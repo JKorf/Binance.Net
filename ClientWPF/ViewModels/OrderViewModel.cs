@@ -1,0 +1,120 @@
+﻿using System;
+using Binance.Net.ClientWPF.MVVM;
+using Binance.Net.Objects;
+
+namespace Binance.Net.ClientWPF.ViewModels
+{
+    public class OrderViewModel: ObservableObject
+    {
+        private long id;
+        public long Id
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                RaisePropertyChangedEvent("Id");
+            }
+        }
+
+        private string symbol;
+        public string Symbol
+        {
+            get { return symbol; }
+            set
+            {
+                symbol = value;
+                RaisePropertyChangedEvent("Symbol");
+            }
+        }
+
+        private double price;
+        public double Price
+        {
+            get { return price; }
+            set
+            {
+                price = value;
+                RaisePropertyChangedEvent("Price");
+            }
+        }
+
+        private double originalQuantity;
+        public double OriginalQuantity
+        {
+            get { return originalQuantity; }
+            set
+            {
+                originalQuantity = value;
+                RaisePropertyChangedEvent("OriginalQuantity");
+            }
+        }
+
+        private double executedQuantity;
+        public double ExecutedQuantity
+        {
+            get { return executedQuantity; }
+            set
+            {
+                executedQuantity = value;
+                RaisePropertyChangedEvent("ExecutedQuantity");
+                RaisePropertyChangedEvent("Fullfilled");
+            }
+        }
+
+        public string FullFilled
+        {
+            get { return ExecutedQuantity + "/" + OriginalQuantity; }
+        }
+
+        private OrderStatus status;
+        public OrderStatus Status
+        {
+            get { return status; }
+            set
+            {
+                status = value;
+                RaisePropertyChangedEvent("Status");
+                RaisePropertyChangedEvent("CanCancel");
+            }
+        }
+
+        private OrderSide side;
+        public OrderSide Side
+        {
+            get { return side; }
+            set
+            {
+                side = value;
+                RaisePropertyChangedEvent("Side");
+            }
+        }
+
+        private OrderType type;
+        public OrderType Type
+        {
+            get { return type; }
+            set
+            {
+                type = value;
+                RaisePropertyChangedEvent("Type");
+            }
+        }
+
+        private DateTime time;
+        public DateTime Time
+        {
+            get { return time; }
+            set
+            {
+                time = value;
+                RaisePropertyChangedEvent("Time");
+            }
+        }
+
+        public bool CanCancel
+        {
+            get { return Status == OrderStatus.New || Status == OrderStatus.PartiallyFilled; }
+        }
+    }
+}

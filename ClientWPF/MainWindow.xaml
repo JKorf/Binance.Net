@@ -1,0 +1,57 @@
+﻿<Window x:Class="Binance.Net.ClientWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Binance.Net.ClientWPF"
+        xmlns:controls="clr-namespace:Binance.Net.ClientWPF.UserControls"
+        mc:Ignorable="d"
+        Name="Main"
+        Title="MainWindow" Height="600" Width="800">
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary>
+            <BitmapImage x:Key="Settings" UriSource="Resources/settings.png"/>
+            <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Column="1" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Top" 
+                Width="32" Height="32" 
+                Margin="0 4 4 0" 
+                Background="Transparent" 
+                BorderThickness="0" 
+                Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+                Command="{Binding SettingsCommand}">
+            <Image Source="{StaticResource Settings}"></Image>
+        </Button>
+        
+        <ListView Grid.Row="0" Grid.RowSpan="2" Margin="5" ItemsSource="{Binding AllPrices}" SelectedItem="{Binding SelectedSymbol}">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Width="60" Header="Name"
+                        DisplayMemberBinding="{Binding Symbol}"/>
+                        <GridViewColumn Width="100" Header="Price"
+                        DisplayMemberBinding="{Binding Price}"/>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <controls:SymbolUserControl Grid.Column="1" Grid.Row="1" Visibility="{Binding SymbolIsSelected, Converter={StaticResource BoolToVis}}"></controls:SymbolUserControl>
+    </Grid>
+</Window>
