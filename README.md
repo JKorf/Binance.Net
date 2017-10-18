@@ -1,5 +1,5 @@
-[build](https://travis-ci.org/JKorf/Binance.Net.png?branch=master)
-[Nuget version](https://img.shields.io/nuget/v/binance.net.svg)
+![build](https://travis-ci.org/JKorf/Binance.Net.png?branch=master)
+![Nuget version](https://img.shields.io/nuget/v/binance.net.svg)
 
 # Binance.Net
 A .Net wrapper for the Binance API as described on [Binance](https://www.binance.com/restapipub.html)
