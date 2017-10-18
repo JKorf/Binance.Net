@@ -8,7 +8,7 @@ namespace BinanceApi.TestConsole
     {
         static void Main(string[] args)
         {
-            BinanceClient.SetAPICredentials("ISNA3LdjrlwdnCXycl8oJU47MnrYK592LiH8g7fG46J1GhQwE2p3cHU07SWnlz3p", "mQjUqedFRVrBPcn8cTnBdMZPdE13ZcJ2Ac96rOERUq7YIM6vsfSLDBkJ9kZ2mtmp");
+            BinanceClient.SetAPICredentials("APIKEY", "APISECRET");
 
             // Public
             var ping = BinanceClient.Ping();
