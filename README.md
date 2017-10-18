@@ -1,4 +1,3 @@
-![build](https://travis-ci.org/JKorf/Binance.Net.png?branch=master)
 ![Nuget version](https://img.shields.io/nuget/v/binance.net.svg)
 
 # Binance.Net ![Icon](https://github.com/JKorf/Binance.Net/blob/master/Resources/binance-coin.png?raw=true)
