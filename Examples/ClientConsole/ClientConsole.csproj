@@ -50,7 +50,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Binance.Net\Binance.Net.csproj">
+    <ProjectReference Include="..\..\Binance.Net\Binance.Net.csproj">
       <Project>{4E00B047-875A-4AAC-A205-F1EF0DB81FD7}</Project>
       <Name>Binance.Net</Name>
     </ProjectReference>
