@@ -59,7 +59,7 @@ var orderResult = BinanceClient.PlaceOrder("BNBBTC", OrderSide.Sell, OrderType.L
 var cancelResult = BinanceClient.CancelOrder("BNBBTC", orderResult.Data.OrderId);
 var accountInfo = BinanceClient.GetAccountInfo();
 var myTrades = BinanceClient.GetMyTrades("BNBBTC");
-```C#
+```
 
 ### Websockets
 The Binance.Net client provides several socket endpoint to which can be subsribed.
