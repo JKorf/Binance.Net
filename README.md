@@ -28,7 +28,7 @@ For private endpoints (trading, order history, account info etc) an API key and 
 ```
 BinanceClient.SetAPICredentials("APIKEY", "APISECRET");
 ```
-API credentials can be managed at [https://www.binance.com/userCenter/createApi.html]
+API credentials can be managed at https://www.binance.com/userCenter/createApi.html
 
 ### Requests
 Public requests:
@@ -97,7 +97,9 @@ var successDepth = BinanceClient.SubscribeToDepthStream("bnbbtc", (data) =>
 BinanceClient.UnsubscribeFromStream(successDepth.StreamId);
 ```
 
-Private socket endpoints can be unsubscribed using the specific methods `BinanceClient.UnsubscribeFromAccountUpdateStream` and `BinanceClient.UnsubscribeFromOrderUpdateStream`
+Private socket endpoints can be unsubscribed using the specific methods `BinanceClient.UnsubscribeFromAccountUpdateStream` and `BinanceClient.UnsubscribeFromOrderUpdateStream`.
+
+When no longer listening the `BinanceClient.StopUserStream` method should be used to signal the Binance server the stream can be closed.
 
 ### AutoTimestamp
 For some private calls a timestamp has to be send to the Binance server. This timestamp in combination with the recvWindow parameter in the request will determine how long the request will be valid. If the more than the recvWindow in miliseconds has passed since the provided timestamp the request will be rejected.

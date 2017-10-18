@@ -640,7 +640,13 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Sends a keep alive for the current user key to prevent timeouts
+        /// Synchronized version of the <see cref="KeepAliveUserStreamAsync"/> method
+        /// </summary>
+        /// <returns></returns>
+        public static ApiResult<object> KeepAliveUserStream() => KeepAliveUserStreamAsync().Result;
+
+        /// <summary>
+        /// Sends a keep alive for the current user stream listen key to prevent timeouts
         /// </summary>
         /// <returns></returns>
         public static async Task<ApiResult<object>> KeepAliveUserStreamAsync()
@@ -660,13 +666,22 @@ namespace Binance.Net
         }
 
         /// <summary>
+        /// Synchronized version of the <see cref="StopUserStreamAsync"/> method
+        /// </summary>
+        /// <returns></returns>
+        public static ApiResult<object> StopUserStream() => StopUserStreamAsync().Result;
+
+        /// <summary>
         /// Stops the current user stream
         /// </summary>
         /// <returns></returns>
-        private static async Task<ApiResult<object>> StopUserStreamAsync()
+        public static async Task<ApiResult<object>> StopUserStreamAsync()
         {
             if (key == null || encryptor == null)
                 return ThrowErrorMessage<object>("No api credentials provided, can't request private endpoints");
+
+            if (listenKey == null)
+                return ThrowErrorMessage<object>("No user stream open, can't close");
 
             if (!timeSynced && AutoTimestamp)
                 await GetServerTimeAsync();
@@ -771,46 +786,32 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="UnsubscribeFromAccountUpdateStreamAsync"/> method
-        /// </summary>
-        /// <returns></returns>
-        public static void UnsubscribeFromAccountUpdateStream() => UnsubscribeFromAccountUpdateStreamAsync().Wait();
-
-        /// <summary>
         /// Unsubscribes from the account update stream
         /// </summary>
         /// <returns></returns>
-        public static async Task UnsubscribeFromAccountUpdateStreamAsync()
+        public static void UnsubscribeFromAccountUpdateStream()
         {
             accountInfoCallback = null;
 
-            // Close the user stream and socket if we're not listening for anything
+            // Close the socket if we're not listening for anything
             if (orderUpdateCallback == null)
             {
-                await StopUserStreamAsync();
                 lock(sockets)
                     sockets.SingleOrDefault(s => s.UserStream)?.Socket.Close();
             }
         }
-
-        /// <summary>
-        /// Synchronized version of the <see cref="UnsubscribeFromOrderUpdateStreamAsync"/> method
-        /// </summary>
-        /// <returns></returns>
-        public static void UnsubscribeFromOrderUpdateStream() => UnsubscribeFromOrderUpdateStreamAsync().Wait();
-
+        
         /// <summary>
         /// Unsubscribes from the order update stream
         /// </summary>
         /// <returns></returns>
-        public static async Task UnsubscribeFromOrderUpdateStreamAsync()
+        public static void UnsubscribeFromOrderUpdateStream()
         {
             orderUpdateCallback = null;
             
-            // Close the user stream and socket if we're not listening for anything
+            // Close the socket if we're not listening for anything
             if (accountInfoCallback == null)
             {
-                await StopUserStreamAsync();
                 lock(sockets)
                     sockets.SingleOrDefault(s => s.UserStream)?.Socket.Close();
             }
