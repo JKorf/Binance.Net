@@ -138,25 +138,29 @@ namespace Binance.Net
         /// <summary>
         /// Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls
         /// </summary>
-        /// <returns>Server time as a Unix timestamp</returns>
+        /// <returns>Server time</returns>
         public static async Task<ApiResult<DateTime>> GetServerTimeAsync()
         {
             var url = GetUrl(CheckTimeEndpoint, PublicVersion);
-            var sw = Stopwatch.StartNew();
-            var localTime = DateTime.UtcNow;
-            var result = await ExecuteRequest<BinanceCheckTime>(url);
-            if (!result.Success)
-                return new ApiResult<DateTime>() { Success = false, Error = result.Error };
-
-            if (AutoTimestamp)
+            if (!AutoTimestamp)
+            { 
+                var result = await ExecuteRequest<BinanceCheckTime>(url);
+                return new ApiResult<DateTime>() { Success = result.Success, Data = result.Data?.ServerTime ?? default(DateTime) };
+            }
+            else
             {
-                sw.Stop();
+                var localTime = DateTime.UtcNow;
+                var sw = Stopwatch.StartNew();
+                var result = await ExecuteRequest<BinanceCheckTime>(url);
+                if (!result.Success)
+                    return new ApiResult<DateTime>() { Success = false, Error = result.Error };
+
                 // Calculate time offset between local and server by taking the elapsed time request time / 2 (round trip)
                 timeOffset = ((result.Data.ServerTime - localTime).TotalMilliseconds) - sw.ElapsedMilliseconds / 2;
                 timeSynced = true;
                 Log.Write(LogLevel.Debug, $"Time offset set to {timeOffset}");
+                return new ApiResult<DateTime>() { Success = result.Success, Data = result.Data.ServerTime };
             }
-            return new ApiResult<DateTime>() { Success = result.Success, Data = result.Data.ServerTime };            
         }
 
         /// <summary>
@@ -173,7 +177,7 @@ namespace Binance.Net
         /// <returns>The order book for the symbol</returns>
         public static async Task<ApiResult<BinanceOrderBook>> GetOrderBookAsync(string symbol, int? limit = null)
         {
-            if (!timeSynced && AutoTimestamp)
+            if (AutoTimestamp && !timeSynced)
                 await GetServerTimeAsync();
 
             var parameters = new Dictionary<string, string>() { { "symbol", symbol } };
@@ -200,7 +204,7 @@ namespace Binance.Net
         /// <returns>The aggregated trades list for the symbol</returns>
         public static async Task<ApiResult<BinanceAggregatedTrades[]>> GetAggregatedTradesAsync(string symbol, int? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null)
         {
-            if (!timeSynced && AutoTimestamp)
+            if (AutoTimestamp && !timeSynced)
                 await GetServerTimeAsync();
 
             var parameters = new Dictionary<string, string>() { { "symbol", symbol } };
@@ -233,7 +237,7 @@ namespace Binance.Net
         /// <returns>The candlestick data for the provided symbol</returns>
         public static async Task<ApiResult<BinanceKline[]>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null)
         {
-            if (!timeSynced && AutoTimestamp)
+            if (AutoTimestamp && !timeSynced)
                 await GetServerTimeAsync();
 
             var parameters = new Dictionary<string, string>() {
@@ -263,7 +267,7 @@ namespace Binance.Net
         /// <returns>Data over the last 24 hours</returns>
         public static async Task<ApiResult<Binance24hPrice>> Get24HPricesAsync(string symbol)
         {
-            if (!timeSynced && AutoTimestamp)
+            if (AutoTimestamp && !timeSynced)
                 await GetServerTimeAsync();
 
             var parameters = new Dictionary<string, string>() { { "symbol", symbol } };
@@ -282,7 +286,7 @@ namespace Binance.Net
         /// <returns>List of prices</returns>
         public static async Task<ApiResult<BinancePrice[]>> GetAllPricesAsync()
         {
-            if (!timeSynced && AutoTimestamp)
+            if (AutoTimestamp && !timeSynced)
                 await GetServerTimeAsync();
 
             return await ExecuteRequest<BinancePrice[]>(GetUrl(AllPricesEndpoint, PublicVersion));
@@ -300,7 +304,7 @@ namespace Binance.Net
         /// <returns>List of book prices</returns>
         public static async Task<ApiResult<BinanceBookPrice[]>> GetAllBookPricesAsync()
         {
-            if (!timeSynced && AutoTimestamp)
+            if (AutoTimestamp && !timeSynced)
                 await GetServerTimeAsync();
 
             return await ExecuteRequest<BinanceBookPrice[]>(GetUrl(BookPricesEndpoint, PublicVersion));
@@ -325,13 +329,13 @@ namespace Binance.Net
             if (key == null || encryptor == null)
                 return ThrowErrorMessage<BinanceOrder[]>("No api credentials provided, can't request private endpoints");
 
-            if (!timeSynced && AutoTimestamp)
+            if (AutoTimestamp && !timeSynced)
                 await GetServerTimeAsync();
 
             var parameters = new Dictionary<string, string>()
             {
                 { "symbol", symbol },
-                { "timestamp", ToUnixTimestamp(DateTime.UtcNow.AddMilliseconds(timeOffset)).ToString() }
+                { "timestamp", GetTimestamp() }
             };
             if (receiveWindow != null)
                 parameters.Add("recvWindow", receiveWindow.Value.ToString());
@@ -358,13 +362,13 @@ namespace Binance.Net
             if (key == null || encryptor == null)
                 return ThrowErrorMessage<BinanceOrder[]>("No api credentials provided, can't request private endpoints");
 
-            if (!timeSynced && AutoTimestamp)
+            if (AutoTimestamp && !timeSynced)
                 await GetServerTimeAsync();
 
             var parameters = new Dictionary<string, string>()
             {
                 { "symbol", symbol },
-                { "timestamp", ToUnixTimestamp(DateTime.UtcNow.AddMilliseconds(timeOffset)).ToString() }
+                { "timestamp", GetTimestamp() }
             };
             if (orderId != null)
                 parameters.Add("orderId", orderId.Value.ToString());
@@ -400,7 +404,7 @@ namespace Binance.Net
             if (key == null || encryptor == null)
                 return ThrowErrorMessage<BinancePlacedOrder>("No api credentials provided, can't request private endpoints");
 
-            if (!timeSynced && AutoTimestamp)
+            if (AutoTimestamp && !timeSynced)
                 await GetServerTimeAsync();
 
             var parameters = new Dictionary<string, string>()
@@ -411,7 +415,7 @@ namespace Binance.Net
                 { "timeInForce", JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter()) },
                 { "quantity", quantity.ToString() },
                 { "price", price.ToString() },
-                { "timestamp", ToUnixTimestamp(DateTime.UtcNow.AddMilliseconds(timeOffset)).ToString() }
+                { "timestamp", GetTimestamp() }
             };
             if (newClientOrderId != null)
                 parameters.Add("newClientOrderId", newClientOrderId);
@@ -447,7 +451,7 @@ namespace Binance.Net
             if (key == null || encryptor == null)
                 return ThrowErrorMessage<BinancePlacedOrder>("No api credentials provided, can't request private endpoints");
 
-            if (!timeSynced && AutoTimestamp)
+            if (AutoTimestamp && !timeSynced)
                 await GetServerTimeAsync();
 
             var parameters = new Dictionary<string, string>()
@@ -458,7 +462,7 @@ namespace Binance.Net
                 { "timeInForce", JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter()) },
                 { "quantity", quantity.ToString() },
                 { "price", price.ToString() },
-                { "timestamp", ToUnixTimestamp(DateTime.UtcNow.AddMilliseconds(timeOffset)).ToString() }
+                { "timestamp", GetTimestamp() }
             };
             if (newClientOrderId != null)
                 parameters.Add("newClientOrderId", newClientOrderId);
@@ -492,13 +496,13 @@ namespace Binance.Net
             if (orderId == null && origClientOrderId == null)
                 return ThrowErrorMessage<BinanceOrder>("Either orderId or origClientOrderId is required");
 
-            if (!timeSynced && AutoTimestamp)
+            if (AutoTimestamp && !timeSynced)
                 await GetServerTimeAsync();
 
             var parameters = new Dictionary<string, string>()
             {
                 { "symbol", symbol },
-                { "timestamp", ToUnixTimestamp(DateTime.UtcNow.AddMilliseconds(timeOffset)).ToString() }
+                { "timestamp", GetTimestamp() }
             };
             if (orderId != null)
                 parameters.Add("orderId", orderId.Value.ToString());
@@ -530,13 +534,13 @@ namespace Binance.Net
             if (key == null || encryptor == null)
                 return ThrowErrorMessage<BinancePlacedOrder>("No api credentials provided, can't request private endpoints");
 
-            if (!timeSynced && AutoTimestamp)
+            if (AutoTimestamp && !timeSynced)
                 await GetServerTimeAsync(); 
 
             var parameters = new Dictionary<string, string>()
             {
                 { "symbol", symbol },
-                { "timestamp", ToUnixTimestamp(DateTime.UtcNow.AddMilliseconds(timeOffset)).ToString() }
+                { "timestamp", GetTimestamp() }
             };
             if (orderId != null)
                 parameters.Add("orderId", orderId.Value.ToString());
@@ -566,12 +570,12 @@ namespace Binance.Net
             if (key == null || encryptor == null)
                 return ThrowErrorMessage<BinanceAccountInfo>("No api credentials provided, can't request private endpoints");
 
-            if (!timeSynced && AutoTimestamp)
+            if (AutoTimestamp && !timeSynced)
                 await GetServerTimeAsync();
 
             var parameters = new Dictionary<string, string>()
             {
-                { "timestamp", ToUnixTimestamp(DateTime.UtcNow.AddMilliseconds(timeOffset)).ToString() }
+                { "timestamp", GetTimestamp() }
             };
             if (recvWindow != null)
                 parameters.Add("recvWindow", recvWindow.ToString());
@@ -598,13 +602,13 @@ namespace Binance.Net
             if (key == null || encryptor == null)
                 return ThrowErrorMessage<BinanceTrade[]>("No api credentials provided, can't request private endpoints");
 
-            if (!timeSynced && AutoTimestamp)
+            if (AutoTimestamp && !timeSynced)
                 await GetServerTimeAsync();
 
             var parameters = new Dictionary<string, string>()
             {
                 { "symbol", symbol },
-                { "timestamp", ToUnixTimestamp(DateTime.UtcNow.AddMilliseconds(timeOffset)).ToString() }
+                { "timestamp", GetTimestamp() }
             };
             if (limit != null)
                 parameters.Add("limit", limit.ToString());
@@ -631,7 +635,7 @@ namespace Binance.Net
             if (key == null || encryptor == null)
                 return ThrowErrorMessage<BinanceListenKey>("No api credentials provided, can't request private endpoints");
 
-            if (!timeSynced && AutoTimestamp)
+            if (AutoTimestamp && !timeSynced)
                 await GetServerTimeAsync();
 
             var result = await ExecuteRequest<BinanceListenKey>(GetUrl(GetListenKeyEndpoint, UserDataStreamVersion), false, PostMethod);
@@ -654,7 +658,7 @@ namespace Binance.Net
             if (key == null || encryptor == null)
                 return ThrowErrorMessage<object>("No api credentials provided, can't request private endpoints");
 
-            if (!timeSynced)
+            if (AutoTimestamp && !timeSynced)
                 await GetServerTimeAsync();
 
             var parameters = new Dictionary<string, string>()
@@ -683,7 +687,7 @@ namespace Binance.Net
             if (listenKey == null)
                 return ThrowErrorMessage<object>("No user stream open, can't close");
 
-            if (!timeSynced && AutoTimestamp)
+            if (AutoTimestamp && !timeSynced)
                 await GetServerTimeAsync();
 
             var parameters = new Dictionary<string, string>()
@@ -984,6 +988,12 @@ namespace Binance.Net
         private static long ToUnixTimestamp(DateTime time)
         {
             return (long)(time - new DateTime(1970, 1, 1)).TotalMilliseconds;
+        }
+
+        private static string GetTimestamp()
+        {
+            var offset = AutoTimestamp ? timeOffset : 0;
+            return ToUnixTimestamp(DateTime.UtcNow.AddMilliseconds(offset)).ToString();
         }
 
         private static int NextStreamId()
