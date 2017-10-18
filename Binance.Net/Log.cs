@@ -4,7 +4,7 @@ namespace Binance.Net
 {
     internal static class Log
     {
-        public static LogLevel Level { get; internal set; }
+        public static LogLevel Level { get; internal set; } = LogLevel.Warning;
 
         public static void Write(LogLevel logType, string message)
         {

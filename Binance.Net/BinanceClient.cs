@@ -999,9 +999,9 @@ namespace Binance.Net
         /// Sets the verbosity of the log messages
         /// </summary>
         /// <param name="level">Verbosity level</param>
-        public static void SetVerbosity(LogLevel level)
+        public static void SetVerbosity(LogLevel verbosity)
         {
-            Log.Level = level;
+            Log.Level = verbosity;
         }
         #endregion
     }

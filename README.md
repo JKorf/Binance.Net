@@ -111,3 +111,7 @@ When no longer listening the `BinanceClient.StopUserStream` method should be use
 For some private calls a timestamp has to be send to the Binance server. This timestamp in combination with the recvWindow parameter in the request will determine how long the request will be valid. If the more than the recvWindow in miliseconds has passed since the provided timestamp the request will be rejected.
 
 While testing I found that my local computer time was offset to the Binance server time, which made it reject all my requests. I added a fix for this in the Binance.Net client which will automatically calibrate the timestamp to the Binance server time. This behaviour is turned off by default and can be turned on using the `BinanceClient.AutoTimeStamp` property. 
+
+
+### Logging
+Binance.Net will by default log warning and error messages. To change the verbosity `BinanceClient.SetVerbosity` can be called.
