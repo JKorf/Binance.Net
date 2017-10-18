@@ -1,17 +1,26 @@
 ![build](https://travis-ci.org/JKorf/Binance.Net.png?branch=master)
 ![Nuget version](https://img.shields.io/nuget/v/binance.net.svg)
 
-# Binance.Net
-A .Net wrapper for the Binance API as described on [Binance](https://www.binance.com/restapipub.html)
+# Binance.Net ![Icon](https://github.com/JKorf/Binance.Net/blob/master/Resources/binance-coin.png?raw=true)
+A .Net wrapper for the Binance API as described on [Binance](https://www.binance.com/restapipub.html), including all features.
 ## Installation
 Binance.Net is available on [Nuget](https://www.nuget.org/packages/Binance.Net/).
-Install using the package manager `pm> Install-Package Binance.Net`
+```
+pm> Install-Package Binance.Net
+```
 
 ## Examples
 Two examples have been provided, a console application providing the basis interaction with the API wrapper, and a WPF application showing some more advanced use casus. Both can be found in the Examples folder.
 
 ## Usage
 For most API methods Binance.Net provides two versions, synchronized and async calls. Start using the API by including `using Binance.Net;` in your usings.
+
+### Setting API credentials
+For private endpoints (trading, order history, account info etc) an API key and secret has to be provided. For this the SetAPICredentials method can be used:
+```
+BinanceClient.SetAPICredentials("APIKEY", "APISECRET");
+```
+API credentials can be managed at https://www.binance.com/userCenter/createApi.html
 
 ### Response handling
 All API requests will respond with an ApiResult object. This object contains wether the call was successful, the data returned from the call and an error message if the call wasn't successful. As such, one should always check the Success flag when processing a response.
@@ -26,12 +35,6 @@ if (allPrices.Success)
 else
 	Console.WriteLine($"Error: {allPrices.Error.Message}");
 ```
-### Setting API credentials
-For private endpoints (trading, order history, account info etc) an API key and secret has to be provided. For this the SetAPICredentials method can be used:
-```
-BinanceClient.SetAPICredentials("APIKEY", "APISECRET");
-```
-API credentials can be managed at https://www.binance.com/userCenter/createApi.html
 
 ### Requests
 Public requests:
