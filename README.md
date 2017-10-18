@@ -17,7 +17,7 @@ For most API methods Binance.Net provides two versions, synchronized and async c
 
 ### Setting API credentials
 For private endpoints (trading, order history, account info etc) an API key and secret has to be provided. For this the SetAPICredentials method can be used:
-```
+```C#
 BinanceClient.SetAPICredentials("APIKEY", "APISECRET");
 ```
 API credentials can be managed at https://www.binance.com/userCenter/createApi.html
@@ -25,7 +25,7 @@ API credentials can be managed at https://www.binance.com/userCenter/createApi.h
 ### Response handling
 All API requests will respond with an ApiResult object. This object contains wether the call was successful, the data returned from the call and an error message if the call wasn't successful. As such, one should always check the Success flag when processing a response.
 For example:
-```
+```C#
 var allPrices = BinanceClient.GetAllPrices();
 if (allPrices.Success)
 {
@@ -38,7 +38,7 @@ else
 
 ### Requests
 Public requests:
-```
+```C#
 var ping = BinanceClient.Ping();
 var serverTime = BinanceClient.GetServerTime();
 var orderBook = BinanceClient.GetOrderBook("BNBBTC", 10);
@@ -50,7 +50,7 @@ var allBookPrices = BinanceClient.GetAllBookPrices();
 ```
 
 Private requests:
-```
+```C#
 var openOrders = BinanceClient.GetOpenOrders("BNBBTC");
 var allOrders = BinanceClient.GetAllOrders("BNBBTC");
 var testOrderResult = BinanceClient.PlaceTestOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, TimeInForce.GoodTillCancel, 1, 1);
@@ -59,12 +59,12 @@ var orderResult = BinanceClient.PlaceOrder("BNBBTC", OrderSide.Sell, OrderType.L
 var cancelResult = BinanceClient.CancelOrder("BNBBTC", orderResult.Data.OrderId);
 var accountInfo = BinanceClient.GetAccountInfo();
 var myTrades = BinanceClient.GetMyTrades("BNBBTC");
-```
+```C#
 
 ### Websockets
 The Binance.Net client provides several socket endpoint to which can be subsribed.
 Public socket endpoints:
-```
+```C#
 var successDepth = BinanceClient.SubscribeToDepthStream("bnbbtc", (data) =>
 {
 	// handle data
@@ -81,7 +81,7 @@ var successKline = BinanceClient.SubscribeToKlineStream("bnbbtc", KlineInterval.
 
 Private socket endpoints:
 For the private endpoints a user stream has to be started on the Binance server. This can be done using the `BinanceClient.StartUserStream()` command. This call should be made before subscribing to private socket endpoints.
-```
+```C#
 var successAccount = BinanceClient.SubscribeToAccountUpdateStream((data) =>
 {
 	// handle data
@@ -94,7 +94,7 @@ var successOrder = BinanceClient.SubscribeToOrderUpdateStream((data) =>
 
 Unsubscribing from socket endpoints:
 Public socket endpoints can be unsubscribed by using the `BinanceClient.UnsubscribeFromStream` method in combination with the stream ID received from subscribing:
-```
+```C#
 var successDepth = BinanceClient.SubscribeToDepthStream("bnbbtc", (data) =>
 {
 	// handle data
