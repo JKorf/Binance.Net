@@ -5,9 +5,9 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Binance.Net", "Binance.Net\Binance.Net.csproj", "{4E00B047-875A-4AAC-A205-F1EF0DB81FD7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientConsole", "ClientConsole\ClientConsole.csproj", "{ABA63E28-A03C-4764-89F1-A7268E380F06}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientConsole", "Examples\ClientConsole\ClientConsole.csproj", "{ABA63E28-A03C-4764-89F1-A7268E380F06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientWPF", "ClientWPF\ClientWPF.csproj", "{2784274C-FD3B-404D-949E-E03D3F735BBC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientWPF", "Examples\ClientWPF\ClientWPF.csproj", "{2784274C-FD3B-404D-949E-E03D3F735BBC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

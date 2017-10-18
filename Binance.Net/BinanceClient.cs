@@ -28,7 +28,7 @@ namespace Binance.Net
         private static Action<BinanceStreamAccountInfo> accountInfoCallback;
         private static Action<BinanceStreamOrderUpdate> orderUpdateCallback;
 
-        public static bool AutoTimestamp = true;
+        public static bool AutoTimestamp = false;
         private static double timeOffset;
         private static bool timeSynced;
 
@@ -133,24 +133,30 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="GetServerTimeAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public static ApiResult<long> GetServerTime() => GetServerTimeAsync().Result;
+        public static ApiResult<DateTime> GetServerTime() => GetServerTimeAsync().Result;
 
         /// <summary>
         /// Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls
         /// </summary>
         /// <returns>Server time as a Unix timestamp</returns>
-        public static async Task<ApiResult<long>> GetServerTimeAsync()
+        public static async Task<ApiResult<DateTime>> GetServerTimeAsync()
         {
             var url = GetUrl(CheckTimeEndpoint, PublicVersion);
             var sw = Stopwatch.StartNew();
             var localTime = DateTime.UtcNow;
             var result = await ExecuteRequest<BinanceCheckTime>(url);
-            sw.Stop();
-            // Calculate time offset between local and server by taking the elapsed time request time / 2 (round trip)
-            timeOffset = -((localTime.AddMilliseconds(sw.ElapsedMilliseconds / 2) - new DateTime(1970, 1, 1)).TotalMilliseconds - result.Data.ServerTime);
-            timeSynced = true;
-            Log.Write(LogLevel.Debug, $"Time offset set to {timeOffset}");
-            return new ApiResult<long>() { Success = result.Success, Data = result.Data.ServerTime };            
+            if (!result.Success)
+                return new ApiResult<DateTime>() { Success = false, Error = result.Error };
+
+            if (AutoTimestamp)
+            {
+                sw.Stop();
+                // Calculate time offset between local and server by taking the elapsed time request time / 2 (round trip)
+                timeOffset = ((result.Data.ServerTime - localTime).TotalMilliseconds) - sw.ElapsedMilliseconds / 2;
+                timeSynced = true;
+                Log.Write(LogLevel.Debug, $"Time offset set to {timeOffset}");
+            }
+            return new ApiResult<DateTime>() { Success = result.Success, Data = result.Data.ServerTime };            
         }
 
         /// <summary>
@@ -611,6 +617,12 @@ namespace Binance.Net
         }
 
         /// <summary>
+        /// Synchronized version of the <see cref="StartUserStreamAsync"/> method
+        /// </summary>
+        /// <returns></returns>
+        public static ApiResult<BinanceListenKey> StartUserStream() => StartUserStreamAsync().Result;
+
+        /// <summary>
         /// Starts a user stream by requesting a listen key. This listen key will be used in subsequent requests to <see cref="StartAccountUpdateStream"/> and <see cref="StartOrderUpdateStream"/>
         /// </summary>
         /// <returns>Listen key</returns>
@@ -771,6 +783,8 @@ namespace Binance.Net
         public static async Task UnsubscribeFromAccountUpdateStreamAsync()
         {
             accountInfoCallback = null;
+
+            // Close the user stream and socket if we're not listening for anything
             if (orderUpdateCallback == null)
             {
                 await StopUserStreamAsync();
@@ -792,6 +806,8 @@ namespace Binance.Net
         public static async Task UnsubscribeFromOrderUpdateStreamAsync()
         {
             orderUpdateCallback = null;
+            
+            // Close the user stream and socket if we're not listening for anything
             if (accountInfoCallback == null)
             {
                 await StopUserStreamAsync();

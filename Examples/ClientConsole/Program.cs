@@ -8,10 +8,11 @@ namespace BinanceApi.TestConsole
     {
         static void Main(string[] args)
         {
-            BinanceClient.SetAPICredentials("INSERT API KEY", "INSERT API SECRET");
+            BinanceClient.SetAPICredentials("ISNA3LdjrlwdnCXycl8oJU47MnrYK592LiH8g7fG46J1GhQwE2p3cHU07SWnlz3p", "mQjUqedFRVrBPcn8cTnBdMZPdE13ZcJ2Ac96rOERUq7YIM6vsfSLDBkJ9kZ2mtmp");
 
             // Public
             var ping = BinanceClient.Ping();
+            var serverTime = BinanceClient.GetServerTime();
             var orderBook = BinanceClient.GetOrderBook("BNBBTC", 10);
             var aggTrades = BinanceClient.GetAggregatedTrades("BNBBTC", startTime: DateTime.UtcNow.AddMinutes(-2), endTime: DateTime.UtcNow, limit: 10);
             var klines = BinanceClient.GetKlines("BNBBTC", KlineInterval.OneHour, startTime: DateTime.UtcNow.AddHours(-10), endTime: DateTime.UtcNow, limit: 10);
@@ -30,20 +31,31 @@ namespace BinanceApi.TestConsole
             var myTrades = BinanceClient.GetMyTrades("BNBBTC");
 
             // Streams
-            var successStart = BinanceClient.StartUserStreamAsync().Result;
-            var successAccount = BinanceClient.SubscribeToAccountUpdateStream((data) =>
+            var successStart = BinanceClient.StartUserStream();
+            var successDepth = BinanceClient.SubscribeToDepthStream("bnbbtc", (data) =>
             {
-                Console.WriteLine($"data received: {data}");
+                // handle data
             });
-            var successOrder = BinanceClient.SubscribeToOrderUpdateStream((data) =>
+            var successTrades = BinanceClient.SubscribeToTradesStream("bnbbtc", (data) =>
             {
-                Console.WriteLine($"data received: {data}");
+                // handle data
             });
             var successKline = BinanceClient.SubscribeToKlineStream("bnbbtc", KlineInterval.OneMinute, (data) =>
             {
-                Console.WriteLine($"data received: {data}");
+                // handle data
             });
+            var successAccount = BinanceClient.SubscribeToAccountUpdateStream((data) =>
+            {
+                // handle data
+            });
+            var successOrder = BinanceClient.SubscribeToOrderUpdateStream((data) =>
+            {
+                // handle data
+            });            
 
+            BinanceClient.UnsubscribeFromStream(successDepth.StreamId);
+            BinanceClient.UnsubscribeFromStream(successTrades.StreamId);
+            BinanceClient.UnsubscribeFromStream(successKline.StreamId);
             BinanceClient.UnsubscribeFromAccountUpdateStream();
             BinanceClient.UnsubscribeFromOrderUpdateStream();
 

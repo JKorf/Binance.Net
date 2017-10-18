@@ -2,7 +2,7 @@
 
 namespace Binance.Net
 {
-    public static class Log
+    internal static class Log
     {
         public static LogLevel Level { get; internal set; }
 

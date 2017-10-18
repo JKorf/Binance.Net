@@ -145,7 +145,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Binance.Net\Binance.Net.csproj">
+    <ProjectReference Include="..\..\Binance.Net\Binance.Net.csproj">
       <Project>{4e00b047-875a-4aac-a205-f1ef0db81fd7}</Project>
       <Name>Binance.Net</Name>
     </ProjectReference>
