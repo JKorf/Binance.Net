@@ -8,7 +8,7 @@ namespace BinanceApi.TestConsole
     {
         static void Main(string[] args)
         {
-            BinanceClient.SetAPICredentials("aZF83FdCJy61YMvh2NpjWsx4v2jKz3zrT6DsbtRzn7LMdz6mrOskvrNZ0RGn98UD", "00P4jv9bb3DvxChMbNZwJf3dcezNjZiczcs712eUyb8ULh7z8UJ82uQtSp6jmOIa");
+            BinanceClient.SetAPICredentials("INSERT API KEY", "INSERT API SECRET");
 
             // Public
             var ping = BinanceClient.Ping();
