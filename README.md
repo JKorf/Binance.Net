@@ -58,6 +58,9 @@ var orderResult = BinanceClient.PlaceOrder("BNBBTC", OrderSide.Sell, OrderType.L
 var cancelResult = BinanceClient.CancelOrder("BNBBTC", orderResult.Data.OrderId);
 var accountInfo = BinanceClient.GetAccountInfo();
 var myTrades = BinanceClient.GetMyTrades("BNBBTC");
+var depositHistory = BinanceClient.GetDepositHistory();
+var withdrawalHistory = BinanceClient.GetWithdrawHistory();
+var withdraw = BinanceClient.Withdraw("TEST", "Address", 1, "TestWithdraw");
 ```
 
 ### Websockets
@@ -114,3 +117,7 @@ While testing I found that my local computer time was offset to the Binance serv
 
 ### Logging
 Binance.Net will by default log warning and error messages. To change the verbosity `BinanceClient.SetVerbosity` can be called.
+
+## Release notes
+10 okt 2017 - Version 1.09
+	- Added withdrawal/deposit functionality
