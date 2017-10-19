@@ -2,7 +2,7 @@
 using Binance.Net.Converters;
 using Newtonsoft.Json;
 
-namespace BinanceAPI.Objects
+namespace Binance.Net.Objects
 {
     public class BinanceCheckTime
     {

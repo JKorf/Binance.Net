@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using BinanceAPI.Objects;
 using Newtonsoft.Json;
-using System.Diagnostics;
 using WebSocketSharp;
 using Binance.Net.Objects;
 using Binance.Net.Converters;
@@ -872,13 +871,14 @@ namespace Binance.Net
             }
             catch (Exception e)
             {
-                Log.Write(LogLevel.Debug, $"Couldn't open socket stream: {e.Message}");
+                Log.Write(LogLevel.Error, $"Couldn't open socket stream: {e.Message}");
                 return null;
             }
         }
 
         private static void Socket_OnOpen(object sender, EventArgs e)
         {
+            Log.Write(LogLevel.Debug, $"Socket opened to {((WebSocket)sender).Url}");
         }
 
         private static void Socket_OnError(object sender, WebSocketSharp.ErrorEventArgs e)
@@ -898,6 +898,7 @@ namespace Binance.Net
         #region helpers
         private static ApiResult<T> ThrowErrorMessage<T>(string message)
         {
+            Log.Write(LogLevel.Warning, $"Call failed: {message}");
             var result = (ApiResult<T>)Activator.CreateInstance(typeof(ApiResult<T>));
             result.Error = new BinanceError()
             {
@@ -950,22 +951,23 @@ namespace Binance.Net
                             var error = JsonConvert.DeserializeObject<BinanceError>(await reader.ReadToEndAsync());
                             apiResult.Success = false;
                             apiResult.Error = error;
+                            Log.Write(LogLevel.Warning, $"Request to {uri} returned an error: {apiResult.Error.Code} - {apiResult.Error.Message}");
                             return apiResult;
                         }
                     }
                     catch(Exception)
                     {
-                        Log.Write(LogLevel.Warning, $"Public request to {uri} failed: " + we.Message);
+                        Log.Write(LogLevel.Warning, $"Request to {uri} failed: " + we.Message);
                         return ExceptionToApiResult(apiResult, we);
                     }
                 }
 
-                Log.Write(LogLevel.Warning, $"Public request to {uri} failed: " + we.Message);
+                Log.Write(LogLevel.Warning, $"Request to {uri} failed: " + we.Message);
                 return ExceptionToApiResult(apiResult, we);
             }
             catch (Exception e)
             {
-                Log.Write(LogLevel.Warning, $"Public request to {uri} failed: " + e.Message);
+                Log.Write(LogLevel.Warning, $"Request to {uri} failed: " + e.Message);
                 return ExceptionToApiResult(apiResult, e);
             }
         }
