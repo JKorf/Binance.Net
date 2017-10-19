@@ -107,7 +107,7 @@ Private socket endpoints can be unsubscribed using the specific methods `Binance
 When no longer listening the `BinanceClient.StopUserStream` method should be used to signal the Binance server the stream can be closed.
 
 ### AutoTimestamp
-For some private calls a timestamp has to be send to the Binance server. This timestamp in combination with the recvWindow parameter in the request will determine how long the request will be valid. If the more than the recvWindow in miliseconds has passed since the provided timestamp the request will be rejected.
+For some private calls a timestamp has to be send to the Binance server. This timestamp in combination with the recvWindow parameter in the request will determine how long the request will be valid. If more than the recvWindow in miliseconds has passed since the provided timestamp the request will be rejected.
 
 While testing I found that my local computer time was offset to the Binance server time, which made it reject all my requests. I added a fix for this in the Binance.Net client which will automatically calibrate the timestamp to the Binance server time. This behaviour is turned off by default and can be turned on using the `BinanceClient.AutoTimeStamp` property. 
 
