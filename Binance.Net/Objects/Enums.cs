@@ -76,4 +76,11 @@
         OneWeek,
         OneMonth
     }    
+
+    public enum WithdrawalStatus
+    {
+        Proccessing = 4,
+        Completed = 6,
+        Unknown = 99
+    }
 }

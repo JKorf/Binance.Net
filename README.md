@@ -1,4 +1,3 @@
-
 # Binance.Net ![Icon](https://github.com/JKorf/Binance.Net/blob/master/Resources/binance-coin.png?raw=true)
 ![Nuget version](https://img.shields.io/nuget/v/binance.net.svg)
 
@@ -20,7 +19,7 @@ For private endpoints (trading, order history, account info etc) an API key and 
 ```C#
 BinanceClient.SetAPICredentials("APIKEY", "APISECRET");
 ```
-API credentials can be managed at https://www.binance.com/userCenter/createApi.html
+API credentials can be managed at https://www.binance.com/userCenter/createApi.html. Make sure to enable the required permission for the right API calls.
 
 ### Response handling
 All API requests will respond with an ApiResult object. This object contains wether the call was successful, the data returned from the call and an error message if the call wasn't successful. As such, one should always check the Success flag when processing a response.

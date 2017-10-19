@@ -644,8 +644,6 @@ namespace Binance.Net
         /// <returns>Withdrawal confirmation</returns>
         public static async Task<ApiResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, double amount, string name = null, long? recvWindow = null)
         {
-
-
             if (key == null || encryptor == null)
                 return ThrowErrorMessage<BinanceWithdrawalPlaced>("No api credentials provided, can't request private endpoints");
 

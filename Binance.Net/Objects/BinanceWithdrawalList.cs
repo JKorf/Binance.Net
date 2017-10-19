@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Binance.Net.Converters;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
@@ -24,6 +25,7 @@ namespace Binance.Net.Objects
         public string Id { get; set; }
         public string Asset { get; set; }
         public string UserId { get; set; }
-        public int Status { get; set; }
+        [JsonConverter(typeof(WithdrawalStatusConverter))]
+        public WithdrawalStatus Status { get; set; }
     }
 }
