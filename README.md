@@ -1,6 +1,7 @@
-![Nuget version](https://img.shields.io/nuget/v/binance.net.svg)
 
 # Binance.Net ![Icon](https://github.com/JKorf/Binance.Net/blob/master/Resources/binance-coin.png?raw=true)
+![Nuget version](https://img.shields.io/nuget/v/binance.net.svg)
+
 A .Net wrapper for the Binance API as described on [Binance](https://www.binance.com/restapipub.html), including all features.
 ## Installation
 Binance.Net is available on [Nuget](https://www.nuget.org/packages/Binance.Net/).
@@ -120,4 +121,4 @@ Binance.Net will by default log warning and error messages. To change the verbos
 
 ## Release notes
 10 okt 2017 - Version 1.09
-	- Added withdrawal/deposit functionality
+ * Added withdrawal/deposit functionality
