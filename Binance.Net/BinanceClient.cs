@@ -681,7 +681,7 @@ namespace Binance.Net
             };
 
             AddOptionalParameter(parameters, "asset", asset);
-            AddOptionalParameter(parameters, "status", JsonConvert.SerializeObject(status, new DepositStatusConverter()));
+            AddOptionalParameter(parameters, "status", status != null ? JsonConvert.SerializeObject(status, new DepositStatusConverter()): null);
             AddOptionalParameter(parameters, "startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString() : null);
             AddOptionalParameter(parameters, "endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
             AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());
@@ -724,7 +724,7 @@ namespace Binance.Net
             };
 
             AddOptionalParameter(parameters, "asset", asset);
-            AddOptionalParameter(parameters, "status", JsonConvert.SerializeObject(status, new WithdrawalStatusConverter()));
+            AddOptionalParameter(parameters, "status", status != null ? JsonConvert.SerializeObject(status, new WithdrawalStatusConverter()): null);
             AddOptionalParameter(parameters, "startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString() : null);
             AddOptionalParameter(parameters, "endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
             AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());
