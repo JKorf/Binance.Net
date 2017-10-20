@@ -21,6 +21,7 @@ namespace Binance.Net.Objects
         public DateTime InsertTime { get; set; }
         public double Amount { get; set; }
         public string Asset { get; set; }
-        public bool Status { get; set; }
+        [JsonConverter(typeof(DepositStatusConverter))]
+        public DepositStatus Status { get; set; }
     }
 }

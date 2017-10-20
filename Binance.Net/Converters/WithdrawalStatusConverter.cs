@@ -10,8 +10,13 @@ namespace Binance.Net.Converters
     {
         private Dictionary<WithdrawalStatus, string> values = new Dictionary<WithdrawalStatus, string>()
         {
-            { WithdrawalStatus.Completed, "6" },
+            { WithdrawalStatus.EmailSend, "0" },
+            { WithdrawalStatus.Canceled, "1" },
+            { WithdrawalStatus.AwaitingApproval, "2" },
+            { WithdrawalStatus.Rejected, "3" },
             { WithdrawalStatus.Proccessing, "4" },
+            { WithdrawalStatus.Failure, "5" },
+            { WithdrawalStatus.Completed, "6" },
         };
 
         public override bool CanConvert(Type objectType)
@@ -21,9 +26,7 @@ namespace Binance.Net.Converters
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            if(values.ContainsValue(reader.Value.ToString()))
-                return values.SingleOrDefault(v => v.Value == reader.Value.ToString()).Key;
-            return WithdrawalStatus.Unknown;
+            return values.Single(v => v.Value == reader.Value.ToString()).Key;
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

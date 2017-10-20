@@ -657,7 +657,7 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="GetDepositHistoryAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public static ApiResult<BinanceDepositList> GetDepositHistory(string asset = null, DateTime? startTime = null, DateTime? endTime = null, long? recvWindow = null) => GetDepositHistoryAsync(asset, startTime, endTime, recvWindow).Result;
+        public static ApiResult<BinanceDepositList> GetDepositHistory(string asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, long? recvWindow = null) => GetDepositHistoryAsync(asset, status, startTime, endTime, recvWindow).Result;
 
         /// <summary>
         /// Gets the deposit history
@@ -667,7 +667,7 @@ namespace Binance.Net
         /// <param name="endTime">Filter end time till</param>
         /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of deposits</returns>
-        public static async Task<ApiResult<BinanceDepositList>> GetDepositHistoryAsync(string asset = null, DateTime? startTime = null, DateTime? endTime = null, long? recvWindow = null)
+        public static async Task<ApiResult<BinanceDepositList>> GetDepositHistoryAsync(string asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, long? recvWindow = null)
         {
             if (key == null || encryptor == null)
                 return ThrowErrorMessage<BinanceDepositList>("No api credentials provided, can't request private endpoints");
@@ -681,6 +681,7 @@ namespace Binance.Net
             };
 
             AddOptionalParameter(parameters, "asset", asset);
+            AddOptionalParameter(parameters, "status", JsonConvert.SerializeObject(status, new DepositStatusConverter()));
             AddOptionalParameter(parameters, "startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString() : null);
             AddOptionalParameter(parameters, "endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
             AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());
@@ -699,7 +700,7 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="GetWithdrawHistoryAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public static ApiResult<BinanceWithdrawalList> GetWithdrawHistory(string asset = null, DateTime? startTime = null, DateTime? endTime = null, long? recvWindow = null) => GetWithdrawHistoryAsync(asset, startTime, endTime, recvWindow).Result;
+        public static ApiResult<BinanceWithdrawalList> GetWithdrawHistory(string asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, long? recvWindow = null) => GetWithdrawHistoryAsync(asset, status, startTime, endTime, recvWindow).Result;
 
         /// <summary>
         /// Gets the withdrawal history
@@ -709,7 +710,7 @@ namespace Binance.Net
         /// <param name="endTime">Filter end time till</param>
         /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of withdrawals</returns>
-        public static async Task<ApiResult<BinanceWithdrawalList>> GetWithdrawHistoryAsync(string asset = null, DateTime? startTime = null, DateTime? endTime = null, long? recvWindow = null)
+        public static async Task<ApiResult<BinanceWithdrawalList>> GetWithdrawHistoryAsync(string asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, long? recvWindow = null)
         {
             if (key == null || encryptor == null)
                 return ThrowErrorMessage<BinanceWithdrawalList>("No api credentials provided, can't request private endpoints");
@@ -723,6 +724,7 @@ namespace Binance.Net
             };
 
             AddOptionalParameter(parameters, "asset", asset);
+            AddOptionalParameter(parameters, "status", JsonConvert.SerializeObject(status, new WithdrawalStatusConverter()));
             AddOptionalParameter(parameters, "startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString() : null);
             AddOptionalParameter(parameters, "endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
             AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());

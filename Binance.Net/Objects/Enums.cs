@@ -79,8 +79,18 @@
 
     public enum WithdrawalStatus
     {
-        Proccessing = 4,
-        Completed = 6,
-        Unknown = 99
+        EmailSend,
+        Canceled,
+        AwaitingApproval,
+        Rejected,
+        Proccessing,
+        Failure,
+        Completed
+    }
+
+    public enum DepositStatus
+    {
+        Pending,
+        Success
     }
 }
