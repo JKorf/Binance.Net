@@ -188,8 +188,8 @@ namespace Binance.Net
                 await GetServerTimeAsync();
 
             var parameters = new Dictionary<string, string>() { { "symbol", symbol } };
-            if (limit != null)
-                parameters.Add("limit", limit.Value.ToString());
+
+            AddOptionalParameter(parameters, "limit", limit?.ToString());
 
             return await ExecuteRequest<BinanceOrderBook>(GetUrl(OrderBookEndpoint, Api, PublicVersion, parameters));
         }
@@ -215,15 +215,12 @@ namespace Binance.Net
                 await GetServerTimeAsync();
 
             var parameters = new Dictionary<string, string>() { { "symbol", symbol } };
-            if (fromId != null)
-                parameters.Add("fromId", fromId.Value.ToString());
-            if (startTime != null)
-                parameters.Add("startTime", ToUnixTimestamp(startTime.Value).ToString());
-            if (endTime != null)
-                parameters.Add("endTime", ToUnixTimestamp(endTime.Value).ToString());
-            if (limit != null)
-                parameters.Add("limit", limit.Value.ToString());
 
+            AddOptionalParameter(parameters, "fromId", fromId?.ToString());
+            AddOptionalParameter(parameters, "startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString() : null);
+            AddOptionalParameter(parameters, "endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
+            AddOptionalParameter(parameters, "limit", limit?.ToString());
+            
             return await ExecuteRequest<BinanceAggregatedTrades[]>(GetUrl(AggregatedTradesEndpoint, Api, PublicVersion, parameters));
         }
 
@@ -251,12 +248,10 @@ namespace Binance.Net
                 { "symbol", symbol },
                 { "interval", JsonConvert.SerializeObject(interval, new KlineIntervalConverter()) },
             };
-            if (startTime != null)
-                parameters.Add("startTime", ToUnixTimestamp(startTime.Value).ToString());
-            if (endTime != null)
-                parameters.Add("endTime", ToUnixTimestamp(endTime.Value).ToString());
-            if (limit != null)
-                parameters.Add("limit", limit.Value.ToString());
+
+            AddOptionalParameter(parameters, "startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString() : null);
+            AddOptionalParameter(parameters, "endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
+            AddOptionalParameter(parameters, "limit", limit?.ToString());
 
             return await ExecuteRequest<BinanceKline[]>(GetUrl(KlinesEndpoint, Api, PublicVersion, parameters));
         }
@@ -344,8 +339,8 @@ namespace Binance.Net
                 { "symbol", symbol },
                 { "timestamp", GetTimestamp() }
             };
-            if (receiveWindow != null)
-                parameters.Add("recvWindow", receiveWindow.Value.ToString());
+
+            AddOptionalParameter(parameters, "recvWindow", receiveWindow?.ToString());
 
             return await ExecuteRequest<BinanceOrder[]>(GetUrl(OpenOrdersEndpoint, Api, SignedVersion, parameters), true);
         }
@@ -377,12 +372,10 @@ namespace Binance.Net
                 { "symbol", symbol },
                 { "timestamp", GetTimestamp() }
             };
-            if (orderId != null)
-                parameters.Add("orderId", orderId.Value.ToString());
-            if (receiveWindow != null)
-                parameters.Add("recvWindow", receiveWindow.Value.ToString());
-            if (limit != null)
-                parameters.Add("limit", limit.Value.ToString());
+
+            AddOptionalParameter(parameters, "orderId", orderId?.ToString());
+            AddOptionalParameter(parameters, "recvWindow", receiveWindow?.ToString());
+            AddOptionalParameter(parameters, "limit", limit?.ToString());
 
             return await ExecuteRequest<BinanceOrder[]>(GetUrl(AllOrdersEndpoint, Api, SignedVersion, parameters), true);
         }
@@ -424,12 +417,10 @@ namespace Binance.Net
                 { "price", price.ToString() },
                 { "timestamp", GetTimestamp() }
             };
-            if (newClientOrderId != null)
-                parameters.Add("newClientOrderId", newClientOrderId);
-            if (stopPrice != null)
-                parameters.Add("stopPrice", stopPrice.Value.ToString());
-            if (icebergQty != null)
-                parameters.Add("icebergQty", icebergQty.Value.ToString());
+
+            AddOptionalParameter(parameters, "newClientOrderId", newClientOrderId ?? null);
+            AddOptionalParameter(parameters, "stopPrice", stopPrice?.ToString());
+            AddOptionalParameter(parameters, "icebergQty", icebergQty?.ToString());
 
             return await ExecuteRequest<BinancePlacedOrder>(GetUrl(NewOrderEndpoint, Api, SignedVersion, parameters), true, PostMethod);
         }
@@ -471,12 +462,10 @@ namespace Binance.Net
                 { "price", price.ToString() },
                 { "timestamp", GetTimestamp() }
             };
-            if (newClientOrderId != null)
-                parameters.Add("newClientOrderId", newClientOrderId);
-            if (stopPrice != null)
-                parameters.Add("stopPrice", stopPrice.Value.ToString());
-            if (icebergQty != null)
-                parameters.Add("icebergQty", icebergQty.Value.ToString());
+
+            AddOptionalParameter(parameters, "newClientOrderId", newClientOrderId ?? null);
+            AddOptionalParameter(parameters, "stopPrice", stopPrice?.ToString());
+            AddOptionalParameter(parameters, "icebergQty", icebergQty?.ToString());
 
             return await ExecuteRequest<BinancePlacedOrder>(GetUrl(NewTestOrderEndpoint, Api, SignedVersion, parameters), true, PostMethod);
         }
@@ -511,13 +500,11 @@ namespace Binance.Net
                 { "symbol", symbol },
                 { "timestamp", GetTimestamp() }
             };
-            if (orderId != null)
-                parameters.Add("orderId", orderId.Value.ToString());
-            if (origClientOrderId != null)
-                parameters.Add("origClientOrderId", origClientOrderId);
-            if (recvWindow != null)
-                parameters.Add("recvWindow", recvWindow.ToString());
 
+            AddOptionalParameter(parameters, "orderId", orderId?.ToString());
+            AddOptionalParameter(parameters, "origClientOrderId", origClientOrderId ?? null);
+            AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());
+            
             return await ExecuteRequest<BinanceOrder>(GetUrl(QueryOrderEndpoint, Api, SignedVersion, parameters), true, GetMethod);
         }
 
@@ -549,15 +536,12 @@ namespace Binance.Net
                 { "symbol", symbol },
                 { "timestamp", GetTimestamp() }
             };
-            if (orderId != null)
-                parameters.Add("orderId", orderId.Value.ToString());
-            if (origClientOrderId != null)
-                parameters.Add("origClientOrderId", origClientOrderId);
-            if (newClientOrderId != null)
-                parameters.Add("newClientOrderId", origClientOrderId);
-            if (recvWindow != null)
-                parameters.Add("recvWindow", recvWindow.ToString());
 
+            AddOptionalParameter(parameters, "orderId", orderId?.ToString());
+            AddOptionalParameter(parameters, "origClientOrderId", origClientOrderId ?? null);
+            AddOptionalParameter(parameters, "newClientOrderId", newClientOrderId ?? null);
+            AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());
+            
             return await ExecuteRequest<BinancePlacedOrder>(GetUrl(CancelOrderEndpoint, Api, SignedVersion, parameters), true, DeleteMethod);
         }
 
@@ -584,8 +568,8 @@ namespace Binance.Net
             {
                 { "timestamp", GetTimestamp() }
             };
-            if (recvWindow != null)
-                parameters.Add("recvWindow", recvWindow.ToString());
+
+            AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());
 
             return await ExecuteRequest<BinanceAccountInfo>(GetUrl(AccountInfoEndpoint, Api, SignedVersion, parameters), true, GetMethod);
         }
@@ -617,12 +601,10 @@ namespace Binance.Net
                 { "symbol", symbol },
                 { "timestamp", GetTimestamp() }
             };
-            if (limit != null)
-                parameters.Add("limit", limit.ToString());
-            if (fromId != null)
-                parameters.Add("fromId", fromId.ToString());
-            if (recvWindow != null)
-                parameters.Add("recvWindow", recvWindow.ToString());
+
+            AddOptionalParameter(parameters, "limit", limit?.ToString());
+            AddOptionalParameter(parameters, "fromId", fromId?.ToString());
+            AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());
 
             return await ExecuteRequest<BinanceTrade[]>(GetUrl(MyTradesEndpoint, Api, SignedVersion, parameters), true, GetMethod);
         }
@@ -658,10 +640,8 @@ namespace Binance.Net
                 { "timestamp", GetTimestamp() }
             };
 
-            if (name != null)
-                parameters.Add("name", name);
-            if (recvWindow != null)
-                parameters.Add("recvWindow", recvWindow.ToString());            
+            AddOptionalParameter(parameters, "name", name);
+            AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());    
 
             var result = await ExecuteRequest<BinanceWithdrawalPlaced>(GetUrl(WithdrawEndpoint, WithdrawalApi, WithdrawalVersion, parameters), true, PostMethod);
             if (!result.Success || result.Data == null)
@@ -700,14 +680,10 @@ namespace Binance.Net
                 { "timestamp", GetTimestamp() }
             };
 
-            if (asset != null)
-                parameters.Add("asset", asset);
-            if (startTime != null)
-                parameters.Add("startTime", ToUnixTimestamp(startTime.Value).ToString());
-            if (endTime != null)
-                parameters.Add("endTime", ToUnixTimestamp(endTime.Value).ToString());
-            if (recvWindow != null)
-                parameters.Add("recvWindow", recvWindow.ToString());
+            AddOptionalParameter(parameters, "asset", asset);
+            AddOptionalParameter(parameters, "startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString() : null);
+            AddOptionalParameter(parameters, "endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
+            AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());
 
             var result = await ExecuteRequest<BinanceDepositList>(GetUrl(DepositHistoryEndpoint, WithdrawalApi, WithdrawalVersion, parameters), true, PostMethod);
             if (!result.Success || result.Data == null)
@@ -746,14 +722,10 @@ namespace Binance.Net
                 { "timestamp", GetTimestamp() }
             };
 
-            if (asset != null)
-                parameters.Add("asset", asset);
-            if (startTime != null)
-                parameters.Add("startTime", ToUnixTimestamp(startTime.Value).ToString());
-            if (endTime != null)
-                parameters.Add("endTime", ToUnixTimestamp(endTime.Value).ToString());
-            if (recvWindow != null)
-                parameters.Add("recvWindow", recvWindow.ToString());
+            AddOptionalParameter(parameters, "asset", asset);
+            AddOptionalParameter(parameters, "startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString() : null);
+            AddOptionalParameter(parameters, "endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
+            AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());
 
             var result = await ExecuteRequest<BinanceWithdrawalList>(GetUrl(WithdrawHistoryEndpoint, WithdrawalApi, WithdrawalVersion, parameters), true, PostMethod);
             if (!result.Success || result.Data == null)
@@ -1053,6 +1025,12 @@ namespace Binance.Net
             return result;
         }
 
+        private static void AddOptionalParameter(Dictionary<string, string> dictionary, string key, string value)
+        {
+            if (value != null)
+                dictionary.Add(key, value);
+        }
+        
         private static Uri GetUrl(string endpoint, string api, string version, Dictionary<string, string> parameters = null)
         {
             var result = $"{BaseApiAddress}/{api}/v{version}/{endpoint}";
