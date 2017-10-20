@@ -30,6 +30,11 @@ namespace BinanceApi.TestConsole
             var accountInfo = BinanceClient.GetAccountInfo();
             var myTrades = BinanceClient.GetMyTrades("BNBBTC");
 
+            // Withdrawal/deposit
+            var withdrawalHistory = BinanceClient.GetWithdrawHistory();
+            var depositHistory = BinanceClient.GetDepositHistory();
+            var withdraw = BinanceClient.Withdraw("ASSET", "ADDRESS", 0);
+
             // Streams
             var successStart = BinanceClient.StartUserStream();
             var successDepth = BinanceClient.SubscribeToDepthStream("bnbbtc", (data) =>
