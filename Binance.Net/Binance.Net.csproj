@@ -5,7 +5,7 @@
   </PropertyGroup>
   
   <PropertyGroup>
-    <Version>1.0.9</Version>
+    <Version>1.1.0</Version>
     <FileVersion>1.0.9</FileVersion>
     <Authors>JKorf</Authors>
     <Description>Binance .Net API wrapper</Description>
@@ -15,7 +15,7 @@
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
 	<Authors>JKorf</Authors>
-    <PackageVersion>1.0.9</PackageVersion>
+    <PackageVersion>1.1.0</PackageVersion>
 	<Description>Binance .Net API wrapper</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance Binance.Net CryptoCurrency Exchange API wrapper</PackageTags>
@@ -24,7 +24,7 @@
 	<PackageLicenseUrl>https://github.com/JKorf/Binance.Net/blob/master/LICENSE</PackageLicenseUrl>
 	<NeutralLanguage>en</NeutralLanguage>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	<PackageReleaseNotes>1.0.9 - Added deposit/withdrawal functionality</PackageReleaseNotes>
+	<PackageReleaseNotes>1.1.0 - Updated deposit/withdraw functionality</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
