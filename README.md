@@ -119,6 +119,9 @@ While testing I found that my local computer time was offset to the Binance serv
 Binance.Net will by default log warning and error messages. To change the verbosity `BinanceClient.SetVerbosity` can be called.
 
 ## Release notes
+* Version 1.1.1 - 20 okt 2017 
+	* Fix for withdrawal/deposit filter
+
 * Version 1.1.0 - 20 okt 2017 
 	* Updated withdrawal/deposit functionality according to API changes
 	* Cleaned up BinanceClient a bit
