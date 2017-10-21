@@ -22,7 +22,7 @@ BinanceClient.SetAPICredentials("APIKEY", "APISECRET");
 API credentials can be managed at https://www.binance.com/userCenter/createApi.html. Make sure to enable the required permission for the right API calls.
 
 ### Response handling
-All API requests will respond with an ApiResult object. This object contains wether the call was successful, the data returned from the call and an error message if the call wasn't successful. As such, one should always check the Success flag when processing a response.
+All API requests will respond with an ApiResult object. This object contains whether the call was successful, the data returned from the call and an error message if the call wasn't successful. As such, one should always check the Success flag when processing a response.
 For example:
 ```C#
 var allPrices = BinanceClient.GetAllPrices();
@@ -64,7 +64,7 @@ var withdraw = BinanceClient.Withdraw("TEST", "Address", 1, "TestWithdraw");
 ```
 
 ### Websockets
-The Binance.Net client provides several socket endpoint to which can be subsribed.
+The Binance.Net client provides several socket endpoints to which can be subsribed.
 Public socket endpoints:
 ```C#
 var successDepth = BinanceClient.SubscribeToDepthStream("bnbbtc", (data) =>
