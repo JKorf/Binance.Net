@@ -64,7 +64,7 @@ var withdraw = BinanceClient.Withdraw("TEST", "Address", 1, "TestWithdraw");
 ```
 
 ### Websockets
-The Binance.Net client provides several socket endpoints to which can be subsribed.
+The Binance.Net client provides several socket endpoints to which can be subscribed.
 Public socket endpoints:
 ```C#
 var successDepth = BinanceClient.SubscribeToDepthStream("bnbbtc", (data) =>
@@ -82,6 +82,7 @@ var successKline = BinanceClient.SubscribeToKlineStream("bnbbtc", KlineInterval.
 ```
 
 Private socket endpoints:
+
 For the private endpoints a user stream has to be started on the Binance server. This can be done using the `BinanceClient.StartUserStream()` command. This call should be made before subscribing to private socket endpoints.
 ```C#
 var successAccount = BinanceClient.SubscribeToAccountUpdateStream((data) =>
@@ -95,6 +96,7 @@ var successOrder = BinanceClient.SubscribeToOrderUpdateStream((data) =>
 ```
 
 Unsubscribing from socket endpoints:
+
 Public socket endpoints can be unsubscribed by using the `BinanceClient.UnsubscribeFromStream` method in combination with the stream ID received from subscribing:
 ```C#
 var successDepth = BinanceClient.SubscribeToDepthStream("bnbbtc", (data) =>
