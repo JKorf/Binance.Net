@@ -22,7 +22,7 @@ BinanceClient.SetAPICredentials("APIKEY", "APISECRET");
 API credentials can be managed at https://www.binance.com/userCenter/createApi.html. Make sure to enable the required permission for the right API calls.
 
 ### Response handling
-All API requests will respond with an ApiResult object. This object contains wether the call was successful, the data returned from the call and an error message if the call wasn't successful. As such, one should always check the Success flag when processing a response.
+All API requests will respond with an ApiResult object. This object contains whether the call was successful, the data returned from the call and an error message if the call wasn't successful. As such, one should always check the Success flag when processing a response.
 For example:
 ```C#
 var allPrices = BinanceClient.GetAllPrices();
@@ -64,8 +64,9 @@ var withdraw = BinanceClient.Withdraw("TEST", "Address", 1, "TestWithdraw");
 ```
 
 ### Websockets
-The Binance.Net client provides several socket endpoint to which can be subsribed.
-Public socket endpoints:
+The Binance.Net client provides several socket endpoints to which can be subscribed.
+
+#### Public socket endpoints:
 ```C#
 var successDepth = BinanceClient.SubscribeToDepthStream("bnbbtc", (data) =>
 {
@@ -81,7 +82,7 @@ var successKline = BinanceClient.SubscribeToKlineStream("bnbbtc", KlineInterval.
 });
 ```
 
-Private socket endpoints:
+#### Private socket endpoints:
 For the private endpoints a user stream has to be started on the Binance server. This can be done using the `BinanceClient.StartUserStream()` command. This call should be made before subscribing to private socket endpoints.
 ```C#
 var successAccount = BinanceClient.SubscribeToAccountUpdateStream((data) =>
@@ -94,7 +95,7 @@ var successOrder = BinanceClient.SubscribeToOrderUpdateStream((data) =>
 });
 ```
 
-Unsubscribing from socket endpoints:
+#### Unsubscribing from socket endpoints:
 Public socket endpoints can be unsubscribed by using the `BinanceClient.UnsubscribeFromStream` method in combination with the stream ID received from subscribing:
 ```C#
 var successDepth = BinanceClient.SubscribeToDepthStream("bnbbtc", (data) =>
