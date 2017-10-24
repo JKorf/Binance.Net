@@ -8,6 +8,18 @@ namespace Binance.Net.Converters
 {
     public class KlineIntervalConverter: JsonConverter
     {
+        private bool quotes;
+
+        public KlineIntervalConverter()
+        {
+            quotes = true;
+        }
+
+        public KlineIntervalConverter(bool useQuotes)
+        {
+            quotes = useQuotes;
+        }
+
         private Dictionary<KlineInterval, string> values = new Dictionary<KlineInterval, string>()
         {
             { KlineInterval.OneMinute, "1m" },
@@ -39,7 +51,10 @@ namespace Binance.Net.Converters
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteRawValue(values[(KlineInterval)value]);
+            if (quotes)
+                writer.WriteValue(values[(KlineInterval)value]);
+            else
+                writer.WriteRawValue(values[(KlineInterval)value]);
         }
     }
 }

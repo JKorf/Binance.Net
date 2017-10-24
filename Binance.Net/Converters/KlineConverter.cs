@@ -9,7 +9,7 @@ namespace Binance.Net.Converters
     {
         public override bool CanConvert(Type objectType)
         {
-            return false;
+            return objectType == typeof(BinanceKline);
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -32,7 +32,21 @@ namespace Binance.Net.Converters
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            var obj = (BinanceKline)value;
+            JArray array = new JArray(
+                obj.OpenTime.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds,
+                obj.Open,
+                obj.High,
+                obj.Low,
+                obj.Close,
+                obj.Volume,
+                obj.CloseTime.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds,
+                obj.AssetVolume,
+                obj.Trades,
+                obj.TakerBuyBaseAssetVolume,
+                obj.TakerBuyQuoteAssetVolume
+                );
+            array.WriteTo(writer);
         }
     }
 }

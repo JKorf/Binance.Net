@@ -8,6 +8,18 @@ namespace Binance.Net.Converters
 {
     public class OrderRejectReasonConverter: JsonConverter
     {
+        private bool quotes;
+
+        public OrderRejectReasonConverter()
+        {
+            quotes = true;
+        }
+
+        public OrderRejectReasonConverter(bool useQuotes)
+        {
+            quotes = useQuotes;
+        }
+
         private Dictionary<OrderRejectReason, string> values = new Dictionary<OrderRejectReason, string>()
         {
             { OrderRejectReason.None, "NONE" },
@@ -34,7 +46,10 @@ namespace Binance.Net.Converters
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteRawValue(values[(OrderRejectReason)value]);
+            if (quotes)
+                writer.WriteValue(values[(OrderRejectReason)value]);
+            else
+                writer.WriteRawValue(values[(OrderRejectReason)value]);
         }
     }
 }

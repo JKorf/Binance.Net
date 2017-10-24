@@ -8,6 +8,18 @@ namespace Binance.Net.Converters
 {
     public class DepositStatusConverter: JsonConverter
     {
+        private bool quotes;
+
+        public DepositStatusConverter()
+        {
+            quotes = true;
+        }
+
+        public DepositStatusConverter(bool useQuotes)
+        {
+            quotes = useQuotes;
+        }
+
         private Dictionary<DepositStatus, string> values = new Dictionary<DepositStatus, string>()
         {
             { DepositStatus.Pending, "0" },
@@ -26,7 +38,10 @@ namespace Binance.Net.Converters
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteRawValue(values[(DepositStatus)value]);
+            if (quotes)
+                writer.WriteValue(values[(DepositStatus)value]);
+            else
+                writer.WriteRawValue(values[(DepositStatus)value]);
         }
     }
 }

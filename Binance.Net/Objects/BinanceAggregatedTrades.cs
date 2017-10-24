@@ -13,9 +13,9 @@ namespace Binance.Net.Objects
         [JsonProperty("q")]
         public double Quantity { get; set; }
         [JsonProperty("f")]
-        public double FirstTradeId { get; set; }
+        public long FirstTradeId { get; set; }
         [JsonProperty("l")]
-        public double LastTradeId { get; set; }
+        public long LastTradeId { get; set; }
         [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
         public DateTime Timestamp { get; set; }
         [JsonProperty("m")]

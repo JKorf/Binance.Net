@@ -8,6 +8,18 @@ namespace Binance.Net.Converters
 {
     public class OrderStatusConverter : JsonConverter
     {
+        private bool quotes;
+
+        public OrderStatusConverter()
+        {
+            quotes = true;
+        }
+
+        public OrderStatusConverter(bool useQuotes)
+        {
+            quotes = useQuotes;
+        }
+
         private Dictionary<OrderStatus, string> values = new Dictionary<OrderStatus, string>()
         {
             { OrderStatus.New, "NEW" },
@@ -31,7 +43,10 @@ namespace Binance.Net.Converters
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteRawValue(values[(OrderStatus)value]);
+            if (quotes)
+                writer.WriteValue(values[(OrderStatus)value]);
+            else
+                writer.WriteRawValue(values[(OrderStatus)value]);
         }
     }
 }

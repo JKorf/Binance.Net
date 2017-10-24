@@ -7,7 +7,7 @@ namespace Binance.Net.Objects
     public class BinanceOrder
     {
         public string Symbol { get; set; }
-        public int OrderId { get; set; }
+        public long OrderId { get; set; }
         public string ClientOrderId { get; set; }
         public double Price { get; set; }
         [JsonProperty("origQty")]

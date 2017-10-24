@@ -252,7 +252,7 @@ namespace Binance.Net
 
             var parameters = new Dictionary<string, string>() {
                 { "symbol", symbol },
-                { "interval", JsonConvert.SerializeObject(interval, new KlineIntervalConverter()) },
+                { "interval", JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)) },
             };
 
             AddOptionalParameter(parameters, "startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString() : null);
@@ -416,9 +416,9 @@ namespace Binance.Net
             var parameters = new Dictionary<string, string>()
             {
                 { "symbol", symbol },
-                { "side", JsonConvert.SerializeObject(side, new OrderSideConverter()) },
-                { "type", JsonConvert.SerializeObject(type, new OrderTypeConverter()) },
-                { "timeInForce", JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter()) },
+                { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
+                { "type", JsonConvert.SerializeObject(type, new OrderTypeConverter(false)) },
+                { "timeInForce", JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)) },
                 { "quantity", quantity.ToString() },
                 { "price", price.ToString() },
                 { "timestamp", GetTimestamp() }
@@ -461,9 +461,9 @@ namespace Binance.Net
             var parameters = new Dictionary<string, string>()
             {
                 { "symbol", symbol },
-                { "side", JsonConvert.SerializeObject(side, new OrderSideConverter()) },
-                { "type", JsonConvert.SerializeObject(type, new OrderTypeConverter()) },
-                { "timeInForce", JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter()) },
+                { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
+                { "type", JsonConvert.SerializeObject(type, new OrderTypeConverter(false)) },
+                { "timeInForce", JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)) },
                 { "quantity", quantity.ToString() },
                 { "price", price.ToString() },
                 { "timestamp", GetTimestamp() }
@@ -687,7 +687,7 @@ namespace Binance.Net
             };
 
             AddOptionalParameter(parameters, "asset", asset);
-            AddOptionalParameter(parameters, "status", status != null ? JsonConvert.SerializeObject(status, new DepositStatusConverter()): null);
+            AddOptionalParameter(parameters, "status", status != null ? JsonConvert.SerializeObject(status, new DepositStatusConverter(false)): null);
             AddOptionalParameter(parameters, "startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString() : null);
             AddOptionalParameter(parameters, "endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
             AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());
@@ -730,7 +730,7 @@ namespace Binance.Net
             };
 
             AddOptionalParameter(parameters, "asset", asset);
-            AddOptionalParameter(parameters, "status", status != null ? JsonConvert.SerializeObject(status, new WithdrawalStatusConverter()): null);
+            AddOptionalParameter(parameters, "status", status != null ? JsonConvert.SerializeObject(status, new WithdrawalStatusConverter(false)): null);
             AddOptionalParameter(parameters, "startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString() : null);
             AddOptionalParameter(parameters, "endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
             AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());
@@ -837,7 +837,7 @@ namespace Binance.Net
         /// specific stream using the <see cref="StopStream(int)"/> method</returns>
         public static BinanceStreamConnection SubscribeToKlineStream(string symbol, KlineInterval interval, Action<BinanceStreamKline> onMessage)
         {
-            var socket = CreateSocket(BaseWebsocketAddress + symbol + KlineStreamEndpoint + "_" + JsonConvert.SerializeObject(interval, new KlineIntervalConverter()));
+            var socket = CreateSocket(BaseWebsocketAddress + symbol + KlineStreamEndpoint + "_" + JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)));
             if (socket == null)
                 return new BinanceStreamConnection() { Succes = false };
 

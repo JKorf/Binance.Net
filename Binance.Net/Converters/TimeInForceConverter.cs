@@ -8,6 +8,18 @@ namespace Binance.Net.Converters
 {
     public class TimeInForceConverter : JsonConverter
     {
+        private bool quotes; 
+
+        public TimeInForceConverter()
+        {
+            quotes = true;
+        }
+
+        public TimeInForceConverter(bool useQuotes)
+        {
+            quotes = useQuotes;
+        }
+
         private Dictionary<TimeInForce, string> values = new Dictionary<TimeInForce, string>()
         {
             { TimeInForce.GoodTillCancel, "GTC" },
@@ -26,7 +38,10 @@ namespace Binance.Net.Converters
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteRawValue(values[(TimeInForce)value]);
+            if(quotes)
+                writer.WriteValue(values[(TimeInForce)value]);
+            else
+                writer.WriteRawValue(values[(TimeInForce)value]);
         }
     }
 }

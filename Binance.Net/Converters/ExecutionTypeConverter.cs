@@ -8,6 +8,18 @@ namespace Binance.Net.Converters
 {
     public class ExecutionTypeConverter: JsonConverter
     {
+        private bool quotes;
+
+        public ExecutionTypeConverter()
+        {
+            quotes = true;
+        }
+
+        public ExecutionTypeConverter(bool useQuotes)
+        {
+            quotes = useQuotes;
+        }
+
         private Dictionary<ExecutionType, string> values = new Dictionary<ExecutionType, string>()
         {
             { ExecutionType.New, "NEW" },
@@ -30,7 +42,10 @@ namespace Binance.Net.Converters
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteRawValue(values[(ExecutionType)value]);
+            if (quotes)
+                writer.WriteValue(values[(ExecutionType)value]);
+            else
+                writer.WriteRawValue(values[(ExecutionType)value]);
         }
     }
 }

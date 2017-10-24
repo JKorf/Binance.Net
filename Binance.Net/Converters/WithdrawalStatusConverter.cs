@@ -8,6 +8,18 @@ namespace Binance.Net.Converters
 {
     public class WithdrawalStatusConverter : JsonConverter
     {
+        private bool quotes;
+
+        public WithdrawalStatusConverter()
+        {
+            quotes = true;
+        }
+
+        public WithdrawalStatusConverter(bool useQuotes)
+        {
+            quotes = useQuotes;
+        }
+
         private Dictionary<WithdrawalStatus, string> values = new Dictionary<WithdrawalStatus, string>()
         {
             { WithdrawalStatus.EmailSend, "0" },
@@ -31,7 +43,10 @@ namespace Binance.Net.Converters
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteRawValue(values[(WithdrawalStatus)value]);
+            if (quotes)
+                writer.WriteValue(values[(WithdrawalStatus)value]);
+            else
+                writer.WriteRawValue(values[(WithdrawalStatus)value]);
         }
     }
 }
