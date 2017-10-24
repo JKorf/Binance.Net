@@ -18,7 +18,7 @@ namespace Binance.Net.Converters
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            writer.WriteValue((((DateTime)value) - new DateTime(1970, 1, 1)).TotalMilliseconds);
         }
     }
 }

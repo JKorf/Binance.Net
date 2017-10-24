@@ -11,6 +11,8 @@ using Newtonsoft.Json;
 using WebSocketSharp;
 using Binance.Net.Objects;
 using Binance.Net.Converters;
+using Binance.Net.Implementations;
+using Binance.Net.Interfaces;
 
 namespace Binance.Net
 {
@@ -27,7 +29,6 @@ namespace Binance.Net
         private static Action<BinanceStreamAccountInfo> accountInfoCallback;
         private static Action<BinanceStreamOrderUpdate> orderUpdateCallback;
 
-        public static bool AutoTimestamp = false;
         private static double timeOffset;
         private static bool timeSynced;
 
@@ -81,6 +82,11 @@ namespace Binance.Net
         private const string WithdrawEndpoint = "withdraw.html";
         private const string DepositHistoryEndpoint = "getDepositHistory.html";
         private const string WithdrawHistoryEndpoint = "getWithdrawHistory.html";
+        #endregion
+
+        #region properties
+        public static bool AutoTimestamp { get; set; } = false;
+        public static IRequestFactory RequestFactory { get; set; } = new RequestFactory();
         #endregion
 
         #region methods
@@ -1050,12 +1056,12 @@ namespace Binance.Net
                 if (signed)
                     uriString += $"&signature={ByteToString(encryptor.ComputeHash(Encoding.UTF8.GetBytes(uri.Query.Replace("?", ""))))}";
 
-                var request = WebRequest.Create(uriString);
+                var request = RequestFactory.Create(uriString);
                 request.Headers.Add("X-MBX-APIKEY", key);
                 request.Method = method;
 
                 Log.Write(LogLevel.Debug, $"Sending {method} request to {uriString}");
-                var response = await request.GetResponseAsync();
+                var response = request.GetResponse();
                 using (var reader = new StreamReader(response.GetResponseStream()))
                 {
                     var data = await reader.ReadToEndAsync();

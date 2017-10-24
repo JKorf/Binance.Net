@@ -24,8 +24,8 @@ namespace Binance.Net.Objects
         [JsonConverter(typeof(TimestampConverter))]
         public DateTime CloseTime { get; set; }
         [JsonProperty("fristId")] // ?
-        public int FirstId { get; set; }
-        public int LastId { get; set; }
+        public long FirstId { get; set; }
+        public long LastId { get; set; }
         [JsonProperty("count")]
         public int Trades { get; set; }
     }
