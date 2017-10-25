@@ -3,5 +3,10 @@ solution: Binance.Net.sln
 mono: none
 dotnet: 1.0.3
 dist: trusty
+install:
+  - nuget restore Binance.Net.sln
+  - nuget install NUnit.Runners -Version 3.7.0 -OutputDirectory testrunner
 script:
  - dotnet restore
+ - xbuild /p:Configuration=Release solution-name.sln
+ - mono ./testrunner/NUnit.Runners.3.7.0/tools/nunit-console.exe ./Binance.Net.UnitTests/bin/Debug/Binance.Net.UnitTests.dll
