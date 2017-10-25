@@ -955,6 +955,18 @@ namespace Binance.Net
             lock(sockets)
                 sockets.SingleOrDefault(s => s.StreamId == streamId)?.Socket.Close();
         }
+
+        /// <summary>
+        /// Unsubscribes from all streams
+        /// </summary>
+        public static void UnsubscribeAllStreams()
+        {
+            lock (sockets)
+                sockets.ToList().ForEach(s => s.Socket.Close());
+
+            orderUpdateCallback = null;
+            accountInfoCallback = null;
+        }
         
         private static void OnUserMessage(string data)
         {
