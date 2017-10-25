@@ -7,7 +7,7 @@
         xmlns:controls="clr-namespace:Binance.Net.ClientWPF.UserControls"
         mc:Ignorable="d"
         Name="Main"
-        Title="MainWindow" Height="600" Width="800">
+        Title="Binance.Net WPF Example" Height="600" Width="800">
     <Window.DataContext>
         <local:MainViewModel/>
     </Window.DataContext>

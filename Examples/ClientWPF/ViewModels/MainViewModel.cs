@@ -73,8 +73,8 @@ namespace Binance.Net.ClientWPF
                 apiKey = value;
                 RaisePropertyChangedEvent("ApiKey");
 
-                if (value != null)
-                    BinanceClient.SetAPIKey(value);         
+                if (value != null && apiSecret != null)
+                    BinanceDefaults.SetDefaultApiCredentials(value, apiSecret);         
             }
         }
 
@@ -87,8 +87,8 @@ namespace Binance.Net.ClientWPF
                 apiSecret = value;
                 RaisePropertyChangedEvent("ApiSecret");
 
-                if (value != null)
-                    BinanceClient.SetAPISecret(value);
+                if (value != null && apiKey != null)
+                    BinanceDefaults.SetDefaultApiCredentials(apiKey, value);
             }
         }
 
@@ -102,6 +102,7 @@ namespace Binance.Net.ClientWPF
         private IMessageBoxService messageBoxService;
         private SettingsWindow settings;
         private object orderLock;
+        private BinanceSocketClient socketClient;
 
         public MainViewModel()
         {
@@ -123,11 +124,14 @@ namespace Binance.Net.ClientWPF
             var order = (OrderViewModel)o;
             Task.Run(() =>
             {
-                var result = BinanceClient.CancelOrder(SelectedSymbol.Symbol, order.Id);
-                if (result.Success)
-                    messageBoxService.ShowMessage("Order canceled!", "Sucess", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
-                else
-                    messageBoxService.ShowMessage($"Order canceling failed: {result.Error.Message}", "Failed", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                using (var client = new BinanceClient())
+                {
+                    var result = client.CancelOrder(SelectedSymbol.Symbol, order.Id);
+                    if (result.Success)
+                        messageBoxService.ShowMessage("Order canceled!", "Sucess", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                    else
+                        messageBoxService.ShowMessage($"Order canceling failed: {result.Error.Message}", "Failed", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                }
             });
         }
 
@@ -135,11 +139,14 @@ namespace Binance.Net.ClientWPF
         {
             Task.Run(() =>
             {
-                var result = BinanceClient.PlaceOrder(SelectedSymbol.Symbol, OrderSide.Buy, OrderType.Limit, TimeInForce.GoodTillCancel, SelectedSymbol.TradeAmount, SelectedSymbol.TradePrice);
-                if (result.Success)
-                    messageBoxService.ShowMessage("Order placed!", "Sucess", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
-                else
-                    messageBoxService.ShowMessage($"Order placing failed: {result.Error.Message}", "Failed", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                using (var client = new BinanceClient())
+                {
+                    var result = client.PlaceOrder(SelectedSymbol.Symbol, OrderSide.Buy, OrderType.Limit, TimeInForce.GoodTillCancel, SelectedSymbol.TradeAmount, SelectedSymbol.TradePrice);
+                    if (result.Success)
+                        messageBoxService.ShowMessage("Order placed!", "Sucess", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                    else
+                        messageBoxService.ShowMessage($"Order placing failed: {result.Error.Message}", "Failed", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                }
             });
         }
 
@@ -147,11 +154,14 @@ namespace Binance.Net.ClientWPF
         {
             Task.Run(() =>
             {
-                var result = BinanceClient.PlaceOrder(SelectedSymbol.Symbol, OrderSide.Sell, OrderType.Limit, TimeInForce.GoodTillCancel, SelectedSymbol.TradeAmount, SelectedSymbol.TradePrice);
-                if (result.Success)
-                    messageBoxService.ShowMessage("Order placed!", "Sucess", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
-                else
-                    messageBoxService.ShowMessage($"Order placing failed: {result.Error.Message}", "Failed", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                using (var client = new BinanceClient())
+                {
+                    var result = client.PlaceOrder(SelectedSymbol.Symbol, OrderSide.Sell, OrderType.Limit, TimeInForce.GoodTillCancel, SelectedSymbol.TradeAmount, SelectedSymbol.TradePrice);
+                    if (result.Success)
+                        messageBoxService.ShowMessage("Order placed!", "Sucess", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                    else
+                        messageBoxService.ShowMessage($"Order placing failed: {result.Error.Message}", "Failed", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                }
             });
         }
 
@@ -171,16 +181,20 @@ namespace Binance.Net.ClientWPF
 
         private async Task GetAllSymbols()
         {
-            var result = await BinanceClient.GetAllPricesAsync();
-            if (result.Success)
-                AllPrices = new ObservableCollection<BinanceSymbolViewModel>(result.Data.Select(r => new BinanceSymbolViewModel(r.Symbol, r.Price)).ToList());
-            else
-                messageBoxService.ShowMessage($"Error requesting data: {result.Error.Message}", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+            using (var client = new BinanceClient())
+            {
+                var result = await client.GetAllPricesAsync();
+                if (result.Success)
+                    AllPrices = new ObservableCollection<BinanceSymbolViewModel>(result.Data.Select(r => new BinanceSymbolViewModel(r.Symbol, r.Price)).ToList());
+                else
+                    messageBoxService.ShowMessage($"Error requesting data: {result.Error.Message}", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
+            socketClient = new BinanceSocketClient();
             List<Task> tasks = new List<Task>();
             foreach (var symbol in AllPrices)
             {
-                var task = new Task(() => BinanceClient.SubscribeToKlineStream(symbol.Symbol.ToLower(), KlineInterval.OneMinute, (data) =>
+                var task = new Task(() => socketClient.SubscribeToKlineStream(symbol.Symbol.ToLower(), KlineInterval.OneMinute, (data) =>
                 {
                     symbol.Price = data.Data.Close;
                 }));
@@ -192,38 +206,44 @@ namespace Binance.Net.ClientWPF
 
         private void Get24HourStats()
         {
-            var result = BinanceClient.Get24HPrices(SelectedSymbol.Symbol);
-            if(result.Success)
+            using (var client = new BinanceClient())
             {
-                SelectedSymbol.HighPrice = result.Data.HighPrice;
-                SelectedSymbol.LowPrice = result.Data.LowPrice;
-                SelectedSymbol.Volume = result.Data.Volume;
-                SelectedSymbol.PriceChangePercent = result.Data.PriceChangePercent;
+                var result = client.Get24HPrices(SelectedSymbol.Symbol);
+                if (result.Success)
+                {
+                    SelectedSymbol.HighPrice = result.Data.HighPrice;
+                    SelectedSymbol.LowPrice = result.Data.LowPrice;
+                    SelectedSymbol.Volume = result.Data.Volume;
+                    SelectedSymbol.PriceChangePercent = result.Data.PriceChangePercent;
+                }
+                else
+                    messageBoxService.ShowMessage($"Error requesting data: {result.Error.Message}", "error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            else
-                messageBoxService.ShowMessage($"Error requesting data: {result.Error.Message}", "error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void GetOrders()
         {
-            var result = BinanceClient.GetAllOrders(SelectedSymbol.Symbol);
-            if (result.Success)
+            using (var client = new BinanceClient())
             {
-                SelectedSymbol.Orders = new ObservableCollection<OrderViewModel>(result.Data.OrderByDescending(d => d.Time).Select(o => new OrderViewModel()
+                var result = client.GetAllOrders(SelectedSymbol.Symbol);
+                if (result.Success)
                 {
-                    Id = o.OrderId,
-                    ExecutedQuantity = o.ExecutedQuantity,
-                    OriginalQuantity = o.OriginalQuantity,
-                    Price = o.Price,
-                    Side = o.Side,
-                    Status = o.Status,
-                    Symbol = o.Symbol,
-                    Time = o.Time,
-                    Type = o.Type
-                }));
+                    SelectedSymbol.Orders = new ObservableCollection<OrderViewModel>(result.Data.OrderByDescending(d => d.Time).Select(o => new OrderViewModel()
+                    {
+                        Id = o.OrderId,
+                        ExecutedQuantity = o.ExecutedQuantity,
+                        OriginalQuantity = o.OriginalQuantity,
+                        Price = o.Price,
+                        Side = o.Side,
+                        Status = o.Status,
+                        Symbol = o.Symbol,
+                        Time = o.Time,
+                        Type = o.Type
+                    }));
+                }
+                else
+                    messageBoxService.ShowMessage($"Error requesting data: {result.Error.Message}", "error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            else
-                messageBoxService.ShowMessage($"Error requesting data: {result.Error.Message}", "error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void SubscribeUserStream()
@@ -233,15 +253,21 @@ namespace Binance.Net.ClientWPF
 
             Task.Run(() =>
             {
-                BinanceClient.StartUserStreamAsync().Wait();
-                BinanceClient.SubscribeToAccountUpdateStream(OnAccountUpdate);
-                BinanceClient.SubscribeToOrderUpdateStream(OnOrderUpdate);
+                using (var client = new BinanceClient())
+                {
+                    var startOkay = client.StartUserStream();
+                    if(startOkay.Success)
+                        messageBoxService.ShowMessage($"Error requesting data: {startOkay.Error.Message}", "error", MessageBoxButton.OK, MessageBoxImage.Error);
 
-                var accountResult = BinanceClient.GetAccountInfo();
-                if (accountResult.Success)
-                    Assets = new ObservableCollection<AssetViewModel>(accountResult.Data.Balances.Where(b => b.Free != 0 || b.Locked != 0).Select(b => new AssetViewModel() { Asset = b.Asset, Free = b.Free, Locked = b.Locked }).ToList());
-                else
-                    messageBoxService.ShowMessage($"Error requesting data: {accountResult.Error.Message}", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    socketClient.SubscribeToAccountUpdateStream(startOkay.Data.ListenKey, OnAccountUpdate);
+                    socketClient.SubscribeToOrderUpdateStream(startOkay.Data.ListenKey, OnOrderUpdate);
+
+                    var accountResult = client.GetAccountInfo();
+                    if (accountResult.Success)
+                        Assets = new ObservableCollection<AssetViewModel>(accountResult.Data.Balances.Where(b => b.Free != 0 || b.Locked != 0).Select(b => new AssetViewModel() { Asset = b.Asset, Free = b.Free, Locked = b.Locked }).ToList());
+                    else
+                        messageBoxService.ShowMessage($"Error requesting data: {accountResult.Error.Message}", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             });
         }
 

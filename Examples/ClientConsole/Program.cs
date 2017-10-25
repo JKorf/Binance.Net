@@ -1,6 +1,7 @@
 ﻿using System;
 using Binance.Net;
 using Binance.Net.Objects;
+using Binance.Net.Logging;
 
 namespace BinanceApi.TestConsole
 {
@@ -8,61 +9,68 @@ namespace BinanceApi.TestConsole
     {
         static void Main(string[] args)
         {
-            BinanceClient.SetAPICredentials("APIKEY", "APISECRET");
+            BinanceDefaults.SetDefaultApiCredentials("APIKEY", "APISECRET");
+            BinanceDefaults.SetDefaultLogVerbosity(LogVerbosity.Debug);
+            BinanceDefaults.SetDefaultLogOutput(Console.Out);
 
-            // Public
-            var ping = BinanceClient.Ping();
-            var serverTime = BinanceClient.GetServerTime();
-            var orderBook = BinanceClient.GetOrderBook("BNBBTC", 10);
-            var aggTrades = BinanceClient.GetAggregatedTrades("BNBBTC", startTime: DateTime.UtcNow.AddMinutes(-2), endTime: DateTime.UtcNow, limit: 10);
-            var klines = BinanceClient.GetKlines("BNBBTC", KlineInterval.OneHour, startTime: DateTime.UtcNow.AddHours(-10), endTime: DateTime.UtcNow, limit: 10);
-            var prices24h = BinanceClient.Get24HPrices("BNBBTC");
-            var allPrices = BinanceClient.GetAllPrices();
-            var allBookPrices = BinanceClient.GetAllBookPrices();
+            using (var client = new BinanceClient())
+            using (var socketClient = new BinanceSocketClient())
+            {
+                // Public
+                var ping = client.Ping();
+                var serverTime = client.GetServerTime();
+                var orderBook = client.GetOrderBook("BNBBTC", 10);
+                var aggTrades = client.GetAggregatedTrades("BNBBTC", startTime: DateTime.UtcNow.AddMinutes(-2), endTime: DateTime.UtcNow, limit: 10);
+                var klines = client.GetKlines("BNBBTC", KlineInterval.OneHour, startTime: DateTime.UtcNow.AddHours(-10), endTime: DateTime.UtcNow, limit: 10);
+                var prices24h = client.Get24HPrices("BNBBTC");
+                var allPrices = client.GetAllPrices();
+                var allBookPrices = client.GetAllBookPrices();
 
-            // Private
-            var openOrders = BinanceClient.GetOpenOrders("BNBBTC");
-            var allOrders = BinanceClient.GetAllOrders("BNBBTC");
-            var testOrderResult = BinanceClient.PlaceTestOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, TimeInForce.GoodTillCancel, 1, 1);
-            var queryOrder = BinanceClient.QueryOrder("BNBBTC", allOrders.Data[0].OrderId);
-            var orderResult = BinanceClient.PlaceOrder("BNBBTC", OrderSide.Sell, OrderType.Limit, TimeInForce.GoodTillCancel, 10, 0.0002);
-            var cancelResult = BinanceClient.CancelOrder("BNBBTC", orderResult.Data.OrderId);
-            var accountInfo = BinanceClient.GetAccountInfo();
-            var myTrades = BinanceClient.GetMyTrades("BNBBTC");
+                // Private
+                var openOrders = client.GetOpenOrders("BNBBTC");
+                var allOrders = client.GetAllOrders("BNBBTC");
+                var testOrderResult = client.PlaceTestOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, TimeInForce.GoodTillCancel, 1, 1);
+                var queryOrder = client.QueryOrder("BNBBTC", allOrders.Data[0].OrderId);
+                var orderResult = client.PlaceOrder("BNBBTC", OrderSide.Sell, OrderType.Limit, TimeInForce.GoodTillCancel, 10, 0.0002);
+                var cancelResult = client.CancelOrder("BNBBTC", orderResult.Data.OrderId);
+                var accountInfo = client.GetAccountInfo();
+                var myTrades = client.GetMyTrades("BNBBTC");
 
-            // Withdrawal/deposit
-            var withdrawalHistory = BinanceClient.GetWithdrawHistory();
-            var depositHistory = BinanceClient.GetDepositHistory();
-            var withdraw = BinanceClient.Withdraw("ASSET", "ADDRESS", 0);
 
-            // Streams
-            var successStart = BinanceClient.StartUserStream();
-            var successDepth = BinanceClient.SubscribeToDepthStream("bnbbtc", (data) =>
-            {
-                // handle data
-            });
-            var successTrades = BinanceClient.SubscribeToTradesStream("bnbbtc", (data) =>
-            {
-                // handle data
-            });
-            var successKline = BinanceClient.SubscribeToKlineStream("bnbbtc", KlineInterval.OneMinute, (data) =>
-            {
-                // handle data
-            });
-            var successAccount = BinanceClient.SubscribeToAccountUpdateStream((data) =>
-            {
-                // handle data
-            });
-            var successOrder = BinanceClient.SubscribeToOrderUpdateStream((data) =>
-            {
-                // handle data
-            });            
+                // Withdrawal/deposit
+                var withdrawalHistory = client.GetWithdrawHistory();
+                var depositHistory = client.GetDepositHistory();
+                var withdraw = client.Withdraw("ASSET", "ADDRESS", 0);
 
-            BinanceClient.UnsubscribeFromStream(successDepth.StreamId);
-            BinanceClient.UnsubscribeFromStream(successTrades.StreamId);
-            BinanceClient.UnsubscribeFromStream(successKline.StreamId);
-            BinanceClient.UnsubscribeFromAccountUpdateStream();
-            BinanceClient.UnsubscribeFromOrderUpdateStream();
+
+                // Streams
+                var successDepth = socketClient.SubscribeToDepthStream("bnbbtc", (data) =>
+                {
+                    // handle data
+                });
+                var successTrades = socketClient.SubscribeToTradesStream("bnbbtc", (data) =>
+                {
+                    // handle data
+                });
+                var successKline = socketClient.SubscribeToKlineStream("bnbbtc", KlineInterval.OneMinute, (data) =>
+                {
+                    // handle data
+                });
+
+                var successStart = client.StartUserStream();
+                var successAccount = socketClient.SubscribeToAccountUpdateStream(successStart.Data.ListenKey, (data) =>
+                {
+                    // handle data
+                });
+                var successOrder = socketClient.SubscribeToOrderUpdateStream(successStart.Data.ListenKey, (data) =>
+                {
+                    // handle data
+                });
+
+                socketClient.UnsubscribeFromStream(successDepth.StreamId);
+                socketClient.UnsubscribeFromAccountUpdateStream();
+                socketClient.UnsubscribeAllStreams();
+            }
 
             Console.ReadLine();
         }
