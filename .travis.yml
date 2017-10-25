@@ -2,6 +2,7 @@ language: csharp
 solution: Binance.Net.sln
 dotnet: 1.0.3
 dist: trusty
+sudo: required
 script:
  - dotnet restore
- - xbuild Binance.Net.sln
+ - dotnet build
