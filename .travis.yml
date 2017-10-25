@@ -2,10 +2,6 @@ language: csharp
 solution: Binance.Net.sln
 dotnet: 1.0.3
 dist: trusty
-install:
-  - nuget restore Binance.Net.sln
-  - nuget install NUnit.Runners -OutputDirectory testrunner
 script:
  - dotnet restore
- - xbuild /p:Configuration=Release Binance.Net.sln
- - mono ./testrunner/NUnit.Runners.3.7.0/tools/nunit-console.exe ./Binance.Net.UnitTests/bin/Debug/Binance.Net.UnitTests.dll
+ 
