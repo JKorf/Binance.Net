@@ -4,4 +4,4 @@ dotnet: 1.0.3
 dist: trusty
 script:
  - dotnet restore
- 
+ - xbuild Binance.Net.sln
