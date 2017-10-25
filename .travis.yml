@@ -4,4 +4,4 @@ dotnet: 1.0.3
 dist: trusty
 script:
  - dotnet restore
- - dotnet build -f netstandard1.3
+ - dotnet build -f netstandard2.0
