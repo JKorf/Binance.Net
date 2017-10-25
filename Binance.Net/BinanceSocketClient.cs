@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Authentication;
 using WebSocketSharp;
 
 namespace Binance.Net
@@ -19,6 +20,7 @@ namespace Binance.Net
         private object streamIdLock = new object();
         private Action<BinanceStreamAccountInfo> accountInfoCallback;
         private Action<BinanceStreamOrderUpdate> orderUpdateCallback;
+        private SslProtocols protocols = SslProtocols.Tls12 | SslProtocols.Tls11 | SslProtocols.Tls;
 
         private const string DepthStreamEndpoint = "@depth";
         private const string KlineStreamEndpoint = "@kline";
@@ -237,6 +239,7 @@ namespace Binance.Net
             try
             {
                 var socket = new WebSocket(url);
+                socket.SslConfiguration.EnabledSslProtocols = protocols; 
                 socket.OnClose += Socket_OnClose;
                 socket.OnError += Socket_OnError;
                 socket.OnOpen += Socket_OnOpen;
