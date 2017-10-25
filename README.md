@@ -12,12 +12,27 @@ pm> Install-Package Binance.Net
 Two examples have been provided, a console application providing the basis interaction with the API wrapper, and a WPF application showing some more advanced use casus. Both can be found in the Examples folder.
 
 ## Usage
-For most API methods Binance.Net provides two versions, synchronized and async calls. Start using the API by including `using Binance.Net;` in your usings.
+Start using the API by including `using Binance.Net;` in your usings.
+Binance.Net provides two clients to interact with the Binance API. The `BinanceClient` provides all rest API calls. The `BinanceSocketClient` provides functions to interact with the Websockets provided by the Binance API. Both clients are disposable and as such can be used in a `using` statement:
+```C#
+using(var client = new BinanceClient())
+{
+}
+```
+
+For most API methods Binance.Net provides two versions, synchronized and async calls. 
 
 ### Setting API credentials
-For private endpoints (trading, order history, account info etc) an API key and secret has to be provided. For this the SetAPICredentials method can be used:
+For private endpoints (trading, order history, account info etc) an API key and secret has to be provided. For this the SetApiCredentials method can be used in both clients, or the credentials can be provided as arguments:
 ```C#
-BinanceClient.SetAPICredentials("APIKEY", "APISECRET");
+using(var client = new BinanceClient("APIKEY", "APISECRET"))
+{
+	client.SetApiCredentials("APIKEY", "APISECRET");
+}
+```
+Alternatively the credentials can be set as default in BinanceDefaults to provide them to all new clients.
+```C#
+BinanceDefaults.SetDefaultApiCredentials("APIKEY", "APISECRET");
 ```
 API credentials can be managed at https://www.binance.com/userCenter/createApi.html. Make sure to enable the required permission for the right API calls.
 
@@ -25,7 +40,7 @@ API credentials can be managed at https://www.binance.com/userCenter/createApi.h
 All API requests will respond with an ApiResult object. This object contains wether the call was successful, the data returned from the call and an error message if the call wasn't successful. As such, one should always check the Success flag when processing a response.
 For example:
 ```C#
-var allPrices = BinanceClient.GetAllPrices();
+var allPrices = client.GetAllPrices();
 if (allPrices.Success)
 {
 	foreach (var price in allPrices.Data)
@@ -38,89 +53,157 @@ else
 ### Requests
 Public requests:
 ```C#
-var ping = BinanceClient.Ping();
-var serverTime = BinanceClient.GetServerTime();
-var orderBook = BinanceClient.GetOrderBook("BNBBTC", 10);
-var aggTrades = BinanceClient.GetAggregatedTrades("BNBBTC", startTime: DateTime.UtcNow.AddMinutes(-2), endTime: DateTime.UtcNow, limit: 10);
-var klines = BinanceClient.GetKlines("BNBBTC", KlineInterval.OneHour, startTime: DateTime.UtcNow.AddHours(-10), endTime: DateTime.UtcNow, limit: 10);
-var prices24h = BinanceClient.Get24HPrices("BNBBTC");
-var allPrices = BinanceClient.GetAllPrices();
-var allBookPrices = BinanceClient.GetAllBookPrices();
+using(var client = new BinanceClient())
+{
+	// Pings the API to check the connection
+	var ping = BinanceClient.Ping();
+	// Gets the server time
+	var serverTime = BinanceClient.GetServerTime();
+	// Gets the order book for specified symbol
+	var orderBook = BinanceClient.GetOrderBook("BNBBTC", 10);
+	// Gets a compresed view of trades for specified symbol
+	var aggTrades = BinanceClient.GetAggregatedTrades("BNBBTC", startTime: DateTime.UtcNow.AddMinutes(-2), endTime: DateTime.UtcNow, limit: 10);
+	// Gets klines data for the specified symbol
+	var klines = BinanceClient.GetKlines("BNBBTC", KlineInterval.OneHour, startTime: DateTime.UtcNow.AddHours(-10), endTime: DateTime.UtcNow, limit: 10);
+	// Gets prices and changes in the last 24 hours for specified symbol
+	var prices24h = BinanceClient.Get24HPrices("BNBBTC");
+	// Gets all symbols and latest prices
+	var allPrices = BinanceClient.GetAllPrices();
+	// Gets book prices (asks/bids) for all symbols
+	var allBookPrices = BinanceClient.GetAllBookPrices();
+}
 ```
 
 Private requests:
 ```C#
-var openOrders = BinanceClient.GetOpenOrders("BNBBTC");
-var allOrders = BinanceClient.GetAllOrders("BNBBTC");
-var testOrderResult = BinanceClient.PlaceTestOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, TimeInForce.GoodTillCancel, 1, 1);
-var queryOrder = BinanceClient.QueryOrder("BNBBTC", allOrders.Data[0].OrderId);
-var orderResult = BinanceClient.PlaceOrder("BNBBTC", OrderSide.Sell, OrderType.Limit, TimeInForce.GoodTillCancel, 10, 0.0002);
-var cancelResult = BinanceClient.CancelOrder("BNBBTC", orderResult.Data.OrderId);
-var accountInfo = BinanceClient.GetAccountInfo();
-var myTrades = BinanceClient.GetMyTrades("BNBBTC");
-var depositHistory = BinanceClient.GetDepositHistory();
-var withdrawalHistory = BinanceClient.GetWithdrawHistory();
-var withdraw = BinanceClient.Withdraw("TEST", "Address", 1, "TestWithdraw");
+using(var client = new BinanceClient())
+{
+	// Gets all open orders for specified symbol
+	var openOrders = BinanceClient.GetOpenOrders("BNBBTC");
+	// Gets all orders for specified symbol
+	var allOrders = BinanceClient.GetAllOrders("BNBBTC");
+	// Places a test order to test the API functionality. No order will actually be placed
+	var testOrderResult = BinanceClient.PlaceTestOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, TimeInForce.GoodTillCancel, 1, 1);
+	// Request information about an order
+	var queryOrder = BinanceClient.QueryOrder("BNBBTC", allOrders.Data[0].OrderId);
+	// Places an order
+	var orderResult = BinanceClient.PlaceOrder("BNBBTC", OrderSide.Sell, OrderType.Limit, TimeInForce.GoodTillCancel, 10, 0.0002);
+	// Cancels an existing order
+	var cancelResult = BinanceClient.CancelOrder("BNBBTC", orderResult.Data.OrderId);
+	// Gets information about your account
+	var accountInfo = BinanceClient.GetAccountInfo();
+	// Gets all trades for specified symbol
+	var myTrades = BinanceClient.GetMyTrades("BNBBTC");
+	// Gets your deposit history
+	var depositHistory = BinanceClient.GetDepositHistory();
+	// Gets your withdraw history
+	var withdrawalHistory = BinanceClient.GetWithdrawHistory();
+	// Requests a withdraw
+	var withdraw = BinanceClient.Withdraw("TEST", "Address", 1, "TestWithdraw");
+}
 ```
 
 ### Websockets
-The Binance.Net client provides several socket endpoint to which can be subsribed.
+The Binance.Net socket client provides several socket endpoint to which can be subsribed.
 Public socket endpoints:
 ```C#
-var successDepth = BinanceClient.SubscribeToDepthStream("bnbbtc", (data) =>
+using(var client = new BinanceSocketClient())
 {
-	// handle data
-});
-var successTrades = BinanceClient.SubscribeToTradesStream("bnbbtc", (data) =>
-{
-	// handle data
-});
-var successKline = BinanceClient.SubscribeToKlineStream("bnbbtc", KlineInterval.OneMinute, (data) =>
-{
-	// handle data
-});
+	var successDepth = client.SubscribeToDepthStream("bnbbtc", (data) =>
+	{
+		// handle data
+	});
+	var successTrades = client.SubscribeToTradesStream("bnbbtc", (data) =>
+	{
+		// handle data
+	});
+	var successKline = client.SubscribeToKlineStream("bnbbtc", KlineInterval.OneMinute, (data) =>
+	{
+		// handle data
+	});
+}
 ```
 
 Private socket endpoints:
 For the private endpoints a user stream has to be started on the Binance server. This can be done using the `BinanceClient.StartUserStream()` command. This call should be made before subscribing to private socket endpoints.
 ```C#
-var successAccount = BinanceClient.SubscribeToAccountUpdateStream((data) =>
+using(var client = new BinanceSocketClient())
 {
-	// handle data
-});
-var successOrder = BinanceClient.SubscribeToOrderUpdateStream((data) =>
-{
-	// handle data
-});
+	var successAccount = client.SubscribeToAccountUpdateStream((data) =>
+	{
+		// handle data
+	});
+	var successOrder = client.SubscribeToOrderUpdateStream((data) =>
+	{
+		// handle data
+	});
+}
 ```
 
 Unsubscribing from socket endpoints:
 Public socket endpoints can be unsubscribed by using the `BinanceClient.UnsubscribeFromStream` method in combination with the stream ID received from subscribing:
 ```C#
-var successDepth = BinanceClient.SubscribeToDepthStream("bnbbtc", (data) =>
+using(var client = new BinanceSocketClient())
+{
+	var successDepth = client.SubscribeToDepthStream("bnbbtc", (data) =>
+	{
+		// handle data
+	});
+
+	client.UnsubscribeFromStream(successDepth.StreamId);
+}
+```
+
+Private socket endpoints can be unsubscribed using the specific methods `client.UnsubscribeFromAccountUpdateStream` and `client.UnsubscribeFromOrderUpdateStream`.
+
+Additionaly, all sockets can be closed with the `UnsubscribeAllStreams` method. Beware that when a client is disposed the sockets are automatically disposed. This means that if the code is no longer in the using statement the eventhandler won't fire anymore. To prevent this from happening make sure the code doesn't leave the using statement or don't use the socket client in a using statement:
+```C#
+// Doesn't leave the using block
+using(var client = new BinanceSocketClient())
+{
+	var successDepth = client.SubscribeToDepthStream("bnbbtc", (data) =>
+	{
+		// handle data
+	});
+
+	Console.ReadLine();
+}
+
+// Without using block
+var client = new BinanceSocketClient();
+client.SubscribeToDepthStream("bnbbtc", (data) =>
 {
 	// handle data
 });
-
-BinanceClient.UnsubscribeFromStream(successDepth.StreamId);
 ```
-
-Private socket endpoints can be unsubscribed using the specific methods `BinanceClient.UnsubscribeFromAccountUpdateStream` and `BinanceClient.UnsubscribeFromOrderUpdateStream`.
-
-Additionaly, all sockets can be closed with the `UnsubscribeAllStreams` method.
 
 When no longer listening to private endpoints the `BinanceClient.StopUserStream` method should be used to signal the Binance server the stream can be closed.
 
 ### AutoTimestamp
 For some private calls a timestamp has to be send to the Binance server. This timestamp in combination with the recvWindow parameter in the request will determine how long the request will be valid. If more than the recvWindow in miliseconds has passed since the provided timestamp the request will be rejected.
 
-While testing I found that my local computer time was offset to the Binance server time, which made it reject all my requests. I added a fix for this in the Binance.Net client which will automatically calibrate the timestamp to the Binance server time. This behaviour is turned off by default and can be turned on using the `BinanceClient.AutoTimeStamp` property. 
+While testing I found that my local computer time was offset to the Binance server time, which made it reject all my requests. I added a fix for this in the Binance.Net client which will automatically calibrate the timestamp to the Binance server time. This behaviour is turned off by default and can be turned on using the `client.AutoTimeStamp` property. 
 
 
 ### Logging
-Binance.Net will by default log warning and error messages. To change the verbosity `BinanceClient.SetVerbosity` can be called.
+Binance.Net will by default log warning and error messages. To change the verbosity `SetLogVerbosity` can be called on a client. The default log verbosity for all new clients can also be set using the `SetDefaultLogVerbosity` in `BinanceDefaults`.
+
+Binance.Net logging will default to logging to the Trace (Trace.WriteLine). This can be changed with the `SetLogOutput` method on clients. Alternatively a default output can be set in the `BinanceDefaults` using the `SetDefaultLogOutput` method:
+```C#
+BinanceDefaults.SetDefaultLogOutput(Console.Out);
+BinanceDefaults.SetDefaultLogVerbosity(LogVerbosity.Debug);
+```
+
 
 ## Release notes
+* Version 2.0.0 - 25 okt 2017
+	* Changed from static class to object orriented, added IDisposable interface to be able to use `using` statements
+	* Split websocket and restapi functionality in BinanceClient and BinanceSocketClient
+	* Added method to set log output writer
+	* Added abitlity to set defaults for new clients
+	* Fixed unit tests for new setup
+	* Updated documentation
+
 * Version 1.1.2 - 25 okt 2017 
 	* Added UnsubscribeAllStreams method
 

@@ -21,10 +21,10 @@ namespace Binance.Net.UnitTests
             // arrange
             DateTime expected = new DateTime(1970, 1, 1).AddMilliseconds(milisecondsTime);
             var time = new BinanceCheckTime() { ServerTime = expected };
-            SetNextResponse(JsonConvert.SerializeObject(time));
+            var client = PrepareClient(JsonConvert.SerializeObject(time));
 
             // act
-            var result = BinanceClient.GetServerTime();
+            var result = client.GetServerTime();
 
             // assert
             Assert.AreEqual(true, result.Success);
@@ -55,10 +55,10 @@ namespace Binance.Net.UnitTests
                 WeightedAveragePrice = 3.456
             };
 
-            SetNextResponse(JsonConvert.SerializeObject(expected));
+            var client = PrepareClient(JsonConvert.SerializeObject(expected));
 
             // act
-            var result = BinanceClient.Get24HPrices("BNBBTC");
+            var result = client.Get24HPrices("BNBBTC");
 
             // assert
             Assert.AreEqual(true, result.Success);
@@ -99,11 +99,11 @@ namespace Binance.Net.UnitTests
                     }
                 }
             };
-            
-            SetNextResponse(JsonConvert.SerializeObject(orderBook));
+
+            var client = PrepareClient(JsonConvert.SerializeObject(orderBook));
 
             // act
-            var result = BinanceClient.GetOrderBook("BNBBTC");
+            var result = client.GetOrderBook("BNBBTC");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -144,11 +144,10 @@ namespace Binance.Net.UnitTests
                 }
             };
 
-            SetNextResponse(JsonConvert.SerializeObject(accountInfo));
-            BinanceClient.SetAPICredentials("test", "test");
+            var client = PrepareClient(JsonConvert.SerializeObject(accountInfo));
 
             // act
-            var result = BinanceClient.GetAccountInfo();
+            var result = client.GetAccountInfo();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -187,10 +186,10 @@ namespace Binance.Net.UnitTests
                 }
             };
 
-            SetNextResponse(JsonConvert.SerializeObject(trades));
+            var client = PrepareClient(JsonConvert.SerializeObject(trades));
 
             // act
-            var result = BinanceClient.GetAggregatedTrades("BNBBTC");
+            var result = client.GetAggregatedTrades("BNBBTC");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -223,10 +222,10 @@ namespace Binance.Net.UnitTests
                 }
             };
 
-            SetNextResponse(JsonConvert.SerializeObject(prices));
+            var client = PrepareClient(JsonConvert.SerializeObject(prices));
 
             // act
-            var result = BinanceClient.GetAllBookPrices();
+            var result = client.GetAllBookPrices();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -275,11 +274,10 @@ namespace Binance.Net.UnitTests
                 }
             };
 
-            SetNextResponse(JsonConvert.SerializeObject(orders));
-            BinanceClient.SetAPICredentials("test", "test");
+            var client = PrepareClient(JsonConvert.SerializeObject(orders));
 
             // act
-            var result = BinanceClient.GetAllOrders("BNBBTC");
+            var result = client.GetAllOrders("BNBBTC");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -306,10 +304,10 @@ namespace Binance.Net.UnitTests
                 }
             };
 
-            SetNextResponse(JsonConvert.SerializeObject(prices));
+            var client = PrepareClient(JsonConvert.SerializeObject(prices));
 
             // act
-            var result = BinanceClient.GetAllPrices();
+            var result = client.GetAllPrices();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -344,11 +342,10 @@ namespace Binance.Net.UnitTests
                 }
             };
 
-            SetNextResponse(JsonConvert.SerializeObject(history));
-            BinanceClient.SetAPICredentials("test", "test");
+            var client = PrepareClient(JsonConvert.SerializeObject(history));
 
             // act
-            var result = BinanceClient.GetDepositHistory();
+            var result = client.GetDepositHistory();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -394,10 +391,10 @@ namespace Binance.Net.UnitTests
                }
             };
 
-            SetNextResponse(JsonConvert.SerializeObject(klines));
+            var client = PrepareClient(JsonConvert.SerializeObject(klines));
 
             // act
-            var result = BinanceClient.GetKlines("BNBBTC", KlineInterval.OneMinute);
+            var result = client.GetKlines("BNBBTC", KlineInterval.OneMinute);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -438,11 +435,10 @@ namespace Binance.Net.UnitTests
                 }
             };
 
-            SetNextResponse(JsonConvert.SerializeObject(trades));
-            BinanceClient.SetAPICredentials("test", "test");
+            var client = PrepareClient(JsonConvert.SerializeObject(trades));
 
             // act
-            var result = BinanceClient.GetMyTrades("BNBBTC");
+            var result = client.GetMyTrades("BNBBTC");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -491,10 +487,10 @@ namespace Binance.Net.UnitTests
                 }
             };
 
-            SetNextResponse(JsonConvert.SerializeObject(orders));
+            var client = PrepareClient(JsonConvert.SerializeObject(orders));
 
             // act
-            var result = BinanceClient.GetOpenOrders("BNBBTC");
+            var result = client.GetOpenOrders("BNBBTC");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -535,10 +531,10 @@ namespace Binance.Net.UnitTests
                 }
             };
 
-            SetNextResponse(JsonConvert.SerializeObject(history));
+            var client = PrepareClient(JsonConvert.SerializeObject(history));
 
             // act
-            var result = BinanceClient.GetWithdrawHistory();
+            var result = client.GetWithdrawHistory();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -560,11 +556,10 @@ namespace Binance.Net.UnitTests
                 TransactTime = new DateTime(2017, 1, 1)
             };
 
-            SetNextResponse(JsonConvert.SerializeObject(canceled));
-            BinanceClient.SetAPICredentials("test", "test");
+            var client = PrepareClient(JsonConvert.SerializeObject(canceled));
 
             // act
-            var result = BinanceClient.CancelOrder("BNBBTC");
+            var result = client.CancelOrder("BNBBTC");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -583,11 +578,10 @@ namespace Binance.Net.UnitTests
                 TransactTime = new DateTime(2017, 1, 1)
             };
 
-            SetNextResponse(JsonConvert.SerializeObject(placed));
-            BinanceClient.SetAPICredentials("test", "test");
+            var client = PrepareClient(JsonConvert.SerializeObject(placed));
 
             // act
-            var result = BinanceClient.PlaceOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, TimeInForce.GoodTillCancel, 1, 2);
+            var result = client.PlaceOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, TimeInForce.GoodTillCancel, 1, 2);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -615,11 +609,10 @@ namespace Binance.Net.UnitTests
                 Type = OrderType.Market
             };
 
-            SetNextResponse(JsonConvert.SerializeObject(order));
-            BinanceClient.SetAPICredentials("test", "test");
+            var client = PrepareClient(JsonConvert.SerializeObject(order));
 
             // act
-            var result = BinanceClient.QueryOrder("BNBBTC", orderId: 1);
+            var result = client.QueryOrder("BNBBTC", orderId: 1);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -635,11 +628,10 @@ namespace Binance.Net.UnitTests
                 Success = true
             };
 
-            SetNextResponse(JsonConvert.SerializeObject(order));
-            BinanceClient.SetAPICredentials("test", "test");
+            var client = PrepareClient(JsonConvert.SerializeObject(order));
 
             // act
-            var result = BinanceClient.Withdraw("BNBBTC", "test", 1);
+            var result = client.Withdraw("BNBBTC", "test", 1);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -654,10 +646,10 @@ namespace Binance.Net.UnitTests
             {
             };
 
-            SetNextResponse(JsonConvert.SerializeObject(pingResult));
+            var client = PrepareClient(JsonConvert.SerializeObject(pingResult));
 
             // act
-            var result = BinanceClient.Ping();
+            var result = client.Ping();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -667,8 +659,10 @@ namespace Binance.Net.UnitTests
         public void RequestingPrivateInfo_Should_RequireAPIKeyAndSecret()
         {
             // arrange
+            var client = PrepareClient("", false);
+
             // act
-            var accountInfo = BinanceClient.GetAccountInfo();
+            var accountInfo = client.GetAccountInfo();
 
             // assert
             Assert.IsFalse(accountInfo.Success);
@@ -683,12 +677,14 @@ namespace Binance.Net.UnitTests
         public void SettingEmptyValuesForAPICredentials_Should_ThrowException(string key, string secret)
         {
             // arrange
+            var client = PrepareClient("");
+
             // act
             // assert
-            Assert.Throws(typeof(ArgumentException), () => BinanceClient.SetAPICredentials(key, secret));
+            Assert.Throws(typeof(ArgumentException), () => client.SetAPICredentials(key, secret));
         }
 
-        private void SetNextResponse(string responseData)
+        private BinanceClient PrepareClient(string responseData, bool credentials = true)
         {
             var expectedBytes = Encoding.UTF8.GetBytes(responseData);
             var responseStream = new MemoryStream();
@@ -706,7 +702,14 @@ namespace Binance.Net.UnitTests
             factory.Setup(c => c.Create(It.IsAny<string>()))
                 .Returns(request.Object);
 
-            BinanceClient.RequestFactory = factory.Object;
+            BinanceClient client;
+            if (credentials)
+                client = new BinanceClient("Test", "Test");
+            else
+                client = new BinanceClient();
+
+            client.RequestFactory = factory.Object;
+            return client;
         }
     }   
 

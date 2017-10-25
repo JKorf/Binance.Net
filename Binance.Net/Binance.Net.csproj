@@ -5,8 +5,8 @@
   </PropertyGroup>
   
   <PropertyGroup>
-    <Version>1.1.2</Version>
-    <FileVersion>1.1.2</FileVersion>
+    <Version>2.0.0</Version>
+    <FileVersion>2.0.0</FileVersion>
     <Authors>JKorf</Authors>
     <Description>Binance .Net API wrapper</Description>
     <Copyright></Copyright>
@@ -15,7 +15,7 @@
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
 	<Authors>JKorf</Authors>
-    <PackageVersion>1.1.2</PackageVersion>
+    <PackageVersion>2.0.0</PackageVersion>
 	<Description>Binance .Net API wrapper</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance Binance.Net CryptoCurrency Exchange API wrapper</PackageTags>
@@ -24,7 +24,7 @@
 	<PackageLicenseUrl>https://github.com/JKorf/Binance.Net/blob/master/LICENSE</PackageLicenseUrl>
 	<NeutralLanguage>en</NeutralLanguage>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	<PackageReleaseNotes>1.1.2 - Added UnsubscribeAllStreams method</PackageReleaseNotes>
+	<PackageReleaseNotes>2.0.0 - Split BinanceClient and BinanceSocketClient to split functionalities, removed static class, added IDisposable for usings, etc</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
