@@ -18,12 +18,16 @@ Binance.Net provides two clients to interact with the Binance API. The `BinanceC
 using(var client = new BinanceClient())
 {
 }
+
+using(var client = new BinanceSocketClient())
+{
+}
 ```
 
 For most API methods Binance.Net provides two versions, synchronized and async calls. 
 
 ### Setting API credentials
-For private endpoints (trading, order history, account info etc) an API key and secret has to be provided. For this the SetApiCredentials method can be used in both clients, or the credentials can be provided as arguments:
+For private endpoints (trading, order history, account info etc) an API key and secret has to be provided. For this the `SetApiCredentials` method can be used in both clients, or the credentials can be provided as arguments:
 ```C#
 using(var client = new BinanceClient("APIKEY", "APISECRET"))
 {
@@ -37,17 +41,20 @@ BinanceDefaults.SetDefaultApiCredentials("APIKEY", "APISECRET");
 API credentials can be managed at https://www.binance.com/userCenter/createApi.html. Make sure to enable the required permission for the right API calls.
 
 ### Response handling
-All API requests will respond with an ApiResult object. This object contains wether the call was successful, the data returned from the call and an error message if the call wasn't successful. As such, one should always check the Success flag when processing a response.
+All API requests will respond with an ApiResult object. This object contains whether the call was successful, the data returned from the call and an error message if the call wasn't successful. As such, one should always check the Success flag when processing a response.
 For example:
 ```C#
-var allPrices = client.GetAllPrices();
-if (allPrices.Success)
+using(var client = new BinanceClient())
 {
-	foreach (var price in allPrices.Data)
-		Console.WriteLine($"{price.Symbol}: {price.Price}");
+	var allPrices = client.GetAllPrices();
+	if (allPrices.Success)
+	{
+		foreach (var price in allPrices.Data)
+			Console.WriteLine($"{price.Symbol}: {price.Price}");
+	}
+	else
+		Console.WriteLine($"Error: {allPrices.Error.Message}");
 }
-else
-	Console.WriteLine($"Error: {allPrices.Error.Message}");
 ```
 
 ### Requests
@@ -56,21 +63,21 @@ Public requests:
 using(var client = new BinanceClient())
 {
 	// Pings the API to check the connection
-	var ping = BinanceClient.Ping();
+	var ping = client.Ping();
 	// Gets the server time
-	var serverTime = BinanceClient.GetServerTime();
+	var serverTime = client.GetServerTime();
 	// Gets the order book for specified symbol
-	var orderBook = BinanceClient.GetOrderBook("BNBBTC", 10);
+	var orderBook = client.GetOrderBook("BNBBTC", 10);
 	// Gets a compresed view of trades for specified symbol
-	var aggTrades = BinanceClient.GetAggregatedTrades("BNBBTC", startTime: DateTime.UtcNow.AddMinutes(-2), endTime: DateTime.UtcNow, limit: 10);
+	var aggTrades = client.GetAggregatedTrades("BNBBTC", startTime: DateTime.UtcNow.AddMinutes(-2), endTime: DateTime.UtcNow, limit: 10);
 	// Gets klines data for the specified symbol
-	var klines = BinanceClient.GetKlines("BNBBTC", KlineInterval.OneHour, startTime: DateTime.UtcNow.AddHours(-10), endTime: DateTime.UtcNow, limit: 10);
+	var klines = client.GetKlines("BNBBTC", KlineInterval.OneHour, startTime: DateTime.UtcNow.AddHours(-10), endTime: DateTime.UtcNow, limit: 10);
 	// Gets prices and changes in the last 24 hours for specified symbol
-	var prices24h = BinanceClient.Get24HPrices("BNBBTC");
+	var prices24h = client.Get24HPrices("BNBBTC");
 	// Gets all symbols and latest prices
-	var allPrices = BinanceClient.GetAllPrices();
+	var allPrices = client.GetAllPrices();
 	// Gets book prices (asks/bids) for all symbols
-	var allBookPrices = BinanceClient.GetAllBookPrices();
+	var allBookPrices = client.GetAllBookPrices();
 }
 ```
 
@@ -79,32 +86,33 @@ Private requests:
 using(var client = new BinanceClient())
 {
 	// Gets all open orders for specified symbol
-	var openOrders = BinanceClient.GetOpenOrders("BNBBTC");
+	var openOrders = client.GetOpenOrders("BNBBTC");
 	// Gets all orders for specified symbol
-	var allOrders = BinanceClient.GetAllOrders("BNBBTC");
+	var allOrders = client.GetAllOrders("BNBBTC");
 	// Places a test order to test the API functionality. No order will actually be placed
-	var testOrderResult = BinanceClient.PlaceTestOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, TimeInForce.GoodTillCancel, 1, 1);
+	var testOrderResult = client.PlaceTestOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, TimeInForce.GoodTillCancel, 1, 1);
 	// Request information about an order
-	var queryOrder = BinanceClient.QueryOrder("BNBBTC", allOrders.Data[0].OrderId);
+	var queryOrder = client.QueryOrder("BNBBTC", allOrders.Data[0].OrderId);
 	// Places an order
-	var orderResult = BinanceClient.PlaceOrder("BNBBTC", OrderSide.Sell, OrderType.Limit, TimeInForce.GoodTillCancel, 10, 0.0002);
+	var orderResult = client.PlaceOrder("BNBBTC", OrderSide.Sell, OrderType.Limit, TimeInForce.GoodTillCancel, 10, 0.0002);
 	// Cancels an existing order
-	var cancelResult = BinanceClient.CancelOrder("BNBBTC", orderResult.Data.OrderId);
+	var cancelResult = client.CancelOrder("BNBBTC", orderResult.Data.OrderId);
 	// Gets information about your account
-	var accountInfo = BinanceClient.GetAccountInfo();
+	var accountInfo = client.GetAccountInfo();
 	// Gets all trades for specified symbol
-	var myTrades = BinanceClient.GetMyTrades("BNBBTC");
+	var myTrades = client.GetMyTrades("BNBBTC");
 	// Gets your deposit history
-	var depositHistory = BinanceClient.GetDepositHistory();
+	var depositHistory = client.GetDepositHistory();
 	// Gets your withdraw history
-	var withdrawalHistory = BinanceClient.GetWithdrawHistory();
+	var withdrawalHistory = client.GetWithdrawHistory();
 	// Requests a withdraw
-	var withdraw = BinanceClient.Withdraw("TEST", "Address", 1, "TestWithdraw");
+	var withdraw = client.Withdraw("TEST", "Address", 1, "TestWithdraw");
 }
 ```
 
 ### Websockets
 The Binance.Net socket client provides several socket endpoint to which can be subsribed.
+
 Public socket endpoints:
 ```C#
 using(var client = new BinanceSocketClient())
@@ -125,15 +133,16 @@ using(var client = new BinanceSocketClient())
 ```
 
 Private socket endpoints:
-For the private endpoints a user stream has to be started on the Binance server. This can be done using the `BinanceClient.StartUserStream()` command. This call should be made before subscribing to private socket endpoints.
+
+For the private endpoints a user stream has to be started on the Binance server. This can be done using the `client.StartUserStream()` command. This command will return a listen key which can then be provided to the private socket subscriptions:
 ```C#
 using(var client = new BinanceSocketClient())
 {
-	var successAccount = client.SubscribeToAccountUpdateStream((data) =>
+	var successAccount = client.SubscribeToAccountUpdateStream(listenKey, (data) =>
 	{
 		// handle data
 	});
-	var successOrder = client.SubscribeToOrderUpdateStream((data) =>
+	var successOrder = client.SubscribeToOrderUpdateStream(listenKey, (data) =>
 	{
 		// handle data
 	});
@@ -141,7 +150,7 @@ using(var client = new BinanceSocketClient())
 ```
 
 Unsubscribing from socket endpoints:
-Public socket endpoints can be unsubscribed by using the `BinanceClient.UnsubscribeFromStream` method in combination with the stream ID received from subscribing:
+Public socket endpoints can be unsubscribed by using the `client.UnsubscribeFromStream` method in combination with the stream ID received from subscribing:
 ```C#
 using(var client = new BinanceSocketClient())
 {
@@ -177,7 +186,7 @@ client.SubscribeToDepthStream("bnbbtc", (data) =>
 });
 ```
 
-When no longer listening to private endpoints the `BinanceClient.StopUserStream` method should be used to signal the Binance server the stream can be closed.
+When no longer listening to private endpoints the `client.StopUserStream` method should be used to signal the Binance server the stream can be closed.
 
 ### AutoTimestamp
 For some private calls a timestamp has to be send to the Binance server. This timestamp in combination with the recvWindow parameter in the request will determine how long the request will be valid. If more than the recvWindow in miliseconds has passed since the provided timestamp the request will be rejected.
