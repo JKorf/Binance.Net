@@ -55,7 +55,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BinanceNetTest.cs" />
+    <Compile Include="BinanceSocketClientTests.cs" />
+    <Compile Include="BinanceClientTests.cs" />
     <Compile Include="ObjectComparer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

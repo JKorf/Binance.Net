@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace Binance.Net.UnitTests
 {
     public static class Compare
     {
+        [ExcludeFromCodeCoverage]
         public static bool PublicInstancePropertiesEqual<T>(T self, T to, params string[] ignore) where T : class
         {
             if (self != null && to != null)

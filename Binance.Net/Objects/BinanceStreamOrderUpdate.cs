@@ -35,7 +35,7 @@ namespace Binance.Net.Objects
         [JsonProperty("r"), JsonConverter(typeof(OrderRejectReasonConverter))]
         public OrderRejectReason RejectReason { get; set; }
         [JsonProperty("i")]
-        public int OrderId { get; set; }
+        public long OrderId { get; set; }
         [JsonProperty("l")]
         public double QuantityOfLastFilledTrade { get; set; }
         [JsonProperty("z")]
@@ -49,7 +49,7 @@ namespace Binance.Net.Objects
         [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
         public DateTime Time { get; set; }
         [JsonProperty("t")]
-        public double TradeId { get; set; }
+        public long TradeId { get; set; }
         [JsonProperty("I")]
         public long I { get; set; }
         [JsonProperty("m")]

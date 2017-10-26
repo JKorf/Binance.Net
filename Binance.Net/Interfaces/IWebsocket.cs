@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Binance.Net.Events;
+using System;
 using System.Security.Authentication;
 using WebSocketSharp;
 
@@ -8,10 +9,10 @@ namespace Binance.Net.Interfaces
     {
         void SetEnabledSslProtocols(SslProtocols protocols);
 
-        void OnClose(EventHandler<CloseEventArgs> onClose);
-        void OnMessage(EventHandler<MessageEventArgs> onMessage);
-        void OnError(EventHandler<ErrorEventArgs> onError);
-        void OnOpen(EventHandler onOpen);
+        event EventHandler<ClosedEventArgs> OnClose;
+        event EventHandler<MessagedEventArgs> OnMessage;
+        event EventHandler<ErroredEventArgs> OnError;
+        event EventHandler OnOpen;
 
         void Connect();
         void Close();

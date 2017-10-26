@@ -12,7 +12,7 @@ using System.Collections.Generic;
 namespace Binance.Net.UnitTests
 {
     [TestFixture()]
-    public class BinanceNetTest
+    public class BinanceClientTests
     {
         [TestCase(1508837063996)]
         [TestCase(1507156891385)]
