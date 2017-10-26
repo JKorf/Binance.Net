@@ -639,6 +639,25 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
+        public void StartUserStream_Should_RespondWithListenKey()
+        {
+            // arrange
+            var key = new BinanceListenKey()
+            {
+                ListenKey = "123"
+            };
+
+            var client = PrepareClient(JsonConvert.SerializeObject(key));
+
+            // act
+            var result = client.StartUserStream();
+
+            // assert
+            Assert.IsTrue(result.Success);
+            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(key, result.Data));
+        }
+
+        [TestCase]
         public void Ping_Should_RespondWithSuccess()
         {
             // arrange
@@ -664,6 +683,8 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsFalse(accountInfo.Success);
+            Assert.IsNotNull(accountInfo.Error);
+            Assert.IsNotNull(accountInfo.Error.Message);
         }
 
         [TestCase(null, null)]

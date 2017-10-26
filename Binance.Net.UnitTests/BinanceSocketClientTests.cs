@@ -26,7 +26,7 @@ namespace Binance.Net.UnitTests
 
             BinanceStreamDepth result = null;
             var client = new BinanceSocketClient {SocketFactory = factory.Object};
-            client.SubscribeToDepthStream("test", (test) => result = test);
+            var subscibtion = client.SubscribeToDepthStream("test", (test) => result = test);
 
             var data = new BinanceStreamDepth()
             {
@@ -50,6 +50,8 @@ namespace Binance.Net.UnitTests
             socket.Raise(r => r.OnMessage += null, new MessagedEventArgs(JsonConvert.SerializeObject(data), false, false, true, new byte[2]));
 
             // assert
+            Assert.IsTrue(subscibtion.Succes);
+            Assert.IsTrue(subscibtion.StreamId != 0);
             Assert.IsNotNull(result);
             Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data, result, "Bids", "Asks"));
             Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data.Asks[0], result.Asks[0]));
