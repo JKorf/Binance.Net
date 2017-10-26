@@ -1,4 +1,5 @@
-﻿using WebSocketSharp;
+﻿using Binance.Net.Interfaces;
+using WebSocketSharp;
 
 namespace Binance.Net.Objects
 {
@@ -10,7 +11,7 @@ namespace Binance.Net.Objects
 
     public class BinanceStream
     {
-        public WebSocket Socket { get; set; }
+        public IWebsocket Socket { get; set; }
         public int StreamId { get; set; }
         public bool UserStream { get; set; }
     }

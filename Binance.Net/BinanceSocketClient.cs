@@ -1,4 +1,5 @@
 ﻿using Binance.Net.Converters;
+using Binance.Net.Implementations;
 using Binance.Net.Logging;
 using Binance.Net.Objects;
 using Newtonsoft.Json;
@@ -25,6 +26,10 @@ namespace Binance.Net
         private const string DepthStreamEndpoint = "@depth";
         private const string KlineStreamEndpoint = "@kline";
         private const string TradesStreamEndpoint = "@aggTrade";
+        #endregion
+
+        #region properties
+        public WebsocketFactory SocketFactory { get; set; } = new WebsocketFactory();
         #endregion
 
         #region constructor/destructor
@@ -69,7 +74,7 @@ namespace Binance.Net
             if (socket == null)
                 return new BinanceStreamConnection() { Succes = false };
 
-            socket.Socket.OnMessage += (o, s) => onMessage(JsonConvert.DeserializeObject<BinanceStreamKline>(s.Data));
+            socket.Socket.OnMessage((o, s) => onMessage(JsonConvert.DeserializeObject<BinanceStreamKline>(s.Data)));
 
             log.Write(LogVerbosity.Debug, $"Started kline stream for {symbol}: {interval}");
             return new BinanceStreamConnection() { StreamId = socket.StreamId, Succes = true };
@@ -89,7 +94,7 @@ namespace Binance.Net
             if (socket == null)
                 return new BinanceStreamConnection() { Succes = false };
 
-            socket.Socket.OnMessage += (o, s) => onMessage(JsonConvert.DeserializeObject<BinanceStreamDepth>(s.Data));
+            socket.Socket.OnMessage((o, s) => onMessage(JsonConvert.DeserializeObject<BinanceStreamDepth>(s.Data)));
 
             log.Write(LogVerbosity.Debug, $"Started depth stream for {symbol}");
             return new BinanceStreamConnection() { StreamId = socket.StreamId, Succes = true };
@@ -109,7 +114,7 @@ namespace Binance.Net
             if (socket == null)
                 return new BinanceStreamConnection() { Succes = false };
 
-            socket.Socket.OnMessage += (o, s) => onMessage(JsonConvert.DeserializeObject<BinanceStreamTrade>(s.Data));
+            socket.Socket.OnMessage((o, s) => onMessage(JsonConvert.DeserializeObject<BinanceStreamTrade>(s.Data)));
 
             log.Write(LogVerbosity.Debug, $"Started trade stream for {symbol}");
             return new BinanceStreamConnection() { StreamId = socket.StreamId, Succes = true };
@@ -228,7 +233,7 @@ namespace Binance.Net
                 return false;
 
             socket.UserStream = true;
-            socket.Socket.OnMessage += (o, s) => OnUserMessage(s.Data);
+            socket.Socket.OnMessage((o, s) => OnUserMessage(s.Data));
             log.Write(LogVerbosity.Debug, $"User stream started");
             return true;
         }
@@ -238,11 +243,11 @@ namespace Binance.Net
         {
             try
             {
-                var socket = new WebSocket(url);
-                socket.SslConfiguration.EnabledSslProtocols = protocols; 
-                socket.OnClose += Socket_OnClose;
-                socket.OnError += Socket_OnError;
-                socket.OnOpen += Socket_OnOpen;
+                var socket = SocketFactory.CreateWebsocket(url);
+                socket.SetEnabledSslProtocols(protocols); 
+                socket.OnClose(Socket_OnClose);
+                socket.OnError(Socket_OnError);
+                socket.OnOpen(Socket_OnOpen);
                 socket.Connect();
                 var socketObject = new BinanceStream() { Socket = socket, StreamId = NextStreamId() };
                 lock (sockets)

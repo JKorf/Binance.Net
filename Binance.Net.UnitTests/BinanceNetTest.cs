@@ -684,6 +684,37 @@ namespace Binance.Net.UnitTests
             Assert.Throws(typeof(ArgumentException), () => client.SetAPICredentials(key, secret));
         }
 
+        [TestCase()]
+        public void EnablingAutoTimestamp_Should_CallServerTime()
+        {
+            // arrange
+            var expectedBytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new BinanceCheckTime() { ServerTime = DateTime.Now }));
+            var responseStream = new MemoryStream();
+            responseStream.Write(expectedBytes, 0, expectedBytes.Length);
+            responseStream.Seek(0, SeekOrigin.Begin);
+
+            var response = new Mock<IResponse>();            
+            response.Setup(c => c.GetResponseStream()).Returns(responseStream);
+
+            var request = new Mock<IRequest>();
+            request.Setup(c => c.Headers).Returns(new WebHeaderCollection());
+            request.Setup(c => c.GetResponse()).Returns(response.Object);
+
+            var factory = new Mock<IRequestFactory>();
+            factory.Setup(c => c.Create(It.IsAny<string>()))
+                .Returns(request.Object);
+
+            BinanceClient client = new BinanceClient();
+            client.RequestFactory = factory.Object;
+            client.AutoTimestamp = true;
+
+            // act
+            client.GetAllPrices();
+
+            // assert
+            factory.Verify(x => x.Create(It.Is<string>(s => s.Contains("time"))));            
+        }
+
         private BinanceClient PrepareClient(string responseData, bool credentials = true)
         {
             var expectedBytes = Encoding.UTF8.GetBytes(responseData);
