@@ -8,6 +8,7 @@ using Binance.Net.Interfaces;
 using Binance.Net.Objects;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using Binance.Net.Logging;
 
 namespace Binance.Net.UnitTests
 {
@@ -567,6 +568,28 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
+        public void PlaceTestOrder_Should_RespondWithPlacedTestOrder()
+        {
+            // arrange
+            var placed = new BinancePlacedOrder()
+            {
+                ClientOrderId = "test",
+                OrderId = 100000000000,
+                Symbol = "BNBBTC",
+                TransactTime = new DateTime(2017, 1, 1)
+            };
+
+            var client = PrepareClient(JsonConvert.SerializeObject(placed));
+
+            // act
+            var result = client.PlaceTestOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, TimeInForce.GoodTillCancel, 1, 2);
+
+            // assert
+            Assert.IsTrue(result.Success);
+            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(placed, result.Data));
+        }
+
+        [TestCase]
         public void PlaceOrder_Should_RespondWithPlacedOrder()
         {
             // arrange
@@ -658,6 +681,32 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
+        public void KeepAliveUserStream_Should_Respond()
+        {
+            // arrange
+            var client = PrepareClient("{}");
+
+            // act
+            var result = client.KeepAliveUserStream("test");
+
+            // assert
+            Assert.IsTrue(result.Success);
+        }
+
+        [TestCase]
+        public void StopUserStream_Should_Respond()
+        {
+            // arrange
+            var client = PrepareClient("{}");
+
+            // act
+            var result = client.StopUserStream("test");
+
+            // assert
+            Assert.IsTrue(result.Success);
+        }
+
+        [TestCase]
         public void Ping_Should_RespondWithSuccess()
         {
             // arrange
@@ -703,6 +752,20 @@ namespace Binance.Net.UnitTests
             Assert.Throws(typeof(ArgumentException), () => client.SetAPICredentials(key, secret));
         }
 
+        [TestCase(null, null)]
+        [TestCase("", "")]
+        [TestCase("test", null)]
+        [TestCase("test", "")]
+        [TestCase(null, "test")]
+        [TestCase("", "test")]
+        public void SettingEmptyValuesForDefaultAPICredentials_Should_ThrowException(string key, string secret)
+        {
+            // arrange
+            // act
+            // assert
+            Assert.Throws(typeof(ArgumentException), () => BinanceDefaults.SetDefaultApiCredentials(key, secret));
+        }
+
         [TestCase()]
         public void EnablingAutoTimestamp_Should_CallServerTime()
         {
@@ -734,6 +797,40 @@ namespace Binance.Net.UnitTests
 
             // assert
             factory.Verify(x => x.Create(It.Is<string>(s => s.Contains("time"))));            
+        }
+
+        [TestCase()]
+        public void SettingLogOutput_Should_RedirectLogOutput()
+        {
+            // arrange
+            var client = PrepareClient(JsonConvert.SerializeObject(new BinancePing()));
+            var stringBuilder = new StringBuilder();
+
+            // act
+            client.SetLogVerbosity(LogVerbosity.Debug);
+            client.SetLogOutput(new StringWriter(stringBuilder));
+            client.Ping();
+
+            // assert
+            Assert.IsFalse(string.IsNullOrEmpty(stringBuilder.ToString()));
+        }
+
+        [TestCase()]
+        public void SettingDefaults_Should_ImpactNewClients()
+        {
+            // arrange
+            var stringBuilder = new StringBuilder();
+            BinanceDefaults.SetDefaultApiCredentials("test", "test");
+            BinanceDefaults.SetDefaultLogOutput(new StringWriter(stringBuilder));
+            BinanceDefaults.SetDefaultLogVerbosity(LogVerbosity.Debug);
+
+            var client = PrepareClient(JsonConvert.SerializeObject(new BinancePing()));
+
+            // act
+            Assert.DoesNotThrow(() => client.GetAccountInfo());
+
+            // assert
+            Assert.IsFalse(string.IsNullOrEmpty(stringBuilder.ToString()));
         }
 
         private BinanceClient PrepareClient(string responseData, bool credentials = true)

@@ -246,6 +246,143 @@ namespace Binance.Net.UnitTests
             Assert.IsNotNull(result);
             Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data, result, "Balances"));
         }
+
+        [TestCase()]
+        public void UnsubscribingStream_Should_CloseTheSocket()
+        {
+            // arrange
+            bool closed = false;
+            var socket = new Mock<IWebsocket>();
+            socket.Setup(s => s.Close()).Raises(s => s.OnClose += null, new ClosedEventArgs(0, "", true));
+            socket.Setup(s => s.Connect());
+            socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
+            socket.Object.OnClose += (sender, args) =>
+            {
+                closed = true;
+            };
+
+            var factory = new Mock<IWebsocketFactory>();
+            factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
+            
+            var client = new BinanceSocketClient { SocketFactory = factory.Object };
+            var subscription = client.SubscribeToTradesStream("test", (data) => { });
+
+            // act
+            client.UnsubscribeFromStream(subscription.StreamId);
+
+            // assert
+            Assert.IsTrue(closed);
+        }
+
+        [TestCase()]
+        public void UnsubscribingAccountUpdate_Should_CloseSocket()
+        {
+            // arrange
+            int closed = 0;
+            var socket = new Mock<IWebsocket>();
+            socket.Setup(s => s.Close()).Raises(s => s.OnClose += null, new ClosedEventArgs(0, "", true));
+            socket.Setup(s => s.Connect());
+            socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
+            socket.Object.OnClose += (sender, args) =>
+            {
+                closed++;
+            };
+
+            var factory = new Mock<IWebsocketFactory>();
+            factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
+
+            var client = new BinanceSocketClient("test", "test") { SocketFactory = factory.Object };
+            client.SubscribeToAccountUpdateStream("test", (data) => { });
+
+            // act
+            client.UnsubscribeFromAccountUpdateStream();
+
+            // assert
+            Assert.IsTrue(closed == 1);
+        }
+
+        [TestCase()]
+        public void UnsubscribingOrderUpdate_Should_CloseSocket()
+        {
+            // arrange
+            int closed = 0;
+            var socket = new Mock<IWebsocket>();
+            socket.Setup(s => s.Close()).Raises(s => s.OnClose += null, new ClosedEventArgs(0, "", true));
+            socket.Setup(s => s.Connect());
+            socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
+            socket.Object.OnClose += (sender, args) =>
+            {
+                closed++;
+            };
+
+            var factory = new Mock<IWebsocketFactory>();
+            factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
+
+            var client = new BinanceSocketClient("test", "test") { SocketFactory = factory.Object };
+            client.SubscribeToOrderUpdateStream("test", (data) => { });
+
+            // act
+            client.UnsubscribeFromOrderUpdateStream();
+
+            // assert
+            Assert.IsTrue(closed == 1);
+        }
+
+        [TestCase()]
+        public void UnsubscribingOrderUpdateWhenAccountInfoAlsoSubscribed_Should_NotCloseSocket()
+        {
+            // arrange
+            int closed = 0;
+            var socket = new Mock<IWebsocket>();
+            socket.Setup(s => s.Close()).Raises(s => s.OnClose += null, new ClosedEventArgs(0, "", true));
+            socket.Setup(s => s.Connect());
+            socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
+            socket.Object.OnClose += (sender, args) =>
+            {
+                closed++;
+            };
+
+            var factory = new Mock<IWebsocketFactory>();
+            factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
+
+            var client = new BinanceSocketClient("test", "test") { SocketFactory = factory.Object };
+            client.SubscribeToOrderUpdateStream("test", (data) => { var d = data; });
+            client.SubscribeToAccountUpdateStream("test", (data) => { var d = data; });
+
+            // act
+            client.UnsubscribeFromOrderUpdateStream();
+
+            // assert
+            Assert.IsTrue(closed == 0);
+        }
+
+        [TestCase()]
+        public void UnsubscribingAll_Should_CloseAllSockets()
+        {
+            // arrange
+            int closed = 0;
+            var socket = new Mock<IWebsocket>();
+            socket.Setup(s => s.Close()).Raises(s => s.OnClose += null, new ClosedEventArgs(0, "", true));
+            socket.Setup(s => s.Connect());
+            socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
+            socket.Object.OnClose += (sender, args) =>
+            {
+                closed++;
+            };
+
+            var factory = new Mock<IWebsocketFactory>();
+            factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
+
+            var client = new BinanceSocketClient { SocketFactory = factory.Object };
+            client.SubscribeToTradesStream("test", (data) => { var d = data; });
+            client.SubscribeToDepthStream("test", (data) => { var d = data; });
+
+            // act
+            client.UnsubscribeAllStreams();
+
+            // assert
+            Assert.IsTrue(closed == 2);
+        }
     }   
 
 }
