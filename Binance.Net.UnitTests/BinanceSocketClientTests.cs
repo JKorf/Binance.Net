@@ -25,8 +25,7 @@ namespace Binance.Net.UnitTests
             factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
 
             BinanceStreamDepth result = null;
-            var client = new BinanceSocketClient();
-            client.SocketFactory = factory.Object;
+            var client = new BinanceSocketClient {SocketFactory = factory.Object};
             client.SubscribeToDepthStream("test", (test) => result = test);
 
             var data = new BinanceStreamDepth()
@@ -72,8 +71,7 @@ namespace Binance.Net.UnitTests
             factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
 
             BinanceStreamKline result = null;
-            var client = new BinanceSocketClient();
-            client.SocketFactory = factory.Object;
+            var client = new BinanceSocketClient {SocketFactory = factory.Object};
             client.SubscribeToKlineStream("test", KlineInterval.OneMinute, (test) => result = test);
 
             var data = new BinanceStreamKline()
@@ -124,8 +122,7 @@ namespace Binance.Net.UnitTests
             factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
 
             BinanceStreamTrade result = null;
-            var client = new BinanceSocketClient();
-            client.SocketFactory = factory.Object;
+            var client = new BinanceSocketClient {SocketFactory = factory.Object};
             client.SubscribeToTradesStream("test", (test) => result = test);
 
             var data = new BinanceStreamTrade()
@@ -163,8 +160,7 @@ namespace Binance.Net.UnitTests
             factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
 
             BinanceStreamAccountInfo result = null;
-            var client = new BinanceSocketClient();
-            client.SocketFactory = factory.Object;
+            var client = new BinanceSocketClient {SocketFactory = factory.Object};
             client.SubscribeToAccountUpdateStream("test", (test) => result = test);
 
             var data = new BinanceStreamAccountInfo()
@@ -208,8 +204,7 @@ namespace Binance.Net.UnitTests
             factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
 
             BinanceStreamOrderUpdate result = null;
-            var client = new BinanceSocketClient();
-            client.SocketFactory = factory.Object;
+            var client = new BinanceSocketClient {SocketFactory = factory.Object};
             client.SubscribeToOrderUpdateStream("test", (test) => result = test);
 
             var data = new BinanceStreamOrderUpdate()

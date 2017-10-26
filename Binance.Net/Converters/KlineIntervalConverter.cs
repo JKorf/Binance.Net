@@ -8,7 +8,7 @@ namespace Binance.Net.Converters
 {
     public class KlineIntervalConverter: JsonConverter
     {
-        private bool quotes;
+        private readonly bool quotes;
 
         public KlineIntervalConverter()
         {
@@ -20,7 +20,7 @@ namespace Binance.Net.Converters
             quotes = useQuotes;
         }
 
-        private Dictionary<KlineInterval, string> values = new Dictionary<KlineInterval, string>()
+        private readonly Dictionary<KlineInterval, string> values = new Dictionary<KlineInterval, string>()
         {
             { KlineInterval.OneMinute, "1m" },
             { KlineInterval.ThreeMinutes, "3m" },

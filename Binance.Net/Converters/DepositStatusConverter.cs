@@ -8,7 +8,7 @@ namespace Binance.Net.Converters
 {
     public class DepositStatusConverter: JsonConverter
     {
-        private bool quotes;
+        private readonly bool quotes;
 
         public DepositStatusConverter()
         {
@@ -20,7 +20,7 @@ namespace Binance.Net.Converters
             quotes = useQuotes;
         }
 
-        private Dictionary<DepositStatus, string> values = new Dictionary<DepositStatus, string>()
+        private readonly Dictionary<DepositStatus, string> values = new Dictionary<DepositStatus, string>()
         {
             { DepositStatus.Pending, "0" },
             { DepositStatus.Success, "1" }

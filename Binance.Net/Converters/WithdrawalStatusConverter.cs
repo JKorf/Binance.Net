@@ -8,7 +8,7 @@ namespace Binance.Net.Converters
 {
     public class WithdrawalStatusConverter : JsonConverter
     {
-        private bool quotes;
+        private readonly bool quotes;
 
         public WithdrawalStatusConverter()
         {
@@ -20,7 +20,7 @@ namespace Binance.Net.Converters
             quotes = useQuotes;
         }
 
-        private Dictionary<WithdrawalStatus, string> values = new Dictionary<WithdrawalStatus, string>()
+        private readonly Dictionary<WithdrawalStatus, string> values = new Dictionary<WithdrawalStatus, string>()
         {
             { WithdrawalStatus.EmailSend, "0" },
             { WithdrawalStatus.Canceled, "1" },

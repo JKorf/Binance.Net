@@ -8,7 +8,7 @@ namespace Binance.Net.Converters
 {
     public class TimeInForceConverter : JsonConverter
     {
-        private bool quotes; 
+        private readonly bool quotes; 
 
         public TimeInForceConverter()
         {
@@ -20,7 +20,7 @@ namespace Binance.Net.Converters
             quotes = useQuotes;
         }
 
-        private Dictionary<TimeInForce, string> values = new Dictionary<TimeInForce, string>()
+        private readonly Dictionary<TimeInForce, string> values = new Dictionary<TimeInForce, string>()
         {
             { TimeInForce.GoodTillCancel, "GTC" },
             { TimeInForce.ImmediateOrCancel, "IOC" },

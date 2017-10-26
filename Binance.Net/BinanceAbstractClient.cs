@@ -66,7 +66,7 @@ namespace Binance.Net
         /// <summary>
         /// Sets the verbosity of the log messages
         /// </summary>
-        /// <param name="level">Verbosity level</param>
+        /// <param name="verbosity">Verbosity level</param>
         public void SetLogVerbosity(LogVerbosity verbosity)
         {
             log.Level = verbosity;

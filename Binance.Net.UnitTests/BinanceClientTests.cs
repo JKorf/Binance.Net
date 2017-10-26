@@ -160,7 +160,7 @@ namespace Binance.Net.UnitTests
         public void GetAggregatedTrades_Should_RespondWithGetAggregatedTrades()
         {
             // arrange
-            var trades = new BinanceAggregatedTrades[2]
+            var trades = new []
             {
                 new BinanceAggregatedTrades()
                 {
@@ -202,7 +202,7 @@ namespace Binance.Net.UnitTests
         public void GetAllBookPrices_Should_RespondWithAllBookPrices()
         {
             // arrange
-            var prices = new BinanceBookPrice[2]
+            var prices = new []
             {
                 new BinanceBookPrice()
                 {
@@ -238,7 +238,7 @@ namespace Binance.Net.UnitTests
         public void GetAllOrders_Should_RespondWithAllOrders()
         {
             // arrange
-            var orders = new BinanceOrder[2]
+            var orders = new []
             {
                 new BinanceOrder()
                 {
@@ -290,7 +290,7 @@ namespace Binance.Net.UnitTests
         public void GetAllPrices_Should_RespondWithAllPrices()
         {
             // arrange
-            var prices = new BinancePrice[2]
+            var prices = new []
             {
                 new BinancePrice()
                 {
@@ -359,7 +359,7 @@ namespace Binance.Net.UnitTests
         public void GetKlines_Should_RespondWithKlines()
         {
             // arrange
-            var klines = new BinanceKline[2] 
+            var klines = new [] 
             {
                new BinanceKline()
                {
@@ -407,7 +407,7 @@ namespace Binance.Net.UnitTests
         public void GetMyTrades_Should_RespondWithTrades()
         {
             // arrange
-            var trades = new BinanceTrade[2]
+            var trades = new []
             {
                 new BinanceTrade()
                 {
@@ -451,7 +451,7 @@ namespace Binance.Net.UnitTests
         public void GetOpenOrders_Should_RespondWithOpenOrders()
         {
             // arrange
-            var orders = new BinanceOrder[2]
+            var orders = new []
             {
                 new BinanceOrder()
                 {
@@ -642,9 +642,7 @@ namespace Binance.Net.UnitTests
         public void Ping_Should_RespondWithSuccess()
         {
             // arrange
-            var pingResult = new BinancePing()
-            {
-            };
+            var pingResult = new BinancePing();
 
             var client = PrepareClient(JsonConvert.SerializeObject(pingResult));
 
@@ -704,9 +702,11 @@ namespace Binance.Net.UnitTests
             factory.Setup(c => c.Create(It.IsAny<string>()))
                 .Returns(request.Object);
 
-            BinanceClient client = new BinanceClient();
-            client.RequestFactory = factory.Object;
-            client.AutoTimestamp = true;
+            BinanceClient client = new BinanceClient
+            {
+                RequestFactory = factory.Object,
+                AutoTimestamp = true
+            };
 
             // act
             client.GetAllPrices();
@@ -733,12 +733,7 @@ namespace Binance.Net.UnitTests
             factory.Setup(c => c.Create(It.IsAny<string>()))
                 .Returns(request.Object);
 
-            BinanceClient client;
-            if (credentials)
-                client = new BinanceClient("Test", "Test");
-            else
-                client = new BinanceClient();
-
+            BinanceClient client = credentials ? new BinanceClient("Test", "Test") : new BinanceClient();
             client.RequestFactory = factory.Object;
             return client;
         }

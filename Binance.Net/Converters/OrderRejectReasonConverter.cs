@@ -8,7 +8,7 @@ namespace Binance.Net.Converters
 {
     public class OrderRejectReasonConverter: JsonConverter
     {
-        private bool quotes;
+        private readonly bool quotes;
 
         public OrderRejectReasonConverter()
         {
@@ -20,7 +20,7 @@ namespace Binance.Net.Converters
             quotes = useQuotes;
         }
 
-        private Dictionary<OrderRejectReason, string> values = new Dictionary<OrderRejectReason, string>()
+        private readonly Dictionary<OrderRejectReason, string> values = new Dictionary<OrderRejectReason, string>()
         {
             { OrderRejectReason.None, "NONE" },
             { OrderRejectReason.UnknownInstrument, "UNKNOWN_INSTRUMENT" },

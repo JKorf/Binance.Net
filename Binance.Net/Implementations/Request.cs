@@ -5,7 +5,7 @@ namespace Binance.Net.Implementations
 {
     public class Request : IRequest
     {
-        private WebRequest request;
+        private readonly WebRequest request;
 
         public Request(WebRequest request)
         {
@@ -14,13 +14,13 @@ namespace Binance.Net.Implementations
 
         public WebHeaderCollection Headers
         {
-            get { return request.Headers; }
-            set { request.Headers = value; }
+            get => request.Headers;
+            set => request.Headers = value;
         }
         public string Method
         {
-            get { return request.Method; }
-            set { request.Method = value; }
+            get => request.Method;
+            set => request.Method = value;
         }
 
         public IResponse GetResponse()

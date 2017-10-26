@@ -6,7 +6,7 @@ namespace Binance.Net.Implementations
 {
     public class Response : IResponse
     {
-        private WebResponse response;
+        private readonly WebResponse response;
 
         public Response(WebResponse response)
         {

@@ -18,9 +18,9 @@ namespace Binance.Net
         #region fields
         private const string BaseWebsocketAddress = "wss://stream.binance.com:9443/ws/";
 
-        private List<BinanceStream> sockets = new List<BinanceStream>();
+        private readonly List<BinanceStream> sockets = new List<BinanceStream>();
         private int lastStreamId;
-        private object streamIdLock = new object();
+        private readonly object streamIdLock = new object();
         private Action<BinanceStreamAccountInfo> accountInfoCallback;
         private Action<BinanceStreamOrderUpdate> orderUpdateCallback;
         private SslProtocols protocols = SslProtocols.Tls12 | SslProtocols.Tls11 | SslProtocols.Tls;
@@ -71,7 +71,7 @@ namespace Binance.Net
         /// <param name="interval">The interval of the candlesticks</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>Returns a <see cref="BinanceStreamConnection"/> object which contains a success flag and a stream id. This stream id can be used to close this 
-        /// specific stream using the <see cref="StopStream(int)"/> method</returns>
+        /// specific stream using the <see cref="UnsubscribeFromStream(int)"/> method</returns>
         public BinanceStreamConnection SubscribeToKlineStream(string symbol, KlineInterval interval, Action<BinanceStreamKline> onMessage)
         {
             symbol = symbol.ToLower();
@@ -91,7 +91,7 @@ namespace Binance.Net
         /// <param name="symbol">The symbol</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>Returns a <see cref="BinanceStreamConnection"/> object which contains a success flag and a stream id. This stream id can be used to close this 
-        /// specific stream using the <see cref="StopStream(int)"/> method</returns>
+        /// specific stream using the <see cref="UnsubscribeFromStream(int)"/> method</returns>
         public BinanceStreamConnection SubscribeToDepthStream(string symbol, Action<BinanceStreamDepth> onMessage)
         {
             symbol = symbol.ToLower();
@@ -111,7 +111,7 @@ namespace Binance.Net
         /// <param name="symbol">The symbol</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>Returns a <see cref="BinanceStreamConnection"/> object which contains a success flag and a stream id. This stream id can be used to close this 
-        /// specific stream using the <see cref="StopStream(int)"/> method</returns>
+        /// specific stream using the <see cref="UnsubscribeFromStream(int)"/> method</returns>
         public BinanceStreamConnection SubscribeToTradesStream(string symbol, Action<BinanceStreamTrade> onMessage)
         {
             symbol = symbol.ToLower();
@@ -126,7 +126,7 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Subscribes to the account update stream. Prior to using this, the <see cref="StartUserStream"/> method should be called.
+        /// Subscribes to the account update stream. Prior to using this, the <see cref="BinanceClient.StartUserStream"/> method should be called.
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
         /// <param name="onMessage">The event handler for the data received</param>
@@ -142,7 +142,7 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Subscribes to the order update stream. Prior to using this, the <see cref="StartUserStream"/> method should be called.
+        /// Subscribes to the order update stream. Prior to using this, the <see cref="BinanceClient.StartUserStream"/> method should be called.
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
         /// <param name="onMessage">The event handler for the data received</param>
@@ -239,7 +239,7 @@ namespace Binance.Net
 
             socket.UserStream = true;
             socket.Socket.OnMessage += (o, s) => OnUserMessage(s.Data);
-            log.Write(LogVerbosity.Debug, $"User stream started");
+            log.Write(LogVerbosity.Debug, "User stream started");
             return true;
         }
 
@@ -278,9 +278,9 @@ namespace Binance.Net
 
         private void Socket_OnClose(object sender, ClosedEventArgs e)
         {
-            log.Write(LogVerbosity.Debug, $"Socket closed");
+            log.Write(LogVerbosity.Debug, "Socket closed");
             lock (sockets)
-                sockets.RemoveAll(s => s.Socket == (WebSocket)sender);
+                sockets.RemoveAll(s => s.Socket == (IWebsocket)sender);
         }
 
         private int NextStreamId()

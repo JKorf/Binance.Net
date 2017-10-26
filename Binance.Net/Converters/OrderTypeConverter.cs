@@ -8,7 +8,7 @@ namespace Binance.Net.Converters
 {
     public class OrderTypeConverter : JsonConverter
     {
-        private bool quotes;
+        private readonly bool quotes;
 
         public OrderTypeConverter()
         {
@@ -20,7 +20,7 @@ namespace Binance.Net.Converters
             quotes = useQuotes;
         }
 
-        private Dictionary<OrderType, string> values = new Dictionary<OrderType, string>()
+        private readonly Dictionary<OrderType, string> values = new Dictionary<OrderType, string>()
         {
             { OrderType.Limit, "LIMIT" },
             { OrderType.Market, "MARKET" },

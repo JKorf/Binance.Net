@@ -8,7 +8,7 @@ namespace Binance.Net.Converters
 {
     public class ExecutionTypeConverter: JsonConverter
     {
-        private bool quotes;
+        private readonly bool quotes;
 
         public ExecutionTypeConverter()
         {
@@ -20,7 +20,7 @@ namespace Binance.Net.Converters
             quotes = useQuotes;
         }
 
-        private Dictionary<ExecutionType, string> values = new Dictionary<ExecutionType, string>()
+        private readonly Dictionary<ExecutionType, string> values = new Dictionary<ExecutionType, string>()
         {
             { ExecutionType.New, "NEW" },
             { ExecutionType.Canceled, "CANCELED" },

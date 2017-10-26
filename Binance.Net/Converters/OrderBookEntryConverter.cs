@@ -15,9 +15,11 @@ namespace Binance.Net.Converters
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             JArray arr = JArray.Load(reader);
-            BinanceOrderBookEntry entry = new BinanceOrderBookEntry();
-            entry.Price = (double)arr[0];
-            entry.Quantity = (double)arr[1];
+            BinanceOrderBookEntry entry = new BinanceOrderBookEntry
+            {
+                Price = (double) arr[0],
+                Quantity = (double) arr[1]
+            };
             return entry;
         }
 

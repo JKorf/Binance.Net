@@ -8,7 +8,7 @@ namespace Binance.Net.Converters
 {
     public class OrderStatusConverter : JsonConverter
     {
-        private bool quotes;
+        private readonly bool quotes;
 
         public OrderStatusConverter()
         {
@@ -20,7 +20,7 @@ namespace Binance.Net.Converters
             quotes = useQuotes;
         }
 
-        private Dictionary<OrderStatus, string> values = new Dictionary<OrderStatus, string>()
+        private readonly Dictionary<OrderStatus, string> values = new Dictionary<OrderStatus, string>()
         {
             { OrderStatus.New, "NEW" },
             { OrderStatus.PartiallyFilled, "PARTIALLY_FILLED" },

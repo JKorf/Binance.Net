@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -395,12 +396,12 @@ namespace Binance.Net
                 { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
                 { "type", JsonConvert.SerializeObject(type, new OrderTypeConverter(false)) },
                 { "timeInForce", JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)) },
-                { "quantity", quantity.ToString() },
-                { "price", price.ToString() },
+                { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
+                { "price", price.ToString(CultureInfo.InvariantCulture) },
                 { "timestamp", GetTimestamp() }
             };
 
-            AddOptionalParameter(parameters, "newClientOrderId", newClientOrderId ?? null);
+            AddOptionalParameter(parameters, "newClientOrderId", newClientOrderId);
             AddOptionalParameter(parameters, "stopPrice", stopPrice?.ToString());
             AddOptionalParameter(parameters, "icebergQty", icebergQty?.ToString());
 
@@ -440,12 +441,12 @@ namespace Binance.Net
                 { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
                 { "type", JsonConvert.SerializeObject(type, new OrderTypeConverter(false)) },
                 { "timeInForce", JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)) },
-                { "quantity", quantity.ToString() },
-                { "price", price.ToString() },
+                { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
+                { "price", price.ToString(CultureInfo.InvariantCulture) },
                 { "timestamp", GetTimestamp() }
             };
 
-            AddOptionalParameter(parameters, "newClientOrderId", newClientOrderId ?? null);
+            AddOptionalParameter(parameters, "newClientOrderId", newClientOrderId);
             AddOptionalParameter(parameters, "stopPrice", stopPrice?.ToString());
             AddOptionalParameter(parameters, "icebergQty", icebergQty?.ToString());
 
@@ -484,7 +485,7 @@ namespace Binance.Net
             };
 
             AddOptionalParameter(parameters, "orderId", orderId?.ToString());
-            AddOptionalParameter(parameters, "origClientOrderId", origClientOrderId ?? null);
+            AddOptionalParameter(parameters, "origClientOrderId", origClientOrderId);
             AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());
             
             return await ExecuteRequest<BinanceOrder>(GetUrl(QueryOrderEndpoint, Api, SignedVersion, parameters), true, GetMethod);
@@ -520,8 +521,8 @@ namespace Binance.Net
             };
 
             AddOptionalParameter(parameters, "orderId", orderId?.ToString());
-            AddOptionalParameter(parameters, "origClientOrderId", origClientOrderId ?? null);
-            AddOptionalParameter(parameters, "newClientOrderId", newClientOrderId ?? null);
+            AddOptionalParameter(parameters, "origClientOrderId", origClientOrderId);
+            AddOptionalParameter(parameters, "newClientOrderId", newClientOrderId);
             AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());
             
             return await ExecuteRequest<BinancePlacedOrder>(GetUrl(CancelOrderEndpoint, Api, SignedVersion, parameters), true, DeleteMethod);
@@ -584,9 +585,9 @@ namespace Binance.Net
                 { "timestamp", GetTimestamp() }
             };
 
-            AddOptionalParameter(parameters, "limit", limit?.ToString());
-            AddOptionalParameter(parameters, "fromId", fromId?.ToString());
-            AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());
+            AddOptionalParameter(parameters, "limit", limit?.ToString(CultureInfo.InvariantCulture));
+            AddOptionalParameter(parameters, "fromId", fromId?.ToString(CultureInfo.InvariantCulture));
+            AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString(CultureInfo.InvariantCulture));
 
             return await ExecuteRequest<BinanceTrade[]>(GetUrl(MyTradesEndpoint, Api, SignedVersion, parameters), true, GetMethod);
         }
@@ -618,7 +619,7 @@ namespace Binance.Net
             {
                 { "asset", asset },
                 { "address", address },
-                { "amount", amount.ToString() },
+                { "amount", amount.ToString(CultureInfo.InvariantCulture) },
                 { "timestamp", GetTimestamp() }
             };
 
@@ -645,6 +646,7 @@ namespace Binance.Net
         /// Gets the deposit history
         /// </summary>
         /// <param name="asset">Filter by asset</param>
+        /// <param name="status">Filter by status</param>
         /// <param name="startTime">Filter start time from</param>
         /// <param name="endTime">Filter end time till</param>
         /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -664,8 +666,8 @@ namespace Binance.Net
 
             AddOptionalParameter(parameters, "asset", asset);
             AddOptionalParameter(parameters, "status", status != null ? JsonConvert.SerializeObject(status, new DepositStatusConverter(false)): null);
-            AddOptionalParameter(parameters, "startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString() : null);
-            AddOptionalParameter(parameters, "endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
+            AddOptionalParameter(parameters, "startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            AddOptionalParameter(parameters, "endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
             AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());
 
             var result = await ExecuteRequest<BinanceDepositList>(GetUrl(DepositHistoryEndpoint, WithdrawalApi, WithdrawalVersion, parameters), true, PostMethod);
@@ -688,6 +690,7 @@ namespace Binance.Net
         /// Gets the withdrawal history
         /// </summary>
         /// <param name="asset">Filter by asset</param>
+        /// <param name="status">Filter by status</param>
         /// <param name="startTime">Filter start time from</param>
         /// <param name="endTime">Filter end time till</param>
         /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -707,8 +710,8 @@ namespace Binance.Net
 
             AddOptionalParameter(parameters, "asset", asset);
             AddOptionalParameter(parameters, "status", status != null ? JsonConvert.SerializeObject(status, new WithdrawalStatusConverter(false)): null);
-            AddOptionalParameter(parameters, "startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString() : null);
-            AddOptionalParameter(parameters, "endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
+            AddOptionalParameter(parameters, "startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            AddOptionalParameter(parameters, "endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
             AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());
 
             var result = await ExecuteRequest<BinanceWithdrawalList>(GetUrl(WithdrawHistoryEndpoint, WithdrawalApi, WithdrawalVersion, parameters), true, PostMethod);
@@ -728,7 +731,7 @@ namespace Binance.Net
         public ApiResult<BinanceListenKey> StartUserStream() => StartUserStreamAsync().Result;
 
         /// <summary>
-        /// Starts a user stream by requesting a listen key. This listen key will be used in subsequent requests to <see cref="StartAccountUpdateStream"/> and <see cref="StartOrderUpdateStream"/>
+        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToAccountUpdateStream"/> and <see cref="BinanceSocketClient.SubscribeToOrderUpdateStream"/>
         /// </summary>
         /// <returns>Listen key</returns>
         public async Task<ApiResult<BinanceListenKey>> StartUserStreamAsync()
@@ -765,7 +768,7 @@ namespace Binance.Net
                 { "listenKey", listenKey },
             };
 
-            return await ExecuteRequest<object>(GetUrl(KeepListenKeyAliveEndpoint, Api, UserDataStreamVersion, parameters), false, PutMethod); ;
+            return await ExecuteRequest<object>(GetUrl(KeepListenKeyAliveEndpoint, Api, UserDataStreamVersion, parameters), false, PutMethod);
         }
 
         /// <summary>
@@ -847,7 +850,7 @@ namespace Binance.Net
             catch(WebException we)
             {
                 var response = (HttpWebResponse)we.Response;
-                if (((int)response.StatusCode) >= 400)
+                if ((int)response.StatusCode >= 400)
                 {
                     try
                     {
@@ -886,7 +889,7 @@ namespace Binance.Net
 
         private string ByteToString(byte[] buff)
         {
-            string sbinary = "";
+            var sbinary = "";
             for (int i = 0; i < buff.Length; i++)
                 sbinary += buff[i].ToString("X2"); /* hex format */
             return sbinary;

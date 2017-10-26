@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 
 namespace Binance.Net.Logging
@@ -12,7 +11,7 @@ namespace Binance.Net.Logging
         public void Write(LogVerbosity logType, string message)
         {
             if((int)logType >= (int)Level)
-                TextWriter.WriteLine($"{DateTime.Now.ToString("hh:mm:ss:fff")} | {logType} | {message}");
+                TextWriter.WriteLine($"{DateTime.Now:hh:mm:ss:fff} | {logType} | {message}");
         }
     }
 

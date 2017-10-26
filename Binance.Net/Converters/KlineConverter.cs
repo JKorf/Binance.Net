@@ -15,18 +15,21 @@ namespace Binance.Net.Converters
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             JArray arr = JArray.Load(reader);
-            BinanceKline entry = new BinanceKline();
-            entry.OpenTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds((long)arr[0]); 
-            entry.Open = (double)arr[1];
-            entry.High = (double)arr[2];
-            entry.Low = (double)arr[3];
-            entry.Close = (double)arr[4];
-            entry.Volume = (double)arr[5];
-            entry.CloseTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds((long)arr[6]);
-            entry.AssetVolume = (double)arr[7];
-            entry.Trades = (int)arr[8];
-            entry.TakerBuyBaseAssetVolume = (double)arr[9];
-            entry.TakerBuyQuoteAssetVolume = (double)arr[10];
+            BinanceKline entry = new BinanceKline
+            {
+                OpenTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds((long) arr[0]),
+                Open = (double) arr[1],
+                High = (double) arr[2],
+                Low = (double) arr[3],
+                Close = (double) arr[4],
+                Volume = (double) arr[5],
+                CloseTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds((long) arr[6]),
+                AssetVolume = (double) arr[7],
+                Trades = (int) arr[8],
+                TakerBuyBaseAssetVolume = (double) arr[9],
+                TakerBuyQuoteAssetVolume = (double) arr[10]
+            };
+
             return entry;
         }
 

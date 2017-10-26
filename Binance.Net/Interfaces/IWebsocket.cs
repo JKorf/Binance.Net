@@ -1,7 +1,6 @@
 ﻿using Binance.Net.Events;
 using System;
 using System.Security.Authentication;
-using WebSocketSharp;
 
 namespace Binance.Net.Interfaces
 {

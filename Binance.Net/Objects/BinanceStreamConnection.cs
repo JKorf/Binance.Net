@@ -1,5 +1,4 @@
 ﻿using Binance.Net.Interfaces;
-using WebSocketSharp;
 
 namespace Binance.Net.Objects
 {

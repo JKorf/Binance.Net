@@ -8,7 +8,7 @@ namespace Binance.Net.Implementations
 {
     public class BinanceSocket : IWebsocket
     {
-        private WebSocket socket;
+        private readonly WebSocket socket;
 
         public event EventHandler<ClosedEventArgs> OnClose
         {
