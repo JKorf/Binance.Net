@@ -134,7 +134,7 @@ using(var client = new BinanceSocketClient())
 
 Private socket endpoints:
 
-For the private endpoints a user stream has to be started on the Binance server. This can be done using the `client.StartUserStream()` command. This command will return a listen key which can then be provided to the private socket subscriptions:
+For the private endpoints a user stream has to be started on the Binance server. This can be done using the `client.StartUserStream()` command in the `BinanceClient`. This command will return a listen key which can then be provided to the private socket subscriptions:
 ```C#
 using(var client = new BinanceSocketClient())
 {
@@ -186,7 +186,7 @@ client.SubscribeToDepthStream("bnbbtc", (data) =>
 });
 ```
 
-When no longer listening to private endpoints the `client.StopUserStream` method should be used to signal the Binance server the stream can be closed.
+When no longer listening to private endpoints the `client.StopUserStream` method in `BinanceClient` should be used to signal the Binance server the stream can be closed.
 
 ### AutoTimestamp
 For some private calls a timestamp has to be send to the Binance server. This timestamp in combination with the recvWindow parameter in the request will determine how long the request will be valid. If more than the recvWindow in miliseconds has passed since the provided timestamp the request will be rejected.
@@ -214,7 +214,7 @@ BinanceDefaults.SetDefaultLogVerbosity(LogVerbosity.Debug);
 	* Updated documentation
 
 * Version 1.1.2 - 25 okt 2017 
-	* Added UnsubscribeAllStreams method
+	* Added `UnsubscribeAllStreams` method
 
 * Version 1.1.1 - 20 okt 2017 
 	* Fix for withdrawal/deposit filter
