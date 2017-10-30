@@ -91,7 +91,7 @@ namespace Binance.Net
         /// <param name="apiSecret">The api secret associated with the key</param>
         public BinanceClient(string apiKey, string apiSecret)
         {
-            SetAPICredentials(apiKey, apiSecret);
+            SetApiCredentials(apiKey, apiSecret);
         }
 
         ~BinanceClient()
@@ -243,20 +243,20 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="Get24HPricesAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public ApiResult<Binance24hPrice> Get24HPrices(string symbol) => Get24HPricesAsync(symbol).Result;
+        public ApiResult<Binance24HPrice> Get24HPrices(string symbol) => Get24HPricesAsync(symbol).Result;
 
         /// <summary>
         /// Get data regarding the last 24 hours for the provided symbol
         /// </summary>
         /// <param name="symbol">The symbol to get the data for</param>
         /// <returns>Data over the last 24 hours</returns>
-        public async Task<ApiResult<Binance24hPrice>> Get24HPricesAsync(string symbol)
+        public async Task<ApiResult<Binance24HPrice>> Get24HPricesAsync(string symbol)
         {
             if (AutoTimestamp && !timeSynced)
                 await GetServerTimeAsync();
 
             var parameters = new Dictionary<string, string>() { { "symbol", symbol } };
-            return await ExecuteRequest<Binance24hPrice>(GetUrl(Price24HEndpoint, Api, PublicVersion, parameters));
+            return await ExecuteRequest<Binance24HPrice>(GetUrl(Price24HEndpoint, Api, PublicVersion, parameters));
         }
 
         /// <summary>
@@ -874,34 +874,27 @@ namespace Binance.Net
 
                 var errorMessage = $"Request to {uri} failed because of a webexception. Status: {response.StatusCode}-{response.StatusDescription}, Message: {we.Message}";
                 log.Write(LogVerbosity.Warning, errorMessage);
-                return ExceptionToApiResult(apiResult, errorMessage);
+                return CreateApiResult(apiResult, errorMessage);
             }
             catch (JsonReaderException jre)
             {
                 var errorMessage = $"Request to {uri} failed, couldn't parse the returned data. Error occured at Path: {jre.Path}, LineNumber: {jre.LineNumber}, LinePosition: {jre.LinePosition}. Received data: {returnedData}";
                 log.Write(LogVerbosity.Warning, errorMessage);
-                return ExceptionToApiResult(apiResult, errorMessage);
+                return CreateApiResult(apiResult, errorMessage);
             }
             catch (Exception e)
             {
                 var errorMessage = $"Request to {uri} failed with unknown error: " + e.Message;
                 log.Write(LogVerbosity.Warning, errorMessage);
-                return ExceptionToApiResult(apiResult, errorMessage);
+                return CreateApiResult(apiResult, errorMessage);
             }
-        }
-
-        private ApiResult<T> ExceptionToApiResult<T>(ApiResult<T> apiResult, string message)
-        {
-            apiResult.Success = false;
-            apiResult.Error = new BinanceError() { Code = 0, Message = message };
-            return apiResult;
         }
 
         private string ByteToString(byte[] buff)
         {
             var sbinary = "";
-            for (int i = 0; i < buff.Length; i++)
-                sbinary += buff[i].ToString("X2"); /* hex format */
+            foreach (byte t in buff)
+                sbinary += t.ToString("X2"); /* hex format */
             return sbinary;
         }
 

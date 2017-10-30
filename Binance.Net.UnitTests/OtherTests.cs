@@ -27,7 +27,7 @@ namespace Binance.Net.UnitTests
 
             // act
             // assert
-            Assert.Throws(typeof(ArgumentException), () => client.SetAPICredentials(key, secret));
+            Assert.Throws(typeof(ArgumentException), () => client.SetApiCredentials(key, secret));
         }
 
         [TestCase(null, null)]

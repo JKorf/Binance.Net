@@ -50,8 +50,8 @@ namespace Binance.Net.UnitTests
             socket.Raise(r => r.OnMessage += null, new MessagedEventArgs(JsonConvert.SerializeObject(data), false, false, true, new byte[2]));
 
             // assert
-            Assert.IsTrue(subscibtion.Succes);
-            Assert.IsTrue(subscibtion.StreamId != 0);
+            Assert.IsTrue(subscibtion.Success);
+            Assert.IsTrue(subscibtion.Data != 0);
             Assert.IsNotNull(result);
             Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data, result, "Bids", "Asks"));
             Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data.Asks[0], result.Asks[0]));
@@ -268,7 +268,7 @@ namespace Binance.Net.UnitTests
             var subscription = client.SubscribeToTradesStream("test", (data) => { });
 
             // act
-            client.UnsubscribeFromStream(subscription.StreamId);
+            client.UnsubscribeFromStream(subscription.Data);
 
             // assert
             Assert.IsTrue(closed);
@@ -383,6 +383,26 @@ namespace Binance.Net.UnitTests
             // assert
             Assert.IsTrue(closed == 2);
         }
-    }   
 
+        [TestCase()]
+        public void WhenSocketConnectionFailsIt_Should_ReturnAnError()
+        {
+            // arrange
+            var socket = new Mock<IWebsocket>();
+            socket.Setup(s => s.Close()).Raises(s => s.OnClose += null, new ClosedEventArgs(0, "", true));
+            socket.Setup(s => s.Connect()).Throws(new Exception("Can't connect"));
+            socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
+
+            var factory = new Mock<IWebsocketFactory>();
+            factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
+
+            var client = new BinanceSocketClient { SocketFactory = factory.Object };
+
+            // act
+            var result = client.SubscribeToTradesStream("test", (data) => { });
+
+            // assert
+            Assert.IsFalse(result.Success);
+        }
+    }
 }

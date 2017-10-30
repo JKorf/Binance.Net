@@ -25,7 +25,7 @@ namespace Binance.Net
                 SetLogVerbosity(BinanceDefaults.LogVerbosity);
 
             if (BinanceDefaults.ApiKey != null && BinanceDefaults.ApiSecret != null)
-                SetAPICredentials(BinanceDefaults.ApiKey, BinanceDefaults.ApiSecret);
+                SetApiCredentials(BinanceDefaults.ApiKey, BinanceDefaults.ApiSecret);
         }
 
         /// <summary>
@@ -33,17 +33,17 @@ namespace Binance.Net
         /// </summary>
         /// <param name="apiKey">The api key</param>
         /// <param name="apiSecret">The api secret associated with the key</param>
-        public void SetAPICredentials(string apiKey, string apiSecret)
+        public void SetApiCredentials(string apiKey, string apiSecret)
         {
-            SetAPIKey(apiKey);
-            SetAPISecret(apiSecret);
+            SetApiKey(apiKey);
+            SetApiSecret(apiSecret);
         }
 
         /// <summary>
         /// Sets the API Key. Api keys can be managed at https://www.binance.com/userCenter/createApi.html
         /// </summary>
         /// <param name="apiKey">The api key</param>
-        public void SetAPIKey(string apiKey)
+        public void SetApiKey(string apiKey)
         {
             if (string.IsNullOrEmpty(apiKey))
                 throw new ArgumentException("Api key empty");
@@ -55,7 +55,7 @@ namespace Binance.Net
         /// Sets the API Secret. Api keys can be managed at https://www.binance.com/userCenter/createApi.html
         /// </summary>
         /// <param name="apiSecret">The api secret</param>
-        public void SetAPISecret(string apiSecret)
+        public void SetApiSecret(string apiSecret)
         {
             if (string.IsNullOrEmpty(apiSecret))
                 throw new ArgumentException("Api secret empty");
@@ -90,6 +90,13 @@ namespace Binance.Net
                 Message = message
             };
             return result;
+        }
+
+        protected ApiResult<T> CreateApiResult<T>(ApiResult<T> apiResult, string message)
+        {
+            apiResult.Success = false;
+            apiResult.Error = new BinanceError() { Code = 0, Message = message };
+            return apiResult;
         }
     }
 }

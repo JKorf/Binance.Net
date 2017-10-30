@@ -9,7 +9,6 @@ using Binance.Net.Objects;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Reflection;
-using Binance.Net.Logging;
 
 namespace Binance.Net.UnitTests
 {
@@ -37,7 +36,7 @@ namespace Binance.Net.UnitTests
         public void GetPrices24H_Should_RespondWithPricesForSymbol()
         {
             // arrange
-            var expected = new Binance24hPrice()
+            var expected = new Binance24HPrice()
             {
                 AskPrice = 0.123,
                 BidPrice = 0.456,
@@ -867,7 +866,6 @@ namespace Binance.Net.UnitTests
             typeof(HttpWebResponse).GetField("m_ConnectStream", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).SetValue(webresponse, responseStream);
 
             var we = new WebException();
-            var fields = typeof(WebException).GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             typeof(WebException).GetField("_message", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).SetValue(we, exceptionMessage);
             typeof(WebException).GetField("m_Response", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).SetValue(we, webresponse);
             

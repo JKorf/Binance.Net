@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Binance.Net.Objects
 {
-    public class Binance24hPrice
+    public class Binance24HPrice
     {
         public double PriceChange { get; set; }
         public double PriceChangePercent { get; set; }
