@@ -46,6 +46,8 @@ namespace Binance.Net.Implementations
             socket.Connect();
         }
 
+        public string Url => socket.Url.ToString();
+
         public void SetEnabledSslProtocols(SslProtocols protocols)
         {
             socket.SslConfiguration.EnabledSslProtocols = protocols;

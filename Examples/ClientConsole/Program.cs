@@ -67,7 +67,7 @@ namespace BinanceApi.TestConsole
                     // handle data
                 });
 
-                socketClient.UnsubscribeFromStream(successDepth.StreamId);
+                socketClient.UnsubscribeFromStream(successDepth.Data);
                 socketClient.UnsubscribeFromAccountUpdateStream();
                 socketClient.UnsubscribeAllStreams();
             }

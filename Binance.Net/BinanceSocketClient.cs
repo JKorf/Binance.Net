@@ -245,12 +245,12 @@ namespace Binance.Net
             try
             {
                 var socket = SocketFactory.CreateWebsocket(url);
-                socket.SetEnabledSslProtocols(protocols); 
-                socket.OnClose += Socket_OnClose;
-                socket.OnError += Socket_OnError;
-                socket.OnOpen += Socket_OnOpen;
-                socket.Connect();
                 var socketObject = new BinanceStream() { Socket = socket, StreamId = NextStreamId() };
+                socket.SetEnabledSslProtocols(protocols); 
+                socket.OnClose += (obj, args) => Socket_OnClose(socketObject, args);
+                socket.OnError += (obj, args) => Socket_OnError(socketObject, args);
+                socket.OnOpen += (obj, args) => Socket_OnOpen(socketObject, args);
+                socket.Connect();
                 lock (sockets)
                     sockets.Add(socketObject);
                 return new ApiResult<BinanceStream>() {Data = socketObject, Success = true};
@@ -265,7 +265,7 @@ namespace Binance.Net
 
         private void Socket_OnOpen(object sender, EventArgs e)
         {
-            log.Write(LogVerbosity.Debug, $"Socket opened to {((WebSocket)sender).Url}");
+            log.Write(LogVerbosity.Debug, $"Socket opened to {((BinanceStream)sender).Socket.Url}");
         }
 
         private void Socket_OnError(object sender, ErroredEventArgs e)
@@ -277,7 +277,7 @@ namespace Binance.Net
         {
             log.Write(LogVerbosity.Debug, "Socket closed");
             lock (sockets)
-                sockets.RemoveAll(s => s.Socket == (IWebsocket)sender);
+                sockets.Remove((BinanceStream)sender);
         }
 
         private int NextStreamId()

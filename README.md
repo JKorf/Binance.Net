@@ -159,7 +159,7 @@ using(var client = new BinanceSocketClient())
 		// handle data
 	});
 
-	client.UnsubscribeFromStream(successDepth.StreamId);
+	client.UnsubscribeFromStream(successDepth.Data);
 }
 ```
 
@@ -205,6 +205,16 @@ BinanceDefaults.SetDefaultLogVerbosity(LogVerbosity.Debug);
 
 
 ## Release notes
+* Version 2.1.1 - 30 okt 2017
+	* Fix for socket closing
+
+* Version 2.1.0 - 30 okt 2017
+	* Small rename/refactor, BinanceSocketClient also use ApiResult now
+
+* Version 2.0.1 - 30 okt 2017
+	* Improved error messages/handling in BinanceClient
+	* Extra unit tests for failing requests
+
 * Version 2.0.0 - 25 okt 2017
 	* Changed from static class to object orriented, added IDisposable interface to be able to use `using` statements
 	* Split websocket and restapi functionality in BinanceClient and BinanceSocketClient
