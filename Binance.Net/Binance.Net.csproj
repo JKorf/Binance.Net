@@ -5,8 +5,8 @@
   </PropertyGroup>
   
   <PropertyGroup>
-    <Version>2.0.1</Version>
-    <FileVersion>2.0.1</FileVersion>
+    <Version>2.1.0</Version>
+    <FileVersion>2.1.0</FileVersion>
     <Authors>JKorf</Authors>
     <Description>Binance .Net API wrapper</Description>
     <Copyright></Copyright>
@@ -15,7 +15,7 @@
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
 	<Authors>JKorf</Authors>
-    <PackageVersion>2.0.1</PackageVersion>
+    <PackageVersion>2.1.0</PackageVersion>
 	<Description>Binance .Net API wrapper</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance Binance.Net CryptoCurrency Exchange API wrapper</PackageTags>
@@ -24,7 +24,7 @@
 	<PackageLicenseUrl>https://github.com/JKorf/Binance.Net/blob/master/LICENSE</PackageLicenseUrl>
 	<NeutralLanguage>en</NeutralLanguage>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	<PackageReleaseNotes>2.0.1 - Better error messages</PackageReleaseNotes>
+	<PackageReleaseNotes>2.1.0 - BinanceSocketClient also using ApiResult now, small naming changes</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
