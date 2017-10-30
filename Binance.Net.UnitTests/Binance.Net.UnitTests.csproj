@@ -58,6 +58,7 @@
     <Compile Include="BinanceSocketClientTests.cs" />
     <Compile Include="BinanceClientTests.cs" />
     <Compile Include="ObjectComparer.cs" />
+    <Compile Include="OtherTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

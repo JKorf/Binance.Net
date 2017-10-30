@@ -116,7 +116,7 @@ namespace Binance.Net
         public async Task<ApiResult<bool>> PingAsync()
         {
             var result = await ExecuteRequest<BinancePing>(GetUrl(PingEndpoint, Api, PublicVersion));
-            return new ApiResult<bool>() { Success = result.Success, Data = result.Data != null };
+            return new ApiResult<bool>() { Success = result.Success, Data = result.Data != null, Error = result.Error };
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace Binance.Net
             if (!AutoTimestamp)
             { 
                 var result = await ExecuteRequest<BinanceCheckTime>(url);
-                return new ApiResult<DateTime>() { Success = result.Success, Data = result.Data?.ServerTime ?? default(DateTime) };
+                return new ApiResult<DateTime>() { Success = result.Success, Data = result.Data?.ServerTime ?? default(DateTime), Error = result.Error };
             }
             else
             {
@@ -149,7 +149,7 @@ namespace Binance.Net
                 timeOffset = ((result.Data.ServerTime - localTime).TotalMilliseconds) - sw.ElapsedMilliseconds / 2;
                 timeSynced = true;
                 log.Write(LogVerbosity.Debug, $"Time offset set to {timeOffset}");
-                return new ApiResult<DateTime>() { Success = result.Success, Data = result.Data.ServerTime };
+                return new ApiResult<DateTime>() { Success = result.Success, Data = result.Data.ServerTime, Error = result.Error};
             }
         }
 
@@ -826,11 +826,13 @@ namespace Binance.Net
         private async Task<ApiResult<T>> ExecuteRequest<T>(Uri uri, bool signed = false, string method = GetMethod)
         {
             var apiResult = (ApiResult<T>)Activator.CreateInstance(typeof(ApiResult<T>));
+            string returnedData = "";
             try
             {
                 var uriString = uri.ToString();
                 if (signed)
-                    uriString += $"&signature={ByteToString(encryptor.ComputeHash(Encoding.UTF8.GetBytes(uri.Query.Replace("?", ""))))}";
+                    uriString +=
+                        $"&signature={ByteToString(encryptor.ComputeHash(Encoding.UTF8.GetBytes(uri.Query.Replace("?", ""))))}";
 
                 var request = RequestFactory.Create(uriString);
                 request.Headers.Add("X-MBX-APIKEY", key);
@@ -840,17 +842,17 @@ namespace Binance.Net
                 var response = request.GetResponse();
                 using (var reader = new StreamReader(response.GetResponseStream()))
                 {
-                    var data = await reader.ReadToEndAsync();
-                    var result =  JsonConvert.DeserializeObject<T>(data);
+                    returnedData = await reader.ReadToEndAsync();
+                    var result = JsonConvert.DeserializeObject<T>(returnedData);
                     apiResult.Success = true;
                     apiResult.Data = result;
                     return apiResult;
-                }            
+                }
             }
-            catch(WebException we)
+            catch (WebException we)
             {
-                var response = (HttpWebResponse)we.Response;
-                if ((int)response.StatusCode >= 400)
+                var response = (HttpWebResponse) we.Response;
+                if ((int) response.StatusCode >= 400)
                 {
                     try
                     {
@@ -859,31 +861,39 @@ namespace Binance.Net
                             var error = JsonConvert.DeserializeObject<BinanceError>(await reader.ReadToEndAsync());
                             apiResult.Success = false;
                             apiResult.Error = error;
-                            log.Write(LogVerbosity.Warning, $"Request to {uri} returned an error: {apiResult.Error.Code} - {apiResult.Error.Message}");
+                            log.Write(LogVerbosity.Warning,
+                                $"Request to {uri} returned an error: {apiResult.Error?.Code} - {apiResult.Error?.Message}");
                             return apiResult;
                         }
                     }
-                    catch(Exception)
+                    catch (Exception)
                     {
-                        log.Write(LogVerbosity.Warning, $"Request to {uri} failed: " + we.Message);
-                        return ExceptionToApiResult(apiResult, we);
+                        log.Write(LogVerbosity.Warning, $"Couldn't parse error response for status code {response.StatusCode}");
                     }
                 }
 
-                log.Write(LogVerbosity.Warning, $"Request to {uri} failed: " + we.Message);
-                return ExceptionToApiResult(apiResult, we);
+                var errorMessage = $"Request to {uri} failed because of a webexception. Status: {response.StatusCode}-{response.StatusDescription}, Message: {we.Message}";
+                log.Write(LogVerbosity.Warning, errorMessage);
+                return ExceptionToApiResult(apiResult, errorMessage);
+            }
+            catch (JsonReaderException jre)
+            {
+                var errorMessage = $"Request to {uri} failed, couldn't parse the returned data. Error occured at Path: {jre.Path}, LineNumber: {jre.LineNumber}, LinePosition: {jre.LinePosition}. Received data: {returnedData}";
+                log.Write(LogVerbosity.Warning, errorMessage);
+                return ExceptionToApiResult(apiResult, errorMessage);
             }
             catch (Exception e)
             {
-                log.Write(LogVerbosity.Warning, $"Request to {uri} failed: " + e.Message);
-                return ExceptionToApiResult(apiResult, e);
+                var errorMessage = $"Request to {uri} failed with unknown error: " + e.Message;
+                log.Write(LogVerbosity.Warning, errorMessage);
+                return ExceptionToApiResult(apiResult, errorMessage);
             }
         }
 
-        private ApiResult<T> ExceptionToApiResult<T>(ApiResult<T> apiResult, Exception e)
+        private ApiResult<T> ExceptionToApiResult<T>(ApiResult<T> apiResult, string message)
         {
             apiResult.Success = false;
-            apiResult.Error = new BinanceError() { Code = 0, Message = e.Message };
+            apiResult.Error = new BinanceError() { Code = 0, Message = message };
             return apiResult;
         }
 

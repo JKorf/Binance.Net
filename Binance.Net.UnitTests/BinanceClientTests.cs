@@ -8,6 +8,7 @@ using Binance.Net.Interfaces;
 using Binance.Net.Objects;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Reflection;
 using Binance.Net.Logging;
 
 namespace Binance.Net.UnitTests
@@ -736,36 +737,6 @@ namespace Binance.Net.UnitTests
             Assert.IsNotNull(accountInfo.Error.Message);
         }
 
-        [TestCase(null, null)]
-        [TestCase("", "")]
-        [TestCase("test", null)]
-        [TestCase("test", "")]
-        [TestCase(null, "test")]
-        [TestCase("", "test")]
-        public void SettingEmptyValuesForAPICredentials_Should_ThrowException(string key, string secret)
-        {
-            // arrange
-            var client = PrepareClient("");
-
-            // act
-            // assert
-            Assert.Throws(typeof(ArgumentException), () => client.SetAPICredentials(key, secret));
-        }
-
-        [TestCase(null, null)]
-        [TestCase("", "")]
-        [TestCase("test", null)]
-        [TestCase("test", "")]
-        [TestCase(null, "test")]
-        [TestCase("", "test")]
-        public void SettingEmptyValuesForDefaultAPICredentials_Should_ThrowException(string key, string secret)
-        {
-            // arrange
-            // act
-            // assert
-            Assert.Throws(typeof(ArgumentException), () => BinanceDefaults.SetDefaultApiCredentials(key, secret));
-        }
-
         [TestCase()]
         public void EnablingAutoTimestamp_Should_CallServerTime()
         {
@@ -800,37 +771,65 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase()]
-        public void SettingLogOutput_Should_RedirectLogOutput()
+        public void ReceivingBinanceError_Should_ReturnBinanceErrorAndNotSuccess()
         {
             // arrange
-            var client = PrepareClient(JsonConvert.SerializeObject(new BinancePing()));
-            var stringBuilder = new StringBuilder();
+            var client = PrepareExceptionClient(JsonConvert.SerializeObject(new BinanceError(){ Code = 1, Message = "TestMessage"}), "504 error", 504);
 
             // act
-            client.SetLogVerbosity(LogVerbosity.Debug);
-            client.SetLogOutput(new StringWriter(stringBuilder));
-            client.Ping();
-
+            var result = client.Ping();
+            
             // assert
-            Assert.IsFalse(string.IsNullOrEmpty(stringBuilder.ToString()));
+            Assert.IsFalse(result.Success);
+            Assert.IsNotNull(result.Error);
+            Assert.IsTrue(result.Error.Code == 1);
+            Assert.IsTrue(result.Error.Message == "TestMessage");
         }
 
         [TestCase()]
-        public void SettingDefaults_Should_ImpactNewClients()
+        public void ReceivingBinanceErrorWithBelow400StatusCode_Should_NotReturnBinanceErrorAndNotSucceed()
         {
             // arrange
-            var stringBuilder = new StringBuilder();
-            BinanceDefaults.SetDefaultApiCredentials("test", "test");
-            BinanceDefaults.SetDefaultLogOutput(new StringWriter(stringBuilder));
-            BinanceDefaults.SetDefaultLogVerbosity(LogVerbosity.Debug);
-
-            var client = PrepareClient(JsonConvert.SerializeObject(new BinancePing()));
+            var client = PrepareExceptionClient(JsonConvert.SerializeObject(new BinanceError() { Code = 1, Message = "TestMessage" }), "InvalidStatusCodeResponse", 203);
 
             // act
-            Assert.DoesNotThrow(() => client.GetAccountInfo());
+            var result = client.Ping();
 
             // assert
-            Assert.IsFalse(string.IsNullOrEmpty(stringBuilder.ToString()));
+            Assert.IsFalse(result.Success);
+            Assert.IsNotNull(result.Error);
+            Assert.IsTrue(result.Error.Code != 1);
+            Assert.IsTrue(result.Error.Message.Contains("InvalidStatusCodeResponse"));
+        }
+
+        [TestCase()]
+        public void ReceivingErrorStatusWithoutBinanceError_Should_ReturnError()
+        {
+            // arrange
+            var client = PrepareExceptionClient("error", "404ErrorWithoutErrorObject", 404);
+
+            // act
+            var result = client.Ping();
+
+            // assert
+            Assert.IsFalse(result.Success);
+            Assert.IsNotNull(result.Error);
+            Assert.IsTrue(result.Error.Message.Contains("404ErrorWithoutErrorObject"));
+        }
+
+        [TestCase()]
+        public void ReceivingInvalidData_Should_ReturnError()
+        {
+            // arrange
+            var client = PrepareClient("TestErrorNotValidJson");
+
+            // act
+            var result = client.Ping();
+
+            // assert
+            Assert.IsFalse(result.Success);
+            Assert.IsNotNull(result.Error);
+            Assert.IsTrue(result.Error.Message.Contains("TestErrorNotValidJson"));
         }
 
         private BinanceClient PrepareClient(string responseData, bool credentials = true)
@@ -842,6 +841,38 @@ namespace Binance.Net.UnitTests
 
             var response = new Mock<IResponse>();
             response.Setup(c => c.GetResponseStream()).Returns(responseStream);
+
+            var request = new Mock<IRequest>();
+            request.Setup(c => c.Headers).Returns(new WebHeaderCollection());
+            request.Setup(c => c.GetResponse()).Returns(response.Object);
+
+            var factory = new Mock<IRequestFactory>();
+            factory.Setup(c => c.Create(It.IsAny<string>()))
+                .Returns(request.Object);
+
+            BinanceClient client = credentials ? new BinanceClient("Test", "Test") : new BinanceClient();
+            client.RequestFactory = factory.Object;
+            return client;
+        }
+
+        private BinanceClient PrepareExceptionClient(string responseData, string exceptionMessage, int statusCode, bool credentials = true)
+        {
+            var expectedBytes = Encoding.UTF8.GetBytes(responseData);
+            var responseStream = new MemoryStream();
+            responseStream.Write(expectedBytes, 0, expectedBytes.Length);
+            responseStream.Seek(0, SeekOrigin.Begin);
+
+            var webresponse = Activator.CreateInstance<HttpWebResponse>();
+            typeof(HttpWebResponse).GetField("m_StatusCode", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).SetValue(webresponse, (HttpStatusCode)statusCode);
+            typeof(HttpWebResponse).GetField("m_ConnectStream", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).SetValue(webresponse, responseStream);
+
+            var we = new WebException();
+            var fields = typeof(WebException).GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            typeof(WebException).GetField("_message", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).SetValue(we, exceptionMessage);
+            typeof(WebException).GetField("m_Response", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).SetValue(we, webresponse);
+            
+            var response = new Mock<IResponse>();
+            response.Setup(c => c.GetResponseStream()).Throws(we);
 
             var request = new Mock<IRequest>();
             request.Setup(c => c.Headers).Returns(new WebHeaderCollection());

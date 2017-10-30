@@ -346,8 +346,8 @@ namespace Binance.Net.UnitTests
             factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
 
             var client = new BinanceSocketClient("test", "test") { SocketFactory = factory.Object };
-            client.SubscribeToOrderUpdateStream("test", (data) => { var d = data; });
-            client.SubscribeToAccountUpdateStream("test", (data) => { var d = data; });
+            client.SubscribeToOrderUpdateStream("test", (data) => { });
+            client.SubscribeToAccountUpdateStream("test", (data) => { });
 
             // act
             client.UnsubscribeFromOrderUpdateStream();
@@ -374,8 +374,8 @@ namespace Binance.Net.UnitTests
             factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
 
             var client = new BinanceSocketClient { SocketFactory = factory.Object };
-            client.SubscribeToTradesStream("test", (data) => { var d = data; });
-            client.SubscribeToDepthStream("test", (data) => { var d = data; });
+            client.SubscribeToTradesStream("test", (data) => { });
+            client.SubscribeToDepthStream("test", (data) => { });
 
             // act
             client.UnsubscribeAllStreams();
