@@ -549,12 +549,12 @@ namespace Binance.Net.UnitTests
         public void CancelOrder_Should_RespondWithCanceledOrder()
         {
             // arrange
-            var canceled = new BinancePlacedOrder()
+            var canceled = new BinanceCanceledOrder()
             {
                 ClientOrderId = "test",
                 OrderId = 100000000000,
                 Symbol = "BNBBTC",
-                TransactTime = new DateTime(2017, 1, 1)
+                OriginalClientOrderId = "test2"
             };
 
             var client = PrepareClient(JsonConvert.SerializeObject(canceled));
