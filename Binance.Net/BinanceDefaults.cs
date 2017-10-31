@@ -4,6 +4,9 @@ using System.IO;
 
 namespace Binance.Net
 {
+    /// <summary>
+    /// Default values used for new clients
+    /// </summary>
     public static class BinanceDefaults
     {
         internal static string ApiKey { get; private set; }

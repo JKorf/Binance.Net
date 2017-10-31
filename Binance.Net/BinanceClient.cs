@@ -16,6 +16,9 @@ using Binance.Net.Logging;
 
 namespace Binance.Net
 {
+    /// <summary>
+    /// Client providing access to the Binance REST Api
+    /// </summary>
     public class BinanceClient: BinanceAbstractClient, IDisposable
     {
         #region fields      
@@ -495,7 +498,7 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="CancelOrderAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public ApiResult<BinancePlacedOrder> CancelOrder(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? recvWindow = null) => CancelOrderAsync(symbol, orderId, origClientOrderId, newClientOrderId, recvWindow).Result;
+        public ApiResult<BinanceCanceledOrder> CancelOrder(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? recvWindow = null) => CancelOrderAsync(symbol, orderId, origClientOrderId, newClientOrderId, recvWindow).Result;
 
         /// <summary>
         /// Cancels a pending order
@@ -506,10 +509,10 @@ namespace Binance.Net
         /// <param name="newClientOrderId">Unique identifier for this cancel</param>
         /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for canceled order</returns>
-        public async Task<ApiResult<BinancePlacedOrder>> CancelOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? recvWindow = null)
+        public async Task<ApiResult<BinanceCanceledOrder>> CancelOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? recvWindow = null)
         {
             if (key == null || encryptor == null)
-                return ThrowErrorMessage<BinancePlacedOrder>("No api credentials provided, can't request private endpoints");
+                return ThrowErrorMessage<BinanceCanceledOrder>("No api credentials provided, can't request private endpoints");
 
             if (AutoTimestamp && !timeSynced)
                 await GetServerTimeAsync(); 
@@ -525,7 +528,7 @@ namespace Binance.Net
             AddOptionalParameter(parameters, "newClientOrderId", newClientOrderId);
             AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());
             
-            return await ExecuteRequest<BinancePlacedOrder>(GetUrl(CancelOrderEndpoint, Api, SignedVersion, parameters), true, DeleteMethod);
+            return await ExecuteRequest<BinanceCanceledOrder>(GetUrl(CancelOrderEndpoint, Api, SignedVersion, parameters), true, DeleteMethod);
         }
 
         /// <summary>

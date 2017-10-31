@@ -9,10 +9,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Authentication;
-using WebSocketSharp;
 
 namespace Binance.Net
 {
+    /// <summary>
+    /// Client providing access to the Binance websocket Api
+    /// </summary>
     public class BinanceSocketClient: BinanceAbstractClient, IDisposable
     {
         #region fields
