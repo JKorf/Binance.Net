@@ -205,6 +205,10 @@ BinanceDefaults.SetDefaultLogVerbosity(LogVerbosity.Debug);
 
 
 ## Release notes
+* Version 2.1.2 - 31 okt 2017
+	* Added alot of code documentation
+	* Small cleanups and fix
+
 * Version 2.1.1 - 30 okt 2017
 	* Fix for socket closing
 
