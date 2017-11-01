@@ -150,6 +150,7 @@ using(var client = new BinanceSocketClient())
 ```
 
 Unsubscribing from socket endpoints:
+
 Public socket endpoints can be unsubscribed by using the `client.UnsubscribeFromStream` method in combination with the stream ID received from subscribing:
 ```C#
 using(var client = new BinanceSocketClient())
