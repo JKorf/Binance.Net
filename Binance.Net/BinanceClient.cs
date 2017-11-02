@@ -879,6 +879,13 @@ namespace Binance.Net
                 log.Write(LogVerbosity.Warning, errorMessage);
                 return CreateApiResult(apiResult, errorMessage);
             }
+            catch (JsonSerializationException jse)
+            {
+                var errorMessage =
+                    $"Request to {uri} failed, couldn't deserialize the returned data. Message: {jse.Message}. Received data: {returnedData}";
+                log.Write(LogVerbosity.Warning, errorMessage);
+                return ThrowErrorMessage<T>(errorMessage);
+            }
             catch (JsonReaderException jre)
             {
                 var errorMessage = $"Request to {uri} failed, couldn't parse the returned data. Error occured at Path: {jre.Path}, LineNumber: {jre.LineNumber}, LinePosition: {jre.LinePosition}. Received data: {returnedData}";
