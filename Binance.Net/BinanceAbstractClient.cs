@@ -21,8 +21,8 @@ namespace Binance.Net
             if (BinanceDefaults.LogWriter != null)
                 SetLogOutput(BinanceDefaults.LogWriter);
 
-            if (BinanceDefaults.LogVerbositySet)
-                SetLogVerbosity(BinanceDefaults.LogVerbosity);
+            if (BinanceDefaults.LogVerbosity != null)
+                SetLogVerbosity(BinanceDefaults.LogVerbosity.Value);
 
             if (BinanceDefaults.ApiKey != null && BinanceDefaults.ApiSecret != null)
                 SetApiCredentials(BinanceDefaults.ApiKey, BinanceDefaults.ApiSecret);
@@ -81,22 +81,19 @@ namespace Binance.Net
             log.TextWriter = writer;
         }
 
-        protected ApiResult<T> ThrowErrorMessage<T>(string message)
+        protected BinanceApiResult<T> ThrowErrorMessage<T>(BinanceError error)
         {
-            log.Write(LogVerbosity.Warning, $"Call failed: {message}");
-            var result = (ApiResult<T>)Activator.CreateInstance(typeof(ApiResult<T>));
-            result.Error = new BinanceError()
-            {
-                Message = message
-            };
-            return result;
+            return ThrowErrorMessage<T>(error, null);
         }
 
-        protected ApiResult<T> CreateApiResult<T>(ApiResult<T> apiResult, string message)
+        protected BinanceApiResult<T> ThrowErrorMessage<T>(BinanceError error, string extraInformation)
         {
-            apiResult.Success = false;
-            apiResult.Error = new BinanceError() { Code = 0, Message = message };
-            return apiResult;
+            log.Write(LogVerbosity.Warning, $"Call failed: {error.Message}");
+            var result = (BinanceApiResult<T>)Activator.CreateInstance(typeof(BinanceApiResult<T>));
+            result.Error = error;
+            if (extraInformation != null)
+                result.Error.Message += Environment.NewLine + extraInformation;
+            return result;
         }
     }
 }
