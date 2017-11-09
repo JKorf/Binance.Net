@@ -62,7 +62,7 @@ If not successful the Error object will contain an error code and an error messa
 * 6000 - 6999: returned errors. The server returned a service error. If this error is persistent check if Binance is online or has any status updates regarding connectivity. If this issue persists please open an Issue.
 * 7000 - 7999: output errors. The server returned data, but we we're unable to successfully parse the response. If this error is persistent please open an Issue.
 
-The `BinanceClient` provides an automatic retry for when the server returns error status codes, for example when a gateway timeout occures or the service is temporarily unavailable. 
+The `BinanceClient` provides an automatic retry for when the server returns error status codes, for example when a gateway timeout occurs or the service is temporarily unavailable. 
 The amount of retries can be set in the client by setting the `MaxRetry` property. This can also be set to a default value by the `SetDefaultRetries` funtion in `BinanceDefaults.`:
 ```C#
 // On a single client
