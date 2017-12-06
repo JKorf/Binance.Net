@@ -38,18 +38,18 @@ namespace Binance.Net.Objects
         /// The quantity of the order
         /// </summary>
         [JsonProperty("q")]
-        public double Quantity { get; set; }
+        public decimal Quantity { get; set; }
         /// <summary>
         /// The price of the order
         /// </summary>
         [JsonProperty("p")]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         [JsonProperty("P")]
-        public double P { get; set; }
+        public decimal P { get; set; }
         [JsonProperty("F")]
-        public double F { get; set; }
+        public decimal F { get; set; }
         [JsonProperty("g")]
-        public double g { get; set; }
+        public decimal g { get; set; }
         [JsonProperty("C")]
         public object C { get; set; }
         /// <summary>
@@ -76,22 +76,22 @@ namespace Binance.Net.Objects
         /// The quantity of the last filled trade of this order
         /// </summary>
         [JsonProperty("l")]
-        public double QuantityOfLastFilledTrade { get; set; }
+        public decimal QuantityOfLastFilledTrade { get; set; }
         /// <summary>
         /// The quantity of all trades that were filled for this order
         /// </summary>
         [JsonProperty("z")]
-        public double AccumulatedQuantityOfFilledTrades { get; set; }
+        public decimal AccumulatedQuantityOfFilledTrades { get; set; }
         /// <summary>
         /// The price of the last filled trade
         /// </summary>
         [JsonProperty("L")]
-        public double PriceLastFilledTrade { get; set; }
+        public decimal PriceLastFilledTrade { get; set; }
         /// <summary>
         /// The commission payed
         /// </summary>
         [JsonProperty("n")]
-        public double Commission { get; set; }
+        public decimal Commission { get; set; }
         /// <summary>
         /// The asset the commission was taken from
         /// </summary>

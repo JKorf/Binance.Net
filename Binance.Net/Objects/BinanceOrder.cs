@@ -24,17 +24,17 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The price of the order
         /// </summary>
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         /// <summary>
         /// The original quantity of the order
         /// </summary>
         [JsonProperty("origQty")]
-        public double OriginalQuantity { get; set; }
+        public decimal OriginalQuantity { get; set; }
         /// <summary>
         /// The currently executed quantity of the order
         /// </summary>
         [JsonProperty("executedQty")]
-        public double ExecutedQuantity { get; set; }
+        public decimal ExecutedQuantity { get; set; }
         /// <summary>
         /// The status of the order
         /// </summary>
@@ -58,12 +58,12 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The stop price
         /// </summary>
-        public double StopPrice { get; set; }
+        public decimal StopPrice { get; set; }
         /// <summary>
         /// The iceberg quantity
         /// </summary>
         [JsonProperty("icebergQty")]
-        public double IcebergQuantity { get; set; }
+        public decimal IcebergQuantity { get; set; }
         /// <summary>
         /// The time the order was submitted
         /// </summary>

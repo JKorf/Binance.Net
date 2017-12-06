@@ -39,7 +39,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The amount deposited
         /// </summary>
-        public double Amount { get; set; }
+        public decimal Amount { get; set; }
         /// <summary>
         /// The asset deposited
         /// </summary>

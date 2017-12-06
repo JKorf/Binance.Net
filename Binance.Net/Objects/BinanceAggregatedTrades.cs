@@ -18,12 +18,12 @@ namespace Binance.Net.Objects
         /// The price of trades in this aggregation
         /// </summary>
         [JsonProperty("p")]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         /// <summary>
         /// The total quantity of trades in the aggregation
         /// </summary>
         [JsonProperty("q")]
-        public double Quantity { get; set; }
+        public decimal Quantity { get; set; }
         /// <summary>
         /// The first trade id in this aggregation
         /// </summary>

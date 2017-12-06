@@ -18,16 +18,16 @@ namespace Binance.Net.Converters
             BinanceKline entry = new BinanceKline
             {
                 OpenTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds((long) arr[0]),
-                Open = (double) arr[1],
-                High = (double) arr[2],
-                Low = (double) arr[3],
-                Close = (double) arr[4],
-                Volume = (double) arr[5],
+                Open = (decimal) arr[1],
+                High = (decimal) arr[2],
+                Low = (decimal) arr[3],
+                Close = (decimal) arr[4],
+                Volume = (decimal) arr[5],
                 CloseTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds((long) arr[6]),
-                AssetVolume = (double) arr[7],
+                AssetVolume = (decimal) arr[7],
                 Trades = (int) arr[8],
-                TakerBuyBaseAssetVolume = (double) arr[9],
-                TakerBuyQuoteAssetVolume = (double) arr[10]
+                TakerBuyBaseAssetVolume = (decimal) arr[9],
+                TakerBuyQuoteAssetVolume = (decimal) arr[10]
             };
 
             return entry;

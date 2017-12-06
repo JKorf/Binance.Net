@@ -12,22 +12,22 @@ namespace Binance.Net.Objects
         /// Commission percentage to pay when making trades
         /// </summary>
         [JsonProperty("m")]
-        public double MakerCommission { get; set; }
+        public decimal MakerCommission { get; set; }
         /// <summary>
         /// Commission percentage to pay when taking trades
         /// </summary>
         [JsonProperty("t")]
-        public double TakerCommission { get; set; }
+        public decimal TakerCommission { get; set; }
         /// <summary>
         /// Commission percentage to buy when buying
         /// </summary>
         [JsonProperty("b")]
-        public double BuyerCommission { get; set; }
+        public decimal BuyerCommission { get; set; }
         /// <summary>
         /// Commission percentage to buy when selling
         /// </summary>
         [JsonProperty("s")]
-        public double SellerCommission { get; set; }
+        public decimal SellerCommission { get; set; }
         /// <summary>
         /// Boolean indicating if this account can trade
         /// </summary>
@@ -64,15 +64,15 @@ namespace Binance.Net.Objects
         /// The amount that isn't locked in a trade
         /// </summary>
         [JsonProperty("f")]
-        public double Free { get; set; }
+        public decimal Free { get; set; }
         /// <summary>
         /// The amount that is currently locked in a trade
         /// </summary>
         [JsonProperty("l")]
-        public double Locked { get; set; }
+        public decimal Locked { get; set; }
         /// <summary>
         /// The total balance of this asset (Free + Locked)
         /// </summary>
-        public double Total => Free + Locked;
+        public decimal Total => Free + Locked;
     }
 }

@@ -17,8 +17,8 @@ namespace Binance.Net.Converters
             JArray arr = JArray.Load(reader);
             BinanceOrderBookEntry entry = new BinanceOrderBookEntry
             {
-                Price = (double) arr[0],
-                Quantity = (double) arr[1]
+                Price = (decimal) arr[0],
+                Quantity = (decimal) arr[1]
             };
             return entry;
         }

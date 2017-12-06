@@ -44,7 +44,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The amount of the withdrawal
         /// </summary>
-        public double Amount { get; set; }
+        public decimal Amount { get; set; }
         /// <summary>
         /// The address the asset was withdrawn to
         /// </summary>

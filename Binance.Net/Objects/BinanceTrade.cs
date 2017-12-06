@@ -16,16 +16,16 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The price of the trade
         /// </summary>
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         /// <summary>
         /// The quantity of the trade
         /// </summary>
         [JsonProperty("qty")]
-        public double Quantity { get; set; }
+        public decimal Quantity { get; set; }
         /// <summary>
         /// The commission paid for the trade
         /// </summary>
-        public double Commission { get; set; }
+        public decimal Commission { get; set; }
         /// <summary>
         /// The asset the commission is paid in
         /// </summary>

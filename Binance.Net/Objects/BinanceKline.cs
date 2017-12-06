@@ -18,23 +18,23 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The price at which this candlestick opened
         /// </summary>
-        public double Open { get; set; }
+        public decimal Open { get; set; }
         /// <summary>
         /// The highest price in this candlestick
         /// </summary>
-        public double High { get; set; }
+        public decimal High { get; set; }
         /// <summary>
         /// The lowest price in this candlestick
         /// </summary>
-        public double Low { get; set; }
+        public decimal Low { get; set; }
         /// <summary>
         /// The price at which this candlestick closed
         /// </summary>
-        public double Close { get; set; }
+        public decimal Close { get; set; }
         /// <summary>
         /// The volume traded during this candlestick
         /// </summary>
-        public double Volume { get; set; }
+        public decimal Volume { get; set; }
         /// <summary>
         /// The close time of this candlestick
         /// </summary>
@@ -43,7 +43,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The volume traded during this candlestick in the asset form
         /// </summary>
-        public double AssetVolume { get; set; }
+        public decimal AssetVolume { get; set; }
         /// <summary>
         /// The amount of trades in this candlestick
         /// </summary>
@@ -51,10 +51,10 @@ namespace Binance.Net.Objects
         /// <summary>
         /// Taker buy base asset volume
         /// </summary>
-        public double TakerBuyBaseAssetVolume { get; set; }
+        public decimal TakerBuyBaseAssetVolume { get; set; }
         /// <summary>
         /// Taker buy quote asset volume
         /// </summary>
-        public double TakerBuyQuoteAssetVolume { get; set; }
+        public decimal TakerBuyQuoteAssetVolume { get; set; }
     }
 }

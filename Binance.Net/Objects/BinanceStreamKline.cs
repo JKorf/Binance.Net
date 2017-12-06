@@ -60,27 +60,27 @@ namespace Binance.Net.Objects
         /// The open price of this candlestick
         /// </summary>
         [JsonProperty("o")]
-        public double Open { get; set; }
+        public decimal Open { get; set; }
         /// <summary>
         /// The close price of this candlestick
         /// </summary>
         [JsonProperty("c")]
-        public double Close { get; set; }
+        public decimal Close { get; set; }
         /// <summary>
         /// The higest price of this candlestick
         /// </summary>
         [JsonProperty("h")]
-        public double High { get; set; }
+        public decimal High { get; set; }
         /// <summary>
         /// The lowest price of this candlestick
         /// </summary>
         [JsonProperty("l")]
-        public double Low { get; set; }
+        public decimal Low { get; set; }
         /// <summary>
         /// The volume traded during this candlestick
         /// </summary>
         [JsonProperty("v")]
-        public double Volume { get; set; }
+        public decimal Volume { get; set; }
         /// <summary>
         /// The amount of trades in this candlestick
         /// </summary>
@@ -95,16 +95,16 @@ namespace Binance.Net.Objects
         /// The quote volume
         /// </summary>
         [JsonProperty("q")]
-        public double QuoteVolume { get; set; }
+        public decimal QuoteVolume { get; set; }
         /// <summary>
         /// The volume of active buy
         /// </summary>
         [JsonProperty("V")]
-        public double ActiveBuyVolume { get; set; }
+        public decimal ActiveBuyVolume { get; set; }
         /// <summary>
         /// The quote volume of active buy
         /// </summary>
         [JsonProperty("Q")]
-        public double QuoteActiveBuyVolume { get; set; }
+        public decimal QuoteActiveBuyVolume { get; set; }
     }
 }

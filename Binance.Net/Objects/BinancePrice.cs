@@ -12,6 +12,6 @@
         /// <summary>
         /// The price of the symbol
         /// </summary>
-        public double Price { get; set; }
+        public decimal Price { get; set; }
     }
 }

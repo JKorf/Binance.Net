@@ -33,10 +33,10 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The price of this order book entry
         /// </summary>
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         /// <summary>
         /// The quantity of this price in the order book
         /// </summary>
-        public double Quantity { get; set; }
+        public decimal Quantity { get; set; }
     }
 }

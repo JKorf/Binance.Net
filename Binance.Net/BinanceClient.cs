@@ -381,7 +381,7 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="PlaceOrderAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public BinanceApiResult<BinancePlacedOrder> PlaceOrder(string symbol, OrderSide side, OrderType type, TimeInForce timeInForce, double quantity, double price, string newClientOrderId = null, double? stopPrice = null, double? icebergQty = null) => PlaceOrderAsync(symbol, side, type, timeInForce, quantity, price, newClientOrderId, stopPrice, icebergQty).Result;
+        public BinanceApiResult<BinancePlacedOrder> PlaceOrder(string symbol, OrderSide side, OrderType type, TimeInForce timeInForce, decimal quantity, decimal price, string newClientOrderId = null, decimal? stopPrice = null, decimal? icebergQty = null) => PlaceOrderAsync(symbol, side, type, timeInForce, quantity, price, newClientOrderId, stopPrice, icebergQty).Result;
 
         /// <summary>
         /// Places a new order
@@ -396,7 +396,7 @@ namespace Binance.Net
         /// <param name="stopPrice">Used for stop orders</param>
         /// <param name="icebergQty">User for iceberg orders</param>
         /// <returns>Id's for the placed order</returns>
-        public async Task<BinanceApiResult<BinancePlacedOrder>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, TimeInForce timeInForce, double quantity, double price, string newClientOrderId = null, double? stopPrice = null, double? icebergQty = null)
+        public async Task<BinanceApiResult<BinancePlacedOrder>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, TimeInForce timeInForce, decimal quantity, decimal price, string newClientOrderId = null, decimal? stopPrice = null, decimal? icebergQty = null)
         {
             if (key == null || encryptor == null)
                 return ThrowErrorMessage<BinancePlacedOrder>(BinanceErrors.GetError(BinanceErrorKey.NoApiCredentialsProvided));
@@ -426,7 +426,7 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="PlaceTestOrderAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public BinanceApiResult<BinancePlacedOrder> PlaceTestOrder(string symbol, OrderSide side, OrderType type, TimeInForce timeInForce, double quantity, double price, string newClientOrderId = null, double? stopPrice = null, double? icebergQty = null) => PlaceTestOrderAsync(symbol, side, type, timeInForce, quantity, price, newClientOrderId, stopPrice, icebergQty).Result;
+        public BinanceApiResult<BinancePlacedOrder> PlaceTestOrder(string symbol, OrderSide side, OrderType type, TimeInForce timeInForce, decimal quantity, decimal price, string newClientOrderId = null, decimal? stopPrice = null, decimal? icebergQty = null) => PlaceTestOrderAsync(symbol, side, type, timeInForce, quantity, price, newClientOrderId, stopPrice, icebergQty).Result;
         
         /// <summary>
         /// Places a new test order. Test orders are not actually being executed and just test the functionality.
@@ -441,7 +441,7 @@ namespace Binance.Net
         /// <param name="stopPrice">Used for stop orders</param>
         /// <param name="icebergQty">User for iceberg orders</param>
         /// <returns>Id's for the placed test order</returns>
-        public async Task<BinanceApiResult<BinancePlacedOrder>> PlaceTestOrderAsync(string symbol, OrderSide side, OrderType type, TimeInForce timeInForce, double quantity, double price, string newClientOrderId = null, double? stopPrice = null, double? icebergQty = null)
+        public async Task<BinanceApiResult<BinancePlacedOrder>> PlaceTestOrderAsync(string symbol, OrderSide side, OrderType type, TimeInForce timeInForce, decimal quantity, decimal price, string newClientOrderId = null, decimal? stopPrice = null, decimal? icebergQty = null)
         {
             if (key == null || encryptor == null)
                 return ThrowErrorMessage<BinancePlacedOrder>(BinanceErrors.GetError(BinanceErrorKey.NoApiCredentialsProvided));
@@ -610,7 +610,7 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="WithdrawAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public BinanceApiResult<BinanceWithdrawalPlaced> Withdraw(string asset, string address, double amount, string name = null, long? recvWindow = null) => WithdrawAsync(asset, address, amount, name, recvWindow).Result;
+        public BinanceApiResult<BinanceWithdrawalPlaced> Withdraw(string asset, string address, decimal amount, string name = null, long? recvWindow = null) => WithdrawAsync(asset, address, amount, name, recvWindow).Result;
 
         /// <summary>
         /// Withdraw assets from Binance to an address
@@ -621,7 +621,7 @@ namespace Binance.Net
         /// <param name="name">Name for the transaction</param>
         /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Withdrawal confirmation</returns>
-        public async Task<BinanceApiResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, double amount, string name = null, long? recvWindow = null)
+        public async Task<BinanceApiResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, decimal amount, string name = null, long? recvWindow = null)
         {
             if (key == null || encryptor == null)
                 return ThrowErrorMessage<BinanceWithdrawalPlaced>(BinanceErrors.GetError(BinanceErrorKey.NoApiCredentialsProvided));

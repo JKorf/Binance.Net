@@ -12,49 +12,49 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The actuals price change in the last 24 hours
         /// </summary>
-        public double PriceChange { get; set; }
+        public decimal PriceChange { get; set; }
         /// <summary>
         /// The price change in percentage in the last 24 hours
         /// </summary>
-        public double PriceChangePercent { get; set; }
+        public decimal PriceChangePercent { get; set; }
         /// <summary>
         /// The weighted average price in the last 24 hours
         /// </summary>
         [JsonProperty("weightedAvgPrice")]
-        public double WeightedAveragePrice { get; set; }
+        public decimal WeightedAveragePrice { get; set; }
         /// <summary>
         /// The close price 24 hours ago
         /// </summary>
         [JsonProperty("prevClosePrice")]
-        public double PreviousClosePrice { get; set; }
+        public decimal PreviousClosePrice { get; set; }
         /// <summary>
         /// The most recent price
         /// </summary>
-        public double LastPrice { get; set; }
+        public decimal LastPrice { get; set; }
         /// <summary>
         /// The most recent bid price
         /// </summary>
-        public double BidPrice { get; set; }
+        public decimal BidPrice { get; set; }
         /// <summary>
         /// The most recent ask price
         /// </summary>
-        public double AskPrice { get; set; }
+        public decimal AskPrice { get; set; }
         /// <summary>
         /// The open price 24 hours ago
         /// </summary>
-        public double OpenPrice { get; set; }
+        public decimal OpenPrice { get; set; }
         /// <summary>
         /// The highest price in the last 24 hours
         /// </summary>
-        public double HighPrice { get; set; }
+        public decimal HighPrice { get; set; }
         /// <summary>
         /// The lowest price in the last 24 hours
         /// </summary>
-        public double LowPrice { get; set; }
+        public decimal LowPrice { get; set; }
         /// <summary>
         /// The volume traded in the last 24 hours
         /// </summary>
-        public double Volume { get; set; }
+        public decimal Volume { get; set; }
         /// <summary>
         /// Time at which this 24 hours opened
         /// </summary>

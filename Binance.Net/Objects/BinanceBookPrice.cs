@@ -14,20 +14,20 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The highest bid price for the symbol
         /// </summary>
-        public double BidPrice { get; set; }
+        public decimal BidPrice { get; set; }
         /// <summary>
         /// The quantity of the highest bid price currently in the order book
         /// </summary>
         [JsonProperty("bidQty")]
-        public double BidQuantity { get; set; }
+        public decimal BidQuantity { get; set; }
         /// <summary>
         /// The lowest ask price for the symbol
         /// </summary>
-        public double AskPrice { get; set; }
+        public decimal AskPrice { get; set; }
         /// <summary>
         /// The quantity of the lowest ask price currently in the order book
         /// </summary>
         [JsonProperty("askQty")]
-        public double AskQuantity { get; set; }
+        public decimal AskQuantity { get; set; }
     }
 }
