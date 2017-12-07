@@ -1,18 +1,18 @@
 ﻿using Binance.Net.Events;
+using SuperSocket.ClientEngine;
 using System;
 using System.Security.Authentication;
-using System.Security.Policy;
+using WebSocket4Net;
 
 namespace Binance.Net.Interfaces
 {
     public interface IWebsocket
     {
-        string Url { get; }
         void SetEnabledSslProtocols(SslProtocols protocols);
 
-        event EventHandler<ClosedEventArgs> OnClose;
-        event EventHandler<MessagedEventArgs> OnMessage;
-        event EventHandler<ErroredEventArgs> OnError;
+        event EventHandler OnClose;
+        event EventHandler<MessageReceivedEventArgs> OnMessage;
+        event EventHandler<ErrorEventArgs> OnError;
         event EventHandler OnOpen;
 
         void Connect();

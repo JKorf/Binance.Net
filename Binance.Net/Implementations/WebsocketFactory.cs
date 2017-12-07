@@ -1,5 +1,5 @@
 ﻿using Binance.Net.Interfaces;
-using WebSocketSharp;
+using WebSocket4Net;
 
 namespace Binance.Net.Implementations
 {

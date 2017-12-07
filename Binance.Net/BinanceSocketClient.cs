@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Authentication;
 using Binance.Net.Errors;
+using SuperSocket.ClientEngine;
 
 namespace Binance.Net
 {
@@ -81,7 +82,7 @@ namespace Binance.Net
             if (!socketResult.Success)
                 return new BinanceApiResult<int>() {Error = socketResult.Error};
 
-            socketResult.Data.Socket.OnMessage += (o, s) => onMessage(JsonConvert.DeserializeObject<BinanceStreamKline>(s.Data));
+            socketResult.Data.Socket.OnMessage += (o, s) => onMessage(JsonConvert.DeserializeObject<BinanceStreamKline>(s.Message));
 
             log.Write(LogVerbosity.Debug, $"Started kline stream for {symbol}: {interval}");
             return new BinanceApiResult<int>() { Data = socketResult.Data.StreamId, Success = true };
@@ -100,7 +101,7 @@ namespace Binance.Net
             if (!socketResult.Success)
                 return new BinanceApiResult<int>() { Error = socketResult.Error };
 
-            socketResult.Data.Socket.OnMessage += (o, s) => onMessage(JsonConvert.DeserializeObject<BinanceStreamDepth>(s.Data));
+            socketResult.Data.Socket.OnMessage += (o, s) => onMessage(JsonConvert.DeserializeObject<BinanceStreamDepth>(s.Message));
 
             log.Write(LogVerbosity.Debug, $"Started depth stream for {symbol}");
             return new BinanceApiResult<int>() { Data = socketResult.Data.StreamId, Success = true };
@@ -119,7 +120,7 @@ namespace Binance.Net
             if (!socketResult.Success)
                 return new BinanceApiResult<int>() { Error = socketResult.Error };
 
-            socketResult.Data.Socket.OnMessage += (o, s) => onMessage(JsonConvert.DeserializeObject<BinanceStreamTrade>(s.Data));
+            socketResult.Data.Socket.OnMessage += (o, s) => onMessage(JsonConvert.DeserializeObject<BinanceStreamTrade>(s.Message));
 
             log.Write(LogVerbosity.Debug, $"Started trade stream for {symbol}");
             return new BinanceApiResult<int>() { Data = socketResult.Data.StreamId, Success = true };
@@ -237,7 +238,7 @@ namespace Binance.Net
                 return new BinanceApiResult<bool>() { Data = false, Success = false, Error = socketResult.Error};
 
             socketResult.Data.UserStream = true;
-            socketResult.Data.Socket.OnMessage += (o, s) => OnUserMessage(s.Data);
+            socketResult.Data.Socket.OnMessage += (o, s) => OnUserMessage(s.Message);
             log.Write(LogVerbosity.Debug, "User stream started");
             return new BinanceApiResult<bool>() { Data = true, Success = true};
         }
@@ -268,15 +269,15 @@ namespace Binance.Net
 
         private void Socket_OnOpen(object sender, EventArgs e)
         {
-            log.Write(LogVerbosity.Debug, $"Socket opened to {((BinanceStream)sender).Socket.Url}");
+            log.Write(LogVerbosity.Debug, $"Socket opened");
         }
 
-        private void Socket_OnError(object sender, ErroredEventArgs e)
+        private void Socket_OnError(object sender, ErrorEventArgs e)
         {
-            log.Write(LogVerbosity.Error, $"Socket error {e.Message}");
+            log.Write(LogVerbosity.Error, $"Socket error {e.Exception?.Message}");
         }
 
-        private void Socket_OnClose(object sender, ClosedEventArgs e)
+        private void Socket_OnClose(object sender, EventArgs e)
         {
             log.Write(LogVerbosity.Debug, "Socket closed");
             lock (sockets)
