@@ -133,7 +133,7 @@ namespace Binance.Net
         /// <returns>True if succesful ping, false if no response</returns>
         public async Task<BinanceApiResult<bool>> PingAsync()
         {
-            var result = await ExecuteRequest<BinancePing>(GetUrl(PingEndpoint, Api, PublicVersion));
+            var result = await ExecuteRequest<BinancePing>(GetUrl(PingEndpoint, Api, PublicVersion)).ConfigureAwait(false);
             return new BinanceApiResult<bool>() { Success = result.Success, Data = result.Data != null, Error = result.Error };
         }
 
@@ -152,14 +152,14 @@ namespace Binance.Net
             var url = GetUrl(CheckTimeEndpoint, Api, PublicVersion);
             if (!AutoTimestamp)
             { 
-                var result = await ExecuteRequest<BinanceCheckTime>(url);
+                var result = await ExecuteRequest<BinanceCheckTime>(url).ConfigureAwait(false);
                 return new BinanceApiResult<DateTime>() { Success = result.Success, Data = result.Data?.ServerTime ?? default(DateTime), Error = result.Error };
             }
             else
             {
                 var localTime = DateTime.UtcNow;
                 var sw = Stopwatch.StartNew();
-                var result = await ExecuteRequest<BinanceCheckTime>(url);
+                var result = await ExecuteRequest<BinanceCheckTime>(url).ConfigureAwait(false);
                 if (!result.Success)
                     return new BinanceApiResult<DateTime>() { Success = false, Error = result.Error };
 
@@ -186,7 +186,7 @@ namespace Binance.Net
             if (AutoTimestamp && !timeSynced)
                 await GetServerTimeAsync();
 
-            return await ExecuteRequest<BinanceExchangeInfo>(GetUrl(ExchangeInfoEndpoint, Api, PublicVersion));
+            return await ExecuteRequest<BinanceExchangeInfo>(GetUrl(ExchangeInfoEndpoint, Api, PublicVersion)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -210,7 +210,7 @@ namespace Binance.Net
 
             AddOptionalParameter(parameters, "limit", limit?.ToString());
 
-            return await ExecuteRequest<BinanceOrderBook>(GetUrl(OrderBookEndpoint, Api, PublicVersion, parameters));
+            return await ExecuteRequest<BinanceOrderBook>(GetUrl(OrderBookEndpoint, Api, PublicVersion, parameters)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -240,7 +240,7 @@ namespace Binance.Net
             AddOptionalParameter(parameters, "endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
             AddOptionalParameter(parameters, "limit", limit?.ToString());
             
-            return await ExecuteRequest<BinanceAggregatedTrades[]>(GetUrl(AggregatedTradesEndpoint, Api, PublicVersion, parameters));
+            return await ExecuteRequest<BinanceAggregatedTrades[]>(GetUrl(AggregatedTradesEndpoint, Api, PublicVersion, parameters)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -264,7 +264,7 @@ namespace Binance.Net
             
             AddOptionalParameter(parameters, "limit", limit?.ToString());
 
-            return await ExecuteRequest<BinanceRecentTrade[]>(GetUrl(RecentTradesEndpoint, Api, PublicVersion, parameters));
+            return await ExecuteRequest<BinanceRecentTrade[]>(GetUrl(RecentTradesEndpoint, Api, PublicVersion, parameters)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -289,7 +289,7 @@ namespace Binance.Net
             AddOptionalParameter(parameters, "limit", limit?.ToString());
             AddOptionalParameter(parameters, "fromId", fromId?.ToString());
 
-            return await ExecuteRequest<BinanceRecentTrade[]>(GetUrl(HistoricalTradesEndpoint, Api, PublicVersion, parameters));
+            return await ExecuteRequest<BinanceRecentTrade[]>(GetUrl(HistoricalTradesEndpoint, Api, PublicVersion, parameters)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -321,7 +321,7 @@ namespace Binance.Net
             AddOptionalParameter(parameters, "endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
             AddOptionalParameter(parameters, "limit", limit?.ToString());
 
-            return await ExecuteRequest<BinanceKline[]>(GetUrl(KlinesEndpoint, Api, PublicVersion, parameters));
+            return await ExecuteRequest<BinanceKline[]>(GetUrl(KlinesEndpoint, Api, PublicVersion, parameters)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -345,7 +345,7 @@ namespace Binance.Net
                 { "symbol", symbol }
             };
 
-            return await ExecuteRequest<Binance24HPrice>(GetUrl(Price24HEndpoint, Api, PublicVersion, parameters));
+            return await ExecuteRequest<Binance24HPrice>(GetUrl(Price24HEndpoint, Api, PublicVersion, parameters)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -363,7 +363,7 @@ namespace Binance.Net
             if (AutoTimestamp && !timeSynced)
                 await GetServerTimeAsync();
 
-            return await ExecuteRequest<List<Binance24HPrice>>(GetUrl(Price24HEndpoint, Api, PublicVersion));
+            return await ExecuteRequest<List<Binance24HPrice>>(GetUrl(Price24HEndpoint, Api, PublicVersion)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -387,7 +387,7 @@ namespace Binance.Net
                 { "symbol", symbol }
             };
 
-            return await ExecuteRequest<BinancePrice>(GetUrl(AllPricesEndpoint, Api, PublicVersion, parameters));
+            return await ExecuteRequest<BinancePrice>(GetUrl(AllPricesEndpoint, Api, PublicVersion, parameters)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -405,7 +405,7 @@ namespace Binance.Net
             if (AutoTimestamp && !timeSynced)
                 await GetServerTimeAsync();
 
-            return await ExecuteRequest<BinancePrice[]>(GetUrl(AllPricesEndpoint, Api, PublicVersion));
+            return await ExecuteRequest<BinancePrice[]>(GetUrl(AllPricesEndpoint, Api, PublicVersion)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -428,7 +428,7 @@ namespace Binance.Net
                 { "symbol", symbol }
             };
 
-            return await ExecuteRequest<BinanceBookPrice>(GetUrl(BookPricesEndpoint, Api, PublicVersion, parameters));
+            return await ExecuteRequest<BinanceBookPrice>(GetUrl(BookPricesEndpoint, Api, PublicVersion, parameters)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -446,7 +446,7 @@ namespace Binance.Net
             if (AutoTimestamp && !timeSynced)
                 await GetServerTimeAsync();
 
-            return await ExecuteRequest<BinanceBookPrice[]>(GetUrl(BookPricesEndpoint, Api, PublicVersion));
+            return await ExecuteRequest<BinanceBookPrice[]>(GetUrl(BookPricesEndpoint, Api, PublicVersion)).ConfigureAwait(false);
         }
         #endregion
 
@@ -479,7 +479,7 @@ namespace Binance.Net
             AddOptionalParameter(parameters, "recvWindow", receiveWindow?.ToString());
             AddOptionalParameter(parameters, "symbol", symbol);
 
-            return await ExecuteRequest<BinanceOrder[]>(GetUrl(OpenOrdersEndpoint, Api, SignedVersion, parameters), true);
+            return await ExecuteRequest<BinanceOrder[]>(GetUrl(OpenOrdersEndpoint, Api, SignedVersion, parameters), true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -514,7 +514,7 @@ namespace Binance.Net
             AddOptionalParameter(parameters, "recvWindow", receiveWindow?.ToString());
             AddOptionalParameter(parameters, "limit", limit?.ToString());
 
-            return await ExecuteRequest<BinanceOrder[]>(GetUrl(AllOrdersEndpoint, Api, SignedVersion, parameters), true);
+            return await ExecuteRequest<BinanceOrder[]>(GetUrl(AllOrdersEndpoint, Api, SignedVersion, parameters), true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -578,17 +578,26 @@ namespace Binance.Net
             AddOptionalParameter(parameters, "timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)));
             AddOptionalParameter(parameters, "stopPrice", stopPrice?.ToString());
             AddOptionalParameter(parameters, "icebergQty", icebergQty?.ToString());
-            AddOptionalParameter(parameters, "newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(timeInForce, new OrderResponseTypeConverter(false)));
+            AddOptionalParameter(parameters, "newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
 
-            return await ExecuteRequest<BinancePlacedOrder>(GetUrl(NewOrderEndpoint, Api, SignedVersion, parameters), true, PostMethod);
+            return await ExecuteRequest<BinancePlacedOrder>(GetUrl(NewOrderEndpoint, Api, SignedVersion, parameters), true, PostMethod).ConfigureAwait(false);
         }
         
         /// <summary>
         /// Synchronized version of the <see cref="PlaceTestOrderAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public BinanceApiResult<BinancePlacedOrder> PlaceTestOrder(string symbol, OrderSide side, OrderType type, TimeInForce timeInForce, decimal quantity, decimal price, string newClientOrderId = null, decimal? stopPrice = null, decimal? icebergQty = null) => PlaceTestOrderAsync(symbol, side, type, timeInForce, quantity, price, newClientOrderId, stopPrice, icebergQty).Result;
-        
+        public BinanceApiResult<BinancePlacedOrder> PlaceTestOrder(string symbol,
+            OrderSide side,
+            OrderType type,
+            decimal quantity,
+            string newClientOrderId = null,
+            decimal? price = null,
+            TimeInForce? timeInForce = null,
+            decimal? stopPrice = null,
+            decimal? icebergQty = null,
+            OrderResponseType? orderResponseType = null) => PlaceTestOrderAsync(symbol, side, type, quantity, newClientOrderId, price, timeInForce, stopPrice, icebergQty, orderResponseType).Result;
+
         /// <summary>
         /// Places a new test order. Test orders are not actually being executed and just test the functionality.
         /// </summary>
@@ -602,7 +611,16 @@ namespace Binance.Net
         /// <param name="stopPrice">Used for stop orders</param>
         /// <param name="icebergQty">User for iceberg orders</param>
         /// <returns>Id's for the placed test order</returns>
-        public async Task<BinanceApiResult<BinancePlacedOrder>> PlaceTestOrderAsync(string symbol, OrderSide side, OrderType type, TimeInForce timeInForce, decimal quantity, decimal price, string newClientOrderId = null, decimal? stopPrice = null, decimal? icebergQty = null)
+        public async Task<BinanceApiResult<BinancePlacedOrder>> PlaceTestOrderAsync(string symbol,
+            OrderSide side,
+            OrderType type,
+            decimal quantity,
+            string newClientOrderId = null,
+            decimal? price = null,
+            TimeInForce? timeInForce = null,
+            decimal? stopPrice = null,
+            decimal? icebergQty = null,
+            OrderResponseType? orderResponseType = null)
         {
             if (key == null || encryptor == null)
                 return ThrowErrorMessage<BinancePlacedOrder>(BinanceErrors.GetError(BinanceErrorKey.NoApiCredentialsProvided));
@@ -615,17 +633,19 @@ namespace Binance.Net
                 { "symbol", symbol },
                 { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
                 { "type", JsonConvert.SerializeObject(type, new OrderTypeConverter(false)) },
-                { "timeInForce", JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)) },
                 { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
-                { "price", price.ToString(CultureInfo.InvariantCulture) },
                 { "timestamp", GetTimestamp() }
             };
 
             AddOptionalParameter(parameters, "newClientOrderId", newClientOrderId);
+            AddOptionalParameter(parameters, "price", price?.ToString());
+            AddOptionalParameter(parameters, "timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)));
             AddOptionalParameter(parameters, "stopPrice", stopPrice?.ToString());
             AddOptionalParameter(parameters, "icebergQty", icebergQty?.ToString());
+            AddOptionalParameter(parameters, "newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
 
-            return await ExecuteRequest<BinancePlacedOrder>(GetUrl(NewTestOrderEndpoint, Api, SignedVersion, parameters), true, PostMethod);
+
+            return await ExecuteRequest<BinancePlacedOrder>(GetUrl(NewTestOrderEndpoint, Api, SignedVersion, parameters), true, PostMethod).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -663,7 +683,7 @@ namespace Binance.Net
             AddOptionalParameter(parameters, "origClientOrderId", origClientOrderId);
             AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());
             
-            return await ExecuteRequest<BinanceOrder>(GetUrl(QueryOrderEndpoint, Api, SignedVersion, parameters), true, GetMethod);
+            return await ExecuteRequest<BinanceOrder>(GetUrl(QueryOrderEndpoint, Api, SignedVersion, parameters), true, GetMethod).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -700,7 +720,7 @@ namespace Binance.Net
             AddOptionalParameter(parameters, "newClientOrderId", newClientOrderId);
             AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());
             
-            return await ExecuteRequest<BinanceCanceledOrder>(GetUrl(CancelOrderEndpoint, Api, SignedVersion, parameters), true, DeleteMethod);
+            return await ExecuteRequest<BinanceCanceledOrder>(GetUrl(CancelOrderEndpoint, Api, SignedVersion, parameters), true, DeleteMethod).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -729,7 +749,7 @@ namespace Binance.Net
 
             AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());
 
-            return await ExecuteRequest<BinanceAccountInfo>(GetUrl(AccountInfoEndpoint, Api, SignedVersion, parameters), true, GetMethod);
+            return await ExecuteRequest<BinanceAccountInfo>(GetUrl(AccountInfoEndpoint, Api, SignedVersion, parameters), true, GetMethod).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -764,7 +784,7 @@ namespace Binance.Net
             AddOptionalParameter(parameters, "fromId", fromId?.ToString(CultureInfo.InvariantCulture));
             AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString(CultureInfo.InvariantCulture));
 
-            return await ExecuteRequest<BinanceTrade[]>(GetUrl(MyTradesEndpoint, Api, SignedVersion, parameters), true, GetMethod);
+            return await ExecuteRequest<BinanceTrade[]>(GetUrl(MyTradesEndpoint, Api, SignedVersion, parameters), true, GetMethod).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -803,7 +823,7 @@ namespace Binance.Net
             AddOptionalParameter(parameters, "addressTag", addressTag);
             AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());    
 
-            var result = await ExecuteRequest<BinanceWithdrawalPlaced>(GetUrl(WithdrawEndpoint, WithdrawalApi, WithdrawalVersion, parameters), true, PostMethod);
+            var result = await ExecuteRequest<BinanceWithdrawalPlaced>(GetUrl(WithdrawEndpoint, WithdrawalApi, WithdrawalVersion, parameters), true, PostMethod).ConfigureAwait(false);
             if (!result.Success || result.Data == null)
                 return result;
 
@@ -847,7 +867,7 @@ namespace Binance.Net
             AddOptionalParameter(parameters, "endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
             AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());
 
-            var result = await ExecuteRequest<BinanceDepositList>(GetUrl(DepositHistoryEndpoint, WithdrawalApi, WithdrawalVersion, parameters), true, GetMethod);
+            var result = await ExecuteRequest<BinanceDepositList>(GetUrl(DepositHistoryEndpoint, WithdrawalApi, WithdrawalVersion, parameters), true, GetMethod).ConfigureAwait(false);
             if (!result.Success || result.Data == null)
                 return result;
 
@@ -891,7 +911,7 @@ namespace Binance.Net
             AddOptionalParameter(parameters, "endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
             AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());
 
-            var result = await ExecuteRequest<BinanceWithdrawalList>(GetUrl(WithdrawHistoryEndpoint, WithdrawalApi, WithdrawalVersion, parameters), true, GetMethod);
+            var result = await ExecuteRequest<BinanceWithdrawalList>(GetUrl(WithdrawHistoryEndpoint, WithdrawalApi, WithdrawalVersion, parameters), true, GetMethod).ConfigureAwait(false);
             if (!result.Success || result.Data == null)
                 return result;
 
@@ -929,7 +949,7 @@ namespace Binance.Net
             
             AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());
                 
-            return await ExecuteRequest<BinanceDepositAddress>(GetUrl(DepositAddressEndpoint, WithdrawalApi, WithdrawalVersion, parameters), true, GetMethod);
+            return await ExecuteRequest<BinanceDepositAddress>(GetUrl(DepositAddressEndpoint, WithdrawalApi, WithdrawalVersion, parameters), true, GetMethod).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -950,7 +970,7 @@ namespace Binance.Net
             if (AutoTimestamp && !timeSynced)
                 await GetServerTimeAsync();
             
-            return await ExecuteRequest<BinanceListenKey>(GetUrl(GetListenKeyEndpoint, Api, UserDataStreamVersion), false, PostMethod);
+            return await ExecuteRequest<BinanceListenKey>(GetUrl(GetListenKeyEndpoint, Api, UserDataStreamVersion), false, PostMethod).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -976,7 +996,7 @@ namespace Binance.Net
                 { "listenKey", listenKey },
             };
 
-            return await ExecuteRequest<object>(GetUrl(KeepListenKeyAliveEndpoint, Api, UserDataStreamVersion, parameters), false, PutMethod);
+            return await ExecuteRequest<object>(GetUrl(KeepListenKeyAliveEndpoint, Api, UserDataStreamVersion, parameters), false, PutMethod).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1002,7 +1022,7 @@ namespace Binance.Net
                 { "listenKey", listenKey },
             };
             
-            return await ExecuteRequest<object>(GetUrl(CloseListenKeyEndpoint, Api, UserDataStreamVersion, parameters), false, DeleteMethod); 
+            return await ExecuteRequest<object>(GetUrl(CloseListenKeyEndpoint, Api, UserDataStreamVersion, parameters), false, DeleteMethod).ConfigureAwait(false); 
         }
         #endregion      
         #endregion
