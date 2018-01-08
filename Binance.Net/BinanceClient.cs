@@ -35,7 +35,7 @@ namespace Binance.Net
         private const string PublicVersion = "1";
         private const string SignedVersion = "3";
         private const string UserDataStreamVersion = "1";
-        private const string WithdrawalVersion = "1";
+        private const string WithdrawalVersion = "3";
 
         // Methods
         private const string GetMethod = "GET";
@@ -46,12 +46,15 @@ namespace Binance.Net
         // Public
         private const string PingEndpoint = "ping";
         private const string CheckTimeEndpoint = "time";
+        private const string ExchangeInfoEndpoint = "exchangeInfo";
         private const string OrderBookEndpoint = "depth";
         private const string AggregatedTradesEndpoint = "aggTrades";
+        private const string RecentTradesEndpoint = "trades";
+        private const string HistoricalTradesEndpoint = "historicalTrades";
         private const string KlinesEndpoint = "klines";
         private const string Price24HEndpoint = "ticker/24hr";
-        private const string AllPricesEndpoint = "ticker/allPrices";
-        private const string BookPricesEndpoint = "ticker/allBookTickers";
+        private const string AllPricesEndpoint = "ticker/price";
+        private const string BookPricesEndpoint = "ticker/bookTicker";
 
         // Signed
         private const string OpenOrdersEndpoint = "openOrders";
@@ -70,8 +73,9 @@ namespace Binance.Net
 
         // Withdrawing
         private const string WithdrawEndpoint = "withdraw.html";
-        private const string DepositHistoryEndpoint = "getDepositHistory.html";
-        private const string WithdrawHistoryEndpoint = "getWithdrawHistory.html";
+        private const string DepositHistoryEndpoint = "depositHistory.html";
+        private const string WithdrawHistoryEndpoint = "withdrawHistory.html";
+        private const string DepositAddressEndpoint = "depositAddress.html";
         #endregion
 
         #region properties
@@ -168,6 +172,24 @@ namespace Binance.Net
         }
 
         /// <summary>
+        /// Synchronized version of the <see cref="GetExchangeInfoAsync"/> method
+        /// </summary>
+        /// <returns></returns>
+        public BinanceApiResult<BinanceExchangeInfo> GetExchangeInfo() => GetExchangeInfoAsync().Result;
+
+        /// <summary>
+        /// Get's information about the exchange including rate limits and symbol list
+        /// </summary>
+        /// <returns>Exchange info</returns>
+        public async Task<BinanceApiResult<BinanceExchangeInfo>> GetExchangeInfoAsync()
+        {
+            if (AutoTimestamp && !timeSynced)
+                await GetServerTimeAsync();
+
+            return await ExecuteRequest<BinanceExchangeInfo>(GetUrl(ExchangeInfoEndpoint, Api, PublicVersion));
+        }
+
+        /// <summary>
         /// Synchronized version of the <see cref="GetOrderBookAsync"/> method
         /// </summary>
         /// <returns></returns>
@@ -222,6 +244,55 @@ namespace Binance.Net
         }
 
         /// <summary>
+        /// Synchronized version of the <see cref="GetRecentTradesAsync"/> method
+        /// </summary>
+        /// <returns></returns>
+        public BinanceApiResult<BinanceRecentTrade[]> GetRecentTrades(string symbol, int? limit = null) => GetRecentTradesAsync(symbol, limit).Result;
+
+        /// <summary>
+        /// Gets the recent trades for a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to get recent trades for</param>
+        /// <param name="limit">Result limit</param>
+        /// <returns>List of recent trades</returns>
+        public async Task<BinanceApiResult<BinanceRecentTrade[]>> GetRecentTradesAsync(string symbol, int? limit = null)
+        {
+            if (AutoTimestamp && !timeSynced)
+                await GetServerTimeAsync();
+
+            var parameters = new Dictionary<string, string>() { { "symbol", symbol } };
+            
+            AddOptionalParameter(parameters, "limit", limit?.ToString());
+
+            return await ExecuteRequest<BinanceRecentTrade[]>(GetUrl(RecentTradesEndpoint, Api, PublicVersion, parameters));
+        }
+
+        /// <summary>
+        /// Synchronized version of the <see cref="GetHistoricalTradesAsync"/> method
+        /// </summary>
+        /// <returns></returns>
+        public BinanceApiResult<BinanceRecentTrade[]> GetHistoricalTrades(string symbol, int? limit = null, long? fromId = null) => GetHistoricalTradesAsync(symbol, limit, fromId).Result;
+
+        /// <summary>
+        /// Gets the historical  trades for a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to get recent trades for</param>
+        /// <param name="limit">Result limit</param>
+        /// <returns>List of recent trades</returns>
+        public async Task<BinanceApiResult<BinanceRecentTrade[]>> GetHistoricalTradesAsync(string symbol, int? limit = null, long? fromId = null)
+        {
+            if (AutoTimestamp && !timeSynced)
+                await GetServerTimeAsync();
+
+            var parameters = new Dictionary<string, string>() { { "symbol", symbol } };
+
+            AddOptionalParameter(parameters, "limit", limit?.ToString());
+            AddOptionalParameter(parameters, "fromId", fromId?.ToString());
+
+            return await ExecuteRequest<BinanceRecentTrade[]>(GetUrl(HistoricalTradesEndpoint, Api, PublicVersion, parameters));
+        }
+
+        /// <summary>
         /// Synchronized version of the <see cref="GetKlinesAsync"/> method
         /// </summary>
         /// <returns></returns>
@@ -257,20 +328,66 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="Get24HPricesAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public BinanceApiResult<Binance24HPrice> Get24HPrices(string symbol) => Get24HPricesAsync(symbol).Result;
+        public BinanceApiResult<Binance24HPrice> Get24HPrice(string symbol) => Get24HPriceAsync(symbol).Result;
 
         /// <summary>
         /// Get data regarding the last 24 hours for the provided symbol
         /// </summary>
         /// <param name="symbol">The symbol to get the data for</param>
         /// <returns>Data over the last 24 hours</returns>
-        public async Task<BinanceApiResult<Binance24HPrice>> Get24HPricesAsync(string symbol)
+        public async Task<BinanceApiResult<Binance24HPrice>> Get24HPriceAsync(string symbol)
         {
             if (AutoTimestamp && !timeSynced)
                 await GetServerTimeAsync();
 
-            var parameters = new Dictionary<string, string>() { { "symbol", symbol } };
+            var parameters = new Dictionary<string, string>()
+            {
+                { "symbol", symbol }
+            };
+
             return await ExecuteRequest<Binance24HPrice>(GetUrl(Price24HEndpoint, Api, PublicVersion, parameters));
+        }
+
+        /// <summary>
+        /// Synchronized version of the <see cref="Get24HPricesAsync"/> method
+        /// </summary>
+        /// <returns></returns>
+        public BinanceApiResult<List<Binance24HPrice>> Get24HPricesList() => Get24HPricesListAsync().Result;
+
+        /// <summary>
+        /// Get data regarding the last 24 hours for all symbols
+        /// </summary>
+        /// <returns>List of data over the last 24 hours</returns>
+        public async Task<BinanceApiResult<List<Binance24HPrice>>> Get24HPricesListAsync()
+        {
+            if (AutoTimestamp && !timeSynced)
+                await GetServerTimeAsync();
+
+            return await ExecuteRequest<List<Binance24HPrice>>(GetUrl(Price24HEndpoint, Api, PublicVersion));
+        }
+
+        /// <summary>
+        /// Synchronized version of the <see cref="GetAllPricesAsync"/> method
+        /// </summary>
+        /// <returns></returns>
+        public BinanceApiResult<BinancePrice> GetPrice(string symbol) => GetPriceAsync(symbol).Result;
+
+        /// <summary>
+        /// Gets the price of a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to get the price for</param>
+        /// <returns>Price of symbol</returns>
+        public async Task<BinanceApiResult<BinancePrice>> GetPriceAsync(string symbol)
+        {
+            if (AutoTimestamp && !timeSynced)
+                await GetServerTimeAsync();
+
+            var parameters = new Dictionary<string, string>()
+            {
+                { "symbol", symbol }
+            };
+
+            return await ExecuteRequest<BinancePrice>(GetUrl(AllPricesEndpoint, Api, PublicVersion, parameters));
         }
 
         /// <summary>
@@ -289,6 +406,29 @@ namespace Binance.Net
                 await GetServerTimeAsync();
 
             return await ExecuteRequest<BinancePrice[]>(GetUrl(AllPricesEndpoint, Api, PublicVersion));
+        }
+
+        /// <summary>
+        /// Synchronized version of the <see cref="GetBookPriceAsync"/> method
+        /// </summary>
+        /// <returns></returns>
+        public BinanceApiResult<BinanceBookPrice> GetBookPrice(string symbol) => GetBookPriceAsync(symbol).Result;
+
+        /// <summary>
+        /// Gets the best price/qantity on the order book for a symbol.
+        /// </summary>
+        /// <returns>List of book prices</returns>
+        public async Task<BinanceApiResult<BinanceBookPrice>> GetBookPriceAsync(string symbol)
+        {
+            if (AutoTimestamp && !timeSynced)
+                await GetServerTimeAsync();
+
+            var parameters = new Dictionary<string, string>()
+            {
+                { "symbol", symbol }
+            };
+
+            return await ExecuteRequest<BinanceBookPrice>(GetUrl(BookPricesEndpoint, Api, PublicVersion, parameters));
         }
 
         /// <summary>
@@ -315,15 +455,15 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="GetOpenOrdersAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public BinanceApiResult<BinanceOrder[]> GetOpenOrders(string symbol, int? receiveWindow = null) => GetOpenOrdersAsync(symbol, receiveWindow).Result;
+        public BinanceApiResult<BinanceOrder[]> GetOpenOrders(string symbol = null, int? receiveWindow = null) => GetOpenOrdersAsync(symbol, receiveWindow).Result;
 
         /// <summary>
-        /// Gets a list of open orders for the provided symbol
+        /// Gets a list of open orders
         /// </summary>
         /// <param name="symbol">The symbol to get open orders for</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of open orders</returns>
-        public async Task<BinanceApiResult<BinanceOrder[]>> GetOpenOrdersAsync(string symbol, int? receiveWindow = null)
+        public async Task<BinanceApiResult<BinanceOrder[]>> GetOpenOrdersAsync(string symbol = null, int? receiveWindow = null)
         {
             if (key == null || encryptor == null)
                 return ThrowErrorMessage<BinanceOrder[]>(BinanceErrors.GetError(BinanceErrorKey.NoApiCredentialsProvided));
@@ -333,11 +473,11 @@ namespace Binance.Net
 
             var parameters = new Dictionary<string, string>()
             {
-                { "symbol", symbol },
                 { "timestamp", GetTimestamp() }
             };
 
             AddOptionalParameter(parameters, "recvWindow", receiveWindow?.ToString());
+            AddOptionalParameter(parameters, "symbol", symbol);
 
             return await ExecuteRequest<BinanceOrder[]>(GetUrl(OpenOrdersEndpoint, Api, SignedVersion, parameters), true);
         }
@@ -381,23 +521,43 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="PlaceOrderAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public BinanceApiResult<BinancePlacedOrder> PlaceOrder(string symbol, OrderSide side, OrderType type, TimeInForce timeInForce, decimal quantity, decimal price, string newClientOrderId = null, decimal? stopPrice = null, decimal? icebergQty = null) => PlaceOrderAsync(symbol, side, type, timeInForce, quantity, price, newClientOrderId, stopPrice, icebergQty).Result;
+        public BinanceApiResult<BinancePlacedOrder> PlaceOrder(
+            string symbol,
+            OrderSide side,
+            OrderType type,
+            decimal quantity,
+            string newClientOrderId = null,
+            decimal? price = null,
+            TimeInForce? timeInForce = null,
+            decimal? stopPrice = null,
+            decimal? icebergQty = null,
+            OrderResponseType? orderResponseType = null) => PlaceOrderAsync(symbol, side, type, quantity, newClientOrderId, price, timeInForce, stopPrice, icebergQty, orderResponseType).Result;
 
         /// <summary>
         /// Places a new order
         /// </summary>
         /// <param name="symbol">The symbol the order is for</param>
         /// <param name="side">The order side (buy/sell)</param>
-        /// <param name="type">The order type (limit/market)</param>
-        /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel)</param>
+        /// <param name="type">The order type</param>
+        /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
         /// <param name="quantity">The amount of the symbol</param>
         /// <param name="price">The price to use</param>
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
-        /// <param name="icebergQty">User for iceberg orders</param>
+        /// <param name="icebergQty">Used for iceberg orders</param>
+        /// <param name="orderResponseType">The type of response to receive</param>
         /// <returns>Id's for the placed order</returns>
-        public async Task<BinanceApiResult<BinancePlacedOrder>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, TimeInForce timeInForce, decimal quantity, decimal price, string newClientOrderId = null, decimal? stopPrice = null, decimal? icebergQty = null)
-        {
+        public async Task<BinanceApiResult<BinancePlacedOrder>> PlaceOrderAsync(string symbol,
+            OrderSide side,
+            OrderType type,
+            decimal quantity,
+            string newClientOrderId = null,
+            decimal? price = null,
+            TimeInForce? timeInForce = null,
+            decimal? stopPrice = null,
+            decimal? icebergQty = null,
+            OrderResponseType? orderResponseType = null)
+        { 
             if (key == null || encryptor == null)
                 return ThrowErrorMessage<BinancePlacedOrder>(BinanceErrors.GetError(BinanceErrorKey.NoApiCredentialsProvided));
 
@@ -409,19 +569,20 @@ namespace Binance.Net
                 { "symbol", symbol },
                 { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
                 { "type", JsonConvert.SerializeObject(type, new OrderTypeConverter(false)) },
-                { "timeInForce", JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)) },
                 { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
-                { "price", price.ToString(CultureInfo.InvariantCulture) },
                 { "timestamp", GetTimestamp() }
             };
 
             AddOptionalParameter(parameters, "newClientOrderId", newClientOrderId);
+            AddOptionalParameter(parameters, "price", price?.ToString());
+            AddOptionalParameter(parameters, "timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)));
             AddOptionalParameter(parameters, "stopPrice", stopPrice?.ToString());
             AddOptionalParameter(parameters, "icebergQty", icebergQty?.ToString());
+            AddOptionalParameter(parameters, "newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(timeInForce, new OrderResponseTypeConverter(false)));
 
             return await ExecuteRequest<BinancePlacedOrder>(GetUrl(NewOrderEndpoint, Api, SignedVersion, parameters), true, PostMethod);
         }
-
+        
         /// <summary>
         /// Synchronized version of the <see cref="PlaceTestOrderAsync"/> method
         /// </summary>
@@ -610,18 +771,19 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="WithdrawAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public BinanceApiResult<BinanceWithdrawalPlaced> Withdraw(string asset, string address, decimal amount, string name = null, long? recvWindow = null) => WithdrawAsync(asset, address, amount, name, recvWindow).Result;
+        public BinanceApiResult<BinanceWithdrawalPlaced> Withdraw(string asset, string address, decimal amount, string addressTag = null, string name = null, long? recvWindow = null) => WithdrawAsync(asset, address,amount, addressTag, name, recvWindow).Result;
 
         /// <summary>
         /// Withdraw assets from Binance to an address
         /// </summary>
         /// <param name="asset">The asset to withdraw</param>
         /// <param name="address">The address to send the funds to</param>
+        /// <param name="addressTag">Secondary address identifier for coins like XRP,XMR etc.</param>
         /// <param name="amount">The amount to withdraw</param>
         /// <param name="name">Name for the transaction</param>
         /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Withdrawal confirmation</returns>
-        public async Task<BinanceApiResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, decimal amount, string name = null, long? recvWindow = null)
+        public async Task<BinanceApiResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, decimal amount, string addressTag = null, string name = null, long? recvWindow = null)
         {
             if (key == null || encryptor == null)
                 return ThrowErrorMessage<BinanceWithdrawalPlaced>(BinanceErrors.GetError(BinanceErrorKey.NoApiCredentialsProvided));
@@ -638,6 +800,7 @@ namespace Binance.Net
             };
 
             AddOptionalParameter(parameters, "name", name);
+            AddOptionalParameter(parameters, "addressTag", addressTag);
             AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());    
 
             var result = await ExecuteRequest<BinanceWithdrawalPlaced>(GetUrl(WithdrawEndpoint, WithdrawalApi, WithdrawalVersion, parameters), true, PostMethod);
@@ -684,7 +847,7 @@ namespace Binance.Net
             AddOptionalParameter(parameters, "endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
             AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());
 
-            var result = await ExecuteRequest<BinanceDepositList>(GetUrl(DepositHistoryEndpoint, WithdrawalApi, WithdrawalVersion, parameters), true, PostMethod);
+            var result = await ExecuteRequest<BinanceDepositList>(GetUrl(DepositHistoryEndpoint, WithdrawalApi, WithdrawalVersion, parameters), true, GetMethod);
             if (!result.Success || result.Data == null)
                 return result;
 
@@ -728,7 +891,7 @@ namespace Binance.Net
             AddOptionalParameter(parameters, "endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
             AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());
 
-            var result = await ExecuteRequest<BinanceWithdrawalList>(GetUrl(WithdrawHistoryEndpoint, WithdrawalApi, WithdrawalVersion, parameters), true, PostMethod);
+            var result = await ExecuteRequest<BinanceWithdrawalList>(GetUrl(WithdrawHistoryEndpoint, WithdrawalApi, WithdrawalVersion, parameters), true, GetMethod);
             if (!result.Success || result.Data == null)
                 return result;
 
@@ -739,13 +902,44 @@ namespace Binance.Net
         }
 
         /// <summary>
+        /// Synchronized version of the <see cref="GetDepositAddressAsync"/> method
+        /// </summary>
+        /// <returns></returns>
+        public BinanceApiResult<BinanceDepositAddress> GetDepositAddress(string asset, long? recvWindow = null) => GetDepositAddressAsync(asset, recvWindow).Result;
+
+        /// <summary>
+        /// Gets the deposit address for an asset
+        /// </summary>
+        /// <param name="asset">Asset to get address for</param>
+        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Deposit address</returns>
+        public async Task<BinanceApiResult<BinanceDepositAddress>> GetDepositAddressAsync(string asset, long? recvWindow = null)
+        {
+            if (key == null || encryptor == null)
+                return ThrowErrorMessage<BinanceDepositAddress>(BinanceErrors.GetError(BinanceErrorKey.NoApiCredentialsProvided));
+
+            if (AutoTimestamp && !timeSynced)
+                await GetServerTimeAsync();
+
+            var parameters = new Dictionary<string, string>()
+            {
+                { "asset", asset },
+                { "timestamp", GetTimestamp() }
+            };
+            
+            AddOptionalParameter(parameters, "recvWindow", recvWindow?.ToString());
+                
+            return await ExecuteRequest<BinanceDepositAddress>(GetUrl(DepositAddressEndpoint, WithdrawalApi, WithdrawalVersion, parameters), true, GetMethod);
+        }
+
+        /// <summary>
         /// Synchronized version of the <see cref="StartUserStreamAsync"/> method
         /// </summary>
         /// <returns></returns>
         public BinanceApiResult<BinanceListenKey> StartUserStream() => StartUserStreamAsync().Result;
 
         /// <summary>
-        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToAccountUpdateStream"/> and <see cref="BinanceSocketClient.SubscribeToOrderUpdateStream"/>
+        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToAccountUpdateStream"/> and <see cref="BinanceSocketClient.SubscribeToOrderUpdateStream"/>. The stream will close after 60 minutes unless a keep alive is send.
         /// </summary>
         /// <returns>Listen key</returns>
         public async Task<BinanceApiResult<BinanceListenKey>> StartUserStreamAsync()
@@ -766,7 +960,7 @@ namespace Binance.Net
         public BinanceApiResult<object> KeepAliveUserStream(string listenKey) => KeepAliveUserStreamAsync(listenKey).Result;
 
         /// <summary>
-        /// Sends a keep alive for the current user stream listen key to prevent timeouts
+        /// Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
         /// </summary>
         /// <returns></returns>
         public async Task<BinanceApiResult<object>> KeepAliveUserStreamAsync(string listenKey)
@@ -886,7 +1080,7 @@ namespace Binance.Net
                     }
                 }
 
-                if (currentTry < MaxRetries)
+                if (currentTry < MaxRetries && response.StatusCode != HttpStatusCode.GatewayTimeout) // Statuscode 504 is unknown status. Could be successful.
                     return await ExecuteRequest<T>(uri, signed, method, ++currentTry);
                 
                 return ThrowErrorMessage<T>(BinanceErrors.GetError(BinanceErrorKey.ErrorWeb), $"Status: {response.StatusCode}-{response.StatusDescription}, Message: {we.Message}");

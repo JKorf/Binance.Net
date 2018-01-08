@@ -1,6 +1,7 @@
 ﻿using Binance.Net.Converters;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
 namespace Binance.Net.Objects
 {
@@ -26,5 +27,19 @@ namespace Binance.Net.Objects
         /// </summary>
         [JsonConverter(typeof(TimestampConverter))]
         public DateTime TransactTime { get; set; }
+        public decimal Price { get; set; }
+        [JsonProperty("origQty")]
+        public decimal OriginalQuantity { get; set; }
+        [JsonProperty("executedQty")]
+        public decimal ExecutedQuantity { get; set; }
+        [JsonConverter(typeof(OrderStatusConverter))]
+        public OrderStatus Status { get; set; }
+        [JsonConverter(typeof(TimeInForceConverter))]
+        public TimeInForce TimeInForce { get; set; }
+        [JsonConverter(typeof(OrderTypeConverter))]
+        public OrderType Type { get; set; }
+        [JsonConverter(typeof(OrderSideConverter))]
+        public OrderSide Side { get; set; }
+        public List<BinanceOrderTrade> Fills { get; set; }
     }
 }

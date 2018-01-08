@@ -24,6 +24,7 @@ namespace Binance.Net.Converters
         {
             { TimeInForce.GoodTillCancel, "GTC" },
             { TimeInForce.ImmediateOrCancel, "IOC" },
+            { TimeInForce.FillOrKill, "FOK" },
         };
 
         public override bool CanConvert(Type objectType)

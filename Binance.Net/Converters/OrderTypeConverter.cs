@@ -24,6 +24,11 @@ namespace Binance.Net.Converters
         {
             { OrderType.Limit, "LIMIT" },
             { OrderType.Market, "MARKET" },
+            { OrderType.LimitMaker, "LIMIT_MAKER" },
+            { OrderType.StopLoss, "STOP_LOSS" },
+            { OrderType.StopLossLimit, "STOP_LOSS_LIMIT" },
+            { OrderType.TakeProfit, "TAKE_PROFIT" },
+            { OrderType.TakeProfitLimit, "TAKE_PROFIT_LIMIT" }
         };
 
         public override bool CanConvert(Type objectType)
@@ -33,7 +38,20 @@ namespace Binance.Net.Converters
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            return values.Single(v => v.Value == (string)reader.Value).Key;
+            if(reader.TokenType == JsonToken.StartArray)
+            {
+                var result = new List<OrderType>();
+                while (reader.Read())
+                {
+                    if (reader.TokenType == JsonToken.String)
+                        result.Add(values.Single(v => v.Value == (string)reader.Value).Key);
+                    if (reader.TokenType == JsonToken.EndArray)
+                        break;
+                }
+                return result;
+            }
+            else
+                return values.Single(v => v.Value == (string)reader.Value).Key;
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

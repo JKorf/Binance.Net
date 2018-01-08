@@ -40,6 +40,17 @@
         Expired
     }
 
+    public enum SymbolStatus
+    {
+        PreTrading,
+        Trading,
+        PostTrading,
+        EndOfDay,
+        Halt,
+        AuctionMatch,
+        Break
+    }
+
     /// <summary>
     /// The type of an order
     /// </summary>
@@ -52,7 +63,12 @@
         /// <summary>
         /// Market order will be placed without a price. The order will be executed at the best price available at that time in the order book.
         /// </summary>
-        Market
+        Market,
+        StopLoss,
+        StopLossLimit,
+        TakeProfit,
+        TakeProfitLimit,
+        LimitMaker
     }
 
     /// <summary>
@@ -76,7 +92,8 @@
         /// <summary>
         /// ImmediateOrCancel orders have to be filled upon placing or will be automatically canceled
         /// </summary>
-        ImmediateOrCancel
+        ImmediateOrCancel,
+        FillOrKill
     }
 
     /// <summary>
@@ -173,5 +190,32 @@
     {
         Pending,
         Success
+    }
+
+    public enum RateLimitInterval
+    {
+        Second,
+        Minute,
+        Day
+    }
+
+    public enum RateLimitType
+    {
+        Requests,
+        Orders
+    }
+
+    public enum SymbolFilterType
+    {
+        PriceFilter,
+        LotSize,
+        MinNotional
+    }
+
+    public enum OrderResponseType
+    {
+        Acknowledge,
+        Result,
+        Full
     }
 }
