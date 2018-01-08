@@ -34,6 +34,7 @@ namespace Binance.Net
         private const string TradesStreamEndpoint = "@aggTrade";
         private const string SymbolTickerStreamEndpoint = "@ticker";
         private const string AllSymbolTickerStreamEndpoint = "!ticker@arr";
+        private const string PartialBookDepthStreamEndpoint = "@depth";
 
         private const string AccountUpdateEvent = "outboundAccountInfo";
         private const string ExecutionUpdateEvent = "executionReport";
@@ -161,6 +162,24 @@ namespace Binance.Net
             socketResult.Data.Socket.OnMessage += (o, s) => onMessage(JsonConvert.DeserializeObject<BinanceStreamTick[]>(s.Message));
 
             log.Write(LogVerbosity.Debug, $"Started all symbol ticker stream");
+            return new BinanceApiResult<int>() { Data = socketResult.Data.StreamId, Success = true };
+        }
+
+        /// <summary>
+        /// Subscribes to ticker updates stream for all symbols
+        /// </summary>
+        /// <param name="onMessage">The event handler for the received data</param>
+        /// <returns>A stream id. This stream id can be used to close this specific stream using the <see cref="UnsubscribeFromStream(int)"/> method</returns>
+        public BinanceApiResult<int> SubscribeToPartialBookDepthStream(string symbol, int levels, Action<BinanceOrderBook> onMessage)
+        {
+            symbol = symbol.ToLower();
+            var socketResult = CreateSocket(BaseWebsocketAddress + symbol + PartialBookDepthStreamEndpoint + levels.ToString());
+            if (!socketResult.Success)
+                return new BinanceApiResult<int>() { Error = socketResult.Error };
+
+            socketResult.Data.Socket.OnMessage += (o, s) => onMessage(JsonConvert.DeserializeObject<BinanceOrderBook>(s.Message));
+
+            log.Write(LogVerbosity.Debug, $"Started partial book depth stream");
             return new BinanceApiResult<int>() { Data = socketResult.Data.StreamId, Success = true };
         }
 

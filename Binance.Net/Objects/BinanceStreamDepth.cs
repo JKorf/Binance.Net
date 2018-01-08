@@ -16,8 +16,13 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The id of this update, can be synced with <see cref="BinanceClient.GetOrderBook"/> to update the orderbook
         /// </summary>
+        [JsonProperty("U")]
+        public long FirstUpdateId { get; set; }
+        /// <summary>
+        /// List of updated bids. If quantity is 0 the entry can be removed
+        /// </summary>
         [JsonProperty("u")]
-        public long UpdateId { get; set; }
+        public long LastUpdateId { get; set; }
         /// <summary>
         /// List of updated bids. If quantity is 0 the entry can be removed
         /// </summary>
