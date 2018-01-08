@@ -114,5 +114,8 @@ namespace Binance.Net.Objects
         /// </summary>
         [JsonProperty("m")]
         public bool BuyerIsMaker { get; set; }
+
+        [JsonProperty("O")]
+        public object O { get; set; }
     }
 }
