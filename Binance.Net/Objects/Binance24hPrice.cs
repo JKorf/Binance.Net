@@ -10,6 +10,10 @@ namespace Binance.Net.Objects
     public class Binance24HPrice
     {
         /// <summary>
+        /// The symbol the price is for
+        /// </summary>
+        public string Symbol { get; set; }
+        /// <summary>
         /// The actuals price change in the last 24 hours
         /// </summary>
         public decimal PriceChange { get; set; }
