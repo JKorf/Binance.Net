@@ -28,8 +28,8 @@ namespace Binance.Net.ClientWPF.ViewModels
             }
         }
 
-        private double price;
-        public double Price
+        private decimal price;
+        public decimal Price
         {
             get { return price; }
             set
@@ -39,8 +39,8 @@ namespace Binance.Net.ClientWPF.ViewModels
             }
         }
 
-        private double originalQuantity;
-        public double OriginalQuantity
+        private decimal originalQuantity;
+        public decimal OriginalQuantity
         {
             get { return originalQuantity; }
             set
@@ -50,8 +50,8 @@ namespace Binance.Net.ClientWPF.ViewModels
             }
         }
 
-        private double executedQuantity;
-        public double ExecutedQuantity
+        private decimal executedQuantity;
+        public decimal ExecutedQuantity
         {
             get { return executedQuantity; }
             set
