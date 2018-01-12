@@ -68,7 +68,6 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The first trade ID in the last 24 hours
         /// </summary>
-        [JsonProperty("fristId")] // ?
         public long FirstId { get; set; }
         /// <summary>
         /// The last trade ID in the last 24 hours
