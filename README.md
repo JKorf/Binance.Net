@@ -223,6 +223,9 @@ BinanceDefaults.SetDefaultLogVerbosity(LogVerbosity.Debug);
 
 
 ## Release notes
+* Version 2.2.1 - 12 jan 2018
+	* Fix for parse error in StreamOrderUpdate
+
 * Version 2.2.0 - 08 jan 2018
 	* Updated according to latest documentation, adding various endpoints
 
