@@ -223,6 +223,11 @@ BinanceDefaults.SetDefaultLogVerbosity(LogVerbosity.Debug);
 
 
 ## Release notes
+* Version 2.2.2 - 15 jan 2018
+	* Fix in PlaceOrder using InvariantCulture
+	* Fix for FirstId property in 24h price
+	* Added symbol property to 24h price
+
 * Version 2.2.1 - 12 jan 2018
 	* Fix for parse error in StreamOrderUpdate
 
