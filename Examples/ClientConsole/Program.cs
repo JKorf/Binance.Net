@@ -22,16 +22,16 @@ namespace BinanceApi.TestConsole
                 var orderBook = client.GetOrderBook("BNBBTC", 10);
                 var aggTrades = client.GetAggregatedTrades("BNBBTC", startTime: DateTime.UtcNow.AddMinutes(-2), endTime: DateTime.UtcNow, limit: 10);
                 var klines = client.GetKlines("BNBBTC", KlineInterval.OneHour, startTime: DateTime.UtcNow.AddHours(-10), endTime: DateTime.UtcNow, limit: 10);
-                var prices24h = client.Get24HPrices("BNBBTC");
+                var prices24h = client.Get24HPrice("BNBBTC");
                 var allPrices = client.GetAllPrices();
                 var allBookPrices = client.GetAllBookPrices();
 
                 // Private
                 var openOrders = client.GetOpenOrders("BNBBTC");
                 var allOrders = client.GetAllOrders("BNBBTC");
-                var testOrderResult = client.PlaceTestOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, TimeInForce.GoodTillCancel, 1, 1);
+                var testOrderResult = client.PlaceTestOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, 1, price: 1, timeInForce: TimeInForce.GoodTillCancel);
                 var queryOrder = client.QueryOrder("BNBBTC", allOrders.Data[0].OrderId);
-                var orderResult = client.PlaceOrder("BNBBTC", OrderSide.Sell, OrderType.Limit, TimeInForce.GoodTillCancel, 10, 0.0002);
+                var orderResult = client.PlaceOrder("BNBBTC", OrderSide.Sell, OrderType.Limit, 10, price: 0.0002m, timeInForce: TimeInForce.GoodTillCancel);
                 var cancelResult = client.CancelOrder("BNBBTC", orderResult.Data.OrderId);
                 var accountInfo = client.GetAccountInfo();
                 var myTrades = client.GetMyTrades("BNBBTC");

@@ -12,7 +12,7 @@ using Binance.Net.ClientWPF.MessageBox;
 
 namespace Binance.Net.ClientWPF
 {
-    public class MainViewModel: ObservableObject
+    public class MainViewModel : ObservableObject
     {
         private ObservableCollection<BinanceSymbolViewModel> allPrices;
         public ObservableCollection<BinanceSymbolViewModel> AllPrices
@@ -74,7 +74,7 @@ namespace Binance.Net.ClientWPF
                 RaisePropertyChangedEvent("ApiKey");
 
                 if (value != null && apiSecret != null)
-                    BinanceDefaults.SetDefaultApiCredentials(value, apiSecret);         
+                    BinanceDefaults.SetDefaultApiCredentials(value, apiSecret);
             }
         }
 
@@ -116,7 +116,7 @@ namespace Binance.Net.ClientWPF
             SettingsCommand = new DelegateCommand(Settings);
             CloseSettingsCommand = new DelegateCommand(CloseSettings);
 
-            Task.Run(() => GetAllSymbols());            
+            Task.Run(() => GetAllSymbols());
         }
 
         public void Cancel(object o)
@@ -141,7 +141,7 @@ namespace Binance.Net.ClientWPF
             {
                 using (var client = new BinanceClient())
                 {
-                    var result = client.PlaceOrder(SelectedSymbol.Symbol, OrderSide.Buy, OrderType.Limit, TimeInForce.GoodTillCancel, SelectedSymbol.TradeAmount, SelectedSymbol.TradePrice);
+                    var result = client.PlaceOrder(SelectedSymbol.Symbol, OrderSide.Buy, OrderType.Limit, SelectedSymbol.TradeAmount, price: SelectedSymbol.TradePrice, timeInForce: TimeInForce.GoodTillCancel);
                     if (result.Success)
                         messageBoxService.ShowMessage("Order placed!", "Sucess", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
                     else
@@ -156,7 +156,7 @@ namespace Binance.Net.ClientWPF
             {
                 using (var client = new BinanceClient())
                 {
-                    var result = client.PlaceOrder(SelectedSymbol.Symbol, OrderSide.Sell, OrderType.Limit, TimeInForce.GoodTillCancel, SelectedSymbol.TradeAmount, SelectedSymbol.TradePrice);
+                    var result = client.PlaceOrder(SelectedSymbol.Symbol, OrderSide.Sell, OrderType.Limit, SelectedSymbol.TradeAmount, price: SelectedSymbol.TradePrice, timeInForce: TimeInForce.GoodTillCancel);
                     if (result.Success)
                         messageBoxService.ShowMessage("Order placed!", "Sucess", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
                     else
@@ -208,7 +208,7 @@ namespace Binance.Net.ClientWPF
         {
             using (var client = new BinanceClient())
             {
-                var result = client.Get24HPrices(SelectedSymbol.Symbol);
+                var result = client.Get24HPrice(SelectedSymbol.Symbol);
                 if (result.Success)
                 {
                     SelectedSymbol.HighPrice = result.Data.HighPrice;
@@ -256,7 +256,7 @@ namespace Binance.Net.ClientWPF
                 using (var client = new BinanceClient())
                 {
                     var startOkay = client.StartUserStream();
-                    if(!startOkay.Success)
+                    if (!startOkay.Success)
                         messageBoxService.ShowMessage($"Error requesting data: {startOkay.Error.Message}", "error", MessageBoxButton.OK, MessageBoxImage.Error);
 
                     socketClient.SubscribeToAccountUpdateStream(startOkay.Data.ListenKey, OnAccountUpdate);

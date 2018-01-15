@@ -90,7 +90,7 @@ using(var client = new BinanceClient())
 	// Gets klines data for the specified symbol
 	var klines = client.GetKlines("BNBBTC", KlineInterval.OneHour, startTime: DateTime.UtcNow.AddHours(-10), endTime: DateTime.UtcNow, limit: 10);
 	// Gets prices and changes in the last 24 hours for specified symbol
-	var prices24h = client.Get24HPrices("BNBBTC");
+	var prices24h = client.Get24HPrice("BNBBTC");
 	// Gets all symbols and latest prices
 	var allPrices = client.GetAllPrices();
 	// Gets book prices (asks/bids) for all symbols
@@ -107,11 +107,11 @@ using(var client = new BinanceClient())
 	// Gets all orders for specified symbol
 	var allOrders = client.GetAllOrders("BNBBTC");
 	// Places a test order to test the API functionality. No order will actually be placed
-	var testOrderResult = client.PlaceTestOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, TimeInForce.GoodTillCancel, 1, 1);
+	var testOrderResult = client.PlaceTestOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, 1, price: 1, timeInForce: TimeInForce.GoodTillCancel);
 	// Request information about an order
 	var queryOrder = client.QueryOrder("BNBBTC", allOrders.Data[0].OrderId);
-	// Places an order
-	var orderResult = client.PlaceOrder("BNBBTC", OrderSide.Sell, OrderType.Limit, TimeInForce.GoodTillCancel, 10, 0.0002);
+	// Places an order. `price` is optional parameter, if not set, order price will use market value
+	var orderResult = client.PlaceOrder("BNBBTC", OrderSide.Sell, OrderType.Limit, 10, price: 0.0002m, timeInForce: TimeInForce.GoodTillCancel);
 	// Cancels an existing order
 	var cancelResult = client.CancelOrder("BNBBTC", orderResult.Data.OrderId);
 	// Gets information about your account
