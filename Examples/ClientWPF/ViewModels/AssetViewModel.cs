@@ -15,8 +15,8 @@ namespace Binance.Net.ClientWPF.ViewModels
             }
         }
 
-        private double free;
-        public double Free
+        private decimal free;
+        public decimal Free
         {
             get { return free; }
             set
@@ -26,8 +26,8 @@ namespace Binance.Net.ClientWPF.ViewModels
             }
         }
 
-        private double locked;
-        public double Locked
+        private decimal locked;
+        public decimal Locked
         {
             get { return locked; }
             set
