@@ -184,7 +184,7 @@ namespace Binance.Net
         public async Task<BinanceApiResult<BinanceExchangeInfo>> GetExchangeInfoAsync()
         {
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync();
+                await GetServerTimeAsync().ConfigureAwait(false);
 
             return await ExecuteRequest<BinanceExchangeInfo>(GetUrl(ExchangeInfoEndpoint, Api, PublicVersion)).ConfigureAwait(false);
         }
@@ -204,7 +204,7 @@ namespace Binance.Net
         public async Task<BinanceApiResult<BinanceOrderBook>> GetOrderBookAsync(string symbol, int? limit = null)
         {
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync();
+                await GetServerTimeAsync().ConfigureAwait(false);
 
             var parameters = new Dictionary<string, string>() { { "symbol", symbol } };
 
@@ -231,7 +231,7 @@ namespace Binance.Net
         public async Task<BinanceApiResult<BinanceAggregatedTrades[]>> GetAggregatedTradesAsync(string symbol, int? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null)
         {
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync();
+                await GetServerTimeAsync().ConfigureAwait(false);
 
             var parameters = new Dictionary<string, string>() { { "symbol", symbol } };
 
@@ -258,7 +258,7 @@ namespace Binance.Net
         public async Task<BinanceApiResult<BinanceRecentTrade[]>> GetRecentTradesAsync(string symbol, int? limit = null)
         {
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync();
+                await GetServerTimeAsync().ConfigureAwait(false);
 
             var parameters = new Dictionary<string, string>() { { "symbol", symbol } };
             
@@ -282,7 +282,7 @@ namespace Binance.Net
         public async Task<BinanceApiResult<BinanceRecentTrade[]>> GetHistoricalTradesAsync(string symbol, int? limit = null, long? fromId = null)
         {
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync();
+                await GetServerTimeAsync().ConfigureAwait(false);
 
             var parameters = new Dictionary<string, string>() { { "symbol", symbol } };
 
@@ -310,7 +310,7 @@ namespace Binance.Net
         public async Task<BinanceApiResult<BinanceKline[]>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null)
         {
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync();
+                await GetServerTimeAsync().ConfigureAwait(false);
 
             var parameters = new Dictionary<string, string>() {
                 { "symbol", symbol },
@@ -338,7 +338,7 @@ namespace Binance.Net
         public async Task<BinanceApiResult<Binance24HPrice>> Get24HPriceAsync(string symbol)
         {
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync();
+                await GetServerTimeAsync().ConfigureAwait(false);
 
             var parameters = new Dictionary<string, string>()
             {
@@ -361,7 +361,7 @@ namespace Binance.Net
         public async Task<BinanceApiResult<List<Binance24HPrice>>> Get24HPricesListAsync()
         {
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync();
+                await GetServerTimeAsync().ConfigureAwait(false);
 
             return await ExecuteRequest<List<Binance24HPrice>>(GetUrl(Price24HEndpoint, Api, PublicVersion)).ConfigureAwait(false);
         }
@@ -380,7 +380,7 @@ namespace Binance.Net
         public async Task<BinanceApiResult<BinancePrice>> GetPriceAsync(string symbol)
         {
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync();
+                await GetServerTimeAsync().ConfigureAwait(false);
 
             var parameters = new Dictionary<string, string>()
             {
@@ -403,7 +403,7 @@ namespace Binance.Net
         public async Task<BinanceApiResult<BinancePrice[]>> GetAllPricesAsync()
         {
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync();
+                await GetServerTimeAsync().ConfigureAwait(false);
 
             return await ExecuteRequest<BinancePrice[]>(GetUrl(AllPricesEndpoint, Api, PublicVersion)).ConfigureAwait(false);
         }
@@ -421,7 +421,7 @@ namespace Binance.Net
         public async Task<BinanceApiResult<BinanceBookPrice>> GetBookPriceAsync(string symbol)
         {
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync();
+                await GetServerTimeAsync().ConfigureAwait(false);
 
             var parameters = new Dictionary<string, string>()
             {
@@ -444,7 +444,7 @@ namespace Binance.Net
         public async Task<BinanceApiResult<BinanceBookPrice[]>> GetAllBookPricesAsync()
         {
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync();
+                await GetServerTimeAsync().ConfigureAwait(false);
 
             return await ExecuteRequest<BinanceBookPrice[]>(GetUrl(BookPricesEndpoint, Api, PublicVersion)).ConfigureAwait(false);
         }
@@ -469,7 +469,7 @@ namespace Binance.Net
                 return ThrowErrorMessage<BinanceOrder[]>(BinanceErrors.GetError(BinanceErrorKey.NoApiCredentialsProvided));
 
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync();
+                await GetServerTimeAsync().ConfigureAwait(false);
 
             var parameters = new Dictionary<string, string>()
             {
@@ -502,7 +502,7 @@ namespace Binance.Net
                 return ThrowErrorMessage<BinanceOrder[]>(BinanceErrors.GetError(BinanceErrorKey.NoApiCredentialsProvided));
 
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync();
+                await GetServerTimeAsync().ConfigureAwait(false);
 
             var parameters = new Dictionary<string, string>()
             {
@@ -562,7 +562,7 @@ namespace Binance.Net
                 return ThrowErrorMessage<BinancePlacedOrder>(BinanceErrors.GetError(BinanceErrorKey.NoApiCredentialsProvided));
 
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync();
+                await GetServerTimeAsync().ConfigureAwait(false);
 
             var parameters = new Dictionary<string, string>()
             {
@@ -626,7 +626,7 @@ namespace Binance.Net
                 return ThrowErrorMessage<BinancePlacedOrder>(BinanceErrors.GetError(BinanceErrorKey.NoApiCredentialsProvided));
 
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync();
+                await GetServerTimeAsync().ConfigureAwait(false);
 
             var parameters = new Dictionary<string, string>()
             {
@@ -671,7 +671,7 @@ namespace Binance.Net
                 return ThrowErrorMessage<BinanceOrder>(BinanceErrors.GetError(BinanceErrorKey.MissingRequiredParameter), "Either orderId or origClientOrderId should be provided");
 
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync();
+                await GetServerTimeAsync().ConfigureAwait(false);
 
             var parameters = new Dictionary<string, string>()
             {
@@ -707,7 +707,7 @@ namespace Binance.Net
                 return ThrowErrorMessage<BinanceCanceledOrder>(BinanceErrors.GetError(BinanceErrorKey.NoApiCredentialsProvided));
 
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync(); 
+                await GetServerTimeAsync().ConfigureAwait(false); 
 
             var parameters = new Dictionary<string, string>()
             {
@@ -740,7 +740,7 @@ namespace Binance.Net
                 return ThrowErrorMessage<BinanceAccountInfo>(BinanceErrors.GetError(BinanceErrorKey.NoApiCredentialsProvided));
 
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync();
+                await GetServerTimeAsync().ConfigureAwait(false);
 
             var parameters = new Dictionary<string, string>()
             {
@@ -772,7 +772,7 @@ namespace Binance.Net
                 return ThrowErrorMessage<BinanceTrade[]>(BinanceErrors.GetError(BinanceErrorKey.NoApiCredentialsProvided));
 
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync();
+                await GetServerTimeAsync().ConfigureAwait(false);
 
             var parameters = new Dictionary<string, string>()
             {
@@ -809,7 +809,7 @@ namespace Binance.Net
                 return ThrowErrorMessage<BinanceWithdrawalPlaced>(BinanceErrors.GetError(BinanceErrorKey.NoApiCredentialsProvided));
 
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync();
+                await GetServerTimeAsync().ConfigureAwait(false);
 
             var parameters = new Dictionary<string, string>()
             {
@@ -854,7 +854,7 @@ namespace Binance.Net
                 return ThrowErrorMessage<BinanceDepositList>(BinanceErrors.GetError(BinanceErrorKey.NoApiCredentialsProvided));
 
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync();
+                await GetServerTimeAsync().ConfigureAwait(false);
 
             var parameters = new Dictionary<string, string>()
             {
@@ -898,7 +898,7 @@ namespace Binance.Net
                 return ThrowErrorMessage<BinanceWithdrawalList>(BinanceErrors.GetError(BinanceErrorKey.NoApiCredentialsProvided));
 
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync();
+                await GetServerTimeAsync().ConfigureAwait(false);
 
             var parameters = new Dictionary<string, string>()
             {
@@ -939,7 +939,7 @@ namespace Binance.Net
                 return ThrowErrorMessage<BinanceDepositAddress>(BinanceErrors.GetError(BinanceErrorKey.NoApiCredentialsProvided));
 
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync();
+                await GetServerTimeAsync().ConfigureAwait(false);
 
             var parameters = new Dictionary<string, string>()
             {
@@ -968,7 +968,7 @@ namespace Binance.Net
                 return ThrowErrorMessage<BinanceListenKey>(BinanceErrors.GetError(BinanceErrorKey.NoApiCredentialsProvided));
 
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync();
+                await GetServerTimeAsync().ConfigureAwait(false);
             
             return await ExecuteRequest<BinanceListenKey>(GetUrl(GetListenKeyEndpoint, Api, UserDataStreamVersion), false, PostMethod).ConfigureAwait(false);
         }
@@ -989,7 +989,7 @@ namespace Binance.Net
                 return ThrowErrorMessage<object>(BinanceErrors.GetError(BinanceErrorKey.NoApiCredentialsProvided));
 
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync();
+                await GetServerTimeAsync().ConfigureAwait(false);
 
             var parameters = new Dictionary<string, string>()
             {
@@ -1015,7 +1015,7 @@ namespace Binance.Net
                 return ThrowErrorMessage<object>(BinanceErrors.GetError(BinanceErrorKey.NoApiCredentialsProvided));
             
             if (AutoTimestamp && !timeSynced)
-                await GetServerTimeAsync();
+                await GetServerTimeAsync().ConfigureAwait(false);
 
             var parameters = new Dictionary<string, string>()
             {
@@ -1070,7 +1070,7 @@ namespace Binance.Net
                 var response = request.GetResponse();
                 using (var reader = new StreamReader(response.GetResponseStream()))
                 {
-                    returnedData = await reader.ReadToEndAsync();
+                    returnedData = await reader.ReadToEndAsync().ConfigureAwait(false);
                     var result = JsonConvert.DeserializeObject<T>(returnedData);
                     apiResult.Success = true;
                     apiResult.Data = result;
@@ -1086,7 +1086,7 @@ namespace Binance.Net
                     {
                         using (var reader = new StreamReader(response.GetResponseStream()))
                         {
-                            var error = JsonConvert.DeserializeObject<BinanceError>(await reader.ReadToEndAsync());
+                            var error = JsonConvert.DeserializeObject<BinanceError>(await reader.ReadToEndAsync().ConfigureAwait(false));
                             apiResult.Success = false;
                             apiResult.Error = error;
                             log.Write(LogVerbosity.Warning,
@@ -1101,7 +1101,7 @@ namespace Binance.Net
                 }
 
                 if (currentTry < MaxRetries && response.StatusCode != HttpStatusCode.GatewayTimeout) // Statuscode 504 is unknown status. Could be successful.
-                    return await ExecuteRequest<T>(uri, signed, method, ++currentTry);
+                    return await ExecuteRequest<T>(uri, signed, method, ++currentTry).ConfigureAwait(false);
                 
                 return ThrowErrorMessage<T>(BinanceErrors.GetError(BinanceErrorKey.ErrorWeb), $"Status: {response.StatusCode}-{response.StatusDescription}, Message: {we.Message}");
             }
