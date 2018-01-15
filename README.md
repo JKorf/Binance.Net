@@ -223,6 +223,9 @@ BinanceDefaults.SetDefaultLogVerbosity(LogVerbosity.Debug);
 
 
 ## Release notes
+* Version 2.2.3 - 15 jan 2018
+	* Fix for calls freezing when made from UI thread
+
 * Version 2.2.2 - 15 jan 2018
 	* Fix in PlaceOrder using InvariantCulture
 	* Fix for FirstId property in 24h price

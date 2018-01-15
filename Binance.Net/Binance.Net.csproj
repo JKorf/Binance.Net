@@ -5,8 +5,8 @@
   </PropertyGroup>
   
   <PropertyGroup>
-    <Version>2.2.2</Version>
-    <FileVersion>2.2.2</FileVersion>
+    <Version>2.2.3</Version>
+    <FileVersion>2.2.3</FileVersion>
     <Authors>JKorf</Authors>
     <Description>Binance .Net API wrapper</Description>
     <Copyright></Copyright>
@@ -15,7 +15,7 @@
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
 	<Authors>JKorf</Authors>
-    <PackageVersion>2.2.2</PackageVersion>
+    <PackageVersion>2.2.3</PackageVersion>
 	<Description>Binance .Net API wrapper</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance Binance.Net CryptoCurrency Exchange API wrapper</PackageTags>
@@ -24,10 +24,8 @@
 	<PackageLicenseUrl>https://github.com/JKorf/Binance.Net/blob/master/LICENSE</PackageLicenseUrl>
 	<NeutralLanguage>en</NeutralLanguage>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	<PackageReleaseNotes>2.2.2 - 
-	* Fix in PlaceOrder using InvariantCulture
-	* Fix for FirstId property in 24h price
-	* Added symbol property to 24h price</PackageReleaseNotes>
+	<PackageReleaseNotes>2.2.3 - 
+	* Fix for calls freezing from UI thread</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
