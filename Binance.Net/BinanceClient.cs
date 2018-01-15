@@ -166,7 +166,7 @@ namespace Binance.Net
                 // Calculate time offset between local and server by taking the elapsed time request time / 2 (round trip)
                 timeOffset = ((result.Data.ServerTime - localTime).TotalMilliseconds) - sw.ElapsedMilliseconds / 2;
                 timeSynced = true;
-                log.Write(LogVerbosity.Debug, $"Time offset set to {timeOffset}");
+                log.Write(LogVerbosity.Debug, $"Time offset set to {timeOffset}ms");
                 return new BinanceApiResult<DateTime>() { Success = result.Success, Data = result.Data.ServerTime, Error = result.Error};
             }
         }
@@ -574,10 +574,10 @@ namespace Binance.Net
             };
 
             AddOptionalParameter(parameters, "newClientOrderId", newClientOrderId);
-            AddOptionalParameter(parameters, "price", price?.ToString());
+            AddOptionalParameter(parameters, "price", price?.ToString(CultureInfo.InvariantCulture));
             AddOptionalParameter(parameters, "timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)));
-            AddOptionalParameter(parameters, "stopPrice", stopPrice?.ToString());
-            AddOptionalParameter(parameters, "icebergQty", icebergQty?.ToString());
+            AddOptionalParameter(parameters, "stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
+            AddOptionalParameter(parameters, "icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
             AddOptionalParameter(parameters, "newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
 
             return await ExecuteRequest<BinancePlacedOrder>(GetUrl(NewOrderEndpoint, Api, SignedVersion, parameters), true, PostMethod).ConfigureAwait(false);
@@ -638,10 +638,10 @@ namespace Binance.Net
             };
 
             AddOptionalParameter(parameters, "newClientOrderId", newClientOrderId);
-            AddOptionalParameter(parameters, "price", price?.ToString());
+            AddOptionalParameter(parameters, "price", price?.ToString(CultureInfo.InvariantCulture));
             AddOptionalParameter(parameters, "timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)));
-            AddOptionalParameter(parameters, "stopPrice", stopPrice?.ToString());
-            AddOptionalParameter(parameters, "icebergQty", icebergQty?.ToString());
+            AddOptionalParameter(parameters, "stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
+            AddOptionalParameter(parameters, "icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
             AddOptionalParameter(parameters, "newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
 
 
