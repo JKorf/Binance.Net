@@ -1,49 +1,54 @@
 ﻿using Binance.Net.Objects;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Binance.Net.Converters
 {
     public class SymbolFilterConverter : JsonConverter
     {
-        private readonly bool quotes;
-
-        public SymbolFilterConverter()
-        {
-            quotes = true;
-        }
-
-        public SymbolFilterConverter(bool useQuotes)
-        {
-            quotes = useQuotes;
-        }
-
-        private readonly Dictionary<SymbolFilterType, string> values = new Dictionary<SymbolFilterType, string>()
-        {
-            { SymbolFilterType.LotSize, "LOT_SIZE" },
-            { SymbolFilterType.MinNotional, "MIN_NOTIONAL" },
-            { SymbolFilterType.PriceFilter, "PRICE_FILTER" },
-        };
-
         public override bool CanConvert(Type objectType)
         {
-            return objectType == typeof(SymbolFilterType);
+            return false;
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            return values.Single(v => v.Value == (string)reader.Value).Key;
+            JObject obj = JObject.Load(reader);
+            SymbolFilterType type = new SymbolFilterTypeConverter(false).ReadString(obj["filterType"].ToString());
+            BinanceSymbolFilter result = null;
+            switch (type)
+            {
+                case SymbolFilterType.LotSize:
+                    result = new BinanceSymbolLotSizeFilter()
+                    {
+                        MaxQuantity = JsonConvert.DeserializeObject<decimal>(obj["maxQty"].ToString()),
+                        MinQuantity = JsonConvert.DeserializeObject<decimal>(obj["minQty"].ToString()),
+                        StepSize = JsonConvert.DeserializeObject<decimal>(obj["stepSize"].ToString())
+                    };
+                    break;
+                case SymbolFilterType.MinNotional:
+                    result = new BinanceSymbolMinNotionalFilter()
+                    {
+                        MinNotional = JsonConvert.DeserializeObject<decimal>(obj["minNotional"].ToString())
+                    };
+                    break;
+                case SymbolFilterType.PriceFilter:
+                    result = new BinanceSymbolPriceFilter()
+                    {
+                        MaxPrice = JsonConvert.DeserializeObject<decimal>(obj["maxPrice"].ToString()),
+                        MinPrice = JsonConvert.DeserializeObject<decimal>(obj["minPrice"].ToString()),
+                        TickSize = JsonConvert.DeserializeObject<decimal>(obj["tickSize"].ToString()),
+                    };
+                    break;
+            }
+            result.FilterType = type;
+            return result;
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            if (quotes)
-                writer.WriteValue(values[(SymbolFilterType)value]);
-            else
-                writer.WriteRawValue(values[(SymbolFilterType)value]);
+            throw new NotImplementedException();
         }
     }
 }
