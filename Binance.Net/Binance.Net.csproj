@@ -5,8 +5,8 @@
   </PropertyGroup>
   
   <PropertyGroup>
-    <Version>2.2.3</Version>
-    <FileVersion>2.2.3</FileVersion>
+    <Version>2.2.4</Version>
+    <FileVersion>2.2.4</FileVersion>
     <Authors>JKorf</Authors>
     <Description>Binance .Net API wrapper</Description>
     <Copyright></Copyright>
@@ -15,7 +15,7 @@
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
 	<Authors>JKorf</Authors>
-    <PackageVersion>2.2.3</PackageVersion>
+    <PackageVersion>2.2.4</PackageVersion>
 	<Description>Binance .Net API wrapper</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance Binance.Net CryptoCurrency Exchange API wrapper</PackageTags>
@@ -24,8 +24,9 @@
 	<PackageLicenseUrl>https://github.com/JKorf/Binance.Net/blob/master/LICENSE</PackageLicenseUrl>
 	<NeutralLanguage>en</NeutralLanguage>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	<PackageReleaseNotes>2.2.3 - 
-	* Fix for calls freezing from UI thread</PackageReleaseNotes>
+	<PackageReleaseNotes>2.2.4 - 
+	* Fix for RateLimit type in GetExchangeInfo
+	* Split the BinanceSymbolFilter in 3 classes</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

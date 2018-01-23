@@ -223,6 +223,10 @@ BinanceDefaults.SetDefaultLogVerbosity(LogVerbosity.Debug);
 
 
 ## Release notes
+* Version 2.2.4 - 23 jan 2018
+	* Fix for RateLimit type in GetExchangeInfo
+	* Split the BinanceSymbolFilter in 3 classes
+
 * Version 2.2.3 - 15 jan 2018
 	* Fix for calls freezing when made from UI thread
 
