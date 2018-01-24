@@ -218,4 +218,11 @@
         Result,
         Full
     }
+
+    public enum TradeRulesBehaviour
+    {
+        None,
+        ThrowError,
+        AutoComply
+    }
 }

@@ -12,6 +12,7 @@ namespace Binance.Net.Errors
                 { BinanceErrorKey.NoApiCredentialsProvided, new BinanceError(5000, "No api credentials provided, can't request private endpoints")},
                 { BinanceErrorKey.NoListenKey, new BinanceError(5001, "Listen key is null or empty. Cannot start stream without listen key. Call the StartUserStream function and try again")},
                 { BinanceErrorKey.MissingRequiredParameter, new BinanceError(5002, "Missing a required parameter.")},
+                { BinanceErrorKey.FailedTradingRules, new BinanceError(5003, "The order does not comply to all trading rules")},
 
                 { BinanceErrorKey.ErrorWeb, new BinanceError(6001, "Server returned a not successful status")},
                 { BinanceErrorKey.CantConnectToServer, new BinanceError(6002, "Can't connect to server")},

@@ -20,9 +20,8 @@ namespace Binance.Net
 
             if (BinanceDefaults.LogWriter != null)
                 SetLogOutput(BinanceDefaults.LogWriter);
-
-            if (BinanceDefaults.LogVerbosity != null)
-                SetLogVerbosity(BinanceDefaults.LogVerbosity.Value);
+            
+            SetLogVerbosity(BinanceDefaults.LogVerbosity);
 
             if (BinanceDefaults.ApiKey != null && BinanceDefaults.ApiSecret != null)
                 SetApiCredentials(BinanceDefaults.ApiKey, BinanceDefaults.ApiSecret);

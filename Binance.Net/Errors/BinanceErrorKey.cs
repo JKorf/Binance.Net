@@ -5,6 +5,7 @@
         NoApiCredentialsProvided,
         NoListenKey,
         MissingRequiredParameter,
+        FailedTradingRules,
 
         ErrorWeb,
 
