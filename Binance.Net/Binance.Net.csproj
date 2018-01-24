@@ -26,6 +26,7 @@
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<PackageReleaseNotes>2.2.5 - 
 	* Added optional automated checking of trading rules when placing an order
+	* Added BinanceHelpers static class containing some basic helper functions
 	* Fix for default logger not writing on a new line
 	* Simplified internal defaults</PackageReleaseNotes>
   </PropertyGroup>

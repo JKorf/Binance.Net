@@ -235,6 +235,7 @@ BinanceDefaults.SetDefaultLogVerbosity(LogVerbosity.Debug);
 ## Release notes
 * Version 2.2.5 - 24 jan 2018
 	* Added optional automated checking of trading rules when placing an order
+	* Added `BinanceHelpers` static class containing some basic helper functions
 	* Fix for default logger not writing on a new line
 	* Simplified internal defaults
 
