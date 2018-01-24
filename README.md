@@ -211,7 +211,17 @@ For some private calls a timestamp has to be send to the Binance server. This ti
 
 While testing I found that my local computer time was offset to the Binance server time, which made it reject all my requests. I added a fix for this in the Binance.Net client which will automatically calibrate the timestamp to the Binance server time. This behaviour is turned off by default and can be turned on using the `client.AutoTimeStamp` property. 
 
+### TradeRulesBehaviour
+The Binance API provides some basic filters to which orders should comply. These include a min/max price and quantity and step sizes. Binance.Net can automatically check these rules when placing an order, before actually sending it to the server. This is managed with the `TradeRulesBehaviour` property on `BinanceClient` (also available in `BinanceDefaults`).
+There are 3 options: 
 
+ * `None`: Binance.Net will not validate the order and send it to the Binance server as is.
+ * `ThrowError`: Binance.Net will check if the order complies with the trade rules. If it does not the order will not be placed and an error is returned.
+ * `AutoComply`: Binance.Net will check if the order complies with the trade rules. If it does not the invalid parameters will be automatically adjusted to the nearest valid value.
+
+Note that if the `TradeRulesBehaviour` is set to `ThrowError` or `AutoComply` Binance.Net will internally do a `GetExchangeInfo` request initialy to request the current rules. After that it will update these rules every 60 minutes with new data by doing a new `GetExchangeInfo` request.
+The interval at which this happens can be controlled by the `TradeRulesUpdateInterval` property (also available in `BinanceDefaults`).
+ 
 ### Logging
 Binance.Net will by default log warning and error messages. To change the verbosity `SetLogVerbosity` can be called on a client. The default log verbosity for all new clients can also be set using the `SetDefaultLogVerbosity` in `BinanceDefaults`.
 
@@ -223,6 +233,11 @@ BinanceDefaults.SetDefaultLogVerbosity(LogVerbosity.Debug);
 
 
 ## Release notes
+* Version 2.2.5 - 24 jan 2018
+	* Added optional automated checking of trading rules when placing an order
+	* Fix for default logger not writing on a new line
+	* Simplified internal defaults
+
 * Version 2.2.4 - 23 jan 2018
 	* Fix for RateLimit type in GetExchangeInfo
 	* Split the BinanceSymbolFilter in 3 classes
