@@ -60,6 +60,10 @@ namespace Binance.Net.Objects
         /// </summary>
         public decimal Volume { get; set; }
         /// <summary>
+        /// The quote asset volume traded in the last 24 hours
+        /// </summary>
+        public decimal QuoteVolume { get; set; }
+        /// <summary>
         /// Time at which this 24 hours opened
         /// </summary>
         [JsonConverter(typeof(TimestampConverter))]
