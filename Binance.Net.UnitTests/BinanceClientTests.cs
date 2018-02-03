@@ -51,6 +51,7 @@ namespace Binance.Net.UnitTests
                 PreviousClosePrice = 2.123,
                 PriceChange = 2.456,
                 PriceChangePercent = 2.789,
+                QuoteVolume = 1.909,
                 Trades = 123,
                 Volume = 3.123,
                 WeightedAveragePrice = 3.456
@@ -132,7 +133,7 @@ namespace Binance.Net.UnitTests
                 {
                     new BinanceBalance()
                     {
-                        Asset = "bnb", 
+                        Asset = "bnb",
                         Free = 0.1,
                         Locked = 0.2
                     },
@@ -161,7 +162,7 @@ namespace Binance.Net.UnitTests
         public void GetAggregatedTrades_Should_RespondWithGetAggregatedTrades()
         {
             // arrange
-            var trades = new []
+            var trades = new[]
             {
                 new BinanceAggregatedTrades()
                 {
@@ -195,7 +196,7 @@ namespace Binance.Net.UnitTests
             // assert
             Assert.IsTrue(result.Success);
             Assert.AreEqual(trades.Length, result.Data.Length);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(trades[0], result.Data[0]));            
+            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(trades[0], result.Data[0]));
             Assert.IsTrue(Compare.PublicInstancePropertiesEqual(trades[1], result.Data[1]));
         }
 
@@ -203,7 +204,7 @@ namespace Binance.Net.UnitTests
         public void GetAllBookPrices_Should_RespondWithAllBookPrices()
         {
             // arrange
-            var prices = new []
+            var prices = new[]
             {
                 new BinanceBookPrice()
                 {
@@ -239,7 +240,7 @@ namespace Binance.Net.UnitTests
         public void GetAllOrders_Should_RespondWithAllOrders()
         {
             // arrange
-            var orders = new []
+            var orders = new[]
             {
                 new BinanceOrder()
                 {
@@ -291,7 +292,7 @@ namespace Binance.Net.UnitTests
         public void GetAllPrices_Should_RespondWithAllPrices()
         {
             // arrange
-            var prices = new []
+            var prices = new[]
             {
                 new BinancePrice()
                 {
@@ -360,7 +361,7 @@ namespace Binance.Net.UnitTests
         public void GetKlines_Should_RespondWithKlines()
         {
             // arrange
-            var klines = new [] 
+            var klines = new[]
             {
                new BinanceKline()
                {
@@ -408,7 +409,7 @@ namespace Binance.Net.UnitTests
         public void GetMyTrades_Should_RespondWithTrades()
         {
             // arrange
-            var trades = new []
+            var trades = new[]
             {
                 new BinanceTrade()
                 {
@@ -452,7 +453,7 @@ namespace Binance.Net.UnitTests
         public void GetOpenOrders_Should_RespondWithOpenOrders()
         {
             // arrange
-            var orders = new []
+            var orders = new[]
             {
                 new BinanceOrder()
                 {
@@ -745,7 +746,7 @@ namespace Binance.Net.UnitTests
             responseStream.Write(expectedBytes, 0, expectedBytes.Length);
             responseStream.Seek(0, SeekOrigin.Begin);
 
-            var response = new Mock<IResponse>();            
+            var response = new Mock<IResponse>();
             response.Setup(c => c.GetResponseStream()).Returns(responseStream);
 
             var request = new Mock<IRequest>();
@@ -766,18 +767,18 @@ namespace Binance.Net.UnitTests
             client.GetAllPrices();
 
             // assert
-            factory.Verify(x => x.Create(It.Is<string>(s => s.Contains("time"))));            
+            factory.Verify(x => x.Create(It.Is<string>(s => s.Contains("time"))));
         }
 
         [TestCase()]
         public void ReceivingBinanceError_Should_ReturnBinanceErrorAndNotSuccess()
         {
             // arrange
-            var client = PrepareExceptionClient(JsonConvert.SerializeObject(new BinanceError(){ Code = 1, Message = "TestMessage"}), "504 error", 504);
+            var client = PrepareExceptionClient(JsonConvert.SerializeObject(new BinanceError() { Code = 1, Message = "TestMessage" }), "504 error", 504);
 
             // act
             var result = client.Ping();
-            
+
             // assert
             Assert.IsFalse(result.Success);
             Assert.IsNotNull(result.Error);
@@ -868,7 +869,7 @@ namespace Binance.Net.UnitTests
             var we = new WebException();
             typeof(WebException).GetField("_message", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).SetValue(we, exceptionMessage);
             typeof(WebException).GetField("m_Response", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).SetValue(we, webresponse);
-            
+
             var response = new Mock<IResponse>();
             response.Setup(c => c.GetResponseStream()).Throws(we);
 
@@ -884,6 +885,6 @@ namespace Binance.Net.UnitTests
             client.RequestFactory = factory.Object;
             return client;
         }
-    }   
+    }
 
 }
