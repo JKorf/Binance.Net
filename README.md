@@ -75,7 +75,7 @@ BinanceDefaults.SetDefaultRetries(3);
 The default amount of retries is 2, setting it to 0 will disable the functionality.
 
 ### Requests
-*Public requests:*
+**Public requests:**
 ```C#
 using(var client = new BinanceClient())
 {
@@ -111,7 +111,8 @@ using(var client = new BinanceClient())
 }
 ```
 
-*Private requests:*
+**Private requests:**
+
 Api credentials have to be provided to use these methods
 ```C#
 using(var client = new BinanceClient())
@@ -152,7 +153,7 @@ using(var client = new BinanceClient())
 ### Websockets
 The Binance.Net socket client provides several socket endpoint to which can be subsribed.
 
-*Public socket endpoints:*
+**Public socket endpoints:**
 ```C#
 using(var client = new BinanceSocketClient())
 {
@@ -183,7 +184,7 @@ using(var client = new BinanceSocketClient())
 }
 ```
 
-*Private socket endpoints:*
+**Private socket endpoints:**
 
 For the private endpoint a user stream has to be started on the Binance server. This can be done using the `StartUserStream()` method in the `BinanceClient`. This command will return a listen key which can then be provided to the private socket subscription:
 ```C#
@@ -201,7 +202,7 @@ using(var client = new BinanceSocketClient())
 }
 ```
 
-*Handling socket events*
+**Handling socket events**
 
 Subscribing to a socket stream returns a BinanceStreamSubscription object. This object can be used to be notified when a socket closes or an error occures:
 ````C#
@@ -221,7 +222,7 @@ sub.Data.Error += (e) =>
 };
 ````
 
-*Unsubscribing from socket endpoints:*
+**Unsubscribing from socket endpoints:**
 
 Sockets streams can be unsubscribed by using the `client.UnsubscribeFromStream` method in combination with the stream subscription received from subscribing:
 ```C#
