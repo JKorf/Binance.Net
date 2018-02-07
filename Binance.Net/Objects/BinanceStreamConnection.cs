@@ -6,6 +6,5 @@ namespace Binance.Net.Objects
     {
         public IWebsocket Socket { get; set; }
         public BinanceStreamSubscription StreamResult { get; set; }
-        public bool UserStream { get; set; }
     }
 }

@@ -26,8 +26,6 @@ namespace Binance.Net
 
         private int lastStreamId;
         private readonly object streamIdLock = new object();
-        private Action<BinanceStreamAccountInfo> accountInfoCallback;
-        private Action<BinanceStreamOrderUpdate> orderUpdateCallback;
         private SslProtocols protocols = SslProtocols.Tls12 | SslProtocols.Tls11 | SslProtocols.Tls;
 
         private const string DepthStreamEndpoint = "@depth";
@@ -190,70 +188,21 @@ namespace Binance.Net
         /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
         /// <param name="onMessage">The event handler for the data received</param>
         /// <returns>bool indicating success</returns>
-        public BinanceApiResult<bool> SubscribeToAccountUpdateStream(string listenKey, Action<BinanceStreamAccountInfo> onMessage)
+        public BinanceApiResult<BinanceStreamSubscription> SubscribeToUserStream(string listenKey, Action<BinanceStreamAccountInfo> onAccountInfoMessage, Action<BinanceStreamOrderUpdate> OnOrderUpdateMessage)
         {
             if (string.IsNullOrEmpty(listenKey))
-                return ThrowErrorMessage<bool>(BinanceErrors.GetError(BinanceErrorKey.NoListenKey));
-
-            accountInfoCallback = onMessage;
-            return CreateUserStream(listenKey);
+                return ThrowErrorMessage<BinanceStreamSubscription>(BinanceErrors.GetError(BinanceErrorKey.NoListenKey));
+            
+            return CreateUserStream(listenKey, onAccountInfoMessage, OnOrderUpdateMessage);
         }
 
         /// <summary>
-        /// Subscribes to the order update stream. Prior to using this, the <see cref="BinanceClient.StartUserStream"/> method should be called.
+        /// Unsubscribes from a stream
         /// </summary>
-        /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-        /// <param name="onMessage">The event handler for the data received</param>
-        /// <returns>bool indicating success</returns>
-        public BinanceApiResult<bool> SubscribeToOrderUpdateStream(string listenKey, Action<BinanceStreamOrderUpdate> onMessage)
-        {
-            if (string.IsNullOrEmpty(listenKey))
-                return ThrowErrorMessage<bool>(BinanceErrors.GetError(BinanceErrorKey.NoListenKey));
-
-            orderUpdateCallback = onMessage;
-            return CreateUserStream(listenKey);
-        }
-
-        /// <summary>
-        /// Unsubscribes from the account update stream
-        /// </summary>
-        /// <returns></returns>
-        public void UnsubscribeFromAccountUpdateStream()
-        {
-            accountInfoCallback = null;
-
-            // Close the socket if we're not listening for anything
-            if (orderUpdateCallback == null)
-            {
-                lock (sockets)
-                    sockets.SingleOrDefault(s => s.UserStream)?.Socket.Close();
-            }
-        }
-
-        /// <summary>
-        /// Unsubscribes from the order update stream
-        /// </summary>
-        /// <returns></returns>
-        public void UnsubscribeFromOrderUpdateStream()
-        {
-            orderUpdateCallback = null;
-
-            // Close the socket if we're not listening for anything
-            if (accountInfoCallback == null)
-            {
-                lock (sockets)
-                    sockets.SingleOrDefault(s => s.UserStream)?.Socket.Close();
-            }
-        }
-
-        /// <summary>
-        /// Unsubscribes from a stream with the provided stream subscription
-        /// </summary>
-        /// <param name="streamId">SteamId of the stream</param>
+        /// <param name="streamSubscription">The stream subscription received by subscribing</param>
         public void UnsubscribeFromStream(BinanceStreamSubscription streamSubscription)
         {
-            lock (sockets)
-                sockets.SingleOrDefault(s => s.StreamResult.StreamId == streamSubscription.StreamId)?.Socket.Close();
+            sockets.SingleOrDefault(s => s.StreamResult.StreamId == streamSubscription.StreamId)?.Socket.Close();            
         }
 
         /// <summary>
@@ -263,9 +212,6 @@ namespace Binance.Net
         {
             lock (sockets)
                 sockets.ToList().ForEach(s => s.Socket.Close());
-
-            orderUpdateCallback = null;
-            accountInfoCallback = null;
         }
 
         /// <summary>
@@ -277,28 +223,22 @@ namespace Binance.Net
             GC.SuppressFinalize(this);
         }
 
-        private void OnUserMessage(string data)
+        private BinanceApiResult<BinanceStreamSubscription> CreateUserStream(string listenKey, Action<BinanceStreamAccountInfo> onAccountInfoMessage, Action<BinanceStreamOrderUpdate> OnOrderUpdateMessage)
         {
-            if (data.Contains(AccountUpdateEvent))
-                accountInfoCallback?.Invoke(JsonConvert.DeserializeObject<BinanceStreamAccountInfo>(data));
-            else if (data.Contains(ExecutionUpdateEvent))
-                orderUpdateCallback?.Invoke(JsonConvert.DeserializeObject<BinanceStreamOrderUpdate>(data));
-        }
-
-        private BinanceApiResult<bool> CreateUserStream(string listenKey)
-        {
-            lock (sockets)
-                if (sockets.Any(s => s.UserStream))
-                    return new BinanceApiResult<bool>() {Data = true, Success = true};
-
             var socketResult = CreateSocket(BaseWebsocketAddress + listenKey);
             if (!socketResult.Success)
-                return new BinanceApiResult<bool>() { Data = false, Success = false, Error = socketResult.Error};
+                return new BinanceApiResult<BinanceStreamSubscription>() { Data = null, Success = false, Error = socketResult.Error};
 
-            socketResult.Data.UserStream = true;
-            socketResult.Data.Socket.OnMessage += (o, s) => OnUserMessage(s.Message);
+            socketResult.Data.Socket.OnMessage += (o, s) =>
+            {
+                if(s.Message.Contains(AccountUpdateEvent))
+                    onAccountInfoMessage?.Invoke(JsonConvert.DeserializeObject<BinanceStreamAccountInfo>(s.Message));
+                else if (s.Message.Contains(ExecutionUpdateEvent))
+                    OnOrderUpdateMessage?.Invoke(JsonConvert.DeserializeObject<BinanceStreamOrderUpdate>(s.Message));
+            };
+
             log.Write(LogVerbosity.Debug, "User stream started");
-            return new BinanceApiResult<bool>() { Data = true, Success = true};
+            return new BinanceApiResult<BinanceStreamSubscription>() { Data = socketResult.Data.StreamResult, Success = true};
         }
 
 
