@@ -36,13 +36,23 @@ namespace Binance.Net.Objects
         /// </summary>
         public decimal LastPrice { get; set; }
         /// <summary>
-        /// The most recent bid price
+        /// The best bid price in the order book
         /// </summary>
         public decimal BidPrice { get; set; }
         /// <summary>
-        /// The most recent ask price
+        /// The size of the best bid price in the order book
+        /// </summary>
+        [JsonProperty("bidQty")]
+        public decimal BidQuantity { get; set; }
+        /// <summary>
+        /// The best ask price in the order book
         /// </summary>
         public decimal AskPrice { get; set; }
+        /// <summary>
+        /// The size of the best ask price in the order book
+        /// </summary>
+        [JsonProperty("AskQty")]
+        public decimal AskQuantity { get; set; }
         /// <summary>
         /// The open price 24 hours ago
         /// </summary>
@@ -59,6 +69,10 @@ namespace Binance.Net.Objects
         /// The volume traded in the last 24 hours
         /// </summary>
         public decimal Volume { get; set; }
+        /// <summary>
+        /// The quote asset volume traded in the last 24 hours
+        /// </summary>
+        public decimal QuoteVolume { get; set; }
         /// <summary>
         /// Time at which this 24 hours opened
         /// </summary>
