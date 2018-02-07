@@ -53,7 +53,7 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsTrue(subscibtion.Success);
-            Assert.IsTrue(subscibtion.Data != 0);
+            Assert.IsTrue(subscibtion.Data != null);
             Assert.IsNotNull(result);
             Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data, result, "Bids", "Asks"));
             Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data.Asks[0], result.Asks[0]));
