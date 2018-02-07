@@ -38,28 +38,32 @@ namespace Binance.Net.UnitTests
             // arrange
             var expected = new Binance24HPrice()
             {
-                AskPrice = 0.123,
-                BidPrice = 0.456,
+                AskPrice = 0.123m,
+                BidPrice = 0.456m,
                 CloseTime = new DateTime(2017, 01, 02),
                 FirstId = 10000000000,
-                HighPrice = 0.789,
+                HighPrice = 0.789m,
                 LastId = 20000000000,
-                LastPrice = 1.123,
-                LowPrice = 1.456,
-                OpenPrice = 1.789,
+                LastPrice = 1.123m,
+                LowPrice = 1.456m,
+                OpenPrice = 1.789m,
                 OpenTime = new DateTime(2017, 01, 01),
-                PreviousClosePrice = 2.123,
-                PriceChange = 2.456,
-                PriceChangePercent = 2.789,
+                PreviousClosePrice = 2.123m,
+                PriceChange = 2.456m,
+                PriceChangePercent = 2.789m,
                 Trades = 123,
-                Volume = 3.123,
-                WeightedAveragePrice = 3.456
+                Volume = 3.123m,
+                AskQuantity = 3.456m,
+                BidQuantity = 3.789m,
+                QuoteVolume = 4.123m,
+                Symbol = "BNBBTC",
+                WeightedAveragePrice = 3.456m
             };
 
             var client = PrepareClient(JsonConvert.SerializeObject(expected));
 
             // act
-            var result = client.Get24HPrices("BNBBTC");
+            var result = client.Get24HPrice("BNBBTC");
 
             // assert
             Assert.AreEqual(true, result.Success);
@@ -77,26 +81,26 @@ namespace Binance.Net.UnitTests
                 {
                     new BinanceOrderBookEntry()
                     {
-                        Price = 0.1,
-                        Quantity = 1.1
+                        Price = 0.1m,
+                        Quantity = 1.1m
                     },
                     new BinanceOrderBookEntry()
                     {
-                        Price = 0.2,
-                        Quantity = 2.2
+                        Price = 0.2m,
+                        Quantity = 2.2m
                     }
                 },
                 Bids = new List<BinanceOrderBookEntry>()
                 {
                     new BinanceOrderBookEntry()
                     {
-                        Price = 0.3,
-                        Quantity = 3.3
+                        Price = 0.3m,
+                        Quantity = 3.3m
                     },
                     new BinanceOrderBookEntry()
                     {
-                        Price = 0.4,
-                        Quantity = 4.4
+                        Price = 0.4m,
+                        Quantity = 4.4m
                     }
                 }
             };
@@ -121,26 +125,26 @@ namespace Binance.Net.UnitTests
             // arrange
             var accountInfo = new BinanceAccountInfo()
             {
-                BuyerCommission = 0.1,
+                BuyerCommission = 0.1m,
                 CanDeposit = true,
                 CanTrade = false,
                 CanWithdraw = true,
-                MakerCommission = 0.2,
-                SellerCommission = 0.3,
-                TakerCommission = 0.4,
+                MakerCommission = 0.2m,
+                SellerCommission = 0.3m,
+                TakerCommission = 0.4m,
                 Balances = new List<BinanceBalance>()
                 {
                     new BinanceBalance()
                     {
                         Asset = "bnb", 
-                        Free = 0.1,
-                        Locked = 0.2
+                        Free = 0.1m,
+                        Locked = 0.2m
                     },
                     new BinanceBalance()
                     {
                         Asset = "btc",
-                        Free = 0.3,
-                        Locked = 0.4
+                        Free = 0.3m,
+                        Locked = 0.4m
                     }
                 }
             };
@@ -169,8 +173,8 @@ namespace Binance.Net.UnitTests
                     BuyerWasMaker = true,
                     FirstTradeId = 10000000000,
                     LastTradeId = 200000000000,
-                    Price = 1.1,
-                    Quantity = 2.2,
+                    Price = 1.1m,
+                    Quantity = 2.2m,
                     Timestamp = new DateTime(2017, 1, 1),
                     WasBestPriceMatch = true
                 },
@@ -180,8 +184,8 @@ namespace Binance.Net.UnitTests
                     BuyerWasMaker = false,
                     FirstTradeId = 30000000000,
                     LastTradeId = 400000000000,
-                    Price = 3.3,
-                    Quantity = 4.4,
+                    Price = 3.3m,
+                    Quantity = 4.4m,
                     Timestamp = new DateTime(2016, 1, 1),
                     WasBestPriceMatch = false
                 }
@@ -207,18 +211,18 @@ namespace Binance.Net.UnitTests
             {
                 new BinanceBookPrice()
                 {
-                    AskPrice = 0.1,
-                    AskQuantity = 0.2,
-                    BidPrice = 0.3,
-                    BidQuantity = 0.4,
+                    AskPrice = 0.1m,
+                    AskQuantity = 0.2m,
+                    BidPrice = 0.3m,
+                    BidQuantity = 0.4m,
                     Symbol = "BNBBTC"
                 },
                 new BinanceBookPrice()
                 {
-                    AskPrice = 0.5,
-                    AskQuantity = 0.6,
-                    BidPrice = 0.7,
-                    BidQuantity = 0.8,
+                    AskPrice = 0.5m,
+                    AskQuantity = 0.6m,
+                    BidPrice = 0.7m,
+                    BidQuantity = 0.8m,
                     Symbol = "ETHBTC"
                 }
             };
@@ -244,14 +248,14 @@ namespace Binance.Net.UnitTests
                 new BinanceOrder()
                 {
                     ClientOrderId = "order1",
-                    ExecutedQuantity = 0.1,
-                    IcebergQuantity = 0.2,
+                    ExecutedQuantity = 0.1m,
+                    IcebergQuantity = 0.2m,
                     OrderId = 100000000000,
-                    OriginalQuantity = 0.3,
-                    Price = 0.4,
+                    OriginalQuantity = 0.3m,
+                    Price = 0.4m,
                     Side = OrderSide.Buy,
                     Status = OrderStatus.Canceled,
-                    StopPrice = 0.5,
+                    StopPrice = 0.5m,
                     Symbol = "BNBBTC",
                     Time = new DateTime(2017, 1, 1),
                     TimeInForce = TimeInForce.GoodTillCancel,
@@ -260,14 +264,14 @@ namespace Binance.Net.UnitTests
                 new BinanceOrder()
                 {
                     ClientOrderId = "order2",
-                    ExecutedQuantity = 0.6,
-                    IcebergQuantity = 0.7,
+                    ExecutedQuantity = 0.6m,
+                    IcebergQuantity = 0.7m,
                     OrderId = 200000000000,
-                    OriginalQuantity = 0.8,
-                    Price = 0.9,
+                    OriginalQuantity = 0.8m,
+                    Price = 0.9m,
                     Side = OrderSide.Sell,
                     Status = OrderStatus.PartiallyFilled,
-                    StopPrice = 1.0,
+                    StopPrice = 1.0m,
                     Symbol = "ETHBTC",
                     Time = new DateTime(2017, 1, 10),
                     TimeInForce = TimeInForce.ImmediateOrCancel,
@@ -295,12 +299,12 @@ namespace Binance.Net.UnitTests
             {
                 new BinancePrice()
                 {
-                    Price = 1.1,
+                    Price = 1.1m,
                     Symbol = "BNBBTC"
                 },
                 new BinancePrice()
                 {
-                    Price = 2.2,
+                    Price = 2.2m,
                     Symbol = "ETHBTC"
                 }
             };
@@ -328,14 +332,14 @@ namespace Binance.Net.UnitTests
                 {
                     new BinanceDeposit()
                     {
-                        Amount = 1.1,
+                        Amount = 1.1m,
                         Asset = "BNB",
                         InsertTime = new DateTime(2017, 1, 1),
                         Status = DepositStatus.Pending
                     },
                     new BinanceDeposit()
                     {
-                        Amount = 2.2,
+                        Amount = 2.2m,
                         Asset = "BTC",
                         InsertTime = new DateTime(2016, 1, 1),
                         Status = DepositStatus.Success
@@ -364,31 +368,31 @@ namespace Binance.Net.UnitTests
             {
                new BinanceKline()
                {
-                    AssetVolume = 0.1,
-                    Close = 0.2,
+                    AssetVolume = 0.1m,
+                    Close = 0.2m,
                     CloseTime = new DateTime(2017, 1, 1),
-                    High = 0.3,
-                    Low = 0.4,
-                    Open = 0.5,
+                    High = 0.3m,
+                    Low = 0.4m,
+                    Open = 0.5m,
                     OpenTime = new DateTime(2016, 1, 1),
-                    TakerBuyBaseAssetVolume = 0.6,
-                    TakerBuyQuoteAssetVolume = 0.7,
+                    TakerBuyBaseAssetVolume = 0.6m,
+                    TakerBuyQuoteAssetVolume = 0.7m,
                     Trades = 10,
-                    Volume = 0.8
+                    Volume = 0.8m
                },
                new BinanceKline()
                {
-                    AssetVolume = 0.9,
-                    Close = 1.0,
+                    AssetVolume = 0.9m,
+                    Close = 1.0m,
                     CloseTime = new DateTime(2015, 1, 1),
-                    High = 1.1,
-                    Low = 1.2,
-                    Open = 1.3,
+                    High = 1.1m,
+                    Low = 1.2m,
+                    Open = 1.3m,
                     OpenTime = new DateTime(2014, 1, 1),
-                    TakerBuyBaseAssetVolume = 1.4,
-                    TakerBuyQuoteAssetVolume = 1.5,
+                    TakerBuyBaseAssetVolume = 1.4m,
+                    TakerBuyQuoteAssetVolume = 1.5m,
                     Trades = 20,
-                    Volume = 1.6
+                    Volume = 1.6m
                }
             };
 
@@ -412,26 +416,26 @@ namespace Binance.Net.UnitTests
             {
                 new BinanceTrade()
                 {
-                    Commission = 0.1,
+                    Commission = 0.1m,
                     CommissionAsset = "bnb",
                     Id = 10000000000,
                     IsBestMatch = true,
                     IsBuyer = false,
                     IsMaker= true,
-                    Price = 0.3,
-                    Quantity = 0.4,
+                    Price = 0.3m,
+                    Quantity = 0.4m,
                     Time =  new DateTime(2017, 1, 1)
                 },
                 new BinanceTrade()
                 {
-                    Commission = 0.5,
+                    Commission = 0.5m,
                     CommissionAsset = "eth",
                     Id = 10000000000,
                     IsBestMatch = false,
                     IsBuyer = true,
                     IsMaker= false,
-                    Price = 0.6,
-                    Quantity = 0.7,
+                    Price = 0.6m,
+                    Quantity = 0.7m,
                     Time =  new DateTime(2016, 1, 1)
                 }
             };
@@ -457,14 +461,14 @@ namespace Binance.Net.UnitTests
                 new BinanceOrder()
                 {
                     ClientOrderId = "order1",
-                    ExecutedQuantity = 0.1,
-                    IcebergQuantity = 0.2,
+                    ExecutedQuantity = 0.1m,
+                    IcebergQuantity = 0.2m,
                     OrderId = 100000000000,
-                    OriginalQuantity = 0.3,
-                    Price = 0.4,
+                    OriginalQuantity = 0.3m,
+                    Price = 0.4m,
                     Side = OrderSide.Buy,
                     Status = OrderStatus.Canceled,
-                    StopPrice = 0.5,
+                    StopPrice = 0.5m,
                     Symbol = "BNBBTC",
                     Time = new DateTime(2017, 1, 1),
                     TimeInForce = TimeInForce.GoodTillCancel,
@@ -473,14 +477,14 @@ namespace Binance.Net.UnitTests
                 new BinanceOrder()
                 {
                     ClientOrderId = "order2",
-                    ExecutedQuantity = 0.6,
-                    IcebergQuantity = 0.7,
+                    ExecutedQuantity = 0.6m,
+                    IcebergQuantity = 0.7m,
                     OrderId = 200000000000,
-                    OriginalQuantity = 0.8,
-                    Price = 0.9,
+                    OriginalQuantity = 0.8m,
+                    Price = 0.9m,
                     Side = OrderSide.Sell,
                     Status = OrderStatus.PartiallyFilled,
-                    StopPrice = 1.0,
+                    StopPrice = 1.0m,
                     Symbol = "ETHBTC",
                     Time = new DateTime(2017, 1, 10),
                     TimeInForce = TimeInForce.ImmediateOrCancel,
@@ -512,7 +516,7 @@ namespace Binance.Net.UnitTests
                     new BinanceWithdrawal()
                     {
                         Address = "test",
-                        Amount = 0.1,
+                        Amount = 0.1m,
                         ApplyTime = new DateTime(2017, 1, 1),
                         Asset = "BNB",
                         Status = WithdrawalStatus.AwaitingApproval,
@@ -522,7 +526,7 @@ namespace Binance.Net.UnitTests
                     new BinanceWithdrawal()
                     {
                         Address = "test2",
-                        Amount = 0.2,
+                        Amount = 0.2m,
                         ApplyTime = new DateTime(2017, 1, 1),
                         Asset = "ETH",
                         Status = WithdrawalStatus.Completed,
@@ -582,7 +586,7 @@ namespace Binance.Net.UnitTests
             var client = PrepareClient(JsonConvert.SerializeObject(placed));
 
             // act
-            var result = client.PlaceTestOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, TimeInForce.GoodTillCancel, 1, 2);
+            var result = client.PlaceTestOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, timeInForce:TimeInForce.GoodTillCancel, quantity:1, price:2);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -604,7 +608,7 @@ namespace Binance.Net.UnitTests
             var client = PrepareClient(JsonConvert.SerializeObject(placed));
 
             // act
-            var result = client.PlaceOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, TimeInForce.GoodTillCancel, 1, 2);
+            var result = client.PlaceOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, timeInForce: TimeInForce.GoodTillCancel, quantity: 1, price: 2);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -618,14 +622,14 @@ namespace Binance.Net.UnitTests
             var order = new BinanceOrder()
             {
                 ClientOrderId = "order2",
-                ExecutedQuantity = 0.6,
-                IcebergQuantity = 0.7,
+                ExecutedQuantity = 0.6m,
+                IcebergQuantity = 0.7m,
                 OrderId = 200000000000,
-                OriginalQuantity = 0.8,
-                Price = 0.9,
+                OriginalQuantity = 0.8m,
+                Price = 0.9m,
                 Side = OrderSide.Sell,
                 Status = OrderStatus.PartiallyFilled,
-                StopPrice = 1.0,
+                StopPrice = 1.0m,
                 Symbol = "ETHBTC",
                 Time = new DateTime(2017, 1, 10),
                 TimeInForce = TimeInForce.ImmediateOrCancel,
@@ -648,7 +652,8 @@ namespace Binance.Net.UnitTests
             // arrange
             var order = new BinanceWithdrawalPlaced()
             {
-                Success = true
+                Success = true, 
+                Message = "Test"
             };
 
             var client = PrepareClient(JsonConvert.SerializeObject(order));
@@ -761,9 +766,10 @@ namespace Binance.Net.UnitTests
                 RequestFactory = factory.Object,
                 AutoTimestamp = true
             };
+            client.SetApiCredentials("test", "test");
 
             // act
-            client.GetAllPrices();
+            client.GetAllOrders("BNBBTC");
 
             // assert
             factory.Verify(x => x.Create(It.Is<string>(s => s.Contains("time"))));            
@@ -884,6 +890,5 @@ namespace Binance.Net.UnitTests
             client.RequestFactory = factory.Object;
             return client;
         }
-    }   
-
+    }
 }

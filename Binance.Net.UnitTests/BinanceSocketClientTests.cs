@@ -6,6 +6,7 @@ using Binance.Net.Objects;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using Moq;
+using WebSocket4Net;
 
 namespace Binance.Net.UnitTests
 {
@@ -19,7 +20,6 @@ namespace Binance.Net.UnitTests
             var socket = new Mock<IWebsocket>();
             socket.Setup(s => s.Close());
             socket.Setup(s => s.Connect());
-            socket.Setup(s => s.Url).Returns("test");
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
             
             var factory = new Mock<IWebsocketFactory>();
@@ -34,21 +34,22 @@ namespace Binance.Net.UnitTests
                 Event = "TestDepthStream",
                 EventTime = new DateTime(2017, 1, 1),
                 Symbol = "test",
-                UpdateId = 1,
+                FirstUpdateId = 1,
+                LastUpdateId = 2,
                 Asks = new List<BinanceOrderBookEntry>()
                 {
-                    new BinanceOrderBookEntry(){ Price = 1.1, Quantity = 2.2},
-                    new BinanceOrderBookEntry(){ Price = 3.3, Quantity = 4.4}
+                    new BinanceOrderBookEntry(){ Price = 1.1m, Quantity = 2.2m},
+                    new BinanceOrderBookEntry(){ Price = 3.3m, Quantity = 4.4m}
                 },
                 Bids = new List<BinanceOrderBookEntry>()
                 {
-                    new BinanceOrderBookEntry(){ Price = 5.5, Quantity = 6.6},
-                    new BinanceOrderBookEntry(){ Price = 7.7, Quantity = 8.8}
+                    new BinanceOrderBookEntry(){ Price = 5.5m, Quantity = 6.6m},
+                    new BinanceOrderBookEntry(){ Price = 7.7m, Quantity = 8.8m}
                 }
             };
 
             // act
-            socket.Raise(r => r.OnMessage += null, new MessagedEventArgs(JsonConvert.SerializeObject(data), false, false, true, new byte[2]));
+            socket.Raise(r => r.OnMessage += null, new MessageReceivedEventArgs(JsonConvert.SerializeObject(data)));
 
             // assert
             Assert.IsTrue(subscibtion.Success);
@@ -68,7 +69,6 @@ namespace Binance.Net.UnitTests
             var socket = new Mock<IWebsocket>();
             socket.Setup(s => s.Close());
             socket.Setup(s => s.Connect());
-            socket.Setup(s => s.Url).Returns("test");
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
 
             var factory = new Mock<IWebsocketFactory>();
@@ -85,32 +85,178 @@ namespace Binance.Net.UnitTests
                 Symbol = "test",
                 Data = new BinanceStreamKlineInner()
                 {
-                    ActiveBuyVolume = 0.1,
-                    Close = 0.2,
+                    ActiveBuyVolume = 0.1m,
+                    Close = 0.2m,
                     EndTime = new DateTime(2017, 1, 2),
                     Final = true,
                     FirstTrade = 10000000000,
-                    High = 0.3,
+                    High = 0.3m,
                     Interval = KlineInterval.OneMinute,
                     LastTrade = 2000000000000,
-                    Low = 0.4,
-                    Open = 0.5,
-                    QuoteActiveBuyVolume = 0.6,
-                    QuoteVolume = 0.7,
+                    Low = 0.4m,
+                    Open = 0.5m,
+                    QuoteActiveBuyVolume = 0.6m,
+                    QuoteVolume = 0.7m,
                     StartTime = new DateTime(2017, 1, 1),
                     Symbol = "test",
                     TradeCount = 10,
-                    Volume = 0.8
+                    Volume = 0.8m
                 }
             };
 
             // act
-            socket.Raise(r => r.OnMessage += null, new MessagedEventArgs(JsonConvert.SerializeObject(data), false, false, true, new byte[2]));
+            socket.Raise(r => r.OnMessage += null, new MessageReceivedEventArgs(JsonConvert.SerializeObject(data)));
 
             // assert
             Assert.IsNotNull(result);
             Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data, result, "Data"));
             Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data.Data, result.Data));
+        }
+
+        [TestCase()]
+        public void SubscribingToPartialBookDepthStream_Should_TriggerWhenPartialBookStreamMessageIsReceived()
+        {
+            // arrange
+            var socket = new Mock<IWebsocket>();
+            socket.Setup(s => s.Close());
+            socket.Setup(s => s.Connect());
+            socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
+
+            var factory = new Mock<IWebsocketFactory>();
+            factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
+
+            BinanceOrderBook result = null;
+            var client = new BinanceSocketClient { SocketFactory = factory.Object };
+            client.SubscribeToPartialBookDepthStream("test", 10, (test) => result = test);
+
+            var data = new BinanceOrderBook()
+            {
+                Asks = new List<BinanceOrderBookEntry>()
+                {
+                    new BinanceOrderBookEntry()
+                    {
+                        Price = 0.1m,
+                        Quantity = 0.2m
+                    },
+                    new BinanceOrderBookEntry()
+                    {
+                        Price = 0.3m,
+                        Quantity = 0.4m
+                    }
+                },
+                LastUpdateId = 1,
+                Bids = new List<BinanceOrderBookEntry>()
+            };
+
+            // act
+            socket.Raise(r => r.OnMessage += null, new MessageReceivedEventArgs(JsonConvert.SerializeObject(data)));
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data, result, "Asks", "Bids"));
+            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data.Asks[0], result.Asks[0]));
+            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data.Asks[1], result.Asks[1]));
+        }
+
+        [TestCase()]
+        public void SubscribingToSymbolTicker_Should_TriggerWhenSymbolTickerStreamMessageIsReceived()
+        {
+            // arrange
+            var socket = new Mock<IWebsocket>();
+            socket.Setup(s => s.Close());
+            socket.Setup(s => s.Connect());
+            socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
+
+            var factory = new Mock<IWebsocketFactory>();
+            factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
+
+            BinanceStreamTick result = null;
+            var client = new BinanceSocketClient { SocketFactory = factory.Object };
+            client.SubscribeToSymbolTicker("test", (test) => result = test);
+
+            var data = new BinanceStreamTick()
+            {
+                BestAskPrice = 0.1m,
+                BestAskQuantity = 0.2m,
+                BestBidPrice = 0.3m,
+                BestBidQuantity = 0.4m,
+                CloseTradesQuantity = 0.5m,
+                CurrentDayClosePrice = 0.6m,
+                FirstTradeId = 1,
+                HighPrice = 0.7m,
+                LastTradeId = 2,
+                LowPrice = 0.8m,
+                OpenPrice = 0.9m,
+                PrevDayClosePrice = 1.0m,
+                PriceChange = 1.1m,
+                PriceChangePercentage = 1.2m,
+                StatisticsCloseTime = new DateTime(2017, 1, 2),
+                StatisticsOpenTime = new DateTime(2017, 1, 1),
+                Symbol = "test",
+                TotalTradedBaseAssetVolume = 1.3m,
+                TotalTradedQuoteAssetVolume = 1.4m,
+                TotalTrades = 3,
+                WeightedAverage = 1.5m
+            };
+
+            // act
+            socket.Raise(r => r.OnMessage += null, new MessageReceivedEventArgs(JsonConvert.SerializeObject(data)));
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data, result));
+        }
+
+        [TestCase()]
+        public void SubscribingToAllSymbolTicker_Should_TriggerWhenAllSymbolTickerStreamMessageIsReceived()
+        {
+            // arrange
+            var socket = new Mock<IWebsocket>();
+            socket.Setup(s => s.Close());
+            socket.Setup(s => s.Connect());
+            socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
+
+            var factory = new Mock<IWebsocketFactory>();
+            factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
+
+            BinanceStreamTick[] result = null;
+            var client = new BinanceSocketClient { SocketFactory = factory.Object };
+            client.SubscribeToAllSymbolTicker((test) => result = test);
+
+            var data = new[] 
+            {
+                new BinanceStreamTick()
+                {
+                    BestAskPrice = 0.1m,
+                    BestAskQuantity = 0.2m,
+                    BestBidPrice = 0.3m,
+                    BestBidQuantity = 0.4m,
+                    CloseTradesQuantity = 0.5m,
+                    CurrentDayClosePrice = 0.6m,
+                    FirstTradeId = 1,
+                    HighPrice = 0.7m,
+                    LastTradeId = 2,
+                    LowPrice = 0.8m,
+                    OpenPrice = 0.9m,
+                    PrevDayClosePrice = 1.0m,
+                    PriceChange = 1.1m,
+                    PriceChangePercentage = 1.2m,
+                    StatisticsCloseTime = new DateTime(2017, 1, 2),
+                    StatisticsOpenTime = new DateTime(2017, 1, 1),
+                    Symbol = "test",
+                    TotalTradedBaseAssetVolume = 1.3m,
+                    TotalTradedQuoteAssetVolume = 1.4m,
+                    TotalTrades = 3,
+                    WeightedAverage = 1.5m
+                }
+            };
+
+            // act
+            socket.Raise(r => r.OnMessage += null, new MessageReceivedEventArgs(JsonConvert.SerializeObject(data)));
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data[0], result[0]));
         }
 
         [TestCase()]
@@ -120,7 +266,6 @@ namespace Binance.Net.UnitTests
             var socket = new Mock<IWebsocket>();
             socket.Setup(s => s.Close());
             socket.Setup(s => s.Connect());
-            socket.Setup(s => s.Url).Returns("test");
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
 
             var factory = new Mock<IWebsocketFactory>();
@@ -139,13 +284,13 @@ namespace Binance.Net.UnitTests
                 BuyerIsMaker = true,
                 FirstTradeId = 10000000000000,
                 LastTradeId = 2000000000000,
-                Price = 1.1,
-                Quantity = 2.2,
+                Price = 1.1m,
+                Quantity = 2.2m,
                 TradeTime = new DateTime(2017, 1, 1)
             };
 
             // act
-            socket.Raise(r => r.OnMessage += null, new MessagedEventArgs(JsonConvert.SerializeObject(data), false, false, true, new byte[2]));
+            socket.Raise(r => r.OnMessage += null, new MessageReceivedEventArgs(JsonConvert.SerializeObject(data)));
 
             // assert
             Assert.IsNotNull(result);
@@ -159,7 +304,6 @@ namespace Binance.Net.UnitTests
             var socket = new Mock<IWebsocket>();
             socket.Setup(s => s.Close());
             socket.Setup(s => s.Connect());
-            socket.Setup(s => s.Url).Returns("test");
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
 
             var factory = new Mock<IWebsocketFactory>();
@@ -173,22 +317,22 @@ namespace Binance.Net.UnitTests
             {
                 Event = "outboundAccountInfo",
                 EventTime = new DateTime(2017, 1, 1),
-                BuyerCommission = 1.1,
+                BuyerCommission = 1.1m,
                 CanDeposit = true,
                 CanTrade = true,
                 CanWithdraw = false,
-                MakerCommission = 2.2,
-                SellerCommission = 3.3,
-                TakerCommission = 4.4,
+                MakerCommission = 2.2m,
+                SellerCommission = 3.3m,
+                TakerCommission = 4.4m,
                 Balances = new List<BinanceStreamBalance>()
                 {
-                    new BinanceStreamBalance(){ Asset = "test1", Free = 1.1, Locked = 2.2},
-                    new BinanceStreamBalance(){ Asset = "test2", Free = 3.3, Locked = 4.4},
+                    new BinanceStreamBalance(){ Asset = "test1", Free = 1.1m, Locked = 2.2m},
+                    new BinanceStreamBalance(){ Asset = "test2", Free = 3.3m, Locked = 4.4m},
                 }
             };
 
             // act
-            socket.Raise(r => r.OnMessage += null, new MessagedEventArgs(JsonConvert.SerializeObject(data), false, false, true, new byte[2]));
+            socket.Raise(r => r.OnMessage += null, new MessageReceivedEventArgs(JsonConvert.SerializeObject(data)));
 
             // assert
             Assert.IsNotNull(result);
@@ -204,7 +348,6 @@ namespace Binance.Net.UnitTests
             var socket = new Mock<IWebsocket>();
             socket.Setup(s => s.Close());
             socket.Setup(s => s.Connect());
-            socket.Setup(s => s.Url).Returns("test");
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
 
             var factory = new Mock<IWebsocketFactory>();
@@ -218,22 +361,22 @@ namespace Binance.Net.UnitTests
             {
                 Event = "executionReport",
                 EventTime = new DateTime(2017, 1, 1),
-                AccumulatedQuantityOfFilledTrades = 1.1,
+                AccumulatedQuantityOfFilledTrades = 1.1m,
                 BuyerIsMaker = true,
                 C = "",
-                Commission = 2.2,
+                Commission = 2.2m,
                 CommissionAsset = "test",
                 ExecutionType = ExecutionType.Trade,
-                F = 3.3,
-                g = 4.4,
+                F = 3.3m,
+                g = 4.4m,
                 I = 100000000000,
                 NewClientOrderId = "test",
                 OrderId = 100000000000,
-                P = 5.5,
-                Price = 6.6,
-                PriceLastFilledTrade = 7.7,
-                Quantity = 8.8,
-                QuantityOfLastFilledTrade = 9.9,
+                P = 5.5m,
+                Price = 6.6m,
+                PriceLastFilledTrade = 7.7m,
+                Quantity = 8.8m,
+                QuantityOfLastFilledTrade = 9.9m,
                 RejectReason = OrderRejectReason.AccountCannotSettle,
                 Side = OrderSide.Buy,
                 Status = OrderStatus.Filled,
@@ -245,7 +388,7 @@ namespace Binance.Net.UnitTests
             };
 
             // act
-            socket.Raise(r => r.OnMessage += null, new MessagedEventArgs(JsonConvert.SerializeObject(data), false, false, true, new byte[2]));
+            socket.Raise(r => r.OnMessage += null, new MessageReceivedEventArgs(JsonConvert.SerializeObject(data)));
 
             // assert
             Assert.IsNotNull(result);
@@ -258,9 +401,8 @@ namespace Binance.Net.UnitTests
             // arrange
             bool closed = false;
             var socket = new Mock<IWebsocket>();
-            socket.Setup(s => s.Close()).Raises(s => s.OnClose += null, new ClosedEventArgs(0, "", true));
+            socket.Setup(s => s.Close()).Raises(s => s.OnClose += null, new Events.ClosedEventArgs(0, "", true));
             socket.Setup(s => s.Connect());
-            socket.Setup(s => s.Url).Returns("test");
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
             socket.Object.OnClose += (sender, args) =>
             {
@@ -286,9 +428,8 @@ namespace Binance.Net.UnitTests
             // arrange
             int closed = 0;
             var socket = new Mock<IWebsocket>();
-            socket.Setup(s => s.Close()).Raises(s => s.OnClose += null, new ClosedEventArgs(0, "", true));
+            socket.Setup(s => s.Close()).Raises(s => s.OnClose += null, new Events.ClosedEventArgs(0, "", true));
             socket.Setup(s => s.Connect());
-            socket.Setup(s => s.Url).Returns("test");
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
             socket.Object.OnClose += (sender, args) =>
             {
@@ -314,9 +455,8 @@ namespace Binance.Net.UnitTests
             // arrange
             int closed = 0;
             var socket = new Mock<IWebsocket>();
-            socket.Setup(s => s.Close()).Raises(s => s.OnClose += null, new ClosedEventArgs(0, "", true));
+            socket.Setup(s => s.Close()).Raises(s => s.OnClose += null, new Events.ClosedEventArgs(0, "", true));
             socket.Setup(s => s.Connect());
-            socket.Setup(s => s.Url).Returns("test");
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
             socket.Object.OnClose += (sender, args) =>
             {
@@ -342,9 +482,8 @@ namespace Binance.Net.UnitTests
             // arrange
             int closed = 0;
             var socket = new Mock<IWebsocket>();
-            socket.Setup(s => s.Close()).Raises(s => s.OnClose += null, new ClosedEventArgs(0, "", true));
+            socket.Setup(s => s.Close()).Raises(s => s.OnClose += null, new Events.ClosedEventArgs(0, "", true));
             socket.Setup(s => s.Connect());
-            socket.Setup(s => s.Url).Returns("test");
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
             socket.Object.OnClose += (sender, args) =>
             {
@@ -371,9 +510,8 @@ namespace Binance.Net.UnitTests
             // arrange
             int closed = 0;
             var socket = new Mock<IWebsocket>();
-            socket.Setup(s => s.Close()).Raises(s => s.OnClose += null, new ClosedEventArgs(0, "", true));
+            socket.Setup(s => s.Close()).Raises(s => s.OnClose += null, new Events.ClosedEventArgs(0, "", true));
             socket.Setup(s => s.Connect());
-            socket.Setup(s => s.Url).Returns("test");
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
             socket.Object.OnClose += (sender, args) =>
             {
@@ -399,9 +537,8 @@ namespace Binance.Net.UnitTests
         {
             // arrange
             var socket = new Mock<IWebsocket>();
-            socket.Setup(s => s.Close()).Raises(s => s.OnClose += null, new ClosedEventArgs(0, "", true));
+            socket.Setup(s => s.Close()).Raises(s => s.OnClose += null, new Events.ClosedEventArgs(0, "", true));
             socket.Setup(s => s.Connect()).Throws(new Exception("Can't connect"));
-            socket.Setup(s => s.Url).Returns("test");
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
 
             var factory = new Mock<IWebsocketFactory>();
