@@ -75,7 +75,7 @@ BinanceDefaults.SetDefaultRetries(3);
 The default amount of retries is 2, setting it to 0 will disable the functionality.
 
 ### Requests
-Public requests:
+*Public requests:*
 ```C#
 using(var client = new BinanceClient())
 {
@@ -83,22 +83,36 @@ using(var client = new BinanceClient())
 	var ping = client.Ping();
 	// Gets the server time
 	var serverTime = client.GetServerTime();
+	// Gets info about the exchange state, including rate limit and symbol rules
+	var exchangeInfo = client.GetExchangeInfo();
 	// Gets the order book for specified symbol
 	var orderBook = client.GetOrderBook("BNBBTC", 10);
 	// Gets a compresed view of trades for specified symbol
 	var aggTrades = client.GetAggregatedTrades("BNBBTC", startTime: DateTime.UtcNow.AddMinutes(-2), endTime: DateTime.UtcNow, limit: 10);
+	// Gets the recently completed trades for a symbol
+	var recentTrades = client.GetRecentTrades("BNBBTC");	
+	// Gets the trade history for a symbol
+	var historicalTrades = client.GetHistoricalTrades("BNBBTC");
 	// Gets klines data for the specified symbol
 	var klines = client.GetKlines("BNBBTC", KlineInterval.OneHour, startTime: DateTime.UtcNow.AddHours(-10), endTime: DateTime.UtcNow, limit: 10);
 	// Gets prices and changes in the last 24 hours for specified symbol
-	var prices24h = client.Get24HPrice("BNBBTC");
+	var price24h = client.Get24HPrice("BNBBTC");
+	// Gets prices and changes in the last 24 hours for all symbols
+	var prices24h = client.Get24HPricesList();
+	// Gets the latest price of a symbol
+	var price = client.GetPrice("BNBBTC");
 	// Gets all symbols and latest prices
 	var allPrices = client.GetAllPrices();
+	// Gets book prices (asks/bids) for a symbol
+	var bookPrice = client.GetBookPrice("BNBBTC");
 	// Gets book prices (asks/bids) for all symbols
 	var allBookPrices = client.GetAllBookPrices();
+	
 }
 ```
 
-Private requests:
+*Private requests:*
+Api credentials have to be provided to use these methods
 ```C#
 using(var client = new BinanceClient())
 {
@@ -124,13 +138,21 @@ using(var client = new BinanceClient())
 	var withdrawalHistory = client.GetWithdrawHistory();
 	// Requests a withdraw
 	var withdraw = client.Withdraw("TEST", "Address", 1, "TestWithdraw");
+	// Retrieve the deposit address for an asset
+	var depositAddress = client.GetDepositAddress("BTC");
+	// Starts the user stream
+	var listenKeyResult = client.StartUserStream(listenKey);
+	// Keeps alive the user stream. User streams get automatically closed after 1 hour if not kept alive, and every 24 hours by default
+	var keepAliveResult = client.KeepAliveUserStream(listenKey);
+	// Stops the user stream
+	var stopResult = client.StopUserStream(listenKey);
 }
 ```
 
 ### Websockets
 The Binance.Net socket client provides several socket endpoint to which can be subsribed.
 
-Public socket endpoints:
+*Public socket endpoints:*
 ```C#
 using(var client = new BinanceSocketClient())
 {
@@ -146,29 +168,62 @@ using(var client = new BinanceSocketClient())
 	{
 		// handle data
 	});
+	var successSymbol = client.SubscribeToSymbolTicker("bnbbtc", (data) =>
+	{
+		// handle data
+	});
+	var successSymbols = client.SubscribeToAllSymbolTicker((data) =>
+	{
+		// handle data
+	});
+	var successOrderBook = client.SubscribeToPartialBookDepthStream("bnbbtc", 10, (data) =>
+	{
+		// handle data
+	});
 }
 ```
 
-Private socket endpoints:
+*Private socket endpoints:*
 
-For the private endpoints a user stream has to be started on the Binance server. This can be done using the `client.StartUserStream()` command in the `BinanceClient`. This command will return a listen key which can then be provided to the private socket subscriptions:
+For the private endpoint a user stream has to be started on the Binance server. This can be done using the `StartUserStream()` method in the `BinanceClient`. This command will return a listen key which can then be provided to the private socket subscription:
 ```C#
 using(var client = new BinanceSocketClient())
 {
-	var successAccount = client.SubscribeToAccountUpdateStream(listenKey, (data) =>
+	var successOrderBook = client.SubscribeToUserStream(listenKey, 
+	(accountInfoUpdate) =>
 	{
-		// handle data
-	});
-	var successOrder = client.SubscribeToOrderUpdateStream(listenKey, (data) =>
+		// handle account info update
+	},
+	(orderInfoUpdate) =>
 	{
-		// handle data
+		// handle order info update
 	});
 }
 ```
 
-Unsubscribing from socket endpoints:
+*Handling socket events*
 
-Public socket endpoints can be unsubscribed by using the `client.UnsubscribeFromStream` method in combination with the stream ID received from subscribing:
+Subscribing to a socket stream returns a BinanceStreamSubscription object. This object can be used to be notified when a socket closes or an error occures:
+````C#
+var sub = client.SubscribeToAllSymbolTicker(data =>
+{
+	Console.WriteLine("Reveived list update");
+});
+
+sub.Data.Closed += () =>
+{
+	Console.WriteLine("Socket closed");
+};
+
+sub.Data.Error += (e) =>
+{
+	Console.WriteLine("Socket error " + e.Message);
+};
+````
+
+*Unsubscribing from socket endpoints:*
+
+Sockets streams can be unsubscribed by using the `client.UnsubscribeFromStream` method in combination with the stream subscription received from subscribing:
 ```C#
 using(var client = new BinanceSocketClient())
 {
@@ -180,8 +235,6 @@ using(var client = new BinanceSocketClient())
 	client.UnsubscribeFromStream(successDepth.Data);
 }
 ```
-
-Private socket endpoints can be unsubscribed using the specific methods `client.UnsubscribeFromAccountUpdateStream` and `client.UnsubscribeFromOrderUpdateStream`.
 
 Additionaly, all sockets can be closed with the `UnsubscribeAllStreams` method. Beware that when a client is disposed the sockets are automatically disposed. This means that if the code is no longer in the using statement the eventhandler won't fire anymore. To prevent this from happening make sure the code doesn't leave the using statement or don't use the socket client in a using statement:
 ```C#
@@ -233,6 +286,13 @@ BinanceDefaults.SetDefaultLogVerbosity(LogVerbosity.Debug);
 
 
 ## Release notes
+* Version 2.3.0 - 07 feb 2018
+	* Added missing fields to 24h prices
+	* Changed subscription results from an id to an object with closed/error events
+	* Changed how to subscribe to the user stream
+	* Updated/fixed unit test project
+	* Updated readme
+
 * Version 2.2.5 - 24 jan 2018
 	* Added optional automated checking of trading rules when placing an order
 	* Added `BinanceHelpers` static class containing some basic helper functions

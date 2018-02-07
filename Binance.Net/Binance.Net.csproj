@@ -5,8 +5,8 @@
   </PropertyGroup>
   
   <PropertyGroup>
-    <Version>2.2.5</Version>
-    <FileVersion>2.2.5</FileVersion>
+    <Version>2.3.0</Version>
+    <FileVersion>2.3.0</FileVersion>
     <Authors>JKorf</Authors>
     <Description>Binance .Net API wrapper</Description>
     <Copyright></Copyright>
@@ -15,7 +15,7 @@
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
 	<Authors>JKorf</Authors>
-    <PackageVersion>2.2.5</PackageVersion>
+    <PackageVersion>2.3.0</PackageVersion>
 	<Description>Binance .Net API wrapper</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance Binance.Net CryptoCurrency Exchange API wrapper</PackageTags>
@@ -24,11 +24,12 @@
 	<PackageLicenseUrl>https://github.com/JKorf/Binance.Net/blob/master/LICENSE</PackageLicenseUrl>
 	<NeutralLanguage>en</NeutralLanguage>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	<PackageReleaseNotes>2.2.5 - 
-	* Added optional automated checking of trading rules when placing an order
-	* Added BinanceHelpers static class containing some basic helper functions
-	* Fix for default logger not writing on a new line
-	* Simplified internal defaults</PackageReleaseNotes>
+	<PackageReleaseNotes>2.3.0 - 
+	* Added missing fields to 24h prices
+	* Changed subscription results from an id to an object with closed/error events
+	* Changed how to subscribe to the user stream
+	* Updated/fixed unit test project
+	* Updated readme</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
