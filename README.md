@@ -287,6 +287,10 @@ BinanceDefaults.SetDefaultLogVerbosity(LogVerbosity.Debug);
 
 
 ## Release notes
+* Version 2.3.1 - 08 feb 2018
+	* Updated models to latest version
+	* Cleaned code and code docs
+
 * Version 2.3.0 - 07 feb 2018
 	* Added missing fields to 24h prices
 	* Changed subscription results from an id to an object with closed/error events
