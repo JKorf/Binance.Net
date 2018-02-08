@@ -69,5 +69,9 @@ namespace Binance.Net.Objects
         /// </summary>
         [JsonConverter(typeof(TimestampConverter))]
         public DateTime Time { get; set; }
+        /// <summary>
+        /// Is working
+        /// </summary>
+        public bool IsWorking { get; set; }
     }
 }

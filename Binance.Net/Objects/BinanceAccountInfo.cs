@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Binance.Net.Converters;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 
 namespace Binance.Net.Objects
 {
@@ -35,6 +38,11 @@ namespace Binance.Net.Objects
         /// Boolean indicating if this account can deposit
         /// </summary>
         public bool CanDeposit { get; set; }
+        /// <summary>
+        /// The time of the update
+        /// </summary>
+        [JsonConverter(typeof(TimestampConverter))]
+        public DateTime UpdateTime { get; set; }
         /// <summary>
         /// List of assets with their current balances
         /// </summary>

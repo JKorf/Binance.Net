@@ -45,6 +45,15 @@ namespace Binance.Net.Objects
         /// </summary>
         public string Asset { get; set; }
         /// <summary>
+        /// The address of the deposit
+        /// </summary>
+        public string Address { get; set; }
+        /// <summary>
+        /// The transaction id
+        /// </summary>
+        [JsonProperty("txId")]
+        public string TransactionId { get; set; }
+        /// <summary>
         /// The status of the deposit
         /// </summary>
         [JsonConverter(typeof(DepositStatusConverter))]

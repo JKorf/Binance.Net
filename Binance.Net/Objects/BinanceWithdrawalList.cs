@@ -32,10 +32,9 @@ namespace Binance.Net.Objects
     public class BinanceWithdrawal
     {
         /// <summary>
-        /// The time the withdrawal was successful
+        /// The id of the withdrawal
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
-        public DateTime SuccessTime { get; set; }
+        public string Id { get; set; }
         /// <summary>
         /// The time the withdrawal was applied for
         /// </summary>

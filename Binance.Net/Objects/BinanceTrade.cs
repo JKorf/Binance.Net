@@ -14,6 +14,10 @@ namespace Binance.Net.Objects
         /// </summary>
         public long Id { get; set; }
         /// <summary>
+        /// The order id the trade belongs to
+        /// </summary>
+        public long OrderId { get; set; }
+        /// <summary>
         /// The price of the trade
         /// </summary>
         public decimal Price { get; set; }
