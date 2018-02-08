@@ -283,6 +283,7 @@ namespace Binance.Net
         /// </summary>
         /// <param name="symbol">The symbol to get recent trades for</param>
         /// <param name="limit">Result limit</param>
+        /// <param name="fromId">From which trade id on results should be retrieved</param>
         /// <returns>List of recent trades</returns>
         public async Task<BinanceApiResult<BinanceRecentTrade[]>> GetHistoricalTradesAsync(string symbol, int? limit = null, long? fromId = null)
         {
@@ -324,7 +325,7 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="Get24HPricesAsync"/> method
+        /// Synchronized version of the <see cref="Get24HPriceAsync"/> method
         /// </summary>
         /// <returns></returns>
         public BinanceApiResult<Binance24HPrice> Get24HPrice(string symbol) => Get24HPriceAsync(symbol).Result;
@@ -345,7 +346,7 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="Get24HPricesAsync"/> method
+        /// Synchronized version of the <see cref="Get24HPricesListAsync"/> method
         /// </summary>
         /// <returns></returns>
         public BinanceApiResult<List<Binance24HPrice>> Get24HPricesList() => Get24HPricesListAsync().Result;
@@ -598,6 +599,7 @@ namespace Binance.Net
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
         /// <param name="icebergQty">User for iceberg orders</param>
+        /// <param name="orderResponseType">What kind of response should be returned</param>
         /// <returns>Id's for the placed test order</returns>
         public async Task<BinanceApiResult<BinancePlacedOrder>> PlaceTestOrderAsync(string symbol,
             OrderSide side,
@@ -948,7 +950,7 @@ namespace Binance.Net
         public BinanceApiResult<BinanceListenKey> StartUserStream() => StartUserStreamAsync().Result;
 
         /// <summary>
-        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToAccountUpdateStream"/> and <see cref="BinanceSocketClient.SubscribeToOrderUpdateStream"/>. The stream will close after 60 minutes unless a keep alive is send.
+        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToUserStream"/>. The stream will close after 60 minutes unless a keep alive is send.
         /// </summary>
         /// <returns>Listen key</returns>
         public async Task<BinanceApiResult<BinanceListenKey>> StartUserStreamAsync()

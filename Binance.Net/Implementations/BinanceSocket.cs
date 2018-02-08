@@ -1,5 +1,4 @@
-﻿using Binance.Net.Events;
-using Binance.Net.Interfaces;
+﻿using Binance.Net.Interfaces;
 using SuperSocket.ClientEngine;
 using System;
 using System.Security.Authentication;

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Binance.Net.Events;
 using Binance.Net.Interfaces;
 using Binance.Net.Objects;
 using Newtonsoft.Json;
@@ -363,16 +362,11 @@ namespace Binance.Net.UnitTests
                 EventTime = new DateTime(2017, 1, 1),
                 AccumulatedQuantityOfFilledTrades = 1.1m,
                 BuyerIsMaker = true,
-                C = "",
                 Commission = 2.2m,
                 CommissionAsset = "test",
                 ExecutionType = ExecutionType.Trade,
-                F = 3.3m,
-                g = 4.4m,
                 I = 100000000000,
-                NewClientOrderId = "test",
                 OrderId = 100000000000,
-                P = 5.5m,
                 Price = 6.6m,
                 PriceLastFilledTrade = 7.7m,
                 Quantity = 8.8m,
@@ -384,7 +378,12 @@ namespace Binance.Net.UnitTests
                 Time = new DateTime(2017, 1, 1),
                 TimeInForce = TimeInForce.GoodTillCancel,
                 TradeId = 10000000000000,
-                Type = OrderType.Limit
+                Type = OrderType.Limit,
+                ClientOrderId = "123",
+                IcebergQuantity = 9.9m,
+                IsWorking = true,
+                OriginalClientOrderId = "456",
+                StopPrice = 10.10m
             };
 
             // act

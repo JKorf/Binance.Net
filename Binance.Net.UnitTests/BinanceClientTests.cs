@@ -520,7 +520,7 @@ namespace Binance.Net.UnitTests
                         ApplyTime = new DateTime(2017, 1, 1),
                         Asset = "BNB",
                         Status = WithdrawalStatus.AwaitingApproval,
-                        SuccessTime = new DateTime(2017, 1, 2),
+                        Id = "123",
                         TransactionId = "1"
                     },
                     new BinanceWithdrawal()
@@ -530,7 +530,7 @@ namespace Binance.Net.UnitTests
                         ApplyTime = new DateTime(2017, 1, 1),
                         Asset = "ETH",
                         Status = WithdrawalStatus.Completed,
-                        SuccessTime = new DateTime(2017, 1, 2),
+                        Id = "123",
                         TransactionId = "2"
                     }
                 }

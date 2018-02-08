@@ -18,7 +18,7 @@ namespace Binance.Net.Objects
         /// The new client order id
         /// </summary>
         [JsonProperty("c")]
-        public string NewClientOrderId { get; set; }
+        public string ClientOrderId { get; set; }
         /// <summary>
         /// The side of the order
         /// </summary>
@@ -45,13 +45,13 @@ namespace Binance.Net.Objects
         [JsonProperty("p")]
         public decimal Price { get; set; }
         [JsonProperty("P")]
-        public decimal P { get; set; }
+        public decimal StopPrice { get; set; }
         [JsonProperty("F")]
-        public decimal F { get; set; }
+        public decimal IcebergQuantity { get; set; }
         [JsonProperty("g")]
-        public decimal g { get; set; }
+        internal decimal g { get; set; }
         [JsonProperty("C")]
-        public object C { get; set; }
+        public object OriginalClientOrderId { get; set; }
         /// <summary>
         /// The execution type
         /// </summary>
@@ -109,13 +109,15 @@ namespace Binance.Net.Objects
         public long TradeId { get; set; }
         [JsonProperty("I")]
         public long I { get; set; }
+        [JsonProperty("w")]
+        public bool IsWorking { get; set; }
         /// <summary>
         /// Whether the buyer is the maker
         /// </summary>
         [JsonProperty("m")]
         public bool BuyerIsMaker { get; set; }
 
-        [JsonProperty("O")]
-        public object O { get; set; }
+        [JsonProperty("M")]
+        internal bool O { get; set; }
     }
 }

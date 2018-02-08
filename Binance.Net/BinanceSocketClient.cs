@@ -1,5 +1,4 @@
 ﻿using Binance.Net.Converters;
-using Binance.Net.Events;
 using Binance.Net.Implementations;
 using Binance.Net.Interfaces;
 using Binance.Net.Logging;
@@ -76,7 +75,8 @@ namespace Binance.Net
         /// <param name="symbol">The symbol</param>
         /// <param name="interval">The interval of the candlesticks</param>
         /// <param name="onMessage">The event handler for the received data</param>
-        /// <returns>A stream id. This stream id can be used to close this specific stream using the <see cref="UnsubscribeFromStream(int)"/> method</returns>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
+        /// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
         public BinanceApiResult<BinanceStreamSubscription> SubscribeToKlineStream(string symbol, KlineInterval interval, Action<BinanceStreamKline> onMessage)
         {
             symbol = symbol.ToLower();
@@ -95,7 +95,8 @@ namespace Binance.Net
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="onMessage">The event handler for the received data</param>
-        /// <returns>A stream id. This stream id can be used to close this specific stream using the <see cref="UnsubscribeFromStream(int)"/> method</returns>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
+        /// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
         public BinanceApiResult<BinanceStreamSubscription> SubscribeToDepthStream(string symbol, Action<BinanceStreamDepth> onMessage)
         {
             symbol = symbol.ToLower();
@@ -114,7 +115,8 @@ namespace Binance.Net
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="onMessage">The event handler for the received data</param>
-        /// <returns>A stream id. This stream id can be used to close this specific stream using the <see cref="UnsubscribeFromStream(int)"/> method</returns>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
+        /// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
         public BinanceApiResult<BinanceStreamSubscription> SubscribeToTradesStream(string symbol, Action<BinanceStreamTrade> onMessage)
         {
             symbol = symbol.ToLower();
@@ -133,7 +135,8 @@ namespace Binance.Net
         /// </summary>
         /// <param name="symbol">The symbol to subscribe to</param>
         /// <param name="onMessage">The event handler for the received data</param>
-        /// <returns>A stream id. This stream id can be used to close this specific stream using the <see cref="UnsubscribeFromStream(int)"/> method</returns>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
+        /// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
         public BinanceApiResult<BinanceStreamSubscription> SubscribeToSymbolTicker(string symbol, Action<BinanceStreamTick> onMessage)
         {
             symbol = symbol.ToLower();
@@ -151,7 +154,8 @@ namespace Binance.Net
         /// Subscribes to ticker updates stream for all symbols
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>
-        /// <returns>A stream id. This stream id can be used to close this specific stream using the <see cref="UnsubscribeFromStream(int)"/> method</returns>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
+        /// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
         public BinanceApiResult<BinanceStreamSubscription> SubscribeToAllSymbolTicker(Action<BinanceStreamTick[]> onMessage)
         {
             var socketResult = CreateSocket(BaseWebsocketAddress + AllSymbolTickerStreamEndpoint);
@@ -165,10 +169,13 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Subscribes to ticker updates stream for all symbols
+        /// Subscribes to the depth updates
         /// </summary>
+        /// <param name="symbol">The symbol to subscribe on</param>
+        /// <param name="levels">The amount of entries to be returned in the update</param>
         /// <param name="onMessage">The event handler for the received data</param>
-        /// <returns>A stream id. This stream id can be used to close this specific stream using the <see cref="UnsubscribeFromStream(int)"/> method</returns>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
+        /// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
         public BinanceApiResult<BinanceStreamSubscription> SubscribeToPartialBookDepthStream(string symbol, int levels, Action<BinanceOrderBook> onMessage)
         {
             symbol = symbol.ToLower();
@@ -186,8 +193,10 @@ namespace Binance.Net
         /// Subscribes to the account update stream. Prior to using this, the <see cref="BinanceClient.StartUserStream"/> method should be called.
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-        /// <param name="onMessage">The event handler for the data received</param>
-        /// <returns>bool indicating success</returns>
+        /// <param name="onAccountInfoMessage">The event handler for whenever an account info update is received</param>
+        /// <param name="OnOrderUpdateMessage">The event handler for whenever an order status update is received</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
+        /// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
         public BinanceApiResult<BinanceStreamSubscription> SubscribeToUserStream(string listenKey, Action<BinanceStreamAccountInfo> onAccountInfoMessage, Action<BinanceStreamOrderUpdate> OnOrderUpdateMessage)
         {
             if (string.IsNullOrEmpty(listenKey))
@@ -202,7 +211,8 @@ namespace Binance.Net
         /// <param name="streamSubscription">The stream subscription received by subscribing</param>
         public void UnsubscribeFromStream(BinanceStreamSubscription streamSubscription)
         {
-            sockets.SingleOrDefault(s => s.StreamResult.StreamId == streamSubscription.StreamId)?.Socket.Close();            
+            lock (sockets)
+                sockets.SingleOrDefault(s => s.StreamResult.StreamId == streamSubscription.StreamId)?.Socket.Close();
         }
 
         /// <summary>
@@ -223,7 +233,7 @@ namespace Binance.Net
             GC.SuppressFinalize(this);
         }
 
-        private BinanceApiResult<BinanceStreamSubscription> CreateUserStream(string listenKey, Action<BinanceStreamAccountInfo> onAccountInfoMessage, Action<BinanceStreamOrderUpdate> OnOrderUpdateMessage)
+        private BinanceApiResult<BinanceStreamSubscription> CreateUserStream(string listenKey, Action<BinanceStreamAccountInfo> onAccountInfoMessage, Action<BinanceStreamOrderUpdate> onOrderUpdateMessage)
         {
             var socketResult = CreateSocket(BaseWebsocketAddress + listenKey);
             if (!socketResult.Success)
@@ -234,7 +244,7 @@ namespace Binance.Net
                 if(s.Message.Contains(AccountUpdateEvent))
                     onAccountInfoMessage?.Invoke(JsonConvert.DeserializeObject<BinanceStreamAccountInfo>(s.Message));
                 else if (s.Message.Contains(ExecutionUpdateEvent))
-                    OnOrderUpdateMessage?.Invoke(JsonConvert.DeserializeObject<BinanceStreamOrderUpdate>(s.Message));
+                    onOrderUpdateMessage?.Invoke(JsonConvert.DeserializeObject<BinanceStreamOrderUpdate>(s.Message));
             };
 
             log.Write(LogVerbosity.Debug, "User stream started");
