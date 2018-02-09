@@ -29,7 +29,7 @@ namespace Binance.Net
         private DateTime? lastExchangeInfoUpdate;
 
         // Addresses
-        private const string BaseApiAddress = "https://www.binance.com";
+        private const string BaseApiAddress = "https://api.binance.com";
         private const string Api = "api";
         private const string WithdrawalApi = "wapi";
 
