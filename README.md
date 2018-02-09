@@ -287,6 +287,9 @@ BinanceDefaults.SetDefaultLogVerbosity(LogVerbosity.Debug);
 
 
 ## Release notes
+* Version 2.3.2 - 09 feb 2018
+	* Changed base address from https://www.binance.com to https://api.binance.com to fix connection errors
+
 * Version 2.3.1 - 08 feb 2018
 	* Updated models to latest version
 	* Cleaned code and code docs
