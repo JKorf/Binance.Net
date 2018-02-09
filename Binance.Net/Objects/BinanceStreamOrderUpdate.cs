@@ -49,7 +49,7 @@ namespace Binance.Net.Objects
         [JsonProperty("F")]
         public decimal IcebergQuantity { get; set; }
         [JsonProperty("g")]
-        internal decimal g { get; set; }
+        public decimal g { get; set; }
         [JsonProperty("C")]
         public object OriginalClientOrderId { get; set; }
         /// <summary>
@@ -117,7 +117,7 @@ namespace Binance.Net.Objects
         [JsonProperty("m")]
         public bool BuyerIsMaker { get; set; }
 
-        [JsonProperty("M")]
-        internal bool O { get; set; }
+        [JsonProperty("O")]
+        public object O { get; set; }
     }
 }
