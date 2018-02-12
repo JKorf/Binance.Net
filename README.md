@@ -287,6 +287,9 @@ BinanceDefaults.SetDefaultLogVerbosity(LogVerbosity.Debug);
 
 
 ## Release notes
+* Version 2.3.4 - 12 feb 2018
+	* Fix for AutoComply trading rules sending too much trailing zero's
+
 * Version 2.3.3 - 10 feb 2018
 	* Fix for stream order parsing
 

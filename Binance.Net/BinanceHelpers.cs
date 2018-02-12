@@ -9,6 +9,7 @@ namespace Binance.Net
             quantity = Math.Min(maxQuantity, quantity);
             quantity = Math.Max(minQuantity, quantity);
             quantity -= quantity % stepSize;
+            quantity = Floor(quantity);
             return quantity;
         }
 
@@ -17,7 +18,13 @@ namespace Binance.Net
             price = Math.Min(maxPrice, price);
             price = Math.Max(minPrice, price);
             price -= price % tickSize;
+            price = Floor(price);
             return price;
+        }
+
+        private static decimal Floor(decimal number)
+        {
+            return Math.Floor(number * 100000000) / 100000000;
         }
     }
 }
