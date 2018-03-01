@@ -3,29 +3,20 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
   </PropertyGroup>
-  
-  <PropertyGroup>
-    <Version>2.3.4</Version>
-    <FileVersion>2.3.4</FileVersion>
-    <Authors>JKorf</Authors>
-    <Description>Binance .Net API wrapper</Description>
-    <Copyright></Copyright>
-  </PropertyGroup>
-  
+    
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
 	<Authors>JKorf</Authors>
-    <PackageVersion>2.3.4</PackageVersion>
-	<Description>Binance .Net API wrapper</Description>
+    <PackageVersion>3.0.0</PackageVersion>
+	<Description>Binance.Net is a .Net wrapper for the Binance API. It includes all features the API provides using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageTags>Binance Binance.Net CryptoCurrency Exchange API wrapper</PackageTags>
+    <PackageTags>Binance Binance.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
     <PackageProjectUrl>https://github.com/JKorf/Binance.Net</PackageProjectUrl>
 	<PackageIconUrl>https://raw.githubusercontent.com/JKorf/Binance.Net/master/Resources/binance-coin.png</PackageIconUrl>
 	<PackageLicenseUrl>https://github.com/JKorf/Binance.Net/blob/master/LICENSE</PackageLicenseUrl>
 	<NeutralLanguage>en</NeutralLanguage>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	<PackageReleaseNotes>2.3.4 - 
-	* Fix for AutoComply trading rules sending too much trailing zero's</PackageReleaseNotes>
+	<PackageReleaseNotes>3.0.0 - Updated to use a base package, which introduces some changes in syntax, but keeps functionality unchanged</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
