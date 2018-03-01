@@ -30,7 +30,7 @@ namespace Binance.Net
         private DateTime? lastExchangeInfoUpdate;
         
         // Addresses
-        private const string BaseApiAddress = "https://api.binance.com";
+        private string baseApiAddress;
         private const string Api = "api";
         private const string WithdrawalApi = "wapi";
 
@@ -938,6 +938,7 @@ namespace Binance.Net
             if (options.ApiCredentials != null)
                 SetAuthenticationProvider(new BinanceAuthenticationProvider(options.ApiCredentials));
 
+            baseApiAddress = options.BaseAddress;
             autoTimestamp = options.AutoTimestamp;
             tradeRulesBehaviour = options.TradeRulesBehaviour;
             tradeRulesUpdateInterval = options.TradeRulesUpdateInterval;
@@ -945,7 +946,7 @@ namespace Binance.Net
         
         private Uri GetUrl(string endpoint, string api, string version)
         {
-            var result = $"{BaseApiAddress}/{api}/v{version}/{endpoint}";
+            var result = $"{baseApiAddress}/{api}/v{version}/{endpoint}";
             return new Uri(result);
         }
         
