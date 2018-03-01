@@ -1,26 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Binance.Net.Objects;
-using Newtonsoft.Json;
+using CryptoExchange.Net;
 
 namespace Binance.Net.Converters
 {
-    public class OrderRejectReasonConverter: JsonConverter
+    public class OrderRejectReasonConverter: BaseConverter<OrderRejectReason>
     {
-        private readonly bool quotes;
+        public OrderRejectReasonConverter(): this(true) { }
+        public OrderRejectReasonConverter(bool quotes) : base(quotes) { }
 
-        public OrderRejectReasonConverter()
-        {
-            quotes = true;
-        }
-
-        public OrderRejectReasonConverter(bool useQuotes)
-        {
-            quotes = useQuotes;
-        }
-
-        private readonly Dictionary<OrderRejectReason, string> values = new Dictionary<OrderRejectReason, string>()
+        protected override Dictionary<OrderRejectReason, string> Mapping => new Dictionary<OrderRejectReason, string>()
         {
             { OrderRejectReason.None, "NONE" },
             { OrderRejectReason.UnknownInstrument, "UNKNOWN_INSTRUMENT" },
@@ -31,25 +20,7 @@ namespace Binance.Net.Converters
             { OrderRejectReason.UnknownAccount, "UNKNOWN_ACCOUNT" },
             { OrderRejectReason.InsufficientBalance, "INSUFFICIENT_BALANCE" },
             { OrderRejectReason.AccountInactive, "ACCOUNT_INACTIVE" },
-            { OrderRejectReason.AccountCannotSettle, "ACCOUNT_CANNOT_SETTLE" },
+            { OrderRejectReason.AccountCannotSettle, "ACCOUNT_CANNOT_SETTLE" }
         };
-
-        public override bool CanConvert(Type objectType)
-        {
-            return objectType == typeof(OrderRejectReason);
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            return values.Single(v => v.Value == (string)reader.Value).Key;
-        }
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-            if (quotes)
-                writer.WriteValue(values[(OrderRejectReason)value]);
-            else
-                writer.WriteRawValue(values[(OrderRejectReason)value]);
-        }
     }
 }

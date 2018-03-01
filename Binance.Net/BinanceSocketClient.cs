@@ -1,14 +1,15 @@
 ﻿using Binance.Net.Converters;
 using Binance.Net.Implementations;
 using Binance.Net.Interfaces;
-using Binance.Net.Logging;
 using Binance.Net.Objects;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Authentication;
-using Binance.Net.Errors;
+using CryptoExchange.Net;
+using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Logging;
 using SuperSocket.ClientEngine;
 
 namespace Binance.Net
@@ -16,11 +17,12 @@ namespace Binance.Net
     /// <summary>
     /// Client providing access to the Binance websocket Api
     /// </summary>
-    public class BinanceSocketClient: BinanceAbstractClient, IDisposable
+    public class BinanceSocketClient: ExchangeClient
     {
         #region fields
-        private const string BaseWebsocketAddress = "wss://stream.binance.com:9443/ws/";
+        private static BinanceSocketClientOptions defaultOptions = new BinanceSocketClientOptions();
 
+        private string baseWebsocketAddress;
         private readonly List<BinanceStream> sockets = new List<BinanceStream>();
 
         private int lastStreamId;
@@ -47,7 +49,7 @@ namespace Binance.Net
         /// <summary>
         /// Create a new instance of BinanceSocketClient
         /// </summary>
-        public BinanceSocketClient()
+        public BinanceSocketClient():this(defaultOptions)
         {
         }
 
@@ -56,19 +58,19 @@ namespace Binance.Net
         /// </summary>
         /// <param name="apiKey">The api key</param>
         /// <param name="apiSecret">The api secret associated with the key</param>
-        public BinanceSocketClient(string apiKey, string apiSecret)
+        public BinanceSocketClient(BinanceSocketClientOptions options): base(options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials))
         {
-            SetApiCredentials(apiKey, apiSecret);
+            Configure(options);
         }
-
-        ~BinanceSocketClient()
-        {
-            Dispose(false);
-        }
-
         #endregion 
 
         #region methods
+
+        public void SetDefaultOptions(BinanceSocketClientOptions options)
+        {
+            defaultOptions = options;
+        }
+
         /// <summary>
         /// Subscribes to the candlestick update stream for the provided symbol
         /// </summary>
@@ -77,17 +79,17 @@ namespace Binance.Net
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
         /// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
-        public BinanceApiResult<BinanceStreamSubscription> SubscribeToKlineStream(string symbol, KlineInterval interval, Action<BinanceStreamKline> onMessage)
+        public CallResult<BinanceStreamSubscription> SubscribeToKlineStream(string symbol, KlineInterval interval, Action<BinanceStreamKline> onMessage)
         {
             symbol = symbol.ToLower();
-            var socketResult = CreateSocket(BaseWebsocketAddress + symbol + KlineStreamEndpoint + "_" + JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)));
+            var socketResult = CreateSocket(baseWebsocketAddress + symbol + KlineStreamEndpoint + "_" + JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)));
             if (!socketResult.Success)
-                return new BinanceApiResult<BinanceStreamSubscription>() {Error = socketResult.Error};
+                return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
 
             socketResult.Data.Socket.OnMessage += (o, s) => onMessage(JsonConvert.DeserializeObject<BinanceStreamKline>(s.Message));
 
             log.Write(LogVerbosity.Debug, $"Started kline stream for {symbol}: {interval}");
-            return new BinanceApiResult<BinanceStreamSubscription>() { Data = socketResult.Data.StreamResult, Success = true };
+            return new CallResult<BinanceStreamSubscription>(socketResult.Data.StreamResult, null);
         }
 
         /// <summary>
@@ -97,17 +99,17 @@ namespace Binance.Net
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
         /// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
-        public BinanceApiResult<BinanceStreamSubscription> SubscribeToDepthStream(string symbol, Action<BinanceStreamDepth> onMessage)
+        public CallResult<BinanceStreamSubscription> SubscribeToDepthStream(string symbol, Action<BinanceStreamDepth> onMessage)
         {
             symbol = symbol.ToLower();
-            var socketResult = CreateSocket(BaseWebsocketAddress + symbol + DepthStreamEndpoint);
+            var socketResult = CreateSocket(baseWebsocketAddress + symbol + DepthStreamEndpoint);
             if (!socketResult.Success)
-                return new BinanceApiResult<BinanceStreamSubscription>() { Error = socketResult.Error };
+                return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
 
             socketResult.Data.Socket.OnMessage += (o, s) => onMessage(JsonConvert.DeserializeObject<BinanceStreamDepth>(s.Message));
 
             log.Write(LogVerbosity.Debug, $"Started depth stream for {symbol}");
-            return new BinanceApiResult<BinanceStreamSubscription>() { Data = socketResult.Data.StreamResult, Success = true };
+            return new CallResult<BinanceStreamSubscription>(socketResult.Data.StreamResult, null);
         }
 
         /// <summary>
@@ -117,17 +119,17 @@ namespace Binance.Net
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
         /// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
-        public BinanceApiResult<BinanceStreamSubscription> SubscribeToTradesStream(string symbol, Action<BinanceStreamTrade> onMessage)
+        public CallResult<BinanceStreamSubscription> SubscribeToTradesStream(string symbol, Action<BinanceStreamTrade> onMessage)
         {
             symbol = symbol.ToLower();
-            var socketResult = CreateSocket(BaseWebsocketAddress + symbol + TradesStreamEndpoint);
+            var socketResult = CreateSocket(baseWebsocketAddress + symbol + TradesStreamEndpoint);
             if (!socketResult.Success)
-                return new BinanceApiResult<BinanceStreamSubscription>() { Error = socketResult.Error };
+                return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
 
             socketResult.Data.Socket.OnMessage += (o, s) => onMessage(JsonConvert.DeserializeObject<BinanceStreamTrade>(s.Message));
 
             log.Write(LogVerbosity.Debug, $"Started trade stream for {symbol}");
-            return new BinanceApiResult<BinanceStreamSubscription>() { Data = socketResult.Data.StreamResult, Success = true };
+            return new CallResult<BinanceStreamSubscription>(socketResult.Data.StreamResult, null);
         }
 
         /// <summary>
@@ -137,17 +139,17 @@ namespace Binance.Net
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
         /// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
-        public BinanceApiResult<BinanceStreamSubscription> SubscribeToSymbolTicker(string symbol, Action<BinanceStreamTick> onMessage)
+        public CallResult<BinanceStreamSubscription> SubscribeToSymbolTicker(string symbol, Action<BinanceStreamTick> onMessage)
         {
             symbol = symbol.ToLower();
-            var socketResult = CreateSocket(BaseWebsocketAddress + symbol + SymbolTickerStreamEndpoint);
+            var socketResult = CreateSocket(baseWebsocketAddress + symbol + SymbolTickerStreamEndpoint);
             if (!socketResult.Success)
-                return new BinanceApiResult<BinanceStreamSubscription>() { Error = socketResult.Error };
+                return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
 
             socketResult.Data.Socket.OnMessage += (o, s) => onMessage(JsonConvert.DeserializeObject<BinanceStreamTick>(s.Message));
 
             log.Write(LogVerbosity.Debug, $"Started symbol ticker stream for {symbol}");
-            return new BinanceApiResult<BinanceStreamSubscription>() { Data = socketResult.Data.StreamResult, Success = true };
+            return new CallResult<BinanceStreamSubscription>(socketResult.Data.StreamResult, null);
         }
 
         /// <summary>
@@ -156,16 +158,16 @@ namespace Binance.Net
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
         /// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
-        public BinanceApiResult<BinanceStreamSubscription> SubscribeToAllSymbolTicker(Action<BinanceStreamTick[]> onMessage)
+        public CallResult<BinanceStreamSubscription> SubscribeToAllSymbolTicker(Action<BinanceStreamTick[]> onMessage)
         {
-            var socketResult = CreateSocket(BaseWebsocketAddress + AllSymbolTickerStreamEndpoint);
+            var socketResult = CreateSocket(baseWebsocketAddress + AllSymbolTickerStreamEndpoint);
             if (!socketResult.Success)
-                return new BinanceApiResult<BinanceStreamSubscription>() { Error = socketResult.Error };
+                return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
 
             socketResult.Data.Socket.OnMessage += (o, s) => onMessage(JsonConvert.DeserializeObject<BinanceStreamTick[]>(s.Message));
 
             log.Write(LogVerbosity.Debug, $"Started all symbol ticker stream");
-            return new BinanceApiResult<BinanceStreamSubscription>() { Data = socketResult.Data.StreamResult, Success = true };
+            return new CallResult<BinanceStreamSubscription>(socketResult.Data.StreamResult, null);
         }
 
         /// <summary>
@@ -176,17 +178,17 @@ namespace Binance.Net
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
         /// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
-        public BinanceApiResult<BinanceStreamSubscription> SubscribeToPartialBookDepthStream(string symbol, int levels, Action<BinanceOrderBook> onMessage)
+        public CallResult<BinanceStreamSubscription> SubscribeToPartialBookDepthStream(string symbol, int levels, Action<BinanceOrderBook> onMessage)
         {
             symbol = symbol.ToLower();
-            var socketResult = CreateSocket(BaseWebsocketAddress + symbol + PartialBookDepthStreamEndpoint + levels.ToString());
+            var socketResult = CreateSocket(baseWebsocketAddress + symbol + PartialBookDepthStreamEndpoint + levels.ToString());
             if (!socketResult.Success)
-                return new BinanceApiResult<BinanceStreamSubscription>() { Error = socketResult.Error };
+                return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
 
             socketResult.Data.Socket.OnMessage += (o, s) => onMessage(JsonConvert.DeserializeObject<BinanceOrderBook>(s.Message));
 
             log.Write(LogVerbosity.Debug, $"Started partial book depth stream");
-            return new BinanceApiResult<BinanceStreamSubscription>() { Data = socketResult.Data.StreamResult, Success = true };
+            return new CallResult<BinanceStreamSubscription>(socketResult.Data.StreamResult, null);
         }
 
         /// <summary>
@@ -197,10 +199,10 @@ namespace Binance.Net
         /// <param name="OnOrderUpdateMessage">The event handler for whenever an order status update is received</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
         /// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
-        public BinanceApiResult<BinanceStreamSubscription> SubscribeToUserStream(string listenKey, Action<BinanceStreamAccountInfo> onAccountInfoMessage, Action<BinanceStreamOrderUpdate> OnOrderUpdateMessage)
+        public CallResult<BinanceStreamSubscription> SubscribeToUserStream(string listenKey, Action<BinanceStreamAccountInfo> onAccountInfoMessage, Action<BinanceStreamOrderUpdate> OnOrderUpdateMessage)
         {
             if (string.IsNullOrEmpty(listenKey))
-                return ThrowErrorMessage<BinanceStreamSubscription>(BinanceErrors.GetError(BinanceErrorKey.NoListenKey));
+                return new CallResult<BinanceStreamSubscription>(null, new ArgumentError("ListenKey must be provided"));
             
             return CreateUserStream(listenKey, onAccountInfoMessage, OnOrderUpdateMessage);
         }
@@ -227,17 +229,17 @@ namespace Binance.Net
         /// <summary>
         /// Dispose this instance
         /// </summary>
-        public void Dispose()
+        public override void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            lock (sockets)
+                sockets.ToList().ForEach(s => s.Socket.Close());
         }
 
-        private BinanceApiResult<BinanceStreamSubscription> CreateUserStream(string listenKey, Action<BinanceStreamAccountInfo> onAccountInfoMessage, Action<BinanceStreamOrderUpdate> onOrderUpdateMessage)
+        private CallResult<BinanceStreamSubscription> CreateUserStream(string listenKey, Action<BinanceStreamAccountInfo> onAccountInfoMessage, Action<BinanceStreamOrderUpdate> onOrderUpdateMessage)
         {
-            var socketResult = CreateSocket(BaseWebsocketAddress + listenKey);
+            var socketResult = CreateSocket(baseWebsocketAddress + listenKey);
             if (!socketResult.Success)
-                return new BinanceApiResult<BinanceStreamSubscription>() { Data = null, Success = false, Error = socketResult.Error};
+                return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
 
             socketResult.Data.Socket.OnMessage += (o, s) =>
             {
@@ -248,11 +250,11 @@ namespace Binance.Net
             };
 
             log.Write(LogVerbosity.Debug, "User stream started");
-            return new BinanceApiResult<BinanceStreamSubscription>() { Data = socketResult.Data.StreamResult, Success = true};
+            return new CallResult<BinanceStreamSubscription>(socketResult.Data.StreamResult, null);
         }
 
 
-        private BinanceApiResult<BinanceStream> CreateSocket(string url)
+        private CallResult<BinanceStream> CreateSocket(string url)
         {
             try
             {
@@ -270,14 +272,19 @@ namespace Binance.Net
                 socket.Connect();
                 lock (sockets)
                     sockets.Add(socketObject);
-                return new BinanceApiResult<BinanceStream>() {Data = socketObject, Success = true};
+                return new CallResult<BinanceStream>(socketObject, null);
             }
             catch (Exception e)
             {
                 var errorMessage = $"Couldn't open socket stream: {e.Message}";
                 log.Write(LogVerbosity.Error, errorMessage);
-                return ThrowErrorMessage<BinanceStream>(BinanceErrors.GetError(BinanceErrorKey.CantConnectToServer), errorMessage);
+                return new CallResult<BinanceStream>(null, new CantConnectError());
             }
+        }
+        
+        private void Configure(BinanceSocketClientOptions options)
+        {
+            baseWebsocketAddress = options.BaseSocketAddress;
         }
 
         private void Socket_OnOpen(object sender, EventArgs e)
@@ -304,12 +311,6 @@ namespace Binance.Net
                 lastStreamId++;
                 return lastStreamId;
             }
-        }
-        
-        private void Dispose(bool disposing)
-        {
-            lock (sockets)
-                sockets.ToList().ForEach(s => s.Socket.Close());
         }
         #endregion
     }

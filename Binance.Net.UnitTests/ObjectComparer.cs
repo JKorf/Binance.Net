@@ -23,7 +23,7 @@ namespace Binance.Net.UnitTests
                     var selfValue = type.GetProperty(pi.Name).GetValue(self, null);
                     var toValue = type.GetProperty(pi.Name).GetValue(to, null);
 
-                    if (pi.PropertyType.IsClass && !pi.PropertyType.Module.ScopeName.Equals("CommonLanguageRuntimeLibrary"))
+                    if (pi.PropertyType.IsClass && !pi.PropertyType.Module.ScopeName.Equals("System.Private.CoreLib.dll"))
                     {
                         // Check of "CommonLanguageRuntimeLibrary" is needed because string is also a class
                         if (PublicInstancePropertiesEqual(selfValue, toValue, ignore))

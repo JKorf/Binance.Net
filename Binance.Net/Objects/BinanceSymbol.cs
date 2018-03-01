@@ -15,8 +15,8 @@ namespace Binance.Net.Objects
         public string QuoteAsset { get; set; }
         public string QuotePrecision { get; set; }
         [JsonConverter(typeof(OrderTypeConverter))]
-        public List<OrderType> OrderTypes { get; set; }
+        public OrderType[] OrderTypes { get; set; }
         public bool IceBergAllowed { get; set; }
-        public List<BinanceSymbolFilter> Filters { get; set; }
+        public BinanceSymbolFilter[] Filters { get; set; }
     }
 }

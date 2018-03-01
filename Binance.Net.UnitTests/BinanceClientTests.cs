@@ -8,7 +8,11 @@ using Binance.Net.Interfaces;
 using Binance.Net.Objects;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Reflection;
+using CryptoExchange.Net;
+using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Interfaces;
 
 namespace Binance.Net.UnitTests
 {
@@ -756,17 +760,20 @@ namespace Binance.Net.UnitTests
             var request = new Mock<IRequest>();
             request.Setup(c => c.Headers).Returns(new WebHeaderCollection());
             request.Setup(c => c.GetResponse()).Returns(response.Object);
+            request.Setup(c => c.Uri).Returns(new Uri("http://www.test.com"));
 
             var factory = new Mock<IRequestFactory>();
             factory.Setup(c => c.Create(It.IsAny<string>()))
                 .Returns(request.Object);
 
-            BinanceClient client = new BinanceClient
+            BinanceClient client = new BinanceClient(new BinanceClientOptions()
+            {
+                ApiCredentials = new ApiCredentials("test", "test"),
+                AutoTimestamp = true
+            })
             {
                 RequestFactory = factory.Object,
-                AutoTimestamp = true
             };
-            client.SetApiCredentials("test", "test");
 
             // act
             client.GetAllOrders("BNBBTC");
@@ -779,7 +786,7 @@ namespace Binance.Net.UnitTests
         public void ReceivingBinanceError_Should_ReturnBinanceErrorAndNotSuccess()
         {
             // arrange
-            var client = PrepareExceptionClient(JsonConvert.SerializeObject(new BinanceError(){ Code = 1, Message = "TestMessage"}), "504 error", 504);
+            var client = PrepareExceptionClient(JsonConvert.SerializeObject(new ArgumentError("TestMessage")), "504 error", 504);
 
             // act
             var result = client.Ping();
@@ -787,15 +794,14 @@ namespace Binance.Net.UnitTests
             // assert
             Assert.IsFalse(result.Success);
             Assert.IsNotNull(result.Error);
-            Assert.IsTrue(result.Error.Code == 1);
-            Assert.IsTrue(result.Error.Message == "TestMessage");
+            Assert.IsTrue(result.Error.Message.Contains("504 error"));
         }
 
         [TestCase()]
         public void ReceivingBinanceErrorWithBelow400StatusCode_Should_NotReturnBinanceErrorAndNotSucceed()
         {
             // arrange
-            var client = PrepareExceptionClient(JsonConvert.SerializeObject(new BinanceError() { Code = 1, Message = "TestMessage" }), "InvalidStatusCodeResponse", 203);
+            var client = PrepareExceptionClient(JsonConvert.SerializeObject(new ArgumentError("TestMessage")), "InvalidStatusCodeResponse", 203);
 
             // act
             var result = client.Ping();
@@ -855,7 +861,7 @@ namespace Binance.Net.UnitTests
             factory.Setup(c => c.Create(It.IsAny<string>()))
                 .Returns(request.Object);
 
-            BinanceClient client = credentials ? new BinanceClient("Test", "Test") : new BinanceClient();
+            BinanceClient client = credentials ? new BinanceClient(new BinanceClientOptions(){ ApiCredentials = new ApiCredentials("test", "test")}) : new BinanceClient();
             client.RequestFactory = factory.Object;
             return client;
         }
@@ -867,14 +873,15 @@ namespace Binance.Net.UnitTests
             responseStream.Write(expectedBytes, 0, expectedBytes.Length);
             responseStream.Seek(0, SeekOrigin.Begin);
 
-            var webresponse = Activator.CreateInstance<HttpWebResponse>();
-            typeof(HttpWebResponse).GetField("m_StatusCode", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).SetValue(webresponse, (HttpStatusCode)statusCode);
-            typeof(HttpWebResponse).GetField("m_ConnectStream", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).SetValue(webresponse, responseStream);
-
             var we = new WebException();
+            var r = new HttpWebResponse();
+            var re = new HttpResponseMessage();
+
+            typeof(HttpResponseMessage).GetField("_statusCode", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).SetValue(re, (HttpStatusCode)statusCode);
+            typeof(HttpWebResponse).GetField("_httpResponseMessage", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).SetValue(r, re);
             typeof(WebException).GetField("_message", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).SetValue(we, exceptionMessage);
-            typeof(WebException).GetField("m_Response", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).SetValue(we, webresponse);
-            
+            typeof(WebException).GetField("_response", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).SetValue(we, r);
+
             var response = new Mock<IResponse>();
             response.Setup(c => c.GetResponseStream()).Throws(we);
 
@@ -886,7 +893,7 @@ namespace Binance.Net.UnitTests
             factory.Setup(c => c.Create(It.IsAny<string>()))
                 .Returns(request.Object);
 
-            BinanceClient client = credentials ? new BinanceClient("Test", "Test") : new BinanceClient();
+            BinanceClient client = credentials ? new BinanceClient(new BinanceClientOptions(){ ApiCredentials = new ApiCredentials("test", "test")}) : new BinanceClient();
             client.RequestFactory = factory.Object;
             return client;
         }

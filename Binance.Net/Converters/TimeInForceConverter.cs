@@ -1,48 +1,19 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Binance.Net.Objects;
+using CryptoExchange.Net;
 
 namespace Binance.Net.Converters
 {
-    public class TimeInForceConverter : JsonConverter
+    public class TimeInForceConverter : BaseConverter<TimeInForce>
     {
-        private readonly bool quotes; 
+        public TimeInForceConverter(): this(true) { }
+        public TimeInForceConverter(bool quotes) : base(quotes) { }
 
-        public TimeInForceConverter()
-        {
-            quotes = true;
-        }
-
-        public TimeInForceConverter(bool useQuotes)
-        {
-            quotes = useQuotes;
-        }
-
-        private readonly Dictionary<TimeInForce, string> values = new Dictionary<TimeInForce, string>()
+        protected override Dictionary<TimeInForce, string> Mapping => new Dictionary<TimeInForce, string>()
         {
             { TimeInForce.GoodTillCancel, "GTC" },
             { TimeInForce.ImmediateOrCancel, "IOC" },
             { TimeInForce.FillOrKill, "FOK" },
         };
-
-        public override bool CanConvert(Type objectType)
-        {
-            return objectType == typeof(TimeInForce);
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            return values.Single(v => v.Value == (string)reader.Value).Key;
-        }
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-            if(quotes)
-                writer.WriteValue(values[(TimeInForce)value]);
-            else
-                writer.WriteRawValue(values[(TimeInForce)value]);
-        }
     }
 }

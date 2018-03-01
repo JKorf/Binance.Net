@@ -32,9 +32,14 @@ namespace Binance.Net.Objects
         [JsonProperty("prevClosePrice")]
         public decimal PreviousClosePrice { get; set; }
         /// <summary>
-        /// The most recent price
+        /// The most recent trade price
         /// </summary>
         public decimal LastPrice { get; set; }
+        /// <summary>
+        /// The most recent trade quantity
+        /// </summary>
+        [JsonProperty("lastQty")]
+        public decimal LastQuantity { get; set; }
         /// <summary>
         /// The best bid price in the order book
         /// </summary>

@@ -1,26 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Binance.Net.Objects;
-using Newtonsoft.Json;
+using CryptoExchange.Net;
 
 namespace Binance.Net.Converters
 {
-    public class KlineIntervalConverter: JsonConverter
+    public class KlineIntervalConverter: BaseConverter<KlineInterval>
     {
-        private readonly bool quotes;
+        public KlineIntervalConverter(): this(true) { }
+        public KlineIntervalConverter(bool quotes) : base(quotes) { }
 
-        public KlineIntervalConverter()
-        {
-            quotes = true;
-        }
-
-        public KlineIntervalConverter(bool useQuotes)
-        {
-            quotes = useQuotes;
-        }
-
-        private readonly Dictionary<KlineInterval, string> values = new Dictionary<KlineInterval, string>()
+        protected override Dictionary<KlineInterval, string> Mapping => new Dictionary<KlineInterval, string>()
         {
             { KlineInterval.OneMinute, "1m" },
             { KlineInterval.ThreeMinutes, "3m" },
@@ -38,23 +27,5 @@ namespace Binance.Net.Converters
             { KlineInterval.OneWeek, "1w" },
             { KlineInterval.OneMonth, "1M" },
         };
-
-        public override bool CanConvert(Type objectType)
-        {
-            return objectType == typeof(KlineInterval);
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            return values.Single(v => v.Value == (string)reader.Value).Key;
-        }
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-            if (quotes)
-                writer.WriteValue(values[(KlineInterval)value]);
-            else
-                writer.WriteRawValue(values[(KlineInterval)value]);
-        }
     }
 }

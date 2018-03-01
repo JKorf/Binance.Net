@@ -48,7 +48,7 @@ namespace Binance.Net.Converters
                     if (reader.TokenType == JsonToken.EndArray)
                         break;
                 }
-                return result;
+                return result.ToArray();
             }
             else
                 return values.Single(v => v.Value == (string)reader.Value).Key;

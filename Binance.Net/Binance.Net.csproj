@@ -29,8 +29,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-    <PackageReference Include="WebSocket4Net" Version="0.15.1" />
+    <PackageReference Include="CryptoExchange.Net" Version="0.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
+    <PackageReference Include="WebSocket4Net" Version="0.15.2" />
   </ItemGroup>
   
 </Project>
