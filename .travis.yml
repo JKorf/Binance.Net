@@ -5,4 +5,4 @@ dotnet: 2.0.0
 dist: trusty
 script:
  - dotnet build Binance.Net/Binance.Net.csproj --framework "netstandard2.0"
- - dotnet test Binance.Net.UnitTests.Core/Binance.Net.UnitTests.csproj
+ - dotnet test Binance.Net.UnitTests/Binance.Net.UnitTests.csproj
