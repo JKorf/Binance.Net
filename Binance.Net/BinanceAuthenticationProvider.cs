@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Interfaces;
@@ -8,7 +7,7 @@ namespace Binance.Net
 {
     public class BinanceAuthenticationProvider: AuthenticationProvider
     {
-        private HMACSHA256 encryptor;
+        private readonly HMACSHA256 encryptor;
 
         public BinanceAuthenticationProvider(ApiCredentials credentials) : base(credentials)
         {

@@ -8,7 +8,6 @@ using Newtonsoft.Json;
 using Binance.Net.Objects;
 using Binance.Net.Converters;
 using CryptoExchange.Net;
-using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Logging;
 
 namespace Binance.Net
@@ -83,19 +82,26 @@ namespace Binance.Net
         #endregion
 
         #region constructor/destructor
+        /// <summary>
+        /// Set the default options to be used when creating new clients
+        /// </summary>
+        /// <param name="options"></param>
+        public void SetDefaultOptions(BinanceClientOptions options)
+        {
+            defaultOptions = options;
+        }
 
         /// <summary>
-        /// Create a new instance of BinanceClient
+        /// Create a new instance of BinanceClient using the default options
         /// </summary>
         public BinanceClient(): this(defaultOptions)
         {
         }
 
         /// <summary>
-        /// Create a new instance of BinanceClient using provided credentials. Api keys can be managed at https://www.binance.com/userCenter/createApi.html
+        /// Create a new instance of BinanceClient using provided options
         /// </summary>
-        /// <param name="apiKey">The api key</param>
-        /// <param name="apiSecret">The api secret associated with the key</param>
+        /// <param name="options">The options to use for this client</param>
         public BinanceClient(BinanceClientOptions options): base(options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials))
         {
             Configure(options);
@@ -149,7 +155,7 @@ namespace Binance.Net
                 if (!timeSynced)
                 {
                     // Calculate time offset between local and server by taking the elapsed time request time / 2 (round trip)
-                    timeOffset = ((result.Data.ServerTime - localTime).TotalMilliseconds) - sw.ElapsedMilliseconds / 2;
+                    timeOffset = ((result.Data.ServerTime - localTime).TotalMilliseconds) - sw.ElapsedMilliseconds / 2.0;
                     timeSynced = true;
                     log.Write(LogVerbosity.Debug, $"Time offset set to {timeOffset}ms");
                 }
@@ -897,7 +903,7 @@ namespace Binance.Net
                 { "listenKey", listenKey },
             };
 
-            return await ExecuteRequest<object>(GetUrl(KeepListenKeyAliveEndpoint, Api, UserDataStreamVersion), PutMethod, parameters, false).ConfigureAwait(false);
+            return await ExecuteRequest<object>(GetUrl(KeepListenKeyAliveEndpoint, Api, UserDataStreamVersion), PutMethod, parameters).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -919,7 +925,7 @@ namespace Binance.Net
                 { "listenKey", listenKey },
             };
             
-            return await ExecuteRequest<object>(GetUrl(CloseListenKeyEndpoint, Api, UserDataStreamVersion), DeleteMethod, parameters, false).ConfigureAwait(false); 
+            return await ExecuteRequest<object>(GetUrl(CloseListenKeyEndpoint, Api, UserDataStreamVersion), DeleteMethod, parameters).ConfigureAwait(false); 
         }
         #endregion      
         #endregion
@@ -968,7 +974,7 @@ namespace Binance.Net
             if (tradeRulesBehaviour == TradeRulesBehaviour.None)
                 return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice);
 
-            if (exchangeInfo == null || (DateTime.UtcNow - lastExchangeInfoUpdate.Value).TotalMinutes > tradeRulesUpdateInterval.TotalMinutes)
+            if (exchangeInfo == null || lastExchangeInfoUpdate == null || (DateTime.UtcNow - lastExchangeInfoUpdate.Value).TotalMinutes > tradeRulesUpdateInterval.TotalMinutes)
                 await GetExchangeInfoAsync().ConfigureAwait(false);
             
             if (exchangeInfo == null)
