@@ -6,6 +6,9 @@ namespace Binance.Net
 {
     public class BinanceClientOptions: ExchangeOptions
     {
+        /// <summary>
+        /// The base address used to connect to the API
+        /// </summary>
         public string BaseAddress { get; set; } = "https://api.binance.com";
         /// <summary>
         /// Whether or not to automatically sync the local time with the server time

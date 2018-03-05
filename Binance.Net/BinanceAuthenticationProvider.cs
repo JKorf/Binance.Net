@@ -33,8 +33,13 @@ namespace Binance.Net
 
         public override IRequest AddAuthenticationToRequest(IRequest request, bool signed)
         {
-            request.Headers.Add("X-MBX-APIKEY", credentials.Key);
+            request.Headers.Add("X-MBX-APIKEY", Credentials.Key);
             return request;
+        }
+
+        public override string Sign(string toSign)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

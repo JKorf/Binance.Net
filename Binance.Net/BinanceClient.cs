@@ -83,15 +83,6 @@ namespace Binance.Net
 
         #region constructor/destructor
         /// <summary>
-        /// Set the default options to be used when creating new clients
-        /// </summary>
-        /// <param name="options"></param>
-        public void SetDefaultOptions(BinanceClientOptions options)
-        {
-            defaultOptions = options;
-        }
-
-        /// <summary>
         /// Create a new instance of BinanceClient using the default options
         /// </summary>
         public BinanceClient(): this(defaultOptions)
@@ -110,6 +101,15 @@ namespace Binance.Net
 
         #region methods
         #region public
+        /// <summary>
+        /// Set the default options to be used when creating new clients
+        /// </summary>
+        /// <param name="options"></param>
+        public void SetDefaultOptions(BinanceClientOptions options)
+        {
+            defaultOptions = options;
+        }
+
         /// <summary>
         /// Synchronized version of the <see cref="PingAsync"/> method
         /// </summary>
@@ -157,7 +157,7 @@ namespace Binance.Net
                     // Calculate time offset between local and server by taking the elapsed time request time / 2 (round trip)
                     timeOffset = ((result.Data.ServerTime - localTime).TotalMilliseconds) - sw.ElapsedMilliseconds / 2.0;
                     timeSynced = true;
-                    log.Write(LogVerbosity.Debug, $"Time offset set to {timeOffset}ms");
+                    log.Write(LogVerbosity.Info, $"Time offset set to {timeOffset}ms");
                 }
                 return new CallResult<DateTime>(result.Data.ServerTime, result.Error);
             }
@@ -180,7 +180,7 @@ namespace Binance.Net
             {
                 exchangeInfo = exchangeInfoResult.Data;
                 lastExchangeInfoUpdate = DateTime.UtcNow;
-                log.Write(LogVerbosity.Debug, "Trade rules updated");
+                log.Write(LogVerbosity.Info, "Trade rules updated");
             }
             return exchangeInfoResult;
         }
@@ -1000,7 +1000,7 @@ namespace Binance.Net
                     if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
                         return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: LotSize filter failed. Original quantity: {quantity}, Closest allowed: {outputQuantity}");
 
-                    log.Write(LogVerbosity.Debug, $"Quantity clamped from {quantity} to {outputQuantity}");
+                    log.Write(LogVerbosity.Info, $"Quantity clamped from {quantity} to {outputQuantity}");
                 }
             }
             
@@ -1013,7 +1013,7 @@ namespace Binance.Net
                     {
                         if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
                             return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter failed. Original price: {price}, Closest allowed: {outputPrice}");
-                        log.Write(LogVerbosity.Debug, $"price clamped from {price} to {outputPrice}");
+                        log.Write(LogVerbosity.Info, $"price clamped from {price} to {outputPrice}");
                     }
                 }
 

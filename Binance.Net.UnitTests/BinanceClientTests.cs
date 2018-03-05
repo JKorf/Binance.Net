@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Reflection;
+using System.Threading.Tasks;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Interfaces;
@@ -759,7 +760,7 @@ namespace Binance.Net.UnitTests
 
             var request = new Mock<IRequest>();
             request.Setup(c => c.Headers).Returns(new WebHeaderCollection());
-            request.Setup(c => c.GetResponse()).Returns(response.Object);
+            request.Setup(c => c.GetResponse()).Returns(Task.FromResult(response.Object));
             request.Setup(c => c.Uri).Returns(new Uri("http://www.test.com"));
 
             var factory = new Mock<IRequestFactory>();
@@ -855,7 +856,7 @@ namespace Binance.Net.UnitTests
 
             var request = new Mock<IRequest>();
             request.Setup(c => c.Headers).Returns(new WebHeaderCollection());
-            request.Setup(c => c.GetResponse()).Returns(response.Object);
+            request.Setup(c => c.GetResponse()).Returns(Task.FromResult(response.Object));
 
             var factory = new Mock<IRequestFactory>();
             factory.Setup(c => c.Create(It.IsAny<string>()))
@@ -887,7 +888,7 @@ namespace Binance.Net.UnitTests
 
             var request = new Mock<IRequest>();
             request.Setup(c => c.Headers).Returns(new WebHeaderCollection());
-            request.Setup(c => c.GetResponse()).Returns(response.Object);
+            request.Setup(c => c.GetResponse()).Returns(Task.FromResult(response.Object));
 
             var factory = new Mock<IRequestFactory>();
             factory.Setup(c => c.Create(It.IsAny<string>()))

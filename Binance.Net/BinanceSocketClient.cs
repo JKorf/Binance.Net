@@ -89,7 +89,7 @@ namespace Binance.Net
 
             socketResult.Data.Socket.OnMessage += (o, s) => onMessage(JsonConvert.DeserializeObject<BinanceStreamKline>(s.Message));
 
-            log.Write(LogVerbosity.Debug, $"Started kline stream for {symbol}: {interval}");
+            log.Write(LogVerbosity.Info, $"Started kline stream for {symbol}: {interval}");
             return new CallResult<BinanceStreamSubscription>(socketResult.Data.StreamResult, null);
         }
 
@@ -109,7 +109,7 @@ namespace Binance.Net
 
             socketResult.Data.Socket.OnMessage += (o, s) => onMessage(JsonConvert.DeserializeObject<BinanceStreamDepth>(s.Message));
 
-            log.Write(LogVerbosity.Debug, $"Started depth stream for {symbol}");
+            log.Write(LogVerbosity.Info, $"Started depth stream for {symbol}");
             return new CallResult<BinanceStreamSubscription>(socketResult.Data.StreamResult, null);
         }
 
@@ -129,7 +129,7 @@ namespace Binance.Net
 
             socketResult.Data.Socket.OnMessage += (o, s) => onMessage(JsonConvert.DeserializeObject<BinanceStreamTrade>(s.Message));
 
-            log.Write(LogVerbosity.Debug, $"Started trade stream for {symbol}");
+            log.Write(LogVerbosity.Info, $"Started trade stream for {symbol}");
             return new CallResult<BinanceStreamSubscription>(socketResult.Data.StreamResult, null);
         }
 
@@ -149,7 +149,7 @@ namespace Binance.Net
 
             socketResult.Data.Socket.OnMessage += (o, s) => onMessage(JsonConvert.DeserializeObject<BinanceStreamTick>(s.Message));
 
-            log.Write(LogVerbosity.Debug, $"Started symbol ticker stream for {symbol}");
+            log.Write(LogVerbosity.Info, $"Started symbol ticker stream for {symbol}");
             return new CallResult<BinanceStreamSubscription>(socketResult.Data.StreamResult, null);
         }
 
@@ -167,7 +167,7 @@ namespace Binance.Net
 
             socketResult.Data.Socket.OnMessage += (o, s) => onMessage(JsonConvert.DeserializeObject<BinanceStreamTick[]>(s.Message));
 
-            log.Write(LogVerbosity.Debug, "Started all symbol ticker stream");
+            log.Write(LogVerbosity.Info, "Started all symbol ticker stream");
             return new CallResult<BinanceStreamSubscription>(socketResult.Data.StreamResult, null);
         }
 
@@ -188,7 +188,7 @@ namespace Binance.Net
 
             socketResult.Data.Socket.OnMessage += (o, s) => onMessage(JsonConvert.DeserializeObject<BinanceOrderBook>(s.Message));
 
-            log.Write(LogVerbosity.Debug, "Started partial book depth stream");
+            log.Write(LogVerbosity.Info, "Started partial book depth stream");
             return new CallResult<BinanceStreamSubscription>(socketResult.Data.StreamResult, null);
         }
 
@@ -232,6 +232,7 @@ namespace Binance.Net
         /// </summary>
         public override void Dispose()
         {
+            log.Write(LogVerbosity.Info, "Disposing socket client, closing sockets");
             lock (sockets)
                 sockets.ToList().ForEach(s => s.Socket.Close());
         }
@@ -250,7 +251,7 @@ namespace Binance.Net
                     onOrderUpdateMessage?.Invoke(JsonConvert.DeserializeObject<BinanceStreamOrderUpdate>(s.Message));
             };
 
-            log.Write(LogVerbosity.Debug, "User stream started");
+            log.Write(LogVerbosity.Info, "User stream started");
             return new CallResult<BinanceStreamSubscription>(socketResult.Data.StreamResult, null);
         }
 
@@ -271,6 +272,9 @@ namespace Binance.Net
 
                 socket.OnOpen += (obj, args) => Socket_OnOpen();
                 socket.Connect();
+
+                log.Write(LogVerbosity.Debug, "Socket connection established");
+
                 lock (sockets)
                     sockets.Add(socketObject);
                 return new CallResult<BinanceStream>(socketObject, null);
