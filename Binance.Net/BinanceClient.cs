@@ -105,7 +105,7 @@ namespace Binance.Net
         /// Set the default options to be used when creating new clients
         /// </summary>
         /// <param name="options"></param>
-        public void SetDefaultOptions(BinanceClientOptions options)
+        public static void SetDefaultOptions(BinanceClientOptions options)
         {
             defaultOptions = options;
         }
