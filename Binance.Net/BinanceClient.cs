@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Binance.Net.Objects;
 using Binance.Net.Converters;
 using CryptoExchange.Net;
+using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Logging;
 
 namespace Binance.Net
@@ -108,6 +109,16 @@ namespace Binance.Net
         public static void SetDefaultOptions(BinanceClientOptions options)
         {
             defaultOptions = options;
+        }
+
+        /// <summary>
+        /// Set the API key and secret
+        /// </summary>
+        /// <param name="apiKey">The api key</param>
+        /// <param name="apiSecret">The api secret</param>
+        public void SetApiCredentials(string apiKey, string apiSecret)
+        {
+            SetAuthenticationProvider(new BinanceAuthenticationProvider(new ApiCredentials(apiKey, apiSecret)));
         }
 
         /// <summary>

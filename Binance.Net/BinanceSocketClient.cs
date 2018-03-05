@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Authentication;
 using CryptoExchange.Net;
+using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Logging;
 using SuperSocket.ClientEngine;
 
@@ -70,6 +71,16 @@ namespace Binance.Net
         public static void SetDefaultOptions(BinanceSocketClientOptions options)
         {
             defaultOptions = options;
+        }
+        
+        /// <summary>
+        /// Set the API key and secret
+        /// </summary>
+        /// <param name="apiKey">The api key</param>
+        /// <param name="apiSecret">The api secret</param>
+        public void SetApiCredentials(string apiKey, string apiSecret)
+        {
+            SetAuthenticationProvider(new BinanceAuthenticationProvider(new ApiCredentials(apiKey, apiSecret)));
         }
 
         /// <summary>

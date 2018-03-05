@@ -9,6 +9,7 @@ using Binance.Net.ClientWPF.MVVM;
 using Binance.Net.ClientWPF.ViewModels;
 using Binance.Net.ClientWPF.UserControls;
 using Binance.Net.ClientWPF.MessageBox;
+using CryptoExchange.Net.Authentication;
 
 namespace Binance.Net.ClientWPF
 {
@@ -72,9 +73,8 @@ namespace Binance.Net.ClientWPF
             {
                 apiKey = value;
                 RaisePropertyChangedEvent("ApiKey");
-
-                if (value != null && apiSecret != null)
-                    BinanceDefaults.SetDefaultApiCredentials(value, apiSecret);
+                //if (value != null && apiSecret != null)
+                //    BinanceDefaults.SetDefaultApiCredentials();
             }
         }
 
@@ -87,8 +87,8 @@ namespace Binance.Net.ClientWPF
                 apiSecret = value;
                 RaisePropertyChangedEvent("ApiSecret");
 
-                if (value != null && apiKey != null)
-                    BinanceDefaults.SetDefaultApiCredentials(apiKey, value);
+                //if (value != null && apiKey != null)
+                //    BinanceDefaults.SetDefaultApiCredentials(apiKey, value);
             }
         }
 
@@ -122,53 +122,46 @@ namespace Binance.Net.ClientWPF
         public void Cancel(object o)
         {
             var order = (OrderViewModel)o;
-            Task.Run(() =>
+            using (var client = new BinanceClient())
             {
-                using (var client = new BinanceClient())
-                {
-                    var result = client.CancelOrder(SelectedSymbol.Symbol, order.Id);
-                    if (result.Success)
-                        messageBoxService.ShowMessage("Order canceled!", "Sucess", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
-                    else
-                        messageBoxService.ShowMessage($"Order canceling failed: {result.Error.Message}", "Failed", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
-                }
-            });
+                var result = client.CancelOrder(SelectedSymbol.Symbol, order.Id);
+                if (result.Success)
+                    messageBoxService.ShowMessage("Order canceled!", "Sucess", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                else
+                    messageBoxService.ShowMessage($"Order canceling failed: {result.Error.Message}", "Failed", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
         }
 
         public void Buy(object o)
         {
-            Task.Run(() =>
+            using (var client = new BinanceClient())
             {
-                using (var client = new BinanceClient())
-                {
-                    var result = client.PlaceOrder(SelectedSymbol.Symbol, OrderSide.Buy, OrderType.Limit, SelectedSymbol.TradeAmount, price: SelectedSymbol.TradePrice, timeInForce: TimeInForce.GoodTillCancel);
-                    if (result.Success)
-                        messageBoxService.ShowMessage("Order placed!", "Sucess", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
-                    else
-                        messageBoxService.ShowMessage($"Order placing failed: {result.Error.Message}", "Failed", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
-                }
-            });
+                var result = client.PlaceOrder(SelectedSymbol.Symbol, OrderSide.Buy, OrderType.Limit, SelectedSymbol.TradeAmount, price: SelectedSymbol.TradePrice, timeInForce: TimeInForce.GoodTillCancel);
+                if (result.Success)
+                    messageBoxService.ShowMessage("Order placed!", "Sucess", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                else
+                    messageBoxService.ShowMessage($"Order placing failed: {result.Error.Message}", "Failed", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
         }
 
         public void Sell(object o)
         {
-            Task.Run(() =>
+            using (var client = new BinanceClient())
             {
-                using (var client = new BinanceClient())
-                {
-                    var result = client.PlaceOrder(SelectedSymbol.Symbol, OrderSide.Sell, OrderType.Limit, SelectedSymbol.TradeAmount, price: SelectedSymbol.TradePrice, timeInForce: TimeInForce.GoodTillCancel);
-                    if (result.Success)
-                        messageBoxService.ShowMessage("Order placed!", "Sucess", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
-                    else
-                        messageBoxService.ShowMessage($"Order placing failed: {result.Error.Message}", "Failed", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
-                }
-            });
+                var result = client.PlaceOrder(SelectedSymbol.Symbol, OrderSide.Sell, OrderType.Limit, SelectedSymbol.TradeAmount, price: SelectedSymbol.TradePrice, timeInForce: TimeInForce.GoodTillCancel);
+                if (result.Success)
+                    messageBoxService.ShowMessage("Order placed!", "Sucess", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                else
+                    messageBoxService.ShowMessage($"Order placing failed: {result.Error.Message}", "Failed", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
         }
 
         private void Settings(object o)
         {
             settings = new SettingsWindow(this);
             settings.ShowDialog();
+            if(!string.IsNullOrEmpty(apiKey) && !string.IsNullOrEmpty(apiSecret))
+                BinanceClient.SetDefaultOptions(new BinanceClientOptions(){ ApiCredentials = new ApiCredentials(apiKey, apiSecret)});
         }
 
         private void CloseSettings(object o)
@@ -259,8 +252,7 @@ namespace Binance.Net.ClientWPF
                     if (!startOkay.Success)
                         messageBoxService.ShowMessage($"Error requesting data: {startOkay.Error.Message}", "error", MessageBoxButton.OK, MessageBoxImage.Error);
 
-                    socketClient.SubscribeToAccountUpdateStream(startOkay.Data.ListenKey, OnAccountUpdate);
-                    socketClient.SubscribeToOrderUpdateStream(startOkay.Data.ListenKey, OnOrderUpdate);
+                    socketClient.SubscribeToUserStream(startOkay.Data.ListenKey, OnAccountUpdate, OnOrderUpdate);
 
                     var accountResult = client.GetAccountInfo();
                     if (accountResult.Success)
