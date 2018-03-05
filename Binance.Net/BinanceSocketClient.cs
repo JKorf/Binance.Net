@@ -67,7 +67,7 @@ namespace Binance.Net
         /// Set the default options to be used when creating new socket clients
         /// </summary>
         /// <param name="options"></param>
-        public void SetDefaultOptions(BinanceSocketClientOptions options)
+        public static void SetDefaultOptions(BinanceSocketClientOptions options)
         {
             defaultOptions = options;
         }

@@ -176,6 +176,13 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.0.2/3.0.3 - 05 mar 2018
+	* SetDefaultOptions made static
+
+* Version 3.0.1 - 05 mar 2018
+	* Additional logging
+	* Updated base verions
+
 * Version 3.0.0 - 01 mar 2018
 	* Updated to use a base package, which introduces some changes in syntax, but keeps functionality unchanged
 	
