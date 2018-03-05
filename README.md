@@ -176,6 +176,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.0.4 - 05 mar 2018
+	* Added SetApiCredentials methods
+
 * Version 3.0.2/3.0.3 - 05 mar 2018
 	* SetDefaultOptions made static
 
