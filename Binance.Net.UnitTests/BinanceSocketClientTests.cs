@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Binance.Net.Interfaces;
 using Binance.Net.Objects;
 using Newtonsoft.Json;
@@ -18,7 +19,7 @@ namespace Binance.Net.UnitTests
             // arrange
             var socket = new Mock<IWebsocket>();
             socket.Setup(s => s.Close());
-            socket.Setup(s => s.Connect());
+            socket.Setup(s => s.Connect()).Returns(Task.FromResult(true));
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
             
             var factory = new Mock<IWebsocketFactory>();
@@ -26,7 +27,7 @@ namespace Binance.Net.UnitTests
 
             BinanceStreamDepth result = null;
             var client = new BinanceSocketClient {SocketFactory = factory.Object};
-            var subscibtion = client.SubscribeToDepthStream("test", (test) => result = test);
+            var subscription = client.SubscribeToDepthStream("test", (test) => result = test);
 
             var data = new BinanceStreamDepth()
             {
@@ -51,8 +52,8 @@ namespace Binance.Net.UnitTests
             socket.Raise(r => r.OnMessage += null, new MessageReceivedEventArgs(JsonConvert.SerializeObject(data)));
 
             // assert
-            Assert.IsTrue(subscibtion.Success);
-            Assert.IsTrue(subscibtion.Data != null);
+            Assert.IsTrue(subscription.Success);
+            Assert.IsTrue(subscription.Data != null);
             Assert.IsNotNull(result);
             Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data, result, "Bids", "Asks"));
             Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data.Asks[0], result.Asks[0]));
@@ -67,7 +68,7 @@ namespace Binance.Net.UnitTests
             // arrange
             var socket = new Mock<IWebsocket>();
             socket.Setup(s => s.Close());
-            socket.Setup(s => s.Connect());
+            socket.Setup(s => s.Connect()).Returns(Task.FromResult(true));
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
 
             var factory = new Mock<IWebsocketFactory>();
@@ -118,7 +119,7 @@ namespace Binance.Net.UnitTests
             // arrange
             var socket = new Mock<IWebsocket>();
             socket.Setup(s => s.Close());
-            socket.Setup(s => s.Connect());
+            socket.Setup(s => s.Connect()).Returns(Task.FromResult(true));
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
 
             var factory = new Mock<IWebsocketFactory>();
@@ -163,7 +164,7 @@ namespace Binance.Net.UnitTests
             // arrange
             var socket = new Mock<IWebsocket>();
             socket.Setup(s => s.Close());
-            socket.Setup(s => s.Connect());
+            socket.Setup(s => s.Connect()).Returns(Task.FromResult(true));
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
 
             var factory = new Mock<IWebsocketFactory>();
@@ -212,7 +213,7 @@ namespace Binance.Net.UnitTests
             // arrange
             var socket = new Mock<IWebsocket>();
             socket.Setup(s => s.Close());
-            socket.Setup(s => s.Connect());
+            socket.Setup(s => s.Connect()).Returns(Task.FromResult(true));
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
 
             var factory = new Mock<IWebsocketFactory>();
@@ -264,7 +265,7 @@ namespace Binance.Net.UnitTests
             // arrange
             var socket = new Mock<IWebsocket>();
             socket.Setup(s => s.Close());
-            socket.Setup(s => s.Connect());
+            socket.Setup(s => s.Connect()).Returns(Task.FromResult(true));
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
 
             var factory = new Mock<IWebsocketFactory>();
@@ -302,7 +303,7 @@ namespace Binance.Net.UnitTests
             // arrange
             var socket = new Mock<IWebsocket>();
             socket.Setup(s => s.Close());
-            socket.Setup(s => s.Connect());
+            socket.Setup(s => s.Connect()).Returns(Task.FromResult(true));
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
 
             var factory = new Mock<IWebsocketFactory>();
@@ -346,7 +347,7 @@ namespace Binance.Net.UnitTests
             // arrange
             var socket = new Mock<IWebsocket>();
             socket.Setup(s => s.Close());
-            socket.Setup(s => s.Connect());
+            socket.Setup(s => s.Connect()).Returns(Task.FromResult(true));
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
 
             var factory = new Mock<IWebsocketFactory>();
@@ -401,7 +402,7 @@ namespace Binance.Net.UnitTests
             bool closed = false;
             var socket = new Mock<IWebsocket>();
             socket.Setup(s => s.Close()).Raises(s => s.OnClose += null, new EventArgs());
-            socket.Setup(s => s.Connect());
+            socket.Setup(s => s.Connect()).Returns(Task.FromResult(true));
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
             socket.Object.OnClose += (sender, args) =>
             {
@@ -428,7 +429,7 @@ namespace Binance.Net.UnitTests
             int closed = 0;
             var socket = new Mock<IWebsocket>();
             socket.Setup(s => s.Close()).Raises(s => s.OnClose += null, new EventArgs());
-            socket.Setup(s => s.Connect());
+            socket.Setup(s => s.Connect()).Returns(Task.FromResult(true));
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
             socket.Object.OnClose += (sender, args) =>
             {

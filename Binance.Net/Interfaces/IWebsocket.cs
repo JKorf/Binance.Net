@@ -1,6 +1,7 @@
 ﻿using SuperSocket.ClientEngine;
 using System;
 using System.Security.Authentication;
+using System.Threading.Tasks;
 using WebSocket4Net;
 
 namespace Binance.Net.Interfaces
@@ -14,7 +15,7 @@ namespace Binance.Net.Interfaces
         event EventHandler<ErrorEventArgs> OnError;
         event EventHandler OnOpen;
 
-        void Connect();
+        Task<bool> Connect();
         void Close();
     }
 }

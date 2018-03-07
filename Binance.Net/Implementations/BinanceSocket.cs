@@ -2,6 +2,7 @@
 using SuperSocket.ClientEngine;
 using System;
 using System.Security.Authentication;
+using System.Threading.Tasks;
 using WebSocket4Net;
 
 namespace Binance.Net.Implementations
@@ -12,23 +13,23 @@ namespace Binance.Net.Implementations
 
         public event EventHandler OnClose
         {
-            add { socket.Closed += value; }
-            remove { socket.Closed -= value; }
+            add => socket.Closed += value;
+            remove => socket.Closed -= value;
         }
         public event EventHandler<MessageReceivedEventArgs> OnMessage
         {
-            add { socket.MessageReceived += value; }
-            remove { socket.MessageReceived -= value; }
+            add => socket.MessageReceived += value;
+            remove => socket.MessageReceived -= value;
         }
         public event EventHandler<ErrorEventArgs> OnError
         {
-            add { socket.Error += value; }
-            remove { socket.Error -= value; }
+            add => socket.Error += value;
+            remove => socket.Error -= value;
         }
         public event EventHandler OnOpen
         {
-            add { socket.Opened += value; }
-            remove { socket.Opened -= value; }
+            add => socket.Opened += value;
+            remove => socket.Opened -= value;
         }
 
         public BinanceSocket(WebSocket socket)
@@ -41,9 +42,9 @@ namespace Binance.Net.Implementations
             socket.Close();
         }
 
-        public void Connect()
+        public async Task<bool> Connect()
         {
-            socket.Open();
+            return await socket.OpenAsync().ConfigureAwait(false);
         }
 
         public void SetEnabledSslProtocols(SslProtocols protocols)
