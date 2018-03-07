@@ -731,21 +731,6 @@ namespace Binance.Net.UnitTests
             Assert.IsTrue(result.Success);
         }
 
-        [TestCase]
-        public void RequestingPrivateInfo_Should_RequireAPIKeyAndSecret()
-        {
-            // arrange
-            var client = PrepareClient("", false);
-
-            // act
-            var accountInfo = client.GetAccountInfo();
-
-            // assert
-            Assert.IsFalse(accountInfo.Success);
-            Assert.IsNotNull(accountInfo.Error);
-            Assert.IsNotNull(accountInfo.Error.Message);
-        }
-
         [TestCase()]
         public void EnablingAutoTimestamp_Should_CallServerTime()
         {
@@ -797,53 +782,7 @@ namespace Binance.Net.UnitTests
             Assert.IsNotNull(result.Error);
             Assert.IsTrue(result.Error.Message.Contains("504 error"));
         }
-
-        [TestCase()]
-        public void ReceivingBinanceErrorWithBelow400StatusCode_Should_NotReturnBinanceErrorAndNotSucceed()
-        {
-            // arrange
-            var client = PrepareExceptionClient(JsonConvert.SerializeObject(new ArgumentError("TestMessage")), "InvalidStatusCodeResponse", 203);
-
-            // act
-            var result = client.Ping();
-
-            // assert
-            Assert.IsFalse(result.Success);
-            Assert.IsNotNull(result.Error);
-            Assert.IsTrue(result.Error.Code != 1);
-            Assert.IsTrue(result.Error.Message.Contains("InvalidStatusCodeResponse"));
-        }
-
-        [TestCase()]
-        public void ReceivingErrorStatusWithoutBinanceError_Should_ReturnError()
-        {
-            // arrange
-            var client = PrepareExceptionClient("error", "404ErrorWithoutErrorObject", 404);
-
-            // act
-            var result = client.Ping();
-
-            // assert
-            Assert.IsFalse(result.Success);
-            Assert.IsNotNull(result.Error);
-            Assert.IsTrue(result.Error.Message.Contains("404ErrorWithoutErrorObject"));
-        }
-
-        [TestCase()]
-        public void ReceivingInvalidData_Should_ReturnError()
-        {
-            // arrange
-            var client = PrepareClient("TestErrorNotValidJson");
-
-            // act
-            var result = client.Ping();
-
-            // assert
-            Assert.IsFalse(result.Success);
-            Assert.IsNotNull(result.Error);
-            Assert.IsTrue(result.Error.Message.Contains("TestErrorNotValidJson"));
-        }
-
+        
         private BinanceClient PrepareClient(string responseData, bool credentials = true)
         {
             var expectedBytes = Encoding.UTF8.GetBytes(responseData);
