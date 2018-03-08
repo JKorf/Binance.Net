@@ -1,6 +1,4 @@
 ﻿using Binance.Net.Converters;
-using Binance.Net.Implementations;
-using Binance.Net.Interfaces;
 using Binance.Net.Objects;
 using Newtonsoft.Json;
 using System;
@@ -10,8 +8,8 @@ using System.Security.Authentication;
 using System.Threading.Tasks;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Logging;
-using SuperSocket.ClientEngine;
 
 namespace Binance.Net
 {
@@ -105,9 +103,9 @@ namespace Binance.Net
             if (!socketResult.Success)
                 return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
 
-            socketResult.Data.Socket.OnMessage += (o, s) =>
+            socketResult.Data.Socket.OnMessage += (msg) =>
             {
-                var result = Deserialize<BinanceStreamKline>(s.Message, false);
+                var result = Deserialize<BinanceStreamKline>(msg, false);
                 if (result.Success)
                     onMessage(result.Data);
                 else
@@ -138,9 +136,9 @@ namespace Binance.Net
             if (!socketResult.Success)
                 return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
 
-            socketResult.Data.Socket.OnMessage += (o, s) =>
+            socketResult.Data.Socket.OnMessage += (msg) =>
             {
-                var result = Deserialize<BinanceStreamDepth>(s.Message, false);
+                var result = Deserialize<BinanceStreamDepth>(msg, false);
                 if (result.Success)
                     onMessage(result.Data);
                 else
@@ -171,9 +169,9 @@ namespace Binance.Net
             if (!socketResult.Success)
                 return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
 
-            socketResult.Data.Socket.OnMessage += (o, s) =>
+            socketResult.Data.Socket.OnMessage += (msg) =>
             {
-                var result = Deserialize<BinanceStreamTrade>(s.Message, false);
+                var result = Deserialize<BinanceStreamTrade>(msg, false);
                 if (result.Success)
                     onMessage(result.Data);
                 else
@@ -204,9 +202,9 @@ namespace Binance.Net
             if (!socketResult.Success)
                 return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
 
-            socketResult.Data.Socket.OnMessage += (o, s) =>
+            socketResult.Data.Socket.OnMessage += (msg) =>
             {
-                var result = Deserialize<BinanceStreamTick>(s.Message, false);
+                var result = Deserialize<BinanceStreamTick>(msg, false);
                 if (result.Success)
                     onMessage(result.Data);
                 else
@@ -235,9 +233,9 @@ namespace Binance.Net
             if (!socketResult.Success)
                 return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
 
-            socketResult.Data.Socket.OnMessage += (o, s) =>
+            socketResult.Data.Socket.OnMessage += (msg) =>
             {
-                var result = Deserialize<BinanceStreamTick[]>(s.Message, false);
+                var result = Deserialize<BinanceStreamTick[]>(msg, false);
                 if (result.Success)
                     onMessage(result.Data);
                 else
@@ -269,9 +267,9 @@ namespace Binance.Net
             if (!socketResult.Success)
                 return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
 
-            socketResult.Data.Socket.OnMessage += (o, s) =>
+            socketResult.Data.Socket.OnMessage += (msg) =>
             {
-                var result = Deserialize<BinanceOrderBook>(s.Message, false);
+                var result = Deserialize<BinanceOrderBook>(msg, false);
                 if (result.Success)
                     onMessage(result.Data);
                 else
@@ -339,19 +337,19 @@ namespace Binance.Net
             if (!socketResult.Success)
                 return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
 
-            socketResult.Data.Socket.OnMessage += (o, s) =>
+            socketResult.Data.Socket.OnMessage += (msg) =>
             {
-                if (s.Message.Contains(AccountUpdateEvent))
+                if (msg.Contains(AccountUpdateEvent))
                 {
-                    var result = Deserialize<BinanceStreamAccountInfo>(s.Message, false);
+                    var result = Deserialize<BinanceStreamAccountInfo>(msg, false);
                     if (result.Success)
                         onAccountInfoMessage(result.Data);
                     else
                         log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account stream: " + result.Error);
                 }
-                else if (s.Message.Contains(ExecutionUpdateEvent))
+                else if (msg.Contains(ExecutionUpdateEvent))
                 {
-                    var result = Deserialize<BinanceStreamOrderUpdate>(s.Message, false);
+                    var result = Deserialize<BinanceStreamOrderUpdate>(msg, false);
                     if (result.Success)
                         onOrderUpdateMessage(result.Data);
                     else
@@ -371,13 +369,13 @@ namespace Binance.Net
                 var socketObject = new BinanceStream() { Socket = socket, StreamResult = new BinanceStreamSubscription() { StreamId = NextStreamId() } };
                 socket.SetEnabledSslProtocols(protocols); 
 
-                socket.OnClose += (obj, args) => Socket_OnClose(socketObject);
-                socket.OnClose += (obj, args) => socketObject.StreamResult.InvokeClosed();
+                socket.OnClose += () => Socket_OnClose(socketObject);
+                socket.OnClose += socketObject.StreamResult.InvokeClosed;
 
-                socket.OnError += (obj, args) => Socket_OnError(args);
-                socket.OnError += (obj, args) => socketObject.StreamResult.InvokeError(args.Exception);
+                socket.OnError += Socket_OnError;
+                socket.OnError += socketObject.StreamResult.InvokeError;
 
-                socket.OnOpen += (obj, args) => Socket_OnOpen();
+                socket.OnOpen += Socket_OnOpen;
                 var connected = await socket.Connect().ConfigureAwait(false);
                 if (!connected)
                 {
@@ -409,9 +407,9 @@ namespace Binance.Net
             log.Write(LogVerbosity.Debug, "Socket opened");
         }
 
-        private void Socket_OnError(ErrorEventArgs e)
+        private void Socket_OnError(Exception e)
         {
-            log.Write(LogVerbosity.Error, $"Socket error {e.Exception?.Message}");
+            log.Write(LogVerbosity.Error, $"Socket error {e?.Message}");
         }
 
         private void Socket_OnClose(object sender)

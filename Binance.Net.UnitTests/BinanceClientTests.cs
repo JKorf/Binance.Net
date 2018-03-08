@@ -4,7 +4,6 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System;
-using Binance.Net.Interfaces;
 using Binance.Net.Objects;
 using Newtonsoft.Json;
 using System.Collections.Generic;

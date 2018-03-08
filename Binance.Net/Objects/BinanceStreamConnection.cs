@@ -1,4 +1,4 @@
-﻿using Binance.Net.Interfaces;
+﻿using CryptoExchange.Net.Interfaces;
 
 namespace Binance.Net.Objects
 {
