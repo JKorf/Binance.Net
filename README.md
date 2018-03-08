@@ -1,10 +1,24 @@
+# ![Icon](https://github.com/JKorf/Binance.Net/blob/master/Resources/binance-coin.png?raw=true) Binance.Net 
 
-# Binance.Net ![Icon](https://github.com/JKorf/Binance.Net/blob/master/Resources/binance-coin.png?raw=true)
 ![Build status](https://travis-ci.org/JKorf/Binance.Net.svg?branch=master)
 
 A .Net wrapper for the Binance API as described on [Binance](https://www.binance.com/restapipub.html), including all features the API provides using clear and readable objects.
 
 **If you think something is broken, something is missing or have any questions, please open an [Issue](https://github.com/JKorf/Binance.Net/issues)**
+
+---
+Also check out my other exchange API wrappers:
+<table>
+<tr>
+<td><img src="https://github.com/JKorf/Bittrex.Net/blob/master/Resources/icon.png?raw=true">
+<br />
+<a href="https://github.com/JKorf/Bittrex.Net">Bittrex</a>
+</td>
+<td><img src="https://github.com/JKorf/Bitfinex.Net/blob/master/Resources/icon.png?raw=true">
+<br />
+<a href="https://github.com/JKorf/Bitfinex.Net">Bitfinex</a></td>
+</table>
+
 ## Installation
 ![Nuget version](https://img.shields.io/nuget/v/binance.net.svg)  ![Nuget downloads](https://img.shields.io/nuget/dt/Binance.Net.svg)
 Available on [Nuget](https://www.nuget.org/packages/Binance.Net/).
