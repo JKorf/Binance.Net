@@ -8,6 +8,7 @@ using System.Security.Authentication;
 using System.Threading.Tasks;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Implementation;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Logging;
 

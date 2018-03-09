@@ -190,6 +190,12 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.0.7 - 08 mar 2018
+	* Updated base
+
+* Version 3.0.6 - 08 mar 2018
+	* Fix for socket connecting in non dotnet core clients
+
 * Version 3.0.5 - 07 mar 2018
 	* Fix for deserialization error handling
 	* Socket opening async, subscribe methods async
