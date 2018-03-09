@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Objects;
 using CryptoExchange.Net.Interfaces;
@@ -401,7 +402,7 @@ namespace Binance.Net.UnitTests
             // arrange
             bool closed = false;
             var socket = new Mock<IWebsocket>();
-            socket.Setup(s => s.Close()).Raises(s => s.OnClose += null);
+            socket.Setup(s => s.Close()).Returns(Task.Run(() => Thread.Sleep(1))).Raises(s => s.OnClose += null);
             socket.Setup(s => s.Connect()).Returns(Task.FromResult(true));
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
             socket.Object.OnClose += () =>
@@ -428,7 +429,7 @@ namespace Binance.Net.UnitTests
             // arrange
             int closed = 0;
             var socket = new Mock<IWebsocket>();
-            socket.Setup(s => s.Close()).Raises(s => s.OnClose += null);
+            socket.Setup(s => s.Close()).Returns(Task.Run(() => Thread.Sleep(1))).Raises(s => s.OnClose += null);
             socket.Setup(s => s.Connect()).Returns(Task.FromResult(true));
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
             socket.Object.OnClose += () =>
@@ -455,7 +456,7 @@ namespace Binance.Net.UnitTests
         {
             // arrange
             var socket = new Mock<IWebsocket>();
-            socket.Setup(s => s.Close()).Raises(s => s.OnClose += null);
+            socket.Setup(s => s.Close()).Returns(Task.Run(() => Thread.Sleep(1))).Raises(s => s.OnClose += null);
             socket.Setup(s => s.Connect()).Throws(new Exception("Can't connect"));
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
 
