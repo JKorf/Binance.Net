@@ -13,7 +13,7 @@ namespace Binance.Net.Objects
         /// The ID of the last update
         /// </summary>
         [JsonProperty("lastUpdateId")]
-        public int LastUpdateId { get; set; }
+        public long LastUpdateId { get; set; }
         /// <summary>
         /// The list of bids
         /// </summary>

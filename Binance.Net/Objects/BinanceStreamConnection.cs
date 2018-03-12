@@ -2,9 +2,16 @@
 
 namespace Binance.Net.Objects
 {
-    public class BinanceStream
+    internal class BinanceStream
     {
+        internal bool TryReconnect { get; set; } = true;
         public IWebsocket Socket { get; set; }
         public BinanceStreamSubscription StreamResult { get; set; }
+
+        public void Close()
+        {
+            TryReconnect = false;
+            Socket.Close();
+        }
     }
 }

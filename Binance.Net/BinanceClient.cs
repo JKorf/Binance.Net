@@ -449,7 +449,7 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="GetAllOrdersAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public CallResult<BinanceOrder[]> GetAllOrders(string symbol, int? orderId = null, int? limit = null, int? receiveWindow = null) => GetAllOrdersAsync(symbol, orderId, limit, receiveWindow).Result;
+        public CallResult<BinanceOrder[]> GetAllOrders(string symbol, long? orderId = null, int? limit = null, int? receiveWindow = null) => GetAllOrdersAsync(symbol, orderId, limit, receiveWindow).Result;
 
         /// <summary>
         /// Gets all orders for the provided symbol
@@ -459,7 +459,7 @@ namespace Binance.Net
         /// <param name="limit">Max number of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of orders</returns>
-        public async Task<CallResult<BinanceOrder[]>> GetAllOrdersAsync(string symbol, int? orderId = null, int? limit = null, int? receiveWindow = null)
+        public async Task<CallResult<BinanceOrder[]>> GetAllOrdersAsync(string symbol, long? orderId = null, int? limit = null, int? receiveWindow = null)
         {
             await CheckAutoTimestamp().ConfigureAwait(false);
 
@@ -739,7 +739,7 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="WithdrawAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public CallResult<BinanceWithdrawalPlaced> Withdraw(string asset, string address, decimal amount, string addressTag = null, string name = null, long? recvWindow = null) => WithdrawAsync(asset, address,amount, addressTag, name, recvWindow).Result;
+        public CallResult<BinanceWithdrawalPlaced> Withdraw(string asset, string address, decimal amount, string addressTag = null, string name = null, int? recvWindow = null) => WithdrawAsync(asset, address,amount, addressTag, name, recvWindow).Result;
 
         /// <summary>
         /// Withdraw assets from Binance to an address
@@ -751,7 +751,7 @@ namespace Binance.Net
         /// <param name="name">Name for the transaction</param>
         /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Withdrawal confirmation</returns>
-        public async Task<CallResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, decimal amount, string addressTag = null, string name = null, long? recvWindow = null)
+        public async Task<CallResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, decimal amount, string addressTag = null, string name = null, int? recvWindow = null)
         {
             await CheckAutoTimestamp().ConfigureAwait(false);
 
@@ -779,7 +779,7 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="GetDepositHistoryAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public CallResult<BinanceDepositList> GetDepositHistory(string asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, long? recvWindow = null) => GetDepositHistoryAsync(asset, status, startTime, endTime, recvWindow).Result;
+        public CallResult<BinanceDepositList> GetDepositHistory(string asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? recvWindow = null) => GetDepositHistoryAsync(asset, status, startTime, endTime, recvWindow).Result;
 
         /// <summary>
         /// Gets the deposit history
@@ -790,7 +790,7 @@ namespace Binance.Net
         /// <param name="endTime">Filter end time till</param>
         /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of deposits</returns>
-        public async Task<CallResult<BinanceDepositList>> GetDepositHistoryAsync(string asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, long? recvWindow = null)
+        public async Task<CallResult<BinanceDepositList>> GetDepositHistoryAsync(string asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? recvWindow = null)
         {
             await CheckAutoTimestamp().ConfigureAwait(false);
 
@@ -817,7 +817,7 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="GetWithdrawHistoryAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public CallResult<BinanceWithdrawalList> GetWithdrawHistory(string asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, long? recvWindow = null) => GetWithdrawHistoryAsync(asset, status, startTime, endTime, recvWindow).Result;
+        public CallResult<BinanceWithdrawalList> GetWithdrawHistory(string asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? recvWindow = null) => GetWithdrawHistoryAsync(asset, status, startTime, endTime, recvWindow).Result;
 
         /// <summary>
         /// Gets the withdrawal history
@@ -828,7 +828,7 @@ namespace Binance.Net
         /// <param name="endTime">Filter end time till</param>
         /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of withdrawals</returns>
-        public async Task<CallResult<BinanceWithdrawalList>> GetWithdrawHistoryAsync(string asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, long? recvWindow = null)
+        public async Task<CallResult<BinanceWithdrawalList>> GetWithdrawHistoryAsync(string asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? recvWindow = null)
         {
             await CheckAutoTimestamp().ConfigureAwait(false);
 
@@ -856,7 +856,7 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="GetDepositAddressAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public CallResult<BinanceDepositAddress> GetDepositAddress(string asset, long? recvWindow = null) => GetDepositAddressAsync(asset, recvWindow).Result;
+        public CallResult<BinanceDepositAddress> GetDepositAddress(string asset, int? recvWindow = null) => GetDepositAddressAsync(asset, recvWindow).Result;
 
         /// <summary>
         /// Gets the deposit address for an asset
@@ -864,7 +864,7 @@ namespace Binance.Net
         /// <param name="asset">Asset to get address for</param>
         /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Deposit address</returns>
-        public async Task<CallResult<BinanceDepositAddress>> GetDepositAddressAsync(string asset, long? recvWindow = null)
+        public async Task<CallResult<BinanceDepositAddress>> GetDepositAddressAsync(string asset, int? recvWindow = null)
         {
             await CheckAutoTimestamp().ConfigureAwait(false);
 

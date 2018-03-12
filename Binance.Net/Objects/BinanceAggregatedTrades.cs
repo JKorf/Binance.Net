@@ -13,7 +13,7 @@ namespace Binance.Net.Objects
         /// The id of this aggregation
         /// </summary>
         [JsonProperty("a")]
-        public int AggregateTradeId { get; set; }
+        public long AggregateTradeId { get; set; }
         /// <summary>
         /// The price of trades in this aggregation
         /// </summary>

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Authentication;
+using System.Threading;
 using System.Threading.Tasks;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
@@ -310,7 +311,7 @@ namespace Binance.Net
         public void UnsubscribeFromStream(BinanceStreamSubscription streamSubscription)
         {
             lock (sockets)
-                sockets.SingleOrDefault(s => s.StreamResult.StreamId == streamSubscription.StreamId)?.Socket.Close();
+                sockets.SingleOrDefault(s => s.StreamResult.StreamId == streamSubscription.StreamId)?.Close();
         }
 
         /// <summary>
@@ -319,7 +320,7 @@ namespace Binance.Net
         public void UnsubscribeAllStreams()
         {
             lock (sockets)
-                sockets.ToList().ForEach(s => s.Socket.Close());
+                sockets.ToList().ForEach(s => s.Close());
         }
 
         /// <summary>
@@ -371,7 +372,6 @@ namespace Binance.Net
                 socket.SetEnabledSslProtocols(protocols); 
 
                 socket.OnClose += () => Socket_OnClose(socketObject);
-                socket.OnClose += socketObject.StreamResult.InvokeClosed;
 
                 socket.OnError += Socket_OnError;
                 socket.OnError += socketObject.StreamResult.InvokeError;
@@ -415,9 +415,28 @@ namespace Binance.Net
 
         private void Socket_OnClose(object sender)
         {
-            log.Write(LogVerbosity.Debug, "Socket closed");
-            lock (sockets)
-                sockets.Remove((BinanceStream)sender);
+            log.Write(LogVerbosity.Info, "Socket closed");
+            var con = (BinanceStream)sender;
+            if (con.TryReconnect)
+            {
+                log.Write(LogVerbosity.Info, "Going to try to reconnect");
+                Task.Run(() =>
+                {
+                    con.TryReconnect = false;
+                    Thread.Sleep(5000);
+                    if (con.Socket.Connect().Result)
+                    {
+                        con.TryReconnect = true;
+                        log.Write(LogVerbosity.Info, "Reconnected");
+                    }
+                });
+            }
+            else
+            {
+                con.StreamResult.InvokeClosed();
+                lock (sockets)
+                    sockets.Remove(con);
+            }
         }
 
         private int NextStreamId()
