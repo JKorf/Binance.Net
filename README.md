@@ -190,6 +190,11 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.0.8 - 12 mar 2018
+	* Fix for inconsistent int/long types
+	* Fix for freezing when making calls from UI thread
+	* Added auto reconnect functionality
+
 * Version 3.0.7 - 08 mar 2018
 	* Updated base
 
