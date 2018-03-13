@@ -32,7 +32,8 @@ namespace Binance.Net
 
         private const string DepthStreamEndpoint = "@depth";
         private const string KlineStreamEndpoint = "@kline";
-        private const string TradesStreamEndpoint = "@aggTrade";
+        private const string TradesStreamEndpoint = "@trade";
+        private const string AggregatedTradesStreamEndpoint = "@aggTrade";
         private const string SymbolTickerStreamEndpoint = "@ticker";
         private const string AllSymbolTickerStreamEndpoint = "!ticker@arr";
         private const string PartialBookDepthStreamEndpoint = "@depth";
@@ -148,6 +149,39 @@ namespace Binance.Net
             };
 
             log.Write(LogVerbosity.Info, $"Started depth stream for {symbol}");
+            return new CallResult<BinanceStreamSubscription>(socketResult.Data.StreamResult, null);
+        }
+
+        /// <summary>
+        /// Synchronized version of the <see cref="SubscribeToAggregatedTradesStreamAsync"/> method
+        /// </summary>
+        /// <returns></returns>
+        public CallResult<BinanceStreamSubscription> SubscribeToAggregatedTradesStream(string symbol, Action<BinanceStreamAggregatedTrade> onMessage) => SubscribeToAggregatedTradesStreamAsync(symbol, onMessage).Result;
+
+        /// <summary>
+        /// Subscribes to the aggregated trades update stream for the provided symbol
+        /// </summary>
+        /// <param name="symbol">The symbol</param>
+        /// <param name="onMessage">The event handler for the received data</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
+        /// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
+        public async Task<CallResult<BinanceStreamSubscription>> SubscribeToAggregatedTradesStreamAsync(string symbol, Action<BinanceStreamAggregatedTrade> onMessage)
+        {
+            symbol = symbol.ToLower();
+            var socketResult = await CreateSocket(baseWebsocketAddress + symbol + AggregatedTradesStreamEndpoint).ConfigureAwait(false);
+            if (!socketResult.Success)
+                return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
+
+            socketResult.Data.Socket.OnMessage += (msg) =>
+            {
+                var result = Deserialize<BinanceStreamAggregatedTrade>(msg, false);
+                if (result.Success)
+                    onMessage(result.Data);
+                else
+                    log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from trade stream: " + result.Error);
+            };
+
+            log.Write(LogVerbosity.Info, $"Started trade stream for {symbol}");
             return new CallResult<BinanceStreamSubscription>(socketResult.Data.StreamResult, null);
         }
 

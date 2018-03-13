@@ -7,7 +7,7 @@ namespace Binance.Net.Objects
     /// <summary>
     /// Aggregated information about trades for a symbol
     /// </summary>
-    public class BinanceStreamTrade: BinanceStreamEvent
+    public class BinanceStreamAggregatedTrade: BinanceStreamEvent
     {
         /// <summary>
         /// The symbol the trade was for
@@ -17,8 +17,8 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The id of this aggregated trade
         /// </summary>
-        [JsonProperty("t")]
-        public long TradeId { get; set; }
+        [JsonProperty("a")]
+        public long AggregatedTradeId { get; set; }
         /// <summary>
         /// The price of the trades
         /// </summary>
@@ -32,13 +32,13 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The first trade id in this aggregation
         /// </summary>
-        [JsonProperty("b")]
-        public long BuyerOrderId { get; set; }
+        [JsonProperty("f")]
+        public long FirstTradeId { get; set; }
         /// <summary>
         /// The last trade id in this aggregation
         /// </summary>
-        [JsonProperty("a")]
-        public long SellerOrderId { get; set; }
+        [JsonProperty("l")]
+        public long LastTradeId { get; set; }
         /// <summary>
         /// The time of the trades
         /// </summary>
