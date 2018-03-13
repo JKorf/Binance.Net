@@ -281,10 +281,10 @@ namespace Binance.Net.UnitTests
                 Event = "TestTradeStream",
                 EventTime = new DateTime(2017, 1, 1),
                 Symbol = "test",
-                AggregatedTradeId = 1000000000000,
+                TradeId = 1000000000000,
                 BuyerIsMaker = true,
-                FirstTradeId = 10000000000000,
-                LastTradeId = 2000000000000,
+                BuyerOrderId = 10000000000000,
+                SellerOrderId = 2000000000000,
                 Price = 1.1m,
                 Quantity = 2.2m,
                 TradeTime = new DateTime(2017, 1, 1)
