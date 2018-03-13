@@ -190,6 +190,10 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.0.9 - 13 mar 2018
+	* Added trade stream next to aggregated trade stream
+	* Fix for BuyerIsMaker field always being true
+
 * Version 3.0.8 - 12 mar 2018
 	* Fix for inconsistent int/long types
 	* Fix for freezing when making calls from UI thread
