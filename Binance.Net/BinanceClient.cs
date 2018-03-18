@@ -29,7 +29,9 @@ namespace Binance.Net
         private bool timeSynced;
         private BinanceExchangeInfo exchangeInfo;
         private DateTime? lastExchangeInfoUpdate;
-        
+
+        private static CultureInfo CultureInfo = CultureInfo.GetCultureInfo("en-US");
+
         // Addresses
         private string baseApiAddress;
         private const string Api = "api";
@@ -533,14 +535,14 @@ namespace Binance.Net
                 { "symbol", symbol },
                 { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
                 { "type", JsonConvert.SerializeObject(type, new OrderTypeConverter(false)) },
-                { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
+                { "quantity", quantity.ToString(CultureInfo) },
                 { "timestamp", GetTimestamp() }
             };
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
-            parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("price", price?.ToString(CultureInfo));
             parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)));
-            parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo));
+            parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo));
             parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
             
             return await ExecuteRequest<BinancePlacedOrder>(GetUrl(NewOrderEndpoint, Api, SignedVersion), PostMethod, parameters, true).ConfigureAwait(false);
@@ -603,14 +605,14 @@ namespace Binance.Net
                 { "symbol", symbol },
                 { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
                 { "type", JsonConvert.SerializeObject(type, new OrderTypeConverter(false)) },
-                { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
+                { "quantity", quantity.ToString(CultureInfo) },
                 { "timestamp", GetTimestamp() }
             };
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
-            parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("price", price?.ToString(CultureInfo));
             parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)));
-            parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo));
+            parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo));
             parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
             
             return await ExecuteRequest<BinancePlacedOrder>(GetUrl(NewTestOrderEndpoint, Api, SignedVersion), PostMethod, parameters, true).ConfigureAwait(false);
@@ -728,9 +730,9 @@ namespace Binance.Net
                 { "symbol", symbol },
                 { "timestamp", GetTimestamp() }
             };
-            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("fromId", fromId?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("recvWindow", recvWindow?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo));
+            parameters.AddOptionalParameter("fromId", fromId?.ToString(CultureInfo));
+            parameters.AddOptionalParameter("recvWindow", recvWindow?.ToString(CultureInfo));
 
             return await ExecuteRequest<BinanceTrade[]>(GetUrl(MyTradesEndpoint, Api, SignedVersion), GetMethod, parameters, true).ConfigureAwait(false);
         }
@@ -759,7 +761,7 @@ namespace Binance.Net
             {
                 { "asset", asset },
                 { "address", address },
-                { "amount", amount.ToString(CultureInfo.InvariantCulture) },
+                { "amount", amount.ToString(CultureInfo) },
                 { "timestamp", GetTimestamp() }
             };
             parameters.AddOptionalParameter("name", name);
@@ -800,8 +802,8 @@ namespace Binance.Net
             };
             parameters.AddOptionalParameter("asset", asset);
             parameters.AddOptionalParameter("status", status != null ? JsonConvert.SerializeObject(status, new DepositStatusConverter(false)) : null);
-            parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
-            parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString(CultureInfo) : null);
+            parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo) : null);
             parameters.AddOptionalParameter("recvWindow", recvWindow?.ToString());
 
             var result = await ExecuteRequest<BinanceDepositList>(GetUrl(DepositHistoryEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
@@ -839,8 +841,8 @@ namespace Binance.Net
 
             parameters.AddOptionalParameter("asset", asset);
             parameters.AddOptionalParameter("status", status != null ? JsonConvert.SerializeObject(status, new WithdrawalStatusConverter(false)): null);
-            parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
-            parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString(CultureInfo) : null);
+            parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo) : null);
             parameters.AddOptionalParameter("recvWindow", recvWindow?.ToString());
 
             var result = await ExecuteRequest<BinanceWithdrawalList>(GetUrl(WithdrawHistoryEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
@@ -938,6 +940,24 @@ namespace Binance.Net
             
             return await ExecuteRequest<object>(GetUrl(CloseListenKeyEndpoint, Api, UserDataStreamVersion), DeleteMethod, parameters).ConfigureAwait(false); 
         }
+
+        /// <summary>
+        /// return The Current Selectet Culture Info.
+        /// </summary>
+        /// <returns></returns>
+        public static CultureInfo getCultureInfo()
+        {
+            return CultureInfo;
+        }
+        /// <summary>
+        /// set The Current Selectet Culture Info.
+        /// </summary>
+        /// <returns></returns>
+        public static void setCultureInfo(CultureInfo newCultureInfo)
+        {
+            CultureInfo = newCultureInfo;
+        }
+
         #endregion      
         #endregion
 
