@@ -190,6 +190,11 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.0.10 - 21 mar 2018
+	* Now possible to add multiple log writers
+	* Added automatic reconnecting after loss of internet
+	* Fixed error when subsribing to a stream while passing Null as handler
+
 * Version 3.0.9 - 13 mar 2018
 	* Added trade stream next to aggregated trade stream
 	* Fix for BuyerIsMaker field always being true

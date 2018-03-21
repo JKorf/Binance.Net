@@ -225,4 +225,10 @@
         ThrowError,
         AutoComply
     }
+
+    public enum ReconnectBehaviour
+    {
+        NoReconnect,
+        AutoReconnect
+    }
 }

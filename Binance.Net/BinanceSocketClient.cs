@@ -24,6 +24,9 @@ namespace Binance.Net
         private static BinanceSocketClientOptions defaultOptions = new BinanceSocketClientOptions();
 
         private string baseWebsocketAddress;
+        private ReconnectBehaviour reconnectBehaviour;
+        private TimeSpan reconnectInterval;
+
         private readonly List<BinanceStream> sockets = new List<BinanceStream>();
 
         private int lastStreamId;
@@ -110,7 +113,7 @@ namespace Binance.Net
             {
                 var result = Deserialize<BinanceStreamKline>(msg, false);
                 if (result.Success)
-                    onMessage(result.Data);
+                    onMessage?.Invoke(result.Data);
                 else
                     log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from kline stream: " + result.Error);
             };
@@ -143,7 +146,7 @@ namespace Binance.Net
             {
                 var result = Deserialize<BinanceStreamDepth>(msg, false);
                 if (result.Success)
-                    onMessage(result.Data);
+                    onMessage?.Invoke(result.Data);
                 else
                     log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from depth stream: " + result.Error);
             };
@@ -176,7 +179,7 @@ namespace Binance.Net
             {
                 var result = Deserialize<BinanceStreamAggregatedTrade>(msg, false);
                 if (result.Success)
-                    onMessage(result.Data);
+                    onMessage?.Invoke(result.Data);
                 else
                     log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from trade stream: " + result.Error);
             };
@@ -209,7 +212,7 @@ namespace Binance.Net
             {
                 var result = Deserialize<BinanceStreamTrade>(msg, false);
                 if (result.Success)
-                    onMessage(result.Data);
+                    onMessage?.Invoke(result.Data);
                 else
                     log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from trade stream: " + result.Error);
             };
@@ -242,7 +245,7 @@ namespace Binance.Net
             {
                 var result = Deserialize<BinanceStreamTick>(msg, false);
                 if (result.Success)
-                    onMessage(result.Data);
+                    onMessage?.Invoke(result.Data);
                 else
                     log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from depth stream: " + result.Error);
             };
@@ -273,7 +276,7 @@ namespace Binance.Net
             {
                 var result = Deserialize<BinanceStreamTick[]>(msg, false);
                 if (result.Success)
-                    onMessage(result.Data);
+                    onMessage?.Invoke(result.Data);
                 else
                     log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from all ticker stream: " + result.Error);
             };
@@ -307,7 +310,7 @@ namespace Binance.Net
             {
                 var result = Deserialize<BinanceOrderBook>(msg, false);
                 if (result.Success)
-                    onMessage(result.Data);
+                    onMessage?.Invoke(result.Data);
                 else
                     log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from depth stream: " + result.Error);
             };
@@ -379,15 +382,16 @@ namespace Binance.Net
                 {
                     var result = Deserialize<BinanceStreamAccountInfo>(msg, false);
                     if (result.Success)
-                        onAccountInfoMessage(result.Data);
+                        onAccountInfoMessage?.Invoke(result.Data);
                     else
                         log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account stream: " + result.Error);
                 }
                 else if (msg.Contains(ExecutionUpdateEvent))
                 {
+                    log.Write(LogVerbosity.Debug, msg);
                     var result = Deserialize<BinanceStreamOrderUpdate>(msg, false);
                     if (result.Success)
-                        onOrderUpdateMessage(result.Data);
+                        onOrderUpdateMessage?.Invoke(result.Data);
                     else
                         log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from order stream: " + result.Error);
                 }
@@ -435,6 +439,8 @@ namespace Binance.Net
         private void Configure(BinanceSocketClientOptions options)
         {
             baseWebsocketAddress = options.BaseSocketAddress;
+            reconnectBehaviour = options.ReconnectTryBehaviour;
+            reconnectInterval = options.ReconnectTryInterval;
         }
 
         private void Socket_OnOpen()
@@ -449,24 +455,20 @@ namespace Binance.Net
 
         private void Socket_OnClose(object sender)
         {
-            log.Write(LogVerbosity.Info, "Socket closed");
             var con = (BinanceStream)sender;
-            if (con.TryReconnect)
+            if (reconnectBehaviour == ReconnectBehaviour.AutoReconnect && con.TryReconnect)
             {
-                log.Write(LogVerbosity.Info, "Going to try to reconnect");
+                log.Write(LogVerbosity.Info, "Connection lost, going to try to reconnect");
                 Task.Run(() =>
                 {
-                    con.TryReconnect = false;
-                    Thread.Sleep(5000);
+                    Thread.Sleep((int)Math.Round(reconnectInterval.TotalMilliseconds));
                     if (con.Socket.Connect().Result)
-                    {
-                        con.TryReconnect = true;
                         log.Write(LogVerbosity.Info, "Reconnected");
-                    }
                 });
             }
             else
             {
+                log.Write(LogVerbosity.Info, "Socket closed");
                 con.StreamResult.InvokeClosed();
                 lock (sockets)
                     sockets.Remove(con);

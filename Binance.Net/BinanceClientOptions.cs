@@ -30,5 +30,15 @@ namespace Binance.Net
         /// The base adress for the socket connections
         /// </summary>
         public string BaseSocketAddress { get; set; } = "wss://stream.binance.com:9443/ws/";
+
+        /// <summary>
+        /// What should be done when the connection is interupted
+        /// </summary>
+        public ReconnectBehaviour ReconnectTryBehaviour { get; set; } = ReconnectBehaviour.AutoReconnect;
+
+        /// <summary>
+        /// The interval to try to reconnect the websocket after the connection was lost
+        /// </summary>
+        public TimeSpan ReconnectTryInterval { get; set; } = TimeSpan.FromSeconds(5);
     }
 }
