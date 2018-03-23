@@ -190,6 +190,10 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.0.11 - 23 mar 2018
+	* Updated closed/reconnect handling for sockets
+	* Updated base
+
 * Version 3.0.10 - 21 mar 2018
 	* Now possible to add multiple log writers
 	* Added automatic reconnecting after loss of internet
