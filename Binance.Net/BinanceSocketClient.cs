@@ -348,7 +348,7 @@ namespace Binance.Net
         public void UnsubscribeFromStream(BinanceStreamSubscription streamSubscription)
         {
             lock (sockets)
-                sockets.SingleOrDefault(s => s.StreamResult.StreamId == streamSubscription.StreamId)?.Close();
+                sockets.SingleOrDefault(s => s.StreamResult.StreamId == streamSubscription.StreamId)?.Close().Wait();
         }
 
         /// <summary>
@@ -357,7 +357,7 @@ namespace Binance.Net
         public void UnsubscribeAllStreams()
         {
             lock (sockets)
-                sockets.ToList().ForEach(s => s.Close());
+                sockets.ToList().ForEach(s => s.Close().Wait());
         }
 
         /// <summary>
@@ -470,6 +470,7 @@ namespace Binance.Net
             {
                 log.Write(LogVerbosity.Info, "Socket closed");
                 con.StreamResult.InvokeClosed();
+                con.Socket.Dispose();
                 lock (sockets)
                     sockets.Remove(con);
             }

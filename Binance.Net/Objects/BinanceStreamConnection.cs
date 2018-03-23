@@ -1,4 +1,5 @@
-﻿using CryptoExchange.Net.Interfaces;
+﻿using System.Threading.Tasks;
+using CryptoExchange.Net.Interfaces;
 
 namespace Binance.Net.Objects
 {
@@ -8,10 +9,10 @@ namespace Binance.Net.Objects
         public IWebsocket Socket { get; set; }
         public BinanceStreamSubscription StreamResult { get; set; }
 
-        public void Close()
+        public async Task Close()
         {
             TryReconnect = false;
-            Socket.Close();
+            await Socket.Close();
         }
     }
 }
