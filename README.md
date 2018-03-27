@@ -190,6 +190,11 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.1.0 - 27 mar 2018
+	* Added GetWithdrawalFee call
+	* Refactored Klines some to have the stream and the rest data be more similair
+	* Added code docs where missing
+
 * Version 3.0.11 - 23 mar 2018
 	* Updated closed/reconnect handling for sockets
 	* Updated base

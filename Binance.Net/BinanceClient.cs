@@ -80,6 +80,7 @@ namespace Binance.Net
         private const string DepositHistoryEndpoint = "depositHistory.html";
         private const string WithdrawHistoryEndpoint = "withdrawHistory.html";
         private const string DepositAddressEndpoint = "depositAddress.html";
+        private const string WithdrawalFeeEndpoint = "withdrawFee.html";
         #endregion
 
         #region constructor/destructor
@@ -879,6 +880,38 @@ namespace Binance.Net
         }
 
         /// <summary>
+        /// Synchronized version of the <see cref="GetWithdrawalFeeAsync"/> method
+        /// </summary>
+        /// <returns></returns>
+        public CallResult<decimal> GetWithdrawalFee(string asset, int? recvWindow = null) => GetWithdrawalFeeAsync(asset, recvWindow).Result;
+
+        /// <summary>
+        /// Gets the withdrawal fee for an asset
+        /// </summary>
+        /// <param name="asset">Asset to get withdrawal fee for</param>
+        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Withdrawal fee</returns>
+        public async Task<CallResult<decimal>> GetWithdrawalFeeAsync(string asset, int? recvWindow = null)
+        {
+            await CheckAutoTimestamp().ConfigureAwait(false);
+
+            var parameters = new Dictionary<string, object>()
+            {
+                { "asset", asset },
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("recvWindow", recvWindow?.ToString());
+
+            var result = await ExecuteRequest<BinanceWithdrawalFee>(GetUrl(WithdrawalFeeEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
+            if (!result.Success)
+                return new CallResult<decimal>(0, result.Error);
+
+            if (!result.Data.Success)
+                return new CallResult<decimal>(0, new ServerError(result.Data.Message));
+            return new CallResult<decimal>(result.Data.WithdrawFee, null);
+        }
+
+        /// <summary>
         /// Synchronized version of the <see cref="StartUserStreamAsync"/> method
         /// </summary>
         /// <returns></returns>
@@ -992,7 +1025,7 @@ namespace Binance.Net
             if (exchangeInfo == null)
                 return BinanceTradeRuleResult.CreateFailed("Unable to retrieve trading rules, validation failed");
 
-            var symbolData = exchangeInfo.Symbols.SingleOrDefault(s => s.SymbolName.ToLower() == symbol.ToLower());
+            var symbolData = exchangeInfo.Symbols.SingleOrDefault(s => s.Name.ToLower() == symbol.ToLower());
             if (symbolData == null)
                 return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Symbol {symbol} not found");
 

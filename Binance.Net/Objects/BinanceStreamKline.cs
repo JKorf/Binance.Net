@@ -8,7 +8,7 @@ namespace Binance.Net.Objects
     /// <summary>
     /// Wrapper for kline information for a symbol
     /// </summary>
-    public class BinanceStreamKline: BinanceStreamEvent
+    public class BinanceStreamKlineData: BinanceStreamEvent
     {
         /// <summary>
         /// The symbol the data is for
@@ -19,24 +19,24 @@ namespace Binance.Net.Objects
         /// The data
         /// </summary>
         [JsonProperty("k")]
-        public BinanceStreamKlineInner Data { get; set; }
+        public BinanceStreamKline Data { get; set; }
     }
 
     /// <summary>
     /// The kline data
     /// </summary>
-    public class BinanceStreamKlineInner
+    public class BinanceStreamKline
     {
         /// <summary>
-        /// The start time of this candlestick
+        /// The open time of this candlestick
         /// </summary>
         [JsonProperty("t"), JsonConverter(typeof(TimestampConverter))]
-        public DateTime StartTime { get; set; }
+        public DateTime OpenTime { get; set; }
         /// <summary>
-        /// The end time of this candlestick
+        /// The close time of this candlestick
         /// </summary>
         [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
-        public DateTime EndTime { get; set; }
+        public DateTime CloseTime { get; set; }
         /// <summary>
         /// The symbol this candlestick is for
         /// </summary>
@@ -96,16 +96,38 @@ namespace Binance.Net.Objects
         /// The quote volume
         /// </summary>
         [JsonProperty("q")]
-        public decimal QuoteVolume { get; set; }
+        public decimal QuoteAssetVolume { get; set; }
         /// <summary>
         /// The volume of active buy
         /// </summary>
         [JsonProperty("V")]
-        public decimal ActiveBuyVolume { get; set; }
+        public decimal TakerBuyBaseAssetVolume { get; set; }
         /// <summary>
         /// The quote volume of active buy
         /// </summary>
         [JsonProperty("Q")]
-        public decimal QuoteActiveBuyVolume { get; set; }
+        public decimal TakerBuyQuoteAssetVolume { get; set; }
+
+        /// <summary>
+        /// Casts this object to a <see cref="BinanceKline"/> object
+        /// </summary>
+        /// <returns></returns>
+        public BinanceKline ToKline()
+        {
+            return new BinanceKline()
+            {
+                Open = Open,
+                Close = Close,
+                Volume = Volume,
+                CloseTime = CloseTime,
+                High = High,
+                Low = Low,
+                OpenTime = OpenTime,
+                QuoteAssetVolume = QuoteAssetVolume,
+                TakerBuyBaseAssetVolume = TakerBuyBaseAssetVolume,
+                TakerBuyQuoteAssetVolume = TakerBuyQuoteAssetVolume,
+                TradeCount = TradeCount
+            };
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
-using Binance.Net.Converters;
+using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects
 {
@@ -27,16 +27,18 @@ namespace Binance.Net.Objects
     /// <summary>
     /// An entry in the orderbook
     /// </summary>
-    [JsonConverter(typeof(OrderBookEntryConverter))]
+    [JsonConverter(typeof(ArrayConverter))]
     public class BinanceOrderBookEntry
     {
         /// <summary>
         /// The price of this order book entry
         /// </summary>
+        [ArrayProperty(0)]
         public decimal Price { get; set; }
         /// <summary>
         /// The quantity of this price in the order book
         /// </summary>
+        [ArrayProperty(1)]
         public decimal Quantity { get; set; }
     }
 }

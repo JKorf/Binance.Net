@@ -109,7 +109,7 @@ namespace Binance.Net.UnitTests
                 }
             };
 
-            var client = PrepareClient(JsonConvert.SerializeObject(orderBook));
+            var client = PrepareClient("{\"lastUpdateId\":123,\"asks\": [[0.1, 1.1], [0.2, 2.2]], \"bids\": [[0.3,3.3], [0.4,4.4]]}");
 
             // act
             var result = client.GetOrderBook("BNBBTC");
@@ -372,35 +372,39 @@ namespace Binance.Net.UnitTests
             {
                new BinanceKline()
                {
-                    AssetVolume = 0.1m,
+                    QuoteAssetVolume = 0.1m,
                     Close = 0.2m,
-                    CloseTime = new DateTime(2017, 1, 1),
+                    CloseTime = new DateTime(1970, 1, 1),
                     High = 0.3m,
                     Low = 0.4m,
                     Open = 0.5m,
-                    OpenTime = new DateTime(2016, 1, 1),
+                    OpenTime = new DateTime(1970, 1, 1),
                     TakerBuyBaseAssetVolume = 0.6m,
                     TakerBuyQuoteAssetVolume = 0.7m,
-                    Trades = 10,
+                    TradeCount = 10,
                     Volume = 0.8m
                },
                new BinanceKline()
                {
-                    AssetVolume = 0.9m,
+                   QuoteAssetVolume = 0.9m,
                     Close = 1.0m,
-                    CloseTime = new DateTime(2015, 1, 1),
+                    CloseTime = new DateTime(1970, 1, 1),
                     High = 1.1m,
                     Low = 1.2m,
                     Open = 1.3m,
-                    OpenTime = new DateTime(2014, 1, 1),
+                    OpenTime = new DateTime(1970, 1, 1),
                     TakerBuyBaseAssetVolume = 1.4m,
                     TakerBuyQuoteAssetVolume = 1.5m,
-                    Trades = 20,
+                   TradeCount = 20,
                     Volume = 1.6m
                }
             };
 
-            var client = PrepareClient(JsonConvert.SerializeObject(klines));
+            var client = PrepareClient(JsonConvert.SerializeObject(new object[]
+            {
+                new object[] { 0, 0.5m, 0.3m, 0.4m, 0.2m, 0.8m, 0, 0.1m, 10, 0.6m, 0.7m},
+                new object[] { 0, 1.3m, 1.1m, 1.2m, 1.0m, 1.6m, 0, 0.9m, 20, 1.4m, 1.5m }
+            }));
 
             // act
             var result = client.GetKlines("BNBBTC", KlineInterval.OneMinute);

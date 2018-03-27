@@ -28,19 +28,43 @@ namespace Binance.Net.Objects
         /// </summary>
         [JsonConverter(typeof(TimestampConverter))]
         public DateTime TransactTime { get; set; }
+        /// <summary>
+        /// The price of the order
+        /// </summary>
         public decimal Price { get; set; }
+        /// <summary>
+        /// The original quantity of the order
+        /// </summary>
         [JsonProperty("origQty")]
         public decimal OriginalQuantity { get; set; }
+        /// <summary>
+        /// The quantity of the order that is executed
+        /// </summary>
         [JsonProperty("executedQty")]
         public decimal ExecutedQuantity { get; set; }
+        /// <summary>
+        /// The current status of the order
+        /// </summary>
         [JsonConverter(typeof(OrderStatusConverter))]
         public OrderStatus Status { get; set; }
+        /// <summary>
+        /// For what time the order lasts
+        /// </summary>
         [JsonConverter(typeof(TimeInForceConverter))]
         public TimeInForce TimeInForce { get; set; }
+        /// <summary>
+        /// The type of the order
+        /// </summary>
         [JsonConverter(typeof(OrderTypeConverter))]
         public OrderType Type { get; set; }
+        /// <summary>
+        /// The side of the order
+        /// </summary>
         [JsonConverter(typeof(OrderSideConverter))]
         public OrderSide Side { get; set; }
+        /// <summary>
+        /// Fills for the order
+        /// </summary>
         public List<BinanceOrderTrade> Fills { get; set; }
     }
 }

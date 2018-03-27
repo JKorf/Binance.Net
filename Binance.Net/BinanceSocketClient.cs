@@ -92,7 +92,7 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="SubscribeToKlineStreamAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public CallResult<BinanceStreamSubscription> SubscribeToKlineStream(string symbol, KlineInterval interval, Action<BinanceStreamKline> onMessage) => SubscribeToKlineStreamAsync(symbol, interval, onMessage).Result;
+        public CallResult<BinanceStreamSubscription> SubscribeToKlineStream(string symbol, KlineInterval interval, Action<BinanceStreamKlineData> onMessage) => SubscribeToKlineStreamAsync(symbol, interval, onMessage).Result;
         
         /// <summary>
         /// Subscribes to the candlestick update stream for the provided symbol
@@ -102,7 +102,7 @@ namespace Binance.Net
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
         /// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
-        public async Task<CallResult<BinanceStreamSubscription>> SubscribeToKlineStreamAsync(string symbol, KlineInterval interval, Action<BinanceStreamKline> onMessage)
+        public async Task<CallResult<BinanceStreamSubscription>> SubscribeToKlineStreamAsync(string symbol, KlineInterval interval, Action<BinanceStreamKlineData> onMessage)
         {
             symbol = symbol.ToLower();
             var socketResult = await CreateSocket(baseWebsocketAddress + symbol + KlineStreamEndpoint + "_" + JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ConfigureAwait(false);
@@ -111,7 +111,7 @@ namespace Binance.Net
 
             socketResult.Data.Socket.OnMessage += (msg) =>
             {
-                var result = Deserialize<BinanceStreamKline>(msg, false);
+                var result = Deserialize<BinanceStreamKlineData>(msg, false);
                 if (result.Success)
                     onMessage?.Invoke(result.Data);
                 else

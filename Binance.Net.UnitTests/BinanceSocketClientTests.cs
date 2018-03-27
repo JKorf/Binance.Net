@@ -7,62 +7,12 @@ using CryptoExchange.Net.Interfaces;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using Moq;
-using WebSocket4Net;
 
 namespace Binance.Net.UnitTests
 {
     [TestFixture()]
     public class BinanceNetTest
     {
-        [TestCase()]
-        public void SubscribingToDepthStream_Should_TriggerWhenDepthStreamMessageIsReceived()
-        {
-            // arrange
-            var socket = new Mock<IWebsocket>();
-            socket.Setup(s => s.Close());
-            socket.Setup(s => s.Connect()).Returns(Task.FromResult(true));
-            socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
-            
-            var factory = new Mock<IWebsocketFactory>();
-            factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
-
-            BinanceStreamDepth result = null;
-            var client = new BinanceSocketClient {SocketFactory = factory.Object};
-            var subscription = client.SubscribeToDepthStream("test", (test) => result = test);
-
-            var data = new BinanceStreamDepth()
-            {
-                Event = "TestDepthStream",
-                EventTime = new DateTime(2017, 1, 1),
-                Symbol = "test",
-                FirstUpdateId = 1,
-                LastUpdateId = 2,
-                Asks = new List<BinanceOrderBookEntry>()
-                {
-                    new BinanceOrderBookEntry(){ Price = 1.1m, Quantity = 2.2m},
-                    new BinanceOrderBookEntry(){ Price = 3.3m, Quantity = 4.4m}
-                },
-                Bids = new List<BinanceOrderBookEntry>()
-                {
-                    new BinanceOrderBookEntry(){ Price = 5.5m, Quantity = 6.6m},
-                    new BinanceOrderBookEntry(){ Price = 7.7m, Quantity = 8.8m}
-                }
-            };
-
-            // act
-            socket.Raise(r => r.OnMessage += null, JsonConvert.SerializeObject(data));
-
-            // assert
-            Assert.IsTrue(subscription.Success);
-            Assert.IsTrue(subscription.Data != null);
-            Assert.IsNotNull(result);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data, result, "Bids", "Asks"));
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data.Asks[0], result.Asks[0]));
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data.Asks[1], result.Asks[1]));
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data.Bids[0], result.Bids[0]));
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data.Bids[1], result.Bids[1]));
-        }
-
         [TestCase()]
         public void SubscribingToKlineStream_Should_TriggerWhenKlineStreamMessageIsReceived()
         {
@@ -75,20 +25,20 @@ namespace Binance.Net.UnitTests
             var factory = new Mock<IWebsocketFactory>();
             factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
 
-            BinanceStreamKline result = null;
+            BinanceStreamKlineData result = null;
             var client = new BinanceSocketClient {SocketFactory = factory.Object};
             client.SubscribeToKlineStream("test", KlineInterval.OneMinute, (test) => result = test);
 
-            var data = new BinanceStreamKline()
+            var data = new BinanceStreamKlineData()
             {
                 Event = "TestKlineStream",
                 EventTime = new DateTime(2017, 1, 1),
                 Symbol = "test",
-                Data = new BinanceStreamKlineInner()
+                Data = new BinanceStreamKline()
                 {
-                    ActiveBuyVolume = 0.1m,
+                    TakerBuyBaseAssetVolume = 0.1m,
                     Close = 0.2m,
-                    EndTime = new DateTime(2017, 1, 2),
+                    CloseTime = new DateTime(2017, 1, 2),
                     Final = true,
                     FirstTrade = 10000000000,
                     High = 0.3m,
@@ -96,9 +46,9 @@ namespace Binance.Net.UnitTests
                     LastTrade = 2000000000000,
                     Low = 0.4m,
                     Open = 0.5m,
-                    QuoteActiveBuyVolume = 0.6m,
-                    QuoteVolume = 0.7m,
-                    StartTime = new DateTime(2017, 1, 1),
+                    TakerBuyQuoteAssetVolume = 0.6m,
+                    QuoteAssetVolume = 0.7m,
+                    OpenTime = new DateTime(2017, 1, 1),
                     Symbol = "test",
                     TradeCount = 10,
                     Volume = 0.8m
@@ -112,51 +62,6 @@ namespace Binance.Net.UnitTests
             Assert.IsNotNull(result);
             Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data, result, "Data"));
             Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data.Data, result.Data));
-        }
-
-        [TestCase()]
-        public void SubscribingToPartialBookDepthStream_Should_TriggerWhenPartialBookStreamMessageIsReceived()
-        {
-            // arrange
-            var socket = new Mock<IWebsocket>();
-            socket.Setup(s => s.Close());
-            socket.Setup(s => s.Connect()).Returns(Task.FromResult(true));
-            socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
-
-            var factory = new Mock<IWebsocketFactory>();
-            factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
-
-            BinanceOrderBook result = null;
-            var client = new BinanceSocketClient { SocketFactory = factory.Object };
-            client.SubscribeToPartialBookDepthStream("test", 10, (test) => result = test);
-
-            var data = new BinanceOrderBook()
-            {
-                Asks = new List<BinanceOrderBookEntry>()
-                {
-                    new BinanceOrderBookEntry()
-                    {
-                        Price = 0.1m,
-                        Quantity = 0.2m
-                    },
-                    new BinanceOrderBookEntry()
-                    {
-                        Price = 0.3m,
-                        Quantity = 0.4m
-                    }
-                },
-                LastUpdateId = 1,
-                Bids = new List<BinanceOrderBookEntry>()
-            };
-
-            // act
-            socket.Raise(r => r.OnMessage += null, JsonConvert.SerializeObject(data));
-
-            // assert
-            Assert.IsNotNull(result);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data, result, "Asks", "Bids"));
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data.Asks[0], result.Asks[0]));
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data.Asks[1], result.Asks[1]));
         }
 
         [TestCase()]
