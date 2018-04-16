@@ -490,7 +490,8 @@ namespace Binance.Net
             TimeInForce? timeInForce = null,
             decimal? stopPrice = null,
             decimal? icebergQty = null,
-            OrderResponseType? orderResponseType = null) => PlaceOrderAsync(symbol, side, type, quantity, newClientOrderId, price, timeInForce, stopPrice, icebergQty, orderResponseType).Result;
+            OrderResponseType? orderResponseType = null,
+            int? receiveWindow = null) => PlaceOrderAsync(symbol, side, type, quantity, newClientOrderId, price, timeInForce, stopPrice, icebergQty, orderResponseType, receiveWindow).Result;
 
         /// <summary>
         /// Places a new order
@@ -505,6 +506,7 @@ namespace Binance.Net
         /// <param name="stopPrice">Used for stop orders</param>
         /// <param name="icebergQty">Used for iceberg orders</param>
         /// <param name="orderResponseType">The type of response to receive</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for the placed order</returns>
         public async Task<CallResult<BinancePlacedOrder>> PlaceOrderAsync(string symbol,
             OrderSide side,
@@ -515,7 +517,8 @@ namespace Binance.Net
             TimeInForce? timeInForce = null,
             decimal? stopPrice = null,
             decimal? icebergQty = null,
-            OrderResponseType? orderResponseType = null)
+            OrderResponseType? orderResponseType = null,
+            int? receiveWindow = null)
         { 
             await CheckAutoTimestamp().ConfigureAwait(false);
 
@@ -543,7 +546,8 @@ namespace Binance.Net
             parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
-            
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture));
+
             return await ExecuteRequest<BinancePlacedOrder>(GetUrl(NewOrderEndpoint, Api, SignedVersion), PostMethod, parameters, true).ConfigureAwait(false);
         }
         
@@ -560,7 +564,8 @@ namespace Binance.Net
             TimeInForce? timeInForce = null,
             decimal? stopPrice = null,
             decimal? icebergQty = null,
-            OrderResponseType? orderResponseType = null) => PlaceTestOrderAsync(symbol, side, type, quantity, newClientOrderId, price, timeInForce, stopPrice, icebergQty, orderResponseType).Result;
+            OrderResponseType? orderResponseType = null,
+            int? receiveWindow = null) => PlaceTestOrderAsync(symbol, side, type, quantity, newClientOrderId, price, timeInForce, stopPrice, icebergQty, orderResponseType, receiveWindow).Result;
 
         /// <summary>
         /// Places a new test order. Test orders are not actually being executed and just test the functionality.
@@ -575,6 +580,7 @@ namespace Binance.Net
         /// <param name="stopPrice">Used for stop orders</param>
         /// <param name="icebergQty">User for iceberg orders</param>
         /// <param name="orderResponseType">What kind of response should be returned</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for the placed test order</returns>
         public async Task<CallResult<BinancePlacedOrder>> PlaceTestOrderAsync(string symbol,
             OrderSide side,
@@ -585,7 +591,8 @@ namespace Binance.Net
             TimeInForce? timeInForce = null,
             decimal? stopPrice = null,
             decimal? icebergQty = null,
-            OrderResponseType? orderResponseType = null)
+            OrderResponseType? orderResponseType = null,
+            int? receiveWindow = null)
         {
             await CheckAutoTimestamp().ConfigureAwait(false);
 
@@ -613,7 +620,8 @@ namespace Binance.Net
             parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
-            
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture));
+
             return await ExecuteRequest<BinancePlacedOrder>(GetUrl(NewTestOrderEndpoint, Api, SignedVersion), PostMethod, parameters, true).ConfigureAwait(false);
         }
 
