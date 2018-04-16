@@ -190,6 +190,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.1.1 - 16 apr 2018
+	* Added receiveWindow parameter to PlaceOrder
+
 * Version 3.1.0 - 27 mar 2018
 	* Added GetWithdrawalFee call
 	* Refactored Klines some to have the stream and the rest data be more similair
