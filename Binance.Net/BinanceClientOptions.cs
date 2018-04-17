@@ -4,7 +4,7 @@ using CryptoExchange.Net;
 
 namespace Binance.Net
 {
-    public class BinanceClientOptions: ExchangeOptions
+    public class BinanceClientOptions : ExchangeOptions
     {
         /// <summary>
         /// The base address used to connect to the API
@@ -30,6 +30,11 @@ namespace Binance.Net
         /// The base adress for the socket connections
         /// </summary>
         public string BaseSocketAddress { get; set; } = "wss://stream.binance.com:9443/ws/";
+
+        /// <summary>
+        /// The base address for combined data in socket connections
+        /// </summary>
+        public string BaseSocketCombinedAddress { get; set; } = "wss://stream.binance.com:9443/";
 
         /// <summary>
         /// What should be done when the connection is interupted
