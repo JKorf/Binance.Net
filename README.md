@@ -190,6 +190,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.1.2 - 19 apr 2018
+	* Added combined streams
+
 * Version 3.1.1 - 16 apr 2018
 	* Added receiveWindow parameter to PlaceOrder
 
