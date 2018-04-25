@@ -184,7 +184,7 @@ namespace Binance.Net
                 else log.Write(LogVerbosity.Info, "Couldn't deserialize data received from combined depth diff stream: " + result.Error);
             };
 
-            log.Write(LogVerbosity.Info, "Started book depth diff stream");
+            log.Write(LogVerbosity.Info, "Started combined book depth diff stream");
             return new CallResult<BinanceStreamSubscription>(socketResult.Data.StreamResult, null);
         }
 
@@ -282,7 +282,7 @@ namespace Binance.Net
                 else log.Write(LogVerbosity.Info, "Couldn't deserialize data received from combined trade stream: " + result.Error);
             };
 
-            log.Write(LogVerbosity.Info, "Started trade stream form combined symbols");
+            log.Write(LogVerbosity.Info, "Started combined trade stream for symbols");
             return new CallResult<BinanceStreamSubscription>(socketResult.Data.StreamResult, null);
         }
 
@@ -416,7 +416,7 @@ namespace Binance.Net
                 else log.Write(LogVerbosity.Info, "Couldn't deserialize data received from combined depth stream: " + result.Error);
             };
 
-            log.Write(LogVerbosity.Info, "Started partial book depth stream");
+            log.Write(LogVerbosity.Info, "Started combined partial book depth stream");
             return new CallResult<BinanceStreamSubscription>(socketResult.Data.StreamResult, null);
         }
 
