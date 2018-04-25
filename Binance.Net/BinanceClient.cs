@@ -16,7 +16,7 @@ namespace Binance.Net
     /// <summary>
     /// Client providing access to the Binance REST Api
     /// </summary>
-    public class BinanceClient: ExchangeClient
+    public class BinanceClient : ExchangeClient, IBinanceClient
     {
         #region fields 
         private static BinanceClientOptions defaultOptions = new BinanceClientOptions();
