@@ -7,6 +7,7 @@ namespace Binance.Net
 {
     public class BinanceAuthenticationProvider: AuthenticationProvider
     {
+        private readonly object locker = new object();
         private readonly HMACSHA256 encryptor;
 
         public BinanceAuthenticationProvider(ApiCredentials credentials) : base(credentials)
@@ -26,8 +27,9 @@ namespace Binance.Net
 
             if (!uri.EndsWith("?"))
                 uri += "&";
-
-            uri += $"signature={ByteToString(encryptor.ComputeHash(Encoding.UTF8.GetBytes(query.Length > 1 ? query[1]: "")))}";
+            
+            lock(locker)
+                uri += $"signature={ByteToString(encryptor.ComputeHash(Encoding.UTF8.GetBytes(query.Length > 1 ? query[1]: "")))}";
             return uri;
         }
 
