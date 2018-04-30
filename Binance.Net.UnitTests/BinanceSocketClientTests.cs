@@ -29,29 +29,33 @@ namespace Binance.Net.UnitTests
             var client = new BinanceSocketClient {SocketFactory = factory.Object};
             client.SubscribeToKlineStream("test", KlineInterval.OneMinute, (test) => result = test);
 
-            var data = new BinanceStreamKlineData()
+            var data = new BinanceCombinedStream<BinanceStreamKlineData>()
             {
-                Event = "TestKlineStream",
-                EventTime = new DateTime(2017, 1, 1),
-                Symbol = "test",
-                Data = new BinanceStreamKline()
+                Stream = "test",
+                Data = new BinanceStreamKlineData()
                 {
-                    TakerBuyBaseAssetVolume = 0.1m,
-                    Close = 0.2m,
-                    CloseTime = new DateTime(2017, 1, 2),
-                    Final = true,
-                    FirstTrade = 10000000000,
-                    High = 0.3m,
-                    Interval = KlineInterval.OneMinute,
-                    LastTrade = 2000000000000,
-                    Low = 0.4m,
-                    Open = 0.5m,
-                    TakerBuyQuoteAssetVolume = 0.6m,
-                    QuoteAssetVolume = 0.7m,
-                    OpenTime = new DateTime(2017, 1, 1),
+                    Event = "TestKlineStream",
+                    EventTime = new DateTime(2017, 1, 1),
                     Symbol = "test",
-                    TradeCount = 10,
-                    Volume = 0.8m
+                    Data = new BinanceStreamKline()
+                    {
+                        TakerBuyBaseAssetVolume = 0.1m,
+                        Close = 0.2m,
+                        CloseTime = new DateTime(2017, 1, 2),
+                        Final = true,
+                        FirstTrade = 10000000000,
+                        High = 0.3m,
+                        Interval = KlineInterval.OneMinute,
+                        LastTrade = 2000000000000,
+                        Low = 0.4m,
+                        Open = 0.5m,
+                        TakerBuyQuoteAssetVolume = 0.6m,
+                        QuoteAssetVolume = 0.7m,
+                        OpenTime = new DateTime(2017, 1, 1),
+                        Symbol = "test",
+                        TradeCount = 10,
+                        Volume = 0.8m
+                    }
                 }
             };
 
@@ -60,8 +64,8 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsNotNull(result);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data, result, "Data"));
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data.Data, result.Data));
+            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data.Data, result, "Data"));
+            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data.Data.Data, result.Data));
         }
 
         [TestCase()]
@@ -181,18 +185,22 @@ namespace Binance.Net.UnitTests
             var client = new BinanceSocketClient {SocketFactory = factory.Object};
             client.SubscribeToTradesStream("test", (test) => result = test);
 
-            var data = new BinanceStreamTrade()
+            var data = new BinanceCombinedStream<BinanceStreamTrade>()
             {
-                Event = "TestTradeStream",
-                EventTime = new DateTime(2017, 1, 1),
-                Symbol = "test",
-                TradeId = 1000000000000,
-                BuyerIsMaker = true,
-                BuyerOrderId = 10000000000000,
-                SellerOrderId = 2000000000000,
-                Price = 1.1m,
-                Quantity = 2.2m,
-                TradeTime = new DateTime(2017, 1, 1)
+                Stream = "test",
+                Data = new BinanceStreamTrade()
+                {
+                    Event = "TestTradeStream",
+                    EventTime = new DateTime(2017, 1, 1),
+                    Symbol = "test",
+                    TradeId = 1000000000000,
+                    BuyerIsMaker = true,
+                    BuyerOrderId = 10000000000000,
+                    SellerOrderId = 2000000000000,
+                    Price = 1.1m,
+                    Quantity = 2.2m,
+                    TradeTime = new DateTime(2017, 1, 1)
+                }
             };
 
             // act
@@ -200,7 +208,7 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsNotNull(result);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data, result));
+            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data.Data, result));
         }
 
         [TestCase()]
