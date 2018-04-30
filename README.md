@@ -190,6 +190,10 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.1.3 - 30 apr 2018
+	* Refactored combined streams to be easier to use and reduce duplicate code
+	* Fixed threadsafety issue in authenticator
+
 * Version 3.1.2 - 19 apr 2018
 	* Added combined streams
 
