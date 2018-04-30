@@ -7,7 +7,7 @@
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
 	<Authors>JKorf</Authors>
-    <PackageVersion>3.1.2</PackageVersion>
+    <PackageVersion>3.1.3</PackageVersion>
 	<Description>Binance.Net is a .Net wrapper for the Binance API. It includes all features the API provides using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance Binance.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
