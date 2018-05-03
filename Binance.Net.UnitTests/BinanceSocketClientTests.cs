@@ -7,6 +7,7 @@ using CryptoExchange.Net.Interfaces;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using Moq;
+using CryptoExchange.Net.Logging;
 
 namespace Binance.Net.UnitTests
 {
@@ -23,7 +24,7 @@ namespace Binance.Net.UnitTests
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
 
             var factory = new Mock<IWebsocketFactory>();
-            factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
+            factory.Setup(s => s.CreateWebsocket(It.IsAny<Log>(), It.IsAny<string>())).Returns(socket.Object);
 
             BinanceStreamKlineData result = null;
             var client = new BinanceSocketClient {SocketFactory = factory.Object};
@@ -78,7 +79,7 @@ namespace Binance.Net.UnitTests
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
 
             var factory = new Mock<IWebsocketFactory>();
-            factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
+            factory.Setup(s => s.CreateWebsocket(It.IsAny<Log>(), It.IsAny<string>())).Returns(socket.Object);
 
             BinanceStreamTick result = null;
             var client = new BinanceSocketClient { SocketFactory = factory.Object };
@@ -127,7 +128,7 @@ namespace Binance.Net.UnitTests
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
 
             var factory = new Mock<IWebsocketFactory>();
-            factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
+            factory.Setup(s => s.CreateWebsocket(It.IsAny<Log>(), It.IsAny<string>())).Returns(socket.Object);
 
             BinanceStreamTick[] result = null;
             var client = new BinanceSocketClient { SocketFactory = factory.Object };
@@ -179,7 +180,7 @@ namespace Binance.Net.UnitTests
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
 
             var factory = new Mock<IWebsocketFactory>();
-            factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
+            factory.Setup(s => s.CreateWebsocket(It.IsAny<Log>(), It.IsAny<string>())).Returns(socket.Object);
 
             BinanceStreamTrade result = null;
             var client = new BinanceSocketClient {SocketFactory = factory.Object};
@@ -221,7 +222,7 @@ namespace Binance.Net.UnitTests
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
 
             var factory = new Mock<IWebsocketFactory>();
-            factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
+            factory.Setup(s => s.CreateWebsocket(It.IsAny<Log>(), It.IsAny<string>())).Returns(socket.Object);
 
             BinanceStreamAccountInfo result = null;
             var client = new BinanceSocketClient {SocketFactory = factory.Object};
@@ -265,7 +266,7 @@ namespace Binance.Net.UnitTests
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
 
             var factory = new Mock<IWebsocketFactory>();
-            factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
+            factory.Setup(s => s.CreateWebsocket(It.IsAny<Log>(), It.IsAny<string>())).Returns(socket.Object);
 
             BinanceStreamOrderUpdate result = null;
             var client = new BinanceSocketClient {SocketFactory = factory.Object};
@@ -324,7 +325,7 @@ namespace Binance.Net.UnitTests
             };
 
             var factory = new Mock<IWebsocketFactory>();
-            factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
+            factory.Setup(s => s.CreateWebsocket(It.IsAny<Log>(), It.IsAny<string>())).Returns(socket.Object);
             
             var client = new BinanceSocketClient { SocketFactory = factory.Object };
             var subscription = client.SubscribeToTradesStream("test", (data) => { });
@@ -351,7 +352,7 @@ namespace Binance.Net.UnitTests
             };
 
             var factory = new Mock<IWebsocketFactory>();
-            factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
+            factory.Setup(s => s.CreateWebsocket(It.IsAny<Log>(), It.IsAny<string>())).Returns(socket.Object);
 
             var client = new BinanceSocketClient { SocketFactory = factory.Object };
             client.SubscribeToTradesStream("test", (data) => { });
@@ -374,7 +375,7 @@ namespace Binance.Net.UnitTests
             socket.Setup(s => s.SetEnabledSslProtocols(It.IsAny<System.Security.Authentication.SslProtocols>()));
 
             var factory = new Mock<IWebsocketFactory>();
-            factory.Setup(s => s.CreateWebsocket(It.IsAny<string>())).Returns(socket.Object);
+            factory.Setup(s => s.CreateWebsocket(It.IsAny<Log>(), It.IsAny<string>())).Returns(socket.Object);
 
             var client = new BinanceSocketClient { SocketFactory = factory.Object };
 
