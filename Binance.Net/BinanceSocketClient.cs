@@ -306,6 +306,7 @@ namespace Binance.Net
 
             socketResult.Data.Socket.OnMessage += (msg) =>
             {
+                log.Write(LogVerbosity.Debug, $"Data received on sub of {typeof(BinanceStreamOrderBook)}: " + msg);
                 var result = Deserialize<BinanceCombinedStream<BinanceStreamOrderBook>>(msg, false);
                 if (result.Success)
                 {
@@ -381,6 +382,7 @@ namespace Binance.Net
 
             socketResult.Data.Socket.OnMessage += (msg) =>
             {
+                log.Write(LogVerbosity.Debug, $"Data received on sub of {typeof(T)}: " + msg);
                 var result = Deserialize<T>(msg, false);
                 if (result.Success)
                     onMessage?.Invoke(result.Data);
@@ -400,6 +402,7 @@ namespace Binance.Net
 
             socketResult.Data.Socket.OnMessage += (msg) =>
             {
+                log.Write(LogVerbosity.Debug, $"Data received on sub of {typeof(T)}: " + msg);
                 var result = Deserialize<BinanceCombinedStream<T>>(msg, false);
                 if (result.Success)
                     onMessage?.Invoke(result.Data.Data);
@@ -446,7 +449,7 @@ namespace Binance.Net
         {
             try
             {
-                var socket = SocketFactory.CreateWebsocket(url);
+                var socket = SocketFactory.CreateWebsocket(log, url);
                 var socketObject = new BinanceStream() { Socket = socket, StreamResult = new BinanceStreamSubscription() { StreamId = NextStreamId() } };
                 socket.SetEnabledSslProtocols(protocols);
 
