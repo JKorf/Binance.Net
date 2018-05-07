@@ -32,13 +32,13 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="BinanceClient.GetServerTimeAsync"/> method
         /// </summary>
         /// <returns></returns>
-        CallResult<DateTime> GetServerTime();
+        CallResult<DateTime> GetServerTime(bool resetAutoTimestamp = false);
 
         /// <summary>
         /// Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls
         /// </summary>
         /// <returns>Server time</returns>
-        Task<CallResult<DateTime>> GetServerTimeAsync();
+        Task<CallResult<DateTime>> GetServerTimeAsync(bool resetAutoTimestamp = false);
 
         /// <summary>
         /// Synchronized version of the <see cref="BinanceClient.GetExchangeInfoAsync"/> method

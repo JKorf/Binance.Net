@@ -190,6 +190,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.1.5 - 07 may 2018
+	* Added resetAutoTimestamp parameter to server time
+
 * Version 3.1.4 - 03 may 2018
 	* Additional debug logging
 

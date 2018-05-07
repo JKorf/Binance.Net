@@ -142,13 +142,13 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="GetServerTimeAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public CallResult<DateTime> GetServerTime() => GetServerTimeAsync().Result;
+        public CallResult<DateTime> GetServerTime(bool resetAutoTimestamp = false) => GetServerTimeAsync(resetAutoTimestamp).Result;
 
         /// <summary>
         /// Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls
         /// </summary>
         /// <returns>Server time</returns>
-        public async Task<CallResult<DateTime>> GetServerTimeAsync()
+        public async Task<CallResult<DateTime>> GetServerTimeAsync(bool resetAutoTimestamp = false)
         {
             var url = GetUrl(CheckTimeEndpoint, Api, PublicVersion);
             if (!autoTimestamp)
@@ -164,7 +164,7 @@ namespace Binance.Net
                 if (!result.Success)
                     return new CallResult<DateTime>(default(DateTime), result.Error);
 
-                if (!timeSynced)
+                if (!timeSynced || resetAutoTimestamp)
                 {
                     // Calculate time offset between local and server by taking the elapsed time request time / 2 (round trip)
                     timeOffset = ((result.Data.ServerTime - localTime).TotalMilliseconds) - sw.ElapsedMilliseconds / 2.0;
