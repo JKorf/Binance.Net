@@ -508,7 +508,10 @@ namespace Binance.Net
                 {
                     Thread.Sleep((int)Math.Round(reconnectInterval.TotalMilliseconds));
                     if (con.Socket.Connect().Result)
+                    {
                         log.Write(LogVerbosity.Info, "Reconnected");
+                        con.StreamResult.InvokeReconnect();
+                    }
                 });
             }
             else

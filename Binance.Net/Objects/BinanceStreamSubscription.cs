@@ -14,6 +14,11 @@ namespace Binance.Net.Objects
         /// </summary>
         public event Action<Exception> Error;
 
+        /// <summary>
+        /// Event when socket reconnects
+        /// </summary>
+        public event Action Reconnect;
+
         internal int StreamId { get; set; }
 
         internal void InvokeClosed()
@@ -24,6 +29,11 @@ namespace Binance.Net.Objects
         internal void InvokeError(Exception ex)
         {
             Error?.Invoke(ex);
+        }
+
+        internal void InvokeReconnect()
+        {
+            Reconnect?.Invoke();
         }
     }
 }
