@@ -184,17 +184,13 @@ namespace Binance.Net.ClientWPF
             }
 
             socketClient = new BinanceSocketClient();
-            List<Task> tasks = new List<Task>();
-            foreach (var symbol in AllPrices)
-            {
-                var task = new Task(() => socketClient.SubscribeToKlineStream(symbol.Symbol.ToLower(), KlineInterval.OneMinute, (data) =>
-                {
-                    symbol.Price = data.Data.Close;
-                }));
-                tasks.Add(task);
-                task.Start();
-            }
-            Task.WaitAll(tasks.ToArray());
+            socketClient.SubscribeToAllSymbolTicker(data => {
+                foreach (var ud in data) {
+                    var symbol = AllPrices.SingleOrDefault(p => p.Symbol == ud.Symbol);
+                    if (symbol != null)
+                        symbol.Price = ud.CurrentDayClosePrice;
+                }
+            });             
         }
 
         private void Get24HourStats()
