@@ -49,8 +49,6 @@ namespace Binance.Net.Objects
         public decimal StopPrice { get; set; }
         [JsonProperty("F")]
         public decimal IcebergQuantity { get; set; }
-        [JsonProperty("g")]
-        public decimal g { get; set; }
         [JsonProperty("C")]
         public object OriginalClientOrderId { get; set; }
         /// <summary>
@@ -108,8 +106,6 @@ namespace Binance.Net.Objects
         /// </summary>
         [JsonProperty("t")]
         public long TradeId { get; set; }
-        [JsonProperty("I")]
-        public long I { get; set; }
         [JsonProperty("w")]
         public bool IsWorking { get; set; }
         /// <summary>
@@ -118,7 +114,15 @@ namespace Binance.Net.Objects
         [JsonProperty("m")]
         public bool BuyerIsMaker { get; set; }
 
+        // These are unused properties, but are mapped to prevent mapping error of lower/upper case
+
+        [JsonProperty("g")]
+        public decimal g { get; set; }
+        [JsonProperty("I")]
+        public long I { get; set; }
         [JsonProperty("O")]
         public object O { get; set; }
+        [JsonProperty("Z")]
+        public decimal Z { get; set; }
     }
 }
