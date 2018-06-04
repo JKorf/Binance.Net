@@ -7,7 +7,7 @@
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
 	<Authors>JKorf</Authors>
-    <PackageVersion>3.1.5</PackageVersion>
+    <PackageVersion>3.1.6</PackageVersion>
 	<Description>Binance.Net is a .Net wrapper for the Binance API. It includes all features the API provides using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance Binance.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
@@ -16,7 +16,7 @@
 	<PackageLicenseUrl>https://github.com/JKorf/Binance.Net/blob/master/LICENSE</PackageLicenseUrl>
 	<NeutralLanguage>en</NeutralLanguage>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	<PackageReleaseNotes>3.1.5 - Added resetAutoTimestamp parameter to server time request</PackageReleaseNotes>
+	<PackageReleaseNotes>3.1.6 - Fix for BinanceSymbol mapping, Fix for OrderUpdate mapping</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

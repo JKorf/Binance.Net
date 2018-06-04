@@ -190,6 +190,10 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.1.6 - 04 jun 2018
+	* Fix for OrderUpdate mapping
+	* Fix for BinanceSymbol mapping
+
 * Version 3.1.5 - 07 may 2018
 	* Added resetAutoTimestamp parameter to server time
 
