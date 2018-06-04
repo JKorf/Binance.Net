@@ -31,6 +31,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The precision of the quote asset
         /// </summary>
+        [JsonProperty("quotePrecision")]
         public string QuoteAssetPrecision { get; set; }
         /// <summary>
         /// Allowed order types
