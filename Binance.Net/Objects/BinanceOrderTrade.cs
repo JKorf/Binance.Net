@@ -5,6 +5,10 @@ namespace Binance.Net.Objects
     public class BinanceOrderTrade
     {
         /// <summary>
+        /// The id of the trade
+        /// </summary>
+        public long TradeId { get; set; }
+        /// <summary>
         /// Price of the trade
         /// </summary>
         public decimal Price { get; set; }
