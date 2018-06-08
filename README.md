@@ -190,6 +190,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.1.8 - 08 jun 2018
+	* Fix for DateTime parsing
+
 * Version 3.1.7 - 08 jun 2018
 	* Added missing TradeId field in PlaceOrder response
 
