@@ -190,6 +190,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.1.7 - 08 jun 2018
+	* Added missing TradeId field in PlaceOrder response
+
 * Version 3.1.6 - 04 jun 2018
 	* Fix for OrderUpdate mapping
 	* Fix for BinanceSymbol mapping
