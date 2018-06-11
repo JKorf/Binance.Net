@@ -352,7 +352,7 @@ namespace Binance.Net
         public void UnsubscribeFromStream(BinanceStreamSubscription streamSubscription)
         {
             lock (sockets)
-                sockets.SingleOrDefault(s => s.StreamResult.StreamId == streamSubscription.StreamId)?.Close().Wait();
+                sockets.SingleOrDefault(s => s.StreamResult.StreamId == streamSubscription.StreamId)?.Close().ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -361,7 +361,7 @@ namespace Binance.Net
         public void UnsubscribeAllStreams()
         {
             lock (sockets)
-                sockets.ToList().ForEach(s => s.Close().Wait());
+                sockets.ToList().ForEach(s => s.Close().ConfigureAwait(false).GetAwaiter().GetResult());
         }
 
         /// <summary>
@@ -371,7 +371,7 @@ namespace Binance.Net
         {
             log.Write(LogVerbosity.Info, "Disposing socket client, closing sockets");
             lock (sockets)
-                sockets.ToList().ForEach(s => s.Socket.Close());
+                sockets.ToList().ForEach(s => s.Socket.Close().Wait());
         }
 
         private async Task<CallResult<BinanceStreamSubscription>> Subscribe<T>(string url, Action<T> onMessage) where T: class
