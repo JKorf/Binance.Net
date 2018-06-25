@@ -190,6 +190,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.1.9 - 25 jun 2018
+	* Updated base
+
 * Version 3.1.8 - 08 jun 2018
 	* Fix for DateTime parsing
 
