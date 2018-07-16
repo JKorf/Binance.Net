@@ -12,7 +12,7 @@ namespace Binance.Net.Objects
         public async Task Close()
         {
             TryReconnect = false;
-            await Socket.Close();
+            await Socket.Close().ConfigureAwait(false);
         }
     }
 }
