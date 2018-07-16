@@ -199,6 +199,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.1.11 - 16 jul 2018
+	* Fix for UI thread freezing when unsubscribing a stream
+
 * Version 3.1.10 - 03 jul 2018
 	* Small fix for socket event binding
 
