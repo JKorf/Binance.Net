@@ -463,6 +463,44 @@ namespace Binance.Net
         Task<CallResult<decimal>> GetWithdrawalFeeAsync(string asset, int? recvWindow = null);
 
         /// <summary>
+        /// Synchronized version of the <see cref="GetAccountStatusAsync"/> method
+        /// </summary>
+        /// <returns></returns>
+        CallResult<BinanceAccountStatus> GetAccountStatus(int? recvWindow = null);
+
+        /// <summary>
+        /// Gets the status of the account associated with the apikey/secret
+        /// </summary>
+        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Account status</returns>
+        Task<CallResult<BinanceAccountStatus>> GetAccountStatusAsync(int? recvWindow = null);
+
+        /// <summary>
+        /// Synchronized version of the <see cref="GetSystemStatusAsync"/> method
+        /// </summary>
+        /// <returns></returns>
+        CallResult<BinanceSystemStatus> GetSystemStatus();
+
+        /// <summary>
+        /// Gets the status of the Binance platform
+        /// </summary>
+        /// <returns>The system status</returns>
+        Task<CallResult<BinanceSystemStatus>> GetSystemStatusAsync();
+
+        /// <summary>
+        /// Synchronized version of the <see cref="GetDustLog"/> method
+        /// </summary>
+        /// <returns></returns>
+        CallResult<BinanceDustLog[]> GetDustLog(int? recvWindow = null);
+
+        /// <summary>
+        /// Gets the history of dust conversions
+        /// </summary>
+        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>The history of dust conversions</returns>
+        Task<CallResult<BinanceDustLog[]>> GetDustLogAsync(int? recvWindow = null);
+
+        /// <summary>
         /// Synchronized version of the <see cref="BinanceClient.StartUserStreamAsync"/> method
         /// </summary>
         /// <returns></returns>

@@ -231,4 +231,10 @@
         NoReconnect,
         AutoReconnect
     }
+
+    public enum SystemStatus
+    {
+        Normal,
+        Maintenance
+    }
 }

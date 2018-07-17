@@ -81,6 +81,11 @@ namespace Binance.Net
         private const string WithdrawHistoryEndpoint = "withdrawHistory.html";
         private const string DepositAddressEndpoint = "depositAddress.html";
         private const string WithdrawalFeeEndpoint = "withdrawFee.html";
+
+        private const string AccountStatusEndpoint = "accountStatus.html";
+        private const string SystemStatusEndpoint = "systemStatus.html";
+        private const string DustLogEndpoint = "userAssetDribbletLog.html";
+
         #endregion
 
         #region constructor/destructor
@@ -917,6 +922,81 @@ namespace Binance.Net
             if (!result.Data.Success)
                 return new CallResult<decimal>(0, new ServerError(result.Data.Message));
             return new CallResult<decimal>(result.Data.WithdrawFee, null);
+        }
+
+        /// <summary>
+        /// Synchronized version of the <see cref="GetAccountStatusAsync"/> method
+        /// </summary>
+        /// <returns></returns>
+        public CallResult<BinanceAccountStatus> GetAccountStatus(int? recvWindow = null) => GetAccountStatusAsync(recvWindow).Result;
+
+        /// <summary>
+        /// Gets the status of the account associated with the apikey/secret
+        /// </summary>
+        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Account status</returns>
+        public async Task<CallResult<BinanceAccountStatus>> GetAccountStatusAsync(int? recvWindow = null)
+        {
+            await CheckAutoTimestamp().ConfigureAwait(false);
+
+            var parameters = new Dictionary<string, object>()
+            {
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("recvWindow", recvWindow?.ToString());
+
+            var result = await ExecuteRequest<BinanceAccountStatus>(GetUrl(AccountStatusEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
+            if (!result.Success)
+                return new CallResult<BinanceAccountStatus>(null, result.Error);
+
+            if (!result.Data.Success)
+                return new CallResult<BinanceAccountStatus>(null, new ServerError(result.Data.Message));
+            return new CallResult<BinanceAccountStatus>(result.Data, null);
+        }
+
+        /// <summary>
+        /// Synchronized version of the <see cref="GetSystemStatusAsync"/> method
+        /// </summary>
+        /// <returns></returns>
+        public CallResult<BinanceSystemStatus> GetSystemStatus() => GetSystemStatusAsync().Result;
+
+        /// <summary>
+        /// Gets the status of the Binance platform
+        /// </summary>
+        /// <returns>The system status</returns>
+        public async Task<CallResult<BinanceSystemStatus>> GetSystemStatusAsync()
+        {
+            return await ExecuteRequest<BinanceSystemStatus>(GetUrl(SystemStatusEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, null, true).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Synchronized version of the <see cref="GetDustLog"/> method
+        /// </summary>
+        /// <returns></returns>
+        public CallResult<BinanceDustLog[]> GetDustLog(int? recvWindow = null) => GetDustLogAsync(recvWindow).Result;
+
+        /// <summary>
+        /// Gets the history of dust conversions
+        /// </summary>
+        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>The history of dust conversions</returns>
+        public async Task<CallResult<BinanceDustLog[]>> GetDustLogAsync(int? recvWindow = null)
+        {
+            await CheckAutoTimestamp().ConfigureAwait(false);
+
+            var parameters = new Dictionary<string, object>()
+            {
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("recvWindow", recvWindow?.ToString());
+
+            var result = await ExecuteRequest<BinanceDustLogListWrapper>(GetUrl(DustLogEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
+            if (!result.Success)
+                return new CallResult<BinanceDustLog[]>(null, result.Error);
+
+            if (!result.Data.Success)
+                return new CallResult<BinanceDustLog[]>(null, new ServerError("Unknown server error while requesting dust log"));
+            return new CallResult<BinanceDustLog[]>(result.Data.Results.Rows, null);
         }
 
         /// <summary>
