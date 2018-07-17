@@ -199,6 +199,11 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.1.12 - 17 jul 2018
+	* Added GetAccountStatus endpoint
+	* Added GetSystemStatus endpoint
+	* Added GetDustLog endpoint
+
 * Version 3.1.11 - 16 jul 2018
 	* Fix for UI thread freezing when unsubscribing a stream
 
