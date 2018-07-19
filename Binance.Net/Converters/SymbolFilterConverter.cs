@@ -47,6 +47,13 @@ namespace Binance.Net.Converters
                         MaxNumberAlgoritmicalOrders = JsonConvert.DeserializeObject<int>(obj["maxNumAlgoOrders"].ToString())
                     };
                     break;
+
+                case SymbolFilterType.IcebergParts:
+                    result = new BinanceSymbolIcebergPartsFilter()
+                    {
+                        Limit = JsonConvert.DeserializeObject<int>(obj["limit"].ToString())
+                    };
+                    break;
             }
             result.FilterType = type;
             return result;

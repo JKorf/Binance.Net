@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Binance.Net.Objects
 {
     /// <summary>
-    /// A filter for order placed on a symbol. Can be either a <see cref="BinanceSymbolPriceFilter"/>, <see cref="BinanceSymbolLotSizeFilter"/> or <see cref="BinanceSymbolMinNotionalFilter"/>
+    /// A filter for order placed on a symbol. Can be either a <see cref="BinanceSymbolPriceFilter"/>, <see cref="BinanceSymbolLotSizeFilter"/>, <see cref="BinanceSymbolMinNotionalFilter"/>, <see cref="BinanceSymbolMaxAlgoritmicalOrdersFilter"/> or <see cref="BinanceSymbolIcebergPartsFilter"/>
     /// </summary>
     [JsonConverter(typeof(SymbolFilterConverter))]
     public class BinanceSymbolFilter
@@ -58,8 +58,16 @@ namespace Binance.Net.Objects
     public class BinanceSymbolMaxAlgoritmicalOrdersFilter : BinanceSymbolFilter
     {
         /// <summary>
-        /// The minimal total size of an order. This is calculated by Price * Quantity.
+        /// The max number of algoritmical orders for this symbol
         /// </summary>
         public int MaxNumberAlgoritmicalOrders { get; set; }
+    }
+
+    public class BinanceSymbolIcebergPartsFilter : BinanceSymbolFilter
+    {
+        /// <summary>
+        /// The max parts of an iceberg order for this symbol.
+        /// </summary>
+        public int Limit { get; set; }
     }
 }

@@ -210,7 +210,8 @@
         PriceFilter,
         LotSize,
         MinNotional,
-        MaxNumberAlogitmicalOrders
+        MaxNumberAlogitmicalOrders,
+        IcebergParts
     }
 
     public enum OrderResponseType
