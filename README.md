@@ -199,6 +199,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.1.13 - 19 jul 2018
+	* Update to latest api update adding various properties/filters
+
 * Version 3.1.12 - 17 jul 2018
 	* Added GetAccountStatus endpoint
 	* Added GetSystemStatus endpoint
