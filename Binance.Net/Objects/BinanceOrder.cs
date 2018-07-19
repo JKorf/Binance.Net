@@ -37,6 +37,11 @@ namespace Binance.Net.Objects
         [JsonProperty("executedQty")]
         public decimal ExecutedQuantity { get; set; }
         /// <summary>
+        /// Cummulative amount
+        /// </summary>
+        [JsonProperty("cummulativeQuoteQty")]
+        public decimal CummulativeQuoteQuantity { get; set; }
+        /// <summary>
         /// The status of the order
         /// </summary>
         [JsonConverter(typeof(OrderStatusConverter))]
@@ -70,6 +75,11 @@ namespace Binance.Net.Objects
         /// </summary>
         [JsonConverter(typeof(TimestampConverter))]
         public DateTime Time { get; set; }
+        /// <summary>
+        /// The time the order was last updated
+        /// </summary>
+        [JsonConverter(typeof(TimestampConverter))]
+        public DateTime UpdateTime { get; set; }
         /// <summary>
         /// Is working
         /// </summary>

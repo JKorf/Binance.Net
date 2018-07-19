@@ -43,6 +43,11 @@ namespace Binance.Net.Objects
         [JsonProperty("executedQty")]
         public decimal ExecutedQuantity { get; set; }
         /// <summary>
+        /// Cummulative amount
+        /// </summary>
+        [JsonProperty("cummulativeQuoteQty")]
+        public decimal CummulativeQuoteQuantity { get; set; }
+        /// <summary>
         /// The current status of the order
         /// </summary>
         [JsonConverter(typeof(OrderStatusConverter))]
