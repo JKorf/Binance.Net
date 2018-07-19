@@ -201,7 +201,7 @@
 
     public enum RateLimitType
     {
-        Requests,
+        RequestWeight,
         Orders
     }
 
@@ -209,7 +209,8 @@
     {
         PriceFilter,
         LotSize,
-        MinNotional
+        MinNotional,
+        MaxNumberAlogitmicalOrders
     }
 
     public enum OrderResponseType

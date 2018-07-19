@@ -54,4 +54,12 @@ namespace Binance.Net.Objects
         /// </summary>
         public decimal MinNotional { get; set; }
     }
+
+    public class BinanceSymbolMaxAlgoritmicalOrdersFilter : BinanceSymbolFilter
+    {
+        /// <summary>
+        /// The minimal total size of an order. This is calculated by Price * Quantity.
+        /// </summary>
+        public int MaxNumberAlgoritmicalOrders { get; set; }
+    }
 }

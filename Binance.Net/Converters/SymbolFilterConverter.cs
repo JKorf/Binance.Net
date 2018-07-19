@@ -41,6 +41,12 @@ namespace Binance.Net.Converters
                         TickSize = JsonConvert.DeserializeObject<decimal>(obj["tickSize"].ToString()),
                     };
                     break;
+                case SymbolFilterType.MaxNumberAlogitmicalOrders:
+                    result = new BinanceSymbolMaxAlgoritmicalOrdersFilter()
+                    {
+                        MaxNumberAlgoritmicalOrders = JsonConvert.DeserializeObject<int>(obj["maxNumAlgoOrders"].ToString())
+                    };
+                    break;
             }
             result.FilterType = type;
             return result;

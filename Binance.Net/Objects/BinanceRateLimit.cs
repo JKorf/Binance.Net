@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Binance.Net.Converters;
+using Newtonsoft.Json;
 
 namespace Binance.Net.Objects
 {
@@ -11,7 +12,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The type the rate limit applies to
         /// </summary>
-        [JsonProperty("rateLimitType")]
+        [JsonProperty("rateLimitType"), JsonConverter(typeof(RateLimitConverter))]
         public RateLimitType Type { get; set; }
         /// <summary>
         /// The amount of calls the limit is
