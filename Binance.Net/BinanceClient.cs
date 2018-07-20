@@ -10,6 +10,7 @@ using Binance.Net.Converters;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Logging;
+using Newtonsoft.Json.Linq;
 
 namespace Binance.Net
 {
@@ -1075,7 +1076,22 @@ namespace Binance.Net
             tradeRulesBehaviour = options.TradeRulesBehaviour;
             tradeRulesUpdateInterval = options.TradeRulesUpdateInterval;
         }
-        
+
+        protected override Error ParseErrorResponse(string error)
+        {
+            if(error == null)
+                return new ServerError("Unknown error, no error message");
+
+            var obj = JObject.Parse(error);
+            if(!obj.ContainsKey("msg") && !obj.ContainsKey("code"))
+                return new ServerError(error);
+
+            if (obj.ContainsKey("msg") && !obj.ContainsKey("code"))
+                return new ServerError((string)obj["msg"]);
+
+            return new ServerError((int)obj["code"], (string)obj["msg"]);
+        }
+
         private Uri GetUrl(string endpoint, string api, string version)
         {
             var result = $"{baseApiAddress}/{api}/v{version}/{endpoint}";
