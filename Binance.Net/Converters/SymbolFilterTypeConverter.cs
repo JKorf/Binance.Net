@@ -14,6 +14,7 @@ namespace Binance.Net.Converters
             { SymbolFilterType.LotSize, "LOT_SIZE" },
             { SymbolFilterType.MinNotional, "MIN_NOTIONAL" },
             { SymbolFilterType.PriceFilter, "PRICE_FILTER" },
+            { SymbolFilterType.IcebergParts, "ICEBERG_PARTS" },
             { SymbolFilterType.MaxNumberAlogitmicalOrders, "MAX_NUM_ALGO_ORDERS" },
         };
     }
