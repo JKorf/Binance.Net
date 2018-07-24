@@ -199,6 +199,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.1.15 - 24 jul 2018
+	* Fixed missing Symbol filter type
+
 * Version 3.1.14 - 20 jul 2018
 	* Added error parsing to code/message
 
