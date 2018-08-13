@@ -415,7 +415,7 @@ namespace Binance.Net
 
         private async Task<CallResult<BinanceStreamSubscription>> CreateUserStream(string listenKey, Action<BinanceStreamAccountInfo> onAccountInfoMessage, Action<BinanceStreamOrderUpdate> onOrderUpdateMessage)
         {
-            var socketResult = await CreateSocket(baseCombinedAddress + listenKey).ConfigureAwait(false);
+            var socketResult = await CreateSocket(baseAddress + listenKey).ConfigureAwait(false);
             if (!socketResult.Success)
                 return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
 
