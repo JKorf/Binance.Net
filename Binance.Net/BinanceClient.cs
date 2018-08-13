@@ -786,7 +786,7 @@ namespace Binance.Net
                 return result;
 
             if (!result.Data.Success)
-                result = new CallResult<BinanceWithdrawalPlaced>(null, new ServerError(result.Data.Message));
+                result = new CallResult<BinanceWithdrawalPlaced>(null, ParseErrorResponse(result.Data.Message));
             return result;
         }
 
@@ -863,7 +863,7 @@ namespace Binance.Net
                 return result;
             
             if (!result.Data.Success)
-                result = new CallResult<BinanceWithdrawalList>(null, new ServerError(result.Data.Message));
+                result = new CallResult<BinanceWithdrawalList>(null, ParseErrorResponse(result.Data.Message));
             return result;
         }
 
@@ -921,7 +921,7 @@ namespace Binance.Net
                 return new CallResult<decimal>(0, result.Error);
 
             if (!result.Data.Success)
-                return new CallResult<decimal>(0, new ServerError(result.Data.Message));
+                return new CallResult<decimal>(0, ParseErrorResponse(result.Data.Message));
             return new CallResult<decimal>(result.Data.WithdrawFee, null);
         }
 
@@ -951,7 +951,7 @@ namespace Binance.Net
                 return new CallResult<BinanceAccountStatus>(null, result.Error);
 
             if (!result.Data.Success)
-                return new CallResult<BinanceAccountStatus>(null, new ServerError(result.Data.Message));
+                return new CallResult<BinanceAccountStatus>(null, ParseErrorResponse(result.Data.Message));
             return new CallResult<BinanceAccountStatus>(result.Data, null);
         }
 

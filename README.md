@@ -16,7 +16,12 @@ Also check out my other exchange API wrappers:
 </td>
 <td><img src="https://github.com/JKorf/Bitfinex.Net/blob/master/Resources/icon.png?raw=true">
 <br />
-<a href="https://github.com/JKorf/Bitfinex.Net">Bitfinex</a></td>
+<a href="https://github.com/JKorf/Bitfinex.Net">Bitfinex</a>
+</td>
+<td><img src="https://github.com/JKorf/CoinEx.Net/blob/master/Resources/icon.png?raw=true">
+<br />
+<a href="https://github.com/JKorf/CoinEx.Net">CoinEx</a>
+</td>
 </table>
 
 
@@ -199,6 +204,10 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.1.16 - 13 aug 2018
+	* Updated CryptoExchange.Net
+	* Fixed error response parsing
+
 * Version 3.1.15 - 24 jul 2018
 	* Fixed missing Symbol filter type
 
