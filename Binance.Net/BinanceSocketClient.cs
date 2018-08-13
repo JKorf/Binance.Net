@@ -12,6 +12,7 @@ using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Implementation;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Logging;
+using System.Diagnostics;
 
 namespace Binance.Net
 {
@@ -86,6 +87,22 @@ namespace Binance.Net
         public void SetApiCredentials(string apiKey, string apiSecret)
         {
             SetAuthenticationProvider(new BinanceAuthenticationProvider(new ApiCredentials(apiKey, apiSecret)));
+        }
+
+        /// <summary>
+        /// Checks the connection to the server and returns how long connecting took
+        /// </summary>
+        /// <returns>Time to connect in miliseconds</returns>
+        public override async Task<CallResult<long>> PingAsync()
+        {
+            var socket = SocketFactory.CreateWebsocket(log, baseAddress);
+
+            var sw = Stopwatch.StartNew();
+            var connect = await socket.Connect().ConfigureAwait(false);
+            if (!connect)
+                return new CallResult<long>(0, new CantConnectError());
+            sw.Stop();
+            return new CallResult<long>(sw.ElapsedMilliseconds, null);
         }
 
         /// <summary>

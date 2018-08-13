@@ -20,13 +20,13 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="BinanceClient.PingAsync"/> method
         /// </summary>
         /// <returns></returns>
-        CallResult<bool> Ping();
+        CallResult<long> Ping();
 
         /// <summary>
         /// Pings the Binance API
         /// </summary>
         /// <returns>True if succesful ping, false if no response</returns>
-        Task<CallResult<bool>> PingAsync();
+        Task<CallResult<long>> PingAsync();
 
         /// <summary>
         /// Synchronized version of the <see cref="BinanceClient.GetServerTimeAsync"/> method
