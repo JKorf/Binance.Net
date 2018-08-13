@@ -7,10 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <packagereference Include="Microsoft.NET.Test.Sdk" Version="15.0.0"></packagereference>
-    <PackageReference Include="Moq" Version="4.7.145" />
-    <packagereference Include="NUnit" Version="3.6.1"></packagereference>
-    <packagereference Include="NUnit3TestAdapter" Version="3.8.0-alpha1"></packagereference>
+    <packagereference Include="Microsoft.NET.Test.Sdk" Version="15.9.0-preview-20180807-05"></packagereference>
+    <PackageReference Include="Moq" Version="4.9.0" />
+    <packagereference Include="NUnit" Version="3.10.1"></packagereference>
+    <packagereference Include="NUnit3TestAdapter" Version="3.10.0"></packagereference>
   </ItemGroup>
 
   <ItemGroup>

@@ -1,5 +1,6 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
+using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Interfaces;
 
@@ -12,7 +13,7 @@ namespace Binance.Net
 
         public BinanceAuthenticationProvider(ApiCredentials credentials) : base(credentials)
         {
-            encryptor = new HMACSHA256(Encoding.ASCII.GetBytes(credentials.Secret));
+            encryptor = new HMACSHA256(Encoding.ASCII.GetBytes(credentials.Secret.GetString()));
         }
 
         public override string AddAuthenticationToUriString(string uri, bool signed)
@@ -35,7 +36,7 @@ namespace Binance.Net
 
         public override IRequest AddAuthenticationToRequest(IRequest request, bool signed)
         {
-            request.Headers.Add("X-MBX-APIKEY", Credentials.Key);
+            request.Headers.Add("X-MBX-APIKEY", Credentials.Key.GetString());
             return request;
         }
 

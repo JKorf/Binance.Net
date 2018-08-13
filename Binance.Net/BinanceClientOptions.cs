@@ -6,10 +6,11 @@ namespace Binance.Net
 {
     public class BinanceClientOptions : ExchangeOptions
     {
-        /// <summary>
-        /// The base address used to connect to the API
-        /// </summary>
-        public string BaseAddress { get; set; } = "https://api.binance.com";
+        public BinanceClientOptions()
+        {
+            BaseAddress = "https://api.binance.com";
+        }
+
         /// <summary>
         /// Whether or not to automatically sync the local time with the server time
         /// </summary>
@@ -26,10 +27,10 @@ namespace Binance.Net
 
     public class BinanceSocketClientOptions : ExchangeOptions
     {
-        /// <summary>
-        /// The base adress for the socket connections
-        /// </summary>
-        public string BaseSocketAddress { get; set; } = "wss://stream.binance.com:9443/ws/";
+        public BinanceSocketClientOptions()
+        {
+            BaseAddress = "wss://stream.binance.com:9443/ws/";
+        }
 
         /// <summary>
         /// The base address for combined data in socket connections

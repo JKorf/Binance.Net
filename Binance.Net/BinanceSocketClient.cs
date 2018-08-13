@@ -23,8 +23,7 @@ namespace Binance.Net
         #region fields
         private static BinanceSocketClientOptions defaultOptions = new BinanceSocketClientOptions();
 
-        private string baseWebsocketAddress;
-        private string baseWebsocketCombinedAddress;
+        private string baseCombinedAddress;
         private ReconnectBehaviour reconnectBehaviour;
         private TimeSpan reconnectInterval;
 
@@ -244,7 +243,7 @@ namespace Binance.Net
         public async Task<CallResult<BinanceStreamSubscription>> SubscribeToSymbolTickerAsync(string symbol, Action<BinanceStreamTick> onMessage)
         {
             symbol = symbol.ToLower();
-            return await Subscribe(baseWebsocketAddress + symbol + SymbolTickerStreamEndpoint, onMessage).ConfigureAwait(false);
+            return await Subscribe(baseAddress + symbol + SymbolTickerStreamEndpoint, onMessage).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -261,7 +260,7 @@ namespace Binance.Net
         /// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
         public async Task<CallResult<BinanceStreamSubscription>> SubscribeToAllSymbolTickerAsync(Action<BinanceStreamTick[]> onMessage)
         {
-            return await Subscribe(baseWebsocketAddress + AllSymbolTickerStreamEndpoint, onMessage).ConfigureAwait(false);
+            return await Subscribe(baseAddress + AllSymbolTickerStreamEndpoint, onMessage).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -300,7 +299,7 @@ namespace Binance.Net
         public async Task<CallResult<BinanceStreamSubscription>> SubscribeToPartialBookDepthStreamAsync(string[] symbols, int levels, Action<BinanceStreamOrderBook> onMessage)
         {
             symbols = symbols.Select(a => a.ToLower() + PartialBookDepthStreamEndpoint + levels).ToArray();
-            var socketResult = await CreateSocket(baseWebsocketCombinedAddress + "stream?streams=" + String.Join("/", symbols)).ConfigureAwait(false);
+            var socketResult = await CreateSocket(baseCombinedAddress + "stream?streams=" + String.Join("/", symbols)).ConfigureAwait(false);
             if (!socketResult.Success)
                 return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
 
@@ -396,7 +395,7 @@ namespace Binance.Net
 
         private async Task<CallResult<BinanceStreamSubscription>> SubscribeCombined<T>(string streams, Action<T> onMessage)
         {
-            var socketResult = await CreateSocket(baseWebsocketCombinedAddress + "stream?streams=" + streams).ConfigureAwait(false);
+            var socketResult = await CreateSocket(baseCombinedAddress + "stream?streams=" + streams).ConfigureAwait(false);
             if (!socketResult.Success)
                 return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
 
@@ -416,7 +415,7 @@ namespace Binance.Net
 
         private async Task<CallResult<BinanceStreamSubscription>> CreateUserStream(string listenKey, Action<BinanceStreamAccountInfo> onAccountInfoMessage, Action<BinanceStreamOrderUpdate> onOrderUpdateMessage)
         {
-            var socketResult = await CreateSocket(baseWebsocketAddress + listenKey).ConfigureAwait(false);
+            var socketResult = await CreateSocket(baseCombinedAddress + listenKey).ConfigureAwait(false);
             if (!socketResult.Success)
                 return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
 
@@ -482,8 +481,7 @@ namespace Binance.Net
 
         private void Configure(BinanceSocketClientOptions options)
         {
-            baseWebsocketAddress = options.BaseSocketAddress;
-            baseWebsocketCombinedAddress = options.BaseSocketCombinedAddress;
+            baseCombinedAddress = options.BaseSocketCombinedAddress;
             reconnectBehaviour = options.ReconnectTryBehaviour;
             reconnectInterval = options.ReconnectTryInterval;
         }

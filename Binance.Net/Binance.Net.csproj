@@ -8,7 +8,7 @@
     <PackageId>Binance.Net</PackageId>
 	<Authors>JKorf</Authors>
     <PackageVersion>3.1.15</PackageVersion>
-	<Description>Binance.Net is a .Net wrapper for the Binance API. It includes all features the API provides using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
+	<Description>Binance.Net is a .Net wrapper for the Binance API. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance Binance.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
     <PackageProjectUrl>https://github.com/JKorf/Binance.Net</PackageProjectUrl>
@@ -20,7 +20,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CryptoExchange.Net" Version="[0.0.31]" />
+    <PackageReference Include="CryptoExchange.Net" Version="[0.0.37]" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
   </ItemGroup>
   
