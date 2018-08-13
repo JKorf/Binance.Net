@@ -26,7 +26,7 @@ Also check out my other exchange API wrappers:
 And other API wrappers based on CryptoExchange.Net:
 <table>
 <tr>
-<td><img src="https://github.com/JKorf/Switcheo.Net/blob/master/Resources/switcheo-coin.png?raw=true">
+<td><img src="https://github.com/Zaliro/Switcheo.Net/blob/master/Resources/switcheo-coin.png?raw=true">
 <br />
 <a href="https://github.com/Zaliro/Switcheo.Net">Switcheo</a>
 </td>
