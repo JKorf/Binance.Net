@@ -132,13 +132,13 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="PingAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public new CallResult<bool> Ping() => PingAsync().Result;
+        public CallResult<bool> Ping() => PingAsync().Result;
 
         /// <summary>
         /// Pings the Binance API
         /// </summary>
         /// <returns>True if succesful ping, false if no response</returns>
-        public new async Task<CallResult<bool>> PingAsync()
+        public async Task<CallResult<bool>> PingAsync()
         {
             var result = await ExecuteRequest<BinancePing>(GetUrl(PingEndpoint, Api, PublicVersion)).ConfigureAwait(false);
             return new CallResult<bool>(result.Data != null, result.Error);
