@@ -204,6 +204,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.1.17 - 13 aug 2018
+	* Updated CryptoExchange.Net to fix bug
+
 * Version 3.1.16 - 13 aug 2018
 	* Updated CryptoExchange.Net
 	* Fixed error response parsing
