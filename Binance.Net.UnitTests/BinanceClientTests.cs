@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.Requests;
 
 namespace Binance.Net.UnitTests
 {
@@ -26,10 +27,10 @@ namespace Binance.Net.UnitTests
             // arrange
             DateTime expected = new DateTime(1970, 1, 1).AddMilliseconds(milisecondsTime);
             var time = new BinanceCheckTime() { ServerTime = expected };
-            var client = PrepareClient(JsonConvert.SerializeObject(time));
+            var objects = TestHelpers.PrepareClient(() => Construct(), JsonConvert.SerializeObject(time));
 
             // act
-            var result = client.GetServerTime();
+            var result = objects.Client.GetServerTime();
 
             // assert
             Assert.AreEqual(true, result.Success);
@@ -64,14 +65,14 @@ namespace Binance.Net.UnitTests
                 WeightedAveragePrice = 3.456m
             };
 
-            var client = PrepareClient(JsonConvert.SerializeObject(expected));
+            var objects = TestHelpers.PrepareClient(() => Construct(), JsonConvert.SerializeObject(expected));
 
             // act
-            var result = client.Get24HPrice("BNBBTC");
+            var result = objects.Client.Get24HPrice("BNBBTC");
 
             // assert
             Assert.AreEqual(true, result.Success);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(expected, result.Data));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(expected, result.Data));
         }
 
         [TestCase]
@@ -109,18 +110,18 @@ namespace Binance.Net.UnitTests
                 }
             };
 
-            var client = PrepareClient("{\"lastUpdateId\":123,\"asks\": [[0.1, 1.1], [0.2, 2.2]], \"bids\": [[0.3,3.3], [0.4,4.4]]}");
+            var objects = TestHelpers.PrepareClient(() => Construct(), "{\"lastUpdateId\":123,\"asks\": [[0.1, 1.1], [0.2, 2.2]], \"bids\": [[0.3,3.3], [0.4,4.4]]}");
 
             // act
-            var result = client.GetOrderBook("BNBBTC");
+            var result = objects.Client.GetOrderBook("BNBBTC");
 
             // assert
             Assert.IsTrue(result.Success);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(orderBook, result.Data, "Asks", "Bids"));
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(orderBook.Asks[0], result.Data.Asks[0]));
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(orderBook.Asks[1], result.Data.Asks[1]));
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(orderBook.Bids[0], result.Data.Bids[0]));
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(orderBook.Bids[1], result.Data.Bids[1]));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(orderBook, result.Data, "Asks", "Bids"));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(orderBook.Asks[0], result.Data.Asks[0]));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(orderBook.Asks[1], result.Data.Asks[1]));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(orderBook.Bids[0], result.Data.Bids[0]));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(orderBook.Bids[1], result.Data.Bids[1]));
         }
 
         [TestCase]
@@ -153,16 +154,19 @@ namespace Binance.Net.UnitTests
                 }
             };
 
-            var client = PrepareClient(JsonConvert.SerializeObject(accountInfo));
+            var objects = TestHelpers.PrepareClient(() => Construct(new BinanceClientOptions()
+            {
+                ApiCredentials = new ApiCredentials("Test", "Test")
+            }), JsonConvert.SerializeObject(accountInfo));
 
             // act
-            var result = client.GetAccountInfo();
+            var result = objects.Client.GetAccountInfo();
 
             // assert
             Assert.IsTrue(result.Success);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(accountInfo, result.Data, "Balances"));
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(accountInfo.Balances[0], result.Data.Balances[0]));
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(accountInfo.Balances[1], result.Data.Balances[1]));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(accountInfo, result.Data, "Balances"));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(accountInfo.Balances[0], result.Data.Balances[0]));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(accountInfo.Balances[1], result.Data.Balances[1]));
         }
 
         [TestCase]
@@ -195,16 +199,16 @@ namespace Binance.Net.UnitTests
                 }
             };
 
-            var client = PrepareClient(JsonConvert.SerializeObject(trades));
+            var objects = TestHelpers.PrepareClient(() => Construct(), JsonConvert.SerializeObject(trades));
 
             // act
-            var result = client.GetAggregatedTrades("BNBBTC");
+            var result = objects.Client.GetAggregatedTrades("BNBBTC");
 
             // assert
             Assert.IsTrue(result.Success);
             Assert.AreEqual(trades.Length, result.Data.Length);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(trades[0], result.Data[0]));            
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(trades[1], result.Data[1]));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(trades[0], result.Data[0]));            
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(trades[1], result.Data[1]));
         }
 
         [TestCase]
@@ -231,16 +235,16 @@ namespace Binance.Net.UnitTests
                 }
             };
 
-            var client = PrepareClient(JsonConvert.SerializeObject(prices));
+            var objects = TestHelpers.PrepareClient(() => Construct(), JsonConvert.SerializeObject(prices));
 
             // act
-            var result = client.GetAllBookPrices();
+            var result = objects.Client.GetAllBookPrices();
 
             // assert
             Assert.IsTrue(result.Success);
             Assert.AreEqual(prices.Length, result.Data.Length);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(prices[0], result.Data[0]));
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(prices[1], result.Data[1]));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(prices[0], result.Data[0]));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(prices[1], result.Data[1]));
         }
 
         [TestCase]
@@ -283,16 +287,19 @@ namespace Binance.Net.UnitTests
                 }
             };
 
-            var client = PrepareClient(JsonConvert.SerializeObject(orders));
+            var objects = TestHelpers.PrepareClient(() => Construct(new BinanceClientOptions()
+            {
+                ApiCredentials = new ApiCredentials("Test", "Test")
+            }), JsonConvert.SerializeObject(orders));
 
             // act
-            var result = client.GetAllOrders("BNBBTC");
+            var result = objects.Client.GetAllOrders("BNBBTC");
 
             // assert
             Assert.IsTrue(result.Success);
             Assert.AreEqual(orders.Length, result.Data.Length);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(orders[0], result.Data[0]));
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(orders[1], result.Data[1]));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(orders[0], result.Data[0]));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(orders[1], result.Data[1]));
         }
 
         [TestCase]
@@ -313,16 +320,16 @@ namespace Binance.Net.UnitTests
                 }
             };
 
-            var client = PrepareClient(JsonConvert.SerializeObject(prices));
+            var objects = TestHelpers.PrepareClient(() => Construct(), JsonConvert.SerializeObject(prices));
 
             // act
-            var result = client.GetAllPrices();
+            var result = objects.Client.GetAllPrices();
 
             // assert
             Assert.IsTrue(result.Success);
             Assert.AreEqual(result.Data.Length, prices.Length);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(prices[0], result.Data[0]));
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(prices[1], result.Data[1]));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(prices[0], result.Data[0]));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(prices[1], result.Data[1]));
         }
 
         [TestCase]
@@ -351,17 +358,20 @@ namespace Binance.Net.UnitTests
                 }
             };
 
-            var client = PrepareClient(JsonConvert.SerializeObject(history));
+            var objects = TestHelpers.PrepareClient(() => Construct(new BinanceClientOptions()
+            {
+                ApiCredentials = new ApiCredentials("Test", "Test")
+            }), JsonConvert.SerializeObject(history));
 
             // act
-            var result = client.GetDepositHistory();
+            var result = objects.Client.GetDepositHistory();
 
             // assert
             Assert.IsTrue(result.Success);
             Assert.IsTrue(result.Data.Success);
             Assert.AreEqual(result.Data.List.Count, history.List.Count);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(history.List[0], result.Data.List[0]));
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(history.List[1], result.Data.List[1]));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(history.List[0], result.Data.List[0]));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(history.List[1], result.Data.List[1]));
         }
 
         [TestCase]
@@ -400,20 +410,20 @@ namespace Binance.Net.UnitTests
                }
             };
 
-            var client = PrepareClient(JsonConvert.SerializeObject(new object[]
+            var objects = TestHelpers.PrepareClient(() => Construct(), JsonConvert.SerializeObject(new object[]
             {
                 new object[] { 0, 0.5m, 0.3m, 0.4m, 0.2m, 0.8m, 0, 0.1m, 10, 0.6m, 0.7m},
                 new object[] { 0, 1.3m, 1.1m, 1.2m, 1.0m, 1.6m, 0, 0.9m, 20, 1.4m, 1.5m }
             }));
 
             // act
-            var result = client.GetKlines("BNBBTC", KlineInterval.OneMinute);
+            var result = objects.Client.GetKlines("BNBBTC", KlineInterval.OneMinute);
 
             // assert
             Assert.IsTrue(result.Success);
             Assert.AreEqual(result.Data.Length, klines.Length);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(klines[0], result.Data[0]));
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(klines[1], result.Data[1]));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(klines[0], result.Data[0]));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(klines[1], result.Data[1]));
         }
 
         [TestCase]
@@ -448,16 +458,19 @@ namespace Binance.Net.UnitTests
                 }
             };
 
-            var client = PrepareClient(JsonConvert.SerializeObject(trades));
+            var objects = TestHelpers.PrepareClient(() => Construct(new BinanceClientOptions()
+            {
+                ApiCredentials = new ApiCredentials("Test", "Test")
+            }), JsonConvert.SerializeObject(trades));
 
             // act
-            var result = client.GetMyTrades("BNBBTC");
+            var result = objects.Client.GetMyTrades("BNBBTC");
 
             // assert
             Assert.IsTrue(result.Success);
             Assert.AreEqual(result.Data.Length, trades.Length);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(trades[0], result.Data[0]));
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(trades[1], result.Data[1]));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(trades[0], result.Data[0]));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(trades[1], result.Data[1]));
         }
 
         [TestCase]
@@ -500,16 +513,19 @@ namespace Binance.Net.UnitTests
                 }
             };
 
-            var client = PrepareClient(JsonConvert.SerializeObject(orders));
+            var objects = TestHelpers.PrepareClient(() => Construct(new BinanceClientOptions()
+            {
+                ApiCredentials = new ApiCredentials("Test", "Test")
+            }), JsonConvert.SerializeObject(orders));
 
             // act
-            var result = client.GetOpenOrders("BNBBTC");
+            var result = objects.Client.GetOpenOrders("BNBBTC");
 
             // assert
             Assert.IsTrue(result.Success);
             Assert.AreEqual(orders.Length, result.Data.Length);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(orders[0], result.Data[0]));
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(orders[1], result.Data[1]));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(orders[0], result.Data[0]));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(orders[1], result.Data[1]));
         }
 
         [TestCase]
@@ -544,17 +560,20 @@ namespace Binance.Net.UnitTests
                 }
             };
 
-            var client = PrepareClient(JsonConvert.SerializeObject(history));
+            var objects = TestHelpers.PrepareClient(() => Construct(new BinanceClientOptions()
+            {
+                ApiCredentials = new ApiCredentials("Test", "Test")
+            }), JsonConvert.SerializeObject(history));
 
             // act
-            var result = client.GetWithdrawHistory();
+            var result = objects.Client.GetWithdrawHistory();
 
             // assert
             Assert.IsTrue(result.Success);
             Assert.IsTrue(result.Data.Success);
             Assert.AreEqual(result.Data.List.Count, history.List.Count);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(history.List[0], result.Data.List[0]));
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(history.List[1], result.Data.List[1]));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(history.List[0], result.Data.List[0]));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(history.List[1], result.Data.List[1]));
         }
 
         [TestCase]
@@ -569,14 +588,17 @@ namespace Binance.Net.UnitTests
                 OriginalClientOrderId = "test2"
             };
 
-            var client = PrepareClient(JsonConvert.SerializeObject(canceled));
+            var objects = TestHelpers.PrepareClient(() => Construct(new BinanceClientOptions()
+            {
+                ApiCredentials = new ApiCredentials("Test", "Test")
+            }), JsonConvert.SerializeObject(canceled));
 
             // act
-            var result = client.CancelOrder("BNBBTC");
+            var result = objects.Client.CancelOrder("BNBBTC");
 
             // assert
             Assert.IsTrue(result.Success);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(canceled, result.Data));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(canceled, result.Data));
         }
 
         [TestCase]
@@ -591,14 +613,17 @@ namespace Binance.Net.UnitTests
                 TransactTime = new DateTime(2017, 1, 1)
             };
 
-            var client = PrepareClient(JsonConvert.SerializeObject(placed));
+            var objects = TestHelpers.PrepareClient(() => Construct(new BinanceClientOptions()
+            {
+                ApiCredentials = new ApiCredentials("Test", "Test")
+            }), JsonConvert.SerializeObject(placed));
 
             // act
-            var result = client.PlaceTestOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, timeInForce:TimeInForce.GoodTillCancel, quantity:1, price:2);
+            var result = objects.Client.PlaceTestOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, timeInForce:TimeInForce.GoodTillCancel, quantity:1, price:2);
 
             // assert
             Assert.IsTrue(result.Success);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(placed, result.Data));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(placed, result.Data));
         }
 
         [TestCase]
@@ -613,14 +638,17 @@ namespace Binance.Net.UnitTests
                 TransactTime = new DateTime(2017, 1, 1)
             };
 
-            var client = PrepareClient(JsonConvert.SerializeObject(placed));
+            var objects = TestHelpers.PrepareClient(() => Construct(new BinanceClientOptions()
+            {
+                ApiCredentials = new ApiCredentials("Test", "Test")
+            }), JsonConvert.SerializeObject(placed));
 
             // act
-            var result = client.PlaceOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, timeInForce: TimeInForce.GoodTillCancel, quantity: 1, price: 2);
+            var result = objects.Client.PlaceOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, timeInForce: TimeInForce.GoodTillCancel, quantity: 1, price: 2);
 
             // assert
             Assert.IsTrue(result.Success);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(placed, result.Data));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(placed, result.Data));
         }
 
         [TestCase]
@@ -644,14 +672,17 @@ namespace Binance.Net.UnitTests
                 Type = OrderType.Market
             };
 
-            var client = PrepareClient(JsonConvert.SerializeObject(order));
+            var objects = TestHelpers.PrepareClient(() => Construct(new BinanceClientOptions()
+            {
+                ApiCredentials = new ApiCredentials("Test", "Test")
+            }), JsonConvert.SerializeObject(order));
 
             // act
-            var result = client.QueryOrder("BNBBTC", orderId: 1);
+            var result = objects.Client.QueryOrder("BNBBTC", orderId: 1);
 
             // assert
             Assert.IsTrue(result.Success);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(order, result.Data));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(order, result.Data));
         }
 
         [TestCase]
@@ -664,14 +695,17 @@ namespace Binance.Net.UnitTests
                 Message = "Test"
             };
 
-            var client = PrepareClient(JsonConvert.SerializeObject(order));
+            var objects = TestHelpers.PrepareClient(() => Construct(new BinanceClientOptions()
+            {
+                ApiCredentials = new ApiCredentials("Test", "Test")
+            }), JsonConvert.SerializeObject(order));
 
             // act
-            var result = client.Withdraw("BNBBTC", "test", 1);
+            var result = objects.Client.Withdraw("BNBBTC", "test", 1);
 
             // assert
             Assert.IsTrue(result.Success);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(order, result.Data));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(order, result.Data));
         }
 
         [TestCase]
@@ -683,24 +717,24 @@ namespace Binance.Net.UnitTests
                 ListenKey = "123"
             };
 
-            var client = PrepareClient(JsonConvert.SerializeObject(key));
+            var objects = TestHelpers.PrepareClient(() => Construct(), JsonConvert.SerializeObject(key));
 
             // act
-            var result = client.StartUserStream();
+            var result = objects.Client.StartUserStream();
 
             // assert
             Assert.IsTrue(result.Success);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(key, result.Data));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(key, result.Data));
         }
 
         [TestCase]
         public void KeepAliveUserStream_Should_Respond()
         {
             // arrange
-            var client = PrepareClient("{}");
+            var objects = TestHelpers.PrepareClient(() => Construct(), "{}");
 
             // act
-            var result = client.KeepAliveUserStream("test");
+            var result = objects.Client.KeepAliveUserStream("test");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -710,10 +744,10 @@ namespace Binance.Net.UnitTests
         public void StopUserStream_Should_Respond()
         {
             // arrange
-            var client = PrepareClient("{}");
+            var objects = TestHelpers.PrepareClient(() => Construct(), "{}");
 
             // act
-            var result = client.StopUserStream("test");
+            var result = objects.Client.StopUserStream("test");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -725,10 +759,10 @@ namespace Binance.Net.UnitTests
             // arrange
             var pingResult = new BinancePing();
 
-            var client = PrepareClient(JsonConvert.SerializeObject(pingResult));
+            var objects = TestHelpers.PrepareClient(() => Construct(), JsonConvert.SerializeObject(pingResult));
 
             // act
-            var result = client.Ping();
+            var result = objects.Client.Ping();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -738,44 +772,24 @@ namespace Binance.Net.UnitTests
         public void EnablingAutoTimestamp_Should_CallServerTime()
         {
             // arrange
-            var expectedBytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new BinanceCheckTime() { ServerTime = DateTime.Now }));
-            var responseStream = new MemoryStream();
-            responseStream.Write(expectedBytes, 0, expectedBytes.Length);
-            responseStream.Seek(0, SeekOrigin.Begin);
-
-            var response = new Mock<IResponse>();            
-            response.Setup(c => c.GetResponseStream()).Returns(responseStream);
-
-            var request = new Mock<IRequest>();
-            request.Setup(c => c.Headers).Returns(new WebHeaderCollection());
-            request.Setup(c => c.GetResponse()).Returns(Task.FromResult(response.Object));
-            request.Setup(c => c.Uri).Returns(new Uri("http://www.test.com"));
-
-            var factory = new Mock<IRequestFactory>();
-            factory.Setup(c => c.Create(It.IsAny<string>()))
-                .Returns(request.Object);
-
-            BinanceClient client = new BinanceClient(new BinanceClientOptions()
+            var objects = TestHelpers.PrepareClient(() => Construct(new BinanceClientOptions()
             {
                 ApiCredentials = new ApiCredentials("test", "test"),
                 AutoTimestamp = true
-            })
-            {
-                RequestFactory = factory.Object,
-            };
+            }), JsonConvert.SerializeObject("{}"));
 
             // act
-            client.GetAllOrders("BNBBTC");
+            objects.Client.GetOpenOrders();
 
             // assert
-            factory.Verify(x => x.Create(It.Is<string>(s => s.Contains("time"))));            
+            objects.RequestFactory.Verify(f => f.Create(It.Is<string>((msg) => msg.Contains("/time"))), Times.Once);
         }
 
         [TestCase()]
         public void ReceivingBinanceError_Should_ReturnBinanceErrorAndNotSuccess()
         {
             // arrange
-            var client = PrepareExceptionClient(JsonConvert.SerializeObject(new ArgumentError("TestMessage")), "504 error", 504);
+            var client = TestHelpers.PrepareExceptionClient<BinanceClient>(JsonConvert.SerializeObject(new ArgumentError("TestMessage")), "504 error", 504);
 
             // act
             var result = client.Ping();
@@ -785,60 +799,54 @@ namespace Binance.Net.UnitTests
             Assert.IsNotNull(result.Error);
             Assert.IsTrue(result.Error.Message.Contains("504 error"));
         }
-        
-        private BinanceClient PrepareClient(string responseData, bool credentials = true)
+
+        [Test]
+        public void ProvidingApiCredentials_Should_SaveApiCredentials()
         {
-            var expectedBytes = Encoding.UTF8.GetBytes(responseData);
-            var responseStream = new MemoryStream();
-            responseStream.Write(expectedBytes, 0, expectedBytes.Length);
-            responseStream.Seek(0, SeekOrigin.Begin);
+            // arrange
+            // act
+            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
 
-            var response = new Mock<IResponse>();
-            response.Setup(c => c.GetResponseStream()).Returns(responseStream);
-
-            var request = new Mock<IRequest>();
-            request.Setup(c => c.Headers).Returns(new WebHeaderCollection());
-            request.Setup(c => c.GetResponse()).Returns(Task.FromResult(response.Object));
-
-            var factory = new Mock<IRequestFactory>();
-            factory.Setup(c => c.Create(It.IsAny<string>()))
-                .Returns(request.Object);
-
-            BinanceClient client = credentials ? new BinanceClient(new BinanceClientOptions(){ ApiCredentials = new ApiCredentials("test", "test")}) : new BinanceClient();
-            client.RequestFactory = factory.Object;
-            return client;
+            // assert
+            Assert.AreEqual(authProvider.Credentials.Key.GetString(), "TestKey");
+            Assert.AreEqual(authProvider.Credentials.Secret.GetString(), "TestSecret");
         }
 
-        private BinanceClient PrepareExceptionClient(string responseData, string exceptionMessage, int statusCode, bool credentials = true)
+        [Test]
+        [TestCase("", "D0F0F055B496CBD9FD1C8CA6719D0B2253F54C667753F70AEF13F394D9161A8B")]
+        [TestCase("?someTestParam=123&someOtherParam=Test", "14A57EF4923C5D1874593BF74D22288773A5EA6D9F91E305543780173FE8A015")]
+        public void AddingAuthToUriString_Should_GiveCorrectSignature(string parameters, string signature)
         {
-            var expectedBytes = Encoding.UTF8.GetBytes(responseData);
-            var responseStream = new MemoryStream();
-            responseStream.Write(expectedBytes, 0, expectedBytes.Length);
-            responseStream.Seek(0, SeekOrigin.Begin);
+            // arrange
+            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
+            string uri = $"https://test.test-api.com{parameters}";
 
-            var we = new WebException();
-            var r = new HttpWebResponse();
-            var re = new HttpResponseMessage();
+            // act
+            var sign = authProvider.AddAuthenticationToUriString(uri, true);
 
-            typeof(HttpResponseMessage).GetField("_statusCode", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).SetValue(re, (HttpStatusCode)statusCode);
-            typeof(HttpWebResponse).GetField("_httpResponseMessage", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).SetValue(r, re);
-            typeof(WebException).GetField("_message", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).SetValue(we, exceptionMessage);
-            typeof(WebException).GetField("_response", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).SetValue(we, r);
-
-            var response = new Mock<IResponse>();
-            response.Setup(c => c.GetResponseStream()).Throws(we);
-
-            var request = new Mock<IRequest>();
-            request.Setup(c => c.Headers).Returns(new WebHeaderCollection());
-            request.Setup(c => c.GetResponse()).Returns(Task.FromResult(response.Object));
-
-            var factory = new Mock<IRequestFactory>();
-            factory.Setup(c => c.Create(It.IsAny<string>()))
-                .Returns(request.Object);
-
-            BinanceClient client = credentials ? new BinanceClient(new BinanceClientOptions(){ ApiCredentials = new ApiCredentials("test", "test")}) : new BinanceClient();
-            client.RequestFactory = factory.Object;
-            return client;
+            // assert
+            Assert.IsTrue(sign.EndsWith($"signature={signature}"));
         }
+
+        [Test]
+        public void AddingAuthToRequest_Should_AddApiKeyHeader()
+        {
+            // arrange
+            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
+            var request = new Request(WebRequest.CreateHttp("https://test.test-api.com"));
+
+            // act
+            var sign = authProvider.AddAuthenticationToRequest(request, true);
+
+            // assert
+            Assert.IsTrue(request.Headers["X-MBX-APIKEY"] == "TestKey");
+        }
+
+        private BinanceClient Construct(BinanceClientOptions options = null)
+        {
+            if (options != null)
+                return new BinanceClient(options);
+            return new BinanceClient();            
+        }        
     }
 }

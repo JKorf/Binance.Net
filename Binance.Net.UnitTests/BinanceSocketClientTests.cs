@@ -65,8 +65,8 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsNotNull(result);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data.Data, result, "Data"));
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data.Data.Data, result.Data));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(data.Data, result, "Data"));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(data.Data.Data, result.Data));
         }
 
         [TestCase()]
@@ -115,7 +115,7 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsNotNull(result);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data, result));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(data, result));
         }
 
         [TestCase()]
@@ -167,7 +167,7 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsNotNull(result);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data[0], result[0]));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(data[0], result[0]));
         }
 
         [TestCase()]
@@ -209,7 +209,7 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsNotNull(result);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data.Data, result));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(data.Data, result));
         }
 
         [TestCase()]
@@ -251,9 +251,9 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsNotNull(result);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data, result, "Balances"));
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data.Balances[0], result.Balances[0]));
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data.Balances[1], result.Balances[1]));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(data, result, "Balances"));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(data.Balances[0], result.Balances[0]));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(data.Balances[1], result.Balances[1]));
         }
 
         [TestCase()]
@@ -307,7 +307,7 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsNotNull(result);
-            Assert.IsTrue(Compare.PublicInstancePropertiesEqual(data, result, "Balances"));
+            Assert.IsTrue(TestHelpers.PublicInstancePropertiesEqual(data, result, "Balances"));
         }
 
         [TestCase()]
