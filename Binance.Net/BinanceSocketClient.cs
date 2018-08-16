@@ -13,13 +13,14 @@ using CryptoExchange.Net.Implementation;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Logging;
 using System.Diagnostics;
+using Binance.Net.Interfaces;
 
 namespace Binance.Net
 {
     /// <summary>
     /// Client providing access to the Binance websocket Api
     /// </summary>
-    public class BinanceSocketClient : ExchangeClient
+    public class BinanceSocketClient : ExchangeClient, IBinanceSocketClient
     {
         #region fields
         private static BinanceSocketClientOptions defaultOptions = new BinanceSocketClientOptions();

@@ -5,7 +5,7 @@ using CryptoExchange.Net;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.RateLimiter;
 
-namespace Binance.Net
+namespace Binance.Net.Interfaces
 {
     public interface IBinanceClient
     {
