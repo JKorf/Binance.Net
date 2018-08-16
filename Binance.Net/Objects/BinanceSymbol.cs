@@ -1,6 +1,5 @@
 ﻿using Binance.Net.Converters;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 
 namespace Binance.Net.Objects
 {

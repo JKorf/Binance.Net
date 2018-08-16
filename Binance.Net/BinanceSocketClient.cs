@@ -33,7 +33,7 @@ namespace Binance.Net
 
         private int lastStreamId;
         private readonly object streamIdLock = new object();
-        private SslProtocols protocols = SslProtocols.Tls12 | SslProtocols.Tls11 | SslProtocols.Tls;
+        private const SslProtocols protocols = SslProtocols.Tls12 | SslProtocols.Tls11 | SslProtocols.Tls;
 
         private const string DepthStreamEndpoint = "@depth";
         private const string KlineStreamEndpoint = "@kline";
@@ -120,7 +120,7 @@ namespace Binance.Net
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
         /// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
-        public async Task<CallResult<BinanceStreamSubscription>> SubscribeToKlineStreamAsync(string symbol, KlineInterval interval, Action<BinanceStreamKlineData> onMessage) => await SubscribeToKlineStreamAsync(new string[] { symbol }, interval, onMessage).ConfigureAwait(false);
+        public async Task<CallResult<BinanceStreamSubscription>> SubscribeToKlineStreamAsync(string symbol, KlineInterval interval, Action<BinanceStreamKlineData> onMessage) => await SubscribeToKlineStreamAsync(new [] { symbol }, interval, onMessage).ConfigureAwait(false);
 
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace Binance.Net
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
         /// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
-        public async Task<CallResult<BinanceStreamSubscription>> SubscribeToDepthStreamAsync(string symbol, Action<BinanceStreamDepth> onMessage) => await SubscribeToDepthStreamAsync(new string[] { symbol }, onMessage).ConfigureAwait(false);
+        public async Task<CallResult<BinanceStreamSubscription>> SubscribeToDepthStreamAsync(string symbol, Action<BinanceStreamDepth> onMessage) => await SubscribeToDepthStreamAsync(new [] { symbol }, onMessage).ConfigureAwait(false);
 
         /// <summary>
         /// Synchronized version of the <see cref="SubscribeToDepthStreamAsync"/> method
@@ -190,7 +190,7 @@ namespace Binance.Net
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
         /// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
-        public async Task<CallResult<BinanceStreamSubscription>> SubscribeToAggregatedTradesStreamAsync(string symbol, Action<BinanceStreamAggregatedTrade> onMessage) => await SubscribeToAggregatedTradesStreamAsync(new string[] { symbol }, onMessage).ConfigureAwait(false);
+        public async Task<CallResult<BinanceStreamSubscription>> SubscribeToAggregatedTradesStreamAsync(string symbol, Action<BinanceStreamAggregatedTrade> onMessage) => await SubscribeToAggregatedTradesStreamAsync(new [] { symbol }, onMessage).ConfigureAwait(false);
 
         /// <summary>
         /// Synchronized version of the <see cref="SubscribeToAggregatedTradesStreamAsync"/> method
@@ -224,10 +224,10 @@ namespace Binance.Net
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
         /// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
-        public async Task<CallResult<BinanceStreamSubscription>> SubscribeToTradesStreamAsync(string symbol, Action<BinanceStreamTrade> onMessage) => await SubscribeToTradesStreamAsync(new string[] { symbol }, onMessage).ConfigureAwait(false);
+        public async Task<CallResult<BinanceStreamSubscription>> SubscribeToTradesStreamAsync(string symbol, Action<BinanceStreamTrade> onMessage) => await SubscribeToTradesStreamAsync(new [] { symbol }, onMessage).ConfigureAwait(false);
 
         /// <summary>
-        /// Synchronized version of the <see cref="SubscribeToCombinedTradesStreamAsync"/> method
+        /// Synchronized version of the <see cref="SubscribeToTradesStreamAsync"/> method
         /// </summary>
         /// <returns></returns>
         public CallResult<BinanceStreamSubscription> SubscribeToTradesStream(string[] symbols, Action<BinanceStreamTrade> onMessage) => SubscribeToTradesStreamAsync(symbols, onMessage).Result;
@@ -295,10 +295,10 @@ namespace Binance.Net
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
         /// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
-        public async Task<CallResult<BinanceStreamSubscription>> SubscribeToPartialBookDepthStreamAsync(string symbol, int levels, Action<BinanceStreamOrderBook> onMessage) => await SubscribeToPartialBookDepthStreamAsync(new string[] { symbol }, levels, onMessage).ConfigureAwait(false);
+        public async Task<CallResult<BinanceStreamSubscription>> SubscribeToPartialBookDepthStreamAsync(string symbol, int levels, Action<BinanceStreamOrderBook> onMessage) => await SubscribeToPartialBookDepthStreamAsync(new [] { symbol }, levels, onMessage).ConfigureAwait(false);
 
         /// <summary>
-        /// Synchronized verion of the <see cref="SubscribeToCombinedPartialBookDepthStreamAsync(string[], int, Action{BinanceCombinedOrderBook})"/> method
+        /// Synchronized verion of the <see cref="SubscribeToPartialBookDepthStreamAsync(string[], int, Action{BinanceStreamOrderBook})"/> method
         /// </summary>
         /// <param name="symbols"></param>
         /// <param name="levels"></param>
@@ -328,7 +328,7 @@ namespace Binance.Net
                 if (result.Success)
                 {
                     var stream = result.Data.Stream;
-                    var symbol = stream.Split(new[] { '@' })[0];
+                    var symbol = stream.Split('@')[0];
                     result.Data.Data.Symbol = symbol;
                     onMessage?.Invoke(result.Data.Data);
                 }

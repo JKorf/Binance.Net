@@ -133,7 +133,7 @@ namespace Binance.Net.Interfaces
         Task<CallResult<BinanceStreamSubscription>> SubscribeToTradesStreamAsync(string symbol, Action<BinanceStreamTrade> onMessage);
 
         /// <summary>
-        /// Synchronized version of the <see cref="SubscribeToCombinedTradesStreamAsync"/> method
+        /// Synchronized version of the <see cref="SubscribeToTradesStreamAsync"/> method
         /// </summary>
         /// <returns></returns>
         CallResult<BinanceStreamSubscription> SubscribeToTradesStream(string[] symbols, Action<BinanceStreamTrade> onMessage);
@@ -193,7 +193,7 @@ namespace Binance.Net.Interfaces
         Task<CallResult<BinanceStreamSubscription>> SubscribeToPartialBookDepthStreamAsync(string symbol, int levels, Action<BinanceStreamOrderBook> onMessage);
 
         /// <summary>
-        /// Synchronized verion of the <see cref="SubscribeToCombinedPartialBookDepthStreamAsync(string[], int, Action{BinanceCombinedOrderBook})"/> method
+        /// Synchronized verion of the <see cref="SubscribeToPartialBookDepthStreamAsync(string[], int, Action{BinanceStreamOrderBook})"/> method
         /// </summary>
         /// <param name="symbols"></param>
         /// <param name="levels"></param>

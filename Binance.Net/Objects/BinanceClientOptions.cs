@@ -1,8 +1,7 @@
 ﻿using System;
-using Binance.Net.Objects;
 using CryptoExchange.Net;
 
-namespace Binance.Net
+namespace Binance.Net.Objects
 {
     public class BinanceClientOptions : ExchangeOptions
     {
