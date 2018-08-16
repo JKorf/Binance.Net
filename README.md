@@ -212,6 +212,11 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.2.0 - 16 aug 2018
+	* Added socket client interface
+	* Moved interface to interface namespace
+	* Fixed some minor Resharper findings
+
 * Version 3.1.18 - 13 aug 2018
 	* Fix for userstream not connecting
 
