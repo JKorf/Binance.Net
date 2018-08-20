@@ -11,6 +11,7 @@ using Binance.Net.Interfaces;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Logging;
+using CryptoExchange.Net.Objects;
 using Newtonsoft.Json.Linq;
 
 namespace Binance.Net

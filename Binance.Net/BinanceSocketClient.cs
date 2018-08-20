@@ -14,6 +14,7 @@ using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Logging;
 using System.Diagnostics;
 using Binance.Net.Interfaces;
+using CryptoExchange.Net.Objects;
 
 namespace Binance.Net
 {

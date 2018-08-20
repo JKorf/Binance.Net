@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Binance.Net.Objects;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.RateLimiter;
 
 namespace Binance.Net.Interfaces
