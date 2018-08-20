@@ -10,15 +10,15 @@ A .Net wrapper for the Binance API as described on [Binance](https://www.binance
 Also check out my other exchange API wrappers:
 <table>
 <tr>
-<td><img src="https://github.com/JKorf/Bittrex.Net/blob/master/Resources/icon.png?raw=true">
+<td><a href="https://github.com/JKorf/Bittrex.Net"><img src="https://github.com/JKorf/Bittrex.Net/blob/master/Resources/icon.png?raw=true"></a>
 <br />
 <a href="https://github.com/JKorf/Bittrex.Net">Bittrex</a>
 </td>
-<td><img src="https://github.com/JKorf/Bitfinex.Net/blob/master/Resources/icon.png?raw=true">
+<td><a href="https://github.com/JKorf/Bitfinex.Net"><img src="https://github.com/JKorf/Bitfinex.Net/blob/master/Resources/icon.png?raw=true"></a>
 <br />
 <a href="https://github.com/JKorf/Bitfinex.Net">Bitfinex</a>
 </td>
-<td><img src="https://github.com/JKorf/CoinEx.Net/blob/master/Resources/icon.png?raw=true">
+<td><a href="https://github.com/JKorf/CoinEx.Net"><img src="https://github.com/JKorf/CoinEx.Net/blob/master/Resources/icon.png?raw=true"></a>
 <br />
 <a href="https://github.com/JKorf/CoinEx.Net">CoinEx</a>
 </td>
@@ -26,7 +26,7 @@ Also check out my other exchange API wrappers:
 And other API wrappers based on CryptoExchange.Net:
 <table>
 <tr>
-<td><img src="https://github.com/Zaliro/Switcheo.Net/blob/master/Resources/switcheo-coin.png?raw=true">
+<td><a href="https://github.com/Zaliro/Switcheo.Net"><img src="https://github.com/Zaliro/Switcheo.Net/blob/master/Resources/switcheo-coin.png?raw=true"></a>
 <br />
 <a href="https://github.com/Zaliro/Switcheo.Net">Switcheo</a>
 </td>
