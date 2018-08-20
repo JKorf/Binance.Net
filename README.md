@@ -212,6 +212,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.2.1 - 20 aug 2018
+	* Update CryptoExchange.Net for bugfix
+
 * Version 3.2.0 - 16 aug 2018
 	* Added socket client interface
 	* Moved interface to interface namespace
