@@ -23,6 +23,19 @@ namespace Binance.Net
     {
         #region fields 
         private static BinanceClientOptions defaultOptions = new BinanceClientOptions();
+        private static BinanceClientOptions DefaultOptions => new BinanceClientOptions()
+        {
+            ApiCredentials = new ApiCredentials(defaultOptions.ApiCredentials.Key.GetString(), defaultOptions.ApiCredentials.Secret.GetString()),
+            AutoTimestamp = defaultOptions.AutoTimestamp,
+            LogVerbosity = defaultOptions.LogVerbosity,
+            BaseAddress = defaultOptions.BaseAddress,
+            LogWriters = defaultOptions.LogWriters,
+            Proxy = defaultOptions.Proxy,
+            RateLimiters = defaultOptions.RateLimiters,
+            TradeRulesBehaviour = defaultOptions.TradeRulesBehaviour,
+            RateLimitingBehaviour = defaultOptions.RateLimitingBehaviour,
+            TradeRulesUpdateInterval = defaultOptions.TradeRulesUpdateInterval
+        };
 
         private bool autoTimestamp;
         private TradeRulesBehaviour tradeRulesBehaviour;
@@ -95,7 +108,7 @@ namespace Binance.Net
         /// <summary>
         /// Create a new instance of BinanceClient using the default options
         /// </summary>
-        public BinanceClient(): this(defaultOptions)
+        public BinanceClient(): this(DefaultOptions)
         {
         }
 
@@ -1179,6 +1192,7 @@ namespace Binance.Net
 
             return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice);
         }
+
         #endregion
     }
 }
