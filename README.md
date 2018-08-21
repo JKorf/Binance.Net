@@ -212,6 +212,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.2.3 - 21 aug 2018
+	* Fix for previous fix..
+
 * Version 3.2.2 - 21 aug 2018
 	* Fix for default api credentials getting disposed
 
