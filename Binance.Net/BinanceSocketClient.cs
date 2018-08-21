@@ -25,6 +25,19 @@ namespace Binance.Net
     {
         #region fields
         private static BinanceSocketClientOptions defaultOptions = new BinanceSocketClientOptions();
+        private static BinanceSocketClientOptions DefaultOptions => new BinanceSocketClientOptions()
+        {
+            ApiCredentials = new ApiCredentials(defaultOptions.ApiCredentials.Key.GetString(), defaultOptions.ApiCredentials.Secret.GetString()),
+            LogVerbosity = defaultOptions.LogVerbosity,
+            BaseAddress = defaultOptions.BaseAddress,
+            LogWriters = defaultOptions.LogWriters,
+            Proxy = defaultOptions.Proxy,
+            RateLimiters = defaultOptions.RateLimiters,
+            RateLimitingBehaviour = defaultOptions.RateLimitingBehaviour,
+            ReconnectTryBehaviour = defaultOptions.ReconnectTryBehaviour,
+            ReconnectTryInterval = defaultOptions.ReconnectTryInterval,
+            BaseSocketCombinedAddress = defaultOptions.BaseSocketCombinedAddress
+        };
 
         private string baseCombinedAddress;
         private ReconnectBehaviour reconnectBehaviour;
@@ -57,7 +70,7 @@ namespace Binance.Net
         /// <summary>
         /// Create a new instance of BinanceSocketClient with default options
         /// </summary>
-        public BinanceSocketClient() : this(defaultOptions)
+        public BinanceSocketClient() : this(DefaultOptions)
         {
         }
 
