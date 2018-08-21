@@ -23,19 +23,29 @@ namespace Binance.Net
     {
         #region fields 
         private static BinanceClientOptions defaultOptions = new BinanceClientOptions();
-        private static BinanceClientOptions DefaultOptions => new BinanceClientOptions()
+        private static BinanceClientOptions DefaultOptions
         {
-            ApiCredentials = new ApiCredentials(defaultOptions.ApiCredentials.Key.GetString(), defaultOptions.ApiCredentials.Secret.GetString()),
-            AutoTimestamp = defaultOptions.AutoTimestamp,
-            LogVerbosity = defaultOptions.LogVerbosity,
-            BaseAddress = defaultOptions.BaseAddress,
-            LogWriters = defaultOptions.LogWriters,
-            Proxy = defaultOptions.Proxy,
-            RateLimiters = defaultOptions.RateLimiters,
-            TradeRulesBehaviour = defaultOptions.TradeRulesBehaviour,
-            RateLimitingBehaviour = defaultOptions.RateLimitingBehaviour,
-            TradeRulesUpdateInterval = defaultOptions.TradeRulesUpdateInterval
-        };
+            get
+            {
+                var result = new BinanceClientOptions()
+                {
+                    AutoTimestamp = defaultOptions.AutoTimestamp,
+                    LogVerbosity = defaultOptions.LogVerbosity,
+                    BaseAddress = defaultOptions.BaseAddress,
+                    LogWriters = defaultOptions.LogWriters,
+                    Proxy = defaultOptions.Proxy,
+                    RateLimiters = defaultOptions.RateLimiters,
+                    TradeRulesBehaviour = defaultOptions.TradeRulesBehaviour,
+                    RateLimitingBehaviour = defaultOptions.RateLimitingBehaviour,
+                    TradeRulesUpdateInterval = defaultOptions.TradeRulesUpdateInterval
+                };
+
+                if (defaultOptions.ApiCredentials != null)
+                    result.ApiCredentials = new ApiCredentials(defaultOptions.ApiCredentials.Key.GetString(), defaultOptions.ApiCredentials.Secret.GetString());
+                
+                return result;
+            }
+        }
 
         private bool autoTimestamp;
         private TradeRulesBehaviour tradeRulesBehaviour;
