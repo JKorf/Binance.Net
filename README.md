@@ -212,6 +212,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.2.2 - 21 aug 2018
+	* Fix for default api credentials getting disposed
+
 * Version 3.2.1 - 20 aug 2018
 	* Update CryptoExchange.Net for bugfix
 
