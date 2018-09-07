@@ -500,6 +500,9 @@ namespace Binance.Net
                 socket.OnError += socketObject.StreamResult.InvokeError;
 
                 socket.OnOpen += Socket_OnOpen;
+                if (apiProxy != null)
+                    socket.SetProxy(apiProxy.Host, apiProxy.Port);
+
                 var connected = await socket.Connect().ConfigureAwait(false);
                 if (!connected)
                 {
