@@ -467,7 +467,9 @@ namespace Binance.Net
         /// <returns>List of open orders</returns>
         public async Task<CallResult<BinanceOrder[]>> GetOpenOrdersAsync(string symbol = null, int? receiveWindow = null)
         {
-            await CheckAutoTimestamp().ConfigureAwait(false);
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new CallResult<BinanceOrder[]>(null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>()
             {
@@ -495,7 +497,9 @@ namespace Binance.Net
         /// <returns>List of orders</returns>
         public async Task<CallResult<BinanceOrder[]>> GetAllOrdersAsync(string symbol, long? orderId = null, int? limit = null, int? receiveWindow = null)
         {
-            await CheckAutoTimestamp().ConfigureAwait(false);
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new CallResult<BinanceOrder[]>(null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>()
             {
@@ -552,8 +556,10 @@ namespace Binance.Net
             decimal? icebergQty = null,
             OrderResponseType? orderResponseType = null,
             int? receiveWindow = null)
-        { 
-            await CheckAutoTimestamp().ConfigureAwait(false);
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new CallResult<BinancePlacedOrder>(null, timestampResult.Error);
 
             var rulesCheck = await CheckTradeRules(symbol, quantity, price, type).ConfigureAwait(false);
             if (!rulesCheck.Passed)
@@ -627,7 +633,9 @@ namespace Binance.Net
             OrderResponseType? orderResponseType = null,
             int? receiveWindow = null)
         {
-            await CheckAutoTimestamp().ConfigureAwait(false);
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new CallResult<BinancePlacedOrder>(null, timestampResult.Error);
 
             var rulesCheck = await CheckTradeRules(symbol, quantity, price, type).ConfigureAwait(false);
             if (!rulesCheck.Passed)
@@ -677,7 +685,9 @@ namespace Binance.Net
             if (orderId == null && origClientOrderId == null)
                 return new CallResult<BinanceOrder>(null, new ArgumentError("Either orderId or origClientOrderId should be provided"));
 
-            await CheckAutoTimestamp().ConfigureAwait(false);
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new CallResult<BinanceOrder>(null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>()
             {
@@ -708,7 +718,9 @@ namespace Binance.Net
         /// <returns>Id's for canceled order</returns>
         public async Task<CallResult<BinanceCanceledOrder>> CancelOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? recvWindow = null)
         {
-            await CheckAutoTimestamp().ConfigureAwait(false);
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new CallResult<BinanceCanceledOrder>(null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>()
             {
@@ -736,7 +748,9 @@ namespace Binance.Net
         /// <returns>The account information</returns>
         public async Task<CallResult<BinanceAccountInfo>> GetAccountInfoAsync(long? recvWindow = null)
         {
-            await CheckAutoTimestamp().ConfigureAwait(false);
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new CallResult<BinanceAccountInfo>(null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>()
             {
@@ -763,7 +777,9 @@ namespace Binance.Net
         /// <returns>List of trades</returns>
         public async Task<CallResult<BinanceTrade[]>> GetMyTradesAsync(string symbol, int? limit = null, long? fromId = null, long? recvWindow = null)
         {
-            await CheckAutoTimestamp().ConfigureAwait(false);
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new CallResult<BinanceTrade[]>(null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>()
             {
@@ -795,7 +811,9 @@ namespace Binance.Net
         /// <returns>Withdrawal confirmation</returns>
         public async Task<CallResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, decimal amount, string addressTag = null, string name = null, int? recvWindow = null)
         {
-            await CheckAutoTimestamp().ConfigureAwait(false);
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new CallResult<BinanceWithdrawalPlaced>(null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>()
             {
@@ -834,7 +852,9 @@ namespace Binance.Net
         /// <returns>List of deposits</returns>
         public async Task<CallResult<BinanceDepositList>> GetDepositHistoryAsync(string asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? recvWindow = null)
         {
-            await CheckAutoTimestamp().ConfigureAwait(false);
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new CallResult<BinanceDepositList>(null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>()
             {
@@ -872,7 +892,9 @@ namespace Binance.Net
         /// <returns>List of withdrawals</returns>
         public async Task<CallResult<BinanceWithdrawalList>> GetWithdrawHistoryAsync(string asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? recvWindow = null)
         {
-            await CheckAutoTimestamp().ConfigureAwait(false);
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new CallResult<BinanceWithdrawalList>(null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>()
             {
@@ -908,7 +930,9 @@ namespace Binance.Net
         /// <returns>Deposit address</returns>
         public async Task<CallResult<BinanceDepositAddress>> GetDepositAddressAsync(string asset, int? recvWindow = null)
         {
-            await CheckAutoTimestamp().ConfigureAwait(false);
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new CallResult<BinanceDepositAddress>(null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>()
             {
@@ -934,7 +958,9 @@ namespace Binance.Net
         /// <returns>Withdrawal fee</returns>
         public async Task<CallResult<decimal>> GetWithdrawalFeeAsync(string asset, int? recvWindow = null)
         {
-            await CheckAutoTimestamp().ConfigureAwait(false);
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new CallResult<decimal>(0, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>()
             {
@@ -965,7 +991,9 @@ namespace Binance.Net
         /// <returns>Account status</returns>
         public async Task<CallResult<BinanceAccountStatus>> GetAccountStatusAsync(int? recvWindow = null)
         {
-            await CheckAutoTimestamp().ConfigureAwait(false);
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new CallResult<BinanceAccountStatus>(null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>()
             {
@@ -1010,7 +1038,9 @@ namespace Binance.Net
         /// <returns>The history of dust conversions</returns>
         public async Task<CallResult<BinanceDustLog[]>> GetDustLogAsync(int? recvWindow = null)
         {
-            await CheckAutoTimestamp().ConfigureAwait(false);
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new CallResult<BinanceDustLog[]>(null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>()
             {
@@ -1039,7 +1069,9 @@ namespace Binance.Net
         /// <returns>Listen key</returns>
         public async Task<CallResult<BinanceListenKey>> StartUserStreamAsync()
         {
-            await CheckAutoTimestamp().ConfigureAwait(false);
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new CallResult<BinanceListenKey>(null, timestampResult.Error);
 
             return await ExecuteRequest<BinanceListenKey>(GetUrl(GetListenKeyEndpoint, Api, UserDataStreamVersion), PostMethod).ConfigureAwait(false);
         }
@@ -1056,7 +1088,9 @@ namespace Binance.Net
         /// <returns></returns>
         public async Task<CallResult<object>> KeepAliveUserStreamAsync(string listenKey)
         {
-            await CheckAutoTimestamp().ConfigureAwait(false);
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new CallResult<object>(null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>()
             {
@@ -1078,7 +1112,9 @@ namespace Binance.Net
         /// <returns></returns>
         public async Task<CallResult<object>> StopUserStreamAsync(string listenKey)
         {
-            await CheckAutoTimestamp().ConfigureAwait(false);            
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new CallResult<object>(null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>()
             {
@@ -1136,10 +1172,11 @@ namespace Binance.Net
             return ToUnixTimestamp(DateTime.UtcNow.AddMilliseconds(offset)).ToString();
         }
 
-        private async Task CheckAutoTimestamp()
+        private async Task<CallResult<DateTime>> CheckAutoTimestamp()
         {
             if (autoTimestamp && !timeSynced)
-                await GetServerTimeAsync().ConfigureAwait(false);
+                return await GetServerTimeAsync().ConfigureAwait(false);
+            return new CallResult<DateTime>(default(DateTime), null);
         }
 
         private async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal quantity, decimal? price, OrderType type)
