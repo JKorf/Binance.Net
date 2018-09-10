@@ -212,6 +212,10 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.2.5 - 10 sep 2018
+	* Added check for failed auto timestamp syncing
+	* Added auto recalculation interval for auto timestamp
+
 * Version 3.2.4 - 07 sep 2018
 	* Fixed proxy setting on socket client
 
