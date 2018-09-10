@@ -48,11 +48,14 @@ namespace Binance.Net
         }
 
         private bool autoTimestamp;
+        private TimeSpan autoTimestampRecalculationInterval;
         private TradeRulesBehaviour tradeRulesBehaviour;
         private TimeSpan tradeRulesUpdateInterval;
 
         private double timeOffset;
         private bool timeSynced;
+        private DateTime lastTimeSync;
+
         private BinanceExchangeInfo exchangeInfo;
         private DateTime? lastExchangeInfoUpdate;
         
@@ -202,6 +205,7 @@ namespace Binance.Net
                     // Calculate time offset between local and server by taking the elapsed time request time / 2 (round trip)
                     timeOffset = ((result.Data.ServerTime - localTime).TotalMilliseconds) - sw.ElapsedMilliseconds / 2.0;
                     timeSynced = true;
+                    lastTimeSync = DateTime.UtcNow;
                     log.Write(LogVerbosity.Info, $"Time offset set to {timeOffset}ms");
                 }
                 return new CallResult<DateTime>(result.Data.ServerTime, result.Error);
@@ -1138,6 +1142,7 @@ namespace Binance.Net
             autoTimestamp = options.AutoTimestamp;
             tradeRulesBehaviour = options.TradeRulesBehaviour;
             tradeRulesUpdateInterval = options.TradeRulesUpdateInterval;
+            autoTimestampRecalculationInterval = options.AutoTimestampRecalculationInterval;
         }
 
         protected override Error ParseErrorResponse(string error)
@@ -1174,8 +1179,8 @@ namespace Binance.Net
 
         private async Task<CallResult<DateTime>> CheckAutoTimestamp()
         {
-            if (autoTimestamp && !timeSynced)
-                return await GetServerTimeAsync().ConfigureAwait(false);
+            if (autoTimestamp && (!timeSynced || (DateTime.UtcNow - lastTimeSync) > autoTimestampRecalculationInterval))
+                return await GetServerTimeAsync(timeSynced).ConfigureAwait(false);
             return new CallResult<DateTime>(default(DateTime), null);
         }
 
