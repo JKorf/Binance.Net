@@ -10,6 +10,11 @@ namespace Binance.Net.Objects
         public event Action Closed;
 
         /// <summary>
+        /// Event when the socket is reconnected
+        /// </summary>
+        public event Action Reconnected;
+
+        /// <summary>
         /// Event when an error occures on the socket
         /// </summary>
         public event Action<Exception> Error;
@@ -19,6 +24,11 @@ namespace Binance.Net.Objects
         internal void InvokeClosed()
         {
             Closed?.Invoke();
+        }
+
+        internal void InvokeReconnected()
+        {
+            Reconnected?.Invoke();
         }
 
         internal void InvokeError(Exception ex)

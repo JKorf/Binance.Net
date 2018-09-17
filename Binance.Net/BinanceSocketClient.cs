@@ -506,11 +506,11 @@ namespace Binance.Net
                 var connected = await socket.Connect().ConfigureAwait(false);
                 if (!connected)
                 {
-                    log.Write(LogVerbosity.Error, "Couldn't open socket stream");
+                    log.Write(LogVerbosity.Error, $"{socketObject.StreamResult.StreamId} Couldn't open socket stream");
                     return new CallResult<BinanceStream>(null, new CantConnectError());
                 }
 
-                log.Write(LogVerbosity.Debug, "Socket connection established");
+                log.Write(LogVerbosity.Debug, $"{socketObject.StreamResult.StreamId} Socket connection established");
 
                 lock (sockets)
                     sockets.Add(socketObject);
@@ -543,20 +543,34 @@ namespace Binance.Net
 
         private void Socket_OnClose(object sender)
         {
-            var con = (BinanceStream)sender;
+            var con = (BinanceStream)sender;            
             if (reconnectBehaviour == ReconnectBehaviour.AutoReconnect && con.TryReconnect)
             {
-                log.Write(LogVerbosity.Info, "Connection lost, going to try to reconnect");
+                if (con.Reconnecting)
+                    return;
+
+                log.Write(LogVerbosity.Info, $"{con.StreamResult.StreamId} Connection lost, going to try to reconnect");
+                con.Reconnecting = true;
                 Task.Run(() =>
                 {
-                    Thread.Sleep((int)Math.Round(reconnectInterval.TotalMilliseconds));
-                    if (con.Socket.Connect().Result)
-                        log.Write(LogVerbosity.Info, "Reconnected");
+                    while (con.TryReconnect)
+                    {
+                        Thread.Sleep((int)Math.Round(reconnectInterval.TotalMilliseconds));
+                        if (con.Socket.Connect().Result)
+                        {
+                            con.Reconnecting = false;
+                            log.Write(LogVerbosity.Info, $"{con.StreamResult.StreamId} Reconnected");
+                            con.StreamResult.InvokeReconnected();
+                            break;
+                        }
+                    }
+
+                    con.Reconnecting = false;
                 });
             }
             else
             {
-                log.Write(LogVerbosity.Info, "Socket closed");
+                log.Write(LogVerbosity.Info, $"{con.StreamResult.StreamId} Socket closed");
                 con.StreamResult.InvokeClosed();
                 con.Socket.Dispose();
                 lock (sockets)
