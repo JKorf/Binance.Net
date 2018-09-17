@@ -212,6 +212,10 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.2.6 - 17 sep 2018
+	* Combined PartialBookDepthStream data object with DepthStream data object
+	* Fix reconnection bug
+
 * Version 3.2.5 - 10 sep 2018
 	* Added check for failed auto timestamp syncing
 	* Added auto recalculation interval for auto timestamp
