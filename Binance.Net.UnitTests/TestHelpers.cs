@@ -30,6 +30,9 @@ namespace Binance.Net.UnitTests
                         continue;
                     }
 
+                    if (type.GetProperty(pi.Name).GetMethod == null)
+                        continue;
+
                     var selfValue = type.GetProperty(pi.Name).GetValue(self, null);
                     var toValue = type.GetProperty(pi.Name).GetValue(to, null);
 
