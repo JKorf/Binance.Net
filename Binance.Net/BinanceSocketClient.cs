@@ -171,7 +171,7 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="SubscribeToDepthStreamAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public CallResult<BinanceStreamSubscription> SubscribeToDepthStream(string symbol, Action<BinanceStreamDepth> onMessage) => SubscribeToDepthStreamAsync(symbol, onMessage).Result;
+        public CallResult<BinanceStreamSubscription> SubscribeToDepthStream(string symbol, Action<BinanceOrderBook> onMessage) => SubscribeToDepthStreamAsync(symbol, onMessage).Result;
 
         /// <summary>
         /// Subscribes to the depth update stream for the provided symbol
@@ -180,13 +180,13 @@ namespace Binance.Net
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
         /// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
-        public async Task<CallResult<BinanceStreamSubscription>> SubscribeToDepthStreamAsync(string symbol, Action<BinanceStreamDepth> onMessage) => await SubscribeToDepthStreamAsync(new [] { symbol }, onMessage).ConfigureAwait(false);
+        public async Task<CallResult<BinanceStreamSubscription>> SubscribeToDepthStreamAsync(string symbol, Action<BinanceOrderBook> onMessage) => await SubscribeToDepthStreamAsync(new [] { symbol }, onMessage).ConfigureAwait(false);
 
         /// <summary>
         /// Synchronized version of the <see cref="SubscribeToDepthStreamAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public CallResult<BinanceStreamSubscription> SubscribeToDepthStream(string[] symbol, Action<BinanceStreamDepth> onMessage) => SubscribeToDepthStreamAsync(symbol, onMessage).Result;
+        public CallResult<BinanceStreamSubscription> SubscribeToDepthStream(string[] symbol, Action<BinanceOrderBook> onMessage) => SubscribeToDepthStreamAsync(symbol, onMessage).Result;
 
         /// <summary>
         /// Subscribes to the depth update stream for the provided symbols
@@ -195,7 +195,7 @@ namespace Binance.Net
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
         /// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
-        public async Task<CallResult<BinanceStreamSubscription>> SubscribeToDepthStreamAsync(string[] symbols, Action<BinanceStreamDepth> onMessage)
+        public async Task<CallResult<BinanceStreamSubscription>> SubscribeToDepthStreamAsync(string[] symbols, Action<BinanceOrderBook> onMessage)
         {
             symbols = symbols.Select(a => a.ToLower() + DepthStreamEndpoint).ToArray();
             return await SubscribeCombined(String.Join("/", symbols), onMessage).ConfigureAwait(false);
@@ -309,7 +309,7 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="SubscribeToPartialBookDepthStreamAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public CallResult<BinanceStreamSubscription> SubscribeToPartialBookDepthStream(string symbol, int levels, Action<BinanceStreamOrderBook> onMessage) => SubscribeToPartialBookDepthStreamAsync(symbol, levels, onMessage).Result;
+        public CallResult<BinanceStreamSubscription> SubscribeToPartialBookDepthStream(string symbol, int levels, Action<BinanceOrderBook> onMessage) => SubscribeToPartialBookDepthStreamAsync(symbol, levels, onMessage).Result;
 
         /// <summary>
         /// Subscribes to the depth updates for the provided symbol
@@ -319,16 +319,16 @@ namespace Binance.Net
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
         /// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
-        public async Task<CallResult<BinanceStreamSubscription>> SubscribeToPartialBookDepthStreamAsync(string symbol, int levels, Action<BinanceStreamOrderBook> onMessage) => await SubscribeToPartialBookDepthStreamAsync(new [] { symbol }, levels, onMessage).ConfigureAwait(false);
+        public async Task<CallResult<BinanceStreamSubscription>> SubscribeToPartialBookDepthStreamAsync(string symbol, int levels, Action<BinanceOrderBook> onMessage) => await SubscribeToPartialBookDepthStreamAsync(new [] { symbol }, levels, onMessage).ConfigureAwait(false);
 
         /// <summary>
-        /// Synchronized verion of the <see cref="SubscribeToPartialBookDepthStreamAsync(string[], int, Action{BinanceStreamOrderBook})"/> method
+        /// Synchronized verion of the <see cref="SubscribeToPartialBookDepthStreamAsync(string[], int, Action{BinanceOrderBook})"/> method
         /// </summary>
         /// <param name="symbols"></param>
         /// <param name="levels"></param>
         /// <param name="onMessage"></param>
         /// <returns></returns>
-        public CallResult<BinanceStreamSubscription> SubscribeToPartialBookDepthStream(string[] symbols, int levels, Action<BinanceStreamOrderBook> onMessage) => SubscribeToPartialBookDepthStreamAsync(symbols, levels, onMessage).Result;
+        public CallResult<BinanceStreamSubscription> SubscribeToPartialBookDepthStream(string[] symbols, int levels, Action<BinanceOrderBook> onMessage) => SubscribeToPartialBookDepthStreamAsync(symbols, levels, onMessage).Result;
 
         /// <summary>
         /// Subscribes to the depth updates for the provided symbols
@@ -338,7 +338,7 @@ namespace Binance.Net
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
         /// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
-        public async Task<CallResult<BinanceStreamSubscription>> SubscribeToPartialBookDepthStreamAsync(string[] symbols, int levels, Action<BinanceStreamOrderBook> onMessage)
+        public async Task<CallResult<BinanceStreamSubscription>> SubscribeToPartialBookDepthStreamAsync(string[] symbols, int levels, Action<BinanceOrderBook> onMessage)
         {
             symbols = symbols.Select(a => a.ToLower() + PartialBookDepthStreamEndpoint + levels).ToArray();
             var socketResult = await CreateSocket(baseCombinedAddress + "stream?streams=" + String.Join("/", symbols)).ConfigureAwait(false);
@@ -347,8 +347,8 @@ namespace Binance.Net
 
             socketResult.Data.Socket.OnMessage += (msg) =>
             {
-                log.Write(LogVerbosity.Debug, $"Data received on sub of {typeof(BinanceStreamOrderBook)}: " + msg);
-                var result = Deserialize<BinanceCombinedStream<BinanceStreamOrderBook>>(msg, false);
+                log.Write(LogVerbosity.Debug, $"Data received on sub of {typeof(BinanceOrderBook)}: " + msg);
+                var result = Deserialize<BinanceCombinedStream<BinanceOrderBook>>(msg, false);
                 if (result.Success)
                 {
                     var stream = result.Data.Stream;
@@ -357,10 +357,10 @@ namespace Binance.Net
                     onMessage?.Invoke(result.Data.Data);
                 }
                 else
-                    log.Write(LogVerbosity.Info, $"Couldn't deserialize data received from combined stream of type {typeof(BinanceStreamOrderBook)}: " + result.Error);
+                    log.Write(LogVerbosity.Info, $"Couldn't deserialize data received from combined stream of type {typeof(BinanceOrderBook)}: " + result.Error);
             };
 
-            log.Write(LogVerbosity.Info, "Started combined stream of type " + typeof(BinanceStreamOrderBook));
+            log.Write(LogVerbosity.Info, "Started combined stream of type " + typeof(BinanceOrderBook));
             return new CallResult<BinanceStreamSubscription>(socketResult.Data.StreamResult, null);
         }
 
