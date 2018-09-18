@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using Binance.Net;
 using Binance.Net.Objects;
 using CryptoExchange.Net.Authentication;
@@ -14,13 +16,13 @@ namespace BinanceAPI.ClientConsole
             {
                 ApiCredentials = new ApiCredentials("APIKEY", "APISECRET"),
                 LogVerbosity = LogVerbosity.Debug,
-                LogWriter = Console.Out
+                LogWriters = new List<TextWriter> { Console.Out }
             });
             BinanceSocketClient.SetDefaultOptions(new BinanceSocketClientOptions()
             {
                 ApiCredentials = new ApiCredentials("APIKEY", "APISECRET"),
                 LogVerbosity = LogVerbosity.Debug,
-                LogWriter = Console.Out
+                LogWriters = new List<TextWriter> { Console.Out }
             });
 
             using (var client = new BinanceClient())
