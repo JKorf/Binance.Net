@@ -212,6 +212,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.2.7 - 21 sep 2018
+	* Updated CryptoExchange.Net
+
 * Version 3.2.6 - 17 sep 2018
 	* Combined PartialBookDepthStream data object with DepthStream data object
 	* Fix reconnection bug
