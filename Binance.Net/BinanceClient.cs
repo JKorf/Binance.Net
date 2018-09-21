@@ -1143,6 +1143,8 @@ namespace Binance.Net
             tradeRulesBehaviour = options.TradeRulesBehaviour;
             tradeRulesUpdateInterval = options.TradeRulesUpdateInterval;
             autoTimestampRecalculationInterval = options.AutoTimestampRecalculationInterval;
+
+            postParametersPosition = PostParameters.InUri;
         }
 
         protected override Error ParseErrorResponse(string error)

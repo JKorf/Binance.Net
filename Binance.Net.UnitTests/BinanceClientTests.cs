@@ -15,6 +15,7 @@ using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Requests;
+using System.Linq;
 
 namespace Binance.Net.UnitTests
 {
@@ -815,7 +816,6 @@ namespace Binance.Net.UnitTests
 
         [Test]
         [TestCase("", "D0F0F055B496CBD9FD1C8CA6719D0B2253F54C667753F70AEF13F394D9161A8B")]
-        [TestCase("?someTestParam=123&someOtherParam=Test", "14A57EF4923C5D1874593BF74D22288773A5EA6D9F91E305543780173FE8A015")]
         public void AddingAuthToUriString_Should_GiveCorrectSignature(string parameters, string signature)
         {
             // arrange
@@ -823,10 +823,10 @@ namespace Binance.Net.UnitTests
             string uri = $"https://test.test-api.com{parameters}";
 
             // act
-            var sign = authProvider.AddAuthenticationToUriString(uri, true);
+            var sign = authProvider.AddAuthenticationToParameters(uri, "POST", new Dictionary<string, object>(), true);
 
             // assert
-            Assert.IsTrue(sign.EndsWith($"signature={signature}"));
+            Assert.IsTrue((string)sign.Last().Value == signature);
         }
 
         [Test]
@@ -837,10 +837,10 @@ namespace Binance.Net.UnitTests
             var request = new Request(WebRequest.CreateHttp("https://test.test-api.com"));
 
             // act
-            var sign = authProvider.AddAuthenticationToRequest(request, true);
+            var sign = authProvider.AddAuthenticationToHeaders(request.Uri.ToString(), "GET", new Dictionary<string, object>(), true);
 
             // assert
-            Assert.IsTrue(request.Headers["X-MBX-APIKEY"] == "TestKey");
+            Assert.IsTrue(sign.First().Key == "X-MBX-APIKEY" && sign.First().Value == "TestKey");
         }
 
         private BinanceClient Construct(BinanceClientOptions options = null)

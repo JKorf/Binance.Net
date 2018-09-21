@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
@@ -16,30 +17,23 @@ namespace Binance.Net
             encryptor = new HMACSHA256(Encoding.ASCII.GetBytes(credentials.Secret.GetString()));
         }
 
-        public override string AddAuthenticationToUriString(string uri, bool signed)
+        public override Dictionary<string, object> AddAuthenticationToParameters(string uri, string method, Dictionary<string, object> parameters, bool signed)
         {
             if (!signed)
-                return uri;
+                return parameters;
 
-            if (!uri.Contains("?"))
-                uri += "?";
-
-            var query = uri.Split('?');
-
-            if (!uri.EndsWith("?"))
-                uri += "&";
-            
-            lock(locker)
-                uri += $"signature={ByteToString(encryptor.ComputeHash(Encoding.UTF8.GetBytes(query.Length > 1 ? query[1]: "")))}";
-            return uri;
+            var query = parameters.CreateParamString().Substring(1);
+            parameters.Add("signature", ByteToString(encryptor.ComputeHash(Encoding.UTF8.GetBytes(query))));
+            return parameters;
         }
 
-        public override IRequest AddAuthenticationToRequest(IRequest request, bool signed)
+        public override Dictionary<string, string> AddAuthenticationToHeaders(string uri, string method, Dictionary<string, object> parameters, bool signed)
         {
-            request.Headers.Add("X-MBX-APIKEY", Credentials.Key.GetString());
-            return request;
+            var result = new Dictionary<string, string>();
+            result.Add("X-MBX-APIKEY", Credentials.Key.GetString());
+            return result;
         }
-
+        
         public override string Sign(string toSign)
         {
             throw new System.NotImplementedException();
