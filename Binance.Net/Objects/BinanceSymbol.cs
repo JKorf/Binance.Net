@@ -1,5 +1,6 @@
 ﻿using Binance.Net.Converters;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace Binance.Net.Objects
 {
@@ -45,5 +46,32 @@ namespace Binance.Net.Objects
         /// Filters for order on this symbol
         /// </summary>
         public BinanceSymbolFilter[] Filters { get; set; }
+
+        /// <summary>
+        /// Filter for max amount of iceberg parts for this symbol
+        /// </summary>
+        [JsonIgnore]        
+        public BinanceSymbolIcebergPartsFilter IceBergPartsFilter => Filters?.OfType<BinanceSymbolIcebergPartsFilter>().FirstOrDefault();
+        /// <summary>
+        /// Filter for max accuracy of the quantity for this symbol
+        /// </summary>
+        [JsonIgnore]
+        public BinanceSymbolLotSizeFilter LotSizeFilter => Filters?.OfType<BinanceSymbolLotSizeFilter>().FirstOrDefault();
+        /// <summary>
+        /// Filter for max algoritmical orders for this symbol
+        /// </summary>
+        [JsonIgnore]
+        public BinanceSymbolMaxAlgoritmicalOrdersFilter MaxAlgoritmicalOrdersFilter => Filters?.OfType<BinanceSymbolMaxAlgoritmicalOrdersFilter>().FirstOrDefault();
+        /// <summary>
+        /// Filter for the minimal size of an order for this symbol
+        /// </summary>
+        [JsonIgnore]
+        public BinanceSymbolMinNotionalFilter MinNotionalFilter => Filters?.OfType<BinanceSymbolMinNotionalFilter>().FirstOrDefault();
+        /// <summary>
+        /// Filter for the max accuracy of the price for this symbol
+        /// </summary>
+        [JsonIgnore]
+        public BinanceSymbolPriceFilter PriceFilter => Filters?.OfType<BinanceSymbolPriceFilter>().FirstOrDefault();
+
     }
 }
