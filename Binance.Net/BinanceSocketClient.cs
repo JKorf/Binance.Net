@@ -510,6 +510,7 @@ namespace Binance.Net
                     return new CallResult<BinanceStream>(null, new CantConnectError());
                 }
 
+                socketObject.TryReconnect = true;
                 log.Write(LogVerbosity.Debug, $"{socketObject.StreamResult.StreamId} Socket connection established");
 
                 lock (sockets)
