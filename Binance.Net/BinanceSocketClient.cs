@@ -341,11 +341,11 @@ namespace Binance.Net
         public async Task<CallResult<BinanceStreamSubscription>> SubscribeToPartialBookDepthStreamAsync(string[] symbols, int levels, Action<BinanceOrderBook> onMessage)
         {
             symbols = symbols.Select(a => a.ToLower() + PartialBookDepthStreamEndpoint + levels).ToArray();
-            var socketResult = await CreateSocket(baseCombinedAddress + "stream?streams=" + String.Join("/", symbols)).ConfigureAwait(false);
+            var socketResult = await ConnectSocket(baseCombinedAddress + "stream?streams=" + String.Join("/", symbols)).ConfigureAwait(false);
             if (!socketResult.Success)
                 return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
 
-            socketResult.Data.Socket.OnMessage += (msg) =>
+            socketResult.Data.OnMessage += (msg) =>
             {
                 log.Write(LogVerbosity.Debug, $"Data received on sub of {typeof(BinanceOrderBook)}: " + msg);
                 var result = Deserialize<BinanceCombinedStream<BinanceOrderBook>>(msg, false);
@@ -417,11 +417,11 @@ namespace Binance.Net
 
         private async Task<CallResult<BinanceStreamSubscription>> Subscribe<T>(string url, Action<T> onMessage) where T: class
         {
-            var socketResult = await CreateSocket(url).ConfigureAwait(false);
+            var socketResult = await ConnectSocket(url).ConfigureAwait(false);
             if (!socketResult.Success)
                 return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
 
-            socketResult.Data.Socket.OnMessage += (msg) =>
+            socketResult.Data.OnMessage = (msg) =>
             {
                 log.Write(LogVerbosity.Debug, $"Data received on sub of {typeof(T)}: " + msg);
                 var result = Deserialize<T>(msg, false);
@@ -437,11 +437,11 @@ namespace Binance.Net
 
         private async Task<CallResult<BinanceStreamSubscription>> SubscribeCombined<T>(string streams, Action<T> onMessage)
         {
-            var socketResult = await CreateSocket(baseCombinedAddress + "stream?streams=" + streams).ConfigureAwait(false);
+            var socketResult = await ConnectSocket(baseCombinedAddress + "stream?streams=" + streams).ConfigureAwait(false);
             if (!socketResult.Success)
                 return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
 
-            socketResult.Data.Socket.OnMessage += (msg) =>
+            socketResult.Data.OnMessage = (msg) =>
             {
                 log.Write(LogVerbosity.Debug, $"Data received on sub of {typeof(T)}: " + msg);
                 var result = Deserialize<BinanceCombinedStream<T>>(msg, false);
@@ -457,11 +457,11 @@ namespace Binance.Net
 
         private async Task<CallResult<BinanceStreamSubscription>> CreateUserStream(string listenKey, Action<BinanceStreamAccountInfo> onAccountInfoMessage, Action<BinanceStreamOrderUpdate> onOrderUpdateMessage)
         {
-            var socketResult = await CreateSocket(baseAddress + listenKey).ConfigureAwait(false);
+            var socketResult = await ConnectSocket(baseAddress + listenKey).ConfigureAwait(false);
             if (!socketResult.Success)
                 return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
 
-            socketResult.Data.Socket.OnMessage += (msg) =>
+            socketResult.Data.OnMessage = (msg) =>
             {
                 if (msg.Contains(AccountUpdateEvent))
                 {
@@ -486,22 +486,25 @@ namespace Binance.Net
             return new CallResult<BinanceStreamSubscription>(socketResult.Data.StreamResult, null);
         }
 
-        private async Task<CallResult<BinanceStream>> CreateSocket(string url)
+        private IWebsocket CreateSocket(string url)
+        {
+            var socket = SocketFactory.CreateWebsocket(log, url);
+            socket.SetEnabledSslProtocols(protocols);
+            socket.OnError += Socket_OnError;
+            socket.OnOpen += Socket_OnOpen;
+            if (apiProxy != null)
+                socket.SetProxy(apiProxy.Host, apiProxy.Port);
+            return socket;
+        }
+
+        private async Task<CallResult<BinanceStream>> ConnectSocket(string url)
         {
             try
             {
-                var socket = SocketFactory.CreateWebsocket(log, url);
+                var socket = CreateSocket(url);
                 var socketObject = new BinanceStream() { Socket = socket, StreamResult = new BinanceStreamSubscription() { StreamId = NextStreamId() } };
-                socket.SetEnabledSslProtocols(protocols);
-
                 socket.OnClose += () => Socket_OnClose(socketObject);
-
-                socket.OnError += Socket_OnError;
                 socket.OnError += socketObject.StreamResult.InvokeError;
-
-                socket.OnOpen += Socket_OnOpen;
-                if (apiProxy != null)
-                    socket.SetProxy(apiProxy.Host, apiProxy.Port);
 
                 var connected = await socket.Connect().ConfigureAwait(false);
                 if (!connected)
@@ -557,6 +560,14 @@ namespace Binance.Net
                     while (con.TryReconnect)
                     {
                         Thread.Sleep((int)Math.Round(reconnectInterval.TotalMilliseconds));
+
+                        // Dispose old socket and create a new one to prevent hanging socket from intervering
+                        var newSocket = CreateSocket(con.Socket.Url);
+                        con.Socket.Dispose();
+                        con.Socket = newSocket;
+                        con.Socket.OnClose += () => Socket_OnClose(con);
+                        con.Socket.OnError += con.StreamResult.InvokeError;
+
                         if (con.Socket.Connect().Result)
                         {
                             con.Reconnecting = false;
