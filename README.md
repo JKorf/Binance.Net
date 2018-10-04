@@ -212,6 +212,11 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.2.8 - 04 oct 2018
+	* Fixed subscriptions trying to reconnect if initial subscribe fails
+	* Added accessors for symbol filters
+	* Fix subscription reconnections
+
 * Version 3.2.7 - 21 sep 2018
 	* Updated CryptoExchange.Net
 
