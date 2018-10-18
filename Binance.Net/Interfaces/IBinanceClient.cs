@@ -325,7 +325,7 @@ namespace Binance.Net.Interfaces
         /// Synchronized version of the <see cref="BinanceClient.QueryOrderAsync"/> method
         /// </summary>
         /// <returns></returns>
-        CallResult<BinanceOrder> QueryOrder(string symbol, long? orderId = null, string origClientOrderId = null, long? recvWindow = null);
+        CallResult<BinanceOrder> QueryOrder(string symbol, long? orderId = null, string origClientOrderId = null, long? receiveWindow = null);
 
         /// <summary>
         /// Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
@@ -333,15 +333,15 @@ namespace Binance.Net.Interfaces
         /// <param name="symbol">The symbol the order is for</param>
         /// <param name="orderId">The order id of the order</param>
         /// <param name="origClientOrderId">The client order id of the order</param>
-        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>The specific order</returns>
-        Task<CallResult<BinanceOrder>> QueryOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, long? recvWindow = null);
+        Task<CallResult<BinanceOrder>> QueryOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, long? receiveWindow = null);
 
         /// <summary>
         /// Synchronized version of the <see cref="BinanceClient.CancelOrderAsync"/> method
         /// </summary>
         /// <returns></returns>
-        CallResult<BinanceCanceledOrder> CancelOrder(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? recvWindow = null);
+        CallResult<BinanceCanceledOrder> CancelOrder(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null);
 
         /// <summary>
         /// Cancels a pending order
@@ -350,28 +350,28 @@ namespace Binance.Net.Interfaces
         /// <param name="orderId">The order id of the order</param>
         /// <param name="origClientOrderId">The client order id of the order</param>
         /// <param name="newClientOrderId">Unique identifier for this cancel</param>
-        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for canceled order</returns>
-        Task<CallResult<BinanceCanceledOrder>> CancelOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? recvWindow = null);
+        Task<CallResult<BinanceCanceledOrder>> CancelOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null);
 
         /// <summary>
         /// Synchronized version of the <see cref="BinanceClient.GetAccountInfoAsync"/> method
         /// </summary>
         /// <returns></returns>
-        CallResult<BinanceAccountInfo> GetAccountInfo(long? recvWindow = null);
+        CallResult<BinanceAccountInfo> GetAccountInfo(long? receiveWindow = null);
 
         /// <summary>
         /// Gets account information, including balances
         /// </summary>
-        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>The account information</returns>
-        Task<CallResult<BinanceAccountInfo>> GetAccountInfoAsync(long? recvWindow = null);
+        Task<CallResult<BinanceAccountInfo>> GetAccountInfoAsync(long? receiveWindow = null);
 
         /// <summary>
         /// Synchronized version of the <see cref="BinanceClient.GetMyTradesAsync"/> method
         /// </summary>
         /// <returns></returns>
-        CallResult<BinanceTrade[]> GetMyTrades(string symbol, int? limit = null, long? fromId = null, long? recvWindow = null);
+        CallResult<BinanceTrade[]> GetMyTrades(string symbol, int? limit = null, long? fromId = null, long? receiveWindow = null);
 
         /// <summary>
         /// Gets all user trades for provided symbol
@@ -379,15 +379,15 @@ namespace Binance.Net.Interfaces
         /// <param name="symbol">Symbol to get trades for</param>
         /// <param name="limit">The max number of results</param>
         /// <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
-        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of trades</returns>
-        Task<CallResult<BinanceTrade[]>> GetMyTradesAsync(string symbol, int? limit = null, long? fromId = null, long? recvWindow = null);
+        Task<CallResult<BinanceTrade[]>> GetMyTradesAsync(string symbol, int? limit = null, long? fromId = null, long? receiveWindow = null);
 
         /// <summary>
         /// Synchronized version of the <see cref="BinanceClient.WithdrawAsync"/> method
         /// </summary>
         /// <returns></returns>
-        CallResult<BinanceWithdrawalPlaced> Withdraw(string asset, string address, decimal amount, string addressTag = null, string name = null, int? recvWindow = null);
+        CallResult<BinanceWithdrawalPlaced> Withdraw(string asset, string address, decimal amount, string addressTag = null, string name = null, int? receiveWindow = null);
 
         /// <summary>
         /// Withdraw assets from Binance to an address
@@ -397,15 +397,15 @@ namespace Binance.Net.Interfaces
         /// <param name="addressTag">Secondary address identifier for coins like XRP,XMR etc.</param>
         /// <param name="amount">The amount to withdraw</param>
         /// <param name="name">Name for the transaction</param>
-        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Withdrawal confirmation</returns>
-        Task<CallResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, decimal amount, string addressTag = null, string name = null, int? recvWindow = null);
+        Task<CallResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, decimal amount, string addressTag = null, string name = null, int? receiveWindow = null);
 
         /// <summary>
         /// Synchronized version of the <see cref="BinanceClient.GetDepositHistoryAsync"/> method
         /// </summary>
         /// <returns></returns>
-        CallResult<BinanceDepositList> GetDepositHistory(string asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? recvWindow = null);
+        CallResult<BinanceDepositList> GetDepositHistory(string asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null);
 
         /// <summary>
         /// Gets the deposit history
@@ -414,15 +414,15 @@ namespace Binance.Net.Interfaces
         /// <param name="status">Filter by status</param>
         /// <param name="startTime">Filter start time from</param>
         /// <param name="endTime">Filter end time till</param>
-        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of deposits</returns>
-        Task<CallResult<BinanceDepositList>> GetDepositHistoryAsync(string asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? recvWindow = null);
+        Task<CallResult<BinanceDepositList>> GetDepositHistoryAsync(string asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null);
 
         /// <summary>
         /// Synchronized version of the <see cref="BinanceClient.GetWithdrawHistoryAsync"/> method
         /// </summary>
         /// <returns></returns>
-        CallResult<BinanceWithdrawalList> GetWithdrawHistory(string asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? recvWindow = null);
+        CallResult<BinanceWithdrawalList> GetWithdrawHistory(string asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null);
 
         /// <summary>
         /// Gets the withdrawal history
@@ -431,50 +431,50 @@ namespace Binance.Net.Interfaces
         /// <param name="status">Filter by status</param>
         /// <param name="startTime">Filter start time from</param>
         /// <param name="endTime">Filter end time till</param>
-        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of withdrawals</returns>
-        Task<CallResult<BinanceWithdrawalList>> GetWithdrawHistoryAsync(string asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? recvWindow = null);
+        Task<CallResult<BinanceWithdrawalList>> GetWithdrawHistoryAsync(string asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null);
 
         /// <summary>
         /// Synchronized version of the <see cref="BinanceClient.GetDepositAddressAsync"/> method
         /// </summary>
         /// <returns></returns>
-        CallResult<BinanceDepositAddress> GetDepositAddress(string asset, int? recvWindow = null);
+        CallResult<BinanceDepositAddress> GetDepositAddress(string asset, int? receiveWindow = null);
 
         /// <summary>
         /// Gets the deposit address for an asset
         /// </summary>
         /// <param name="asset">Asset to get address for</param>
-        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Deposit address</returns>
-        Task<CallResult<BinanceDepositAddress>> GetDepositAddressAsync(string asset, int? recvWindow = null);
+        Task<CallResult<BinanceDepositAddress>> GetDepositAddressAsync(string asset, int? receiveWindow = null);
 
         /// <summary>
         /// Synchronized version of the <see cref="BinanceClient.GetWithdrawalFeeAsync"/> method
         /// </summary>
         /// <returns></returns>
-        CallResult<decimal> GetWithdrawalFee(string asset, int? recvWindow = null);
+        CallResult<decimal> GetWithdrawalFee(string asset, int? receiveWindow = null);
 
         /// <summary>
         /// Gets the withdrawal fee for an asset
         /// </summary>
         /// <param name="asset">Asset to get withdrawal fee for</param>
-        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Withdrawal fee</returns>
-        Task<CallResult<decimal>> GetWithdrawalFeeAsync(string asset, int? recvWindow = null);
+        Task<CallResult<decimal>> GetWithdrawalFeeAsync(string asset, int? receiveWindow = null);
 
         /// <summary>
         /// Synchronized version of the <see cref="GetAccountStatusAsync"/> method
         /// </summary>
         /// <returns></returns>
-        CallResult<BinanceAccountStatus> GetAccountStatus(int? recvWindow = null);
+        CallResult<BinanceAccountStatus> GetAccountStatus(int? receiveWindow = null);
 
         /// <summary>
         /// Gets the status of the account associated with the apikey/secret
         /// </summary>
-        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Account status</returns>
-        Task<CallResult<BinanceAccountStatus>> GetAccountStatusAsync(int? recvWindow = null);
+        Task<CallResult<BinanceAccountStatus>> GetAccountStatusAsync(int? receiveWindow = null);
 
         /// <summary>
         /// Synchronized version of the <see cref="GetSystemStatusAsync"/> method
@@ -492,14 +492,14 @@ namespace Binance.Net.Interfaces
         /// Synchronized version of the <see cref="GetDustLog"/> method
         /// </summary>
         /// <returns></returns>
-        CallResult<BinanceDustLog[]> GetDustLog(int? recvWindow = null);
+        CallResult<BinanceDustLog[]> GetDustLog(int? receiveWindow = null);
 
         /// <summary>
         /// Gets the history of dust conversions
         /// </summary>
-        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>The history of dust conversions</returns>
-        Task<CallResult<BinanceDustLog[]>> GetDustLogAsync(int? recvWindow = null);
+        Task<CallResult<BinanceDustLog[]>> GetDustLogAsync(int? receiveWindow = null);
 
         /// <summary>
         /// Synchronized version of the <see cref="BinanceClient.StartUserStreamAsync"/> method
