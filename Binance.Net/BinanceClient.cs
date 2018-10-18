@@ -37,7 +37,9 @@ namespace Binance.Net
                     RateLimiters = defaultOptions.RateLimiters,
                     TradeRulesBehaviour = defaultOptions.TradeRulesBehaviour,
                     RateLimitingBehaviour = defaultOptions.RateLimitingBehaviour,
-                    TradeRulesUpdateInterval = defaultOptions.TradeRulesUpdateInterval
+                    TradeRulesUpdateInterval = defaultOptions.TradeRulesUpdateInterval,
+                    AutoTimestampRecalculationInterval = defaultOptions.AutoTimestampRecalculationInterval,
+                    ReceiveWindow = defaultOptions.ReceiveWindow
                 };
 
                 if (defaultOptions.ApiCredentials != null)
@@ -51,6 +53,7 @@ namespace Binance.Net
         private TimeSpan autoTimestampRecalculationInterval;
         private TradeRulesBehaviour tradeRulesBehaviour;
         private TimeSpan tradeRulesUpdateInterval;
+        private TimeSpan defaultReceiveWindow;
 
         private double timeOffset;
         private bool timeSynced;
@@ -479,7 +482,7 @@ namespace Binance.Net
             {
                 { "timestamp", GetTimestamp() }
             };
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString());
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("symbol", symbol);
 
             return await ExecuteRequest<BinanceOrder[]>(GetUrl(OpenOrdersEndpoint, Api, SignedVersion), GetMethod, parameters, true).ConfigureAwait(false);
@@ -511,7 +514,7 @@ namespace Binance.Net
                 { "timestamp", GetTimestamp() }
             };
             parameters.AddOptionalParameter("orderId", orderId?.ToString());
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString());
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", limit?.ToString());
 
             return await ExecuteRequest<BinanceOrder[]>(GetUrl(AllOrdersEndpoint, Api, SignedVersion), GetMethod, parameters, true).ConfigureAwait(false);
@@ -589,7 +592,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await ExecuteRequest<BinancePlacedOrder>(GetUrl(NewOrderEndpoint, Api, SignedVersion), PostMethod, parameters, true).ConfigureAwait(false);
         }
@@ -665,7 +668,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await ExecuteRequest<BinancePlacedOrder>(GetUrl(NewTestOrderEndpoint, Api, SignedVersion), PostMethod, parameters, true).ConfigureAwait(false);
         }
@@ -674,7 +677,7 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="QueryOrderAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public CallResult<BinanceOrder> QueryOrder(string symbol, long? orderId = null, string origClientOrderId = null, long? recvWindow = null) => QueryOrderAsync(symbol, orderId, origClientOrderId, recvWindow).Result;
+        public CallResult<BinanceOrder> QueryOrder(string symbol, long? orderId = null, string origClientOrderId = null, long? receiveWindow = null) => QueryOrderAsync(symbol, orderId, origClientOrderId, receiveWindow).Result;
 
         /// <summary>
         /// Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
@@ -682,9 +685,9 @@ namespace Binance.Net
         /// <param name="symbol">The symbol the order is for</param>
         /// <param name="orderId">The order id of the order</param>
         /// <param name="origClientOrderId">The client order id of the order</param>
-        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>The specific order</returns>
-        public async Task<CallResult<BinanceOrder>> QueryOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, long? recvWindow = null)
+        public async Task<CallResult<BinanceOrder>> QueryOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, long? receiveWindow = null)
         {
             if (orderId == null && origClientOrderId == null)
                 return new CallResult<BinanceOrder>(null, new ArgumentError("Either orderId or origClientOrderId should be provided"));
@@ -700,8 +703,8 @@ namespace Binance.Net
             };
             parameters.AddOptionalParameter("orderId", orderId?.ToString());
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
-            parameters.AddOptionalParameter("recvWindow", recvWindow?.ToString());
-            
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
             return await ExecuteRequest<BinanceOrder>(GetUrl(QueryOrderEndpoint, Api, SignedVersion), GetMethod, parameters, true).ConfigureAwait(false);
         }
 
@@ -709,7 +712,7 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="CancelOrderAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public CallResult<BinanceCanceledOrder> CancelOrder(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? recvWindow = null) => CancelOrderAsync(symbol, orderId, origClientOrderId, newClientOrderId, recvWindow).Result;
+        public CallResult<BinanceCanceledOrder> CancelOrder(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null) => CancelOrderAsync(symbol, orderId, origClientOrderId, newClientOrderId, receiveWindow).Result;
 
         /// <summary>
         /// Cancels a pending order
@@ -718,9 +721,9 @@ namespace Binance.Net
         /// <param name="orderId">The order id of the order</param>
         /// <param name="origClientOrderId">The client order id of the order</param>
         /// <param name="newClientOrderId">Unique identifier for this cancel</param>
-        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for canceled order</returns>
-        public async Task<CallResult<BinanceCanceledOrder>> CancelOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? recvWindow = null)
+        public async Task<CallResult<BinanceCanceledOrder>> CancelOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
@@ -734,8 +737,8 @@ namespace Binance.Net
             parameters.AddOptionalParameter("orderId", orderId?.ToString());
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
-            parameters.AddOptionalParameter("recvWindow", recvWindow?.ToString());
-            
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
             return await ExecuteRequest<BinanceCanceledOrder>(GetUrl(CancelOrderEndpoint, Api, SignedVersion), DeleteMethod, parameters, true).ConfigureAwait(false);
         }
 
@@ -743,14 +746,14 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="GetAccountInfoAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public CallResult<BinanceAccountInfo> GetAccountInfo(long? recvWindow = null) => GetAccountInfoAsync(recvWindow).Result;
+        public CallResult<BinanceAccountInfo> GetAccountInfo(long? receiveWindow = null) => GetAccountInfoAsync(receiveWindow).Result;
 
         /// <summary>
         /// Gets account information, including balances
         /// </summary>
-        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>The account information</returns>
-        public async Task<CallResult<BinanceAccountInfo>> GetAccountInfoAsync(long? recvWindow = null)
+        public async Task<CallResult<BinanceAccountInfo>> GetAccountInfoAsync(long? receiveWindow = null)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
@@ -760,7 +763,7 @@ namespace Binance.Net
             {
                 { "timestamp", GetTimestamp() }
             };
-            parameters.AddOptionalParameter("recvWindow", recvWindow?.ToString());
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await ExecuteRequest<BinanceAccountInfo>(GetUrl(AccountInfoEndpoint, Api, SignedVersion), GetMethod, parameters, true).ConfigureAwait(false);
         }
@@ -769,7 +772,7 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="GetMyTradesAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public CallResult<BinanceTrade[]> GetMyTrades(string symbol, int? limit = null, long? fromId = null, long? recvWindow = null) => GetMyTradesAsync(symbol, limit, fromId, recvWindow).Result;
+        public CallResult<BinanceTrade[]> GetMyTrades(string symbol, int? limit = null, long? fromId = null, long? receiveWindow = null) => GetMyTradesAsync(symbol, limit, fromId, receiveWindow).Result;
 
         /// <summary>
         /// Gets all user trades for provided symbol
@@ -777,9 +780,9 @@ namespace Binance.Net
         /// <param name="symbol">Symbol to get trades for</param>
         /// <param name="limit">The max number of results</param>
         /// <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
-        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of trades</returns>
-        public async Task<CallResult<BinanceTrade[]>> GetMyTradesAsync(string symbol, int? limit = null, long? fromId = null, long? recvWindow = null)
+        public async Task<CallResult<BinanceTrade[]>> GetMyTradesAsync(string symbol, int? limit = null, long? fromId = null, long? receiveWindow = null)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
@@ -792,7 +795,7 @@ namespace Binance.Net
             };
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("fromId", fromId?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("recvWindow", recvWindow?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await ExecuteRequest<BinanceTrade[]>(GetUrl(MyTradesEndpoint, Api, SignedVersion), GetMethod, parameters, true).ConfigureAwait(false);
         }
@@ -801,7 +804,7 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="WithdrawAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public CallResult<BinanceWithdrawalPlaced> Withdraw(string asset, string address, decimal amount, string addressTag = null, string name = null, int? recvWindow = null) => WithdrawAsync(asset, address,amount, addressTag, name, recvWindow).Result;
+        public CallResult<BinanceWithdrawalPlaced> Withdraw(string asset, string address, decimal amount, string addressTag = null, string name = null, int? receiveWindow = null) => WithdrawAsync(asset, address,amount, addressTag, name, receiveWindow).Result;
 
         /// <summary>
         /// Withdraw assets from Binance to an address
@@ -811,9 +814,9 @@ namespace Binance.Net
         /// <param name="addressTag">Secondary address identifier for coins like XRP,XMR etc.</param>
         /// <param name="amount">The amount to withdraw</param>
         /// <param name="name">Name for the transaction</param>
-        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Withdrawal confirmation</returns>
-        public async Task<CallResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, decimal amount, string addressTag = null, string name = null, int? recvWindow = null)
+        public async Task<CallResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, decimal amount, string addressTag = null, string name = null, int? receiveWindow = null)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
@@ -828,7 +831,7 @@ namespace Binance.Net
             };
             parameters.AddOptionalParameter("name", name);
             parameters.AddOptionalParameter("addressTag", addressTag);
-            parameters.AddOptionalParameter("recvWindow", recvWindow?.ToString());
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await ExecuteRequest<BinanceWithdrawalPlaced>(GetUrl(WithdrawEndpoint, WithdrawalApi, WithdrawalVersion), PostMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success || result.Data == null)
@@ -843,7 +846,7 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="GetDepositHistoryAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public CallResult<BinanceDepositList> GetDepositHistory(string asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? recvWindow = null) => GetDepositHistoryAsync(asset, status, startTime, endTime, recvWindow).Result;
+        public CallResult<BinanceDepositList> GetDepositHistory(string asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null) => GetDepositHistoryAsync(asset, status, startTime, endTime, receiveWindow).Result;
 
         /// <summary>
         /// Gets the deposit history
@@ -852,9 +855,9 @@ namespace Binance.Net
         /// <param name="status">Filter by status</param>
         /// <param name="startTime">Filter start time from</param>
         /// <param name="endTime">Filter end time till</param>
-        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of deposits</returns>
-        public async Task<CallResult<BinanceDepositList>> GetDepositHistoryAsync(string asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? recvWindow = null)
+        public async Task<CallResult<BinanceDepositList>> GetDepositHistoryAsync(string asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
@@ -868,7 +871,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("status", status != null ? JsonConvert.SerializeObject(status, new DepositStatusConverter(false)) : null);
             parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
             parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
-            parameters.AddOptionalParameter("recvWindow", recvWindow?.ToString());
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await ExecuteRequest<BinanceDepositList>(GetUrl(DepositHistoryEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success || result.Data == null)
@@ -883,7 +886,7 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="GetWithdrawHistoryAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public CallResult<BinanceWithdrawalList> GetWithdrawHistory(string asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? recvWindow = null) => GetWithdrawHistoryAsync(asset, status, startTime, endTime, recvWindow).Result;
+        public CallResult<BinanceWithdrawalList> GetWithdrawHistory(string asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null) => GetWithdrawHistoryAsync(asset, status, startTime, endTime, receiveWindow).Result;
 
         /// <summary>
         /// Gets the withdrawal history
@@ -892,9 +895,9 @@ namespace Binance.Net
         /// <param name="status">Filter by status</param>
         /// <param name="startTime">Filter start time from</param>
         /// <param name="endTime">Filter end time till</param>
-        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of withdrawals</returns>
-        public async Task<CallResult<BinanceWithdrawalList>> GetWithdrawHistoryAsync(string asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? recvWindow = null)
+        public async Task<CallResult<BinanceWithdrawalList>> GetWithdrawHistoryAsync(string asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
@@ -909,7 +912,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("status", status != null ? JsonConvert.SerializeObject(status, new WithdrawalStatusConverter(false)): null);
             parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
             parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
-            parameters.AddOptionalParameter("recvWindow", recvWindow?.ToString());
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await ExecuteRequest<BinanceWithdrawalList>(GetUrl(WithdrawHistoryEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success || result.Data == null)
@@ -924,15 +927,15 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="GetDepositAddressAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public CallResult<BinanceDepositAddress> GetDepositAddress(string asset, int? recvWindow = null) => GetDepositAddressAsync(asset, recvWindow).Result;
+        public CallResult<BinanceDepositAddress> GetDepositAddress(string asset, int? receiveWindow = null) => GetDepositAddressAsync(asset, receiveWindow).Result;
 
         /// <summary>
         /// Gets the deposit address for an asset
         /// </summary>
         /// <param name="asset">Asset to get address for</param>
-        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Deposit address</returns>
-        public async Task<CallResult<BinanceDepositAddress>> GetDepositAddressAsync(string asset, int? recvWindow = null)
+        public async Task<CallResult<BinanceDepositAddress>> GetDepositAddressAsync(string asset, int? receiveWindow = null)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
@@ -943,8 +946,8 @@ namespace Binance.Net
                 { "asset", asset },
                 { "timestamp", GetTimestamp() }
             };
-            parameters.AddOptionalParameter("recvWindow", recvWindow?.ToString());
-                
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
             return await ExecuteRequest<BinanceDepositAddress>(GetUrl(DepositAddressEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
         }
 
@@ -952,15 +955,15 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="GetWithdrawalFeeAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public CallResult<decimal> GetWithdrawalFee(string asset, int? recvWindow = null) => GetWithdrawalFeeAsync(asset, recvWindow).Result;
+        public CallResult<decimal> GetWithdrawalFee(string asset, int? receiveWindow = null) => GetWithdrawalFeeAsync(asset, receiveWindow).Result;
 
         /// <summary>
         /// Gets the withdrawal fee for an asset
         /// </summary>
         /// <param name="asset">Asset to get withdrawal fee for</param>
-        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Withdrawal fee</returns>
-        public async Task<CallResult<decimal>> GetWithdrawalFeeAsync(string asset, int? recvWindow = null)
+        public async Task<CallResult<decimal>> GetWithdrawalFeeAsync(string asset, int? receiveWindow = null)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
@@ -971,7 +974,7 @@ namespace Binance.Net
                 { "asset", asset },
                 { "timestamp", GetTimestamp() }
             };
-            parameters.AddOptionalParameter("recvWindow", recvWindow?.ToString());
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await ExecuteRequest<BinanceWithdrawalFee>(GetUrl(WithdrawalFeeEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success)
@@ -986,14 +989,14 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="GetAccountStatusAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public CallResult<BinanceAccountStatus> GetAccountStatus(int? recvWindow = null) => GetAccountStatusAsync(recvWindow).Result;
+        public CallResult<BinanceAccountStatus> GetAccountStatus(int? receiveWindow = null) => GetAccountStatusAsync(recvWindow).Result;
 
         /// <summary>
         /// Gets the status of the account associated with the apikey/secret
         /// </summary>
-        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Account status</returns>
-        public async Task<CallResult<BinanceAccountStatus>> GetAccountStatusAsync(int? recvWindow = null)
+        public async Task<CallResult<BinanceAccountStatus>> GetAccountStatusAsync(int? receiveWindow = null)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
@@ -1003,7 +1006,7 @@ namespace Binance.Net
             {
                 { "timestamp", GetTimestamp() }
             };
-            parameters.AddOptionalParameter("recvWindow", recvWindow?.ToString());
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await ExecuteRequest<BinanceAccountStatus>(GetUrl(AccountStatusEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success)
@@ -1033,14 +1036,14 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="GetDustLog"/> method
         /// </summary>
         /// <returns></returns>
-        public CallResult<BinanceDustLog[]> GetDustLog(int? recvWindow = null) => GetDustLogAsync(recvWindow).Result;
+        public CallResult<BinanceDustLog[]> GetDustLog(int? receiveWindow = null) => GetDustLogAsync(receiveWindow).Result;
 
         /// <summary>
         /// Gets the history of dust conversions
         /// </summary>
-        /// <param name="recvWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>The history of dust conversions</returns>
-        public async Task<CallResult<BinanceDustLog[]>> GetDustLogAsync(int? recvWindow = null)
+        public async Task<CallResult<BinanceDustLog[]>> GetDustLogAsync(int? receiveWindow = null)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
@@ -1050,7 +1053,7 @@ namespace Binance.Net
             {
                 { "timestamp", GetTimestamp() }
             };
-            parameters.AddOptionalParameter("recvWindow", recvWindow?.ToString());
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await ExecuteRequest<BinanceDustLogListWrapper>(GetUrl(DustLogEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success)
@@ -1143,6 +1146,7 @@ namespace Binance.Net
             tradeRulesBehaviour = options.TradeRulesBehaviour;
             tradeRulesUpdateInterval = options.TradeRulesUpdateInterval;
             autoTimestampRecalculationInterval = options.AutoTimestampRecalculationInterval;
+            defaultReceiveWindow = options.ReceiveWindow;
 
             postParametersPosition = PostParameters.InUri;
         }

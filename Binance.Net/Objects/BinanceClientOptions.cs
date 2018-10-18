@@ -29,6 +29,11 @@ namespace Binance.Net.Objects
         /// How often the trade rules should be updated. Only used when TradeRulesBehaviour is not None
         /// </summary>
         public TimeSpan TradeRulesUpdateInterval { get; set; } = TimeSpan.FromMinutes(60);
+
+        /// <summary>
+        /// The default receive window for requests
+        /// </summary>
+        public TimeSpan ReceiveWindow { get; set; } = TimeSpan.FromSeconds(5);
     }
 
     public class BinanceSocketClientOptions : ExchangeOptions
