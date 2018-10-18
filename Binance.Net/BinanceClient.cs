@@ -62,6 +62,7 @@ namespace Binance.Net
         private BinanceExchangeInfo exchangeInfo;
         private DateTime? lastExchangeInfoUpdate;
         
+
         // Addresses
         private string baseApiAddress;
         private const string Api = "api";
@@ -198,15 +199,14 @@ namespace Binance.Net
             else
             {
                 var localTime = DateTime.UtcNow;
-                var sw = Stopwatch.StartNew();
                 var result = await ExecuteRequest<BinanceCheckTime>(url).ConfigureAwait(false);
                 if (!result.Success)
                     return new CallResult<DateTime>(default(DateTime), result.Error);
 
                 if (!timeSynced || resetAutoTimestamp)
                 {
-                    // Calculate time offset between local and server by taking the elapsed time request time / 2 (round trip)
-                    timeOffset = ((result.Data.ServerTime - localTime).TotalMilliseconds) - sw.ElapsedMilliseconds / 2.0;
+                    // Calculate time offset between local and server
+                    timeOffset = (result.Data.ServerTime - localTime).TotalMilliseconds;
                     timeSynced = true;
                     lastTimeSync = DateTime.UtcNow;
                     log.Write(LogVerbosity.Info, $"Time offset set to {timeOffset}ms");
