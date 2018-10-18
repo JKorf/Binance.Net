@@ -212,6 +212,10 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.2.9 - 18 oct 2018
+	* Added default receiveWindow parameter to client options
+	* Updated time calculation between server/client, should help people with unstable ping who got intermittent errors saying the local time was ahead of server time
+
 * Version 3.2.8 - 04 oct 2018
 	* Fixed subscriptions trying to reconnect if initial subscribe fails
 	* Added accessors for symbol filters
