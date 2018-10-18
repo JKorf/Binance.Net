@@ -989,7 +989,7 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="GetAccountStatusAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public CallResult<BinanceAccountStatus> GetAccountStatus(int? receiveWindow = null) => GetAccountStatusAsync(recvWindow).Result;
+        public CallResult<BinanceAccountStatus> GetAccountStatus(int? receiveWindow = null) => GetAccountStatusAsync(receiveWindow).Result;
 
         /// <summary>
         /// Gets the status of the account associated with the apikey/secret
