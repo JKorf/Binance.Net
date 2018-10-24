@@ -212,6 +212,10 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.2.10 - 24 oct 2018
+	* AutoTimestamp now enabled by default
+	* BaseAssetPrecision and QuoteAssetPrecision type from string to int
+
 * Version 3.2.9 - 18 oct 2018
 	* Added default receiveWindow parameter to client options
 	* Updated time calculation between server/client, should help people with unstable ping who got intermittent errors saying the local time was ahead of server time
