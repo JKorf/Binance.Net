@@ -14,7 +14,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// Whether or not to automatically sync the local time with the server time
         /// </summary>
-        public bool AutoTimestamp { get; set; } = false;
+        public bool AutoTimestamp { get; set; } = true;
 
         /// <summary>
         /// Interval for refreshing the auto timestamp calculation

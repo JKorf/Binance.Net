@@ -23,7 +23,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The precision of the base asset
         /// </summary>
-        public string BaseAssetPrecision { get; set; }
+        public int BaseAssetPrecision { get; set; }
         /// <summary>
         /// The quote asset
         /// </summary>
@@ -32,7 +32,7 @@ namespace Binance.Net.Objects
         /// The precision of the quote asset
         /// </summary>
         [JsonProperty("quotePrecision")]
-        public string QuoteAssetPrecision { get; set; }
+        public int QuoteAssetPrecision { get; set; }
         /// <summary>
         /// Allowed order types
         /// </summary>
