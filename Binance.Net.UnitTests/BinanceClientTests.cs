@@ -158,7 +158,8 @@ namespace Binance.Net.UnitTests
 
             var objects = TestHelpers.PrepareClient(() => Construct(new BinanceClientOptions()
             {
-                ApiCredentials = new ApiCredentials("Test", "Test")
+                ApiCredentials = new ApiCredentials("Test", "Test"),
+                AutoTimestamp = false
             }), JsonConvert.SerializeObject(accountInfo));
 
             // act
@@ -291,7 +292,8 @@ namespace Binance.Net.UnitTests
 
             var objects = TestHelpers.PrepareClient(() => Construct(new BinanceClientOptions()
             {
-                ApiCredentials = new ApiCredentials("Test", "Test")
+                ApiCredentials = new ApiCredentials("Test", "Test"),
+                AutoTimestamp = false
             }), JsonConvert.SerializeObject(orders));
 
             // act
@@ -362,7 +364,8 @@ namespace Binance.Net.UnitTests
 
             var objects = TestHelpers.PrepareClient(() => Construct(new BinanceClientOptions()
             {
-                ApiCredentials = new ApiCredentials("Test", "Test")
+                ApiCredentials = new ApiCredentials("Test", "Test"),
+                AutoTimestamp = false
             }), JsonConvert.SerializeObject(history));
 
             // act
@@ -462,7 +465,8 @@ namespace Binance.Net.UnitTests
 
             var objects = TestHelpers.PrepareClient(() => Construct(new BinanceClientOptions()
             {
-                ApiCredentials = new ApiCredentials("Test", "Test")
+                ApiCredentials = new ApiCredentials("Test", "Test"),
+                AutoTimestamp = false
             }), JsonConvert.SerializeObject(trades));
 
             // act
@@ -517,7 +521,8 @@ namespace Binance.Net.UnitTests
 
             var objects = TestHelpers.PrepareClient(() => Construct(new BinanceClientOptions()
             {
-                ApiCredentials = new ApiCredentials("Test", "Test")
+                ApiCredentials = new ApiCredentials("Test", "Test"),
+                AutoTimestamp = false
             }), JsonConvert.SerializeObject(orders));
 
             // act
@@ -564,7 +569,8 @@ namespace Binance.Net.UnitTests
 
             var objects = TestHelpers.PrepareClient(() => Construct(new BinanceClientOptions()
             {
-                ApiCredentials = new ApiCredentials("Test", "Test")
+                ApiCredentials = new ApiCredentials("Test", "Test"),
+                AutoTimestamp = false
             }), JsonConvert.SerializeObject(history));
 
             // act
@@ -592,7 +598,8 @@ namespace Binance.Net.UnitTests
 
             var objects = TestHelpers.PrepareClient(() => Construct(new BinanceClientOptions()
             {
-                ApiCredentials = new ApiCredentials("Test", "Test")
+                ApiCredentials = new ApiCredentials("Test", "Test"),
+                AutoTimestamp = false
             }), JsonConvert.SerializeObject(canceled));
 
             // act
@@ -617,7 +624,8 @@ namespace Binance.Net.UnitTests
 
             var objects = TestHelpers.PrepareClient(() => Construct(new BinanceClientOptions()
             {
-                ApiCredentials = new ApiCredentials("Test", "Test")
+                ApiCredentials = new ApiCredentials("Test", "Test"),
+                AutoTimestamp = false
             }), JsonConvert.SerializeObject(placed));
 
             // act
@@ -642,7 +650,8 @@ namespace Binance.Net.UnitTests
 
             var objects = TestHelpers.PrepareClient(() => Construct(new BinanceClientOptions()
             {
-                ApiCredentials = new ApiCredentials("Test", "Test")
+                ApiCredentials = new ApiCredentials("Test", "Test"),
+                AutoTimestamp = false
             }), JsonConvert.SerializeObject(placed));
 
             // act
@@ -676,7 +685,8 @@ namespace Binance.Net.UnitTests
 
             var objects = TestHelpers.PrepareClient(() => Construct(new BinanceClientOptions()
             {
-                ApiCredentials = new ApiCredentials("Test", "Test")
+                ApiCredentials = new ApiCredentials("Test", "Test"),
+                AutoTimestamp = false
             }), JsonConvert.SerializeObject(order));
 
             // act
@@ -699,7 +709,8 @@ namespace Binance.Net.UnitTests
 
             var objects = TestHelpers.PrepareClient(() => Construct(new BinanceClientOptions()
             {
-                ApiCredentials = new ApiCredentials("Test", "Test")
+                ApiCredentials = new ApiCredentials("Test", "Test"),
+                AutoTimestamp = false
             }), JsonConvert.SerializeObject(order));
 
             // act
@@ -719,7 +730,10 @@ namespace Binance.Net.UnitTests
                 ListenKey = "123"
             };
 
-            var objects = TestHelpers.PrepareClient(() => Construct(), JsonConvert.SerializeObject(key));
+            var objects = TestHelpers.PrepareClient(() => Construct(new BinanceClientOptions()
+            {
+                AutoTimestamp = false
+            }), JsonConvert.SerializeObject(key));
 
             // act
             var result = objects.Client.StartUserStream();
@@ -733,7 +747,10 @@ namespace Binance.Net.UnitTests
         public void KeepAliveUserStream_Should_Respond()
         {
             // arrange
-            var objects = TestHelpers.PrepareClient(() => Construct(), "{}");
+            var objects = TestHelpers.PrepareClient(() => Construct(new BinanceClientOptions()
+            {
+                AutoTimestamp = false
+            }), "{}");
 
             // act
             var result = objects.Client.KeepAliveUserStream("test");
@@ -746,7 +763,10 @@ namespace Binance.Net.UnitTests
         public void StopUserStream_Should_Respond()
         {
             // arrange
-            var objects = TestHelpers.PrepareClient(() => Construct(), "{}");
+            var objects = TestHelpers.PrepareClient(() => Construct(new BinanceClientOptions()
+            {
+                AutoTimestamp = false
+            }), "{}");
 
             // act
             var result = objects.Client.StopUserStream("test");
