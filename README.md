@@ -212,6 +212,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.2.11 - 01 nov 2018
+	* Exception handling in error response parsing
+
 * Version 3.2.10 - 24 oct 2018
 	* AutoTimestamp now enabled by default
 	* BaseAssetPrecision and QuoteAssetPrecision type from string to int

@@ -1153,17 +1153,32 @@ namespace Binance.Net
 
         protected override Error ParseErrorResponse(string error)
         {
-            if(error == null)
-                return new ServerError("Unknown error, no error message");
+            if(string.IsNullOrEmpty(error))
+                return new ServerError("Couldn't parse Binance error: no error message provided by server");
 
-            var obj = JObject.Parse(error);
-            if(!obj.ContainsKey("msg") && !obj.ContainsKey("code"))
-                return new ServerError(error);
+            try
+            {
+                var obj = JObject.Parse(error);
+                if (!obj.ContainsKey("msg") && !obj.ContainsKey("code"))
+                    return new ServerError(error);
 
-            if (obj.ContainsKey("msg") && !obj.ContainsKey("code"))
-                return new ServerError((string)obj["msg"]);
+                if (obj.ContainsKey("msg") && !obj.ContainsKey("code"))
+                    return new ServerError((string) obj["msg"]);
 
-            return new ServerError((int)obj["code"], (string)obj["msg"]);
+                return new ServerError((int) obj["code"], (string) obj["msg"]);
+            }
+            catch (JsonReaderException jre)
+            {
+                var info = $"Couldn't parse Binance error. Deserialize JsonReaderException: {jre.Message}, Path: {jre.Path}, LineNumber: {jre.LineNumber}, LinePosition: {jre.LinePosition}. Received data: {error}";
+                log.Write(LogVerbosity.Error, info);
+                return new ServerError(info);
+            }
+            catch (JsonSerializationException jse)
+            {
+                var info = $"Couldn't parse Binance error. Deserialize JsonSerializationException: {jse.Message}. Received data: {error}";
+                log.Write(LogVerbosity.Error, info);
+                return new ServerError(info);
+            }
         }
 
         private Uri GetUrl(string endpoint, string api, string version)
