@@ -27,6 +27,14 @@ namespace Binance.Net.Converters
                         StepSize = JsonConvert.DeserializeObject<decimal>(obj["stepSize"].ToString())
                     };
                     break;
+                case SymbolFilterType.MarketLotSize:
+                    result = new BinanceSymbolMarketLotSizeFilter()
+                    {
+                        MaxQuantity = JsonConvert.DeserializeObject<decimal>(obj["maxQty"].ToString()),
+                        MinQuantity = JsonConvert.DeserializeObject<decimal>(obj["minQty"].ToString()),
+                        StepSize = JsonConvert.DeserializeObject<decimal>(obj["stepSize"].ToString())
+                    };
+                    break;
                 case SymbolFilterType.MinNotional:
                     result = new BinanceSymbolMinNotionalFilter()
                     {

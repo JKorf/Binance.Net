@@ -211,6 +211,7 @@
         Price,
         PricePercent,
         LotSize,
+        MarketLotSize,
         MinNotional,
         MaxNumberAlogitmicalOrders,
         IcebergParts

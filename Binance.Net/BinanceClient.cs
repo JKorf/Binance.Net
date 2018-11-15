@@ -1226,9 +1226,20 @@ namespace Binance.Net
             if(!symbolData.OrderTypes.Contains(type))
                 return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: {type} order type not allowed for {symbol}");
             
-            if (symbolData.LotSizeFilter != null)
+
+            if (symbolData.LotSizeFilter != null || (symbolData.MarketLotSizeFilter != null && type == OrderType.Market))
             {
-                outputQuantity = BinanceHelpers.ClampQuantity(symbolData.LotSizeFilter.MinQuantity, symbolData.LotSizeFilter.MaxQuantity, symbolData.LotSizeFilter.StepSize, quantity);
+                var minQty = symbolData.LotSizeFilter.MinQuantity;
+                var maxQty = symbolData.LotSizeFilter.MaxQuantity;
+                var stepSize = symbolData.LotSizeFilter.StepSize;
+                if(type == OrderType.Market && symbolData.MarketLotSizeFilter != null)
+                {
+                    minQty = symbolData.MarketLotSizeFilter.MinQuantity;
+                    maxQty = symbolData.MarketLotSizeFilter.MaxQuantity;
+                    stepSize = symbolData.MarketLotSizeFilter.StepSize;
+                }
+
+                outputQuantity = BinanceHelpers.ClampQuantity(minQty, maxQty, stepSize, quantity);
                 if (outputQuantity != quantity)
                 {
                     if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)

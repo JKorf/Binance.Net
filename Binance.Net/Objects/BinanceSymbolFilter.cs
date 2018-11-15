@@ -63,6 +63,22 @@ namespace Binance.Net.Objects
         public decimal StepSize { get; set; }
     }
 
+    public class BinanceSymbolMarketLotSizeFilter : BinanceSymbolFilter
+    {
+        /// <summary>
+        /// The minimal quantity of an order
+        /// </summary>
+        public decimal MinQuantity { get; set; }
+        /// <summary>
+        /// The maximum quantity of an order
+        /// </summary>
+        public decimal MaxQuantity { get; set; }
+        /// <summary>
+        /// The tick size of the quantity. The quantity can not have more precision as this and can only be incremented in steps of this.
+        /// </summary>
+        public decimal StepSize { get; set; }
+    }
+
     public class BinanceSymbolMinNotionalFilter : BinanceSymbolFilter
     {
         /// <summary>

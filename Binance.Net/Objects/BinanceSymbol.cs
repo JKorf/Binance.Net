@@ -58,6 +58,11 @@ namespace Binance.Net.Objects
         [JsonIgnore]
         public BinanceSymbolLotSizeFilter LotSizeFilter => Filters?.OfType<BinanceSymbolLotSizeFilter>().FirstOrDefault();
         /// <summary>
+        /// Filter for max accuracy of the quantity for this symbol, specifically for market orders
+        /// </summary>
+        [JsonIgnore]
+        public BinanceSymbolMarketLotSizeFilter MarketLotSizeFilter => Filters?.OfType<BinanceSymbolMarketLotSizeFilter>().FirstOrDefault();
+        /// <summary>
         /// Filter for max algoritmical orders for this symbol
         /// </summary>
         [JsonIgnore]
