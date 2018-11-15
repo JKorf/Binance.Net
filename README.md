@@ -212,6 +212,13 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.3.0 - 15 nov 2018
+	* Updated to support latest Binance API update, including:
+		* Added RawRequest rate limit
+		* Canceling an order now returns full order report
+		* Added multiple symbol filters
+		* Added LastQuoteTransactedQuantity to socket order update
+
 * Version 3.2.12 - 15 nov 2018
 	* Added event time to BinanceStreamTick
 
