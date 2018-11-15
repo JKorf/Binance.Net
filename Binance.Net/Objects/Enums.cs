@@ -208,7 +208,8 @@
 
     public enum SymbolFilterType
     {
-        PriceFilter,
+        Price,
+        PricePercent,
         LotSize,
         MinNotional,
         MaxNumberAlogitmicalOrders,

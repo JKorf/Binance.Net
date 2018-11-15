@@ -1225,14 +1225,10 @@ namespace Binance.Net
 
             if(!symbolData.OrderTypes.Contains(type))
                 return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: {type} order type not allowed for {symbol}");
-
-            var lotSizeFilter = symbolData.Filters.OfType<BinanceSymbolLotSizeFilter>().SingleOrDefault();
-            var minNotionalFilter = symbolData.Filters.OfType<BinanceSymbolMinNotionalFilter>().SingleOrDefault();
-            var priceFilter = symbolData.Filters.OfType<BinanceSymbolPriceFilter>().SingleOrDefault();
-
-            if (lotSizeFilter != null)
+            
+            if (symbolData.LotSizeFilter != null)
             {
-                outputQuantity = BinanceHelpers.ClampQuantity(lotSizeFilter.MinQuantity, lotSizeFilter.MaxQuantity, lotSizeFilter.StepSize, quantity);
+                outputQuantity = BinanceHelpers.ClampQuantity(symbolData.LotSizeFilter.MinQuantity, symbolData.LotSizeFilter.MaxQuantity, symbolData.LotSizeFilter.StepSize, quantity);
                 if (outputQuantity != quantity)
                 {
                     if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
@@ -1244,9 +1240,9 @@ namespace Binance.Net
             
             if(price != null)
             {
-                if (priceFilter != null)
+                if (symbolData.PriceFilter != null)
                 {
-                    outputPrice = BinanceHelpers.ClampPrice(priceFilter.MinPrice, priceFilter.MaxPrice, priceFilter.TickSize, price.Value);
+                    outputPrice = BinanceHelpers.ClampPrice(symbolData.PriceFilter.MinPrice, symbolData.PriceFilter.MaxPrice, symbolData.PriceFilter.TickSize, price.Value);
                     if (outputPrice != price)
                     {
                         if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
@@ -1255,11 +1251,11 @@ namespace Binance.Net
                     }
                 }
 
-                if (minNotionalFilter != null)
+                if (symbolData.MinNotionalFilter != null)
                 {
                     decimal notional = quantity * price.Value;
-                    if (notional < minNotionalFilter.MinNotional)
-                        return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: MinNotional filter failed. Order size: {notional}, minimal order size: {minNotionalFilter.MinNotional}");
+                    if (notional < symbolData.MinNotionalFilter.MinNotional)
+                        return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: MinNotional filter failed. Order size: {notional}, minimal order size: {symbolData.MinNotionalFilter.MinNotional}");
                 }                
             }
 

@@ -33,7 +33,7 @@ namespace Binance.Net.Converters
                         MinNotional = JsonConvert.DeserializeObject<decimal>(obj["minNotional"].ToString())
                     };
                     break;
-                case SymbolFilterType.PriceFilter:
+                case SymbolFilterType.Price:
                     result = new BinanceSymbolPriceFilter()
                     {
                         MaxPrice = JsonConvert.DeserializeObject<decimal>(obj["maxPrice"].ToString()),
@@ -52,6 +52,14 @@ namespace Binance.Net.Converters
                     result = new BinanceSymbolIcebergPartsFilter()
                     {
                         Limit = JsonConvert.DeserializeObject<int>(obj["limit"].ToString())
+                    };
+                    break;
+                case SymbolFilterType.PricePercent:
+                    result = new BinanceSymbolPercentPriceFilter()
+                    {
+                        MultiplierUp = JsonConvert.DeserializeObject<decimal>(obj["multiplierUp"].ToString()),
+                        MultiplierDown = JsonConvert.DeserializeObject<decimal>(obj["multiplierDown"].ToString()),
+                        AveragePriceMinutes = JsonConvert.DeserializeObject<int>(obj["avgPriceMins"].ToString()),
                     };
                     break;
             }

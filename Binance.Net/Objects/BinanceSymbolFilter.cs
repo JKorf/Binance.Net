@@ -31,6 +31,22 @@ namespace Binance.Net.Objects
         public decimal TickSize { get; set; }
     }
 
+    public class BinanceSymbolPercentPriceFilter : BinanceSymbolFilter
+    {
+        /// <summary>
+        /// The max factor the price can deviate up
+        /// </summary>
+        public decimal MultiplierUp { get; set; }
+        /// <summary>
+        /// The max factor the price can deviate down
+        /// </summary>
+        public decimal MultiplierDown { get; set; }
+        /// <summary>
+        /// The amount of minutes the average price of trades is calculated over. 0 means the last price is used
+        /// </summary>
+        public decimal AveragePriceMinutes { get; set; }
+    }
+
     public class BinanceSymbolLotSizeFilter : BinanceSymbolFilter
     {
         /// <summary>
