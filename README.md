@@ -212,6 +212,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 3.2.12 - 15 nov 2018
+	* Added event time to BinanceStreamTick
+
 * Version 3.2.11 - 01 nov 2018
 	* Exception handling in error response parsing
 

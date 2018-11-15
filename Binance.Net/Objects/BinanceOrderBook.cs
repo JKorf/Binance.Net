@@ -20,6 +20,8 @@ namespace Binance.Net.Objects
         /// </summary>
         [JsonProperty("lastUpdateId")]
         public long LastUpdateId { get; set; }
+
+
         [JsonProperty("u")]
         private long LastUpdateIdStream { set => LastUpdateId = value; }
 
@@ -33,12 +35,14 @@ namespace Binance.Net.Objects
         /// The list of bids
         /// </summary>
         public List<BinanceOrderBookEntry> Bids { get; set; }
+
         [JsonProperty("b")]
         private List<BinanceOrderBookEntry> BidsStream { set => Bids = value; }
         /// <summary>
         /// The list of asks
         /// </summary>
         public List<BinanceOrderBookEntry> Asks { get; set; }
+
         [JsonProperty("a")]
         public List<BinanceOrderBookEntry> AsksStream { set => Asks = value; }
     }
