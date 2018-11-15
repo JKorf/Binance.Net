@@ -4,8 +4,8 @@ using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects
 {
-    public class BinanceStreamTick
-    {
+    public class BinanceStreamTick: BinanceStreamEvent
+    {        
         /// <summary>
         /// The symbol this data is for
         /// </summary>
