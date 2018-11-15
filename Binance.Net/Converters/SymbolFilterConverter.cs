@@ -30,7 +30,9 @@ namespace Binance.Net.Converters
                 case SymbolFilterType.MinNotional:
                     result = new BinanceSymbolMinNotionalFilter()
                     {
-                        MinNotional = JsonConvert.DeserializeObject<decimal>(obj["minNotional"].ToString())
+                        MinNotional = JsonConvert.DeserializeObject<decimal>(obj["minNotional"].ToString()),
+                        ApplyToMarketOrders = (bool)obj["applyToMarket"],
+                        AveragePriceMinutes = JsonConvert.DeserializeObject<int>(obj["avgPriceMins"].ToString())
                     };
                     break;
                 case SymbolFilterType.Price:
