@@ -12,9 +12,12 @@ namespace Binance.Net.Converters
         protected override Dictionary<SymbolFilterType, string> Mapping => new Dictionary<SymbolFilterType, string>()
         {
             { SymbolFilterType.LotSize, "LOT_SIZE" },
+            { SymbolFilterType.MarketLotSize, "MARKET_LOT_SIZE" },
             { SymbolFilterType.MinNotional, "MIN_NOTIONAL" },
             { SymbolFilterType.Price, "PRICE_FILTER" },
+            { SymbolFilterType.PricePercent, "PERCENT_PRICE" },
             { SymbolFilterType.IcebergParts, "ICEBERG_PARTS" },
+            { SymbolFilterType.MaxNumberOrders, "MAX_NUM_ORDERS" },
             { SymbolFilterType.MaxNumberAlogitmicalOrders, "MAX_NUM_ALGO_ORDERS" },
         };
     }

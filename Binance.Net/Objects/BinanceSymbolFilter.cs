@@ -97,6 +97,14 @@ namespace Binance.Net.Objects
         public int AveragePriceMinutes { get; set; }
     }
 
+    public class BinanceSymbolMaxOrdersFilter : BinanceSymbolFilter
+    {
+        /// <summary>
+        /// The max number of orders for this symbol
+        /// </summary>
+        public int MaxNumberOrders { get; set; }
+    }
+
     public class BinanceSymbolMaxAlgoritmicalOrdersFilter : BinanceSymbolFilter
     {
         /// <summary>

@@ -213,6 +213,7 @@
         LotSize,
         MarketLotSize,
         MinNotional,
+        MaxNumberOrders,
         MaxNumberAlogitmicalOrders,
         IcebergParts
     }
