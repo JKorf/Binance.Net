@@ -58,6 +58,13 @@ namespace Binance.Net.Converters
                     };
                     break;
 
+                case SymbolFilterType.MaxNumberIcebergOrders:
+                    result = new BinanceSymbolMaxIcebergOrdersFilter()
+                    {
+                        MaxNumberIcebergOrders = JsonConvert.DeserializeObject<int>(obj["maxNumIcebergOrders"].ToString())
+                    };
+                    break;
+
                 case SymbolFilterType.MaxNumberOrders:
                     result = new BinanceSymbolMaxOrdersFilter()
                     {

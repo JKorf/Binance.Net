@@ -68,6 +68,11 @@ namespace Binance.Net.Objects
         [JsonIgnore]
         public BinanceSymbolMaxOrdersFilter MaxOrdersFilter => Filters?.OfType<BinanceSymbolMaxOrdersFilter>().FirstOrDefault();
         /// <summary>
+        /// Filter for max iceberg orders for this symbol
+        /// </summary>
+        [JsonIgnore]
+        public BinanceSymbolMaxIcebergOrdersFilter MaxIcebergOrdersFilter => Filters?.OfType<BinanceSymbolMaxIcebergOrdersFilter>().FirstOrDefault();
+        /// <summary>
         /// Filter for max algoritmical orders for this symbol
         /// </summary>
         [JsonIgnore]

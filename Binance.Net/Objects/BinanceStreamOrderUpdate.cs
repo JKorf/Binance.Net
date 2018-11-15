@@ -123,6 +123,11 @@ namespace Binance.Net.Objects
         /// </summary>
         [JsonProperty("Z")]
         public decimal CummulativeQuoteQuantity { get; set; }
+        /// <summary>
+        /// Last quote asset transacted quantity (i.e. LastPrice * LastQuantity)
+        /// </summary>
+        [JsonProperty("Y")]
+        public decimal LastQuoteTransactedQuantity { get; set; }
 
         // These are unused properties, but are mapped to prevent mapping error of lower/upper case
 

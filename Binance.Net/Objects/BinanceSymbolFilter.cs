@@ -105,6 +105,14 @@ namespace Binance.Net.Objects
         public int MaxNumberOrders { get; set; }
     }
 
+    public class BinanceSymbolMaxIcebergOrdersFilter : BinanceSymbolFilter
+    {
+        /// <summary>
+        /// The max number of iceberg orders for this symbol
+        /// </summary>
+        public int MaxNumberIcebergOrders { get; set; }
+    }
+
     public class BinanceSymbolMaxAlgoritmicalOrdersFilter : BinanceSymbolFilter
     {
         /// <summary>

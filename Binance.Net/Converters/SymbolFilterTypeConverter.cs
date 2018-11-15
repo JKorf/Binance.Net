@@ -18,6 +18,7 @@ namespace Binance.Net.Converters
             { SymbolFilterType.PricePercent, "PERCENT_PRICE" },
             { SymbolFilterType.IcebergParts, "ICEBERG_PARTS" },
             { SymbolFilterType.MaxNumberOrders, "MAX_NUM_ORDERS" },
+            { SymbolFilterType.MaxNumberIcebergOrders, "MAX_NUM_ICEBERG_ORDERS" },
             { SymbolFilterType.MaxNumberAlogitmicalOrders, "MAX_NUM_ALGO_ORDERS" },
         };
     }
