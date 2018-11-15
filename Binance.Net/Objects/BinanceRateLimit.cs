@@ -17,6 +17,11 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The amount of calls the limit is
         /// </summary>
+        [JsonProperty("intervalNum")]
+        public int IntervalNumber { get; set; }
+        /// <summary>
+        /// The amount of calls the limit is
+        /// </summary>
         public int Limit { get; set; }
     }
 }

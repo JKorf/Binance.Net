@@ -202,7 +202,8 @@
     public enum RateLimitType
     {
         RequestWeight,
-        Orders
+        Orders,
+        RawRequests
     }
 
     public enum SymbolFilterType

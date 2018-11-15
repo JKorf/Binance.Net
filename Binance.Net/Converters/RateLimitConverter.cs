@@ -12,7 +12,8 @@ namespace Binance.Net.Converters
         protected override Dictionary<RateLimitType, string> Mapping => new Dictionary<RateLimitType, string>()
         {
             { RateLimitType.Orders, "ORDERS" },
-            { RateLimitType.RequestWeight, "REQUEST_WEIGHT" }
+            { RateLimitType.RequestWeight, "REQUEST_WEIGHT" },
+            { RateLimitType.RawRequests, "RAW_REQUEST" },
         };
     }
 }
