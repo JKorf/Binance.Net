@@ -19,7 +19,7 @@ namespace Binance.Net
     /// <summary>
     /// Client providing access to the Binance REST Api
     /// </summary>
-    public class BinanceClient : ExchangeClient, IBinanceClient
+    public class BinanceClient : RestClient//, IBinanceClient
     {
         #region fields 
         private static BinanceClientOptions defaultOptions = new BinanceClientOptions();
@@ -39,7 +39,8 @@ namespace Binance.Net
                     RateLimitingBehaviour = defaultOptions.RateLimitingBehaviour,
                     TradeRulesUpdateInterval = defaultOptions.TradeRulesUpdateInterval,
                     AutoTimestampRecalculationInterval = defaultOptions.AutoTimestampRecalculationInterval,
-                    ReceiveWindow = defaultOptions.ReceiveWindow
+                    ReceiveWindow = defaultOptions.ReceiveWindow,
+                    RequestTimeout = defaultOptions.RequestTimeout
                 };
 
                 if (defaultOptions.ApiCredentials != null)
@@ -1137,11 +1138,6 @@ namespace Binance.Net
 
         private void Configure(BinanceClientOptions options)
         {
-            base.Configure(options);
-            if (options.ApiCredentials != null)
-                SetAuthenticationProvider(new BinanceAuthenticationProvider(options.ApiCredentials));
-
-            baseApiAddress = options.BaseAddress;
             autoTimestamp = options.AutoTimestamp;
             tradeRulesBehaviour = options.TradeRulesBehaviour;
             tradeRulesUpdateInterval = options.TradeRulesUpdateInterval;

@@ -3,7 +3,6 @@ using System.Security.Cryptography;
 using System.Text;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.Interfaces;
 
 namespace Binance.Net
 {
@@ -22,7 +21,7 @@ namespace Binance.Net
             if (!signed)
                 return parameters;
 
-            var query = parameters.CreateParamString().Substring(1);
+            var query = parameters.CreateParamString(true).Substring(1);
             parameters.Add("signature", ByteToString(encryptor.ComputeHash(Encoding.UTF8.GetBytes(query))));
             return parameters;
         }

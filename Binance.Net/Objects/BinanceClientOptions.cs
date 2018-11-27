@@ -1,10 +1,9 @@
 ﻿using System;
-using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 
 namespace Binance.Net.Objects
 {
-    public class BinanceClientOptions : ExchangeOptions
+    public class BinanceClientOptions : ClientOptions
     {
         public BinanceClientOptions()
         {
@@ -36,7 +35,7 @@ namespace Binance.Net.Objects
         public TimeSpan ReceiveWindow { get; set; } = TimeSpan.FromSeconds(5);
     }
 
-    public class BinanceSocketClientOptions : ExchangeOptions
+    public class BinanceSocketClientOptions : SocketClientOptions
     {
         public BinanceSocketClientOptions()
         {
@@ -52,10 +51,5 @@ namespace Binance.Net.Objects
         /// What should be done when the connection is interupted
         /// </summary>
         public ReconnectBehaviour ReconnectTryBehaviour { get; set; } = ReconnectBehaviour.AutoReconnect;
-
-        /// <summary>
-        /// The interval to try to reconnect the websocket after the connection was lost
-        /// </summary>
-        public TimeSpan ReconnectTryInterval { get; set; } = TimeSpan.FromSeconds(5);
     }
 }
