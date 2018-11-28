@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Binance.Net.Objects;
 using Binance.Net.Converters;
-using Binance.Net.Interfaces;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Logging;
