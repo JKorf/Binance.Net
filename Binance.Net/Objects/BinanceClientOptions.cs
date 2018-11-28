@@ -5,11 +5,6 @@ namespace Binance.Net.Objects
 {
     public class BinanceClientOptions : ClientOptions
     {
-        public BinanceClientOptions()
-        {
-            BaseAddress = "https://api.binance.com";
-        }
-
         /// <summary>
         /// Whether or not to automatically sync the local time with the server time
         /// </summary>
@@ -33,23 +28,42 @@ namespace Binance.Net.Objects
         /// The default receive window for requests
         /// </summary>
         public TimeSpan ReceiveWindow { get; set; } = TimeSpan.FromSeconds(5);
+
+        public BinanceClientOptions()
+        {
+            BaseAddress = "https://api.binance.com";
+        }
+
+        public BinanceClientOptions Copy()
+        {
+            var copy = Copy<BinanceClientOptions>();
+            copy.AutoTimestamp = AutoTimestamp;
+            copy.AutoTimestampRecalculationInterval = AutoTimestampRecalculationInterval;
+            copy.TradeRulesBehaviour = TradeRulesBehaviour;
+            copy.TradeRulesUpdateInterval = TradeRulesUpdateInterval;
+            copy.ReceiveWindow = ReceiveWindow;
+            return copy;
+        }
     }
 
     public class BinanceSocketClientOptions : SocketClientOptions
     {
-        public BinanceSocketClientOptions()
-        {
-            BaseAddress = "wss://stream.binance.com:9443/ws/";
-        }
-
         /// <summary>
         /// The base address for combined data in socket connections
         /// </summary>
         public string BaseSocketCombinedAddress { get; set; } = "wss://stream.binance.com:9443/";
 
-        /// <summary>
-        /// What should be done when the connection is interupted
-        /// </summary>
-        public ReconnectBehaviour ReconnectTryBehaviour { get; set; } = ReconnectBehaviour.AutoReconnect;
+        public BinanceSocketClientOptions()
+        {
+            BaseAddress = "wss://stream.binance.com:9443/ws/";
+        }        
+
+        public BinanceSocketClientOptions Copy()
+        {
+            var copy = Copy<BinanceSocketClientOptions>();
+            copy.BaseSocketCombinedAddress = BaseSocketCombinedAddress;
+            return copy;
+        }
+
     }
 }

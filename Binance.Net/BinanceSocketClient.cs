@@ -2,17 +2,11 @@
 using Binance.Net.Objects;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Authentication;
-using System.Threading;
 using System.Threading.Tasks;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Logging;
-using System.Diagnostics;
-using Binance.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using Newtonsoft.Json.Linq;
@@ -26,37 +20,9 @@ namespace Binance.Net
     {
         #region fields
         private static BinanceSocketClientOptions defaultOptions = new BinanceSocketClientOptions();
-        private static BinanceSocketClientOptions DefaultOptions
-        {
-            get
-            {
-                var result = new BinanceSocketClientOptions()
-                {
-                    LogVerbosity = defaultOptions.LogVerbosity,
-                    BaseAddress = defaultOptions.BaseAddress,
-                    LogWriters = defaultOptions.LogWriters,
-                    Proxy = defaultOptions.Proxy,
-                    ReconnectTryBehaviour = defaultOptions.ReconnectTryBehaviour,
-                    BaseSocketCombinedAddress = defaultOptions.BaseSocketCombinedAddress,
-                    ReconnectInterval = defaultOptions.ReconnectInterval
-                };
-
-                if (defaultOptions.ApiCredentials != null)
-                    result.ApiCredentials = new ApiCredentials(defaultOptions.ApiCredentials.Key.GetString(), defaultOptions.ApiCredentials.Secret.GetString());
-
-                return result;
-            }
-        }
+        private static BinanceSocketClientOptions DefaultOptions => defaultOptions.Copy();
 
         private string baseCombinedAddress;
-        private ReconnectBehaviour reconnectBehaviour;
-        private TimeSpan reconnectInterval;
-
-        private readonly List<BinanceStream> sockets = new List<BinanceStream>();
-
-        private int lastStreamId;
-        private readonly object streamIdLock = new object();
-        private const SslProtocols protocols = SslProtocols.Tls12 | SslProtocols.Tls11 | SslProtocols.Tls;
 
         private const string DepthStreamEndpoint = "@depth";
         private const string KlineStreamEndpoint = "@kline";
@@ -109,22 +75,6 @@ namespace Binance.Net
             SetAuthenticationProvider(new BinanceAuthenticationProvider(new ApiCredentials(apiKey, apiSecret)));
         }
 
-        /// <summary>
-        /// Checks the connection to the server and returns how long connecting took
-        /// </summary>
-        /// <returns>Time to connect in miliseconds</returns>
-        //public async Task<CallResult<long>> PingAsync()
-        //{
-        //    var socket = SocketFactory.CreateWebsocket(log, baseAddress);
-
-        //    var sw = Stopwatch.StartNew();
-        //    var connect = await socket.Connect().ConfigureAwait(false);
-        //    if (!connect)
-        //        return new CallResult<long>(0, new CantConnectError());
-        //    sw.Stop();
-        //    return new CallResult<long>(sw.ElapsedMilliseconds, null);
-        //}
-
         ///// <summary>
         ///// Synchronized version of the <see cref="SubscribeToKlineStreamAsync"/> method
         ///// </summary>
@@ -158,8 +108,9 @@ namespace Binance.Net
         ///// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToKlineStreamAsync(string[] symbols, KlineInterval interval, Action<BinanceStreamKlineData> onMessage)
         {
+            var handler = new Action<BinanceCombinedStream<BinanceStreamKlineData>>(data => onMessage(data.Data));
             symbols = symbols.Select(a => a.ToLower() + KlineStreamEndpoint + "_" + JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ToArray();
-            return await Subscribe(String.Join("/", symbols), onMessage).ConfigureAwait(false);
+            return await Subscribe(String.Join("/", symbols), true, handler).ConfigureAwait(false);
         }
 
         ///// <summary>
@@ -192,8 +143,9 @@ namespace Binance.Net
         ///// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToDepthStreamAsync(string[] symbols, Action<BinanceOrderBook> onMessage)
         {
+            var handler = new Action<BinanceCombinedStream<BinanceOrderBook>>(data => onMessage(data.Data));
             symbols = symbols.Select(a => a.ToLower() + DepthStreamEndpoint).ToArray();
-            return await Subscribe(String.Join("/", symbols), onMessage).ConfigureAwait(false);
+            return await Subscribe(String.Join("/", symbols), true, handler).ConfigureAwait(false);
         }
 
         ///// <summary>
@@ -226,8 +178,9 @@ namespace Binance.Net
         ///// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToAggregatedTradesStreamAsync(string[] symbols, Action<BinanceStreamAggregatedTrade> onMessage)
         {
+            var handler = new Action<BinanceCombinedStream<BinanceStreamAggregatedTrade>>(data => onMessage(data.Data));
             symbols = symbols.Select(a => a.ToLower() + AggregatedTradesStreamEndpoint).ToArray();
-            return await Subscribe(String.Join("/", symbols), onMessage).ConfigureAwait(false);
+            return await Subscribe(String.Join("/", symbols), true, handler).ConfigureAwait(false);
         }
 
         ///// <summary>
@@ -260,15 +213,16 @@ namespace Binance.Net
         ///// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToTradesStreamAsync(string[] symbols, Action<BinanceStreamTrade> onMessage)
         {
+            var handler = new Action<BinanceCombinedStream<BinanceStreamTrade>>(data => onMessage(data.Data));
             symbols = symbols.Select(a => a.ToLower() + TradesStreamEndpoint).ToArray();
-            return await Subscribe(String.Join("/", symbols), onMessage).ConfigureAwait(false);
+            return await Subscribe(String.Join("/", symbols), true, handler).ConfigureAwait(false);
         }
 
         ///// <summary>
         ///// Synchronized version of the <see cref="SubscribeToSymbolTickerAsync"/> method
         ///// </summary>
         ///// <returns></returns>
-        //public CallResult<BinanceStreamSubscription> SubscribeToSymbolTicker(string symbol, Action<BinanceStreamTick> onMessage) => SubscribeToSymbolTickerAsync(symbol, onMessage).Result;
+        public CallResult<UpdateSubscription> SubscribeToSymbolTicker(string symbol, Action<BinanceStreamTick> onMessage) => SubscribeToSymbolTickerAsync(symbol, onMessage).Result;
 
         ///// <summary>
         ///// Subscribes to ticker updates stream for a specific symbol
@@ -277,17 +231,16 @@ namespace Binance.Net
         ///// <param name="onMessage">The event handler for the received data</param>
         ///// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
         ///// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
-        //public async Task<CallResult<BinanceStreamSubscription>> SubscribeToSymbolTickerAsync(string symbol, Action<BinanceStreamTick> onMessage)
-        //{
-        //    symbol = symbol.ToLower();
-        //    return await Subscribe(baseAddress + symbol + SymbolTickerStreamEndpoint, onMessage).ConfigureAwait(false);
-        //}
+        public async Task<CallResult<UpdateSubscription>> SubscribeToSymbolTickerAsync(string symbol, Action<BinanceStreamTick> onMessage)
+        {
+            return await Subscribe(symbol.ToLower() + SymbolTickerStreamEndpoint, false, onMessage).ConfigureAwait(false);
+        }
 
         ///// <summary>
         ///// Synchronized version of the <see cref="SubscribeToAllSymbolTickerAsync"/> method
         ///// </summary>
         ///// <returns></returns>
-        //public CallResult<BinanceStreamSubscription> SubscribeToAllSymbolTicker(Action<BinanceStreamTick[]> onMessage) => SubscribeToAllSymbolTickerAsync(onMessage).Result;
+        public CallResult<UpdateSubscription> SubscribeToAllSymbolTicker(Action<BinanceStreamTick[]> onMessage) => SubscribeToAllSymbolTickerAsync(onMessage).Result;
 
         ///// <summary>
         ///// Subscribes to ticker updates stream for all symbols
@@ -295,16 +248,16 @@ namespace Binance.Net
         ///// <param name="onMessage">The event handler for the received data</param>
         ///// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
         ///// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
-        //public async Task<CallResult<BinanceStreamSubscription>> SubscribeToAllSymbolTickerAsync(Action<BinanceStreamTick[]> onMessage)
-        //{
-        //    return await Subscribe(baseAddress + AllSymbolTickerStreamEndpoint, onMessage).ConfigureAwait(false);
-        //}
+        public async Task<CallResult<UpdateSubscription>> SubscribeToAllSymbolTickerAsync(Action<BinanceStreamTick[]> onMessage)
+        {
+            return await Subscribe(AllSymbolTickerStreamEndpoint, false, onMessage).ConfigureAwait(false);
+        }
 
         ///// <summary>
         ///// Synchronized version of the <see cref="SubscribeToPartialBookDepthStreamAsync"/> method
         ///// </summary>
         ///// <returns></returns>
-        //public CallResult<BinanceStreamSubscription> SubscribeToPartialBookDepthStream(string symbol, int levels, Action<BinanceOrderBook> onMessage) => SubscribeToPartialBookDepthStreamAsync(symbol, levels, onMessage).Result;
+        public CallResult<UpdateSubscription> SubscribeToPartialBookDepthStream(string symbol, int levels, Action<BinanceOrderBook> onMessage) => SubscribeToPartialBookDepthStreamAsync(symbol, levels, onMessage).Result;
 
         ///// <summary>
         ///// Subscribes to the depth updates for the provided symbol
@@ -314,7 +267,7 @@ namespace Binance.Net
         ///// <param name="onMessage">The event handler for the received data</param>
         ///// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
         ///// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
-        //public async Task<CallResult<BinanceStreamSubscription>> SubscribeToPartialBookDepthStreamAsync(string symbol, int levels, Action<BinanceOrderBook> onMessage) => await SubscribeToPartialBookDepthStreamAsync(new [] { symbol }, levels, onMessage).ConfigureAwait(false);
+        public async Task<CallResult<UpdateSubscription>> SubscribeToPartialBookDepthStreamAsync(string symbol, int levels, Action<BinanceOrderBook> onMessage) => await SubscribeToPartialBookDepthStreamAsync(new [] { symbol }, levels, onMessage).ConfigureAwait(false);
 
         ///// <summary>
         ///// Synchronized verion of the <see cref="SubscribeToPartialBookDepthStreamAsync(string[], int, Action{BinanceOrderBook})"/> method
@@ -323,7 +276,7 @@ namespace Binance.Net
         ///// <param name="levels"></param>
         ///// <param name="onMessage"></param>
         ///// <returns></returns>
-        //public CallResult<BinanceStreamSubscription> SubscribeToPartialBookDepthStream(string[] symbols, int levels, Action<BinanceOrderBook> onMessage) => SubscribeToPartialBookDepthStreamAsync(symbols, levels, onMessage).Result;
+        public CallResult<UpdateSubscription> SubscribeToPartialBookDepthStream(string[] symbols, int levels, Action<BinanceOrderBook> onMessage) => SubscribeToPartialBookDepthStreamAsync(symbols, levels, onMessage).Result;
 
         ///// <summary>
         ///// Subscribes to the depth updates for the provided symbols
@@ -333,37 +286,23 @@ namespace Binance.Net
         ///// <param name="onMessage">The event handler for the received data</param>
         ///// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
         ///// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
-        //public async Task<CallResult<BinanceStreamSubscription>> SubscribeToPartialBookDepthStreamAsync(string[] symbols, int levels, Action<BinanceOrderBook> onMessage)
-        //{
-        //    symbols = symbols.Select(a => a.ToLower() + PartialBookDepthStreamEndpoint + levels).ToArray();
-        //    var socketResult = await ConnectSocket(baseCombinedAddress + "stream?streams=" + String.Join("/", symbols)).ConfigureAwait(false);
-        //    if (!socketResult.Success)
-        //        return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
+        public async Task<CallResult<UpdateSubscription>> SubscribeToPartialBookDepthStreamAsync(string[] symbols, int levels, Action<BinanceOrderBook> onMessage)
+        {
+            var handler = new Action<BinanceCombinedStream<BinanceOrderBook>>(data =>
+            {
+                data.Data.Symbol = data.Stream.Split('@')[0];
+                onMessage(data.Data);
+            });
 
-        //    socketResult.Data.OnMessage += (msg) =>
-        //    {
-        //        log.Write(LogVerbosity.Debug, $"Data received on sub of {typeof(BinanceOrderBook)}: " + msg);
-        //        var result = Deserialize<BinanceCombinedStream<BinanceOrderBook>>(msg, false);
-        //        if (result.Success)
-        //        {
-        //            var stream = result.Data.Stream;
-        //            var symbol = stream.Split('@')[0];
-        //            result.Data.Data.Symbol = symbol;
-        //            onMessage?.Invoke(result.Data.Data);
-        //        }
-        //        else
-        //            log.Write(LogVerbosity.Info, $"Couldn't deserialize data received from combined stream of type {typeof(BinanceOrderBook)}: " + result.Error);
-        //    };
-
-        //    log.Write(LogVerbosity.Info, "Started combined stream of type " + typeof(BinanceOrderBook));
-        //    return new CallResult<BinanceStreamSubscription>(socketResult.Data.StreamResult, null);
-        //}
+            symbols = symbols.Select(a => a.ToLower() + PartialBookDepthStreamEndpoint + levels).ToArray();
+            return await Subscribe(String.Join("/", symbols), true, handler).ConfigureAwait(false);
+        }
 
         ///// <summary>
         ///// Synchronized version of the <see cref="SubscribeToUserStreamAsync"/> method
         ///// </summary>
         ///// <returns></returns>
-        //public CallResult<BinanceStreamSubscription> SubscribeToUserStream(string listenKey, Action<BinanceStreamAccountInfo> onAccountInfoMessage, Action<BinanceStreamOrderUpdate> onOrderUpdateMessage) => SubscribeToUserStreamAsync(listenKey, onAccountInfoMessage, onOrderUpdateMessage).Result;
+        public CallResult<UpdateSubscription> SubscribeToUserStream(string listenKey, Action<BinanceStreamAccountInfo> onAccountInfoMessage, Action<BinanceStreamOrderUpdate> onOrderUpdateMessage) => SubscribeToUserStreamAsync(listenKey, onAccountInfoMessage, onOrderUpdateMessage).Result;
 
         ///// <summary>
         ///// Subscribes to the account update stream. Prior to using this, the <see cref="BinanceClient.StartUserStream"/> method should be called.
@@ -373,231 +312,97 @@ namespace Binance.Net
         ///// <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
         ///// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is closed and can close this specific stream 
         ///// using the <see cref="UnsubscribeFromStream(BinanceStreamSubscription)"/> method</returns>
-        //public async Task<CallResult<BinanceStreamSubscription>> SubscribeToUserStreamAsync(string listenKey, Action<BinanceStreamAccountInfo> onAccountInfoMessage, Action<BinanceStreamOrderUpdate> onOrderUpdateMessage)
-        //{
-        //    if (string.IsNullOrEmpty(listenKey))
-        //        return new CallResult<BinanceStreamSubscription>(null, new ArgumentError("ListenKey must be provided"));
-
-        //    return await CreateUserStream(listenKey, onAccountInfoMessage, onOrderUpdateMessage).ConfigureAwait(false);
-        //}
-
-        private async Task<CallResult<UpdateSubscription>> Subscribe<T>(string url, Action<T> onData)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToUserStreamAsync(string listenKey, Action<BinanceStreamAccountInfo> onAccountInfoMessage, Action<BinanceStreamOrderUpdate> onOrderUpdateMessage)
         {
-            var connectResult = await CreateAndConnectSocket(baseCombinedAddress + "stream?streams=" + url, true, onData);
+            if (string.IsNullOrEmpty(listenKey))
+                return new CallResult<UpdateSubscription>(null, new ArgumentError("ListenKey must be provided"));
+
+            var handler = new Action<string>(data =>
+            {
+                var token = JToken.Parse(data);
+                var evnt = (string)token["e"];
+                if (evnt == AccountUpdateEvent)
+                {
+                    var result = Deserialize<BinanceStreamAccountInfo>(token, false);
+                    if (result.Success)
+                        onAccountInfoMessage?.Invoke(result.Data);
+                    else
+                        log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account stream: " + result.Error);
+                }
+                else if (evnt == ExecutionUpdateEvent)
+                {
+                    log.Write(LogVerbosity.Debug, data);
+                    var result = Deserialize<BinanceStreamOrderUpdate>(token, false);
+                    if (result.Success)
+                        onOrderUpdateMessage?.Invoke(result.Data);
+                    else
+                        log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from order stream: " + result.Error);
+                }
+                else
+                {
+                    log.Write(LogVerbosity.Warning, $"Received unknown user data event {evnt}: " + data);
+                }
+            });
+
+            return await Subscribe(listenKey, false, handler).ConfigureAwait(false);
+        }
+
+        private async Task<CallResult<UpdateSubscription>> Subscribe<T>(string url, bool combined, Action<T> onData)
+        {
+            if (combined)
+                url = baseCombinedAddress + "stream?streams=" + url;
+            else
+                url = baseAddress + url;
+
+            var connectResult = await CreateAndConnectSocket(url, onData);
             if (!connectResult.Success)
                 return new CallResult<UpdateSubscription>(null, connectResult.Error);
 
             return new CallResult<UpdateSubscription>(new UpdateSubscription(connectResult.Data), null);
         }
         
-        private async Task<CallResult<SocketSubscription>> CreateAndConnectSocket<T>(string url, bool sub, Action<T> onMessage)
+        private async Task<CallResult<SocketSubscription>> CreateAndConnectSocket<T>(string url, Action<T> onMessage)
         {
             var socket = CreateSocket(url);
-            var subscription = new SocketSubscription(socket);
-
-            if (sub)
-            {
-                subscription.DataHandlers.Add((subs, data) => DataHandler(subs, data, onMessage));
-                subscription.AddEvent("Subscription");
-            }
+            var subscription = new SocketSubscription(socket);            
+            subscription.MessageHandlers.Add((subs, data) => DataHandler(subs, data, onMessage));
 
             var connectResult = await ConnectSocket(subscription);
             if (!connectResult.Success)
                 return new CallResult<SocketSubscription>(null, connectResult.Error);
-            
+
+            socket.ShouldReconnect = true;
             return new CallResult<SocketSubscription>(subscription, null);
         }
-
-        private void DataHandler<T>(SocketSubscription subscription, JToken data, Action<T> handler)
+        
+        private bool DataHandler<T>(SocketSubscription subscription, JToken data, Action<T> handler)
         {
-            var desResult = Deserialize<BinanceCombinedStream<T>>(data, false);
-            if (!desResult.Success)
+            if (typeof(T) == typeof(string))
             {
-                log.Write(LogVerbosity.Info, $"Couldn't deserialize data received from combined stream of type {typeof(T)}: " + desResult.Error);
-                return;
+                handler((T)Convert.ChangeType(data.ToString(), typeof(T)));
+                return true;
             }
 
-            handler(desResult.Data.Data);
+            var desResult = Deserialize<T>(data, false);
+            if (!desResult.Success)
+            {
+                log.Write(LogVerbosity.Info, $"Couldn't deserialize data received from stream of type {typeof(T)}: " + desResult.Error);
+                return false;
+            }
+
+            handler(desResult.Data);
+            return true;
         }
-
-        //private async Task<CallResult<BinanceStreamSubscription>> Subscribe<T>(string url, Action<T> onMessage) where T: class
-        //{
-        //    var socketResult = await ConnectSocket(url).ConfigureAwait(false);
-        //    if (!socketResult.Success)
-        //        return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
-
-        //    socketResult.Data.OnMessage = (msg) =>
-        //    {
-        //        log.Write(LogVerbosity.Debug, $"Data received on sub of {typeof(T)}: " + msg);
-        //        var result = Deserialize<T>(msg, false);
-        //        if (result.Success)
-        //            onMessage?.Invoke(result.Data);
-        //        else
-        //            log.Write(LogVerbosity.Warning, $"Couldn't deserialize data received from {typeof(T)} stream: " + result.Error);
-        //    };
-
-        //    log.Write(LogVerbosity.Info, $"Started stream for {typeof(T)}");
-        //    return new CallResult<BinanceStreamSubscription>(socketResult.Data.StreamResult, null);
-        //}
-
-        //private async Task<CallResult<BinanceStreamSubscription>> SubscribeCombined<T>(string streams, Action<T> onMessage)
-        //{
-        //    var socketResult = await ConnectSocket(baseCombinedAddress + "stream?streams=" + streams).ConfigureAwait(false);
-        //    if (!socketResult.Success)
-        //        return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
-
-        //    socketResult.Data.OnMessage = (msg) =>
-        //    {
-        //        log.Write(LogVerbosity.Debug, $"Data received on sub of {typeof(T)}: " + msg);
-        //        var result = Deserialize<BinanceCombinedStream<T>>(msg, false);
-        //        if (result.Success)
-        //            onMessage?.Invoke(result.Data.Data);
-        //        else
-        //            log.Write(LogVerbosity.Info, $"Couldn't deserialize data received from combined stream of type {typeof(T)}: " + result.Error);
-        //    };
-
-        //    log.Write(LogVerbosity.Info, "Started combined stream of type " + typeof(T));
-        //    return new CallResult<BinanceStreamSubscription>(socketResult.Data.StreamResult, null);
-        //}
-
-        //private async Task<CallResult<BinanceStreamSubscription>> CreateUserStream(string listenKey, Action<BinanceStreamAccountInfo> onAccountInfoMessage, Action<BinanceStreamOrderUpdate> onOrderUpdateMessage)
-        //{
-        //    var socketResult = await ConnectSocket(baseAddress + listenKey).ConfigureAwait(false);
-        //    if (!socketResult.Success)
-        //        return new CallResult<BinanceStreamSubscription>(null, socketResult.Error);
-
-        //    socketResult.Data.OnMessage = (msg) =>
-        //    {
-        //        if (msg.Contains(AccountUpdateEvent))
-        //        {
-        //            var result = Deserialize<BinanceStreamAccountInfo>(msg, false);
-        //            if (result.Success)
-        //                onAccountInfoMessage?.Invoke(result.Data);
-        //            else
-        //                log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account stream: " + result.Error);
-        //        }
-        //        else if (msg.Contains(ExecutionUpdateEvent))
-        //        {
-        //            log.Write(LogVerbosity.Debug, msg);
-        //            var result = Deserialize<BinanceStreamOrderUpdate>(msg, false);
-        //            if (result.Success)
-        //                onOrderUpdateMessage?.Invoke(result.Data);
-        //            else
-        //                log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from order stream: " + result.Error);
-        //        }
-        //    };
-
-        //    log.Write(LogVerbosity.Info, "User stream started");
-        //    return new CallResult<BinanceStreamSubscription>(socketResult.Data.StreamResult, null);
-        //}
-
-        //private IWebsocket CreateSocket(string url)
-        //{
-        //    var socket = SocketFactory.CreateWebsocket(log, url);
-        //    socket.SetEnabledSslProtocols(protocols);
-        //    socket.OnError += Socket_OnError;
-        //    socket.OnOpen += Socket_OnOpen;
-        //    if (apiProxy != null)
-        //        socket.SetProxy(apiProxy.Host, apiProxy.Port);
-        //    return socket;
-        //}
-
-        //private async Task<CallResult<BinanceStream>> ConnectSocket(string url)
-        //{
-        //    try
-        //    {
-        //        var socket = CreateSocket(url);
-        //        var socketObject = new BinanceStream() { Socket = socket, StreamResult = new BinanceStreamSubscription() { StreamId = NextStreamId() } };
-        //        socket.OnClose += () => Socket_OnClose(socketObject);
-        //        socket.OnError += socketObject.StreamResult.InvokeError;
-
-        //        var connected = await socket.Connect().ConfigureAwait(false);
-        //        if (!connected)
-        //        {
-        //            log.Write(LogVerbosity.Error, $"{socketObject.StreamResult.StreamId} Couldn't open socket stream");
-        //            return new CallResult<BinanceStream>(null, new CantConnectError());
-        //        }
-
-        //        socketObject.TryReconnect = true;
-        //        log.Write(LogVerbosity.Debug, $"{socketObject.StreamResult.StreamId} Socket connection established");
-
-        //        lock (sockets)
-        //            sockets.Add(socketObject);
-        //        return new CallResult<BinanceStream>(socketObject, null);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        var errorMessage = $"Couldn't open socket stream: {e.Message}";
-        //        log.Write(LogVerbosity.Error, errorMessage);
-        //        return new CallResult<BinanceStream>(null, new CantConnectError());
-        //    }
-        //}
 
         private void Configure(BinanceSocketClientOptions options)
         {
             baseCombinedAddress = options.BaseSocketCombinedAddress;
-            reconnectBehaviour = options.ReconnectTryBehaviour;
         }
 
         protected override bool SocketReconnect(SocketSubscription subscription, TimeSpan disconnectedTime)
         {
-            throw new NotImplementedException();
+            return true;
         }
-
-        //private void Socket_OnOpen()
-        //{
-        //    log.Write(LogVerbosity.Debug, "Socket opened");
-        //}
-
-        //private void Socket_OnError(Exception e)
-        //{
-        //    log.Write(LogVerbosity.Error, $"Socket error {e?.Message}");
-        //}
-
-        //private void Socket_OnClose(object sender)
-        //{
-        //    var con = (BinanceStream)sender;            
-        //    if (reconnectBehaviour == ReconnectBehaviour.AutoReconnect && con.TryReconnect)
-        //    {
-        //        if (con.Reconnecting)
-        //            return;
-
-        //        log.Write(LogVerbosity.Info, $"{con.StreamResult.StreamId} Connection lost, going to try to reconnect");
-        //        con.Reconnecting = true;
-        //        Task.Run(() =>
-        //        {
-        //            while (con.TryReconnect)
-        //            {
-        //                Thread.Sleep((int)Math.Round(reconnectInterval.TotalMilliseconds));
-
-        //                // Dispose old socket and create a new one to prevent hanging socket from intervering
-        //                var newSocket = CreateSocket(con.Socket.Url);
-        //                con.Socket.Dispose();
-        //                con.Socket = newSocket;
-        //                con.Socket.OnClose += () => Socket_OnClose(con);
-        //                con.Socket.OnError += con.StreamResult.InvokeError;
-
-        //                if (con.Socket.Connect().Result)
-        //                {
-        //                    con.Reconnecting = false;
-        //                    log.Write(LogVerbosity.Info, $"{con.StreamResult.StreamId} Reconnected");
-        //                    con.StreamResult.InvokeReconnected();
-        //                    break;
-        //                }
-        //            }
-
-        //            con.Reconnecting = false;
-        //        });
-        //    }
-        //    else
-        //    {
-        //        log.Write(LogVerbosity.Info, $"{con.StreamResult.StreamId} Socket closed");
-        //        con.StreamResult.InvokeClosed();
-        //        con.Socket.Dispose();
-        //        lock (sockets)
-        //            sockets.Remove(con);
-        //    }
-        //}
         #endregion
     }
 }

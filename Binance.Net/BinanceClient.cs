@@ -23,32 +23,7 @@ namespace Binance.Net
     {
         #region fields 
         private static BinanceClientOptions defaultOptions = new BinanceClientOptions();
-        private static BinanceClientOptions DefaultOptions
-        {
-            get
-            {
-                var result = new BinanceClientOptions()
-                {
-                    AutoTimestamp = defaultOptions.AutoTimestamp,
-                    LogVerbosity = defaultOptions.LogVerbosity,
-                    BaseAddress = defaultOptions.BaseAddress,
-                    LogWriters = defaultOptions.LogWriters,
-                    Proxy = defaultOptions.Proxy,
-                    RateLimiters = defaultOptions.RateLimiters,
-                    TradeRulesBehaviour = defaultOptions.TradeRulesBehaviour,
-                    RateLimitingBehaviour = defaultOptions.RateLimitingBehaviour,
-                    TradeRulesUpdateInterval = defaultOptions.TradeRulesUpdateInterval,
-                    AutoTimestampRecalculationInterval = defaultOptions.AutoTimestampRecalculationInterval,
-                    ReceiveWindow = defaultOptions.ReceiveWindow,
-                    RequestTimeout = defaultOptions.RequestTimeout
-                };
-
-                if (defaultOptions.ApiCredentials != null)
-                    result.ApiCredentials = new ApiCredentials(defaultOptions.ApiCredentials.Key.GetString(), defaultOptions.ApiCredentials.Secret.GetString());
-                
-                return result;
-            }
-        }
+        private static BinanceClientOptions DefaultOptions => defaultOptions.Copy();
 
         private bool autoTimestamp;
         private TimeSpan autoTimestampRecalculationInterval;
@@ -65,7 +40,6 @@ namespace Binance.Net
         
 
         // Addresses
-        private string baseApiAddress;
         private const string Api = "api";
         private const string WithdrawalApi = "wapi";
 
@@ -1069,19 +1043,20 @@ namespace Binance.Net
         /// Synchronized version of the <see cref="StartUserStreamAsync"/> method
         /// </summary>
         /// <returns></returns>
-        public CallResult<BinanceListenKey> StartUserStream() => StartUserStreamAsync().Result;
+        public CallResult<string> StartUserStream() => StartUserStreamAsync().Result;
 
         /// <summary>
         /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToUserStream"/>. The stream will close after 60 minutes unless a keep alive is send.
         /// </summary>
         /// <returns>Listen key</returns>
-        public async Task<CallResult<BinanceListenKey>> StartUserStreamAsync()
+        public async Task<CallResult<string>> StartUserStreamAsync()
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new CallResult<BinanceListenKey>(null, timestampResult.Error);
+                return new CallResult<string>(null, timestampResult.Error);
 
-            return await ExecuteRequest<BinanceListenKey>(GetUrl(GetListenKeyEndpoint, Api, UserDataStreamVersion), PostMethod).ConfigureAwait(false);
+            var result = await ExecuteRequest<BinanceListenKey>(GetUrl(GetListenKeyEndpoint, Api, UserDataStreamVersion), PostMethod).ConfigureAwait(false);
+            return new CallResult<string>(result.Data?.ListenKey, result.Error);
         }
 
         /// <summary>
@@ -1179,7 +1154,7 @@ namespace Binance.Net
 
         private Uri GetUrl(string endpoint, string api, string version)
         {
-            var result = $"{baseApiAddress}/{api}/v{version}/{endpoint}";
+            var result = $"{baseAddress}/{api}/v{version}/{endpoint}";
             return new Uri(result);
         }
         
