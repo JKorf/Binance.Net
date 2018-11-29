@@ -365,7 +365,7 @@ namespace Binance.Net
         {
             var socket = CreateSocket(url);
             var subscription = new SocketSubscription(socket);            
-            subscription.MessageHandlers.Add((subs, data) => DataHandler(subs, data, onMessage));
+            subscription.MessageHandlers.Add(DataHandlerName, (subs, data) => DataHandler(subs, data, onMessage));
 
             var connectResult = await ConnectSocket(subscription);
             if (!connectResult.Success)
