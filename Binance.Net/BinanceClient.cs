@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Binance.Net.Objects;
 using Binance.Net.Converters;
+using Binance.Net.Interfaces;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Logging;
@@ -18,7 +19,7 @@ namespace Binance.Net
     /// <summary>
     /// Client providing access to the Binance REST Api
     /// </summary>
-    public class BinanceClient : RestClient//, IBinanceClient
+    public class BinanceClient : RestClient, IBinanceClient
     {
         #region fields 
         private static BinanceClientOptions defaultOptions = new BinanceClientOptions();
@@ -135,15 +136,15 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="PingAsync"/> method
+        /// Pings the Binance API
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if successful ping, false if no response</returns>
         public override CallResult<long> Ping() => PingAsync().Result;
 
         /// <summary>
         /// Pings the Binance API
         /// </summary>
-        /// <returns>True if succesful ping, false if no response</returns>
+        /// <returns>True if successful ping, false if no response</returns>
         public override async Task<CallResult<long>> PingAsync()
         {
             var sw = Stopwatch.StartNew();
@@ -153,9 +154,9 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="GetServerTimeAsync"/> method
+        /// Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Server time</returns>
         public CallResult<DateTime> GetServerTime(bool resetAutoTimestamp = false) => GetServerTimeAsync(resetAutoTimestamp).Result;
 
         /// <summary>
@@ -190,9 +191,9 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="GetExchangeInfoAsync"/> method
+        /// Get's information about the exchange including rate limits and symbol list
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Exchange info</returns>
         public CallResult<BinanceExchangeInfo> GetExchangeInfo() => GetExchangeInfoAsync().Result;
 
         /// <summary>
@@ -212,9 +213,11 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="GetOrderBookAsync"/> method
+        /// Gets the order book for the provided symbol
         /// </summary>
-        /// <returns></returns>
+        /// <param name="symbol">The symbol to get the order book for</param>
+        /// <param name="limit">Max number of results</param>
+        /// <returns>The order book for the symbol</returns>
         public CallResult<BinanceOrderBook> GetOrderBook(string symbol, int? limit = null) => GetOrderBookAsync(symbol, limit).Result;
 
         /// <summary>
@@ -231,9 +234,14 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="GetAggregatedTradesAsync"/> method
+        /// Gets compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="symbol">The symbol to get the trades for</param>
+        /// <param name="fromId">ID to get aggregate trades from INCLUSIVE.</param>
+        /// <param name="startTime">Time to start getting trades from</param>
+        /// <param name="endTime">Time to stop getting trades from</param>
+        /// <param name="limit">Max number of results</param>
+        /// <returns>The aggregated trades list for the symbol</returns>
         public CallResult<BinanceAggregatedTrades[]> GetAggregatedTrades(string symbol, int? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null) => GetAggregatedTradesAsync(symbol, fromId, startTime, endTime, limit).Result;
 
         /// <summary>
@@ -257,9 +265,11 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="GetRecentTradesAsync"/> method
+        /// Gets the recent trades for a symbol
         /// </summary>
-        /// <returns></returns>
+        /// <param name="symbol">The symbol to get recent trades for</param>
+        /// <param name="limit">Result limit</param>
+        /// <returns>List of recent trades</returns>
         public CallResult<BinanceRecentTrade[]> GetRecentTrades(string symbol, int? limit = null) => GetRecentTradesAsync(symbol, limit).Result;
 
         /// <summary>
@@ -276,9 +286,12 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="GetHistoricalTradesAsync"/> method
+        /// Gets the historical  trades for a symbol
         /// </summary>
-        /// <returns></returns>
+        /// <param name="symbol">The symbol to get recent trades for</param>
+        /// <param name="limit">Result limit</param>
+        /// <param name="fromId">From which trade id on results should be retrieved</param>
+        /// <returns>List of recent trades</returns>
         public CallResult<BinanceRecentTrade[]> GetHistoricalTrades(string symbol, int? limit = null, long? fromId = null) => GetHistoricalTradesAsync(symbol, limit, fromId).Result;
 
         /// <summary>
@@ -298,9 +311,14 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="GetKlinesAsync"/> method
+        /// Get candlestick data for the provided symbol
         /// </summary>
-        /// <returns></returns>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="interval">The candlestick timespan</param>
+        /// <param name="startTime">Start time to get candlestick data</param>
+        /// <param name="endTime">End time to get candlestick data</param>
+        /// <param name="limit">Max number of results</param>
+        /// <returns>The candlestick data for the provided symbol</returns>
         public CallResult<BinanceKline[]> GetKlines(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null) => GetKlinesAsync(symbol, interval, startTime, endTime, limit).Result;
 
         /// <summary>
@@ -326,9 +344,10 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="Get24HPriceAsync"/> method
+        /// Get data regarding the last 24 hours for the provided symbol
         /// </summary>
-        /// <returns></returns>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <returns>Data over the last 24 hours</returns>
         public CallResult<Binance24HPrice> Get24HPrice(string symbol) => Get24HPriceAsync(symbol).Result;
 
         /// <summary>
@@ -347,9 +366,9 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="Get24HPricesListAsync"/> method
+        /// Get data regarding the last 24 hours for all symbols
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of data over the last 24 hours</returns>
         public CallResult<Binance24HPrice[]> Get24HPricesList() => Get24HPricesListAsync().Result;
 
         /// <summary>
@@ -362,9 +381,10 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="GetAllPricesAsync"/> method
+        /// Gets the price of a symbol
         /// </summary>
-        /// <returns></returns>
+        /// <param name="symbol">The symbol to get the price for</param>
+        /// <returns>Price of symbol</returns>
         public CallResult<BinancePrice> GetPrice(string symbol) => GetPriceAsync(symbol).Result;
 
         /// <summary>
@@ -383,9 +403,9 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="GetAllPricesAsync"/> method
+        /// Get a list of the prices of all symbols
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of prices</returns>
         public CallResult<BinancePrice[]> GetAllPrices() => GetAllPricesAsync().Result;
 
         /// <summary>
@@ -398,13 +418,13 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="GetBookPriceAsync"/> method
+        /// Gets the best price/quantity on the order book for a symbol.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of book prices</returns>
         public CallResult<BinanceBookPrice> GetBookPrice(string symbol) => GetBookPriceAsync(symbol).Result;
 
         /// <summary>
-        /// Gets the best price/qantity on the order book for a symbol.
+        /// Gets the best price/quantity on the order book for a symbol.
         /// </summary>
         /// <returns>List of book prices</returns>
         public async Task<CallResult<BinanceBookPrice>> GetBookPriceAsync(string symbol)
@@ -418,13 +438,13 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="GetAllBookPricesAsync"/> method
+        /// Gets the best price/quantity on the order book for all symbols.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of book prices</returns>
         public CallResult<BinanceBookPrice[]> GetAllBookPrices() => GetAllBookPricesAsync().Result;
 
         /// <summary>
-        /// Gets the best price/qantity on the order book for all symbols.
+        /// Gets the best price/quantity on the order book for all symbols.
         /// </summary>
         /// <returns>List of book prices</returns>
         public async Task<CallResult<BinanceBookPrice[]>> GetAllBookPricesAsync()
@@ -435,9 +455,11 @@ namespace Binance.Net
 
         #region signed
         /// <summary>
-        /// Synchronized version of the <see cref="GetOpenOrdersAsync"/> method
+        /// Gets a list of open orders
         /// </summary>
-        /// <returns></returns>
+        /// <param name="symbol">The symbol to get open orders for</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of open orders</returns>
         public CallResult<BinanceOrder[]> GetOpenOrders(string symbol = null, int? receiveWindow = null) => GetOpenOrdersAsync(symbol, receiveWindow).Result;
 
         /// <summary>
@@ -452,7 +474,7 @@ namespace Binance.Net
             if (!timestampResult.Success)
                 return new CallResult<BinanceOrder[]>(null, timestampResult.Error);
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new Dictionary<string, object>
             {
                 { "timestamp", GetTimestamp() }
             };
@@ -463,9 +485,13 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="GetAllOrdersAsync"/> method
+        /// Gets all orders for the provided symbol
         /// </summary>
-        /// <returns></returns>
+        /// <param name="symbol">The symbol to get orders for</param>
+        /// <param name="orderId">If set, only orders with an order id higher than the provided will be returned</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of orders</returns>
         public CallResult<BinanceOrder[]> GetAllOrders(string symbol, long? orderId = null, int? limit = null, int? receiveWindow = null) => GetAllOrdersAsync(symbol, orderId, limit, receiveWindow).Result;
 
         /// <summary>
@@ -495,9 +521,20 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="PlaceOrderAsync"/> method
+        /// Places a new order
         /// </summary>
-        /// <returns></returns>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="side">The order side (buy/sell)</param>
+        /// <param name="type">The order type</param>
+        /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
+        /// <param name="quantity">The amount of the symbol</param>
+        /// <param name="price">The price to use</param>
+        /// <param name="newClientOrderId">Unique id for order</param>
+        /// <param name="stopPrice">Used for stop orders</param>
+        /// <param name="icebergQty">Used for iceberg orders</param>
+        /// <param name="orderResponseType">The type of response to receive</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Id's for the placed order</returns>
         public CallResult<BinancePlacedOrder> PlaceOrder(
             string symbol,
             OrderSide side,
@@ -570,11 +607,22 @@ namespace Binance.Net
 
             return await ExecuteRequest<BinancePlacedOrder>(GetUrl(NewOrderEndpoint, Api, SignedVersion), PostMethod, parameters, true).ConfigureAwait(false);
         }
-        
+
         /// <summary>
-        /// Synchronized version of the <see cref="PlaceTestOrderAsync"/> method
+        /// Places a new test order. Test orders are not actually being executed and just test the functionality.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="side">The order side (buy/sell)</param>
+        /// <param name="type">The order type (limit/market)</param>
+        /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel)</param>
+        /// <param name="quantity">The amount of the symbol</param>
+        /// <param name="price">The price to use</param>
+        /// <param name="newClientOrderId">Unique id for order</param>
+        /// <param name="stopPrice">Used for stop orders</param>
+        /// <param name="icebergQty">User for iceberg orders</param>
+        /// <param name="orderResponseType">What kind of response should be returned</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Id's for the placed test order</returns>
         public CallResult<BinancePlacedOrder> PlaceTestOrder(string symbol,
             OrderSide side,
             OrderType type,
@@ -648,9 +696,13 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="QueryOrderAsync"/> method
+        /// Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="orderId">The order id of the order</param>
+        /// <param name="origClientOrderId">The client order id of the order</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>The specific order</returns>
         public CallResult<BinanceOrder> QueryOrder(string symbol, long? orderId = null, string origClientOrderId = null, long? receiveWindow = null) => QueryOrderAsync(symbol, orderId, origClientOrderId, receiveWindow).Result;
 
         /// <summary>
@@ -683,9 +735,14 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="CancelOrderAsync"/> method
+        /// Cancels a pending order
         /// </summary>
-        /// <returns></returns>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="orderId">The order id of the order</param>
+        /// <param name="origClientOrderId">The client order id of the order</param>
+        /// <param name="newClientOrderId">Unique identifier for this cancel</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Id's for canceled order</returns>
         public CallResult<BinanceCanceledOrder> CancelOrder(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null) => CancelOrderAsync(symbol, orderId, origClientOrderId, newClientOrderId, receiveWindow).Result;
 
         /// <summary>
@@ -717,9 +774,10 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="GetAccountInfoAsync"/> method
+        /// Gets account information, including balances
         /// </summary>
-        /// <returns></returns>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>The account information</returns>
         public CallResult<BinanceAccountInfo> GetAccountInfo(long? receiveWindow = null) => GetAccountInfoAsync(receiveWindow).Result;
 
         /// <summary>
@@ -743,9 +801,13 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="GetMyTradesAsync"/> method
+        /// Gets all user trades for provided symbol
         /// </summary>
-        /// <returns></returns>
+        /// <param name="symbol">Symbol to get trades for</param>
+        /// <param name="limit">The max number of results</param>
+        /// <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of trades</returns>
         public CallResult<BinanceTrade[]> GetMyTrades(string symbol, int? limit = null, long? fromId = null, long? receiveWindow = null) => GetMyTradesAsync(symbol, limit, fromId, receiveWindow).Result;
 
         /// <summary>
@@ -775,9 +837,15 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="WithdrawAsync"/> method
+        /// Withdraw assets from Binance to an address
         /// </summary>
-        /// <returns></returns>
+        /// <param name="asset">The asset to withdraw</param>
+        /// <param name="address">The address to send the funds to</param>
+        /// <param name="addressTag">Secondary address identifier for coins like XRP,XMR etc.</param>
+        /// <param name="amount">The amount to withdraw</param>
+        /// <param name="name">Name for the transaction</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Withdrawal confirmation</returns>
         public CallResult<BinanceWithdrawalPlaced> Withdraw(string asset, string address, decimal amount, string addressTag = null, string name = null, int? receiveWindow = null) => WithdrawAsync(asset, address,amount, addressTag, name, receiveWindow).Result;
 
         /// <summary>
@@ -817,9 +885,14 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="GetDepositHistoryAsync"/> method
+        /// Gets the deposit history
         /// </summary>
-        /// <returns></returns>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="status">Filter by status</param>
+        /// <param name="startTime">Filter start time from</param>
+        /// <param name="endTime">Filter end time till</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of deposits</returns>
         public CallResult<BinanceDepositList> GetDepositHistory(string asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null) => GetDepositHistoryAsync(asset, status, startTime, endTime, receiveWindow).Result;
 
         /// <summary>
@@ -857,9 +930,14 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="GetWithdrawHistoryAsync"/> method
+        /// Gets the withdrawal history
         /// </summary>
-        /// <returns></returns>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="status">Filter by status</param>
+        /// <param name="startTime">Filter start time from</param>
+        /// <param name="endTime">Filter end time till</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of withdrawals</returns>
         public CallResult<BinanceWithdrawalList> GetWithdrawHistory(string asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null) => GetWithdrawHistoryAsync(asset, status, startTime, endTime, receiveWindow).Result;
 
         /// <summary>
@@ -898,9 +976,11 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="GetDepositAddressAsync"/> method
+        /// Gets the deposit address for an asset
         /// </summary>
-        /// <returns></returns>
+        /// <param name="asset">Asset to get address for</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Deposit address</returns>
         public CallResult<BinanceDepositAddress> GetDepositAddress(string asset, int? receiveWindow = null) => GetDepositAddressAsync(asset, receiveWindow).Result;
 
         /// <summary>
@@ -926,9 +1006,11 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="GetWithdrawalFeeAsync"/> method
+        /// Gets the withdrawal fee for an asset
         /// </summary>
-        /// <returns></returns>
+        /// <param name="asset">Asset to get withdrawal fee for</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Withdrawal fee</returns>
         public CallResult<decimal> GetWithdrawalFee(string asset, int? receiveWindow = null) => GetWithdrawalFeeAsync(asset, receiveWindow).Result;
 
         /// <summary>
@@ -943,7 +1025,7 @@ namespace Binance.Net
             if (!timestampResult.Success)
                 return new CallResult<decimal>(0, timestampResult.Error);
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new Dictionary<string, object>
             {
                 { "asset", asset },
                 { "timestamp", GetTimestamp() }
@@ -960,13 +1042,14 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="GetAccountStatusAsync"/> method
+        /// Gets the status of the account associated with the api key/secret
         /// </summary>
-        /// <returns></returns>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Account status</returns>
         public CallResult<BinanceAccountStatus> GetAccountStatus(int? receiveWindow = null) => GetAccountStatusAsync(receiveWindow).Result;
 
         /// <summary>
-        /// Gets the status of the account associated with the apikey/secret
+        /// Gets the status of the account associated with the api key/secret
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Account status</returns>
@@ -992,9 +1075,9 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="GetSystemStatusAsync"/> method
+        /// Gets the status of the Binance platform
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The system status</returns>
         public CallResult<BinanceSystemStatus> GetSystemStatus() => GetSystemStatusAsync().Result;
 
         /// <summary>
@@ -1007,9 +1090,10 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="GetDustLog"/> method
+        /// Gets the history of dust conversions
         /// </summary>
-        /// <returns></returns>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>The history of dust conversions</returns>
         public CallResult<BinanceDustLog[]> GetDustLog(int? receiveWindow = null) => GetDustLogAsync(receiveWindow).Result;
 
         /// <summary>
@@ -1023,7 +1107,7 @@ namespace Binance.Net
             if (!timestampResult.Success)
                 return new CallResult<BinanceDustLog[]>(null, timestampResult.Error);
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new Dictionary<string, object>
             {
                 { "timestamp", GetTimestamp() }
             };
@@ -1039,9 +1123,9 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="StartUserStreamAsync"/> method
+        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToUserStream"/>. The stream will close after 60 minutes unless a keep alive is send.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Listen key</returns>
         public CallResult<string> StartUserStream() => StartUserStreamAsync().Result;
 
         /// <summary>
@@ -1059,7 +1143,7 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="KeepAliveUserStreamAsync"/> method
+        /// Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
         /// </summary>
         /// <returns></returns>
         public CallResult<object> KeepAliveUserStream(string listenKey) => KeepAliveUserStreamAsync(listenKey).Result;
@@ -1083,7 +1167,7 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Synchronized version of the <see cref="StopUserStreamAsync"/> method
+        /// Stops the current user stream
         /// </summary>
         /// <returns></returns>
         public CallResult<object> StopUserStream(string listenKey) => StopUserStreamAsync(listenKey).Result;
@@ -1199,9 +1283,9 @@ namespace Binance.Net
 
             if (symbolData.LotSizeFilter != null || (symbolData.MarketLotSizeFilter != null && type == OrderType.Market))
             {
-                var minQty = symbolData.LotSizeFilter.MinQuantity;
-                var maxQty = symbolData.LotSizeFilter.MaxQuantity;
-                var stepSize = symbolData.LotSizeFilter.StepSize;
+                var minQty = symbolData.LotSizeFilter?.MinQuantity;
+                var maxQty = symbolData.LotSizeFilter?.MaxQuantity;
+                var stepSize = symbolData.LotSizeFilter?.StepSize;
                 if(type == OrderType.Market && symbolData.MarketLotSizeFilter != null)
                 {
                     minQty = symbolData.MarketLotSizeFilter.MinQuantity;
@@ -1209,13 +1293,16 @@ namespace Binance.Net
                     stepSize = symbolData.MarketLotSizeFilter.StepSize;
                 }
 
-                outputQuantity = BinanceHelpers.ClampQuantity(minQty, maxQty, stepSize, quantity);
-                if (outputQuantity != quantity)
+                if (minQty.HasValue)
                 {
-                    if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
-                        return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: LotSize filter failed. Original quantity: {quantity}, Closest allowed: {outputQuantity}");
+                    outputQuantity = BinanceHelpers.ClampQuantity(minQty.Value, maxQty.Value, stepSize.Value, quantity);
+                    if (outputQuantity != quantity)
+                    {
+                        if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                            return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: LotSize filter failed. Original quantity: {quantity}, Closest allowed: {outputQuantity}");
 
-                    log.Write(LogVerbosity.Info, $"Quantity clamped from {quantity} to {outputQuantity}");
+                        log.Write(LogVerbosity.Info, $"Quantity clamped from {quantity} to {outputQuantity}");
+                    }
                 }
             }
             

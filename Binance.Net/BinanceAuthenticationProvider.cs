@@ -8,7 +8,6 @@ namespace Binance.Net
 {
     public class BinanceAuthenticationProvider: AuthenticationProvider
     {
-        private readonly object locker = new object();
         private readonly HMACSHA256 encryptor;
 
         public BinanceAuthenticationProvider(ApiCredentials credentials) : base(credentials)
@@ -28,9 +27,7 @@ namespace Binance.Net
 
         public override Dictionary<string, string> AddAuthenticationToHeaders(string uri, string method, Dictionary<string, object> parameters, bool signed)
         {
-            var result = new Dictionary<string, string>();
-            result.Add("X-MBX-APIKEY", Credentials.Key.GetString());
-            return result;
+            return new Dictionary<string, string> {{"X-MBX-APIKEY", Credentials.Key.GetString()}};
         }
         
         public override string Sign(string toSign)
