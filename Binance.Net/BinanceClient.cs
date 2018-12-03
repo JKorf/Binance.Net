@@ -1237,7 +1237,7 @@ namespace Binance.Net
 
         private Uri GetUrl(string endpoint, string api, string version)
         {
-            var result = $"{baseAddress}/{api}/v{version}/{endpoint}";
+            var result = $"{BaseAddress}/{api}/v{version}/{endpoint}";
             return new Uri(result);
         }
         

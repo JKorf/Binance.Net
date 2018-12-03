@@ -20,7 +20,7 @@ namespace Binance.Net
             if (!signed)
                 return parameters;
 
-            var query = parameters.CreateParamString(true).Substring(1);
+            var query = parameters.CreateParamString(true);
             parameters.Add("signature", ByteToString(encryptor.ComputeHash(Encoding.UTF8.GetBytes(query))));
             return parameters;
         }

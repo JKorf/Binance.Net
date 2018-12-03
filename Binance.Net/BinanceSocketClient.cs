@@ -367,7 +367,7 @@ namespace Binance.Net
             if (combined)
                 url = baseCombinedAddress + "stream?streams=" + url;
             else
-                url = baseAddress + url;
+                url = BaseAddress + url;
 
             var connectResult = await CreateAndConnectSocket(url, onData);
             if (!connectResult.Success)
