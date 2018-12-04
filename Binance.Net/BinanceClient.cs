@@ -10,6 +10,7 @@ using Binance.Net.Converters;
 using Binance.Net.Interfaces;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
 using Newtonsoft.Json.Linq;
@@ -805,10 +806,12 @@ namespace Binance.Net
         /// </summary>
         /// <param name="symbol">Symbol to get trades for</param>
         /// <param name="limit">The max number of results</param>
+        /// <param name="startTime">Orders newer than this date will be retrieved</param>
+        /// <param name="endTime">Orders older than this date will be retrieved</param>
         /// <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of trades</returns>
-        public CallResult<BinanceTrade[]> GetMyTrades(string symbol, int? limit = null, long? fromId = null, long? receiveWindow = null) => GetMyTradesAsync(symbol, limit, fromId, receiveWindow).Result;
+        public CallResult<BinanceTrade[]> GetMyTrades(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? receiveWindow = null) => GetMyTradesAsync(symbol, startTime, endTime, limit, fromId, receiveWindow).Result;
 
         /// <summary>
         /// Gets all user trades for provided symbol
@@ -816,9 +819,11 @@ namespace Binance.Net
         /// <param name="symbol">Symbol to get trades for</param>
         /// <param name="limit">The max number of results</param>
         /// <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
+        /// <param name="startTime">Orders newer than this date will be retrieved</param>
+        /// <param name="endTime">Orders older than this date will be retrieved</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of trades</returns>
-        public async Task<CallResult<BinanceTrade[]>> GetMyTradesAsync(string symbol, int? limit = null, long? fromId = null, long? receiveWindow = null)
+        public async Task<CallResult<BinanceTrade[]>> GetMyTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? receiveWindow = null)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
@@ -831,6 +836,8 @@ namespace Binance.Net
             };
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("fromId", fromId?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("startTime", startTime.HasValue ? JsonConvert.SerializeObject(startTime.Value, new TimestampConverter()) :null);
+            parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) :null);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await ExecuteRequest<BinanceTrade[]>(GetUrl(MyTradesEndpoint, Api, SignedVersion), GetMethod, parameters, true).ConfigureAwait(false);
