@@ -4,6 +4,7 @@ using System.Security.Authentication;
 using System.Text;
 using System.Threading.Tasks;
 using CryptoExchange.Net.Interfaces;
+using Newtonsoft.Json;
 using WebSocket4Net;
 
 namespace Binance.Net.UnitTests.TestImplementations
@@ -70,6 +71,11 @@ namespace Binance.Net.UnitTests.TestImplementations
         public void InvokeMessage(string data)
         {
             OnMessage?.Invoke(data);
+        }
+
+        public void InvokeMessage<T>(T data)
+        {
+            OnMessage?.Invoke(JsonConvert.SerializeObject(data));
         }
     }
 }

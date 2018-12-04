@@ -1205,34 +1205,15 @@ namespace Binance.Net
             postParametersPosition = PostParameters.InUri;
         }
 
-        protected override Error ParseErrorResponse(string error)
+        protected override Error ParseErrorResponse(JToken error)
         {
-            if(string.IsNullOrEmpty(error))
-                return new ServerError("Couldn't parse Binance error: no error message provided by server");
+            if (error["msg"] == null && error["code"] == null)
+                return new ServerError(error.ToString());
 
-            try
-            {
-                var obj = JObject.Parse(error);
-                if (!obj.ContainsKey("msg") && !obj.ContainsKey("code"))
-                    return new ServerError(error);
+            if (error["msg"] != null && error["code"] == null)
+                return new ServerError((string)error["msg"]);
 
-                if (obj.ContainsKey("msg") && !obj.ContainsKey("code"))
-                    return new ServerError((string) obj["msg"]);
-
-                return new ServerError((int) obj["code"], (string) obj["msg"]);
-            }
-            catch (JsonReaderException jre)
-            {
-                var info = $"Couldn't parse Binance error. Deserialize JsonReaderException: {jre.Message}, Path: {jre.Path}, LineNumber: {jre.LineNumber}, LinePosition: {jre.LinePosition}. Received data: {error}";
-                log.Write(LogVerbosity.Error, info);
-                return new ServerError(info);
-            }
-            catch (JsonSerializationException jse)
-            {
-                var info = $"Couldn't parse Binance error. Deserialize JsonSerializationException: {jse.Message}. Received data: {error}";
-                log.Write(LogVerbosity.Error, info);
-                return new ServerError(info);
-            }
+            return new ServerError((int)error["code"], (string)error["msg"]);
         }
 
         private Uri GetUrl(string endpoint, string api, string version)
