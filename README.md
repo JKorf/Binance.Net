@@ -212,6 +212,12 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 4.0.0 - 05 dec 2018
+	* Updated to CryptoExchange.Net version 2
+		* Libraries now use the same standard functionalities
+		* Objects returned by socket subscriptions standardized across libraries
+	* Added start/endtime parameters to GetMyTrades
+
 * Version 3.3.0 - 15 nov 2018
 	* Updated to support latest Binance API update, including:
 		* Added RawRequest rate limit
