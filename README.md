@@ -154,40 +154,41 @@ using(var client = new BinanceSocketClient())
 
 **Handling socket events**
 
-Subscribing to a socket stream returns a BinanceStreamSubscription object. This object can be used to be notified when a socket closes or an error occures:
+Subscribing to a socket stream returns a UpdateSubscription object. This object can be used to be notified when a socket is disconnected or reconnected:
 ````C#
-var sub = client.SubscribeToAllSymbolTicker(data =>
+var subscriptionResult = client.SubscribeToAllSymbolTicker(data =>
 {
-	Console.WriteLine("Reveived list update");
+	Console.WriteLine("Received list update");
 });
 
-sub.Data.Closed += () =>
-{
-	Console.WriteLine("Socket closed");
-};
+if(subscriptionResult.Success){
+	sub.Data.Disconnected += () =>
+	{
+		Console.WriteLine("Socket disconnected");
+	};
 
-sub.Data.Error += (e) =>
-{
-	Console.WriteLine("Socket error " + e.Message);
-};
+	sub.Data.Reconnected += (e) =>
+	{
+		Console.WriteLine("Socket reconnected after " + e);
+	};
+}
 ````
 
 **Unsubscribing from socket endpoints:**
 
-Sockets streams can be unsubscribed by using the `client.UnsubscribeFromStream` method in combination with the stream subscription received from subscribing:
+Sockets streams can be unsubscribed by using the `client.Unsubscribe` method in combination with the stream subscription received from subscribing:
 ```C#
-using(var client = new BinanceSocketClient())
-{
-	var successDepth = client.SubscribeToDepthStream("bnbbtc", (data) =>
-	{
-		// handle data
-	});
+var client = new BinanceSocketClient();
 
-	client.UnsubscribeFromStream(successDepth.Data);
-}
+var successDepth = client.SubscribeToDepthStream("bnbbtc", (data) =>
+{
+	// handle data
+});
+
+client.Unsubscribe(successDepth.Data);
 ```
 
-Additionaly, all sockets can be closed with the `UnsubscribeAllStreams` method. Beware that when a client is disposed the sockets are automatically disposed. This means that if the code is no longer in the using statement the eventhandler won't fire anymore. To prevent this from happening make sure the code doesn't leave the using statement or don't use the socket client in a using statement:
+Additionaly, all sockets can be closed with the `UnsubscribeAll` method. Beware that when a client is disposed the sockets are automatically disposed. This means that if the code is no longer in the using statement the eventhandler won't fire anymore. To prevent this from happening make sure the code doesn't leave the using statement or don't use the socket client in a using statement:
 ```C#
 // Doesn't leave the using block
 using(var client = new BinanceSocketClient())
