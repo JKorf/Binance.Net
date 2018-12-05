@@ -30,6 +30,7 @@ namespace Binance.Net.UnitTests.TestImplementations
         public bool PingConnection { get; set; }
         public TimeSpan PingInterval { get; set; }
         public SslProtocols SSLProtocols { get; set; }
+        public TimeSpan Timeout { get; set; }
 
         public Task<bool> Connect()
         {
