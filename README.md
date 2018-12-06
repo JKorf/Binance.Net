@@ -213,6 +213,11 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 4.0.1 - 06 dec 2018
+	* Fix for freezes if called from UI thread
+	* Fixed AutoComply trade rules behavior
+	* Fixed IDisposable interface
+
 * Version 4.0.0 - 05 dec 2018
 	* Updated to CryptoExchange.Net version 2
 		* Libraries now use the same standard functionalities
