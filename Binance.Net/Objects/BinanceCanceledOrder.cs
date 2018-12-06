@@ -1,7 +1,5 @@
 ﻿using Binance.Net.Converters;
-using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
-using System;
 
 namespace Binance.Net.Objects
 {
@@ -28,9 +26,9 @@ namespace Binance.Net.Objects
         /// </summary>
         public string ClientOrderId { get; set; }
         
-        /// <summary>
-        /// The time of the cancelation
-        /// </summary>
+        ///// <summary>
+        ///// The time of the cancellation
+        ///// </summary>
         //[JsonConverter(typeof(TimestampConverter))]
         //public DateTime TransactTime { get; set; }  NOTE: mentioned in documentation but not returned by API
 

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Binance.Net.Objects
 {
     /// <summary>
-    /// A filter for order placed on a symbol. Can be either a <see cref="BinanceSymbolPriceFilter"/>, <see cref="BinanceSymbolLotSizeFilter"/>, <see cref="BinanceSymbolMinNotionalFilter"/>, <see cref="BinanceSymbolMaxAlgoritmicalOrdersFilter"/> or <see cref="BinanceSymbolIcebergPartsFilter"/>
+    /// A filter for order placed on a symbol. Can be either a <see cref="BinanceSymbolPriceFilter"/>, <see cref="BinanceSymbolLotSizeFilter"/>, <see cref="BinanceSymbolMinNotionalFilter"/>, <see cref="BinanceSymbolMaxAlgorithmicOrdersFilter"/> or <see cref="BinanceSymbolIcebergPartsFilter"/>
     /// </summary>
     [JsonConverter(typeof(SymbolFilterConverter))]
     public class BinanceSymbolFilter
@@ -87,7 +87,7 @@ namespace Binance.Net.Objects
         public decimal MinNotional { get; set; }
 
         /// <summary>
-        /// Wether or not this filter is applied to market orders. If so the average trade price is used.
+        /// Whether or not this filter is applied to market orders. If so the average trade price is used.
         /// </summary>
         public bool ApplyToMarketOrders { get; set; }
 
@@ -113,12 +113,12 @@ namespace Binance.Net.Objects
         public int MaxNumberIcebergOrders { get; set; }
     }
 
-    public class BinanceSymbolMaxAlgoritmicalOrdersFilter : BinanceSymbolFilter
+    public class BinanceSymbolMaxAlgorithmicOrdersFilter : BinanceSymbolFilter
     {
         /// <summary>
-        /// The max number of algoritmical orders for this symbol
+        /// The max number of Algorithmic orders for this symbol
         /// </summary>
-        public int MaxNumberAlgoritmicalOrders { get; set; }
+        public int MaxNumberAlgorithmicOrders { get; set; }
     }
 
     public class BinanceSymbolIcebergPartsFilter : BinanceSymbolFilter

@@ -9,7 +9,7 @@
 
         public static BinanceTradeRuleResult CreatePassed(decimal quantity, decimal? price)
         {
-            return new BinanceTradeRuleResult()
+            return new BinanceTradeRuleResult
             {
                 Passed = true,
                 Quantity = quantity,
@@ -19,7 +19,7 @@
 
         public static BinanceTradeRuleResult CreateFailed(string message)
         {
-            return new BinanceTradeRuleResult()
+            return new BinanceTradeRuleResult
             {
                 Passed = false,
                 ErrorMessage = message

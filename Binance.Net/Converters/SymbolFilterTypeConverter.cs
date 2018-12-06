@@ -9,7 +9,7 @@ namespace Binance.Net.Converters
         public SymbolFilterTypeConverter(): this(true) { }
         public SymbolFilterTypeConverter(bool quotes) : base(quotes) { }
 
-        protected override Dictionary<SymbolFilterType, string> Mapping => new Dictionary<SymbolFilterType, string>()
+        protected override Dictionary<SymbolFilterType, string> Mapping => new Dictionary<SymbolFilterType, string>
         {
             { SymbolFilterType.LotSize, "LOT_SIZE" },
             { SymbolFilterType.MarketLotSize, "MARKET_LOT_SIZE" },
@@ -19,7 +19,7 @@ namespace Binance.Net.Converters
             { SymbolFilterType.IcebergParts, "ICEBERG_PARTS" },
             { SymbolFilterType.MaxNumberOrders, "MAX_NUM_ORDERS" },
             { SymbolFilterType.MaxNumberIcebergOrders, "MAX_NUM_ICEBERG_ORDERS" },
-            { SymbolFilterType.MaxNumberAlogitmicalOrders, "MAX_NUM_ALGO_ORDERS" },
+            { SymbolFilterType.MaxNumberAlgorithmicOrders, "MAX_NUM_ALGO_ORDERS" }
         };
     }
 }

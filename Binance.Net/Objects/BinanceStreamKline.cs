@@ -68,7 +68,7 @@ namespace Binance.Net.Objects
         [JsonProperty("c")]
         public decimal Close { get; set; }
         /// <summary>
-        /// The higest price of this candlestick
+        /// The highest price of this candlestick
         /// </summary>
         [JsonProperty("h")]
         public decimal High { get; set; }
@@ -114,7 +114,7 @@ namespace Binance.Net.Objects
         /// <returns></returns>
         public BinanceKline ToKline()
         {
-            return new BinanceKline()
+            return new BinanceKline
             {
                 Open = Open,
                 Close = Close,

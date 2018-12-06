@@ -9,7 +9,7 @@ namespace Binance.Net.Converters
         public OrderRejectReasonConverter(): this(true) { }
         public OrderRejectReasonConverter(bool quotes) : base(quotes) { }
 
-        protected override Dictionary<OrderRejectReason, string> Mapping => new Dictionary<OrderRejectReason, string>()
+        protected override Dictionary<OrderRejectReason, string> Mapping => new Dictionary<OrderRejectReason, string>
         {
             { OrderRejectReason.None, "NONE" },
             { OrderRejectReason.UnknownInstrument, "UNKNOWN_INSTRUMENT" },

@@ -14,7 +14,7 @@ namespace Binance.Net.Converters
         {
         }
 
-        protected override Dictionary<SystemStatus, string> Mapping => new Dictionary<SystemStatus, string>()
+        protected override Dictionary<SystemStatus, string> Mapping => new Dictionary<SystemStatus, string>
         {
             {SystemStatus.Normal, "0"},
             {SystemStatus.Maintenance, "1"}

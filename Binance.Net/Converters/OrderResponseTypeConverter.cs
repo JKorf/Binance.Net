@@ -9,7 +9,7 @@ namespace Binance.Net.Converters
         public OrderResponseTypeConverter(): this(true) { }
         public OrderResponseTypeConverter(bool quotes) : base(quotes) { }
 
-        protected override Dictionary<OrderResponseType, string> Mapping => new Dictionary<OrderResponseType, string>()
+        protected override Dictionary<OrderResponseType, string> Mapping => new Dictionary<OrderResponseType, string>
         {
             { OrderResponseType.Acknowledge, "ACK" },
             { OrderResponseType.Result, "RESULT" },

@@ -3,7 +3,7 @@
 namespace Binance.Net.Objects
 {
     /// <summary>
-    /// Information about the best price/quantity avaiable for a symbol
+    /// Information about the best price/quantity available for a symbol
     /// </summary>
     public class BinanceBookPrice
     {

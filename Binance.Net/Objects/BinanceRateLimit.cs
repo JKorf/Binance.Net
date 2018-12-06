@@ -6,7 +6,7 @@ namespace Binance.Net.Objects
     public class BinanceRateLimit
     {
         /// <summary>
-        /// The interval the ratelimit uses to count
+        /// The interval the rate limit uses to count
         /// </summary>
         public RateLimitInterval Interval { get; set; }
         /// <summary>

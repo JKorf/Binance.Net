@@ -9,7 +9,7 @@ namespace Binance.Net.Converters
         public SymbolStatusConverter(): this(true) { }
         public SymbolStatusConverter(bool quotes) : base(quotes) { }
 
-        protected override Dictionary<SymbolStatus, string> Mapping => new Dictionary<SymbolStatus, string>()
+        protected override Dictionary<SymbolStatus, string> Mapping => new Dictionary<SymbolStatus, string>
         {
             { SymbolStatus.AuctionMatch, "AUCTION_MATCH" },
             { SymbolStatus.Break, "BREAK" },
@@ -17,7 +17,7 @@ namespace Binance.Net.Converters
             { SymbolStatus.Halt, "HALT" },
             { SymbolStatus.PostTrading, "POST_TRADING" },
             { SymbolStatus.PreTrading, "PRE_TRADING" },
-            { SymbolStatus.Trading, "TRADING" },
+            { SymbolStatus.Trading, "TRADING" }
         };
     }
 }

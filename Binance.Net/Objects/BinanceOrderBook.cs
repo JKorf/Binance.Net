@@ -26,7 +26,7 @@ namespace Binance.Net.Objects
         private long LastUpdateIdStream { set => LastUpdateId = value; }
 
         /// <summary>
-        /// The id of this update, can be synced with <see cref="BinanceClient.GetOrderBook"/> to update the orderbook
+        /// The id of this update, can be synced with <see cref="BinanceClient.GetOrderBook"/> to update the order book
         /// </summary>
         [JsonProperty("U")]
         public long? FirstUpdateId { get; set; }
@@ -48,7 +48,7 @@ namespace Binance.Net.Objects
     }
 
     /// <summary>
-    /// An entry in the orderbook
+    /// An entry in the order book
     /// </summary>
     [JsonConverter(typeof(ArrayConverter))]
     public class BinanceOrderBookEntry

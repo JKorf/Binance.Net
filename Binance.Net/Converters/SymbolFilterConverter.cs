@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Diagnostics;
 
 namespace Binance.Net.Converters
 {
@@ -14,13 +15,13 @@ namespace Binance.Net.Converters
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            JObject obj = JObject.Load(reader);
-            SymbolFilterType type = new SymbolFilterTypeConverter(false).ReadString(obj["filterType"].ToString());
-            BinanceSymbolFilter result = null;
+            var obj = JObject.Load(reader);
+            var type = new SymbolFilterTypeConverter(false).ReadString(obj["filterType"].ToString());
+            BinanceSymbolFilter result;
             switch (type)
             {
                 case SymbolFilterType.LotSize:
-                    result = new BinanceSymbolLotSizeFilter()
+                    result = new BinanceSymbolLotSizeFilter
                     {
                         MaxQuantity = JsonConvert.DeserializeObject<decimal>(obj["maxQty"].ToString()),
                         MinQuantity = JsonConvert.DeserializeObject<decimal>(obj["minQty"].ToString()),
@@ -28,7 +29,7 @@ namespace Binance.Net.Converters
                     };
                     break;
                 case SymbolFilterType.MarketLotSize:
-                    result = new BinanceSymbolMarketLotSizeFilter()
+                    result = new BinanceSymbolMarketLotSizeFilter
                     {
                         MaxQuantity = JsonConvert.DeserializeObject<decimal>(obj["maxQty"].ToString()),
                         MinQuantity = JsonConvert.DeserializeObject<decimal>(obj["minQty"].ToString()),
@@ -36,7 +37,7 @@ namespace Binance.Net.Converters
                     };
                     break;
                 case SymbolFilterType.MinNotional:
-                    result = new BinanceSymbolMinNotionalFilter()
+                    result = new BinanceSymbolMinNotionalFilter
                     {
                         MinNotional = JsonConvert.DeserializeObject<decimal>(obj["minNotional"].ToString()),
                         ApplyToMarketOrders = (bool)obj["applyToMarket"],
@@ -44,47 +45,51 @@ namespace Binance.Net.Converters
                     };
                     break;
                 case SymbolFilterType.Price:
-                    result = new BinanceSymbolPriceFilter()
+                    result = new BinanceSymbolPriceFilter
                     {
                         MaxPrice = JsonConvert.DeserializeObject<decimal>(obj["maxPrice"].ToString()),
                         MinPrice = JsonConvert.DeserializeObject<decimal>(obj["minPrice"].ToString()),
-                        TickSize = JsonConvert.DeserializeObject<decimal>(obj["tickSize"].ToString()),
+                        TickSize = JsonConvert.DeserializeObject<decimal>(obj["tickSize"].ToString())
                     };
                     break;
-                case SymbolFilterType.MaxNumberAlogitmicalOrders:
-                    result = new BinanceSymbolMaxAlgoritmicalOrdersFilter()
+                case SymbolFilterType.MaxNumberAlgorithmicOrders:
+                    result = new BinanceSymbolMaxAlgorithmicOrdersFilter
                     {
-                        MaxNumberAlgoritmicalOrders = JsonConvert.DeserializeObject<int>(obj["maxNumAlgoOrders"].ToString())
+                        MaxNumberAlgorithmicOrders = JsonConvert.DeserializeObject<int>(obj["maxNumAlgoOrders"].ToString())
                     };
                     break;
 
                 case SymbolFilterType.MaxNumberIcebergOrders:
-                    result = new BinanceSymbolMaxIcebergOrdersFilter()
+                    result = new BinanceSymbolMaxIcebergOrdersFilter
                     {
                         MaxNumberIcebergOrders = JsonConvert.DeserializeObject<int>(obj["maxNumIcebergOrders"].ToString())
                     };
                     break;
 
                 case SymbolFilterType.MaxNumberOrders:
-                    result = new BinanceSymbolMaxOrdersFilter()
+                    result = new BinanceSymbolMaxOrdersFilter
                     {
                         MaxNumberOrders = JsonConvert.DeserializeObject<int>(obj["limit"].ToString())
                     };
                     break;
 
                 case SymbolFilterType.IcebergParts:
-                    result = new BinanceSymbolIcebergPartsFilter()
+                    result = new BinanceSymbolIcebergPartsFilter
                     {
                         Limit = JsonConvert.DeserializeObject<int>(obj["limit"].ToString())
                     };
                     break;
                 case SymbolFilterType.PricePercent:
-                    result = new BinanceSymbolPercentPriceFilter()
+                    result = new BinanceSymbolPercentPriceFilter
                     {
                         MultiplierUp = JsonConvert.DeserializeObject<decimal>(obj["multiplierUp"].ToString()),
                         MultiplierDown = JsonConvert.DeserializeObject<decimal>(obj["multiplierDown"].ToString()),
-                        AveragePriceMinutes = JsonConvert.DeserializeObject<int>(obj["avgPriceMins"].ToString()),
+                        AveragePriceMinutes = JsonConvert.DeserializeObject<int>(obj["avgPriceMins"].ToString())
                     };
+                    break;
+                default:
+                    Debug.WriteLine("Can't parse symbol filter of type: " + obj["filterType"]);
+                    result = new BinanceSymbolFilter();
                     break;
             }
             result.FilterType = type;

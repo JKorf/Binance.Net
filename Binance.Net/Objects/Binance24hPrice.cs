@@ -14,7 +14,7 @@ namespace Binance.Net.Objects
         /// </summary>
         public string Symbol { get; set; }
         /// <summary>
-        /// The actuals price change in the last 24 hours
+        /// The actual price change in the last 24 hours
         /// </summary>
         public decimal PriceChange { get; set; }
         /// <summary>

@@ -17,8 +17,8 @@ namespace Binance.Net.Objects
 
     public class BinanceDustLog
     {
-        [JsonProperty("tranfered_total")]
-        public decimal TransferedTotal { get; set; }
+        [JsonProperty("transfered_total")]
+        public decimal TransferredTotal { get; set; }
         [JsonProperty("service_charge_total")]
         public decimal ServiceChargeTotal { get; set; }
         [JsonProperty("tran_id")]
@@ -42,7 +42,7 @@ namespace Binance.Net.Objects
         [JsonProperty("operateTime")]
         public DateTime OperateTime { get; set; }
         [JsonProperty("transferedAmount")]
-        public decimal TransferedAmount { get; set; }
+        public decimal TransferredAmount { get; set; }
         [JsonProperty("fromAsset")]
         public string FromAsset { get; set; }
     }

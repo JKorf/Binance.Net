@@ -9,11 +9,11 @@ namespace Binance.Net.Converters
         public RateLimitConverter() : this(true) { }
         public RateLimitConverter(bool quotes) : base(quotes) { }
 
-        protected override Dictionary<RateLimitType, string> Mapping => new Dictionary<RateLimitType, string>()
+        protected override Dictionary<RateLimitType, string> Mapping => new Dictionary<RateLimitType, string>
         {
             { RateLimitType.Orders, "ORDERS" },
             { RateLimitType.RequestWeight, "REQUEST_WEIGHT" },
-            { RateLimitType.RawRequests, "RAW_REQUEST" },
+            { RateLimitType.RawRequests, "RAW_REQUEST" }
         };
     }
 }

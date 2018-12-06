@@ -42,7 +42,7 @@ namespace Binance.Net.Objects
         [JsonProperty("Q")]
         public decimal CloseTradesQuantity { get; set; }
         /// <summary>
-        /// The best bid price in the orderbook
+        /// The best bid price in the order book
         /// </summary>
         [JsonProperty("b")]
         public decimal BestBidPrice { get; set; }
@@ -52,7 +52,7 @@ namespace Binance.Net.Objects
         [JsonProperty("B")]
         public decimal BestBidQuantity { get; set; }
         /// <summary>
-        /// The best ask price in the orderbook
+        /// The best ask price in the order book
         /// </summary>
         [JsonProperty("a")]
         public decimal BestAskPrice { get; set; }

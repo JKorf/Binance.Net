@@ -179,14 +179,14 @@ namespace Binance.Net
                 if (!result.Success)
                     return new CallResult<DateTime>(default(DateTime), result.Error);
 
-                if (!timeSynced || resetAutoTimestamp)
-                {
-                    // Calculate time offset between local and server
-                    timeOffset = (result.Data.ServerTime - localTime).TotalMilliseconds;
-                    timeSynced = true;
-                    lastTimeSync = DateTime.UtcNow;
-                    log.Write(LogVerbosity.Info, $"Time offset set to {timeOffset}ms");
-                }
+                if (timeSynced && !resetAutoTimestamp)
+                    return new CallResult<DateTime>(result.Data.ServerTime, result.Error);
+
+                // Calculate time offset between local and server
+                timeOffset = (result.Data.ServerTime - localTime).TotalMilliseconds;
+                timeSynced = true;
+                lastTimeSync = DateTime.UtcNow;
+                log.Write(LogVerbosity.Info, $"Time offset set to {timeOffset}ms");
                 return new CallResult<DateTime>(result.Data.ServerTime, result.Error);
             }
         }
@@ -204,12 +204,12 @@ namespace Binance.Net
         public async Task<CallResult<BinanceExchangeInfo>> GetExchangeInfoAsync()
         {
             var exchangeInfoResult = await ExecuteRequest<BinanceExchangeInfo>(GetUrl(ExchangeInfoEndpoint, Api, PublicVersion)).ConfigureAwait(false);
-            if (exchangeInfoResult.Success)
-            {
-                exchangeInfo = exchangeInfoResult.Data;
-                lastExchangeInfoUpdate = DateTime.UtcNow;
-                log.Write(LogVerbosity.Info, "Trade rules updated");
-            }
+            if (!exchangeInfoResult.Success)
+                return exchangeInfoResult;
+
+            exchangeInfo = exchangeInfoResult.Data;
+            lastExchangeInfoUpdate = DateTime.UtcNow;
+            log.Write(LogVerbosity.Info, "Trade rules updated");
             return exchangeInfoResult;
         }
 
@@ -229,7 +229,7 @@ namespace Binance.Net
         /// <returns>The order book for the symbol</returns>
         public async Task<CallResult<BinanceOrderBook>> GetOrderBookAsync(string symbol, int? limit = null)
         {
-            var parameters = new Dictionary<string, object>() { { "symbol", symbol } };
+            var parameters = new Dictionary<string, object> { { "symbol", symbol } };
             parameters.AddOptionalParameter("limit", limit?.ToString());
             return await ExecuteRequest<BinanceOrderBook>(GetUrl(OrderBookEndpoint, Api, PublicVersion), GetMethod, parameters).ConfigureAwait(false);
         }
@@ -256,7 +256,7 @@ namespace Binance.Net
         /// <returns>The aggregated trades list for the symbol</returns>
         public async Task<CallResult<BinanceAggregatedTrades[]>> GetAggregatedTradesAsync(string symbol, int? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null)
         {
-            var parameters = new Dictionary<string, object>() { { "symbol", symbol } };
+            var parameters = new Dictionary<string, object> { { "symbol", symbol } };
             parameters.AddOptionalParameter("fromId", fromId?.ToString());
             parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString() : null);
             parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
@@ -281,7 +281,7 @@ namespace Binance.Net
         /// <returns>List of recent trades</returns>
         public async Task<CallResult<BinanceRecentTrade[]>> GetRecentTradesAsync(string symbol, int? limit = null)
         {
-            var parameters = new Dictionary<string, object>() { { "symbol", symbol } };
+            var parameters = new Dictionary<string, object> { { "symbol", symbol } };
             parameters.AddOptionalParameter("limit", limit?.ToString());
             return await ExecuteRequest<BinanceRecentTrade[]>(GetUrl(RecentTradesEndpoint, Api, PublicVersion), GetMethod, parameters).ConfigureAwait(false);
         }
@@ -304,7 +304,7 @@ namespace Binance.Net
         /// <returns>List of recent trades</returns>
         public async Task<CallResult<BinanceRecentTrade[]>> GetHistoricalTradesAsync(string symbol, int? limit = null, long? fromId = null)
         {
-            var parameters = new Dictionary<string, object>() { { "symbol", symbol } };
+            var parameters = new Dictionary<string, object> { { "symbol", symbol } };
             parameters.AddOptionalParameter("limit", limit?.ToString());
             parameters.AddOptionalParameter("fromId", fromId?.ToString());
 
@@ -333,9 +333,9 @@ namespace Binance.Net
         /// <returns>The candlestick data for the provided symbol</returns>
         public async Task<CallResult<BinanceKline[]>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null)
         {
-            var parameters = new Dictionary<string, object>() {
+            var parameters = new Dictionary<string, object> {
                 { "symbol", symbol },
-                { "interval", JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)) },
+                { "interval", JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)) }
             };
             parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString() : null);
             parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
@@ -358,7 +358,7 @@ namespace Binance.Net
         /// <returns>Data over the last 24 hours</returns>
         public async Task<CallResult<Binance24HPrice>> Get24HPriceAsync(string symbol)
         {
-            var parameters = new Dictionary<string, object>()
+            var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol }
             };
@@ -395,7 +395,7 @@ namespace Binance.Net
         /// <returns>Price of symbol</returns>
         public async Task<CallResult<BinancePrice>> GetPriceAsync(string symbol)
         {
-            var parameters = new Dictionary<string, object>()
+            var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol }
             };
@@ -430,7 +430,7 @@ namespace Binance.Net
         /// <returns>List of book prices</returns>
         public async Task<CallResult<BinanceBookPrice>> GetBookPriceAsync(string symbol)
         {
-            var parameters = new Dictionary<string, object>()
+            var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol }
             };
@@ -509,7 +509,7 @@ namespace Binance.Net
             if (!timestampResult.Success)
                 return new CallResult<BinanceOrder[]>(null, timestampResult.Error);
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
                 { "timestamp", GetTimestamp() }
@@ -590,7 +590,7 @@ namespace Binance.Net
             quantity = rulesCheck.Quantity;
             price = rulesCheck.Price;
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
                 { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
@@ -677,7 +677,7 @@ namespace Binance.Net
             quantity = rulesCheck.Quantity;
             price = rulesCheck.Price;
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
                 { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
@@ -723,7 +723,7 @@ namespace Binance.Net
             if (!timestampResult.Success)
                 return new CallResult<BinanceOrder>(null, timestampResult.Error);
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
                 { "timestamp", GetTimestamp() }
@@ -761,7 +761,7 @@ namespace Binance.Net
             if (!timestampResult.Success)
                 return new CallResult<BinanceCanceledOrder>(null, timestampResult.Error);
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
                 { "timestamp", GetTimestamp() }
@@ -792,7 +792,7 @@ namespace Binance.Net
             if (!timestampResult.Success)
                 return new CallResult<BinanceAccountInfo>(null, timestampResult.Error);
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new Dictionary<string, object>
             {
                 { "timestamp", GetTimestamp() }
             };
@@ -829,7 +829,7 @@ namespace Binance.Net
             if (!timestampResult.Success)
                 return new CallResult<BinanceTrade[]>(null, timestampResult.Error);
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
                 { "timestamp", GetTimestamp() }
@@ -871,7 +871,7 @@ namespace Binance.Net
             if (!timestampResult.Success)
                 return new CallResult<BinanceWithdrawalPlaced>(null, timestampResult.Error);
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new Dictionary<string, object>
             {
                 { "asset", asset },
                 { "address", address },
@@ -917,7 +917,7 @@ namespace Binance.Net
             if (!timestampResult.Success)
                 return new CallResult<BinanceDepositList>(null, timestampResult.Error);
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new Dictionary<string, object>
             {
                 { "timestamp", GetTimestamp() }
             };
@@ -962,7 +962,7 @@ namespace Binance.Net
             if (!timestampResult.Success)
                 return new CallResult<BinanceWithdrawalList>(null, timestampResult.Error);
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new Dictionary<string, object>
             {
                 { "timestamp", GetTimestamp() }
             };
@@ -1002,7 +1002,7 @@ namespace Binance.Net
             if (!timestampResult.Success)
                 return new CallResult<BinanceDepositAddress>(null, timestampResult.Error);
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new Dictionary<string, object>
             {
                 { "asset", asset },
                 { "timestamp", GetTimestamp() }
@@ -1043,9 +1043,7 @@ namespace Binance.Net
             if (!result.Success)
                 return new CallResult<decimal>(0, result.Error);
 
-            if (!result.Data.Success)
-                return new CallResult<decimal>(0, ParseErrorResponse(result.Data.Message));
-            return new CallResult<decimal>(result.Data.WithdrawFee, null);
+            return !result.Data.Success ? new CallResult<decimal>(0, ParseErrorResponse(result.Data.Message)) : new CallResult<decimal>(result.Data.WithdrawFee, null);
         }
 
         /// <summary>
@@ -1066,7 +1064,7 @@ namespace Binance.Net
             if (!timestampResult.Success)
                 return new CallResult<BinanceAccountStatus>(null, timestampResult.Error);
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new Dictionary<string, object>
             {
                 { "timestamp", GetTimestamp() }
             };
@@ -1076,9 +1074,7 @@ namespace Binance.Net
             if (!result.Success)
                 return new CallResult<BinanceAccountStatus>(null, result.Error);
 
-            if (!result.Data.Success)
-                return new CallResult<BinanceAccountStatus>(null, ParseErrorResponse(result.Data.Message));
-            return new CallResult<BinanceAccountStatus>(result.Data, null);
+            return !result.Data.Success ? new CallResult<BinanceAccountStatus>(null, ParseErrorResponse(result.Data.Message)) : new CallResult<BinanceAccountStatus>(result.Data, null);
         }
 
         /// <summary>
@@ -1124,9 +1120,7 @@ namespace Binance.Net
             if (!result.Success)
                 return new CallResult<BinanceDustLog[]>(null, result.Error);
 
-            if (!result.Data.Success)
-                return new CallResult<BinanceDustLog[]>(null, new ServerError("Unknown server error while requesting dust log"));
-            return new CallResult<BinanceDustLog[]>(result.Data.Results.Rows, null);
+            return !result.Data.Success ? new CallResult<BinanceDustLog[]>(null, new ServerError("Unknown server error while requesting dust log")) : new CallResult<BinanceDustLog[]>(result.Data.Results.Rows, null);
         }
 
         /// <summary>
@@ -1165,9 +1159,9 @@ namespace Binance.Net
             if (!timestampResult.Success)
                 return new CallResult<object>(null, timestampResult.Error);
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new Dictionary<string, object>
             {
-                { "listenKey", listenKey },
+                { "listenKey", listenKey }
             };
 
             return await ExecuteRequest<object>(GetUrl(KeepListenKeyAliveEndpoint, Api, UserDataStreamVersion), PutMethod, parameters).ConfigureAwait(false);
@@ -1189,9 +1183,9 @@ namespace Binance.Net
             if (!timestampResult.Success)
                 return new CallResult<object>(null, timestampResult.Error);
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new Dictionary<string, object>
             {
-                { "listenKey", listenKey },
+                { "listenKey", listenKey }
             };
             
             return await ExecuteRequest<object>(GetUrl(CloseListenKeyEndpoint, Api, UserDataStreamVersion), DeleteMethod, parameters).ConfigureAwait(false); 
@@ -1229,7 +1223,7 @@ namespace Binance.Net
             return new Uri(result);
         }
         
-        private long ToUnixTimestamp(DateTime time)
+        private static long ToUnixTimestamp(DateTime time)
         {
             return (long)(time - new DateTime(1970, 1, 1)).TotalMilliseconds;
         }
@@ -1242,15 +1236,15 @@ namespace Binance.Net
 
         private async Task<CallResult<DateTime>> CheckAutoTimestamp()
         {
-            if (autoTimestamp && (!timeSynced || (DateTime.UtcNow - lastTimeSync) > autoTimestampRecalculationInterval))
+            if (autoTimestamp && (!timeSynced || DateTime.UtcNow - lastTimeSync > autoTimestampRecalculationInterval))
                 return await GetServerTimeAsync(timeSynced).ConfigureAwait(false);
             return new CallResult<DateTime>(default(DateTime), null);
         }
 
         private async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal quantity, decimal? price, OrderType type)
         {
-            decimal outputQuantity = quantity;
-            decimal? outputPrice = price;
+            var outputQuantity = quantity;
+            var outputPrice = price;
 
             if (tradeRulesBehaviour == TradeRulesBehaviour.None)
                 return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice);
@@ -1261,7 +1255,7 @@ namespace Binance.Net
             if (exchangeInfo == null)
                 return BinanceTradeRuleResult.CreateFailed("Unable to retrieve trading rules, validation failed");
 
-            var symbolData = exchangeInfo.Symbols.SingleOrDefault(s => s.Name.ToLower() == symbol.ToLower());
+            var symbolData = exchangeInfo.Symbols.SingleOrDefault(s => string.Equals(s.Name, symbol, StringComparison.CurrentCultureIgnoreCase));
             if (symbolData == null)
                 return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Symbol {symbol} not found");
 
@@ -1293,27 +1287,27 @@ namespace Binance.Net
                     }
                 }
             }
-            
-            if(price != null)
-            {
-                if (symbolData.PriceFilter != null && symbolData.PriceFilter.MaxPrice != 0 && symbolData.PriceFilter.TickSize != 0)
-                {
-                    outputPrice = BinanceHelpers.ClampPrice(symbolData.PriceFilter.MinPrice, symbolData.PriceFilter.MaxPrice, symbolData.PriceFilter.TickSize, price.Value);
-                    if (outputPrice != price)
-                    {
-                        if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
-                            return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter failed. Original price: {price}, Closest allowed: {outputPrice}");
-                        log.Write(LogVerbosity.Info, $"price clamped from {price} to {outputPrice}");
-                    }
-                }
 
-                if (symbolData.MinNotionalFilter != null)
+            if (price == null)
+                return BinanceTradeRuleResult.CreatePassed(outputQuantity, null);
+
+            if (symbolData.PriceFilter != null && symbolData.PriceFilter.MaxPrice != 0 && symbolData.PriceFilter.TickSize != 0)
+            {
+                outputPrice = BinanceHelpers.ClampPrice(symbolData.PriceFilter.MinPrice, symbolData.PriceFilter.MaxPrice, symbolData.PriceFilter.TickSize, price.Value);
+                if (outputPrice != price)
                 {
-                    decimal notional = quantity * price.Value;
-                    if (notional < symbolData.MinNotionalFilter.MinNotional)
-                        return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: MinNotional filter failed. Order size: {notional}, minimal order size: {symbolData.MinNotionalFilter.MinNotional}");
-                }                
+                    if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                        return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter failed. Original price: {price}, Closest allowed: {outputPrice}");
+                    log.Write(LogVerbosity.Info, $"price clamped from {price} to {outputPrice}");
+                }
             }
+
+            if (symbolData.MinNotionalFilter == null)
+                return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice);
+
+            var notional = quantity * price.Value;
+            if (notional < symbolData.MinNotionalFilter.MinNotional)
+                return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: MinNotional filter failed. Order size: {notional}, minimal order size: {symbolData.MinNotionalFilter.MinNotional}");
 
             return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice);
         }

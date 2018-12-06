@@ -1,10 +1,5 @@
 ﻿namespace Binance.Net.Objects
 {
-    public enum SymbolType
-    {
-        Spot
-    }
-
     /// <summary>
     /// The status of an order
     /// </summary>
@@ -141,7 +136,7 @@
         FourHour,
         SixHour,
         EightHour,
-        TwelfHour,
+        TwelveHour,
         OneDay,
         ThreeDay,
         OneWeek,
@@ -172,7 +167,7 @@
         /// <summary>
         /// Withdrawal is processing
         /// </summary>
-        Proccessing,
+        Processing,
         /// <summary>
         /// Withdrawal has failed
         /// </summary>
@@ -208,6 +203,7 @@
 
     public enum SymbolFilterType
     {
+        Unknown,
         Price,
         PricePercent,
         LotSize,
@@ -215,7 +211,7 @@
         MinNotional,
         MaxNumberOrders,
         MaxNumberIcebergOrders,
-        MaxNumberAlogitmicalOrders,
+        MaxNumberAlgorithmicOrders,
         IcebergParts
     }
 
@@ -232,13 +228,7 @@
         ThrowError,
         AutoComply
     }
-
-    public enum ReconnectBehaviour
-    {
-        NoReconnect,
-        AutoReconnect
-    }
-
+    
     public enum SystemStatus
     {
         Normal,

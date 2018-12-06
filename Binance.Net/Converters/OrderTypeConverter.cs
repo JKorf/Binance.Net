@@ -20,7 +20,7 @@ namespace Binance.Net.Converters
             quotes = useQuotes;
         }
 
-        private readonly Dictionary<OrderType, string> values = new Dictionary<OrderType, string>()
+        private readonly Dictionary<OrderType, string> values = new Dictionary<OrderType, string>
         {
             { OrderType.Limit, "LIMIT" },
             { OrderType.Market, "MARKET" },
@@ -50,8 +50,8 @@ namespace Binance.Net.Converters
                 }
                 return result.ToArray();
             }
-            else
-                return values.Single(v => v.Value == (string)reader.Value).Key;
+
+            return values.Single(v => v.Value == (string)reader.Value).Key;
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

@@ -9,7 +9,7 @@ namespace Binance.Net.Converters
         public OrderStatusConverter(): this(true) { }
         public OrderStatusConverter(bool quotes) : base(quotes) { }
 
-        protected override Dictionary<OrderStatus, string> Mapping => new Dictionary<OrderStatus, string>()
+        protected override Dictionary<OrderStatus, string> Mapping => new Dictionary<OrderStatus, string>
         {
             { OrderStatus.New, "NEW" },
             { OrderStatus.PartiallyFilled, "PARTIALLY_FILLED" },

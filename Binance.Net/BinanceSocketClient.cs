@@ -336,26 +336,30 @@ namespace Binance.Net
             {
                 var token = JToken.Parse(data);
                 var evnt = (string)token["e"];
-                if (evnt == AccountUpdateEvent)
+                switch (evnt)
                 {
-                    var result = Deserialize<BinanceStreamAccountInfo>(token, false);
-                    if (result.Success)
-                        onAccountInfoMessage?.Invoke(result.Data);
-                    else
-                        log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account stream: " + result.Error);
-                }
-                else if (evnt == ExecutionUpdateEvent)
-                {
-                    log.Write(LogVerbosity.Debug, data);
-                    var result = Deserialize<BinanceStreamOrderUpdate>(token, false);
-                    if (result.Success)
-                        onOrderUpdateMessage?.Invoke(result.Data);
-                    else
-                        log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from order stream: " + result.Error);
-                }
-                else
-                {
-                    log.Write(LogVerbosity.Warning, $"Received unknown user data event {evnt}: " + data);
+                    case AccountUpdateEvent:
+                    {
+                        var result = Deserialize<BinanceStreamAccountInfo>(token, false);
+                        if (result.Success)
+                            onAccountInfoMessage?.Invoke(result.Data);
+                        else
+                            log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account stream: " + result.Error);
+                        break;
+                    }
+                    case ExecutionUpdateEvent:
+                    {
+                        log.Write(LogVerbosity.Debug, data);
+                        var result = Deserialize<BinanceStreamOrderUpdate>(token, false);
+                        if (result.Success)
+                            onOrderUpdateMessage?.Invoke(result.Data);
+                        else
+                            log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from order stream: " + result.Error);
+                        break;
+                    }
+                    default:
+                        log.Write(LogVerbosity.Warning, $"Received unknown user data event {evnt}: " + data);
+                        break;
                 }
             });
 
@@ -370,10 +374,7 @@ namespace Binance.Net
                 url = BaseAddress + url;
 
             var connectResult = await CreateAndConnectSocket(url, onData).ConfigureAwait(false);
-            if (!connectResult.Success)
-                return new CallResult<UpdateSubscription>(null, connectResult.Error);
-
-            return new CallResult<UpdateSubscription>(new UpdateSubscription(connectResult.Data), null);
+            return !connectResult.Success ? new CallResult<UpdateSubscription>(null, connectResult.Error) : new CallResult<UpdateSubscription>(new UpdateSubscription(connectResult.Data), null);
         }
         
         private async Task<CallResult<SocketSubscription>> CreateAndConnectSocket<T>(string url, Action<T> onMessage)
