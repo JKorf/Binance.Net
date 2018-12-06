@@ -369,7 +369,7 @@ namespace Binance.Net
             else
                 url = BaseAddress + url;
 
-            var connectResult = await CreateAndConnectSocket(url, onData);
+            var connectResult = await CreateAndConnectSocket(url, onData).ConfigureAwait(false);
             if (!connectResult.Success)
                 return new CallResult<UpdateSubscription>(null, connectResult.Error);
 
@@ -382,7 +382,7 @@ namespace Binance.Net
             var subscription = new SocketSubscription(socket);            
             subscription.MessageHandlers.Add(DataHandlerName, (subs, data) => DataHandler(data, onMessage));
 
-            var connectResult = await ConnectSocket(subscription);
+            var connectResult = await ConnectSocket(subscription).ConfigureAwait(false);
             if (!connectResult.Success)
                 return new CallResult<SocketSubscription>(null, connectResult.Error);
 

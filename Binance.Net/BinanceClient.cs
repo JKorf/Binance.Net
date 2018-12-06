@@ -1296,7 +1296,7 @@ namespace Binance.Net
             
             if(price != null)
             {
-                if (symbolData.PriceFilter != null)
+                if (symbolData.PriceFilter != null && symbolData.PriceFilter.MaxPrice != 0 && symbolData.PriceFilter.TickSize != 0)
                 {
                     outputPrice = BinanceHelpers.ClampPrice(symbolData.PriceFilter.MinPrice, symbolData.PriceFilter.MaxPrice, symbolData.PriceFilter.TickSize, price.Value);
                     if (outputPrice != price)
