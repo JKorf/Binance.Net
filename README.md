@@ -218,6 +218,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 4.0.2 - 10 dec 2018
+	* TradeRuleBehavior.AutoComply rounding fix
+
 * Version 4.0.1 - 06 dec 2018
 	* Fix for freezes if called from UI thread
 	* Fixed AutoComply trade rules behavior
