@@ -1291,14 +1291,29 @@ namespace Binance.Net
             if (price == null)
                 return BinanceTradeRuleResult.CreatePassed(outputQuantity, null);
 
-            if (symbolData.PriceFilter != null && symbolData.PriceFilter.MaxPrice != 0 && symbolData.PriceFilter.TickSize != 0)
+            if (symbolData.PriceFilter != null)
             {
-                outputPrice = BinanceHelpers.ClampPrice(symbolData.PriceFilter.MinPrice, symbolData.PriceFilter.MaxPrice, symbolData.PriceFilter.TickSize, price.Value);
-                if (outputPrice != price)
+                if (symbolData.PriceFilter.MaxPrice != 0 && symbolData.PriceFilter.MinPrice != 0)
                 {
-                    if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
-                        return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter failed. Original price: {price}, Closest allowed: {outputPrice}");
-                    log.Write(LogVerbosity.Info, $"price clamped from {price} to {outputPrice}");
+                    outputPrice = BinanceHelpers.ClampPrice(symbolData.PriceFilter.MinPrice, symbolData.PriceFilter.MaxPrice, price.Value);
+                    if (outputPrice != price)
+                    {
+                        if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                            return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter max/min failed. Original price: {price}, Closest allowed: {outputPrice}");
+                        log.Write(LogVerbosity.Info, $"price clamped from {price} to {outputPrice}");
+                    }
+                }
+
+                if (symbolData.PriceFilter.TickSize != 0)
+                {
+                    var beforePrice = outputPrice;
+                    outputPrice = BinanceHelpers.FloorPrice(symbolData.PriceFilter.TickSize, price.Value);
+                    if (outputPrice != beforePrice)
+                    {
+                        if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                            return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter tick failed. Original price: {price}, Closest allowed: {outputPrice}");
+                        log.Write(LogVerbosity.Info, $"price rounded from {beforePrice} to {outputPrice}");
+                    }
                 }
             }
 

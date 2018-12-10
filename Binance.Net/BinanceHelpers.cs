@@ -13,10 +13,15 @@ namespace Binance.Net
             return quantity;
         }
 
-        public static decimal ClampPrice(decimal minPrice, decimal maxPrice, decimal tickSize, decimal price)
+        public static decimal ClampPrice(decimal minPrice, decimal maxPrice, decimal price)
         {
             price = Math.Min(maxPrice, price);
             price = Math.Max(minPrice, price);
+            return price;
+        }
+
+        public static decimal FloorPrice(decimal tickSize, decimal price)
+        {
             price -= price % tickSize;
             price = Floor(price);
             return price;
