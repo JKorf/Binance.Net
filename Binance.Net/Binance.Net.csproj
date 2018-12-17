@@ -16,7 +16,7 @@
 	<PackageLicenseUrl>https://github.com/JKorf/Binance.Net/blob/master/LICENSE</PackageLicenseUrl>
 	<NeutralLanguage>en</NeutralLanguage>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	<PackageReleaseNotes>4.0.3 - TradeRuleBehavior.AutoComply rounding fix</PackageReleaseNotes>
+	<PackageReleaseNotes>4.0.3 - Fixed reconnecting sometimes throwing an error</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
