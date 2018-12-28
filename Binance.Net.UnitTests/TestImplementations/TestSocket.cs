@@ -31,6 +31,7 @@ namespace Binance.Net.UnitTests.TestImplementations
         public TimeSpan PingInterval { get; set; }
         public SslProtocols SSLProtocols { get; set; }
         public TimeSpan Timeout { get; set; }
+        public bool Reconnecting { get; set; }
 
         public Task<bool> Connect()
         {
@@ -82,6 +83,10 @@ namespace Binance.Net.UnitTests.TestImplementations
         public void InvokeMessage<T>(T data)
         {
             OnMessage?.Invoke(JsonConvert.SerializeObject(data));
+        }
+
+        public void SetEnabledSslProtocols(SslProtocols protocols)
+        {
         }
     }
 }
