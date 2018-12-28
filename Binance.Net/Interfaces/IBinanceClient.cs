@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Binance.Net.Objects;
 using CryptoExchange.Net.Interfaces;
@@ -536,16 +537,30 @@ namespace Binance.Net.Interfaces
         /// </summary>
         /// <param name="asset">Asset to get withdrawal fee for</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <returns>Withdrawal fee</returns>
-        CallResult<decimal> GetWithdrawalFee(string asset, int? receiveWindow = null);
+        /// <returns>Trade fees</returns>
+        CallResult<BinanceTradeFee[]> GetTradeFee(string asset = null, int? receiveWindow = null);
 
         /// <summary>
         /// Gets the withdrawal fee for an asset
         /// </summary>
         /// <param name="asset">Asset to get withdrawal fee for</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <returns>Withdrawal fee</returns>
-        Task<CallResult<decimal>> GetWithdrawalFeeAsync(string asset, int? receiveWindow = null);
+        /// <returns>Trade fees</returns>
+        Task<CallResult<BinanceTradeFee[]>> GetTradeFeeAsync(string asset = null, int? receiveWindow = null);
+
+        /// <summary>
+        /// Gets the withdraw/deposit details for an asset
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Asset details</returns>
+        CallResult<Dictionary<string, BinanceAssetDetails>> GetAssetDetails(int? receiveWindow = null);
+
+        /// <summary>
+        /// Gets the withdraw/deposit details for an asset
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Asset detail</returns>
+        Task<CallResult<Dictionary<string, BinanceAssetDetails>>> GetAssetDetailsAsync(int? receiveWindow = null);
 
         /// <summary>
         /// Gets the status of the account associated with the api key/secret

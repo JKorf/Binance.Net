@@ -89,8 +89,9 @@ namespace Binance.Net
         private const string DepositHistoryEndpoint = "depositHistory.html";
         private const string WithdrawHistoryEndpoint = "withdrawHistory.html";
         private const string DepositAddressEndpoint = "depositAddress.html";
-        private const string WithdrawalFeeEndpoint = "withdrawFee.html";
 
+        private const string TradeFeeEndpoint = "tradeFee.html";
+        private const string AssetDetailsEndpoint = "assetDetail.html";
         private const string AccountStatusEndpoint = "accountStatus.html";
         private const string SystemStatusEndpoint = "systemStatus.html";
         private const string DustLogEndpoint = "userAssetDribbletLog.html";
@@ -1013,37 +1014,68 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Gets the withdrawal fee for an asset
+        /// Gets the withdrawal fee for an symbol
         /// </summary>
-        /// <param name="asset">Asset to get withdrawal fee for</param>
+        /// <param name="symbol">Symbol to get withdrawal fee for</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <returns>Withdrawal fee</returns>
-        public CallResult<decimal> GetWithdrawalFee(string asset, int? receiveWindow = null) => GetWithdrawalFeeAsync(asset, receiveWindow).Result;
+        /// <returns>Trade fees</returns>
+        public CallResult<BinanceTradeFee[]> GetTradeFee(string symbol = null, int? receiveWindow = null) => GetTradeFeeAsync(symbol, receiveWindow).Result;
 
         /// <summary>
-        /// Gets the withdrawal fee for an asset
+        /// Gets the trade fee for a symbol
         /// </summary>
-        /// <param name="asset">Asset to get withdrawal fee for</param>
+        /// <param name="symbol">Symbol to get withdrawal fee for</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <returns>Withdrawal fee</returns>
-        public async Task<CallResult<decimal>> GetWithdrawalFeeAsync(string asset, int? receiveWindow = null)
+        /// <returns>Trade fees</returns>
+        public async Task<CallResult<BinanceTradeFee[]>> GetTradeFeeAsync(string symbol = null, int? receiveWindow = null)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new CallResult<decimal>(0, timestampResult.Error);
+                return new CallResult<BinanceTradeFee[]>(null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
-                { "asset", asset },
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("symbol", symbol);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await ExecuteRequest<BinanceTradeFeeWrapper>(GetUrl(TradeFeeEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
+            if (!result.Success)
+                return new CallResult<BinanceTradeFee[]>(null, result.Error);
+
+            return !result.Data.Success ? new CallResult<BinanceTradeFee[]>(null, ParseErrorResponse(result.Data.Message)) : new CallResult<BinanceTradeFee[]>(result.Data.Data, null);
+        }
+
+        /// <summary>
+        /// Gets the withdraw/deposit details for an asset
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Asset detail</returns>
+        public CallResult<Dictionary<string, BinanceAssetDetails>> GetAssetDetails(int? receiveWindow = null) => GetAssetDetailsAsync(receiveWindow).Result;
+
+        /// <summary>
+        /// Gets the withdraw/deposit details for an asset
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Asset detail</returns>
+        public async Task<CallResult<Dictionary<string, BinanceAssetDetails>>> GetAssetDetailsAsync(int? receiveWindow = null)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new CallResult<Dictionary<string, BinanceAssetDetails>>(null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
                 { "timestamp", GetTimestamp() }
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await ExecuteRequest<BinanceWithdrawalFee>(GetUrl(WithdrawalFeeEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
+            var result = await ExecuteRequest<BinanceAssetDetailsWrapper>(GetUrl(AssetDetailsEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success)
-                return new CallResult<decimal>(0, result.Error);
+                return new CallResult<Dictionary<string, BinanceAssetDetails>>(null, result.Error);
 
-            return !result.Data.Success ? new CallResult<decimal>(0, ParseErrorResponse(result.Data.Message)) : new CallResult<decimal>(result.Data.WithdrawFee, null);
+            return !result.Data.Success ? new CallResult<Dictionary<string, BinanceAssetDetails>>(null, ParseErrorResponse(JToken.Parse(result.Data.Message))) : new CallResult<Dictionary<string, BinanceAssetDetails>>(result.Data.Data, null);
         }
 
         /// <summary>
