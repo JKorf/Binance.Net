@@ -32,6 +32,7 @@ namespace Binance.Net.UnitTests.TestImplementations
         public SslProtocols SSLProtocols { get; set; }
         public TimeSpan Timeout { get; set; }
         public bool Reconnecting { get; set; }
+        public string Origin { get; set; }
 
         public Task<bool> Connect()
         {

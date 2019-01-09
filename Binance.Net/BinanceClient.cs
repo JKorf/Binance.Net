@@ -183,7 +183,27 @@ namespace Binance.Net
                 if (timeSynced && !resetAutoTimestamp)
                     return new CallResult<DateTime>(result.Data.ServerTime, result.Error);
 
+                if (TotalRequestsMade == 1)
+                {
+                    // If this was the first request make another one to calculate the offset since the first one can be slower
+                    localTime = DateTime.UtcNow;
+                    result = await ExecuteRequest<BinanceCheckTime>(url).ConfigureAwait(false);
+                    if (!result.Success)
+                        return new CallResult<DateTime>(default(DateTime), result.Error);
+                }
+
                 // Calculate time offset between local and server
+                var offset = (result.Data.ServerTime - localTime).TotalMilliseconds;
+                if (offset < 1000)
+                {
+                    // Small offset, probably mainly due to ping. Don't adjust time
+                    timeOffset = 0;
+                    timeSynced = true;
+                    lastTimeSync = DateTime.UtcNow;
+                    log.Write(LogVerbosity.Info, $"Time offset within 1 seconds ({offset}ms), no adjustment needed");
+                    return new CallResult<DateTime>(result.Data.ServerTime, result.Error);
+                }
+
                 timeOffset = (result.Data.ServerTime - localTime).TotalMilliseconds;
                 timeSynced = true;
                 lastTimeSync = DateTime.UtcNow;
