@@ -218,6 +218,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 4.0.6 - 10 jan 2019
+	* Fix for timestamp calculation
+
 * Version 4.0.5 - 09 jan 2019
 	* Adjusted AutoTimestamp calculation
 
