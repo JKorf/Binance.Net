@@ -23,7 +23,7 @@ namespace Binance.Net.UnitTests
             // arrange
             DateTime expected = new DateTime(1970, 1, 1).AddMilliseconds(milisecondsTime);
             var time = new BinanceCheckTime() { ServerTime = expected };
-            var client = TestHelpers.CreateResponseClient(JsonConvert.SerializeObject(time));
+            var client = TestHelpers.CreateResponseClient(JsonConvert.SerializeObject(time), new BinanceClientOptions(){ AutoTimestamp = false});
 
             // act
             var result = client.GetServerTime();
@@ -788,7 +788,7 @@ namespace Binance.Net.UnitTests
             client.GetOpenOrders();
 
             // assert
-            Mock.Get(client.RequestFactory).Verify(f => f.Create(It.Is<string>((msg) => msg.Contains("/time"))), Times.Once);
+            Mock.Get(client.RequestFactory).Verify(f => f.Create(It.Is<string>((msg) => msg.Contains("/time"))), Times.Exactly(2));
         }
 
         [TestCase()]
