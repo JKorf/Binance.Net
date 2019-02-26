@@ -194,13 +194,13 @@ namespace Binance.Net
 
                 // Calculate time offset between local and server
                 var offset = Math.Abs((result.Data.ServerTime - localTime).TotalMilliseconds);
-                if (offset < 1000)
+                if (offset < 500)
                 {
                     // Small offset, probably mainly due to ping. Don't adjust time
                     timeOffset = 0;
                     timeSynced = true;
                     lastTimeSync = DateTime.UtcNow;
-                    log.Write(LogVerbosity.Info, $"Time offset within 1 seconds ({offset}ms), no adjustment needed");
+                    log.Write(LogVerbosity.Info, $"Time offset within 0.5 seconds ({offset}ms), no adjustment needed");
                     return new CallResult<DateTime>(result.Data.ServerTime, result.Error);
                 }
 
