@@ -222,6 +222,11 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 4.0.8 - 27 feb 2019
+	* Added sub account support
+	* Added trading status call
+	* Changed CallResult to WebCallResult for REST requests to expose the response status
+
 * Version 4.0.7	- 01 feb 2019
 	* Added exception event to subscriptions
 	* General fixes
