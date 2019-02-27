@@ -13,7 +13,6 @@
     <PackageTags>Binance Binance.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
     <PackageProjectUrl>https://github.com/lucaswalter/Binance.Net/blob/master/Binance.Net/Binance.Net.csproj</PackageProjectUrl>
 	<PackageIconUrl>https://raw.githubusercontent.com/lucaswalter/Binance.Net/master/Resources/binance-coin.png</PackageIconUrl>
-	<PackageLicenseUrl>https://github.com/lucaswalter/Binance.Net/blob/master/LICENSE</PackageLicenseUrl>
 	<NeutralLanguage>en</NeutralLanguage>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<PackageReleaseNotes>1.0.0 - Adjusted AutoTimestamp Threshold</PackageReleaseNotes>

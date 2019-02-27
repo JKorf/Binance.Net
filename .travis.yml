@@ -11,7 +11,7 @@ script:
 deploy:
   skip_cleanup: true
   provider: script
-  script: dotnet nuget push src/Binance.Net/Binance.Net/bin/Release/SampleNetLib.*.nupkg --api-key $NUGET_API_KEY
+  script: dotnet nuget push src/Binance.Net/Binance.Net/bin/Release/Binance.Net.AutoTimestamp.*.nupkg --api-key $NUGET_API_KEY
   on:
     tags: true
     condition: $TRAVIS_TAG =~ ^(\d+\.)?(\d+\.)?(\*|\d+)$
