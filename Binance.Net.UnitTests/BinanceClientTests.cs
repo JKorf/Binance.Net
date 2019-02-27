@@ -718,6 +718,58 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
+        public void GetTradingStatus_Should_RespondWithSuccess()
+        {
+            // arrange
+            var status = new BinanceTradingStatusWrapper()
+            {
+                Success = true,
+                Message = "Test",
+                Status = new BinanceTradingStatus()
+                {
+                    IsLocked = false,
+                    PlannedRecoverTime = 0,
+                    UpdateTime = new DateTime(2019, 1, 1),
+                    TriggerConditions = new Dictionary<string, int>()
+                    {
+                        { "GCR", 100 },
+                        { "IFER", 150 }
+                    },
+                    Indicators = new Dictionary<string, List<BinanceIndicator>>()
+                    {
+                        { "BTCUSDT", new List<BinanceIndicator>
+                            { 
+                                new BinanceIndicator()
+                                {
+                                    Count = 1,
+                                    CurrentValue = 0.5m,
+                                    Indicator = "UFR",
+                                    TriggerValue = 0.95m
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            var client = TestHelpers.CreateResponseClient(status, new BinanceClientOptions()
+            {
+                ApiCredentials = new ApiCredentials("Test", "Test"),
+                AutoTimestamp = false
+            });
+
+            // act
+            var result = client.GetTradingStatus();
+
+            // assert
+            Assert.IsTrue(result.Success);
+            Assert.IsTrue(TestHelpers.AreEqual(status.Status, result.Data, "Indicators", "TriggerConditions"));
+            Assert.IsTrue(status.Status.TriggerConditions["GCR"] == result.Data.TriggerConditions["GCR"]);
+            Assert.IsTrue(status.Status.TriggerConditions["IFER"] == result.Data.TriggerConditions["IFER"]);
+            Assert.IsTrue(TestHelpers.AreEqual(status.Status.Indicators["BTCUSDT"][0], result.Data.Indicators["BTCUSDT"][0]));
+        }
+
+        [TestCase]
         public void StartUserStream_Should_RespondWithListenKey()
         {
             // arrange

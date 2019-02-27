@@ -33,25 +33,25 @@ namespace Binance.Net.Interfaces
         /// Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls
         /// </summary>
         /// <returns>Server time</returns>
-        CallResult<DateTime> GetServerTime(bool resetAutoTimestamp = false);
+        WebCallResult<DateTime> GetServerTime(bool resetAutoTimestamp = false);
 
         /// <summary>
         /// Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls
         /// </summary>
         /// <returns>Server time</returns>
-        Task<CallResult<DateTime>> GetServerTimeAsync(bool resetAutoTimestamp = false);
+        Task<WebCallResult<DateTime>> GetServerTimeAsync(bool resetAutoTimestamp = false);
 
         /// <summary>
         /// Get's information about the exchange including rate limits and symbol list
         /// </summary>
         /// <returns>Exchange info</returns>
-        CallResult<BinanceExchangeInfo> GetExchangeInfo();
+        WebCallResult<BinanceExchangeInfo> GetExchangeInfo();
 
         /// <summary>
         /// Get's information about the exchange including rate limits and symbol list
         /// </summary>
         /// <returns>Exchange info</returns>
-        Task<CallResult<BinanceExchangeInfo>> GetExchangeInfoAsync();
+        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync();
 
         /// <summary>
         /// Gets the order book for the provided symbol
@@ -59,7 +59,7 @@ namespace Binance.Net.Interfaces
         /// <param name="symbol">The symbol to get the order book for</param>
         /// <param name="limit">Max number of results</param>
         /// <returns>The order book for the symbol</returns>
-        CallResult<BinanceOrderBook> GetOrderBook(string symbol, int? limit = null);
+        WebCallResult<BinanceOrderBook> GetOrderBook(string symbol, int? limit = null);
 
         /// <summary>
         /// Gets the order book for the provided symbol
@@ -67,7 +67,7 @@ namespace Binance.Net.Interfaces
         /// <param name="symbol">The symbol to get the order book for</param>
         /// <param name="limit">Max number of results</param>
         /// <returns>The order book for the symbol</returns>
-        Task<CallResult<BinanceOrderBook>> GetOrderBookAsync(string symbol, int? limit = null);
+        Task<WebCallResult<BinanceOrderBook>> GetOrderBookAsync(string symbol, int? limit = null);
 
         /// <summary>
         /// Gets compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
@@ -78,7 +78,7 @@ namespace Binance.Net.Interfaces
         /// <param name="endTime">Time to stop getting trades from</param>
         /// <param name="limit">Max number of results</param>
         /// <returns>The aggregated trades list for the symbol</returns>
-        CallResult<BinanceAggregatedTrades[]> GetAggregatedTrades(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null);
+        WebCallResult<BinanceAggregatedTrades[]> GetAggregatedTrades(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null);
 
         /// <summary>
         /// Gets compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
@@ -89,7 +89,7 @@ namespace Binance.Net.Interfaces
         /// <param name="endTime">Time to stop getting trades from</param>
         /// <param name="limit">Max number of results</param>
         /// <returns>The aggregated trades list for the symbol</returns>
-        Task<CallResult<BinanceAggregatedTrades[]>> GetAggregatedTradesAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null);
+        Task<WebCallResult<BinanceAggregatedTrades[]>> GetAggregatedTradesAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null);
 
         /// <summary>
         /// Gets the recent trades for a symbol
@@ -97,7 +97,7 @@ namespace Binance.Net.Interfaces
         /// <param name="symbol">The symbol to get recent trades for</param>
         /// <param name="limit">Result limit</param>
         /// <returns>List of recent trades</returns>
-        CallResult<BinanceRecentTrade[]> GetRecentTrades(string symbol, int? limit = null);
+        WebCallResult<BinanceRecentTrade[]> GetRecentTrades(string symbol, int? limit = null);
 
         /// <summary>
         /// Gets the recent trades for a symbol
@@ -105,7 +105,7 @@ namespace Binance.Net.Interfaces
         /// <param name="symbol">The symbol to get recent trades for</param>
         /// <param name="limit">Result limit</param>
         /// <returns>List of recent trades</returns>
-        Task<CallResult<BinanceRecentTrade[]>> GetRecentTradesAsync(string symbol, int? limit = null);
+        Task<WebCallResult<BinanceRecentTrade[]>> GetRecentTradesAsync(string symbol, int? limit = null);
 
         /// <summary>
         /// Gets the historical  trades for a symbol
@@ -114,7 +114,7 @@ namespace Binance.Net.Interfaces
         /// <param name="limit">Result limit</param>
         /// <param name="fromId">From which trade id on results should be retrieved</param>
         /// <returns>List of recent trades</returns>
-        CallResult<BinanceRecentTrade[]> GetHistoricalTrades(string symbol, int? limit = null, long? fromId = null);
+        WebCallResult<BinanceRecentTrade[]> GetHistoricalTrades(string symbol, int? limit = null, long? fromId = null);
 
         /// <summary>
         /// Gets the historical  trades for a symbol
@@ -123,7 +123,7 @@ namespace Binance.Net.Interfaces
         /// <param name="limit">Result limit</param>
         /// <param name="fromId">From which trade id on results should be retrieved</param>
         /// <returns>List of recent trades</returns>
-        Task<CallResult<BinanceRecentTrade[]>> GetHistoricalTradesAsync(string symbol, int? limit = null, long? fromId = null);
+        Task<WebCallResult<BinanceRecentTrade[]>> GetHistoricalTradesAsync(string symbol, int? limit = null, long? fromId = null);
 
         /// <summary>
         /// Get candlestick data for the provided symbol
@@ -134,7 +134,7 @@ namespace Binance.Net.Interfaces
         /// <param name="endTime">End time to get candlestick data</param>
         /// <param name="limit">Max number of results</param>
         /// <returns>The candlestick data for the provided symbol</returns>
-        CallResult<BinanceKline[]> GetKlines(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null);
+        WebCallResult<BinanceKline[]> GetKlines(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null);
 
         /// <summary>
         /// Get candlestick data for the provided symbol
@@ -145,83 +145,83 @@ namespace Binance.Net.Interfaces
         /// <param name="endTime">End time to get candlestick data</param>
         /// <param name="limit">Max number of results</param>
         /// <returns>The candlestick data for the provided symbol</returns>
-        Task<CallResult<BinanceKline[]>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null);
+        Task<WebCallResult<BinanceKline[]>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null);
 
         /// <summary>
         /// Get data regarding the last 24 hours for the provided symbol
         /// </summary>
         /// <param name="symbol">The symbol to get the data for</param>
         /// <returns>Data over the last 24 hours</returns>
-        CallResult<Binance24HPrice> Get24HPrice(string symbol);
+        WebCallResult<Binance24HPrice> Get24HPrice(string symbol);
 
         /// <summary>
         /// Get data regarding the last 24 hours for the provided symbol
         /// </summary>
         /// <param name="symbol">The symbol to get the data for</param>
         /// <returns>Data over the last 24 hours</returns>
-        Task<CallResult<Binance24HPrice>> Get24HPriceAsync(string symbol);
+        Task<WebCallResult<Binance24HPrice>> Get24HPriceAsync(string symbol);
 
         /// <summary>
         /// Get data regarding the last 24 hours for all symbols
         /// </summary>
         /// <returns>List of data over the last 24 hours</returns>
-        CallResult<Binance24HPrice[]> Get24HPricesList();
+        WebCallResult<Binance24HPrice[]> Get24HPricesList();
 
         /// <summary>
         /// Get data regarding the last 24 hours for all symbols
         /// </summary>
         /// <returns>List of data over the last 24 hours</returns>
-        Task<CallResult<Binance24HPrice[]>> Get24HPricesListAsync();
+        Task<WebCallResult<Binance24HPrice[]>> Get24HPricesListAsync();
 
         /// <summary>
         /// Gets the price of a symbol
         /// </summary>
         /// <param name="symbol">The symbol to get the price for</param>
         /// <returns>Price of symbol</returns>
-        CallResult<BinancePrice> GetPrice(string symbol);
+        WebCallResult<BinancePrice> GetPrice(string symbol);
 
         /// <summary>
         /// Gets the price of a symbol
         /// </summary>
         /// <param name="symbol">The symbol to get the price for</param>
         /// <returns>Price of symbol</returns>
-        Task<CallResult<BinancePrice>> GetPriceAsync(string symbol);
+        Task<WebCallResult<BinancePrice>> GetPriceAsync(string symbol);
 
         /// <summary>
         /// Get a list of the prices of all symbols
         /// </summary>
         /// <returns>List of prices</returns>
-        CallResult<BinancePrice[]> GetAllPrices();
+        WebCallResult<BinancePrice[]> GetAllPrices();
 
         /// <summary>
         /// Get a list of the prices of all symbols
         /// </summary>
         /// <returns>List of prices</returns>
-        Task<CallResult<BinancePrice[]>> GetAllPricesAsync();
+        Task<WebCallResult<BinancePrice[]>> GetAllPricesAsync();
 
         /// <summary>
         /// Gets the best price/quantity on the order book for a symbol.
         /// </summary>
         /// <returns>List of book prices</returns>
-        CallResult<BinanceBookPrice> GetBookPrice(string symbol);
+        WebCallResult<BinanceBookPrice> GetBookPrice(string symbol);
 
         /// <summary>
         /// Gets the best price/quantity on the order book for a symbol.
         /// </summary>
         /// <returns>List of book prices</returns>
-        Task<CallResult<BinanceBookPrice>> GetBookPriceAsync(string symbol);
+        Task<WebCallResult<BinanceBookPrice>> GetBookPriceAsync(string symbol);
 
         /// <summary>
         /// Gets the best price/quantity on the order book for all symbols.
         /// </summary>
         /// <returns>List of book prices</returns>
-        CallResult<BinanceBookPrice[]> GetAllBookPrices();
+        WebCallResult<BinanceBookPrice[]> GetAllBookPrices();
 
         /// <summary>
         /// Gets the best price/quantity on the order book for all symbols.
         /// </summary>
         /// <returns>List of book prices</returns>
-        Task<CallResult<BinanceBookPrice[]>> GetAllBookPricesAsync();
+        Task<WebCallResult<BinanceBookPrice[]>> GetAllBookPricesAsync();
 
         /// <summary>
         /// Gets a list of open orders
@@ -229,7 +229,7 @@ namespace Binance.Net.Interfaces
         /// <param name="symbol">The symbol to get open orders for</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of open orders</returns>
-        CallResult<BinanceOrder[]> GetOpenOrders(string symbol = null, int? receiveWindow = null);
+        WebCallResult<BinanceOrder[]> GetOpenOrders(string symbol = null, int? receiveWindow = null);
 
         /// <summary>
         /// Gets a list of open orders
@@ -237,7 +237,7 @@ namespace Binance.Net.Interfaces
         /// <param name="symbol">The symbol to get open orders for</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of open orders</returns>
-        Task<CallResult<BinanceOrder[]>> GetOpenOrdersAsync(string symbol = null, int? receiveWindow = null);
+        Task<WebCallResult<BinanceOrder[]>> GetOpenOrdersAsync(string symbol = null, int? receiveWindow = null);
 
         /// <summary>
         /// Gets all orders for the provided symbol
@@ -247,7 +247,7 @@ namespace Binance.Net.Interfaces
         /// <param name="limit">Max number of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of orders</returns>
-        CallResult<BinanceOrder[]> GetAllOrders(string symbol, long? orderId = null, int? limit = null, int? receiveWindow = null);
+        WebCallResult<BinanceOrder[]> GetAllOrders(string symbol, long? orderId = null, int? limit = null, int? receiveWindow = null);
 
         /// <summary>
         /// Gets all orders for the provided symbol
@@ -257,7 +257,7 @@ namespace Binance.Net.Interfaces
         /// <param name="limit">Max number of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of orders</returns>
-        Task<CallResult<BinanceOrder[]>> GetAllOrdersAsync(string symbol, long? orderId = null, int? limit = null, int? receiveWindow = null);
+        Task<WebCallResult<BinanceOrder[]>> GetAllOrdersAsync(string symbol, long? orderId = null, int? limit = null, int? receiveWindow = null);
 
         /// <summary>
         /// Places a new order
@@ -274,7 +274,7 @@ namespace Binance.Net.Interfaces
         /// <param name="orderResponseType">The type of response to receive</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for the placed order</returns>
-        CallResult<BinancePlacedOrder> PlaceOrder(
+        WebCallResult<BinancePlacedOrder> PlaceOrder(
             string symbol,
             OrderSide side,
             OrderType type,
@@ -302,7 +302,7 @@ namespace Binance.Net.Interfaces
         /// <param name="orderResponseType">The type of response to receive</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for the placed order</returns>
-        Task<CallResult<BinancePlacedOrder>> PlaceOrderAsync(string symbol,
+        Task<WebCallResult<BinancePlacedOrder>> PlaceOrderAsync(string symbol,
             OrderSide side,
             OrderType type,
             decimal quantity,
@@ -329,7 +329,7 @@ namespace Binance.Net.Interfaces
         /// <param name="orderResponseType">What kind of response should be returned</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for the placed test order</returns>
-        CallResult<BinancePlacedOrder> PlaceTestOrder(string symbol,
+        WebCallResult<BinancePlacedOrder> PlaceTestOrder(string symbol,
             OrderSide side,
             OrderType type,
             decimal quantity,
@@ -356,7 +356,7 @@ namespace Binance.Net.Interfaces
         /// <param name="orderResponseType">What kind of response should be returned</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for the placed test order</returns>
-        Task<CallResult<BinancePlacedOrder>> PlaceTestOrderAsync(string symbol,
+        Task<WebCallResult<BinancePlacedOrder>> PlaceTestOrderAsync(string symbol,
             OrderSide side,
             OrderType type,
             decimal quantity,
@@ -376,7 +376,7 @@ namespace Binance.Net.Interfaces
         /// <param name="origClientOrderId">The client order id of the order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>The specific order</returns>
-        CallResult<BinanceOrder> QueryOrder(string symbol, long? orderId = null, string origClientOrderId = null, long? receiveWindow = null);
+        WebCallResult<BinanceOrder> QueryOrder(string symbol, long? orderId = null, string origClientOrderId = null, long? receiveWindow = null);
 
         /// <summary>
         /// Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
@@ -386,7 +386,7 @@ namespace Binance.Net.Interfaces
         /// <param name="origClientOrderId">The client order id of the order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>The specific order</returns>
-        Task<CallResult<BinanceOrder>> QueryOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, long? receiveWindow = null);
+        Task<WebCallResult<BinanceOrder>> QueryOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, long? receiveWindow = null);
 
         /// <summary>
         /// Cancels a pending order
@@ -397,7 +397,7 @@ namespace Binance.Net.Interfaces
         /// <param name="newClientOrderId">Unique identifier for this cancel</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for canceled order</returns>
-        CallResult<BinanceCanceledOrder> CancelOrder(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null);
+        WebCallResult<BinanceCanceledOrder> CancelOrder(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null);
 
         /// <summary>
         /// Cancels a pending order
@@ -408,21 +408,21 @@ namespace Binance.Net.Interfaces
         /// <param name="newClientOrderId">Unique identifier for this cancel</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for canceled order</returns>
-        Task<CallResult<BinanceCanceledOrder>> CancelOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null);
+        Task<WebCallResult<BinanceCanceledOrder>> CancelOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null);
 
         /// <summary>
         /// Gets account information, including balances
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>The account information</returns>
-        CallResult<BinanceAccountInfo> GetAccountInfo(long? receiveWindow = null);
+        WebCallResult<BinanceAccountInfo> GetAccountInfo(long? receiveWindow = null);
 
         /// <summary>
         /// Gets account information, including balances
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>The account information</returns>
-        Task<CallResult<BinanceAccountInfo>> GetAccountInfoAsync(long? receiveWindow = null);
+        Task<WebCallResult<BinanceAccountInfo>> GetAccountInfoAsync(long? receiveWindow = null);
 
         /// <summary>
         /// Gets all user trades for provided symbol
@@ -434,19 +434,19 @@ namespace Binance.Net.Interfaces
         /// <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of trades</returns>
-        CallResult<BinanceTrade[]> GetMyTrades(string symbol, DateTime? startTime = null, DateTime? endTime = null, int ? limit = null, long? fromId = null, long? receiveWindow = null);
+        WebCallResult<BinanceTrade[]> GetMyTrades(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? receiveWindow = null);
 
         /// <summary>
         /// Gets all user trades for provided symbol
         /// </summary>
         /// <param name="symbol">Symbol to get trades for</param>
         /// <param name="limit">The max number of results</param>
+        /// <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
         /// <param name="startTime">Orders newer than this date will be retrieved</param>
         /// <param name="endTime">Orders older than this date will be retrieved</param>
-        /// <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of trades</returns>
-        Task<CallResult<BinanceTrade[]>> GetMyTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int ? limit = null, long? fromId = null, long? receiveWindow = null);
+        Task<WebCallResult<BinanceTrade[]>> GetMyTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? receiveWindow = null);
 
         /// <summary>
         /// Withdraw assets from Binance to an address
@@ -458,7 +458,7 @@ namespace Binance.Net.Interfaces
         /// <param name="name">Name for the transaction</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Withdrawal confirmation</returns>
-        CallResult<BinanceWithdrawalPlaced> Withdraw(string asset, string address, decimal amount, string addressTag = null, string name = null, int? receiveWindow = null);
+        WebCallResult<BinanceWithdrawalPlaced> Withdraw(string asset, string address, decimal amount, string addressTag = null, string name = null, int? receiveWindow = null);
 
         /// <summary>
         /// Withdraw assets from Binance to an address
@@ -470,7 +470,7 @@ namespace Binance.Net.Interfaces
         /// <param name="name">Name for the transaction</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Withdrawal confirmation</returns>
-        Task<CallResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, decimal amount, string addressTag = null, string name = null, int? receiveWindow = null);
+        Task<WebCallResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, decimal amount, string addressTag = null, string name = null, int? receiveWindow = null);
 
         /// <summary>
         /// Gets the deposit history
@@ -481,7 +481,7 @@ namespace Binance.Net.Interfaces
         /// <param name="endTime">Filter end time till</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of deposits</returns>
-        CallResult<BinanceDepositList> GetDepositHistory(string asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null);
+        WebCallResult<BinanceDepositList> GetDepositHistory(string asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null);
 
         /// <summary>
         /// Gets the deposit history
@@ -492,7 +492,7 @@ namespace Binance.Net.Interfaces
         /// <param name="endTime">Filter end time till</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of deposits</returns>
-        Task<CallResult<BinanceDepositList>> GetDepositHistoryAsync(string asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null);
+        Task<WebCallResult<BinanceDepositList>> GetDepositHistoryAsync(string asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null);
 
         /// <summary>
         /// Gets the withdrawal history
@@ -503,7 +503,7 @@ namespace Binance.Net.Interfaces
         /// <param name="endTime">Filter end time till</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of withdrawals</returns>
-        CallResult<BinanceWithdrawalList> GetWithdrawHistory(string asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null);
+        WebCallResult<BinanceWithdrawalList> GetWithdrawHistory(string asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null);
 
         /// <summary>
         /// Gets the withdrawal history
@@ -514,7 +514,7 @@ namespace Binance.Net.Interfaces
         /// <param name="endTime">Filter end time till</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of withdrawals</returns>
-        Task<CallResult<BinanceWithdrawalList>> GetWithdrawHistoryAsync(string asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null);
+        Task<WebCallResult<BinanceWithdrawalList>> GetWithdrawHistoryAsync(string asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null);
 
         /// <summary>
         /// Gets the deposit address for an asset
@@ -522,7 +522,7 @@ namespace Binance.Net.Interfaces
         /// <param name="asset">Asset to get address for</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Deposit address</returns>
-        CallResult<BinanceDepositAddress> GetDepositAddress(string asset, int? receiveWindow = null);
+        WebCallResult<BinanceDepositAddress> GetDepositAddress(string asset, int? receiveWindow = null);
 
         /// <summary>
         /// Gets the deposit address for an asset
@@ -530,118 +530,205 @@ namespace Binance.Net.Interfaces
         /// <param name="asset">Asset to get address for</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Deposit address</returns>
-        Task<CallResult<BinanceDepositAddress>> GetDepositAddressAsync(string asset, int? receiveWindow = null);
+        Task<WebCallResult<BinanceDepositAddress>> GetDepositAddressAsync(string asset, int? receiveWindow = null);
 
         /// <summary>
-        /// Gets the withdrawal fee for an asset
+        /// Gets the withdrawal fee for an symbol
         /// </summary>
-        /// <param name="asset">Asset to get withdrawal fee for</param>
+        /// <param name="symbol">Symbol to get withdrawal fee for</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Trade fees</returns>
-        CallResult<BinanceTradeFee[]> GetTradeFee(string asset = null, int? receiveWindow = null);
+        WebCallResult<BinanceTradeFee[]> GetTradeFee(string symbol = null, int? receiveWindow = null);
 
         /// <summary>
-        /// Gets the withdrawal fee for an asset
+        /// Gets the trade fee for a symbol
         /// </summary>
-        /// <param name="asset">Asset to get withdrawal fee for</param>
+        /// <param name="symbol">Symbol to get withdrawal fee for</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Trade fees</returns>
-        Task<CallResult<BinanceTradeFee[]>> GetTradeFeeAsync(string asset = null, int? receiveWindow = null);
-
-        /// <summary>
-        /// Gets the withdraw/deposit details for an asset
-        /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <returns>Asset details</returns>
-        CallResult<Dictionary<string, BinanceAssetDetails>> GetAssetDetails(int? receiveWindow = null);
+        Task<WebCallResult<BinanceTradeFee[]>> GetTradeFeeAsync(string symbol = null, int? receiveWindow = null);
 
         /// <summary>
         /// Gets the withdraw/deposit details for an asset
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Asset detail</returns>
-        Task<CallResult<Dictionary<string, BinanceAssetDetails>>> GetAssetDetailsAsync(int? receiveWindow = null);
+        WebCallResult<Dictionary<string, BinanceAssetDetails>> GetAssetDetails(int? receiveWindow = null);
+
+        /// <summary>
+        /// Gets the withdraw/deposit details for an asset
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Asset detail</returns>
+        Task<WebCallResult<Dictionary<string, BinanceAssetDetails>>> GetAssetDetailsAsync(int? receiveWindow = null);
 
         /// <summary>
         /// Gets the status of the account associated with the api key/secret
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Account status</returns>
-        CallResult<BinanceAccountStatus> GetAccountStatus(int? receiveWindow = null);
+        WebCallResult<BinanceAccountStatus> GetAccountStatus(int? receiveWindow = null);
 
         /// <summary>
         /// Gets the status of the account associated with the api key/secret
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Account status</returns>
-        Task<CallResult<BinanceAccountStatus>> GetAccountStatusAsync(int? receiveWindow = null);
+        Task<WebCallResult<BinanceAccountStatus>> GetAccountStatusAsync(int? receiveWindow = null);
 
         /// <summary>
         /// Gets the status of the Binance platform
         /// </summary>
         /// <returns>The system status</returns>
-        CallResult<BinanceSystemStatus> GetSystemStatus();
+        WebCallResult<BinanceSystemStatus> GetSystemStatus();
 
         /// <summary>
         /// Gets the status of the Binance platform
         /// </summary>
         /// <returns>The system status</returns>
-        Task<CallResult<BinanceSystemStatus>> GetSystemStatusAsync();
+        Task<WebCallResult<BinanceSystemStatus>> GetSystemStatusAsync();
 
         /// <summary>
         /// Gets the history of dust conversions
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>The history of dust conversions</returns>
-        CallResult<BinanceDustLog[]> GetDustLog(int? receiveWindow = null);
+        WebCallResult<BinanceDustLog[]> GetDustLog(int? receiveWindow = null);
 
         /// <summary>
         /// Gets the history of dust conversions
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>The history of dust conversions</returns>
-        Task<CallResult<BinanceDustLog[]>> GetDustLogAsync(int? receiveWindow = null);
+        Task<WebCallResult<BinanceDustLog[]>> GetDustLogAsync(int? receiveWindow = null);
+
+        /// <summary>
+        /// Gets a list of sub accounts associated with this master account
+        /// </summary>
+        /// <param name="email">Filter the list by email</param>
+        /// <param name="accountStatus">Filter the list by account status</param>
+        /// <param name="page">The page of the results</param>
+        /// <param name="limit">The max amount of results to return</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of sub accounts</returns>
+        WebCallResult<BinanceSubAccount[]> GetSubAccounts(string email = null, SubAccountStatus? accountStatus = null, int? page = null, int? limit = null, int? receiveWindow = null);
+
+        /// <summary>
+        /// Gets a list of sub accounts associated with this master account
+        /// </summary>
+        /// <param name="email">Filter the list by email</param>
+        /// <param name="accountStatus">Filter the list by account status</param>
+        /// <param name="page">The page of the results</param>
+        /// <param name="limit">The max amount of results to return</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of sub accounts</returns>
+        Task<WebCallResult<BinanceSubAccount[]>> GetSubAccountsAsync(string email = null, SubAccountStatus? accountStatus = null, int? page = null, int? limit = null, int? receiveWindow = null);
+
+        /// <summary>
+        /// Gets the history of sub account transfers
+        /// </summary>
+        /// <param name="email">Filter the history by email</param>
+        /// <param name="startTime">Filter the history by startTime</param>
+        /// <param name="endTime">Filter the history by endTime</param>
+        /// <param name="page">The page of the results</param>
+        /// <param name="limit">The max amount of results to return</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of transfers</returns>
+        WebCallResult<BinanceSubAccountTransfer[]> GetSubAccountTransferHistory(string email = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null);
+
+        /// <summary>
+        /// Gets the history of sub account transfers
+        /// </summary>
+        /// <param name="email">Filter the history by email</param>
+        /// <param name="startTime">Filter the history by startTime</param>
+        /// <param name="endTime">Filter the history by endTime</param>
+        /// <param name="page">The page of the results</param>
+        /// <param name="limit">The max amount of results to return</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of transfers</returns>
+        Task<WebCallResult<BinanceSubAccountTransfer[]>> GetSubAccountTransferHistoryAsync(string email = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null);
+
+        /// <summary>
+        /// Transfers an asset from one sub account to another
+        /// </summary>
+        /// <param name="fromEmail">From which account to transfer</param>
+        /// <param name="toEmail">To which account to transfer</param>
+        /// <param name="asset">The asset to transfer</param>
+        /// <param name="amount">The quantity to transfer</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>The result of the transfer</returns>
+        WebCallResult<BinanceSubAccountTransferResult> TransferSubAccount(string fromEmail, string toEmail, string asset, decimal amount, int? receiveWindow = null);
+
+        /// <summary>
+        /// Transfers an asset from one sub account to another
+        /// </summary>
+        /// <param name="fromEmail">From which account to transfer</param>
+        /// <param name="toEmail">To which account to transfer</param>
+        /// <param name="asset">The asset to transfer</param>
+        /// <param name="amount">The quantity to transfer</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>The result of the transfer</returns>
+        Task<WebCallResult<BinanceSubAccountTransferResult>> TransferSubAccountAsync(string fromEmail, string toEmail, string asset, decimal amount, int? receiveWindow = null);
+
+        /// <summary>
+        /// Gets the trading status for the current account
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>The trading status of the account</returns>
+        WebCallResult<BinanceTradingStatus> GetTradingStatus(int? receiveWindow = null);
+
+        /// <summary>
+        /// Gets the trading status for the current account
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>The trading status of the account</returns>
+        Task<WebCallResult<BinanceTradingStatus>> GetTradingStatusAsync(int? receiveWindow = null);
 
         /// <summary>
         /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToUserStream"/>. The stream will close after 60 minutes unless a keep alive is send.
         /// </summary>
         /// <returns>Listen key</returns>
-        CallResult<string> StartUserStream();
+        WebCallResult<string> StartUserStream();
 
         /// <summary>
         /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToUserStream"/>. The stream will close after 60 minutes unless a keep alive is send.
         /// </summary>
         /// <returns>Listen key</returns>
-        Task<CallResult<string>> StartUserStreamAsync();
+        Task<WebCallResult<string>> StartUserStreamAsync();
 
         /// <summary>
         /// Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
         /// </summary>
         /// <returns></returns>
-        CallResult<object> KeepAliveUserStream(string listenKey);
+        WebCallResult<object> KeepAliveUserStream(string listenKey);
 
         /// <summary>
         /// Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
         /// </summary>
         /// <returns></returns>
-        Task<CallResult<object>> KeepAliveUserStreamAsync(string listenKey);
+        Task<WebCallResult<object>> KeepAliveUserStreamAsync(string listenKey);
 
         /// <summary>
         /// Stops the current user stream
         /// </summary>
         /// <returns></returns>
-        CallResult<object> StopUserStream(string listenKey);
+        WebCallResult<object> StopUserStream(string listenKey);
 
         /// <summary>
         /// Stops the current user stream
         /// </summary>
         /// <returns></returns>
-        Task<CallResult<object>> StopUserStreamAsync(string listenKey);
+        Task<WebCallResult<object>> StopUserStreamAsync(string listenKey);
 
         /// <summary>
         /// The factory for creating requests. Used for unit testing
         /// </summary>
         IRequestFactory RequestFactory { get; set; }
+
+        RateLimitingBehaviour RateLimitBehaviour { get; }
+        IEnumerable<IRateLimiter> RateLimiters { get; }
+        int TotalRequestsMade { get; }
+        string BaseAddress { get; }
 
         /// <summary>
         /// Adds a rate limiter to the client. There are 2 choices, the <see cref="RateLimiterTotal"/> and the <see cref="RateLimiterPerEndpoint"/>.

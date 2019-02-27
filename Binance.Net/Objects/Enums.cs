@@ -234,4 +234,10 @@
         Normal,
         Maintenance
     }
+
+    public enum SubAccountStatus
+    {
+        Enabled,
+        Disabled
+    }
 }
