@@ -1,8 +1,17 @@
 language: csharp
 mono: none
+os: linux
 solution: Binance.Net.sln
 dotnet: 2.0.0
 dist: trusty
 script:
- - dotnet build Binance.Net/Binance.Net.csproj --framework "netstandard2.0"
+ - dotnet build Binance.Net/Binance.Net.csproj -c Release --framework "netstandard2.0"
  - dotnet test Binance.Net.UnitTests/Binance.Net.UnitTests.csproj
+ - dotnet pack Binance.Net/Binance.Net.csproj -c Release
+ deploy:
+  skip_cleanup: true
+  provider: script
+  script: dotnet nuget push src/Binance.Net/Binance.Net/bin/Release/SampleNetLib.*.nupkg --api-key $NUGET_API_KEY
+  on:
+    tags: true
+    condition: $TRAVIS_TAG =~ ^(\d+\.)?(\d+\.)?(\*|\d+)$
