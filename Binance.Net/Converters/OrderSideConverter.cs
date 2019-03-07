@@ -9,10 +9,10 @@ namespace Binance.Net.Converters
         public OrderSideConverter(): this(true) { }
         public OrderSideConverter(bool quotes) : base(quotes) { }
 
-        protected override Dictionary<OrderSide, string> Mapping => new Dictionary<OrderSide, string>
+        protected override List<KeyValuePair<OrderSide, string>> Mapping => new List<KeyValuePair<OrderSide, string>>
         {
-            { OrderSide.Buy, "BUY" },
-            { OrderSide.Sell, "SELL" }
+            new KeyValuePair<OrderSide, string>(OrderSide.Buy, "BUY"),
+            new KeyValuePair<OrderSide, string>(OrderSide.Sell, "SELL")
         };
     }
 }

@@ -9,14 +9,14 @@ namespace Binance.Net.Converters
         public ExecutionTypeConverter(): this(true) { }
         public ExecutionTypeConverter(bool quotes) : base(quotes) { }
 
-        protected override Dictionary<ExecutionType, string> Mapping => new Dictionary<ExecutionType, string>
+        protected override List<KeyValuePair<ExecutionType, string>> Mapping => new List<KeyValuePair<ExecutionType, string>>
         {
-            { ExecutionType.New, "NEW" },
-            { ExecutionType.Canceled, "CANCELED" },
-            { ExecutionType.Replaced, "REPLACED" },
-            { ExecutionType.Rejected, "REJECTED" },
-            { ExecutionType.Trade, "TRADE" },
-            { ExecutionType.Expired, "EXPIRED" }
+            new KeyValuePair<ExecutionType, string>(ExecutionType.New, "NEW"),
+            new KeyValuePair<ExecutionType, string>(ExecutionType.Canceled, "CANCELED"),
+            new KeyValuePair<ExecutionType, string>(ExecutionType.Replaced, "REPLACED"),
+            new KeyValuePair<ExecutionType, string>(ExecutionType.Rejected, "REJECTED"),
+            new KeyValuePair<ExecutionType, string>(ExecutionType.Trade, "TRADE"),
+            new KeyValuePair<ExecutionType, string>(ExecutionType.Expired, "EXPIRED")
         };
     }
 }

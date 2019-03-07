@@ -9,11 +9,11 @@ namespace Binance.Net.Converters
         public OrderResponseTypeConverter(): this(true) { }
         public OrderResponseTypeConverter(bool quotes) : base(quotes) { }
 
-        protected override Dictionary<OrderResponseType, string> Mapping => new Dictionary<OrderResponseType, string>
+        protected override List<KeyValuePair<OrderResponseType, string>> Mapping => new List<KeyValuePair<OrderResponseType, string>>
         {
-            { OrderResponseType.Acknowledge, "ACK" },
-            { OrderResponseType.Result, "RESULT" },
-            { OrderResponseType.Full, "FULL" }
+            new KeyValuePair<OrderResponseType, string>(OrderResponseType.Acknowledge, "ACK"),
+            new KeyValuePair<OrderResponseType, string>(OrderResponseType.Result, "RESULT"),
+            new KeyValuePair<OrderResponseType, string>( OrderResponseType.Full, "FULL")
         };
     }
 }

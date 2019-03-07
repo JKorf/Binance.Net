@@ -9,15 +9,15 @@ namespace Binance.Net.Converters
         public SymbolStatusConverter(): this(true) { }
         public SymbolStatusConverter(bool quotes) : base(quotes) { }
 
-        protected override Dictionary<SymbolStatus, string> Mapping => new Dictionary<SymbolStatus, string>
+        protected override List<KeyValuePair<SymbolStatus, string>> Mapping => new List<KeyValuePair<SymbolStatus, string>>
         {
-            { SymbolStatus.AuctionMatch, "AUCTION_MATCH" },
-            { SymbolStatus.Break, "BREAK" },
-            { SymbolStatus.EndOfDay, "END_OF_DAY" },
-            { SymbolStatus.Halt, "HALT" },
-            { SymbolStatus.PostTrading, "POST_TRADING" },
-            { SymbolStatus.PreTrading, "PRE_TRADING" },
-            { SymbolStatus.Trading, "TRADING" }
+            new KeyValuePair<SymbolStatus, string>(SymbolStatus.AuctionMatch, "AUCTION_MATCH"),
+            new KeyValuePair<SymbolStatus, string>(SymbolStatus.Break, "BREAK"),
+            new KeyValuePair<SymbolStatus, string>(SymbolStatus.EndOfDay, "END_OF_DAY"),
+            new KeyValuePair<SymbolStatus, string>(SymbolStatus.Halt, "HALT"),
+            new KeyValuePair<SymbolStatus, string>(SymbolStatus.PostTrading, "POST_TRADING"),
+            new KeyValuePair<SymbolStatus, string>(SymbolStatus.PreTrading, "PRE_TRADING"),
+            new KeyValuePair<SymbolStatus, string>(SymbolStatus.Trading, "TRADING")
         };
     }
 }

@@ -6,18 +6,23 @@ namespace Binance.Net.Converters
 {
     public class WithdrawalStatusConverter : BaseConverter<WithdrawalStatus>
     {
-        public WithdrawalStatusConverter(): this(true) { }
-        public WithdrawalStatusConverter(bool quotes) : base(quotes) { }
-
-        protected override Dictionary<WithdrawalStatus, string> Mapping => new Dictionary<WithdrawalStatus, string>
+        public WithdrawalStatusConverter() : this(true)
         {
-            { WithdrawalStatus.EmailSend, "0" },
-            { WithdrawalStatus.Canceled, "1" },
-            { WithdrawalStatus.AwaitingApproval, "2" },
-            { WithdrawalStatus.Rejected, "3" },
-            { WithdrawalStatus.Processing, "4" },
-            { WithdrawalStatus.Failure, "5" },
-            { WithdrawalStatus.Completed, "6" }
+        }
+
+        public WithdrawalStatusConverter(bool quotes) : base(quotes)
+        {
+        }
+
+        protected override List<KeyValuePair<WithdrawalStatus, string>> Mapping => new List<KeyValuePair<WithdrawalStatus, string>>
+        {
+            new KeyValuePair<WithdrawalStatus, string>(WithdrawalStatus.EmailSend, "0"),
+            new KeyValuePair<WithdrawalStatus, string>(WithdrawalStatus.Canceled, "1"),
+            new KeyValuePair<WithdrawalStatus, string>(WithdrawalStatus.AwaitingApproval, "2"),
+            new KeyValuePair<WithdrawalStatus, string>(WithdrawalStatus.Rejected, "3"),
+            new KeyValuePair<WithdrawalStatus, string>(WithdrawalStatus.Processing, "4"),
+            new KeyValuePair<WithdrawalStatus, string>(WithdrawalStatus.Failure, "5"),
+            new KeyValuePair<WithdrawalStatus, string>(WithdrawalStatus.Completed, "6")
         };
     }
 }

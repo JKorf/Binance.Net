@@ -14,10 +14,10 @@ namespace Binance.Net.Converters
         {
         }
 
-        protected override Dictionary<SubAccountStatus, string> Mapping => new Dictionary<SubAccountStatus, string>
+        protected override List<KeyValuePair<SubAccountStatus, string>> Mapping => new List<KeyValuePair<SubAccountStatus, string>>
         {
-            {SubAccountStatus.Disabled, "disabled"},
-            {SubAccountStatus.Enabled, "enabled"}
+            new KeyValuePair<SubAccountStatus, string>(SubAccountStatus.Disabled, "disabled"),
+            new KeyValuePair<SubAccountStatus, string>(SubAccountStatus.Enabled, "enabled")
         };
     }
 }

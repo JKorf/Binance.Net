@@ -9,10 +9,10 @@ namespace Binance.Net.Converters
         public DepositStatusConverter(): this(true) { }
         public DepositStatusConverter(bool quotes) : base(quotes) { }
 
-        protected override Dictionary<DepositStatus, string> Mapping => new Dictionary<DepositStatus, string>
+        protected override List<KeyValuePair<DepositStatus, string>> Mapping => new List<KeyValuePair<DepositStatus, string>>
         {
-            { DepositStatus.Pending, "0" },
-            { DepositStatus.Success, "1" }
+            new KeyValuePair<DepositStatus, string>(DepositStatus.Pending, "0"),
+            new KeyValuePair<DepositStatus, string>(DepositStatus.Success, "1"),
         };
     }
 }

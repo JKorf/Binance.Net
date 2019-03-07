@@ -9,18 +9,18 @@ namespace Binance.Net.Converters
         public OrderRejectReasonConverter(): this(true) { }
         public OrderRejectReasonConverter(bool quotes) : base(quotes) { }
 
-        protected override Dictionary<OrderRejectReason, string> Mapping => new Dictionary<OrderRejectReason, string>
+        protected override List<KeyValuePair<OrderRejectReason, string>> Mapping => new List<KeyValuePair<OrderRejectReason, string>>
         {
-            { OrderRejectReason.None, "NONE" },
-            { OrderRejectReason.UnknownInstrument, "UNKNOWN_INSTRUMENT" },
-            { OrderRejectReason.MarketClosed, "MARKET_CLOSED" },
-            { OrderRejectReason.PriceQuantityExceedsHardLimits, "PRICE_QTY_EXCEED_HARD_LIMITS" },
-            { OrderRejectReason.UnknownOrder, "UNKNOWN_ORDER" },
-            { OrderRejectReason.DuplicateOrder, "DUPLICATE_ORDER" },
-            { OrderRejectReason.UnknownAccount, "UNKNOWN_ACCOUNT" },
-            { OrderRejectReason.InsufficientBalance, "INSUFFICIENT_BALANCE" },
-            { OrderRejectReason.AccountInactive, "ACCOUNT_INACTIVE" },
-            { OrderRejectReason.AccountCannotSettle, "ACCOUNT_CANNOT_SETTLE" }
+            new KeyValuePair<OrderRejectReason, string>(OrderRejectReason.None, "NONE"),
+            new KeyValuePair<OrderRejectReason, string>(OrderRejectReason.UnknownInstrument, "UNKNOWN_INSTRUMENT"),
+            new KeyValuePair<OrderRejectReason, string>(OrderRejectReason.MarketClosed, "MARKET_CLOSED"),
+            new KeyValuePair<OrderRejectReason, string>(OrderRejectReason.PriceQuantityExceedsHardLimits, "PRICE_QTY_EXCEED_HARD_LIMITS"),
+            new KeyValuePair<OrderRejectReason, string>(OrderRejectReason.UnknownOrder, "UNKNOWN_ORDER"),
+            new KeyValuePair<OrderRejectReason, string>(OrderRejectReason.DuplicateOrder, "DUPLICATE_ORDER"),
+            new KeyValuePair<OrderRejectReason, string>(OrderRejectReason.UnknownAccount, "UNKNOWN_ACCOUNT" ),
+            new KeyValuePair<OrderRejectReason, string>(OrderRejectReason.InsufficientBalance, "INSUFFICIENT_BALANCE" ),
+            new KeyValuePair<OrderRejectReason, string>(OrderRejectReason.AccountInactive, "ACCOUNT_INACTIVE" ),
+            new KeyValuePair<OrderRejectReason, string>(OrderRejectReason.AccountCannotSettle, "ACCOUNT_CANNOT_SETTLE")
         };
     }
 }

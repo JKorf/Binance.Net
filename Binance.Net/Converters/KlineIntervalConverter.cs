@@ -9,23 +9,23 @@ namespace Binance.Net.Converters
         public KlineIntervalConverter(): this(true) { }
         public KlineIntervalConverter(bool quotes) : base(quotes) { }
 
-        protected override Dictionary<KlineInterval, string> Mapping => new Dictionary<KlineInterval, string>
+        protected override List<KeyValuePair<KlineInterval, string>> Mapping => new List<KeyValuePair<KlineInterval, string>>
         {
-            { KlineInterval.OneMinute, "1m" },
-            { KlineInterval.ThreeMinutes, "3m" },
-            { KlineInterval.FiveMinutes, "5m" },
-            { KlineInterval.FiveteenMinutes, "15m" },
-            { KlineInterval.ThirtyMinutes, "30m" },
-            { KlineInterval.OneHour, "1h" },
-            { KlineInterval.TwoHour, "2h" },
-            { KlineInterval.FourHour, "4h" },
-            { KlineInterval.SixHour, "6h" },
-            { KlineInterval.EightHour, "8h" },
-            { KlineInterval.TwelveHour, "12h" },
-            { KlineInterval.OneDay, "1d" },
-            { KlineInterval.ThreeDay, "3d" },
-            { KlineInterval.OneWeek, "1w" },
-            { KlineInterval.OneMonth, "1M" }
+            new KeyValuePair<KlineInterval, string>(KlineInterval.OneMinute, "1m"),
+            new KeyValuePair<KlineInterval, string>(KlineInterval.ThreeMinutes, "3m"),
+            new KeyValuePair<KlineInterval, string>(KlineInterval.FiveMinutes, "5m"),
+            new KeyValuePair<KlineInterval, string>(KlineInterval.FiveteenMinutes, "15m"),
+            new KeyValuePair<KlineInterval, string>(KlineInterval.ThirtyMinutes, "30m"),
+            new KeyValuePair<KlineInterval, string>(KlineInterval.OneHour, "1h"),
+            new KeyValuePair<KlineInterval, string>(KlineInterval.TwoHour, "2h"),
+            new KeyValuePair<KlineInterval, string>(KlineInterval.FourHour, "4h"),
+            new KeyValuePair<KlineInterval, string>(KlineInterval.SixHour, "6h"),
+            new KeyValuePair<KlineInterval, string>(KlineInterval.EightHour, "8h"),
+            new KeyValuePair<KlineInterval, string>(KlineInterval.TwelveHour, "12h"),
+            new KeyValuePair<KlineInterval, string>(KlineInterval.OneDay, "1d"),
+            new KeyValuePair<KlineInterval, string>(KlineInterval.ThreeDay, "3d"),
+            new KeyValuePair<KlineInterval, string>(KlineInterval.OneWeek, "1w"),
+            new KeyValuePair<KlineInterval, string>(KlineInterval.OneMonth, "1M")
         };
     }
 }

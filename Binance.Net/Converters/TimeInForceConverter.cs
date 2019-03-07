@@ -9,11 +9,11 @@ namespace Binance.Net.Converters
         public TimeInForceConverter(): this(true) { }
         public TimeInForceConverter(bool quotes) : base(quotes) { }
 
-        protected override Dictionary<TimeInForce, string> Mapping => new Dictionary<TimeInForce, string>
+        protected override List<KeyValuePair<TimeInForce, string>> Mapping => new List<KeyValuePair<TimeInForce, string>>
         {
-            { TimeInForce.GoodTillCancel, "GTC" },
-            { TimeInForce.ImmediateOrCancel, "IOC" },
-            { TimeInForce.FillOrKill, "FOK" }
+            new KeyValuePair<TimeInForce, string>(TimeInForce.GoodTillCancel, "GTC"),
+            new KeyValuePair<TimeInForce, string>(TimeInForce.ImmediateOrCancel, "IOC"),
+            new KeyValuePair<TimeInForce, string>(TimeInForce.FillOrKill, "FOK")
         };
     }
 }

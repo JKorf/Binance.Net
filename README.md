@@ -222,6 +222,10 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 4.0.9 - 07 mar 2019
+	* Added start/end time parameters to GetAllOrders
+	* Updated CryptoExchange.Net
+
 * Version 4.0.8 - 27 feb 2019
 	* Added sub account support
 	* Added trading status call
