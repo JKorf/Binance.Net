@@ -244,20 +244,24 @@ namespace Binance.Net.Interfaces
         /// </summary>
         /// <param name="symbol">The symbol to get orders for</param>
         /// <param name="orderId">If set, only orders with an order id higher than the provided will be returned</param>
+        /// <param name="startTime">If set, only orders placed after this time will be returned</param>
+        /// <param name="endTime">If set, only orders placed before this time will be returned</param>
         /// <param name="limit">Max number of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of orders</returns>
-        WebCallResult<BinanceOrder[]> GetAllOrders(string symbol, long? orderId = null, int? limit = null, int? receiveWindow = null);
+        WebCallResult<BinanceOrder[]> GetAllOrders(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null);
 
         /// <summary>
         /// Gets all orders for the provided symbol
         /// </summary>
         /// <param name="symbol">The symbol to get orders for</param>
         /// <param name="orderId">If set, only orders with an order id higher than the provided will be returned</param>
+        /// <param name="startTime">If set, only orders placed after this time will be returned</param>
+        /// <param name="endTime">If set, only orders placed before this time will be returned</param>
         /// <param name="limit">Max number of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of orders</returns>
-        Task<WebCallResult<BinanceOrder[]>> GetAllOrdersAsync(string symbol, long? orderId = null, int? limit = null, int? receiveWindow = null);
+        Task<WebCallResult<BinanceOrder[]>> GetAllOrdersAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null);
 
         /// <summary>
         /// Places a new order
