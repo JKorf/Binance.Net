@@ -11,6 +11,8 @@
         PAX,
         TUSD,
         USDC,
-        USDT
+        USDS,
+        USDT,
+        XRP
     }
 }
