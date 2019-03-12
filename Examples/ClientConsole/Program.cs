@@ -81,17 +81,17 @@ namespace BinanceAPI.ClientConsole
 
             string listenKey;
             using (var client = new BinanceClient())
-                listenKey = client.StartUserStream().Data.ListenKey;
+                listenKey = client.StartUserStream().Data;
 
             var successAccount = socketClient.SubscribeToUserStream(listenKey, data =>
                 {
-                    // Hanlde account info data
+                    // Handle account info data
                 },
                 data =>
                 {
-                    // Hanlde order update info data
+                    // Handle order update info data
                 });
-            socketClient.UnsubscribeAllStreams();
+            socketClient.UnsubscribeAll();
 
             Console.ReadLine();
         }

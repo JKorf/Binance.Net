@@ -248,7 +248,7 @@ namespace Binance.Net.ClientWPF
                     if (!startOkay.Success)
                         messageBoxService.ShowMessage($"Error requesting data: {startOkay.Error.Message}", "error", MessageBoxButton.OK, MessageBoxImage.Error);
 
-                    socketClient.SubscribeToUserStream(startOkay.Data.ListenKey, OnAccountUpdate, OnOrderUpdate);
+                    socketClient.SubscribeToUserStream(startOkay.Data, OnAccountUpdate, OnOrderUpdate);
 
                     var accountResult = client.GetAccountInfo();
                     if (accountResult.Success)
