@@ -247,15 +247,23 @@ namespace Binance.Net.ClientWPF
                 {
                     var startOkay = client.StartUserStream();
                     if (!startOkay.Success)
-                        messageBoxService.ShowMessage($"Error requesting data: {startOkay.Error.Message}", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    {
+                        messageBoxService.ShowMessage($"Error starting user stream: {startOkay.Error.Message}", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
 
-                    socketClient.SubscribeToUserStream(startOkay.Data, OnAccountUpdate, OnOrderUpdate);
+                    var subOkay = socketClient.SubscribeToUserStream(startOkay.Data, OnAccountUpdate, OnOrderUpdate);
+                    if (!subOkay.Success)
+                    {
+                        messageBoxService.ShowMessage($"Error subscribing to user stream: {subOkay.Error.Message}", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
 
                     var accountResult = client.GetAccountInfo();
                     if (accountResult.Success)
                         Assets = new ObservableCollection<AssetViewModel>(accountResult.Data.Balances.Where(b => b.Free != 0 || b.Locked != 0).Select(b => new AssetViewModel() { Asset = b.Asset, Free = b.Free, Locked = b.Locked }).ToList());
                     else
-                        messageBoxService.ShowMessage($"Error requesting data: {accountResult.Error.Message}", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        messageBoxService.ShowMessage($"Error requesting account info: {accountResult.Error.Message}", "error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             });
         }
