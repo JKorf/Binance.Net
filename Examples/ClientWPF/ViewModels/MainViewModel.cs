@@ -160,14 +160,15 @@ namespace Binance.Net.ClientWPF
         {
             settings = new SettingsWindow(this);
             settings.ShowDialog();
-            if(!string.IsNullOrEmpty(apiKey) && !string.IsNullOrEmpty(apiSecret))
-                BinanceClient.SetDefaultOptions(new BinanceClientOptions(){ ApiCredentials = new ApiCredentials(apiKey, apiSecret)});
         }
 
         private void CloseSettings(object o)
         {
             settings?.Close();
             settings = null;
+
+            if (!string.IsNullOrEmpty(apiKey) && !string.IsNullOrEmpty(apiSecret))
+                BinanceClient.SetDefaultOptions(new BinanceClientOptions() { ApiCredentials = new ApiCredentials(apiKey, apiSecret) });
 
             SubscribeUserStream();
         }
