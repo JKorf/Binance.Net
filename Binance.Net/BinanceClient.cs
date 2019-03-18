@@ -1435,6 +1435,9 @@ namespace Binance.Net
 
         protected override Error ParseErrorResponse(JToken error)
         {
+            if (!error.HasValues)
+                return new ServerError(error.ToString());
+
             if (error["msg"] == null && error["code"] == null)
                 return new ServerError(error.ToString());
 

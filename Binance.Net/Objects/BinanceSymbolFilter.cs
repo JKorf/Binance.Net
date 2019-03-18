@@ -44,7 +44,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The amount of minutes the average price of trades is calculated over. 0 means the last price is used
         /// </summary>
-        public decimal AveragePriceMinutes { get; set; }
+        public int AveragePriceMinutes { get; set; }
     }
 
     public class BinanceSymbolLotSizeFilter : BinanceSymbolFilter
