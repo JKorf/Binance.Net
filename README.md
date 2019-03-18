@@ -222,6 +222,11 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 4.0.10 - 18 mar 2019
+	* Added AutoReconnect option
+	* Fix for error parsing without code/message
+	* Added QuoteQuantity to MyTrades result
+
 * Version 4.0.9 - 07 mar 2019
 	* Added start/end time parameters to GetAllOrders
 	* Updated CryptoExchange.Net
