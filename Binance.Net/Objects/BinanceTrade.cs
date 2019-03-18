@@ -27,6 +27,11 @@ namespace Binance.Net.Objects
         [JsonProperty("qty")]
         public decimal Quantity { get; set; }
         /// <summary>
+        /// The quote quantity of the trade
+        /// </summary>
+        [JsonProperty("quoteQty")]
+        public decimal QuoteQuantity { get; set; }
+        /// <summary>
         /// The commission paid for the trade
         /// </summary>
         public decimal Commission { get; set; }
