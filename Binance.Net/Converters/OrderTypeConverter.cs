@@ -38,19 +38,6 @@ namespace Binance.Net.Converters
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            if(reader.TokenType == JsonToken.StartArray)
-            {
-                var result = new List<OrderType>();
-                while (reader.Read())
-                {
-                    if (reader.TokenType == JsonToken.String)
-                        result.Add(values.Single(v => v.Value == (string)reader.Value).Key);
-                    if (reader.TokenType == JsonToken.EndArray)
-                        break;
-                }
-                return result.ToArray();
-            }
-
             return values.Single(v => v.Value == (string)reader.Value).Key;
         }
 
