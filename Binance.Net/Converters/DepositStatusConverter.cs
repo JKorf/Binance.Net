@@ -13,6 +13,7 @@ namespace Binance.Net.Converters
         {
             new KeyValuePair<DepositStatus, string>(DepositStatus.Pending, "0"),
             new KeyValuePair<DepositStatus, string>(DepositStatus.Success, "1"),
+            new KeyValuePair<DepositStatus, string>(DepositStatus.Completed, "6"),
         };
     }
 }
