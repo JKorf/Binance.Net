@@ -129,7 +129,7 @@
         OneMinute,
         ThreeMinutes,
         FiveMinutes,
-        FiveteenMinutes,
+        FifteenMinutes,
         ThirtyMinutes,
         OneHour,
         TwoHour,
