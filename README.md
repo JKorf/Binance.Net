@@ -222,6 +222,16 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 4.0.11 - 02 apr 2019
+	* Added Symbol field in BinanceTrade
+	* Added deposit status Completed to deposits filter
+	* Fixed Exception handler null reference if not set
+
+* Version 4.0.10 - 18 mar 2019
+	* Added AutoReconnect option
+	* Fix for error parsing without code/message
+	* Added QuoteQuantity to MyTrades result
+
 * Version 4.0.9 - 07 mar 2019
 	* Added start/end time parameters to GetAllOrders
 	* Updated CryptoExchange.Net

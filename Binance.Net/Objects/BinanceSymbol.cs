@@ -36,7 +36,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// Allowed order types
         /// </summary>
-        [JsonConverter(typeof(OrderTypeConverter))]
+        [JsonProperty(ItemConverterType = typeof(OrderTypeConverter))]
         public OrderType[] OrderTypes { get; set; }
         /// <summary>
         /// Ice berg orders allowed

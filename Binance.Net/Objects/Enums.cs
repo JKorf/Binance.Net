@@ -184,7 +184,8 @@
     public enum DepositStatus
     {
         Pending,
-        Success
+        Success,
+        Completed
     }
 
     public enum RateLimitInterval

@@ -444,6 +444,7 @@ namespace Binance.Net.UnitTests
                     IsMaker= true,
                     Price = 0.3m,
                     Quantity = 0.4m,
+                    Symbol = "BNBUSDT",
                     Time =  new DateTime(2017, 1, 1)
                 },
                 new BinanceTrade()
@@ -456,6 +457,7 @@ namespace Binance.Net.UnitTests
                     IsMaker= false,
                     Price = 0.6m,
                     Quantity = 0.7m,
+                    Symbol = "ETHBTC",
                     Time =  new DateTime(2016, 1, 1)
                 }
             };
