@@ -222,6 +222,12 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 4.0.12 - 09 apr 2019
+	* Fixed type in FifteenMinutes kline interval enum
+	* Added update time to BinanceStreamAccountInfo
+	* Added IsSpotTradingAllowed and IsMarginTradingAllowed fields to BinanceSymbol
+	* Added IDisposable to client interfaces
+
 * Version 4.0.11 - 02 apr 2019
 	* Added Symbol field in BinanceTrade
 	* Added deposit status Completed to deposits filter
