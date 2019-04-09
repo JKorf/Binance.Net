@@ -14,7 +14,7 @@ namespace Binance.Net.Converters
             new KeyValuePair<KlineInterval, string>(KlineInterval.OneMinute, "1m"),
             new KeyValuePair<KlineInterval, string>(KlineInterval.ThreeMinutes, "3m"),
             new KeyValuePair<KlineInterval, string>(KlineInterval.FiveMinutes, "5m"),
-            new KeyValuePair<KlineInterval, string>(KlineInterval.FiveteenMinutes, "15m"),
+            new KeyValuePair<KlineInterval, string>(KlineInterval.FifteenMinutes, "15m"),
             new KeyValuePair<KlineInterval, string>(KlineInterval.ThirtyMinutes, "30m"),
             new KeyValuePair<KlineInterval, string>(KlineInterval.OneHour, "1h"),
             new KeyValuePair<KlineInterval, string>(KlineInterval.TwoHour, "2h"),

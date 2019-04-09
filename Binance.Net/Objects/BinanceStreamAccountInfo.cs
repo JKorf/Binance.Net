@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects
@@ -8,6 +10,11 @@ namespace Binance.Net.Objects
     /// </summary>
     public class BinanceStreamAccountInfo: BinanceStreamEvent
     {
+        /// <summary>
+        /// Time of last account update
+        /// </summary>
+        [JsonProperty("u"), JsonConverter(typeof(TimestampConverter))]
+        public DateTime Time { get; set; }
         /// <summary>
         /// Commission percentage to pay when making trades
         /// </summary>

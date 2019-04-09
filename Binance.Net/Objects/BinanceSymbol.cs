@@ -43,6 +43,14 @@ namespace Binance.Net.Objects
         /// </summary>
         public bool IceBergAllowed { get; set; }
         /// <summary>
+        /// Spot trading orders allowed
+        /// </summary>
+        public bool IsSpotTradingAllowed { get; set; }
+        /// <summary>
+        /// Margin trading orders allowed
+        /// </summary>
+        public bool IsMarginTradingAllowed { get; set; }
+        /// <summary>
         /// Filters for order on this symbol
         /// </summary>
         public BinanceSymbolFilter[] Filters { get; set; }
