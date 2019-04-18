@@ -50,7 +50,7 @@ namespace Binance.Net.Objects
         [JsonProperty("F")]
         public decimal IcebergQuantity { get; set; }
         [JsonProperty("C")]
-        public object OriginalClientOrderId { get; set; }
+        public string OriginalClientOrderId { get; set; }
         /// <summary>
         /// The execution type
         /// </summary>
