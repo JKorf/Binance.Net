@@ -1,9 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Binance.Net
 {
     public static class BinanceHelpers
     {
+        public static int? UsedWeight(this IEnumerable<Tuple<string, string>>  headers)
+        {
+            if (int.TryParse(headers?.SingleOrDefault(s => s.Item1 == "X-MBX-USED-WEIGHT")?.Item2, out var value))
+                return value;
+            return null;
+        }
+
         public static decimal ClampQuantity(decimal minQuantity, decimal maxQuantity, decimal stepSize, decimal quantity)
         {
             quantity = Math.Min(maxQuantity, quantity);

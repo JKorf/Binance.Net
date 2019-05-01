@@ -7,7 +7,7 @@ using CryptoExchange.Net.Sockets;
 
 namespace Binance.Net.Interfaces
 {
-    public interface IBinanceSocketClient
+    public interface IBinanceSocketClient: ISocketClient
     {
         /// <summary>
         /// Set the API key and secret
@@ -232,24 +232,5 @@ namespace Binance.Net.Interfaces
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToUserStreamAsync(string listenKey, Action<BinanceStreamAccountInfo> onAccountInfoMessage, Action<BinanceStreamOrderUpdate> onOrderUpdateMessage);
 
-        /// <summary>
-        /// The factory for creating sockets. Used for unit testing
-        /// </summary>
-        IWebsocketFactory SocketFactory { get; set; }
-
-        /// <summary>
-        /// Unsubscribe from a stream
-        /// </summary>
-        /// <param name="subscription">The subscription to unsubscribe</param>
-        /// <returns></returns>
-        Task Unsubscribe(UpdateSubscription subscription);
-
-        /// <summary>
-        /// Unsubscribe all subscriptions
-        /// </summary>
-        /// <returns></returns>
-        Task UnsubscribeAll();
-
-        void Dispose();
     }
 }

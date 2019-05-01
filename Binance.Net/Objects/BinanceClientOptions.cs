@@ -53,6 +53,21 @@ namespace Binance.Net.Objects
         /// </summary>
         public string BaseSocketCombinedAddress { get; set; } = "wss://stream.binance.com:9443/";
 
+        /// <summary>
+        /// The amount of subscriptions that should be made on a single socket connection. Not all exchanges support multiple subscriptions on a single socket.
+        /// Setting this to a higher number increases subscription speed, but having more subscriptions on a single connection will also increase the amount of traffic on that single connection.
+        /// Not available on Binance.
+        /// </summary>
+        public new int? SocketSubscriptionsCombineTarget
+        {
+            get => 1;
+            set
+            {
+                if (value != 1)
+                    throw new ArgumentException("Can't change SocketSubscriptionsCombineTarget; server implementation does not allow multiple subscription on a socket");
+            }
+        }
+
         public BinanceSocketClientOptions()
         {
             BaseAddress = "wss://stream.binance.com:9443/ws/";

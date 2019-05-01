@@ -178,17 +178,17 @@ namespace Binance.Net
             if (!autoTimestamp)
             { 
                 var result = await ExecuteRequest<BinanceCheckTime>(url).ConfigureAwait(false);
-                return new WebCallResult<DateTime>(result.ResponseStatusCode, result.Data?.ServerTime ?? default(DateTime), result.Error);
+                return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, result.Data?.ServerTime ?? default(DateTime), result.Error);
             }
             else
             {
                 var localTime = DateTime.UtcNow;
                 var result = await ExecuteRequest<BinanceCheckTime>(url).ConfigureAwait(false);
                 if (!result.Success)
-                    return new WebCallResult<DateTime>(result.ResponseStatusCode, default(DateTime), result.Error);
+                    return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, default(DateTime), result.Error);
 
                 if (timeSynced && !resetAutoTimestamp)
-                    return new WebCallResult<DateTime>(result.ResponseStatusCode, result.Data.ServerTime, result.Error);
+                    return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.ServerTime, result.Error);
 
                 if (TotalRequestsMade == 1)
                 {
@@ -196,7 +196,7 @@ namespace Binance.Net
                     localTime = DateTime.UtcNow;
                     result = await ExecuteRequest<BinanceCheckTime>(url).ConfigureAwait(false);
                     if (!result.Success)
-                        return new WebCallResult<DateTime>(result.ResponseStatusCode, default(DateTime), result.Error);
+                        return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, default(DateTime), result.Error);
                 }
 
                 // Calculate time offset between local and server
@@ -208,14 +208,14 @@ namespace Binance.Net
                     timeSynced = true;
                     lastTimeSync = DateTime.UtcNow;
                     log.Write(LogVerbosity.Info, $"Time offset between 0 and 500ms ({offset}ms), no adjustment needed");
-                    return new WebCallResult<DateTime>(result.ResponseStatusCode, result.Data.ServerTime, result.Error);
+                    return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.ServerTime, result.Error);
                 }
 
                 timeOffset = (result.Data.ServerTime - localTime).TotalMilliseconds;
                 timeSynced = true;
                 lastTimeSync = DateTime.UtcNow;
                 log.Write(LogVerbosity.Info, $"Time offset set to {timeOffset}ms");
-                return new WebCallResult<DateTime>(result.ResponseStatusCode, result.Data.ServerTime, result.Error);
+                return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.ServerTime, result.Error);
             }
         }
 
@@ -501,7 +501,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<BinanceOrder[]>(timestampResult.ResponseStatusCode, null, timestampResult.Error);
+                return new WebCallResult<BinanceOrder[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -539,7 +539,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<BinanceOrder[]>(timestampResult.ResponseStatusCode, null, timestampResult.Error);
+                return new WebCallResult<BinanceOrder[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -612,13 +612,13 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<BinancePlacedOrder>(timestampResult.ResponseStatusCode, null, timestampResult.Error);
+                return new WebCallResult<BinancePlacedOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var rulesCheck = await CheckTradeRules(symbol, quantity, price, type).ConfigureAwait(false);
             if (!rulesCheck.Passed)
             {
                 log.Write(LogVerbosity.Warning, rulesCheck.ErrorMessage);
-                return new WebCallResult<BinancePlacedOrder>(null, null, new ArgumentError(rulesCheck.ErrorMessage));
+                return new WebCallResult<BinancePlacedOrder>(null, null, null, new ArgumentError(rulesCheck.ErrorMessage));
             }
 
             quantity = rulesCheck.Quantity;
@@ -699,13 +699,13 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<BinancePlacedOrder>(timestampResult.ResponseStatusCode, null, timestampResult.Error);
+                return new WebCallResult<BinancePlacedOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var rulesCheck = await CheckTradeRules(symbol, quantity, price, type).ConfigureAwait(false);
             if (!rulesCheck.Passed)
             {
                 log.Write(LogVerbosity.Warning, rulesCheck.ErrorMessage);
-                return new WebCallResult<BinancePlacedOrder>(null, null, new ArgumentError(rulesCheck.ErrorMessage));
+                return new WebCallResult<BinancePlacedOrder>(null, null, null, new ArgumentError(rulesCheck.ErrorMessage));
             }
 
             quantity = rulesCheck.Quantity;
@@ -751,11 +751,11 @@ namespace Binance.Net
         public async Task<WebCallResult<BinanceOrder>> QueryOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, long? receiveWindow = null)
         {
             if (orderId == null && origClientOrderId == null)
-                return new WebCallResult<BinanceOrder>(null, null, new ArgumentError("Either orderId or origClientOrderId should be provided"));
+                return new WebCallResult<BinanceOrder>(null, null, null, new ArgumentError("Either orderId or origClientOrderId should be provided"));
 
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<BinanceOrder>(timestampResult.ResponseStatusCode, null, timestampResult.Error);
+                return new WebCallResult<BinanceOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -793,7 +793,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<BinanceCanceledOrder>(timestampResult.ResponseStatusCode, null, timestampResult.Error);
+                return new WebCallResult<BinanceCanceledOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -824,7 +824,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<BinanceAccountInfo>(timestampResult.ResponseStatusCode, null, timestampResult.Error);
+                return new WebCallResult<BinanceAccountInfo>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -861,7 +861,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<BinanceTrade[]>(timestampResult.ResponseStatusCode, null, timestampResult.Error);
+                return new WebCallResult<BinanceTrade[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -903,7 +903,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<BinanceWithdrawalPlaced>(timestampResult.ResponseStatusCode, null, timestampResult.Error);
+                return new WebCallResult<BinanceWithdrawalPlaced>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -921,7 +921,7 @@ namespace Binance.Net
                 return result;
 
             if (!result.Data.Success)
-                return new WebCallResult<BinanceWithdrawalPlaced>(result.ResponseStatusCode, null, ParseErrorResponse(result.Data.Message));
+                return new WebCallResult<BinanceWithdrawalPlaced>(result.ResponseStatusCode, result.ResponseHeaders, null, ParseErrorResponse(result.Data.Message));
             return result;
         }
 
@@ -949,7 +949,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<BinanceDepositList>(timestampResult.ResponseStatusCode, null, timestampResult.Error);
+                return new WebCallResult<BinanceDepositList>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -966,7 +966,7 @@ namespace Binance.Net
                 return result;
 
             if (!result.Data.Success)
-                return new WebCallResult<BinanceDepositList>(result.ResponseStatusCode, null, ParseErrorResponse(result.Data.Message));
+                return new WebCallResult<BinanceDepositList>(result.ResponseStatusCode, result.ResponseHeaders, null, ParseErrorResponse(result.Data.Message));
             return result;
         }
 
@@ -994,7 +994,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<BinanceWithdrawalList>(timestampResult.ResponseStatusCode, null, timestampResult.Error);
+                return new WebCallResult<BinanceWithdrawalList>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -1012,7 +1012,7 @@ namespace Binance.Net
                 return result;
             
             if (!result.Data.Success)
-                return new WebCallResult<BinanceWithdrawalList>(result.ResponseStatusCode, null, ParseErrorResponse(result.Data.Message));
+                return new WebCallResult<BinanceWithdrawalList>(result.ResponseStatusCode, result.ResponseHeaders, null, ParseErrorResponse(result.Data.Message));
             return result;
         }
 
@@ -1034,7 +1034,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<BinanceDepositAddress>(timestampResult.ResponseStatusCode, null, timestampResult.Error);
+                return new WebCallResult<BinanceDepositAddress>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -1064,7 +1064,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<BinanceTradeFee[]>(timestampResult.ResponseStatusCode, null, timestampResult.Error);
+                return new WebCallResult<BinanceTradeFee[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -1075,9 +1075,9 @@ namespace Binance.Net
 
             var result = await ExecuteRequest<BinanceTradeFeeWrapper>(GetUrl(TradeFeeEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success)
-                return new WebCallResult<BinanceTradeFee[]>(result.ResponseStatusCode, null, result.Error);
+                return new WebCallResult<BinanceTradeFee[]>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
 
-            return !result.Data.Success ? new WebCallResult<BinanceTradeFee[]>(result.ResponseStatusCode, null, ParseErrorResponse(result.Data.Message)) : new WebCallResult<BinanceTradeFee[]>(result.ResponseStatusCode, result.Data.Data, null);
+            return !result.Data.Success ? new WebCallResult<BinanceTradeFee[]>(result.ResponseStatusCode, result.ResponseHeaders, null, ParseErrorResponse(result.Data.Message)) : new WebCallResult<BinanceTradeFee[]>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
         }
 
         /// <summary>
@@ -1096,7 +1096,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<Dictionary<string, BinanceAssetDetails>>(timestampResult.ResponseStatusCode, null, timestampResult.Error);
+                return new WebCallResult<Dictionary<string, BinanceAssetDetails>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -1106,9 +1106,9 @@ namespace Binance.Net
 
             var result = await ExecuteRequest<BinanceAssetDetailsWrapper>(GetUrl(AssetDetailsEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success)
-                return new WebCallResult<Dictionary<string, BinanceAssetDetails>>(result.ResponseStatusCode, null, result.Error);
+                return new WebCallResult<Dictionary<string, BinanceAssetDetails>>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
 
-            return !result.Data.Success ? new WebCallResult<Dictionary<string, BinanceAssetDetails>>(result.ResponseStatusCode, null, ParseErrorResponse(JToken.Parse(result.Data.Message))) : new WebCallResult<Dictionary<string, BinanceAssetDetails>>(result.ResponseStatusCode, result.Data.Data, null);
+            return !result.Data.Success ? new WebCallResult<Dictionary<string, BinanceAssetDetails>>(result.ResponseStatusCode, result.ResponseHeaders, null, ParseErrorResponse(JToken.Parse(result.Data.Message))) : new WebCallResult<Dictionary<string, BinanceAssetDetails>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
         }
 
         /// <summary>
@@ -1127,7 +1127,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<BinanceAccountStatus>(timestampResult.ResponseStatusCode, null, timestampResult.Error);
+                return new WebCallResult<BinanceAccountStatus>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -1137,9 +1137,9 @@ namespace Binance.Net
 
             var result = await ExecuteRequest<BinanceAccountStatus>(GetUrl(AccountStatusEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success)
-                return new WebCallResult<BinanceAccountStatus>(result.ResponseStatusCode, null, result.Error);
+                return new WebCallResult<BinanceAccountStatus>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
 
-            return !result.Data.Success ? new WebCallResult<BinanceAccountStatus>(result.ResponseStatusCode, null, ParseErrorResponse(result.Data.Message)) : new WebCallResult<BinanceAccountStatus>(result.ResponseStatusCode, result.Data, null);
+            return !result.Data.Success ? new WebCallResult<BinanceAccountStatus>(result.ResponseStatusCode, result.ResponseHeaders, null, ParseErrorResponse(result.Data.Message)) : new WebCallResult<BinanceAccountStatus>(result.ResponseStatusCode, result.ResponseHeaders, result.Data, null);
         }
 
         /// <summary>
@@ -1173,7 +1173,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<BinanceDustLog[]>(timestampResult.ResponseStatusCode, null, timestampResult.Error);
+                return new WebCallResult<BinanceDustLog[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -1183,9 +1183,9 @@ namespace Binance.Net
 
             var result = await ExecuteRequest<BinanceDustLogListWrapper>(GetUrl(DustLogEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success)
-                return new WebCallResult<BinanceDustLog[]>(result.ResponseStatusCode, null, result.Error);
+                return new WebCallResult<BinanceDustLog[]>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
 
-            return !result.Data.Success ? new WebCallResult<BinanceDustLog[]>(result.ResponseStatusCode, null, new ServerError("Unknown server error while requesting dust log")) : new WebCallResult<BinanceDustLog[]>(result.ResponseStatusCode, result.Data.Results.Rows, null);
+            return !result.Data.Success ? new WebCallResult<BinanceDustLog[]>(result.ResponseStatusCode, result.ResponseHeaders, null, new ServerError("Unknown server error while requesting dust log")) : new WebCallResult<BinanceDustLog[]>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Results.Rows, null);
         }
 
         /// <summary>
@@ -1212,7 +1212,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<BinanceSubAccount[]>(timestampResult.ResponseStatusCode, null, timestampResult.Error);
+                return new WebCallResult<BinanceSubAccount[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -1226,9 +1226,9 @@ namespace Binance.Net
 
             var result = await ExecuteRequest<BinanceSubAccountWrapper>(GetUrl(SubAccountListEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success)
-                return new WebCallResult<BinanceSubAccount[]>(result.ResponseStatusCode, null, result.Error);
+                return new WebCallResult<BinanceSubAccount[]>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
 
-            return !result.Data.Success ? new WebCallResult<BinanceSubAccount[]>(result.ResponseStatusCode, null, new ServerError(result.Data.Message)) : new WebCallResult<BinanceSubAccount[]>(result.ResponseStatusCode, result.Data.SubAccounts, null);
+            return !result.Data.Success ? new WebCallResult<BinanceSubAccount[]>(result.ResponseStatusCode, result.ResponseHeaders, null, new ServerError(result.Data.Message)) : new WebCallResult<BinanceSubAccount[]>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.SubAccounts, null);
         }
 
         /// <summary>
@@ -1257,7 +1257,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<BinanceSubAccountTransfer[]>(timestampResult.ResponseStatusCode, null, timestampResult.Error);
+                return new WebCallResult<BinanceSubAccountTransfer[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -1272,9 +1272,9 @@ namespace Binance.Net
 
             var result = await ExecuteRequest<BinanceSubAccountTransferWrapper>(GetUrl(SubAccountTransferHistoryEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success)
-                return new WebCallResult<BinanceSubAccountTransfer[]>(result.ResponseStatusCode, null, result.Error);
+                return new WebCallResult<BinanceSubAccountTransfer[]>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
 
-            return !result.Data.Success ? new WebCallResult<BinanceSubAccountTransfer[]>(result.ResponseStatusCode, null, new ServerError(result.Data.Message)) : new WebCallResult<BinanceSubAccountTransfer[]>(result.ResponseStatusCode, result.Data.Transfers, null);
+            return !result.Data.Success ? new WebCallResult<BinanceSubAccountTransfer[]>(result.ResponseStatusCode, result.ResponseHeaders, null, new ServerError(result.Data.Message)) : new WebCallResult<BinanceSubAccountTransfer[]>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Transfers, null);
         }
 
         /// <summary>
@@ -1301,7 +1301,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<BinanceSubAccountTransferResult>(timestampResult.ResponseStatusCode, null, timestampResult.Error);
+                return new WebCallResult<BinanceSubAccountTransferResult>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -1333,7 +1333,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<BinanceTradingStatus>(timestampResult.ResponseStatusCode, null, timestampResult.Error);
+                return new WebCallResult<BinanceTradingStatus>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -1344,9 +1344,9 @@ namespace Binance.Net
 
             var result = await ExecuteRequest<BinanceTradingStatusWrapper>(GetUrl(TradingStatusEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success)
-                return new WebCallResult<BinanceTradingStatus>(result.ResponseStatusCode, null, result.Error);
+                return new WebCallResult<BinanceTradingStatus>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
 
-            return !result.Data.Success ? new WebCallResult<BinanceTradingStatus>(result.ResponseStatusCode, null, new ServerError(result.Data.Message)) : new WebCallResult<BinanceTradingStatus>(result.ResponseStatusCode, result.Data.Status, null);
+            return !result.Data.Success ? new WebCallResult<BinanceTradingStatus>(result.ResponseStatusCode, result.ResponseHeaders, null, new ServerError(result.Data.Message)) : new WebCallResult<BinanceTradingStatus>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Status, null);
         }
 
 
@@ -1364,10 +1364,10 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<string>(timestampResult.ResponseStatusCode, null, timestampResult.Error);
+                return new WebCallResult<string>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var result = await ExecuteRequest<BinanceListenKey>(GetUrl(GetListenKeyEndpoint, Api, UserDataStreamVersion), PostMethod).ConfigureAwait(false);
-            return new WebCallResult<string>(result.ResponseStatusCode, result.Data?.ListenKey, result.Error);
+            return new WebCallResult<string>(result.ResponseStatusCode, result.ResponseHeaders, result.Data?.ListenKey, result.Error);
         }
 
         /// <summary>
@@ -1384,7 +1384,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<object>(timestampResult.ResponseStatusCode, null, timestampResult.Error);
+                return new WebCallResult<object>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -1408,7 +1408,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<object>(timestampResult.ResponseStatusCode, null, timestampResult.Error);
+                return new WebCallResult<object>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -1468,7 +1468,7 @@ namespace Binance.Net
         {
             if (autoTimestamp && (!timeSynced || DateTime.UtcNow - lastTimeSync > autoTimestampRecalculationInterval))
                 return await GetServerTimeAsync(timeSynced).ConfigureAwait(false);
-            return new WebCallResult<DateTime>(null, default(DateTime), null);
+            return new WebCallResult<DateTime>(null, null, default(DateTime), null);
         }
 
         private async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal quantity, decimal? price, OrderType type)

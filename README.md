@@ -222,6 +222,12 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 4.0.13 - 01 may 2019
+	* Updated to latest CryptoExchange.Net
+		* Adds response header to REST call result
+		* Added rate limiter per API key
+		* Unified socket client workings
+
 * Version 4.0.12 - 09 apr 2019
 	* Fixed type in FifteenMinutes kline interval enum
 	* Added update time to BinanceStreamAccountInfo

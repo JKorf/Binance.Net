@@ -373,41 +373,7 @@ namespace Binance.Net
             else
                 url = BaseAddress + url;
 
-            var connectResult = await CreateAndConnectSocket(url, onData).ConfigureAwait(false);
-            return !connectResult.Success ? new CallResult<UpdateSubscription>(null, connectResult.Error) : new CallResult<UpdateSubscription>(new UpdateSubscription(connectResult.Data), null);
-        }
-        
-        private async Task<CallResult<SocketSubscription>> CreateAndConnectSocket<T>(string url, Action<T> onMessage)
-        {
-            var socket = CreateSocket(url);
-            var subscription = new SocketSubscription(socket);            
-            subscription.MessageHandlers.Add(DataHandlerName, (subs, data) => DataHandler(data, onMessage));
-
-            var connectResult = await ConnectSocket(subscription).ConfigureAwait(false);
-            if (!connectResult.Success)
-                return new CallResult<SocketSubscription>(null, connectResult.Error);
-
-            socket.ShouldReconnect = true;
-            return new CallResult<SocketSubscription>(subscription, null);
-        }
-        
-        private bool DataHandler<T>(JToken data, Action<T> handler)
-        {
-            if (typeof(T) == typeof(string))
-            {
-                handler((T)Convert.ChangeType(data.ToString(), typeof(T)));
-                return true;
-            }
-
-            var desResult = Deserialize<T>(data, false);
-            if (!desResult.Success)
-            {
-                log.Write(LogVerbosity.Info, $"Couldn't deserialize data received from stream of type {typeof(T)}: " + desResult.Error);
-                return false;
-            }
-
-            handler(desResult.Data);
-            return true;
+            return await Subscribe(url, null, url + NextId(), false, onData).ConfigureAwait(false);
         }
 
         private void Configure(BinanceSocketClientOptions options)
@@ -415,9 +381,34 @@ namespace Binance.Net
             baseCombinedAddress = options.BaseSocketCombinedAddress;
         }
 
-        protected override bool SocketReconnect(SocketSubscription subscription, TimeSpan disconnectedTime)
+        protected override bool HandleQueryResponse<T>(SocketConnection s, object request, JToken data, out CallResult<T> callResult)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override bool HandleSubscriptionResponse(SocketConnection s, SocketSubscription subscription, object request, JToken message, out CallResult<object> callResult)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override bool MessageMatchesHandler(JToken message, object request)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override bool MessageMatchesHandler(JToken message, string identifier)
         {
             return true;
+        }
+
+        protected override Task<CallResult<bool>> AuthenticateSocket(SocketConnection s)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override Task<bool> Unsubscribe(SocketConnection connection, SocketSubscription s)
+        {
+            return Task.FromResult(true);
         }
         #endregion
     }
