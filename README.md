@@ -26,6 +26,10 @@ Also check out my other exchange API wrappers:
 <br />
 <a href="https://github.com/JKorf/Huobi.Net">Huobi</a>
 </td>
+<td><a href="https://github.com/JKorf/Kucoin.Net"><img src="https://github.com/JKorf/Kucoin.Net/blob/master/Resources/icon.png?raw=true"></a>
+<br />
+<a href="https://github.com/JKorf/Kucoin.Net">Kucoin</a>
+</td>
 </tr>
 </table>
 And other API wrappers based on CryptoExchange.Net:
