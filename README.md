@@ -9,8 +9,7 @@ A .Net wrapper for the Binance API as described on [Binance](https://www.binance
 ## CryptoExchange.Net
 Implementation is build upon the CryptoExchange.Net library, make sure to also check out the documentation on that: [docs](https://github.com/JKorf/CryptoExchange.Net)
 
----
-Also check out my other exchange API wrappers:
+Other CryptoExchange.Net implementations:
 <table>
 <tr>
 <td><a href="https://github.com/JKorf/Bittrex.Net"><img src="https://github.com/JKorf/Bittrex.Net/blob/master/Resources/icon.png?raw=true"></a>
@@ -35,7 +34,7 @@ Also check out my other exchange API wrappers:
 </td>
 </tr>
 </table>
-And other API wrappers based on CryptoExchange.Net:
+Implementations from third parties:
 <table>
 <tr>
 <td><a href="https://github.com/Zaliro/Switcheo.Net"><img src="https://github.com/Zaliro/Switcheo.Net/blob/master/Resources/switcheo-coin.png?raw=true"></a>
