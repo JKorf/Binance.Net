@@ -7,7 +7,7 @@
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
 	<Authors>JKorf</Authors>
-    <PackageVersion>4.0.13</PackageVersion>
+    <PackageVersion>4.0.14</PackageVersion>
 	<Description>Binance.Net is a .Net wrapper for the Binance API. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance Binance.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
@@ -16,7 +16,7 @@
 	<PackageLicenseUrl>https://github.com/JKorf/Binance.Net/blob/master/LICENSE</PackageLicenseUrl>
 	<NeutralLanguage>en</NeutralLanguage>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	<PackageReleaseNotes>4.0.13 - Updated CryptoExchange.Net, adds response headers to rest call result, added rate limiter per API key</PackageReleaseNotes>
+	<PackageReleaseNotes>4.0.14 - Added an order book implementation for easily keeping an updated order book, added additional constructor to ApiCredentials to be able to read from file</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

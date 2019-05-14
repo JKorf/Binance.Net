@@ -226,6 +226,10 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 4.0.14 - 14 may 2019
+	* Added an order book implementation for easily keeping an updated order book
+	* Added additional constructor to ApiCredentials to be able to read from file
+
 * Version 4.0.13 - 01 may 2019
 	* Updated to latest CryptoExchange.Net
 		* Adds response header to REST call result
