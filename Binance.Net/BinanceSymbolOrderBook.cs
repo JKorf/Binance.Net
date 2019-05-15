@@ -16,7 +16,7 @@ namespace Binance.Net
         private readonly BinanceSocketClient socketClient;
         private readonly int? limit;
 
-        public BinanceSymbolOrderBook(string symbol, int? limit = null, LogVerbosity logVerbosity = LogVerbosity.Info, IEnumerable<TextWriter> logWriters = null) : base("Binance", symbol, true, logVerbosity, logWriters)
+        public BinanceSymbolOrderBook(string symbol, int? limit = null, LogVerbosity logVerbosity = LogVerbosity.Info, IEnumerable<TextWriter> logWriters = null) : base("Binance", symbol, limit == null, logVerbosity, logWriters)
         {
             this.limit = limit;
             restClient = new BinanceClient();
@@ -54,7 +54,7 @@ namespace Binance.Net
             var updates = new List<ProcessEntry>();
             updates.AddRange(data.Asks.Select(a => new ProcessEntry(OrderBookEntryType.Ask, a)));
             updates.AddRange(data.Bids.Select(b => new ProcessEntry(OrderBookEntryType.Bid, b)));
-            UpdateOrderBook(data.FirstUpdateId.Value, data.LastUpdateId, updates);
+            UpdateOrderBook(data.FirstUpdateId ?? data.LastUpdateId, data.LastUpdateId, updates);
         }
 
         protected override async Task<CallResult<bool>> DoResync()
