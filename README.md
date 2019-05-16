@@ -135,6 +135,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 4.0.15 - 16 may 2019
+	* Fixed order book limit implementation
+
 * Version 4.0.14 - 14 may 2019
 	* Added an order book implementation for easily keeping an updated order book
 	* Added additional constructor to ApiCredentials to be able to read from file
