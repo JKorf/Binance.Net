@@ -15,6 +15,7 @@ namespace Binance.Net
         private readonly BinanceClient restClient;
         private readonly BinanceSocketClient socketClient;
         private readonly int? limit;
+        private bool initialUpdateReceived;
 
         public BinanceSymbolOrderBook(string symbol, int? limit = null, LogVerbosity logVerbosity = LogVerbosity.Info, IEnumerable<TextWriter> logWriters = null) : base("Binance", symbol, limit == null, logVerbosity, logWriters)
         {
@@ -38,27 +39,57 @@ namespace Binance.Net
                 return new CallResult<UpdateSubscription>(null, subResult.Error);
 
             Status = OrderBookStatus.Syncing;
-            var bookResult = await restClient.GetOrderBookAsync(Symbol, limit).ConfigureAwait(false);
-            if (!bookResult.Success)
+            if (limit == null)
             {
-                await socketClient.UnsubscribeAll().ConfigureAwait(false);
-                return new CallResult<UpdateSubscription>(null, bookResult.Error);
+                var bookResult = await restClient.GetOrderBookAsync(Symbol, limit).ConfigureAwait(false);
+                if (!bookResult.Success)
+                {
+                    await socketClient.UnsubscribeAll().ConfigureAwait(false);
+                    return new CallResult<UpdateSubscription>(null, bookResult.Error);
+                }
+
+                SetInitialOrderBook(bookResult.Data.LastUpdateId, bookResult.Data.Asks, bookResult.Data.Bids);
+            }
+            else
+            {
+                while (!initialUpdateReceived && Status == OrderBookStatus.Syncing)
+                    await Task.Delay(10).ConfigureAwait(false);
             }
 
-            SetInitialOrderBook(bookResult.Data.LastUpdateId, bookResult.Data.Asks, bookResult.Data.Bids);
             return new CallResult<UpdateSubscription>(subResult.Data, null);
         }
 
         private void HandleUpdate(BinanceOrderBook data)
         {
-            var updates = new List<ProcessEntry>();
-            updates.AddRange(data.Asks.Select(a => new ProcessEntry(OrderBookEntryType.Ask, a)));
-            updates.AddRange(data.Bids.Select(b => new ProcessEntry(OrderBookEntryType.Bid, b)));
-            UpdateOrderBook(data.FirstUpdateId ?? data.LastUpdateId, data.LastUpdateId, updates);
+            if (limit == null)
+            {
+                var updates = new List<ProcessEntry>();
+                updates.AddRange(data.Asks.Select(a => new ProcessEntry(OrderBookEntryType.Ask, a)));
+                updates.AddRange(data.Bids.Select(b => new ProcessEntry(OrderBookEntryType.Bid, b)));
+                UpdateOrderBook(data.FirstUpdateId ?? data.LastUpdateId, data.LastUpdateId, updates);
+            }
+            else
+            {
+                initialUpdateReceived = true;
+                SetInitialOrderBook(data.LastUpdateId, data.Asks, data.Bids);
+            }
+        }
+
+        protected override void DoReset()
+        {
+            initialUpdateReceived = false;
         }
 
         protected override async Task<CallResult<bool>> DoResync()
         {
+            if (limit != null)
+            {
+                while (!initialUpdateReceived && Status == OrderBookStatus.Syncing)
+                    await Task.Delay(10).ConfigureAwait(false);
+
+                return new CallResult<bool>(true, null);
+            }
+            
             var bookResult = await restClient.GetOrderBookAsync(Symbol, limit).ConfigureAwait(false);
             if (!bookResult.Success)
                 return new CallResult<bool>(false, bookResult.Error);
