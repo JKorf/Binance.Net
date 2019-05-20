@@ -135,6 +135,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 4.0.16 - 20 may 2019
+	* Fixed AutoComply trade rules behavior
+
 * Version 4.0.15 - 16 may 2019
 	* Fixed order book limit implementation
 
