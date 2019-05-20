@@ -17,6 +17,8 @@ namespace Binance.Net
         {
             quantity = Math.Min(maxQuantity, quantity);
             quantity = Math.Max(minQuantity, quantity);
+            if (stepSize == 0)
+                return quantity;
             quantity -= quantity % stepSize;
             quantity = Floor(quantity);
             return quantity;

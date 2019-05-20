@@ -1501,8 +1501,10 @@ namespace Binance.Net
                 if(type == OrderType.Market && symbolData.MarketLotSizeFilter != null)
                 {
                     minQty = symbolData.MarketLotSizeFilter.MinQuantity;
-                    maxQty = symbolData.MarketLotSizeFilter.MaxQuantity;
-                    stepSize = symbolData.MarketLotSizeFilter.StepSize;
+                    if (symbolData.MarketLotSizeFilter.MaxQuantity != 0)
+                        maxQty = symbolData.MarketLotSizeFilter.MaxQuantity;
+                    if (symbolData.MarketLotSizeFilter.StepSize != 0)
+                        stepSize = symbolData.MarketLotSizeFilter.StepSize;
                 }
 
                 if (minQty.HasValue)
