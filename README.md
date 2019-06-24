@@ -79,6 +79,11 @@ Binance.Net provides two clients to interact with the Binance API. The  `Binance
 ## Examples
 Examples can be found in the Examples folder.
 
+## Timestamping
+Requests made to Binance are checked for a correct timestamp. When requests are send a timestamp is added to the message. When Binance processes the message the timestamp is checked to be > the current time and < the current time + 5000ms (default). If the timestamp is outside these limits the following errors will be returned:
+`timestamps 1000ms ahead of server time` or `Timestamp for this request is outside of the recvWindow`
+The recvWindow is default 5000ms and can be changed using the `ReceiveWindow` configuration option. All times are communicated in UTC so there won't be any timezone issues. However, because of clock drifting it can be that the client UTC time is not the same as the server UTC time. It is therefor recommended clients use the `SP TimeSync` program to resync the client UTC time more often than windows does by default (every 10 minutes or less is recommended).
+
 ## Websockets
 The Binance.Net socket client provides several socket endpoint to which can be subscribed.
 
