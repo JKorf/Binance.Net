@@ -3,7 +3,7 @@ using CryptoExchange.Net.Objects;
 
 namespace Binance.Net.Objects
 {
-    public class BinanceClientOptions : ClientOptions
+    public class BinanceClientOptions : RestClientOptions
     {
         /// <summary>
         /// Whether or not to automatically sync the local time with the server time
@@ -14,6 +14,11 @@ namespace Binance.Net.Objects
         /// Interval for refreshing the auto timestamp calculation
         /// </summary>
         public TimeSpan AutoTimestampRecalculationInterval { get; set; } = TimeSpan.FromHours(3);
+
+        /// <summary>
+        /// A manual offset for the timestamp. Should only be used if AutoTimestamp and regular time synchronization on the OS is not reliable enough
+        /// </summary>
+        public TimeSpan TimestampOffset { get; set; } = TimeSpan.Zero;
 
         /// <summary>
         /// Whether to check the trade rules when placing new orders and what to do if the trade isn't valid
@@ -39,6 +44,7 @@ namespace Binance.Net.Objects
             var copy = Copy<BinanceClientOptions>();
             copy.AutoTimestamp = AutoTimestamp;
             copy.AutoTimestampRecalculationInterval = AutoTimestampRecalculationInterval;
+            copy.TimestampOffset = TimestampOffset;
             copy.TradeRulesBehaviour = TradeRulesBehaviour;
             copy.TradeRulesUpdateInterval = TradeRulesUpdateInterval;
             copy.ReceiveWindow = ReceiveWindow;
@@ -79,6 +85,22 @@ namespace Binance.Net.Objects
             copy.BaseSocketCombinedAddress = BaseSocketCombinedAddress;
             return copy;
         }
+    }
 
+    public class BinanceOrderBookOptions : OrderBookOptions
+    {
+        /// <summary>
+        /// The top amount of results to keep in sync. If for example limit=10 is used, the order book will contain the 10 best bids and 10 best asks. Leaving this null will sync the full order book
+        /// </summary>
+        public int? Limit { get; }
+
+        /// <summary>
+        /// Create new options
+        /// </summary>
+        /// <param name="limit">The top amount of results to keep in sync. If for example limit=10 is used, the order book will contain the 10 best bids and 10 best asks. Leaving this null will sync the full order book</param>
+        public BinanceOrderBookOptions(int? limit = null): base("Binance", limit == null)
+        {
+            Limit = limit;
+        }
     }
 }

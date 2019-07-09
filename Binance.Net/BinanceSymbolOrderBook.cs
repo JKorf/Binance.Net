@@ -10,6 +10,10 @@ using CryptoExchange.Net.Sockets;
 
 namespace Binance.Net
 {
+    /// <summary>
+    /// Implementation for a synchronized order book. After calling Start the order book will sync itself and keep up to date with new data. It will automatically try to reconnect and resync in case of a lost/interrupted connection.
+    /// Make sure to check the State property to see if the order book is synced.
+    /// </summary>
     public class BinanceSymbolOrderBook: SymbolOrderBook
     {
         private readonly BinanceClient restClient;
@@ -17,9 +21,14 @@ namespace Binance.Net
         private readonly int? limit;
         private bool initialUpdateReceived;
 
-        public BinanceSymbolOrderBook(string symbol, int? limit = null, LogVerbosity logVerbosity = LogVerbosity.Info, IEnumerable<TextWriter> logWriters = null) : base("Binance", symbol, limit == null, logVerbosity, logWriters)
+        /// <summary>
+        /// Create a new instance
+        /// </summary>
+        /// <param name="symbol">The symbol of the order book</param>
+        /// <param name="options">The options for the order book</param>
+        public BinanceSymbolOrderBook(string symbol, BinanceOrderBookOptions options = null) : base(symbol, options ?? new BinanceOrderBookOptions())
         {
-            this.limit = limit;
+            limit = options?.Limit;
             restClient = new BinanceClient();
             socketClient = new BinanceSocketClient();
         }
@@ -41,7 +50,7 @@ namespace Binance.Net
             Status = OrderBookStatus.Syncing;
             if (limit == null)
             {
-                var bookResult = await restClient.GetOrderBookAsync(Symbol, limit).ConfigureAwait(false);
+                var bookResult = await restClient.GetOrderBookAsync(Symbol, limit ?? 1000).ConfigureAwait(false);
                 if (!bookResult.Success)
                 {
                     await socketClient.UnsubscribeAll().ConfigureAwait(false);

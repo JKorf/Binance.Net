@@ -140,6 +140,10 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 4.0.17 - 09 jun 2019
+	* Added TimestampOffset options
+	* Update BinanceSymbolOrderBook
+
 * Version 4.0.16 - 20 may 2019
 	* Fixed AutoComply trade rules behavior
 

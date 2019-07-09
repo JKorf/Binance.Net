@@ -28,11 +28,12 @@ namespace Binance.Net
 
         private bool autoTimestamp;
         private TimeSpan autoTimestampRecalculationInterval;
+        private TimeSpan timestampOffset;
         private TradeRulesBehaviour tradeRulesBehaviour;
         private TimeSpan tradeRulesUpdateInterval;
         private TimeSpan defaultReceiveWindow;
 
-        private double timeOffset;
+        private double calculatedTimeOffset;
         private bool timeSynced;
         private DateTime lastTimeSync;
 
@@ -204,17 +205,17 @@ namespace Binance.Net
                 if (offset >= 0 && offset < 500)
                 {
                     // Small offset, probably mainly due to ping. Don't adjust time
-                    timeOffset = 0;
+                    calculatedTimeOffset = 0;
                     timeSynced = true;
                     lastTimeSync = DateTime.UtcNow;
                     log.Write(LogVerbosity.Info, $"Time offset between 0 and 500ms ({offset}ms), no adjustment needed");
                     return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.ServerTime, result.Error);
                 }
 
-                timeOffset = (result.Data.ServerTime - localTime).TotalMilliseconds;
+                calculatedTimeOffset = (result.Data.ServerTime - localTime).TotalMilliseconds;
                 timeSynced = true;
                 lastTimeSync = DateTime.UtcNow;
-                log.Write(LogVerbosity.Info, $"Time offset set to {timeOffset}ms");
+                log.Write(LogVerbosity.Info, $"Time offset set to {calculatedTimeOffset}ms");
                 return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.ServerTime, result.Error);
             }
         }
@@ -1428,6 +1429,7 @@ namespace Binance.Net
             tradeRulesBehaviour = options.TradeRulesBehaviour;
             tradeRulesUpdateInterval = options.TradeRulesUpdateInterval;
             autoTimestampRecalculationInterval = options.AutoTimestampRecalculationInterval;
+            timestampOffset = options.TimestampOffset;
             defaultReceiveWindow = options.ReceiveWindow;
 
             postParametersPosition = PostParameters.InUri;
@@ -1460,7 +1462,8 @@ namespace Binance.Net
 
         private string GetTimestamp()
         {
-            var offset = autoTimestamp ? timeOffset : 0;
+            var offset = autoTimestamp ? calculatedTimeOffset : 0;
+            offset += timestampOffset.TotalMilliseconds;
             return ToUnixTimestamp(DateTime.UtcNow.AddMilliseconds(offset)).ToString();
         }
 
