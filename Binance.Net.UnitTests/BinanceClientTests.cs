@@ -1,15 +1,15 @@
-﻿using NUnit.Framework;
-using Moq;
-using System.Net;
-using System;
-using Binance.Net.Objects;
-using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using Binance.Net.Objects;
+using Binance.Net.UnitTests.TestImplementations;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Requests;
+using Moq;
+using Newtonsoft.Json;
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using Binance.Net.UnitTests.TestImplementations;
+using System.Net;
 
 namespace Binance.Net.UnitTests
 {
@@ -23,7 +23,7 @@ namespace Binance.Net.UnitTests
             // arrange
             DateTime expected = new DateTime(1970, 1, 1).AddMilliseconds(milisecondsTime);
             var time = new BinanceCheckTime() { ServerTime = expected };
-            var client = TestHelpers.CreateResponseClient(JsonConvert.SerializeObject(time), new BinanceClientOptions(){ AutoTimestamp = false});
+            var client = TestHelpers.CreateResponseClient(JsonConvert.SerializeObject(time), new BinanceClientOptions() { AutoTimestamp = false });
 
             // act
             var result = client.GetServerTime();
@@ -106,7 +106,7 @@ namespace Binance.Net.UnitTests
                 }
             };
             var client = TestHelpers.CreateResponseClient("{\"lastUpdateId\":123,\"asks\": [[0.1, 1.1], [0.2, 2.2]], \"bids\": [[0.3,3.3], [0.4,4.4]]}");
-            
+
             // act
             var result = client.GetOrderBook("BNBBTC");
 
@@ -230,7 +230,7 @@ namespace Binance.Net.UnitTests
                     Symbol = "ETHBTC"
                 }
             };
-            
+
             var client = TestHelpers.CreateResponseClient(prices);
 
             // act
@@ -740,7 +740,7 @@ namespace Binance.Net.UnitTests
                     Indicators = new Dictionary<string, List<BinanceIndicator>>()
                     {
                         { "BTCUSDT", new List<BinanceIndicator>
-                            { 
+                            {
                                 new BinanceIndicator()
                                 {
                                     Count = 1,
@@ -901,6 +901,101 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsTrue(sign.First().Key == "X-MBX-APIKEY" && sign.First().Value == "TestKey");
+        }
+
+        [TestCase]
+        public void Transfer_Should_RespondWithTransfer()
+        {
+            // arrange
+            var placed = new BinanceTransfer()
+            {
+                TranId = 1001
+            };
+
+            var client = TestHelpers.CreateResponseClient(placed, new BinanceClientOptions()
+            {
+                ApiCredentials = new ApiCredentials("Test", "Test"),
+                AutoTimestamp = false
+            });
+
+            // act
+            var result = client.Transfer("USDT", 1001, TransferDirectionType.MainToMargin);
+
+            // assert
+            Assert.IsTrue(result.Success);
+            Assert.IsTrue(TestHelpers.AreEqual(placed, result.Data));
+        }
+
+        [TestCase]
+        public void Borrow_Should_RespondWithBorrow()
+        {
+            // arrange
+            var placed = new BinanceBorrow()
+            {
+                TranId = 11
+            };
+
+            var client = TestHelpers.CreateResponseClient(placed, new BinanceClientOptions()
+            {
+                ApiCredentials = new ApiCredentials("Test", "Test"),
+                AutoTimestamp = false
+            });
+
+            // act
+            var result = client.Borrow("USDT", 2002);
+
+            // assert
+            Assert.IsTrue(result.Success);
+            Assert.IsTrue(TestHelpers.AreEqual(placed, result.Data));
+        }
+
+        [TestCase]
+        public void Repay_Should_RespondWithRepay()
+        {
+            // arrange
+            var placed = new BinanceRepay()
+            {
+                TranId = 11
+            };
+
+            var client = TestHelpers.CreateResponseClient(placed, new BinanceClientOptions()
+            {
+                ApiCredentials = new ApiCredentials("Test", "Test"),
+                AutoTimestamp = false
+            });
+
+            // act
+            var result = client.Repay("USDT", 2002);
+
+            // assert
+            Assert.IsTrue(result.Success);
+            Assert.IsTrue(TestHelpers.AreEqual(placed, result.Data));
+        }
+
+        [TestCase]
+        public void MarginPlaceOrder_Should_RespondWithMarginPlacedOrder()
+        {
+            // arrange
+            var placed = new BinancePlacedOrder()
+            {
+                ClientOrderId = "test",
+                OrderId = 100000000000,
+                Symbol = "BNBBTC",
+                TransactTime = new DateTime(2017, 1, 1)
+            };
+
+            var client = TestHelpers.CreateResponseClient(placed, new BinanceClientOptions()
+            {
+                ApiCredentials = new ApiCredentials("Test", "Test"),
+                AutoTimestamp = false
+            });
+
+            // act
+            var result = client.MarginPlaceOrder("BTCUSDT", OrderSide.Buy, OrderType.Limit, timeInForce: TimeInForce.GoodTillCancel, quantity: 1, price: 2);
+
+            // assert
+            Assert.IsTrue(result.Success);
+            Assert.IsTrue(TestHelpers.AreEqual(placed, result.Data));
         }
     }
 }

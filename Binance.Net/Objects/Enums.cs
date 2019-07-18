@@ -141,7 +141,7 @@
         ThreeDay,
         OneWeek,
         OneMonth
-    }    
+    }
 
     /// <summary>
     /// The status of a withdrawal
@@ -229,7 +229,7 @@
         ThrowError,
         AutoComply
     }
-    
+
     public enum SystemStatus
     {
         Normal,
@@ -240,5 +240,10 @@
     {
         Enabled,
         Disabled
+    }
+    public enum TransferDirectionType
+    {
+        MainToMargin ,
+        MarginToMain
     }
 }

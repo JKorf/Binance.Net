@@ -719,6 +719,116 @@ namespace Binance.Net.Interfaces
         WebCallResult<object> StopUserStream(string listenKey);
 
         /// <summary>
+        /// Execute transfer between spot account and margin account.
+        /// </summary>
+        /// <param name="asset">The asset being transferred, e.g., BTC</param>
+        /// <param name="amount">The amount to be transferred</param>
+        /// <param name="type">TransferDirection (MainToMargin/MarginToMain)</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Transaction Id</returns>
+        WebCallResult<BinanceTransfer> Transfer(string asset, decimal amount, TransferDirectionType type, int? receiveWindow = null);
+
+        /// <summary>
+        /// Execute transfer between spot account and margin account.
+        /// </summary>
+        /// <param name="asset">The asset being transferred, e.g., BTC</param>
+        /// <param name="amount">The amount to be transferred</param>
+        /// <param name="type">TransferDirection (MainToMargin/MarginToMain)</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Transaction Id</returns>
+        Task<WebCallResult<BinanceTransfer>> TransferAsync(string asset, decimal amount, TransferDirectionType type, int? receiveWindow = null);
+
+        /// <summary>
+        /// Borrow. Apply for a loan. 
+        /// </summary>
+        /// <param name="asset">The asset being borrow, e.g., BTC</param>
+        /// <param name="amount">The amount to be borrow</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Transaction Id</returns>
+        WebCallResult<BinanceBorrow> Borrow(string asset, decimal amount, int? receiveWindow = null);
+
+        /// <summary>
+        /// Borrow. Apply for a loan. 
+        /// </summary>
+        /// <param name="asset">The asset being borrow, e.g., BTC</param>
+        /// <param name="amount">The amount to be borrow</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Transaction Id</returns>
+        Task<WebCallResult<BinanceBorrow>> BorrowAsync(string asset, decimal amount, int? receiveWindow = null);
+
+        /// <summary>
+        /// Repay loan for margin account.
+        /// </summary>
+        /// <param name="asset">The asset being repay, e.g., BTC</param>
+        /// <param name="amount">The amount to be repay</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Transaction Id</returns>
+        WebCallResult<BinanceRepay> Repay(string asset, decimal amount, int? receiveWindow = null);
+
+        /// <summary>
+        /// Repay loan for margin account.
+        /// </summary>
+        /// <param name="asset">The asset being repay, e.g., BTC</param>
+        /// <param name="amount">The amount to be repay</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Transaction Id</returns>
+        Task<WebCallResult<BinanceRepay>> RepayAsync(string asset, decimal amount, int? receiveWindow = null);
+
+        /// <summary>
+        /// Margin account new order
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="side">The order side (buy/sell)</param>
+        /// <param name="type">The order type</param>
+        /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
+        /// <param name="quantity">The amount of the symbol</param>
+        /// <param name="price">The price to use</param>
+        /// <param name="newClientOrderId">Unique id for order</param>
+        /// <param name="stopPrice">Used for stop orders</param>
+        /// <param name="icebergQty">Used for iceberg orders</param>
+        /// <param name="orderResponseType">The type of response to receive</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Id's for the placed order</returns>
+        WebCallResult<BinancePlacedOrder> MarginPlaceOrder(string symbol,
+            OrderSide side,
+            OrderType type,
+            decimal quantity,
+            string newClientOrderId = null,
+            decimal? price = null,
+            TimeInForce? timeInForce = null,
+            decimal? stopPrice = null,
+            decimal? icebergQty = null,
+            OrderResponseType? orderResponseType = null,
+            int? receiveWindow = null);
+
+        /// <summary>
+        /// Margin account new order
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="side">The order side (buy/sell)</param>
+        /// <param name="type">The order type</param>
+        /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
+        /// <param name="quantity">The amount of the symbol</param>
+        /// <param name="price">The price to use</param>
+        /// <param name="newClientOrderId">Unique id for order</param>
+        /// <param name="stopPrice">Used for stop orders</param>
+        /// <param name="icebergQty">Used for iceberg orders</param>
+        /// <param name="orderResponseType">The type of response to receive</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Id's for the placed order</returns>
+        Task<WebCallResult<BinancePlacedOrder>> MarginPlaceOrderAsync(string symbol,
+            OrderSide side,
+            OrderType type,
+            decimal quantity,
+            string newClientOrderId = null,
+            decimal? price = null,
+            TimeInForce? timeInForce = null,
+            decimal? stopPrice = null,
+            decimal? icebergQty = null,
+            OrderResponseType? orderResponseType = null,
+            int? receiveWindow = null);
+
+        /// <summary>
         /// Stops the current user stream
         /// </summary>
         /// <returns></returns>
