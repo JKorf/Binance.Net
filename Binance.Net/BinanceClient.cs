@@ -85,7 +85,7 @@ namespace Binance.Net
         // Margin
         private const string MarginTransferEndpoint = "margin/transfer";
         private const string MarginBorrowEndpoint = "margin/loan";
-        private const string MarginRepayEndpoint = "margin/transfer";
+        private const string MarginRepayEndpoint = "margin/repay";
         private const string NewMarginOrderEndpoint = "margin/order";
         private const string CancelMarginOrderEndpoint = "margin/order";
 
