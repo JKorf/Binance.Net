@@ -86,8 +86,8 @@ namespace Binance.Net
         private const string MarginTransferEndpoint = "margin/transfer";
         private const string MarginBorrowEndpoint = "margin/loan";
         private const string MarginRepayEndpoint = "margin/transfer";
-        private const string MarginNewOrderEndpoint = "margin/order";
-
+        private const string NewMarginOrderEndpoint = "margin/order";
+        private const string CancelMarginOrderEndpoint = "margin/order";
 
         // User stream
         private const string GetListenKeyEndpoint = "userDataStream";
@@ -195,14 +195,10 @@ namespace Binance.Net
                 var localTime = DateTime.UtcNow;
                 var result = await ExecuteRequest<BinanceCheckTime>(url).ConfigureAwait(false);
                 if (!result.Success)
-                {
                     return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, default(DateTime), result.Error);
-                }
 
                 if (timeSynced && !resetAutoTimestamp)
-                {
                     return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.ServerTime, result.Error);
-                }
 
                 if (TotalRequestsMade == 1)
                 {
@@ -210,9 +206,7 @@ namespace Binance.Net
                     localTime = DateTime.UtcNow;
                     result = await ExecuteRequest<BinanceCheckTime>(url).ConfigureAwait(false);
                     if (!result.Success)
-                    {
                         return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, default(DateTime), result.Error);
-                    }
                 }
 
                 // Calculate time offset between local and server
@@ -249,9 +243,7 @@ namespace Binance.Net
         {
             var exchangeInfoResult = await ExecuteRequest<BinanceExchangeInfo>(GetUrl(ExchangeInfoEndpoint, Api, PublicVersion)).ConfigureAwait(false);
             if (!exchangeInfoResult.Success)
-            {
                 return exchangeInfoResult;
-            }
 
             exchangeInfo = exchangeInfoResult.Data;
             lastExchangeInfoUpdate = DateTime.UtcNow;
@@ -519,9 +511,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
                 return new WebCallResult<BinanceOrder[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
 
             var parameters = new Dictionary<string, object>
             {
@@ -559,9 +549,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
                 return new WebCallResult<BinanceOrder[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
 
             var parameters = new Dictionary<string, object>
             {
@@ -634,9 +622,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
                 return new WebCallResult<BinancePlacedOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
 
             var rulesCheck = await CheckTradeRules(symbol, quantity, price, type).ConfigureAwait(false);
             if (!rulesCheck.Passed)
@@ -723,9 +709,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
                 return new WebCallResult<BinancePlacedOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
 
             var rulesCheck = await CheckTradeRules(symbol, quantity, price, type).ConfigureAwait(false);
             if (!rulesCheck.Passed)
@@ -777,15 +761,11 @@ namespace Binance.Net
         public async Task<WebCallResult<BinanceOrder>> QueryOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, long? receiveWindow = null)
         {
             if (orderId == null && origClientOrderId == null)
-            {
                 return new WebCallResult<BinanceOrder>(null, null, null, new ArgumentError("Either orderId or origClientOrderId should be provided"));
-            }
 
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
                 return new WebCallResult<BinanceOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
 
             var parameters = new Dictionary<string, object>
             {
@@ -823,9 +803,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
                 return new WebCallResult<BinanceCanceledOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
 
             var parameters = new Dictionary<string, object>
             {
@@ -856,9 +834,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
                 return new WebCallResult<BinanceAccountInfo>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
 
             var parameters = new Dictionary<string, object>
             {
@@ -895,9 +871,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
                 return new WebCallResult<BinanceTrade[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
 
             var parameters = new Dictionary<string, object>
             {
@@ -939,9 +913,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
                 return new WebCallResult<BinanceWithdrawalPlaced>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
 
             var parameters = new Dictionary<string, object>
             {
@@ -992,9 +964,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
                 return new WebCallResult<BinanceDepositList>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
 
             var parameters = new Dictionary<string, object>
             {
@@ -1044,9 +1014,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
                 return new WebCallResult<BinanceWithdrawalList>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
 
             var parameters = new Dictionary<string, object>
             {
@@ -1091,9 +1059,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
                 return new WebCallResult<BinanceDepositAddress>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
 
             var parameters = new Dictionary<string, object>
             {
@@ -1123,9 +1089,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
                 return new WebCallResult<BinanceTradeFee[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
 
             var parameters = new Dictionary<string, object>
             {
@@ -1159,9 +1123,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
                 return new WebCallResult<Dictionary<string, BinanceAssetDetails>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
 
             var parameters = new Dictionary<string, object>
             {
@@ -1194,9 +1156,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
                 return new WebCallResult<BinanceAccountStatus>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
 
             var parameters = new Dictionary<string, object>
             {
@@ -1244,9 +1204,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
                 return new WebCallResult<BinanceDustLog[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
 
             var parameters = new Dictionary<string, object>
             {
@@ -1287,9 +1245,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
                 return new WebCallResult<BinanceSubAccount[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
 
             var parameters = new Dictionary<string, object>
             {
@@ -1336,9 +1292,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
                 return new WebCallResult<BinanceSubAccountTransfer[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
 
             var parameters = new Dictionary<string, object>
             {
@@ -1384,9 +1338,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
                 return new WebCallResult<BinanceSubAccountTransferResult>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
 
             var parameters = new Dictionary<string, object>
             {
@@ -1418,9 +1370,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
                 return new WebCallResult<BinanceTradingStatus>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
 
             var parameters = new Dictionary<string, object>
             {
@@ -1453,9 +1403,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
                 return new WebCallResult<string>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
 
             var result = await ExecuteRequest<BinanceListenKey>(GetUrl(GetListenKeyEndpoint, Api, UserDataStreamVersion), PostMethod).ConfigureAwait(false);
             return new WebCallResult<string>(result.ResponseStatusCode, result.ResponseHeaders, result.Data?.ListenKey, result.Error);
@@ -1475,9 +1423,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
                 return new WebCallResult<object>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
 
             var parameters = new Dictionary<string, object>
             {
@@ -1501,9 +1447,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
                 return new WebCallResult<object>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
 
             var parameters = new Dictionary<string, object>
             {
@@ -1523,7 +1467,7 @@ namespace Binance.Net
         /// <param name="type">TransferDirection (MainToMargin/MarginToMain)</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Transaction Id</returns>
-        public WebCallResult<BinanceTransfer> Transfer(string asset, decimal amount, TransferDirectionType type, int? receiveWindow = null) => TransferAsync(asset, amount, type, receiveWindow).Result;
+        public WebCallResult<BinanceMarginTransaction> Transfer(string asset, decimal amount, TransferDirectionType type, int? receiveWindow = null) => TransferAsync(asset, amount, type, receiveWindow).Result;
 
         /// <summary>
         /// Execute transfer between spot account and margin account.
@@ -1533,13 +1477,11 @@ namespace Binance.Net
         /// <param name="type">TransferDirection (MainToMargin/MarginToMain)</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Transaction Id</returns>
-        public async Task<WebCallResult<BinanceTransfer>> TransferAsync(string asset, decimal amount, TransferDirectionType type, int? receiveWindow = null)
+        public async Task<WebCallResult<BinanceMarginTransaction>> TransferAsync(string asset, decimal amount, TransferDirectionType type, int? receiveWindow = null)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
-                return new WebCallResult<BinanceTransfer>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
+                return new WebCallResult<BinanceMarginTransaction>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -1550,7 +1492,7 @@ namespace Binance.Net
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await ExecuteRequest<BinanceTransfer>(GetUrl(MarginTransferEndpoint, MarginApi, MarginVersion), PostMethod, parameters, true).ConfigureAwait(false);
+            return await ExecuteRequest<BinanceMarginTransaction>(GetUrl(MarginTransferEndpoint, MarginApi, MarginVersion), PostMethod, parameters, true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1560,7 +1502,7 @@ namespace Binance.Net
         /// <param name="amount">The amount to be borrow</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Transaction Id</returns>
-        public WebCallResult<BinanceBorrow> Borrow(string asset, decimal amount, int? receiveWindow = null) => BorrowAsync(asset, amount, receiveWindow).Result;
+        public WebCallResult<BinanceMarginTransaction> Borrow(string asset, decimal amount, int? receiveWindow = null) => BorrowAsync(asset, amount, receiveWindow).Result;
 
         /// <summary>
         /// Borrow. Apply for a loan. 
@@ -1569,13 +1511,11 @@ namespace Binance.Net
         /// <param name="amount">The amount to be borrow</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Transaction Id</returns>
-        public async Task<WebCallResult<BinanceBorrow>> BorrowAsync(string asset, decimal amount, int? receiveWindow = null)
+        public async Task<WebCallResult<BinanceMarginTransaction>> BorrowAsync(string asset, decimal amount, int? receiveWindow = null)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
-                return new WebCallResult<BinanceBorrow>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
+                return new WebCallResult<BinanceMarginTransaction>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -1585,7 +1525,7 @@ namespace Binance.Net
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await ExecuteRequest<BinanceBorrow>(GetUrl(MarginBorrowEndpoint, MarginApi, MarginVersion), PostMethod, parameters, true).ConfigureAwait(false);
+            return await ExecuteRequest<BinanceMarginTransaction>(GetUrl(MarginBorrowEndpoint, MarginApi, MarginVersion), PostMethod, parameters, true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1595,7 +1535,7 @@ namespace Binance.Net
         /// <param name="amount">The amount to be borrow</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Transaction Id</returns>
-        public WebCallResult<BinanceRepay> Repay(string asset, decimal amount, int? receiveWindow = null) => RepayAsync(asset, amount, receiveWindow).Result;
+        public WebCallResult<BinanceMarginTransaction> Repay(string asset, decimal amount, int? receiveWindow = null) => RepayAsync(asset, amount, receiveWindow).Result;
 
         /// <summary>
         /// Repay loan for margin account.
@@ -1604,13 +1544,11 @@ namespace Binance.Net
         /// <param name="amount">The amount to be borrow</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Transaction Id</returns>
-        public async Task<WebCallResult<BinanceRepay>> RepayAsync(string asset, decimal amount, int? receiveWindow = null)
+        public async Task<WebCallResult<BinanceMarginTransaction>> RepayAsync(string asset, decimal amount, int? receiveWindow = null)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
-                return new WebCallResult<BinanceRepay>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
+                return new WebCallResult<BinanceMarginTransaction>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -1620,7 +1558,7 @@ namespace Binance.Net
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await ExecuteRequest<BinanceRepay>(GetUrl(MarginRepayEndpoint, MarginApi, MarginVersion), PostMethod, parameters, true).ConfigureAwait(false);
+            return await ExecuteRequest<BinanceMarginTransaction>(GetUrl(MarginRepayEndpoint, MarginApi, MarginVersion), PostMethod, parameters, true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1638,7 +1576,7 @@ namespace Binance.Net
         /// <param name="orderResponseType">The type of response to receive</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for the placed order</returns>
-        public WebCallResult<BinancePlacedOrder> MarginPlaceOrder(string symbol,
+        public WebCallResult<BinancePlacedOrder> PlaceMarginOrder(string symbol,
             OrderSide side,
             OrderType type,
             decimal quantity,
@@ -1648,7 +1586,7 @@ namespace Binance.Net
             decimal? stopPrice = null,
             decimal? icebergQty = null,
             OrderResponseType? orderResponseType = null,
-            int? receiveWindow = null) => MarginPlaceOrderAsync(symbol, side, type, quantity, newClientOrderId, price, timeInForce, stopPrice, icebergQty, orderResponseType, receiveWindow).Result;
+            int? receiveWindow = null) => PlaceMarginOrderAsync(symbol, side, type, quantity, newClientOrderId, price, timeInForce, stopPrice, icebergQty, orderResponseType, receiveWindow).Result;
 
         /// <summary>
         /// Margin account new order
@@ -1665,7 +1603,7 @@ namespace Binance.Net
         /// <param name="orderResponseType">The type of response to receive</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for the placed order</returns>
-        public async Task<WebCallResult<BinancePlacedOrder>> MarginPlaceOrderAsync(string symbol,
+        public async Task<WebCallResult<BinancePlacedOrder>> PlaceMarginOrderAsync(string symbol,
             OrderSide side,
             OrderType type,
             decimal quantity,
@@ -1679,9 +1617,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
                 return new WebCallResult<BinancePlacedOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
 
             var rulesCheck = await CheckTradeRules(symbol, quantity, price, type).ConfigureAwait(false);
             if (!rulesCheck.Passed)
@@ -1709,8 +1645,48 @@ namespace Binance.Net
             parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await ExecuteRequest<BinancePlacedOrder>(GetUrl(MarginNewOrderEndpoint, MarginApi, MarginVersion), PostMethod, parameters, true).ConfigureAwait(false);
+            return await ExecuteRequest<BinancePlacedOrder>(GetUrl(NewMarginOrderEndpoint, MarginApi, MarginVersion), PostMethod, parameters, true).ConfigureAwait(false);
         }
+
+        /// <summary>
+        /// Cancel an active order for margin account
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="orderId">The order id of the order</param>
+        /// <param name="origClientOrderId">The client order id of the order</param>
+        /// <param name="newClientOrderId">Unique identifier for this cancel</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Id's for canceled order</returns>
+        public WebCallResult<BinanceCanceledOrder> CancelMarginOrder(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null) => CancelOrderAsync(symbol, orderId, origClientOrderId, newClientOrderId, receiveWindow).Result;
+
+        /// <summary>
+        /// Cancel an active order for margin account
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="orderId">The order id of the order</param>
+        /// <param name="origClientOrderId">The client order id of the order</param>
+        /// <param name="newClientOrderId">Unique identifier for this cancel</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Id's for canceled order</returns>
+        public async Task<WebCallResult<BinanceCanceledOrder>> CancelMarginOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<BinanceCanceledOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "symbol", symbol },
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("orderId", orderId?.ToString());
+            parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
+            parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await ExecuteRequest<BinanceCanceledOrder>(GetUrl(CancelMarginOrderEndpoint, MarginApi, SignedVersion), DeleteMethod, parameters, true).ConfigureAwait(false);
+        }
+
         #endregion
 
         #endregion

@@ -42,6 +42,5 @@ namespace Binance.Net
         {
             return Math.Floor(number * 100000000) / 100000000;
         }
-
     }
 }

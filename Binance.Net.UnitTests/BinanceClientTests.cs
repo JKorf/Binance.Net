@@ -904,12 +904,12 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void Transfer_Should_RespondWithTransfer()
+        public void Transfer_Should_RespondWithMarginTransaction()
         {
             // arrange
-            var placed = new BinanceTransfer()
+            var placed = new BinanceMarginTransaction()
             {
-                TranId = 1001
+                TransactionId = 1001
             };
 
             var client = TestHelpers.CreateResponseClient(placed, new BinanceClientOptions()
@@ -927,12 +927,12 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void Borrow_Should_RespondWithBorrow()
+        public void Borrow_Should_RespondWithMarginTransaction()
         {
             // arrange
-            var placed = new BinanceBorrow()
+            var placed = new BinanceMarginTransaction()
             {
-                TranId = 11
+                TransactionId = 11
             };
 
             var client = TestHelpers.CreateResponseClient(placed, new BinanceClientOptions()
@@ -950,12 +950,12 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void Repay_Should_RespondWithRepay()
+        public void Repay_Should_RespondWithMarginTransaction()
         {
             // arrange
-            var placed = new BinanceRepay()
+            var placed = new BinanceMarginTransaction()
             {
-                TranId = 11
+                TransactionId = 11
             };
 
             var client = TestHelpers.CreateResponseClient(placed, new BinanceClientOptions()
@@ -973,7 +973,7 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void MarginPlaceOrder_Should_RespondWithMarginPlacedOrder()
+        public void PlaceMarginOrder_Should_RespondWithMarginPlacedOrder()
         {
             // arrange
             var placed = new BinancePlacedOrder()
@@ -991,11 +991,37 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.MarginPlaceOrder("BTCUSDT", OrderSide.Buy, OrderType.Limit, timeInForce: TimeInForce.GoodTillCancel, quantity: 1, price: 2);
+            var result = client.PlaceMarginOrder("BTCUSDT", OrderSide.Buy, OrderType.Limit, timeInForce: TimeInForce.GoodTillCancel, quantity: 1, price: 2);
 
             // assert
             Assert.IsTrue(result.Success);
             Assert.IsTrue(TestHelpers.AreEqual(placed, result.Data));
+        }
+
+        [TestCase]
+        public void CancelMarginOrder_Should_RespondWithCanceledOrder()
+        {
+            // arrange
+            var canceled = new BinanceCanceledOrder()
+            {
+                ClientOrderId = "test",
+                OrderId = 100000000000,
+                Symbol = "BNBBTC",
+                OriginalClientOrderId = "test2"
+            };
+
+            var client = TestHelpers.CreateResponseClient(canceled, new BinanceClientOptions()
+            {
+                ApiCredentials = new ApiCredentials("Test", "Test"),
+                AutoTimestamp = false
+            });
+
+            // act
+            var result = client.CancelMarginOrder("BNBBTC");
+
+            // assert
+            Assert.IsTrue(result.Success);
+            Assert.IsTrue(TestHelpers.AreEqual(canceled, result.Data));
         }
     }
 }
