@@ -88,6 +88,8 @@ namespace Binance.Net
         private const string MarginRepayEndpoint = "margin/repay";
         private const string NewMarginOrderEndpoint = "margin/order";
         private const string CancelMarginOrderEndpoint = "margin/order";
+        private const string QueryLoanEndpoint = "margin/query/loan";
+        private const string QueryRapayEndpoint = "margin/query/repay";
 
         // User stream
         private const string GetListenKeyEndpoint = "userDataStream";
@@ -928,14 +930,10 @@ namespace Binance.Net
 
             var result = await ExecuteRequest<BinanceWithdrawalPlaced>(GetUrl(WithdrawEndpoint, WithdrawalApi, WithdrawalVersion), PostMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success || result.Data == null)
-            {
                 return result;
-            }
 
             if (!result.Data.Success)
-            {
                 return new WebCallResult<BinanceWithdrawalPlaced>(result.ResponseStatusCode, result.ResponseHeaders, null, ParseErrorResponse(result.Data.Message));
-            }
 
             return result;
         }
@@ -978,14 +976,10 @@ namespace Binance.Net
 
             var result = await ExecuteRequest<BinanceDepositList>(GetUrl(DepositHistoryEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success || result.Data == null)
-            {
                 return result;
-            }
 
             if (!result.Data.Success)
-            {
                 return new WebCallResult<BinanceDepositList>(result.ResponseStatusCode, result.ResponseHeaders, null, ParseErrorResponse(result.Data.Message));
-            }
 
             return result;
         }
@@ -1029,14 +1023,10 @@ namespace Binance.Net
 
             var result = await ExecuteRequest<BinanceWithdrawalList>(GetUrl(WithdrawHistoryEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success || result.Data == null)
-            {
                 return result;
-            }
 
             if (!result.Data.Success)
-            {
                 return new WebCallResult<BinanceWithdrawalList>(result.ResponseStatusCode, result.ResponseHeaders, null, ParseErrorResponse(result.Data.Message));
-            }
 
             return result;
         }
@@ -1100,9 +1090,7 @@ namespace Binance.Net
 
             var result = await ExecuteRequest<BinanceTradeFeeWrapper>(GetUrl(TradeFeeEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success)
-            {
                 return new WebCallResult<BinanceTradeFee[]>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
-            }
 
             return !result.Data.Success ? new WebCallResult<BinanceTradeFee[]>(result.ResponseStatusCode, result.ResponseHeaders, null, ParseErrorResponse(result.Data.Message)) : new WebCallResult<BinanceTradeFee[]>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
         }
@@ -1133,9 +1121,7 @@ namespace Binance.Net
 
             var result = await ExecuteRequest<BinanceAssetDetailsWrapper>(GetUrl(AssetDetailsEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success)
-            {
                 return new WebCallResult<Dictionary<string, BinanceAssetDetails>>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
-            }
 
             return !result.Data.Success ? new WebCallResult<Dictionary<string, BinanceAssetDetails>>(result.ResponseStatusCode, result.ResponseHeaders, null, ParseErrorResponse(JToken.Parse(result.Data.Message))) : new WebCallResult<Dictionary<string, BinanceAssetDetails>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
         }
@@ -1204,7 +1190,9 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
+            {
                 return new WebCallResult<BinanceDustLog[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+            }
 
             var parameters = new Dictionary<string, object>
             {
@@ -1214,9 +1202,7 @@ namespace Binance.Net
 
             var result = await ExecuteRequest<BinanceDustLogListWrapper>(GetUrl(DustLogEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success)
-            {
                 return new WebCallResult<BinanceDustLog[]>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
-            }
 
             return !result.Data.Success ? new WebCallResult<BinanceDustLog[]>(result.ResponseStatusCode, result.ResponseHeaders, null, new ServerError("Unknown server error while requesting dust log")) : new WebCallResult<BinanceDustLog[]>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Results.Rows, null);
         }
@@ -1259,9 +1245,7 @@ namespace Binance.Net
 
             var result = await ExecuteRequest<BinanceSubAccountWrapper>(GetUrl(SubAccountListEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success)
-            {
                 return new WebCallResult<BinanceSubAccount[]>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
-            }
 
             return !result.Data.Success ? new WebCallResult<BinanceSubAccount[]>(result.ResponseStatusCode, result.ResponseHeaders, null, new ServerError(result.Data.Message)) : new WebCallResult<BinanceSubAccount[]>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.SubAccounts, null);
         }
@@ -1684,9 +1668,108 @@ namespace Binance.Net
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await ExecuteRequest<BinanceCanceledOrder>(GetUrl(CancelMarginOrderEndpoint, MarginApi, SignedVersion), DeleteMethod, parameters, true).ConfigureAwait(false);
+            return await ExecuteRequest<BinanceCanceledOrder>(GetUrl(CancelMarginOrderEndpoint, MarginApi, MarginVersion), DeleteMethod, parameters, true).ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Query loan records
+        /// </summary>
+        /// <param name="asset">The records asset</param>
+        /// <param name="transationId">The id of loan transation</param>
+        /// <param name="startTime">Time to start getting records from</param>
+        /// <param name="endTime">Time to stop getting records to</param>
+        /// <param name="current">Number of page records</param>
+        /// <param name="size">The records count size need show</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Loan records</returns>
+        public WebCallResult<BinanceQueryLoan[]> QueryLoan(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null) => QueryLoanAsync(asset, transationId, startTime, endTime, current, size, receiveWindow).Result;
+
+        /// <summary>
+        /// Query loan records
+        /// </summary>
+        /// <param name="asset">The records asset</param>
+        /// <param name="transationId">The id of loan transation</param>
+        /// <param name="startTime">Time to start getting records from</param>
+        /// <param name="endTime">Time to stop getting records to</param>
+        /// <param name="current">Number of page records</param>
+        /// <param name="size">The records count size need show</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Loan records</returns>
+        public async Task<WebCallResult<BinanceQueryLoan[]>> QueryLoanAsync(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<BinanceQueryLoan[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "asset", asset },
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("txId", transationId?.ToString());
+            // TxId or [startTime, endTime) must be sent. txId takes precedence.
+            parameters.AddOptionalParameter("startTime", ToUnixTimestamp(startTime != null ? startTime.Value : DateTime.MinValue).ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("endTime", ToUnixTimestamp(endTime != null ? endTime.Value : DateTime.Now).ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("current", current?.ToString());
+            parameters.AddOptionalParameter("size", size?.ToString());
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await ExecuteRequest<BinanceQueryLoanList>(GetUrl(QueryLoanEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
+            if (!result.Success)
+                return new WebCallResult<BinanceQueryLoan[]>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
+
+            return new WebCallResult<BinanceQueryLoan[]>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Rows, null);
+        }
+
+        /// <summary>
+        /// Query repay record
+        /// </summary>
+        /// <param name="asset">The records asset</param>
+        /// <param name="transationId">The id of repay transation</param>
+        /// <param name="startTime">Time to start getting records from</param>
+        /// <param name="endTime">Time to stop getting records to</param>
+        /// <param name="current">Number of page records</param>
+        /// <param name="size">The records count size need show</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Repay records</returns>
+        public WebCallResult<BinanceQueryRepay[]> QueryRapay(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, long? receiveWindow = null) => QueryRapayAsync(asset, transationId, startTime, endTime, current, size, receiveWindow).Result;
+
+        /// <summary>
+        /// Query repay record
+        /// </summary>
+        /// <param name="asset">The records asset</param>
+        /// <param name="transationId">The id of repay transation</param>
+        /// <param name="startTime">Time to start getting records from</param>
+        /// <param name="endTime">Time to stop getting records to</param>
+        /// <param name="current">Filter by number</param>
+        /// <param name="size">The records count size need show</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Repay records</returns>
+        public async Task<WebCallResult<BinanceQueryRepay[]>> QueryRapayAsync(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, long? receiveWindow = null)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<BinanceQueryRepay[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "asset", asset },
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("txId", transationId?.ToString());
+            // TxId or [startTime, endTime) must be sent. txId takes precedence.
+            parameters.AddOptionalParameter("startTime", ToUnixTimestamp(startTime != null ? startTime.Value : DateTime.MinValue).ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("endTime", ToUnixTimestamp(endTime != null ? endTime.Value : DateTime.Now).ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("current", current?.ToString());
+            parameters.AddOptionalParameter("size", size?.ToString());
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await ExecuteRequest<BinanceQueryRepayList>(GetUrl(QueryRapayEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
+            if (!result.Success)
+                return new WebCallResult<BinanceQueryRepay[]>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
+
+            return new WebCallResult<BinanceQueryRepay[]>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Rows, null);
+        }
         #endregion
 
         #endregion
@@ -1708,19 +1791,13 @@ namespace Binance.Net
         protected override Error ParseErrorResponse(JToken error)
         {
             if (!error.HasValues)
-            {
                 return new ServerError(error.ToString());
-            }
 
             if (error["msg"] == null && error["code"] == null)
-            {
                 return new ServerError(error.ToString());
-            }
 
             if (error["msg"] != null && error["code"] == null)
-            {
                 return new ServerError((string)error["msg"]);
-            }
 
             return new ServerError((int)error["code"], (string)error["msg"]);
         }
@@ -1746,9 +1823,7 @@ namespace Binance.Net
         private async Task<WebCallResult<DateTime>> CheckAutoTimestamp()
         {
             if (autoTimestamp && (!timeSynced || DateTime.UtcNow - lastTimeSync > autoTimestampRecalculationInterval))
-            {
                 return await GetServerTimeAsync(timeSynced).ConfigureAwait(false);
-            }
 
             return new WebCallResult<DateTime>(null, null, default(DateTime), null);
         }
@@ -1759,30 +1834,20 @@ namespace Binance.Net
             var outputPrice = price;
 
             if (tradeRulesBehaviour == TradeRulesBehaviour.None)
-            {
                 return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice);
-            }
 
             if (exchangeInfo == null || lastExchangeInfoUpdate == null || (DateTime.UtcNow - lastExchangeInfoUpdate.Value).TotalMinutes > tradeRulesUpdateInterval.TotalMinutes)
-            {
                 await GetExchangeInfoAsync().ConfigureAwait(false);
-            }
 
             if (exchangeInfo == null)
-            {
                 return BinanceTradeRuleResult.CreateFailed("Unable to retrieve trading rules, validation failed");
-            }
 
             var symbolData = exchangeInfo.Symbols.SingleOrDefault(s => string.Equals(s.Name, symbol, StringComparison.CurrentCultureIgnoreCase));
             if (symbolData == null)
-            {
                 return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Symbol {symbol} not found");
-            }
 
             if (!symbolData.OrderTypes.Contains(type))
-            {
                 return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: {type} order type not allowed for {symbol}");
-            }
 
             if (symbolData.LotSizeFilter != null || (symbolData.MarketLotSizeFilter != null && type == OrderType.Market))
             {
@@ -1819,9 +1884,7 @@ namespace Binance.Net
             }
 
             if (price == null)
-            {
                 return BinanceTradeRuleResult.CreatePassed(outputQuantity, null);
-            }
 
             if (symbolData.PriceFilter != null)
             {
@@ -1856,9 +1919,7 @@ namespace Binance.Net
             }
 
             if (symbolData.MinNotionalFilter == null)
-            {
                 return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice);
-            }
 
             var notional = quantity * price.Value;
             if (notional < symbolData.MinNotionalFilter.MinNotional)

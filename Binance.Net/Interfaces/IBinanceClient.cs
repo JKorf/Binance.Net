@@ -413,6 +413,58 @@ namespace Binance.Net.Interfaces
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for canceled order</returns>
         Task<WebCallResult<BinanceCanceledOrder>> CancelOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null);
+        /// <summary>
+        /// Query loan records
+        /// </summary>
+        /// <param name="asset">The records asset</param>
+        /// <param name="transationId">The id of loan transation</param>
+        /// <param name="startTime">Time to start getting records from</param>
+        /// <param name="endTime">Time to stop getting records to</param>
+        /// <param name="current">Number of page records</param>
+        /// <param name="size">The records count size need show</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Loan records</returns>
+        WebCallResult<BinanceQueryLoan[]> QueryLoan(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null);
+
+        /// <summary>
+        /// Query loan records
+        /// </summary>
+        /// <param name="asset">The records asset</param>
+        /// <param name="transationId">The id of loan transation</param>
+        /// <param name="startTime">Time to start getting records from</param>
+        /// <param name="endTime">Time to stop getting records to</param>
+        /// <param name="current">Number of page records</param>
+        /// <param name="size">The records count size need show</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Loan records</returns>
+        Task<WebCallResult<BinanceQueryLoan[]>> QueryLoanAsync(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null);
+
+        /// <summary>
+        /// Query repay record
+        /// </summary>
+        /// <param name="asset">The records asset</param>
+        /// <param name="transationId">The id of repay transation</param>
+        /// <param name="startTime">Time to start getting records from</param>
+        /// <param name="endTime">Time to stop getting records to</param>
+        /// <param name="current">Number of page records</param>
+        /// <param name="size">The records count size need show</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Repay records</returns>
+        WebCallResult<BinanceQueryRepay[]> QueryRapay(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null);
+
+        /// <summary>
+        /// Query repay record
+        /// </summary>
+        /// <param name="asset">The records asset</param>
+        /// <param name="transationId">The id of repay transation</param>
+        /// <param name="startTime">Time to start getting records from</param>
+        /// <param name="endTime">Time to stop getting records to</param>
+        /// <param name="current">Number of page records</param>
+        /// <param name="size">The records count size need show</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Repay records</returns>
+        Task<WebCallResult<BinanceQueryRepay[]>> QueryRapayAsync(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null);
+
 
         /// <summary>
         /// Gets account information, including balances
