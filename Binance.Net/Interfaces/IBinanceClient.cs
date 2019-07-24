@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Binance.Net.Objects;
+﻿using Binance.Net.Objects;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.RateLimiter;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Binance.Net.Interfaces
 {
@@ -771,6 +771,12 @@ namespace Binance.Net.Interfaces
         WebCallResult<object> StopUserStream(string listenKey);
 
         /// <summary>
+        /// Stops the current user stream
+        /// </summary>
+        /// <returns></returns>
+        Task<WebCallResult<object>> StopUserStreamAsync(string listenKey);
+
+        /// <summary>
         /// Execute transfer between spot account and margin account.
         /// </summary>
         /// <param name="asset">The asset being transferred, e.g., BTC</param>
@@ -902,12 +908,95 @@ namespace Binance.Net.Interfaces
         /// <returns>Id's for canceled order</returns>
         Task<WebCallResult<BinanceCanceledOrder>> CancelMarginOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null);
 
+        /// <summary>
+        /// Query margin account details
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>The margin account information</returns>
+        WebCallResult<BinanceMarginAccount> GerMarginAccountInfo(long? receiveWindow = null);
 
         /// <summary>
-        /// Stops the current user stream
+        /// Query margin account details
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>The margin account information</returns>
+        Task<WebCallResult<BinanceMarginAccount>> GerMarginAccountInfoAsync(long? receiveWindow = null);
+
+        /// <summary>
+        /// Query max borrow amount
+        /// <param name="asset">The records asset</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// </summary>
+        /// <returns>Return max amount</returns>
+        WebCallResult<decimal> GetMaxtBorrowAmoun(string asset, long? receiveWindow = null);
+
+        /// <summary>
+        /// Query max borrow amount
+        /// <param name="asset">The records asset</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// </summary>
+        /// <returns>Return max amount</returns>
+        Task<WebCallResult<decimal>> GetMaxBorrowAmountAsync(string asset, long? receiveWindow = null);
+
+        /// <summary>
+        /// Query max transfer-out amount 
+        /// <param name="asset">The records asset</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// </summary>
+        /// <returns>Return max amount</returns>
+        WebCallResult<decimal> GetMaxTransferAmount(string asset, long? receiveWindow = null);
+
+        /// <summary>
+        /// Query max transfer-out amount 
+        /// <param name="asset">The records asset</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// </summary>
+        /// <returns>Return max amount</returns>
+        Task<WebCallResult<decimal>> GetMaxTransferAmountAsync(string asset, long? receiveWindow = null);
+
+        /// <summary>
+        /// Starts a user stream  for margin account by requesting a listen key. 
+        /// This listen key can be used in subsequent requests to 
+        /// <see cref="BinanceSocketClient.SubscribeToUserStream"/>. 
+        /// The stream will close after 60 minutes unless a keep alive is send.
+        /// </summary>
+        /// <returns>Listen key</returns>
+        WebCallResult<string> StartMarginUserStream();
+
+        /// <summary>
+        /// Starts a user stream  for margin account by requesting a listen key. 
+        /// This listen key can be used in subsequent requests to 
+        /// <see cref="BinanceSocketClient.SubscribeToUserStream"/>. 
+        /// The stream will close after 60 minutes unless a keep alive is send.
+        /// </summary>
+        /// <returns>Listen key</returns>
+        Task<WebCallResult<string>> StartMarginUserStreamAsync();
+
+        /// <summary>
+        /// Sends a keep alive for the current user for margin account stream listen key to keep the stream from closing. 
+        /// Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
         /// </summary>
         /// <returns></returns>
-        Task<WebCallResult<object>> StopUserStreamAsync(string listenKey);
+        WebCallResult<object> PingMarginUserStream(string listenKey, long? receiveWindow = null);
+
+        /// <summary>
+        /// Sends a keep alive for the current user stream for margin account listen key to keep the stream from closing. 
+        /// Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
+        /// </summary>
+        /// <returns></returns>
+        Task<WebCallResult<object>> PingMarginUserStreamAsync(string listenKey, long? receiveWindow = null);
+
+        /// <summary>
+        /// Close the user stream for margin account
+        /// </summary>
+        /// <returns></returns>
+        WebCallResult<object> CloseMarginUserStream(string listenKey);
+
+        /// <summary>
+        /// Close the user stream for margin account
+        /// </summary>
+        /// <returns></returns>
+        Task<WebCallResult<object>> CloseMarginUserStreamAsync(string listenKey);
 
         /// <summary>
         /// The factory for creating requests. Used for unit testing

@@ -90,6 +90,9 @@ namespace Binance.Net
         private const string CancelMarginOrderEndpoint = "margin/order";
         private const string QueryLoanEndpoint = "margin/query/loan";
         private const string QueryRapayEndpoint = "margin/query/repay";
+        private const string MarginAccountInfoEndpoint = "margin/query/account";
+        private const string MaxBorrowableEndpoint = "margin/maxBorrowable";
+        private const string MaxTransferableEndpoint = "margin/maxTransferable";
 
         // User stream
         private const string GetListenKeyEndpoint = "userDataStream";
@@ -1152,9 +1155,7 @@ namespace Binance.Net
 
             var result = await ExecuteRequest<BinanceAccountStatus>(GetUrl(AccountStatusEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success)
-            {
                 return new WebCallResult<BinanceAccountStatus>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
-            }
 
             return !result.Data.Success ? new WebCallResult<BinanceAccountStatus>(result.ResponseStatusCode, result.ResponseHeaders, null, ParseErrorResponse(result.Data.Message)) : new WebCallResult<BinanceAccountStatus>(result.ResponseStatusCode, result.ResponseHeaders, result.Data, null);
         }
@@ -1190,9 +1191,7 @@ namespace Binance.Net
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-            {
                 return new WebCallResult<BinanceDustLog[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            }
 
             var parameters = new Dictionary<string, object>
             {
@@ -1291,9 +1290,7 @@ namespace Binance.Net
 
             var result = await ExecuteRequest<BinanceSubAccountTransferWrapper>(GetUrl(SubAccountTransferHistoryEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success)
-            {
                 return new WebCallResult<BinanceSubAccountTransfer[]>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
-            }
 
             return !result.Data.Success ? new WebCallResult<BinanceSubAccountTransfer[]>(result.ResponseStatusCode, result.ResponseHeaders, null, new ServerError(result.Data.Message)) : new WebCallResult<BinanceSubAccountTransfer[]>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Transfers, null);
         }
@@ -1365,9 +1362,7 @@ namespace Binance.Net
 
             var result = await ExecuteRequest<BinanceTradingStatusWrapper>(GetUrl(TradingStatusEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success)
-            {
                 return new WebCallResult<BinanceTradingStatus>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
-            }
 
             return !result.Data.Success ? new WebCallResult<BinanceTradingStatus>(result.ResponseStatusCode, result.ResponseHeaders, null, new ServerError(result.Data.Message)) : new WebCallResult<BinanceTradingStatus>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Status, null);
         }
@@ -1770,8 +1765,196 @@ namespace Binance.Net
 
             return new WebCallResult<BinanceQueryRepay[]>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Rows, null);
         }
+
+        /// <summary>
+        /// Query margin account details
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>The margin account information</returns>
+        public WebCallResult<BinanceMarginAccount> GerMarginAccountInfo(long? receiveWindow = null) => GerMarginAccountInfoAsync(receiveWindow).Result;
+
+        /// <summary>
+        /// Query margin account details
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>The margin account information</returns>
+        public async Task<WebCallResult<BinanceMarginAccount>> GerMarginAccountInfoAsync(long? receiveWindow = null)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<BinanceMarginAccount>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await ExecuteRequest<BinanceMarginAccount>(GetUrl(MarginAccountInfoEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Query max borrow amount
+        /// <param name="asset">The records asset</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// </summary>
+        /// <returns>Return max amount</returns>
+        public WebCallResult<decimal> GetMaxtBorrowAmoun(string asset,long? receiveWindow = null) => GetMaxBorrowAmountAsync(asset,receiveWindow).Result;
+
+        /// <summary>
+        /// Query max borrow amount
+        /// <param name="asset">The records asset</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// </summary>
+        /// <returns>Return max amount</returns>
+        public async Task<WebCallResult<decimal>> GetMaxBorrowAmountAsync(string asset, long? receiveWindow = null)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<decimal>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, 0, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "asset", asset },
+                { "timestamp", GetTimestamp() }
+            };
+
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await ExecuteRequest<BinanceMarginAmount>(GetUrl(MaxBorrowableEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
+
+            if (!result.Success)
+                return new WebCallResult<decimal>(result.ResponseStatusCode, result.ResponseHeaders, 0, result.Error);
+
+            return new WebCallResult<decimal>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Amount, null);
+        }
+
+        /// <summary>
+        /// Query max transfer-out amount 
+        /// <param name="asset">The records asset</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// </summary>
+        /// <returns>Return max amount</returns>
+        public WebCallResult<decimal> GetMaxTransferAmount(string asset, long? receiveWindow = null) => GetMaxTransferAmountAsync(asset, receiveWindow).Result;
+
+        /// <summary>
+        /// Query max transfer-out amount 
+        /// <param name="asset">The records asset</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// </summary>
+        /// <returns>Return max amount</returns>
+        public async Task<WebCallResult<decimal>> GetMaxTransferAmountAsync(string asset, long? receiveWindow = null)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<decimal>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, 0, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "asset", asset },
+                { "timestamp", GetTimestamp() }
+            };
+
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await ExecuteRequest<BinanceMarginAmount>(GetUrl(MaxTransferableEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
+
+            if (!result.Success)
+                return new WebCallResult<decimal>(result.ResponseStatusCode, result.ResponseHeaders, 0, result.Error);
+
+            return new WebCallResult<decimal>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Amount, null);
+        }
         #endregion
 
+        #region Margin Stream
+        /// <summary>
+        /// Starts a user stream  for margin account by requesting a listen key. 
+        /// This listen key can be used in subsequent requests to 
+        /// <see cref="BinanceSocketClient.SubscribeToUserStream"/>. 
+        /// The stream will close after 60 minutes unless a keep alive is send.
+        /// </summary>
+        /// <returns>Listen key</returns>
+        public WebCallResult<string> StartMarginUserStream() => StartMarginUserStreamAsync().Result;
+
+        /// <summary>
+        /// Starts a user stream  for margin account by requesting a listen key. 
+        /// This listen key can be used in subsequent requests to 
+        /// <see cref="BinanceSocketClient.SubscribeToUserStream"/>. 
+        /// The stream will close after 60 minutes unless a keep alive is send.
+        /// </summary>
+        /// <returns>Listen key</returns>
+        public async Task<WebCallResult<string>> StartMarginUserStreamAsync()
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<string>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", GetTimestamp() }
+            };
+
+            var result = await ExecuteRequest<BinanceListenKey>(GetUrl(GetListenKeyEndpoint, MarginApi, MarginVersion), PostMethod).ConfigureAwait(false);
+            return new WebCallResult<string>(result.ResponseStatusCode, result.ResponseHeaders, result.Data?.ListenKey, result.Error);
+        }
+
+        /// <summary>
+        /// Sends a keep alive for the current user for margin account stream listen key to keep the stream from closing. 
+        /// Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
+        /// </summary>
+        /// <returns></returns>
+        public WebCallResult<object> PingMarginUserStream(string listenKey, long? receiveWindow = null) => KeepAliveUserStreamAsync(listenKey).Result;
+
+        /// <summary>
+        /// Sends a keep alive for the current user stream for margin account listen key to keep the stream from closing. 
+        /// Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<WebCallResult<object>> PingMarginUserStreamAsync(string listenKey, long? receiveWindow = null)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<object>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+
+                { "listenKey", listenKey },
+                { "timestamp", GetTimestamp() }
+
+            };
+
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+
+            return await ExecuteRequest<object>(GetUrl(KeepListenKeyAliveEndpoint, MarginApi, MarginVersion), PutMethod, parameters,true).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Close the user stream for margin account
+        /// </summary>
+        /// <returns></returns>
+        public WebCallResult<object> CloseMarginUserStream(string listenKey) => CloseMarginUserStreamAsync(listenKey).Result;
+
+        /// <summary>
+        /// Close the user stream for margin account
+        /// </summary>
+        /// <returns></returns>
+        public async Task<WebCallResult<object>> CloseMarginUserStreamAsync(string listenKey)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<object>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "listenKey", listenKey }
+            };
+
+            return await ExecuteRequest<object>(GetUrl(CloseListenKeyEndpoint, MarginApi, MarginVersion), DeleteMethod, parameters).ConfigureAwait(false);
+        }
+
+        #endregion
         #endregion
 
         #region helpers
@@ -1858,14 +2041,10 @@ namespace Binance.Net
                 {
                     minQty = symbolData.MarketLotSizeFilter.MinQuantity;
                     if (symbolData.MarketLotSizeFilter.MaxQuantity != 0)
-                    {
                         maxQty = symbolData.MarketLotSizeFilter.MaxQuantity;
-                    }
 
                     if (symbolData.MarketLotSizeFilter.StepSize != 0)
-                    {
                         stepSize = symbolData.MarketLotSizeFilter.StepSize;
-                    }
                 }
 
                 if (minQty.HasValue)
@@ -1894,9 +2073,7 @@ namespace Binance.Net
                     if (outputPrice != price)
                     {
                         if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
-                        {
                             return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter max/min failed. Original price: {price}, Closest allowed: {outputPrice}");
-                        }
 
                         log.Write(LogVerbosity.Info, $"price clamped from {price} to {outputPrice}");
                     }
@@ -1909,9 +2086,7 @@ namespace Binance.Net
                     if (outputPrice != beforePrice)
                     {
                         if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
-                        {
                             return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter tick failed. Original price: {price}, Closest allowed: {outputPrice}");
-                        }
 
                         log.Write(LogVerbosity.Info, $"price rounded from {beforePrice} to {outputPrice}");
                     }
@@ -1923,9 +2098,7 @@ namespace Binance.Net
 
             var notional = quantity * price.Value;
             if (notional < symbolData.MinNotionalFilter.MinNotional)
-            {
                 return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: MinNotional filter failed. Order size: {notional}, minimal order size: {symbolData.MinNotionalFilter.MinNotional}");
-            }
 
             return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice);
         }
