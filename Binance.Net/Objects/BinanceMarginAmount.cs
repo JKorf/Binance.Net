@@ -3,7 +3,7 @@
 namespace Binance.Net.Objects
 {
     /// <summary>
-    /// The result amount of geting maxBorrowabl or maxTransferable 
+    /// The result amount of geting maxBorrowable or maxTransferable 
     /// </summary>
     public class BinanceMarginAmount
     {

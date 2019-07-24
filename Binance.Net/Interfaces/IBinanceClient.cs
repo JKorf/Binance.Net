@@ -928,7 +928,7 @@ namespace Binance.Net.Interfaces
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// </summary>
         /// <returns>Return max amount</returns>
-        WebCallResult<decimal> GetMaxtBorrowAmoun(string asset, long? receiveWindow = null);
+        WebCallResult<decimal> GetMaxBorrowAmoun(string asset, long? receiveWindow = null);
 
         /// <summary>
         /// Query max borrow amount
@@ -977,14 +977,14 @@ namespace Binance.Net.Interfaces
         /// Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
         /// </summary>
         /// <returns></returns>
-        WebCallResult<object> PingMarginUserStream(string listenKey, long? receiveWindow = null);
+        WebCallResult<object> PingMarginUserStream(string listenKey);
 
         /// <summary>
         /// Sends a keep alive for the current user stream for margin account listen key to keep the stream from closing. 
         /// Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
         /// </summary>
         /// <returns></returns>
-        Task<WebCallResult<object>> PingMarginUserStreamAsync(string listenKey, long? receiveWindow = null);
+        Task<WebCallResult<object>> PingMarginUserStreamAsync(string listenKey);
 
         /// <summary>
         /// Close the user stream for margin account

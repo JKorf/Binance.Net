@@ -88,9 +88,9 @@ namespace Binance.Net
         private const string MarginRepayEndpoint = "margin/repay";
         private const string NewMarginOrderEndpoint = "margin/order";
         private const string CancelMarginOrderEndpoint = "margin/order";
-        private const string QueryLoanEndpoint = "margin/query/loan";
-        private const string QueryRepayEndpoint = "margin/query/repay";
-        private const string MarginAccountInfoEndpoint = "margin/query/account";
+        private const string GetLoanEndpoint = "margin/loan";
+        private const string GetRepayEndpoint = "margin/repay";
+        private const string MarginAccountInfoEndpoint = "margin/account";
         private const string MaxBorrowableEndpoint = "margin/maxBorrowable";
         private const string MaxTransferableEndpoint = "margin/maxTransferable";
 
@@ -1707,24 +1707,23 @@ namespace Binance.Net
                 { "timestamp", GetTimestamp() }
             };
             parameters.AddOptionalParameter("txId", transationId?.ToString());
-           
-            // TxId or [startTime, endTime) must be sent. txId takes precedence.
+
+            // TxId or startTime must be sent. txId takes precedence.
             if (!transationId.HasValue)
             {
                 parameters.AddOptionalParameter("startTime", ToUnixTimestamp(startTime != null ? startTime.Value : DateTime.MinValue).ToString(CultureInfo.InvariantCulture));
-                parameters.AddOptionalParameter("endTime", ToUnixTimestamp(endTime != null ? endTime.Value : DateTime.Now).ToString(CultureInfo.InvariantCulture));
             }
             else
             {
                 parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
-                parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
             }
 
+            parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
             parameters.AddOptionalParameter("current", current?.ToString());
             parameters.AddOptionalParameter("size", size?.ToString());
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await ExecuteRequest<BinanceQueryRecords<BinanceQueryLoan>>(GetUrl(QueryLoanEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
+            var result = await ExecuteRequest<BinanceQueryRecords<BinanceQueryLoan>>(GetUrl(GetLoanEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success)
                 return new WebCallResult<BinanceQueryLoan[]>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
 
@@ -1768,23 +1767,22 @@ namespace Binance.Net
             };
             parameters.AddOptionalParameter("txId", transationId?.ToString());
 
-            // TxId or [startTime, endTime) must be sent. txId takes precedence.
+            // TxId or startTime must be sent. txId takes precedence.
             if (!transationId.HasValue)
             {
                 parameters.AddOptionalParameter("startTime", ToUnixTimestamp(startTime != null ? startTime.Value : DateTime.MinValue).ToString(CultureInfo.InvariantCulture));
-                parameters.AddOptionalParameter("endTime", ToUnixTimestamp(endTime != null ? endTime.Value : DateTime.Now).ToString(CultureInfo.InvariantCulture));
             }
             else
             {
                 parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp( startTime.Value ).ToString(CultureInfo.InvariantCulture):null);
-                parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
             }
-           
+
+            parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
             parameters.AddOptionalParameter("current", current?.ToString());
             parameters.AddOptionalParameter("size", size?.ToString());
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await ExecuteRequest<BinanceQueryRecords<BinanceQueryRepay>>(GetUrl(QueryRepayEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
+            var result = await ExecuteRequest<BinanceQueryRecords<BinanceQueryRepay>>(GetUrl(GetRepayEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success)
                 return new WebCallResult<BinanceQueryRepay[]>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
 
@@ -1824,7 +1822,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// </summary>
         /// <returns>Return max amount</returns>
-        public WebCallResult<decimal> GetMaxtBorrowAmoun(string asset,long? receiveWindow = null) => GetMaxBorrowAmountAsync(asset,receiveWindow).Result;
+        public WebCallResult<decimal> GetMaxBorrowAmoun(string asset,long? receiveWindow = null) => GetMaxBorrowAmountAsync(asset,receiveWindow).Result;
 
         /// <summary>
         /// Query max borrow amount
@@ -1914,11 +1912,6 @@ namespace Binance.Net
             if (!timestampResult.Success)
                 return new WebCallResult<string>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
-            var parameters = new Dictionary<string, object>
-            {
-                { "timestamp", GetTimestamp() }
-            };
-
             var result = await ExecuteRequest<BinanceListenKey>(GetUrl(GetListenKeyEndpoint, MarginApi, MarginVersion), PostMethod).ConfigureAwait(false);
             return new WebCallResult<string>(result.ResponseStatusCode, result.ResponseHeaders, result.Data?.ListenKey, result.Error);
         }
@@ -1928,14 +1921,14 @@ namespace Binance.Net
         /// Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
         /// </summary>
         /// <returns></returns>
-        public WebCallResult<object> PingMarginUserStream(string listenKey, long? receiveWindow = null) => KeepAliveUserStreamAsync(listenKey).Result;
+        public WebCallResult<object> PingMarginUserStream(string listenKey) => KeepAliveUserStreamAsync(listenKey).Result;
 
         /// <summary>
         /// Sends a keep alive for the current user stream for margin account listen key to keep the stream from closing. 
         /// Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
         /// </summary>
         /// <returns></returns>
-        public async Task<WebCallResult<object>> PingMarginUserStreamAsync(string listenKey, long? receiveWindow = null)
+        public async Task<WebCallResult<object>> PingMarginUserStreamAsync(string listenKey)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
@@ -1943,14 +1936,8 @@ namespace Binance.Net
 
             var parameters = new Dictionary<string, object>
             {
-
                 { "listenKey", listenKey },
-                { "timestamp", GetTimestamp() }
-
             };
-
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
 
             return await ExecuteRequest<object>(GetUrl(KeepListenKeyAliveEndpoint, MarginApi, MarginVersion), PutMethod, parameters,true).ConfigureAwait(false);
         }

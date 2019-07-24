@@ -12,7 +12,7 @@ namespace Binance.Net.Converters
         protected override List<KeyValuePair<MarginStatus, string>> Mapping => new List<KeyValuePair<MarginStatus, string>>
         {
             new KeyValuePair<MarginStatus, string>(MarginStatus.Pending, "PENDING"),
-            new KeyValuePair<MarginStatus, string>(MarginStatus.Compleated, "COMPLETED"),
+            new KeyValuePair<MarginStatus, string>(MarginStatus.Completed, "COMPLETED"),
             new KeyValuePair<MarginStatus, string>(MarginStatus.Confirmed , "CONFIRMED"),
             new KeyValuePair<MarginStatus, string>(MarginStatus.Failed, "FAILED"),
         };

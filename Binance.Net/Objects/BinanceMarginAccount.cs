@@ -31,11 +31,11 @@ namespace Binance.Net.Objects
         /// </summary>
         public decimal TotalAssetOfBtc { get; set; }
         /// <summary>
-        /// Aggregate total alalible balace as BTC
+        /// Aggregate total liability balace of BTC
         /// </summary>
         public decimal TotalLiabilityOfBtc { get; set; }
         /// <summary>
-        /// Aggregate total net balace as BTC
+        /// Aggregate total available net balance of BTC
         /// </summary>
         public decimal TotalNetAssetOfBtc { get; set; }
     
@@ -61,7 +61,7 @@ namespace Binance.Net.Objects
         /// </summary>
         public decimal Free { get; set; }
         /// <summary>
-        /// TODO: wite description
+        /// Commission to need pay by borrowed
         /// </summary>
         public decimal Interest { get; set; }
         /// <summary>
