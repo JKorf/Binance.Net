@@ -89,7 +89,7 @@ namespace Binance.Net
         private const string NewMarginOrderEndpoint = "margin/order";
         private const string CancelMarginOrderEndpoint = "margin/order";
         private const string QueryLoanEndpoint = "margin/query/loan";
-        private const string QueryRapayEndpoint = "margin/query/repay";
+        private const string QueryRepayEndpoint = "margin/query/repay";
         private const string MarginAccountInfoEndpoint = "margin/query/account";
         private const string MaxBorrowableEndpoint = "margin/maxBorrowable";
         private const string MaxTransferableEndpoint = "margin/maxTransferable";
@@ -790,7 +790,6 @@ namespace Binance.Net
         /// <param name="symbol">The symbol the order is for</param>
         /// <param name="orderId">The order id of the order</param>
         /// <param name="origClientOrderId">The client order id of the order</param>
-        /// <param name="newClientOrderId">Unique identifier for this cancel</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for canceled order</returns>
         public WebCallResult<BinanceCanceledOrder> CancelOrder(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null) => CancelOrderAsync(symbol, orderId, origClientOrderId, newClientOrderId, receiveWindow).Result;
@@ -809,6 +808,9 @@ namespace Binance.Net
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
                 return new WebCallResult<BinanceCanceledOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            if(!orderId.HasValue && string.IsNullOrEmpty(origClientOrderId))
+                return new WebCallResult<BinanceCanceledOrder>(null, null, null, new ArgumentError("Either orderId or origClientOrderId must be sent."));
 
             var parameters = new Dictionary<string, object>
             {
@@ -1644,7 +1646,6 @@ namespace Binance.Net
         /// <param name="symbol">The symbol the order is for</param>
         /// <param name="orderId">The order id of the order</param>
         /// <param name="origClientOrderId">The client order id of the order</param>
-        /// <param name="newClientOrderId">Unique identifier for this cancel</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for canceled order</returns>
         public async Task<WebCallResult<BinanceCanceledOrder>> CancelMarginOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null)
@@ -1652,6 +1653,10 @@ namespace Binance.Net
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
                 return new WebCallResult<BinanceCanceledOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            if (!orderId.HasValue && string.IsNullOrEmpty(origClientOrderId))
+                return new WebCallResult<BinanceCanceledOrder>(null, null, null, new ArgumentError("Either orderId or origClientOrderId must be sent."));
+
 
             var parameters = new Dictionary<string, object>
             {
@@ -1702,14 +1707,24 @@ namespace Binance.Net
                 { "timestamp", GetTimestamp() }
             };
             parameters.AddOptionalParameter("txId", transationId?.ToString());
+           
             // TxId or [startTime, endTime) must be sent. txId takes precedence.
-            parameters.AddOptionalParameter("startTime", ToUnixTimestamp(startTime != null ? startTime.Value : DateTime.MinValue).ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("endTime", ToUnixTimestamp(endTime != null ? endTime.Value : DateTime.Now).ToString(CultureInfo.InvariantCulture));
+            if (!transationId.HasValue)
+            {
+                parameters.AddOptionalParameter("startTime", ToUnixTimestamp(startTime != null ? startTime.Value : DateTime.MinValue).ToString(CultureInfo.InvariantCulture));
+                parameters.AddOptionalParameter("endTime", ToUnixTimestamp(endTime != null ? endTime.Value : DateTime.Now).ToString(CultureInfo.InvariantCulture));
+            }
+            else
+            {
+                parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+                parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            }
+
             parameters.AddOptionalParameter("current", current?.ToString());
             parameters.AddOptionalParameter("size", size?.ToString());
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await ExecuteRequest<BinanceQueryLoanList>(GetUrl(QueryLoanEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
+            var result = await ExecuteRequest<BinanceQueryRecords<BinanceQueryLoan>>(GetUrl(QueryLoanEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success)
                 return new WebCallResult<BinanceQueryLoan[]>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
 
@@ -1727,7 +1742,7 @@ namespace Binance.Net
         /// <param name="size">The records count size need show</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Repay records</returns>
-        public WebCallResult<BinanceQueryRepay[]> QueryRapay(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, long? receiveWindow = null) => QueryRapayAsync(asset, transationId, startTime, endTime, current, size, receiveWindow).Result;
+        public WebCallResult<BinanceQueryRepay[]> QueryRepay(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, long? receiveWindow = null) => QueryRepayAsync(asset, transationId, startTime, endTime, current, size, receiveWindow).Result;
 
         /// <summary>
         /// Query repay record
@@ -1740,7 +1755,7 @@ namespace Binance.Net
         /// <param name="size">The records count size need show</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Repay records</returns>
-        public async Task<WebCallResult<BinanceQueryRepay[]>> QueryRapayAsync(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, long? receiveWindow = null)
+        public async Task<WebCallResult<BinanceQueryRepay[]>> QueryRepayAsync(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, long? receiveWindow = null)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
@@ -1752,14 +1767,24 @@ namespace Binance.Net
                 { "timestamp", GetTimestamp() }
             };
             parameters.AddOptionalParameter("txId", transationId?.ToString());
+
             // TxId or [startTime, endTime) must be sent. txId takes precedence.
-            parameters.AddOptionalParameter("startTime", ToUnixTimestamp(startTime != null ? startTime.Value : DateTime.MinValue).ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("endTime", ToUnixTimestamp(endTime != null ? endTime.Value : DateTime.Now).ToString(CultureInfo.InvariantCulture));
+            if (!transationId.HasValue)
+            {
+                parameters.AddOptionalParameter("startTime", ToUnixTimestamp(startTime != null ? startTime.Value : DateTime.MinValue).ToString(CultureInfo.InvariantCulture));
+                parameters.AddOptionalParameter("endTime", ToUnixTimestamp(endTime != null ? endTime.Value : DateTime.Now).ToString(CultureInfo.InvariantCulture));
+            }
+            else
+            {
+                parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp( startTime.Value ).ToString(CultureInfo.InvariantCulture):null);
+                parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            }
+           
             parameters.AddOptionalParameter("current", current?.ToString());
             parameters.AddOptionalParameter("size", size?.ToString());
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await ExecuteRequest<BinanceQueryRepayList>(GetUrl(QueryRapayEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
+            var result = await ExecuteRequest<BinanceQueryRecords<BinanceQueryRepay>>(GetUrl(QueryRepayEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success)
                 return new WebCallResult<BinanceQueryRepay[]>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
 

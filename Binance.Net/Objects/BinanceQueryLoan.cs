@@ -5,12 +5,6 @@ using System;
 
 namespace Binance.Net.Objects
 {
-    public class BinanceQueryLoanList
-    {
-        public BinanceQueryLoan[] Rows { get; set; }
-        public int Total { get; set; }
-    }
-
     public class BinanceQueryLoan
     {
         // <summary>
@@ -29,7 +23,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The status of the loan
         /// </summary>
-        [JsonProperty("status"), JsonConverter(typeof(MarginStatusConverter))]
+        [JsonConverter(typeof(MarginStatusConverter))]
         public MarginStatus Status { get; set; }
     }
 }

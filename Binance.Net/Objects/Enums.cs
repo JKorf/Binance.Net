@@ -257,7 +257,7 @@
         /// <summary>
         /// Executed, waiting to be confirmed
         /// </summary>
-        Compleated,
+        Completed,
         /// <summary>
         /// Successfully loaned/repay
         /// </summary>

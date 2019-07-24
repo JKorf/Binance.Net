@@ -450,7 +450,7 @@ namespace Binance.Net.Interfaces
         /// <param name="size">The records count size need show</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Repay records</returns>
-        WebCallResult<BinanceQueryRepay[]> QueryRapay(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null);
+        WebCallResult<BinanceQueryRepay[]> QueryRepay(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null);
 
         /// <summary>
         /// Query repay record
@@ -463,7 +463,7 @@ namespace Binance.Net.Interfaces
         /// <param name="size">The records count size need show</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Repay records</returns>
-        Task<WebCallResult<BinanceQueryRepay[]>> QueryRapayAsync(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null);
+        Task<WebCallResult<BinanceQueryRepay[]>> QueryRepayAsync(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null);
 
 
         /// <summary>

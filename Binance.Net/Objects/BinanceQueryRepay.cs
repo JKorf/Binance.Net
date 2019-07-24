@@ -5,18 +5,6 @@ using System;
 
 namespace Binance.Net.Objects
 {
-    public class BinanceQueryRepayList
-    {
-        // <summary>
-        /// The list records
-        /// </summary>
-        public BinanceQueryRepay[] Rows { get; set; }
-        // <summary>
-        /// The total count of the records
-        /// </summary>
-        public int Total { get; set; }
-    }
-
     public class BinanceQueryRepay
     {
         // <summary>
