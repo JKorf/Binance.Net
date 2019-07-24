@@ -16,7 +16,7 @@ namespace Binance.Net.Objects
         /// <summary>
         public decimal Principal { get; set; }
         /// <summary>
-        /// Time of repay compleated
+        /// Time of repay completed
         /// </summary>
         [JsonProperty("timestamp"), JsonConverter(typeof(TimestampConverter))]
         public DateTime Time { get; set; }
