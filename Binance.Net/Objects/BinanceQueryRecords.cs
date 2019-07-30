@@ -2,11 +2,11 @@
 {
     public class BinanceQueryRecords<T>
     {
-        // <summary>
+        /// <summary>
         /// The list records
         /// </summary>
         public T[] Rows { get; set; }
-        // <summary>
+        /// <summary>
         /// The total count of the records
         /// </summary>
         public int Total { get; set; }

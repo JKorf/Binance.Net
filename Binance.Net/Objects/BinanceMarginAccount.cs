@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects
 {
@@ -27,11 +25,11 @@ namespace Binance.Net.Objects
         /// </summary>
         public decimal MarginLevel { get; set; }
         /// <summary>
-        /// Aggregate total balace as BTC
+        /// Aggregate total balance as BTC
         /// </summary>
         public decimal TotalAssetOfBtc { get; set; }
         /// <summary>
-        /// Aggregate total liability balace of BTC
+        /// Aggregate total liability balance of BTC
         /// </summary>
         public decimal TotalLiabilityOfBtc { get; set; }
         /// <summary>

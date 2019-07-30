@@ -7,13 +7,13 @@ namespace Binance.Net.Objects
 {
     public class BinanceQueryLoan
     {
-        // <summary>
+        /// <summary>
         /// The asset of the loan
         /// </summary>
         public string Asset { get; set; }
         /// <summary>
         /// Principal repaid 
-        /// <summary>
+        /// </summary>
         public decimal Principal { get; set; }
         /// <summary>
         /// Time of repay completed

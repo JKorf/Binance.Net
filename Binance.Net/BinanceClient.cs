@@ -790,6 +790,7 @@ namespace Binance.Net
         /// <param name="symbol">The symbol the order is for</param>
         /// <param name="orderId">The order id of the order</param>
         /// <param name="origClientOrderId">The client order id of the order</param>
+        /// <param name="newClientOrderId">The new client order id of the order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for canceled order</returns>
         public WebCallResult<BinanceCanceledOrder> CancelOrder(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null) => CancelOrderAsync(symbol, orderId, origClientOrderId, newClientOrderId, receiveWindow).Result;
@@ -1369,76 +1370,6 @@ namespace Binance.Net
             return !result.Data.Success ? new WebCallResult<BinanceTradingStatus>(result.ResponseStatusCode, result.ResponseHeaders, null, new ServerError(result.Data.Message)) : new WebCallResult<BinanceTradingStatus>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Status, null);
         }
 
-
-        /// <summary>
-        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToUserStream"/>. The stream will close after 60 minutes unless a keep alive is send.
-        /// </summary>
-        /// <returns>Listen key</returns>
-        public WebCallResult<string> StartUserStream() => StartUserStreamAsync().Result;
-
-        /// <summary>
-        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToUserStream"/>. The stream will close after 60 minutes unless a keep alive is send.
-        /// </summary>
-        /// <returns>Listen key</returns>
-        public async Task<WebCallResult<string>> StartUserStreamAsync()
-        {
-            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
-            if (!timestampResult.Success)
-                return new WebCallResult<string>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-
-            var result = await ExecuteRequest<BinanceListenKey>(GetUrl(GetListenKeyEndpoint, Api, UserDataStreamVersion), PostMethod).ConfigureAwait(false);
-            return new WebCallResult<string>(result.ResponseStatusCode, result.ResponseHeaders, result.Data?.ListenKey, result.Error);
-        }
-
-        /// <summary>
-        /// Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
-        /// </summary>
-        /// <returns></returns>
-        public WebCallResult<object> KeepAliveUserStream(string listenKey) => KeepAliveUserStreamAsync(listenKey).Result;
-
-        /// <summary>
-        /// Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
-        /// </summary>
-        /// <returns></returns>
-        public async Task<WebCallResult<object>> KeepAliveUserStreamAsync(string listenKey)
-        {
-            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
-            if (!timestampResult.Success)
-                return new WebCallResult<object>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-
-            var parameters = new Dictionary<string, object>
-            {
-                { "listenKey", listenKey }
-            };
-
-            return await ExecuteRequest<object>(GetUrl(KeepListenKeyAliveEndpoint, Api, UserDataStreamVersion), PutMethod, parameters).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Stops the current user stream
-        /// </summary>
-        /// <returns></returns>
-        public WebCallResult<object> StopUserStream(string listenKey) => StopUserStreamAsync(listenKey).Result;
-
-        /// <summary>
-        /// Stops the current user stream
-        /// </summary>
-        /// <returns></returns>
-        public async Task<WebCallResult<object>> StopUserStreamAsync(string listenKey)
-        {
-            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
-            if (!timestampResult.Success)
-                return new WebCallResult<object>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-
-            var parameters = new Dictionary<string, object>
-            {
-                { "listenKey", listenKey }
-            };
-
-            return await ExecuteRequest<object>(GetUrl(CloseListenKeyEndpoint, Api, UserDataStreamVersion), DeleteMethod, parameters).ConfigureAwait(false);
-        }
-        #endregion
-
         #region margin
         /// <summary>
         /// Execute transfer between spot account and margin account.
@@ -1553,7 +1484,7 @@ namespace Binance.Net
         /// <param name="price">The price to use</param>
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
-        /// <param name="icebergQty">Used for iceberg orders</param>
+        /// <param name="icebergQuantity">Used for iceberg orders</param>
         /// <param name="orderResponseType">The type of response to receive</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for the placed order</returns>
@@ -1565,9 +1496,9 @@ namespace Binance.Net
             decimal? price = null,
             TimeInForce? timeInForce = null,
             decimal? stopPrice = null,
-            decimal? icebergQty = null,
+            decimal? icebergQuantity = null,
             OrderResponseType? orderResponseType = null,
-            int? receiveWindow = null) => PlaceMarginOrderAsync(symbol, side, type, quantity, newClientOrderId, price, timeInForce, stopPrice, icebergQty, orderResponseType, receiveWindow).Result;
+            int? receiveWindow = null) => PlaceMarginOrderAsync(symbol, side, type, quantity, newClientOrderId, price, timeInForce, stopPrice, icebergQuantity, orderResponseType, receiveWindow).Result;
 
         /// <summary>
         /// Margin account new order
@@ -1580,7 +1511,7 @@ namespace Binance.Net
         /// <param name="price">The price to use</param>
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
-        /// <param name="icebergQty">Used for iceberg orders</param>
+        /// <param name="icebergQuantity">Used for iceberg orders</param>
         /// <param name="orderResponseType">The type of response to receive</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for the placed order</returns>
@@ -1592,7 +1523,7 @@ namespace Binance.Net
             decimal? price = null,
             TimeInForce? timeInForce = null,
             decimal? stopPrice = null,
-            decimal? icebergQty = null,
+            decimal? icebergQuantity = null,
             OrderResponseType? orderResponseType = null,
             int? receiveWindow = null)
         {
@@ -1622,7 +1553,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)));
             parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("icebergQty", icebergQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
@@ -1675,27 +1606,27 @@ namespace Binance.Net
         /// Query loan records
         /// </summary>
         /// <param name="asset">The records asset</param>
-        /// <param name="transationId">The id of loan transation</param>
+        /// <param name="transactionId">The id of loan transaction</param>
         /// <param name="startTime">Time to start getting records from</param>
         /// <param name="endTime">Time to stop getting records to</param>
         /// <param name="current">Number of page records</param>
         /// <param name="size">The records count size need show</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Loan records</returns>
-        public WebCallResult<BinanceQueryLoan[]> QueryLoan(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null) => QueryLoanAsync(asset, transationId, startTime, endTime, current, size, receiveWindow).Result;
+        public WebCallResult<BinanceQueryLoan[]> QueryLoan(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null) => QueryLoanAsync(asset, transactionId, startTime, endTime, current, size, receiveWindow).Result;
 
         /// <summary>
         /// Query loan records
         /// </summary>
         /// <param name="asset">The records asset</param>
-        /// <param name="transationId">The id of loan transation</param>
+        /// <param name="transactionId">The id of loan transaction</param>
         /// <param name="startTime">Time to start getting records from</param>
         /// <param name="endTime">Time to stop getting records to</param>
         /// <param name="current">Number of page records</param>
         /// <param name="size">The records count size need show</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Loan records</returns>
-        public async Task<WebCallResult<BinanceQueryLoan[]>> QueryLoanAsync(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null)
+        public async Task<WebCallResult<BinanceQueryLoan[]>> QueryLoanAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
@@ -1706,12 +1637,12 @@ namespace Binance.Net
                 { "asset", asset },
                 { "timestamp", GetTimestamp() }
             };
-            parameters.AddOptionalParameter("txId", transationId?.ToString());
+            parameters.AddOptionalParameter("txId", transactionId?.ToString());
 
             // TxId or startTime must be sent. txId takes precedence.
-            if (!transationId.HasValue)
+            if (!transactionId.HasValue)
             {
-                parameters.AddOptionalParameter("startTime", ToUnixTimestamp(startTime != null ? startTime.Value : DateTime.MinValue).ToString(CultureInfo.InvariantCulture));
+                parameters.AddOptionalParameter("startTime", ToUnixTimestamp(startTime ?? DateTime.MinValue).ToString(CultureInfo.InvariantCulture));
             }
             else
             {
@@ -1734,27 +1665,27 @@ namespace Binance.Net
         /// Query repay record
         /// </summary>
         /// <param name="asset">The records asset</param>
-        /// <param name="transationId">The id of repay transation</param>
+        /// <param name="transactionId">The id of repay transaction</param>
         /// <param name="startTime">Time to start getting records from</param>
         /// <param name="endTime">Time to stop getting records to</param>
         /// <param name="current">Number of page records</param>
         /// <param name="size">The records count size need show</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Repay records</returns>
-        public WebCallResult<BinanceQueryRepay[]> QueryRepay(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, long? receiveWindow = null) => QueryRepayAsync(asset, transationId, startTime, endTime, current, size, receiveWindow).Result;
+        public WebCallResult<BinanceQueryRepay[]> QueryRepay(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, long? receiveWindow = null) => QueryRepayAsync(asset, transactionId, startTime, endTime, current, size, receiveWindow).Result;
 
         /// <summary>
         /// Query repay record
         /// </summary>
         /// <param name="asset">The records asset</param>
-        /// <param name="transationId">The id of repay transation</param>
+        /// <param name="transactionId">The id of repay transaction</param>
         /// <param name="startTime">Time to start getting records from</param>
         /// <param name="endTime">Time to stop getting records to</param>
         /// <param name="current">Filter by number</param>
         /// <param name="size">The records count size need show</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Repay records</returns>
-        public async Task<WebCallResult<BinanceQueryRepay[]>> QueryRepayAsync(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, long? receiveWindow = null)
+        public async Task<WebCallResult<BinanceQueryRepay[]>> QueryRepayAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, long? receiveWindow = null)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
@@ -1765,16 +1696,16 @@ namespace Binance.Net
                 { "asset", asset },
                 { "timestamp", GetTimestamp() }
             };
-            parameters.AddOptionalParameter("txId", transationId?.ToString());
+            parameters.AddOptionalParameter("txId", transactionId?.ToString());
 
             // TxId or startTime must be sent. txId takes precedence.
-            if (!transationId.HasValue)
+            if (!transactionId.HasValue)
             {
-                parameters.AddOptionalParameter("startTime", ToUnixTimestamp(startTime != null ? startTime.Value : DateTime.MinValue).ToString(CultureInfo.InvariantCulture));
+                parameters.AddOptionalParameter("startTime", ToUnixTimestamp(startTime ?? DateTime.MinValue).ToString(CultureInfo.InvariantCulture));
             }
             else
             {
-                parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp( startTime.Value ).ToString(CultureInfo.InvariantCulture):null);
+                parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
             }
 
             parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
@@ -1822,7 +1753,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// </summary>
         /// <returns>Return max amount</returns>
-        public WebCallResult<decimal> GetMaxBorrowAmoun(string asset,long? receiveWindow = null) => GetMaxBorrowAmountAsync(asset,receiveWindow).Result;
+        public WebCallResult<decimal> GetMaxBorrowAmount(string asset, long? receiveWindow = null) => GetMaxBorrowAmountAsync(asset, receiveWindow).Result;
 
         /// <summary>
         /// Query max borrow amount
@@ -1889,7 +1820,78 @@ namespace Binance.Net
         }
         #endregion
 
-        #region Margin Stream
+        #region Stream 
+
+
+
+        /// <summary>
+        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToUserStream"/>. The stream will close after 60 minutes unless a keep alive is send.
+        /// </summary>
+        /// <returns>Listen key</returns>
+        public WebCallResult<string> StartUserStream() => StartUserStreamAsync().Result;
+
+        /// <summary>
+        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToUserStream"/>. The stream will close after 60 minutes unless a keep alive is send.
+        /// </summary>
+        /// <returns>Listen key</returns>
+        public async Task<WebCallResult<string>> StartUserStreamAsync()
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<string>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var result = await ExecuteRequest<BinanceListenKey>(GetUrl(GetListenKeyEndpoint, Api, UserDataStreamVersion), PostMethod).ConfigureAwait(false);
+            return new WebCallResult<string>(result.ResponseStatusCode, result.ResponseHeaders, result.Data?.ListenKey, result.Error);
+        }
+
+        /// <summary>
+        /// Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
+        /// </summary>
+        /// <returns></returns>
+        public WebCallResult<object> KeepAliveUserStream(string listenKey) => KeepAliveUserStreamAsync(listenKey).Result;
+
+        /// <summary>
+        /// Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<WebCallResult<object>> KeepAliveUserStreamAsync(string listenKey)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<object>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "listenKey", listenKey }
+            };
+
+            return await ExecuteRequest<object>(GetUrl(KeepListenKeyAliveEndpoint, Api, UserDataStreamVersion), PutMethod, parameters).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Stops the current user stream
+        /// </summary>
+        /// <returns></returns>
+        public WebCallResult<object> StopUserStream(string listenKey) => StopUserStreamAsync(listenKey).Result;
+
+        /// <summary>
+        /// Stops the current user stream
+        /// </summary>
+        /// <returns></returns>
+        public async Task<WebCallResult<object>> StopUserStreamAsync(string listenKey)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<object>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "listenKey", listenKey }
+            };
+
+            return await ExecuteRequest<object>(GetUrl(CloseListenKeyEndpoint, Api, UserDataStreamVersion), DeleteMethod, parameters).ConfigureAwait(false);
+        }
+
         /// <summary>
         /// Starts a user stream  for margin account by requesting a listen key. 
         /// This listen key can be used in subsequent requests to 
@@ -1921,14 +1923,14 @@ namespace Binance.Net
         /// Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
         /// </summary>
         /// <returns></returns>
-        public WebCallResult<object> PingMarginUserStream(string listenKey) => KeepAliveUserStreamAsync(listenKey).Result;
+        public WebCallResult<object> KeepAliveMarginUserStream(string listenKey) => KeepAliveMarginUserStreamAsync(listenKey).Result;
 
         /// <summary>
         /// Sends a keep alive for the current user stream for margin account listen key to keep the stream from closing. 
         /// Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
         /// </summary>
         /// <returns></returns>
-        public async Task<WebCallResult<object>> PingMarginUserStreamAsync(string listenKey)
+        public async Task<WebCallResult<object>> KeepAliveMarginUserStreamAsync(string listenKey)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
@@ -1939,7 +1941,7 @@ namespace Binance.Net
                 { "listenKey", listenKey },
             };
 
-            return await ExecuteRequest<object>(GetUrl(KeepListenKeyAliveEndpoint, MarginApi, MarginVersion), PutMethod, parameters,true).ConfigureAwait(false);
+            return await ExecuteRequest<object>(GetUrl(KeepListenKeyAliveEndpoint, MarginApi, MarginVersion), PutMethod, parameters, true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1967,6 +1969,10 @@ namespace Binance.Net
         }
 
         #endregion
+
+        #endregion
+
+
         #endregion
 
         #region helpers

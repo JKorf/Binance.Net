@@ -1,9 +1,7 @@
-﻿using Newtonsoft.Json;
-
-namespace Binance.Net.Objects
+﻿namespace Binance.Net.Objects
 {
     /// <summary>
-    /// The result amount of geting maxBorrowable or maxTransferable 
+    /// The result amount of getting maxBorrowable or maxTransferable 
     /// </summary>
     public class BinanceMarginAmount
     {

@@ -3,7 +3,7 @@
 namespace Binance.Net.Objects
 {
     /// <summary>
-    /// The result of transfering, borrow or repay response
+    /// The result of transferring, borrow or repay response
     /// </summary>
     public class BinanceMarginTransaction
     {

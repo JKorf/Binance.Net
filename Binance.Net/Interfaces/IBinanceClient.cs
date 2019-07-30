@@ -417,53 +417,53 @@ namespace Binance.Net.Interfaces
         /// Query loan records
         /// </summary>
         /// <param name="asset">The records asset</param>
-        /// <param name="transationId">The id of loan transation</param>
+        /// <param name="transactionId">The id of loan transaction</param>
         /// <param name="startTime">Time to start getting records from</param>
         /// <param name="endTime">Time to stop getting records to</param>
         /// <param name="current">Number of page records</param>
         /// <param name="size">The records count size need show</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Loan records</returns>
-        WebCallResult<BinanceQueryLoan[]> QueryLoan(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null);
+        WebCallResult<BinanceQueryLoan[]> QueryLoan(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null);
 
         /// <summary>
         /// Query loan records
         /// </summary>
         /// <param name="asset">The records asset</param>
-        /// <param name="transationId">The id of loan transation</param>
+        /// <param name="transactionId">The id of loan transaction</param>
         /// <param name="startTime">Time to start getting records from</param>
         /// <param name="endTime">Time to stop getting records to</param>
         /// <param name="current">Number of page records</param>
         /// <param name="size">The records count size need show</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Loan records</returns>
-        Task<WebCallResult<BinanceQueryLoan[]>> QueryLoanAsync(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null);
+        Task<WebCallResult<BinanceQueryLoan[]>> QueryLoanAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null);
 
         /// <summary>
         /// Query repay record
         /// </summary>
         /// <param name="asset">The records asset</param>
-        /// <param name="transationId">The id of repay transation</param>
+        /// <param name="transactionId">The id of repay transaction</param>
         /// <param name="startTime">Time to start getting records from</param>
         /// <param name="endTime">Time to stop getting records to</param>
         /// <param name="current">Number of page records</param>
         /// <param name="size">The records count size need show</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Repay records</returns>
-        WebCallResult<BinanceQueryRepay[]> QueryRepay(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null);
+        WebCallResult<BinanceQueryRepay[]> QueryRepay(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null);
 
         /// <summary>
         /// Query repay record
         /// </summary>
         /// <param name="asset">The records asset</param>
-        /// <param name="transationId">The id of repay transation</param>
+        /// <param name="transactionId">The id of repay transaction</param>
         /// <param name="startTime">Time to start getting records from</param>
         /// <param name="endTime">Time to stop getting records to</param>
         /// <param name="current">Number of page records</param>
         /// <param name="size">The records count size need show</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Repay records</returns>
-        Task<WebCallResult<BinanceQueryRepay[]>> QueryRepayAsync(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null);
+        Task<WebCallResult<BinanceQueryRepay[]>> QueryRepayAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null);
 
 
         /// <summary>
@@ -928,7 +928,7 @@ namespace Binance.Net.Interfaces
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// </summary>
         /// <returns>Return max amount</returns>
-        WebCallResult<decimal> GetMaxBorrowAmoun(string asset, long? receiveWindow = null);
+        WebCallResult<decimal> GetMaxBorrowAmount(string asset, long? receiveWindow = null);
 
         /// <summary>
         /// Query max borrow amount
@@ -977,14 +977,14 @@ namespace Binance.Net.Interfaces
         /// Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
         /// </summary>
         /// <returns></returns>
-        WebCallResult<object> PingMarginUserStream(string listenKey);
+        WebCallResult<object> KeepAliveMarginUserStream(string listenKey);
 
         /// <summary>
         /// Sends a keep alive for the current user stream for margin account listen key to keep the stream from closing. 
         /// Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
         /// </summary>
         /// <returns></returns>
-        Task<WebCallResult<object>> PingMarginUserStreamAsync(string listenKey);
+        Task<WebCallResult<object>> KeepAliveMarginUserStreamAsync(string listenKey);
 
         /// <summary>
         /// Close the user stream for margin account
