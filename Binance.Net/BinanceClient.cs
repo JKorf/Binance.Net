@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Binance.Net.Objects;
-using Binance.Net.Converters;
+﻿using Binance.Net.Converters;
 using Binance.Net.Interfaces;
+using Binance.Net.Objects;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Binance.Net
 {
@@ -39,10 +39,11 @@ namespace Binance.Net
 
         private BinanceExchangeInfo exchangeInfo;
         private DateTime? lastExchangeInfoUpdate;
-        
+
 
         // Addresses
         private const string Api = "api";
+        private const string MarginApi = "sapi";
         private const string WithdrawalApi = "wapi";
 
         // Versions
@@ -50,6 +51,7 @@ namespace Binance.Net
         private const string SignedVersion = "3";
         private const string UserDataStreamVersion = "1";
         private const string WithdrawalVersion = "3";
+        private const string MarginVersion = "1";
 
         // Methods
         private const string GetMethod = "GET";
@@ -79,6 +81,18 @@ namespace Binance.Net
         private const string CancelOrderEndpoint = "order";
         private const string AccountInfoEndpoint = "account";
         private const string MyTradesEndpoint = "myTrades";
+
+        // Margin
+        private const string MarginTransferEndpoint = "margin/transfer";
+        private const string MarginBorrowEndpoint = "margin/loan";
+        private const string MarginRepayEndpoint = "margin/repay";
+        private const string NewMarginOrderEndpoint = "margin/order";
+        private const string CancelMarginOrderEndpoint = "margin/order";
+        private const string GetLoanEndpoint = "margin/loan";
+        private const string GetRepayEndpoint = "margin/repay";
+        private const string MarginAccountInfoEndpoint = "margin/account";
+        private const string MaxBorrowableEndpoint = "margin/maxBorrowable";
+        private const string MaxTransferableEndpoint = "margin/maxTransferable";
 
         // User stream
         private const string GetListenKeyEndpoint = "userDataStream";
@@ -110,7 +124,7 @@ namespace Binance.Net
         /// <summary>
         /// Create a new instance of BinanceClient using the default options
         /// </summary>
-        public BinanceClient(): this(DefaultOptions)
+        public BinanceClient() : this(DefaultOptions)
         {
         }
 
@@ -118,7 +132,7 @@ namespace Binance.Net
         /// Create a new instance of BinanceClient using provided options
         /// </summary>
         /// <param name="options">The options to use for this client</param>
-        public BinanceClient(BinanceClientOptions options): base(options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials))
+        public BinanceClient(BinanceClientOptions options) : base(options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials))
         {
             Configure(options);
         }
@@ -160,7 +174,7 @@ namespace Binance.Net
             var sw = Stopwatch.StartNew();
             var result = await ExecuteRequest<BinancePing>(GetUrl(PingEndpoint, Api, PublicVersion)).ConfigureAwait(false);
             sw.Stop();
-            return new CallResult<long>(result.Error == null ? sw.ElapsedMilliseconds: 0, result.Error);
+            return new CallResult<long>(result.Error == null ? sw.ElapsedMilliseconds : 0, result.Error);
         }
 
         /// <summary>
@@ -177,7 +191,7 @@ namespace Binance.Net
         {
             var url = GetUrl(CheckTimeEndpoint, Api, PublicVersion);
             if (!autoTimestamp)
-            { 
+            {
                 var result = await ExecuteRequest<BinanceCheckTime>(url).ConfigureAwait(false);
                 return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, result.Data?.ServerTime ?? default(DateTime), result.Error);
             }
@@ -290,7 +304,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString() : null);
             parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
             parameters.AddOptionalParameter("limit", limit?.ToString());
-            
+
             return await ExecuteRequest<BinanceAggregatedTrades[]>(GetUrl(AggregatedTradesEndpoint, Api, PublicVersion), GetMethod, parameters).ConfigureAwait(false);
         }
 
@@ -776,7 +790,6 @@ namespace Binance.Net
         /// <param name="symbol">The symbol the order is for</param>
         /// <param name="orderId">The order id of the order</param>
         /// <param name="origClientOrderId">The client order id of the order</param>
-        /// <param name="newClientOrderId">Unique identifier for this cancel</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for canceled order</returns>
         public WebCallResult<BinanceCanceledOrder> CancelOrder(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null) => CancelOrderAsync(symbol, orderId, origClientOrderId, newClientOrderId, receiveWindow).Result;
@@ -795,6 +808,9 @@ namespace Binance.Net
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
                 return new WebCallResult<BinanceCanceledOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            if(!orderId.HasValue && string.IsNullOrEmpty(origClientOrderId))
+                return new WebCallResult<BinanceCanceledOrder>(null, null, null, new ArgumentError("Either orderId or origClientOrderId must be sent."));
 
             var parameters = new Dictionary<string, object>
             {
@@ -871,8 +887,8 @@ namespace Binance.Net
             };
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("fromId", fromId?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("startTime", startTime.HasValue ? JsonConvert.SerializeObject(startTime.Value, new TimestampConverter()) :null);
-            parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) :null);
+            parameters.AddOptionalParameter("startTime", startTime.HasValue ? JsonConvert.SerializeObject(startTime.Value, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await ExecuteRequest<BinanceTrade[]>(GetUrl(MyTradesEndpoint, Api, SignedVersion), GetMethod, parameters, true).ConfigureAwait(false);
@@ -888,7 +904,7 @@ namespace Binance.Net
         /// <param name="name">Name for the transaction</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Withdrawal confirmation</returns>
-        public WebCallResult<BinanceWithdrawalPlaced> Withdraw(string asset, string address, decimal amount, string addressTag = null, string name = null, int? receiveWindow = null) => WithdrawAsync(asset, address,amount, addressTag, name, receiveWindow).Result;
+        public WebCallResult<BinanceWithdrawalPlaced> Withdraw(string asset, string address, decimal amount, string addressTag = null, string name = null, int? receiveWindow = null) => WithdrawAsync(asset, address, amount, addressTag, name, receiveWindow).Result;
 
         /// <summary>
         /// Withdraw assets from Binance to an address
@@ -923,6 +939,7 @@ namespace Binance.Net
 
             if (!result.Data.Success)
                 return new WebCallResult<BinanceWithdrawalPlaced>(result.ResponseStatusCode, result.ResponseHeaders, null, ParseErrorResponse(result.Data.Message));
+
             return result;
         }
 
@@ -968,6 +985,7 @@ namespace Binance.Net
 
             if (!result.Data.Success)
                 return new WebCallResult<BinanceDepositList>(result.ResponseStatusCode, result.ResponseHeaders, null, ParseErrorResponse(result.Data.Message));
+
             return result;
         }
 
@@ -1003,7 +1021,7 @@ namespace Binance.Net
             };
 
             parameters.AddOptionalParameter("asset", asset);
-            parameters.AddOptionalParameter("status", status != null ? JsonConvert.SerializeObject(status, new WithdrawalStatusConverter(false)): null);
+            parameters.AddOptionalParameter("status", status != null ? JsonConvert.SerializeObject(status, new WithdrawalStatusConverter(false)) : null);
             parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
             parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -1011,9 +1029,10 @@ namespace Binance.Net
             var result = await ExecuteRequest<BinanceWithdrawalList>(GetUrl(WithdrawHistoryEndpoint, WithdrawalApi, WithdrawalVersion), GetMethod, parameters, true).ConfigureAwait(false);
             if (!result.Success || result.Data == null)
                 return result;
-            
+
             if (!result.Data.Success)
                 return new WebCallResult<BinanceWithdrawalList>(result.ResponseStatusCode, result.ResponseHeaders, null, ParseErrorResponse(result.Data.Message));
+
             return result;
         }
 
@@ -1415,10 +1434,539 @@ namespace Binance.Net
             {
                 { "listenKey", listenKey }
             };
-            
-            return await ExecuteRequest<object>(GetUrl(CloseListenKeyEndpoint, Api, UserDataStreamVersion), DeleteMethod, parameters).ConfigureAwait(false); 
+
+            return await ExecuteRequest<object>(GetUrl(CloseListenKeyEndpoint, Api, UserDataStreamVersion), DeleteMethod, parameters).ConfigureAwait(false);
         }
-        #endregion      
+        #endregion
+
+        #region margin
+        /// <summary>
+        /// Execute transfer between spot account and margin account.
+        /// </summary>
+        /// <param name="asset">The asset being transferred, e.g., BTC</param>
+        /// <param name="amount">The amount to be transferred</param>
+        /// <param name="type">TransferDirection (MainToMargin/MarginToMain)</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Transaction Id</returns>
+        public WebCallResult<BinanceMarginTransaction> Transfer(string asset, decimal amount, TransferDirectionType type, int? receiveWindow = null) => TransferAsync(asset, amount, type, receiveWindow).Result;
+
+        /// <summary>
+        /// Execute transfer between spot account and margin account.
+        /// </summary>
+        /// <param name="asset">The asset being transferred, e.g., BTC</param>
+        /// <param name="amount">The amount to be transferred</param>
+        /// <param name="type">TransferDirection (MainToMargin/MarginToMain)</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Transaction Id</returns>
+        public async Task<WebCallResult<BinanceMarginTransaction>> TransferAsync(string asset, decimal amount, TransferDirectionType type, int? receiveWindow = null)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<BinanceMarginTransaction>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "asset", asset },
+                { "amount", amount.ToString(CultureInfo.InvariantCulture) },
+                { "type", JsonConvert.SerializeObject(type, new TransferDirectionTypeConverter(false)) },
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await ExecuteRequest<BinanceMarginTransaction>(GetUrl(MarginTransferEndpoint, MarginApi, MarginVersion), PostMethod, parameters, true).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Borrow. Apply for a loan. 
+        /// </summary>
+        /// <param name="asset">The asset being borrow, e.g., BTC</param>
+        /// <param name="amount">The amount to be borrow</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Transaction Id</returns>
+        public WebCallResult<BinanceMarginTransaction> Borrow(string asset, decimal amount, int? receiveWindow = null) => BorrowAsync(asset, amount, receiveWindow).Result;
+
+        /// <summary>
+        /// Borrow. Apply for a loan. 
+        /// </summary>
+        /// <param name="asset">The asset being borrow, e.g., BTC</param>
+        /// <param name="amount">The amount to be borrow</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Transaction Id</returns>
+        public async Task<WebCallResult<BinanceMarginTransaction>> BorrowAsync(string asset, decimal amount, int? receiveWindow = null)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<BinanceMarginTransaction>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "asset", asset },
+                { "amount", amount.ToString(CultureInfo.InvariantCulture) },
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await ExecuteRequest<BinanceMarginTransaction>(GetUrl(MarginBorrowEndpoint, MarginApi, MarginVersion), PostMethod, parameters, true).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Repay loan for margin account.
+        /// </summary>
+        /// <param name="asset">The asset being repay, e.g., BTC</param>
+        /// <param name="amount">The amount to be borrow</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Transaction Id</returns>
+        public WebCallResult<BinanceMarginTransaction> Repay(string asset, decimal amount, int? receiveWindow = null) => RepayAsync(asset, amount, receiveWindow).Result;
+
+        /// <summary>
+        /// Repay loan for margin account.
+        /// </summary>
+        /// <param name="asset">The asset being repay, e.g., BTC</param>
+        /// <param name="amount">The amount to be borrow</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Transaction Id</returns>
+        public async Task<WebCallResult<BinanceMarginTransaction>> RepayAsync(string asset, decimal amount, int? receiveWindow = null)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<BinanceMarginTransaction>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "asset", asset },
+                { "amount", amount.ToString(CultureInfo.InvariantCulture) },
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await ExecuteRequest<BinanceMarginTransaction>(GetUrl(MarginRepayEndpoint, MarginApi, MarginVersion), PostMethod, parameters, true).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Margin account new order
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="side">The order side (buy/sell)</param>
+        /// <param name="type">The order type</param>
+        /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
+        /// <param name="quantity">The amount of the symbol</param>
+        /// <param name="price">The price to use</param>
+        /// <param name="newClientOrderId">Unique id for order</param>
+        /// <param name="stopPrice">Used for stop orders</param>
+        /// <param name="icebergQty">Used for iceberg orders</param>
+        /// <param name="orderResponseType">The type of response to receive</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Id's for the placed order</returns>
+        public WebCallResult<BinancePlacedOrder> PlaceMarginOrder(string symbol,
+            OrderSide side,
+            OrderType type,
+            decimal quantity,
+            string newClientOrderId = null,
+            decimal? price = null,
+            TimeInForce? timeInForce = null,
+            decimal? stopPrice = null,
+            decimal? icebergQty = null,
+            OrderResponseType? orderResponseType = null,
+            int? receiveWindow = null) => PlaceMarginOrderAsync(symbol, side, type, quantity, newClientOrderId, price, timeInForce, stopPrice, icebergQty, orderResponseType, receiveWindow).Result;
+
+        /// <summary>
+        /// Margin account new order
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="side">The order side (buy/sell)</param>
+        /// <param name="type">The order type</param>
+        /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
+        /// <param name="quantity">The amount of the symbol</param>
+        /// <param name="price">The price to use</param>
+        /// <param name="newClientOrderId">Unique id for order</param>
+        /// <param name="stopPrice">Used for stop orders</param>
+        /// <param name="icebergQty">Used for iceberg orders</param>
+        /// <param name="orderResponseType">The type of response to receive</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Id's for the placed order</returns>
+        public async Task<WebCallResult<BinancePlacedOrder>> PlaceMarginOrderAsync(string symbol,
+            OrderSide side,
+            OrderType type,
+            decimal quantity,
+            string newClientOrderId = null,
+            decimal? price = null,
+            TimeInForce? timeInForce = null,
+            decimal? stopPrice = null,
+            decimal? icebergQty = null,
+            OrderResponseType? orderResponseType = null,
+            int? receiveWindow = null)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<BinancePlacedOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var rulesCheck = await CheckTradeRules(symbol, quantity, price, type).ConfigureAwait(false);
+            if (!rulesCheck.Passed)
+            {
+                log.Write(LogVerbosity.Warning, rulesCheck.ErrorMessage);
+                return new WebCallResult<BinancePlacedOrder>(null, null, null, new ArgumentError(rulesCheck.ErrorMessage));
+            }
+
+            quantity = rulesCheck.Quantity;
+            price = rulesCheck.Price;
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "symbol", symbol },
+                { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
+                { "type", JsonConvert.SerializeObject(type, new OrderTypeConverter(false)) },
+                { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
+            parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)));
+            parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await ExecuteRequest<BinancePlacedOrder>(GetUrl(NewMarginOrderEndpoint, MarginApi, MarginVersion), PostMethod, parameters, true).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Cancel an active order for margin account
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="orderId">The order id of the order</param>
+        /// <param name="origClientOrderId">The client order id of the order</param>
+        /// <param name="newClientOrderId">Unique identifier for this cancel</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Id's for canceled order</returns>
+        public WebCallResult<BinanceCanceledOrder> CancelMarginOrder(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null) => CancelOrderAsync(symbol, orderId, origClientOrderId, newClientOrderId, receiveWindow).Result;
+
+        /// <summary>
+        /// Cancel an active order for margin account
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="orderId">The order id of the order</param>
+        /// <param name="origClientOrderId">The client order id of the order</param>
+        /// <param name="newClientOrderId">Unique identifier for this cancel</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Id's for canceled order</returns>
+        public async Task<WebCallResult<BinanceCanceledOrder>> CancelMarginOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<BinanceCanceledOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            if (!orderId.HasValue && string.IsNullOrEmpty(origClientOrderId))
+                return new WebCallResult<BinanceCanceledOrder>(null, null, null, new ArgumentError("Either orderId or origClientOrderId must be sent."));
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "symbol", symbol },
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("orderId", orderId?.ToString());
+            parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
+            parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await ExecuteRequest<BinanceCanceledOrder>(GetUrl(CancelMarginOrderEndpoint, MarginApi, MarginVersion), DeleteMethod, parameters, true).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Query loan records
+        /// </summary>
+        /// <param name="asset">The records asset</param>
+        /// <param name="transationId">The id of loan transation</param>
+        /// <param name="startTime">Time to start getting records from</param>
+        /// <param name="endTime">Time to stop getting records to</param>
+        /// <param name="current">Number of page records</param>
+        /// <param name="size">The records count size need show</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Loan records</returns>
+        public WebCallResult<BinanceQueryLoan[]> QueryLoan(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null) => QueryLoanAsync(asset, transationId, startTime, endTime, current, size, receiveWindow).Result;
+
+        /// <summary>
+        /// Query loan records
+        /// </summary>
+        /// <param name="asset">The records asset</param>
+        /// <param name="transationId">The id of loan transation</param>
+        /// <param name="startTime">Time to start getting records from</param>
+        /// <param name="endTime">Time to stop getting records to</param>
+        /// <param name="current">Number of page records</param>
+        /// <param name="size">The records count size need show</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Loan records</returns>
+        public async Task<WebCallResult<BinanceQueryLoan[]>> QueryLoanAsync(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<BinanceQueryLoan[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "asset", asset },
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("txId", transationId?.ToString());
+
+            // TxId or startTime must be sent. txId takes precedence.
+            if (!transationId.HasValue)
+            {
+                parameters.AddOptionalParameter("startTime", ToUnixTimestamp(startTime != null ? startTime.Value : DateTime.MinValue).ToString(CultureInfo.InvariantCulture));
+            }
+            else
+            {
+                parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            }
+
+            parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("current", current?.ToString());
+            parameters.AddOptionalParameter("size", size?.ToString());
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await ExecuteRequest<BinanceQueryRecords<BinanceQueryLoan>>(GetUrl(GetLoanEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
+            if (!result.Success)
+                return new WebCallResult<BinanceQueryLoan[]>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
+
+            return new WebCallResult<BinanceQueryLoan[]>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Rows, null);
+        }
+
+        /// <summary>
+        /// Query repay record
+        /// </summary>
+        /// <param name="asset">The records asset</param>
+        /// <param name="transationId">The id of repay transation</param>
+        /// <param name="startTime">Time to start getting records from</param>
+        /// <param name="endTime">Time to stop getting records to</param>
+        /// <param name="current">Number of page records</param>
+        /// <param name="size">The records count size need show</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Repay records</returns>
+        public WebCallResult<BinanceQueryRepay[]> QueryRepay(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, long? receiveWindow = null) => QueryRepayAsync(asset, transationId, startTime, endTime, current, size, receiveWindow).Result;
+
+        /// <summary>
+        /// Query repay record
+        /// </summary>
+        /// <param name="asset">The records asset</param>
+        /// <param name="transationId">The id of repay transation</param>
+        /// <param name="startTime">Time to start getting records from</param>
+        /// <param name="endTime">Time to stop getting records to</param>
+        /// <param name="current">Filter by number</param>
+        /// <param name="size">The records count size need show</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Repay records</returns>
+        public async Task<WebCallResult<BinanceQueryRepay[]>> QueryRepayAsync(string asset, long? transationId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, long? receiveWindow = null)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<BinanceQueryRepay[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "asset", asset },
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("txId", transationId?.ToString());
+
+            // TxId or startTime must be sent. txId takes precedence.
+            if (!transationId.HasValue)
+            {
+                parameters.AddOptionalParameter("startTime", ToUnixTimestamp(startTime != null ? startTime.Value : DateTime.MinValue).ToString(CultureInfo.InvariantCulture));
+            }
+            else
+            {
+                parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp( startTime.Value ).ToString(CultureInfo.InvariantCulture):null);
+            }
+
+            parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("current", current?.ToString());
+            parameters.AddOptionalParameter("size", size?.ToString());
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await ExecuteRequest<BinanceQueryRecords<BinanceQueryRepay>>(GetUrl(GetRepayEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
+            if (!result.Success)
+                return new WebCallResult<BinanceQueryRepay[]>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
+
+            return new WebCallResult<BinanceQueryRepay[]>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Rows, null);
+        }
+
+        /// <summary>
+        /// Query margin account details
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>The margin account information</returns>
+        public WebCallResult<BinanceMarginAccount> GerMarginAccountInfo(long? receiveWindow = null) => GerMarginAccountInfoAsync(receiveWindow).Result;
+
+        /// <summary>
+        /// Query margin account details
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>The margin account information</returns>
+        public async Task<WebCallResult<BinanceMarginAccount>> GerMarginAccountInfoAsync(long? receiveWindow = null)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<BinanceMarginAccount>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await ExecuteRequest<BinanceMarginAccount>(GetUrl(MarginAccountInfoEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Query max borrow amount
+        /// <param name="asset">The records asset</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// </summary>
+        /// <returns>Return max amount</returns>
+        public WebCallResult<decimal> GetMaxBorrowAmoun(string asset,long? receiveWindow = null) => GetMaxBorrowAmountAsync(asset,receiveWindow).Result;
+
+        /// <summary>
+        /// Query max borrow amount
+        /// <param name="asset">The records asset</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// </summary>
+        /// <returns>Return max amount</returns>
+        public async Task<WebCallResult<decimal>> GetMaxBorrowAmountAsync(string asset, long? receiveWindow = null)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<decimal>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, 0, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "asset", asset },
+                { "timestamp", GetTimestamp() }
+            };
+
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await ExecuteRequest<BinanceMarginAmount>(GetUrl(MaxBorrowableEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
+
+            if (!result.Success)
+                return new WebCallResult<decimal>(result.ResponseStatusCode, result.ResponseHeaders, 0, result.Error);
+
+            return new WebCallResult<decimal>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Amount, null);
+        }
+
+        /// <summary>
+        /// Query max transfer-out amount 
+        /// <param name="asset">The records asset</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// </summary>
+        /// <returns>Return max amount</returns>
+        public WebCallResult<decimal> GetMaxTransferAmount(string asset, long? receiveWindow = null) => GetMaxTransferAmountAsync(asset, receiveWindow).Result;
+
+        /// <summary>
+        /// Query max transfer-out amount 
+        /// <param name="asset">The records asset</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// </summary>
+        /// <returns>Return max amount</returns>
+        public async Task<WebCallResult<decimal>> GetMaxTransferAmountAsync(string asset, long? receiveWindow = null)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<decimal>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, 0, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "asset", asset },
+                { "timestamp", GetTimestamp() }
+            };
+
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await ExecuteRequest<BinanceMarginAmount>(GetUrl(MaxTransferableEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
+
+            if (!result.Success)
+                return new WebCallResult<decimal>(result.ResponseStatusCode, result.ResponseHeaders, 0, result.Error);
+
+            return new WebCallResult<decimal>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Amount, null);
+        }
+        #endregion
+
+        #region Margin Stream
+        /// <summary>
+        /// Starts a user stream  for margin account by requesting a listen key. 
+        /// This listen key can be used in subsequent requests to 
+        /// <see cref="BinanceSocketClient.SubscribeToUserStream"/>. 
+        /// The stream will close after 60 minutes unless a keep alive is send.
+        /// </summary>
+        /// <returns>Listen key</returns>
+        public WebCallResult<string> StartMarginUserStream() => StartMarginUserStreamAsync().Result;
+
+        /// <summary>
+        /// Starts a user stream  for margin account by requesting a listen key. 
+        /// This listen key can be used in subsequent requests to 
+        /// <see cref="BinanceSocketClient.SubscribeToUserStream"/>. 
+        /// The stream will close after 60 minutes unless a keep alive is send.
+        /// </summary>
+        /// <returns>Listen key</returns>
+        public async Task<WebCallResult<string>> StartMarginUserStreamAsync()
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<string>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var result = await ExecuteRequest<BinanceListenKey>(GetUrl(GetListenKeyEndpoint, MarginApi, MarginVersion), PostMethod).ConfigureAwait(false);
+            return new WebCallResult<string>(result.ResponseStatusCode, result.ResponseHeaders, result.Data?.ListenKey, result.Error);
+        }
+
+        /// <summary>
+        /// Sends a keep alive for the current user for margin account stream listen key to keep the stream from closing. 
+        /// Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
+        /// </summary>
+        /// <returns></returns>
+        public WebCallResult<object> PingMarginUserStream(string listenKey) => KeepAliveUserStreamAsync(listenKey).Result;
+
+        /// <summary>
+        /// Sends a keep alive for the current user stream for margin account listen key to keep the stream from closing. 
+        /// Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<WebCallResult<object>> PingMarginUserStreamAsync(string listenKey)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<object>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "listenKey", listenKey },
+            };
+
+            return await ExecuteRequest<object>(GetUrl(KeepListenKeyAliveEndpoint, MarginApi, MarginVersion), PutMethod, parameters,true).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Close the user stream for margin account
+        /// </summary>
+        /// <returns></returns>
+        public WebCallResult<object> CloseMarginUserStream(string listenKey) => CloseMarginUserStreamAsync(listenKey).Result;
+
+        /// <summary>
+        /// Close the user stream for margin account
+        /// </summary>
+        /// <returns></returns>
+        public async Task<WebCallResult<object>> CloseMarginUserStreamAsync(string listenKey)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<object>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "listenKey", listenKey }
+            };
+
+            return await ExecuteRequest<object>(GetUrl(CloseListenKeyEndpoint, MarginApi, MarginVersion), DeleteMethod, parameters).ConfigureAwait(false);
+        }
+
+        #endregion
         #endregion
 
         #region helpers
@@ -1454,7 +2002,7 @@ namespace Binance.Net
             var result = $"{BaseAddress}/{api}/v{version}/{endpoint}";
             return new Uri(result);
         }
-        
+
         private static long ToUnixTimestamp(DateTime time)
         {
             return (long)(time - new DateTime(1970, 1, 1)).TotalMilliseconds;
@@ -1471,6 +2019,7 @@ namespace Binance.Net
         {
             if (autoTimestamp && (!timeSynced || DateTime.UtcNow - lastTimeSync > autoTimestampRecalculationInterval))
                 return await GetServerTimeAsync(timeSynced).ConfigureAwait(false);
+
             return new WebCallResult<DateTime>(null, null, default(DateTime), null);
         }
 
@@ -1484,7 +2033,7 @@ namespace Binance.Net
 
             if (exchangeInfo == null || lastExchangeInfoUpdate == null || (DateTime.UtcNow - lastExchangeInfoUpdate.Value).TotalMinutes > tradeRulesUpdateInterval.TotalMinutes)
                 await GetExchangeInfoAsync().ConfigureAwait(false);
-            
+
             if (exchangeInfo == null)
                 return BinanceTradeRuleResult.CreateFailed("Unable to retrieve trading rules, validation failed");
 
@@ -1492,20 +2041,20 @@ namespace Binance.Net
             if (symbolData == null)
                 return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Symbol {symbol} not found");
 
-            if(!symbolData.OrderTypes.Contains(type))
+            if (!symbolData.OrderTypes.Contains(type))
                 return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: {type} order type not allowed for {symbol}");
-            
 
             if (symbolData.LotSizeFilter != null || (symbolData.MarketLotSizeFilter != null && type == OrderType.Market))
             {
                 var minQty = symbolData.LotSizeFilter?.MinQuantity;
                 var maxQty = symbolData.LotSizeFilter?.MaxQuantity;
                 var stepSize = symbolData.LotSizeFilter?.StepSize;
-                if(type == OrderType.Market && symbolData.MarketLotSizeFilter != null)
+                if (type == OrderType.Market && symbolData.MarketLotSizeFilter != null)
                 {
                     minQty = symbolData.MarketLotSizeFilter.MinQuantity;
                     if (symbolData.MarketLotSizeFilter.MaxQuantity != 0)
                         maxQty = symbolData.MarketLotSizeFilter.MaxQuantity;
+
                     if (symbolData.MarketLotSizeFilter.StepSize != 0)
                         stepSize = symbolData.MarketLotSizeFilter.StepSize;
                 }
@@ -1516,7 +2065,9 @@ namespace Binance.Net
                     if (outputQuantity != quantity)
                     {
                         if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                        {
                             return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: LotSize filter failed. Original quantity: {quantity}, Closest allowed: {outputQuantity}");
+                        }
 
                         log.Write(LogVerbosity.Info, $"Quantity clamped from {quantity} to {outputQuantity}");
                     }
@@ -1535,6 +2086,7 @@ namespace Binance.Net
                     {
                         if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
                             return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter max/min failed. Original price: {price}, Closest allowed: {outputPrice}");
+
                         log.Write(LogVerbosity.Info, $"price clamped from {price} to {outputPrice}");
                     }
                 }
@@ -1547,6 +2099,7 @@ namespace Binance.Net
                     {
                         if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
                             return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter tick failed. Original price: {price}, Closest allowed: {outputPrice}");
+
                         log.Write(LogVerbosity.Info, $"price rounded from {beforePrice} to {outputPrice}");
                     }
                 }

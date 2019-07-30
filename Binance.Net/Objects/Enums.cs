@@ -141,7 +141,7 @@
         ThreeDay,
         OneWeek,
         OneMonth
-    }    
+    }
 
     /// <summary>
     /// The status of a withdrawal
@@ -229,7 +229,7 @@
         ThrowError,
         AutoComply
     }
-    
+
     public enum SystemStatus
     {
         Normal,
@@ -240,5 +240,31 @@
     {
         Enabled,
         Disabled
+    }
+
+    public enum TransferDirectionType
+    {
+        MainToMargin ,
+        MarginToMain
+    }
+
+    public enum MarginStatus
+    {
+        /// <summary>
+        /// Pending to execution
+        /// </summary>
+        Pending,
+        /// <summary>
+        /// Executed, waiting to be confirmed
+        /// </summary>
+        Completed,
+        /// <summary>
+        /// Successfully loaned/repay
+        /// </summary>
+        Confirmed,
+        /// <summary>
+        /// execution failed, nothing happened to your account
+        /// </summary>
+        Failed
     }
 }
