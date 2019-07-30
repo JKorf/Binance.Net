@@ -44,6 +44,11 @@ namespace Binance.Net.Objects
         [JsonConverter(typeof(TimestampConverter))]
         public DateTime UpdateTime { get; set; }
         /// <summary>
+        /// The type of account
+        /// </summary>
+        // TODO make enum when api docs are updated
+        public string AccountType { get; set; }
+        /// <summary>
         /// List of assets with their current balances
         /// </summary>
         public List<BinanceBalance> Balances { get; set; }
