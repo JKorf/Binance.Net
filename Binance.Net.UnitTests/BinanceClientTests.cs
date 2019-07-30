@@ -601,7 +601,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.CancelOrder("BNBBTC");
+            var result = client.CancelOrder("BNBBTC",orderId:123);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -1017,7 +1017,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.CancelMarginOrder("BNBBTC");
+            var result = client.CancelMarginOrder("BNBBTC", orderId:123);
 
             // assert
             Assert.IsTrue(result.Success);
