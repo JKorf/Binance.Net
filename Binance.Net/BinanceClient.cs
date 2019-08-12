@@ -1569,7 +1569,7 @@ namespace Binance.Net
         /// <param name="newClientOrderId">Unique identifier for this cancel</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for canceled order</returns>
-        public WebCallResult<BinanceCanceledOrder> CancelMarginOrder(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null) => CancelOrderAsync(symbol, orderId, origClientOrderId, newClientOrderId, receiveWindow).Result;
+        public WebCallResult<BinanceCanceledOrder> CancelMarginOrder(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null) => CancelMarginOrderAsync(symbol, orderId, origClientOrderId, newClientOrderId, receiveWindow).Result;
 
         /// <summary>
         /// Cancel an active order for margin account
