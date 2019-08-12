@@ -140,6 +140,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 4.1.3 - 12 Aug 2019
+    * Fix margin order cancel
+
 * Version 4.1.2 - 07 Aug 2019
     * Updated CryptoExchange.Net
 
