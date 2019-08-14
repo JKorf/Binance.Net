@@ -23,8 +23,11 @@ namespace Binance.Net.Objects
         public long LastUpdateId { get; set; }
 
 
+        /// <summary>
+        /// Setter for last update id, need for Json.Net
+        /// </summary>
         [JsonProperty("u")]
-        private long LastUpdateIdStream { set => LastUpdateId = value; }
+        public long LastUpdateIdStream { set => LastUpdateId = value; }
 
         /// <summary>
         /// The id of this update, can be synced with <see cref="BinanceClient.GetOrderBook"/> to update the order book
@@ -37,13 +40,19 @@ namespace Binance.Net.Objects
         /// </summary>
         public List<BinanceOrderBookEntry> Bids { get; set; }
 
+        /// <summary>
+        /// Setter for bids (needed forJson.Net)
+        /// </summary>
         [JsonProperty("b")]
-        private List<BinanceOrderBookEntry> BidsStream { set => Bids = value; }
+        public List<BinanceOrderBookEntry> BidsStream { set => Bids = value; }
         /// <summary>
         /// The list of asks
         /// </summary>
         public List<BinanceOrderBookEntry> Asks { get; set; }
 
+        /// <summary>
+        /// Setter for asks (needed forJson.Net)
+        /// </summary>
         [JsonProperty("a")]
         public List<BinanceOrderBookEntry> AsksStream { set => Asks = value; }
     }

@@ -3,6 +3,9 @@ using CryptoExchange.Net.Objects;
 
 namespace Binance.Net.Objects
 {
+    /// <summary>
+    /// Options for the binance client
+    /// </summary>
     public class BinanceClientOptions : RestClientOptions
     {
         /// <summary>
@@ -34,11 +37,18 @@ namespace Binance.Net.Objects
         /// </summary>
         public TimeSpan ReceiveWindow { get; set; } = TimeSpan.FromSeconds(5);
 
+        /// <summary>
+        /// ctor
+        /// </summary>
         public BinanceClientOptions()
         {
             BaseAddress = "https://api.binance.com";
         }
 
+        /// <summary>
+        /// Return a copy of these options
+        /// </summary>
+        /// <returns></returns>
         public BinanceClientOptions Copy()
         {
             var copy = Copy<BinanceClientOptions>();
@@ -52,6 +62,9 @@ namespace Binance.Net.Objects
         }
     }
 
+    /// <summary>
+    /// Binance socket client options
+    /// </summary>
     public class BinanceSocketClientOptions : SocketClientOptions
     {
         /// <summary>
@@ -74,11 +87,18 @@ namespace Binance.Net.Objects
             }
         }
 
+        /// <summary>
+        /// ctor
+        /// </summary>
         public BinanceSocketClientOptions()
         {
             BaseAddress = "wss://stream.binance.com:9443/ws/";
         }        
 
+        /// <summary>
+        /// Return a copy of these options
+        /// </summary>
+        /// <returns></returns>
         public BinanceSocketClientOptions Copy()
         {
             var copy = Copy<BinanceSocketClientOptions>();
@@ -87,6 +107,9 @@ namespace Binance.Net.Objects
         }
     }
 
+    /// <summary>
+    /// Binance symbol order book options
+    /// </summary>
     public class BinanceOrderBookOptions : OrderBookOptions
     {
         /// <summary>

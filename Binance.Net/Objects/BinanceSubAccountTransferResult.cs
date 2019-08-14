@@ -2,6 +2,9 @@
 
 namespace Binance.Net.Objects
 {
+    /// <summary>
+    /// Sub account transfer result
+    /// </summary>
     public class BinanceSubAccountTransferResult
     {
         /// <summary>

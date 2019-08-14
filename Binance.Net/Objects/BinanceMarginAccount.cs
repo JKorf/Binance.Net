@@ -36,7 +36,9 @@ namespace Binance.Net.Objects
         /// Aggregate total available net balance of BTC
         /// </summary>
         public decimal TotalNetAssetOfBtc { get; set; }
-    
+        /// <summary>
+        /// Balance list
+        /// </summary>
         [JsonProperty("userAssets")]
         public List<BinanceMarginBalance> Balances { get; set; }
     }

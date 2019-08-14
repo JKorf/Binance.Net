@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace Binance.Net.Objects
 {
+    /// <summary>
+    /// Symbol info
+    /// </summary>
     public class BinanceSymbol
     {
         /// <summary>

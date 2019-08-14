@@ -417,31 +417,37 @@ namespace Binance.Net
             baseCombinedAddress = options.BaseSocketCombinedAddress;
         }
 
+        /// <inheritdoc />
         protected override bool HandleQueryResponse<T>(SocketConnection s, object request, JToken data, out CallResult<T> callResult)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         protected override bool HandleSubscriptionResponse(SocketConnection s, SocketSubscription subscription, object request, JToken message, out CallResult<object> callResult)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         protected override bool MessageMatchesHandler(JToken message, object request)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         protected override bool MessageMatchesHandler(JToken message, string identifier)
         {
             return true;
         }
 
+        /// <inheritdoc />
         protected override Task<CallResult<bool>> AuthenticateSocket(SocketConnection s)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         protected override Task<bool> Unsubscribe(SocketConnection connection, SocketSubscription s)
         {
             return Task.FromResult(true);

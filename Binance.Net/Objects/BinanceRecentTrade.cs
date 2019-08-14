@@ -4,6 +4,9 @@ using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects
 {
+    /// <summary>
+    /// Recent trade info
+    /// </summary>
     public class BinanceRecentTrade
     {
         /// <summary>

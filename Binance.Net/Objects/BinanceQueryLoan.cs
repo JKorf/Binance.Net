@@ -5,6 +5,9 @@ using System;
 
 namespace Binance.Net.Objects
 {
+    /// <summary>
+    /// Loan info
+    /// </summary>
     public class BinanceQueryLoan
     {
         /// <summary>

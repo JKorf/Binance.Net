@@ -4,7 +4,7 @@ using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Converters
 {
-    public class SystemStatusConverter : BaseConverter<SystemStatus>
+    internal class SystemStatusConverter : BaseConverter<SystemStatus>
     {
         public SystemStatusConverter() : this(true)
         {

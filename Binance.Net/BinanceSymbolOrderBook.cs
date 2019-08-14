@@ -31,6 +31,7 @@ namespace Binance.Net
             socketClient = new BinanceSocketClient();
         }
 
+        /// <inheritdoc />
         protected override async Task<CallResult<UpdateSubscription>> DoStart()
         {
             if (limit.HasValue && limit != 5 && limit != 10 && limit != 20)
@@ -82,11 +83,13 @@ namespace Binance.Net
             }
         }
 
+        /// <inheritdoc />
         protected override void DoReset()
         {
             initialUpdateReceived = false;
         }
 
+        /// <inheritdoc />
         protected override async Task<CallResult<bool>> DoResync()
         {
             if (limit != null)
@@ -105,6 +108,7 @@ namespace Binance.Net
             return new CallResult<bool>(true, null);
         }
 
+        /// <inheritdoc />
         public override void Dispose()
         {
             processBuffer.Clear();

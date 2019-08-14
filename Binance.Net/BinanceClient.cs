@@ -181,7 +181,7 @@ namespace Binance.Net
         public override async Task<CallResult<long>> PingAsync()
         {
             var sw = Stopwatch.StartNew();
-            var result = await ExecuteRequest<BinancePing>(GetUrl(PingEndpoint, Api, PublicVersion)).ConfigureAwait(false);
+            var result = await ExecuteRequest<object>(GetUrl(PingEndpoint, Api, PublicVersion)).ConfigureAwait(false);
             sw.Stop();
             return new CallResult<long>(result.Error == null ? sw.ElapsedMilliseconds : 0, result.Error);
         }
@@ -1594,14 +1594,10 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Retrieves a list of oco orders matching the parameters
+        /// Retrieves a list of open oco orders
         /// </summary>
-        /// <param name="fromId">Only return oco orders with id higher than this</param>
-        /// <param name="startTime">Only return oco orders placed later than this. Only valid if fromId isn't provided</param>
-        /// <param name="endTime">Only return oco orders placed before this. Only valid if fromId isn't provided</param>
-        /// <param name="limit">Max number of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <returns>Order lists matching the parameters</returns>
+        /// <returns>Open order lists</returns>
         public WebCallResult<BinanceOrderList[]> QueryOpenOCOOrders(long? receiveWindow = null) => QueryOpenOCOOrdersAsync( receiveWindow).Result;
 
         /// <summary>
@@ -2241,6 +2237,7 @@ namespace Binance.Net
             postParametersPosition = PostParameters.InUri;
         }
 
+        /// <inheritdoc />
         protected override Error ParseErrorResponse(JToken error)
         {
             if (!error.HasValues)

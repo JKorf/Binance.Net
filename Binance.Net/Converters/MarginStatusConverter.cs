@@ -4,7 +4,7 @@ using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Converters
 {
-    public class MarginStatusConverter : BaseConverter<MarginStatus>
+    internal class MarginStatusConverter : BaseConverter<MarginStatus>
     {
         public MarginStatusConverter(): this(false) { }
         public MarginStatusConverter(bool quotes) : base(quotes) { }

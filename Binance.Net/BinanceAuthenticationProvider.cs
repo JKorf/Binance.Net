@@ -6,7 +6,7 @@ using CryptoExchange.Net.Authentication;
 
 namespace Binance.Net
 {
-    public class BinanceAuthenticationProvider: AuthenticationProvider
+    internal class BinanceAuthenticationProvider: AuthenticationProvider
     {
         private readonly HMACSHA256 encryptor;
 

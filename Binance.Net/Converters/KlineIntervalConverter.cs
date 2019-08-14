@@ -4,7 +4,7 @@ using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Converters
 {
-    public class KlineIntervalConverter: BaseConverter<KlineInterval>
+    internal class KlineIntervalConverter: BaseConverter<KlineInterval>
     {
         public KlineIntervalConverter(): this(true) { }
         public KlineIntervalConverter(bool quotes) : base(quotes) { }

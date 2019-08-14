@@ -7,6 +7,9 @@ using CryptoExchange.Net.Sockets;
 
 namespace Binance.Net.Interfaces
 {
+    /// <summary>
+    /// Binance socket client interface
+    /// </summary>
     public interface IBinanceSocketClient: ISocketClient
     {
         /// <summary>

@@ -6,7 +6,7 @@ using Binance.Net.Objects;
 
 namespace Binance.Net.Converters
 {
-    public class OrderTypeConverter : JsonConverter
+    internal class OrderTypeConverter : JsonConverter
     {
         private readonly bool quotes;
 

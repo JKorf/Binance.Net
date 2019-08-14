@@ -15,6 +15,9 @@ namespace Binance.Net.Objects
         public SymbolFilterType FilterType { get; set; }
     }
 
+    /// <summary>
+    /// Price filter
+    /// </summary>
     public class BinanceSymbolPriceFilter: BinanceSymbolFilter
     {
         /// <summary>
@@ -31,6 +34,9 @@ namespace Binance.Net.Objects
         public decimal TickSize { get; set; }
     }
 
+    /// <summary>
+    /// Price percentage filter
+    /// </summary>
     public class BinanceSymbolPercentPriceFilter : BinanceSymbolFilter
     {
         /// <summary>
@@ -47,6 +53,9 @@ namespace Binance.Net.Objects
         public int AveragePriceMinutes { get; set; }
     }
 
+    /// <summary>
+    /// Lot size filter
+    /// </summary>
     public class BinanceSymbolLotSizeFilter : BinanceSymbolFilter
     {
         /// <summary>
@@ -63,6 +72,9 @@ namespace Binance.Net.Objects
         public decimal StepSize { get; set; }
     }
 
+    /// <summary>
+    /// Market lot size filter
+    /// </summary>
     public class BinanceSymbolMarketLotSizeFilter : BinanceSymbolFilter
     {
         /// <summary>
@@ -79,6 +91,9 @@ namespace Binance.Net.Objects
         public decimal StepSize { get; set; }
     }
 
+    /// <summary>
+    /// Min notional filter
+    /// </summary>
     public class BinanceSymbolMinNotionalFilter : BinanceSymbolFilter
     {
         /// <summary>
@@ -97,6 +112,9 @@ namespace Binance.Net.Objects
         public int AveragePriceMinutes { get; set; }
     }
 
+    /// <summary>
+    /// Nax orders filter
+    /// </summary>
     public class BinanceSymbolMaxOrdersFilter : BinanceSymbolFilter
     {
         /// <summary>
@@ -105,6 +123,9 @@ namespace Binance.Net.Objects
         public int MaxNumberOrders { get; set; }
     }
 
+    /// <summary>
+    /// Max iceberg orders filter
+    /// </summary>
     public class BinanceSymbolMaxIcebergOrdersFilter : BinanceSymbolFilter
     {
         /// <summary>
@@ -113,6 +134,9 @@ namespace Binance.Net.Objects
         public int MaxNumberIcebergOrders { get; set; }
     }
 
+    /// <summary>
+    /// Max algo orders filter
+    /// </summary>
     public class BinanceSymbolMaxAlgorithmicOrdersFilter : BinanceSymbolFilter
     {
         /// <summary>
@@ -121,6 +145,9 @@ namespace Binance.Net.Objects
         public int MaxNumberAlgorithmicOrders { get; set; }
     }
 
+    /// <summary>
+    /// Max iceberg parts filter
+    /// </summary>
     public class BinanceSymbolIcebergPartsFilter : BinanceSymbolFilter
     {
         /// <summary>

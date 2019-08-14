@@ -663,6 +663,118 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>The trading status of the account</returns>
         </member>
+        <member name="M:Binance.Net.BinanceClient.PlaceOCOOrder(System.String,Binance.Net.Objects.OrderSide,System.Decimal,System.Decimal,System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32})">
+            <summary>
+            Places a new OCO(One cancels other) order
+            </summary>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="side">The order side (buy/sell)</param>
+            <param name="stopLimitTimeInForce">Lifetime of the stop order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
+            <param name="quantity">The amount of the symbol</param>
+            <param name="price">The price to use</param>
+            <param name="stopClientOrderId">Client id for the stop order</param>
+            <param name="limitClientOrderId">Client id for the limit order</param>
+            <param name="listClientOrderId">Client id for the order list</param>
+            <param name="limitIcebergQuantity">Iceberg quantity for the limit order</param>
+            <param name="stopIcebergQuantity">Iceberg quantity for the stop order</param>
+            <param name="orderResponseType">The type of response to receive</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>Order list info</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceClient.PlaceOCOOrderAsync(System.String,Binance.Net.Objects.OrderSide,System.Decimal,System.Decimal,System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32})">
+            <summary>
+            Places a new OCO(One cancels other) order
+            </summary>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="side">The order side (buy/sell)</param>
+            <param name="stopLimitTimeInForce">Lifetime of the stop order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
+            <param name="quantity">The amount of the symbol</param>
+            <param name="price">The price to use</param>
+            <param name="stopClientOrderId">Client id for the stop order</param>
+            <param name="limitClientOrderId">Client id for the limit order</param>
+            <param name="listClientOrderId">Client id for the order list</param>
+            <param name="limitIcebergQuantity">Iceberg quantity for the limit order</param>
+            <param name="stopIcebergQuantity">Iceberg quantity for the stop order</param>
+            <param name="orderResponseType">The type of response to receive</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>Order list info</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceClient.CancelOCOOrder(System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64})">
+            <summary>
+            Cancels a pending oco order
+            </summary>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="orderListId">The id of the order list to cancel</param>
+            <param name="listClientOrderId">The client order id of the order list to cancel</param>
+            <param name="newClientOrderId">The new client order list id for the order list</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>Id's for canceled order</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceClient.CancelOCOOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64})">
+            <summary>
+            Cancels a pending oco order
+            </summary>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="orderListId">The id of the order list to cancel</param>
+            <param name="listClientOrderId">The client order id of the order list to cancel</param>
+            <param name="newClientOrderId">The new client order list id for the order list</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>Id's for canceled order</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceClient.QueryOCOOrder(System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
+            <summary>
+            Retrieves data for a specific oco order. Either listClientOrderId or listClientOrderId should be provided.
+            </summary>
+            <param name="orderListId">The list order id of the order</param>
+            <param name="listClientOrderId">The client order id of the list order</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>The specific order list</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceClient.QueryOCOOrderAsync(System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
+            <summary>
+            Retrieves data for a specific oco order. Either orderListId or listClientOrderId should be provided.
+            </summary>
+            <param name="orderListId">The list order id of the order</param>
+            <param name="listClientOrderId">The client order id of the list order</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>The specific order list</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceClient.QueryOCOOrders(System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+            <summary>
+            Retrieves a list of oco orders matching the parameters
+            </summary>
+            <param name="fromId">Only return oco orders with id higher than this</param>
+            <param name="startTime">Only return oco orders placed later than this. Only valid if fromId isn't provided</param>
+            <param name="endTime">Only return oco orders placed before this. Only valid if fromId isn't provided</param>
+            <param name="limit">Max number of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>Order lists matching the parameters</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceClient.QueryOCOOrdersAsync(System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+            <summary>
+            Retrieves a list of oco orders matching the parameters
+            </summary>
+            <param name="fromId">Only return oco orders with id higher than this</param>
+            <param name="startTime">Only return oco orders placed later than this. Only valid if fromId isn't provided</param>
+            <param name="endTime">Only return oco orders placed before this. Only valid if fromId isn't provided</param>
+            <param name="limit">Max number of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>Order lists matching the parameters</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceClient.QueryOpenOCOOrders(System.Nullable{System.Int64})">
+            <summary>
+            Retrieves a list of open oco orders
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>Open order lists</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceClient.QueryOpenOCOOrdersAsync(System.Nullable{System.Int64})">
+            <summary>
+            Retrieves a list of open oco orders
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>Open order lists</returns>
+        </member>
         <member name="M:Binance.Net.BinanceClient.Transfer(System.String,System.Decimal,Binance.Net.Objects.TransferDirectionType,System.Nullable{System.Int32})">
             <summary>
             Execute transfer between spot account and margin account.
@@ -875,13 +987,13 @@
         </member>
         <member name="M:Binance.Net.BinanceClient.StartUserStream">
             <summary>
-            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate})"/>. The stream will close after 60 minutes unless a keep alive is send.
+            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{System.Object},System.Action{System.Object})"/>. The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <returns>Listen key</returns>
         </member>
         <member name="M:Binance.Net.BinanceClient.StartUserStreamAsync">
             <summary>
-            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate})"/>. The stream will close after 60 minutes unless a keep alive is send.
+            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{System.Object},System.Action{System.Object})"/>. The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <returns>Listen key</returns>
         </member>
@@ -913,7 +1025,7 @@
             <summary>
             Starts a user stream  for margin account by requesting a listen key. 
             This listen key can be used in subsequent requests to 
-            <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate})"/>. 
+            <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{System.Object},System.Action{System.Object})"/>. 
             The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <returns>Listen key</returns>
@@ -922,7 +1034,7 @@
             <summary>
             Starts a user stream  for margin account by requesting a listen key. 
             This listen key can be used in subsequent requests to 
-            <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate})"/>. 
+            <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{System.Object},System.Action{System.Object})"/>. 
             The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <returns>Listen key</returns>
@@ -951,6 +1063,48 @@
             <summary>
             Close the user stream for margin account
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.BinanceClient.ParseErrorResponse(Newtonsoft.Json.Linq.JToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Binance.Net.BinanceHelpers">
+            <summary>
+            Helper methods for the Binance API
+            </summary>
+        </member>
+        <member name="M:Binance.Net.BinanceHelpers.UsedWeight(System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String}})">
+            <summary>
+            Get the used weight from the response headers
+            </summary>
+            <param name="headers"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.BinanceHelpers.ClampQuantity(System.Decimal,System.Decimal,System.Decimal,System.Decimal)">
+            <summary>
+            Clamp a quantity between a min and max quantity and floor to the closest step
+            </summary>
+            <param name="minQuantity"></param>
+            <param name="maxQuantity"></param>
+            <param name="stepSize"></param>
+            <param name="quantity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.BinanceHelpers.ClampPrice(System.Decimal,System.Decimal,System.Decimal)">
+            <summary>
+            Clamp a price between a min and max price
+            </summary>
+            <param name="minPrice"></param>
+            <param name="maxPrice"></param>
+            <param name="price"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.BinanceHelpers.FloorPrice(System.Decimal,System.Decimal)">
+            <summary>
+            Floor a price to the closest tick
+            </summary>
+            <param name="tickSize"></param>
+            <param name="price"></param>
             <returns></returns>
         </member>
         <member name="T:Binance.Net.BinanceSocketClient">
@@ -1180,23 +1334,45 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate})">
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{System.Object},System.Action{System.Object})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.BinanceClient.StartUserStream"/> method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
             <param name="onAccountInfoMessage">The event handler for whenever an account info update is received</param>
             <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
+            <param name="onOcoOrderMessage">The event handler for whenever an oco order status update is received</param>
+            <param name="onAccountPositionMessage">The event handler for whenever an account position update is received</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToUserStreamAsync(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate})">
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToUserStreamAsync(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{System.Object},System.Action{System.Object})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.BinanceClient.StartUserStream"/> method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
             <param name="onAccountInfoMessage">The event handler for whenever an account info update is received</param>
             <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
+            /// <param name="onOcoOrderMessage">The event handler for whenever an oco order status update is received</param>
+            <param name="onAccountPositionMessage">The event handler for whenever an account position update is received</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceSocketClient.HandleQueryResponse``1(CryptoExchange.Net.Sockets.SocketConnection,System.Object,Newtonsoft.Json.Linq.JToken,CryptoExchange.Net.Objects.CallResult{``0}@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.BinanceSocketClient.HandleSubscriptionResponse(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Sockets.SocketSubscription,System.Object,Newtonsoft.Json.Linq.JToken,CryptoExchange.Net.Objects.CallResult{System.Object}@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.BinanceSocketClient.MessageMatchesHandler(Newtonsoft.Json.Linq.JToken,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.BinanceSocketClient.MessageMatchesHandler(Newtonsoft.Json.Linq.JToken,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.BinanceSocketClient.AuthenticateSocket(CryptoExchange.Net.Sockets.SocketConnection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.BinanceSocketClient.Unsubscribe(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Sockets.SocketSubscription)">
+            <inheritdoc />
         </member>
         <member name="T:Binance.Net.BinanceSymbolOrderBook">
             <summary>
@@ -1210,6 +1386,23 @@
             </summary>
             <param name="symbol">The symbol of the order book</param>
             <param name="options">The options for the order book</param>
+        </member>
+        <member name="M:Binance.Net.BinanceSymbolOrderBook.DoStart">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.BinanceSymbolOrderBook.DoReset">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.BinanceSymbolOrderBook.DoResync">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.BinanceSymbolOrderBook.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:Binance.Net.Interfaces.IBinanceClient">
+            <summary>
+            Binance rest client
+            </summary>
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceClient.SetApiCredentials(System.String,System.String)">
             <summary>
@@ -1902,13 +2095,13 @@
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceClient.StartUserStream">
             <summary>
-            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate})"/>. The stream will close after 60 minutes unless a keep alive is send.
+            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{System.Object},System.Action{System.Object})"/>. The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <returns>Listen key</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceClient.StartUserStreamAsync">
             <summary>
-            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate})"/>. The stream will close after 60 minutes unless a keep alive is send.
+            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{System.Object},System.Action{System.Object})"/>. The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <returns>Listen key</returns>
         </member>
@@ -2098,7 +2291,7 @@
             <summary>
             Starts a user stream  for margin account by requesting a listen key. 
             This listen key can be used in subsequent requests to 
-            <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate})"/>. 
+            <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{System.Object},System.Action{System.Object})"/>. 
             The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <returns>Listen key</returns>
@@ -2107,7 +2300,7 @@
             <summary>
             Starts a user stream  for margin account by requesting a listen key. 
             This listen key can be used in subsequent requests to 
-            <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate})"/>. 
+            <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{System.Object},System.Action{System.Object})"/>. 
             The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <returns>Listen key</returns>
@@ -2138,20 +2331,9 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="P:Binance.Net.Interfaces.IBinanceClient.RequestFactory">
+        <member name="T:Binance.Net.Interfaces.IBinanceSocketClient">
             <summary>
-            The factory for creating requests. Used for unit testing
-            </summary>
-        </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.AddRateLimiter(CryptoExchange.Net.Interfaces.IRateLimiter)">
-            <summary>
-            Adds a rate limiter to the client. There are 2 choices, the <see cref="T:CryptoExchange.Net.RateLimiter.RateLimiterTotal"/> and the <see cref="T:CryptoExchange.Net.RateLimiter.RateLimiterPerEndpoint"/>.
-            </summary>
-            <param name="limiter">The limiter to add</param>
-        </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.RemoveRateLimiters">
-            <summary>
-            Removes all rate limiters from this client
+            Binance socket client interface
             </summary>
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SetApiCredentials(System.String,System.String)">
@@ -2567,6 +2749,26 @@
             The total balance of this asset (Free + Locked)
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceAccountStatus">
+            <summary>
+            Account status info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceAccountStatus.Message">
+            <summary>
+            The result message
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceAccountStatus.Success">
+            <summary>
+            Success boolean
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceAccountStatus.Objects">
+            <summary>
+            Parameters
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.BinanceAggregatedTrades">
             <summary>
             Compressed aggregated trade information. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
@@ -2707,6 +2909,11 @@
             Side of the order
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceClientOptions">
+            <summary>
+            Options for the binance client
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceClientOptions.AutoTimestamp">
             <summary>
             Whether or not to automatically sync the local time with the server time
@@ -2737,6 +2944,22 @@
             The default receive window for requests
             </summary>
         </member>
+        <member name="M:Binance.Net.Objects.BinanceClientOptions.#ctor">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Objects.BinanceClientOptions.Copy">
+            <summary>
+            Return a copy of these options
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceSocketClientOptions">
+            <summary>
+            Binance socket client options
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceSocketClientOptions.BaseSocketCombinedAddress">
             <summary>
             The base address for combined data in socket connections
@@ -2747,6 +2970,22 @@
             The amount of subscriptions that should be made on a single socket connection. Not all exchanges support multiple subscriptions on a single socket.
             Setting this to a higher number increases subscription speed, but having more subscriptions on a single connection will also increase the amount of traffic on that single connection.
             Not available on Binance.
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Objects.BinanceSocketClientOptions.#ctor">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Objects.BinanceSocketClientOptions.Copy">
+            <summary>
+            Return a copy of these options
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceOrderBookOptions">
+            <summary>
+            Binance symbol order book options
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BinanceOrderBookOptions.Limit">
@@ -2776,6 +3015,11 @@
         <member name="P:Binance.Net.Objects.BinanceCombinedStream`1.Data">
             <summary>
             The data of stream
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceDepositAddress">
+            <summary>
+            Deposit address info
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BinanceDepositAddress.Address">
@@ -2853,6 +3097,81 @@
             The status of the deposit
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceDustLog">
+            <summary>
+            Dust log details
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceDustLog.TransferredTotal">
+            <summary>
+            Total transferred
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceDustLog.ServiceChargeTotal">
+            <summary>
+            Total service charge
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceDustLog.TransactionId">
+            <summary>
+            Transaction id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceDustLog.Logs">
+            <summary>
+            Detail logs
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceDustLog.OperateTime">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceDustLogDetails">
+            <summary>
+            Dust log entry details
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceDustLogDetails.TransactionId">
+            <summary>
+            Transaction id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceDustLogDetails.ServiceChargeAmount">
+            <summary>
+            Service charge
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceDustLogDetails.UId">
+            <summary>
+            Identifier
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceDustLogDetails.Amount">
+            <summary>
+            Amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceDustLogDetails.OperateTime">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceDustLogDetails.TransferredAmount">
+            <summary>
+            Transferred amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceDustLogDetails.FromAsset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceExchangeInfo">
+            <summary>
+            Exchange info
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceExchangeInfo.TimeZone">
             <summary>
             The timezone the server uses
@@ -2871,6 +3190,11 @@
         <member name="P:Binance.Net.Objects.BinanceExchangeInfo.Symbols">
             <summary>
             All symbols supported
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceExchangeInfo.ExchangeFilters">
+            <summary>
+            Filters
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinanceKline">
@@ -2981,6 +3305,11 @@
         <member name="P:Binance.Net.Objects.BinanceMarginAccount.TotalNetAssetOfBtc">
             <summary>
             Aggregate total available net balance of BTC
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceMarginAccount.Balances">
+            <summary>
+            Balance list
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinanceMarginBalance">
@@ -3148,9 +3477,19 @@
             The list of bids
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderBook.BidsStream">
+            <summary>
+            Setter for bids (needed forJson.Net)
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceOrderBook.Asks">
             <summary>
             The list of asks
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderBook.AsksStream">
+            <summary>
+            Setter for asks (needed forJson.Net)
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinanceOrderBookEntry">
@@ -3166,6 +3505,11 @@
         <member name="P:Binance.Net.Objects.BinanceOrderBookEntry.Quantity">
             <summary>
             The quantity of this price in the order book
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceOrderTrade">
+            <summary>
+            Trade info
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BinanceOrderTrade.TradeId">
@@ -3258,9 +3602,89 @@
             The side of the order
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.BinancePlacedOrder.StopPrice">
+            <summary>
+            Stop price for the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinancePlacedOrder.OrderListId">
+            <summary>
+            Id of the order list this order belongs to
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinancePlacedOrder.Fills">
             <summary>
             Fills for the order
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceOrderList">
+            <summary>
+            The result of placing a new OCO order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderList.OrderListId">
+            <summary>
+            The id of the order list
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderList.ContingencyType">
+            <summary>
+            The contingency type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderList.ListStatus">
+            <summary>
+            The order list status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderList.ListOrderStatus">
+            <summary>
+            The order status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderList.ListClientOrderId">
+            <summary>
+            The client id of the order list
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderList.TransactionTime">
+            <summary>
+            The transaction time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderList.Symbol">
+            <summary>
+            The symbol of the order list
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderList.Orders">
+            <summary>
+            The order in this list
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderList.OrderReports">
+            <summary>
+            The order details
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceOrderId">
+            <summary>
+            Order reference
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderId.Symbol">
+            <summary>
+            The symbol of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderId.OrderId">
+            <summary>
+            The id of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderId.ClientOrderId">
+            <summary>
+            The client order id
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinancePrice">
@@ -3276,6 +3700,11 @@
         <member name="P:Binance.Net.Objects.BinancePrice.Price">
             <summary>
             The price of the symbol
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceQueryLoan">
+            <summary>
+            Loan info
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BinanceQueryLoan.Asset">
@@ -3308,6 +3737,11 @@
             The total count of the records
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceQueryRepay">
+            <summary>
+            Repay info
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceQueryRepay.Asset">
             <summary>
             The asset of the repay
@@ -3338,6 +3772,11 @@
             The status of the repay
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceRateLimit">
+            <summary>
+            Rate limit info
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceRateLimit.Interval">
             <summary>
             The interval the rate limit uses to count
@@ -3356,6 +3795,11 @@
         <member name="P:Binance.Net.Objects.BinanceRateLimit.Limit">
             <summary>
             The amount of calls the limit is
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceRecentTrade">
+            <summary>
+            Recent trade info
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BinanceRecentTrade.Id">
@@ -3506,6 +3950,11 @@
         <member name="P:Binance.Net.Objects.BinanceStreamAggregatedTrade.BuyerIsMaker">
             <summary>
             Whether the buyer was the maker
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamAggregatedTrade.Ignore">
+            <summary>
+            Unused
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinanceStreamEvent">
@@ -3669,6 +4118,21 @@
             The price of the order
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.StopPrice">
+            <summary>
+            The stop price of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.IcebergQuantity">
+            <summary>
+            The iceberg quantity of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.OriginalClientOrderId">
+            <summary>
+            The original client order id
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.ExecutionType">
             <summary>
             The execution type
@@ -3724,6 +4188,11 @@
             The trade id
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.IsWorking">
+            <summary>
+            Is working
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.BuyerIsMaker">
             <summary>
             Whether the buyer is the maker
@@ -3742,6 +4211,21 @@
         <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.LastQuoteTransactedQuantity">
             <summary>
             Last quote asset transacted quantity (i.e. LastPrice * LastQuantity)
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.OrderListId">
+            <summary>
+            This id of the corresponding order list. (-1 if not part of an order list)
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.I">
+            <summary>
+            Unused
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceStreamTick">
+            <summary>
+            Tick info
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BinanceStreamTick.Symbol">
@@ -3894,6 +4378,16 @@
             Whether the buyer was the maker
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTrade.Ignore">
+            <summary>
+            Unused
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceSubAccount">
+            <summary>
+            Sub account details
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceSubAccount.Email">
             <summary>
             The email associated with the sub account
@@ -3924,6 +4418,11 @@
             The time the sub account was created
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceSubAccountTransfer">
+            <summary>
+            Sub account transfer info
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceSubAccountTransfer.From">
             <summary>
             From which email the transfer originated
@@ -3949,6 +4448,11 @@
             The timestamp of the transfer
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceSubAccountTransferResult">
+            <summary>
+            Sub account transfer result
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceSubAccountTransferResult.Success">
             <summary>
             Whether the transfer was successful
@@ -3957,6 +4461,11 @@
         <member name="P:Binance.Net.Objects.BinanceSubAccountTransferResult.TransactionId">
             <summary>
             The transaction id of the transfer
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceSymbol">
+            <summary>
+            Symbol info
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BinanceSymbol.Name">
@@ -4074,6 +4583,11 @@
             The type of this filter
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceSymbolPriceFilter">
+            <summary>
+            Price filter
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceSymbolPriceFilter.MinPrice">
             <summary>
             The minimal price the order can be for
@@ -4087,6 +4601,11 @@
         <member name="P:Binance.Net.Objects.BinanceSymbolPriceFilter.TickSize">
             <summary>
             The tick size of the price. The price can not have more precision as this and can only be incremented in steps of this.
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceSymbolPercentPriceFilter">
+            <summary>
+            Price percentage filter
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BinanceSymbolPercentPriceFilter.MultiplierUp">
@@ -4104,6 +4623,11 @@
             The amount of minutes the average price of trades is calculated over. 0 means the last price is used
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceSymbolLotSizeFilter">
+            <summary>
+            Lot size filter
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceSymbolLotSizeFilter.MinQuantity">
             <summary>
             The minimal quantity of an order
@@ -4117,6 +4641,11 @@
         <member name="P:Binance.Net.Objects.BinanceSymbolLotSizeFilter.StepSize">
             <summary>
             The tick size of the quantity. The quantity can not have more precision as this and can only be incremented in steps of this.
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceSymbolMarketLotSizeFilter">
+            <summary>
+            Market lot size filter
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BinanceSymbolMarketLotSizeFilter.MinQuantity">
@@ -4134,6 +4663,11 @@
             The tick size of the quantity. The quantity can not have more precision as this and can only be incremented in steps of this.
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceSymbolMinNotionalFilter">
+            <summary>
+            Min notional filter
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceSymbolMinNotionalFilter.MinNotional">
             <summary>
             The minimal total size of an order. This is calculated by Price * Quantity.
@@ -4149,9 +4683,19 @@
             The amount of minutes the average price of trades is calculated over for market orders. 0 means the last price is used
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceSymbolMaxOrdersFilter">
+            <summary>
+            Nax orders filter
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceSymbolMaxOrdersFilter.MaxNumberOrders">
             <summary>
             The max number of orders for this symbol
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceSymbolMaxIcebergOrdersFilter">
+            <summary>
+            Max iceberg orders filter
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BinanceSymbolMaxIcebergOrdersFilter.MaxNumberIcebergOrders">
@@ -4159,14 +4703,39 @@
             The max number of iceberg orders for this symbol
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceSymbolMaxAlgorithmicOrdersFilter">
+            <summary>
+            Max algo orders filter
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceSymbolMaxAlgorithmicOrdersFilter.MaxNumberAlgorithmicOrders">
             <summary>
             The max number of Algorithmic orders for this symbol
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceSymbolIcebergPartsFilter">
+            <summary>
+            Max iceberg parts filter
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceSymbolIcebergPartsFilter.Limit">
             <summary>
             The max parts of an iceberg order for this symbol.
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceSystemStatus">
+            <summary>
+            The status of Binance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceSystemStatus.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceSystemStatus.Message">
+            <summary>
+            Additional info
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinanceTrade">
@@ -4234,6 +4803,11 @@
             Whether trade was made with the best match
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceTradeFee">
+            <summary>
+            Trade fee info
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceTradeFee.Symbol">
             <summary>
             The symbol this fee is for
@@ -4247,6 +4821,66 @@
         <member name="P:Binance.Net.Objects.BinanceTradeFee.TakerFee">
             <summary>
             The fee for trades where you're the taker
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceTradingStatus">
+            <summary>
+            Trade status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceTradingStatus.IsLocked">
+            <summary>
+            Is locked
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceTradingStatus.PlannedRecoverTime">
+            <summary>
+            Planned time of recovery
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceTradingStatus.TriggerConditions">
+            <summary>
+            Conditions
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceTradingStatus.Indicators">
+            <summary>
+            Indicators
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceTradingStatus.UpdateTime">
+            <summary>
+            Last update time
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceIndicator">
+            <summary>
+            Indicator info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceIndicator.Indicator">
+            <summary>
+            Indicator name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceIndicator.Count">
+            <summary>
+            Count
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceIndicator.CurrentValue">
+            <summary>
+            Current value
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceIndicator.TriggerValue">
+            <summary>
+            Trigger value
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceAssetDetails">
+            <summary>
+            Asset details
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BinanceAssetDetails.MinimalWithdrawAmount">
@@ -4394,6 +5028,46 @@
             The order has expired
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.SymbolStatus">
+            <summary>
+            Status of a symbol
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SymbolStatus.PreTrading">
+            <summary>
+            Not trading yet
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SymbolStatus.Trading">
+            <summary>
+            Trading
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SymbolStatus.PostTrading">
+            <summary>
+            No longer trading
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SymbolStatus.EndOfDay">
+            <summary>
+            Not trading
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SymbolStatus.Halt">
+            <summary>
+            Halted
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SymbolStatus.AuctionMatch">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SymbolStatus.Break">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.OrderType">
             <summary>
             The type of an order
@@ -4409,9 +5083,44 @@
             Market order will be placed without a price. The order will be executed at the best price available at that time in the order book.
             </summary>
         </member>
+        <member name="F:Binance.Net.Objects.OrderType.StopLoss">
+            <summary>
+            Stop loss order. Will execute a market order when the price drops below a price to sell and therefor limit the loss
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.OrderType.StopLossLimit">
+            <summary>
+            Stop loss order. Will execute a limit order when the price drops below a price to sell and therefor limit the loss
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.OrderType.TakeProfit">
+            <summary>
+            Take profit order. Will execute a market order when the price rises above a price to sell and therefor take a profit
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.OrderType.TakeProfitLimit">
+            <summary>
+            Take profit order. Will execute a limit order when the price rises above a price to sell and therefor take a profit
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.OrderType.LimitMaker">
+            <summary>
+            Same as a limit order, however it will fail if the order would immediately match, therefor preventing taker orders
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.OrderSide">
             <summary>
             The side of an order
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.OrderSide.Buy">
+            <summary>
+            Buy
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.OrderSide.Sell">
+            <summary>
+            Sell
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.TimeInForce">
@@ -4426,7 +5135,12 @@
         </member>
         <member name="F:Binance.Net.Objects.TimeInForce.ImmediateOrCancel">
             <summary>
-            ImmediateOrCancel orders have to be filled upon placing or will be automatically canceled
+            ImmediateOrCancel orders have to be at least partially filled upon placing or will be automatically canceled
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.TimeInForce.FillOrKill">
+            <summary>
+            ImmediateOrCancel orders have to be entirely filled upon placing or will be automatically canceled
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.ExecutionType">
@@ -4434,14 +5148,169 @@
             The type of execution
             </summary>
         </member>
+        <member name="F:Binance.Net.Objects.ExecutionType.New">
+            <summary>
+            New
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.ExecutionType.Canceled">
+            <summary>
+            Canceled
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.ExecutionType.Replaced">
+            <summary>
+            Replaced
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.ExecutionType.Rejected">
+            <summary>
+            Rejected
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.ExecutionType.Trade">
+            <summary>
+            Trade
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.ExecutionType.Expired">
+            <summary>
+            Expired
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.OrderRejectReason">
             <summary>
             The reason the order was rejected
             </summary>
         </member>
+        <member name="F:Binance.Net.Objects.OrderRejectReason.None">
+            <summary>
+            Not rejected
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.OrderRejectReason.UnknownInstrument">
+            <summary>
+            Unknown instrument
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.OrderRejectReason.MarketClosed">
+            <summary>
+            Closed market
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.OrderRejectReason.PriceQuantityExceedsHardLimits">
+            <summary>
+            Quantity out of bounds
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.OrderRejectReason.UnknownOrder">
+            <summary>
+            Unknown order
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.OrderRejectReason.DuplicateOrder">
+            <summary>
+            Duplicate
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.OrderRejectReason.UnknownAccount">
+            <summary>
+            Unkown account
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.OrderRejectReason.InsufficientBalance">
+            <summary>
+            Not enough balance
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.OrderRejectReason.AccountInactive">
+            <summary>
+            Account not active
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.OrderRejectReason.AccountCannotSettle">
+            <summary>
+            Cannot settle
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.KlineInterval">
             <summary>
             The interval for the kline
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.KlineInterval.OneMinute">
+            <summary>
+            1m
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.KlineInterval.ThreeMinutes">
+            <summary>
+            3m
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.KlineInterval.FiveMinutes">
+            <summary>
+            5m
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.KlineInterval.FifteenMinutes">
+            <summary>
+            15m
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.KlineInterval.ThirtyMinutes">
+            <summary>
+            30m
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.KlineInterval.OneHour">
+            <summary>
+            1h
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.KlineInterval.TwoHour">
+            <summary>
+            2h
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.KlineInterval.FourHour">
+            <summary>
+            4h
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.KlineInterval.SixHour">
+            <summary>
+            6h
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.KlineInterval.EightHour">
+            <summary>
+            8h
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.KlineInterval.TwelveHour">
+            <summary>
+            12h
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.KlineInterval.OneDay">
+            <summary>
+            1d
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.KlineInterval.ThreeDay">
+            <summary>
+            3d
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.KlineInterval.OneWeek">
+            <summary>
+            1w
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.KlineInterval.OneMonth">
+            <summary>
+            1M
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.WithdrawalStatus">
@@ -4489,6 +5358,206 @@
             The status of a deposit
             </summary>
         </member>
+        <member name="F:Binance.Net.Objects.DepositStatus.Pending">
+            <summary>
+            Pending
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.DepositStatus.Success">
+            <summary>
+            Success
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.DepositStatus.Completed">
+            <summary>
+            Completed
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.RateLimitInterval">
+            <summary>
+            Rate limit on what unit
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.RateLimitInterval.Second">
+            <summary>
+            Seconds
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.RateLimitInterval.Minute">
+            <summary>
+            Minutes
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.RateLimitInterval.Day">
+            <summary>
+            Days
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.RateLimitType">
+            <summary>
+            Type of rate limit
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.RateLimitType.RequestWeight">
+            <summary>
+            Request weight
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.RateLimitType.Orders">
+            <summary>
+            Order amount
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.RateLimitType.RawRequests">
+            <summary>
+            Raw requests
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.SymbolFilterType">
+            <summary>
+            Filter type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SymbolFilterType.Unknown">
+            <summary>
+            Unknown filter type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SymbolFilterType.Price">
+            <summary>
+            Price filter
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SymbolFilterType.PricePercent">
+            <summary>
+            Price percent filter
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SymbolFilterType.LotSize">
+            <summary>
+            Lot size filter
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SymbolFilterType.MarketLotSize">
+            <summary>
+            Market lot size filter
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SymbolFilterType.MinNotional">
+            <summary>
+            Min notional filter
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SymbolFilterType.MaxNumberOrders">
+            <summary>
+            Max orders filter
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SymbolFilterType.MaxNumberIcebergOrders">
+            <summary>
+            Max iceberg orders filter
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SymbolFilterType.MaxNumberAlgorithmicOrders">
+            <summary>
+            Max algo orders filter
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SymbolFilterType.IcebergParts">
+            <summary>
+            Max iceberg parts filter
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.OrderResponseType">
+            <summary>
+            Response type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.OrderResponseType.Acknowledge">
+            <summary>
+            Ack only
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.OrderResponseType.Result">
+            <summary>
+            Resulting order
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.OrderResponseType.Full">
+            <summary>
+            Full order info
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.TradeRulesBehaviour">
+            <summary>
+            Trade rules behaviour
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.TradeRulesBehaviour.None">
+            <summary>
+            None
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.TradeRulesBehaviour.ThrowError">
+            <summary>
+            Throw an error if not complying
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.TradeRulesBehaviour.AutoComply">
+            <summary>
+            Auto adjust order when not complying
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.SystemStatus">
+            <summary>
+            Status of the Binance system
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SystemStatus.Normal">
+            <summary>
+            Operational
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SystemStatus.Maintenance">
+            <summary>
+            In maintenance
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.SubAccountStatus">
+            <summary>
+            Status of the sub account
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SubAccountStatus.Enabled">
+            <summary>
+            Enabled
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SubAccountStatus.Disabled">
+            <summary>
+            Disabled
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.TransferDirectionType">
+            <summary>
+            Transfer direction
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.TransferDirectionType.MainToMargin">
+            <summary>
+            From main account to margin account
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.TransferDirectionType.MarginToMain">
+            <summary>
+            From margin account to main account
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.MarginStatus">
+            <summary>
+            Status of a margin actuon
+            </summary>
+        </member>
         <member name="F:Binance.Net.Objects.MarginStatus.Pending">
             <summary>
             Pending to execution
@@ -4501,12 +5570,52 @@
         </member>
         <member name="F:Binance.Net.Objects.MarginStatus.Confirmed">
             <summary>
-            Successfully loaned/repay
+            Successfully loaned/repayed
             </summary>
         </member>
         <member name="F:Binance.Net.Objects.MarginStatus.Failed">
             <summary>
             execution failed, nothing happened to your account
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.ListStatusType">
+            <summary>
+            List status type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.ListStatusType.Response">
+            <summary>
+            Failed action
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.ListStatusType.ExecutionStarted">
+            <summary>
+            Placed
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.ListStatusType.Done">
+            <summary>
+            Order list is done
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.ListOrderStatus">
+            <summary>
+            List order status
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.ListOrderStatus.Executing">
+            <summary>
+            Executing
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.ListOrderStatus.Done">
+            <summary>
+            Executed
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.ListOrderStatus.Rejected">
+            <summary>
+            Rejected
             </summary>
         </member>
     </members>

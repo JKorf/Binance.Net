@@ -4,6 +4,9 @@ using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects
 {
+    /// <summary>
+    /// Exchange info
+    /// </summary>
     public class BinanceExchangeInfo
     {
         /// <summary>
@@ -23,7 +26,9 @@ namespace Binance.Net.Objects
         /// All symbols supported
         /// </summary>
         public BinanceSymbol[] Symbols { get; set; }
-
+        /// <summary>
+        /// Filters
+        /// </summary>
         public object[] ExchangeFilters { get; set; }
     }
 }

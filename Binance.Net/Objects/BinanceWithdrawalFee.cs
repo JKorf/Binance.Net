@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Binance.Net.Objects
 {
-    public class BinanceAssetDetailsWrapper
+    internal class BinanceAssetDetailsWrapper
     {
         [JsonProperty("assetDetail")]
         public Dictionary<string, BinanceAssetDetails> Data { get; set; }
@@ -14,6 +14,9 @@ namespace Binance.Net.Objects
         public string Message { get; set; }
     }
 
+    /// <summary>
+    /// Asset details
+    /// </summary>
     public class BinanceAssetDetails
     {
         /// <summary>

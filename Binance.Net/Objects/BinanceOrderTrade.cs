@@ -2,6 +2,9 @@
 
 namespace Binance.Net.Objects
 {
+    /// <summary>
+    /// Trade info
+    /// </summary>
     public class BinanceOrderTrade
     {
         /// <summary>

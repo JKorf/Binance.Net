@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Binance.Net.Objects
 {
-    public class BinanceSubAccountWrapper
+    internal class BinanceSubAccountWrapper
     {
         [JsonProperty("msg")]
         public string Message { get; set; }
@@ -13,6 +13,9 @@ namespace Binance.Net.Objects
         public BinanceSubAccount[] SubAccounts { get; set; }
     }
 
+    /// <summary>
+    /// Sub account details
+    /// </summary>
     public class BinanceSubAccount
     {
         /// <summary>

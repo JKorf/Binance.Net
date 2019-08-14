@@ -49,7 +49,10 @@ namespace Binance.Net.Objects
         /// </summary>
         [JsonProperty("m")]
         public bool BuyerIsMaker { get; set; }
-        
+
+        /// <summary>
+        /// Unused
+        /// </summary>
         [JsonProperty("M")]
         public bool Ignore { get; set; }
     }

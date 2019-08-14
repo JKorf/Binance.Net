@@ -5,6 +5,9 @@ using System;
 
 namespace Binance.Net.Objects
 {
+    /// <summary>
+    /// Repay info
+    /// </summary>
     public class BinanceQueryRepay
     {
         /// <summary>

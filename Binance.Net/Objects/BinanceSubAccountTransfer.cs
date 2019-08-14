@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Binance.Net.Objects
 {
-    public class BinanceSubAccountTransferWrapper
+    internal class BinanceSubAccountTransferWrapper
     {
         [JsonProperty("msg")]
         public string Message { get; set; }
@@ -12,6 +12,9 @@ namespace Binance.Net.Objects
         public BinanceSubAccountTransfer[] Transfers { get; set; }
     }
 
+    /// <summary>
+    /// Sub account transfer info
+    /// </summary>
     public class BinanceSubAccountTransfer
     {
         /// <summary>

@@ -4,7 +4,7 @@ using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Converters
 {
-    public class ExecutionTypeConverter: BaseConverter<ExecutionType>
+    internal class ExecutionTypeConverter: BaseConverter<ExecutionType>
     {
         public ExecutionTypeConverter(): this(true) { }
         public ExecutionTypeConverter(bool quotes) : base(quotes) { }

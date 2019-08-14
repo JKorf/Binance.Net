@@ -4,7 +4,7 @@ using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Converters
 {
-    public class OrderRejectReasonConverter: BaseConverter<OrderRejectReason>
+    internal class OrderRejectReasonConverter: BaseConverter<OrderRejectReason>
     {
         public OrderRejectReasonConverter(): this(true) { }
         public OrderRejectReasonConverter(bool quotes) : base(quotes) { }

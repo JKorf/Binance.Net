@@ -8,7 +8,10 @@ using System.Threading.Tasks;
 
 namespace Binance.Net.Interfaces
 {
-    public interface IBinanceClient
+    /// <summary>
+    /// Binance rest client
+    /// </summary>
+    public interface IBinanceClient: IRestClient
     {
         /// <summary>
         /// Set the API key and secret
@@ -21,13 +24,13 @@ namespace Binance.Net.Interfaces
         /// Pings the Binance API
         /// </summary>
         /// <returns>True if successful ping, false if no response</returns>
-        CallResult<long> Ping();
+        new CallResult<long> Ping();
 
         /// <summary>
         /// Pings the Binance API
         /// </summary>
         /// <returns>True if successful ping, false if no response</returns>
-        Task<CallResult<long>> PingAsync();
+        new Task<CallResult<long>> PingAsync();
 
         /// <summary>
         /// Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls
@@ -997,28 +1000,5 @@ namespace Binance.Net.Interfaces
         /// </summary>
         /// <returns></returns>
         Task<WebCallResult<object>> CloseMarginUserStreamAsync(string listenKey);
-
-        /// <summary>
-        /// The factory for creating requests. Used for unit testing
-        /// </summary>
-        IRequestFactory RequestFactory { get; set; }
-
-        RateLimitingBehaviour RateLimitBehaviour { get; }
-        IEnumerable<IRateLimiter> RateLimiters { get; }
-        int TotalRequestsMade { get; }
-        string BaseAddress { get; }
-
-        /// <summary>
-        /// Adds a rate limiter to the client. There are 2 choices, the <see cref="RateLimiterTotal"/> and the <see cref="RateLimiterPerEndpoint"/>.
-        /// </summary>
-        /// <param name="limiter">The limiter to add</param>
-        void AddRateLimiter(IRateLimiter limiter);
-
-        /// <summary>
-        /// Removes all rate limiters from this client
-        /// </summary>
-        void RemoveRateLimiters();
-
-        void Dispose();
     }
 }

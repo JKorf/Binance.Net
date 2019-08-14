@@ -1,5 +1,8 @@
 ﻿namespace Binance.Net.Objects
 {
+    /// <summary>
+    /// Deposit address info
+    /// </summary>
     public class BinanceDepositAddress
     {
         /// <summary>

@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace Binance.Net.Converters
 {
-    public class SymbolFilterConverter : JsonConverter
+    internal class SymbolFilterConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {

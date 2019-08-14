@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Binance.Net.Objects
 {
-    public class BinanceTradeFeeWrapper
+    internal class BinanceTradeFeeWrapper
     {
         [JsonOptionalProperty]
         [JsonProperty("msg")]
@@ -13,6 +13,9 @@ namespace Binance.Net.Objects
         public BinanceTradeFee[] Data { get; set; }
     }
 
+    /// <summary>
+    /// Trade fee info
+    /// </summary>
     public class BinanceTradeFee
     {
         /// <summary>

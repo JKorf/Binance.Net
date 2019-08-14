@@ -4,7 +4,7 @@ using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Converters
 {
-    public class SymbolStatusConverter : BaseConverter<SymbolStatus>
+    internal class SymbolStatusConverter : BaseConverter<SymbolStatus>
     {
         public SymbolStatusConverter(): this(true) { }
         public SymbolStatusConverter(bool quotes) : base(quotes) { }

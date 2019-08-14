@@ -4,7 +4,7 @@ using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Converters
 {
-    public class WithdrawalStatusConverter : BaseConverter<WithdrawalStatus>
+    internal class WithdrawalStatusConverter : BaseConverter<WithdrawalStatus>
     {
         public WithdrawalStatusConverter() : this(true)
         {

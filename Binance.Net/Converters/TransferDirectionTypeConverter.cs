@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Binance.Net.Converters
 {
-    public class TransferDirectionTypeConverter : BaseConverter<TransferDirectionType>
+    internal class TransferDirectionTypeConverter : BaseConverter<TransferDirectionType>
     {
         public TransferDirectionTypeConverter() : this(true)
         {

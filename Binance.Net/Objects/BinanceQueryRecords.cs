@@ -1,6 +1,6 @@
 ﻿namespace Binance.Net.Objects
 {
-    public class BinanceQueryRecords<T>
+    internal class BinanceQueryRecords<T>
     {
         /// <summary>
         /// The list records

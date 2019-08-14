@@ -4,7 +4,7 @@ using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Converters
 {
-    public class SubAccountStatusConverter : BaseConverter<SubAccountStatus>
+    internal class SubAccountStatusConverter : BaseConverter<SubAccountStatus>
     {
         public SubAccountStatusConverter() : this(true)
         {

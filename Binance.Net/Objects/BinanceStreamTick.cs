@@ -4,6 +4,9 @@ using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects
 {
+    /// <summary>
+    /// Tick info
+    /// </summary>
     public class BinanceStreamTick: BinanceStreamEvent
     {        
         /// <summary>
