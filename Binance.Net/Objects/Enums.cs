@@ -267,4 +267,18 @@
         /// </summary>
         Failed
     }
+
+    public enum ListStatusType
+    {
+        Response,
+        ExecutionStarted,
+        Done
+    }
+
+    public enum ListOrderStatus
+    {
+        Executing,
+        Done,
+        Rejected
+    }
 }

@@ -128,11 +128,15 @@ namespace Binance.Net.Objects
         /// </summary>
         [JsonProperty("Y")]
         public decimal LastQuoteTransactedQuantity { get; set; }
+        /// <summary>
+        /// This id of the corresponding order list. (-1 if not part of an order list)
+        /// </summary>
+        [JsonProperty("g")]
+        public long OrderListId { get; set; }
 
         // These are unused properties, but are mapped to prevent mapping error of lower/upper case
 
-        [JsonProperty("g")]
-        public decimal g { get; set; }
+
         [JsonProperty("I")]
         public long I { get; set; }
     }

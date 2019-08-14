@@ -48,7 +48,7 @@ namespace Binance.Net
             Status = OrderBookStatus.Syncing;
             if (limit == null)
             {
-                var bookResult = await restClient.GetOrderBookAsync(Symbol, limit ?? 1000).ConfigureAwait(false);
+                var bookResult = await restClient.GetOrderBookAsync(Symbol, limit ?? 10000).ConfigureAwait(false);
                 if (!bookResult.Success)
                 {
                     await socketClient.UnsubscribeAll().ConfigureAwait(false);

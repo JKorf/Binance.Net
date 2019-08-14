@@ -68,6 +68,14 @@ namespace Binance.Net.Objects
         [JsonConverter(typeof(OrderSideConverter))]
         public OrderSide Side { get; set; }
         /// <summary>
+        /// Stop price for the order
+        /// </summary>
+        public decimal? StopPrice { get; set; }
+        /// <summary>
+        /// Id of the order list this order belongs to
+        /// </summary>
+        public long? OrderListId { get; set; }
+        /// <summary>
         /// Fills for the order
         /// </summary>
         public List<BinanceOrderTrade> Fills { get; set; }

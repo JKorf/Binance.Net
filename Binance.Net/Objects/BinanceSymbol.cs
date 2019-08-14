@@ -51,6 +51,10 @@ namespace Binance.Net.Objects
         /// </summary>
         public bool IsMarginTradingAllowed { get; set; }
         /// <summary>
+        /// If OCO(One Cancels Other) orders are allowed
+        /// </summary>
+        public bool OCOAllowed { get; set; }
+        /// <summary>
         /// Filters for order on this symbol
         /// </summary>
         public BinanceSymbolFilter[] Filters { get; set; }

@@ -72,16 +72,25 @@ namespace Binance.Net
         private const string AllPricesEndpoint = "ticker/price";
         private const string BookPricesEndpoint = "ticker/bookTicker";
 
-        // Signed
+        // Orders
         private const string OpenOrdersEndpoint = "openOrders";
         private const string AllOrdersEndpoint = "allOrders";
         private const string NewOrderEndpoint = "order";
         private const string NewTestOrderEndpoint = "order/test";
         private const string QueryOrderEndpoint = "order";
         private const string CancelOrderEndpoint = "order";
-        private const string AccountInfoEndpoint = "account";
         private const string MyTradesEndpoint = "myTrades";
 
+        // OCO orders
+        private const string NewOCOOrderEndpoint = "order/oco";
+        private const string CancelOCOOrderEndpoint = "orderList";
+        private const string GetOCOOrderEndpoint = "orderList";
+        private const string GetAllOCOOrderEndpoint = "allOrderList";
+        private const string GetOpenOCOOrderEndpoint = "openOrderList";
+
+        // Accounts
+        private const string AccountInfoEndpoint = "account";
+        
         // Margin
         private const string MarginTransferEndpoint = "margin/transfer";
         private const string MarginBorrowEndpoint = "margin/loan";
@@ -1370,6 +1379,252 @@ namespace Binance.Net
             return !result.Data.Success ? new WebCallResult<BinanceTradingStatus>(result.ResponseStatusCode, result.ResponseHeaders, null, new ServerError(result.Data.Message)) : new WebCallResult<BinanceTradingStatus>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Status, null);
         }
 
+        #region oco
+        /// <summary>
+        /// Places a new OCO(One cancels other) order
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="side">The order side (buy/sell)</param>
+        /// <param name="stopLimitTimeInForce">Lifetime of the stop order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
+        /// <param name="quantity">The amount of the symbol</param>
+        /// <param name="price">The price to use</param>
+        /// <param name="stopClientOrderId">Client id for the stop order</param>
+        /// <param name="limitClientOrderId">Client id for the limit order</param>
+        /// <param name="listClientOrderId">Client id for the order list</param>
+        /// <param name="limitIcebergQuantity">Iceberg quantity for the limit order</param>
+        /// <param name="stopIcebergQuantity">Iceberg quantity for the stop order</param>
+        /// <param name="orderResponseType">The type of response to receive</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Order list info</returns>
+        public WebCallResult<BinanceOrderList> PlaceOCOOrder(
+            string symbol,
+            OrderSide side,
+            decimal quantity,
+            decimal price,
+            string listClientOrderId = null,
+            string limitClientOrderId = null,
+            string stopClientOrderId = null,
+            decimal? limitIcebergQuantity = null,
+            decimal? stopIcebergQuantity = null,
+            TimeInForce? stopLimitTimeInForce = null,
+            OrderResponseType? orderResponseType = null,
+            int? receiveWindow = null) => PlaceOCOOrderAsync(symbol, side, quantity, price, listClientOrderId, limitClientOrderId, stopClientOrderId, limitIcebergQuantity, stopIcebergQuantity, stopLimitTimeInForce, orderResponseType, receiveWindow).Result;
+
+        /// <summary>
+        /// Places a new OCO(One cancels other) order
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="side">The order side (buy/sell)</param>
+        /// <param name="stopLimitTimeInForce">Lifetime of the stop order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
+        /// <param name="quantity">The amount of the symbol</param>
+        /// <param name="price">The price to use</param>
+        /// <param name="stopClientOrderId">Client id for the stop order</param>
+        /// <param name="limitClientOrderId">Client id for the limit order</param>
+        /// <param name="listClientOrderId">Client id for the order list</param>
+        /// <param name="limitIcebergQuantity">Iceberg quantity for the limit order</param>
+        /// <param name="stopIcebergQuantity">Iceberg quantity for the stop order</param>
+        /// <param name="orderResponseType">The type of response to receive</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Order list info</returns>
+        public async Task<WebCallResult<BinanceOrderList>> PlaceOCOOrderAsync(string symbol,
+            OrderSide side,
+            decimal quantity,
+            decimal price,
+            string listClientOrderId = null,
+            string limitClientOrderId = null,
+            string stopClientOrderId = null,
+            decimal? limitIcebergQuantity = null,
+            decimal? stopIcebergQuantity = null,
+            TimeInForce? stopLimitTimeInForce = null,
+            OrderResponseType? orderResponseType = null,
+            int? receiveWindow = null)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<BinanceOrderList>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            //var rulesCheck = await CheckTradeRules(symbol, quantity, price, type).ConfigureAwait(false);
+            //if (!rulesCheck.Passed)
+            //{
+            //    log.Write(LogVerbosity.Warning, rulesCheck.ErrorMessage);
+            //    return new WebCallResult<BinancePlacedOrder>(null, null, null, new ArgumentError(rulesCheck.ErrorMessage));
+            //}
+
+            //quantity = rulesCheck.Quantity;
+            //price = rulesCheck.Price;
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "symbol", symbol },
+                { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
+                { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
+                { "price", price.ToString(CultureInfo.InvariantCulture) },
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("listClientOrderId", listClientOrderId);
+            parameters.AddOptionalParameter("limitClientOrderId", limitClientOrderId);
+            parameters.AddOptionalParameter("stopClientOrderId", stopClientOrderId);
+            parameters.AddOptionalParameter("limitIcebergQty", limitIcebergQuantity?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("stopIcebergQty", stopIcebergQuantity?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("stopLimitTimeInForce", stopLimitTimeInForce == null ? null : JsonConvert.SerializeObject(stopLimitTimeInForce, new TimeInForceConverter(false)));
+            parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await ExecuteRequest<BinanceOrderList>(GetUrl(NewOCOOrderEndpoint, Api, SignedVersion), PostMethod, parameters, true).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Cancels a pending oco order
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="orderListId">The id of the order list to cancel</param>
+        /// <param name="listClientOrderId">The client order id of the order list to cancel</param>
+        /// <param name="newClientOrderId">The new client order list id for the order list</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Id's for canceled order</returns>
+        public WebCallResult<BinanceCanceledOrder> CancelOCOOrder(string symbol, long? orderListId = null, string listClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null) => CancelOrderAsync(symbol, orderListId, listClientOrderId, newClientOrderId, receiveWindow).Result;
+
+        /// <summary>
+        /// Cancels a pending oco order
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="orderListId">The id of the order list to cancel</param>
+        /// <param name="listClientOrderId">The client order id of the order list to cancel</param>
+        /// <param name="newClientOrderId">The new client order list id for the order list</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Id's for canceled order</returns>
+        public async Task<WebCallResult<BinanceCanceledOrder>> CancelOCOOrderAsync(string symbol, long? orderListId = null, string listClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<BinanceCanceledOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            if (!orderListId.HasValue && string.IsNullOrEmpty(listClientOrderId))
+                return new WebCallResult<BinanceCanceledOrder>(null, null, null, new ArgumentError("Either orderListId or listClientOrderId must be sent."));
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "symbol", symbol },
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("orderListId", orderListId?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("listClientOrderId", listClientOrderId);
+            parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await ExecuteRequest<BinanceCanceledOrder>(GetUrl(CancelOCOOrderEndpoint, Api, SignedVersion), DeleteMethod, parameters, true).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Retrieves data for a specific oco order. Either listClientOrderId or listClientOrderId should be provided.
+        /// </summary>
+        /// <param name="orderListId">The list order id of the order</param>
+        /// <param name="listClientOrderId">The client order id of the list order</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>The specific order list</returns>
+        public WebCallResult<BinanceOrderList> QueryOCOOrder(long? orderListId = null, string listClientOrderId = null, long? receiveWindow = null) => QueryOCOOrderAsync(orderListId, listClientOrderId, receiveWindow).Result;
+
+        /// <summary>
+        /// Retrieves data for a specific oco order. Either orderListId or listClientOrderId should be provided.
+        /// </summary>
+        /// <param name="orderListId">The list order id of the order</param>
+        /// <param name="listClientOrderId">The client order id of the list order</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>The specific order list</returns>
+        public async Task<WebCallResult<BinanceOrderList>> QueryOCOOrderAsync(long? orderListId = null, string listClientOrderId = null, long? receiveWindow = null)
+        {
+            if (orderListId == null && listClientOrderId == null)
+                return new WebCallResult<BinanceOrderList>(null, null, null, new ArgumentError("Either orderListId or listClientOrderId should be provided"));
+
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<BinanceOrderList>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("orderListId", orderListId?.ToString());
+            parameters.AddOptionalParameter("listClientOrderId", listClientOrderId);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await ExecuteRequest<BinanceOrderList>(GetUrl(GetOCOOrderEndpoint, Api, SignedVersion), GetMethod, parameters, true).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Retrieves a list of oco orders matching the parameters
+        /// </summary>
+        /// <param name="fromId">Only return oco orders with id higher than this</param>
+        /// <param name="startTime">Only return oco orders placed later than this. Only valid if fromId isn't provided</param>
+        /// <param name="endTime">Only return oco orders placed before this. Only valid if fromId isn't provided</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Order lists matching the parameters</returns>
+        public WebCallResult<BinanceOrderList[]> QueryOCOOrders(long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null) => QueryOCOOrdersAsync(fromId, startTime, endTime, limit, receiveWindow).Result;
+
+        /// <summary>
+        /// Retrieves a list of oco orders matching the parameters
+        /// </summary>
+        /// <param name="fromId">Only return oco orders with id higher than this</param>
+        /// <param name="startTime">Only return oco orders placed later than this. Only valid if fromId isn't provided</param>
+        /// <param name="endTime">Only return oco orders placed before this. Only valid if fromId isn't provided</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Order lists matching the parameters</returns>
+        public async Task<WebCallResult<BinanceOrderList[]>> QueryOCOOrdersAsync(long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null)
+        {
+            if (fromId != null && (startTime != null || endTime != null))
+                return new WebCallResult<BinanceOrderList[]>(null, null, null, new ArgumentError("Start/end time can only be provided without fromId parameter"));
+
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<BinanceOrderList[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("fromId", fromId?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("startTime", startTime != null ? JsonConvert.SerializeObject(startTime, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("endTime", endTime != null ? JsonConvert.SerializeObject(endTime, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await ExecuteRequest<BinanceOrderList[]>(GetUrl(GetAllOCOOrderEndpoint, Api, SignedVersion), GetMethod, parameters, true).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Retrieves a list of oco orders matching the parameters
+        /// </summary>
+        /// <param name="fromId">Only return oco orders with id higher than this</param>
+        /// <param name="startTime">Only return oco orders placed later than this. Only valid if fromId isn't provided</param>
+        /// <param name="endTime">Only return oco orders placed before this. Only valid if fromId isn't provided</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Order lists matching the parameters</returns>
+        public WebCallResult<BinanceOrderList[]> QueryOpenOCOOrders(long? receiveWindow = null) => QueryOpenOCOOrdersAsync( receiveWindow).Result;
+
+        /// <summary>
+        /// Retrieves a list of open oco orders
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Open order lists</returns>
+        public async Task<WebCallResult<BinanceOrderList[]>> QueryOpenOCOOrdersAsync(long? receiveWindow = null)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<BinanceOrderList[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await ExecuteRequest<BinanceOrderList[]>(GetUrl(GetOpenOCOOrderEndpoint, Api, SignedVersion), GetMethod, parameters, true).ConfigureAwait(false);
+        }
+        #endregion
+
         #region margin
         /// <summary>
         /// Execute transfer between spot account and margin account.
@@ -1820,10 +2075,7 @@ namespace Binance.Net
         }
         #endregion
 
-        #region Stream 
-
-
-
+        #region stream
         /// <summary>
         /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToUserStream"/>. The stream will close after 60 minutes unless a keep alive is send.
         /// </summary>

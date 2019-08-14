@@ -4009,6 +4009,11 @@
             Margin trading orders allowed
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.BinanceSymbol.OCOAllowed">
+            <summary>
+            If OCO(One Cancels Other) orders are allowed
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceSymbol.Filters">
             <summary>
             Filters for order on this symbol
