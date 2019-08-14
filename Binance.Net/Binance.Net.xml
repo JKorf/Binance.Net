@@ -3467,6 +3467,11 @@
             The ID of the last update
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderBook.LastUpdateIdStream">
+            <summary>
+            Setter for last update id, need for Json.Net
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceOrderBook.FirstUpdateId">
             <summary>
             The id of this update, can be synced with <see cref="M:Binance.Net.BinanceClient.GetOrderBook(System.String,System.Nullable{System.Int32})"/> to update the order book
