@@ -5,7 +5,7 @@
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
     <Authors>JKorf</Authors>
-    <PackageVersion>4.1.3</PackageVersion>
+    <PackageVersion>4.2.0</PackageVersion>
     <Description>Binance.Net is a .Net wrapper for the Binance API. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance Binance.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
@@ -14,7 +14,7 @@
     <PackageLicenseUrl>https://github.com/JKorf/Binance.Net/blob/master/LICENSE</PackageLicenseUrl>
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>4.1.3 - Fix margin order cancel</PackageReleaseNotes>
+    <PackageReleaseNotes>4.2.0 - Implemented OCO orders, Adjustments for API update</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
     <DocumentationFile>Binance.Net.xml</DocumentationFile>

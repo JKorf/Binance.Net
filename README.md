@@ -140,6 +140,10 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 4.2.0 - 15 Aug 2019
+    * Implemented OCO orders
+    * Adjustments for API update
+
 * Version 4.1.3 - 12 Aug 2019
     * Fix margin order cancel
 
