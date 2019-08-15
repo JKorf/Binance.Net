@@ -1388,6 +1388,8 @@ namespace Binance.Net
         /// <param name="stopLimitTimeInForce">Lifetime of the stop order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
         /// <param name="quantity">The amount of the symbol</param>
         /// <param name="price">The price to use</param>
+        /// <param name="stopPrice">The stop price</param>
+        /// <param name="stopLimitPrice">The price for the stop limit order</param>
         /// <param name="stopClientOrderId">Client id for the stop order</param>
         /// <param name="limitClientOrderId">Client id for the limit order</param>
         /// <param name="listClientOrderId">Client id for the order list</param>
@@ -1401,6 +1403,8 @@ namespace Binance.Net
             OrderSide side,
             decimal quantity,
             decimal price,
+            decimal stopPrice,
+            decimal? stopLimitPrice = null,
             string listClientOrderId = null,
             string limitClientOrderId = null,
             string stopClientOrderId = null,
@@ -1408,7 +1412,7 @@ namespace Binance.Net
             decimal? stopIcebergQuantity = null,
             TimeInForce? stopLimitTimeInForce = null,
             OrderResponseType? orderResponseType = null,
-            int? receiveWindow = null) => PlaceOCOOrderAsync(symbol, side, quantity, price, listClientOrderId, limitClientOrderId, stopClientOrderId, limitIcebergQuantity, stopIcebergQuantity, stopLimitTimeInForce, orderResponseType, receiveWindow).Result;
+            int? receiveWindow = null) => PlaceOCOOrderAsync(symbol, side, quantity, price, stopPrice, stopLimitPrice, listClientOrderId, limitClientOrderId, stopClientOrderId, limitIcebergQuantity, stopIcebergQuantity, stopLimitTimeInForce, orderResponseType, receiveWindow).Result;
 
         /// <summary>
         /// Places a new OCO(One cancels other) order
@@ -1418,6 +1422,8 @@ namespace Binance.Net
         /// <param name="stopLimitTimeInForce">Lifetime of the stop order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
         /// <param name="quantity">The amount of the symbol</param>
         /// <param name="price">The price to use</param>
+        /// <param name="stopPrice">The stop price</param>
+        /// <param name="stopLimitPrice">The price for the stop limit order</param>
         /// <param name="stopClientOrderId">Client id for the stop order</param>
         /// <param name="limitClientOrderId">Client id for the limit order</param>
         /// <param name="listClientOrderId">Client id for the order list</param>
@@ -1430,6 +1436,8 @@ namespace Binance.Net
             OrderSide side,
             decimal quantity,
             decimal price,
+            decimal stopPrice,
+            decimal? stopLimitPrice = null,
             string listClientOrderId = null,
             string limitClientOrderId = null,
             string stopClientOrderId = null,
@@ -1459,8 +1467,10 @@ namespace Binance.Net
                 { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
                 { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
                 { "price", price.ToString(CultureInfo.InvariantCulture) },
+                { "stopPrice", stopPrice.ToString(CultureInfo.InvariantCulture) },
                 { "timestamp", GetTimestamp() }
             };
+            parameters.AddOptionalParameter("stopLimitPrice", stopLimitPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("listClientOrderId", listClientOrderId);
             parameters.AddOptionalParameter("limitClientOrderId", limitClientOrderId);
             parameters.AddOptionalParameter("stopClientOrderId", stopClientOrderId);
@@ -1482,7 +1492,7 @@ namespace Binance.Net
         /// <param name="newClientOrderId">The new client order list id for the order list</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for canceled order</returns>
-        public WebCallResult<BinanceCanceledOrder> CancelOCOOrder(string symbol, long? orderListId = null, string listClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null) => CancelOrderAsync(symbol, orderListId, listClientOrderId, newClientOrderId, receiveWindow).Result;
+        public WebCallResult<BinanceOrderList> CancelOCOOrder(string symbol, long? orderListId = null, string listClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null) => CancelOCOOrderAsync(symbol, orderListId, listClientOrderId, newClientOrderId, receiveWindow).Result;
 
         /// <summary>
         /// Cancels a pending oco order
@@ -1493,14 +1503,14 @@ namespace Binance.Net
         /// <param name="newClientOrderId">The new client order list id for the order list</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for canceled order</returns>
-        public async Task<WebCallResult<BinanceCanceledOrder>> CancelOCOOrderAsync(string symbol, long? orderListId = null, string listClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null)
+        public async Task<WebCallResult<BinanceOrderList>> CancelOCOOrderAsync(string symbol, long? orderListId = null, string listClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<BinanceCanceledOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<BinanceOrderList>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             if (!orderListId.HasValue && string.IsNullOrEmpty(listClientOrderId))
-                return new WebCallResult<BinanceCanceledOrder>(null, null, null, new ArgumentError("Either orderListId or listClientOrderId must be sent."));
+                return new WebCallResult<BinanceOrderList>(null, null, null, new ArgumentError("Either orderListId or listClientOrderId must be sent."));
 
             var parameters = new Dictionary<string, object>
             {
@@ -1512,7 +1522,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await ExecuteRequest<BinanceCanceledOrder>(GetUrl(CancelOCOOrderEndpoint, Api, SignedVersion), DeleteMethod, parameters, true).ConfigureAwait(false);
+            return await ExecuteRequest<BinanceOrderList>(GetUrl(CancelOCOOrderEndpoint, Api, SignedVersion), DeleteMethod, parameters, true).ConfigureAwait(false);
         }
 
         /// <summary>

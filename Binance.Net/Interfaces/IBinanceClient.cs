@@ -1,15 +1,15 @@
-﻿using Binance.Net.Objects;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Binance.Net.Objects;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.RateLimiter;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Binance.Net.Interfaces
 {
     /// <summary>
-    /// Binance rest client
+    /// Binance client interface
     /// </summary>
     public interface IBinanceClient: IRestClient
     {
@@ -401,7 +401,7 @@ namespace Binance.Net.Interfaces
         /// <param name="symbol">The symbol the order is for</param>
         /// <param name="orderId">The order id of the order</param>
         /// <param name="origClientOrderId">The client order id of the order</param>
-        /// <param name="newClientOrderId">Unique identifier for this cancel</param>
+        /// <param name="newClientOrderId">The new client order id of the order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for canceled order</returns>
         WebCallResult<BinanceCanceledOrder> CancelOrder(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null);
@@ -416,58 +416,6 @@ namespace Binance.Net.Interfaces
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for canceled order</returns>
         Task<WebCallResult<BinanceCanceledOrder>> CancelOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null);
-        /// <summary>
-        /// Query loan records
-        /// </summary>
-        /// <param name="asset">The records asset</param>
-        /// <param name="transactionId">The id of loan transaction</param>
-        /// <param name="startTime">Time to start getting records from</param>
-        /// <param name="endTime">Time to stop getting records to</param>
-        /// <param name="current">Number of page records</param>
-        /// <param name="size">The records count size need show</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <returns>Loan records</returns>
-        WebCallResult<BinanceQueryLoan[]> QueryLoan(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null);
-
-        /// <summary>
-        /// Query loan records
-        /// </summary>
-        /// <param name="asset">The records asset</param>
-        /// <param name="transactionId">The id of loan transaction</param>
-        /// <param name="startTime">Time to start getting records from</param>
-        /// <param name="endTime">Time to stop getting records to</param>
-        /// <param name="current">Number of page records</param>
-        /// <param name="size">The records count size need show</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <returns>Loan records</returns>
-        Task<WebCallResult<BinanceQueryLoan[]>> QueryLoanAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null);
-
-        /// <summary>
-        /// Query repay record
-        /// </summary>
-        /// <param name="asset">The records asset</param>
-        /// <param name="transactionId">The id of repay transaction</param>
-        /// <param name="startTime">Time to start getting records from</param>
-        /// <param name="endTime">Time to stop getting records to</param>
-        /// <param name="current">Number of page records</param>
-        /// <param name="size">The records count size need show</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <returns>Repay records</returns>
-        WebCallResult<BinanceQueryRepay[]> QueryRepay(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null);
-
-        /// <summary>
-        /// Query repay record
-        /// </summary>
-        /// <param name="asset">The records asset</param>
-        /// <param name="transactionId">The id of repay transaction</param>
-        /// <param name="startTime">Time to start getting records from</param>
-        /// <param name="endTime">Time to stop getting records to</param>
-        /// <param name="current">Number of page records</param>
-        /// <param name="size">The records count size need show</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <returns>Repay records</returns>
-        Task<WebCallResult<BinanceQueryRepay[]>> QueryRepayAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null);
-
 
         /// <summary>
         /// Gets account information, including balances
@@ -744,40 +692,147 @@ namespace Binance.Net.Interfaces
         Task<WebCallResult<BinanceTradingStatus>> GetTradingStatusAsync(int? receiveWindow = null);
 
         /// <summary>
-        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToUserStream"/>. The stream will close after 60 minutes unless a keep alive is send.
+        /// Places a new OCO(One cancels other) order
         /// </summary>
-        /// <returns>Listen key</returns>
-        WebCallResult<string> StartUserStream();
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="side">The order side (buy/sell)</param>
+        /// <param name="stopLimitTimeInForce">Lifetime of the stop order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
+        /// <param name="quantity">The amount of the symbol</param>
+        /// <param name="price">The price to use</param>
+        /// <param name="stopPrice">The stop price</param>
+        /// <param name="stopLimitPrice">The price for the stop limit order</param>
+        /// <param name="stopClientOrderId">Client id for the stop order</param>
+        /// <param name="limitClientOrderId">Client id for the limit order</param>
+        /// <param name="listClientOrderId">Client id for the order list</param>
+        /// <param name="limitIcebergQuantity">Iceberg quantity for the limit order</param>
+        /// <param name="stopIcebergQuantity">Iceberg quantity for the stop order</param>
+        /// <param name="orderResponseType">The type of response to receive</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Order list info</returns>
+        WebCallResult<BinanceOrderList> PlaceOCOOrder(
+            string symbol,
+            OrderSide side,
+            decimal quantity,
+            decimal price,
+            decimal stopPrice,
+            decimal? stopLimitPrice = null,
+            string listClientOrderId = null,
+            string limitClientOrderId = null,
+            string stopClientOrderId = null,
+            decimal? limitIcebergQuantity = null,
+            decimal? stopIcebergQuantity = null,
+            TimeInForce? stopLimitTimeInForce = null,
+            OrderResponseType? orderResponseType = null,
+            int? receiveWindow = null);
 
         /// <summary>
-        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToUserStream"/>. The stream will close after 60 minutes unless a keep alive is send.
+        /// Places a new OCO(One cancels other) order
         /// </summary>
-        /// <returns>Listen key</returns>
-        Task<WebCallResult<string>> StartUserStreamAsync();
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="side">The order side (buy/sell)</param>
+        /// <param name="stopLimitTimeInForce">Lifetime of the stop order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
+        /// <param name="quantity">The amount of the symbol</param>
+        /// <param name="price">The price to use</param>
+        /// <param name="stopPrice">The stop price</param>
+        /// <param name="stopLimitPrice">The price for the stop limit order</param>
+        /// <param name="stopClientOrderId">Client id for the stop order</param>
+        /// <param name="limitClientOrderId">Client id for the limit order</param>
+        /// <param name="listClientOrderId">Client id for the order list</param>
+        /// <param name="limitIcebergQuantity">Iceberg quantity for the limit order</param>
+        /// <param name="stopIcebergQuantity">Iceberg quantity for the stop order</param>
+        /// <param name="orderResponseType">The type of response to receive</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Order list info</returns>
+        Task<WebCallResult<BinanceOrderList>> PlaceOCOOrderAsync(string symbol,
+            OrderSide side,
+            decimal quantity,
+            decimal price,
+            decimal stopPrice,
+            decimal? stopLimitPrice = null,
+            string listClientOrderId = null,
+            string limitClientOrderId = null,
+            string stopClientOrderId = null,
+            decimal? limitIcebergQuantity = null,
+            decimal? stopIcebergQuantity = null,
+            TimeInForce? stopLimitTimeInForce = null,
+            OrderResponseType? orderResponseType = null,
+            int? receiveWindow = null);
 
         /// <summary>
-        /// Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
+        /// Cancels a pending oco order
         /// </summary>
-        /// <returns></returns>
-        WebCallResult<object> KeepAliveUserStream(string listenKey);
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="orderListId">The id of the order list to cancel</param>
+        /// <param name="listClientOrderId">The client order id of the order list to cancel</param>
+        /// <param name="newClientOrderId">The new client order list id for the order list</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Id's for canceled order</returns>
+        WebCallResult<BinanceOrderList> CancelOCOOrder(string symbol, long? orderListId = null, string listClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null);
 
         /// <summary>
-        /// Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
+        /// Cancels a pending oco order
         /// </summary>
-        /// <returns></returns>
-        Task<WebCallResult<object>> KeepAliveUserStreamAsync(string listenKey);
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="orderListId">The id of the order list to cancel</param>
+        /// <param name="listClientOrderId">The client order id of the order list to cancel</param>
+        /// <param name="newClientOrderId">The new client order list id for the order list</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Id's for canceled order</returns>
+        Task<WebCallResult<BinanceOrderList>> CancelOCOOrderAsync(string symbol, long? orderListId = null, string listClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null);
 
         /// <summary>
-        /// Stops the current user stream
+        /// Retrieves data for a specific oco order. Either listClientOrderId or listClientOrderId should be provided.
         /// </summary>
-        /// <returns></returns>
-        WebCallResult<object> StopUserStream(string listenKey);
+        /// <param name="orderListId">The list order id of the order</param>
+        /// <param name="listClientOrderId">The client order id of the list order</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>The specific order list</returns>
+        WebCallResult<BinanceOrderList> QueryOCOOrder(long? orderListId = null, string listClientOrderId = null, long? receiveWindow = null);
 
         /// <summary>
-        /// Stops the current user stream
+        /// Retrieves data for a specific oco order. Either orderListId or listClientOrderId should be provided.
         /// </summary>
-        /// <returns></returns>
-        Task<WebCallResult<object>> StopUserStreamAsync(string listenKey);
+        /// <param name="orderListId">The list order id of the order</param>
+        /// <param name="listClientOrderId">The client order id of the list order</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>The specific order list</returns>
+        Task<WebCallResult<BinanceOrderList>> QueryOCOOrderAsync(long? orderListId = null, string listClientOrderId = null, long? receiveWindow = null);
+
+        /// <summary>
+        /// Retrieves a list of oco orders matching the parameters
+        /// </summary>
+        /// <param name="fromId">Only return oco orders with id higher than this</param>
+        /// <param name="startTime">Only return oco orders placed later than this. Only valid if fromId isn't provided</param>
+        /// <param name="endTime">Only return oco orders placed before this. Only valid if fromId isn't provided</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Order lists matching the parameters</returns>
+        WebCallResult<BinanceOrderList[]> QueryOCOOrders(long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null);
+
+        /// <summary>
+        /// Retrieves a list of oco orders matching the parameters
+        /// </summary>
+        /// <param name="fromId">Only return oco orders with id higher than this</param>
+        /// <param name="startTime">Only return oco orders placed later than this. Only valid if fromId isn't provided</param>
+        /// <param name="endTime">Only return oco orders placed before this. Only valid if fromId isn't provided</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Order lists matching the parameters</returns>
+        Task<WebCallResult<BinanceOrderList[]>> QueryOCOOrdersAsync(long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null);
+
+        /// <summary>
+        /// Retrieves a list of open oco orders
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Open order lists</returns>
+        WebCallResult<BinanceOrderList[]> QueryOpenOCOOrders(long? receiveWindow = null);
+
+        /// <summary>
+        /// Retrieves a list of open oco orders
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Open order lists</returns>
+        Task<WebCallResult<BinanceOrderList[]>> QueryOpenOCOOrdersAsync(long? receiveWindow = null);
 
         /// <summary>
         /// Execute transfer between spot account and margin account.
@@ -821,7 +876,7 @@ namespace Binance.Net.Interfaces
         /// Repay loan for margin account.
         /// </summary>
         /// <param name="asset">The asset being repay, e.g., BTC</param>
-        /// <param name="amount">The amount to be repay</param>
+        /// <param name="amount">The amount to be borrow</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Transaction Id</returns>
         WebCallResult<BinanceMarginTransaction> Repay(string asset, decimal amount, int? receiveWindow = null);
@@ -830,7 +885,7 @@ namespace Binance.Net.Interfaces
         /// Repay loan for margin account.
         /// </summary>
         /// <param name="asset">The asset being repay, e.g., BTC</param>
-        /// <param name="amount">The amount to be repay</param>
+        /// <param name="amount">The amount to be borrow</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Transaction Id</returns>
         Task<WebCallResult<BinanceMarginTransaction>> RepayAsync(string asset, decimal amount, int? receiveWindow = null);
@@ -846,7 +901,7 @@ namespace Binance.Net.Interfaces
         /// <param name="price">The price to use</param>
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
-        /// <param name="icebergQty">Used for iceberg orders</param>
+        /// <param name="icebergQuantity">Used for iceberg orders</param>
         /// <param name="orderResponseType">The type of response to receive</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for the placed order</returns>
@@ -858,7 +913,7 @@ namespace Binance.Net.Interfaces
             decimal? price = null,
             TimeInForce? timeInForce = null,
             decimal? stopPrice = null,
-            decimal? icebergQty = null,
+            decimal? icebergQuantity = null,
             OrderResponseType? orderResponseType = null,
             int? receiveWindow = null);
 
@@ -873,7 +928,7 @@ namespace Binance.Net.Interfaces
         /// <param name="price">The price to use</param>
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
-        /// <param name="icebergQty">Used for iceberg orders</param>
+        /// <param name="icebergQuantity">Used for iceberg orders</param>
         /// <param name="orderResponseType">The type of response to receive</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for the placed order</returns>
@@ -885,7 +940,7 @@ namespace Binance.Net.Interfaces
             decimal? price = null,
             TimeInForce? timeInForce = null,
             decimal? stopPrice = null,
-            decimal? icebergQty = null,
+            decimal? icebergQuantity = null,
             OrderResponseType? orderResponseType = null,
             int? receiveWindow = null);
 
@@ -910,6 +965,58 @@ namespace Binance.Net.Interfaces
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Id's for canceled order</returns>
         Task<WebCallResult<BinanceCanceledOrder>> CancelMarginOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, string newClientOrderId = null, long? receiveWindow = null);
+
+        /// <summary>
+        /// Query loan records
+        /// </summary>
+        /// <param name="asset">The records asset</param>
+        /// <param name="transactionId">The id of loan transaction</param>
+        /// <param name="startTime">Time to start getting records from</param>
+        /// <param name="endTime">Time to stop getting records to</param>
+        /// <param name="current">Number of page records</param>
+        /// <param name="size">The records count size need show</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Loan records</returns>
+        WebCallResult<BinanceQueryLoan[]> QueryLoan(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null);
+
+        /// <summary>
+        /// Query loan records
+        /// </summary>
+        /// <param name="asset">The records asset</param>
+        /// <param name="transactionId">The id of loan transaction</param>
+        /// <param name="startTime">Time to start getting records from</param>
+        /// <param name="endTime">Time to stop getting records to</param>
+        /// <param name="current">Number of page records</param>
+        /// <param name="size">The records count size need show</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Loan records</returns>
+        Task<WebCallResult<BinanceQueryLoan[]>> QueryLoanAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null);
+
+        /// <summary>
+        /// Query repay record
+        /// </summary>
+        /// <param name="asset">The records asset</param>
+        /// <param name="transactionId">The id of repay transaction</param>
+        /// <param name="startTime">Time to start getting records from</param>
+        /// <param name="endTime">Time to stop getting records to</param>
+        /// <param name="current">Number of page records</param>
+        /// <param name="size">The records count size need show</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Repay records</returns>
+        WebCallResult<BinanceQueryRepay[]> QueryRepay(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, long? receiveWindow = null);
+
+        /// <summary>
+        /// Query repay record
+        /// </summary>
+        /// <param name="asset">The records asset</param>
+        /// <param name="transactionId">The id of repay transaction</param>
+        /// <param name="startTime">Time to start getting records from</param>
+        /// <param name="endTime">Time to stop getting records to</param>
+        /// <param name="current">Filter by number</param>
+        /// <param name="size">The records count size need show</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Repay records</returns>
+        Task<WebCallResult<BinanceQueryRepay[]>> QueryRepayAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, long? receiveWindow = null);
 
         /// <summary>
         /// Query margin account details
@@ -956,6 +1063,42 @@ namespace Binance.Net.Interfaces
         /// </summary>
         /// <returns>Return max amount</returns>
         Task<WebCallResult<decimal>> GetMaxTransferAmountAsync(string asset, long? receiveWindow = null);
+
+        /// <summary>
+        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToUserStream"/>. The stream will close after 60 minutes unless a keep alive is send.
+        /// </summary>
+        /// <returns>Listen key</returns>
+        WebCallResult<string> StartUserStream();
+
+        /// <summary>
+        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToUserStream"/>. The stream will close after 60 minutes unless a keep alive is send.
+        /// </summary>
+        /// <returns>Listen key</returns>
+        Task<WebCallResult<string>> StartUserStreamAsync();
+
+        /// <summary>
+        /// Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
+        /// </summary>
+        /// <returns></returns>
+        WebCallResult<object> KeepAliveUserStream(string listenKey);
+
+        /// <summary>
+        /// Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
+        /// </summary>
+        /// <returns></returns>
+        Task<WebCallResult<object>> KeepAliveUserStreamAsync(string listenKey);
+
+        /// <summary>
+        /// Stops the current user stream
+        /// </summary>
+        /// <returns></returns>
+        WebCallResult<object> StopUserStream(string listenKey);
+
+        /// <summary>
+        /// Stops the current user stream
+        /// </summary>
+        /// <returns></returns>
+        Task<WebCallResult<object>> StopUserStreamAsync(string listenKey);
 
         /// <summary>
         /// Starts a user stream  for margin account by requesting a listen key. 

@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using CryptoExchange.Net.Attributes;
 using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects
@@ -24,8 +25,15 @@ namespace Binance.Net.Objects
         /// </summary>
         public string ClientOrderId { get; set; }
         /// <summary>
+        /// Original order id
+        /// </summary>
+        [JsonOptionalProperty]
+        [JsonProperty("origClientOrderId")]
+        public string OriginalClientOrderId { get; set; }
+        /// <summary>
         /// The time the order was placed
         /// </summary>
+        [JsonOptionalProperty]
         [JsonConverter(typeof(TimestampConverter))]
         public DateTime TransactTime { get; set; }
         /// <summary>
@@ -78,6 +86,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// Fills for the order
         /// </summary>
+        [JsonOptionalProperty]
         public List<BinanceOrderTrade> Fills { get; set; }
     }
 }

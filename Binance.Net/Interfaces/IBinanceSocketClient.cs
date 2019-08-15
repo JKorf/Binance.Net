@@ -223,8 +223,15 @@ namespace Binance.Net.Interfaces
         /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
         /// <param name="onAccountInfoMessage">The event handler for whenever an account info update is received</param>
         /// <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
+        /// <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
+        /// <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        CallResult<UpdateSubscription> SubscribeToUserStream(string listenKey, Action<BinanceStreamAccountInfo> onAccountInfoMessage, Action<BinanceStreamOrderUpdate> onOrderUpdateMessage);
+        CallResult<UpdateSubscription> SubscribeToUserStream(
+            string listenKey,
+            Action<BinanceStreamAccountInfo> onAccountInfoMessage,
+            Action<BinanceStreamOrderUpdate> onOrderUpdateMessage,
+            Action<BinanceStreamOrderList> onOcoOrderUpdateMessage,
+            Action<BinanceStreamBalance[]> onAccountPositionMessage);
 
         /// <summary>
         /// Subscribes to the account update stream. Prior to using this, the <see cref="BinanceClient.StartUserStream"/> method should be called.
@@ -232,8 +239,15 @@ namespace Binance.Net.Interfaces
         /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
         /// <param name="onAccountInfoMessage">The event handler for whenever an account info update is received</param>
         /// <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
+        /// <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
+        /// <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToUserStreamAsync(string listenKey, Action<BinanceStreamAccountInfo> onAccountInfoMessage, Action<BinanceStreamOrderUpdate> onOrderUpdateMessage);
+        Task<CallResult<UpdateSubscription>> SubscribeToUserStreamAsync(
+            string listenKey,
+            Action<BinanceStreamAccountInfo> onAccountInfoMessage,
+            Action<BinanceStreamOrderUpdate> onOrderUpdateMessage,
+            Action<BinanceStreamOrderList> onOcoOrderUpdateMessage,
+            Action<BinanceStreamBalance[]> onAccountPositionMessage);
 
     }
 }

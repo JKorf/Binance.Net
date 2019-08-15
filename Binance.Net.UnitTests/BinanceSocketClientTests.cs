@@ -197,7 +197,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateSocketClient(socket);
 
             BinanceStreamAccountInfo result = null;
-            client.SubscribeToUserStream("test", (test) => result = test, null);
+            client.SubscribeToUserStream("test", (test) => result = test, null, null, null);
 
             var data = new BinanceStreamAccountInfo()
             {
@@ -228,6 +228,54 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase()]
+        public void SubscribingToUserStream_Should_TriggerWhenOcoOrderUpdateStreamMessageIsReceived()
+        {
+            // arrange
+            var socket = new TestSocket();
+            var client = TestHelpers.CreateSocketClient(socket, new BinanceSocketClientOptions(){ LogVerbosity = LogVerbosity.Debug });
+
+            BinanceStreamOrderList result = null;
+            client.SubscribeToUserStream("test", null, null, (test) => result = test, null);
+
+            var data = new BinanceStreamOrderList()
+            {
+                Event = "listStatus",
+                EventTime = new DateTime(2017, 1, 1),
+                Symbol = "BNBUSDT",
+                ContingencyType = "OCO",
+                ListStatusType = ListStatusType.Done,
+                ListOrderStatus = ListOrderStatus.Done,
+                OrderListId = 1,
+                ListClientOrderId = "2",
+                TransactionTime = new DateTime(2018, 1, 1),
+                Orders = new []
+                {
+                    new BinanceStreamOrderId()
+                    {
+                        Symbol = "BNBUSDT",
+                        OrderId = 2,
+                        ClientOrderId = "3"
+                    },
+                    new BinanceStreamOrderId()
+                    {
+                        Symbol = "BNBUSDT",
+                        OrderId = 3,
+                        ClientOrderId = "4"
+                    }
+                }
+            };
+
+            // act
+            socket.InvokeMessage(data);
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(TestHelpers.AreEqual(data, result, "Orders"));
+            Assert.IsTrue(TestHelpers.AreEqual(data.Orders[0], result.Orders[0]));
+            Assert.IsTrue(TestHelpers.AreEqual(data.Orders[1], result.Orders[1]));
+        }
+
+        [TestCase()]
         public void SubscribingToUserStream_Should_TriggerWhenOrderUpdateStreamMessageIsReceived()
         {
             // arrange
@@ -235,7 +283,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateSocketClient(socket);
 
             BinanceStreamOrderUpdate result = null;
-            client.SubscribeToUserStream("test", null, (test) => result = test);
+            client.SubscribeToUserStream("test", null, (test) => result = test, null, null);
 
             var data = new BinanceStreamOrderUpdate()
             {

@@ -663,7 +663,7 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>The trading status of the account</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.PlaceOCOOrder(System.String,Binance.Net.Objects.OrderSide,System.Decimal,System.Decimal,System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32})">
+        <member name="M:Binance.Net.BinanceClient.PlaceOCOOrder(System.String,Binance.Net.Objects.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32})">
             <summary>
             Places a new OCO(One cancels other) order
             </summary>
@@ -672,6 +672,8 @@
             <param name="stopLimitTimeInForce">Lifetime of the stop order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
             <param name="quantity">The amount of the symbol</param>
             <param name="price">The price to use</param>
+            <param name="stopPrice">The stop price</param>
+            <param name="stopLimitPrice">The price for the stop limit order</param>
             <param name="stopClientOrderId">Client id for the stop order</param>
             <param name="limitClientOrderId">Client id for the limit order</param>
             <param name="listClientOrderId">Client id for the order list</param>
@@ -681,7 +683,7 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>Order list info</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.PlaceOCOOrderAsync(System.String,Binance.Net.Objects.OrderSide,System.Decimal,System.Decimal,System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32})">
+        <member name="M:Binance.Net.BinanceClient.PlaceOCOOrderAsync(System.String,Binance.Net.Objects.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32})">
             <summary>
             Places a new OCO(One cancels other) order
             </summary>
@@ -690,6 +692,8 @@
             <param name="stopLimitTimeInForce">Lifetime of the stop order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
             <param name="quantity">The amount of the symbol</param>
             <param name="price">The price to use</param>
+            <param name="stopPrice">The stop price</param>
+            <param name="stopLimitPrice">The price for the stop limit order</param>
             <param name="stopClientOrderId">Client id for the stop order</param>
             <param name="limitClientOrderId">Client id for the limit order</param>
             <param name="listClientOrderId">Client id for the order list</param>
@@ -987,13 +991,13 @@
         </member>
         <member name="M:Binance.Net.BinanceClient.StartUserStream">
             <summary>
-            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{System.Object},System.Action{System.Object})"/>. The stream will close after 60 minutes unless a keep alive is send.
+            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{Binance.Net.Objects.BinanceStreamBalance[]})"/>. The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <returns>Listen key</returns>
         </member>
         <member name="M:Binance.Net.BinanceClient.StartUserStreamAsync">
             <summary>
-            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{System.Object},System.Action{System.Object})"/>. The stream will close after 60 minutes unless a keep alive is send.
+            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{Binance.Net.Objects.BinanceStreamBalance[]})"/>. The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <returns>Listen key</returns>
         </member>
@@ -1025,7 +1029,7 @@
             <summary>
             Starts a user stream  for margin account by requesting a listen key. 
             This listen key can be used in subsequent requests to 
-            <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{System.Object},System.Action{System.Object})"/>. 
+            <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{Binance.Net.Objects.BinanceStreamBalance[]})"/>. 
             The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <returns>Listen key</returns>
@@ -1034,7 +1038,7 @@
             <summary>
             Starts a user stream  for margin account by requesting a listen key. 
             This listen key can be used in subsequent requests to 
-            <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{System.Object},System.Action{System.Object})"/>. 
+            <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{Binance.Net.Objects.BinanceStreamBalance[]})"/>. 
             The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <returns>Listen key</returns>
@@ -1334,26 +1338,26 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{System.Object},System.Action{System.Object})">
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{Binance.Net.Objects.BinanceStreamBalance[]})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.BinanceClient.StartUserStream"/> method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
             <param name="onAccountInfoMessage">The event handler for whenever an account info update is received</param>
             <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
-            <param name="onOcoOrderMessage">The event handler for whenever an oco order status update is received</param>
-            <param name="onAccountPositionMessage">The event handler for whenever an account position update is received</param>
+            <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco status update is received</param>
+            <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToUserStreamAsync(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{System.Object},System.Action{System.Object})">
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToUserStreamAsync(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{Binance.Net.Objects.BinanceStreamBalance[]})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.BinanceClient.StartUserStream"/> method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
             <param name="onAccountInfoMessage">The event handler for whenever an account info update is received</param>
             <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
-            /// <param name="onOcoOrderMessage">The event handler for whenever an oco order status update is received</param>
-            <param name="onAccountPositionMessage">The event handler for whenever an account position update is received</param>
+            <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
+            <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
         <member name="M:Binance.Net.BinanceSocketClient.HandleQueryResponse``1(CryptoExchange.Net.Sockets.SocketConnection,System.Object,Newtonsoft.Json.Linq.JToken,CryptoExchange.Net.Objects.CallResult{``0}@)">
@@ -1401,7 +1405,7 @@
         </member>
         <member name="T:Binance.Net.Interfaces.IBinanceClient">
             <summary>
-            Binance rest client
+            Binance client interface
             </summary>
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceClient.SetApiCredentials(System.String,System.String)">
@@ -1752,7 +1756,7 @@
             <param name="symbol">The symbol the order is for</param>
             <param name="orderId">The order id of the order</param>
             <param name="origClientOrderId">The client order id of the order</param>
-            <param name="newClientOrderId">Unique identifier for this cancel</param>
+            <param name="newClientOrderId">The new client order id of the order</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>Id's for canceled order</returns>
         </member>
@@ -1766,58 +1770,6 @@
             <param name="newClientOrderId">Unique identifier for this cancel</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>Id's for canceled order</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryLoan(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64})">
-            <summary>
-            Query loan records
-            </summary>
-            <param name="asset">The records asset</param>
-            <param name="transactionId">The id of loan transaction</param>
-            <param name="startTime">Time to start getting records from</param>
-            <param name="endTime">Time to stop getting records to</param>
-            <param name="current">Number of page records</param>
-            <param name="size">The records count size need show</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <returns>Loan records</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryLoanAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64})">
-            <summary>
-            Query loan records
-            </summary>
-            <param name="asset">The records asset</param>
-            <param name="transactionId">The id of loan transaction</param>
-            <param name="startTime">Time to start getting records from</param>
-            <param name="endTime">Time to stop getting records to</param>
-            <param name="current">Number of page records</param>
-            <param name="size">The records count size need show</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <returns>Loan records</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryRepay(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64})">
-            <summary>
-            Query repay record
-            </summary>
-            <param name="asset">The records asset</param>
-            <param name="transactionId">The id of repay transaction</param>
-            <param name="startTime">Time to start getting records from</param>
-            <param name="endTime">Time to stop getting records to</param>
-            <param name="current">Number of page records</param>
-            <param name="size">The records count size need show</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <returns>Repay records</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryRepayAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64})">
-            <summary>
-            Query repay record
-            </summary>
-            <param name="asset">The records asset</param>
-            <param name="transactionId">The id of repay transaction</param>
-            <param name="startTime">Time to start getting records from</param>
-            <param name="endTime">Time to stop getting records to</param>
-            <param name="current">Number of page records</param>
-            <param name="size">The records count size need show</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <returns>Repay records</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceClient.GetAccountInfo(System.Nullable{System.Int64})">
             <summary>
@@ -2093,41 +2045,121 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>The trading status of the account</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.StartUserStream">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceOCOOrder(System.String,Binance.Net.Objects.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32})">
             <summary>
-            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{System.Object},System.Action{System.Object})"/>. The stream will close after 60 minutes unless a keep alive is send.
+            Places a new OCO(One cancels other) order
             </summary>
-            <returns>Listen key</returns>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="side">The order side (buy/sell)</param>
+            <param name="stopLimitTimeInForce">Lifetime of the stop order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
+            <param name="quantity">The amount of the symbol</param>
+            <param name="price">The price to use</param>
+            <param name="stopPrice">The stop price</param>
+            <param name="stopLimitPrice">The price for the stop limit order</param>
+            <param name="stopClientOrderId">Client id for the stop order</param>
+            <param name="limitClientOrderId">Client id for the limit order</param>
+            <param name="listClientOrderId">Client id for the order list</param>
+            <param name="limitIcebergQuantity">Iceberg quantity for the limit order</param>
+            <param name="stopIcebergQuantity">Iceberg quantity for the stop order</param>
+            <param name="orderResponseType">The type of response to receive</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>Order list info</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.StartUserStreamAsync">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceOCOOrderAsync(System.String,Binance.Net.Objects.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32})">
             <summary>
-            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{System.Object},System.Action{System.Object})"/>. The stream will close after 60 minutes unless a keep alive is send.
+            Places a new OCO(One cancels other) order
             </summary>
-            <returns>Listen key</returns>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="side">The order side (buy/sell)</param>
+            <param name="stopLimitTimeInForce">Lifetime of the stop order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
+            <param name="quantity">The amount of the symbol</param>
+            <param name="price">The price to use</param>
+            <param name="stopPrice">The stop price</param>
+            <param name="stopLimitPrice">The price for the stop limit order</param>
+            <param name="stopClientOrderId">Client id for the stop order</param>
+            <param name="limitClientOrderId">Client id for the limit order</param>
+            <param name="listClientOrderId">Client id for the order list</param>
+            <param name="limitIcebergQuantity">Iceberg quantity for the limit order</param>
+            <param name="stopIcebergQuantity">Iceberg quantity for the stop order</param>
+            <param name="orderResponseType">The type of response to receive</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>Order list info</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.KeepAliveUserStream(System.String)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.CancelOCOOrder(System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64})">
             <summary>
-            Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
+            Cancels a pending oco order
             </summary>
-            <returns></returns>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="orderListId">The id of the order list to cancel</param>
+            <param name="listClientOrderId">The client order id of the order list to cancel</param>
+            <param name="newClientOrderId">The new client order list id for the order list</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>Id's for canceled order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.KeepAliveUserStreamAsync(System.String)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.CancelOCOOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64})">
             <summary>
-            Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
+            Cancels a pending oco order
             </summary>
-            <returns></returns>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="orderListId">The id of the order list to cancel</param>
+            <param name="listClientOrderId">The client order id of the order list to cancel</param>
+            <param name="newClientOrderId">The new client order list id for the order list</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>Id's for canceled order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.StopUserStream(System.String)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryOCOOrder(System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
             <summary>
-            Stops the current user stream
+            Retrieves data for a specific oco order. Either listClientOrderId or listClientOrderId should be provided.
             </summary>
-            <returns></returns>
+            <param name="orderListId">The list order id of the order</param>
+            <param name="listClientOrderId">The client order id of the list order</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>The specific order list</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.StopUserStreamAsync(System.String)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryOCOOrderAsync(System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
             <summary>
-            Stops the current user stream
+            Retrieves data for a specific oco order. Either orderListId or listClientOrderId should be provided.
             </summary>
-            <returns></returns>
+            <param name="orderListId">The list order id of the order</param>
+            <param name="listClientOrderId">The client order id of the list order</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>The specific order list</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryOCOOrders(System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+            <summary>
+            Retrieves a list of oco orders matching the parameters
+            </summary>
+            <param name="fromId">Only return oco orders with id higher than this</param>
+            <param name="startTime">Only return oco orders placed later than this. Only valid if fromId isn't provided</param>
+            <param name="endTime">Only return oco orders placed before this. Only valid if fromId isn't provided</param>
+            <param name="limit">Max number of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>Order lists matching the parameters</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryOCOOrdersAsync(System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+            <summary>
+            Retrieves a list of oco orders matching the parameters
+            </summary>
+            <param name="fromId">Only return oco orders with id higher than this</param>
+            <param name="startTime">Only return oco orders placed later than this. Only valid if fromId isn't provided</param>
+            <param name="endTime">Only return oco orders placed before this. Only valid if fromId isn't provided</param>
+            <param name="limit">Max number of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>Order lists matching the parameters</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryOpenOCOOrders(System.Nullable{System.Int64})">
+            <summary>
+            Retrieves a list of open oco orders
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>Open order lists</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryOpenOCOOrdersAsync(System.Nullable{System.Int64})">
+            <summary>
+            Retrieves a list of open oco orders
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>Open order lists</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceClient.Transfer(System.String,System.Decimal,Binance.Net.Objects.TransferDirectionType,System.Nullable{System.Int32})">
             <summary>
@@ -2172,7 +2204,7 @@
             Repay loan for margin account.
             </summary>
             <param name="asset">The asset being repay, e.g., BTC</param>
-            <param name="amount">The amount to be repay</param>
+            <param name="amount">The amount to be borrow</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>Transaction Id</returns>
         </member>
@@ -2181,7 +2213,7 @@
             Repay loan for margin account.
             </summary>
             <param name="asset">The asset being repay, e.g., BTC</param>
-            <param name="amount">The amount to be repay</param>
+            <param name="amount">The amount to be borrow</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>Transaction Id</returns>
         </member>
@@ -2197,7 +2229,7 @@
             <param name="price">The price to use</param>
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
-            <param name="icebergQty">Used for iceberg orders</param>
+            <param name="icebergQuantity">Used for iceberg orders</param>
             <param name="orderResponseType">The type of response to receive</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>Id's for the placed order</returns>
@@ -2214,7 +2246,7 @@
             <param name="price">The price to use</param>
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
-            <param name="icebergQty">Used for iceberg orders</param>
+            <param name="icebergQuantity">Used for iceberg orders</param>
             <param name="orderResponseType">The type of response to receive</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>Id's for the placed order</returns>
@@ -2240,6 +2272,58 @@
             <param name="newClientOrderId">Unique identifier for this cancel</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>Id's for canceled order</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryLoan(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+            <summary>
+            Query loan records
+            </summary>
+            <param name="asset">The records asset</param>
+            <param name="transactionId">The id of loan transaction</param>
+            <param name="startTime">Time to start getting records from</param>
+            <param name="endTime">Time to stop getting records to</param>
+            <param name="current">Number of page records</param>
+            <param name="size">The records count size need show</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>Loan records</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryLoanAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+            <summary>
+            Query loan records
+            </summary>
+            <param name="asset">The records asset</param>
+            <param name="transactionId">The id of loan transaction</param>
+            <param name="startTime">Time to start getting records from</param>
+            <param name="endTime">Time to stop getting records to</param>
+            <param name="current">Number of page records</param>
+            <param name="size">The records count size need show</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>Loan records</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryRepay(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+            <summary>
+            Query repay record
+            </summary>
+            <param name="asset">The records asset</param>
+            <param name="transactionId">The id of repay transaction</param>
+            <param name="startTime">Time to start getting records from</param>
+            <param name="endTime">Time to stop getting records to</param>
+            <param name="current">Number of page records</param>
+            <param name="size">The records count size need show</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>Repay records</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryRepayAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+            <summary>
+            Query repay record
+            </summary>
+            <param name="asset">The records asset</param>
+            <param name="transactionId">The id of repay transaction</param>
+            <param name="startTime">Time to start getting records from</param>
+            <param name="endTime">Time to stop getting records to</param>
+            <param name="current">Filter by number</param>
+            <param name="size">The records count size need show</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>Repay records</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceClient.GerMarginAccountInfo(System.Nullable{System.Int64})">
             <summary>
@@ -2287,11 +2371,47 @@
             </summary>
             <returns>Return max amount</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.StartUserStream">
+            <summary>
+            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{Binance.Net.Objects.BinanceStreamBalance[]})"/>. The stream will close after 60 minutes unless a keep alive is send.
+            </summary>
+            <returns>Listen key</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.StartUserStreamAsync">
+            <summary>
+            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{Binance.Net.Objects.BinanceStreamBalance[]})"/>. The stream will close after 60 minutes unless a keep alive is send.
+            </summary>
+            <returns>Listen key</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.KeepAliveUserStream(System.String)">
+            <summary>
+            Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.KeepAliveUserStreamAsync(System.String)">
+            <summary>
+            Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.StopUserStream(System.String)">
+            <summary>
+            Stops the current user stream
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.StopUserStreamAsync(System.String)">
+            <summary>
+            Stops the current user stream
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.IBinanceClient.StartMarginUserStream">
             <summary>
             Starts a user stream  for margin account by requesting a listen key. 
             This listen key can be used in subsequent requests to 
-            <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{System.Object},System.Action{System.Object})"/>. 
+            <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{Binance.Net.Objects.BinanceStreamBalance[]})"/>. 
             The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <returns>Listen key</returns>
@@ -2300,7 +2420,7 @@
             <summary>
             Starts a user stream  for margin account by requesting a listen key. 
             This listen key can be used in subsequent requests to 
-            <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{System.Object},System.Action{System.Object})"/>. 
+            <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{Binance.Net.Objects.BinanceStreamBalance[]})"/>. 
             The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <returns>Listen key</returns>
@@ -2541,22 +2661,26 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate})">
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToUserStream(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{Binance.Net.Objects.BinanceStreamBalance[]})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.BinanceClient.StartUserStream"/> method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
             <param name="onAccountInfoMessage">The event handler for whenever an account info update is received</param>
             <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
+            <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
+            <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToUserStreamAsync(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate})">
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToUserStreamAsync(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{Binance.Net.Objects.BinanceStreamBalance[]})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.BinanceClient.StartUserStream"/> method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
             <param name="onAccountInfoMessage">The event handler for whenever an account info update is received</param>
             <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
+            <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
+            <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
         <member name="T:Binance.Net.Objects.Binance24HPrice">
@@ -3512,6 +3636,76 @@
             The quantity of this price in the order book
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceOrderList">
+            <summary>
+            The result of placing a new OCO order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderList.OrderListId">
+            <summary>
+            The id of the order list
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderList.ContingencyType">
+            <summary>
+            The contingency type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderList.ListStatusType">
+            <summary>
+            The order list status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderList.ListOrderStatus">
+            <summary>
+            The order status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderList.ListClientOrderId">
+            <summary>
+            The client id of the order list
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderList.TransactionTime">
+            <summary>
+            The transaction time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderList.Symbol">
+            <summary>
+            The symbol of the order list
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderList.Orders">
+            <summary>
+            The order in this list
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderList.OrderReports">
+            <summary>
+            The order details
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceOrderId">
+            <summary>
+            Order reference
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderId.Symbol">
+            <summary>
+            The symbol of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderId.OrderId">
+            <summary>
+            The id of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderId.ClientOrderId">
+            <summary>
+            The client order id
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.BinanceOrderTrade">
             <summary>
             Trade info
@@ -3560,6 +3754,11 @@
         <member name="P:Binance.Net.Objects.BinancePlacedOrder.ClientOrderId">
             <summary>
             The order id as assigned by the client
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinancePlacedOrder.OriginalClientOrderId">
+            <summary>
+            Original order id
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BinancePlacedOrder.TransactTime">
@@ -3620,76 +3819,6 @@
         <member name="P:Binance.Net.Objects.BinancePlacedOrder.Fills">
             <summary>
             Fills for the order
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceOrderList">
-            <summary>
-            The result of placing a new OCO order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceOrderList.OrderListId">
-            <summary>
-            The id of the order list
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceOrderList.ContingencyType">
-            <summary>
-            The contingency type
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceOrderList.ListStatus">
-            <summary>
-            The order list status
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceOrderList.ListOrderStatus">
-            <summary>
-            The order status
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceOrderList.ListClientOrderId">
-            <summary>
-            The client id of the order list
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceOrderList.TransactionTime">
-            <summary>
-            The transaction time
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceOrderList.Symbol">
-            <summary>
-            The symbol of the order list
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceOrderList.Orders">
-            <summary>
-            The order in this list
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceOrderList.OrderReports">
-            <summary>
-            The order details
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceOrderId">
-            <summary>
-            Order reference
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceOrderId.Symbol">
-            <summary>
-            The symbol of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceOrderId.OrderId">
-            <summary>
-            The id of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceOrderId.ClientOrderId">
-            <summary>
-            The client order id
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinancePrice">
@@ -4082,6 +4211,71 @@
             Casts this object to a <see cref="T:Binance.Net.Objects.BinanceKline"/> object
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceStreamOrderList">
+            <summary>
+            Order list info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderList.OrderListId">
+            <summary>
+            The id of the order list
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderList.ContingencyType">
+            <summary>
+            The contingency type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderList.ListStatusType">
+            <summary>
+            The order list status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderList.ListOrderStatus">
+            <summary>
+            The order status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderList.ListClientOrderId">
+            <summary>
+            The client id of the order list
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderList.TransactionTime">
+            <summary>
+            The transaction time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderList.Symbol">
+            <summary>
+            The symbol of the order list
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderList.Orders">
+            <summary>
+            The order in this list
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceStreamOrderId">
+            <summary>
+            Order reference
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderId.Symbol">
+            <summary>
+            The symbol of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderId.OrderId">
+            <summary>
+            The id of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderId.ClientOrderId">
+            <summary>
+            The client order id
+            </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinanceStreamOrderUpdate">
             <summary>

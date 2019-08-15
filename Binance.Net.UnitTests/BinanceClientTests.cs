@@ -112,7 +112,7 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsTrue(result.Success);
-            Assert.IsTrue(TestHelpers.AreEqual(orderBook, result.Data, "Asks", "Bids", "AsksStream", "BidsStream"));
+            Assert.IsTrue(TestHelpers.AreEqual(orderBook, result.Data, "Asks", "Bids", "AsksStream", "BidsStream", "LastUpdateIdStream"));
             Assert.IsTrue(TestHelpers.AreEqual(orderBook.Asks[0], result.Data.Asks[0]));
             Assert.IsTrue(TestHelpers.AreEqual(orderBook.Asks[1], result.Data.Asks[1]));
             Assert.IsTrue(TestHelpers.AreEqual(orderBook.Bids[0], result.Data.Bids[0]));
