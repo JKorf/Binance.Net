@@ -215,6 +215,20 @@ namespace Binance.Net.Interfaces
         Task<WebCallResult<BinanceBookPrice>> GetBookPriceAsync(string symbol);
 
         /// <summary>
+        /// Gets current average price for a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <returns></returns>
+        WebCallResult<BinanceAveragePrice> GetCurrentAvgPrice(string symbol);
+
+        /// <summary>
+        /// Gets current average price for a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceAveragePrice>> GetCurrentAvgPriceAsync(string symbol);
+
+        /// <summary>
         /// Gets the best price/quantity on the order book for all symbols.
         /// </summary>
         /// <returns>List of book prices</returns>

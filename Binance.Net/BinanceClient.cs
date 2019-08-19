@@ -52,7 +52,8 @@ namespace Binance.Net
         private const string UserDataStreamVersion = "1";
         private const string WithdrawalVersion = "3";
         private const string MarginVersion = "1";
-
+        private const string AveragePriceVersion = "3";
+        
         // Methods
         private const string GetMethod = "GET";
         private const string PostMethod = "POST";
@@ -71,7 +72,8 @@ namespace Binance.Net
         private const string Price24HEndpoint = "ticker/24hr";
         private const string AllPricesEndpoint = "ticker/price";
         private const string BookPricesEndpoint = "ticker/bookTicker";
-
+        private const string AveragePriceEndpoint = "avgPrice";
+        
         // Orders
         private const string OpenOrdersEndpoint = "openOrders";
         private const string AllOrdersEndpoint = "allOrders";
@@ -503,6 +505,28 @@ namespace Binance.Net
         public async Task<WebCallResult<BinanceBookPrice[]>> GetAllBookPricesAsync()
         {
             return await ExecuteRequest<BinanceBookPrice[]>(GetUrl(BookPricesEndpoint, Api, PublicVersion)).ConfigureAwait(false);
+        }
+        
+        /// <summary>
+        /// Gets current average price for a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <returns></returns>
+        public WebCallResult<BinanceAveragePrice> GetCurrentAvgPrice(string symbol) => GetCurrentAvgPriceAsync(symbol).Result;
+
+        /// <summary>
+        /// Gets current average price for a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <returns></returns>
+        public async Task<WebCallResult<BinanceAveragePrice>> GetCurrentAvgPriceAsync(string symbol)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "symbol", symbol }
+            };
+
+            return await ExecuteRequest<BinanceAveragePrice>(GetUrl(AveragePriceEndpoint, Api, AveragePriceVersion), GetMethod, parameters).ConfigureAwait(false);
         }
         #endregion
 
