@@ -239,6 +239,20 @@
             </summary>
             <returns>List of book prices</returns>
         </member>
+        <member name="M:Binance.Net.BinanceClient.GetCurrentAvgPrice(System.String)">
+            <summary>
+            Gets current average price for a symbol
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.BinanceClient.GetCurrentAvgPriceAsync(System.String)">
+            <summary>
+            Gets current average price for a symbol
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <returns></returns>
+        </member>
         <member name="M:Binance.Net.BinanceClient.GetOpenOrders(System.String,System.Nullable{System.Int32})">
             <summary>
             Gets a list of open orders
@@ -1609,6 +1623,20 @@
             </summary>
             <returns>List of book prices</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetCurrentAvgPrice(System.String)">
+            <summary>
+            Gets current average price for a symbol
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetCurrentAvgPriceAsync(System.String)">
+            <summary>
+            Gets current average price for a symbol
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <returns></returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.IBinanceClient.GetAllBookPrices">
             <summary>
             Gets the best price/quantity on the order book for all symbols.
@@ -2936,6 +2964,21 @@
         <member name="P:Binance.Net.Objects.BinanceAggregatedTrades.WasBestPriceMatch">
             <summary>
             Whether the trade was matched at the best price
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceAveragePrice">
+            <summary>
+            Current average price details for a symbol.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceAveragePrice.Minutes">
+            <summary>
+            Duration in minutes
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceAveragePrice.Price">
+            <summary>
+            The average price
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinanceBookPrice">

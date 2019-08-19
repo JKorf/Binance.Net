@@ -140,6 +140,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 4.2.1 - 19 Aug 2019
+    * Added current average price endpoint
+
 * Version 4.2.0 - 15 Aug 2019
     * Implemented OCO orders
     * Adjustments for API update
