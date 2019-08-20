@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Binance.Net.Converters;
 using CryptoExchange.Net.Attributes;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
@@ -36,7 +37,7 @@ namespace Binance.Net.Objects
         public Dictionary<string, int> TriggerConditions { get; set; }
 
         /// <summary>
-        /// Indicators
+        /// Dictionary of indicator lists for symbols
         /// </summary>
         public Dictionary<string, List<BinanceIndicator>> Indicators { get; set; }
         /// <summary>
@@ -55,7 +56,8 @@ namespace Binance.Net.Objects
         /// Indicator name
         /// </summary>
         [JsonProperty("i")]
-        public string Indicator { get; set; }
+        public IndicatorType IndicatorType { get; set; }
+
         /// <summary>
         /// Count
         /// </summary>

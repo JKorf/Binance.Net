@@ -6,10 +6,10 @@ using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.RateLimiter;
 
-namespace Binance.Net.Interfaces
+namespace Binance.Net
 {
     /// <summary>
-    /// Binance client interface
+    /// Interface for the binance client
     /// </summary>
     public interface IBinanceClient: IRestClient
     {
@@ -215,6 +215,18 @@ namespace Binance.Net.Interfaces
         Task<WebCallResult<BinanceBookPrice>> GetBookPriceAsync(string symbol);
 
         /// <summary>
+        /// Gets the best price/quantity on the order book for all symbols.
+        /// </summary>
+        /// <returns>List of book prices</returns>
+        WebCallResult<BinanceBookPrice[]> GetAllBookPrices();
+
+        /// <summary>
+        /// Gets the best price/quantity on the order book for all symbols.
+        /// </summary>
+        /// <returns>List of book prices</returns>
+        Task<WebCallResult<BinanceBookPrice[]>> GetAllBookPricesAsync();
+
+        /// <summary>
         /// Gets current average price for a symbol
         /// </summary>
         /// <param name="symbol">The symbol to get the data for</param>
@@ -227,18 +239,6 @@ namespace Binance.Net.Interfaces
         /// <param name="symbol">The symbol to get the data for</param>
         /// <returns></returns>
         Task<WebCallResult<BinanceAveragePrice>> GetCurrentAvgPriceAsync(string symbol);
-
-        /// <summary>
-        /// Gets the best price/quantity on the order book for all symbols.
-        /// </summary>
-        /// <returns>List of book prices</returns>
-        WebCallResult<BinanceBookPrice[]> GetAllBookPrices();
-
-        /// <summary>
-        /// Gets the best price/quantity on the order book for all symbols.
-        /// </summary>
-        /// <returns>List of book prices</returns>
-        Task<WebCallResult<BinanceBookPrice[]>> GetAllBookPricesAsync();
 
         /// <summary>
         /// Gets a list of open orders
@@ -1037,14 +1037,98 @@ namespace Binance.Net.Interfaces
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>The margin account information</returns>
-        WebCallResult<BinanceMarginAccount> GerMarginAccountInfo(long? receiveWindow = null);
+        WebCallResult<BinanceMarginAccount> GetMarginAccountInfo(long? receiveWindow = null);
 
         /// <summary>
         /// Query margin account details
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>The margin account information</returns>
-        Task<WebCallResult<BinanceMarginAccount>> GerMarginAccountInfoAsync(long? receiveWindow = null);
+        Task<WebCallResult<BinanceMarginAccount>> GetMarginAccountInfoAsync(long? receiveWindow = null);
+
+        /// <summary>
+        /// Retrieves data for a specific margin account order. Either orderId or origClientOrderId should be provided.
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="orderId">The order id of the order</param>
+        /// <param name="origClientOrderId">The client order id of the order</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>The specific margin account order</returns>
+        WebCallResult<BinanceOrder> QueryMarginAccountOrder(string symbol, long? orderId = null, string origClientOrderId = null, long? receiveWindow = null);
+
+        /// <summary>
+        /// Retrieves data for a specific margin account order. Either orderId or origClientOrderId should be provided.
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="orderId">The order id of the order</param>
+        /// <param name="origClientOrderId">The client order id of the order</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>The specific margin account order</returns>
+        Task<WebCallResult<BinanceOrder>> QueryMarginAccountOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, long? receiveWindow = null);
+
+        /// <summary>
+        /// Gets a list of open margin account orders
+        /// </summary>
+        /// <param name="symbol">The symbol to get open orders for</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of open margin account orders</returns>
+        WebCallResult<BinanceOrder[]> GetOpenMarginAccountOrders(string symbol = null, int? receiveWindow = null);
+
+        /// <summary>
+        /// Gets a list of open margin account orders
+        /// </summary>
+        /// <param name="symbol">The symbol to get open orders for</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of open margin account orders</returns>
+        Task<WebCallResult<BinanceOrder[]>> GetOpenMarginAccountOrdersAsync(string symbol = null, int? receiveWindow = null);
+
+        /// <summary>
+        /// Gets all margin account orders for the provided symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to get orders for</param>
+        /// <param name="orderId">If set, only orders with an order id higher than the provided will be returned</param>
+        /// <param name="startTime">If set, only orders placed after this time will be returned</param>
+        /// <param name="endTime">If set, only orders placed before this time will be returned</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of margin account orders</returns>
+        WebCallResult<BinanceOrder[]> GetAllMarginAccountOrders(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null);
+
+        /// <summary>
+        /// Gets all margin account orders for the provided symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to get orders for</param>
+        /// <param name="orderId">If set, only orders with an order id higher than the provided will be returned</param>
+        /// <param name="startTime">If set, only orders placed after this time will be returned</param>
+        /// <param name="endTime">If set, only orders placed before this time will be returned</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of margin account orders</returns>
+        Task<WebCallResult<BinanceOrder[]>> GetAllMarginAccountOrdersAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null);
+
+        /// <summary>
+        /// Gets all user margin account trades for provided symbol
+        /// </summary>
+        /// <param name="symbol">Symbol to get trades for</param>
+        /// <param name="limit">The max number of results</param>
+        /// <param name="startTime">Orders newer than this date will be retrieved</param>
+        /// <param name="endTime">Orders older than this date will be retrieved</param>
+        /// <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of margin account trades</returns>
+        WebCallResult<BinanceTrade[]> GetMyMarginAccountTrades(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? receiveWindow = null);
+
+        /// <summary>
+        /// Gets all user margin account trades for provided symbol
+        /// </summary>
+        /// <param name="symbol">Symbol to get trades for</param>
+        /// <param name="limit">The max number of results</param>
+        /// <param name="startTime">Orders newer than this date will be retrieved</param>
+        /// <param name="endTime">Orders older than this date will be retrieved</param>
+        /// <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of margin account trades</returns>
+        Task<WebCallResult<BinanceTrade[]>> GetMyMarginAccountTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? receiveWindow = null);
 
         /// <summary>
         /// Query max borrow amount
