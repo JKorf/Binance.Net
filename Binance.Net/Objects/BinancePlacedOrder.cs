@@ -78,6 +78,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// Stop price for the order
         /// </summary>
+        [JsonOptionalProperty]
         public decimal? StopPrice { get; set; }
         /// <summary>
         /// Id of the order list this order belongs to

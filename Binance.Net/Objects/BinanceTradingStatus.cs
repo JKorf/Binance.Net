@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CryptoExchange.Net.Attributes;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
@@ -9,6 +10,7 @@ namespace Binance.Net.Objects
     {
         public bool Success { get; set; }
         [JsonProperty("msg")]
+        [JsonOptionalProperty]
         public string Message { get; set; }
         public BinanceTradingStatus Status { get; set; }
     }
