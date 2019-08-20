@@ -745,7 +745,7 @@ namespace Binance.Net.UnitTests
                                 {
                                     Count = 1,
                                     CurrentValue = 0.5m,
-                                    Indicator = "UFR",
+                                    IndicatorType = IndicatorType.CancellationRatio,
                                     TriggerValue = 0.95m
                                 }
                             }
