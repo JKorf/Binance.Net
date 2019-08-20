@@ -140,6 +140,10 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 4.2.2 - 20 Aug 2019
+    * Added missing margin endpoints
+    * IndicatorType to enum
+
 * Version 4.2.1 - 19 Aug 2019
     * Added current average price endpoint
 
