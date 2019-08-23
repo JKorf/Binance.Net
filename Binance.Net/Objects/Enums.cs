@@ -137,7 +137,7 @@ namespace Binance.Net.Objects
         /// </summary>
         ImmediateOrCancel,
         /// <summary>
-        /// ImmediateOrCancel orders have to be entirely filled upon placing or will be automatically canceled
+        /// FillOrKill orders have to be entirely filled upon placing or will be automatically canceled
         /// </summary>
         FillOrKill
     }
