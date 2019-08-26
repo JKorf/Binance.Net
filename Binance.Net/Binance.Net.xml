@@ -5555,7 +5555,7 @@
         </member>
         <member name="F:Binance.Net.Objects.TimeInForce.FillOrKill">
             <summary>
-            ImmediateOrCancel orders have to be entirely filled upon placing or will be automatically canceled
+            FillOrKill orders have to be entirely filled upon placing or will be automatically canceled
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.ExecutionType">
