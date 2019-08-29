@@ -59,33 +59,37 @@ namespace Binance.Net.Interfaces
         /// Subscribes to the depth update stream for the provided symbol
         /// </summary>
         /// <param name="symbol">The symbol</param>
+        /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        CallResult<UpdateSubscription> SubscribeToDepthStream(string symbol, Action<BinanceOrderBook> onMessage);
+        CallResult<UpdateSubscription> SubscribeToDepthStream(string symbol, int? updateInterval, Action<BinanceOrderBook> onMessage);
 
         /// <summary>
         /// Subscribes to the depth update stream for the provided symbol
         /// </summary>
         /// <param name="symbol">The symbol</param>
+        /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToDepthStreamAsync(string symbol, Action<BinanceOrderBook> onMessage);
+        Task<CallResult<UpdateSubscription>> SubscribeToDepthStreamAsync(string symbol, int? updateInterval, Action<BinanceOrderBook> onMessage);
 
         /// <summary>
         /// Subscribes to the depth update stream for the provided symbols
         /// </summary>
         /// <param name="symbols">The symbols</param>
+        /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        CallResult<UpdateSubscription> SubscribeToDepthStream(string[] symbols, Action<BinanceOrderBook> onMessage);
+        CallResult<UpdateSubscription> SubscribeToDepthStream(string[] symbols, int? updateInterval, Action<BinanceOrderBook> onMessage);
 
         /// <summary>
         /// Subscribes to the depth update stream for the provided symbols
         /// </summary>
         /// <param name="symbols">The symbols</param>
+        /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToDepthStreamAsync(string[] symbols, Action<BinanceOrderBook> onMessage);
+        Task<CallResult<UpdateSubscription>> SubscribeToDepthStreamAsync(string[] symbols, int? updateInterval, Action<BinanceOrderBook> onMessage);
 
         /// <summary>
         /// Subscribes to the aggregated trades update stream for the provided symbol
@@ -186,36 +190,40 @@ namespace Binance.Net.Interfaces
         /// </summary>
         /// <param name="symbol">The symbol to subscribe on</param>
         /// <param name="levels">The amount of entries to be returned in the update</param>
+        /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        CallResult<UpdateSubscription> SubscribeToPartialBookDepthStream(string symbol, int levels, Action<BinanceOrderBook> onMessage);
+        CallResult<UpdateSubscription> SubscribeToPartialBookDepthStream(string symbol, int levels, int? updateInterval, Action<BinanceOrderBook> onMessage);
 
         /// <summary>
         /// Subscribes to the depth updates for the provided symbol
         /// </summary>
         /// <param name="symbol">The symbol to subscribe on</param>
         /// <param name="levels">The amount of entries to be returned in the update</param>
+        /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToPartialBookDepthStreamAsync(string symbol, int levels, Action<BinanceOrderBook> onMessage);
+        Task<CallResult<UpdateSubscription>> SubscribeToPartialBookDepthStreamAsync(string symbol, int levels, int? updateInterval, Action<BinanceOrderBook> onMessage);
 
         /// <summary>
         /// Subscribes to the depth updates for the provided symbols
         /// </summary>
         /// <param name="symbols">The symbols to subscribe on</param>
         /// <param name="levels">The amount of entries to be returned in the update of each symbol</param>
+        /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        CallResult<UpdateSubscription> SubscribeToPartialBookDepthStream(string[] symbols, int levels, Action<BinanceOrderBook> onMessage);
+        CallResult<UpdateSubscription> SubscribeToPartialBookDepthStream(string[] symbols, int levels, int? updateInterval, Action<BinanceOrderBook> onMessage);
 
         /// <summary>
         /// Subscribes to the depth updates for the provided symbols
         /// </summary>
         /// <param name="symbols">The symbols to subscribe on</param>
         /// <param name="levels">The amount of entries to be returned in the update of each symbol</param>
+        /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToPartialBookDepthStreamAsync(string[] symbols, int levels, Action<BinanceOrderBook> onMessage);
+        Task<CallResult<UpdateSubscription>> SubscribeToPartialBookDepthStreamAsync(string[] symbols, int levels, int? updateInterval, Action<BinanceOrderBook> onMessage);
 
         /// <summary>
         /// Subscribes to the account update stream. Prior to using this, the <see cref="BinanceClient.StartUserStream"/> method should be called.

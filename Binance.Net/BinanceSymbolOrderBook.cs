@@ -17,6 +17,7 @@ namespace Binance.Net
         private readonly BinanceClient restClient;
         private readonly BinanceSocketClient socketClient;
         private readonly int? limit;
+        private readonly int? updateInterval;
         private bool initialUpdateReceived;
 
         /// <summary>
@@ -27,6 +28,7 @@ namespace Binance.Net
         public BinanceSymbolOrderBook(string symbol, BinanceOrderBookOptions options = null) : base(symbol, options ?? new BinanceOrderBookOptions())
         {
             limit = options?.Limit;
+            updateInterval = options?.UpdateInterval;
             restClient = new BinanceClient();
             socketClient = new BinanceSocketClient();
         }
@@ -34,14 +36,11 @@ namespace Binance.Net
         /// <inheritdoc />
         protected override async Task<CallResult<UpdateSubscription>> DoStart()
         {
-            if (limit.HasValue && limit != 5 && limit != 10 && limit != 20)
-                return new CallResult<UpdateSubscription>(null, new ArgumentError("Limit should be one of the following: 5, 10, 20 or null for full order book"));
-
             CallResult<UpdateSubscription> subResult;
             if (limit == null)
-                subResult = await socketClient.SubscribeToDepthStreamAsync(Symbol, HandleUpdate).ConfigureAwait(false);
+                subResult = await socketClient.SubscribeToDepthStreamAsync(Symbol, updateInterval, HandleUpdate).ConfigureAwait(false);
             else
-                subResult = await socketClient.SubscribeToPartialBookDepthStreamAsync(Symbol, limit.Value, HandleUpdate).ConfigureAwait(false);
+                subResult = await socketClient.SubscribeToPartialBookDepthStreamAsync(Symbol, limit.Value, updateInterval, HandleUpdate).ConfigureAwait(false);
 
             if (!subResult.Success)
                 return new CallResult<UpdateSubscription>(null, subResult.Error);
