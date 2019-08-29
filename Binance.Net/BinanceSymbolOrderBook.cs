@@ -49,7 +49,7 @@ namespace Binance.Net
             Status = OrderBookStatus.Syncing;
             if (limit == null)
             {
-                var bookResult = await restClient.GetOrderBookAsync(Symbol, limit ?? 10000).ConfigureAwait(false);
+                var bookResult = await restClient.GetOrderBookAsync(Symbol, limit ?? 5000).ConfigureAwait(false);
                 if (!bookResult.Success)
                 {
                     await socketClient.UnsubscribeAll().ConfigureAwait(false);
@@ -100,7 +100,7 @@ namespace Binance.Net
                 return new CallResult<bool>(true, null);
             }
             
-            var bookResult = await restClient.GetOrderBookAsync(Symbol, limit ?? 10000).ConfigureAwait(false);
+            var bookResult = await restClient.GetOrderBookAsync(Symbol, limit ?? 5000).ConfigureAwait(false);
             if (!bookResult.Success)
                 return new CallResult<bool>(false, bookResult.Error);
 
