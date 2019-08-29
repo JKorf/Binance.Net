@@ -52,7 +52,7 @@ namespace Binance.Net
         /// Create a new instance of BinanceSocketClient using provided options
         /// </summary>
         /// <param name="options">The options to use for this client</param>
-        public BinanceSocketClient(BinanceSocketClientOptions options) : base(options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials))
+        public BinanceSocketClient(BinanceSocketClientOptions options) : base(options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials, ArrayParametersSerialization.MultipleValues))
         {
             Configure(options);
         }
@@ -75,7 +75,7 @@ namespace Binance.Net
         /// <param name="apiSecret">The api secret</param>
         public void SetApiCredentials(string apiKey, string apiSecret)
         {
-            SetAuthenticationProvider(new BinanceAuthenticationProvider(new ApiCredentials(apiKey, apiSecret)));
+            SetAuthenticationProvider(new BinanceAuthenticationProvider(new ApiCredentials(apiKey, apiSecret), ArrayParametersSerialization.MultipleValues));
         }
 
         /// <summary>

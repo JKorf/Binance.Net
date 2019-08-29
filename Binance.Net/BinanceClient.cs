@@ -125,7 +125,9 @@ namespace Binance.Net
         private const string AccountStatusEndpoint = "accountStatus.html";
         private const string SystemStatusEndpoint = "systemStatus.html";
         private const string DustLogEndpoint = "userAssetDribbletLog.html";
+        private const string DustTransferEndpoint = "asset/dust";
         private const string TradingStatusEndpoint = "apiTradingStatus.html";
+        private const string DividendRecordsEndpoint = "asset/assetDividend";
 
         // Sub accounts
         private const string SubAccountListEndpoint = "sub-account/list.html";
@@ -147,8 +149,9 @@ namespace Binance.Net
         /// Create a new instance of BinanceClient using provided options
         /// </summary>
         /// <param name="options">The options to use for this client</param>
-        public BinanceClient(BinanceClientOptions options) : base(options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials))
+        public BinanceClient(BinanceClientOptions options) : base(options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials, ArrayParametersSerialization.MultipleValues))
         {
+            arraySerialization = ArrayParametersSerialization.MultipleValues;
             Configure(options);
         }
         #endregion
@@ -171,7 +174,7 @@ namespace Binance.Net
         /// <param name="apiSecret">The api secret</param>
         public void SetApiCredentials(string apiKey, string apiSecret)
         {
-            SetAuthenticationProvider(new BinanceAuthenticationProvider(new ApiCredentials(apiKey, apiSecret)));
+            SetAuthenticationProvider(new BinanceAuthenticationProvider(new ApiCredentials(apiKey, apiSecret), ArrayParametersSerialization.MultipleValues));
         }
 
         /// <summary>
@@ -1245,6 +1248,72 @@ namespace Binance.Net
                 return new WebCallResult<BinanceDustLog[]>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
 
             return !result.Data.Success ? new WebCallResult<BinanceDustLog[]>(result.ResponseStatusCode, result.ResponseHeaders, null, new ServerError("Unknown server error while requesting dust log")) : new WebCallResult<BinanceDustLog[]>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Results.Rows, null);
+        }
+
+        /// <summary>
+        /// Converts dust (small amounts of) assets to BNB 
+        /// </summary>
+        /// <param name="assets">The assets to convert to BNB</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Dust transfer result</returns>
+        public WebCallResult<BinanceDustTransferResult> DustTransfer(string[] assets, int? receiveWindow = null) => DustTransferAsync(assets, receiveWindow).Result;
+
+        /// <summary>
+        /// Converts dust (small amounts of) assets to BNB 
+        /// </summary>
+        /// <param name="assets">The assets to convert to BNB</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Dust transfer result</returns>
+        public async Task<WebCallResult<BinanceDustTransferResult>> DustTransferAsync(string[] assets, int? receiveWindow = null)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<BinanceDustTransferResult>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "asset", assets },
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await ExecuteRequest<BinanceDustTransferResult>(GetUrl(DustTransferEndpoint, MarginApi, MarginVersion), PostMethod, parameters, true).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get asset dividend records
+        /// </summary>
+        /// <param name="asset">Filter by asset</param>
+        /// /// <param name="startTime">Filter by start time from</param>
+        /// <param name="endTime">Filter by end time till</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Dividend records</returns>
+        public WebCallResult<BinanceDividendRecords> GetAssetDividendRecords(string asset = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null) => GetAssetDividendRecordsAsync(asset, startTime, endTime, receiveWindow).Result;
+
+        /// <summary>
+        /// Get asset dividend records
+        /// </summary>
+        /// <param name="asset">Filter by asset</param>
+        /// /// <param name="startTime">Filter by start time from</param>
+        /// <param name="endTime">Filter by end time till</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Dividend records</returns>
+        public async Task<WebCallResult<BinanceDividendRecords>> GetAssetDividendRecordsAsync(string asset = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<BinanceDividendRecords>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("asset", asset);
+            parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await ExecuteRequest<BinanceDividendRecords>(GetUrl(DividendRecordsEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
         }
 
         /// <summary>

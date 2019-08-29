@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using CryptoExchange.Net.Objects;
 
 namespace Binance.Net.UnitTests
 {
@@ -867,7 +868,7 @@ namespace Binance.Net.UnitTests
         {
             // arrange
             // act
-            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
+            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"), ArrayParametersSerialization.MultipleValues);
 
             // assert
             Assert.AreEqual(authProvider.Credentials.Key.GetString(), "TestKey");
@@ -879,7 +880,7 @@ namespace Binance.Net.UnitTests
         public void AddingAuthToUriString_Should_GiveCorrectSignature(string parameters, string signature)
         {
             // arrange
-            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
+            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"), ArrayParametersSerialization.MultipleValues);
             string uri = $"https://test.test-api.com{parameters}";
 
             // act
@@ -893,7 +894,7 @@ namespace Binance.Net.UnitTests
         public void AddingAuthToRequest_Should_AddApiKeyHeader()
         {
             // arrange
-            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
+            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"), ArrayParametersSerialization.MultipleValues);
             var request = new Request(WebRequest.CreateHttp("https://test.test-api.com"));
 
             // act

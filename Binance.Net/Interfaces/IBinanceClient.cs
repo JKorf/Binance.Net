@@ -4,9 +4,8 @@ using System.Threading.Tasks;
 using Binance.Net.Objects;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.RateLimiter;
 
-namespace Binance.Net
+namespace Binance.Net.Interfaces
 {
     /// <summary>
     /// Interface for the binance client
@@ -622,6 +621,41 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>The history of dust conversions</returns>
         Task<WebCallResult<BinanceDustLog[]>> GetDustLogAsync(int? receiveWindow = null);
+
+        /// <summary>
+        /// Converts dust (small amounts of) assets to BNB 
+        /// </summary>
+        /// <param name="assets">The assets to convert to BNB</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Dust transfer result</returns>
+        WebCallResult<BinanceDustTransferResult> DustTransfer(string[] assets, int? receiveWindow = null);
+        /// <summary>
+        /// Converts dust (small amounts of) assets to BNB 
+        /// </summary>
+        /// <param name="assets">The assets to convert to BNB</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Dust transfer result</returns>
+        Task<WebCallResult<BinanceDustTransferResult>> DustTransferAsync(string[] assets, int? receiveWindow = null);
+
+        /// <summary>
+        /// Get asset dividend records
+        /// </summary>
+        /// <param name="asset">Filter by asset</param>
+        /// /// <param name="startTime">Filter by start time from</param>
+        /// <param name="endTime">Filter by end time till</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Dividend records</returns>
+        WebCallResult<BinanceDividendRecords> GetAssetDividendRecords(string asset = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null);
+
+        /// <summary>
+        /// Get asset dividend records
+        /// </summary>
+        /// <param name="asset">Filter by asset</param>
+        /// /// <param name="startTime">Filter by start time from</param>
+        /// <param name="endTime">Filter by end time till</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>Dividend records</returns>
+        Task<WebCallResult<BinanceDividendRecords>> GetAssetDividendRecordsAsync(string asset = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null);
 
         /// <summary>
         /// Gets a list of sub accounts associated with this master account
