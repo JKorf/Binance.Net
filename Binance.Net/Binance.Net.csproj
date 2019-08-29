@@ -20,7 +20,7 @@
     <DocumentationFile>Binance.Net.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CryptoExchange.Net" Version="2.1.7" />
+    <PackageReference Include="CryptoExchange.Net" Version="2.1.8" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
   </ItemGroup>
 </Project>
