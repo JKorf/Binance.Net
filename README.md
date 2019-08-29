@@ -140,6 +140,10 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 4.2.3 - 29 Aug 2019
+    * Added DustTransfer and GetDividendRecords endpoints
+    * Added updateInterval parameter to depth streams
+
 * Version 4.2.2 - 20 Aug 2019
     * Added missing margin endpoints
     * IndicatorType to enum
