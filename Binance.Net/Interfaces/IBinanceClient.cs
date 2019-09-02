@@ -883,6 +883,30 @@ namespace Binance.Net.Interfaces
         Task<WebCallResult<BinanceOrderList[]>> QueryOpenOCOOrdersAsync(long? receiveWindow = null);
 
         /// <summary>
+        /// Get all assets available for margin trading
+        /// </summary>
+        /// <returns>List of margin assets</returns>
+        WebCallResult<BinanceMarginAsset[]> GetMarginAssets();
+
+        /// <summary>
+        /// Get all assets available for margin trading
+        /// </summary>
+        /// <returns>List of margin assets</returns>
+        Task<WebCallResult<BinanceMarginAsset[]>> GetMarginAssetsAsync();
+
+        /// <summary>
+        /// Get all asset pairs available for margin trading
+        /// </summary>
+        /// <returns>List of margin pairs</returns>
+        WebCallResult<BinanceMarginPair[]> GetMarginPairs();
+
+        /// <summary>
+        /// Get all asset pairs available for margin trading
+        /// </summary>
+        /// <returns>List of margin pairs</returns>
+        Task<WebCallResult<BinanceMarginPair[]>> GetMarginPairsAsync();
+
+        /// <summary>
         /// Execute transfer between spot account and margin account.
         /// </summary>
         /// <param name="asset">The asset being transferred, e.g., BTC</param>
@@ -1195,6 +1219,78 @@ namespace Binance.Net.Interfaces
         /// </summary>
         /// <returns>Return max amount</returns>
         Task<WebCallResult<decimal>> GetMaxTransferAmountAsync(string asset, long? receiveWindow = null);
+
+        /// <summary>
+        /// Get history of transfers
+        /// </summary>
+        /// <param name="direction">The direction of the the transfers to retrieve</param>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="page">Results page</param>
+        /// <param name="startTime">Filter by startTime from</param>
+        /// <param name="endTime">Filter by endTime from</param>
+        /// <param name="limit">Limit of the amount of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of transfers</returns>
+        WebCallResult<BinanceTransferHistory> GetTransferHistory(TransferDirection direction, string asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null);
+
+        /// <summary>
+        /// Get history of transfers
+        /// </summary>
+        /// <param name="direction">The direction of the the transfers to retrieve</param>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="page">Results page</param>
+        /// <param name="startTime">Filter by startTime from</param>
+        /// <param name="endTime">Filter by endTime from</param>
+        /// <param name="limit">Limit of the amount of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of transfers</returns>
+        Task<WebCallResult<BinanceTransferHistory>> GetTransferHistoryAsync(TransferDirection direction, string asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null);
+
+        /// <summary>
+        /// Get history of interest
+        /// </summary>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="page">Results page</param>
+        /// <param name="startTime">Filter by startTime from</param>
+        /// <param name="endTime">Filter by endTime from</param>
+        /// <param name="limit">Limit of the amount of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of interest events</returns>
+        WebCallResult<BinanceInterestHistory> GetInterestHistory(string asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null);
+
+        /// <summary>
+        /// Get history of interest
+        /// </summary>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="page">Results page</param>
+        /// <param name="startTime">Filter by startTime from</param>
+        /// <param name="endTime">Filter by endTime from</param>
+        /// <param name="limit">Limit of the amount of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of interest events</returns>
+        Task<WebCallResult<BinanceInterestHistory>> GetInterestHistoryAsync(string asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null);
+
+        /// <summary>
+        /// Get history of forced liquidations
+        /// </summary>
+        /// <param name="page">Results page</param>
+        /// <param name="startTime">Filter by startTime from</param>
+        /// <param name="endTime">Filter by endTime from</param>
+        /// <param name="limit">Limit of the amount of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of forced liquidations</returns>
+        WebCallResult<BinanceForcedLiquidationHistory> GetForceLiquidationHistory(int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null);
+
+        /// <summary>
+        /// Get history of forced liquidations
+        /// </summary>
+        /// <param name="page">Results page</param>
+        /// <param name="startTime">Filter by startTime from</param>
+        /// <param name="endTime">Filter by endTime from</param>
+        /// <param name="limit">Limit of the amount of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of forced liquidations</returns>
+        Task<WebCallResult<BinanceForcedLiquidationHistory>> GetForceLiquidationHistoryAsync(int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null);
 
         /// <summary>
         /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToUserStream"/>. The stream will close after 60 minutes unless a keep alive is send.

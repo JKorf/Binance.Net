@@ -829,6 +829,30 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>Open order lists</returns>
         </member>
+        <member name="M:Binance.Net.BinanceClient.GetMarginAssets">
+            <summary>
+            Get all assets available for margin trading
+            </summary>
+            <returns>List of margin assets</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceClient.GetMarginAssetsAsync">
+            <summary>
+            Get all assets available for margin trading
+            </summary>
+            <returns>List of margin assets</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceClient.GetMarginPairs">
+            <summary>
+            Get all asset pairs available for margin trading
+            </summary>
+            <returns>List of margin pairs</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceClient.GetMarginPairsAsync">
+            <summary>
+            Get all asset pairs available for margin trading
+            </summary>
+            <returns>List of margin pairs</returns>
+        </member>
         <member name="M:Binance.Net.BinanceClient.Transfer(System.String,System.Decimal,Binance.Net.Objects.TransferDirectionType,System.Nullable{System.Int32})">
             <summary>
             Execute transfer between spot account and margin account.
@@ -1122,6 +1146,78 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             </summary>
             <returns>Return max amount</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceClient.GetTransferHistory(Binance.Net.Objects.TransferDirection,System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+            <summary>
+            Get history of transfers
+            </summary>
+            <param name="direction">The direction of the the transfers to retrieve</param>
+            <param name="asset">Filter by asset</param>
+            <param name="page">Results page</param>
+            <param name="startTime">Filter by startTime from</param>
+            <param name="endTime">Filter by endTime from</param>
+            <param name="limit">Limit of the amount of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>List of transfers</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceClient.GetTransferHistoryAsync(Binance.Net.Objects.TransferDirection,System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+            <summary>
+            Get history of transfers
+            </summary>
+            <param name="direction">The direction of the the transfers to retrieve</param>
+            <param name="asset">Filter by asset</param>
+            <param name="page">Results page</param>
+            <param name="startTime">Filter by startTime from</param>
+            <param name="endTime">Filter by endTime from</param>
+            <param name="limit">Limit of the amount of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>List of transfers</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceClient.GetInterestHistory(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+            <summary>
+            Get history of interest
+            </summary>
+            <param name="asset">Filter by asset</param>
+            <param name="page">Results page</param>
+            <param name="startTime">Filter by startTime from</param>
+            <param name="endTime">Filter by endTime from</param>
+            <param name="limit">Limit of the amount of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>List of interest events</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceClient.GetInterestHistoryAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+            <summary>
+            Get history of interest
+            </summary>
+            <param name="asset">Filter by asset</param>
+            <param name="page">Results page</param>
+            <param name="startTime">Filter by startTime from</param>
+            <param name="endTime">Filter by endTime from</param>
+            <param name="limit">Limit of the amount of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>List of interest events</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceClient.GetForceLiquidationHistory(System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+            <summary>
+            Get history of forced liquidations
+            </summary>
+            <param name="page">Results page</param>
+            <param name="startTime">Filter by startTime from</param>
+            <param name="endTime">Filter by endTime from</param>
+            <param name="limit">Limit of the amount of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>List of forced liquidations</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceClient.GetForceLiquidationHistoryAsync(System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+            <summary>
+            Get history of forced liquidations
+            </summary>
+            <param name="page">Results page</param>
+            <param name="startTime">Filter by startTime from</param>
+            <param name="endTime">Filter by endTime from</param>
+            <param name="limit">Limit of the amount of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>List of forced liquidations</returns>
         </member>
         <member name="M:Binance.Net.BinanceClient.StartUserStream">
             <summary>
@@ -3731,6 +3827,121 @@
             Filters
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceForcedLiquidationHistory">
+            <summary>
+            Forced liquidation info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceForcedLiquidationHistory.Total">
+            <summary>
+            Total results
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceForcedLiquidationHistory.Data">
+            <summary>
+            Results this page
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceForcedLiquidationEntry">
+            <summary>
+            Forced liquidation info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceForcedLiquidationEntry.AveragePrice">
+            <summary>
+            Average price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceForcedLiquidationEntry.ExecutedQuantity">
+            <summary>
+            The executed quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceForcedLiquidationEntry.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceForcedLiquidationEntry.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceForcedLiquidationEntry.Quantity">
+            <summary>
+            Total quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceForcedLiquidationEntry.Side">
+            <summary>
+            Side
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceForcedLiquidationEntry.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceForcedLiquidationEntry.TimeInForce">
+            <summary>
+            Time in force
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceForcedLiquidationEntry.UpdateTime">
+            <summary>
+            Last update time
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceInterestHistory">
+            <summary>
+            Interest history
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceInterestHistory.Total">
+            <summary>
+            Total number or rows
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceInterestHistory.Data">
+            <summary>
+            Results for this page
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceInterestHistoryResultEntry">
+            <summary>
+            Interest history entry info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceInterestHistoryResultEntry.Asset">
+            <summary>
+            The asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceInterestHistoryResultEntry.InterestAmount">
+            <summary>
+            The amount of interest
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceInterestHistoryResultEntry.InterestAccuredTime">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceInterestHistoryResultEntry.InterestRate">
+            <summary>
+            Interest rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceInterestHistoryResultEntry.Principal">
+            <summary>
+            Principal
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceInterestHistoryResultEntry.Type">
+            <summary>
+            Type of interest
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.BinanceKline">
             <summary>
             Candlestick information for symbol
@@ -3889,6 +4100,81 @@
         <member name="P:Binance.Net.Objects.BinanceMarginAmount.Amount">
             <summary>
             The amount
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceMarginAsset">
+            <summary>
+            Margin asset info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceMarginAsset.FullName">
+            <summary>
+            Full name of the asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceMarginAsset.Name">
+            <summary>
+            Short name of the asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceMarginAsset.IsBorrowable">
+            <summary>
+            Is borrowable
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceMarginAsset.IsMortgageable">
+            <summary>
+            Is mortgageable
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceMarginAsset.MinimalBorrowAmount">
+            <summary>
+            Minimal amount which can be borrowed
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceMarginAsset.MinimalRepayAmount">
+            <summary>
+            Minimal amount which can be repaid
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceMarginPair">
+            <summary>
+            Margin pair info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceMarginPair.BaseAsset">
+            <summary>
+            Base asset of the pair
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceMarginPair.QuoteAsset">
+            <summary>
+            Quote asset of the pair
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceMarginPair.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceMarginPair.IsBuyAllowed">
+            <summary>
+            Is buying allowed
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceMarginPair.IsSellAllowed">
+            <summary>
+            Is selling allowed
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceMarginPair.IsMarginTrade">
+            <summary>
+            Is margin trading
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceMarginPair.Symbol">
+            <summary>
+            Symbol name
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinanceMarginTransaction">
@@ -5487,6 +5773,56 @@
             Trigger value
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceTransferHistory">
+            <summary>
+            Transfer history
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceTransferHistory.Total">
+            <summary>
+            Total results
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceTransferHistory.Data">
+            <summary>
+            Results for this page
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceTransferHistoryEntry">
+            <summary>
+            Transfer history entry
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceTransferHistoryEntry.Amount">
+            <summary>
+            Amount of the transfer
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceTransferHistoryEntry.Asset">
+            <summary>
+            Asset of the transfer
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceTransferHistoryEntry.Status">
+            <summary>
+            Status of the transfer
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceTransferHistoryEntry.Timestamp">
+            <summary>
+            Timestamp of the transaction
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceTransferHistoryEntry.TransactionId">
+            <summary>
+            Transaction id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceTransferHistoryEntry.Direction">
+            <summary>
+            Direction of the transfer
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.BinanceAssetDetails">
             <summary>
             Asset details
@@ -6164,7 +6500,7 @@
         </member>
         <member name="T:Binance.Net.Objects.MarginStatus">
             <summary>
-            Status of a margin actuon
+            Status of a margin action
             </summary>
         </member>
         <member name="F:Binance.Net.Objects.MarginStatus.Pending">
@@ -6245,6 +6581,21 @@
         <member name="F:Binance.Net.Objects.IndicatorType.CancellationRatio">
             <summary>
             Cancelled orders ratio
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.TransferDirection">
+            <summary>
+            Direction of a transfer
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.TransferDirection.RollIn">
+            <summary>
+            Roll-in
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.TransferDirection.RollOut">
+            <summary>
+            Roll-out
             </summary>
         </member>
     </members>

@@ -94,6 +94,8 @@ namespace Binance.Net
         private const string AccountInfoEndpoint = "account";
         
         // Margin
+        private const string MarginAssetsEndpoint = "margin/allAssets";
+        private const string MarginPairsEndpoint = "margin/allPairs";
         private const string MarginTransferEndpoint = "margin/transfer";
         private const string MarginBorrowEndpoint = "margin/loan";
         private const string MarginRepayEndpoint = "margin/repay";
@@ -105,6 +107,9 @@ namespace Binance.Net
         private const string MaxBorrowableEndpoint = "margin/maxBorrowable";
         private const string MaxTransferableEndpoint = "margin/maxTransferable";
         private const string MyMarginTradesEndpoint = "margin/myTrades";
+        private const string TransferHistoryEndpoint = "margin/transfer";
+        private const string InterestHistoryEndpoint = "margin/interestHistory";
+        private const string ForceLiquidationHistoryEndpoint = "margin/forceLiquidationRec";
         private const string AllMarginOrdersEndpoint = "margin/allOrders";
         private const string OpenMarginOrdersEndpoint = "margin/openOrders";
         private const string QueryMarginOrderEndpoint = "margin/order";
@@ -1731,6 +1736,35 @@ namespace Binance.Net
         #endregion
 
         #region margin
+
+        /// <summary>
+        /// Get all assets available for margin trading
+        /// </summary>
+        /// <returns>List of margin assets</returns>
+        public WebCallResult<BinanceMarginAsset[]> GetMarginAssets() => GetMarginAssetsAsync().Result;
+        /// <summary>
+        /// Get all assets available for margin trading
+        /// </summary>
+        /// <returns>List of margin assets</returns>
+        public async Task<WebCallResult<BinanceMarginAsset[]>> GetMarginAssetsAsync()
+        {
+            return await ExecuteRequest<BinanceMarginAsset[]>(GetUrl(MarginAssetsEndpoint, MarginApi, MarginVersion), GetMethod, null, false).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get all asset pairs available for margin trading
+        /// </summary>
+        /// <returns>List of margin pairs</returns>
+        public WebCallResult<BinanceMarginPair[]> GetMarginPairs() => GetMarginPairsAsync().Result;
+        /// <summary>
+        /// Get all asset pairs available for margin trading
+        /// </summary>
+        /// <returns>List of margin pairs</returns>
+        public async Task<WebCallResult<BinanceMarginPair[]>> GetMarginPairsAsync()
+        {
+            return await ExecuteRequest<BinanceMarginPair[]>(GetUrl(MarginPairsEndpoint, MarginApi, MarginVersion), GetMethod, null, false).ConfigureAwait(false);
+        }
+
         /// <summary>
         /// Execute transfer between spot account and margin account.
         /// </summary>
@@ -2331,6 +2365,129 @@ namespace Binance.Net
                 return new WebCallResult<decimal>(result.ResponseStatusCode, result.ResponseHeaders, 0, result.Error);
 
             return new WebCallResult<decimal>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Amount, null);
+        }
+
+
+        /// <summary>
+        /// Get history of transfers
+        /// </summary>
+        /// <param name="direction">The direction of the the transfers to retrieve</param>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="page">Results page</param>
+        /// <param name="startTime">Filter by startTime from</param>
+        /// <param name="endTime">Filter by endTime from</param>
+        /// <param name="limit">Limit of the amount of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of transfers</returns>
+        public WebCallResult<BinanceTransferHistory> GetTransferHistory(TransferDirection direction, string asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null) => GetTransferHistoryAsync(direction, asset, page, startTime, endTime, limit, receiveWindow).Result;
+        /// <summary>
+        /// Get history of transfers
+        /// </summary>
+        /// <param name="direction">The direction of the the transfers to retrieve</param>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="page">Results page</param>
+        /// <param name="startTime">Filter by startTime from</param>
+        /// <param name="endTime">Filter by endTime from</param>
+        /// <param name="limit">Limit of the amount of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of transfers</returns>
+        public async Task<WebCallResult<BinanceTransferHistory>> GetTransferHistoryAsync(TransferDirection direction, string asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<BinanceTransferHistory>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "direction", JsonConvert.SerializeObject(direction, new TransferDirectionConverter(false)) },
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("size", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("startTime", startTime.HasValue ? JsonConvert.SerializeObject(startTime.Value, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await ExecuteRequest<BinanceTransferHistory>(GetUrl(TransferHistoryEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get history of interest
+        /// </summary>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="page">Results page</param>
+        /// <param name="startTime">Filter by startTime from</param>
+        /// <param name="endTime">Filter by endTime from</param>
+        /// <param name="limit">Limit of the amount of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of interest events</returns>
+        public WebCallResult<BinanceInterestHistory> GetInterestHistory(string asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null) => GetInterestHistoryAsync(asset, page, startTime, endTime, limit, receiveWindow).Result;
+        /// <summary>
+        /// Get history of interest
+        /// </summary>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="page">Results page</param>
+        /// <param name="startTime">Filter by startTime from</param>
+        /// <param name="endTime">Filter by endTime from</param>
+        /// <param name="limit">Limit of the amount of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of interest events</returns>
+        public async Task<WebCallResult<BinanceInterestHistory>> GetInterestHistoryAsync(string asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<BinanceInterestHistory>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "asset", asset },
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("size", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("startTime", startTime.HasValue ? JsonConvert.SerializeObject(startTime.Value, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await ExecuteRequest<BinanceInterestHistory>(GetUrl(InterestHistoryEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get history of forced liquidations
+        /// </summary>
+        /// <param name="page">Results page</param>
+        /// <param name="startTime">Filter by startTime from</param>
+        /// <param name="endTime">Filter by endTime from</param>
+        /// <param name="limit">Limit of the amount of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of forced liquidations</returns>
+        public WebCallResult<BinanceForcedLiquidationHistory> GetForceLiquidationHistory(int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null) => GetForceLiquidationHistoryAsync(page, startTime, endTime, limit, receiveWindow).Result;
+        /// <summary>
+        /// Get history of forced liquidations
+        /// </summary>
+        /// <param name="page">Results page</param>
+        /// <param name="startTime">Filter by startTime from</param>
+        /// <param name="endTime">Filter by endTime from</param>
+        /// <param name="limit">Limit of the amount of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <returns>List of forced liquidations</returns>
+        public async Task<WebCallResult<BinanceForcedLiquidationHistory>> GetForceLiquidationHistoryAsync(int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null)
+        {
+            var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
+            if (!timestampResult.Success)
+                return new WebCallResult<BinanceForcedLiquidationHistory>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("size", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("startTime", startTime.HasValue ? JsonConvert.SerializeObject(startTime.Value, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await ExecuteRequest<BinanceForcedLiquidationHistory>(GetUrl(ForceLiquidationHistoryEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
         }
         #endregion
 

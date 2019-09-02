@@ -510,7 +510,7 @@ namespace Binance.Net.Objects
     }
 
     /// <summary>
-    /// Status of a margin actuon
+    /// Status of a margin action
     /// </summary>
     public enum MarginStatus
     {
@@ -588,5 +588,20 @@ namespace Binance.Net.Objects
         /// Cancelled orders ratio
         /// </summary>
         CancellationRatio
+    }
+
+    /// <summary>
+    /// Direction of a transfer
+    /// </summary>
+    public enum TransferDirection
+    {
+        /// <summary>
+        /// Roll-in
+        /// </summary>
+        RollIn,
+        /// <summary>
+        /// Roll-out
+        /// </summary>
+        RollOut
     }
 }
