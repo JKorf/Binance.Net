@@ -689,7 +689,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.QueryOrder("BNBBTC", orderId: 1);
+            var result = client.GetOrder("BNBBTC", orderId: 1);
 
             // assert
             Assert.IsTrue(result.Success);

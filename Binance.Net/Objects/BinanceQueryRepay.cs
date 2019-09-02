@@ -8,7 +8,7 @@ namespace Binance.Net.Objects
     /// <summary>
     /// Repay info
     /// </summary>
-    public class BinanceQueryRepay
+    public class BinanceRepay
     {
         /// <summary>
         /// The asset of the repay

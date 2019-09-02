@@ -8,7 +8,7 @@ namespace Binance.Net.Objects
     /// <summary>
     /// Loan info
     /// </summary>
-    public class BinanceQueryLoan
+    public class BinanceLoan
     {
         /// <summary>
         /// The asset of the loan

@@ -5,25 +5,9 @@ using Newtonsoft.Json;
 namespace Binance.Net.Objects
 {
     /// <summary>
-    /// Interest history
-    /// </summary>
-    public class BinanceInterestHistory
-    {
-        /// <summary>
-        /// Total number or rows
-        /// </summary>
-        public int Total { get; set; }
-        /// <summary>
-        /// Results for this page
-        /// </summary>
-        [JsonProperty("rows")]
-        public BinanceInterestHistoryResultEntry[] Data { get; set; }
-    }
-
-    /// <summary>
     /// Interest history entry info
     /// </summary>
-    public class BinanceInterestHistoryResultEntry
+    public class BinanceInterestHistory
     {
         /// <summary>
         /// The asset

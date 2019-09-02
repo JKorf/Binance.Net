@@ -799,7 +799,7 @@ namespace Binance.Net
         /// <param name="origClientOrderId">The client order id of the order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>The specific order</returns>
-        public WebCallResult<BinanceOrder> QueryOrder(string symbol, long? orderId = null, string origClientOrderId = null, long? receiveWindow = null) => QueryOrderAsync(symbol, orderId, origClientOrderId, receiveWindow).Result;
+        public WebCallResult<BinanceOrder> GetOrder(string symbol, long? orderId = null, string origClientOrderId = null, long? receiveWindow = null) => GetOrderAsync(symbol, orderId, origClientOrderId, receiveWindow).Result;
 
         /// <summary>
         /// Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
@@ -809,7 +809,7 @@ namespace Binance.Net
         /// <param name="origClientOrderId">The client order id of the order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>The specific order</returns>
-        public async Task<WebCallResult<BinanceOrder>> QueryOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, long? receiveWindow = null)
+        public async Task<WebCallResult<BinanceOrder>> GetOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, long? receiveWindow = null)
         {
             if (orderId == null && origClientOrderId == null)
                 return new WebCallResult<BinanceOrder>(null, null, null, new ArgumentError("Either orderId or origClientOrderId should be provided"));
@@ -1636,7 +1636,7 @@ namespace Binance.Net
         /// <param name="listClientOrderId">The client order id of the list order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>The specific order list</returns>
-        public WebCallResult<BinanceOrderList> QueryOCOOrder(long? orderListId = null, string listClientOrderId = null, long? receiveWindow = null) => QueryOCOOrderAsync(orderListId, listClientOrderId, receiveWindow).Result;
+        public WebCallResult<BinanceOrderList> GetOCOOrder(long? orderListId = null, string listClientOrderId = null, long? receiveWindow = null) => GetOCOOrderAsync(orderListId, listClientOrderId, receiveWindow).Result;
 
         /// <summary>
         /// Retrieves data for a specific oco order. Either orderListId or listClientOrderId should be provided.
@@ -1645,7 +1645,7 @@ namespace Binance.Net
         /// <param name="listClientOrderId">The client order id of the list order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>The specific order list</returns>
-        public async Task<WebCallResult<BinanceOrderList>> QueryOCOOrderAsync(long? orderListId = null, string listClientOrderId = null, long? receiveWindow = null)
+        public async Task<WebCallResult<BinanceOrderList>> GetOCOOrderAsync(long? orderListId = null, string listClientOrderId = null, long? receiveWindow = null)
         {
             if (orderListId == null && listClientOrderId == null)
                 return new WebCallResult<BinanceOrderList>(null, null, null, new ArgumentError("Either orderListId or listClientOrderId should be provided"));
@@ -1674,7 +1674,7 @@ namespace Binance.Net
         /// <param name="limit">Max number of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Order lists matching the parameters</returns>
-        public WebCallResult<BinanceOrderList[]> QueryOCOOrders(long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null) => QueryOCOOrdersAsync(fromId, startTime, endTime, limit, receiveWindow).Result;
+        public WebCallResult<BinanceOrderList[]> GetOCOOrders(long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null) => GetOCOOrdersAsync(fromId, startTime, endTime, limit, receiveWindow).Result;
 
         /// <summary>
         /// Retrieves a list of oco orders matching the parameters
@@ -1685,7 +1685,7 @@ namespace Binance.Net
         /// <param name="limit">Max number of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Order lists matching the parameters</returns>
-        public async Task<WebCallResult<BinanceOrderList[]>> QueryOCOOrdersAsync(long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null)
+        public async Task<WebCallResult<BinanceOrderList[]>> GetOCOOrdersAsync(long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null)
         {
             if (fromId != null && (startTime != null || endTime != null))
                 return new WebCallResult<BinanceOrderList[]>(null, null, null, new ArgumentError("Start/end time can only be provided without fromId parameter"));
@@ -1712,14 +1712,14 @@ namespace Binance.Net
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Open order lists</returns>
-        public WebCallResult<BinanceOrderList[]> QueryOpenOCOOrders(long? receiveWindow = null) => QueryOpenOCOOrdersAsync( receiveWindow).Result;
+        public WebCallResult<BinanceOrderList[]> GetOpenOCOOrders(long? receiveWindow = null) => GetOpenOCOOrdersAsync( receiveWindow).Result;
 
         /// <summary>
         /// Retrieves a list of open oco orders
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Open order lists</returns>
-        public async Task<WebCallResult<BinanceOrderList[]>> QueryOpenOCOOrdersAsync(long? receiveWindow = null)
+        public async Task<WebCallResult<BinanceOrderList[]>> GetOpenOCOOrdersAsync(long? receiveWindow = null)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
@@ -1997,7 +1997,7 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Query loan records
+        /// Get loan records
         /// </summary>
         /// <param name="asset">The records asset</param>
         /// <param name="transactionId">The id of loan transaction</param>
@@ -2007,7 +2007,7 @@ namespace Binance.Net
         /// <param name="size">The records count size need show</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Loan records</returns>
-        public WebCallResult<BinanceQueryLoan[]> QueryLoan(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null) => QueryLoanAsync(asset, transactionId, startTime, endTime, current, size, receiveWindow).Result;
+        public WebCallResult<BinanceQueryRecords<BinanceLoan>> GetLoans(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null) => GetLoansAsync(asset, transactionId, startTime, endTime, current, size, receiveWindow).Result;
 
         /// <summary>
         /// Query loan records
@@ -2020,11 +2020,11 @@ namespace Binance.Net
         /// <param name="size">The records count size need show</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Loan records</returns>
-        public async Task<WebCallResult<BinanceQueryLoan[]>> QueryLoanAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null)
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceLoan>>> GetLoansAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<BinanceQueryLoan[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<BinanceQueryRecords<BinanceLoan>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -2048,15 +2048,11 @@ namespace Binance.Net
             parameters.AddOptionalParameter("size", size?.ToString());
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await ExecuteRequest<BinanceQueryRecords<BinanceQueryLoan>>(GetUrl(GetLoanEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
-            if (!result.Success)
-                return new WebCallResult<BinanceQueryLoan[]>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
-
-            return new WebCallResult<BinanceQueryLoan[]>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Rows, null);
+            return await ExecuteRequest<BinanceQueryRecords<BinanceLoan>>(GetUrl(GetLoanEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Query repay record
+        /// Query repay records
         /// </summary>
         /// <param name="asset">The records asset</param>
         /// <param name="transactionId">The id of repay transaction</param>
@@ -2066,10 +2062,10 @@ namespace Binance.Net
         /// <param name="size">The records count size need show</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Repay records</returns>
-        public WebCallResult<BinanceQueryRepay[]> QueryRepay(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, long? receiveWindow = null) => QueryRepayAsync(asset, transactionId, startTime, endTime, current, size, receiveWindow).Result;
+        public WebCallResult<BinanceQueryRecords<BinanceRepay>> GetRepays(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, long? receiveWindow = null) => GetRepaysAsync(asset, transactionId, startTime, endTime, current, size, receiveWindow).Result;
 
         /// <summary>
-        /// Query repay record
+        /// Query repay records
         /// </summary>
         /// <param name="asset">The records asset</param>
         /// <param name="transactionId">The id of repay transaction</param>
@@ -2079,11 +2075,11 @@ namespace Binance.Net
         /// <param name="size">The records count size need show</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>Repay records</returns>
-        public async Task<WebCallResult<BinanceQueryRepay[]>> QueryRepayAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, long? receiveWindow = null)
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceRepay>>> GetRepaysAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, long? receiveWindow = null)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<BinanceQueryRepay[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<BinanceQueryRecords<BinanceRepay>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -2107,11 +2103,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("size", size?.ToString());
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await ExecuteRequest<BinanceQueryRecords<BinanceQueryRepay>>(GetUrl(GetRepayEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
-            if (!result.Success)
-                return new WebCallResult<BinanceQueryRepay[]>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
-
-            return new WebCallResult<BinanceQueryRepay[]>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Rows, null);
+            return await ExecuteRequest<BinanceQueryRecords<BinanceRepay>>(GetUrl(GetRepayEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -2149,7 +2141,7 @@ namespace Binance.Net
         /// <param name="origClientOrderId">The client order id of the order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>The specific margin account order</returns>
-        public WebCallResult<BinanceOrder> QueryMarginAccountOrder(string symbol, long? orderId = null, string origClientOrderId = null, long? receiveWindow = null) => QueryMarginAccountOrderAsync(symbol, orderId, origClientOrderId, receiveWindow).Result;
+        public WebCallResult<BinanceOrder> GetMarginAccountOrder(string symbol, long? orderId = null, string origClientOrderId = null, long? receiveWindow = null) => GetMarginAccountOrderAsync(symbol, orderId, origClientOrderId, receiveWindow).Result;
 
         /// <summary>
         /// Retrieves data for a specific margin account order. Either orderId or origClientOrderId should be provided.
@@ -2159,7 +2151,7 @@ namespace Binance.Net
         /// <param name="origClientOrderId">The client order id of the order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>The specific margin account order</returns>
-        public async Task<WebCallResult<BinanceOrder>> QueryMarginAccountOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, long? receiveWindow = null)
+        public async Task<WebCallResult<BinanceOrder>> GetMarginAccountOrderAsync(string symbol, long? orderId = null, string origClientOrderId = null, long? receiveWindow = null)
         {
             if (orderId == null && origClientOrderId == null)
                 return new WebCallResult<BinanceOrder>(null, null, null, new ArgumentError("Either orderId or origClientOrderId should be provided"));
@@ -2379,7 +2371,7 @@ namespace Binance.Net
         /// <param name="limit">Limit of the amount of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of transfers</returns>
-        public WebCallResult<BinanceTransferHistory> GetTransferHistory(TransferDirection direction, string asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null) => GetTransferHistoryAsync(direction, asset, page, startTime, endTime, limit, receiveWindow).Result;
+        public WebCallResult<BinanceQueryRecords<BinanceTransferHistory>> GetTransferHistory(TransferDirection direction, string asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null) => GetTransferHistoryAsync(direction, asset, page, startTime, endTime, limit, receiveWindow).Result;
         /// <summary>
         /// Get history of transfers
         /// </summary>
@@ -2391,11 +2383,11 @@ namespace Binance.Net
         /// <param name="limit">Limit of the amount of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of transfers</returns>
-        public async Task<WebCallResult<BinanceTransferHistory>> GetTransferHistoryAsync(TransferDirection direction, string asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null)
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceTransferHistory>>> GetTransferHistoryAsync(TransferDirection direction, string asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<BinanceTransferHistory>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<BinanceQueryRecords<BinanceTransferHistory>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -2408,7 +2400,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await ExecuteRequest<BinanceTransferHistory>(GetUrl(TransferHistoryEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
+            return await ExecuteRequest<BinanceQueryRecords<BinanceTransferHistory>>(GetUrl(TransferHistoryEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -2421,7 +2413,7 @@ namespace Binance.Net
         /// <param name="limit">Limit of the amount of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of interest events</returns>
-        public WebCallResult<BinanceInterestHistory> GetInterestHistory(string asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null) => GetInterestHistoryAsync(asset, page, startTime, endTime, limit, receiveWindow).Result;
+        public WebCallResult<BinanceQueryRecords<BinanceInterestHistory>> GetInterestHistory(string asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null) => GetInterestHistoryAsync(asset, page, startTime, endTime, limit, receiveWindow).Result;
         /// <summary>
         /// Get history of interest
         /// </summary>
@@ -2432,11 +2424,11 @@ namespace Binance.Net
         /// <param name="limit">Limit of the amount of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of interest events</returns>
-        public async Task<WebCallResult<BinanceInterestHistory>> GetInterestHistoryAsync(string asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null)
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceInterestHistory>>> GetInterestHistoryAsync(string asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<BinanceInterestHistory>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<BinanceQueryRecords<BinanceInterestHistory>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -2449,7 +2441,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await ExecuteRequest<BinanceInterestHistory>(GetUrl(InterestHistoryEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
+            return await ExecuteRequest<BinanceQueryRecords<BinanceInterestHistory>>(GetUrl(InterestHistoryEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -2461,7 +2453,7 @@ namespace Binance.Net
         /// <param name="limit">Limit of the amount of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of forced liquidations</returns>
-        public WebCallResult<BinanceForcedLiquidationHistory> GetForceLiquidationHistory(int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null) => GetForceLiquidationHistoryAsync(page, startTime, endTime, limit, receiveWindow).Result;
+        public WebCallResult<BinanceQueryRecords<BinanceForcedLiquidation>> GetForceLiquidationHistory(int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null) => GetForceLiquidationHistoryAsync(page, startTime, endTime, limit, receiveWindow).Result;
         /// <summary>
         /// Get history of forced liquidations
         /// </summary>
@@ -2471,11 +2463,11 @@ namespace Binance.Net
         /// <param name="limit">Limit of the amount of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <returns>List of forced liquidations</returns>
-        public async Task<WebCallResult<BinanceForcedLiquidationHistory>> GetForceLiquidationHistoryAsync(int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null)
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceForcedLiquidation>>> GetForceLiquidationHistoryAsync(int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null)
         {
             var timestampResult = await CheckAutoTimestamp().ConfigureAwait(false);
             if (!timestampResult.Success)
-                return new WebCallResult<BinanceForcedLiquidationHistory>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<BinanceQueryRecords<BinanceForcedLiquidation>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -2487,7 +2479,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await ExecuteRequest<BinanceForcedLiquidationHistory>(GetUrl(ForceLiquidationHistoryEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
+            return await ExecuteRequest<BinanceQueryRecords<BinanceForcedLiquidation>>(GetUrl(ForceLiquidationHistoryEndpoint, MarginApi, MarginVersion), GetMethod, parameters, true).ConfigureAwait(false);
         }
         #endregion
 

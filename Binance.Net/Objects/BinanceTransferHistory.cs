@@ -1,32 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Binance.Net.Converters;
+﻿using Binance.Net.Converters;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects
 {
     /// <summary>
-    /// Transfer history
-    /// </summary>
-    public class BinanceTransferHistory
-    {
-        /// <summary>
-        /// Total results
-        /// </summary>
-        public int Total { get; set; }
-        /// <summary>
-        /// Results for this page
-        /// </summary>
-        [JsonProperty("rows")]
-        public BinanceTransferHistoryEntry[] Data { get; set; }
-    }
-
-    /// <summary>
     /// Transfer history entry
     /// </summary>
-    public class BinanceTransferHistoryEntry
+    public class BinanceTransferHistory
     {
         /// <summary>
         /// Amount of the transfer

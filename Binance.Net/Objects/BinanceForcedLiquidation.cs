@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Binance.Net.Converters;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
@@ -10,22 +8,7 @@ namespace Binance.Net.Objects
     /// <summary>
     /// Forced liquidation info
     /// </summary>
-    public class BinanceForcedLiquidationHistory
-    {
-        /// <summary>
-        /// Total results
-        /// </summary>
-        public int Total { get; set; }
-        /// <summary>
-        /// Results this page
-        /// </summary>
-        public BinanceForcedLiquidationEntry[] Data { get; set; }
-    }
-
-    /// <summary>
-    /// Forced liquidation info
-    /// </summary>
-    public class BinanceForcedLiquidationEntry
+    public class BinanceForcedLiquidation
     {
         /// <summary>
         /// Average price

@@ -361,7 +361,7 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>Id's for the placed test order</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.QueryOrder(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
+        <member name="M:Binance.Net.BinanceClient.GetOrder(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
             <summary>
             Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
             </summary>
@@ -371,7 +371,7 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>The specific order</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.QueryOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
+        <member name="M:Binance.Net.BinanceClient.GetOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
             <summary>
             Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
             </summary>
@@ -775,7 +775,7 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>Id's for canceled order</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.QueryOCOOrder(System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
+        <member name="M:Binance.Net.BinanceClient.GetOCOOrder(System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
             <summary>
             Retrieves data for a specific oco order. Either listClientOrderId or listClientOrderId should be provided.
             </summary>
@@ -784,7 +784,7 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>The specific order list</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.QueryOCOOrderAsync(System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
+        <member name="M:Binance.Net.BinanceClient.GetOCOOrderAsync(System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
             <summary>
             Retrieves data for a specific oco order. Either orderListId or listClientOrderId should be provided.
             </summary>
@@ -793,7 +793,7 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>The specific order list</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.QueryOCOOrders(System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+        <member name="M:Binance.Net.BinanceClient.GetOCOOrders(System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64})">
             <summary>
             Retrieves a list of oco orders matching the parameters
             </summary>
@@ -804,7 +804,7 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>Order lists matching the parameters</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.QueryOCOOrdersAsync(System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+        <member name="M:Binance.Net.BinanceClient.GetOCOOrdersAsync(System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64})">
             <summary>
             Retrieves a list of oco orders matching the parameters
             </summary>
@@ -815,14 +815,14 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>Order lists matching the parameters</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.QueryOpenOCOOrders(System.Nullable{System.Int64})">
+        <member name="M:Binance.Net.BinanceClient.GetOpenOCOOrders(System.Nullable{System.Int64})">
             <summary>
             Retrieves a list of open oco orders
             </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>Open order lists</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.QueryOpenOCOOrdersAsync(System.Nullable{System.Int64})">
+        <member name="M:Binance.Net.BinanceClient.GetOpenOCOOrdersAsync(System.Nullable{System.Int64})">
             <summary>
             Retrieves a list of open oco orders
             </summary>
@@ -965,7 +965,20 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>Id's for canceled order</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.QueryLoan(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+        <member name="M:Binance.Net.BinanceClient.GetLoans(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+            <summary>
+            Get loan records
+            </summary>
+            <param name="asset">The records asset</param>
+            <param name="transactionId">The id of loan transaction</param>
+            <param name="startTime">Time to start getting records from</param>
+            <param name="endTime">Time to stop getting records to</param>
+            <param name="current">Number of page records</param>
+            <param name="size">The records count size need show</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>Loan records</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceClient.GetLoansAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64})">
             <summary>
             Query loan records
             </summary>
@@ -978,22 +991,9 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>Loan records</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.QueryLoanAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+        <member name="M:Binance.Net.BinanceClient.GetRepays(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64})">
             <summary>
-            Query loan records
-            </summary>
-            <param name="asset">The records asset</param>
-            <param name="transactionId">The id of loan transaction</param>
-            <param name="startTime">Time to start getting records from</param>
-            <param name="endTime">Time to stop getting records to</param>
-            <param name="current">Number of page records</param>
-            <param name="size">The records count size need show</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <returns>Loan records</returns>
-        </member>
-        <member name="M:Binance.Net.BinanceClient.QueryRepay(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64})">
-            <summary>
-            Query repay record
+            Query repay records
             </summary>
             <param name="asset">The records asset</param>
             <param name="transactionId">The id of repay transaction</param>
@@ -1004,9 +1004,9 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>Repay records</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.QueryRepayAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+        <member name="M:Binance.Net.BinanceClient.GetRepaysAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64})">
             <summary>
-            Query repay record
+            Query repay records
             </summary>
             <param name="asset">The records asset</param>
             <param name="transactionId">The id of repay transaction</param>
@@ -1031,7 +1031,7 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>The margin account information</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.QueryMarginAccountOrder(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
+        <member name="M:Binance.Net.BinanceClient.GetMarginAccountOrder(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
             <summary>
             Retrieves data for a specific margin account order. Either orderId or origClientOrderId should be provided.
             </summary>
@@ -1041,7 +1041,7 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>The specific margin account order</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.QueryMarginAccountOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
+        <member name="M:Binance.Net.BinanceClient.GetMarginAccountOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
             <summary>
             Retrieves data for a specific margin account order. Either orderId or origClientOrderId should be provided.
             </summary>
@@ -1981,7 +1981,7 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>Id's for the placed test order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryOrder(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetOrder(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
             <summary>
             Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
             </summary>
@@ -1991,7 +1991,7 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>The specific order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
             <summary>
             Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
             </summary>
@@ -2395,7 +2395,7 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>Id's for canceled order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryOCOOrder(System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetOCOOrder(System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
             <summary>
             Retrieves data for a specific oco order. Either listClientOrderId or listClientOrderId should be provided.
             </summary>
@@ -2404,7 +2404,7 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>The specific order list</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryOCOOrderAsync(System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetOCOOrderAsync(System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
             <summary>
             Retrieves data for a specific oco order. Either orderListId or listClientOrderId should be provided.
             </summary>
@@ -2413,7 +2413,7 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>The specific order list</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryOCOOrders(System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetOCOOrders(System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64})">
             <summary>
             Retrieves a list of oco orders matching the parameters
             </summary>
@@ -2424,7 +2424,7 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>Order lists matching the parameters</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryOCOOrdersAsync(System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetOCOOrdersAsync(System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64})">
             <summary>
             Retrieves a list of oco orders matching the parameters
             </summary>
@@ -2435,19 +2435,43 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>Order lists matching the parameters</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryOpenOCOOrders(System.Nullable{System.Int64})">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetOpenOCOOrders(System.Nullable{System.Int64})">
             <summary>
             Retrieves a list of open oco orders
             </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>Open order lists</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryOpenOCOOrdersAsync(System.Nullable{System.Int64})">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetOpenOCOOrdersAsync(System.Nullable{System.Int64})">
             <summary>
             Retrieves a list of open oco orders
             </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>Open order lists</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetMarginAssets">
+            <summary>
+            Get all assets available for margin trading
+            </summary>
+            <returns>List of margin assets</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetMarginAssetsAsync">
+            <summary>
+            Get all assets available for margin trading
+            </summary>
+            <returns>List of margin assets</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetMarginPairs">
+            <summary>
+            Get all asset pairs available for margin trading
+            </summary>
+            <returns>List of margin pairs</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetMarginPairsAsync">
+            <summary>
+            Get all asset pairs available for margin trading
+            </summary>
+            <returns>List of margin pairs</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceClient.Transfer(System.String,System.Decimal,Binance.Net.Objects.TransferDirectionType,System.Nullable{System.Int32})">
             <summary>
@@ -2561,7 +2585,20 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>Id's for canceled order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryLoan(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetLoans(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+            <summary>
+            Get loan records
+            </summary>
+            <param name="asset">The records asset</param>
+            <param name="transactionId">The id of loan transaction</param>
+            <param name="startTime">Time to start getting records from</param>
+            <param name="endTime">Time to stop getting records to</param>
+            <param name="current">Number of page records</param>
+            <param name="size">The records count size need show</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>Loan records</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetLoansAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64})">
             <summary>
             Query loan records
             </summary>
@@ -2574,22 +2611,9 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>Loan records</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryLoanAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetRepays(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64})">
             <summary>
-            Query loan records
-            </summary>
-            <param name="asset">The records asset</param>
-            <param name="transactionId">The id of loan transaction</param>
-            <param name="startTime">Time to start getting records from</param>
-            <param name="endTime">Time to stop getting records to</param>
-            <param name="current">Number of page records</param>
-            <param name="size">The records count size need show</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <returns>Loan records</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryRepay(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64})">
-            <summary>
-            Query repay record
+            Query repay records
             </summary>
             <param name="asset">The records asset</param>
             <param name="transactionId">The id of repay transaction</param>
@@ -2600,9 +2624,9 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>Repay records</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryRepayAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetRepaysAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64})">
             <summary>
-            Query repay record
+            Query repay records
             </summary>
             <param name="asset">The records asset</param>
             <param name="transactionId">The id of repay transaction</param>
@@ -2627,7 +2651,7 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>The margin account information</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryMarginAccountOrder(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetMarginAccountOrder(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
             <summary>
             Retrieves data for a specific margin account order. Either orderId or origClientOrderId should be provided.
             </summary>
@@ -2637,7 +2661,7 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <returns>The specific margin account order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.QueryMarginAccountOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetMarginAccountOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
             <summary>
             Retrieves data for a specific margin account order. Either orderId or origClientOrderId should be provided.
             </summary>
@@ -2742,6 +2766,78 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             </summary>
             <returns>Return max amount</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetTransferHistory(Binance.Net.Objects.TransferDirection,System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+            <summary>
+            Get history of transfers
+            </summary>
+            <param name="direction">The direction of the the transfers to retrieve</param>
+            <param name="asset">Filter by asset</param>
+            <param name="page">Results page</param>
+            <param name="startTime">Filter by startTime from</param>
+            <param name="endTime">Filter by endTime from</param>
+            <param name="limit">Limit of the amount of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>List of transfers</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetTransferHistoryAsync(Binance.Net.Objects.TransferDirection,System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+            <summary>
+            Get history of transfers
+            </summary>
+            <param name="direction">The direction of the the transfers to retrieve</param>
+            <param name="asset">Filter by asset</param>
+            <param name="page">Results page</param>
+            <param name="startTime">Filter by startTime from</param>
+            <param name="endTime">Filter by endTime from</param>
+            <param name="limit">Limit of the amount of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>List of transfers</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetInterestHistory(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+            <summary>
+            Get history of interest
+            </summary>
+            <param name="asset">Filter by asset</param>
+            <param name="page">Results page</param>
+            <param name="startTime">Filter by startTime from</param>
+            <param name="endTime">Filter by endTime from</param>
+            <param name="limit">Limit of the amount of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>List of interest events</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetInterestHistoryAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+            <summary>
+            Get history of interest
+            </summary>
+            <param name="asset">Filter by asset</param>
+            <param name="page">Results page</param>
+            <param name="startTime">Filter by startTime from</param>
+            <param name="endTime">Filter by endTime from</param>
+            <param name="limit">Limit of the amount of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>List of interest events</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetForceLiquidationHistory(System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+            <summary>
+            Get history of forced liquidations
+            </summary>
+            <param name="page">Results page</param>
+            <param name="startTime">Filter by startTime from</param>
+            <param name="endTime">Filter by endTime from</param>
+            <param name="limit">Limit of the amount of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>List of forced liquidations</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetForceLiquidationHistoryAsync(System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64})">
+            <summary>
+            Get history of forced liquidations
+            </summary>
+            <param name="page">Results page</param>
+            <param name="startTime">Filter by startTime from</param>
+            <param name="endTime">Filter by endTime from</param>
+            <param name="limit">Limit of the amount of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <returns>List of forced liquidations</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceClient.StartUserStream">
             <summary>
@@ -3827,117 +3923,87 @@
             Filters
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.BinanceForcedLiquidationHistory">
+        <member name="T:Binance.Net.Objects.BinanceForcedLiquidation">
             <summary>
             Forced liquidation info
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceForcedLiquidationHistory.Total">
-            <summary>
-            Total results
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceForcedLiquidationHistory.Data">
-            <summary>
-            Results this page
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceForcedLiquidationEntry">
-            <summary>
-            Forced liquidation info
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceForcedLiquidationEntry.AveragePrice">
+        <member name="P:Binance.Net.Objects.BinanceForcedLiquidation.AveragePrice">
             <summary>
             Average price
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceForcedLiquidationEntry.ExecutedQuantity">
+        <member name="P:Binance.Net.Objects.BinanceForcedLiquidation.ExecutedQuantity">
             <summary>
             The executed quantity
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceForcedLiquidationEntry.OrderId">
+        <member name="P:Binance.Net.Objects.BinanceForcedLiquidation.OrderId">
             <summary>
             Order id
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceForcedLiquidationEntry.Price">
+        <member name="P:Binance.Net.Objects.BinanceForcedLiquidation.Price">
             <summary>
             Price
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceForcedLiquidationEntry.Quantity">
+        <member name="P:Binance.Net.Objects.BinanceForcedLiquidation.Quantity">
             <summary>
             Total quantity
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceForcedLiquidationEntry.Side">
+        <member name="P:Binance.Net.Objects.BinanceForcedLiquidation.Side">
             <summary>
             Side
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceForcedLiquidationEntry.Symbol">
+        <member name="P:Binance.Net.Objects.BinanceForcedLiquidation.Symbol">
             <summary>
             Symbol
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceForcedLiquidationEntry.TimeInForce">
+        <member name="P:Binance.Net.Objects.BinanceForcedLiquidation.TimeInForce">
             <summary>
             Time in force
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceForcedLiquidationEntry.UpdateTime">
+        <member name="P:Binance.Net.Objects.BinanceForcedLiquidation.UpdateTime">
             <summary>
             Last update time
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinanceInterestHistory">
             <summary>
-            Interest history
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceInterestHistory.Total">
-            <summary>
-            Total number or rows
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceInterestHistory.Data">
-            <summary>
-            Results for this page
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceInterestHistoryResultEntry">
-            <summary>
             Interest history entry info
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceInterestHistoryResultEntry.Asset">
+        <member name="P:Binance.Net.Objects.BinanceInterestHistory.Asset">
             <summary>
             The asset
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceInterestHistoryResultEntry.InterestAmount">
+        <member name="P:Binance.Net.Objects.BinanceInterestHistory.InterestAmount">
             <summary>
             The amount of interest
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceInterestHistoryResultEntry.InterestAccuredTime">
+        <member name="P:Binance.Net.Objects.BinanceInterestHistory.InterestAccuredTime">
             <summary>
             Timestamp
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceInterestHistoryResultEntry.InterestRate">
+        <member name="P:Binance.Net.Objects.BinanceInterestHistory.InterestRate">
             <summary>
             Interest rate
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceInterestHistoryResultEntry.Principal">
+        <member name="P:Binance.Net.Objects.BinanceInterestHistory.Principal">
             <summary>
             Principal
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceInterestHistoryResultEntry.Type">
+        <member name="P:Binance.Net.Objects.BinanceInterestHistory.Type">
             <summary>
             Type of interest
             </summary>
@@ -4532,30 +4598,36 @@
             The price of the symbol
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.BinanceQueryLoan">
+        <member name="T:Binance.Net.Objects.BinanceLoan">
             <summary>
             Loan info
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceQueryLoan.Asset">
+        <member name="P:Binance.Net.Objects.BinanceLoan.Asset">
             <summary>
             The asset of the loan
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceQueryLoan.Principal">
+        <member name="P:Binance.Net.Objects.BinanceLoan.Principal">
             <summary>
             Principal repaid 
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceQueryLoan.Time">
+        <member name="P:Binance.Net.Objects.BinanceLoan.Time">
             <summary>
             Time of repay completed
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceQueryLoan.Status">
+        <member name="P:Binance.Net.Objects.BinanceLoan.Status">
             <summary>
             The status of the loan
             </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceQueryRecords`1">
+            <summary>
+            Query results
+            </summary>
+            <typeparam name="T"></typeparam>
         </member>
         <member name="P:Binance.Net.Objects.BinanceQueryRecords`1.Rows">
             <summary>
@@ -4567,37 +4639,37 @@
             The total count of the records
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.BinanceQueryRepay">
+        <member name="T:Binance.Net.Objects.BinanceRepay">
             <summary>
             Repay info
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceQueryRepay.Asset">
+        <member name="P:Binance.Net.Objects.BinanceRepay.Asset">
             <summary>
             The asset of the repay
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceQueryRepay.TransactionId">
+        <member name="P:Binance.Net.Objects.BinanceRepay.TransactionId">
             <summary>
             The transaction id of the repay
             </summary>`
         </member>
-        <member name="P:Binance.Net.Objects.BinanceQueryRepay.Amount">
+        <member name="P:Binance.Net.Objects.BinanceRepay.Amount">
             <summary>
             Total amount repaid
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceQueryRepay.Principal">
+        <member name="P:Binance.Net.Objects.BinanceRepay.Principal">
             <summary>
             Principal repaid
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceQueryRepay.Time">
+        <member name="P:Binance.Net.Objects.BinanceRepay.Time">
             <summary>
             Time of repay completed
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceQueryRepay.Status">
+        <member name="P:Binance.Net.Objects.BinanceRepay.Status">
             <summary>
             The status of the repay
             </summary>
@@ -5775,50 +5847,35 @@
         </member>
         <member name="T:Binance.Net.Objects.BinanceTransferHistory">
             <summary>
-            Transfer history
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceTransferHistory.Total">
-            <summary>
-            Total results
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceTransferHistory.Data">
-            <summary>
-            Results for this page
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceTransferHistoryEntry">
-            <summary>
             Transfer history entry
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceTransferHistoryEntry.Amount">
+        <member name="P:Binance.Net.Objects.BinanceTransferHistory.Amount">
             <summary>
             Amount of the transfer
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceTransferHistoryEntry.Asset">
+        <member name="P:Binance.Net.Objects.BinanceTransferHistory.Asset">
             <summary>
             Asset of the transfer
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceTransferHistoryEntry.Status">
+        <member name="P:Binance.Net.Objects.BinanceTransferHistory.Status">
             <summary>
             Status of the transfer
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceTransferHistoryEntry.Timestamp">
+        <member name="P:Binance.Net.Objects.BinanceTransferHistory.Timestamp">
             <summary>
             Timestamp of the transaction
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceTransferHistoryEntry.TransactionId">
+        <member name="P:Binance.Net.Objects.BinanceTransferHistory.TransactionId">
             <summary>
             Transaction id
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceTransferHistoryEntry.Direction">
+        <member name="P:Binance.Net.Objects.BinanceTransferHistory.Direction">
             <summary>
             Direction of the transfer
             </summary>
