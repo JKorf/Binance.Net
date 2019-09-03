@@ -92,6 +92,38 @@ namespace Binance.Net.Interfaces
         Task<CallResult<UpdateSubscription>> SubscribeToDepthStreamAsync(string[] symbols, int? updateInterval, Action<BinanceOrderBook> onMessage);
 
         /// <summary>
+        /// Subscribes to the book ticker update stream for the provided symbol
+        /// </summary>
+        /// <param name="symbol">The symbol</param>
+        /// <param name="onMessage">The event handler for the received data</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        CallResult<UpdateSubscription> SubscribeToBookTickerStream(string symbol, Action<BinanceBookTick> onMessage);
+
+        /// <summary>
+        /// Subscribes to the book ticker update stream for the provided symbol
+        /// </summary>
+        /// <param name="symbol">The symbol</param>
+        /// <param name="onMessage">The event handler for the received data</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToBookTickerStreamAsync(string symbol, Action<BinanceBookTick> onMessage);
+
+        /// <summary>
+        /// Subscribes to the book ticker update stream for the provided symbols
+        /// </summary>
+        /// <param name="symbols">The symbols</param>
+        /// <param name="onMessage">The event handler for the received data</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        CallResult<UpdateSubscription> SubscribeToBookTickerStream(string[] symbols, Action<BinanceBookTick> onMessage);
+
+        /// <summary>
+        /// Subscribes to the book ticker update stream for the provided symbols
+        /// </summary>
+        /// <param name="symbols">The symbols</param>
+        /// <param name="onMessage">The event handler for the received data</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToBookTickerStreamAsync(string[] symbols, Action<BinanceBookTick> onMessage);
+
+        /// <summary>
         /// Subscribes to the aggregated trades update stream for the provided symbol
         /// </summary>
         /// <param name="symbol">The symbol</param>
