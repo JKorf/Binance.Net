@@ -6054,9 +6054,19 @@
             The address the asset was withdrawn to
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.BinanceWithdrawal.AddressTag">
+            <summary>
+            Tag for the address
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceWithdrawal.TransactionId">
             <summary>
             The transaction id of the withdrawal
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceWithdrawal.TransactionFee">
+            <summary>
+            Transaction fee for the withdrawal
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BinanceWithdrawal.Asset">

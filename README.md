@@ -144,6 +144,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 4.3.2 - 25 Sep 2019
+    * Added missing AddressTag and TransactionFee properties in withdrawal object
+
 * Version 4.3.1 - 03 Sep 2019
     * Added book ticker stream to socket client
 

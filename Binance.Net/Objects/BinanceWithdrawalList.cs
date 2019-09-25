@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using CryptoExchange.Net.Attributes;
 using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects
@@ -24,6 +25,7 @@ namespace Binance.Net.Objects
         /// Message what went wrong if retrieving wasn't successful
         /// </summary>
         [JsonProperty("msg")]
+        [JsonOptionalProperty]
         public string Message { get; set; }
     }
 
@@ -50,10 +52,18 @@ namespace Binance.Net.Objects
         /// </summary>
         public string Address { get; set; }
         /// <summary>
+        /// Tag for the address
+        /// </summary>
+        public string AddressTag { get; set; }
+        /// <summary>
         /// The transaction id of the withdrawal
         /// </summary>
         [JsonProperty("txId")]
         public string TransactionId { get; set; }
+        /// <summary>
+        /// Transaction fee for the withdrawal
+        /// </summary>
+        public decimal TransactionFee { get; set; }
         /// <summary>
         /// The asset that was withdrawn
         /// </summary>
