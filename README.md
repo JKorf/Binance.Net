@@ -144,6 +144,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 4.3.3 - 06 Oct 2019
+    * Added serialization method for BinanceSymbolFilter
+
 * Version 4.3.2 - 25 Sep 2019
     * Added missing AddressTag and TransactionFee properties in withdrawal object
 
