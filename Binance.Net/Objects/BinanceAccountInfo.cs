@@ -47,11 +47,11 @@ namespace Binance.Net.Objects
         /// The type of account
         /// </summary>
         // TODO make enum when api docs are updated
-        public string AccountType { get; set; }
+        public string AccountType { get; set; } = "";
         /// <summary>
         /// List of assets with their current balances
         /// </summary>
-        public List<BinanceBalance> Balances { get; set; }
+        public IEnumerable<BinanceBalance> Balances { get; set; } = new List<BinanceBalance>();
     }
 
     /// <summary>
@@ -75,5 +75,10 @@ namespace Binance.Net.Objects
         /// The total balance of this asset (Free + Locked)
         /// </summary>
         public decimal Total => Free + Locked;
+
+        private BinanceBalance()
+        {
+            Asset = "";
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
@@ -12,7 +13,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// Records
         /// </summary>
-        public BinanceDividendRecord[] Rows { get; set; }
+        public IEnumerable<BinanceDividendRecord> Rows { get; set; } = new List<BinanceDividendRecord>();
         /// <summary>
         /// Total records
         /// </summary>
@@ -31,7 +32,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// Asset
         /// </summary>
-        public string Asset { get; set; }
+        public string Asset { get; set; } = "";
         /// <summary>
         /// Timestamp of the transaction
         /// </summary>
@@ -41,11 +42,11 @@ namespace Binance.Net.Objects
         /// Transaction id
         /// </summary>
         [JsonProperty("tranId")]
-        public string TransactionId { get; set; }
+        public string TransactionId { get; set; } = "";
         /// <summary>
         /// Info
         /// </summary>
         [JsonProperty("enInfo")]
-        public string Info { get; set; }
+        public string? Info { get; set; }
     }
 }

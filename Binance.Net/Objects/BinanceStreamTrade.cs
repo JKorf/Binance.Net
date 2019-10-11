@@ -13,7 +13,7 @@ namespace Binance.Net.Objects
         /// The symbol the trade was for
         /// </summary>
         [JsonProperty("s")]
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = "";
         /// <summary>
         /// The id of this aggregated trade
         /// </summary>

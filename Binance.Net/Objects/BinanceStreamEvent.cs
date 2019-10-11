@@ -13,7 +13,7 @@ namespace Binance.Net.Objects
         /// The type of the event
         /// </summary>
         [JsonProperty("e")]
-        public string Event { get; set; }
+        public string Event { get; set; } = "";
         /// <summary>
         /// The time the event happened
         /// </summary>

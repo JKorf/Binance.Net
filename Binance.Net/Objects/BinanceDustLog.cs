@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects
@@ -6,13 +7,13 @@ namespace Binance.Net.Objects
     internal class BinanceDustLogListWrapper
     {
         public bool Success { get; set; }
-        public BinanceDustLogList Results { get; set; }
+        public BinanceDustLogList? Results { get; set; }
     }
 
     internal class BinanceDustLogList
     {
         public int Total { get; set; }
-        public BinanceDustLog[] Rows { get; set; }
+        public IEnumerable<BinanceDustLog> Rows { get; set; } = new List<BinanceDustLog>();
     }
 
     /// <summary>
@@ -39,7 +40,7 @@ namespace Binance.Net.Objects
         /// Detail logs
         /// </summary>
         [JsonProperty("logs")]
-        public BinanceDustLogDetails[] Logs { get; set; }
+        public IEnumerable<BinanceDustLogDetails> Logs { get; set; } = new List<BinanceDustLogDetails>();
         /// <summary>
         /// Timestamp
         /// </summary>
@@ -86,6 +87,6 @@ namespace Binance.Net.Objects
         /// Asset
         /// </summary>
         [JsonProperty("fromAsset")]
-        public string FromAsset { get; set; }
+        public string FromAsset { get; set; } = "";
     }
 }

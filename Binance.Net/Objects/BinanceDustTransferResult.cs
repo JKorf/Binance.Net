@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
@@ -22,7 +23,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// Transfer entries
         /// </summary>
-        public BinanceDustTransferResultEntry[] TransferResult { get; set; }
+        public IEnumerable<BinanceDustTransferResultEntry> TransferResult { get; set; } = new List<BinanceDustTransferResultEntry>();
     }
 
     /// <summary>
@@ -37,7 +38,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// Asset
         /// </summary>
-        public string FromAsset { get; set; }
+        public string FromAsset { get; set; } = "";
         /// <summary>
         /// Timestamp of conversion
         /// </summary>

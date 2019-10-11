@@ -14,9 +14,13 @@ namespace Binance.Net
         /// </summary>
         /// <param name="headers"></param>
         /// <returns></returns>
-        public static int? UsedWeight(this IEnumerable<Tuple<string, string>>  headers)
+        public static int? UsedWeight(this IEnumerable<KeyValuePair<string, IEnumerable<string>>>? headers)
         {
-            if (int.TryParse(headers?.SingleOrDefault(s => s.Item1 == "X-MBX-USED-WEIGHT")?.Item2, out var value))
+            if (headers == null)
+                return null;
+
+            var headerValues = headers.SingleOrDefault(s => s.Key == "X-MBX-USED-WEIGHT").Value;
+            if (int.TryParse(headerValues.First(), out var value))
                 return value;
             return null;
         }

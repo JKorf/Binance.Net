@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Binance.Net.Converters;
 using CryptoExchange.Net.Attributes;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
@@ -12,8 +11,8 @@ namespace Binance.Net.Objects
         public bool Success { get; set; }
         [JsonProperty("msg")]
         [JsonOptionalProperty]
-        public string Message { get; set; }
-        public BinanceTradingStatus Status { get; set; }
+        public string? Message { get; set; }
+        public BinanceTradingStatus? Status { get; set; }
     }
 
     /// <summary>
@@ -34,12 +33,12 @@ namespace Binance.Net.Objects
         /// Conditions
         /// </summary>
         [JsonProperty("triggerCondition")]
-        public Dictionary<string, int> TriggerConditions { get; set; }
+        public Dictionary<string, int> TriggerConditions { get; set; } = new Dictionary<string, int>();
 
         /// <summary>
         /// Dictionary of indicator lists for symbols
         /// </summary>
-        public Dictionary<string, List<BinanceIndicator>> Indicators { get; set; }
+        public Dictionary<string, List<BinanceIndicator>> Indicators { get; set; } = new Dictionary<string, List<BinanceIndicator>>();
         /// <summary>
         /// Last update time
         /// </summary>

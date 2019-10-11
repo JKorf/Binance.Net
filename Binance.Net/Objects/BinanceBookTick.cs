@@ -16,7 +16,7 @@ namespace Binance.Net.Objects
         /// The symbol
         /// </summary>
         [JsonProperty("s")]
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = "";
         /// <summary>
         /// Price of the best bid
         /// </summary>

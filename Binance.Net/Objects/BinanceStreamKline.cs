@@ -20,6 +20,12 @@ namespace Binance.Net.Objects
         /// </summary>
         [JsonProperty("k")]
         public BinanceStreamKline Data { get; set; }
+
+        private BinanceStreamKlineData()
+        {
+            Symbol = "";
+            Data = new BinanceStreamKline();
+        }
     }
 
     /// <summary>
@@ -41,7 +47,7 @@ namespace Binance.Net.Objects
         /// The symbol this candlestick is for
         /// </summary>
         [JsonProperty("s")]
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = "";
         /// <summary>
         /// The interval of this candlestick
         /// </summary>

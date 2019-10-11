@@ -23,7 +23,7 @@ namespace Binance.Net
         private static BinanceSocketClientOptions defaultOptions = new BinanceSocketClientOptions();
         private static BinanceSocketClientOptions DefaultOptions => defaultOptions.Copy();
 
-        private string baseCombinedAddress;
+        private readonly string baseCombinedAddress;
 
         private const string DepthStreamEndpoint = "@depth";
         private const string BookTickerStreamEndpoint = "@bookTicker";
@@ -55,7 +55,7 @@ namespace Binance.Net
         /// <param name="options">The options to use for this client</param>
         public BinanceSocketClient(BinanceSocketClientOptions options) : base(options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials, ArrayParametersSerialization.MultipleValues))
         {
-            Configure(options);
+            baseCombinedAddress = options.BaseSocketCombinedAddress;
         }
         #endregion 
 
@@ -422,7 +422,7 @@ namespace Binance.Net
                     {
                         log.Write(LogVerbosity.Debug, data);
                         var result = Deserialize<BinanceStreamOrderUpdate>(token, false);
-                        if (result.Success)
+                        if (result)
                             onOrderUpdateMessage?.Invoke(result.Data);
                         else
                             log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from order stream: " + result.Error);
@@ -432,7 +432,7 @@ namespace Binance.Net
                     {
                         log.Write(LogVerbosity.Debug, data);
                         var result = Deserialize<BinanceStreamOrderList>(token, false);
-                        if (result.Success)
+                        if (result)
                             onOcoOrderUpdateMessage?.Invoke(result.Data);
                         else
                             log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from oco order stream: " + result.Error);
@@ -442,7 +442,7 @@ namespace Binance.Net
                     {
                         log.Write(LogVerbosity.Debug, data);
                         var result = Deserialize<BinanceStreamBalance[]>(token["B"], false);
-                        if (result.Success)
+                        if (result)
                             onAccountPositionMessage?.Invoke(result.Data);
                         else
                             log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account position stream: " + result.Error);
@@ -465,11 +465,6 @@ namespace Binance.Net
                 url = BaseAddress + url;
 
             return await Subscribe(url, null, url + NextId(), false, onData).ConfigureAwait(false);
-        }
-
-        private void Configure(BinanceSocketClientOptions options)
-        {
-            baseCombinedAddress = options.BaseSocketCombinedAddress;
         }
 
         /// <inheritdoc />

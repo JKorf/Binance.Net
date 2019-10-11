@@ -15,10 +15,10 @@ namespace Binance.Net.Objects
         /// Message describing what went wrong if not successful
         /// </summary>
         [JsonProperty("msg")]
-        public string Message { get; set; }
+        public string? Message { get; set; }
         /// <summary>
         /// The id
         /// </summary>
-        public string Id { get; set; }
+        public string? Id { get; set; }
     }
 }

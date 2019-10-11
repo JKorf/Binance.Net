@@ -54,7 +54,7 @@ namespace Binance.Net.Objects
         /// List of assets with their current balances
         /// </summary>
         [JsonProperty("B")]
-        public List<BinanceStreamBalance> Balances { get; set; }
+        public IEnumerable<BinanceStreamBalance> Balances { get; set; } = new List<BinanceStreamBalance>();
     }
 
     /// <summary>
@@ -66,7 +66,7 @@ namespace Binance.Net.Objects
         /// The asset this balance is for
         /// </summary>
         [JsonProperty("a")]
-        public string Asset { get; set; }
+        public string Asset { get; set; } = "";
         /// <summary>
         /// The amount that isn't locked in a trade
         /// </summary>

@@ -12,7 +12,7 @@ namespace Binance.Net
     /// Implementation for a synchronized order book. After calling Start the order book will sync itself and keep up to date with new data. It will automatically try to reconnect and resync in case of a lost/interrupted connection.
     /// Make sure to check the State property to see if the order book is synced.
     /// </summary>
-    public class BinanceSymbolOrderBook: SymbolOrderBook
+    public class BinanceSymbolOrderBook : SymbolOrderBook
     {
         private readonly BinanceClient restClient;
         private readonly BinanceSocketClient socketClient;
@@ -25,7 +25,7 @@ namespace Binance.Net
         /// </summary>
         /// <param name="symbol">The symbol of the order book</param>
         /// <param name="options">The options for the order book</param>
-        public BinanceSymbolOrderBook(string symbol, BinanceOrderBookOptions options = null) : base(symbol, options ?? new BinanceOrderBookOptions())
+        public BinanceSymbolOrderBook(string symbol, BinanceOrderBookOptions? options = null) : base(symbol, options ?? new BinanceOrderBookOptions())
         {
             limit = options?.Limit;
             updateInterval = options?.UpdateInterval;
@@ -42,14 +42,14 @@ namespace Binance.Net
             else
                 subResult = await socketClient.SubscribeToPartialBookDepthStreamAsync(Symbol, limit.Value, updateInterval, HandleUpdate).ConfigureAwait(false);
 
-            if (!subResult.Success)
+            if (!subResult)
                 return new CallResult<UpdateSubscription>(null, subResult.Error);
 
             Status = OrderBookStatus.Syncing;
             if (limit == null)
             {
                 var bookResult = await restClient.GetOrderBookAsync(Symbol, limit ?? 5000).ConfigureAwait(false);
-                if (!bookResult.Success)
+                if (!bookResult)
                 {
                     await socketClient.UnsubscribeAll().ConfigureAwait(false);
                     return new CallResult<UpdateSubscription>(null, bookResult.Error);
@@ -98,9 +98,9 @@ namespace Binance.Net
 
                 return new CallResult<bool>(true, null);
             }
-            
+
             var bookResult = await restClient.GetOrderBookAsync(Symbol, limit ?? 5000).ConfigureAwait(false);
-            if (!bookResult.Success)
+            if (!bookResult)
                 return new CallResult<bool>(false, bookResult.Error);
 
             SetInitialOrderBook(bookResult.Data.LastUpdateId, bookResult.Data.Asks, bookResult.Data.Bids);

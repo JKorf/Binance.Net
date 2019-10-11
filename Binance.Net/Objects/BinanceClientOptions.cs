@@ -40,9 +40,8 @@ namespace Binance.Net.Objects
         /// <summary>
         /// ctor
         /// </summary>
-        public BinanceClientOptions()
+        public BinanceClientOptions(): base("https://api.binance.com")
         {
-            BaseAddress = "https://api.binance.com";
         }
 
         /// <summary>
@@ -90,9 +89,8 @@ namespace Binance.Net.Objects
         /// <summary>
         /// ctor
         /// </summary>
-        public BinanceSocketClientOptions()
+        public BinanceSocketClientOptions(): base("wss://stream.binance.com:9443/ws/")
         {
-            BaseAddress = "wss://stream.binance.com:9443/ws/";
         }        
 
         /// <summary>

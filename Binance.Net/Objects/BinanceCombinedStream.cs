@@ -14,12 +14,12 @@ namespace Binance.Net.Objects
         /// The stream combined
         /// </summary>
         [JsonProperty("stream")]
-        public string Stream { get; set; }
+        public string Stream { get; set; } = "";
 
         /// <summary>
         /// The data of stream
         /// </summary>
         [JsonProperty("data")]
-        public T Data { get; set; }
+        public T Data { get; set; } = default!;
     }
 }

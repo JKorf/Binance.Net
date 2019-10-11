@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using CryptoExchange.Net.Converters;
+using System.Collections.Generic;
 
 namespace Binance.Net.Objects
 {
@@ -12,7 +13,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The timezone the server uses
         /// </summary>
-        public string TimeZone { get; set; }
+        public string TimeZone { get; set; } = "";
         /// <summary>
         /// The current server time
         /// </summary>
@@ -21,14 +22,14 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The rate limits used
         /// </summary>
-        public BinanceRateLimit[] RateLimits { get; set; }
+        public IEnumerable<BinanceRateLimit> RateLimits { get; set; } = new List<BinanceRateLimit>();
         /// <summary>
         /// All symbols supported
         /// </summary>
-        public BinanceSymbol[] Symbols { get; set; }
+        public IEnumerable<BinanceSymbol> Symbols { get; set; } = new List<BinanceSymbol>();
         /// <summary>
         /// Filters
         /// </summary>
-        public object[] ExchangeFilters { get; set; }
+        public IEnumerable<object> ExchangeFilters { get; set; } = new List<object>();
     }
 }

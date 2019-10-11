@@ -15,7 +15,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The symbol the order is for
         /// </summary>
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = "";
         /// <summary>
         /// The order id as assigned by Binance
         /// </summary>
@@ -23,13 +23,13 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The order id as assigned by the client
         /// </summary>
-        public string ClientOrderId { get; set; }
+        public string ClientOrderId { get; set; } = "";
         /// <summary>
         /// Original order id
         /// </summary>
         [JsonOptionalProperty]
         [JsonProperty("origClientOrderId")]
-        public string OriginalClientOrderId { get; set; }
+        public string OriginalClientOrderId { get; set; } = "";
         /// <summary>
         /// The time the order was placed
         /// </summary>
@@ -88,6 +88,6 @@ namespace Binance.Net.Objects
         /// Fills for the order
         /// </summary>
         [JsonOptionalProperty]
-        public List<BinanceOrderTrade> Fills { get; set; }
+        public IEnumerable<BinanceOrderTrade>? Fills { get; set; }
     }
 }

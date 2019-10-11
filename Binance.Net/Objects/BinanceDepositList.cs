@@ -15,7 +15,7 @@ namespace Binance.Net.Objects
         /// The list of deposits
         /// </summary>
         [JsonProperty("depositList")]
-        public List<BinanceDeposit> List { get; set; }
+        public List<BinanceDeposit>? List { get; set; }
         /// <summary>
         /// Boolean indicating if the deposit list retrieval was successful
         /// </summary>
@@ -24,7 +24,7 @@ namespace Binance.Net.Objects
         /// Message what went wrong if retrieving wasn't successful
         /// </summary>
         [JsonProperty("msg")]
-        public string Message { get; set; }
+        public string? Message { get; set; }
     }
 
     /// <summary>
@@ -44,16 +44,16 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The asset deposited
         /// </summary>
-        public string Asset { get; set; }
+        public string Asset { get; set; } = "";
         /// <summary>
         /// The address of the deposit
         /// </summary>
-        public string Address { get; set; }
+        public string Address { get; set; } = "";
         /// <summary>
         /// The transaction id
         /// </summary>
         [JsonProperty("txId")]
-        public string TransactionId { get; set; }
+        public string TransactionId { get; set; } = "";
         /// <summary>
         /// The status of the deposit
         /// </summary>

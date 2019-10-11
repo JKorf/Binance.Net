@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Binance.Net.Objects
 {
@@ -11,7 +12,7 @@ namespace Binance.Net.Objects
         /// The result message
         /// </summary>
         [JsonProperty("msg")]
-        public string Message { get; set; }
+        public string? Message { get; set; }
         /// <summary>
         /// Success boolean
         /// </summary>
@@ -20,6 +21,6 @@ namespace Binance.Net.Objects
         /// Parameters
         /// </summary>
         [JsonProperty("objs")]
-        public object[] Objects { get; set; }
+        public IEnumerable<object>? Objects { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Binance.Net.Converters;
 using CryptoExchange.Net.Attributes;
 using CryptoExchange.Net.Converters;
@@ -18,7 +19,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The contingency type
         /// </summary>
-        public string ContingencyType { get; set; }
+        public string ContingencyType { get; set; } = "";
         /// <summary>
         /// The order list status
         /// </summary>
@@ -32,7 +33,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The client id of the order list
         /// </summary>
-        public string ListClientOrderId { get; set; }
+        public string ListClientOrderId { get; set; } = "";
         /// <summary>
         /// The transaction time
         /// </summary>
@@ -41,16 +42,16 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The symbol of the order list
         /// </summary>
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = "";
         /// <summary>
         /// The order in this list
         /// </summary>
-        public BinanceOrderId[] Orders { get; set; }
+        public IEnumerable<BinanceOrderId> Orders { get; set; } = new List<BinanceOrderId>();
         /// <summary>
         /// The order details
         /// </summary>
         [JsonOptionalProperty]
-        public BinancePlacedOrder[] OrderReports { get; set; }
+        public IEnumerable<BinancePlacedOrder> OrderReports { get; set; } = new List<BinancePlacedOrder>();
     }
 
     /// <summary>
@@ -61,7 +62,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The symbol of the order
         /// </summary>
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = "";
         /// <summary>
         /// The id of the order
         /// </summary>
@@ -69,6 +70,6 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The client order id
         /// </summary>
-        public string ClientOrderId { get; set; }
+        public string ClientOrderId { get; set; } = "";
     }
 }
