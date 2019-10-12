@@ -6764,5 +6764,10 @@
             Roll-out
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Symbols">
+            <summary>
+            All binance symbols
+            </summary>
+        </member>
     </members>
 </doc>
