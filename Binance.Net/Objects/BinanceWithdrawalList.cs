@@ -10,7 +10,7 @@ namespace Binance.Net.Objects
     /// <summary>
     /// Wrapper for list of withdrawals
     /// </summary>
-    public class BinanceWithdrawalList
+    internal class BinanceWithdrawalList
     {
         /// <summary>
         /// The list of withdrawals

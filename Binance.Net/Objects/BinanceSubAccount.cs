@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Binance.Net.Converters;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
@@ -10,7 +11,7 @@ namespace Binance.Net.Objects
         [JsonProperty("msg")]
         public string? Message { get; set; }
         public bool Success { get; set; }
-        public BinanceSubAccount[]? SubAccounts { get; set; }
+        public IEnumerable<BinanceSubAccount>? SubAccounts { get; set; }
     }
 
     /// <summary>

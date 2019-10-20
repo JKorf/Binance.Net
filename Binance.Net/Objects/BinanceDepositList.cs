@@ -9,13 +9,13 @@ namespace Binance.Net.Objects
     /// <summary>
     /// Wrapper for list of deposits
     /// </summary>
-    public class BinanceDepositList
+    internal class BinanceDepositList
     {
         /// <summary>
         /// The list of deposits
         /// </summary>
         [JsonProperty("depositList")]
-        public List<BinanceDeposit>? List { get; set; }
+        public IEnumerable<BinanceDeposit>? List { get; set; }
         /// <summary>
         /// Boolean indicating if the deposit list retrieval was successful
         /// </summary>

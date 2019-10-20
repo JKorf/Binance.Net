@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Binance.Net.Objects;
 using CryptoExchange.Net.Interfaces;
@@ -208,14 +209,14 @@ namespace Binance.Net.Interfaces
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        CallResult<UpdateSubscription> SubscribeToAllSymbolTicker(Action<BinanceStreamTick[]> onMessage);
+        CallResult<UpdateSubscription> SubscribeToAllSymbolTicker(Action<IEnumerable<BinanceStreamTick>> onMessage);
 
         /// <summary>
         /// Subscribes to ticker updates stream for all symbols
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToAllSymbolTickerAsync(Action<BinanceStreamTick[]> onMessage);
+        Task<CallResult<UpdateSubscription>> SubscribeToAllSymbolTickerAsync(Action<IEnumerable<BinanceStreamTick>> onMessage);
 
         /// <summary>
         /// Subscribes to the depth updates for the provided symbol
@@ -271,7 +272,7 @@ namespace Binance.Net.Interfaces
             Action<BinanceStreamAccountInfo> onAccountInfoMessage,
             Action<BinanceStreamOrderUpdate> onOrderUpdateMessage,
             Action<BinanceStreamOrderList> onOcoOrderUpdateMessage,
-            Action<BinanceStreamBalance[]> onAccountPositionMessage);
+            Action<IEnumerable<BinanceStreamBalance>> onAccountPositionMessage);
 
         /// <summary>
         /// Subscribes to the account update stream. Prior to using this, the <see cref="BinanceClient.StartUserStream"/> method should be called.
@@ -287,7 +288,7 @@ namespace Binance.Net.Interfaces
             Action<BinanceStreamAccountInfo> onAccountInfoMessage,
             Action<BinanceStreamOrderUpdate> onOrderUpdateMessage,
             Action<BinanceStreamOrderList> onOcoOrderUpdateMessage,
-            Action<BinanceStreamBalance[]> onAccountPositionMessage);
+            Action<IEnumerable<BinanceStreamBalance>> onAccountPositionMessage);
 
     }
 }

@@ -2,6 +2,7 @@
 using Binance.Net.Objects;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Binance.Net.Interfaces;
@@ -300,14 +301,14 @@ namespace Binance.Net
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        public CallResult<UpdateSubscription> SubscribeToAllSymbolTicker(Action<BinanceStreamTick[]> onMessage) => SubscribeToAllSymbolTickerAsync(onMessage).Result;
+        public CallResult<UpdateSubscription> SubscribeToAllSymbolTicker(Action<IEnumerable<BinanceStreamTick>> onMessage) => SubscribeToAllSymbolTickerAsync(onMessage).Result;
 
         /// <summary>
         /// Subscribes to ticker updates stream for all symbols
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        public async Task<CallResult<UpdateSubscription>> SubscribeToAllSymbolTickerAsync(Action<BinanceStreamTick[]> onMessage)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToAllSymbolTickerAsync(Action<IEnumerable<BinanceStreamTick>> onMessage)
         {
             return await Subscribe(AllSymbolTickerStreamEndpoint, false, onMessage).ConfigureAwait(false);
         }
@@ -382,7 +383,7 @@ namespace Binance.Net
             Action<BinanceStreamAccountInfo> onAccountInfoMessage, 
             Action<BinanceStreamOrderUpdate> onOrderUpdateMessage,
             Action<BinanceStreamOrderList> onOcoOrderUpdateMessage,
-            Action<BinanceStreamBalance[]> onAccountPositionMessage) => SubscribeToUserStreamAsync(listenKey, onAccountInfoMessage, onOrderUpdateMessage, onOcoOrderUpdateMessage, onAccountPositionMessage).Result;
+            Action<IEnumerable<BinanceStreamBalance>> onAccountPositionMessage) => SubscribeToUserStreamAsync(listenKey, onAccountInfoMessage, onOrderUpdateMessage, onOcoOrderUpdateMessage, onAccountPositionMessage).Result;
 
         /// <summary>
         /// Subscribes to the account update stream. Prior to using this, the <see cref="BinanceClient.StartUserStream"/> method should be called.
@@ -398,7 +399,7 @@ namespace Binance.Net
             Action<BinanceStreamAccountInfo> onAccountInfoMessage, 
             Action<BinanceStreamOrderUpdate> onOrderUpdateMessage,
             Action<BinanceStreamOrderList> onOcoOrderUpdateMessage,
-            Action<BinanceStreamBalance[]> onAccountPositionMessage)
+            Action<IEnumerable<BinanceStreamBalance>> onAccountPositionMessage)
         {
             if (string.IsNullOrEmpty(listenKey))
                 return new CallResult<UpdateSubscription>(null, new ArgumentError("ListenKey must be provided"));
@@ -441,7 +442,7 @@ namespace Binance.Net
                     case AccountPositionUpdateEvent:
                     {
                         log.Write(LogVerbosity.Debug, data);
-                        var result = Deserialize<BinanceStreamBalance[]>(token["B"], false);
+                        var result = Deserialize<IEnumerable<BinanceStreamBalance>>(token["B"], false);
                         if (result)
                             onAccountPositionMessage?.Invoke(result.Data);
                         else

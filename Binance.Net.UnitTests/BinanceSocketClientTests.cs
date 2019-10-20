@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Objects;
@@ -115,7 +116,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateSocketClient(socket);
 
             BinanceStreamTick[] result = null;
-            client.SubscribeToAllSymbolTicker((test) => result = test);
+            client.SubscribeToAllSymbolTicker((test) => result = test.ToArray());
 
             var data = new[]
             {
@@ -222,9 +223,11 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsNotNull(result);
+            var expectedBalances = data.Balances.ToList();
+            var balances = result.Balances.ToList();
             Assert.IsTrue(TestHelpers.AreEqual(data, result, "Balances"));
-            Assert.IsTrue(TestHelpers.AreEqual(data.Balances[0], result.Balances[0]));
-            Assert.IsTrue(TestHelpers.AreEqual(data.Balances[1], result.Balances[1]));
+            Assert.IsTrue(TestHelpers.AreEqual(expectedBalances[0], balances[0]));
+            Assert.IsTrue(TestHelpers.AreEqual(expectedBalances[1], balances[1]));
         }
 
         [TestCase()]
@@ -271,8 +274,8 @@ namespace Binance.Net.UnitTests
             // assert
             Assert.IsNotNull(result);
             Assert.IsTrue(TestHelpers.AreEqual(data, result, "Orders"));
-            Assert.IsTrue(TestHelpers.AreEqual(data.Orders[0], result.Orders[0]));
-            Assert.IsTrue(TestHelpers.AreEqual(data.Orders[1], result.Orders[1]));
+            Assert.IsTrue(TestHelpers.AreEqual(data.Orders.ToList()[0], result.Orders.ToList()[0]));
+            Assert.IsTrue(TestHelpers.AreEqual(data.Orders.ToList()[1], result.Orders.ToList()[1]));
         }
 
         [TestCase()]

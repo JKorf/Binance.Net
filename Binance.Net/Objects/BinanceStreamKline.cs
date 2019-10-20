@@ -14,18 +14,13 @@ namespace Binance.Net.Objects
         /// The symbol the data is for
         /// </summary>
         [JsonProperty("s")]
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = "";
+
         /// <summary>
         /// The data
         /// </summary>
         [JsonProperty("k")]
-        public BinanceStreamKline Data { get; set; }
-
-        private BinanceStreamKlineData()
-        {
-            Symbol = "";
-            Data = new BinanceStreamKline();
-        }
+        public BinanceStreamKline Data { get; set; } = default!;
     }
 
     /// <summary>

@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
 	<Nullable>enable</Nullable>
   </PropertyGroup>
@@ -13,7 +13,7 @@
     <PackageTags>Binance Binance.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
     <PackageProjectUrl>https://github.com/JKorf/Binance.Net</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/JKorf/Binance.Net/master/Resources/binance-coin.png</PackageIconUrl>
-    <PackageLicenseUrl>https://github.com/JKorf/Binance.Net/blob/master/LICENSE</PackageLicenseUrl>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>4.3.3 - Added serialization method for BinanceSymbolFilter</PackageReleaseNotes>
@@ -21,9 +21,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
     <DocumentationFile>Binance.Net.xml</DocumentationFile>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CryptoExchange.net\CryptoExchange.Net\CryptoExchange.Net.csproj" />
   </ItemGroup>

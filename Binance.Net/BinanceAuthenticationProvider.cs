@@ -43,7 +43,7 @@ namespace Binance.Net
         
         public override string Sign(string toSign)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

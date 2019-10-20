@@ -38,7 +38,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// Dictionary of indicator lists for symbols
         /// </summary>
-        public Dictionary<string, List<BinanceIndicator>> Indicators { get; set; } = new Dictionary<string, List<BinanceIndicator>>();
+        public Dictionary<string, IEnumerable<BinanceIndicator>> Indicators { get; set; } = new Dictionary<string, IEnumerable<BinanceIndicator>>();
         /// <summary>
         /// Last update time
         /// </summary>

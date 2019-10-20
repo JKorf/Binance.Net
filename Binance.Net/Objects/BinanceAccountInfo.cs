@@ -62,7 +62,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The asset this balance is for
         /// </summary>
-        public string Asset { get; set; }
+        public string Asset { get; set; } = "";
         /// <summary>
         /// The amount that isn't locked in a trade
         /// </summary>
@@ -75,10 +75,5 @@ namespace Binance.Net.Objects
         /// The total balance of this asset (Free + Locked)
         /// </summary>
         public decimal Total => Free + Locked;
-
-        private BinanceBalance()
-        {
-            Asset = "";
-        }
     }
 }

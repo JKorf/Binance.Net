@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Binance.Net
 {
@@ -74,6 +75,16 @@ namespace Binance.Net
         private static decimal Floor(decimal number)
         {
             return Math.Floor(number * 100000000) / 100000000;
+        }
+
+        /// <summary>
+        /// Validate the string is a valid Binance symbol.
+        /// </summary>
+        /// <param name="symbolString">string to validate</param>
+        public static void ValidateAsBinanceSymbol(this string symbolString)
+        {
+            if(!Regex.IsMatch(symbolString, "^([A-Z|a-z]{6,8})$"))
+                throw new ArgumentException($"{symbolString} is not a valid Binance symbol. Should be [QuoteCurrency][BaseCurrency], e.g. BTCUSDT");
         }
     }
 }

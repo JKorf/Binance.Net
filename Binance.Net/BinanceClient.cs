@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
@@ -22,7 +22,7 @@ namespace Binance.Net
     /// <summary>
     /// Client providing access to the Binance REST Api
     /// </summary>
-    public class BinanceClient : RestClient//, IBinanceClient
+    public class BinanceClient : RestClient, IBinanceClient
     {
         #region fields 
         private static BinanceClientOptions defaultOptions = new BinanceClientOptions();
@@ -186,23 +186,23 @@ namespace Binance.Net
             SetAuthenticationProvider(new BinanceAuthenticationProvider(new ApiCredentials(apiKey, apiSecret), ArrayParametersSerialization.MultipleValues));
         }
 
-        ///// <summary>
-        ///// Pings the Binance API
-        ///// </summary>
-        ///// <returns>True if successful ping, false if no response</returns>
-        //public override CallResult<long> Ping(CancellationToken ct = default) => PingAsync(ct).Result;
+        /// <summary>
+        /// Pings the Binance API
+        /// </summary>
+        /// <returns>True if successful ping, false if no response</returns>
+        public override CallResult<long> Ping(CancellationToken ct = default) => PingAsync(ct).Result;
 
-        ///// <summary>
-        ///// Pings the Binance API
-        ///// </summary>
-        ///// <returns>True if successful ping, false if no response</returns>
-        //public override async Task<CallResult<long>> PingAsync(CancellationToken ct = default)
-        //{
-        //    var sw = Stopwatch.StartNew();
-        //    var result = await SendRequest<object>(GetUrl(PingEndpoint, Api, PublicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
-        //    sw.Stop();
-        //    return new CallResult<long>(result.Error == null ? sw.ElapsedMilliseconds : 0, result.Error);
-        //}
+        /// <summary>
+        /// Pings the Binance API
+        /// </summary>
+        /// <returns>True if successful ping, false if no response</returns>
+        public override async Task<CallResult<long>> PingAsync(CancellationToken ct = default)
+        {
+            var sw = Stopwatch.StartNew();
+            var result = await SendRequest<object>(GetUrl(PingEndpoint, Api, PublicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
+            sw.Stop();
+            return new CallResult<long>(result.Error == null ? sw.ElapsedMilliseconds : 0, result.Error);
+        }
 
         /// <summary>
         /// Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls
@@ -322,7 +322,7 @@ namespace Binance.Net
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The aggregated trades list for the symbol</returns>
-        public WebCallResult<BinanceAggregatedTrades[]> GetAggregatedTrades(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default) => GetAggregatedTradesAsync(symbol, fromId, startTime, endTime, limit, ct).Result;
+        public WebCallResult<IEnumerable<BinanceAggregatedTrades>> GetAggregatedTrades(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default) => GetAggregatedTradesAsync(symbol, fromId, startTime, endTime, limit, ct).Result;
 
         /// <summary>
         /// Gets compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
@@ -334,7 +334,7 @@ namespace Binance.Net
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The aggregated trades list for the symbol</returns>
-        public async Task<WebCallResult<BinanceAggregatedTrades[]>> GetAggregatedTradesAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceAggregatedTrades>>> GetAggregatedTradesAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object> { { "symbol", symbol } };
             parameters.AddOptionalParameter("fromId", fromId?.ToString());
@@ -342,7 +342,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
             parameters.AddOptionalParameter("limit", limit?.ToString());
 
-            return await SendRequest<BinanceAggregatedTrades[]>(GetUrl(AggregatedTradesEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceAggregatedTrades>>(GetUrl(AggregatedTradesEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -352,7 +352,7 @@ namespace Binance.Net
         /// <param name="limit">Result limit</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of recent trades</returns>
-        public WebCallResult<BinanceRecentTrade[]> GetRecentTrades(string symbol, int? limit = null, CancellationToken ct = default) => GetRecentTradesAsync(symbol, limit, ct).Result;
+        public WebCallResult<IEnumerable<BinanceRecentTrade>> GetRecentTrades(string symbol, int? limit = null, CancellationToken ct = default) => GetRecentTradesAsync(symbol, limit, ct).Result;
 
         /// <summary>
         /// Gets the recent trades for a symbol
@@ -361,11 +361,11 @@ namespace Binance.Net
         /// <param name="limit">Result limit</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of recent trades</returns>
-        public async Task<WebCallResult<BinanceRecentTrade[]>> GetRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceRecentTrade>>> GetRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object> { { "symbol", symbol } };
             parameters.AddOptionalParameter("limit", limit?.ToString());
-            return await SendRequest<BinanceRecentTrade[]>(GetUrl(RecentTradesEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceRecentTrade>>(GetUrl(RecentTradesEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -376,7 +376,7 @@ namespace Binance.Net
         /// <param name="fromId">From which trade id on results should be retrieved</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of recent trades</returns>
-        public WebCallResult<BinanceRecentTrade[]> GetHistoricalTrades(string symbol, int? limit = null, long? fromId = null, CancellationToken ct = default) => GetHistoricalTradesAsync(symbol, limit, fromId, ct).Result;
+        public WebCallResult<IEnumerable<BinanceRecentTrade>> GetHistoricalTrades(string symbol, int? limit = null, long? fromId = null, CancellationToken ct = default) => GetHistoricalTradesAsync(symbol, limit, fromId, ct).Result;
 
         /// <summary>
         /// Gets the historical  trades for a symbol
@@ -386,13 +386,13 @@ namespace Binance.Net
         /// <param name="fromId">From which trade id on results should be retrieved</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of recent trades</returns>
-        public async Task<WebCallResult<BinanceRecentTrade[]>> GetHistoricalTradesAsync(string symbol, int? limit = null, long? fromId = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceRecentTrade>>> GetHistoricalTradesAsync(string symbol, int? limit = null, long? fromId = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object> { { "symbol", symbol } };
             parameters.AddOptionalParameter("limit", limit?.ToString());
             parameters.AddOptionalParameter("fromId", fromId?.ToString());
 
-            return await SendRequest<BinanceRecentTrade[]>(GetUrl(HistoricalTradesEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceRecentTrade>>(GetUrl(HistoricalTradesEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -405,7 +405,7 @@ namespace Binance.Net
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The candlestick data for the provided symbol</returns>
-        public WebCallResult<BinanceKline[]> GetKlines(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default) => GetKlinesAsync(symbol, interval, startTime, endTime, limit, ct).Result;
+        public WebCallResult<IEnumerable<BinanceKline>> GetKlines(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default) => GetKlinesAsync(symbol, interval, startTime, endTime, limit, ct).Result;
 
         /// <summary>
         /// Get candlestick data for the provided symbol
@@ -417,7 +417,7 @@ namespace Binance.Net
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The candlestick data for the provided symbol</returns>
-        public async Task<WebCallResult<BinanceKline[]>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceKline>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object> {
                 { "symbol", symbol },
@@ -427,7 +427,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
             parameters.AddOptionalParameter("limit", limit?.ToString());
 
-            return await SendRequest<BinanceKline[]>(GetUrl(KlinesEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceKline>>(GetUrl(KlinesEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -459,16 +459,16 @@ namespace Binance.Net
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of data over the last 24 hours</returns>
-        public WebCallResult<Binance24HPrice[]> Get24HPricesList(CancellationToken ct = default) => Get24HPricesListAsync(ct).Result;
+        public WebCallResult<IEnumerable<Binance24HPrice>> Get24HPricesList(CancellationToken ct = default) => Get24HPricesListAsync(ct).Result;
 
         /// <summary>
         /// Get data regarding the last 24 hours for all symbols
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of data over the last 24 hours</returns>
-        public async Task<WebCallResult<Binance24HPrice[]>> Get24HPricesListAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<Binance24HPrice>>> Get24HPricesListAsync(CancellationToken ct = default)
         {
-            return await SendRequest<Binance24HPrice[]>(GetUrl(Price24HEndpoint, Api, PublicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<Binance24HPrice>>(GetUrl(Price24HEndpoint, Api, PublicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -500,16 +500,16 @@ namespace Binance.Net
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of prices</returns>
-        public WebCallResult<BinancePrice[]> GetAllPrices(CancellationToken ct = default) => GetAllPricesAsync(ct).Result;
+        public WebCallResult<IEnumerable<BinancePrice>> GetAllPrices(CancellationToken ct = default) => GetAllPricesAsync(ct).Result;
 
         /// <summary>
         /// Get a list of the prices of all symbols
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of prices</returns>
-        public async Task<WebCallResult<BinancePrice[]>> GetAllPricesAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinancePrice>>> GetAllPricesAsync(CancellationToken ct = default)
         {
-            return await SendRequest<BinancePrice[]>(GetUrl(AllPricesEndpoint, Api, PublicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinancePrice>>(GetUrl(AllPricesEndpoint, Api, PublicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -541,16 +541,16 @@ namespace Binance.Net
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of book prices</returns>
-        public WebCallResult<BinanceBookPrice[]> GetAllBookPrices(CancellationToken ct = default) => GetAllBookPricesAsync(ct).Result;
+        public WebCallResult<IEnumerable<BinanceBookPrice>> GetAllBookPrices(CancellationToken ct = default) => GetAllBookPricesAsync(ct).Result;
 
         /// <summary>
         /// Gets the best price/quantity on the order book for all symbols.
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of book prices</returns>
-        public async Task<WebCallResult<BinanceBookPrice[]>> GetAllBookPricesAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceBookPrice>>> GetAllBookPricesAsync(CancellationToken ct = default)
         {
-            return await SendRequest<BinanceBookPrice[]>(GetUrl(BookPricesEndpoint, Api, PublicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceBookPrice>>(GetUrl(BookPricesEndpoint, Api, PublicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -587,7 +587,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of open orders</returns>
-        public WebCallResult<BinanceOrder[]> GetOpenOrders(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default) => GetOpenOrdersAsync(symbol, receiveWindow, ct).Result;
+        public WebCallResult<IEnumerable<BinanceOrder>> GetOpenOrders(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default) => GetOpenOrdersAsync(symbol, receiveWindow, ct).Result;
 
         /// <summary>
         /// Gets a list of open orders
@@ -596,11 +596,11 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of open orders</returns>
-        public async Task<WebCallResult<BinanceOrder[]>> GetOpenOrdersAsync(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceOrder>>> GetOpenOrdersAsync(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
-                return new WebCallResult<BinanceOrder[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<IEnumerable<BinanceOrder>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -609,7 +609,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("symbol", symbol);
 
-            return await SendRequest<BinanceOrder[]>(GetUrl(OpenOrdersEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceOrder>>(GetUrl(OpenOrdersEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -623,7 +623,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of orders</returns>
-        public WebCallResult<BinanceOrder[]> GetAllOrders(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default) => GetAllOrdersAsync(symbol, orderId, startTime, endTime, limit, receiveWindow, ct).Result;
+        public WebCallResult<IEnumerable<BinanceOrder>> GetAllOrders(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default) => GetAllOrdersAsync(symbol, orderId, startTime, endTime, limit, receiveWindow, ct).Result;
 
         /// <summary>
         /// Gets all orders for the provided symbol
@@ -636,11 +636,11 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of orders</returns>
-        public async Task<WebCallResult<BinanceOrder[]>> GetAllOrdersAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceOrder>>> GetAllOrdersAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
-                return new WebCallResult<BinanceOrder[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<IEnumerable<BinanceOrder>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -653,7 +653,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", limit?.ToString());
 
-            return await SendRequest<BinanceOrder[]>(GetUrl(AllOrdersEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceOrder>>(GetUrl(AllOrdersEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -964,7 +964,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of trades</returns>
-        public WebCallResult<BinanceTrade[]> GetMyTrades(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? receiveWindow = null, CancellationToken ct = default) => GetMyTradesAsync(symbol, startTime, endTime, limit, fromId, receiveWindow, ct).Result;
+        public WebCallResult<IEnumerable<BinanceTrade>> GetMyTrades(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? receiveWindow = null, CancellationToken ct = default) => GetMyTradesAsync(symbol, startTime, endTime, limit, fromId, receiveWindow, ct).Result;
 
         /// <summary>
         /// Gets all user trades for provided symbol
@@ -977,11 +977,11 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of trades</returns>
-        public async Task<WebCallResult<BinanceTrade[]>> GetMyTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceTrade>>> GetMyTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
-                return new WebCallResult<BinanceTrade[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<IEnumerable<BinanceTrade>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -994,7 +994,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await SendRequest<BinanceTrade[]>(GetUrl(MyTradesEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceTrade>>(GetUrl(MyTradesEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1058,7 +1058,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of deposits</returns>
-        public WebCallResult<BinanceDepositList> GetDepositHistory(string? asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default) => GetDepositHistoryAsync(asset, status, startTime, endTime, receiveWindow, ct).Result;
+        public WebCallResult<IEnumerable<BinanceDeposit>> GetDepositHistory(string? asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default) => GetDepositHistoryAsync(asset, status, startTime, endTime, receiveWindow, ct).Result;
 
         /// <summary>
         /// Gets the deposit history
@@ -1070,11 +1070,11 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of deposits</returns>
-        public async Task<WebCallResult<BinanceDepositList>> GetDepositHistoryAsync(string? asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceDeposit>>> GetDepositHistoryAsync(string? asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
-                return new WebCallResult<BinanceDepositList>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<IEnumerable<BinanceDeposit>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -1088,12 +1088,12 @@ namespace Binance.Net
 
             var result = await SendRequest<BinanceDepositList>(GetUrl(DepositHistoryEndpoint, WithdrawalApi, WithdrawalVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result || result.Data == null)
-                return result;
+                return WebCallResult<IEnumerable<BinanceDeposit>>.CreateErrorResult(result.Error ?? new UnknownError("Unknown response"));
 
             if (!result.Data.Success)
-                return new WebCallResult<BinanceDepositList>(result.ResponseStatusCode, result.ResponseHeaders, null, ParseErrorResponse(result.Data.Message));
+                return new WebCallResult<IEnumerable<BinanceDeposit>>(result.ResponseStatusCode, result.ResponseHeaders, null, ParseErrorResponse(result.Data.Message));
 
-            return result;
+            return new WebCallResult<IEnumerable<BinanceDeposit>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.List, null);
         }
 
         /// <summary>
@@ -1106,7 +1106,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of withdrawals</returns>
-        public WebCallResult<BinanceWithdrawalList> GetWithdrawHistory(string? asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default) => GetWithdrawHistoryAsync(asset, status, startTime, endTime, receiveWindow, ct).Result;
+        public WebCallResult<IEnumerable<BinanceWithdrawal>> GetWithdrawHistory(string? asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default) => GetWithdrawHistoryAsync(asset, status, startTime, endTime, receiveWindow, ct).Result;
 
         /// <summary>
         /// Gets the withdrawal history
@@ -1118,11 +1118,11 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of withdrawals</returns>
-        public async Task<WebCallResult<BinanceWithdrawalList>> GetWithdrawHistoryAsync(string? asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceWithdrawal>>> GetWithdrawHistoryAsync(string? asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
-                return new WebCallResult<BinanceWithdrawalList>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<IEnumerable<BinanceWithdrawal>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -1137,12 +1137,12 @@ namespace Binance.Net
 
             var result = await SendRequest<BinanceWithdrawalList>(GetUrl(WithdrawHistoryEndpoint, WithdrawalApi, WithdrawalVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result || result.Data == null)
-                return result;
+                return WebCallResult<IEnumerable<BinanceWithdrawal>>.CreateErrorResult(result.Error ?? new UnknownError("Unknown response"));
 
             if (!result.Data.Success)
-                return new WebCallResult<BinanceWithdrawalList>(result.ResponseStatusCode, result.ResponseHeaders, null, ParseErrorResponse(result.Data.Message));
+                return new WebCallResult<IEnumerable<BinanceWithdrawal>>(result.ResponseStatusCode, result.ResponseHeaders, null, ParseErrorResponse(result.Data.Message));
 
-            return result;
+            return new WebCallResult<IEnumerable<BinanceWithdrawal>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.List, null);
         }
 
         /// <summary>
@@ -1370,7 +1370,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Dividend records</returns>
-        public WebCallResult<BinanceDividendRecords> GetAssetDividendRecords(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default) => GetAssetDividendRecordsAsync(asset, startTime, endTime, receiveWindow, ct).Result;
+        public WebCallResult<BinanceQueryRecords<BinanceDividendRecord>> GetAssetDividendRecords(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default) => GetAssetDividendRecordsAsync(asset, startTime, endTime, receiveWindow, ct).Result;
 
         /// <summary>
         /// Get asset dividend records
@@ -1381,11 +1381,11 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Dividend records</returns>
-        public async Task<WebCallResult<BinanceDividendRecords>> GetAssetDividendRecordsAsync(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceDividendRecord>>> GetAssetDividendRecordsAsync(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
-                return new WebCallResult<BinanceDividendRecords>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<BinanceQueryRecords<BinanceDividendRecord>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -1396,7 +1396,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await SendRequest<BinanceDividendRecords>(GetUrl(DividendRecordsEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequest<BinanceQueryRecords<BinanceDividendRecord>>(GetUrl(DividendRecordsEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1409,7 +1409,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of sub accounts</returns>
-        public WebCallResult<BinanceSubAccount[]> GetSubAccounts(string? email = null, SubAccountStatus? accountStatus = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default) => GetSubAccountsAsync(email, accountStatus, page, limit, receiveWindow, ct).Result;
+        public WebCallResult<IEnumerable<BinanceSubAccount>> GetSubAccounts(string? email = null, SubAccountStatus? accountStatus = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default) => GetSubAccountsAsync(email, accountStatus, page, limit, receiveWindow, ct).Result;
 
         /// <summary>
         /// Gets a list of sub accounts associated with this master account
@@ -1421,11 +1421,11 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of sub accounts</returns>
-        public async Task<WebCallResult<BinanceSubAccount[]>> GetSubAccountsAsync(string? email = null, SubAccountStatus? accountStatus = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceSubAccount>>> GetSubAccountsAsync(string? email = null, SubAccountStatus? accountStatus = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
-                return new WebCallResult<BinanceSubAccount[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<IEnumerable<BinanceSubAccount>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -1439,9 +1439,9 @@ namespace Binance.Net
 
             var result = await SendRequest<BinanceSubAccountWrapper>(GetUrl(SubAccountListEndpoint, WithdrawalApi, WithdrawalVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result)
-                return new WebCallResult<BinanceSubAccount[]>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
+                return new WebCallResult<IEnumerable<BinanceSubAccount>>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
 
-            return !result.Data.Success ? new WebCallResult<BinanceSubAccount[]>(result.ResponseStatusCode, result.ResponseHeaders, null, new ServerError(result.Data.Message!)) : new WebCallResult<BinanceSubAccount[]>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.SubAccounts, null);
+            return !result.Data.Success ? new WebCallResult<IEnumerable<BinanceSubAccount>>(result.ResponseStatusCode, result.ResponseHeaders, null, new ServerError(result.Data.Message!)) : new WebCallResult<IEnumerable<BinanceSubAccount>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.SubAccounts, null);
         }
 
         /// <summary>
@@ -1759,7 +1759,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Order lists matching the parameters</returns>
-        public WebCallResult<BinanceOrderList[]> GetOCOOrders(long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default) => GetOCOOrdersAsync(fromId, startTime, endTime, limit, receiveWindow, ct).Result;
+        public WebCallResult<IEnumerable<BinanceOrderList>> GetOCOOrders(long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default) => GetOCOOrdersAsync(fromId, startTime, endTime, limit, receiveWindow, ct).Result;
 
         /// <summary>
         /// Retrieves a list of oco orders matching the parameters
@@ -1771,14 +1771,14 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Order lists matching the parameters</returns>
-        public async Task<WebCallResult<BinanceOrderList[]>> GetOCOOrdersAsync(long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceOrderList>>> GetOCOOrdersAsync(long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (fromId != null && (startTime != null || endTime != null))
-                return new WebCallResult<BinanceOrderList[]>(null, null, null, new ArgumentError("Start/end time can only be provided without fromId parameter"));
+                return new WebCallResult<IEnumerable<BinanceOrderList>>(null, null, null, new ArgumentError("Start/end time can only be provided without fromId parameter"));
 
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
-                return new WebCallResult<BinanceOrderList[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<IEnumerable<BinanceOrderList>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -1790,7 +1790,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await SendRequest<BinanceOrderList[]>(GetUrl(GetAllOCOOrderEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceOrderList>>(GetUrl(GetAllOCOOrderEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1799,7 +1799,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Open order lists</returns>
-        public WebCallResult<BinanceOrderList[]> GetOpenOCOOrders(long? receiveWindow = null, CancellationToken ct = default) => GetOpenOCOOrdersAsync(receiveWindow, ct).Result;
+        public WebCallResult<IEnumerable<BinanceOrderList>> GetOpenOCOOrders(long? receiveWindow = null, CancellationToken ct = default) => GetOpenOCOOrdersAsync(receiveWindow, ct).Result;
 
         /// <summary>
         /// Retrieves a list of open oco orders
@@ -1807,11 +1807,11 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Open order lists</returns>
-        public async Task<WebCallResult<BinanceOrderList[]>> GetOpenOCOOrdersAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceOrderList>>> GetOpenOCOOrdersAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
-                return new WebCallResult<BinanceOrderList[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<IEnumerable<BinanceOrderList>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -1819,7 +1819,7 @@ namespace Binance.Net
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await SendRequest<BinanceOrderList[]>(GetUrl(GetOpenOCOOrderEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceOrderList>>(GetUrl(GetOpenOCOOrderEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
         #endregion
 
@@ -1830,15 +1830,15 @@ namespace Binance.Net
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of margin assets</returns>
-        public WebCallResult<BinanceMarginAsset[]> GetMarginAssets(CancellationToken ct = default) => GetMarginAssetsAsync(ct).Result;
+        public WebCallResult<IEnumerable<BinanceMarginAsset>> GetMarginAssets(CancellationToken ct = default) => GetMarginAssetsAsync(ct).Result;
         /// <summary>
         /// Get all assets available for margin trading
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of margin assets</returns>
-        public async Task<WebCallResult<BinanceMarginAsset[]>> GetMarginAssetsAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceMarginAsset>>> GetMarginAssetsAsync(CancellationToken ct = default)
         {
-            return await SendRequest<BinanceMarginAsset[]>(GetUrl(MarginAssetsEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, null, false).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceMarginAsset>>(GetUrl(MarginAssetsEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1846,15 +1846,15 @@ namespace Binance.Net
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of margin pairs</returns>
-        public WebCallResult<BinanceMarginPair[]> GetMarginPairs(CancellationToken ct = default) => GetMarginPairsAsync(ct).Result;
+        public WebCallResult<IEnumerable<BinanceMarginPair>> GetMarginPairs(CancellationToken ct = default) => GetMarginPairsAsync(ct).Result;
         /// <summary>
         /// Get all asset pairs available for margin trading
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of margin pairs</returns>
-        public async Task<WebCallResult<BinanceMarginPair[]>> GetMarginPairsAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceMarginPair>>> GetMarginPairsAsync(CancellationToken ct = default)
         {
-            return await SendRequest<BinanceMarginPair[]>(GetUrl(MarginPairsEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, null, false).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceMarginPair>>(GetUrl(MarginPairsEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -2291,7 +2291,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of open margin account orders</returns>
-        public WebCallResult<BinanceOrder[]> GetOpenMarginAccountOrders(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default) => GetOpenMarginAccountOrdersAsync(symbol, receiveWindow, ct).Result;
+        public WebCallResult<IEnumerable<BinanceOrder>> GetOpenMarginAccountOrders(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default) => GetOpenMarginAccountOrdersAsync(symbol, receiveWindow, ct).Result;
 
         /// <summary>
         /// Gets a list of open margin account orders
@@ -2300,11 +2300,11 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of open margin account orders</returns>
-        public async Task<WebCallResult<BinanceOrder[]>> GetOpenMarginAccountOrdersAsync(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceOrder>>> GetOpenMarginAccountOrdersAsync(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
-                return new WebCallResult<BinanceOrder[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<IEnumerable<BinanceOrder>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -2313,7 +2313,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("symbol", symbol);
 
-            return await SendRequest<BinanceOrder[]>(GetUrl(OpenMarginOrdersEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceOrder>>(GetUrl(OpenMarginOrdersEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -2327,7 +2327,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of margin account orders</returns>
-        public WebCallResult<BinanceOrder[]> GetAllMarginAccountOrders(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default) => GetAllMarginAccountOrdersAsync(symbol, orderId, startTime, endTime, limit, receiveWindow, ct).Result;
+        public WebCallResult<IEnumerable<BinanceOrder>> GetAllMarginAccountOrders(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default) => GetAllMarginAccountOrdersAsync(symbol, orderId, startTime, endTime, limit, receiveWindow, ct).Result;
 
         /// <summary>
         /// Gets all margin account orders for the provided symbol
@@ -2340,11 +2340,11 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of margin account orders</returns>
-        public async Task<WebCallResult<BinanceOrder[]>> GetAllMarginAccountOrdersAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceOrder>>> GetAllMarginAccountOrdersAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
-                return new WebCallResult<BinanceOrder[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<IEnumerable<BinanceOrder>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -2357,7 +2357,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", limit?.ToString());
 
-            return await SendRequest<BinanceOrder[]>(GetUrl(AllMarginOrdersEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceOrder>>(GetUrl(AllMarginOrdersEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -2371,7 +2371,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of margin account trades</returns>
-        public WebCallResult<BinanceTrade[]> GetMyMarginAccountTrades(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? receiveWindow = null, CancellationToken ct = default) => GetMyMarginAccountTradesAsync(symbol, startTime, endTime, limit, fromId, receiveWindow, ct).Result;
+        public WebCallResult<IEnumerable<BinanceTrade>> GetMyMarginAccountTrades(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? receiveWindow = null, CancellationToken ct = default) => GetMyMarginAccountTradesAsync(symbol, startTime, endTime, limit, fromId, receiveWindow, ct).Result;
 
         /// <summary>
         /// Gets all user margin account trades for provided symbol
@@ -2384,11 +2384,11 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of margin account trades</returns>
-        public async Task<WebCallResult<BinanceTrade[]>> GetMyMarginAccountTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceTrade>>> GetMyMarginAccountTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
-                return new WebCallResult<BinanceTrade[]>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<IEnumerable<BinanceTrade>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -2401,7 +2401,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await SendRequest<BinanceTrade[]>(GetUrl(MyMarginTradesEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceTrade>>(GetUrl(MyMarginTradesEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -2484,7 +2484,6 @@ namespace Binance.Net
         /// Get history of transfers
         /// </summary>
         /// <param name="direction">The direction of the the transfers to retrieve</param>
-        /// <param name="asset">Filter by asset</param>
         /// <param name="page">Results page</param>
         /// <param name="startTime">Filter by startTime from</param>
         /// <param name="endTime">Filter by endTime from</param>
@@ -2498,7 +2497,6 @@ namespace Binance.Net
         /// Get history of transfers
         /// </summary>
         /// <param name="direction">The direction of the the transfers to retrieve</param>
-        /// <param name="asset">Filter by asset</param>
         /// <param name="page">Results page</param>
         /// <param name="startTime">Filter by startTime from</param>
         /// <param name="endTime">Filter by endTime from</param>

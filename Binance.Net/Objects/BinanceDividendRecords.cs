@@ -1,25 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects
 {
-    /// <summary>
-    /// Dividend records
-    /// </summary>
-    public class BinanceDividendRecords
-    {
-        /// <summary>
-        /// Records
-        /// </summary>
-        public IEnumerable<BinanceDividendRecord> Rows { get; set; } = new List<BinanceDividendRecord>();
-        /// <summary>
-        /// Total records
-        /// </summary>
-        public int Total { get; set; }
-    }
-
     /// <summary>
     /// Dividend record
     /// </summary>
