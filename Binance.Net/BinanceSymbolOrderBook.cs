@@ -27,6 +27,7 @@ namespace Binance.Net
         /// <param name="options">The options for the order book</param>
         public BinanceSymbolOrderBook(string symbol, BinanceOrderBookOptions? options = null) : base(symbol, options ?? new BinanceOrderBookOptions())
         {
+            symbol.ValidateBinanceSymbol();
             limit = options?.Limit;
             updateInterval = options?.UpdateInterval;
             restClient = new BinanceClient();

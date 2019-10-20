@@ -1034,5 +1034,21 @@ namespace Binance.Net.UnitTests
             Assert.IsTrue(result.Success);
             Assert.IsTrue(TestHelpers.AreEqual(canceled, result.Data));
         }
+
+        [TestCase("BTCUSDT", true)]
+        [TestCase("NANOUSDT", true)]
+        [TestCase("NANOBTC", true)]
+        [TestCase("ETHBTC", true)]
+        [TestCase("BEETC", false)]
+        [TestCase("NANOUSDTD", false)]
+        [TestCase("BTC-USDT", false)]
+        [TestCase("BTC-USD", false)]
+        public void CheckValidBinanceSymbol(string symbol, bool isValid)
+        {
+            if (isValid)
+                Assert.DoesNotThrow(() => symbol.ValidateBinanceSymbol());
+            else
+                Assert.Throws(typeof(ArgumentException), () => symbol.ValidateBinanceSymbol());
+        }
     }
 }

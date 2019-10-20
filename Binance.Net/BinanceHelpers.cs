@@ -81,8 +81,11 @@ namespace Binance.Net
         /// Validate the string is a valid Binance symbol.
         /// </summary>
         /// <param name="symbolString">string to validate</param>
-        public static void ValidateAsBinanceSymbol(this string symbolString)
+        public static void ValidateBinanceSymbol(this string symbolString)
         {
+            if (string.IsNullOrEmpty(symbolString))
+                throw new ArgumentException("Symbol is not provided");
+
             if(!Regex.IsMatch(symbolString, "^([A-Z|a-z]{6,8})$"))
                 throw new ArgumentException($"{symbolString} is not a valid Binance symbol. Should be [QuoteCurrency][BaseCurrency], e.g. BTCUSDT");
         }

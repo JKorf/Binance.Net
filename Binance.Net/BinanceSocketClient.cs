@@ -106,7 +106,7 @@ namespace Binance.Net
         /// <param name="interval">The interval of the candlesticks</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        public CallResult<UpdateSubscription> SubscribeToKlineStream(string[] symbols, KlineInterval interval, Action<BinanceStreamKlineData> onMessage) => SubscribeToKlineStreamAsync(symbols, interval, onMessage).Result;
+        public CallResult<UpdateSubscription> SubscribeToKlineStream(IEnumerable<string> symbols, KlineInterval interval, Action<BinanceStreamKlineData> onMessage) => SubscribeToKlineStreamAsync(symbols, interval, onMessage).Result;
 
         /// <summary>
         /// Subscribes to the candlestick update stream for the provided symbols
@@ -115,8 +115,11 @@ namespace Binance.Net
         /// <param name="interval">The interval of the candlesticks</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineStreamAsync(string[] symbols, KlineInterval interval, Action<BinanceStreamKlineData> onMessage)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineStreamAsync(IEnumerable<string> symbols, KlineInterval interval, Action<BinanceStreamKlineData> onMessage)
         {
+            foreach(var symbol in symbols)
+                symbol.ValidateBinanceSymbol();
+
             var handler = new Action<BinanceCombinedStream<BinanceStreamKlineData>>(data => onMessage(data.Data));
             symbols = symbols.Select(a => a.ToLower() + KlineStreamEndpoint + "_" + JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ToArray();
             return await Subscribe(String.Join("/", symbols), true, handler).ConfigureAwait(false);
@@ -147,7 +150,7 @@ namespace Binance.Net
         /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        public CallResult<UpdateSubscription> SubscribeToDepthStream(string[] symbols, int? updateInterval, Action<BinanceOrderBook> onMessage) => SubscribeToDepthStreamAsync(symbols, updateInterval, onMessage).Result;
+        public CallResult<UpdateSubscription> SubscribeToDepthStream(IEnumerable<string> symbols, int? updateInterval, Action<BinanceOrderBook> onMessage) => SubscribeToDepthStreamAsync(symbols, updateInterval, onMessage).Result;
 
         /// <summary>
         /// Subscribes to the depth update stream for the provided symbols
@@ -156,8 +159,11 @@ namespace Binance.Net
         /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        public async Task<CallResult<UpdateSubscription>> SubscribeToDepthStreamAsync(string[] symbols, int? updateInterval, Action<BinanceOrderBook> onMessage)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToDepthStreamAsync(IEnumerable<string> symbols, int? updateInterval, Action<BinanceOrderBook> onMessage)
         {
+            foreach (var symbol in symbols)
+                symbol.ValidateBinanceSymbol();
+
             if (updateInterval.HasValue && updateInterval != 100 && updateInterval != 1000)
                 return new CallResult<UpdateSubscription>(null, new ArgumentError("Update interval should be either 100 or 1000"));
             
@@ -188,7 +194,7 @@ namespace Binance.Net
         /// <param name="symbols">The symbols</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        public CallResult<UpdateSubscription> SubscribeToBookTickerStream(string[] symbols, Action<BinanceBookTick> onMessage) => SubscribeToBookTickerStreamAsync(symbols, onMessage).Result;
+        public CallResult<UpdateSubscription> SubscribeToBookTickerStream(IEnumerable<string> symbols, Action<BinanceBookTick> onMessage) => SubscribeToBookTickerStreamAsync(symbols, onMessage).Result;
 
         /// <summary>
         /// Subscribes to the book ticker update stream for the provided symbols
@@ -196,8 +202,11 @@ namespace Binance.Net
         /// <param name="symbols">The symbols</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        public async Task<CallResult<UpdateSubscription>> SubscribeToBookTickerStreamAsync(string[] symbols, Action<BinanceBookTick> onMessage)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToBookTickerStreamAsync(IEnumerable<string> symbols, Action<BinanceBookTick> onMessage)
         {
+            foreach (var symbol in symbols)
+                symbol.ValidateBinanceSymbol();
+
             var handler = new Action<BinanceCombinedStream<BinanceBookTick>>(data => onMessage(data.Data));
             symbols = symbols.Select(a => a.ToLower() + BookTickerStreamEndpoint).ToArray();
             return await Subscribe(String.Join("/", symbols), true, handler).ConfigureAwait(false);
@@ -225,7 +234,7 @@ namespace Binance.Net
         /// <param name="symbols">The symbols</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        public CallResult<UpdateSubscription> SubscribeToAggregatedTradesStream(string[] symbols, Action<BinanceStreamAggregatedTrade> onMessage) => SubscribeToAggregatedTradesStreamAsync(symbols, onMessage).Result;
+        public CallResult<UpdateSubscription> SubscribeToAggregatedTradesStream(IEnumerable<string> symbols, Action<BinanceStreamAggregatedTrade> onMessage) => SubscribeToAggregatedTradesStreamAsync(symbols, onMessage).Result;
 
         /// <summary>
         /// Subscribes to the aggregated trades update stream for the provided symbols
@@ -233,8 +242,11 @@ namespace Binance.Net
         /// <param name="symbols">The symbols</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        public async Task<CallResult<UpdateSubscription>> SubscribeToAggregatedTradesStreamAsync(string[] symbols, Action<BinanceStreamAggregatedTrade> onMessage)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToAggregatedTradesStreamAsync(IEnumerable<string> symbols, Action<BinanceStreamAggregatedTrade> onMessage)
         {
+            foreach (var symbol in symbols)
+                symbol.ValidateBinanceSymbol();
+
             var handler = new Action<BinanceCombinedStream<BinanceStreamAggregatedTrade>>(data => onMessage(data.Data));
             symbols = symbols.Select(a => a.ToLower() + AggregatedTradesStreamEndpoint).ToArray();
             return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
@@ -262,7 +274,7 @@ namespace Binance.Net
         /// <param name="symbols">The symbols</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        public CallResult<UpdateSubscription> SubscribeToTradesStream(string[] symbols, Action<BinanceStreamTrade> onMessage) => SubscribeToTradesStreamAsync(symbols, onMessage).Result;
+        public CallResult<UpdateSubscription> SubscribeToTradesStream(IEnumerable<string> symbols, Action<BinanceStreamTrade> onMessage) => SubscribeToTradesStreamAsync(symbols, onMessage).Result;
 
         /// <summary>
         /// Subscribes to the trades update stream for the provided symbols
@@ -270,8 +282,11 @@ namespace Binance.Net
         /// <param name="symbols">The symbols</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTradesStreamAsync(string[] symbols, Action<BinanceStreamTrade> onMessage)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToTradesStreamAsync(IEnumerable<string> symbols, Action<BinanceStreamTrade> onMessage)
         {
+            foreach (var symbol in symbols)
+                symbol.ValidateBinanceSymbol();
+
             var handler = new Action<BinanceCombinedStream<BinanceStreamTrade>>(data => onMessage(data.Data));
             symbols = symbols.Select(a => a.ToLower() + TradesStreamEndpoint).ToArray();
             return await Subscribe(String.Join("/", symbols), true, handler).ConfigureAwait(false);
@@ -293,6 +308,7 @@ namespace Binance.Net
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToSymbolTickerAsync(string symbol, Action<BinanceStreamTick> onMessage)
         {
+            symbol.ValidateBinanceSymbol();
             return await Subscribe(symbol.ToLower() + SymbolTickerStreamEndpoint, false, onMessage).ConfigureAwait(false);
         }
 
@@ -341,7 +357,7 @@ namespace Binance.Net
         /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        public CallResult<UpdateSubscription> SubscribeToPartialBookDepthStream(string[] symbols, int levels, int? updateInterval, Action<BinanceOrderBook> onMessage) => SubscribeToPartialBookDepthStreamAsync(symbols, levels, updateInterval, onMessage).Result;
+        public CallResult<UpdateSubscription> SubscribeToPartialBookDepthStream(IEnumerable<string> symbols, int levels, int? updateInterval, Action<BinanceOrderBook> onMessage) => SubscribeToPartialBookDepthStreamAsync(symbols, levels, updateInterval, onMessage).Result;
 
         /// <summary>
         /// Subscribes to the depth updates for the provided symbols
@@ -351,8 +367,11 @@ namespace Binance.Net
         /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        public async Task<CallResult<UpdateSubscription>> SubscribeToPartialBookDepthStreamAsync(string[] symbols, int levels, int? updateInterval, Action<BinanceOrderBook> onMessage)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToPartialBookDepthStreamAsync(IEnumerable<string> symbols, int levels, int? updateInterval, Action<BinanceOrderBook> onMessage)
         {
+            foreach (var symbol in symbols)
+                symbol.ValidateBinanceSymbol();
+
             if (levels != 5 && levels != 10 && levels != 20)
                 return new CallResult<UpdateSubscription>(null, new ArgumentError("Level should be one of the following: 5, 10, 20"));
 
