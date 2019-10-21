@@ -71,10 +71,7 @@ namespace Binance.Net
         {
             if (limit == null)
             {
-                var updates = new List<ProcessEntry>();
-                updates.AddRange(data.Asks.Select(a => new ProcessEntry(OrderBookEntryType.Ask, a)));
-                updates.AddRange(data.Bids.Select(b => new ProcessEntry(OrderBookEntryType.Bid, b)));
-                UpdateOrderBook(data.FirstUpdateId ?? data.LastUpdateId, data.LastUpdateId, updates);
+                UpdateOrderBook(data.FirstUpdateId ?? data.LastUpdateId, data.LastUpdateId, data.Asks, data.Bids);
             }
             else
             {

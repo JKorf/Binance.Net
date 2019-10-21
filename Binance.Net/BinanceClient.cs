@@ -1370,6 +1370,7 @@ namespace Binance.Net
         /// <returns>Dust transfer result</returns>
         public async Task<WebCallResult<BinanceDustTransferResult>> DustTransferAsync(IEnumerable<string> assets, int? receiveWindow = null, CancellationToken ct = default)
         {
+            assets.ValidateNotNull(nameof(assets));
             foreach(var asset in assets)
                 asset.ValidateNotNull(nameof(asset));
 

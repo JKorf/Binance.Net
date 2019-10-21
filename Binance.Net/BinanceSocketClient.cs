@@ -117,6 +117,7 @@ namespace Binance.Net
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToKlineStreamAsync(IEnumerable<string> symbols, KlineInterval interval, Action<BinanceStreamKlineData> onMessage)
         {
+            symbols.ValidateNotNull(nameof(symbols));
             foreach(var symbol in symbols)
                 symbol.ValidateBinanceSymbol();
 
@@ -161,6 +162,7 @@ namespace Binance.Net
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToDepthStreamAsync(IEnumerable<string> symbols, int? updateInterval, Action<BinanceOrderBook> onMessage)
         {
+            symbols.ValidateNotNull(nameof(symbols));
             foreach (var symbol in symbols)
                 symbol.ValidateBinanceSymbol();
 
@@ -202,6 +204,7 @@ namespace Binance.Net
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToBookTickerStreamAsync(IEnumerable<string> symbols, Action<BinanceBookTick> onMessage)
         {
+            symbols.ValidateNotNull(nameof(symbols));
             foreach (var symbol in symbols)
                 symbol.ValidateBinanceSymbol();
 
@@ -242,6 +245,7 @@ namespace Binance.Net
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToAggregatedTradesStreamAsync(IEnumerable<string> symbols, Action<BinanceStreamAggregatedTrade> onMessage)
         {
+            symbols.ValidateNotNull(nameof(symbols));
             foreach (var symbol in symbols)
                 symbol.ValidateBinanceSymbol();
 
@@ -282,6 +286,7 @@ namespace Binance.Net
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToTradesStreamAsync(IEnumerable<string> symbols, Action<BinanceStreamTrade> onMessage)
         {
+            symbols.ValidateNotNull(nameof(symbols));
             foreach (var symbol in symbols)
                 symbol.ValidateBinanceSymbol();
 
@@ -367,6 +372,7 @@ namespace Binance.Net
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToPartialBookDepthStreamAsync(IEnumerable<string> symbols, int levels, int? updateInterval, Action<BinanceOrderBook> onMessage)
         {
+            symbols.ValidateNotNull(nameof(symbols));
             foreach (var symbol in symbols)
                 symbol.ValidateBinanceSymbol();
 
