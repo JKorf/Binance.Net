@@ -661,7 +661,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The history of dust conversions</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.DustTransfer(System.String[],System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.DustTransfer(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Converts dust (small amounts of) assets to BNB 
             </summary>
@@ -670,7 +670,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Dust transfer result</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.DustTransferAsync(System.String[],System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.DustTransferAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Converts dust (small amounts of) assets to BNB 
             </summary>
@@ -1076,7 +1076,7 @@
             <param name="startTime">Time to start getting records from</param>
             <param name="endTime">Time to stop getting records to</param>
             <param name="current">Number of page records</param>
-            <param name="size">The records count size need show</param>
+            <param name="limit">The records count size need show</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Loan records</returns>
@@ -1090,7 +1090,7 @@
             <param name="startTime">Time to start getting records from</param>
             <param name="endTime">Time to stop getting records to</param>
             <param name="current">Number of page records</param>
-            <param name="size">The records count size need show</param>
+            <param name="limit">The records count size need show</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Loan records</returns>
@@ -2463,7 +2463,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The history of dust conversions</returns>
         </member>
-        <member name="M:Binance.Net.IBinanceClient.DustTransfer(System.String[],System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.IBinanceClient.DustTransfer(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Converts dust (small amounts of) assets to BNB 
             </summary>
@@ -2472,7 +2472,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Dust transfer result</returns>
         </member>
-        <member name="M:Binance.Net.IBinanceClient.DustTransferAsync(System.String[],System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.IBinanceClient.DustTransferAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Converts dust (small amounts of) assets to BNB 
             </summary>
@@ -2906,7 +2906,7 @@
             <param name="startTime">Time to start getting records from</param>
             <param name="endTime">Time to stop getting records to</param>
             <param name="current">Number of page records</param>
-            <param name="size">The records count size need show</param>
+            <param name="limit">The records count size need show</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Repay records</returns>

@@ -701,7 +701,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Dust transfer result</returns>
-        WebCallResult<BinanceDustTransferResult> DustTransfer(string[] assets, int? receiveWindow = null, CancellationToken ct = default);
+        WebCallResult<BinanceDustTransferResult> DustTransfer(IEnumerable<string> assets, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Converts dust (small amounts of) assets to BNB 
@@ -710,7 +710,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Dust transfer result</returns>
-        Task<WebCallResult<BinanceDustTransferResult>> DustTransferAsync(string[] assets, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceDustTransferResult>> DustTransferAsync(IEnumerable<string> assets, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get asset dividend records
@@ -1173,11 +1173,11 @@ namespace Binance.Net
         /// <param name="startTime">Time to start getting records from</param>
         /// <param name="endTime">Time to stop getting records to</param>
         /// <param name="current">Number of page records</param>
-        /// <param name="size">The records count size need show</param>
+        /// <param name="limit">The records count size need show</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Loan records</returns>
-        Task<WebCallResult<BinanceQueryRecords<BinanceLoan>>> GetLoansAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceQueryRecords<BinanceLoan>>> GetLoansAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? limit = 10, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Query repay records
@@ -1187,11 +1187,11 @@ namespace Binance.Net
         /// <param name="startTime">Time to start getting records from</param>
         /// <param name="endTime">Time to stop getting records to</param>
         /// <param name="current">Number of page records</param>
-        /// <param name="size">The records count size need show</param>
+        /// <param name="limit">The records count size need show</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Repay records</returns>
-        WebCallResult<BinanceQueryRecords<BinanceRepay>> GetRepays(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, long? receiveWindow = null, CancellationToken ct = default);
+        WebCallResult<BinanceQueryRecords<BinanceRepay>> GetRepays(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Query repay records

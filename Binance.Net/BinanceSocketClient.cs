@@ -164,9 +164,7 @@ namespace Binance.Net
             foreach (var symbol in symbols)
                 symbol.ValidateBinanceSymbol();
 
-            if (updateInterval.HasValue && updateInterval != 100 && updateInterval != 1000)
-                return new CallResult<UpdateSubscription>(null, new ArgumentError("Update interval should be either 100 or 1000"));
-            
+            updateInterval?.ValidateIntValues(nameof(updateInterval), 100, 1000);
             var handler = new Action<BinanceCombinedStream<BinanceOrderBook>>(data => onMessage(data.Data));
             symbols = symbols.Select(a => a.ToLower() + DepthStreamEndpoint + (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
             return await Subscribe(String.Join("/", symbols), true, handler).ConfigureAwait(false);
@@ -372,11 +370,8 @@ namespace Binance.Net
             foreach (var symbol in symbols)
                 symbol.ValidateBinanceSymbol();
 
-            if (levels != 5 && levels != 10 && levels != 20)
-                return new CallResult<UpdateSubscription>(null, new ArgumentError("Level should be one of the following: 5, 10, 20"));
-
-            if (updateInterval.HasValue && updateInterval != 100 && updateInterval != 1000)
-                return new CallResult<UpdateSubscription>(null, new ArgumentError("Update interval should be either 100 or 1000"));
+            levels.ValidateIntValues(nameof(levels), 5, 10, 20);
+            updateInterval?.ValidateIntValues(nameof(updateInterval), 100, 1000);
 
             var handler = new Action<BinanceCombinedStream<BinanceOrderBook>>(data =>
             {
@@ -420,8 +415,7 @@ namespace Binance.Net
             Action<BinanceStreamOrderList> onOcoOrderUpdateMessage,
             Action<IEnumerable<BinanceStreamBalance>> onAccountPositionMessage)
         {
-            if (string.IsNullOrEmpty(listenKey))
-                return new CallResult<UpdateSubscription>(null, new ArgumentError("ListenKey must be provided"));
+            listenKey.ValidateNotNull(nameof(listenKey));
 
             var handler = new Action<string>(data =>
             {

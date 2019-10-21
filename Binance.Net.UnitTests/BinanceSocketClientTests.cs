@@ -24,7 +24,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateSocketClient(socket);
 
             BinanceStreamKlineData result = null;
-            client.SubscribeToKlineStream("test", KlineInterval.OneMinute, (test) => result = test);
+            client.SubscribeToKlineStream("ETHBTC", KlineInterval.OneMinute, (test) => result = test);
 
             var data = new BinanceCombinedStream<BinanceStreamKlineData>()
             {
@@ -33,7 +33,7 @@ namespace Binance.Net.UnitTests
                 {
                     Event = "TestKlineStream",
                     EventTime = new DateTime(2017, 1, 1),
-                    Symbol = "test",
+                    Symbol = "ETHBTC",
                     Data = new BinanceStreamKline()
                     {
                         TakerBuyBaseAssetVolume = 0.1m,
@@ -73,7 +73,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateSocketClient(socket);
 
             BinanceStreamTick result = null;
-            client.SubscribeToSymbolTicker("test", (test) => result = test);
+            client.SubscribeToSymbolTicker("ETHBTC", (test) => result = test);
 
             var data = new BinanceStreamTick()
             {
@@ -162,7 +162,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateSocketClient(socket);
 
             BinanceStreamTrade result = null;
-            client.SubscribeToTradesStream("test", (test) => result = test);
+            client.SubscribeToTradesStream("ETHBTC", (test) => result = test);
 
             var data = new BinanceCombinedStream<BinanceStreamTrade>()
             {
@@ -171,7 +171,7 @@ namespace Binance.Net.UnitTests
                 {
                     Event = "TestTradeStream",
                     EventTime = new DateTime(2017, 1, 1),
-                    Symbol = "test",
+                    Symbol = "ETHBTC",
                     TradeId = 1000000000000,
                     BuyerIsMaker = true,
                     BuyerOrderId = 10000000000000,

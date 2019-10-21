@@ -308,6 +308,7 @@ namespace Binance.Net
         public async Task<WebCallResult<BinanceOrderBook>> GetOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
+            limit?.ValidateIntValues(nameof(limit), 5, 10, 20, 50, 100, 500, 1000, 5000);
             var parameters = new Dictionary<string, object> { { "symbol", symbol } };
             parameters.AddOptionalParameter("limit", limit?.ToString());
             return await SendRequest<BinanceOrderBook>(GetUrl(OrderBookEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
@@ -338,6 +339,8 @@ namespace Binance.Net
         public async Task<WebCallResult<IEnumerable<BinanceAggregatedTrades>>> GetAggregatedTradesAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
+            limit?.ValidateIntBetween(nameof(limit), 1, 1000);
+
             var parameters = new Dictionary<string, object> { { "symbol", symbol } };
             parameters.AddOptionalParameter("fromId", fromId?.ToString());
             parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString() : null);
@@ -366,6 +369,8 @@ namespace Binance.Net
         public async Task<WebCallResult<IEnumerable<BinanceRecentTrade>>> GetRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
+            limit?.ValidateIntBetween(nameof(limit), 1, 1000);
+
             var parameters = new Dictionary<string, object> { { "symbol", symbol } };
             parameters.AddOptionalParameter("limit", limit?.ToString());
             return await SendRequest<IEnumerable<BinanceRecentTrade>>(GetUrl(RecentTradesEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
@@ -392,6 +397,7 @@ namespace Binance.Net
         public async Task<WebCallResult<IEnumerable<BinanceRecentTrade>>> GetHistoricalTradesAsync(string symbol, int? limit = null, long? fromId = null, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
+            limit?.ValidateIntBetween(nameof(limit), 1, 1000);
             var parameters = new Dictionary<string, object> { { "symbol", symbol } };
             parameters.AddOptionalParameter("limit", limit?.ToString());
             parameters.AddOptionalParameter("fromId", fromId?.ToString());
@@ -424,6 +430,7 @@ namespace Binance.Net
         public async Task<WebCallResult<IEnumerable<BinanceKline>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
+            limit?.ValidateIntBetween(nameof(limit), 1, 1000);
             var parameters = new Dictionary<string, object> {
                 { "symbol", symbol },
                 { "interval", JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)) }
@@ -640,6 +647,7 @@ namespace Binance.Net
         public async Task<WebCallResult<IEnumerable<BinanceOrder>>> GetAllOrdersAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
+            limit?.ValidateIntBetween(nameof(limit), 1, 1000);
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<IEnumerable<BinanceOrder>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
@@ -867,7 +875,7 @@ namespace Binance.Net
         {
             symbol.ValidateBinanceSymbol();
             if (orderId == null && origClientOrderId == null)
-                return new WebCallResult<BinanceOrder>(null, null, null, new ArgumentError("Either orderId or origClientOrderId should be provided"));
+                throw new ArgumentException("Either orderId or origClientOrderId must be sent");
 
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
@@ -915,7 +923,7 @@ namespace Binance.Net
                 return new WebCallResult<BinanceCanceledOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             if (!orderId.HasValue && string.IsNullOrEmpty(origClientOrderId))
-                return new WebCallResult<BinanceCanceledOrder>(null, null, null, new ArgumentError("Either orderId or origClientOrderId must be sent."));
+                throw new ArgumentException("Either orderId or origClientOrderId must be sent");
 
             var parameters = new Dictionary<string, object>
             {
@@ -986,6 +994,8 @@ namespace Binance.Net
         public async Task<WebCallResult<IEnumerable<BinanceTrade>>> GetMyTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
+            limit?.ValidateIntBetween(nameof(limit), 1, 1000);
+
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<IEnumerable<BinanceTrade>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
@@ -1030,6 +1040,9 @@ namespace Binance.Net
         /// <returns>Withdrawal confirmation</returns>
         public async Task<WebCallResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, decimal amount, string? addressTag = null, string? name = null, int? receiveWindow = null, CancellationToken ct = default)
         {
+            asset.ValidateNotNull(nameof(asset));
+            address.ValidateNotNull(nameof(address));
+
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<BinanceWithdrawalPlaced>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
@@ -1170,6 +1183,8 @@ namespace Binance.Net
         /// <returns>Deposit address</returns>
         public async Task<WebCallResult<BinanceDepositAddress>> GetDepositAddressAsync(string asset, int? receiveWindow = null, CancellationToken ct = default)
         {
+            asset.ValidateNotNull(nameof(asset));
+
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<BinanceDepositAddress>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
@@ -1344,7 +1359,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Dust transfer result</returns>
-        public WebCallResult<BinanceDustTransferResult> DustTransfer(string[] assets, int? receiveWindow = null, CancellationToken ct = default) => DustTransferAsync(assets, receiveWindow, ct).Result;
+        public WebCallResult<BinanceDustTransferResult> DustTransfer(IEnumerable<string> assets, int? receiveWindow = null, CancellationToken ct = default) => DustTransferAsync(assets, receiveWindow, ct).Result;
 
         /// <summary>
         /// Converts dust (small amounts of) assets to BNB 
@@ -1353,8 +1368,11 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Dust transfer result</returns>
-        public async Task<WebCallResult<BinanceDustTransferResult>> DustTransferAsync(string[] assets, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceDustTransferResult>> DustTransferAsync(IEnumerable<string> assets, int? receiveWindow = null, CancellationToken ct = default)
         {
+            foreach(var asset in assets)
+                asset.ValidateNotNull(nameof(asset));
+
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<BinanceDustTransferResult>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
@@ -1524,6 +1542,10 @@ namespace Binance.Net
         /// <returns>The result of the transfer</returns>
         public async Task<WebCallResult<BinanceSubAccountTransferResult>> TransferSubAccountAsync(string fromEmail, string toEmail, string asset, decimal amount, int? receiveWindow = null, CancellationToken ct = default)
         {
+            fromEmail.ValidateNotNull(nameof(fromEmail));
+            toEmail.ValidateNotNull(nameof(toEmail));
+            asset.ValidateNotNull(nameof(asset));
+
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<BinanceSubAccountTransferResult>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
@@ -1706,7 +1728,7 @@ namespace Binance.Net
                 return new WebCallResult<BinanceOrderList>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             if (!orderListId.HasValue && string.IsNullOrEmpty(listClientOrderId))
-                return new WebCallResult<BinanceOrderList>(null, null, null, new ArgumentError("Either orderListId or listClientOrderId must be sent."));
+                throw new ArgumentException("Either orderListId or listClientOrderId must be sent");
 
             var parameters = new Dictionary<string, object>
             {
@@ -1742,7 +1764,7 @@ namespace Binance.Net
         public async Task<WebCallResult<BinanceOrderList>> GetOCOOrderAsync(long? orderListId = null, string? listClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (orderListId == null && listClientOrderId == null)
-                return new WebCallResult<BinanceOrderList>(null, null, null, new ArgumentError("Either orderListId or listClientOrderId should be provided"));
+                throw new ArgumentException("Either orderListId or listClientOrderId must be sent");
 
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
@@ -1784,7 +1806,9 @@ namespace Binance.Net
         public async Task<WebCallResult<IEnumerable<BinanceOrderList>>> GetOCOOrdersAsync(long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (fromId != null && (startTime != null || endTime != null))
-                return new WebCallResult<IEnumerable<BinanceOrderList>>(null, null, null, new ArgumentError("Start/end time can only be provided without fromId parameter"));
+                throw new ArgumentException("Start/end time can only be provided without fromId parameter");
+
+            limit?.ValidateIntBetween(nameof(limit), 1, 1000);
 
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
@@ -1889,6 +1913,7 @@ namespace Binance.Net
         /// <returns>Transaction Id</returns>
         public async Task<WebCallResult<BinanceMarginTransaction>> TransferAsync(string asset, decimal amount, TransferDirectionType type, int? receiveWindow = null, CancellationToken ct = default)
         {
+            asset.ValidateNotNull(nameof(asset));
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<BinanceMarginTransaction>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
@@ -1925,6 +1950,7 @@ namespace Binance.Net
         /// <returns>Transaction Id</returns>
         public async Task<WebCallResult<BinanceMarginTransaction>> BorrowAsync(string asset, decimal amount, int? receiveWindow = null, CancellationToken ct = default)
         {
+            asset.ValidateNotNull(nameof(asset));
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<BinanceMarginTransaction>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
@@ -1960,6 +1986,7 @@ namespace Binance.Net
         /// <returns>Transaction Id</returns>
         public async Task<WebCallResult<BinanceMarginTransaction>> RepayAsync(string asset, decimal amount, int? receiveWindow = null, CancellationToken ct = default)
         {
+            asset.ValidateNotNull(nameof(asset));
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<BinanceMarginTransaction>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
@@ -2097,7 +2124,7 @@ namespace Binance.Net
                 return new WebCallResult<BinanceCanceledOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             if (!orderId.HasValue && string.IsNullOrEmpty(origClientOrderId))
-                return new WebCallResult<BinanceCanceledOrder>(null, null, null, new ArgumentError("Either orderId or origClientOrderId must be sent."));
+                throw new ArgumentException("Either orderId or origClientOrderId must be sent");
 
             var parameters = new Dictionary<string, object>
             {
@@ -2120,11 +2147,11 @@ namespace Binance.Net
         /// <param name="startTime">Time to start getting records from</param>
         /// <param name="endTime">Time to stop getting records to</param>
         /// <param name="current">Number of page records</param>
-        /// <param name="size">The records count size need show</param>
+        /// <param name="limit">The records count size need show</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Loan records</returns>
-        public WebCallResult<BinanceQueryRecords<BinanceLoan>> GetLoans(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null, CancellationToken ct = default) => GetLoansAsync(asset, transactionId, startTime, endTime, current, size, receiveWindow, ct).Result;
+        public WebCallResult<BinanceQueryRecords<BinanceLoan>> GetLoans(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? limit = 10, long? receiveWindow = null, CancellationToken ct = default) => GetLoansAsync(asset, transactionId, startTime, endTime, current, limit, receiveWindow, ct).Result;
 
         /// <summary>
         /// Query loan records
@@ -2134,12 +2161,14 @@ namespace Binance.Net
         /// <param name="startTime">Time to start getting records from</param>
         /// <param name="endTime">Time to stop getting records to</param>
         /// <param name="current">Number of page records</param>
-        /// <param name="size">The records count size need show</param>
+        /// <param name="limit">The records count size need show</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Loan records</returns>
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceLoan>>> GetLoansAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? size = 10, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceLoan>>> GetLoansAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? limit = 10, long? receiveWindow = null, CancellationToken ct = default)
         {
+            asset.ValidateNotNull(nameof(asset));
+            limit?.ValidateIntBetween(nameof(limit), 1, 100);
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<BinanceQueryRecords<BinanceLoan>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
@@ -2163,7 +2192,7 @@ namespace Binance.Net
 
             parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
             parameters.AddOptionalParameter("current", current?.ToString());
-            parameters.AddOptionalParameter("size", size?.ToString());
+            parameters.AddOptionalParameter("size", limit?.ToString());
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await SendRequest<BinanceQueryRecords<BinanceLoan>>(GetUrl(GetLoanEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
@@ -2197,6 +2226,7 @@ namespace Binance.Net
         /// <returns>Repay records</returns>
         public async Task<WebCallResult<BinanceQueryRecords<BinanceRepay>>> GetRepaysAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, long? receiveWindow = null, CancellationToken ct = default)
         {
+            asset.ValidateNotNull(nameof(asset));
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<BinanceQueryRecords<BinanceRepay>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
@@ -2279,7 +2309,7 @@ namespace Binance.Net
         {
             symbol.ValidateBinanceSymbol();
             if (orderId == null && origClientOrderId == null)
-                return new WebCallResult<BinanceOrder>(null, null, null, new ArgumentError("Either orderId or origClientOrderId should be provided"));
+                throw new ArgumentException("Either orderId or origClientOrderId should be provided");
 
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
@@ -2357,6 +2387,7 @@ namespace Binance.Net
         public async Task<WebCallResult<IEnumerable<BinanceOrder>>> GetAllMarginAccountOrdersAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
+            limit?.ValidateIntBetween(nameof(limit), 1, 1000);
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<IEnumerable<BinanceOrder>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
@@ -2402,6 +2433,7 @@ namespace Binance.Net
         public async Task<WebCallResult<IEnumerable<BinanceTrade>>> GetMyMarginAccountTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
+            limit?.ValidateIntBetween(nameof(limit), 1, 1000);
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<IEnumerable<BinanceTrade>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
@@ -2438,6 +2470,7 @@ namespace Binance.Net
         /// <returns>Return max amount</returns>
         public async Task<WebCallResult<decimal>> GetMaxBorrowAmountAsync(string asset, long? receiveWindow = null, CancellationToken ct = default)
         {
+            asset.ValidateNotNull(nameof(asset));
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<decimal>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, 0, timestampResult.Error);
@@ -2476,6 +2509,7 @@ namespace Binance.Net
         /// <returns>Return max amount</returns>
         public async Task<WebCallResult<decimal>> GetMaxTransferAmountAsync(string asset, long? receiveWindow = null, CancellationToken ct = default)
         {
+            asset.ValidateNotNull(nameof(asset));
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<decimal>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, 0, timestampResult.Error);
@@ -2522,6 +2556,8 @@ namespace Binance.Net
         /// <returns>List of transfers</returns>
         public async Task<WebCallResult<BinanceQueryRecords<BinanceTransferHistory>>> GetTransferHistoryAsync(TransferDirection direction, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
+            limit?.ValidateIntBetween(nameof(limit), 1, 100);
+
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<BinanceQueryRecords<BinanceTransferHistory>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
@@ -2566,6 +2602,7 @@ namespace Binance.Net
         /// <returns>List of interest events</returns>
         public async Task<WebCallResult<BinanceQueryRecords<BinanceInterestHistory>>> GetInterestHistoryAsync(string? asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
+            limit?.ValidateIntBetween(nameof(limit), 1, 100);
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<BinanceQueryRecords<BinanceInterestHistory>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
@@ -2607,6 +2644,7 @@ namespace Binance.Net
         /// <returns>List of forced liquidations</returns>
         public async Task<WebCallResult<BinanceQueryRecords<BinanceForcedLiquidation>>> GetForceLiquidationHistoryAsync(int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
+            limit?.ValidateIntBetween(nameof(limit), 1, 100);
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<BinanceQueryRecords<BinanceForcedLiquidation>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
@@ -2664,6 +2702,7 @@ namespace Binance.Net
         /// <returns></returns>
         public async Task<WebCallResult<object>> KeepAliveUserStreamAsync(string listenKey, CancellationToken ct = default)
         {
+            listenKey.ValidateNotNull(nameof(listenKey));
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<object>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
@@ -2692,6 +2731,7 @@ namespace Binance.Net
         /// <returns></returns>
         public async Task<WebCallResult<object>> StopUserStreamAsync(string listenKey, CancellationToken ct = default)
         {
+            listenKey.ValidateNotNull(nameof(listenKey));
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<object>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
@@ -2750,6 +2790,7 @@ namespace Binance.Net
         /// <returns></returns>
         public async Task<WebCallResult<object>> KeepAliveMarginUserStreamAsync(string listenKey, CancellationToken ct = default)
         {
+            listenKey.ValidateNotNull(nameof(listenKey));
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<object>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
@@ -2778,6 +2819,7 @@ namespace Binance.Net
         /// <returns></returns>
         public async Task<WebCallResult<object>> CloseMarginUserStreamAsync(string listenKey, CancellationToken ct = default)
         {
+            listenKey.ValidateNotNull(nameof(listenKey));
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<object>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
