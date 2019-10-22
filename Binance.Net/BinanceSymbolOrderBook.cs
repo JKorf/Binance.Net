@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Binance.Net.Objects;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.OrderBook;
@@ -18,7 +16,6 @@ namespace Binance.Net
         private readonly BinanceSocketClient socketClient;
         private readonly int? limit;
         private readonly int? updateInterval;
-        private bool initialUpdateReceived;
 
         /// <summary>
         /// Create a new instance
@@ -56,12 +53,12 @@ namespace Binance.Net
                     return new CallResult<UpdateSubscription>(null, bookResult.Error);
                 }
 
-                SetInitialOrderBook(bookResult.Data.LastUpdateId, bookResult.Data.Asks, bookResult.Data.Bids);
+                SetInitialOrderBook(bookResult.Data.LastUpdateId, bookResult.Data.Bids, bookResult.Data.Asks);
             }
             else
             {
-                while (!initialUpdateReceived && Status == OrderBookStatus.Syncing)
-                    await Task.Delay(10).ConfigureAwait(false);
+                var setResult = await WaitForSetOrderBook(10000).ConfigureAwait(false);
+                return setResult ? subResult : new CallResult<UpdateSubscription>(null, setResult.Error);
             }
 
             return new CallResult<UpdateSubscription>(subResult.Data, null);
@@ -71,11 +68,10 @@ namespace Binance.Net
         {
             if (limit == null)
             {
-                UpdateOrderBook(data.FirstUpdateId ?? data.LastUpdateId, data.LastUpdateId, data.Asks, data.Bids);
+                UpdateOrderBook(data.FirstUpdateId ?? 0, data.LastUpdateId, data.Bids, data.Asks);
             }
             else
             {
-                initialUpdateReceived = true;
                 SetInitialOrderBook(data.LastUpdateId, data.Asks, data.Bids);
             }
         }
@@ -83,25 +79,19 @@ namespace Binance.Net
         /// <inheritdoc />
         protected override void DoReset()
         {
-            initialUpdateReceived = false;
         }
 
         /// <inheritdoc />
         protected override async Task<CallResult<bool>> DoResync()
         {
             if (limit != null)
-            {
-                while (!initialUpdateReceived && Status == OrderBookStatus.Syncing)
-                    await Task.Delay(10).ConfigureAwait(false);
-
-                return new CallResult<bool>(true, null);
-            }
+                return await WaitForSetOrderBook(10000).ConfigureAwait(false);
 
             var bookResult = await restClient.GetOrderBookAsync(Symbol, limit ?? 5000).ConfigureAwait(false);
             if (!bookResult)
                 return new CallResult<bool>(false, bookResult.Error);
 
-            SetInitialOrderBook(bookResult.Data.LastUpdateId, bookResult.Data.Asks, bookResult.Data.Bids);
+            SetInitialOrderBook(bookResult.Data.LastUpdateId, bookResult.Data.Bids, bookResult.Data.Asks);
             return new CallResult<bool>(true, null);
         }
 
