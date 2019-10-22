@@ -1,5 +1,4 @@
 ﻿using Binance.Net.Converters;
-using Binance.Net.Interfaces;
 using Binance.Net.Objects;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
@@ -16,6 +15,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Binance.Net.Interfaces;
 
 namespace Binance.Net
 {
@@ -55,7 +55,7 @@ namespace Binance.Net
         private const string WithdrawalVersion = "3";
         private const string MarginVersion = "1";
         private const string AveragePriceVersion = "3";
-        
+
         // Public
         private const string PingEndpoint = "ping";
         private const string CheckTimeEndpoint = "time";
@@ -69,7 +69,7 @@ namespace Binance.Net
         private const string AllPricesEndpoint = "ticker/price";
         private const string BookPricesEndpoint = "ticker/bookTicker";
         private const string AveragePriceEndpoint = "avgPrice";
-        
+
         // Orders
         private const string OpenOrdersEndpoint = "openOrders";
         private const string AllOrdersEndpoint = "allOrders";
@@ -88,7 +88,7 @@ namespace Binance.Net
 
         // Accounts
         private const string AccountInfoEndpoint = "account";
-        
+
         // Margin
         private const string MarginAssetsEndpoint = "margin/allAssets";
         private const string MarginPairsEndpoint = "margin/allPairs";
@@ -357,7 +357,7 @@ namespace Binance.Net
         /// <param name="limit">Result limit</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of recent trades</returns>
-        public WebCallResult<IEnumerable<BinanceRecentTrade>> GetRecentTrades(string symbol, int? limit = null, CancellationToken ct = default) => GetRecentTradesAsync(symbol, limit, ct).Result;
+        public WebCallResult<IEnumerable<BinanceRecentTrade>> GetSymbolTrades(string symbol, int? limit = null, CancellationToken ct = default) => GetSymbolTradesAsync(symbol, limit, ct).Result;
 
         /// <summary>
         /// Gets the recent trades for a symbol
@@ -366,7 +366,7 @@ namespace Binance.Net
         /// <param name="limit">Result limit</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of recent trades</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceRecentTrade>>> GetRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceRecentTrade>>> GetSymbolTradesAsync(string symbol, int? limit = null, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);
@@ -384,7 +384,7 @@ namespace Binance.Net
         /// <param name="fromId">From which trade id on results should be retrieved</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of recent trades</returns>
-        public WebCallResult<IEnumerable<BinanceRecentTrade>> GetHistoricalTrades(string symbol, int? limit = null, long? fromId = null, CancellationToken ct = default) => GetHistoricalTradesAsync(symbol, limit, fromId, ct).Result;
+        public WebCallResult<IEnumerable<BinanceRecentTrade>> GetHistoricalSymbolTrades(string symbol, int? limit = null, long? fromId = null, CancellationToken ct = default) => GetHistoricalSymbolTradesAsync(symbol, limit, fromId, ct).Result;
 
         /// <summary>
         /// Gets the historical  trades for a symbol
@@ -394,7 +394,7 @@ namespace Binance.Net
         /// <param name="fromId">From which trade id on results should be retrieved</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of recent trades</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceRecentTrade>>> GetHistoricalTradesAsync(string symbol, int? limit = null, long? fromId = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceRecentTrade>>> GetHistoricalSymbolTradesAsync(string symbol, int? limit = null, long? fromId = null, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);
@@ -785,7 +785,7 @@ namespace Binance.Net
             decimal? stopPrice = null,
             decimal? icebergQty = null,
             OrderResponseType? orderResponseType = null,
-            int? receiveWindow = null, 
+            int? receiveWindow = null,
             CancellationToken ct = default) => PlaceTestOrderAsync(symbol, side, type, quantity, newClientOrderId, price, timeInForce, stopPrice, icebergQty, orderResponseType, receiveWindow, ct).Result;
 
         /// <summary>
@@ -814,7 +814,7 @@ namespace Binance.Net
             decimal? stopPrice = null,
             decimal? icebergQty = null,
             OrderResponseType? orderResponseType = null,
-            int? receiveWindow = null, 
+            int? receiveWindow = null,
             CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
@@ -1126,7 +1126,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of withdrawals</returns>
-        public WebCallResult<IEnumerable<BinanceWithdrawal>> GetWithdrawHistory(string? asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default) => GetWithdrawHistoryAsync(asset, status, startTime, endTime, receiveWindow, ct).Result;
+        public WebCallResult<IEnumerable<BinanceWithdrawal>> GetWithdrawalHistory(string? asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default) => GetWithdrawalHistoryAsync(asset, status, startTime, endTime, receiveWindow, ct).Result;
 
         /// <summary>
         /// Gets the withdrawal history
@@ -1138,7 +1138,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of withdrawals</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceWithdrawal>>> GetWithdrawHistoryAsync(string? asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceWithdrawal>>> GetWithdrawalHistoryAsync(string? asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
@@ -1371,7 +1371,7 @@ namespace Binance.Net
         public async Task<WebCallResult<BinanceDustTransferResult>> DustTransferAsync(IEnumerable<string> assets, int? receiveWindow = null, CancellationToken ct = default)
         {
             assets.ValidateNotNull(nameof(assets));
-            foreach(var asset in assets)
+            foreach (var asset in assets)
                 asset.ValidateNotNull(nameof(asset));
 
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -1634,7 +1634,7 @@ namespace Binance.Net
             decimal? stopIcebergQuantity = null,
             TimeInForce? stopLimitTimeInForce = null,
             OrderResponseType? orderResponseType = null,
-            int? receiveWindow = null, 
+            int? receiveWindow = null,
             CancellationToken ct = default) => PlaceOCOOrderAsync(symbol, side, quantity, price, stopPrice, stopLimitPrice, listClientOrderId, limitClientOrderId, stopClientOrderId, limitIcebergQuantity, stopIcebergQuantity, stopLimitTimeInForce, orderResponseType, receiveWindow, ct).Result;
 
         /// <summary>
@@ -1669,14 +1669,14 @@ namespace Binance.Net
             decimal? stopIcebergQuantity = null,
             TimeInForce? stopLimitTimeInForce = null,
             OrderResponseType? orderResponseType = null,
-            int? receiveWindow = null, 
+            int? receiveWindow = null,
             CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<BinanceOrderList>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-            
+
             var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
@@ -2029,7 +2029,7 @@ namespace Binance.Net
             decimal? stopPrice = null,
             decimal? icebergQuantity = null,
             OrderResponseType? orderResponseType = null,
-            int? receiveWindow = null, 
+            int? receiveWindow = null,
             CancellationToken ct = default) => PlaceMarginOrderAsync(symbol, side, type, quantity, newClientOrderId, price, timeInForce, stopPrice, icebergQuantity, orderResponseType, receiveWindow, ct).Result;
 
         /// <summary>
@@ -2058,7 +2058,7 @@ namespace Binance.Net
             decimal? stopPrice = null,
             decimal? icebergQuantity = null,
             OrderResponseType? orderResponseType = null,
-            int? receiveWindow = null, 
+            int? receiveWindow = null,
             CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
@@ -2666,14 +2666,14 @@ namespace Binance.Net
 
         #region stream
         /// <summary>
-        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToUserStream"/>. The stream will close after 60 minutes unless a keep alive is send.
+        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToUserDataUpdates"/>. The stream will close after 60 minutes unless a keep alive is send.
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Listen key</returns>
         public WebCallResult<string> StartUserStream(CancellationToken ct = default) => StartUserStreamAsync(ct).Result;
 
         /// <summary>
-        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToUserStream"/>. The stream will close after 60 minutes unless a keep alive is send.
+        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToUserDataUpdates"/>. The stream will close after 60 minutes unless a keep alive is send.
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Listen key</returns>
@@ -2748,7 +2748,7 @@ namespace Binance.Net
         /// <summary>
         /// Starts a user stream  for margin account by requesting a listen key. 
         /// This listen key can be used in subsequent requests to 
-        /// <see cref="BinanceSocketClient.SubscribeToUserStream"/>. 
+        /// <see cref="BinanceSocketClient.SubscribeToUserDataUpdates"/>. 
         /// The stream will close after 60 minutes unless a keep alive is send.
         /// </summary>
         /// <param name="ct">Cancellation token</param>
@@ -2758,7 +2758,7 @@ namespace Binance.Net
         /// <summary>
         /// Starts a user stream  for margin account by requesting a listen key. 
         /// This listen key can be used in subsequent requests to 
-        /// <see cref="BinanceSocketClient.SubscribeToUserStream"/>. 
+        /// <see cref="BinanceSocketClient.SubscribeToUserDataUpdates"/>. 
         /// The stream will close after 60 minutes unless a keep alive is send.
         /// </summary>
         /// <param name="ct">Cancellation token</param>
@@ -2840,7 +2840,7 @@ namespace Binance.Net
         #endregion
 
         #region helpers
-        
+
         /// <inheritdoc />
         protected override Error ParseErrorResponse(JToken error)
         {

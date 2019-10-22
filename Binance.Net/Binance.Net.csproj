@@ -12,7 +12,7 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance Binance.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
     <PackageProjectUrl>https://github.com/JKorf/Binance.Net</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/JKorf/Binance.Net/master/Resources/binance-coin.png</PackageIconUrl>
+    <PackageIcon>icon.png</PackageIcon>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -23,5 +23,8 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CryptoExchange.net\CryptoExchange.Net\CryptoExchange.Net.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icon\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 </Project>

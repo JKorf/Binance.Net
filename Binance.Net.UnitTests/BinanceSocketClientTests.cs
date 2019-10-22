@@ -24,7 +24,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateSocketClient(socket);
 
             BinanceStreamKlineData result = null;
-            client.SubscribeToKlineStream("ETHBTC", KlineInterval.OneMinute, (test) => result = test);
+            client.SubscribeToKlineUpdatesAsync("ETHBTC", KlineInterval.OneMinute, (test) => result = test);
 
             var data = new BinanceCombinedStream<BinanceStreamKlineData>()
             {
@@ -73,7 +73,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateSocketClient(socket);
 
             BinanceStreamTick result = null;
-            client.SubscribeToSymbolTicker("ETHBTC", (test) => result = test);
+            client.SubscribeToSymbolTickerUpdates("ETHBTC", (test) => result = test);
 
             var data = new BinanceStreamTick()
             {
@@ -116,7 +116,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateSocketClient(socket);
 
             BinanceStreamTick[] result = null;
-            client.SubscribeToAllSymbolTicker((test) => result = test.ToArray());
+            client.SubscribeToAllSymbolTickerUpdates((test) => result = test.ToArray());
 
             var data = new[]
             {
@@ -162,7 +162,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateSocketClient(socket);
 
             BinanceStreamTrade result = null;
-            client.SubscribeToTradesStream("ETHBTC", (test) => result = test);
+            client.SubscribeToTradeUpdates("ETHBTC", (test) => result = test);
 
             var data = new BinanceCombinedStream<BinanceStreamTrade>()
             {
@@ -198,7 +198,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateSocketClient(socket);
 
             BinanceStreamAccountInfo result = null;
-            client.SubscribeToUserStream("test", (test) => result = test, null, null, null);
+            client.SubscribeToUserDataUpdates("test", (test) => result = test, null, null, null);
 
             var data = new BinanceStreamAccountInfo()
             {
@@ -238,7 +238,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateSocketClient(socket, new BinanceSocketClientOptions(){ LogVerbosity = LogVerbosity.Debug });
 
             BinanceStreamOrderList result = null;
-            client.SubscribeToUserStream("test", null, null, (test) => result = test, null);
+            client.SubscribeToUserDataUpdatesAsync("test", null, null, (test) => result = test, null);
 
             var data = new BinanceStreamOrderList()
             {
@@ -286,7 +286,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateSocketClient(socket);
 
             BinanceStreamOrderUpdate result = null;
-            client.SubscribeToUserStream("test", null, (test) => result = test, null, null);
+            client.SubscribeToUserDataUpdatesAsync("test", null, (test) => result = test, null, null);
 
             var data = new BinanceStreamOrderUpdate()
             {

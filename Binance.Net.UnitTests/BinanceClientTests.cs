@@ -575,7 +575,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.GetWithdrawHistory();
+            var result = client.GetWithdrawalHistory();
 
             // assert
             Assert.IsTrue(result.Success);

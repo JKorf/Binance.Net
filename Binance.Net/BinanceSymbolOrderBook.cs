@@ -36,9 +36,9 @@ namespace Binance.Net
         {
             CallResult<UpdateSubscription> subResult;
             if (limit == null)
-                subResult = await socketClient.SubscribeToDepthStreamAsync(Symbol, updateInterval, HandleUpdate).ConfigureAwait(false);
+                subResult = await socketClient.SubscribeToOrderBookUpdatesAsync(Symbol, updateInterval, HandleUpdate).ConfigureAwait(false);
             else
-                subResult = await socketClient.SubscribeToPartialBookDepthStreamAsync(Symbol, limit.Value, updateInterval, HandleUpdate).ConfigureAwait(false);
+                subResult = await socketClient.SubscribeToPartialOrderBookUpdatesAsync(Symbol, limit.Value, updateInterval, HandleUpdate).ConfigureAwait(false);
 
             if (!subResult)
                 return new CallResult<UpdateSubscription>(null, subResult.Error);
