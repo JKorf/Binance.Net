@@ -1046,9 +1046,9 @@ namespace Binance.Net.UnitTests
         public void CheckValidBinanceSymbol(string symbol, bool isValid)
         {
             if (isValid)
-                Assert.DoesNotThrow(() => symbol.ValidateBinanceSymbol());
+                Assert.DoesNotThrow(symbol.ValidateBinanceSymbol);
             else
-                Assert.Throws(typeof(ArgumentException), () => symbol.ValidateBinanceSymbol());
+                Assert.Throws(typeof(ArgumentException), symbol.ValidateBinanceSymbol);
         }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Security.Authentication;
-using System.Text;
 using System.Threading.Tasks;
 using CryptoExchange.Net.Interfaces;
 using Newtonsoft.Json;
