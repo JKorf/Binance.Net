@@ -144,6 +144,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 5.0.1 - 23 Oct 2019
+	* Fixed validation for 5 length symbols
+
 * Version 5.0.0 - 23 Oct 2019
 	* See CryptoExchange.Net 3.0 release notes
 	* Added input validation
