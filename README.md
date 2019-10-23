@@ -1,4 +1,4 @@
-# ![Icon](https://github.com/JKorf/Binance.Net/blob/master/Resources/binance-coin.png?raw=true) Binance.Net 
+# ![Icon](https://github.com/JKorf/Binance.Net/blob/master/Binance.Net/Icon/icon.png?raw=true) Binance.Net 
 
 ![Build status](https://travis-ci.org/JKorf/Binance.Net.svg?branch=master)
 
