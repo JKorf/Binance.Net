@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.OrderBook;
+using CryptoExchange.Net.Interfaces;
 
 namespace Binance.Net.Objects
 {
@@ -14,7 +14,7 @@ namespace Binance.Net.Objects
         /// The symbol the update is for
         /// </summary>
         [JsonProperty("s")]
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = "";
 
         /// <summary>
         /// The ID of the last update
@@ -38,23 +38,23 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The list of bids
         /// </summary>
-        public List<BinanceOrderBookEntry> Bids { get; set; }
+        public IEnumerable<BinanceOrderBookEntry> Bids { get; set; } = new List<BinanceOrderBookEntry>();
 
         /// <summary>
         /// Setter for bids (needed forJson.Net)
         /// </summary>
         [JsonProperty("b")]
-        public List<BinanceOrderBookEntry> BidsStream { set => Bids = value; }
+        public IEnumerable<BinanceOrderBookEntry> BidsStream { set => Bids = value; }
         /// <summary>
         /// The list of asks
         /// </summary>
-        public List<BinanceOrderBookEntry> Asks { get; set; }
+        public IEnumerable<BinanceOrderBookEntry> Asks { get; set; } = new List<BinanceOrderBookEntry>();
 
         /// <summary>
         /// Setter for asks (needed forJson.Net)
         /// </summary>
         [JsonProperty("a")]
-        public List<BinanceOrderBookEntry> AsksStream { set => Asks = value; }
+        public IEnumerable<BinanceOrderBookEntry> AsksStream { set => Asks = value; }
     }
 
     /// <summary>

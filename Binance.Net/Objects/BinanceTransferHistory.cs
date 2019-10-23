@@ -20,7 +20,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// Status of the transfer
         /// </summary>
-        public string Status { get; set; }
+        public string Status { get; set; } = "";
         /// <summary>
         /// Timestamp of the transaction
         /// </summary>

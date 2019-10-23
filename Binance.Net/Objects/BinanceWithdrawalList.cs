@@ -10,13 +10,13 @@ namespace Binance.Net.Objects
     /// <summary>
     /// Wrapper for list of withdrawals
     /// </summary>
-    public class BinanceWithdrawalList
+    internal class BinanceWithdrawalList
     {
         /// <summary>
         /// The list of withdrawals
         /// </summary>
         [JsonProperty("withdrawList")]
-        public List<BinanceWithdrawal> List { get; set; }
+        public IEnumerable<BinanceWithdrawal>? List { get; set; }
         /// <summary>
         /// Boolean indicating if the withdrawal list retrieval was successful
         /// </summary>
@@ -26,7 +26,7 @@ namespace Binance.Net.Objects
         /// </summary>
         [JsonProperty("msg")]
         [JsonOptionalProperty]
-        public string Message { get; set; }
+        public string? Message { get; set; }
     }
 
     /// <summary>
@@ -37,7 +37,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The id of the withdrawal
         /// </summary>
-        public string Id { get; set; }
+        public string Id { get; set; } = "";
         /// <summary>
         /// The time the withdrawal was applied for
         /// </summary>
@@ -50,16 +50,16 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The address the asset was withdrawn to
         /// </summary>
-        public string Address { get; set; }
+        public string Address { get; set; } = "";
         /// <summary>
         /// Tag for the address
         /// </summary>
-        public string AddressTag { get; set; }
+        public string AddressTag { get; set; } = "";
         /// <summary>
         /// The transaction id of the withdrawal
         /// </summary>
         [JsonProperty("txId")]
-        public string TransactionId { get; set; }
+        public string TransactionId { get; set; } = "";
         /// <summary>
         /// Transaction fee for the withdrawal
         /// </summary>
@@ -67,7 +67,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The asset that was withdrawn
         /// </summary>
-        public string Asset { get; set; }
+        public string Asset { get; set; } = "";
         /// <summary>
         /// The status of the withdrawal
         /// </summary>

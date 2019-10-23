@@ -27,6 +27,6 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The asset the commission is paid in
         /// </summary>
-        public string CommissionAsset { get; set; }
+        public string CommissionAsset { get; set; } = "";
     }
 }

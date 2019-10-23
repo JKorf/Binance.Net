@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using CryptoExchange.Net;
@@ -14,11 +16,14 @@ namespace Binance.Net
 
         public BinanceAuthenticationProvider(ApiCredentials credentials, ArrayParametersSerialization arraySerialization) : base(credentials)
         {
+            if (credentials.Secret == null)
+                throw new ArgumentException("No valid API credentials provided. Key/Secret needed.");
+
             encryptor = new HMACSHA256(Encoding.ASCII.GetBytes(credentials.Secret.GetString()));
             this.arraySerialization = arraySerialization;
         }
 
-        public override Dictionary<string, object> AddAuthenticationToParameters(string uri, string method, Dictionary<string, object> parameters, bool signed)
+        public override Dictionary<string, object> AddAuthenticationToParameters(string uri, HttpMethod method, Dictionary<string, object> parameters, bool signed)
         {
             if (!signed)
                 return parameters;
@@ -28,14 +33,17 @@ namespace Binance.Net
             return parameters;
         }
 
-        public override Dictionary<string, string> AddAuthenticationToHeaders(string uri, string method, Dictionary<string, object> parameters, bool signed)
+        public override Dictionary<string, string> AddAuthenticationToHeaders(string uri, HttpMethod method, Dictionary<string, object> parameters, bool signed)
         {
+            if (Credentials.Key == null)
+                throw new ArgumentException("No valid API credentials provided. Key/Secret needed.");
+
             return new Dictionary<string, string> {{"X-MBX-APIKEY", Credentials.Key.GetString()}};
         }
         
         public override string Sign(string toSign)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

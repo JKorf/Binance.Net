@@ -20,7 +20,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The symbol the trade is for
         /// </summary>
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = "";
         /// <summary>
         /// The price of the trade
         /// </summary>
@@ -42,7 +42,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The asset the commission is paid in
         /// </summary>
-        public string CommissionAsset { get; set; }
+        public string CommissionAsset { get; set; } = "";
         /// <summary>
         /// The time the trade was made
         /// </summary>

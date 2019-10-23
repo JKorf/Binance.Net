@@ -5,21 +5,6 @@ using Newtonsoft.Json;
 namespace Binance.Net.Objects
 {
     /// <summary>
-    /// Dividend records
-    /// </summary>
-    public class BinanceDividendRecords
-    {
-        /// <summary>
-        /// Records
-        /// </summary>
-        public BinanceDividendRecord[] Rows { get; set; }
-        /// <summary>
-        /// Total records
-        /// </summary>
-        public int Total { get; set; }
-    }
-
-    /// <summary>
     /// Dividend record
     /// </summary>
     public class BinanceDividendRecord
@@ -31,7 +16,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// Asset
         /// </summary>
-        public string Asset { get; set; }
+        public string Asset { get; set; } = "";
         /// <summary>
         /// Timestamp of the transaction
         /// </summary>
@@ -41,11 +26,11 @@ namespace Binance.Net.Objects
         /// Transaction id
         /// </summary>
         [JsonProperty("tranId")]
-        public string TransactionId { get; set; }
+        public string TransactionId { get; set; } = "";
         /// <summary>
         /// Info
         /// </summary>
         [JsonProperty("enInfo")]
-        public string Info { get; set; }
+        public string? Info { get; set; }
     }
 }

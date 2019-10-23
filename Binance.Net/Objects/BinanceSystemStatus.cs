@@ -17,6 +17,6 @@ namespace Binance.Net.Objects
         /// Additional info
         /// </summary>
         [JsonProperty("msg")]
-        public string Message { get; set; }
+        public string? Message { get; set; }
     }
 }

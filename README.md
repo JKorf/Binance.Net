@@ -144,6 +144,14 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 5.0.0 - 23 Oct 2019
+	* See CryptoExchange.Net 3.0 release notes
+	* Added input validation
+	* Added CancellationToken support to all requests
+	* Now using IEnumerable<> for collections
+	* Renamed various methods to be more in line with other exchanges
+	* Renamed SubscribeToXXXStream to SubscribeToXXXUpdates
+
 * Version 4.3.3 - 06 Oct 2019
     * Added serialization method for BinanceSymbolFilter
 

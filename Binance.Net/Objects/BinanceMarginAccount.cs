@@ -40,7 +40,7 @@ namespace Binance.Net.Objects
         /// Balance list
         /// </summary>
         [JsonProperty("userAssets")]
-        public List<BinanceMarginBalance> Balances { get; set; }
+        public IEnumerable<BinanceMarginBalance> Balances { get; set; } = new List<BinanceMarginBalance>();
     }
 
     /// <summary>
@@ -51,7 +51,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The asset this balance is for
         /// </summary>
-        public string Asset { get; set; }
+        public string Asset { get; set; } = "";
         /// <summary>
         /// The amount that was borrowed
         /// </summary>

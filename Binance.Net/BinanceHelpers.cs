@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Binance.Net
 {
@@ -14,9 +15,13 @@ namespace Binance.Net
         /// </summary>
         /// <param name="headers"></param>
         /// <returns></returns>
-        public static int? UsedWeight(this IEnumerable<Tuple<string, string>>  headers)
+        public static int? UsedWeight(this IEnumerable<KeyValuePair<string, IEnumerable<string>>>? headers)
         {
-            if (int.TryParse(headers?.SingleOrDefault(s => s.Item1 == "X-MBX-USED-WEIGHT")?.Item2, out var value))
+            if (headers == null)
+                return null;
+
+            var headerValues = headers.SingleOrDefault(s => s.Key == "X-MBX-USED-WEIGHT").Value;
+            if (int.TryParse(headerValues.First(), out var value))
                 return value;
             return null;
         }
@@ -70,6 +75,19 @@ namespace Binance.Net
         private static decimal Floor(decimal number)
         {
             return Math.Floor(number * 100000000) / 100000000;
+        }
+
+        /// <summary>
+        /// Validate the string is a valid Binance symbol.
+        /// </summary>
+        /// <param name="symbolString">string to validate</param>
+        public static void ValidateBinanceSymbol(this string symbolString)
+        {
+            if (string.IsNullOrEmpty(symbolString))
+                throw new ArgumentException("Symbol is not provided");
+
+            if(!Regex.IsMatch(symbolString, "^([A-Z|a-z]{6,8})$"))
+                throw new ArgumentException($"{symbolString} is not a valid Binance symbol. Should be [QuoteCurrency][BaseCurrency], e.g. BTCUSDT");
         }
     }
 }

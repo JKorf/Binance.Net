@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Binance.Net.Converters;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
@@ -19,7 +20,7 @@ namespace Binance.Net.Objects
         /// The contingency type
         /// </summary>
         [JsonProperty("c")]
-        public string ContingencyType { get; set; }
+        public string ContingencyType { get; set; } = "";
         /// <summary>
         /// The order list status
         /// </summary>
@@ -36,7 +37,7 @@ namespace Binance.Net.Objects
         /// The client id of the order list
         /// </summary>
         [JsonProperty("C")]
-        public string ListClientOrderId { get; set; }
+        public string ListClientOrderId { get; set; } = "";
         /// <summary>
         /// The transaction time
         /// </summary>
@@ -47,12 +48,12 @@ namespace Binance.Net.Objects
         /// The symbol of the order list
         /// </summary>
         [JsonProperty("s")]
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = "";
         /// <summary>
         /// The order in this list
         /// </summary>
         [JsonProperty("O")]
-        public BinanceStreamOrderId[] Orders { get; set; }
+        public IEnumerable<BinanceStreamOrderId> Orders { get; set; } = new List<BinanceStreamOrderId>();
     }
 
     /// <summary>
@@ -64,7 +65,7 @@ namespace Binance.Net.Objects
         /// The symbol of the order
         /// </summary>
         [JsonProperty("s")]
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = "";
         /// <summary>
         /// The id of the order
         /// </summary>
@@ -74,6 +75,6 @@ namespace Binance.Net.Objects
         /// The client order id
         /// </summary>
         [JsonProperty("c")]
-        public string ClientOrderId { get; set; }
+        public string ClientOrderId { get; set; } = "";
     }
 }

@@ -13,7 +13,7 @@ namespace Binance.Net.Objects
         /// The symbol this data is for
         /// </summary>
         [JsonProperty("s")]
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = "";
         /// <summary>
         /// The price change of this symbol
         /// </summary>

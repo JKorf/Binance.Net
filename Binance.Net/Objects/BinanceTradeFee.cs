@@ -1,5 +1,6 @@
 ﻿using CryptoExchange.Net.Attributes;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Binance.Net.Objects
 {
@@ -7,10 +8,10 @@ namespace Binance.Net.Objects
     {
         [JsonOptionalProperty]
         [JsonProperty("msg")]
-        public string Message { get; set; }
+        public string? Message { get; set; }
         public bool Success { get; set; }
         [JsonProperty("tradeFee")]
-        public BinanceTradeFee[] Data { get; set; }
+        public IEnumerable<BinanceTradeFee>? Data { get; set; }
     }
 
     /// <summary>
@@ -21,7 +22,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The symbol this fee is for
         /// </summary>
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = "";
         /// <summary>
         /// The fee for trades where you're the maker
         /// </summary>

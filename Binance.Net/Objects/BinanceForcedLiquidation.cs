@@ -41,7 +41,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// Symbol
         /// </summary>
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = "";
         /// <summary>
         /// Time in force
         /// </summary>

@@ -8,7 +8,7 @@
         /// <summary>
         /// The symbol the price is for
         /// </summary>
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = "";
         /// <summary>
         /// The price of the symbol
         /// </summary>

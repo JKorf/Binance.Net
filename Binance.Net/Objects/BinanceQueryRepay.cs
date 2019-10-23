@@ -13,7 +13,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The asset of the repay
         /// </summary>
-        public string Asset { get; set; }
+        public string Asset { get; set; } = "";
         /// <summary>
         /// The transaction id of the repay
         /// </summary>`

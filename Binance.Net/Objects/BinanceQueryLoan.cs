@@ -13,7 +13,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The asset of the loan
         /// </summary>
-        public string Asset { get; set; }
+        public string Asset { get; set; } = "";
         /// <summary>
         /// Principal repaid 
         /// </summary>
