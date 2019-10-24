@@ -18,7 +18,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>5.0.2 - Fixed validation symbols</PackageReleaseNotes>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+  <PropertyGroup>
     <DocumentationFile>Binance.Net.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>

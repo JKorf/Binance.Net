@@ -11,7 +11,7 @@ namespace Binance.Net.Objects
     public class BinanceOrderBook
     {
         /// <summary>
-        /// The symbol the update is for
+        /// The symbol of the order book (only filled from stream updates)
         /// </summary>
         [JsonProperty("s")]
         public string Symbol { get; set; } = "";
