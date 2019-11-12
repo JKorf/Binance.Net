@@ -5574,6 +5574,11 @@
             Cummulative amount
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.QuoteOrderQuantity">
+            <summary>
+            Quote order quantity
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.LastQuoteTransactedQuantity">
             <summary>
             Last quote asset transacted quantity (i.e. LastPrice * LastQuantity)
