@@ -329,7 +329,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of orders</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.PlaceOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Decimal,System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.PlaceOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -337,7 +337,8 @@
             <param name="side">The order side (buy/sell)</param>
             <param name="type">The order type</param>
             <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
-            <param name="quantity">The amount of the symbol</param>
+            <param name="quantity">The amount of the base symbol</param>
+            <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
             <param name="price">The price to use</param>
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
@@ -347,7 +348,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.PlaceOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Decimal,System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.PlaceOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -356,6 +357,7 @@
             <param name="type">The order type</param>
             <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
             <param name="quantity">The amount of the symbol</param>
+            <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
             <param name="price">The price to use</param>
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
@@ -365,7 +367,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.PlaceTestOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Decimal,System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.PlaceTestOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new test order. Test orders are not actually being executed and just test the functionality.
             </summary>
@@ -374,6 +376,7 @@
             <param name="type">The order type (limit/market)</param>
             <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel)</param>
             <param name="quantity">The amount of the symbol</param>
+            <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
             <param name="price">The price to use</param>
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
@@ -383,7 +386,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed test order</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.PlaceTestOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Decimal,System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.PlaceTestOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new test order. Test orders are not actually being executed and just test the functionality.
             </summary>
@@ -392,6 +395,7 @@
             <param name="type">The order type (limit/market)</param>
             <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel)</param>
             <param name="quantity">The amount of the symbol</param>
+            <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
             <param name="price">The price to use</param>
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
@@ -1007,7 +1011,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Transaction Id</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.PlaceMarginOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Decimal,System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.PlaceMarginOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Margin account new order
             </summary>
@@ -1016,6 +1020,7 @@
             <param name="type">The order type</param>
             <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
             <param name="quantity">The amount of the symbol</param>
+            <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
             <param name="price">The price to use</param>
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
@@ -1025,7 +1030,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.PlaceMarginOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Decimal,System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.PlaceMarginOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Margin account new order
             </summary>
@@ -1034,6 +1039,7 @@
             <param name="type">The order type</param>
             <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
             <param name="quantity">The amount of the symbol</param>
+            <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
             <param name="price">The price to use</param>
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
@@ -1345,14 +1351,14 @@
         </member>
         <member name="M:Binance.Net.BinanceClient.StartUserStream(System.Threading.CancellationToken)">
             <summary>
-            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}})"/>. The stream will close after 60 minutes unless a keep alive is send.
+            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}},System.Action{Binance.Net.Objects.Sockets.BinanceStreamBalanceUpdate})"/>. The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>Listen key</returns>
         </member>
         <member name="M:Binance.Net.BinanceClient.StartUserStreamAsync(System.Threading.CancellationToken)">
             <summary>
-            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}})"/>. The stream will close after 60 minutes unless a keep alive is send.
+            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}},System.Action{Binance.Net.Objects.Sockets.BinanceStreamBalanceUpdate})"/>. The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>Listen key</returns>
@@ -1393,7 +1399,7 @@
             <summary>
             Starts a user stream  for margin account by requesting a listen key. 
             This listen key can be used in subsequent requests to 
-            <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}})"/>. 
+            <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}},System.Action{Binance.Net.Objects.Sockets.BinanceStreamBalanceUpdate})"/>. 
             The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <param name="ct">Cancellation token</param>
@@ -1403,7 +1409,7 @@
             <summary>
             Starts a user stream  for margin account by requesting a listen key. 
             This listen key can be used in subsequent requests to 
-            <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}})"/>. 
+            <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}},System.Action{Binance.Net.Objects.Sockets.BinanceStreamBalanceUpdate})"/>. 
             The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <param name="ct">Cancellation token</param>
@@ -1758,7 +1764,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}})">
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}},System.Action{Binance.Net.Objects.Sockets.BinanceStreamBalanceUpdate})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.BinanceClient.StartUserStream(System.Threading.CancellationToken)"/> method should be called.
             </summary>
@@ -1767,9 +1773,10 @@
             <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
             <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco status update is received</param>
             <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
+            <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToUserDataUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}})">
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToUserDataUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}},System.Action{Binance.Net.Objects.Sockets.BinanceStreamBalanceUpdate})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.BinanceClient.StartUserStream(System.Threading.CancellationToken)"/> method should be called.
             </summary>
@@ -1778,6 +1785,7 @@
             <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
             <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
             <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
+            <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
         <member name="M:Binance.Net.BinanceSocketClient.HandleQueryResponse``1(CryptoExchange.Net.Sockets.SocketConnection,System.Object,Newtonsoft.Json.Linq.JToken,CryptoExchange.Net.Objects.CallResult{``0}@)">
@@ -2131,7 +2139,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of orders</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Decimal,System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -2140,6 +2148,7 @@
             <param name="type">The order type</param>
             <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
             <param name="quantity">The amount of the symbol</param>
+            <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
             <param name="price">The price to use</param>
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
@@ -2149,7 +2158,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Decimal,System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -2158,6 +2167,7 @@
             <param name="type">The order type</param>
             <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
             <param name="quantity">The amount of the symbol</param>
+            <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
             <param name="price">The price to use</param>
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
@@ -2167,7 +2177,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceTestOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Decimal,System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceTestOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new test order. Test orders are not actually being executed and just test the functionality.
             </summary>
@@ -2176,6 +2186,7 @@
             <param name="type">The order type (limit/market)</param>
             <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel)</param>
             <param name="quantity">The amount of the symbol</param>
+            <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
             <param name="price">The price to use</param>
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
@@ -2185,7 +2196,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed test order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceTestOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Decimal,System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceTestOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new test order. Test orders are not actually being executed and just test the functionality.
             </summary>
@@ -2194,6 +2205,7 @@
             <param name="type">The order type (limit/market)</param>
             <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel)</param>
             <param name="quantity">The amount of the symbol</param>
+            <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
             <param name="price">The price to use</param>
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
@@ -2809,7 +2821,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Transaction Id</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceMarginOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Decimal,System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceMarginOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Margin account new order
             </summary>
@@ -2818,6 +2830,7 @@
             <param name="type">The order type</param>
             <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
             <param name="quantity">The amount of the symbol</param>
+            <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
             <param name="price">The price to use</param>
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
@@ -2827,7 +2840,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceMarginOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Decimal,System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceMarginOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Margin account new order
             </summary>
@@ -2836,6 +2849,7 @@
             <param name="type">The order type</param>
             <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
             <param name="quantity">The amount of the symbol</param>
+            <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
             <param name="price">The price to use</param>
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
@@ -3147,14 +3161,14 @@
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceClient.StartUserStream(System.Threading.CancellationToken)">
             <summary>
-            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}})"/>. The stream will close after 60 minutes unless a keep alive is send.
+            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}},System.Action{Binance.Net.Objects.Sockets.BinanceStreamBalanceUpdate})"/>. The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>Listen key</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceClient.StartUserStreamAsync(System.Threading.CancellationToken)">
             <summary>
-            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}})"/>. The stream will close after 60 minutes unless a keep alive is send.
+            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}},System.Action{Binance.Net.Objects.Sockets.BinanceStreamBalanceUpdate})"/>. The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>Listen key</returns>
@@ -3195,7 +3209,7 @@
             <summary>
             Starts a user stream  for margin account by requesting a listen key. 
             This listen key can be used in subsequent requests to 
-            <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}})"/>. 
+            <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}},System.Action{Binance.Net.Objects.Sockets.BinanceStreamBalanceUpdate})"/>. 
             The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <param name="ct">Cancellation token</param>
@@ -3205,7 +3219,7 @@
             <summary>
             Starts a user stream  for margin account by requesting a listen key. 
             This listen key can be used in subsequent requests to 
-            <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}})"/>. 
+            <see cref="M:Binance.Net.BinanceSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}},System.Action{Binance.Net.Objects.Sockets.BinanceStreamBalanceUpdate})"/>. 
             The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <param name="ct">Cancellation token</param>
@@ -3495,7 +3509,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}})">
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}},System.Action{Binance.Net.Objects.Sockets.BinanceStreamBalanceUpdate})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.BinanceClient.StartUserStream(System.Threading.CancellationToken)"/> method should be called.
             </summary>
@@ -3504,9 +3518,10 @@
             <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
             <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco status update is received</param>
             <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
+            <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToUserDataUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}})">
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToUserDataUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}},System.Action{Binance.Net.Objects.Sockets.BinanceStreamBalanceUpdate})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.BinanceClient.StartUserStream(System.Threading.CancellationToken)"/> method should be called.
             </summary>
@@ -3515,6 +3530,7 @@
             <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
             <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
             <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
+            <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
         <member name="T:Binance.Net.Objects.Binance24HPrice">
@@ -3865,6 +3881,11 @@
         <member name="P:Binance.Net.Objects.BinanceCanceledOrder.OriginalClientOrderId">
             <summary>
             The client order id the order was
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceCanceledOrder.OriginalQuoteOrderQuantity">
+            <summary>
+            The original quote order quantity
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BinanceCanceledOrder.OrderId">
@@ -4661,6 +4682,11 @@
             Cummulative amount
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.BinanceOrder.OriginalQuoteOrderQuantity">
+            <summary>
+            The original quote order quantity
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceOrder.Status">
             <summary>
             The status of the order
@@ -4914,6 +4940,11 @@
         <member name="P:Binance.Net.Objects.BinancePlacedOrder.CummulativeQuoteQuantity">
             <summary>
             Cummulative amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinancePlacedOrder.OriginalQuoteOrderQuantity">
+            <summary>
+            The original quote order quantity
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BinancePlacedOrder.Status">
@@ -5856,6 +5887,21 @@
         <member name="P:Binance.Net.Objects.BinanceSymbol.OCOAllowed">
             <summary>
             If OCO(One Cancels Other) orders are allowed
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceSymbol.QuoteOrderQuantityMarketAllowed">
+            <summary>
+            Whether or not it is allowed to specify the quantity of a market order in the quote asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceSymbol.BaseCommissionPrecision">
+            <summary>
+            The precision of the base asset commission
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceSymbol.QuoteCommissionPrecision">
+            <summary>
+            The precision of the quote asset commission
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BinanceSymbol.Filters">
@@ -7031,6 +7077,26 @@
         <member name="F:Binance.Net.Objects.TransferDirection.RollOut">
             <summary>
             Roll-out
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Sockets.BinanceStreamBalanceUpdate">
+            <summary>
+            Update when asset is withdrawn/deposited 
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Sockets.BinanceStreamBalanceUpdate.Asset">
+            <summary>
+            The asset which changed
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Sockets.BinanceStreamBalanceUpdate.BalanceDelta">
+            <summary>
+            The balance delta
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Sockets.BinanceStreamBalanceUpdate.ClearTime">
+            <summary>
+            The time the deposit/withdrawal was cleared
             </summary>
         </member>
     </members>
