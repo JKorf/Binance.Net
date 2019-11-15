@@ -185,7 +185,7 @@ namespace Binance.Net.ClientWPF
             }
 
             socketClient = new BinanceSocketClient();
-            socketClient.SubscribeToAllSymbolTicker(data => {
+            socketClient.SubscribeToAllSymbolTickerUpdates(data => {
                 foreach (var ud in data) {
                     var symbol = AllPrices.SingleOrDefault(p => p.Symbol == ud.Symbol);
                     if (symbol != null)
@@ -252,7 +252,7 @@ namespace Binance.Net.ClientWPF
                         return;
                     }
 
-                    var subOkay = socketClient.SubscribeToUserStream(startOkay.Data, OnAccountUpdate, OnOrderUpdate);
+                    var subOkay = socketClient.SubscribeToUserDataUpdates(startOkay.Data, OnAccountUpdate, OnOrderUpdate, null, null, null);
                     if (!subOkay.Success)
                     {
                         messageBoxService.ShowMessage($"Error subscribing to user stream: {subOkay.Error.Message}", "error", MessageBoxButton.OK, MessageBoxImage.Error);
