@@ -1,11 +1,14 @@
 ﻿namespace Binance.Net.Objects
 {
+    /// <summary>
+    /// Deposit address info
+    /// </summary>
     public class BinanceDepositAddress
     {
         /// <summary>
         /// The deposit address
         /// </summary>
-        public string Address { get; set; }
+        public string Address { get; set; } = "";
         /// <summary>
         /// Whether the call was successful
         /// </summary>
@@ -13,10 +16,10 @@
         /// <summary>
         /// Address tag
         /// </summary>
-        public string AddressTag { get; set; }
+        public string AddressTag { get; set; } = "";
         /// <summary>
         /// Asset the address is for
         /// </summary>
-        public string Asset { get; set; }
+        public string Asset { get; set; } = "";
     }
 }

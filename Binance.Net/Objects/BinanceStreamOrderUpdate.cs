@@ -14,12 +14,12 @@ namespace Binance.Net.Objects
         /// The symbol the order is for
         /// </summary>
         [JsonProperty("s")]
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = "";
         /// <summary>
         /// The new client order id
         /// </summary>
         [JsonProperty("c")]
-        public string ClientOrderId { get; set; }
+        public string ClientOrderId { get; set; } = "";
         /// <summary>
         /// The side of the order
         /// </summary>
@@ -45,12 +45,21 @@ namespace Binance.Net.Objects
         /// </summary>
         [JsonProperty("p")]
         public decimal Price { get; set; }
+        /// <summary>
+        /// The stop price of the order
+        /// </summary>
         [JsonProperty("P")]
         public decimal StopPrice { get; set; }
+        /// <summary>
+        /// The iceberg quantity of the order
+        /// </summary>
         [JsonProperty("F")]
         public decimal IcebergQuantity { get; set; }
+        /// <summary>
+        /// The original client order id
+        /// </summary>
         [JsonProperty("C")]
-        public object OriginalClientOrderId { get; set; }
+        public string? OriginalClientOrderId { get; set; } = "";
         /// <summary>
         /// The execution type
         /// </summary>
@@ -95,7 +104,7 @@ namespace Binance.Net.Objects
         /// The asset the commission was taken from
         /// </summary>
         [JsonProperty("N")]
-        public string CommissionAsset { get; set; }
+        public string CommissionAsset { get; set; } = "";
         /// <summary>
         /// The time of the update
         /// </summary>
@@ -106,6 +115,9 @@ namespace Binance.Net.Objects
         /// </summary>
         [JsonProperty("t")]
         public long TradeId { get; set; }
+        /// <summary>
+        /// Is working
+        /// </summary>
         [JsonProperty("w")]
         public bool IsWorking { get; set; }
         /// <summary>
@@ -124,15 +136,25 @@ namespace Binance.Net.Objects
         [JsonProperty("Z")]
         public decimal CummulativeQuoteQuantity { get; set; }
         /// <summary>
+        /// Quote order quantity
+        /// </summary>
+        [JsonProperty("Q")]
+        public decimal QuoteOrderQuantity { get; set; }
+        /// <summary>
         /// Last quote asset transacted quantity (i.e. LastPrice * LastQuantity)
         /// </summary>
         [JsonProperty("Y")]
         public decimal LastQuoteTransactedQuantity { get; set; }
+        /// <summary>
+        /// This id of the corresponding order list. (-1 if not part of an order list)
+        /// </summary>
+        [JsonProperty("g")]
+        public long OrderListId { get; set; }
 
         // These are unused properties, but are mapped to prevent mapping error of lower/upper case
-
-        [JsonProperty("g")]
-        public decimal g { get; set; }
+        /// <summary>
+        /// Unused
+        /// </summary>
         [JsonProperty("I")]
         public long I { get; set; }
     }

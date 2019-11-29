@@ -3,6 +3,9 @@ using Newtonsoft.Json;
 
 namespace Binance.Net.Objects
 {
+    /// <summary>
+    /// Rate limit info
+    /// </summary>
     public class BinanceRateLimit
     {
         /// <summary>

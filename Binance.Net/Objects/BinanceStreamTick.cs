@@ -4,13 +4,16 @@ using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects
 {
+    /// <summary>
+    /// Tick info
+    /// </summary>
     public class BinanceStreamTick: BinanceStreamEvent
     {        
         /// <summary>
         /// The symbol this data is for
         /// </summary>
         [JsonProperty("s")]
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = "";
         /// <summary>
         /// The price change of this symbol
         /// </summary>

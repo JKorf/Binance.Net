@@ -1,4 +1,4 @@
-# ![Icon](https://github.com/JKorf/Binance.Net/blob/master/Resources/binance-coin.png?raw=true) Binance.Net 
+# ![Icon](https://github.com/JKorf/Binance.Net/blob/master/Binance.Net/Icon/icon.png?raw=true) Binance.Net 
 
 ![Build status](https://travis-ci.org/JKorf/Binance.Net.svg?branch=master)
 
@@ -6,29 +6,39 @@ A .Net wrapper for the Binance API as described on [Binance](https://www.binance
 
 **If you think something is broken, something is missing or have any questions, please open an [Issue](https://github.com/JKorf/Binance.Net/issues)**
 
----
-Also check out my other exchange API wrappers:
+## CryptoExchange.Net
+Implementation is build upon the CryptoExchange.Net library, make sure to also check out the documentation on that: [docs](https://github.com/JKorf/CryptoExchange.Net)
+
+Other CryptoExchange.Net implementations:
 <table>
 <tr>
-<td><a href="https://github.com/JKorf/Bittrex.Net"><img src="https://github.com/JKorf/Bittrex.Net/blob/master/Resources/icon.png?raw=true"></a>
+<td><a href="https://github.com/JKorf/Bittrex.Net"><img src="https://github.com/JKorf/Bittrex.Net/blob/master/Bittrex.Net/Icon/icon.png?raw=true"></a>
 <br />
 <a href="https://github.com/JKorf/Bittrex.Net">Bittrex</a>
 </td>
-<td><a href="https://github.com/JKorf/Bitfinex.Net"><img src="https://github.com/JKorf/Bitfinex.Net/blob/master/Resources/icon.png?raw=true"></a>
+<td><a href="https://github.com/JKorf/Bitfinex.Net"><img src="https://github.com/JKorf/Bitfinex.Net/blob/master/Bitfinex.Net/Icon/icon.png?raw=true"></a>
 <br />
 <a href="https://github.com/JKorf/Bitfinex.Net">Bitfinex</a>
 </td>
-<td><a href="https://github.com/JKorf/CoinEx.Net"><img src="https://github.com/JKorf/CoinEx.Net/blob/master/Resources/icon.png?raw=true"></a>
+<td><a href="https://github.com/JKorf/CoinEx.Net"><img src="https://github.com/JKorf/CoinEx.Net/blob/master/CoinEx.Net/Icon/icon.png?raw=true"></a>
 <br />
 <a href="https://github.com/JKorf/CoinEx.Net">CoinEx</a>
 </td>
-<td><a href="https://github.com/JKorf/Huobi.Net"><img src="https://github.com/JKorf/Huobi.Net/blob/master/Resources/icon.png?raw=true"></a>
+<td><a href="https://github.com/JKorf/Huobi.Net"><img src="https://github.com/JKorf/Huobi.Net/blob/master/Huobi.Net/Icon/icon.png?raw=true"></a>
 <br />
 <a href="https://github.com/JKorf/Huobi.Net">Huobi</a>
 </td>
+<td><a href="https://github.com/JKorf/Kucoin.Net"><img src="https://github.com/JKorf/Kucoin.Net/blob/master/Kucoin.Net/Icon/icon.png?raw=true"></a>
+<br />
+<a href="https://github.com/JKorf/Kucoin.Net">Kucoin</a>
+</td>
+<td><a href="https://github.com/JKorf/Kraken.Net"><img src="https://github.com/JKorf/Kraken.Net/blob/master/Kraken.Net/Icon/icon.png?raw=true"></a>
+<br />
+<a href="https://github.com/JKorf/Kraken.Net">Kraken</a>
+</td>
 </tr>
 </table>
-And other API wrappers based on CryptoExchange.Net:
+Implementations from third parties:
 <table>
 <tr>
 <td><a href="https://github.com/Zaliro/Switcheo.Net"><img src="https://github.com/Zaliro/Switcheo.Net/blob/master/Resources/switcheo-coin.png?raw=true"></a>
@@ -70,44 +80,13 @@ After installing it's time to actually use it. To get started we have to add the
 
 Binance.Net provides two clients to interact with the Binance API. The  `BinanceClient`  provides all rest API calls. The  `BinanceSocketClient`  provides functions to interact with the websocket provided by the Binance API. Both clients are disposable and as such can be used in a  `using`statement.
 
-Most API methods are available in two flavors, sync and async:
-````C#
-public void NonAsyncMethod()
-{
-    using(var client = new BinanceClient())
-    {
-        var result = client.Ping();
-    }
-}
-
-public async Task AsyncMethod()
-{
-    using(var client = new BinanceClient())
-    {
-        var result2 = await client.PingAsync();
-    }
-}
-````
-
 ## Examples
 Examples can be found in the Examples folder.
 
-
-## Response handling
-All API requests will respond with an CallResult object. This object contains whether the call was successful, the data returned from the call and an error if the call wasn't successful. As such, one should always check the Success flag when processing a response.
-For example:
-```C#
-using(var client = new BinanceClient())
-{
-	var result = client.GetServerTime();
-	if (result.Success)
-		Console.WriteLine($"Server time: {result.Data}");
-	else
-		Console.WriteLine($"Error: {result.Error.Message}");
-}
-```
-## Options & Authentication
-The default behavior of the clients can be changed by providing options to the constructor, or using the `SetDefaultOptions` before creating a new client. Api credentials can be provided in the options.
+## Timestamping
+Requests made to Binance are checked for a correct timestamp. When requests are send a timestamp is added to the message. When Binance processes the message the timestamp is checked to be > the current time and < the current time + 5000ms (default). If the timestamp is outside these limits the following errors will be returned:
+`timestamps 1000ms ahead of server time` or `Timestamp for this request is outside of the recvWindow`
+The recvWindow is default 5000ms and can be changed using the `ReceiveWindow` configuration option. All times are communicated in UTC so there won't be any timezone issues. However, because of clock drifting it can be that the client UTC time is not the same as the server UTC time. It is therefor recommended clients use the `SP TimeSync` program to resync the client UTC time more often than windows does by default (every 10 minutes or less is recommended).
 
 ## Websockets
 The Binance.Net socket client provides several socket endpoint to which can be subscribed.
@@ -161,67 +140,115 @@ using(var client = new BinanceSocketClient())
 }
 ```
 
-**Handling socket events**
-
-Subscribing to a socket stream returns a UpdateSubscription object. This object can be used to be notified when a socket is disconnected or reconnected:
-````C#
-var subscriptionResult = client.SubscribeToAllSymbolTicker(data =>
-{
-	Console.WriteLine("Received list update");
-});
-
-if(subscriptionResult.Success){
-	sub.Data.Disconnected += () =>
-	{
-		Console.WriteLine("Socket disconnected");
-	};
-
-	sub.Data.Reconnected += (e) =>
-	{
-		Console.WriteLine("Socket reconnected after " + e);
-	};
-}
-````
-
-**Unsubscribing from socket endpoints:**
-
-Sockets streams can be unsubscribed by using the `client.Unsubscribe` method in combination with the stream subscription received from subscribing:
-```C#
-var client = new BinanceSocketClient();
-
-var successDepth = client.SubscribeToDepthStream("bnbbtc", (data) =>
-{
-	// handle data
-});
-
-client.Unsubscribe(successDepth.Data);
-```
-
-Additionaly, all sockets can be closed with the `UnsubscribeAll` method. Beware that when a client is disposed the sockets are automatically disposed. This means that if the code is no longer in the using statement the eventhandler won't fire anymore. To prevent this from happening make sure the code doesn't leave the using statement or don't use the socket client in a using statement:
-```C#
-// Doesn't leave the using block
-using(var client = new BinanceSocketClient())
-{
-	var successDepth = client.SubscribeToDepthStream("bnbbtc", (data) =>
-	{
-		// handle data
-	});
-
-	Console.ReadLine();
-}
-
-// Without using block
-var client = new BinanceSocketClient();
-client.SubscribeToDepthStream("bnbbtc", (data) =>
-{
-	// handle data
-});
-```
-
 When no longer listening to private endpoints the `client.StopUserStream` method in `BinanceClient` should be used to signal the Binance server the stream can be closed.
 
 
 ## Release notes
+* Version 5.0.3 - 13 Nov 2019
+    * Updated for new API version
+    * Added QuoteOrderQuantity parameter/property
+    * Add stream balance update
+    * Added precisions to ExchangeInfo symbols
+
+* Version 5.0.1 - 23 Oct 2019
+	* Fixed validation for 9 length symbols
+	
+* Version 5.0.1 - 23 Oct 2019
+	* Fixed validation for 5 length symbols
+
+* Version 5.0.0 - 23 Oct 2019
+	* See CryptoExchange.Net 3.0 release notes
+	* Added input validation
+	* Added CancellationToken support to all requests
+	* Now using IEnumerable<> for collections
+	* Renamed various methods to be more in line with other exchanges
+	* Renamed SubscribeToXXXStream to SubscribeToXXXUpdates
+
+* Version 4.3.3 - 06 Oct 2019
+    * Added serialization method for BinanceSymbolFilter
+
+* Version 4.3.2 - 25 Sep 2019
+    * Added missing AddressTag and TransactionFee properties in withdrawal object
+
+* Version 4.3.1 - 03 Sep 2019
+    * Added book ticker stream to socket client
+
+* Version 4.3.0 - 02 Sep 2019
+    * Added new Margin endpoints
+    * Renamed Query- methods to Get- methods for consistency
+
+* Version 4.2.3 - 29 Aug 2019
+    * Added DustTransfer and GetDividendRecords endpoints
+    * Added updateInterval parameter to depth streams
+
+* Version 4.2.2 - 20 Aug 2019
+    * Added missing margin endpoints
+    * IndicatorType to enum
+
+* Version 4.2.1 - 19 Aug 2019
+    * Added current average price endpoint
+
+* Version 4.2.0 - 15 Aug 2019
+    * Implemented OCO orders
+    * Adjustments for API update
+
+* Version 4.1.3 - 12 Aug 2019
+    * Fix margin order cancel
+
+* Version 4.1.2 - 07 Aug 2019
+    * Updated CryptoExchange.Net
+
+* Version 4.1.1 - 05 Aug 2019
+    * Added xml file for code docs
+
+* Version 4.1.0 - 30 Jul 2019
+    * Added margin API
+
+* Version 4.0.17 - 09 jun 2019
+	* Added TimestampOffset options
+	* Update BinanceSymbolOrderBook
+
+* Version 4.0.16 - 20 may 2019
+	* Fixed AutoComply trade rules behavior
+
+* Version 4.0.15 - 16 may 2019
+	* Fixed order book limit implementation
+
+* Version 4.0.14 - 14 may 2019
+	* Added an order book implementation for easily keeping an updated order book
+	* Added additional constructor to ApiCredentials to be able to read from file
+
+* Version 4.0.13 - 01 may 2019
+	* Updated to latest CryptoExchange.Net
+		* Adds response header to REST call result
+		* Added rate limiter per API key
+		* Unified socket client workings
+
+* Version 4.0.12 - 09 apr 2019
+	* Fixed type in FifteenMinutes kline interval enum
+	* Added update time to BinanceStreamAccountInfo
+	* Added IsSpotTradingAllowed and IsMarginTradingAllowed fields to BinanceSymbol
+	* Added IDisposable to client interfaces
+
+* Version 4.0.11 - 02 apr 2019
+	* Added Symbol field in BinanceTrade
+	* Added deposit status Completed to deposits filter
+	* Fixed Exception handler null reference if not set
+
+* Version 4.0.10 - 18 mar 2019
+	* Added AutoReconnect option
+	* Fix for error parsing without code/message
+	* Added QuoteQuantity to MyTrades result
+
+* Version 4.0.9 - 07 mar 2019
+	* Added start/end time parameters to GetAllOrders
+	* Updated CryptoExchange.Net
+
+* Version 4.0.8 - 27 feb 2019
+	* Added sub account support
+	* Added trading status call
+	* Changed CallResult to WebCallResult for REST requests to expose the response status
+
 * Version 4.0.7	- 01 feb 2019
 	* Added exception event to subscriptions
 	* General fixes

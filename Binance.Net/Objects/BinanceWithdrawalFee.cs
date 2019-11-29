@@ -4,16 +4,19 @@ using System.Collections.Generic;
 
 namespace Binance.Net.Objects
 {
-    public class BinanceAssetDetailsWrapper
+    internal class BinanceAssetDetailsWrapper
     {
         [JsonProperty("assetDetail")]
-        public Dictionary<string, BinanceAssetDetails> Data { get; set; }
+        public Dictionary<string, BinanceAssetDetails>? Data { get; set; }
         public bool Success { get; set; }
         [JsonProperty("msg")]
         [JsonOptionalProperty]
-        public string Message { get; set; }
+        public string? Message { get; set; }
     }
 
+    /// <summary>
+    /// Asset details
+    /// </summary>
     public class BinanceAssetDetails
     {
         /// <summary>
@@ -36,6 +39,6 @@ namespace Binance.Net.Objects
         /// <summary>
         /// Status string for deposit
         /// </summary>
-        public string DepositTip { get; set; }
+        public string? DepositTip { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Converters
 {
-    public class SystemStatusConverter : BaseConverter<SystemStatus>
+    internal class SystemStatusConverter : BaseConverter<SystemStatus>
     {
         public SystemStatusConverter() : this(true)
         {
@@ -14,10 +14,10 @@ namespace Binance.Net.Converters
         {
         }
 
-        protected override Dictionary<SystemStatus, string> Mapping => new Dictionary<SystemStatus, string>
+        protected override List<KeyValuePair<SystemStatus, string>> Mapping => new List<KeyValuePair<SystemStatus, string>>
         {
-            {SystemStatus.Normal, "0"},
-            {SystemStatus.Maintenance, "1"}
+            new KeyValuePair<SystemStatus, string>(SystemStatus.Normal, "0"),
+            new KeyValuePair<SystemStatus, string>(SystemStatus.Maintenance, "1")
         };
     }
 }

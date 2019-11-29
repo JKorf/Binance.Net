@@ -4,22 +4,22 @@ using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Converters
 {
-    public class SymbolFilterTypeConverter : BaseConverter<SymbolFilterType>
+    internal class SymbolFilterTypeConverter : BaseConverter<SymbolFilterType>
     {
         public SymbolFilterTypeConverter(): this(true) { }
         public SymbolFilterTypeConverter(bool quotes) : base(quotes) { }
 
-        protected override Dictionary<SymbolFilterType, string> Mapping => new Dictionary<SymbolFilterType, string>
+        protected override List<KeyValuePair<SymbolFilterType, string>> Mapping => new List<KeyValuePair<SymbolFilterType, string>>
         {
-            { SymbolFilterType.LotSize, "LOT_SIZE" },
-            { SymbolFilterType.MarketLotSize, "MARKET_LOT_SIZE" },
-            { SymbolFilterType.MinNotional, "MIN_NOTIONAL" },
-            { SymbolFilterType.Price, "PRICE_FILTER" },
-            { SymbolFilterType.PricePercent, "PERCENT_PRICE" },
-            { SymbolFilterType.IcebergParts, "ICEBERG_PARTS" },
-            { SymbolFilterType.MaxNumberOrders, "MAX_NUM_ORDERS" },
-            { SymbolFilterType.MaxNumberIcebergOrders, "MAX_NUM_ICEBERG_ORDERS" },
-            { SymbolFilterType.MaxNumberAlgorithmicOrders, "MAX_NUM_ALGO_ORDERS" }
+            new KeyValuePair<SymbolFilterType, string>(SymbolFilterType.LotSize, "LOT_SIZE"),
+            new KeyValuePair<SymbolFilterType, string>(SymbolFilterType.MarketLotSize, "MARKET_LOT_SIZE"),
+            new KeyValuePair<SymbolFilterType, string>(SymbolFilterType.MinNotional, "MIN_NOTIONAL"),
+            new KeyValuePair<SymbolFilterType, string>(SymbolFilterType.Price, "PRICE_FILTER"),
+            new KeyValuePair<SymbolFilterType, string>(SymbolFilterType.PricePercent, "PERCENT_PRICE"),
+            new KeyValuePair<SymbolFilterType, string>(SymbolFilterType.IcebergParts, "ICEBERG_PARTS"),
+            new KeyValuePair<SymbolFilterType, string>(SymbolFilterType.MaxNumberOrders, "MAX_NUM_ORDERS"),
+            new KeyValuePair<SymbolFilterType, string>(SymbolFilterType.MaxNumberIcebergOrders, "MAX_NUM_ICEBERG_ORDERS"),
+            new KeyValuePair<SymbolFilterType, string>(SymbolFilterType.MaxNumberAlgorithmicOrders, "MAX_NUM_ALGO_ORDERS")
         };
     }
 }

@@ -1,8 +1,7 @@
 language: csharp
 mono: none
 solution: Binance.Net.sln
-dotnet: 2.0.0
-dist: trusty
+dotnet: 3.0
 script:
- - dotnet build Binance.Net/Binance.Net.csproj --framework "netstandard2.0"
+ - dotnet build Binance.Net/Binance.Net.csproj --framework "netstandard2.1"
  - dotnet test Binance.Net.UnitTests/Binance.Net.UnitTests.csproj

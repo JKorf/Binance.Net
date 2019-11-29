@@ -1,24 +1,28 @@
 ﻿using CryptoExchange.Net.Attributes;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Binance.Net.Objects
 {
-    public class BinanceTradeFeeWrapper
+    internal class BinanceTradeFeeWrapper
     {
         [JsonOptionalProperty]
         [JsonProperty("msg")]
-        public string Message { get; set; }
+        public string? Message { get; set; }
         public bool Success { get; set; }
         [JsonProperty("tradeFee")]
-        public BinanceTradeFee[] Data { get; set; }
+        public IEnumerable<BinanceTradeFee>? Data { get; set; }
     }
 
+    /// <summary>
+    /// Trade fee info
+    /// </summary>
     public class BinanceTradeFee
     {
         /// <summary>
         /// The symbol this fee is for
         /// </summary>
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = "";
         /// <summary>
         /// The fee for trades where you're the maker
         /// </summary>

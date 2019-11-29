@@ -18,6 +18,10 @@ namespace Binance.Net.Objects
         /// </summary>
         public long OrderId { get; set; }
         /// <summary>
+        /// The symbol the trade is for
+        /// </summary>
+        public string Symbol { get; set; } = "";
+        /// <summary>
         /// The price of the trade
         /// </summary>
         public decimal Price { get; set; }
@@ -27,13 +31,18 @@ namespace Binance.Net.Objects
         [JsonProperty("qty")]
         public decimal Quantity { get; set; }
         /// <summary>
+        /// The quote quantity of the trade
+        /// </summary>
+        [JsonProperty("quoteQty")]
+        public decimal QuoteQuantity { get; set; }
+        /// <summary>
         /// The commission paid for the trade
         /// </summary>
         public decimal Commission { get; set; }
         /// <summary>
         /// The asset the commission is paid in
         /// </summary>
-        public string CommissionAsset { get; set; }
+        public string CommissionAsset { get; set; } = "";
         /// <summary>
         /// The time the trade was made
         /// </summary>

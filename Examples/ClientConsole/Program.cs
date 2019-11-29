@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Binance.Net;
 using Binance.Net.Objects;
 using CryptoExchange.Net.Authentication;
@@ -38,60 +39,63 @@ namespace BinanceAPI.ClientConsole
                 var prices24h = client.Get24HPrice("BNBBTC");
                 var allPrices = client.GetAllPrices();
                 var allBookPrices = client.GetAllBookPrices();
-                var historicalTrades = client.GetHistoricalTrades("BNBBTC");
+                var historicalTrades = client.GetHistoricalSymbolTrades("BNBBTC");
 
                 // Private
                 var openOrders = client.GetOpenOrders("BNBBTC");
                 var allOrders = client.GetAllOrders("BNBBTC");
                 var testOrderResult = client.PlaceTestOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, 1, price: 1, timeInForce: TimeInForce.GoodTillCancel);
-                var queryOrder = client.QueryOrder("BNBBTC", allOrders.Data[0].OrderId);
+                var queryOrder = client.GetOrder("BNBBTC", allOrders.Data.First().OrderId);
                 var orderResult = client.PlaceOrder("BNBBTC", OrderSide.Sell, OrderType.Limit, 10, price: 0.0002m, timeInForce: TimeInForce.GoodTillCancel);
                 var cancelResult = client.CancelOrder("BNBBTC", orderResult.Data.OrderId);
                 var accountInfo = client.GetAccountInfo();
                 var myTrades = client.GetMyTrades("BNBBTC");
 
                 // Withdrawal/deposit
-                var withdrawalHistory = client.GetWithdrawHistory();
+                var withdrawalHistory = client.GetWithdrawalHistory();
                 var depositHistory = client.GetDepositHistory();
                 var withdraw = client.Withdraw("ASSET", "ADDRESS", 0);
             }
 
             var socketClient = new BinanceSocketClient();
             // Streams
-            var successDepth = socketClient.SubscribeToDepthStream("bnbbtc", (data) =>
+            var successDepth = socketClient.SubscribeToOrderBookUpdates("bnbbtc", 1000, (data) =>
             {
                 // handle data
             });
-            var successTrades = socketClient.SubscribeToTradesStream("bnbbtc", (data) =>
+            var successTrades = socketClient.SubscribeToTradeUpdates("bnbbtc", (data) =>
             {
                 // handle data
             });
-            var successKline = socketClient.SubscribeToKlineStream("bnbbtc", KlineInterval.OneMinute, (data) =>
+            var successKline = socketClient.SubscribeToKlineUpdates("bnbbtc", KlineInterval.OneMinute, (data) =>
             {
                 // handle data
             });
-            var successTicker = socketClient.SubscribeToAllSymbolTicker((data) =>
+            var successTicker = socketClient.SubscribeToAllSymbolTickerUpdates((data) =>
             {
                 // handle data
             });
-            var successSingleTicker = socketClient.SubscribeToSymbolTicker("bnbbtc", (data) =>
+            var successSingleTicker = socketClient.SubscribeToSymbolTickerUpdates("bnbbtc", (data) =>
             {
                 // handle data
             });
 
             string listenKey;
             using (var client = new BinanceClient())
-                listenKey = client.StartUserStream().Data.ListenKey;
+                listenKey = client.StartUserStream().Data;
 
-            var successAccount = socketClient.SubscribeToUserStream(listenKey, data =>
+            var successAccount = socketClient.SubscribeToUserDataUpdates(listenKey, data =>
                 {
-                    // Hanlde account info data
+                    // Handle account info data
                 },
                 data =>
                 {
-                    // Hanlde order update info data
-                });
-            socketClient.UnsubscribeAllStreams();
+                    // Handle order update info data
+                },
+                null, // Handler for OCO updates
+                null, // Handler for position updates
+                null); // Handler for account balance updates (withdrawals/deposits)
+            socketClient.UnsubscribeAll();
 
             Console.ReadLine();
         }

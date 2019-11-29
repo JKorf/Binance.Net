@@ -82,7 +82,7 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Price"></TextBlock>
-                    <xctk:DecimalUpDown  Margin="5" Text="{Binding SelectedSymbol.TradePrice}" FormatString="F8" Grid.Column="1"></xctk:DecimalUpDown>
+                    <xctk:DecimalUpDown  Margin="5" Value="{Binding SelectedSymbol.TradePrice}" Grid.Column="1"></xctk:DecimalUpDown>
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -90,7 +90,7 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Amount"></TextBlock>
-                    <xctk:DecimalUpDown  Margin="5" Text="{Binding SelectedSymbol.TradeAmount}" FormatString="F8" Grid.Column="1"></xctk:DecimalUpDown>
+                    <xctk:DecimalUpDown  Margin="5" Value="{Binding SelectedSymbol.TradeAmount}" FormatString="F8" Grid.Column="1"></xctk:DecimalUpDown>
                 </Grid>
                 <StackPanel Orientation="Horizontal">
                     <Button Width="60" Margin="5" Command="{Binding SellCommand}">Sell</Button>

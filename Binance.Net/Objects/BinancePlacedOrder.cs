@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using CryptoExchange.Net.Attributes;
 using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects
@@ -14,7 +15,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The symbol the order is for
         /// </summary>
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = "";
         /// <summary>
         /// The order id as assigned by Binance
         /// </summary>
@@ -22,10 +23,17 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The order id as assigned by the client
         /// </summary>
-        public string ClientOrderId { get; set; }
+        public string ClientOrderId { get; set; } = "";
+        /// <summary>
+        /// Original order id
+        /// </summary>
+        [JsonOptionalProperty]
+        [JsonProperty("origClientOrderId")]
+        public string OriginalClientOrderId { get; set; } = "";
         /// <summary>
         /// The time the order was placed
         /// </summary>
+        [JsonOptionalProperty]
         [JsonConverter(typeof(TimestampConverter))]
         public DateTime TransactTime { get; set; }
         /// <summary>
@@ -48,6 +56,11 @@ namespace Binance.Net.Objects
         [JsonProperty("cummulativeQuoteQty")]
         public decimal CummulativeQuoteQuantity { get; set; }
         /// <summary>
+        /// The original quote order quantity
+        /// </summary>
+        [JsonProperty("origQuoteOrderQty")]
+        public decimal OriginalQuoteOrderQuantity { get; set; }
+        /// <summary>
         /// The current status of the order
         /// </summary>
         [JsonConverter(typeof(OrderStatusConverter))]
@@ -68,8 +81,18 @@ namespace Binance.Net.Objects
         [JsonConverter(typeof(OrderSideConverter))]
         public OrderSide Side { get; set; }
         /// <summary>
+        /// Stop price for the order
+        /// </summary>
+        [JsonOptionalProperty]
+        public decimal? StopPrice { get; set; }
+        /// <summary>
+        /// Id of the order list this order belongs to
+        /// </summary>
+        public long? OrderListId { get; set; }
+        /// <summary>
         /// Fills for the order
         /// </summary>
-        public List<BinanceOrderTrade> Fills { get; set; }
+        [JsonOptionalProperty]
+        public IEnumerable<BinanceOrderTrade>? Fills { get; set; }
     }
 }

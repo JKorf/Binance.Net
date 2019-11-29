@@ -1,0 +1,15 @@
+﻿@model Binance.Net.Objects.BinanceStreamKlineData
+
+@{
+    ViewData["Title"] = "Test";
+}
+
+<div class="text-center">
+    
+    <div>
+        <br />
+        The last price of the BTCUSDT symbol is @(Model?.Data.Close.ToString() ?? "not known yet")
+        <br />
+        (refresh the page to get the latest price)
+    </div>
+</div>

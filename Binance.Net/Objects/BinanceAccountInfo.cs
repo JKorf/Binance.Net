@@ -44,9 +44,14 @@ namespace Binance.Net.Objects
         [JsonConverter(typeof(TimestampConverter))]
         public DateTime UpdateTime { get; set; }
         /// <summary>
+        /// The type of account
+        /// </summary>
+        // TODO make enum when api docs are updated
+        public string AccountType { get; set; } = "";
+        /// <summary>
         /// List of assets with their current balances
         /// </summary>
-        public List<BinanceBalance> Balances { get; set; }
+        public IEnumerable<BinanceBalance> Balances { get; set; } = new List<BinanceBalance>();
     }
 
     /// <summary>
@@ -57,7 +62,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The asset this balance is for
         /// </summary>
-        public string Asset { get; set; }
+        public string Asset { get; set; } = "";
         /// <summary>
         /// The amount that isn't locked in a trade
         /// </summary>
