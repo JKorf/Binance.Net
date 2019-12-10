@@ -72,7 +72,7 @@ namespace Binance.Net
             }
             else
             {
-                SetInitialOrderBook(data.LastUpdateId, data.Asks, data.Bids);
+                SetInitialOrderBook(data.LastUpdateId, data.Bids, data.Asks);
             }
         }
 
