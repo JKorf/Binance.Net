@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Binance.Net.Interfaces;
+using Binance.Net.Objects.Sockets;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Logging;
@@ -39,6 +40,7 @@ namespace Binance.Net
         private const string ExecutionUpdateEvent = "executionReport";
         private const string OcoOrderUpdateEvent = "listStatus";
         private const string AccountPositionUpdateEvent = "outboundAccountPosition";
+        private const string BalanceUpdateEvent = "balanceUpdate";
         #endregion
 
         #region constructor/destructor
@@ -123,7 +125,7 @@ namespace Binance.Net
 
             var handler = new Action<BinanceCombinedStream<BinanceStreamKlineData>>(data => onMessage(data.Data));
             symbols = symbols.Select(a => a.ToLower() + KlineStreamEndpoint + "_" + JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ToArray();
-            return await Subscribe(String.Join("/", symbols), true, handler).ConfigureAwait(false);
+            return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -397,13 +399,15 @@ namespace Binance.Net
         /// <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
         /// <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco status update is received</param>
         /// <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
+        /// <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public CallResult<UpdateSubscription> SubscribeToUserDataUpdates(
             string listenKey, 
-            Action<BinanceStreamAccountInfo> onAccountInfoMessage, 
-            Action<BinanceStreamOrderUpdate> onOrderUpdateMessage,
-            Action<BinanceStreamOrderList> onOcoOrderUpdateMessage,
-            Action<IEnumerable<BinanceStreamBalance>> onAccountPositionMessage) => SubscribeToUserDataUpdatesAsync(listenKey, onAccountInfoMessage, onOrderUpdateMessage, onOcoOrderUpdateMessage, onAccountPositionMessage).Result;
+            Action<BinanceStreamAccountInfo>? onAccountInfoMessage, 
+            Action<BinanceStreamOrderUpdate>? onOrderUpdateMessage,
+            Action<BinanceStreamOrderList>? onOcoOrderUpdateMessage,
+            Action<IEnumerable<BinanceStreamBalance>>? onAccountPositionMessage,
+            Action<BinanceStreamBalanceUpdate>? onAccountBalanceUpdate) => SubscribeToUserDataUpdatesAsync(listenKey, onAccountInfoMessage, onOrderUpdateMessage, onOcoOrderUpdateMessage, onAccountPositionMessage, onAccountBalanceUpdate).Result;
 
         /// <summary>
         /// Subscribes to the account update stream. Prior to using this, the <see cref="BinanceClient.StartUserStream"/> method should be called.
@@ -413,13 +417,15 @@ namespace Binance.Net
         /// <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
         /// <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
         /// <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
+        /// <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
             string listenKey, 
-            Action<BinanceStreamAccountInfo> onAccountInfoMessage, 
-            Action<BinanceStreamOrderUpdate> onOrderUpdateMessage,
-            Action<BinanceStreamOrderList> onOcoOrderUpdateMessage,
-            Action<IEnumerable<BinanceStreamBalance>> onAccountPositionMessage)
+            Action<BinanceStreamAccountInfo>? onAccountInfoMessage, 
+            Action<BinanceStreamOrderUpdate>? onOrderUpdateMessage,
+            Action<BinanceStreamOrderList>? onOcoOrderUpdateMessage,
+            Action<IEnumerable<BinanceStreamBalance>>? onAccountPositionMessage,
+            Action<BinanceStreamBalanceUpdate>? onAccountBalanceUpdate)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
 
@@ -468,6 +474,16 @@ namespace Binance.Net
                             log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account position stream: " + result.Error);
                         break;
                     }
+                    case BalanceUpdateEvent:
+                    {
+                        log.Write(LogVerbosity.Debug, data);
+                        var result = Deserialize<BinanceStreamBalanceUpdate>(token, false);
+                        if (result)
+                            onAccountBalanceUpdate?.Invoke(result.Data);
+                        else
+                            log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account position stream: " + result.Error);
+                        break;
+                    }
                     default:
                         log.Write(LogVerbosity.Warning, $"Received unknown user data event {evnt}: " + data);
                         break;
@@ -494,7 +510,7 @@ namespace Binance.Net
         }
 
         /// <inheritdoc />
-        protected override bool HandleSubscriptionResponse(SocketConnection s, SocketSubscription subscription, object request, JToken message, out CallResult<object> callResult)
+        protected override bool HandleSubscriptionResponse(SocketConnection s, SocketSubscription subscription, object request, JToken message, out CallResult<object>? callResult)
         {
             throw new NotImplementedException();
         }

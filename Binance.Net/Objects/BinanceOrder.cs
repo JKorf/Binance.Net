@@ -42,6 +42,11 @@ namespace Binance.Net.Objects
         [JsonProperty("cummulativeQuoteQty")]
         public decimal CummulativeQuoteQuantity { get; set; }
         /// <summary>
+        /// The original quote order quantity
+        /// </summary>
+        [JsonProperty("origQuoteOrderQty")]
+        public decimal OriginalQuoteOrderQuantity { get; set; }
+        /// <summary>
         /// The status of the order
         /// </summary>
         [JsonConverter(typeof(OrderStatusConverter))]

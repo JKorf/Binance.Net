@@ -59,7 +59,7 @@ namespace Binance.Net.Objects
         /// The original client order id
         /// </summary>
         [JsonProperty("C")]
-        public string OriginalClientOrderId { get; set; } = "";
+        public string? OriginalClientOrderId { get; set; } = "";
         /// <summary>
         /// The execution type
         /// </summary>
@@ -135,6 +135,11 @@ namespace Binance.Net.Objects
         /// </summary>
         [JsonProperty("Z")]
         public decimal CummulativeQuoteQuantity { get; set; }
+        /// <summary>
+        /// Quote order quantity
+        /// </summary>
+        [JsonProperty("Q")]
+        public decimal QuoteOrderQuantity { get; set; }
         /// <summary>
         /// Last quote asset transacted quantity (i.e. LastPrice * LastQuantity)
         /// </summary>

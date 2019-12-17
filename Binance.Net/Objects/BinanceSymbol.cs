@@ -59,6 +59,19 @@ namespace Binance.Net.Objects
         /// </summary>
         public bool OCOAllowed { get; set; }
         /// <summary>
+        /// Whether or not it is allowed to specify the quantity of a market order in the quote asset
+        /// </summary>
+        [JsonProperty("quoteOrderQtyMarketAllowed")]
+        public bool QuoteOrderQuantityMarketAllowed { get; set; }
+        /// <summary>
+        /// The precision of the base asset commission
+        /// </summary>
+        public int BaseCommissionPrecision { get; set; }
+        /// <summary>
+        /// The precision of the quote asset commission
+        /// </summary>
+        public int QuoteCommissionPrecision { get; set; }
+        /// <summary>
         /// Filters for order on this symbol
         /// </summary>
         public IEnumerable<BinanceSymbolFilter> Filters { get; set; } = new List<BinanceSymbolFilter>();

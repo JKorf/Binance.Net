@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientWPF", "ClientWPF\ClientWPF.csproj", "{2784274C-FD3B-404D-949E-E03D3F735BBC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientConsole", "ClientConsole\ClientConsole.csproj", "{ABA63E28-A03C-4764-89F1-A7268E380F06}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication1", "Asp.NetCore.MVC\WebApplication1.csproj", "{D935C79F-48CE-47BD-9E37-17D4A1EFDF63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +23,15 @@ Global
 		{ABA63E28-A03C-4764-89F1-A7268E380F06}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABA63E28-A03C-4764-89F1-A7268E380F06}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABA63E28-A03C-4764-89F1-A7268E380F06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D935C79F-48CE-47BD-9E37-17D4A1EFDF63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D935C79F-48CE-47BD-9E37-17D4A1EFDF63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D935C79F-48CE-47BD-9E37-17D4A1EFDF63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D935C79F-48CE-47BD-9E37-17D4A1EFDF63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0FC03929-769B-4314-AF91-AF01E06278DD}
 	EndGlobalSection
 EndGlobal

@@ -324,6 +324,7 @@ namespace Binance.Net.Interfaces
         /// <param name="type">The order type</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
         /// <param name="quantity">The amount of the symbol</param>
+        /// <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
         /// <param name="price">The price to use</param>
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
@@ -336,7 +337,8 @@ namespace Binance.Net.Interfaces
             string symbol,
             OrderSide side,
             OrderType type,
-            decimal quantity,
+            decimal? quantity = null,
+            decimal? quoteOrderQuantity = null,
             string? newClientOrderId = null,
             decimal? price = null,
             TimeInForce? timeInForce = null,
@@ -354,6 +356,7 @@ namespace Binance.Net.Interfaces
         /// <param name="type">The order type</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
         /// <param name="quantity">The amount of the symbol</param>
+        /// <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
         /// <param name="price">The price to use</param>
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
@@ -365,7 +368,8 @@ namespace Binance.Net.Interfaces
         Task<WebCallResult<BinancePlacedOrder>> PlaceOrderAsync(string symbol,
             OrderSide side,
             OrderType type,
-            decimal quantity,
+            decimal? quantity = null,
+            decimal? quoteOrderQuantity = null,
             string? newClientOrderId = null,
             decimal? price = null,
             TimeInForce? timeInForce = null,
@@ -383,6 +387,7 @@ namespace Binance.Net.Interfaces
         /// <param name="type">The order type (limit/market)</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel)</param>
         /// <param name="quantity">The amount of the symbol</param>
+        /// <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
         /// <param name="price">The price to use</param>
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
@@ -394,7 +399,8 @@ namespace Binance.Net.Interfaces
         WebCallResult<BinancePlacedOrder> PlaceTestOrder(string symbol,
             OrderSide side,
             OrderType type,
-            decimal quantity,
+            decimal? quantity = null,
+            decimal? quoteOrderQuantity = null,
             string? newClientOrderId = null,
             decimal? price = null,
             TimeInForce? timeInForce = null,
@@ -412,6 +418,7 @@ namespace Binance.Net.Interfaces
         /// <param name="type">The order type (limit/market)</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel)</param>
         /// <param name="quantity">The amount of the symbol</param>
+        /// <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
         /// <param name="price">The price to use</param>
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
@@ -423,7 +430,8 @@ namespace Binance.Net.Interfaces
         Task<WebCallResult<BinancePlacedOrder>> PlaceTestOrderAsync(string symbol,
             OrderSide side,
             OrderType type,
-            decimal quantity,
+            decimal? quantity = null,
+            decimal? quoteOrderQuantity = null,
             string? newClientOrderId = null,
             decimal? price = null,
             TimeInForce? timeInForce = null,
@@ -1076,6 +1084,7 @@ namespace Binance.Net.Interfaces
         /// <param name="type">The order type</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
         /// <param name="quantity">The amount of the symbol</param>
+        /// <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
         /// <param name="price">The price to use</param>
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
@@ -1087,7 +1096,8 @@ namespace Binance.Net.Interfaces
         WebCallResult<BinancePlacedOrder> PlaceMarginOrder(string symbol,
             OrderSide side,
             OrderType type,
-            decimal quantity,
+            decimal? quantity = null,
+            decimal? quoteOrderQuantity = null,
             string? newClientOrderId = null,
             decimal? price = null,
             TimeInForce? timeInForce = null,
@@ -1105,6 +1115,7 @@ namespace Binance.Net.Interfaces
         /// <param name="type">The order type</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
         /// <param name="quantity">The amount of the symbol</param>
+        /// <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
         /// <param name="price">The price to use</param>
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
@@ -1116,7 +1127,8 @@ namespace Binance.Net.Interfaces
         Task<WebCallResult<BinancePlacedOrder>> PlaceMarginOrderAsync(string symbol,
             OrderSide side,
             OrderType type,
-            decimal quantity,
+            decimal? quantity = null,
+            decimal? quoteOrderQuantity = null,
             string? newClientOrderId = null,
             decimal? price = null,
             TimeInForce? timeInForce = null,
