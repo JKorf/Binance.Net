@@ -49,7 +49,7 @@ namespace Binance.Net
         private const string WithdrawalApi = "wapi";
 
         // Versions
-        private const string PublicVersion = "1";
+        private const string PublicVersion = "3";
         private const string SignedVersion = "3";
         private const string UserDataStreamVersion = "1";
         private const string WithdrawalVersion = "3";
@@ -311,8 +311,12 @@ namespace Binance.Net
             limit?.ValidateIntValues(nameof(limit), 5, 10, 20, 50, 100, 500, 1000, 5000);
             var parameters = new Dictionary<string, object> { { "symbol", symbol } };
             parameters.AddOptionalParameter("limit", limit?.ToString());
-            return await SendRequest<BinanceOrderBook>(GetUrl(OrderBookEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            var result = await SendRequest<BinanceOrderBook>(GetUrl(OrderBookEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            if (result)
+                result.Data.Symbol = symbol;
+            return result;
         }
+
 
         /// <summary>
         /// Gets compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
@@ -673,7 +677,8 @@ namespace Binance.Net
         /// <param name="side">The order side (buy/sell)</param>
         /// <param name="type">The order type</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
-        /// <param name="quantity">The amount of the symbol</param>
+        /// <param name="quantity">The amount of the base symbol</param>
+        /// <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
         /// <param name="price">The price to use</param>
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
@@ -686,7 +691,8 @@ namespace Binance.Net
             string symbol,
             OrderSide side,
             OrderType type,
-            decimal quantity,
+            decimal? quantity = null,
+            decimal? quoteOrderQuantity = null,
             string? newClientOrderId = null,
             decimal? price = null,
             TimeInForce? timeInForce = null,
@@ -694,7 +700,7 @@ namespace Binance.Net
             decimal? icebergQty = null,
             OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
-            CancellationToken ct = default) => PlaceOrderAsync(symbol, side, type, quantity, newClientOrderId, price, timeInForce, stopPrice, icebergQty, orderResponseType, receiveWindow, ct).Result;
+            CancellationToken ct = default) => PlaceOrderAsync(symbol, side, type, quantity, quoteOrderQuantity, newClientOrderId, price, timeInForce, stopPrice, icebergQty, orderResponseType, receiveWindow, ct).Result;
 
         /// <summary>
         /// Places a new order
@@ -704,6 +710,7 @@ namespace Binance.Net
         /// <param name="type">The order type</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
         /// <param name="quantity">The amount of the symbol</param>
+        /// <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
         /// <param name="price">The price to use</param>
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
@@ -715,7 +722,8 @@ namespace Binance.Net
         public async Task<WebCallResult<BinancePlacedOrder>> PlaceOrderAsync(string symbol,
             OrderSide side,
             OrderType type,
-            decimal quantity,
+            decimal? quantity = null,
+            decimal? quoteOrderQuantity = null,
             string? newClientOrderId = null,
             decimal? price = null,
             TimeInForce? timeInForce = null,
@@ -725,38 +733,20 @@ namespace Binance.Net
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
-            symbol.ValidateBinanceSymbol();
-            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
-            if (!timestampResult)
-                return new WebCallResult<BinancePlacedOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-
-            var rulesCheck = await CheckTradeRules(symbol, quantity, price, type, ct).ConfigureAwait(false);
-            if (!rulesCheck.Passed)
-            {
-                log.Write(LogVerbosity.Warning, rulesCheck.ErrorMessage!);
-                return new WebCallResult<BinancePlacedOrder>(null, null, null, new ArgumentError(rulesCheck.ErrorMessage!));
-            }
-
-            quantity = rulesCheck.Quantity;
-            price = rulesCheck.Price;
-
-            var parameters = new Dictionary<string, object>
-            {
-                { "symbol", symbol },
-                { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
-                { "type", JsonConvert.SerializeObject(type, new OrderTypeConverter(false)) },
-                { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
-                { "timestamp", GetTimestamp() }
-            };
-            parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
-            parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)));
-            parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await SendRequest<BinancePlacedOrder>(GetUrl(NewOrderEndpoint, Api, SignedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await PlaceOrderInternal(GetUrl(NewOrderEndpoint, Api, SignedVersion),
+                symbol,
+                side,
+                type,
+                quantity,
+                quoteOrderQuantity,
+                newClientOrderId,
+                price,
+                timeInForce,
+                stopPrice,
+                icebergQty,
+                orderResponseType,
+                receiveWindow,
+                ct).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -767,6 +757,7 @@ namespace Binance.Net
         /// <param name="type">The order type (limit/market)</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel)</param>
         /// <param name="quantity">The amount of the symbol</param>
+        /// <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
         /// <param name="price">The price to use</param>
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
@@ -778,7 +769,8 @@ namespace Binance.Net
         public WebCallResult<BinancePlacedOrder> PlaceTestOrder(string symbol,
             OrderSide side,
             OrderType type,
-            decimal quantity,
+            decimal? quantity = null,
+            decimal? quoteOrderQuantity = null,
             string? newClientOrderId = null,
             decimal? price = null,
             TimeInForce? timeInForce = null,
@@ -786,7 +778,7 @@ namespace Binance.Net
             decimal? icebergQty = null,
             OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
-            CancellationToken ct = default) => PlaceTestOrderAsync(symbol, side, type, quantity, newClientOrderId, price, timeInForce, stopPrice, icebergQty, orderResponseType, receiveWindow, ct).Result;
+            CancellationToken ct = default) => PlaceTestOrderAsync(symbol, side, type, quantity, quoteOrderQuantity, newClientOrderId, price, timeInForce, stopPrice, icebergQty, orderResponseType, receiveWindow, ct).Result;
 
         /// <summary>
         /// Places a new test order. Test orders are not actually being executed and just test the functionality.
@@ -796,6 +788,7 @@ namespace Binance.Net
         /// <param name="type">The order type (limit/market)</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel)</param>
         /// <param name="quantity">The amount of the symbol</param>
+        /// <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
         /// <param name="price">The price to use</param>
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
@@ -807,7 +800,8 @@ namespace Binance.Net
         public async Task<WebCallResult<BinancePlacedOrder>> PlaceTestOrderAsync(string symbol,
             OrderSide side,
             OrderType type,
-            decimal quantity,
+            decimal? quantity = null,
+            decimal? quoteOrderQuantity = null,
             string? newClientOrderId = null,
             decimal? price = null,
             TimeInForce? timeInForce = null,
@@ -817,38 +811,20 @@ namespace Binance.Net
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
-            symbol.ValidateBinanceSymbol();
-            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
-            if (!timestampResult)
-                return new WebCallResult<BinancePlacedOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-
-            var rulesCheck = await CheckTradeRules(symbol, quantity, price, type, ct).ConfigureAwait(false);
-            if (!rulesCheck.Passed)
-            {
-                log.Write(LogVerbosity.Warning, rulesCheck.ErrorMessage!);
-                return new WebCallResult<BinancePlacedOrder>(null, null, null, new ArgumentError(rulesCheck.ErrorMessage!));
-            }
-
-            quantity = rulesCheck.Quantity;
-            price = rulesCheck.Price;
-
-            var parameters = new Dictionary<string, object>
-            {
-                { "symbol", symbol },
-                { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
-                { "type", JsonConvert.SerializeObject(type, new OrderTypeConverter(false)) },
-                { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
-                { "timestamp", GetTimestamp() }
-            };
-            parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
-            parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)));
-            parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await SendRequest<BinancePlacedOrder>(GetUrl(NewTestOrderEndpoint, Api, SignedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await PlaceOrderInternal(GetUrl(NewTestOrderEndpoint, Api, SignedVersion),
+                symbol,
+                side,
+                type,
+                quantity,
+                quoteOrderQuantity,
+                newClientOrderId,
+                price,
+                timeInForce,
+                stopPrice,
+                icebergQty,
+                orderResponseType,
+                receiveWindow,
+                ct).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -2011,6 +1987,7 @@ namespace Binance.Net
         /// <param name="type">The order type</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
         /// <param name="quantity">The amount of the symbol</param>
+        /// <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
         /// <param name="price">The price to use</param>
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
@@ -2022,7 +1999,8 @@ namespace Binance.Net
         public WebCallResult<BinancePlacedOrder> PlaceMarginOrder(string symbol,
             OrderSide side,
             OrderType type,
-            decimal quantity,
+            decimal? quantity = null,
+            decimal? quoteOrderQuantity = null,
             string? newClientOrderId = null,
             decimal? price = null,
             TimeInForce? timeInForce = null,
@@ -2030,7 +2008,7 @@ namespace Binance.Net
             decimal? icebergQuantity = null,
             OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
-            CancellationToken ct = default) => PlaceMarginOrderAsync(symbol, side, type, quantity, newClientOrderId, price, timeInForce, stopPrice, icebergQuantity, orderResponseType, receiveWindow, ct).Result;
+            CancellationToken ct = default) => PlaceMarginOrderAsync(symbol, side, type, quantity, quoteOrderQuantity, newClientOrderId, price, timeInForce, stopPrice, icebergQuantity, orderResponseType, receiveWindow, ct).Result;
 
         /// <summary>
         /// Margin account new order
@@ -2040,6 +2018,7 @@ namespace Binance.Net
         /// <param name="type">The order type</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
         /// <param name="quantity">The amount of the symbol</param>
+        /// <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
         /// <param name="price">The price to use</param>
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
@@ -2051,7 +2030,8 @@ namespace Binance.Net
         public async Task<WebCallResult<BinancePlacedOrder>> PlaceMarginOrderAsync(string symbol,
             OrderSide side,
             OrderType type,
-            decimal quantity,
+            decimal? quantity = null,
+            decimal? quoteOrderQuantity = null,
             string? newClientOrderId = null,
             decimal? price = null,
             TimeInForce? timeInForce = null,
@@ -2061,38 +2041,20 @@ namespace Binance.Net
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
-            symbol.ValidateBinanceSymbol();
-            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
-            if (!timestampResult)
-                return new WebCallResult<BinancePlacedOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-
-            var rulesCheck = await CheckTradeRules(symbol, quantity, price, type, ct).ConfigureAwait(false);
-            if (!rulesCheck.Passed)
-            {
-                log.Write(LogVerbosity.Warning, rulesCheck.ErrorMessage!);
-                return new WebCallResult<BinancePlacedOrder>(null, null, null, new ArgumentError(rulesCheck.ErrorMessage!));
-            }
-
-            quantity = rulesCheck.Quantity;
-            price = rulesCheck.Price;
-
-            var parameters = new Dictionary<string, object>
-            {
-                { "symbol", symbol },
-                { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
-                { "type", JsonConvert.SerializeObject(type, new OrderTypeConverter(false)) },
-                { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
-                { "timestamp", GetTimestamp() }
-            };
-            parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
-            parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)));
-            parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("icebergQty", icebergQuantity?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await SendRequest<BinancePlacedOrder>(GetUrl(NewMarginOrderEndpoint, MarginApi, MarginVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await PlaceOrderInternal(GetUrl(NewMarginOrderEndpoint, MarginApi, MarginVersion),
+                symbol,
+                side,
+                type,
+                quantity,
+                quoteOrderQuantity,
+                newClientOrderId,
+                price,
+                timeInForce,
+                stopPrice,
+                icebergQuantity,
+                orderResponseType,
+                receiveWindow,
+                ct).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -2841,6 +2803,63 @@ namespace Binance.Net
 
         #region helpers
 
+        private async Task<WebCallResult<BinancePlacedOrder>> PlaceOrderInternal(Uri uri, 
+            string symbol,
+            OrderSide side,
+            OrderType type,
+            decimal? quantity = null,
+            decimal? quoteOrderQuantity = null,
+            string? newClientOrderId = null,
+            decimal? price = null,
+            TimeInForce? timeInForce = null,
+            decimal? stopPrice = null,
+            decimal? icebergQty = null,
+            OrderResponseType? orderResponseType = null,
+            int? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            symbol.ValidateBinanceSymbol();
+
+            if(quoteOrderQuantity != null && type != OrderType.Market)
+                throw new ArgumentException("quoteOrderQuantity is only valid for market orders");
+
+            if ((quantity == null && quoteOrderQuantity == null) || (quantity != null && quoteOrderQuantity != null))
+                throw new ArgumentException("1 of either should be specified, quantity or quoteOrderQuantity");
+
+            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinancePlacedOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var rulesCheck = await CheckTradeRules(symbol, quantity, price, type, ct).ConfigureAwait(false);
+            if (!rulesCheck.Passed)
+            {
+                log.Write(LogVerbosity.Warning, rulesCheck.ErrorMessage!);
+                return new WebCallResult<BinancePlacedOrder>(null, null, null, new ArgumentError(rulesCheck.ErrorMessage!));
+            }
+
+            quantity = rulesCheck.Quantity;
+            price = rulesCheck.Price;
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "symbol", symbol },
+                { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
+                { "type", JsonConvert.SerializeObject(type, new OrderTypeConverter(false)) },
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("quantity", quantity?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("quoteOrderQty", quoteOrderQuantity?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
+            parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)));
+            parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await SendRequest<BinancePlacedOrder>(uri, HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
         /// <inheritdoc />
         protected override Error ParseErrorResponse(JToken error)
         {
@@ -2882,7 +2901,7 @@ namespace Binance.Net
             return new WebCallResult<DateTime>(null, null, default, null);
         }
 
-        private async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal quantity, decimal? price, OrderType type, CancellationToken ct)
+        private async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? price, OrderType type, CancellationToken ct)
         {
             var outputQuantity = quantity;
             var outputPrice = price;
@@ -2918,10 +2937,10 @@ namespace Binance.Net
                         stepSize = symbolData.MarketLotSizeFilter.StepSize;
                 }
 
-                if (minQty.HasValue)
+                if (minQty.HasValue && quantity.HasValue)
                 {
-                    outputQuantity = BinanceHelpers.ClampQuantity(minQty.Value, maxQty!.Value, stepSize!.Value, quantity);
-                    if (outputQuantity != quantity)
+                    outputQuantity = BinanceHelpers.ClampQuantity(minQty.Value, maxQty!.Value, stepSize!.Value, quantity.Value);
+                    if (outputQuantity != quantity.Value)
                     {
                         if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
                         {
@@ -2964,7 +2983,7 @@ namespace Binance.Net
                 }
             }
 
-            if (symbolData.MinNotionalFilter == null)
+            if (symbolData.MinNotionalFilter == null || quantity == null)
                 return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice);
 
             var notional = quantity * price.Value;

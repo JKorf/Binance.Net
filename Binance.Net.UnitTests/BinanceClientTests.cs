@@ -80,6 +80,7 @@ namespace Binance.Net.UnitTests
             var orderBook = new BinanceOrderBook()
             {
                 LastUpdateId = 123,
+                Symbol = "BNBBTC",
                 Asks = new List<BinanceOrderBookEntry>()
                 {
                     new BinanceOrderBookEntry()
