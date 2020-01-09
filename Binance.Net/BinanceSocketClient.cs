@@ -168,7 +168,7 @@ namespace Binance.Net
             foreach (var symbol in symbols)
                 symbol.ValidateBinanceSymbol();
 
-            updateInterval?.ValidateIntValues(nameof(updateInterval), 0, 100, 1000);
+            updateInterval?.ValidateIntValues(nameof(updateInterval), 100, 1000);
             var handler = new Action<BinanceCombinedStream<BinanceOrderBook>>(data => onMessage(data.Data));
             symbols = symbols.Select(a => a.ToLower() + DepthStreamEndpoint + (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
             return await Subscribe(String.Join("/", symbols), true, handler).ConfigureAwait(false);
