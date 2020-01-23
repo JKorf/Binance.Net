@@ -45,6 +45,14 @@ namespace Binance.Net.Objects
         }
 
         /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="baseAddress">Сustom url to connect via mirror website</param>
+        public BinanceClientOptions(string baseAddress) : base(baseAddress)
+        {
+        }
+
+        /// <summary>
         /// Return a copy of these options
         /// </summary>
         /// <returns></returns>

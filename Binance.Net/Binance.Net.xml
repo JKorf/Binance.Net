@@ -3983,6 +3983,12 @@
             ctor
             </summary>
         </member>
+        <member name="M:Binance.Net.Objects.BinanceClientOptions.#ctor(System.String)">
+            <summary>
+            ctor
+            </summary>
+            <param name="baseAddress">Сustom url to connect via mirror website</param>
+        </member>
         <member name="M:Binance.Net.Objects.BinanceClientOptions.Copy">
             <summary>
             Return a copy of these options
