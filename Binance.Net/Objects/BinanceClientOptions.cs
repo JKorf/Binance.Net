@@ -97,6 +97,14 @@ namespace Binance.Net.Objects
         /// <summary>
         /// ctor
         /// </summary>
+        /// <param name="address"></param>
+        public BinanceSocketClientOptions(string address): base(address)
+        {
+        }
+
+        /// <summary>
+        /// ctor
+        /// </summary>
         public BinanceSocketClientOptions(): base("wss://stream.binance.com:9443/ws/")
         {
         }        
