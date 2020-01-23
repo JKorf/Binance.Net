@@ -144,6 +144,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 5.0.5 - 23 Jan 2020
+    * Added option for custom url
+
 * Version 5.0.4 - 10 Dec 2019
     * Fix for BinanceSymbolOrderBook
 

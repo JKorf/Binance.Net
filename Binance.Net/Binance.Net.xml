@@ -4012,6 +4012,12 @@
             Not available on Binance.
             </summary>
         </member>
+        <member name="M:Binance.Net.Objects.BinanceSocketClientOptions.#ctor(System.String)">
+            <summary>
+            ctor
+            </summary>
+            <param name="address"></param>
+        </member>
         <member name="M:Binance.Net.Objects.BinanceSocketClientOptions.#ctor">
             <summary>
             ctor
