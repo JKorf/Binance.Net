@@ -49,6 +49,10 @@ Implementations from third parties:
 <br />
 <a href="https://github.com/ridicoulous/LiquidQuoine.Net">Liquid</a>
 </td>
+<td><a href="https://github.com/burakoner/OKEx.Net"><img src="https://github.com/burakoner/OKEx.Net/blob/master/Icon/icon.png?raw=true"></a>
+<br />
+<a href="https://github.comburakoner/OKEx.Net">OKEx</a>
+</td>
 </tr>
 </table>
 
@@ -144,6 +148,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 5.0.6 - 27 Jan 2020
+    * Updated CryptoExchange.Net
+
 * Version 5.0.5 - 23 Jan 2020
     * Added option for custom url
 
