@@ -49,7 +49,7 @@ Implementations from third parties:
 <br />
 <a href="https://github.com/ridicoulous/LiquidQuoine.Net">Liquid</a>
 </td>
-<td><a href="https://github.com/burakoner/OKEx.Net"><img src="https://github.com/burakoner/OKEx.Net/blob/master/Icon/icon.png?raw=true"></a>
+<td><a href="https://github.com/burakoner/OKEx.Net"><img src="https://raw.githubusercontent.com/burakoner/OKEx.Net/master/Okex.Net/Icon/icon.png"></a>
 <br />
 <a href="https://github.comburakoner/OKEx.Net">OKEx</a>
 </td>
