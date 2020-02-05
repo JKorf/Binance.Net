@@ -1039,7 +1039,7 @@ namespace Binance.Net.UnitTests
         [TestCase("BTCUSDT", true)]
         [TestCase("NANOUSDT", true)]
         [TestCase("NANOAUSDTA", true)]
-        [TestCase("NANOAUSDTAD", false)]
+        [TestCase("NANOAUSDTADD", false)]
         [TestCase("NANOBTC", true)]
         [TestCase("ETHBTC", true)]
         [TestCase("BEETC", true)]
