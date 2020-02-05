@@ -148,6 +148,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 5.0.7 - 05 Feb 2020
+    * Fixed incorrect Invalid symbol error
+
 * Version 5.0.6 - 27 Jan 2020
     * Updated CryptoExchange.Net
 
