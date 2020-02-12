@@ -119,6 +119,8 @@ namespace Binance.Net.Objects
             copy.BaseSocketCombinedAddress = BaseSocketCombinedAddress;
             return copy;
         }
+
+        public enum 
     }
 
     /// <summary>

@@ -47,6 +47,7 @@ namespace Binance.Net
         private const string Api = "api";
         private const string MarginApi = "sapi";
         private const string WithdrawalApi = "wapi";
+        private const string FuturesApi = "fapi";
 
         // Versions
         private const string PublicVersion = "3";
@@ -55,6 +56,7 @@ namespace Binance.Net
         private const string WithdrawalVersion = "3";
         private const string MarginVersion = "1";
         private const string AveragePriceVersion = "3";
+        private const string FuturesVersion = "1";
 
         // Public
         private const string PingEndpoint = "ping";
@@ -110,6 +112,9 @@ namespace Binance.Net
         private const string OpenMarginOrdersEndpoint = "margin/openOrders";
         private const string QueryMarginOrderEndpoint = "margin/order";
 
+        // Futures
+
+            
         // User stream
         private const string GetListenKeyEndpoint = "userDataStream";
         private const string KeepListenKeyAliveEndpoint = "userDataStream";
@@ -167,6 +172,7 @@ namespace Binance.Net
 
         #region methods
         #region public
+        #region spot and margin
         /// <summary>
         /// Set the default options to be used when creating new clients
         /// </summary>
@@ -587,6 +593,12 @@ namespace Binance.Net
 
             return await SendRequest<BinanceAveragePrice>(GetUrl(AveragePriceEndpoint, Api, AveragePriceVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
+        #endregion
+
+        #region Futures
+
+
+        #endregion
         #endregion
 
         #region signed
@@ -2624,6 +2636,10 @@ namespace Binance.Net
 
             return await SendRequest<BinanceQueryRecords<BinanceForcedLiquidation>>(GetUrl(ForceLiquidationHistoryEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
+        #endregion
+
+        #region Futures
+
         #endregion
 
         #region stream
