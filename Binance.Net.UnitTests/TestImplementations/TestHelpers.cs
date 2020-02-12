@@ -60,7 +60,7 @@ namespace Binance.Net.UnitTests.TestImplementations
             return self == to;
         }
 
-        public static IBinanceSocketClient CreateSocketClient(IWebsocket socket, BinanceSocketClientOptions options = null)
+        public static IBinanceSocketClient CreateSocketClient(IWebsocket socket, BinanceSpotAndMarginSocketClientOptions options = null)
         {
             IBinanceSocketClient client;
             client = options != null ? new BinanceSocketClient(options) : new BinanceSocketClient();
@@ -69,7 +69,7 @@ namespace Binance.Net.UnitTests.TestImplementations
             return client;
         }
 
-        public static IBinanceClient CreateClient(BinanceClientOptions options = null)
+        public static IBinanceClient CreateClient(BinanceSpotAndMarginClientOptions options = null)
         {
             IBinanceClient client;
             client = options != null ? new BinanceClient(options) : new BinanceClient();
@@ -77,14 +77,14 @@ namespace Binance.Net.UnitTests.TestImplementations
             return client;
         }
 
-        public static IBinanceClient CreateResponseClient(string response, BinanceClientOptions options = null)
+        public static IBinanceClient CreateResponseClient(string response, BinanceSpotAndMarginClientOptions options = null)
         {
             var client = (BinanceClient)CreateClient(options);
             SetResponse(client, response);
             return client;
         }
 
-        public static IBinanceClient CreateResponseClient<T>(T response, BinanceClientOptions options = null)
+        public static IBinanceClient CreateResponseClient<T>(T response, BinanceSpotAndMarginClientOptions options = null)
         {
             var client = (BinanceClient)CreateClient(options);
             SetResponse(client, JsonConvert.SerializeObject(response));

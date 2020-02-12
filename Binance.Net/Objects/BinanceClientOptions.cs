@@ -9,6 +9,25 @@ namespace Binance.Net.Objects
     public class BinanceClientOptions : RestClientOptions
     {
         /// <summary>
+        /// The account type for combined data in rest client
+        /// </summary>
+        public AccountType accountType { get; set; } = AccountType.Margin;
+        
+        /// <summary>
+        /// The base address for combined data in rest client
+        /// </summary>
+        public string BaseClientAddress { get {
+            if (accountType == AccountType.Margin)
+            {
+                return "https://api.binance.com";
+            }
+            else
+            {
+                return "https://fapi.binance.com";
+            }
+        }}
+
+        /// <summary>
         /// Whether or not to automatically sync the local time with the server time
         /// </summary>
         public bool AutoTimestamp { get; set; } = true;
@@ -27,6 +46,7 @@ namespace Binance.Net.Objects
         /// Whether to check the trade rules when placing new orders and what to do if the trade isn't valid
         /// </summary>
         public TradeRulesBehaviour TradeRulesBehaviour { get; set; } = TradeRulesBehaviour.None;
+
         /// <summary>
         /// How often the trade rules should be updated. Only used when TradeRulesBehaviour is not None
         /// </summary>
@@ -40,8 +60,18 @@ namespace Binance.Net.Objects
         /// <summary>
         /// ctor
         /// </summary>
-        public BinanceClientOptions(): base("https://api.binance.com")
+        public BinanceClientOptions(): base("")
         {
+            base.BaseAddress = this.BaseClientAddress;
+        }
+        
+        /// <summary>
+        /// ctor
+        /// </summary>
+        public BinanceClientOptions(AccountType accountType): base("")
+        {
+            this.accountType = accountType;
+            base.BaseAddress = this.BaseClientAddress;
         }
 
         /// <summary>
@@ -59,6 +89,7 @@ namespace Binance.Net.Objects
         public BinanceClientOptions Copy()
         {
             var copy = Copy<BinanceClientOptions>();
+            copy.accountType = accountType;
             copy.AutoTimestamp = AutoTimestamp;
             copy.AutoTimestampRecalculationInterval = AutoTimestampRecalculationInterval;
             copy.TimestampOffset = TimestampOffset;
@@ -75,10 +106,24 @@ namespace Binance.Net.Objects
     public class BinanceSocketClientOptions : SocketClientOptions
     {
         /// <summary>
+        /// The account type for combined data in socket connections
+        /// </summary>
+        public AccountType accountType { get; set; } = AccountType.Margin;
+
+        /// <summary>
         /// The base address for combined data in socket connections
         /// </summary>
-        public string BaseSocketCombinedAddress { get; set; } = "wss://stream.binance.com:9443/";
-
+        public string BaseSocketCombinedAddress { get {
+            if (accountType == AccountType.Margin)
+            {
+                return "wss://stream.binance.com:9443/ws/";
+            }
+            else
+            {
+                return "wss://fstream.binance.com/";
+            }
+        }}
+        
         /// <summary>
         /// The amount of subscriptions that should be made on a single socket connection. Not all exchanges support multiple subscriptions on a single socket.
         /// Setting this to a higher number increases subscription speed, but having more subscriptions on a single connection will also increase the amount of traffic on that single connection.
@@ -97,6 +142,14 @@ namespace Binance.Net.Objects
         /// <summary>
         /// ctor
         /// </summary>
+        public BinanceSocketClientOptions(): base("")
+        {
+            base.BaseAddress = BaseSocketCombinedAddress;
+        }
+
+        /// <summary>
+        /// ctor
+        /// </summary>
         /// <param name="address"></param>
         public BinanceSocketClientOptions(string address): base(address)
         {
@@ -105,8 +158,9 @@ namespace Binance.Net.Objects
         /// <summary>
         /// ctor
         /// </summary>
-        public BinanceSocketClientOptions(): base("wss://stream.binance.com:9443/ws/")
+        public BinanceSocketClientOptions(AccountType accountType): base("")
         {
+            base.BaseAddress = BaseSocketCombinedAddress;
         }        
 
         /// <summary>
@@ -116,11 +170,10 @@ namespace Binance.Net.Objects
         public BinanceSocketClientOptions Copy()
         {
             var copy = Copy<BinanceSocketClientOptions>();
-            copy.BaseSocketCombinedAddress = BaseSocketCombinedAddress;
+            copy.accountType = accountType;
             return copy;
         }
 
-        public enum 
     }
 
     /// <summary>
@@ -148,5 +201,20 @@ namespace Binance.Net.Objects
             Limit = limit;
             UpdateInterval = updateInterval;
         }
+    }
+
+    /// <summary>
+    /// Binance account type
+    /// </summary>
+    public enum AccountType
+    {
+        /// <summary>
+        /// Margin Account type
+        /// </summary>
+        Margin,
+        /// <summary>
+        /// Futures Account type
+        /// </summary>
+        Futures
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using Binance.Net.Objects;
 
 namespace Binance.Net.Converters
-{
+{//TODO Converters
     internal class OrderTypeConverter : JsonConverter
     {
         private readonly bool quotes;

@@ -4,7 +4,7 @@ using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects
-{
+{//TODO All streams
     /// <summary>
     /// Information about an account
     /// </summary>

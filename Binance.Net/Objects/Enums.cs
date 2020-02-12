@@ -73,6 +73,7 @@ namespace Binance.Net.Objects
         Break
     }
 
+//TODO
     /// <summary>
     /// The type of an order
     /// </summary>

@@ -230,7 +230,7 @@ namespace Binance.Net.UnitTests
         {
             // arrange
             var socket = new TestSocket();
-            var client = TestHelpers.CreateSocketClient(socket, new BinanceSocketClientOptions(){ LogVerbosity = LogVerbosity.Debug });
+            var client = TestHelpers.CreateSocketClient(socket, new BinanceSpotAndMarginSocketClientOptions(){ LogVerbosity = LogVerbosity.Debug });
 
             BinanceStreamOrderList result = null;
             client.SubscribeToUserDataUpdatesAsync("test", null, null, (test) => result = test, null, null);

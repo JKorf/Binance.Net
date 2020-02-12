@@ -7,7 +7,7 @@ using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 
 namespace Binance.Net.Interfaces
-{
+{//TODO Interfaces
     /// <summary>
     /// Interface for the Binance client
     /// </summary>

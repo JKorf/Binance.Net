@@ -25,7 +25,7 @@ namespace Binance.Net.UnitTests
             // arrange
             DateTime expected = new DateTime(1970, 1, 1).AddMilliseconds(milisecondsTime);
             var time = new BinanceCheckTime() { ServerTime = expected };
-            var client = TestHelpers.CreateResponseClient(JsonConvert.SerializeObject(time), new BinanceClientOptions() { AutoTimestamp = false });
+            var client = TestHelpers.CreateResponseClient(JsonConvert.SerializeObject(time), new BinanceSpotAndMarginClientOptions() { AutoTimestamp = false });
 
             // act
             var result = client.GetServerTime();
@@ -152,7 +152,7 @@ namespace Binance.Net.UnitTests
                 }
             };
 
-            var client = TestHelpers.CreateResponseClient(accountInfo, new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient(accountInfo, new BinanceSpotAndMarginClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
@@ -288,7 +288,7 @@ namespace Binance.Net.UnitTests
                 }
             };
 
-            var client = TestHelpers.CreateResponseClient(orders, new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient(orders, new BinanceSpotAndMarginClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
@@ -360,7 +360,7 @@ namespace Binance.Net.UnitTests
                 }
             };
 
-            var client = TestHelpers.CreateResponseClient(history, new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient(history, new BinanceSpotAndMarginClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
@@ -416,7 +416,7 @@ namespace Binance.Net.UnitTests
             {
                 new object[] { 0, 0.5m, 0.3m, 0.4m, 0.2m, 0.8m, 0, 0.1m, 10, 0.6m, 0.7m},
                 new object[] { 0, 1.3m, 1.1m, 1.2m, 1.0m, 1.6m, 0, 0.9m, 20, 1.4m, 1.5m }
-            }), new BinanceClientOptions()
+            }), new BinanceSpotAndMarginClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
@@ -466,7 +466,7 @@ namespace Binance.Net.UnitTests
                 }
             };
 
-            var client = TestHelpers.CreateResponseClient(trades, new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient(trades, new BinanceSpotAndMarginClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
@@ -522,7 +522,7 @@ namespace Binance.Net.UnitTests
                 }
             };
 
-            var client = TestHelpers.CreateResponseClient(orders, new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient(orders, new BinanceSpotAndMarginClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
@@ -569,7 +569,7 @@ namespace Binance.Net.UnitTests
                     }
                 }
             };
-            var client = TestHelpers.CreateResponseClient(history, new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient(history, new BinanceSpotAndMarginClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
@@ -597,7 +597,7 @@ namespace Binance.Net.UnitTests
                 OriginalClientOrderId = "test2"
             };
 
-            var client = TestHelpers.CreateResponseClient(canceled, new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient(canceled, new BinanceSpotAndMarginClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
@@ -623,7 +623,7 @@ namespace Binance.Net.UnitTests
                 TransactTime = new DateTime(2017, 1, 1)
             };
 
-            var client = TestHelpers.CreateResponseClient(placed, new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient(placed, new BinanceSpotAndMarginClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
@@ -649,7 +649,7 @@ namespace Binance.Net.UnitTests
                 TransactTime = new DateTime(2017, 1, 1)
             };
 
-            var client = TestHelpers.CreateResponseClient(placed, new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient(placed, new BinanceSpotAndMarginClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
@@ -684,7 +684,7 @@ namespace Binance.Net.UnitTests
                 Type = OrderType.Market
             };
 
-            var client = TestHelpers.CreateResponseClient(order, new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient(order, new BinanceSpotAndMarginClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
@@ -708,7 +708,7 @@ namespace Binance.Net.UnitTests
                 Message = "Test"
             };
 
-            var client = TestHelpers.CreateResponseClient(order, new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient(order, new BinanceSpotAndMarginClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
@@ -757,7 +757,7 @@ namespace Binance.Net.UnitTests
                 }
             };
 
-            var client = TestHelpers.CreateResponseClient(status, new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient(status, new BinanceSpotAndMarginClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
@@ -783,7 +783,7 @@ namespace Binance.Net.UnitTests
                 ListenKey = "123"
             };
 
-            var client = TestHelpers.CreateResponseClient(key, new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient(key, new BinanceSpotAndMarginClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
@@ -801,7 +801,7 @@ namespace Binance.Net.UnitTests
         public void KeepAliveUserStream_Should_Respond()
         {
             // arrange
-            var client = TestHelpers.CreateResponseClient("{}", new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient("{}", new BinanceSpotAndMarginClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
@@ -818,7 +818,7 @@ namespace Binance.Net.UnitTests
         public void StopUserStream_Should_Respond()
         {
             // arrange
-            var client = TestHelpers.CreateResponseClient("{}", new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient("{}", new BinanceSpotAndMarginClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
@@ -835,7 +835,7 @@ namespace Binance.Net.UnitTests
         public void EnablingAutoTimestamp_Should_CallServerTime()
         {
             // arrange
-            var client = TestHelpers.CreateResponseClient("{}", new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient("{}", new BinanceSpotAndMarginClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = true
@@ -924,7 +924,7 @@ namespace Binance.Net.UnitTests
                 TransactionId = 1001
             };
 
-            var client = TestHelpers.CreateResponseClient(placed, new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient(placed, new BinanceSpotAndMarginClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
@@ -947,7 +947,7 @@ namespace Binance.Net.UnitTests
                 TransactionId = 11
             };
 
-            var client = TestHelpers.CreateResponseClient(placed, new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient(placed, new BinanceSpotAndMarginClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
@@ -970,7 +970,7 @@ namespace Binance.Net.UnitTests
                 TransactionId = 11
             };
 
-            var client = TestHelpers.CreateResponseClient(placed, new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient(placed, new BinanceSpotAndMarginClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
@@ -996,7 +996,7 @@ namespace Binance.Net.UnitTests
                 TransactTime = new DateTime(2017, 1, 1)
             };
 
-            var client = TestHelpers.CreateResponseClient(placed, new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient(placed, new BinanceSpotAndMarginClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
@@ -1022,7 +1022,7 @@ namespace Binance.Net.UnitTests
                 OriginalClientOrderId = "test2"
             };
 
-            var client = TestHelpers.CreateResponseClient(canceled, new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient(canceled, new BinanceSpotAndMarginClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
