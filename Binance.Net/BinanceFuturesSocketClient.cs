@@ -362,11 +362,12 @@ namespace Binance.Net
         /// <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco status update is received</param>
         /// <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
         /// <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
+        /// <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public CallResult<UpdateSubscription> SubscribeToUserDataUpdates(
             string listenKey, 
-            Action<BinanceStreamAccountInfo>? onAccountInfoMessage, 
-            Action<BinanceStreamOrderUpdate>? onOrderUpdateMessage,
+            Action<BinanceFuturesStreamAccountInfo>? onAccountInfoMessage, 
+            Action<BinanceFuturesStreamOrderUpdate>? onOrderUpdateMessage,
             Action<BinanceStreamOrderList>? onOcoOrderUpdateMessage,
             Action<IEnumerable<BinanceStreamBalance>>? onAccountPositionMessage,
             Action<BinanceStreamBalanceUpdate>? onAccountBalanceUpdate,
@@ -381,11 +382,12 @@ namespace Binance.Net
         /// <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
         /// <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
         /// <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
+        /// <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
             string listenKey, 
-            Action<BinanceStreamAccountInfo>? onAccountInfoMessage, 
-            Action<BinanceStreamOrderUpdate>? onOrderUpdateMessage,
+            Action<BinanceFuturesStreamAccountInfo>? onAccountInfoMessage, 
+            Action<BinanceFuturesStreamOrderUpdate>? onOrderUpdateMessage,
             Action<BinanceStreamOrderList>? onOcoOrderUpdateMessage,
             Action<IEnumerable<BinanceStreamBalance>>? onAccountPositionMessage,
             Action<BinanceStreamBalanceUpdate>? onAccountBalanceUpdate,
@@ -402,7 +404,7 @@ namespace Binance.Net
                     case AccountUpdateEvent:
                         {
                             var account = token["a"];
-                            var result = Deserialize<BinanceStreamAccountInfo>(account, false);
+                            var result = Deserialize<BinanceFuturesStreamAccountInfo>(account, false);
                         if (result.Success)
                             onAccountInfoMessage?.Invoke(result.Data);
                         else
@@ -413,7 +415,7 @@ namespace Binance.Net
                     {
                         log.Write(LogVerbosity.Debug, data);
                             var orders = token["o"];
-                            var result = Deserialize<BinanceStreamOrderUpdate>(orders, false);
+                            var result = Deserialize<BinanceFuturesStreamOrderUpdate>(orders, false);
                         if (result)
                             onOrderUpdateMessage?.Invoke(result.Data);
                         else

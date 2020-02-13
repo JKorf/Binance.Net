@@ -92,14 +92,14 @@ namespace Binance.Net
 
         #region constructor/destructor
         /// <summary>
-        /// Create a new instance of BinanceClient using the default options
+        /// Create a new instance of BinanceFuturesClient using the default options
         /// </summary>
         public BinanceFuturesClient() : this(DefaultOptions)
         {
         }
 
         /// <summary>
-        /// Create a new instance of BinanceClient using provided options
+        /// Create a new instance of BinanceFuturesClient using provided options
         /// </summary>
         /// <param name="options">The options to use for this client</param>
         public BinanceFuturesClient(BinanceFuturesClientOptions options) : base(options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials, ArrayParametersSerialization.MultipleValues))
@@ -139,13 +139,13 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Pings the Binance API
+        /// Pings the Binance Futures API
         /// </summary>
         /// <returns>True if successful ping, false if no response</returns>
         public override CallResult<long> Ping(CancellationToken ct = default) => PingAsync(ct).Result;
 
         /// <summary>
-        /// Pings the Binance API
+        /// Pings the Binance Futures API
         /// </summary>
         /// <returns>True if successful ping, false if no response</returns>
         public override async Task<CallResult<long>> PingAsync(CancellationToken ct = default)
@@ -529,11 +529,10 @@ namespace Binance.Net
         /// <param name="type">The order type</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
         /// <param name="quantity">The amount of the base symbol</param>
-        /// <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
+        /// <param name="reduceOnly">Specify as true if the order is intended to only reduce the position</param>
         /// <param name="price">The price to use</param>
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
-        /// <param name="icebergQty">Used for iceberg orders</param>
         /// <param name="orderResponseType">The type of response to receive</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -559,12 +558,11 @@ namespace Binance.Net
         /// <param name="side">The order side (buy/sell)</param>
         /// <param name="type">The order type</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
-        /// <param name="quantity">The amount of the symbol</param>
-        /// <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
+        /// <param name="quantity">The amount of the base symbol</param>
+        /// <param name="reduceOnly">Specify as true if the order is intended to only reduce the position</param>
         /// <param name="price">The price to use</param>
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
-        /// <param name="icebergQty">Used for iceberg orders</param>
         /// <param name="orderResponseType">The type of response to receive</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -844,6 +842,7 @@ namespace Binance.Net
         /// Gets Futures Account Balance
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
         /// <returns>List of Positions</returns>
         public WebCallResult<IEnumerable<BinanceFuturesAccountBalance>> GetFuturesAccountBalance(long? receiveWindow = null, CancellationToken ct = default) => GetFuturesAccountBalanceAsync(receiveWindow).Result;
 
@@ -851,6 +850,7 @@ namespace Binance.Net
         /// Gets Futures Account Balance
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
         /// <returns>List of Positions</returns>
         public async Task<WebCallResult<IEnumerable<BinanceFuturesAccountBalance>>> GetFuturesAccountBalanceAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
@@ -871,6 +871,7 @@ namespace Binance.Net
         /// Gets all user positions
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
         /// <returns>List of Positions</returns>
         public WebCallResult<IEnumerable<BinanceFuturesPosition>> GetOpenPositions(long? receiveWindow = null, CancellationToken ct = default) => GetOpenPositionsAsync(receiveWindow).Result;
 
@@ -878,6 +879,7 @@ namespace Binance.Net
         /// Gets all user positions
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
         /// <returns>List of Positions</returns>
         public async Task<WebCallResult<IEnumerable<BinanceFuturesPosition>>> GetOpenPositionsAsync(long? receiveWindow = null, CancellationToken ct = default)
         {

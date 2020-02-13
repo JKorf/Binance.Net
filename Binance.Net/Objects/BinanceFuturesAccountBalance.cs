@@ -10,8 +10,17 @@ namespace Binance.Net.Objects
     /// </summary>
     public class BinanceFuturesAccountBalance
     {
-        public string Asset { get; set; }
+        /// <summary>
+        /// The asset this balance is for
+        /// </summary>
+        public string? Asset { get; set; }
+        /// <summary>
+        /// The total balance of this asset
+        /// </summary>
         public decimal Balance { get; set; }
+        /// <summary>
+        /// The total balance available for withdraw for this asset
+        /// </summary>
         public decimal WithdrawAvailable { get; set; }
     }
 
