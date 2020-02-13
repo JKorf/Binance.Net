@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using CryptoExchange.Net.Objects;
 
 namespace Binance.Net.Objects
@@ -6,7 +6,7 @@ namespace Binance.Net.Objects
     /// <summary>
     /// Options for the binance client
     /// </summary>
-    public class BinanceClientOptions : RestClientOptions
+    public class BinanceFuturesClientOptions : RestClientOptions
     {
         /// <summary>
         /// Whether or not to automatically sync the local time with the server time
@@ -40,15 +40,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// ctor
         /// </summary>
-        public BinanceClientOptions(): base("https://api.binance.com")
-        {
-        }
-
-        /// <summary>
-        /// ctor
-        /// </summary>
-        /// <param name="baseAddress">Сustom url to connect via mirror website</param>
-        public BinanceClientOptions(string baseAddress) : base(baseAddress)
+        public BinanceFuturesClientOptions(): base("https://fapi.binance.com")
         {
         }
 
@@ -56,9 +48,9 @@ namespace Binance.Net.Objects
         /// Return a copy of these options
         /// </summary>
         /// <returns></returns>
-        public BinanceClientOptions Copy()
+        public BinanceFuturesClientOptions Copy()
         {
-            var copy = Copy<BinanceClientOptions>();
+            var copy = Copy<BinanceFuturesClientOptions>();
             copy.AutoTimestamp = AutoTimestamp;
             copy.AutoTimestampRecalculationInterval = AutoTimestampRecalculationInterval;
             copy.TimestampOffset = TimestampOffset;
@@ -72,12 +64,12 @@ namespace Binance.Net.Objects
     /// <summary>
     /// Binance socket client options
     /// </summary>
-    public class BinanceSocketClientOptions : SocketClientOptions
+    public class BinanceFuturesSocketClientOptions : SocketClientOptions
     {
         /// <summary>
         /// The base address for combined data in socket connections
         /// </summary>
-        public string BaseSocketCombinedAddress { get; set; } = "wss://stream.binance.com:9443/";
+        public string BaseSocketCombinedAddress { get; set; } = "wss://fstream.binance.com/";
 
         /// <summary>
         /// The amount of subscriptions that should be made on a single socket connection. Not all exchanges support multiple subscriptions on a single socket.
@@ -97,15 +89,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// ctor
         /// </summary>
-        /// <param name="address"></param>
-        public BinanceSocketClientOptions(string address): base(address)
-        {
-        }
-
-        /// <summary>
-        /// ctor
-        /// </summary>
-        public BinanceSocketClientOptions(): base("wss://stream.binance.com:9443/ws/")
+        public BinanceFuturesSocketClientOptions(): base("wss://fstream.binance.com/ws/")
         {
         }        
 
@@ -113,38 +97,12 @@ namespace Binance.Net.Objects
         /// Return a copy of these options
         /// </summary>
         /// <returns></returns>
-        public BinanceSocketClientOptions Copy()
+        public BinanceFuturesSocketClientOptions Copy()
         {
-            var copy = Copy<BinanceSocketClientOptions>();
+            var copy = Copy<BinanceFuturesSocketClientOptions>();
             copy.BaseSocketCombinedAddress = BaseSocketCombinedAddress;
             return copy;
         }
     }
 
-    /// <summary>
-    /// Binance symbol order book options
-    /// </summary>
-    public class BinanceOrderBookOptions : OrderBookOptions
-    {
-        /// <summary>
-        /// The top amount of results to keep in sync. If for example limit=10 is used, the order book will contain the 10 best bids and 10 best asks. Leaving this null will sync the full order book
-        /// </summary>
-        public int? Limit { get; }
-
-        /// <summary>
-        /// Update interval in milliseconds, either 100 or 1000. Defaults to 1000
-        /// </summary>
-        public int? UpdateInterval { get; }
-
-        /// <summary>
-        /// Create new options
-        /// </summary>
-        /// <param name="limit">The top amount of results to keep in sync. If for example limit=10 is used, the order book will contain the 10 best bids and 10 best asks. Leaving this null will sync the full order book</param>
-        /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
-        public BinanceOrderBookOptions(int? limit = null, int? updateInterval = null): base("Binance", limit == null)
-        {
-            Limit = limit;
-            UpdateInterval = updateInterval;
-        }
-    }
 }

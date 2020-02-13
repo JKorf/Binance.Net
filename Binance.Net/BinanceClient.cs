@@ -27,7 +27,6 @@ namespace Binance.Net
         #region fields 
         private static BinanceClientOptions defaultOptions = new BinanceClientOptions();
         private static BinanceClientOptions DefaultOptions => defaultOptions.Copy();
-        private static AccountType accountType = AccountType.Margin;
 
         private readonly bool autoTimestamp;
         private readonly TimeSpan autoTimestampRecalculationInterval;
@@ -48,7 +47,6 @@ namespace Binance.Net
         private const string Api = "api";
         private const string MarginApi = "sapi";
         private const string WithdrawalApi = "wapi";
-        private const string FuturesApi = "fapi";
 
         // Versions
         private const string PublicVersion = "3";
@@ -57,8 +55,6 @@ namespace Binance.Net
         private const string WithdrawalVersion = "3";
         private const string MarginVersion = "1";
         private const string AveragePriceVersion = "3";
-        private const string FuturesPublicVersion = "1";
-        private const string FuturesSignedVersion = "1";
 
         // Public
         private const string PingEndpoint = "ping";
@@ -114,20 +110,6 @@ namespace Binance.Net
         private const string OpenMarginOrdersEndpoint = "margin/openOrders";
         private const string QueryMarginOrderEndpoint = "margin/order";
 
-        // Futures
-        private const string MyFuturesTradesEndpoint = "userTrades";
-        private const string MarkPriceEndpoint = "premiumIndex"; //TODO
-        private const string FundingRateHistoryEndpoint = "fundingRate"; //TODO
-        private const string FutureAccountBalanceEndpoint = "balance"; //TODO
-        private const string ChangeInitialLeverageEndpoint = "leverage"; //TODO
-        private const string PositionInformationEndpoint = "positionRisk"; //TODO
-        private const string IncomeHistoryEndpoint = "income"; //TODO
-
-        private const string GetFuturesListenKeyEndpoint = "listenKey";
-        private const string KeepFuturesListenKeyAliveEndpoint = "listenKey";
-        private const string CloseFuturesListenKeyEndpoint = "listenKey";
-
-            
         // User stream
         private const string GetListenKeyEndpoint = "userDataStream";
         private const string KeepListenKeyAliveEndpoint = "userDataStream";
@@ -172,7 +154,6 @@ namespace Binance.Net
         {
             arraySerialization = ArrayParametersSerialization.MultipleValues;
 
-            accountType = options.accountType;
             autoTimestamp = options.AutoTimestamp;
             tradeRulesBehaviour = options.TradeRulesBehaviour;
             tradeRulesUpdateInterval = options.TradeRulesUpdateInterval;
@@ -186,7 +167,6 @@ namespace Binance.Net
 
         #region methods
         #region public
-        #region spot and margin
         /// <summary>
         /// Set the default options to be used when creating new clients
         /// </summary>
@@ -218,9 +198,8 @@ namespace Binance.Net
         /// <returns>True if successful ping, false if no response</returns>
         public override async Task<CallResult<long>> PingAsync(CancellationToken ct = default)
         {
-            var url = accountType == AccountType.Futures ? GetUrl(PingEndpoint, FuturesApi, FuturesPublicVersion) : GetUrl(PingEndpoint, Api, PublicVersion);
             var sw = Stopwatch.StartNew();
-            var result = await SendRequest<object>(url, HttpMethod.Get, ct).ConfigureAwait(false);
+            var result = await SendRequest<object>(GetUrl(PingEndpoint, Api, PublicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
             sw.Stop();
             return new CallResult<long>(result.Error == null ? sw.ElapsedMilliseconds : 0, result.Error);
         }
@@ -241,7 +220,7 @@ namespace Binance.Net
         /// <returns>Server time</returns>
         public async Task<WebCallResult<DateTime>> GetServerTimeAsync(bool resetAutoTimestamp = false, CancellationToken ct = default)
         {
-            var url = accountType == AccountType.Futures ? GetUrl(CheckTimeEndpoint, FuturesApi, FuturesPublicVersion) : GetUrl(CheckTimeEndpoint, Api, PublicVersion);
+            var url = GetUrl(CheckTimeEndpoint, Api, PublicVersion);
             if (!autoTimestamp)
             {
                 var result = await SendRequest<BinanceCheckTime>(url, HttpMethod.Get, ct).ConfigureAwait(false);
@@ -300,8 +279,7 @@ namespace Binance.Net
         /// <returns>Exchange info</returns>
         public async Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(CancellationToken ct = default)
         {
-            var url = accountType == AccountType.Futures ? GetUrl(ExchangeInfoEndpoint, FuturesApi, FuturesPublicVersion) : GetUrl(ExchangeInfoEndpoint, Api, PublicVersion);
-            var exchangeInfoResult = await SendRequest<BinanceExchangeInfo>(url, HttpMethod.Get, ct).ConfigureAwait(false);
+            var exchangeInfoResult = await SendRequest<BinanceExchangeInfo>(GetUrl(ExchangeInfoEndpoint, Api, PublicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
             if (!exchangeInfoResult)
                 return exchangeInfoResult;
 
@@ -331,10 +309,9 @@ namespace Binance.Net
         {
             symbol.ValidateBinanceSymbol();
             limit?.ValidateIntValues(nameof(limit), 5, 10, 20, 50, 100, 500, 1000, 5000);
-            var url = accountType == AccountType.Futures ? GetUrl(OrderBookEndpoint, FuturesApi, FuturesPublicVersion) : GetUrl(OrderBookEndpoint, Api, PublicVersion);
             var parameters = new Dictionary<string, object> { { "symbol", symbol } };
             parameters.AddOptionalParameter("limit", limit?.ToString());
-            var result = await SendRequest<BinanceOrderBook>(url, HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            var result = await SendRequest<BinanceOrderBook>(GetUrl(OrderBookEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
             if (result)
                 result.Data.Symbol = symbol;
             return result;
@@ -374,8 +351,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
             parameters.AddOptionalParameter("limit", limit?.ToString());
 
-            var url = accountType == AccountType.Futures ? GetUrl(AggregatedTradesEndpoint, FuturesApi, FuturesPublicVersion) : GetUrl(AggregatedTradesEndpoint, Api, PublicVersion);
-            return await SendRequest<IEnumerable<BinanceAggregatedTrades>>(url, HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceAggregatedTrades>>(GetUrl(AggregatedTradesEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -401,8 +377,7 @@ namespace Binance.Net
 
             var parameters = new Dictionary<string, object> { { "symbol", symbol } };
             parameters.AddOptionalParameter("limit", limit?.ToString());
-            var url = accountType == AccountType.Futures ? GetUrl(RecentTradesEndpoint, FuturesApi, FuturesPublicVersion) : GetUrl(RecentTradesEndpoint, Api, PublicVersion);
-            return await SendRequest<IEnumerable<BinanceRecentTrade>>(url, HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceRecentTrade>>(GetUrl(RecentTradesEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -431,8 +406,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("limit", limit?.ToString());
             parameters.AddOptionalParameter("fromId", fromId?.ToString());
 
-            var url = accountType == AccountType.Futures ? GetUrl(HistoricalTradesEndpoint, FuturesApi, FuturesPublicVersion) : GetUrl(HistoricalTradesEndpoint, Api, PublicVersion);
-            return await SendRequest<IEnumerable<BinanceRecentTrade>>(url, HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceRecentTrade>>(GetUrl(HistoricalTradesEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -469,8 +443,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
             parameters.AddOptionalParameter("limit", limit?.ToString());
 
-            var url = accountType == AccountType.Futures ? GetUrl(KlinesEndpoint, FuturesApi, FuturesPublicVersion) : GetUrl(KlinesEndpoint, Api, PublicVersion);
-            return await SendRequest<IEnumerable<BinanceKline>>(url, HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceKline>>(GetUrl(KlinesEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -492,8 +465,7 @@ namespace Binance.Net
             symbol.ValidateBinanceSymbol();
             var parameters = new Dictionary<string, object> { { "symbol", symbol } };
 
-            var url = accountType == AccountType.Futures ? GetUrl(Price24HEndpoint, FuturesApi, FuturesPublicVersion) : GetUrl(Price24HEndpoint, Api, PublicVersion);
-            return await SendRequest<Binance24HPrice>(url, HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await SendRequest<Binance24HPrice>(GetUrl(Price24HEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -510,8 +482,7 @@ namespace Binance.Net
         /// <returns>List of data over the last 24 hours</returns>
         public async Task<WebCallResult<IEnumerable<Binance24HPrice>>> Get24HPricesListAsync(CancellationToken ct = default)
         {
-            var url = accountType == AccountType.Futures ? GetUrl(Price24HEndpoint, FuturesApi, FuturesPublicVersion) : GetUrl(Price24HEndpoint, Api, PublicVersion);
-            return await SendRequest<IEnumerable<Binance24HPrice>>(url, HttpMethod.Get, ct).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<Binance24HPrice>>(GetUrl(Price24HEndpoint, Api, PublicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -536,8 +507,7 @@ namespace Binance.Net
                 { "symbol", symbol }
             };
 
-            var url = accountType == AccountType.Futures ? GetUrl(AllPricesEndpoint, FuturesApi, FuturesPublicVersion) : GetUrl(AllPricesEndpoint, Api, PublicVersion);
-            return await SendRequest<BinancePrice>(url, HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await SendRequest<BinancePrice>(GetUrl(AllPricesEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -554,8 +524,7 @@ namespace Binance.Net
         /// <returns>List of prices</returns>
         public async Task<WebCallResult<IEnumerable<BinancePrice>>> GetAllPricesAsync(CancellationToken ct = default)
         {
-            var url = accountType == AccountType.Futures ? GetUrl(AllPricesEndpoint, FuturesApi, FuturesPublicVersion) : GetUrl(AllPricesEndpoint, Api, PublicVersion);
-            return await SendRequest<IEnumerable<BinancePrice>>(url, HttpMethod.Get, ct).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinancePrice>>(GetUrl(AllPricesEndpoint, Api, PublicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -577,8 +546,7 @@ namespace Binance.Net
             symbol.ValidateBinanceSymbol();
             var parameters = new Dictionary<string, object> { { "symbol", symbol } };
 
-            var url = accountType == AccountType.Futures ? GetUrl(BookPricesEndpoint, FuturesApi, FuturesPublicVersion) : GetUrl(BookPricesEndpoint, Api, PublicVersion);
-            return await SendRequest<BinanceBookPrice>(url, HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await SendRequest<BinanceBookPrice>(GetUrl(BookPricesEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -595,11 +563,9 @@ namespace Binance.Net
         /// <returns>List of book prices</returns>
         public async Task<WebCallResult<IEnumerable<BinanceBookPrice>>> GetAllBookPricesAsync(CancellationToken ct = default)
         {
-            var url = accountType == AccountType.Futures ? GetUrl(BookPricesEndpoint, FuturesApi, FuturesPublicVersion) : GetUrl(BookPricesEndpoint, Api, PublicVersion);
-            return await SendRequest<IEnumerable<BinanceBookPrice>>(url, HttpMethod.Get, ct).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceBookPrice>>(GetUrl(BookPricesEndpoint, Api, PublicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
         }
 
-        //TODO Hide this from Futures option??
         /// <summary>
         /// Gets current average price for a symbol
         /// </summary>
@@ -621,12 +587,6 @@ namespace Binance.Net
 
             return await SendRequest<BinanceAveragePrice>(GetUrl(AveragePriceEndpoint, Api, AveragePriceVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
-        #endregion
-
-        #region Futures
-
-
-        #endregion
         #endregion
 
         #region signed
@@ -661,8 +621,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("symbol", symbol);
 
-            var url = accountType == AccountType.Futures ? GetUrl(OpenOrdersEndpoint, FuturesApi, FuturesSignedVersion) : GetUrl(OpenOrdersEndpoint, Api, SignedVersion);
-            return await SendRequest<IEnumerable<BinanceOrder>>(url, HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceOrder>>(GetUrl(OpenOrdersEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -708,8 +667,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", limit?.ToString());
 
-            var url = accountType == AccountType.Futures ? GetUrl(AllOrdersEndpoint, FuturesApi, FuturesSignedVersion) : GetUrl(AllOrdersEndpoint, Api, SignedVersion);
-            return await SendRequest<IEnumerable<BinanceOrder>>(url, HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceOrder>>(GetUrl(AllOrdersEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -908,8 +866,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var url = accountType == AccountType.Futures ? GetUrl(QueryOrderEndpoint, FuturesApi, FuturesSignedVersion) : GetUrl(QueryOrderEndpoint, Api, SignedVersion);
-            return await SendRequest<BinanceOrder>(url, HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequest<BinanceOrder>(GetUrl(QueryOrderEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -954,8 +911,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var url = accountType == AccountType.Futures ? GetUrl(CancelOrderEndpoint, FuturesApi, FuturesSignedVersion) : GetUrl(CancelOrderEndpoint, Api, SignedVersion);
-            return await SendRequest<BinanceCanceledOrder>(url, HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequest<BinanceCanceledOrder>(GetUrl(CancelOrderEndpoint, Api, SignedVersion), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -984,8 +940,7 @@ namespace Binance.Net
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var url = accountType == AccountType.Futures ? GetUrl(AccountInfoEndpoint, FuturesApi, FuturesSignedVersion) : GetUrl(AccountInfoEndpoint, Api, SignedVersion);
-            return await SendRequest<BinanceAccountInfo>(url, HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequest<BinanceAccountInfo>(GetUrl(AccountInfoEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1032,8 +987,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var url = accountType == AccountType.Futures ? GetUrl(MyFuturesTradesEndpoint, FuturesApi, FuturesSignedVersion) : GetUrl(MyTradesEndpoint, Api, SignedVersion);
-            return await SendRequest<IEnumerable<BinanceTrade>>(url, HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceTrade>>(GetUrl(MyTradesEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -2670,10 +2624,6 @@ namespace Binance.Net
 
             return await SendRequest<BinanceQueryRecords<BinanceForcedLiquidation>>(GetUrl(ForceLiquidationHistoryEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
-        #endregion
-
-        #region Futures
-
         #endregion
 
         #region stream
