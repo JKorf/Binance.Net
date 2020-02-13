@@ -60,7 +60,7 @@ namespace Binance.Net.UnitTests.TestImplementations
             return self == to;
         }
 
-        public static IBinanceSocketClient CreateSocketClient(IWebsocket socket, BinanceSpotAndMarginSocketClientOptions options = null)
+        public static IBinanceSocketClient CreateSocketClient(IWebsocket socket, BinanceSocketClientOptions options = null)
         {
             IBinanceSocketClient client;
             client = options != null ? new BinanceSocketClient(options) : new BinanceSocketClient();
@@ -69,7 +69,7 @@ namespace Binance.Net.UnitTests.TestImplementations
             return client;
         }
 
-        public static IBinanceClient CreateClient(BinanceSpotAndMarginClientOptions options = null)
+        public static IBinanceClient CreateClient(BinanceClientOptions options = null)
         {
             IBinanceClient client;
             client = options != null ? new BinanceClient(options) : new BinanceClient();
@@ -77,14 +77,14 @@ namespace Binance.Net.UnitTests.TestImplementations
             return client;
         }
 
-        public static IBinanceClient CreateResponseClient(string response, BinanceSpotAndMarginClientOptions options = null)
+        public static IBinanceClient CreateResponseClient(string response, BinanceClientOptions options = null)
         {
             var client = (BinanceClient)CreateClient(options);
             SetResponse(client, response);
             return client;
         }
 
-        public static IBinanceClient CreateResponseClient<T>(T response, BinanceSpotAndMarginClientOptions options = null)
+        public static IBinanceClient CreateResponseClient<T>(T response, BinanceClientOptions options = null)
         {
             var client = (BinanceClient)CreateClient(options);
             SetResponse(client, JsonConvert.SerializeObject(response));
@@ -131,5 +131,59 @@ namespace Binance.Net.UnitTests.TestImplementations
                 .Returns(request.Object);
         }
 
+        #region Futures
+
+        public static IBinanceFuturesSocketClient CreateFuturesSocketClient(IWebsocket socket, BinanceFuturesSocketClientOptions options = null)
+        {
+            IBinanceFuturesSocketClient client;
+            client = options != null ? new BinanceFuturesSocketClient(options) : new BinanceFuturesSocketClient();
+            client.SocketFactory = Mock.Of<IWebsocketFactory>();
+            Mock.Get(client.SocketFactory).Setup(f => f.CreateWebsocket(It.IsAny<Log>(), It.IsAny<string>())).Returns(socket);
+            return client;
+        }
+
+        public static IBinanceFuturesClient CreateFuturesClient(BinanceFuturesClientOptions options = null)
+        {
+            IBinanceFuturesClient client;
+            client = options != null ? new BinanceFuturesClient(options) : new BinanceFuturesClient();
+            client.RequestFactory = Mock.Of<IRequestFactory>();
+            return client;
+        }
+
+        public static IBinanceFuturesClient CreateFuturesResponseClient(string response, BinanceFuturesClientOptions options = null)
+        {
+            var client = (BinanceFuturesClient)CreateFuturesClient(options);
+            SetResponse(client, response);
+            return client;
+        }
+
+        public static IBinanceFuturesClient CreateFuturesResponseClient<T>(T response, BinanceFuturesClientOptions options = null)
+        {
+            var client = (BinanceFuturesClient)CreateFuturesClient(options);
+            SetResponse(client, JsonConvert.SerializeObject(response));
+            return client;
+        }
+
+        public static void SetErrorWithResponse(IBinanceFuturesClient client, string responseData, HttpStatusCode code)
+        {
+            var expectedBytes = Encoding.UTF8.GetBytes(responseData);
+            var responseStream = new MemoryStream();
+            responseStream.Write(expectedBytes, 0, expectedBytes.Length);
+            responseStream.Seek(0, SeekOrigin.Begin);
+
+            var response = new Mock<IResponse>();
+            response.Setup(c => c.IsSuccessStatusCode).Returns(false);
+            response.Setup(c => c.GetResponseStream()).Returns(Task.FromResult((Stream)responseStream));
+
+            var request = new Mock<IRequest>();
+            request.Setup(c => c.Uri).Returns(new Uri("http://www.test.com"));
+            request.Setup(c => c.GetResponse(It.IsAny<CancellationToken>())).Returns(Task.FromResult(response.Object));
+
+            var factory = Mock.Get(client.RequestFactory);
+            factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<string>()))
+                .Returns(request.Object);
+        }
+
+        #endregion
     }
 }
