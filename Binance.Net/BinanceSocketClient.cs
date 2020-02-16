@@ -493,6 +493,108 @@ namespace Binance.Net
             return await Subscribe(listenKey, false, handler).ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Subscribes to the margin account update stream. Prior to using this, the <see cref="BinanceClient.StartMarginUserStream"/> method should be called.
+        /// </summary>
+        /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
+        /// <param name="onAccountInfoMessage">The event handler for whenever an account info update is received</param>
+        /// <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
+        /// <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
+        /// <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
+        /// <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        public CallResult<UpdateSubscription> SubscribeToMarginUserDataUpdates(
+            string listenKey, 
+            Action<BinanceStreamMarginAccountInfo> onAccountInfoMessage, 
+            Action<BinanceStreamMarginOrderUpdate> onOrderUpdateMessage,
+            Action<BinanceStreamMarginOrderList> onOcoOrderUpdateMessage,
+            Action<IEnumerable<BinanceStreamMarginBalance>> onAccountPositionMessage,
+            Action<BinanceStreamMarginBalanceUpdate>? onAccountBalanceUpdate) => SubscribeToMarginUserDataUpdatesAsync(listenKey, onAccountInfoMessage, onOrderUpdateMessage, onOcoOrderUpdateMessage, onAccountPositionMessage, onAccountBalanceUpdate).Result;
+
+        /// <summary>
+        /// Subscribes to the margin account update stream. Prior to using this, the <see cref="BinanceClient.StartMarginUserStream"/> method should be called.
+        /// </summary>
+        /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
+        /// <param name="onAccountInfoMessage">The event handler for whenever an account info update is received</param>
+        /// <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
+        /// <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
+        /// <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
+        /// <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        public async Task<CallResult<UpdateSubscription>> SubscribeToMarginUserDataUpdatesAsync(
+            string listenKey, 
+            Action<BinanceStreamMarginAccountInfo> onAccountInfoMessage, 
+            Action<BinanceStreamMarginOrderUpdate> onOrderUpdateMessage,
+            Action<BinanceStreamMarginOrderList> onOcoOrderUpdateMessage,
+            Action<IEnumerable<BinanceStreamMarginBalance>> onAccountPositionMessage,
+            Action<BinanceStreamMarginBalanceUpdate>? onAccountBalanceUpdate)
+        {
+            listenKey.ValidateNotNull(nameof(listenKey));
+
+            var handler = new Action<string>(data =>
+            {
+                var token = JToken.Parse(data);
+                var evnt = (string)token["e"];
+                switch (evnt)
+                {
+                    case AccountUpdateEvent:
+                    {
+                        var result = Deserialize<BinanceStreamMarginAccountInfo>(token, false);
+                        if (result.Success)
+                            onAccountInfoMessage?.Invoke(result.Data);
+                        else
+                            log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account stream: " + result.Error);
+                        break;
+                    }
+                    case ExecutionUpdateEvent:
+                    {
+                        log.Write(LogVerbosity.Debug, data);
+                        var result = Deserialize<BinanceStreamMarginOrderUpdate>(token, false);
+                        if (result)
+                            onOrderUpdateMessage?.Invoke(result.Data);
+                        else
+                            log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from order stream: " + result.Error);
+                        break;
+                    }
+                    case OcoOrderUpdateEvent:
+                    {
+                        log.Write(LogVerbosity.Debug, data);
+                        var result = Deserialize<BinanceStreamMarginOrderList>(token, false);
+                        if (result)
+                            onOcoOrderUpdateMessage?.Invoke(result.Data);
+                        else
+                            log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from oco order stream: " + result.Error);
+                        break;
+                    }
+                    case AccountPositionUpdateEvent:
+                    {
+                        log.Write(LogVerbosity.Debug, data);
+                        var result = Deserialize<IEnumerable<BinanceStreamMarginBalance>>(token["B"], false);
+                        if (result)
+                            onAccountPositionMessage?.Invoke(result.Data);
+                        else
+                            log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account position stream: " + result.Error);
+                        break;
+                    }
+                    case BalanceUpdateEvent:
+                    {
+                        log.Write(LogVerbosity.Debug, data);
+                        var result = Deserialize<BinanceStreamMarginBalanceUpdate>(token, false);
+                        if (result)
+                            onAccountBalanceUpdate?.Invoke(result.Data);
+                        else
+                            log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account position stream: " + result.Error);
+                        break;
+                    }
+                    default:
+                        log.Write(LogVerbosity.Warning, $"Received unknown user data event {evnt}: " + data);
+                        break;
+                }
+            });
+
+            return await Subscribe(listenKey, false, handler).ConfigureAwait(false);
+        }
+
         private async Task<CallResult<UpdateSubscription>> Subscribe<T>(string url, bool combined, Action<T> onData)
         {
             if (combined)

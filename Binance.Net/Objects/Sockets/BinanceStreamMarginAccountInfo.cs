@@ -1,14 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects
-{//TODO All streams
+{//TODO
     /// <summary>
     /// Information about an account
     /// </summary>
-    public class BinanceStreamAccountInfo: BinanceStreamEvent
+    public class BinanceStreamMarginAccountInfo: BinanceStreamEvent
     {
         /// <summary>
         /// Time of last account update
@@ -54,13 +54,13 @@ namespace Binance.Net.Objects
         /// List of assets with their current balances
         /// </summary>
         [JsonProperty("B")]
-        public IEnumerable<BinanceStreamBalance> Balances { get; set; } = new List<BinanceStreamBalance>();
+        public IEnumerable<BinanceStreamMarginBalance> Balances { get; set; } = new List<BinanceStreamMarginBalance>();
     }
 
     /// <summary>
     /// Information about an asset balance
     /// </summary>
-    public class BinanceStreamBalance
+    public class BinanceStreamMarginBalance
     {
         /// <summary>
         /// The asset this balance is for
