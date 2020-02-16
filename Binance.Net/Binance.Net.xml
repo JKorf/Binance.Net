@@ -1627,58 +1627,6 @@
             <param name="ct">Cancellation token</param>
             <returns>The candlestick data for the provided symbol</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.GetMarkPrice(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Get Mark Price and Funding Rate for the provided symbol
-            </summary>
-            <param name="symbol">The symbol to get the data for</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Data over the last 24 hours</returns>
-        </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.GetMarkPriceAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Get Mark Price and Funding Rate for the provided symbol
-            </summary>
-            <param name="symbol">The symbol to get the data for</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Data over the last 24 hours</returns>
-        </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.GetMarkPricesList(System.Threading.CancellationToken)">
-            <summary>
-            Get Mark Price and Funding Rate for all symbols
-            </summary>
-            <param name="ct">Cancellation token</param>
-            <returns>List of data over the last 24 hours</returns>
-        </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.GetMarkPricesListAsync(System.Threading.CancellationToken)">
-            <summary>
-            Get Mark Price and Funding Rate for all symbols
-            </summary>
-            <param name="ct">Cancellation token</param>
-            <returns>List of data over the last 24 hours</returns>
-        </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.GetFundingRates(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get funding rate history for the provided symbol
-            </summary>
-            <param name="symbol">The symbol to get the data for</param>
-            <param name="startTime">Start time to get funding rate history</param>
-            <param name="endTime">End time to get funding rate history</param>
-            <param name="limit">Max number of results</param>
-            <param name="ct">Cancellation token</param>
-            <returns>The funding rate history for the provided symbol</returns>
-        </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.GetFundingRatesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get funding rate history for the provided symbol
-            </summary>
-            <param name="symbol">The symbol to get the data for</param>
-            <param name="startTime">Start time to get funding rate history</param>
-            <param name="endTime">End time to get funding rate history</param>
-            <param name="limit">Max number of results</param>
-            <param name="ct">Cancellation token</param>
-            <returns>The funding rate history for the provided symbol</returns>
-        </member>
         <member name="M:Binance.Net.BinanceFuturesClient.Get24HPrice(System.String,System.Threading.CancellationToken)">
             <summary>
             Get data regarding the last 24 hours for the provided symbol
@@ -1895,22 +1843,6 @@
             <param name="ct">Cancellation token</param>
             <returns>List of orders</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.GetFuturesAccountBalance(System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Gets account balances
-            </summary>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>The account information</returns>
-        </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.GetFuturesAccountBalanceAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>.
-            Gets account balances
-            </summary>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>The account information</returns>
-        </member>
         <member name="M:Binance.Net.BinanceFuturesClient.GetAccountInfo(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets account information, including balances
@@ -1952,6 +1884,22 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of trades</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetFuturesAccountBalance(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Gets Futures Account Balance
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of Positions</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetFuturesAccountBalanceAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Gets Futures Account Balance
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of Positions</returns>
         </member>
         <member name="M:Binance.Net.BinanceFuturesClient.GetOpenPositions(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
@@ -2624,30 +2572,6 @@
         <member name="M:Binance.Net.BinanceSocketClient.SubscribeToUserDataUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}},System.Action{Binance.Net.Objects.Sockets.BinanceStreamBalanceUpdate})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.BinanceClient.StartUserStream(System.Threading.CancellationToken)"/> method should be called.
-            </summary>
-            <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-            <param name="onAccountInfoMessage">The event handler for whenever an account info update is received</param>
-            <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
-            <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
-            <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
-            <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToMarginUserDataUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamMarginAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamMarginOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamMarginOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamMarginBalance}},System.Action{Binance.Net.Objects.Sockets.BinanceStreamMarginBalanceUpdate})">
-            <summary>
-            Subscribes to the margin account update stream. Prior to using this, the <see cref="M:Binance.Net.BinanceClient.StartMarginUserStream(System.Threading.CancellationToken)"/> method should be called.
-            </summary>
-            <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-            <param name="onAccountInfoMessage">The event handler for whenever an account info update is received</param>
-            <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
-            <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
-            <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
-            <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToMarginUserDataUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceStreamMarginAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamMarginOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamMarginOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamMarginBalance}},System.Action{Binance.Net.Objects.Sockets.BinanceStreamMarginBalanceUpdate})">
-            <summary>
-            Subscribes to the margin account update stream. Prior to using this, the <see cref="M:Binance.Net.BinanceClient.StartMarginUserStream(System.Threading.CancellationToken)"/> method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
             <param name="onAccountInfoMessage">The event handler for whenever an account info update is received</param>
@@ -5140,30 +5064,6 @@
             <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToMarginUserDataUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamMarginAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamMarginOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamMarginOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamMarginBalance}},System.Action{Binance.Net.Objects.Sockets.BinanceStreamMarginBalanceUpdate})">
-            <summary>
-            Subscribes to the margin account update stream. Prior to using this, the <see cref="M:Binance.Net.BinanceClient.StartMarginUserStream(System.Threading.CancellationToken)"/> method should be called.
-            </summary>
-            <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-            <param name="onAccountInfoMessage">The event handler for whenever an account info update is received</param>
-            <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
-            <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
-            <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
-            <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToMarginUserDataUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceStreamMarginAccountInfo},System.Action{Binance.Net.Objects.BinanceStreamMarginOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamMarginOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamMarginBalance}},System.Action{Binance.Net.Objects.Sockets.BinanceStreamMarginBalanceUpdate})">
-            <summary>
-            Subscribes to the margin account update stream. Prior to using this, the <see cref="M:Binance.Net.BinanceClient.StartMarginUserStream(System.Threading.CancellationToken)"/> method should be called.
-            </summary>
-            <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-            <param name="onAccountInfoMessage">The event handler for whenever an account info update is received</param>
-            <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
-            <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
-            <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
-            <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
         <member name="T:Binance.Net.Objects.Binance24HPrice">
             <summary>
             Price statistics of the last 24 hours
@@ -6015,31 +5915,6 @@
             Last update time
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.BinanceFundingRate">
-            <summary>
-            Upcoming funding rate and time
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceFundingRate.Symbol">
-            <summary>
-            The symbol the information is about
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceFundingRate.FundingRate">
-            <summary>
-            The upcoming funding rate
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceFundingRate.FundingTime">
-            <summary>
-            The time the next funding rate will be implemented
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceFundingRate.Time">
-            <summary>
-            The time now
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.BinanceFuturesAccountBalance">
             <summary>
             Information about an account
@@ -6739,36 +6614,6 @@
             The Transaction id as assigned by Binance
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.BinanceMarkPrice">
-            <summary>
-            The current mark price and previous funding rate for a symbol
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceMarkPrice.Symbol">
-            <summary>
-            The symbol the information is about
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceMarkPrice.MarkPrice">
-            <summary>
-            The current mark price for the symbol
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceMarkPrice.LastFundingRate">
-            <summary>
-            The last funding rate
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceMarkPrice.NextFundingTime">
-            <summary>
-            The time the next funding rate will be implemented
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceMarkPrice.Time">
-            <summary>
-            The time now
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.BinanceOrder">
             <summary>
             Information regarding a specific order
@@ -7258,6 +7103,627 @@
         <member name="P:Binance.Net.Objects.BinanceRecentTrade.IsBestMatch">
             <summary>
             Whether the trade was made at the best match
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceStreamAccountInfo">
+            <summary>
+            Information about an account
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamAccountInfo.Time">
+            <summary>
+            Time of last account update
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamAccountInfo.MakerCommission">
+            <summary>
+            Commission percentage to pay when making trades
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamAccountInfo.TakerCommission">
+            <summary>
+            Commission percentage to pay when taking trades
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamAccountInfo.BuyerCommission">
+            <summary>
+            Commission percentage to buy when buying
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamAccountInfo.SellerCommission">
+            <summary>
+            Commission percentage to buy when selling
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamAccountInfo.CanTrade">
+            <summary>
+            Boolean indicating if this account can trade
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamAccountInfo.CanWithdraw">
+            <summary>
+            Boolean indicating if this account can withdraw
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamAccountInfo.CanDeposit">
+            <summary>
+            Boolean indicating if this account can deposit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamAccountInfo.Balances">
+            <summary>
+            List of assets with their current balances
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceStreamBalance">
+            <summary>
+            Information about an asset balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamBalance.Asset">
+            <summary>
+            The asset this balance is for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamBalance.Free">
+            <summary>
+            The amount that isn't locked in a trade
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamBalance.Locked">
+            <summary>
+            The amount that is currently locked in a trade
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamBalance.Total">
+            <summary>
+            The total balance of this asset (Free + Locked)
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceStreamAggregatedTrade">
+            <summary>
+            Aggregated information about trades for a symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamAggregatedTrade.Symbol">
+            <summary>
+            The symbol the trade was for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamAggregatedTrade.AggregatedTradeId">
+            <summary>
+            The id of this aggregated trade
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamAggregatedTrade.Price">
+            <summary>
+            The price of the trades
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamAggregatedTrade.Quantity">
+            <summary>
+            The combined quantity of the trades
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamAggregatedTrade.FirstTradeId">
+            <summary>
+            The first trade id in this aggregation
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamAggregatedTrade.LastTradeId">
+            <summary>
+            The last trade id in this aggregation
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamAggregatedTrade.TradeTime">
+            <summary>
+            The time of the trades
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamAggregatedTrade.BuyerIsMaker">
+            <summary>
+            Whether the buyer was the maker
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamAggregatedTrade.Ignore">
+            <summary>
+            Unused
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceStreamEvent">
+            <summary>
+            A event received by a Binance websocket
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamEvent.Event">
+            <summary>
+            The type of the event
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamEvent.EventTime">
+            <summary>
+            The time the event happened
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceStreamKlineData">
+            <summary>
+            Wrapper for kline information for a symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamKlineData.Symbol">
+            <summary>
+            The symbol the data is for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamKlineData.Data">
+            <summary>
+            The data
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceStreamKline">
+            <summary>
+            The kline data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamKline.OpenTime">
+            <summary>
+            The open time of this candlestick
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamKline.CloseTime">
+            <summary>
+            The close time of this candlestick
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamKline.Symbol">
+            <summary>
+            The symbol this candlestick is for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamKline.Interval">
+            <summary>
+            The interval of this candlestick
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamKline.FirstTrade">
+            <summary>
+            The first trade id in this candlestick
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamKline.LastTrade">
+            <summary>
+            The last trade id in this candlestick
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamKline.Open">
+            <summary>
+            The open price of this candlestick
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamKline.Close">
+            <summary>
+            The close price of this candlestick
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamKline.High">
+            <summary>
+            The highest price of this candlestick
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamKline.Low">
+            <summary>
+            The lowest price of this candlestick
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamKline.Volume">
+            <summary>
+            The volume traded during this candlestick
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamKline.TradeCount">
+            <summary>
+            The amount of trades in this candlestick
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamKline.Final">
+            <summary>
+            Boolean indicating whether this candlestick is closed
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamKline.QuoteAssetVolume">
+            <summary>
+            The quote volume
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamKline.TakerBuyBaseAssetVolume">
+            <summary>
+            The volume of active buy
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamKline.TakerBuyQuoteAssetVolume">
+            <summary>
+            The quote volume of active buy
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Objects.BinanceStreamKline.ToKline">
+            <summary>
+            Casts this object to a <see cref="T:Binance.Net.Objects.BinanceKline"/> object
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceStreamOrderList">
+            <summary>
+            Order list info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderList.OrderListId">
+            <summary>
+            The id of the order list
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderList.ContingencyType">
+            <summary>
+            The contingency type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderList.ListStatusType">
+            <summary>
+            The order list status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderList.ListOrderStatus">
+            <summary>
+            The order status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderList.ListClientOrderId">
+            <summary>
+            The client id of the order list
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderList.TransactionTime">
+            <summary>
+            The transaction time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderList.Symbol">
+            <summary>
+            The symbol of the order list
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderList.Orders">
+            <summary>
+            The order in this list
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceStreamOrderId">
+            <summary>
+            Order reference
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderId.Symbol">
+            <summary>
+            The symbol of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderId.OrderId">
+            <summary>
+            The id of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderId.ClientOrderId">
+            <summary>
+            The client order id
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceStreamOrderUpdate">
+            <summary>
+            Update data about an order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.Symbol">
+            <summary>
+            The symbol the order is for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.ClientOrderId">
+            <summary>
+            The new client order id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.Side">
+            <summary>
+            The side of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.Type">
+            <summary>
+            The type of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.TimeInForce">
+            <summary>
+            The timespan the order is active
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.Quantity">
+            <summary>
+            The quantity of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.Price">
+            <summary>
+            The price of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.StopPrice">
+            <summary>
+            The stop price of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.IcebergQuantity">
+            <summary>
+            The iceberg quantity of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.OriginalClientOrderId">
+            <summary>
+            The original client order id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.ExecutionType">
+            <summary>
+            The execution type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.Status">
+            <summary>
+            The status of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.RejectReason">
+            <summary>
+            The reason the order was rejected
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.OrderId">
+            <summary>
+            The id of the order as assigned by Binance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.QuantityOfLastFilledTrade">
+            <summary>
+            The quantity of the last filled trade of this order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.AccumulatedQuantityOfFilledTrades">
+            <summary>
+            The quantity of all trades that were filled for this order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.PriceLastFilledTrade">
+            <summary>
+            The price of the last filled trade
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.Commission">
+            <summary>
+            The commission payed
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.CommissionAsset">
+            <summary>
+            The asset the commission was taken from
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.Time">
+            <summary>
+            The time of the update
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.TradeId">
+            <summary>
+            The trade id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.IsWorking">
+            <summary>
+            Is working
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.BuyerIsMaker">
+            <summary>
+            Whether the buyer is the maker
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.OrderCreationTime">
+            <summary>
+            Time the order was created
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.CummulativeQuoteQuantity">
+            <summary>
+            Cummulative amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.QuoteOrderQuantity">
+            <summary>
+            Quote order quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.LastQuoteTransactedQuantity">
+            <summary>
+            Last quote asset transacted quantity (i.e. LastPrice * LastQuantity)
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.OrderListId">
+            <summary>
+            This id of the corresponding order list. (-1 if not part of an order list)
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.I">
+            <summary>
+            Unused
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceStreamTick">
+            <summary>
+            Tick info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.Symbol">
+            <summary>
+            The symbol this data is for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.PriceChange">
+            <summary>
+            The price change of this symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.PriceChangePercentage">
+            <summary>
+            The price change percentage of this symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.WeightedAverage">
+            <summary>
+            The weighted average
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.PrevDayClosePrice">
+            <summary>
+            The close price of the previous day
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.CurrentDayClosePrice">
+            <summary>
+            The current day close price. This is the latest price for this symbol.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.CloseTradesQuantity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.BestBidPrice">
+            <summary>
+            The best bid price in the order book
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.BestBidQuantity">
+            <summary>
+            The quantity of the best bid price available
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.BestAskPrice">
+            <summary>
+            The best ask price in the order book
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.BestAskQuantity">
+            <summary>
+            The quantity of the best ask price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.OpenPrice">
+            <summary>
+            Todays open price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.HighPrice">
+            <summary>
+            Todays high price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.LowPrice">
+            <summary>
+            Todays low price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.TotalTradedBaseAssetVolume">
+            <summary>
+            Total traded volume in the base asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.TotalTradedQuoteAssetVolume">
+            <summary>
+            Total traded volume in the quote asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.FirstTradeId">
+            <summary>
+            The first trade id of today
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.LastTradeId">
+            <summary>
+            The last trade id of today
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.TotalTrades">
+            <summary>
+            The total trades of id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.StatisticsOpenTime">
+            <summary>
+            The open time of these stats
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.StatisticsCloseTime">
+            <summary>
+            The close time of these stats
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceStreamTrade">
+            <summary>
+            Aggregated information about trades for a symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTrade.Symbol">
+            <summary>
+            The symbol the trade was for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTrade.TradeId">
+            <summary>
+            The id of this aggregated trade
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTrade.Price">
+            <summary>
+            The price of the trades
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTrade.Quantity">
+            <summary>
+            The combined quantity of the trades
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTrade.BuyerOrderId">
+            <summary>
+            The first trade id in this aggregation
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTrade.SellerOrderId">
+            <summary>
+            The last trade id in this aggregation
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTrade.TradeTime">
+            <summary>
+            The time of the trades
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTrade.BuyerIsMaker">
+            <summary>
+            Whether the buyer was the maker
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTrade.Ignore">
+            <summary>
+            Unused
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinanceSubAccount">
@@ -8590,131 +9056,6 @@
             Roll-out
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.BinanceStreamAccountInfo">
-            <summary>
-            Information about an account
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamAccountInfo.Time">
-            <summary>
-            Time of last account update
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamAccountInfo.MakerCommission">
-            <summary>
-            Commission percentage to pay when making trades
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamAccountInfo.TakerCommission">
-            <summary>
-            Commission percentage to pay when taking trades
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamAccountInfo.BuyerCommission">
-            <summary>
-            Commission percentage to buy when buying
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamAccountInfo.SellerCommission">
-            <summary>
-            Commission percentage to buy when selling
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamAccountInfo.CanTrade">
-            <summary>
-            Boolean indicating if this account can trade
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamAccountInfo.CanWithdraw">
-            <summary>
-            Boolean indicating if this account can withdraw
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamAccountInfo.CanDeposit">
-            <summary>
-            Boolean indicating if this account can deposit
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamAccountInfo.Balances">
-            <summary>
-            List of assets with their current balances
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceStreamBalance">
-            <summary>
-            Information about an asset balance
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamBalance.Asset">
-            <summary>
-            The asset this balance is for
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamBalance.Free">
-            <summary>
-            The amount that isn't locked in a trade
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamBalance.Locked">
-            <summary>
-            The amount that is currently locked in a trade
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamBalance.Total">
-            <summary>
-            The total balance of this asset (Free + Locked)
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceStreamAggregatedTrade">
-            <summary>
-            Aggregated information about trades for a symbol
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamAggregatedTrade.Symbol">
-            <summary>
-            The symbol the trade was for
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamAggregatedTrade.AggregatedTradeId">
-            <summary>
-            The id of this aggregated trade
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamAggregatedTrade.Price">
-            <summary>
-            The price of the trades
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamAggregatedTrade.Quantity">
-            <summary>
-            The combined quantity of the trades
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamAggregatedTrade.FirstTradeId">
-            <summary>
-            The first trade id in this aggregation
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamAggregatedTrade.LastTradeId">
-            <summary>
-            The last trade id in this aggregation
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamAggregatedTrade.TradeTime">
-            <summary>
-            The time of the trades
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamAggregatedTrade.BuyerIsMaker">
-            <summary>
-            Whether the buyer was the maker
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamAggregatedTrade.Ignore">
-            <summary>
-            Unused
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Sockets.BinanceStreamBalanceUpdate">
             <summary>
             Update when asset is withdrawn/deposited 
@@ -8733,812 +9074,6 @@
         <member name="P:Binance.Net.Objects.Sockets.BinanceStreamBalanceUpdate.ClearTime">
             <summary>
             The time the deposit/withdrawal was cleared
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Sockets.BinanceStreamMarginBalanceUpdate">
-            <summary>
-            Update when asset is withdrawn/deposited 
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Sockets.BinanceStreamMarginBalanceUpdate.Asset">
-            <summary>
-            The asset which changed
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Sockets.BinanceStreamMarginBalanceUpdate.BalanceDelta">
-            <summary>
-            The balance delta
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Sockets.BinanceStreamMarginBalanceUpdate.ClearTime">
-            <summary>
-            The time the deposit/withdrawal was cleared
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceStreamEvent">
-            <summary>
-            A event received by a Binance websocket
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamEvent.Event">
-            <summary>
-            The type of the event
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamEvent.EventTime">
-            <summary>
-            The time the event happened
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceStreamKlineData">
-            <summary>
-            Wrapper for kline information for a symbol
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamKlineData.Symbol">
-            <summary>
-            The symbol the data is for
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamKlineData.Data">
-            <summary>
-            The data
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceStreamKline">
-            <summary>
-            The kline data
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamKline.OpenTime">
-            <summary>
-            The open time of this candlestick
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamKline.CloseTime">
-            <summary>
-            The close time of this candlestick
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamKline.Symbol">
-            <summary>
-            The symbol this candlestick is for
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamKline.Interval">
-            <summary>
-            The interval of this candlestick
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamKline.FirstTrade">
-            <summary>
-            The first trade id in this candlestick
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamKline.LastTrade">
-            <summary>
-            The last trade id in this candlestick
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamKline.Open">
-            <summary>
-            The open price of this candlestick
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamKline.Close">
-            <summary>
-            The close price of this candlestick
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamKline.High">
-            <summary>
-            The highest price of this candlestick
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamKline.Low">
-            <summary>
-            The lowest price of this candlestick
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamKline.Volume">
-            <summary>
-            The volume traded during this candlestick
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamKline.TradeCount">
-            <summary>
-            The amount of trades in this candlestick
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamKline.Final">
-            <summary>
-            Boolean indicating whether this candlestick is closed
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamKline.QuoteAssetVolume">
-            <summary>
-            The quote volume
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamKline.TakerBuyBaseAssetVolume">
-            <summary>
-            The volume of active buy
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamKline.TakerBuyQuoteAssetVolume">
-            <summary>
-            The quote volume of active buy
-            </summary>
-        </member>
-        <member name="M:Binance.Net.Objects.BinanceStreamKline.ToKline">
-            <summary>
-            Casts this object to a <see cref="T:Binance.Net.Objects.BinanceKline"/> object
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceStreamMarginAccountInfo">
-            <summary>
-            Information about an account
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginAccountInfo.Time">
-            <summary>
-            Time of last account update
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginAccountInfo.MakerCommission">
-            <summary>
-            Commission percentage to pay when making trades
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginAccountInfo.TakerCommission">
-            <summary>
-            Commission percentage to pay when taking trades
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginAccountInfo.BuyerCommission">
-            <summary>
-            Commission percentage to buy when buying
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginAccountInfo.SellerCommission">
-            <summary>
-            Commission percentage to buy when selling
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginAccountInfo.CanTrade">
-            <summary>
-            Boolean indicating if this account can trade
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginAccountInfo.CanWithdraw">
-            <summary>
-            Boolean indicating if this account can withdraw
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginAccountInfo.CanDeposit">
-            <summary>
-            Boolean indicating if this account can deposit
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginAccountInfo.Balances">
-            <summary>
-            List of assets with their current balances
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceStreamMarginBalance">
-            <summary>
-            Information about an asset balance
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginBalance.Asset">
-            <summary>
-            The asset this balance is for
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginBalance.Free">
-            <summary>
-            The amount that isn't locked in a trade
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginBalance.Locked">
-            <summary>
-            The amount that is currently locked in a trade
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginBalance.Total">
-            <summary>
-            The total balance of this asset (Free + Locked)
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceStreamMarginOrderList">
-            <summary>
-            Order list info
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderList.OrderListId">
-            <summary>
-            The id of the order list
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderList.ContingencyType">
-            <summary>
-            The contingency type
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderList.ListStatusType">
-            <summary>
-            The order list status
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderList.ListOrderStatus">
-            <summary>
-            The order status
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderList.ListClientOrderId">
-            <summary>
-            The client id of the order list
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderList.TransactionTime">
-            <summary>
-            The transaction time
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderList.Symbol">
-            <summary>
-            The symbol of the order list
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderList.Orders">
-            <summary>
-            The order in this list
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceStreamMarginOrderId">
-            <summary>
-            Order reference
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderId.Symbol">
-            <summary>
-            The symbol of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderId.OrderId">
-            <summary>
-            The id of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderId.ClientOrderId">
-            <summary>
-            The client order id
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceStreamMarginOrderUpdate">
-            <summary>
-            Update data about an order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.Symbol">
-            <summary>
-            The symbol the order is for
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.ClientOrderId">
-            <summary>
-            The new client order id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.Side">
-            <summary>
-            The side of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.Type">
-            <summary>
-            The type of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.TimeInForce">
-            <summary>
-            The timespan the order is active
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.Quantity">
-            <summary>
-            The quantity of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.Price">
-            <summary>
-            The price of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.StopPrice">
-            <summary>
-            The stop price of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.IcebergQuantity">
-            <summary>
-            The iceberg quantity of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.OriginalClientOrderId">
-            <summary>
-            The original client order id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.ExecutionType">
-            <summary>
-            The execution type
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.Status">
-            <summary>
-            The status of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.RejectReason">
-            <summary>
-            The reason the order was rejected
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.OrderId">
-            <summary>
-            The id of the order as assigned by Binance
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.QuantityOfLastFilledTrade">
-            <summary>
-            The quantity of the last filled trade of this order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.AccumulatedQuantityOfFilledTrades">
-            <summary>
-            The quantity of all trades that were filled for this order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.PriceLastFilledTrade">
-            <summary>
-            The price of the last filled trade
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.Commission">
-            <summary>
-            The commission payed
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.CommissionAsset">
-            <summary>
-            The asset the commission was taken from
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.Time">
-            <summary>
-            The time of the update
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.TradeId">
-            <summary>
-            The trade id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.IsWorking">
-            <summary>
-            Is working
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.BuyerIsMaker">
-            <summary>
-            Whether the buyer is the maker
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.OrderCreationTime">
-            <summary>
-            Time the order was created
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.CummulativeQuoteQuantity">
-            <summary>
-            Cummulative amount
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.QuoteOrderQuantity">
-            <summary>
-            Quote order quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.LastQuoteTransactedQuantity">
-            <summary>
-            Last quote asset transacted quantity (i.e. LastPrice * LastQuantity)
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.OrderListId">
-            <summary>
-            This id of the corresponding order list. (-1 if not part of an order list)
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMarginOrderUpdate.I">
-            <summary>
-            Unused
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceStreamOrderList">
-            <summary>
-            Order list info
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderList.OrderListId">
-            <summary>
-            The id of the order list
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderList.ContingencyType">
-            <summary>
-            The contingency type
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderList.ListStatusType">
-            <summary>
-            The order list status
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderList.ListOrderStatus">
-            <summary>
-            The order status
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderList.ListClientOrderId">
-            <summary>
-            The client id of the order list
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderList.TransactionTime">
-            <summary>
-            The transaction time
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderList.Symbol">
-            <summary>
-            The symbol of the order list
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderList.Orders">
-            <summary>
-            The order in this list
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceStreamOrderId">
-            <summary>
-            Order reference
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderId.Symbol">
-            <summary>
-            The symbol of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderId.OrderId">
-            <summary>
-            The id of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderId.ClientOrderId">
-            <summary>
-            The client order id
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceStreamOrderUpdate">
-            <summary>
-            Update data about an order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.Symbol">
-            <summary>
-            The symbol the order is for
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.ClientOrderId">
-            <summary>
-            The new client order id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.Side">
-            <summary>
-            The side of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.Type">
-            <summary>
-            The type of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.TimeInForce">
-            <summary>
-            The timespan the order is active
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.Quantity">
-            <summary>
-            The quantity of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.Price">
-            <summary>
-            The price of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.StopPrice">
-            <summary>
-            The stop price of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.IcebergQuantity">
-            <summary>
-            The iceberg quantity of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.OriginalClientOrderId">
-            <summary>
-            The original client order id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.ExecutionType">
-            <summary>
-            The execution type
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.Status">
-            <summary>
-            The status of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.RejectReason">
-            <summary>
-            The reason the order was rejected
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.OrderId">
-            <summary>
-            The id of the order as assigned by Binance
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.QuantityOfLastFilledTrade">
-            <summary>
-            The quantity of the last filled trade of this order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.AccumulatedQuantityOfFilledTrades">
-            <summary>
-            The quantity of all trades that were filled for this order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.PriceLastFilledTrade">
-            <summary>
-            The price of the last filled trade
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.Commission">
-            <summary>
-            The commission payed
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.CommissionAsset">
-            <summary>
-            The asset the commission was taken from
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.Time">
-            <summary>
-            The time of the update
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.TradeId">
-            <summary>
-            The trade id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.IsWorking">
-            <summary>
-            Is working
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.BuyerIsMaker">
-            <summary>
-            Whether the buyer is the maker
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.OrderCreationTime">
-            <summary>
-            Time the order was created
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.CummulativeQuoteQuantity">
-            <summary>
-            Cummulative amount
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.QuoteOrderQuantity">
-            <summary>
-            Quote order quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.LastQuoteTransactedQuantity">
-            <summary>
-            Last quote asset transacted quantity (i.e. LastPrice * LastQuantity)
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.OrderListId">
-            <summary>
-            This id of the corresponding order list. (-1 if not part of an order list)
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamOrderUpdate.I">
-            <summary>
-            Unused
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceStreamTick">
-            <summary>
-            Tick info
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.Symbol">
-            <summary>
-            The symbol this data is for
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.PriceChange">
-            <summary>
-            The price change of this symbol
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.PriceChangePercentage">
-            <summary>
-            The price change percentage of this symbol
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.WeightedAverage">
-            <summary>
-            The weighted average
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.PrevDayClosePrice">
-            <summary>
-            The close price of the previous day
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.CurrentDayClosePrice">
-            <summary>
-            The current day close price. This is the latest price for this symbol.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.CloseTradesQuantity">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.BestBidPrice">
-            <summary>
-            The best bid price in the order book
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.BestBidQuantity">
-            <summary>
-            The quantity of the best bid price available
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.BestAskPrice">
-            <summary>
-            The best ask price in the order book
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.BestAskQuantity">
-            <summary>
-            The quantity of the best ask price
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.OpenPrice">
-            <summary>
-            Todays open price
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.HighPrice">
-            <summary>
-            Todays high price
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.LowPrice">
-            <summary>
-            Todays low price
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.TotalTradedBaseAssetVolume">
-            <summary>
-            Total traded volume in the base asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.TotalTradedQuoteAssetVolume">
-            <summary>
-            Total traded volume in the quote asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.FirstTradeId">
-            <summary>
-            The first trade id of today
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.LastTradeId">
-            <summary>
-            The last trade id of today
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.TotalTrades">
-            <summary>
-            The total trades of id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.StatisticsOpenTime">
-            <summary>
-            The open time of these stats
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.StatisticsCloseTime">
-            <summary>
-            The close time of these stats
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceStreamTrade">
-            <summary>
-            Aggregated information about trades for a symbol
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTrade.Symbol">
-            <summary>
-            The symbol the trade was for
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTrade.TradeId">
-            <summary>
-            The id of this aggregated trade
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTrade.Price">
-            <summary>
-            The price of the trades
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTrade.Quantity">
-            <summary>
-            The combined quantity of the trades
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTrade.BuyerOrderId">
-            <summary>
-            The first trade id in this aggregation
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTrade.SellerOrderId">
-            <summary>
-            The last trade id in this aggregation
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTrade.TradeTime">
-            <summary>
-            The time of the trades
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTrade.BuyerIsMaker">
-            <summary>
-            Whether the buyer was the maker
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTrade.Ignore">
-            <summary>
-            Unused
             </summary>
         </member>
     </members>

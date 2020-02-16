@@ -294,42 +294,5 @@ namespace Binance.Net.Interfaces
             Action<BinanceStreamOrderList> onOcoOrderUpdateMessage,
             Action<IEnumerable<BinanceStreamBalance>> onAccountPositionMessage,
             Action<BinanceStreamBalanceUpdate>? onAccountBalanceUpdate);
-        
-        /// <summary>
-        /// Subscribes to the margin account update stream. Prior to using this, the <see cref="BinanceClient.StartMarginUserStream"/> method should be called.
-        /// </summary>
-        /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-        /// <param name="onAccountInfoMessage">The event handler for whenever an account info update is received</param>
-        /// <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
-        /// <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
-        /// <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
-        /// <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
-        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        CallResult<UpdateSubscription> SubscribeToMarginUserDataUpdates(
-            string listenKey, 
-            Action<BinanceStreamMarginAccountInfo> onAccountInfoMessage, 
-            Action<BinanceStreamMarginOrderUpdate> onOrderUpdateMessage,
-            Action<BinanceStreamMarginOrderList> onOcoOrderUpdateMessage,
-            Action<IEnumerable<BinanceStreamMarginBalance>> onAccountPositionMessage,
-            Action<BinanceStreamMarginBalanceUpdate>? onAccountBalanceUpdate);
-
-        /// <summary>
-        /// Subscribes to the margin account update stream. Prior to using this, the <see cref="BinanceClient.StartMarginUserStream"/> method should be called.
-        /// </summary>
-        /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-        /// <param name="onAccountInfoMessage">The event handler for whenever an account info update is received</param>
-        /// <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
-        /// <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
-        /// <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
-        /// <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
-        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToMarginUserDataUpdatesAsync(
-            string listenKey, 
-            Action<BinanceStreamMarginAccountInfo> onAccountInfoMessage, 
-            Action<BinanceStreamMarginOrderUpdate> onOrderUpdateMessage,
-            Action<BinanceStreamMarginOrderList> onOcoOrderUpdateMessage,
-            Action<IEnumerable<BinanceStreamMarginBalance>> onAccountPositionMessage,
-            Action<BinanceStreamMarginBalanceUpdate>? onAccountBalanceUpdate);
     }
-    
 }
