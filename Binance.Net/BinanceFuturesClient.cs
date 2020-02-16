@@ -79,13 +79,17 @@ namespace Binance.Net
         private const string KeepFuturesListenKeyAliveEndpoint = "listenKey";
         private const string CloseFuturesListenKeyEndpoint = "listenKey";
 
-        // Futures
-        private const string MarkPriceEndpoint = "premiumIndex"; //TODO
-        private const string FundingRateHistoryEndpoint = "fundingRate"; //TODO
-        private const string FutureAccountBalanceEndpoint = "balance"; //TODO
+        // Futures Public
+        private const string MarkPriceEndpoint = "premiumIndex";
+        private const string FundingRateHistoryEndpoint = "fundingRate";
+
+        // Futures Private
+        private const string FuturesAccountBalanceEndpoint = "balance";
         private const string ChangeInitialLeverageEndpoint = "leverage"; //TODO
         private const string PositionInformationEndpoint = "positionRisk"; //TODO
         private const string IncomeHistoryEndpoint = "income"; //TODO
+        private const string PositionMarginEndpoint = "positionMargin"; //TODO
+        private const string PositionMarginChangeHistoryEndpoint = "positionMargin/history"; //TODO
 
 
         #endregion
@@ -397,7 +401,80 @@ namespace Binance.Net
 
             return await SendRequest<IEnumerable<BinanceKline>>(GetUrl(KlinesEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
+        //TODO - object and add to Interface
+        /// <summary>
+        /// Get Mark Price and Funding Rate for the provided symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Data over the last 24 hours</returns>
+        public WebCallResult<BinanceMarkPrice> GetMarkPrice(string symbol, CancellationToken ct = default) => GetMarkPriceAsync(symbol, ct).Result;
 
+        /// <summary>
+        /// Get Mark Price and Funding Rate for the provided symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Data over the last 24 hours</returns>
+        public async Task<WebCallResult<BinanceMarkPrice>> GetMarkPriceAsync(string symbol, CancellationToken ct = default)
+        {
+            symbol.ValidateBinanceSymbol();
+            var parameters = new Dictionary<string, object> { { "symbol", symbol } };
+
+            return await SendRequest<BinanceMarkPrice>(GetUrl(MarkPriceEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get Mark Price and Funding Rate for all symbols
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of data over the last 24 hours</returns>
+        public WebCallResult<IEnumerable<BinanceMarkPrice>> GetMarkPricesList(CancellationToken ct = default) => GetMarkPricesListAsync(ct).Result;
+
+        /// <summary>
+        /// Get Mark Price and Funding Rate for all symbols
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of data over the last 24 hours</returns>
+        public async Task<WebCallResult<IEnumerable<BinanceMarkPrice>>> GetMarkPricesListAsync(CancellationToken ct = default)
+        {
+            return await SendRequest<IEnumerable<BinanceMarkPrice>>(GetUrl(MarkPriceEndpoint, Api, PublicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
+        }
+//TODO - object and add to Interface
+        /// <summary>
+        /// Get funding rate history for the provided symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="startTime">Start time to get funding rate history</param>
+        /// <param name="endTime">End time to get funding rate history</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The funding rate history for the provided symbol</returns>
+        public WebCallResult<IEnumerable<BinanceFundingRate>> GetFundingRates(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default) => GetFundingRatesAsync(symbol, startTime, endTime, limit, ct).Result;
+
+        /// <summary>
+        /// Get funding rate history for the provided symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="startTime">Start time to get funding rate history</param>
+        /// <param name="endTime">End time to get funding rate history</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The funding rate history for the provided symbol</returns>
+        public async Task<WebCallResult<IEnumerable<BinanceFundingRate>>> GetFundingRatesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        {
+            symbol.ValidateBinanceSymbol();
+            limit?.ValidateIntBetween(nameof(limit), 1, 1000);
+            var parameters = new Dictionary<string, object> {
+                { "symbol", symbol }
+            };
+            parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString() : null);
+            parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
+            parameters.AddOptionalParameter("limit", limit?.ToString());
+
+            return await SendRequest<IEnumerable<BinanceFundingRate>>(GetUrl(FundingRateHistoryEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+        
         /// <summary>
         /// Get data regarding the last 24 hours for the provided symbol
         /// </summary>
@@ -761,6 +838,35 @@ namespace Binance.Net
 
             return await SendRequest<IEnumerable<BinanceOrder>>(GetUrl(AllOrdersEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
+//TODO add to interface
+        /// <summary>
+        /// Gets account balances
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The account information</returns>
+        public WebCallResult<IEnumerable<BinanceFuturesAccountBalance>> GetFuturesAccountBalance(long? receiveWindow = null, CancellationToken ct = default) => GetFuturesAccountBalanceAsync(receiveWindow, ct).Result;
+
+        /// <summary>.
+        /// Gets account balances
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The account information</returns>
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesAccountBalance>>> GetFuturesAccountBalanceAsync(long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<IEnumerable<BinanceFuturesAccountBalance>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await SendRequest<IEnumerable<BinanceFuturesAccountBalance>>(GetUrl(FuturesAccountBalanceEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
 
         /// <summary>
         /// Gets account information, including balances
@@ -790,6 +896,16 @@ namespace Binance.Net
 
             return await SendRequest<BinanceAccountInfo>(GetUrl(AccountInfoEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
+
+        //TODO Change Initial Leverage
+
+        //TODO Change MArgin Type
+
+        //TODO Modify Isolated Position Margin
+
+        //TODO Get Position Margin Change History
+
+        //TODO Get Position Information
 
         /// <summary>
         /// Gets all user trades for provided symbol
@@ -838,34 +954,7 @@ namespace Binance.Net
             return await SendRequest<IEnumerable<BinanceTrade>>(GetUrl(MyFuturesTradesEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Gets Futures Account Balance
-        /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of Positions</returns>
-        public WebCallResult<IEnumerable<BinanceFuturesAccountBalance>> GetFuturesAccountBalance(long? receiveWindow = null, CancellationToken ct = default) => GetFuturesAccountBalanceAsync(receiveWindow).Result;
-
-        /// <summary>
-        /// Gets Futures Account Balance
-        /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of Positions</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceFuturesAccountBalance>>> GetFuturesAccountBalanceAsync(long? receiveWindow = null, CancellationToken ct = default)
-        {
-            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
-            if (!timestampResult)
-                return new WebCallResult<IEnumerable<BinanceFuturesAccountBalance>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-
-            var parameters = new Dictionary<string, object>
-            {
-                { "timestamp", GetTimestamp() }
-            };
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await SendRequest<IEnumerable<BinanceFuturesAccountBalance>>(GetUrl(FutureAccountBalanceEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
-        }
+        //TODO get Income History
 
         /// <summary>
         /// Gets all user positions
