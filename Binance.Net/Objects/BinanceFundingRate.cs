@@ -1,33 +1,31 @@
+using System;
+using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects
-{//TODO
+{
     /// <summary>
-    /// 
+    /// Upcoming funding rate and time
     /// </summary>
     public class BinanceFundingRate
     {
-        /// <summary>
+         /// <summary>
         /// The symbol the information is about
         /// </summary>
         public string Symbol { get; set; } = "";
         /// <summary>
-        /// The highest bid price for the symbol
+        /// The upcoming funding rate
         /// </summary>
-        public decimal BidPrice { get; set; }
+        public decimal FundingRate { get; set; }
         /// <summary>
-        /// The quantity of the highest bid price currently in the order book
+        /// The time the next funding rate will be implemented
         /// </summary>
-        [JsonProperty("bidQty")]
-        public decimal BidQuantity { get; set; }
+        [JsonConverter(typeof(TimestampConverter))]
+        public DateTime FundingTime { get; set; }
         /// <summary>
-        /// The lowest ask price for the symbol
+        /// The time now
         /// </summary>
-        public decimal AskPrice { get; set; }
-        /// <summary>
-        /// The quantity of the lowest ask price currently in the order book
-        /// </summary>
-        [JsonProperty("askQty")]
-        public decimal AskQuantity { get; set; }
+        [JsonConverter(typeof(TimestampConverter))]
+        public DateTime Time { get; set; }
     }
 }
