@@ -310,8 +310,8 @@ namespace Binance.Net.Interfaces
             Action<BinanceStreamMarginAccountInfo> onAccountInfoMessage, 
             Action<BinanceStreamMarginOrderUpdate> onOrderUpdateMessage,
             Action<BinanceStreamMarginOrderList> onOcoOrderUpdateMessage,
-            Action<IEnumerable<BinanceStreamMarginBalance>> onAccountPositionMessage,
-            Action<BinanceStreamMarginBalanceUpdate>? onAccountBalanceUpdate);
+            Action<IEnumerable<BinanceStreamBalance>> onAccountPositionMessage,
+            Action<BinanceStreamBalanceUpdate>? onAccountBalanceUpdate);
 
         /// <summary>
         /// Subscribes to the margin account update stream. Prior to using this, the <see cref="BinanceClient.StartMarginUserStream"/> method should be called.
@@ -328,8 +328,8 @@ namespace Binance.Net.Interfaces
             Action<BinanceStreamMarginAccountInfo> onAccountInfoMessage, 
             Action<BinanceStreamMarginOrderUpdate> onOrderUpdateMessage,
             Action<BinanceStreamMarginOrderList> onOcoOrderUpdateMessage,
-            Action<IEnumerable<BinanceStreamMarginBalance>> onAccountPositionMessage,
-            Action<BinanceStreamMarginBalanceUpdate>? onAccountBalanceUpdate);
+            Action<IEnumerable<BinanceStreamBalance>> onAccountPositionMessage,
+            Action<BinanceStreamBalanceUpdate>? onAccountBalanceUpdate);
     }
     
 }

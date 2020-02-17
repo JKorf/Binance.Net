@@ -508,8 +508,8 @@ namespace Binance.Net
             Action<BinanceStreamMarginAccountInfo> onAccountInfoMessage, 
             Action<BinanceStreamMarginOrderUpdate> onOrderUpdateMessage,
             Action<BinanceStreamMarginOrderList> onOcoOrderUpdateMessage,
-            Action<IEnumerable<BinanceStreamMarginBalance>> onAccountPositionMessage,
-            Action<BinanceStreamMarginBalanceUpdate>? onAccountBalanceUpdate) => SubscribeToMarginUserDataUpdatesAsync(listenKey, onAccountInfoMessage, onOrderUpdateMessage, onOcoOrderUpdateMessage, onAccountPositionMessage, onAccountBalanceUpdate).Result;
+            Action<IEnumerable<BinanceStreamBalance>> onAccountPositionMessage,
+            Action<BinanceStreamBalanceUpdate>? onAccountBalanceUpdate) => SubscribeToMarginUserDataUpdatesAsync(listenKey, onAccountInfoMessage, onOrderUpdateMessage, onOcoOrderUpdateMessage, onAccountPositionMessage, onAccountBalanceUpdate).Result;
 
         /// <summary>
         /// Subscribes to the margin account update stream. Prior to using this, the <see cref="BinanceClient.StartMarginUserStream"/> method should be called.
@@ -526,8 +526,8 @@ namespace Binance.Net
             Action<BinanceStreamMarginAccountInfo> onAccountInfoMessage, 
             Action<BinanceStreamMarginOrderUpdate> onOrderUpdateMessage,
             Action<BinanceStreamMarginOrderList> onOcoOrderUpdateMessage,
-            Action<IEnumerable<BinanceStreamMarginBalance>> onAccountPositionMessage,
-            Action<BinanceStreamMarginBalanceUpdate>? onAccountBalanceUpdate)
+            Action<IEnumerable<BinanceStreamBalance>> onAccountPositionMessage,
+            Action<BinanceStreamBalanceUpdate>? onAccountBalanceUpdate)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
 
@@ -569,7 +569,7 @@ namespace Binance.Net
                     case AccountPositionUpdateEvent:
                     {
                         log.Write(LogVerbosity.Debug, data);
-                        var result = Deserialize<IEnumerable<BinanceStreamMarginBalance>>(token["B"], false);
+                        var result = Deserialize<IEnumerable<BinanceStreamBalance>>(token["B"], false);
                         if (result)
                             onAccountPositionMessage?.Invoke(result.Data);
                         else
@@ -579,7 +579,7 @@ namespace Binance.Net
                     case BalanceUpdateEvent:
                     {
                         log.Write(LogVerbosity.Debug, data);
-                        var result = Deserialize<BinanceStreamMarginBalanceUpdate>(token, false);
+                        var result = Deserialize<BinanceStreamBalanceUpdate>(token, false);
                         if (result)
                             onAccountBalanceUpdate?.Invoke(result.Data);
                         else
