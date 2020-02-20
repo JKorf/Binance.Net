@@ -604,4 +604,65 @@ namespace Binance.Net.Objects
         /// </summary>
         RollOut
     }
+
+    /// <summary>
+    /// Type of futures income
+    /// </summary>
+    public enum IncomeType
+    {
+        /// <summary>
+        /// Transfer into account
+        /// </summary>
+        Transfer,
+        /// <summary>
+        /// Futures welcome bonus
+        /// </summary>
+        WelcomeBonus,
+        /// <summary>
+        /// Futures realized profit
+        /// </summary>
+        RealizedPnL,
+        /// <summary>
+        /// Futures funding fee
+        /// </summary>
+        FundingFee,
+        /// <summary>
+        /// Futures trading commission
+        /// </summary>
+        Commission,
+        /// <summary>
+        /// Insurance clear
+        /// </summary>
+        InsuranceClear
+    }
+
+    /// <summary>
+    /// The direction to change futures margin
+    /// </summary>
+    public enum FuturesMarginChangeDirectionType
+    {
+        /// <summary>
+        /// Add margin
+        /// </summary>
+        Add,
+        /// <summary>
+        /// Reduce Margin
+        /// </summary>
+        Reduce
+    }
+
+    /// <summary>
+    /// Type of Margin
+    /// </summary>
+    public enum FuturesMarginType
+    {
+        /// <summary>
+        /// Isolated margin
+        /// </summary>
+        Isolated,
+        /// <summary>
+        /// Crossed margin
+        /// </summary>
+        Cross
+    }
 }
