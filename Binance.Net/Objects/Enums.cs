@@ -447,25 +447,6 @@ namespace Binance.Net.Objects
     }
 
     /// <summary>
-    /// Margin Order Side Effect type
-    /// </summary>
-    public enum SideEffectType
-    {
-        /// <summary>
-        /// No side effect
-        /// </summary>
-        NoSideEffect,
-        /// <summary>
-        /// Place Margin Order
-        /// </summary>
-        MarginBuy,
-        /// <summary>
-        /// Automatically repay borrowed amount
-        /// </summary>
-        AutoRepay
-    }
-
-    /// <summary>
     /// Trade rules behaviour
     /// </summary>
     public enum TradeRulesBehaviour

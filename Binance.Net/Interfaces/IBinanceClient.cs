@@ -1090,11 +1090,10 @@ namespace Binance.Net.Interfaces
         /// <param name="stopPrice">Used for stop orders</param>
         /// <param name="icebergQuantity">Used for iceberg orders</param>
         /// <param name="orderResponseType">The type of response to receive</param>
-        /// <param name="sideEffectType">The side effect to place with the order (auto-borrow or repay)</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed order</returns>
-        WebCallResult<BinanceMarginPlacedOrder> PlaceMarginOrder(string symbol,
+        WebCallResult<BinancePlacedOrder> PlaceMarginOrder(string symbol,
             OrderSide side,
             OrderType type,
             decimal? quantity = null,
@@ -1105,7 +1104,6 @@ namespace Binance.Net.Interfaces
             decimal? stopPrice = null,
             decimal? icebergQuantity = null,
             OrderResponseType? orderResponseType = null,
-            SideEffectType? sideEffectType = null,
             int? receiveWindow = null,
             CancellationToken ct = default);
 
@@ -1123,11 +1121,10 @@ namespace Binance.Net.Interfaces
         /// <param name="stopPrice">Used for stop orders</param>
         /// <param name="icebergQuantity">Used for iceberg orders</param>
         /// <param name="orderResponseType">The type of response to receive</param>
-        /// <param name="sideEffectType">The side effect to place with the order (auto-borrow or repay)</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed order</returns>
-        Task<WebCallResult<BinanceMarginPlacedOrder>> PlaceMarginOrderAsync(string symbol,
+        Task<WebCallResult<BinancePlacedOrder>> PlaceMarginOrderAsync(string symbol,
             OrderSide side,
             OrderType type,
             decimal? quantity = null,
@@ -1138,7 +1135,6 @@ namespace Binance.Net.Interfaces
             decimal? stopPrice = null,
             decimal? icebergQuantity = null,
             OrderResponseType? orderResponseType = null,
-            SideEffectType? sideEffectType = null,
             int? receiveWindow = null,
             CancellationToken ct = default);
 

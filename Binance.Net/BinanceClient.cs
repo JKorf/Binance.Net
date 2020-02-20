@@ -1993,11 +1993,10 @@ namespace Binance.Net
         /// <param name="stopPrice">Used for stop orders</param>
         /// <param name="icebergQuantity">Used for iceberg orders</param>
         /// <param name="orderResponseType">The type of response to receive</param>
-        /// <param name="sideEffectType">The side effect to place with the order (auto-borrow or repay)</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed order</returns>
-        public WebCallResult<BinanceMarginPlacedOrder> PlaceMarginOrder(string symbol,
+        public WebCallResult<BinancePlacedOrder> PlaceMarginOrder(string symbol,
             OrderSide side,
             OrderType type,
             decimal? quantity = null,
@@ -2008,9 +2007,8 @@ namespace Binance.Net
             decimal? stopPrice = null,
             decimal? icebergQuantity = null,
             OrderResponseType? orderResponseType = null,
-            SideEffectType? sideEffectType = null,
             int? receiveWindow = null,
-            CancellationToken ct = default) => PlaceMarginOrderAsync(symbol, side, type, quantity, quoteOrderQuantity, newClientOrderId, price, timeInForce, stopPrice, icebergQuantity, orderResponseType, sideEffectType, receiveWindow, ct).Result;
+            CancellationToken ct = default) => PlaceMarginOrderAsync(symbol, side, type, quantity, quoteOrderQuantity, newClientOrderId, price, timeInForce, stopPrice, icebergQuantity, orderResponseType, receiveWindow, ct).Result;
 
         /// <summary>
         /// Margin account new order
@@ -2026,11 +2024,10 @@ namespace Binance.Net
         /// <param name="stopPrice">Used for stop orders</param>
         /// <param name="icebergQuantity">Used for iceberg orders</param>
         /// <param name="orderResponseType">The type of response to receive</param>
-        /// <param name="sideEffectType">The side effect to place with the order (auto-borrow or repay)</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed order</returns>
-        public async Task<WebCallResult<BinanceMarginPlacedOrder>> PlaceMarginOrderAsync(string symbol,
+        public async Task<WebCallResult<BinancePlacedOrder>> PlaceMarginOrderAsync(string symbol,
             OrderSide side,
             OrderType type,
             decimal? quantity = null,
@@ -2041,11 +2038,10 @@ namespace Binance.Net
             decimal? stopPrice = null,
             decimal? icebergQuantity = null,
             OrderResponseType? orderResponseType = null,
-            SideEffectType? sideEffectType = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
-            return await PlaceMarginOrderInternal(GetUrl(NewMarginOrderEndpoint, MarginApi, MarginVersion),
+            return await PlaceOrderInternal(GetUrl(NewMarginOrderEndpoint, MarginApi, MarginVersion),
                 symbol,
                 side,
                 type,
@@ -2057,7 +2053,6 @@ namespace Binance.Net
                 stopPrice,
                 icebergQuantity,
                 orderResponseType,
-                sideEffectType,
                 receiveWindow,
                 ct).ConfigureAwait(false);
         }
@@ -2863,65 +2858,6 @@ namespace Binance.Net
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await SendRequest<BinancePlacedOrder>(uri, HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
-        }
-
-        private async Task<WebCallResult<BinanceMarginPlacedOrder>> PlaceMarginOrderInternal(Uri uri,
-            string symbol,
-            OrderSide side,
-            OrderType type,
-            decimal? quantity = null,
-            decimal? quoteOrderQuantity = null,
-            string? newClientOrderId = null,
-            decimal? price = null,
-            TimeInForce? timeInForce = null,
-            decimal? stopPrice = null,
-            decimal? icebergQty = null,
-            OrderResponseType? orderResponseType = null,
-            SideEffectType? sideEffectType = null,
-            int? receiveWindow = null,
-            CancellationToken ct = default)
-        {
-            symbol.ValidateBinanceSymbol();
-
-            if (quoteOrderQuantity != null && type != OrderType.Market)
-                throw new ArgumentException("quoteOrderQuantity is only valid for market orders");
-
-            if ((quantity == null && quoteOrderQuantity == null) || (quantity != null && quoteOrderQuantity != null))
-                throw new ArgumentException("1 of either should be specified, quantity or quoteOrderQuantity");
-
-            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
-            if (!timestampResult)
-                return new WebCallResult<BinanceMarginPlacedOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-
-            var rulesCheck = await CheckTradeRules(symbol, quantity, price, type, ct).ConfigureAwait(false);
-            if (!rulesCheck.Passed)
-            {
-                log.Write(LogVerbosity.Warning, rulesCheck.ErrorMessage!);
-                return new WebCallResult<BinanceMarginPlacedOrder>(null, null, null, new ArgumentError(rulesCheck.ErrorMessage!));
-            }
-
-            quantity = rulesCheck.Quantity;
-            price = rulesCheck.Price;
-
-            var parameters = new Dictionary<string, object>
-            {
-                { "symbol", symbol },
-                { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
-                { "type", JsonConvert.SerializeObject(type, new OrderTypeConverter(false)) },
-                { "timestamp", GetTimestamp() }
-            };
-            parameters.AddOptionalParameter("quantity", quantity?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("quoteOrderQty", quoteOrderQuantity?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
-            parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)));
-            parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
-            parameters.AddOptionalParameter("sideEffectType", sideEffectType == null ? null : JsonConvert.SerializeObject(sideEffectType, new SideEffectTypeConverter(false)));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await SendRequest<BinanceMarginPlacedOrder>(uri, HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
