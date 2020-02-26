@@ -451,7 +451,7 @@ namespace Binance.Net
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The funding rate history for the provided symbol</returns>
-        public WebCallResult<IEnumerable<BinanceFuturesFundingRate>> GetFundingRates(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default) => GetFundingRatesAsync(symbol, startTime, endTime, limit, ct).Result;
+        public WebCallResult<IEnumerable<BinanceFuturesFundingRateHistory>> GetFundingRates(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default) => GetFundingRatesAsync(symbol, startTime, endTime, limit, ct).Result;
 
         /// <summary>
         /// Get funding rate history for the provided symbol
@@ -462,7 +462,7 @@ namespace Binance.Net
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The funding rate history for the provided symbol</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceFuturesFundingRate>>> GetFundingRatesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesFundingRateHistory>>> GetFundingRatesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);
@@ -473,7 +473,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
             parameters.AddOptionalParameter("limit", limit?.ToString());
 
-            return await SendRequest<IEnumerable<BinanceFuturesFundingRate>>(GetUrl(FundingRateHistoryEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceFuturesFundingRateHistory>>(GetUrl(FundingRateHistoryEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
         
         /// <summary>

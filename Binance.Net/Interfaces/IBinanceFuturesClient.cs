@@ -206,7 +206,7 @@ namespace Binance.Net.Interfaces
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The funding rate history for the provided symbol</returns>
-        WebCallResult<IEnumerable<BinanceFuturesFundingRate>> GetFundingRates(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        WebCallResult<IEnumerable<BinanceFuturesFundingRateHistory>> GetFundingRates(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get funding rate history for the provided symbol
@@ -217,7 +217,7 @@ namespace Binance.Net.Interfaces
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The funding rate history for the provided symbol</returns>
-        Task<WebCallResult<IEnumerable<BinanceFuturesFundingRate>>> GetFundingRatesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceFuturesFundingRateHistory>>> GetFundingRatesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get data regarding the last 24 hours for the provided symbol
@@ -499,7 +499,7 @@ namespace Binance.Net.Interfaces
         /// Change the margin type for an open position
         /// </summary>
         /// <param name="symbol">Symbol to change the position type for</param>
-        /// <param name="type">The type of margin to use</param>
+        /// <param name="marginType">The type of margin to use</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Whether the request was successful</returns>
@@ -509,7 +509,7 @@ namespace Binance.Net.Interfaces
         /// Change the margin type for an open position
         /// </summary>
         /// <param name="symbol">Symbol to change the position type for</param>
-        /// <param name="type">The type of margin to use</param>
+        /// <param name="marginType">The type of margin to use</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Whether the request was successful</returns>
