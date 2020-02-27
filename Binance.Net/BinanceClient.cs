@@ -1655,6 +1655,13 @@ namespace Binance.Net
             if (!timestampResult)
                 return new WebCallResult<BinanceOrderList>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
+            var rulesCheck = await CheckTradeRules(symbol, quantity, price, null, ct).ConfigureAwait(false);
+            if (!rulesCheck.Passed)
+            {
+                log.Write(LogVerbosity.Warning, rulesCheck.ErrorMessage!);
+                return new WebCallResult<BinanceOrderList>(null, null, null, new ArgumentError(rulesCheck.ErrorMessage!));
+            }
+
             var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
@@ -2910,7 +2917,7 @@ namespace Binance.Net
             return new WebCallResult<DateTime>(null, null, default, null);
         }
 
-        private async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? price, OrderType type, CancellationToken ct)
+        private async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? price, OrderType? type, CancellationToken ct)
         {
             var outputQuantity = quantity;
             var outputPrice = price;
@@ -2928,9 +2935,13 @@ namespace Binance.Net
             if (symbolData == null)
                 return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Symbol {symbol} not found");
 
-            if (!symbolData.OrderTypes.Contains(type))
-                return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: {type} order type not allowed for {symbol}");
-
+            if (type != null)
+            {
+                if (!symbolData.OrderTypes.Contains(type.Value))
+                    return BinanceTradeRuleResult.CreateFailed(
+                        $"Trade rules check failed: {type} order type not allowed for {symbol}");
+            }
+            
             if (symbolData.LotSizeFilter != null || (symbolData.MarketLotSizeFilter != null && type == OrderType.Market))
             {
                 var minQty = symbolData.LotSizeFilter?.MinQuantity;
