@@ -1089,6 +1089,7 @@ namespace Binance.Net.Interfaces
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
         /// <param name="icebergQuantity">Used for iceberg orders</param>
+        /// <param name="sideEffectType">Side effect type for this order</param>
         /// <param name="orderResponseType">The type of response to receive</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -1103,6 +1104,7 @@ namespace Binance.Net.Interfaces
             TimeInForce? timeInForce = null,
             decimal? stopPrice = null,
             decimal? icebergQuantity = null,
+            SideEffectType? sideEffectType = null,
             OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
             CancellationToken ct = default);
@@ -1120,6 +1122,7 @@ namespace Binance.Net.Interfaces
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
         /// <param name="icebergQuantity">Used for iceberg orders</param>
+        /// <param name="sideEffectType">Side effect type for this order</param>
         /// <param name="orderResponseType">The type of response to receive</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -1134,6 +1137,7 @@ namespace Binance.Net.Interfaces
             TimeInForce? timeInForce = null,
             decimal? stopPrice = null,
             decimal? icebergQuantity = null,
+            SideEffectType? sideEffectType = null,
             OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
             CancellationToken ct = default);
