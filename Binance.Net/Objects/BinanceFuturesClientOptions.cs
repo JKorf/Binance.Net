@@ -45,6 +45,14 @@ namespace Binance.Net.Objects
         }
 
         /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="baseAddress">Сustom url to connect via mirror website</param>
+        public BinanceFuturesClientOptions(string baseAddress): base(baseAddress)
+        {
+        }
+
+        /// <summary>
         /// Return a copy of these options
         /// </summary>
         /// <returns></returns>
@@ -91,7 +99,15 @@ namespace Binance.Net.Objects
         /// </summary>
         public BinanceFuturesSocketClientOptions(): base("wss://fstream.binance.com/ws/")
         {
-        }        
+        }  
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="baseAddress">Сustom url to connect via mirror website</param>
+        public BinanceFuturesSocketClientOptions(string baseAddress): base(baseAddress)
+        {
+        }      
 
         /// <summary>
         /// Return a copy of these options

@@ -17,7 +17,7 @@ namespace Binance.Net.Objects
         public string? Symbol { get; set; }
 
         /// <summary>
-        /// Liquidation Side
+        /// Liquidation Sided
         /// </summary>
         [JsonProperty("S")]
         public OrderSide Side { get; set; }
@@ -59,7 +59,7 @@ namespace Binance.Net.Objects
         public OrderStatus OrderStatus { get; set; }
         
         /// <summary>
-        /// Liquidation Last Fille Quantity
+        /// Liquidation Last Filled Quantity
         /// </summary>
         [JsonProperty("l")]
         public decimal LastFilledQty { get; set; }

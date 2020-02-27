@@ -17,7 +17,7 @@ using Newtonsoft.Json.Linq;
 namespace Binance.Net
 {
     /// <summary>
-    /// Client providing access to the Binance websocket Api
+    /// Client providing access to the Binance Futures Websocket Api
     /// </summary>
     public class BinanceFuturesSocketClient : SocketClient, IBinanceFuturesSocketClient
     {
@@ -28,24 +28,23 @@ namespace Binance.Net
         private readonly string baseCombinedAddress;
 
         private const string AggregatedTradesStreamEndpoint = "@aggTrade";
-        private const string MarkPriceStreamEndpoint = "@markPrice";//TODO
+        private const string MarkPriceStreamEndpoint = "@markPrice";
         private const string AllMarkPriceStreamEndpoint = "!markPrice@arr";
         private const string KlineStreamEndpoint = "@kline";
-        private const string SymbolMiniTickerStreamEndpoint = "@miniTicker";//TODO
+        private const string SymbolMiniTickerStreamEndpoint = "@miniTicker";
         private const string AllMiniTickerStreamEndpoint = "!miniTicker@arr";
         private const string SymbolTickerStreamEndpoint = "@ticker";
-        private const string AllTickerStreamEndpoint = "!ticker@arr";//TODO
+        private const string AllTickerStreamEndpoint = "!ticker@arr";
         private const string BookTickerStreamEndpoint = "@bookTicker";
         private const string AllBookTickerStreamEndpoint = "!bookTicker";
-        private const string LiquidationStreamEndpoint = "@forceOrder";//TODO
+        private const string LiquidationStreamEndpoint = "@forceOrder";
         private const string AllLiquidationStreamEndpoint = "!forceOrder@arr";
         private const string PartialBookDepthStreamEndpoint = "@depth";
         private const string DepthStreamEndpoint = "@depth";
-        private const string DiffBookDepthStreamEndpoint = "@depth";//TODO
 
         private const string AccountUpdateEvent = "ACCOUNT_UPDATE";
         private const string ExecutionUpdateEvent = "executionReport";
-        private const string OcoOrderUpdateEvent = "ORDER_TRADE_UPDATE";
+        private const string OrderUpdateEvent = "ORDER_TRADE_UPDATE";
         private const string AccountPositionUpdateEvent = "outboundAccountPosition";
         private const string BalanceUpdateEvent = "balanceUpdate";
         private const string ListenKeyExpiredEvent = "listenKeyExpired";
@@ -54,14 +53,14 @@ namespace Binance.Net
         #region constructor/destructor
 
         /// <summary>
-        /// Create a new instance of BinanceSocketClient with default options
+        /// Create a new instance of BinanceFuturesSocketClient with default options
         /// </summary>
         public BinanceFuturesSocketClient() : this(DefaultOptions)
         {
         }
 
         /// <summary>
-        /// Create a new instance of BinanceSocketClient using provided options
+        /// Create a new instance of BinanceFuturesSocketClient using provided options
         /// </summary>
         /// <param name="options">The options to use for this client</param>
         public BinanceFuturesSocketClient(BinanceFuturesSocketClientOptions options) : base(options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials, ArrayParametersSerialization.MultipleValues))
@@ -632,7 +631,7 @@ namespace Binance.Net
                             log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account stream: " + result.Error);
                         break;
                     }
-                    case OcoOrderUpdateEvent:
+                    case OrderUpdateEvent:
                     {
                         log.Write(LogVerbosity.Debug, data);
                             var orders = token["o"];
@@ -651,7 +650,7 @@ namespace Binance.Net
                         if (result)
                             onOcoOrderUpdateMessage?.Invoke(result.Data);
                         else
-                            log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from oco order stream: " + result.Error);
+                            log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from execution stream: " + result.Error);
                         break;
                     }
                     case AccountPositionUpdateEvent:
@@ -671,7 +670,7 @@ namespace Binance.Net
                         if (result)
                             onAccountBalanceUpdate?.Invoke(result.Data);
                         else
-                            log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account position stream: " + result.Error);
+                            log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account balance stream: " + result.Error);
                         break;
                     }
                     case ListenKeyExpiredEvent:
@@ -681,7 +680,7 @@ namespace Binance.Net
                         if (result)
                             onListenKeyExpired?.Invoke(result.Data);
                         else
-                            log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account position stream: " + result.Error);
+                            log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from the expried listen key event: " + result.Error);
                         break;
                     }
                     default:

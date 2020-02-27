@@ -9,7 +9,7 @@ using CryptoExchange.Net.Objects;
 namespace Binance.Net.Interfaces
 {
     /// <summary>
-    /// Interface for the Binance client
+    /// Interface for the Binance Futures client
     /// </summary>
     public interface IBinanceFuturesClient: IRestClient
 
@@ -476,7 +476,7 @@ namespace Binance.Net.Interfaces
         Task<WebCallResult<BinanceAccountInfo>> GetAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Requests to change the initial leverag of the given symbol
+        /// Requests to change the initial leverage of the given symbol
         /// </summary>
         /// <param name="symbol">Symbol to change the initial leverage for</param>
         /// <param name="leverage">The amount of initial leverage to change to</param>
@@ -486,7 +486,7 @@ namespace Binance.Net.Interfaces
         WebCallResult<BinanceFuturesInitialLeverageChangeResult> ChangeInitialLeverage(string symbol, int leverage, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Requests to change the initial leverag of the given symbol
+        /// Requests to change the initial leverage of the given symbol
         /// </summary>
         /// <param name="symbol">Symbol to change the initial leverage for</param>
         /// <param name="leverage">The amount of initial leverage to change to</param>

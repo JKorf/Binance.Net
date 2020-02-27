@@ -15,7 +15,7 @@ namespace Binance.Net.Objects
         /// </summary>
         public IEnumerable<BinanceSymbolFilter> Filters { get; set; } = new List<BinanceSymbolFilter>();
         /// <summary>
-        /// The open margin percent
+        /// The maintenance margin percent
         /// </summary>
         public decimal MaintMarginPercent { get; set; }
         /// <summary>

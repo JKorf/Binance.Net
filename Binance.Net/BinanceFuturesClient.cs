@@ -20,7 +20,7 @@ using Binance.Net.Interfaces;
 namespace Binance.Net
 {
     /// <summary>
-    /// Client providing access to the Binance REST Api
+    /// Client providing access to the Binance Futures REST Api
     /// </summary>
     public class BinanceFuturesClient : RestClient, IBinanceFuturesClient
     {
@@ -899,7 +899,7 @@ namespace Binance.Net
         }
 
         /// <summary>
-        /// Requests to change the initial leverag of the given symbol
+        /// Requests to change the initial leverage of the given symbol
         /// </summary>
         /// <param name="symbol">Symbol to change the initial leverage for</param>
         /// <param name="leverage">The amount of initial leverage to change to</param>
@@ -909,7 +909,7 @@ namespace Binance.Net
         public WebCallResult<BinanceFuturesInitialLeverageChangeResult> ChangeInitialLeverage(string symbol, int leverage, long? receiveWindow = null, CancellationToken ct = default) => ChangeInitialLeverageAsync(symbol, leverage, receiveWindow, ct).Result;
 
         /// <summary>
-        /// Requests to change the initial leverag of the given symbol
+        /// Requests to change the initial leverage of the given symbol
         /// </summary>
         /// <param name="symbol">Symbol to change the initial leverage for</param>
         /// <param name="leverage">The amount of initial leverage to change to</param>

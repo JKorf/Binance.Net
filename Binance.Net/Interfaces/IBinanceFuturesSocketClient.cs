@@ -10,7 +10,7 @@ using CryptoExchange.Net.Sockets;
 namespace Binance.Net.Interfaces
 {
     /// <summary>
-    /// Interface for the Binance socket client
+    /// Interface for the Binance Futures socket client
     /// </summary>
     public interface IBinanceFuturesSocketClient: ISocketClient
     {
