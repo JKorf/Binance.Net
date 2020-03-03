@@ -148,6 +148,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 5.0.9 - 03 Mar 2020
+    * Fixed serialization issue on DustTransfer assets parameter
+
 * Version 5.0.8 - 03 Mar 2020
     * Added SideEffectType and MarginBuyBorrow properties
     * Added trade rules check for margin orders
