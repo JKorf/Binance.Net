@@ -660,11 +660,14 @@ namespace Binance.Net.Objects
         /// Isolated margin
         /// </summary>
         Isolated,
+
         /// <summary>
         /// Crossed margin
         /// </summary>
         Cross
+    }
 
+    /// <summary>
     /// Side effect for a margin order
     /// </summary>
     public enum SideEffectType

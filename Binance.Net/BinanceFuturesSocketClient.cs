@@ -680,7 +680,7 @@ namespace Binance.Net
                         if (result)
                             onListenKeyExpired?.Invoke(result.Data);
                         else
-                            log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from the expried listen key event: " + result.Error);
+                            log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from the expired listen key event: " + result.Error);
                         break;
                     }
                     default:

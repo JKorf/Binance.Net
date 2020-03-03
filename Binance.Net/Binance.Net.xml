@@ -1011,7 +1011,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Transaction Id</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.PlaceMarginOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.PlaceMarginOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.SideEffectType},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Margin account new order
             </summary>
@@ -1025,12 +1025,13 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQuantity">Used for iceberg orders</param>
+            <param name="sideEffectType">Side effect type for this order</param>
             <param name="orderResponseType">The type of response to receive</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.PlaceMarginOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.PlaceMarginOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.SideEffectType},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Margin account new order
             </summary>
@@ -1044,6 +1045,7 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQuantity">Used for iceberg orders</param>
+            <param name="sideEffectType">Side effect type for this order</param>
             <param name="orderResponseType">The type of response to receive</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -1454,7 +1456,7 @@
         </member>
         <member name="T:Binance.Net.BinanceFuturesClient">
             <summary>
-            Client providing access to the Binance REST Api
+            Client providing access to the Binance Futures REST Api
             </summary>
         </member>
         <member name="M:Binance.Net.BinanceFuturesClient.#ctor">
@@ -1927,6 +1929,94 @@
             <param name="ct">Cancellation token</param>
             <returns>The account information</returns>
         </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.ChangeInitialLeverage(System.String,System.Int32,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Requests to change the initial leverage of the given symbol
+            </summary>
+            <param name="symbol">Symbol to change the initial leverage for</param>
+            <param name="leverage">The amount of initial leverage to change to</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Result of the initial leverage change request</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.ChangeInitialLeverageAsync(System.String,System.Int32,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Requests to change the initial leverage of the given symbol
+            </summary>
+            <param name="symbol">Symbol to change the initial leverage for</param>
+            <param name="leverage">The amount of initial leverage to change to</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Result of the initial leverage change request</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.ChangeMarginType(System.String,Binance.Net.Objects.FuturesMarginType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Change the margin type for an open position
+            </summary>
+            <param name="symbol">Symbol to change the position type for</param>
+            <param name="marginType">The type of margin to use</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Whether the request was successful</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.ChangeMarginTypeAsync(System.String,Binance.Net.Objects.FuturesMarginType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Change the margin type for an open position
+            </summary>
+            <param name="symbol">Symbol to change the position type for</param>
+            <param name="marginType">The type of margin to use</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Whether the request was successful</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.ModifyPositionMargin(System.String,System.Decimal,Binance.Net.Objects.FuturesMarginChangeDirectionType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Change the margin on an open position
+            </summary>
+            <param name="symbol">Symbol to adjust the position margin for</param>
+            <param name="amount">The amount of margin to be used</param>
+            <param name="type">Whether to reduce or add margin to the position</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The new position margin</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.ModifyPositionMarginAsync(System.String,System.Decimal,Binance.Net.Objects.FuturesMarginChangeDirectionType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Change the margin on an open position
+            </summary>
+            <param name="symbol">Symbol to adjust the position margin for</param>
+            <param name="amount">The amount of margin to be used</param>
+            <param name="type">Whether to reduce or add margin to the position</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The new position margin</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetMarginChangeHistory(System.String,System.Nullable{Binance.Net.Objects.FuturesMarginChangeDirectionType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Requests the margin change history for a specific symbol
+            </summary>
+            <param name="symbol">Symbol to get margin history for</param>
+            <param name="type">Filter the history by the direction of margin change</param>
+            <param name="startTime">Margin changes newer than this date will be retrieved</param>
+            <param name="endTime">Margin changes older than this date will be retrieved</param>
+            <param name="limit">The max number of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of all margin changes for the symbol</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetMarginChangeHistoryAsync(System.String,System.Nullable{Binance.Net.Objects.FuturesMarginChangeDirectionType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Requests the margin change history for a specific symbol
+            </summary>
+            <param name="symbol">Symbol to get margin history for</param>
+            <param name="type">Filter the history by the direction of margin change</param>
+            <param name="startTime">Margin changes newer than this date will be retrieved</param>
+            <param name="endTime">Margin changes older than this date will be retrieved</param>
+            <param name="limit">The max number of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of all margin changes for the symbol</returns>
+        </member>
         <member name="M:Binance.Net.BinanceFuturesClient.GetMyTrades(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user trades for provided symbol
@@ -1952,6 +2042,32 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of trades</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetIncomeHistory(System.String,System.Nullable{Binance.Net.Objects.IncomeType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Gets the income history for the futures account
+            </summary>
+            <param name="symbol">The symbol to get income history from</param>
+            <param name="incomeType">The income type filter to apply to the request</param>
+            <param name="startTime">Time to start getting income history from</param>
+            <param name="endTime">Time to stop getting income history from</param>
+            <param name="limit">Max number of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The income history for the futures account</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetIncomeHistoryAsync(System.String,System.Nullable{Binance.Net.Objects.IncomeType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Gets the income history for the futures account
+            </summary>
+            <param name="symbol">The symbol to get income history from</param>
+            <param name="incomeType">The income type filter to apply to the request</param>
+            <param name="startTime">Time to start getting income history from</param>
+            <param name="endTime">Time to stop getting income history from</param>
+            <param name="limit">Max number of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The income history for the futures account</returns>
         </member>
         <member name="M:Binance.Net.BinanceFuturesClient.GetOpenPositions(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
@@ -2020,17 +2136,17 @@
         </member>
         <member name="T:Binance.Net.BinanceFuturesSocketClient">
             <summary>
-            Client providing access to the Binance websocket Api
+            Client providing access to the Binance Futures Websocket Api
             </summary>
         </member>
         <member name="M:Binance.Net.BinanceFuturesSocketClient.#ctor">
             <summary>
-            Create a new instance of BinanceSocketClient with default options
+            Create a new instance of BinanceFuturesSocketClient with default options
             </summary>
         </member>
         <member name="M:Binance.Net.BinanceFuturesSocketClient.#ctor(Binance.Net.Objects.BinanceFuturesSocketClientOptions)">
             <summary>
-            Create a new instance of BinanceSocketClient using provided options
+            Create a new instance of BinanceFuturesSocketClient using provided options
             </summary>
             <param name="options">The options to use for this client</param>
         </member>
@@ -2079,6 +2195,52 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToMarkPriceUpdates(System.String,System.Action{Binance.Net.Objects.BinanceFuturesStreamMarkPrice})">
+            <summary>
+            Subscribes to the Mark price update stream for a single symbol
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToMarkPriceUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceFuturesStreamMarkPrice})">
+            <summary>
+            Subscribes to the Mark price update stream for a single symbol
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToMarkPriceUpdates(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceFuturesStreamMarkPrice})">
+            <summary>
+            Subscribes to the Mark price update stream for a list of symbols
+            </summary>
+            <param name="symbols">The symbols</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToMarkPriceUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceFuturesStreamMarkPrice})">
+            <summary>
+            Subscribes to the Mark price update stream for a list of symbols
+            </summary>
+            <param name="symbols">The symbols</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToAllMarkPriceUpdates(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceFuturesStreamMarkPrice}})">
+            <summary>
+            Subscribes to the Mark price update stream for a all symbols
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToAllMarkPriceUpdatesAsync(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceFuturesStreamMarkPrice}})">
+            <summary>
+            Subscribes to the Mark price update stream for a all symbols
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
         <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToKlineUpdates(System.String,Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.BinanceStreamKlineData})">
             <summary>
             Subscribes to the candlestick update stream for the provided symbol
@@ -2115,6 +2277,52 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToSymbolMiniTickerUpdates(System.String,System.Action{Binance.Net.Objects.BinanceFuturesStreamMiniTick})">
+            <summary>
+            Subscribes to mini ticker updates stream for a specific symbol
+            </summary>
+            <param name="symbol">The symbol to subscribe to</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToSymbolMiniTickerUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceFuturesStreamMiniTick})">
+            <summary>
+            Subscribes to mini ticker updates stream for a specific symbol
+            </summary>
+            <param name="symbol">The symbol to subscribe to</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToSymbolMiniTickerUpdates(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceFuturesStreamMiniTick})">
+            <summary>
+            Subscribes to mini ticker updates stream for a list of symbol
+            </summary>
+            <param name="symbols">The symbols to subscribe to</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToSymbolMiniTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceFuturesStreamMiniTick})">
+            <summary>
+            Subscribes to mini ticker updates stream for a list of symbol
+            </summary>
+            <param name="symbols">The symbols to subscribe to</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToAllMiniTickerUpdates(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceFuturesStreamMiniTick}})">
+            <summary>
+            Subscribes to mini ticker updates stream for all symbols
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToAllMiniTickerUpdatesAsync(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceFuturesStreamMiniTick}})">
+            <summary>
+            Subscribes to mini ticker updates stream for all symbols
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
         <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToOrderBookUpdates(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceOrderBook})">
             <summary>
             Subscribes to the order book updates for the provided symbol
@@ -2148,6 +2356,52 @@
             </summary>
             <param name="symbols">The symbols</param>
             <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToSymbolTickerUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamTick})">
+            <summary>
+            Subscribes to ticker updates stream for a specific symbol
+            </summary>
+            <param name="symbol">The symbol to subscribe to</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToSymbolTickerUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceStreamTick})">
+            <summary>
+            Subscribes to ticker updates stream for a specific symbol
+            </summary>
+            <param name="symbol">The symbol to subscribe to</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToSymbolTickerUpdates(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceStreamTick})">
+            <summary>
+            Subscribes to ticker updates stream for a specific symbol
+            </summary>
+            <param name="symbols">The symbol to subscribe to</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToSymbolTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceStreamTick})">
+            <summary>
+            Subscribes to ticker updates stream for a specific symbol
+            </summary>
+            <param name="symbols">The symbols to subscribe to</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToAllTickerUpdates(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamTick}})">
+            <summary>
+            Subscribes to ticker updates stream for all symbols
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToAllTickerUpdatesAsync(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamTick}})">
+            <summary>
+            Subscribes to ticker updates stream for all symbols
+            </summary>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -2197,19 +2451,49 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToSymbolTickerUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamTick})">
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToLiquidationUpdates(System.String,System.Action{Binance.Net.Objects.BinanceFuturesStreamLiquidation})">
             <summary>
-            Subscribes to ticker updates stream for a specific symbol
+            Subscribes to specific symbol forced liquidations stream
             </summary>
-            <param name="symbol">The symbol to subscribe to</param>
+            <param name="symbol">The symbol</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToSymbolTickerUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceStreamTick})">
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToLiquidationUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceFuturesStreamLiquidation})">
             <summary>
-            Subscribes to ticker updates stream for a specific symbol
+            Subscribes to specific symbol forced liquidations stream
             </summary>
-            <param name="symbol">The symbol to subscribe to</param>
+            <param name="symbol">The symbol</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToLiquidationUpdates(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceFuturesStreamLiquidation})">
+            <summary>
+            Subscribes to list of symbol forced liquidations stream
+            </summary>
+            <param name="symbols">The symbols</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToLiquidationUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceFuturesStreamLiquidation})">
+            <summary>
+            Subscribes to list of symbol forced liquidations stream
+            </summary>
+            <param name="symbols">The symbols</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToAllLiquidationUpdates(System.Action{Binance.Net.Objects.BinanceFuturesStreamLiquidation})">
+            <summary>
+            Subscribes to all forced liquidations stream
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToAllLiquidationUpdatesAsync(System.Action{Binance.Net.Objects.BinanceFuturesStreamLiquidation})">
+            <summary>
+            Subscribes to all forced liquidations stream
+            </summary>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -3666,7 +3950,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Transaction Id</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceMarginOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceMarginOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.SideEffectType},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Margin account new order
             </summary>
@@ -3680,12 +3964,13 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQuantity">Used for iceberg orders</param>
+            <param name="sideEffectType">Side effect type for this order</param>
             <param name="orderResponseType">The type of response to receive</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceMarginOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceMarginOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.SideEffectType},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Margin account new order
             </summary>
@@ -3699,6 +3984,7 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQuantity">Used for iceberg orders</param>
+            <param name="sideEffectType">Side effect type for this order</param>
             <param name="orderResponseType">The type of response to receive</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -4106,7 +4392,7 @@
         </member>
         <member name="T:Binance.Net.Interfaces.IBinanceFuturesClient">
             <summary>
-            Interface for the Binance client
+            Interface for the Binance Futures client
             </summary>
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.SetApiCredentials(System.String,System.String)">
@@ -4261,6 +4547,58 @@
             <param name="limit">Max number of results</param>
             <param name="ct">Cancellation token</param>
             <returns>The candlestick data for the provided symbol</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetMarkPrice(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get Mark Price and Funding Rate for the provided symbol
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Data over the last 24 hours</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetMarkPriceAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get Mark Price and Funding Rate for the provided symbol
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Data over the last 24 hours</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetMarkPricesList(System.Threading.CancellationToken)">
+            <summary>
+            Get Mark Price and Funding Rate for all symbols
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>List of data over the last 24 hours</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetMarkPricesListAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get Mark Price and Funding Rate for all symbols
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>List of data over the last 24 hours</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetFundingRates(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get funding rate history for the provided symbol
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="startTime">Start time to get funding rate history</param>
+            <param name="endTime">End time to get funding rate history</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The funding rate history for the provided symbol</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetFundingRatesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get funding rate history for the provided symbol
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="startTime">Start time to get funding rate history</param>
+            <param name="endTime">End time to get funding rate history</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The funding rate history for the provided symbol</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.Get24HPrice(System.String,System.Threading.CancellationToken)">
             <summary>
@@ -4494,6 +4832,94 @@
             <param name="ct">Cancellation token</param>
             <returns>The account information</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.ChangeInitialLeverage(System.String,System.Int32,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Requests to change the initial leverage of the given symbol
+            </summary>
+            <param name="symbol">Symbol to change the initial leverage for</param>
+            <param name="leverage">The amount of initial leverage to change to</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Result of the initial leverage change request</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.ChangeInitialLeverageAsync(System.String,System.Int32,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Requests to change the initial leverage of the given symbol
+            </summary>
+            <param name="symbol">Symbol to change the initial leverage for</param>
+            <param name="leverage">The amount of initial leverage to change to</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Result of the initial leverage change request</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.ChangeMarginType(System.String,Binance.Net.Objects.FuturesMarginType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Change the margin type for an open position
+            </summary>
+            <param name="symbol">Symbol to change the position type for</param>
+            <param name="marginType">The type of margin to use</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Whether the request was successful</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.ChangeMarginTypeAsync(System.String,Binance.Net.Objects.FuturesMarginType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Change the margin type for an open position
+            </summary>
+            <param name="symbol">Symbol to change the position type for</param>
+            <param name="marginType">The type of margin to use</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Whether the request was successful</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.ModifyPositionMargin(System.String,System.Decimal,Binance.Net.Objects.FuturesMarginChangeDirectionType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Change the margin on an open position
+            </summary>
+            <param name="symbol">Symbol to adjust the position margin for</param>
+            <param name="amount">The amount of margin to be used</param>
+            <param name="type">Whether to reduce or add margin to the position</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The new position margin</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.ModifyPositionMarginAsync(System.String,System.Decimal,Binance.Net.Objects.FuturesMarginChangeDirectionType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Change the margin on an open position
+            </summary>
+            <param name="symbol">Symbol to adjust the position margin for</param>
+            <param name="amount">The amount of margin to be used</param>
+            <param name="type">Whether to reduce or add margin to the position</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The new position margin</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetMarginChangeHistory(System.String,System.Nullable{Binance.Net.Objects.FuturesMarginChangeDirectionType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Requests the margin change history for a specific symbol
+            </summary>
+            <param name="symbol">Symbol to get margin history for</param>
+            <param name="type">Filter the history by the direction of margin change</param>
+            <param name="startTime">Margin changes newer than this date will be retrieved</param>
+            <param name="endTime">Margin changes older than this date will be retrieved</param>
+            <param name="limit">The max number of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of all margin changes for the symbol</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetMarginChangeHistoryAsync(System.String,System.Nullable{Binance.Net.Objects.FuturesMarginChangeDirectionType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Requests the margin change history for a specific symbol
+            </summary>
+            <param name="symbol">Symbol to get margin history for</param>
+            <param name="type">Filter the history by the direction of margin change</param>
+            <param name="startTime">Margin changes newer than this date will be retrieved</param>
+            <param name="endTime">Margin changes older than this date will be retrieved</param>
+            <param name="limit">The max number of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of all margin changes for the symbol</returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetMyTrades(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user trades for provided symbol
@@ -4535,6 +4961,32 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of Positions</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetIncomeHistory(System.String,System.Nullable{Binance.Net.Objects.IncomeType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Gets the income history for the futures account
+            </summary>
+            <param name="symbol">The symbol to get income history from</param>
+            <param name="incomeType">The income type filter to apply to the request</param>
+            <param name="startTime">Time to start getting income history from</param>
+            <param name="endTime">Time to stop getting income history from</param>
+            <param name="limit">Max number of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The income history for the futures account</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetIncomeHistoryAsync(System.String,System.Nullable{Binance.Net.Objects.IncomeType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Gets the income history for the futures account
+            </summary>
+            <param name="symbol">The symbol to get income history from</param>
+            <param name="incomeType">The income type filter to apply to the request</param>
+            <param name="startTime">Time to start getting income history from</param>
+            <param name="endTime">Time to stop getting income history from</param>
+            <param name="limit">Max number of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The income history for the futures account</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetOpenPositions(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
@@ -4600,7 +5052,7 @@
         </member>
         <member name="T:Binance.Net.Interfaces.IBinanceFuturesSocketClient">
             <summary>
-            Interface for the Binance socket client
+            Interface for the Binance Futures socket client
             </summary>
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SetApiCredentials(System.String,System.String)">
@@ -4609,6 +5061,84 @@
             </summary>
             <param name="apiKey">The api key</param>
             <param name="apiSecret">The api secret</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToAggregatedTradeUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamAggregatedTrade})">
+            <summary>
+            Subscribes to the aggregated trades update stream for the provided symbol
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToAggregatedTradeUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceStreamAggregatedTrade})">
+            <summary>
+            Subscribes to the aggregated trades update stream for the provided symbol
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToAggregatedTradeUpdates(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceStreamAggregatedTrade})">
+            <summary>
+            Subscribes to the aggregated trades update stream for the provided symbols
+            </summary>
+            <param name="symbols">The symbols</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToAggregatedTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceStreamAggregatedTrade})">
+            <summary>
+            Subscribes to the aggregated trades update stream for the provided symbols
+            </summary>
+            <param name="symbols">The symbols</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToMarkPriceUpdates(System.String,System.Action{Binance.Net.Objects.BinanceFuturesStreamMarkPrice})">
+            <summary>
+            Subscribes to the Mark price update stream for a single symbol
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToMarkPriceUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceFuturesStreamMarkPrice})">
+            <summary>
+            Subscribes to the Mark price update stream for a single symbol
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToMarkPriceUpdates(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceFuturesStreamMarkPrice})">
+            <summary>
+            Subscribes to the Mark price update stream for a list of symbols
+            </summary>
+            <param name="symbols">The symbols</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToMarkPriceUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceFuturesStreamMarkPrice})">
+            <summary>
+            Subscribes to the Mark price update stream for a list of symbols
+            </summary>
+            <param name="symbols">The symbols</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToAllMarkPriceUpdates(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceFuturesStreamMarkPrice}})">
+            <summary>
+            Subscribes to the Mark price update stream for a all symbols
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToAllMarkPriceUpdatesAsync(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceFuturesStreamMarkPrice}})">
+            <summary>
+            Subscribes to the Mark price update stream for a all symbols
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToKlineUpdates(System.String,Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.BinanceStreamKlineData})">
             <summary>
@@ -4646,39 +5176,95 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToOrderBookUpdates(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceOrderBook})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToSymbolMiniTickerUpdates(System.String,System.Action{Binance.Net.Objects.BinanceFuturesStreamMiniTick})">
             <summary>
-            Subscribes to the order book updates for the provided symbol
+            Subscribes to mini ticker updates stream for a specific symbol
             </summary>
-            <param name="symbol">The symbol</param>
-            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+            <param name="symbol">The symbol to subscribe to</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceOrderBook})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToSymbolMiniTickerUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceFuturesStreamMiniTick})">
             <summary>
-            Subscribes to the order book updates for the provided symbol
+            Subscribes to mini ticker updates stream for a specific symbol
             </summary>
-            <param name="symbol">The symbol</param>
-            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+            <param name="symbol">The symbol to subscribe to</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToOrderBookUpdates(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceOrderBook})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToSymbolMiniTickerUpdates(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceFuturesStreamMiniTick})">
             <summary>
-            Subscribes to the depth update stream for the provided symbols
+            Subscribes to mini ticker updates stream for a list of symbol
             </summary>
-            <param name="symbols">The symbols</param>
-            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+            <param name="symbols">The symbols to subscribe to</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceOrderBook})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToSymbolMiniTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceFuturesStreamMiniTick})">
             <summary>
-            Subscribes to the depth update stream for the provided symbols
+            Subscribes to mini ticker updates stream for a list of symbol
             </summary>
-            <param name="symbols">The symbols</param>
-            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+            <param name="symbols">The symbols to subscribe to</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToAllMiniTickerUpdates(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceFuturesStreamMiniTick}})">
+            <summary>
+            Subscribes to mini ticker updates stream for all symbols
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToAllMiniTickerUpdatesAsync(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceFuturesStreamMiniTick}})">
+            <summary>
+            Subscribes to mini ticker updates stream for all symbols
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToSymbolTickerUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamTick})">
+            <summary>
+            Subscribes to ticker updates stream for a specific symbol
+            </summary>
+            <param name="symbol">The symbol to subscribe to</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToSymbolTickerUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceStreamTick})">
+            <summary>
+            Subscribes to ticker updates stream for a specific symbol
+            </summary>
+            <param name="symbol">The symbol to subscribe to</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToSymbolTickerUpdates(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceStreamTick})">
+            <summary>
+            Subscribes to ticker updates stream for a specific symbol
+            </summary>
+            <param name="symbol">The symbol to subscribe to</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToSymbolTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceStreamTick})">
+            <summary>
+            Subscribes to ticker updates stream for a specific symbol
+            </summary>
+            <param name="symbol">The symbol to subscribe to</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToAllTickerUpdates(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamTick}})">
+            <summary>
+            Subscribes to ticker updates stream for all symbols
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToAllTickerUpdatesAsync(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamTick}})">
+            <summary>
+            Subscribes to ticker updates stream for all symbols
+            </summary>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -4728,51 +5314,49 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToAggregatedTradeUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamAggregatedTrade})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToLiquidationUpdates(System.String,System.Action{Binance.Net.Objects.BinanceFuturesStreamLiquidation})">
             <summary>
-            Subscribes to the aggregated trades update stream for the provided symbol
+            Subscribes to specific symbol forced liquidations stream
             </summary>
             <param name="symbol">The symbol</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToAggregatedTradeUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceStreamAggregatedTrade})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToLiquidationUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceFuturesStreamLiquidation})">
             <summary>
-            Subscribes to the aggregated trades update stream for the provided symbol
+            Subscribes to specific symbol forced liquidations stream
             </summary>
             <param name="symbol">The symbol</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToAggregatedTradeUpdates(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceStreamAggregatedTrade})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToLiquidationUpdates(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceFuturesStreamLiquidation})">
             <summary>
-            Subscribes to the aggregated trades update stream for the provided symbols
+            Subscribes to list of symbol forced liquidations stream
             </summary>
             <param name="symbols">The symbols</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToAggregatedTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceStreamAggregatedTrade})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToLiquidationUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceFuturesStreamLiquidation})">
             <summary>
-            Subscribes to the aggregated trades update stream for the provided symbols
+            Subscribes to list of symbol forced liquidations stream
             </summary>
             <param name="symbols">The symbols</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToSymbolTickerUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamTick})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToAllLiquidationUpdates(System.Action{Binance.Net.Objects.BinanceFuturesStreamLiquidation})">
             <summary>
-            Subscribes to ticker updates stream for a specific symbol
+            Subscribes to all forced liquidations stream
             </summary>
-            <param name="symbol">The symbol to subscribe to</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToSymbolTickerUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceStreamTick})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToAllLiquidationUpdatesAsync(System.Action{Binance.Net.Objects.BinanceFuturesStreamLiquidation})">
             <summary>
-            Subscribes to ticker updates stream for a specific symbol
+            Subscribes to all forced liquidations stream
             </summary>
-            <param name="symbol">The symbol to subscribe to</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -4812,6 +5396,42 @@
             </summary>
             <param name="symbols">The symbols to subscribe on</param>
             <param name="levels">The amount of entries to be returned in the update of each symbol</param>
+            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToOrderBookUpdates(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceOrderBook})">
+            <summary>
+            Subscribes to the order book updates for the provided symbol
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceOrderBook})">
+            <summary>
+            Subscribes to the order book updates for the provided symbol
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToOrderBookUpdates(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceOrderBook})">
+            <summary>
+            Subscribes to the depth update stream for the provided symbols
+            </summary>
+            <param name="symbols">The symbols</param>
+            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceOrderBook})">
+            <summary>
+            Subscribes to the depth update stream for the provided symbols
+            </summary>
+            <param name="symbols">The symbols</param>
             <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -5987,6 +6607,21 @@
             The total balance available for withdraw for this asset
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceFuturesChangeMarginTypeResult">
+            <summary>
+            Result from a change margin type request
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesChangeMarginTypeResult.Code">
+            <summary>
+            Response code
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesChangeMarginTypeResult.Message">
+            <summary>
+            Response message
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.BinanceFuturesClientOptions">
             <summary>
             Options for the binance client
@@ -6027,6 +6662,12 @@
             ctor
             </summary>
         </member>
+        <member name="M:Binance.Net.Objects.BinanceFuturesClientOptions.#ctor(System.String)">
+            <summary>
+            ctor
+            </summary>
+            <param name="baseAddress">Сustom url to connect via mirror website</param>
+        </member>
         <member name="M:Binance.Net.Objects.BinanceFuturesClientOptions.Copy">
             <summary>
             Return a copy of these options
@@ -6054,6 +6695,12 @@
             <summary>
             ctor
             </summary>
+        </member>
+        <member name="M:Binance.Net.Objects.BinanceFuturesSocketClientOptions.#ctor(System.String)">
+            <summary>
+            ctor
+            </summary>
+            <param name="baseAddress">Сustom url to connect via mirror website</param>
         </member>
         <member name="M:Binance.Net.Objects.BinanceFuturesSocketClientOptions.Copy">
             <summary>
@@ -6091,39 +6738,114 @@
             Filters
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.BinanceFuturesFundingRate">
+        <member name="T:Binance.Net.Objects.BinanceFuturesFundingRateHistory">
             <summary>
-            
+            Funding rate information for Futures trading
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesFundingRate.Symbol">
+        <member name="P:Binance.Net.Objects.BinanceFuturesFundingRateHistory.Symbol">
             <summary>
             The symbol the information is about
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesFundingRate.BidPrice">
+        <member name="P:Binance.Net.Objects.BinanceFuturesFundingRateHistory.FundingRate">
             <summary>
-            The highest bid price for the symbol
+            The finding rate for the given symbol and time
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesFundingRate.BidQuantity">
+        <member name="P:Binance.Net.Objects.BinanceFuturesFundingRateHistory.FundingTime">
             <summary>
-            The quantity of the highest bid price currently in the order book
+            The time the funding rate is applied
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesFundingRate.AskPrice">
+        <member name="T:Binance.Net.Objects.BinanceFuturesIncomeHistory">
             <summary>
-            The lowest ask price for the symbol
+            Futures income history result
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesFundingRate.AskQuantity">
+        <member name="P:Binance.Net.Objects.BinanceFuturesIncomeHistory.Symbol">
             <summary>
-            The quantity of the lowest ask price currently in the order book
+            Symbol for the resulting income history, may be null if not associated with a trading pair
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesIncomeHistory.IncomeType">
+            <summary>
+            Type of income
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesIncomeHistory.Income">
+            <summary>
+            Amount of income
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesIncomeHistory.Asset">
+            <summary>
+            Base asset for the income
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesIncomeHistory.Info">
+            <summary>
+            Additional info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesIncomeHistory.Time">
+            <summary>
+            Time of the income
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceFuturesInitialLeverageChangeResult">
+            <summary>
+            Response to the change in initial leverage request
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesInitialLeverageChangeResult.Leverage">
+            <summary>
+            New leverage multiplier
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesInitialLeverageChangeResult.MaxNotionalValue">
+            <summary>
+            Maximum value that can be held
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesInitialLeverageChangeResult.Symbol">
+            <summary>
+            Symbol the request is for
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceFuturesMarginChangeHistoryResult">
+            <summary>
+            Result of the margin change history request
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesMarginChangeHistoryResult.Amount">
+            <summary>
+            Request amount of margin used
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesMarginChangeHistoryResult.Asset">
+            <summary>
+            Base asset used for margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesMarginChangeHistoryResult.Symbol">
+            <summary>
+            Symbol margin is placed on
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesMarginChangeHistoryResult.Time">
+            <summary>
+            Time of the margin change request
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesMarginChangeHistoryResult.Type">
+            <summary>
+            Direction of the margin change request
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinanceFuturesMarkPrice">
             <summary>
-            
+            Mark Price and Funding Rate
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BinanceFuturesMarkPrice.Symbol">
@@ -6131,24 +6853,19 @@
             The symbol the information is about
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesMarkPrice.BidPrice">
+        <member name="P:Binance.Net.Objects.BinanceFuturesMarkPrice.MarkPrice">
             <summary>
-            The highest bid price for the symbol
+            The current market price
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesMarkPrice.BidQuantity">
+        <member name="P:Binance.Net.Objects.BinanceFuturesMarkPrice.LastFundingRate">
             <summary>
-            The quantity of the highest bid price currently in the order book
+            The last funding rate
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesMarkPrice.AskPrice">
+        <member name="P:Binance.Net.Objects.BinanceFuturesMarkPrice.NextFundingTime">
             <summary>
-            The lowest ask price for the symbol
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesMarkPrice.AskQuantity">
-            <summary>
-            The quantity of the lowest ask price currently in the order book
+            The time the funding rate is applied
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinanceFuturesPosition">
@@ -6161,14 +6878,24 @@
             The entry price of the position
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesPosition.MarginType">
+            <summary>
+            Type of margin used for the position
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesPosition.IsAutoAddMargin">
+            <summary>
+            Does the position add margin automatically?
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesPosition.IsolatedMargin">
+            <summary>
+            Amount of isolated margin
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceFuturesPosition.Leverage">
             <summary>
             The current initial leverage of the position
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesPosition.MaxNotionalValue">
-            <summary>
-            The notional value limit of current initial leverage
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BinanceFuturesPosition.LiquidationPrice">
@@ -6181,6 +6908,11 @@
             The Market price of the position
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesPosition.MaxNotionalValue">
+            <summary>
+            The notional value limit of current initial leverage
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceFuturesPosition.Quantity">
             <summary>
             The quantity of the position
@@ -6191,9 +6923,34 @@
             The symbol the position is for
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesPosition.unRealizedProfit">
+        <member name="P:Binance.Net.Objects.BinanceFuturesPosition.UnrealizedPnL">
             <summary>
             The price of the unrealized PnL
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceFuturesPositionMarginResult">
+            <summary>
+            Result of the requested margin amount change
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesPositionMarginResult.Amount">
+            <summary>
+            New margin amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesPositionMarginResult.Code">
+            <summary>
+            Request response code
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesPositionMarginResult.MaxNotionalValue">
+            <summary>
+            Maximum margin value
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesPositionMarginResult.Type">
+            <summary>
+            Direction of the requested margin change
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinanceFuturesStreamAccountInfo">
@@ -6249,6 +7006,131 @@
         <member name="P:Binance.Net.Objects.BinanceFuturesStreamPosition.RealizedPnL">
             <summary>
             The accumulated realized PnL
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceFuturesStreamLiquidation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamLiquidation.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamLiquidation.Side">
+            <summary>
+            Liquidation Sided
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamLiquidation.OrderType">
+            <summary>
+            Liquidation order type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamLiquidation.TimeInForce">
+            <summary>
+            Liquidation Time in Force
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamLiquidation.OriginalQuantity">
+            <summary>
+            Liquidation Original Quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamLiquidation.Price">
+            <summary>
+            Liquidation order price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamLiquidation.AveragePrice">
+            <summary>
+            Liquidation Average Price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamLiquidation.OrderStatus">
+            <summary>
+            Liquidation Order Status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamLiquidation.LastFilledQty">
+            <summary>
+            Liquidation Last Filled Quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamLiquidation.CumulativeFilledQty">
+            <summary>
+            Liquidation Accumulated fill quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamLiquidation.Time">
+            <summary>
+            Liquidation Trade Time
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceFuturesStreamMarkPrice">
+            <summary>
+            TODO
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamMarkPrice.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamMarkPrice.MarkPrice">
+            <summary>
+            Mark Price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamMarkPrice.FundingRate">
+            <summary>
+            Next Funding Rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamMarkPrice.FundingTime">
+            <summary>
+            Next Funding Time
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceFuturesStreamMiniTick">
+            <summary>
+            TODO
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamMiniTick.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamMiniTick.Close">
+            <summary>
+            Close Price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamMiniTick.Open">
+            <summary>
+            Open Price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamMiniTick.High">
+            <summary>
+            High
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamMiniTick.Low">
+            <summary>
+            Low
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamMiniTick.BaseVolume">
+            <summary>
+            Total traded base asset volume
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamMiniTick.QuoteVolume">
+            <summary>
+            Total traded quote asset volume
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinanceFuturesStreamOrderUpdate">
@@ -6368,7 +7250,7 @@
         </member>
         <member name="P:Binance.Net.Objects.BinanceFuturesSymbol.MaintMarginPercent">
             <summary>
-            The open margin percent
+            The maintenance margin percent
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BinanceFuturesSymbol.PricePrecision">
@@ -7054,6 +7936,16 @@
         <member name="P:Binance.Net.Objects.BinancePlacedOrder.StopPrice">
             <summary>
             Stop price for the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinancePlacedOrder.MarginBuyBorrowAmount">
+            <summary>
+            Only present if a margin trade happened
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinancePlacedOrder.MarginBuyBorrowAsset">
+            <summary>
+            Only present if a margin trade happened
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BinancePlacedOrder.OrderListId">
@@ -9166,6 +10058,91 @@
         <member name="F:Binance.Net.Objects.TransferDirection.RollOut">
             <summary>
             Roll-out
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.IncomeType">
+            <summary>
+            Type of futures income
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.IncomeType.Transfer">
+            <summary>
+            Transfer into account
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.IncomeType.WelcomeBonus">
+            <summary>
+            Futures welcome bonus
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.IncomeType.RealizedPnL">
+            <summary>
+            Futures realized profit
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.IncomeType.FundingFee">
+            <summary>
+            Futures funding fee
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.IncomeType.Commission">
+            <summary>
+            Futures trading commission
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.IncomeType.InsuranceClear">
+            <summary>
+            Insurance clear
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.FuturesMarginChangeDirectionType">
+            <summary>
+            The direction to change futures margin
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.FuturesMarginChangeDirectionType.Add">
+            <summary>
+            Add margin
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.FuturesMarginChangeDirectionType.Reduce">
+            <summary>
+            Reduce Margin
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.FuturesMarginType">
+            <summary>
+            Type of Margin
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.FuturesMarginType.Isolated">
+            <summary>
+            Isolated margin
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.FuturesMarginType.Cross">
+            <summary>
+            Crossed margin
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.SideEffectType">
+            <summary>
+            Side effect for a margin order
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SideEffectType.NoSideEffect">
+            <summary>
+            Normal trade
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SideEffectType.MarginBuy">
+            <summary>
+            Margin trade order
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SideEffectType.AutoRepay">
+            <summary>
+            Make auto repayment after order is filled
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Sockets.BinanceStreamBalanceUpdate">
