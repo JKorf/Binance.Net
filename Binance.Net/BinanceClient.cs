@@ -1348,8 +1348,10 @@ namespace Binance.Net
         /// <returns>Dust transfer result</returns>
         public async Task<WebCallResult<BinanceDustTransferResult>> DustTransferAsync(IEnumerable<string> assets, int? receiveWindow = null, CancellationToken ct = default)
         {
-            assets.ValidateNotNull(nameof(assets));
-            foreach (var asset in assets)
+            var assetsArray = assets.ToArray();
+
+            assetsArray.ValidateNotNull(nameof(assets));
+            foreach (var asset in assetsArray)
                 asset.ValidateNotNull(nameof(asset));
 
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -1358,7 +1360,7 @@ namespace Binance.Net
 
             var parameters = new Dictionary<string, object>
             {
-                { "asset", assets },
+                { "asset", assetsArray },
                 { "timestamp", GetTimestamp() }
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
