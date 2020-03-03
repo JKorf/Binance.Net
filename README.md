@@ -148,6 +148,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 5.1.0-alpha2 - 03 Mar 2020
+    * Updated CryptoExchange version
+
 * Version 5.1.0-alpha - 03 Mar 2020
     * First version Futures Api implementation
 
