@@ -86,6 +86,15 @@ namespace Binance.Net.Objects
         [JsonOptionalProperty]
         public decimal? StopPrice { get; set; }
         /// <summary>
+        /// Only present if a margin trade happened
+        /// </summary>
+        public decimal? MarginBuyBorrowAmount { get; set; }
+        /// <summary>
+        /// Only present if a margin trade happened
+        /// </summary>
+        public string? MarginBuyBorrowAsset { get; set; }
+
+        /// <summary>
         /// Id of the order list this order belongs to
         /// </summary>
         public long? OrderListId { get; set; }

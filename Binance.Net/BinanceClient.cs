@@ -744,6 +744,7 @@ namespace Binance.Net
                 timeInForce,
                 stopPrice,
                 icebergQty,
+                null,
                 orderResponseType,
                 receiveWindow,
                 ct).ConfigureAwait(false);
@@ -822,6 +823,7 @@ namespace Binance.Net
                 timeInForce,
                 stopPrice,
                 icebergQty,
+                null,
                 orderResponseType,
                 receiveWindow,
                 ct).ConfigureAwait(false);
@@ -1653,6 +1655,13 @@ namespace Binance.Net
             if (!timestampResult)
                 return new WebCallResult<BinanceOrderList>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
+            var rulesCheck = await CheckTradeRules(symbol, quantity, price, null, ct).ConfigureAwait(false);
+            if (!rulesCheck.Passed)
+            {
+                log.Write(LogVerbosity.Warning, rulesCheck.ErrorMessage!);
+                return new WebCallResult<BinanceOrderList>(null, null, null, new ArgumentError(rulesCheck.ErrorMessage!));
+            }
+
             var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
@@ -1992,6 +2001,7 @@ namespace Binance.Net
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
         /// <param name="icebergQuantity">Used for iceberg orders</param>
+        /// <param name="sideEffectType">Side effect type for this order</param>
         /// <param name="orderResponseType">The type of response to receive</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -2006,9 +2016,10 @@ namespace Binance.Net
             TimeInForce? timeInForce = null,
             decimal? stopPrice = null,
             decimal? icebergQuantity = null,
+            SideEffectType? sideEffectType = null,
             OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
-            CancellationToken ct = default) => PlaceMarginOrderAsync(symbol, side, type, quantity, quoteOrderQuantity, newClientOrderId, price, timeInForce, stopPrice, icebergQuantity, orderResponseType, receiveWindow, ct).Result;
+            CancellationToken ct = default) => PlaceMarginOrderAsync(symbol, side, type, quantity, quoteOrderQuantity, newClientOrderId, price, timeInForce, stopPrice, icebergQuantity, sideEffectType, orderResponseType, receiveWindow, ct).Result;
 
         /// <summary>
         /// Margin account new order
@@ -2023,6 +2034,7 @@ namespace Binance.Net
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
         /// <param name="icebergQuantity">Used for iceberg orders</param>
+        /// <param name="sideEffectType">Side effect type for this order</param>
         /// <param name="orderResponseType">The type of response to receive</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -2037,6 +2049,7 @@ namespace Binance.Net
             TimeInForce? timeInForce = null,
             decimal? stopPrice = null,
             decimal? icebergQuantity = null,
+            SideEffectType? sideEffectType = null,
             OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
@@ -2052,6 +2065,7 @@ namespace Binance.Net
                 timeInForce,
                 stopPrice,
                 icebergQuantity,
+                sideEffectType,
                 orderResponseType,
                 receiveWindow,
                 ct).ConfigureAwait(false);
@@ -2814,6 +2828,7 @@ namespace Binance.Net
             TimeInForce? timeInForce = null,
             decimal? stopPrice = null,
             decimal? icebergQty = null,
+            SideEffectType? sideEffectType = null,
             OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
@@ -2854,6 +2869,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)));
             parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("sideEffectType", sideEffectType == null ? null : JsonConvert.SerializeObject(sideEffectType, new SideEffectTypeConverter(false)));
             parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
@@ -2901,7 +2917,7 @@ namespace Binance.Net
             return new WebCallResult<DateTime>(null, null, default, null);
         }
 
-        private async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? price, OrderType type, CancellationToken ct)
+        private async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? price, OrderType? type, CancellationToken ct)
         {
             var outputQuantity = quantity;
             var outputPrice = price;
@@ -2919,9 +2935,13 @@ namespace Binance.Net
             if (symbolData == null)
                 return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Symbol {symbol} not found");
 
-            if (!symbolData.OrderTypes.Contains(type))
-                return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: {type} order type not allowed for {symbol}");
-
+            if (type != null)
+            {
+                if (!symbolData.OrderTypes.Contains(type.Value))
+                    return BinanceTradeRuleResult.CreateFailed(
+                        $"Trade rules check failed: {type} order type not allowed for {symbol}");
+            }
+            
             if (symbolData.LotSizeFilter != null || (symbolData.MarketLotSizeFilter != null && type == OrderType.Market))
             {
                 var minQty = symbolData.LotSizeFilter?.MinQuantity;
