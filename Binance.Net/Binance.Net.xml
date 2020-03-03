@@ -1011,7 +1011,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Transaction Id</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.PlaceMarginOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.PlaceMarginOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.SideEffectType},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Margin account new order
             </summary>
@@ -1025,12 +1025,13 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQuantity">Used for iceberg orders</param>
+            <param name="sideEffectType">Side effect type for this order</param>
             <param name="orderResponseType">The type of response to receive</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.PlaceMarginOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.PlaceMarginOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.SideEffectType},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Margin account new order
             </summary>
@@ -1044,6 +1045,7 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQuantity">Used for iceberg orders</param>
+            <param name="sideEffectType">Side effect type for this order</param>
             <param name="orderResponseType">The type of response to receive</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -2821,7 +2823,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Transaction Id</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceMarginOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceMarginOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.SideEffectType},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Margin account new order
             </summary>
@@ -2835,12 +2837,13 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQuantity">Used for iceberg orders</param>
+            <param name="sideEffectType">Side effect type for this order</param>
             <param name="orderResponseType">The type of response to receive</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceMarginOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceMarginOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.SideEffectType},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Margin account new order
             </summary>
@@ -2854,6 +2857,7 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQuantity">Used for iceberg orders</param>
+            <param name="sideEffectType">Side effect type for this order</param>
             <param name="orderResponseType">The type of response to receive</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -4984,6 +4988,16 @@
             Stop price for the order
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.BinancePlacedOrder.MarginBuyBorrowAmount">
+            <summary>
+            Only present if a margin trade happened
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinancePlacedOrder.MarginBuyBorrowAsset">
+            <summary>
+            Only present if a margin trade happened
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinancePlacedOrder.OrderListId">
             <summary>
             Id of the order list this order belongs to
@@ -7094,6 +7108,26 @@
         <member name="F:Binance.Net.Objects.TransferDirection.RollOut">
             <summary>
             Roll-out
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.SideEffectType">
+            <summary>
+            Side effect for a margin order
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SideEffectType.NoSideEffect">
+            <summary>
+            Normal trade
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SideEffectType.MarginBuy">
+            <summary>
+            Margin trade order
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.SideEffectType.AutoRepay">
+            <summary>
+            Make auto repayment after order is filled
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Sockets.BinanceStreamBalanceUpdate">
