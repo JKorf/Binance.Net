@@ -57,47 +57,53 @@ namespace Binance.Net.Interfaces
         /// Subscribes to the Mark price update stream for a single symbol
         /// </summary>
         /// <param name="symbol">The symbol</param>
+        /// <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        CallResult<UpdateSubscription> SubscribeToMarkPriceUpdates(string symbol, Action<BinanceFuturesStreamMarkPrice> onMessage);
+        CallResult<UpdateSubscription> SubscribeToMarkPriceUpdates(string symbol, int? updateInterval, Action<BinanceFuturesStreamMarkPrice> onMessage);
 
         /// <summary>
         /// Subscribes to the Mark price update stream for a single symbol
         /// </summary>
         /// <param name="symbol">The symbol</param>
+        /// <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToMarkPriceUpdatesAsync(string symbol, Action<BinanceFuturesStreamMarkPrice> onMessage);
+        Task<CallResult<UpdateSubscription>> SubscribeToMarkPriceUpdatesAsync(string symbol, int? updateInterval, Action<BinanceFuturesStreamMarkPrice> onMessage);
 
         /// <summary>
         /// Subscribes to the Mark price update stream for a list of symbols
         /// </summary>
         /// <param name="symbols">The symbols</param>
+        /// <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        CallResult<UpdateSubscription> SubscribeToMarkPriceUpdates(IEnumerable<string> symbols, Action<BinanceFuturesStreamMarkPrice> onMessage);
+        CallResult<UpdateSubscription> SubscribeToMarkPriceUpdates(IEnumerable<string> symbols, int? updateInterval, Action<BinanceFuturesStreamMarkPrice> onMessage);
 
         /// <summary>
         /// Subscribes to the Mark price update stream for a list of symbols
         /// </summary>
         /// <param name="symbols">The symbols</param>
+        /// <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToMarkPriceUpdatesAsync(IEnumerable<string> symbols, Action<BinanceFuturesStreamMarkPrice> onMessage);
+        Task<CallResult<UpdateSubscription>> SubscribeToMarkPriceUpdatesAsync(IEnumerable<string> symbols, int? updateInterval, Action<BinanceFuturesStreamMarkPrice> onMessage);
 
         /// <summary>
         /// Subscribes to the Mark price update stream for a all symbols
         /// </summary>
+        /// <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        CallResult<UpdateSubscription> SubscribeToAllMarkPriceUpdates(Action<IEnumerable<BinanceFuturesStreamMarkPrice>> onMessage);
+        CallResult<UpdateSubscription> SubscribeToAllMarkPriceUpdates(int? updateInterval, Action<IEnumerable<BinanceFuturesStreamMarkPrice>> onMessage);
 
         /// <summary>
         /// Subscribes to the Mark price update stream for a all symbols
         /// </summary>
+        /// <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToAllMarkPriceUpdatesAsync(Action<IEnumerable<BinanceFuturesStreamMarkPrice>> onMessage);
+        Task<CallResult<UpdateSubscription>> SubscribeToAllMarkPriceUpdatesAsync(int? updateInterval, Action<IEnumerable<BinanceFuturesStreamMarkPrice>> onMessage);
 
         /// <summary>
         /// Subscribes to the candlestick update stream for the provided symbol
@@ -325,7 +331,7 @@ namespace Binance.Net.Interfaces
         /// </summary>
         /// <param name="symbol">The symbol to subscribe on</param>
         /// <param name="levels">The amount of entries to be returned in the update</param>
-        /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+        /// <param name="updateInterval">Update interval in milliseconds, either 100 or 500. Defaults to 250</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         CallResult<UpdateSubscription> SubscribeToPartialOrderBookUpdates(string symbol, int levels, int? updateInterval, Action<BinanceOrderBook> onMessage);
@@ -335,7 +341,7 @@ namespace Binance.Net.Interfaces
         /// </summary>
         /// <param name="symbol">The symbol to subscribe on</param>
         /// <param name="levels">The amount of entries to be returned in the update</param>
-        /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+        /// <param name="updateInterval">Update interval in milliseconds, either 100 or 500. Defaults to 250</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToPartialOrderBookUpdatesAsync(string symbol, int levels, int? updateInterval, Action<BinanceOrderBook> onMessage);
@@ -345,7 +351,7 @@ namespace Binance.Net.Interfaces
         /// </summary>
         /// <param name="symbols">The symbols to subscribe on</param>
         /// <param name="levels">The amount of entries to be returned in the update of each symbol</param>
-        /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+        /// <param name="updateInterval">Update interval in milliseconds, either 100 or 500. Defaults to 250</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         CallResult<UpdateSubscription> SubscribeToPartialOrderBookUpdates(IEnumerable<string> symbols, int levels, int? updateInterval, Action<BinanceOrderBook> onMessage);
@@ -355,7 +361,7 @@ namespace Binance.Net.Interfaces
         /// </summary>
         /// <param name="symbols">The symbols to subscribe on</param>
         /// <param name="levels">The amount of entries to be returned in the update of each symbol</param>
-        /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+        /// <param name="updateInterval">Update interval in milliseconds, either 100 or 500. Defaults to 250</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToPartialOrderBookUpdatesAsync(IEnumerable<string> symbols, int levels, int? updateInterval, Action<BinanceOrderBook> onMessage);
@@ -364,7 +370,7 @@ namespace Binance.Net.Interfaces
         /// Subscribes to the order book updates for the provided symbol
         /// </summary>
         /// <param name="symbol">The symbol</param>
-        /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+        /// <param name="updateInterval">Update interval in milliseconds, either 0 or 100 or 500. Defaults to 250</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         CallResult<UpdateSubscription> SubscribeToOrderBookUpdates(string symbol, int? updateInterval, Action<BinanceOrderBook> onMessage);
@@ -373,7 +379,7 @@ namespace Binance.Net.Interfaces
         /// Subscribes to the order book updates for the provided symbol
         /// </summary>
         /// <param name="symbol">The symbol</param>
-        /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+        /// <param name="updateInterval">Update interval in milliseconds, either 0 or 100 or 500. Defaults to 250</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string symbol, int? updateInterval, Action<BinanceOrderBook> onMessage);
@@ -382,7 +388,7 @@ namespace Binance.Net.Interfaces
         /// Subscribes to the depth update stream for the provided symbols
         /// </summary>
         /// <param name="symbols">The symbols</param>
-        /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+        /// <param name="updateInterval">Update interval in milliseconds, either 0 or 100 or 500. Defaults to 250</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         CallResult<UpdateSubscription> SubscribeToOrderBookUpdates(IEnumerable<string> symbols, int? updateInterval, Action<BinanceOrderBook> onMessage);
@@ -391,49 +397,42 @@ namespace Binance.Net.Interfaces
         /// Subscribes to the depth update stream for the provided symbols
         /// </summary>
         /// <param name="symbols">The symbols</param>
-        /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+        /// <param name="updateInterval">Update interval in milliseconds, either 0 or 100 or 500. Defaults to 250</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerable<string> symbols, int? updateInterval, Action<BinanceOrderBook> onMessage);
-        //TODO BinanceStreamPositionUpdate
-        /// <summary>
-        /// Subscribes to the account update stream. Prior to using this, the <see cref="BinanceClient.StartUserStream"/> method should be called.
-        /// </summary>
-        /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-        /// <param name="onAccountInfoMessage">The event handler for whenever an account info update is received</param>
-        /// <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
-        /// <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco status update is received</param>
-        /// <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
-        /// <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
-        /// <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
-        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        CallResult<UpdateSubscription> SubscribeToUserDataUpdates(
-            string listenKey, 
-            Action<BinanceFuturesStreamAccountInfo> onAccountInfoMessage, 
-            Action<BinanceFuturesStreamOrderUpdate> onOrderUpdateMessage,
-            Action<BinanceStreamOrderList> onOcoOrderUpdateMessage,
-            Action<IEnumerable<BinanceStreamBalance>> onAccountPositionMessage,
-            Action<BinanceStreamBalanceUpdate>? onAccountBalanceUpdate,
-            Action<BinanceStreamEvent> onListenKeyExpired);
 
         /// <summary>
         /// Subscribes to the account update stream. Prior to using this, the <see cref="BinanceClient.StartUserStream"/> method should be called.
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-        /// <param name="onAccountInfoMessage">The event handler for whenever an account info update is received</param>
-        /// <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
-        /// <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
-        /// <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
         /// <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
+        /// <param name="onPositionUpdateMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
+        /// <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
+        /// <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        CallResult<UpdateSubscription> SubscribeToUserDataUpdates(
+            string listenKey,
+            Action<BinanceFuturesStreamBalance>? onAccountBalanceUpdate,
+            Action<BinanceFuturesStreamPosition>? onPositionUpdateMessage,
+            Action<BinanceFuturesStreamOrderUpdate>? onOrderUpdateMessage,
+            Action<BinanceStreamEvent> onListenKeyExpired);
+
+
+        /// <summary>
+        /// Subscribes to the account update stream. Prior to using this, the <see cref="BinanceClient.StartUserStream"/> method should be called.
+        /// </summary>
+        /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
+        /// <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
+        /// <param name="onPositionUpdateMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
+        /// <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
         /// <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
-            string listenKey, 
-            Action<BinanceFuturesStreamAccountInfo> onAccountInfoMessage, 
-            Action<BinanceFuturesStreamOrderUpdate> onOrderUpdateMessage,
-            Action<BinanceStreamOrderList> onOcoOrderUpdateMessage,
-            Action<IEnumerable<BinanceStreamBalance>> onAccountPositionMessage,
-            Action<BinanceStreamBalanceUpdate>? onAccountBalanceUpdate,
+            string listenKey,
+            Action<BinanceFuturesStreamBalance>? onAccountBalanceUpdate,
+            Action<BinanceFuturesStreamPosition>? onPositionUpdateMessage,
+            Action<BinanceFuturesStreamOrderUpdate>? onOrderUpdateMessage,
             Action<BinanceStreamEvent> onListenKeyExpired);
     }
 }
