@@ -25,7 +25,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// Next Funding Rate
         /// </summary>
-        [JsonProperty("p")]
+        [JsonProperty("r")]
         public decimal FundingRate { get; set; }
         
         /// <summary>

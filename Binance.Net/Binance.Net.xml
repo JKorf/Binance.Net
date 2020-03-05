@@ -2195,49 +2195,55 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToMarkPriceUpdates(System.String,System.Action{Binance.Net.Objects.BinanceFuturesStreamMarkPrice})">
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToMarkPriceUpdates(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceFuturesStreamMarkPrice})">
             <summary>
             Subscribes to the Mark price update stream for a single symbol
             </summary>
             <param name="symbol">The symbol</param>
+            <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToMarkPriceUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceFuturesStreamMarkPrice})">
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToMarkPriceUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceFuturesStreamMarkPrice})">
             <summary>
             Subscribes to the Mark price update stream for a single symbol
             </summary>
             <param name="symbol">The symbol</param>
+            <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToMarkPriceUpdates(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceFuturesStreamMarkPrice})">
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToMarkPriceUpdates(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceFuturesStreamMarkPrice})">
             <summary>
             Subscribes to the Mark price update stream for a list of symbols
             </summary>
             <param name="symbols">The symbols</param>
+            <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToMarkPriceUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceFuturesStreamMarkPrice})">
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToMarkPriceUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceFuturesStreamMarkPrice})">
             <summary>
             Subscribes to the Mark price update stream for a list of symbols
             </summary>
             <param name="symbols">The symbols</param>
+            <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToAllMarkPriceUpdates(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceFuturesStreamMarkPrice}})">
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToAllMarkPriceUpdates(System.Nullable{System.Int32},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceFuturesStreamMarkPrice}})">
             <summary>
             Subscribes to the Mark price update stream for a all symbols
             </summary>
+            <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToAllMarkPriceUpdatesAsync(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceFuturesStreamMarkPrice}})">
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToAllMarkPriceUpdatesAsync(System.Nullable{System.Int32},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceFuturesStreamMarkPrice}})">
             <summary>
             Subscribes to the Mark price update stream for a all symbols
             </summary>
+            /// <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -2323,42 +2329,6 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToOrderBookUpdates(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceOrderBook})">
-            <summary>
-            Subscribes to the order book updates for the provided symbol
-            </summary>
-            <param name="symbol">The symbol</param>
-            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceOrderBook})">
-            <summary>
-            Subscribes to the order book updates for the provided symbol
-            </summary>
-            <param name="symbol">The symbol</param>
-            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToOrderBookUpdates(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceOrderBook})">
-            <summary>
-            Subscribes to the depth update stream for the provided symbols
-            </summary>
-            <param name="symbols">The symbols</param>
-            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceOrderBook})">
-            <summary>
-            Subscribes to the depth update stream for the provided symbols
-            </summary>
-            <param name="symbols">The symbols</param>
-            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
         <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToSymbolTickerUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamTick})">
             <summary>
             Subscribes to ticker updates stream for a specific symbol
@@ -2379,7 +2349,7 @@
             <summary>
             Subscribes to ticker updates stream for a specific symbol
             </summary>
-            <param name="symbols">The symbol to subscribe to</param>
+            <param name="symbols">The symbols to subscribe to</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -2503,7 +2473,7 @@
             </summary>
             <param name="symbol">The symbol to subscribe on</param>
             <param name="levels">The amount of entries to be returned in the update</param>
-            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+            <param name="updateInterval">Update interval in milliseconds, either 100 or 500. Defaults to 250</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -2513,7 +2483,7 @@
             </summary>
             <param name="symbol">The symbol to subscribe on</param>
             <param name="levels">The amount of entries to be returned in the update</param>
-            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+            <param name="updateInterval">Update interval in milliseconds, either 100 or 500. Defaults to 250</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -2523,7 +2493,7 @@
             </summary>
             <param name="symbols">The symbols to subscribe on</param>
             <param name="levels">The amount of entries to be returned in the update of each symbol</param>
-            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+            <param name="updateInterval">Update interval in milliseconds, either 100 or 500. Defaults to 250</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -2533,33 +2503,65 @@
             </summary>
             <param name="symbols">The symbols to subscribe on</param>
             <param name="levels">The amount of entries to be returned in the update of each symbol</param>
-            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+            <param name="updateInterval">Update interval in milliseconds, either 100 or 500. Defaults to 250</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.BinanceFuturesStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}},System.Action{Binance.Net.Objects.Sockets.BinanceStreamBalanceUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToOrderBookUpdates(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceOrderBook})">
+            <summary>
+            Subscribes to the order book updates for the provided symbol
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="updateInterval">Update interval in milliseconds, either 0 or 100 or 500. Defaults to 250</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceOrderBook})">
+            <summary>
+            Subscribes to the order book updates for the provided symbol
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="updateInterval">Update interval in milliseconds, either 0 or 100 or 500. Defaults to 250</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToOrderBookUpdates(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceOrderBook})">
+            <summary>
+            Subscribes to the depth update stream for the provided symbols
+            </summary>
+            <param name="symbols">The symbols</param>
+            <param name="updateInterval">Update interval in milliseconds, either 0 or 100 or 500. Defaults to 250</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceOrderBook})">
+            <summary>
+            Subscribes to the depth update stream for the provided symbols
+            </summary>
+            <param name="symbols">The symbols</param>
+            <param name="updateInterval">Update interval in milliseconds, either 0 or 100 or 500. Defaults to 250</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.BinanceFuturesStreamBalance},System.Action{Binance.Net.Objects.BinanceFuturesStreamPosition},System.Action{Binance.Net.Objects.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.BinanceClient.StartUserStream(System.Threading.CancellationToken)"/> method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-            <param name="onAccountInfoMessage">The event handler for whenever an account info update is received</param>
-            <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
-            <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco status update is received</param>
-            <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
             <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
+            <param name="onPositionUpdateMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
+            <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
             <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToUserDataUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceFuturesStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}},System.Action{Binance.Net.Objects.Sockets.BinanceStreamBalanceUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToUserDataUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceFuturesStreamBalance},System.Action{Binance.Net.Objects.BinanceFuturesStreamPosition},System.Action{Binance.Net.Objects.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.BinanceClient.StartUserStream(System.Threading.CancellationToken)"/> method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-            <param name="onAccountInfoMessage">The event handler for whenever an account info update is received</param>
-            <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
-            <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
-            <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
             <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
+            <param name="onPositionUpdateMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
+            <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
             <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -2655,110 +2657,6 @@
             <param name="apiKey">The api key</param>
             <param name="apiSecret">The api secret</param>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToKlineUpdates(System.String,Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.BinanceStreamKlineData})">
-            <summary>
-            Subscribes to the candlestick update stream for the provided symbol
-            </summary>
-            <param name="symbol">The symbol</param>
-            <param name="interval">The interval of the candlesticks</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToKlineUpdatesAsync(System.String,Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.BinanceStreamKlineData})">
-            <summary>
-            Subscribes to the candlestick update stream for the provided symbol
-            </summary>
-            <param name="symbol">The symbol</param>
-            <param name="interval">The interval of the candlesticks</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToKlineUpdates(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.BinanceStreamKlineData})">
-            <summary>
-            Subscribes to the candlestick update stream for the provided symbols
-            </summary>
-            <param name="symbols">The symbols</param>
-            <param name="interval">The interval of the candlesticks</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.BinanceStreamKlineData})">
-            <summary>
-            Subscribes to the candlestick update stream for the provided symbols
-            </summary>
-            <param name="symbols">The symbols</param>
-            <param name="interval">The interval of the candlesticks</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToOrderBookUpdates(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceOrderBook})">
-            <summary>
-            Subscribes to the order book updates for the provided symbol
-            </summary>
-            <param name="symbol">The symbol</param>
-            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceOrderBook})">
-            <summary>
-            Subscribes to the order book updates for the provided symbol
-            </summary>
-            <param name="symbol">The symbol</param>
-            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToOrderBookUpdates(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceOrderBook})">
-            <summary>
-            Subscribes to the depth update stream for the provided symbols
-            </summary>
-            <param name="symbols">The symbols</param>
-            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceOrderBook})">
-            <summary>
-            Subscribes to the depth update stream for the provided symbols
-            </summary>
-            <param name="symbols">The symbols</param>
-            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToBookTickerUpdates(System.String,System.Action{Binance.Net.Objects.BinanceBookTick})">
-            <summary>
-            Subscribes to the book ticker update stream for the provided symbol
-            </summary>
-            <param name="symbol">The symbol</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToBookTickerUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceBookTick})">
-            <summary>
-            Subscribes to the book ticker update stream for the provided symbol
-            </summary>
-            <param name="symbol">The symbol</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToBookTickerUpdates(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceBookTick})">
-            <summary>
-            Subscribes to the book ticker update stream for the provided symbols
-            </summary>
-            <param name="symbols">The symbols</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToBookTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceBookTick})">
-            <summary>
-            Subscribes to the book ticker update stream for the provided symbols
-            </summary>
-            <param name="symbols">The symbols</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
         <member name="M:Binance.Net.BinanceSocketClient.SubscribeToAggregatedTradeUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamAggregatedTrade})">
             <summary>
             Subscribes to the aggregated trades update stream for the provided symbol
@@ -2823,6 +2721,88 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToKlineUpdates(System.String,Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.BinanceStreamKlineData})">
+            <summary>
+            Subscribes to the candlestick update stream for the provided symbol
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="interval">The interval of the candlesticks</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToKlineUpdatesAsync(System.String,Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.BinanceStreamKlineData})">
+            <summary>
+            Subscribes to the candlestick update stream for the provided symbol
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="interval">The interval of the candlesticks</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToKlineUpdates(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.BinanceStreamKlineData})">
+            <summary>
+            Subscribes to the candlestick update stream for the provided symbols
+            </summary>
+            <param name="symbols">The symbols</param>
+            <param name="interval">The interval of the candlesticks</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.BinanceStreamKlineData})">
+            <summary>
+            Subscribes to the candlestick update stream for the provided symbols
+            </summary>
+            <param name="symbols">The symbols</param>
+            <param name="interval">The interval of the candlesticks</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToSymbolMiniTickerUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamMiniTick})">
+            <summary>
+            Subscribes to mini ticker updates stream for a specific symbol
+            </summary>
+            <param name="symbol">The symbol to subscribe to</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToSymbolMiniTickerUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceStreamMiniTick})">
+            <summary>
+            Subscribes to mini ticker updates stream for a specific symbol
+            </summary>
+            <param name="symbol">The symbol to subscribe to</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToSymbolMiniTickerUpdates(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceStreamMiniTick})">
+            <summary>
+            Subscribes to mini ticker updates stream for a specific symbol
+            </summary>
+            <param name="symbols">The symbols to subscribe to</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToSymbolMiniTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceStreamMiniTick})">
+            <summary>
+            Subscribes to mini ticker updates stream for a specific symbol
+            </summary>
+            <param name="symbols">The symbols to subscribe to</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToAllSymbolMiniTickerUpdates(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamMiniTick}})">
+            <summary>
+            Subscribes to mini ticker updates stream for all symbols
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToAllSymbolMiniTickerUpdatesAsync(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamMiniTick}})">
+            <summary>
+            Subscribes to mini ticker updates stream for all symbols
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
         <member name="M:Binance.Net.BinanceSocketClient.SubscribeToSymbolTickerUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamTick})">
             <summary>
             Subscribes to ticker updates stream for a specific symbol
@@ -2839,6 +2819,22 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToSymbolTickerUpdates(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceStreamTick})">
+            <summary>
+            Subscribes to ticker updates stream for a specific symbol
+            </summary>
+            <param name="symbols">The symbol to subscribe to</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToSymbolTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceStreamTick})">
+            <summary>
+            Subscribes to ticker updates stream for a specific symbol
+            </summary>
+            <param name="symbols">The symbols to subscribe to</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
         <member name="M:Binance.Net.BinanceSocketClient.SubscribeToAllSymbolTickerUpdates(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamTick}})">
             <summary>
             Subscribes to ticker updates stream for all symbols
@@ -2849,6 +2845,52 @@
         <member name="M:Binance.Net.BinanceSocketClient.SubscribeToAllSymbolTickerUpdatesAsync(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamTick}})">
             <summary>
             Subscribes to ticker updates stream for all symbols
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToBookTickerUpdates(System.String,System.Action{Binance.Net.Objects.BinanceBookTick})">
+            <summary>
+            Subscribes to the book ticker update stream for the provided symbol
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToBookTickerUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceBookTick})">
+            <summary>
+            Subscribes to the book ticker update stream for the provided symbol
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToBookTickerUpdates(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceBookTick})">
+            <summary>
+            Subscribes to the book ticker update stream for the provided symbols
+            </summary>
+            <param name="symbols">The symbols</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToBookTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceBookTick})">
+            <summary>
+            Subscribes to the book ticker update stream for the provided symbols
+            </summary>
+            <param name="symbols">The symbols</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToAllBookTickerUpdates(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceBookTick}})">
+            <summary>
+            Subscribes to the book ticker update stream for all symbols
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToAllBookTickerUpdatesAsync(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceBookTick}})">
+            <summary>
+            Subscribes to the book ticker update stream for all symbols
             </summary>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -2889,6 +2931,42 @@
             </summary>
             <param name="symbols">The symbols to subscribe on</param>
             <param name="levels">The amount of entries to be returned in the update of each symbol</param>
+            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToOrderBookUpdates(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceOrderBook})">
+            <summary>
+            Subscribes to the order book updates for the provided symbol
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceOrderBook})">
+            <summary>
+            Subscribes to the order book updates for the provided symbol
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToOrderBookUpdates(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceOrderBook})">
+            <summary>
+            Subscribes to the depth update stream for the provided symbols
+            </summary>
+            <param name="symbols">The symbols</param>
+            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceOrderBook})">
+            <summary>
+            Subscribes to the depth update stream for the provided symbols
+            </summary>
+            <param name="symbols">The symbols</param>
             <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -5094,49 +5172,55 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToMarkPriceUpdates(System.String,System.Action{Binance.Net.Objects.BinanceFuturesStreamMarkPrice})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToMarkPriceUpdates(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceFuturesStreamMarkPrice})">
             <summary>
             Subscribes to the Mark price update stream for a single symbol
             </summary>
             <param name="symbol">The symbol</param>
+            <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToMarkPriceUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceFuturesStreamMarkPrice})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToMarkPriceUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceFuturesStreamMarkPrice})">
             <summary>
             Subscribes to the Mark price update stream for a single symbol
             </summary>
             <param name="symbol">The symbol</param>
+            <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToMarkPriceUpdates(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceFuturesStreamMarkPrice})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToMarkPriceUpdates(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceFuturesStreamMarkPrice})">
             <summary>
             Subscribes to the Mark price update stream for a list of symbols
             </summary>
             <param name="symbols">The symbols</param>
+            <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToMarkPriceUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceFuturesStreamMarkPrice})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToMarkPriceUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.BinanceFuturesStreamMarkPrice})">
             <summary>
             Subscribes to the Mark price update stream for a list of symbols
             </summary>
             <param name="symbols">The symbols</param>
+            <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToAllMarkPriceUpdates(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceFuturesStreamMarkPrice}})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToAllMarkPriceUpdates(System.Nullable{System.Int32},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceFuturesStreamMarkPrice}})">
             <summary>
             Subscribes to the Mark price update stream for a all symbols
             </summary>
+            <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToAllMarkPriceUpdatesAsync(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceFuturesStreamMarkPrice}})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToAllMarkPriceUpdatesAsync(System.Nullable{System.Int32},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceFuturesStreamMarkPrice}})">
             <summary>
             Subscribes to the Mark price update stream for a all symbols
             </summary>
+            <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -5366,7 +5450,7 @@
             </summary>
             <param name="symbol">The symbol to subscribe on</param>
             <param name="levels">The amount of entries to be returned in the update</param>
-            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+            <param name="updateInterval">Update interval in milliseconds, either 100 or 500. Defaults to 250</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -5376,7 +5460,7 @@
             </summary>
             <param name="symbol">The symbol to subscribe on</param>
             <param name="levels">The amount of entries to be returned in the update</param>
-            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+            <param name="updateInterval">Update interval in milliseconds, either 100 or 500. Defaults to 250</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -5386,7 +5470,7 @@
             </summary>
             <param name="symbols">The symbols to subscribe on</param>
             <param name="levels">The amount of entries to be returned in the update of each symbol</param>
-            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+            <param name="updateInterval">Update interval in milliseconds, either 100 or 500. Defaults to 250</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -5396,7 +5480,7 @@
             </summary>
             <param name="symbols">The symbols to subscribe on</param>
             <param name="levels">The amount of entries to be returned in the update of each symbol</param>
-            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+            <param name="updateInterval">Update interval in milliseconds, either 100 or 500. Defaults to 250</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -5405,7 +5489,7 @@
             Subscribes to the order book updates for the provided symbol
             </summary>
             <param name="symbol">The symbol</param>
-            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+            <param name="updateInterval">Update interval in milliseconds, either 0 or 100 or 500. Defaults to 250</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -5414,7 +5498,7 @@
             Subscribes to the order book updates for the provided symbol
             </summary>
             <param name="symbol">The symbol</param>
-            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+            <param name="updateInterval">Update interval in milliseconds, either 0 or 100 or 500. Defaults to 250</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -5423,7 +5507,7 @@
             Subscribes to the depth update stream for the provided symbols
             </summary>
             <param name="symbols">The symbols</param>
-            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+            <param name="updateInterval">Update interval in milliseconds, either 0 or 100 or 500. Defaults to 250</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -5432,33 +5516,29 @@
             Subscribes to the depth update stream for the provided symbols
             </summary>
             <param name="symbols">The symbols</param>
-            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+            <param name="updateInterval">Update interval in milliseconds, either 0 or 100 or 500. Defaults to 250</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.BinanceFuturesStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}},System.Action{Binance.Net.Objects.Sockets.BinanceStreamBalanceUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.BinanceFuturesStreamBalance},System.Action{Binance.Net.Objects.BinanceFuturesStreamPosition},System.Action{Binance.Net.Objects.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.BinanceClient.StartUserStream(System.Threading.CancellationToken)"/> method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-            <param name="onAccountInfoMessage">The event handler for whenever an account info update is received</param>
-            <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
-            <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco status update is received</param>
-            <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
             <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
+            <param name="onPositionUpdateMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
+            <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
             <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToUserDataUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceFuturesStreamAccountInfo},System.Action{Binance.Net.Objects.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBalance}},System.Action{Binance.Net.Objects.Sockets.BinanceStreamBalanceUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToUserDataUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceFuturesStreamBalance},System.Action{Binance.Net.Objects.BinanceFuturesStreamPosition},System.Action{Binance.Net.Objects.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.BinanceClient.StartUserStream(System.Threading.CancellationToken)"/> method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-            <param name="onAccountInfoMessage">The event handler for whenever an account info update is received</param>
-            <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
-            <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
-            <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
             <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
+            <param name="onPositionUpdateMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
+            <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
             <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -5473,6 +5553,52 @@
             </summary>
             <param name="apiKey">The api key</param>
             <param name="apiSecret">The api secret</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToSymbolMiniTickerUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamMiniTick})">
+            <summary>
+            Subscribes to mini ticker updates stream for a specific symbol
+            </summary>
+            <param name="symbol">The symbol to subscribe to</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToSymbolMiniTickerUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceStreamMiniTick})">
+            <summary>
+            Subscribes to mini ticker updates stream for a specific symbol
+            </summary>
+            <param name="symbol">The symbol to subscribe to</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToSymbolMiniTickerUpdates(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceStreamMiniTick})">
+            <summary>
+            Subscribes to mini ticker updates stream for a specific symbol
+            </summary>
+            <param name="symbols">The symbols to subscribe to</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToSymbolMiniTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceStreamMiniTick})">
+            <summary>
+            Subscribes to mini ticker updates stream for a specific symbol
+            </summary>
+            <param name="symbols">The symbols to subscribe to</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToAllSymbolMiniTickerUpdates(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamMiniTick}})">
+            <summary>
+            Subscribes to mini ticker updates stream for all symbols
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToAllSymbolMiniTickerUpdatesAsync(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamMiniTick}})">
+            <summary>
+            Subscribes to mini ticker updates stream for all symbols
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToKlineUpdates(System.String,Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.BinanceStreamKlineData})">
             <summary>
@@ -5655,6 +5781,22 @@
             Subscribes to ticker updates stream for a specific symbol
             </summary>
             <param name="symbol">The symbol to subscribe to</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToSymbolTickerUpdates(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceStreamTick})">
+            <summary>
+            Subscribes to ticker updates stream for a specific symbol
+            </summary>
+            <param name="symbols">The symbol to subscribe to</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToSymbolTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceStreamTick})">
+            <summary>
+            Subscribes to ticker updates stream for a specific symbol
+            </summary>
+            <param name="symbols">The symbols to subscribe to</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -6953,21 +7095,6 @@
             Direction of the requested margin change
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.BinanceFuturesStreamAccountInfo">
-            <summary>
-            Information about an account
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesStreamAccountInfo.Balances">
-            <summary>
-            List of assets with their current balances
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesStreamAccountInfo.Positions">
-            <summary>
-            List of assets with their current positions
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.BinanceFuturesStreamBalance">
             <summary>
             Information about an asset balance
@@ -6981,6 +7108,11 @@
         <member name="P:Binance.Net.Objects.BinanceFuturesStreamBalance.WalletBalance">
             <summary>
             The amount that isn't locked in a trade
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamBalance.CrossBalance">
+            <summary>
+            The amount that is locked in a trade
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinanceFuturesStreamPosition">
@@ -7006,6 +7138,21 @@
         <member name="P:Binance.Net.Objects.BinanceFuturesStreamPosition.RealizedPnL">
             <summary>
             The accumulated realized PnL
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamPosition.UnRealizedPnL">
+            <summary>
+            The Unrealized PnL
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamPosition.MarginType">
+            <summary>
+            The margin type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamPosition.IsolatedWallet">
+            <summary>
+            The isolated wallet (if isolated position)
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinanceFuturesStreamLiquidation">
@@ -7236,6 +7383,16 @@
         <member name="P:Binance.Net.Objects.BinanceFuturesStreamOrderUpdate.BuyerIsMaker">
             <summary>
             Whether the buyer is the maker
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamOrderUpdate.IsReduce">
+            <summary>
+            Is this reduce only
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamOrderUpdate.StopPriceWorking">
+            <summary>
+            Stop price working type
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinanceFuturesSymbol">
@@ -8355,6 +8512,46 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceStreamMiniTick">
+            <summary>
+            MiniTick info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamMiniTick.Symbol">
+            <summary>
+            The symbol this data is for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamMiniTick.CurrentDayClosePrice">
+            <summary>
+            The current day close price. This is the latest price for this symbol.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamMiniTick.OpenPrice">
+            <summary>
+            Todays open price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamMiniTick.HighPrice">
+            <summary>
+            Todays high price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamMiniTick.LowPrice">
+            <summary>
+            Todays low price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamMiniTick.TotalTradedBaseAssetVolume">
+            <summary>
+            Total traded volume in the base asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamMiniTick.TotalTradedQuoteAssetVolume">
+            <summary>
+            Total traded volume in the quote asset
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.BinanceStreamOrderList">
             <summary>
             Order list info
@@ -8608,26 +8805,6 @@
         <member name="P:Binance.Net.Objects.BinanceStreamTick.CloseTradesQuantity">
             <summary>
             
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.BestBidPrice">
-            <summary>
-            The best bid price in the order book
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.BestBidQuantity">
-            <summary>
-            The quantity of the best bid price available
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.BestAskPrice">
-            <summary>
-            The best ask price in the order book
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.BestAskQuantity">
-            <summary>
-            The quantity of the best ask price
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BinanceStreamTick.OpenPrice">
@@ -8981,6 +9158,26 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BinanceSymbolPercentPriceFilter.AveragePriceMinutes">
+            <summary>
+            The amount of minutes the average price of trades is calculated over. 0 means the last price is used
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceFuturesSymbolPercentPriceFilter">
+            <summary>
+            Price percentage filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesSymbolPercentPriceFilter.MultiplierUp">
+            <summary>
+            The max factor the price can deviate up
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesSymbolPercentPriceFilter.MultiplierDown">
+            <summary>
+            The max factor the price can deviate down
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesSymbolPercentPriceFilter.MultiplierDecimal">
             <summary>
             The amount of minutes the average price of trades is calculated over. 0 means the last price is used
             </summary>
@@ -9500,9 +9697,24 @@
             Stop loss order. Will execute a limit order when the price drops below a price to sell and therefor limit the loss
             </summary>
         </member>
+        <member name="F:Binance.Net.Objects.OrderType.Stop">
+            <summary>
+            Stop loss order. Will execute a market order when the price drops below a price to sell and therefor limit the loss
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.OrderType.StopMarket">
+            <summary>
+            Stop loss order. Will be executed at the best price available at that time in the order book
+            </summary>
+        </member>
         <member name="F:Binance.Net.Objects.OrderType.TakeProfit">
             <summary>
             Take profit order. Will execute a market order when the price rises above a price to sell and therefor take a profit
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.OrderType.TakeProfitMarket">
+            <summary>
+            Take profit order. Will be executed at the best price available at that time in the order book
             </summary>
         </member>
         <member name="F:Binance.Net.Objects.OrderType.TakeProfitLimit">
@@ -9513,6 +9725,11 @@
         <member name="F:Binance.Net.Objects.OrderType.LimitMaker">
             <summary>
             Same as a limit order, however it will fail if the order would immediately match, therefor preventing taker orders
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.OrderType.TralingStopMaret">
+            <summary>
+            Trailing stop order will be placed without a price. The order will be executed at the best price available at that time in the order book.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.OrderSide">
@@ -9548,6 +9765,11 @@
         <member name="F:Binance.Net.Objects.TimeInForce.FillOrKill">
             <summary>
             FillOrKill orders have to be entirely filled upon placing or will be automatically canceled
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.TimeInForce.GootTillCrossing">
+            <summary>
+            GootTillCrossing orders will post only
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.ExecutionType">
@@ -10143,6 +10365,21 @@
         <member name="F:Binance.Net.Objects.SideEffectType.AutoRepay">
             <summary>
             Make auto repayment after order is filled
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.WorkingType">
+            <summary>
+            Type of working
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.WorkingType.Mark">
+            <summary>
+            Mark price type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.WorkingType.Contract">
+            <summary>
+            Contract price type
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Sockets.BinanceStreamBalanceUpdate">

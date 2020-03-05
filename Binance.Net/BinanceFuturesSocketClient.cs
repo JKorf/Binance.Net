@@ -678,20 +678,22 @@ namespace Binance.Net
                         {
                             if (token["a"]["B"] != null)
                             {
-                                var balance = token["a"]["B"];
-                                var result = Deserialize<BinanceFuturesStreamBalance>(balance, false);
+                                var balances = token["a"]["B"];
+                                var result = Deserialize<BinanceFuturesStreamBalance[]>(balances, false);
                                 if (result.Success)
-                                    onAccountBalanceUpdate?.Invoke(result.Data);
+                                    foreach (var balance in result.Data)
+                                        onAccountBalanceUpdate?.Invoke(balance);
                                 else
                                     log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account stream: " + result.Error);
                             }
 
                             if (token["a"]["P"] != null)
                             {
-                                var position = token["a"]["P"];
-                                var result = Deserialize<BinanceFuturesStreamPosition>(position, false);
+                                var positions = token["a"]["P"];
+                                var result = Deserialize<BinanceFuturesStreamPosition[]>(positions, false);
                                 if (result.Success)
-                                    onPositionUpdateMessage?.Invoke(result.Data);
+                                    foreach (var position in result.Data)
+                                        onPositionUpdateMessage?.Invoke(position);
                                 else
                                     log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account stream: " + result.Error);
                             }

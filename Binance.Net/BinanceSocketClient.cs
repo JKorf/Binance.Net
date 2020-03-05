@@ -62,8 +62,6 @@ namespace Binance.Net
         public BinanceSocketClient(BinanceSocketClientOptions options) : base(options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials, ArrayParametersSerialization.MultipleValues))
         {
             baseCombinedAddress = options.BaseSocketCombinedAddress;
-
-            SendPeriodic(TimeSpan.FromMinutes(3), (connection) => "pong frame");
         }
         #endregion 
 
