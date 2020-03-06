@@ -72,10 +72,6 @@ namespace Binance.Net.UnitTests
 
             var data = new BinanceStreamTick()
             {
-                BestAskPrice = 0.1m,
-                BestAskQuantity = 0.2m,
-                BestBidPrice = 0.3m,
-                BestBidQuantity = 0.4m,
                 CloseTradesQuantity = 0.5m,
                 CurrentDayClosePrice = 0.6m,
                 FirstTradeId = 1,
@@ -117,10 +113,6 @@ namespace Binance.Net.UnitTests
             {
                 new BinanceStreamTick()
                 {
-                    BestAskPrice = 0.1m,
-                    BestAskQuantity = 0.2m,
-                    BestBidPrice = 0.3m,
-                    BestBidQuantity = 0.4m,
                     CloseTradesQuantity = 0.5m,
                     CurrentDayClosePrice = 0.6m,
                     FirstTradeId = 1,
