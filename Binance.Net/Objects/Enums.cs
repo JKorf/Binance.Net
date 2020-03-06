@@ -95,9 +95,21 @@ namespace Binance.Net.Objects
         /// </summary>
         StopLossLimit,
         /// <summary>
+        /// Stop loss order. Will execute a market order when the price drops below a price to sell and therefor limit the loss
+        /// </summary>
+        Stop,
+        /// <summary>
+        /// Stop loss order. Will be executed at the best price available at that time in the order book
+        /// </summary>
+        StopMarket,
+        /// <summary>
         /// Take profit order. Will execute a market order when the price rises above a price to sell and therefor take a profit
         /// </summary>
         TakeProfit,
+        /// <summary>
+        /// Take profit order. Will be executed at the best price available at that time in the order book
+        /// </summary>
+        TakeProfitMarket,
         /// <summary>
         /// Take profit order. Will execute a limit order when the price rises above a price to sell and therefor take a profit
         /// </summary>
@@ -105,7 +117,11 @@ namespace Binance.Net.Objects
         /// <summary>
         /// Same as a limit order, however it will fail if the order would immediately match, therefor preventing taker orders
         /// </summary>
-        LimitMaker
+        LimitMaker,
+        /// <summary>
+        /// Trailing stop order will be placed without a price. The order will be executed at the best price available at that time in the order book.
+        /// </summary>
+        TralingStopMaret
     }
 
     /// <summary>
@@ -139,7 +155,11 @@ namespace Binance.Net.Objects
         /// <summary>
         /// FillOrKill orders have to be entirely filled upon placing or will be automatically canceled
         /// </summary>
-        FillOrKill
+        FillOrKill,
+        /// <summary>
+        /// GootTillCrossing orders will post only
+        /// </summary>
+        GootTillCrossing
     }
 
     /// <summary>
@@ -684,5 +704,20 @@ namespace Binance.Net.Objects
         /// Make auto repayment after order is filled
         /// </summary>
         AutoRepay
+    }
+
+    /// <summary>
+    /// Type of working
+    /// </summary>
+    public enum WorkingType
+    {
+        /// <summary>
+        /// Mark price type
+        /// </summary>
+        Mark,
+        /// <summary>
+        /// Contract price type
+        /// </summary>
+        Contract
     }
 }

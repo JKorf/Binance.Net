@@ -80,12 +80,21 @@ namespace Binance.Net.Converters
                     };
                     break;
                 case SymbolFilterType.PricePercent:
-                    result = new BinanceSymbolPercentPriceFilter
-                    {
-                        MultiplierUp = (decimal)obj["multiplierUp"],
-                        MultiplierDown = (decimal)obj["multiplierDown"],
-                        AveragePriceMinutes = (int)obj["avgPriceMins"]
-                    };
+                    if (obj["avgPriceMins"] != null)
+                        result = new BinanceSymbolPercentPriceFilter
+                        {
+                            MultiplierUp = (decimal)obj["multiplierUp"],
+                            MultiplierDown = (decimal)obj["multiplierDown"],
+                            AveragePriceMinutes = (int)obj["avgPriceMins"]
+                        };
+                    else
+                        result = new BinanceFuturesSymbolPercentPriceFilter
+                        {
+                            MultiplierUp = (decimal)obj["multiplierUp"],
+                            MultiplierDown = (decimal)obj["multiplierDown"],
+                            MultiplierDecimal = (int)obj["multiplierDecimal"]
+                        };
+
                     break;
                 default:
                     Debug.WriteLine("Can't parse symbol filter of type: " + obj["filterType"]);

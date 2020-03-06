@@ -1,14 +1,27 @@
 using System;
 using System.Collections.Generic;
+using Binance.Net.Converters;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects
 {
     /// <summary>
+    /// A event received by a Binance websocket
+    /// </summary>
+    public class BinanceFuturesStreamLiquidationData : BinanceStreamEvent
+    {
+        /// <summary>
+        /// The data of the event
+        /// </summary>
+        [JsonProperty("o")]
+        public BinanceFuturesStreamLiquidation Data { get; set; }
+    }
+
+    /// <summary>
     /// 
     /// </summary>
-    public class BinanceFuturesStreamLiquidation: BinanceStreamEvent
+    public class BinanceFuturesStreamLiquidation
     {
         /// <summary>
         /// Symbol
@@ -19,19 +32,19 @@ namespace Binance.Net.Objects
         /// <summary>
         /// Liquidation Sided
         /// </summary>
-        [JsonProperty("S")]
+        [JsonProperty("S"), JsonConverter(typeof(OrderSideConverter))]
         public OrderSide Side { get; set; }
         
         /// <summary>
         /// Liquidation order type
         /// </summary>
-        [JsonProperty("o")]
+        [JsonProperty("o"), JsonConverter(typeof(OrderTypeConverter))]
         public OrderType OrderType { get; set; }
         
         /// <summary>
         /// Liquidation Time in Force
         /// </summary>
-        [JsonProperty("f")]
+        [JsonProperty("f"), JsonConverter(typeof(TimeInForceConverter))]
         public TimeInForce TimeInForce { get; set; }
         
         /// <summary>
@@ -55,7 +68,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// Liquidation Order Status
         /// </summary>
-        [JsonProperty("X")]
+        [JsonProperty("X"), JsonConverter(typeof(OrderStatusConverter))]
         public OrderStatus OrderStatus { get; set; }
         
         /// <summary>

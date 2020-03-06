@@ -100,7 +100,7 @@ namespace Binance.Net.Objects
         /// Filter for the maximum deviation of the price
         /// </summary>
         [JsonIgnore]
-        public BinanceSymbolPercentPriceFilter PricePercentFilter => Filters.OfType<BinanceSymbolPercentPriceFilter>().FirstOrDefault();
+        public BinanceFuturesSymbolPercentPriceFilter PricePercentFilter => Filters.OfType<BinanceFuturesSymbolPercentPriceFilter>().FirstOrDefault();
     }
 
 }
