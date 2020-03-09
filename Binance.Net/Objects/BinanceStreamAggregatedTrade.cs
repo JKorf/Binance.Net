@@ -1,13 +1,14 @@
 ﻿using System;
 using Newtonsoft.Json;
 using CryptoExchange.Net.Converters;
+using Binance.Net.Interfaces;
 
 namespace Binance.Net.Objects
 {
     /// <summary>
     /// Aggregated information about trades for a symbol
     /// </summary>
-    public class BinanceStreamAggregatedTrade: BinanceStreamEvent
+    public class BinanceStreamAggregatedTrade: BinanceStreamEvent , IBinanceAggregatedTrade
     {
         /// <summary>
         /// The symbol the trade was for
@@ -18,7 +19,7 @@ namespace Binance.Net.Objects
         /// The id of this aggregated trade
         /// </summary>
         [JsonProperty("a")]
-        public long AggregatedTradeId { get; set; }
+        public long AggregateTradeId { get; set; }
         /// <summary>
         /// The price of the trades
         /// </summary>

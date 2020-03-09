@@ -1,13 +1,14 @@
 ﻿using Newtonsoft.Json;
 using System;
 using CryptoExchange.Net.Converters;
+using Binance.Net.Interfaces;
 
 namespace Binance.Net.Objects
 {
     /// <summary>
     /// Information about a trade
     /// </summary>
-    public class BinanceTrade
+    public class BinanceTrade : IBinanceTrade
     {
         /// <summary>
         /// The id of the trade
@@ -47,15 +48,11 @@ namespace Binance.Net.Objects
         /// The time the trade was made
         /// </summary>
         [JsonConverter(typeof(TimestampConverter))]
-        public DateTime Time { get; set; }
+        public DateTime TradeTime { get; set; }
         /// <summary>
         /// Whether account was the buyer in the trade
         /// </summary>
-        public bool IsBuyer { get; set; }
-        /// <summary>
-        /// Whether account was the maker in the trade
-        /// </summary>
-        public bool IsMaker { get; set; }
+        public bool BuyerIsMaker { get; set; }
         /// <summary>
         /// Whether trade was made with the best match
         /// </summary>

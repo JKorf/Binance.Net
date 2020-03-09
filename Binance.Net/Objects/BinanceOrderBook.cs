@@ -2,13 +2,14 @@
 using Newtonsoft.Json;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Interfaces;
+using Binance.Net.Interfaces;
 
 namespace Binance.Net.Objects
 {
     /// <summary>
     /// The order book for a asset
     /// </summary>
-    public class BinanceOrderBook
+    public class BinanceOrderBook : IBinanceOrderBook
     {
         /// <summary>
         /// The symbol of the order book (only filled from stream updates)
