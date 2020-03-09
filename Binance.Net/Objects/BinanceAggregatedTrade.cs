@@ -1,4 +1,5 @@
 ﻿using System;
+using Binance.Net.Interfaces;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
@@ -7,7 +8,7 @@ namespace Binance.Net.Objects
     /// <summary>
     /// Compressed aggregated trade information. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
     /// </summary>
-    public class BinanceAggregatedTrades
+    public class BinanceAggregatedTrade : IBinanceAggregatedTrade
     {
         /// <summary>
         /// The id of this aggregation
@@ -38,12 +39,12 @@ namespace Binance.Net.Objects
         /// The timestamp of the trades
         /// </summary>
         [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
-        public DateTime Timestamp { get; set; }
+        public DateTime TradeTime { get; set; }
         /// <summary>
         /// Whether the buyer was the maker
         /// </summary>
         [JsonProperty("m")]
-        public bool BuyerWasMaker { get; set; }
+        public bool BuyerIsMaker { get; set; }
         /// <summary>
         /// Whether the trade was matched at the best price
         /// </summary>

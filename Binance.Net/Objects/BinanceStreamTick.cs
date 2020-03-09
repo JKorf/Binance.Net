@@ -1,13 +1,14 @@
 ﻿using Newtonsoft.Json;
 using System;
 using CryptoExchange.Net.Converters;
+using Binance.Net.Interfaces;
 
 namespace Binance.Net.Objects
 {
     /// <summary>
     /// Tick info
     /// </summary>
-    public class BinanceStreamTick: BinanceStreamEvent
+    public class BinanceStreamTick: BinanceStreamEvent, IBinanceTick
     {        
         /// <summary>
         /// The symbol this data is for
@@ -23,12 +24,12 @@ namespace Binance.Net.Objects
         /// The price change percentage of this symbol
         /// </summary>
         [JsonProperty("P")]
-        public decimal PriceChangePercentage { get; set; }
+        public decimal PriceChangePercent { get; set; }
         /// <summary>
         /// The weighted average
         /// </summary>
         [JsonProperty("w")]
-        public decimal WeightedAverage { get; set; }
+        public decimal WeightedAveragePrice { get; set; }
         /// <summary>
         /// The close price of the previous day
         /// </summary>
@@ -38,12 +39,32 @@ namespace Binance.Net.Objects
         /// The current day close price. This is the latest price for this symbol.
         /// </summary>
         [JsonProperty("c")]
-        public decimal CurrentDayClosePrice { get; set; }
+        public decimal LastPrice { get; set; }
         /// <summary>
-        /// 
+        /// The most recent trade quantity
         /// </summary>
         [JsonProperty("Q")]
-        public decimal CloseTradesQuantity { get; set; }
+        public decimal LastQuantity { get; set; }
+        /// <summary>
+        /// The best bid price in the order book
+        /// </summary>
+        [JsonProperty("b")]
+        public decimal BidPrice { get; set; }
+        /// <summary>
+        /// The size of the best bid price in the order book
+        /// </summary>
+        [JsonProperty("B")]
+        public decimal BidQuantity { get; set; }
+        /// <summary>
+        /// The best ask price in the order book
+        /// </summary>
+        [JsonProperty("a")]
+        public decimal AskPrice { get; set; }
+        /// <summary>
+        /// The size of the best ask price in the order book
+        /// </summary>
+        [JsonProperty("A")]
+        public decimal AskQuantity { get; set; }
         /// <summary>
         /// Todays open price
         /// </summary>
@@ -88,11 +109,11 @@ namespace Binance.Net.Objects
         /// The open time of these stats
         /// </summary>
         [JsonProperty("O"), JsonConverter(typeof(TimestampConverter))]
-        public DateTime StatisticsOpenTime { get; set; }
+        public DateTime OpenTime { get; set; }
         /// <summary>
         /// The close time of these stats
         /// </summary>
         [JsonProperty("C"), JsonConverter(typeof(TimestampConverter))]
-        public DateTime StatisticsCloseTime { get; set; }
+        public DateTime CloseTime { get; set; }
     }
 }

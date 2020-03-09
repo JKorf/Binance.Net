@@ -1,11 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using Binance.Net.Interfaces;
+using Newtonsoft.Json;
 
 namespace Binance.Net.Objects
 {
     /// <summary>
     /// Book tick
     /// </summary>
-    public class BinanceBookTick
+    public class BinanceStreamBookPrice : IBinanceBookPrice
     {
         /// <summary>
         /// Update id

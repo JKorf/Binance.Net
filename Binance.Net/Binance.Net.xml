@@ -1771,6 +1771,74 @@
             <param name="ct">Cancellation token</param>
             <returns>List of book prices</returns>
         </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetAllLiquidationOrders(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get all Liquidation Orders
+            </summary>
+            <param name="Symbol">The symbol to get the data for</param>
+            <param name="startTime">Start time to get  liquidation orders history</param>
+            <param name="endTime">End time to get liquidation orders history</param>
+            <param name="limit">Max number of results. Default:100 Max:1000</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The all liquidation orders</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetAllLiquidationOrdersAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get all Liquidation Orders
+            </summary>
+            <param name="Symbol">The symbol to get the data for</param>
+            <param name="startTime">Start time to get  liquidation orders history</param>
+            <param name="endTime">End time to get liquidation orders history</param>
+            <param name="limit">Max number of results. Default:100 Max:1000</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The all liquidation orders</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetOpenInterest(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets Open Interest
+            </summary>
+            <param name="Symbol">The symbol to get the data for</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Open Interest info</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetOpenInterestAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets the best price/quantity on the order book for all symbols.
+            </summary>
+            <param name="Symbol">The symbol to get the data for</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of book prices</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetBrackets(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets Notional and Leverage Brackets
+            </summary>
+            <param name="Symbol">The symbol to get the data for</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Notional and Leverage Brackets info</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetBracketsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets Notional and Leverage Brackets.
+            </summary>
+            <param name="Symbol">The symbol to get the data for</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Notional and Leverage Brackets</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetBrackets(System.Threading.CancellationToken)">
+            <summary>
+            Gets all Notional and Leverage Brackets
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>Notional and Leverage Brackets info</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetBracketsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Gets all Notional and Leverage Brackets.
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>Notional and Leverage Brackets</returns>
+        </member>
         <member name="M:Binance.Net.BinanceFuturesClient.PlaceOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
@@ -2375,7 +2443,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToBookTickerUpdates(System.String,System.Action{Binance.Net.Objects.BinanceBookTick})">
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToBookTickerUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamBookPrice})">
             <summary>
             Subscribes to the book ticker update stream for the provided symbol
             </summary>
@@ -2383,7 +2451,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToBookTickerUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceBookTick})">
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToBookTickerUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceStreamBookPrice})">
             <summary>
             Subscribes to the book ticker update stream for the provided symbol
             </summary>
@@ -2391,7 +2459,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToBookTickerUpdates(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceBookTick})">
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToBookTickerUpdates(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceStreamBookPrice})">
             <summary>
             Subscribes to the book ticker update stream for the provided symbols
             </summary>
@@ -2399,7 +2467,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToBookTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceBookTick})">
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToBookTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceStreamBookPrice})">
             <summary>
             Subscribes to the book ticker update stream for the provided symbols
             </summary>
@@ -2407,14 +2475,14 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToAllBookTickerUpdates(System.Action{Binance.Net.Objects.BinanceBookTick})">
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToAllBookTickerUpdates(System.Action{Binance.Net.Objects.BinanceStreamBookPrice})">
             <summary>
             Subscribes to all book ticker update streams
             </summary>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToAllBookTickerUpdatesAsync(System.Action{Binance.Net.Objects.BinanceBookTick})">
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToAllBookTickerUpdatesAsync(System.Action{Binance.Net.Objects.BinanceStreamBookPrice})">
             <summary>
             Subscribes to all book ticker update streams
             </summary>
@@ -2849,7 +2917,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToBookTickerUpdates(System.String,System.Action{Binance.Net.Objects.BinanceBookTick})">
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToBookTickerUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamBookPrice})">
             <summary>
             Subscribes to the book ticker update stream for the provided symbol
             </summary>
@@ -2857,7 +2925,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToBookTickerUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceBookTick})">
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToBookTickerUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceStreamBookPrice})">
             <summary>
             Subscribes to the book ticker update stream for the provided symbol
             </summary>
@@ -2865,7 +2933,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToBookTickerUpdates(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceBookTick})">
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToBookTickerUpdates(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceStreamBookPrice})">
             <summary>
             Subscribes to the book ticker update stream for the provided symbols
             </summary>
@@ -2873,7 +2941,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToBookTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceBookTick})">
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToBookTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceStreamBookPrice})">
             <summary>
             Subscribes to the book ticker update stream for the provided symbols
             </summary>
@@ -2881,14 +2949,14 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToAllBookTickerUpdates(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceBookTick}})">
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToAllBookTickerUpdates(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBookPrice}})">
             <summary>
             Subscribes to the book ticker update stream for all symbols
             </summary>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToAllBookTickerUpdatesAsync(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceBookTick}})">
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToAllBookTickerUpdatesAsync(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.BinanceStreamBookPrice}})">
             <summary>
             Subscribes to the book ticker update stream for all symbols
             </summary>
@@ -3037,6 +3105,76 @@
         </member>
         <member name="M:Binance.Net.BinanceSymbolOrderBook.Dispose">
             <inheritdoc />
+        </member>
+        <member name="T:Binance.Net.Interfaces.IBinanceAggregatedTrade">
+            <summary>
+            Compressed aggregated trade information. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceAggregatedTrade.AggregateTradeId">
+            <summary>
+            The id of this aggregation
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceAggregatedTrade.Price">
+            <summary>
+            The price of trades in this aggregation
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceAggregatedTrade.Quantity">
+            <summary>
+            The total quantity of trades in the aggregation
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceAggregatedTrade.FirstTradeId">
+            <summary>
+            The first trade id in this aggregation
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceAggregatedTrade.LastTradeId">
+            <summary>
+            The last trade id in this aggregation
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceAggregatedTrade.TradeTime">
+            <summary>
+            The timestamp of the trades
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceAggregatedTrade.BuyerIsMaker">
+            <summary>
+            Whether the buyer was the maker
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Interfaces.IBinanceBookPrice">
+            <summary>
+            Book tick
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceBookPrice.Symbol">
+            <summary>
+            The symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceBookPrice.BestBidPrice">
+            <summary>
+            Price of the best bid
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceBookPrice.BestBidQuantity">
+            <summary>
+            Quantity of the best bid
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceBookPrice.BestAskPrice">
+            <summary>
+            Price of the best ask
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceBookPrice.BestAskQuantity">
+            <summary>
+            Quantity of the best ask
+            </summary>
         </member>
         <member name="T:Binance.Net.Interfaces.IBinanceClient">
             <summary>
@@ -4768,6 +4906,74 @@
             <param name="ct">Cancellation token</param>
             <returns>List of book prices</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetAllLiquidationOrders(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get all Liquidation Orders
+            </summary>
+            <param name="Symbol">The symbol to get the data for</param>
+            <param name="startTime">Start time to get  liquidation orders history</param>
+            <param name="endTime">End time to get liquidation orders history</param>
+            <param name="limit">Max number of results. Default:100 Max:1000</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The all liquidation orders</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetAllLiquidationOrdersAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get all Liquidation Orders
+            </summary>
+            <param name="Symbol">The symbol to get the data for</param>
+            <param name="startTime">Start time to get  liquidation orders history</param>
+            <param name="endTime">End time to get liquidation orders history</param>
+            <param name="limit">Max number of results. Default:100 Max:1000</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The all liquidation orders</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetOpenInterest(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets Open Interest
+            </summary>
+            <param name="Symbol">The symbol to get the data for</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Open Interest info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetOpenInterestAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets the best price/quantity on the order book for all symbols.
+            </summary>
+            <param name="Symbol">The symbol to get the data for</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of book prices</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetBrackets(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets Notional and Leverage Brackets
+            </summary>
+            <param name="Symbol">The symbol to get the data for</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Notional and Leverage Brackets info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetBracketsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets Notional and Leverage Brackets.
+            </summary>
+            <param name="Symbol">The symbol to get the data for</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Notional and Leverage Brackets</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetBrackets(System.Threading.CancellationToken)">
+            <summary>
+            Gets all Notional and Leverage Brackets
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>Notional and Leverage Brackets info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetBracketsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Gets all Notional and Leverage Brackets.
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>Notional and Leverage Brackets</returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetOpenOrders(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets a list of open orders
@@ -5128,6 +5334,86 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
+        <member name="T:Binance.Net.Interfaces.IBinanceFuturesLiquidation">
+            <summary>
+            Forced liquidation info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceFuturesLiquidation.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceFuturesLiquidation.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceFuturesLiquidation.LastQuantityFilled">
+            <summary>
+            Total quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceFuturesLiquidation.QuantityFilled">
+            <summary>
+            The executed quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceFuturesLiquidation.AveragePrice">
+            <summary>
+            Average price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceFuturesLiquidation.Status">
+            <summary>
+            Order status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceFuturesLiquidation.TimeInForce">
+            <summary>
+            Time in force
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceFuturesLiquidation.Side">
+            <summary>
+            Side
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceFuturesLiquidation.Type">
+            <summary>
+            Side
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceFuturesLiquidation.Time">
+            <summary>
+            Forced time
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Interfaces.IBinanceFuturesMarkPrice">
+            <summary>
+            Mark Price and Funding Rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceFuturesMarkPrice.Symbol">
+            <summary>
+            The symbol the information is about
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceFuturesMarkPrice.MarkPrice">
+            <summary>
+            The current market price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceFuturesMarkPrice.FundingRate">
+            <summary>
+            The last funding rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceFuturesMarkPrice.NextFundingTime">
+            <summary>
+            The time the funding rate is applied
+            </summary>
+        </member>
         <member name="T:Binance.Net.Interfaces.IBinanceFuturesSocketClient">
             <summary>
             Interface for the Binance Futures socket client
@@ -5352,7 +5638,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToBookTickerUpdates(System.String,System.Action{Binance.Net.Objects.BinanceBookTick})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToBookTickerUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamBookPrice})">
             <summary>
             Subscribes to the book ticker update stream for the provided symbol
             </summary>
@@ -5360,7 +5646,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToBookTickerUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceBookTick})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToBookTickerUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceStreamBookPrice})">
             <summary>
             Subscribes to the book ticker update stream for the provided symbol
             </summary>
@@ -5368,7 +5654,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToBookTickerUpdates(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceBookTick})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToBookTickerUpdates(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceStreamBookPrice})">
             <summary>
             Subscribes to the book ticker update stream for the provided symbols
             </summary>
@@ -5376,7 +5662,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToBookTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceBookTick})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToBookTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceStreamBookPrice})">
             <summary>
             Subscribes to the book ticker update stream for the provided symbols
             </summary>
@@ -5384,14 +5670,14 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToAllBookTickerUpdates(System.Action{Binance.Net.Objects.BinanceBookTick})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToAllBookTickerUpdates(System.Action{Binance.Net.Objects.BinanceStreamBookPrice})">
             <summary>
             Subscribes to all book ticker update streams
             </summary>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToAllBookTickerUpdatesAsync(System.Action{Binance.Net.Objects.BinanceBookTick})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToAllBookTickerUpdatesAsync(System.Action{Binance.Net.Objects.BinanceStreamBookPrice})">
             <summary>
             Subscribes to all book ticker update streams
             </summary>
@@ -5542,6 +5828,131 @@
             <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
+        <member name="T:Binance.Net.Interfaces.IBinanceKline">
+            <summary>
+            Candlestick information for symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceKline.OpenTime">
+            <summary>
+            The time this candlestick opened
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceKline.Open">
+            <summary>
+            The price at which this candlestick opened
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceKline.High">
+            <summary>
+            The highest price in this candlestick
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceKline.Low">
+            <summary>
+            The lowest price in this candlestick
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceKline.Close">
+            <summary>
+            The price at which this candlestick closed
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceKline.Volume">
+            <summary>
+            The volume traded during this candlestick
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceKline.CloseTime">
+            <summary>
+            The close time of this candlestick
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceKline.QuoteAssetVolume">
+            <summary>
+            The volume traded during this candlestick in the asset form
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceKline.TradeCount">
+            <summary>
+            The amount of trades in this candlestick
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceKline.TakerBuyBaseAssetVolume">
+            <summary>
+            Taker buy base asset volume
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceKline.TakerBuyQuoteAssetVolume">
+            <summary>
+            Taker buy quote asset volume
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Interfaces.IBinanceMiniTick">
+            <summary>
+            MiniTick info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceMiniTick.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceMiniTick.LastPrice">
+            <summary>
+            Close Price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceMiniTick.OpenPrice">
+            <summary>
+            Open Price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceMiniTick.HighPrice">
+            <summary>
+            High
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceMiniTick.LowPrice">
+            <summary>
+            Low
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceMiniTick.TotalTradedBaseAssetVolume">
+            <summary>
+            Total traded base asset volume
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceMiniTick.TotalTradedQuoteAssetVolume">
+            <summary>
+            Total traded quote asset volume
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Interfaces.IBinanceOrderBook">
+            <summary>
+            The order book for a asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceOrderBook.Symbol">
+            <summary>
+            The symbol of the order book (only filled from stream updates)
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceOrderBook.LastUpdateId">
+            <summary>
+            The ID of the last update
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceOrderBook.Bids">
+            <summary>
+            The list of bids
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceOrderBook.Asks">
+            <summary>
+            The list of asks
+            </summary>
+        </member>
         <member name="T:Binance.Net.Interfaces.IBinanceSocketClient">
             <summary>
             Interface for the Binance socket client
@@ -5672,7 +6083,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToBookTickerUpdates(System.String,System.Action{Binance.Net.Objects.BinanceBookTick})">
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToBookTickerUpdates(System.String,System.Action{Binance.Net.Objects.BinanceStreamBookPrice})">
             <summary>
             Subscribes to the book ticker update stream for the provided symbol
             </summary>
@@ -5680,7 +6091,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToBookTickerUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceBookTick})">
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToBookTickerUpdatesAsync(System.String,System.Action{Binance.Net.Objects.BinanceStreamBookPrice})">
             <summary>
             Subscribes to the book ticker update stream for the provided symbol
             </summary>
@@ -5688,7 +6099,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToBookTickerUpdates(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceBookTick})">
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToBookTickerUpdates(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceStreamBookPrice})">
             <summary>
             Subscribes to the book ticker update stream for the provided symbols
             </summary>
@@ -5696,7 +6107,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToBookTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceBookTick})">
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToBookTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.BinanceStreamBookPrice})">
             <summary>
             Subscribes to the book ticker update stream for the provided symbols
             </summary>
@@ -5878,6 +6289,121 @@
             <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
+        <member name="T:Binance.Net.Interfaces.IBinanceTick">
+            <summary>
+            Price statistics of the last 24 hours
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceTick.PriceChange">
+            <summary>
+            The actual price change in the last 24 hours
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceTick.PriceChangePercent">
+            <summary>
+            The price change in percentage in the last 24 hours
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceTick.WeightedAveragePrice">
+            <summary>
+            The weighted average price in the last 24 hours
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceTick.PrevDayClosePrice">
+            <summary>
+            The close price 24 hours ago
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceTick.LastQuantity">
+            <summary>
+            The most recent trade quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceTick.BidPrice">
+            <summary>
+            The best bid price in the order book
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceTick.BidQuantity">
+            <summary>
+            The size of the best bid price in the order book
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceTick.AskPrice">
+            <summary>
+            The best ask price in the order book
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceTick.AskQuantity">
+            <summary>
+            The size of the best ask price in the order book
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceTick.OpenTime">
+            <summary>
+            Time at which this 24 hours opened
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceTick.CloseTime">
+            <summary>
+            Time at which this 24 hours closed
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceTick.FirstTradeId">
+            <summary>
+            The first trade ID in the last 24 hours
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceTick.LastTradeId">
+            <summary>
+            The last trade ID in the last 24 hours
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceTick.TotalTrades">
+            <summary>
+            The amount of trades made in the last 24 hours
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Interfaces.IBinanceTrade">
+            <summary>
+            Information about a trade
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceTrade.OrderId">
+            <summary>
+            The order id the trade belongs to
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceTrade.Symbol">
+            <summary>
+            The symbol the trade is for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceTrade.Price">
+            <summary>
+            The price of the trade
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceTrade.Quantity">
+            <summary>
+            The quantity of the trade
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceTrade.TradeTime">
+            <summary>
+            The time the trade was made
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceTrade.BuyerIsMaker">
+            <summary>
+            Whether account was the buyer in the trade
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceTrade.IsBestMatch">
+            <summary>
+            Whether trade was made with the best match
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Binance24HPrice">
             <summary>
             Price statistics of the last 24 hours
@@ -5903,7 +6429,7 @@
             The weighted average price in the last 24 hours
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Binance24HPrice.PreviousClosePrice">
+        <member name="P:Binance.Net.Objects.Binance24HPrice.PrevDayClosePrice">
             <summary>
             The close price 24 hours ago
             </summary>
@@ -5953,12 +6479,12 @@
             The lowest price in the last 24 hours
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Binance24HPrice.Volume">
+        <member name="P:Binance.Net.Objects.Binance24HPrice.TotalTradedBaseAssetVolume">
             <summary>
             The volume traded in the last 24 hours
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Binance24HPrice.QuoteVolume">
+        <member name="P:Binance.Net.Objects.Binance24HPrice.TotalTradedQuoteAssetVolume">
             <summary>
             The quote asset volume traded in the last 24 hours
             </summary>
@@ -5973,17 +6499,17 @@
             Time at which this 24 hours closed
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Binance24HPrice.FirstId">
+        <member name="P:Binance.Net.Objects.Binance24HPrice.FirstTradeId">
             <summary>
             The first trade ID in the last 24 hours
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Binance24HPrice.LastId">
+        <member name="P:Binance.Net.Objects.Binance24HPrice.LastTradeId">
             <summary>
             The last trade ID in the last 24 hours
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Binance24HPrice.Trades">
+        <member name="P:Binance.Net.Objects.Binance24HPrice.TotalTrades">
             <summary>
             The amount of trades made in the last 24 hours
             </summary>
@@ -6088,47 +6614,47 @@
             Parameters
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.BinanceAggregatedTrades">
+        <member name="T:Binance.Net.Objects.BinanceAggregatedTrade">
             <summary>
             Compressed aggregated trade information. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceAggregatedTrades.AggregateTradeId">
+        <member name="P:Binance.Net.Objects.BinanceAggregatedTrade.AggregateTradeId">
             <summary>
             The id of this aggregation
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceAggregatedTrades.Price">
+        <member name="P:Binance.Net.Objects.BinanceAggregatedTrade.Price">
             <summary>
             The price of trades in this aggregation
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceAggregatedTrades.Quantity">
+        <member name="P:Binance.Net.Objects.BinanceAggregatedTrade.Quantity">
             <summary>
             The total quantity of trades in the aggregation
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceAggregatedTrades.FirstTradeId">
+        <member name="P:Binance.Net.Objects.BinanceAggregatedTrade.FirstTradeId">
             <summary>
             The first trade id in this aggregation
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceAggregatedTrades.LastTradeId">
+        <member name="P:Binance.Net.Objects.BinanceAggregatedTrade.LastTradeId">
             <summary>
             The last trade id in this aggregation
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceAggregatedTrades.Timestamp">
+        <member name="P:Binance.Net.Objects.BinanceAggregatedTrade.TradeTime">
             <summary>
             The timestamp of the trades
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceAggregatedTrades.BuyerWasMaker">
+        <member name="P:Binance.Net.Objects.BinanceAggregatedTrade.BuyerIsMaker">
             <summary>
             Whether the buyer was the maker
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceAggregatedTrades.WasBestPriceMatch">
+        <member name="P:Binance.Net.Objects.BinanceAggregatedTrade.WasBestPriceMatch">
             <summary>
             Whether the trade was matched at the best price
             </summary>
@@ -6158,59 +6684,24 @@
             The symbol the information is about
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceBookPrice.BidPrice">
+        <member name="P:Binance.Net.Objects.BinanceBookPrice.BestBidPrice">
             <summary>
             The highest bid price for the symbol
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceBookPrice.BidQuantity">
+        <member name="P:Binance.Net.Objects.BinanceBookPrice.BestBidQuantity">
             <summary>
             The quantity of the highest bid price currently in the order book
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceBookPrice.AskPrice">
+        <member name="P:Binance.Net.Objects.BinanceBookPrice.BestAskPrice">
             <summary>
             The lowest ask price for the symbol
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceBookPrice.AskQuantity">
+        <member name="P:Binance.Net.Objects.BinanceBookPrice.BestAskQuantity">
             <summary>
             The quantity of the lowest ask price currently in the order book
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceBookTick">
-            <summary>
-            Book tick
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceBookTick.UpdateId">
-            <summary>
-            Update id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceBookTick.Symbol">
-            <summary>
-            The symbol
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceBookTick.BestBidPrice">
-            <summary>
-            Price of the best bid
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceBookTick.BestBidQuantity">
-            <summary>
-            Quantity of the best bid
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceBookTick.BestAskPrice">
-            <summary>
-            Price of the best ask
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceBookTick.BestAskQuantity">
-            <summary>
-            Quantity of the best ask
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinanceCanceledOrder">
@@ -6955,6 +7446,61 @@
             Symbol the request is for
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceFuturesLiquidation">
+            <summary>
+            Forced liquidation info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesLiquidation.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesLiquidation.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesLiquidation.LastQuantityFilled">
+            <summary>
+            Total quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesLiquidation.QuantityFilled">
+            <summary>
+            The executed quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesLiquidation.AveragePrice">
+            <summary>
+            Average price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesLiquidation.Status">
+            <summary>
+            Order status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesLiquidation.TimeInForce">
+            <summary>
+            Time in force
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesLiquidation.Side">
+            <summary>
+            Side
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesLiquidation.Type">
+            <summary>
+            Side
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesLiquidation.Time">
+            <summary>
+            Forced time
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.BinanceFuturesMarginChangeHistoryResult">
             <summary>
             Result of the margin change history request
@@ -7000,7 +7546,7 @@
             The current market price
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesMarkPrice.LastFundingRate">
+        <member name="P:Binance.Net.Objects.BinanceFuturesMarkPrice.FundingRate">
             <summary>
             The last funding rate
             </summary>
@@ -7008,6 +7554,21 @@
         <member name="P:Binance.Net.Objects.BinanceFuturesMarkPrice.NextFundingTime">
             <summary>
             The time the funding rate is applied
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceFuturesOpenInterest">
+            <summary>
+            Forced liquidation info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesOpenInterest.Symbol">
+            <summary>
+            The symbol the information is about
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesOpenInterest.OpenInterest">
+            <summary>
+            Open Interest info
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinanceFuturesPosition">
@@ -7180,7 +7741,7 @@
             Liquidation Sided
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesStreamLiquidation.OrderType">
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamLiquidation.Type">
             <summary>
             Liquidation order type
             </summary>
@@ -7190,7 +7751,7 @@
             Liquidation Time in Force
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesStreamLiquidation.OriginalQuantity">
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamLiquidation.Quantity">
             <summary>
             Liquidation Original Quantity
             </summary>
@@ -7205,17 +7766,17 @@
             Liquidation Average Price
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesStreamLiquidation.OrderStatus">
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamLiquidation.Status">
             <summary>
             Liquidation Order Status
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesStreamLiquidation.LastFilledQty">
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamLiquidation.LastQuantityFilled">
             <summary>
             Liquidation Last Filled Quantity
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesStreamLiquidation.CumulativeFilledQty">
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamLiquidation.QuantityFilled">
             <summary>
             Liquidation Accumulated fill quantity
             </summary>
@@ -7245,7 +7806,7 @@
             Next Funding Rate
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesStreamMarkPrice.FundingTime">
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamMarkPrice.NextFundingTime">
             <summary>
             Next Funding Time
             </summary>
@@ -7260,32 +7821,32 @@
             Symbol
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesStreamMiniTick.Close">
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamMiniTick.LastPrice">
             <summary>
             Close Price
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesStreamMiniTick.Open">
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamMiniTick.OpenPrice">
             <summary>
             Open Price
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesStreamMiniTick.High">
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamMiniTick.HighPrice">
             <summary>
             High
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesStreamMiniTick.Low">
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamMiniTick.LowPrice">
             <summary>
             Low
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesStreamMiniTick.BaseVolume">
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamMiniTick.TotalTradedBaseAssetVolume">
             <summary>
             Total traded base asset volume
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesStreamMiniTick.QuoteVolume">
+        <member name="P:Binance.Net.Objects.BinanceFuturesStreamMiniTick.TotalTradedQuoteAssetVolume">
             <summary>
             Total traded quote asset volume
             </summary>
@@ -7543,6 +8104,51 @@
         <member name="P:Binance.Net.Objects.BinanceFuturesSymbol.PricePercentFilter">
             <summary>
             Filter for the maximum deviation of the price
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceFuturesSymbolBracket">
+            <summary>
+            Notional and Leverage Brackets
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesSymbolBracket.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesSymbolBracket.Brackets">
+            <summary>
+            Brackets
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceFuturesBracket">
+            <summary>
+            Bracket
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesBracket.Bracket">
+            <summary>
+            Notianl bracket
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesBracket.InitialLeverage">
+            <summary>
+            Max initial leverge for this bracket
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesBracket.NotionalCap">
+            <summary>
+            Cap notional of this bracket
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesBracket.NotionalFloor">
+            <summary>
+            Notionl threshold of this bracket
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceFuturesBracket.MaintMarginRatio">
+            <summary>
+            Maintenance ratio for this bracket
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinanceInterestHistory">
@@ -8286,7 +8892,7 @@
             Recent trade info
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceRecentTrade.Id">
+        <member name="P:Binance.Net.Objects.BinanceRecentTrade.OrderId">
             <summary>
             The id of the trade
             </summary>
@@ -8301,12 +8907,12 @@
             The quantity of the trade
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceRecentTrade.Time">
+        <member name="P:Binance.Net.Objects.BinanceRecentTrade.TradeTime">
             <summary>
             The timestamp of the trade
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceRecentTrade.IsBuyerMaker">
+        <member name="P:Binance.Net.Objects.BinanceRecentTrade.BuyerIsMaker">
             <summary>
             Whether the buyer is maker
             </summary>
@@ -8401,7 +9007,7 @@
             The symbol the trade was for
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamAggregatedTrade.AggregatedTradeId">
+        <member name="P:Binance.Net.Objects.BinanceStreamAggregatedTrade.AggregateTradeId">
             <summary>
             The id of this aggregated trade
             </summary>
@@ -8439,6 +9045,41 @@
         <member name="P:Binance.Net.Objects.BinanceStreamAggregatedTrade.Ignore">
             <summary>
             Unused
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceStreamBookPrice">
+            <summary>
+            Book tick
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamBookPrice.UpdateId">
+            <summary>
+            Update id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamBookPrice.Symbol">
+            <summary>
+            The symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamBookPrice.BestBidPrice">
+            <summary>
+            Price of the best bid
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamBookPrice.BestBidQuantity">
+            <summary>
+            Quantity of the best bid
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamBookPrice.BestAskPrice">
+            <summary>
+            Price of the best ask
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamBookPrice.BestAskQuantity">
+            <summary>
+            Quantity of the best ask
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinanceStreamEvent">
@@ -8572,7 +9213,7 @@
             The symbol this data is for
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamMiniTick.CurrentDayClosePrice">
+        <member name="P:Binance.Net.Objects.BinanceStreamMiniTick.LastPrice">
             <summary>
             The current day close price. This is the latest price for this symbol.
             </summary>
@@ -8832,12 +9473,12 @@
             The price change of this symbol
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.PriceChangePercentage">
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.PriceChangePercent">
             <summary>
             The price change percentage of this symbol
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.WeightedAverage">
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.WeightedAveragePrice">
             <summary>
             The weighted average
             </summary>
@@ -8847,14 +9488,34 @@
             The close price of the previous day
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.CurrentDayClosePrice">
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.LastPrice">
             <summary>
             The current day close price. This is the latest price for this symbol.
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.CloseTradesQuantity">
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.LastQuantity">
             <summary>
-            
+            The most recent trade quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.BidPrice">
+            <summary>
+            The best bid price in the order book
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.BidQuantity">
+            <summary>
+            The size of the best bid price in the order book
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.AskPrice">
+            <summary>
+            The best ask price in the order book
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.AskQuantity">
+            <summary>
+            The size of the best ask price in the order book
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BinanceStreamTick.OpenPrice">
@@ -8897,12 +9558,12 @@
             The total trades of id
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.StatisticsOpenTime">
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.OpenTime">
             <summary>
             The open time of these stats
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTick.StatisticsCloseTime">
+        <member name="P:Binance.Net.Objects.BinanceStreamTick.CloseTime">
             <summary>
             The close time of these stats
             </summary>
@@ -8917,7 +9578,7 @@
             The symbol the trade was for
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTrade.TradeId">
+        <member name="P:Binance.Net.Objects.BinanceStreamTrade.OrderId">
             <summary>
             The id of this aggregated trade
             </summary>
@@ -8952,7 +9613,7 @@
             Whether the buyer was the maker
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceStreamTrade.Ignore">
+        <member name="P:Binance.Net.Objects.BinanceStreamTrade.IsBestMatch">
             <summary>
             Unused
             </summary>

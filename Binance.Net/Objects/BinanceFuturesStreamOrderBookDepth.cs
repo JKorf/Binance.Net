@@ -1,4 +1,5 @@
-﻿using CryptoExchange.Net.Converters;
+﻿using Binance.Net.Interfaces;
+using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace Binance.Net.Objects
     /// <summary>
     /// The order book for a asset
     /// </summary>
-    public class BinanceFuturesStreamOrderBookDepth : BinanceStreamEvent
+    public class BinanceFuturesStreamOrderBookDepth : BinanceStreamEvent, IBinanceOrderBook
     {
         /// <summary>
         /// The symbol of the order book (only filled from stream updates)

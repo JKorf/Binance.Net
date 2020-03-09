@@ -63,6 +63,9 @@ namespace Binance.Net
         private const string Price24HEndpoint = "ticker/24hr";
         private const string AllPricesEndpoint = "ticker/price";
         private const string BookPricesEndpoint = "ticker/bookTicker";
+        private const string AllForcedOrdersEndpoint = "allForceOrders";
+        private const string OpenInterestEndpoint = "openInterest";
+        private const string LeverageBracketEndpoint = "leverageBracket";
 
         // Orders
         private const string NewOrderEndpoint = "order";
@@ -340,7 +343,7 @@ namespace Binance.Net
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The aggregated trades list for the symbol</returns>
-        public WebCallResult<IEnumerable<BinanceAggregatedTrades>> GetAggregatedTrades(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default) => GetAggregatedTradesAsync(symbol, fromId, startTime, endTime, limit, ct).Result;
+        public WebCallResult<IEnumerable<BinanceAggregatedTrade>> GetAggregatedTrades(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default) => GetAggregatedTradesAsync(symbol, fromId, startTime, endTime, limit, ct).Result;
 
         /// <summary>
         /// Gets compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
@@ -352,7 +355,7 @@ namespace Binance.Net
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The aggregated trades list for the symbol</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceAggregatedTrades>>> GetAggregatedTradesAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceAggregatedTrade>>> GetAggregatedTradesAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);
@@ -363,7 +366,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
             parameters.AddOptionalParameter("limit", limit?.ToString());
 
-            return await SendRequest<IEnumerable<BinanceAggregatedTrades>>(GetUrl(AggregatedTradesEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceAggregatedTrade>>(GetUrl(AggregatedTradesEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -594,6 +597,98 @@ namespace Binance.Net
         public async Task<WebCallResult<IEnumerable<BinanceBookPrice>>> GetAllBookPricesAsync(CancellationToken ct = default)
         {
             return await SendRequest<IEnumerable<BinanceBookPrice>>(GetUrl(BookPricesEndpoint, Api, PublicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get all Liquidation Orders
+        /// </summary>
+        /// <param name="Symbol">The symbol to get the data for</param>
+        /// <param name="startTime">Start time to get  liquidation orders history</param>
+        /// <param name="endTime">End time to get liquidation orders history</param>
+        /// <param name="limit">Max number of results. Default:100 Max:1000</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The all liquidation orders</returns>
+        public WebCallResult<IEnumerable<BinanceFuturesLiquidation>> GetAllLiquidationOrders(string? Symbol = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default) => GetAllLiquidationOrdersAsync(Symbol, startTime, endTime, limit, ct).Result;
+
+        /// <summary>
+        /// Get all Liquidation Orders
+        /// </summary>
+        /// <param name="Symbol">The symbol to get the data for</param>
+        /// <param name="startTime">Start time to get  liquidation orders history</param>
+        /// <param name="endTime">End time to get liquidation orders history</param>
+        /// <param name="limit">Max number of results. Default:100 Max:1000</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The all liquidation orders</returns>
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesLiquidation>>> GetAllLiquidationOrdersAsync(string? Symbol = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        {
+            Symbol?.ValidateBinanceSymbol();
+            limit?.ValidateIntBetween(nameof(limit), 0, 1000);
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("symbol", Symbol != null ? Symbol : null);
+            parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString() : null);
+            parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
+            parameters.AddOptionalParameter("limit", limit?.ToString());
+
+            return await SendRequest<IEnumerable<BinanceFuturesLiquidation>>(GetUrl(AllForcedOrdersEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets Open Interest
+        /// </summary>
+        /// <param name="Symbol">The symbol to get the data for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Open Interest info</returns>
+        public WebCallResult<BinanceFuturesOpenInterest> GetOpenInterest(string Symbol, CancellationToken ct = default) => GetOpenInterestAsync(Symbol, ct).Result;
+
+        /// <summary>
+        /// Gets the best price/quantity on the order book for all symbols.
+        /// </summary>
+        /// <param name="Symbol">The symbol to get the data for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of book prices</returns>
+        public async Task<WebCallResult<BinanceFuturesOpenInterest>> GetOpenInterestAsync(string Symbol, CancellationToken ct = default)
+        {
+            Symbol?.ValidateBinanceSymbol();
+
+            return await SendRequest<BinanceFuturesOpenInterest>(GetUrl(OpenInterestEndpoint, Api, PublicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets Notional and Leverage Brackets
+        /// </summary>
+        /// <param name="Symbol">The symbol to get the data for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Notional and Leverage Brackets info</returns>
+        public WebCallResult<BinanceFuturesSymbolBracket> GetBrackets(string Symbol, CancellationToken ct = default) => GetBracketsAsync(Symbol, ct).Result;
+
+        /// <summary>
+        /// Gets Notional and Leverage Brackets.
+        /// </summary>
+        /// <param name="Symbol">The symbol to get the data for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Notional and Leverage Brackets</returns>
+        public async Task<WebCallResult<BinanceFuturesSymbolBracket>> GetBracketsAsync(string Symbol, CancellationToken ct = default)
+        {
+            Symbol?.ValidateBinanceSymbol();
+
+            return await SendRequest<BinanceFuturesSymbolBracket>(GetUrl(LeverageBracketEndpoint, Api, PublicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets all Notional and Leverage Brackets
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Notional and Leverage Brackets info</returns>
+        public WebCallResult<IEnumerable<BinanceFuturesSymbolBracket>> GetBrackets(CancellationToken ct = default) => GetBracketsAsync(ct).Result;
+
+        /// <summary>
+        /// Gets all Notional and Leverage Brackets.
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Notional and Leverage Brackets</returns>
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesSymbolBracket>>> GetBracketsAsync(CancellationToken ct = default)
+        {
+            return await SendRequest<IEnumerable<BinanceFuturesSymbolBracket>>(GetUrl(LeverageBracketEndpoint, Api, PublicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
         }
         #endregion
 

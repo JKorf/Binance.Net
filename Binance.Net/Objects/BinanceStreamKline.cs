@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using CryptoExchange.Net.Converters;
+using Binance.Net.Interfaces;
 
 namespace Binance.Net.Objects
 {
@@ -26,7 +27,7 @@ namespace Binance.Net.Objects
     /// <summary>
     /// The kline data
     /// </summary>
-    public class BinanceStreamKline
+    public class BinanceStreamKline : IBinanceKline
     {
         /// <summary>
         /// The open time of this candlestick
