@@ -27,12 +27,8 @@ namespace Binance.Net.Converters
             { OrderType.LimitMaker, "LIMIT_MAKER" },
             { OrderType.StopLoss, "STOP_LOSS" },
             { OrderType.StopLossLimit, "STOP_LOSS_LIMIT" },
-            { OrderType.Stop, "STOP" },
-            { OrderType.StopMarket, "STOP_MARKET" },
             { OrderType.TakeProfit, "TAKE_PROFIT" },
-            { OrderType.TakeProfitMarket, "TAKE_PROFIT_MARKET" },
-            { OrderType.TakeProfitLimit, "TAKE_PROFIT_LIMIT" },
-            { OrderType.TralingStopMaret, "TRAILING_STOP_MARKET" }
+            { OrderType.TakeProfitLimit, "TAKE_PROFIT_LIMIT" }
         };
 
         public override bool CanConvert(Type objectType)

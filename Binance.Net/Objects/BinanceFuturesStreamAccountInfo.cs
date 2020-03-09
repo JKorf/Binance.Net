@@ -1,11 +1,27 @@
 using System;
 using System.Collections.Generic;
-using Binance.Net.Converters;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects
 {
+    /// <summary>
+    /// Information about an account
+    /// </summary>
+    public class BinanceFuturesStreamAccountInfo: BinanceStreamEvent
+    {
+        /// <summary>
+        /// List of assets with their current balances
+        /// </summary>
+        [JsonProperty("B")]
+        public List<BinanceFuturesStreamBalance>? Balances { get; set; }
+        /// <summary>
+        /// List of assets with their current positions
+        /// </summary>
+        [JsonProperty("P")]
+        public List<BinanceFuturesStreamPosition>? Positions { get; set; }
+    }
+
     /// <summary>
     /// Information about an asset balance
     /// </summary>
@@ -21,11 +37,6 @@ namespace Binance.Net.Objects
         /// </summary>
         [JsonProperty("wb")]
         public decimal WalletBalance { get; set; }
-        /// <summary>
-        /// The amount that is locked in a trade
-        /// </summary>
-        [JsonProperty("wb")]
-        public decimal CrossBalance { get; set; }
     }
 
     /// <summary>
@@ -53,22 +64,5 @@ namespace Binance.Net.Objects
         /// </summary>
         [JsonProperty("cr")]
         public decimal RealizedPnL { get; set; }
-        /// <summary>
-        /// The Unrealized PnL
-        /// </summary>
-        [JsonProperty("up")]
-        public decimal UnRealizedPnL { get; set; }
-
-        /// <summary>
-        /// The margin type
-        /// </summary>
-        [JsonProperty("mt"), JsonConverter(typeof(FuturesMarginTypeConverter))]
-        public FuturesMarginType MarginType { get; set; }
-
-        /// <summary>
-        /// The isolated wallet (if isolated position)
-        /// </summary>
-        [JsonProperty("iw")]
-        public decimal IsolatedWallet { get; set; }
     }
 }

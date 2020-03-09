@@ -8,7 +8,7 @@ namespace Binance.Net.Objects
     /// <summary>
     /// Update data about an order
     /// </summary>
-    public class BinanceFuturesStreamOrderUpdate
+    public class BinanceFuturesStreamOrderUpdate: BinanceStreamEvent
     {
         /// <summary>
         /// The symbol the order is for
@@ -110,15 +110,5 @@ namespace Binance.Net.Objects
         /// </summary>
         [JsonProperty("m")]
         public bool BuyerIsMaker { get; set; }
-        /// <summary>
-        /// Is this reduce only
-        /// </summary>
-        [JsonProperty("R")]
-        public bool IsReduce { get; set; }
-        /// <summary>
-        /// Stop price working type
-        /// </summary>
-        [JsonProperty("wt"), JsonConverter(typeof(WorkingTypeConverter))]
-        public WorkingType StopPriceWorking { get; set; }
     }
 }

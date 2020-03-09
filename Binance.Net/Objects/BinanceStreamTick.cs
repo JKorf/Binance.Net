@@ -66,6 +66,26 @@ namespace Binance.Net.Objects
         [JsonProperty("A")]
         public decimal AskQuantity { get; set; }
         /// <summary>
+        /// The best bid price in the order book
+        /// </summary>
+        [JsonProperty("b")]
+        public decimal BestBidPrice { get; set; }
+        /// <summary>
+        /// The quantity of the best bid price available
+        /// </summary>
+        [JsonProperty("B")]
+        public decimal BestBidQuantity { get; set; }
+        /// <summary>
+        /// The best ask price in the order book
+        /// </summary>
+        [JsonProperty("a")]
+        public decimal BestAskPrice { get; set; }
+        /// <summary>
+        /// The quantity of the best ask price
+        /// </summary>
+        [JsonProperty("A")]
+        public decimal BestAskQuantity { get; set; }
+        /// <summary>
         /// Todays open price
         /// </summary>
         [JsonProperty("o")]
