@@ -71,6 +71,7 @@ namespace Binance.Net
         private const string NewOrderEndpoint = "order";
         private const string QueryOrderEndpoint = "order";
         private const string CancelOrderEndpoint = "order";
+        private const string OpenOrderEndpoint = "openOrder";
         private const string OpenOrdersEndpoint = "openOrders";
         private const string AllOrdersEndpoint = "allOrders";
         // Accounts
@@ -773,7 +774,7 @@ namespace Binance.Net
 
         #region signed
 
-        #region Account/Trades Endpoints [3 ENDPOINTS NOT AVAILIBLE YET]
+        #region Account/Trades Endpoints [2 ENDPOINTS NOT AVAILABLE YET]
 
         #region New Order
 
@@ -973,8 +974,50 @@ namespace Binance.Net
 
         #endregion
 
-        #region Query Current Open Order [NOT AVAILABLE YET]
+        #region Query Current Open Order
 
+        /// <summary>
+        /// Retrieves data for a specific current orders. Either orderId or origClientOrderId should be provided.
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="orderId">The order id of the order</param>
+        /// <param name="origClientOrderId">The client order id of the order</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The specific order</returns>
+        public WebCallResult<IEnumerable<BinanceFuturesOrder>> GetOpenOrders(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default) => GetOpenOrdersAsync(symbol, orderId, origClientOrderId, receiveWindow, ct).Result;
+
+        /// <summary>
+        /// Retrieves data for a specific current orders. Either orderId or origClientOrderId should be provided.
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="orderId">The order id of the order</param>
+        /// <param name="origClientOrderId">The client order id of the order</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The specific order</returns>
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetOpenOrdersAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            symbol.ValidateBinanceSymbol();
+
+            if (orderId == null && origClientOrderId == null)
+                throw new ArgumentException("Either orderId or origClientOrderId must be sent");
+
+            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<IEnumerable<BinanceFuturesOrder>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "symbol", symbol },
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("orderId", orderId?.ToString());
+            parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await SendRequest<IEnumerable<BinanceFuturesOrder>>(GetUrl(OpenOrderEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
 
         #endregion
 

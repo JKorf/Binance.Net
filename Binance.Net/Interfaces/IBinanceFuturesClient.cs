@@ -539,6 +539,30 @@ namespace Binance.Net.Interfaces
         /// <returns>Id's for canceled order</returns>
         Task<WebCallResult<BinanceFuturesCancelOrder>> CancelOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, string? newClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
 
+
+        /// <summary>
+        /// Retrieves data for a specific current orders. Either orderId or origClientOrderId should be provided.
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="orderId">The order id of the order</param>
+        /// <param name="origClientOrderId">The client order id of the order</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The specific order</returns>
+        public WebCallResult<IEnumerable<BinanceFuturesOrder>> GetOpenOrders(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Retrieves data for a specific current orders. Either orderId or origClientOrderId should be provided.
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="orderId">The order id of the order</param>
+        /// <param name="origClientOrderId">The client order id of the order</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The specific order</returns>
+        Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetOpenOrdersAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
+
+
         /// <summary>
         /// Gets account information, including balances
         /// </summary>

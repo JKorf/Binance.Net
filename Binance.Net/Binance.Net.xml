@@ -1927,6 +1927,28 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for canceled order</returns>
         </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetOpenOrders(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Retrieves data for a specific current orders. Either orderId or origClientOrderId should be provided.
+            </summary>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="orderId">The order id of the order</param>
+            <param name="origClientOrderId">The client order id of the order</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The specific order</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetOpenOrdersAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Retrieves data for a specific current orders. Either orderId or origClientOrderId should be provided.
+            </summary>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="orderId">The order id of the order</param>
+            <param name="origClientOrderId">The client order id of the order</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The specific order</returns>
+        </member>
         <member name="M:Binance.Net.BinanceFuturesClient.GetOpenOrders(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets a list of open orders
@@ -5111,6 +5133,28 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for canceled order</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetOpenOrders(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Retrieves data for a specific current orders. Either orderId or origClientOrderId should be provided.
+            </summary>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="orderId">The order id of the order</param>
+            <param name="origClientOrderId">The client order id of the order</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The specific order</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetOpenOrdersAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Retrieves data for a specific current orders. Either orderId or origClientOrderId should be provided.
+            </summary>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="orderId">The order id of the order</param>
+            <param name="origClientOrderId">The client order id of the order</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The specific order</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetAccountInfo(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
