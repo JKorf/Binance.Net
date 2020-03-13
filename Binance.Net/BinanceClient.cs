@@ -132,6 +132,7 @@ namespace Binance.Net
 
         // Sub accounts
         private const string SubAccountListEndpoint = "sub-account/list.html";
+        private const string SubAccountStatusEndpoint = "sub-account/status";
         private const string SubAccountTransferHistoryEndpoint = "sub-account/transfer/history.html";
         private const string TransferSubAccountEndpoint = "sub-account/transfer.html";
 
@@ -1447,6 +1448,39 @@ namespace Binance.Net
                 return new WebCallResult<IEnumerable<BinanceSubAccount>>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
 
             return !result.Data.Success ? new WebCallResult<IEnumerable<BinanceSubAccount>>(result.ResponseStatusCode, result.ResponseHeaders, null, new ServerError(result.Data.Message!)) : new WebCallResult<IEnumerable<BinanceSubAccount>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.SubAccounts, null);
+        }
+
+
+        /// <summary>
+        /// Get Sub-account's Status on Margin/Futures(For Master Account)
+        /// </summary>
+        /// <param name="email">Filter the list by email</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of sub accounts status</returns>
+        public WebCallResult<IEnumerable<BinanceSubAccountStatus>> GetSubAccountStatus(string? email = null, int? receiveWindow = null, CancellationToken ct = default) => GetSubAccountStatusAsync(email, receiveWindow, ct).Result;
+
+        /// <summary>
+        /// Get Sub-account's Status on Margin/Futures(For Master Account)
+        /// </summary>
+        /// <param name="email">Filter the list by email</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of sub accounts status</returns>
+        public async Task<WebCallResult<IEnumerable<BinanceSubAccountStatus>>> GetSubAccountStatusAsync(string? email = null, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<IEnumerable<BinanceSubAccountStatus>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("email", email);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await SendRequest<IEnumerable<BinanceSubAccountStatus>>(GetUrl(SubAccountStatusEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <summary>
