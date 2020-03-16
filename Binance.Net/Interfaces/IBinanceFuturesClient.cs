@@ -91,7 +91,7 @@ namespace Binance.Net.Interfaces
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The aggregated trades list for the symbol</returns>
-        WebCallResult<IEnumerable<BinanceAggregatedTrades>> GetAggregatedTrades(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        WebCallResult<IEnumerable<BinanceAggregatedTrade>> GetAggregatedTrades(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
@@ -103,7 +103,7 @@ namespace Binance.Net.Interfaces
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The aggregated trades list for the symbol</returns>
-        Task<WebCallResult<IEnumerable<BinanceAggregatedTrades>>> GetAggregatedTradesAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceAggregatedTrade>>> GetAggregatedTradesAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the recent trades for a symbol
@@ -188,14 +188,14 @@ namespace Binance.Net.Interfaces
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of data over the last 24 hours</returns>
-        WebCallResult<IEnumerable<BinanceFuturesMarkPrice>> GetMarkPricesList(CancellationToken ct = default);
+        WebCallResult<IEnumerable<BinanceFuturesMarkPrice>> GetAllMarkPrices(CancellationToken ct = default);
 
         /// <summary>
         /// Get Mark Price and Funding Rate for all symbols
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of data over the last 24 hours</returns>
-        Task<WebCallResult<IEnumerable<BinanceFuturesMarkPrice>>> GetMarkPricesListAsync(CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceFuturesMarkPrice>>> GetAllMarkPricesAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get funding rate history for the provided symbol
@@ -240,14 +240,14 @@ namespace Binance.Net.Interfaces
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of data over the last 24 hours</returns>
-        WebCallResult<IEnumerable<Binance24HPrice>> Get24HPricesList(CancellationToken ct = default);
+        WebCallResult<IEnumerable<Binance24HPrice>> Get24HPrices(CancellationToken ct = default);
 
         /// <summary>
         /// Get data regarding the last 24 hours for all symbols
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of data over the last 24 hours</returns>
-        Task<WebCallResult<IEnumerable<Binance24HPrice>>> Get24HPricesListAsync(CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<Binance24HPrice>>> Get24HPricesAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Gets the price of a symbol
@@ -310,13 +310,72 @@ namespace Binance.Net.Interfaces
         Task<WebCallResult<IEnumerable<BinanceBookPrice>>> GetAllBookPricesAsync(CancellationToken ct = default);
 
         /// <summary>
-        /// Gets a list of open orders
+        /// Get all Liquidation Orders
         /// </summary>
-        /// <param name="symbol">The symbol to get open orders for</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="Symbol">The symbol to get the data for</param>
+        /// <param name="startTime">Start time to get  liquidation orders history</param>
+        /// <param name="endTime">End time to get liquidation orders history</param>
+        /// <param name="limit">Max number of results. Default:100 Max:1000</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>List of open orders</returns>
-        WebCallResult<IEnumerable<BinanceOrder>> GetOpenOrders(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default);
+        /// <returns>The all liquidation orders</returns>
+        WebCallResult<IEnumerable<BinanceFuturesLiquidation>> GetAllLiquidationOrders(string? Symbol = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get all Liquidation Orders
+        /// </summary>
+        /// <param name="Symbol">The symbol to get the data for</param>
+        /// <param name="startTime">Start time to get  liquidation orders history</param>
+        /// <param name="endTime">End time to get liquidation orders history</param>
+        /// <param name="limit">Max number of results. Default:100 Max:1000</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The all liquidation orders</returns>
+        Task<WebCallResult<IEnumerable<BinanceFuturesLiquidation>>> GetAllLiquidationOrdersAsync(string? Symbol = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets Open Interest
+        /// </summary>
+        /// <param name="Symbol">The symbol to get the data for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Open Interest info</returns>
+        WebCallResult<BinanceFuturesOpenInterest> GetOpenInterest(string Symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets the best price/quantity on the order book for all symbols.
+        /// </summary>
+        /// <param name="Symbol">The symbol to get the data for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of book prices</returns>
+        Task<WebCallResult<BinanceFuturesOpenInterest>> GetOpenInterestAsync(string Symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets Notional and Leverage Brackets
+        /// </summary>
+        /// <param name="Symbol">The symbol to get the data for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Notional and Leverage Brackets info</returns>
+        WebCallResult<BinanceFuturesSymbolBracket> GetBracket(string Symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets Notional and Leverage Brackets.
+        /// </summary>
+        /// <param name="Symbol">The symbol to get the data for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Notional and Leverage Brackets</returns>
+        Task<WebCallResult<BinanceFuturesSymbolBracket>> GetBracketAsync(string Symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets all Notional and Leverage Brackets
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Notional and Leverage Brackets info</returns>
+        WebCallResult<IEnumerable<BinanceFuturesSymbolBracket>> GetBrackets(CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets all Notional and Leverage Brackets.
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Notional and Leverage Brackets</returns>
+        Task<WebCallResult<IEnumerable<BinanceFuturesSymbolBracket>>> GetBracketsAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Gets a list of open orders
@@ -325,7 +384,16 @@ namespace Binance.Net.Interfaces
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of open orders</returns>
-        Task<WebCallResult<IEnumerable<BinanceOrder>>> GetOpenOrdersAsync(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default);
+        WebCallResult<IEnumerable<BinanceFuturesOrder>> GetOpenOrders(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets a list of open orders
+        /// </summary>
+        /// <param name="symbol">The symbol to get open orders for</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of open orders</returns>
+        Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetOpenOrdersAsync(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets all orders for the provided symbol
@@ -338,7 +406,7 @@ namespace Binance.Net.Interfaces
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of orders</returns>
-        WebCallResult<IEnumerable<BinanceOrder>> GetAllOrders(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+        WebCallResult<IEnumerable<BinanceFuturesOrder>> GetAllOrders(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets all orders for the provided symbol
@@ -351,7 +419,7 @@ namespace Binance.Net.Interfaces
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of orders</returns>
-        Task<WebCallResult<IEnumerable<BinanceOrder>>> GetAllOrdersAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetAllOrdersAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Places a new order
@@ -365,11 +433,14 @@ namespace Binance.Net.Interfaces
         /// <param name="price">The price to use</param>
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
+        /// <param name="activationPrice">Used with TRAILING_STOP_MARKET orders, default as the latest price（supporting different workingType)</param>
+        /// <param name="callbackRate">Used with TRAILING_STOP_MARKET orders</param>
+        /// <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
         /// <param name="orderResponseType">The type of response to receive</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed order</returns>
-        WebCallResult<BinancePlacedOrder> PlaceOrder(
+        WebCallResult<BinanceFuturesPlacedOrder> PlaceOrder(
             string symbol,
             OrderSide side,
             OrderType type,
@@ -379,6 +450,9 @@ namespace Binance.Net.Interfaces
             decimal? price = null,
             string? newClientOrderId = null,
             decimal? stopPrice = null,
+            decimal? activationPrice = null,
+            decimal? callbackRate = null,
+            WorkingType? workingType = null,
             OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
             CancellationToken ct = default);
@@ -395,11 +469,14 @@ namespace Binance.Net.Interfaces
         /// <param name="price">The price to use</param>
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
+        /// <param name="activationPrice">Used with TRAILING_STOP_MARKET orders, default as the latest price（supporting different workingType)</param>
+        /// <param name="callbackRate">Used with TRAILING_STOP_MARKET orders</param>
+        /// <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
         /// <param name="orderResponseType">The type of response to receive</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed order</returns>
-        Task<WebCallResult<BinancePlacedOrder>> PlaceOrderAsync(
+        Task<WebCallResult<BinanceFuturesPlacedOrder>> PlaceOrderAsync(
             string symbol,
             OrderSide side,
             OrderType type,
@@ -409,6 +486,9 @@ namespace Binance.Net.Interfaces
             decimal? price = null,
             string? newClientOrderId = null,
             decimal? stopPrice = null,
+            decimal? activationPrice = null,
+            decimal? callbackRate = null,
+            WorkingType? workingType = null,
             OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
             CancellationToken ct = default);
@@ -422,7 +502,7 @@ namespace Binance.Net.Interfaces
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The specific order</returns>
-        WebCallResult<BinanceOrder> GetOrder(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
+        WebCallResult<BinanceFuturesOrder> GetOrder(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
@@ -433,7 +513,7 @@ namespace Binance.Net.Interfaces
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The specific order</returns>
-        Task<WebCallResult<BinanceOrder>> GetOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceFuturesOrder>> GetOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Cancels a pending order
@@ -445,7 +525,7 @@ namespace Binance.Net.Interfaces
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for canceled order</returns>
-        WebCallResult<BinanceCanceledOrder> CancelOrder(string symbol, long? orderId = null, string? origClientOrderId = null, string? newClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
+        WebCallResult<BinanceFuturesCancelOrder> CancelOrder(string symbol, long? orderId = null, string? origClientOrderId = null, string? newClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Cancels a pending order
@@ -457,7 +537,31 @@ namespace Binance.Net.Interfaces
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for canceled order</returns>
-        Task<WebCallResult<BinanceCanceledOrder>> CancelOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, string? newClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceFuturesCancelOrder>> CancelOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, string? newClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
+
+
+        /// <summary>
+        /// Retrieves data for a specific current orders. Either orderId or origClientOrderId should be provided.
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="orderId">The order id of the order</param>
+        /// <param name="origClientOrderId">The client order id of the order</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The specific order</returns>
+        public WebCallResult<IEnumerable<BinanceFuturesOrder>> GetOpenOrders(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Retrieves data for a specific current orders. Either orderId or origClientOrderId should be provided.
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="orderId">The order id of the order</param>
+        /// <param name="origClientOrderId">The client order id of the order</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The specific order</returns>
+        Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetOpenOrdersAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
+
 
         /// <summary>
         /// Gets account information, including balances

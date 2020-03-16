@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Binance.Net.Converters;
+using Binance.Net.Interfaces;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
@@ -21,13 +22,13 @@ namespace Binance.Net.Objects
     /// <summary>
     /// 
     /// </summary>
-    public class BinanceFuturesStreamLiquidation
+    public class BinanceFuturesStreamLiquidation : IBinanceFuturesLiquidation
     {
         /// <summary>
         /// Symbol
         /// </summary>
         [JsonProperty("s")]
-        public string? Symbol { get; set; }
+        public string Symbol { get; set; }
 
         /// <summary>
         /// Liquidation Sided
@@ -39,7 +40,7 @@ namespace Binance.Net.Objects
         /// Liquidation order type
         /// </summary>
         [JsonProperty("o"), JsonConverter(typeof(OrderTypeConverter))]
-        public OrderType OrderType { get; set; }
+        public OrderType Type { get; set; }
         
         /// <summary>
         /// Liquidation Time in Force
@@ -51,7 +52,7 @@ namespace Binance.Net.Objects
         /// Liquidation Original Quantity
         /// </summary>
         [JsonProperty("q")]
-        public decimal OriginalQuantity { get; set; }
+        public decimal Quantity { get; set; }
         
         /// <summary>
         /// Liquidation order price
@@ -69,19 +70,19 @@ namespace Binance.Net.Objects
         /// Liquidation Order Status
         /// </summary>
         [JsonProperty("X"), JsonConverter(typeof(OrderStatusConverter))]
-        public OrderStatus OrderStatus { get; set; }
+        public OrderStatus Status { get; set; }
         
         /// <summary>
         /// Liquidation Last Filled Quantity
         /// </summary>
         [JsonProperty("l")]
-        public decimal LastFilledQty { get; set; }
+        public decimal LastQuantityFilled { get; set; }
         
         /// <summary>
         /// Liquidation Accumulated fill quantity
         /// </summary>
         [JsonProperty("z")]
-        public decimal CumulativeFilledQty { get; set; }
+        public decimal QuantityFilled { get; set; }
         
         /// <summary>
         /// Liquidation Trade Time

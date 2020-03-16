@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Binance.Net.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Binance.Net.Objects
     /// <summary>
     /// MiniTick info
     /// </summary>
-    public class BinanceStreamMiniTick : BinanceStreamEvent
+    public class BinanceStreamMiniTick : BinanceStreamEvent, IBinanceMiniTick
     {
         /// <summary>
         /// The symbol this data is for
@@ -20,7 +21,7 @@ namespace Binance.Net.Objects
         /// The current day close price. This is the latest price for this symbol.
         /// </summary>
         [JsonProperty("c")]
-        public decimal CurrentDayClosePrice { get; set; }
+        public decimal LastPrice { get; set; }
 
         /// <summary>
         /// Todays open price

@@ -1,4 +1,5 @@
 ﻿using System;
+using Binance.Net.Interfaces;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
@@ -7,7 +8,7 @@ namespace Binance.Net.Objects
     /// <summary>
     /// Price statistics of the last 24 hours
     /// </summary>
-    public class Binance24HPrice
+    public class Binance24HPrice : IBinanceTick
     {
         /// <summary>
         /// The symbol the price is for
@@ -30,7 +31,7 @@ namespace Binance.Net.Objects
         /// The close price 24 hours ago
         /// </summary>
         [JsonProperty("prevClosePrice")]
-        public decimal PreviousClosePrice { get; set; }
+        public decimal PrevDayClosePrice { get; set; }
         /// <summary>
         /// The most recent trade price
         /// </summary>
@@ -73,11 +74,13 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The volume traded in the last 24 hours
         /// </summary>
-        public decimal Volume { get; set; }
+        [JsonProperty("volume")]
+        public decimal TotalTradedBaseAssetVolume { get; set; }
         /// <summary>
         /// The quote asset volume traded in the last 24 hours
         /// </summary>
-        public decimal QuoteVolume { get; set; }
+        [JsonProperty("volume")]
+        public decimal TotalTradedQuoteAssetVolume { get; set; }
         /// <summary>
         /// Time at which this 24 hours opened
         /// </summary>
@@ -91,15 +94,15 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The first trade ID in the last 24 hours
         /// </summary>
-        public long FirstId { get; set; }
+        public long FirstTradeId { get; set; }
         /// <summary>
         /// The last trade ID in the last 24 hours
         /// </summary>
-        public long LastId { get; set; }
+        public long LastTradeId { get; set; }
         /// <summary>
         /// The amount of trades made in the last 24 hours
         /// </summary>
         [JsonProperty("count")]
-        public int Trades { get; set; }
+        public long TotalTrades { get; set; }
     }
 }

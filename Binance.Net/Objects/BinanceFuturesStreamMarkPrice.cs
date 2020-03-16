@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Binance.Net.Interfaces;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
@@ -8,7 +9,7 @@ namespace Binance.Net.Objects
     /// <summary>
     /// TODO
     /// </summary>
-    public class BinanceFuturesStreamMarkPrice: BinanceStreamEvent
+    public class BinanceFuturesStreamMarkPrice: BinanceStreamEvent, IBinanceFuturesMarkPrice
     {
         /// <summary>
         /// Symbol
@@ -32,6 +33,6 @@ namespace Binance.Net.Objects
         /// Next Funding Time
         /// </summary>
         [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
-        public DateTime FundingTime { get; set; }
+        public DateTime NextFundingTime { get; set; }
     }
 }

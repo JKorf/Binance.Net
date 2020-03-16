@@ -1,11 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using Binance.Net.Interfaces;
+using Newtonsoft.Json;
 
 namespace Binance.Net.Objects
 {
     /// <summary>
     /// Information about the best price/quantity available for a symbol
     /// </summary>
-    public class BinanceBookPrice
+    public class BinanceBookPrice : IBinanceBookPrice
     {
         /// <summary>
         /// The symbol the information is about
@@ -14,20 +15,22 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The highest bid price for the symbol
         /// </summary>
-        public decimal BidPrice { get; set; }
+        [JsonProperty("bidPrice")]
+        public decimal BestBidPrice { get; set; }
         /// <summary>
         /// The quantity of the highest bid price currently in the order book
         /// </summary>
         [JsonProperty("bidQty")]
-        public decimal BidQuantity { get; set; }
+        public decimal BestBidQuantity { get; set; }
         /// <summary>
         /// The lowest ask price for the symbol
         /// </summary>
-        public decimal AskPrice { get; set; }
+        [JsonProperty("askPrice")]
+        public decimal BestAskPrice { get; set; }
         /// <summary>
         /// The quantity of the lowest ask price currently in the order book
         /// </summary>
         [JsonProperty("askQty")]
-        public decimal AskQuantity { get; set; }
+        public decimal BestAskQuantity { get; set; }
     }
 }

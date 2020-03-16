@@ -44,21 +44,21 @@ namespace Binance.Net.UnitTests
                 AskPrice = 0.123m,
                 BidPrice = 0.456m,
                 CloseTime = new DateTime(2017, 01, 02),
-                FirstId = 10000000000,
+                FirstTradeId = 10000000000,
                 HighPrice = 0.789m,
-                LastId = 20000000000,
-                LastPrice = 1.123m,
+                LastTradeId = 20000000000,
+                PrevDayClosePrice = 1.123m,
                 LowPrice = 1.456m,
                 OpenPrice = 1.789m,
                 OpenTime = new DateTime(2017, 01, 01),
-                PreviousClosePrice = 2.123m,
+                LastPrice = 2.123m,
                 PriceChange = 2.456m,
                 PriceChangePercent = 2.789m,
-                Trades = 123,
-                Volume = 3.123m,
+                TotalTrades = 123,
+                TotalTradedBaseAssetVolume = 3.123m,
                 AskQuantity = 3.456m,
                 BidQuantity = 3.789m,
-                QuoteVolume = 4.123m,
+                TotalTradedQuoteAssetVolume = 4.123m,
                 Symbol = "BNBBTC",
                 WeightedAveragePrice = 3.456m
             };
@@ -174,26 +174,26 @@ namespace Binance.Net.UnitTests
             // arrange
             var trades = new[]
             {
-                new BinanceAggregatedTrades()
+                new BinanceAggregatedTrade()
                 {
                     AggregateTradeId = 1,
-                    BuyerWasMaker = true,
+                    BuyerIsMaker = true,
                     FirstTradeId = 10000000000,
                     LastTradeId = 200000000000,
                     Price = 1.1m,
                     Quantity = 2.2m,
-                    Timestamp = new DateTime(2017, 1, 1),
+                    TradeTime = new DateTime(2017, 1, 1),
                     WasBestPriceMatch = true
                 },
-                new BinanceAggregatedTrades()
+                new BinanceAggregatedTrade()
                 {
                     AggregateTradeId = 2,
-                    BuyerWasMaker = false,
+                    BuyerIsMaker = false,
                     FirstTradeId = 30000000000,
                     LastTradeId = 400000000000,
                     Price = 3.3m,
                     Quantity = 4.4m,
-                    Timestamp = new DateTime(2016, 1, 1),
+                    TradeTime = new DateTime(2016, 1, 1),
                     WasBestPriceMatch = false
                 }
             };
@@ -219,18 +219,18 @@ namespace Binance.Net.UnitTests
             {
                 new BinanceBookPrice()
                 {
-                    AskPrice = 0.1m,
-                    AskQuantity = 0.2m,
-                    BidPrice = 0.3m,
-                    BidQuantity = 0.4m,
+                    BestAskPrice = 0.1m,
+                    BestAskQuantity = 0.2m,
+                    BestBidPrice = 0.3m,
+                    BestBidQuantity = 0.4m,
                     Symbol = "BNBBTC"
                 },
                 new BinanceBookPrice()
                 {
-                    AskPrice = 0.5m,
-                    AskQuantity = 0.6m,
-                    BidPrice = 0.7m,
-                    BidQuantity = 0.8m,
+                    BestAskPrice = 0.5m,
+                    BestAskQuantity = 0.6m,
+                    BestBidPrice = 0.7m,
+                    BestBidQuantity = 0.8m,
                     Symbol = "ETHBTC"
                 }
             };
