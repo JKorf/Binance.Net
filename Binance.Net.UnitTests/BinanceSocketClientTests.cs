@@ -65,15 +65,16 @@ namespace Binance.Net.UnitTests
         {
             // arrange
             var socket = new TestSocket();
-            var client = TestHelpers.CreateSocketClient(socket);
+            var client = TestHelpers.CreateSocketClient(socket, new BinanceSocketClientOptions()
+            {
+                LogVerbosity = LogVerbosity.Debug
+            });
 
             BinanceStreamTick result = null;
             client.SubscribeToSymbolTickerUpdates("ETHBTC", (test) => result = test);
 
             var data = new BinanceStreamTick()
             {
-                CloseTradesQuantity = 0.5m,
-                CurrentDayClosePrice = 0.6m,
                 FirstTradeId = 1,
                 HighPrice = 0.7m,
                 LastTradeId = 2,
@@ -81,14 +82,10 @@ namespace Binance.Net.UnitTests
                 OpenPrice = 0.9m,
                 PrevDayClosePrice = 1.0m,
                 PriceChange = 1.1m,
-                PriceChangePercentage = 1.2m,
-                StatisticsCloseTime = new DateTime(2017, 1, 2),
-                StatisticsOpenTime = new DateTime(2017, 1, 1),
                 Symbol = "test",
                 TotalTradedBaseAssetVolume = 1.3m,
                 TotalTradedQuoteAssetVolume = 1.4m,
                 TotalTrades = 3,
-                WeightedAverage = 1.5m
             };
 
             // act
@@ -113,8 +110,6 @@ namespace Binance.Net.UnitTests
             {
                 new BinanceStreamTick()
                 {
-                    CloseTradesQuantity = 0.5m,
-                    CurrentDayClosePrice = 0.6m,
                     FirstTradeId = 1,
                     HighPrice = 0.7m,
                     LastTradeId = 2,
@@ -122,14 +117,10 @@ namespace Binance.Net.UnitTests
                     OpenPrice = 0.9m,
                     PrevDayClosePrice = 1.0m,
                     PriceChange = 1.1m,
-                    PriceChangePercentage = 1.2m,
-                    StatisticsCloseTime = new DateTime(2017, 1, 2),
-                    StatisticsOpenTime = new DateTime(2017, 1, 1),
                     Symbol = "test",
                     TotalTradedBaseAssetVolume = 1.3m,
                     TotalTradedQuoteAssetVolume = 1.4m,
-                    TotalTrades = 3,
-                    WeightedAverage = 1.5m
+                    TotalTrades = 3
                 }
             };
 
@@ -159,7 +150,6 @@ namespace Binance.Net.UnitTests
                     Event = "TestTradeStream",
                     EventTime = new DateTime(2017, 1, 1),
                     Symbol = "ETHBTC",
-                    TradeId = 1000000000000,
                     BuyerIsMaker = true,
                     BuyerOrderId = 10000000000000,
                     SellerOrderId = 2000000000000,
