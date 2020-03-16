@@ -336,7 +336,7 @@ namespace Binance.Net
             var handler = new Action<BinanceCombinedStream<BinanceStreamTick>>(data => onMessage(data.Data));
             symbols = symbols.Select(a => a.ToLower() + SymbolTickerStreamEndpoint).ToArray();
 
-            return await Subscribe(String.Join("/", symbols), false, handler).ConfigureAwait(false);
+            return await Subscribe(String.Join("/", symbols), true, handler).ConfigureAwait(false);
         }
 
         #endregion
