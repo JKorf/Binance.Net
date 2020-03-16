@@ -6,9 +6,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
-    <Authors>JKorf, CaptHolley</Authors>
+    <Authors>JKorf, Nikkozp, CaptHolley</Authors>
     <PackageVersion>5.1.0-alpha4</PackageVersion>
-    <Description>Binance.Net is a .Net wrapper for the Binance API. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
+    <Description>Binance.Net is a .Net wrapper for the Binance API, including Binance Futures. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance Binance.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
     <PackageProjectUrl>https://github.com/JKorf/Binance.Net</PackageProjectUrl>
