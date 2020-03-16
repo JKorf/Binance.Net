@@ -148,6 +148,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 5.1.0-alpha7 - 16 Mar 2020
+    * fixed reference
+
 * Version 5.1.0-alpha6 - 16 Mar 2020
     * Fixed ticker stream
 
