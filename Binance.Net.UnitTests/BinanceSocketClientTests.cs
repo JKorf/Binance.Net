@@ -73,19 +73,22 @@ namespace Binance.Net.UnitTests
             BinanceStreamTick result = null;
             client.SubscribeToSymbolTickerUpdates("ETHBTC", (test) => result = test);
 
-            var data = new BinanceStreamTick()
+            var data = new BinanceCombinedStream<BinanceStreamTick>()
             {
-                FirstTradeId = 1,
-                HighPrice = 0.7m,
-                LastTradeId = 2,
-                LowPrice = 0.8m,
-                OpenPrice = 0.9m,
-                PrevDayClosePrice = 1.0m,
-                PriceChange = 1.1m,
-                Symbol = "test",
-                TotalTradedBaseAssetVolume = 1.3m,
-                TotalTradedQuoteAssetVolume = 1.4m,
-                TotalTrades = 3,
+                Stream = "test",
+                Data = new BinanceStreamTick() { 
+                    FirstTradeId = 1,
+                    HighPrice = 0.7m,
+                    LastTradeId = 2,
+                    LowPrice = 0.8m,
+                    OpenPrice = 0.9m,
+                    PrevDayClosePrice = 1.0m,
+                    PriceChange = 1.1m,
+                    Symbol = "test",
+                    TotalTradedBaseAssetVolume = 1.3m,
+                    TotalTradedQuoteAssetVolume = 1.4m,
+                    TotalTrades = 3
+                }
             };
 
             // act
@@ -93,7 +96,7 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsNotNull(result);
-            Assert.IsTrue(TestHelpers.AreEqual(data, result));
+            Assert.IsTrue(TestHelpers.AreEqual(data.Data, result));
         }
 
         [TestCase()]
