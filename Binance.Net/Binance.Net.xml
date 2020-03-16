@@ -729,6 +729,24 @@
             <param name="ct">Cancellation token</param>
             <returns>List of sub accounts</returns>
         </member>
+        <member name="M:Binance.Net.BinanceClient.GetSubAccountStatus(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get Sub-account's Status on Margin/Futures(For Master Account)
+            </summary>
+            <param name="email">Filter the list by email</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of sub accounts status</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceClient.GetSubAccountStatusAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get Sub-account's Status on Margin/Futures(For Master Account)
+            </summary>
+            <param name="email">Filter the list by email</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of sub accounts status</returns>
+        </member>
         <member name="M:Binance.Net.BinanceClient.GetSubAccountTransferHistory(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the history of sub account transfers
@@ -3911,6 +3929,24 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of sub accounts</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetSubAccountStatus(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get Sub-account's Status on Margin/Futures(For Master Account)
+            </summary>
+            <param name="email">Filter the list by email</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of sub accounts status</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetSubAccountStatusAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get Sub-account's Status on Margin/Futures(For Master Account)
+            </summary>
+            <param name="email">Filter the list by email</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of sub accounts status</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceClient.GetSubAccountTransferHistory(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
@@ -10012,6 +10048,46 @@
         <member name="P:Binance.Net.Objects.BinanceSubAccount.CreateTime">
             <summary>
             The time the sub account was created
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceSubAccountStatus">
+            <summary>
+            Sub-account Status on Margin/Futures
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceSubAccountStatus.Email">
+            <summary>
+            User email
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceSubAccountStatus.IsAccountEnabled">
+            <summary>
+            Sub account user enabled
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceSubAccountStatus.IsActive">
+            <summary>
+            Sub account user active
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceSubAccountStatus.CreateTime">
+            <summary>
+            The time the sub account was created
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceSubAccountStatus.IsMarginEnabled">
+            <summary>
+            Is Margin enabled
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceSubAccountStatus.isFutureEnabled">
+            <summary>
+            Is Futures enabled
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceSubAccountStatus.MobileNumber">
+            <summary>
+            User mobile number
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinanceSubAccountTransfer">
