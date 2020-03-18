@@ -25,7 +25,7 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// <summary>
         /// The amount that is locked in a trade
         /// </summary>
-        [JsonProperty("wb")]
+        [JsonProperty("cw")]
         public decimal CrossBalance { get; set; }
     }
 
