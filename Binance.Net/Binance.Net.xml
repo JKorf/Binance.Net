@@ -3587,6 +3587,16 @@
             The order has expired
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.OrderStatus.Insurance">
+            <summary>
+            Liquidation with Insurance Fund
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderStatus.Adl">
+            <summary>
+            Counterparty Liquidation
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.OrderType">
             <summary>
             The type of an order

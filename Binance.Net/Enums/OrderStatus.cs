@@ -36,6 +36,14 @@ namespace Binance.Net.Enums
         /// <summary>
         /// The order has expired
         /// </summary>
-        Expired
+        Expired,
+        /// <summary>
+        /// Liquidation with Insurance Fund
+        /// </summary>
+        Insurance,
+        /// <summary>
+        /// Counterparty Liquidation
+        /// </summary>
+        Adl
     }
 }

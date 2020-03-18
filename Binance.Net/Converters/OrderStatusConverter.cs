@@ -18,7 +18,8 @@ namespace Binance.Net.Converters
             new KeyValuePair<OrderStatus, string>(OrderStatus.Canceled, "CANCELED"),
             new KeyValuePair<OrderStatus, string>(OrderStatus.PendingCancel, "PENDING_CANCEL"),
             new KeyValuePair<OrderStatus, string>(OrderStatus.Rejected, "REJECTED"),
-            new KeyValuePair<OrderStatus, string>(OrderStatus.Expired, "EXPIRED" )
+            new KeyValuePair<OrderStatus, string>(OrderStatus.Insurance, "NEW_INSURANCE" ),
+            new KeyValuePair<OrderStatus, string>(OrderStatus.Adl, "NEW_ADL" )
         };
     }
 }
