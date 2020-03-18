@@ -1,4 +1,5 @@
 using System;
+using Binance.Net.Enums;
 using CryptoExchange.Net.Objects;
 
 namespace Binance.Net.Objects.Futures

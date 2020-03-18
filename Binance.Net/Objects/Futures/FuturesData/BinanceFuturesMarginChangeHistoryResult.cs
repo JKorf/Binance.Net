@@ -2,6 +2,7 @@
 using Binance.Net.Converters;
 using CryptoExchange.Net.Converters;
 using System;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Futures.FuturesData
 {

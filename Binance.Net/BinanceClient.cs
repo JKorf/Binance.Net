@@ -23,6 +23,7 @@ using Binance.Net.Objects.Spot.SpotData;
 using Binance.Net.Objects.Spot.UserData;
 using Binance.Net.Objects.Spot.MarginData;
 using Binance.Net.Objects.Spot;
+using Binance.Net.Enums;
 
 namespace Binance.Net
 {

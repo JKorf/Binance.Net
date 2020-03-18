@@ -16,6 +16,7 @@ using Binance.Net.Objects.Spot.MarketStream;
 using Binance.Net.Objects.Futures;
 using Binance.Net.Objects.Futures.UserStream;
 using Binance.Net.Objects.Futures.MarketStream;
+using Binance.Net.Enums;
 
 namespace Binance.Net
 {

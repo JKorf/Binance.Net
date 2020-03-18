@@ -2,6 +2,7 @@ using System;
 using Newtonsoft.Json;
 using Binance.Net.Converters;
 using CryptoExchange.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Futures.UserStream
 {

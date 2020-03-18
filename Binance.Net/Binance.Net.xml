@@ -155,7 +155,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The aggregated trades list for the symbol</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.GetKlines(System.String,Binance.Net.Objects.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.GetKlines(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get candlestick data for the provided symbol
             </summary>
@@ -167,7 +167,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The candlestick data for the provided symbol</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.GetKlinesAsync(System.String,Binance.Net.Objects.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.GetKlinesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get candlestick data for the provided symbol
             </summary>
@@ -325,7 +325,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Withdrawal confirmation</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.GetDepositHistory(System.String,System.Nullable{Binance.Net.Objects.DepositStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.GetDepositHistory(System.String,System.Nullable{Binance.Net.Enums.DepositStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the deposit history
             </summary>
@@ -337,7 +337,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of deposits</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.GetDepositHistoryAsync(System.String,System.Nullable{Binance.Net.Objects.DepositStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.GetDepositHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.DepositStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the deposit history
             </summary>
@@ -349,7 +349,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of deposits</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.GetWithdrawalHistory(System.String,System.Nullable{Binance.Net.Objects.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.GetWithdrawalHistory(System.String,System.Nullable{Binance.Net.Enums.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the withdrawal history
             </summary>
@@ -361,7 +361,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of withdrawals</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.GetWithdrawalHistoryAsync(System.String,System.Nullable{Binance.Net.Objects.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.GetWithdrawalHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the withdrawal history
             </summary>
@@ -513,7 +513,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Trade fees</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.GetSubAccounts(System.String,System.Nullable{Binance.Net.Objects.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.GetSubAccounts(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets a list of sub accounts associated with this master account
             </summary>
@@ -525,7 +525,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of sub accounts</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.GetSubAccountsAsync(System.String,System.Nullable{Binance.Net.Objects.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.GetSubAccountsAsync(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets a list of sub accounts associated with this master account
             </summary>
@@ -605,7 +605,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of sub accounts status</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.PlaceTestOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.PlaceTestOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new test order. Test orders are not actually being executed and just test the functionality.
             </summary>
@@ -624,7 +624,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed test order</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.PlaceTestOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.PlaceTestOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new test order. Test orders are not actually being executed and just test the functionality.
             </summary>
@@ -643,7 +643,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed test order</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.PlaceOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -662,7 +662,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.PlaceOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -771,7 +771,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of orders</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.PlaceOCOOrder(System.String,Binance.Net.Objects.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.PlaceOCOOrder(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new OCO(One cancels other) order
             </summary>
@@ -792,7 +792,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Order list info</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.PlaceOCOOrderAsync(System.String,Binance.Net.Objects.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.PlaceOCOOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new OCO(One cancels other) order
             </summary>
@@ -939,7 +939,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of trades</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.Transfer(System.String,System.Decimal,Binance.Net.Objects.TransferDirectionType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.Transfer(System.String,System.Decimal,Binance.Net.Enums.TransferDirectionType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Execute transfer between spot account and margin account.
             </summary>
@@ -950,7 +950,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Transaction Id</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.TransferAsync(System.String,System.Decimal,Binance.Net.Objects.TransferDirectionType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.TransferAsync(System.String,System.Decimal,Binance.Net.Enums.TransferDirectionType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Execute transfer between spot account and margin account.
             </summary>
@@ -1029,7 +1029,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of margin pairs</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.PlaceMarginOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.SideEffectType},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.PlaceMarginOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.SideEffectType},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Margin account new order
             </summary>
@@ -1049,7 +1049,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.PlaceMarginOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.SideEffectType},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.PlaceMarginOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.SideEffectType},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Margin account new order
             </summary>
@@ -1093,7 +1093,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for canceled order</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.GetTransferHistory(Binance.Net.Objects.TransferDirection,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.GetTransferHistory(Binance.Net.Enums.TransferDirection,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get history of transfers
             </summary>
@@ -1106,7 +1106,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of transfers</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.GetTransferHistoryAsync(Binance.Net.Objects.TransferDirection,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.GetTransferHistoryAsync(Binance.Net.Enums.TransferDirection,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get history of transfers
             </summary>
@@ -1623,7 +1623,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The aggregated trades list for the symbol</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.GetKlines(System.String,Binance.Net.Objects.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.GetKlines(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get candlestick data for the provided symbol
             </summary>
@@ -1635,7 +1635,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The candlestick data for the provided symbol</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.GetKlinesAsync(System.String,Binance.Net.Objects.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.GetKlinesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get candlestick data for the provided symbol
             </summary>
@@ -1857,7 +1857,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Notional and Leverage Brackets</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.PlaceOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.WorkingType},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -1878,7 +1878,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.PlaceOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.WorkingType},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -2063,7 +2063,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Result of the initial leverage change request</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.ChangeMarginType(System.String,Binance.Net.Objects.FuturesMarginType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.ChangeMarginType(System.String,Binance.Net.Enums.FuturesMarginType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Change the margin type for an open position
             </summary>
@@ -2073,7 +2073,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Whether the request was successful</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.ChangeMarginTypeAsync(System.String,Binance.Net.Objects.FuturesMarginType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.ChangeMarginTypeAsync(System.String,Binance.Net.Enums.FuturesMarginType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Change the margin type for an open position
             </summary>
@@ -2083,7 +2083,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Whether the request was successful</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.ModifyPositionMargin(System.String,System.Decimal,Binance.Net.Objects.FuturesMarginChangeDirectionType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.ModifyPositionMargin(System.String,System.Decimal,Binance.Net.Enums.FuturesMarginChangeDirectionType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Change the margin on an open position
             </summary>
@@ -2094,7 +2094,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The new position margin</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.ModifyPositionMarginAsync(System.String,System.Decimal,Binance.Net.Objects.FuturesMarginChangeDirectionType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.ModifyPositionMarginAsync(System.String,System.Decimal,Binance.Net.Enums.FuturesMarginChangeDirectionType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Change the margin on an open position
             </summary>
@@ -2105,7 +2105,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The new position margin</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.GetMarginChangeHistory(System.String,System.Nullable{Binance.Net.Objects.FuturesMarginChangeDirectionType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.GetMarginChangeHistory(System.String,System.Nullable{Binance.Net.Enums.FuturesMarginChangeDirectionType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Requests the margin change history for a specific symbol
             </summary>
@@ -2118,7 +2118,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of all margin changes for the symbol</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.GetMarginChangeHistoryAsync(System.String,System.Nullable{Binance.Net.Objects.FuturesMarginChangeDirectionType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.GetMarginChangeHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.FuturesMarginChangeDirectionType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Requests the margin change history for a specific symbol
             </summary>
@@ -2173,7 +2173,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of trades</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.GetIncomeHistory(System.String,System.Nullable{Binance.Net.Objects.IncomeType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.GetIncomeHistory(System.String,System.Nullable{Binance.Net.Enums.IncomeType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets the income history for the futures account
             </summary>
@@ -2186,7 +2186,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The income history for the futures account</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.GetIncomeHistoryAsync(System.String,System.Nullable{Binance.Net.Objects.IncomeType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.GetIncomeHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.IncomeType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets the income history for the futures account
             </summary>
@@ -2361,7 +2361,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToKlineUpdates(System.String,Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKline})">
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToKlineUpdates(System.String,Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKline})">
             <summary>
             Subscribes to the candlestick update stream for the provided symbol
             </summary>
@@ -2370,7 +2370,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToKlineUpdatesAsync(System.String,Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKline})">
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKline})">
             <summary>
             Subscribes to the candlestick update stream for the provided symbol
             </summary>
@@ -2379,7 +2379,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToKlineUpdates(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKline})">
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToKlineUpdates(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKline})">
             <summary>
             Subscribes to the candlestick update stream for the provided symbols
             </summary>
@@ -2388,7 +2388,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKline})">
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKline})">
             <summary>
             Subscribes to the candlestick update stream for the provided symbols
             </summary>
@@ -2835,7 +2835,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToKlineUpdates(System.String,Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKlineData})">
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToKlineUpdates(System.String,Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKlineData})">
             <summary>
             Subscribes to the candlestick update stream for the provided symbol
             </summary>
@@ -2844,7 +2844,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToKlineUpdatesAsync(System.String,Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKlineData})">
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKlineData})">
             <summary>
             Subscribes to the candlestick update stream for the provided symbol
             </summary>
@@ -2853,7 +2853,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToKlineUpdates(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKlineData})">
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToKlineUpdates(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKlineData})">
             <summary>
             Subscribes to the candlestick update stream for the provided symbols
             </summary>
@@ -2862,7 +2862,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKlineData})">
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKlineData})">
             <summary>
             Subscribes to the candlestick update stream for the provided symbols
             </summary>
@@ -3152,6 +3152,816 @@
         <member name="M:Binance.Net.BinanceSymbolOrderBook.Dispose">
             <inheritdoc />
         </member>
+        <member name="T:Binance.Net.Enums.AccountType">
+            <summary>
+            Type of account
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.Spot">
+            <summary>
+            Spot account type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.Margin">
+            <summary>
+            Margin account type
+            </summary>>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.Futures">
+            <summary>
+            Futures account type
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.DepositStatus">
+            <summary>
+            The status of a deposit
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.DepositStatus.Pending">
+            <summary>
+            Pending
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.DepositStatus.Success">
+            <summary>
+            Success
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.DepositStatus.Completed">
+            <summary>
+            Completed
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.ExecutionType">
+            <summary>
+            The type of execution
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.ExecutionType.New">
+            <summary>
+            New
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.ExecutionType.Canceled">
+            <summary>
+            Canceled
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.ExecutionType.Replaced">
+            <summary>
+            Replaced
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.ExecutionType.Rejected">
+            <summary>
+            Rejected
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.ExecutionType.Trade">
+            <summary>
+            Trade
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.ExecutionType.Expired">
+            <summary>
+            Expired
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.FuturesMarginChangeDirectionType">
+            <summary>
+            The direction to change futures margin
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.FuturesMarginChangeDirectionType.Add">
+            <summary>
+            Add margin
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.FuturesMarginChangeDirectionType.Reduce">
+            <summary>
+            Reduce Margin
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.FuturesMarginType">
+            <summary>
+            Type of Margin
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.FuturesMarginType.Isolated">
+            <summary>
+            Isolated margin
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.FuturesMarginType.Cross">
+            <summary>
+            Crossed margin
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.IncomeType">
+            <summary>
+            Type of futures income
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.IncomeType.Transfer">
+            <summary>
+            Transfer into account
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.IncomeType.WelcomeBonus">
+            <summary>
+            Futures welcome bonus
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.IncomeType.RealizedPnL">
+            <summary>
+            Futures realized profit
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.IncomeType.FundingFee">
+            <summary>
+            Futures funding fee
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.IncomeType.Commission">
+            <summary>
+            Futures trading commission
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.IncomeType.InsuranceClear">
+            <summary>
+            Insurance clear
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.IndicatorType">
+            <summary>
+            Types of indicators
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.IndicatorType.UnfilledRatio">
+            <summary>
+            Unfilled ratio
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.IndicatorType.ExpirationRatio">
+            <summary>
+            Expired orders ratio
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.IndicatorType.CancellationRatio">
+            <summary>
+            Cancelled orders ratio
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.KlineInterval">
+            <summary>
+            The interval for the kline
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.KlineInterval.OneMinute">
+            <summary>
+            1m
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.KlineInterval.ThreeMinutes">
+            <summary>
+            3m
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.KlineInterval.FiveMinutes">
+            <summary>
+            5m
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.KlineInterval.FifteenMinutes">
+            <summary>
+            15m
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.KlineInterval.ThirtyMinutes">
+            <summary>
+            30m
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.KlineInterval.OneHour">
+            <summary>
+            1h
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.KlineInterval.TwoHour">
+            <summary>
+            2h
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.KlineInterval.FourHour">
+            <summary>
+            4h
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.KlineInterval.SixHour">
+            <summary>
+            6h
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.KlineInterval.EightHour">
+            <summary>
+            8h
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.KlineInterval.TwelveHour">
+            <summary>
+            12h
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.KlineInterval.OneDay">
+            <summary>
+            1d
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.KlineInterval.ThreeDay">
+            <summary>
+            3d
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.KlineInterval.OneWeek">
+            <summary>
+            1w
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.KlineInterval.OneMonth">
+            <summary>
+            1M
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.ListOrderStatus">
+            <summary>
+            List order status
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.ListOrderStatus.Executing">
+            <summary>
+            Executing
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.ListOrderStatus.Done">
+            <summary>
+            Executed
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.ListOrderStatus.Rejected">
+            <summary>
+            Rejected
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.ListStatusType">
+            <summary>
+            List status type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.ListStatusType.Response">
+            <summary>
+            Failed action
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.ListStatusType.ExecutionStarted">
+            <summary>
+            Placed
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.ListStatusType.Done">
+            <summary>
+            Order list is done
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.MarginStatus">
+            <summary>
+            Status of a margin action
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.MarginStatus.Pending">
+            <summary>
+            Pending to execution
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.MarginStatus.Completed">
+            <summary>
+            Executed, waiting to be confirmed
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.MarginStatus.Confirmed">
+            <summary>
+            Successfully loaned/repayed
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.MarginStatus.Failed">
+            <summary>
+            execution failed, nothing happened to your account
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.OrderRejectReason">
+            <summary>
+            The reason the order was rejected
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderRejectReason.None">
+            <summary>
+            Not rejected
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderRejectReason.UnknownInstrument">
+            <summary>
+            Unknown instrument
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderRejectReason.MarketClosed">
+            <summary>
+            Closed market
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderRejectReason.PriceQuantityExceedsHardLimits">
+            <summary>
+            Quantity out of bounds
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderRejectReason.UnknownOrder">
+            <summary>
+            Unknown order
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderRejectReason.DuplicateOrder">
+            <summary>
+            Duplicate
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderRejectReason.UnknownAccount">
+            <summary>
+            Unkown account
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderRejectReason.InsufficientBalance">
+            <summary>
+            Not enough balance
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderRejectReason.AccountInactive">
+            <summary>
+            Account not active
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderRejectReason.AccountCannotSettle">
+            <summary>
+            Cannot settle
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.OrderResponseType">
+            <summary>
+            Response type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderResponseType.Acknowledge">
+            <summary>
+            Ack only
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderResponseType.Result">
+            <summary>
+            Resulting order
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderResponseType.Full">
+            <summary>
+            Full order info
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.OrderSide">
+            <summary>
+            The side of an order
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderSide.Buy">
+            <summary>
+            Buy
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderSide.Sell">
+            <summary>
+            Sell
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.OrderStatus">
+            <summary>
+            The status of an orderн
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderStatus.New">
+            <summary>
+            Order is new
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderStatus.PartiallyFilled">
+            <summary>
+            Order is partly filled, still has quantity left to fill
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderStatus.Filled">
+            <summary>
+            The order has been filled and completed
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderStatus.Canceled">
+            <summary>
+            The order has been canceled
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderStatus.PendingCancel">
+            <summary>
+            The order is in the process of being canceled
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderStatus.Rejected">
+            <summary>
+            The order has been rejected
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderStatus.Expired">
+            <summary>
+            The order has expired
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.OrderType">
+            <summary>
+            The type of an order
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderType.Limit">
+            <summary>
+            Limit orders will be placed at a specific price. If the price isn't available in the order book for that asset the order will be added in the order book for someone to fill.
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderType.Market">
+            <summary>
+            Market order will be placed without a price. The order will be executed at the best price available at that time in the order book.
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderType.StopLoss">
+            <summary>
+            Stop loss order. Will execute a market order when the price drops below a price to sell and therefor limit the loss
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderType.StopLossLimit">
+            <summary>
+            Stop loss order. Will execute a limit order when the price drops below a price to sell and therefor limit the loss
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderType.Stop">
+            <summary>
+            Stop loss order. Will execute a market order when the price drops below a price to sell and therefor limit the loss
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderType.StopMarket">
+            <summary>
+            Stop loss order. Will be executed at the best price available at that time in the order book
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderType.TakeProfit">
+            <summary>
+            Take profit order. Will execute a market order when the price rises above a price to sell and therefor take a profit
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderType.TakeProfitMarket">
+            <summary>
+            Take profit order. Will be executed at the best price available at that time in the order book
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderType.TakeProfitLimit">
+            <summary>
+            Take profit order. Will execute a limit order when the price rises above a price to sell and therefor take a profit
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderType.LimitMaker">
+            <summary>
+            Same as a limit order, however it will fail if the order would immediately match, therefor preventing taker orders
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderType.TralingStopMaret">
+            <summary>
+            Trailing stop order will be placed without a price. The order will be executed at the best price available at that time in the order book.
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.RateLimitInterval">
+            <summary>
+            Rate limit on what unit
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.RateLimitInterval.Second">
+            <summary>
+            Seconds
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.RateLimitInterval.Minute">
+            <summary>
+            Minutes
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.RateLimitInterval.Day">
+            <summary>
+            Days
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.RateLimitType">
+            <summary>
+            Type of rate limit
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.RateLimitType.RequestWeight">
+            <summary>
+            Request weight
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.RateLimitType.Orders">
+            <summary>
+            Order amount
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.RateLimitType.RawRequests">
+            <summary>
+            Raw requests
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.SideEffectType">
+            <summary>
+            Side effect for a margin order
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SideEffectType.NoSideEffect">
+            <summary>
+            Normal trade
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SideEffectType.MarginBuy">
+            <summary>
+            Margin trade order
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SideEffectType.AutoRepay">
+            <summary>
+            Make auto repayment after order is filled
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.SubAccountStatus">
+            <summary>
+            Status of the sub account
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SubAccountStatus.Enabled">
+            <summary>
+            Enabled
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SubAccountStatus.Disabled">
+            <summary>
+            Disabled
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.SymbolFilterType">
+            <summary>
+            Filter type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolFilterType.Unknown">
+            <summary>
+            Unknown filter type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolFilterType.Price">
+            <summary>
+            Price filter
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolFilterType.PricePercent">
+            <summary>
+            Price percent filter
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolFilterType.LotSize">
+            <summary>
+            Lot size filter
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolFilterType.MarketLotSize">
+            <summary>
+            Market lot size filter
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolFilterType.MinNotional">
+            <summary>
+            Min notional filter
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolFilterType.MaxNumberOrders">
+            <summary>
+            Max orders filter
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolFilterType.MaxNumberIcebergOrders">
+            <summary>
+            Max iceberg orders filter
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolFilterType.MaxNumberAlgorithmicOrders">
+            <summary>
+            Max algo orders filter
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolFilterType.IcebergParts">
+            <summary>
+            Max iceberg parts filter
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.SymbolStatus">
+            <summary>
+            Status of a symbol
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolStatus.PreTrading">
+            <summary>
+            Not trading yet
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolStatus.Trading">
+            <summary>
+            Trading
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolStatus.PostTrading">
+            <summary>
+            No longer trading
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolStatus.EndOfDay">
+            <summary>
+            Not trading
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolStatus.Halt">
+            <summary>
+            Halted
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolStatus.AuctionMatch">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolStatus.Break">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.SystemStatus">
+            <summary>
+            Status of the Binance system
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SystemStatus.Normal">
+            <summary>
+            Operational
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SystemStatus.Maintenance">
+            <summary>
+            In maintenance
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.TimeInForce">
+            <summary>
+            The time the order will be active for
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.TimeInForce.GoodTillCancel">
+            <summary>
+            GoodTillCancel orders will stay active until they are filled or canceled
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.TimeInForce.ImmediateOrCancel">
+            <summary>
+            ImmediateOrCancel orders have to be at least partially filled upon placing or will be automatically canceled
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.TimeInForce.FillOrKill">
+            <summary>
+            FillOrKill orders have to be entirely filled upon placing or will be automatically canceled
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.TimeInForce.GootTillCrossing">
+            <summary>
+            GootTillCrossing orders will post only
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.TradeRulesBehaviour">
+            <summary>
+            Trade rules behaviour
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.TradeRulesBehaviour.None">
+            <summary>
+            None
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.TradeRulesBehaviour.ThrowError">
+            <summary>
+            Throw an error if not complying
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.TradeRulesBehaviour.AutoComply">
+            <summary>
+            Auto adjust order when not complying
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.TransferDirection">
+            <summary>
+            Direction of a transfer
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.TransferDirection.RollIn">
+            <summary>
+            Roll-in
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.TransferDirection.RollOut">
+            <summary>
+            Roll-out
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.TransferDirectionType">
+            <summary>
+            Transfer direction
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.TransferDirectionType.MainToMargin">
+            <summary>
+            From main account to margin account
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.TransferDirectionType.MarginToMain">
+            <summary>
+            From margin account to main account
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.WithdrawalStatus">
+            <summary>
+            The status of a withdrawal
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.WithdrawalStatus.EmailSend">
+            <summary>
+            Email has been send
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.WithdrawalStatus.Canceled">
+            <summary>
+            Withdrawal has been canceled
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.WithdrawalStatus.AwaitingApproval">
+            <summary>
+            Withdrawal is awaiting approval
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.WithdrawalStatus.Rejected">
+            <summary>
+            Withdrawal has been rejected
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.WithdrawalStatus.Processing">
+            <summary>
+            Withdrawal is processing
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.WithdrawalStatus.Failure">
+            <summary>
+            Withdrawal has failed
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.WithdrawalStatus.Completed">
+            <summary>
+            Withdrawal has been processed
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.WorkingType">
+            <summary>
+            Type of working
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.WorkingType.Mark">
+            <summary>
+            Mark price type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.WorkingType.Contract">
+            <summary>
+            Contract price type
+            </summary>
+        </member>
         <member name="T:Binance.Net.Interfaces.IBinanceAggregatedTrade">
             <summary>
             Compressed aggregated trade information. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
@@ -3356,7 +4166,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The aggregated trades list for the symbol</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetKlines(System.String,Binance.Net.Objects.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetKlines(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get candlestick data for the provided symbol
             </summary>
@@ -3368,7 +4178,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The candlestick data for the provided symbol</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetKlinesAsync(System.String,Binance.Net.Objects.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetKlinesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get candlestick data for the provided symbol
             </summary>
@@ -3526,7 +4336,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Withdrawal confirmation</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetDepositHistory(System.String,System.Nullable{Binance.Net.Objects.DepositStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetDepositHistory(System.String,System.Nullable{Binance.Net.Enums.DepositStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the deposit history
             </summary>
@@ -3538,7 +4348,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of deposits</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetDepositHistoryAsync(System.String,System.Nullable{Binance.Net.Objects.DepositStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetDepositHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.DepositStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the deposit history
             </summary>
@@ -3550,7 +4360,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of deposits</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetWithdrawalHistory(System.String,System.Nullable{Binance.Net.Objects.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetWithdrawalHistory(System.String,System.Nullable{Binance.Net.Enums.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the withdrawal history
             </summary>
@@ -3562,7 +4372,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of withdrawals</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetWithdrawalHistoryAsync(System.String,System.Nullable{Binance.Net.Objects.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetWithdrawalHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the withdrawal history
             </summary>
@@ -3714,7 +4524,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Trade fees</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetSubAccounts(System.String,System.Nullable{Binance.Net.Objects.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetSubAccounts(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets a list of sub accounts associated with this master account
             </summary>
@@ -3726,7 +4536,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of sub accounts</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetSubAccountsAsync(System.String,System.Nullable{Binance.Net.Objects.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetSubAccountsAsync(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets a list of sub accounts associated with this master account
             </summary>
@@ -3806,7 +4616,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of sub accounts status</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceTestOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceTestOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new test order. Test orders are not actually being executed and just test the functionality.
             </summary>
@@ -3825,7 +4635,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed test order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceTestOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceTestOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new test order. Test orders are not actually being executed and just test the functionality.
             </summary>
@@ -3844,7 +4654,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed test order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -3863,7 +4673,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -3972,7 +4782,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of orders</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceOCOOrder(System.String,Binance.Net.Objects.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceOCOOrder(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new OCO(One cancels other) order
             </summary>
@@ -3993,7 +4803,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Order list info</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceOCOOrderAsync(System.String,Binance.Net.Objects.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceOCOOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new OCO(One cancels other) order
             </summary>
@@ -4140,7 +4950,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of trades</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.Transfer(System.String,System.Decimal,Binance.Net.Objects.TransferDirectionType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.Transfer(System.String,System.Decimal,Binance.Net.Enums.TransferDirectionType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Execute transfer between spot account and margin account.
             </summary>
@@ -4151,7 +4961,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Transaction Id</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.TransferAsync(System.String,System.Decimal,Binance.Net.Objects.TransferDirectionType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.TransferAsync(System.String,System.Decimal,Binance.Net.Enums.TransferDirectionType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Execute transfer between spot account and margin account.
             </summary>
@@ -4230,7 +5040,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of margin pairs</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceMarginOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.SideEffectType},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceMarginOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.SideEffectType},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Margin account new order
             </summary>
@@ -4250,7 +5060,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceMarginOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.SideEffectType},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.PlaceMarginOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.SideEffectType},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Margin account new order
             </summary>
@@ -4294,7 +5104,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for canceled order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetTransferHistory(Binance.Net.Objects.TransferDirection,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetTransferHistory(Binance.Net.Enums.TransferDirection,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get history of transfers
             </summary>
@@ -4307,7 +5117,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of transfers</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetTransferHistoryAsync(Binance.Net.Objects.TransferDirection,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.GetTransferHistoryAsync(Binance.Net.Enums.TransferDirection,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get history of transfers
             </summary>
@@ -4804,7 +5614,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of recent trades</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetKlines(System.String,Binance.Net.Objects.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetKlines(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get candlestick data for the provided symbol
             </summary>
@@ -4816,7 +5626,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The candlestick data for the provided symbol</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetKlinesAsync(System.String,Binance.Net.Objects.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetKlinesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get candlestick data for the provided symbol
             </summary>
@@ -5082,7 +5892,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of orders</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.PlaceOrder(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.WorkingType},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -5103,7 +5913,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.PlaceOrderAsync(System.String,Binance.Net.Objects.OrderSide,Binance.Net.Objects.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Objects.WorkingType},System.Nullable{Binance.Net.Objects.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -5228,7 +6038,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Result of the initial leverage change request</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.ChangeMarginType(System.String,Binance.Net.Objects.FuturesMarginType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.ChangeMarginType(System.String,Binance.Net.Enums.FuturesMarginType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Change the margin type for an open position
             </summary>
@@ -5238,7 +6048,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Whether the request was successful</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.ChangeMarginTypeAsync(System.String,Binance.Net.Objects.FuturesMarginType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.ChangeMarginTypeAsync(System.String,Binance.Net.Enums.FuturesMarginType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Change the margin type for an open position
             </summary>
@@ -5248,7 +6058,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Whether the request was successful</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.ModifyPositionMargin(System.String,System.Decimal,Binance.Net.Objects.FuturesMarginChangeDirectionType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.ModifyPositionMargin(System.String,System.Decimal,Binance.Net.Enums.FuturesMarginChangeDirectionType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Change the margin on an open position
             </summary>
@@ -5259,7 +6069,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The new position margin</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.ModifyPositionMarginAsync(System.String,System.Decimal,Binance.Net.Objects.FuturesMarginChangeDirectionType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.ModifyPositionMarginAsync(System.String,System.Decimal,Binance.Net.Enums.FuturesMarginChangeDirectionType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Change the margin on an open position
             </summary>
@@ -5270,7 +6080,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The new position margin</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetMarginChangeHistory(System.String,System.Nullable{Binance.Net.Objects.FuturesMarginChangeDirectionType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetMarginChangeHistory(System.String,System.Nullable{Binance.Net.Enums.FuturesMarginChangeDirectionType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Requests the margin change history for a specific symbol
             </summary>
@@ -5283,7 +6093,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of all margin changes for the symbol</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetMarginChangeHistoryAsync(System.String,System.Nullable{Binance.Net.Objects.FuturesMarginChangeDirectionType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetMarginChangeHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.FuturesMarginChangeDirectionType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Requests the margin change history for a specific symbol
             </summary>
@@ -5338,7 +6148,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of Positions</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetIncomeHistory(System.String,System.Nullable{Binance.Net.Objects.IncomeType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetIncomeHistory(System.String,System.Nullable{Binance.Net.Enums.IncomeType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets the income history for the futures account
             </summary>
@@ -5351,7 +6161,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The income history for the futures account</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetIncomeHistoryAsync(System.String,System.Nullable{Binance.Net.Objects.IncomeType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetIncomeHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.IncomeType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets the income history for the futures account
             </summary>
@@ -5602,7 +6412,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToKlineUpdates(System.String,Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKline})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToKlineUpdates(System.String,Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKline})">
             <summary>
             Subscribes to the candlestick update stream for the provided symbol
             </summary>
@@ -5611,7 +6421,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToKlineUpdatesAsync(System.String,Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKline})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKline})">
             <summary>
             Subscribes to the candlestick update stream for the provided symbol
             </summary>
@@ -5620,7 +6430,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToKlineUpdates(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKline})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToKlineUpdates(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKline})">
             <summary>
             Subscribes to the candlestick update stream for the provided symbols
             </summary>
@@ -5629,7 +6439,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKline})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKline})">
             <summary>
             Subscribes to the candlestick update stream for the provided symbols
             </summary>
@@ -6103,7 +6913,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToKlineUpdates(System.String,Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKlineData})">
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToKlineUpdates(System.String,Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKlineData})">
             <summary>
             Subscribes to the candlestick update stream for the provided symbol
             </summary>
@@ -6112,7 +6922,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToKlineUpdatesAsync(System.String,Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKlineData})">
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKlineData})">
             <summary>
             Subscribes to the candlestick update stream for the provided symbol
             </summary>
@@ -6121,7 +6931,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToKlineUpdates(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKlineData})">
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToKlineUpdates(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKlineData})">
             <summary>
             Subscribes to the candlestick update stream for the provided symbols
             </summary>
@@ -6130,7 +6940,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Objects.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKlineData})">
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamKlineData})">
             <summary>
             Subscribes to the candlestick update stream for the provided symbols
             </summary>
@@ -6753,816 +7563,6 @@
         <member name="P:Binance.Net.Objects.BinanceSymbolIcebergPartsFilter.Limit">
             <summary>
             The max parts of an iceberg order for this symbol.
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.OrderStatus">
-            <summary>
-            The status of an order
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderStatus.New">
-            <summary>
-            Order is new
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderStatus.PartiallyFilled">
-            <summary>
-            Order is partly filled, still has quantity left to fill
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderStatus.Filled">
-            <summary>
-            The order has been filled and completed
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderStatus.Canceled">
-            <summary>
-            The order has been canceled
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderStatus.PendingCancel">
-            <summary>
-            The order is in the process of being canceled
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderStatus.Rejected">
-            <summary>
-            The order has been rejected
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderStatus.Expired">
-            <summary>
-            The order has expired
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.SymbolStatus">
-            <summary>
-            Status of a symbol
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.SymbolStatus.PreTrading">
-            <summary>
-            Not trading yet
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.SymbolStatus.Trading">
-            <summary>
-            Trading
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.SymbolStatus.PostTrading">
-            <summary>
-            No longer trading
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.SymbolStatus.EndOfDay">
-            <summary>
-            Not trading
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.SymbolStatus.Halt">
-            <summary>
-            Halted
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.SymbolStatus.AuctionMatch">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.SymbolStatus.Break">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.OrderType">
-            <summary>
-            The type of an order
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderType.Limit">
-            <summary>
-            Limit orders will be placed at a specific price. If the price isn't available in the order book for that asset the order will be added in the order book for someone to fill.
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderType.Market">
-            <summary>
-            Market order will be placed without a price. The order will be executed at the best price available at that time in the order book.
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderType.StopLoss">
-            <summary>
-            Stop loss order. Will execute a market order when the price drops below a price to sell and therefor limit the loss
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderType.StopLossLimit">
-            <summary>
-            Stop loss order. Will execute a limit order when the price drops below a price to sell and therefor limit the loss
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderType.Stop">
-            <summary>
-            Stop loss order. Will execute a market order when the price drops below a price to sell and therefor limit the loss
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderType.StopMarket">
-            <summary>
-            Stop loss order. Will be executed at the best price available at that time in the order book
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderType.TakeProfit">
-            <summary>
-            Take profit order. Will execute a market order when the price rises above a price to sell and therefor take a profit
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderType.TakeProfitMarket">
-            <summary>
-            Take profit order. Will be executed at the best price available at that time in the order book
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderType.TakeProfitLimit">
-            <summary>
-            Take profit order. Will execute a limit order when the price rises above a price to sell and therefor take a profit
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderType.LimitMaker">
-            <summary>
-            Same as a limit order, however it will fail if the order would immediately match, therefor preventing taker orders
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderType.TralingStopMaret">
-            <summary>
-            Trailing stop order will be placed without a price. The order will be executed at the best price available at that time in the order book.
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.OrderSide">
-            <summary>
-            The side of an order
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderSide.Buy">
-            <summary>
-            Buy
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderSide.Sell">
-            <summary>
-            Sell
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.TimeInForce">
-            <summary>
-            The time the order will be active for
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.TimeInForce.GoodTillCancel">
-            <summary>
-            GoodTillCancel orders will stay active until they are filled or canceled
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.TimeInForce.ImmediateOrCancel">
-            <summary>
-            ImmediateOrCancel orders have to be at least partially filled upon placing or will be automatically canceled
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.TimeInForce.FillOrKill">
-            <summary>
-            FillOrKill orders have to be entirely filled upon placing or will be automatically canceled
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.TimeInForce.GootTillCrossing">
-            <summary>
-            GootTillCrossing orders will post only
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.ExecutionType">
-            <summary>
-            The type of execution
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.ExecutionType.New">
-            <summary>
-            New
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.ExecutionType.Canceled">
-            <summary>
-            Canceled
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.ExecutionType.Replaced">
-            <summary>
-            Replaced
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.ExecutionType.Rejected">
-            <summary>
-            Rejected
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.ExecutionType.Trade">
-            <summary>
-            Trade
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.ExecutionType.Expired">
-            <summary>
-            Expired
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.OrderRejectReason">
-            <summary>
-            The reason the order was rejected
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderRejectReason.None">
-            <summary>
-            Not rejected
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderRejectReason.UnknownInstrument">
-            <summary>
-            Unknown instrument
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderRejectReason.MarketClosed">
-            <summary>
-            Closed market
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderRejectReason.PriceQuantityExceedsHardLimits">
-            <summary>
-            Quantity out of bounds
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderRejectReason.UnknownOrder">
-            <summary>
-            Unknown order
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderRejectReason.DuplicateOrder">
-            <summary>
-            Duplicate
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderRejectReason.UnknownAccount">
-            <summary>
-            Unkown account
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderRejectReason.InsufficientBalance">
-            <summary>
-            Not enough balance
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderRejectReason.AccountInactive">
-            <summary>
-            Account not active
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderRejectReason.AccountCannotSettle">
-            <summary>
-            Cannot settle
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.KlineInterval">
-            <summary>
-            The interval for the kline
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.KlineInterval.OneMinute">
-            <summary>
-            1m
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.KlineInterval.ThreeMinutes">
-            <summary>
-            3m
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.KlineInterval.FiveMinutes">
-            <summary>
-            5m
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.KlineInterval.FifteenMinutes">
-            <summary>
-            15m
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.KlineInterval.ThirtyMinutes">
-            <summary>
-            30m
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.KlineInterval.OneHour">
-            <summary>
-            1h
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.KlineInterval.TwoHour">
-            <summary>
-            2h
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.KlineInterval.FourHour">
-            <summary>
-            4h
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.KlineInterval.SixHour">
-            <summary>
-            6h
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.KlineInterval.EightHour">
-            <summary>
-            8h
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.KlineInterval.TwelveHour">
-            <summary>
-            12h
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.KlineInterval.OneDay">
-            <summary>
-            1d
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.KlineInterval.ThreeDay">
-            <summary>
-            3d
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.KlineInterval.OneWeek">
-            <summary>
-            1w
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.KlineInterval.OneMonth">
-            <summary>
-            1M
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.WithdrawalStatus">
-            <summary>
-            The status of a withdrawal
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.WithdrawalStatus.EmailSend">
-            <summary>
-            Email has been send
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.WithdrawalStatus.Canceled">
-            <summary>
-            Withdrawal has been canceled
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.WithdrawalStatus.AwaitingApproval">
-            <summary>
-            Withdrawal is awaiting approval
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.WithdrawalStatus.Rejected">
-            <summary>
-            Withdrawal has been rejected
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.WithdrawalStatus.Processing">
-            <summary>
-            Withdrawal is processing
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.WithdrawalStatus.Failure">
-            <summary>
-            Withdrawal has failed
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.WithdrawalStatus.Completed">
-            <summary>
-            Withdrawal has been processed
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.DepositStatus">
-            <summary>
-            The status of a deposit
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.DepositStatus.Pending">
-            <summary>
-            Pending
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.DepositStatus.Success">
-            <summary>
-            Success
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.DepositStatus.Completed">
-            <summary>
-            Completed
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.RateLimitInterval">
-            <summary>
-            Rate limit on what unit
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.RateLimitInterval.Second">
-            <summary>
-            Seconds
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.RateLimitInterval.Minute">
-            <summary>
-            Minutes
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.RateLimitInterval.Day">
-            <summary>
-            Days
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.RateLimitType">
-            <summary>
-            Type of rate limit
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.RateLimitType.RequestWeight">
-            <summary>
-            Request weight
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.RateLimitType.Orders">
-            <summary>
-            Order amount
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.RateLimitType.RawRequests">
-            <summary>
-            Raw requests
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.SymbolFilterType">
-            <summary>
-            Filter type
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.SymbolFilterType.Unknown">
-            <summary>
-            Unknown filter type
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.SymbolFilterType.Price">
-            <summary>
-            Price filter
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.SymbolFilterType.PricePercent">
-            <summary>
-            Price percent filter
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.SymbolFilterType.LotSize">
-            <summary>
-            Lot size filter
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.SymbolFilterType.MarketLotSize">
-            <summary>
-            Market lot size filter
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.SymbolFilterType.MinNotional">
-            <summary>
-            Min notional filter
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.SymbolFilterType.MaxNumberOrders">
-            <summary>
-            Max orders filter
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.SymbolFilterType.MaxNumberIcebergOrders">
-            <summary>
-            Max iceberg orders filter
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.SymbolFilterType.MaxNumberAlgorithmicOrders">
-            <summary>
-            Max algo orders filter
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.SymbolFilterType.IcebergParts">
-            <summary>
-            Max iceberg parts filter
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.OrderResponseType">
-            <summary>
-            Response type
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderResponseType.Acknowledge">
-            <summary>
-            Ack only
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderResponseType.Result">
-            <summary>
-            Resulting order
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.OrderResponseType.Full">
-            <summary>
-            Full order info
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.TradeRulesBehaviour">
-            <summary>
-            Trade rules behaviour
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.TradeRulesBehaviour.None">
-            <summary>
-            None
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.TradeRulesBehaviour.ThrowError">
-            <summary>
-            Throw an error if not complying
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.TradeRulesBehaviour.AutoComply">
-            <summary>
-            Auto adjust order when not complying
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.SystemStatus">
-            <summary>
-            Status of the Binance system
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.SystemStatus.Normal">
-            <summary>
-            Operational
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.SystemStatus.Maintenance">
-            <summary>
-            In maintenance
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.SubAccountStatus">
-            <summary>
-            Status of the sub account
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.SubAccountStatus.Enabled">
-            <summary>
-            Enabled
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.SubAccountStatus.Disabled">
-            <summary>
-            Disabled
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.TransferDirectionType">
-            <summary>
-            Transfer direction
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.TransferDirectionType.MainToMargin">
-            <summary>
-            From main account to margin account
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.TransferDirectionType.MarginToMain">
-            <summary>
-            From margin account to main account
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.MarginStatus">
-            <summary>
-            Status of a margin action
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.MarginStatus.Pending">
-            <summary>
-            Pending to execution
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.MarginStatus.Completed">
-            <summary>
-            Executed, waiting to be confirmed
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.MarginStatus.Confirmed">
-            <summary>
-            Successfully loaned/repayed
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.MarginStatus.Failed">
-            <summary>
-            execution failed, nothing happened to your account
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.ListStatusType">
-            <summary>
-            List status type
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.ListStatusType.Response">
-            <summary>
-            Failed action
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.ListStatusType.ExecutionStarted">
-            <summary>
-            Placed
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.ListStatusType.Done">
-            <summary>
-            Order list is done
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.ListOrderStatus">
-            <summary>
-            List order status
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.ListOrderStatus.Executing">
-            <summary>
-            Executing
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.ListOrderStatus.Done">
-            <summary>
-            Executed
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.ListOrderStatus.Rejected">
-            <summary>
-            Rejected
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.IndicatorType">
-            <summary>
-            Types of indicators
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.IndicatorType.UnfilledRatio">
-            <summary>
-            Unfilled ratio
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.IndicatorType.ExpirationRatio">
-            <summary>
-            Expired orders ratio
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.IndicatorType.CancellationRatio">
-            <summary>
-            Cancelled orders ratio
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.TransferDirection">
-            <summary>
-            Direction of a transfer
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.TransferDirection.RollIn">
-            <summary>
-            Roll-in
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.TransferDirection.RollOut">
-            <summary>
-            Roll-out
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.IncomeType">
-            <summary>
-            Type of futures income
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.IncomeType.Transfer">
-            <summary>
-            Transfer into account
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.IncomeType.WelcomeBonus">
-            <summary>
-            Futures welcome bonus
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.IncomeType.RealizedPnL">
-            <summary>
-            Futures realized profit
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.IncomeType.FundingFee">
-            <summary>
-            Futures funding fee
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.IncomeType.Commission">
-            <summary>
-            Futures trading commission
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.IncomeType.InsuranceClear">
-            <summary>
-            Insurance clear
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.FuturesMarginChangeDirectionType">
-            <summary>
-            The direction to change futures margin
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.FuturesMarginChangeDirectionType.Add">
-            <summary>
-            Add margin
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.FuturesMarginChangeDirectionType.Reduce">
-            <summary>
-            Reduce Margin
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.FuturesMarginType">
-            <summary>
-            Type of Margin
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.FuturesMarginType.Isolated">
-            <summary>
-            Isolated margin
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.FuturesMarginType.Cross">
-            <summary>
-            Crossed margin
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.SideEffectType">
-            <summary>
-            Side effect for a margin order
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.SideEffectType.NoSideEffect">
-            <summary>
-            Normal trade
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.SideEffectType.MarginBuy">
-            <summary>
-            Margin trade order
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.SideEffectType.AutoRepay">
-            <summary>
-            Make auto repayment after order is filled
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.WorkingType">
-            <summary>
-            Type of working
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.WorkingType.Mark">
-            <summary>
-            Mark price type
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.WorkingType.Contract">
-            <summary>
-            Contract price type
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.AccountType">
-            <summary>
-            Type of account
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.AccountType.Spot">
-            <summary>
-            Spot account type
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.AccountType.Margin">
-            <summary>
-            Margin account type
-            </summary>>
-        </member>
-        <member name="F:Binance.Net.Objects.AccountType.Futures">
-            <summary>
-            Futures account type
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.BinanceFuturesClientOptions">

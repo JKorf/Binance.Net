@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Binance.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Futures.FuturesData
 {

@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Futures.FuturesData
 {

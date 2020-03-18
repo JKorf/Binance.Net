@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using Binance.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Futures.MarketData
 {

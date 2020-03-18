@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Binance.Net.Enums;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Spot.MarginData;
 using Binance.Net.Objects.Spot.MarketData;

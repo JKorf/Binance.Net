@@ -4,6 +4,7 @@ using System;
 using CryptoExchange.Net.Converters;
 using Binance.Net.Interfaces;
 using Binance.Net.Objects.Spot.MarketData;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Spot.MarketStream
 {

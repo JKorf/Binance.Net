@@ -22,6 +22,7 @@ using Binance.Net.Objects.Spot.UserData;
 using Binance.Net.Objects.Futures;
 using Binance.Net.Objects.Futures.MarketData;
 using Binance.Net.Objects.Futures.FuturesData;
+using Binance.Net.Enums;
 
 namespace Binance.Net
 {
