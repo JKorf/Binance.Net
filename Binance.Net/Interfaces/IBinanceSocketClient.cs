@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Binance.Net.Objects;
-using Binance.Net.Objects.Sockets;
+using Binance.Net.Objects.Spot.MarketData;
+using Binance.Net.Objects.Spot.MarketStream;
+using Binance.Net.Objects.Spot.UserStream;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;

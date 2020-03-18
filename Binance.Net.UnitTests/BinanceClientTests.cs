@@ -12,6 +12,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using CryptoExchange.Net.Objects;
+using Binance.Net.Objects.Spot.SpotData;
+using Binance.Net.Objects.Spot.MarketData;
+using Binance.Net.Objects.Spot.WalletData;
+using Binance.Net.Objects.Spot.UserData;
+using Binance.Net.Objects.Spot.MarginData;
+using Binance.Net.Objects.Spot;
 
 namespace Binance.Net.UnitTests
 {
@@ -257,32 +263,32 @@ namespace Binance.Net.UnitTests
                 new BinanceOrder()
                 {
                     ClientOrderId = "order1",
-                    ExecutedQuantity = 0.1m,
+                    QuantityFilled = 0.1m,
                     IcebergQuantity = 0.2m,
                     OrderId = 100000000000,
-                    OriginalQuantity = 0.3m,
+                    Quantity = 0.3m,
                     Price = 0.4m,
                     Side = OrderSide.Buy,
                     Status = OrderStatus.Canceled,
                     StopPrice = 0.5m,
                     Symbol = "BNBBTC",
-                    Time = new DateTime(2017, 1, 1),
+                    CreateTime = new DateTime(2017, 1, 1),
                     TimeInForce = TimeInForce.GoodTillCancel,
                     Type = OrderType.Limit
                 },
                 new BinanceOrder()
                 {
                     ClientOrderId = "order2",
-                    ExecutedQuantity = 0.6m,
+                    QuantityFilled = 0.6m,
                     IcebergQuantity = 0.7m,
                     OrderId = 200000000000,
-                    OriginalQuantity = 0.8m,
+                    Quantity = 0.8m,
                     Price = 0.9m,
                     Side = OrderSide.Sell,
                     Status = OrderStatus.PartiallyFilled,
                     StopPrice = 1.0m,
                     Symbol = "ETHBTC",
-                    Time = new DateTime(2017, 1, 10),
+                    CreateTime = new DateTime(2017, 1, 10),
                     TimeInForce = TimeInForce.ImmediateOrCancel,
                     Type = OrderType.Market
                 }
@@ -449,7 +455,7 @@ namespace Binance.Net.UnitTests
                     Price = 0.3m,
                     Quantity = 0.4m,
                     Symbol = "BNBUSDT",
-                    Time =  new DateTime(2017, 1, 1)
+                    TradeTime =  new DateTime(2017, 1, 1)
                 },
                 new BinanceTrade()
                 {
@@ -462,7 +468,7 @@ namespace Binance.Net.UnitTests
                     Price = 0.6m,
                     Quantity = 0.7m,
                     Symbol = "ETHBTC",
-                    Time =  new DateTime(2016, 1, 1)
+                    TradeTime =  new DateTime(2016, 1, 1)
                 }
             };
 
@@ -491,32 +497,32 @@ namespace Binance.Net.UnitTests
                 new BinanceOrder()
                 {
                     ClientOrderId = "order1",
-                    ExecutedQuantity = 0.1m,
+                    QuantityFilled = 0.1m,
                     IcebergQuantity = 0.2m,
                     OrderId = 100000000000,
-                    OriginalQuantity = 0.3m,
+                    Quantity = 0.3m,
                     Price = 0.4m,
                     Side = OrderSide.Buy,
                     Status = OrderStatus.Canceled,
                     StopPrice = 0.5m,
                     Symbol = "BNBBTC",
-                    Time = new DateTime(2017, 1, 1),
+                    CreateTime = new DateTime(2017, 1, 1),
                     TimeInForce = TimeInForce.GoodTillCancel,
                     Type = OrderType.Limit
                 },
                 new BinanceOrder()
                 {
                     ClientOrderId = "order2",
-                    ExecutedQuantity = 0.6m,
+                    QuantityFilled = 0.6m,
                     IcebergQuantity = 0.7m,
                     OrderId = 200000000000,
-                    OriginalQuantity = 0.8m,
+                    Quantity = 0.8m,
                     Price = 0.9m,
                     Side = OrderSide.Sell,
                     Status = OrderStatus.PartiallyFilled,
                     StopPrice = 1.0m,
                     Symbol = "ETHBTC",
-                    Time = new DateTime(2017, 1, 10),
+                    CreateTime = new DateTime(2017, 1, 10),
                     TimeInForce = TimeInForce.ImmediateOrCancel,
                     Type = OrderType.Market
                 }
@@ -620,7 +626,7 @@ namespace Binance.Net.UnitTests
                 ClientOrderId = "test",
                 OrderId = 100000000000,
                 Symbol = "BNBBTC",
-                TransactTime = new DateTime(2017, 1, 1)
+                CreateTime = new DateTime(2017, 1, 1)
             };
 
             var client = TestHelpers.CreateResponseClient(placed, new BinanceClientOptions()
@@ -646,7 +652,7 @@ namespace Binance.Net.UnitTests
                 ClientOrderId = "test",
                 OrderId = 100000000000,
                 Symbol = "BNBBTC",
-                TransactTime = new DateTime(2017, 1, 1)
+                CreateTime = new DateTime(2017, 1, 1)
             };
 
             var client = TestHelpers.CreateResponseClient(placed, new BinanceClientOptions()
@@ -670,16 +676,16 @@ namespace Binance.Net.UnitTests
             var order = new BinanceOrder()
             {
                 ClientOrderId = "order2",
-                ExecutedQuantity = 0.6m,
+                QuantityFilled = 0.6m,
                 IcebergQuantity = 0.7m,
                 OrderId = 200000000000,
-                OriginalQuantity = 0.8m,
+                Quantity = 0.8m,
                 Price = 0.9m,
                 Side = OrderSide.Sell,
                 Status = OrderStatus.PartiallyFilled,
                 StopPrice = 1.0m,
                 Symbol = "ETHBTC",
-                Time = new DateTime(2017, 1, 10),
+                CreateTime = new DateTime(2017, 1, 10),
                 TimeInForce = TimeInForce.ImmediateOrCancel,
                 Type = OrderType.Market
             };
@@ -993,7 +999,7 @@ namespace Binance.Net.UnitTests
                 ClientOrderId = "test",
                 OrderId = 100000000000,
                 Symbol = "BNBBTC",
-                TransactTime = new DateTime(2017, 1, 1)
+                CreateTime = new DateTime(2017, 1, 1)
             };
 
             var client = TestHelpers.CreateResponseClient(placed, new BinanceClientOptions()

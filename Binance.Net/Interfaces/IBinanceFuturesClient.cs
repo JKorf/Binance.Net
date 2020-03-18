@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Objects;
+using Binance.Net.Objects.Futures.FuturesData;
+using Binance.Net.Objects.Futures.MarketData;
+using Binance.Net.Objects.Spot.MarketData;
+using Binance.Net.Objects.Spot.SpotData;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 

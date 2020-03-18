@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Binance.Net.Objects
 {
     /// <summary>
-    /// The status of an order
+    /// The status of an orderн
     /// </summary>
     public enum OrderStatus
     {
@@ -719,5 +719,24 @@ namespace Binance.Net.Objects
         /// Contract price type
         /// </summary>
         Contract
+    }
+
+    /// <summary>
+    /// Type of account
+    /// </summary>
+    public enum AccountType
+    {
+        /// <summary>
+        /// Spot account type
+        /// </summary>
+        Spot,
+        /// <summary>
+        /// Margin account type
+        /// </summary>>
+        Margin,
+        /// <summary>
+        /// Futures account type
+        /// </summary>
+        Futures
     }
 }
