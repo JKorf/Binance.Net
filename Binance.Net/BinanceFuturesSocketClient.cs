@@ -6,13 +6,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Binance.Net.Interfaces;
-using Binance.Net.Objects.Sockets;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using Newtonsoft.Json.Linq;
+using Binance.Net.Objects.Spot.MarketStream;
+using Binance.Net.Objects.Futures;
+using Binance.Net.Objects.Futures.UserStream;
+using Binance.Net.Objects.Futures.MarketStream;
+using Binance.Net.Enums;
 
 namespace Binance.Net
 {

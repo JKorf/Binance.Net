@@ -16,6 +16,13 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Interfaces;
+using Binance.Net.Objects.Spot.MarketData;
+using Binance.Net.Objects.Spot.SpotData;
+using Binance.Net.Objects.Spot.UserData;
+using Binance.Net.Objects.Futures;
+using Binance.Net.Objects.Futures.MarketData;
+using Binance.Net.Objects.Futures.FuturesData;
+using Binance.Net.Enums;
 
 namespace Binance.Net
 {
