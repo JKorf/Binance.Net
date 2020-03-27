@@ -97,6 +97,12 @@ namespace Binance.Net.Converters
                         };
 
                     break;
+                case SymbolFilterType.MaxPosition:
+                    result = new BinanceSymbolMaxPositionFilter
+                    {
+                        MaxPosition = (decimal)obj["maxPosition"]
+                    };
+                    break;
                 default:
                     Debug.WriteLine("Can't parse symbol filter of type: " + obj["filterType"]);
                     result = new BinanceSymbolFilter();
@@ -180,6 +186,11 @@ namespace Binance.Net.Converters
                     writer.WriteValue(pricePercentFilter.MultiplierDown);
                     writer.WritePropertyName("avgPriceMins");
                     writer.WriteValue(pricePercentFilter.AveragePriceMinutes);
+                    break;
+                case SymbolFilterType.MaxPosition:
+                    var maxPositionFilter = (BinanceSymbolMaxPositionFilter)filter;
+                    writer.WritePropertyName("multiplierUp");
+                    writer.WriteValue(maxPositionFilter.MaxPosition);
                     break;
                 default:
                     Debug.WriteLine("Can't write symbol filter of type: " + filter.FilterType);
