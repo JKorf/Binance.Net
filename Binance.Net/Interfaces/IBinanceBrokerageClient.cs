@@ -1,6 +1,7 @@
 ﻿using Binance.Net.Objects.Brokerage.SubAccountData;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -38,5 +39,11 @@ namespace Binance.Net.Interfaces
             string symbol = null, int? receiveWindow = null, CancellationToken ct = default);
         
         Task<WebCallResult<BinanceBrokerageAccountInfo>> GetBrokerAccountInfoAsync(int? receiveWindow = null, CancellationToken ct = default);
+        
+        Task<WebCallResult<BinanceBrokerageTransferResult>> TransferAsync(string asset, decimal amount, 
+            string fromId = null, string toId = null, string clientTransferId = null, int? receiveWindow = null, CancellationToken ct = default);
+        
+        Task<WebCallResult<IEnumerable<BinanceBrokerageTransferTransaction>>> GetTransferHistoryAsync(string id, string clientTransferId = null, 
+            DateTime? startDate = null, DateTime? endDate = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
     }
 }

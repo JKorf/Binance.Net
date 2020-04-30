@@ -4,8 +4,10 @@ using Binance.Net.Objects.Brokerage.SubAccountData;
 using Binance.Net.Objects.Spot.MarketData;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -17,6 +19,8 @@ namespace Binance.Net
 {
     public class BinanceBrokerageClient : RestClient, IBinanceBrokerageClient
     {
+        #region Fields
+        
         private static BinanceBrokerageClientOptions defaultOptions = new BinanceBrokerageClientOptions();
         private static BinanceBrokerageClientOptions DefaultOptions => defaultOptions.Copy();
         
@@ -45,7 +49,12 @@ namespace Binance.Net
         private const string ApiKeySubAccountPermissionEndpoint = "broker/subAccountApi/permission";
         private const string ApiKeySubAccountCommissionEndpoint = "broker/subAccountApi/commission";
         private const string ApiKeySubAccountCommissionFuturesEndpoint = "broker/subAccountApi/commission/futures";
+        private const string TransferEndpoint = "broker/transfer";
 
+        #endregion
+
+        #region Constructors
+        
         public BinanceBrokerageClient(ApiCredentials credentials)
             : base(DefaultOptions, new BinanceAuthenticationProvider(credentials, ArrayParametersSerialization.MultipleValues))
         {
@@ -61,6 +70,10 @@ namespace Binance.Net
             defaultReceiveWindow = options.ReceiveWindow;
             postParametersPosition = PostParameters.InUri;
         }
+        
+        #endregion
+
+        #region Brokerge API
         
         /// <summary>
         /// Generate a sub account under your brokerage master account
@@ -312,12 +325,12 @@ namespace Binance.Net
             var parameters = new Dictionary<string, object>
                              {
                                  {"subAccountId", id},
-                                 {"makerCommission", makerCommission},
-                                 {"takerCommission", takerCommission},
+                                 {"makerCommission", makerCommission.ToString(CultureInfo.InvariantCulture)},
+                                 {"takerCommission", takerCommission.ToString(CultureInfo.InvariantCulture)},
                                  {"timestamp", GetTimestamp()}
                              };
-            parameters.AddOptionalParameter("marginMakerCommission", marginMakerCommission);
-            parameters.AddOptionalParameter("marginTakerCommission", marginTakerCommission);
+            parameters.AddOptionalParameter("marginMakerCommission", marginMakerCommission?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("marginTakerCommission", marginTakerCommission?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await SendRequest<BinanceBrokerageSubAccountCommission>(GetUrl(ApiKeySubAccountCommissionEndpoint, BrokerageApi, BrokerageVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
@@ -350,8 +363,8 @@ namespace Binance.Net
                              {
                                  {"subAccountId", id},
                                  {"symbol", symbol},
-                                 {"makerAdjustment", makerAdjustment},
-                                 {"takerAdjustment", takerAdjustment},
+                                 {"makerAdjustment", makerAdjustment.ToString(CultureInfo.InvariantCulture)},
+                                 {"takerAdjustment", takerAdjustment.ToString(CultureInfo.InvariantCulture)},
                                  {"timestamp", GetTimestamp()}
                              };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -411,6 +424,83 @@ namespace Binance.Net
             return await SendRequest<BinanceBrokerageAccountInfo>(GetUrl(BrokerAccountInfoEndpoint, BrokerageApi, BrokerageVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
         
+        /// <summary>
+        /// Sub Account Transfer
+        /// <para>You need to enable "internal transfer" option for the api key which requests this endpoint</para>
+        /// <para>Transfer from master account if fromId not sent</para>
+        /// <para>Transfer to master account if toId not sent</para>
+        /// </summary>
+        /// <param name="asset">Asset</param>
+        /// <param name="amount">Amount</param>
+        /// <param name="fromId">From id</param>
+        /// <param name="toId">To id</param>
+        /// <param name="clientTransferId">Client transfer id, must be unique</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Transfer result</returns>
+        public async Task<WebCallResult<BinanceBrokerageTransferResult>> TransferAsync(string asset, decimal amount, 
+            string fromId = null, string toId = null, string clientTransferId = null, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            asset.ValidateNotNull(nameof(asset));
+            
+            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceBrokerageTransferResult>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+                             {
+                                 {"asset", asset},
+                                 {"amount", amount},
+                                 {"timestamp", GetTimestamp()}
+                             };
+            parameters.AddOptionalParameter("fromId", fromId);
+            parameters.AddOptionalParameter("toId", toId);
+            parameters.AddOptionalParameter("clientTranId", clientTransferId);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await SendRequest<BinanceBrokerageTransferResult>(GetUrl(TransferEndpoint, BrokerageApi, BrokerageVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+        
+        /// <summary>
+        /// Query Sub Account Transfer History
+        /// </summary>
+        /// <param name="id">Sub account id</param>
+        /// <param name="clientTransferId">Client transfer id</param>
+        /// <param name="startDate">From date</param>
+        /// <param name="endDate">To date</param>
+        /// <param name="page">Page</param>
+        /// <param name="limit">Limit</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Transfer history</returns>
+        public async Task<WebCallResult<IEnumerable<BinanceBrokerageTransferTransaction>>> GetTransferHistoryAsync(string id, string clientTransferId = null, 
+            DateTime? startDate = null, DateTime? endDate = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            id.ValidateNotNull(nameof(id));
+            
+            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<IEnumerable<BinanceBrokerageTransferTransaction>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+                             {
+                                 {"subAccountId", id},
+                                 {"timestamp", GetTimestamp()}
+                             };
+            parameters.AddOptionalParameter("clientTranId", clientTransferId);
+            parameters.AddOptionalParameter("startTime", startDate != null ? JsonConvert.SerializeObject(startDate, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("endTime", endDate != null ? JsonConvert.SerializeObject(endDate, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await SendRequest<IEnumerable<BinanceBrokerageTransferTransaction>>(GetUrl(TransferEndpoint, BrokerageApi, BrokerageVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+        
+        #endregion
+
+        #region Private methods
+        
         private async Task<WebCallResult<DateTime>> GetServerTimeAsync(bool resetAutoTimestamp = false, CancellationToken ct = default)
         {
             var url = GetUrl(CheckTimeEndpoint, Api, PublicVersion);
@@ -458,12 +548,8 @@ namespace Binance.Net
             }
         }
         
-        private Uri GetUrl(string endpoint, string api, string version)
-        {
-            var result = $"{BaseAddress}/{api}/v{version}/{endpoint}";
-            return new Uri(result);
-        }
-        
+        private Uri GetUrl(string endpoint, string api, string version) => new Uri($"{BaseAddress}/{api}/v{version}/{endpoint}");
+
         private async Task<WebCallResult<DateTime>> CheckAutoTimestamp(CancellationToken ct)
         {
             if (autoTimestamp && (!timeSynced || DateTime.UtcNow - lastTimeSync > autoTimestampRecalculationInterval))
@@ -479,6 +565,8 @@ namespace Binance.Net
             var offset = autoTimestamp ? calculatedTimeOffset : 0;
             offset += timestampOffset.TotalMilliseconds;
             return ToUnixTimestamp(DateTime.UtcNow.AddMilliseconds(offset)).ToString();
-        }     
+        }
+        
+        #endregion
     }
 }
