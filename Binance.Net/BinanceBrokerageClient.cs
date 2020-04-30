@@ -43,6 +43,8 @@ namespace Binance.Net
         private const string EnableFuturesForSubAccountEndpoint = "broker/subAccount/futures";
         private const string ApiKeySubAccountEndpoint = "broker/subAccountApi";
         private const string ApiKeySubAccountPermissionEndpoint = "broker/subAccountApi/permission";
+        private const string ApiKeySubAccountCommissionEndpoint = "broker/subAccountApi/commission";
+        private const string ApiKeySubAccountCommissionFuturesEndpoint = "broker/subAccountApi/commission/futures";
 
         public BinanceBrokerageClient(ApiCredentials credentials)
             : base(DefaultOptions, new BinanceAuthenticationProvider(credentials, ArrayParametersSerialization.MultipleValues))
@@ -140,13 +142,13 @@ namespace Binance.Net
         /// <para>Sub account should be enable futures before its api-key's futuresTrade being enabled</para>
         /// </summary>
         /// <param name="id">Sub account id</param>
-        /// <param name="isSpotTradingEnabled">Is spot trading enabled</param>
+        /// <param name="isTradingEnabled">Is spot trading enabled</param>
         /// <param name="isMarginTradingEnabled">Is margin trading enabled</param>
         /// <param name="isFuturesTradingEnabled">Is futures trading enabled</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Api key result</returns>
-        public async Task<WebCallResult<BinanceBrokerageApiKeyCreateResult>> CreateApiKeyForSubAccountAsync(string id, bool isSpotTradingEnabled, bool? isMarginTradingEnabled = null, 
+        public async Task<WebCallResult<BinanceBrokerageApiKeyCreateResult>> CreateApiKeyForSubAccountAsync(string id, bool isTradingEnabled, bool? isMarginTradingEnabled = null, 
             bool? isFuturesTradingEnabled = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             id.ValidateNotNull(nameof(id));
@@ -158,7 +160,7 @@ namespace Binance.Net
             var parameters = new Dictionary<string, object>
                              {
                                  {"subAccountId", id},
-                                 {"canTrade", isSpotTradingEnabled},
+                                 {"canTrade", isTradingEnabled},
                                  {"timestamp", GetTimestamp()}
                              };
             parameters.AddOptionalParameter("marginTrade", isMarginTradingEnabled);
@@ -204,7 +206,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Api key result</returns>
-        public async Task<WebCallResult<BinanceBrokerageSubAccountApiKey>> QuerySubAccountApiKeyAsync(string id, string apiKey = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceBrokerageSubAccountApiKey>> GetSubAccountApiKeyAsync(string id, string apiKey = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             id.ValidateNotNull(nameof(id));
             
@@ -231,14 +233,14 @@ namespace Binance.Net
         /// </summary>
         /// <param name="id">Sub account id</param>
         /// <param name="apiKey">Api key</param>
-        /// <param name="isSpotTradingEnabled">Is spot trading enabled</param>
+        /// <param name="isTradingEnabled">Is spot trading enabled</param>
         /// <param name="isMarginTradingEnabled">Is margin trading enabled</param>
         /// <param name="isFuturesTradingEnabled">Is futures trading enabled</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Api key result</returns>
         public async Task<WebCallResult<BinanceBrokerageSubAccountApiKey>> ChangeSubAccountApiPermissionAsync(string id, string apiKey, 
-            bool isSpotTradingEnabled, bool isMarginTradingEnabled, bool isFuturesTradingEnabled, int? receiveWindow = null, CancellationToken ct = default)
+            bool isTradingEnabled, bool isMarginTradingEnabled, bool isFuturesTradingEnabled, int? receiveWindow = null, CancellationToken ct = default)
         {
             id.ValidateNotNull(nameof(id));
             id.ValidateNotNull(nameof(apiKey));
@@ -251,7 +253,7 @@ namespace Binance.Net
                              {
                                  {"subAccountId", id},
                                  {"subAccountApiKey", apiKey},
-                                 {"canTrade", isSpotTradingEnabled},
+                                 {"canTrade", isTradingEnabled},
                                  {"marginTrade", isMarginTradingEnabled},
                                  {"futuresTrade", isFuturesTradingEnabled},
                                  {"timestamp", GetTimestamp()}
@@ -284,6 +286,116 @@ namespace Binance.Net
             return await SendRequest<IEnumerable<BinanceBrokerageSubAccount>>(GetUrl(SubAccountEndpoint, BrokerageApi, BrokerageVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
         
+        /// <summary>
+        /// Change Sub Account Commission
+        /// <para>You need to enable "trade" option for the api key which requests this endpoint</para>
+        /// <para>If margin disabled, it is not allowed to send marginMakerCommission or marginTakerCommission</para>
+        /// <para>If margin enabled, marginMakerCommission or marginTakerCommission has default value as spotMakerCommission or spotTakerCommission</para>
+        /// </summary>
+        /// <param name="id">Sub account id</param>
+        /// <param name="makerCommission">Maker commission</param>
+        /// <param name="takerCommission">Taker commission</param>
+        /// <param name="marginMakerCommission">Margin maker commission</param>
+        /// <param name="marginTakerCommission">Margin taker commission</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Sub account commission result</returns>
+        public async Task<WebCallResult<BinanceBrokerageSubAccountCommission>> ChangeSubAccountCommissionAsync(string id, decimal makerCommission, decimal takerCommission,
+            decimal? marginMakerCommission = null, decimal? marginTakerCommission = null, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            id.ValidateNotNull(nameof(id));
+            
+            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceBrokerageSubAccountCommission>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+                             {
+                                 {"subAccountId", id},
+                                 {"makerCommission", makerCommission},
+                                 {"takerCommission", takerCommission},
+                                 {"timestamp", GetTimestamp()}
+                             };
+            parameters.AddOptionalParameter("marginMakerCommission", marginMakerCommission);
+            parameters.AddOptionalParameter("marginTakerCommission", marginTakerCommission);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await SendRequest<BinanceBrokerageSubAccountCommission>(GetUrl(ApiKeySubAccountCommissionEndpoint, BrokerageApi, BrokerageVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+        
+        /// <summary>
+        /// Change Sub Account Futures Commission Adjustment
+        /// <para>You need to enable "trade" option for the api key which requests this endpoint</para>
+        /// <para>The sub-account's futures commission of a symbol equals to the base commission of the symbol on the sub-account's fee tier plus the commission adjustment</para>
+        /// <para>If futures disabled, it is not allowed to set subaccount's futures commission adjustment on any symbol</para>
+        /// </summary>
+        /// <param name="id">Sub account id</param>
+        /// <param name="symbol">Symbol</param>
+        /// <param name="makerAdjustment">Maker adjustment (100 for 0.01%)</param>
+        /// <param name="takerAdjustment">Taker adjustment (100 for 0.01%)</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Sub account futures commission result</returns>
+        public async Task<WebCallResult<BinanceBrokerageSubAccountFuturesCommission>> ChangeSubAccountFuturesCommissionAdjustmentAsync(string id, string symbol, 
+            int makerAdjustment, int takerAdjustment, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            id.ValidateNotNull(nameof(id));
+            id.ValidateNotNull(nameof(symbol));
+            
+            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceBrokerageSubAccountFuturesCommission>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+                             {
+                                 {"subAccountId", id},
+                                 {"symbol", symbol},
+                                 {"makerAdjustment", makerAdjustment},
+                                 {"takerAdjustment", takerAdjustment},
+                                 {"timestamp", GetTimestamp()}
+                             };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await SendRequest<BinanceBrokerageSubAccountFuturesCommission>(GetUrl(ApiKeySubAccountCommissionFuturesEndpoint, BrokerageApi, BrokerageVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+        
+        /// <summary>
+        /// Query Sub Account Futures Commission Adjustment
+        /// <para>The sub-account's futures commission of a symbol equals to the base commission of the symbol on the sub-account's fee tier plus the commission adjustment</para>
+        /// <para>If symbol not sent, commission adjustment of all symbols will be returned</para>
+        /// <para>If futures disabled, it is not allowed to set subaccount's futures commission adjustment on any symbol</para>
+        /// </summary>
+        /// <param name="id">Sub account id</param>
+        /// <param name="symbol">Symbol</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Sub account futures commissions result</returns>
+        public async Task<WebCallResult<IEnumerable<BinanceBrokerageSubAccountFuturesCommission>>> GetSubAccountFuturesCommissionAdjustmentAsync(string id, 
+            string symbol = null, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            id.ValidateNotNull(nameof(id));
+            
+            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<IEnumerable<BinanceBrokerageSubAccountFuturesCommission>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+                             {
+                                 {"subAccountId", id},
+                                 {"timestamp", GetTimestamp()}
+                             };
+            parameters.AddOptionalParameter("symbol", symbol);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await SendRequest<IEnumerable<BinanceBrokerageSubAccountFuturesCommission>>(GetUrl(ApiKeySubAccountCommissionFuturesEndpoint, BrokerageApi, BrokerageVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+        
+        /// <summary>
+        /// Broker Account Information
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Broker information</returns>
         public async Task<WebCallResult<BinanceBrokerageAccountInfo>> GetBrokerAccountInfoAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);

@@ -11,7 +11,7 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         public string ApiKey { get; set; }
         
         [JsonProperty("canTrade")]
-        public bool IsSpotTradingEnabled { get; set; }
+        public bool IsTradingEnabled { get; set; }
         
         [JsonProperty("marginTrade")]
         public bool IsMarginTradingEnabled { get; set; }
