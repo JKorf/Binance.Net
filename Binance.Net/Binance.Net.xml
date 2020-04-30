@@ -7575,6 +7575,26 @@
             The max parts of an iceberg order for this symbol.
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Brokerage.BinanceBrokerageClientOptions.AutoTimestamp">
+            <summary>
+            Whether or not to automatically sync the local time with the server time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.BinanceBrokerageClientOptions.AutoTimestampRecalculationInterval">
+            <summary>
+            Interval for refreshing the auto timestamp calculation
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.BinanceBrokerageClientOptions.TimestampOffset">
+            <summary>
+            A manual offset for the timestamp. Should only be used if AutoTimestamp and regular time synchronization on the OS is not reliable enough
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.BinanceBrokerageClientOptions.ReceiveWindow">
+            <summary>
+            The default receive window for requests
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.BinanceFuturesClientOptions">
             <summary>
             Options for the binance client
