@@ -69,7 +69,7 @@ namespace Binance.Net.Converters
                 case SymbolFilterType.MaxNumberOrders:
                     result = new BinanceSymbolMaxOrdersFilter
                     {
-                        MaxNumberOrders = (int)obj["limit"]
+                        MaxNumberOrders = (int)obj["maxNumOrders"]
                     };
                     break;
 
