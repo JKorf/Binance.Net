@@ -50,6 +50,11 @@ namespace Binance.Net
         private const string ApiKeySubAccountCommissionEndpoint = "broker/subAccountApi/commission";
         private const string ApiKeySubAccountCommissionFuturesEndpoint = "broker/subAccountApi/commission/futures";
         private const string TransferEndpoint = "broker/transfer";
+        private const string RebatesRecentEndpoint = "broker/rebate/recentRecord";
+        private const string RebatesHistoryEndpoint = "broker/rebate/historicalRecord";
+        private const string EnableOrDisableBnbBurnForSubAccountSpotAndMarginEndpoint = "broker/subAccount/bnbBurn/spot";
+        private const string EnableOrDisableBnbBurnForSubAccountMarginInterestEndpoint = "broker/subAccount/bnbBurn/marginInterest";
+        private const string BnbBurnForSubAccountStatusEndpoint = "broker/subAccount/bnbBurn/status";
 
         #endregion
 
@@ -495,6 +500,150 @@ namespace Binance.Net
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await SendRequest<IEnumerable<BinanceBrokerageTransferTransaction>>(GetUrl(TransferEndpoint, BrokerageApi, BrokerageVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+        
+        /// <summary>
+        /// Query Broker Commission Rebate Recent Record
+        /// <para>Only get the latest history of past 7 days</para>
+        /// </summary>
+        /// <param name="subAccountId">Sub account id</param>
+        /// <param name="startDate">From date</param>
+        /// <param name="endDate">To date</param>
+        /// <param name="limit">Limit (Default 500, max 1000)</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Rebates history</returns>
+        public async Task<WebCallResult<IEnumerable<BinanceBrokerageRebate>>> GetBrokerCommissionRebatesRecentAsync(string subAccountId = null, 
+            DateTime? startDate = null, DateTime? endDate = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<IEnumerable<BinanceBrokerageRebate>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+                             {
+                                 {"timestamp", GetTimestamp()}
+                             };
+            parameters.AddOptionalParameter("subAccountId", subAccountId);
+            parameters.AddOptionalParameter("startTime", startDate != null ? JsonConvert.SerializeObject(startDate, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("endTime", endDate != null ? JsonConvert.SerializeObject(endDate, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await SendRequest<IEnumerable<BinanceBrokerageRebate>>(GetUrl(RebatesRecentEndpoint, BrokerageApi, BrokerageVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+        
+        /// <summary>
+        /// Query Broker Commission Rebate History
+        /// </summary>
+        /// <param name="subAccountId">Sub account id</param>
+        /// <param name="startDate">From date</param>
+        /// <param name="endDate">To date</param>
+        /// <param name="limit">Limit (default 1000)</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>A download link for an offline file</returns>
+        public async Task<WebCallResult<string>> GetBrokerCommissionRebatesHistoryAsync(string subAccountId = null, 
+            DateTime? startDate = null, DateTime? endDate = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<string>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+                             {
+                                 {"timestamp", GetTimestamp()}
+                             };
+            parameters.AddOptionalParameter("subAccountId", subAccountId);
+            parameters.AddOptionalParameter("startTime", startDate != null ? JsonConvert.SerializeObject(startDate, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("endTime", endDate != null ? JsonConvert.SerializeObject(endDate, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await SendRequest<string>(GetUrl(RebatesHistoryEndpoint, BrokerageApi, BrokerageVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+        
+        /// <summary>
+        /// Enable Or Disable BNB Burn for Sub Account SPOT and MARGIN
+        /// </summary>
+        /// <param name="subAccountId">Sub account id</param>
+        /// <param name="spotBnbBurn">"true" or "false", spot and margin whether use BNB to pay for transaction fees or not</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Result</returns>
+        public async Task<WebCallResult<BinanceBrokerageEnableOrDisableBnbBurnSpotAndMarginResult>> EnableOrDisableBnbBurnForSubAccountSpotAndMarginAsync(string subAccountId, bool spotBnbBurn, 
+            int? receiveWindow = null, CancellationToken ct = default)
+        {
+            subAccountId.ValidateNotNull(nameof(subAccountId));
+            
+            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceBrokerageEnableOrDisableBnbBurnSpotAndMarginResult>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+                             {
+                                 {"subAccountId", subAccountId},
+                                 {"spotBNBBurn", spotBnbBurn},
+                                 {"timestamp", GetTimestamp()}
+                             };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await SendRequest<BinanceBrokerageEnableOrDisableBnbBurnSpotAndMarginResult>(GetUrl(EnableOrDisableBnbBurnForSubAccountSpotAndMarginEndpoint, BrokerageApi, BrokerageVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+        
+        /// <summary>
+        /// Enable Or Disable BNB Burn for Sub Account Margin Interest
+        /// <para>Sub account must be enabled margin before using this switch</para>
+        /// </summary>
+        /// <param name="subAccountId">Sub account id</param>
+        /// <param name="interestBnbBurn">"true" or "false", margin loan whether uses BNB to pay for margin interest or not</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Result</returns>
+        public async Task<WebCallResult<BinanceBrokerageEnableOrDisableBnbBurnMarginInterestResult>> EnableOrDisableBnbBurnForSubAccountMarginInterestAsync(string subAccountId, bool interestBnbBurn, 
+            int? receiveWindow = null, CancellationToken ct = default)
+        {
+            subAccountId.ValidateNotNull(nameof(subAccountId));
+            
+            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceBrokerageEnableOrDisableBnbBurnMarginInterestResult>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+                             {
+                                 {"subAccountId", subAccountId},
+                                 {"interestBNBBurn", interestBnbBurn},
+                                 {"timestamp", GetTimestamp()}
+                             };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await SendRequest<BinanceBrokerageEnableOrDisableBnbBurnMarginInterestResult>(GetUrl(EnableOrDisableBnbBurnForSubAccountMarginInterestEndpoint, BrokerageApi, BrokerageVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+        
+        /// <summary>
+        /// Get BNB Burn Status for Sub Account
+        /// </summary>
+        /// <param name="subAccountId">Sub account id</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Status</returns>
+        public async Task<WebCallResult<BinanceBrokerageBnbBurnStatus>> GetBnbBurnStatusForSubAccountAsync(string subAccountId,
+            int? receiveWindow = null, CancellationToken ct = default)
+        {
+            subAccountId.ValidateNotNull(nameof(subAccountId));
+            
+            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceBrokerageBnbBurnStatus>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+                             {
+                                 {"subAccountId", subAccountId},
+                                 {"timestamp", GetTimestamp()}
+                             };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await SendRequest<BinanceBrokerageBnbBurnStatus>(GetUrl(BnbBurnForSubAccountStatusEndpoint, BrokerageApi, BrokerageVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
         
         #endregion

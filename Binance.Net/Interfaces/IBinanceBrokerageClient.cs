@@ -45,5 +45,20 @@ namespace Binance.Net.Interfaces
         
         Task<WebCallResult<IEnumerable<BinanceBrokerageTransferTransaction>>> GetTransferHistoryAsync(string id, string clientTransferId = null, 
             DateTime? startDate = null, DateTime? endDate = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+        
+        Task<WebCallResult<IEnumerable<BinanceBrokerageRebate>>> GetBrokerCommissionRebatesRecentAsync(string subAccountId = null, 
+            DateTime? startDate = null, DateTime? endDate = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+        
+        Task<WebCallResult<string>> GetBrokerCommissionRebatesHistoryAsync(string subAccountId = null, 
+            DateTime? startDate = null, DateTime? endDate = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+        
+        Task<WebCallResult<BinanceBrokerageEnableOrDisableBnbBurnSpotAndMarginResult>> EnableOrDisableBnbBurnForSubAccountSpotAndMarginAsync(string subAccountId, bool spotBnbBurn, 
+            int? receiveWindow = null, CancellationToken ct = default);
+        
+        Task<WebCallResult<BinanceBrokerageEnableOrDisableBnbBurnMarginInterestResult>> EnableOrDisableBnbBurnForSubAccountMarginInterestAsync(string subAccountId, bool interestBnbBurn, 
+            int? receiveWindow = null, CancellationToken ct = default);
+
+        Task<WebCallResult<BinanceBrokerageBnbBurnStatus>> GetBnbBurnStatusForSubAccountAsync(string subAccountId,
+            int? receiveWindow = null, CancellationToken ct = default);
     }
 }
