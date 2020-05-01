@@ -148,6 +148,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 5.0.10 - 01 May 2020
+    * Fixed filter parsing in GetExchangeInfo
+
 * Version 5.0.9 - 03 Mar 2020
     * Fixed serialization issue on DustTransfer assets parameter
 
