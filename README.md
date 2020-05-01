@@ -148,6 +148,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 5.1.0-alpha9 - 01 May 2020
+    * Fixed GetExchangeInfo call, merged master
+
 * Version 5.1.0-alpha8 - 19 Mar 2020
     * Futures update
 
