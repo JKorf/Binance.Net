@@ -2,15 +2,27 @@
 
 namespace Binance.Net.Objects.Brokerage.SubAccountData
 {
+    /// <summary>
+    /// BNB Burn Status
+    /// </summary>
     public class BinanceBrokerageBnbBurnStatus
     {
+        /// <summary>
+        /// Sub Account Id
+        /// </summary>
         [JsonProperty("subAccountId")]
-        public string SubAccountId { get; set; }
+        public string SubAccountId { get; set; } = "";
         
+        /// <summary>
+        /// Is Spot BNB Burn
+        /// </summary>
         [JsonProperty("spotBNBBurn")]
-        public bool SpotBnbBurn { get; set; }
+        public bool IsSpotBnbBurn { get; set; }
         
+        /// <summary>
+        /// Is Interest BNB Burn
+        /// </summary>
         [JsonProperty("interestBNBBurn")]
-        public bool InterestBnbBurn { get; set; }
+        public bool IsInterestBnbBurn { get; set; }
     }
 }

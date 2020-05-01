@@ -4,15 +4,27 @@ using System;
 
 namespace Binance.Net.Objects.Brokerage.SubAccountData
 {
+    /// <summary>
+    /// Enable Margin Result
+    /// </summary>
     public class BinanceBrokerageEnableMarginResult
     {
+        /// <summary>
+        /// Sub Account Id
+        /// </summary>
         [JsonProperty("subaccountId")]
-        public string Id { get; set; }
+        public string SubAccountId { get; set; } = "";
         
+        /// <summary>
+        /// Is Margin Enabled
+        /// </summary>
         [JsonProperty("enableMargin")]
-        public bool EnableMargin { get; set; }
+        public bool IsMarginEnabled { get; set; }
         
+        /// <summary>
+        /// Update Date
+        /// </summary>
         [JsonProperty("updateTime"), JsonConverter(typeof(TimestampConverter))]
-        public DateTime UpdateTime { get; set; }
+        public DateTime UpdateDate { get; set; }
     }
 }

@@ -2,12 +2,21 @@
 
 namespace Binance.Net.Objects.Brokerage.SubAccountData
 {
+    /// <summary>
+    /// Enable Or Disable BNB Burn Spot And Margin Result
+    /// </summary>
     public class BinanceBrokerageEnableOrDisableBnbBurnSpotAndMarginResult
     {
+        /// <summary>
+        /// Sub Account Id
+        /// </summary>
         [JsonProperty("subaccountId")]
-        public string Id { get; set; }
+        public string SubAccountId { get; set; } = "";
         
+        /// <summary>
+        /// Is Spot BNB Burn
+        /// </summary>
         [JsonProperty("spotBNBBurn")]
-        public bool SpotBnbBurn { get; set; }
+        public bool IsSpotBnbBurn { get; set; }
     }
 }

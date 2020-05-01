@@ -2,13 +2,22 @@
 
 namespace Binance.Net.Objects.Brokerage.SubAccountData
 {
+    /// <summary>
+    /// Sub Account Futures Commission
+    /// </summary>
     public class BinanceBrokerageSubAccountFuturesCommission
     {
+        /// <summary>
+        /// Sub Account Id
+        /// </summary>
         [JsonProperty("subaccountId")]
-        public string Id { get; set; }
+        public string SubAccountId { get; set; } = "";
         
+        /// <summary>
+        /// Symbol
+        /// </summary>
         [JsonProperty("symbol")]
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = "";
         
         /// <summary>
         /// Futures commission adjustment for maker </summary>
