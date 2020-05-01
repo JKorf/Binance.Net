@@ -172,6 +172,16 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 * Version 5.1.0-alpha - 03 Mar 2020
     * First version Futures Api implementation
 
+* Version 5.0.10 - 01 May 2020
+    * Fixed filter parsing in GetExchangeInfo
+
+* Version 5.0.9 - 03 Mar 2020
+    * Fixed serialization issue on DustTransfer assets parameter
+
+* Version 5.0.8 - 03 Mar 2020
+    * Added SideEffectType and MarginBuyBorrow properties
+    * Added trade rules check for margin orders
+
 * Version 5.0.7 - 05 Feb 2020
     * Fixed incorrect Invalid symbol error
 
