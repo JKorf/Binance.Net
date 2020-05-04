@@ -20,6 +20,19 @@
             </summary>
             <param name="options">The options to use for this client</param>
         </member>
+        <member name="M:Binance.Net.BinanceBrokerageClient.SetApiCredentials(System.String,System.String)">
+            <summary>
+            Set the API key and secret
+            </summary>
+            <param name="apiKey">The api key</param>
+            <param name="apiSecret">The api secret</param>
+        </member>
+        <member name="M:Binance.Net.BinanceBrokerageClient.PingAsync(System.Threading.CancellationToken)">
+            <summary>
+            Pings the Binance API
+            </summary>
+            <returns>True if successful ping, false if no response</returns>
+        </member>
         <member name="M:Binance.Net.BinanceBrokerageClient.CreateSubAccountAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Generate a sub account under your brokerage master account
@@ -4286,6 +4299,19 @@
             Client providing access to the Binance Brokerage REST Api
             </summary>
         </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceBrokerageClient.SetApiCredentials(System.String,System.String)">
+            <summary>
+            Set the API key and secret
+            </summary>
+            <param name="apiKey">The api key</param>
+            <param name="apiSecret">The api secret</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceBrokerageClient.PingAsync(System.Threading.CancellationToken)">
+            <summary>
+            Pings the Binance API
+            </summary>
+            <returns>True if successful ping, false if no response</returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.IBinanceBrokerageClient.CreateSubAccountAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Generate a sub account under your brokerage master account
@@ -8042,6 +8068,11 @@
             The max parts of an iceberg order for this symbol.
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Brokerage.BinanceBrokerageClientOptions">
+            <summary>
+            Options for the binance brokerage client
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Brokerage.BinanceBrokerageClientOptions.AutoTimestamp">
             <summary>
             Whether or not to automatically sync the local time with the server time
@@ -8060,6 +8091,21 @@
         <member name="P:Binance.Net.Objects.Brokerage.BinanceBrokerageClientOptions.ReceiveWindow">
             <summary>
             The default receive window for requests
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Objects.Brokerage.BinanceBrokerageClientOptions.#ctor">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Objects.Brokerage.BinanceBrokerageClientOptions.#ctor(System.String)">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Objects.Brokerage.BinanceBrokerageClientOptions.Copy">
+            <summary>
+            Return a copy of these options
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageAccountInfo">

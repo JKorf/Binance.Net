@@ -10,6 +10,7 @@ using CryptoExchange.Net.Objects;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Net.Http;
 using System.Threading;
@@ -43,6 +44,7 @@ namespace Binance.Net
         private const string BrokerageVersion = "1";
         
         private const string CheckTimeEndpoint = "time";
+        private const string PingEndpoint = "ping";
         
         private const string SubAccountEndpoint = "broker/subAccount";
         private const string BrokerAccountInfoEndpoint = "broker/info";
@@ -88,6 +90,32 @@ namespace Binance.Net
         
         #endregion
 
+        #region Public methods
+        
+        /// <summary>
+        /// Set the API key and secret
+        /// </summary>
+        /// <param name="apiKey">The api key</param>
+        /// <param name="apiSecret">The api secret</param>
+        public void SetApiCredentials(string apiKey, string apiSecret)
+        {
+            SetAuthenticationProvider(new BinanceAuthenticationProvider(new ApiCredentials(apiKey, apiSecret), ArrayParametersSerialization.MultipleValues));
+        }
+        
+        /// <summary>
+        /// Pings the Binance API
+        /// </summary>
+        /// <returns>True if successful ping, false if no response</returns>
+        public override async Task<CallResult<long>> PingAsync(CancellationToken ct = default)
+        {
+            var sw = Stopwatch.StartNew();
+            var result = await SendRequest<object>(GetUrl(PingEndpoint, Api, PublicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
+            sw.Stop();
+            return new CallResult<long>(result.Error == null ? sw.ElapsedMilliseconds : 0, result.Error);
+        }
+
+        #endregion
+        
         #region Brokerge API
         
         /// <summary>
@@ -234,7 +262,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Api key result</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceBrokerageSubAccountApiKey>>> GetSubAccountApiKeyAsync(string subAccountId, string apiKey = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceBrokerageSubAccountApiKey>>> GetSubAccountApiKeyAsync(string subAccountId, string? apiKey = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
             
@@ -298,7 +326,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Sub accounts</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceBrokerageSubAccount>>> GetSubAccountsAsync(string subAccountId = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceBrokerageSubAccount>>> GetSubAccountsAsync(string? subAccountId = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
@@ -399,7 +427,7 @@ namespace Binance.Net
         /// <param name="ct">Cancellation token</param>
         /// <returns>Sub account futures commissions result</returns>
         public async Task<WebCallResult<IEnumerable<BinanceBrokerageSubAccountFuturesCommission>>> GetSubAccountFuturesCommissionAdjustmentAsync(string subAccountId, 
-            string symbol = null, int? receiveWindow = null, CancellationToken ct = default)
+            string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
             
@@ -454,7 +482,7 @@ namespace Binance.Net
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transfer result</returns>
         public async Task<WebCallResult<BinanceBrokerageTransferResult>> TransferAsync(string asset, decimal amount, 
-            string fromId, string toId, string clientTransferId = null, int? receiveWindow = null, CancellationToken ct = default)
+            string fromId, string toId, string? clientTransferId = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             
@@ -488,7 +516,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transfer history</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceBrokerageTransferTransaction>>> GetTransferHistoryAsync(string subAccountId, string clientTransferId = null, 
+        public async Task<WebCallResult<IEnumerable<BinanceBrokerageTransferTransaction>>> GetTransferHistoryAsync(string subAccountId, string? clientTransferId = null, 
             DateTime? startDate = null, DateTime? endDate = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
@@ -523,7 +551,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Rebates history</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceBrokerageRebate>>> GetBrokerCommissionRebatesRecentAsync(string subAccountId = null, 
+        public async Task<WebCallResult<IEnumerable<BinanceBrokerageRebate>>> GetBrokerCommissionRebatesRecentAsync(string? subAccountId = null, 
             DateTime? startDate = null, DateTime? endDate = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -553,7 +581,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>A download link for an offline file</returns>
-        public async Task<WebCallResult<string>> GetBrokerCommissionRebatesHistoryAsync(string subAccountId = null, 
+        public async Task<WebCallResult<string>> GetBrokerCommissionRebatesHistoryAsync(string? subAccountId = null, 
             DateTime? startDate = null, DateTime? endDate = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);

@@ -3,6 +3,9 @@ using System;
 
 namespace Binance.Net.Objects.Brokerage
 {
+    /// <summary>
+    /// Options for the binance brokerage client
+    /// </summary>
     public class BinanceBrokerageClientOptions : RestClientOptions
     {
         /// <summary>
@@ -25,14 +28,23 @@ namespace Binance.Net.Objects.Brokerage
         /// </summary>
         public TimeSpan ReceiveWindow { get; set; } = TimeSpan.FromSeconds(5);
 
+        /// <summary>
+        /// ctor
+        /// </summary>
         public BinanceBrokerageClientOptions() : base("https://api.binance.com")
         {
         }
 
+        /// <summary>
+        /// ctor
+        /// </summary>
         public BinanceBrokerageClientOptions(string baseAddress) : base(baseAddress)
         {
         }
         
+        /// <summary>
+        /// Return a copy of these options
+        /// </summary>
         public BinanceBrokerageClientOptions Copy()
         {
             var copy = Copy<BinanceBrokerageClientOptions>();
