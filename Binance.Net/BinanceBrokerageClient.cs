@@ -234,13 +234,13 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Api key result</returns>
-        public async Task<WebCallResult<BinanceBrokerageSubAccountApiKey>> GetSubAccountApiKeyAsync(string subAccountId, string apiKey = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceBrokerageSubAccountApiKey>>> GetSubAccountApiKeyAsync(string subAccountId, string apiKey = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
             
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
-                return new WebCallResult<BinanceBrokerageSubAccountApiKey>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<IEnumerable<BinanceBrokerageSubAccountApiKey>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
                              {
@@ -250,7 +250,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("subAccountApiKey", apiKey);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await SendRequest<BinanceBrokerageSubAccountApiKey>(GetUrl(ApiKeySubAccountEndpoint, BrokerageApi, BrokerageVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceBrokerageSubAccountApiKey>>(GetUrl(ApiKeySubAccountEndpoint, BrokerageApi, BrokerageVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
         
         /// <summary>
@@ -454,7 +454,7 @@ namespace Binance.Net
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transfer result</returns>
         public async Task<WebCallResult<BinanceBrokerageTransferResult>> TransferAsync(string asset, decimal amount, 
-            string fromId = null, string toId = null, string clientTransferId = null, int? receiveWindow = null, CancellationToken ct = default)
+            string fromId, string toId, string clientTransferId = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             

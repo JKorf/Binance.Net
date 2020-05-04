@@ -74,7 +74,7 @@ namespace Binance.Net.Interfaces
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Api key result</returns>
-        Task<WebCallResult<BinanceBrokerageSubAccountApiKey>> GetSubAccountApiKeyAsync(string subAccountId, string apiKey = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceBrokerageSubAccountApiKey>>> GetSubAccountApiKeyAsync(string subAccountId, string apiKey = null, int? receiveWindow = null, CancellationToken ct = default);
         
         /// <summary>
         /// Change Sub Account Api Permission
@@ -172,7 +172,7 @@ namespace Binance.Net.Interfaces
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transfer result</returns>
         Task<WebCallResult<BinanceBrokerageTransferResult>> TransferAsync(string asset, decimal amount, 
-            string fromId = null, string toId = null, string clientTransferId = null, int? receiveWindow = null, CancellationToken ct = default);
+            string fromId, string toId, string clientTransferId = null, int? receiveWindow = null, CancellationToken ct = default);
         
         /// <summary>
         /// Query Sub Account Transfer History
