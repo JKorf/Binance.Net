@@ -10975,6 +10975,11 @@
             Boolean indicating if this account can deposit
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamAccountInfo.AccountType">
+            <summary>
+            Boolean indicating if this account can deposit
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamAccountInfo.Balances">
             <summary>
             List of assets with their current balances
