@@ -164,7 +164,7 @@ namespace Binance.Net.Converters
                     break;
                 case SymbolFilterType.MaxNumberOrders:
                     var orderFilter = (BinanceSymbolMaxOrdersFilter)filter;
-                    writer.WritePropertyName("limit");
+                    writer.WritePropertyName("maxNumberOrders");
                     writer.WriteValue(orderFilter.MaxNumberOrders);
                     break;
                 case SymbolFilterType.IcebergParts:
