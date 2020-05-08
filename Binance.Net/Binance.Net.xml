@@ -3172,6 +3172,11 @@
             Futures account type
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.AccountType.Leveraged">
+            <summary>
+            Leveraged account type
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.DepositStatus">
             <summary>
             The status of a deposit
