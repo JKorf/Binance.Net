@@ -75,7 +75,7 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// <summary>
         /// Permissions types
         /// </summary>
-        [JsonProperty(ItemConverterType = typeof(OrderTypeConverter))]
+        [JsonProperty(ItemConverterType = typeof(AccountTypeConverter))]
         public IEnumerable<AccountType> Permissions { get; set; } = new List<AccountType>();
         /// <summary>
         /// Filters for order on this symbol

@@ -10260,6 +10260,11 @@
             The type of account
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceAccountInfo.Permissions">
+            <summary>
+            Permissions types
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceAccountInfo.Balances">
             <summary>
             List of assets with their current balances

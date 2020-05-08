@@ -55,7 +55,7 @@ namespace Binance.Net.Objects.Spot.UserStream
         /// <summary>
         /// Permissions types
         /// </summary>
-        [JsonProperty("P", ItemConverterType = typeof(OrderTypeConverter))]
+        [JsonProperty("P", ItemConverterType = typeof(AccountTypeConverter))]
         public IEnumerable<AccountType> Permissions { get; set; } = new List<AccountType>();
         /// <summary>
         /// List of assets with their current balances
