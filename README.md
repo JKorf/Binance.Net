@@ -148,6 +148,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 5.1.0-alpha10 - 08 May 2020
+    * Added Brokerage client, various fixes, added some missing parameters
+
 * Version 5.1.0-alpha9 - 01 May 2020
     * Fixed GetExchangeInfo call, merged master
 

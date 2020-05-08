@@ -170,7 +170,7 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsTrue(result.Success);
-            Assert.IsTrue(TestHelpers.AreEqual(accountInfo, result.Data, "Balances"));
+            Assert.IsTrue(TestHelpers.AreEqual(accountInfo, result.Data, "Balances", "Permissions"));
             Assert.IsTrue(TestHelpers.AreEqual(accountInfo.Balances.ToList()[0], result.Data.Balances.ToList()[0]));
             Assert.IsTrue(TestHelpers.AreEqual(accountInfo.Balances.ToList()[1], result.Data.Balances.ToList()[1]));
         }
