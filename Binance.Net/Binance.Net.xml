@@ -9759,6 +9759,11 @@
             The precision of the quote asset commission
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbol.Permissions">
+            <summary>
+            Permissions types
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbol.Filters">
             <summary>
             Filters for order on this symbol
@@ -10975,9 +10980,9 @@
             Boolean indicating if this account can deposit
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamAccountInfo.AccountType">
+        <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamAccountInfo.Permissions">
             <summary>
-            Boolean indicating if this account can deposit
+            Permissions types
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamAccountInfo.Balances">

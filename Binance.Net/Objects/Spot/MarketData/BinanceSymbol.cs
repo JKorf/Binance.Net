@@ -73,6 +73,11 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// </summary>
         public int QuoteCommissionPrecision { get; set; }
         /// <summary>
+        /// Permissions types
+        /// </summary>
+        [JsonProperty(ItemConverterType = typeof(OrderTypeConverter))]
+        public IEnumerable<AccountType> Permissions { get; set; } = new List<AccountType>();
+        /// <summary>
         /// Filters for order on this symbol
         /// </summary>
         public IEnumerable<BinanceSymbolFilter> Filters { get; set; } = new List<BinanceSymbolFilter>();
