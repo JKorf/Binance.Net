@@ -30,13 +30,13 @@ namespace Binance.Net.Interfaces
         /// Pings the Binance API
         /// </summary>
         /// <returns>True if successful ping, false if no response</returns>
-        new CallResult<long> Ping(CancellationToken ct = default);
+        new WebCallResult<long> Ping(CancellationToken ct = default);
 
         /// <summary>
         /// Pings the Binance API
         /// </summary>
         /// <returns>True if successful ping, false if no response</returns>
-        new Task<CallResult<long>> PingAsync(CancellationToken ct = default);
+        new Task<WebCallResult<long>> PingAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls

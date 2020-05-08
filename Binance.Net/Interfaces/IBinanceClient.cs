@@ -36,13 +36,13 @@ namespace Binance.Net.Interfaces
         /// Pings the Binance API
         /// </summary>
         /// <returns>True if successful ping, false if no response</returns>
-        CallResult<long> Ping(CancellationToken ct = default);
+        WebCallResult<long> Ping(CancellationToken ct = default);
 
         /// <summary>
         /// Pings the Binance API
         /// </summary>
         /// <returns>True if successful ping, false if no response</returns>
-        Task<CallResult<long>> PingAsync(CancellationToken ct = default);
+        Task<WebCallResult<long>> PingAsync(CancellationToken ct = default);
 
         #endregion
 

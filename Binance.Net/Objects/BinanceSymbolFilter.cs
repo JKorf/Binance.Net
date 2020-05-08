@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Binance.Net.Objects
 {
     /// <summary>
-    /// A filter for order placed on a symbol. Can be either a <see cref="BinanceSymbolPriceFilter"/>, <see cref="BinanceSymbolLotSizeFilter"/>, <see cref="BinanceSymbolMinNotionalFilter"/>, <see cref="BinanceSymbolMaxAlgorithmicOrdersFilter"/> or <see cref="BinanceSymbolIcebergPartsFilter"/>
+    /// A filter for order placed on a symbol. Can be either a <see cref="BinanceSymbolPriceFilter"/>, <see cref="BinanceSymbolLotSizeFilter"/>, <see cref="BinanceSymbolMinNotionalFilter"/>, <see cref="BinanceSymbolMaxAlgorithmicOrdersFilter"/> or <see cref="BinanceSymbolIcebergPartsFilter"/> or <see cref="BinanceSymbolMaxPositionFilter"/>
     /// </summary>
     [JsonConverter(typeof(SymbolFilterConverter))]
     public class BinanceSymbolFilter
@@ -174,5 +174,16 @@ namespace Binance.Net.Objects
         /// The max parts of an iceberg order for this symbol.
         /// </summary>
         public int Limit { get; set; }
+    }
+
+    /// <summary>
+    /// The max position filter
+    /// </summary>
+    public class BinanceSymbolMaxPositionFilter : BinanceSymbolFilter
+    {
+        /// <summary>
+        /// The max position an account can have on the base asset of a symbol.
+        /// </summary>
+        public decimal MaxPosition { get; set; }
     }
 }

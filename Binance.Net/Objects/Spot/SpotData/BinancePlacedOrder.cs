@@ -26,7 +26,7 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// <summary>
         /// Id of the order list this order belongs to
         /// </summary>
-        public long? OrderListId { get; set; }
+        public long OrderListId { get; set; }
 
         /// <summary>
         /// The order id as assigned by the client

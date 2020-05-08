@@ -26,7 +26,7 @@ namespace Binance.Net.Enums
         /// </summary>
         Canceled,
         /// <summary>
-        /// The order is in the process of being canceled
+        /// The order is in the process of being canceled  (currently unused)
         /// </summary>
         PendingCancel,
         /// <summary>

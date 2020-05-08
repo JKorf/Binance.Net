@@ -85,17 +85,17 @@ namespace Binance.Net.Objects.Spot.UserStream
         /// The quantity of the last filled trade of this order
         /// </summary>
         [JsonProperty("l")]
-        public decimal QuantityOfLastFilledTrade { get; set; }
+        public decimal LastQuantityFilled { get; set; }
         /// <summary>
         /// The quantity of all trades that were filled for this order
         /// </summary>
         [JsonProperty("z")]
-        public decimal AccumulatedQuantityOfFilledTrades { get; set; }
+        public decimal QuantityFilled { get; set; }
         /// <summary>
         /// The price of the last filled trade
         /// </summary>
         [JsonProperty("L")]
-        public decimal PriceLastFilledTrade { get; set; }
+        public decimal LastPriceFilled { get; set; }
         /// <summary>
         /// The commission payed
         /// </summary>
@@ -110,7 +110,7 @@ namespace Binance.Net.Objects.Spot.UserStream
         /// The time of the update
         /// </summary>
         [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
-        public DateTime Time { get; set; }
+        public DateTime UpdateTime { get; set; }
         /// <summary>
         /// The trade id
         /// </summary>
@@ -130,22 +130,22 @@ namespace Binance.Net.Objects.Spot.UserStream
         /// Time the order was created
         /// </summary>
         [JsonProperty("O"), JsonConverter(typeof(TimestampConverter))]
-        public DateTime OrderCreationTime { get; set; }
+        public DateTime CreateTime { get; set; }
         /// <summary>
         /// Cummulative amount
         /// </summary>
         [JsonProperty("Z")]
-        public decimal CummulativeQuoteQuantity { get; set; }
+        public decimal QuoteQuantityFilled { get; set; }
         /// <summary>
         /// Quote order quantity
         /// </summary>
         [JsonProperty("Q")]
-        public decimal QuoteOrderQuantity { get; set; }
+        public decimal QuoteQuantity { get; set; }
         /// <summary>
         /// Last quote asset transacted quantity (i.e. LastPrice * LastQuantity)
         /// </summary>
         [JsonProperty("Y")]
-        public decimal LastQuoteTransactedQuantity { get; set; }
+        public decimal LastQuoteQuantity { get; set; }
         /// <summary>
         /// This id of the corresponding order list. (-1 if not part of an order list)
         /// </summary>

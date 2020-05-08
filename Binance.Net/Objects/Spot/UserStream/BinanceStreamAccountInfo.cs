@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Binance.Net.Converters;
+using Binance.Net.Enums;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
@@ -50,6 +52,11 @@ namespace Binance.Net.Objects.Spot.UserStream
         /// </summary>
         [JsonProperty("D")]
         public bool CanDeposit { get; set; }
+        /// <summary>
+        /// The type of account
+        /// </summary>
+        [JsonProperty("p"), JsonConverter(typeof(AccountTypeConverter))]
+        public AccountType AccountType { get; set; }
         /// <summary>
         /// List of assets with their current balances
         /// </summary>

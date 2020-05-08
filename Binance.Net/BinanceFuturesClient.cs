@@ -163,18 +163,18 @@ namespace Binance.Net
         /// Pings the Binance Futures API
         /// </summary>
         /// <returns>True if successful ping, false if no response</returns>
-        public override CallResult<long> Ping(CancellationToken ct = default) => PingAsync(ct).Result;
+        public WebCallResult<long> Ping(CancellationToken ct = default) => PingAsync(ct).Result;
 
         /// <summary>
         /// Pings the Binance Futures API
         /// </summary>
         /// <returns>True if successful ping, false if no response</returns>
-        public override async Task<CallResult<long>> PingAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<long>> PingAsync(CancellationToken ct = default)
         {
             var sw = Stopwatch.StartNew();
             var result = await SendRequest<object>(GetUrl(PingEndpoint, Api, PublicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
             sw.Stop();
-            return new CallResult<long>(result.Error == null ? sw.ElapsedMilliseconds : 0, result.Error);
+            return new WebCallResult<long>(result.ResponseStatusCode, result.ResponseHeaders, result.Error == null ? sw.ElapsedMilliseconds : 0, result.Error);
         }
 
         #endregion
