@@ -385,11 +385,12 @@ namespace Binance.Net.Interfaces
         /// <param name="address">The address to send the funds to</param>
         /// <param name="addressTag">Secondary address identifier for coins like XRP,XMR etc.</param>
         /// <param name="amount">The amount to withdraw</param>
+        /// <param name="network">The network to use</param>
         /// <param name="name">Name for the transaction</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Withdrawal confirmation</returns>
-        WebCallResult<BinanceWithdrawalPlaced> Withdraw(string asset, string address, decimal amount, string? addressTag = null, string? name = null, int? receiveWindow = null, CancellationToken ct = default);
+        WebCallResult<BinanceWithdrawalPlaced> Withdraw(string asset, string address, decimal amount, string? network = null, string? addressTag = null, string? name = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Withdraw assets from Binance to an address
@@ -398,11 +399,12 @@ namespace Binance.Net.Interfaces
         /// <param name="address">The address to send the funds to</param>
         /// <param name="addressTag">Secondary address identifier for coins like XRP,XMR etc.</param>
         /// <param name="amount">The amount to withdraw</param>
+        /// <param name="network">The network to use</param>
         /// <param name="name">Name for the transaction</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Withdrawal confirmation</returns>
-        Task<WebCallResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, decimal amount, string? addressTag = null, string? name = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, decimal amount, string? network = null, string? addressTag = null, string? name = null, int? receiveWindow = null, CancellationToken ct = default);
 
         #endregion
 
