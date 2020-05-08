@@ -5,17 +5,16 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
     /// <summary>
     /// Enable Or Disable BNB Burn Margin Interest Result
     /// </summary>
-    public class BinanceBrokerageEnableOrDisableBnbBurnMarginInterestResult
+    public class BinanceBrokerageChangeBnbBurnMarginInterestResult
     {
         /// <summary>
         /// Sub Account Id
         /// </summary>
-        [JsonProperty("subaccountId")]
         public string SubAccountId { get; set; } = "";
         
         /// <summary>
         /// Is Interest BNB Burn
-        /// </summary>
+        /// </summary> 
         [JsonProperty("interestBNBBurn")]
         public bool IsInterestBnbBurn { get; set; }
     }

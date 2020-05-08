@@ -9,9 +9,9 @@
             Client providing access to the Binance Brokerage REST Api
             </summary>
         </member>
-        <member name="M:Binance.Net.BinanceBrokerageClient.#ctor(CryptoExchange.Net.Authentication.ApiCredentials)">
+        <member name="M:Binance.Net.BinanceBrokerageClient.#ctor">
             <summary>
-            Create a new instance of BinanceBrokerageClient using credentials and the default options
+            Create a new instance of BinanceBrokerageClient using the default options
             </summary>
         </member>
         <member name="M:Binance.Net.BinanceBrokerageClient.#ctor(Binance.Net.Objects.Brokerage.BinanceBrokerageClientOptions)">
@@ -31,6 +31,7 @@
             <summary>
             Pings the Binance API
             </summary>
+            <param name="ct">Cancellation token</param>
             <returns>True if successful ping, false if no response</returns>
         </member>
         <member name="M:Binance.Net.BinanceBrokerageClient.CreateSubAccountAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
@@ -226,7 +227,7 @@
             <param name="ct">Cancellation token</param>
             <returns>A download link for an offline file</returns>
         </member>
-        <member name="M:Binance.Net.BinanceBrokerageClient.EnableOrDisableBnbBurnForSubAccountSpotAndMarginAsync(System.String,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceBrokerageClient.ChangeBnbBurnForSubAccountSpotAndMarginAsync(System.String,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Enable Or Disable BNB Burn for Sub Account SPOT and MARGIN
             </summary>
@@ -236,7 +237,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Result</returns>
         </member>
-        <member name="M:Binance.Net.BinanceBrokerageClient.EnableOrDisableBnbBurnForSubAccountMarginInterestAsync(System.String,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceBrokerageClient.ChangeBnbBurnForSubAccountMarginInterestAsync(System.String,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Enable Or Disable BNB Burn for Sub Account Margin Interest
             <para>Sub account must be enabled margin before using this switch</para>
@@ -4310,6 +4311,7 @@
             <summary>
             Pings the Binance API
             </summary>
+            <param name="ct">Cancellation token</param>
             <returns>True if successful ping, false if no response</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceBrokerageClient.CreateSubAccountAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
@@ -4505,7 +4507,7 @@
             <param name="ct">Cancellation token</param>
             <returns>A download link for an offline file</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceBrokerageClient.EnableOrDisableBnbBurnForSubAccountSpotAndMarginAsync(System.String,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceBrokerageClient.ChangeBnbBurnForSubAccountSpotAndMarginAsync(System.String,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Enable Or Disable BNB Burn for Sub Account SPOT and MARGIN
             </summary>
@@ -4515,7 +4517,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Result</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceBrokerageClient.EnableOrDisableBnbBurnForSubAccountMarginInterestAsync(System.String,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceBrokerageClient.ChangeBnbBurnForSubAccountMarginInterestAsync(System.String,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Enable Or Disable BNB Burn for Sub Account Margin Interest
             <para>Sub account must be enabled margin before using this switch</para>
@@ -8198,6 +8200,36 @@
             Is Interest BNB Burn
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageChangeBnbBurnMarginInterestResult">
+            <summary>
+            Enable Or Disable BNB Burn Margin Interest Result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageChangeBnbBurnMarginInterestResult.SubAccountId">
+            <summary>
+            Sub Account Id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageChangeBnbBurnMarginInterestResult.IsInterestBnbBurn">
+            <summary>
+            Is Interest BNB Burn
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageChangeBnbBurnSpotAndMarginResult">
+            <summary>
+            Enable Or Disable BNB Burn Spot And Margin Result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageChangeBnbBurnSpotAndMarginResult.SubAccountId">
+            <summary>
+            Sub Account Id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageChangeBnbBurnSpotAndMarginResult.IsSpotBnbBurn">
+            <summary>
+            Is Spot BNB Burn
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageEnableFuturesResult">
             <summary>
             Enable Futures Result
@@ -8236,36 +8268,6 @@
         <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageEnableMarginResult.UpdateDate">
             <summary>
             Update Date
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageEnableOrDisableBnbBurnMarginInterestResult">
-            <summary>
-            Enable Or Disable BNB Burn Margin Interest Result
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageEnableOrDisableBnbBurnMarginInterestResult.SubAccountId">
-            <summary>
-            Sub Account Id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageEnableOrDisableBnbBurnMarginInterestResult.IsInterestBnbBurn">
-            <summary>
-            Is Interest BNB Burn
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageEnableOrDisableBnbBurnSpotAndMarginResult">
-            <summary>
-            Enable Or Disable BNB Burn Spot And Margin Result
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageEnableOrDisableBnbBurnSpotAndMarginResult.SubAccountId">
-            <summary>
-            Sub Account Id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageEnableOrDisableBnbBurnSpotAndMarginResult.IsSpotBnbBurn">
-            <summary>
-            Is Spot BNB Burn
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageRebate">

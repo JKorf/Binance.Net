@@ -23,6 +23,7 @@ namespace Binance.Net.Interfaces
         /// <summary>
         /// Pings the Binance API
         /// </summary>
+        /// <param name="ct">Cancellation token</param>
         /// <returns>True if successful ping, false if no response</returns>
         Task<CallResult<long>> PingAsync(CancellationToken ct = default);
         
@@ -237,7 +238,7 @@ namespace Binance.Net.Interfaces
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Result</returns>
-        Task<WebCallResult<BinanceBrokerageEnableOrDisableBnbBurnSpotAndMarginResult>> EnableOrDisableBnbBurnForSubAccountSpotAndMarginAsync(string subAccountId, bool spotBnbBurn, 
+        Task<WebCallResult<BinanceBrokerageChangeBnbBurnSpotAndMarginResult>> ChangeBnbBurnForSubAccountSpotAndMarginAsync(string subAccountId, bool spotBnbBurn, 
             int? receiveWindow = null, CancellationToken ct = default);
         
         /// <summary>
@@ -249,7 +250,7 @@ namespace Binance.Net.Interfaces
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Result</returns>
-        Task<WebCallResult<BinanceBrokerageEnableOrDisableBnbBurnMarginInterestResult>> EnableOrDisableBnbBurnForSubAccountMarginInterestAsync(string subAccountId, bool interestBnbBurn, 
+        Task<WebCallResult<BinanceBrokerageChangeBnbBurnMarginInterestResult>> ChangeBnbBurnForSubAccountMarginInterestAsync(string subAccountId, bool interestBnbBurn, 
             int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>

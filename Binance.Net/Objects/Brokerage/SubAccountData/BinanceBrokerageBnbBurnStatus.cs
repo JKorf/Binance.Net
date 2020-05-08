@@ -10,7 +10,6 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         /// <summary>
         /// Sub Account Id
         /// </summary>
-        [JsonProperty("subAccountId")]
         public string SubAccountId { get; set; } = "";
         
         /// <summary>

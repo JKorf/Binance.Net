@@ -57,8 +57,8 @@ namespace Binance.Net
         private const string TransferEndpoint = "broker/transfer";
         private const string RebatesRecentEndpoint = "broker/rebate/recentRecord";
         private const string RebatesHistoryEndpoint = "broker/rebate/historicalRecord";
-        private const string EnableOrDisableBnbBurnForSubAccountSpotAndMarginEndpoint = "broker/subAccount/bnbBurn/spot";
-        private const string EnableOrDisableBnbBurnForSubAccountMarginInterestEndpoint = "broker/subAccount/bnbBurn/marginInterest";
+        private const string ChangeBnbBurnForSubAccountSpotAndMarginEndpoint = "broker/subAccount/bnbBurn/spot";
+        private const string ChangeBnbBurnForSubAccountMarginInterestEndpoint = "broker/subAccount/bnbBurn/marginInterest";
         private const string BnbBurnForSubAccountStatusEndpoint = "broker/subAccount/bnbBurn/status";
 
         #endregion
@@ -66,10 +66,9 @@ namespace Binance.Net
         #region Constructors
         
         /// <summary>
-        /// Create a new instance of BinanceBrokerageClient using credentials and the default options
+        /// Create a new instance of BinanceBrokerageClient using the default options
         /// </summary>
-        public BinanceBrokerageClient(ApiCredentials credentials)
-            : base(DefaultOptions, new BinanceAuthenticationProvider(credentials, ArrayParametersSerialization.MultipleValues))
+        public BinanceBrokerageClient() : this(DefaultOptions)
         {
             postParametersPosition = PostParameters.InUri;
         }
@@ -105,6 +104,7 @@ namespace Binance.Net
         /// <summary>
         /// Pings the Binance API
         /// </summary>
+        /// <param name="ct">Cancellation token</param>
         /// <returns>True if successful ping, false if no response</returns>
         public override async Task<CallResult<long>> PingAsync(CancellationToken ct = default)
         {
@@ -609,14 +609,14 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Result</returns>
-        public async Task<WebCallResult<BinanceBrokerageEnableOrDisableBnbBurnSpotAndMarginResult>> EnableOrDisableBnbBurnForSubAccountSpotAndMarginAsync(string subAccountId, bool spotBnbBurn, 
+        public async Task<WebCallResult<BinanceBrokerageChangeBnbBurnSpotAndMarginResult>> ChangeBnbBurnForSubAccountSpotAndMarginAsync(string subAccountId, bool spotBnbBurn, 
             int? receiveWindow = null, CancellationToken ct = default)
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
             
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
-                return new WebCallResult<BinanceBrokerageEnableOrDisableBnbBurnSpotAndMarginResult>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<BinanceBrokerageChangeBnbBurnSpotAndMarginResult>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
                              {
@@ -626,7 +626,7 @@ namespace Binance.Net
                              };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await SendRequest<BinanceBrokerageEnableOrDisableBnbBurnSpotAndMarginResult>(GetUrl(EnableOrDisableBnbBurnForSubAccountSpotAndMarginEndpoint, BrokerageApi, BrokerageVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequest<BinanceBrokerageChangeBnbBurnSpotAndMarginResult>(GetUrl(ChangeBnbBurnForSubAccountSpotAndMarginEndpoint, BrokerageApi, BrokerageVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
         
         /// <summary>
@@ -638,14 +638,14 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Result</returns>
-        public async Task<WebCallResult<BinanceBrokerageEnableOrDisableBnbBurnMarginInterestResult>> EnableOrDisableBnbBurnForSubAccountMarginInterestAsync(string subAccountId, bool interestBnbBurn, 
+        public async Task<WebCallResult<BinanceBrokerageChangeBnbBurnMarginInterestResult>> ChangeBnbBurnForSubAccountMarginInterestAsync(string subAccountId, bool interestBnbBurn, 
             int? receiveWindow = null, CancellationToken ct = default)
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
             
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
-                return new WebCallResult<BinanceBrokerageEnableOrDisableBnbBurnMarginInterestResult>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<BinanceBrokerageChangeBnbBurnMarginInterestResult>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
                              {
@@ -655,7 +655,7 @@ namespace Binance.Net
                              };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await SendRequest<BinanceBrokerageEnableOrDisableBnbBurnMarginInterestResult>(GetUrl(EnableOrDisableBnbBurnForSubAccountMarginInterestEndpoint, BrokerageApi, BrokerageVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequest<BinanceBrokerageChangeBnbBurnMarginInterestResult>(GetUrl(ChangeBnbBurnForSubAccountMarginInterestEndpoint, BrokerageApi, BrokerageVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
         
         /// <summary>

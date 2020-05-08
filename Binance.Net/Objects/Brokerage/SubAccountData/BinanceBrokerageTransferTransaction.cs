@@ -24,19 +24,16 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         /// <summary>
         /// From Id
         /// </summary>
-        [JsonProperty("fromId")]
         public string FromId { get; set; } = "";
         
         /// <summary>
         /// To Id
         /// </summary>
-        [JsonProperty("toId")]
         public string ToId { get; set; } = "";
         
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("asset")]
         public string Asset { get; set; } = "";
         
         /// <summary>
