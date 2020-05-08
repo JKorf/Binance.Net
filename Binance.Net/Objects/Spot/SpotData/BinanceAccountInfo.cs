@@ -51,6 +51,11 @@ namespace Binance.Net.Objects.Spot.SpotData
         [JsonConverter(typeof(AccountTypeConverter))]
         public AccountType AccountType { get; set; }
         /// <summary>
+        /// Permissions types
+        /// </summary>
+        [JsonProperty(ItemConverterType = typeof(AccountTypeConverter))]
+        public IEnumerable<AccountType> Permissions { get; set; } = new List<AccountType>();
+        /// <summary>
         /// List of assets with their current balances
         /// </summary>
         public IEnumerable<BinanceBalance> Balances { get; set; } = new List<BinanceBalance>();
