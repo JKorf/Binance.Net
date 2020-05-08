@@ -418,14 +418,14 @@ namespace Binance.Net
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        public CallResult<UpdateSubscription> SubscribeToAllBookTickerUpdates(Action<IEnumerable<BinanceStreamBookPrice>> onMessage) => SubscribeToAllBookTickerUpdatesAsync(onMessage).Result;
+        public CallResult<UpdateSubscription> SubscribeToAllBookTickerUpdates(Action<BinanceStreamBookPrice> onMessage) => SubscribeToAllBookTickerUpdatesAsync(onMessage).Result;
 
         /// <summary>
         /// Subscribes to the book ticker update stream for all symbols
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        public async Task<CallResult<UpdateSubscription>> SubscribeToAllBookTickerUpdatesAsync(Action<IEnumerable<BinanceStreamBookPrice>> onMessage)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToAllBookTickerUpdatesAsync(Action<BinanceStreamBookPrice> onMessage)
         {
             return await Subscribe(AllBookTickerStreamEndpoint, false, onMessage).ConfigureAwait(false);
         }
