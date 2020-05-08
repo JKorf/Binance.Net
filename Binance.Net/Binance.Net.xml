@@ -3248,14 +3248,14 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToAllBookTickerUpdates(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Spot.MarketStream.BinanceStreamBookPrice}})">
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToAllBookTickerUpdates(System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamBookPrice})">
             <summary>
             Subscribes to the book ticker update stream for all symbols
             </summary>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToAllBookTickerUpdatesAsync(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Spot.MarketStream.BinanceStreamBookPrice}})">
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToAllBookTickerUpdatesAsync(System.Action{Binance.Net.Objects.Spot.MarketStream.BinanceStreamBookPrice})">
             <summary>
             Subscribes to the book ticker update stream for all symbols
             </summary>
@@ -3827,7 +3827,7 @@
         </member>
         <member name="F:Binance.Net.Enums.OrderStatus.PendingCancel">
             <summary>
-            The order is in the process of being canceled
+            The order is in the process of being canceled  (currently unused)
             </summary>
         </member>
         <member name="F:Binance.Net.Enums.OrderStatus.Rejected">
@@ -4038,6 +4038,11 @@
         <member name="F:Binance.Net.Enums.SymbolFilterType.IcebergParts">
             <summary>
             Max iceberg parts filter
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolFilterType.MaxPosition">
+            <summary>
+            Max position filter
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.SymbolStatus">
@@ -7902,7 +7907,7 @@
         </member>
         <member name="T:Binance.Net.Objects.BinanceSymbolFilter">
             <summary>
-            A filter for order placed on a symbol. Can be either a <see cref="T:Binance.Net.Objects.BinanceSymbolPriceFilter"/>, <see cref="T:Binance.Net.Objects.BinanceSymbolLotSizeFilter"/>, <see cref="T:Binance.Net.Objects.BinanceSymbolMinNotionalFilter"/>, <see cref="T:Binance.Net.Objects.BinanceSymbolMaxAlgorithmicOrdersFilter"/> or <see cref="T:Binance.Net.Objects.BinanceSymbolIcebergPartsFilter"/>
+            A filter for order placed on a symbol. Can be either a <see cref="T:Binance.Net.Objects.BinanceSymbolPriceFilter"/>, <see cref="T:Binance.Net.Objects.BinanceSymbolLotSizeFilter"/>, <see cref="T:Binance.Net.Objects.BinanceSymbolMinNotionalFilter"/>, <see cref="T:Binance.Net.Objects.BinanceSymbolMaxAlgorithmicOrdersFilter"/> or <see cref="T:Binance.Net.Objects.BinanceSymbolIcebergPartsFilter"/> or <see cref="T:Binance.Net.Objects.BinanceSymbolMaxPositionFilter"/>
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BinanceSymbolFilter.FilterType">
@@ -8070,6 +8075,16 @@
             The max parts of an iceberg order for this symbol.
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceSymbolMaxPositionFilter">
+            <summary>
+            The max position filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceSymbolMaxPositionFilter.MaxPosition">
+            <summary>
+            The max position an account can have on the base asset of a symbol.
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Brokerage.BinanceBrokerageClientOptions">
             <summary>
             Options for the binance brokerage client
@@ -8213,7 +8228,7 @@
         <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageChangeBnbBurnMarginInterestResult.IsInterestBnbBurn">
             <summary>
             Is Interest BNB Burn
-            </summary>
+            </summary> 
         </member>
         <member name="T:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageChangeBnbBurnSpotAndMarginResult">
             <summary>
@@ -10693,6 +10708,11 @@
             Filter for the maximum deviation of the price
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbol.MaxPositionFilter">
+            <summary>
+            Filter for the max position
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.MarketStream.BinanceStreamAggregatedTrade">
             <summary>
             Aggregated information about trades for a symbol
@@ -11262,6 +11282,11 @@
         <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceOrder.OrderListId">
             <summary>
             The order list id as generated by Binance, only for OCO orders
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceOrder.OriginalClientOrderId">
+            <summary>
+            Original order id
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceOrder.Price">
@@ -11849,6 +11874,11 @@
             Boolean indicating if this account can deposit
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamAccountInfo.AccountType">
+            <summary>
+            The type of account
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamAccountInfo.Balances">
             <summary>
             List of assets with their current balances
@@ -12039,17 +12069,17 @@
             The id of the order as assigned by Binance
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate.QuantityOfLastFilledTrade">
+        <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate.LastQuantityFilled">
             <summary>
             The quantity of the last filled trade of this order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate.AccumulatedQuantityOfFilledTrades">
+        <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate.QuantityFilled">
             <summary>
             The quantity of all trades that were filled for this order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate.PriceLastFilledTrade">
+        <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate.LastPriceFilled">
             <summary>
             The price of the last filled trade
             </summary>
@@ -12064,7 +12094,7 @@
             The asset the commission was taken from
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate.Time">
+        <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate.UpdateTime">
             <summary>
             The time of the update
             </summary>
@@ -12084,22 +12114,22 @@
             Whether the buyer is the maker
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate.OrderCreationTime">
+        <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate.CreateTime">
             <summary>
             Time the order was created
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate.CummulativeQuoteQuantity">
+        <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate.QuoteQuantityFilled">
             <summary>
             Cummulative amount
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate.QuoteOrderQuantity">
+        <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate.QuoteQuantity">
             <summary>
             Quote order quantity
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate.LastQuoteTransactedQuantity">
+        <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate.LastQuoteQuantity">
             <summary>
             Last quote asset transacted quantity (i.e. LastPrice * LastQuantity)
             </summary>

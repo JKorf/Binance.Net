@@ -122,5 +122,11 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// </summary>
         [JsonIgnore]
         public BinanceSymbolPercentPriceFilter PricePercentFilter => Filters.OfType<BinanceSymbolPercentPriceFilter>().FirstOrDefault();
+
+        /// <summary>
+        /// Filter for the max position
+        /// </summary>
+        [JsonIgnore]
+        public BinanceSymbolMaxPositionFilter MaxPositionFilter => Filters.OfType<BinanceSymbolMaxPositionFilter>().FirstOrDefault();
     }
 }

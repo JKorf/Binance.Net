@@ -48,6 +48,10 @@ namespace Binance.Net.Enums
         /// <summary>
         /// Max iceberg parts filter
         /// </summary>
-        IcebergParts
+        IcebergParts,
+        /// <summary>
+        /// Max position filter
+        /// </summary>
+        MaxPosition
     }
 }
