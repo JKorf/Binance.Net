@@ -20,6 +20,10 @@ namespace Binance.Net.Enums
         /// <summary>
         /// Futures account type
         /// </summary>
-        Futures
+        Futures,
+        /// <summary>
+        /// Leveraged account type
+        /// </summary>
+        Leveraged
     }
 }
