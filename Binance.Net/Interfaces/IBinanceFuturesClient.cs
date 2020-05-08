@@ -432,6 +432,7 @@ namespace Binance.Net.Interfaces
         /// <param name="symbol">The symbol the order is for</param>
         /// <param name="side">The order side (buy/sell)</param>
         /// <param name="type">The order type</param>
+        /// <param name="positionSide">The position side</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
         /// <param name="quantity">The amount of the base symbol</param>
         /// <param name="reduceOnly">Specify as true if the order is intended to only reduce the position</param>
@@ -450,6 +451,7 @@ namespace Binance.Net.Interfaces
             OrderSide side,
             OrderType type,
             decimal? quantity,
+            PositionSide? positionSide = null,
             TimeInForce? timeInForce = null,
             bool? reduceOnly = null,
             decimal? price = null,
@@ -468,6 +470,7 @@ namespace Binance.Net.Interfaces
         /// <param name="symbol">The symbol the order is for</param>
         /// <param name="side">The order side (buy/sell)</param>
         /// <param name="type">The order type</param>
+        /// <param name="positionSide">The position side</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
         /// <param name="quantity">The amount of the base symbol</param>
         /// <param name="reduceOnly">Specify as true if the order is intended to only reduce the position</param>
@@ -486,6 +489,7 @@ namespace Binance.Net.Interfaces
             OrderSide side,
             OrderType type,
             decimal? quantity,
+            PositionSide? positionSide = null,
             TimeInForce? timeInForce = null,
             bool? reduceOnly = null,
             decimal? price = null,
