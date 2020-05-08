@@ -299,7 +299,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The system status</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.Withdraw(System.String,System.String,System.Decimal,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.Withdraw(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Withdraw assets from Binance to an address
             </summary>
@@ -307,12 +307,13 @@
             <param name="address">The address to send the funds to</param>
             <param name="addressTag">Secondary address identifier for coins like XRP,XMR etc.</param>
             <param name="amount">The amount to withdraw</param>
+            <param name="network">The network to use</param>
             <param name="name">Name for the transaction</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Withdrawal confirmation</returns>
         </member>
-        <member name="M:Binance.Net.BinanceClient.WithdrawAsync(System.String,System.String,System.Decimal,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceClient.WithdrawAsync(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Withdraw assets from Binance to an address
             </summary>
@@ -320,6 +321,7 @@
             <param name="address">The address to send the funds to</param>
             <param name="addressTag">Secondary address identifier for coins like XRP,XMR etc.</param>
             <param name="amount">The amount to withdraw</param>
+            <param name="network">The network to use</param>
             <param name="name">Name for the transaction</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -1857,7 +1859,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Notional and Leverage Brackets</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -1865,6 +1867,7 @@
             <param name="side">The order side (buy/sell)</param>
             <param name="type">The order type</param>
             <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill/GootTillCrossing)</param>
+            <param name="positionSide">The position side</param>
             <param name="quantity">The amount of the base symbol</param>
             <param name="reduceOnly">Specify as true if the order is intended to only reduce the position</param>
             <param name="price">The price to use</param>
@@ -1878,7 +1881,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -1887,6 +1890,7 @@
             <param name="type">The order type</param>
             <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
             <param name="quantity">The amount of the base symbol</param>
+            <param name="positionSide">The position side</param>
             <param name="reduceOnly">Specify as true if the order is intended to only reduce the position</param>
             <param name="price">The price to use</param>
             <param name="newClientOrderId">Unique id for order</param>
@@ -3652,9 +3656,29 @@
             Same as a limit order, however it will fail if the order would immediately match, therefor preventing taker orders
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.OrderType.TralingStopMaret">
+        <member name="F:Binance.Net.Enums.OrderType.TrailingStopMarket">
             <summary>
             Trailing stop order will be placed without a price. The order will be executed at the best price available at that time in the order book.
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.PositionSide">
+            <summary>
+            Position side
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PositionSide.Short">
+            <summary>
+            Short
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PositionSide.Long">
+            <summary>
+            Long
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PositionSide.Both">
+            <summary>
+            Both for One-way mode when placing an order
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.RateLimitInterval">
@@ -4325,7 +4349,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The system status</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.Withdraw(System.String,System.String,System.Decimal,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.Withdraw(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Withdraw assets from Binance to an address
             </summary>
@@ -4333,12 +4357,13 @@
             <param name="address">The address to send the funds to</param>
             <param name="addressTag">Secondary address identifier for coins like XRP,XMR etc.</param>
             <param name="amount">The amount to withdraw</param>
+            <param name="network">The network to use</param>
             <param name="name">Name for the transaction</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Withdrawal confirmation</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceClient.WithdrawAsync(System.String,System.String,System.Decimal,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceClient.WithdrawAsync(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Withdraw assets from Binance to an address
             </summary>
@@ -4346,6 +4371,7 @@
             <param name="address">The address to send the funds to</param>
             <param name="addressTag">Secondary address identifier for coins like XRP,XMR etc.</param>
             <param name="amount">The amount to withdraw</param>
+            <param name="network">The network to use</param>
             <param name="name">Name for the transaction</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -5907,13 +5933,14 @@
             <param name="ct">Cancellation token</param>
             <returns>List of orders</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
             <param name="symbol">The symbol the order is for</param>
             <param name="side">The order side (buy/sell)</param>
             <param name="type">The order type</param>
+            <param name="positionSide">The position side</param>
             <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
             <param name="quantity">The amount of the base symbol</param>
             <param name="reduceOnly">Specify as true if the order is intended to only reduce the position</param>
@@ -5928,13 +5955,14 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
             <param name="symbol">The symbol the order is for</param>
             <param name="side">The order side (buy/sell)</param>
             <param name="type">The order type</param>
+            <param name="positionSide">The position side</param>
             <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
             <param name="quantity">The amount of the base symbol</param>
             <param name="reduceOnly">Specify as true if the order is intended to only reduce the position</param>
@@ -8064,6 +8092,11 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.Side">
             <summary>
             The side of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.PositionSide">
+            <summary>
+            The position side of the order
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.Status">
@@ -10977,7 +11010,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamAccountInfo.AccountType">
             <summary>
-            Boolean indicating if this account can deposit
+            The type of account
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamAccountInfo.Balances">
