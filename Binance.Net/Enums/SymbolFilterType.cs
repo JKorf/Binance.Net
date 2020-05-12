@@ -38,10 +38,6 @@ namespace Binance.Net.Enums
         /// </summary>
         MaxNumberOrders,
         /// <summary>
-        /// Max iceberg orders filter
-        /// </summary>
-        MaxNumberIcebergOrders,
-        /// <summary>
         /// Max algo orders filter
         /// </summary>
         MaxNumberAlgorithmicOrders,
@@ -49,9 +45,5 @@ namespace Binance.Net.Enums
         /// Max iceberg parts filter
         /// </summary>
         IcebergParts,
-        /// <summary>
-        /// Max position filter
-        /// </summary>
-        MaxPosition
     }
 }

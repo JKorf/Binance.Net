@@ -1,5 +1,5 @@
 ﻿using Binance.Net.Enums;
-using Binance.Net.Objects;
+using Binance.Net.Objects.MarketData;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -59,14 +59,6 @@ namespace Binance.Net.Converters
                         MaxNumberAlgorithmicOrders = (int)obj["maxNumAlgoOrders"]
                     };
                     break;
-
-                case SymbolFilterType.MaxNumberIcebergOrders:
-                    result = new BinanceSymbolMaxIcebergOrdersFilter
-                    {
-                        MaxNumberIcebergOrders = (int)obj["maxNumIcebergOrders"]
-                    };
-                    break;
-
                 case SymbolFilterType.MaxNumberOrders:
                     result = new BinanceSymbolMaxOrdersFilter
                     {
@@ -81,26 +73,11 @@ namespace Binance.Net.Converters
                     };
                     break;
                 case SymbolFilterType.PricePercent:
-                    if (obj["avgPriceMins"] != null)
-                        result = new BinanceSymbolPercentPriceFilter
-                        {
-                            MultiplierUp = (decimal)obj["multiplierUp"],
-                            MultiplierDown = (decimal)obj["multiplierDown"],
-                            AveragePriceMinutes = (int)obj["avgPriceMins"]
-                        };
-                    else
-                        result = new BinanceFuturesSymbolPercentPriceFilter
-                        {
-                            MultiplierUp = (decimal)obj["multiplierUp"],
-                            MultiplierDown = (decimal)obj["multiplierDown"],
-                            MultiplierDecimal = (int)obj["multiplierDecimal"]
-                        };
-
-                    break;
-                case SymbolFilterType.MaxPosition:
-                    result = new BinanceSymbolMaxPositionFilter
+                    result = new BinanceSymbolPercentPriceFilter
                     {
-                        MaxPosition = (decimal)obj["maxPosition"]
+                        MultiplierUp = (decimal)obj["multiplierUp"],
+                        MultiplierDown = (decimal)obj["multiplierDown"],
+                        AveragePriceMinutes = (int)obj["avgPriceMins"]
                     };
                     break;
                 default:
@@ -163,14 +140,9 @@ namespace Binance.Net.Converters
                     writer.WritePropertyName("maxNumAlgoOrders");
                     writer.WriteValue(algoFilter.MaxNumberAlgorithmicOrders);
                     break;
-                case SymbolFilterType.MaxNumberIcebergOrders:
-                    var icebergFilter = (BinanceSymbolMaxIcebergOrdersFilter)filter;
-                    writer.WritePropertyName("maxNumIcebergOrders");
-                    writer.WriteValue(icebergFilter.MaxNumberIcebergOrders);
-                    break;
                 case SymbolFilterType.MaxNumberOrders:
                     var orderFilter = (BinanceSymbolMaxOrdersFilter)filter;
-                    writer.WritePropertyName("limit");
+                    writer.WritePropertyName("maxNumOrders");
                     writer.WriteValue(orderFilter.MaxNumberOrders);
                     break;
                 case SymbolFilterType.IcebergParts:
@@ -186,11 +158,6 @@ namespace Binance.Net.Converters
                     writer.WriteValue(pricePercentFilter.MultiplierDown);
                     writer.WritePropertyName("avgPriceMins");
                     writer.WriteValue(pricePercentFilter.AveragePriceMinutes);
-                    break;
-                case SymbolFilterType.MaxPosition:
-                    var maxPositionFilter = (BinanceSymbolMaxPositionFilter)filter;
-                    writer.WritePropertyName("multiplierUp");
-                    writer.WriteValue(maxPositionFilter.MaxPosition);
                     break;
                 default:
                     Debug.WriteLine("Can't write symbol filter of type: " + filter.FilterType);
