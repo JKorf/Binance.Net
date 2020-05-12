@@ -792,6 +792,7 @@ namespace Binance.Net
         /// <param name="side">The order side (buy/sell)</param>
         /// <param name="type">The order type</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill/GootTillCrossing)</param>
+        /// <param name="positionSide">The position side</param>
         /// <param name="quantity">The amount of the base symbol</param>
         /// <param name="reduceOnly">Specify as true if the order is intended to only reduce the position</param>
         /// <param name="price">The price to use</param>
@@ -809,6 +810,7 @@ namespace Binance.Net
             OrderSide side,
             OrderType type,
             decimal? quantity,
+            PositionSide? positionSide = null,
             TimeInForce? timeInForce = null,
             bool? reduceOnly = null,
             decimal? price = null,
@@ -819,7 +821,7 @@ namespace Binance.Net
             WorkingType? workingType = null,
             OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
-            CancellationToken ct = default) => PlaceOrderAsync(symbol, side, type, quantity, timeInForce, reduceOnly, price, newClientOrderId, stopPrice, activationPrice, callbackRate, workingType,  orderResponseType, receiveWindow, ct).Result;
+            CancellationToken ct = default) => PlaceOrderAsync(symbol, side, type, quantity, positionSide, timeInForce, reduceOnly, price, newClientOrderId, stopPrice, activationPrice, callbackRate, workingType,  orderResponseType, receiveWindow, ct).Result;
 
         /// <summary>
         /// Places a new order
@@ -829,6 +831,7 @@ namespace Binance.Net
         /// <param name="type">The order type</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
         /// <param name="quantity">The amount of the base symbol</param>
+        /// <param name="positionSide">The position side</param>
         /// <param name="reduceOnly">Specify as true if the order is intended to only reduce the position</param>
         /// <param name="price">The price to use</param>
         /// <param name="newClientOrderId">Unique id for order</param>
@@ -845,6 +848,7 @@ namespace Binance.Net
             OrderSide side,
             OrderType type,
             decimal? quantity,
+            PositionSide? positionSide = null,
             TimeInForce? timeInForce = null,
             bool? reduceOnly = null,
             decimal? price = null,
@@ -862,6 +866,7 @@ namespace Binance.Net
                 side,
                 type,
                 quantity,
+                positionSide,
                 timeInForce,
                 reduceOnly,
                 price,
@@ -1597,6 +1602,7 @@ namespace Binance.Net
             OrderSide side,
             OrderType type,
             decimal? quantity,
+            PositionSide? positionSide = null,
             TimeInForce? timeInForce = null,
             bool? reduceOnly = null,
             decimal? price = null,
@@ -1637,6 +1643,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)));
+            parameters.AddOptionalParameter("positionSide", positionSide == null ? null : JsonConvert.SerializeObject(positionSide, new PositionSideConverter(false)));
             parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("activationPrice", activationPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("callbackRate", callbackRate?.ToString(CultureInfo.InvariantCulture));

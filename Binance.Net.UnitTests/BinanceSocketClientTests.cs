@@ -209,7 +209,7 @@ namespace Binance.Net.UnitTests
             Assert.IsNotNull(result);
             var expectedBalances = data.Balances.ToList();
             var balances = result.Balances.ToList();
-            Assert.IsTrue(TestHelpers.AreEqual(data, result, "Balances"));
+            Assert.IsTrue(TestHelpers.AreEqual(data, result, "Balances", "Permissions"));
             Assert.IsTrue(TestHelpers.AreEqual(expectedBalances[0], balances[0]));
             Assert.IsTrue(TestHelpers.AreEqual(expectedBalances[1], balances[1]));
         }
@@ -276,7 +276,6 @@ namespace Binance.Net.UnitTests
             {
                 Event = "executionReport",
                 EventTime = new DateTime(2017, 1, 1),
-                AccumulatedQuantityOfFilledTrades = 1.1m,
                 BuyerIsMaker = true,
                 Commission = 2.2m,
                 CommissionAsset = "test",
@@ -284,14 +283,11 @@ namespace Binance.Net.UnitTests
                 I = 100000000000,
                 OrderId = 100000000000,
                 Price = 6.6m,
-                PriceLastFilledTrade = 7.7m,
                 Quantity = 8.8m,
-                QuantityOfLastFilledTrade = 9.9m,
                 RejectReason = OrderRejectReason.AccountCannotSettle,
                 Side = OrderSide.Buy,
                 Status = OrderStatus.Filled,
                 Symbol = "test",
-                Time = new DateTime(2017, 1, 1),
                 TimeInForce = TimeInForce.GoodTillCancel,
                 TradeId = 10000000000000,
                 Type = OrderType.Limit,
