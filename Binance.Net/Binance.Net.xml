@@ -1168,6 +1168,39 @@
             <param name="ct">Cancellation token</param>
             <returns>The account information</returns>
         </member>
+        <member name="M:Binance.Net.BinanceClient.GetDailySpotAccountSnapshot(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get a daily account snapshot (balances)
+            </summary>
+            <param name="startTime">The start time</param>
+            <param name="endTime">The end time</param>
+            <param name="limit">The amount of days to retrieve</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.BinanceClient.GetDailyMarginAccountSnapshot(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get a daily account snapshot (assets)
+            </summary>
+            <param name="startTime">The start time</param>
+            <param name="endTime">The end time</param>
+            <param name="limit">The amount of days to retrieve</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.BinanceClient.GetDailyFutureAccountSnapshot(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get a daily account snapshot (assets and positions)
+            </summary>
+            <param name="startTime">The start time</param>
+            <param name="endTime">The end time</param>
+            <param name="limit">The amount of days to retrieve</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="M:Binance.Net.BinanceClient.GetMyTrades(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user trades for provided symbol
@@ -10041,6 +10074,56 @@
             The total balance of this asset (Free + Locked)
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Spot.MarginData.BinanceMarginAccountSnapshot">
+            <summary>
+            Margin account snapshot
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceMarginAccountSnapshot.Timestamp">
+            <summary>
+            Timestamp of the data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceMarginAccountSnapshot.Type">
+            <summary>
+            Account type the data is for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceMarginAccountSnapshot.Data">
+            <summary>
+            Snapshot data
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.MarginData.BinanceMarginAccountSnapshotData">
+            <summary>
+            Margin snapshot data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceMarginAccountSnapshotData.MarginLevel">
+            <summary>
+            The margin level
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceMarginAccountSnapshotData.TotalAssetOfBtc">
+            <summary>
+            Total BTC asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceMarginAccountSnapshotData.TotalLiabilityOfBtc">
+            <summary>
+            Total BTC liability
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceMarginAccountSnapshotData.TotalNetAssetOfBtc">
+            <summary>
+            Total net BTC asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceMarginAccountSnapshotData.UserAssets">
+            <summary>
+            Assets
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.MarginData.BinanceMarginAmount">
             <summary>
             The result amount of getting maxBorrowable or maxTransferable 
@@ -11307,6 +11390,91 @@
             Side of the order
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Spot.SpotData.BinanceFuturesAccountSnapshot">
+            <summary>
+            Snapshot data of a futures account
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceFuturesAccountSnapshot.Timestamp">
+            <summary>
+            Timestamp of the data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceFuturesAccountSnapshot.Type">
+            <summary>
+            Account type the data is for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceFuturesAccountSnapshot.Data">
+            <summary>
+            Snapshot data
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.SpotData.BinanceFuturesAccountSnapshotData">
+            <summary>
+            Data of the snapshot
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceFuturesAccountSnapshotData.Assets">
+            <summary>
+            List of assets
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceFuturesAccountSnapshotData.Positions">
+            <summary>
+            List of positions
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.SpotData.BinanceFuturesAsset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceFuturesAsset.Asset">
+            <summary>
+            Name of the asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceFuturesAsset.MarginBalance">
+            <summary>
+            Margin balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceFuturesAsset.WalletBalance">
+            <summary>
+            Wallet balance
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.SpotData.BinanceFuturesSnapshotPosition">
+            <summary>
+            Position
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceFuturesSnapshotPosition.Symbol">
+            <summary>
+            The symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceFuturesSnapshotPosition.EntryPrice">
+            <summary>
+            Entry price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceFuturesSnapshotPosition.MarkPrice">
+            <summary>
+            Mark price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceFuturesSnapshotPosition.PositionAmt">
+            <summary>
+            PositionAmt
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceFuturesSnapshotPosition.UnrealizedProfit">
+            <summary>
+            Unrealized profit
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.SpotData.BinanceOrder">
             <summary>
             Information regarding a specific order
@@ -11685,6 +11853,41 @@
         <member name="P:Binance.Net.Objects.Spot.SpotData.BinancePlacedOrder.MarginBuyBorrowAsset">
             <summary>
             Only present if a margin trade happened
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.SpotData.BinanceSpotAccountSnapshot">
+            <summary>
+            Snapshot data of a spot account
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceSpotAccountSnapshot.Timestamp">
+            <summary>
+            Timestamp of the data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceSpotAccountSnapshot.Type">
+            <summary>
+            Account type the data is for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceSpotAccountSnapshot.Data">
+            <summary>
+            Snapshot data
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.SpotData.BinanceSpotAccountSnapshotData">
+            <summary>
+            Data of the snapshot
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceSpotAccountSnapshotData.TotalAssetOfBtc">
+            <summary>
+            The total value of assets in btc
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceSpotAccountSnapshotData.Balances">
+            <summary>
+            List of balances
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.SpotData.BinanceTrade">

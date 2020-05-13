@@ -96,6 +96,7 @@ namespace Binance.Net
 
         // Accounts
         private const string AccountInfoEndpoint = "account";
+        private const string AccountSnapshotEndpoint = "accountSnapshot";
 
         // Margin
         private const string MarginAssetsEndpoint = "margin/allAssets";
@@ -2102,6 +2103,81 @@ namespace Binance.Net
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await SendRequest<BinanceAccountInfo>(GetUrl(AccountInfoEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+        #endregion
+
+        #region Account snapshot
+
+        /// <summary>
+        /// Get a daily account snapshot (balances)
+        /// </summary>
+        /// <param name="startTime">The start time</param>
+        /// <param name="endTime">The end time</param>
+        /// <param name="limit">The amount of days to retrieve</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        public async Task<WebCallResult<IEnumerable<BinanceSpotAccountSnapshot>>> GetDailySpotAccountSnapshot(
+            DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null,
+            CancellationToken ct = default) =>
+            await GetDailyAccountSnapshot<IEnumerable<BinanceSpotAccountSnapshot>>(AccountType.Spot, startTime, endTime, limit, receiveWindow, ct).ConfigureAwait(false);
+
+        /// <summary>
+        /// Get a daily account snapshot (assets)
+        /// </summary>
+        /// <param name="startTime">The start time</param>
+        /// <param name="endTime">The end time</param>
+        /// <param name="limit">The amount of days to retrieve</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        public async Task<WebCallResult<IEnumerable<BinanceMarginAccountSnapshot>>> GetDailyMarginAccountSnapshot(
+            DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null,
+            CancellationToken ct = default) =>
+            await GetDailyAccountSnapshot<IEnumerable<BinanceMarginAccountSnapshot>>(AccountType.Spot, startTime, endTime, limit, receiveWindow, ct).ConfigureAwait(false);
+
+        /// <summary>
+        /// Get a daily account snapshot (assets and positions)
+        /// </summary>
+        /// <param name="startTime">The start time</param>
+        /// <param name="endTime">The end time</param>
+        /// <param name="limit">The amount of days to retrieve</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesAccountSnapshot>>> GetDailyFutureAccountSnapshot(
+            DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null,
+            CancellationToken ct = default) =>
+            await GetDailyAccountSnapshot<IEnumerable<BinanceFuturesAccountSnapshot>>(AccountType.Spot, startTime, endTime, limit, receiveWindow, ct).ConfigureAwait(false);
+
+
+        private async Task<WebCallResult<T>> GetDailyAccountSnapshot<T>(AccountType accountType, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null,
+            CancellationToken ct = default) where T: class
+        {
+            limit?.ValidateIntBetween(nameof(limit), 5, 30);
+
+            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<T>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "type", JsonConvert.SerializeObject(accountType, new AccountTypeConverter(false)) },
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("startTime", startTime.HasValue ? JsonConvert.SerializeObject(startTime.Value, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await SendRequest<BinanceSnapshotWrapper<T>>(GetUrl(AccountSnapshotEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            if(!result.Success)
+                return WebCallResult<T>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error);
+
+            if(result.Data.Code != 200)
+                return WebCallResult<T>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data.Code, result.Data.Message));
+
+            return new WebCallResult<T>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.SnapshotData, null);
         }
 
         #endregion
