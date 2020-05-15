@@ -46,6 +46,7 @@ namespace Binance.Net
         private const string PartialBookDepthStreamEndpoint = "@depth";
         private const string DepthStreamEndpoint = "@depth";
 
+        private const string MarginUpdateEvent = "MARGIN_CALL";
         private const string AccountUpdateEvent = "ACCOUNT_UPDATE";
         private const string OrderUpdateEvent = "ORDER_TRADE_UPDATE";
         private const string ListenKeyExpiredEvent = "listenKeyExpired";
@@ -643,32 +644,40 @@ namespace Binance.Net
         /// Subscribes to the account update stream. Prior to using this, the <see cref="BinanceClient.StartUserStream"/> method should be called.
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
+        /// <param name="onCrossWalletUpdate">The event handler for whenever a cross wallet has changed</param>
+        /// <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
         /// <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
-        /// <param name="onPositionUpdateMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
-        /// <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
+        /// <param name="onPositionUpdate">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
+        /// <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
         /// <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public CallResult<UpdateSubscription> SubscribeToUserDataUpdates(
-            string listenKey, 
-            Action<BinanceFuturesStreamBalance>? onAccountBalanceUpdate, 
-            Action<BinanceFuturesStreamPosition>? onPositionUpdateMessage,
-            Action<BinanceFuturesStreamOrderUpdate>? onOrderUpdateMessage,
-            Action<BinanceStreamEvent> onListenKeyExpired) => SubscribeToUserDataUpdatesAsync(listenKey, onAccountBalanceUpdate, onPositionUpdateMessage, onOrderUpdateMessage, onListenKeyExpired).Result;
+            string listenKey,
+            Action<decimal>? onCrossWalletUpdate,
+             Action<IEnumerable<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate,
+            Action<IEnumerable<BinanceFuturesStreamBalance>>? onAccountBalanceUpdate,
+            Action<IEnumerable<BinanceFuturesStreamPosition>>? onPositionUpdate,
+            Action<BinanceFuturesStreamOrderUpdate>? onOrderUpdate,
+            Action<BinanceStreamEvent> onListenKeyExpired) => SubscribeToUserDataUpdatesAsync(listenKey, onCrossWalletUpdate, onMarginUpdate,  onAccountBalanceUpdate, onPositionUpdate, onOrderUpdate, onListenKeyExpired).Result;
 
         /// <summary>
         /// Subscribes to the account update stream. Prior to using this, the <see cref="BinanceClient.StartUserStream"/> method should be called.
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
+        /// <param name="onCrossWalletUpdate">The event handler for whenever a cross wallet has changed</param>
+        /// <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
         /// <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
-        /// <param name="onPositionUpdateMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
-        /// <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
+        /// <param name="onPositionUpdate">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
+        /// <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
         /// <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
             string listenKey, 
-            Action<BinanceFuturesStreamBalance>? onAccountBalanceUpdate,
-            Action<BinanceFuturesStreamPosition>? onPositionUpdateMessage,
-            Action<BinanceFuturesStreamOrderUpdate>? onOrderUpdateMessage,
+            Action<decimal>? onCrossWalletUpdate,
+            Action<IEnumerable<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate,
+            Action<IEnumerable<BinanceFuturesStreamBalance>>? onAccountBalanceUpdate,
+            Action<IEnumerable<BinanceFuturesStreamPosition>>? onPositionUpdate,
+            Action<BinanceFuturesStreamOrderUpdate>? onOrderUpdate,
             Action<BinanceStreamEvent> onListenKeyExpired)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
@@ -679,6 +688,20 @@ namespace Binance.Net
                 var evnt = (string)token["e"];
                 switch (evnt)
                 {
+                    case MarginUpdateEvent:
+                        {
+                            log.Write(LogVerbosity.Debug, data);
+
+                            onCrossWalletUpdate?.Invoke(token["cw"].ToObject<decimal>());
+
+                            var orders = token["o"];
+                            var result = Deserialize<BinanceFuturesStreamMarginUpdate[]>(orders, false);
+                            if (result)
+                                onMarginUpdate?.Invoke(result.Data);
+                            else
+                                log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from order stream: " + result.Error);
+                            break;
+                        }
                     case AccountUpdateEvent:
                         {
                             if (token["a"]["B"] != null)
@@ -686,8 +709,7 @@ namespace Binance.Net
                                 var balances = token["a"]["B"];
                                 var result = Deserialize<BinanceFuturesStreamBalance[]>(balances, false);
                                 if (result.Success)
-                                    foreach (var balance in result.Data)
-                                        onAccountBalanceUpdate?.Invoke(balance);
+                                        onAccountBalanceUpdate?.Invoke(result.Data);
                                 else
                                     log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account stream: " + result.Error);
                             }
@@ -697,8 +719,7 @@ namespace Binance.Net
                                 var positions = token["a"]["P"];
                                 var result = Deserialize<BinanceFuturesStreamPosition[]>(positions, false);
                                 if (result.Success)
-                                    foreach (var position in result.Data)
-                                        onPositionUpdateMessage?.Invoke(position);
+                                        onPositionUpdate?.Invoke(result.Data);
                                 else
                                     log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account stream: " + result.Error);
                             }
@@ -711,7 +732,7 @@ namespace Binance.Net
                             var orders = token["o"];
                             var result = Deserialize<BinanceFuturesStreamOrderUpdate>(orders, false);
                         if (result)
-                            onOrderUpdateMessage?.Invoke(result.Data);
+                            onOrderUpdate?.Invoke(result.Data);
                         else
                             log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from order stream: " + result.Error);
                         break;

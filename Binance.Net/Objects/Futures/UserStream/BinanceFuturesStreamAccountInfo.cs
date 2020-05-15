@@ -71,5 +71,11 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// </summary>
         [JsonProperty("iw")]
         public decimal IsolatedWallet { get; set; }
+
+        /// <summary>
+        /// Position Side
+        /// </summary>
+        [JsonProperty("ps"), JsonConverter(typeof(PositionSideConverter))]
+        public PositionSide PositionSide { get; set; }
     }
 }
