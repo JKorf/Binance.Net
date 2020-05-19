@@ -45,7 +45,7 @@ namespace Binance.Net.Objects.Spot.SubAccountData
         /// Is Futures enabled
         /// </summary>
         [JsonProperty("isFutureEnabled")]
-        public bool isFutureEnabled { get; set; }
+        public bool IsFutureEnabled { get; set; }
 
         /// <summary>
         /// User mobile number

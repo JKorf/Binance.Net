@@ -1,16 +1,17 @@
-﻿using Binance.Net.Converters;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using CryptoExchange.Net.Converters;
+using System.Text;
+using Binance.Net.Converters;
 using Binance.Net.Enums;
+using CryptoExchange.Net.Converters;
+using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.WalletData
+namespace Binance.Net.Objects.Spot.SubAccountData
 {
     /// <summary>
     /// Information about a deposit
     /// </summary>
-    public class BinanceDeposit
+    public class BinanceSubAccountDeposit
     {
         /// <summary>
         /// Time the deposit was added to Binance
@@ -29,14 +30,6 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// The address of the deposit
         /// </summary>
         public string Address { get; set; } = "";
-        /// <summary>
-        /// The tag of the address of the deposit
-        /// </summary>
-        public string Tag { get; set; } = "";
-        /// <summary>
-        /// The network
-        /// </summary>
-        public string Network { get; set; } = "";
         /// <summary>
         /// The transaction id
         /// </summary>

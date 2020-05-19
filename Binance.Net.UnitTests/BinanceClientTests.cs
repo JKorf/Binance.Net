@@ -345,25 +345,21 @@ namespace Binance.Net.UnitTests
         public void GetDepositHistory_Should_RespondWithDepositHistory()
         {
             // arrange
-            var history = new BinanceDepositList()
+            var history = new List<BinanceDeposit>()
             {
-                Success = true,
-                List = new List<BinanceDeposit>()
+                new BinanceDeposit()
                 {
-                    new BinanceDeposit()
-                    {
-                        Amount = 1.1m,
-                        Asset = "BNB",
-                        InsertTime = new DateTime(2017, 1, 1),
-                        Status = DepositStatus.Pending
-                    },
-                    new BinanceDeposit()
-                    {
-                        Amount = 2.2m,
-                        Asset = "BTC",
-                        InsertTime = new DateTime(2016, 1, 1),
-                        Status = DepositStatus.Success
-                    }
+                    Amount = 1.1m,
+                    Coin = "BNB",
+                    InsertTime = new DateTime(2017, 1, 1),
+                    Status = DepositStatus.Pending
+                },
+                new BinanceDeposit()
+                {
+                    Amount = 2.2m,
+                    Coin = "BTC",
+                    InsertTime = new DateTime(2016, 1, 1),
+                    Status = DepositStatus.Success
                 }
             };
 
@@ -378,9 +374,9 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsTrue(result.Success);
-            Assert.AreEqual(result.Data.Count(), history.List.Count());
-            Assert.IsTrue(TestHelpers.AreEqual(history.List.ToList()[0], result.Data.ToList()[0]));
-            Assert.IsTrue(TestHelpers.AreEqual(history.List.ToList()[1], result.Data.ToList()[1]));
+            Assert.AreEqual(result.Data.Count(), history.Count());
+            Assert.IsTrue(TestHelpers.AreEqual(history.ToList()[0], result.Data.ToList()[0]));
+            Assert.IsTrue(TestHelpers.AreEqual(history.ToList()[1], result.Data.ToList()[1]));
         }
 
         [TestCase]
@@ -722,7 +718,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Withdraw("BNBBTC", "test", 1);
+            var result = client.Withdraw("BNBBTC", "test", 1, "x");
 
             // assert
             Assert.IsTrue(result.Success);

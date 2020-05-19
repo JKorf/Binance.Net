@@ -1,25 +1,25 @@
-﻿namespace Binance.Net.Objects.Spot.WalletData
+﻿namespace Binance.Net.Objects.Spot.SubAccountData
 {
     /// <summary>
-    /// Deposit address info
+    /// Deposit address info for a sub-account
     /// </summary>
-    public class BinanceDepositAddress
+    public class BinanceSubAccountDepositAddress
     {
         /// <summary>
         /// The deposit address
         /// </summary>
         public string Address { get; set; } = "";
         /// <summary>
-        /// Url
+        /// Coin type
         /// </summary>
-        public string Url { get; set; }
+        public string Coin { get; set; } = "";
         /// <summary>
-        /// Address tag
+        /// Tag for the deposit address
         /// </summary>
         public string Tag { get; set; } = "";
         /// <summary>
-        /// Coin the address is for
+        /// Url
         /// </summary>
-        public string Coin { get; set; } = "";
+        public string Url { get; set; } = "";
     }
 }
