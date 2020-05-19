@@ -51,7 +51,7 @@ namespace Binance.Net.Objects.Spot.LendingData
         /// <summary>
         /// Status of the product
         /// </summary>
-        public string Status { get; set; }
+        public string Status { get; set; } = "";
         /// <summary>
         /// Upper limit
         /// </summary>

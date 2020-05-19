@@ -12,7 +12,7 @@
         /// <summary>
         /// Url
         /// </summary>
-        public string Url { get; set; }
+        public string Url { get; set; } = "";
         /// <summary>
         /// Address tag
         /// </summary>

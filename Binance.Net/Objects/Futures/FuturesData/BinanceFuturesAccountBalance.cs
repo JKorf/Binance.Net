@@ -13,7 +13,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// Account alias
         /// </summary>
-        public string AccountAlias { get; set; }
+        public string AccountAlias { get; set; } = "";
         /// <summary>
         /// The asset this balance is for
         /// </summary>

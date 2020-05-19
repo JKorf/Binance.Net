@@ -4642,6 +4642,31 @@
             execution failed, nothing happened to your account
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.MinerStatus">
+            <summary>
+            Miner status
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.MinerStatus.All">
+            <summary>
+            All miners
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.MinerStatus.Valid">
+            <summary>
+            Valid
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.MinerStatus.Invalid">
+            <summary>
+            Invalid
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.MinerStatus.Failure">
+            <summary>
+            Failure
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.OrderRejectReason">
             <summary>
             The reason the order was rejected
@@ -11193,6 +11218,11 @@
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesMarkPrice.NextFundingTime">
             <summary>
             The time the funding rate is applied
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesMarkPrice.Time">
+            <summary>
+            Timestamp
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesOpenInterest">

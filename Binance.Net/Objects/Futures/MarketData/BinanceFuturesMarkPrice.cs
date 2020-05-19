@@ -29,6 +29,9 @@ namespace Binance.Net.Objects.Futures.MarketData
         [JsonConverter(typeof(TimestampConverter))]
         public DateTime NextFundingTime { get; set; }
 
+        /// <summary>
+        /// Timestamp
+        /// </summary>
         [JsonConverter(typeof(TimestampConverter))]
         public DateTime Time { get; set; }
     }

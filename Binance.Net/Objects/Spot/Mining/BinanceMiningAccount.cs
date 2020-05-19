@@ -15,11 +15,11 @@ namespace Binance.Net.Objects.Spot.Mining
         /// <summary>
         /// Type
         /// </summary>
-        public string Type { get; set; }
+        public string Type { get; set; } = "";
         /// <summary>
         /// User name
         /// </summary>
-        public string UserName { get; set; }
+        public string UserName { get; set; } = "";
         /// <summary>
         /// Hash rates
         /// </summary>

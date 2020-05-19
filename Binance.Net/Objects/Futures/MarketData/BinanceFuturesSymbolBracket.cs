@@ -17,7 +17,7 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// <summary>
         /// Brackets
         /// </summary>
-        public IEnumerable<BinanceFuturesBracket> Brackets { get; set; }
+        public IEnumerable<BinanceFuturesBracket> Brackets { get; set; } = new List<BinanceFuturesBracket>();
 
     }
 

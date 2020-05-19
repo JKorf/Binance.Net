@@ -71,7 +71,7 @@ namespace Binance.Net.Objects.Spot.LendingData
         /// <summary>
         /// Redeem date
         /// </summary>
-        public string RedeemDate { get; set; }
+        public string RedeemDate { get; set; } = "";
         /// <summary>
         /// Start time
         /// </summary>

@@ -15,7 +15,7 @@ namespace Binance.Net.Objects.Futures.MarketStream
         /// Symbol
         /// </summary>
         [JsonProperty("s")]
-        public string? Symbol { get; set; }
+        public string Symbol { get; set; } = "";
 
         /// <summary>
         /// Mark Price

@@ -34,11 +34,11 @@ namespace Binance.Net.Objects.Spot.Mining
         /// <summary>
         /// Worker id
         /// </summary>
-        public string WorkerId { get; set; }
+        public string WorkerId { get; set; } = "";
         /// <summary>
         /// Worker name
         /// </summary>
-        public string WorkerName { get; set; }
+        public string WorkerName { get; set; } = "";
         /// <summary>
         /// Status
         /// </summary>

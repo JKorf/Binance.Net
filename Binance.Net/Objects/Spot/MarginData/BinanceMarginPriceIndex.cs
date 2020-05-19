@@ -14,7 +14,7 @@ namespace Binance.Net.Objects.Spot.MarginData
         /// <summary>
         /// Symbol
         /// </summary>
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = "";
         /// <summary>
         /// Price
         /// </summary>

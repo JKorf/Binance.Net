@@ -13,7 +13,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// <summary>
         /// Coin code
         /// </summary>
-        public string Coin { get; set; }
+        public string Coin { get; set; } = "";
         /// <summary>
         /// Deposit all is enabled
         /// </summary>
@@ -57,7 +57,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// <summary>
         /// Name of the coin
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
 
         /// <summary>
         /// Networks
