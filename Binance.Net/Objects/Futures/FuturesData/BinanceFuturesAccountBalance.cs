@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Futures.FuturesData

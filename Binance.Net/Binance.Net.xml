@@ -20,6 +20,12 @@
             </summary>
             <param name="options">The options to use for this client</param>
         </member>
+        <member name="M:Binance.Net.BinanceBrokerageClient.SetDefaultOptions(Binance.Net.Objects.Brokerage.BinanceBrokerageClientOptions)">
+            <summary>
+            Set the default options to be used when creating new clients
+            </summary>
+            <param name="options"></param>
+        </member>
         <member name="M:Binance.Net.BinanceBrokerageClient.SetApiCredentials(System.String,System.String)">
             <summary>
             Set the API key and secret
@@ -13523,6 +13529,146 @@
             Filter for the maximum deviation of the price
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Spot.MarketData.BinanceSymbolFilter">
+            <summary>
+            A filter for order placed on a symbol.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbolFilter.FilterType">
+            <summary>
+            The type of this filter
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.MarketData.BinanceSymbolPriceFilter">
+            <summary>
+            Price filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbolPriceFilter.MinPrice">
+            <summary>
+            The minimal price the order can be for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbolPriceFilter.MaxPrice">
+            <summary>
+            The max price the order can be for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbolPriceFilter.TickSize">
+            <summary>
+            The tick size of the price. The price can not have more precision as this and can only be incremented in steps of this.
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.MarketData.BinanceSymbolPercentPriceFilter">
+            <summary>
+            Price percentage filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbolPercentPriceFilter.MultiplierUp">
+            <summary>
+            The max factor the price can deviate up
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbolPercentPriceFilter.MultiplierDown">
+            <summary>
+            The max factor the price can deviate down
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbolPercentPriceFilter.AveragePriceMinutes">
+            <summary>
+            The amount of minutes the average price of trades is calculated over. 0 means the last price is used
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.MarketData.BinanceSymbolLotSizeFilter">
+            <summary>
+            Lot size filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbolLotSizeFilter.MinQuantity">
+            <summary>
+            The minimal quantity of an order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbolLotSizeFilter.MaxQuantity">
+            <summary>
+            The maximum quantity of an order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbolLotSizeFilter.StepSize">
+            <summary>
+            The tick size of the quantity. The quantity can not have more precision as this and can only be incremented in steps of this.
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.MarketData.BinanceSymbolMarketLotSizeFilter">
+            <summary>
+            Market lot size filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbolMarketLotSizeFilter.MinQuantity">
+            <summary>
+            The minimal quantity of an order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbolMarketLotSizeFilter.MaxQuantity">
+            <summary>
+            The maximum quantity of an order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbolMarketLotSizeFilter.StepSize">
+            <summary>
+            The tick size of the quantity. The quantity can not have more precision as this and can only be incremented in steps of this.
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.MarketData.BinanceSymbolMinNotionalFilter">
+            <summary>
+            Min notional filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbolMinNotionalFilter.MinNotional">
+            <summary>
+            The minimal total size of an order. This is calculated by Price * Quantity.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbolMinNotionalFilter.ApplyToMarketOrders">
+            <summary>
+            Whether or not this filter is applied to market orders. If so the average trade price is used.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbolMinNotionalFilter.AveragePriceMinutes">
+            <summary>
+            The amount of minutes the average price of trades is calculated over for market orders. 0 means the last price is used
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.MarketData.BinanceSymbolMaxOrdersFilter">
+             <summary>
+            Max orders filter
+             </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbolMaxOrdersFilter.MaxNumberOrders">
+            <summary>
+            The max number of orders for this symbol
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.MarketData.BinanceSymbolMaxAlgorithmicOrdersFilter">
+            <summary>
+            Max algo orders filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbolMaxAlgorithmicOrdersFilter.MaxNumberAlgorithmicOrders">
+            <summary>
+            The max number of Algorithmic orders for this symbol
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.MarketData.BinanceSymbolIcebergPartsFilter">
+            <summary>
+            Max iceberg parts filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbolIcebergPartsFilter.Limit">
+            <summary>
+            The max parts of an iceberg order for this symbol.
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.MarketStream.BinanceStreamAggregatedTrade">
             <summary>
             Aggregated information about trades for a symbol
@@ -16482,146 +16628,6 @@
         <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawalPlaced.Id">
             <summary>
             The id
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.MarketData.BinanceSymbolFilter">
-            <summary>
-            A filter for order placed on a symbol. Can be either a <see cref="T:Binance.Net.Objects.MarketData.BinanceSymbolPriceFilter"/>, <see cref="T:Binance.Net.Objects.MarketData.BinanceSymbolLotSizeFilter"/>, <see cref="T:Binance.Net.Objects.MarketData.BinanceSymbolMinNotionalFilter"/>, <see cref="T:Binance.Net.Objects.MarketData.BinanceSymbolMaxAlgorithmicOrdersFilter"/> or <see cref="T:Binance.Net.Objects.MarketData.BinanceSymbolIcebergPartsFilter"/> or <see cref="!:BinanceSymbolMaxPositionFilter"/>
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolFilter.FilterType">
-            <summary>
-            The type of this filter
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.MarketData.BinanceSymbolPriceFilter">
-            <summary>
-            Price filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolPriceFilter.MinPrice">
-            <summary>
-            The minimal price the order can be for
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolPriceFilter.MaxPrice">
-            <summary>
-            The max price the order can be for
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolPriceFilter.TickSize">
-            <summary>
-            The tick size of the price. The price can not have more precision as this and can only be incremented in steps of this.
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.MarketData.BinanceSymbolPercentPriceFilter">
-            <summary>
-            Price percentage filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolPercentPriceFilter.MultiplierUp">
-            <summary>
-            The max factor the price can deviate up
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolPercentPriceFilter.MultiplierDown">
-            <summary>
-            The max factor the price can deviate down
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolPercentPriceFilter.AveragePriceMinutes">
-            <summary>
-            The amount of minutes the average price of trades is calculated over. 0 means the last price is used
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.MarketData.BinanceSymbolLotSizeFilter">
-            <summary>
-            Lot size filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolLotSizeFilter.MinQuantity">
-            <summary>
-            The minimal quantity of an order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolLotSizeFilter.MaxQuantity">
-            <summary>
-            The maximum quantity of an order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolLotSizeFilter.StepSize">
-            <summary>
-            The tick size of the quantity. The quantity can not have more precision as this and can only be incremented in steps of this.
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.MarketData.BinanceSymbolMarketLotSizeFilter">
-            <summary>
-            Market lot size filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolMarketLotSizeFilter.MinQuantity">
-            <summary>
-            The minimal quantity of an order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolMarketLotSizeFilter.MaxQuantity">
-            <summary>
-            The maximum quantity of an order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolMarketLotSizeFilter.StepSize">
-            <summary>
-            The tick size of the quantity. The quantity can not have more precision as this and can only be incremented in steps of this.
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.MarketData.BinanceSymbolMinNotionalFilter">
-            <summary>
-            Min notional filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolMinNotionalFilter.MinNotional">
-            <summary>
-            The minimal total size of an order. This is calculated by Price * Quantity.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolMinNotionalFilter.ApplyToMarketOrders">
-            <summary>
-            Whether or not this filter is applied to market orders. If so the average trade price is used.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolMinNotionalFilter.AveragePriceMinutes">
-            <summary>
-            The amount of minutes the average price of trades is calculated over for market orders. 0 means the last price is used
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.MarketData.BinanceSymbolMaxOrdersFilter">
-             <summary>
-            Max orders filter
-             </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolMaxOrdersFilter.MaxNumberOrders">
-            <summary>
-            The max number of orders for this symbol
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.MarketData.BinanceSymbolMaxAlgorithmicOrdersFilter">
-            <summary>
-            Max algo orders filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolMaxAlgorithmicOrdersFilter.MaxNumberAlgorithmicOrders">
-            <summary>
-            The max number of Algorithmic orders for this symbol
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.MarketData.BinanceSymbolIcebergPartsFilter">
-            <summary>
-            Max iceberg parts filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolIcebergPartsFilter.Limit">
-            <summary>
-            The max parts of an iceberg order for this symbol.
             </summary>
         </member>
     </members>

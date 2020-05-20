@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using Binance.Net.Interfaces;
-using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Futures.MarketStream

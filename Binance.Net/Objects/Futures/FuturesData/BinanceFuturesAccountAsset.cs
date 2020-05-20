@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Binance.Net.Objects.Futures.FuturesData
+﻿namespace Binance.Net.Objects.Futures.FuturesData
 {
     /// <summary>
     /// Information about an account asset

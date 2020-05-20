@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Binance.Net.Objects.Spot.SpotData;
 using Newtonsoft.Json;
 

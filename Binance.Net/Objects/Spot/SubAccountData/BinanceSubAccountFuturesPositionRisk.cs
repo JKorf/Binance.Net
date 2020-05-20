@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Binance.Net.Objects.Spot.SubAccountData
+﻿namespace Binance.Net.Objects.Spot.SubAccountData
 {
     /// <summary>
     /// Sub account position risk

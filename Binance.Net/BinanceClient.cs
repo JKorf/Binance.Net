@@ -867,7 +867,7 @@ namespace Binance.Net
 
             var result = await SendRequest<BinanceSnapshotWrapper<T>>(GetUrl(AccountSnapshotEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result.Success)
-                return WebCallResult<T>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error);
+                return WebCallResult<T>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
             if (result.Data.Code != 200)
                 return WebCallResult<T>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data.Code, result.Data.Message));
@@ -1623,7 +1623,7 @@ namespace Binance.Net
             var result = await SendRequest<BinanceSubAccountAsset>(GetUrl(SubAccountAssetsEndpoint, WithdrawalApi, WithdrawalVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
             if (!result.Success)
                 return WebCallResult<IEnumerable<BinanceBalance>>.CreateErrorResult(result.ResponseStatusCode,
-                    result.ResponseHeaders, result.Error);
+                    result.ResponseHeaders, result.Error!);
 
             if(!result.Data.Success)
                 return WebCallResult<IEnumerable<BinanceBalance>>.CreateErrorResult(result.ResponseStatusCode,
@@ -4779,10 +4779,10 @@ namespace Binance.Net
         {
             var result = await SendRequest<BinanceResult<IEnumerable<BinanceMiningCoin>>>(GetUrl(CoinListEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, null, false).ConfigureAwait(false);
             if (!result.Success)
-                return WebCallResult<IEnumerable<BinanceMiningCoin>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error);
+                return WebCallResult<IEnumerable<BinanceMiningCoin>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<IEnumerable<BinanceMiningCoin>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data.Code, result.Data.Message));
+                return WebCallResult<IEnumerable<BinanceMiningCoin>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
 
             return new WebCallResult<IEnumerable<BinanceMiningCoin>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
         }
@@ -4807,10 +4807,10 @@ namespace Binance.Net
         {
             var result = await SendRequest<BinanceResult<IEnumerable<BinanceMiningAlgorithm>>>(GetUrl(AlgorithmEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, null, false).ConfigureAwait(false);
             if(!result.Success)
-                return WebCallResult<IEnumerable<BinanceMiningAlgorithm>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error);
+                return WebCallResult<IEnumerable<BinanceMiningAlgorithm>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<IEnumerable<BinanceMiningAlgorithm>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data.Code, result.Data.Message));
+                return WebCallResult<IEnumerable<BinanceMiningAlgorithm>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
 
             return new WebCallResult<IEnumerable<BinanceMiningAlgorithm>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
         }
@@ -4854,10 +4854,10 @@ namespace Binance.Net
 
             var result = await SendRequest<BinanceResult<IEnumerable<BinanceMinerDetails>>>(GetUrl(MinerDetailsEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, parameters, false).ConfigureAwait(false);
             if (!result.Success)
-                return WebCallResult<IEnumerable<BinanceMinerDetails>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error);
+                return WebCallResult<IEnumerable<BinanceMinerDetails>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<IEnumerable<BinanceMinerDetails>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data.Code, result.Data.Message));
+                return WebCallResult<IEnumerable<BinanceMinerDetails>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
 
             return new WebCallResult<IEnumerable<BinanceMinerDetails>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
         }
@@ -4879,7 +4879,7 @@ namespace Binance.Net
         public WebCallResult<BinanceMinerList> GetMinerList(string algorithm, string userName, int? page = null,
             bool? sortAscending = null, string? sortColumn = null, MinerStatus? workerStatus = null,
             CancellationToken ct = default)
-            => GetMinerListAsync(algorithm, userName, page, sortAscending, sortColumn, workerStatus).Result;
+            => GetMinerListAsync(algorithm, userName, page, sortAscending, sortColumn, workerStatus, ct).Result;
 
         /// <summary>
         /// Gets miner list
@@ -4910,10 +4910,10 @@ namespace Binance.Net
 
             var result = await SendRequest<BinanceResult<BinanceMinerList>>(GetUrl(MinerListEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, parameters, false).ConfigureAwait(false);
             if (!result.Success)
-                return WebCallResult<BinanceMinerList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error);
+                return WebCallResult<BinanceMinerList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<BinanceMinerList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data.Code, result.Data.Message));
+                return WebCallResult<BinanceMinerList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
 
             return new WebCallResult<BinanceMinerList>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
         }
@@ -4966,10 +4966,10 @@ namespace Binance.Net
 
             var result = await SendRequest<BinanceResult<BinanceRevenueList>>(GetUrl(MiningRevenueEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, parameters, false).ConfigureAwait(false);
             if (!result.Success)
-                return WebCallResult<BinanceRevenueList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error);
+                return WebCallResult<BinanceRevenueList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<BinanceRevenueList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data.Code, result.Data.Message));
+                return WebCallResult<BinanceRevenueList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
 
             return new WebCallResult<BinanceRevenueList>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
         }
@@ -5008,10 +5008,10 @@ namespace Binance.Net
             
             var result = await SendRequest<BinanceResult<BinanceMiningStatistic>>(GetUrl(MiningStatisticsEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, parameters, false).ConfigureAwait(false);
             if (!result.Success)
-                return WebCallResult<BinanceMiningStatistic>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error);
+                return WebCallResult<BinanceMiningStatistic>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<BinanceMiningStatistic>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data.Code, result.Data.Message));
+                return WebCallResult<BinanceMiningStatistic>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
 
             return new WebCallResult<BinanceMiningStatistic>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
         }
@@ -5038,10 +5038,10 @@ namespace Binance.Net
 
             var result = await SendRequest<BinanceResult<BinanceMiningAccount>>(GetUrl(MiningAccountListEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, parameters, false).ConfigureAwait(false);
             if (!result.Success)
-                return WebCallResult<BinanceMiningAccount>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error);
+                return WebCallResult<BinanceMiningAccount>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<BinanceMiningAccount>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data.Code, result.Data.Message));
+                return WebCallResult<BinanceMiningAccount>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
 
             return new WebCallResult<BinanceMiningAccount>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
         }

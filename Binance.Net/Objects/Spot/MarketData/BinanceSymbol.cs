@@ -1,6 +1,5 @@
 ﻿using Binance.Net.Converters;
 using Binance.Net.Enums;
-using Binance.Net.Objects.MarketData;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;

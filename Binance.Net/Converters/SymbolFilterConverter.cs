@@ -1,9 +1,9 @@
 ﻿using Binance.Net.Enums;
-using Binance.Net.Objects.MarketData;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Diagnostics;
+using Binance.Net.Objects.Spot.MarketData;
 
 namespace Binance.Net.Converters
 {

@@ -86,11 +86,20 @@ namespace Binance.Net
             defaultReceiveWindow = options.ReceiveWindow;
             postParametersPosition = PostParameters.InUri;
         }
-        
+
         #endregion
 
         #region Public methods
         
+        /// <summary>
+        /// Set the default options to be used when creating new clients
+        /// </summary>
+        /// <param name="options"></param>
+        public static void SetDefaultOptions(BinanceBrokerageClientOptions options)
+        {
+            defaultOptions = options;
+        }
+
         /// <summary>
         /// Set the API key and secret
         /// </summary>

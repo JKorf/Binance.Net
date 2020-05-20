@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Binance.Net.Enums
+﻿namespace Binance.Net.Enums
 {
     /// <summary>
     /// The time the order will be active for

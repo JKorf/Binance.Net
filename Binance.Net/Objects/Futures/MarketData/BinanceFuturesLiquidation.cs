@@ -4,8 +4,6 @@ using Binance.Net.Interfaces;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Binance.Net.Objects.Futures.MarketData
 {

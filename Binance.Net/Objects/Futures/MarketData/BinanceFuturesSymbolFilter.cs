@@ -1,9 +1,6 @@
 ﻿using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Binance.Net.Objects.Futures.MarketData
 {

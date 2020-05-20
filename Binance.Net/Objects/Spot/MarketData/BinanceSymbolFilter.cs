@@ -2,10 +2,10 @@
 using Binance.Net.Enums;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.MarketData
+namespace Binance.Net.Objects.Spot.MarketData
 {
     /// <summary>
-    /// A filter for order placed on a symbol. Can be either a <see cref="BinanceSymbolPriceFilter"/>, <see cref="BinanceSymbolLotSizeFilter"/>, <see cref="BinanceSymbolMinNotionalFilter"/>, <see cref="BinanceSymbolMaxAlgorithmicOrdersFilter"/> or <see cref="BinanceSymbolIcebergPartsFilter"/> or <see cref="BinanceSymbolMaxPositionFilter"/>
+    /// A filter for order placed on a symbol.
     /// </summary>
     [JsonConverter(typeof(SymbolFilterConverter))]
     public class BinanceSymbolFilter

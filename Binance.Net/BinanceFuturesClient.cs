@@ -688,7 +688,7 @@ namespace Binance.Net
             symbol?.ValidateBinanceSymbol();
             limit?.ValidateIntBetween(nameof(limit), 0, 1000);
             var parameters = new Dictionary<string, object>();
-            parameters.AddOptionalParameter("symbol", symbol != null ? symbol : null);
+            parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString() : null);
             parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
             parameters.AddOptionalParameter("limit", limit?.ToString());
@@ -1367,7 +1367,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of Positions</returns>
-        public WebCallResult<IEnumerable<BinanceFuturesPosition>> GetOpenPositions(long? receiveWindow = null, CancellationToken ct = default) => GetOpenPositionsAsync(receiveWindow).Result;
+        public WebCallResult<IEnumerable<BinanceFuturesPosition>> GetOpenPositions(long? receiveWindow = null, CancellationToken ct = default) => GetOpenPositionsAsync(receiveWindow, ct).Result;
 
         /// <summary>
         /// Gets all user positions
@@ -1481,7 +1481,7 @@ namespace Binance.Net
             {
                 { "timestamp", GetTimestamp() }
             };
-            parameters.AddOptionalParameter("symbol", symbol?.ToString());
+            parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("incomeType", incomeType.HasValue ? JsonConvert.SerializeObject(incomeType, new IncomeTypeConverter(false)) : null);
             parameters.AddOptionalParameter("startTime", startTime.HasValue ? JsonConvert.SerializeObject(startTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);

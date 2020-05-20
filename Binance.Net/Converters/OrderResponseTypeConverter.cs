@@ -1,5 +1,4 @@
-﻿using Binance.Net.Objects;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CryptoExchange.Net.Converters;
 using Binance.Net.Enums;
 

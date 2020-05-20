@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using CryptoExchange.Net.Converters;
-using Binance.Net.Interfaces;
 
 namespace Binance.Net.Objects.Spot.MarketData
 {

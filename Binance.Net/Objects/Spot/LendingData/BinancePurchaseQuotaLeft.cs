@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Binance.Net.Objects.Spot.LendingData
+﻿namespace Binance.Net.Objects.Spot.LendingData
 {
     /// <summary>
     /// Purchase quota left

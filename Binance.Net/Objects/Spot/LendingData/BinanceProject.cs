@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Binance.Net.Objects.Spot.LendingData
+﻿namespace Binance.Net.Objects.Spot.LendingData
 {
     /// <summary>
     /// Binance project info
@@ -66,10 +62,11 @@ namespace Binance.Net.Objects.Spot.LendingData
         /// Status
         /// </summary>
         public string Status { get; set; } = "";
+
         /// <summary>
         /// Type
         /// </summary>
-        public string Type { get; set; }
+        public string Type { get; set; } = "";
         /// <summary>
         /// Has area limitation
         /// </summary>

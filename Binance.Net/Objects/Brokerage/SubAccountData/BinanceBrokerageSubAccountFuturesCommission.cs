@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Binance.Net.Objects.Brokerage.SubAccountData
+﻿namespace Binance.Net.Objects.Brokerage.SubAccountData
 {
     /// <summary>
     /// Sub Account Futures Commission
