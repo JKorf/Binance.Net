@@ -10774,6 +10774,7 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesInitialLeverageChangeResult.MaxNotionalValue">
             <summary>
             Maximum value that can be held
+            NOTE: string type, because the value van be 'inf' (infinite)
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesInitialLeverageChangeResult.Symbol">
@@ -11059,6 +11060,7 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPosition.MaxNotionalValue">
             <summary>
             The notional value limit of current initial leverage
+            NOTE: string type, because the value van be 'inf' (infinite)
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPosition.Quantity">
@@ -11094,6 +11096,7 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPositionMarginResult.MaxNotionalValue">
             <summary>
             Maximum margin value
+            NOTE: string type, because the value van be 'inf' (infinite)
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPositionMarginResult.Type">

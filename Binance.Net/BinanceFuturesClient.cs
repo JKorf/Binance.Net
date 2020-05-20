@@ -101,7 +101,7 @@ namespace Binance.Net
         private const string IncomeHistoryEndpoint = "income";
         private const string PositionMarginEndpoint = "positionMargin";
         private const string PositionMarginChangeHistoryEndpoint = "positionMargin/history";
-        private const string ChangeMarginTypeEndpoint = "marginType ";
+        private const string ChangeMarginTypeEndpoint = "marginType";
 
 
         #endregion
@@ -1222,7 +1222,7 @@ namespace Binance.Net
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await SendRequest<BinanceFuturesInitialLeverageChangeResult>(GetUrl(ChangeInitialLeverageEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequest<BinanceFuturesInitialLeverageChangeResult>(GetUrl(ChangeInitialLeverageEndpoint, Api, SignedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -1262,7 +1262,7 @@ namespace Binance.Net
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await SendRequest<BinanceFuturesChangeMarginTypeResult>(GetUrl(ChangeMarginTypeEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequest<BinanceFuturesChangeMarginTypeResult>(GetUrl(ChangeMarginTypeEndpoint, Api, SignedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion

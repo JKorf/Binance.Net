@@ -44,11 +44,13 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// </summary>
         [JsonProperty("markPrice")]
         public decimal MarkPrice { get; set; }
+
         /// <summary>
         /// The notional value limit of current initial leverage
+        /// NOTE: string type, because the value van be 'inf' (infinite)
         /// </summary>
         [JsonProperty("maxNotionalValue")]
-        public decimal MaxNotionalValue { get; set; }
+        public string MaxNotionalValue { get; set; } = "";
         /// <summary>
         /// The quantity of the position
         /// </summary>

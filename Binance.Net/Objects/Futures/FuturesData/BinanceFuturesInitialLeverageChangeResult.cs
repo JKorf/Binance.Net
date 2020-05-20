@@ -9,10 +9,12 @@
         /// New leverage multiplier
         /// </summary>
         public int Leverage { get; set; }
+
         /// <summary>
         /// Maximum value that can be held
+        /// NOTE: string type, because the value van be 'inf' (infinite)
         /// </summary>
-        public decimal MaxNotionalValue { get; set; }
+        public string MaxNotionalValue { get; set; } = "";
         /// <summary>
         /// Symbol the request is for
         /// </summary>

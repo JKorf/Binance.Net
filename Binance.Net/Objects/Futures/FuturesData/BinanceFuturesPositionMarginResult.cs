@@ -17,10 +17,12 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Request response code
         /// </summary>
         public int Code { get; set; }
+
         /// <summary>
         /// Maximum margin value
+        /// NOTE: string type, because the value van be 'inf' (infinite)
         /// </summary>
-        public decimal MaxNotionalValue { get; set; }
+        public string MaxNotionalValue { get; set; } = "";
         /// <summary>
         /// Direction of the requested margin change
         /// </summary>
