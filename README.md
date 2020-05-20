@@ -148,6 +148,12 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 5.1.1 - 20 May 2020
+    * Fixed ChangeInitialLeverage endpoint
+    * Fixed ChangeMarginType endpoint
+    * Fixed deserialization error on maxNotionalValue
+    * Updated CryptoExchange.Net
+
 * Version 5.1.0 - 20 may 2020
 	* Bumped to release version
 	* Added missing wallet endpoints
