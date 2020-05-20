@@ -100,12 +100,22 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// The time of the update
         /// </summary>
         [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
-        public DateTime OrderCreationTime { get; set; }
+        public DateTime CreateTime { get; set; }
         /// <summary>
         /// The trade id
         /// </summary>
         [JsonProperty("t")]
         public long TradeId { get; set; }
+        /// <summary>
+        /// Bid Notional
+        /// </summary>
+        [JsonProperty("b")]
+        public decimal BidNotional { get; set; }
+        /// <summary>
+        /// Ask Notional
+        /// </summary>
+        [JsonProperty("a")]
+        public decimal AskNotional { get; set; }
         /// <summary>
         /// Whether the buyer is the maker
         /// </summary>
@@ -121,5 +131,36 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// </summary>
         [JsonProperty("wt"), JsonConverter(typeof(WorkingTypeConverter))]
         public WorkingType StopPriceWorking { get; set; }
+        /// <summary>
+        /// Original Order Type
+        /// </summary>
+        [JsonProperty("ot"), JsonConverter(typeof(OrderTypeConverter))]
+        public OrderType OriginalType { get; set; }
+        /// <summary>
+        /// Position side
+        /// </summary>
+        [JsonProperty("ps"), JsonConverter(typeof(PositionSideConverter))]
+        public PositionSide PositionSide { get; set; }
+        /// <summary>
+        /// If Close-All, only pushed with conditional order
+        /// </summary>
+        [JsonProperty("cp")]
+        public bool PushedConditionalOrder { get; set; }
+        /// <summary>
+        /// Activation Price, only puhed with TRAILING_STOP_MARKET order
+        /// </summary>
+        [JsonProperty("AP"), JsonConverter(typeof(PositionSideConverter))]
+        public PositionSide ActivationPrice { get; set; }
+        /// <summary>
+        /// Callback Rate, only puhed with TRAILING_STOP_MARKET order
+        /// </summary>
+        [JsonProperty("cr")]
+        public decimal CallbackRate { get; set; }
+
+
+        
+
+
+        
     }
 }

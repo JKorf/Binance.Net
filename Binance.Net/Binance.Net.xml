@@ -2914,25 +2914,29 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamBalance},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{System.Decimal},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate}},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamBalance}},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition}},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.BinanceClient.StartUserStream(System.Threading.CancellationToken)"/> method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
+            <param name="onCrossWalletUpdate">The event handler for whenever a cross wallet has changed</param>
+            <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
             <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
-            <param name="onPositionUpdateMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
-            <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
+            <param name="onPositionUpdate">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
+            <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
             <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToUserDataUpdatesAsync(System.String,System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamBalance},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
+        <member name="M:Binance.Net.BinanceFuturesSocketClient.SubscribeToUserDataUpdatesAsync(System.String,System.Action{System.Decimal},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate}},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamBalance}},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition}},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.BinanceClient.StartUserStream(System.Threading.CancellationToken)"/> method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
+            <param name="onCrossWalletUpdate">The event handler for whenever a cross wallet has changed</param>
+            <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
             <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
-            <param name="onPositionUpdateMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
-            <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
+            <param name="onPositionUpdate">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
+            <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
             <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -2960,6 +2964,13 @@
             </summary>
         </member>
         <member name="M:Binance.Net.BinanceHelpers.UsedWeight(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}})">
+            <summary>
+            Get the used weight from the response headers
+            </summary>
+            <param name="headers"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.BinanceHelpers.UsedOrderCount(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}})">
             <summary>
             Get the used weight from the response headers
             </summary>
@@ -4054,11 +4065,6 @@
             Max orders filter
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.SymbolFilterType.MaxNumberIcebergOrders">
-            <summary>
-            Max iceberg orders filter
-            </summary>
-        </member>
         <member name="F:Binance.Net.Enums.SymbolFilterType.MaxNumberAlgorithmicOrders">
             <summary>
             Max algo orders filter
@@ -4067,11 +4073,6 @@
         <member name="F:Binance.Net.Enums.SymbolFilterType.IcebergParts">
             <summary>
             Max iceberg parts filter
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.SymbolFilterType.MaxPosition">
-            <summary>
-            Max position filter
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.SymbolStatus">
@@ -7251,25 +7252,29 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamBalance},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{System.Decimal},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate}},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamBalance}},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition}},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.BinanceClient.StartUserStream(System.Threading.CancellationToken)"/> method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
+            <param name="onCrossWalletUpdate">The event handler for whenever a cross wallet has changed</param>
+            <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
             <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
-            <param name="onPositionUpdateMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
-            <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
+            <param name="onPositionUpdate">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
+            <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
             <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToUserDataUpdatesAsync(System.String,System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamBalance},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToUserDataUpdatesAsync(System.String,System.Action{System.Decimal},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate}},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamBalance}},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition}},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.BinanceClient.StartUserStream(System.Threading.CancellationToken)"/> method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
+            <param name="onCrossWalletUpdate">The event handler for whenever a cross wallet has changed</param>
+            <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
             <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
-            <param name="onPositionUpdateMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
-            <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
+            <param name="onPositionUpdate">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
+            <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
             <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -7938,186 +7943,6 @@
             The time the event happened
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.BinanceSymbolFilter">
-            <summary>
-            A filter for order placed on a symbol. Can be either a <see cref="T:Binance.Net.Objects.BinanceSymbolPriceFilter"/>, <see cref="T:Binance.Net.Objects.BinanceSymbolLotSizeFilter"/>, <see cref="T:Binance.Net.Objects.BinanceSymbolMinNotionalFilter"/>, <see cref="T:Binance.Net.Objects.BinanceSymbolMaxAlgorithmicOrdersFilter"/> or <see cref="T:Binance.Net.Objects.BinanceSymbolIcebergPartsFilter"/> or <see cref="T:Binance.Net.Objects.BinanceSymbolMaxPositionFilter"/>
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceSymbolFilter.FilterType">
-            <summary>
-            The type of this filter
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceSymbolPriceFilter">
-            <summary>
-            Price filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceSymbolPriceFilter.MinPrice">
-            <summary>
-            The minimal price the order can be for
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceSymbolPriceFilter.MaxPrice">
-            <summary>
-            The max price the order can be for
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceSymbolPriceFilter.TickSize">
-            <summary>
-            The tick size of the price. The price can not have more precision as this and can only be incremented in steps of this.
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceSymbolPercentPriceFilter">
-            <summary>
-            Price percentage filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceSymbolPercentPriceFilter.MultiplierUp">
-            <summary>
-            The max factor the price can deviate up
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceSymbolPercentPriceFilter.MultiplierDown">
-            <summary>
-            The max factor the price can deviate down
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceSymbolPercentPriceFilter.AveragePriceMinutes">
-            <summary>
-            The amount of minutes the average price of trades is calculated over. 0 means the last price is used
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceFuturesSymbolPercentPriceFilter">
-            <summary>
-            Price percentage filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesSymbolPercentPriceFilter.MultiplierUp">
-            <summary>
-            The max factor the price can deviate up
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesSymbolPercentPriceFilter.MultiplierDown">
-            <summary>
-            The max factor the price can deviate down
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceFuturesSymbolPercentPriceFilter.MultiplierDecimal">
-            <summary>
-            The amount of minutes the average price of trades is calculated over. 0 means the last price is used
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceSymbolLotSizeFilter">
-            <summary>
-            Lot size filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceSymbolLotSizeFilter.MinQuantity">
-            <summary>
-            The minimal quantity of an order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceSymbolLotSizeFilter.MaxQuantity">
-            <summary>
-            The maximum quantity of an order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceSymbolLotSizeFilter.StepSize">
-            <summary>
-            The tick size of the quantity. The quantity can not have more precision as this and can only be incremented in steps of this.
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceSymbolMarketLotSizeFilter">
-            <summary>
-            Market lot size filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceSymbolMarketLotSizeFilter.MinQuantity">
-            <summary>
-            The minimal quantity of an order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceSymbolMarketLotSizeFilter.MaxQuantity">
-            <summary>
-            The maximum quantity of an order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceSymbolMarketLotSizeFilter.StepSize">
-            <summary>
-            The tick size of the quantity. The quantity can not have more precision as this and can only be incremented in steps of this.
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceSymbolMinNotionalFilter">
-            <summary>
-            Min notional filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceSymbolMinNotionalFilter.MinNotional">
-            <summary>
-            The minimal total size of an order. This is calculated by Price * Quantity.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceSymbolMinNotionalFilter.ApplyToMarketOrders">
-            <summary>
-            Whether or not this filter is applied to market orders. If so the average trade price is used.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceSymbolMinNotionalFilter.AveragePriceMinutes">
-            <summary>
-            The amount of minutes the average price of trades is calculated over for market orders. 0 means the last price is used
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceSymbolMaxOrdersFilter">
-            <summary>
-            Nax orders filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceSymbolMaxOrdersFilter.MaxNumberOrders">
-            <summary>
-            The max number of orders for this symbol
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceSymbolMaxIcebergOrdersFilter">
-            <summary>
-            Max iceberg orders filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceSymbolMaxIcebergOrdersFilter.MaxNumberIcebergOrders">
-            <summary>
-            The max number of iceberg orders for this symbol
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceSymbolMaxAlgorithmicOrdersFilter">
-            <summary>
-            Max algo orders filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceSymbolMaxAlgorithmicOrdersFilter.MaxNumberAlgorithmicOrders">
-            <summary>
-            The max number of Algorithmic orders for this symbol
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceSymbolIcebergPartsFilter">
-            <summary>
-            Max iceberg parts filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceSymbolIcebergPartsFilter.Limit">
-            <summary>
-            The max parts of an iceberg order for this symbol.
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.BinanceSymbolMaxPositionFilter">
-            <summary>
-            The max position filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceSymbolMaxPositionFilter.MaxPosition">
-            <summary>
-            The max position an account can have on the base asset of a symbol.
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Brokerage.BinanceBrokerageClientOptions">
             <summary>
             Options for the binance brokerage client
@@ -8608,6 +8433,56 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset">
+            <summary>
+            Information about an account asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.InitialMargin">
+            <summary>
+            Initial Margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.MaintMargin">
+            <summary>
+            Maint Margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.MarginBalance">
+            <summary>
+            Margin Balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.MaxWithdrawAmount">
+            <summary>
+            Maximum Withdraw Amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.OpenOrderInitialMargin">
+            <summary>
+            Open Order Initial Margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.PositionInitialMargin">
+            <summary>
+            Position Initial Margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.UnrealizedProfit">
+            <summary>
+            Unrealized Profit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.WalletBalance">
+            <summary>
+            Wallet Balance
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance">
             <summary>
             Information about an account
@@ -8636,6 +8511,136 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance.UpdateTime">
             <summary>
             The time of balance was updated
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo">
+            <summary>
+            Information about an account
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.Assets">
+            <summary>
+            Information about an account assets
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.CanDeposite">
+            <summary>
+            Boolean indicating if this account can deposite
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.CanTrade">
+            <summary>
+            Boolean indicating if this account can trade
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.CanWithdraw">
+            <summary>
+            Boolean indicating if this account can withdraw
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.FeeTier">
+            <summary>
+            Fee tier
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.MaxWithdrawAmount">
+            <summary>
+            Maximum withdraw amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.Positions">
+            <summary>
+            Information about an account positions
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.TotalInitialMargin">
+            <summary>
+            Total initial margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.TotalMaintMargin">
+            <summary>
+            Total maint margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.TotalMarginBalance">
+            <summary>
+            Total margin balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.TotalOpenOrderInitialMargin">
+            <summary>
+            Total open order initial margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.TotalPositionInitialMargin">
+            <summary>
+            Total positional initial margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.TotalUnrealizedProfit">
+            <summary>
+            Total unrealized profit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.TotalWalletBalance">
+            <summary>
+            Total wallet balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.UpdateTime">
+            <summary>
+            The time of account info was updated
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition">
+            <summary>
+            Information about an account position
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.Isolated">
+            <summary>
+            Is isolated
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.Leverage">
+            <summary>
+            Leverage
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.InitialMargin">
+            <summary>
+            Initial margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.MaintMargin">
+            <summary>
+            Maint margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.OpenOrderInitialMargin">
+            <summary>
+            Open order initial margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.PositionInitialMargin">
+            <summary>
+            Position initial margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.UnrealizedProfit">
+            <summary>
+            Unrealized profit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.PositionSide">
+            <summary>
+            Position side
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder">
@@ -9045,7 +9050,7 @@
         </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPosition">
             <summary>
-            Information about an account
+            Information about an position
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPosition.EntryPrice">
@@ -9418,6 +9423,116 @@
             Maintenance ratio for this bracket
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbolFilter">
+            <summary>
+            A filter for order placed on a symbol. Can be either a <see cref="T:Binance.Net.Objects.Futures.MarketData.BinanceSymbolPriceFilter"/>, <see cref="T:Binance.Net.Objects.Futures.MarketData.BinanceSymbolLotSizeFilter"/>, <see cref="T:Binance.Net.Objects.Futures.MarketData.BinanceSymbolMaxAlgorithmicOrdersFilter"/>
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbolFilter.FilterType">
+            <summary>
+            The type of this filter
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceSymbolPriceFilter">
+            <summary>
+            Price filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceSymbolPriceFilter.MinPrice">
+            <summary>
+            The minimal price the order can be for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceSymbolPriceFilter.MaxPrice">
+            <summary>
+            The max price the order can be for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceSymbolPriceFilter.TickSize">
+            <summary>
+            The tick size of the price. The price can not have more precision as this and can only be incremented in steps of this.
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceSymbolLotSizeFilter">
+            <summary>
+            Lot size filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceSymbolLotSizeFilter.MinQuantity">
+            <summary>
+            The minimal quantity of an order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceSymbolLotSizeFilter.MaxQuantity">
+            <summary>
+            The maximum quantity of an order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceSymbolLotSizeFilter.StepSize">
+            <summary>
+            The tick size of the quantity. The quantity can not have more precision as this and can only be incremented in steps of this.
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceSymbolMarketLotSizeFilter">
+            <summary>
+            Market lot size filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceSymbolMarketLotSizeFilter.MinQuantity">
+            <summary>
+            The minimal quantity of an order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceSymbolMarketLotSizeFilter.MaxQuantity">
+            <summary>
+            The maximum quantity of an order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceSymbolMarketLotSizeFilter.StepSize">
+            <summary>
+            The tick size of the quantity. The quantity can not have more precision as this and can only be incremented in steps of this.
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceSymbolMaxOrdersFilter">
+             <summary>
+            Max orders filter
+             </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceSymbolMaxOrdersFilter.MaxNumberOrders">
+            <summary>
+            The max number of orders for this symbol
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceSymbolMaxAlgorithmicOrdersFilter">
+            <summary>
+            Max algo orders filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceSymbolMaxAlgorithmicOrdersFilter.MaxNumberAlgorithmicOrders">
+            <summary>
+            The max number of Algorithmic orders for this symbol
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceSymbolPercentPriceFilter">
+            <summary>
+            Price percentage filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceSymbolPercentPriceFilter.MultiplierUp">
+            <summary>
+            The max factor the price can deviate up
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceSymbolPercentPriceFilter.MultiplierDown">
+            <summary>
+            The max factor the price can deviate down
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceSymbolPercentPriceFilter.MultiplierDecimal">
+            <summary>
+            The amount of minutes the average price of trades is calculated over. 0 means the last price is used
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamLiquidationData">
             <summary>
             A event received by a Binance websocket
@@ -9653,6 +9768,56 @@
             The isolated wallet (if isolated position)
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition.PositionSide">
+            <summary>
+            Position Side
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate">
+            <summary>
+            Update data about an margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate.PositionSide">
+            <summary>
+            Position Side
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate.PositionAmount">
+            <summary>
+            Position Amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate.MarginType">
+            <summary>
+            Margin type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate.IsolatedWallet">
+            <summary>
+            Isolated Wallet (if isolated position)
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate.MarkPrice">
+            <summary>
+            Mark Price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate.UnrealizedPNL">
+            <summary>
+            Unrealized PnL
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate.MaintMargin">
+            <summary>
+            Maintenance Margin Required
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate">
             <summary>
             Update data about an order
@@ -9743,7 +9908,7 @@
             The asset the commission was taken from
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.OrderCreationTime">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.CreateTime">
             <summary>
             The time of the update
             </summary>
@@ -9751,6 +9916,16 @@
         <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.TradeId">
             <summary>
             The trade id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.BidNotional">
+            <summary>
+            Bid Notional
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.AskNotional">
+            <summary>
+            Ask Notional
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.BuyerIsMaker">
@@ -9766,6 +9941,31 @@
         <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.StopPriceWorking">
             <summary>
             Stop price working type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.OriginalType">
+            <summary>
+            Original Order Type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.PositionSide">
+            <summary>
+            Position side
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.PushedConditionalOrder">
+            <summary>
+            If Close-All, only pushed with conditional order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.ActivationPrice">
+            <summary>
+            Activation Price, only puhed with TRAILING_STOP_MARKET order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.CallbackRate">
+            <summary>
+            Callback Rate, only puhed with TRAILING_STOP_MARKET order
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.BinanceClientOptions">
@@ -10726,11 +10926,6 @@
             Filter for max number of orders for this symbol
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbol.MaxIcebergOrdersFilter">
-            <summary>
-            Filter for max iceberg orders for this symbol
-            </summary>
-        </member>
         <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbol.MaxAlgorithmicOrdersFilter">
             <summary>
             Filter for max algorithmic orders for this symbol
@@ -10749,11 +10944,6 @@
         <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbol.PricePercentFilter">
             <summary>
             Filter for the maximum deviation of the price
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbol.MaxPositionFilter">
-            <summary>
-            Filter for the max position
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.MarketStream.BinanceStreamAggregatedTrade">
@@ -12655,6 +12845,146 @@
         <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawalPlaced.Id">
             <summary>
             The id
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.MarketData.BinanceSymbolFilter">
+            <summary>
+            A filter for order placed on a symbol. Can be either a <see cref="T:Binance.Net.Objects.MarketData.BinanceSymbolPriceFilter"/>, <see cref="T:Binance.Net.Objects.MarketData.BinanceSymbolLotSizeFilter"/>, <see cref="T:Binance.Net.Objects.MarketData.BinanceSymbolMinNotionalFilter"/>, <see cref="T:Binance.Net.Objects.MarketData.BinanceSymbolMaxAlgorithmicOrdersFilter"/> or <see cref="T:Binance.Net.Objects.MarketData.BinanceSymbolIcebergPartsFilter"/> or <see cref="!:BinanceSymbolMaxPositionFilter"/>
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolFilter.FilterType">
+            <summary>
+            The type of this filter
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.MarketData.BinanceSymbolPriceFilter">
+            <summary>
+            Price filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolPriceFilter.MinPrice">
+            <summary>
+            The minimal price the order can be for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolPriceFilter.MaxPrice">
+            <summary>
+            The max price the order can be for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolPriceFilter.TickSize">
+            <summary>
+            The tick size of the price. The price can not have more precision as this and can only be incremented in steps of this.
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.MarketData.BinanceSymbolPercentPriceFilter">
+            <summary>
+            Price percentage filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolPercentPriceFilter.MultiplierUp">
+            <summary>
+            The max factor the price can deviate up
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolPercentPriceFilter.MultiplierDown">
+            <summary>
+            The max factor the price can deviate down
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolPercentPriceFilter.AveragePriceMinutes">
+            <summary>
+            The amount of minutes the average price of trades is calculated over. 0 means the last price is used
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.MarketData.BinanceSymbolLotSizeFilter">
+            <summary>
+            Lot size filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolLotSizeFilter.MinQuantity">
+            <summary>
+            The minimal quantity of an order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolLotSizeFilter.MaxQuantity">
+            <summary>
+            The maximum quantity of an order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolLotSizeFilter.StepSize">
+            <summary>
+            The tick size of the quantity. The quantity can not have more precision as this and can only be incremented in steps of this.
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.MarketData.BinanceSymbolMarketLotSizeFilter">
+            <summary>
+            Market lot size filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolMarketLotSizeFilter.MinQuantity">
+            <summary>
+            The minimal quantity of an order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolMarketLotSizeFilter.MaxQuantity">
+            <summary>
+            The maximum quantity of an order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolMarketLotSizeFilter.StepSize">
+            <summary>
+            The tick size of the quantity. The quantity can not have more precision as this and can only be incremented in steps of this.
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.MarketData.BinanceSymbolMinNotionalFilter">
+            <summary>
+            Min notional filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolMinNotionalFilter.MinNotional">
+            <summary>
+            The minimal total size of an order. This is calculated by Price * Quantity.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolMinNotionalFilter.ApplyToMarketOrders">
+            <summary>
+            Whether or not this filter is applied to market orders. If so the average trade price is used.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolMinNotionalFilter.AveragePriceMinutes">
+            <summary>
+            The amount of minutes the average price of trades is calculated over for market orders. 0 means the last price is used
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.MarketData.BinanceSymbolMaxOrdersFilter">
+             <summary>
+            Max orders filter
+             </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolMaxOrdersFilter.MaxNumberOrders">
+            <summary>
+            The max number of orders for this symbol
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.MarketData.BinanceSymbolMaxAlgorithmicOrdersFilter">
+            <summary>
+            Max algo orders filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolMaxAlgorithmicOrdersFilter.MaxNumberAlgorithmicOrders">
+            <summary>
+            The max number of Algorithmic orders for this symbol
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.MarketData.BinanceSymbolIcebergPartsFilter">
+            <summary>
+            Max iceberg parts filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.MarketData.BinanceSymbolIcebergPartsFilter.Limit">
+            <summary>
+            The max parts of an iceberg order for this symbol.
             </summary>
         </member>
     </members>

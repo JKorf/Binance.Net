@@ -1,5 +1,6 @@
 ﻿using Binance.Net.Converters;
 using Binance.Net.Enums;
+using Binance.Net.Objects.MarketData;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
@@ -103,11 +104,6 @@ namespace Binance.Net.Objects.Spot.MarketData
         [JsonIgnore]
         public BinanceSymbolMaxOrdersFilter MaxOrdersFilter => Filters.OfType<BinanceSymbolMaxOrdersFilter>().FirstOrDefault();
         /// <summary>
-        /// Filter for max iceberg orders for this symbol
-        /// </summary>
-        [JsonIgnore]
-        public BinanceSymbolMaxIcebergOrdersFilter MaxIcebergOrdersFilter => Filters.OfType<BinanceSymbolMaxIcebergOrdersFilter>().FirstOrDefault();
-        /// <summary>
         /// Filter for max algorithmic orders for this symbol
         /// </summary>
         [JsonIgnore]
@@ -127,11 +123,5 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// </summary>
         [JsonIgnore]
         public BinanceSymbolPercentPriceFilter PricePercentFilter => Filters.OfType<BinanceSymbolPercentPriceFilter>().FirstOrDefault();
-
-        /// <summary>
-        /// Filter for the max position
-        /// </summary>
-        [JsonIgnore]
-        public BinanceSymbolMaxPositionFilter MaxPositionFilter => Filters.OfType<BinanceSymbolMaxPositionFilter>().FirstOrDefault();
     }
 }

@@ -8,7 +8,7 @@ using Binance.Net.Enums;
 namespace Binance.Net.Objects.Futures.FuturesData
 {
     /// <summary>
-    /// Information about an account
+    /// Information about an position
     /// </summary>
     public class BinanceFuturesPosition
     {

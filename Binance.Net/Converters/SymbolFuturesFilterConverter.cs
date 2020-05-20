@@ -1,13 +1,15 @@
 ﻿using Binance.Net.Enums;
-using Binance.Net.Objects.MarketData;
+using Binance.Net.Objects.Futures.MarketData;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text;
 
 namespace Binance.Net.Converters
 {
-    internal class SymbolFilterConverter : JsonConverter
+    internal class SymbolFuturesFilterConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {
@@ -18,7 +20,7 @@ namespace Binance.Net.Converters
         {
             var obj = JObject.Load(reader);
             var type = new SymbolFilterTypeConverter(false).ReadString(obj["filterType"].ToString());
-            BinanceSymbolFilter result;
+            BinanceFuturesSymbolFilter result;
             switch (type)
             {
                 case SymbolFilterType.LotSize:
@@ -37,14 +39,6 @@ namespace Binance.Net.Converters
                         StepSize = (decimal)obj["stepSize"]
                     };
                     break;
-                case SymbolFilterType.MinNotional:
-                    result = new BinanceSymbolMinNotionalFilter
-                    {
-                        MinNotional = (decimal)obj["minNotional"],
-                        ApplyToMarketOrders = (bool)obj["applyToMarket"],
-                        AveragePriceMinutes = (int)obj["avgPriceMins"]
-                    };
-                    break;
                 case SymbolFilterType.Price:
                     result = new BinanceSymbolPriceFilter
                     {
@@ -53,23 +47,10 @@ namespace Binance.Net.Converters
                         TickSize = (decimal)obj["tickSize"]
                     };
                     break;
-                case SymbolFilterType.MaxNumberAlgorithmicOrders:
-                    result = new BinanceSymbolMaxAlgorithmicOrdersFilter
-                    {
-                        MaxNumberAlgorithmicOrders = (int)obj["maxNumAlgoOrders"]
-                    };
-                    break;
                 case SymbolFilterType.MaxNumberOrders:
                     result = new BinanceSymbolMaxOrdersFilter
                     {
-                        MaxNumberOrders = (int)obj["maxNumOrders"]
-                    };
-                    break;
-
-                case SymbolFilterType.IcebergParts:
-                    result = new BinanceSymbolIcebergPartsFilter
-                    {
-                        Limit = (int)obj["limit"]
+                        MaxNumberOrders = (int)obj["limit"]
                     };
                     break;
                 case SymbolFilterType.PricePercent:
@@ -77,12 +58,18 @@ namespace Binance.Net.Converters
                     {
                         MultiplierUp = (decimal)obj["multiplierUp"],
                         MultiplierDown = (decimal)obj["multiplierDown"],
-                        AveragePriceMinutes = (int)obj["avgPriceMins"]
+                        MultiplierDecimal = (int)obj["multiplierDecimal"]
+                    };
+                    break;
+                case SymbolFilterType.MaxNumberAlgorithmicOrders:
+                    result = new BinanceSymbolMaxAlgorithmicOrdersFilter
+                    {
+                        MaxNumberAlgorithmicOrders = (int)obj["limit"]
                     };
                     break;
                 default:
                     Debug.WriteLine("Can't parse symbol filter of type: " + obj["filterType"]);
-                    result = new BinanceSymbolFilter();
+                    result = new BinanceFuturesSymbolFilter();
                     break;
             }
             result.FilterType = type;
@@ -91,7 +78,7 @@ namespace Binance.Net.Converters
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            var filter = (BinanceSymbolFilter)value;
+            var filter = (BinanceFuturesSymbolFilter)value;
             writer.WriteStartObject();
 
             writer.WritePropertyName("filterType");
@@ -117,15 +104,6 @@ namespace Binance.Net.Converters
                     writer.WritePropertyName("stepSize");
                     writer.WriteValue(marketLotSizeFilter.StepSize);
                     break;
-                case SymbolFilterType.MinNotional:
-                    var minNotionalFilter = (BinanceSymbolMinNotionalFilter)filter;
-                    writer.WritePropertyName("minNotional");
-                    writer.WriteValue(minNotionalFilter.MinNotional);
-                    writer.WritePropertyName("applyToMarket");
-                    writer.WriteValue(minNotionalFilter.ApplyToMarketOrders);
-                    writer.WritePropertyName("avgPriceMins");
-                    writer.WriteValue(minNotionalFilter.AveragePriceMinutes);
-                    break;
                 case SymbolFilterType.Price:
                     var priceFilter = (BinanceSymbolPriceFilter)filter;
                     writer.WritePropertyName("maxPrice");
@@ -137,18 +115,13 @@ namespace Binance.Net.Converters
                     break;
                 case SymbolFilterType.MaxNumberAlgorithmicOrders:
                     var algoFilter = (BinanceSymbolMaxAlgorithmicOrdersFilter)filter;
-                    writer.WritePropertyName("maxNumAlgoOrders");
+                    writer.WritePropertyName("limit");
                     writer.WriteValue(algoFilter.MaxNumberAlgorithmicOrders);
                     break;
                 case SymbolFilterType.MaxNumberOrders:
                     var orderFilter = (BinanceSymbolMaxOrdersFilter)filter;
-                    writer.WritePropertyName("maxNumOrders");
-                    writer.WriteValue(orderFilter.MaxNumberOrders);
-                    break;
-                case SymbolFilterType.IcebergParts:
-                    var icebergPartsFilter = (BinanceSymbolIcebergPartsFilter)filter;
                     writer.WritePropertyName("limit");
-                    writer.WriteValue(icebergPartsFilter.Limit);
+                    writer.WriteValue(orderFilter.MaxNumberOrders);
                     break;
                 case SymbolFilterType.PricePercent:
                     var pricePercentFilter = (BinanceSymbolPercentPriceFilter)filter;
@@ -156,8 +129,8 @@ namespace Binance.Net.Converters
                     writer.WriteValue(pricePercentFilter.MultiplierUp);
                     writer.WritePropertyName("multiplierDown");
                     writer.WriteValue(pricePercentFilter.MultiplierDown);
-                    writer.WritePropertyName("avgPriceMins");
-                    writer.WriteValue(pricePercentFilter.AveragePriceMinutes);
+                    writer.WritePropertyName("multiplierDecimal");
+                    writer.WriteValue(pricePercentFilter.MultiplierDecimal);
                     break;
                 default:
                     Debug.WriteLine("Can't write symbol filter of type: " + filter.FilterType);
