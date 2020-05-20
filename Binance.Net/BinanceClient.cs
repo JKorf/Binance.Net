@@ -727,7 +727,7 @@ namespace Binance.Net
         /// <returns>The system status</returns>
         public async Task<WebCallResult<BinanceSystemStatus>> GetSystemStatusAsync(CancellationToken ct = default)
         {
-            return await SendRequest<BinanceSystemStatus>(GetUrl(SystemStatusEndpoint, WithdrawalApi, WithdrawalVersion), HttpMethod.Get, ct, null, true).ConfigureAwait(false);
+            return await SendRequest<BinanceSystemStatus>(GetUrl(SystemStatusEndpoint, WithdrawalApi, WithdrawalVersion), HttpMethod.Get, ct, null, false).ConfigureAwait(false);
         }
 
         #endregion

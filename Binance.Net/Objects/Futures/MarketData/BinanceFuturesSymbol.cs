@@ -14,7 +14,7 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// <summary>
         /// Filters for order on this symbol
         /// </summary>
-        public IEnumerable<BinanceSymbolFilter> Filters { get; set; } = new List<BinanceSymbolFilter>();
+        public IEnumerable<BinanceFuturesSymbolFilter> Filters { get; set; } = new List<BinanceFuturesSymbolFilter>();
         /// <summary>
         /// The maintenance margin percent
         /// </summary>
@@ -101,7 +101,7 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// Filter for the maximum deviation of the price
         /// </summary>
         [JsonIgnore]
-        public BinanceFuturesSymbolPercentPriceFilter PricePercentFilter => Filters.OfType<BinanceFuturesSymbolPercentPriceFilter>().FirstOrDefault();
+        public BinanceSymbolPercentPriceFilter PricePercentFilter => Filters.OfType<BinanceSymbolPercentPriceFilter>().FirstOrDefault();
     }
 
 }
