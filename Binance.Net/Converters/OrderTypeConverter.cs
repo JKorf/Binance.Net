@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Binance.Net.Objects;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Converters
 {
@@ -27,8 +27,12 @@ namespace Binance.Net.Converters
             { OrderType.LimitMaker, "LIMIT_MAKER" },
             { OrderType.StopLoss, "STOP_LOSS" },
             { OrderType.StopLossLimit, "STOP_LOSS_LIMIT" },
+            { OrderType.Stop, "STOP" },
+            { OrderType.StopMarket, "STOP_MARKET" },
             { OrderType.TakeProfit, "TAKE_PROFIT" },
-            { OrderType.TakeProfitLimit, "TAKE_PROFIT_LIMIT" }
+            { OrderType.TakeProfitMarket, "TAKE_PROFIT_MARKET" },
+            { OrderType.TakeProfitLimit, "TAKE_PROFIT_LIMIT" },
+            { OrderType.TrailingStopMarket, "TRAILING_STOP_MARKET" }
         };
 
         public override bool CanConvert(Type objectType)

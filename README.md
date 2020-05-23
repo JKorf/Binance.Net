@@ -148,6 +148,48 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 5.1.1 - 20 May 2020
+    * Fixed ChangeInitialLeverage endpoint
+    * Fixed ChangeMarginType endpoint
+    * Fixed deserialization error on maxNotionalValue
+    * Updated CryptoExchange.Net
+
+* Version 5.1.0 - 20 may 2020
+	* Bumped to release version
+	* Added missing wallet endpoints
+	* Added sub-account endpoints
+	* Added savings endpoints
+
+* Version 5.1.0-alpha10 - 08 May 2020
+    * Added Brokerage client, various fixes, added some missing parameters
+
+* Version 5.1.0-alpha9 - 01 May 2020
+    * Fixed GetExchangeInfo call, merged master
+
+* Version 5.1.0-alpha8 - 19 Mar 2020
+    * Futures update
+
+* Version 5.1.0-alpha7 - 16 Mar 2020
+    * fixed reference
+
+* Version 5.1.0-alpha6 - 16 Mar 2020
+    * Fixed ticker stream
+
+* Version 5.1.0-alpha5 - 16 Mar 2020
+    * Futures update
+
+* Version 5.1.0-alpha4 - 06 Mar 2020
+    * Actual stream fixes
+
+* Version 5.1.0-alpha3 - 06 Mar 2020
+    * Futures stream fixes
+
+* Version 5.1.0-alpha2 - 03 Mar 2020
+    * Updated CryptoExchange version
+
+* Version 5.1.0-alpha - 03 Mar 2020
+    * First version Futures Api implementation
+
 * Version 5.0.10 - 01 May 2020
     * Fixed filter parsing in GetExchangeInfo
 

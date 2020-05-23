@@ -5,6 +5,10 @@ using Binance.Net.Objects;
 using Binance.Net.UnitTests.TestImplementations;
 using NUnit.Framework;
 using CryptoExchange.Net.Logging;
+using Binance.Net.Objects.Spot.UserStream;
+using Binance.Net.Objects.Spot.MarketStream;
+using Binance.Net.Enums;
+using Binance.Net.Objects.Spot;
 
 namespace Binance.Net.UnitTests
 {
@@ -65,34 +69,30 @@ namespace Binance.Net.UnitTests
         {
             // arrange
             var socket = new TestSocket();
-            var client = TestHelpers.CreateSocketClient(socket);
+            var client = TestHelpers.CreateSocketClient(socket, new BinanceSocketClientOptions()
+            {
+                LogVerbosity = LogVerbosity.Debug
+            });
 
             BinanceStreamTick result = null;
             client.SubscribeToSymbolTickerUpdates("ETHBTC", (test) => result = test);
 
-            var data = new BinanceStreamTick()
+            var data = new BinanceCombinedStream<BinanceStreamTick>()
             {
-                BestAskPrice = 0.1m,
-                BestAskQuantity = 0.2m,
-                BestBidPrice = 0.3m,
-                BestBidQuantity = 0.4m,
-                CloseTradesQuantity = 0.5m,
-                CurrentDayClosePrice = 0.6m,
-                FirstTradeId = 1,
-                HighPrice = 0.7m,
-                LastTradeId = 2,
-                LowPrice = 0.8m,
-                OpenPrice = 0.9m,
-                PrevDayClosePrice = 1.0m,
-                PriceChange = 1.1m,
-                PriceChangePercentage = 1.2m,
-                StatisticsCloseTime = new DateTime(2017, 1, 2),
-                StatisticsOpenTime = new DateTime(2017, 1, 1),
-                Symbol = "test",
-                TotalTradedBaseAssetVolume = 1.3m,
-                TotalTradedQuoteAssetVolume = 1.4m,
-                TotalTrades = 3,
-                WeightedAverage = 1.5m
+                Stream = "test",
+                Data = new BinanceStreamTick() { 
+                    FirstTradeId = 1,
+                    HighPrice = 0.7m,
+                    LastTradeId = 2,
+                    LowPrice = 0.8m,
+                    OpenPrice = 0.9m,
+                    PrevDayClosePrice = 1.0m,
+                    PriceChange = 1.1m,
+                    Symbol = "test",
+                    TotalTradedBaseAssetVolume = 1.3m,
+                    TotalTradedQuoteAssetVolume = 1.4m,
+                    TotalTrades = 3
+                }
             };
 
             // act
@@ -100,7 +100,7 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsNotNull(result);
-            Assert.IsTrue(TestHelpers.AreEqual(data, result));
+            Assert.IsTrue(TestHelpers.AreEqual(data.Data, result));
         }
 
         [TestCase()]
@@ -117,12 +117,6 @@ namespace Binance.Net.UnitTests
             {
                 new BinanceStreamTick()
                 {
-                    BestAskPrice = 0.1m,
-                    BestAskQuantity = 0.2m,
-                    BestBidPrice = 0.3m,
-                    BestBidQuantity = 0.4m,
-                    CloseTradesQuantity = 0.5m,
-                    CurrentDayClosePrice = 0.6m,
                     FirstTradeId = 1,
                     HighPrice = 0.7m,
                     LastTradeId = 2,
@@ -130,14 +124,10 @@ namespace Binance.Net.UnitTests
                     OpenPrice = 0.9m,
                     PrevDayClosePrice = 1.0m,
                     PriceChange = 1.1m,
-                    PriceChangePercentage = 1.2m,
-                    StatisticsCloseTime = new DateTime(2017, 1, 2),
-                    StatisticsOpenTime = new DateTime(2017, 1, 1),
                     Symbol = "test",
                     TotalTradedBaseAssetVolume = 1.3m,
                     TotalTradedQuoteAssetVolume = 1.4m,
-                    TotalTrades = 3,
-                    WeightedAverage = 1.5m
+                    TotalTrades = 3
                 }
             };
 
@@ -167,7 +157,6 @@ namespace Binance.Net.UnitTests
                     Event = "TestTradeStream",
                     EventTime = new DateTime(2017, 1, 1),
                     Symbol = "ETHBTC",
-                    TradeId = 1000000000000,
                     BuyerIsMaker = true,
                     BuyerOrderId = 10000000000000,
                     SellerOrderId = 2000000000000,
@@ -220,7 +209,7 @@ namespace Binance.Net.UnitTests
             Assert.IsNotNull(result);
             var expectedBalances = data.Balances.ToList();
             var balances = result.Balances.ToList();
-            Assert.IsTrue(TestHelpers.AreEqual(data, result, "Balances"));
+            Assert.IsTrue(TestHelpers.AreEqual(data, result, "Balances", "Permissions"));
             Assert.IsTrue(TestHelpers.AreEqual(expectedBalances[0], balances[0]));
             Assert.IsTrue(TestHelpers.AreEqual(expectedBalances[1], balances[1]));
         }
@@ -287,7 +276,6 @@ namespace Binance.Net.UnitTests
             {
                 Event = "executionReport",
                 EventTime = new DateTime(2017, 1, 1),
-                AccumulatedQuantityOfFilledTrades = 1.1m,
                 BuyerIsMaker = true,
                 Commission = 2.2m,
                 CommissionAsset = "test",
@@ -295,14 +283,11 @@ namespace Binance.Net.UnitTests
                 I = 100000000000,
                 OrderId = 100000000000,
                 Price = 6.6m,
-                PriceLastFilledTrade = 7.7m,
                 Quantity = 8.8m,
-                QuantityOfLastFilledTrade = 9.9m,
                 RejectReason = OrderRejectReason.AccountCannotSettle,
                 Side = OrderSide.Buy,
                 Status = OrderStatus.Filled,
                 Symbol = "test",
-                Time = new DateTime(2017, 1, 1),
                 TimeInForce = TimeInForce.GoodTillCancel,
                 TradeId = 10000000000000,
                 Type = OrderType.Limit,
