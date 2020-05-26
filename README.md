@@ -148,6 +148,11 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 5.1.2 - 26 May 2020
+    * Added CancelAllOrdersAfterTimeout futures endpoint
+    * Added timestamp to various models
+    * Added closePosition paramter for future orders
+
 * Version 5.1.1 - 20 May 2020
     * Fixed ChangeInitialLeverage endpoint
     * Fixed ChangeMarginType endpoint
