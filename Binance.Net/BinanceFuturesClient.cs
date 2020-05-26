@@ -81,6 +81,8 @@ namespace Binance.Net
         private const string OpenOrderEndpoint = "openOrder";
         private const string OpenOrdersEndpoint = "openOrders";
         private const string AllOrdersEndpoint = "allOrders";
+        private const string CountDownCancelAllEndpoint = "countdownCancelAll";
+
         // Accounts
         private const string AccountInfoEndpoint = "account";
         private const string MyFuturesTradesEndpoint = "userTrades";
@@ -979,6 +981,47 @@ namespace Binance.Net
         #endregion
 
         #region Cancel All Open Orders [NOT AVAILABLE YET]
+
+        #endregion
+
+        #region Auto-Cancel All Open Orders
+
+        /// <summary>
+        /// Cancel all open orders of the specified symbol at the end of the specified countdown. This rest endpoint means to ensure your open orders are canceled in case of an outage. The endpoint should be called repeatedly as heartbeats
+        /// so that the existing countdown time can be canceled and replaced by a new one.
+        /// </summary>
+        /// <param name="symbol">The symbol</param>
+        /// <param name="countDownTime">The time after which all open orders should cancel, or 0 to cancel an existing timer</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Countdown result</returns>
+        public WebCallResult<BinanceFuturesCountDownResult> CancelAllOrdersAfterTimeout(string symbol, TimeSpan countDownTime, long? receiveWindow = null, CancellationToken ct = default) => CancelAllOrdersAfterTimeoutAsync(symbol, countDownTime, receiveWindow, ct).Result;
+
+        /// <summary>
+        /// Cancel all open orders of the specified symbol at the end of the specified countdown. This rest endpoint means to ensure your open orders are canceled in case of an outage. The endpoint should be called repeatedly as heartbeats
+        /// so that the existing countdown time can be canceled and replaced by a new one.
+        /// </summary>
+        /// <param name="symbol">The symbol</param>
+        /// <param name="countDownTime">The time after which all open orders should cancel, or 0 to cancel an existing timer</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Countdown result</returns>
+        public async Task<WebCallResult<BinanceFuturesCountDownResult>> CancelAllOrdersAfterTimeoutAsync(string symbol, TimeSpan countDownTime, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            symbol.ValidateBinanceSymbol();
+            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceFuturesCountDownResult>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+            
+            var parameters = new Dictionary<string, object>
+            {
+                { "symbol", symbol },
+                { "countdownTime", (int)countDownTime.TotalMilliseconds }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await SendRequest<BinanceFuturesCountDownResult>(GetUrl(CountDownCancelAllEndpoint, Api, SignedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
 
         #endregion
 

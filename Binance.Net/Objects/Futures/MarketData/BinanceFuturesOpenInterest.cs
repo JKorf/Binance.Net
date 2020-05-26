@@ -1,4 +1,8 @@
-﻿namespace Binance.Net.Objects.Futures.MarketData
+﻿using System;
+using CryptoExchange.Net.Converters;
+using Newtonsoft.Json;
+
+namespace Binance.Net.Objects.Futures.MarketData
 {
     /// <summary>
     /// Forced liquidation info
@@ -14,5 +18,11 @@
         /// Open Interest info
         /// </summary>
         public decimal OpenInterest { get; set; }
+
+        /// <summary>
+        /// Timestamp
+        /// </summary>
+        [JsonProperty("time"), JsonConverter(typeof(TimestampConverter))]
+        public DateTime? Timestamp { get; set; }
     }
 }

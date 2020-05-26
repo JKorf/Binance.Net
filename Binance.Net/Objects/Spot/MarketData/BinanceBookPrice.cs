@@ -1,4 +1,6 @@
-﻿using Binance.Net.Interfaces;
+﻿using System;
+using Binance.Net.Interfaces;
+using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Spot.MarketData
@@ -32,5 +34,10 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// </summary>
         [JsonProperty("askQty")]
         public decimal BestAskQuantity { get; set; }
+        /// <summary>
+        /// Timestamp
+        /// </summary>
+        [JsonProperty("time"), JsonConverter(typeof(TimestampConverter))]
+        public DateTime? Timestamp { get; set; }
     }
 }

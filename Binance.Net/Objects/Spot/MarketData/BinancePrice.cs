@@ -1,4 +1,8 @@
-﻿namespace Binance.Net.Objects.Spot.MarketData
+﻿using System;
+using CryptoExchange.Net.Converters;
+using Newtonsoft.Json;
+
+namespace Binance.Net.Objects.Spot.MarketData
 {
     /// <summary>
     /// The price of a symbol
@@ -13,5 +17,10 @@
         /// The price of the symbol
         /// </summary>
         public decimal Price { get; set; }
+        /// <summary>
+        /// Timestamp
+        /// </summary>
+        [JsonProperty("time"), JsonConverter(typeof(TimestampConverter))]
+        public DateTime? Timestamp { get; set; }
     }
 }
