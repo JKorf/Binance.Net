@@ -802,6 +802,7 @@ namespace Binance.Net
         /// <param name="stopPrice">Used with STOP/STOP_MARKET or TAKE_PROFIT/TAKE_PROFIT_MARKET orders.</param>
         /// <param name="activationPrice">Used with TRAILING_STOP_MARKET orders, default as the latest price（supporting different workingType)</param>
         /// <param name="callbackRate">Used with TRAILING_STOP_MARKET orders</param>
+        /// <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
         /// <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
         /// <param name="orderResponseType">The type of response to receive</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -821,9 +822,10 @@ namespace Binance.Net
             decimal? activationPrice = null,
             decimal? callbackRate = null,
             WorkingType? workingType = null,
+            bool? closePosition = null,
             OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
-            CancellationToken ct = default) => PlaceOrderAsync(symbol, side, type, quantity, positionSide, timeInForce, reduceOnly, price, newClientOrderId, stopPrice, activationPrice, callbackRate, workingType,  orderResponseType, receiveWindow, ct).Result;
+            CancellationToken ct = default) => PlaceOrderAsync(symbol, side, type, quantity, positionSide, timeInForce, reduceOnly, price, newClientOrderId, stopPrice, activationPrice, callbackRate, workingType,  closePosition, orderResponseType, receiveWindow, ct).Result;
 
         /// <summary>
         /// Places a new order
@@ -841,6 +843,7 @@ namespace Binance.Net
         /// <param name="activationPrice">Used with TRAILING_STOP_MARKET orders, default as the latest price（supporting different workingType)</param>
         /// <param name="callbackRate">Used with TRAILING_STOP_MARKET orders</param>
         /// <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
+        /// <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
         /// <param name="orderResponseType">The type of response to receive</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -859,6 +862,7 @@ namespace Binance.Net
             decimal? activationPrice = null,
             decimal? callbackRate = null,
             WorkingType? workingType = null,
+            bool? closePosition = null,
             OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
@@ -877,6 +881,7 @@ namespace Binance.Net
                 activationPrice,
                 callbackRate,
                 workingType,
+                closePosition,
                 orderResponseType,
                 receiveWindow,
                 ct).ConfigureAwait(false);
@@ -1654,6 +1659,7 @@ namespace Binance.Net
             decimal? activationPrice = null,
             decimal? callbackRate = null,
             WorkingType? workingType = null,
+            bool? closePosition = null,
             OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
@@ -1692,6 +1698,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("callbackRate", callbackRate?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("workingType", workingType == null ? null : JsonConvert.SerializeObject(workingType, new WorkingTypeConverter(false)));
             parameters.AddOptionalParameter("reduceOnly", reduceOnly);
+            parameters.AddOptionalParameter("closePosition", closePosition);
             parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 

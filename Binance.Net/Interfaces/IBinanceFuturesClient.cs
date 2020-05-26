@@ -441,6 +441,7 @@ namespace Binance.Net.Interfaces
         /// <param name="activationPrice">Used with TRAILING_STOP_MARKET orders, default as the latest price（supporting different workingType)</param>
         /// <param name="callbackRate">Used with TRAILING_STOP_MARKET orders</param>
         /// <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
+        /// <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
         /// <param name="orderResponseType">The type of response to receive</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -459,6 +460,7 @@ namespace Binance.Net.Interfaces
             decimal? activationPrice = null,
             decimal? callbackRate = null,
             WorkingType? workingType = null,
+            bool? closePosition = null,
             OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
             CancellationToken ct = default);
@@ -479,6 +481,7 @@ namespace Binance.Net.Interfaces
         /// <param name="activationPrice">Used with TRAILING_STOP_MARKET orders, default as the latest price（supporting different workingType)</param>
         /// <param name="callbackRate">Used with TRAILING_STOP_MARKET orders</param>
         /// <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
+        /// <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
         /// <param name="orderResponseType">The type of response to receive</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -497,6 +500,7 @@ namespace Binance.Net.Interfaces
             decimal? activationPrice = null,
             decimal? callbackRate = null,
             WorkingType? workingType = null,
+            bool? closePosition = null,
             OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
             CancellationToken ct = default);

@@ -1,4 +1,6 @@
-﻿using Binance.Net.Interfaces;
+﻿using System;
+using Binance.Net.Interfaces;
+using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Spot.MarketStream
@@ -8,6 +10,16 @@ namespace Binance.Net.Objects.Spot.MarketStream
     /// </summary>
     public class BinanceStreamBookPrice : IBinanceBookPrice
     {
+        /// <summary>
+        /// Timestamp
+        /// </summary>
+        [JsonProperty("E"), JsonConverter(typeof(TimestampConverter))]
+        public DateTime? EventTime { get; set; }
+        /// <summary>
+        /// Timestamp
+        /// </summary>
+        [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
+        public DateTime? TransactionTime { get; set; }
         /// <summary>
         /// Update id
         /// </summary>

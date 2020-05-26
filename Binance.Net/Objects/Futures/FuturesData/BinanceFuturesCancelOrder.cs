@@ -58,6 +58,11 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// </summary>
         [JsonProperty("reduceOnly")]
         public bool ReduceOnly { get; set; }
+        
+        /// <summary>
+        /// if Close-All
+        /// </summary>
+        public bool ClosePosition { get; set; }
 
         /// <summary>
         /// The side of the order
