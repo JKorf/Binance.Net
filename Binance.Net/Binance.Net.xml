@@ -11273,7 +11273,7 @@
             User's position mode
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPositionMode.DualSidePosition">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPositionMode.PositionMode">
             <summary>
             true": Hedge Mode mode; "false": One-way Mode
             </summary>
