@@ -355,31 +355,35 @@ namespace Binance.Net.Interfaces
         /// Gets Notional and Leverage Brackets
         /// </summary>
         /// <param name="Symbol">The symbol to get the data for</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Notional and Leverage Brackets info</returns>
-        WebCallResult<BinanceFuturesSymbolBracket> GetBracket(string Symbol, CancellationToken ct = default);
+        WebCallResult<BinanceFuturesSymbolBracket> GetBracket(string Symbol, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets Notional and Leverage Brackets.
         /// </summary>
         /// <param name="Symbol">The symbol to get the data for</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Notional and Leverage Brackets</returns>
-        Task<WebCallResult<BinanceFuturesSymbolBracket>> GetBracketAsync(string Symbol, CancellationToken ct = default);
+        Task<WebCallResult<BinanceFuturesSymbolBracket>> GetBracketAsync(string Symbol, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets all Notional and Leverage Brackets
         /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Notional and Leverage Brackets info</returns>
-        WebCallResult<IEnumerable<BinanceFuturesSymbolBracket>> GetBrackets(CancellationToken ct = default);
+        WebCallResult<IEnumerable<BinanceFuturesSymbolBracket>> GetBrackets(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets all Notional and Leverage Brackets.
         /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Notional and Leverage Brackets</returns>
-        Task<WebCallResult<IEnumerable<BinanceFuturesSymbolBracket>>> GetBracketsAsync(CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceFuturesSymbolBracket>>> GetBracketsAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets a list of open orders
@@ -424,6 +428,40 @@ namespace Binance.Net.Interfaces
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of orders</returns>
         Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetAllOrdersAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
+        /// </summary>
+        /// <param name="dualPositionSide">User position mode</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Whether the request was successful</returns>
+        WebCallResult<BinanceFuturesPositionMode> ModifyPositionMode(bool dualPositionSide, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
+        /// </summary>
+        /// <param name="dualPositionSide">User position mode</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Whether the request was successful</returns>
+        Task<WebCallResult<BinanceFuturesPositionMode>> ModifyPositionModeAsync(bool dualPositionSide, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get user's position mode (Hedge Mode or One-way Mode ) on EVERY symboln
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Whether the request was successful</returns>
+        WebCallResult<BinanceFuturesPositionMode> GetPositionMode(long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Whether the request was successful</returns>
+        Task<WebCallResult<BinanceFuturesPositionMode>> GetPositionModeAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Places a new order

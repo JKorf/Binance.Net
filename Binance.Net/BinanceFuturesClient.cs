@@ -97,6 +97,7 @@ namespace Binance.Net
         private const string FundingRateHistoryEndpoint = "fundingRate";
 
         // Futures Private
+        private const string PositionModeSideEndpoint = "positionSide/dual";
         private const string FuturesAccountBalanceEndpoint = "balance";
         private const string ChangeInitialLeverageEndpoint = "leverage";
         private const string PositionInformationEndpoint = "positionRisk";
@@ -730,53 +731,6 @@ namespace Binance.Net
 
         #endregion
 
-        #region Notional and Leverage Brackets
-
-        /// <summary>
-        /// Gets Notional and Leverage Brackets
-        /// </summary>
-        /// <param name="symbol">The symbol to get the data for</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Notional and Leverage Brackets info</returns>
-        public WebCallResult<BinanceFuturesSymbolBracket> GetBracket(string symbol, CancellationToken ct = default) => GetBracketAsync(symbol, ct).Result;
-
-        /// <summary>
-        /// Gets Notional and Leverage Brackets.
-        /// </summary>
-        /// <param name="symbol">The symbol to get the data for</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Notional and Leverage Brackets</returns>
-        public async Task<WebCallResult<BinanceFuturesSymbolBracket>> GetBracketAsync(string symbol, CancellationToken ct = default)
-        {
-            symbol?.ValidateBinanceSymbol();
-
-            var parameters = new Dictionary<string, object>()
-            {
-                { "symbol", symbol }
-            };
-
-            return await SendRequest<BinanceFuturesSymbolBracket>(GetUrl(LeverageBracketEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Gets all Notional and Leverage Brackets
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Notional and Leverage Brackets info</returns>
-        public WebCallResult<IEnumerable<BinanceFuturesSymbolBracket>> GetBrackets(CancellationToken ct = default) => GetBracketsAsync(ct).Result;
-
-        /// <summary>
-        /// Gets all Notional and Leverage Brackets.
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Notional and Leverage Brackets</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceFuturesSymbolBracket>>> GetBracketsAsync(CancellationToken ct = default)
-        {
-            return await SendRequest<IEnumerable<BinanceFuturesSymbolBracket>>(GetUrl(LeverageBracketEndpoint, Api, PublicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
-        }
-
-        #endregion
-
         #endregion
 
         #endregion
@@ -784,6 +738,83 @@ namespace Binance.Net
         #region signed
 
         #region Account/Trades Endpoints [2 ENDPOINTS NOT AVAILABLE YET]
+
+        #region New Future Account Transfer [NOT AVAILABLE YET]
+
+        #endregion
+
+        #region Get Future Account Transaction History List [NOT AVAILABLE YET]
+
+        #endregion
+
+        #region Change Position Mode
+
+        /// <summary>
+        /// Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
+        /// </summary>
+        /// <param name="dualPositionSide">User position mode</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Whether the request was successful</returns>
+        public WebCallResult<BinanceFuturesPositionMode> ModifyPositionMode(bool dualPositionSide, long? receiveWindow = null, CancellationToken ct = default) => ModifyPositionModeAsync(dualPositionSide, receiveWindow, ct).Result;
+
+        /// <summary>
+        /// Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
+        /// </summary>
+        /// <param name="dualPositionSide">User position mode</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Whether the request was successful</returns>
+        public async Task<WebCallResult<BinanceFuturesPositionMode>> ModifyPositionModeAsync(bool dualPositionSide, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceFuturesPositionMode>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "dualSidePosition", dualPositionSide },
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await SendRequest<BinanceFuturesPositionMode>(GetUrl(PositionModeSideEndpoint, Api, SignedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Current Position Mode
+
+        /// <summary>
+        /// Get user's position mode (Hedge Mode or One-way Mode ) on EVERY symboln
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Whether the request was successful</returns>
+        public WebCallResult<BinanceFuturesPositionMode> GetPositionMode(long? receiveWindow = null, CancellationToken ct = default) => GetPositionModeAsync(receiveWindow, ct).Result;
+
+        /// <summary>
+        /// Get user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Whether the request was successful</returns>
+        public async Task<WebCallResult<BinanceFuturesPositionMode>> GetPositionModeAsync(long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceFuturesPositionMode>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await SendRequest<BinanceFuturesPositionMode>(GetUrl(PositionModeSideEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
 
         #region New Order
 
@@ -1537,6 +1568,72 @@ namespace Binance.Net
             parameters.AddOptionalParameter("limit", limit?.ToString());
 
             return await SendRequest<IEnumerable<BinanceFuturesIncomeHistory>>(GetUrl(IncomeHistoryEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Notional and Leverage Brackets
+
+        /// <summary>
+        /// Gets Notional and Leverage Brackets
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Notional and Leverage Brackets info</returns>
+        public WebCallResult<BinanceFuturesSymbolBracket> GetBracket(string symbol, long? receiveWindow = null, CancellationToken ct = default) => GetBracketAsync(symbol, receiveWindow, ct).Result;
+
+        /// <summary>
+        /// Gets Notional and Leverage Brackets.
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Notional and Leverage Brackets</returns>
+        public async Task<WebCallResult<BinanceFuturesSymbolBracket>> GetBracketAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            symbol?.ValidateBinanceSymbol();
+            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceFuturesSymbolBracket>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("symbol", symbol);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await SendRequest<BinanceFuturesSymbolBracket>(GetUrl(LeverageBracketEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets all Notional and Leverage Brackets
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Notional and Leverage Brackets info</returns>
+        public WebCallResult<IEnumerable<BinanceFuturesSymbolBracket>> GetBrackets(long? receiveWindow = null, CancellationToken ct = default) => GetBracketsAsync(receiveWindow, ct).Result;
+
+        /// <summary>
+        /// Gets all Notional and Leverage Brackets.
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Notional and Leverage Brackets</returns>
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesSymbolBracket>>> GetBracketsAsync(long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<IEnumerable<BinanceFuturesSymbolBracket>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await SendRequest<IEnumerable<BinanceFuturesSymbolBracket>>(GetUrl(LeverageBracketEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion

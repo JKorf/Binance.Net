@@ -2991,35 +2991,39 @@
             <param name="ct">Cancellation token</param>
             <returns>List of book prices</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.GetBracket(System.String,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.ModifyPositionMode(System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Gets Notional and Leverage Brackets
+            Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
             </summary>
-            <param name="symbol">The symbol to get the data for</param>
+            <param name="dualPositionSide">User position mode</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
-            <returns>Notional and Leverage Brackets info</returns>
+            <returns>Whether the request was successful</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.GetBracketAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.ModifyPositionModeAsync(System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Gets Notional and Leverage Brackets.
+            Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
             </summary>
-            <param name="symbol">The symbol to get the data for</param>
+            <param name="dualPositionSide">User position mode</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
-            <returns>Notional and Leverage Brackets</returns>
+            <returns>Whether the request was successful</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.GetBrackets(System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.GetPositionMode(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Gets all Notional and Leverage Brackets
+            Get user's position mode (Hedge Mode or One-way Mode ) on EVERY symboln
             </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
-            <returns>Notional and Leverage Brackets info</returns>
+            <returns>Whether the request was successful</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.GetBracketsAsync(System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.GetPositionModeAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Gets all Notional and Leverage Brackets.
+            Get user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
             </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
-            <returns>Notional and Leverage Brackets</returns>
+            <returns>Whether the request was successful</returns>
         </member>
         <member name="M:Binance.Net.BinanceFuturesClient.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
@@ -3388,6 +3392,40 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>The income history for the futures account</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetBracket(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Gets Notional and Leverage Brackets
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Notional and Leverage Brackets info</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetBracketAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Gets Notional and Leverage Brackets.
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Notional and Leverage Brackets</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetBrackets(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Gets all Notional and Leverage Brackets
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Notional and Leverage Brackets info</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetBracketsAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Gets all Notional and Leverage Brackets.
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Notional and Leverage Brackets</returns>
         </member>
         <member name="M:Binance.Net.BinanceFuturesClient.StartUserStream(System.Threading.CancellationToken)">
             <summary>
@@ -4906,6 +4944,21 @@
         <member name="F:Binance.Net.Enums.OrderType.TrailingStopMarket">
             <summary>
             Trailing stop order will be placed without a price. The order will be executed at the best price available at that time in the order book.
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.PositionMode">
+            <summary>
+            User position mode
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PositionMode.Hedge">
+            <summary>
+            In the Hedge Mode, one contract can hold positions in both long and short directions at the same time, and hedge positions in different directions under the same contract.
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PositionMode.OneWay">
+            <summary>
+            In the One-way Mode, one contract can only hold positions in one direction.
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.PositionSide">
@@ -8336,33 +8389,37 @@
             <param name="ct">Cancellation token</param>
             <returns>List of book prices</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetBracket(System.String,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetBracket(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets Notional and Leverage Brackets
             </summary>
             <param name="Symbol">The symbol to get the data for</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Notional and Leverage Brackets info</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetBracketAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetBracketAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets Notional and Leverage Brackets.
             </summary>
             <param name="Symbol">The symbol to get the data for</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Notional and Leverage Brackets</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetBrackets(System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetBrackets(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all Notional and Leverage Brackets
             </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Notional and Leverage Brackets info</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetBracketsAsync(System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetBracketsAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all Notional and Leverage Brackets.
             </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Notional and Leverage Brackets</returns>
         </member>
@@ -8409,6 +8466,40 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of orders</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.ModifyPositionMode(System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
+            </summary>
+            <param name="dualPositionSide">User position mode</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Whether the request was successful</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.ModifyPositionModeAsync(System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
+            </summary>
+            <param name="dualPositionSide">User position mode</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Whether the request was successful</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetPositionMode(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get user's position mode (Hedge Mode or One-way Mode ) on EVERY symboln
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Whether the request was successful</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetPositionModeAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Whether the request was successful</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
@@ -11175,6 +11266,16 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPositionMarginResult.Type">
             <summary>
             Direction of the requested margin change
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPositionMode">
+            <summary>
+            User's position mode
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPositionMode.PositionMode">
+            <summary>
+            true": Hedge Mode mode; "false": One-way Mode
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesExchangeInfo">

@@ -37,7 +37,7 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// <summary>
         /// Cap notional of this bracket
         /// </summary>
-        public int NotionalCap { get; set; }
+        public long NotionalCap { get; set; }
 
         /// <summary>
         /// Notionl threshold of this bracket
