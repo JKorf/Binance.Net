@@ -87,12 +87,13 @@ namespace Binance.Net
 
             postParametersPosition = PostParameters.InBody;
             requestBodyFormat = RequestBodyFormat.FormData;
+            requestBodyEmptyContent = "";
         }
 
         #endregion
 
         #region Public methods
-        
+
         /// <summary>
         /// Set the default options to be used when creating new clients
         /// </summary>

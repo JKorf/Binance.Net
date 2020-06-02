@@ -229,6 +229,7 @@ namespace Binance.Net
 
             postParametersPosition = PostParameters.InBody;
             requestBodyFormat = RequestBodyFormat.FormData;
+            requestBodyEmptyContent = "";
         }
         #endregion
 
