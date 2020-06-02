@@ -87,6 +87,7 @@ namespace Binance.Net
         private const string NewTestOrderEndpoint = "order/test";
         private const string QueryOrderEndpoint = "order";
         private const string CancelOrderEndpoint = "order";
+        private const string CancelAllOpenOrderEndpoint = "openOrders";
         private const string MyTradesEndpoint = "myTrades";
 
         // OCO orders
@@ -2512,6 +2513,44 @@ namespace Binance.Net
             return await SendRequest<BinanceCanceledOrder>(GetUrl(CancelOrderEndpoint, Api, SignedVersion), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
         }
 
+        #endregion
+
+        #region Cancel all Open Orders on a Symbol
+
+        /// <summary>
+        /// Cancels all open orders on a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Id's for canceled order</returns>
+        public WebCallResult<IEnumerable<BinanceCancelledId>> CancelAllOpenOrders(string symbol,
+            long? receiveWindow = null, CancellationToken ct = default)
+            => CancelAllOpenOrdersAsync(symbol, receiveWindow, ct).Result;
+
+        /// <summary>
+        /// Cancels all open orders on a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Id's for canceled order</returns>
+        public async Task<WebCallResult<IEnumerable<BinanceCancelledId>>> CancelAllOpenOrdersAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            symbol.ValidateBinanceSymbol();
+            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<IEnumerable<BinanceCancelledId>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+            
+            var parameters = new Dictionary<string, object>
+            {
+                { "symbol", symbol },
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await SendRequest<IEnumerable<BinanceCancelledId>>(GetUrl(CancelAllOpenOrderEndpoint, Api, SignedVersion), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
+        }
         #endregion
 
         #region Query Order

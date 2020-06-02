@@ -1223,6 +1223,24 @@ namespace Binance.Net.Interfaces
         Task<WebCallResult<BinanceCanceledOrder>> CancelOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, string? newClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Cancels all open orders on a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Id's for canceled order</returns>
+        WebCallResult<IEnumerable<BinanceCancelledId>> CancelAllOpenOrders(string symbol, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Cancels all open orders on a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Id's for canceled order</returns>
+        Task<WebCallResult<IEnumerable<BinanceCancelledId>>> CancelAllOpenOrdersAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
         /// </summary>
         /// <param name="symbol">The symbol the order is for</param>
