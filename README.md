@@ -148,6 +148,13 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 5.1.3 - 02 Jun 2020
+    * Added CancelAllOrders endpoint
+    * Added PlaceMultipleOrders endpoint for futures
+    * Added BinanceFuturesSymbolOrderBook
+    * Added missing Expired order status mapping
+    * Added GetBrackets to futures client
+
 * Version 5.1.2 - 26 May 2020
     * Added CancelAllOrdersAfterTimeout futures endpoint
     * Added timestamp to various models
