@@ -76,6 +76,7 @@ namespace Binance.Net
 
         // Orders
         private const string NewOrderEndpoint = "order";
+        private const string MultipleNewOrdersEndpoint = "batchOrders";
         private const string QueryOrderEndpoint = "order";
         private const string CancelOrderEndpoint = "order";
         private const string OpenOrderEndpoint = "openOrder";
@@ -132,7 +133,8 @@ namespace Binance.Net
             timestampOffset = options.TimestampOffset;
             defaultReceiveWindow = options.ReceiveWindow;
 
-            postParametersPosition = PostParameters.InUri;
+            postParametersPosition = PostParameters.InBody;
+            requestBodyFormat = RequestBodyFormat.FormData;
         }
         #endregion
 
@@ -916,6 +918,107 @@ namespace Binance.Net
                 orderResponseType,
                 receiveWindow,
                 ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Multiple New Orders
+        /// <summary>
+        /// Place multiple orders in one call
+        /// </summary>
+        /// <param name="orders">The orders to place</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Returns a list of call results, one for each order. The order the results are in is the order the orders were sent</returns>
+        public WebCallResult<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>> PlaceMultipleOrders(
+            BinanceFuturesBatchOrder[] orders,
+            int? receiveWindow = null,
+            CancellationToken ct = default) => PlaceMultipleOrdersAsync(orders, receiveWindow, ct).Result;
+
+        /// <summary>
+        /// Place multiple orders in one call
+        /// </summary>
+        /// <param name="orders">The orders to place</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Returns a list of call results, one for each order. The order the results are in is the order the orders were sent</returns>
+        public async Task<WebCallResult<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>> PlaceMultipleOrdersAsync(
+            BinanceFuturesBatchOrder[] orders,
+            int? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            if(orders.Length <= 0 || orders.Length > 5)
+                throw new ArgumentException("Order list should be at least 1 and max 5 orders");
+
+            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            if (tradeRulesBehaviour != TradeRulesBehaviour.None)
+            {
+                foreach (var order in orders)
+                {
+                    var rulesCheck = await CheckTradeRules(order.Symbol, order.Quantity, order.Price, order.Type, ct).ConfigureAwait(false);
+                    if (!rulesCheck.Passed)
+                    {
+                        log.Write(LogVerbosity.Warning, rulesCheck.ErrorMessage!);
+                        return new WebCallResult<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>(null, null, null,
+                            new ArgumentError(rulesCheck.ErrorMessage!));
+                    }
+
+                    order.Quantity = rulesCheck.Quantity;
+                    order.Price = rulesCheck.Price;
+                }
+            }
+            
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", GetTimestamp() }
+            };
+
+            var parameterOrders = new Dictionary<string, object>[orders.Length];
+            int i = 0;
+            foreach (var order in orders)
+            {
+                var orderParameters = new Dictionary<string, object>()
+                {
+                    { "symbol", order.Symbol },
+                    { "side", JsonConvert.SerializeObject(order.Side, new OrderSideConverter(false)) },
+                    { "type", JsonConvert.SerializeObject(order.Type, new OrderTypeConverter(false)) },
+                    { "newOrderRespType", "RESULT" }
+                };
+                
+                orderParameters.AddOptionalParameter("quantity", order.Quantity?.ToString(CultureInfo.InvariantCulture));
+                orderParameters.AddOptionalParameter("newClientOrderId", order.NewClientOrderId);
+                orderParameters.AddOptionalParameter("price", order.Price?.ToString(CultureInfo.InvariantCulture));
+                orderParameters.AddOptionalParameter("timeInForce", order.TimeInForce == null ? null : JsonConvert.SerializeObject(order.TimeInForce, new TimeInForceConverter(false)));
+                orderParameters.AddOptionalParameter("positionSide", order.PositionSide == null ? null : JsonConvert.SerializeObject(order.PositionSide, new PositionSideConverter(false)));
+                orderParameters.AddOptionalParameter("stopPrice", order.StopPrice?.ToString(CultureInfo.InvariantCulture));
+                orderParameters.AddOptionalParameter("activationPrice", order.ActivationPrice?.ToString(CultureInfo.InvariantCulture));
+                orderParameters.AddOptionalParameter("callbackRate", order.CallbackRate?.ToString(CultureInfo.InvariantCulture));
+                orderParameters.AddOptionalParameter("workingType", order.WorkingType == null ? null : JsonConvert.SerializeObject(order.WorkingType, new WorkingTypeConverter(false)));
+                orderParameters.AddOptionalParameter("reduceOnly", order.ReduceOnly);
+                parameterOrders[i] = orderParameters;
+                i++;
+            }
+            
+            parameters.Add("batchOrders", JsonConvert.SerializeObject(parameterOrders));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var response = await SendRequest<IEnumerable<BinanceFuturesMultipleOrderPlaceResult>>(GetUrl(MultipleNewOrdersEndpoint, Api, SignedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            if(!response.Success)
+                return WebCallResult<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>.CreateErrorResult(response.ResponseStatusCode, response.ResponseHeaders, response.Error);
+            
+            var result = new List<CallResult<BinanceFuturesPlacedOrder>>();
+            foreach (var item in response.Data)
+            {
+                if(item.Code != 0)
+                    result.Add(new CallResult<BinanceFuturesPlacedOrder>(null, new ServerError(item.Code, item.Message)));
+                else
+                    result.Add(new CallResult<BinanceFuturesPlacedOrder>(item, null));
+            }
+            
+            return new WebCallResult<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>(response.ResponseStatusCode, response.ResponseHeaders, result, null);
         }
 
         #endregion

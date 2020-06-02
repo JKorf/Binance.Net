@@ -19,6 +19,9 @@ using Binance.Net.Objects.Spot.UserData;
 using Binance.Net.Objects.Spot.MarginData;
 using Binance.Net.Objects.Spot;
 using Binance.Net.Enums;
+using Binance.Net.Objects.Futures;
+using Binance.Net.Objects.Futures.FuturesData;
+using CryptoExchange.Net.Logging;
 
 namespace Binance.Net.UnitTests
 {
@@ -723,6 +726,43 @@ namespace Binance.Net.UnitTests
             // assert
             Assert.IsTrue(result.Success);
             Assert.IsTrue(TestHelpers.AreEqual(order, result.Data));
+        }
+
+        [TestCase]
+        public void PlaceMultipleOrders_Should_RespondWithResultList()
+        {
+            // arrange
+            var response =
+                "[\r\n    {\r\n        \"clientOrderId\": \"testOrder\",\r\n        \"cumQuote\": \"0\",\r\n        \"executedQty\": \"0\",\r\n        \"orderId\": 22542179,\r\n        \"avgPrice\": \"0.00000\",\r\n        \"origQty\": \"10\",\r\n        \"price\": \"0\",\r\n        \"reduceOnly\": false,\r\n        \"side\": \"BUY\",\r\n        \"positionSide\": \"SHORT\",\r\n        \"status\": \"NEW\",\r\n        \"stopPrice\": \"9300\",        // please ignore when order type is TRAILING_STOP_MARKET\r\n        \"symbol\": \"BTCUSDT\",\r\n        \"timeInForce\": \"GTC\",\r\n        \"type\": \"TRAILING_STOP_MARKET\",\r\n        \"activatePrice\": \"9020\",    // activation price, only return with TRAILING_STOP_MARKET order\r\n        \"priceRate\": \"0.3\",         // callback rate, only return with TRAILING_STOP_MARKET order\r\n        \"updateTime\": 1566818724722,\r\n        \"workingType\": \"CONTRACT_PRICE\"\r\n    },\r\n    {\r\n        \"code\": -2022, \r\n        \"msg\": \"ReduceOnly Order is rejected.\"\r\n    }\r\n]";
+
+            var client = TestHelpers.CreateFuturesResponseClient(response, new BinanceFuturesClientOptions()
+            {
+                ApiCredentials = new ApiCredentials("Test", "Test"),
+                AutoTimestamp = false,
+                LogVerbosity = LogVerbosity.Debug
+            });
+
+            // act
+            var result = client.PlaceMultipleOrders(new []
+            {
+                new BinanceFuturesBatchOrder()
+                {
+                    Symbol = "Test",
+                    Quantity = 3,
+                    Side = OrderSide.Sell
+                },
+                new BinanceFuturesBatchOrder()
+                {
+                    Symbol = "Test2",
+                    Quantity = 2,
+                    Side = OrderSide.Buy
+                },
+            });
+
+            // Assert
+            Assert.IsTrue(result.Success);
+            Assert.IsTrue(result.Data.First().Success);
+            Assert.IsFalse(result.Data.Skip(1).First().Success);
         }
 
         [TestCase]

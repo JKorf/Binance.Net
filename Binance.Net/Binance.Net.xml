@@ -3071,6 +3071,24 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.PlaceMultipleOrders(Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder[],System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Place multiple orders in one call
+            </summary>
+            <param name="orders">The orders to place</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Returns a list of call results, one for each order. The order the results are in is the order the orders were sent</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.PlaceMultipleOrdersAsync(Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder[],System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Place multiple orders in one call
+            </summary>
+            <param name="orders">The orders to place</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Returns a list of call results, one for each order. The order the results are in is the order the orders were sent</returns>
+        </member>
         <member name="M:Binance.Net.BinanceFuturesClient.GetOrder(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
@@ -8572,6 +8590,24 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.PlaceMultipleOrders(Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder[],System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Place multiple orders in one call
+            </summary>
+            <param name="orders">The orders to place</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Returns a list of call results, one for each order. The order the results are in is the order the orders were sent</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.PlaceMultipleOrdersAsync(Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder[],System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Place multiple orders in one call
+            </summary>
+            <param name="orders">The orders to place</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Returns a list of call results, one for each order. The order the results are in is the order the orders were sent</returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetOrder(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
@@ -10775,6 +10811,76 @@
             Position side
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder">
+            <summary>
+            Parameters for a new futures batch order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder.Symbol">
+            <summary>
+            Symbol of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder.Side">
+            <summary>
+            Side of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder.PositionSide">
+            <summary>
+            Default Both for One-way Mode ; Long or Short for Hedge Mode. It must be sent with Hedge Mode.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder.Type">
+            <summary>
+            Order type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder.TimeInForce">
+            <summary>
+            Time in force
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder.ReduceOnly">
+            <summary>
+            Reduce only, default false
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder.NewClientOrderId">
+            <summary>
+            A unique id among open orders. Automatically generated if not sent.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder.StopPrice">
+            <summary>
+            Used with Stop/StopMarket or TakeProfit/TakeProfitMarket orders.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder.ActivationPrice">
+            <summary>
+            Used with TrailingStopMarket orders, default as the latest price（supporting different workingType)
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder.CallbackRate">
+            <summary>
+            Used with TrailingStopMarket orders, min 0.1, max 4 where 1 for 1%
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder.WorkingType">
+            <summary>
+            Stop price triggered by: Mark or Contract. Default Contract
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder">
             <summary>
             The result of cancel order
@@ -10994,6 +11100,11 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesMarginChangeHistoryResult.Type">
             <summary>
             Direction of the margin change request
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesMultipleOrderPlaceResult">
+            <summary>
+            Extension to be able to deserialize an error response as well
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder">

@@ -226,7 +226,8 @@ namespace Binance.Net
             timestampOffset = options.TimestampOffset;
             defaultReceiveWindow = options.ReceiveWindow;
 
-            postParametersPosition = PostParameters.InUri;
+            postParametersPosition = PostParameters.InBody;
+            requestBodyFormat = RequestBodyFormat.FormData;
         }
         #endregion
 

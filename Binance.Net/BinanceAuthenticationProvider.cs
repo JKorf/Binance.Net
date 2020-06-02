@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Objects;
@@ -28,8 +30,21 @@ namespace Binance.Net
             if (!signed)
                 return parameters;
 
-            var query = parameters.CreateParamString(true, arraySerialization);
-            parameters.Add("signature", ByteToString(encryptor.ComputeHash(Encoding.UTF8.GetBytes(query))));
+            string signData;
+            if (method == HttpMethod.Get || method == HttpMethod.Delete)
+            {
+                signData = parameters.CreateParamString(true, arraySerialization);
+            }
+            else
+            {
+
+                var formData = HttpUtility.ParseQueryString(string.Empty);
+                foreach (var kvp in parameters.OrderBy(p => p.Key))
+                    formData.Add(kvp.Key, kvp.Value.ToString());
+                signData = formData.ToString();
+            }
+
+            parameters.Add("signature", ByteToString(encryptor.ComputeHash(Encoding.UTF8.GetBytes(signData))));
             return parameters;
         }
 
