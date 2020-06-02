@@ -3929,6 +3929,31 @@
         <member name="M:Binance.Net.BinanceFuturesSocketClient.Unsubscribe(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Sockets.SocketSubscription)">
             <inheritdoc />
         </member>
+        <member name="T:Binance.Net.BinanceFuturesSymbolOrderBook">
+            <summary>
+            Implementation for a synchronized order book. After calling Start the order book will sync itself and keep up to date with new data. It will automatically try to reconnect and resync in case of a lost/interrupted connection.
+            Make sure to check the State property to see if the order book is synced.
+            </summary>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSymbolOrderBook.#ctor(System.String,Binance.Net.Objects.Spot.BinanceOrderBookOptions)">
+            <summary>
+            Create a new instance
+            </summary>
+            <param name="symbol">The symbol of the order book</param>
+            <param name="options">The options for the order book</param>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSymbolOrderBook.DoStart">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSymbolOrderBook.DoReset">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSymbolOrderBook.DoResync">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesSymbolOrderBook.Dispose">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.BinanceHelpers">
             <summary>
             Helper methods for the Binance API
