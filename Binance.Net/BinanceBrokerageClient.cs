@@ -78,7 +78,7 @@ namespace Binance.Net
         /// </summary>
         /// <param name="options">The options to use for this client</param>
         public BinanceBrokerageClient(BinanceBrokerageClientOptions options) 
-            : base(options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials, ArrayParametersSerialization.MultipleValues))
+            : base(options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials))
         {
             autoTimestamp = options.AutoTimestamp;
             autoTimestampRecalculationInterval = options.AutoTimestampRecalculationInterval;
@@ -87,6 +87,7 @@ namespace Binance.Net
 
             postParametersPosition = PostParameters.InBody;
             requestBodyFormat = RequestBodyFormat.FormData;
+            arraySerialization = ArrayParametersSerialization.MultipleValues;
             requestBodyEmptyContent = "";
         }
 
@@ -110,7 +111,7 @@ namespace Binance.Net
         /// <param name="apiSecret">The api secret</param>
         public void SetApiCredentials(string apiKey, string apiSecret)
         {
-            SetAuthenticationProvider(new BinanceAuthenticationProvider(new ApiCredentials(apiKey, apiSecret), ArrayParametersSerialization.MultipleValues));
+            SetAuthenticationProvider(new BinanceAuthenticationProvider(new ApiCredentials(apiKey, apiSecret)));
         }
         
         /// <summary>

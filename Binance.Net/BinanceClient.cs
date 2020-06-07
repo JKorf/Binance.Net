@@ -216,10 +216,8 @@ namespace Binance.Net
         /// Create a new instance of BinanceClient using provided options
         /// </summary>
         /// <param name="options">The options to use for this client</param>
-        public BinanceClient(BinanceClientOptions options) : base(options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials, ArrayParametersSerialization.MultipleValues))
+        public BinanceClient(BinanceClientOptions options) : base(options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials))
         {
-            arraySerialization = ArrayParametersSerialization.MultipleValues;
-
             autoTimestamp = options.AutoTimestamp;
             tradeRulesBehaviour = options.TradeRulesBehaviour;
             tradeRulesUpdateInterval = options.TradeRulesUpdateInterval;
@@ -227,6 +225,7 @@ namespace Binance.Net
             timestampOffset = options.TimestampOffset;
             defaultReceiveWindow = options.ReceiveWindow;
 
+            arraySerialization = ArrayParametersSerialization.MultipleValues;
             postParametersPosition = PostParameters.InBody;
             requestBodyFormat = RequestBodyFormat.FormData;
             requestBodyEmptyContent = "";
@@ -252,7 +251,7 @@ namespace Binance.Net
         /// <param name="apiSecret">The api secret</param>
         public void SetApiCredentials(string apiKey, string apiSecret)
         {
-            SetAuthenticationProvider(new BinanceAuthenticationProvider(new ApiCredentials(apiKey, apiSecret), ArrayParametersSerialization.MultipleValues));
+            SetAuthenticationProvider(new BinanceAuthenticationProvider(new ApiCredentials(apiKey, apiSecret)));
         }
 
         #region Market Data Endpoints
@@ -999,7 +998,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("addressTag", addressTag);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await SendRequest<BinanceWithdrawalPlaced>(GetUrl(WithdrawEndpoint, WithdrawalApi, WithdrawalVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            var result = await SendRequest<BinanceWithdrawalPlaced>(GetUrl(WithdrawEndpoint, WithdrawalApi, WithdrawalVersion), HttpMethod.Post, ct, parameters, true, true, PostParameters.InUri).ConfigureAwait(false);
             if (!result || result.Data == null)
                 return result;
 
@@ -1581,7 +1580,7 @@ namespace Binance.Net
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await SendRequest<BinanceSubAccountTransferResult>(GetUrl(TransferSubAccountEndpoint, WithdrawalApi, WithdrawalVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequest<BinanceSubAccountTransferResult>(GetUrl(TransferSubAccountEndpoint, WithdrawalApi, WithdrawalVersion), HttpMethod.Post, ct, parameters, true, true, PostParameters.InUri).ConfigureAwait(false);
         }
 
         #endregion
@@ -1623,7 +1622,7 @@ namespace Binance.Net
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await SendRequest<BinanceSubAccountAsset>(GetUrl(SubAccountAssetsEndpoint, WithdrawalApi, WithdrawalVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            var result = await SendRequest<BinanceSubAccountAsset>(GetUrl(SubAccountAssetsEndpoint, WithdrawalApi, WithdrawalVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result.Success)
                 return WebCallResult<IEnumerable<BinanceBalance>>.CreateErrorResult(result.ResponseStatusCode,
                     result.ResponseHeaders, result.Error!);

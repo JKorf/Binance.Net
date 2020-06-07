@@ -122,10 +122,8 @@ namespace Binance.Net
         /// Create a new instance of BinanceFuturesClient using provided options
         /// </summary>
         /// <param name="options">The options to use for this client</param>
-        public BinanceFuturesClient(BinanceFuturesClientOptions options) : base(options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials, ArrayParametersSerialization.MultipleValues))
+        public BinanceFuturesClient(BinanceFuturesClientOptions options) : base(options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials))
         {
-            arraySerialization = ArrayParametersSerialization.MultipleValues;
-
             autoTimestamp = options.AutoTimestamp;
             tradeRulesBehaviour = options.TradeRulesBehaviour;
             tradeRulesUpdateInterval = options.TradeRulesUpdateInterval;
@@ -133,6 +131,7 @@ namespace Binance.Net
             timestampOffset = options.TimestampOffset;
             defaultReceiveWindow = options.ReceiveWindow;
 
+            arraySerialization = ArrayParametersSerialization.MultipleValues;
             postParametersPosition = PostParameters.InBody;
             requestBodyFormat = RequestBodyFormat.FormData;
             requestBodyEmptyContent = "";
@@ -158,7 +157,7 @@ namespace Binance.Net
         /// <param name="apiSecret">The api secret</param>
         public void SetApiCredentials(string apiKey, string apiSecret)
         {
-            SetAuthenticationProvider(new BinanceAuthenticationProvider(new ApiCredentials(apiKey, apiSecret), ArrayParametersSerialization.MultipleValues));
+            SetAuthenticationProvider(new BinanceAuthenticationProvider(new ApiCredentials(apiKey, apiSecret)));
         }
 
         #region Market Data Endpoints
