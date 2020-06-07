@@ -148,6 +148,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 5.1.5 - 07 Jun 2020
+	* Fixed serialization/encryption bug
+
 * Version 5.1.4 - 02 Jun 2020
 	* Fixed empty request bug
 
