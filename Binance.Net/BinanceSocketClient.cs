@@ -17,6 +17,7 @@ using Binance.Net.Objects.Spot.MarketStream;
 using Binance.Net.Objects.Spot.UserStream;
 using Binance.Net.Objects.Spot;
 using Binance.Net.Enums;
+using System.Globalization;
 
 namespace Binance.Net
 {
@@ -130,7 +131,7 @@ namespace Binance.Net
                 symbol.ValidateBinanceSymbol();
 
             var handler = new Action<BinanceCombinedStream<BinanceStreamAggregatedTrade>>(data => onMessage(data.Data));
-            symbols = symbols.Select(a => a.ToLower() + AggregatedTradesStreamEndpoint).ToArray();
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + AggregatedTradesStreamEndpoint).ToArray();
             return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
         }
 
@@ -175,8 +176,8 @@ namespace Binance.Net
                 symbol.ValidateBinanceSymbol();
 
             var handler = new Action<BinanceCombinedStream<BinanceStreamTrade>>(data => onMessage(data.Data));
-            symbols = symbols.Select(a => a.ToLower() + TradesStreamEndpoint).ToArray();
-            return await Subscribe(String.Join("/", symbols), true, handler).ConfigureAwait(false);
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + TradesStreamEndpoint).ToArray();
+            return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
         }
 
         #endregion
@@ -225,7 +226,7 @@ namespace Binance.Net
                 symbol.ValidateBinanceSymbol();
 
             var handler = new Action<BinanceCombinedStream<BinanceStreamKlineData>>(data => onMessage(data.Data));
-            symbols = symbols.Select(a => a.ToLower() + KlineStreamEndpoint + "_" + JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ToArray();
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + KlineStreamEndpoint + "_" + JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ToArray();
             return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
         }
 
@@ -271,7 +272,7 @@ namespace Binance.Net
                 symbol.ValidateBinanceSymbol();
 
             var handler = new Action<BinanceCombinedStream<BinanceStreamMiniTick>>(data => onMessage(data.Data));
-            symbols = symbols.Select(a => a.ToLower() + SymboMiniTickerStreamEndpoint).ToArray();
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + SymboMiniTickerStreamEndpoint).ToArray();
 
             return await Subscribe(String.Join("/", symbols), false, handler).ConfigureAwait(false);
         }
@@ -338,7 +339,7 @@ namespace Binance.Net
                 symbol.ValidateBinanceSymbol();
 
             var handler = new Action<BinanceCombinedStream<BinanceStreamTick>>(data => onMessage(data.Data));
-            symbols = symbols.Select(a => a.ToLower() + SymbolTickerStreamEndpoint).ToArray();
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + SymbolTickerStreamEndpoint).ToArray();
 
             return await Subscribe(String.Join("/", symbols), true, handler).ConfigureAwait(false);
         }
@@ -405,7 +406,7 @@ namespace Binance.Net
                 symbol.ValidateBinanceSymbol();
 
             var handler = new Action<BinanceCombinedStream<BinanceStreamBookPrice>>(data => onMessage(data.Data));
-            symbols = symbols.Select(a => a.ToLower() + BookTickerStreamEndpoint).ToArray();
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + BookTickerStreamEndpoint).ToArray();
             return await Subscribe(String.Join("/", symbols), true, handler).ConfigureAwait(false);
         }
 
@@ -487,7 +488,7 @@ namespace Binance.Net
                 onMessage(data.Data);
             });
 
-            symbols = symbols.Select(a => a.ToLower() + PartialBookDepthStreamEndpoint + levels + (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + PartialBookDepthStreamEndpoint + levels + (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
             return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
         }
 
@@ -537,7 +538,7 @@ namespace Binance.Net
 
             updateInterval?.ValidateIntValues(nameof(updateInterval), 100, 1000);
             var handler = new Action<BinanceCombinedStream<BinanceOrderBook>>(data => onMessage(data.Data));
-            symbols = symbols.Select(a => a.ToLower() + DepthStreamEndpoint + (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + DepthStreamEndpoint + (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
             return await Subscribe(String.Join("/", symbols), true, handler).ConfigureAwait(false);
         }
 

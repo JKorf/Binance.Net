@@ -763,7 +763,7 @@ namespace Binance.Net
         {
             var offset = autoTimestamp ? calculatedTimeOffset : 0;
             offset += timestampOffset.TotalMilliseconds;
-            return ToUnixTimestamp(DateTime.UtcNow.AddMilliseconds(offset)).ToString();
+            return ToUnixTimestamp(DateTime.UtcNow.AddMilliseconds(offset)).ToString(CultureInfo.InvariantCulture);
         }
         
         #endregion
