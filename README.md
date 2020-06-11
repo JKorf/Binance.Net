@@ -148,6 +148,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 5.1.6  - 11 Jun 2020
+	* Fixed subscribe error on symbols with an `I` caused by unset culture info
+
 * Version 5.1.5 - 07 Jun 2020
 	* Fixed serialization/encryption bug
 
