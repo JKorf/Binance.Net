@@ -15,11 +15,18 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Symbol for the resulting income history, may be null if not associated with a trading pair
         /// </summary>
         public string? Symbol { get; set; }
+
+        /// <summary>
+        /// Type of income as string
+        /// </summary>
+        [JsonProperty("incomeType")]
+        public string? IncomeTypeString { get; set; }
+
         /// <summary>
         /// Type of income
         /// </summary>
-        [JsonProperty("incomeType"), JsonConverter(typeof(IncomeTypeConverter))]
-        public IncomeType IncomeType { get; set; }
+        public IncomeType? IncomeType => new IncomeTypeConverter().ReadString(IncomeTypeString);
+
         /// <summary>
         /// Amount of income
         /// </summary>

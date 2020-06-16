@@ -1638,7 +1638,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The income history for the futures account</returns>
-        public WebCallResult<IEnumerable<BinanceFuturesIncomeHistory>> GetIncomeHistory(string? symbol = null, IncomeType? incomeType = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default) => GetIncomeHistoryAsync(symbol, incomeType, startTime, endTime, limit, receiveWindow, ct).Result;
+        public WebCallResult<IEnumerable<BinanceFuturesIncomeHistory>> GetIncomeHistory(string? symbol = null, string? incomeType = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default) => GetIncomeHistoryAsync(symbol, incomeType, startTime, endTime, limit, receiveWindow, ct).Result;
 
         /// <summary>
         /// Gets the income history for the futures account
@@ -1651,7 +1651,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The income history for the futures account</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceFuturesIncomeHistory>>> GetIncomeHistoryAsync(string? symbol = null, IncomeType? incomeType = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesIncomeHistory>>> GetIncomeHistoryAsync(string? symbol = null, string? incomeType = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             symbol?.ValidateBinanceSymbol();
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);
@@ -1664,7 +1664,7 @@ namespace Binance.Net
                 { "timestamp", GetTimestamp() }
             };
             parameters.AddOptionalParameter("symbol", symbol);
-            parameters.AddOptionalParameter("incomeType", incomeType.HasValue ? JsonConvert.SerializeObject(incomeType, new IncomeTypeConverter(false)) : null);
+            parameters.AddOptionalParameter("incomeType", incomeType != null ? JsonConvert.SerializeObject(incomeType, new IncomeTypeConverter(false)) : null);
             parameters.AddOptionalParameter("startTime", startTime.HasValue ? JsonConvert.SerializeObject(startTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
