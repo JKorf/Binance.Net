@@ -142,7 +142,7 @@ namespace Binance.Net.Objects.Spot
         /// </summary>
         /// <param name="limit">The top amount of results to keep in sync. If for example limit=10 is used, the order book will contain the 10 best bids and 10 best asks. Leaving this null will sync the full order book</param>
         /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
-        public BinanceOrderBookOptions(int? limit = null, int? updateInterval = null): base("Binance", limit == null)
+        public BinanceOrderBookOptions(int? limit = null, int? updateInterval = null): base("Binance", limit == null, false)
         {
             Limit = limit;
             UpdateInterval = updateInterval;

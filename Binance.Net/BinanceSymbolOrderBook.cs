@@ -15,7 +15,6 @@ namespace Binance.Net
     {
         private readonly BinanceClient restClient;
         private readonly BinanceSocketClient socketClient;
-        private readonly int? limit;
         private readonly int? updateInterval;
 
         /// <summary>
@@ -26,7 +25,7 @@ namespace Binance.Net
         public BinanceSymbolOrderBook(string symbol, BinanceOrderBookOptions? options = null) : base(symbol, options ?? new BinanceOrderBookOptions())
         {
             symbol.ValidateBinanceSymbol();
-            limit = options?.Limit;
+            Levels = options?.Limit;
             updateInterval = options?.UpdateInterval;
             restClient = new BinanceClient();
             socketClient = new BinanceSocketClient();
@@ -36,18 +35,18 @@ namespace Binance.Net
         protected override async Task<CallResult<UpdateSubscription>> DoStart()
         {
             CallResult<UpdateSubscription> subResult;
-            if (limit == null)
+            if (Levels == null)
                 subResult = await socketClient.SubscribeToOrderBookUpdatesAsync(Symbol, updateInterval, HandleUpdate).ConfigureAwait(false);
             else
-                subResult = await socketClient.SubscribeToPartialOrderBookUpdatesAsync(Symbol, limit.Value, updateInterval, HandleUpdate).ConfigureAwait(false);
+                subResult = await socketClient.SubscribeToPartialOrderBookUpdatesAsync(Symbol, Levels.Value, updateInterval, HandleUpdate).ConfigureAwait(false);
 
             if (!subResult)
                 return new CallResult<UpdateSubscription>(null, subResult.Error);
 
             Status = OrderBookStatus.Syncing;
-            if (limit == null)
+            if (Levels == null)
             {
-                var bookResult = await restClient.GetOrderBookAsync(Symbol, limit ?? 5000).ConfigureAwait(false);
+                var bookResult = await restClient.GetOrderBookAsync(Symbol, Levels ?? 5000).ConfigureAwait(false);
                 if (!bookResult)
                 {
                     await socketClient.UnsubscribeAll().ConfigureAwait(false);
@@ -67,7 +66,7 @@ namespace Binance.Net
 
         private void HandleUpdate(BinanceOrderBook data)
         {
-            if (limit == null)
+            if (Levels == null)
             {
                 UpdateOrderBook(data.FirstUpdateId ?? 0, data.LastUpdateId, data.Bids, data.Asks);
             }
@@ -85,10 +84,10 @@ namespace Binance.Net
         /// <inheritdoc />
         protected override async Task<CallResult<bool>> DoResync()
         {
-            if (limit != null)
+            if (Levels != null)
                 return await WaitForSetOrderBook(10000).ConfigureAwait(false);
 
-            var bookResult = await restClient.GetOrderBookAsync(Symbol, limit ?? 5000).ConfigureAwait(false);
+            var bookResult = await restClient.GetOrderBookAsync(Symbol, Levels ?? 5000).ConfigureAwait(false);
             if (!bookResult)
                 return new CallResult<bool>(false, bookResult.Error);
 
