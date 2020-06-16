@@ -921,7 +921,7 @@ namespace Binance.Net.UnitTests
         {
             // arrange
             // act
-            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"), ArrayParametersSerialization.MultipleValues);
+            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
 
             // assert
             Assert.AreEqual(authProvider.Credentials.Key.GetString(), "TestKey");
@@ -933,11 +933,11 @@ namespace Binance.Net.UnitTests
         public void AddingAuthToUriString_Should_GiveCorrectSignature(string parameters, string signature)
         {
             // arrange
-            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"), ArrayParametersSerialization.MultipleValues);
+            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
             string uri = $"https://test.test-api.com{parameters}";
 
             // act
-            var sign = authProvider.AddAuthenticationToParameters(uri, HttpMethod.Post, new Dictionary<string, object>(), true);
+            var sign = authProvider.AddAuthenticationToParameters(uri, HttpMethod.Post, new Dictionary<string, object>(), true, PostParameters.InBody, ArrayParametersSerialization.MultipleValues);
 
             // assert
             Assert.IsTrue((string)sign.Last().Value == signature);
@@ -947,12 +947,12 @@ namespace Binance.Net.UnitTests
         public void AddingAuthToRequest_Should_AddApiKeyHeader()
         {
             // arrange
-            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"), ArrayParametersSerialization.MultipleValues);
+            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
             var client = new HttpClient();
             var request = new Request(new HttpRequestMessage(HttpMethod.Get, "https://test.test-api.com"), client);
 
             // act
-            var sign = authProvider.AddAuthenticationToHeaders(request.Uri.ToString(), HttpMethod.Get, new Dictionary<string, object>(), true);
+            var sign = authProvider.AddAuthenticationToHeaders(request.Uri.ToString(), HttpMethod.Get, new Dictionary<string, object>(), true, PostParameters.InBody, ArrayParametersSerialization.MultipleValues);
 
             // assert
             Assert.IsTrue(sign.First().Key == "X-MBX-APIKEY" && sign.First().Value == "TestKey");

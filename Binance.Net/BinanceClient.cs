@@ -216,10 +216,8 @@ namespace Binance.Net
         /// Create a new instance of BinanceClient using provided options
         /// </summary>
         /// <param name="options">The options to use for this client</param>
-        public BinanceClient(BinanceClientOptions options) : base(options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials, ArrayParametersSerialization.MultipleValues))
+        public BinanceClient(BinanceClientOptions options) : base(options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials))
         {
-            arraySerialization = ArrayParametersSerialization.MultipleValues;
-
             autoTimestamp = options.AutoTimestamp;
             tradeRulesBehaviour = options.TradeRulesBehaviour;
             tradeRulesUpdateInterval = options.TradeRulesUpdateInterval;
@@ -227,6 +225,7 @@ namespace Binance.Net
             timestampOffset = options.TimestampOffset;
             defaultReceiveWindow = options.ReceiveWindow;
 
+            arraySerialization = ArrayParametersSerialization.MultipleValues;
             postParametersPosition = PostParameters.InBody;
             requestBodyFormat = RequestBodyFormat.FormData;
             requestBodyEmptyContent = "";
@@ -252,7 +251,7 @@ namespace Binance.Net
         /// <param name="apiSecret">The api secret</param>
         public void SetApiCredentials(string apiKey, string apiSecret)
         {
-            SetAuthenticationProvider(new BinanceAuthenticationProvider(new ApiCredentials(apiKey, apiSecret), ArrayParametersSerialization.MultipleValues));
+            SetAuthenticationProvider(new BinanceAuthenticationProvider(new ApiCredentials(apiKey, apiSecret)));
         }
 
         #region Market Data Endpoints
@@ -395,7 +394,7 @@ namespace Binance.Net
             symbol.ValidateBinanceSymbol();
             limit?.ValidateIntValues(nameof(limit), 5, 10, 20, 50, 100, 500, 1000, 5000);
             var parameters = new Dictionary<string, object> { { "symbol", symbol } };
-            parameters.AddOptionalParameter("limit", limit?.ToString());
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             var result = await SendRequest<BinanceOrderBook>(GetUrl(OrderBookEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
             if (result)
                 result.Data.Symbol = symbol;
@@ -428,7 +427,7 @@ namespace Binance.Net
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);
 
             var parameters = new Dictionary<string, object> { { "symbol", symbol } };
-            parameters.AddOptionalParameter("limit", limit?.ToString());
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             return await SendRequest<IEnumerable<BinanceRecentTrade>>(GetUrl(RecentTradesEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
@@ -459,8 +458,8 @@ namespace Binance.Net
             symbol.ValidateBinanceSymbol();
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);
             var parameters = new Dictionary<string, object> { { "symbol", symbol } };
-            parameters.AddOptionalParameter("limit", limit?.ToString());
-            parameters.AddOptionalParameter("fromId", fromId?.ToString());
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("fromId", fromId?.ToString(CultureInfo.InvariantCulture));
 
             return await SendRequest<IEnumerable<BinanceRecentTrade>>(GetUrl(HistoricalTradesEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
@@ -497,10 +496,10 @@ namespace Binance.Net
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);
 
             var parameters = new Dictionary<string, object> { { "symbol", symbol } };
-            parameters.AddOptionalParameter("fromId", fromId?.ToString());
-            parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString() : null);
-            parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
-            parameters.AddOptionalParameter("limit", limit?.ToString());
+            parameters.AddOptionalParameter("fromId", fromId?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
             return await SendRequest<IEnumerable<BinanceAggregatedTrade>>(GetUrl(AggregatedTradesEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
@@ -539,9 +538,9 @@ namespace Binance.Net
                 { "symbol", symbol },
                 { "interval", JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)) }
             };
-            parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString() : null);
-            parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString() : null);
-            parameters.AddOptionalParameter("limit", limit?.ToString());
+            parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
             return await SendRequest<IEnumerable<BinanceKline>>(GetUrl(KlinesEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
@@ -999,7 +998,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("addressTag", addressTag);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await SendRequest<BinanceWithdrawalPlaced>(GetUrl(WithdrawEndpoint, WithdrawalApi, WithdrawalVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            var result = await SendRequest<BinanceWithdrawalPlaced>(GetUrl(WithdrawEndpoint, WithdrawalApi, WithdrawalVersion), HttpMethod.Post, ct, parameters, true, true, PostParameters.InUri).ConfigureAwait(false);
             if (!result || result.Data == null)
                 return result;
 
@@ -1581,7 +1580,7 @@ namespace Binance.Net
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await SendRequest<BinanceSubAccountTransferResult>(GetUrl(TransferSubAccountEndpoint, WithdrawalApi, WithdrawalVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequest<BinanceSubAccountTransferResult>(GetUrl(TransferSubAccountEndpoint, WithdrawalApi, WithdrawalVersion), HttpMethod.Post, ct, parameters, true, true, PostParameters.InUri).ConfigureAwait(false);
         }
 
         #endregion
@@ -1623,7 +1622,7 @@ namespace Binance.Net
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await SendRequest<BinanceSubAccountAsset>(GetUrl(SubAccountAssetsEndpoint, WithdrawalApi, WithdrawalVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            var result = await SendRequest<BinanceSubAccountAsset>(GetUrl(SubAccountAssetsEndpoint, WithdrawalApi, WithdrawalVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result.Success)
                 return WebCallResult<IEnumerable<BinanceBalance>>.CreateErrorResult(result.ResponseStatusCode,
                     result.ResponseHeaders, result.Error!);
@@ -2506,7 +2505,7 @@ namespace Binance.Net
                 { "symbol", symbol },
                 { "timestamp", GetTimestamp() }
             };
-            parameters.AddOptionalParameter("orderId", orderId?.ToString());
+            parameters.AddOptionalParameter("orderId", orderId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -2591,7 +2590,7 @@ namespace Binance.Net
                 { "symbol", symbol },
                 { "timestamp", GetTimestamp() }
             };
-            parameters.AddOptionalParameter("orderId", orderId?.ToString());
+            parameters.AddOptionalParameter("orderId", orderId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
@@ -2676,11 +2675,11 @@ namespace Binance.Net
                 { "symbol", symbol },
                 { "timestamp", GetTimestamp() }
             };
-            parameters.AddOptionalParameter("orderId", orderId?.ToString());
+            parameters.AddOptionalParameter("orderId", orderId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("startTime", startTime.HasValue ? JsonConvert.SerializeObject(startTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("limit", limit?.ToString());
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
             return await SendRequest<IEnumerable<BinanceOrder>>(GetUrl(AllOrdersEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
@@ -2878,7 +2877,7 @@ namespace Binance.Net
             {
                 { "timestamp", GetTimestamp() }
             };
-            parameters.AddOptionalParameter("orderListId", orderListId?.ToString());
+            parameters.AddOptionalParameter("orderListId", orderListId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("listClientOrderId", listClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
@@ -3429,7 +3428,7 @@ namespace Binance.Net
                 { "symbol", symbol },
                 { "timestamp", GetTimestamp() }
             };
-            parameters.AddOptionalParameter("orderId", orderId?.ToString());
+            parameters.AddOptionalParameter("orderId", orderId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -3530,7 +3529,7 @@ namespace Binance.Net
                 { "asset", asset },
                 { "timestamp", GetTimestamp() }
             };
-            parameters.AddOptionalParameter("txId", transactionId?.ToString());
+            parameters.AddOptionalParameter("txId", transactionId?.ToString(CultureInfo.InvariantCulture));
 
             // TxId or startTime must be sent. txId takes precedence.
             if (!transactionId.HasValue)
@@ -3543,8 +3542,8 @@ namespace Binance.Net
             }
 
             parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
-            parameters.AddOptionalParameter("current", current?.ToString());
-            parameters.AddOptionalParameter("size", limit?.ToString());
+            parameters.AddOptionalParameter("current", current?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("size", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await SendRequest<BinanceQueryRecords<BinanceLoan>>(GetUrl(GetLoanEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
@@ -3592,7 +3591,7 @@ namespace Binance.Net
                 { "asset", asset },
                 { "timestamp", GetTimestamp() }
             };
-            parameters.AddOptionalParameter("txId", transactionId?.ToString());
+            parameters.AddOptionalParameter("txId", transactionId?.ToString(CultureInfo.InvariantCulture));
 
             // TxId or startTime must be sent. txId takes precedence.
             if (!transactionId.HasValue)
@@ -3605,8 +3604,8 @@ namespace Binance.Net
             }
 
             parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
-            parameters.AddOptionalParameter("current", current?.ToString());
-            parameters.AddOptionalParameter("size", size?.ToString());
+            parameters.AddOptionalParameter("current", current?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("size", size?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await SendRequest<BinanceQueryRecords<BinanceRepay>>(GetUrl(GetRepayEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
@@ -3778,7 +3777,7 @@ namespace Binance.Net
                 { "symbol", symbol },
                 { "timestamp", GetTimestamp() }
             };
-            parameters.AddOptionalParameter("orderId", orderId?.ToString());
+            parameters.AddOptionalParameter("orderId", orderId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
@@ -3863,11 +3862,11 @@ namespace Binance.Net
                 { "symbol", symbol },
                 { "timestamp", GetTimestamp() }
             };
-            parameters.AddOptionalParameter("orderId", orderId?.ToString());
+            parameters.AddOptionalParameter("orderId", orderId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("startTime", startTime.HasValue ? JsonConvert.SerializeObject(startTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("limit", limit?.ToString());
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
             return await SendRequest<IEnumerable<BinanceOrder>>(GetUrl(AllMarginOrdersEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
@@ -4250,7 +4249,7 @@ namespace Binance.Net
                 { "timestamp", GetTimestamp() }
             };
             parameters.AddOptionalParameter("status", status == null? null: JsonConvert.SerializeObject(status, new ProductStatusConverter(false)));
-            parameters.AddOptionalParameter("featured", featured?.ToString());
+            parameters.AddOptionalParameter("featured", featured?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await SendRequest<IEnumerable<BinanceSavingsProduct>>(GetUrl(FlexibleProductListEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
@@ -5185,7 +5184,7 @@ namespace Binance.Net
         {
             var offset = autoTimestamp ? calculatedTimeOffset : 0;
             offset += timestampOffset.TotalMilliseconds;
-            return ToUnixTimestamp(DateTime.UtcNow.AddMilliseconds(offset)).ToString();
+            return ToUnixTimestamp(DateTime.UtcNow.AddMilliseconds(offset)).ToString(CultureInfo.InvariantCulture);
         }
 
         private async Task<WebCallResult<DateTime>> CheckAutoTimestamp(CancellationToken ct)
