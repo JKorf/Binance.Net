@@ -3403,7 +3403,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of trades</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.GetIncomeHistory(System.String,System.Nullable{Binance.Net.Enums.IncomeType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.GetIncomeHistory(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets the income history for the futures account
             </summary>
@@ -3416,7 +3416,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The income history for the futures account</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.GetIncomeHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.IncomeType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.GetIncomeHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets the income history for the futures account
             </summary>
@@ -8880,7 +8880,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of Positions</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetIncomeHistory(System.String,System.Nullable{Binance.Net.Enums.IncomeType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetIncomeHistory(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets the income history for the futures account
             </summary>
@@ -8893,7 +8893,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The income history for the futures account</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetIncomeHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.IncomeType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetIncomeHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets the income history for the futures account
             </summary>
@@ -11060,6 +11060,11 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesIncomeHistory.Symbol">
             <summary>
             Symbol for the resulting income history, may be null if not associated with a trading pair
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesIncomeHistory.IncomeTypeString">
+            <summary>
+            Type of income as string
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesIncomeHistory.IncomeType">
