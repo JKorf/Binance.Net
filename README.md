@@ -148,6 +148,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 5.1.8 - 21 Jun 2020
+    * Updated CryptoExchange
+
 * Version 5.1.7 - 16 Jun 2020
     * Changed IncomeType to string, Update CryptoExchange.Net
 
