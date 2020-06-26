@@ -3153,6 +3153,24 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for canceled order</returns>
         </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.CancelAllOrders(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Cancels all open orders
+            </summary>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Id's for canceled order</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.CancelAllOrdersAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Cancels all open orders
+            </summary>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Id's for canceled order</returns>
+        </member>
         <member name="M:Binance.Net.BinanceFuturesClient.CancelAllOrdersAfterTimeout(System.String,System.TimeSpan,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Cancel all open orders of the specified symbol at the end of the specified countdown. This rest endpoint means to ensure your open orders are canceled in case of an outage. The endpoint should be called repeatedly as heartbeats
@@ -10915,6 +10933,21 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder.WorkingType">
             <summary>
             Stop price triggered by: Mark or Contract. Default Contract
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelAllOrders">
+            <summary>
+            The result of cancel all orders
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelAllOrders.Code">
+            <summary>
+            The execution code
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelAllOrders.Message">
+            <summary>
+            The execution message
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder">
