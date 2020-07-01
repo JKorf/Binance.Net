@@ -12,6 +12,16 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using CryptoExchange.Net.Objects;
+using Binance.Net.Objects.Spot.SpotData;
+using Binance.Net.Objects.Spot.MarketData;
+using Binance.Net.Objects.Spot.WalletData;
+using Binance.Net.Objects.Spot.UserData;
+using Binance.Net.Objects.Spot.MarginData;
+using Binance.Net.Objects.Spot;
+using Binance.Net.Enums;
+using Binance.Net.Objects.Futures;
+using Binance.Net.Objects.Futures.FuturesData;
+using CryptoExchange.Net.Logging;
 
 namespace Binance.Net.UnitTests
 {
@@ -44,21 +54,21 @@ namespace Binance.Net.UnitTests
                 AskPrice = 0.123m,
                 BidPrice = 0.456m,
                 CloseTime = new DateTime(2017, 01, 02),
-                FirstId = 10000000000,
+                FirstTradeId = 10000000000,
                 HighPrice = 0.789m,
-                LastId = 20000000000,
-                LastPrice = 1.123m,
+                LastTradeId = 20000000000,
+                PrevDayClosePrice = 1.123m,
                 LowPrice = 1.456m,
                 OpenPrice = 1.789m,
                 OpenTime = new DateTime(2017, 01, 01),
-                PreviousClosePrice = 2.123m,
+                LastPrice = 2.123m,
                 PriceChange = 2.456m,
                 PriceChangePercent = 2.789m,
-                Trades = 123,
-                Volume = 3.123m,
+                TotalTrades = 123,
+                TotalTradedBaseAssetVolume = 3.123m,
                 AskQuantity = 3.456m,
                 BidQuantity = 3.789m,
-                QuoteVolume = 4.123m,
+                TotalTradedQuoteAssetVolume = 4.123m,
                 Symbol = "BNBBTC",
                 WeightedAveragePrice = 3.456m
             };
@@ -163,7 +173,7 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsTrue(result.Success);
-            Assert.IsTrue(TestHelpers.AreEqual(accountInfo, result.Data, "Balances"));
+            Assert.IsTrue(TestHelpers.AreEqual(accountInfo, result.Data, "Balances", "Permissions"));
             Assert.IsTrue(TestHelpers.AreEqual(accountInfo.Balances.ToList()[0], result.Data.Balances.ToList()[0]));
             Assert.IsTrue(TestHelpers.AreEqual(accountInfo.Balances.ToList()[1], result.Data.Balances.ToList()[1]));
         }
@@ -174,26 +184,26 @@ namespace Binance.Net.UnitTests
             // arrange
             var trades = new[]
             {
-                new BinanceAggregatedTrades()
+                new BinanceAggregatedTrade()
                 {
                     AggregateTradeId = 1,
-                    BuyerWasMaker = true,
+                    BuyerIsMaker = true,
                     FirstTradeId = 10000000000,
                     LastTradeId = 200000000000,
                     Price = 1.1m,
                     Quantity = 2.2m,
-                    Timestamp = new DateTime(2017, 1, 1),
+                    TradeTime = new DateTime(2017, 1, 1),
                     WasBestPriceMatch = true
                 },
-                new BinanceAggregatedTrades()
+                new BinanceAggregatedTrade()
                 {
                     AggregateTradeId = 2,
-                    BuyerWasMaker = false,
+                    BuyerIsMaker = false,
                     FirstTradeId = 30000000000,
                     LastTradeId = 400000000000,
                     Price = 3.3m,
                     Quantity = 4.4m,
-                    Timestamp = new DateTime(2016, 1, 1),
+                    TradeTime = new DateTime(2016, 1, 1),
                     WasBestPriceMatch = false
                 }
             };
@@ -219,18 +229,18 @@ namespace Binance.Net.UnitTests
             {
                 new BinanceBookPrice()
                 {
-                    AskPrice = 0.1m,
-                    AskQuantity = 0.2m,
-                    BidPrice = 0.3m,
-                    BidQuantity = 0.4m,
+                    BestAskPrice = 0.1m,
+                    BestAskQuantity = 0.2m,
+                    BestBidPrice = 0.3m,
+                    BestBidQuantity = 0.4m,
                     Symbol = "BNBBTC"
                 },
                 new BinanceBookPrice()
                 {
-                    AskPrice = 0.5m,
-                    AskQuantity = 0.6m,
-                    BidPrice = 0.7m,
-                    BidQuantity = 0.8m,
+                    BestAskPrice = 0.5m,
+                    BestAskQuantity = 0.6m,
+                    BestBidPrice = 0.7m,
+                    BestBidQuantity = 0.8m,
                     Symbol = "ETHBTC"
                 }
             };
@@ -257,32 +267,32 @@ namespace Binance.Net.UnitTests
                 new BinanceOrder()
                 {
                     ClientOrderId = "order1",
-                    ExecutedQuantity = 0.1m,
+                    QuantityFilled = 0.1m,
                     IcebergQuantity = 0.2m,
                     OrderId = 100000000000,
-                    OriginalQuantity = 0.3m,
+                    Quantity = 0.3m,
                     Price = 0.4m,
                     Side = OrderSide.Buy,
                     Status = OrderStatus.Canceled,
                     StopPrice = 0.5m,
                     Symbol = "BNBBTC",
-                    Time = new DateTime(2017, 1, 1),
+                    CreateTime = new DateTime(2017, 1, 1),
                     TimeInForce = TimeInForce.GoodTillCancel,
                     Type = OrderType.Limit
                 },
                 new BinanceOrder()
                 {
                     ClientOrderId = "order2",
-                    ExecutedQuantity = 0.6m,
+                    QuantityFilled = 0.6m,
                     IcebergQuantity = 0.7m,
                     OrderId = 200000000000,
-                    OriginalQuantity = 0.8m,
+                    Quantity = 0.8m,
                     Price = 0.9m,
                     Side = OrderSide.Sell,
                     Status = OrderStatus.PartiallyFilled,
                     StopPrice = 1.0m,
                     Symbol = "ETHBTC",
-                    Time = new DateTime(2017, 1, 10),
+                    CreateTime = new DateTime(2017, 1, 10),
                     TimeInForce = TimeInForce.ImmediateOrCancel,
                     Type = OrderType.Market
                 }
@@ -338,25 +348,21 @@ namespace Binance.Net.UnitTests
         public void GetDepositHistory_Should_RespondWithDepositHistory()
         {
             // arrange
-            var history = new BinanceDepositList()
+            var history = new List<BinanceDeposit>()
             {
-                Success = true,
-                List = new List<BinanceDeposit>()
+                new BinanceDeposit()
                 {
-                    new BinanceDeposit()
-                    {
-                        Amount = 1.1m,
-                        Asset = "BNB",
-                        InsertTime = new DateTime(2017, 1, 1),
-                        Status = DepositStatus.Pending
-                    },
-                    new BinanceDeposit()
-                    {
-                        Amount = 2.2m,
-                        Asset = "BTC",
-                        InsertTime = new DateTime(2016, 1, 1),
-                        Status = DepositStatus.Success
-                    }
+                    Amount = 1.1m,
+                    Coin = "BNB",
+                    InsertTime = new DateTime(2017, 1, 1),
+                    Status = DepositStatus.Pending
+                },
+                new BinanceDeposit()
+                {
+                    Amount = 2.2m,
+                    Coin = "BTC",
+                    InsertTime = new DateTime(2016, 1, 1),
+                    Status = DepositStatus.Success
                 }
             };
 
@@ -371,9 +377,9 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsTrue(result.Success);
-            Assert.AreEqual(result.Data.Count(), history.List.Count());
-            Assert.IsTrue(TestHelpers.AreEqual(history.List.ToList()[0], result.Data.ToList()[0]));
-            Assert.IsTrue(TestHelpers.AreEqual(history.List.ToList()[1], result.Data.ToList()[1]));
+            Assert.AreEqual(result.Data.Count(), history.Count());
+            Assert.IsTrue(TestHelpers.AreEqual(history.ToList()[0], result.Data.ToList()[0]));
+            Assert.IsTrue(TestHelpers.AreEqual(history.ToList()[1], result.Data.ToList()[1]));
         }
 
         [TestCase]
@@ -449,7 +455,7 @@ namespace Binance.Net.UnitTests
                     Price = 0.3m,
                     Quantity = 0.4m,
                     Symbol = "BNBUSDT",
-                    Time =  new DateTime(2017, 1, 1)
+                    TradeTime =  new DateTime(2017, 1, 1)
                 },
                 new BinanceTrade()
                 {
@@ -462,7 +468,7 @@ namespace Binance.Net.UnitTests
                     Price = 0.6m,
                     Quantity = 0.7m,
                     Symbol = "ETHBTC",
-                    Time =  new DateTime(2016, 1, 1)
+                    TradeTime =  new DateTime(2016, 1, 1)
                 }
             };
 
@@ -491,32 +497,32 @@ namespace Binance.Net.UnitTests
                 new BinanceOrder()
                 {
                     ClientOrderId = "order1",
-                    ExecutedQuantity = 0.1m,
+                    QuantityFilled = 0.1m,
                     IcebergQuantity = 0.2m,
                     OrderId = 100000000000,
-                    OriginalQuantity = 0.3m,
+                    Quantity = 0.3m,
                     Price = 0.4m,
                     Side = OrderSide.Buy,
                     Status = OrderStatus.Canceled,
                     StopPrice = 0.5m,
                     Symbol = "BNBBTC",
-                    Time = new DateTime(2017, 1, 1),
+                    CreateTime = new DateTime(2017, 1, 1),
                     TimeInForce = TimeInForce.GoodTillCancel,
                     Type = OrderType.Limit
                 },
                 new BinanceOrder()
                 {
                     ClientOrderId = "order2",
-                    ExecutedQuantity = 0.6m,
+                    QuantityFilled = 0.6m,
                     IcebergQuantity = 0.7m,
                     OrderId = 200000000000,
-                    OriginalQuantity = 0.8m,
+                    Quantity = 0.8m,
                     Price = 0.9m,
                     Side = OrderSide.Sell,
                     Status = OrderStatus.PartiallyFilled,
                     StopPrice = 1.0m,
                     Symbol = "ETHBTC",
-                    Time = new DateTime(2017, 1, 10),
+                    CreateTime = new DateTime(2017, 1, 10),
                     TimeInForce = TimeInForce.ImmediateOrCancel,
                     Type = OrderType.Market
                 }
@@ -620,7 +626,7 @@ namespace Binance.Net.UnitTests
                 ClientOrderId = "test",
                 OrderId = 100000000000,
                 Symbol = "BNBBTC",
-                TransactTime = new DateTime(2017, 1, 1)
+                CreateTime = new DateTime(2017, 1, 1)
             };
 
             var client = TestHelpers.CreateResponseClient(placed, new BinanceClientOptions()
@@ -646,7 +652,7 @@ namespace Binance.Net.UnitTests
                 ClientOrderId = "test",
                 OrderId = 100000000000,
                 Symbol = "BNBBTC",
-                TransactTime = new DateTime(2017, 1, 1)
+                CreateTime = new DateTime(2017, 1, 1)
             };
 
             var client = TestHelpers.CreateResponseClient(placed, new BinanceClientOptions()
@@ -670,16 +676,16 @@ namespace Binance.Net.UnitTests
             var order = new BinanceOrder()
             {
                 ClientOrderId = "order2",
-                ExecutedQuantity = 0.6m,
+                QuantityFilled = 0.6m,
                 IcebergQuantity = 0.7m,
                 OrderId = 200000000000,
-                OriginalQuantity = 0.8m,
+                Quantity = 0.8m,
                 Price = 0.9m,
                 Side = OrderSide.Sell,
                 Status = OrderStatus.PartiallyFilled,
                 StopPrice = 1.0m,
                 Symbol = "ETHBTC",
-                Time = new DateTime(2017, 1, 10),
+                CreateTime = new DateTime(2017, 1, 10),
                 TimeInForce = TimeInForce.ImmediateOrCancel,
                 Type = OrderType.Market
             };
@@ -715,11 +721,48 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Withdraw("BNBBTC", "test", 1);
+            var result = client.Withdraw("BNBBTC", "test", 1, "x");
 
             // assert
             Assert.IsTrue(result.Success);
             Assert.IsTrue(TestHelpers.AreEqual(order, result.Data));
+        }
+
+        [TestCase]
+        public void PlaceMultipleOrders_Should_RespondWithResultList()
+        {
+            // arrange
+            var response =
+                "[\r\n    {\r\n        \"clientOrderId\": \"testOrder\",\r\n        \"cumQuote\": \"0\",\r\n        \"executedQty\": \"0\",\r\n        \"orderId\": 22542179,\r\n        \"avgPrice\": \"0.00000\",\r\n        \"origQty\": \"10\",\r\n        \"price\": \"0\",\r\n        \"reduceOnly\": false,\r\n        \"side\": \"BUY\",\r\n        \"positionSide\": \"SHORT\",\r\n        \"status\": \"NEW\",\r\n        \"stopPrice\": \"9300\",        // please ignore when order type is TRAILING_STOP_MARKET\r\n        \"symbol\": \"BTCUSDT\",\r\n        \"timeInForce\": \"GTC\",\r\n        \"type\": \"TRAILING_STOP_MARKET\",\r\n        \"activatePrice\": \"9020\",    // activation price, only return with TRAILING_STOP_MARKET order\r\n        \"priceRate\": \"0.3\",         // callback rate, only return with TRAILING_STOP_MARKET order\r\n        \"updateTime\": 1566818724722,\r\n        \"workingType\": \"CONTRACT_PRICE\"\r\n    },\r\n    {\r\n        \"code\": -2022, \r\n        \"msg\": \"ReduceOnly Order is rejected.\"\r\n    }\r\n]";
+
+            var client = TestHelpers.CreateFuturesResponseClient(response, new BinanceFuturesClientOptions()
+            {
+                ApiCredentials = new ApiCredentials("Test", "Test"),
+                AutoTimestamp = false,
+                LogVerbosity = LogVerbosity.Debug
+            });
+
+            // act
+            var result = client.PlaceMultipleOrders(new []
+            {
+                new BinanceFuturesBatchOrder()
+                {
+                    Symbol = "Test",
+                    Quantity = 3,
+                    Side = OrderSide.Sell
+                },
+                new BinanceFuturesBatchOrder()
+                {
+                    Symbol = "Test2",
+                    Quantity = 2,
+                    Side = OrderSide.Buy
+                },
+            });
+
+            // Assert
+            Assert.IsTrue(result.Success);
+            Assert.IsTrue(result.Data.First().Success);
+            Assert.IsFalse(result.Data.Skip(1).First().Success);
         }
 
         [TestCase]
@@ -878,7 +921,7 @@ namespace Binance.Net.UnitTests
         {
             // arrange
             // act
-            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"), ArrayParametersSerialization.MultipleValues);
+            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
 
             // assert
             Assert.AreEqual(authProvider.Credentials.Key.GetString(), "TestKey");
@@ -890,11 +933,11 @@ namespace Binance.Net.UnitTests
         public void AddingAuthToUriString_Should_GiveCorrectSignature(string parameters, string signature)
         {
             // arrange
-            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"), ArrayParametersSerialization.MultipleValues);
+            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
             string uri = $"https://test.test-api.com{parameters}";
 
             // act
-            var sign = authProvider.AddAuthenticationToParameters(uri, HttpMethod.Post, new Dictionary<string, object>(), true);
+            var sign = authProvider.AddAuthenticationToParameters(uri, HttpMethod.Post, new Dictionary<string, object>(), true, PostParameters.InBody, ArrayParametersSerialization.MultipleValues);
 
             // assert
             Assert.IsTrue((string)sign.Last().Value == signature);
@@ -904,12 +947,12 @@ namespace Binance.Net.UnitTests
         public void AddingAuthToRequest_Should_AddApiKeyHeader()
         {
             // arrange
-            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"), ArrayParametersSerialization.MultipleValues);
+            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
             var client = new HttpClient();
             var request = new Request(new HttpRequestMessage(HttpMethod.Get, "https://test.test-api.com"), client);
 
             // act
-            var sign = authProvider.AddAuthenticationToHeaders(request.Uri.ToString(), HttpMethod.Get, new Dictionary<string, object>(), true);
+            var sign = authProvider.AddAuthenticationToHeaders(request.Uri.ToString(), HttpMethod.Get, new Dictionary<string, object>(), true, PostParameters.InBody, ArrayParametersSerialization.MultipleValues);
 
             // assert
             Assert.IsTrue(sign.First().Key == "X-MBX-APIKEY" && sign.First().Value == "TestKey");
@@ -993,7 +1036,7 @@ namespace Binance.Net.UnitTests
                 ClientOrderId = "test",
                 OrderId = 100000000000,
                 Symbol = "BNBBTC",
-                TransactTime = new DateTime(2017, 1, 1)
+                CreateTime = new DateTime(2017, 1, 1)
             };
 
             var client = TestHelpers.CreateResponseClient(placed, new BinanceClientOptions()
@@ -1039,7 +1082,6 @@ namespace Binance.Net.UnitTests
         [TestCase("BTCUSDT", true)]
         [TestCase("NANOUSDT", true)]
         [TestCase("NANOAUSDTA", true)]
-        [TestCase("NANOAUSDTAD", false)]
         [TestCase("NANOBTC", true)]
         [TestCase("ETHBTC", true)]
         [TestCase("BEETC", true)]

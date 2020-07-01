@@ -20,8 +20,24 @@ namespace Binance.Net
             if (headers == null)
                 return null;
 
-            var headerValues = headers.SingleOrDefault(s => s.Key == "X-MBX-USED-WEIGHT").Value;
-            if (int.TryParse(headerValues.First(), out var value))
+            var headerValues = headers.SingleOrDefault(s => s.Key.StartsWith("X-MBX-USED-WEIGHT-")).Value;
+            if (headerValues != null && int.TryParse(headerValues.First(), out var value))
+                return value;
+            return null;
+        }
+
+        /// <summary>
+        /// Get the used weight from the response headers
+        /// </summary>
+        /// <param name="headers"></param>
+        /// <returns></returns>
+        public static int? UsedOrderCount(this IEnumerable<KeyValuePair<string, IEnumerable<string>>>? headers)
+        {
+            if (headers == null)
+                return null;
+
+            var headerValues = headers.SingleOrDefault(s => s.Key.StartsWith("X-MBX-ORDER-COUNT-")).Value;
+            if (headerValues != null && int.TryParse(headerValues.First(), out var value))
                 return value;
             return null;
         }
@@ -86,8 +102,8 @@ namespace Binance.Net
             if (string.IsNullOrEmpty(symbolString))
                 throw new ArgumentException("Symbol is not provided");
 
-            if(!Regex.IsMatch(symbolString, "^([A-Z|a-z]{5,10})$"))
-                throw new ArgumentException($"{symbolString} is not a valid Binance symbol. Should be [QuoteCurrency][BaseCurrency], e.g. BTCUSDT");
+            if(!Regex.IsMatch(symbolString, "^([A-Z|a-z]{5,})$"))
+                throw new ArgumentException($"{symbolString} is not a valid Binance symbol. Should be [BaseCurrency][QuoteCurrency], e.g. BTCUSDT");
         }
     }
 }

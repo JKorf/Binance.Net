@@ -10,6 +10,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Interfaces;
 using Binance.Net.Objects;
+using Binance.Net.Objects.Futures;
+using Binance.Net.Objects.Spot;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Logging;
@@ -88,6 +90,28 @@ namespace Binance.Net.UnitTests.TestImplementations
         {
             var client = (BinanceClient)CreateClient(options);
             SetResponse(client, JsonConvert.SerializeObject(response));
+            return client;
+        }
+
+        public static IBinanceFuturesClient CreateFuturesResponseClient(string response, BinanceFuturesClientOptions options = null)
+        {
+            var client = (BinanceFuturesClient)CreateFuturesClient(options);
+            SetResponse(client, response);
+            return client;
+        }
+
+        public static IBinanceFuturesClient CreateFuturesResponseClient<T>(T response, BinanceFuturesClientOptions options = null)
+        {
+            var client = (BinanceFuturesClient)CreateFuturesClient(options);
+            SetResponse(client, JsonConvert.SerializeObject(response));
+            return client;
+        }
+
+        public static IBinanceFuturesClient CreateFuturesClient(BinanceFuturesClientOptions options = null)
+        {
+            IBinanceFuturesClient client;
+            client = options != null ? new BinanceFuturesClient(options) : new BinanceFuturesClient();
+            client.RequestFactory = Mock.Of<IRequestFactory>();
             return client;
         }
 

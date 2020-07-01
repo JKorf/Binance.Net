@@ -1,6 +1,6 @@
-﻿using Binance.Net.Objects;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CryptoExchange.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Converters
 {
@@ -18,8 +18,7 @@ namespace Binance.Net.Converters
             new KeyValuePair<SymbolFilterType, string>(SymbolFilterType.PricePercent, "PERCENT_PRICE"),
             new KeyValuePair<SymbolFilterType, string>(SymbolFilterType.IcebergParts, "ICEBERG_PARTS"),
             new KeyValuePair<SymbolFilterType, string>(SymbolFilterType.MaxNumberOrders, "MAX_NUM_ORDERS"),
-            new KeyValuePair<SymbolFilterType, string>(SymbolFilterType.MaxNumberIcebergOrders, "MAX_NUM_ICEBERG_ORDERS"),
-            new KeyValuePair<SymbolFilterType, string>(SymbolFilterType.MaxNumberAlgorithmicOrders, "MAX_NUM_ALGO_ORDERS")
+            new KeyValuePair<SymbolFilterType, string>(SymbolFilterType.MaxNumberAlgorithmicOrders, "MAX_NUM_ALGO_ORDERS"),
         };
     }
 }
