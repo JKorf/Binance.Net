@@ -3193,6 +3193,28 @@
             <param name="ct">Cancellation token</param>
             <returns>Countdown result</returns>
         </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.CancelMultipleOrders(System.String,System.Collections.Generic.List{System.Int64},System.Collections.Generic.List{System.String},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Cancels muliple orders
+            </summary>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="orderIdList">The list of order ids to cancel</param>
+            <param name="origClientOrderIdList">The list of client order ids to cancel</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Id's for canceled order</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.CancelMultipleOrdersAsync(System.String,System.Collections.Generic.List{System.Int64},System.Collections.Generic.List{System.String},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Cancels muliple orders
+            </summary>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="orderIdList">The list of order ids to cancel</param>
+            <param name="origClientOrderIdList">The list of client order ids to cancel</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Id's for canceled order</returns>
+        </member>
         <member name="M:Binance.Net.BinanceFuturesClient.GetOpenOrders(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Retrieves data for a specific current orders. Either orderId or origClientOrderId should be provided.

@@ -79,6 +79,7 @@ namespace Binance.Net
         private const string MultipleNewOrdersEndpoint = "batchOrders";
         private const string QueryOrderEndpoint = "order";
         private const string CancelOrderEndpoint = "order";
+        private const string CancelMultipleOrdersEndpoint = "batchOrders";
         private const string CancelAllOrdersEndpoint = "allOpenOrders";
         private const string OpenOrderEndpoint = "openOrder";
         private const string OpenOrdersEndpoint = "openOrders";
@@ -1198,7 +1199,60 @@ namespace Binance.Net
 
         #endregion
 
-        #region Cancel Multiple Orders [NOT AVAILABLE YET]
+
+        #region Cancel Multiple Orders
+        /// <summary>
+        /// Cancels muliple orders
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="orderIdList">The list of order ids to cancel</param>
+        /// <param name="origClientOrderIdList">The list of client order ids to cancel</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Id's for canceled order</returns>
+        public WebCallResult<List<BinanceFuturesCancelOrder>> CancelMultipleOrders(string symbol, List<long>? orderIdList = null, List<string>? origClientOrderIdList = null, long? receiveWindow = null, CancellationToken ct = default) => CancelMultipleOrdersAsync(symbol, orderIdList, origClientOrderIdList, receiveWindow, ct).Result;
+
+        /// <summary>
+        /// Cancels muliple orders
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="orderIdList">The list of order ids to cancel</param>
+        /// <param name="origClientOrderIdList">The list of client order ids to cancel</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Id's for canceled order</returns>
+        public async Task<WebCallResult<List<BinanceFuturesCancelOrder>>> CancelMultipleOrdersAsync(string symbol, List<long>? orderIdList = null, List<string>? origClientOrderIdList = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            symbol.ValidateBinanceSymbol();
+            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<List<BinanceFuturesCancelOrder>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            if (orderIdList == null && origClientOrderIdList == null)
+                throw new ArgumentException("Either orderIdList or origClientOrderIdList must be sent");
+
+            if (orderIdList?.Count > 10)
+                throw new ArgumentException("orderIdList cannot contain more than 10 items");
+
+            if (origClientOrderIdList?.Count > 10)
+                throw new ArgumentException("origClientOrderIdList cannot contain more than 10 items");
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "symbol", symbol },
+                { "timestamp", GetTimestamp() }
+            };
+
+            if (orderIdList != null)
+                parameters.AddOptionalParameter("orderIdList", $"[{string.Join(",", orderIdList)}]");
+
+            if (origClientOrderIdList != null)
+                parameters.AddOptionalParameter("origClientOrderIdList", $"[{string.Join(",", origClientOrderIdList.Select(id => $"\"{id}\""))}]");
+
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await SendRequest<List<BinanceFuturesCancelOrder>>(GetUrl(CancelMultipleOrdersEndpoint, Api, SignedVersion), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
+        }
 
         #endregion
 
