@@ -3353,24 +3353,26 @@
             <param name="ct">Cancellation token</param>
             <returns>Whether the request was successful</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.ModifyPositionMargin(System.String,System.Decimal,Binance.Net.Enums.FuturesMarginChangeDirectionType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.ModifyPositionMargin(System.String,System.Decimal,Binance.Net.Enums.FuturesMarginChangeDirectionType,System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Change the margin on an open position
             </summary>
             <param name="symbol">Symbol to adjust the position margin for</param>
             <param name="amount">The amount of margin to be used</param>
             <param name="type">Whether to reduce or add margin to the position</param>
+            <param name="positionSide">Default BOTH for One-way Mode ; LONG or SHORT for Hedge Mode. It must be sent with Hedge Mode.</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>The new position margin</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.ModifyPositionMarginAsync(System.String,System.Decimal,Binance.Net.Enums.FuturesMarginChangeDirectionType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.ModifyPositionMarginAsync(System.String,System.Decimal,Binance.Net.Enums.FuturesMarginChangeDirectionType,System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Change the margin on an open position
             </summary>
             <param name="symbol">Symbol to adjust the position margin for</param>
             <param name="amount">The amount of margin to be used</param>
             <param name="type">Whether to reduce or add margin to the position</param>
+            <param name="positionSide">Default BOTH for One-way Mode ; LONG or SHORT for Hedge Mode. It must be sent with Hedge Mode.</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>The new position margin</returns>
@@ -8830,24 +8832,26 @@
             <param name="ct">Cancellation token</param>
             <returns>Whether the request was successful</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.ModifyPositionMargin(System.String,System.Decimal,Binance.Net.Enums.FuturesMarginChangeDirectionType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.ModifyPositionMargin(System.String,System.Decimal,Binance.Net.Enums.FuturesMarginChangeDirectionType,System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Change the margin on an open position
             </summary>
             <param name="symbol">Symbol to adjust the position margin for</param>
             <param name="amount">The amount of margin to be used</param>
             <param name="type">Whether to reduce or add margin to the position</param>
+            <param name="positionSide">Default BOTH for One-way Mode ; LONG or SHORT for Hedge Mode. It must be sent with Hedge Mode.</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>The new position margin</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.ModifyPositionMarginAsync(System.String,System.Decimal,Binance.Net.Enums.FuturesMarginChangeDirectionType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.ModifyPositionMarginAsync(System.String,System.Decimal,Binance.Net.Enums.FuturesMarginChangeDirectionType,System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Change the margin on an open position
             </summary>
             <param name="symbol">Symbol to adjust the position margin for</param>
             <param name="amount">The amount of margin to be used</param>
             <param name="type">Whether to reduce or add margin to the position</param>
+            <param name="positionSide">Default BOTH for One-way Mode ; LONG or SHORT for Hedge Mode. It must be sent with Hedge Mode.</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>The new position margin</returns>
@@ -13750,7 +13754,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.EventTime">
             <summary>
-            Setter for last update id, need for Json.Net
+            Event time of the update (stream only)
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.FirstUpdateId">

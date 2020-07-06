@@ -1545,10 +1545,11 @@ namespace Binance.Net
         /// <param name="symbol">Symbol to adjust the position margin for</param>
         /// <param name="amount">The amount of margin to be used</param>
         /// <param name="type">Whether to reduce or add margin to the position</param>
+        /// <param name="positionSide">Default BOTH for One-way Mode ; LONG or SHORT for Hedge Mode. It must be sent with Hedge Mode.</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The new position margin</returns>
-        public WebCallResult<BinanceFuturesPositionMarginResult> ModifyPositionMargin(string symbol, decimal amount, FuturesMarginChangeDirectionType type, long? receiveWindow = null, CancellationToken ct = default) => ModifyPositionMarginAsync(symbol, amount, type, receiveWindow, ct).Result;
+        public WebCallResult<BinanceFuturesPositionMarginResult> ModifyPositionMargin(string symbol, decimal amount, FuturesMarginChangeDirectionType type, PositionSide? positionSide = null, long? receiveWindow = null, CancellationToken ct = default) => ModifyPositionMarginAsync(symbol, amount, type, positionSide, receiveWindow, ct).Result;
 
         /// <summary>
         /// Change the margin on an open position
@@ -1556,6 +1557,7 @@ namespace Binance.Net
         /// <param name="symbol">Symbol to adjust the position margin for</param>
         /// <param name="amount">The amount of margin to be used</param>
         /// <param name="type">Whether to reduce or add margin to the position</param>
+        /// <param name="positionSide">Default BOTH for One-way Mode ; LONG or SHORT for Hedge Mode. It must be sent with Hedge Mode.</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The new position margin</returns>
