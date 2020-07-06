@@ -80,6 +80,7 @@ namespace Binance.Net
         private const string QueryOrderEndpoint = "order";
         private const string CancelOrderEndpoint = "order";
         private const string CancelMultipleOrdersEndpoint = "batchOrders";
+        private const string CancelAllOrdersEndpoint = "allOpenOrders";
         private const string OpenOrderEndpoint = "openOrder";
         private const string OpenOrdersEndpoint = "openOrders";
         private const string AllOrdersEndpoint = "allOrders";
@@ -1120,7 +1121,40 @@ namespace Binance.Net
 
         #endregion
 
-        #region Cancel All Open Orders [NOT AVAILABLE YET]
+        #region Cancel All Open Orders
+
+        /// <summary>
+        /// Cancels all open orders
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Id's for canceled order</returns>
+        public WebCallResult<BinanceFuturesCancelAllOrders> CancelAllOrders(string symbol, long? receiveWindow = null, CancellationToken ct = default) => CancelAllOrdersAsync(symbol, receiveWindow, ct).Result;
+
+        /// <summary>
+        /// Cancels all open orders
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Id's for canceled order</returns>
+        public async Task<WebCallResult<BinanceFuturesCancelAllOrders>> CancelAllOrdersAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            symbol.ValidateBinanceSymbol();
+            var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceFuturesCancelAllOrders>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "symbol", symbol },
+                { "timestamp", GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await SendRequest<BinanceFuturesCancelAllOrders>(GetUrl(CancelAllOrdersEndpoint, Api, SignedVersion), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
+        }
 
         #endregion
 
