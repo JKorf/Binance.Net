@@ -13688,6 +13688,16 @@
             Setter for last update id, need for Json.Net
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.EventType">
+            <summary>
+            Mapping e to prevent collision with capital E
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.EventTime">
+            <summary>
+            Setter for last update id, need for Json.Net
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.FirstUpdateId">
             <summary>
             The id of this update, can be synced with <see cref="M:Binance.Net.BinanceClient.GetOrderBook(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)"/> to update the order book

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using Binance.Net.Interfaces;
+using System;
+using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Spot.MarketData
 {
@@ -21,12 +23,23 @@ namespace Binance.Net.Objects.Spot.MarketData
         [JsonProperty("lastUpdateId")]
         public long LastUpdateId { get; set; }
 
-
         /// <summary>
         /// Setter for last update id, need for Json.Net
         /// </summary>
         [JsonProperty("u")]
         public long LastUpdateIdStream { set => LastUpdateId = value; }
+
+        /// <summary>
+        /// Mapping e to prevent collision with capital E
+        /// </summary>
+        [JsonProperty("e")]
+        private string EventType { get; set; } = "";
+
+        /// <summary>
+        /// Event time of the update (stream only)
+        /// </summary>
+        [JsonProperty("E"), JsonConverter(typeof(TimestampConverter))]
+        public DateTime? EventTime { get; set; }
 
         /// <summary>
         /// The id of this update, can be synced with <see cref="BinanceClient.GetOrderBook"/> to update the order book
