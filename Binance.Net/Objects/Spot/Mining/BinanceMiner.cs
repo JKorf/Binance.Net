@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
+using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Spot.Mining
@@ -58,6 +59,7 @@ namespace Binance.Net.Objects.Spot.Mining
         /// <summary>
         /// Last share time
         /// </summary>
+        [JsonConverter(typeof(TimestampConverter))]
         public DateTime LastShareTime { get; set; }
     }
 }
