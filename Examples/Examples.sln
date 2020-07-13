@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientConsole", "ClientCons
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication1", "Asp.NetCore.MVC\WebApplication1.csproj", "{D935C79F-48CE-47BD-9E37-17D4A1EFDF63}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serverless.BlazorWASM", "Serverless.BlazorWASM\Serverless.BlazorWASM.csproj", "{7230F3C2-230A-46CA-9D0A-641DCD14E8F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serverless.FunctionApp", "Serverless.FunctionApp\Serverless.FunctionApp.csproj", "{D664F17C-E823-490A-8FB4-0AD5E4BCEAA7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{D935C79F-48CE-47BD-9E37-17D4A1EFDF63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D935C79F-48CE-47BD-9E37-17D4A1EFDF63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D935C79F-48CE-47BD-9E37-17D4A1EFDF63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7230F3C2-230A-46CA-9D0A-641DCD14E8F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7230F3C2-230A-46CA-9D0A-641DCD14E8F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7230F3C2-230A-46CA-9D0A-641DCD14E8F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7230F3C2-230A-46CA-9D0A-641DCD14E8F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D664F17C-E823-490A-8FB4-0AD5E4BCEAA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D664F17C-E823-490A-8FB4-0AD5E4BCEAA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D664F17C-E823-490A-8FB4-0AD5E4BCEAA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D664F17C-E823-490A-8FB4-0AD5E4BCEAA7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

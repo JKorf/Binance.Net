@@ -1,0 +1,42 @@
+@page "/fetchdata"
+@inject HttpClient Http
+
+<h1>BTCUSDT forecast</h1>
+
+<p>This component demonstrates fetching data from the Azure Function.</p>
+
+@if (string.IsNullOrEmpty(price))
+{
+	<p><em>Loading...</em></p>
+}
+else if (price.Equals("initialized", StringComparison.OrdinalIgnoreCase))
+{
+	<p><em>Loading...</em></p>
+}
+else
+{
+	<table class="table">
+		<thead>
+			<tr>
+				<th>BTC/USD</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					@price
+				</td>
+			</tr>
+		</tbody>
+	</table>
+}
+
+@code {
+	private string price;
+
+	protected override async Task OnInitializedAsync()
+	{
+		price = await Http.GetFromJsonAsync<string>("BTCUSDTFunction");
+	}
+}
+
