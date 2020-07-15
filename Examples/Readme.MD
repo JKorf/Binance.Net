@@ -12,5 +12,6 @@ To get started with serverless example, you need to do following steps:
 
 ![Screenshot](https://github.com/mehmettahameral/Binance.Net/blob/serverless/Examples/screenshot.png?raw=true)
 
+- Grab the Serverless.FunctionApp api url and update the base address of HttpClient in Serverless.BlazorWASM.Program file.
 - Navigate to /fetchdata by clicking BTC/USD link on the nav menu
 - Wait 5 seconds for Azure Functions to initialize Binance api connection. Then the price refresh itself every 3 seconds. (You can change it )
