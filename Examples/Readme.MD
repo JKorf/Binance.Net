@@ -4,7 +4,7 @@
 
 To get started with serverless example, you need to do following steps:
 
-- Grab a Binance API public and secret key.
+- Grab a Binance API public and secret key. (<https://www.binance.com/en/register?ref=21638759> )
 - Set BinanceApiKey and BinanceSecretKey as environment variable on Serverless.FunctionApp. (Right Click on Serverless.FunctionApp project > Properties > Debug > Add BinanceApiKey and BinanceSecretKey with value you just grabbed from binance)
 - You can also get variables from local.settings.json file if you'd prefer. In that case, don'f forget the update Serverless.FunctionApp.Startup class.
 - Install Azure Functions Emulator (if you don't have it) and run in on your machine.
