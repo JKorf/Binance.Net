@@ -33,7 +33,7 @@ namespace Serverless.FunctionApp
 			[HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
 			ILogger log)
 		{
-			string price;
+			decimal price;
 			try
 			{
 				price = GetPrice();
@@ -47,15 +47,15 @@ namespace Serverless.FunctionApp
 			return new JsonResult(price);
 		}
 
-		private string GetPrice()
+		private decimal GetPrice()
 		{
-			var price = _dataProvider.LastKline?.Data.Close.ToString();
-			if (string.IsNullOrEmpty(price))
+			var price = _dataProvider.LastKline?.Data.Close;
+			if (price == null || price == 0 )
 			{
 				Thread.Sleep(TimeSpan.FromSeconds(3));
 				price = GetPrice();
 			}
-			return price;
+			return price ?? 0;
 		}
 	}
 }

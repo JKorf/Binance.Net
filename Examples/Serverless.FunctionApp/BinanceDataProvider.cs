@@ -29,7 +29,7 @@ namespace Serverless.FunctionApp
         {
             _socketClient = socketClient;
             _binanceClient = binanceClient;
-            Start().Wait(); // Probably want to do this in some initialization step at application startup
+            Start().Wait(); 
         }
 
         public async Task Start()

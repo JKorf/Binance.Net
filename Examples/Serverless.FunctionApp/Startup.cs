@@ -12,12 +12,7 @@ namespace Serverless.FunctionApp
 	{
 		public override void Configure(IFunctionsHostBuilder builder)
 		{
-			//builder.Services.AddSingleton<IBinanceSocketClient, BinanceSocketClient>();
-			//builder.Services.AddTransient<IBinanceClient, BinanceClient>();
-			//builder.Services.AddSingleton<IBinanceDataProvider, BinanceDataProvider>();
-
-
-
+			// Binance Setup
 			builder.Services.AddSingleton<IBinanceSocketClient>(x => new BinanceSocketClient(new BinanceSocketClientOptions
 			{
 				ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials(Environment.GetEnvironmentVariable("BinanceApiKey"), Environment.GetEnvironmentVariable("BinanceSecretKey"))
@@ -30,7 +25,7 @@ namespace Serverless.FunctionApp
 
 			builder.Services.AddSingleton<IBinanceDataProvider, BinanceDataProvider>();
 
-
+			// additional setup
 			string insKey = Environment.GetEnvironmentVariable("APPINSIGHTS_INSTRUMENTATIONKEY");
 			builder.Services.AddApplicationInsightsTelemetry(insKey);
 
