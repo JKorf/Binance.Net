@@ -66,6 +66,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// if Close-All
         /// </summary>
+        [JsonProperty("closePosition")]
         public bool ClosePosition { get; set; }
 
         /// <summary>
