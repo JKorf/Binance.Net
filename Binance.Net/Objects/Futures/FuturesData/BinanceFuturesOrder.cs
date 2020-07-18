@@ -133,5 +133,11 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// </summary>
         [JsonProperty("workingType"), JsonConverter(typeof(WorkingTypeConverter))]
         public WorkingType WorkingType { get; set; }
+
+        /// <summary>
+        /// The position side of the order
+        /// </summary>
+        [JsonProperty("positionSide"), JsonConverter(typeof(PositionSideConverter))]
+        public PositionSide PositionSide { get; set; }
     }
 }
