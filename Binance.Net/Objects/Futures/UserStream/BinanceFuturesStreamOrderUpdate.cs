@@ -150,7 +150,7 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// Activation Price, only puhed with TRAILING_STOP_MARKET order
         /// </summary>
         [JsonProperty("AP"), JsonConverter(typeof(PositionSideConverter))]
-        public PositionSide ActivationPrice { get; set; }
+        public decimal ActivationPrice { get; set; }
         /// <summary>
         /// Callback Rate, only puhed with TRAILING_STOP_MARKET order
         /// </summary>
