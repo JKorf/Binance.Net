@@ -11322,6 +11322,11 @@
             The working type
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.PositionSide">
+            <summary>
+            The position side of the order
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder">
             <summary>
             The result of placing a new order

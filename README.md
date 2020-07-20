@@ -152,6 +152,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 5.1.11 - 20 Jul 2020
+    * Fixes for future client
+
 * Version 5.1.10 - 07 Jul 2020
     * Fixed datetime conversion for some objects
 
