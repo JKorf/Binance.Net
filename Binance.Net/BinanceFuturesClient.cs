@@ -1571,7 +1571,7 @@ namespace Binance.Net
             var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
-                { "amount", amount },
+                { "amount", amount.ToString(CultureInfo.InvariantCulture) },
                 { "type", JsonConvert.SerializeObject(type, new FuturesMarginChangeDirectionTypeConverter(false)) },
                 { "timestamp", GetTimestamp() }
             };
