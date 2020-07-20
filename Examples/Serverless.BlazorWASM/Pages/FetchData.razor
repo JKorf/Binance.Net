@@ -1,0 +1,88 @@
+@page "/fetchdata"
+@inject HttpClient Http
+
+<h1>BTCUSDT forecast</h1>
+
+<p>This component demonstrates fetching data from the Azure Function.</p>
+
+@if (currentPrice == 0)
+{
+	<p><em>Loading...</em></p>
+}
+else
+{
+	<table class="table">
+		<thead>
+			<tr>
+				<th>BTC/USD</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td style="@style">
+					@currentPrice
+				</td>
+			</tr>
+		</tbody>
+	</table>
+}
+
+@code {
+	private decimal currentPrice;
+	private decimal price;
+	private string style;
+
+	protected override async Task OnInitializedAsync()
+	{
+		await UpdateUI();
+		StartCountdown();
+	}
+
+	async Task UpdateUI()
+	{
+		price = await GetPriceAsync();
+		if (currentPrice < price)
+		{
+			style = "color: green;";
+		}
+		else if (currentPrice > price)
+		{
+			style = "color: red;";
+		}
+		else
+		{
+			style = "color: gray;";
+		}
+		currentPrice = price;
+	}
+
+	async Task<decimal> GetPriceAsync()
+	{
+		return await Http.GetFromJsonAsync<decimal>("BTCUSDTFunction");
+	}
+
+
+	private int Seconds { get; set; } = 3;
+
+	void StartCountdown()
+	{
+		var timer = new Timer(new TimerCallback(_ =>
+		{
+			if (Seconds >= 0)
+			{
+				Seconds--;
+			}
+			else
+			{
+				Seconds = 3;
+				InvokeAsync(async () =>
+				{
+					await UpdateUI();
+					StateHasChanged();
+				});
+			}
+		}), null, 3000, 1000);
+	}
+
+}
+
