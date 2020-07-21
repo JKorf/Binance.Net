@@ -152,6 +152,9 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 5.1.12 - 21 Jul 2020
+    * Updated order book models
+
 * Version 5.1.11 - 20 Jul 2020
     * Fixes for future client
 

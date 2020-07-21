@@ -13769,7 +13769,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.Symbol">
             <summary>
-            The symbol of the order book (only filled from stream updates)
+            The symbol of the order book 
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.LastUpdateId">
