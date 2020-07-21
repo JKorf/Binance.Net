@@ -4391,7 +4391,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToOrderBookUpdates(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceOrderBook})">
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToOrderBookUpdates(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook})">
             <summary>
             Subscribes to the order book updates for the provided symbol
             </summary>
@@ -4400,7 +4400,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceOrderBook})">
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook})">
             <summary>
             Subscribes to the order book updates for the provided symbol
             </summary>
@@ -4409,7 +4409,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToOrderBookUpdates(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceOrderBook})">
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToOrderBookUpdates(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook})">
             <summary>
             Subscribes to the depth update stream for the provided symbols
             </summary>
@@ -4418,7 +4418,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceOrderBook})">
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook})">
             <summary>
             Subscribes to the depth update stream for the provided symbols
             </summary>
@@ -9729,7 +9729,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToOrderBookUpdates(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceOrderBook})">
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToOrderBookUpdates(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook})">
             <summary>
             Subscribes to the order book updates for the provided symbol
             </summary>
@@ -9738,7 +9738,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceOrderBook})">
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook})">
             <summary>
             Subscribes to the order book updates for the provided symbol
             </summary>
@@ -9747,7 +9747,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToOrderBookUpdates(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceOrderBook})">
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToOrderBookUpdates(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook})">
             <summary>
             Subscribes to the depth update stream for the provided symbols
             </summary>
@@ -9756,7 +9756,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceOrderBook})">
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook})">
             <summary>
             Subscribes to the depth update stream for the provided symbols
             </summary>
@@ -13642,6 +13642,36 @@
             Timestamp
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook">
+            <summary>
+            Stream order book
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook.LastUpdateIdStream">
+            <summary>
+            Setter for last update id, need for Json.Net
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook.EventType">
+            <summary>
+            Event type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook.EventTime">
+            <summary>
+            Event time of the update (stream only)
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook.BidsStream">
+            <summary>
+            Setter for bids (needed forJson.Net)
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook.AsksStream">
+            <summary>
+            Setter for asks (needed forJson.Net)
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.MarketData.BinanceExchangeInfo">
             <summary>
             Exchange info
@@ -13747,21 +13777,6 @@
             The ID of the last update
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.LastUpdateIdStream">
-            <summary>
-            Setter for last update id, need for Json.Net
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.EventType">
-            <summary>
-            Mapping e to prevent collision with capital E
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.EventTime">
-            <summary>
-            Event time of the update (stream only)
-            </summary>
-        </member>
         <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.FirstUpdateId">
             <summary>
             The id of this update, can be synced with <see cref="M:Binance.Net.BinanceClient.GetOrderBook(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)"/> to update the order book
@@ -13772,19 +13787,9 @@
             The list of bids
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.BidsStream">
-            <summary>
-            Setter for bids (needed forJson.Net)
-            </summary>
-        </member>
         <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.Asks">
             <summary>
             The list of asks
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.AsksStream">
-            <summary>
-            Setter for asks (needed forJson.Net)
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.MarketData.BinancePrice">
