@@ -352,6 +352,30 @@ namespace Binance.Net.Interfaces
         Task<WebCallResult<BinanceFuturesOpenInterest>> GetOpenInterestAsync(string Symbol, CancellationToken ct = default);
 
         /// <summary>
+        /// Gets Open Interest History
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="interval">The period timespan</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time to get open interest history</param>
+        /// <param name="endTime">End time to get open interest history</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Open Interest History info</returns>
+        WebCallResult<IEnumerable<BinanceFuturesOpenInterestHistory>> GetOpenInterestHistory(string symbol, PeriodInterval interval, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets Open Interest History
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="interval">The period timespan</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time to get open interest history</param>
+        /// <param name="endTime">End time to get open interest history</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Open Interest History info</returns>
+        Task<WebCallResult<IEnumerable<BinanceFuturesOpenInterestHistory>>> GetOpenInterestHistoryAsync(string symbol, PeriodInterval interval, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
+
+        /// <summary>
         /// Gets Notional and Leverage Brackets
         /// </summary>
         /// <param name="Symbol">The symbol to get the data for</param>

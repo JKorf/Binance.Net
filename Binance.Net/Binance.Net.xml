@@ -3009,6 +3009,30 @@
             <param name="ct">Cancellation token</param>
             <returns>List of book prices</returns>
         </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetOpenInterestHistory(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Open Interest History
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="interval">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get open interest history</param>
+            <param name="endTime">End time to get open interest history</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Open Interest History info</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetOpenInterestHistoryAsync(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Open Interest History
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="interval">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get open interest history</param>
+            <param name="endTime">End time to get open interest history</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Open Interest History info</returns>
+        </member>
         <member name="M:Binance.Net.BinanceFuturesClient.ModifyPositionMode(System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
@@ -5047,6 +5071,56 @@
         <member name="F:Binance.Net.Enums.OrderType.TrailingStopMarket">
             <summary>
             Trailing stop order will be placed without a price. The order will be executed at the best price available at that time in the order book.
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.PeriodInterval">
+            <summary>
+            The interval for the period
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PeriodInterval.FiveMinutes">
+            <summary>
+            5m
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PeriodInterval.FifteenMinutes">
+            <summary>
+            15m
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PeriodInterval.ThirtyMinutes">
+            <summary>
+            30m
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PeriodInterval.OneHour">
+            <summary>
+            1h
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PeriodInterval.TwoHour">
+            <summary>
+            2h
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PeriodInterval.FourHour">
+            <summary>
+            4h
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PeriodInterval.SixHour">
+            <summary>
+            6h
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PeriodInterval.TwelveHour">
+            <summary>
+            12h
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PeriodInterval.OneDay">
+            <summary>
+            1d
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.PositionMode">
@@ -8510,6 +8584,30 @@
             <param name="ct">Cancellation token</param>
             <returns>List of book prices</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetOpenInterestHistory(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Open Interest History
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="interval">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get open interest history</param>
+            <param name="endTime">End time to get open interest history</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Open Interest History info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetOpenInterestHistoryAsync(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Open Interest History
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="interval">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get open interest history</param>
+            <param name="endTime">End time to get open interest history</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Open Interest History info</returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetBracket(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets Notional and Leverage Brackets
@@ -11670,6 +11768,31 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesOpenInterest.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesOpenInterestHistory">
+            <summary>
+            Open Interest History info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesOpenInterestHistory.Symbol">
+            <summary>
+            The symbol the information is about
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesOpenInterestHistory.SumOpenInterest">
+            <summary>
+            Total open interest
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesOpenInterestHistory.SumOpenInterestValue">
+            <summary>
+            Total open interest value
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesOpenInterestHistory.Timestamp">
             <summary>
             Timestamp
             </summary>

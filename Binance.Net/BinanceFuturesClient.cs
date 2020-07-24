@@ -72,6 +72,7 @@ namespace Binance.Net
         private const string BookPricesEndpoint = "ticker/bookTicker";
         private const string AllForcedOrdersEndpoint = "allForceOrders";
         private const string OpenInterestEndpoint = "openInterest";
+        private const string OpenInterestHistoryEndpoint = "openInterestHist";
         private const string LeverageBracketEndpoint = "leverageBracket";
 
         // Orders
@@ -731,6 +732,49 @@ namespace Binance.Net
             };
 
             return await SendRequest<BinanceFuturesOpenInterest>(GetUrl(OpenInterestEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Open Interest History
+
+        /// <summary>
+        /// Gets Open Interest History
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="interval">The period timespan</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time to get open interest history</param>
+        /// <param name="endTime">End time to get open interest history</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Open Interest History info</returns>
+        public WebCallResult<IEnumerable<BinanceFuturesOpenInterestHistory>> GetOpenInterestHistory(string symbol, PeriodInterval interval, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default) => GetOpenInterestHistoryAsync(symbol, interval, limit, startTime, endTime, ct).Result;
+
+        /// <summary>
+        /// Gets Open Interest History
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="interval">The period timespan</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time to get open interest history</param>
+        /// <param name="endTime">End time to get open interest history</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Open Interest History info</returns>
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesOpenInterestHistory>>> GetOpenInterestHistoryAsync(string symbol, PeriodInterval interval, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default)
+        {
+            symbol.ValidateBinanceSymbol();
+            limit?.ValidateIntBetween(nameof(limit), 1, 500);
+            
+            var parameters = new Dictionary<string, object> {
+                { "symbol", symbol },
+                { "interval", JsonConvert.SerializeObject(interval, new PeriodIntervalConverter(false)) }
+            };
+
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+
+            return await SendRequest<IEnumerable<BinanceFuturesOpenInterestHistory>>(GetUrl(OpenInterestHistoryEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         #endregion
