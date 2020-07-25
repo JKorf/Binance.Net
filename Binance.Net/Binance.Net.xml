@@ -11319,14 +11319,14 @@
             The price of the order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.CummulativeQuantity">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.CumulativeQuantity">
             <summary>
-            Cummulative amount
+            Cumulative amount
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.CummulativeQuoteQuantity">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.CumulativeQuoteQuantity">
             <summary>
-            Cummulative amount
+            Cumulative amount
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.ExecutedQuantity">
@@ -11560,14 +11560,14 @@
             The average price of the order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.CummulativeQuantity">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.CumulativeQuantity">
             <summary>
-            Cummulative amount
+            Cumulative amount
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.CummulativeQuoteQuantity">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.CumulativeQuoteQuantity">
             <summary>
-            Cummulative amount
+            Cumulative amount
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.ExecutedQuantity">
@@ -11682,12 +11682,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.CumulativeQuantity">
             <summary>
-            Cummulative amount
+            Cumulative amount
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.CumulativeQuoteQuantity">
             <summary>
-            Cummulative amount in quote currency
+            Cumulative amount in quote currency
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.ExecutedQuantity">
