@@ -105,13 +105,13 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Activation price, only return with TRAILING_STOP_MARKET order
         /// </summary>
         [JsonProperty("activatePrice")]
-        public decimal ActivatePrice { get; set; }
+        public decimal? ActivatePrice { get; set; }
 
         /// <summary>
         /// Callback rate, only return with TRAILING_STOP_MARKET order
         /// </summary>
         [JsonProperty("priceRate")]
-        public decimal PriceRate { get; set; }
+        public decimal? PriceRate { get; set; }
 
         /// <summary>
         /// The time the order was updated
@@ -124,5 +124,11 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// </summary>
         [JsonProperty("workingType"), JsonConverter(typeof(WorkingTypeConverter))]
         public WorkingType WorkingType { get; set; }
+
+        /// <summary>
+        /// The position side of the order
+        /// </summary>
+        [JsonProperty("positionSide"), JsonConverter(typeof(PositionSideConverter))]
+        public PositionSide PositionSide { get; set; }
     }
 }
