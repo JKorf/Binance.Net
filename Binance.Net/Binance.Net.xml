@@ -3033,6 +3033,30 @@
             <param name="ct">Cancellation token</param>
             <returns>Open Interest History info</returns>
         </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetTopLongShortAccountRatio(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Top Trader Long/Short Ratio (Accounts)
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="interval">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get top trader long/short ratio (accounts)</param>
+            <param name="endTime">End time to get top trader long/short ratio (accounts)</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Top Trader Long/Short Ratio (Accounts) info</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetTopLongShortAccountRatioAsync(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Top Trader Long/Short Ratio (Accounts)
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="interval">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get top trader long/short ratio (accounts)</param>
+            <param name="endTime">End time to get top trader long/short ratio (accounts)</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Top Trader Long/Short Ratio (Accounts) info</returns>
+        </member>
         <member name="M:Binance.Net.BinanceFuturesClient.ModifyPositionMode(System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
@@ -8608,6 +8632,30 @@
             <param name="ct">Cancellation token</param>
             <returns>Open Interest History info</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetTopLongShortAccountRatio(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Top Trader Long/Short Ratio (Accounts)
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="interval">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get top trader long/short ratio (accounts)</param>
+            <param name="endTime">End time to get top trader long/short ratio (accounts)</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Top Trader Long/Short Ratio (Accounts) info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetTopLongShortAccountRatioAsync(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Top Trader Long/Short Ratio (Accounts)
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="interval">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get top trader long/short ratio (accounts)</param>
+            <param name="endTime">End time to get top trader long/short ratio (accounts)</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Top Trader Long/Short Ratio (Accounts) info</returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetBracket(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets Notional and Leverage Brackets
@@ -11720,6 +11768,36 @@
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesLiquidation.Time">
             <summary>
             Forced time
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesLongShortRatio">
+            <summary>
+            Long Short Ratio Info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesLongShortRatio.Symbol">
+            <summary>
+            The symbol the information is about
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesLongShortRatio.LongShortRatio">
+            <summary>
+            long/short ratio
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesLongShortRatio.LongAccount">
+            <summary>
+            longs percentage (in decimal form)
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesLongShortRatio.ShortAccount">
+            <summary>
+            shorts percentage (in decimal form)
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesLongShortRatio.Timestamp">
+            <summary>
+            Timestamp
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesMarkPrice">

@@ -376,6 +376,30 @@ namespace Binance.Net.Interfaces
         Task<WebCallResult<IEnumerable<BinanceFuturesOpenInterestHistory>>> GetOpenInterestHistoryAsync(string symbol, PeriodInterval interval, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
 
         /// <summary>
+        /// Gets Top Trader Long/Short Ratio (Accounts)
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="interval">The period timespan</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time to get top trader long/short ratio (accounts)</param>
+        /// <param name="endTime">End time to get top trader long/short ratio (accounts)</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Top Trader Long/Short Ratio (Accounts) info</returns>
+        WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>> GetTopLongShortAccountRatio(string symbol, PeriodInterval interval, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets Top Trader Long/Short Ratio (Accounts)
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="interval">The period timespan</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time to get top trader long/short ratio (accounts)</param>
+        /// <param name="endTime">End time to get top trader long/short ratio (accounts)</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Top Trader Long/Short Ratio (Accounts) info</returns>
+        Task<WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>>> GetTopLongShortAccountRatioAsync(string symbol, PeriodInterval interval, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
+
+        /// <summary>
         /// Gets Notional and Leverage Brackets
         /// </summary>
         /// <param name="Symbol">The symbol to get the data for</param>

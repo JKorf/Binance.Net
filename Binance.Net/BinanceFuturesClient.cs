@@ -52,6 +52,7 @@ namespace Binance.Net
 
         // Addresses
         private const string Api = "fapi";
+        private const string TradingDataApi = "futures/data";
 
         // Versions
         private const string PublicVersion = "1";
@@ -74,6 +75,7 @@ namespace Binance.Net
         private const string OpenInterestEndpoint = "openInterest";
         private const string OpenInterestHistoryEndpoint = "openInterestHist";
         private const string LeverageBracketEndpoint = "leverageBracket";
+        private const string TopLongShortAccountRatioEndpoint = "topLongShortAccountRatio";
 
         // Orders
         private const string NewOrderEndpoint = "order";
@@ -774,7 +776,50 @@ namespace Binance.Net
             parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
             parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
 
-            return await SendRequest<IEnumerable<BinanceFuturesOpenInterestHistory>>(GetUrl(OpenInterestHistoryEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceFuturesOpenInterestHistory>>(GetUrl(OpenInterestHistoryEndpoint, TradingDataApi), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Top Trader Long/Short Ratio (Accounts)
+
+        /// <summary>
+        /// Gets Top Trader Long/Short Ratio (Accounts)
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="interval">The period timespan</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time to get top trader long/short ratio (accounts)</param>
+        /// <param name="endTime">End time to get top trader long/short ratio (accounts)</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Top Trader Long/Short Ratio (Accounts) info</returns>
+        public WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>> GetTopLongShortAccountRatio(string symbol, PeriodInterval interval, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default) => GetTopLongShortAccountRatioAsync(symbol, interval, limit, startTime, endTime, ct).Result;
+
+        /// <summary>
+        /// Gets Top Trader Long/Short Ratio (Accounts)
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="interval">The period timespan</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time to get top trader long/short ratio (accounts)</param>
+        /// <param name="endTime">End time to get top trader long/short ratio (accounts)</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Top Trader Long/Short Ratio (Accounts) info</returns>
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>>> GetTopLongShortAccountRatioAsync(string symbol, PeriodInterval interval, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default)
+        {
+            symbol.ValidateBinanceSymbol();
+            limit?.ValidateIntBetween(nameof(limit), 1, 500);
+
+            var parameters = new Dictionary<string, object> {
+                { "symbol", symbol },
+                { "interval", JsonConvert.SerializeObject(interval, new PeriodIntervalConverter(false)) }
+            };
+
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+
+            return await SendRequest<IEnumerable<BinanceFuturesLongShortRatio>>(GetUrl(TopLongShortAccountRatioEndpoint, TradingDataApi), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         #endregion
@@ -2061,9 +2106,14 @@ namespace Binance.Net
             return err;
         }
 
-        private Uri GetUrl(string endpoint, string api, string version)
+        private Uri GetUrl(string endpoint, string api, string? version = null)
         {
-            var result = $"{BaseAddress}/{api}/v{version}/{endpoint}";
+            var result = $"{BaseAddress}/{api}/";
+
+            if (!string.IsNullOrEmpty(version))
+                result += $"v{version}/";
+
+            result += endpoint;
             return new Uri(result);
         }
 
