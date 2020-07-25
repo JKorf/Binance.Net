@@ -3014,7 +3014,7 @@
             Gets Open Interest History
             </summary>
             <param name="symbol">The symbol to get the data for</param>
-            <param name="interval">The period timespan</param>
+            <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time to get open interest history</param>
             <param name="endTime">End time to get open interest history</param>
@@ -3026,7 +3026,7 @@
             Gets Open Interest History
             </summary>
             <param name="symbol">The symbol to get the data for</param>
-            <param name="interval">The period timespan</param>
+            <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time to get open interest history</param>
             <param name="endTime">End time to get open interest history</param>
@@ -3038,7 +3038,7 @@
             Gets Top Trader Long/Short Ratio (Accounts)
             </summary>
             <param name="symbol">The symbol to get the data for</param>
-            <param name="interval">The period timespan</param>
+            <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time to get top trader long/short ratio (accounts)</param>
             <param name="endTime">End time to get top trader long/short ratio (accounts)</param>
@@ -3050,7 +3050,7 @@
             Gets Top Trader Long/Short Ratio (Accounts)
             </summary>
             <param name="symbol">The symbol to get the data for</param>
-            <param name="interval">The period timespan</param>
+            <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time to get top trader long/short ratio (accounts)</param>
             <param name="endTime">End time to get top trader long/short ratio (accounts)</param>
@@ -3062,7 +3062,7 @@
             Gets Top Trader Long/Short Ratio (Positions)
             </summary>
             <param name="symbol">The symbol to get the data for</param>
-            <param name="interval">The period timespan</param>
+            <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time to get top trader long/short ratio (positions)</param>
             <param name="endTime">End time to get top trader long/short ratio (positions)</param>
@@ -3074,7 +3074,7 @@
             Gets Top Trader Long/Short Ratio (Positions)
             </summary>
             <param name="symbol">The symbol to get the data for</param>
-            <param name="interval">The period timespan</param>
+            <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time to get top trader long/short ratio (positions)</param>
             <param name="endTime">End time to get top trader long/short ratio (positions)</param>
@@ -3086,7 +3086,7 @@
             Gets Global Long/Short Ratio (Accounts)
             </summary>
             <param name="symbol">The symbol to get the data for</param>
-            <param name="interval">The period timespan</param>
+            <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time to get global long/short ratio (accounts)</param>
             <param name="endTime">End time to get global long/short ratio (accounts)</param>
@@ -3098,7 +3098,7 @@
             Gets Global Long/Short Ratio (Accounts)
             </summary>
             <param name="symbol">The symbol to get the data for</param>
-            <param name="interval">The period timespan</param>
+            <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time to get global long/short ratio (accounts)</param>
             <param name="endTime">End time to get global long/short ratio (accounts)</param>
@@ -3110,7 +3110,7 @@
             Gets Taker Buy/Sell Volume Ratio
             </summary>
             <param name="symbol">The symbol to get the data for</param>
-            <param name="interval">The period timespan</param>
+            <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time to get taker buy/sell volume ratio</param>
             <param name="endTime">End time to get taker buy/sell volume ratio</param>
@@ -3122,7 +3122,7 @@
             Gets Taker Buy/Sell Volume Ratio
             </summary>
             <param name="symbol">The symbol to get the data for</param>
-            <param name="interval">The period timespan</param>
+            <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time to get taker buy/sell volume ratio</param>
             <param name="endTime">End time to get taker buy/sell volume ratio</param>
@@ -8685,7 +8685,7 @@
             Gets Open Interest History
             </summary>
             <param name="symbol">The symbol to get the data for</param>
-            <param name="interval">The period timespan</param>
+            <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time to get open interest history</param>
             <param name="endTime">End time to get open interest history</param>
@@ -8697,7 +8697,7 @@
             Gets Open Interest History
             </summary>
             <param name="symbol">The symbol to get the data for</param>
-            <param name="interval">The period timespan</param>
+            <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time to get open interest history</param>
             <param name="endTime">End time to get open interest history</param>
@@ -8709,7 +8709,7 @@
             Gets Top Trader Long/Short Ratio (Accounts)
             </summary>
             <param name="symbol">The symbol to get the data for</param>
-            <param name="interval">The period timespan</param>
+            <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time to get top trader long/short ratio (accounts)</param>
             <param name="endTime">End time to get top trader long/short ratio (accounts)</param>
@@ -8721,7 +8721,7 @@
             Gets Top Trader Long/Short Ratio (Accounts)
             </summary>
             <param name="symbol">The symbol to get the data for</param>
-            <param name="interval">The period timespan</param>
+            <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time to get top trader long/short ratio (accounts)</param>
             <param name="endTime">End time to get top trader long/short ratio (accounts)</param>
@@ -8733,7 +8733,7 @@
             Gets Top Trader Long/Short Ratio (Positions)
             </summary>
             <param name="symbol">The symbol to get the data for</param>
-            <param name="interval">The period timespan</param>
+            <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time to get top trader long/short ratio (positions)</param>
             <param name="endTime">End time to get top trader long/short ratio (positions)</param>
@@ -8745,7 +8745,7 @@
             Gets Top Trader Long/Short Ratio (Positions)
             </summary>
             <param name="symbol">The symbol to get the data for</param>
-            <param name="interval">The period timespan</param>
+            <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time to get top trader long/short ratio (positions)</param>
             <param name="endTime">End time to get top trader long/short ratio (positions)</param>
@@ -8757,7 +8757,7 @@
             Gets Taker Buy/Sell Volume Ratio
             </summary>
             <param name="symbol">The symbol to get the data for</param>
-            <param name="interval">The period timespan</param>
+            <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time to get taker buy/sell volume ratio</param>
             <param name="endTime">End time to get taker buy/sell volume ratio</param>
@@ -8769,7 +8769,7 @@
             Gets Taker Buy/Sell Volume Ratio
             </summary>
             <param name="symbol">The symbol to get the data for</param>
-            <param name="interval">The period timespan</param>
+            <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time to get taker buy/sell volume ratio</param>
             <param name="endTime">End time to get taker buy/sell volume ratio</param>
@@ -11399,6 +11399,11 @@
             The working type
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.PositionSide">
+            <summary>
+            The position side of the order
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesChangeMarginTypeResult">
             <summary>
             Result from a change margin type request
@@ -11670,9 +11675,19 @@
             The price of the order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.CummulativeQuoteQuantity">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.AvgPrice">
+            <summary>
+            The average price of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.CumulativeQuantity">
             <summary>
             Cummulative amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.CumulativeQuoteQuantity">
+            <summary>
+            Cummulative amount in quote currency
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.ExecutedQuantity">
@@ -11710,6 +11725,11 @@
             Stop price for the order
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.ClosePosition">
+            <summary>
+            If order is for closing a position
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.TimeInForce">
             <summary>
             For what time the order lasts
@@ -11718,6 +11738,11 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.Type">
             <summary>
             The type of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.OriginalType">
+            <summary>
+            The original type of the order
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.ActivatePrice">
