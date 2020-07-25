@@ -17,12 +17,14 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// <summary>
         /// buy volume
         /// </summary>
-        public decimal BuyVol { get; set; }
+        [JsonProperty("buyVol")]
+        public decimal BuyVolume { get; set; }
 
         /// <summary>
         /// sell volume
         /// </summary>
-        public decimal SellVol { get; set; }
+        [JsonProperty("sellVol")]
+        public decimal SellVolume { get; set; }
 
         /// <summary>
         /// Timestamp

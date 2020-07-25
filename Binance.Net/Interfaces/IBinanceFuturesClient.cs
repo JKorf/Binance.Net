@@ -931,20 +931,22 @@ namespace Binance.Net.Interfaces
         Task<WebCallResult<IEnumerable<BinanceFuturesIncomeHistory>>> GetIncomeHistoryAsync(string? symbol = null, string? incomeType = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Gets all user positions
+        /// Gets open positions
         /// </summary>
+        /// <param name="symbol">The symbol to get open positions for</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of Positions</returns>
-        WebCallResult<IEnumerable<BinanceFuturesPosition>> GetOpenPositions(long? receiveWindow = null, CancellationToken ct = default);
+        WebCallResult<IEnumerable<BinanceFuturesPosition>> GetOpenPositions(string? symbol, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Gets all user positions
+        /// Gets open positions
         /// </summary>
+        /// <param name="symbol">The symbol to get open positions for</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of Positions</returns>
-        Task<WebCallResult<IEnumerable<BinanceFuturesPosition>>> GetOpenPositionsAsync(long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceFuturesPosition>>> GetOpenPositionsAsync(string? symbol, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToUserDataUpdates"/>. The stream will close after 60 minutes unless a keep alive is send.

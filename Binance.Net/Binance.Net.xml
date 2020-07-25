@@ -3523,7 +3523,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of all margin changes for the symbol</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.GetOpenPositions(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.GetOpenPositions(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user positions
             </summary>
@@ -3531,7 +3531,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of Positions</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.GetOpenPositionsAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.GetOpenPositionsAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user positions
             </summary>
@@ -9216,18 +9216,20 @@
             <param name="ct">Cancellation token</param>
             <returns>The income history for the futures account</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetOpenPositions(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetOpenPositions(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Gets all user positions
+            Gets open positions
             </summary>
+            <param name="symbol">The symbol to get open positions for</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of Positions</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetOpenPositionsAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetOpenPositionsAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Gets all user positions
+            Gets open positions
             </summary>
+            <param name="symbol">The symbol to get open positions for</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of Positions</returns>
@@ -10997,6 +10999,21 @@
             Wallet Balance
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.CrossWalletBalance">
+            <summary>
+            Crossed Wallet Balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.CrossUnPnl">
+            <summary>
+            Unrealized profit of crossed positions
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.AvailableBalance">
+            <summary>
+            Available balance
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance">
             <summary>
             Information about an account
@@ -11017,14 +11034,24 @@
             The total balance of this asset
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance.WithdrawAvailable">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance.CrossWalletBalance">
             <summary>
-            The total balance available for withdraw for this asset
+            Crossed wallet balance
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance.UpdateTime">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance.CrossPositionsUnrealizedProfitAndLoss">
             <summary>
-            The time of balance was updated
+            Unrealized profit of crossed positions
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance.AvailableBalance">
+            <summary>
+            Available balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance.MaxWithdrawAvailable">
+            <summary>
+            Maximum amount for transfer out
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo">
@@ -11037,9 +11064,9 @@
             Information about an account assets
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.CanDeposite">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.CanDeposit">
             <summary>
-            Boolean indicating if this account can deposite
+            Boolean indicating if this account can deposit
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.CanTrade">
@@ -11102,6 +11129,21 @@
             Total wallet balance
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.TotalCrossWalletBalance">
+            <summary>
+            Total crossed wallet balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.TotalCrossUnPnl">
+            <summary>
+            Unrealized profit of crossed positions
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.AvailableBalance">
+            <summary>
+            Available balance
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.UpdateTime">
             <summary>
             The time of account info was updated
@@ -11155,6 +11197,16 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.PositionSide">
             <summary>
             Position side
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.EntryPrice">
+            <summary>
+            Entry Price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.MaxNotional">
+            <summary>
+            Maximum available notional with current leverage
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder">
@@ -11749,6 +11801,11 @@
             The price of the unrealized PnL
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPosition.PositionSide">
+            <summary>
+            The position side of the order
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPositionMarginResult">
             <summary>
             Result of the requested margin amount change
@@ -11795,12 +11852,12 @@
             buy/sell ratio
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesBuySellVolumeRatio.BuyVol">
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesBuySellVolumeRatio.BuyVolume">
             <summary>
             buy volume
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesBuySellVolumeRatio.SellVol">
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesBuySellVolumeRatio.SellVolume">
             <summary>
             sell volume
             </summary>

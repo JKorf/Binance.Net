@@ -51,5 +51,15 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Position side
         /// </summary>
         public PositionSide PositionSide { get; set; }
+
+        /// <summary>
+        /// Entry Price
+        /// </summary>
+        public decimal EntryPrice { get; set; }
+
+        /// <summary>
+        /// Maximum available notional with current leverage
+        /// </summary>
+        public decimal MaxNotional { get; set; }
     }
 }

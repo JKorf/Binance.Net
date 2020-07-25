@@ -16,9 +16,9 @@ namespace Binance.Net.Objects.Futures.FuturesData
         public IEnumerable<BinanceFuturesAccountAsset> Assets { get; set; } = new List<BinanceFuturesAccountAsset>();
         
         /// <summary>
-        /// Boolean indicating if this account can deposite
+        /// Boolean indicating if this account can deposit
         /// </summary>
-        public bool CanDeposite { get; set; }
+        public bool CanDeposit { get; set; }
 
         /// <summary>
         /// Boolean indicating if this account can trade
@@ -79,6 +79,21 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Total wallet balance
         /// </summary>
         public decimal TotalWalletBalance { get; set; }
+
+        /// <summary>
+        /// Total crossed wallet balance
+        /// </summary>
+        public decimal TotalCrossWalletBalance { get; set; }
+
+        /// <summary>
+        /// Unrealized profit of crossed positions
+        /// </summary>
+        public decimal TotalCrossUnPnl { get; set; }
+
+        /// <summary>
+        /// Available balance
+        /// </summary>
+        public decimal AvailableBalance { get; set; }
 
         /// <summary>
         /// The time of account info was updated
