@@ -400,6 +400,54 @@ namespace Binance.Net.Interfaces
         Task<WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>>> GetTopLongShortAccountRatioAsync(string symbol, PeriodInterval interval, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
 
         /// <summary>
+        /// Gets Top Trader Long/Short Ratio (Positions)
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="interval">The period timespan</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time to get top trader long/short ratio (positions)</param>
+        /// <param name="endTime">End time to get top trader long/short ratio (positions)</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Top Trader Long/Short Ratio (Positions) info</returns>
+        WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>> GetTopLongShortPositionRatio(string symbol, PeriodInterval interval, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets Top Trader Long/Short Ratio (Positions)
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="interval">The period timespan</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time to get top trader long/short ratio (positions)</param>
+        /// <param name="endTime">End time to get top trader long/short ratio (positions)</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Top Trader Long/Short Ratio (Positions) info</returns>
+        Task<WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>>> GetTopLongShortPositionRatioAsync(string symbol, PeriodInterval interval, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets Taker Buy/Sell Volume Ratio
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="interval">The period timespan</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time to get taker buy/sell volume ratio</param>
+        /// <param name="endTime">End time to get taker buy/sell volume ratio</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Taker Buy/Sell Volume Ratio info</returns>
+        WebCallResult<IEnumerable<BinanceFuturesBuySellVolumeRatio>> GetTakerBuySellVolumeRatio(string symbol, PeriodInterval interval, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets Taker Buy/Sell Volume Ratio
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="interval">The period timespan</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time to get taker buy/sell volume ratio</param>
+        /// <param name="endTime">End time to get taker buy/sell volume ratio</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Taker Buy/Sell Volume Ratio info</returns>
+        Task<WebCallResult<IEnumerable<BinanceFuturesBuySellVolumeRatio>>> GetTakerBuySellVolumeRatioAsync(string symbol, PeriodInterval interval, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
+
+        /// <summary>
         /// Gets Notional and Leverage Brackets
         /// </summary>
         /// <param name="Symbol">The symbol to get the data for</param>

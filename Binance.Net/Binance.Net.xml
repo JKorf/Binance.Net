@@ -3057,6 +3057,78 @@
             <param name="ct">Cancellation token</param>
             <returns>Top Trader Long/Short Ratio (Accounts) info</returns>
         </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetTopLongShortPositionRatio(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Top Trader Long/Short Ratio (Positions)
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="interval">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get top trader long/short ratio (positions)</param>
+            <param name="endTime">End time to get top trader long/short ratio (positions)</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Top Trader Long/Short Ratio (Positions) info</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetTopLongShortPositionRatioAsync(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Top Trader Long/Short Ratio (Positions)
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="interval">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get top trader long/short ratio (positions)</param>
+            <param name="endTime">End time to get top trader long/short ratio (positions)</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Top Trader Long/Short Ratio (Positions) info</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetGlobalLongShortAccountRatio(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Global Long/Short Ratio (Accounts)
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="interval">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get global long/short ratio (accounts)</param>
+            <param name="endTime">End time to get global long/short ratio (accounts)</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Global Long/Short Ratio (Accounts) info</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetGlobalLongShortAccountRatioAsync(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Global Long/Short Ratio (Accounts)
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="interval">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get global long/short ratio (accounts)</param>
+            <param name="endTime">End time to get global long/short ratio (accounts)</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Global Long/Short Ratio (Accounts) info</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetTakerBuySellVolumeRatio(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Taker Buy/Sell Volume Ratio
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="interval">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get taker buy/sell volume ratio</param>
+            <param name="endTime">End time to get taker buy/sell volume ratio</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Taker Buy/Sell Volume Ratio info</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetTakerBuySellVolumeRatioAsync(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Taker Buy/Sell Volume Ratio
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="interval">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get taker buy/sell volume ratio</param>
+            <param name="endTime">End time to get taker buy/sell volume ratio</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Taker Buy/Sell Volume Ratio info</returns>
+        </member>
         <member name="M:Binance.Net.BinanceFuturesClient.ModifyPositionMode(System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
@@ -8656,6 +8728,54 @@
             <param name="ct">Cancellation token</param>
             <returns>Top Trader Long/Short Ratio (Accounts) info</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetTopLongShortPositionRatio(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Top Trader Long/Short Ratio (Positions)
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="interval">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get top trader long/short ratio (positions)</param>
+            <param name="endTime">End time to get top trader long/short ratio (positions)</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Top Trader Long/Short Ratio (Positions) info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetTopLongShortPositionRatioAsync(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Top Trader Long/Short Ratio (Positions)
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="interval">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get top trader long/short ratio (positions)</param>
+            <param name="endTime">End time to get top trader long/short ratio (positions)</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Top Trader Long/Short Ratio (Positions) info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetTakerBuySellVolumeRatio(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Taker Buy/Sell Volume Ratio
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="interval">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get taker buy/sell volume ratio</param>
+            <param name="endTime">End time to get taker buy/sell volume ratio</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Taker Buy/Sell Volume Ratio info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetTakerBuySellVolumeRatioAsync(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Taker Buy/Sell Volume Ratio
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="interval">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get taker buy/sell volume ratio</param>
+            <param name="endTime">End time to get taker buy/sell volume ratio</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Taker Buy/Sell Volume Ratio info</returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetBracket(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets Notional and Leverage Brackets
@@ -11663,6 +11783,31 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPositionMode.PositionMode">
             <summary>
             true": Hedge Mode mode; "false": One-way Mode
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesBuySellVolumeRatio">
+            <summary>
+            Buy Sell Volume Ratio Info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesBuySellVolumeRatio.BuySellRatio">
+            <summary>
+            buy/sell ratio
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesBuySellVolumeRatio.BuyVol">
+            <summary>
+            buy volume
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesBuySellVolumeRatio.SellVol">
+            <summary>
+            sell volume
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesBuySellVolumeRatio.Timestamp">
+            <summary>
+            Timestamp
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesExchangeInfo">

@@ -5,29 +5,24 @@ using System;
 namespace Binance.Net.Objects.Futures.MarketData
 {
     /// <summary>
-    /// Long Short Ratio Info
+    /// Buy Sell Volume Ratio Info
     /// </summary>
-    public class BinanceFuturesLongShortRatio
+    public class BinanceFuturesBuySellVolumeRatio
     {
         /// <summary>
-        /// The symbol the information is about
+        /// buy/sell ratio
         /// </summary>
-        public string Symbol { get; set; } = "";
+        public decimal BuySellRatio { get; set; }
 
         /// <summary>
-        /// long/short ratio
+        /// buy volume
         /// </summary>
-        public decimal LongShortRatio { get; set; }
+        public decimal BuyVol { get; set; }
 
         /// <summary>
-        /// longs percentage (in decimal form)
+        /// sell volume
         /// </summary>
-        public decimal LongAccount { get; set; }
-
-        /// <summary>
-        /// shorts percentage (in decimal form)
-        /// </summary>
-        public decimal ShortAccount { get; set; }
+        public decimal SellVol { get; set; }
 
         /// <summary>
         /// Timestamp
