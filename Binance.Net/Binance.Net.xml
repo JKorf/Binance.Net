@@ -8752,6 +8752,30 @@
             <param name="ct">Cancellation token</param>
             <returns>Top Trader Long/Short Ratio (Positions) info</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetGlobalLongShortAccountRatio(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Global Long/Short Ratio (Accounts)
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="period">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get global long/short ratio (accounts)</param>
+            <param name="endTime">End time to get global long/short ratio (accounts)</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Global Long/Short Ratio (Accounts) info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetGlobalLongShortAccountRatioAsync(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Global Long/Short Ratio (Accounts)
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="period">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get global long/short ratio (accounts)</param>
+            <param name="endTime">End time to get global long/short ratio (accounts)</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Global Long/Short Ratio (Accounts) info</returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetTakerBuySellVolumeRatio(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             Gets Taker Buy/Sell Volume Ratio

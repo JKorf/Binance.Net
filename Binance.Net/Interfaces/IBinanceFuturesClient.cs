@@ -424,6 +424,30 @@ namespace Binance.Net.Interfaces
         Task<WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>>> GetTopLongShortPositionRatioAsync(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
 
         /// <summary>
+        /// Gets Global Long/Short Ratio (Accounts)
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="period">The period timespan</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time to get global long/short ratio (accounts)</param>
+        /// <param name="endTime">End time to get global long/short ratio (accounts)</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Global Long/Short Ratio (Accounts) info</returns>
+        WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>> GetGlobalLongShortAccountRatio(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets Global Long/Short Ratio (Accounts)
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="period">The period timespan</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time to get global long/short ratio (accounts)</param>
+        /// <param name="endTime">End time to get global long/short ratio (accounts)</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Global Long/Short Ratio (Accounts) info</returns>
+        Task<WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>>> GetGlobalLongShortAccountRatioAsync(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
+
+        /// <summary>
         /// Gets Taker Buy/Sell Volume Ratio
         /// </summary>
         /// <param name="symbol">The symbol to get the data for</param>
