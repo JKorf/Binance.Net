@@ -33,15 +33,15 @@ namespace Binance.Net.Objects.Futures.FuturesData
         [JsonProperty("price")]
         public decimal Price { get; set; }
         /// <summary>
-        /// Cummulative amount
+        /// Cumulative amount
         /// </summary>
         [JsonProperty("cumQty")]
-        public decimal CummulativeQuantity { get; set; }
+        public decimal CumulativeQuantity { get; set; }
         /// <summary>
-        /// Cummulative amount
+        /// Cumulative amount
         /// </summary>
         [JsonProperty("cumQuote")]
-        public decimal CummulativeQuoteQuantity { get; set; }
+        public decimal CumulativeQuoteQuantity { get; set; }
         /// <summary>
         /// The quantity of the order that is executed
         /// </summary>
@@ -58,10 +58,11 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// </summary>
         [JsonProperty("reduceOnly")]
         public bool ReduceOnly { get; set; }
-        
+
         /// <summary>
         /// if Close-All
         /// </summary>
+        [JsonProperty("closePosition")]
         public bool ClosePosition { get; set; }
 
         /// <summary>
@@ -104,13 +105,13 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Activation price, only return with TRAILING_STOP_MARKET order
         /// </summary>
         [JsonProperty("activatePrice")]
-        public decimal ActivatePrice { get; set; }
+        public decimal? ActivatePrice { get; set; }
 
         /// <summary>
         /// Callback rate, only return with TRAILING_STOP_MARKET order
         /// </summary>
         [JsonProperty("priceRate")]
-        public decimal PriceRate { get; set; }
+        public decimal? PriceRate { get; set; }
 
         /// <summary>
         /// The time the order was updated
@@ -123,5 +124,11 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// </summary>
         [JsonProperty("workingType"), JsonConverter(typeof(WorkingTypeConverter))]
         public WorkingType WorkingType { get; set; }
+
+        /// <summary>
+        /// The position side of the order
+        /// </summary>
+        [JsonProperty("positionSide"), JsonConverter(typeof(PositionSideConverter))]
+        public PositionSide PositionSide { get; set; }
     }
 }

@@ -49,5 +49,20 @@
         /// Wallet Balance
         /// </summary>
         public decimal WalletBalance { get; set; }
+
+        /// <summary>
+        /// Crossed Wallet Balance
+        /// </summary>
+        public decimal CrossWalletBalance { get; set; }
+
+        /// <summary>
+        /// Unrealized profit of crossed positions
+        /// </summary>
+        public decimal CrossUnPnl { get; set; }
+
+        /// <summary>
+        /// Available balance
+        /// </summary>
+        public decimal AvailableBalance { get; set; }
     }
 }

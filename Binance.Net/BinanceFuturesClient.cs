@@ -52,10 +52,12 @@ namespace Binance.Net
 
         // Addresses
         private const string Api = "fapi";
+        private const string TradingDataApi = "futures/data";
 
         // Versions
         private const string PublicVersion = "1";
         private const string SignedVersion = "1";
+        private const string SignedV2 = "2";
         private const string UserDataStreamVersion = "1";
 
         // Public
@@ -73,6 +75,13 @@ namespace Binance.Net
         private const string AllForcedOrdersEndpoint = "allForceOrders";
         private const string OpenInterestEndpoint = "openInterest";
         private const string LeverageBracketEndpoint = "leverageBracket";
+
+        // Market Data
+        private const string OpenInterestHistoryEndpoint = "openInterestHist";
+        private const string TopLongShortAccountRatioEndpoint = "topLongShortAccountRatio";
+        private const string TopLongShortPositionRatioEndpoint = "topLongShortPositionRatio";
+        private const string GlobalLongShortAccountRatioEndpoint = "globalLongShortAccountRatio";
+        private const string TakerBuySellVolumeRatioEndpoint = "takerlongshortRatio";
 
         // Orders
         private const string NewOrderEndpoint = "order";
@@ -731,6 +740,221 @@ namespace Binance.Net
             };
 
             return await SendRequest<BinanceFuturesOpenInterest>(GetUrl(OpenInterestEndpoint, Api, PublicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Open Interest History
+
+        /// <summary>
+        /// Gets Open Interest History
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="period">The period timespan</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time to get open interest history</param>
+        /// <param name="endTime">End time to get open interest history</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Open Interest History info</returns>
+        public WebCallResult<IEnumerable<BinanceFuturesOpenInterestHistory>> GetOpenInterestHistory(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default) => GetOpenInterestHistoryAsync(symbol, period, limit, startTime, endTime, ct).Result;
+
+        /// <summary>
+        /// Gets Open Interest History
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="period">The period timespan</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time to get open interest history</param>
+        /// <param name="endTime">End time to get open interest history</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Open Interest History info</returns>
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesOpenInterestHistory>>> GetOpenInterestHistoryAsync(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default)
+        {
+            symbol.ValidateBinanceSymbol();
+            limit?.ValidateIntBetween(nameof(limit), 1, 500);
+            
+            var parameters = new Dictionary<string, object> {
+                { "symbol", symbol },
+                { "period", JsonConvert.SerializeObject(period, new PeriodIntervalConverter(false)) }
+            };
+
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+
+            return await SendRequest<IEnumerable<BinanceFuturesOpenInterestHistory>>(GetUrl(OpenInterestHistoryEndpoint, TradingDataApi), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Top Trader Long/Short Ratio (Accounts)
+
+        /// <summary>
+        /// Gets Top Trader Long/Short Ratio (Accounts)
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="period">The period timespan</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time to get top trader long/short ratio (accounts)</param>
+        /// <param name="endTime">End time to get top trader long/short ratio (accounts)</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Top Trader Long/Short Ratio (Accounts) info</returns>
+        public WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>> GetTopLongShortAccountRatio(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default) => GetTopLongShortAccountRatioAsync(symbol, period, limit, startTime, endTime, ct).Result;
+
+        /// <summary>
+        /// Gets Top Trader Long/Short Ratio (Accounts)
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="period">The period timespan</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time to get top trader long/short ratio (accounts)</param>
+        /// <param name="endTime">End time to get top trader long/short ratio (accounts)</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Top Trader Long/Short Ratio (Accounts) info</returns>
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>>> GetTopLongShortAccountRatioAsync(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default)
+        {
+            symbol.ValidateBinanceSymbol();
+            limit?.ValidateIntBetween(nameof(limit), 1, 500);
+
+            var parameters = new Dictionary<string, object> {
+                { "symbol", symbol },
+                { "period", JsonConvert.SerializeObject(period, new PeriodIntervalConverter(false)) }
+            };
+
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+
+            return await SendRequest<IEnumerable<BinanceFuturesLongShortRatio>>(GetUrl(TopLongShortAccountRatioEndpoint, TradingDataApi), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Top Trader Long/Short Ratio (Positions)
+
+        /// <summary>
+        /// Gets Top Trader Long/Short Ratio (Positions)
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="period">The period timespan</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time to get top trader long/short ratio (positions)</param>
+        /// <param name="endTime">End time to get top trader long/short ratio (positions)</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Top Trader Long/Short Ratio (Positions) info</returns>
+        public WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>> GetTopLongShortPositionRatio(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default) => GetTopLongShortPositionRatioAsync(symbol, period, limit, startTime, endTime, ct).Result;
+
+        /// <summary>
+        /// Gets Top Trader Long/Short Ratio (Positions)
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="period">The period timespan</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time to get top trader long/short ratio (positions)</param>
+        /// <param name="endTime">End time to get top trader long/short ratio (positions)</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Top Trader Long/Short Ratio (Positions) info</returns>
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>>> GetTopLongShortPositionRatioAsync(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default)
+        {
+            symbol.ValidateBinanceSymbol();
+            limit?.ValidateIntBetween(nameof(limit), 1, 500);
+
+            var parameters = new Dictionary<string, object> {
+                { "symbol", symbol },
+                { "period", JsonConvert.SerializeObject(period, new PeriodIntervalConverter(false)) }
+            };
+
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+
+            return await SendRequest<IEnumerable<BinanceFuturesLongShortRatio>>(GetUrl(TopLongShortPositionRatioEndpoint, TradingDataApi), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Global Long/Short Ratio (Accounts)
+
+        /// <summary>
+        /// Gets Global Long/Short Ratio (Accounts)
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="period">The period timespan</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time to get global long/short ratio (accounts)</param>
+        /// <param name="endTime">End time to get global long/short ratio (accounts)</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Global Long/Short Ratio (Accounts) info</returns>
+        public WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>> GetGlobalLongShortAccountRatio(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default) => GetGlobalLongShortAccountRatioAsync(symbol, period, limit, startTime, endTime, ct).Result;
+
+        /// <summary>
+        /// Gets Global Long/Short Ratio (Accounts)
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="period">The period timespan</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time to get global long/short ratio (accounts)</param>
+        /// <param name="endTime">End time to get global long/short ratio (accounts)</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Global Long/Short Ratio (Accounts) info</returns>
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>>> GetGlobalLongShortAccountRatioAsync(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default)
+        {
+            symbol.ValidateBinanceSymbol();
+            limit?.ValidateIntBetween(nameof(limit), 1, 500);
+
+            var parameters = new Dictionary<string, object> {
+                { "symbol", symbol },
+                { "period", JsonConvert.SerializeObject(period, new PeriodIntervalConverter(false)) }
+            };
+
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+
+            return await SendRequest<IEnumerable<BinanceFuturesLongShortRatio>>(GetUrl(GlobalLongShortAccountRatioEndpoint, TradingDataApi), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Taker Buy/Sell Volume Ratio
+
+        /// <summary>
+        /// Gets Taker Buy/Sell Volume Ratio
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="period">The period timespan</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time to get taker buy/sell volume ratio</param>
+        /// <param name="endTime">End time to get taker buy/sell volume ratio</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Taker Buy/Sell Volume Ratio info</returns>
+        public WebCallResult<IEnumerable<BinanceFuturesBuySellVolumeRatio>> GetTakerBuySellVolumeRatio(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default) => GetTakerBuySellVolumeRatioAsync(symbol, period, limit, startTime, endTime, ct).Result;
+
+        /// <summary>
+        /// Gets Taker Buy/Sell Volume Ratio
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="period">The period timespan</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time to get taker buy/sell volume ratio</param>
+        /// <param name="endTime">End time to get taker buy/sell volume ratio</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Taker Buy/Sell Volume Ratio info</returns>
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesBuySellVolumeRatio>>> GetTakerBuySellVolumeRatioAsync(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default)
+        {
+            symbol.ValidateBinanceSymbol();
+            limit?.ValidateIntBetween(nameof(limit), 1, 500);
+
+            var parameters = new Dictionary<string, object> {
+                { "symbol", symbol },
+                { "period", JsonConvert.SerializeObject(period, new PeriodIntervalConverter(false)) }
+            };
+
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("startTime", startTime != null ? ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("endTime", endTime != null ? ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+
+            return await SendRequest<IEnumerable<BinanceFuturesBuySellVolumeRatio>>(GetUrl(TakerBuySellVolumeRatioEndpoint, TradingDataApi), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         #endregion
@@ -1418,7 +1642,7 @@ namespace Binance.Net
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await SendRequest<IEnumerable<BinanceFuturesAccountBalance>>(GetUrl(FuturesAccountBalanceEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceFuturesAccountBalance>>(GetUrl(FuturesAccountBalanceEndpoint, Api, SignedV2), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -1451,7 +1675,7 @@ namespace Binance.Net
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await SendRequest<BinanceFuturesAccountInfo>(GetUrl(AccountInfoEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequest<BinanceFuturesAccountInfo>(GetUrl(AccountInfoEndpoint, Api, SignedV2), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -1640,7 +1864,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of Positions</returns>
-        public WebCallResult<IEnumerable<BinanceFuturesPosition>> GetOpenPositions(long? receiveWindow = null, CancellationToken ct = default) => GetOpenPositionsAsync(receiveWindow, ct).Result;
+        public WebCallResult<IEnumerable<BinanceFuturesPosition>> GetOpenPositions(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default) => GetOpenPositionsAsync(symbol, receiveWindow, ct).Result;
 
         /// <summary>
         /// Gets all user positions
@@ -1648,7 +1872,7 @@ namespace Binance.Net
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of Positions</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceFuturesPosition>>> GetOpenPositionsAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesPosition>>> GetOpenPositionsAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
@@ -1658,9 +1882,11 @@ namespace Binance.Net
             {
                 { "timestamp", GetTimestamp() }
             };
+
+            parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await SendRequest<IEnumerable<BinanceFuturesPosition>>(GetUrl(PositionInformationEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequest<IEnumerable<BinanceFuturesPosition>>(GetUrl(PositionInformationEndpoint, Api, SignedV2), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -2017,9 +2243,14 @@ namespace Binance.Net
             return err;
         }
 
-        private Uri GetUrl(string endpoint, string api, string version)
+        private Uri GetUrl(string endpoint, string api, string? version = null)
         {
-            var result = $"{BaseAddress}/{api}/v{version}/{endpoint}";
+            var result = $"{BaseAddress}/{api}/";
+
+            if (!string.IsNullOrEmpty(version))
+                result += $"v{version}/";
+
+            result += endpoint;
             return new Uri(result);
         }
 

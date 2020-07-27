@@ -66,6 +66,12 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// </summary>
         [JsonProperty("unRealizedProfit")]
         public decimal UnrealizedPnL { get; set; }
+
+        /// <summary>
+        /// The position side of the order
+        /// </summary>
+        [JsonProperty("positionSide"), JsonConverter(typeof(PositionSideConverter))]
+        public PositionSide PositionSide { get; set; }
     }
 
 }

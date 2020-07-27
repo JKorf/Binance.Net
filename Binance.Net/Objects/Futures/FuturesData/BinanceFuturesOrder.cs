@@ -38,15 +38,15 @@ namespace Binance.Net.Objects.Futures.FuturesData
         [JsonProperty("avgPrice")]
         public decimal AvgPrice { get; set; }
         /// <summary>
-        /// Cummulative amount
+        /// Cumulative amount
         /// </summary>
         [JsonProperty("cumQty")]
-        public decimal CummulativeQuantity { get; set; }
+        public decimal CumulativeQuantity { get; set; }
         /// <summary>
-        /// Cummulative amount
+        /// Cumulative amount
         /// </summary>
         [JsonProperty("cumQuote")]
-        public decimal CummulativeQuoteQuantity { get; set; }
+        public decimal CumulativeQuoteQuantity { get; set; }
         /// <summary>
         /// The quantity of the order that is executed
         /// </summary>
@@ -108,13 +108,13 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Activation price, only return with TRAILING_STOP_MARKET order
         /// </summary>
         [JsonProperty("activatePrice")]
-        public decimal ActivatePrice { get; set; }
+        public decimal? ActivatePrice { get; set; }
 
         /// <summary>
         /// Callback rate, only return with TRAILING_STOP_MARKET order
         /// </summary>
         [JsonProperty("priceRate")]
-        public decimal PriceRate { get; set; }
+        public decimal? PriceRate { get; set; }
 
         /// <summary>
         /// The time the order was updated
