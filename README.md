@@ -51,7 +51,11 @@ Implementations from third parties:
 </td>
 <td><a href="https://github.com/burakoner/OKEx.Net"><img src="https://raw.githubusercontent.com/burakoner/OKEx.Net/master/Okex.Net/Icon/icon.png"></a>
 <br />
-<a href="https://github.comburakoner/OKEx.Net">OKEx</a>
+<a href="https://github.com/burakoner/OKEx.Net">OKEx</a>
+</td>
+	<td><a href="https://github.com/ridicoulous/Bitmex.Net"><img src="https://github.com/ridicoulous/Bitmex.Net/blob/master/Bitmex.Net/Icon/icon.png"></a>
+<br />
+<a href="https://github.com/ridicoulous/Bitmex.Net">Bitmex</a>
 </td>
 	<td><a href="https://github.com/ridicoulous/Bitmex.Net"><img src="https://github.com/ridicoulous/Bitmex.Net/blob/master/Bitmex.Net/Icon/icon.png"></a>
 <br />
@@ -152,6 +156,25 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 5.1.13 - 27 Jul 2020
+	* Updated futures balance, account info, position endpoints to version 2
+	* Added missing futures market data endpoints
+
+* Version 5.1.12 - 21 Jul 2020
+    * Updated order book models
+
+* Version 5.1.11 - 20 Jul 2020
+    * Fixes for future client
+
+* Version 5.1.10 - 07 Jul 2020
+    * Fixed datetime conversion for some objects
+
+* Version 5.1.9 - 06 Jul 2020
+    * Added CancelMultipleOrders
+    * Added CancelAllOrders
+    * Added EventTime to OrderBook stream
+    * Fixed purchase record conversion
+
 * Version 5.1.8 - 21 Jun 2020
     * Updated CryptoExchange
 

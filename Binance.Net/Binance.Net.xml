@@ -3009,6 +3009,126 @@
             <param name="ct">Cancellation token</param>
             <returns>List of book prices</returns>
         </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetOpenInterestHistory(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Open Interest History
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="period">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get open interest history</param>
+            <param name="endTime">End time to get open interest history</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Open Interest History info</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetOpenInterestHistoryAsync(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Open Interest History
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="period">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get open interest history</param>
+            <param name="endTime">End time to get open interest history</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Open Interest History info</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetTopLongShortAccountRatio(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Top Trader Long/Short Ratio (Accounts)
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="period">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get top trader long/short ratio (accounts)</param>
+            <param name="endTime">End time to get top trader long/short ratio (accounts)</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Top Trader Long/Short Ratio (Accounts) info</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetTopLongShortAccountRatioAsync(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Top Trader Long/Short Ratio (Accounts)
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="period">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get top trader long/short ratio (accounts)</param>
+            <param name="endTime">End time to get top trader long/short ratio (accounts)</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Top Trader Long/Short Ratio (Accounts) info</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetTopLongShortPositionRatio(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Top Trader Long/Short Ratio (Positions)
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="period">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get top trader long/short ratio (positions)</param>
+            <param name="endTime">End time to get top trader long/short ratio (positions)</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Top Trader Long/Short Ratio (Positions) info</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetTopLongShortPositionRatioAsync(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Top Trader Long/Short Ratio (Positions)
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="period">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get top trader long/short ratio (positions)</param>
+            <param name="endTime">End time to get top trader long/short ratio (positions)</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Top Trader Long/Short Ratio (Positions) info</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetGlobalLongShortAccountRatio(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Global Long/Short Ratio (Accounts)
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="period">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get global long/short ratio (accounts)</param>
+            <param name="endTime">End time to get global long/short ratio (accounts)</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Global Long/Short Ratio (Accounts) info</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetGlobalLongShortAccountRatioAsync(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Global Long/Short Ratio (Accounts)
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="period">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get global long/short ratio (accounts)</param>
+            <param name="endTime">End time to get global long/short ratio (accounts)</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Global Long/Short Ratio (Accounts) info</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetTakerBuySellVolumeRatio(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Taker Buy/Sell Volume Ratio
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="period">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get taker buy/sell volume ratio</param>
+            <param name="endTime">End time to get taker buy/sell volume ratio</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Taker Buy/Sell Volume Ratio info</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.GetTakerBuySellVolumeRatioAsync(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Taker Buy/Sell Volume Ratio
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="period">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get taker buy/sell volume ratio</param>
+            <param name="endTime">End time to get taker buy/sell volume ratio</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Taker Buy/Sell Volume Ratio info</returns>
+        </member>
         <member name="M:Binance.Net.BinanceFuturesClient.ModifyPositionMode(System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
@@ -3153,6 +3273,24 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for canceled order</returns>
         </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.CancelAllOrders(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Cancels all open orders
+            </summary>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Id's for canceled order</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.CancelAllOrdersAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Cancels all open orders
+            </summary>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Id's for canceled order</returns>
+        </member>
         <member name="M:Binance.Net.BinanceFuturesClient.CancelAllOrdersAfterTimeout(System.String,System.TimeSpan,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Cancel all open orders of the specified symbol at the end of the specified countdown. This rest endpoint means to ensure your open orders are canceled in case of an outage. The endpoint should be called repeatedly as heartbeats
@@ -3174,6 +3312,28 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Countdown result</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.CancelMultipleOrders(System.String,System.Collections.Generic.List{System.Int64},System.Collections.Generic.List{System.String},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Cancels muliple orders
+            </summary>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="orderIdList">The list of order ids to cancel</param>
+            <param name="origClientOrderIdList">The list of client order ids to cancel</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Id's for canceled order</returns>
+        </member>
+        <member name="M:Binance.Net.BinanceFuturesClient.CancelMultipleOrdersAsync(System.String,System.Collections.Generic.List{System.Int64},System.Collections.Generic.List{System.String},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Cancels muliple orders
+            </summary>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="orderIdList">The list of order ids to cancel</param>
+            <param name="origClientOrderIdList">The list of client order ids to cancel</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Id's for canceled order</returns>
         </member>
         <member name="M:Binance.Net.BinanceFuturesClient.GetOpenOrders(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
@@ -3313,24 +3473,26 @@
             <param name="ct">Cancellation token</param>
             <returns>Whether the request was successful</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.ModifyPositionMargin(System.String,System.Decimal,Binance.Net.Enums.FuturesMarginChangeDirectionType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.ModifyPositionMargin(System.String,System.Decimal,Binance.Net.Enums.FuturesMarginChangeDirectionType,System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Change the margin on an open position
             </summary>
             <param name="symbol">Symbol to adjust the position margin for</param>
             <param name="amount">The amount of margin to be used</param>
             <param name="type">Whether to reduce or add margin to the position</param>
+            <param name="positionSide">Default BOTH for One-way Mode ; LONG or SHORT for Hedge Mode. It must be sent with Hedge Mode.</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>The new position margin</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.ModifyPositionMarginAsync(System.String,System.Decimal,Binance.Net.Enums.FuturesMarginChangeDirectionType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.ModifyPositionMarginAsync(System.String,System.Decimal,Binance.Net.Enums.FuturesMarginChangeDirectionType,System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Change the margin on an open position
             </summary>
             <param name="symbol">Symbol to adjust the position margin for</param>
             <param name="amount">The amount of margin to be used</param>
             <param name="type">Whether to reduce or add margin to the position</param>
+            <param name="positionSide">Default BOTH for One-way Mode ; LONG or SHORT for Hedge Mode. It must be sent with Hedge Mode.</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>The new position margin</returns>
@@ -3361,7 +3523,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of all margin changes for the symbol</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.GetOpenPositions(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.GetOpenPositions(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user positions
             </summary>
@@ -3369,7 +3531,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of Positions</returns>
         </member>
-        <member name="M:Binance.Net.BinanceFuturesClient.GetOpenPositionsAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.BinanceFuturesClient.GetOpenPositionsAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user positions
             </summary>
@@ -4349,7 +4511,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToOrderBookUpdates(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceOrderBook})">
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToOrderBookUpdates(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook})">
             <summary>
             Subscribes to the order book updates for the provided symbol
             </summary>
@@ -4358,7 +4520,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceOrderBook})">
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook})">
             <summary>
             Subscribes to the order book updates for the provided symbol
             </summary>
@@ -4367,7 +4529,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToOrderBookUpdates(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceOrderBook})">
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToOrderBookUpdates(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook})">
             <summary>
             Subscribes to the depth update stream for the provided symbols
             </summary>
@@ -4376,7 +4538,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceOrderBook})">
+        <member name="M:Binance.Net.BinanceSocketClient.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook})">
             <summary>
             Subscribes to the depth update stream for the provided symbols
             </summary>
@@ -5005,6 +5167,56 @@
         <member name="F:Binance.Net.Enums.OrderType.TrailingStopMarket">
             <summary>
             Trailing stop order will be placed without a price. The order will be executed at the best price available at that time in the order book.
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.PeriodInterval">
+            <summary>
+            The interval for the period
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PeriodInterval.FiveMinutes">
+            <summary>
+            5m
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PeriodInterval.FifteenMinutes">
+            <summary>
+            15m
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PeriodInterval.ThirtyMinutes">
+            <summary>
+            30m
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PeriodInterval.OneHour">
+            <summary>
+            1h
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PeriodInterval.TwoHour">
+            <summary>
+            2h
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PeriodInterval.FourHour">
+            <summary>
+            4h
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PeriodInterval.SixHour">
+            <summary>
+            6h
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PeriodInterval.TwelveHour">
+            <summary>
+            12h
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PeriodInterval.OneDay">
+            <summary>
+            1d
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.PositionMode">
@@ -8468,6 +8680,126 @@
             <param name="ct">Cancellation token</param>
             <returns>List of book prices</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetOpenInterestHistory(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Open Interest History
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="period">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get open interest history</param>
+            <param name="endTime">End time to get open interest history</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Open Interest History info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetOpenInterestHistoryAsync(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Open Interest History
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="period">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get open interest history</param>
+            <param name="endTime">End time to get open interest history</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Open Interest History info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetTopLongShortAccountRatio(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Top Trader Long/Short Ratio (Accounts)
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="period">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get top trader long/short ratio (accounts)</param>
+            <param name="endTime">End time to get top trader long/short ratio (accounts)</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Top Trader Long/Short Ratio (Accounts) info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetTopLongShortAccountRatioAsync(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Top Trader Long/Short Ratio (Accounts)
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="period">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get top trader long/short ratio (accounts)</param>
+            <param name="endTime">End time to get top trader long/short ratio (accounts)</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Top Trader Long/Short Ratio (Accounts) info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetTopLongShortPositionRatio(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Top Trader Long/Short Ratio (Positions)
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="period">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get top trader long/short ratio (positions)</param>
+            <param name="endTime">End time to get top trader long/short ratio (positions)</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Top Trader Long/Short Ratio (Positions) info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetTopLongShortPositionRatioAsync(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Top Trader Long/Short Ratio (Positions)
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="period">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get top trader long/short ratio (positions)</param>
+            <param name="endTime">End time to get top trader long/short ratio (positions)</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Top Trader Long/Short Ratio (Positions) info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetGlobalLongShortAccountRatio(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Global Long/Short Ratio (Accounts)
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="period">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get global long/short ratio (accounts)</param>
+            <param name="endTime">End time to get global long/short ratio (accounts)</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Global Long/Short Ratio (Accounts) info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetGlobalLongShortAccountRatioAsync(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Global Long/Short Ratio (Accounts)
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="period">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get global long/short ratio (accounts)</param>
+            <param name="endTime">End time to get global long/short ratio (accounts)</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Global Long/Short Ratio (Accounts) info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetTakerBuySellVolumeRatio(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Taker Buy/Sell Volume Ratio
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="period">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get taker buy/sell volume ratio</param>
+            <param name="endTime">End time to get taker buy/sell volume ratio</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Taker Buy/Sell Volume Ratio info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetTakerBuySellVolumeRatioAsync(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Gets Taker Buy/Sell Volume Ratio
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="period">The period timespan</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time to get taker buy/sell volume ratio</param>
+            <param name="endTime">End time to get taker buy/sell volume ratio</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Taker Buy/Sell Volume Ratio info</returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetBracket(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets Notional and Leverage Brackets
@@ -8790,24 +9122,26 @@
             <param name="ct">Cancellation token</param>
             <returns>Whether the request was successful</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.ModifyPositionMargin(System.String,System.Decimal,Binance.Net.Enums.FuturesMarginChangeDirectionType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.ModifyPositionMargin(System.String,System.Decimal,Binance.Net.Enums.FuturesMarginChangeDirectionType,System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Change the margin on an open position
             </summary>
             <param name="symbol">Symbol to adjust the position margin for</param>
             <param name="amount">The amount of margin to be used</param>
             <param name="type">Whether to reduce or add margin to the position</param>
+            <param name="positionSide">Default BOTH for One-way Mode ; LONG or SHORT for Hedge Mode. It must be sent with Hedge Mode.</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>The new position margin</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.ModifyPositionMarginAsync(System.String,System.Decimal,Binance.Net.Enums.FuturesMarginChangeDirectionType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.ModifyPositionMarginAsync(System.String,System.Decimal,Binance.Net.Enums.FuturesMarginChangeDirectionType,System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Change the margin on an open position
             </summary>
             <param name="symbol">Symbol to adjust the position margin for</param>
             <param name="amount">The amount of margin to be used</param>
             <param name="type">Whether to reduce or add margin to the position</param>
+            <param name="positionSide">Default BOTH for One-way Mode ; LONG or SHORT for Hedge Mode. It must be sent with Hedge Mode.</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>The new position margin</returns>
@@ -8906,18 +9240,20 @@
             <param name="ct">Cancellation token</param>
             <returns>The income history for the futures account</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetOpenPositions(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetOpenPositions(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Gets all user positions
+            Gets open positions
             </summary>
+            <param name="symbol">The symbol to get open positions for</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of Positions</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetOpenPositionsAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.IBinanceFuturesClient.GetOpenPositionsAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Gets all user positions
+            Gets open positions
             </summary>
+            <param name="symbol">The symbol to get open positions for</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of Positions</returns>
@@ -9685,7 +10021,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToOrderBookUpdates(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceOrderBook})">
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToOrderBookUpdates(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook})">
             <summary>
             Subscribes to the order book updates for the provided symbol
             </summary>
@@ -9694,7 +10030,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceOrderBook})">
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook})">
             <summary>
             Subscribes to the order book updates for the provided symbol
             </summary>
@@ -9703,7 +10039,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToOrderBookUpdates(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceOrderBook})">
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToOrderBookUpdates(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook})">
             <summary>
             Subscribes to the depth update stream for the provided symbols
             </summary>
@@ -9712,7 +10048,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceOrderBook})">
+        <member name="M:Binance.Net.Interfaces.IBinanceSocketClient.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook})">
             <summary>
             Subscribes to the depth update stream for the provided symbols
             </summary>
@@ -10687,6 +11023,21 @@
             Wallet Balance
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.CrossWalletBalance">
+            <summary>
+            Crossed Wallet Balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.CrossUnPnl">
+            <summary>
+            Unrealized profit of crossed positions
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.AvailableBalance">
+            <summary>
+            Available balance
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance">
             <summary>
             Information about an account
@@ -10707,14 +11058,24 @@
             The total balance of this asset
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance.WithdrawAvailable">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance.CrossWalletBalance">
             <summary>
-            The total balance available for withdraw for this asset
+            Crossed wallet balance
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance.UpdateTime">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance.CrossPositionsUnrealizedProfitAndLoss">
             <summary>
-            The time of balance was updated
+            Unrealized profit of crossed positions
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance.AvailableBalance">
+            <summary>
+            Available balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance.MaxWithdrawAvailable">
+            <summary>
+            Maximum amount for transfer out
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo">
@@ -10727,9 +11088,9 @@
             Information about an account assets
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.CanDeposite">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.CanDeposit">
             <summary>
-            Boolean indicating if this account can deposite
+            Boolean indicating if this account can deposit
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.CanTrade">
@@ -10792,6 +11153,21 @@
             Total wallet balance
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.TotalCrossWalletBalance">
+            <summary>
+            Total crossed wallet balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.TotalCrossUnPnl">
+            <summary>
+            Unrealized profit of crossed positions
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.AvailableBalance">
+            <summary>
+            Available balance
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.UpdateTime">
             <summary>
             The time of account info was updated
@@ -10845,6 +11221,16 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.PositionSide">
             <summary>
             Position side
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.EntryPrice">
+            <summary>
+            Entry Price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.MaxNotional">
+            <summary>
+            Maximum available notional with current leverage
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder">
@@ -10917,6 +11303,21 @@
             Stop price triggered by: Mark or Contract. Default Contract
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelAllOrders">
+            <summary>
+            The result of cancel all orders
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelAllOrders.Code">
+            <summary>
+            The execution code
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelAllOrders.Message">
+            <summary>
+            The execution message
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder">
             <summary>
             The result of cancel order
@@ -10942,14 +11343,14 @@
             The price of the order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.CummulativeQuantity">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.CumulativeQuantity">
             <summary>
-            Cummulative amount
+            Cumulative amount
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.CummulativeQuoteQuantity">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.CumulativeQuoteQuantity">
             <summary>
-            Cummulative amount
+            Cumulative amount
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.ExecutedQuantity">
@@ -11020,6 +11421,11 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.WorkingType">
             <summary>
             The working type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.PositionSide">
+            <summary>
+            The position side of the order
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesChangeMarginTypeResult">
@@ -11178,14 +11584,14 @@
             The average price of the order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.CummulativeQuantity">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.CumulativeQuantity">
             <summary>
-            Cummulative amount
+            Cumulative amount
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.CummulativeQuoteQuantity">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.CumulativeQuoteQuantity">
             <summary>
-            Cummulative amount
+            Cumulative amount
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.ExecutedQuantity">
@@ -11263,6 +11669,11 @@
             The working type
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.PositionSide">
+            <summary>
+            The position side of the order
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder">
             <summary>
             The result of placing a new order
@@ -11288,9 +11699,19 @@
             The price of the order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.CummulativeQuoteQuantity">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.AvgPrice">
             <summary>
-            Cummulative amount
+            The average price of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.CumulativeQuantity">
+            <summary>
+            Cumulative amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.CumulativeQuoteQuantity">
+            <summary>
+            Cumulative amount in quote currency
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.ExecutedQuantity">
@@ -11328,6 +11749,11 @@
             Stop price for the order
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.ClosePosition">
+            <summary>
+            If order is for closing a position
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.TimeInForce">
             <summary>
             For what time the order lasts
@@ -11336,6 +11762,11 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.Type">
             <summary>
             The type of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.OriginalType">
+            <summary>
+            The original type of the order
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.ActivatePrice">
@@ -11419,6 +11850,11 @@
             The price of the unrealized PnL
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPosition.PositionSide">
+            <summary>
+            The position side of the order
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPositionMarginResult">
             <summary>
             Result of the requested margin amount change
@@ -11453,6 +11889,31 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPositionMode.PositionMode">
             <summary>
             true": Hedge Mode mode; "false": One-way Mode
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesBuySellVolumeRatio">
+            <summary>
+            Buy Sell Volume Ratio Info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesBuySellVolumeRatio.BuySellRatio">
+            <summary>
+            buy/sell ratio
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesBuySellVolumeRatio.BuyVolume">
+            <summary>
+            buy volume
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesBuySellVolumeRatio.SellVolume">
+            <summary>
+            sell volume
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesBuySellVolumeRatio.Timestamp">
+            <summary>
+            Timestamp
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesExchangeInfo">
@@ -11560,6 +12021,36 @@
             Forced time
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesLongShortRatio">
+            <summary>
+            Long Short Ratio Info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesLongShortRatio.Symbol">
+            <summary>
+            The symbol the information is about
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesLongShortRatio.LongShortRatio">
+            <summary>
+            long/short ratio
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesLongShortRatio.LongAccount">
+            <summary>
+            longs percentage (in decimal form)
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesLongShortRatio.ShortAccount">
+            <summary>
+            shorts percentage (in decimal form)
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesLongShortRatio.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesMarkPrice">
             <summary>
             Mark Price and Funding Rate
@@ -11606,6 +12097,31 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesOpenInterest.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesOpenInterestHistory">
+            <summary>
+            Open Interest History info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesOpenInterestHistory.Symbol">
+            <summary>
+            The symbol the information is about
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesOpenInterestHistory.SumOpenInterest">
+            <summary>
+            Total open interest
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesOpenInterestHistory.SumOpenInterestValue">
+            <summary>
+            Total open interest value
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesOpenInterestHistory.Timestamp">
             <summary>
             Timestamp
             </summary>
@@ -13578,6 +14094,36 @@
             Timestamp
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook">
+            <summary>
+            Stream order book
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook.LastUpdateIdStream">
+            <summary>
+            Setter for last update id, need for Json.Net
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook.EventType">
+            <summary>
+            Event type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook.EventTime">
+            <summary>
+            Event time of the update (stream only)
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook.BidsStream">
+            <summary>
+            Setter for bids (needed forJson.Net)
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook.AsksStream">
+            <summary>
+            Setter for asks (needed forJson.Net)
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.MarketData.BinanceExchangeInfo">
             <summary>
             Exchange info
@@ -13675,17 +14221,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.Symbol">
             <summary>
-            The symbol of the order book (only filled from stream updates)
+            The symbol of the order book 
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.LastUpdateId">
             <summary>
             The ID of the last update
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.LastUpdateIdStream">
-            <summary>
-            Setter for last update id, need for Json.Net
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.FirstUpdateId">
@@ -13698,19 +14239,9 @@
             The list of bids
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.BidsStream">
-            <summary>
-            Setter for bids (needed forJson.Net)
-            </summary>
-        </member>
         <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.Asks">
             <summary>
             The list of asks
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.AsksStream">
-            <summary>
-            Setter for asks (needed forJson.Net)
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.MarketData.BinancePrice">

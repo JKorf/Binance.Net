@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Futures.FuturesData
 {
@@ -13,24 +11,37 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Account alias
         /// </summary>
         public string AccountAlias { get; set; } = "";
+
         /// <summary>
         /// The asset this balance is for
         /// </summary>
         public string? Asset { get; set; }
+
         /// <summary>
         /// The total balance of this asset
         /// </summary>
         public decimal Balance { get; set; }
-        /// <summary>
-        /// The total balance available for withdraw for this asset
-        /// </summary>
-        public decimal WithdrawAvailable { get; set; }
 
         /// <summary>
-        /// The time of balance was updated
+        /// Crossed wallet balance
         /// </summary>
-        [JsonProperty("updateTime"), JsonConverter(typeof(TimestampConverter))]
-        public DateTime UpdateTime { get; set; }
+        public decimal CrossWalletBalance { get; set; }
+
+        /// <summary>
+        /// Unrealized profit of crossed positions
+        /// </summary>
+        [JsonProperty("crossUnPnl")]
+        public decimal CrossPositionsUnrealizedProfitAndLoss { get; set; }
+
+        /// <summary>
+        /// Available balance
+        /// </summary>
+        public decimal AvailableBalance { get; set; }
+
+        /// <summary>
+        /// Maximum amount for transfer out
+        /// </summary>
+        public decimal MaxWithdrawAvailable { get; set; }
     }
 
 }

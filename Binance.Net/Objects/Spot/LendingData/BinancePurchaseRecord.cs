@@ -1,6 +1,7 @@
 ﻿using System;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
+using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Spot.LendingData
@@ -21,6 +22,7 @@ namespace Binance.Net.Objects.Spot.LendingData
         /// <summary>
         /// Timestamp
         /// </summary>
+        [JsonConverter(typeof(TimestampConverter))]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// Lending type

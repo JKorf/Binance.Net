@@ -33,10 +33,20 @@ namespace Binance.Net.Objects.Futures.FuturesData
         [JsonProperty("price")]
         public decimal Price { get; set; }
         /// <summary>
-        /// Cummulative amount
+        /// The average price of the order
+        /// </summary>
+        [JsonProperty("avgPrice")]
+        public decimal AvgPrice { get; set; }
+        /// <summary>
+        /// Cumulative amount
+        /// </summary>
+        [JsonProperty("cumQty")]
+        public decimal CumulativeQuantity { get; set; }
+        /// <summary>
+        /// Cumulative amount in quote currency
         /// </summary>
         [JsonProperty("cumQuote")]
-        public decimal CummulativeQuoteQuantity { get; set; }
+        public decimal CumulativeQuoteQuantity { get; set; }
         /// <summary>
         /// The quantity of the order that is executed
         /// </summary>
@@ -79,6 +89,12 @@ namespace Binance.Net.Objects.Futures.FuturesData
         public decimal? StopPrice { get; set; }
 
         /// <summary>
+        /// If order is for closing a position
+        /// </summary>
+        [JsonProperty("closePosition")]
+        public bool ClosePosition { get; set; }
+
+        /// <summary>
         /// For what time the order lasts
         /// </summary>
         [JsonProperty("timeInForce"), JsonConverter(typeof(TimeInForceConverter))]
@@ -91,16 +107,22 @@ namespace Binance.Net.Objects.Futures.FuturesData
         public OrderType Type { get; set; }
 
         /// <summary>
+        /// The original type of the order
+        /// </summary>
+        [JsonProperty("origType"), JsonConverter(typeof(OrderTypeConverter))]
+        public OrderType OriginalType { get; set; }
+
+        /// <summary>
         /// Activation price, only return with TRAILING_STOP_MARKET order
         /// </summary>
         [JsonProperty("activatePrice")]
-        public decimal ActivatePrice { get; set; }
+        public decimal? ActivatePrice { get; set; }
 
         /// <summary>
         /// Callback rate, only return with TRAILING_STOP_MARKET order
         /// </summary>
         [JsonProperty("priceRate")]
-        public decimal PriceRate { get; set; }
+        public decimal? PriceRate { get; set; }
 
         /// <summary>
         /// The time the order was updated
