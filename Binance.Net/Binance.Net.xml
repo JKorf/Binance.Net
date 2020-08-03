@@ -4198,6 +4198,13 @@
             <param name="price"></param>
             <returns></returns>
         </member>
+        <member name="M:Binance.Net.BinanceHelpers.Floor(System.Decimal)">
+            <summary>
+            Floor
+            </summary>
+            <param name="number"></param>
+            <returns></returns>
+        </member>
         <member name="M:Binance.Net.BinanceHelpers.ValidateBinanceSymbol(System.String)">
             <summary>
             Validate the string is a valid Binance symbol.

@@ -88,7 +88,12 @@ namespace Binance.Net
             return price;
         }
 
-        private static decimal Floor(decimal number)
+        /// <summary>
+        /// Floor
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        public static decimal Floor(decimal number)
         {
             return Math.Floor(number * 100000000) / 100000000;
         }
