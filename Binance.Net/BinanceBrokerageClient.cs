@@ -232,8 +232,8 @@ namespace Binance.Net
                                  {"canTrade", isTradingEnabled},
                                  {"timestamp", GetTimestamp()}
                              };
-            parameters.AddOptionalParameter("marginTrade", isMarginTradingEnabled);
-            parameters.AddOptionalParameter("futuresTrade", isFuturesTradingEnabled);
+            parameters.AddOptionalParameter("marginTrade", isMarginTradingEnabled.ToString().ToLower());
+            parameters.AddOptionalParameter("futuresTrade", isFuturesTradingEnabled.ToString().ToLower());
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await SendRequest<BinanceBrokerageApiKeyCreateResult>(GetUrl(ApiKeySubAccountEndpoint, BrokerageApi, BrokerageVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
@@ -322,9 +322,9 @@ namespace Binance.Net
                              {
                                  {"subAccountId", subAccountId},
                                  {"subAccountApiKey", apiKey},
-                                 {"canTrade", isTradingEnabled},
-                                 {"marginTrade", isMarginTradingEnabled},
-                                 {"futuresTrade", isFuturesTradingEnabled},
+                                 {"canTrade", isTradingEnabled.ToString().ToLower()},
+                                 {"marginTrade", isMarginTradingEnabled.ToString().ToLower()},
+                                 {"futuresTrade", isFuturesTradingEnabled.ToString().ToLower()},
                                  {"timestamp", GetTimestamp()}
                              };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -634,7 +634,7 @@ namespace Binance.Net
             var parameters = new Dictionary<string, object>
                              {
                                  {"subAccountId", subAccountId},
-                                 {"spotBNBBurn", spotBnbBurn},
+                                 {"spotBNBBurn", spotBnbBurn.ToString().ToLower()},
                                  {"timestamp", GetTimestamp()}
                              };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -663,7 +663,7 @@ namespace Binance.Net
             var parameters = new Dictionary<string, object>
                              {
                                  {"subAccountId", subAccountId},
-                                 {"interestBNBBurn", interestBnbBurn},
+                                 {"interestBNBBurn", interestBnbBurn.ToString().ToLower()},
                                  {"timestamp", GetTimestamp()}
                              };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));

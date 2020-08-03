@@ -4249,7 +4249,7 @@ namespace Binance.Net
                 { "timestamp", GetTimestamp() }
             };
             parameters.AddOptionalParameter("status", status == null? null: JsonConvert.SerializeObject(status, new ProductStatusConverter(false)));
-            parameters.AddOptionalParameter("featured", featured?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("featured", featured?.ToString().ToLower());
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await SendRequest<IEnumerable<BinanceSavingsProduct>>(GetUrl(FlexibleProductListEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
@@ -4509,7 +4509,7 @@ namespace Binance.Net
             };
             parameters.AddOptionalParameter("asset", asset);
             parameters.AddOptionalParameter("status", status == null? null: JsonConvert.SerializeObject(status, new ProductStatusConverter(false)));
-            parameters.AddOptionalParameter("isSortAsc", sortAscending);
+            parameters.AddOptionalParameter("isSortAsc", sortAscending.ToString().ToLower());
             parameters.AddOptionalParameter("sortBy", sortBy);
             parameters.AddOptionalParameter("current", currentPage);
             parameters.AddOptionalParameter("size", size);
