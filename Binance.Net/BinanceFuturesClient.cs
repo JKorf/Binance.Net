@@ -1001,7 +1001,7 @@ namespace Binance.Net
 
             var parameters = new Dictionary<string, object>
             {
-                { "dualSidePosition", dualPositionSide },
+                { "dualSidePosition", dualPositionSide.ToString().ToLower() },
                 { "timestamp", GetTimestamp() }
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
