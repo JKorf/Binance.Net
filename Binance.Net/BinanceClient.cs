@@ -845,7 +845,7 @@ namespace Binance.Net
         public async Task<WebCallResult<IEnumerable<BinanceFuturesAccountSnapshot>>> GetDailyFutureAccountSnapshotAsync(
             DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null,
             CancellationToken ct = default) =>
-            await GetDailyAccountSnapshot<IEnumerable<BinanceFuturesAccountSnapshot>>(AccountType.Spot, startTime, endTime, limit, receiveWindow, ct).ConfigureAwait(false);
+            await GetDailyAccountSnapshot<IEnumerable<BinanceFuturesAccountSnapshot>>(AccountType.Futures, startTime, endTime, limit, receiveWindow, ct).ConfigureAwait(false);
 
 
         private async Task<WebCallResult<T>> GetDailyAccountSnapshot<T>(AccountType accountType, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null,
@@ -4249,7 +4249,7 @@ namespace Binance.Net
                 { "timestamp", GetTimestamp() }
             };
             parameters.AddOptionalParameter("status", status == null? null: JsonConvert.SerializeObject(status, new ProductStatusConverter(false)));
-            parameters.AddOptionalParameter("featured", featured?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("featured", featured?.ToString().ToLower());
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? defaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await SendRequest<IEnumerable<BinanceSavingsProduct>>(GetUrl(FlexibleProductListEndpoint, MarginApi, MarginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
@@ -4509,7 +4509,7 @@ namespace Binance.Net
             };
             parameters.AddOptionalParameter("asset", asset);
             parameters.AddOptionalParameter("status", status == null? null: JsonConvert.SerializeObject(status, new ProductStatusConverter(false)));
-            parameters.AddOptionalParameter("isSortAsc", sortAscending);
+            parameters.AddOptionalParameter("isSortAsc", sortAscending.ToString().ToLower());
             parameters.AddOptionalParameter("sortBy", sortBy);
             parameters.AddOptionalParameter("current", currentPage);
             parameters.AddOptionalParameter("size", size);
@@ -5245,7 +5245,7 @@ namespace Binance.Net
                             return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: LotSize filter failed. Original quantity: {quantity}, Closest allowed: {outputQuantity}");
                         }
 
-                        log.Write(LogVerbosity.Info, $"Quantity clamped from {quantity} to {outputQuantity}");
+                        log.Write(LogVerbosity.Info, $"Quantity clamped from {quantity} to {outputQuantity} based on lot size filter");
                     }
                 }
             }
@@ -5263,7 +5263,7 @@ namespace Binance.Net
                         if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
                             return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter max/min failed. Original price: {price}, Closest allowed: {outputPrice}");
 
-                        log.Write(LogVerbosity.Info, $"price clamped from {price} to {outputPrice}");
+                        log.Write(LogVerbosity.Info, $"price clamped from {price} to {outputPrice} based on price filter");
                     }
                 }
 
@@ -5276,7 +5276,7 @@ namespace Binance.Net
                         if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
                             return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter tick failed. Original price: {price}, Closest allowed: {outputPrice}");
 
-                        log.Write(LogVerbosity.Info, $"price rounded from {beforePrice} to {outputPrice}");
+                        log.Write(LogVerbosity.Info, $"price rounded from {beforePrice} to {outputPrice} based on price filter");
                     }
                 }
             }
@@ -5284,9 +5284,22 @@ namespace Binance.Net
             if (symbolData.MinNotionalFilter == null || quantity == null)
                 return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice);
 
-            var notional = quantity * price.Value;
+            var currentQuantity = (outputQuantity.HasValue ? outputQuantity.Value : quantity.Value);
+            var notional = currentQuantity * price.Value;
             if (notional < symbolData.MinNotionalFilter.MinNotional)
-                return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: MinNotional filter failed. Order size: {notional}, minimal order size: {symbolData.MinNotionalFilter.MinNotional}");
+            {
+                if(tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                    return BinanceTradeRuleResult.CreateFailed(
+                        $"Trade rules check failed: MinNotional filter failed. Order size: {notional}, minimal order size: {symbolData.MinNotionalFilter.MinNotional}");
+
+                if (symbolData.LotSizeFilter == null)
+                    return BinanceTradeRuleResult.CreateFailed("Trade rules check failed: MinNotional filter failed. Unable to auto comply because LotSizeFilter not present");
+                
+                var minQuantity = symbolData.MinNotionalFilter.MinNotional / price.Value;
+                var stepSize = symbolData.LotSizeFilter!.StepSize;
+                outputQuantity = BinanceHelpers.Floor(minQuantity + (stepSize - (minQuantity % stepSize)));
+                log.Write(LogVerbosity.Info, $"Quantity clamped from {currentQuantity} to {outputQuantity} based on min notional filter");
+            }
 
             return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice);
         }

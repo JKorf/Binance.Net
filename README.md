@@ -152,6 +152,10 @@ When no longer listening to private endpoints the `client.StopUserStream` method
 
 
 ## Release notes
+* Version 5.1.14 - 03 Aug 2020
+    * Added check for MinNotional filter when using AutoComply trade rules behaviour
+    * Adjusted bool parameter serialization
+
 * Version 5.1.13 - 27 Jul 2020
 	* Updated futures balance, account info, position endpoints to version 2
 	* Added missing futures market data endpoints
