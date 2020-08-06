@@ -5276,16 +5276,16 @@ namespace Binance.Net
                         if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
                             return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter tick failed. Original price: {price}, Closest allowed: {outputPrice}");
 
-                        log.Write(LogVerbosity.Info, $"price rounded from {beforePrice} to {outputPrice} based on price filter");
+                        log.Write(LogVerbosity.Info, $"price floored from {beforePrice} to {outputPrice} based on price filter");
                     }
                 }
             }
 
-            if (symbolData.MinNotionalFilter == null || quantity == null)
+            if (symbolData.MinNotionalFilter == null || quantity == null || outputPrice == null)
                 return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice);
 
             var currentQuantity = (outputQuantity.HasValue ? outputQuantity.Value : quantity.Value);
-            var notional = currentQuantity * price.Value;
+            var notional = currentQuantity * outputPrice.Value;
             if (notional < symbolData.MinNotionalFilter.MinNotional)
             {
                 if(tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
@@ -5295,7 +5295,7 @@ namespace Binance.Net
                 if (symbolData.LotSizeFilter == null)
                     return BinanceTradeRuleResult.CreateFailed("Trade rules check failed: MinNotional filter failed. Unable to auto comply because LotSizeFilter not present");
                 
-                var minQuantity = symbolData.MinNotionalFilter.MinNotional / price.Value;
+                var minQuantity = symbolData.MinNotionalFilter.MinNotional / outputPrice.Value;
                 var stepSize = symbolData.LotSizeFilter!.StepSize;
                 outputQuantity = BinanceHelpers.Floor(minQuantity + (stepSize - (minQuantity % stepSize)));
                 log.Write(LogVerbosity.Info, $"Quantity clamped from {currentQuantity} to {outputQuantity} based on min notional filter");
