@@ -38,7 +38,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateResponseClient(JsonConvert.SerializeObject(time), new BinanceClientOptions() { AutoTimestamp = false });
 
             // act
-            var result = client.GetServerTime();
+            var result = client.System.GetServerTime();
 
             // assert
             Assert.AreEqual(true, result.Success);
@@ -76,7 +76,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateResponseClient(JsonConvert.SerializeObject(expected));
 
             // act
-            var result = client.Get24HPrice("BNBBTC");
+            var result = client.Spot.Market.Get24HPrice("BNBBTC");
 
             // assert
             Assert.AreEqual(true, result.Success);
@@ -121,7 +121,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateResponseClient("{\"lastUpdateId\":123,\"asks\": [[0.1, 1.1], [0.2, 2.2]], \"bids\": [[0.3,3.3], [0.4,4.4]]}");
 
             // act
-            var result = client.GetOrderBook("BNBBTC");
+            var result = client.Spot.Market.GetOrderBook("BNBBTC");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -169,7 +169,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.GetAccountInfo();
+            var result = client.Account.GetAccountInfo();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -211,7 +211,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateResponseClient(trades);
 
             // act
-            var result = client.GetAggregatedTrades("BNBBTC");
+            var result = client.Spot.Market.GetAggregatedTrades("BNBBTC");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -248,7 +248,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateResponseClient(prices);
 
             // act
-            var result = client.GetAllBookPrices();
+            var result = client.Spot.Market.GetAllBookPrices();
 
             // assert
             var data = result.Data.ToList();
@@ -305,7 +305,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.GetAllOrders("BNBBTC");
+            var result = client.Spot.Order.GetAllOrders("BNBBTC");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -335,7 +335,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateResponseClient(prices);
 
             // act
-            var result = client.GetAllPrices();
+            var result = client.Spot.Market.GetAllPrices();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -373,7 +373,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.GetDepositHistory();
+            var result = client.Deposit.GetDepositHistory();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -429,7 +429,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.GetKlines("BNBBTC", KlineInterval.OneMinute);
+            var result = client.Spot.Market.GetKlines("BNBBTC", KlineInterval.OneMinute);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -479,7 +479,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.GetMyTrades("BNBBTC");
+            var result = client.Spot.Order.GetMyTrades("BNBBTC");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -535,7 +535,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.GetOpenOrders("BNBBTC");
+            var result = client.Spot.Order.GetOpenOrders("BNBBTC");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -582,7 +582,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.GetWithdrawalHistory();
+            var result = client.Withdraw.GetWithdrawalHistory();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -610,7 +610,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.CancelOrder("BNBBTC",orderId:123);
+            var result = client.Spot.Order.CancelOrder("BNBBTC",orderId:123);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -636,7 +636,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.PlaceTestOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, timeInForce: TimeInForce.GoodTillCancel, quantity: 1, price: 2);
+            var result = client.Spot.Order.PlaceTestOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, timeInForce: TimeInForce.GoodTillCancel, quantity: 1, price: 2);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -662,7 +662,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.PlaceOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, timeInForce: TimeInForce.GoodTillCancel, quantity: 1, price: 2);
+            var result = client.Spot.Order.PlaceOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, timeInForce: TimeInForce.GoodTillCancel, quantity: 1, price: 2);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -697,7 +697,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.GetOrder("BNBBTC", orderId: 1);
+            var result = client.Spot.Order.GetOrder("BNBBTC", orderId: 1);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -721,7 +721,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Withdraw("BNBBTC", "test", 1, "x");
+            var result = client.Withdraw.Withdraw("BNBBTC", "test", 1, "x");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -735,7 +735,7 @@ namespace Binance.Net.UnitTests
             var response =
                 "[\r\n    {\r\n        \"clientOrderId\": \"testOrder\",\r\n        \"cumQuote\": \"0\",\r\n        \"executedQty\": \"0\",\r\n        \"orderId\": 22542179,\r\n        \"avgPrice\": \"0.00000\",\r\n        \"origQty\": \"10\",\r\n        \"price\": \"0\",\r\n        \"reduceOnly\": false,\r\n        \"side\": \"BUY\",\r\n        \"positionSide\": \"SHORT\",\r\n        \"status\": \"NEW\",\r\n        \"stopPrice\": \"9300\",        // please ignore when order type is TRAILING_STOP_MARKET\r\n        \"symbol\": \"BTCUSDT\",\r\n        \"timeInForce\": \"GTC\",\r\n        \"type\": \"TRAILING_STOP_MARKET\",\r\n        \"activatePrice\": \"9020\",    // activation price, only return with TRAILING_STOP_MARKET order\r\n        \"priceRate\": \"0.3\",         // callback rate, only return with TRAILING_STOP_MARKET order\r\n        \"updateTime\": 1566818724722,\r\n        \"workingType\": \"CONTRACT_PRICE\"\r\n    },\r\n    {\r\n        \"code\": -2022, \r\n        \"msg\": \"ReduceOnly Order is rejected.\"\r\n    }\r\n]";
 
-            var client = TestHelpers.CreateFuturesResponseClient(response, new BinanceFuturesClientOptions()
+            var client = TestHelpers.CreateResponseClient(response, new BinanceClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false,
@@ -743,7 +743,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.PlaceMultipleOrders(new []
+            var result = client.Futures.Orders.PlaceMultipleOrders(new []
             {
                 new BinanceFuturesBatchOrder()
                 {
@@ -807,7 +807,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.GetTradingStatus();
+            var result = client.Account.GetTradingStatus();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -833,7 +833,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.StartUserStream();
+            var result = client.Spot.UserStreams.StartUserStream();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -851,7 +851,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.KeepAliveUserStream("test");
+            var result = client.Spot.UserStreams.KeepAliveUserStream("test");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -868,7 +868,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.StopUserStream("test");
+            var result = client.Spot.UserStreams.StopUserStream("test");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -887,7 +887,7 @@ namespace Binance.Net.UnitTests
             // act
             try
             {
-                client.GetOpenOrders();
+                client.Spot.Order.GetOpenOrders();
             }
             catch (Exception)
             {
@@ -974,7 +974,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Transfer("USDT", 1001, TransferDirectionType.MainToMargin);
+            var result = client.Margin.Transfer("USDT", 1001, TransferDirectionType.MainToMargin);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -997,7 +997,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Borrow("USDT", 2002);
+            var result = client.Margin.Borrow("USDT", 2002);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -1020,7 +1020,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Repay("USDT", 2002);
+            var result = client.Margin.Repay("USDT", 2002);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -1046,7 +1046,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.PlaceMarginOrder("BTCUSDT", OrderSide.Buy, OrderType.Limit, timeInForce: TimeInForce.GoodTillCancel, quantity: 1, price: 2);
+            var result = client.Margin.Orders.PlaceMarginOrder("BTCUSDT", OrderSide.Buy, OrderType.Limit, timeInForce: TimeInForce.GoodTillCancel, quantity: 1, price: 2);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -1072,7 +1072,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.CancelMarginOrder("BNBBTC", orderId:123);
+            var result = client.Margin.Orders.CancelMarginOrder("BNBBTC", orderId:123);
 
             // assert
             Assert.IsTrue(result.Success);

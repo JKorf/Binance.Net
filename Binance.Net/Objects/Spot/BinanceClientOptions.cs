@@ -39,18 +39,25 @@ namespace Binance.Net.Objects.Spot
         public TimeSpan ReceiveWindow { get; set; } = TimeSpan.FromSeconds(5);
 
         /// <summary>
+        /// Base address for the futures API
+        /// </summary>
+        public string FuturesBaseAddress { get; set; }
+
+        /// <summary>
         /// ctor
         /// </summary>
         public BinanceClientOptions(): base("https://api.binance.com")
         {
+            FuturesBaseAddress = "https://fapi.binance.com";
         }
 
         /// <summary>
         /// ctor
         /// </summary>
         /// <param name="baseAddress">Сustom url to connect via mirror website</param>
-        public BinanceClientOptions(string baseAddress) : base(baseAddress)
+        public BinanceClientOptions(string baseAddress, string futuresBaseAddress) : base(baseAddress)
         {
+            FuturesBaseAddress = futuresBaseAddress;
         }
 
         /// <summary>
@@ -66,6 +73,7 @@ namespace Binance.Net.Objects.Spot
             copy.TradeRulesBehaviour = TradeRulesBehaviour;
             copy.TradeRulesUpdateInterval = TradeRulesUpdateInterval;
             copy.ReceiveWindow = ReceiveWindow;
+            copy.FuturesBaseAddress = FuturesBaseAddress;
             return copy;
         }
     }
@@ -79,6 +87,16 @@ namespace Binance.Net.Objects.Spot
         /// The base address for combined data in socket connections
         /// </summary>
         public string BaseSocketCombinedAddress { get; set; } = "wss://stream.binance.com:9443/";
+
+        /// <summary>
+        /// The base address for futures
+        /// </summary>
+        public string BaseAddressFutures { get; set; } = "wss://fstream.binance.com/ws/";
+
+        /// <summary>
+        /// The base address for futures
+        /// </summary>
+        public string BaseAddressFuturesCombined { get; set; } = "wss://fstream.binance.com/";
 
         /// <summary>
         /// The amount of subscriptions that should be made on a single socket connection. Not all exchanges support multiple subscriptions on a single socket.
@@ -98,9 +116,15 @@ namespace Binance.Net.Objects.Spot
         /// <summary>
         /// ctor
         /// </summary>
-        /// <param name="address"></param>
-        public BinanceSocketClientOptions(string address): base(address)
+        /// <param name="address">Custom address</param>
+        /// <param name="addressCombined">Custom address for combined streams</param>
+        /// <param name="futuresAddress">Custom address for futures</param>
+        /// <param name="futuresCombinedAddress">Custom address for futures combined streams</param>
+        public BinanceSocketClientOptions(string address, string addressCombined, string futuresAddress, string futuresCombinedAddress): base(address)
         {
+            BaseAddressFutures = futuresAddress;
+            BaseSocketCombinedAddress = addressCombined;
+            BaseAddressFuturesCombined = futuresCombinedAddress;
         }
 
         /// <summary>
@@ -108,7 +132,7 @@ namespace Binance.Net.Objects.Spot
         /// </summary>
         public BinanceSocketClientOptions(): base("wss://stream.binance.com:9443/ws/")
         {
-        }        
+        }
 
         /// <summary>
         /// Return a copy of these options
@@ -118,6 +142,7 @@ namespace Binance.Net.Objects.Spot
         {
             var copy = Copy<BinanceSocketClientOptions>();
             copy.BaseSocketCombinedAddress = BaseSocketCombinedAddress;
+            copy.BaseAddressFutures = BaseAddressFutures;
             return copy;
         }
     }

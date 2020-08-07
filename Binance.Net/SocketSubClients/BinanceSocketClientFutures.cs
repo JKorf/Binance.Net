@@ -1,95 +1,62 @@
-using Binance.Net.Converters;
-using Binance.Net.Objects;
-using Newtonsoft.Json;
+﻿using CryptoExchange.Net.Logging;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using Binance.Net.Interfaces;
+using Binance.Net.Converters;
+using Binance.Net.Enums;
+using Binance.Net.Interfaces.SocketSubClient;
+using Binance.Net.Objects;
+using Binance.Net.Objects.Futures.MarketStream;
+using Binance.Net.Objects.Futures.UserStream;
+using Binance.Net.Objects.Spot;
+using Binance.Net.Objects.Spot.MarketStream;
 using CryptoExchange.Net;
-using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Binance.Net.Objects.Spot.MarketStream;
-using Binance.Net.Objects.Futures;
-using Binance.Net.Objects.Futures.UserStream;
-using Binance.Net.Objects.Futures.MarketStream;
-using Binance.Net.Enums;
-using System.Globalization;
 
-namespace Binance.Net
+namespace Binance.Net.SocketSubClients
 {
     /// <summary>
-    /// Client providing access to the Binance Futures Websocket Api
+    /// Futures subscriptions
     /// </summary>
-    public class BinanceFuturesSocketClient : SocketClient, IBinanceFuturesSocketClient
+    public class BinanceSocketClientFutures : IBinanceSocketClientFutures
     {
-        #region fields
-        private static BinanceFuturesSocketClientOptions defaultOptions = new BinanceFuturesSocketClientOptions();
-        private static BinanceFuturesSocketClientOptions DefaultOptions => defaultOptions.Copy();
+        private const string aggregatedTradesStreamEndpoint = "@aggTrade";
+        private const string markPriceStreamEndpoint = "@markPrice";
+        private const string allMarkPriceStreamEndpoint = "!markPrice@arr";
+        private const string klineStreamEndpoint = "@kline";
+        private const string symbolMiniTickerStreamEndpoint = "@miniTicker";
+        private const string allMiniTickerStreamEndpoint = "!miniTicker@arr";
+        private const string symbolTickerStreamEndpoint = "@ticker";
+        private const string allTickerStreamEndpoint = "!ticker@arr";
+        private const string bookTickerStreamEndpoint = "@bookTicker";
+        private const string allBookTickerStreamEndpoint = "!bookTicker";
+        private const string liquidationStreamEndpoint = "@forceOrder";
+        private const string allLiquidationStreamEndpoint = "!forceOrder@arr";
+        private const string partialBookDepthStreamEndpoint = "@depth";
+        private const string depthStreamEndpoint = "@depth";
 
-        private readonly string baseCombinedAddress;
+        private const string marginUpdateEvent = "MARGIN_CALL";
+        private const string accountUpdateEvent = "ACCOUNT_UPDATE";
+        private const string orderUpdateEvent = "ORDER_TRADE_UPDATE";
+        private const string listenKeyExpiredEvent = "listenKeyExpired";
 
-        private const string AggregatedTradesStreamEndpoint = "@aggTrade";
-        private const string MarkPriceStreamEndpoint = "@markPrice";
-        private const string AllMarkPriceStreamEndpoint = "!markPrice@arr";
-        private const string KlineStreamEndpoint = "@kline";
-        private const string SymbolMiniTickerStreamEndpoint = "@miniTicker";
-        private const string AllMiniTickerStreamEndpoint = "!miniTicker@arr";
-        private const string SymbolTickerStreamEndpoint = "@ticker";
-        private const string AllTickerStreamEndpoint = "!ticker@arr";
-        private const string BookTickerStreamEndpoint = "@bookTicker";
-        private const string AllBookTickerStreamEndpoint = "!bookTicker";
-        private const string LiquidationStreamEndpoint = "@forceOrder";
-        private const string AllLiquidationStreamEndpoint = "!forceOrder@arr";
-        private const string PartialBookDepthStreamEndpoint = "@depth";
-        private const string DepthStreamEndpoint = "@depth";
+        private readonly Log _log;
+        private readonly BinanceSocketClient _baseClient;
+        private readonly string _baseCombinedAddress;
+        private readonly string _baseAddress;
 
-        private const string MarginUpdateEvent = "MARGIN_CALL";
-        private const string AccountUpdateEvent = "ACCOUNT_UPDATE";
-        private const string OrderUpdateEvent = "ORDER_TRADE_UPDATE";
-        private const string ListenKeyExpiredEvent = "listenKeyExpired";
-        #endregion
-
-        #region constructor/destructor
-
-        /// <summary>
-        /// Create a new instance of BinanceFuturesSocketClient with default options
-        /// </summary>
-        public BinanceFuturesSocketClient() : this(DefaultOptions)
+        internal BinanceSocketClientFutures(Log log, BinanceSocketClient baseClient, BinanceSocketClientOptions options)
         {
-        }
-
-        /// <summary>
-        /// Create a new instance of BinanceFuturesSocketClient using provided options
-        /// </summary>
-        /// <param name="options">The options to use for this client</param>
-        public BinanceFuturesSocketClient(BinanceFuturesSocketClientOptions options) : base(options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials))
-        {
-            baseCombinedAddress = options.BaseSocketCombinedAddress;
-        }
-        #endregion 
-
-        #region methods
-        /// <summary>
-        /// Set the default options to be used when creating new socket clients
-        /// </summary>
-        /// <param name="options"></param>
-        public static void SetDefaultOptions(BinanceFuturesSocketClientOptions options)
-        {
-            defaultOptions = options;
-        }
-
-        /// <summary>
-        /// Set the API key and secret
-        /// </summary>
-        /// <param name="apiKey">The api key</param>
-        /// <param name="apiSecret">The api secret</param>
-        public void SetApiCredentials(string apiKey, string apiSecret)
-        {
-            SetAuthenticationProvider(new BinanceAuthenticationProvider(new ApiCredentials(apiKey, apiSecret)));
+            _log = log;
+            _baseClient = baseClient;
+            _baseCombinedAddress = options.BaseAddressFuturesCombined;
+            _baseAddress = options.BaseAddressFutures;
         }
 
         #region Aggregate Trade Streams
@@ -131,7 +98,7 @@ namespace Binance.Net
                 symbol.ValidateBinanceSymbol();
 
             var handler = new Action<BinanceCombinedStream<BinanceStreamAggregatedTrade>>(data => onMessage(data.Data));
-            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + AggregatedTradesStreamEndpoint).ToArray();
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + aggregatedTradesStreamEndpoint).ToArray();
             return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
         }
 
@@ -182,7 +149,7 @@ namespace Binance.Net
             updateInterval?.ValidateIntValues(nameof(updateInterval), 1000, 3000);
 
             var handler = new Action<BinanceCombinedStream<BinanceFuturesStreamMarkPrice>>(data => onMessage(data.Data));
-            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + MarkPriceStreamEndpoint + (updateInterval == 1000 ? "@1s" : "")).ToArray();
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + markPriceStreamEndpoint + (updateInterval == 1000 ? "@1s" : "")).ToArray();
             return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
         }
 
@@ -208,7 +175,7 @@ namespace Binance.Net
         {
             updateInterval?.ValidateIntValues(nameof(updateInterval), 1000, 3000);
 
-            return await Subscribe(AllMarkPriceStreamEndpoint + (updateInterval == 1000 ? "@1s" : ""), false, onMessage).ConfigureAwait(false);
+            return await Subscribe(allMarkPriceStreamEndpoint + (updateInterval == 1000 ? "@1s" : ""), false, onMessage).ConfigureAwait(false);
         }
 
         #endregion
@@ -257,7 +224,7 @@ namespace Binance.Net
                 symbol.ValidateBinanceSymbol();
 
             var handler = new Action<BinanceCombinedStream<BinanceStreamKlineData>>(data => onMessage(data.Data.Data));
-            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + KlineStreamEndpoint + "_" + JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ToArray();
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + klineStreamEndpoint + "_" + JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ToArray();
             return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
         }
 
@@ -302,7 +269,7 @@ namespace Binance.Net
                 symbol.ValidateBinanceSymbol();
 
             var handler = new Action<BinanceCombinedStream<BinanceFuturesStreamMiniTick>>(data => onMessage(data.Data));
-            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + SymbolMiniTickerStreamEndpoint).ToArray();
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + symbolMiniTickerStreamEndpoint).ToArray();
             return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
         }
 
@@ -324,7 +291,7 @@ namespace Binance.Net
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllMiniTickerUpdatesAsync(Action<IEnumerable<BinanceFuturesStreamMiniTick>> onMessage)
         {
-            return await Subscribe(AllMiniTickerStreamEndpoint, false, onMessage).ConfigureAwait(false);
+            return await Subscribe(allMiniTickerStreamEndpoint, false, onMessage).ConfigureAwait(false);
         }
 
         #endregion
@@ -368,7 +335,7 @@ namespace Binance.Net
                 symbol.ValidateBinanceSymbol();
 
             var handler = new Action<BinanceCombinedStream<BinanceStreamTick>>(data => onMessage(data.Data));
-            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + SymbolTickerStreamEndpoint).ToArray();
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + symbolTickerStreamEndpoint).ToArray();
             return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
         }
 
@@ -390,7 +357,7 @@ namespace Binance.Net
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllTickerUpdatesAsync(Action<IEnumerable<BinanceStreamTick>> onMessage)
         {
-            return await Subscribe(AllTickerStreamEndpoint, false, onMessage).ConfigureAwait(false);
+            return await Subscribe(allTickerStreamEndpoint, false, onMessage).ConfigureAwait(false);
         }
 
         #endregion
@@ -434,7 +401,7 @@ namespace Binance.Net
                 symbol.ValidateBinanceSymbol();
 
             var handler = new Action<BinanceCombinedStream<BinanceStreamBookPrice>>(data => onMessage(data.Data));
-            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + BookTickerStreamEndpoint).ToArray();
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + bookTickerStreamEndpoint).ToArray();
             return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
         }
 
@@ -456,7 +423,7 @@ namespace Binance.Net
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllBookTickerUpdatesAsync(Action<BinanceStreamBookPrice> onMessage)
         {
-            return await Subscribe(AllBookTickerStreamEndpoint, false, onMessage).ConfigureAwait(false);
+            return await Subscribe(allBookTickerStreamEndpoint, false, onMessage).ConfigureAwait(false);
         }
 
         #endregion
@@ -500,7 +467,7 @@ namespace Binance.Net
                 symbol.ValidateBinanceSymbol();
 
             var handler = new Action<BinanceCombinedStream<BinanceFuturesStreamLiquidationData>>(data => onMessage(data.Data.Data));
-            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + LiquidationStreamEndpoint).ToArray();
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + liquidationStreamEndpoint).ToArray();
             return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
         }
 
@@ -523,7 +490,7 @@ namespace Binance.Net
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllLiquidationUpdatesAsync(Action<BinanceFuturesStreamLiquidation> onMessage)
         {
             var handler = new Action<BinanceFuturesStreamLiquidationData>(data => onMessage(data.Data));
-            return await Subscribe(AllLiquidationStreamEndpoint, false, handler).ConfigureAwait(false);
+            return await Subscribe(allLiquidationStreamEndpoint, false, handler).ConfigureAwait(false);
         }
 
         #endregion
@@ -575,7 +542,7 @@ namespace Binance.Net
                 symbol.ValidateBinanceSymbol();
 
             levels.ValidateIntValues(nameof(levels), 5, 10, 20);
-            updateInterval?.ValidateIntValues(nameof(updateInterval),100, 250, 500);
+            updateInterval?.ValidateIntValues(nameof(updateInterval), 100, 250, 500);
 
             var handler = new Action<BinanceCombinedStream<BinanceFuturesStreamOrderBookDepth>>(data =>
             {
@@ -583,7 +550,7 @@ namespace Binance.Net
                 onMessage(data.Data);
             });
 
-            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + PartialBookDepthStreamEndpoint + levels + (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + partialBookDepthStreamEndpoint + levels + (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
             return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
         }
 
@@ -633,16 +600,16 @@ namespace Binance.Net
 
             updateInterval?.ValidateIntValues(nameof(updateInterval), 0, 100, 500);
             var handler = new Action<BinanceCombinedStream<BinanceFuturesStreamOrderBookDepth>>(data => onMessage(data.Data));
-            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + DepthStreamEndpoint + (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + depthStreamEndpoint + (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
             return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
         }
 
         #endregion
 
-        #region User Fata Streams
+        #region User Data Streams
 
         /// <summary>
-        /// Subscribes to the account update stream. Prior to using this, the <see cref="BinanceClient.StartUserStream"/> method should be called.
+        /// Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStreams.StartUserStream method should be called.
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
         /// <param name="onCrossWalletUpdate">The event handler for whenever a cross wallet has changed</param>
@@ -659,10 +626,10 @@ namespace Binance.Net
             Action<IEnumerable<BinanceFuturesStreamBalance>>? onAccountBalanceUpdate,
             Action<IEnumerable<BinanceFuturesStreamPosition>>? onPositionUpdate,
             Action<BinanceFuturesStreamOrderUpdate>? onOrderUpdate,
-            Action<BinanceStreamEvent> onListenKeyExpired) => SubscribeToUserDataUpdatesAsync(listenKey, onCrossWalletUpdate, onMarginUpdate,  onAccountBalanceUpdate, onPositionUpdate, onOrderUpdate, onListenKeyExpired).Result;
+            Action<BinanceStreamEvent> onListenKeyExpired) => SubscribeToUserDataUpdatesAsync(listenKey, onCrossWalletUpdate, onMarginUpdate, onAccountBalanceUpdate, onPositionUpdate, onOrderUpdate, onListenKeyExpired).Result;
 
         /// <summary>
-        /// Subscribes to the account update stream. Prior to using this, the <see cref="BinanceClient.StartUserStream"/> method should be called.
+        /// Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStreams.StartUserStream method should be called.
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
         /// <param name="onCrossWalletUpdate">The event handler for whenever a cross wallet has changed</param>
@@ -673,7 +640,7 @@ namespace Binance.Net
         /// <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
-            string listenKey, 
+            string listenKey,
             Action<decimal>? onCrossWalletUpdate,
             Action<IEnumerable<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate,
             Action<IEnumerable<BinanceFuturesStreamBalance>>? onAccountBalanceUpdate,
@@ -689,67 +656,67 @@ namespace Binance.Net
                 var evnt = (string)token["e"];
                 switch (evnt)
                 {
-                    case MarginUpdateEvent:
+                    case marginUpdateEvent:
                         {
-                            log.Write(LogVerbosity.Debug, data);
+                            _log.Write(LogVerbosity.Debug, data);
 
                             onCrossWalletUpdate?.Invoke(token["cw"].ToObject<decimal>());
 
                             var orders = token["o"];
-                            var result = Deserialize<BinanceFuturesStreamMarginUpdate[]>(orders, false);
+                            var result = _baseClient.DeserializeInternal<BinanceFuturesStreamMarginUpdate[]>(orders, false);
                             if (result)
                                 onMarginUpdate?.Invoke(result.Data);
                             else
-                                log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from order stream: " + result.Error);
+                                _log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from order stream: " + result.Error);
                             break;
                         }
-                    case AccountUpdateEvent:
+                    case accountUpdateEvent:
                         {
                             if (token["a"]["B"] != null)
                             {
                                 var balances = token["a"]["B"];
-                                var result = Deserialize<BinanceFuturesStreamBalance[]>(balances, false);
+                                var result = _baseClient.DeserializeInternal<BinanceFuturesStreamBalance[]>(balances, false);
                                 if (result.Success)
-                                        onAccountBalanceUpdate?.Invoke(result.Data);
+                                    onAccountBalanceUpdate?.Invoke(result.Data);
                                 else
-                                    log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account stream: " + result.Error);
+                                    _log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account stream: " + result.Error);
                             }
 
                             if (token["a"]["P"] != null)
                             {
                                 var positions = token["a"]["P"];
-                                var result = Deserialize<BinanceFuturesStreamPosition[]>(positions, false);
+                                var result = _baseClient.DeserializeInternal<BinanceFuturesStreamPosition[]>(positions, false);
                                 if (result.Success)
-                                        onPositionUpdate?.Invoke(result.Data);
+                                    onPositionUpdate?.Invoke(result.Data);
                                 else
-                                    log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account stream: " + result.Error);
+                                    _log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account stream: " + result.Error);
                             }
 
                             break;
-                        }    
-                    case OrderUpdateEvent:
-                    {
-                        log.Write(LogVerbosity.Debug, data);
+                        }
+                    case orderUpdateEvent:
+                        {
+                            _log.Write(LogVerbosity.Debug, data);
                             var orders = token["o"];
-                            var result = Deserialize<BinanceFuturesStreamOrderUpdate>(orders, false);
-                        if (result)
-                            onOrderUpdate?.Invoke(result.Data);
-                        else
-                            log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from order stream: " + result.Error);
-                        break;
-                    }
-                    case ListenKeyExpiredEvent:
-                    {
-                        log.Write(LogVerbosity.Debug, data);
-                        var result = Deserialize<BinanceStreamEvent>(token, false);
-                        if (result)
-                            onListenKeyExpired?.Invoke(result.Data);
-                        else
-                            log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from the expired listen key event: " + result.Error);
-                        break;
-                    }
+                            var result = _baseClient.DeserializeInternal<BinanceFuturesStreamOrderUpdate>(orders, false);
+                            if (result)
+                                onOrderUpdate?.Invoke(result.Data);
+                            else
+                                _log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from order stream: " + result.Error);
+                            break;
+                        }
+                    case listenKeyExpiredEvent:
+                        {
+                            _log.Write(LogVerbosity.Debug, data);
+                            var result = _baseClient.DeserializeInternal<BinanceStreamEvent>(token, false);
+                            if (result)
+                                onListenKeyExpired?.Invoke(result.Data);
+                            else
+                                _log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from the expired listen key event: " + result.Error);
+                            break;
+                        }
                     default:
-                        log.Write(LogVerbosity.Warning, $"Received unknown user data event {evnt}: " + data);
+                        _log.Write(LogVerbosity.Warning, $"Received unknown user data event {evnt}: " + data);
                         break;
                 }
             });
@@ -762,49 +729,11 @@ namespace Binance.Net
         private async Task<CallResult<UpdateSubscription>> Subscribe<T>(string url, bool combined, Action<T> onData)
         {
             if (combined)
-                url = baseCombinedAddress + "stream?streams=" + url;
+                url = _baseCombinedAddress + "stream?streams=" + url;
             else
-                url = BaseAddress + url;
+                url = _baseAddress + url;
 
-            return await Subscribe(url, null, url + NextId(), false, onData).ConfigureAwait(false);
+            return await _baseClient.SubscribeInternal(url, onData).ConfigureAwait(false);
         }
-
-        /// <inheritdoc />
-        protected override bool HandleQueryResponse<T>(SocketConnection s, object request, JToken data, out CallResult<T>? callResult)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        protected override bool HandleSubscriptionResponse(SocketConnection s, SocketSubscription subscription, object request, JToken message, out CallResult<object>? callResult)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        protected override bool MessageMatchesHandler(JToken message, object request)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        protected override bool MessageMatchesHandler(JToken message, string identifier)
-        {
-            return true;
-        }
-
-        /// <inheritdoc />
-        protected override Task<CallResult<bool>> AuthenticateSocket(SocketConnection s)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        protected override Task<bool> Unsubscribe(SocketConnection connection, SocketSubscription s)
-        {
-            return Task.FromResult(true);
-        }
-
-        #endregion
     }
 }
