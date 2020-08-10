@@ -55,6 +55,7 @@ namespace Binance.Net.Objects.Spot
         /// ctor
         /// </summary>
         /// <param name="baseAddress">Сustom url to connect via mirror website</param>
+        /// <param name="futuresBaseAddress">Сustom futures url to connect via mirror website</param>
         public BinanceClientOptions(string baseAddress, string futuresBaseAddress) : base(baseAddress)
         {
             FuturesBaseAddress = futuresBaseAddress;

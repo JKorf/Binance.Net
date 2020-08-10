@@ -52,7 +52,7 @@ namespace Binance.Net
         internal BinanceExchangeInfo? ExchangeInfo;
         internal DateTime? LastExchangeInfoUpdate;
 
-        private string _baseAddressFutures;
+        private readonly string _baseAddressFutures;
 
         #endregion
 
@@ -76,6 +76,7 @@ namespace Binance.Net
         /// Margin endpoints
         /// </summary>
         public IBinanceClientMargin Margin { get; }
+
 
         /// <summary>
         /// Spot endpoints
@@ -193,7 +194,7 @@ namespace Binance.Net
             decimal? stopPrice = null,
             decimal? icebergQty = null,
             SideEffectType? sideEffectType = null,
-            OrderResponseType? orderResponseType = null,
+            bool? isIsolated = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -204,6 +205,7 @@ namespace Binance.Net
 
             if ((quantity == null && quoteOrderQuantity == null) || (quantity != null && quoteOrderQuantity != null))
                 throw new ArgumentException("1 of either should be specified, quantity or quoteOrderQuantity");
+
 
             var timestampResult = await CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
@@ -234,7 +236,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("sideEffectType", sideEffectType == null ? null : JsonConvert.SerializeObject(sideEffectType, new SideEffectTypeConverter(false)));
-            parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
+            parameters.AddOptionalParameter("isIsolated", isIsolated);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await SendRequest<BinancePlacedOrder>(uri, HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);

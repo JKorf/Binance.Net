@@ -907,7 +907,7 @@ namespace Binance.Net.UnitTests
             TestHelpers.SetErrorWithResponse(client, "{\"msg\": \"Error!\", \"code\": 123}", HttpStatusCode.BadRequest);
 
             // act
-            var result = client.Ping();
+            var result = client.System.GetServerTime();
 
             // assert
             Assert.IsFalse(result.Success);

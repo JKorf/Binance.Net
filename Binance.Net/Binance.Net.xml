@@ -377,6 +377,21 @@
             Cancelled orders ratio
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.IsolatedMarginTransferDirection">
+            <summary>
+            Transfer direction for isolated margin transfer
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.IsolatedMarginTransferDirection.Spot">
+            <summary>
+            Spot
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.IsolatedMarginTransferDirection.IsolatedMargin">
+            <summary>
+            Isolated margin
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.KlineInterval">
             <summary>
             The interval for the kline
@@ -515,6 +530,36 @@
         <member name="F:Binance.Net.Enums.ListStatusType.Done">
             <summary>
             Order list is done
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.MarginLevelStatus">
+            <summary>
+            Margin level status
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.MarginLevelStatus.Excessive">
+            <summary>
+            Excessive
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.MarginLevelStatus.Normal">
+            <summary>
+            Normal
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.MarginLevelStatus.MarginCall">
+            <summary>
+            Margin call
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.MarginLevelStatus.PreLiquidation">
+            <summary>
+            Pre-liquidation
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.MarginLevelStatus.ForceLiquidation">
+            <summary>
+            Force liquidation
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.MarginStatus">
@@ -2115,7 +2160,7 @@
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToUserDataUpdates(System.String,System.Action{System.Decimal},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate}},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamBalance}},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition}},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
             <summary>
-            Subscribes to the account update stream. Prior to using this, the <see cref="!:BinanceClient.StartUserStream"/> method should be called.
+            Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStream.StartUserStream method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
             <param name="onCrossWalletUpdate">The event handler for whenever a cross wallet has changed</param>
@@ -2128,7 +2173,7 @@
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceFuturesSocketClient.SubscribeToUserDataUpdatesAsync(System.String,System.Action{System.Decimal},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate}},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamBalance}},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition}},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
             <summary>
-            Subscribes to the account update stream. Prior to using this, the <see cref="!:BinanceClient.StartUserStream"/> method should be called.
+            Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStream.StartUserStream method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
             <param name="onCrossWalletUpdate">The event handler for whenever a cross wallet has changed</param>
@@ -3838,7 +3883,7 @@
             Futures orders interface
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesOrders.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesOrders.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -3856,12 +3901,11 @@
             <param name="callbackRate">Used with TRAILING_STOP_MARKET orders</param>
             <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
             <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
-            <param name="orderResponseType">The type of response to receive</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesOrders.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesOrders.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -3879,7 +3923,6 @@
             <param name="callbackRate">Used with TRAILING_STOP_MARKET orders</param>
             <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
             <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
-            <param name="orderResponseType">The type of response to receive</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
@@ -4156,14 +4199,14 @@
         </member>
         <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUserStream.StartUserStream(System.Threading.CancellationToken)">
             <summary>
-            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="!:BinanceSocketClient.SubscribeToUserDataUpdates"/>. The stream will close after 60 minutes unless a keep alive is send.
+            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to BinanceSocketClient.Futures.SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>Listen key</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUserStream.StartUserStreamAsync(System.Threading.CancellationToken)">
             <summary>
-            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="!:BinanceSocketClient.SubscribeToUserDataUpdates"/>. The stream will close after 60 minutes unless a keep alive is send.
+            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to BinanceSocketClient.Futures.SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>Listen key</returns>
@@ -5701,6 +5744,143 @@
             <param name="ct">Cancellation token</param>
             <returns>Asset detail</returns>
         </member>
+        <member name="T:Binance.Net.Interfaces.SubClients.IsolatedMargin.IBinanceClientIsolatedMargin">
+            <summary>
+            Isolated margin interface
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.SubClients.IsolatedMargin.IBinanceClientIsolatedMargin.UserStream">
+            <summary>
+            Isolated margin user stream endpoints
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IsolatedMargin.IBinanceClientIsolatedMargin.CreateIsolatedMarginAccountAsync(System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            
+            </summary>
+            <param name="baseAsset">The base asset</param>
+            <param name="quoteAsset">The quote asset</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IsolatedMargin.IBinanceClientIsolatedMargin.IsolatedMarginAccountTransfer(System.String,System.String,Binance.Net.Enums.IsolatedMarginTransferDirection,Binance.Net.Enums.IsolatedMarginTransferDirection,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Transfer from or to isolated margin account
+            </summary>
+            <param name="asset">The asset</param>
+            <param name="symbol">Isolated symbol</param>
+            <param name="from">From</param>
+            <param name="to">To</param>
+            <param name="amount">Amount to transfer</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IsolatedMargin.IBinanceClientIsolatedMargin.GetIsolatedMarginAccountTransferHistory(System.String,System.String,System.Nullable{Binance.Net.Enums.IsolatedMarginTransferDirection},System.Nullable{Binance.Net.Enums.IsolatedMarginTransferDirection},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get history of transfer to and from the isolated margin account
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="asset">Filter by asset</param>
+            <param name="from">Filter by direction</param>
+            <param name="to">Filter by direction</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="current">Current page</param>
+            <param name="limit">Page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IsolatedMargin.IBinanceClientIsolatedMargin.GetIsolatedMarginAccountAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Isolated margin account info
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IsolatedMargin.IBinanceClientIsolatedMargin.GetIsolatedMarginSymbol(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Isolated margin symbol info
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IsolatedMargin.IBinanceClientIsolatedMargin.GetIsolatedMarginSymbols(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Isolated margin symbol info
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Binance.Net.Interfaces.SubClients.IsolatedMargin.IBinanceClientIsolatedMarginUserStream">
+            <summary>
+            Isolated margin user stream interface
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IsolatedMargin.IBinanceClientIsolatedMarginUserStream.StartIsolatedMarginUserStream(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Starts a user stream  for margin account by requesting a listen key. 
+            This listen key can be used in subsequent requests to BinanceSocketClient.Spot.SubscribeToUserDataUpdates. 
+            The stream will close after 60 minutes unless a keep alive is send.
+            </summary>
+            <param name="symbol">The isolated symbol</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Listen key</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IsolatedMargin.IBinanceClientIsolatedMarginUserStream.StartIsolatedMarginUserStreamAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Starts a user stream  for margin account by requesting a listen key. 
+            This listen key can be used in subsequent requests to  BinanceSocketClient.Spot.SubscribeToUserDataUpdates  
+            The stream will close after 60 minutes unless a keep alive is send.
+            </summary>
+            <param name="symbol">The isolated symbol</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Listen key</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IsolatedMargin.IBinanceClientIsolatedMarginUserStream.KeepAliveIsolatedMarginUserStream(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Sends a keep alive for the current user for margin account stream listen key to keep the stream from closing. 
+            Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
+            </summary>
+            <param name="symbol">The isolated symbol</param>
+            <param name="listenKey">The listen key to keep alive</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IsolatedMargin.IBinanceClientIsolatedMarginUserStream.KeepAliveIsolatedMarginUserStreamAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Sends a keep alive for the current user stream for margin account listen key to keep the stream from closing. 
+            Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
+            </summary>
+            <param name="symbol">The isolated symbol</param>
+            <param name="listenKey">The listen key to keep alive</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IsolatedMargin.IBinanceClientIsolatedMarginUserStream.CloseIsolatedMarginUserStream(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Close the user stream for margin account
+            </summary>
+            <param name="symbol">The isolated symbol</param>
+            <param name="listenKey">The listen key to keep alive</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IsolatedMargin.IBinanceClientIsolatedMarginUserStream.CloseIsolatedMarginUserStreamAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Close the user stream for margin account
+            </summary>
+            <param name="symbol">The isolated symbol</param>
+            <param name="listenKey">The listen key to keep alive</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="T:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin">
             <summary>
             Margin interface
@@ -5743,42 +5923,50 @@
             <param name="ct">Cancellation token</param>
             <returns>Transaction Id</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.Borrow(System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.Borrow(System.String,System.Decimal,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Borrow. Apply for a loan. 
             </summary>
             <param name="asset">The asset being borrow, e.g., BTC</param>
             <param name="amount">The amount to be borrow</param>
+            <param name="isIsolated">For isolated margin or not</param>
+            <param name="symbol">The isolated symbol</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Transaction Id</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.BorrowAsync(System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.BorrowAsync(System.String,System.Decimal,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Borrow. Apply for a loan. 
             </summary>
             <param name="asset">The asset being borrow, e.g., BTC</param>
             <param name="amount">The amount to be borrow</param>
+            <param name="isIsolated">For isolated margin or not</param>
+            <param name="symbol">The isolated symbol</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Transaction Id</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.Repay(System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.Repay(System.String,System.Decimal,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Repay loan for margin account.
             </summary>
             <param name="asset">The asset being repay, e.g., BTC</param>
             <param name="amount">The amount to be borrow</param>
+            <param name="isIsolated">For isolated margin or not</param>
+            <param name="symbol">The isolated symbol</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Transaction Id</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.RepayAsync(System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.RepayAsync(System.String,System.Decimal,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Repay loan for margin account.
             </summary>
             <param name="asset">The asset being repay, e.g., BTC</param>
             <param name="amount">The amount to be borrow</param>
+            <param name="isIsolated">For isolated margin or not</param>
+            <param name="symbol">The isolated symbol</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Transaction Id</returns>
@@ -5809,7 +5997,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of transfers</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetLoans(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetLoans(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get loan records
             </summary>
@@ -5818,12 +6006,13 @@
             <param name="startTime">Time to start getting records from</param>
             <param name="endTime">Time to stop getting records to</param>
             <param name="current">Number of page records</param>
+            <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="limit">The records count size need show</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Loan records</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetLoansAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetLoansAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Query loan records
             </summary>
@@ -5832,12 +6021,13 @@
             <param name="startTime">Time to start getting records from</param>
             <param name="endTime">Time to stop getting records to</param>
             <param name="current">Number of page records</param>
+            <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="limit">The records count size need show</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Loan records</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetRepays(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetRepays(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Query repay records
             </summary>
@@ -5846,12 +6036,13 @@
             <param name="startTime">Time to start getting records from</param>
             <param name="endTime">Time to stop getting records to</param>
             <param name="current">Number of page records</param>
+            <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="size">The records count size need show</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Repay records</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetRepaysAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetRepaysAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Query repay records
             </summary>
@@ -5860,12 +6051,13 @@
             <param name="startTime">Time to start getting records from</param>
             <param name="endTime">Time to stop getting records to</param>
             <param name="current">Filter by number</param>
+            <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="size">The records count size need show</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Repay records</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetInterestHistory(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetInterestHistory(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get history of interest
             </summary>
@@ -5873,12 +6065,13 @@
             <param name="page">Results page</param>
             <param name="startTime">Filter by startTime from</param>
             <param name="endTime">Filter by endTime from</param>
+            <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="limit">Limit of the amount of results</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of interest events</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetInterestHistoryAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetInterestHistoryAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get history of interest
             </summary>
@@ -5886,30 +6079,33 @@
             <param name="page">Results page</param>
             <param name="startTime">Filter by startTime from</param>
             <param name="endTime">Filter by endTime from</param>
+            <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="limit">Limit of the amount of results</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of interest events</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetForceLiquidationHistory(System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetForceLiquidationHistory(System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get history of forced liquidations
             </summary>
             <param name="page">Results page</param>
             <param name="startTime">Filter by startTime from</param>
+            <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="endTime">Filter by endTime from</param>
             <param name="limit">Limit of the amount of results</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of forced liquidations</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetForceLiquidationHistoryAsync(System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetForceLiquidationHistoryAsync(System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get history of forced liquidations
             </summary>
             <param name="page">Results page</param>
             <param name="startTime">Filter by startTime from</param>
             <param name="endTime">Filter by endTime from</param>
+            <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="limit">Limit of the amount of results</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -5931,38 +6127,42 @@
             <param name="ct">Cancellation token</param>
             <returns>The margin account information</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetMaxBorrowAmount(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetMaxBorrowAmount(System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Query max borrow amount
             </summary>
             <param name="asset">The records asset</param>
+            <param name="isolatedSymbol">The isolated symbol</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Return max amount</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetMaxBorrowAmountAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetMaxBorrowAmountAsync(System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Query max borrow amount
             </summary>
             <param name="asset">The records asset</param>
+            <param name="isolatedSymbol">The isolated symbol</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Return max amount</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetMaxTransferAmount(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetMaxTransferAmount(System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Query max transfer-out amount 
             </summary>
             <param name="asset">The records asset</param>
+            <param name="isolatedSymbol">The isolated symbol</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Return max amount</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetMaxTransferAmountAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetMaxTransferAmountAsync(System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Query max transfer-out amount 
             </summary>
             <param name="asset">The records asset</param>
+            <param name="isolatedSymbol">The isolated symbol</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Return max amount</returns>
@@ -6053,7 +6253,7 @@
             Margin orders interface
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.PlaceMarginOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.SideEffectType},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.PlaceMarginOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.SideEffectType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Margin account new order
             </summary>
@@ -6068,12 +6268,12 @@
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQuantity">Used for iceberg orders</param>
             <param name="sideEffectType">Side effect type for this order</param>
-            <param name="orderResponseType">The type of response to receive</param>
+            <param name="isIsolated">For isolated margin or not</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.PlaceMarginOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.SideEffectType},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.PlaceMarginOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.SideEffectType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Margin account new order
             </summary>
@@ -6088,80 +6288,87 @@
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQuantity">Used for iceberg orders</param>
             <param name="sideEffectType">Side effect type for this order</param>
-            <param name="orderResponseType">The type of response to receive</param>
+            <param name="isIsolated">For isolated margin or not</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.CancelMarginOrder(System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.CancelMarginOrder(System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Cancel an active order for margin account
             </summary>
             <param name="symbol">The symbol the order is for</param>
             <param name="orderId">The order id of the order</param>
             <param name="origClientOrderId">The client order id of the order</param>
+            <param name="isIsolated">For isolated margin or not</param>
             <param name="newClientOrderId">Unique identifier for this cancel</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for canceled order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.CancelMarginOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.CancelMarginOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Cancel an active order for margin account
             </summary>
             <param name="symbol">The symbol the order is for</param>
             <param name="orderId">The order id of the order</param>
+            <param name="isIsolated">For isolated margin or not</param>
             <param name="origClientOrderId">The client order id of the order</param>
             <param name="newClientOrderId">Unique identifier for this cancel</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for canceled order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetMarginAccountOrder(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetMarginAccountOrder(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Retrieves data for a specific margin account order. Either orderId or origClientOrderId should be provided.
             </summary>
             <param name="symbol">The symbol the order is for</param>
+            <param name="orderId">The order id of the order</param>
+            <param name="isIsolated">For isolated margin or not</param>
+            <param name="origClientOrderId">The client order id of the order</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The specific margin account order</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetMarginAccountOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Retrieves data for a specific margin account order. Either orderId or origClientOrderId should be provided.
+            </summary>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="isIsolated">For isolated margin or not</param>
             <param name="orderId">The order id of the order</param>
             <param name="origClientOrderId">The client order id of the order</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>The specific margin account order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetMarginAccountOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Retrieves data for a specific margin account order. Either orderId or origClientOrderId should be provided.
-            </summary>
-            <param name="symbol">The symbol the order is for</param>
-            <param name="orderId">The order id of the order</param>
-            <param name="origClientOrderId">The client order id of the order</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>The specific margin account order</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetOpenMarginAccountOrders(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetOpenMarginAccountOrders(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets a list of open margin account orders
             </summary>
             <param name="symbol">The symbol to get open orders for</param>
+            <param name="isIsolated">For isolated margin or not</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of open margin account orders</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetOpenMarginAccountOrdersAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetOpenMarginAccountOrdersAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets a list of open margin account orders
             </summary>
             <param name="symbol">The symbol to get open orders for</param>
+            <param name="isIsolated">For isolated margin or not</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of open margin account orders</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetAllMarginAccountOrders(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetAllMarginAccountOrders(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets all margin account orders for the provided symbol
             </summary>
             <param name="symbol">The symbol to get orders for</param>
+            <param name="isIsolated">For isolated margin or not</param>
             <param name="orderId">If set, only orders with an order id higher than the provided will be returned</param>
             <param name="startTime">If set, only orders placed after this time will be returned</param>
             <param name="endTime">If set, only orders placed before this time will be returned</param>
@@ -6170,11 +6377,12 @@
             <param name="ct">Cancellation token</param>
             <returns>List of margin account orders</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetAllMarginAccountOrdersAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetAllMarginAccountOrdersAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets all margin account orders for the provided symbol
             </summary>
             <param name="symbol">The symbol to get orders for</param>
+            <param name="isIsolated">For isolated margin or not</param>
             <param name="orderId">If set, only orders with an order id higher than the provided will be returned</param>
             <param name="startTime">If set, only orders placed after this time will be returned</param>
             <param name="endTime">If set, only orders placed before this time will be returned</param>
@@ -6183,12 +6391,13 @@
             <param name="ct">Cancellation token</param>
             <returns>List of margin account orders</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetMyMarginAccountTrades(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetMyMarginAccountTrades(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user margin account trades for provided symbol
             </summary>
             <param name="symbol">Symbol to get trades for</param>
             <param name="limit">The max number of results</param>
+            <param name="isIsolated">For isolated margin or not</param>
             <param name="startTime">Orders newer than this date will be retrieved</param>
             <param name="endTime">Orders older than this date will be retrieved</param>
             <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
@@ -6196,12 +6405,13 @@
             <param name="ct">Cancellation token</param>
             <returns>List of margin account trades</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetMyMarginAccountTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetMyMarginAccountTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user margin account trades for provided symbol
             </summary>
             <param name="symbol">Symbol to get trades for</param>
             <param name="limit">The max number of results</param>
+            <param name="isIsolated">For isolated margin or not</param>
             <param name="startTime">Orders newer than this date will be retrieved</param>
             <param name="endTime">Orders older than this date will be retrieved</param>
             <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
@@ -6217,8 +6427,7 @@
         <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginUserStream.StartMarginUserStream(System.Threading.CancellationToken)">
             <summary>
             Starts a user stream  for margin account by requesting a listen key. 
-            This listen key can be used in subsequent requests to 
-            <see cref="!:BinanceSocketClient.SubscribeToUserDataUpdates"/>. 
+            This listen key can be used in subsequent requests to BinanceSocketClient.Spot.SubscribeToUserDataUpdates.
             The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <param name="ct">Cancellation token</param>
@@ -6227,8 +6436,7 @@
         <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginUserStream.StartMarginUserStreamAsync(System.Threading.CancellationToken)">
             <summary>
             Starts a user stream  for margin account by requesting a listen key. 
-            This listen key can be used in subsequent requests to 
-            <see cref="!:BinanceSocketClient.SubscribeToUserDataUpdates"/>. 
+            This listen key can be used in subsequent requests to BinanceSocketClient.Spot.SubscribeToUserDataUpdates.
             The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <param name="ct">Cancellation token</param>
@@ -6526,7 +6734,7 @@
             Spot order interface
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.PlaceTestOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.PlaceTestOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new test order. Test orders are not actually being executed and just test the functionality.
             </summary>
@@ -6540,12 +6748,11 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQty">User for iceberg orders</param>
-            <param name="orderResponseType">What kind of response should be returned</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed test order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.PlaceTestOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.PlaceTestOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new test order. Test orders are not actually being executed and just test the functionality.
             </summary>
@@ -6559,12 +6766,11 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQty">User for iceberg orders</param>
-            <param name="orderResponseType">What kind of response should be returned</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed test order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -6578,12 +6784,11 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQty">Used for iceberg orders</param>
-            <param name="orderResponseType">The type of response to receive</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -6597,7 +6802,6 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQty">Used for iceberg orders</param>
-            <param name="orderResponseType">The type of response to receive</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
@@ -6710,7 +6914,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of orders</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.PlaceOCOOrder(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.PlaceOCOOrder(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new OCO(One cancels other) order
             </summary>
@@ -6726,12 +6930,11 @@
             <param name="listClientOrderId">Client id for the order list</param>
             <param name="limitIcebergQuantity">Iceberg quantity for the limit order</param>
             <param name="stopIcebergQuantity">Iceberg quantity for the stop order</param>
-            <param name="orderResponseType">The type of response to receive</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Order list info</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.PlaceOCOOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.PlaceOCOOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new OCO(One cancels other) order
             </summary>
@@ -6747,7 +6950,6 @@
             <param name="listClientOrderId">Client id for the order list</param>
             <param name="limitIcebergQuantity">Iceberg quantity for the limit order</param>
             <param name="stopIcebergQuantity">Iceberg quantity for the stop order</param>
-            <param name="orderResponseType">The type of response to receive</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Order list info</returns>
@@ -6869,14 +7071,14 @@
         </member>
         <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotUserStream.StartUserStream(System.Threading.CancellationToken)">
             <summary>
-            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="!:BinanceSocketClient.SubscribeToUserDataUpdates"/>. The stream will close after 60 minutes unless a keep alive is send.
+            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to BinanceSocketClient.Spot.SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>Listen key</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotUserStream.StartUserStreamAsync(System.Threading.CancellationToken)">
             <summary>
-            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="!:BinanceSocketClient.SubscribeToUserDataUpdates"/>. The stream will close after 60 minutes unless a keep alive is send.
+            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to BinanceSocketClient.Spot.SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>Listen key</returns>
@@ -9401,6 +9603,7 @@
             ctor
             </summary>
             <param name="baseAddress">Сustom url to connect via mirror website</param>
+            <param name="futuresBaseAddress">Сustom futures url to connect via mirror website</param>
         </member>
         <member name="M:Binance.Net.Objects.Spot.BinanceClientOptions.Copy">
             <summary>
@@ -9476,6 +9679,236 @@
             </summary>
             <param name="limit">The top amount of results to keep in sync. If for example limit=10 is used, the order book will contain the 10 best bids and 10 best asks. Leaving this null will sync the full order book</param>
             <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginSymbol">
+            <summary>
+            Isolated margin symbol info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginSymbol.Symbol">
+            <summary>
+            Symbol name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginSymbol.Base">
+            <summary>
+            Base asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginSymbol.Quote">
+            <summary>
+            Quote asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginSymbol.IsMarginTrade">
+            <summary>
+            Margin trade
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginSymbol.IsBuyAllowed">
+            <summary>
+            Is buy allowed
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginSymbol.IsSellAllowed">
+            <summary>
+            Is sell allowed
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginTransfer">
+            <summary>
+            Isolated margin transfer
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginTransfer.Amount">
+            <summary>
+            Amount of the transfer
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginTransfer.Asset">
+            <summary>
+            Transfer asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginTransfer.Status">
+            <summary>
+            Status of the transfer
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginTransfer.Timestamp">
+            <summary>
+            Timestamp of the transfer
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginTransfer.TransactionId">
+            <summary>
+            Transaction id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginTransfer.From">
+            <summary>
+            From
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginTransfer.To">
+            <summary>
+            To
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.IsolatedMarginData.CreateIsolatedMarginAccountResult">
+            <summary>
+            Result of creating isolated margin account
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.CreateIsolatedMarginAccountResult.Success">
+            <summary>
+            Success
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.CreateIsolatedMarginAccountResult.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccount">
+            <summary>
+            Isolated margin account info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccount.Assets">
+            <summary>
+            Account assets
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccount.TotalAssetOfBtc">
+            <summary>
+            Total btc asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccount.TotalLiabilityOfBtc">
+            <summary>
+            Total liability
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccount.TotalNetAssetOfBtc">
+            <summary>
+            Total net asset
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountSymbol">
+            <summary>
+            Isolated margin account symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountSymbol.BaseAsset">
+            <summary>
+            Base asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountSymbol.QuoteAsset">
+            <summary>
+            Quote asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountSymbol.Symbol">
+            <summary>
+            Symbol name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountSymbol.IsolatedCreated">
+            <summary>
+            Isolated created
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountSymbol.MarginLevel">
+            <summary>
+            The margin level
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountSymbol.MarginLevelStatus">
+            <summary>
+            Margin level status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountSymbol.MarginRatio">
+            <summary>
+            Margin ratio
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountSymbol.IndexPrice">
+            <summary>
+            Index price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountSymbol.LiquidatePrice">
+            <summary>
+            Liquidate price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountSymbol.LiquidateRate">
+            <summary>
+            Liquidate rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountSymbol.TradeEnabled">
+            <summary>
+            If trading is enabled
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountAsset">
+            <summary>
+            Isolated margin account asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountAsset.Asset">
+            <summary>
+            Asset name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountAsset.BorrowEnabled">
+            <summary>
+            If borrow is enabled
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountAsset.Borrowed">
+            <summary>
+            Borrowed
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountAsset.Free">
+            <summary>
+            Free
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountAsset.Interest">
+            <summary>
+            Interest
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountAsset.Locked">
+            <summary>
+            Locked
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountAsset.NetAsset">
+            <summary>
+            Net asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountAsset.NetAssetOfBtc">
+            <summary>
+            Net asset in btc
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountAsset.RepayEnabled">
+            <summary>
+            Is repay enabled
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountAsset.TotalAsset">
+            <summary>
+            Total asset
+            </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.LendingData.BinanceCustomizedFixedProjectPosition">
             <summary>
@@ -10067,6 +10500,11 @@
             Last update time
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceForcedLiquidation.IsIsolated">
+            <summary>
+            Is isolated margin
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.MarginData.BinanceInterestHistory">
             <summary>
             Interest history entry info
@@ -10339,7 +10777,7 @@
         </member>
         <member name="T:Binance.Net.Objects.Spot.MarginData.BinanceMarginTransaction">
             <summary>
-            The result of transferring, borrow or repay response
+            The result of transferring
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceMarginTransaction.TransactionId">
@@ -10784,7 +11222,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.FirstUpdateId">
             <summary>
-            The id of this update, can be synced with <see cref="!:BinanceClient.GetOrderBook"/> to update the order book
+            The id of this update, can be synced with BinanceClient.Spot.GetOrderBook to update the order book
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.Bids">
@@ -17040,7 +17478,7 @@
             Futures order endpoints
             </summary>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -17058,12 +17496,11 @@
             <param name="callbackRate">Used with TRAILING_STOP_MARKET orders</param>
             <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
             <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
-            <param name="orderResponseType">The type of response to receive</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -17081,7 +17518,6 @@
             <param name="callbackRate">Used with TRAILING_STOP_MARKET orders</param>
             <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
             <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
-            <param name="orderResponseType">The type of response to receive</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
@@ -17358,14 +17794,14 @@
         </member>
         <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesUserStream.StartUserStream(System.Threading.CancellationToken)">
             <summary>
-            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="!:BinanceSocketClient.SubscribeToUserDataUpdates"/>. The stream will close after 60 minutes unless a keep alive is send.
+            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to BinanceSocketClient.Futures.SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>Listen key</returns>
         </member>
         <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesUserStream.StartUserStreamAsync(System.Threading.CancellationToken)">
             <summary>
-            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="!:BinanceSocketClient.SubscribeToUserDataUpdates"/>. The stream will close after 60 minutes unless a keep alive is send.
+            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to BinanceSocketClient.Futures.SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>Listen key</returns>
@@ -17398,6 +17834,143 @@
             <summary>
             Stops the current user stream
             </summary>
+            <param name="listenKey">The listen key to keep alive</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Binance.Net.SubClients.IsolatedMargin.BinanceClientIsolatedMargin">
+            <summary>
+            Isolated margin endpoints
+            </summary>
+        </member>
+        <member name="P:Binance.Net.SubClients.IsolatedMargin.BinanceClientIsolatedMargin.UserStream">
+            <summary>
+            Isolated margin user stream endpoints
+            </summary>
+        </member>
+        <member name="M:Binance.Net.SubClients.IsolatedMargin.BinanceClientIsolatedMargin.CreateIsolatedMarginAccountAsync(System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Create isolated margin account
+            </summary>
+            <param name="baseAsset">The base asset</param>
+            <param name="quoteAsset">The quote asset</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.IsolatedMargin.BinanceClientIsolatedMargin.IsolatedMarginAccountTransfer(System.String,System.String,Binance.Net.Enums.IsolatedMarginTransferDirection,Binance.Net.Enums.IsolatedMarginTransferDirection,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Transfer from or to isolated margin account
+            </summary>
+            <param name="asset">The asset</param>
+            <param name="symbol">Isolated symbol</param>
+            <param name="from">From</param>
+            <param name="to">To</param>
+            <param name="amount">Amount to transfer</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.IsolatedMargin.BinanceClientIsolatedMargin.GetIsolatedMarginAccountTransferHistory(System.String,System.String,System.Nullable{Binance.Net.Enums.IsolatedMarginTransferDirection},System.Nullable{Binance.Net.Enums.IsolatedMarginTransferDirection},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get history of transfer to and from the isolated margin account
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="asset">Filter by asset</param>
+            <param name="from">Filter by direction</param>
+            <param name="to">Filter by direction</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="current">Current page</param>
+            <param name="limit">Page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.IsolatedMargin.BinanceClientIsolatedMargin.GetIsolatedMarginAccountAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Isolated margin account info
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.IsolatedMargin.BinanceClientIsolatedMargin.GetIsolatedMarginSymbol(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Isolated margin symbol info
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.IsolatedMargin.BinanceClientIsolatedMargin.GetIsolatedMarginSymbols(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Isolated margin symbol info
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Binance.Net.SubClients.IsolatedMargin.BinanceClientIsolatedMarginUserStream">
+            <summary>
+            Margin user stream endpoints
+            </summary>
+        </member>
+        <member name="M:Binance.Net.SubClients.IsolatedMargin.BinanceClientIsolatedMarginUserStream.StartIsolatedMarginUserStream(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Starts a user stream  for margin account by requesting a listen key. 
+            This listen key can be used in subsequent requests to BinanceSocketClient.Spot.SubscribeToUserDataUpdates
+            The stream will close after 60 minutes unless a keep alive is send.
+            </summary>
+            <param name="symbol">The isolated symbol</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Listen key</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.IsolatedMargin.BinanceClientIsolatedMarginUserStream.StartIsolatedMarginUserStreamAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Starts a user stream  for margin account by requesting a listen key. 
+            This listen key can be used in subsequent requests to BinanceSocketClient.Spot.SubscribeToUserDataUpdates
+            The stream will close after 60 minutes unless a keep alive is send.
+            </summary>
+            <param name="symbol">The isolated symbol</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Listen key</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.IsolatedMargin.BinanceClientIsolatedMarginUserStream.KeepAliveIsolatedMarginUserStream(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Sends a keep alive for the current user for margin account stream listen key to keep the stream from closing. 
+            Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
+            </summary>
+            <param name="symbol">The isolated symbol</param>
+            <param name="listenKey">The listen key to keep alive</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.IsolatedMargin.BinanceClientIsolatedMarginUserStream.KeepAliveIsolatedMarginUserStreamAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Sends a keep alive for the current user stream for margin account listen key to keep the stream from closing. 
+            Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
+            </summary>
+            <param name="symbol">The isolated symbol</param>
+            <param name="listenKey">The listen key to keep alive</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.IsolatedMargin.BinanceClientIsolatedMarginUserStream.CloseIsolatedMarginUserStream(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Close the user stream for margin account
+            </summary>
+            <param name="symbol">The isolated symbol</param>
+            <param name="listenKey">The listen key to keep alive</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.IsolatedMargin.BinanceClientIsolatedMarginUserStream.CloseIsolatedMarginUserStreamAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Close the user stream for margin account
+            </summary>
+            <param name="symbol">The isolated symbol</param>
             <param name="listenKey">The listen key to keep alive</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -17444,42 +18017,50 @@
             <param name="ct">Cancellation token</param>
             <returns>Transaction Id</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.Borrow(System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.Borrow(System.String,System.Decimal,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Borrow. Apply for a loan. 
             </summary>
             <param name="asset">The asset being borrow, e.g., BTC</param>
             <param name="amount">The amount to be borrow</param>
+            <param name="isIsolated">For isolated margin or not</param>
+            <param name="symbol">The isolated symbol</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Transaction Id</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.BorrowAsync(System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.BorrowAsync(System.String,System.Decimal,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Borrow. Apply for a loan. 
             </summary>
             <param name="asset">The asset being borrow, e.g., BTC</param>
             <param name="amount">The amount to be borrow</param>
+            <param name="isIsolated">For isolated margin or not</param>
+            <param name="symbol">The isolated symbol</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Transaction Id</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.Repay(System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.Repay(System.String,System.Decimal,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Repay loan for margin account.
             </summary>
             <param name="asset">The asset being repay, e.g., BTC</param>
             <param name="amount">The amount to be borrow</param>
+            <param name="isIsolated">For isolated margin or not</param>
+            <param name="symbol">The isolated symbol</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Transaction Id</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.RepayAsync(System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.RepayAsync(System.String,System.Decimal,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Repay loan for margin account.
             </summary>
             <param name="asset">The asset being repay, e.g., BTC</param>
             <param name="amount">The amount to be borrow</param>
+            <param name="isIsolated">For isolated margin or not</param>
+            <param name="symbol">The isolated symbol</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Transaction Id</returns>
@@ -17510,7 +18091,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of transfers</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetLoans(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetLoans(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get loan records
             </summary>
@@ -17519,12 +18100,13 @@
             <param name="startTime">Time to start getting records from</param>
             <param name="endTime">Time to stop getting records to</param>
             <param name="current">Number of page records</param>
+            <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="limit">The records count size need show</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Loan records</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetLoansAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetLoansAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Query loan records
             </summary>
@@ -17533,12 +18115,13 @@
             <param name="startTime">Time to start getting records from</param>
             <param name="endTime">Time to stop getting records to</param>
             <param name="current">Number of page records</param>
+            <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="limit">The records count size need show</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Loan records</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetRepays(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetRepays(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Query repay records
             </summary>
@@ -17547,12 +18130,13 @@
             <param name="startTime">Time to start getting records from</param>
             <param name="endTime">Time to stop getting records to</param>
             <param name="current">Number of page records</param>
+            <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="size">The records count size need show</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Repay records</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetRepaysAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetRepaysAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Query repay records
             </summary>
@@ -17561,12 +18145,13 @@
             <param name="startTime">Time to start getting records from</param>
             <param name="endTime">Time to stop getting records to</param>
             <param name="current">Filter by number</param>
+            <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="size">The records count size need show</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Repay records</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetInterestHistory(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetInterestHistory(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get history of interest
             </summary>
@@ -17574,12 +18159,13 @@
             <param name="page">Results page</param>
             <param name="startTime">Filter by startTime from</param>
             <param name="endTime">Filter by endTime from</param>
+            <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="limit">Limit of the amount of results</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of interest events</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetInterestHistoryAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetInterestHistoryAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get history of interest
             </summary>
@@ -17587,30 +18173,33 @@
             <param name="page">Results page</param>
             <param name="startTime">Filter by startTime from</param>
             <param name="endTime">Filter by endTime from</param>
+            <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="limit">Limit of the amount of results</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of interest events</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetForceLiquidationHistory(System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetForceLiquidationHistory(System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get history of forced liquidations
             </summary>
             <param name="page">Results page</param>
             <param name="startTime">Filter by startTime from</param>
+            <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="endTime">Filter by endTime from</param>
             <param name="limit">Limit of the amount of results</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of forced liquidations</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetForceLiquidationHistoryAsync(System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetForceLiquidationHistoryAsync(System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get history of forced liquidations
             </summary>
             <param name="page">Results page</param>
             <param name="startTime">Filter by startTime from</param>
             <param name="endTime">Filter by endTime from</param>
+            <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="limit">Limit of the amount of results</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -17632,38 +18221,42 @@
             <param name="ct">Cancellation token</param>
             <returns>The margin account information</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetMaxBorrowAmount(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetMaxBorrowAmount(System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Query max borrow amount
             </summary>
             <param name="asset">The records asset</param>
+            <param name="isolatedSymbol">The isolated symbol</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Return max amount</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetMaxBorrowAmountAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetMaxBorrowAmountAsync(System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Query max borrow amount
             </summary>
             <param name="asset">The records asset</param>
+            <param name="isolatedSymbol">The isolated symbol</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Return max amount</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetMaxTransferAmount(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetMaxTransferAmount(System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Query max transfer-out amount 
             </summary>
             <param name="asset">The records asset</param>
+            <param name="isolatedSymbol">The isolated symbol</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Return max amount</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetMaxTransferAmountAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetMaxTransferAmountAsync(System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Query max transfer-out amount 
             </summary>
             <param name="asset">The records asset</param>
+            <param name="isolatedSymbol">The isolated symbol</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Return max amount</returns>
@@ -17754,7 +18347,7 @@
             Margin order endpoints
             </summary>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.PlaceMarginOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.SideEffectType},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.PlaceMarginOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.SideEffectType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Margin account new order
             </summary>
@@ -17769,12 +18362,12 @@
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQuantity">Used for iceberg orders</param>
             <param name="sideEffectType">Side effect type for this order</param>
-            <param name="orderResponseType">The type of response to receive</param>
+            <param name="isIsolated">For isolated margin or not</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.PlaceMarginOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.SideEffectType},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.PlaceMarginOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.SideEffectType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Margin account new order
             </summary>
@@ -17789,80 +18382,87 @@
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQuantity">Used for iceberg orders</param>
             <param name="sideEffectType">Side effect type for this order</param>
-            <param name="orderResponseType">The type of response to receive</param>
+            <param name="isIsolated">For isolated margin or not</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.CancelMarginOrder(System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.CancelMarginOrder(System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Cancel an active order for margin account
             </summary>
             <param name="symbol">The symbol the order is for</param>
             <param name="orderId">The order id of the order</param>
             <param name="origClientOrderId">The client order id of the order</param>
+            <param name="isIsolated">For isolated margin or not</param>
             <param name="newClientOrderId">Unique identifier for this cancel</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for canceled order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.CancelMarginOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.CancelMarginOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Cancel an active order for margin account
             </summary>
             <param name="symbol">The symbol the order is for</param>
             <param name="orderId">The order id of the order</param>
+            <param name="isIsolated">For isolated margin or not</param>
             <param name="origClientOrderId">The client order id of the order</param>
             <param name="newClientOrderId">Unique identifier for this cancel</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for canceled order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetMarginAccountOrder(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetMarginAccountOrder(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Retrieves data for a specific margin account order. Either orderId or origClientOrderId should be provided.
             </summary>
             <param name="symbol">The symbol the order is for</param>
+            <param name="orderId">The order id of the order</param>
+            <param name="isIsolated">For isolated margin or not</param>
+            <param name="origClientOrderId">The client order id of the order</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The specific margin account order</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetMarginAccountOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Retrieves data for a specific margin account order. Either orderId or origClientOrderId should be provided.
+            </summary>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="isIsolated">For isolated margin or not</param>
             <param name="orderId">The order id of the order</param>
             <param name="origClientOrderId">The client order id of the order</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>The specific margin account order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetMarginAccountOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Retrieves data for a specific margin account order. Either orderId or origClientOrderId should be provided.
-            </summary>
-            <param name="symbol">The symbol the order is for</param>
-            <param name="orderId">The order id of the order</param>
-            <param name="origClientOrderId">The client order id of the order</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>The specific margin account order</returns>
-        </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetOpenMarginAccountOrders(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetOpenMarginAccountOrders(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets a list of open margin account orders
             </summary>
             <param name="symbol">The symbol to get open orders for</param>
+            <param name="isIsolated">For isolated margin or not</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of open margin account orders</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetOpenMarginAccountOrdersAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetOpenMarginAccountOrdersAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets a list of open margin account orders
             </summary>
             <param name="symbol">The symbol to get open orders for</param>
+            <param name="isIsolated">For isolated margin or not</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of open margin account orders</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetAllMarginAccountOrders(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetAllMarginAccountOrders(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets all margin account orders for the provided symbol
             </summary>
             <param name="symbol">The symbol to get orders for</param>
+            <param name="isIsolated">For isolated margin or not</param>
             <param name="orderId">If set, only orders with an order id higher than the provided will be returned</param>
             <param name="startTime">If set, only orders placed after this time will be returned</param>
             <param name="endTime">If set, only orders placed before this time will be returned</param>
@@ -17871,11 +18471,12 @@
             <param name="ct">Cancellation token</param>
             <returns>List of margin account orders</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetAllMarginAccountOrdersAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetAllMarginAccountOrdersAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets all margin account orders for the provided symbol
             </summary>
             <param name="symbol">The symbol to get orders for</param>
+            <param name="isIsolated">For isolated margin or not</param>
             <param name="orderId">If set, only orders with an order id higher than the provided will be returned</param>
             <param name="startTime">If set, only orders placed after this time will be returned</param>
             <param name="endTime">If set, only orders placed before this time will be returned</param>
@@ -17884,12 +18485,13 @@
             <param name="ct">Cancellation token</param>
             <returns>List of margin account orders</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetMyMarginAccountTrades(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetMyMarginAccountTrades(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user margin account trades for provided symbol
             </summary>
             <param name="symbol">Symbol to get trades for</param>
             <param name="limit">The max number of results</param>
+            <param name="isIsolated">For isolated margin or not</param>
             <param name="startTime">Orders newer than this date will be retrieved</param>
             <param name="endTime">Orders older than this date will be retrieved</param>
             <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
@@ -17897,12 +18499,13 @@
             <param name="ct">Cancellation token</param>
             <returns>List of margin account trades</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetMyMarginAccountTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetMyMarginAccountTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user margin account trades for provided symbol
             </summary>
             <param name="symbol">Symbol to get trades for</param>
             <param name="limit">The max number of results</param>
+            <param name="isIsolated">For isolated margin or not</param>
             <param name="startTime">Orders newer than this date will be retrieved</param>
             <param name="endTime">Orders older than this date will be retrieved</param>
             <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
@@ -17918,8 +18521,7 @@
         <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginUserStream.StartMarginUserStream(System.Threading.CancellationToken)">
             <summary>
             Starts a user stream  for margin account by requesting a listen key. 
-            This listen key can be used in subsequent requests to 
-            <see cref="!:BinanceSocketClient.SubscribeToUserDataUpdates"/>. 
+            This listen key can be used in subsequent requests to BinanceSocketClient.Spot.SubscribeToUserDataUpdates. 
             The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <param name="ct">Cancellation token</param>
@@ -17928,8 +18530,7 @@
         <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginUserStream.StartMarginUserStreamAsync(System.Threading.CancellationToken)">
             <summary>
             Starts a user stream  for margin account by requesting a listen key. 
-            This listen key can be used in subsequent requests to 
-            <see cref="!:BinanceSocketClient.SubscribeToUserDataUpdates"/>. 
+            This listen key can be used in subsequent requests to BinanceSocketClient.Spot.SubscribeToUserDataUpdates. 
             The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <param name="ct">Cancellation token</param>
@@ -18227,7 +18828,7 @@
             Spot order endpoints
             </summary>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.PlaceTestOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.PlaceTestOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new test order. Test orders are not actually being executed and just test the functionality.
             </summary>
@@ -18241,12 +18842,11 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQty">User for iceberg orders</param>
-            <param name="orderResponseType">What kind of response should be returned</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed test order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.PlaceTestOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.PlaceTestOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new test order. Test orders are not actually being executed and just test the functionality.
             </summary>
@@ -18260,12 +18860,11 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQty">User for iceberg orders</param>
-            <param name="orderResponseType">What kind of response should be returned</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed test order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -18279,12 +18878,11 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQty">Used for iceberg orders</param>
-            <param name="orderResponseType">The type of response to receive</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -18298,7 +18896,6 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQty">Used for iceberg orders</param>
-            <param name="orderResponseType">The type of response to receive</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
@@ -18411,7 +19008,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of orders</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.PlaceOCOOrder(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.PlaceOCOOrder(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new OCO(One cancels other) order
             </summary>
@@ -18427,12 +19024,11 @@
             <param name="listClientOrderId">Client id for the order list</param>
             <param name="limitIcebergQuantity">Iceberg quantity for the limit order</param>
             <param name="stopIcebergQuantity">Iceberg quantity for the stop order</param>
-            <param name="orderResponseType">The type of response to receive</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Order list info</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.PlaceOCOOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.PlaceOCOOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new OCO(One cancels other) order
             </summary>
@@ -18448,7 +19044,6 @@
             <param name="listClientOrderId">Client id for the order list</param>
             <param name="limitIcebergQuantity">Iceberg quantity for the limit order</param>
             <param name="stopIcebergQuantity">Iceberg quantity for the stop order</param>
-            <param name="orderResponseType">The type of response to receive</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Order list info</returns>
@@ -18570,14 +19165,14 @@
         </member>
         <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotUserStream.StartUserStream(System.Threading.CancellationToken)">
             <summary>
-            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="!:BinanceSocketClient.SubscribeToUserDataUpdates"/>. The stream will close after 60 minutes unless a keep alive is send.
+            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to BinanceSocketClient.Spot.SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>Listen key</returns>
         </member>
         <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotUserStream.StartUserStreamAsync(System.Threading.CancellationToken)">
             <summary>
-            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="!:BinanceSocketClient.SubscribeToUserDataUpdates"/>. The stream will close after 60 minutes unless a keep alive is send.
+            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to BinanceSocketClient.Spot.SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>Listen key</returns>

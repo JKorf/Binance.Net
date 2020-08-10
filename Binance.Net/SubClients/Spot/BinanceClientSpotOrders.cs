@@ -65,7 +65,6 @@ namespace Binance.Net.SubClients.Spot
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
         /// <param name="icebergQty">User for iceberg orders</param>
-        /// <param name="orderResponseType">What kind of response should be returned</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed test order</returns>
@@ -79,9 +78,8 @@ namespace Binance.Net.SubClients.Spot
             TimeInForce? timeInForce = null,
             decimal? stopPrice = null,
             decimal? icebergQty = null,
-            OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
-            CancellationToken ct = default) => PlaceTestOrderAsync(symbol, side, type, quantity, quoteOrderQuantity, newClientOrderId, price, timeInForce, stopPrice, icebergQty, orderResponseType, receiveWindow, ct).Result;
+            CancellationToken ct = default) => PlaceTestOrderAsync(symbol, side, type, quantity, quoteOrderQuantity, newClientOrderId, price, timeInForce, stopPrice, icebergQty, receiveWindow, ct).Result;
 
         /// <summary>
         /// Places a new test order. Test orders are not actually being executed and just test the functionality.
@@ -96,7 +94,6 @@ namespace Binance.Net.SubClients.Spot
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
         /// <param name="icebergQty">User for iceberg orders</param>
-        /// <param name="orderResponseType">What kind of response should be returned</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed test order</returns>
@@ -110,7 +107,6 @@ namespace Binance.Net.SubClients.Spot
             TimeInForce? timeInForce = null,
             decimal? stopPrice = null,
             decimal? icebergQty = null,
-            OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -126,7 +122,7 @@ namespace Binance.Net.SubClients.Spot
                 stopPrice,
                 icebergQty,
                 null,
-                orderResponseType,
+                null,
                 receiveWindow,
                 ct).ConfigureAwait(false);
         }
@@ -148,7 +144,6 @@ namespace Binance.Net.SubClients.Spot
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
         /// <param name="icebergQty">Used for iceberg orders</param>
-        /// <param name="orderResponseType">The type of response to receive</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed order</returns>
@@ -163,9 +158,8 @@ namespace Binance.Net.SubClients.Spot
             TimeInForce? timeInForce = null,
             decimal? stopPrice = null,
             decimal? icebergQty = null,
-            OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
-            CancellationToken ct = default) => PlaceOrderAsync(symbol, side, type, quantity, quoteOrderQuantity, newClientOrderId, price, timeInForce, stopPrice, icebergQty, orderResponseType, receiveWindow, ct).Result;
+            CancellationToken ct = default) => PlaceOrderAsync(symbol, side, type, quantity, quoteOrderQuantity, newClientOrderId, price, timeInForce, stopPrice, icebergQty, receiveWindow, ct).Result;
 
         /// <summary>
         /// Places a new order
@@ -180,7 +174,6 @@ namespace Binance.Net.SubClients.Spot
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
         /// <param name="icebergQty">Used for iceberg orders</param>
-        /// <param name="orderResponseType">The type of response to receive</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed order</returns>
@@ -194,7 +187,6 @@ namespace Binance.Net.SubClients.Spot
             TimeInForce? timeInForce = null,
             decimal? stopPrice = null,
             decimal? icebergQty = null,
-            OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -210,7 +202,7 @@ namespace Binance.Net.SubClients.Spot
                 stopPrice,
                 icebergQty,
                 null,
-                orderResponseType,
+                null,
                 receiveWindow,
                 ct).ConfigureAwait(false);
         }
@@ -454,7 +446,6 @@ namespace Binance.Net.SubClients.Spot
         /// <param name="listClientOrderId">Client id for the order list</param>
         /// <param name="limitIcebergQuantity">Iceberg quantity for the limit order</param>
         /// <param name="stopIcebergQuantity">Iceberg quantity for the stop order</param>
-        /// <param name="orderResponseType">The type of response to receive</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Order list info</returns>
@@ -471,9 +462,8 @@ namespace Binance.Net.SubClients.Spot
             decimal? limitIcebergQuantity = null,
             decimal? stopIcebergQuantity = null,
             TimeInForce? stopLimitTimeInForce = null,
-            OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
-            CancellationToken ct = default) => PlaceOCOOrderAsync(symbol, side, quantity, price, stopPrice, stopLimitPrice, listClientOrderId, limitClientOrderId, stopClientOrderId, limitIcebergQuantity, stopIcebergQuantity, stopLimitTimeInForce, orderResponseType, receiveWindow, ct).Result;
+            CancellationToken ct = default) => PlaceOCOOrderAsync(symbol, side, quantity, price, stopPrice, stopLimitPrice, listClientOrderId, limitClientOrderId, stopClientOrderId, limitIcebergQuantity, stopIcebergQuantity, stopLimitTimeInForce, receiveWindow, ct).Result;
 
         /// <summary>
         /// Places a new OCO(One cancels other) order
@@ -490,7 +480,6 @@ namespace Binance.Net.SubClients.Spot
         /// <param name="listClientOrderId">Client id for the order list</param>
         /// <param name="limitIcebergQuantity">Iceberg quantity for the limit order</param>
         /// <param name="stopIcebergQuantity">Iceberg quantity for the stop order</param>
-        /// <param name="orderResponseType">The type of response to receive</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Order list info</returns>
@@ -506,7 +495,6 @@ namespace Binance.Net.SubClients.Spot
             decimal? limitIcebergQuantity = null,
             decimal? stopIcebergQuantity = null,
             TimeInForce? stopLimitTimeInForce = null,
-            OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -538,7 +526,6 @@ namespace Binance.Net.SubClients.Spot
             parameters.AddOptionalParameter("limitIcebergQty", limitIcebergQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("stopIcebergQty", stopIcebergQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("stopLimitTimeInForce", stopLimitTimeInForce == null ? null : JsonConvert.SerializeObject(stopLimitTimeInForce, new TimeInForceConverter(false)));
-            parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceOrderOcoList>(_baseClient.GetUrl(false, newOCOOrderEndpoint, api, signedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);

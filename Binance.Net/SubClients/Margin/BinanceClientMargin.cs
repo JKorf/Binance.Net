@@ -50,7 +50,7 @@ namespace Binance.Net.SubClients.Margin
         /// Margin user stream endpoints
         /// </summary>
         public IBinanceClientMarginUserStream UserStream { get; }
-
+        
         internal BinanceClientMargin(BinanceClient baseClient)
         {
             _baseClient = baseClient;
@@ -109,22 +109,29 @@ namespace Binance.Net.SubClients.Margin
         /// </summary>
         /// <param name="asset">The asset being borrow, e.g., BTC</param>
         /// <param name="amount">The amount to be borrow</param>
+        /// <param name="isIsolated">For isolated margin or not</param>
+        /// <param name="symbol">The isolated symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transaction Id</returns>
-        public WebCallResult<BinanceMarginTransaction> Borrow(string asset, decimal amount, int? receiveWindow = null, CancellationToken ct = default) => BorrowAsync(asset, amount, receiveWindow, ct).Result;
+        public WebCallResult<BinanceMarginTransaction> Borrow(string asset, decimal amount, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default) => BorrowAsync(asset, amount, isIsolated, symbol, receiveWindow, ct).Result;
 
         /// <summary>
         /// Borrow. Apply for a loan. 
         /// </summary>
         /// <param name="asset">The asset being borrow, e.g., BTC</param>
         /// <param name="amount">The amount to be borrow</param>
+        /// <param name="isIsolated">For isolated margin or not</param>
+        /// <param name="symbol">The isolated symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transaction Id</returns>
-        public async Task<WebCallResult<BinanceMarginTransaction>> BorrowAsync(string asset, decimal amount, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceMarginTransaction>> BorrowAsync(string asset, decimal amount, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
+            if(isIsolated == true && symbol == null)
+                throw new ArgumentException("Symbol should be specified when using isolated margin");
+
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<BinanceMarginTransaction>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
@@ -135,6 +142,8 @@ namespace Binance.Net.SubClients.Margin
                 { "amount", amount.ToString(CultureInfo.InvariantCulture) },
                 { "timestamp", _baseClient.GetTimestamp() }
             };
+            parameters.AddOptionalParameter("isIsolated", isIsolated?.ToString().ToLower());
+            parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceMarginTransaction>(_baseClient.GetUrl(false, marginBorrowEndpoint, marginApi, marginVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
@@ -149,20 +158,24 @@ namespace Binance.Net.SubClients.Margin
         /// </summary>
         /// <param name="asset">The asset being repay, e.g., BTC</param>
         /// <param name="amount">The amount to be borrow</param>
+        /// <param name="isIsolated">For isolated margin or not</param>
+        /// <param name="symbol">The isolated symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transaction Id</returns>
-        public WebCallResult<BinanceMarginTransaction> Repay(string asset, decimal amount, int? receiveWindow = null, CancellationToken ct = default) => RepayAsync(asset, amount, receiveWindow, ct).Result;
+        public WebCallResult<BinanceMarginTransaction> Repay(string asset, decimal amount, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default) => RepayAsync(asset, amount, isIsolated, symbol, receiveWindow, ct).Result;
 
         /// <summary>
         /// Repay loan for margin account.
         /// </summary>
         /// <param name="asset">The asset being repay, e.g., BTC</param>
         /// <param name="amount">The amount to be borrow</param>
+        /// <param name="isIsolated">For isolated margin or not</param>
+        /// <param name="symbol">The isolated symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transaction Id</returns>
-        public async Task<WebCallResult<BinanceMarginTransaction>> RepayAsync(string asset, decimal amount, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceMarginTransaction>> RepayAsync(string asset, decimal amount, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -175,6 +188,8 @@ namespace Binance.Net.SubClients.Margin
                 { "amount", amount.ToString(CultureInfo.InvariantCulture) },
                 { "timestamp", _baseClient.GetTimestamp() }
             };
+            parameters.AddOptionalParameter("isIsolated", isIsolated?.ToString().ToLower());
+            parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceMarginTransaction>(_baseClient.GetUrl(false, marginRepayEndpoint, marginApi, marginVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
@@ -242,11 +257,12 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="startTime">Time to start getting records from</param>
         /// <param name="endTime">Time to stop getting records to</param>
         /// <param name="current">Number of page records</param>
+        /// <param name="isolatedSymbol">Filter by isolated symbol</param>
         /// <param name="limit">The records count size need show</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Loan records</returns>
-        public WebCallResult<BinanceQueryRecords<BinanceLoan>> GetLoans(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? limit = 10, long? receiveWindow = null, CancellationToken ct = default) => GetLoansAsync(asset, transactionId, startTime, endTime, current, limit, receiveWindow, ct).Result;
+        public WebCallResult<BinanceQueryRecords<BinanceLoan>> GetLoans(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? limit = 10, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default) => GetLoansAsync(asset, transactionId, startTime, endTime, current, limit, isolatedSymbol, receiveWindow, ct).Result;
 
         /// <summary>
         /// Query loan records
@@ -256,11 +272,12 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="startTime">Time to start getting records from</param>
         /// <param name="endTime">Time to stop getting records to</param>
         /// <param name="current">Number of page records</param>
+        /// <param name="isolatedSymbol">Filter by isolated symbol</param>
         /// <param name="limit">The records count size need show</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Loan records</returns>
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceLoan>>> GetLoansAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? limit = 10, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceLoan>>> GetLoansAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? limit = 10, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             limit?.ValidateIntBetween(nameof(limit), 1, 100);
@@ -305,11 +322,12 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="startTime">Time to start getting records from</param>
         /// <param name="endTime">Time to stop getting records to</param>
         /// <param name="current">Number of page records</param>
+        /// <param name="isolatedSymbol">Filter by isolated symbol</param>
         /// <param name="size">The records count size need show</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Repay records</returns>
-        public WebCallResult<BinanceQueryRecords<BinanceRepay>> GetRepays(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, long? receiveWindow = null, CancellationToken ct = default) => GetRepaysAsync(asset, transactionId, startTime, endTime, current, size, receiveWindow, ct).Result;
+        public WebCallResult<BinanceQueryRecords<BinanceRepay>> GetRepays(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default) => GetRepaysAsync(asset, transactionId, startTime, endTime, current, size, isolatedSymbol, receiveWindow, ct).Result;
 
         /// <summary>
         /// Query repay records
@@ -319,11 +337,12 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="startTime">Time to start getting records from</param>
         /// <param name="endTime">Time to stop getting records to</param>
         /// <param name="current">Filter by number</param>
+        /// <param name="isolatedSymbol">Filter by isolated symbol</param>
         /// <param name="size">The records count size need show</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Repay records</returns>
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceRepay>>> GetRepaysAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceRepay>>> GetRepaysAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -350,6 +369,7 @@ namespace Binance.Net.SubClients.Margin
             parameters.AddOptionalParameter("endTime", endTime != null ? BinanceClient.ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
             parameters.AddOptionalParameter("current", current?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("size", size?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("isolatedSymbol", isolatedSymbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceRepay>>(_baseClient.GetUrl(false, getRepayEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
@@ -366,11 +386,12 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="page">Results page</param>
         /// <param name="startTime">Filter by startTime from</param>
         /// <param name="endTime">Filter by endTime from</param>
+        /// <param name="isolatedSymbol">Filter by isolated symbol</param>
         /// <param name="limit">Limit of the amount of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of interest events</returns>
-        public WebCallResult<BinanceQueryRecords<BinanceInterestHistory>> GetInterestHistory(string? asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default) => GetInterestHistoryAsync(asset, page, startTime, endTime, limit, receiveWindow, ct).Result;
+        public WebCallResult<BinanceQueryRecords<BinanceInterestHistory>> GetInterestHistory(string? asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default) => GetInterestHistoryAsync(asset, page, startTime, endTime, limit, isolatedSymbol, receiveWindow, ct).Result;
 
         /// <summary>
         /// Get history of interest
@@ -379,11 +400,12 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="page">Results page</param>
         /// <param name="startTime">Filter by startTime from</param>
         /// <param name="endTime">Filter by endTime from</param>
+        /// <param name="isolatedSymbol">Filter by isolated symbol</param>
         /// <param name="limit">Limit of the amount of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of interest events</returns>
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceInterestHistory>>> GetInterestHistoryAsync(string? asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceInterestHistory>>> GetInterestHistoryAsync(string? asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 100);
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -397,6 +419,7 @@ namespace Binance.Net.SubClients.Margin
             parameters.AddOptionalParameter("asset", asset);
             parameters.AddOptionalParameter("size", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("isolatedSymbol", isolatedSymbol);
             parameters.AddOptionalParameter("startTime", startTime.HasValue ? JsonConvert.SerializeObject(startTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -413,23 +436,25 @@ namespace Binance.Net.SubClients.Margin
         /// </summary>
         /// <param name="page">Results page</param>
         /// <param name="startTime">Filter by startTime from</param>
+        /// <param name="isolatedSymbol">Filter by isolated symbol</param>
         /// <param name="endTime">Filter by endTime from</param>
         /// <param name="limit">Limit of the amount of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of forced liquidations</returns>
-        public WebCallResult<BinanceQueryRecords<BinanceForcedLiquidation>> GetForceLiquidationHistory(int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default) => GetForceLiquidationHistoryAsync(page, startTime, endTime, limit, receiveWindow, ct).Result;
+        public WebCallResult<BinanceQueryRecords<BinanceForcedLiquidation>> GetForceLiquidationHistory(int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default) => GetForceLiquidationHistoryAsync(page, startTime, endTime, limit, isolatedSymbol, receiveWindow, ct).Result;
         /// <summary>
         /// Get history of forced liquidations
         /// </summary>
         /// <param name="page">Results page</param>
         /// <param name="startTime">Filter by startTime from</param>
         /// <param name="endTime">Filter by endTime from</param>
+        /// <param name="isolatedSymbol">Filter by isolated symbol</param>
         /// <param name="limit">Limit of the amount of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of forced liquidations</returns>
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceForcedLiquidation>>> GetForceLiquidationHistoryAsync(int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceForcedLiquidation>>> GetForceLiquidationHistoryAsync(int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 100);
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -442,6 +467,7 @@ namespace Binance.Net.SubClients.Margin
             };
             parameters.AddOptionalParameter("size", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("isolatedSymbol", isolatedSymbol);
             parameters.AddOptionalParameter("startTime", startTime.HasValue ? JsonConvert.SerializeObject(startTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -483,26 +509,28 @@ namespace Binance.Net.SubClients.Margin
         }
 
         #endregion
-        
+
         #region Query Max Borrow
 
         /// <summary>
         /// Query max borrow amount
         /// </summary>
         /// <param name="asset">The records asset</param>
+        /// <param name="isolatedSymbol">The isolated symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Return max amount</returns>
-        public WebCallResult<decimal> GetMaxBorrowAmount(string asset, long? receiveWindow = null, CancellationToken ct = default) => GetMaxBorrowAmountAsync(asset, receiveWindow, ct).Result;
+        public WebCallResult<decimal> GetMaxBorrowAmount(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default) => GetMaxBorrowAmountAsync(asset, isolatedSymbol, receiveWindow, ct).Result;
 
         /// <summary>
         /// Query max borrow amount
         /// </summary>
         /// <param name="asset">The records asset</param>
+        /// <param name="isolatedSymbol">The isolated symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Return max amount</returns>
-        public async Task<WebCallResult<decimal>> GetMaxBorrowAmountAsync(string asset, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<decimal>> GetMaxBorrowAmountAsync(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -515,6 +543,7 @@ namespace Binance.Net.SubClients.Margin
                 { "timestamp", _baseClient.GetTimestamp() }
             };
 
+            parameters.AddOptionalParameter("isolatedSymbol", isolatedSymbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestInternal<BinanceMarginAmount>(_baseClient.GetUrl(false, maxBorrowableEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
@@ -533,19 +562,21 @@ namespace Binance.Net.SubClients.Margin
         /// Query max transfer-out amount 
         /// </summary>
         /// <param name="asset">The records asset</param>
+        /// <param name="isolatedSymbol">The isolated symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Return max amount</returns>
-        public WebCallResult<decimal> GetMaxTransferAmount(string asset, long? receiveWindow = null, CancellationToken ct = default) => GetMaxTransferAmountAsync(asset, receiveWindow, ct).Result;
+        public WebCallResult<decimal> GetMaxTransferAmount(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default) => GetMaxTransferAmountAsync(asset, isolatedSymbol, receiveWindow, ct).Result;
 
         /// <summary>
         /// Query max transfer-out amount 
         /// </summary>
         /// <param name="asset">The records asset</param>
+        /// <param name="isolatedSymbol">The isolated symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Return max amount</returns>
-        public async Task<WebCallResult<decimal>> GetMaxTransferAmountAsync(string asset, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<decimal>> GetMaxTransferAmountAsync(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -558,6 +589,7 @@ namespace Binance.Net.SubClients.Margin
                 { "timestamp", _baseClient.GetTimestamp() }
             };
 
+            parameters.AddOptionalParameter("isolatedSymbol", isolatedSymbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestInternal<BinanceMarginAmount>(_baseClient.GetUrl(false, maxTransferableEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);

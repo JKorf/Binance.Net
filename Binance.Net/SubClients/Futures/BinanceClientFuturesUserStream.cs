@@ -33,14 +33,14 @@ namespace Binance.Net.SubClients.Futures
         #region Start User Data Stream
 
         /// <summary>
-        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToUserDataUpdates"/>. The stream will close after 60 minutes unless a keep alive is send.
+        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to BinanceSocketClient.Futures.SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Listen key</returns>
         public WebCallResult<string> StartUserStream(CancellationToken ct = default) => StartUserStreamAsync(ct).Result;
 
         /// <summary>
-        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToUserDataUpdates"/>. The stream will close after 60 minutes unless a keep alive is send.
+        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to BinanceSocketClient.Futures.SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Listen key</returns>

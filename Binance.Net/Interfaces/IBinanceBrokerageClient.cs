@@ -25,7 +25,7 @@ namespace Binance.Net.Interfaces
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>True if successful ping, false if no response</returns>
-        Task<CallResult<long>> PingAsync(CancellationToken ct = default);
+        new Task<CallResult<long>> PingAsync(CancellationToken ct = default);
         
         /// <summary>
         /// Generate a sub account under your brokerage master account

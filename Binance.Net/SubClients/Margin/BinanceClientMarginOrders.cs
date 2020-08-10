@@ -36,7 +36,7 @@ namespace Binance.Net.SubClients.Margin
         {
             _baseClient = baseClient;
         }
-        
+
         #region Margin Account New Order
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="stopPrice">Used for stop orders</param>
         /// <param name="icebergQuantity">Used for iceberg orders</param>
         /// <param name="sideEffectType">Side effect type for this order</param>
-        /// <param name="orderResponseType">The type of response to receive</param>
+        /// <param name="isIsolated">For isolated margin or not</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed order</returns>
@@ -68,9 +68,9 @@ namespace Binance.Net.SubClients.Margin
             decimal? stopPrice = null,
             decimal? icebergQuantity = null,
             SideEffectType? sideEffectType = null,
-            OrderResponseType? orderResponseType = null,
+            bool? isIsolated = null,
             int? receiveWindow = null,
-            CancellationToken ct = default) => PlaceMarginOrderAsync(symbol, side, type, quantity, quoteOrderQuantity, newClientOrderId, price, timeInForce, stopPrice, icebergQuantity, sideEffectType, orderResponseType, receiveWindow, ct).Result;
+            CancellationToken ct = default) => PlaceMarginOrderAsync(symbol, side, type, quantity, quoteOrderQuantity, newClientOrderId, price, timeInForce, stopPrice, icebergQuantity, sideEffectType, isIsolated, receiveWindow, ct).Result;
 
         /// <summary>
         /// Margin account new order
@@ -86,7 +86,7 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="stopPrice">Used for stop orders</param>
         /// <param name="icebergQuantity">Used for iceberg orders</param>
         /// <param name="sideEffectType">Side effect type for this order</param>
-        /// <param name="orderResponseType">The type of response to receive</param>
+        /// <param name="isIsolated">For isolated margin or not</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed order</returns>
@@ -101,7 +101,7 @@ namespace Binance.Net.SubClients.Margin
             decimal? stopPrice = null,
             decimal? icebergQuantity = null,
             SideEffectType? sideEffectType = null,
-            OrderResponseType? orderResponseType = null,
+            bool? isIsolated = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -117,7 +117,7 @@ namespace Binance.Net.SubClients.Margin
                 stopPrice,
                 icebergQuantity,
                 sideEffectType,
-                orderResponseType,
+                isIsolated,
                 receiveWindow,
                 ct).ConfigureAwait(false);
         }
@@ -132,23 +132,25 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="symbol">The symbol the order is for</param>
         /// <param name="orderId">The order id of the order</param>
         /// <param name="origClientOrderId">The client order id of the order</param>
+        /// <param name="isIsolated">For isolated margin or not</param>
         /// <param name="newClientOrderId">Unique identifier for this cancel</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for canceled order</returns>
-        public WebCallResult<BinanceCanceledOrder> CancelMarginOrder(string symbol, long? orderId = null, string? origClientOrderId = null, string? newClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default) => CancelMarginOrderAsync(symbol, orderId, origClientOrderId, newClientOrderId, receiveWindow, ct).Result;
+        public WebCallResult<BinanceCanceledOrder> CancelMarginOrder(string symbol, long? orderId = null, string? origClientOrderId = null, string? newClientOrderId = null, bool? isIsolated = null, long? receiveWindow = null, CancellationToken ct = default) => CancelMarginOrderAsync(symbol, orderId, origClientOrderId, newClientOrderId, isIsolated, receiveWindow, ct).Result;
 
         /// <summary>
         /// Cancel an active order for margin account
         /// </summary>
         /// <param name="symbol">The symbol the order is for</param>
         /// <param name="orderId">The order id of the order</param>
+        /// <param name="isIsolated">For isolated margin or not</param>
         /// <param name="origClientOrderId">The client order id of the order</param>
         /// <param name="newClientOrderId">Unique identifier for this cancel</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for canceled order</returns>
-        public async Task<WebCallResult<BinanceCanceledOrder>> CancelMarginOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, string? newClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceCanceledOrder>> CancelMarginOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, string? newClientOrderId = null, bool? isIsolated = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -165,6 +167,7 @@ namespace Binance.Net.SubClients.Margin
             };
             parameters.AddOptionalParameter("orderId", orderId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
+            parameters.AddOptionalParameter("isIsolated", isIsolated);
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
@@ -172,7 +175,7 @@ namespace Binance.Net.SubClients.Margin
         }
 
         #endregion
-        
+
         #region Query Margin Account's Order
 
         /// <summary>
@@ -180,22 +183,24 @@ namespace Binance.Net.SubClients.Margin
         /// </summary>
         /// <param name="symbol">The symbol the order is for</param>
         /// <param name="orderId">The order id of the order</param>
+        /// <param name="isIsolated">For isolated margin or not</param>
         /// <param name="origClientOrderId">The client order id of the order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The specific margin account order</returns>
-        public WebCallResult<BinanceOrder> GetMarginAccountOrder(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default) => GetMarginAccountOrderAsync(symbol, orderId, origClientOrderId, receiveWindow, ct).Result;
+        public WebCallResult<BinanceOrder> GetMarginAccountOrder(string symbol, long? orderId = null, string? origClientOrderId = null, bool? isIsolated = null, long? receiveWindow = null, CancellationToken ct = default) => GetMarginAccountOrderAsync(symbol, orderId, origClientOrderId, isIsolated, receiveWindow, ct).Result;
 
         /// <summary>
         /// Retrieves data for a specific margin account order. Either orderId or origClientOrderId should be provided.
         /// </summary>
         /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="isIsolated">For isolated margin or not</param>
         /// <param name="orderId">The order id of the order</param>
         /// <param name="origClientOrderId">The client order id of the order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The specific margin account order</returns>
-        public async Task<WebCallResult<BinanceOrder>> GetMarginAccountOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceOrder>> GetMarginAccountOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, bool? isIsolated = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
             if (orderId == null && origClientOrderId == null)
@@ -210,6 +215,7 @@ namespace Binance.Net.SubClients.Margin
                 { "symbol", symbol },
                 { "timestamp", _baseClient.GetTimestamp() }
             };
+            parameters.AddOptionalParameter("isIsolated", isIsolated);
             parameters.AddOptionalParameter("orderId", orderId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -225,21 +231,26 @@ namespace Binance.Net.SubClients.Margin
         /// Gets a list of open margin account orders
         /// </summary>
         /// <param name="symbol">The symbol to get open orders for</param>
+        /// <param name="isIsolated">For isolated margin or not</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of open margin account orders</returns>
-        public WebCallResult<IEnumerable<BinanceOrder>> GetOpenMarginAccountOrders(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default) => GetOpenMarginAccountOrdersAsync(symbol, receiveWindow, ct).Result;
+        public WebCallResult<IEnumerable<BinanceOrder>> GetOpenMarginAccountOrders(string? symbol = null, bool? isIsolated = null, int? receiveWindow = null, CancellationToken ct = default) => GetOpenMarginAccountOrdersAsync(symbol, isIsolated, receiveWindow, ct).Result;
 
         /// <summary>
         /// Gets a list of open margin account orders
         /// </summary>
         /// <param name="symbol">The symbol to get open orders for</param>
+        /// <param name="isIsolated">For isolated margin or not</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of open margin account orders</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceOrder>>> GetOpenMarginAccountOrdersAsync(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceOrder>>> GetOpenMarginAccountOrdersAsync(string? symbol = null, bool? isIsolated = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             symbol?.ValidateBinanceSymbol();
+            if (isIsolated == true && symbol == null)
+                throw new ArgumentException("Symbol must be provided for isolated margin");
+
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<IEnumerable<BinanceOrder>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
@@ -250,6 +261,7 @@ namespace Binance.Net.SubClients.Margin
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("symbol", symbol);
+            parameters.AddOptionalParameter("isIsolated", isIsolated);
 
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceOrder>>(_baseClient.GetUrl(false, openMarginOrdersEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
@@ -262,6 +274,7 @@ namespace Binance.Net.SubClients.Margin
         /// Gets all margin account orders for the provided symbol
         /// </summary>
         /// <param name="symbol">The symbol to get orders for</param>
+        /// <param name="isIsolated">For isolated margin or not</param>
         /// <param name="orderId">If set, only orders with an order id higher than the provided will be returned</param>
         /// <param name="startTime">If set, only orders placed after this time will be returned</param>
         /// <param name="endTime">If set, only orders placed before this time will be returned</param>
@@ -269,12 +282,13 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of margin account orders</returns>
-        public WebCallResult<IEnumerable<BinanceOrder>> GetAllMarginAccountOrders(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default) => GetAllMarginAccountOrdersAsync(symbol, orderId, startTime, endTime, limit, receiveWindow, ct).Result;
+        public WebCallResult<IEnumerable<BinanceOrder>> GetAllMarginAccountOrders(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, bool? isIsolated = null, int? receiveWindow = null, CancellationToken ct = default) => GetAllMarginAccountOrdersAsync(symbol, orderId, startTime, endTime, limit, isIsolated, receiveWindow, ct).Result;
 
         /// <summary>
         /// Gets all margin account orders for the provided symbol
         /// </summary>
         /// <param name="symbol">The symbol to get orders for</param>
+        /// <param name="isIsolated">For isolated margin or not</param>
         /// <param name="orderId">If set, only orders with an order id higher than the provided will be returned</param>
         /// <param name="startTime">If set, only orders placed after this time will be returned</param>
         /// <param name="endTime">If set, only orders placed before this time will be returned</param>
@@ -282,7 +296,7 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of margin account orders</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceOrder>>> GetAllMarginAccountOrdersAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceOrder>>> GetAllMarginAccountOrdersAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, bool? isIsolated = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
             limit?.ValidateIntBetween(nameof(limit), 1, 500);
@@ -296,6 +310,7 @@ namespace Binance.Net.SubClients.Margin
                 { "timestamp", _baseClient.GetTimestamp() }
             };
             parameters.AddOptionalParameter("orderId", orderId?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("isIsolated", isIsolated);
             parameters.AddOptionalParameter("startTime", startTime.HasValue ? JsonConvert.SerializeObject(startTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -304,7 +319,7 @@ namespace Binance.Net.SubClients.Margin
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceOrder>>(_baseClient.GetUrl(false, allMarginOrdersEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
         #endregion
-        
+
         #region Query Margin Account's Trade List
 
         /// <summary>
@@ -312,26 +327,28 @@ namespace Binance.Net.SubClients.Margin
         /// </summary>
         /// <param name="symbol">Symbol to get trades for</param>
         /// <param name="limit">The max number of results</param>
+        /// <param name="isIsolated">For isolated margin or not</param>
         /// <param name="startTime">Orders newer than this date will be retrieved</param>
         /// <param name="endTime">Orders older than this date will be retrieved</param>
         /// <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of margin account trades</returns>
-        public WebCallResult<IEnumerable<BinanceTrade>> GetMyMarginAccountTrades(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? receiveWindow = null, CancellationToken ct = default) => GetMyMarginAccountTradesAsync(symbol, startTime, endTime, limit, fromId, receiveWindow, ct).Result;
+        public WebCallResult<IEnumerable<BinanceTrade>> GetMyMarginAccountTrades(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, bool? isIsolated = null, long? receiveWindow = null, CancellationToken ct = default) => GetMyMarginAccountTradesAsync(symbol, startTime, endTime, limit, fromId, isIsolated, receiveWindow, ct).Result;
 
         /// <summary>
         /// Gets all user margin account trades for provided symbol
         /// </summary>
         /// <param name="symbol">Symbol to get trades for</param>
         /// <param name="limit">The max number of results</param>
+        /// <param name="isIsolated">For isolated margin or not</param>
         /// <param name="startTime">Orders newer than this date will be retrieved</param>
         /// <param name="endTime">Orders older than this date will be retrieved</param>
         /// <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of margin account trades</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceTrade>>> GetMyMarginAccountTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceTrade>>> GetMyMarginAccountTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, bool? isIsolated = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);
@@ -345,6 +362,7 @@ namespace Binance.Net.SubClients.Margin
                 { "timestamp", _baseClient.GetTimestamp() }
             };
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("isIsolated", isIsolated);
             parameters.AddOptionalParameter("fromId", fromId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("startTime", startTime.HasValue ? JsonConvert.SerializeObject(startTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);

@@ -2,7 +2,7 @@
 
 ![Build status](https://travis-ci.org/JKorf/Binance.Net.svg?branch=master)
 
-A .Net wrapper for the Binance API as described on [Binance](https://www.binance.com/restapipub.html), including all features the API provides using clear and readable objects.
+A .Net wrapper for the Binance API as described on [Binance](https://binance-docs.github.io/apidocs/spot/en/#change-log), including all features the API provides (Spot, (Isolated) margin and futures) using clear and readable objects.
 
 **If you think something is broken, something is missing or have any questions, please open an [Issue](https://github.com/JKorf/Binance.Net/issues)**
 
@@ -103,27 +103,27 @@ The Binance.Net socket client provides several socket endpoint to which can be s
 ```C#
 using(var client = new BinanceSocketClient())
 {
-	var successDepth = client.SubscribeToDepthStream("bnbbtc", (data) =>
+	var successDepth = client.Spot.SubscribeToDepthStream("bnbbtc", (data) =>
 	{
 		// handle data
 	});
-	var successTrades = client.SubscribeToTradesStream("bnbbtc", (data) =>
+	var successTrades = client.Spot.SubscribeToTradesStream("bnbbtc", (data) =>
 	{
 		// handle data
 	});
-	var successKline = client.SubscribeToKlineStream("bnbbtc", KlineInterval.OneMinute, (data) =>
+	var successKline = client.Spot.SubscribeToKlineStream("bnbbtc", KlineInterval.OneMinute, (data) =>
 	{
 		// handle data
 	});
-	var successSymbol = client.SubscribeToSymbolTicker("bnbbtc", (data) =>
+	var successSymbol = client.Spot.SubscribeToSymbolTicker("bnbbtc", (data) =>
 	{
 		// handle data
 	});
-	var successSymbols = client.SubscribeToAllSymbolTicker((data) =>
+	var successSymbols = client.Spot.SubscribeToAllSymbolTicker((data) =>
 	{
 		// handle data
 	});
-	var successOrderBook = client.SubscribeToPartialBookDepthStream("bnbbtc", 10, (data) =>
+	var successOrderBook = client.Spot.SubscribeToPartialBookDepthStream("bnbbtc", 10, (data) =>
 	{
 		// handle data
 	});
@@ -136,7 +136,7 @@ For the private endpoint a user stream has to be started on the Binance server. 
 ```C#
 using(var client = new BinanceSocketClient())
 {
-	var successOrderBook = client.SubscribeToUserStream(listenKey, 
+	var successOrderBook = client.Spot.SubscribeToUserStream(listenKey, 
 	(accountInfoUpdate) =>
 	{
 		// handle account info update

@@ -10,14 +10,14 @@ namespace Binance.Net.Interfaces.SubClients.Spot
     public interface IBinanceClientSpotUserStream
     {
         /// <summary>
-        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToUserDataUpdates"/>. The stream will close after 60 minutes unless a keep alive is send.
+        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to BinanceSocketClient.Spot.SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Listen key</returns>
         WebCallResult<string> StartUserStream(CancellationToken ct = default);
 
         /// <summary>
-        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to <see cref="BinanceSocketClient.SubscribeToUserDataUpdates"/>. The stream will close after 60 minutes unless a keep alive is send.
+        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to BinanceSocketClient.Spot.SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Listen key</returns>

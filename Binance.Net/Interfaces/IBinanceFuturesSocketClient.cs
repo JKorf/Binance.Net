@@ -406,7 +406,7 @@ namespace Binance.Net.Interfaces
         Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerable<string> symbols, int? updateInterval, Action<BinanceFuturesStreamOrderBookDepth> onMessage);
 
         /// <summary>
-        /// Subscribes to the account update stream. Prior to using this, the <see cref="BinanceClient.StartUserStream"/> method should be called.
+        /// Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStream.StartUserStream method should be called.
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
         /// <param name="onCrossWalletUpdate">The event handler for whenever a cross wallet has changed</param>
@@ -427,7 +427,7 @@ namespace Binance.Net.Interfaces
 
 
         /// <summary>
-        /// Subscribes to the account update stream. Prior to using this, the <see cref="BinanceClient.StartUserStream"/> method should be called.
+        /// Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStream.StartUserStream method should be called.
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
         /// <param name="onCrossWalletUpdate">The event handler for whenever a cross wallet has changed</param>
