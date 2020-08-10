@@ -580,7 +580,7 @@ namespace Binance.Net.SocketSubClients
         /// Subscribes to the depth update stream for the provided symbols
         /// </summary>
         /// <param name="symbols">The symbols</param>
-        /// <param name="updateInterval">Update interval in milliseconds, either 0 or 100 or 500. Defaults to 250</param>
+        /// <param name="updateInterval">Update interval in milliseconds, either 0, 100, 250 or 500. Defaults to 250</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public CallResult<UpdateSubscription> SubscribeToOrderBookUpdates(IEnumerable<string> symbols, int? updateInterval, Action<BinanceFuturesStreamOrderBookDepth> onMessage) => SubscribeToOrderBookUpdatesAsync(symbols, updateInterval, onMessage).Result;
@@ -589,7 +589,7 @@ namespace Binance.Net.SocketSubClients
         /// Subscribes to the depth update stream for the provided symbols
         /// </summary>
         /// <param name="symbols">The symbols</param>
-        /// <param name="updateInterval">Update interval in milliseconds, either 0 or 100 or 500. Defaults to 250</param>
+        /// <param name="updateInterval">Update interval in milliseconds, either 0, 100, 250 or 500. Defaults to 250</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerable<string> symbols, int? updateInterval, Action<BinanceFuturesStreamOrderBookDepth> onMessage)
@@ -598,7 +598,7 @@ namespace Binance.Net.SocketSubClients
             foreach (var symbol in symbols)
                 symbol.ValidateBinanceSymbol();
 
-            updateInterval?.ValidateIntValues(nameof(updateInterval), 0, 100, 500);
+            updateInterval?.ValidateIntValues(nameof(updateInterval), 0, 100, 250, 500);
             var handler = new Action<BinanceCombinedStream<BinanceFuturesStreamOrderBookDepth>>(data => onMessage(data.Data));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + depthStreamEndpoint + (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
             return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);

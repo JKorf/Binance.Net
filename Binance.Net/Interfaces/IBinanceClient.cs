@@ -25,7 +25,7 @@ namespace Binance.Net.Interfaces
         /// <summary>
         /// Sub account endpoints
         /// </summary>
-        IBinanceClientSubAccounts SubAccounts { get; }
+        IBinanceClientSubAccount SubAccount { get; }
 
         /// <summary>
         /// Margin endpoints

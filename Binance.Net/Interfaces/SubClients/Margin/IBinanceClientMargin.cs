@@ -21,7 +21,7 @@ namespace Binance.Net.Interfaces.SubClients.Margin
         /// <summary>
         /// Margin order endpoints
         /// </summary>
-        IBinanceClientMarginOrders Orders { get; }
+        IBinanceClientMarginOrders Order { get; }
 
         /// <summary>
         /// Margin user stream endpoints

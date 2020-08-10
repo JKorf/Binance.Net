@@ -72,7 +72,7 @@ namespace Binance.Net
         /// <summary>
         /// Sub account endpoints
         /// </summary>
-        public IBinanceClientSubAccounts SubAccounts { get; }
+        public IBinanceClientSubAccount SubAccount { get; }
 
         /// <summary>
         /// Margin endpoints
@@ -161,7 +161,7 @@ namespace Binance.Net
             Lending = new BinanceClientLending(this);
             Mining = new BinanceClientMining(this);
             
-            SubAccounts = new BinanceClientSubAccounts(this);
+            SubAccount = new BinanceClientSubAccount(this);
             Dust = new BinanceClientDust(this);
             Withdraw = new BinanceClientWithdraw(this);
             Deposit = new BinanceClientDeposit(this);

@@ -743,7 +743,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Futures.Orders.PlaceMultipleOrders(new []
+            var result = client.Futures.Order.PlaceMultipleOrders(new []
             {
                 new BinanceFuturesBatchOrder()
                 {
@@ -833,7 +833,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Spot.UserStreams.StartUserStream();
+            var result = client.Spot.UserStream.StartUserStream();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -851,7 +851,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Spot.UserStreams.KeepAliveUserStream("test");
+            var result = client.Spot.UserStream.KeepAliveUserStream("test");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -868,7 +868,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Spot.UserStreams.StopUserStream("test");
+            var result = client.Spot.UserStream.StopUserStream("test");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -1046,7 +1046,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Margin.Orders.PlaceMarginOrder("BTCUSDT", OrderSide.Buy, OrderType.Limit, timeInForce: TimeInForce.GoodTillCancel, quantity: 1, price: 2);
+            var result = client.Margin.Order.PlaceMarginOrder("BTCUSDT", OrderSide.Buy, OrderType.Limit, timeInForce: TimeInForce.GoodTillCancel, quantity: 1, price: 2);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -1072,7 +1072,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Margin.Orders.CancelMarginOrder("BNBBTC", orderId:123);
+            var result = client.Margin.Order.CancelMarginOrder("BNBBTC", orderId:123);
 
             // assert
             Assert.IsTrue(result.Success);

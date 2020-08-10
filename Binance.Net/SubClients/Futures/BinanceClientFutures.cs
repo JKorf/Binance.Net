@@ -62,7 +62,7 @@ namespace Binance.Net.SubClients.Futures
         /// <summary>
         /// Futures order endpoints
         /// </summary>
-        public IBinanceClientFuturesOrders Orders { get; }
+        public IBinanceClientFuturesOrders Order { get; }
         /// <summary>
         /// Futures user stream endpoints
         /// </summary>
@@ -76,7 +76,7 @@ namespace Binance.Net.SubClients.Futures
             Account = new BinanceClientFuturesAccount(_baseClient, this);
             Market = new BinanceClientFuturesMarket(_baseClient);
             System = new BinanceClientFuturesSystem(log, _baseClient, this);
-            Orders = new BinanceClientFuturesOrders(log, _baseClient, this);
+            Order = new BinanceClientFuturesOrder(log, _baseClient, this);
             UserStream = new BinanceClientFuturesUserStream(_baseClient, this);
         }
 

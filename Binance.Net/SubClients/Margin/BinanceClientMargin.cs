@@ -45,7 +45,7 @@ namespace Binance.Net.SubClients.Margin
         /// <summary>
         /// Margin order endpoints
         /// </summary>
-        public IBinanceClientMarginOrders Orders { get; }
+        public IBinanceClientMarginOrders Order { get; }
         /// <summary>
         /// Margin user stream endpoints
         /// </summary>
@@ -55,7 +55,7 @@ namespace Binance.Net.SubClients.Margin
         {
             _baseClient = baseClient;
             Market = new BinanceClientMarginMarket(_baseClient);
-            Orders = new BinanceClientMarginOrders(_baseClient);
+            Order = new BinanceClientMarginOrders(_baseClient);
             UserStream = new BinanceClientMarginUserStream(_baseClient);
         }
 

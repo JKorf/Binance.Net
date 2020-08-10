@@ -22,7 +22,7 @@ namespace Binance.Net.SubClients.Futures
     /// <summary>
     /// Futures order endpoints
     /// </summary>
-    public class BinanceClientFuturesOrders : IBinanceClientFuturesOrders
+    public class BinanceClientFuturesOrder : IBinanceClientFuturesOrders
     {
         // Orders
         private const string newOrderEndpoint = "order";
@@ -44,7 +44,7 @@ namespace Binance.Net.SubClients.Futures
         private readonly BinanceClientFutures _futuresClient;
         private readonly Log _log;
 
-        internal BinanceClientFuturesOrders(Log log, BinanceClient baseClient, BinanceClientFutures futuresClient)
+        internal BinanceClientFuturesOrder(Log log, BinanceClient baseClient, BinanceClientFutures futuresClient)
         {
             _baseClient = baseClient;
             _futuresClient = futuresClient;

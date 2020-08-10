@@ -19,7 +19,7 @@
             Account endpoints
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceClient.SubAccounts">
+        <member name="P:Binance.Net.BinanceClient.SubAccount">
             <summary>
             Sub account endpoints
             </summary>
@@ -27,6 +27,11 @@
         <member name="P:Binance.Net.BinanceClient.Margin">
             <summary>
             Margin endpoints
+            </summary>
+        </member>
+        <member name="P:Binance.Net.BinanceClient.IsolatedMargin">
+            <summary>
+            Isolated Margin endpoints
             </summary>
         </member>
         <member name="P:Binance.Net.BinanceClient.Spot">
@@ -1629,7 +1634,7 @@
             Account endpoints
             </summary>
         </member>
-        <member name="P:Binance.Net.Interfaces.IBinanceClient.SubAccounts">
+        <member name="P:Binance.Net.Interfaces.IBinanceClient.SubAccount">
             <summary>
             Sub account endpoints
             </summary>
@@ -1637,6 +1642,11 @@
         <member name="P:Binance.Net.Interfaces.IBinanceClient.Margin">
             <summary>
             Margin endpoints
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceClient.IsolatedMargin">
+            <summary>
+            Isolated Margin endpoints
             </summary>
         </member>
         <member name="P:Binance.Net.Interfaces.IBinanceClient.Spot">
@@ -3220,7 +3230,7 @@
             Futures system endpoints
             </summary>
         </member>
-        <member name="P:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFutures.Orders">
+        <member name="P:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFutures.Order">
             <summary>
             Futures order endpoints
             </summary>
@@ -5205,12 +5215,12 @@
             <param name="ct">Cancellation token</param>
             <returns>Revenue list</returns>
         </member>
-        <member name="T:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts">
+        <member name="T:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount">
             <summary>
             Sub accounts interface
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.GetSubAccounts(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccounts(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets a list of sub accounts associated with this master account
             </summary>
@@ -5222,7 +5232,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of sub accounts</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.GetSubAccountsAsync(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountsAsync(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets a list of sub accounts associated with this master account
             </summary>
@@ -5234,7 +5244,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of sub accounts</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.GetSubAccountTransferForMasterHistory(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountTransferForMasterHistory(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the transfer history of a sub account (from the master account) 
             </summary>
@@ -5247,7 +5257,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of transfers</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.GetSubAccountTransferHistoryForMasterAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountTransferHistoryForMasterAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the transfer history of a sub account (from the master account) 
             </summary>
@@ -5260,7 +5270,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of transfers</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.TransferSubAccount(System.String,System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.TransferSubAccount(System.String,System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers an asset from one sub account to another
             </summary>
@@ -5272,7 +5282,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The result of the transfer</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.TransferSubAccountAsync(System.String,System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.TransferSubAccountAsync(System.String,System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers an asset from one sub account to another
             </summary>
@@ -5284,7 +5294,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The result of the transfer</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.GetSubAccountAssets(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountAssets(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets list of balances for a sub account
             </summary>
@@ -5293,7 +5303,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of balances</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.GetSubAccountAssetsAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountAssetsAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets list of balances for a sub account
             </summary>
@@ -5302,7 +5312,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of balances</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.GetSubAccountDepositAddress(System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountDepositAddress(System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the deposit address for a coin to a sub account
             </summary>
@@ -5313,7 +5323,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The deposit address</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.GetSubAccountDepositAddressAsync(System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountDepositAddressAsync(System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the deposit address for a coin to a sub account
             </summary>
@@ -5324,7 +5334,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The deposit address</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.GetSubAccountDepositHistory(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountDepositHistory(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the deposit history for a sub account
             </summary>
@@ -5338,7 +5348,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The deposit history</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.GetSubAccountDepositHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountDepositHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the deposit history for a sub account
             </summary>
@@ -5352,7 +5362,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The deposit history</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.GetSubAccountStatus(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountStatus(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get Sub-account's Status on Margin/Futures(For Master Account)
             </summary>
@@ -5361,7 +5371,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of sub accounts status</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.GetSubAccountStatusAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountStatusAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get Sub-account's Status on Margin/Futures(For Master Account)
             </summary>
@@ -5370,7 +5380,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of sub accounts status</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.EnableMarginForSubAccount(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.EnableMarginForSubAccount(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Enables margin for a sub account
             </summary>
@@ -5379,7 +5389,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Margin enable status</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.EnableMarginForSubAccountAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.EnableMarginForSubAccountAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Enables margin for a sub account
             </summary>
@@ -5388,7 +5398,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Margin enable status</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.GetSubAccountMarginDetails(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountMarginDetails(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets margin details for a sub account
             </summary>
@@ -5397,7 +5407,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Margin details</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.GetSubAccountMarginDetailsAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountMarginDetailsAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets margin details for a sub account
             </summary>
@@ -5406,7 +5416,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Margin details</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.GetSubAccountsMarginSummary(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountsMarginSummary(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets margin summary for sub accounts
             </summary>
@@ -5414,7 +5424,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Margin summary</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.GetSubAccountsMarginSummaryAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountsMarginSummaryAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets margin summary for sub accounts
             </summary>
@@ -5422,7 +5432,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Margin summary</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.EnableFuturesForSubAccount(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.EnableFuturesForSubAccount(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Enables futures for a sub account
             </summary>
@@ -5431,7 +5441,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Futures status</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.EnableFuturesForSubAccountAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.EnableFuturesForSubAccountAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Enables futures for a sub account
             </summary>
@@ -5440,7 +5450,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Futures status</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.GetSubAccountFuturesDetails(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountFuturesDetails(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets futures details for a sub account
             </summary>
@@ -5449,7 +5459,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Futures details</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.GetSubAccountFuturesDetailsAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountFuturesDetailsAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets futures details for a sub account
             </summary>
@@ -5458,7 +5468,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Futures details</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.GetSubAccountsFuturesSummary(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountsFuturesSummary(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets futures summary for sub accounts
             </summary>
@@ -5466,7 +5476,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Futures summary</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.GetSubAccountsFuturesSummaryAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountsFuturesSummaryAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets futures summary for sub accounts
             </summary>
@@ -5474,7 +5484,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Futures summary</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.GetSubAccountsFuturesPositionRisk(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountsFuturesPositionRisk(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets futures position risk for a sub account
             </summary>
@@ -5483,7 +5493,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Position risk</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.GetSubAccountsFuturesPositionRiskAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountsFuturesPositionRiskAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets futures position risk for a sub account
             </summary>
@@ -5492,7 +5502,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Position risk</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.TransferSubAccountFutures(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.TransferSubAccountFutures(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers from or to a futures sub account
             </summary>
@@ -5504,7 +5514,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The result of the transfer</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.TransferSubAccountFuturesAsync(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.TransferSubAccountFuturesAsync(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers from or to a futures sub account
             </summary>
@@ -5516,7 +5526,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The result of the transfer</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.TransferSubAccountMargin(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.TransferSubAccountMargin(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers from or to a margin sub account
             </summary>
@@ -5528,7 +5538,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The result of the transfer</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.TransferSubAccountMarginAsync(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.TransferSubAccountMarginAsync(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers from or to a margin sub account
             </summary>
@@ -5540,7 +5550,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The result of the transfer</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.TransferSubAccountToSubAccount(System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.TransferSubAccountToSubAccount(System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers to another sub account of the same master
             </summary>
@@ -5551,7 +5561,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The result of the transfer</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.TransferSubAccountToSubAccountAsync(System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.TransferSubAccountToSubAccountAsync(System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers to another sub account of the same master
             </summary>
@@ -5562,7 +5572,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The result of the transfer</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.TransferSubAccountToMaster(System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.TransferSubAccountToMaster(System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers to master account
             </summary>
@@ -5572,7 +5582,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The result of the transfer</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.TransferSubAccountToMasterAsync(System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.TransferSubAccountToMasterAsync(System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers to master account
             </summary>
@@ -5582,7 +5592,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The result of the transfer</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.GetSubAccountTransferHistoryForSubAccount(System.String,System.Nullable{Binance.Net.Enums.SubAccountTransferSubAccountType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountTransferHistoryForSubAccount(System.String,System.Nullable{Binance.Net.Enums.SubAccountTransferSubAccountType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the transfer history of a sub account (from the sub account)
             </summary>
@@ -5595,7 +5605,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Transfer history</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccounts.GetSubAccountTransferHistoryForSubAccountAsync(System.String,System.Nullable{Binance.Net.Enums.SubAccountTransferSubAccountType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountTransferHistoryForSubAccountAsync(System.String,System.Nullable{Binance.Net.Enums.SubAccountTransferSubAccountType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the transfer history of a sub account (from the sub account)
             </summary>
@@ -5891,7 +5901,7 @@
             Margin market endpoints
             </summary>
         </member>
-        <member name="P:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.Orders">
+        <member name="P:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.Order">
             <summary>
             Margin order endpoints
             </summary>
@@ -6491,7 +6501,7 @@
             Spot order endpoints
             </summary>
         </member>
-        <member name="P:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpot.UserStreams">
+        <member name="P:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpot.UserStream">
             <summary>
             Spot user stream endpoints
             </summary>
@@ -14923,7 +14933,7 @@
             Subscribes to the depth update stream for the provided symbols
             </summary>
             <param name="symbols">The symbols</param>
-            <param name="updateInterval">Update interval in milliseconds, either 0 or 100 or 500. Defaults to 250</param>
+            <param name="updateInterval">Update interval in milliseconds, either 0, 100, 250 or 500. Defaults to 250</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -14932,7 +14942,7 @@
             Subscribes to the depth update stream for the provided symbols
             </summary>
             <param name="symbols">The symbols</param>
-            <param name="updateInterval">Update interval in milliseconds, either 0 or 100 or 500. Defaults to 250</param>
+            <param name="updateInterval">Update interval in milliseconds, either 0, 100, 250 or 500. Defaults to 250</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -16251,12 +16261,12 @@
             <param name="ct">Cancellation token</param>
             <returns>Revenue list</returns>
         </member>
-        <member name="T:Binance.Net.SubClients.BinanceClientSubAccounts">
+        <member name="T:Binance.Net.SubClients.BinanceClientSubAccount">
             <summary>
             Sub accounts endpoints
             </summary>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.GetSubAccounts(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccounts(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets a list of sub accounts associated with this master account
             </summary>
@@ -16268,7 +16278,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of sub accounts</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.GetSubAccountsAsync(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountsAsync(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets a list of sub accounts associated with this master account
             </summary>
@@ -16280,7 +16290,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of sub accounts</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.GetSubAccountTransferForMasterHistory(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountTransferForMasterHistory(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the transfer history of a sub account (from the master account) 
             </summary>
@@ -16293,7 +16303,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of transfers</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.GetSubAccountTransferHistoryForMasterAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountTransferHistoryForMasterAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the transfer history of a sub account (from the master account) 
             </summary>
@@ -16306,7 +16316,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of transfers</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.TransferSubAccount(System.String,System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.TransferSubAccount(System.String,System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers an asset from one sub account to another
             </summary>
@@ -16318,7 +16328,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The result of the transfer</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.TransferSubAccountAsync(System.String,System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.TransferSubAccountAsync(System.String,System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers an asset from one sub account to another
             </summary>
@@ -16330,7 +16340,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The result of the transfer</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.GetSubAccountAssets(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountAssets(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets list of balances for a sub account
             </summary>
@@ -16339,7 +16349,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of balances</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.GetSubAccountAssetsAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountAssetsAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets list of balances for a sub account
             </summary>
@@ -16348,7 +16358,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of balances</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.GetSubAccountDepositAddress(System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountDepositAddress(System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the deposit address for a coin to a sub account
             </summary>
@@ -16359,7 +16369,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The deposit address</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.GetSubAccountDepositAddressAsync(System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountDepositAddressAsync(System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the deposit address for a coin to a sub account
             </summary>
@@ -16370,7 +16380,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The deposit address</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.GetSubAccountDepositHistory(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountDepositHistory(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the deposit history for a sub account
             </summary>
@@ -16384,7 +16394,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The deposit history</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.GetSubAccountDepositHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountDepositHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the deposit history for a sub account
             </summary>
@@ -16398,7 +16408,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The deposit history</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.GetSubAccountStatus(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountStatus(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get Sub-account's Status on Margin/Futures(For Master Account)
             </summary>
@@ -16407,7 +16417,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of sub accounts status</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.GetSubAccountStatusAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountStatusAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get Sub-account's Status on Margin/Futures(For Master Account)
             </summary>
@@ -16416,7 +16426,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of sub accounts status</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.EnableMarginForSubAccount(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.EnableMarginForSubAccount(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Enables margin for a sub account
             </summary>
@@ -16425,7 +16435,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Margin enable status</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.EnableMarginForSubAccountAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.EnableMarginForSubAccountAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Enables margin for a sub account
             </summary>
@@ -16434,7 +16444,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Margin enable status</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.GetSubAccountMarginDetails(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountMarginDetails(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets margin details for a sub account
             </summary>
@@ -16443,7 +16453,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Margin details</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.GetSubAccountMarginDetailsAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountMarginDetailsAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets margin details for a sub account
             </summary>
@@ -16452,7 +16462,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Margin details</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.GetSubAccountsMarginSummary(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountsMarginSummary(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets margin summary for sub accounts
             </summary>
@@ -16460,7 +16470,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Margin summary</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.GetSubAccountsMarginSummaryAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountsMarginSummaryAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets margin summary for sub accounts
             </summary>
@@ -16468,7 +16478,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Margin summary</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.EnableFuturesForSubAccount(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.EnableFuturesForSubAccount(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Enables futures for a sub account
             </summary>
@@ -16477,7 +16487,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Futures status</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.EnableFuturesForSubAccountAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.EnableFuturesForSubAccountAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Enables futures for a sub account
             </summary>
@@ -16486,7 +16496,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Futures status</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.GetSubAccountFuturesDetails(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountFuturesDetails(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets futures details for a sub account
             </summary>
@@ -16495,7 +16505,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Futures details</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.GetSubAccountFuturesDetailsAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountFuturesDetailsAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets futures details for a sub account
             </summary>
@@ -16504,7 +16514,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Futures details</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.GetSubAccountsFuturesSummary(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountsFuturesSummary(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets futures summary for sub accounts
             </summary>
@@ -16512,7 +16522,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Futures summary</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.GetSubAccountsFuturesSummaryAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountsFuturesSummaryAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets futures summary for sub accounts
             </summary>
@@ -16520,7 +16530,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Futures summary</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.GetSubAccountsFuturesPositionRisk(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountsFuturesPositionRisk(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets futures position risk for a sub account
             </summary>
@@ -16529,7 +16539,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Position risk</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.GetSubAccountsFuturesPositionRiskAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountsFuturesPositionRiskAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets futures position risk for a sub account
             </summary>
@@ -16538,7 +16548,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Position risk</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.TransferSubAccountFutures(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.TransferSubAccountFutures(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers from or to a futures sub account
             </summary>
@@ -16550,7 +16560,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The result of the transfer</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.TransferSubAccountFuturesAsync(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.TransferSubAccountFuturesAsync(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers from or to a futures sub account
             </summary>
@@ -16562,7 +16572,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The result of the transfer</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.TransferSubAccountMargin(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.TransferSubAccountMargin(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers from or to a margin sub account
             </summary>
@@ -16574,7 +16584,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The result of the transfer</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.TransferSubAccountMarginAsync(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.TransferSubAccountMarginAsync(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers from or to a margin sub account
             </summary>
@@ -16586,7 +16596,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The result of the transfer</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.TransferSubAccountToSubAccount(System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.TransferSubAccountToSubAccount(System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers to another sub account of the same master
             </summary>
@@ -16597,7 +16607,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The result of the transfer</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.TransferSubAccountToSubAccountAsync(System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.TransferSubAccountToSubAccountAsync(System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers to another sub account of the same master
             </summary>
@@ -16608,7 +16618,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The result of the transfer</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.TransferSubAccountToMaster(System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.TransferSubAccountToMaster(System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers to master account
             </summary>
@@ -16618,7 +16628,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The result of the transfer</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.TransferSubAccountToMasterAsync(System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.TransferSubAccountToMasterAsync(System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers to master account
             </summary>
@@ -16628,7 +16638,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The result of the transfer</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.GetSubAccountTransferHistoryForSubAccount(System.String,System.Nullable{Binance.Net.Enums.SubAccountTransferSubAccountType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountTransferHistoryForSubAccount(System.String,System.Nullable{Binance.Net.Enums.SubAccountTransferSubAccountType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the transfer history of a sub account (from the sub account)
             </summary>
@@ -16641,7 +16651,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Transfer history</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccounts.GetSubAccountTransferHistoryForSubAccountAsync(System.String,System.Nullable{Binance.Net.Enums.SubAccountTransferSubAccountType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountTransferHistoryForSubAccountAsync(System.String,System.Nullable{Binance.Net.Enums.SubAccountTransferSubAccountType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the transfer history of a sub account (from the sub account)
             </summary>
@@ -16815,7 +16825,7 @@
             Futures system endpoints
             </summary>
         </member>
-        <member name="P:Binance.Net.SubClients.Futures.BinanceClientFutures.Orders">
+        <member name="P:Binance.Net.SubClients.Futures.BinanceClientFutures.Order">
             <summary>
             Futures order endpoints
             </summary>
@@ -17473,12 +17483,12 @@
             <param name="ct">Cancellation token</param>
             <returns>Taker Buy/Sell Volume Ratio info</returns>
         </member>
-        <member name="T:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders">
+        <member name="T:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder">
             <summary>
             Futures order endpoints
             </summary>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -17500,7 +17510,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -17522,7 +17532,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders.PlaceMultipleOrders(Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder[],System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.PlaceMultipleOrders(Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder[],System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Place multiple orders in one call
             </summary>
@@ -17531,7 +17541,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Returns a list of call results, one for each order. The order the results are in is the order the orders were sent</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders.PlaceMultipleOrdersAsync(Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder[],System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.PlaceMultipleOrdersAsync(Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder[],System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Place multiple orders in one call
             </summary>
@@ -17540,7 +17550,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Returns a list of call results, one for each order. The order the results are in is the order the orders were sent</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders.GetOrder(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.GetOrder(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
             </summary>
@@ -17551,7 +17561,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The specific order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders.GetOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.GetOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
             </summary>
@@ -17562,7 +17572,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The specific order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders.CancelOrder(System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.CancelOrder(System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Cancels a pending order
             </summary>
@@ -17574,7 +17584,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for canceled order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders.CancelOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.CancelOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Cancels a pending order
             </summary>
@@ -17586,7 +17596,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for canceled order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders.CancelAllOrders(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.CancelAllOrders(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Cancels all open orders
             </summary>
@@ -17595,7 +17605,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for canceled order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders.CancelAllOrdersAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.CancelAllOrdersAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Cancels all open orders
             </summary>
@@ -17604,7 +17614,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for canceled order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders.CancelAllOrdersAfterTimeout(System.String,System.TimeSpan,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.CancelAllOrdersAfterTimeout(System.String,System.TimeSpan,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Cancel all open orders of the specified symbol at the end of the specified countdown. This rest endpoint means to ensure your open orders are canceled in case of an outage. The endpoint should be called repeatedly as heartbeats
             so that the existing countdown time can be canceled and replaced by a new one.
@@ -17615,7 +17625,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Countdown result</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders.CancelAllOrdersAfterTimeoutAsync(System.String,System.TimeSpan,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.CancelAllOrdersAfterTimeoutAsync(System.String,System.TimeSpan,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Cancel all open orders of the specified symbol at the end of the specified countdown. This rest endpoint means to ensure your open orders are canceled in case of an outage. The endpoint should be called repeatedly as heartbeats
             so that the existing countdown time can be canceled and replaced by a new one.
@@ -17626,7 +17636,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Countdown result</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders.CancelMultipleOrders(System.String,System.Collections.Generic.List{System.Int64},System.Collections.Generic.List{System.String},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.CancelMultipleOrders(System.String,System.Collections.Generic.List{System.Int64},System.Collections.Generic.List{System.String},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Cancels muliple orders
             </summary>
@@ -17637,7 +17647,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for canceled order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders.CancelMultipleOrdersAsync(System.String,System.Collections.Generic.List{System.Int64},System.Collections.Generic.List{System.String},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.CancelMultipleOrdersAsync(System.String,System.Collections.Generic.List{System.Int64},System.Collections.Generic.List{System.String},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Cancels muliple orders
             </summary>
@@ -17648,7 +17658,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for canceled order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders.GetOpenOrders(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.GetOpenOrders(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Retrieves data for a specific current orders. Either orderId or origClientOrderId should be provided.
             </summary>
@@ -17659,7 +17669,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The specific order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders.GetOpenOrdersAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.GetOpenOrdersAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Retrieves data for a specific current orders. Either orderId or origClientOrderId should be provided.
             </summary>
@@ -17670,7 +17680,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The specific order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders.GetOpenOrders(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.GetOpenOrders(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets a list of open orders
             </summary>
@@ -17679,7 +17689,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of open orders</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders.GetOpenOrdersAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.GetOpenOrdersAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets a list of open orders
             </summary>
@@ -17688,7 +17698,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of open orders</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders.GetAllOrders(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.GetAllOrders(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets all orders for the provided symbol
             </summary>
@@ -17701,7 +17711,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of orders</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders.GetAllOrdersAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.GetAllOrdersAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets all orders for the provided symbol
             </summary>
@@ -17714,7 +17724,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of orders</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders.GetMyTrades(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.GetMyTrades(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user trades for provided symbol
             </summary>
@@ -17727,7 +17737,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of trades</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrders.GetMyTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.GetMyTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user trades for provided symbol
             </summary>
@@ -17985,7 +17995,7 @@
             Margin market endpoints
             </summary>
         </member>
-        <member name="P:Binance.Net.SubClients.Margin.BinanceClientMargin.Orders">
+        <member name="P:Binance.Net.SubClients.Margin.BinanceClientMargin.Order">
             <summary>
             Margin order endpoints
             </summary>
@@ -18585,7 +18595,7 @@
             Spot order endpoints
             </summary>
         </member>
-        <member name="P:Binance.Net.SubClients.Spot.BinanceClientSpot.UserStreams">
+        <member name="P:Binance.Net.SubClients.Spot.BinanceClientSpot.UserStream">
             <summary>
             Spot user stream endpoints
             </summary>

@@ -33,7 +33,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <summary>
         /// Futures order endpoints
         /// </summary>
-        IBinanceClientFuturesOrders Orders { get; }
+        IBinanceClientFuturesOrders Order { get; }
 
         /// <summary>
         /// Futures user stream endpoints

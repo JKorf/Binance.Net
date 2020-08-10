@@ -19,7 +19,7 @@ namespace Binance.Net.SubClients
     /// <summary>
     /// Sub accounts endpoints
     /// </summary>
-    public class BinanceClientSubAccounts : IBinanceClientSubAccounts
+    public class BinanceClientSubAccount : IBinanceClientSubAccount
     {
         private const string subAccountListEndpoint = "sub-account/list.html";
         private const string subAccountTransferHistoryEndpoint = "sub-account/transfer/history.html";
@@ -48,7 +48,7 @@ namespace Binance.Net.SubClients
 
         private readonly BinanceClient _baseClient;
 
-        internal BinanceClientSubAccounts(BinanceClient baseClient)
+        internal BinanceClientSubAccount(BinanceClient baseClient)
         {
             _baseClient = baseClient;
         }

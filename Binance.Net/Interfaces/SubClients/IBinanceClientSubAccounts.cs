@@ -12,7 +12,7 @@ namespace Binance.Net.Interfaces.SubClients
     /// <summary>
     /// Sub accounts interface
     /// </summary>
-    public interface IBinanceClientSubAccounts
+    public interface IBinanceClientSubAccount
     {
         /// <summary>
         /// Gets a list of sub accounts associated with this master account
