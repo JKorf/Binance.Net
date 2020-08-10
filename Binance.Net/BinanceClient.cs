@@ -20,10 +20,12 @@ using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.SubClients;
 using Binance.Net.Interfaces.SubClients.Futures;
+using Binance.Net.Interfaces.SubClients.IsolatedMargin;
 using Binance.Net.Interfaces.SubClients.Margin;
 using Binance.Net.Interfaces.SubClients.Spot;
 using Binance.Net.SubClients;
 using Binance.Net.SubClients.Futures;
+using Binance.Net.SubClients.IsolatedMargin;
 using Binance.Net.SubClients.Margin;
 using Binance.Net.SubClients.Spot;
 
@@ -76,7 +78,11 @@ namespace Binance.Net
         /// Margin endpoints
         /// </summary>
         public IBinanceClientMargin Margin { get; }
-
+        
+        /// <summary>
+        /// Isolated Margin endpoints
+        /// </summary>
+        public IBinanceClientIsolatedMargin IsolatedMargin { get; }
 
         /// <summary>
         /// Spot endpoints
@@ -150,6 +156,7 @@ namespace Binance.Net
 
             Account = new BinanceClientAccount(this);
             Margin = new BinanceClientMargin(this);
+            IsolatedMargin = new BinanceClientIsolatedMargin(this);
             System = new BinanceClientSystem(log, this);
             Lending = new BinanceClientLending(this);
             Mining = new BinanceClientMining(this);
