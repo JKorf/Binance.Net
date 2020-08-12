@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Binance.Net.Interfaces.SubClients;
 using Binance.Net.Interfaces.SubClients.Margin;
 using Binance.Net.Objects.Spot.UserData;
 using CryptoExchange.Net;
@@ -12,7 +13,7 @@ namespace Binance.Net.SubClients.Margin
     /// <summary>
     /// Margin user stream endpoints
     /// </summary>
-    public class BinanceClientMarginUserStream : IBinanceClientMarginUserStream
+    public class BinanceClientMarginUserStream : IBinanceClientUserStream
     {
         // Margin
         private const string getListenKeyEndpoint = "userDataStream";
@@ -35,7 +36,7 @@ namespace Binance.Net.SubClients.Margin
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Listen key</returns>
-        public WebCallResult<string> StartMarginUserStream(CancellationToken ct = default) => StartMarginUserStreamAsync(ct).Result;
+        public WebCallResult<string> StartUserStream(CancellationToken ct = default) => StartUserStreamAsync(ct).Result;
 
         /// <summary>
         /// Starts a user stream  for margin account by requesting a listen key. 
@@ -44,7 +45,7 @@ namespace Binance.Net.SubClients.Margin
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Listen key</returns>
-        public async Task<WebCallResult<string>> StartMarginUserStreamAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<string>> StartUserStreamAsync(CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
@@ -65,7 +66,7 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="listenKey">The listen key to keep alive</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public WebCallResult<object> KeepAliveMarginUserStream(string listenKey, CancellationToken ct = default) => KeepAliveMarginUserStreamAsync(listenKey, ct).Result;
+        public WebCallResult<object> KeepAliveUserStream(string listenKey, CancellationToken ct = default) => KeepAliveUserStreamAsync(listenKey, ct).Result;
 
         /// <summary>
         /// Sends a keep alive for the current user stream for margin account listen key to keep the stream from closing. 
@@ -74,7 +75,7 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="listenKey">The listen key to keep alive</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<object>> KeepAliveMarginUserStreamAsync(string listenKey, CancellationToken ct = default)
+        public async Task<WebCallResult<object>> KeepAliveUserStreamAsync(string listenKey, CancellationToken ct = default)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -99,7 +100,7 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="listenKey">The listen key to keep alive</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public WebCallResult<object> CloseMarginUserStream(string listenKey, CancellationToken ct = default) => CloseMarginUserStreamAsync(listenKey, ct).Result;
+        public WebCallResult<object> StopUserStream(string listenKey, CancellationToken ct = default) => StopUserStreamAsync(listenKey, ct).Result;
 
         /// <summary>
         /// Close the user stream for margin account
@@ -107,7 +108,7 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="listenKey">The listen key to keep alive</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<object>> CloseMarginUserStreamAsync(string listenKey, CancellationToken ct = default)
+        public async Task<WebCallResult<object>> StopUserStreamAsync(string listenKey, CancellationToken ct = default)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);

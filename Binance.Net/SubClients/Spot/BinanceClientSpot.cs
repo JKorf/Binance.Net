@@ -1,4 +1,5 @@
-﻿using Binance.Net.Interfaces.SubClients.Spot;
+﻿using Binance.Net.Interfaces.SubClients;
+using Binance.Net.Interfaces.SubClients.Spot;
 using CryptoExchange.Net.Logging;
 
 namespace Binance.Net.SubClients.Spot
@@ -19,7 +20,7 @@ namespace Binance.Net.SubClients.Spot
         /// <summary>
         /// Spot user stream endpoints
         /// </summary>
-        public IBinanceClientSpotUserStream UserStream { get; }
+        public IBinanceClientUserStream UserStream { get; }
 
         internal BinanceClientSpot(Log log, BinanceClient baseClient)
         {

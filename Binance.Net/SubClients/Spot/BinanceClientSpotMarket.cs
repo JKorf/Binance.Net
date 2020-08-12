@@ -41,9 +41,6 @@ namespace Binance.Net.SubClients.Spot
             _baseClient = baseClient;
         }
 
-        #region Market Data Endpoints
-
-
         #region Order Book
 
         /// <summary>
@@ -275,14 +272,14 @@ namespace Binance.Net.SubClients.Spot
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of data over the last 24 hours</returns>
-        public WebCallResult<IEnumerable<Binance24HPrice>> Get24HPricesList(CancellationToken ct = default) => Get24HPricesListAsync(ct).Result;
+        public WebCallResult<IEnumerable<Binance24HPrice>> Get24HPrices(CancellationToken ct = default) => Get24HPricesAsync(ct).Result;
 
         /// <summary>
         /// Get data regarding the last 24 hours for all symbols
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of data over the last 24 hours</returns>
-        public async Task<WebCallResult<IEnumerable<Binance24HPrice>>> Get24HPricesListAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<Binance24HPrice>>> Get24HPricesAsync(CancellationToken ct = default)
         {
             return await _baseClient.SendRequestInternal<IEnumerable<Binance24HPrice>>(_baseClient.GetUrl(false, price24HEndpoint, api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
         }
@@ -378,8 +375,7 @@ namespace Binance.Net.SubClients.Spot
 
         #endregion
 
-
-
+        #region GetTradeFee
         /// <summary>
         /// Gets the withdrawal fee for an symbol
         /// </summary>

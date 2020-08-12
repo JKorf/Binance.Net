@@ -38,7 +38,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <summary>
         /// Futures user stream endpoints
         /// </summary>
-        IBinanceClientFuturesUserStream UserStream { get; }
+        IBinanceClientUserStream UserStream { get; }
 
         /// <summary>
         /// Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol

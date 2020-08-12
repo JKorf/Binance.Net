@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
+using Binance.Net.Interfaces.SubClients;
 using Binance.Net.Interfaces.SubClients.Margin;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Spot.MarginData;
@@ -49,7 +50,7 @@ namespace Binance.Net.SubClients.Margin
         /// <summary>
         /// Margin user stream endpoints
         /// </summary>
-        public IBinanceClientMarginUserStream UserStream { get; }
+        public IBinanceClientUserStream UserStream { get; }
         
         internal BinanceClientMargin(BinanceClient baseClient)
         {

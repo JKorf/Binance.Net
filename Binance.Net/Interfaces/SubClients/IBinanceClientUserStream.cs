@@ -1,13 +1,16 @@
-﻿using System.Threading;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using CryptoExchange.Net.Objects;
 
-namespace Binance.Net.Interfaces.SubClients.Futures
+namespace Binance.Net.Interfaces.SubClients
 {
     /// <summary>
-    /// Futures user stream interfaces
+    /// Interface for user stream
     /// </summary>
-    public interface IBinanceClientFuturesUserStream
+    public interface IBinanceClientUserStream
     {
         /// <summary>
         /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to BinanceSocketClient.Futures.SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.

@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
+using Binance.Net.Interfaces.SubClients;
 using Binance.Net.Interfaces.SubClients.Futures;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Futures.FuturesData;
@@ -66,7 +67,7 @@ namespace Binance.Net.SubClients.Futures
         /// <summary>
         /// Futures user stream endpoints
         /// </summary>
-        public IBinanceClientFuturesUserStream UserStream { get; }
+        public IBinanceClientUserStream UserStream { get; }
 
         internal BinanceClientFutures(Log log, BinanceClient baseClient)
         {

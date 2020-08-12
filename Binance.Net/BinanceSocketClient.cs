@@ -22,7 +22,7 @@ namespace Binance.Net
         private static BinanceSocketClientOptions DefaultOptions => _defaultOptions.Copy();
         
         /// <summary>
-        /// Spot subscription
+        /// Spot subscriptions
         /// </summary>
         public IBinanceSocketClientSpot Spot { get; set; }
         /// <summary>

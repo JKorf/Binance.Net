@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
+using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.SubClients.Futures;
 using Binance.Net.Objects.Futures.MarketData;
 using Binance.Net.Objects.Spot.MarketData;
@@ -62,7 +63,7 @@ namespace Binance.Net.SubClients.Futures
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The order book for the symbol</returns>
-        public WebCallResult<BinanceEventOrderBook> GetOrderBook(string symbol, int? limit = null, CancellationToken ct = default) => GetOrderBookAsync(symbol, limit, ct).Result;
+        public WebCallResult<BinanceOrderBook> GetOrderBook(string symbol, int? limit = null, CancellationToken ct = default) => GetOrderBookAsync(symbol, limit, ct).Result;
 
         /// <summary>
         /// Gets the order book for the provided symbol
@@ -71,7 +72,7 @@ namespace Binance.Net.SubClients.Futures
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The order book for the symbol</returns>
-        public async Task<WebCallResult<BinanceEventOrderBook>> GetOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceOrderBook>> GetOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
             limit?.ValidateIntValues(nameof(limit), 5, 10, 20, 50, 100, 500, 1000);
@@ -80,7 +81,7 @@ namespace Binance.Net.SubClients.Futures
             var result = await _baseClient.SendRequestInternal<BinanceEventOrderBook>(_baseClient.GetUrl(true, orderBookEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
             if (result)
                 result.Data.Symbol = symbol;
-            return result;
+            return new WebCallResult<BinanceOrderBook>(result.ResponseStatusCode, result.ResponseHeaders, result.Data, result.Error);
         }
 
         #endregion

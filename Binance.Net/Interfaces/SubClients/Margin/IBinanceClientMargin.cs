@@ -26,7 +26,7 @@ namespace Binance.Net.Interfaces.SubClients.Margin
         /// <summary>
         /// Margin user stream endpoints
         /// </summary>
-        IBinanceClientMarginUserStream UserStream { get; }
+        IBinanceClientUserStream UserStream { get; }
         
         /// <summary>
         /// Execute transfer between spot account and margin account.
