@@ -26,7 +26,7 @@ namespace Binance.Net.Objects.Spot.MarginData
         /// Snapshot data
         /// </summary>
         [JsonProperty("data")]
-        public BinanceMarginAccountSnapshotData Data { get; set; }
+        public BinanceMarginAccountSnapshotData Data { get; set; } = default!;
     }
 
     /// <summary>

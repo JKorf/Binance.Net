@@ -38,11 +38,12 @@ namespace Binance.Net.Objects.Spot.IsolatedMarginData
         /// <summary>
         /// Base asset
         /// </summary>
-        public BinanceIsolatedMarginAccountAsset BaseAsset { get; set; }
+        public BinanceIsolatedMarginAccountAsset BaseAsset { get; set; } = default!;
+
         /// <summary>
         /// Quote asset
         /// </summary>
-        public BinanceIsolatedMarginAccountAsset QuoteAsset { get; set; }
+        public BinanceIsolatedMarginAccountAsset QuoteAsset { get; set; } = default!;
 
         /// <summary>
         /// Symbol name

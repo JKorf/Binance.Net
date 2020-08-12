@@ -266,7 +266,7 @@ namespace Binance.Net.SubClients.Futures
 
             var response = await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesMultipleOrderPlaceResult>>(_baseClient.GetUrl(true, multipleNewOrdersEndpoint, api, signedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
             if (!response.Success)
-                return WebCallResult<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>.CreateErrorResult(response.ResponseStatusCode, response.ResponseHeaders, response.Error);
+                return WebCallResult<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>.CreateErrorResult(response.ResponseStatusCode, response.ResponseHeaders, response.Error!);
 
             var result = new List<CallResult<BinanceFuturesPlacedOrder>>();
             foreach (var item in response.Data)

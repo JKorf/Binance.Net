@@ -25,11 +25,12 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// </summary>
         [JsonConverter(typeof(AccountTypeConverter))]
         public AccountType Type { get; set; }
+
         /// <summary>
         /// Snapshot data
         /// </summary>
         [JsonProperty("data")]
-        public BinanceFuturesAccountSnapshotData Data { get; set; }
+        public BinanceFuturesAccountSnapshotData Data { get; set; } = default!;
     }
 
     /// <summary>
