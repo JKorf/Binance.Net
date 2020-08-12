@@ -145,6 +145,12 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.0.0-beta.1 - 12 Aug 2020
+    * Restructured BinanceClient and BinanceSocketClient to include the futures and brokerage API. Clients are now divided per topic
+    * Added isolated margin endpoints
+    * Fixed MinNotional checking in trade rules when also adjusting price
+    * Added shared interfaces for Futures and Spot market data and market stream subscriptions
+
 * Version 5.1.14 - 03 Aug 2020
     * Added check for MinNotional filter when using AutoComply trade rules behaviour
     * Adjusted bool parameter serialization
