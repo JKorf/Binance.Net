@@ -145,6 +145,9 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.0.0-beta.2 - 13 Aug 2020
+    * Fixed ModifyPositionMargin futures call
+
 * Version 6.0.0-beta.1 - 12 Aug 2020
     * Restructured BinanceClient and BinanceSocketClient to include the futures and brokerage API. Clients are now divided per topic
     * Added isolated margin endpoints
