@@ -2,7 +2,7 @@
 
 ![Build status](https://travis-ci.org/JKorf/Binance.Net.svg?branch=master)
 
-A .Net wrapper for the Binance API as described on [Binance](https://www.binance.com/restapipub.html), including all features the API provides using clear and readable objects.
+A .Net wrapper for the Binance API as described on [Binance](https://binance-docs.github.io/apidocs/spot/en/#change-log), including all features the API provides (Spot, (Isolated) margin and futures) using clear and readable objects.
 
 **If you think something is broken, something is missing or have any questions, please open an [Issue](https://github.com/JKorf/Binance.Net/issues)**
 
@@ -65,7 +65,7 @@ Implementations from third parties:
 </table>
 
 ## Donations
-Donations are greatly appreciated and a motivation to keep improving.
+I develop and maintain this package on my own for free in my spare time. Donations are greatly appreciated.
 
 **Btc**:  12KwZk3r2Y3JZ2uMULcjqqBvXmpDwjhhQS  
 **Eth**:  0x069176ca1a4b1d6e0b7901a6bc0dbf3bb0bf5cc2  
@@ -101,61 +101,67 @@ Requests made to Binance are checked for a correct timestamp. When requests are 
 The recvWindow is default 5000ms and can be changed using the `ReceiveWindow` configuration option. All times are communicated in UTC so there won't be any timezone issues. However, because of clock drifting it can be that the client UTC time is not the same as the server UTC time. It is therefor recommended clients use the `SP TimeSync` program to resync the client UTC time more often than windows does by default (every 10 minutes or less is recommended).
 
 ## Websockets
-The Binance.Net socket client provides several socket endpoint to which can be subscribed.
+The Binance.Net socket client provides several socket endpoint to which can be subscribed. 
 
-**Public socket endpoints:**
-```C#
-using(var client = new BinanceSocketClient())
-{
-	var successDepth = client.SubscribeToDepthStream("bnbbtc", (data) =>
-	{
-		// handle data
-	});
-	var successTrades = client.SubscribeToTradesStream("bnbbtc", (data) =>
-	{
-		// handle data
-	});
-	var successKline = client.SubscribeToKlineStream("bnbbtc", KlineInterval.OneMinute, (data) =>
-	{
-		// handle data
-	});
-	var successSymbol = client.SubscribeToSymbolTicker("bnbbtc", (data) =>
-	{
-		// handle data
-	});
-	var successSymbols = client.SubscribeToAllSymbolTicker((data) =>
-	{
-		// handle data
-	});
-	var successOrderBook = client.SubscribeToPartialBookDepthStream("bnbbtc", 10, (data) =>
-	{
-		// handle data
-	});
-}
-```
+````
+var client = new BinanceSocketClient();
+// subscribe to updates on the spot API
+client.Spot.SubscribeToBookTickerUpdates("BTCUSDT", data => {
+  // Handle data
+});
 
-**Private socket endpoints:**
+// subscribe to updates on the futures API
+client.Futures.SubscribeToBookTickerUpdates("BTCUSDT", data => {
+  // Handle data
+});
 
-For the private endpoint a user stream has to be started on the Binance server. This can be done using the `StartUserStream()` method in the `BinanceClient`. This command will return a listen key which can then be provided to the private socket subscription:
-```C#
-using(var client = new BinanceSocketClient())
-{
-	var successOrderBook = client.SubscribeToUserStream(listenKey, 
-	(accountInfoUpdate) =>
-	{
-		// handle account info update
+````
+
+To subscribe to account update ( balance updates, order updates, etc ) you need to create a listen key using the `BinanceClient`, then start the user stream for account updates on the `BinanceSocketClient`:
+````
+var client = new BinanceClient(new BinanceClientOptions{
+	ApiCredentials = new ApiCredentials("APIKEY", "APISECRET")
+});
+var startResult = client.Spot.UserStream.StartUserStream();
+
+if(!startResult.Success)
+	throw new Exception($"Failed to start user stream: {startResult.Error}");
+
+var socketClient = BinanceSocketClient();
+
+socketClient.Spot.SubscribeToUserStream(startResult.Data, 
+	accountUpdate => { // Handle account info update 
 	},
-	(orderInfoUpdate) =>
-	{
-		// handle order info update
+	orderUpdate => { // Handle order update
+	}, 
+	ocoUpdate => { // Handle oco order update
+	},
+	positionUpdate => // Handle account position update
+	},
+	balanceUpdate => // Handle balance update
 	});
-}
-```
+````
 
-When no longer listening to private endpoints the `client.StopUserStream` method in `BinanceClient` should be used to signal the Binance server the stream can be closed.
+Null can be passed as a parameter to any of these handlers to ignore the events of that type.
+
+
+When no longer listening to private endpoints the `StopUserStream` method in `BinanceClient` should be used to signal the Binance server the stream can be closed.
 
 
 ## Release notes
+* Version 6.0.0-beta.2 - 13 Aug 2020
+    * Fixed ModifyPositionMargin futures call
+
+* Version 6.0.0-beta.1 - 12 Aug 2020
+    * Restructured BinanceClient and BinanceSocketClient to include the futures and brokerage API. Clients are now divided per topic
+    * Added isolated margin endpoints
+    * Fixed MinNotional checking in trade rules when also adjusting price
+    * Added shared interfaces for Futures and Spot market data and market stream subscriptions
+
+* Version 5.1.14 - 03 Aug 2020
+    * Added check for MinNotional filter when using AutoComply trade rules behaviour
+    * Adjusted bool parameter serialization
+
 * Version 5.1.13 - 27 Jul 2020
 	* Updated futures balance, account info, position endpoints to version 2
 	* Added missing futures market data endpoints

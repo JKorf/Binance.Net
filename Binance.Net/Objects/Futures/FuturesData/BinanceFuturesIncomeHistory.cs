@@ -25,7 +25,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// Type of income
         /// </summary>
-        public IncomeType? IncomeType => new IncomeTypeConverter().ReadString(IncomeTypeString);
+        public IncomeType? IncomeType => IncomeTypeString != null ? new IncomeTypeConverter().ReadString(IncomeTypeString): (IncomeType?)null;
 
         /// <summary>
         /// Amount of income

@@ -24,7 +24,7 @@ namespace Binance.Net.Objects.Spot.MarketData
         public long LastUpdateId { get; set; }
 
         /// <summary>
-        /// The id of this update, can be synced with <see cref="BinanceClient.GetOrderBook"/> to update the order book
+        /// The id of this update, can be synced with BinanceClient.Spot.GetOrderBook to update the order book
         /// </summary>
         [JsonProperty("U")]
         public long? FirstUpdateId { get; set; }

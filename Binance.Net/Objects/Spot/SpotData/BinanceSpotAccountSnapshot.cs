@@ -26,7 +26,7 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// Snapshot data
         /// </summary>
         [JsonProperty("data")]
-        public BinanceSpotAccountSnapshotData Data { get; set; }
+        public BinanceSpotAccountSnapshotData Data { get; set; } = default!;
     }
 
     /// <summary>

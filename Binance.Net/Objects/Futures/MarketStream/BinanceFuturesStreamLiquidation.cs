@@ -16,7 +16,7 @@ namespace Binance.Net.Objects.Futures.MarketStream
         /// The data of the event
         /// </summary>
         [JsonProperty("o")]
-        public BinanceFuturesStreamLiquidation Data { get; set; }
+        public BinanceFuturesStreamLiquidation Data { get; set; } = default!;
     }
 
     /// <summary>

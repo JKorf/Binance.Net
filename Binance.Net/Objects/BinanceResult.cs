@@ -11,7 +11,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The data
         /// </summary>
-        public T Data { get; set; }
+        public T Data { get; set; } = default!;
         /// <summary>
         /// Result code
         /// </summary>
