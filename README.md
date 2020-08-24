@@ -149,6 +149,9 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.0.0-beta.3 - 17 Aug 2020
+    * Fixed GetAccountInfo endpoint
+
 * Version 6.0.0-beta.2 - 13 Aug 2020
     * Fixed ModifyPositionMargin futures call
 
