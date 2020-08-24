@@ -896,7 +896,7 @@ namespace Binance.Net.UnitTests
 
 
             // assert
-            Mock.Get(client.RequestFactory).Verify(f => f.Create(It.IsAny<HttpMethod>(), It.Is<string>((msg) => msg.Contains("/time"))), Times.Exactly(2));
+            Mock.Get(client.RequestFactory).Verify(f => f.Create(It.IsAny<HttpMethod>(), It.Is<string>((msg) => msg.Contains("/time")), It.IsAny<int>()), Times.Exactly(2));
         }
 
         [TestCase()]
@@ -949,7 +949,7 @@ namespace Binance.Net.UnitTests
             // arrange
             var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
             var client = new HttpClient();
-            var request = new Request(new HttpRequestMessage(HttpMethod.Get, "https://test.test-api.com"), client);
+            var request = new Request(new HttpRequestMessage(HttpMethod.Get, "https://test.test-api.com"), client, 1);
 
             // act
             var sign = authProvider.AddAuthenticationToHeaders(request.Uri.ToString(), HttpMethod.Get, new Dictionary<string, object>(), true, PostParameters.InBody, ArrayParametersSerialization.MultipleValues);

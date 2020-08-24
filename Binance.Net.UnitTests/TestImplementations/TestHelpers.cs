@@ -108,7 +108,7 @@ namespace Binance.Net.UnitTests.TestImplementations
             request.Setup(c => c.GetResponse(It.IsAny<CancellationToken>())).Returns(Task.FromResult(response.Object));
 
             var factory = Mock.Get(client.RequestFactory);
-            factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<string>()))
+            factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<string>(), It.IsAny<int>()))
                 .Returns(request.Object);
         }
 
@@ -128,7 +128,7 @@ namespace Binance.Net.UnitTests.TestImplementations
             request.Setup(c => c.GetResponse(It.IsAny<CancellationToken>())).Returns(Task.FromResult(response.Object));
 
             var factory = Mock.Get(client.RequestFactory);
-            factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<string>()))
+            factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<string>(), It.IsAny<int>()))
                 .Returns(request.Object);
         }
 
