@@ -32,6 +32,10 @@
         /// <summary>
         /// 
         /// </summary>
-        Break
+        Break,
+        /// <summary>
+        /// 
+        /// </summary>
+        Close
     }
 }
