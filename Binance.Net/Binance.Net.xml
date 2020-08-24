@@ -1162,6 +1162,11 @@
             
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.SymbolStatus.Close">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.SystemStatus">
             <summary>
             Status of the Binance system

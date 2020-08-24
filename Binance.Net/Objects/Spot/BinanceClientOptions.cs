@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http;
 using Binance.Net.Enums;
 using CryptoExchange.Net.Objects;
 
@@ -50,7 +51,14 @@ namespace Binance.Net.Objects.Spot
         {
             FuturesBaseAddress = "https://fapi.binance.com";
         }
-
+        /// <summary>
+        /// Shared http client
+        /// </summary>
+        /// <param name="client"></param>
+        public BinanceClientOptions(HttpClient client) : base(client,"https://api.binance.com")
+        {
+            FuturesBaseAddress = "https://fapi.binance.com";
+        }
         /// <summary>
         /// ctor
         /// </summary>
