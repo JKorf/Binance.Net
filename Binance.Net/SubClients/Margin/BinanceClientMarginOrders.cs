@@ -52,6 +52,7 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
         /// <param name="icebergQuantity">Used for iceberg orders</param>
+        /// <param name="orderResponseType">Used for the response JSON</param>
         /// <param name="sideEffectType">Side effect type for this order</param>
         /// <param name="isIsolated">For isolated margin or not</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -67,10 +68,11 @@ namespace Binance.Net.SubClients.Margin
             TimeInForce? timeInForce = null,
             decimal? stopPrice = null,
             decimal? icebergQuantity = null,
+            OrderResponseType? orderResponseType = null,
             SideEffectType? sideEffectType = null,
             bool? isIsolated = null,
             int? receiveWindow = null,
-            CancellationToken ct = default) => PlaceMarginOrderAsync(symbol, side, type, quantity, quoteOrderQuantity, newClientOrderId, price, timeInForce, stopPrice, icebergQuantity, sideEffectType, isIsolated, receiveWindow, ct).Result;
+            CancellationToken ct = default) => PlaceMarginOrderAsync(symbol, side, type, quantity, quoteOrderQuantity, newClientOrderId, price, timeInForce, stopPrice, icebergQuantity, orderResponseType, sideEffectType, isIsolated, receiveWindow, ct).Result;
 
         /// <summary>
         /// Margin account new order
@@ -85,6 +87,7 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
         /// <param name="icebergQuantity">Used for iceberg orders</param>
+        /// <param name="orderResponseType">Used for the response JSON</param>
         /// <param name="sideEffectType">Side effect type for this order</param>
         /// <param name="isIsolated">For isolated margin or not</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -100,6 +103,7 @@ namespace Binance.Net.SubClients.Margin
             TimeInForce? timeInForce = null,
             decimal? stopPrice = null,
             decimal? icebergQuantity = null,
+            OrderResponseType? orderResponseType = null,
             SideEffectType? sideEffectType = null,
             bool? isIsolated = null,
             int? receiveWindow = null,
@@ -116,6 +120,7 @@ namespace Binance.Net.SubClients.Margin
                 timeInForce,
                 stopPrice,
                 icebergQuantity,
+                orderResponseType,
                 sideEffectType,
                 isIsolated,
                 receiveWindow,

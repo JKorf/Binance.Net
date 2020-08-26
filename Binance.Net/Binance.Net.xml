@@ -1162,6 +1162,11 @@
             
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.SymbolStatus.Close">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.SystemStatus">
             <summary>
             Status of the Binance system
@@ -5991,7 +5996,7 @@
             Margin orders interface
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.PlaceMarginOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.SideEffectType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.PlaceMarginOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{Binance.Net.Enums.SideEffectType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Margin account new order
             </summary>
@@ -6005,13 +6010,14 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQuantity">Used for iceberg orders</param>
+            <param name="orderResponseType">Used for the response JSON</param>
             <param name="sideEffectType">Side effect type for this order</param>
             <param name="isIsolated">For isolated margin or not</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.PlaceMarginOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.SideEffectType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.PlaceMarginOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{Binance.Net.Enums.SideEffectType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Margin account new order
             </summary>
@@ -6025,6 +6031,7 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQuantity">Used for iceberg orders</param>
+            <param name="orderResponseType">Used for the response JSON</param>
             <param name="sideEffectType">Side effect type for this order</param>
             <param name="isIsolated">For isolated margin or not</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -6221,7 +6228,7 @@
             Spot order interface
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.PlaceTestOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.PlaceTestOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new test order. Test orders are not actually being executed and just test the functionality.
             </summary>
@@ -6235,11 +6242,12 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQty">User for iceberg orders</param>
+            <param name="orderResponseType">Used for the response JSON</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed test order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.PlaceTestOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.PlaceTestOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new test order. Test orders are not actually being executed and just test the functionality.
             </summary>
@@ -6253,11 +6261,12 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQty">User for iceberg orders</param>
+            <param name="orderResponseType">Used for the response JSON</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed test order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -6271,11 +6280,12 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQty">Used for iceberg orders</param>
+            <param name="orderResponseType">Used for the response JSON</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -6289,6 +6299,7 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQty">Used for iceberg orders</param>
+            <param name="orderResponseType">Used for the response JSON</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
@@ -17783,7 +17794,7 @@
             Margin order endpoints
             </summary>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.PlaceMarginOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.SideEffectType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.PlaceMarginOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{Binance.Net.Enums.SideEffectType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Margin account new order
             </summary>
@@ -17797,13 +17808,14 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQuantity">Used for iceberg orders</param>
+            <param name="orderResponseType">Used for the response JSON</param>
             <param name="sideEffectType">Side effect type for this order</param>
             <param name="isIsolated">For isolated margin or not</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.PlaceMarginOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.SideEffectType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.PlaceMarginOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{Binance.Net.Enums.SideEffectType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Margin account new order
             </summary>
@@ -17817,6 +17829,7 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQuantity">Used for iceberg orders</param>
+            <param name="orderResponseType">Used for the response JSON</param>
             <param name="sideEffectType">Side effect type for this order</param>
             <param name="isIsolated">For isolated margin or not</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -18264,7 +18277,7 @@
             Spot order endpoints
             </summary>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.PlaceTestOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.PlaceTestOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new test order. Test orders are not actually being executed and just test the functionality.
             </summary>
@@ -18278,11 +18291,12 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQty">User for iceberg orders</param>
+            <param name="orderResponseType">Used for the response JSON</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed test order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.PlaceTestOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.PlaceTestOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new test order. Test orders are not actually being executed and just test the functionality.
             </summary>
@@ -18296,11 +18310,12 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQty">User for iceberg orders</param>
+            <param name="orderResponseType">Used for the response JSON</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed test order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -18314,11 +18329,12 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQty">Used for iceberg orders</param>
+            <param name="orderResponseType">Used for the response JSON</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -18332,6 +18348,7 @@
             <param name="newClientOrderId">Unique id for order</param>
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQty">Used for iceberg orders</param>
+            <param name="orderResponseType">Used for the response JSON</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>

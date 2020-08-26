@@ -200,6 +200,7 @@ namespace Binance.Net
             TimeInForce? timeInForce = null,
             decimal? stopPrice = null,
             decimal? icebergQty = null,
+            OrderResponseType? orderResponseType = null,
             SideEffectType? sideEffectType = null,
             bool? isIsolated = null,
             int? receiveWindow = null,
@@ -242,6 +243,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)));
             parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
             parameters.AddOptionalParameter("sideEffectType", sideEffectType == null ? null : JsonConvert.SerializeObject(sideEffectType, new SideEffectTypeConverter(false)));
             parameters.AddOptionalParameter("isIsolated", isIsolated);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
