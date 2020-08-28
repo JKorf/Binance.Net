@@ -99,7 +99,7 @@ The recvWindow is default 5000ms and can be changed using the `ReceiveWindow` co
 ## Websockets
 The Binance.Net socket client provides several socket endpoint to which can be subscribed. 
 
-````
+````csharp
 var client = new BinanceSocketClient();
 // subscribe to updates on the spot API
 client.Spot.SubscribeToBookTickerUpdates("BTCUSDT", data => {
@@ -114,7 +114,7 @@ client.Futures.SubscribeToBookTickerUpdates("BTCUSDT", data => {
 ````
 
 To subscribe to account update ( balance updates, order updates, etc ) you need to create a listen key using the `BinanceClient`, then start the user stream for account updates on the `BinanceSocketClient`:
-````
+````csharp
 var client = new BinanceClient(new BinanceClientOptions{
 	ApiCredentials = new ApiCredentials("APIKEY", "APISECRET")
 });
