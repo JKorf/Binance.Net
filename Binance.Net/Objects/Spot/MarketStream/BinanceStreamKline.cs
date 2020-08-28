@@ -127,9 +127,9 @@ namespace Binance.Net.Objects.Spot.MarketStream
                 High = High,
                 Low = Low,
                 OpenTime = OpenTime,
-                QuoteAssetVolume = QuoteAssetVolume,
-                TakerBuyBaseAssetVolume = TakerBuyBaseAssetVolume,
-                TakerBuyQuoteAssetVolume = TakerBuyQuoteAssetVolume,
+                AlternateAssetVolume = QuoteAssetVolume,
+                TakerBuyVolume = TakerBuyBaseAssetVolume,
+                TakerBuyAlternateAssetVolume = TakerBuyQuoteAssetVolume,
                 TradeCount = TradeCount
             };
         }

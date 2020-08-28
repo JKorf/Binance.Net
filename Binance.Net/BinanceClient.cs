@@ -20,12 +20,11 @@ using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.SubClients;
 using Binance.Net.Interfaces.SubClients.Futures;
-using Binance.Net.Interfaces.SubClients.IsolatedMargin;
 using Binance.Net.Interfaces.SubClients.Margin;
 using Binance.Net.Interfaces.SubClients.Spot;
 using Binance.Net.SubClients;
-using Binance.Net.SubClients.Futures;
-using Binance.Net.SubClients.IsolatedMargin;
+using Binance.Net.SubClients.Futures.Coin;
+using Binance.Net.SubClients.Futures.Usdt;
 using Binance.Net.SubClients.Margin;
 using Binance.Net.SubClients.Spot;
 
@@ -54,20 +53,16 @@ namespace Binance.Net
         internal BinanceExchangeInfo? ExchangeInfo;
         internal DateTime? LastExchangeInfoUpdate;
 
-        private readonly string _baseAddressFutures;
+        private readonly string _baseAddressFuturesUsdt;
+        private readonly string _baseAddressFuturesCoin;
 
         #endregion
 
         #region Subclients
         /// <summary>
-        /// System endpoints
+        /// General endpoints
         /// </summary>
-        public IBinanceClientSystem System { get; }
-
-        /// <summary>
-        /// Account endpoints
-        /// </summary>
-        public IBinanceClientAccount Account { get; }
+        public IBinanceClientGeneral General { get; }
 
         /// <summary>
         /// Sub account endpoints
@@ -75,14 +70,9 @@ namespace Binance.Net
         public IBinanceClientSubAccount SubAccount { get; }
 
         /// <summary>
-        /// Margin endpoints
+        /// (Isolated) Margin endpoints
         /// </summary>
         public IBinanceClientMargin Margin { get; }
-        
-        /// <summary>
-        /// Isolated Margin endpoints
-        /// </summary>
-        public IBinanceClientIsolatedMargin IsolatedMargin { get; }
 
         /// <summary>
         /// Spot endpoints
@@ -100,17 +90,9 @@ namespace Binance.Net
         public IBinanceClientMining Mining { get; }
         
         /// <summary>
-        /// Dust endpoints
+        /// Withdraw/deposit endpoints
         /// </summary>
-        public IBinanceClientDust Dust { get; }
-        /// <summary>
-        /// Withdraw endpoints
-        /// </summary>
-        public IBinanceClientWithdraw Withdraw { get; }
-        /// <summary>
-        /// Deposit endpoints
-        /// </summary>
-        public IBinanceClientDeposit Deposit { get; }
+        public IBinanceClientWithdrawDeposit WithdrawDeposit { get; }
 
         /// <summary>
         /// Brokerage endpoints
@@ -118,9 +100,14 @@ namespace Binance.Net
         public IBinanceClientBrokerage Brokerage { get; }
 
         /// <summary>
-        /// Futures endpoints
+        /// USDT-M futures endpoints
         /// </summary>
-        public IBinanceClientFutures Futures { get; }
+        public IBinanceClientFuturesUsdt FuturesUsdt { get; }
+
+        /// <summary>
+        /// Coin-M futures endpoints
+        /// </summary>
+        public IBinanceClientFuturesCoin FuturesCoin { get; }
         #endregion
 
         #region constructor/destructor
@@ -143,7 +130,8 @@ namespace Binance.Net
             AutoTimestampRecalculationInterval = options.AutoTimestampRecalculationInterval;
             TimestampOffset = options.TimestampOffset;
             DefaultReceiveWindow = options.ReceiveWindow;
-            _baseAddressFutures = options.FuturesBaseAddress;
+            _baseAddressFuturesUsdt = options.FuturesUsdtBaseAddress;
+            _baseAddressFuturesCoin = options.FuturesCoinBaseAddress;
 
             arraySerialization = ArrayParametersSerialization.MultipleValues;
             postParametersPosition = PostParameters.InBody;
@@ -152,19 +140,16 @@ namespace Binance.Net
 
             Spot = new BinanceClientSpot(log, this);
             Brokerage = new BinanceClientBrokerage(this);
-            Futures = new BinanceClientFutures(log, this);
+            FuturesCoin = new BinanceClientFuturesCoin(log, this);
+            FuturesUsdt = new BinanceClientFuturesUsdt(log, this);
 
-            Account = new BinanceClientAccount(this);
+            General = new BinanceClientGeneral(this);
             Margin = new BinanceClientMargin(this);
-            IsolatedMargin = new BinanceClientIsolatedMargin(this);
-            System = new BinanceClientSystem(log, this);
             Lending = new BinanceClientLending(this);
             Mining = new BinanceClientMining(this);
             
             SubAccount = new BinanceClientSubAccount(this);
-            Dust = new BinanceClientDust(this);
-            Withdraw = new BinanceClientWithdraw(this);
-            Deposit = new BinanceClientDeposit(this);
+            WithdrawDeposit = new BinanceClientWithdrawDeposit(this);
         }
         #endregion
 
@@ -202,6 +187,7 @@ namespace Binance.Net
             decimal? icebergQty = null,
             SideEffectType? sideEffectType = null,
             bool? isIsolated = null,
+            OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -244,6 +230,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("sideEffectType", sideEffectType == null ? null : JsonConvert.SerializeObject(sideEffectType, new SideEffectTypeConverter(false)));
             parameters.AddOptionalParameter("isIsolated", isIsolated);
+            parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await SendRequest<BinancePlacedOrder>(uri, HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
@@ -265,16 +252,38 @@ namespace Binance.Net
             if (err.Code == -1021)
             {
                 if (AutoTimestamp)
-                    System.GetServerTime(true);
+                    Spot.System.GetServerTime(true);
             }
             return err;
         }
 
         internal Error ParseErrorResponseInternal(JToken error) => ParseErrorResponse(error);
 
-        internal Uri GetUrl(bool isFutures, string endpoint, string api, string? version = null)
+        internal Uri GetUrlSpot(string endpoint, string api, string? version = null)
         {
-            var result = $"{(isFutures ? _baseAddressFutures : BaseAddress)}/{api}/";
+            var result = $"{BaseAddress}/{api}/";
+
+            if (!string.IsNullOrEmpty(version))
+                result += $"v{version}/";
+
+            result += endpoint;
+            return new Uri(result);
+        }
+
+        internal Uri GetUrlUsdtFutures(string endpoint, string api, string? version = null)
+        {
+            var result = $"{_baseAddressFuturesUsdt}/{api}/";
+
+            if (!string.IsNullOrEmpty(version))
+                result += $"v{version}/";
+
+            result += endpoint;
+            return new Uri(result);
+        }
+
+        internal Uri GetUrlCoinFutures(string endpoint, string api, string? version = null)
+        {
+            var result = $"{_baseAddressFuturesCoin}/{api}/";
 
             if (!string.IsNullOrEmpty(version))
                 result += $"v{version}/";
@@ -298,7 +307,7 @@ namespace Binance.Net
         internal async Task<WebCallResult<DateTime>> CheckAutoTimestamp(CancellationToken ct)
         {
             if (AutoTimestamp && (!TimeSynced || DateTime.UtcNow - LastTimeSync > AutoTimestampRecalculationInterval))
-                return await System.GetServerTimeAsync(TimeSynced, ct).ConfigureAwait(false);
+                return await Spot.System.GetServerTimeAsync(TimeSynced, ct).ConfigureAwait(false);
 
             return new WebCallResult<DateTime>(null, null, default, null);
         }
@@ -312,7 +321,7 @@ namespace Binance.Net
                 return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice);
 
             if (ExchangeInfo == null || LastExchangeInfoUpdate == null || (DateTime.UtcNow - LastExchangeInfoUpdate.Value).TotalMinutes > TradeRulesUpdateInterval.TotalMinutes)
-                await System.GetExchangeInfoAsync(ct).ConfigureAwait(false);
+                await Spot.System.GetExchangeInfoAsync(ct).ConfigureAwait(false);
 
             if (ExchangeInfo == null)
                 return BinanceTradeRuleResult.CreateFailed("Unable to retrieve trading rules, validation failed");

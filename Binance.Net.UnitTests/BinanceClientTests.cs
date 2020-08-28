@@ -38,7 +38,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateResponseClient(JsonConvert.SerializeObject(time), new BinanceClientOptions() { AutoTimestamp = false });
 
             // act
-            var result = client.System.GetServerTime();
+            var result = client.Spot.System.GetServerTime();
 
             // assert
             Assert.AreEqual(true, result.Success);
@@ -65,10 +65,10 @@ namespace Binance.Net.UnitTests
                 PriceChange = 2.456m,
                 PriceChangePercent = 2.789m,
                 TotalTrades = 123,
-                TotalTradedBaseAssetVolume = 3.123m,
+                Volume = 3.123m,
                 AskQuantity = 3.456m,
                 BidQuantity = 3.789m,
-                TotalTradedQuoteAssetVolume = 4.123m,
+                TotalTradedAlternateAssetVolume = 4.123m,
                 Symbol = "BNBBTC",
                 WeightedAveragePrice = 3.456m
             };
@@ -169,7 +169,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Account.GetAccountInfo();
+            var result = client.General.GetAccountInfo();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -373,7 +373,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Deposit.GetDepositHistory();
+            var result = client.WithdrawDeposit.GetDepositHistory();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -390,29 +390,29 @@ namespace Binance.Net.UnitTests
             {
                new BinanceKline()
                {
-                    QuoteAssetVolume = 0.1m,
+                    AlternateAssetVolume = 0.1m,
                     Close = 0.2m,
                     CloseTime = new DateTime(1970, 1, 1),
                     High = 0.3m,
                     Low = 0.4m,
                     Open = 0.5m,
                     OpenTime = new DateTime(1970, 1, 1),
-                    TakerBuyBaseAssetVolume = 0.6m,
-                    TakerBuyQuoteAssetVolume = 0.7m,
+                    TakerBuyVolume = 0.6m,
+                    TakerBuyAlternateAssetVolume = 0.7m,
                     TradeCount = 10,
                     Volume = 0.8m
                },
                new BinanceKline()
                {
-                   QuoteAssetVolume = 0.9m,
+                   AlternateAssetVolume = 0.9m,
                     Close = 1.0m,
                     CloseTime = new DateTime(1970, 1, 1),
                     High = 1.1m,
                     Low = 1.2m,
                     Open = 1.3m,
                     OpenTime = new DateTime(1970, 1, 1),
-                    TakerBuyBaseAssetVolume = 1.4m,
-                    TakerBuyQuoteAssetVolume = 1.5m,
+                    TakerBuyVolume = 1.4m,
+                    TakerBuyAlternateAssetVolume = 1.5m,
                    TradeCount = 20,
                     Volume = 1.6m
                }
@@ -582,7 +582,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Withdraw.GetWithdrawalHistory();
+            var result = client.WithdrawDeposit.GetWithdrawalHistory();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -721,7 +721,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Withdraw.Withdraw("BNBBTC", "test", 1, "x");
+            var result = client.WithdrawDeposit.Withdraw("BNBBTC", "test", 1, "x");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -743,7 +743,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Futures.Order.PlaceMultipleOrders(new []
+            var result = client.FuturesUsdt.Order.PlaceMultipleOrders(new []
             {
                 new BinanceFuturesBatchOrder()
                 {
@@ -807,7 +807,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Account.GetTradingStatus();
+            var result = client.General.GetTradingStatus();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -907,7 +907,7 @@ namespace Binance.Net.UnitTests
             TestHelpers.SetErrorWithResponse(client, "{\"msg\": \"Error!\", \"code\": 123}", HttpStatusCode.BadRequest);
 
             // act
-            var result = client.System.GetServerTime();
+            var result = client.Spot.System.GetServerTime();
 
             // assert
             Assert.IsFalse(result.Success);

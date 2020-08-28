@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces.SubClients.Futures;
 using Binance.Net.Objects.Futures.FuturesData;
-using Binance.Net.Objects.Spot.SpotData;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Logging;
@@ -22,7 +20,7 @@ namespace Binance.Net.SubClients.Futures
     /// <summary>
     /// Futures order endpoints
     /// </summary>
-    public class BinanceClientFuturesOrder : IBinanceClientFuturesOrders
+    public abstract class BinanceClientFuturesOrder : IBinanceClientFuturesOrders
     {
         // Orders
         private const string newOrderEndpoint = "order";
@@ -35,19 +33,32 @@ namespace Binance.Net.SubClients.Futures
         private const string openOrdersEndpoint = "openOrders";
         private const string allOrdersEndpoint = "allOrders";
         private const string countDownCancelAllEndpoint = "countdownCancelAll";
-        private const string myFuturesTradesEndpoint = "userTrades";
+        private const string forceOrdersEndpoint = "forceOrders";
 
-        private const string api = "fapi";
-        private const string signedVersion = "1";
+        /// <summary>
+        /// Api path
+        /// </summary>
+        protected abstract string Api { get; }
+        /// <summary>
+        /// Signed version
+        /// </summary>
+        protected const string SignedVersion = "1";
 
-        private readonly BinanceClient _baseClient;
-        private readonly BinanceClientFutures _futuresClient;
+        /// <summary>
+        /// Base client
+        /// </summary>
+        protected readonly BinanceClient BaseClient;
+        /// <summary>
+        /// Futures client
+        /// </summary>
+        protected readonly BinanceClientFutures FuturesClient;
+        
         private readonly Log _log;
 
         internal BinanceClientFuturesOrder(Log log, BinanceClient baseClient, BinanceClientFutures futuresClient)
         {
-            _baseClient = baseClient;
-            _futuresClient = futuresClient;
+            BaseClient = baseClient;
+            FuturesClient = futuresClient;
             _log = log;
         }
 
@@ -129,8 +140,6 @@ namespace Binance.Net.SubClients.Futures
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
-            symbol.ValidateBinanceSymbol();
-
             if (closePosition == true && positionSide != null)
             {
                 if (positionSide == PositionSide.Short && side == OrderSide.Sell)
@@ -140,11 +149,11 @@ namespace Binance.Net.SubClients.Futures
             }
 
 
-            var timestampResult = await _futuresClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<BinanceFuturesPlacedOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
-            var rulesCheck = await _futuresClient.CheckTradeRules(symbol, quantity, price, type, ct).ConfigureAwait(false);
+            var rulesCheck = await FuturesClient.CheckTradeRules(symbol, quantity, price, type, ct).ConfigureAwait(false);
             if (!rulesCheck.Passed)
             {
                 _log.Write(LogVerbosity.Warning, rulesCheck.ErrorMessage!);
@@ -153,14 +162,13 @@ namespace Binance.Net.SubClients.Futures
 
             quantity = rulesCheck.Quantity;
             price = rulesCheck.Price;
-
-
+            
             var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
                 { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
                 { "type", JsonConvert.SerializeObject(type, new OrderTypeConverter(false)) },
-                { "timestamp", _baseClient.GetTimestamp() }
+                { "timestamp", BaseClient.GetTimestamp() }
             };
             parameters.AddOptionalParameter("quantity", quantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
@@ -173,9 +181,9 @@ namespace Binance.Net.SubClients.Futures
             parameters.AddOptionalParameter("workingType", workingType == null ? null : JsonConvert.SerializeObject(workingType, new WorkingTypeConverter(false)));
             parameters.AddOptionalParameter("reduceOnly", reduceOnly?.ToString().ToLower());
             parameters.AddOptionalParameter("closePosition", closePosition?.ToString().ToLower());
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? BaseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceFuturesPlacedOrder>(_baseClient.GetUrl(true, newOrderEndpoint, api, signedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await BaseClient.SendRequestInternal<BinanceFuturesPlacedOrder>(FuturesClient.GetUrl(newOrderEndpoint, Api, SignedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
     
 
@@ -209,15 +217,15 @@ namespace Binance.Net.SubClients.Futures
             if (orders.Length <= 0 || orders.Length > 5)
                 throw new ArgumentException("Order list should be at least 1 and max 5 orders");
 
-            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
-            if (_baseClient.TradeRulesBehaviour != TradeRulesBehaviour.None)
+            if (BaseClient.TradeRulesBehaviour != TradeRulesBehaviour.None)
             {
                 foreach (var order in orders)
                 {
-                    var rulesCheck = await _futuresClient.CheckTradeRules(order.Symbol, order.Quantity, order.Price, order.Type, ct).ConfigureAwait(false);
+                    var rulesCheck = await FuturesClient.CheckTradeRules(order.Symbol, order.Quantity, order.Price, order.Type, ct).ConfigureAwait(false);
                     if (!rulesCheck.Passed)
                     {
                         _log.Write(LogVerbosity.Warning, rulesCheck.ErrorMessage!);
@@ -232,7 +240,7 @@ namespace Binance.Net.SubClients.Futures
 
             var parameters = new Dictionary<string, object>
             {
-                { "timestamp", _baseClient.GetTimestamp() }
+                { "timestamp", BaseClient.GetTimestamp() }
             };
 
             var parameterOrders = new Dictionary<string, object>[orders.Length];
@@ -262,9 +270,9 @@ namespace Binance.Net.SubClients.Futures
             }
 
             parameters.Add("batchOrders", JsonConvert.SerializeObject(parameterOrders));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? BaseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var response = await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesMultipleOrderPlaceResult>>(_baseClient.GetUrl(true, multipleNewOrdersEndpoint, api, signedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            var response = await BaseClient.SendRequestInternal<IEnumerable<BinanceFuturesMultipleOrderPlaceResult>>(FuturesClient.GetUrl(multipleNewOrdersEndpoint, Api, SignedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
             if (!response.Success)
                 return WebCallResult<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>.CreateErrorResult(response.ResponseStatusCode, response.ResponseHeaders, response.Error!);
 
@@ -306,24 +314,23 @@ namespace Binance.Net.SubClients.Futures
         /// <returns>The specific order</returns>
         public async Task<WebCallResult<BinanceFuturesOrder>> GetOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
-            symbol.ValidateBinanceSymbol();
             if (orderId == null && origClientOrderId == null)
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
 
-            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<BinanceFuturesOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
-                { "timestamp", _baseClient.GetTimestamp() }
+                { "timestamp", BaseClient.GetTimestamp() }
             };
             parameters.AddOptionalParameter("orderId", orderId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? BaseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceFuturesOrder>(_baseClient.GetUrl(true, queryOrderEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await BaseClient.SendRequestInternal<BinanceFuturesOrder>(FuturesClient.GetUrl(queryOrderEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
 
@@ -355,8 +362,7 @@ namespace Binance.Net.SubClients.Futures
         /// <returns>Id's for canceled order</returns>
         public async Task<WebCallResult<BinanceFuturesCancelOrder>> CancelOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, string? newClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
-            symbol.ValidateBinanceSymbol();
-            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<BinanceFuturesCancelOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
@@ -366,14 +372,14 @@ namespace Binance.Net.SubClients.Futures
             var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
-                { "timestamp", _baseClient.GetTimestamp() }
+                { "timestamp", BaseClient.GetTimestamp() }
             };
             parameters.AddOptionalParameter("orderId", orderId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? BaseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceFuturesCancelOrder>(_baseClient.GetUrl(true, cancelOrderEndpoint, api, signedVersion), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
+            return await BaseClient.SendRequestInternal<BinanceFuturesCancelOrder>(FuturesClient.GetUrl(cancelOrderEndpoint, Api, SignedVersion), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -398,19 +404,18 @@ namespace Binance.Net.SubClients.Futures
         /// <returns>Id's for canceled order</returns>
         public async Task<WebCallResult<BinanceFuturesCancelAllOrders>> CancelAllOrdersAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default)
         {
-            symbol.ValidateBinanceSymbol();
-            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<BinanceFuturesCancelAllOrders>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
-                { "timestamp", _baseClient.GetTimestamp() }
+                { "timestamp", BaseClient.GetTimestamp() }
             };
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? BaseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceFuturesCancelAllOrders>(_baseClient.GetUrl(true, cancelAllOrdersEndpoint, api, signedVersion), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
+            return await BaseClient.SendRequestInternal<BinanceFuturesCancelAllOrders>(FuturesClient.GetUrl(cancelAllOrdersEndpoint, Api, SignedVersion), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -439,26 +444,26 @@ namespace Binance.Net.SubClients.Futures
         /// <returns>Countdown result</returns>
         public async Task<WebCallResult<BinanceFuturesCountDownResult>> CancelAllOrdersAfterTimeoutAsync(string symbol, TimeSpan countDownTime, long? receiveWindow = null, CancellationToken ct = default)
         {
-            symbol.ValidateBinanceSymbol();
-            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<BinanceFuturesCountDownResult>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
+                { "timestamp", BaseClient.GetTimestamp() },
                 { "countdownTime", (int)countDownTime.TotalMilliseconds }
             };
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? BaseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceFuturesCountDownResult>(_baseClient.GetUrl(true, countDownCancelAllEndpoint, api, signedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await BaseClient.SendRequestInternal<BinanceFuturesCountDownResult>(FuturesClient.GetUrl(countDownCancelAllEndpoint, Api, SignedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
 
         #region Cancel Multiple Orders
         /// <summary>
-        /// Cancels muliple orders
+        /// Cancels multiple orders
         /// </summary>
         /// <param name="symbol">The symbol the order is for</param>
         /// <param name="orderIdList">The list of order ids to cancel</param>
@@ -469,7 +474,7 @@ namespace Binance.Net.SubClients.Futures
         public WebCallResult<List<BinanceFuturesCancelOrder>> CancelMultipleOrders(string symbol, List<long>? orderIdList = null, List<string>? origClientOrderIdList = null, long? receiveWindow = null, CancellationToken ct = default) => CancelMultipleOrdersAsync(symbol, orderIdList, origClientOrderIdList, receiveWindow, ct).Result;
 
         /// <summary>
-        /// Cancels muliple orders
+        /// Cancels multiple orders
         /// </summary>
         /// <param name="symbol">The symbol the order is for</param>
         /// <param name="orderIdList">The list of order ids to cancel</param>
@@ -479,8 +484,7 @@ namespace Binance.Net.SubClients.Futures
         /// <returns>Id's for canceled order</returns>
         public async Task<WebCallResult<List<BinanceFuturesCancelOrder>>> CancelMultipleOrdersAsync(string symbol, List<long>? orderIdList = null, List<string>? origClientOrderIdList = null, long? receiveWindow = null, CancellationToken ct = default)
         {
-            symbol.ValidateBinanceSymbol();
-            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<List<BinanceFuturesCancelOrder>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
@@ -496,7 +500,7 @@ namespace Binance.Net.SubClients.Futures
             var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
-                { "timestamp", _baseClient.GetTimestamp() }
+                { "timestamp", BaseClient.GetTimestamp() }
             };
 
             if (orderIdList != null)
@@ -505,9 +509,9 @@ namespace Binance.Net.SubClients.Futures
             if (origClientOrderIdList != null)
                 parameters.AddOptionalParameter("origClientOrderIdList", $"[{string.Join(",", origClientOrderIdList.Select(id => $"\"{id}\""))}]");
 
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? BaseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<List<BinanceFuturesCancelOrder>>(_baseClient.GetUrl(true, cancelMultipleOrdersEndpoint, api, signedVersion), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
+            return await BaseClient.SendRequestInternal<List<BinanceFuturesCancelOrder>>(FuturesClient.GetUrl(cancelMultipleOrdersEndpoint, Api, SignedVersion), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -536,25 +540,23 @@ namespace Binance.Net.SubClients.Futures
         /// <returns>The specific order</returns>
         public async Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetOpenOrdersAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
-            symbol.ValidateBinanceSymbol();
-
             if (orderId == null && origClientOrderId == null)
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
 
-            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<IEnumerable<BinanceFuturesOrder>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
-                { "timestamp", _baseClient.GetTimestamp() }
+                { "timestamp", BaseClient.GetTimestamp() }
             };
             parameters.AddOptionalParameter("orderId", orderId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? BaseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesOrder>>(_baseClient.GetUrl(true, openOrderEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await BaseClient.SendRequestInternal<IEnumerable<BinanceFuturesOrder>>(FuturesClient.GetUrl(openOrderEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -579,19 +581,18 @@ namespace Binance.Net.SubClients.Futures
         /// <returns>List of open orders</returns>
         public async Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetOpenOrdersAsync(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
         {
-            symbol?.ValidateBinanceSymbol();
-            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<IEnumerable<BinanceFuturesOrder>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
-                { "timestamp", _baseClient.GetTimestamp() }
+                { "timestamp", BaseClient.GetTimestamp() }
             };
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? BaseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("symbol", symbol);
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesOrder>>(_baseClient.GetUrl(true, openOrdersEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await BaseClient.SendRequestInternal<IEnumerable<BinanceFuturesOrder>>(FuturesClient.GetUrl(openOrdersEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -624,75 +625,68 @@ namespace Binance.Net.SubClients.Futures
         /// <returns>List of orders</returns>
         public async Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetAllOrdersAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
-            symbol.ValidateBinanceSymbol();
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);
-            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<IEnumerable<BinanceFuturesOrder>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
-                { "timestamp", _baseClient.GetTimestamp() }
+                { "timestamp", BaseClient.GetTimestamp() }
             };
             parameters.AddOptionalParameter("orderId", orderId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("startTime", startTime.HasValue ? JsonConvert.SerializeObject(startTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? BaseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesOrder>>(_baseClient.GetUrl(true, allOrdersEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await BaseClient.SendRequestInternal<IEnumerable<BinanceFuturesOrder>>(FuturesClient.GetUrl(allOrdersEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
 
-        #region Account Trade List
+        #region User's Force Orders
 
         /// <summary>
-        /// Gets all user trades for provided symbol
+        /// Gets a list of users forced orders
         /// </summary>
-        /// <param name="symbol">Symbol to get trades for</param>
-        /// <param name="limit">The max number of results</param>
-        /// <param name="startTime">Orders newer than this date will be retrieved</param>
-        /// <param name="endTime">Orders older than this date will be retrieved</param>
-        /// <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
+        /// <param name="symbol">The symbol to get forced orders for</param>
+        /// <param name="closeType">Filter by reason for close</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>List of trades</returns>
-        public WebCallResult<IEnumerable<BinanceTrade>> GetMyTrades(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? receiveWindow = null, CancellationToken ct = default) => GetMyTradesAsync(symbol, startTime, endTime, limit, fromId, receiveWindow, ct).Result;
+        /// <returns>List of forced orders</returns>
+        public WebCallResult<IEnumerable<BinanceFuturesOrder>> GetForcedOrders(string? symbol = null, AutoCloseType? closeType = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default) => GetForcedOrdersAsync(symbol, closeType, startTime, endTime, receiveWindow, ct).Result;
 
         /// <summary>
-        /// Gets all user trades for provided symbol
+        /// Gets a list of users forced orders
         /// </summary>
-        /// <param name="symbol">Symbol to get trades for</param>
-        /// <param name="limit">The max number of results</param>
-        /// <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
-        /// <param name="startTime">Orders newer than this date will be retrieved</param>
-        /// <param name="endTime">Orders older than this date will be retrieved</param>
+        /// <param name="symbol">The symbol to get forced orders for</param>
+        /// <param name="closeType">Filter by reason for close</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>List of trades</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceTrade>>> GetMyTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? receiveWindow = null, CancellationToken ct = default)
+        /// <returns>List of forced orders</returns>
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetForcedOrdersAsync(string? symbol = null, AutoCloseType? closeType = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default)
         {
-            symbol.ValidateBinanceSymbol();
-            limit?.ValidateIntBetween(nameof(limit), 1, 1000);
-
-            var timestampResult = await _futuresClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
-                return new WebCallResult<IEnumerable<BinanceTrade>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<IEnumerable<BinanceFuturesOrder>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
-                { "symbol", symbol },
-                { "timestamp", _baseClient.GetTimestamp() }
+                { "timestamp", BaseClient.GetTimestamp() }
             };
-            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("fromId", fromId?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? BaseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("symbol", symbol);
+            parameters.AddOptionalParameter("autoCloseType", closeType.HasValue ? JsonConvert.SerializeObject(closeType, new AutoCloseTypeConverter(false)) : null);
             parameters.AddOptionalParameter("startTime", startTime.HasValue ? JsonConvert.SerializeObject(startTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceTrade>>(_baseClient.GetUrl(true, myFuturesTradesEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            
+            return await BaseClient.SendRequestInternal<IEnumerable<BinanceFuturesOrder>>(FuturesClient.GetUrl(forceOrdersEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion

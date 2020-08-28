@@ -22,7 +22,7 @@ using Newtonsoft.Json.Linq;
 namespace Binance.Net.SocketSubClients
 {
     /// <summary>
-    /// Spot subscriptions
+    /// Spot streams
     /// </summary>
     public class BinanceSocketClientSpot : IBinanceSocketClientSpot
     {
@@ -50,14 +50,12 @@ namespace Binance.Net.SocketSubClients
 
         private readonly BinanceSocketClient _baseClient;
         private readonly Log _log;
-        private readonly string _baseCombinedAddress;
         private readonly string _baseAddress;
 
         internal BinanceSocketClientSpot(Log log, BinanceSocketClient baseClient, BinanceSocketClientOptions options)
         {
             _log = log;
             _baseClient = baseClient;
-            _baseCombinedAddress = options.BaseSocketCombinedAddress;
             _baseAddress = options.BaseAddress;
         }
 
@@ -692,17 +690,16 @@ namespace Binance.Net.SocketSubClients
 
             return await Subscribe(listenKey, false, handler).ConfigureAwait(false);
         }
+        #endregion
 
         private async Task<CallResult<UpdateSubscription>> Subscribe<T>(string url, bool combined, Action<T> onData)
         {
             if (combined)
-                url = _baseCombinedAddress + "stream?streams=" + url;
+                url = _baseAddress + "stream?streams=" + url;
             else
-                url = _baseAddress + url;
+                url = _baseAddress + "ws/" + url;
 
             return await _baseClient.SubscribeInternal(url, onData).ConfigureAwait(false);
         }
-
-        #endregion
     }
 }

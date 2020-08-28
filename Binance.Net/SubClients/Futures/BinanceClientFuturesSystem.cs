@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Interfaces.SubClients.Futures;
@@ -16,13 +14,16 @@ namespace Binance.Net.SubClients.Futures
     /// <summary>
     /// Futures system endpoints
     /// </summary>
-    public class BinanceClientFuturesSystem : IBinanceClientFuturesSystem
+    public abstract class BinanceClientFuturesSystem : IBinanceClientFuturesSystem
     {
         private const string pingEndpoint = "ping";
         private const string checkTimeEndpoint = "time";
         private const string exchangeInfoEndpoint = "exchangeInfo";
 
-        private const string api = "fapi";
+        /// <summary>
+        /// Api path
+        /// </summary>
+        protected abstract string Api { get; }
         private const string publicVersion = "1";
 
         private readonly BinanceClient _baseClient;
@@ -52,7 +53,7 @@ namespace Binance.Net.SubClients.Futures
         public async Task<WebCallResult<long>> PingAsync(CancellationToken ct = default)
         {
             var sw = Stopwatch.StartNew();
-            var result = await _baseClient.SendRequestInternal<object>(_baseClient.GetUrl(true, pingEndpoint, api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<object>(_futuresClient.GetUrl(pingEndpoint, Api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
             sw.Stop();
             return new WebCallResult<long>(result.ResponseStatusCode, result.ResponseHeaders, result.Error == null ? sw.ElapsedMilliseconds : 0, result.Error);
         }
@@ -77,49 +78,9 @@ namespace Binance.Net.SubClients.Futures
         /// <returns>Server time</returns>
         public async Task<WebCallResult<DateTime>> GetServerTimeAsync(bool resetAutoTimestamp = false, CancellationToken ct = default)
         {
-            var url = _baseClient.GetUrl(true, checkTimeEndpoint, api, publicVersion);
-            if (!_baseClient.AutoTimestamp)
-            {
-                var result = await _baseClient.SendRequestInternal<BinanceCheckTime>(url, HttpMethod.Get, ct).ConfigureAwait(false);
-                return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, result.Data?.ServerTime ?? default, result.Error);
-            }
-            else
-            {
-                var localTime = DateTime.UtcNow;
-                var result = await _baseClient.SendRequestInternal<BinanceCheckTime>(url, HttpMethod.Get, ct).ConfigureAwait(false);
-                if (!result)
-                    return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, default, result.Error);
-
-                if (_futuresClient.TimeSynced && !resetAutoTimestamp)
-                    return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.ServerTime, result.Error);
-
-                if (_baseClient.TotalRequestsMade == 1)
-                {
-                    // If this was the first request make another one to calculate the offset since the first one can be slower
-                    localTime = DateTime.UtcNow;
-                    result = await _baseClient.SendRequestInternal<BinanceCheckTime>(url, HttpMethod.Get, ct).ConfigureAwait(false);
-                    if (!result)
-                        return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, default, result.Error);
-                }
-
-                // Calculate time offset between local and server
-                var offset = (result.Data.ServerTime - localTime).TotalMilliseconds;
-                if (offset >= 0 && offset < 500)
-                {
-                    // Small offset, probably mainly due to ping. Don't adjust time
-                    _futuresClient.CalculatedTimeOffset = 0;
-                    _futuresClient.TimeSynced = true;
-                    _futuresClient.LastTimeSync = DateTime.UtcNow;
-                    _log.Write(LogVerbosity.Info, $"Time offset between 0 and 500ms ({offset}ms), no adjustment needed");
-                    return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.ServerTime, result.Error);
-                }
-
-                _futuresClient.CalculatedTimeOffset = (result.Data.ServerTime - localTime).TotalMilliseconds;
-                _futuresClient.TimeSynced = true;
-                _futuresClient.LastTimeSync = DateTime.UtcNow;
-                _log.Write(LogVerbosity.Info, $"Time offset set to {_futuresClient.CalculatedTimeOffset}ms");
-                return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.ServerTime, result.Error);
-            }
+            var url = _futuresClient.GetUrl(checkTimeEndpoint, Api, publicVersion);
+            var result = await _baseClient.SendRequestInternal<BinanceCheckTime>(url, HttpMethod.Get, ct).ConfigureAwait(false);
+            return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, result.Data?.ServerTime ?? default, result.Error);
         }
 
         #endregion
@@ -140,7 +101,7 @@ namespace Binance.Net.SubClients.Futures
         /// <returns>Exchange info</returns>
         public async Task<WebCallResult<BinanceFuturesExchangeInfo>> GetExchangeInfoAsync(CancellationToken ct = default)
         {
-            var exchangeInfoResult = await _baseClient.SendRequestInternal<BinanceFuturesExchangeInfo>(_baseClient.GetUrl(true, exchangeInfoEndpoint, api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
+            var exchangeInfoResult = await _baseClient.SendRequestInternal<BinanceFuturesExchangeInfo>(_futuresClient.GetUrl(exchangeInfoEndpoint, Api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
             if (!exchangeInfoResult)
                 return exchangeInfoResult;
 

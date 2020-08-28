@@ -22,7 +22,7 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// The last funding rate
         /// </summary>
         [JsonProperty("lastFundingRate")]
-        public decimal FundingRate { get; set; }
+        public decimal? FundingRate { get; set; }
         /// <summary>
         /// The time the funding rate is applied
         /// </summary>
@@ -34,5 +34,20 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// </summary>
         [JsonConverter(typeof(TimestampConverter))]
         public DateTime Time { get; set; }
+    }
+
+    /// <summary>
+    /// Mark price for Coin-M future
+    /// </summary>
+    public class BinanceFuturesCoinMarkPrice: BinanceFuturesMarkPrice
+    {
+        /// <summary>
+        /// The pair
+        /// </summary>
+        public string Pair { get; set; } = "";
+        /// <summary>
+        /// Estimated settle price
+        /// </summary>
+        public decimal EstimatedSettlePrice { get; set; }
     }
 }

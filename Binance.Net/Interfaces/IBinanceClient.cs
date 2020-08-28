@@ -3,6 +3,7 @@ using Binance.Net.Interfaces.SubClients.Futures;
 using Binance.Net.Interfaces.SubClients.IsolatedMargin;
 using Binance.Net.Interfaces.SubClients.Margin;
 using Binance.Net.Interfaces.SubClients.Spot;
+using Binance.Net.SubClients;
 using CryptoExchange.Net.Interfaces;
 
 namespace Binance.Net.Interfaces
@@ -13,14 +14,9 @@ namespace Binance.Net.Interfaces
     public interface IBinanceClient: IRestClient
     {
         /// <summary>
-        /// System endpoints
+        /// General endpoints
         /// </summary>
-        IBinanceClientSystem System { get; }
-
-        /// <summary>
-        /// Account endpoints
-        /// </summary>
-        IBinanceClientAccount Account { get; }
+        IBinanceClientGeneral General { get; }
 
         /// <summary>
         /// Sub account endpoints
@@ -28,14 +24,9 @@ namespace Binance.Net.Interfaces
         IBinanceClientSubAccount SubAccount { get; }
 
         /// <summary>
-        /// Margin endpoints
+        /// (Isolated) Margin endpoints
         /// </summary>
         IBinanceClientMargin Margin { get; }
-
-        /// <summary>
-        /// Isolated Margin endpoints
-        /// </summary>
-        IBinanceClientIsolatedMargin IsolatedMargin { get; }
 
         /// <summary>
         /// Spot endpoints
@@ -53,19 +44,9 @@ namespace Binance.Net.Interfaces
         IBinanceClientMining Mining { get; }
 
         /// <summary>
-        /// Dust endpoints
+        /// Withdraw/Deposit endpoints
         /// </summary>
-        IBinanceClientDust Dust { get; }
-
-        /// <summary>
-        /// Withdraw endpoints
-        /// </summary>
-        IBinanceClientWithdraw Withdraw { get; }
-
-        /// <summary>
-        /// Deposit endpoints
-        /// </summary>
-        IBinanceClientDeposit Deposit { get; }
+        IBinanceClientWithdrawDeposit WithdrawDeposit { get; }
 
         /// <summary>
         /// Brokerage endpoints
@@ -73,9 +54,13 @@ namespace Binance.Net.Interfaces
         IBinanceClientBrokerage Brokerage { get; }
 
         /// <summary>
-        /// Futures endpoints
+        /// Usdt-M futures endpoints
         /// </summary>
-        IBinanceClientFutures Futures { get; }
+        IBinanceClientFuturesUsdt FuturesUsdt { get; }
+        /// <summary>
+        /// Coin-M futures endpoints
+        /// </summary>
+        IBinanceClientFuturesCoin FuturesCoin { get; }
 
         /// <summary>
         /// Set the API key and secret

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Binance.Net.Objects.Futures.MarketStream
 {
     /// <summary>
-    /// TODO
+    /// Mini tick data
     /// </summary>
     public class BinanceFuturesStreamMiniTick : IBinanceMiniTick
     {
@@ -42,13 +42,13 @@ namespace Binance.Net.Objects.Futures.MarketStream
         /// Total traded base asset volume
         /// </summary>
         [JsonProperty("v")]
-        public decimal TotalTradedBaseAssetVolume { get; set; }
+        public decimal Volume { get; set; }
         
         /// <summary>
         /// Total traded quote asset volume
         /// </summary>
         [JsonProperty("q")]
-        public decimal TotalTradedQuoteAssetVolume { get; set; }
+        public decimal TotalTradedAlternateAssetVolume { get; set; }
         
     }
 }

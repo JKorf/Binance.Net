@@ -7,26 +7,10 @@ using CryptoExchange.Net.Objects;
 namespace Binance.Net.Interfaces.SubClients.Futures
 {
     /// <summary>
-    /// Futures account interface
+    /// USDT-M futures account endpoints
     /// </summary>
-    public interface IBinanceClientFuturesAccount
+    public interface IBinanceClientFuturesUsdtAccount
     {
-        /// <summary>
-        /// Gets account balances
-        /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The account information</returns>
-        WebCallResult<IEnumerable<BinanceFuturesAccountBalance>> GetFuturesAccountBalance(long? receiveWindow = null, CancellationToken ct = default);
-
-        /// <summary>.
-        /// Gets account balances
-        /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The account information</returns>
-        Task<WebCallResult<IEnumerable<BinanceFuturesAccountBalance>>> GetFuturesAccountBalanceAsync(long? receiveWindow = null, CancellationToken ct = default);
-
         /// <summary>
         /// Gets account information, including balances
         /// </summary>
@@ -42,5 +26,21 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="ct">Cancellation token</param>
         /// <returns>The account information</returns>
         Task<WebCallResult<BinanceFuturesAccountInfo>> GetAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets account balances
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The account information</returns>
+        WebCallResult<IEnumerable<BinanceFuturesAccountBalance>> GetBalance(long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>.
+        /// Gets account balances
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The account information</returns>
+        Task<WebCallResult<IEnumerable<BinanceFuturesAccountBalance>>> GetBalanceAsync(long? receiveWindow = null, CancellationToken ct = default);
     }
 }

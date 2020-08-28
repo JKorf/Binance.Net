@@ -3,12 +3,11 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Interfaces.SubClients.IsolatedMargin;
-using Binance.Net.Interfaces.SubClients.Margin;
 using Binance.Net.Objects.Spot.UserData;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 
-namespace Binance.Net.SubClients.IsolatedMargin
+namespace Binance.Net.SubClients.Margin
 {
     /// <summary>
     /// Margin user stream endpoints
@@ -60,7 +59,7 @@ namespace Binance.Net.SubClients.IsolatedMargin
                 {"symbol", symbol}
             };
 
-            var result = await _baseClient.SendRequestInternal<BinanceListenKey>(_baseClient.GetUrl(false, getListenKeyEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceListenKey>(_baseClient.GetUrlSpot(getListenKeyEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters).ConfigureAwait(false);
             return new WebCallResult<string>(result.ResponseStatusCode, result.ResponseHeaders, result.Data?.ListenKey, result.Error);
         }
 
@@ -99,7 +98,7 @@ namespace Binance.Net.SubClients.IsolatedMargin
                 {"symbol", symbol}
             };
 
-            return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrl(false, keepListenKeyAliveEndpoint, "sapi", "1"), HttpMethod.Put, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrlSpot(keepListenKeyAliveEndpoint, "sapi", "1"), HttpMethod.Put, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -135,7 +134,7 @@ namespace Binance.Net.SubClients.IsolatedMargin
                 {"symbol", symbol}
             };
 
-            return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrl(false, closeListenKeyEndpoint, "sapi", "1"), HttpMethod.Delete, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrlSpot(closeListenKeyEndpoint, "sapi", "1"), HttpMethod.Delete, ct, parameters).ConfigureAwait(false);
         }
 
         #endregion

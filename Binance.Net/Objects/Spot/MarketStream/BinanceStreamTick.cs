@@ -84,12 +84,12 @@ namespace Binance.Net.Objects.Spot.MarketStream
         /// Total traded volume in the base asset
         /// </summary>
         [JsonProperty("v")]
-        public decimal TotalTradedBaseAssetVolume { get; set; }
+        public decimal Volume { get; set; }
         /// <summary>
         /// Total traded volume in the quote asset
         /// </summary>
         [JsonProperty("q")]
-        public decimal TotalTradedQuoteAssetVolume { get; set; }
+        public decimal TotalTradedAlternateAssetVolume { get; set; }
         /// <summary>
         /// The first trade id of today
         /// </summary>

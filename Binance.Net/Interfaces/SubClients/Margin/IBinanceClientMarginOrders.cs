@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Enums;
+using Binance.Net.Objects.Spot.MarginData;
 using Binance.Net.Objects.Spot.SpotData;
 using CryptoExchange.Net.Objects;
 
@@ -28,6 +29,7 @@ namespace Binance.Net.Interfaces.SubClients.Margin
         /// <param name="icebergQuantity">Used for iceberg orders</param>
         /// <param name="sideEffectType">Side effect type for this order</param>
         /// <param name="isIsolated">For isolated margin or not</param>
+        /// <param name="orderResponseType">Used for the response JSON</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed order</returns>
@@ -43,6 +45,7 @@ namespace Binance.Net.Interfaces.SubClients.Margin
             decimal? icebergQuantity = null,
             SideEffectType? sideEffectType = null,
             bool? isIsolated = null,
+            OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
             CancellationToken ct = default);
 
@@ -61,6 +64,7 @@ namespace Binance.Net.Interfaces.SubClients.Margin
         /// <param name="icebergQuantity">Used for iceberg orders</param>
         /// <param name="sideEffectType">Side effect type for this order</param>
         /// <param name="isIsolated">For isolated margin or not</param>
+        /// <param name="orderResponseType">Used for the response JSON</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed order</returns>
@@ -76,6 +80,7 @@ namespace Binance.Net.Interfaces.SubClients.Margin
             decimal? icebergQuantity = null,
             SideEffectType? sideEffectType = null,
             bool? isIsolated = null,
+            OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
             CancellationToken ct = default);
 
@@ -204,5 +209,6 @@ namespace Binance.Net.Interfaces.SubClients.Margin
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of margin account trades</returns>
         Task<WebCallResult<IEnumerable<BinanceTrade>>> GetMyMarginAccountTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, bool? isIsolated = null, long? receiveWindow = null, CancellationToken ct = default);
+
     }
 }

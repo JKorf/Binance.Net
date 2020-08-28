@@ -35,11 +35,11 @@ namespace Binance.Net.SubClients.Spot
         private const string myTradesEndpoint = "myTrades";
 
         // OCO orders
-        private const string newOCOOrderEndpoint = "order/oco";
-        private const string cancelOCOOrderEndpoint = "orderList";
-        private const string getOCOOrderEndpoint = "orderList";
-        private const string getAllOCOOrderEndpoint = "allOrderList";
-        private const string getOpenOCOOrderEndpoint = "openOrderList";
+        private const string newOcoOrderEndpoint = "order/oco";
+        private const string cancelOcoOrderEndpoint = "orderList";
+        private const string getOcoOrderEndpoint = "orderList";
+        private const string getAllOcoOrderEndpoint = "allOrderList";
+        private const string getOpenOcoOrderEndpoint = "openOrderList";
 
         private readonly BinanceClient _baseClient;
         private readonly Log _log;
@@ -65,6 +65,7 @@ namespace Binance.Net.SubClients.Spot
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
         /// <param name="icebergQty">User for iceberg orders</param>
+        /// <param name="orderResponseType">Used for the response JSON</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed test order</returns>
@@ -78,8 +79,9 @@ namespace Binance.Net.SubClients.Spot
             TimeInForce? timeInForce = null,
             decimal? stopPrice = null,
             decimal? icebergQty = null,
+            OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
-            CancellationToken ct = default) => PlaceTestOrderAsync(symbol, side, type, quantity, quoteOrderQuantity, newClientOrderId, price, timeInForce, stopPrice, icebergQty, receiveWindow, ct).Result;
+            CancellationToken ct = default) => PlaceTestOrderAsync(symbol, side, type, quantity, quoteOrderQuantity, newClientOrderId, price, timeInForce, stopPrice, icebergQty, orderResponseType, receiveWindow, ct).Result;
 
         /// <summary>
         /// Places a new test order. Test orders are not actually being executed and just test the functionality.
@@ -94,6 +96,7 @@ namespace Binance.Net.SubClients.Spot
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
         /// <param name="icebergQty">User for iceberg orders</param>
+        /// <param name="orderResponseType">Used for the response JSON</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed test order</returns>
@@ -107,10 +110,11 @@ namespace Binance.Net.SubClients.Spot
             TimeInForce? timeInForce = null,
             decimal? stopPrice = null,
             decimal? icebergQty = null,
+            OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
-            return await _baseClient.PlaceOrderInternal(_baseClient.GetUrl(false, newTestOrderEndpoint, api, signedVersion),
+            return await _baseClient.PlaceOrderInternal(_baseClient.GetUrlSpot(newTestOrderEndpoint, api, signedVersion),
                 symbol,
                 side,
                 type,
@@ -123,6 +127,7 @@ namespace Binance.Net.SubClients.Spot
                 icebergQty,
                 null,
                 null,
+                orderResponseType,
                 receiveWindow,
                 ct).ConfigureAwait(false);
         }
@@ -144,6 +149,7 @@ namespace Binance.Net.SubClients.Spot
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
         /// <param name="icebergQty">Used for iceberg orders</param>
+        /// <param name="orderResponseType">Used for the response JSON</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed order</returns>
@@ -158,8 +164,9 @@ namespace Binance.Net.SubClients.Spot
             TimeInForce? timeInForce = null,
             decimal? stopPrice = null,
             decimal? icebergQty = null,
+            OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
-            CancellationToken ct = default) => PlaceOrderAsync(symbol, side, type, quantity, quoteOrderQuantity, newClientOrderId, price, timeInForce, stopPrice, icebergQty, receiveWindow, ct).Result;
+            CancellationToken ct = default) => PlaceOrderAsync(symbol, side, type, quantity, quoteOrderQuantity, newClientOrderId, price, timeInForce, stopPrice, icebergQty, orderResponseType, receiveWindow, ct).Result;
 
         /// <summary>
         /// Places a new order
@@ -174,6 +181,7 @@ namespace Binance.Net.SubClients.Spot
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
         /// <param name="icebergQty">Used for iceberg orders</param>
+        /// <param name="orderResponseType">Used for the response JSON</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed order</returns>
@@ -187,10 +195,11 @@ namespace Binance.Net.SubClients.Spot
             TimeInForce? timeInForce = null,
             decimal? stopPrice = null,
             decimal? icebergQty = null,
+            OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
-            return await _baseClient.PlaceOrderInternal(_baseClient.GetUrl(false, newOrderEndpoint, api, signedVersion),
+            return await _baseClient.PlaceOrderInternal(_baseClient.GetUrlSpot(newOrderEndpoint, api, signedVersion),
                 symbol,
                 side,
                 type,
@@ -203,6 +212,7 @@ namespace Binance.Net.SubClients.Spot
                 icebergQty,
                 null,
                 null,
+                orderResponseType,
                 receiveWindow,
                 ct).ConfigureAwait(false);
         }
@@ -253,7 +263,7 @@ namespace Binance.Net.SubClients.Spot
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceCanceledOrder>(_baseClient.GetUrl(false, cancelOrderEndpoint, api, signedVersion), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceCanceledOrder>(_baseClient.GetUrlSpot(cancelOrderEndpoint, api, signedVersion), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -292,7 +302,7 @@ namespace Binance.Net.SubClients.Spot
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceCancelledId>>(_baseClient.GetUrl(false, cancelAllOpenOrderEndpoint, api, signedVersion), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceCancelledId>>(_baseClient.GetUrlSpot(cancelAllOpenOrderEndpoint, api, signedVersion), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
         }
         #endregion
 
@@ -337,7 +347,7 @@ namespace Binance.Net.SubClients.Spot
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceOrder>(_baseClient.GetUrl(false, queryOrderEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceOrder>(_baseClient.GetUrlSpot(queryOrderEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -374,7 +384,7 @@ namespace Binance.Net.SubClients.Spot
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("symbol", symbol);
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceOrder>>(_baseClient.GetUrl(false, openOrdersEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceOrder>>(_baseClient.GetUrlSpot(openOrdersEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -424,7 +434,7 @@ namespace Binance.Net.SubClients.Spot
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceOrder>>(_baseClient.GetUrl(false, allOrdersEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceOrder>>(_baseClient.GetUrlSpot(allOrdersEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -449,7 +459,7 @@ namespace Binance.Net.SubClients.Spot
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Order list info</returns>
-        public WebCallResult<BinanceOrderOcoList> PlaceOCOOrder(
+        public WebCallResult<BinanceOrderOcoList> PlaceOcoOrder(
             string symbol,
             OrderSide side,
             decimal quantity,
@@ -463,7 +473,7 @@ namespace Binance.Net.SubClients.Spot
             decimal? stopIcebergQuantity = null,
             TimeInForce? stopLimitTimeInForce = null,
             int? receiveWindow = null,
-            CancellationToken ct = default) => PlaceOCOOrderAsync(symbol, side, quantity, price, stopPrice, stopLimitPrice, listClientOrderId, limitClientOrderId, stopClientOrderId, limitIcebergQuantity, stopIcebergQuantity, stopLimitTimeInForce, receiveWindow, ct).Result;
+            CancellationToken ct = default) => PlaceOcoOrderAsync(symbol, side, quantity, price, stopPrice, stopLimitPrice, listClientOrderId, limitClientOrderId, stopClientOrderId, limitIcebergQuantity, stopIcebergQuantity, stopLimitTimeInForce, receiveWindow, ct).Result;
 
         /// <summary>
         /// Places a new OCO(One cancels other) order
@@ -483,7 +493,7 @@ namespace Binance.Net.SubClients.Spot
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Order list info</returns>
-        public async Task<WebCallResult<BinanceOrderOcoList>> PlaceOCOOrderAsync(string symbol,
+        public async Task<WebCallResult<BinanceOrderOcoList>> PlaceOcoOrderAsync(string symbol,
             OrderSide side,
             decimal quantity,
             decimal price,
@@ -528,7 +538,7 @@ namespace Binance.Net.SubClients.Spot
             parameters.AddOptionalParameter("stopLimitTimeInForce", stopLimitTimeInForce == null ? null : JsonConvert.SerializeObject(stopLimitTimeInForce, new TimeInForceConverter(false)));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceOrderOcoList>(_baseClient.GetUrl(false, newOCOOrderEndpoint, api, signedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceOrderOcoList>(_baseClient.GetUrlSpot(newOcoOrderEndpoint, api, signedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -545,7 +555,7 @@ namespace Binance.Net.SubClients.Spot
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for canceled order</returns>
-        public WebCallResult<BinanceOrderOcoList> CancelOCOOrder(string symbol, long? orderListId = null, string? listClientOrderId = null, string? newClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default) => CancelOCOOrderAsync(symbol, orderListId, listClientOrderId, newClientOrderId, receiveWindow, ct).Result;
+        public WebCallResult<BinanceOrderOcoList> CancelOcoOrder(string symbol, long? orderListId = null, string? listClientOrderId = null, string? newClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default) => CancelOcoOrderAsync(symbol, orderListId, listClientOrderId, newClientOrderId, receiveWindow, ct).Result;
 
         /// <summary>
         /// Cancels a pending oco order
@@ -557,7 +567,7 @@ namespace Binance.Net.SubClients.Spot
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for canceled order</returns>
-        public async Task<WebCallResult<BinanceOrderOcoList>> CancelOCOOrderAsync(string symbol, long? orderListId = null, string? listClientOrderId = null, string? newClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceOrderOcoList>> CancelOcoOrderAsync(string symbol, long? orderListId = null, string? listClientOrderId = null, string? newClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -577,7 +587,7 @@ namespace Binance.Net.SubClients.Spot
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceOrderOcoList>(_baseClient.GetUrl(false, cancelOCOOrderEndpoint, api, signedVersion), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceOrderOcoList>(_baseClient.GetUrlSpot(cancelOcoOrderEndpoint, api, signedVersion), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -592,7 +602,7 @@ namespace Binance.Net.SubClients.Spot
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The specific order list</returns>
-        public WebCallResult<BinanceOrderOcoList> GetOCOOrder(long? orderListId = null, string? listClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default) => GetOCOOrderAsync(orderListId, listClientOrderId, receiveWindow, ct).Result;
+        public WebCallResult<BinanceOrderOcoList> GetOcoOrder(long? orderListId = null, string? listClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default) => GetOcoOrderAsync(orderListId, listClientOrderId, receiveWindow, ct).Result;
 
         /// <summary>
         /// Retrieves data for a specific oco order. Either orderListId or listClientOrderId should be provided.
@@ -602,7 +612,7 @@ namespace Binance.Net.SubClients.Spot
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The specific order list</returns>
-        public async Task<WebCallResult<BinanceOrderOcoList>> GetOCOOrderAsync(long? orderListId = null, string? listClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceOrderOcoList>> GetOcoOrderAsync(long? orderListId = null, string? listClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (orderListId == null && listClientOrderId == null)
                 throw new ArgumentException("Either orderListId or listClientOrderId must be sent");
@@ -619,7 +629,7 @@ namespace Binance.Net.SubClients.Spot
             parameters.AddOptionalParameter("listClientOrderId", listClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceOrderOcoList>(_baseClient.GetUrl(false, getOCOOrderEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceOrderOcoList>(_baseClient.GetUrlSpot(getOcoOrderEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -636,7 +646,7 @@ namespace Binance.Net.SubClients.Spot
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Order lists matching the parameters</returns>
-        public WebCallResult<IEnumerable<BinanceOrderOcoList>> GetOCOOrders(long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default) => GetOCOOrdersAsync(fromId, startTime, endTime, limit, receiveWindow, ct).Result;
+        public WebCallResult<IEnumerable<BinanceOrderOcoList>> GetOcoOrders(long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default) => GetOcoOrdersAsync(fromId, startTime, endTime, limit, receiveWindow, ct).Result;
 
         /// <summary>
         /// Retrieves a list of oco orders matching the parameters
@@ -648,7 +658,7 @@ namespace Binance.Net.SubClients.Spot
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Order lists matching the parameters</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceOrderOcoList>>> GetOCOOrdersAsync(long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceOrderOcoList>>> GetOcoOrdersAsync(long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (fromId != null && (startTime != null || endTime != null))
                 throw new ArgumentException("Start/end time can only be provided without fromId parameter");
@@ -669,7 +679,7 @@ namespace Binance.Net.SubClients.Spot
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceOrderOcoList>>(_baseClient.GetUrl(false, getAllOCOOrderEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceOrderOcoList>>(_baseClient.GetUrlSpot(getAllOcoOrderEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -682,7 +692,7 @@ namespace Binance.Net.SubClients.Spot
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Open order lists</returns>
-        public WebCallResult<IEnumerable<BinanceOrderOcoList>> GetOpenOCOOrders(long? receiveWindow = null, CancellationToken ct = default) => GetOpenOCOOrdersAsync(receiveWindow, ct).Result;
+        public WebCallResult<IEnumerable<BinanceOrderOcoList>> GetOpenOcoOrders(long? receiveWindow = null, CancellationToken ct = default) => GetOpenOcoOrdersAsync(receiveWindow, ct).Result;
 
         /// <summary>
         /// Retrieves a list of open oco orders
@@ -690,7 +700,7 @@ namespace Binance.Net.SubClients.Spot
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Open order lists</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceOrderOcoList>>> GetOpenOCOOrdersAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceOrderOcoList>>> GetOpenOcoOrdersAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
@@ -702,12 +712,12 @@ namespace Binance.Net.SubClients.Spot
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceOrderOcoList>>(_baseClient.GetUrl(false, getOpenOCOOrderEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceOrderOcoList>>(_baseClient.GetUrlSpot(getOpenOcoOrderEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
 
-
+        #region Get user trades
         /// <summary>
         /// Gets all user trades for provided symbol
         /// </summary>
@@ -752,7 +762,8 @@ namespace Binance.Net.SubClients.Spot
             parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceTrade>>(_baseClient.GetUrl(false, myTradesEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceTrade>>(_baseClient.GetUrlSpot(myTradesEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
+        #endregion
     }
 }

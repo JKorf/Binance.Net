@@ -75,12 +75,12 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// The volume traded in the last 24 hours
         /// </summary>
         [JsonProperty("volume")]
-        public decimal TotalTradedBaseAssetVolume { get; set; }
+        public decimal Volume { get; set; }
         /// <summary>
         /// The quote asset volume traded in the last 24 hours
         /// </summary>
         [JsonProperty("quoteVolume")]
-        public decimal TotalTradedQuoteAssetVolume { get; set; }
+        public decimal TotalTradedAlternateAssetVolume { get; set; }
         /// <summary>
         /// Time at which this 24 hours opened
         /// </summary>

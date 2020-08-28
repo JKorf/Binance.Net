@@ -11,9 +11,9 @@ using CryptoExchange.Net.Objects;
 namespace Binance.Net.Interfaces.SubClients
 {
     /// <summary>
-    /// Account interface
+    /// General interface
     /// </summary>
-    public interface IBinanceClientAccount
+    public interface IBinanceClientGeneral
     {
         /// <summary>
         /// Get a daily account snapshot (balances)
@@ -220,5 +220,41 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<object>> EnableFastWithdrawSwitchAsync(int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets the history of dust conversions
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The history of dust conversions</returns>
+        WebCallResult<IEnumerable<BinanceDustLog>> GetDustLog(int? receiveWindow = null, CancellationToken ct = default);
+       
+        /// <summary>
+        /// Gets the history of dust conversions
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The history of dust conversions</returns>
+        Task<WebCallResult<IEnumerable<BinanceDustLog>>> GetDustLogAsync(int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Converts dust (small amounts of) assets to BNB 
+        /// </summary>
+        /// <param name="assets">The assets to convert to BNB</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Dust transfer result</returns>
+        WebCallResult<BinanceDustTransferResult> DustTransfer(IEnumerable<string> assets, int? receiveWindow = null,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Converts dust (small amounts of) assets to BNB 
+        /// </summary>
+        /// <param name="assets">The assets to convert to BNB</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Dust transfer result</returns>
+        Task<WebCallResult<BinanceDustTransferResult>> DustTransferAsync(IEnumerable<string> assets,
+            int? receiveWindow = null, CancellationToken ct = default);
     }
 }

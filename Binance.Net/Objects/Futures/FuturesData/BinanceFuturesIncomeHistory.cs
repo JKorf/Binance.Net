@@ -44,6 +44,16 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// </summary>
         [JsonConverter(typeof(TimestampConverter))]
         public DateTime Time { get; set; }
+
+        /// <summary>
+        /// Transaction id if relevant
+        /// </summary>
+        [JsonProperty("tranId")]
+        public string TransactionId { get; set; } = "";
+        /// <summary>
+        /// Trade id if existing
+        /// </summary>
+        public string TradeId { get; set; } = "";
     }
 
 }

@@ -3,7 +3,6 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Interfaces.SubClients;
-using Binance.Net.Interfaces.SubClients.Futures;
 using Binance.Net.Objects.Spot.UserData;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
@@ -13,13 +12,16 @@ namespace Binance.Net.SubClients.Futures
     /// <summary>
     /// Futures user stream endpoints
     /// </summary>
-    public class BinanceClientFuturesUserStream : IBinanceClientUserStream
+    public abstract class BinanceClientFuturesUserStream : IBinanceClientUserStream
     {
         private const string getFuturesListenKeyEndpoint = "listenKey";
         private const string keepFuturesListenKeyAliveEndpoint = "listenKey";
         private const string closeFuturesListenKeyEndpoint = "listenKey";
 
-        private const string api = "fapi";
+        /// <summary>
+        /// Api path
+        /// </summary>
+        protected abstract string Api { get; }
         private const string userDataStreamVersion = "1";
 
         private readonly BinanceClient _baseClient;
@@ -47,11 +49,11 @@ namespace Binance.Net.SubClients.Futures
         /// <returns>Listen key</returns>
         public async Task<WebCallResult<string>> StartUserStreamAsync(CancellationToken ct = default)
         {
-            var timestampResult = await _futuresClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<string>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
-            var result = await _baseClient.SendRequestInternal<BinanceListenKey>(_baseClient.GetUrl(true, getFuturesListenKeyEndpoint, api, userDataStreamVersion), HttpMethod.Post, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceListenKey>(_futuresClient.GetUrl(getFuturesListenKeyEndpoint, Api, userDataStreamVersion), HttpMethod.Post, ct).ConfigureAwait(false);
             return new WebCallResult<string>(result.ResponseStatusCode, result.ResponseHeaders, result.Data?.ListenKey, result.Error);
         }
 
@@ -76,7 +78,7 @@ namespace Binance.Net.SubClients.Futures
         public async Task<WebCallResult<object>> KeepAliveUserStreamAsync(string listenKey, CancellationToken ct = default)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
-            var timestampResult = await _futuresClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<object>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
@@ -85,7 +87,7 @@ namespace Binance.Net.SubClients.Futures
                 { "listenKey", listenKey }
             };
 
-            return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrl(true, keepFuturesListenKeyAliveEndpoint, api, userDataStreamVersion), HttpMethod.Put, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<object>(_futuresClient.GetUrl(keepFuturesListenKeyAliveEndpoint, Api, userDataStreamVersion), HttpMethod.Put, ct, parameters).ConfigureAwait(false);
         }
 
         #endregion
@@ -109,7 +111,7 @@ namespace Binance.Net.SubClients.Futures
         public async Task<WebCallResult<object>> StopUserStreamAsync(string listenKey, CancellationToken ct = default)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
-            var timestampResult = await _futuresClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<object>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
@@ -118,7 +120,7 @@ namespace Binance.Net.SubClients.Futures
                 { "listenKey", listenKey }
             };
 
-            return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrl(true, closeFuturesListenKeyEndpoint, api, userDataStreamVersion), HttpMethod.Delete, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<object>(_futuresClient.GetUrl(closeFuturesListenKeyEndpoint, Api, userDataStreamVersion), HttpMethod.Delete, ct, parameters).ConfigureAwait(false);
         }
 
         #endregion

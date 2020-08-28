@@ -95,7 +95,7 @@ namespace Binance.Net.SubClients
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestInternal<BinanceSubAccountWrapper>(_baseClient.GetUrl(false, subAccountListEndpoint, "wapi", "3"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceSubAccountWrapper>(_baseClient.GetUrlSpot(subAccountListEndpoint, "wapi", "3"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result)
                 return new WebCallResult<IEnumerable<BinanceSubAccount>>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
 
@@ -147,7 +147,7 @@ namespace Binance.Net.SubClients
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestInternal<BinanceSubAccountTransferWrapper>(_baseClient.GetUrl(false, subAccountTransferHistoryEndpoint, "wapi", "3"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceSubAccountTransferWrapper>(_baseClient.GetUrlSpot(subAccountTransferHistoryEndpoint, "wapi", "3"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result)
                 return new WebCallResult<IEnumerable<BinanceSubAccountTransfer>>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
 
@@ -201,7 +201,7 @@ namespace Binance.Net.SubClients
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceSubAccountTransferResult>(_baseClient.GetUrl(false, transferSubAccountEndpoint, "wapi", "3"), HttpMethod.Post, ct, parameters, true, true, PostParameters.InUri).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceSubAccountTransferResult>(_baseClient.GetUrlSpot(transferSubAccountEndpoint, "wapi", "3"), HttpMethod.Post, ct, parameters, true, true, PostParameters.InUri).ConfigureAwait(false);
         }
 
         #endregion
@@ -243,7 +243,7 @@ namespace Binance.Net.SubClients
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestInternal<BinanceSubAccountAsset>(_baseClient.GetUrl(false, subAccountAssetsEndpoint, "wapi", "3"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceSubAccountAsset>(_baseClient.GetUrlSpot(subAccountAssetsEndpoint, "wapi", "3"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result.Success)
                 return WebCallResult<IEnumerable<BinanceBalance>>.CreateErrorResult(result.ResponseStatusCode,
                     result.ResponseHeaders, result.Error!);
@@ -299,7 +299,7 @@ namespace Binance.Net.SubClients
             parameters.AddOptionalParameter("network", network);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceSubAccountDepositAddress>(_baseClient.GetUrl(false, subAccountDepositAddressEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceSubAccountDepositAddress>(_baseClient.GetUrlSpot(subAccountDepositAddressEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
         #endregion
 
@@ -356,7 +356,7 @@ namespace Binance.Net.SubClients
             parameters.AddOptionalParameter("offset", offset?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceSubAccountDeposit>>(_baseClient.GetUrl(false, subAccountDepositHistoryEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceSubAccountDeposit>>(_baseClient.GetUrlSpot(subAccountDepositHistoryEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -392,7 +392,7 @@ namespace Binance.Net.SubClients
             parameters.AddOptionalParameter("email", email);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceSubAccountStatus>>(_baseClient.GetUrl(false, subAccountStatusEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceSubAccountStatus>>(_baseClient.GetUrlSpot(subAccountStatusEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -434,7 +434,7 @@ namespace Binance.Net.SubClients
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceSubAccountMarginEnabled>>(_baseClient.GetUrl(false, subAccountEnableMarginEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceSubAccountMarginEnabled>>(_baseClient.GetUrlSpot(subAccountEnableMarginEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -475,7 +475,7 @@ namespace Binance.Net.SubClients
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceSubAccountMarginDetails>(_baseClient.GetUrl(false, subAccountMarginDetailsEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceSubAccountMarginDetails>(_baseClient.GetUrlSpot(subAccountMarginDetailsEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -511,7 +511,7 @@ namespace Binance.Net.SubClients
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceSubAccountsMarginSummary>(_baseClient.GetUrl(false, subAccountMarginSummaryEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceSubAccountsMarginSummary>(_baseClient.GetUrlSpot(subAccountMarginSummaryEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -551,7 +551,7 @@ namespace Binance.Net.SubClients
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceSubAccountFuturesEnabled>(_baseClient.GetUrl(false, subAccountEnableFuturesEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceSubAccountFuturesEnabled>(_baseClient.GetUrlSpot(subAccountEnableFuturesEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -592,7 +592,7 @@ namespace Binance.Net.SubClients
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceSubAccountFuturesDetails>(_baseClient.GetUrl(false, subAccountFuturesDetailsEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceSubAccountFuturesDetails>(_baseClient.GetUrlSpot(subAccountFuturesDetailsEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -628,7 +628,7 @@ namespace Binance.Net.SubClients
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceSubAccountsFuturesSummary>(_baseClient.GetUrl(false, subAccountFuturesSummaryEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceSubAccountsFuturesSummary>(_baseClient.GetUrlSpot(subAccountFuturesSummaryEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -667,7 +667,7 @@ namespace Binance.Net.SubClients
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceSubAccountFuturesPositionRisk>>(_baseClient.GetUrl(false, subAccountFuturesPositionRiskEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceSubAccountFuturesPositionRisk>>(_baseClient.GetUrlSpot(subAccountFuturesPositionRiskEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -719,7 +719,7 @@ namespace Binance.Net.SubClients
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceSubAccountTransaction>(_baseClient.GetUrl(false, subAccountTransferFuturesSpotEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceSubAccountTransaction>(_baseClient.GetUrlSpot(subAccountTransferFuturesSpotEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
         #endregion
 
@@ -769,7 +769,7 @@ namespace Binance.Net.SubClients
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceSubAccountTransaction>(_baseClient.GetUrl(false, subAccountTransferMarginSpotEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceSubAccountTransaction>(_baseClient.GetUrlSpot(subAccountTransferMarginSpotEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
         #endregion
 
@@ -816,7 +816,7 @@ namespace Binance.Net.SubClients
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceSubAccountTransaction>(_baseClient.GetUrl(false, subAccountTransferToSubEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceSubAccountTransaction>(_baseClient.GetUrlSpot(subAccountTransferToSubEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
         #endregion
 
@@ -859,7 +859,7 @@ namespace Binance.Net.SubClients
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceSubAccountTransaction>(_baseClient.GetUrl(false, subAccountTransferToMasterEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceSubAccountTransaction>(_baseClient.GetUrlSpot(subAccountTransferToMasterEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
         #endregion
 
@@ -912,7 +912,7 @@ namespace Binance.Net.SubClients
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceSubAccountTransaction>(_baseClient.GetUrl(false, subAccountTransferHistorySubAccountEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceSubAccountTransaction>(_baseClient.GetUrlSpot(subAccountTransferHistorySubAccountEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
         #endregion
 

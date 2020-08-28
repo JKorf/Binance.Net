@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Futures.MarketData
 {
@@ -8,9 +9,16 @@ namespace Binance.Net.Objects.Futures.MarketData
     public class BinanceFuturesSymbolBracket
     {
         /// <summary>
-        /// Symbol
+        /// Symbol or pair
         /// </summary>
-        public string Symbol { get; set; } = "";
+        [JsonProperty("symbol")]
+        public string SymbolOrPair { get; set; } = "";
+
+        [JsonProperty("pair")]
+        private string Pair
+        {
+            set => SymbolOrPair = value;
+        }
 
         /// <summary>
         /// Brackets
@@ -25,28 +33,41 @@ namespace Binance.Net.Objects.Futures.MarketData
     public class BinanceFuturesBracket
     {
         /// <summary>
-        /// Notianl bracket
+        /// Bracket
         /// </summary>
         public int Bracket { get; set; }
 
         /// <summary>
-        /// Max initial leverge for this bracket
+        /// Max initial leverage for this bracket
         /// </summary>
         public int InitialLeverage { get; set; }
 
         /// <summary>
-        /// Cap notional of this bracket
+        /// Cap of this bracket
         /// </summary>
-        public long NotionalCap { get; set; }
+        [JsonProperty("notionalCap")]
+        public long Cap { get; set; }
+        [JsonProperty("qtyCap")]
+        private long QuantityCap
+        {
+            set => Cap = value;
+        }
 
         /// <summary>
-        /// Notionl threshold of this bracket
+        /// Floor of this bracket
         /// </summary>
-        public int NotionalFloor { get; set; }
+        [JsonProperty("notionalFloor")]
+        public long Floor { get; set; }
+        [JsonProperty("qtylFloor")]
+        private long QuantityFloor
+        {
+            set => Floor = value;
+        }
 
         /// <summary>
         /// Maintenance ratio for this bracket
         /// </summary>
-        public decimal MaintMarginRatio { get; set; }
+        [JsonProperty("maintMarginRatio")]
+        public decimal MaintenanceMarginRatio { get; set; }
     }
 }

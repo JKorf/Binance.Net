@@ -22,13 +22,19 @@ namespace Binance.Net
         private static BinanceSocketClientOptions DefaultOptions => _defaultOptions.Copy();
         
         /// <summary>
-        /// Spot subscriptions
+        /// Spot streams
         /// </summary>
         public IBinanceSocketClientSpot Spot { get; set; }
+
         /// <summary>
-        /// Futures subscriptions
+        /// USDT-M futures stream
         /// </summary>
-        public IBinanceSocketClientFutures Futures { get; set; }
+        public IBinanceSocketClientFuturesUsdt FuturesUsdt { get; set; }
+
+        /// <summary>
+        /// COIN-M futures stream
+        /// </summary>
+        public IBinanceSocketClientFuturesCoin FuturesCoin { get; set; }
         #endregion
 
         #region constructor/destructor
@@ -47,7 +53,8 @@ namespace Binance.Net
         public BinanceSocketClient(BinanceSocketClientOptions options) : base(options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials))
         {
             Spot = new BinanceSocketClientSpot(log, this, options);
-            Futures = new BinanceSocketClientFutures(log, this, options);
+            FuturesCoin = new BinanceSocketClientFuturesCoin(log, this, options);
+            FuturesUsdt = new BinanceSocketClientFuturesUsdt(log, this, options);
         }
         #endregion 
 

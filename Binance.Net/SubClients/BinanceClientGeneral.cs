@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,9 +20,9 @@ using Newtonsoft.Json;
 namespace Binance.Net.SubClients
 {
     /// <summary>
-    /// Account endpoints
+    /// General endpoints
     /// </summary>
-    public class BinanceClientAccount : IBinanceClientAccount
+    public class BinanceClientGeneral : IBinanceClientGeneral
     {
         private const string accountInfoEndpoint = "account";
         private const string accountSnapshotEndpoint = "accountSnapshot";
@@ -35,13 +36,17 @@ namespace Binance.Net.SubClients
         private const string disableFastWithdrawSwitchEndpoint = "account/disableFastWithdrawSwitch";
         private const string enableFastWithdrawSwitchEndpoint = "account/enableFastWithdrawSwitch";
 
+        private const string dustLogEndpoint = "userAssetDribbletLog.html";
+        private const string dustTransferEndpoint = "asset/dust";
+
         private readonly BinanceClient _baseClient;
 
-        internal BinanceClientAccount(BinanceClient baseClient)
+        internal BinanceClientGeneral(BinanceClient baseClient)
         {
             _baseClient = baseClient;
         }
 
+        #region Daily snapshots
         /// <summary>
         /// Get a daily account snapshot (balances)
         /// </summary>
@@ -146,7 +151,7 @@ namespace Binance.Net.SubClients
             parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestInternal<BinanceSnapshotWrapper<T>>(_baseClient.GetUrl(false, accountSnapshotEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceSnapshotWrapper<T>>(_baseClient.GetUrlSpot(accountSnapshotEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result.Success)
                 return WebCallResult<T>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
@@ -155,7 +160,9 @@ namespace Binance.Net.SubClients
 
             return new WebCallResult<T>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.SnapshotData, null);
         }
+        #endregion
 
+        #region Account status
         /// <summary>
         /// Gets the status of the account associated with the api key/secret
         /// </summary>
@@ -182,13 +189,15 @@ namespace Binance.Net.SubClients
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestInternal<BinanceAccountStatus>(_baseClient.GetUrl(false, accountStatusEndpoint, "wapi", "3"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceAccountStatus>(_baseClient.GetUrlSpot(accountStatusEndpoint, "wapi", "3"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result)
                 return new WebCallResult<BinanceAccountStatus>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
 
             return !result.Data.Success ? new WebCallResult<BinanceAccountStatus>(result.ResponseStatusCode, result.ResponseHeaders, null, _baseClient.ParseErrorResponseInternal(result.Data.Message)) : new WebCallResult<BinanceAccountStatus>(result.ResponseStatusCode, result.ResponseHeaders, result.Data, null);
         }
+        #endregion
 
+        #region Account info
         /// <summary>
         /// Gets account information, including balances
         /// </summary>
@@ -215,9 +224,11 @@ namespace Binance.Net.SubClients
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceAccountInfo>(_baseClient.GetUrl(false, accountInfoEndpoint, "api", "3"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceAccountInfo>(_baseClient.GetUrlSpot(accountInfoEndpoint, "api", "3"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
+        #endregion
 
+        #region Trading status
         /// <summary>
         /// Gets the trading status for the current account
         /// </summary>
@@ -245,13 +256,15 @@ namespace Binance.Net.SubClients
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestInternal<BinanceTradingStatusWrapper>(_baseClient.GetUrl(false, tradingStatusEndpoint, "wapi", "3"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceTradingStatusWrapper>(_baseClient.GetUrlSpot(tradingStatusEndpoint, "wapi", "3"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result)
                 return new WebCallResult<BinanceTradingStatus>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
 
             return !result.Data.Success ? new WebCallResult<BinanceTradingStatus>(result.ResponseStatusCode, result.ResponseHeaders, null, new ServerError(result.Data.Message!)) : new WebCallResult<BinanceTradingStatus>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Status, null);
         }
+        #endregion
 
+        #region User coins
         /// <summary>
         /// Gets information of coins for a user
         /// </summary>
@@ -275,9 +288,11 @@ namespace Binance.Net.SubClients
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceUserCoin>>(_baseClient.GetUrl(false, userCoinsEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceUserCoin>>(_baseClient.GetUrlSpot(userCoinsEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
+        #endregion
 
+        #region Asset Dividend Records
         /// <summary>
         /// Get asset dividend records
         /// </summary>
@@ -313,8 +328,9 @@ namespace Binance.Net.SubClients
             parameters.AddOptionalParameter("endTime", endTime != null ? BinanceClient.ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceDividendRecord>>(_baseClient.GetUrl(false, dividendRecordsEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceDividendRecord>>(_baseClient.GetUrlSpot(dividendRecordsEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
+        #endregion
 
         #region Disable Fast Withdraw Switch
 
@@ -343,7 +359,7 @@ namespace Binance.Net.SubClients
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
 
-            return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrl(false, disableFastWithdrawSwitchEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrlSpot(disableFastWithdrawSwitchEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -380,8 +396,87 @@ namespace Binance.Net.SubClients
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
 
-            return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrl(false, enableFastWithdrawSwitchEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrlSpot(enableFastWithdrawSwitchEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
+        #endregion
+
+        #region DustLog
+
+        /// <summary>
+        /// Gets the history of dust conversions
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The history of dust conversions</returns>
+        public WebCallResult<IEnumerable<BinanceDustLog>> GetDustLog(int? receiveWindow = null, CancellationToken ct = default) => GetDustLogAsync(receiveWindow, ct).Result;
+
+        /// <summary>
+        /// Gets the history of dust conversions
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The history of dust conversions</returns>
+        public async Task<WebCallResult<IEnumerable<BinanceDustLog>>> GetDustLogAsync(int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<IEnumerable<BinanceDustLog>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", _baseClient.GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await _baseClient.SendRequestInternal<BinanceDustLogListWrapper>(_baseClient.GetUrlSpot(dustLogEndpoint, "wapi", "3"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            if (!result)
+                return new WebCallResult<IEnumerable<BinanceDustLog>>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
+
+            return !result.Data.Success ? new WebCallResult<IEnumerable<BinanceDustLog>>(result.ResponseStatusCode, result.ResponseHeaders, null, new ServerError("Unknown server error while requesting dust log")) : new WebCallResult<IEnumerable<BinanceDustLog>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Results!.Rows, null);
+        }
+
+        #endregion
+
+        #region Dust Transfer
+
+        /// <summary>
+        /// Converts dust (small amounts of) assets to BNB 
+        /// </summary>
+        /// <param name="assets">The assets to convert to BNB</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Dust transfer result</returns>
+        public WebCallResult<BinanceDustTransferResult> DustTransfer(IEnumerable<string> assets, int? receiveWindow = null, CancellationToken ct = default) => DustTransferAsync(assets, receiveWindow, ct).Result;
+
+        /// <summary>
+        /// Converts dust (small amounts of) assets to BNB 
+        /// </summary>
+        /// <param name="assets">The assets to convert to BNB</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Dust transfer result</returns>
+        public async Task<WebCallResult<BinanceDustTransferResult>> DustTransferAsync(IEnumerable<string> assets, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var assetsArray = assets.ToArray();
+
+            assetsArray.ValidateNotNull(nameof(assets));
+            foreach (var asset in assetsArray)
+                asset.ValidateNotNull(nameof(asset));
+
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceDustTransferResult>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "asset", assetsArray },
+                { "timestamp", _baseClient.GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceDustTransferResult>(_baseClient.GetUrlSpot(dustTransferEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
         #endregion
     }
 }

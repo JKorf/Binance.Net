@@ -1,4 +1,5 @@
 ﻿using Binance.Net.Interfaces.SocketSubClient;
+using Binance.Net.SocketSubClients;
 using CryptoExchange.Net.Interfaces;
 
 namespace Binance.Net.Interfaces
@@ -9,14 +10,18 @@ namespace Binance.Net.Interfaces
     public interface IBinanceSocketClient: ISocketClient
     {
         /// <summary>
-        /// Spot subscription
+        /// Spot streams
         /// </summary>
         IBinanceSocketClientSpot Spot { get; set; }
 
         /// <summary>
-        /// Futures subscriptions
+        /// USDT-M futures streams
         /// </summary>
-        IBinanceSocketClientFutures Futures { get; set; }
+        IBinanceSocketClientFuturesUsdt FuturesUsdt { get; set; }
+        /// <summary>
+        /// COIN-M futures stream
+        /// </summary>
+        IBinanceSocketClientFuturesCoin FuturesCoin { get; set; }
 
         /// <summary>
         /// Set the API key and secret

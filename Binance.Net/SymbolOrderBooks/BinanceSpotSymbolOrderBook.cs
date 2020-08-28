@@ -11,7 +11,7 @@ namespace Binance.Net.SymbolOrderBooks
     /// Implementation for a synchronized order book. After calling Start the order book will sync itself and keep up to date with new data. It will automatically try to reconnect and resync in case of a lost/interrupted connection.
     /// Make sure to check the State property to see if the order book is synced.
     /// </summary>
-    public class BinanceSymbolOrderBook : SymbolOrderBook
+    public class BinanceSpotSymbolOrderBook : SymbolOrderBook
     {
         private readonly BinanceClient _restClient;
         private readonly BinanceSocketClient _socketClient;
@@ -22,7 +22,7 @@ namespace Binance.Net.SymbolOrderBooks
         /// </summary>
         /// <param name="symbol">The symbol of the order book</param>
         /// <param name="options">The options for the order book</param>
-        public BinanceSymbolOrderBook(string symbol, BinanceOrderBookOptions? options = null) : base(symbol, options ?? new BinanceOrderBookOptions())
+        public BinanceSpotSymbolOrderBook(string symbol, BinanceOrderBookOptions? options = null) : base(symbol, options ?? new BinanceOrderBookOptions())
         {
             symbol.ValidateBinanceSymbol();
             Levels = options?.Limit;

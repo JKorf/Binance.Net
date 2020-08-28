@@ -3,18 +3,18 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Binance.Net.Interfaces.SubClients;
+using Binance.Net.Interfaces.SubClients.Spot;
 using Binance.Net.Objects.Spot.MarketData;
 using Binance.Net.Objects.Spot.WalletData;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
 
-namespace Binance.Net.SubClients
+namespace Binance.Net.SubClients.Spot
 {
     /// <summary>
-    /// System endpoints
+    /// Spot system endpoints
     /// </summary>
-    public class BinanceClientSystem : IBinanceClientSystem
+    public class BinanceClientSpotSystem : IBinanceClientSpotSystem
     {
         private const string api = "api";
         private const string publicVersion = "3";
@@ -28,7 +28,7 @@ namespace Binance.Net.SubClients
 
         private readonly BinanceClient _baseClient;
 
-        internal BinanceClientSystem(Log log, BinanceClient baseClient)
+        internal BinanceClientSpotSystem(Log log, BinanceClient baseClient)
         {
             _log = log;
             _baseClient = baseClient;
@@ -49,7 +49,7 @@ namespace Binance.Net.SubClients
         public async Task<WebCallResult<long>> PingAsync(CancellationToken ct = default)
         {
             var sw = Stopwatch.StartNew();
-            var result = await _baseClient.SendRequestInternal<object>(_baseClient.GetUrl(false, pingEndpoint, api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<object>(_baseClient.GetUrlSpot(pingEndpoint, api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
             sw.Stop();
             return new WebCallResult<long>(result.ResponseStatusCode, result.ResponseHeaders, result.Error == null ? sw.ElapsedMilliseconds : 0, result.Error);
         }
@@ -74,7 +74,7 @@ namespace Binance.Net.SubClients
         /// <returns>Server time</returns>
         public async Task<WebCallResult<DateTime>> GetServerTimeAsync(bool resetAutoTimestamp = false, CancellationToken ct = default)
         {
-            var url = _baseClient.GetUrl(false, checkTimeEndpoint, api, publicVersion);
+            var url = _baseClient.GetUrlSpot(checkTimeEndpoint, api, publicVersion);
             if (!_baseClient.AutoTimestamp)
             {
                 var result = await _baseClient.SendRequestInternal<BinanceCheckTime>(url, HttpMethod.Get, ct).ConfigureAwait(false);
@@ -137,7 +137,7 @@ namespace Binance.Net.SubClients
         /// <returns>Exchange info</returns>
         public async Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(CancellationToken ct = default)
         {
-            var exchangeInfoResult = await _baseClient.SendRequestInternal<BinanceExchangeInfo>(_baseClient.GetUrl(false, exchangeInfoEndpoint, api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
+            var exchangeInfoResult = await _baseClient.SendRequestInternal<BinanceExchangeInfo>(_baseClient.GetUrlSpot(exchangeInfoEndpoint, api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
             if (!exchangeInfoResult)
                 return exchangeInfoResult;
 
@@ -162,7 +162,7 @@ namespace Binance.Net.SubClients
         /// <returns>The system status</returns>
         public async Task<WebCallResult<BinanceSystemStatus>> GetSystemStatusAsync(CancellationToken ct = default)
         {
-            return await _baseClient.SendRequestInternal<BinanceSystemStatus>(_baseClient.GetUrl(false, systemStatusEndpoint, "wapi", "3"), HttpMethod.Get, ct, null, false).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceSystemStatus>(_baseClient.GetUrlSpot(systemStatusEndpoint, "wapi", "3"), HttpMethod.Get, ct, null, false).ConfigureAwait(false);
         }
 
         #endregion

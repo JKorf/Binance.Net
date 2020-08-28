@@ -8,6 +8,11 @@ namespace Binance.Net.Interfaces.SubClients.Spot
     public interface IBinanceClientSpot
     {
         /// <summary>
+        /// Spot system endpoints
+        /// </summary>
+        IBinanceClientSpotSystem System { get; }
+
+        /// <summary>
         /// Spot market endpoints
         /// </summary>
         IBinanceClientSpotMarket Market { get; }

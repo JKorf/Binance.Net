@@ -4,8 +4,10 @@ using System.Globalization;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces.SubClients.Margin;
+using Binance.Net.Objects.Spot.MarginData;
 using Binance.Net.Objects.Spot.SpotData;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Converters;
@@ -29,6 +31,7 @@ namespace Binance.Net.SubClients.Margin
         private const string allMarginOrdersEndpoint = "margin/allOrders";
         private const string openMarginOrdersEndpoint = "margin/openOrders";
         private const string queryMarginOrderEndpoint = "margin/order";
+
 
         private readonly BinanceClient _baseClient;
 
@@ -54,6 +57,7 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="icebergQuantity">Used for iceberg orders</param>
         /// <param name="sideEffectType">Side effect type for this order</param>
         /// <param name="isIsolated">For isolated margin or not</param>
+        /// <param name="orderResponseType">Used for the response JSON</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed order</returns>
@@ -69,8 +73,9 @@ namespace Binance.Net.SubClients.Margin
             decimal? icebergQuantity = null,
             SideEffectType? sideEffectType = null,
             bool? isIsolated = null,
+            OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
-            CancellationToken ct = default) => PlaceMarginOrderAsync(symbol, side, type, quantity, quoteOrderQuantity, newClientOrderId, price, timeInForce, stopPrice, icebergQuantity, sideEffectType, isIsolated, receiveWindow, ct).Result;
+            CancellationToken ct = default) => PlaceMarginOrderAsync(symbol, side, type, quantity, quoteOrderQuantity, newClientOrderId, price, timeInForce, stopPrice, icebergQuantity, sideEffectType, isIsolated, orderResponseType, receiveWindow, ct).Result;
 
         /// <summary>
         /// Margin account new order
@@ -87,6 +92,7 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="icebergQuantity">Used for iceberg orders</param>
         /// <param name="sideEffectType">Side effect type for this order</param>
         /// <param name="isIsolated">For isolated margin or not</param>
+        /// <param name="orderResponseType">Used for the response JSON</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed order</returns>
@@ -102,10 +108,11 @@ namespace Binance.Net.SubClients.Margin
             decimal? icebergQuantity = null,
             SideEffectType? sideEffectType = null,
             bool? isIsolated = null,
+            OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
-            return await _baseClient.PlaceOrderInternal(_baseClient.GetUrl(false, newMarginOrderEndpoint, marginApi, marginVersion),
+            return await _baseClient.PlaceOrderInternal(_baseClient.GetUrlSpot(newMarginOrderEndpoint, marginApi, marginVersion),
                 symbol,
                 side,
                 type,
@@ -118,6 +125,7 @@ namespace Binance.Net.SubClients.Margin
                 icebergQuantity,
                 sideEffectType,
                 isIsolated,
+                orderResponseType,
                 receiveWindow,
                 ct).ConfigureAwait(false);
         }
@@ -171,7 +179,7 @@ namespace Binance.Net.SubClients.Margin
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceCanceledOrder>(_baseClient.GetUrl(false, cancelMarginOrderEndpoint, marginApi, marginVersion), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceCanceledOrder>(_baseClient.GetUrlSpot(cancelMarginOrderEndpoint, marginApi, marginVersion), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -220,7 +228,7 @@ namespace Binance.Net.SubClients.Margin
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceOrder>(_baseClient.GetUrl(false, queryMarginOrderEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceOrder>(_baseClient.GetUrlSpot(queryMarginOrderEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -263,7 +271,7 @@ namespace Binance.Net.SubClients.Margin
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("isIsolated", isIsolated);
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceOrder>>(_baseClient.GetUrl(false, openMarginOrdersEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceOrder>>(_baseClient.GetUrlSpot(openMarginOrdersEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -316,7 +324,7 @@ namespace Binance.Net.SubClients.Margin
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceOrder>>(_baseClient.GetUrl(false, allMarginOrdersEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceOrder>>(_baseClient.GetUrlSpot(allMarginOrdersEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
         #endregion
 
@@ -368,7 +376,7 @@ namespace Binance.Net.SubClients.Margin
             parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceTrade>>(_baseClient.GetUrl(false, myMarginTradesEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceTrade>>(_baseClient.GetUrlSpot(myMarginTradesEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion

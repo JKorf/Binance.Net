@@ -49,7 +49,7 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// The volume traded during this candlestick in the asset form
         /// </summary>
         [ArrayProperty(7)]
-        public decimal QuoteAssetVolume { get; set; }
+        public decimal AlternateAssetVolume { get; set; }
         /// <summary>
         /// The amount of trades in this candlestick
         /// </summary>
@@ -59,11 +59,11 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// Taker buy base asset volume
         /// </summary>
         [ArrayProperty(9)]
-        public decimal TakerBuyBaseAssetVolume { get; set; }
+        public decimal TakerBuyVolume { get; set; }
         /// <summary>
         /// Taker buy quote asset volume
         /// </summary>
         [ArrayProperty(10)]
-        public decimal TakerBuyQuoteAssetVolume { get; set; }
+        public decimal TakerBuyAlternateAssetVolume { get; set; }
     }
 }

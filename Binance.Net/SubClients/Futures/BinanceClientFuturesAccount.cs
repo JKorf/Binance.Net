@@ -13,22 +13,32 @@ namespace Binance.Net.SubClients.Futures
     /// <summary>
     /// Futures account endpoints
     /// </summary>
-    public class BinanceClientFuturesAccount : IBinanceClientFuturesAccount
+    public abstract class BinanceClientFuturesAccount
     {
-        private const string api = "fapi";
-        private const string signedV2 = "2";
-
         private const string futuresAccountBalanceEndpoint = "balance";
-        private const string accountInfoEndpoint = "account";
 
-
-        private readonly BinanceClient _baseClient;
-        private readonly BinanceClientFutures _futuresClient;
+        /// <summary>
+        /// Api path
+        /// </summary>
+        protected abstract string Api { get; }
+        /// <summary>
+        /// Signed version
+        /// </summary>
+        protected const string SignedV2 = "2";
+        
+        /// <summary>
+        /// Base client
+        /// </summary>
+        protected readonly BinanceClient BaseClient;
+        /// <summary>
+        /// Futures client
+        /// </summary>
+        protected readonly BinanceClientFutures FuturesClient;
 
         internal BinanceClientFuturesAccount(BinanceClient baseClient, BinanceClientFutures futuresClient)
         {
-            _baseClient = baseClient;
-            _futuresClient = futuresClient;
+            BaseClient = baseClient;
+            FuturesClient = futuresClient;
         }
         #region Future Account Balance
 
@@ -38,7 +48,7 @@ namespace Binance.Net.SubClients.Futures
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The account information</returns>
-        public WebCallResult<IEnumerable<BinanceFuturesAccountBalance>> GetFuturesAccountBalance(long? receiveWindow = null, CancellationToken ct = default) => GetFuturesAccountBalanceAsync(receiveWindow, ct).Result;
+        public WebCallResult<IEnumerable<BinanceFuturesAccountBalance>> GetBalance(long? receiveWindow = null, CancellationToken ct = default) => GetBalanceAsync(receiveWindow, ct).Result;
 
         /// <summary>.
         /// Gets account balances
@@ -46,52 +56,19 @@ namespace Binance.Net.SubClients.Futures
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The account information</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceFuturesAccountBalance>>> GetFuturesAccountBalanceAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesAccountBalance>>> GetBalanceAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
-            var timestampResult = await _futuresClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
                 return new WebCallResult<IEnumerable<BinanceFuturesAccountBalance>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
-                { "timestamp", _baseClient.GetTimestamp() }
+                { "timestamp", BaseClient.GetTimestamp() }
             };
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? BaseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesAccountBalance>>(_baseClient.GetUrl(true, futuresAccountBalanceEndpoint, api, signedV2), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region Account Information
-
-        /// <summary>
-        /// Gets account information, including balances
-        /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The account information</returns>
-        public WebCallResult<BinanceFuturesAccountInfo> GetAccountInfo(long? receiveWindow = null, CancellationToken ct = default) => GetAccountInfoAsync(receiveWindow, ct).Result;
-
-        /// <summary>
-        /// Gets account information, including balances
-        /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The account information</returns>
-        public async Task<WebCallResult<BinanceFuturesAccountInfo>> GetAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default)
-        {
-            var timestampResult = await _futuresClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
-            if (!timestampResult)
-                return new WebCallResult<BinanceFuturesAccountInfo>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-
-            var parameters = new Dictionary<string, object>
-            {
-                { "timestamp", _baseClient.GetTimestamp() }
-            };
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<BinanceFuturesAccountInfo>(_baseClient.GetUrl(true, accountInfoEndpoint, api, signedV2), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await BaseClient.SendRequestInternal<IEnumerable<BinanceFuturesAccountBalance>>(FuturesClient.GetUrl(futuresAccountBalanceEndpoint, Api, Api == "dapi" ? "1": "2"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion

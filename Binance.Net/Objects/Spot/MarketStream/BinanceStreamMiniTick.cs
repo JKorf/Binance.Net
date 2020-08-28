@@ -39,15 +39,15 @@ namespace Binance.Net.Objects.Spot.MarketStream
         public decimal LowPrice { get; set; }
 
         /// <summary>
-        /// Total traded volume in the base asset
+        /// Total traded volume
         /// </summary>
         [JsonProperty("v")]
-        public decimal TotalTradedBaseAssetVolume { get; set; }
+        public decimal Volume { get; set; }
 
         /// <summary>
-        /// Total traded volume in the quote asset
+        /// Total traded volume in the alternate asset
         /// </summary>
         [JsonProperty("q")]
-        public decimal TotalTradedQuoteAssetVolume { get; set; }
+        public decimal TotalTradedAlternateAssetVolume { get; set; }
     }
 }

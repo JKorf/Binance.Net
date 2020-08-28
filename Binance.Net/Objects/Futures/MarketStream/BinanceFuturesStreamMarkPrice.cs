@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Binance.Net.Objects.Futures.MarketStream
 {
     /// <summary>
-    /// TODO
+    /// Mark price update
     /// </summary>
     public class BinanceFuturesStreamMarkPrice: BinanceStreamEvent, IBinanceFuturesMarkPrice
     {
@@ -26,12 +26,36 @@ namespace Binance.Net.Objects.Futures.MarketStream
         /// Next Funding Rate
         /// </summary>
         [JsonProperty("r")]
-        public decimal FundingRate { get; set; }
+        public decimal? FundingRate { get; set; }
         
         /// <summary>
         /// Next Funding Time
         /// </summary>
         [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
         public DateTime NextFundingTime { get; set; }
+    }
+
+    /// <summary>
+    /// Mark price update
+    /// </summary>
+    public class BinanceFuturesUsdtStreamMarkPrice : BinanceFuturesStreamMarkPrice
+    {
+        /// <summary>
+        /// Mark Price
+        /// </summary>
+        [JsonProperty("i")]
+        public decimal IndexPrice { get; set; }
+    }
+
+    /// <summary>
+    /// Mark price update
+    /// </summary>
+    public class BinanceFuturesCoinStreamMarkPrice : BinanceFuturesStreamMarkPrice
+    {
+        /// <summary>
+        /// Mark Price
+        /// </summary>
+        [JsonProperty("P")]
+        public decimal EstimatedSettlePrice { get; set; }
     }
 }

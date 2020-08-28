@@ -33,7 +33,7 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// <summary>
         /// Average price
         /// </summary>
-        [JsonProperty("avgPrice")]
+        [JsonProperty("averagePrice")]
         public decimal AveragePrice { get; set; }
         /// <summary>
         /// Order status

@@ -11,7 +11,7 @@ namespace Binance.Net.SymbolOrderBooks
     /// Implementation for a synchronized order book. After calling Start the order book will sync itself and keep up to date with new data. It will automatically try to reconnect and resync in case of a lost/interrupted connection.
     /// Make sure to check the State property to see if the order book is synced.
     /// </summary>
-    public class BinanceFuturesSymbolOrderBook : SymbolOrderBook
+    public class BinanceFuturesUsdtSymbolOrderBook : SymbolOrderBook
     {
         private readonly BinanceClient _restClient;
         private readonly BinanceSocketClient _socketClient;
@@ -23,9 +23,8 @@ namespace Binance.Net.SymbolOrderBooks
         /// </summary>
         /// <param name="symbol">The symbol of the order book</param>
         /// <param name="options">The options for the order book</param>
-        public BinanceFuturesSymbolOrderBook(string symbol, BinanceOrderBookOptions? options = null) : base(symbol, options ?? new BinanceOrderBookOptions())
+        public BinanceFuturesUsdtSymbolOrderBook(string symbol, BinanceOrderBookOptions? options = null) : base(symbol, options ?? new BinanceOrderBookOptions())
         {
-            symbol.ValidateBinanceSymbol();
             _limit = options?.Limit;
             _updateInterval = options?.UpdateInterval;
             _restClient = new BinanceClient();
@@ -37,9 +36,9 @@ namespace Binance.Net.SymbolOrderBooks
         {
             CallResult<UpdateSubscription> subResult;
             if (_limit == null)
-                subResult = await _socketClient.Futures.SubscribeToOrderBookUpdatesAsync(Symbol, _updateInterval, data => HandleUpdate((BinanceFuturesStreamOrderBookDepth)data)).ConfigureAwait(false);
+                subResult = await _socketClient.FuturesUsdt.SubscribeToOrderBookUpdatesAsync(Symbol, _updateInterval, data => HandleUpdate((BinanceFuturesStreamOrderBookDepth)data)).ConfigureAwait(false);
             else
-                subResult = await _socketClient.Futures.SubscribeToPartialOrderBookUpdatesAsync(Symbol, _limit.Value, _updateInterval, data => HandleUpdate((BinanceFuturesStreamOrderBookDepth)data)).ConfigureAwait(false);
+                subResult = await _socketClient.FuturesUsdt.SubscribeToPartialOrderBookUpdatesAsync(Symbol, _limit.Value, _updateInterval, data => HandleUpdate((BinanceFuturesStreamOrderBookDepth)data)).ConfigureAwait(false);
 
             if (!subResult)
                 return new CallResult<UpdateSubscription>(null, subResult.Error);
@@ -47,7 +46,7 @@ namespace Binance.Net.SymbolOrderBooks
             Status = OrderBookStatus.Syncing;
             if (_limit == null)
             {
-                var bookResult = await _restClient.Futures.Market.GetOrderBookAsync(Symbol, _limit ?? 1000).ConfigureAwait(false);
+                var bookResult = await _restClient.FuturesUsdt.Market.GetOrderBookAsync(Symbol, _limit ?? 1000).ConfigureAwait(false);
                 if (!bookResult)
                 {
                     await _socketClient.UnsubscribeAll().ConfigureAwait(false);
@@ -88,7 +87,7 @@ namespace Binance.Net.SymbolOrderBooks
             if (_limit != null)
                 return await WaitForSetOrderBook(10000).ConfigureAwait(false);
 
-            var bookResult = await _restClient.Futures.Market.GetOrderBookAsync(Symbol, _limit ?? 1000).ConfigureAwait(false);
+            var bookResult = await _restClient.FuturesUsdt.Market.GetOrderBookAsync(Symbol, _limit ?? 1000).ConfigureAwait(false);
             if (!bookResult)
                 return new CallResult<bool>(false, bookResult.Error);
 

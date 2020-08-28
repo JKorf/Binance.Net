@@ -287,31 +287,33 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of orders</returns>
         Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetAllOrdersAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
-
+        
         /// <summary>
-        /// Gets all user trades for provided symbol
+        /// Gets a list of users forced orders
         /// </summary>
-        /// <param name="symbol">Symbol to get trades for</param>
-        /// <param name="limit">The max number of results</param>
-        /// <param name="startTime">Orders newer than this date will be retrieved</param>
-        /// <param name="endTime">Orders older than this date will be retrieved</param>
-        /// <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
+        /// <param name="symbol">The symbol to get forced orders for</param>
+        /// <param name="closeType">Filter by reason for close</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>List of trades</returns>
-        WebCallResult<IEnumerable<BinanceTrade>> GetMyTrades(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? receiveWindow = null, CancellationToken ct = default);
+        /// <returns>List of forced orders</returns>
+        WebCallResult<IEnumerable<BinanceFuturesOrder>> GetForcedOrders(string? symbol = null,
+            AutoCloseType? closeType = null, DateTime? startTime = null, DateTime? endTime = null,
+            int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Gets all user trades for provided symbol
+        /// Gets a list of users forced orders
         /// </summary>
-        /// <param name="symbol">Symbol to get trades for</param>
-        /// <param name="limit">The max number of results</param>
-        /// <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
-        /// <param name="startTime">Orders newer than this date will be retrieved</param>
-        /// <param name="endTime">Orders older than this date will be retrieved</param>
+        /// <param name="symbol">The symbol to get forced orders for</param>
+        /// <param name="closeType">Filter by reason for close</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>List of trades</returns>
-        Task<WebCallResult<IEnumerable<BinanceTrade>>> GetMyTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? receiveWindow = null, CancellationToken ct = default);
+        /// <returns>List of forced orders</returns>
+        Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetForcedOrdersAsync(string? symbol = null,
+            AutoCloseType? closeType = null, DateTime? startTime = null, DateTime? endTime = null,
+            int? receiveWindow = null, CancellationToken ct = default);
     }
 }

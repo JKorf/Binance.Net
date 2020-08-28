@@ -89,8 +89,8 @@ namespace Binance.Net.UnitTests
                     PrevDayClosePrice = 1.0m,
                     PriceChange = 1.1m,
                     Symbol = "test",
-                    TotalTradedBaseAssetVolume = 1.3m,
-                    TotalTradedQuoteAssetVolume = 1.4m,
+                    Volume = 1.3m,
+                    TotalTradedAlternateAssetVolume = 1.4m,
                     TotalTrades = 3
                 }
             };
@@ -125,8 +125,8 @@ namespace Binance.Net.UnitTests
                     PrevDayClosePrice = 1.0m,
                     PriceChange = 1.1m,
                     Symbol = "test",
-                    TotalTradedBaseAssetVolume = 1.3m,
-                    TotalTradedQuoteAssetVolume = 1.4m,
+                    Volume = 1.3m,
+                    TotalTradedAlternateAssetVolume = 1.4m,
                     TotalTrades = 3
                 }
             };

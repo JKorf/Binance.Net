@@ -10,6 +10,10 @@ namespace Binance.Net.SubClients.Spot
     public class BinanceClientSpot : IBinanceClientSpot
     {
         /// <summary>
+        /// Spot system endpoints
+        /// </summary>
+        public IBinanceClientSpotSystem System { get; }
+        /// <summary>
         /// Spot market endpoints
         /// </summary>
         public IBinanceClientSpotMarket Market { get; }
@@ -24,6 +28,7 @@ namespace Binance.Net.SubClients.Spot
 
         internal BinanceClientSpot(Log log, BinanceClient baseClient)
         {
+            System = new BinanceClientSpotSystem(log, baseClient);
             Market = new BinanceClientSpotMarket(baseClient);
             Order = new BinanceClientSpotOrder(log, baseClient);
             UserStream = new BinanceClientSpotUserStream(baseClient);
