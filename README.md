@@ -145,6 +145,10 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.0.0-beta.4 - 28 Aug 2020
+    * Added support for Coin-M futures
+    * Some refactoring
+
 * Version 6.0.0-beta.3 - 17 Aug 2020
     * Fixed GetAccountInfo endpoint
 
