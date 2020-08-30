@@ -1,9 +1,34 @@
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Binance.Net.Objects.Futures.UserStream
 {
+    /// <summary>
+    /// Account update event
+    /// </summary>
+    public class BinanceFuturesAccountUpdate
+    {
+        /// <summary>
+        /// Account update reason type
+        /// </summary>
+        [JsonProperty("m"), JsonConverter(typeof(AccountUpdateReasonConverter))]
+        public AccountUpdateReason Reason { get; set; }
+
+        /// <summary>
+        /// Balances
+        /// </summary>
+        [JsonProperty("B")]
+        public IEnumerable<BinanceFuturesStreamBalance> Balances { get; set; } = new List<BinanceFuturesStreamBalance>();
+
+        /// <summary>
+        /// Positions
+        /// </summary>
+        [JsonProperty("P")]
+        public IEnumerable<BinanceFuturesStreamPosition> Positions { get; set; } = new List<BinanceFuturesStreamPosition>();
+    }
+
     /// <summary>
     /// Information about an asset balance
     /// </summary>

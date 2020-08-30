@@ -525,8 +525,7 @@ namespace Binance.Net.SocketSubClients
         /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
         /// <param name="onCrossWalletUpdate">The event handler for whenever a cross wallet has changed</param>
         /// <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
-        /// <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
-        /// <param name="onPositionUpdate">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
+        /// <param name="onAccountUpdate">The event handler for whenever an account update is received</param>
         /// <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
         /// <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -534,10 +533,9 @@ namespace Binance.Net.SocketSubClients
             string listenKey,
             Action<decimal>? onCrossWalletUpdate,
              Action<IEnumerable<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate,
-            Action<IEnumerable<BinanceFuturesStreamBalance>>? onAccountBalanceUpdate,
-            Action<IEnumerable<BinanceFuturesStreamPosition>>? onPositionUpdate,
+            Action<BinanceFuturesAccountUpdate>? onAccountUpdate,
             Action<BinanceFuturesStreamOrderUpdate>? onOrderUpdate,
-            Action<BinanceStreamEvent> onListenKeyExpired) => SubscribeToUserDataUpdatesAsync(listenKey, onCrossWalletUpdate, onMarginUpdate, onAccountBalanceUpdate, onPositionUpdate, onOrderUpdate, onListenKeyExpired).Result;
+            Action<BinanceStreamEvent> onListenKeyExpired) => SubscribeToUserDataUpdatesAsync(listenKey, onCrossWalletUpdate, onMarginUpdate, onAccountUpdate, onOrderUpdate, onListenKeyExpired).Result;
 
         /// <summary>
         /// Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStreams.StartUserStream method should be called.
@@ -545,8 +543,7 @@ namespace Binance.Net.SocketSubClients
         /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
         /// <param name="onCrossWalletUpdate">The event handler for whenever a cross wallet has changed</param>
         /// <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
-        /// <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
-        /// <param name="onPositionUpdate">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
+        /// <param name="onAccountUpdate">The event handler for whenever an account update is received</param>
         /// <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
         /// <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -554,8 +551,7 @@ namespace Binance.Net.SocketSubClients
             string listenKey,
             Action<decimal>? onCrossWalletUpdate,
             Action<IEnumerable<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate,
-            Action<IEnumerable<BinanceFuturesStreamBalance>>? onAccountBalanceUpdate,
-            Action<IEnumerable<BinanceFuturesStreamPosition>>? onPositionUpdate,
+            Action<BinanceFuturesAccountUpdate>? onAccountUpdate,
             Action<BinanceFuturesStreamOrderUpdate>? onOrderUpdate,
             Action<BinanceStreamEvent> onListenKeyExpired)
         {
@@ -583,25 +579,12 @@ namespace Binance.Net.SocketSubClients
                         }
                     case accountUpdateEvent:
                         {
-                            if (token["a"]["B"] != null)
-                            {
-                                var balances = token["a"]["B"];
-                                var result = BaseClient.DeserializeInternal<BinanceFuturesStreamBalance[]>(balances, false);
-                                if (result.Success)
-                                    onAccountBalanceUpdate?.Invoke(result.Data);
-                                else
-                                    Log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account stream: " + result.Error);
-                            }
-
-                            if (token["a"]["P"] != null)
-                            {
-                                var positions = token["a"]["P"];
-                                var result = BaseClient.DeserializeInternal<BinanceFuturesStreamPosition[]>(positions, false);
-                                if (result.Success)
-                                    onPositionUpdate?.Invoke(result.Data);
-                                else
-                                    Log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account stream: " + result.Error);
-                            }
+                            var accountUpdate = token["a"];
+                            var result = BaseClient.DeserializeInternal<BinanceFuturesAccountUpdate>(accountUpdate, false);
+                            if (result.Success)
+                                onAccountUpdate?.Invoke(result.Data);
+                            else
+                                Log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from account stream: " + result.Error);
 
                             break;
                         }

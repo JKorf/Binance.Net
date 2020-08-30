@@ -232,6 +232,81 @@
             Leveraged account type
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.AccountUpdateReason">
+            <summary>
+            Account update reason
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountUpdateReason.Deposit">
+            <summary>
+            Deposit
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountUpdateReason.Withdraw">
+            <summary>
+            Withdraw
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountUpdateReason.Order">
+            <summary>
+            Order
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountUpdateReason.FundingFee">
+            <summary>
+            Funding Fee
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountUpdateReason.WithdrawReject">
+            <summary>
+            Withdraw Reject
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountUpdateReason.Adjustment">
+            <summary>
+            Adjustment
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountUpdateReason.InsuranceClear">
+            <summary>
+            Insurance Clear
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountUpdateReason.AdminDeposit">
+            <summary>
+            Admin Deposit
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountUpdateReason.AdminWithdraw">
+            <summary>
+            Admin Withdraw
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountUpdateReason.MarginTransfer">
+            <summary>
+            Margin Transfer
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountUpdateReason.MarginTypeChange">
+            <summary>
+            Margin Type Change
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountUpdateReason.AssetTransfer">
+            <summary>
+             Asset Transfer
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountUpdateReason.OptionsPremiumFee">
+            <summary>
+            Options Premium Fee
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountUpdateReason.OptionsSettleProfit">
+            <summary>
+            Options Settle Profit
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.AutoCloseType">
             <summary>
             Type of auto close
@@ -2814,28 +2889,26 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientFutures.SubscribeToUserDataUpdates(System.String,System.Action{System.Decimal},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate}},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamBalance}},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition}},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
+        <member name="M:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientFutures.SubscribeToUserDataUpdates(System.String,System.Action{System.Decimal},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate}},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesAccountUpdate},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStreams.StartUserStream method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
             <param name="onCrossWalletUpdate">The event handler for whenever a cross wallet has changed</param>
             <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
-            <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
-            <param name="onPositionUpdate">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
+            <param name="onAccountUpdate">The event handler for whenever an account update is received</param>
             <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
             <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientFutures.SubscribeToUserDataUpdatesAsync(System.String,System.Action{System.Decimal},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate}},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamBalance}},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition}},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
+        <member name="M:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientFutures.SubscribeToUserDataUpdatesAsync(System.String,System.Action{System.Decimal},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate}},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesAccountUpdate},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStreams.StartUserStream method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
             <param name="onCrossWalletUpdate">The event handler for whenever a cross wallet has changed</param>
             <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
-            <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
-            <param name="onPositionUpdate">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
+            <param name="onAccountUpdate">The event handler for whenever an account update is received</param>
             <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
             <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -9969,6 +10042,26 @@
             The list of diff asks
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Futures.UserStream.BinanceFuturesAccountUpdate">
+            <summary>
+            Account update event
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesAccountUpdate.Reason">
+            <summary>
+            Account update reason type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesAccountUpdate.Balances">
+            <summary>
+            Balances
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesAccountUpdate.Positions">
+            <summary>
+            Positions
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamBalance">
             <summary>
             Information about an asset balance
@@ -15640,28 +15733,26 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFutures.SubscribeToUserDataUpdates(System.String,System.Action{System.Decimal},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate}},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamBalance}},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition}},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFutures.SubscribeToUserDataUpdates(System.String,System.Action{System.Decimal},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate}},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesAccountUpdate},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStreams.StartUserStream method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
             <param name="onCrossWalletUpdate">The event handler for whenever a cross wallet has changed</param>
             <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
-            <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
-            <param name="onPositionUpdate">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
+            <param name="onAccountUpdate">The event handler for whenever an account update is received</param>
             <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
             <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFutures.SubscribeToUserDataUpdatesAsync(System.String,System.Action{System.Decimal},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate}},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamBalance}},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition}},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFutures.SubscribeToUserDataUpdatesAsync(System.String,System.Action{System.Decimal},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate}},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesAccountUpdate},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStreams.StartUserStream method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
             <param name="onCrossWalletUpdate">The event handler for whenever a cross wallet has changed</param>
             <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
-            <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
-            <param name="onPositionUpdate">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
+            <param name="onAccountUpdate">The event handler for whenever an account update is received</param>
             <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
             <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
