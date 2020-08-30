@@ -76,7 +76,7 @@ namespace Binance.Net.Interfaces.SocketSubClient
             string listenKey,
             Action<decimal>? onCrossWalletUpdate,
             Action<IEnumerable<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate,
-            Action<BinanceFuturesAccountUpdate>? onAccountUpdate,
+            Action<BinanceFuturesStreamAccountUpdate>? onAccountUpdate,
             Action<BinanceFuturesStreamOrderUpdate>? onOrderUpdate,
             Action<BinanceStreamEvent> onListenKeyExpired);
 
@@ -94,7 +94,7 @@ namespace Binance.Net.Interfaces.SocketSubClient
             string listenKey,
             Action<decimal>? onCrossWalletUpdate,
             Action<IEnumerable<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate,
-            Action<BinanceFuturesAccountUpdate>? onAccountUpdate,
+            Action<BinanceFuturesStreamAccountUpdate>? onAccountUpdate,
             Action<BinanceFuturesStreamOrderUpdate>? onOrderUpdate,
             Action<BinanceStreamEvent> onListenKeyExpired);
     }

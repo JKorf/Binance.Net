@@ -533,7 +533,7 @@ namespace Binance.Net.SocketSubClients
             string listenKey,
             Action<decimal>? onCrossWalletUpdate,
              Action<IEnumerable<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate,
-            Action<BinanceFuturesAccountUpdate>? onAccountUpdate,
+            Action<BinanceFuturesStreamAccountUpdate>? onAccountUpdate,
             Action<BinanceFuturesStreamOrderUpdate>? onOrderUpdate,
             Action<BinanceStreamEvent> onListenKeyExpired) => SubscribeToUserDataUpdatesAsync(listenKey, onCrossWalletUpdate, onMarginUpdate, onAccountUpdate, onOrderUpdate, onListenKeyExpired).Result;
 
@@ -551,7 +551,7 @@ namespace Binance.Net.SocketSubClients
             string listenKey,
             Action<decimal>? onCrossWalletUpdate,
             Action<IEnumerable<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate,
-            Action<BinanceFuturesAccountUpdate>? onAccountUpdate,
+            Action<BinanceFuturesStreamAccountUpdate>? onAccountUpdate,
             Action<BinanceFuturesStreamOrderUpdate>? onOrderUpdate,
             Action<BinanceStreamEvent> onListenKeyExpired)
         {
@@ -580,7 +580,7 @@ namespace Binance.Net.SocketSubClients
                     case accountUpdateEvent:
                         {
                             var accountUpdate = token["a"];
-                            var result = BaseClient.DeserializeInternal<BinanceFuturesAccountUpdate>(accountUpdate, false);
+                            var result = BaseClient.DeserializeInternal<BinanceFuturesStreamAccountUpdate>(accountUpdate, false);
                             if (result.Success)
                                 onAccountUpdate?.Invoke(result.Data);
                             else

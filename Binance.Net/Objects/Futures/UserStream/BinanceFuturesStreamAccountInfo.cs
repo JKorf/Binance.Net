@@ -8,7 +8,7 @@ namespace Binance.Net.Objects.Futures.UserStream
     /// <summary>
     /// Account update event
     /// </summary>
-    public class BinanceFuturesAccountUpdate
+    public class BinanceFuturesStreamAccountUpdate
     {
         /// <summary>
         /// Account update reason type
