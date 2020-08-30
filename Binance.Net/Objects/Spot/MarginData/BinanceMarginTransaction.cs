@@ -3,7 +3,7 @@
 namespace Binance.Net.Objects.Spot.MarginData
 {
     /// <summary>
-    /// The result of transferring, borrow or repay response
+    /// The result of transferring
     /// </summary>
     public class BinanceMarginTransaction
     {

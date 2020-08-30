@@ -13,7 +13,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// Symbol of the order
         /// </summary>
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = "";
         /// <summary>
         /// Side of the order
         /// </summary>
@@ -45,7 +45,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// A unique id among open orders. Automatically generated if not sent.
         /// </summary>
-        public string NewClientOrderId { get; set; }
+        public string NewClientOrderId { get; set; } = "";
         /// <summary>
         /// Used with Stop/StopMarket or TakeProfit/TakeProfitMarket orders.
         /// </summary>

@@ -92,29 +92,6 @@ namespace Binance.Net.UnitTests.TestImplementations
             SetResponse(client, JsonConvert.SerializeObject(response));
             return client;
         }
-
-        public static IBinanceFuturesClient CreateFuturesResponseClient(string response, BinanceFuturesClientOptions options = null)
-        {
-            var client = (BinanceFuturesClient)CreateFuturesClient(options);
-            SetResponse(client, response);
-            return client;
-        }
-
-        public static IBinanceFuturesClient CreateFuturesResponseClient<T>(T response, BinanceFuturesClientOptions options = null)
-        {
-            var client = (BinanceFuturesClient)CreateFuturesClient(options);
-            SetResponse(client, JsonConvert.SerializeObject(response));
-            return client;
-        }
-
-        public static IBinanceFuturesClient CreateFuturesClient(BinanceFuturesClientOptions options = null)
-        {
-            IBinanceFuturesClient client;
-            client = options != null ? new BinanceFuturesClient(options) : new BinanceFuturesClient();
-            client.RequestFactory = Mock.Of<IRequestFactory>();
-            return client;
-        }
-
         public static void SetResponse(RestClient client, string responseData)
         {
             var expectedBytes = Encoding.UTF8.GetBytes(responseData);
@@ -131,7 +108,7 @@ namespace Binance.Net.UnitTests.TestImplementations
             request.Setup(c => c.GetResponse(It.IsAny<CancellationToken>())).Returns(Task.FromResult(response.Object));
 
             var factory = Mock.Get(client.RequestFactory);
-            factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<string>()))
+            factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<string>(), It.IsAny<int>()))
                 .Returns(request.Object);
         }
 
@@ -151,7 +128,7 @@ namespace Binance.Net.UnitTests.TestImplementations
             request.Setup(c => c.GetResponse(It.IsAny<CancellationToken>())).Returns(Task.FromResult(response.Object));
 
             var factory = Mock.Get(client.RequestFactory);
-            factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<string>()))
+            factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<string>(), It.IsAny<int>()))
                 .Returns(request.Object);
         }
 

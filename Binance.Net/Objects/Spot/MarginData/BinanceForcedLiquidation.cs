@@ -54,5 +54,9 @@ namespace Binance.Net.Objects.Spot.MarginData
         [JsonConverter(typeof(TimestampConverter))]
         [JsonProperty("updatedTime")]
         public DateTime UpdateTime { get; set; }
+        /// <summary>
+        /// Is isolated margin
+        /// </summary>
+        public bool IsIsolated { get; set; }
     }
 }

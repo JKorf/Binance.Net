@@ -18,7 +18,7 @@ namespace Binance.Net.Interfaces
         /// <summary>
         /// The last funding rate
         /// </summary>
-        decimal FundingRate { get; set; }
+        decimal? FundingRate { get; set; }
         /// <summary>
         /// The time the funding rate is applied
         /// </summary>

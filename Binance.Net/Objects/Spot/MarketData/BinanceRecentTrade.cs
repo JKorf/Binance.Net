@@ -24,11 +24,6 @@ namespace Binance.Net.Objects.Spot.MarketData
         [JsonProperty("qty")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// The quantity of the trade
-        /// </summary>
-        [JsonProperty("quoteQty")]
-        public decimal QuoteQuantity { get; set; }
-        /// <summary>
         /// The timestamp of the trade
         /// </summary>
         [JsonProperty("Time"), JsonConverter(typeof(TimestampConverter))]
@@ -42,5 +37,29 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// Whether the trade was made at the best match
         /// </summary>
         public bool IsBestMatch { get; set; }
+    }
+
+    /// <summary>
+    /// Recent trade with quote quantity
+    /// </summary>
+    public class BinanceRecentTradeQuote : BinanceRecentTrade
+    {
+        /// <summary>
+        /// The quote quantity of the trade
+        /// </summary>
+        [JsonProperty("quoteQty")]
+        public decimal QuoteQuantity { get; set; }
+    }
+
+    /// <summary>
+    /// Recent trade with base quantity
+    /// </summary>
+    public class BinanceRecentTradeBase : BinanceRecentTrade
+    {
+        /// <summary>
+        /// The base quantity of the trade
+        /// </summary>
+        [JsonProperty("baseQty")]
+        public decimal BaseQuantity { get; set; }
     }
 }

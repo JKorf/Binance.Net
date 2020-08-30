@@ -31,13 +31,13 @@
         decimal LowPrice { get; set; }
 
         /// <summary>
-        /// Total traded base asset volume
+        /// Total traded volume
         /// </summary>
-        decimal TotalTradedBaseAssetVolume { get; set; }
+        decimal Volume { get; set; }
 
         /// <summary>
-        /// Total traded quote asset volume
+        /// Total traded alternate asset volume
         /// </summary>
-        decimal TotalTradedQuoteAssetVolume { get; set; }
+        decimal TotalTradedAlternateAssetVolume { get; set; }
     }
 }

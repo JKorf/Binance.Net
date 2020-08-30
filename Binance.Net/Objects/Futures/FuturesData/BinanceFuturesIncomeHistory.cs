@@ -25,7 +25,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// Type of income
         /// </summary>
-        public IncomeType? IncomeType => new IncomeTypeConverter().ReadString(IncomeTypeString);
+        public IncomeType? IncomeType => IncomeTypeString != null ? new IncomeTypeConverter().ReadString(IncomeTypeString): (IncomeType?)null;
 
         /// <summary>
         /// Amount of income
@@ -44,6 +44,16 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// </summary>
         [JsonConverter(typeof(TimestampConverter))]
         public DateTime Time { get; set; }
+
+        /// <summary>
+        /// Transaction id if relevant
+        /// </summary>
+        [JsonProperty("tranId")]
+        public string TransactionId { get; set; } = "";
+        /// <summary>
+        /// Trade id if existing
+        /// </summary>
+        public string TradeId { get; set; } = "";
     }
 
 }

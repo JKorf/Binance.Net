@@ -8,13 +8,8 @@ namespace Binance.Net.Objects.Spot.MarketStream
     /// <summary>
     /// Book tick
     /// </summary>
-    public class BinanceStreamBookPrice : IBinanceBookPrice
+    public class BinanceStreamBookPrice : BinanceStreamEvent, IBinanceBookPrice
     {
-        /// <summary>
-        /// Timestamp
-        /// </summary>
-        [JsonProperty("E"), JsonConverter(typeof(TimestampConverter))]
-        public DateTime? EventTime { get; set; }
         /// <summary>
         /// Timestamp
         /// </summary>
