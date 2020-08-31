@@ -145,6 +145,9 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.0.0-beta.6 - 31 Aug 2020
+    * Combined futures userstream Balance and Position update handlers, UpdateReason property added
+
 * Version 6.0.0-beta.5 - 28 Aug 2020
     * Fixed futures order update wrong JsonConverter
 
