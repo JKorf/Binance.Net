@@ -7,7 +7,7 @@
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
     <Authors>JKorf, Nikkozp, CaptHolley</Authors>
-    <PackageVersion>6.0.0-beta.5</PackageVersion>
+    <PackageVersion>6.0.0-beta.6</PackageVersion>
     <Description>Binance.Net is a .Net wrapper for the Binance API, including Binance Futures. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance Binance.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
@@ -16,7 +16,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>6.0.0-beta.5 - Fixed futures order update wrong JsonConverter</PackageReleaseNotes>
+    <PackageReleaseNotes>6.0.0-beta.6 - Combined futures userstream Balance and Position update handlers, UpdateReason property added</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup>
     <DocumentationFile>Binance.Net.xml</DocumentationFile>
