@@ -32,6 +32,8 @@ namespace Binance.Net.SubClients.Spot
         private const string futuresBorrowHistoryEndpoint = "futures/loan/borrow/history";
         private const string futuresRepayEndpoint = "futures/loan/repay";
         private const string futuresRepayHistoryEndpoint = "futures/loan/repay/history";
+        private const string futuresWalletEndpoint = "futures/loan/wallet";
+        private const string futuresInformationEndpoint = "futures/loan/configs";
 
         private const string api = "sapi";
         private const string publicVersion = "1";
@@ -312,6 +314,74 @@ namespace Binance.Net.SubClients.Spot
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceCrossCollateralRepayHistory>>(_baseClient.GetUrlSpot(futuresRepayHistoryEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Cross collateral wallet
+
+        /// <summary>
+        /// Get cross-collateral wallet info
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Wallet</returns>
+        public WebCallResult<BinanceCrossCollateralWallet> GetCrossCollateralWallet(long? receiveWindow = null, CancellationToken ct = default) => GetCrossCollateralWalletAsync(receiveWindow, ct).Result;
+
+        /// <summary>
+        /// Get cross-collateral wallet info
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Wallet</returns>
+        public async Task<WebCallResult<BinanceCrossCollateralWallet>> GetCrossCollateralWalletAsync(long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceCrossCollateralWallet>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", _baseClient.GetTimestamp() }
+            };
+
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceCrossCollateralWallet>(_baseClient.GetUrlSpot(futuresWalletEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Cross collateral information
+
+        /// <summary>
+        /// Get cross-collateral info
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Info</returns>
+        public WebCallResult<IEnumerable<BinanceCrossCollateralInformation>> GetCrossCollateralInformation(long? receiveWindow = null, CancellationToken ct = default) => GetCrossCollateralInformationAsync(receiveWindow, ct).Result;
+
+        /// <summary>
+        /// Get cross-collateral info
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Info</returns>
+        public async Task<WebCallResult<IEnumerable<BinanceCrossCollateralInformation>>> GetCrossCollateralInformationAsync(long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<IEnumerable<BinanceCrossCollateralInformation>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", _baseClient.GetTimestamp() }
+            };
+
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceCrossCollateralInformation>>(_baseClient.GetUrlSpot(futuresInformationEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion

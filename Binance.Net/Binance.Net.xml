@@ -10474,6 +10474,36 @@
             The timestamp
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralInformation">
+            <summary>
+            Collateral info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralInformation.CollateralCoin">
+            <summary>
+            The collateral coin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralInformation.Rate">
+            <summary>
+            Rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralInformation.MarginCallCollateralRate">
+            <summary>
+            Margin call collateral rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralInformation.LiquidationCollateralRate">
+            <summary>
+            Liquidation collateal rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralInformation.CurrentCollateralRate">
+            <summary>
+            Current collateral rate
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralRepayHistory">
             <summary>
             Repay history
@@ -10532,6 +10562,56 @@
         <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralRepayResult.Amount">
             <summary>
             The amount borrowed
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralWallet">
+            <summary>
+            Cross colateral wallet info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralWallet.TotalCrossCollateral">
+            <summary>
+            Total cross collateral
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralWallet.TotalBorrowed">
+            <summary>
+            Total borrowed
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralWallet.Asset">
+            <summary>
+            The asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralWallet.CrossCollaterals">
+            <summary>
+            Cross collaterals
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralWalletEntry">
+            <summary>
+            Cross collateral data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralWalletEntry.CollateralCoin">
+            <summary>
+            Collateral coin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralWalletEntry.Locked">
+            <summary>
+            Amount locked
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralWalletEntry.LoanAmount">
+            <summary>
+            Loan amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralWalletEntry.CurrentCollateralRate">
+            <summary>
+            Current collateral rate
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginSymbol">
@@ -20656,6 +20736,38 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>History</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotFuturesInteraction.GetCrossCollateralWallet(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get cross-collateral wallet info
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Wallet</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotFuturesInteraction.GetCrossCollateralWalletAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get cross-collateral wallet info
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Wallet</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotFuturesInteraction.GetCrossCollateralInformation(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get cross-collateral info
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Info</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotFuturesInteraction.GetCrossCollateralInformationAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get cross-collateral info
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Info</returns>
         </member>
         <member name="T:Binance.Net.SubClients.Spot.BinanceClientSpotMarket">
             <summary>
