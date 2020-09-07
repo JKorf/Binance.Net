@@ -8,7 +8,7 @@ namespace Binance.Net.Objects.Spot.MarketStream
     /// <summary>
     /// Tick info
     /// </summary>
-    public class BinanceStreamTick: BinanceStreamEvent, IBinanceTick
+    public abstract class BinanceStreamTickBase: BinanceStreamEvent, IBinanceTick
     {        
         /// <summary>
         /// The symbol this data is for
@@ -83,13 +83,11 @@ namespace Binance.Net.Objects.Spot.MarketStream
         /// <summary>
         /// Total traded volume in the base asset
         /// </summary>
-        [JsonProperty("v")]
-        public decimal Volume { get; set; }
+        public abstract decimal BaseVolume { get; set; }
         /// <summary>
         /// Total traded volume in the quote asset
         /// </summary>
-        [JsonProperty("q")]
-        public decimal TotalTradedAlternateAssetVolume { get; set; }
+        public abstract decimal QuoteVolume { get; set; }
         /// <summary>
         /// The first trade id of today
         /// </summary>
@@ -115,5 +113,39 @@ namespace Binance.Net.Objects.Spot.MarketStream
         /// </summary>
         [JsonProperty("C"), JsonConverter(typeof(TimestampConverter))]
         public DateTime CloseTime { get; set; }
+    }
+
+    /// <summary>
+    /// Stream tick
+    /// </summary>
+    public class BinanceStreamTick: BinanceStreamTickBase
+    {
+        /// <summary>
+        /// Total traded volume in the base asset
+        /// </summary>
+        [JsonProperty("v")]
+        public override decimal BaseVolume { get; set; }
+        /// <summary>
+        /// Total traded volume in the quote asset
+        /// </summary>
+        [JsonProperty("q")]
+        public override decimal QuoteVolume { get; set; }
+    }
+
+    /// <summary>
+    /// Stream tick
+    /// </summary>
+    public class BinanceStreamCoinTick : BinanceStreamTickBase
+    {
+        /// <summary>
+        /// Total traded volume in the base asset
+        /// </summary>
+        [JsonProperty("q")]
+        public override decimal BaseVolume { get; set; }
+        /// <summary>
+        /// Total traded volume in the quote asset
+        /// </summary>
+        [JsonProperty("v")]
+        public override decimal QuoteVolume { get; set; }
     }
 }

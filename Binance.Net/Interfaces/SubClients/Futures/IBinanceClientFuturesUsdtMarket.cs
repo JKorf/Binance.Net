@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Enums;
 using Binance.Net.Objects.Futures.MarketData;
+using Binance.Net.Objects.Shared;
 using Binance.Net.Objects.Spot.MarketData;
 using CryptoExchange.Net.Objects;
 
@@ -37,7 +38,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="symbol">The symbol to get the data for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Data over the last 24 hours</returns>
-        WebCallResult<IEnumerable<Binance24HPrice>> Get24HPrices(string? symbol = null, CancellationToken ct = default);
+        WebCallResult<IEnumerable<IBinance24HPrice>> Get24HPrices(string? symbol = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get data regarding the last 24 hours change
@@ -45,7 +46,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="symbol">The symbol to get the data for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Data over the last 24 hours</returns>
-        Task<WebCallResult<IEnumerable<Binance24HPrice>>> Get24HPricesAsync(string? symbol = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<IBinance24HPrice>>> Get24HPricesAsync(string? symbol = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the best price/quantity on the order book for a symbol.

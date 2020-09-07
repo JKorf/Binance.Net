@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using Binance.Net.Interfaces;
 using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Spot.MarketData
@@ -7,7 +8,7 @@ namespace Binance.Net.Objects.Spot.MarketData
     /// <summary>
     /// Recent trade info
     /// </summary>
-    public class BinanceRecentTrade
+    public abstract class BinanceRecentTrade : IBinanceRecentTrade
     {
         /// <summary>
         /// The id of the trade
@@ -18,11 +19,10 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// The price of the trade
         /// </summary>
         public decimal Price { get; set; }
-        /// <summary>
-        /// The quantity of the trade
-        /// </summary>
-        [JsonProperty("qty")]
-        public decimal Quantity { get; set; }
+        /// <inheritdoc />
+        public abstract decimal BaseQuantity { get; set; }
+        /// <inheritdoc />
+        public abstract decimal QuoteQuantity { get; set; }
         /// <summary>
         /// The timestamp of the trade
         /// </summary>
@@ -44,11 +44,13 @@ namespace Binance.Net.Objects.Spot.MarketData
     /// </summary>
     public class BinanceRecentTradeQuote : BinanceRecentTrade
     {
-        /// <summary>
-        /// The quote quantity of the trade
-        /// </summary>
+        /// <inheritdoc />
         [JsonProperty("quoteQty")]
-        public decimal QuoteQuantity { get; set; }
+        public override decimal QuoteQuantity { get; set; }
+
+        /// <inheritdoc />
+        [JsonProperty("qty")]
+        public override decimal BaseQuantity { get; set; }
     }
 
     /// <summary>
@@ -56,10 +58,12 @@ namespace Binance.Net.Objects.Spot.MarketData
     /// </summary>
     public class BinanceRecentTradeBase : BinanceRecentTrade
     {
-        /// <summary>
-        /// The base quantity of the trade
-        /// </summary>
+        /// <inheritdoc />
+        [JsonProperty("qty")]
+        public override decimal QuoteQuantity { get; set; }
+
+        /// <inheritdoc />
         [JsonProperty("baseQty")]
-        public decimal BaseQuantity { get; set; }
+        public override decimal BaseQuantity { get; set; }
     }
 }

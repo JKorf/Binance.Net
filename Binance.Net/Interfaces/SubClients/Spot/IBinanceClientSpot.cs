@@ -26,5 +26,9 @@ namespace Binance.Net.Interfaces.SubClients.Spot
         /// Spot user stream endpoints
         /// </summary>
         IBinanceClientUserStream UserStream { get; }
+        /// <summary>
+        /// Spot/futures endpoints
+        /// </summary>
+        BinanceClientSpotFuturesInteraction Futures { get; }
     }
 }

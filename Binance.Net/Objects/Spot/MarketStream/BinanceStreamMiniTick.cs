@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Spot.MarketStream
     /// <summary>
     /// MiniTick info
     /// </summary>
-    public class BinanceStreamMiniTick : BinanceStreamEvent, IBinanceMiniTick
+    public abstract class BinanceStreamMiniTickBase : BinanceStreamEvent, IBinanceMiniTick
     {
         /// <summary>
         /// The symbol this data is for
@@ -37,17 +37,41 @@ namespace Binance.Net.Objects.Spot.MarketStream
         /// </summary>
         [JsonProperty("l")]
         public decimal LowPrice { get; set; }
-
+        
         /// <summary>
         /// Total traded volume
         /// </summary>
-        [JsonProperty("v")]
-        public decimal Volume { get; set; }
+        public abstract decimal BaseVolume { get; set; }
 
         /// <summary>
-        /// Total traded volume in the alternate asset
+        /// Total traded quote volume
         /// </summary>
+        public abstract decimal QuoteVolume { get; set; }
+    }
+
+    /// <summary>
+    /// Stream mini tick
+    /// </summary>
+    public class BinanceStreamMiniTick: BinanceStreamMiniTickBase
+    {
+        /// <inheritdoc/>
+        [JsonProperty("v")]
+        public override decimal BaseVolume { get; set; }
+        /// <inheritdoc/>
         [JsonProperty("q")]
-        public decimal TotalTradedAlternateAssetVolume { get; set; }
+        public override decimal QuoteVolume { get; set; }
+    }
+
+    /// <summary>
+    /// Stream mini tick
+    /// </summary>
+    public class BinanceStreamCoinMiniTick : BinanceStreamMiniTickBase
+    {
+        /// <inheritdoc/>
+        [JsonProperty("q")]
+        public override decimal BaseVolume { get; set; }
+        /// <inheritdoc/>
+        [JsonProperty("v")]
+        public override decimal QuoteVolume { get; set; }
     }
 }

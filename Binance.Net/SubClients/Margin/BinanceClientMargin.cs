@@ -84,7 +84,7 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transaction Id</returns>
-        public WebCallResult<BinanceMarginTransaction> Transfer(string asset, decimal amount, TransferDirectionType type, int? receiveWindow = null, CancellationToken ct = default) => TransferAsync(asset, amount, type, receiveWindow, ct).Result;
+        public WebCallResult<BinanceTransaction> Transfer(string asset, decimal amount, TransferDirectionType type, int? receiveWindow = null, CancellationToken ct = default) => TransferAsync(asset, amount, type, receiveWindow, ct).Result;
 
         /// <summary>
         /// Execute transfer between spot account and margin account.
@@ -95,12 +95,12 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transaction Id</returns>
-        public async Task<WebCallResult<BinanceMarginTransaction>> TransferAsync(string asset, decimal amount, TransferDirectionType type, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceTransaction>> TransferAsync(string asset, decimal amount, TransferDirectionType type, int? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
-                return new WebCallResult<BinanceMarginTransaction>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<BinanceTransaction>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -111,7 +111,7 @@ namespace Binance.Net.SubClients.Margin
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceMarginTransaction>(_baseClient.GetUrlSpot(marginTransferEndpoint, marginApi, marginVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceTransaction>(_baseClient.GetUrlSpot(marginTransferEndpoint, marginApi, marginVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -128,7 +128,7 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transaction Id</returns>
-        public WebCallResult<BinanceMarginTransaction> Borrow(string asset, decimal amount, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default) => BorrowAsync(asset, amount, isIsolated, symbol, receiveWindow, ct).Result;
+        public WebCallResult<BinanceTransaction> Borrow(string asset, decimal amount, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default) => BorrowAsync(asset, amount, isIsolated, symbol, receiveWindow, ct).Result;
 
         /// <summary>
         /// Borrow. Apply for a loan. 
@@ -140,7 +140,7 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transaction Id</returns>
-        public async Task<WebCallResult<BinanceMarginTransaction>> BorrowAsync(string asset, decimal amount, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceTransaction>> BorrowAsync(string asset, decimal amount, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             if(isIsolated == true && symbol == null)
@@ -148,7 +148,7 @@ namespace Binance.Net.SubClients.Margin
 
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
-                return new WebCallResult<BinanceMarginTransaction>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<BinanceTransaction>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -160,7 +160,7 @@ namespace Binance.Net.SubClients.Margin
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceMarginTransaction>(_baseClient.GetUrlSpot(marginBorrowEndpoint, marginApi, marginVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceTransaction>(_baseClient.GetUrlSpot(marginBorrowEndpoint, marginApi, marginVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -177,7 +177,7 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transaction Id</returns>
-        public WebCallResult<BinanceMarginTransaction> Repay(string asset, decimal amount, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default) => RepayAsync(asset, amount, isIsolated, symbol, receiveWindow, ct).Result;
+        public WebCallResult<BinanceTransaction> Repay(string asset, decimal amount, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default) => RepayAsync(asset, amount, isIsolated, symbol, receiveWindow, ct).Result;
 
         /// <summary>
         /// Repay loan for margin account.
@@ -189,12 +189,12 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transaction Id</returns>
-        public async Task<WebCallResult<BinanceMarginTransaction>> RepayAsync(string asset, decimal amount, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceTransaction>> RepayAsync(string asset, decimal amount, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
-                return new WebCallResult<BinanceMarginTransaction>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<BinanceTransaction>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -206,7 +206,7 @@ namespace Binance.Net.SubClients.Margin
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceMarginTransaction>(_baseClient.GetUrlSpot(marginRepayEndpoint, marginApi, marginVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceTransaction>(_baseClient.GetUrlSpot(marginRepayEndpoint, marginApi, marginVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -754,7 +754,7 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<BinanceMarginTransaction>> IsolatedMarginAccountTransferAsync(string asset,
+        public async Task<WebCallResult<BinanceTransaction>> IsolatedMarginAccountTransferAsync(string asset,
             string symbol, IsolatedMarginTransferDirection from, IsolatedMarginTransferDirection to, decimal amount,
             int? receiveWindow = null, CancellationToken ct = default)
         {
@@ -763,7 +763,7 @@ namespace Binance.Net.SubClients.Margin
 
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
-                return new WebCallResult<BinanceMarginTransaction>(timestampResult.ResponseStatusCode,
+                return new WebCallResult<BinanceTransaction>(timestampResult.ResponseStatusCode,
                     timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
@@ -780,7 +780,7 @@ namespace Binance.Net.SubClients.Margin
                 _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient
-                .SendRequestInternal<BinanceMarginTransaction>(
+                .SendRequestInternal<BinanceTransaction>(
                     _baseClient.GetUrlSpot(transferIsolatedMarginAccountEndpoint, "sapi", "1"), HttpMethod.Post, ct,
                     parameters, true).ConfigureAwait(false);
         }

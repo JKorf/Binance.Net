@@ -4,6 +4,7 @@ using System.Text;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces;
+using Binance.Net.Objects.Shared;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 

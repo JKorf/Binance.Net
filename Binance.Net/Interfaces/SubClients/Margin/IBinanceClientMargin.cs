@@ -44,7 +44,7 @@ namespace Binance.Net.Interfaces.SubClients.Margin
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transaction Id</returns>
-        WebCallResult<BinanceMarginTransaction> Transfer(string asset, decimal amount, TransferDirectionType type, int? receiveWindow = null, CancellationToken ct = default);
+        WebCallResult<BinanceTransaction> Transfer(string asset, decimal amount, TransferDirectionType type, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Execute transfer between spot account and margin account.
@@ -55,7 +55,7 @@ namespace Binance.Net.Interfaces.SubClients.Margin
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transaction Id</returns>
-        Task<WebCallResult<BinanceMarginTransaction>> TransferAsync(string asset, decimal amount, TransferDirectionType type, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceTransaction>> TransferAsync(string asset, decimal amount, TransferDirectionType type, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Borrow. Apply for a loan. 
@@ -67,7 +67,7 @@ namespace Binance.Net.Interfaces.SubClients.Margin
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transaction Id</returns>
-        WebCallResult<BinanceMarginTransaction> Borrow(string asset, decimal amount, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default);
+        WebCallResult<BinanceTransaction> Borrow(string asset, decimal amount, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Borrow. Apply for a loan. 
@@ -79,7 +79,7 @@ namespace Binance.Net.Interfaces.SubClients.Margin
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transaction Id</returns>
-        Task<WebCallResult<BinanceMarginTransaction>> BorrowAsync(string asset, decimal amount, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceTransaction>> BorrowAsync(string asset, decimal amount, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Repay loan for margin account.
@@ -91,7 +91,7 @@ namespace Binance.Net.Interfaces.SubClients.Margin
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transaction Id</returns>
-        WebCallResult<BinanceMarginTransaction> Repay(string asset, decimal amount, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default);
+        WebCallResult<BinanceTransaction> Repay(string asset, decimal amount, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Repay loan for margin account.
@@ -103,7 +103,7 @@ namespace Binance.Net.Interfaces.SubClients.Margin
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transaction Id</returns>
-        Task<WebCallResult<BinanceMarginTransaction>> RepayAsync(string asset, decimal amount, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceTransaction>> RepayAsync(string asset, decimal amount, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get history of transfers
@@ -353,7 +353,7 @@ namespace Binance.Net.Interfaces.SubClients.Margin
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BinanceMarginTransaction>> IsolatedMarginAccountTransferAsync(string asset,
+        Task<WebCallResult<BinanceTransaction>> IsolatedMarginAccountTransferAsync(string asset,
             string symbol, IsolatedMarginTransferDirection from, IsolatedMarginTransferDirection to, decimal amount,
             int? receiveWindow = null, CancellationToken ct = default);
     }

@@ -1,18 +1,18 @@
-﻿using Binance.Net.Converters;
-using Newtonsoft.Json;
-using System;
-using CryptoExchange.Net.Converters;
-using Binance.Net.Interfaces;
-using Binance.Net.Objects.Spot.MarketData;
+﻿using System;
+using Binance.Net.Converters;
 using Binance.Net.Enums;
+using Binance.Net.Interfaces;
 using Binance.Net.Objects.Shared;
+using Binance.Net.Objects.Spot.MarketData;
+using CryptoExchange.Net.Converters;
+using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.MarketStream
+namespace Binance.Net.Objects.Futures.MarketStream
 {
     /// <summary>
     /// Wrapper for kline information for a symbol
     /// </summary>
-    public class BinanceStreamKlineData: BinanceStreamEvent, IBinanceStreamKlineData
+    public class BinanceFuturesStreamCoinKlineData : BinanceStreamEvent, IBinanceStreamKlineData
     {
         /// <summary>
         /// The symbol the data is for
@@ -24,14 +24,14 @@ namespace Binance.Net.Objects.Spot.MarketStream
         /// The data
         /// </summary>
         [JsonProperty("k")]
-        [JsonConverter(typeof(InterfaceConverter<BinanceStreamKline>))]
+        [JsonConverter(typeof(InterfaceConverter<BinanceFuturesStreamCoinKline>))]
         public IBinanceKline Data { get; set; } = default!;
     }
 
     /// <summary>
     /// The kline data
     /// </summary>
-    public class BinanceStreamKline: BinanceKlineBase
+    public class BinanceFuturesStreamCoinKline : BinanceKlineBase
     {
         /// <summary>
         /// The open time of this candlestick
@@ -40,7 +40,7 @@ namespace Binance.Net.Objects.Spot.MarketStream
         public new DateTime OpenTime { get; set; }
 
         /// <inheritdoc />
-        [JsonProperty("v")]
+        [JsonProperty("q")]
         public override decimal BaseVolume { get; set; }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Binance.Net.Objects.Spot.MarketStream
         public new DateTime CloseTime { get; set; }
 
         /// <inheritdoc />
-        [JsonProperty("q")]
+        [JsonProperty("v")]
         public override decimal QuoteVolume { get; set; }
 
         /// <summary>
@@ -100,10 +100,10 @@ namespace Binance.Net.Objects.Spot.MarketStream
         public new int TradeCount { get; set; }
 
         /// <inheritdoc />
-        [JsonProperty("V")]
+        [JsonProperty("Q")]
         public override decimal TakerBuyBaseVolume { get; set; }
         /// <inheritdoc />
-        [JsonProperty("Q")]
+        [JsonProperty("V")]
         public override decimal TakerBuyQuoteVolume { get; set; }
 
         /// <summary>

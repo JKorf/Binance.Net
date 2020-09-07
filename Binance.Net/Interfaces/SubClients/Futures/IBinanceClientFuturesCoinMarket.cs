@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Binance.Net.Enums;
 using Binance.Net.Objects.Futures.FuturesData;
 using Binance.Net.Objects.Futures.MarketData;
+using Binance.Net.Objects.Shared;
 using Binance.Net.Objects.Spot.MarketData;
 using CryptoExchange.Net.Objects;
 
@@ -32,7 +33,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<BinanceFuturesCoinMarkPrice>>> GetMarkPricesAsync(string? symbol = null, string? pair = null, CancellationToken ct = default);
-
+        
         /// <summary>
         /// Get candlestick data for the provided pair
         /// </summary>
@@ -44,7 +45,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The candlestick data for the provided symbol</returns>
-        WebCallResult<IEnumerable<BinanceKline>> GetContinuousContractKlines(string pair, ContractType contractType, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        WebCallResult<IEnumerable<IBinanceKline>> GetContinuousContractKlines(string pair, ContractType contractType, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get candlestick data for the provided pair
@@ -57,7 +58,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The candlestick data for the provided symbol</returns>
-        Task<WebCallResult<IEnumerable<BinanceKline>>> GetContinuousContractKlinesAsync(string pair, ContractType contractType, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<IBinanceKline>>> GetContinuousContractKlinesAsync(string pair, ContractType contractType, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get candlestick data for the provided pair
@@ -114,7 +115,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="pair">Filter by pair</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Data over the last 24 hours</returns>
-        WebCallResult<IEnumerable<BinanceFuturesCoin24HPrice>> Get24HPrices(string? symbol = null, string? pair = null, CancellationToken ct = default);
+        WebCallResult<IEnumerable<IBinance24HPrice>> Get24HPrices(string? symbol = null, string? pair = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get data regarding the last 24 hours change
@@ -123,7 +124,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="pair">Filter by pair</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Data over the last 24 hours</returns>
-        Task<WebCallResult<IEnumerable<BinanceFuturesCoin24HPrice>>> Get24HPricesAsync(string? symbol = null, string? pair = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<IBinance24HPrice>>> Get24HPricesAsync(string? symbol = null, string? pair = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the best price/quantity on the order book for a symbol.
