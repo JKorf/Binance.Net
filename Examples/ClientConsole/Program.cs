@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Binance.Net;
+using Binance.Net.Enums;
 using Binance.Net.Objects;
+using Binance.Net.Objects.Spot;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Logging;
 
@@ -28,65 +30,112 @@ namespace BinanceAPI.ClientConsole
 
             using (var client = new BinanceClient())
             {
-                // Public
-                var ping = client.Ping();
-                var exchangeInfo = client.GetExchangeInfo();
-                var serverTime = client.GetServerTime();
-                var orderBook = client.GetOrderBook("BNBBTC", 10);
-                var aggTrades = client.GetAggregatedTrades("BNBBTC", startTime: DateTime.UtcNow.AddMinutes(-2), endTime: DateTime.UtcNow, limit: 10);
-                var klines = client.GetKlines("BNBBTC", KlineInterval.OneHour, startTime: DateTime.UtcNow.AddHours(-10), endTime: DateTime.UtcNow, limit: 10);
-                var price = client.GetPrice("BNBBTC");
-                var prices24h = client.Get24HPrice("BNBBTC");
-                var allPrices = client.GetAllPrices();
-                var allBookPrices = client.GetAllBookPrices();
-                var historicalTrades = client.GetHistoricalSymbolTrades("BNBBTC");
+                // Spot.Market | Spot market info endpoints
+                client.Spot.Market.GetBookPrice("BTCUSDT");
+                // Spot.Order | Spot order info endpoints
+                client.Spot.Order.GetAllOrders("BTCUSDT");
+                // Spot.System | Spot system endpoints
+                client.Spot.System.GetExchangeInfo();
+                // Spot.UserStream | Spot user stream endpoints. Should be used to subscribe to a user stream with the socket client
+                client.Spot.UserStream.StartUserStream();
+                // Spot.Futures | Transfer to/from spot from/to the futures account + cross-collateral endpoints
+                client.Spot.Futures.TransferFuturesAccount("ASSET", 1, FuturesTransferType.FromSpotToUsdtFutures);
 
-                // Private
-                var openOrders = client.GetOpenOrders("BNBBTC");
-                var allOrders = client.GetAllOrders("BNBBTC");
-                var testOrderResult = client.PlaceTestOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, 1, price: 1, timeInForce: TimeInForce.GoodTillCancel);
-                var queryOrder = client.GetOrder("BNBBTC", allOrders.Data.First().OrderId);
-                var orderResult = client.PlaceOrder("BNBBTC", OrderSide.Sell, OrderType.Limit, 10, price: 0.0002m, timeInForce: TimeInForce.GoodTillCancel);
-                var cancelResult = client.CancelOrder("BNBBTC", orderResult.Data.OrderId);
-                var accountInfo = client.GetAccountInfo();
-                var myTrades = client.GetMyTrades("BNBBTC");
+                // FuturesCoin | Coin-M general endpoints
+                client.FuturesCoin.GetPositionInformation();
+                // FuturesCoin.Market | Coin-M futures market endpoints
+                client.FuturesCoin.Market.GetBookPrices("BTCUSD");
+                // FuturesCoin.Order | Coin-M futures order endpoints
+                client.FuturesCoin.Order.GetMyTrades();
+                // FuturesCoin.Account | Coin-M account info
+                client.FuturesCoin.Account.GetAccountInfo();
+                // FuturesCoin.System | Coin-M system endpoints
+                client.FuturesCoin.System.GetExchangeInfo();
+                // FuturesCoin.UserStream | Coin-M user stream endpoints. Should be used to subscribe to a user stream with the socket client
+                client.FuturesCoin.UserStream.StartUserStream();
 
-                // Withdrawal/deposit
-                var withdrawalHistory = client.GetWithdrawalHistory();
-                var depositHistory = client.GetDepositHistory();
-                var withdraw = client.Withdraw("ASSET", "ADDRESS", 0);
+                // FuturesUsdt | USDT-M general endpoints
+                client.FuturesUsdt.GetPositionInformation();
+                // FuturesUsdt.Market | USDT-M futures market endpoints
+                client.FuturesUsdt.Market.GetBookPrices("BTCUSDT");
+                // FuturesUsdt.Order | USDT-M futures order endpoints
+                client.FuturesUsdt.Order.GetMyTrades("BTCUSDT");
+                // FuturesUsdt.Account | USDT-M account info
+                client.FuturesUsdt.Account.GetAccountInfo();
+                // FuturesUsdt.System | USDT-M system endpoints
+                client.FuturesUsdt.System.GetExchangeInfo();
+                // FuturesUsdt.UserStream | USDT-M user stream endpoints. Should be used to subscribe to a user stream with the socket client
+                client.FuturesUsdt.UserStream.StartUserStream();
+
+                // General | General/account endpoints
+                client.General.GetAccountInfo();
+
+                // Lending | Lending endpoints
+                client.Lending.GetFlexibleProductList();
+
+                // Margin | Margin general/account info
+                client.Margin.GetMarginAccountInfo();
+                // Margin.Market | Margin market endpoints
+                client.Margin.Market.GetMarginPairs();
+                // Margin.Order | Margin order endpoints
+                client.Margin.Order.GetAllMarginAccountOrders("BTCUSDT");
+                // Margin.UserStream | Margin user stream endpoints. Should be used to subscribe to a user stream with the socket client
+                client.Margin.UserStream.StartUserStream();
+                // Margin.IsolatedUserStream | Isolated margin user stream endpoints. Should be used to subscribe to a user stream with the socket client
+                client.Margin.IsolatedUserStream.StartIsolatedMarginUserStream("BTCUSDT");
+
+                // Mining | Mining endpoints
+                client.Mining.GetMiningCoinList();
+
+                // SubAccount | Sub account management
+                client.SubAccount.TransferSubAccount("fromEmail", "toEmail", "asset", 1);
+
+                // Brokerage | Brokerage management
+                client.Brokerage.CreateSubAccountAsync();
+
+                // WithdrawDeposit | Withdraw and deposit endpoints
+                client.WithdrawDeposit.GetWithdrawalHistory();
             }
 
             var socketClient = new BinanceSocketClient();
-            // Streams
-            var successDepth = socketClient.SubscribeToOrderBookUpdates("bnbbtc", 1000, (data) =>
+            // Spot | Spot market and user subscription methods
+            socketClient.Spot.SubscribeToAllBookTickerUpdates(data =>
             {
-                // handle data
-            });
-            var successTrades = socketClient.SubscribeToTradeUpdates("bnbbtc", (data) =>
-            {
-                // handle data
-            });
-            var successKline = socketClient.SubscribeToKlineUpdates("bnbbtc", KlineInterval.OneMinute, (data) =>
-            {
-                // handle data
-            });
-            var successTicker = socketClient.SubscribeToAllSymbolTickerUpdates((data) =>
-            {
-                // handle data
-            });
-            var successSingleTicker = socketClient.SubscribeToSymbolTickerUpdates("bnbbtc", (data) =>
-            {
-                // handle data
+                // Handle data
             });
 
-            string listenKey;
-            using (var client = new BinanceClient())
-                listenKey = client.StartUserStream().Data;
+            // FuturesCoin | Coin-M futures market and user subscription methods
+            socketClient.FuturesCoin.SubscribeToAllBookTickerUpdates(data =>
+            {
+                // Handle data
+            });
 
-            var successAccount = socketClient.SubscribeToUserDataUpdates(listenKey, data =>
+            // FuturesUsdt | USDT-M futures market and user subscription methods
+            socketClient.FuturesUsdt.SubscribeToAllBookTickerUpdates(data =>
+            {
+                // Handle data
+            });
+            
+            // Unsubscribe
+            socketClient.UnsubscribeAll();
+
+            Console.ReadLine();
+        }
+
+        private void SubscribeToSpotUserStream()
+        {
+            var socketClient = new BinanceSocketClient();
+            // Subscribe to a user stream
+            var restClient = new BinanceClient();
+            var listenKeyResult = restClient.Spot.UserStream.StartUserStream();
+            if (!listenKeyResult.Success)
+                throw new Exception("Failed to start user stream: " + listenKeyResult.Error);
+
+            var successAccount = socketClient.Spot.SubscribeToUserDataUpdates(listenKeyResult.Data,
+                data =>
                 {
                     // Handle account info data
+                    // Deprecated, will be removed in the future
                 },
                 data =>
                 {
@@ -95,8 +144,6 @@ namespace BinanceAPI.ClientConsole
                 null, // Handler for OCO updates
                 null, // Handler for position updates
                 null); // Handler for account balance updates (withdrawals/deposits)
-            socketClient.UnsubscribeAll();
-
             Console.ReadLine();
         }
     }

@@ -123,7 +123,7 @@ var startResult = client.Spot.UserStream.StartUserStream();
 if(!startResult.Success)
 	throw new Exception($"Failed to start user stream: {startResult.Error}");
 
-var socketClient = BinanceSocketClient();
+var socketClient = new BinanceSocketClient();
 
 socketClient.Spot.SubscribeToUserStream(startResult.Data, 
 	accountUpdate => { // Handle account info update 
@@ -132,9 +132,9 @@ socketClient.Spot.SubscribeToUserStream(startResult.Data,
 	}, 
 	ocoUpdate => { // Handle oco order update
 	},
-	positionUpdate => // Handle account position update
+	positionUpdate => { // Handle account position update
 	},
-	balanceUpdate => // Handle balance update
+	balanceUpdate => { // Handle balance update
 	});
 ````
 
