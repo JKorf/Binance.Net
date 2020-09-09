@@ -404,7 +404,7 @@ namespace Binance.Net.UnitTests
                },
                new BinanceSpotKline()
                {
-                   TakerBuyQuoteVolume = 0.9m,
+                    BaseVolume = 1.5m,
                     Close = 1.0m,
                     CloseTime = new DateTime(1970, 1, 1),
                     High = 1.1m,
@@ -412,16 +412,16 @@ namespace Binance.Net.UnitTests
                     Open = 1.3m,
                     OpenTime = new DateTime(1970, 1, 1),
                     TakerBuyBaseVolume = 1.4m,
-                    BaseVolume = 1.5m,
-                   TradeCount = 20,
+                    TakerBuyQuoteVolume = 0.9m,
+                    TradeCount = 20,
                     QuoteVolume = 1.6m
                }
             };
 
             var client = TestHelpers.CreateResponseClient(JsonConvert.SerializeObject(new object[]
             {
-                new object[] { 0, 0.5m, 0.3m, 0.4m, 0.2m, 0.8m, 0, 0.1m, 10, 0.6m, 0.7m},
-                new object[] { 0, 1.3m, 1.1m, 1.2m, 1.0m, 1.6m, 0, 0.9m, 20, 1.4m, 1.5m }
+                new object[] { 0, 0.5m, 0.3m, 0.4m, 0.2m, 0.1m, 0, 0.8m, 10, 0.6m, 0.7m},
+                new object[] { 0, 1.3m, 1.1m, 1.2m, 1.0m, 1.5m, 0, 1.6m, 20, 1.4m, 0.9m }
             }), new BinanceClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
