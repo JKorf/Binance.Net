@@ -27,7 +27,7 @@ namespace Binance.Net.SubClients.Margin
         private const string marginPriceIndexEndpoint = "margin/priceIndex";
 
         private const string isolatedMarginSymbolEndpoint = "margin/isolated/pair";
-        private const string isolatedMarginAllSymbolEndpoint = "margin/isolated/allPair";
+        private const string isolatedMarginAllSymbolEndpoint = "margin/isolated/allPairs";
 
         private readonly BinanceClient _baseClient;
 

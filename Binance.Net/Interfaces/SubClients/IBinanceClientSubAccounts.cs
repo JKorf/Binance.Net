@@ -432,5 +432,29 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transfer history</returns>
         Task<WebCallResult<BinanceSubAccountTransaction>> GetSubAccountTransferHistoryForSubAccountAsync(string? asset = null, SubAccountTransferSubAccountType? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get BTC valued asset summary of subaccounts.
+        /// </summary>
+        /// <param name="email">Email of the sub account</param>
+        /// <param name="page">The page</param>
+        /// <param name="limit">The page size</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Btc asset values</returns>
+        WebCallResult<BinanceSubAccountSpotAssetsSummary> GetSubAccountBtcValues(string? email = null,
+            int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get BTC valued asset summary of subaccounts.
+        /// </summary>
+        /// <param name="email">Email of the sub account</param>
+        /// <param name="page">The page</param>
+        /// <param name="limit">The page size</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Btc asset values</returns>
+        Task<WebCallResult<BinanceSubAccountSpotAssetsSummary>> GetSubAccountBtcValuesAsync(string? email = null,
+            int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
     }
 }

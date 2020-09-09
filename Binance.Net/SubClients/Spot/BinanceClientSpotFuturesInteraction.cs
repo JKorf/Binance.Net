@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
+using Binance.Net.Interfaces.SubClients.Spot;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Spot.Futures;
 using Binance.Net.Objects.Spot.MarginData;
@@ -22,7 +23,7 @@ namespace Binance.Net.SubClients.Spot
     /// <summary>
     /// Spot/futures endpoints
     /// </summary>
-    public class BinanceClientSpotFuturesInteraction
+    public class BinanceClientSpotFuturesInteraction : IBinanceClientSpotFuturesInteraction
     {
         private readonly BinanceClient _baseClient;
 
@@ -34,6 +35,11 @@ namespace Binance.Net.SubClients.Spot
         private const string futuresRepayHistoryEndpoint = "futures/loan/repay/history";
         private const string futuresWalletEndpoint = "futures/loan/wallet";
         private const string futuresInformationEndpoint = "futures/loan/configs";
+        private const string futuresCalculateAdjustLevelEndpoint = "futures/loan/calcAdjustLevel";
+        private const string futuresCalculateMaxAdjustAmountEndpoint = "futures/loan/calcMaxAdjustAmount";
+        private const string futuresAdjustCrossCollateralEndpoint = "futures/loan/adjustCollateral";
+        private const string futuresAdjustCrossCollateralHistoryEndpoint = "futures/loan/adjustCollateral/history";
+        private const string futuresCrossCollateralLiquidationHistoryEndpoint = "futures/loan/liquidationHistory";
 
         private const string api = "sapi";
         private const string publicVersion = "1";
@@ -382,6 +388,221 @@ namespace Binance.Net.SubClients.Spot
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceCrossCollateralInformation>>(_baseClient.GetUrlSpot(futuresInformationEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Calculate Rate After Adjust Cross-Collateral LTV
+
+        /// <summary>
+        /// Calculate rate after adjust cross-collateral loan to value
+        /// </summary>
+        /// <param name="collateralCoin">The collateral coin</param>
+        /// <param name="amount">The amount</param>
+        /// <param name="direction">The direction</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>After collateral rate</returns>
+        public WebCallResult<BinanceCrossCollateralAfterAdjust> GetRateAfterAdjustLoanToValue(string collateralCoin, decimal amount, AdjustRateDirection direction, long? receiveWindow = null, CancellationToken ct = default) => GetRateAfterAdjustLoanToValueAsync(collateralCoin, amount, direction, receiveWindow, ct).Result;
+
+        /// <summary>
+        /// Calculate rate after adjust cross-collateral loan to value
+        /// </summary>
+        /// <param name="collateralCoin">The collateral coin</param>
+        /// <param name="amount">The amount</param>
+        /// <param name="direction">The direction</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>After collateral rate</returns>
+        public async Task<WebCallResult<BinanceCrossCollateralAfterAdjust>> GetRateAfterAdjustLoanToValueAsync(string collateralCoin, decimal amount, AdjustRateDirection direction, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceCrossCollateralAfterAdjust>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", _baseClient.GetTimestamp() },
+                { "collateralCoin", collateralCoin },
+                { "amount", amount },
+                { "direction", JsonConvert.SerializeObject(direction, new AdjustRateDirectionConverter(false)) },
+            };
+
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceCrossCollateralAfterAdjust>(_baseClient.GetUrlSpot(futuresCalculateAdjustLevelEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Max Amount for Adjust Cross-Collateral LTV
+
+        /// <summary>
+        /// Get max amount for adjust cross-collateral LTV
+        /// </summary>
+        /// <param name="collateralCoin">The collateral coin</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Max amounts</returns>
+        public WebCallResult<BinanceCrossCollateralAdjustMaxAmounts> GetMaxAmountForAdjustCrossCollateralLoanToValue(string collateralCoin, long? receiveWindow = null, CancellationToken ct = default) => GetMaxAmountForAdjustCrossCollateralLoanToValueAsync(collateralCoin, receiveWindow, ct).Result;
+
+        /// <summary>
+        /// Get max amount for adjust cross-collateral LTV
+        /// </summary>
+        /// <param name="collateralCoin">The collateral coin</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Max amounts</returns>
+        public async Task<WebCallResult<BinanceCrossCollateralAdjustMaxAmounts>> GetMaxAmountForAdjustCrossCollateralLoanToValueAsync(string collateralCoin, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceCrossCollateralAdjustMaxAmounts>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", _baseClient.GetTimestamp() },
+                { "collateralCoin", collateralCoin },
+            };
+
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceCrossCollateralAdjustMaxAmounts>(_baseClient.GetUrlSpot(futuresCalculateMaxAdjustAmountEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Adjust cross collateral LTV
+
+        /// <summary>
+        /// Adjust cross collateral LTV
+        /// </summary>
+        /// <param name="collateralCoin">The collateral coin</param>
+        /// <param name="amount">The amount</param>
+        /// <param name="direction">The direction</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Adjust result</returns>
+        public WebCallResult<BinanceCrossCollateralAdjustLtvResult> AdjustCrossCollateralLoanToValue(string collateralCoin, decimal amount, AdjustRateDirection direction, long? receiveWindow = null, CancellationToken ct = default) => AdjustCrossCollateralLoanToValueAsync(collateralCoin, amount, direction, receiveWindow, ct).Result;
+
+        /// <summary>
+        /// Adjust cross collateral LTV
+        /// </summary>
+        /// <param name="collateralCoin">The collateral coin</param>
+        /// <param name="amount">The amount</param>
+        /// <param name="direction">The direction</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Adjust result</returns>
+        public async Task<WebCallResult<BinanceCrossCollateralAdjustLtvResult>> AdjustCrossCollateralLoanToValueAsync(string collateralCoin, decimal amount, AdjustRateDirection direction, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceCrossCollateralAdjustLtvResult>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", _baseClient.GetTimestamp() },
+                { "collateralCoin", collateralCoin },
+                { "amount", amount },
+                { "direction", JsonConvert.SerializeObject(direction, new AdjustRateDirectionConverter(false)) },
+            };
+
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceCrossCollateralAdjustLtvResult>(_baseClient.GetUrlSpot(futuresAdjustCrossCollateralEndpoint, api, publicVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Adjust Cross-Collateral LTV History
+
+        /// <summary>
+        /// Get cross collateral LTV adjustment history
+        /// </summary>
+        /// <param name="collateralCoin">The collateral coin</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="limit">The page size</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Adjustment history</returns>
+        public WebCallResult<BinanceQueryRecords<BinanceCrossCollateralAdjustLtvHistory>> GetAdjustCrossCollateralLoanToValueHistory(string collateralCoin, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default) => GetAdjustCrossCollateralLoanToValueHistoryAsync(collateralCoin, startTime, endTime, limit, receiveWindow, ct).Result;
+
+        /// <summary>
+        /// Get cross collateral LTV adjustment history
+        /// </summary>
+        /// <param name="collateralCoin">The collateral coin</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="limit">The page size</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Adjustment history</returns>
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceCrossCollateralAdjustLtvHistory>>> GetAdjustCrossCollateralLoanToValueHistoryAsync(string collateralCoin, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceQueryRecords<BinanceCrossCollateralAdjustLtvHistory>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", _baseClient.GetTimestamp() },
+                { "collateralCoin", collateralCoin }
+            };
+
+            parameters.AddOptionalParameter("startTime", startTime.HasValue ? JsonConvert.SerializeObject(startTime.Value, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("size", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceCrossCollateralAdjustLtvHistory>>(_baseClient.GetUrlSpot(futuresAdjustCrossCollateralHistoryEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Cross-Collateral Liquidation History
+
+        /// <summary>
+        /// Get cross collateral liquidation history
+        /// </summary>
+        /// <param name="collateralCoin">The collateral coin</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="limit">The page size</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Liquidation history</returns>
+        public WebCallResult<BinanceQueryRecords<BinanceCrossCollateralLiquidationHistory>> GetCrossCollateralLiquidationHistory(string? collateralCoin = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default) => GetCrossCollateralLiquidationHistoryAsync(collateralCoin, startTime, endTime, limit, receiveWindow, ct).Result;
+
+        /// <summary>
+        /// Get cross collateral liquidation history
+        /// </summary>
+        /// <param name="collateralCoin">The collateral coin</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="limit">The page size</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Liquidation history</returns>
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceCrossCollateralLiquidationHistory>>> GetCrossCollateralLiquidationHistoryAsync(string? collateralCoin = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceQueryRecords<BinanceCrossCollateralLiquidationHistory>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", _baseClient.GetTimestamp() }
+            };
+
+            parameters.AddOptionalParameter("collateralCoin", collateralCoin);
+            parameters.AddOptionalParameter("startTime", startTime.HasValue ? JsonConvert.SerializeObject(startTime.Value, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("size", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceCrossCollateralLiquidationHistory>>(_baseClient.GetUrlSpot(futuresCrossCollateralLiquidationHistoryEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion

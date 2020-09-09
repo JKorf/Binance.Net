@@ -29,7 +29,7 @@ namespace Binance.Net.SubClients.Spot
         /// <summary>
         /// Spot/futures endpoints
         /// </summary>
-        public BinanceClientSpotFuturesInteraction Futures { get; }
+        public IBinanceClientSpotFuturesInteraction Futures { get; }
 
         internal BinanceClientSpot(Log log, BinanceClient baseClient)
         {
