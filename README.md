@@ -145,6 +145,12 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.0.0 - 09 Sep 2020
+    * Added future transfer endpoints
+    * Added cross-collateral endpoints
+    * Refactored volume properties to properly be named base/quote
+    * Fixed isolated margin all symbols endpoint
+
 * Version 6.0.0-beta.6 - 31 Aug 2020
     * Combined futures userstream Balance and Position update handlers, UpdateReason property added
 
