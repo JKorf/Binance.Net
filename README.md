@@ -145,6 +145,9 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.0.1 - 09 Sep 2020
+    * Fixed missing properties in stream kline models
+
 * Version 6.0.0 - 09 Sep 2020
     * Added future transfer endpoints
     * Added cross-collateral endpoints
