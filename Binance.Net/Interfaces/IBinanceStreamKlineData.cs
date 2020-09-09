@@ -18,6 +18,25 @@ namespace Binance.Net.Interfaces
         /// <summary>
         /// The data
         /// </summary>
-        IBinanceKline Data { get; set; }
+        IBinanceStreamKline Data { get; set; }
+    }
+
+    /// <summary>
+    /// Stream kline data
+    /// </summary>
+    public interface IBinanceStreamKline: IBinanceKline
+    {
+        /// <summary>
+        /// Is this kline final
+        /// </summary>
+        bool Final { get; set; }
+        /// <summary>
+        /// Id of the first trade in this kline
+        /// </summary>
+        long FirstTrade { get; set; }
+        /// <summary>
+        /// Id of the last trade in this kline
+        /// </summary>
+        long LastTrade { get; set; }
     }
 }

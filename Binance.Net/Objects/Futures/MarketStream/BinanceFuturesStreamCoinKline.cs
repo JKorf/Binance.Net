@@ -25,13 +25,13 @@ namespace Binance.Net.Objects.Futures.MarketStream
         /// </summary>
         [JsonProperty("k")]
         [JsonConverter(typeof(InterfaceConverter<BinanceFuturesStreamCoinKline>))]
-        public IBinanceKline Data { get; set; } = default!;
+        public IBinanceStreamKline Data { get; set; } = default!;
     }
 
     /// <summary>
     /// The kline data
     /// </summary>
-    public class BinanceFuturesStreamCoinKline : BinanceKlineBase
+    public class BinanceFuturesStreamCoinKline : BinanceKlineBase, IBinanceStreamKline
     {
         /// <summary>
         /// The open time of this candlestick

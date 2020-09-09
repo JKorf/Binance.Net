@@ -2218,6 +2218,26 @@
             The data
             </summary>
         </member>
+        <member name="T:Binance.Net.Interfaces.IBinanceStreamKline">
+            <summary>
+            Stream kline data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceStreamKline.Final">
+            <summary>
+            Is this kline final
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceStreamKline.FirstTrade">
+            <summary>
+            Id of the first trade in this kline
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceStreamKline.LastTrade">
+            <summary>
+            Id of the last trade in this kline
+            </summary>
+        </member>
         <member name="T:Binance.Net.Interfaces.IBinanceTick">
             <summary>
             Price statistics of the last 24 hours

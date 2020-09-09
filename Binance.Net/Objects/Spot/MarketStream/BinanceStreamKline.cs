@@ -25,13 +25,13 @@ namespace Binance.Net.Objects.Spot.MarketStream
         /// </summary>
         [JsonProperty("k")]
         [JsonConverter(typeof(InterfaceConverter<BinanceStreamKline>))]
-        public IBinanceKline Data { get; set; } = default!;
+        public IBinanceStreamKline Data { get; set; } = default!;
     }
 
     /// <summary>
     /// The kline data
     /// </summary>
-    public class BinanceStreamKline: BinanceKlineBase
+    public class BinanceStreamKline: BinanceKlineBase, IBinanceStreamKline
     {
         /// <summary>
         /// The open time of this candlestick
