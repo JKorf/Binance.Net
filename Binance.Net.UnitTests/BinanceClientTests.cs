@@ -65,10 +65,10 @@ namespace Binance.Net.UnitTests
                 PriceChange = 2.456m,
                 PriceChangePercent = 2.789m,
                 TotalTrades = 123,
-                Volume = 3.123m,
+                BaseVolume = 3.123m,
                 AskQuantity = 3.456m,
                 BidQuantity = 3.789m,
-                TotalTradedAlternateAssetVolume = 4.123m,
+                QuoteVolume = 4.123m,
                 Symbol = "BNBBTC",
                 WeightedAveragePrice = 3.456m
             };
@@ -388,40 +388,40 @@ namespace Binance.Net.UnitTests
             // arrange
             var klines = new[]
             {
-               new BinanceKline()
+               new BinanceSpotKline()
                {
-                    AlternateAssetVolume = 0.1m,
+                    BaseVolume = 0.1m,
                     Close = 0.2m,
                     CloseTime = new DateTime(1970, 1, 1),
                     High = 0.3m,
                     Low = 0.4m,
                     Open = 0.5m,
                     OpenTime = new DateTime(1970, 1, 1),
-                    TakerBuyVolume = 0.6m,
-                    TakerBuyAlternateAssetVolume = 0.7m,
+                    TakerBuyBaseVolume = 0.6m,
+                    TakerBuyQuoteVolume = 0.7m,
                     TradeCount = 10,
-                    Volume = 0.8m
+                    QuoteVolume = 0.8m
                },
-               new BinanceKline()
+               new BinanceSpotKline()
                {
-                   AlternateAssetVolume = 0.9m,
+                    BaseVolume = 1.5m,
                     Close = 1.0m,
                     CloseTime = new DateTime(1970, 1, 1),
                     High = 1.1m,
                     Low = 1.2m,
                     Open = 1.3m,
                     OpenTime = new DateTime(1970, 1, 1),
-                    TakerBuyVolume = 1.4m,
-                    TakerBuyAlternateAssetVolume = 1.5m,
-                   TradeCount = 20,
-                    Volume = 1.6m
+                    TakerBuyBaseVolume = 1.4m,
+                    TakerBuyQuoteVolume = 0.9m,
+                    TradeCount = 20,
+                    QuoteVolume = 1.6m
                }
             };
 
             var client = TestHelpers.CreateResponseClient(JsonConvert.SerializeObject(new object[]
             {
-                new object[] { 0, 0.5m, 0.3m, 0.4m, 0.2m, 0.8m, 0, 0.1m, 10, 0.6m, 0.7m},
-                new object[] { 0, 1.3m, 1.1m, 1.2m, 1.0m, 1.6m, 0, 0.9m, 20, 1.4m, 1.5m }
+                new object[] { 0, 0.5m, 0.3m, 0.4m, 0.2m, 0.1m, 0, 0.8m, 10, 0.6m, 0.7m},
+                new object[] { 0, 1.3m, 1.1m, 1.2m, 1.0m, 1.5m, 0, 1.6m, 20, 1.4m, 0.9m }
             }), new BinanceClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
@@ -962,7 +962,7 @@ namespace Binance.Net.UnitTests
         public void Transfer_Should_RespondWithMarginTransaction()
         {
             // arrange
-            var placed = new BinanceMarginTransaction()
+            var placed = new BinanceTransaction()
             {
                 TransactionId = 1001
             };
@@ -985,7 +985,7 @@ namespace Binance.Net.UnitTests
         public void Borrow_Should_RespondWithMarginTransaction()
         {
             // arrange
-            var placed = new BinanceMarginTransaction()
+            var placed = new BinanceTransaction()
             {
                 TransactionId = 11
             };
@@ -1008,7 +1008,7 @@ namespace Binance.Net.UnitTests
         public void Repay_Should_RespondWithMarginTransaction()
         {
             // arrange
-            var placed = new BinanceMarginTransaction()
+            var placed = new BinanceTransaction()
             {
                 TransactionId = 11
             };

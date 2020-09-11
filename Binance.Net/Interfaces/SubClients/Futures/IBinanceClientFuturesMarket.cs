@@ -23,7 +23,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The funding rate history for the provided symbol</returns>
-        public WebCallResult<IEnumerable<BinanceFuturesFundingRateHistory>> GetFundingRates(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        WebCallResult<IEnumerable<BinanceFuturesFundingRateHistory>> GetFundingRates(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get funding rate history for the provided symbol
@@ -34,7 +34,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The funding rate history for the provided symbol</returns>
-        public Task<WebCallResult<IEnumerable<BinanceFuturesFundingRateHistory>>> GetFundingRatesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceFuturesFundingRateHistory>>> GetFundingRatesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
         
         /// <summary>
         /// Gets Top Trader Long/Short Ratio (Accounts)
@@ -46,7 +46,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="endTime">End time to get top trader long/short ratio (accounts)</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Top Trader Long/Short Ratio (Accounts) info</returns>
-        public WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>> GetTopLongShortAccountRatio(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
+        WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>> GetTopLongShortAccountRatio(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
 
         /// <summary>
         /// Gets Top Trader Long/Short Ratio (Accounts)
@@ -58,7 +58,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="endTime">End time to get top trader long/short ratio (accounts)</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Top Trader Long/Short Ratio (Accounts) info</returns>
-        public Task<WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>>> GetTopLongShortAccountRatioAsync(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>>> GetTopLongShortAccountRatioAsync(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
 
         /// <summary>
         /// Gets Top Trader Long/Short Ratio (Positions)
@@ -70,7 +70,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="endTime">End time to get top trader long/short ratio (positions)</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Top Trader Long/Short Ratio (Positions) info</returns>
-        public WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>> GetTopLongShortPositionRatio(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
+        WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>> GetTopLongShortPositionRatio(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
 
         /// <summary>
         /// Gets Top Trader Long/Short Ratio (Positions)
@@ -82,7 +82,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="endTime">End time to get top trader long/short ratio (positions)</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Top Trader Long/Short Ratio (Positions) info</returns>
-        public Task<WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>>> GetTopLongShortPositionRatioAsync(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>>> GetTopLongShortPositionRatioAsync(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
 
         /// <summary>
         /// Gets Global Long/Short Ratio (Accounts)
@@ -94,7 +94,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="endTime">End time to get global long/short ratio (accounts)</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Global Long/Short Ratio (Accounts) info</returns>
-        public WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>> GetGlobalLongShortAccountRatio(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
+        WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>> GetGlobalLongShortAccountRatio(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
 
         /// <summary>
         /// Gets Global Long/Short Ratio (Accounts)
@@ -106,7 +106,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="endTime">End time to get global long/short ratio (accounts)</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Global Long/Short Ratio (Accounts) info</returns>
-        public Task<WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>>> GetGlobalLongShortAccountRatioAsync(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>>> GetGlobalLongShortAccountRatioAsync(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
 
     }
 }

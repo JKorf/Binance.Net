@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Spot.MarginData
     /// <summary>
     /// The result of transferring
     /// </summary>
-    public class BinanceMarginTransaction
+    public class BinanceTransaction
     {
         /// <summary>
         /// The Transaction id as assigned by Binance

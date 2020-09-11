@@ -46,6 +46,8 @@ namespace Binance.Net.SubClients
         private const string subAccountTransferToMasterEndpoint = "sub-account/transfer/subToMaster";
         private const string subAccountTransferHistorySubAccountEndpoint = "sub-account/transfer/subUserHistory";
 
+        private const string subAccountSpotSummaryEndpoint = "sub-account/spotSummary";
+
         private readonly BinanceClient _baseClient;
 
         internal BinanceClientSubAccount(BinanceClient baseClient)
@@ -916,7 +918,51 @@ namespace Binance.Net.SubClients
         }
         #endregion
 
+        #region Query Sub-account Spot Assets Summary (For Master Account)
+
+        /// <summary>
+        /// Get BTC valued asset summary of subaccounts.
+        /// </summary>
+        /// <param name="email">Email of the sub account</param>
+        /// <param name="page">The page</param>
+        /// <param name="limit">The page size</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Btc asset values</returns>
+        public WebCallResult<BinanceSubAccountSpotAssetsSummary> GetSubAccountBtcValues(
+            string? email = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+            => GetSubAccountBtcValuesAsync(email, page, limit, receiveWindow, ct).Result;
+
+        /// <summary>
+        /// Get BTC valued asset summary of subaccounts.
+        /// </summary>
+        /// <param name="email">Email of the sub account</param>
+        /// <param name="page">The page</param>
+        /// <param name="limit">The page size</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Btc asset values</returns>
+        public async Task<WebCallResult<BinanceSubAccountSpotAssetsSummary>> GetSubAccountBtcValuesAsync(string? email = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceSubAccountSpotAssetsSummary>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", _baseClient.GetTimestamp() },
+            };
+
+            parameters.AddOptionalParameter("email", email);
+            parameters.AddOptionalParameter("page", page);
+            parameters.AddOptionalParameter("limit", limit);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceSubAccountSpotAssetsSummary>(_baseClient.GetUrlSpot(subAccountSpotSummaryEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
         #endregion
 
+        #endregion
     }
 }

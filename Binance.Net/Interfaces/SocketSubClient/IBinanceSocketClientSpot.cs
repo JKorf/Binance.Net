@@ -55,7 +55,7 @@ namespace Binance.Net.Interfaces.SocketSubClient
         /// Subscribes to the account update stream. Prior to using this, the BinanceClient.Spot.UserStreams.StartUserStream method should be called.
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-        /// <param name="onAccountInfoMessage">The event handler for whenever an account info update is received</param>
+        /// <param name="onAccountInfoMessage">*DEPRICATED; use onAccountPositionMessage instead, this update will be removed in the future* The event handler for whenever an account info update is received</param>
         /// <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
         /// <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco status update is received</param>
         /// <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
@@ -73,7 +73,7 @@ namespace Binance.Net.Interfaces.SocketSubClient
         /// Subscribes to the account update stream. Prior to using this, the BinanceClient.Spot.UserStreams.StartUserStream method should be called.
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-        /// <param name="onAccountInfoMessage">The event handler for whenever an account info update is received</param>
+        /// <param name="onAccountInfoMessage">*DEPRICATED; use onAccountPositionMessage instead, this update will be removed in the future* The event handler for whenever an account info update is received</param>
         /// <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
         /// <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
         /// <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>

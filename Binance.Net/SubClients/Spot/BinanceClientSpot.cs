@@ -26,12 +26,18 @@ namespace Binance.Net.SubClients.Spot
         /// </summary>
         public IBinanceClientUserStream UserStream { get; }
 
+        /// <summary>
+        /// Spot/futures endpoints
+        /// </summary>
+        public IBinanceClientSpotFuturesInteraction Futures { get; }
+
         internal BinanceClientSpot(Log log, BinanceClient baseClient)
         {
             System = new BinanceClientSpotSystem(log, baseClient);
             Market = new BinanceClientSpotMarket(baseClient);
             Order = new BinanceClientSpotOrder(log, baseClient);
             UserStream = new BinanceClientSpotUserStream(baseClient);
+            Futures = new BinanceClientSpotFuturesInteraction(baseClient);
         }
     }
 }

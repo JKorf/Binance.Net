@@ -3,13 +3,15 @@ using Binance.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using System;
 using System.Threading.Tasks;
+using Binance.Net.Enums;
+using Binance.Net.Objects.Spot.MarketStream;
 
 namespace WebApplication1
 {
     public interface IBinanceDataProvider
     {
-        BinanceStreamKlineData LastKline { get; }
-        Action<BinanceStreamKlineData> OnKlineData { get; set; }
+        IBinanceStreamKlineData LastKline { get; }
+        Action<IBinanceStreamKlineData> OnKlineData { get; set; }
 
         Task Start();
         Task Stop();
@@ -20,8 +22,8 @@ namespace WebApplication1
         private IBinanceSocketClient _socketClient;
         private UpdateSubscription _subscription;
 
-        public BinanceStreamKlineData LastKline { get; private set; }
-        public Action<BinanceStreamKlineData> OnKlineData { get; set; }
+        public IBinanceStreamKlineData LastKline { get; private set; }
+        public Action<IBinanceStreamKlineData> OnKlineData { get; set; }
        
         public BinanceDataProvider(IBinanceSocketClient socketClient)
         {
@@ -32,7 +34,7 @@ namespace WebApplication1
 
         public async Task Start()
         {
-            var subResult = await _socketClient.SubscribeToKlineUpdatesAsync("BTCUSDT", KlineInterval.FifteenMinutes, data =>
+            var subResult = await _socketClient.Spot.SubscribeToKlineUpdatesAsync("BTCUSDT", KlineInterval.FifteenMinutes, data =>
             {
                 LastKline = data;
                 OnKlineData?.Invoke(data);

@@ -47,9 +47,9 @@ namespace Binance.Net.Objects.Spot.MarketData
 
         [ArrayProperty(7)] internal string? Ignore2 { get; set; } = "";
         /// <summary>
-        /// Number of bisic data
+        /// Number of basic data
         /// </summary>
         [ArrayProperty(8)]
-        public int BisicDataCount { get; set; }
+        public int BasicDataCount { get; set; }
     }
 }

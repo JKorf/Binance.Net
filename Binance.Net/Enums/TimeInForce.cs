@@ -18,8 +18,8 @@
         /// </summary>
         FillOrKill,
         /// <summary>
-        /// GootTillCrossing orders will post only
+        /// GoodTillCrossing orders will post only
         /// </summary>
-        GootTillCrossing
+        GoodTillCrossing
     }
 }

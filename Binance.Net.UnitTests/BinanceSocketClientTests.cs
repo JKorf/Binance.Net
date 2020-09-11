@@ -8,6 +8,7 @@ using CryptoExchange.Net.Logging;
 using Binance.Net.Objects.Spot.UserStream;
 using Binance.Net.Objects.Spot.MarketStream;
 using Binance.Net.Enums;
+using Binance.Net.Interfaces;
 using Binance.Net.Objects.Spot;
 
 namespace Binance.Net.UnitTests
@@ -22,7 +23,7 @@ namespace Binance.Net.UnitTests
             var socket = new TestSocket();
             var client = TestHelpers.CreateSocketClient(socket);
 
-            BinanceStreamKlineData result = null;
+            IBinanceStreamKlineData result = null;
             client.Spot.SubscribeToKlineUpdatesAsync("ETHBTC", KlineInterval.OneMinute, (test) => result = test);
 
             var data = new BinanceCombinedStream<BinanceStreamKlineData>()
@@ -35,7 +36,7 @@ namespace Binance.Net.UnitTests
                     Symbol = "ETHBTC",
                     Data = new BinanceStreamKline()
                     {
-                        TakerBuyBaseAssetVolume = 0.1m,
+                        TakerBuyBaseVolume = 0.1m,
                         Close = 0.2m,
                         CloseTime = new DateTime(2017, 1, 2),
                         Final = true,
@@ -45,12 +46,12 @@ namespace Binance.Net.UnitTests
                         LastTrade = 2000000000000,
                         Low = 0.4m,
                         Open = 0.5m,
-                        TakerBuyQuoteAssetVolume = 0.6m,
-                        QuoteAssetVolume = 0.7m,
+                        TakerBuyQuoteVolume = 0.6m,
+                        QuoteVolume = 0.7m,
                         OpenTime = new DateTime(2017, 1, 1),
                         Symbol = "test",
                         TradeCount = 10,
-                        Volume = 0.8m
+                        BaseVolume = 0.8m
                     }
                 }
             };
@@ -74,7 +75,7 @@ namespace Binance.Net.UnitTests
                 LogVerbosity = LogVerbosity.Debug
             });
 
-            BinanceStreamTick result = null;
+            IBinanceTick result = null;
             client.Spot.SubscribeToSymbolTickerUpdates("ETHBTC", (test) => result = test);
 
             var data = new BinanceCombinedStream<BinanceStreamTick>()
@@ -89,8 +90,8 @@ namespace Binance.Net.UnitTests
                     PrevDayClosePrice = 1.0m,
                     PriceChange = 1.1m,
                     Symbol = "test",
-                    Volume = 1.3m,
-                    TotalTradedAlternateAssetVolume = 1.4m,
+                    BaseVolume = 1.3m,
+                    QuoteVolume = 1.4m,
                     TotalTrades = 3
                 }
             };
@@ -110,7 +111,7 @@ namespace Binance.Net.UnitTests
             var socket = new TestSocket();
             var client = TestHelpers.CreateSocketClient(socket);
 
-            BinanceStreamTick[] result = null;
+            IBinanceTick[] result = null;
             client.Spot.SubscribeToAllSymbolTickerUpdates((test) => result = test.ToArray());
 
             var data = new[]
@@ -125,8 +126,8 @@ namespace Binance.Net.UnitTests
                     PrevDayClosePrice = 1.0m,
                     PriceChange = 1.1m,
                     Symbol = "test",
-                    Volume = 1.3m,
-                    TotalTradedAlternateAssetVolume = 1.4m,
+                    BaseVolume = 1.3m,
+                    QuoteVolume = 1.4m,
                     TotalTrades = 3
                 }
             };

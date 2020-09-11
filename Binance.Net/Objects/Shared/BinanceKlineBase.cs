@@ -1,14 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Binance.Net.Interfaces;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.MarketData
+namespace Binance.Net.Objects.Shared
 {
     /// <summary>
     /// Candlestick information for symbol
     /// </summary>
-    [JsonConverter(typeof(ArrayConverter))]
-    public class BinanceKline
+    public abstract class BinanceKlineBase : IBinanceKline
     {
         /// <summary>
         /// The time this candlestick opened
@@ -38,8 +40,7 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// <summary>
         /// The volume traded during this candlestick
         /// </summary>
-        [ArrayProperty(5)]
-        public decimal Volume { get; set; }
+        public abstract decimal BaseVolume { get; set; }
         /// <summary>
         /// The close time of this candlestick
         /// </summary>
@@ -48,8 +49,7 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// <summary>
         /// The volume traded during this candlestick in the asset form
         /// </summary>
-        [ArrayProperty(7)]
-        public decimal AlternateAssetVolume { get; set; }
+        public abstract decimal QuoteVolume { get; set; }
         /// <summary>
         /// The amount of trades in this candlestick
         /// </summary>
@@ -58,12 +58,10 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// <summary>
         /// Taker buy base asset volume
         /// </summary>
-        [ArrayProperty(9)]
-        public decimal TakerBuyVolume { get; set; }
+        public abstract decimal TakerBuyBaseVolume { get; set; }
         /// <summary>
         /// Taker buy quote asset volume
         /// </summary>
-        [ArrayProperty(10)]
-        public decimal TakerBuyAlternateAssetVolume { get; set; }
+        public abstract decimal TakerBuyQuoteVolume { get; set; }
     }
 }
