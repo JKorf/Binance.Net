@@ -55,7 +55,7 @@ namespace Binance.Net.Interfaces.SubClients.Spot
         /// <param name="symbol">The symbol to get the data for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Data over the last 24 hours</returns>
-        WebCallResult<IBinance24HPrice> Get24HPrice(string symbol, CancellationToken ct = default);
+        WebCallResult<IBinanceTick> Get24HPrice(string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Get data regarding the last 24 hours for the provided symbol
@@ -63,7 +63,7 @@ namespace Binance.Net.Interfaces.SubClients.Spot
         /// <param name="symbol">The symbol to get the data for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Data over the last 24 hours</returns>
-        Task<WebCallResult<IBinance24HPrice>> Get24HPriceAsync(string symbol,
+        Task<WebCallResult<IBinanceTick>> Get24HPriceAsync(string symbol,
             CancellationToken ct = default);
 
         /// <summary>
@@ -71,14 +71,14 @@ namespace Binance.Net.Interfaces.SubClients.Spot
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of data over the last 24 hours</returns>
-        WebCallResult<IEnumerable<IBinance24HPrice>> Get24HPrices(CancellationToken ct = default);
+        WebCallResult<IEnumerable<IBinanceTick>> Get24HPrices(CancellationToken ct = default);
 
         /// <summary>
         /// Get data regarding the last 24 hours for all symbols
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of data over the last 24 hours</returns>
-        Task<WebCallResult<IEnumerable<IBinance24HPrice>>> Get24HPricesAsync(CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<IBinanceTick>>> Get24HPricesAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Gets the best price/quantity on the order book for a symbol.

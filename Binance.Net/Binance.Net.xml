@@ -1477,11 +1477,6 @@
             24 hour price stats
             </summary>
         </member>
-        <member name="P:Binance.Net.Interfaces.IBinance24HPrice.Symbol">
-            <summary>
-            The symbol the price is for
-            </summary>
-        </member>
         <member name="P:Binance.Net.Interfaces.IBinance24HPrice.PriceChange">
             <summary>
             The actual price change in the last 24 hours
@@ -1497,39 +1492,9 @@
             The weighted average price in the last 24 hours
             </summary>
         </member>
-        <member name="P:Binance.Net.Interfaces.IBinance24HPrice.LastPrice">
-            <summary>
-            The most recent trade price
-            </summary>
-        </member>
         <member name="P:Binance.Net.Interfaces.IBinance24HPrice.LastQuantity">
             <summary>
             The most recent trade quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Interfaces.IBinance24HPrice.OpenPrice">
-            <summary>
-            The open price 24 hours ago
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Interfaces.IBinance24HPrice.HighPrice">
-            <summary>
-            The highest price in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Interfaces.IBinance24HPrice.LowPrice">
-            <summary>
-            The lowest price in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Interfaces.IBinance24HPrice.BaseVolume">
-            <summary>
-            The base volume traded in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Interfaces.IBinance24HPrice.QuoteVolume">
-            <summary>
-            The quote asset volume traded in the last 24 hours
             </summary>
         </member>
         <member name="P:Binance.Net.Interfaces.IBinance24HPrice.OpenTime">
@@ -2243,29 +2208,9 @@
             Price statistics of the last 24 hours
             </summary>
         </member>
-        <member name="P:Binance.Net.Interfaces.IBinanceTick.PriceChange">
-            <summary>
-            The actual price change in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Interfaces.IBinanceTick.PriceChangePercent">
-            <summary>
-            The price change in percentage in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Interfaces.IBinanceTick.WeightedAveragePrice">
-            <summary>
-            The weighted average price in the last 24 hours
-            </summary>
-        </member>
         <member name="P:Binance.Net.Interfaces.IBinanceTick.PrevDayClosePrice">
             <summary>
             The close price 24 hours ago
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Interfaces.IBinanceTick.LastQuantity">
-            <summary>
-            The most recent trade quantity
             </summary>
         </member>
         <member name="P:Binance.Net.Interfaces.IBinanceTick.BidPrice">
@@ -2286,31 +2231,6 @@
         <member name="P:Binance.Net.Interfaces.IBinanceTick.AskQuantity">
             <summary>
             The size of the best ask price in the order book
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Interfaces.IBinanceTick.OpenTime">
-            <summary>
-            Time at which this 24 hours opened
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Interfaces.IBinanceTick.CloseTime">
-            <summary>
-            Time at which this 24 hours closed
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Interfaces.IBinanceTick.FirstTradeId">
-            <summary>
-            The first trade ID in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Interfaces.IBinanceTick.LastTradeId">
-            <summary>
-            The last trade ID in the last 24 hours
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Interfaces.IBinanceTick.TotalTrades">
-            <summary>
-            The amount of trades made in the last 24 hours
             </summary>
         </member>
         <member name="T:Binance.Net.Interfaces.IBinanceTrade">
