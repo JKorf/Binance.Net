@@ -40,6 +40,15 @@ namespace Binance.Net.Interfaces.SubClients
         Task<WebCallResult<BinanceBrokerageEnableFuturesResult>> EnableFuturesForSubAccountAsync(string subAccountId, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Enable Leverage Token for Sub Account
+        /// </summary>
+        /// <param name="subAccountId">Sub account id</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Enable Leverage Token result</returns>
+        Task<WebCallResult<BinanceBrokerageEnableLeverageTokenResult>> EnableLeverageTokenForSubAccountAsync(string subAccountId, int? receiveWindow = null, CancellationToken ct = default);
+        
+        /// <summary>
         /// Create Api Key for Sub Account
         /// <para>Sub account should be enable margin before its api-key's marginTrade being enabled</para>
         /// <para>Sub account should be enable futures before its api-key's futuresTrade being enabled</para>
@@ -95,10 +104,12 @@ namespace Binance.Net.Interfaces.SubClients
         /// Query Sub Account
         /// </summary>
         /// <param name="subAccountId">Sub account id</param>
+        /// <param name="page">Page (default 1)</param>
+        /// <param name="size">Size (default 500, max 500)</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Sub accounts</returns>
-        Task<WebCallResult<IEnumerable<BinanceBrokerageSubAccount>>> GetSubAccountsAsync(string? subAccountId = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceBrokerageSubAccount>>> GetSubAccountsAsync(string? subAccountId = null, int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Change Sub Account Commission
@@ -180,7 +191,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="startDate">From date</param>
         /// <param name="endDate">To date</param>
         /// <param name="page">Page</param>
-        /// <param name="limit">Limit</param>
+        /// <param name="limit">Limit (default 500, max 500)</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transfer history</returns>
@@ -194,12 +205,13 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="subAccountId">Sub account id</param>
         /// <param name="startDate">From date</param>
         /// <param name="endDate">To date</param>
-        /// <param name="limit">Limit (Default 500, max 1000)</param>
+        /// <param name="page">Page (default 1)</param>
+        /// <param name="size">Size (default 500, max 500)</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Rebates history</returns>
         Task<WebCallResult<IEnumerable<BinanceBrokerageRebate>>> GetBrokerCommissionRebatesRecentAsync(string? subAccountId = null,
-            DateTime? startDate = null, DateTime? endDate = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+            DateTime? startDate = null, DateTime? endDate = null, int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Query Broker Commission Rebate History

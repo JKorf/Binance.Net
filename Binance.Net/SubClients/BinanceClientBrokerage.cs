@@ -118,6 +118,32 @@ namespace Binance.Net.SubClients
 
             return await _baseClient.SendRequestInternal<BinanceBrokerageEnableFuturesResult>(_baseClient.GetUrlSpot(enableFuturesForSubAccountEndpoint, brokerageApi, brokerageVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
+        
+        /// <summary>
+        /// Enable Leverage Token for Sub Account
+        /// </summary>
+        /// <param name="subAccountId">Sub account id</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Enable Leverage Token result</returns>
+        public async Task<WebCallResult<BinanceBrokerageEnableLeverageTokenResult>> EnableLeverageTokenForSubAccountAsync(string subAccountId, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            subAccountId.ValidateNotNull(nameof(subAccountId));
+
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceBrokerageEnableLeverageTokenResult>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+                             {
+                                 {"subAccountId", subAccountId},
+                                 {"blvt", true},  // only true for now
+                                 {"timestamp", _baseClient.GetTimestamp()}
+                             };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceBrokerageEnableLeverageTokenResult>(_baseClient.GetUrlSpot(enableFuturesForSubAccountEndpoint, brokerageApi, brokerageVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
 
         /// <summary>
         /// Create Api Key for Sub Account
@@ -250,10 +276,12 @@ namespace Binance.Net.SubClients
         /// Query Sub Account
         /// </summary>
         /// <param name="subAccountId">Sub account id</param>
+        /// <param name="page">Page (default 1)</param>
+        /// <param name="size">Size (default 500, max 500)</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Sub accounts</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceBrokerageSubAccount>>> GetSubAccountsAsync(string? subAccountId = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceBrokerageSubAccount>>> GetSubAccountsAsync(string? subAccountId = null, int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
@@ -264,6 +292,8 @@ namespace Binance.Net.SubClients
                                  {"timestamp", _baseClient.GetTimestamp()}
                              };
             parameters.AddOptionalParameter("subAccountId", subAccountId);
+            parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("size", size?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceBrokerageSubAccount>>(_baseClient.GetUrlSpot(subAccountEndpoint, brokerageApi, brokerageVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
@@ -439,7 +469,7 @@ namespace Binance.Net.SubClients
         /// <param name="startDate">From date</param>
         /// <param name="endDate">To date</param>
         /// <param name="page">Page</param>
-        /// <param name="limit">Limit</param>
+        /// <param name="limit">Limit (default 500, max 500)</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transfer history</returns>
@@ -474,12 +504,13 @@ namespace Binance.Net.SubClients
         /// <param name="subAccountId">Sub account id</param>
         /// <param name="startDate">From date</param>
         /// <param name="endDate">To date</param>
-        /// <param name="limit">Limit (Default 500, max 1000)</param>
+        /// <param name="page">Page (default 1)</param>
+        /// <param name="size">Size (default 500, max 500)</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Rebates history</returns>
         public async Task<WebCallResult<IEnumerable<BinanceBrokerageRebate>>> GetBrokerCommissionRebatesRecentAsync(string? subAccountId = null,
-            DateTime? startDate = null, DateTime? endDate = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+            DateTime? startDate = null, DateTime? endDate = null, int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
@@ -492,7 +523,8 @@ namespace Binance.Net.SubClients
             parameters.AddOptionalParameter("subAccountId", subAccountId);
             parameters.AddOptionalParameter("startTime", startDate != null ? JsonConvert.SerializeObject(startDate, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("endTime", endDate != null ? JsonConvert.SerializeObject(endDate, new TimestampConverter()) : null);
-            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("size", size?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceBrokerageRebate>>(_baseClient.GetUrlSpot(rebatesRecentEndpoint, brokerageApi, brokerageVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);

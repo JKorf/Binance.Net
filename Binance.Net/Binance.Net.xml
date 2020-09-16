@@ -4272,6 +4272,15 @@
             <param name="ct">Cancellation token</param>
             <returns>Enable Futures result</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.EnableLeverageTokenForSubAccountAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Enable Leverage Token for Sub Account
+            </summary>
+            <param name="subAccountId">Sub account id</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Enable Leverage Token result</returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.CreateApiKeyForSubAccountAsync(System.String,System.Boolean,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Create Api Key for Sub Account
@@ -4322,11 +4331,13 @@
             <param name="ct">Cancellation token</param>
             <returns>Api key result</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetSubAccountsAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetSubAccountsAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Sub Account
             </summary>
             <param name="subAccountId">Sub account id</param>
+            <param name="page">Page (default 1)</param>
+            <param name="size">Size (default 500, max 500)</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Sub accounts</returns>
@@ -4408,12 +4419,12 @@
             <param name="startDate">From date</param>
             <param name="endDate">To date</param>
             <param name="page">Page</param>
-            <param name="limit">Limit</param>
+            <param name="limit">Limit (default 500, max 500)</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Transfer history</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetBrokerCommissionRebatesRecentAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetBrokerCommissionRebatesRecentAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Broker Commission Rebate Recent Record
             <para>Only get the latest history of past 7 days</para>
@@ -4421,7 +4432,8 @@
             <param name="subAccountId">Sub account id</param>
             <param name="startDate">From date</param>
             <param name="endDate">To date</param>
-            <param name="limit">Limit (Default 500, max 1000)</param>
+            <param name="page">Page (default 1)</param>
+            <param name="size">Size (default 500, max 500)</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Rebates history</returns>
@@ -7700,6 +7712,21 @@
         <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageEnableFuturesResult.UpdateDate">
             <summary>
             Update Date
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageEnableLeverageTokenResult">
+            <summary>
+            Enable Leverage Token Result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageEnableLeverageTokenResult.SubAccountId">
+            <summary>
+            Sub Account Id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageEnableLeverageTokenResult.IsLeverageTokenEnabled">
+            <summary>
+            Is Leverage Token Enabled
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageEnableMarginResult">
@@ -17274,6 +17301,15 @@
             <param name="ct">Cancellation token</param>
             <returns>Enable Futures result</returns>
         </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.EnableLeverageTokenForSubAccountAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Enable Leverage Token for Sub Account
+            </summary>
+            <param name="subAccountId">Sub account id</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Enable Leverage Token result</returns>
+        </member>
         <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.CreateApiKeyForSubAccountAsync(System.String,System.Boolean,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Create Api Key for Sub Account
@@ -17324,11 +17360,13 @@
             <param name="ct">Cancellation token</param>
             <returns>Api key result</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetSubAccountsAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetSubAccountsAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Sub Account
             </summary>
             <param name="subAccountId">Sub account id</param>
+            <param name="page">Page (default 1)</param>
+            <param name="size">Size (default 500, max 500)</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Sub accounts</returns>
@@ -17410,12 +17448,12 @@
             <param name="startDate">From date</param>
             <param name="endDate">To date</param>
             <param name="page">Page</param>
-            <param name="limit">Limit</param>
+            <param name="limit">Limit (default 500, max 500)</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Transfer history</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetBrokerCommissionRebatesRecentAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetBrokerCommissionRebatesRecentAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Broker Commission Rebate Recent Record
             <para>Only get the latest history of past 7 days</para>
@@ -17423,7 +17461,8 @@
             <param name="subAccountId">Sub account id</param>
             <param name="startDate">From date</param>
             <param name="endDate">To date</param>
-            <param name="limit">Limit (Default 500, max 1000)</param>
+            <param name="page">Page (default 1)</param>
+            <param name="size">Size (default 500, max 500)</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Rebates history</returns>
