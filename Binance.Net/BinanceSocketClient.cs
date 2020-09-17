@@ -55,6 +55,8 @@ namespace Binance.Net
             Spot = new BinanceSocketClientSpot(log, this, options);
             FuturesCoin = new BinanceSocketClientFuturesCoin(log, this, options);
             FuturesUsdt = new BinanceSocketClientFuturesUsdt(log, this, options);
+
+            SetDataInterpreter((byte[] data) => { return string.Empty; }, null);
         }
         #endregion 
 
@@ -77,6 +79,16 @@ namespace Binance.Net
         public void SetApiCredentials(string apiKey, string apiSecret)
         {
             SetAuthenticationProvider(new BinanceAuthenticationProvider(new ApiCredentials(apiKey, apiSecret)));
+        }
+
+        /// <summary>
+        /// Set a function to interpret the data, used when the data is received as bytes instead of a string
+        /// </summary>
+        /// <param name="byteHandler">Handler for byte data</param>
+        /// <param name="stringHandler">Handler for string data</param>
+        public new void SetDataInterpreter(Func<byte[], string>? byteHandler, Func<string, string>? stringHandler)
+        {
+            base.SetDataInterpreter(byteHandler, stringHandler);
         }
 
         internal CallResult<T> DeserializeInternal<T>(JToken data, bool checkObject = true)
