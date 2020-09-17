@@ -4315,7 +4315,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Api key result</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.ChangeSubAccountApiPermissionAsync(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.ChangeSubAccountApiKeyPermissionAsync(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Change Sub Account Api Permission
             <para>You need to enable "trade" option for the api key which requests this endpoint</para>
@@ -4330,6 +4330,49 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Api key result</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.AddIpRestrictionForSubAccountApiKeyAsync(System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Add IP Restriction for Sub Account Api Key
+            </summary>
+            <param name="subAccountId">Sub account id</param>
+            <param name="apiKey">Api key</param>
+            <param name="ipAddress">IP address</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Restriction result</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.ChangeIpRestrictionForSubAccountApiKeyAsync(System.String,System.String,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Enable or Disable IP Restriction for Sub Account Api Key
+            </summary>
+            <param name="subAccountId">Sub account id</param>
+            <param name="apiKey">Api key</param>
+            <param name="ipRestrict">IP restrict</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Restriction result</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetIpRestrictionForSubAccountApiKeyAsync(System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get IP Restriction for Sub Account Api Key
+            </summary>
+            <param name="subAccountId">Sub account id</param>
+            <param name="apiKey">Api key</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Restriction result</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.DeleteIpRestrictionForSubAccountApiKeyAsync(System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Delete IP Restriction for Sub Account Api Key
+            </summary>
+            <param name="subAccountId">Sub account id</param>
+            <param name="apiKey">Api key</param>
+            <param name="ipAddress">IP address</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Restriction result</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetSubAccountsAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
@@ -4481,6 +4524,19 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>A download link for an offline file</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetBrokerFuturesCommissionRebatesHistoryAsync(Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.DateTime,System.DateTime,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Query Broker Futures Commission Rebate Record
+            </summary>
+            <param name="futuresType">Futures type</param>
+            <param name="startDate">Start date</param>
+            <param name="endDate">End date</param>
+            <param name="page">Page (default 1)</param>
+            <param name="size">Size (default 10, max 100)</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Rebate records</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.ChangeBnbBurnForSubAccountSpotAndMarginAsync(System.String,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
@@ -7677,6 +7733,31 @@
             Max Sub Account Quantity
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageAddIpRestrictionResult">
+            <summary>
+            Add IP Restriction Result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageAddIpRestrictionResult.SubAccountId">
+            <summary>
+            Sub Account Id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageAddIpRestrictionResult.ApiKey">
+            <summary>
+            Api key
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageAddIpRestrictionResult.Ip">
+            <summary>
+            IP
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageAddIpRestrictionResult.UpdateDate">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageApiKeyCreateResult">
             <summary>
             Api Key Create Result
@@ -7895,6 +7976,41 @@
         <member name="F:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageFuturesType.COIN">
             <summary>
             COIN Futures
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageIpRestrictionBase">
+            <summary>
+            IP Restriction
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageIpRestrictionBase.SubAccountId">
+            <summary>
+            Sub Account Id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageIpRestrictionBase.ApiKey">
+            <summary>
+            Api key
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageIpRestrictionBase.IpList">
+            <summary>
+            IP list
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageIpRestrictionBase.UpdateDate">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageIpRestriction">
+            <summary>
+            IP Restriction
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageIpRestriction.IpRestrict">
+            <summary>
+            Ip Restrict
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageMarginAssetInfo">
@@ -8242,6 +8358,41 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageTransferTransaction.Date">
+            <summary>
+            Date
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerFuturesCommissionRebate">
+            <summary>
+            Futures Commission Rebate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerFuturesCommissionRebate.SubAccountId">
+            <summary>
+            Sub Account Id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerFuturesCommissionRebate.Income">
+            <summary>
+            Income
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerFuturesCommissionRebate.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerFuturesCommissionRebate.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerFuturesCommissionRebate.TradeId">
+            <summary>
+            TradeId
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerFuturesCommissionRebate.Date">
             <summary>
             Date
             </summary>
@@ -17576,6 +17727,17 @@
             <param name="ct">Cancellation token</param>
             <returns>Created sub-account id</returns>
         </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetSubAccountsAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Query Sub Account
+            </summary>
+            <param name="subAccountId">Sub account id</param>
+            <param name="page">Page (default 1)</param>
+            <param name="size">Size (default 500, max 500)</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Sub accounts</returns>
+        </member>
         <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.EnableMarginForSubAccountAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Enable Margin for Sub Account
@@ -17637,7 +17799,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Api key result</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.ChangeSubAccountApiPermissionAsync(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.ChangeSubAccountApiKeyPermissionAsync(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Change Sub Account Api Permission
             <para>You need to enable "trade" option for the api key which requests this endpoint</para>
@@ -17653,16 +17815,48 @@
             <param name="ct">Cancellation token</param>
             <returns>Api key result</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetSubAccountsAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.AddIpRestrictionForSubAccountApiKeyAsync(System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
-            Query Sub Account
+            Add IP Restriction for Sub Account Api Key
             </summary>
             <param name="subAccountId">Sub account id</param>
-            <param name="page">Page (default 1)</param>
-            <param name="size">Size (default 500, max 500)</param>
+            <param name="apiKey">Api key</param>
+            <param name="ipAddress">IP address</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
-            <returns>Sub accounts</returns>
+            <returns>Restriction result</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.ChangeIpRestrictionForSubAccountApiKeyAsync(System.String,System.String,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Enable or Disable IP Restriction for Sub Account Api Key
+            </summary>
+            <param name="subAccountId">Sub account id</param>
+            <param name="apiKey">Api key</param>
+            <param name="ipRestrict">IP restrict</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Restriction result</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetIpRestrictionForSubAccountApiKeyAsync(System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get IP Restriction for Sub Account Api Key
+            </summary>
+            <param name="subAccountId">Sub account id</param>
+            <param name="apiKey">Api key</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Restriction result</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.DeleteIpRestrictionForSubAccountApiKeyAsync(System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Delete IP Restriction for Sub Account Api Key
+            </summary>
+            <param name="subAccountId">Sub account id</param>
+            <param name="apiKey">Api key</param>
+            <param name="ipAddress">IP address</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Restriction result</returns>
         </member>
         <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.ChangeSubAccountCommissionAsync(System.String,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
@@ -17708,13 +17902,71 @@
             <param name="ct">Cancellation token</param>
             <returns>Sub account futures commissions result</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetBrokerAccountInfoAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetSubAccountSpotAssetInfoAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
-            Broker Account Information
+            Query Sub Account Spot Asset info
+            <para>If subAccountId is not sent, the size must be sent</para>
             </summary>
+            <param name="subAccountId">Sub account id</param>
+            <param name="page">Page (default 1)</param>
+            <param name="size">Size (default 10, max 20)</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
-            <returns>Broker information</returns>
+            <returns>Asset info</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetSubAccountMarginAssetInfoAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Query Sub Account Margin Asset info
+            <para>If subAccountId is not sent, the size must be sent</para>
+            </summary>
+            <param name="subAccountId">Sub account id</param>
+            <param name="page">Page (default 1)</param>
+            <param name="size">Size (default 10, max 20)</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Asset info</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetSubAccountFuturesAssetInfoAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Query Sub Account Futures Asset info
+            <para>If subAccountId is not sent, the size must be sent</para>
+            </summary>
+            <param name="subAccountId">Sub account id</param>
+            <param name="page">Page (default 1)</param>
+            <param name="size">Size (default 10, max 20)</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Asset info</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.ChangeBnbBurnForSubAccountSpotAndMarginAsync(System.String,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Enable Or Disable BNB Burn for Sub Account SPOT and MARGIN
+            </summary>
+            <param name="subAccountId">Sub account id</param>
+            <param name="spotBnbBurn">"true" or "false", spot and margin whether use BNB to pay for transaction fees or not</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Result</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.ChangeBnbBurnForSubAccountMarginInterestAsync(System.String,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Enable Or Disable BNB Burn for Sub Account Margin Interest
+            <para>Sub account must be enabled margin before using this switch</para>
+            </summary>
+            <param name="subAccountId">Sub account id</param>
+            <param name="interestBnbBurn">"true" or "false", margin loan whether uses BNB to pay for margin interest or not</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Result</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetBnbBurnStatusForSubAccountAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get BNB Burn Status for Sub Account
+            </summary>
+            <param name="subAccountId">Sub account id</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Status</returns>
         </member>
         <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.TransferAsync(System.String,System.Decimal,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
@@ -17778,6 +18030,14 @@
             <param name="ct">Cancellation token</param>
             <returns>Transfer history</returns>
         </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetBrokerAccountInfoAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Broker Account Information
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Broker information</returns>
+        </member>
         <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetBrokerCommissionRebatesRecentAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Broker Commission Rebate Recent Record
@@ -17804,71 +18064,18 @@
             <param name="ct">Cancellation token</param>
             <returns>A download link for an offline file</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.ChangeBnbBurnForSubAccountSpotAndMarginAsync(System.String,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetBrokerFuturesCommissionRebatesHistoryAsync(Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.DateTime,System.DateTime,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
-            Enable Or Disable BNB Burn for Sub Account SPOT and MARGIN
+            Query Broker Futures Commission Rebate Record
             </summary>
-            <param name="subAccountId">Sub account id</param>
-            <param name="spotBnbBurn">"true" or "false", spot and margin whether use BNB to pay for transaction fees or not</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Result</returns>
-        </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.ChangeBnbBurnForSubAccountMarginInterestAsync(System.String,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Enable Or Disable BNB Burn for Sub Account Margin Interest
-            <para>Sub account must be enabled margin before using this switch</para>
-            </summary>
-            <param name="subAccountId">Sub account id</param>
-            <param name="interestBnbBurn">"true" or "false", margin loan whether uses BNB to pay for margin interest or not</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Result</returns>
-        </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetBnbBurnStatusForSubAccountAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get BNB Burn Status for Sub Account
-            </summary>
-            <param name="subAccountId">Sub account id</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Status</returns>
-        </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetSubAccountSpotAssetInfoAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Query Sub Account Spot Asset info
-            <para>If subAccountId is not sent, the size must be sent</para>
-            </summary>
-            <param name="subAccountId">Sub account id</param>
+            <param name="futuresType">Futures type</param>
+            <param name="startDate">Start date</param>
+            <param name="endDate">End date</param>
             <param name="page">Page (default 1)</param>
-            <param name="size">Size (default 10, max 20)</param>
+            <param name="size">Size (default 10, max 100)</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
-            <returns>Asset info</returns>
-        </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetSubAccountMarginAssetInfoAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Query Sub Account Margin Asset info
-            <para>If subAccountId is not sent, the size must be sent</para>
-            </summary>
-            <param name="subAccountId">Sub account id</param>
-            <param name="page">Page (default 1)</param>
-            <param name="size">Size (default 10, max 20)</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Asset info</returns>
-        </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetSubAccountFuturesAssetInfoAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Query Sub Account Futures Asset info
-            <para>If subAccountId is not sent, the size must be sent</para>
-            </summary>
-            <param name="subAccountId">Sub account id</param>
-            <param name="page">Page (default 1)</param>
-            <param name="size">Size (default 10, max 20)</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Asset info</returns>
+            <returns>Rebate records</returns>
         </member>
         <member name="T:Binance.Net.SubClients.BinanceClientGeneral">
             <summary>

@@ -97,8 +97,55 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Api key result</returns>
-        Task<WebCallResult<BinanceBrokerageSubAccountApiKey>> ChangeSubAccountApiPermissionAsync(string subAccountId, string apiKey,
+        Task<WebCallResult<BinanceBrokerageSubAccountApiKey>> ChangeSubAccountApiKeyPermissionAsync(string subAccountId, string apiKey,
             bool isTradingEnabled, bool isMarginTradingEnabled, bool isFuturesTradingEnabled, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Add IP Restriction for Sub Account Api Key
+        /// </summary>
+        /// <param name="subAccountId">Sub account id</param>
+        /// <param name="apiKey">Api key</param>
+        /// <param name="ipAddress">IP address</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Restriction result</returns>
+        Task<WebCallResult<BinanceBrokerageAddIpRestrictionResult>> AddIpRestrictionForSubAccountApiKeyAsync(string subAccountId,
+            string apiKey, string ipAddress, int? receiveWindow = null, CancellationToken ct = default);
+        
+        /// <summary>
+        /// Enable or Disable IP Restriction for Sub Account Api Key
+        /// </summary>
+        /// <param name="subAccountId">Sub account id</param>
+        /// <param name="apiKey">Api key</param>
+        /// <param name="ipRestrict">IP restrict</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Restriction result</returns>
+        Task<WebCallResult<BinanceBrokerageIpRestriction>> ChangeIpRestrictionForSubAccountApiKeyAsync(string subAccountId, 
+            string apiKey, bool ipRestrict, int? receiveWindow = null, CancellationToken ct = default);
+        
+        /// <summary>
+        /// Get IP Restriction for Sub Account Api Key
+        /// </summary>
+        /// <param name="subAccountId">Sub account id</param>
+        /// <param name="apiKey">Api key</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Restriction result</returns>
+        Task<WebCallResult<BinanceBrokerageIpRestriction>> GetIpRestrictionForSubAccountApiKeyAsync(string subAccountId, 
+            string apiKey, int? receiveWindow = null, CancellationToken ct = default);
+        
+        /// <summary>
+        /// Delete IP Restriction for Sub Account Api Key
+        /// </summary>
+        /// <param name="subAccountId">Sub account id</param>
+        /// <param name="apiKey">Api key</param>
+        /// <param name="ipAddress">IP address</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Restriction result</returns>
+        Task<WebCallResult<BinanceBrokerageIpRestrictionBase>> DeleteIpRestrictionForSubAccountApiKeyAsync(string subAccountId, 
+            string apiKey, string ipAddress, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Query Sub Account
@@ -260,6 +307,20 @@ namespace Binance.Net.Interfaces.SubClients
         /// <returns>A download link for an offline file</returns>
         Task<WebCallResult<string>> GetBrokerCommissionRebatesHistoryAsync(string? subAccountId = null,
             DateTime? startDate = null, DateTime? endDate = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+        
+        /// <summary>
+        /// Query Broker Futures Commission Rebate Record
+        /// </summary>
+        /// <param name="futuresType">Futures type</param>
+        /// <param name="startDate">Start date</param>
+        /// <param name="endDate">End date</param>
+        /// <param name="page">Page (default 1)</param>
+        /// <param name="size">Size (default 10, max 100)</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Rebate records</returns>
+        Task<WebCallResult<IEnumerable<BinanceBrokerFuturesCommissionRebate>>> GetBrokerFuturesCommissionRebatesHistoryAsync(BinanceBrokerageFuturesType futuresType,
+            DateTime startDate, DateTime endDate, int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Enable Or Disable BNB Burn for Sub Account SPOT and MARGIN
