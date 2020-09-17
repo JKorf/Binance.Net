@@ -181,7 +181,26 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transfer result</returns>
         Task<WebCallResult<BinanceBrokerageTransferResult>> TransferAsync(string asset, decimal amount,
-            string fromId, string toId, string? clientTransferId = null, int? receiveWindow = null, CancellationToken ct = default);
+            string? fromId, string? toId, string? clientTransferId = null, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Sub Account Transfer (Futures)
+        /// <para>You need to enable "internal transfer" option for the api key which requests this endpoint</para>
+        /// <para>Transfer from master account if fromId not sent</para>
+        /// <para>Transfer to master account if toId not sent</para>
+        /// <para>Each master account could transfer 5000 times/min</para>
+        /// </summary>
+        /// <param name="asset">Asset</param>
+        /// <param name="amount">Amount</param>
+        /// <param name="futuresType">Futures type</param>
+        /// <param name="fromId">From id</param>
+        /// <param name="toId">To id</param>
+        /// <param name="clientTransferId">Client transfer id, must be unique</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Transfer result</returns>
+        Task<WebCallResult<BinanceBrokerageTransferFuturesResult>> TransferFuturesAsync(string asset, decimal amount, BinanceBrokerageFuturesType futuresType,
+            string? fromId, string? toId, string? clientTransferId = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Query Sub Account Transfer History
@@ -197,6 +216,22 @@ namespace Binance.Net.Interfaces.SubClients
         /// <returns>Transfer history</returns>
         Task<WebCallResult<IEnumerable<BinanceBrokerageTransferTransaction>>> GetTransferHistoryAsync(string subAccountId, string? clientTransferId = null,
             DateTime? startDate = null, DateTime? endDate = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Query Sub Account Transfer History (Futures)
+        /// </summary>
+        /// <param name="subAccountId">Sub account id</param>
+        /// <param name="futuresType">Futures type</param>
+        /// <param name="startDate">From date (default 100 days records)</param>
+        /// <param name="endDate">To date (default 100 days records)</param>
+        /// <param name="page">Page (default 1)</param>
+        /// <param name="limit">Limit (default 50, max 500)</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Transfer history</returns>
+        Task<WebCallResult<BinanceBrokerageTransferFuturesTransactions>> GetTransferFuturesHistoryAsync(string subAccountId,
+            BinanceBrokerageFuturesType futuresType, DateTime? startDate = null, DateTime? endDate = null,
+            int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Query Broker Commission Rebate Recent Record

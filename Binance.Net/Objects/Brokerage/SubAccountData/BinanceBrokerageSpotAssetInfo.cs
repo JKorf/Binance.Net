@@ -13,7 +13,7 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         /// <summary>
         /// Data
         /// </summary>
-        public IEnumerable<BinanceBrokerageSubAccountSpotAssetInfo>? Data { get; set; }
+        public IEnumerable<BinanceBrokerageSubAccountSpotAssetInfo> Data { get; set; } = new List<BinanceBrokerageSubAccountSpotAssetInfo>();
         
         /// <summary>
         /// Timestamp
