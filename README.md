@@ -145,6 +145,10 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.0.2 - 17 Sep 2020
+    * Fix for socket client receiving intermittent byte data
+    * Updated market data interfaces to support inheritance
+
 * Version 6.0.1 - 09 Sep 2020
     * Fixed missing properties in stream kline models
 

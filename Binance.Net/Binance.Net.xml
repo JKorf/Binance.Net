@@ -189,6 +189,13 @@
             <param name="apiKey">The api key</param>
             <param name="apiSecret">The api secret</param>
         </member>
+        <member name="M:Binance.Net.BinanceSocketClient.SetDataInterpreter(System.Func{System.Byte[],System.String},System.Func{System.String,System.String})">
+            <summary>
+            Set a function to interpret the data, used when the data is received as bytes instead of a string
+            </summary>
+            <param name="byteHandler">Handler for byte data</param>
+            <param name="stringHandler">Handler for string data</param>
+        </member>
         <member name="M:Binance.Net.BinanceSocketClient.HandleQueryResponse``1(CryptoExchange.Net.Sockets.SocketConnection,System.Object,Newtonsoft.Json.Linq.JToken,CryptoExchange.Net.Objects.CallResult{``0}@)">
             <inheritdoc />
         </member>
