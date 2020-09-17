@@ -257,5 +257,44 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="ct">Cancellation token</param>
         /// <returns>Status</returns>
         Task<WebCallResult<BinanceBrokerageBnbBurnStatus>> GetBnbBurnStatusForSubAccountAsync(string subAccountId, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Query Sub Account Spot Asset info
+        /// <para>If subAccountId is not sent, the size must be sent</para>
+        /// </summary>
+        /// <param name="subAccountId">Sub account id</param>
+        /// <param name="page">Page (default 1)</param>
+        /// <param name="size">Size (default 10, max 20)</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Asset info</returns>
+        Task<WebCallResult<BinanceBrokerageSpotAssetInfo>> GetSubAccountSpotAssetInfoAsync(string? subAccountId,
+            int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default);
+        
+        /// <summary>
+        /// Query Sub Account Margin Asset info
+        /// <para>If subAccountId is not sent, the size must be sent</para>
+        /// </summary>
+        /// <param name="subAccountId">Sub account id</param>
+        /// <param name="page">Page (default 1)</param>
+        /// <param name="size">Size (default 10, max 20)</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Asset info</returns>
+        Task<WebCallResult<BinanceBrokerageMarginAssetInfo>> GetSubAccountMarginAssetInfoAsync(string? subAccountId,
+            int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Query Sub Account Futures Asset info
+        /// <para>If subAccountId is not sent, the size must be sent</para>
+        /// </summary>
+        /// <param name="subAccountId">Sub account id</param>
+        /// <param name="page">Page (default 1)</param>
+        /// <param name="size">Size (default 10, max 20)</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Asset info</returns>
+        Task<WebCallResult<BinanceBrokerageFuturesAssetInfo>> GetSubAccountFuturesAssetInfoAsync(string? subAccountId,
+            int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default);
     }
 }

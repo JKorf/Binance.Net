@@ -4480,6 +4480,42 @@
             <param name="ct">Cancellation token</param>
             <returns>Status</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetSubAccountSpotAssetInfoAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Query Sub Account Spot Asset info
+            <para>If subAccountId is not sent, the size must be sent</para>
+            </summary>
+            <param name="subAccountId">Sub account id</param>
+            <param name="page">Page (default 1)</param>
+            <param name="size">Size (default 10, max 20)</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Asset info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetSubAccountMarginAssetInfoAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Query Sub Account Margin Asset info
+            <para>If subAccountId is not sent, the size must be sent</para>
+            </summary>
+            <param name="subAccountId">Sub account id</param>
+            <param name="page">Page (default 1)</param>
+            <param name="size">Size (default 10, max 20)</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Asset info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetSubAccountFuturesAssetInfoAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Query Sub Account Futures Asset info
+            <para>If subAccountId is not sent, the size must be sent</para>
+            </summary>
+            <param name="subAccountId">Sub account id</param>
+            <param name="page">Page (default 1)</param>
+            <param name="size">Size (default 10, max 20)</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Asset info</returns>
+        </member>
         <member name="T:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral">
             <summary>
             General interface
@@ -7749,6 +7785,121 @@
             Update Date
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageFuturesAssetInfo">
+            <summary>
+            Futures Asset Info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageFuturesAssetInfo.Data">
+            <summary>
+            Data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageFuturesAssetInfo.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageSubAccountFuturesAssetInfo">
+            <summary>
+            Account Futures Asset Info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageSubAccountFuturesAssetInfo.SubAccountId">
+            <summary>
+            Sub Account Id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageSubAccountFuturesAssetInfo.FuturesEnable">
+            <summary>
+            Futures enable
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageSubAccountFuturesAssetInfo.TotalInitialMarginOfUsdt">
+            <summary>
+            Total Initial Margin Of Usdt
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageSubAccountFuturesAssetInfo.TotalMaintenanceMarginOfUsdt">
+            <summary>
+            Total Maintenance Margin Of Usdt
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageSubAccountFuturesAssetInfo.TotalWalletBalanceOfUsdt">
+            <summary>
+            Total Wallet Balance Of Usdt
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageSubAccountFuturesAssetInfo.TotalUnrealizedProfitOfUsdt">
+            <summary>
+            Total Unrealized Profit Of Usdt
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageSubAccountFuturesAssetInfo.TotalMarginBalanceOfUsdt">
+            <summary>
+            Total Margin Balance Of Usdt
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageSubAccountFuturesAssetInfo.TotalPositionInitialMarginOfUsdt">
+            <summary>
+            Total Position Initial Margin Of Usdt
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageSubAccountFuturesAssetInfo.TotalOpenOrderInitialMarginOfUsdt">
+            <summary>
+            Total Open Order Initial Margin Of Usdt
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageMarginAssetInfo">
+            <summary>
+            Margin Asset Info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageMarginAssetInfo.Data">
+            <summary>
+            Data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageMarginAssetInfo.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageSubAccountMarginAssetInfo">
+            <summary>
+            Account Margin Asset Info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageSubAccountMarginAssetInfo.SubAccountId">
+            <summary>
+            Sub Account Id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageSubAccountMarginAssetInfo.MarginEnable">
+            <summary>
+            Margin enable
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageSubAccountMarginAssetInfo.TotalAssetOfBtc">
+            <summary>
+            Total Asset Of Btc
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageSubAccountMarginAssetInfo.TotalLiabilityOfBtc">
+            <summary>
+            Total Liability Of Btc
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageSubAccountMarginAssetInfo.TotalNetAssetOfBtc">
+            <summary>
+            Total Net Asset Of Btc
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageSubAccountMarginAssetInfo.MarginLevel">
+            <summary>
+            Margin level
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageRebate">
             <summary>
             Brokerage Rebate
@@ -7782,6 +7933,36 @@
         <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageRebate.Date">
             <summary>
             Date
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageSpotAssetInfo">
+            <summary>
+            Spot Asset Info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageSpotAssetInfo.Data">
+            <summary>
+            Data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageSpotAssetInfo.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageSubAccountSpotAssetInfo">
+            <summary>
+            Account Spot Asset Info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageSubAccountSpotAssetInfo.SubAccountId">
+            <summary>
+            Sub Account Id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageSubAccountSpotAssetInfo.TotalBalanceOfBtc">
+            <summary>
+            Total Balance Of Btc
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageSubAccount">
@@ -17508,6 +17689,42 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Status</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetSubAccountSpotAssetInfoAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Query Sub Account Spot Asset info
+            <para>If subAccountId is not sent, the size must be sent</para>
+            </summary>
+            <param name="subAccountId">Sub account id</param>
+            <param name="page">Page (default 1)</param>
+            <param name="size">Size (default 10, max 20)</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Asset info</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetSubAccountMarginAssetInfoAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Query Sub Account Margin Asset info
+            <para>If subAccountId is not sent, the size must be sent</para>
+            </summary>
+            <param name="subAccountId">Sub account id</param>
+            <param name="page">Page (default 1)</param>
+            <param name="size">Size (default 10, max 20)</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Asset info</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetSubAccountFuturesAssetInfoAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Query Sub Account Futures Asset info
+            <para>If subAccountId is not sent, the size must be sent</para>
+            </summary>
+            <param name="subAccountId">Sub account id</param>
+            <param name="page">Page (default 1)</param>
+            <param name="size">Size (default 10, max 20)</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Asset info</returns>
         </member>
         <member name="T:Binance.Net.SubClients.BinanceClientGeneral">
             <summary>

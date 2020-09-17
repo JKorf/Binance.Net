@@ -35,6 +35,9 @@ namespace Binance.Net.SubClients
         private const string changeBnbBurnForSubAccountSpotAndMarginEndpoint = "broker/subAccount/bnbBurn/spot";
         private const string changeBnbBurnForSubAccountMarginInterestEndpoint = "broker/subAccount/bnbBurn/marginInterest";
         private const string bnbBurnForSubAccountStatusEndpoint = "broker/subAccount/bnbBurn/status";
+        private const string spotSummaryEndpoint = "broker/subAccount/spotSummary";
+        private const string marginSummaryEndpoint = "broker/subAccount/marginSummary";
+        private const string futuresSummaryEndpoint = "broker/subAccount/futuresSummary";
 
         private readonly BinanceClient _baseClient;
 
@@ -641,7 +644,94 @@ namespace Binance.Net.SubClients
 
             return await _baseClient.SendRequestInternal<BinanceBrokerageBnbBurnStatus>(_baseClient.GetUrlSpot(bnbBurnForSubAccountStatusEndpoint, brokerageApi, brokerageVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
+        
+        /// <summary>
+        /// Query Sub Account Spot Asset info
+        /// <para>If subAccountId is not sent, the size must be sent</para>
+        /// </summary>
+        /// <param name="subAccountId">Sub account id</param>
+        /// <param name="page">Page (default 1)</param>
+        /// <param name="size">Size (default 10, max 20)</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Asset info</returns>
+        public async Task<WebCallResult<BinanceBrokerageSpotAssetInfo>> GetSubAccountSpotAssetInfoAsync(
+            string? subAccountId, int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceBrokerageSpotAssetInfo>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
+            var parameters = new Dictionary<string, object>
+                             {
+                                 {"timestamp", _baseClient.GetTimestamp()}
+                             };
+            parameters.AddOptionalParameter("subAccountId", subAccountId);
+            parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("size", size?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceBrokerageSpotAssetInfo>(_baseClient.GetUrlSpot(spotSummaryEndpoint, brokerageApi, brokerageVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+        
+        /// <summary>
+        /// Query Sub Account Margin Asset info
+        /// <para>If subAccountId is not sent, the size must be sent</para>
+        /// </summary>
+        /// <param name="subAccountId">Sub account id</param>
+        /// <param name="page">Page (default 1)</param>
+        /// <param name="size">Size (default 10, max 20)</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Asset info</returns>
+        public async Task<WebCallResult<BinanceBrokerageMarginAssetInfo>> GetSubAccountMarginAssetInfoAsync(
+            string? subAccountId, int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceBrokerageMarginAssetInfo>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+                             {
+                                 {"timestamp", _baseClient.GetTimestamp()}
+                             };
+            parameters.AddOptionalParameter("subAccountId", subAccountId);
+            parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("size", size?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceBrokerageMarginAssetInfo>(_baseClient.GetUrlSpot(marginSummaryEndpoint, brokerageApi, brokerageVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+        
+        /// <summary>
+        /// Query Sub Account Futures Asset info
+        /// <para>If subAccountId is not sent, the size must be sent</para>
+        /// </summary>
+        /// <param name="subAccountId">Sub account id</param>
+        /// <param name="page">Page (default 1)</param>
+        /// <param name="size">Size (default 10, max 20)</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Asset info</returns>
+        public async Task<WebCallResult<BinanceBrokerageFuturesAssetInfo>> GetSubAccountFuturesAssetInfoAsync(
+            string? subAccountId, int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceBrokerageFuturesAssetInfo>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+                             {
+                                 {"timestamp", _baseClient.GetTimestamp()}
+                             };
+            parameters.AddOptionalParameter("subAccountId", subAccountId);
+            parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("size", size?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceBrokerageFuturesAssetInfo>(_baseClient.GetUrlSpot(futuresSummaryEndpoint, brokerageApi, brokerageVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+        
         #endregion
     }
 }
