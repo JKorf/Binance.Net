@@ -35,6 +35,6 @@ namespace Binance.Net.Interfaces
         /// <summary>
         /// Whether trade was made with the best match
         /// </summary>
-        public bool IsBestMatch { get; set; }
+        bool IsBestMatch { get; set; }
     }
 }
