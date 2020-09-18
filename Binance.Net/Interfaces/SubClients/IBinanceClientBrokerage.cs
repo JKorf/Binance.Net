@@ -13,7 +13,8 @@ namespace Binance.Net.Interfaces.SubClients
     public interface IBinanceClientBrokerage
     {
         /// <summary>
-        /// Generate a sub account under your brokerage master account
+        /// Create a Sub Account
+        /// <para>This request will generate a sub account under your brokerage master account</para>
         /// <para>You need to enable "trade" option for the api key which requests this endpoint</para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -50,21 +51,24 @@ namespace Binance.Net.Interfaces.SubClients
         
         /// <summary>
         /// Create Api Key for Sub Account
+        /// <para>This request will generate a api key for a sub account</para>
+        /// <para>You need to enable "trade" option for the api key which requests this endpoint</para>
         /// <para>Sub account should be enable margin before its api-key's marginTrade being enabled</para>
         /// <para>Sub account should be enable futures before its api-key's futuresTrade being enabled</para>
         /// </summary>
         /// <param name="subAccountId">Sub account id</param>
-        /// <param name="isTradingEnabled">Is spot trading enabled</param>
+        /// <param name="isSpotTradingEnabled">Is spot trading enabled</param>
         /// <param name="isMarginTradingEnabled">Is margin trading enabled</param>
         /// <param name="isFuturesTradingEnabled">Is futures trading enabled</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Api key result</returns>
-        Task<WebCallResult<BinanceBrokerageApiKeyCreateResult>> CreateApiKeyForSubAccountAsync(string subAccountId, bool isTradingEnabled, bool? isMarginTradingEnabled = null,
-            bool? isFuturesTradingEnabled = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceBrokerageApiKeyCreateResult>> CreateApiKeyForSubAccountAsync(string subAccountId, bool isSpotTradingEnabled, 
+            bool? isMarginTradingEnabled = null, bool? isFuturesTradingEnabled = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Delete Sub Account Api Key
+        /// <para>This request will delete a api key for a sub account</para>
         /// <para>You need to enable "trade" option for the api key which requests this endpoint</para>
         /// </summary>
         /// <param name="subAccountId">Sub account id</param>
@@ -85,20 +89,21 @@ namespace Binance.Net.Interfaces.SubClients
 
         /// <summary>
         /// Change Sub Account Api Permission
+        /// <para>This request will change the api permission for a sub account</para>
         /// <para>You need to enable "trade" option for the api key which requests this endpoint</para>
         /// <para>Sub account should be enable margin before its api-key's marginTrade being enabled</para>
         /// <para>Sub account should be enable futures before its api-key's futuresTrade being enabled</para>
         /// </summary>
         /// <param name="subAccountId">Sub account id</param>
         /// <param name="apiKey">Api key</param>
-        /// <param name="isTradingEnabled">Is spot trading enabled</param>
+        /// <param name="isSpotTradingEnabled">Is spot trading enabled</param>
         /// <param name="isMarginTradingEnabled">Is margin trading enabled</param>
         /// <param name="isFuturesTradingEnabled">Is futures trading enabled</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Api key result</returns>
         Task<WebCallResult<BinanceBrokerageSubAccountApiKey>> ChangeSubAccountApiKeyPermissionAsync(string subAccountId, string apiKey,
-            bool isTradingEnabled, bool isMarginTradingEnabled, bool isFuturesTradingEnabled, int? receiveWindow = null, CancellationToken ct = default);
+            bool isSpotTradingEnabled, bool isMarginTradingEnabled, bool isFuturesTradingEnabled, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Add IP Restriction for Sub Account Api Key
@@ -152,7 +157,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// </summary>
         /// <param name="subAccountId">Sub account id</param>
         /// <param name="page">Page (default 1)</param>
-        /// <param name="size">Size (default 500, max 500)</param>
+        /// <param name="size">Size (default 500)</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Sub accounts</returns>
@@ -160,6 +165,7 @@ namespace Binance.Net.Interfaces.SubClients
 
         /// <summary>
         /// Change Sub Account Commission
+        /// <para>This request will change the commission for a sub account</para>
         /// <para>You need to enable "trade" option for the api key which requests this endpoint</para>
         /// <para>If margin disabled, it is not allowed to send marginMakerCommission or marginTakerCommission</para>
         /// <para>If margin enabled, marginMakerCommission or marginTakerCommission has default value as spotMakerCommission or spotTakerCommission</para>
@@ -176,10 +182,11 @@ namespace Binance.Net.Interfaces.SubClients
             decimal? marginMakerCommission = null, decimal? marginTakerCommission = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Change Sub Account Futures Commission Adjustment
+        /// Change Sub Account USDT-Ⓜ Futures Commission Adjustment
+        /// <para>This request will change the USDT-Ⓜ futures commission for a sub account</para>
         /// <para>You need to enable "trade" option for the api key which requests this endpoint</para>
-        /// <para>The sub-account's futures commission of a symbol equals to the base commission of the symbol on the sub-account's fee tier plus the commission adjustment</para>
-        /// <para>If futures disabled, it is not allowed to set subaccount's futures commission adjustment on any symbol</para>
+        /// <para>The sub-account's USDT-Ⓜ futures commission of a symbol equals to the base commission of the symbol on the sub-account's fee tier plus the commission adjustment</para>
+        /// <para>If futures disabled, it is not allowed to set subaccount's USDT-Ⓜ futures commission adjustment on any symbol</para>
         /// </summary>
         /// <param name="subAccountId">Sub account id</param>
         /// <param name="symbol">Symbol</param>
@@ -187,23 +194,56 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="takerAdjustment">Taker adjustment (100 for 0.01%)</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>Sub account futures commission result</returns>
+        /// <returns>Sub account USDT-Ⓜ futures commission result</returns>
         Task<WebCallResult<BinanceBrokerageSubAccountFuturesCommission>> ChangeSubAccountFuturesCommissionAdjustmentAsync(string subAccountId, string symbol,
             int makerAdjustment, int takerAdjustment, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Query Sub Account Futures Commission Adjustment
-        /// <para>The sub-account's futures commission of a symbol equals to the base commission of the symbol on the sub-account's fee tier plus the commission adjustment</para>
+        /// Query Sub Account USDT-Ⓜ Futures Commission Adjustment
+        /// <para>The sub-account's USDT-Ⓜ futures commission of a symbol equals to the base commission of the symbol on the sub-account's fee tier plus the commission adjustment</para>
         /// <para>If symbol not sent, commission adjustment of all symbols will be returned</para>
-        /// <para>If futures disabled, it is not allowed to set subaccount's futures commission adjustment on any symbol</para>
+        /// <para>If futures disabled, it is not allowed to set subaccount's USDT-Ⓜ futures commission adjustment on any symbol</para>
         /// </summary>
         /// <param name="subAccountId">Sub account id</param>
         /// <param name="symbol">Symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>Sub account futures commissions result</returns>
+        /// <returns>Sub account USDT-Ⓜ futures commissions result</returns>
         Task<WebCallResult<IEnumerable<BinanceBrokerageSubAccountFuturesCommission>>> GetSubAccountFuturesCommissionAdjustmentAsync(string subAccountId,
             string? symbol = null, int? receiveWindow = null, CancellationToken ct = default);
+        
+        /// <summary>
+        /// Change Sub Account COIN-Ⓜ Futures Commission Adjustment
+        /// <para>This request will change the COIN-Ⓜ futures commission for a sub account</para>
+        /// <para>You need to enable "trade" option for the api key which requests this endpoint</para>
+        /// <para>The sub-account's COIN-Ⓜ futures commission of a symbol equals to the base commission of the symbol on the sub-account's fee tier plus the commission adjustment</para>
+        /// <para>If futures disabled, it is not allowed to set subaccount's COIN-Ⓜ futures commission adjustment on any symbol</para>
+        /// <para>Different symbols have the same commission for the same pair</para>
+        /// </summary>
+        /// <param name="subAccountId">Sub account id</param>
+        /// <param name="pair">Pair</param>
+        /// <param name="makerAdjustment">Maker adjustment (100 for 0.01%)</param>
+        /// <param name="takerAdjustment">Taker adjustment (100 for 0.01%)</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Sub account coin futures commission result</returns>
+        Task<WebCallResult<BinanceBrokerageSubAccountCoinFuturesCommission>> ChangeSubAccountCoinFuturesCommissionAdjustmentAsync(string subAccountId, 
+            string pair, int makerAdjustment, int takerAdjustment, int? receiveWindow = null, CancellationToken ct = default);
+        
+        /// <summary>
+        /// Query Sub Account COIN-Ⓜ Futures Commission Adjustment
+        /// <para>The sub-account's COIN-Ⓜ futures commission of a symbol equals to the base commission of the symbol on the sub-account's fee tier plus the commission adjustment</para>
+        /// <para>If pair not sent, commission adjustment of all symbols will be returned</para>
+        /// <para>If futures disabled, it is not allowed to set subaccount's COIN-Ⓜ futures commission adjustment on any symbol</para>
+        /// <para>Different symbols have the same commission for the same pair</para>
+        /// </summary>
+        /// <param name="subAccountId">Sub account id</param>
+        /// <param name="pair">Pair</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Sub account coin futures commissions result</returns>
+        Task<WebCallResult<IEnumerable<BinanceBrokerageSubAccountCoinFuturesCommission>>> GetSubAccountCoinFuturesCommissionAdjustmentAsync(string subAccountId,
+            string? pair = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Broker Account Information
@@ -214,7 +254,7 @@ namespace Binance.Net.Interfaces.SubClients
         Task<WebCallResult<BinanceBrokerageAccountInfo>> GetBrokerAccountInfoAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Sub Account Transfer
+        /// Sub Account Transfer (Spot)
         /// <para>You need to enable "internal transfer" option for the api key which requests this endpoint</para>
         /// <para>Transfer from master account if fromId not sent</para>
         /// <para>Transfer to master account if toId not sent</para>
@@ -242,15 +282,14 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="futuresType">Futures type</param>
         /// <param name="fromId">From id</param>
         /// <param name="toId">To id</param>
-        /// <param name="clientTransferId">Client transfer id, must be unique</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transfer result</returns>
         Task<WebCallResult<BinanceBrokerageTransferFuturesResult>> TransferFuturesAsync(string asset, decimal amount, BinanceBrokerageFuturesType futuresType,
-            string? fromId, string? toId, string? clientTransferId = null, int? receiveWindow = null, CancellationToken ct = default);
+            string? fromId, string? toId, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Query Sub Account Transfer History
+        /// Query Sub Account Transfer History (Spot)
         /// </summary>
         /// <param name="subAccountId">Sub account id</param>
         /// <param name="clientTransferId">Client transfer id</param>
@@ -279,9 +318,28 @@ namespace Binance.Net.Interfaces.SubClients
         Task<WebCallResult<BinanceBrokerageTransferFuturesTransactions>> GetTransferFuturesHistoryAsync(string subAccountId,
             BinanceBrokerageFuturesType futuresType, DateTime? startDate = null, DateTime? endDate = null,
             int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+        
+        /// <summary>
+        /// Get Sub Account Deposit History
+        /// <para>Please notice the default startDate and endDate to make sure that time interval is within 0-7 days</para>
+        /// <para>If both startDate and endDate are sent, time between startDate and endDate must be less than 7 days</para>
+        /// </summary>
+        /// <param name="subAccountId">Sub account id</param>
+        /// <param name="coin">Coin</param>
+        /// <param name="status">Status</param>
+        /// <param name="startDate">From date (default 7 days from current timestamp)</param>
+        /// <param name="endDate">To date (default present timestamp)</param>
+        /// <param name="limit">Limit (default 500)</param>
+        /// <param name="offset">Offset (default 0)</param>
+        /// <param name="receiveWindow"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BinanceBrokerageSubAccountDepositTransaction>>> GetSubAccountDepositHistoryAsync(string? subAccountId = null, 
+            string? coin = null, BinanceBrokerageSubAccountDepositStatus? status = null, DateTime? startDate = null, DateTime? endDate = null,
+            int? limit = null, int? offset = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Query Broker Commission Rebate Recent Record
+        /// Query Broker Commission Rebate Recent Record (Spot)
         /// <para>Only get the latest history of past 7 days</para>
         /// </summary>
         /// <param name="subAccountId">Sub account id</param>
@@ -296,7 +354,19 @@ namespace Binance.Net.Interfaces.SubClients
             DateTime? startDate = null, DateTime? endDate = null, int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Query Broker Commission Rebate History
+        /// Generate Broker Commission Rebate History (Spot)
+        /// </summary>
+        /// <param name="subAccountId">Sub account id</param>
+        /// <param name="startDate">From date</param>
+        /// <param name="endDate">To date</param>
+        /// <param name="limit">Limit (default 1000)</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<object>> GenerateBrokerCommissionRebatesHistoryAsync(string? subAccountId = null,
+            DateTime? startDate = null, DateTime? endDate = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+        
+        /// <summary>
+        /// Query Broker Commission Rebate History (Spot)
         /// </summary>
         /// <param name="subAccountId">Sub account id</param>
         /// <param name="startDate">From date</param>

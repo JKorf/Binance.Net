@@ -35,7 +35,8 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         /// <summary>
         /// Futures enable
         /// </summary>
-        public bool FuturesEnable { get; set; }
+        [JsonProperty("futuresEnable")]
+        public bool IsFuturesEnable { get; set; }
         
         /// <summary>
         /// Total Initial Margin Of Usdt

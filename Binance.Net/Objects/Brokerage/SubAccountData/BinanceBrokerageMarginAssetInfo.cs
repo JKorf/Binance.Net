@@ -35,7 +35,8 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         /// <summary>
         /// Margin enable
         /// </summary>
-        public bool MarginEnable { get; set; }
+        [JsonProperty("marginEnable")]
+        public bool IsMarginEnable { get; set; }
         
         /// <summary>
         /// Total Asset Of Btc

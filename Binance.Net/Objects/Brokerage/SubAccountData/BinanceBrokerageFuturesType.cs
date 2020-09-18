@@ -6,12 +6,12 @@
     public enum BinanceBrokerageFuturesType
     {
         /// <summary>
-        /// USDT Futures
+        /// USDT-Ⓜ Futures
         /// </summary>
         USDT = 1,
         
         /// <summary>
-        /// COIN Futures
+        /// COIN-Ⓜ Futures
         /// </summary>
         COIN = 2,
     }
