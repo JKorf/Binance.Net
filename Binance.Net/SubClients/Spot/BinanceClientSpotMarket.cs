@@ -256,7 +256,7 @@ namespace Binance.Net.SubClients.Spot
         /// <param name="symbol">The symbol to get the data for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Data over the last 24 hours</returns>
-        public WebCallResult<IBinance24HPrice> Get24HPrice(string symbol, CancellationToken ct = default) => Get24HPriceAsync(symbol, ct).Result;
+        public WebCallResult<IBinanceTick> Get24HPrice(string symbol, CancellationToken ct = default) => Get24HPriceAsync(symbol, ct).Result;
 
         /// <summary>
         /// Get data regarding the last 24 hours for the provided symbol
@@ -264,13 +264,13 @@ namespace Binance.Net.SubClients.Spot
         /// <param name="symbol">The symbol to get the data for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Data over the last 24 hours</returns>
-        public async Task<WebCallResult<IBinance24HPrice>> Get24HPriceAsync(string symbol, CancellationToken ct = default)
+        public async Task<WebCallResult<IBinanceTick>> Get24HPriceAsync(string symbol, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
             var parameters = new Dictionary<string, object> { { "symbol", symbol } };
 
             var result = await _baseClient.SendRequestInternal<Binance24HPrice>(_baseClient.GetUrlSpot(price24HEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
-            return new WebCallResult<IBinance24HPrice>(result.ResponseStatusCode, result.ResponseHeaders, result.Data, result.Error);
+            return new WebCallResult<IBinanceTick>(result.ResponseStatusCode, result.ResponseHeaders, result.Data, result.Error);
         }
 
         /// <summary>
@@ -278,17 +278,17 @@ namespace Binance.Net.SubClients.Spot
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of data over the last 24 hours</returns>
-        public WebCallResult<IEnumerable<IBinance24HPrice>> Get24HPrices(CancellationToken ct = default) => Get24HPricesAsync(ct).Result;
+        public WebCallResult<IEnumerable<IBinanceTick>> Get24HPrices(CancellationToken ct = default) => Get24HPricesAsync(ct).Result;
 
         /// <summary>
         /// Get data regarding the last 24 hours for all symbols
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of data over the last 24 hours</returns>
-        public async Task<WebCallResult<IEnumerable<IBinance24HPrice>>> Get24HPricesAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<IBinanceTick>>> Get24HPricesAsync(CancellationToken ct = default)
         {
             var result = await _baseClient.SendRequestInternal<IEnumerable<Binance24HPrice>>(_baseClient.GetUrlSpot(price24HEndpoint, api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
-            return new WebCallResult<IEnumerable<IBinance24HPrice>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data, result.Error);
+            return new WebCallResult<IEnumerable<IBinanceTick>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data, result.Error);
         }
 
         #endregion

@@ -16,7 +16,7 @@ namespace Binance.Net.Interfaces
         /// <summary>
         /// The ID of the last update
         /// </summary>
-        public long LastUpdateId { get; set; }
+        long LastUpdateId { get; set; }
 
         /// <summary>
         /// The list of bids

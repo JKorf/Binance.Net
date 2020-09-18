@@ -9,7 +9,7 @@ namespace Binance.Net.Objects.Spot.MarketData
     /// <summary>
     /// Price statistics of the last 24 hours
     /// </summary>
-    public class Binance24HPrice : Binance24HPriceBase
+    public class Binance24HPrice : Binance24HPriceBase, IBinanceTick
     {
         /// <summary>
         /// The close price 24 hours ago
