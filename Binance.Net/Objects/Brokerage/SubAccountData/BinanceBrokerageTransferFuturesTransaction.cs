@@ -23,7 +23,7 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         /// <summary>
         /// Transfer
         /// </summary>
-        [JsonProperty("transfer")]
+        [JsonProperty("transfers")]
         public IEnumerable<BinanceBrokerageTransferFuturesTransaction> Transactions { get; set; } = new List<BinanceBrokerageTransferFuturesTransaction>();
     }
     

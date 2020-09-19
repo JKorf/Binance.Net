@@ -350,33 +350,8 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Rebates history</returns>
-        Task<WebCallResult<IEnumerable<BinanceBrokerageRebate>>> GetBrokerCommissionRebatesRecentAsync(string? subAccountId = null,
+        Task<WebCallResult<IEnumerable<BinanceBrokerageRebate>>> GetBrokerCommissionRebatesRecentAsync(string subAccountId,
             DateTime? startDate = null, DateTime? endDate = null, int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default);
-
-        /// <summary>
-        /// Generate Broker Commission Rebate History (Spot)
-        /// </summary>
-        /// <param name="subAccountId">Sub account id</param>
-        /// <param name="startDate">From date</param>
-        /// <param name="endDate">To date</param>
-        /// <param name="limit">Limit (default 1000)</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<object>> GenerateBrokerCommissionRebatesHistoryAsync(string? subAccountId = null,
-            DateTime? startDate = null, DateTime? endDate = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
-        
-        /// <summary>
-        /// Query Broker Commission Rebate History (Spot)
-        /// </summary>
-        /// <param name="subAccountId">Sub account id</param>
-        /// <param name="startDate">From date</param>
-        /// <param name="endDate">To date</param>
-        /// <param name="limit">Limit (default 1000)</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>A download link for an offline file</returns>
-        Task<WebCallResult<string>> GetBrokerCommissionRebatesHistoryAsync(string? subAccountId = null,
-            DateTime? startDate = null, DateTime? endDate = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
         
         /// <summary>
         /// Query Broker Futures Commission Rebate Record
@@ -389,7 +364,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Rebate records</returns>
-        Task<WebCallResult<IEnumerable<BinanceBrokerFuturesCommissionRebate>>> GetBrokerFuturesCommissionRebatesHistoryAsync(BinanceBrokerageFuturesType futuresType,
+        Task<WebCallResult<IEnumerable<BinanceBrokerageFuturesRebate>>> GetBrokerFuturesCommissionRebatesHistoryAsync(BinanceBrokerageFuturesType futuresType,
             DateTime startDate, DateTime endDate, int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
@@ -434,7 +409,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Asset info</returns>
-        Task<WebCallResult<BinanceBrokerageSpotAssetInfo>> GetSubAccountSpotAssetInfoAsync(string? subAccountId,
+        Task<WebCallResult<BinanceBrokerageSpotAssetInfo>> GetSubAccountSpotAssetInfoAsync(string? subAccountId = null,
             int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default);
         
         /// <summary>
@@ -447,7 +422,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Asset info</returns>
-        Task<WebCallResult<BinanceBrokerageMarginAssetInfo>> GetSubAccountMarginAssetInfoAsync(string? subAccountId,
+        Task<WebCallResult<BinanceBrokerageMarginAssetInfo>> GetSubAccountMarginAssetInfoAsync(string? subAccountId = null,
             int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
@@ -460,7 +435,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Asset info</returns>
-        Task<WebCallResult<BinanceBrokerageFuturesAssetInfo>> GetSubAccountFuturesAssetInfoAsync(string? subAccountId,
+        Task<WebCallResult<BinanceBrokerageFuturesAssetInfo>> GetSubAccountFuturesAssetInfoAsync(string? subAccountId = null,
             int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default);
     }
 }

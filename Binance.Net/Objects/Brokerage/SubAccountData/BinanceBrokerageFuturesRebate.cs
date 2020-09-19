@@ -7,7 +7,7 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
     /// <summary>
     /// Futures Commission Rebate
     /// </summary>
-    public class BinanceBrokerFuturesCommissionRebate
+    public class BinanceBrokerageFuturesRebate
     {
         /// <summary>
         /// Sub Account Id
