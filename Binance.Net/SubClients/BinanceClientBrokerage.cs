@@ -968,8 +968,8 @@ namespace Binance.Net.SubClients
         /// <param name="endDate">To date (default present timestamp)</param>
         /// <param name="limit">Limit (default 500)</param>
         /// <param name="offset">Offset (default 0)</param>
-        /// <param name="receiveWindow"></param>
-        /// <param name="ct"></param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         public async Task<WebCallResult<IEnumerable<BinanceBrokerageSubAccountDepositTransaction>>> GetSubAccountDepositHistoryAsync(string? subAccountId = null, 
             string? coin = null, BinanceBrokerageSubAccountDepositStatus? status = null, DateTime? startDate = null, DateTime? endDate = null,
