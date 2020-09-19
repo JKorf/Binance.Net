@@ -242,7 +242,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Sub account coin futures commissions result</returns>
-        Task<WebCallResult<IEnumerable<BinanceBrokerageSubAccountCoinFuturesCommission>>> GetSubAccountCoinFuturesCommissionAdjustmentAsync(string subAccountId,
+        Task<WebCallResult<IEnumerable<BinanceBrokerageSubAccountFuturesCommission>>> GetSubAccountCoinFuturesCommissionAdjustmentAsync(string subAccountId,
             string? pair = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
