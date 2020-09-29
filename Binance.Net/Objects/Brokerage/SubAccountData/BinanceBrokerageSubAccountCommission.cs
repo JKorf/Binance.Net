@@ -22,11 +22,13 @@
         
         /// <summary>
         /// Margin Maker Commission
+        /// <para>If margin disabled, return -1</para>
         /// </summary>
         public decimal MarginMakerCommission { get; set; }
         
         /// <summary>
         /// Margin Taker Commission
+        /// <para>If margin disabled, return -1</para>
         /// </summary>
         public decimal MarginTakerCommission { get; set; }
     }

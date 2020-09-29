@@ -10,6 +10,11 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
     public class BinanceBrokerageSubAccount : BinanceBrokerageSubAccountCommission
     {
         /// <summary>
+        /// Email
+        /// </summary>
+        public string Email { get; set; } = "";
+        
+        /// <summary>
         /// Create Date
         /// </summary>
         [JsonProperty("createTime"), JsonConverter(typeof(TimestampConverter))]
