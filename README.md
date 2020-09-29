@@ -113,7 +113,7 @@ client.Futures.SubscribeToBookTickerUpdates("BTCUSDT", data => {
 
 ````
 
-To subscribe to account update ( balance updates, order updates, etc ) you need to create a listen key using the `BinanceClient`, then start the user stream for account updates on the `BinanceSocketClient`:
+To subscribe to account update (balance updates, order updates, etc.) you need to create a listen key using the `BinanceClient`, then start the user stream for account updates on the `BinanceSocketClient`:
 ````csharp
 var client = new BinanceClient(new BinanceClientOptions{
 	ApiCredentials = new ApiCredentials("APIKEY", "APISECRET")
@@ -138,7 +138,7 @@ socketClient.Spot.SubscribeToUserStream(startResult.Data,
 	});
 ````
 
-Null can be passed as a parameter to any of these handlers to ignore the events of that type.
+`null` can be passed as a parameter to any of these handlers to ignore the events of that type.
 
 
 When no longer listening to private endpoints the `StopUserStream` method in `BinanceClient` should be used to signal the Binance server the stream can be closed.
