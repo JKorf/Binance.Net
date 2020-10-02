@@ -20,7 +20,7 @@ namespace Binance.Net
             if (headers == null)
                 return null;
 
-            var headerValues = headers.SingleOrDefault(s => s.Key.StartsWith("X-MBX-USED-WEIGHT-")).Value;
+            var headerValues = headers.SingleOrDefault(s => s.Key.StartsWith("X-MBX-USED-WEIGHT-", StringComparison.InvariantCultureIgnoreCase)).Value;
             if (headerValues != null && int.TryParse(headerValues.First(), out var value))
                 return value;
             return null;
@@ -36,7 +36,7 @@ namespace Binance.Net
             if (headers == null)
                 return null;
 
-            var headerValues = headers.SingleOrDefault(s => s.Key.StartsWith("X-MBX-ORDER-COUNT-")).Value;
+            var headerValues = headers.SingleOrDefault(s => s.Key.StartsWith("X-MBX-ORDER-COUNT-", StringComparison.InvariantCultureIgnoreCase)).Value;
             if (headerValues != null && int.TryParse(headerValues.First(), out var value))
                 return value;
             return null;
