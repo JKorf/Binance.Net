@@ -1,9 +1,9 @@
 ﻿namespace Binance.Net.Objects.Brokerage.SubAccountData
 {
     /// <summary>
-    /// Sub Account Futures Commission
+    /// Sub Account Coin Futures Commission
     /// </summary>
-    public class BinanceBrokerageSubAccountFuturesCommission
+    public class BinanceBrokerageSubAccountCoinFuturesCommission
     {
         /// <summary>
         /// Sub Account Id
@@ -11,27 +11,27 @@
         public string SubAccountId { get; set; } = "";
         
         /// <summary>
-        /// Symbol
+        /// Pair
         /// </summary>
-        public string Symbol { get; set; } = "";
+        public string Pair { get; set; } = "";
         
         /// <summary>
-        /// USDT-Ⓜ futures commission adjustment for maker
+        /// COIN-Ⓜ futures commission adjustment for maker
         /// </summary>
         public int MakerAdjustment { get; set; }
         
         /// <summary>
-        /// USDT-Ⓜ futures commission adjustment for taker
+        /// COIN-Ⓜ futures commission adjustment for taker
         /// </summary>
         public int TakerAdjustment { get; set; }
         
         /// <summary>
-        /// USDT-Ⓜ futures commission (after adjusted) for maker
+        /// COIN-Ⓜ futures commission (after adjusted) for maker
         /// </summary>
         public decimal MakerCommission { get; set; }
         
         /// <summary>
-        /// USDT-Ⓜ futures commission (after adjusted) for taker
+        /// COIN-Ⓜ futures commission (after adjusted) for taker
         /// </summary>
         public decimal TakerCommission { get; set; }
     }
