@@ -80,7 +80,7 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// The Unrealized PnL
         /// </summary>
         [JsonProperty("up")]
-        public decimal UnRealizedPnL { get; set; }
+        public decimal UnrealizedPnl { get; set; }
 
         /// <summary>
         /// The margin type

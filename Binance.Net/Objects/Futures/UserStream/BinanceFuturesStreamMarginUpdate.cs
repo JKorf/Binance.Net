@@ -49,7 +49,7 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// Unrealized PnL
         /// </summary>
         [JsonProperty("up")]
-        public decimal UnrealizedPNL { get; set; }
+        public decimal UnrealizedPnl { get; set; }
 
         /// <summary>
         /// Maintenance Margin Required
