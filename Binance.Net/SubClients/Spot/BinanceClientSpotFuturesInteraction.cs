@@ -80,7 +80,7 @@ namespace Binance.Net.SubClients.Spot
             var parameters = new Dictionary<string, object>
             {
                 { "asset", asset }, 
-                { "amount", amount },
+                { "amount", amount.ToString(CultureInfo.InvariantCulture) },
                 { "type", JsonConvert.SerializeObject(transferType, new FuturesTransferTypeConverter(false)) },
                 { "timestamp", _baseClient.GetTimestamp() }
             };
@@ -424,7 +424,7 @@ namespace Binance.Net.SubClients.Spot
             {
                 { "timestamp", _baseClient.GetTimestamp() },
                 { "collateralCoin", collateralCoin },
-                { "amount", amount },
+                { "amount", amount.ToString(CultureInfo.InvariantCulture) },
                 { "direction", JsonConvert.SerializeObject(direction, new AdjustRateDirectionConverter(false)) },
             };
 
@@ -504,7 +504,7 @@ namespace Binance.Net.SubClients.Spot
             {
                 { "timestamp", _baseClient.GetTimestamp() },
                 { "collateralCoin", collateralCoin },
-                { "amount", amount },
+                { "amount", amount.ToString(CultureInfo.InvariantCulture) },
                 { "direction", JsonConvert.SerializeObject(direction, new AdjustRateDirectionConverter(false)) },
             };
 
