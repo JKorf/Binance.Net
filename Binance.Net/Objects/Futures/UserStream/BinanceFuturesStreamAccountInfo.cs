@@ -6,9 +6,21 @@ using System.Collections.Generic;
 namespace Binance.Net.Objects.Futures.UserStream
 {
     /// <summary>
-    /// Account update event
+    /// Account update
     /// </summary>
-    public class BinanceFuturesStreamAccountUpdate
+    public class BinanceFuturesStreamAccountUpdate: BinanceStreamEvent
+    {
+        /// <summary>
+        /// The update data
+        /// </summary>
+        [JsonProperty("a")]
+        public BinanceFuturesStreamAccountUpdateData UpdateData { get; set; }
+    }
+
+    /// <summary>
+    /// Account update data
+    /// </summary>
+    public class BinanceFuturesStreamAccountUpdateData
     {
         /// <summary>
         /// Account update reason type

@@ -478,7 +478,6 @@ namespace Binance.Net.SocketSubClients
         /// Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStreams.StartUserStream method should be called.
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-        /// <param name="onCrossWalletUpdate">The event handler for whenever a cross wallet has changed</param>
         /// <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
         /// <param name="onAccountUpdate">The event handler for whenever an account update is received</param>
         /// <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
@@ -486,17 +485,15 @@ namespace Binance.Net.SocketSubClients
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public CallResult<UpdateSubscription> SubscribeToUserDataUpdates(
             string listenKey,
-            Action<decimal>? onCrossWalletUpdate,
-             Action<IEnumerable<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate,
+             Action<BinanceFuturesStreamMarginUpdate>? onMarginUpdate,
             Action<BinanceFuturesStreamAccountUpdate>? onAccountUpdate,
             Action<BinanceFuturesStreamOrderUpdate>? onOrderUpdate,
-            Action<BinanceStreamEvent> onListenKeyExpired) => SubscribeToUserDataUpdatesAsync(listenKey, onCrossWalletUpdate, onMarginUpdate, onAccountUpdate, onOrderUpdate, onListenKeyExpired).Result;
+            Action<BinanceStreamEvent> onListenKeyExpired) => SubscribeToUserDataUpdatesAsync(listenKey, onMarginUpdate, onAccountUpdate, onOrderUpdate, onListenKeyExpired).Result;
 
         /// <summary>
         /// Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStreams.StartUserStream method should be called.
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-        /// <param name="onCrossWalletUpdate">The event handler for whenever a cross wallet has changed</param>
         /// <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
         /// <param name="onAccountUpdate">The event handler for whenever an account update is received</param>
         /// <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
@@ -504,8 +501,7 @@ namespace Binance.Net.SocketSubClients
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
             string listenKey,
-            Action<decimal>? onCrossWalletUpdate,
-            Action<IEnumerable<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate,
+            Action<BinanceFuturesStreamMarginUpdate>? onMarginUpdate,
             Action<BinanceFuturesStreamAccountUpdate>? onAccountUpdate,
             Action<BinanceFuturesStreamOrderUpdate>? onOrderUpdate,
             Action<BinanceStreamEvent> onListenKeyExpired)
@@ -522,10 +518,7 @@ namespace Binance.Net.SocketSubClients
                         {
                             Log.Write(LogVerbosity.Debug, data);
 
-                            onCrossWalletUpdate?.Invoke(token["cw"].ToObject<decimal>());
-
-                            var orders = token["o"];
-                            var result = BaseClient.DeserializeInternal<BinanceFuturesStreamMarginUpdate[]>(orders, false);
+                            var result = BaseClient.DeserializeInternal<BinanceFuturesStreamMarginUpdate>(token, false);
                             if (result)
                                 onMarginUpdate?.Invoke(result.Data);
                             else
@@ -534,8 +527,7 @@ namespace Binance.Net.SocketSubClients
                         }
                     case accountUpdateEvent:
                         {
-                            var accountUpdate = token["a"];
-                            var result = BaseClient.DeserializeInternal<BinanceFuturesStreamAccountUpdate>(accountUpdate, false);
+                            var result = BaseClient.DeserializeInternal<BinanceFuturesStreamAccountUpdate>(token, false);
                             if (result.Success)
                                 onAccountUpdate?.Invoke(result.Data);
                             else
@@ -546,8 +538,7 @@ namespace Binance.Net.SocketSubClients
                     case orderUpdateEvent:
                         {
                             Log.Write(LogVerbosity.Debug, data);
-                            var orders = token["o"];
-                            var result = BaseClient.DeserializeInternal<BinanceFuturesStreamOrderUpdate>(orders, false);
+                            var result = BaseClient.DeserializeInternal<BinanceFuturesStreamOrderUpdate>(token, false);
                             if (result)
                                 onOrderUpdate?.Invoke(result.Data);
                             else

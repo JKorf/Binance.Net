@@ -1,13 +1,27 @@
-﻿using Binance.Net.Converters;
+﻿using System.Collections.Generic;
+using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Futures.UserStream
 {
+    public class BinanceFuturesStreamMarginUpdate : BinanceStreamEvent
+    {
+        /// <summary>
+        /// Cross Wallet Balance. Only pushed with crossed position margin call
+        /// </summary>
+        [JsonProperty("cw")]
+        public decimal? CrossWalletBalance { get; set; }
+        /// <summary>
+        /// Positions
+        /// </summary>
+        public IEnumerable<BinanceFuturesStreamMarginPosition> Positions { get; set; } = new List<BinanceFuturesStreamMarginPosition>();
+    }
+
     /// <summary>
     /// Update data about an margin
     /// </summary>
-    public class BinanceFuturesStreamMarginUpdate
+    public class BinanceFuturesStreamMarginPosition
     {
         /// <summary>
         /// Symbol

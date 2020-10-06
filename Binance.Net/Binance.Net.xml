@@ -2618,24 +2618,22 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientFutures.SubscribeToUserDataUpdates(System.String,System.Action{System.Decimal},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate}},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamAccountUpdate},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
+        <member name="M:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientFutures.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamAccountUpdate},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStreams.StartUserStream method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-            <param name="onCrossWalletUpdate">The event handler for whenever a cross wallet has changed</param>
             <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
             <param name="onAccountUpdate">The event handler for whenever an account update is received</param>
             <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
             <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientFutures.SubscribeToUserDataUpdatesAsync(System.String,System.Action{System.Decimal},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate}},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamAccountUpdate},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
+        <member name="M:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientFutures.SubscribeToUserDataUpdatesAsync(System.String,System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamAccountUpdate},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStreams.StartUserStream method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-            <param name="onCrossWalletUpdate">The event handler for whenever a cross wallet has changed</param>
             <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
             <param name="onAccountUpdate">The event handler for whenever an account update is received</param>
             <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
@@ -2925,7 +2923,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientSpot.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Spot.UserStream.BinanceStreamBalance}},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamBalanceUpdate})">
+        <member name="M:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientSpot.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderList},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamPositionsUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamBalanceUpdate})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the BinanceClient.Spot.UserStreams.StartUserStream method should be called.
             </summary>
@@ -2937,7 +2935,7 @@
             <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientSpot.SubscribeToUserDataUpdatesAsync(System.String,System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Spot.UserStream.BinanceStreamBalance}},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamBalanceUpdate})">
+        <member name="M:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientSpot.SubscribeToUserDataUpdatesAsync(System.String,System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderList},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamPositionsUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamBalanceUpdate})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the BinanceClient.Spot.UserStreams.StartUserStream method should be called.
             </summary>
@@ -8680,11 +8678,6 @@
             Maximum amount for transfer out
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance.UpdateTime">
-            <summary>
-            Update time
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo">
             <summary>
             Information about an account
@@ -9088,6 +9081,16 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesChangeMarginTypeResult.Message">
             <summary>
             Response message
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCoinAccountBalance">
+            <summary>
+            Information about an account
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCoinAccountBalance.UpdateTime">
+            <summary>
+            Update time
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCoinAccountInfo">
@@ -10738,20 +10741,30 @@
         </member>
         <member name="T:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamAccountUpdate">
             <summary>
-            Account update event
+            Account update
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamAccountUpdate.Reason">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamAccountUpdate.UpdateData">
+            <summary>
+            The update data
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamAccountUpdateData">
+            <summary>
+            Account update data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamAccountUpdateData.Reason">
             <summary>
             Account update reason type
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamAccountUpdate.Balances">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamAccountUpdateData.Balances">
             <summary>
             Balances
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamAccountUpdate.Positions">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamAccountUpdateData.Positions">
             <summary>
             Positions
             </summary>
@@ -10801,7 +10814,7 @@
             The accumulated realized PnL
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition.UnRealizedPnL">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition.UnrealizedPnl">
             <summary>
             The Unrealized PnL
             </summary>
@@ -10821,197 +10834,217 @@
             Position Side
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate.CrossWalletBalance">
+            <summary>
+            Cross Wallet Balance. Only pushed with crossed position margin call
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate.Positions">
+            <summary>
+            Positions
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginPosition">
             <summary>
             Update data about an margin
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate.Symbol">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginPosition.Symbol">
             <summary>
             Symbol
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate.PositionSide">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginPosition.PositionSide">
             <summary>
             Position Side
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate.PositionAmount">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginPosition.PositionAmount">
             <summary>
             Position Amount
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate.MarginType">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginPosition.MarginType">
             <summary>
             Margin type
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate.IsolatedWallet">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginPosition.IsolatedWallet">
             <summary>
             Isolated Wallet (if isolated position)
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate.MarkPrice">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginPosition.MarkPrice">
             <summary>
             Mark Price
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate.UnrealizedPNL">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginPosition.UnrealizedPnl">
             <summary>
             Unrealized PnL
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate.MaintMargin">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginPosition.MaintMargin">
             <summary>
             Maintenance Margin Required
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate">
             <summary>
+            Order update
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.UpdateData">
+            <summary>
+            Update data
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData">
+            <summary>
             Update data about an order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.Symbol">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.Symbol">
             <summary>
             The symbol the order is for
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.ClientOrderId">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.ClientOrderId">
             <summary>
             The new client order id
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.Side">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.Side">
             <summary>
             The side of the order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.Type">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.Type">
             <summary>
             The type of the order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.TimeInForce">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.TimeInForce">
             <summary>
             The timespan the order is active
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.Quantity">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.Quantity">
             <summary>
             The quantity of the order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.Price">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.Price">
             <summary>
             The price of the order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.AveragePrice">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.AveragePrice">
             <summary>
             The average price of the order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.StopPrice">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.StopPrice">
             <summary>
             The stop price of the order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.ExecutionType">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.ExecutionType">
             <summary>
             The execution type
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.Status">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.Status">
             <summary>
             The status of the order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.OrderId">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.OrderId">
             <summary>
             The id of the order as assigned by Binance
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.QuantityOfLastFilledTrade">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.QuantityOfLastFilledTrade">
             <summary>
             The quantity of the last filled trade of this order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.AccumulatedQuantityOfFilledTrades">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.AccumulatedQuantityOfFilledTrades">
             <summary>
             The quantity of all trades that were filled for this order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.PriceLastFilledTrade">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.PriceLastFilledTrade">
             <summary>
             The price of the last filled trade
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.Commission">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.Commission">
             <summary>
             The commission payed
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.CommissionAsset">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.CommissionAsset">
             <summary>
             The asset the commission was taken from
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.CreateTime">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.CreateTime">
             <summary>
             The time of the update
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.TradeId">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.TradeId">
             <summary>
             The trade id
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.BidNotional">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.BidNotional">
             <summary>
             Bid Notional
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.AskNotional">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.AskNotional">
             <summary>
             Ask Notional
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.BuyerIsMaker">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.BuyerIsMaker">
             <summary>
             Whether the buyer is the maker
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.IsReduce">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.IsReduce">
             <summary>
             Is this reduce only
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.StopPriceWorking">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.StopPriceWorking">
             <summary>
             Stop price working type
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.OriginalType">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.OriginalType">
             <summary>
             Original Order Type
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.PositionSide">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.PositionSide">
             <summary>
             Position side
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.PushedConditionalOrder">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.PushedConditionalOrder">
             <summary>
             If Close-All, only pushed with conditional order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.ActivationPrice">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.ActivationPrice">
             <summary>
             Activation Price, only pushed with TRAILING_STOP_MARKET order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate.CallbackRate">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.CallbackRate">
             <summary>
             Callback Rate, only pushed with TRAILING_STOP_MARKET order
             </summary>
@@ -15947,6 +15980,21 @@
             Unused
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Spot.UserStream.BinanceStreamPositionsUpdate">
+            <summary>
+            Positions update
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamPositionsUpdate.Time">
+            <summary>
+            Time of last account update
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.UserStream.BinanceStreamPositionsUpdate.Balances">
+            <summary>
+            Balances
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceAccountStatus">
             <summary>
             Account status info
@@ -16916,24 +16964,22 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFutures.SubscribeToUserDataUpdates(System.String,System.Action{System.Decimal},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate}},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamAccountUpdate},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFutures.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamAccountUpdate},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStreams.StartUserStream method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-            <param name="onCrossWalletUpdate">The event handler for whenever a cross wallet has changed</param>
             <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
             <param name="onAccountUpdate">The event handler for whenever an account update is received</param>
             <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
             <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFutures.SubscribeToUserDataUpdatesAsync(System.String,System.Action{System.Decimal},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate}},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamAccountUpdate},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFutures.SubscribeToUserDataUpdatesAsync(System.String,System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamAccountUpdate},System.Action{Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdate},System.Action{Binance.Net.Objects.BinanceStreamEvent})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStreams.StartUserStream method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-            <param name="onCrossWalletUpdate">The event handler for whenever a cross wallet has changed</param>
             <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
             <param name="onAccountUpdate">The event handler for whenever an account update is received</param>
             <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
@@ -17781,7 +17827,7 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientSpot.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Spot.UserStream.BinanceStreamBalance}},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamBalanceUpdate})">
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientSpot.SubscribeToUserDataUpdates(System.String,System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderList},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamPositionsUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamBalanceUpdate})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the BinanceClient.Spot.UserStreams.StartUserStream method should be called.
             </summary>
@@ -17793,7 +17839,7 @@
             <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientSpot.SubscribeToUserDataUpdatesAsync(System.String,System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderList},System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Spot.UserStream.BinanceStreamBalance}},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamBalanceUpdate})">
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientSpot.SubscribeToUserDataUpdatesAsync(System.String,System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamAccountInfo},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamOrderList},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamPositionsUpdate},System.Action{Binance.Net.Objects.Spot.UserStream.BinanceStreamBalanceUpdate})">
             <summary>
             Subscribes to the account update stream. Prior to using this, the BinanceClient.Spot.UserStreams.StartUserStream method should be called.
             </summary>
@@ -19655,22 +19701,6 @@
             Futures client
             </summary>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesAccount.GetBalance(System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Gets account balances
-            </summary>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>The account information</returns>
-        </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesAccount.GetBalanceAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>.
-            Gets account balances
-            </summary>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>The account information</returns>
-        </member>
         <member name="T:Binance.Net.SubClients.Futures.BinanceClientFuturesMarket">
             <summary>
             Futures market endpoints
@@ -20393,6 +20423,22 @@
             <param name="ct">Cancellation token</param>
             <returns>The account information</returns>
         </member>
+        <member name="M:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinAccount.GetBalance(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Gets account balances
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The account information</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinAccount.GetBalanceAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>.
+            Gets account balances
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The account information</returns>
+        </member>
         <member name="T:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinMarket">
             <summary>
             COIN-M futures market endpoints
@@ -20843,6 +20889,22 @@
         <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtAccount.GetAccountInfoAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets account information, including balances
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The account information</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtAccount.GetBalance(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Gets account balances
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The account information</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtAccount.GetBalanceAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>.
+            Gets account balances
             </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>

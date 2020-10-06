@@ -66,7 +66,7 @@ namespace Binance.Net.Interfaces.SocketSubClient
             Action<BinanceStreamAccountInfo>? onAccountInfoMessage,
             Action<BinanceStreamOrderUpdate>? onOrderUpdateMessage,
             Action<BinanceStreamOrderList>? onOcoOrderUpdateMessage,
-            Action<IEnumerable<BinanceStreamBalance>>? onAccountPositionMessage,
+            Action<BinanceStreamPositionsUpdate>? onAccountPositionMessage,
             Action<BinanceStreamBalanceUpdate>? onAccountBalanceUpdate);
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace Binance.Net.Interfaces.SocketSubClient
             Action<BinanceStreamAccountInfo>? onAccountInfoMessage,
             Action<BinanceStreamOrderUpdate>? onOrderUpdateMessage,
             Action<BinanceStreamOrderList>? onOcoOrderUpdateMessage,
-            Action<IEnumerable<BinanceStreamBalance>>? onAccountPositionMessage,
+            Action<BinanceStreamPositionsUpdate>? onAccountPositionMessage,
             Action<BinanceStreamBalanceUpdate>? onAccountBalanceUpdate);
     }
 }

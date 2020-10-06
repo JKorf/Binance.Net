@@ -49,12 +49,6 @@ namespace Binance.Net.Objects.Futures.FuturesData
         {
             set => MaxWithdrawAvailable = value;
         }
-
-        /// <summary>
-        /// Update time
-        /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
-        public DateTime UpdateTime { get; set; }
     }
 
 }

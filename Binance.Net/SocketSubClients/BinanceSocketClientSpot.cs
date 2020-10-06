@@ -587,7 +587,7 @@ namespace Binance.Net.SocketSubClients
             Action<BinanceStreamAccountInfo>? onAccountInfoMessage,
             Action<BinanceStreamOrderUpdate>? onOrderUpdateMessage,
             Action<BinanceStreamOrderList>? onOcoOrderUpdateMessage,
-            Action<IEnumerable<BinanceStreamBalance>>? onAccountPositionMessage,
+            Action<BinanceStreamPositionsUpdate>? onAccountPositionMessage,
             Action<BinanceStreamBalanceUpdate>? onAccountBalanceUpdate) => SubscribeToUserDataUpdatesAsync(listenKey,
             onAccountInfoMessage, onOrderUpdateMessage, onOcoOrderUpdateMessage, onAccountPositionMessage,
             onAccountBalanceUpdate).Result;
@@ -607,7 +607,7 @@ namespace Binance.Net.SocketSubClients
             Action<BinanceStreamAccountInfo>? onAccountInfoMessage,
             Action<BinanceStreamOrderUpdate>? onOrderUpdateMessage,
             Action<BinanceStreamOrderList>? onOcoOrderUpdateMessage,
-            Action<IEnumerable<BinanceStreamBalance>>? onAccountPositionMessage,
+            Action<BinanceStreamPositionsUpdate>? onAccountPositionMessage,
             Action<BinanceStreamBalanceUpdate>? onAccountBalanceUpdate)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
@@ -653,7 +653,7 @@ namespace Binance.Net.SocketSubClients
                     case accountPositionUpdateEvent:
                     {
                         _log.Write(LogVerbosity.Debug, data);
-                        var result = _baseClient.DeserializeInternal<IEnumerable<BinanceStreamBalance>>(token["B"], false);
+                        var result = _baseClient.DeserializeInternal<BinanceStreamPositionsUpdate>(token, false);
                         if (result)
                             onAccountPositionMessage?.Invoke(result.Data);
                         else

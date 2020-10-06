@@ -7,9 +7,21 @@ using Binance.Net.Enums;
 namespace Binance.Net.Objects.Futures.UserStream
 {
     /// <summary>
+    /// Order update
+    /// </summary>
+    public class BinanceFuturesStreamOrderUpdate: BinanceStreamEvent
+    {
+        /// <summary>
+        /// Update data
+        /// </summary>
+        [JsonProperty("o")]
+        public BinanceFuturesStreamOrderUpdateData UpdateData { get; set; }
+    }
+
+    /// <summary>
     /// Update data about an order
     /// </summary>
-    public class BinanceFuturesStreamOrderUpdate
+    public class BinanceFuturesStreamOrderUpdateData
     {
         /// <summary>
         /// The symbol the order is for
