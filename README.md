@@ -145,6 +145,13 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.1.0 - 06 Oct 2020
+    * Fixed future trade timestamps
+    * Fixed some decimal serialization culture issues
+    * Updated future user streams to include timestamps
+    * Fixed used weight parsing
+    * Brokerage API update
+
 * Version 6.0.2 - 17 Sep 2020
     * Fix for socket client receiving intermittent byte data
     * Updated market data interfaces to support inheritance
