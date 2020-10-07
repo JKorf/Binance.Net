@@ -16,6 +16,12 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// </summary>
         [JsonProperty("o")]
         public BinanceFuturesStreamOrderUpdateData UpdateData { get; set; }
+
+        /// <summary>
+        /// Transaction time
+        /// </summary>
+        [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
+        public DateTime TransactionTime { get; set; }
     }
 
     /// <summary>

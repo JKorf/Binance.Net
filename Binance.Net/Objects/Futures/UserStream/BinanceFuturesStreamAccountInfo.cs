@@ -1,7 +1,9 @@
+using System;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Futures.UserStream
 {
@@ -15,6 +17,11 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// </summary>
         [JsonProperty("a")]
         public BinanceFuturesStreamAccountUpdateData UpdateData { get; set; }
+        /// <summary>
+        /// Transaction time
+        /// </summary>
+        [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
+        public DateTime TransactionTime { get; set; }
     }
 
     /// <summary>

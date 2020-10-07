@@ -5,6 +5,9 @@ using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Futures.UserStream
 {
+    /// <summary>
+    /// Margin update
+    /// </summary>
     public class BinanceFuturesStreamMarginUpdate : BinanceStreamEvent
     {
         /// <summary>
