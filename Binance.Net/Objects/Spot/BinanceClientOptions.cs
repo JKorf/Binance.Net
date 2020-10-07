@@ -112,15 +112,38 @@ namespace Binance.Net.Objects.Spot
     /// </summary>
     public class BinanceSocketClientOptions : SocketClientOptions
     {
-        /// <summary>
-        /// The base address for futures
-        /// </summary>
-        public string BaseAddressUsdtFutures { get; set; } = "wss://fstream.binance.com/";
+        private string _baseAddressUsdtFutures = "wss://fstream.binance.com/";
+        private string _baseAddressCoinFutures = "wss://dstream.binance.com/";
 
         /// <summary>
-        /// The base address for futures
+        /// The base address for USDT-M futures
         /// </summary>
-        public string BaseAddressCoinFutures { get; set; } = "wss://dstream.binance.com/";
+        public string BaseAddressUsdtFutures
+        {
+            get => _baseAddressUsdtFutures;
+            set
+            {
+                var newValue = value;
+                if (!newValue.EndsWith("/"))
+                    newValue += "/";
+                _baseAddressUsdtFutures = newValue;
+            }
+        }
+
+        /// <summary>
+        /// The base address for Coin-M futures
+        /// </summary>
+        public string BaseAddressCoinFutures
+        {
+            get => _baseAddressCoinFutures;
+            set
+            {
+                var newValue = value;
+                if (!newValue.EndsWith("/"))
+                    newValue += "/";
+                _baseAddressCoinFutures = newValue;
+            }
+        }
 
         /// <summary>
         /// The amount of subscriptions that should be made on a single socket connection. Not all exchanges support multiple subscriptions on a single socket.

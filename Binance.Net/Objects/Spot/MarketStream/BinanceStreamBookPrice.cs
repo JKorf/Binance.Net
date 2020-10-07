@@ -6,20 +6,28 @@ using Newtonsoft.Json;
 namespace Binance.Net.Objects.Spot.MarketStream
 {
     /// <summary>
-    /// Book tick
+    /// Futures book price
     /// </summary>
-    public class BinanceStreamBookPrice : BinanceStreamEvent, IBinanceBookPrice
+    public class BinanceStreamFuturesBookPrice: BinanceStreamBookPrice
     {
+
         /// <summary>
         /// Timestamp
         /// </summary>
         [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
         public DateTime? TransactionTime { get; set; }
         /// <summary>
-        /// Update id
+        /// The time the event happened
         /// </summary>
-        [JsonProperty("u")]
-        public long UpdateId { get; set; }
+        [JsonProperty("E"), JsonConverter(typeof(TimestampConverter))]
+        public DateTime EventTime { get; set; }
+    }
+
+    /// <summary>
+    /// Book tick
+    /// </summary>
+    public class BinanceStreamBookPrice: IBinanceBookPrice
+    {
         /// <summary>
         /// The symbol
         /// </summary>

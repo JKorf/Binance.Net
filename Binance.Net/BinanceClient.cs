@@ -261,7 +261,7 @@ namespace Binance.Net
 
         internal Uri GetUrlSpot(string endpoint, string api, string? version = null)
         {
-            var result = $"{BaseAddress}/{api}/";
+            var result = $"{BaseAddress}{api}/";
 
             if (!string.IsNullOrEmpty(version))
                 result += $"v{version}/";
@@ -272,7 +272,7 @@ namespace Binance.Net
 
         internal Uri GetUrlUsdtFutures(string endpoint, string api, string? version = null)
         {
-            var result = $"{_baseAddressFuturesUsdt}/{api}/";
+            var result = $"{_baseAddressFuturesUsdt}{api}/";
 
             if (!string.IsNullOrEmpty(version))
                 result += $"v{version}/";
@@ -283,7 +283,7 @@ namespace Binance.Net
 
         internal Uri GetUrlCoinFutures(string endpoint, string api, string? version = null)
         {
-            var result = $"{_baseAddressFuturesCoin}/{api}/";
+            var result = $"{_baseAddressFuturesCoin}{api}/";
 
             if (!string.IsNullOrEmpty(version))
                 result += $"v{version}/";
