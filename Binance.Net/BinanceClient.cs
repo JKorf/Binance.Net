@@ -130,8 +130,8 @@ namespace Binance.Net
             AutoTimestampRecalculationInterval = options.AutoTimestampRecalculationInterval;
             TimestampOffset = options.TimestampOffset;
             DefaultReceiveWindow = options.ReceiveWindow;
-            _baseAddressFuturesUsdt = options.FuturesUsdtBaseAddress;
-            _baseAddressFuturesCoin = options.FuturesCoinBaseAddress;
+            _baseAddressFuturesUsdt = options.BaseAddressUsdtFutures;
+            _baseAddressFuturesCoin = options.BaseAddressCoinFutures;
 
             arraySerialization = ArrayParametersSerialization.MultipleValues;
             postParametersPosition = PostParameters.InBody;

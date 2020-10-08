@@ -10,6 +10,39 @@ namespace Binance.Net.Objects.Spot
     /// </summary>
     public class BinanceClientOptions : RestClientOptions
     {
+        private string _baseAddressUsdtFutures;
+        private string _baseAddressCoinFutures;
+
+        /// <summary>
+        /// The base address for USDT-M futures
+        /// </summary>
+        public string BaseAddressUsdtFutures
+        {
+            get => _baseAddressUsdtFutures;
+            set
+            {
+                var newValue = value;
+                if (!newValue.EndsWith("/"))
+                    newValue += "/";
+                _baseAddressUsdtFutures = newValue;
+            }
+        }
+
+        /// <summary>
+        /// The base address for Coin-M futures
+        /// </summary>
+        public string BaseAddressCoinFutures
+        {
+            get => _baseAddressCoinFutures;
+            set
+            {
+                var newValue = value;
+                if (!newValue.EndsWith("/"))
+                    newValue += "/";
+                _baseAddressCoinFutures = newValue;
+            }
+        }
+
         /// <summary>
         /// Whether or not to automatically sync the local time with the server time
         /// </summary>
@@ -38,17 +71,7 @@ namespace Binance.Net.Objects.Spot
         /// The default receive window for requests
         /// </summary>
         public TimeSpan ReceiveWindow { get; set; } = TimeSpan.FromSeconds(5);
-
-        /// <summary>
-        /// Base address for the futures coin API
-        /// </summary>
-        public string FuturesCoinBaseAddress { get; set; }
-
-        /// <summary>
-        /// Base address for the futures usdt API
-        /// </summary>
-        public string FuturesUsdtBaseAddress { get; set; }
-
+        
         /// <summary>
         /// Constructor with default endpoints
         /// </summary>
@@ -84,8 +107,8 @@ namespace Binance.Net.Objects.Spot
         public BinanceClientOptions(string spotBaseAddress, string futuresUsdtBaseAddress, string futuresCoinBaseAddress, HttpClient? client) : base(spotBaseAddress)
         {
             HttpClient = client;
-            FuturesUsdtBaseAddress = futuresUsdtBaseAddress;
-            FuturesCoinBaseAddress = futuresCoinBaseAddress;
+            BaseAddressCoinFutures = futuresCoinBaseAddress;
+            BaseAddressUsdtFutures = futuresUsdtBaseAddress;
         }
 
         /// <summary>
@@ -101,8 +124,8 @@ namespace Binance.Net.Objects.Spot
             copy.TradeRulesBehaviour = TradeRulesBehaviour;
             copy.TradeRulesUpdateInterval = TradeRulesUpdateInterval;
             copy.ReceiveWindow = ReceiveWindow;
-            copy.FuturesCoinBaseAddress = FuturesCoinBaseAddress;
-            copy.FuturesUsdtBaseAddress = FuturesUsdtBaseAddress;
+            copy.BaseAddressCoinFutures = BaseAddressCoinFutures;
+            copy.BaseAddressUsdtFutures = BaseAddressUsdtFutures;
             return copy;
         }
     }

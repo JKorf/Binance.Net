@@ -11246,6 +11246,16 @@
             Options for the binance client
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.BinanceClientOptions.BaseAddressUsdtFutures">
+            <summary>
+            The base address for USDT-M futures
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.BinanceClientOptions.BaseAddressCoinFutures">
+            <summary>
+            The base address for Coin-M futures
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Spot.BinanceClientOptions.AutoTimestamp">
             <summary>
             Whether or not to automatically sync the local time with the server time
@@ -11274,16 +11284,6 @@
         <member name="P:Binance.Net.Objects.Spot.BinanceClientOptions.ReceiveWindow">
             <summary>
             The default receive window for requests
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.BinanceClientOptions.FuturesCoinBaseAddress">
-            <summary>
-            Base address for the futures coin API
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.BinanceClientOptions.FuturesUsdtBaseAddress">
-            <summary>
-            Base address for the futures usdt API
             </summary>
         </member>
         <member name="M:Binance.Net.Objects.Spot.BinanceClientOptions.#ctor">
