@@ -145,6 +145,11 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.2.0 - 08 Oct 2020
+    * Added missing transaction timestamp on future user streams
+    * Updated book price models
+    * Update CryptoExchange.Net
+
 * Version 6.1.0 - 06 Oct 2020
     * Fixed future trade timestamps
     * Fixed some decimal serialization culture issues
