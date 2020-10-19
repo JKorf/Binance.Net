@@ -269,7 +269,7 @@ namespace Binance.Net.Interfaces.SubClients.Margin
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Return max amount</returns>
-        WebCallResult<decimal> GetMaxBorrowAmount(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default);
+        WebCallResult<BinanceMarginAmount> GetMaxBorrowAmount(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Query max borrow amount
@@ -279,7 +279,7 @@ namespace Binance.Net.Interfaces.SubClients.Margin
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Return max amount</returns>
-        Task<WebCallResult<decimal>> GetMaxBorrowAmountAsync(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceMarginAmount>> GetMaxBorrowAmountAsync(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Query max transfer-out amount 

@@ -534,7 +534,7 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Return max amount</returns>
-        public WebCallResult<decimal> GetMaxBorrowAmount(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default) => GetMaxBorrowAmountAsync(asset, isolatedSymbol, receiveWindow, ct).Result;
+        public WebCallResult<BinanceMarginAmount> GetMaxBorrowAmount(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default) => GetMaxBorrowAmountAsync(asset, isolatedSymbol, receiveWindow, ct).Result;
 
         /// <summary>
         /// Query max borrow amount
@@ -544,12 +544,12 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Return max amount</returns>
-        public async Task<WebCallResult<decimal>> GetMaxBorrowAmountAsync(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceMarginAmount>> GetMaxBorrowAmountAsync(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
-                return new WebCallResult<decimal>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, 0, timestampResult.Error);
+                return new WebCallResult<BinanceMarginAmount>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -560,12 +560,7 @@ namespace Binance.Net.SubClients.Margin
             parameters.AddOptionalParameter("isolatedSymbol", isolatedSymbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestInternal<BinanceMarginAmount>(_baseClient.GetUrlSpot(maxBorrowableEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
-
-            if (!result)
-                return new WebCallResult<decimal>(result.ResponseStatusCode, result.ResponseHeaders, 0, result.Error);
-
-            return new WebCallResult<decimal>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Amount, null);
+            return await _baseClient.SendRequestInternal<BinanceMarginAmount>(_baseClient.GetUrlSpot(maxBorrowableEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
