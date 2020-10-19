@@ -344,7 +344,7 @@ namespace Binance.Net.SubClients.Futures
                 { "timestamp", BaseClient.GetTimestamp() }
             };
             parameters.AddOptionalParameter("symbol", symbol);
-            parameters.AddOptionalParameter("incomeType", incomeType != null ? JsonConvert.SerializeObject(incomeType, new IncomeTypeConverter(false)) : null);
+            parameters.AddOptionalParameter("incomeType", incomeType);
             parameters.AddOptionalParameter("startTime", startTime.HasValue ? JsonConvert.SerializeObject(startTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? BaseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
