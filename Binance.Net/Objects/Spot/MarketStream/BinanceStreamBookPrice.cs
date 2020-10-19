@@ -29,6 +29,11 @@ namespace Binance.Net.Objects.Spot.MarketStream
     public class BinanceStreamBookPrice: IBinanceBookPrice
     {
         /// <summary>
+        /// Update id
+        /// </summary>
+        [JsonProperty("u")]
+        public long UpdateId { get; set; }
+        /// <summary>
         /// The symbol
         /// </summary>
         [JsonProperty("s")]
