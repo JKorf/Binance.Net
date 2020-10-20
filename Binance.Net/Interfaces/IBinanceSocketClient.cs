@@ -24,6 +24,11 @@ namespace Binance.Net.Interfaces
         IBinanceSocketClientFuturesCoin FuturesCoin { get; set; }
 
         /// <summary>
+        /// Leveraged token streams
+        /// </summary>
+        IBinanceSocketClientBlvt Blvt { get; set; }
+
+        /// <summary>
         /// Set the API key and secret
         /// </summary>
         /// <param name="apiKey">The api key</param>

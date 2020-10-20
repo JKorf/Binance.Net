@@ -35,6 +35,11 @@ namespace Binance.Net
         /// COIN-M futures stream
         /// </summary>
         public IBinanceSocketClientFuturesCoin FuturesCoin { get; set; }
+
+        /// <summary>
+        /// Leveraged tokens stream
+        /// </summary>
+        public IBinanceSocketClientBlvt Blvt { get; set; }
         #endregion
 
         #region constructor/destructor
@@ -55,6 +60,7 @@ namespace Binance.Net
             Spot = new BinanceSocketClientSpot(log, this, options);
             FuturesCoin = new BinanceSocketClientFuturesCoin(log, this, options);
             FuturesUsdt = new BinanceSocketClientFuturesUsdt(log, this, options);
+            Blvt = new BinanceSocketClientBlvt(log, this, options);
 
             SetDataInterpreter((byte[] data) => { return string.Empty; }, null);
         }
