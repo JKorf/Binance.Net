@@ -318,7 +318,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="ct">Cancellation token</param>
         /// <returns>The result of the transfer</returns>
         WebCallResult<BinanceSubAccountTransaction> TransferSubAccountFutures(string email, string asset,
-            decimal amount, SubAccountTransferType type, int? receiveWindow = null,
+            decimal amount, SubAccountFuturesTransferType type, int? receiveWindow = null,
             CancellationToken ct = default);
 
         /// <summary>
@@ -331,7 +331,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The result of the transfer</returns>
-        Task<WebCallResult<BinanceSubAccountTransaction>> TransferSubAccountFuturesAsync(string email, string asset, decimal amount, SubAccountTransferType type, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceSubAccountTransaction>> TransferSubAccountFuturesAsync(string email, string asset, decimal amount, SubAccountFuturesTransferType type, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Transfers from or to a margin sub account
@@ -344,7 +344,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="ct">Cancellation token</param>
         /// <returns>The result of the transfer</returns>
         WebCallResult<BinanceSubAccountTransaction> TransferSubAccountMargin(string email, string asset,
-            decimal amount, SubAccountTransferType type, int? receiveWindow = null,
+            decimal amount, SubAccountMarginTransferType type, int? receiveWindow = null,
             CancellationToken ct = default);
 
         /// <summary>
@@ -357,7 +357,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The result of the transfer</returns>
-        Task<WebCallResult<BinanceSubAccountTransaction>> TransferSubAccountMarginAsync(string email, string asset, decimal amount, SubAccountTransferType type, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceSubAccountTransaction>> TransferSubAccountMarginAsync(string email, string asset, decimal amount, SubAccountMarginTransferType type, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Transfers to another sub account of the same master

@@ -1194,6 +1194,21 @@
             Make auto repayment after order is filled
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.SubAccountMarginTransferType">
+            <summary>
+            Sub account margin transfer type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SubAccountMarginTransferType.FromSubAccountSpotToSubAccountMargin">
+            <summary>
+            Sub account spot to sub account margin
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SubAccountMarginTransferType.FromSubAccountMarginToSubAccountSpot">
+            <summary>
+            From sub account margin to sub account spot
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.SubAccountStatus">
             <summary>
             Status of the sub account
@@ -1224,19 +1239,29 @@
             From sub account to main spot account
             </summary>
         </member>
-        <member name="T:Binance.Net.Enums.SubAccountTransferType">
+        <member name="T:Binance.Net.Enums.SubAccountFuturesTransferType">
             <summary>
             Transfer type
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.SubAccountTransferType.FromSpotMain">
+        <member name="F:Binance.Net.Enums.SubAccountFuturesTransferType.FromSpotToUsdtFutures">
             <summary>
-            From main spot account to sub account
+            From sub account spot to sub account usdt-m futures
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.SubAccountTransferType.ToSpotMain">
+        <member name="F:Binance.Net.Enums.SubAccountFuturesTransferType.FromUsdtFuturesToSpot">
             <summary>
-            From sub account to main spot account
+            From sub account usdt-m futures to sub account spot
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SubAccountFuturesTransferType.FromSpotToCoinFutures">
+            <summary>
+            From sub account spot to sub account coin-m futures
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SubAccountFuturesTransferType.FromCoinFuturesToSpot">
+            <summary>
+            From sub account coin-m futures to sub account spot
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.SymbolFilterType">
@@ -5689,7 +5714,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Position risk</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.TransferSubAccountFutures(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.TransferSubAccountFutures(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountFuturesTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers from or to a futures sub account
             </summary>
@@ -5701,7 +5726,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The result of the transfer</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.TransferSubAccountFuturesAsync(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.TransferSubAccountFuturesAsync(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountFuturesTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers from or to a futures sub account
             </summary>
@@ -5713,7 +5738,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The result of the transfer</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.TransferSubAccountMargin(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.TransferSubAccountMargin(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountMarginTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers from or to a margin sub account
             </summary>
@@ -5725,7 +5750,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The result of the transfer</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.TransferSubAccountMarginAsync(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.TransferSubAccountMarginAsync(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountMarginTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers from or to a margin sub account
             </summary>
@@ -12738,6 +12763,11 @@
             The amount
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceMarginAmount.BorrowLimit">
+            <summary>
+            The borrow limit
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.MarginData.BinanceMarginAsset">
             <summary>
             Margin asset info
@@ -19261,7 +19291,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Position risk</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.TransferSubAccountFutures(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.TransferSubAccountFutures(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountFuturesTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers from or to a futures sub account
             </summary>
@@ -19273,7 +19303,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The result of the transfer</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.TransferSubAccountFuturesAsync(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.TransferSubAccountFuturesAsync(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountFuturesTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers from or to a futures sub account
             </summary>
@@ -19285,7 +19315,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The result of the transfer</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.TransferSubAccountMargin(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.TransferSubAccountMargin(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountMarginTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers from or to a margin sub account
             </summary>
@@ -19297,7 +19327,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The result of the transfer</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.TransferSubAccountMarginAsync(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.TransferSubAccountMarginAsync(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountMarginTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers from or to a margin sub account
             </summary>

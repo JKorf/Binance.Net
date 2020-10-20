@@ -687,7 +687,7 @@ namespace Binance.Net.SubClients
         /// <param name="ct">Cancellation token</param>
         /// <returns>The result of the transfer</returns>
         public WebCallResult<BinanceSubAccountTransaction> TransferSubAccountFutures(string email, string asset,
-            decimal amount, SubAccountTransferType type, int? receiveWindow = null,
+            decimal amount, SubAccountFuturesTransferType type, int? receiveWindow = null,
             CancellationToken ct = default)
             => TransferSubAccountFuturesAsync(email, asset, amount, type, receiveWindow, ct).Result;
 
@@ -701,7 +701,7 @@ namespace Binance.Net.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The result of the transfer</returns>
-        public async Task<WebCallResult<BinanceSubAccountTransaction>> TransferSubAccountFuturesAsync(string email, string asset, decimal amount, SubAccountTransferType type, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceSubAccountTransaction>> TransferSubAccountFuturesAsync(string email, string asset, decimal amount, SubAccountFuturesTransferType type, int? receiveWindow = null, CancellationToken ct = default)
         {
             email.ValidateNotNull(nameof(email));
             asset.ValidateNotNull(nameof(asset));
@@ -714,7 +714,7 @@ namespace Binance.Net.SubClients
             {
                 { "email", email },
                 { "asset", asset },
-                { "type", JsonConvert.SerializeObject(type, new SubAccountTransferTypeConverter(false)) },
+                { "type", JsonConvert.SerializeObject(type, new SubAccountFuturesTransferTypeConverter(false)) },
                 { "amount", amount.ToString(CultureInfo.InvariantCulture) },
                 { "timestamp", _baseClient.GetTimestamp() },
             };
@@ -737,7 +737,7 @@ namespace Binance.Net.SubClients
         /// <param name="ct">Cancellation token</param>
         /// <returns>The result of the transfer</returns>
         public WebCallResult<BinanceSubAccountTransaction> TransferSubAccountMargin(string email, string asset,
-            decimal amount, SubAccountTransferType type, int? receiveWindow = null,
+            decimal amount, SubAccountMarginTransferType type, int? receiveWindow = null,
             CancellationToken ct = default)
             => TransferSubAccountMarginAsync(email, asset, amount, type, receiveWindow, ct).Result;
 
@@ -751,7 +751,7 @@ namespace Binance.Net.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The result of the transfer</returns>
-        public async Task<WebCallResult<BinanceSubAccountTransaction>> TransferSubAccountMarginAsync(string email, string asset, decimal amount, SubAccountTransferType type, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceSubAccountTransaction>> TransferSubAccountMarginAsync(string email, string asset, decimal amount, SubAccountMarginTransferType type, int? receiveWindow = null, CancellationToken ct = default)
         {
             email.ValidateNotNull(nameof(email));
             asset.ValidateNotNull(nameof(asset));
@@ -764,7 +764,7 @@ namespace Binance.Net.SubClients
             {
                 { "email", email },
                 { "asset", asset },
-                { "type", JsonConvert.SerializeObject(type, new SubAccountTransferTypeConverter(false)) },
+                { "type", JsonConvert.SerializeObject(type, new SubAccountMarginTransferTypeConverter(false)) },
                 { "amount", amount.ToString(CultureInfo.InvariantCulture) },
                 { "timestamp", _baseClient.GetTimestamp() },
             };

@@ -3,15 +3,23 @@
     /// <summary>
     /// Transfer type
     /// </summary>
-    public enum SubAccountTransferType
+    public enum SubAccountFuturesTransferType
     {
         /// <summary>
-        /// From main spot account to sub account
+        /// From sub account spot to sub account usdt-m futures
         /// </summary>
-        FromSpotMain,
+        FromSpotToUsdtFutures,
         /// <summary>
-        /// From sub account to main spot account
+        /// From sub account usdt-m futures to sub account spot
         /// </summary>
-        ToSpotMain
+        FromUsdtFuturesToSpot,
+        /// <summary>
+        /// From sub account spot to sub account coin-m futures
+        /// </summary>
+        FromSpotToCoinFutures,
+        /// <summary>
+        /// From sub account coin-m futures to sub account spot
+        /// </summary>
+        FromCoinFuturesToSpot
     }
 }

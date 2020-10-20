@@ -9,5 +9,10 @@
         /// The amount
         /// </summary>
         public decimal Amount { get; set; }
+
+        /// <summary>
+        /// The borrow limit
+        /// </summary>
+        public decimal BorrowLimit { get; set; }
     }
 }
