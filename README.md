@@ -145,6 +145,16 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.3.0 - 20 Oct 2020
+    * Added BSwap endpoints
+    * Added BLVT endpoints
+    * Fixed incomeType parameter on GetIncomeHistory
+    * Added BorrowLimit property to GetMaxBorrowAmount
+    * Added Coin-M futures support for sub-account transfer
+    * Added ids to lending borrow/repay results
+    * Added ChangeToDailyPosition endpoint
+    * Updated Regular to Activity in savings endpoints
+
 * Version 6.2.0 - 08 Oct 2020
     * Added missing transaction timestamp on future user streams
     * Updated book price models
