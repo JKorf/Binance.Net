@@ -322,5 +322,31 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="ct">Cancellation token</param>
         /// <returns>The interest history</returns>
         Task<WebCallResult<IEnumerable<BinanceLendingInterestHistory>>> GetLendingInterestHistoryAsync(LendingType lendingType, string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = 1, int? limit = 10, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Changed fixed/activity position to daily position
+        /// </summary>
+        /// <param name="projectId">Id of the project</param>
+        /// <param name="lot">The lot</param>
+        /// <param name="positionId">For fixed position</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Purchase id</returns>
+        WebCallResult<BinanceLendingPurchaseResult> ChangeToDailyPosition(string projectId, int lot,
+            long? positionId = null,
+            long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Changed fixed/activity position to daily position
+        /// </summary>
+        /// <param name="projectId">Id of the project</param>
+        /// <param name="lot">The lot</param>
+        /// <param name="positionId">For fixed position</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Purchase id</returns>
+        Task<WebCallResult<BinanceLendingPurchaseResult>> ChangeToDailyPositionAsync(string projectId, int lot,
+            long? positionId = null,
+            long? receiveWindow = null, CancellationToken ct = default);
     }
 }

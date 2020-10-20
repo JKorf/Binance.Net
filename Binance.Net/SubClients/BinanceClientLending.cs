@@ -34,6 +34,7 @@ namespace Binance.Net.SubClients
         private const string purchaseRecordEndpoint = "lending/union/purchaseRecord";
         private const string redemptionRecordEndpoint = "lending/union/redemptionRecord";
         private const string lendingInterestHistoryEndpoint = "lending/union/interestHistory";
+        private const string positionChangedEndpoint = "lending/positionChanged";
 
         private readonly BinanceClient _baseClient;
 
@@ -625,6 +626,51 @@ namespace Binance.Net.SubClients
         }
         #endregion
 
+
+        #region ChangeToDailyPosition
+        /// <summary>
+        /// Changed fixed/activity position to daily position
+        /// </summary>
+        /// <param name="projectId">Id of the project</param>
+        /// <param name="lot">The lot</param>
+        /// <param name="positionId">For fixed position</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Purchase id</returns>
+        public WebCallResult<BinanceLendingPurchaseResult> ChangeToDailyPosition(string projectId, int lot, long? positionId = null,
+            long? receiveWindow = null, CancellationToken ct = default)
+            => ChangeToDailyPositionAsync(projectId, lot, positionId, receiveWindow, ct).Result;
+
+        /// <summary>
+        /// Changed fixed/activity position to daily position
+        /// </summary>
+        /// <param name="projectId">Id of the project</param>
+        /// <param name="lot">The lot</param>
+        /// <param name="positionId">For fixed position</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Purchase id</returns>
+        public async Task<WebCallResult<BinanceLendingPurchaseResult>> ChangeToDailyPositionAsync(string projectId, int lot, long? positionId = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            projectId.ValidateNotNull(nameof(projectId));
+
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceLendingPurchaseResult>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "projectId", projectId },
+                { "lot", lot.ToString(CultureInfo.InvariantCulture) },
+                { "timestamp", _baseClient.GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("positionId", positionId?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceLendingPurchaseResult>(_baseClient.GetUrlSpot(positionChangedEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
         #endregion
     }
 }
