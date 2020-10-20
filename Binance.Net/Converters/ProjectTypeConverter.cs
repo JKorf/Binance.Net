@@ -12,7 +12,7 @@ namespace Binance.Net.Converters
         protected override List<KeyValuePair<ProjectType, string>> Mapping => new List<KeyValuePair<ProjectType, string>>
         {
             new KeyValuePair<ProjectType, string>(ProjectType.CustomizedFixed, "CUSTOMIZED_FIXED"),
-            new KeyValuePair<ProjectType, string>(ProjectType.Regular, "REGULAR")
+            new KeyValuePair<ProjectType, string>(ProjectType.Activity, "ACTIVITY")
         };
     }
 }

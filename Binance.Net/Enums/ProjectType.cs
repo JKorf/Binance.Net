@@ -8,7 +8,7 @@
         /// <summary>
         /// Regular
         /// </summary>
-        Regular,
+        Activity,
         /// <summary>
         /// Customized fixed
         /// </summary>

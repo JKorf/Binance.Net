@@ -11,7 +11,7 @@ namespace Binance.Net.Converters
 
         protected override List<KeyValuePair<LendingType, string>> Mapping => new List<KeyValuePair<LendingType, string>>
         {
-            new KeyValuePair<LendingType, string>(LendingType.Regular, "REGULAR"),
+            new KeyValuePair<LendingType, string>(LendingType.Activity, "ACTIVITY"),
             new KeyValuePair<LendingType, string>(LendingType.CustomizedFixed, "CUSTOMIZED_FIXED"),
             new KeyValuePair<LendingType, string>(LendingType.Daily, "DAILY")
         };

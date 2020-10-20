@@ -10,9 +10,9 @@
         /// </summary>
         Daily,
         /// <summary>
-        /// Fixed
+        /// Activity
         /// </summary>
-        Regular,
+        Activity,
         /// <summary>
         /// Customized fixed
         /// </summary>

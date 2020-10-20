@@ -10,6 +10,10 @@ namespace Binance.Net.Objects.Spot.Futures
     public class BinanceCrossCollateralRepayResult
     {
         /// <summary>
+        /// Id
+        /// </summary>
+        public string RepayId { get; set; }
+        /// <summary>
         /// The coin borrowed
         /// </summary>
         public string Coin { get; set; } = "";

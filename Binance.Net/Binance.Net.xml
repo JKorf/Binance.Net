@@ -654,9 +654,9 @@
             Flexible
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.LendingType.Regular">
+        <member name="F:Binance.Net.Enums.LendingType.Activity">
             <summary>
-            Fixed
+            Activity
             </summary>
         </member>
         <member name="F:Binance.Net.Enums.LendingType.CustomizedFixed">
@@ -1109,7 +1109,7 @@
             The type of project
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.ProjectType.Regular">
+        <member name="F:Binance.Net.Enums.ProjectType.Activity">
             <summary>
             Regular
             </summary>
@@ -5155,6 +5155,28 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>The interest history</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLending.ChangeToDailyPosition(System.String,System.Int32,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Changed fixed/activity position to daily position
+            </summary>
+            <param name="projectId">Id of the project</param>
+            <param name="lot">The lot</param>
+            <param name="positionId">For fixed position</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Purchase id</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLending.ChangeToDailyPositionAsync(System.String,System.Int32,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Changed fixed/activity position to daily position
+            </summary>
+            <param name="projectId">Id of the project</param>
+            <param name="lot">The lot</param>
+            <param name="positionId">For fixed position</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Purchase id</returns>
         </member>
         <member name="T:Binance.Net.Interfaces.SubClients.IBinanceClientMarket">
             <summary>
@@ -11508,6 +11530,11 @@
             Borrow history
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralBorrowHistory.BorrowId">
+            <summary>
+            Id
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralBorrowHistory.ConfirmedTime">
             <summary>
             Time of confirmation
@@ -11556,6 +11583,11 @@
         <member name="T:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralBorrowResult">
             <summary>
             Borrow result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralBorrowResult.BorrowId">
+            <summary>
+            Id
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralBorrowResult.Coin">
@@ -11658,6 +11690,11 @@
             Repay history
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralRepayHistory.RepayId">
+            <summary>
+            Id
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralRepayHistory.ConfirmedTime">
             <summary>
             Time of confirmation
@@ -11685,7 +11722,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralRepayHistory.ReleasedCollateral">
             <summary>
-            Released colatteral amount
+            Released collateral amount
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralRepayHistory.Status">
@@ -11696,6 +11733,11 @@
         <member name="T:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralRepayResult">
             <summary>
             Repay result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralRepayResult.RepayId">
+            <summary>
+            Id
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralRepayResult.Coin">
@@ -18871,6 +18913,28 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>The interest history</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientLending.ChangeToDailyPosition(System.String,System.Int32,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Changed fixed/activity position to daily position
+            </summary>
+            <param name="projectId">Id of the project</param>
+            <param name="lot">The lot</param>
+            <param name="positionId">For fixed position</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Purchase id</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientLending.ChangeToDailyPositionAsync(System.String,System.Int32,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Changed fixed/activity position to daily position
+            </summary>
+            <param name="projectId">Id of the project</param>
+            <param name="lot">The lot</param>
+            <param name="positionId">For fixed position</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Purchase id</returns>
         </member>
         <member name="T:Binance.Net.SubClients.BinanceClientMining">
             <summary>

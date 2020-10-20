@@ -625,8 +625,7 @@ namespace Binance.Net.SubClients
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceLendingInterestHistory>>(_baseClient.GetUrlSpot(lendingInterestHistoryEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
         #endregion
-
-
+        
         #region ChangeToDailyPosition
         /// <summary>
         /// Changed fixed/activity position to daily position
