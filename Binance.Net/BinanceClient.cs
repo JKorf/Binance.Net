@@ -113,6 +113,11 @@ namespace Binance.Net
         /// Leveraged tokens endpoints
         /// </summary>
         public IBinanceClientLeveragedTokens Blvt { get; set; }
+
+        /// <summary>
+        /// Liquidity swap endpoints
+        /// </summary>
+        public IBinanceClientLiquidSwap BSwap { get; set; }
         #endregion
 
         #region constructor/destructor
@@ -156,6 +161,7 @@ namespace Binance.Net
             SubAccount = new BinanceClientSubAccount(this);
             WithdrawDeposit = new BinanceClientWithdrawDeposit(this);
             Blvt = new BinanceClientLeveragedTokens(this);
+            BSwap = new BinanceClientLiquidSwap(this);
         }
         #endregion
 

@@ -64,6 +64,11 @@
             Leveraged tokens endpoints
             </summary>
         </member>
+        <member name="P:Binance.Net.BinanceClient.BSwap">
+            <summary>
+            Liquidity swap endpoints
+            </summary>
+        </member>
         <member name="M:Binance.Net.BinanceClient.#ctor">
             <summary>
             Create a new instance of BinanceClient using the default options
@@ -370,6 +375,41 @@
             </summary>
         </member>
         <member name="F:Binance.Net.Enums.BlvtStatus.Failure">
+            <summary>
+            Failure
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.BSwapOperation">
+            <summary>
+            Swap operation
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BSwapOperation.Add">
+            <summary>
+            Add liquidity
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BSwapOperation.Remove">
+            <summary>
+            Remove liquidity
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.BSwapStatus">
+            <summary>
+            Status of a BSwap operation
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BSwapStatus.Pending">
+            <summary>
+            Pending
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BSwapStatus.Success">
+            <summary>
+            Success
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BSwapStatus.Failure">
             <summary>
             Failure
             </summary>
@@ -1204,6 +1244,21 @@
             Normal
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.RemoveLiquidityType">
+            <summary>
+            Remove liquidity type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.RemoveLiquidityType.Single">
+            <summary>
+            Remove single asset
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.RemoveLiquidityType.Combined">
+            <summary>
+            Remove combination of all coins
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.SideEffectType">
             <summary>
             Side effect for a margin order
@@ -1954,6 +2009,11 @@
         <member name="P:Binance.Net.Interfaces.IBinanceClient.Blvt">
             <summary>
             Leveraged token endpoints
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceClient.BSwap">
+            <summary>
+            Liquidity swap endpoints
             </summary>
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceClient.SetApiCredentials(System.String,System.String)">
@@ -5325,6 +5385,103 @@
             <param name="startTime">Filter by startTime</param>
             <param name="endTime">Filter by endTime</param>
             <param name="limit">Number of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap">
+            <summary>
+            Liquid swap endpoints
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap.GetBSwapPoolsAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get all swap pools
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap.GetPoolLiquidityInfoAsync(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get liquidity info for a pool
+            </summary>
+            <param name="poolId">Get a specific pool</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap.AddLiquidityAsync(System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Add liquidity to a pool
+            </summary>
+            <param name="poolId">The pool</param>
+            <param name="asset">The asset</param>
+            <param name="quantity">Quantity to add</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap.RemoveLiquidityAsync(System.String,System.String,Binance.Net.Enums.RemoveLiquidityType,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Remove liquidity from a pool
+            </summary>
+            <param name="poolId">The pool</param>
+            <param name="asset">The asset</param>
+            <param name="type">Remove type</param>
+            <param name="shareAmount">Amount to remove</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap.GetLiquidityOperationRecordsAsync(System.Nullable{System.Int64},System.String,System.Nullable{Binance.Net.Enums.BSwapOperation},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get liquidity operation records
+            </summary>
+            <param name="operationId">Filter by operationId</param>
+            <param name="poolId">Filter by poolId</param>
+            <param name="operation">Filter by operation</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Max number of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap.GetQuoteAsync(System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Request a quote for swap quote asset (selling asset) for base asset (buying asset), essentially price/exchange rates. quoteQty is quantity of quote asset(to sell).
+            Please be noted the quote is for reference only, the actual price will change as the liquidity changes, it's recommended to swap immediate after request a quote for slippage prevention.
+            </summary>
+            <param name="quoteAsset">Quote asset</param>
+            <param name="baseAsset">Base asset</param>
+            <param name="quoteQuantity">Quote quantity</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap.SwapAsync(System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Swap quote asset for base asset
+            </summary>
+            <param name="quoteAsset">Quote asset</param>
+            <param name="baseAsset">Base asset</param>
+            <param name="quoteQuantity">Quote quantity</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap.GetSwapHistoryAsync(System.Nullable{System.Int64},System.Nullable{Binance.Net.Enums.BSwapStatus},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get swap history records
+            </summary>
+            <param name="swapId">Filter by swapId</param>
+            <param name="status">Filter by status</param>
+            <param name="quoteAsset">Filter by quote asset</param>
+            <param name="baseAsset">Filter by base asset</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Max number of results</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -9020,6 +9177,221 @@
         <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageTransferTransaction.Date">
             <summary>
             Date
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BSwap.BinanceBSwapOperation">
+            <summary>
+            Operation record
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapOperation.OperationId">
+            <summary>
+            Operation id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapOperation.PoolId">
+            <summary>
+            Pool id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapOperation.PoolName">
+            <summary>
+            Pool name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapOperation.Operation">
+            <summary>
+            Operation
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapOperation.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapOperation.UpdateTime">
+            <summary>
+            Update time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapOperation.ShareAmount">
+            <summary>
+            Share amount
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BSwap.BinanceBSwapOperationResult">
+            <summary>
+            Operation result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapOperationResult.OperationId">
+            <summary>
+            Id of the operation
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BSwap.BinanceBSwapPool">
+            <summary>
+            Swap pool info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPool.PoolId">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPool.PoolName">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPool.Assets">
+            <summary>
+            Assets in the pool
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BSwap.BinanceBSwapPoolLiquidity">
+            <summary>
+            Pool liquidity info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPoolLiquidity.PoolId">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPoolLiquidity.PoolName">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPoolLiquidity.UpdateTime">
+            <summary>
+            Update time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPoolLiquidity.Liquidity">
+            <summary>
+            Liquidity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPoolLiquidity.Share">
+            <summary>
+            Share
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinancePoolShare.ShareAmount">
+            <summary>
+            Share amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinancePoolShare.SharePercentage">
+            <summary>
+            Share percentage
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinancePoolShare.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BSwap.BinanceBSwapQuote">
+            <summary>
+            Quote info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapQuote.QuoteAsset">
+            <summary>
+            Quote asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapQuote.BaseAsset">
+            <summary>
+            Base asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapQuote.QuoteQuantity">
+            <summary>
+            Quote quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapQuote.BaseQuantity">
+            <summary>
+            Base quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapQuote.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapQuote.Slippage">
+            <summary>
+            Slippage
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapQuote.Fee">
+            <summary>
+            Fee
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BSwap.BinanceBSwapRecord">
+            <summary>
+            Swap record
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapRecord.SwapId">
+            <summary>
+            Swap id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapRecord.SwapTime">
+            <summary>
+            Time of the swap
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapRecord.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapRecord.BaseAsset">
+            <summary>
+            Base asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapRecord.QuoteAsset">
+            <summary>
+            Quote asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapRecord.BaseQuantity">
+            <summary>
+            Base quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapRecord.QuoteQuantity">
+            <summary>
+            Quote quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapRecord.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapRecord.Fee">
+            <summary>
+            Fee
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BSwap.BinanceBSwapResult">
+            <summary>
+            Swap result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapResult.SwapId">
+            <summary>
+            Swap id
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.BinanceFuturesClientOptions">
@@ -19499,6 +19871,103 @@
             <param name="startTime">Filter by startTime</param>
             <param name="endTime">Filter by endTime</param>
             <param name="limit">Number of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Binance.Net.SubClients.BinanceClientLiquidSwap">
+            <summary>
+            Liquid swap endpoints
+            </summary>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientLiquidSwap.GetBSwapPoolsAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get all swap pools
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientLiquidSwap.GetPoolLiquidityInfoAsync(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get liquidity info for a pool
+            </summary>
+            <param name="poolId">Get a specific pool</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientLiquidSwap.AddLiquidityAsync(System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Add liquidity to a pool
+            </summary>
+            <param name="poolId">The pool</param>
+            <param name="asset">The asset</param>
+            <param name="quantity">Quantity to add</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientLiquidSwap.RemoveLiquidityAsync(System.String,System.String,Binance.Net.Enums.RemoveLiquidityType,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Remove liquidity from a pool
+            </summary>
+            <param name="poolId">The pool</param>
+            <param name="asset">The asset</param>
+            <param name="type">Remove type</param>
+            <param name="shareAmount">Amount to remove</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientLiquidSwap.GetLiquidityOperationRecordsAsync(System.Nullable{System.Int64},System.String,System.Nullable{Binance.Net.Enums.BSwapOperation},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get liquidity operation records
+            </summary>
+            <param name="operationId">Filter by operationId</param>
+            <param name="poolId">Filter by poolId</param>
+            <param name="operation">Filter by operation</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Max number of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientLiquidSwap.GetQuoteAsync(System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Request a quote for swap quote asset (selling asset) for base asset (buying asset), essentially price/exchange rates. quoteQty is quantity of quote asset(to sell).
+            Please be noted the quote is for reference only, the actual price will change as the liquidity changes, it's recommended to swap immediate after request a quote for slippage prevention.
+            </summary>
+            <param name="quoteAsset">Quote asset</param>
+            <param name="baseAsset">Base asset</param>
+            <param name="quoteQuantity">Quote quantity</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientLiquidSwap.SwapAsync(System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Swap quote asset for base asset
+            </summary>
+            <param name="quoteAsset">Quote asset</param>
+            <param name="baseAsset">Base asset</param>
+            <param name="quoteQuantity">Quote quantity</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientLiquidSwap.GetSwapHistoryAsync(System.Nullable{System.Int64},System.Nullable{Binance.Net.Enums.BSwapStatus},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get swap history records
+            </summary>
+            <param name="swapId">Filter by swapId</param>
+            <param name="status">Filter by status</param>
+            <param name="quoteAsset">Filter by quote asset</param>
+            <param name="baseAsset">Filter by base asset</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Max number of results</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>

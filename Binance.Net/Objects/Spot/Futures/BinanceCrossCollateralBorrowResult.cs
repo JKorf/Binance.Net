@@ -14,7 +14,7 @@ namespace Binance.Net.Objects.Spot.Futures
         /// <summary>
         /// Id
         /// </summary>
-        public string BorrowId { get; set; }
+        public string BorrowId { get; set; } = "";
         /// <summary>
         /// The coin borrowed
         /// </summary>

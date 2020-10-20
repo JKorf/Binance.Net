@@ -33,7 +33,7 @@ namespace Binance.Net.Objects.Spot.SubAccountData
         /// <summary>
         /// Sub account email
         /// </summary>
-        public string Email { get; set; }
+        public string Email { get; set; } = "";
         /// <summary>
         /// Sub account total asset 
         /// </summary>

@@ -16,7 +16,7 @@ namespace Binance.Net.Objects.Spot.Futures
         /// <summary>
         /// Id
         /// </summary>
-        public string RepayId { get; set; }
+        public string RepayId { get; set; } = "";
         /// <summary>
         /// Time of confirmation
         /// </summary>

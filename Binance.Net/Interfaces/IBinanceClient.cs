@@ -68,6 +68,11 @@ namespace Binance.Net.Interfaces
         IBinanceClientLeveragedTokens Blvt { get; set; }
 
         /// <summary>
+        /// Liquidity swap endpoints
+        /// </summary>
+        IBinanceClientLiquidSwap BSwap { get; set; }
+
+        /// <summary>
         /// Set the API key and secret
         /// </summary>
         /// <param name="apiKey">The api key</param>

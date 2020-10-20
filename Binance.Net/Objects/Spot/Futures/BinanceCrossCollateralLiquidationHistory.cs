@@ -28,7 +28,7 @@ namespace Binance.Net.Objects.Spot.Futures
         /// <summary>
         /// Coin
         /// </summary>
-        public string Coin { get; set; }
+        public string Coin { get; set; } = "";
         /// <summary>
         /// Rest collateral amount after liquidation
         /// </summary>
