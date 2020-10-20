@@ -14,6 +14,10 @@ namespace Binance.Net.Objects.Spot.Futures
     public class BinanceCrossCollateralBorrowHistory
     {
         /// <summary>
+        /// Id
+        /// </summary>
+        public string BorrowId { get; set; }
+        /// <summary>
         /// Time of confirmation
         /// </summary>
         [JsonConverter(typeof(TimestampConverter))]

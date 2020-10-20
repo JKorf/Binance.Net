@@ -14,6 +14,10 @@ namespace Binance.Net.Objects.Spot.Futures
     public class BinanceCrossCollateralRepayHistory
     {
         /// <summary>
+        /// Id
+        /// </summary>
+        public string RepayId { get; set; }
+        /// <summary>
         /// Time of confirmation
         /// </summary>
         [JsonConverter(typeof(TimestampConverter))]
@@ -38,7 +42,7 @@ namespace Binance.Net.Objects.Spot.Futures
         /// </summary>
         public decimal Amount { get; set; }
         /// <summary>
-        /// Released colatteral amount
+        /// Released collateral amount
         /// </summary>
         public decimal ReleasedCollateral { get; set; }
         /// <summary>
