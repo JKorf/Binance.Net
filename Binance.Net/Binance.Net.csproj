@@ -7,7 +7,7 @@
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
     <Authors>JKorf, Nikkozp, CaptHolley</Authors>
-    <PackageVersion>6.3.0</PackageVersion>
+    <PackageVersion>6.3.1</PackageVersion>
     <AssemblyVersion>6.3.0</AssemblyVersion>
     <Description>Binance.Net is a .Net wrapper for the Binance API, including Binance Futures. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -17,7 +17,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>6.3.0 - Added BSwap endpoints, Added BLVT endpoints, Fixed incomeType parameter on GetIncomeHistory, Added BorrowLimit property to GetMaxBorrowAmount, Added Coin-M futures support for sub-account transfer, Added ids to lending borrow/repay results, Added ChangeToDailyPosition endpoint, Updated Regular to Activity in savings endpoints</PackageReleaseNotes>
+    <PackageReleaseNotes>6.3.1 - Added missing Interval property on stream kline updates</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup>
     <DocumentationFile>Binance.Net.xml</DocumentationFile>

@@ -145,6 +145,9 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.3.1 - 22 okt 2020
+    * Added missing Interval property on stream kline updates
+
 * Version 6.3.0 - 20 Oct 2020
     * Added BSwap endpoints
     * Added BLVT endpoints
