@@ -2320,6 +2320,11 @@
             Stream kline data
             </summary>
         </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceStreamKline.Interval">
+            <summary>
+            Interval
+            </summary>
+        </member>
         <member name="P:Binance.Net.Interfaces.IBinanceStreamKline.Final">
             <summary>
             Is this kline final

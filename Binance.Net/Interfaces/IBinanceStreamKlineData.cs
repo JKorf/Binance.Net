@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Binance.Net.Enums;
 using Binance.Net.Objects.Shared;
 
 namespace Binance.Net.Interfaces
@@ -26,6 +27,10 @@ namespace Binance.Net.Interfaces
     /// </summary>
     public interface IBinanceStreamKline: IBinanceKline
     {
+        /// <summary>
+        /// Interval
+        /// </summary>
+        KlineInterval Interval { get; set; }
         /// <summary>
         /// Is this kline final
         /// </summary>
