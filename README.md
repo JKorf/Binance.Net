@@ -145,6 +145,9 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.3.2 - 23 okt 2020
+    * Re-added locking when signing messages to prevent issues when multithreading
+
 * Version 6.3.1 - 22 okt 2020
     * Added missing Interval property on stream kline updates
 
