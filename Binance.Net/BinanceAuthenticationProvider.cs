@@ -13,6 +13,7 @@ namespace Binance.Net
 {
     internal class BinanceAuthenticationProvider : AuthenticationProvider
     {
+        private readonly object signLock = new object();
         private readonly HMACSHA256 encryptor;
 
         public BinanceAuthenticationProvider(ApiCredentials credentials) : base(credentials)
@@ -50,7 +51,8 @@ namespace Binance.Net
                 signData = formData.ToString();
             }
 
-            parameters.Add("signature", ByteToString(encryptor.ComputeHash(Encoding.UTF8.GetBytes(signData))));
+            lock (signLock)
+                parameters.Add("signature", ByteToString(encryptor.ComputeHash(Encoding.UTF8.GetBytes(signData))));
             return parameters;
         }
 
