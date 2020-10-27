@@ -1,5 +1,6 @@
 ﻿using System;
 using Binance.Net.ClientWPF.MVVM;
+using Binance.Net.Enums;
 using Binance.Net.Objects;
 
 namespace Binance.Net.ClientWPF.ViewModels

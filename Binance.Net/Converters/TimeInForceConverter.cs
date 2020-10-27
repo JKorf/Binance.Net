@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Binance.Net.Objects;
+using Binance.Net.Enums;
 using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Converters
@@ -13,7 +13,8 @@ namespace Binance.Net.Converters
         {
             new KeyValuePair<TimeInForce, string>(TimeInForce.GoodTillCancel, "GTC"),
             new KeyValuePair<TimeInForce, string>(TimeInForce.ImmediateOrCancel, "IOC"),
-            new KeyValuePair<TimeInForce, string>(TimeInForce.FillOrKill, "FOK")
+            new KeyValuePair<TimeInForce, string>(TimeInForce.FillOrKill, "FOK"),
+            new KeyValuePair<TimeInForce, string>(TimeInForce.GoodTillCrossing, "GTX")
         };
     }
 }

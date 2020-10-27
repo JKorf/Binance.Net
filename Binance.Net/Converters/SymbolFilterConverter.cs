@@ -1,8 +1,9 @@
-﻿using Binance.Net.Objects;
+﻿using Binance.Net.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Diagnostics;
+using Binance.Net.Objects.Spot.MarketData;
 
 namespace Binance.Net.Converters
 {
@@ -58,14 +59,6 @@ namespace Binance.Net.Converters
                         MaxNumberAlgorithmicOrders = (int)obj["maxNumAlgoOrders"]
                     };
                     break;
-
-                case SymbolFilterType.MaxNumberIcebergOrders:
-                    result = new BinanceSymbolMaxIcebergOrdersFilter
-                    {
-                        MaxNumberIcebergOrders = (int)obj["maxNumIcebergOrders"]
-                    };
-                    break;
-
                 case SymbolFilterType.MaxNumberOrders:
                     result = new BinanceSymbolMaxOrdersFilter
                     {
@@ -147,14 +140,9 @@ namespace Binance.Net.Converters
                     writer.WritePropertyName("maxNumAlgoOrders");
                     writer.WriteValue(algoFilter.MaxNumberAlgorithmicOrders);
                     break;
-                case SymbolFilterType.MaxNumberIcebergOrders:
-                    var icebergFilter = (BinanceSymbolMaxIcebergOrdersFilter)filter;
-                    writer.WritePropertyName("maxNumIcebergOrders");
-                    writer.WriteValue(icebergFilter.MaxNumberIcebergOrders);
-                    break;
                 case SymbolFilterType.MaxNumberOrders:
                     var orderFilter = (BinanceSymbolMaxOrdersFilter)filter;
-                    writer.WritePropertyName("limit");
+                    writer.WritePropertyName("maxNumOrders");
                     writer.WriteValue(orderFilter.MaxNumberOrders);
                     break;
                 case SymbolFilterType.IcebergParts:

@@ -2,7 +2,7 @@
 
 ![Build status](https://travis-ci.org/JKorf/Binance.Net.svg?branch=master)
 
-A .Net wrapper for the Binance API as described on [Binance](https://www.binance.com/restapipub.html), including all features the API provides using clear and readable objects.
+A .Net wrapper for the Binance API as described on [Binance](https://binance-docs.github.io/apidocs/spot/en/#change-log), including all features the API provides (Spot, (Isolated) margin and futures) using clear and readable objects.
 
 **If you think something is broken, something is missing or have any questions, please open an [Issue](https://github.com/JKorf/Binance.Net/issues)**
 
@@ -51,13 +51,17 @@ Implementations from third parties:
 </td>
 <td><a href="https://github.com/burakoner/OKEx.Net"><img src="https://raw.githubusercontent.com/burakoner/OKEx.Net/master/Okex.Net/Icon/icon.png"></a>
 <br />
-<a href="https://github.comburakoner/OKEx.Net">OKEx</a>
+<a href="https://github.com/burakoner/OKEx.Net">OKEx</a>
+</td>
+	<td><a href="https://github.com/ridicoulous/Bitmex.Net"><img src="https://github.com/ridicoulous/Bitmex.Net/blob/master/Bitmex.Net/Icon/icon.png"></a>
+<br />
+<a href="https://github.com/ridicoulous/Bitmex.Net">Bitmex</a>
 </td>
 </tr>
 </table>
 
 ## Donations
-Donations are greatly appreciated and a motivation to keep improving.
+I develop and maintain this package on my own for free in my spare time. Donations are greatly appreciated.
 
 **Btc**:  12KwZk3r2Y3JZ2uMULcjqqBvXmpDwjhhQS  
 **Eth**:  0x069176ca1a4b1d6e0b7901a6bc0dbf3bb0bf5cc2  
@@ -93,61 +97,209 @@ Requests made to Binance are checked for a correct timestamp. When requests are 
 The recvWindow is default 5000ms and can be changed using the `ReceiveWindow` configuration option. All times are communicated in UTC so there won't be any timezone issues. However, because of clock drifting it can be that the client UTC time is not the same as the server UTC time. It is therefor recommended clients use the `SP TimeSync` program to resync the client UTC time more often than windows does by default (every 10 minutes or less is recommended).
 
 ## Websockets
-The Binance.Net socket client provides several socket endpoint to which can be subscribed.
+The Binance.Net socket client provides several socket endpoint to which can be subscribed. 
 
-**Public socket endpoints:**
-```C#
-using(var client = new BinanceSocketClient())
-{
-	var successDepth = client.SubscribeToDepthStream("bnbbtc", (data) =>
-	{
-		// handle data
-	});
-	var successTrades = client.SubscribeToTradesStream("bnbbtc", (data) =>
-	{
-		// handle data
-	});
-	var successKline = client.SubscribeToKlineStream("bnbbtc", KlineInterval.OneMinute, (data) =>
-	{
-		// handle data
-	});
-	var successSymbol = client.SubscribeToSymbolTicker("bnbbtc", (data) =>
-	{
-		// handle data
-	});
-	var successSymbols = client.SubscribeToAllSymbolTicker((data) =>
-	{
-		// handle data
-	});
-	var successOrderBook = client.SubscribeToPartialBookDepthStream("bnbbtc", 10, (data) =>
-	{
-		// handle data
-	});
-}
-```
+````csharp
+var client = new BinanceSocketClient();
+// subscribe to updates on the spot API
+client.Spot.SubscribeToBookTickerUpdates("BTCUSDT", data => {
+  // Handle data
+});
 
-**Private socket endpoints:**
+// subscribe to updates on the futures API
+client.Futures.SubscribeToBookTickerUpdates("BTCUSDT", data => {
+  // Handle data
+});
 
-For the private endpoint a user stream has to be started on the Binance server. This can be done using the `StartUserStream()` method in the `BinanceClient`. This command will return a listen key which can then be provided to the private socket subscription:
-```C#
-using(var client = new BinanceSocketClient())
-{
-	var successOrderBook = client.SubscribeToUserStream(listenKey, 
-	(accountInfoUpdate) =>
-	{
-		// handle account info update
+````
+
+To subscribe to account update (balance updates, order updates, etc.) you need to create a listen key using the `BinanceClient`, then start the user stream for account updates on the `BinanceSocketClient`:
+````csharp
+var client = new BinanceClient(new BinanceClientOptions{
+	ApiCredentials = new ApiCredentials("APIKEY", "APISECRET")
+});
+var startResult = client.Spot.UserStream.StartUserStream();
+
+if(!startResult.Success)
+	throw new Exception($"Failed to start user stream: {startResult.Error}");
+
+var socketClient = new BinanceSocketClient();
+
+socketClient.Spot.SubscribeToUserStream(startResult.Data, 
+	accountUpdate => { // Handle account info update 
 	},
-	(orderInfoUpdate) =>
-	{
-		// handle order info update
+	orderUpdate => { // Handle order update
+	}, 
+	ocoUpdate => { // Handle oco order update
+	},
+	positionUpdate => { // Handle account position update
+	},
+	balanceUpdate => { // Handle balance update
 	});
-}
-```
+````
 
-When no longer listening to private endpoints the `client.StopUserStream` method in `BinanceClient` should be used to signal the Binance server the stream can be closed.
+`null` can be passed as a parameter to any of these handlers to ignore the events of that type.
+
+
+When no longer listening to private endpoints the `StopUserStream` method in `BinanceClient` should be used to signal the Binance server the stream can be closed.
 
 
 ## Release notes
+* Version 6.3.2 - 23 okt 2020
+    * Re-added locking when signing messages to prevent issues when multithreading
+
+* Version 6.3.1 - 22 okt 2020
+    * Added missing Interval property on stream kline updates
+
+* Version 6.3.0 - 20 Oct 2020
+    * Added BSwap endpoints
+    * Added BLVT endpoints
+    * Fixed incomeType parameter on GetIncomeHistory
+    * Added BorrowLimit property to GetMaxBorrowAmount
+    * Added Coin-M futures support for sub-account transfer
+    * Added ids to lending borrow/repay results
+    * Added ChangeToDailyPosition endpoint
+    * Updated Regular to Activity in savings endpoints
+
+* Version 6.2.0 - 08 Oct 2020
+    * Added missing transaction timestamp on future user streams
+    * Updated book price models
+    * Update CryptoExchange.Net
+
+* Version 6.1.0 - 06 Oct 2020
+    * Fixed future trade timestamps
+    * Fixed some decimal serialization culture issues
+    * Updated future user streams to include timestamps
+    * Fixed used weight parsing
+    * Brokerage API update
+
+* Version 6.0.2 - 17 Sep 2020
+    * Fix for socket client receiving intermittent byte data
+    * Updated market data interfaces to support inheritance
+
+* Version 6.0.1 - 09 Sep 2020
+    * Fixed missing properties in stream kline models
+
+* Version 6.0.0 - 09 Sep 2020
+    * Added future transfer endpoints
+    * Added cross-collateral endpoints
+    * Refactored volume properties to properly be named base/quote
+    * Fixed isolated margin all symbols endpoint
+
+* Version 6.0.0-beta.6 - 31 Aug 2020
+    * Combined futures userstream Balance and Position update handlers, UpdateReason property added
+
+* Version 6.0.0-beta.5 - 28 Aug 2020
+    * Fixed futures order update wrong JsonConverter
+
+* Version 6.0.0-beta.4 - 28 Aug 2020
+    * Added support for Coin-M futures
+    * Some refactoring
+
+* Version 6.0.0-beta.3 - 17 Aug 2020
+    * Fixed GetAccountInfo endpoint
+
+* Version 6.0.0-beta.2 - 13 Aug 2020
+    * Fixed ModifyPositionMargin futures call
+
+* Version 6.0.0-beta.1 - 12 Aug 2020
+    * Restructured BinanceClient and BinanceSocketClient to include the futures and brokerage API. Clients are now divided per topic
+    * Added isolated margin endpoints
+    * Fixed MinNotional checking in trade rules when also adjusting price
+    * Added shared interfaces for Futures and Spot market data and market stream subscriptions
+
+* Version 5.1.14 - 03 Aug 2020
+    * Added check for MinNotional filter when using AutoComply trade rules behaviour
+    * Adjusted bool parameter serialization
+
+* Version 5.1.13 - 27 Jul 2020
+	* Updated futures balance, account info, position endpoints to version 2
+	* Added missing futures market data endpoints
+
+* Version 5.1.12 - 21 Jul 2020
+    * Updated order book models
+
+* Version 5.1.11 - 20 Jul 2020
+    * Fixes for future client
+
+* Version 5.1.10 - 07 Jul 2020
+    * Fixed datetime conversion for some objects
+
+* Version 5.1.9 - 06 Jul 2020
+    * Added CancelMultipleOrders
+    * Added CancelAllOrders
+    * Added EventTime to OrderBook stream
+    * Fixed purchase record conversion
+
+* Version 5.1.8 - 21 Jun 2020
+    * Updated CryptoExchange
+
+* Version 5.1.7 - 16 Jun 2020
+    * Changed IncomeType to string, Update CryptoExchange.Net
+
+* Version 5.1.6  - 11 Jun 2020
+	* Fixed subscribe error on symbols with an `I` caused by unset culture info
+
+* Version 5.1.5 - 07 Jun 2020
+	* Fixed serialization/encryption bug
+
+* Version 5.1.4 - 02 Jun 2020
+	* Fixed empty request bug
+
+* Version 5.1.3 - 02 Jun 2020
+    * Added CancelAllOrders endpoint
+    * Added PlaceMultipleOrders endpoint for futures
+    * Added BinanceFuturesSymbolOrderBook
+    * Added missing Expired order status mapping
+    * Added GetBrackets to futures client
+
+* Version 5.1.2 - 26 May 2020
+    * Added CancelAllOrdersAfterTimeout futures endpoint
+    * Added timestamp to various models
+    * Added closePosition paramter for future orders
+
+* Version 5.1.1 - 20 May 2020
+    * Fixed ChangeInitialLeverage endpoint
+    * Fixed ChangeMarginType endpoint
+    * Fixed deserialization error on maxNotionalValue
+    * Updated CryptoExchange.Net
+
+* Version 5.1.0 - 20 may 2020
+	* Bumped to release version
+	* Added missing wallet endpoints
+	* Added sub-account endpoints
+	* Added savings endpoints
+
+* Version 5.1.0-alpha10 - 08 May 2020
+    * Added Brokerage client, various fixes, added some missing parameters
+
+* Version 5.1.0-alpha9 - 01 May 2020
+    * Fixed GetExchangeInfo call, merged master
+
+* Version 5.1.0-alpha8 - 19 Mar 2020
+    * Futures update
+
+* Version 5.1.0-alpha7 - 16 Mar 2020
+    * fixed reference
+
+* Version 5.1.0-alpha6 - 16 Mar 2020
+    * Fixed ticker stream
+
+* Version 5.1.0-alpha5 - 16 Mar 2020
+    * Futures update
+
+* Version 5.1.0-alpha4 - 06 Mar 2020
+    * Actual stream fixes
+
+* Version 5.1.0-alpha3 - 06 Mar 2020
+    * Futures stream fixes
+
+* Version 5.1.0-alpha2 - 03 Mar 2020
+    * Updated CryptoExchange version
+
+* Version 5.1.0-alpha - 03 Mar 2020
+    * First version Futures Api implementation
+
 * Version 5.0.10 - 01 May 2020
     * Fixed filter parsing in GetExchangeInfo
 
