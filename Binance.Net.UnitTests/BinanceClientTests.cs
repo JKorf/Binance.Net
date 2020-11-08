@@ -1086,6 +1086,7 @@ namespace Binance.Net.UnitTests
         [TestCase("ETHBTC", true)]
         [TestCase("BEETC", true)]
         [TestCase("EETC", false)]
+        [TestCase("KP3RBNB", true)]
         [TestCase("BTC-USDT", false)]
         [TestCase("BTC-USD", false)]
         public void CheckValidBinanceSymbol(string symbol, bool isValid)
