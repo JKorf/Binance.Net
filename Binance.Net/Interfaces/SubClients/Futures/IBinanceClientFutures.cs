@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Enums;
+using Binance.Net.Objects;
 using Binance.Net.Objects.Futures.FuturesData;
 using Binance.Net.Objects.Futures.MarketData;
 using Binance.Net.SubClients.Futures.Coin;
@@ -118,7 +119,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Whether the request was successful</returns>
-        WebCallResult<BinanceFuturesPositionMode> ModifyPositionMode(bool dualPositionSide, long? receiveWindow = null, CancellationToken ct = default);
+        WebCallResult<BinanceResult> ModifyPositionMode(bool dualPositionSide, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
@@ -127,7 +128,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Whether the request was successful</returns>
-        Task<WebCallResult<BinanceFuturesPositionMode>> ModifyPositionModeAsync(bool dualPositionSide, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceResult>> ModifyPositionModeAsync(bool dualPositionSide, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol

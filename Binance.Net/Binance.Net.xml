@@ -7986,6 +7986,21 @@
             The amount of calls the limit is
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceResult">
+            <summary>
+            Query result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceResult.Code">
+            <summary>
+            Result code
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceResult.Message">
+            <summary>
+            Message
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.BinanceResult`1">
             <summary>
             Query result
@@ -7995,11 +8010,6 @@
         <member name="P:Binance.Net.Objects.BinanceResult`1.Data">
             <summary>
             The data
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceResult`1.Code">
-            <summary>
-            Result code
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinanceStreamEvent">

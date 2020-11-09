@@ -74,7 +74,7 @@ namespace Binance.Net.SubClients.Futures
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Whether the request was successful</returns>
-        public WebCallResult<BinanceFuturesPositionMode> ModifyPositionMode(bool dualPositionSide, long? receiveWindow = null, CancellationToken ct = default) => ModifyPositionModeAsync(dualPositionSide, receiveWindow, ct).Result;
+        public WebCallResult<BinanceResult> ModifyPositionMode(bool dualPositionSide, long? receiveWindow = null, CancellationToken ct = default) => ModifyPositionModeAsync(dualPositionSide, receiveWindow, ct).Result;
 
         /// <summary>
         /// Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
@@ -83,11 +83,11 @@ namespace Binance.Net.SubClients.Futures
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Whether the request was successful</returns>
-        public async Task<WebCallResult<BinanceFuturesPositionMode>> ModifyPositionModeAsync(bool dualPositionSide, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceResult>> ModifyPositionModeAsync(bool dualPositionSide, long? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
-                return new WebCallResult<BinanceFuturesPositionMode>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<BinanceResult>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -96,7 +96,7 @@ namespace Binance.Net.SubClients.Futures
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? BaseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await BaseClient.SendRequestInternal<BinanceFuturesPositionMode>(GetUrl(positionModeSideEndpoint, Api, signedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await BaseClient.SendRequestInternal<BinanceResult>(GetUrl(positionModeSideEndpoint, Api, signedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
