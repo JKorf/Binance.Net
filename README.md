@@ -145,6 +145,10 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.3.3 - 09 nov 2020
+    * Updated check for valid Binance symbol
+    * Fixed ModifyPositionMode result symbol
+
 * Version 6.3.2 - 23 okt 2020
     * Re-added locking when signing messages to prevent issues when multithreading
 
