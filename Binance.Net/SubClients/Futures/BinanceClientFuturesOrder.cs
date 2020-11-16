@@ -81,6 +81,7 @@ namespace Binance.Net.SubClients.Futures
         /// <param name="callbackRate">Used with TRAILING_STOP_MARKET orders</param>
         /// <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
         /// <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
+        /// <param name="orderResponseType">The response type. Default Acknowledge</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed order</returns>
@@ -99,8 +100,9 @@ namespace Binance.Net.SubClients.Futures
             decimal? callbackRate = null,
             WorkingType? workingType = null,
             bool? closePosition = null,
+            OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
-            CancellationToken ct = default) => PlaceOrderAsync(symbol, side, type, quantity, positionSide, timeInForce, reduceOnly, price, newClientOrderId, stopPrice, activationPrice, callbackRate, workingType, closePosition, receiveWindow, ct).Result;
+            CancellationToken ct = default) => PlaceOrderAsync(symbol, side, type, quantity, positionSide, timeInForce, reduceOnly, price, newClientOrderId, stopPrice, activationPrice, callbackRate, workingType, closePosition, orderResponseType, receiveWindow, ct).Result;
 
         /// <summary>
         /// Places a new order
@@ -119,6 +121,7 @@ namespace Binance.Net.SubClients.Futures
         /// <param name="callbackRate">Used with TRAILING_STOP_MARKET orders</param>
         /// <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
         /// <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
+        /// <param name="orderResponseType">The response type. Default Acknowledge</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed order</returns>
@@ -137,6 +140,7 @@ namespace Binance.Net.SubClients.Futures
             decimal? callbackRate = null,
             WorkingType? workingType = null,
             bool? closePosition = null,
+            OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -147,6 +151,9 @@ namespace Binance.Net.SubClients.Futures
                 if (positionSide == PositionSide.Long && side == OrderSide.Buy)
                     throw new ArgumentException("Can't close long position with order side buy");
             }
+
+            if(orderResponseType == OrderResponseType.Full)
+                throw new ArgumentException("OrderResponseType.Full is not supported in Futures");
 
 
             var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -181,6 +188,7 @@ namespace Binance.Net.SubClients.Futures
             parameters.AddOptionalParameter("workingType", workingType == null ? null : JsonConvert.SerializeObject(workingType, new WorkingTypeConverter(false)));
             parameters.AddOptionalParameter("reduceOnly", reduceOnly?.ToString().ToLower());
             parameters.AddOptionalParameter("closePosition", closePosition?.ToString().ToLower());
+            parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? BaseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await BaseClient.SendRequestInternal<BinanceFuturesPlacedOrder>(FuturesClient.GetUrl(newOrderEndpoint, Api, SignedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);

@@ -14,7 +14,7 @@
         /// </summary>
         Result,
         /// <summary>
-        /// Full order info
+        /// Full order info, only valid on SPOT orders  
         /// </summary>
         Full
     }
