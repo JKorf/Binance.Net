@@ -14,7 +14,8 @@ namespace Binance.Net.Converters
             new KeyValuePair<TimeInForce, string>(TimeInForce.GoodTillCancel, "GTC"),
             new KeyValuePair<TimeInForce, string>(TimeInForce.ImmediateOrCancel, "IOC"),
             new KeyValuePair<TimeInForce, string>(TimeInForce.FillOrKill, "FOK"),
-            new KeyValuePair<TimeInForce, string>(TimeInForce.GoodTillCrossing, "GTX")
+            new KeyValuePair<TimeInForce, string>(TimeInForce.GoodTillCrossing, "GTX"),
+            new KeyValuePair<TimeInForce, string>(TimeInForce.GoodTillExpiredOrCanceled, "GTE_GTC")
         };
     }
 }

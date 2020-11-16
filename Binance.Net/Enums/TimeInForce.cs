@@ -20,6 +20,10 @@
         /// <summary>
         /// GoodTillCrossing orders will post only
         /// </summary>
-        GoodTillCrossing
+        GoodTillCrossing,
+        /// <summary>
+        /// Good til the order expires or is canceled
+        /// </summary>
+        GoodTillExpiredOrCanceled
     }
 }
