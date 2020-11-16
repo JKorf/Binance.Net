@@ -149,6 +149,10 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.3.4 - 16 nov 2020
+    * Added missig TimeInForce mapping
+    * Added missing orderResponseType parameter to futures PlaceOrder
+
 * Version 6.3.3 - 09 nov 2020
     * Updated check for valid Binance symbol
     * Fixed ModifyPositionMode result symbol
