@@ -149,6 +149,13 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.3.5 - 19 nov 2020
+    * Added PendingTrade status to futures symbol status mapping
+    * Added BNB burn toggle endpoints
+    * Added Composite index endpoint to USDT futures
+    * Added Composite index stream to USDT futures
+    * Added archived parameter for margin loan/repay/interestHistory queries
+
 * Version 6.3.4 - 16 nov 2020
     * Added missig TimeInForce mapping
     * Added missing orderResponseType parameter to futures PlaceOrder
