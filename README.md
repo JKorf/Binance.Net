@@ -149,6 +149,9 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.3.6 - 19 nov 2020
+    * Fixed reference in package
+
 * Version 6.3.5 - 19 nov 2020
     * Added PendingTrade status to futures symbol status mapping
     * Added BNB burn toggle endpoints
