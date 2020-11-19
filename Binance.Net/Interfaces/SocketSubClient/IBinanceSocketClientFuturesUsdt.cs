@@ -63,5 +63,23 @@ namespace Binance.Net.Interfaces.SocketSubClient
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToAllMarkPriceUpdatesAsync(int? updateInterval, Action<IEnumerable<BinanceFuturesStreamMarkPrice>> onMessage);
+
+        /// <summary>
+        /// Subscribes to composite index updates stream for a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to subscribe</param>
+        /// <param name="onMessage">The event handler for the received data</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        CallResult<UpdateSubscription> SubscribeToCompositeIndexUpdates(string symbol,
+            Action<BinanceFuturesStreamCompositeIndex> onMessage);
+
+        /// <summary>
+        /// Subscribes to composite index updates stream for a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to subscribe</param>
+        /// <param name="onMessage">The event handler for the received data</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToCompositeIndexUpdatesAsync(string symbol,
+            Action<BinanceFuturesStreamCompositeIndex> onMessage);
     }
 }

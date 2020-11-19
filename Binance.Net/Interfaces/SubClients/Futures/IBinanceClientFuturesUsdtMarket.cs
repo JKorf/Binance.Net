@@ -149,5 +149,23 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="ct">Cancellation token</param>
         /// <returns>Taker Buy/Sell Volume Ratio info</returns>
         Task<WebCallResult<IEnumerable<BinanceFuturesBuySellVolumeRatio>>> GetTakerBuySellVolumeRatioAsync(string symbol, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets composite index info
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        WebCallResult<IEnumerable<BinanceFuturesCompositeIndexInfo>> GetCompositeIndexInfo(
+            string? symbol = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets composite index info
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BinanceFuturesCompositeIndexInfo>>> GetCompositeIndexInfoAsync(
+            string? symbol = null, CancellationToken ct = default);
     }
 }

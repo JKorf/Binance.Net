@@ -1,4 +1,5 @@
 ﻿using Binance.Net.Enums;
+using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Futures.FuturesData
 {
@@ -61,5 +62,11 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Maximum available notional with current leverage
         /// </summary>
         public decimal MaxNotional { get; set; }
+
+        /// <summary>
+        /// Position amount
+        /// </summary>
+        [JsonProperty("positionAmt")]
+        public decimal PositionAmount { get; set; }
     }
 }

@@ -32,6 +32,7 @@ namespace Binance.Net.SocketSubClients
         private const string allMiniTickerStreamEndpoint = "!miniTicker@arr";
         private const string symbolTickerStreamEndpoint = "@ticker";
         private const string allTickerStreamEndpoint = "!ticker@arr";
+        private const string compositeIndexEndpoint = "@compositeIndex";
         /// <summary>
         /// Base address
         /// </summary>
@@ -269,6 +270,29 @@ namespace Binance.Net.SocketSubClients
             var handler = new Action<BinanceCombinedStream<BinanceStreamTick>>(data => onMessage(data.Data));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + symbolTickerStreamEndpoint).ToArray();
             return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region All Market Tickers Streams
+
+        /// <summary>
+        /// Subscribes to composite index updates stream for a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to subscribe</param>
+        /// <param name="onMessage">The event handler for the received data</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        public CallResult<UpdateSubscription> SubscribeToCompositeIndexUpdates(string symbol, Action<BinanceFuturesStreamCompositeIndex> onMessage) => SubscribeToCompositeIndexUpdatesAsync(symbol, onMessage).Result;
+
+        /// <summary>
+        /// Subscribes to composite index updates stream for a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to subscribe</param>
+        /// <param name="onMessage">The event handler for the received data</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        public async Task<CallResult<UpdateSubscription>> SubscribeToCompositeIndexUpdatesAsync(string symbol, Action<BinanceFuturesStreamCompositeIndex> onMessage)
+        {
+            return await Subscribe(symbol + compositeIndexEndpoint, false, onMessage).ConfigureAwait(false);
         }
 
         #endregion

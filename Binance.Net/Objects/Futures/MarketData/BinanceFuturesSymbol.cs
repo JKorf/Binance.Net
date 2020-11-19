@@ -36,6 +36,10 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// </summary>
         public string BaseAsset { get; set; } = "";
         /// <summary>
+        /// Margin asset
+        /// </summary>
+        public string MarginAsset { get; set; } = "";
+        /// <summary>
         /// The quote asset
         /// </summary>
         public string QuoteAsset { get; set; } = "";

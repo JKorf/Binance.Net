@@ -3065,6 +3065,22 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientFuturesUsdt.SubscribeToCompositeIndexUpdates(System.String,System.Action{Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndex})">
+            <summary>
+            Subscribes to composite index updates stream for a symbol
+            </summary>
+            <param name="symbol">The symbol to subscribe</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientFuturesUsdt.SubscribeToCompositeIndexUpdatesAsync(System.String,System.Action{Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndex})">
+            <summary>
+            Subscribes to composite index updates stream for a symbol
+            </summary>
+            <param name="symbol">The symbol to subscribe</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
         <member name="T:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientSpot">
             <summary>
             Spot subscription interface
@@ -4346,6 +4362,22 @@
             <param name="endTime">End time to get taker buy/sell volume ratio</param>
             <param name="ct">Cancellation token</param>
             <returns>Taker Buy/Sell Volume Ratio info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtMarket.GetCompositeIndexInfo(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets composite index info
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtMarket.GetCompositeIndexInfoAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets composite index info
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
         </member>
         <member name="T:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtOrder">
             <summary>
@@ -9814,6 +9846,11 @@
             Maximum available notional with current leverage
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.PositionAmount">
+            <summary>
+            Position amount
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBasis">
             <summary>
             Basis info
@@ -10835,6 +10872,46 @@
             Timestamp
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCompositeIndexInfo">
+            <summary>
+            Index info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCompositeIndexInfo.Symbol">
+            <summary>
+            The symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCompositeIndexInfo.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCompositeIndexInfo.BaseAssets">
+            <summary>
+            Base asset list
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCompositeIndexInfoAsset">
+            <summary>
+            Composite index asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCompositeIndexInfoAsset.BaseAsset">
+            <summary>
+            Base asset name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCompositeIndexInfoAsset.WeightInQuantity">
+            <summary>
+            Weight in quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCompositeIndexInfoAsset.WeightInPercentage">
+            <summary>
+            Weight in percentage
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesExchangeInfo">
             <summary>
             Exchange info
@@ -11108,6 +11185,11 @@
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.BaseAsset">
             <summary>
             The base asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.MarginAsset">
+            <summary>
+            Margin asset
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.QuoteAsset">
@@ -11444,6 +11526,46 @@
             Casts this object to a <see cref="T:Binance.Net.Objects.Spot.MarketData.BinanceSpotKline"/> object
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndex">
+            <summary>
+            Composite index info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndex.Symbol">
+            <summary>
+            The symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndex.Price">
+            <summary>
+            The price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndex.Composition">
+            <summary>
+            Composition
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndexAsset">
+            <summary>
+            Composite index asset info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndexAsset.Asset">
+            <summary>
+            Asset name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndexAsset.WeightInQuantity">
+            <summary>
+            Weight in quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndexAsset.WeightInPercentage">
+            <summary>
+            Weight in percentage
+            </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.MarketStream.BinanceStreamIndexKlineData">
             <summary>
@@ -18584,6 +18706,22 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFuturesUsdt.SubscribeToCompositeIndexUpdates(System.String,System.Action{Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndex})">
+            <summary>
+            Subscribes to composite index updates stream for a symbol
+            </summary>
+            <param name="symbol">The symbol to subscribe</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFuturesUsdt.SubscribeToCompositeIndexUpdatesAsync(System.String,System.Action{Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndex})">
+            <summary>
+            Subscribes to composite index updates stream for a symbol
+            </summary>
+            <param name="symbol">The symbol to subscribe</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
         <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFuturesUsdt.SubscribeToAllSymbolTickerUpdates(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Interfaces.IBinanceTick}})">
             <summary>
             Subscribes to ticker updates stream for all symbols
@@ -22434,6 +22572,22 @@
             <param name="endTime">End time to get taker buy/sell volume ratio</param>
             <param name="ct">Cancellation token</param>
             <returns>Taker Buy/Sell Volume Ratio info</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket.GetCompositeIndexInfo(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets composite index info
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket.GetCompositeIndexInfoAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets composite index info
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
         </member>
         <member name="T:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtOrder">
             <summary>

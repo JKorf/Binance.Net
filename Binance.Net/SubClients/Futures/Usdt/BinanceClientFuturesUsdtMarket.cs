@@ -33,6 +33,7 @@ namespace Binance.Net.SubClients.Futures.Usdt
         private const string openInterestEndpoint = "openInterest";
         private const string openInterestHistoryEndpoint = "openInterestHist";
         private const string takerBuySellVolumeRatioEndpoint = "takerlongshortRatio";
+        private const string compositeIndexApi = "indexInfo";
         private const string klinesEndpoint = "klines";
         private const string publicVersion = "1";
         private const string tradingDataApi = "futures/data";
@@ -409,6 +410,33 @@ namespace Binance.Net.SubClients.Futures.Usdt
             parameters.AddOptionalParameter("endTime", endTime != null ? BinanceClient.ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
 
             return await BaseClient.SendRequestInternal<IEnumerable<BinanceFuturesBuySellVolumeRatio>>(FuturesClient.GetUrl(takerBuySellVolumeRatioEndpoint, tradingDataApi), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Composite index symbol information
+
+        /// <summary>
+        /// Gets composite index info
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        public WebCallResult<IEnumerable<BinanceFuturesCompositeIndexInfo>> GetCompositeIndexInfo(string? symbol = null, CancellationToken ct = default) => GetCompositeIndexInfoAsync(symbol, ct).Result;
+        
+        /// <summary>
+        /// Gets composite index info
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesCompositeIndexInfo>>> GetCompositeIndexInfoAsync(string? symbol = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            
+
+            parameters.AddOptionalParameter("symbol", symbol);
+            return await BaseClient.SendRequestInternal<IEnumerable<BinanceFuturesCompositeIndexInfo>>(FuturesClient.GetUrl(compositeIndexApi, Api, publicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         #endregion
