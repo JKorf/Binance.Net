@@ -6654,7 +6654,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of transfers</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetLoans(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetLoans(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get loan records
             </summary>
@@ -6664,12 +6664,13 @@
             <param name="endTime">Time to stop getting records to</param>
             <param name="current">Number of page records</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="limit">The records count size need show</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Loan records</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetLoansAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetLoansAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Query loan records
             </summary>
@@ -6678,13 +6679,14 @@
             <param name="startTime">Time to start getting records from</param>
             <param name="endTime">Time to stop getting records to</param>
             <param name="current">Number of page records</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="limit">The records count size need show</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Loan records</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetRepays(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetRepays(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Query repay records
             </summary>
@@ -6693,13 +6695,14 @@
             <param name="startTime">Time to start getting records from</param>
             <param name="endTime">Time to stop getting records to</param>
             <param name="current">Number of page records</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="size">The records count size need show</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Repay records</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetRepaysAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetRepaysAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Query repay records
             </summary>
@@ -6708,13 +6711,14 @@
             <param name="startTime">Time to start getting records from</param>
             <param name="endTime">Time to stop getting records to</param>
             <param name="current">Filter by number</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="size">The records count size need show</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Repay records</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetInterestHistory(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetInterestHistory(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get history of interest
             </summary>
@@ -6723,12 +6727,13 @@
             <param name="startTime">Filter by startTime from</param>
             <param name="endTime">Filter by endTime from</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="limit">Limit of the amount of results</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of interest events</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetInterestHistoryAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetInterestHistoryAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get history of interest
             </summary>
@@ -6737,6 +6742,7 @@
             <param name="startTime">Filter by startTime from</param>
             <param name="endTime">Filter by endTime from</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="limit">Limit of the amount of results</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -22606,7 +22612,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of transfers</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetLoans(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetLoans(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get loan records
             </summary>
@@ -22617,11 +22623,12 @@
             <param name="current">Number of page records</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="limit">The records count size need show</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Loan records</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetLoansAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetLoansAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Query loan records
             </summary>
@@ -22632,11 +22639,12 @@
             <param name="current">Number of page records</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="limit">The records count size need show</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Loan records</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetRepays(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetRepays(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Query repay records
             </summary>
@@ -22647,11 +22655,12 @@
             <param name="current">Number of page records</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="size">The records count size need show</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Repay records</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetRepaysAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetRepaysAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Query repay records
             </summary>
@@ -22662,11 +22671,12 @@
             <param name="current">Filter by number</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="size">The records count size need show</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Repay records</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetInterestHistory(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetInterestHistory(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get history of interest
             </summary>
@@ -22676,11 +22686,12 @@
             <param name="endTime">Filter by endTime from</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="limit">Limit of the amount of results</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of interest events</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetInterestHistoryAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetInterestHistoryAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get history of interest
             </summary>
@@ -22690,6 +22701,7 @@
             <param name="endTime">Filter by endTime from</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="limit">Limit of the amount of results</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of interest events</returns>
