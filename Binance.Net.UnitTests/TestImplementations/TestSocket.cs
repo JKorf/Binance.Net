@@ -14,7 +14,9 @@ namespace Binance.Net.UnitTests.TestImplementations
 
         public event Action OnClose;
         public event Action<string> OnMessage;
+#pragma warning disable 0067
         public event Action<Exception> OnError;
+#pragma warning restore 0067
         public event Action OnOpen;
 
         public int Id { get; }
@@ -83,10 +85,6 @@ namespace Binance.Net.UnitTests.TestImplementations
         public void InvokeMessage<T>(T data)
         {
             OnMessage?.Invoke(JsonConvert.SerializeObject(data));
-        }
-
-        public void SetEnabledSslProtocols(SslProtocols protocols)
-        {
         }
     }
 }

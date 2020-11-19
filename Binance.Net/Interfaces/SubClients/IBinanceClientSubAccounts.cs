@@ -416,7 +416,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transfer history</returns>
-        WebCallResult<BinanceSubAccountTransaction> GetSubAccountTransferHistoryForSubAccount(
+        WebCallResult<IEnumerable<BinanceSubAccountTransferSubAccount>> GetSubAccountTransferHistoryForSubAccount(
             string? asset = null, SubAccountTransferSubAccountType? type = null, DateTime? startTime = null,
             DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
 
@@ -431,7 +431,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transfer history</returns>
-        Task<WebCallResult<BinanceSubAccountTransaction>> GetSubAccountTransferHistoryForSubAccountAsync(string? asset = null, SubAccountTransferSubAccountType? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceSubAccountTransferSubAccount>>> GetSubAccountTransferHistoryForSubAccountAsync(string? asset = null, SubAccountTransferSubAccountType? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get BTC valued asset summary of subaccounts.

@@ -1409,6 +1409,11 @@
             Not trading yet
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.SymbolStatus.PendingTrading">
+            <summary>
+            Pending trading
+            </summary>
+        </member>
         <member name="F:Binance.Net.Enums.SymbolStatus.Trading">
             <summary>
             Trading
@@ -5011,6 +5016,42 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Dust transfer result</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.GetBnbBurnStatus(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets the status of the BNB burn switch for spot trading and margin interest
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.GetBnbBurnStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets the status of the BNB burn switch for spot trading and margin interest
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.SetBnbBurnStatus(System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Sets the status of the BNB burn switch for spot trading and margin interest
+            </summary>
+            <param name="spotTrading">If BNB burning should be enabled for spot trading</param>
+            <param name="marginInterest">If BNB burning should be enabled for margin interest</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.SetBnbBurnStatusAsync(System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Sets the status of the BNB burn switch for spot trading and margin interest
+            </summary>
+            <param name="spotTrading">If BNB burning should be enabled for spot trading</param>
+            <param name="marginInterest">If BNB burning should be enabled for margin interest</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
         </member>
         <member name="T:Binance.Net.Interfaces.SubClients.IBinanceClientLending">
             <summary>
@@ -9299,6 +9340,11 @@
         <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPoolLiquidity.Share">
             <summary>
             Share
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BSwap.BinancePoolShare">
+            <summary>
+            Pool share info
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BSwap.BinancePoolShare.ShareAmount">
@@ -15299,6 +15345,21 @@
             The total balance of this asset (Free + Locked)
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Spot.SpotData.BinanceBnbBurnStatus">
+            <summary>
+            Bnb burn status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceBnbBurnStatus.SpotBnbBurn">
+            <summary>
+            If spot trading BNB burn is enabled
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceBnbBurnStatus.InterestBnbBurn">
+            <summary>
+            If margin interest BNB burn is enabled
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.SpotData.BinanceCanceledOrder">
             <summary>
             Information about a canceled order
@@ -16632,6 +16693,11 @@
         <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountTransferSubAccount.Asset">
             <summary>
             Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountTransferSubAccount.TransactionId">
+            <summary>
+            Transaction id
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountTransferSubAccount.Quantity">
@@ -19507,6 +19573,42 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Dust transfer result</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientGeneral.GetBnbBurnStatus(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets the status of the BNB burn switch for spot trading and margin interest
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientGeneral.GetBnbBurnStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets the status of the BNB burn switch for spot trading and margin interest
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientGeneral.SetBnbBurnStatus(System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Sets the status of the BNB burn switch for spot trading and margin interest
+            </summary>
+            <param name="spotTrading">If BNB burning should be enabled for spot trading</param>
+            <param name="marginInterest">If BNB burning should be enabled for margin interest</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientGeneral.SetBnbBurnStatusAsync(System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Sets the status of the BNB burn switch for spot trading and margin interest
+            </summary>
+            <param name="spotTrading">If BNB burning should be enabled for spot trading</param>
+            <param name="marginInterest">If BNB burning should be enabled for margin interest</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
         </member>
         <member name="T:Binance.Net.SubClients.BinanceClientLending">
             <summary>

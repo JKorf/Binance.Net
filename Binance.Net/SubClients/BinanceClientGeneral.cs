@@ -39,6 +39,10 @@ namespace Binance.Net.SubClients
         private const string dustLogEndpoint = "userAssetDribbletLog.html";
         private const string dustTransferEndpoint = "asset/dust";
 
+        private const string toggleBnbBurnEndpoint = "bnbBurn";
+        private const string getBnbBurnEndpoint = "bnbBurn";
+
+
         private readonly BinanceClient _baseClient;
 
         internal BinanceClientGeneral(BinanceClient baseClient)
@@ -477,6 +481,77 @@ namespace Binance.Net.SubClients
             return await _baseClient.SendRequestInternal<BinanceDustTransferResult>(_baseClient.GetUrlSpot(dustTransferEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
+        #endregion
+
+        #region Get BNB Burn Status
+        /// <summary>
+        /// Gets the status of the BNB burn switch for spot trading and margin interest
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        public WebCallResult<BinanceBnbBurnStatus> GetBnbBurnStatus(int? receiveWindow = null, CancellationToken ct = default) => GetBnbBurnStatusAsync(receiveWindow, ct).Result;
+
+        /// <summary>
+        /// Gets the status of the BNB burn switch for spot trading and margin interest
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        public async Task<WebCallResult<BinanceBnbBurnStatus>> GetBnbBurnStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceBnbBurnStatus>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", _baseClient.GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceBnbBurnStatus>(_baseClient.GetUrlSpot(getBnbBurnEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+        #endregion
+
+        #region Set BNB Burn Status
+        /// <summary>
+        /// Sets the status of the BNB burn switch for spot trading and margin interest
+        /// </summary>
+        /// <param name="spotTrading">If BNB burning should be enabled for spot trading</param>
+        /// <param name="marginInterest">If BNB burning should be enabled for margin interest</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        public WebCallResult<BinanceBnbBurnStatus> SetBnbBurnStatus(bool? spotTrading = null, bool? marginInterest = null, int? receiveWindow = null, CancellationToken ct = default) => SetBnbBurnStatusAsync(spotTrading, marginInterest, receiveWindow, ct).Result;
+
+        /// <summary>
+        /// Sets the status of the BNB burn switch for spot trading and margin interest
+        /// </summary>
+        /// <param name="spotTrading">If BNB burning should be enabled for spot trading</param>
+        /// <param name="marginInterest">If BNB burning should be enabled for margin interest</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        public async Task<WebCallResult<BinanceBnbBurnStatus>> SetBnbBurnStatusAsync(bool? spotTrading = null, bool? marginInterest = null, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            if(spotTrading == null && marginInterest == null)
+                throw new ArgumentException("SpotTrading or MarginInterest should be provided");
+
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceBnbBurnStatus>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", _baseClient.GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("spotBNBBurn", spotTrading);
+            parameters.AddOptionalParameter("interestBNBBurn", marginInterest);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceBnbBurnStatus>(_baseClient.GetUrlSpot(toggleBnbBurnEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
         #endregion
     }
 }

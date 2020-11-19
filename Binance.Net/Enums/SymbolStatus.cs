@@ -10,6 +10,10 @@
         /// </summary>
         PreTrading,
         /// <summary>
+        /// Pending trading
+        /// </summary>
+        PendingTrading,
+        /// <summary>
         /// Trading
         /// </summary>
         Trading,

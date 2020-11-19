@@ -28,6 +28,12 @@ namespace Binance.Net.Objects.Spot.SubAccountData
         /// Asset
         /// </summary>
         public string Asset { get; set; } = "";
+
+        /// <summary>
+        /// Transaction id
+        /// </summary>
+        [JsonProperty("tranId")]
+        public string TransactionId { get; set; } = "";
         /// <summary>
         /// Quantity
         /// </summary>

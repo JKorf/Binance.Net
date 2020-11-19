@@ -32,9 +32,12 @@ namespace Binance.Net.Objects.BSwap
         /// <summary>
         /// Share
         /// </summary>
-        public BinancePoolShare Share { get; set; }
+        public BinancePoolShare Share { get; set; } = new BinancePoolShare();
     }
 
+    /// <summary>
+    /// Pool share info
+    /// </summary>
     public class BinancePoolShare
     {
         /// <summary>
