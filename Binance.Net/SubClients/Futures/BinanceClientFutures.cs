@@ -387,13 +387,7 @@ namespace Binance.Net.SubClients.Futures
             parameters.AddOptionalParameter(url.ToString().Contains("dapi") ? "pair": "symbol", symbolOrPair);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? BaseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            if (url.ToString().Contains("fapi") && !string.IsNullOrEmpty(symbolOrPair))
-            {
-                var result = await BaseClient.SendRequestInternal<BinanceFuturesSymbolBracket>(url, HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
-                return new WebCallResult<IEnumerable<BinanceFuturesSymbolBracket>>(result.ResponseStatusCode, result.ResponseHeaders, result.Success ? new [] {result.Data}: null, result.Error);
-            }
-            else
-                return await BaseClient.SendRequestInternal<IEnumerable<BinanceFuturesSymbolBracket>>(url, HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await BaseClient.SendRequestInternal<IEnumerable<BinanceFuturesSymbolBracket>>(url, HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
