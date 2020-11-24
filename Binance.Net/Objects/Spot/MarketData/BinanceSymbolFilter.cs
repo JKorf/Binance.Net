@@ -145,4 +145,15 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// </summary>
         public int Limit { get; set; }
     }
+
+    /// <summary>
+    /// Max position filter
+    /// </summary>
+    public class BinanceSymbolMaxPositionFilter : BinanceSymbolFilter
+    {
+        /// <summary>
+        /// The MaxPosition filter defines the allowed maximum position an account can have on the base asset of a symbol.
+        /// </summary>
+        public decimal MaxPosition { get; set; }
+    }
 }

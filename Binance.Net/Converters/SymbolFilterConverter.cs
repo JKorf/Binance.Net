@@ -80,6 +80,12 @@ namespace Binance.Net.Converters
                         AveragePriceMinutes = (int)obj["avgPriceMins"]
                     };
                     break;
+                case SymbolFilterType.MaxPosition:
+                    result = new BinanceSymbolMaxPositionFilter
+                    {
+                        MaxPosition = (decimal)obj["maxPosition"]
+                    };
+                    break;
                 default:
                     Debug.WriteLine("Can't parse symbol filter of type: " + obj["filterType"]);
                     result = new BinanceSymbolFilter();

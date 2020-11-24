@@ -41,5 +41,9 @@
         /// Max iceberg parts filter
         /// </summary>
         IcebergParts,
+        /// <summary>
+        /// Max position filter
+        /// </summary>
+        MaxPosition
     }
 }

@@ -1399,6 +1399,11 @@
             Max iceberg parts filter
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.SymbolFilterType.MaxPosition">
+            <summary>
+            Max position filter
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.SymbolStatus">
             <summary>
             Status of a symbol
@@ -14528,6 +14533,11 @@
             Filter for the maximum deviation of the price
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbol.MaxPositionFilter">
+            <summary>
+            Filter for the maximum position on a symbol
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.MarketData.BinanceSymbolFilter">
             <summary>
             A filter for order placed on a symbol.
@@ -14666,6 +14676,16 @@
         <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbolIcebergPartsFilter.Limit">
             <summary>
             The max parts of an iceberg order for this symbol.
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.MarketData.BinanceSymbolMaxPositionFilter">
+            <summary>
+            Max position filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceSymbolMaxPositionFilter.MaxPosition">
+            <summary>
+            The MaxPosition filter defines the allowed maximum position an account can have on the base asset of a symbol.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.MarketStream.BinanceStreamAggregatedTrade">
