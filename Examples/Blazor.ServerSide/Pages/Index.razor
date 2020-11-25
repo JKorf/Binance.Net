@@ -1,0 +1,48 @@
+﻿@page "/"
+@using Binance.Net.Interfaces
+@using Blazor.DataProvider
+@using CryptoExchange.Net.Sockets
+
+@inject BinanceDataProvider _dataProvider
+@implements IAsyncDisposable
+
+<div>
+    <h3>24h data</h3>
+    @foreach (var tick in _ticks)
+    {
+        <div>@tick.Symbol | @tick.PriceChangePercent</div>
+    }
+</div>
+
+@code
+{
+    private IEnumerable<IBinanceTick> _ticks = new List<IBinanceTick>();
+    private UpdateSubscription _subscription;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var callResult = await _dataProvider.Get24HPrices();
+        if (callResult)
+            _ticks = callResult.Data;
+
+        var subResult = await _dataProvider.SubscribeTickerUpdates(HandleTickUpdates);
+        if (subResult)
+            _subscription = subResult.Data;
+    }
+
+    private void HandleTickUpdates(IEnumerable<IBinanceTick> ticks)
+    {
+        foreach (var tick in ticks)
+        {
+            var symbol = _ticks.Single(t => t.Symbol == tick.Symbol);
+            symbol.PriceChangePercent = tick.PriceChangePercent;
+        }
+
+        InvokeAsync(StateHasChanged);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await _dataProvider.Unsubscribe(_subscription);
+    }
+}
