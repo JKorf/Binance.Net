@@ -245,7 +245,7 @@ namespace Binance.Net.SocketSubClients
         /// <param name="symbol">The symbol</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        public CallResult<UpdateSubscription> SubscribeToBookTickerUpdates(string symbol, Action<BinanceStreamFuturesBookPrice> onMessage) => SubscribeToBookTickerUpdatesAsync(symbol, onMessage).Result;
+        public CallResult<UpdateSubscription> SubscribeToBookTickerUpdates(string symbol, Action<BinanceFuturesStreamBookPrice> onMessage) => SubscribeToBookTickerUpdatesAsync(symbol, onMessage).Result;
 
         /// <summary>
         /// Subscribes to the book ticker update stream for the provided symbol
@@ -253,7 +253,7 @@ namespace Binance.Net.SocketSubClients
         /// <param name="symbol">The symbol</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        public async Task<CallResult<UpdateSubscription>> SubscribeToBookTickerUpdatesAsync(string symbol, Action<BinanceStreamFuturesBookPrice> onMessage) => await SubscribeToBookTickerUpdatesAsync(new[] { symbol }, onMessage).ConfigureAwait(false);
+        public async Task<CallResult<UpdateSubscription>> SubscribeToBookTickerUpdatesAsync(string symbol, Action<BinanceFuturesStreamBookPrice> onMessage) => await SubscribeToBookTickerUpdatesAsync(new[] { symbol }, onMessage).ConfigureAwait(false);
 
         /// <summary>
         /// Subscribes to the book ticker update stream for the provided symbols
@@ -261,7 +261,7 @@ namespace Binance.Net.SocketSubClients
         /// <param name="symbols">The symbols</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        public CallResult<UpdateSubscription> SubscribeToBookTickerUpdates(IEnumerable<string> symbols, Action<BinanceStreamFuturesBookPrice> onMessage) => SubscribeToBookTickerUpdatesAsync(symbols, onMessage).Result;
+        public CallResult<UpdateSubscription> SubscribeToBookTickerUpdates(IEnumerable<string> symbols, Action<BinanceFuturesStreamBookPrice> onMessage) => SubscribeToBookTickerUpdatesAsync(symbols, onMessage).Result;
 
         /// <summary>
         /// Subscribes to the book ticker update stream for the provided symbols
@@ -269,11 +269,11 @@ namespace Binance.Net.SocketSubClients
         /// <param name="symbols">The symbols</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        public async Task<CallResult<UpdateSubscription>> SubscribeToBookTickerUpdatesAsync(IEnumerable<string> symbols, Action<BinanceStreamFuturesBookPrice> onMessage)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToBookTickerUpdatesAsync(IEnumerable<string> symbols, Action<BinanceFuturesStreamBookPrice> onMessage)
         {
             symbols.ValidateNotNull(nameof(symbols));
 
-            var handler = new Action<BinanceCombinedStream<BinanceStreamFuturesBookPrice>>(data => onMessage(data.Data));
+            var handler = new Action<BinanceCombinedStream<BinanceFuturesStreamBookPrice>>(data => onMessage(data.Data));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + bookTickerStreamEndpoint).ToArray();
             return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
         }
