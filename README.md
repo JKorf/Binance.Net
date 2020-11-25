@@ -149,6 +149,9 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.4.0 - 25 nov 2020
+    * Fixed futures book ticker stream data parsing
+
 * Version 6.3.7 - 24 nov 2020
     * Fix parsing of single bracket in GetBrackets
     * Added MaxPosition filter in GetExchangeInfo
