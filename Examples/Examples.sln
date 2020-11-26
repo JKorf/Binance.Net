@@ -15,11 +15,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF application", "WPF appl
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Asp.Net", "Asp.Net", "{BAAD8EE7-CDF7-485B-87CC-FDCACDF60925}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blazor server", "Blazor server", "{83DB9D9B-E860-4435-B972-0085D3D75156}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blazor", "Blazor", "{83DB9D9B-E860-4435-B972-0085D3D75156}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.ServerSide", "Blazor.ServerSide\Blazor.ServerSide.csproj", "{A1185DE7-82B0-42D8-BE3E-E7A5B75204B4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.DataProvider", "Blazor.DataProvider\Blazor.DataProvider.csproj", "{AA44638F-6399-42C5-AFCD-FE66AB3D5C3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.ClientSide", "Blazor.ClientSide\Blazor.ClientSide.csproj", "{58E071ED-D45E-4389-A37B-0C08AE27EA26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{AA44638F-6399-42C5-AFCD-FE66AB3D5C3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA44638F-6399-42C5-AFCD-FE66AB3D5C3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA44638F-6399-42C5-AFCD-FE66AB3D5C3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58E071ED-D45E-4389-A37B-0C08AE27EA26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58E071ED-D45E-4389-A37B-0C08AE27EA26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58E071ED-D45E-4389-A37B-0C08AE27EA26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58E071ED-D45E-4389-A37B-0C08AE27EA26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +63,7 @@ Global
 		{D935C79F-48CE-47BD-9E37-17D4A1EFDF63} = {BAAD8EE7-CDF7-485B-87CC-FDCACDF60925}
 		{A1185DE7-82B0-42D8-BE3E-E7A5B75204B4} = {83DB9D9B-E860-4435-B972-0085D3D75156}
 		{AA44638F-6399-42C5-AFCD-FE66AB3D5C3F} = {83DB9D9B-E860-4435-B972-0085D3D75156}
+		{58E071ED-D45E-4389-A37B-0C08AE27EA26} = {83DB9D9B-E860-4435-B972-0085D3D75156}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0FC03929-769B-4314-AF91-AF01E06278DD}

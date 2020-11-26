@@ -27,5 +27,10 @@ namespace Blazor.DataProvider
         {
             return _socketClient.Spot.SubscribeToAllSymbolTickerUpdatesAsync(tickHandler);
         }
+
+        public async Task Unsubscribe(UpdateSubscription subscription)
+        {
+            await _socketClient.Unsubscribe(subscription);
+        }
     }
 }
