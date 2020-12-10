@@ -2,6 +2,7 @@
 using System;
 using Binance.Net.Interfaces;
 using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.ExchangeInterfaces;
 
 namespace Binance.Net.Objects.Spot.MarketData
 {
@@ -37,6 +38,10 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// Whether the trade was made at the best match
         /// </summary>
         public bool IsBestMatch { get; set; }
+
+        decimal ICommonRecentTrade.CommonPrice => Price;
+        decimal ICommonRecentTrade.CommonQuantity => BaseQuantity;
+        DateTime ICommonRecentTrade.CommonTradeTime => TradeTime;
     }
 
     /// <summary>

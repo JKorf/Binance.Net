@@ -27,13 +27,14 @@ using Binance.Net.SubClients.Futures.Coin;
 using Binance.Net.SubClients.Futures.Usdt;
 using Binance.Net.SubClients.Margin;
 using Binance.Net.SubClients.Spot;
+using CryptoExchange.Net.ExchangeInterfaces;
 
 namespace Binance.Net
 {
     /// <summary>
     /// Client providing access to the Binance REST Api
     /// </summary>
-    public class BinanceClient : RestClient, IBinanceClient
+    public class BinanceClient : RestClient, IBinanceClient, IExchangeClient
     {
         #region fields 
         private static BinanceClientOptions _defaultOptions = new BinanceClientOptions();
@@ -132,7 +133,7 @@ namespace Binance.Net
         /// Create a new instance of BinanceClient using provided options
         /// </summary>
         /// <param name="options">The options to use for this client</param>
-        public BinanceClient(BinanceClientOptions options) : base(options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials))
+        public BinanceClient(BinanceClientOptions options) : base("Binance", options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials))
         {
             AutoTimestamp = options.AutoTimestamp;
             TradeRulesBehaviour = options.TradeRulesBehaviour;
@@ -258,9 +259,9 @@ namespace Binance.Net
                 return new ServerError(error.ToString());
 
             if (error["msg"] != null && error["code"] == null)
-                return new ServerError((string)error["msg"]);
+                return new ServerError((string)error["msg"]!);
 
-            var err = new ServerError((int)error["code"], (string)error["msg"]);
+            var err = new ServerError((int)error["code"]!, (string)error["msg"]!);
             if (err.Code == -1021)
             {
                 if (AutoTimestamp)
@@ -440,5 +441,125 @@ namespace Binance.Net
         }
 
         #endregion
+        
+        async Task<WebCallResult<IEnumerable<ICommonSymbol>>> IExchangeClient.GetSymbolsAsync()
+        {
+            var exchangeInfo = await Spot.System.GetExchangeInfoAsync();
+            return new WebCallResult<IEnumerable<ICommonSymbol>>(exchangeInfo.ResponseStatusCode,
+                exchangeInfo.ResponseHeaders, exchangeInfo.Data?.Symbols, exchangeInfo.Error);
+        }
+        
+        async Task<WebCallResult<IEnumerable<ICommonTicker>>> IExchangeClient.GetTickersAsync()
+        {
+            var tickers = await Spot.Market.Get24HPricesAsync();
+            return new WebCallResult<IEnumerable<ICommonTicker>>(tickers.ResponseStatusCode, tickers.ResponseHeaders, tickers.Data?.Select(d => (Binance24HPrice)d), tickers.Error);
+        }
+
+        async Task<WebCallResult<IEnumerable<ICommonKline>>> IExchangeClient.GetKlinesAsync(string symbol, TimeSpan timespan)
+        {
+            var klines = await Spot.Market.GetKlinesAsync(symbol, GetKlineIntervalFromTimespan(timespan));
+            return WebCallResult<IEnumerable<ICommonKline>>.CreateFrom(klines);
+        }
+
+        async Task<WebCallResult<ICommonOrderBook>> IExchangeClient.GetOrderBookAsync(string symbol)
+        {
+            var orderBookResult = await Spot.Market.GetOrderBookAsync(symbol);
+            return WebCallResult<ICommonOrderBook>.CreateFrom(orderBookResult);
+        }
+
+        async Task<WebCallResult<IEnumerable<ICommonRecentTrade>>> IExchangeClient.GetRecentTradesAsync(string symbol)
+        {
+            var tradesResult = await Spot.Market.GetSymbolTradesAsync(symbol);
+            return WebCallResult<IEnumerable<ICommonRecentTrade>>.CreateFrom(tradesResult);
+        }
+
+        async Task<WebCallResult<ICommonOrderId>> IExchangeClient.PlaceOrderAsync(string symbol, IExchangeClient.OrderSide side, IExchangeClient.OrderType type, decimal quantity, decimal? price, string? accountId)
+        {
+            var result = await Spot.Order.PlaceOrderAsync(symbol, GetOrderSide(side), GetOrderType(type), quantity, price: price, timeInForce: TimeInForce.GoodTillCancel);
+            return WebCallResult<ICommonOrderId>.CreateFrom(result);
+        }
+
+        async Task<WebCallResult<ICommonOrder>> IExchangeClient.GetOrderAsync(string orderId, string? symbol)
+        {
+            var result = await Spot.Order.GetOrderAsync(orderId);
+            return WebCallResult<ICommonOrder>.CreateFrom(result);
+        }
+
+        async Task<WebCallResult<IEnumerable<ICommonTrade>>> IExchangeClient.GetTradesAsync(string orderId, string? symbol)
+        {
+            if(string.IsNullOrEmpty(symbol))
+                return WebCallResult<IEnumerable<ICommonTrade>>.CreateErrorResult(new ArgumentError(nameof(symbol) + " required for Binance " + nameof(IExchangeClient.GetTradesAsync)));
+               
+            var result = await Spot.Order.GetMyTradesAsync(symbol!);
+            if(!result)
+                return WebCallResult<IEnumerable<ICommonTrade>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
+
+            return new WebCallResult<IEnumerable<ICommonTrade>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Where(d => d.OrderId.ToString() == orderId), result.Error);
+        }
+
+        async Task<WebCallResult<IEnumerable<ICommonOrder>>> IExchangeClient.GetOpenOrdersAsync(string? symbol)
+        {
+            var result = await Spot.Order.GetOpenOrdersAsync();
+            return WebCallResult<IEnumerable<ICommonOrder>>.CreateFrom(result);
+        }
+
+        async Task<WebCallResult<IEnumerable<ICommonOrder>>> IExchangeClient.GetClosedOrdersAsync(string? symbol)
+        {
+            if (symbol == null)
+                return WebCallResult<IEnumerable<ICommonOrder>>.CreateErrorResult(new ArgumentError(nameof(symbol) + " required for Binance " + nameof(IExchangeClient.GetClosedOrdersAsync)));
+
+            var result = await Spot.Order.GetAllOrdersAsync(symbol);
+            return WebCallResult<IEnumerable<ICommonOrder>>.CreateFrom(result);
+        }
+
+        async Task<WebCallResult<ICommonOrderId>> IExchangeClient.CancelOrderAsync(string orderId, string? symbol)
+        {
+            if (symbol == null)
+                return WebCallResult<ICommonOrderId>.CreateErrorResult(new ArgumentError(nameof(symbol) + " required for Binance " + nameof(IExchangeClient.CancelOrderAsync)));
+
+            var result = await Spot.Order.CancelOrderAsync(symbol, orderId: long.Parse(orderId));
+            return WebCallResult<ICommonOrderId>.CreateFrom(result);
+        }
+
+        /// <inheritdoc />
+        public string GetSymbolName(string baseAsset, string quoteAsset) =>
+            (baseAsset + quoteAsset).ToUpper(CultureInfo.InvariantCulture);
+
+        private static KlineInterval GetKlineIntervalFromTimespan(TimeSpan timeSpan)
+        {
+            if (timeSpan == TimeSpan.FromMinutes(1)) return KlineInterval.OneMinute;
+            if (timeSpan == TimeSpan.FromMinutes(3)) return KlineInterval.ThreeMinutes;
+            if (timeSpan == TimeSpan.FromMinutes(5)) return KlineInterval.FiveMinutes;
+            if (timeSpan == TimeSpan.FromMinutes(15)) return KlineInterval.FifteenMinutes;
+            if (timeSpan == TimeSpan.FromMinutes(30)) return KlineInterval.ThirtyMinutes;
+            if (timeSpan == TimeSpan.FromHours(1)) return KlineInterval.OneHour;
+            if (timeSpan == TimeSpan.FromHours(2)) return KlineInterval.TwoHour;
+            if (timeSpan == TimeSpan.FromHours(4)) return KlineInterval.FourHour;
+            if (timeSpan == TimeSpan.FromHours(6)) return KlineInterval.SixHour;
+            if (timeSpan == TimeSpan.FromHours(8)) return KlineInterval.EightHour;
+            if (timeSpan == TimeSpan.FromHours(12)) return KlineInterval.TwelveHour;
+            if (timeSpan == TimeSpan.FromDays(1)) return KlineInterval.OneDay;
+            if (timeSpan == TimeSpan.FromDays(3)) return KlineInterval.ThreeDay;
+            if (timeSpan == TimeSpan.FromDays(7)) return KlineInterval.OneWeek;
+            if (timeSpan == TimeSpan.FromDays(30) || timeSpan == TimeSpan.FromDays(31)) return KlineInterval.OneMonth;
+
+            throw new ArgumentException("Unsupported timespan for Binance Klines, check supported intervals using Binance.Net.Enums.KlineInterval");
+        }
+
+        private static OrderSide GetOrderSide(IExchangeClient.OrderSide side)
+        {
+            if (side == IExchangeClient.OrderSide.Sell) return OrderSide.Sell;
+            if (side == IExchangeClient.OrderSide.Buy) return OrderSide.Buy;
+
+            throw new ArgumentException("Unsupported order side for Binance order: " + side);
+        }
+
+        private static OrderType GetOrderType(IExchangeClient.OrderType type)
+        {
+            if (type == IExchangeClient.OrderType.Limit) return OrderType.Limit;
+            if (type == IExchangeClient.OrderType.Market) return OrderType.Market;
+
+            throw new ArgumentException("Unsupported order type for Binance order: " + type);
+        }
     }
 }

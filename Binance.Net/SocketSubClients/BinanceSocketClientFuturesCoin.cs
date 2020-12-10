@@ -477,6 +477,9 @@ namespace Binance.Net.SocketSubClients
         private void HandlePossibleSingleData<T>(JToken data, Action<IEnumerable<T>> onMessage)
         {
             var internalData = data["data"];
+            if (internalData == null)
+                return;
+
             if (internalData.Type == JTokenType.Array)
             {
                 var deserialized = BaseClient

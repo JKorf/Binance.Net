@@ -2,17 +2,20 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using CryptoExchange.Net.Attributes;
 using CryptoExchange.Net.Converters;
 using Binance.Net.Enums;
+using CryptoExchange.Net.ExchangeInterfaces;
 
 namespace Binance.Net.Objects.Spot.SpotData
 {
     /// <summary>
     /// The result of placing a new order
     /// </summary>
-    public class BinancePlacedOrder
+    public class BinancePlacedOrder: ICommonOrderId
     {
+
         /// <summary>
         /// The symbol the order is for
         /// </summary>
@@ -113,5 +116,7 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// </summary>
         [JsonOptionalProperty]
         public string? MarginBuyBorrowAsset { get; set; }
+
+        string ICommonOrderId.CommonId => OrderId.ToString();
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Binance.Net.Interfaces;
 using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.ExchangeInterfaces;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Shared
@@ -63,5 +64,10 @@ namespace Binance.Net.Objects.Shared
         /// Taker buy quote asset volume
         /// </summary>
         public abstract decimal TakerBuyQuoteVolume { get; set; }
+
+        decimal ICommonKline.CommonHigh => High;
+        decimal ICommonKline.CommonLow => Low;
+        decimal ICommonKline.CommonOpen => Open;
+        decimal ICommonKline.CommonClose => Close;
     }
 }

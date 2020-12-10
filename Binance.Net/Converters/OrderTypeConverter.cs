@@ -40,17 +40,17 @@ namespace Binance.Net.Converters
             return objectType == typeof(OrderType);
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
-            return values.Single(v => v.Value == (string)reader.Value).Key;
+            return values.Single(v => v.Value == (string?)reader.Value).Key;
         }
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
             if (quotes)
-                writer.WriteValue(values[(OrderType)value]);
+                writer.WriteValue(values[(OrderType)value!]);
             else
-                writer.WriteRawValue(values[(OrderType)value]);
+                writer.WriteRawValue(values[(OrderType)value!]);
         }
     }
 }

@@ -55,7 +55,7 @@ namespace Binance.Net
         /// Create a new instance of BinanceSocketClient using provided options
         /// </summary>
         /// <param name="options">The options to use for this client</param>
-        public BinanceSocketClient(BinanceSocketClientOptions options) : base(options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials))
+        public BinanceSocketClient(BinanceSocketClientOptions options) : base("Binance", options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials))
         {
             Spot = new BinanceSocketClientSpot(log, this, options);
             FuturesCoin = new BinanceSocketClientFuturesCoin(log, this, options);

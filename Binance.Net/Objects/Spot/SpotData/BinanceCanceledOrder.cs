@@ -1,5 +1,7 @@
-﻿using Binance.Net.Converters;
+﻿using System.Globalization;
+using Binance.Net.Converters;
 using Binance.Net.Enums;
+using CryptoExchange.Net.ExchangeInterfaces;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Spot.SpotData
@@ -7,7 +9,7 @@ namespace Binance.Net.Objects.Spot.SpotData
     /// <summary>
     /// Information about a canceled order
     /// </summary>
-    public class BinanceCanceledOrder
+    public class BinanceCanceledOrder: ICommonOrderId
     {
         /// <summary>
         /// The symbol the order was for
@@ -74,5 +76,7 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// </summary>
         [JsonConverter(typeof(OrderSideConverter))]
         public OrderSide Side { get; set; }
+
+        string ICommonOrderId.CommonId => OrderId.ToString(CultureInfo.InvariantCulture);
     }
 }

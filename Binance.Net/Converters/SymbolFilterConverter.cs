@@ -14,8 +14,9 @@ namespace Binance.Net.Converters
             return false;
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
+#pragma warning disable 8604, 8602
             var obj = JObject.Load(reader);
             var type = new SymbolFilterTypeConverter(false).ReadString(obj["filterType"].ToString());
             BinanceSymbolFilter result;
@@ -91,13 +92,14 @@ namespace Binance.Net.Converters
                     result = new BinanceSymbolFilter();
                     break;
             }
+#pragma warning restore 8604
             result.FilterType = type;
             return result;
         }
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
-            var filter = (BinanceSymbolFilter)value;
+            var filter = (BinanceSymbolFilter)value!;
             writer.WriteStartObject();
 
             writer.WritePropertyName("filterType");

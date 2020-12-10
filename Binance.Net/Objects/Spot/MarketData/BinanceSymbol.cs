@@ -3,13 +3,14 @@ using Binance.Net.Enums;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
+using CryptoExchange.Net.ExchangeInterfaces;
 
 namespace Binance.Net.Objects.Spot.MarketData
 {
     /// <summary>
     /// Symbol info
     /// </summary>
-    public class BinanceSymbol
+    public class BinanceSymbol: ICommonSymbol
     {
         /// <summary>
         /// The symbol
@@ -38,6 +39,7 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// </summary>
         [JsonProperty("quotePrecision")]
         public int QuoteAssetPrecision { get; set; }
+
         /// <summary>
         /// Allowed order types
         /// </summary>
@@ -127,5 +129,8 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// </summary>
         [JsonIgnore]
         public BinanceSymbolMaxPositionFilter MaxPositionFilter => Filters.OfType<BinanceSymbolMaxPositionFilter>().FirstOrDefault();
+
+        string ICommonSymbol.CommonName => Name;
+        decimal ICommonSymbol.CommonMinimumTradeSize => LotSizeFilter.MinQuantity;
     }
 }

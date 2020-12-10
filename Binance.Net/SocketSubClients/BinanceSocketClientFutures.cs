@@ -511,7 +511,10 @@ namespace Binance.Net.SocketSubClients
             var handler = new Action<string>(data =>
             {
                 var token = JToken.Parse(data);
-                var evnt = (string)token["e"];
+                var evnt = (string?)token["e"];
+                if (evnt == null)
+                    return;
+
                 switch (evnt)
                 {
                     case marginUpdateEvent:

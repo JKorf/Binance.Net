@@ -1,17 +1,18 @@
 ﻿using System;
+using CryptoExchange.Net.ExchangeInterfaces;
 
 namespace Binance.Net.Interfaces
 {
     /// <summary>
     /// Kline data
     /// </summary>
-    public interface IBinanceKline
+    public interface IBinanceKline: ICommonKline
     {
         /// <summary>
         /// The time this candlestick opened
         /// </summary>
         DateTime OpenTime { get; set; }
-
+        
         /// <summary>
         /// The price at which this candlestick opened
         /// </summary>

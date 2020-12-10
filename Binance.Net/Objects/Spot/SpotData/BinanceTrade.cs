@@ -1,13 +1,15 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Globalization;
 using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.ExchangeInterfaces;
 
 namespace Binance.Net.Objects.Spot.SpotData
 {
     /// <summary>
     /// Information about a trade
     /// </summary>
-    public class BinanceTrade
+    public class BinanceTrade: ICommonTrade
     {
         /// <summary>
         /// The symbol the trade is for
@@ -66,5 +68,11 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// Whether trade was made with the best match
         /// </summary>
         public bool IsBestMatch { get; set; }
+
+        string ICommonTrade.CommonId => Id.ToString(CultureInfo.InvariantCulture);
+        decimal ICommonTrade.CommonPrice => Price;
+        decimal ICommonTrade.CommonQuantity => Quantity;
+        decimal ICommonTrade.CommonFee => Commission;
+        string ICommonTrade.CommonFeeAsset => CommissionAsset;
     }
 }
