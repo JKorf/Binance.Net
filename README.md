@@ -149,6 +149,12 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.4.1 - 11 dec 2020
+    * Updated CryptoExchange.Net
+    * Added IExchangeClient implementation
+    * Added missing properties Coin-M Symbol model
+    * Added stopPrice checking in AutoComply trade rules behaviour
+
 * Version 6.4.0 - 25 nov 2020
     * Fixed futures book ticker stream data parsing
 
