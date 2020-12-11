@@ -96,6 +96,9 @@
         <member name="M:Binance.Net.BinanceClient.ParseErrorResponse(Newtonsoft.Json.Linq.JToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.BinanceClient.GetSymbolName(System.String,System.String)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.BinanceHelpers">
             <summary>
             Helper methods for the Binance API
@@ -3199,6 +3202,11 @@
             Futures order endpoints
             </summary>
         </member>
+        <member name="P:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesCoin.System">
+            <summary>
+            Futures system endpoints
+            </summary>
+        </member>
         <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesCoin.GetPositionInformation(System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets account position information
@@ -3239,6 +3247,11 @@
             Futures order endpoints
             </summary>
         </member>
+        <member name="P:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdt.System">
+            <summary>
+            Futures system endpoints
+            </summary>
+        </member>
         <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdt.GetPositionInformation(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets account information
@@ -3260,11 +3273,6 @@
         <member name="T:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFutures">
             <summary>
             Futures interface
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFutures.System">
-            <summary>
-            Futures system endpoints
             </summary>
         </member>
         <member name="P:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFutures.UserStream">
@@ -3779,6 +3787,25 @@
             <param name="ct">Cancellation token</param>
             <returns>List of trades</returns>
         </member>
+        <member name="T:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesCoinSystem">
+            <summary>
+            Futures system interface
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesCoinSystem.GetExchangeInfo(System.Threading.CancellationToken)">
+            <summary>
+            Get's information about the exchange including rate limits and symbol list
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>Exchange info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesCoinSystem.GetExchangeInfoAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get's information about the exchange including rate limits and symbol list
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>Exchange info</returns>
+        </member>
         <member name="T:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesMarket">
             <summary>
             Futures market interface
@@ -4178,20 +4205,6 @@
             <param name="ct">Cancellation token</param>
             <returns>Server time</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesSystem.GetExchangeInfo(System.Threading.CancellationToken)">
-            <summary>
-            Get's information about the exchange including rate limits and symbol list
-            </summary>
-            <param name="ct">Cancellation token</param>
-            <returns>Exchange info</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesSystem.GetExchangeInfoAsync(System.Threading.CancellationToken)">
-            <summary>
-            Get's information about the exchange including rate limits and symbol list
-            </summary>
-            <param name="ct">Cancellation token</param>
-            <returns>Exchange info</returns>
-        </member>
         <member name="T:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtAccount">
             <summary>
             USDT-M futures account endpoints
@@ -4414,6 +4427,25 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of trades</returns>
+        </member>
+        <member name="T:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtSystem">
+            <summary>
+            Futures system interface
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtSystem.GetExchangeInfo(System.Threading.CancellationToken)">
+            <summary>
+            Get's information about the exchange including rate limits and symbol list
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>Exchange info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtSystem.GetExchangeInfoAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get's information about the exchange including rate limits and symbol list
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>Exchange info</returns>
         </member>
         <member name="T:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage">
             <summary>
@@ -10937,14 +10969,29 @@
             The rate limits used
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesExchangeInfo.Symbols">
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesExchangeInfo.ExchangeFilters">
+            <summary>
+            Filters
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesUsdtExchangeInfo">
+            <summary>
+            Exchange info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesUsdtExchangeInfo.Symbols">
             <summary>
             All symbols supported
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesExchangeInfo.ExchangeFilters">
+        <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCoinExchangeInfo">
             <summary>
-            Filters
+            Exchange info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCoinExchangeInfo.Symbols">
+            <summary>
+            All symbols supported
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesFundingRateHistory">
@@ -11159,12 +11206,17 @@
         </member>
         <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol">
             <summary>
-            Information about an account
+            Information about a futures symbol
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.Filters">
             <summary>
             Filters for order on this symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.ContractType">
+            <summary>
+            Contract type
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.MaintMarginPercent">
@@ -11212,11 +11264,6 @@
             The precision of the quote asset
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.Status">
-            <summary>
-            The status of the symbol
-            </summary>
-        </member>
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.OrderTypes">
             <summary>
             Allowed order types
@@ -11260,6 +11307,41 @@
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.PricePercentFilter">
             <summary>
             Filter for the maximum deviation of the price
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesUsdtSymbol">
+            <summary>
+            Information about a futures symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesUsdtSymbol.Status">
+            <summary>
+            The status of the symbol
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCoinSymbol">
+            <summary>
+            Information about a futures symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCoinSymbol.Status">
+            <summary>
+            The status of the symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCoinSymbol.ContractSize">
+            <summary>
+            Contract size
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCoinSymbol.EqualQuantityPrecision">
+            <summary>
+            Equal quantity precision
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCoinSymbol.TriggerProtect">
+            <summary>
+            Trigger protect
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbolBracket">
@@ -20955,9 +21037,9 @@
             Base client
             </summary>
         </member>
-        <member name="P:Binance.Net.SubClients.Futures.BinanceClientFutures.System">
+        <member name="F:Binance.Net.SubClients.Futures.BinanceClientFutures._log">
             <summary>
-            Futures system endpoints
+            
             </summary>
         </member>
         <member name="P:Binance.Net.SubClients.Futures.BinanceClientFutures.UserStream">
@@ -21721,6 +21803,21 @@
             Api path
             </summary>
         </member>
+        <member name="F:Binance.Net.SubClients.Futures.BinanceClientFuturesSystem.publicVersion">
+            <summary>
+            version
+            </summary>
+        </member>
+        <member name="F:Binance.Net.SubClients.Futures.BinanceClientFuturesSystem._baseClient">
+            <summary>
+            Client
+            </summary>
+        </member>
+        <member name="F:Binance.Net.SubClients.Futures.BinanceClientFuturesSystem._log">
+            <summary>
+            Log
+            </summary>
+        </member>
         <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesSystem.Ping(System.Threading.CancellationToken)">
             <summary>
             Pings the Binance Futures API
@@ -21748,20 +21845,6 @@
             <param name="resetAutoTimestamp">Whether the response should be used for a new auto timestamp calculation</param>
             <param name="ct">Cancellation token</param>
             <returns>Server time</returns>
-        </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesSystem.GetExchangeInfo(System.Threading.CancellationToken)">
-            <summary>
-            Get's information about the exchange including rate limits and symbol list
-            </summary>
-            <param name="ct">Cancellation token</param>
-            <returns>Exchange info</returns>
-        </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesSystem.GetExchangeInfoAsync(System.Threading.CancellationToken)">
-            <summary>
-            Get's information about the exchange including rate limits and symbol list
-            </summary>
-            <param name="ct">Cancellation token</param>
-            <returns>Exchange info</returns>
         </member>
         <member name="T:Binance.Net.SubClients.Futures.BinanceClientFuturesUserStream">
             <summary>
@@ -22282,6 +22365,20 @@
             Api path
             </summary>
         </member>
+        <member name="M:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinSystem.GetExchangeInfo(System.Threading.CancellationToken)">
+            <summary>
+            Get's information about the exchange including rate limits and symbol list
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>Exchange info</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinSystem.GetExchangeInfoAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get's information about the exchange including rate limits and symbol list
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>Exchange info</returns>
+        </member>
         <member name="T:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinUserStream">
             <summary>
             COIN-M futures account endpoints
@@ -22654,6 +22751,20 @@
             <summary>
             Api path
             </summary>
+        </member>
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtSystem.GetExchangeInfo(System.Threading.CancellationToken)">
+            <summary>
+            Get's information about the exchange including rate limits and symbol list
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>Exchange info</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtSystem.GetExchangeInfoAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get's information about the exchange including rate limits and symbol list
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>Exchange info</returns>
         </member>
         <member name="T:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtUserStream">
             <summary>

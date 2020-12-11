@@ -24,12 +24,30 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// </summary>
         public IEnumerable<BinanceRateLimit> RateLimits { get; set; } = new List<BinanceRateLimit>();
         /// <summary>
-        /// All symbols supported
-        /// </summary>
-        public IEnumerable<BinanceFuturesSymbol> Symbols { get; set; } = new List<BinanceFuturesSymbol>();
-        /// <summary>
         /// Filters
         /// </summary>
         public IEnumerable<object> ExchangeFilters { get; set; } = new List<object>();
+    }
+
+    /// <summary>
+    /// Exchange info
+    /// </summary>
+    public class BinanceFuturesUsdtExchangeInfo: BinanceFuturesExchangeInfo
+    {
+        /// <summary>
+        /// All symbols supported
+        /// </summary>
+        public IEnumerable<BinanceFuturesUsdtSymbol> Symbols { get; set; } = new List<BinanceFuturesUsdtSymbol>();
+    }
+
+    /// <summary>
+    /// Exchange info
+    /// </summary>
+    public class BinanceFuturesCoinExchangeInfo : BinanceFuturesExchangeInfo
+    {
+        /// <summary>
+        /// All symbols supported
+        /// </summary>
+        public IEnumerable<BinanceFuturesCoinSymbol> Symbols { get; set; } = new List<BinanceFuturesCoinSymbol>();
     }
 }

@@ -18,17 +18,25 @@ namespace Binance.Net.SubClients.Futures
     {
         private const string pingEndpoint = "ping";
         private const string checkTimeEndpoint = "time";
-        private const string exchangeInfoEndpoint = "exchangeInfo";
 
         /// <summary>
         /// Api path
         /// </summary>
         protected abstract string Api { get; }
-        private const string publicVersion = "1";
-
-        private readonly BinanceClient _baseClient;
+        /// <summary>
+        /// version
+        /// </summary>
+        protected const string publicVersion = "1";
+        
+        /// <summary>
+        /// Client
+        /// </summary>
+        protected readonly BinanceClient _baseClient;
         private readonly BinanceClientFutures _futuresClient;
-        private readonly Log _log;
+        /// <summary>
+        /// Log
+        /// </summary>
+        protected readonly Log _log;
 
         internal BinanceClientFuturesSystem(Log log, BinanceClient baseClient, BinanceClientFutures futuresClient)
         {
@@ -81,34 +89,6 @@ namespace Binance.Net.SubClients.Futures
             var url = _futuresClient.GetUrl(checkTimeEndpoint, Api, publicVersion);
             var result = await _baseClient.SendRequestInternal<BinanceCheckTime>(url, HttpMethod.Get, ct).ConfigureAwait(false);
             return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, result.Data?.ServerTime ?? default, result.Error);
-        }
-
-        #endregion
-
-        #region Exchange Information
-
-        /// <summary>
-        /// Get's information about the exchange including rate limits and symbol list
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Exchange info</returns>
-        public WebCallResult<BinanceFuturesExchangeInfo> GetExchangeInfo(CancellationToken ct = default) => GetExchangeInfoAsync(ct).Result;
-
-        /// <summary>
-        /// Get's information about the exchange including rate limits and symbol list
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Exchange info</returns>
-        public async Task<WebCallResult<BinanceFuturesExchangeInfo>> GetExchangeInfoAsync(CancellationToken ct = default)
-        {
-            var exchangeInfoResult = await _baseClient.SendRequestInternal<BinanceFuturesExchangeInfo>(_futuresClient.GetUrl(exchangeInfoEndpoint, Api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
-            if (!exchangeInfoResult)
-                return exchangeInfoResult;
-
-            _futuresClient.ExchangeInfo = exchangeInfoResult.Data;
-            _futuresClient.LastExchangeInfoUpdate = DateTime.UtcNow;
-            _log.Write(LogVerbosity.Info, "Trade rules updated");
-            return exchangeInfoResult;
         }
 
         #endregion

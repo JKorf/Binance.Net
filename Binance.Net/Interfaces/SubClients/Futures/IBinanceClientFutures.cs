@@ -33,6 +33,11 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         IBinanceClientFuturesCoinAccount Account { get; }
 
         /// <summary>
+        /// Futures system endpoints
+        /// </summary>
+        IBinanceClientFuturesCoinSystem System { get; }
+
+        /// <summary>
         /// Gets account position information
         /// </summary>
         /// <param name="marginAsset">Filter by margin asset</param>
@@ -75,6 +80,11 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// Futures order endpoints
         /// </summary>
         IBinanceClientFuturesUsdtAccount Account { get; }
+        
+        /// <summary>
+        /// Futures system endpoints
+        /// </summary>
+        IBinanceClientFuturesUsdtSystem System { get; }
 
         /// <summary>
         /// Gets account information
@@ -102,11 +112,6 @@ namespace Binance.Net.Interfaces.SubClients.Futures
     /// </summary>
     public interface IBinanceClientFutures
     {
-        /// <summary>
-        /// Futures system endpoints
-        /// </summary>
-        IBinanceClientFuturesSystem System { get; }
-        
         /// <summary>
         /// Futures user stream endpoints
         /// </summary>

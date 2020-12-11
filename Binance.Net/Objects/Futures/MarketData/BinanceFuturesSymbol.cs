@@ -7,7 +7,7 @@ using Binance.Net.Enums;
 namespace Binance.Net.Objects.Futures.MarketData
 {
     /// <summary>
-    /// Information about an account
+    /// Information about a futures symbol
     /// </summary>
     public class BinanceFuturesSymbol
     {
@@ -15,6 +15,11 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// Filters for order on this symbol
         /// </summary>
         public IEnumerable<BinanceFuturesSymbolFilter> Filters { get; set; } = new List<BinanceFuturesSymbolFilter>();
+        /// <summary>
+        /// Contract type
+        /// </summary>
+        [JsonConverter(typeof(ContractTypeConverter))]
+        public ContractType ContractType { get; set; }
         /// <summary>
         /// The maintenance margin percent
         /// </summary>
@@ -52,11 +57,6 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// </summary>
         [JsonProperty("quotePrecision")]
         public int QuoteAssetPrecision { get; set; }
-        /// <summary>
-        /// The status of the symbol
-        /// </summary>
-        [JsonConverter(typeof(SymbolStatusConverter))]
-        public SymbolStatus Status { get; set; }
         /// <summary>
         /// Allowed order types
         /// </summary>
@@ -108,4 +108,45 @@ namespace Binance.Net.Objects.Futures.MarketData
         public BinanceSymbolPercentPriceFilter PricePercentFilter => Filters.OfType<BinanceSymbolPercentPriceFilter>().FirstOrDefault();
     }
 
+    /// <summary>
+    /// Information about a futures symbol
+    /// </summary>
+    public class BinanceFuturesUsdtSymbol: BinanceFuturesSymbol
+    {
+        /// <summary>
+        /// The status of the symbol
+        /// </summary>
+        [JsonConverter(typeof(SymbolStatusConverter))]
+        public SymbolStatus Status { get; set; }
+    }
+
+    /// <summary>
+    /// Information about a futures symbol
+    /// </summary>
+    public class BinanceFuturesCoinSymbol: BinanceFuturesSymbol
+    {
+
+        /// <summary>
+        /// The status of the symbol
+        /// </summary>
+        [JsonConverter(typeof(SymbolStatusConverter))]
+        [JsonProperty("contractStatus")]
+        public SymbolStatus Status { get; set; }
+
+        /// <summary>
+        /// Contract size
+        /// </summary>
+        public int ContractSize { get; set; }
+
+        /// <summary>
+        /// Equal quantity precision
+        /// </summary>
+        [JsonProperty("equalQtyPrecision")]
+        public int EqualQuantityPrecision { get; set; }
+
+        /// <summary>
+        /// Trigger protect
+        /// </summary>
+        public decimal TriggerProtect { get; set; }
+    }
 }

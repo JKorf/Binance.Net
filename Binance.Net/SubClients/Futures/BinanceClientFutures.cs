@@ -45,15 +45,13 @@ namespace Binance.Net.SubClients.Futures
         /// </summary>
         protected readonly BinanceClient BaseClient;
         
-        internal BinanceFuturesExchangeInfo? ExchangeInfo;
         internal DateTime? LastExchangeInfoUpdate;
 
-        private readonly Log _log;
-        
         /// <summary>
-        /// Futures system endpoints
+        /// 
         /// </summary>
-        public abstract IBinanceClientFuturesSystem System { get; protected set; }
+        protected readonly Log _log;
+        
         /// <summary>
         /// Futures user stream endpoints
         /// </summary>
@@ -428,90 +426,8 @@ namespace Binance.Net.SubClients.Futures
 
         #endregion
 
-        internal async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? price, OrderType type, CancellationToken ct)
-        {
-            var outputQuantity = quantity;
-            var outputPrice = price;
-
-            if (BaseClient.TradeRulesBehaviour == TradeRulesBehaviour.None)
-                return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice);
-
-            if (ExchangeInfo == null || LastExchangeInfoUpdate == null || (DateTime.UtcNow - LastExchangeInfoUpdate.Value).TotalMinutes > BaseClient.TradeRulesUpdateInterval.TotalMinutes)
-                await System.GetExchangeInfoAsync(ct).ConfigureAwait(false);
-
-            if (ExchangeInfo == null)
-                return BinanceTradeRuleResult.CreateFailed("Unable to retrieve trading rules, validation failed");
-
-            var symbolData = ExchangeInfo.Symbols.SingleOrDefault(s => string.Equals(s.Name, symbol, StringComparison.CurrentCultureIgnoreCase));
-            if (symbolData == null)
-                return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Symbol {symbol} not found");
-
-            if (!symbolData.OrderTypes.Contains(type))
-                return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: {type} order type not allowed for {symbol}");
-
-            if (symbolData.LotSizeFilter != null || (symbolData.MarketLotSizeFilter != null && type == OrderType.Market))
-            {
-                var minQty = symbolData.LotSizeFilter?.MinQuantity;
-                var maxQty = symbolData.LotSizeFilter?.MaxQuantity;
-                var stepSize = symbolData.LotSizeFilter?.StepSize;
-                if (type == OrderType.Market && symbolData.MarketLotSizeFilter != null)
-                {
-                    minQty = symbolData.MarketLotSizeFilter.MinQuantity;
-                    if (symbolData.MarketLotSizeFilter.MaxQuantity != 0)
-                        maxQty = symbolData.MarketLotSizeFilter.MaxQuantity;
-
-                    if (symbolData.MarketLotSizeFilter.StepSize != 0)
-                        stepSize = symbolData.MarketLotSizeFilter.StepSize;
-                }
-
-                if (minQty.HasValue && quantity.HasValue)
-                {
-                    outputQuantity = BinanceHelpers.ClampQuantity(minQty.Value, maxQty!.Value, stepSize!.Value, quantity.Value);
-                    if (outputQuantity != quantity.Value)
-                    {
-                        if (BaseClient.TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
-                        {
-                            return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: LotSize filter failed. Original quantity: {quantity}, Closest allowed: {outputQuantity}");
-                        }
-
-                        _log.Write(LogVerbosity.Info, $"Quantity clamped from {quantity} to {outputQuantity}");
-                    }
-                }
-            }
-
-            if (price == null)
-                return BinanceTradeRuleResult.CreatePassed(outputQuantity, null);
-
-            if (symbolData.PriceFilter != null)
-            {
-                if (symbolData.PriceFilter.MaxPrice != 0 && symbolData.PriceFilter.MinPrice != 0)
-                {
-                    outputPrice = BinanceHelpers.ClampPrice(symbolData.PriceFilter.MinPrice, symbolData.PriceFilter.MaxPrice, price.Value);
-                    if (outputPrice != price)
-                    {
-                        if (BaseClient.TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
-                            return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter max/min failed. Original price: {price}, Closest allowed: {outputPrice}");
-
-                        _log.Write(LogVerbosity.Info, $"price clamped from {price} to {outputPrice}");
-                    }
-                }
-
-                if (symbolData.PriceFilter.TickSize != 0)
-                {
-                    var beforePrice = outputPrice;
-                    outputPrice = BinanceHelpers.FloorPrice(symbolData.PriceFilter.TickSize, price.Value);
-                    if (outputPrice != beforePrice)
-                    {
-                        if (BaseClient.TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
-                            return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter tick failed. Original price: {price}, Closest allowed: {outputPrice}");
-
-                        _log.Write(LogVerbosity.Info, $"price rounded from {beforePrice} to {outputPrice}");
-                    }
-                }
-            }
-
-            return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice);
-        }
+        internal abstract Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? price,
+            OrderType type, CancellationToken ct);
         
         internal abstract Uri GetUrl(string endpoint, string api, string? version = null);
     }

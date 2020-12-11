@@ -38,19 +38,5 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="ct">Cancellation token</param>
         /// <returns>Server time</returns>
         Task<WebCallResult<DateTime>> GetServerTimeAsync(bool resetAutoTimestamp = false, CancellationToken ct = default);
-
-        /// <summary>
-        /// Get's information about the exchange including rate limits and symbol list
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Exchange info</returns>
-        WebCallResult<BinanceFuturesExchangeInfo> GetExchangeInfo(CancellationToken ct = default);
-
-        /// <summary>
-        /// Get's information about the exchange including rate limits and symbol list
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Exchange info</returns>
-        Task<WebCallResult<BinanceFuturesExchangeInfo>> GetExchangeInfoAsync(CancellationToken ct = default);
     }
 }
