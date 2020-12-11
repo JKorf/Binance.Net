@@ -7,9 +7,9 @@ using System;
 namespace Binance.Net.Objects.Brokerage.SubAccountData
 {
     /// <summary>
-    /// Transfer Transaction
+    /// Transfer Transaction Universal
     /// </summary>
-    public class BinanceBrokerageTransferTransaction
+    public class BinanceBrokerageTransferTransactionUniversal
     {
         /// <summary>
         /// Transaction Id
@@ -24,14 +24,21 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         public string ClientTransferId { get; set; } = "";
         
         /// <summary>
-        /// From Id
-        /// </summary>
-        public string FromId { get; set; } = "";
-        
-        /// <summary>
-        /// To Id
+        /// To id
         /// </summary>
         public string ToId { get; set; } = "";
+        
+        /// <summary>
+        /// From account type
+        /// </summary>
+        [JsonConverter(typeof(BrokerageAccountTypeConverter))]
+        public BrokerageAccountType FromAccountType { get; set; }
+        
+        /// <summary>
+        /// To account type
+        /// </summary>
+        [JsonConverter(typeof(BrokerageAccountTypeConverter))]
+        public BrokerageAccountType ToAccountType { get; set; }
         
         /// <summary>
         /// Asset
@@ -49,11 +56,5 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         /// </summary>
         [JsonProperty("time"), JsonConverter(typeof(TimestampConverter))]
         public DateTime Date { get; set; }
-        
-        /// <summary>
-        /// Status
-        /// </summary>
-        [JsonConverter(typeof(BrokerageTransferTransactionStatusConverter))]
-        public BrokerageTransferTransactionStatus Status { get; set; }
     }
 }
