@@ -513,7 +513,7 @@ namespace Binance.Net.SubClients.Spot
             if (!timestampResult)
                 return new WebCallResult<BinanceOrderOcoList>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
-            var rulesCheck = await _baseClient.CheckTradeRules(symbol, quantity, price, null, ct).ConfigureAwait(false);
+            var rulesCheck = await _baseClient.CheckTradeRules(symbol, quantity, price, stopPrice, null, ct).ConfigureAwait(false);
             if (!rulesCheck.Passed)
             {
                 _log.Write(LogVerbosity.Warning, rulesCheck.ErrorMessage!);

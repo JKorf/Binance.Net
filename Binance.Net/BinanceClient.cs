@@ -217,7 +217,7 @@ namespace Binance.Net
             if (!timestampResult)
                 return new WebCallResult<BinancePlacedOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
-            var rulesCheck = await CheckTradeRules(symbol, quantity, price, type, ct).ConfigureAwait(false);
+            var rulesCheck = await CheckTradeRules(symbol, quantity, price, stopPrice, type, ct).ConfigureAwait(false);
             if (!rulesCheck.Passed)
             {
                 log.Write(LogVerbosity.Warning, rulesCheck.ErrorMessage!);
@@ -325,13 +325,14 @@ namespace Binance.Net
             return new WebCallResult<DateTime>(null, null, default, null);
         }
 
-        internal async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? price, OrderType? type, CancellationToken ct)
+        internal async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? price, decimal? stopPrice, OrderType? type, CancellationToken ct)
         {
             var outputQuantity = quantity;
             var outputPrice = price;
+            var outputStopPrice = stopPrice;
 
             if (TradeRulesBehaviour == TradeRulesBehaviour.None)
-                return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice);
+                return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice, outputStopPrice);
 
             if (ExchangeInfo == null || LastExchangeInfoUpdate == null || (DateTime.UtcNow - LastExchangeInfoUpdate.Value).TotalMinutes > TradeRulesUpdateInterval.TotalMinutes)
                 await Spot.System.GetExchangeInfoAsync(ct).ConfigureAwait(false);
@@ -381,7 +382,7 @@ namespace Binance.Net
             }
 
             if (price == null)
-                return BinanceTradeRuleResult.CreatePassed(outputQuantity, null);
+                return BinanceTradeRuleResult.CreatePassed(outputQuantity, null, outputStopPrice);
 
             if (symbolData.PriceFilter != null)
             {
@@ -394,6 +395,21 @@ namespace Binance.Net
                             return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter max/min failed. Original price: {price}, Closest allowed: {outputPrice}");
 
                         log.Write(LogVerbosity.Info, $"price clamped from {price} to {outputPrice} based on price filter");
+                    }
+
+                    if (stopPrice != null)
+                    {
+                        outputStopPrice = BinanceHelpers.ClampPrice(symbolData.PriceFilter.MinPrice,
+                            symbolData.PriceFilter.MaxPrice, stopPrice.Value);
+                        if (outputStopPrice != stopPrice)
+                        {
+                            if (TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                                return BinanceTradeRuleResult.CreateFailed(
+                                    $"Trade rules check failed: Stop price filter max/min failed. Original stop price: {stopPrice}, Closest allowed: {outputStopPrice}");
+
+                            log.Write(LogVerbosity.Info,
+                                $"Stop price clamped from {stopPrice} to {outputStopPrice} based on price filter");
+                        }
                     }
                 }
 
@@ -408,11 +424,26 @@ namespace Binance.Net
 
                         log.Write(LogVerbosity.Info, $"price floored from {beforePrice} to {outputPrice} based on price filter");
                     }
+
+                    if (stopPrice != null)
+                    {
+                        var beforeStopPrice = outputStopPrice;
+                        outputStopPrice = BinanceHelpers.FloorPrice(symbolData.PriceFilter.TickSize, stopPrice.Value);
+                        if (outputPrice != beforePrice)
+                        {
+                            if (TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                                return BinanceTradeRuleResult.CreateFailed(
+                                    $"Trade rules check failed: Stop price filter tick failed. Original stop price: {stopPrice}, Closest allowed: {outputStopPrice}");
+
+                            log.Write(LogVerbosity.Info,
+                                $"Stop price floored from {beforeStopPrice} to {outputStopPrice} based on price filter");
+                        }
+                    }
                 }
             }
 
             if (symbolData.MinNotionalFilter == null || quantity == null || outputPrice == null)
-                return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice);
+                return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice, outputStopPrice);
 
             var currentQuantity = (outputQuantity.HasValue ? outputQuantity.Value : quantity.Value);
             var notional = currentQuantity * outputPrice.Value;
@@ -431,7 +462,7 @@ namespace Binance.Net
                 log.Write(LogVerbosity.Info, $"Quantity clamped from {currentQuantity} to {outputQuantity} based on min notional filter");
             }
 
-            return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice);
+            return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice, outputStopPrice);
         }
 
         internal Task<WebCallResult<T>> SendRequestInternal<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken,

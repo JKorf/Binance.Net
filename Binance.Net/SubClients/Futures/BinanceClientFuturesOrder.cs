@@ -160,7 +160,7 @@ namespace Binance.Net.SubClients.Futures
             if (!timestampResult)
                 return new WebCallResult<BinanceFuturesPlacedOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
-            var rulesCheck = await FuturesClient.CheckTradeRules(symbol, quantity, price, type, ct).ConfigureAwait(false);
+            var rulesCheck = await FuturesClient.CheckTradeRules(symbol, quantity, price, stopPrice, type, ct).ConfigureAwait(false);
             if (!rulesCheck.Passed)
             {
                 _log.Write(LogVerbosity.Warning, rulesCheck.ErrorMessage!);
@@ -233,7 +233,7 @@ namespace Binance.Net.SubClients.Futures
             {
                 foreach (var order in orders)
                 {
-                    var rulesCheck = await FuturesClient.CheckTradeRules(order.Symbol, order.Quantity, order.Price, order.Type, ct).ConfigureAwait(false);
+                    var rulesCheck = await FuturesClient.CheckTradeRules(order.Symbol, order.Quantity, order.Price, order.StopPrice, order.Type, ct).ConfigureAwait(false);
                     if (!rulesCheck.Passed)
                     {
                         _log.Write(LogVerbosity.Warning, rulesCheck.ErrorMessage!);

@@ -426,7 +426,7 @@ namespace Binance.Net.SubClients.Futures
 
         #endregion
 
-        internal abstract Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? price,
+        internal abstract Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? price, decimal? stopPrice,
             OrderType type, CancellationToken ct);
         
         internal abstract Uri GetUrl(string endpoint, string api, string? version = null);

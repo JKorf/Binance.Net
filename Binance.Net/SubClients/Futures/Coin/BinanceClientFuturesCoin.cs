@@ -99,13 +99,14 @@ namespace Binance.Net.SubClients.Futures.Coin
 
         #endregion
 
-        internal override async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? price, OrderType type, CancellationToken ct)
+        internal override async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? price, decimal? stopPrice, OrderType type, CancellationToken ct)
         {
             var outputQuantity = quantity;
             var outputPrice = price;
+            var outputStopPrice = stopPrice;
 
             if (BaseClient.TradeRulesBehaviour == TradeRulesBehaviour.None)
-                return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice);
+                return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice, outputStopPrice);
 
             if (ExchangeInfo == null || LastExchangeInfoUpdate == null || (DateTime.UtcNow - LastExchangeInfoUpdate.Value).TotalMinutes > BaseClient.TradeRulesUpdateInterval.TotalMinutes)
                 await System.GetExchangeInfoAsync(ct).ConfigureAwait(false);
@@ -151,7 +152,7 @@ namespace Binance.Net.SubClients.Futures.Coin
             }
 
             if (price == null)
-                return BinanceTradeRuleResult.CreatePassed(outputQuantity, null);
+                return BinanceTradeRuleResult.CreatePassed(outputQuantity, null, outputStopPrice);
 
             if (symbolData.PriceFilter != null)
             {
@@ -164,6 +165,21 @@ namespace Binance.Net.SubClients.Futures.Coin
                             return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter max/min failed. Original price: {price}, Closest allowed: {outputPrice}");
 
                         _log.Write(LogVerbosity.Info, $"price clamped from {price} to {outputPrice}");
+                    }
+
+                    if (stopPrice != null)
+                    {
+                        outputStopPrice = BinanceHelpers.ClampPrice(symbolData.PriceFilter.MinPrice,
+                            symbolData.PriceFilter.MaxPrice, stopPrice.Value);
+                        if (outputStopPrice != stopPrice)
+                        {
+                            if (BaseClient.TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                                return BinanceTradeRuleResult.CreateFailed(
+                                    $"Trade rules check failed: Stop price filter max/min failed. Original stop price: {stopPrice}, Closest allowed: {outputStopPrice}");
+
+                            _log.Write(LogVerbosity.Info,
+                                $"Stop price clamped from {stopPrice} to {outputStopPrice} based on price filter");
+                        }
                     }
                 }
 
@@ -178,10 +194,25 @@ namespace Binance.Net.SubClients.Futures.Coin
 
                         _log.Write(LogVerbosity.Info, $"price rounded from {beforePrice} to {outputPrice}");
                     }
+
+                    if (stopPrice != null)
+                    {
+                        var beforeStopPrice = outputStopPrice;
+                        outputStopPrice = BinanceHelpers.FloorPrice(symbolData.PriceFilter.TickSize, stopPrice.Value);
+                        if (outputPrice != beforePrice)
+                        {
+                            if (BaseClient.TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                                return BinanceTradeRuleResult.CreateFailed(
+                                    $"Trade rules check failed: Stop price filter tick failed. Original stop price: {stopPrice}, Closest allowed: {outputStopPrice}");
+
+                            _log.Write(LogVerbosity.Info,
+                                $"Stop price floored from {beforeStopPrice} to {outputStopPrice} based on price filter");
+                        }
+                    }
                 }
             }
 
-            return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice);
+            return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice, outputStopPrice);
         }
 
         internal override Uri GetUrl(string endpoint, string api, string? version = null)
