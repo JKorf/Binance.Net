@@ -153,6 +153,13 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.5.0 - 21 dec 2020
+    * Updated Brokerage API
+    * Fix for SubAccountToSubAccount email parameter serialization
+    * Fix for GetSubAccountTransferHistoryForSubAccount using wrong Http method
+    * Fix in TradeRules check
+    * Updated CryptoExchange.Net, updated IExchangeClient
+
 * Version 6.4.1 - 11 dec 2020
     * Updated CryptoExchange.Net
     * Added IExchangeClient implementation
