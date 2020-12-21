@@ -198,7 +198,7 @@ namespace Binance.Net.SubClients.Futures.Usdt
                     {
                         var beforeStopPrice = outputStopPrice;
                         outputStopPrice = BinanceHelpers.FloorPrice(symbolData.PriceFilter.TickSize, stopPrice.Value);
-                        if (outputPrice != beforePrice)
+                        if (outputStopPrice != beforeStopPrice)
                         {
                             if (BaseClient.TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
                                 return BinanceTradeRuleResult.CreateFailed(

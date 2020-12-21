@@ -429,7 +429,7 @@ namespace Binance.Net
                     {
                         var beforeStopPrice = outputStopPrice;
                         outputStopPrice = BinanceHelpers.FloorPrice(symbolData.PriceFilter.TickSize, stopPrice.Value);
-                        if (outputPrice != beforePrice)
+                        if (outputStopPrice != beforeStopPrice)
                         {
                             if (TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
                                 return BinanceTradeRuleResult.CreateFailed(
