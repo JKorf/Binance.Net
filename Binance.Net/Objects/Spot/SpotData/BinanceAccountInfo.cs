@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using CryptoExchange.Net.Converters;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
+using CryptoExchange.Net.ExchangeInterfaces;
 
 namespace Binance.Net.Objects.Spot.SpotData
 {
@@ -64,7 +65,7 @@ namespace Binance.Net.Objects.Spot.SpotData
     /// <summary>
     /// Information about an asset balance
     /// </summary>
-    public class BinanceBalance
+    public class BinanceBalance: ICommonBalance
     {
         /// <summary>
         /// The asset this balance is for
@@ -82,5 +83,9 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// The total balance of this asset (Free + Locked)
         /// </summary>
         public decimal Total => Free + Locked;
+
+        string ICommonBalance.CommonAsset => Asset;
+        decimal ICommonBalance.CommonAvailable => Free;
+        decimal ICommonBalance.CommonTotal => Total;
     }
 }

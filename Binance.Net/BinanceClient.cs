@@ -479,16 +479,22 @@ namespace Binance.Net
             return new WebCallResult<IEnumerable<ICommonSymbol>>(exchangeInfo.ResponseStatusCode,
                 exchangeInfo.ResponseHeaders, exchangeInfo.Data?.Symbols, exchangeInfo.Error);
         }
-        
+
+        async Task<WebCallResult<ICommonTicker>> IExchangeClient.GetTickerAsync(string symbol)
+        {
+            var tickers = await Spot.Market.Get24HPriceAsync(symbol);
+            return new WebCallResult<ICommonTicker>(tickers.ResponseStatusCode, tickers.ResponseHeaders, (Binance24HPrice)tickers.Data, tickers.Error);
+        }
+
         async Task<WebCallResult<IEnumerable<ICommonTicker>>> IExchangeClient.GetTickersAsync()
         {
             var tickers = await Spot.Market.Get24HPricesAsync();
             return new WebCallResult<IEnumerable<ICommonTicker>>(tickers.ResponseStatusCode, tickers.ResponseHeaders, tickers.Data?.Select(d => (Binance24HPrice)d), tickers.Error);
         }
 
-        async Task<WebCallResult<IEnumerable<ICommonKline>>> IExchangeClient.GetKlinesAsync(string symbol, TimeSpan timespan)
+        async Task<WebCallResult<IEnumerable<ICommonKline>>> IExchangeClient.GetKlinesAsync(string symbol, TimeSpan timespan, DateTime? startTime = null, DateTime? endTime = null, int? limit = null)
         {
-            var klines = await Spot.Market.GetKlinesAsync(symbol, GetKlineIntervalFromTimespan(timespan));
+            var klines = await Spot.Market.GetKlinesAsync(symbol, GetKlineIntervalFromTimespan(timespan), startTime, endTime, limit);
             return WebCallResult<IEnumerable<ICommonKline>>.CreateFrom(klines);
         }
 
@@ -550,6 +556,12 @@ namespace Binance.Net
 
             var result = await Spot.Order.CancelOrderAsync(symbol, orderId: long.Parse(orderId));
             return WebCallResult<ICommonOrderId>.CreateFrom(result);
+        }
+
+        async Task<WebCallResult<IEnumerable<ICommonBalance>>> IExchangeClient.GetBalancesAsync(string? accountId = null)
+        {
+            var result = await General.GetAccountInfoAsync();
+            return new WebCallResult<IEnumerable<ICommonBalance>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data?.Balances.Select(b => (ICommonBalance)b), result.Error);
         }
 
         /// <inheritdoc />
