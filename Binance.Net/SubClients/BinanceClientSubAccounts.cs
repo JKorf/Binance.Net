@@ -810,7 +810,7 @@ namespace Binance.Net.SubClients
 
             var parameters = new Dictionary<string, object>
             {
-                { "email", email },
+                { "toEmail", email },
                 { "asset", asset },
                 { "amount", amount.ToString(CultureInfo.InvariantCulture) },
                 { "timestamp", _baseClient.GetTimestamp() },
