@@ -94,9 +94,7 @@ namespace Binance.Net.SocketSubClients
         }
 
         #endregion
-
-
-
+        
         #region Mark Price Stream for All market
 
         /// <summary>
@@ -211,6 +209,7 @@ namespace Binance.Net.SocketSubClients
         }
 
         #endregion
+
         #region All Market Mini Tickers Stream
         /// <summary>
         /// Subscribes to mini ticker updates stream for all symbols

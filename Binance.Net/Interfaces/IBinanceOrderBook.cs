@@ -1,4 +1,5 @@
-﻿using Binance.Net.Objects;
+﻿using System;
+using Binance.Net.Objects;
 using System.Collections.Generic;
 
 namespace Binance.Net.Interfaces
@@ -27,5 +28,35 @@ namespace Binance.Net.Interfaces
         /// The list of asks
         /// </summary>
         IEnumerable<BinanceOrderBookEntry> Asks { get; set; }
+    }
+
+    /// <summary>
+    /// Order book update event
+    /// </summary>
+    public interface IBinanceEventOrderBook : IBinanceOrderBook
+    {
+        /// <summary>
+        /// The ID of the first update
+        /// </summary>
+        long? FirstUpdateId { get; set; }
+        /// <summary>
+        /// Timestamp of the event
+        /// </summary>
+        DateTime EventTime { get; set; }
+    }
+
+    /// <summary>
+    /// Futures order book update event
+    /// </summary>
+    public interface IBinanceFuturesEventOrderBook : IBinanceEventOrderBook
+    {
+        /// <summary>
+        /// Transaction time
+        /// </summary>
+        DateTime TransactionTime { get; set; }
+        /// <summary>
+        /// Last update id of the previous update
+        /// </summary>
+        public long LastUpdateIdStream { get; set; }
     }
 }

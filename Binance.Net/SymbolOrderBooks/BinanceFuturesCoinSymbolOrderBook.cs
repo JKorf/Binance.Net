@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Binance.Net.Interfaces;
 using Binance.Net.Objects.Futures.MarketStream;
 using Binance.Net.Objects.Spot;
 using CryptoExchange.Net.Objects;
@@ -36,9 +37,9 @@ namespace Binance.Net.SymbolOrderBooks
         {
             CallResult<UpdateSubscription> subResult;
             if (_limit == null)
-                subResult = await _socketClient.FuturesCoin.SubscribeToOrderBookUpdatesAsync(Symbol, _updateInterval, data => HandleUpdate((BinanceFuturesStreamOrderBookDepth)data)).ConfigureAwait(false);
+                subResult = await _socketClient.FuturesCoin.SubscribeToOrderBookUpdatesAsync(Symbol, _updateInterval, HandleUpdate).ConfigureAwait(false);
             else
-                subResult = await _socketClient.FuturesCoin.SubscribeToPartialOrderBookUpdatesAsync(Symbol, _limit.Value, _updateInterval, data => HandleUpdate((BinanceFuturesStreamOrderBookDepth)data)).ConfigureAwait(false);
+                subResult = await _socketClient.FuturesCoin.SubscribeToPartialOrderBookUpdatesAsync(Symbol, _limit.Value, _updateInterval, HandleUpdate).ConfigureAwait(false);
 
             if (!subResult)
                 return new CallResult<UpdateSubscription>(null, subResult.Error);
@@ -64,7 +65,7 @@ namespace Binance.Net.SymbolOrderBooks
             return new CallResult<UpdateSubscription>(subResult.Data, null);
         }
 
-        private void HandleUpdate(BinanceFuturesStreamOrderBookDepth data)
+        private void HandleUpdate(IBinanceFuturesEventOrderBook data)
         {
             if (_limit == null)
             {
