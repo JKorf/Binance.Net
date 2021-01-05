@@ -12,8 +12,11 @@ namespace Binance.Net.Converters
         protected override List<KeyValuePair<ContractType, string>> Mapping => new List<KeyValuePair<ContractType, string>>
         {
             new KeyValuePair<ContractType, string>(ContractType.Perpetual, "PERPETUAL"),
+            new KeyValuePair<ContractType, string>(ContractType.CurrentQuarter, "CURRENT_MONTH"),
             new KeyValuePair<ContractType, string>(ContractType.CurrentQuarter, "CURRENT_QUARTER"),
             new KeyValuePair<ContractType, string>(ContractType.NextQuarter, "NEXT_QUARTER"),
+            new KeyValuePair<ContractType, string>(ContractType.NextQuarterDelivering, "Next_QUARTER DELIVERING"),
+            new KeyValuePair<ContractType, string>(ContractType.Unknown, ""),
         };
     }
 }
