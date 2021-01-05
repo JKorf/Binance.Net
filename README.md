@@ -165,6 +165,10 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.6.0 - 05 jan 2021
+    * Updated orderbook models
+    * Fixed GetExchangeInfo deserialization for Futures
+
 * Version 6.5.0 - 21 dec 2020
     * Updated Brokerage API
     * Fix for SubAccountToSubAccount email parameter serialization
