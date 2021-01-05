@@ -48,6 +48,8 @@
         /// <summary>
         /// Trailing stop order will be placed without a price. The order will be executed at the best price available at that time in the order book.
         /// </summary>
-        TrailingStopMarket
+        TrailingStopMarket,
+
+        Liquidation
     }
 }

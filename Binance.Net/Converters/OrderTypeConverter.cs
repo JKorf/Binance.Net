@@ -32,7 +32,8 @@ namespace Binance.Net.Converters
             { OrderType.TakeProfit, "TAKE_PROFIT" },
             { OrderType.TakeProfitMarket, "TAKE_PROFIT_MARKET" },
             { OrderType.TakeProfitLimit, "TAKE_PROFIT_LIMIT" },
-            { OrderType.TrailingStopMarket, "TRAILING_STOP_MARKET" }
+            { OrderType.TrailingStopMarket, "TRAILING_STOP_MARKET" },
+            { OrderType.Liquidation, "LIQUIDATION" }
         };
 
         public override bool CanConvert(Type objectType)
