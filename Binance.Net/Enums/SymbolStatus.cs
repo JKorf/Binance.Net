@@ -38,8 +38,12 @@
         /// </summary>
         Break,
         /// <summary>
-        /// 
+        /// Closed
         /// </summary>
-        Close
+        Close,
+        /// <summary>
+        /// Delivering
+        /// </summary>
+        Delivering
     }
 }
