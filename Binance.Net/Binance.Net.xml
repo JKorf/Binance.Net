@@ -478,6 +478,11 @@
             Next quarter delivering
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.ContractType.NextMonth">
+            <summary>
+            Next month
+            </summary>
+        </member>
         <member name="F:Binance.Net.Enums.ContractType.Unknown">
             <summary>
             Unknown
