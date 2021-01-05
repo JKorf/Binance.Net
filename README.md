@@ -165,6 +165,9 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.6.1 - 05 jan 2021
+    * Fixed contractType deserialization
+
 * Version 6.6.0 - 05 jan 2021
     * Updated orderbook models
     * Fixed GetExchangeInfo deserialization for Futures
