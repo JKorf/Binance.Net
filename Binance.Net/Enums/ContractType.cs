@@ -26,6 +26,10 @@
         /// </summary>
         NextQuarterDelivering,
         /// <summary>
+        /// Next month
+        /// </summary>
+        NextMonth,
+        /// <summary>
         /// Unknown
         /// </summary>
         Unknown

@@ -69,6 +69,10 @@ namespace Binance.Net.Objects.Spot.MarginData
         /// </summary>
         public decimal Locked { get; set; }
         /// <summary>
+        /// The amount that is netAsset
+        /// </summary>
+        public decimal NetAsset { get; set; }
+        /// <summary>
         /// The total balance of this asset (Free + Locked)
         /// </summary>
         public decimal Total => Free + Locked;

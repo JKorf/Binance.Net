@@ -478,6 +478,11 @@
             Next quarter delivering
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.ContractType.NextMonth">
+            <summary>
+            Next month
+            </summary>
+        </member>
         <member name="F:Binance.Net.Enums.ContractType.Unknown">
             <summary>
             Unknown
@@ -4603,6 +4608,34 @@
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>Exchange info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtSystem.Ping(System.Threading.CancellationToken)">
+            <summary>
+            Pings the Binance Futures API
+            </summary>
+            <returns>True if successful ping, false if no response</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtSystem.PingAsync(System.Threading.CancellationToken)">
+            <summary>
+            Pings the Binance Futures API
+            </summary>
+            <returns>True if successful ping, false if no response</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtSystem.GetServerTime(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls
+            </summary>
+            <param name="resetAutoTimestamp">Whether the response should be used for a new auto timestamp calculation</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Server time</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtSystem.GetServerTimeAsync(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls
+            </summary>
+            <param name="resetAutoTimestamp">Whether the response should be used for a new auto timestamp calculation</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Server time</returns>
         </member>
         <member name="T:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage">
             <summary>
@@ -14116,6 +14149,11 @@
         <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceMarginBalance.Locked">
             <summary>
             The amount that is currently locked in a trade
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceMarginBalance.NetAsset">
+            <summary>
+            The amount that is netAsset
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceMarginBalance.Total">
