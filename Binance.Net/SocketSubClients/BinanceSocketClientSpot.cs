@@ -456,7 +456,7 @@ namespace Binance.Net.SocketSubClients
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public CallResult<UpdateSubscription> SubscribeToOrderBookUpdates(string symbol, int? updateInterval,
-            Action<IBinanceOrderBook> onMessage) =>
+            Action<IBinanceEventOrderBook> onMessage) =>
             SubscribeToOrderBookUpdatesAsync(symbol, updateInterval, onMessage).Result;
 
         /// <summary>
@@ -467,7 +467,7 @@ namespace Binance.Net.SocketSubClients
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string symbol,
-            int? updateInterval, Action<IBinanceOrderBook> onMessage) =>
+            int? updateInterval, Action<IBinanceEventOrderBook> onMessage) =>
             await SubscribeToOrderBookUpdatesAsync(new[] {symbol}, updateInterval, onMessage).ConfigureAwait(false);
 
         /// <summary>
@@ -478,7 +478,7 @@ namespace Binance.Net.SocketSubClients
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public CallResult<UpdateSubscription> SubscribeToOrderBookUpdates(IEnumerable<string> symbols,
-            int? updateInterval, Action<IBinanceOrderBook> onMessage) =>
+            int? updateInterval, Action<IBinanceEventOrderBook> onMessage) =>
             SubscribeToOrderBookUpdatesAsync(symbols, updateInterval, onMessage).Result;
 
         /// <summary>
@@ -489,7 +489,7 @@ namespace Binance.Net.SocketSubClients
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerable<string> symbols,
-            int? updateInterval, Action<IBinanceOrderBook> onMessage)
+            int? updateInterval, Action<IBinanceEventOrderBook> onMessage)
         {
             symbols.ValidateNotNull(nameof(symbols));
             foreach (var symbol in symbols)

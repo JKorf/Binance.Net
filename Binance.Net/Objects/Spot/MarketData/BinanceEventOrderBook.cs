@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Binance.Net.Interfaces;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
@@ -9,7 +10,7 @@ namespace Binance.Net.Objects.Spot.MarketData
     /// <summary>
     /// Stream order book
     /// </summary>
-    public class BinanceEventOrderBook: BinanceOrderBook
+    public class BinanceEventOrderBook: BinanceOrderBook, IBinanceEventOrderBook
     {
         /// <summary>
         /// Setter for last update id, need for Json.Net
@@ -24,10 +25,10 @@ namespace Binance.Net.Objects.Spot.MarketData
         internal string EventType { get; set; } = "";
 
         /// <summary>
-        /// Event time of the update (stream only)
+        /// Event time of the update
         /// </summary>
         [JsonProperty("E"), JsonConverter(typeof(TimestampConverter))]
-        public DateTime? EventTime { get; set; }
+        public DateTime EventTime { get; set; }
         
         /// <summary>
         /// Setter for bids (needed forJson.Net)

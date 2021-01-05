@@ -9,7 +9,7 @@ namespace Binance.Net.Objects.Futures.MarketStream
     /// <summary>
     /// The order book for a asset
     /// </summary>
-    public class BinanceFuturesStreamOrderBookDepth : BinanceStreamEvent, IBinanceOrderBook
+    public class BinanceFuturesStreamOrderBookDepth : BinanceStreamEvent, IBinanceFuturesEventOrderBook
     {
         /// <summary>
         /// The symbol of the order book (only filled from stream updates)
@@ -20,7 +20,7 @@ namespace Binance.Net.Objects.Futures.MarketStream
         /// <summary>
         /// The time the event happened
         /// </summary>
-        [JsonProperty("E"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
         public DateTime TransactionTime { get; set; }
 
         /// <summary>
