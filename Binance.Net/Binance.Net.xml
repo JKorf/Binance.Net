@@ -10649,6 +10649,11 @@
             Direction of the margin change request
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesMultipleOrderCancelResult">
+            <summary>
+            Extension to be able to deserialize an error response as well
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesMultipleOrderPlaceResult">
             <summary>
             Extension to be able to deserialize an error response as well
