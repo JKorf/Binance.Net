@@ -1618,6 +1618,21 @@
             From margin account to main account
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.UnderlyingType">
+            <summary>
+            Underlying Type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UnderlyingType.Coin">
+            <summary>
+            Coin
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UnderlyingType.Index">
+            <summary>
+            Index
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.WithdrawalStatus">
             <summary>
             The status of a withdrawal
@@ -10639,6 +10654,11 @@
             Direction of the margin change request
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesMultipleOrderCancelResult">
+            <summary>
+            Extension to be able to deserialize an error response as well
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesMultipleOrderPlaceResult">
             <summary>
             Extension to be able to deserialize an error response as well
@@ -11569,6 +11589,36 @@
             The symbol
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.Pair">
+            <summary>
+            Pair
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.DeliveryDate">
+            <summary>
+            Delivery Date
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.ListingDate">
+            <summary>
+            Delivery Date
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.TriggerProtect">
+            <summary>
+            Trigger protect
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.UnderlyingType">
+            <summary>
+            Currently Empty
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.UnderlyingSupType">
+            <summary>
+            Currently Empty
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.TimeInForce">
             <summary>
             Allowed order time in force
@@ -11614,6 +11664,11 @@
             The status of the symbol
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesUsdtSymbol.SettlePlan">
+            <summary>
+            The status of the symbol
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCoinSymbol">
             <summary>
             Information about a futures symbol
@@ -11632,11 +11687,6 @@
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCoinSymbol.EqualQuantityPrecision">
             <summary>
             Equal quantity precision
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCoinSymbol.TriggerProtect">
-            <summary>
-            Trigger protect
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbolBracket">
