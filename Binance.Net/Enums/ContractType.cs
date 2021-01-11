@@ -18,6 +18,10 @@
         /// </summary>
         CurrentQuarter,
         /// <summary>
+        /// Current quarter delivering
+        /// </summary>
+        CurrentQuarterDelivering,
+        /// <summary>
         /// Next quarter
         /// </summary>
         NextQuarter,

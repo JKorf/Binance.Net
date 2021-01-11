@@ -468,6 +468,11 @@
             Current quarter
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.ContractType.CurrentQuarterDelivering">
+            <summary>
+            Current quarter delivering
+            </summary>
+        </member>
         <member name="F:Binance.Net.Enums.ContractType.NextQuarter">
             <summary>
             Next quarter
@@ -1513,6 +1518,11 @@
             Closed
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.SymbolStatus.PreDelivering">
+            <summary>
+            Pre delivering
+            </summary>
+        </member>
         <member name="F:Binance.Net.Enums.SymbolStatus.Delivering">
             <summary>
             Delivering
@@ -1521,6 +1531,11 @@
         <member name="F:Binance.Net.Enums.SymbolStatus.PreSettle">
             <summary>
             Pre settle
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolStatus.Settling">
+            <summary>
+            Settings
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.SystemStatus">

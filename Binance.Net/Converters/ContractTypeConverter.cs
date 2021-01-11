@@ -14,6 +14,7 @@ namespace Binance.Net.Converters
             new KeyValuePair<ContractType, string>(ContractType.Perpetual, "PERPETUAL"),
             new KeyValuePair<ContractType, string>(ContractType.CurrentMonth, "CURRENT_MONTH"),
             new KeyValuePair<ContractType, string>(ContractType.CurrentQuarter, "CURRENT_QUARTER"),
+            new KeyValuePair<ContractType, string>(ContractType.CurrentQuarterDelivering, "CURRENT_QUARTER DELIVERING"),
             new KeyValuePair<ContractType, string>(ContractType.NextQuarter, "NEXT_QUARTER"),
             new KeyValuePair<ContractType, string>(ContractType.NextQuarterDelivering, "NEXT_QUARTER DELIVERING"),
             new KeyValuePair<ContractType, string>(ContractType.NextMonth, "NEXT_MONTH"),

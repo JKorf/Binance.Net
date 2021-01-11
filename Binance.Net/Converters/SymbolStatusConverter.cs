@@ -20,8 +20,10 @@ namespace Binance.Net.Converters
             new KeyValuePair<SymbolStatus, string>(SymbolStatus.PendingTrading, "PENDING_TRADING"),
             new KeyValuePair<SymbolStatus, string>(SymbolStatus.Trading, "TRADING"),
             new KeyValuePair<SymbolStatus, string>(SymbolStatus.Close, "CLOSE"),
+            new KeyValuePair<SymbolStatus, string>(SymbolStatus.PreDelivering, "PRE_DELIVERING"),
             new KeyValuePair<SymbolStatus, string>(SymbolStatus.Delivering, "DELIVERING"),
             new KeyValuePair<SymbolStatus, string>(SymbolStatus.PreSettle, "PRE_SETTLE"),
+            new KeyValuePair<SymbolStatus, string>(SymbolStatus.Settling, "SETTLING"),
         };
     }
 }
