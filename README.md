@@ -165,6 +165,9 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.6.3 - 11 jan 2021
+    * Added missing enum values
+
 * Version 6.6.2 - 11 jan 2021
     * Updated futures Symbol models for GetExchangeInfo
     * Updated CryptoExchange.Net
