@@ -44,6 +44,10 @@
         /// <summary>
         /// Delivering
         /// </summary>
-        Delivering
+        Delivering,
+        /// <summary>
+        /// Pre settle
+        /// </summary>
+        PreSettle
     }
 }

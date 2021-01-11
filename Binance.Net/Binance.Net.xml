@@ -1518,6 +1518,11 @@
             Delivering
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.SymbolStatus.PreSettle">
+            <summary>
+            Pre settle
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.SystemStatus">
             <summary>
             Status of the Binance system
