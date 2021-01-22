@@ -13,6 +13,12 @@ namespace Binance.Net.Objects.Spot.MarketData
     public class BinanceEventOrderBook: BinanceOrderBook, IBinanceEventOrderBook
     {
         /// <summary>
+        /// The id of this update, can be synced with BinanceClient.Spot.GetOrderBook to update the order book
+        /// </summary>
+        [JsonProperty("U")]
+        public long? FirstUpdateId { get; set; }
+
+        /// <summary>
         /// Setter for last update id, need for Json.Net
         /// </summary>
         [JsonProperty("u")]
