@@ -69,5 +69,7 @@ namespace Binance.Net.Objects.Shared
         decimal ICommonKline.CommonLow => Low;
         decimal ICommonKline.CommonOpen => Open;
         decimal ICommonKline.CommonClose => Close;
+        decimal ICommonKline.CommonVolume => BaseVolume;
+        DateTime ICommonKline.CommonOpenTime => OpenTime;
     }
 }

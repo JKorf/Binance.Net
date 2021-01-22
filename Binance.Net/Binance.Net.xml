@@ -14637,6 +14637,11 @@
             Stream order book
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook.FirstUpdateId">
+            <summary>
+            The id of this update, can be synced with BinanceClient.Spot.GetOrderBook to update the order book
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceEventOrderBook.LastUpdateIdStream">
             <summary>
             Setter for last update id, need for Json.Net
@@ -14745,11 +14750,6 @@
         <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.LastUpdateId">
             <summary>
             The ID of the last update
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.FirstUpdateId">
-            <summary>
-            The id of this update, can be synced with BinanceClient.Spot.GetOrderBook to update the order book
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceOrderBook.Bids">
