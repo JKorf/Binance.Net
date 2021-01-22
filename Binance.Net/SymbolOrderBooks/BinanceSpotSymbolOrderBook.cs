@@ -68,7 +68,7 @@ namespace Binance.Net.SymbolOrderBooks
         {
             if (Levels == null)
             {
-                UpdateOrderBook(data.FirstUpdateId ?? 0, data.LastUpdateId, data.Bids, data.Asks);
+                UpdateOrderBook(data.LastUpdateId, data.Bids, data.Asks);
             }
             else
             {
