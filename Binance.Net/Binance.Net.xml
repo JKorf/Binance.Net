@@ -11669,6 +11669,11 @@
             Filter for the maximum deviation of the price
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.MinNotionalFilter">
+            <summary>
+            Filter for the maximum deviation of the price
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesUsdtSymbol">
             <summary>
             Information about a futures symbol
@@ -11857,6 +11862,16 @@
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceSymbolPercentPriceFilter.MultiplierDecimal">
             <summary>
             The amount of minutes the average price of trades is calculated over. 0 means the last price is used
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceSymbolMinNotionalFilter">
+            <summary>
+            Min notional filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceSymbolMinNotionalFilter.MinNotional">
+            <summary>
+            The minimal total size of an order. This is calculated by Price * Quantity.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesUsdtKline">
