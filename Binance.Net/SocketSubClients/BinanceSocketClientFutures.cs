@@ -34,6 +34,7 @@ namespace Binance.Net.SocketSubClients
         private const string partialBookDepthStreamEndpoint = "@depth";
         private const string depthStreamEndpoint = "@depth";
 
+        private const string configUpdateEvent = "ACCOUNT_CONFIG_UPDATE";
         private const string marginUpdateEvent = "MARGIN_CALL";
         private const string accountUpdateEvent = "ACCOUNT_UPDATE";
         private const string orderUpdateEvent = "ORDER_TRADE_UPDATE";
@@ -478,6 +479,7 @@ namespace Binance.Net.SocketSubClients
         /// Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStreams.StartUserStream method should be called.
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
+        ///  /// <param name="onConfigUpdate">The event handler for leverage changed update</param>
         /// <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
         /// <param name="onAccountUpdate">The event handler for whenever an account update is received</param>
         /// <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
@@ -485,15 +487,17 @@ namespace Binance.Net.SocketSubClients
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public CallResult<UpdateSubscription> SubscribeToUserDataUpdates(
             string listenKey,
-             Action<BinanceFuturesStreamMarginUpdate>? onMarginUpdate,
+            Action<BinanceFuturesStreamConfigUpdate>? onConfigUpdate,
+            Action<BinanceFuturesStreamMarginUpdate>? onMarginUpdate,
             Action<BinanceFuturesStreamAccountUpdate>? onAccountUpdate,
             Action<BinanceFuturesStreamOrderUpdate>? onOrderUpdate,
-            Action<BinanceStreamEvent> onListenKeyExpired) => SubscribeToUserDataUpdatesAsync(listenKey, onMarginUpdate, onAccountUpdate, onOrderUpdate, onListenKeyExpired).Result;
+            Action<BinanceStreamEvent> onListenKeyExpired) => SubscribeToUserDataUpdatesAsync(listenKey, onConfigUpdate, onMarginUpdate, onAccountUpdate, onOrderUpdate, onListenKeyExpired).Result;
 
         /// <summary>
         /// Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStreams.StartUserStream method should be called.
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
+        /// <param name="onConfigUpdate">The event handler for leverage changed update</param>
         /// <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
         /// <param name="onAccountUpdate">The event handler for whenever an account update is received</param>
         /// <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
@@ -501,6 +505,7 @@ namespace Binance.Net.SocketSubClients
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
             string listenKey,
+            Action<BinanceFuturesStreamConfigUpdate>? onConfigUpdate,
             Action<BinanceFuturesStreamMarginUpdate>? onMarginUpdate,
             Action<BinanceFuturesStreamAccountUpdate>? onAccountUpdate,
             Action<BinanceFuturesStreamOrderUpdate>? onOrderUpdate,
@@ -517,6 +522,18 @@ namespace Binance.Net.SocketSubClients
 
                 switch (evnt)
                 {
+                    case configUpdateEvent:
+                        {
+                            Log.Write(LogVerbosity.Debug, data);
+
+                            var result = BaseClient.DeserializeInternal<BinanceFuturesStreamConfigUpdate>(token, false);
+                            if (result)
+                                onConfigUpdate?.Invoke(result.Data);
+                            else
+                                Log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from config stream: " + result.Error);
+
+                            break;
+                        }
                     case marginUpdateEvent:
                         {
                             Log.Write(LogVerbosity.Debug, data);
