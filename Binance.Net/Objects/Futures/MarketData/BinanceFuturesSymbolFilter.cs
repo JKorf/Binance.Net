@@ -113,4 +113,15 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// </summary>
         public int MultiplierDecimal { get; set; }
     }
+
+    /// <summary>
+    /// Min notional filter
+    /// </summary>
+    public class BinanceSymbolMinNotionalFilter : BinanceFuturesSymbolFilter
+    {
+        /// <summary>
+        /// The minimal total size of an order. This is calculated by Price * Quantity.
+        /// </summary>
+        public decimal MinNotional { get; set; }
+    }
 }

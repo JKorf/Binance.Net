@@ -138,6 +138,12 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// </summary>
         [JsonIgnore]
         public BinanceSymbolPercentPriceFilter PricePercentFilter => Filters.OfType<BinanceSymbolPercentPriceFilter>().FirstOrDefault();
+
+        /// <summary>
+        /// Filter for the maximum deviation of the price
+        /// </summary>
+        [JsonIgnore]
+        public BinanceSymbolMinNotionalFilter MinNotionalFilter => Filters.OfType<BinanceSymbolMinNotionalFilter>().FirstOrDefault();
     }
 
     /// <summary>

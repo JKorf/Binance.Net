@@ -66,6 +66,12 @@ namespace Binance.Net.Converters
                         MaxNumberAlgorithmicOrders = (int)obj["limit"]
                     };
                     break;
+                case SymbolFilterType.MinNotional:
+                    result = new BinanceSymbolMinNotionalFilter
+                    {
+                        MinNotional = obj.ContainsKey("notional") ? (decimal)obj["notional"] : 0
+                    };
+                    break;
                 default:
                     Debug.WriteLine("Can't parse symbol filter of type: " + obj["filterType"]);
                     result = new BinanceFuturesSymbolFilter();
@@ -131,6 +137,11 @@ namespace Binance.Net.Converters
                     writer.WriteValue(pricePercentFilter.MultiplierDown);
                     writer.WritePropertyName("multiplierDecimal");
                     writer.WriteValue(pricePercentFilter.MultiplierDecimal);
+                    break;
+                case SymbolFilterType.MinNotional:
+                    var minNotional = (BinanceSymbolMinNotionalFilter)filter;
+                    writer.WritePropertyName("notional");
+                    writer.WriteValue(minNotional.MinNotional);
                     break;
                 default:
                     Debug.WriteLine("Can't write symbol filter of type: " + filter.FilterType);
