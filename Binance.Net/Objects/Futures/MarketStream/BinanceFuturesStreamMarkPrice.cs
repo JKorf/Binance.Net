@@ -21,7 +21,13 @@ namespace Binance.Net.Objects.Futures.MarketStream
         /// </summary>
         [JsonProperty("p")]
         public decimal MarkPrice { get; set; }
-        
+
+        /// <summary>
+        /// Estimated Settle Price, only useful in the last hour before the settlement starts
+        /// </summary>
+        [JsonProperty("P")]
+        public decimal EstimatedSettlePrice { get; set; }
+
         /// <summary>
         /// Next Funding Rate
         /// </summary>
