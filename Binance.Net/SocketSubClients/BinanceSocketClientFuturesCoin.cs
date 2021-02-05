@@ -388,6 +388,7 @@ namespace Binance.Net.SocketSubClients
         }
 
         #endregion
+
         #region All Market Mini Tickers Stream
         /// <summary>
         /// Subscribes to mini ticker updates stream for all symbols
@@ -407,8 +408,7 @@ namespace Binance.Net.SocketSubClients
             return await Subscribe(allMiniTickerStreamEndpoint, false, handler).ConfigureAwait(false);
         }
         #endregion
-
-
+        
         #region Individual Symbol Ticker Streams
 
         /// <summary>

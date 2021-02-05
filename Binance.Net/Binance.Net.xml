@@ -10205,12 +10205,42 @@
             Entry Price
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.MaxNotional">
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPositionUsdt">
+            <summary>
+            Usdt position info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPositionUsdt.MaxNotional">
             <summary>
             Maximum available notional with current leverage
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.PositionAmount">
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPositionCoin">
+            <summary>
+            Coin position info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPositionCoin.MaxQty">
+            <summary>
+            Maximum quantity of base asset
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPositionUsdtExtended">
+            <summary>
+            Usdt position info including amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPositionUsdtExtended.PositionAmount">
+            <summary>
+            Position amount
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPositionCoinExtended">
+            <summary>
+            Coin position including amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPositionCoinExtended.PositionAmount">
             <summary>
             Position amount
             </summary>

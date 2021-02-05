@@ -45,7 +45,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of Positions</returns>
-        WebCallResult<IEnumerable<BinanceFuturesPosition>> GetPositionInformation(string? marginAsset = null, string? pair = null,
+        WebCallResult<IEnumerable<BinanceFuturesAccountPositionCoinExtended>> GetPositionInformation(string? marginAsset = null, string? pair = null,
             long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of Positions</returns>
-        Task<WebCallResult<IEnumerable<BinanceFuturesPosition>>> GetPositionInformationAsync(string? marginAsset = null, string? pair = null,
+        Task<WebCallResult<IEnumerable<BinanceFuturesAccountPositionCoinExtended>>> GetPositionInformationAsync(string? marginAsset = null, string? pair = null,
             long? receiveWindow = null, CancellationToken ct = default);
     }
 
@@ -93,7 +93,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of Positions</returns>
-        WebCallResult<IEnumerable<BinanceFuturesPosition>> GetPositionInformation(string? symbol = null,
+        WebCallResult<IEnumerable<BinanceFuturesAccountPositionUsdtExtended>> GetPositionInformation(string? symbol = null,
             long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of Positions</returns>
-        Task<WebCallResult<IEnumerable<BinanceFuturesPosition>>> GetPositionInformationAsync(string? symbol = null,
+        Task<WebCallResult<IEnumerable<BinanceFuturesAccountPositionUsdtExtended>>> GetPositionInformationAsync(string? symbol = null,
             long? receiveWindow = null, CancellationToken ct = default);
     }
 

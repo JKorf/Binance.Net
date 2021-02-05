@@ -58,11 +58,53 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// </summary>
         public decimal EntryPrice { get; set; }
 
+    }
+
+    /// <summary>
+    /// Usdt position info
+    /// </summary>
+    public class BinanceFuturesAccountPositionUsdt: BinanceFuturesAccountPosition
+    {
         /// <summary>
         /// Maximum available notional with current leverage
         /// </summary>
         public decimal MaxNotional { get; set; }
 
+        [JsonProperty("maxNotionalValue")]
+        private decimal MaxNotionalValue
+        {
+            set => MaxNotional = value;
+        }
+    }
+
+    /// <summary>
+    /// Coin position info
+    /// </summary>
+    public class BinanceFuturesAccountPositionCoin: BinanceFuturesAccountPosition
+    {
+        /// <summary>
+        /// Maximum quantity of base asset
+        /// </summary>
+        public decimal MaxQty { get; set; }
+    }
+
+    /// <summary>
+    /// Usdt position info including amount
+    /// </summary>
+    public class BinanceFuturesAccountPositionUsdtExtended: BinanceFuturesAccountPositionUsdt
+    {
+        /// <summary>
+        /// Position amount
+        /// </summary>
+        [JsonProperty("positionAmt")]
+        public decimal PositionAmount { get; set; }
+    }
+
+    /// <summary>
+    /// Coin position including amount
+    /// </summary>
+    public class BinanceFuturesAccountPositionCoinExtended: BinanceFuturesAccountPositionCoin
+    {
         /// <summary>
         /// Position amount
         /// </summary>

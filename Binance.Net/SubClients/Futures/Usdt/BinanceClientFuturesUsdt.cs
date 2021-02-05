@@ -70,7 +70,7 @@ namespace Binance.Net.SubClients.Futures.Usdt
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of Positions</returns>
-        public WebCallResult<IEnumerable<BinanceFuturesPosition>> GetPositionInformation(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default) => GetPositionInformationAsync(symbol, receiveWindow, ct).Result;
+        public WebCallResult<IEnumerable<BinanceFuturesAccountPositionUsdtExtended>> GetPositionInformation(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default) => GetPositionInformationAsync(symbol, receiveWindow, ct).Result;
 
         /// <summary>
         /// Gets account information
@@ -79,11 +79,11 @@ namespace Binance.Net.SubClients.Futures.Usdt
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of Positions</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceFuturesPosition>>> GetPositionInformationAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesAccountPositionUsdtExtended>>> GetPositionInformationAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
-                return new WebCallResult<IEnumerable<BinanceFuturesPosition>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<IEnumerable<BinanceFuturesAccountPositionUsdtExtended>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -93,7 +93,7 @@ namespace Binance.Net.SubClients.Futures.Usdt
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? BaseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await BaseClient.SendRequestInternal<IEnumerable<BinanceFuturesPosition>>(GetUrl(positionInformationEndpoint, Api, "2"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await BaseClient.SendRequestInternal<IEnumerable<BinanceFuturesAccountPositionUsdtExtended>>(GetUrl(positionInformationEndpoint, Api, "2"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
