@@ -169,7 +169,8 @@ namespace Binance.Net.SubClients.Futures
 
             quantity = rulesCheck.Quantity;
             price = rulesCheck.Price;
-            
+            stopPrice = rulesCheck.StopPrice;
+
             var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
@@ -243,6 +244,7 @@ namespace Binance.Net.SubClients.Futures
 
                     order.Quantity = rulesCheck.Quantity;
                     order.Price = rulesCheck.Price;
+                    order.StopPrice = rulesCheck.StopPrice;
                 }
             }
 

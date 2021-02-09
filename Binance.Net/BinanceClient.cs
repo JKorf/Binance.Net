@@ -226,6 +226,7 @@ namespace Binance.Net
 
             quantity = rulesCheck.Quantity;
             price = rulesCheck.Price;
+            stopPrice = rulesCheck.StopPrice;
 
             var parameters = new Dictionary<string, object>
             {
