@@ -165,6 +165,10 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.8.0 - 09 feb 2021
+    * Fixed stopPrice AutoComply trade rules behavior
+    * Fixed position models
+
 * Version 6.7.0 - 05 feb 2021
     * Fixed Mark stream update model
     * Added onLeverageUpdate to futures user stream subscription
