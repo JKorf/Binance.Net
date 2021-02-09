@@ -4748,12 +4748,14 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetSubAccountApiKeyAsync(System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetSubAccountApiKeyAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Sub Account Api Key
             </summary>
             <param name="subAccountId">Sub account id</param>
             <param name="apiKey">Api key</param>
+            <param name="page">Page (default 1)</param>
+            <param name="size">Size (default 500, max 500)</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Api key result</returns>
@@ -4933,11 +4935,12 @@
             <param name="ct">Cancellation token</param>
             <returns>Transfer result</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetTransferHistoryUniversalAsync(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetTransferHistoryUniversalAsync(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Sub Account Transfer History Universal
             <para>Either fromId or toId must be sent. Return fromId equal master account by default</para>
             <para>Only get the latest history of past 30 days</para>
+            <para>If showAllStatus is true, the status in response will show four types: INIT,PROCESS,SUCCESS,FAILURE</para>
             </summary>
             <param name="fromId">From id</param>
             <param name="toId">To id</param>
@@ -4946,6 +4949,7 @@
             <param name="endDate">To date</param>
             <param name="page">Page</param>
             <param name="limit">Limit (default 500, max 500)</param>
+            <param name="showAllStatus">Show all status</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Transfer history</returns>
@@ -4967,7 +4971,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Transfer result</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.TransferFuturesAsync(System.String,System.Decimal,Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.TransferFuturesAsync(System.String,System.Decimal,Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Sub Account Transfer (Futures)
             <para>You need to enable "internal transfer" option for the api key which requests this endpoint</para>
@@ -4980,17 +4984,19 @@
             <param name="futuresType">Futures type</param>
             <param name="fromId">From id</param>
             <param name="toId">To id</param>
+            <param name="clientTransferId">Client transfer id</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Transfer result</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetTransferHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetTransferHistoryAsync(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Sub Account Transfer History (Spot)
             <para>If showAllStatus is true, the status in response will show four types: INIT,PROCESS,SUCCESS,FAILURE</para>
             <para>If showAllStatus is false, the status in response will show three types: INIT,PROCESS,SUCCESS</para>
             </summary>
-            <param name="subAccountId">Sub account id</param>
+            <param name="fromId">From id</param>
+            <param name="toId">To id</param>
             <param name="clientTransferId">Client transfer id</param>
             <param name="startDate">From date</param>
             <param name="endDate">To date</param>
@@ -5001,16 +5007,17 @@
             <param name="ct">Cancellation token</param>
             <returns>Transfer history</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetTransferFuturesHistoryAsync(System.String,Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetTransferFuturesHistoryAsync(System.String,Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Sub Account Transfer History (Futures)
             </summary>
             <param name="subAccountId">Sub account id</param>
             <param name="futuresType">Futures type</param>
-            <param name="startDate">From date (default 100 days records)</param>
-            <param name="endDate">To date (default 100 days records)</param>
+            <param name="startDate">From date (default 30 days records)</param>
+            <param name="endDate">To date (default 30 days records)</param>
             <param name="page">Page (default 1)</param>
             <param name="limit">Limit (default 50, max 500)</param>
+            <param name="clientTransferId">Client transfer id</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Transfer history</returns>
@@ -5113,11 +5120,12 @@
             <param name="ct">Cancellation token</param>
             <returns>Asset info</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetSubAccountFuturesAssetInfoAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage.GetSubAccountFuturesAssetInfoAsync(Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Sub Account Futures Asset info
             <para>If subAccountId is not sent, the size must be sent</para>
             </summary>
+            <param name="futuresType">Futures type</param>
             <param name="subAccountId">Sub account id</param>
             <param name="page">Page (default 1)</param>
             <param name="size">Size (default 10, max 20)</param>
@@ -9484,6 +9492,11 @@
             Success
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageTransferFuturesResult.ClientTransferId">
+            <summary>
+            Client Transfer Id
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageTransferFuturesTransactions">
             <summary>
             Transfer Futures Transactions
@@ -9532,6 +9545,11 @@
         <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageTransferFuturesTransaction.Id">
             <summary>
             Transaction Id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageTransferFuturesTransaction.ClientTransferId">
+            <summary>
+            Client Transfer Id
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageTransferFuturesTransaction.Date">
@@ -9642,6 +9660,11 @@
         <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageTransferTransactionUniversal.Date">
             <summary>
             Date
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageTransferTransactionUniversal.Status">
+            <summary>
+            Status
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BSwap.BinanceBSwapOperation">
@@ -19750,12 +19773,14 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetSubAccountApiKeyAsync(System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetSubAccountApiKeyAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Sub Account Api Key
             </summary>
             <param name="subAccountId">Sub account id</param>
             <param name="apiKey">Api key</param>
+            <param name="page">Page (default 1)</param>
+            <param name="size">Size (default 500, max 500)</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Api key result</returns>
@@ -19921,11 +19946,12 @@
             <param name="ct">Cancellation token</param>
             <returns>Asset info</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetSubAccountFuturesAssetInfoAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetSubAccountFuturesAssetInfoAsync(Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Sub Account Futures Asset info
             <para>If subAccountId is not sent, the size must be sent</para>
             </summary>
+            <param name="futuresType">Futures type</param>
             <param name="subAccountId">Sub account id</param>
             <param name="page">Page (default 1)</param>
             <param name="size">Size (default 10, max 20)</param>
@@ -19982,11 +20008,12 @@
             <param name="ct">Cancellation token</param>
             <returns>Transfer result</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetTransferHistoryUniversalAsync(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetTransferHistoryUniversalAsync(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Sub Account Transfer History Universal
             <para>Either fromId or toId must be sent. Return fromId equal master account by default</para>
             <para>Only get the latest history of past 30 days</para>
+            <para>If showAllStatus is true, the status in response will show four types: INIT,PROCESS,SUCCESS,FAILURE</para>
             </summary>
             <param name="fromId">From id</param>
             <param name="toId">To id</param>
@@ -19995,6 +20022,7 @@
             <param name="endDate">To date</param>
             <param name="page">Page</param>
             <param name="limit">Limit (default 500, max 500)</param>
+            <param name="showAllStatus">Show all status</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Transfer history</returns>
@@ -20016,7 +20044,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Transfer result</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.TransferFuturesAsync(System.String,System.Decimal,Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.TransferFuturesAsync(System.String,System.Decimal,Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Sub Account Transfer (Futures)
             <para>You need to enable "internal transfer" option for the api key which requests this endpoint</para>
@@ -20029,17 +20057,19 @@
             <param name="futuresType">Futures type</param>
             <param name="fromId">From id</param>
             <param name="toId">To id</param>
+            <param name="clientTransferId">Client transfer id</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Transfer result</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetTransferHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetTransferHistoryAsync(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Sub Account Transfer History (Spot)
             <para>If showAllStatus is true, the status in response will show four types: INIT,PROCESS,SUCCESS,FAILURE</para>
             <para>If showAllStatus is false, the status in response will show three types: INIT,PROCESS,SUCCESS</para>
             </summary>
-            <param name="subAccountId">Sub account id</param>
+            <param name="fromId">From id</param>
+            <param name="toId">To id</param>
             <param name="clientTransferId">Client transfer id</param>
             <param name="startDate">From date</param>
             <param name="endDate">To date</param>
@@ -20050,16 +20080,17 @@
             <param name="ct">Cancellation token</param>
             <returns>Transfer history</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetTransferFuturesHistoryAsync(System.String,Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientBrokerage.GetTransferFuturesHistoryAsync(System.String,Binance.Net.Objects.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Sub Account Transfer History (Futures)
             </summary>
             <param name="subAccountId">Sub account id</param>
             <param name="futuresType">Futures type</param>
-            <param name="startDate">From date (default 100 days records)</param>
-            <param name="endDate">To date (default 100 days records)</param>
+            <param name="startDate">From date (default 30 days records)</param>
+            <param name="endDate">To date (default 30 days records)</param>
             <param name="page">Page (default 1)</param>
             <param name="limit">Limit (default 50, max 500)</param>
+            <param name="clientTransferId">Client transfer id</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Transfer history</returns>
