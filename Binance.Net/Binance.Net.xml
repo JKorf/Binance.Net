@@ -10150,101 +10150,6 @@
             The time of account info was updated
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition">
-            <summary>
-            Information about an account position
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.Isolated">
-            <summary>
-            Is isolated
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.Leverage">
-            <summary>
-            Leverage
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.InitialMargin">
-            <summary>
-            Initial margin
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.MaintMargin">
-            <summary>
-            Maint margin
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.OpenOrderInitialMargin">
-            <summary>
-            Open order initial margin
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.PositionInitialMargin">
-            <summary>
-            Position initial margin
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.Symbol">
-            <summary>
-            Symbol
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.UnrealizedProfit">
-            <summary>
-            Unrealized profit
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.PositionSide">
-            <summary>
-            Position side
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.EntryPrice">
-            <summary>
-            Entry Price
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPositionUsdt">
-            <summary>
-            Usdt position info
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPositionUsdt.MaxNotional">
-            <summary>
-            Maximum available notional with current leverage
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPositionCoin">
-            <summary>
-            Coin position info
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPositionCoin.MaxQty">
-            <summary>
-            Maximum quantity of base asset
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPositionUsdtExtended">
-            <summary>
-            Usdt position info including amount
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPositionUsdtExtended.PositionAmount">
-            <summary>
-            Position amount
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPositionCoinExtended">
-            <summary>
-            Coin position including amount
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPositionCoinExtended.PositionAmount">
-            <summary>
-            Position amount
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBasis">
             <summary>
             Basis info
@@ -11176,6 +11081,141 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCoinTrade.BaseQuantity">
             <summary>
             Base quantity
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinancePositionBase">
+            <summary>
+            Base position info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionBase.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionBase.EntryPrice">
+            <summary>
+            Entry price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionBase.Leverage">
+            <summary>
+            Leverage
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionBase.UnrealizedProfit">
+            <summary>
+            Unrealized profit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionBase.PositionSide">
+            <summary>
+            Position side
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoBase">
+            <summary>
+            Position info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoBase.InitialMargin">
+            <summary>
+            Initial margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoBase.MaintMargin">
+            <summary>
+            Maint margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoBase.PositionInitialMargin">
+            <summary>
+            Position initial margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoBase.OpenOrderInitialMargin">
+            <summary>
+            Open order initial margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoBase.Isolated">
+            <summary>
+            Isolated
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoUsdt">
+            <summary>
+            Usdt position info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoUsdt.MaxNotional">
+            <summary>
+            Max notional
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoCoin">
+            <summary>
+            Coin position info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoCoin.MaxQuantity">
+            <summary>
+            Max quantity
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinancePositionDetailsBase">
+            <summary>
+            Base position details
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionDetailsBase.MarginType">
+            <summary>
+            Margin type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionDetailsBase.IsAutoAddMargin">
+            <summary>
+            Is auto add margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionDetailsBase.IsolatedMargin">
+            <summary>
+            Isolated margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionDetailsBase.LiquidationPrice">
+            <summary>
+            Liquidation price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionDetailsBase.MarkPrice">
+            <summary>
+            Mark price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionDetailsBase.PositionAmount">
+            <summary>
+            Position amount
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinancePositionDetailsUsdt">
+            <summary>
+            Usdt position details
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionDetailsUsdt.MaxNotionalValue">
+            <summary>
+            Max notional
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinancePositionDetailsCoin">
+            <summary>
+            Coin position info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionDetailsCoin.MaxQuantity">
+            <summary>
+            Max quantity
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesBookPrice">
