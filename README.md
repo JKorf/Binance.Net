@@ -165,6 +165,10 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.8.1 - 11 feb 2021
+    * Fixed GetOpenOrder endpoint on futures
+    * Fixed HttpMethods in subaccount calls
+
 * Version 6.8.0 - 09 feb 2021
     * Fixed stopPrice AutoComply trade rules behavior
     * Fixed position models
