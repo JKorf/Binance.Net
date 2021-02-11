@@ -4286,9 +4286,9 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for canceled order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesOrders.GetOpenOrders(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesOrders.GetOpenOrder(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Retrieves data for a specific current orders. Either orderId or origClientOrderId should be provided.
+            Retrieves data for a specific open order. Either orderId or origClientOrderId should be provided.
             </summary>
             <param name="symbol">The symbol the order is for</param>
             <param name="orderId">The order id of the order</param>
@@ -4297,9 +4297,9 @@
             <param name="ct">Cancellation token</param>
             <returns>The specific order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesOrders.GetOpenOrdersAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesOrders.GetOpenOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Retrieves data for a specific current orders. Either orderId or origClientOrderId should be provided.
+            Retrieves data for a specific open order. Either orderId or origClientOrderId should be provided.
             </summary>
             <param name="symbol">The symbol the order is for</param>
             <param name="orderId">The order id of the order</param>
@@ -22232,9 +22232,9 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for canceled order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.GetOpenOrders(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.GetOpenOrder(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Retrieves data for a specific current orders. Either orderId or origClientOrderId should be provided.
+            Retrieves data for a specific open order. Either orderId or origClientOrderId should be provided.
             </summary>
             <param name="symbol">The symbol the order is for</param>
             <param name="orderId">The order id of the order</param>
@@ -22243,9 +22243,9 @@
             <param name="ct">Cancellation token</param>
             <returns>The specific order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.GetOpenOrdersAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.GetOpenOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Retrieves data for a specific current orders. Either orderId or origClientOrderId should be provided.
+            Retrieves data for a specific open order. Either orderId or origClientOrderId should be provided.
             </summary>
             <param name="symbol">The symbol the order is for</param>
             <param name="orderId">The order id of the order</param>

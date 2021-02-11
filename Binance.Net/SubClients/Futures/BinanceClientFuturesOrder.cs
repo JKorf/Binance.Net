@@ -543,7 +543,7 @@ namespace Binance.Net.SubClients.Futures
         #region Query Current Open Order
 
         /// <summary>
-        /// Retrieves data for a specific current orders. Either orderId or origClientOrderId should be provided.
+        /// Retrieves data for a specific open order. Either orderId or origClientOrderId should be provided.
         /// </summary>
         /// <param name="symbol">The symbol the order is for</param>
         /// <param name="orderId">The order id of the order</param>
@@ -551,10 +551,10 @@ namespace Binance.Net.SubClients.Futures
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The specific order</returns>
-        public WebCallResult<IEnumerable<BinanceFuturesOrder>> GetOpenOrders(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default) => GetOpenOrdersAsync(symbol, orderId, origClientOrderId, receiveWindow, ct).Result;
+        public WebCallResult<BinanceFuturesOrder> GetOpenOrder(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default) => GetOpenOrderAsync(symbol, orderId, origClientOrderId, receiveWindow, ct).Result;
 
         /// <summary>
-        /// Retrieves data for a specific current orders. Either orderId or origClientOrderId should be provided.
+        /// Retrieves data for a specific open order. Either orderId or origClientOrderId should be provided.
         /// </summary>
         /// <param name="symbol">The symbol the order is for</param>
         /// <param name="orderId">The order id of the order</param>
@@ -562,14 +562,14 @@ namespace Binance.Net.SubClients.Futures
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The specific order</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetOpenOrdersAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceFuturesOrder>> GetOpenOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (orderId == null && origClientOrderId == null)
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
 
             var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
-                return new WebCallResult<IEnumerable<BinanceFuturesOrder>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<BinanceFuturesOrder>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -580,7 +580,7 @@ namespace Binance.Net.SubClients.Futures
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? BaseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await BaseClient.SendRequestInternal<IEnumerable<BinanceFuturesOrder>>(FuturesClient.GetUrl(openOrderEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await BaseClient.SendRequestInternal<BinanceFuturesOrder>(FuturesClient.GetUrl(openOrderEndpoint, Api, SignedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
