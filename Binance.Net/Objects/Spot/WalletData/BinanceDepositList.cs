@@ -46,5 +46,17 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// </summary>
         [JsonConverter(typeof(DepositStatusConverter))]
         public DepositStatus Status { get; set; }
+
+        /// <summary>
+        /// The transfer type
+        /// </summary>
+        [JsonConverter(typeof(WithdrawDepositTransferTypeConverter))]
+        public WithdrawDepositTransferType TransferType { get; set; }
+
+        /// <summary>
+        /// Confirmations
+        /// </summary>
+        [JsonProperty("confirmTimes")]
+        public string Confirmations { get; set; } = "";
     }
 }

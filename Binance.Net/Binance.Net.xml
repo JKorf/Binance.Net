@@ -1688,6 +1688,21 @@
             Withdrawal has been processed
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.WithdrawDepositTransferType">
+            <summary>
+            Transfer type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.WithdrawDepositTransferType.Internal">
+            <summary>
+            Internal transfer
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.WithdrawDepositTransferType.External">
+            <summary>
+            External transfer
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.WorkingType">
             <summary>
             Type of working
@@ -17845,6 +17860,16 @@
         <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceDeposit.Status">
             <summary>
             The status of the deposit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceDeposit.TransferType">
+            <summary>
+            The transfer type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceDeposit.Confirmations">
+            <summary>
+            Confirmations
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceDividendRecord">
