@@ -261,5 +261,24 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="ct">Cancellation token</param>
         /// <returns>Basis</returns>
         Task<WebCallResult<IEnumerable<BinanceFuturesBasis>>> GetBasisAsync(string pair, ContractType contractType, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
+
+
+        /// <summary>
+        /// Get a list of the prices of all symbols
+        /// </summary>
+        /// <param name="symbol">Retrieve for a symbol</param>
+        /// <param name="pair">Retrieve prices for a specific pair</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of prices</returns>
+        WebCallResult<IEnumerable<BinanceFuturesCoinPrice>> GetAllPrices(string? symbol = null, string? pair = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get a list of the prices of all symbols
+        /// </summary>
+        /// <param name="symbol">Retrieve for a symbol</param>
+        /// <param name="pair">Retrieve prices for a specific pair</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of prices</returns>
+        Task<WebCallResult<IEnumerable<BinanceFuturesCoinPrice>>> GetAllPricesAsync(string? symbol = null, string? pair = null, CancellationToken ct = default);
     }
 }

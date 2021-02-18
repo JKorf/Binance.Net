@@ -167,5 +167,36 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<BinanceFuturesCompositeIndexInfo>>> GetCompositeIndexInfoAsync(
             string? symbol = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets the price of a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to get the price for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Price of symbol</returns>
+        WebCallResult<BinancePrice> GetPrice(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets the price of a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to get the price for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Price of symbol</returns>
+        Task<WebCallResult<BinancePrice>> GetPriceAsync(string symbol, CancellationToken ct = default);
+
+
+        /// <summary>
+        /// Get a list of the prices of all symbols
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of prices</returns>
+        WebCallResult<IEnumerable<BinancePrice>> GetAllPrices(CancellationToken ct = default);
+
+        /// <summary>
+        /// Get a list of the prices of all symbols
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of prices</returns>
+        Task<WebCallResult<IEnumerable<BinancePrice>>> GetAllPricesAsync(CancellationToken ct = default);
     }
 }

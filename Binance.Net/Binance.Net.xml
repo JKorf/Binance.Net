@@ -3973,6 +3973,24 @@
             <param name="ct">Cancellation token</param>
             <returns>Basis</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesCoinMarket.GetAllPrices(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get a list of the prices of all symbols
+            </summary>
+            <param name="symbol">Retrieve for a symbol</param>
+            <param name="pair">Retrieve prices for a specific pair</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of prices</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesCoinMarket.GetAllPricesAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get a list of the prices of all symbols
+            </summary>
+            <param name="symbol">Retrieve for a symbol</param>
+            <param name="pair">Retrieve prices for a specific pair</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of prices</returns>
+        </member>
         <member name="T:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesCoinOrder">
             <summary>
             COIN-M futures order endpoints
@@ -4615,6 +4633,36 @@
             <param name="symbol">The symbol to get the data for</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtMarket.GetPrice(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets the price of a symbol
+            </summary>
+            <param name="symbol">The symbol to get the price for</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Price of symbol</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtMarket.GetPriceAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets the price of a symbol
+            </summary>
+            <param name="symbol">The symbol to get the price for</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Price of symbol</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtMarket.GetAllPrices(System.Threading.CancellationToken)">
+            <summary>
+            Get a list of the prices of all symbols
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>List of prices</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtMarket.GetAllPricesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get a list of the prices of all symbols
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>List of prices</returns>
         </member>
         <member name="T:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtOrder">
             <summary>
@@ -5979,36 +6027,6 @@
             <param name="limit">Max number of results</param>
             <param name="ct">Cancellation token</param>
             <returns>The aggregated trades list for the symbol</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientMarket.GetPrice(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Gets the price of a symbol
-            </summary>
-            <param name="symbol">The symbol to get the price for</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Price of symbol</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientMarket.GetPriceAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Gets the price of a symbol
-            </summary>
-            <param name="symbol">The symbol to get the price for</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Price of symbol</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientMarket.GetAllPrices(System.Threading.CancellationToken)">
-            <summary>
-            Get a list of the prices of all symbols
-            </summary>
-            <param name="ct">Cancellation token</param>
-            <returns>List of prices</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientMarket.GetAllPricesAsync(System.Threading.CancellationToken)">
-            <summary>
-            Get a list of the prices of all symbols
-            </summary>
-            <param name="ct">Cancellation token</param>
-            <returns>List of prices</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientMarket.GetKlines(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
@@ -7921,6 +7939,22 @@
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>List of book prices</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotMarket.GetPrice(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets the price of a symbol
+            </summary>
+            <param name="symbol">The symbol to get the price for</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Price of symbol</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotMarket.GetPriceAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets the price of a symbol
+            </summary>
+            <param name="symbol">The symbol to get the price for</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Price of symbol</returns>
         </member>
         <member name="T:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder">
             <summary>
@@ -14917,6 +14951,16 @@
         <member name="P:Binance.Net.Objects.Spot.MarketData.BinancePrice.Timestamp">
             <summary>
             Timestamp
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.MarketData.BinanceFuturesCoinPrice">
+            <summary>
+            Futures-Coin price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarketData.BinanceFuturesCoinPrice.Pair">
+            <summary>
+            Name of the pair
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.MarketData.BinanceRecentTrade">
@@ -21934,36 +21978,6 @@
             <param name="ct">Cancellation token</param>
             <returns>The funding rate history for the provided symbol</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesMarket.GetPrice(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Gets the price of a symbol
-            </summary>
-            <param name="symbol">The symbol to get the price for</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Price of symbol</returns>
-        </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesMarket.GetPriceAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Gets the price of a symbol
-            </summary>
-            <param name="symbol">The symbol to get the price for</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Price of symbol</returns>
-        </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesMarket.GetAllPrices(System.Threading.CancellationToken)">
-            <summary>
-            Get a list of the prices of all symbols
-            </summary>
-            <param name="ct">Cancellation token</param>
-            <returns>List of prices</returns>
-        </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesMarket.GetAllPricesAsync(System.Threading.CancellationToken)">
-            <summary>
-            Get a list of the prices of all symbols
-            </summary>
-            <param name="ct">Cancellation token</param>
-            <returns>List of prices</returns>
-        </member>
         <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesMarket.GetTopLongShortAccountRatio(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             Gets Top Trader Long/Short Ratio (Accounts)
@@ -22871,6 +22885,24 @@
             <param name="ct">Cancellation token</param>
             <returns>Basis</returns>
         </member>
+        <member name="M:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinMarket.GetAllPrices(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get a list of the prices of all symbols
+            </summary>
+            <param name="symbol">Retrieve for a symbol</param>
+            <param name="pair">Retrieve prices for a specific pair</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of prices</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinMarket.GetAllPricesAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get a list of the prices of all symbols
+            </summary>
+            <param name="symbol">Retrieve for a symbol</param>
+            <param name="pair">Retrieve prices for a specific pair</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of prices</returns>
+        </member>
         <member name="T:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinOrder">
             <summary>
             COIN-M futures order endpoints
@@ -23259,6 +23291,36 @@
             <param name="symbol">The symbol to get the data for</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket.GetPrice(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets the price of a symbol
+            </summary>
+            <param name="symbol">The symbol to get the price for</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Price of symbol</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket.GetPriceAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets the price of a symbol
+            </summary>
+            <param name="symbol">The symbol to get the price for</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Price of symbol</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket.GetAllPrices(System.Threading.CancellationToken)">
+            <summary>
+            Get a list of the prices of all symbols
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>List of prices</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket.GetAllPricesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get a list of the prices of all symbols
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>List of prices</returns>
         </member>
         <member name="T:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtOrder">
             <summary>

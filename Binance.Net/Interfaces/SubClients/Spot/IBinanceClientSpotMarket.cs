@@ -109,5 +109,21 @@ namespace Binance.Net.Interfaces.SubClients.Spot
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of book prices</returns>
         Task<WebCallResult<IEnumerable<BinanceBookPrice>>> GetAllBookPricesAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets the price of a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to get the price for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Price of symbol</returns>
+        WebCallResult<BinancePrice> GetPrice(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets the price of a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to get the price for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Price of symbol</returns>
+        Task<WebCallResult<BinancePrice>> GetPriceAsync(string symbol, CancellationToken ct = default);
     }
 }

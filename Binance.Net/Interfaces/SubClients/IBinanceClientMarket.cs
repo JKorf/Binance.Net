@@ -96,37 +96,6 @@ namespace Binance.Net.Interfaces.SubClients
         Task<WebCallResult<IEnumerable<BinanceAggregatedTrade>>> GetAggregatedTradesAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Gets the price of a symbol
-        /// </summary>
-        /// <param name="symbol">The symbol to get the price for</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Price of symbol</returns>
-        WebCallResult<BinancePrice> GetPrice(string symbol, CancellationToken ct = default);
-
-        /// <summary>
-        /// Gets the price of a symbol
-        /// </summary>
-        /// <param name="symbol">The symbol to get the price for</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Price of symbol</returns>
-        Task<WebCallResult<BinancePrice>> GetPriceAsync(string symbol, CancellationToken ct = default);
-
-        /// <summary>
-        /// Get a list of the prices of all symbols
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of prices</returns>
-        WebCallResult<IEnumerable<BinancePrice>> GetAllPrices(CancellationToken ct = default);
-
-        /// <summary>
-        /// Get a list of the prices of all symbols
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of prices</returns>
-        Task<WebCallResult<IEnumerable<BinancePrice>>> GetAllPricesAsync(CancellationToken ct = default);
-
-
-        /// <summary>
         /// Get candlestick data for the provided symbol
         /// </summary>
         /// <param name="symbol">The symbol to get the data for</param>

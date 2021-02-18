@@ -33,7 +33,6 @@ namespace Binance.Net.SubClients.Futures
 
         private const string orderBookEndpoint = "depth";
         private const string aggregatedTradesEndpoint = "aggTrades";
-        private const string allPricesEndpoint = "ticker/price";
 
         private const string fundingRateHistoryEndpoint = "fundingRate";
         
@@ -211,52 +210,7 @@ namespace Binance.Net.SubClients.Futures
         }
 
         #endregion
-
-        #region Symbol Price Ticker
-
-        /// <summary>
-        /// Gets the price of a symbol
-        /// </summary>
-        /// <param name="symbol">The symbol to get the price for</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Price of symbol</returns>
-        public WebCallResult<BinancePrice> GetPrice(string symbol, CancellationToken ct = default) => GetPriceAsync(symbol, ct).Result;
-
-        /// <summary>
-        /// Gets the price of a symbol
-        /// </summary>
-        /// <param name="symbol">The symbol to get the price for</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Price of symbol</returns>
-        public async Task<WebCallResult<BinancePrice>> GetPriceAsync(string symbol, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>
-            {
-                { "symbol", symbol }
-            };
-
-            return await BaseClient.SendRequestInternal<BinancePrice>(FuturesClient.GetUrl(allPricesEndpoint, Api, publicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Get a list of the prices of all symbols
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of prices</returns>
-        public WebCallResult<IEnumerable<BinancePrice>> GetAllPrices(CancellationToken ct = default) => GetAllPricesAsync(ct).Result;
-
-        /// <summary>
-        /// Get a list of the prices of all symbols
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of prices</returns>
-        public async Task<WebCallResult<IEnumerable<BinancePrice>>> GetAllPricesAsync(CancellationToken ct = default)
-        {
-            return await BaseClient.SendRequestInternal<IEnumerable<BinancePrice>>(FuturesClient.GetUrl(allPricesEndpoint, Api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
-        }
-
-        #endregion
-
+        
         #region Top Trader Long/Short Ratio (Accounts)
 
         /// <summary>

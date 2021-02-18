@@ -23,4 +23,16 @@ namespace Binance.Net.Objects.Spot.MarketData
         [JsonProperty("time"), JsonConverter(typeof(TimestampConverter))]
         public DateTime? Timestamp { get; set; }
     }
+
+    /// <summary>
+    /// Futures-Coin price
+    /// </summary>
+    public class BinanceFuturesCoinPrice: BinancePrice
+    {
+        /// <summary>
+        /// Name of the pair
+        /// </summary>
+        [JsonProperty("ps")]
+        public string Pair { get; set; }
+    }
 }

@@ -30,6 +30,7 @@ namespace Binance.Net.SubClients.Futures.Coin
         private const string indexPriceKlineEndpoint = "indexPriceKlines";
         private const string markPriceKlineEndpoint = "markPriceKlines";
         private const string price24HEndpoint = "ticker/24hr";
+        private const string allPricesEndpoint = "ticker/price";
         private const string bookPricesEndpoint = "ticker/bookTicker";
         private const string allForcedOrdersEndpoint = "allForceOrders";
         private const string openInterestEndpoint = "openInterest";
@@ -568,5 +569,33 @@ namespace Binance.Net.SubClients.Futures.Coin
         }
 
         #endregion
+
+        #region Price
+        /// <summary>
+        /// Get a list of the prices of all symbols
+        /// </summary>
+        /// <param name="symbol">Retrieve for a symbol</param>
+        /// <param name="pair">Retrieve prices for a specific pair</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of prices</returns>
+        public WebCallResult<IEnumerable<BinanceFuturesCoinPrice>> GetAllPrices(string? symbol = null, string? pair = null, CancellationToken ct = default) => GetAllPricesAsync(symbol, pair, ct).Result;
+
+        /// <summary>
+        /// Get a list of the prices of all symbols
+        /// </summary>
+        /// <param name="symbol">Retrieve for a symbol</param>
+        /// <param name="pair">Retrieve prices for a specific pair</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of prices</returns>
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesCoinPrice>>> GetAllPricesAsync(string? symbol = null, string? pair = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("symbol", symbol);
+            parameters.AddOptionalParameter("pair", pair);
+
+            return await BaseClient.SendRequestInternal<IEnumerable<BinanceFuturesCoinPrice>>(FuturesClient.GetUrl(allPricesEndpoint, Api, publicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+        #endregion
+
     }
 }
