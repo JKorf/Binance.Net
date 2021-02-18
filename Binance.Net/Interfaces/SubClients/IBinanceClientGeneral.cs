@@ -163,10 +163,11 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="asset">Filter by asset</param>
         /// /// <param name="startTime">Filter by start time from</param>
         /// <param name="endTime">Filter by end time till</param>
+        /// <param name="limit">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Dividend records</returns>
-        WebCallResult<BinanceQueryRecords<BinanceDividendRecord>> GetAssetDividendRecords(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default);
+        WebCallResult<BinanceQueryRecords<BinanceDividendRecord>> GetAssetDividendRecords(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get asset dividend records
@@ -174,10 +175,11 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="asset">Filter by asset</param>
         /// /// <param name="startTime">Filter by start time from</param>
         /// <param name="endTime">Filter by end time till</param>
+        /// <param name="limit">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Dividend records</returns>
-        Task<WebCallResult<BinanceQueryRecords<BinanceDividendRecord>>> GetAssetDividendRecordsAsync(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceQueryRecords<BinanceDividendRecord>>> GetAssetDividendRecordsAsync(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// This request will disable fastwithdraw switch under your account.

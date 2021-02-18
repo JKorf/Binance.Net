@@ -301,12 +301,13 @@ namespace Binance.Net.SubClients
         /// Get asset dividend records
         /// </summary>
         /// <param name="asset">Filter by asset</param>
-        /// /// <param name="startTime">Filter by start time from</param>
+        /// <param name="startTime">Filter by start time from</param>
         /// <param name="endTime">Filter by end time till</param>
+        /// <param name="limit">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Dividend records</returns>
-        public WebCallResult<BinanceQueryRecords<BinanceDividendRecord>> GetAssetDividendRecords(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default) => GetAssetDividendRecordsAsync(asset, startTime, endTime, receiveWindow, ct).Result;
+        public WebCallResult<BinanceQueryRecords<BinanceDividendRecord>> GetAssetDividendRecords(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default) => GetAssetDividendRecordsAsync(asset, startTime, endTime, limit, receiveWindow, ct).Result;
 
         /// <summary>
         /// Get asset dividend records
@@ -314,10 +315,11 @@ namespace Binance.Net.SubClients
         /// <param name="asset">Filter by asset</param>
         /// /// <param name="startTime">Filter by start time from</param>
         /// <param name="endTime">Filter by end time till</param>
+        /// <param name="limit">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Dividend records</returns>
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceDividendRecord>>> GetAssetDividendRecordsAsync(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceDividendRecord>>> GetAssetDividendRecordsAsync(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
@@ -328,6 +330,7 @@ namespace Binance.Net.SubClients
                 { "timestamp", _baseClient.GetTimestamp() }
             };
             parameters.AddOptionalParameter("asset", asset);
+            parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("startTime", startTime != null ? BinanceClient.ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
             parameters.AddOptionalParameter("endTime", endTime != null ? BinanceClient.ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
