@@ -252,7 +252,7 @@ namespace Binance.Net.SubClients
             {
                 {"quoteAsset", quoteAsset},
                 {"baseAsset", baseAsset},
-                {"quoteQuantity",quoteQuantity.ToString(CultureInfo.InvariantCulture)},
+                {"quoteQty",quoteQuantity.ToString(CultureInfo.InvariantCulture)},
                 {"timestamp", _baseClient.GetTimestamp()}
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
