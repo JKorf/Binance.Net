@@ -56,5 +56,11 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         /// </summary>
         [JsonProperty("time"), JsonConverter(typeof(TimestampConverter))]
         public DateTime Date { get; set; }
+        
+        /// <summary>
+        /// Status
+        /// </summary>
+        [JsonConverter(typeof(BrokerageTransferTransactionStatusConverter))]
+        public BrokerageTransferTransactionStatus Status { get; set; }
     }
 }

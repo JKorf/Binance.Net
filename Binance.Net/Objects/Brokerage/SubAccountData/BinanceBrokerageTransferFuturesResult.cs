@@ -17,5 +17,11 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         /// Success
         /// </summary>
         public bool Success { get; set; }
+        
+        /// <summary>
+        /// Client Transfer Id
+        /// </summary>
+        [JsonProperty("clientTranId")]
+        public string ClientTransferId { get; set; } = "";
     }
 }

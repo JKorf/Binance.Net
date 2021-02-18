@@ -60,6 +60,12 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         public string Id { get; set; } = "";
         
         /// <summary>
+        /// Client Transfer Id
+        /// </summary>
+        [JsonProperty("clientTranId")]
+        public string ClientTransferId { get; set; } = "";
+        
+        /// <summary>
         /// Date
         /// </summary>
         [JsonProperty("time"), JsonConverter(typeof(TimestampConverter))]
