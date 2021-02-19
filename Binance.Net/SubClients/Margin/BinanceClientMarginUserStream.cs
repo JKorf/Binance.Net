@@ -20,6 +20,9 @@ namespace Binance.Net.SubClients.Margin
         private const string keepListenKeyAliveEndpoint = "userDataStream";
         private const string closeListenKeyEndpoint = "userDataStream";
 
+        private const string api = "api";
+        private const string userDataStreamVersion = "3";
+
         private readonly BinanceClient _baseClient;
 
         internal BinanceClientMarginUserStream(BinanceClient baseClient)
@@ -51,7 +54,7 @@ namespace Binance.Net.SubClients.Margin
             if (!timestampResult)
                 return new WebCallResult<string>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
-            var result = await _baseClient.SendRequestInternal<BinanceListenKey>(_baseClient.GetUrlSpot(getListenKeyEndpoint, "sapi", "1"), HttpMethod.Post, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceListenKey>(_baseClient.GetUrlSpot(getListenKeyEndpoint, api, userDataStreamVersion), HttpMethod.Post, ct).ConfigureAwait(false);
             return new WebCallResult<string>(result.ResponseStatusCode, result.ResponseHeaders, result.Data?.ListenKey, result.Error);
         }
 
@@ -87,7 +90,7 @@ namespace Binance.Net.SubClients.Margin
                 { "listenKey", listenKey },
             };
 
-            return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrlSpot(keepListenKeyAliveEndpoint, "sapi", "1"), HttpMethod.Put, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrlSpot(keepListenKeyAliveEndpoint, api, userDataStreamVersion), HttpMethod.Put, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -120,7 +123,7 @@ namespace Binance.Net.SubClients.Margin
                 { "listenKey", listenKey }
             };
 
-            return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrlSpot(closeListenKeyEndpoint, "sapi", "1"), HttpMethod.Delete, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrlSpot(closeListenKeyEndpoint, api, userDataStreamVersion), HttpMethod.Delete, ct, parameters).ConfigureAwait(false);
         }
 
         #endregion

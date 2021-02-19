@@ -19,7 +19,7 @@ namespace Binance.Net.SubClients.Spot
         private const string closeListenKeyEndpoint = "userDataStream";
         
         private const string api = "api";
-        private const string userDataStreamVersion = "1";
+        private const string userDataStreamVersion = "3";
 
         private readonly BinanceClient _baseClient;
 
