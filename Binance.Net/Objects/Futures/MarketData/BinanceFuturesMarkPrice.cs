@@ -19,6 +19,10 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// </summary>
         public decimal MarkPrice { get; set; }
         /// <summary>
+        /// The current index price
+        /// </summary>
+        public decimal IndexPrice { get; set; }
+        /// <summary>
         /// The last funding rate
         /// </summary>
         [JsonProperty("lastFundingRate")]

@@ -11539,6 +11539,11 @@
             The current market price
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesMarkPrice.IndexPrice">
+            <summary>
+            The current index price
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesMarkPrice.FundingRate">
             <summary>
             The last funding rate
