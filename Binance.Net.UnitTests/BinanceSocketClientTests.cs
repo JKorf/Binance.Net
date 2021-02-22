@@ -182,25 +182,16 @@ namespace Binance.Net.UnitTests
             var socket = new TestSocket();
             var client = TestHelpers.CreateSocketClient(socket);
 
-            BinanceStreamAccountInfo result = null;
-            client.Spot.SubscribeToUserDataUpdates("test", (test) => result = test, null, null, null, null);
+            BinanceStreamBalanceUpdate result = null;
+            client.Spot.SubscribeToUserDataUpdates("test", null, null, null, (test) => result = test);
 
-            var data = new BinanceStreamAccountInfo()
+            var data = new BinanceStreamBalanceUpdate()
             {
-                Event = "outboundAccountInfo",
+                Event = "balanceUpdate",
                 EventTime = new DateTime(2017, 1, 1),
-                BuyerCommission = 1.1m,
-                CanDeposit = true,
-                CanTrade = true,
-                CanWithdraw = false,
-                MakerCommission = 2.2m,
-                SellerCommission = 3.3m,
-                TakerCommission = 4.4m,
-                Balances = new List<BinanceStreamBalance>()
-                {
-                    new BinanceStreamBalance(){ Asset = "test1", Free = 1.1m, Locked = 2.2m},
-                    new BinanceStreamBalance(){ Asset = "test2", Free = 3.3m, Locked = 4.4m},
-                }
+                Asset = "BTC",
+                BalanceDelta = 1,
+                ClearTime = new DateTime(2018, 1, 1),
             };
 
             // act
@@ -208,11 +199,7 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsNotNull(result);
-            var expectedBalances = data.Balances.ToList();
-            var balances = result.Balances.ToList();
-            Assert.IsTrue(TestHelpers.AreEqual(data, result, "Balances", "Permissions"));
-            Assert.IsTrue(TestHelpers.AreEqual(expectedBalances[0], balances[0]));
-            Assert.IsTrue(TestHelpers.AreEqual(expectedBalances[1], balances[1]));
+            Assert.IsTrue(TestHelpers.AreEqual(data, result));
         }
 
         [TestCase()]
@@ -223,7 +210,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateSocketClient(socket, new BinanceSocketClientOptions(){ LogVerbosity = LogVerbosity.Debug });
 
             BinanceStreamOrderList result = null;
-            client.Spot.SubscribeToUserDataUpdatesAsync("test", null, null, (test) => result = test, null, null);
+            client.Spot.SubscribeToUserDataUpdatesAsync("test", null, (test) => result = test, null, null);
 
             var data = new BinanceStreamOrderList()
             {
@@ -271,7 +258,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateSocketClient(socket);
 
             BinanceStreamOrderUpdate result = null;
-            client.Spot.SubscribeToUserDataUpdatesAsync("test", null, (test) => result = test, null, null, null);
+            client.Spot.SubscribeToUserDataUpdatesAsync("test", (test) => result = test, null, null, null);
 
             var data = new BinanceStreamOrderUpdate()
             {

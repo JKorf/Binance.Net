@@ -40,7 +40,6 @@ namespace Binance.Net.SocketSubClients
         private const string symbolMiniTickerStreamEndpoint = "@miniTicker";
         private const string allSymbolMiniTickerStreamEndpoint = "!miniTicker@arr";
 
-        private const string accountUpdateEvent = "outboundAccountInfo";
         private const string executionUpdateEvent = "executionReport";
         private const string ocoOrderUpdateEvent = "listStatus";
         private const string accountPositionUpdateEvent = "outboundAccountPosition";
