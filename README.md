@@ -165,6 +165,11 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.10.0 - 22 feb 2021
+    * IndexPrice added to BinanceFurustMarkPrice
+    * Removed deprecated accountInfo update from userDataStream
+    * Updated spot Order models
+
 * Version 6.9.1 - 18 feb 2021
     * Fixed inconsistent naming GetPrices
 
