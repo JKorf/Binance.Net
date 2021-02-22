@@ -165,6 +165,16 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.9.1 - 18 feb 2021
+    * Fixed inconsistent naming GetPrices
+
+* Version 6.9.0 - 18 feb 2021
+    * Updated withdraw models
+    * Brokerage API updates
+    * Updated GetPrice for coin futures
+    * Fixed Swap quantity parameter
+    * Added limit parameter to GetDividendRecords
+
 * Version 6.8.2 - 11 feb 2021
     * Fixed more HttpMethods
 

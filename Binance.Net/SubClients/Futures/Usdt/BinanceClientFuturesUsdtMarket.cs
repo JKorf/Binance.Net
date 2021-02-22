@@ -473,14 +473,14 @@ namespace Binance.Net.SubClients.Futures.Usdt
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of prices</returns>
-        public WebCallResult<IEnumerable<BinancePrice>> GetAllPrices(CancellationToken ct = default) => GetAllPricesAsync(ct).Result;
+        public WebCallResult<IEnumerable<BinancePrice>> GetPrices(CancellationToken ct = default) => GetPricesAsync(ct).Result;
 
         /// <summary>
         /// Get a list of the prices of all symbols
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of prices</returns>
-        public async Task<WebCallResult<IEnumerable<BinancePrice>>> GetAllPricesAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinancePrice>>> GetPricesAsync(CancellationToken ct = default)
         {
             return await BaseClient.SendRequestInternal<IEnumerable<BinancePrice>>(FuturesClient.GetUrl(allPricesEndpoint, Api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
         }

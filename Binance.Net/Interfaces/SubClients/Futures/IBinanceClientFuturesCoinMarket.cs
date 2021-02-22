@@ -270,7 +270,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="pair">Retrieve prices for a specific pair</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of prices</returns>
-        WebCallResult<IEnumerable<BinanceFuturesCoinPrice>> GetAllPrices(string? symbol = null, string? pair = null, CancellationToken ct = default);
+        WebCallResult<IEnumerable<BinanceFuturesCoinPrice>> GetPrices(string? symbol = null, string? pair = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get a list of the prices of all symbols
@@ -279,6 +279,6 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="pair">Retrieve prices for a specific pair</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of prices</returns>
-        Task<WebCallResult<IEnumerable<BinanceFuturesCoinPrice>>> GetAllPricesAsync(string? symbol = null, string? pair = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceFuturesCoinPrice>>> GetPricesAsync(string? symbol = null, string? pair = null, CancellationToken ct = default);
     }
 }

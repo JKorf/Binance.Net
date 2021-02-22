@@ -3973,7 +3973,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Basis</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesCoinMarket.GetAllPrices(System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesCoinMarket.GetPrices(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Get a list of the prices of all symbols
             </summary>
@@ -3982,7 +3982,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of prices</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesCoinMarket.GetAllPricesAsync(System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesCoinMarket.GetPricesAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Get a list of the prices of all symbols
             </summary>
@@ -4650,14 +4650,14 @@
             <param name="ct">Cancellation token</param>
             <returns>Price of symbol</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtMarket.GetAllPrices(System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtMarket.GetPrices(System.Threading.CancellationToken)">
             <summary>
             Get a list of the prices of all symbols
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>List of prices</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtMarket.GetAllPricesAsync(System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtMarket.GetPricesAsync(System.Threading.CancellationToken)">
             <summary>
             Get a list of the prices of all symbols
             </summary>
@@ -5331,24 +5331,26 @@
             <param name="ct">Cancellation token</param>
             <returns>Coins info</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.GetAssetDividendRecords(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.GetAssetDividendRecords(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get asset dividend records
             </summary>
             <param name="asset">Filter by asset</param>
             /// <param name="startTime">Filter by start time from</param>
             <param name="endTime">Filter by end time till</param>
+            <param name="limit">Page size</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Dividend records</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.GetAssetDividendRecordsAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.GetAssetDividendRecordsAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get asset dividend records
             </summary>
             <param name="asset">Filter by asset</param>
             /// <param name="startTime">Filter by start time from</param>
             <param name="endTime">Filter by end time till</param>
+            <param name="limit">Page size</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Dividend records</returns>
@@ -7963,6 +7965,20 @@
             <param name="symbol">The symbol to get the price for</param>
             <param name="ct">Cancellation token</param>
             <returns>Price of symbol</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotMarket.GetPrices(System.Threading.CancellationToken)">
+            <summary>
+            Get a list of the prices of all symbols
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>List of prices</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotMarket.GetPricesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get a list of the prices of all symbols
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>List of prices</returns>
         </member>
         <member name="T:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder">
             <summary>
@@ -20351,24 +20367,26 @@
             <param name="ct">Cancellation token</param>
             <returns>Coins info</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientGeneral.GetAssetDividendRecords(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientGeneral.GetAssetDividendRecords(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get asset dividend records
             </summary>
             <param name="asset">Filter by asset</param>
-            /// <param name="startTime">Filter by start time from</param>
+            <param name="startTime">Filter by start time from</param>
             <param name="endTime">Filter by end time till</param>
+            <param name="limit">Page size</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Dividend records</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientGeneral.GetAssetDividendRecordsAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientGeneral.GetAssetDividendRecordsAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get asset dividend records
             </summary>
             <param name="asset">Filter by asset</param>
             /// <param name="startTime">Filter by start time from</param>
             <param name="endTime">Filter by end time till</param>
+            <param name="limit">Page size</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Dividend records</returns>
@@ -22916,7 +22934,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Basis</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinMarket.GetAllPrices(System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinMarket.GetPrices(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Get a list of the prices of all symbols
             </summary>
@@ -22925,7 +22943,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of prices</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinMarket.GetAllPricesAsync(System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinMarket.GetPricesAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Get a list of the prices of all symbols
             </summary>
@@ -23339,14 +23357,14 @@
             <param name="ct">Cancellation token</param>
             <returns>Price of symbol</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket.GetAllPrices(System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket.GetPrices(System.Threading.CancellationToken)">
             <summary>
             Get a list of the prices of all symbols
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>List of prices</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket.GetAllPricesAsync(System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket.GetPricesAsync(System.Threading.CancellationToken)">
             <summary>
             Get a list of the prices of all symbols
             </summary>
@@ -24648,14 +24666,14 @@
             <param name="ct">Cancellation token</param>
             <returns>Price of symbol</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotMarket.GetAllPrices(System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotMarket.GetPrices(System.Threading.CancellationToken)">
             <summary>
             Get a list of the prices of all symbols
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>List of prices</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotMarket.GetAllPricesAsync(System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotMarket.GetPricesAsync(System.Threading.CancellationToken)">
             <summary>
             Get a list of the prices of all symbols
             </summary>

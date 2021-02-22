@@ -335,7 +335,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateResponseClient(prices);
 
             // act
-            var result = client.Spot.Market.GetAllPrices();
+            var result = client.Spot.Market.GetPrices();
 
             // assert
             Assert.IsTrue(result.Success);

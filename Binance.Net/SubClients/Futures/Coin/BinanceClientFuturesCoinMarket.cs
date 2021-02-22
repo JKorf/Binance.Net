@@ -578,7 +578,7 @@ namespace Binance.Net.SubClients.Futures.Coin
         /// <param name="pair">Retrieve prices for a specific pair</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of prices</returns>
-        public WebCallResult<IEnumerable<BinanceFuturesCoinPrice>> GetAllPrices(string? symbol = null, string? pair = null, CancellationToken ct = default) => GetAllPricesAsync(symbol, pair, ct).Result;
+        public WebCallResult<IEnumerable<BinanceFuturesCoinPrice>> GetPrices(string? symbol = null, string? pair = null, CancellationToken ct = default) => GetPricesAsync(symbol, pair, ct).Result;
 
         /// <summary>
         /// Get a list of the prices of all symbols
@@ -587,7 +587,7 @@ namespace Binance.Net.SubClients.Futures.Coin
         /// <param name="pair">Retrieve prices for a specific pair</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of prices</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceFuturesCoinPrice>>> GetAllPricesAsync(string? symbol = null, string? pair = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesCoinPrice>>> GetPricesAsync(string? symbol = null, string? pair = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("symbol", symbol);

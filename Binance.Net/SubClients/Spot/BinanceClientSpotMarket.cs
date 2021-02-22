@@ -325,14 +325,14 @@ namespace Binance.Net.SubClients.Spot
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of prices</returns>
-        public WebCallResult<IEnumerable<BinancePrice>> GetAllPrices(CancellationToken ct = default) => GetAllPricesAsync(ct).Result;
+        public WebCallResult<IEnumerable<BinancePrice>> GetPrices(CancellationToken ct = default) => GetPricesAsync(ct).Result;
 
         /// <summary>
         /// Get a list of the prices of all symbols
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of prices</returns>
-        public async Task<WebCallResult<IEnumerable<BinancePrice>>> GetAllPricesAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinancePrice>>> GetPricesAsync(CancellationToken ct = default)
         {
             return await _baseClient.SendRequestInternal<IEnumerable<BinancePrice>>(_baseClient.GetUrlSpot(allPricesEndpoint, api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
         }

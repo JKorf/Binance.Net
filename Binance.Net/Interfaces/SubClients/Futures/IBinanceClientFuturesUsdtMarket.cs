@@ -190,13 +190,13 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of prices</returns>
-        WebCallResult<IEnumerable<BinancePrice>> GetAllPrices(CancellationToken ct = default);
+        WebCallResult<IEnumerable<BinancePrice>> GetPrices(CancellationToken ct = default);
 
         /// <summary>
         /// Get a list of the prices of all symbols
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of prices</returns>
-        Task<WebCallResult<IEnumerable<BinancePrice>>> GetAllPricesAsync(CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinancePrice>>> GetPricesAsync(CancellationToken ct = default);
     }
 }
