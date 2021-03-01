@@ -274,7 +274,7 @@ namespace Binance.Net.SubClients.Futures
                 orderParameters.AddOptionalParameter("activationPrice", order.ActivationPrice?.ToString(CultureInfo.InvariantCulture));
                 orderParameters.AddOptionalParameter("callbackRate", order.CallbackRate?.ToString(CultureInfo.InvariantCulture));
                 orderParameters.AddOptionalParameter("workingType", order.WorkingType == null ? null : JsonConvert.SerializeObject(order.WorkingType, new WorkingTypeConverter(false)));
-                orderParameters.AddOptionalParameter("reduceOnly", order.ReduceOnly);
+                orderParameters.AddOptionalParameter("reduceOnly", order.ReduceOnly?.ToString().ToLower());
                 parameterOrders[i] = orderParameters;
                 i++;
             }
