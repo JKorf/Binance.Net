@@ -165,6 +165,13 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.11.0 - 01 mrt 2021
+    * Fixed position models
+    * Fixed reduceOnly parameter on PlaceMultipleOrder method
+    * Added transactionFeeFlag on Withdraw method
+    * Added config for deterministic build
+    * Updated CryptoExchange.Net
+
 * Version 6.10.0 - 22 feb 2021
     * IndexPrice added to BinanceFurustMarkPrice
     * Removed deprecated accountInfo update from userDataStream
