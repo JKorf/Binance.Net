@@ -165,6 +165,9 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.11.1 - 01 mrt 2021
+    * Added Nuget SymbolPackage
+
 * Version 6.11.0 - 01 mrt 2021
     * Fixed position models
     * Fixed reduceOnly parameter on PlaceMultipleOrder method
