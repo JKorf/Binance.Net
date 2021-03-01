@@ -69,7 +69,7 @@ namespace Binance.Net.SubClients
                 : new WebCallResult<Dictionary<string, BinanceAssetDetails>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
         }
         #endregion
-        
+
         #region Withdraw
 
         /// <summary>
@@ -81,11 +81,12 @@ namespace Binance.Net.SubClients
         /// <param name="amount">The amount to withdraw</param>
         /// <param name="withdrawOrderId">Custom client order id</param>
         /// <param name="network">The network to use</param>
+        /// <param name="transactionFeeFlag">When making internal transfer, true for returning the fee to the destination account; false for returning the fee back to the departure account. Default false.</param>
         /// <param name="name">Description of the address</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Withdrawal confirmation</returns>
-        public WebCallResult<BinanceWithdrawalPlaced> Withdraw(string asset, string address, decimal amount, string? withdrawOrderId = null, string? network = null, string? addressTag = null, string? name = null, int? receiveWindow = null, CancellationToken ct = default) => WithdrawAsync(asset, address, amount, withdrawOrderId, network, addressTag, name, receiveWindow, ct).Result;
+        public WebCallResult<BinanceWithdrawalPlaced> Withdraw(string asset, string address, decimal amount, string? withdrawOrderId = null, string? network = null, string? addressTag = null, string? name = null, bool? transactionFeeFlag = null, int? receiveWindow = null, CancellationToken ct = default) => WithdrawAsync(asset, address, amount, withdrawOrderId, network, addressTag, name, transactionFeeFlag, receiveWindow, ct).Result;
 
         /// <summary>
         /// Withdraw assets from Binance to an address
@@ -95,12 +96,13 @@ namespace Binance.Net.SubClients
         /// <param name="addressTag">Secondary address identifier for coins like XRP,XMR etc.</param>
         /// <param name="withdrawOrderId">Custom client order id</param>
         /// <param name="amount">The amount to withdraw</param>
+        /// <param name="transactionFeeFlag">When making internal transfer, true for returning the fee to the destination account; false for returning the fee back to the departure account. Default false.</param>
         /// <param name="network">The network to use</param>
         /// <param name="name">Description of the address</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Withdrawal confirmation</returns>
-        public async Task<WebCallResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, decimal amount, string? withdrawOrderId = null, string? network = null, string? addressTag = null, string? name = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, decimal amount, string? withdrawOrderId = null, string? network = null, string? addressTag = null, string? name = null, bool? transactionFeeFlag = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             address.ValidateNotNull(nameof(address));
@@ -119,6 +121,7 @@ namespace Binance.Net.SubClients
             parameters.AddOptionalParameter("name", name);
             parameters.AddOptionalParameter("withdrawOrderId", withdrawOrderId);
             parameters.AddOptionalParameter("network", network);
+            parameters.AddOptionalParameter("transactionFeeFlag", transactionFeeFlag);
             parameters.AddOptionalParameter("addressTag", addressTag);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
