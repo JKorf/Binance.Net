@@ -6750,7 +6750,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Asset detail</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientWithdrawDeposit.Withdraw(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientWithdrawDeposit.Withdraw(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Withdraw assets from Binance to an address
             </summary>
@@ -6759,13 +6759,14 @@
             <param name="addressTag">Secondary address identifier for coins like XRP,XMR etc.</param>
             <param name="amount">The amount to withdraw</param>
             <param name="withdrawOrderId">Custom client order id</param>
+            <param name="transactionFeeFlag">When making internal transfer, true for returning the fee to the destination account; false for returning the fee back to the departure account. Default false.</param>
             <param name="network">The network to use</param>
             <param name="name">Description of the address</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Withdrawal confirmation</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientWithdrawDeposit.WithdrawAsync(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientWithdrawDeposit.WithdrawAsync(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Withdraw assets from Binance to an address
             </summary>
@@ -6773,6 +6774,7 @@
             <param name="address">The address to send the funds to</param>
             <param name="addressTag">Secondary address identifier for coins like XRP,XMR etc.</param>
             <param name="withdrawOrderId">Custom client order id</param>
+            <param name="transactionFeeFlag">When making internal transfer, true for returning the fee to the destination account; false for returning the fee back to the departure account. Default false.</param>
             <param name="amount">The amount to withdraw</param>
             <param name="network">The network to use</param>
             <param name="name">Description of the address</param>
@@ -21373,7 +21375,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Asset detail</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientWithdrawDeposit.Withdraw(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientWithdrawDeposit.Withdraw(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Withdraw assets from Binance to an address
             </summary>
@@ -21383,12 +21385,13 @@
             <param name="amount">The amount to withdraw</param>
             <param name="withdrawOrderId">Custom client order id</param>
             <param name="network">The network to use</param>
+            <param name="transactionFeeFlag">When making internal transfer, true for returning the fee to the destination account; false for returning the fee back to the departure account. Default false.</param>
             <param name="name">Description of the address</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Withdrawal confirmation</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientWithdrawDeposit.WithdrawAsync(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientWithdrawDeposit.WithdrawAsync(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Withdraw assets from Binance to an address
             </summary>
@@ -21397,6 +21400,7 @@
             <param name="addressTag">Secondary address identifier for coins like XRP,XMR etc.</param>
             <param name="withdrawOrderId">Custom client order id</param>
             <param name="amount">The amount to withdraw</param>
+            <param name="transactionFeeFlag">When making internal transfer, true for returning the fee to the destination account; false for returning the fee back to the departure account. Default false.</param>
             <param name="network">The network to use</param>
             <param name="name">Description of the address</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
