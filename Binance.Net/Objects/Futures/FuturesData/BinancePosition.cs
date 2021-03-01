@@ -77,6 +77,12 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Max notional
         /// </summary>
         public decimal MaxNotional { get; set; }
+
+        /// <summary>
+        /// Position amount
+        /// </summary>
+        [JsonProperty("positionAmt")]
+        public decimal PositionAmount { get; set; }
     }
 
     /// <summary>

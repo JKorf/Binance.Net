@@ -11239,6 +11239,11 @@
             Max notional
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoUsdt.PositionAmount">
+            <summary>
+            Position amount
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoCoin">
             <summary>
             Coin position info

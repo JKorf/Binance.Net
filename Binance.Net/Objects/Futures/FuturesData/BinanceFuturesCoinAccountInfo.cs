@@ -37,6 +37,6 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// Account positions
         /// </summary>
-        public IEnumerable<BinancePositionDetailsCoin> Positions { get; set; } = new List<BinancePositionDetailsCoin>();
+        public IEnumerable<BinancePositionInfoCoin> Positions { get; set; } = new List<BinancePositionInfoCoin>();
     }
 }
