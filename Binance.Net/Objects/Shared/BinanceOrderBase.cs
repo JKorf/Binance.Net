@@ -49,7 +49,7 @@ namespace Binance.Net.Objects.Shared
         {
             get
             {
-                if (_price == 0 && Type == OrderType.Market)
+                if (_price == 0 && Type == OrderType.Market && QuantityFilled != 0)
                     return QuoteQuantityFilled / QuantityFilled;
                 return _price;
             }
