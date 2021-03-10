@@ -14746,6 +14746,11 @@
             The asset of the loan
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceLoan.TransactionId">
+            <summary>
+            The transaction id of the loan
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceLoan.Principal">
             <summary>
             Principal repaid 
@@ -14779,6 +14784,11 @@
         <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceRepay.Amount">
             <summary>
             Total amount repaid
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceRepay.Interest">
+            <summary>
+            Interest repaid
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceRepay.Principal">
