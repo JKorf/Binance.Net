@@ -16,6 +16,11 @@ namespace Binance.Net.Objects.Spot.MarginData
         /// </summary>
         public string Asset { get; set; } = "";
         /// <summary>
+        /// The transaction id of the loan
+        /// </summary>
+        [JsonProperty("txId")]
+        public long TransactionId { get; set; }
+        /// <summary>
         /// Principal repaid 
         /// </summary>
         public decimal Principal { get; set; }

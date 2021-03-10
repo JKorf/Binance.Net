@@ -25,6 +25,10 @@ namespace Binance.Net.Objects.Spot.MarginData
         /// </summary>
         public decimal Amount { get; set; }
         /// <summary>
+        /// Interest repaid
+        /// </summary>
+        public decimal Interest { get; set; }
+        /// <summary>
         /// Principal repaid
         /// </summary>
         public decimal Principal { get; set; }
