@@ -18,7 +18,7 @@ namespace Binance.Net.Objects.Spot.MarginData
         /// <summary>
         /// Asset of the transfer
         /// </summary>
-        public decimal Asset { get; set; }
+        public string Asset { get; set; } = "";
         /// <summary>
         /// Status of the transfer
         /// </summary>
