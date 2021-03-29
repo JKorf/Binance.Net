@@ -210,7 +210,7 @@ namespace Binance.Net.SubClients
         /// <param name="ct">Cancellation token</param>
         /// <returns>Revenue list</returns>
         public WebCallResult<BinanceRevenueList> GetMiningRevenueList(string algorithm, string userName,
-            string? coin = null, DateTime? startDate = null, DateTime? endDate = null, int? page = null,
+            string? coin = null, DateTime? startDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null,
             CancellationToken ct = default)
             => GetMiningRevenueListAsync(algorithm, userName, coin, startDate, endDate, page, ct).Result;
 
@@ -220,12 +220,13 @@ namespace Binance.Net.SubClients
         /// <param name="algorithm">Algorithm</param>
         /// <param name="userName">Mining account</param>
         /// <param name="page">Result page</param>
+        /// <param name="pageSize">Results per page</param>
         /// <param name="coin">Coin</param>
         /// <param name="startDate">Start date</param>
         /// <param name="endDate">End date</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Revenue list</returns>
-        public async Task<WebCallResult<BinanceRevenueList>> GetMiningRevenueListAsync(string algorithm, string userName, string? coin = null, DateTime? startDate = null, DateTime? endDate = null, int? page = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceRevenueList>> GetMiningRevenueListAsync(string algorithm, string userName, string? coin = null, DateTime? startDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null, CancellationToken ct = default)
         {
             algorithm.ValidateNotNull(nameof(algorithm));
             userName.ValidateNotNull(nameof(userName));
@@ -237,6 +238,7 @@ namespace Binance.Net.SubClients
             };
 
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("pageSize", pageSize?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("coin", coin);
             parameters.AddOptionalParameter("startDate", startDate.HasValue ? JsonConvert.SerializeObject(startDate.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("endDate", endDate.HasValue ? JsonConvert.SerializeObject(endDate.Value, new TimestampConverter()) : null);
