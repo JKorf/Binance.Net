@@ -48,10 +48,53 @@ namespace Binance.Net.Objects.Blvt
         /// Daily management fee
         /// </summary>
         public decimal DailyManagementFee { get; set; }
+
+        /// <summary>
+        /// Current baskets
+        /// </summary>
+        public IEnumerable<BlvtCurrentBasket> CurrentBaskets { get; set; } = new BlvtCurrentBasket[0];
+        /// <summary>
+        /// Redeem fee percentage
+        /// </summary>
+        [JsonProperty("redeemFeePct")]
+        public decimal RedeemFeePercentage { get; set; }
+        /// <summary>
+        /// Daily redeem limit
+        /// </summary>
+        public decimal DailyRedeemLimit { get; set; }
+        /// <summary>
+        /// Purchase fee percentage
+        /// </summary>
+        [JsonProperty("purchaseFeePct")]
+        public decimal PurchaseFeePercentage { get; set; }
+        /// <summary>
+        /// Daily purchase limit
+        /// </summary>
+        public decimal DailyPurchaseLimit { get; set; }
+
         /// <summary>
         /// Data timestamp
         /// </summary>
         [JsonConverter(typeof(TimestampConverter))]
         public DateTime Timestamp { get; set; }
+    }
+
+    /// <summary>
+    /// Basket
+    /// </summary>
+    public class BlvtCurrentBasket
+    {
+        /// <summary>
+        /// Symbol
+        /// </summary>
+        public string Symbol { get; set; }
+        /// <summary>
+        /// Amount
+        /// </summary>
+        public decimal Amount { get; set; }
+        /// <summary>
+        /// Notional value
+        /// </summary>
+        public decimal NotionalValue { get; set; }
     }
 }

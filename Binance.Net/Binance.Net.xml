@@ -8545,9 +8545,34 @@
             Daily management fee
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Blvt.BinanceBlvtInfo.CurrentBaskets">
+            <summary>
+            Current baskets
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Blvt.BinanceBlvtInfo.Timestamp">
             <summary>
             Data timestamp
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Blvt.BlvtCurrentBasket">
+            <summary>
+            Basket
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Blvt.BlvtCurrentBasket.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Blvt.BlvtCurrentBasket.Amount">
+            <summary>
+            Amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Blvt.BlvtCurrentBasket.NotionalValue">
+            <summary>
+            Notional value
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Blvt.BinanceBlvtInfoUpdate">
@@ -12847,6 +12872,11 @@
         <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.CallbackRate">
             <summary>
             Callback Rate, only pushed with TRAILING_STOP_MARKET order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.RealizedProfit">
+            <summary>
+            Realized profit of the trade
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Shared.Binance24HPriceBase">
