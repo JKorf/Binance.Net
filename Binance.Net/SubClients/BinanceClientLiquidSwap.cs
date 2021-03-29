@@ -59,9 +59,9 @@ namespace Binance.Net.SubClients
                 return new WebCallResult<IEnumerable<BinanceBSwapPool>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
-                             {
-                                 {"timestamp", _baseClient.GetTimestamp()}
-                             };
+            {
+                {"timestamp", _baseClient.GetTimestamp()}
+            };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceBSwapPool>>(_baseClient.GetUrlSpot(bSwapPoolsEndpoint, bSwapApi, bSwapVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
@@ -221,7 +221,7 @@ namespace Binance.Net.SubClients
             {
                 {"quoteAsset", quoteAsset},
                 {"baseAsset", baseAsset},
-                {"quoteQuantity",quoteQuantity.ToString(CultureInfo.InvariantCulture)},
+                {"quoteQty", quoteQuantity.ToString(CultureInfo.InvariantCulture)},
                 {"timestamp", _baseClient.GetTimestamp()}
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
