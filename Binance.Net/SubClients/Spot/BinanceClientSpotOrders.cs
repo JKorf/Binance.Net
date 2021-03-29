@@ -520,6 +520,10 @@ namespace Binance.Net.SubClients.Spot
                 return new WebCallResult<BinanceOrderOcoList>(null, null, null, new ArgumentError(rulesCheck.ErrorMessage!));
             }
 
+            quantity = rulesCheck.Quantity!.Value;
+            price = rulesCheck.Price!.Value;
+            stopPrice = rulesCheck.StopPrice!.Value;
+
             var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
