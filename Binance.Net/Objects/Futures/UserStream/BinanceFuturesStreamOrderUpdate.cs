@@ -174,5 +174,10 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// </summary>
         [JsonProperty("cr")]
         public decimal CallbackRate { get; set; }
+        /// <summary>
+        /// Realized profit of the trade
+        /// </summary>
+        [JsonProperty("rp")]
+        public decimal RealizedProfit { get; set; }
     }
 }
