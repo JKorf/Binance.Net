@@ -82,7 +82,7 @@ namespace Binance.Net.SubClients
         /// <returns>Algorithms info</returns>
         public async Task<WebCallResult<IEnumerable<BinanceMiningAlgorithm>>> GetMiningAlgorithmListAsync(CancellationToken ct = default)
         {
-            var result = await _baseClient.SendRequestInternal<BinanceResult<IEnumerable<BinanceMiningAlgorithm>>>(_baseClient.GetUrlSpot(algorithmEndpoint, "sapi", "1"), HttpMethod.Get, ct, null, false).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceResult<IEnumerable<BinanceMiningAlgorithm>>>(_baseClient.GetUrlSpot(algorithmEndpoint, "sapi", "1"), HttpMethod.Get, ct, null, true).ConfigureAwait(false);
             if (!result.Success)
                 return WebCallResult<IEnumerable<BinanceMiningAlgorithm>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
@@ -129,7 +129,7 @@ namespace Binance.Net.SubClients
                 {"workerName", workerName}
             };
 
-            var result = await _baseClient.SendRequestInternal<BinanceResult<IEnumerable<BinanceMinerDetails>>>(_baseClient.GetUrlSpot(minerDetailsEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, false).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceResult<IEnumerable<BinanceMinerDetails>>>(_baseClient.GetUrlSpot(minerDetailsEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result.Success)
                 return WebCallResult<IEnumerable<BinanceMinerDetails>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
@@ -185,7 +185,7 @@ namespace Binance.Net.SubClients
             parameters.AddOptionalParameter("sortColumn", sortColumn);
             parameters.AddOptionalParameter("workerStatus", workerStatus == null ? null : JsonConvert.SerializeObject(workerStatus, new MinerStatusConverter(false)));
 
-            var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceMinerList>>(_baseClient.GetUrlSpot(minerListEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, false).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceMinerList>>(_baseClient.GetUrlSpot(minerListEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result.Success)
                 return WebCallResult<BinanceMinerList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
@@ -241,7 +241,7 @@ namespace Binance.Net.SubClients
             parameters.AddOptionalParameter("startDate", startDate.HasValue ? JsonConvert.SerializeObject(startDate.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("endDate", endDate.HasValue ? JsonConvert.SerializeObject(endDate.Value, new TimestampConverter()) : null);
 
-            var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceRevenueList>>(_baseClient.GetUrlSpot(miningRevenueEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, false).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceRevenueList>>(_baseClient.GetUrlSpot(miningRevenueEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result.Success)
                 return WebCallResult<BinanceRevenueList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
@@ -283,7 +283,7 @@ namespace Binance.Net.SubClients
                 {"userName", userName},
             };
 
-            var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceMiningStatistic>>(_baseClient.GetUrlSpot(miningStatisticsEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, false).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceMiningStatistic>>(_baseClient.GetUrlSpot(miningStatisticsEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result.Success)
                 return WebCallResult<BinanceMiningStatistic>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
@@ -313,7 +313,7 @@ namespace Binance.Net.SubClients
                 {"userName", userName},
             };
 
-            var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceMiningAccount>>(_baseClient.GetUrlSpot(miningAccountListEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, false).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceMiningAccount>>(_baseClient.GetUrlSpot(miningAccountListEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result.Success)
                 return WebCallResult<BinanceMiningAccount>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
