@@ -496,7 +496,7 @@ namespace Binance.Net.SubClients
                 { "userName", userName },
             };
 
-            var result = await _baseClient.SendRequestInternal<BinanceResult<int>>(_baseClient.GetUrlSpot(miningHashrateResaleCancel, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceResult<bool>>(_baseClient.GetUrlSpot(miningHashrateResaleCancel, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
             if (!result.Success)
                 return WebCallResult<bool>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 

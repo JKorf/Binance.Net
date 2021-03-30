@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Enums;
-using Binance.Net.Objects.Spot.MarginData;
 using Binance.Net.Objects.Spot.SpotData;
 using CryptoExchange.Net.Objects;
 
-namespace Binance.Net.Interfaces.SubClients.Margin
+namespace Binance.Net.SubClients.Margin
 {
     /// <summary>
     /// Margin orders interface
@@ -111,6 +110,16 @@ namespace Binance.Net.Interfaces.SubClients.Margin
         Task<WebCallResult<BinanceCanceledOrder>> CancelMarginOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, string? newClientOrderId = null, bool? isIsolated = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Cancel all active orders for a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol the to cancel orders for</param>
+        /// <param name="isIsolated">For isolated margin or not</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Id's for canceled order</returns>
+        Task<WebCallResult<IEnumerable<BinanceCanceledOrder>>> CancelOpenMarginOrdersAsync(string symbol, bool? isIsolated = null, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Retrieves data for a specific margin account order. Either orderId or origClientOrderId should be provided.
         /// </summary>
         /// <param name="symbol">The symbol the order is for</param>
@@ -209,6 +218,5 @@ namespace Binance.Net.Interfaces.SubClients.Margin
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of margin account trades</returns>
         Task<WebCallResult<IEnumerable<BinanceTrade>>> GetMyMarginAccountTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, bool? isIsolated = null, long? receiveWindow = null, CancellationToken ct = default);
-
     }
 }
