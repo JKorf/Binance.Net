@@ -7,7 +7,7 @@ using Binance.Net.Objects.Spot.SpotData;
 using Binance.Net.Objects.Spot.SubAccountData;
 using CryptoExchange.Net.Objects;
 
-namespace Binance.Net.Interfaces.SubClients
+namespace Binance.Net.SubClients
 {
     /// <summary>
     /// Sub accounts interface
@@ -442,8 +442,8 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Btc asset values</returns>
-        WebCallResult<BinanceSubAccountSpotAssetsSummary> GetSubAccountBtcValues(string? email = null,
-            int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+        WebCallResult<BinanceSubAccountSpotAssetsSummary> GetSubAccountBtcValues(
+            string? email = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get BTC valued asset summary of subaccounts.
@@ -454,7 +454,46 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Btc asset values</returns>
-        Task<WebCallResult<BinanceSubAccountSpotAssetsSummary>> GetSubAccountBtcValuesAsync(string? email = null,
-            int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceSubAccountSpotAssetsSummary>> GetSubAccountBtcValuesAsync(string? email = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Create a virtual sub account
+        /// </summary>
+        /// <param name="email">Virtual email of the sub account</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        WebCallResult<BinanceSubAccountEmail> CreateVirtualSubAccount(
+            string email, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Create a virtual sub account
+        /// </summary>
+        /// <param name="email">Virtual email of the sub account</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceSubAccountEmail>> CreateVirtualSubAccountAsync(string email, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Enable or disable blvt
+        /// </summary>
+        /// <param name="email">Email of the sub account</param>
+        /// <param name="enable">Enable or disable (only true for now)</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        WebCallResult<BinanceSubAccountBlvt> EnableBlvtForSubAccount(
+            string email, bool enable, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Enable or disable blvt
+        /// </summary>
+        /// <param name="email">Email of the sub account</param>
+        /// <param name="enable">Enable or disable (only true for now)</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceSubAccountBlvt>> EnableBlvtForSubAccountAsync(string email, bool enable, int? receiveWindow = null, CancellationToken ct = default);
     }
 }

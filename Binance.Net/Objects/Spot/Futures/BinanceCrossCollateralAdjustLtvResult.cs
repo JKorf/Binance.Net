@@ -18,6 +18,10 @@ namespace Binance.Net.Objects.Spot.Futures
         /// </summary>
         public string CollateralCoin { get; set; } = "";
         /// <summary>
+        /// Loan coin
+        /// </summary>
+        public string LoanCoin { get; set; } = "";
+        /// <summary>
         /// The direction
         /// </summary>
         [JsonConverter(typeof(AdjustRateDirectionConverter))]
