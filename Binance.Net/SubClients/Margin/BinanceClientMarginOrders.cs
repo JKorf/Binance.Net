@@ -30,6 +30,7 @@ namespace Binance.Net.SubClients.Margin
         private const string myMarginTradesEndpoint = "margin/myTrades";
         private const string allMarginOrdersEndpoint = "margin/allOrders";
         private const string openMarginOrdersEndpoint = "margin/openOrders";
+        private const string cancelOpenMarginOrdersEndpoint = "margin/openOrders";
         private const string queryMarginOrderEndpoint = "margin/order";
 
 
@@ -180,6 +181,36 @@ namespace Binance.Net.SubClients.Margin
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceCanceledOrder>(_baseClient.GetUrlSpot(cancelMarginOrderEndpoint, marginApi, marginVersion), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Margin Account Cancel All Open Orders
+
+        /// <summary>
+        /// Cancel all active orders for a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol the to cancel orders for</param>
+        /// <param name="isIsolated">For isolated margin or not</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Id's for canceled order</returns>
+        public async Task<WebCallResult<IEnumerable<BinanceCanceledOrder>>> CancelOpenMarginOrdersAsync(string symbol, bool? isIsolated = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            symbol.ValidateBinanceSymbol();
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<IEnumerable<BinanceCanceledOrder>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "symbol", symbol },
+                { "timestamp", _baseClient.GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("isIsolated", isIsolated);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceCanceledOrder>>(_baseClient.GetUrlSpot(cancelOpenMarginOrdersEndpoint, marginApi, marginVersion), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
