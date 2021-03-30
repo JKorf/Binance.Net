@@ -38,6 +38,7 @@ namespace Binance.Net.SubClients.Margin
         private const string maxTransferableEndpoint = "margin/maxTransferable";
         private const string transferHistoryEndpoint = "margin/transfer";
         private const string interestHistoryEndpoint = "margin/interestHistory";
+        private const string interestRateHistoryEndpoint = "margin/interestRateHistory";
         private const string forceLiquidationHistoryEndpoint = "margin/forceLiquidationRec";
 
         private const string createIsolatedMarginAccountEndpoint = "margin/isolated/create";
@@ -450,6 +451,58 @@ namespace Binance.Net.SubClients.Margin
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceInterestHistory>>(_baseClient.GetUrlSpot(interestHistoryEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Interest History
+
+        /// <summary>
+        /// Get history of interest rate
+        /// </summary>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="vipLevel">Vip level</param>
+        /// <param name="startTime">Filter by startTime from</param>
+        /// <param name="endTime">Filter by endTime from</param>
+        /// <param name="limit">Limit of the amount of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of interest rate</returns>
+        public WebCallResult<IEnumerable<BinanceInterestRateHistory>> GetInterestRateHistory(string asset, string? vipLevel = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default) =>
+            GetInterestRateHistoryAsync(asset, vipLevel, startTime, endTime, limit, receiveWindow, ct).Result;
+
+        /// <summary>
+        /// Get history of interest rate
+        /// </summary>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="vipLevel">Vip level</param>
+        /// <param name="startTime">Filter by startTime from</param>
+        /// <param name="endTime">Filter by endTime from</param>
+        /// <param name="limit">Limit of the amount of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of interest rate</returns>
+        public async Task<WebCallResult<IEnumerable<BinanceInterestRateHistory>>> GetInterestRateHistoryAsync(string asset, string? vipLevel = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            asset?.ValidateNotNull(nameof(asset));
+            limit?.ValidateIntBetween(nameof(limit), 1, 100);
+
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<IEnumerable<BinanceInterestRateHistory>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", _baseClient.GetTimestamp() },
+                { "asset", asset }
+            };
+            parameters.AddOptionalParameter("vipLevel", vipLevel?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("size", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("startTime", startTime.HasValue ? JsonConvert.SerializeObject(startTime.Value, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceInterestRateHistory>>(_baseClient.GetUrlSpot(interestRateHistoryEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
