@@ -10,6 +10,10 @@ namespace Binance.Net.Objects.Spot.Futures
     public class BinanceCrossCollateralInformation
     {
         /// <summary>
+        /// The loan coin
+        /// </summary>
+        public string LoanCoin { get; set; } = "";
+        /// <summary>
         /// The collateral coin
         /// </summary>
         public string CollateralCoin { get; set; } = "";
