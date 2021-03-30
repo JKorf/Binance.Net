@@ -42,6 +42,8 @@ namespace Binance.Net.SubClients
         private const string toggleBnbBurnEndpoint = "bnbBurn";
         private const string getBnbBurnEndpoint = "bnbBurn";
 
+        private const string universalTransferEndpoint = "asset/transfer";
+
 
         private readonly BinanceClient _baseClient;
 
@@ -554,6 +556,68 @@ namespace Binance.Net.SubClients
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceBnbBurnStatus>(_baseClient.GetUrlSpot(toggleBnbBurnEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+        #endregion
+
+        #region User Universal Transfer
+        /// <summary>
+        /// Transfers between accounts
+        /// </summary>
+        /// <param name="type">The type of transfer</param>
+        /// <param name="asset">The asset to transfer</param>
+        /// <param name="amount">The amount to transfer</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        public async Task<WebCallResult<BinanceTransaction>> Transfer(UniversalTransferType type, string asset, decimal amount, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceTransaction>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "type", JsonConvert.SerializeObject(type, new UniversalTransferTypeConverter(false)) },
+                { "asset", asset },
+                { "amount", amount.ToString(CultureInfo.InvariantCulture) },
+                { "timestamp", _baseClient.GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceTransaction>(_baseClient.GetUrlSpot(universalTransferEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+        #endregion
+
+        #region User Universal Transfer
+        /// <summary>
+        /// Get transfer history
+        /// </summary>
+        /// <param name="type">The type of transfer</param>
+        /// <param name="startTime">Filter by startTime</param>
+        /// <param name="endTime">Filter by endTime</param>
+        /// <param name="page">The page</param>
+        /// <param name="pageSize">Results per page</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceTransfer>>> GetTransfers(UniversalTransferType type, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceQueryRecords<BinanceTransfer>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "type", JsonConvert.SerializeObject(type, new UniversalTransferTypeConverter(false)) },
+                { "timestamp", _baseClient.GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("startTime", startTime == null ? null: JsonConvert.SerializeObject(startTime, new TimestampConverter()));
+            parameters.AddOptionalParameter("endTime", endTime == null ? null : JsonConvert.SerializeObject(endTime, new TimestampConverter()));
+            parameters.AddOptionalParameter("current", page?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("size", pageSize?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceTransfer>>(_baseClient.GetUrlSpot(universalTransferEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
         #endregion
     }
