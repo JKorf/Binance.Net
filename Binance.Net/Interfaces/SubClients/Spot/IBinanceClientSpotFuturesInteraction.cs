@@ -238,6 +238,7 @@ namespace Binance.Net.Interfaces.SubClients.Spot
         /// Adjust cross collateral LTV
         /// </summary>
         /// <param name="collateralCoin">The collateral coin</param>
+        /// <param name="loanCoin">The loan coin</param>
         /// <param name="amount">The amount</param>
         /// <param name="direction">The direction</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>

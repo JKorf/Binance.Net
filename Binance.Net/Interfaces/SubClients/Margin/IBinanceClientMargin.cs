@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Enums;
-using Binance.Net.Interfaces.SubClients;
 using Binance.Net.Interfaces.SubClients.IsolatedMargin;
-using Binance.Net.Interfaces.SubClients.Margin;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Spot.IsolatedMarginData;
 using Binance.Net.Objects.Spot.MarginData;
 using CryptoExchange.Net.Objects;
 
-namespace Binance.Net.SubClients.Margin
+namespace Binance.Net.Interfaces.SubClients.Margin
 {
     /// <summary>
     /// Margin interface

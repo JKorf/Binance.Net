@@ -7,7 +7,7 @@ using Binance.Net.Objects.Spot.SpotData;
 using Binance.Net.Objects.Spot.SubAccountData;
 using CryptoExchange.Net.Objects;
 
-namespace Binance.Net.SubClients
+namespace Binance.Net.Interfaces.SubClients
 {
     /// <summary>
     /// Sub accounts interface

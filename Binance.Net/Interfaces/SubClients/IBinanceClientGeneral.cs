@@ -9,7 +9,7 @@ using Binance.Net.Objects.Spot.SpotData;
 using Binance.Net.Objects.Spot.WalletData;
 using CryptoExchange.Net.Objects;
 
-namespace Binance.Net.SubClients
+namespace Binance.Net.Interfaces.SubClients
 {
     /// <summary>
     /// General endpoints

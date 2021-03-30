@@ -494,7 +494,7 @@ namespace Binance.Net.SubClients.Margin
             var parameters = new Dictionary<string, object>
             {
                 { "timestamp", _baseClient.GetTimestamp() },
-                { "asset", asset }
+                { "asset", asset! }
             };
             parameters.AddOptionalParameter("vipLevel", vipLevel?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("size", limit?.ToString(CultureInfo.InvariantCulture));

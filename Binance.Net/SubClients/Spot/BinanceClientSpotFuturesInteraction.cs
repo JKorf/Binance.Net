@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
+using Binance.Net.Interfaces.SubClients;
 using Binance.Net.Interfaces.SubClients.Spot;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Spot.Futures;

@@ -362,6 +362,66 @@
             Liquidation
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.BinanceEarningType">
+            <summary>
+            Mining earnings type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BinanceEarningType.MiningWallet">
+            <summary>
+            Mining wallet
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BinanceEarningType.MergedMining">
+            <summary>
+            Merged mining
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BinanceEarningType.ActivityBonus">
+            <summary>
+            Activity bonus
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BinanceEarningType.Rebate">
+            <summary>
+            Rebate
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BinanceEarningType.SmartPool">
+            <summary>
+            Smart pool
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BinanceEarningType.MiningAddress">
+            <summary>
+            Mining address
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BinanceEarningType.PoolSavings">
+            <summary>
+            Pool savings
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BinanceEarningType.Transfered">
+            <summary>
+            Transfered
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BinanceEarningType.IncomeTransfer">
+            <summary>
+            Income transfer
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BinanceEarningType.HashrateResaleMiningWallet">
+            <summary>
+            Hashrate resale - mining wallet
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BinanceEarningType.HashrateResalePoolSavings">
+            <summary>
+            Hashrate resale - pool savings
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.BlvtStatus">
             <summary>
             Status of a blvt action
@@ -621,6 +681,26 @@
         <member name="F:Binance.Net.Enums.FuturesTransferType.FromCoinFuturesToSpot">
             <summary>
             From COIN-M futures to spot account
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.HashrateResaleStatus">
+            <summary>
+            Resale status
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.HashrateResaleStatus.Processing">
+            <summary>
+            Processing
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.HashrateResaleStatus.Cancelled">
+            <summary>
+            Cancelled
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.HashrateResaleStatus.Terminated">
+            <summary>
+            Terminated
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.IncomeType">
@@ -1646,6 +1726,126 @@
         <member name="F:Binance.Net.Enums.UnderlyingType.Index">
             <summary>
             Index
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.UniversalTransferType">
+            <summary>
+            Universal transfer type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.MainToC2C">
+            <summary>
+            Main (spot) to C2C
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.MainToUsdFutures">
+            <summary>
+            Main (spot) to Usd Futures
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.MainToCoinFutures">
+            <summary>
+            Main (spot) to Coin Futures
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.MainToMargin">
+            <summary>
+            Main (spot) to Margin
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.MainToMining">
+            <summary>
+            Main (spot) to Mining
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.C2CToMain">
+            <summary>
+            C2C to Main (spot)
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.C2CToUsdFutures">
+            <summary>
+            C2C to Usd futures
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.C2CToMining">
+            <summary>
+            C2C to mining
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.C2CToMargin">
+            <summary>
+            C2C to margin
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.UsdFuturesToMain">
+            <summary>
+            Usd futures to Main (spot)
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.UsdFuturesToC2C">
+            <summary>
+            Usd futures to C2C
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.UsdFuturesToMargin">
+            <summary>
+            Usd futures to Margin
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.CoinFuturesToMain">
+            <summary>
+            Coin futures to Main (spot)
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.CoinFuturesToMargin">
+            <summary>
+            Coin futures to Margin
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.MarginToMain">
+            <summary>
+            Margin to Main (spot)
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.MarginToUsdFutures">
+            <summary>
+            Margin to Usd futures
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.MarginToCoinFutures">
+            <summary>
+            Margin to Coin futures
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.MarginToMining">
+            <summary>
+            Margin to Mining
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.MarginToC2C">
+            <summary>
+            Margin to C2C
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.MiningToMain">
+            <summary>
+            Mining to Main (spot)
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.MiningToUsdFutures">
+            <summary>
+            Mining to Usd futures
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.MiningToC2C">
+            <summary>
+            Mining to C2C
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.MiningToMargin">
+            <summary>
+            Mining to Margin
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.WithdrawalStatus">
@@ -5196,7 +5396,7 @@
         </member>
         <member name="T:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral">
             <summary>
-            General interface
+            General endpoints
             </summary>
         </member>
         <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.GetDailySpotAccountSnapshot(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
@@ -5334,7 +5534,7 @@
             Get asset dividend records
             </summary>
             <param name="asset">Filter by asset</param>
-            /// <param name="startTime">Filter by start time from</param>
+            <param name="startTime">Filter by start time from</param>
             <param name="endTime">Filter by end time till</param>
             <param name="limit">Page size</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -5461,6 +5661,30 @@
             </summary>
             <param name="spotTrading">If BNB burning should be enabled for spot trading</param>
             <param name="marginInterest">If BNB burning should be enabled for margin interest</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.Transfer(Binance.Net.Enums.UniversalTransferType,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Transfers between accounts
+            </summary>
+            <param name="type">The type of transfer</param>
+            <param name="asset">The asset to transfer</param>
+            <param name="amount">The amount to transfer</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.GetTransfers(Binance.Net.Enums.UniversalTransferType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get transfer history
+            </summary>
+            <param name="type">The type of transfer</param>
+            <param name="startTime">Filter by startTime</param>
+            <param name="endTime">Filter by endTime</param>
+            <param name="page">The page</param>
+            <param name="pageSize">Results per page</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -6139,26 +6363,42 @@
             <param name="ct">Cancellation token</param>
             <returns>Miner list</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientMining.GetMiningRevenueList(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientMining.GetMiningRevenueList(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets revenue list
             </summary>
             <param name="algorithm">Algorithm</param>
             <param name="userName">Mining account</param>
             <param name="page">Result page</param>
+            <param name="pageSize">Results per page</param>
             <param name="coin">Coin</param>
             <param name="startDate">Start date</param>
             <param name="endDate">End date</param>
             <param name="ct">Cancellation token</param>
             <returns>Revenue list</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientMining.GetMiningRevenueListAsync(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientMining.GetMiningRevenueListAsync(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets revenue list
             </summary>
             <param name="algorithm">Algorithm</param>
             <param name="userName">Mining account</param>
             <param name="page">Result page</param>
+            <param name="pageSize">Results per page</param>
+            <param name="coin">Coin</param>
+            <param name="startDate">Start date</param>
+            <param name="endDate">End date</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Revenue list</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientMining.GetMiningOtherRevenueListAsync(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get other revenue list
+            </summary>
+            <param name="algorithm">Algorithm</param>
+            <param name="userName">Mining account</param>
+            <param name="page">Result page</param>
+            <param name="pageSize">Results per page</param>
             <param name="coin">Coin</param>
             <param name="startDate">Start date</param>
             <param name="endDate">End date</param>
@@ -6191,6 +6431,48 @@
             <param name="userName">Mining account user name</param>
             <param name="ct">Cancellation token</param>
             <returns>Revenue list</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientMining.GetHashrateResaleListAsync(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets hash rate resale list
+            </summary>
+            <param name="page">Page</param>
+            <param name="pageSize">Results per page</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Resale list</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientMining.GetHashrateResaleDetailsAsync(System.Int32,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets hash rate resale details
+            </summary>
+            <param name="configId">The mining id</param>
+            <param name="userName">Mining account</param>
+            <param name="page">Page</param>
+            <param name="pageSize">Results per page</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Resale details</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientMining.PlaceHashrateResaleRequest(System.String,System.String,System.DateTime,System.DateTime,System.String,System.Decimal,System.Threading.CancellationToken)">
+            <summary>
+            Hashrate resale request
+            </summary>
+            <param name="userName">Mining account</param>
+            <param name="algorithm">Transfer algorithm</param>
+            <param name="startDate">Resale start time</param>
+            <param name="endDate">Resale end time</param>
+            <param name="toUser">To mining account</param>
+            <param name="hashRate">Results per page</param>
+            <param name="ct">Resale hashrate h/s must be transferred (BTC is greater than 500000000000 ETH is greater than 500000)</param>
+            <returns>Mining account</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientMining.PlaceHashrateResaleRequest(System.Int32,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Cancel Hashrate Resale Configuration
+            </summary>
+            <param name="configId">Mining id</param>
+            <param name="userName">Mining account</param>
+            <param name="ct">Resale hashrate h/s must be transferred (BTC is greater than 500000000000 ETH is greater than 500000)</param>
+            <returns>Success</returns>
         </member>
         <member name="T:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount">
             <summary>
@@ -6617,6 +6899,44 @@
             <param name="ct">Cancellation token</param>
             <returns>Btc asset values</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.CreateVirtualSubAccount(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Create a virtual sub account
+            </summary>
+            <param name="email">Virtual email of the sub account</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.CreateVirtualSubAccountAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Create a virtual sub account
+            </summary>
+            <param name="email">Virtual email of the sub account</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.EnableBlvtForSubAccount(System.String,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Enable or disable blvt
+            </summary>
+            <param name="email">Email of the sub account</param>
+            <param name="enable">Enable or disable (only true for now)</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.EnableBlvtForSubAccountAsync(System.String,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Enable or disable blvt
+            </summary>
+            <param name="email">Email of the sub account</param>
+            <param name="enable">Enable or disable (only true for now)</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="T:Binance.Net.Interfaces.SubClients.IBinanceClientSystem">
             <summary>
             System interface
@@ -6939,7 +7259,7 @@
         </member>
         <member name="P:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.IsolatedUserStream">
             <summary>
-            Isolated Margin endpoints
+            Isolated margin user stream endpoints
             </summary>
         </member>
         <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.Transfer(System.String,System.Decimal,Binance.Net.Enums.TransferDirectionType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
@@ -7048,8 +7368,8 @@
             <param name="endTime">Time to stop getting records to</param>
             <param name="current">Number of page records</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
-            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="limit">The records count size need show</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Loan records</returns>
@@ -7063,9 +7383,9 @@
             <param name="startTime">Time to start getting records from</param>
             <param name="endTime">Time to stop getting records to</param>
             <param name="current">Number of page records</param>
-            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="limit">The records count size need show</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Loan records</returns>
@@ -7079,9 +7399,9 @@
             <param name="startTime">Time to start getting records from</param>
             <param name="endTime">Time to stop getting records to</param>
             <param name="current">Number of page records</param>
-            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="size">The records count size need show</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Repay records</returns>
@@ -7095,9 +7415,9 @@
             <param name="startTime">Time to start getting records from</param>
             <param name="endTime">Time to stop getting records to</param>
             <param name="current">Filter by number</param>
-            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="size">The records count size need show</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Repay records</returns>
@@ -7111,8 +7431,8 @@
             <param name="startTime">Filter by startTime from</param>
             <param name="endTime">Filter by endTime from</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
-            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="limit">Limit of the amount of results</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of interest events</returns>
@@ -7126,11 +7446,37 @@
             <param name="startTime">Filter by startTime from</param>
             <param name="endTime">Filter by endTime from</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
-            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="limit">Limit of the amount of results</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of interest events</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetInterestRateHistory(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get history of interest rate
+            </summary>
+            <param name="asset">Filter by asset</param>
+            <param name="vipLevel">Vip level</param>
+            <param name="startTime">Filter by startTime from</param>
+            <param name="endTime">Filter by endTime from</param>
+            <param name="limit">Limit of the amount of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of interest rate</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetInterestRateHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get history of interest rate
+            </summary>
+            <param name="asset">Filter by asset</param>
+            <param name="vipLevel">Vip level</param>
+            <param name="startTime">Filter by startTime from</param>
+            <param name="endTime">Filter by endTime from</param>
+            <param name="limit">Limit of the amount of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of interest rate</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetForceLiquidationHistory(System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
@@ -7428,6 +7774,16 @@
             <param name="isIsolated">For isolated margin or not</param>
             <param name="origClientOrderId">The client order id of the order</param>
             <param name="newClientOrderId">Unique identifier for this cancel</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Id's for canceled order</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.CancelOpenMarginOrdersAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Cancel all active orders for a symbol
+            </summary>
+            <param name="symbol">The symbol the to cancel orders for</param>
+            <param name="isIsolated">For isolated margin or not</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for canceled order</returns>
@@ -7741,47 +8097,51 @@
             <param name="ct">Cancellation token</param>
             <returns>Info</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotFuturesInteraction.GetRateAfterAdjustLoanToValue(System.String,System.Decimal,Binance.Net.Enums.AdjustRateDirection,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotFuturesInteraction.GetRateAfterAdjustLoanToValue(System.String,System.String,System.Decimal,Binance.Net.Enums.AdjustRateDirection,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Calculate rate after adjust cross-collateral loan to value
             </summary>
             <param name="collateralCoin">The collateral coin</param>
+            <param name="loanCoin">The loan coin</param>
             <param name="amount">The amount</param>
             <param name="direction">The direction</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>After collateral rate</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotFuturesInteraction.GetRateAfterAdjustLoanToValueAsync(System.String,System.Decimal,Binance.Net.Enums.AdjustRateDirection,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotFuturesInteraction.GetRateAfterAdjustLoanToValueAsync(System.String,System.String,System.Decimal,Binance.Net.Enums.AdjustRateDirection,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Calculate rate after adjust cross-collateral loan to value
             </summary>
             <param name="collateralCoin">The collateral coin</param>
+            <param name="loanCoin">The loan coin</param>
             <param name="amount">The amount</param>
             <param name="direction">The direction</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>After collateral rate</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotFuturesInteraction.GetMaxAmountForAdjustCrossCollateralLoanToValue(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotFuturesInteraction.GetMaxAmountForAdjustCrossCollateralLoanToValue(System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get max amount for adjust cross-collateral LTV
             </summary>
             <param name="collateralCoin">The collateral coin</param>
+            <param name="loanCoin">The loan coin</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Max amounts</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotFuturesInteraction.GetMaxAmountForAdjustCrossCollateralLoanToValueAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotFuturesInteraction.GetMaxAmountForAdjustCrossCollateralLoanToValueAsync(System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get max amount for adjust cross-collateral LTV
             </summary>
             <param name="collateralCoin">The collateral coin</param>
+            <param name="loanCoin">The loan coin</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Max amounts</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotFuturesInteraction.AdjustCrossCollateralLoanToValue(System.String,System.Decimal,Binance.Net.Enums.AdjustRateDirection,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotFuturesInteraction.AdjustCrossCollateralLoanToValue(System.String,System.String,System.Decimal,Binance.Net.Enums.AdjustRateDirection,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Adjust cross collateral LTV
             </summary>
@@ -7792,21 +8152,23 @@
             <param name="ct">Cancellation token</param>
             <returns>Adjust result</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotFuturesInteraction.AdjustCrossCollateralLoanToValueAsync(System.String,System.Decimal,Binance.Net.Enums.AdjustRateDirection,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotFuturesInteraction.AdjustCrossCollateralLoanToValueAsync(System.String,System.String,System.Decimal,Binance.Net.Enums.AdjustRateDirection,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Adjust cross collateral LTV
             </summary>
             <param name="collateralCoin">The collateral coin</param>
+            <param name="loanCoin">The loan coin</param>
             <param name="amount">The amount</param>
             <param name="direction">The direction</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Adjust result</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotFuturesInteraction.GetAdjustCrossCollateralLoanToValueHistory(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotFuturesInteraction.GetAdjustCrossCollateralLoanToValueHistory(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get cross collateral LTV adjustment history
             </summary>
+            <param name="loanCoin">The loan coin</param>
             <param name="collateralCoin">The collateral coin</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
@@ -7815,10 +8177,11 @@
             <param name="ct">Cancellation token</param>
             <returns>Adjustment history</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotFuturesInteraction.GetAdjustCrossCollateralLoanToValueHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotFuturesInteraction.GetAdjustCrossCollateralLoanToValueHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get cross collateral LTV adjustment history
             </summary>
+            <param name="loanCoin">The loan coin</param>
             <param name="collateralCoin">The collateral coin</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
@@ -7827,11 +8190,12 @@
             <param name="ct">Cancellation token</param>
             <returns>Adjustment history</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotFuturesInteraction.GetCrossCollateralLiquidationHistory(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotFuturesInteraction.GetCrossCollateralLiquidationHistory(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get cross collateral liquidation history
             </summary>
             <param name="collateralCoin">The collateral coin</param>
+            <param name="loanCoin">The loan coin</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
             <param name="limit">The page size</param>
@@ -7839,11 +8203,12 @@
             <param name="ct">Cancellation token</param>
             <returns>Liquidation history</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotFuturesInteraction.GetCrossCollateralLiquidationHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotFuturesInteraction.GetCrossCollateralLiquidationHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get cross collateral liquidation history
             </summary>
             <param name="collateralCoin">The collateral coin</param>
+            <param name="loanCoin">The loan coin</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
             <param name="limit">The page size</param>
@@ -8548,6 +8913,26 @@
         <member name="P:Binance.Net.Objects.Blvt.BinanceBlvtInfo.CurrentBaskets">
             <summary>
             Current baskets
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Blvt.BinanceBlvtInfo.RedeemFeePercentage">
+            <summary>
+            Redeem fee percentage
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Blvt.BinanceBlvtInfo.DailyRedeemLimit">
+            <summary>
+            Daily redeem limit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Blvt.BinanceBlvtInfo.PurchaseFeePercentage">
+            <summary>
+            Purchase fee percentage
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Blvt.BinanceBlvtInfo.DailyPurchaseLimit">
+            <summary>
+            Daily purchase limit
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Blvt.BinanceBlvtInfo.Timestamp">
@@ -13331,6 +13716,11 @@
             Collateral coin
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralAdjustLtvResult.LoanCoin">
+            <summary>
+            Loan coin
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralAdjustLtvResult.Direction">
             <summary>
             The direction
@@ -13464,6 +13854,11 @@
         <member name="T:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralInformation">
             <summary>
             Collateral info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralInformation.LoanCoin">
+            <summary>
+            The loan coin
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralInformation.CollateralCoin">
@@ -13616,6 +14011,16 @@
             Total borrowed
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralWallet.TotalInterest">
+            <summary>
+            Total interest
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralWallet.InterestFreeLimit">
+            <summary>
+            Interest free limit
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralWallet.Asset">
             <summary>
             The asset
@@ -13629,6 +14034,11 @@
         <member name="T:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralWalletEntry">
             <summary>
             Cross collateral data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralWalletEntry.LoanCoin">
+            <summary>
+            Loan coin
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralWalletEntry.CollateralCoin">
@@ -13649,6 +14059,21 @@
         <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralWalletEntry.CurrentCollateralRate">
             <summary>
             Current collateral rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralWalletEntry.InterestFreeLimitUsed">
+            <summary>
+            Used interest free limit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralWalletEntry.PrincipalForInterest">
+            <summary>
+            Principal interest
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralWalletEntry.Interest">
+            <summary>
+            Interest
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginSymbol">
@@ -14509,6 +14934,31 @@
         <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceInterestHistory.Type">
             <summary>
             Type of interest
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.MarginData.BinanceInterestRateHistory">
+            <summary>
+            Interest rate history
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceInterestRateHistory.Asset">
+            <summary>
+            The asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceInterestRateHistory.DailyInterest">
+            <summary>
+            The daily interest
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceInterestRateHistory.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceInterestRateHistory.VipLevel">
+            <summary>
+            Vip level
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.MarginData.BinanceMarginAccount">
@@ -15965,6 +16415,131 @@
             Unused
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Spot.Mining.BinanceHashrateResaleDetails">
+            <summary>
+            Resale list
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceHashrateResaleDetails.TotalNum">
+            <summary>
+            Total number of results
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceHashrateResaleDetails.PageSize">
+            <summary>
+            Page size
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceHashrateResaleDetails.ProfitTransferDetails">
+            <summary>
+            Transfer details
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.Mining.BinanceHashrateResaleDetailsItem">
+            <summary>
+            Resale item
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceHashrateResaleDetailsItem.PoolUserName">
+            <summary>
+            From user
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceHashrateResaleDetailsItem.ToPoolUserName">
+            <summary>
+            To user
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceHashrateResaleDetailsItem.AlgoName">
+            <summary>
+            Algorithm
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceHashrateResaleDetailsItem.Hashrate">
+            <summary>
+            Hash rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceHashrateResaleDetailsItem.Day">
+            <summary>
+            Start day
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceHashrateResaleDetailsItem.Coin">
+            <summary>
+            Coin name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceHashrateResaleDetailsItem.Amount">
+            <summary>
+            Transferred income
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.Mining.BinanceHashrateResaleList">
+            <summary>
+            Resale list
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceHashrateResaleList.TotalNum">
+            <summary>
+            Total number of results
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceHashrateResaleList.PageSize">
+            <summary>
+            Page size
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceHashrateResaleList.AccountProfits">
+            <summary>
+            Revenue items
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.Mining.BinanceHashrateResaleItem">
+            <summary>
+            Resale item
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceHashrateResaleItem.ConfigId">
+            <summary>
+            Mining id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceHashrateResaleItem.PoolUserName">
+            <summary>
+            From user
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceHashrateResaleItem.ToPoolUserName">
+            <summary>
+            To user
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceHashrateResaleItem.AlgoName">
+            <summary>
+            Algorithm
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceHashrateResaleItem.Hashrate">
+            <summary>
+            Hash rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceHashrateResaleItem.StartDay">
+            <summary>
+            Start day
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceHashrateResaleItem.EndDay">
+            <summary>
+            End day
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceHashrateResaleItem.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.Mining.BinanceMinerList">
             <summary>
             Miner list
@@ -16190,6 +16765,56 @@
             Algorithm
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Spot.Mining.BinanceOtherRevenueList">
+            <summary>
+            Revenue list
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceOtherRevenueList.TotalNum">
+            <summary>
+            Total number of results
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceOtherRevenueList.PageSize">
+            <summary>
+            Page size
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceOtherRevenueList.AccountProfits">
+            <summary>
+            Revenue items
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.Mining.BinanceOtherRevenueItem">
+            <summary>
+            Revenue
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceOtherRevenueItem.Time">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceOtherRevenueItem.Coin">
+            <summary>
+            Coin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceOtherRevenueItem.Type">
+            <summary>
+            Earning type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceOtherRevenueItem.ProfitAmount">
+            <summary>
+            Profit amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceOtherRevenueItem.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.Mining.BinanceRevenueList">
             <summary>
             Revenue list
@@ -16220,6 +16845,16 @@
             Timestamp
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceRevenueItem.Coin">
+            <summary>
+            Coin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceRevenueItem.Type">
+            <summary>
+            Earning type
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Spot.Mining.BinanceRevenueItem.DayHashRate">
             <summary>
             Day hashrate
@@ -16228,6 +16863,16 @@
         <member name="P:Binance.Net.Objects.Spot.Mining.BinanceRevenueItem.ProfitAmount">
             <summary>
             Profit amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceRevenueItem.HashTransfer">
+            <summary>
+            Hash transfer
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.Mining.BinanceRevenueItem.TransferAmount">
+            <summary>
+            Transfer amount
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.Mining.BinanceRevenueItem.Status">
@@ -16725,6 +17370,21 @@
             The time the sub account was created
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountBlvt">
+            <summary>
+            Sub account details
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountBlvt.Email">
+            <summary>
+            The email associated with the sub account
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountBlvt.EnableBlvt">
+            <summary>
+            Blvt enabled
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountDeposit">
             <summary>
             Information about a deposit
@@ -16783,6 +17443,16 @@
         <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountDepositAddress.Url">
             <summary>
             Url
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountEmail">
+            <summary>
+            Sub account details
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountEmail.Email">
+            <summary>
+            The email associated with the sub account
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountFuturesDetails">
@@ -18083,6 +18753,41 @@
         <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceIndicator.TriggerValue">
             <summary>
             Trigger value
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceTransfer">
+            <summary>
+            Transfer info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceTransfer.Asset">
+            <summary>
+            The asset which was transfered
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceTransfer.Amount">
+            <summary>
+            Amount transfered
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceTransfer.Type">
+            <summary>
+            Transfer type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceTransfer.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceTransfer.TransactionId">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceTransfer.Timestamp">
+            <summary>
+            Timestamp
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceUserCoin">
@@ -20351,6 +21056,30 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientGeneral.Transfer(Binance.Net.Enums.UniversalTransferType,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Transfers between accounts
+            </summary>
+            <param name="type">The type of transfer</param>
+            <param name="asset">The asset to transfer</param>
+            <param name="amount">The amount to transfer</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientGeneral.GetTransfers(Binance.Net.Enums.UniversalTransferType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get transfer history
+            </summary>
+            <param name="type">The type of transfer</param>
+            <param name="startTime">Filter by startTime</param>
+            <param name="endTime">Filter by endTime</param>
+            <param name="page">The page</param>
+            <param name="pageSize">Results per page</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="T:Binance.Net.SubClients.BinanceClientLending">
             <summary>
             Lending endpoints
@@ -20916,26 +21645,42 @@
             <param name="ct">Cancellation token</param>
             <returns>Miner list</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientMining.GetMiningRevenueList(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientMining.GetMiningRevenueList(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets revenue list
             </summary>
             <param name="algorithm">Algorithm</param>
             <param name="userName">Mining account</param>
             <param name="page">Result page</param>
+            <param name="pageSize">Results per page</param>
             <param name="coin">Coin</param>
             <param name="startDate">Start date</param>
             <param name="endDate">End date</param>
             <param name="ct">Cancellation token</param>
             <returns>Revenue list</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientMining.GetMiningRevenueListAsync(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientMining.GetMiningRevenueListAsync(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets revenue list
             </summary>
             <param name="algorithm">Algorithm</param>
             <param name="userName">Mining account</param>
             <param name="page">Result page</param>
+            <param name="pageSize">Results per page</param>
+            <param name="coin">Coin</param>
+            <param name="startDate">Start date</param>
+            <param name="endDate">End date</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Revenue list</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientMining.GetMiningOtherRevenueListAsync(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get other revenue list
+            </summary>
+            <param name="algorithm">Algorithm</param>
+            <param name="userName">Mining account</param>
+            <param name="page">Result page</param>
+            <param name="pageSize">Results per page</param>
             <param name="coin">Coin</param>
             <param name="startDate">Start date</param>
             <param name="endDate">End date</param>
@@ -20968,6 +21713,48 @@
             <param name="userName">Mining account user name</param>
             <param name="ct">Cancellation token</param>
             <returns>Revenue list</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientMining.GetHashrateResaleListAsync(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets hash rate resale list
+            </summary>
+            <param name="page">Page</param>
+            <param name="pageSize">Results per page</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Resale list</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientMining.GetHashrateResaleDetailsAsync(System.Int32,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets hash rate resale details
+            </summary>
+            <param name="configId">The mining id</param>
+            <param name="userName">Mining account</param>
+            <param name="page">Page</param>
+            <param name="pageSize">Results per page</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Resale details</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientMining.PlaceHashrateResaleRequest(System.String,System.String,System.DateTime,System.DateTime,System.String,System.Decimal,System.Threading.CancellationToken)">
+            <summary>
+            Hashrate resale request
+            </summary>
+            <param name="userName">Mining account</param>
+            <param name="algorithm">Transfer algorithm</param>
+            <param name="startDate">Resale start time</param>
+            <param name="endDate">Resale end time</param>
+            <param name="toUser">To mining account</param>
+            <param name="hashRate">Results per page</param>
+            <param name="ct">Resale hashrate h/s must be transferred (BTC is greater than 500000000000 ETH is greater than 500000)</param>
+            <returns>Mining account</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientMining.PlaceHashrateResaleRequest(System.Int32,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Cancel Hashrate Resale Configuration
+            </summary>
+            <param name="configId">Mining id</param>
+            <param name="userName">Mining account</param>
+            <param name="ct">Resale hashrate h/s must be transferred (BTC is greater than 500000000000 ETH is greater than 500000)</param>
+            <returns>Success</returns>
         </member>
         <member name="T:Binance.Net.SubClients.BinanceClientSubAccount">
             <summary>
@@ -21393,6 +22180,44 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Btc asset values</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.CreateVirtualSubAccount(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Create a virtual sub account
+            </summary>
+            <param name="email">Virtual email of the sub account</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.CreateVirtualSubAccountAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Create a virtual sub account
+            </summary>
+            <param name="email">Virtual email of the sub account</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.EnableBlvtForSubAccount(System.String,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Enable or disable blvt
+            </summary>
+            <param name="email">Email of the sub account</param>
+            <param name="enable">Enable or disable (only true for now)</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.EnableBlvtForSubAccountAsync(System.String,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Enable or disable blvt
+            </summary>
+            <param name="email">Email of the sub account</param>
+            <param name="enable">Enable or disable (only true for now)</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
         </member>
         <member name="T:Binance.Net.SubClients.BinanceClientWithdrawDeposit">
             <summary>
@@ -23506,6 +24331,32 @@
             <param name="ct">Cancellation token</param>
             <returns>List of interest events</returns>
         </member>
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetInterestRateHistory(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get history of interest rate
+            </summary>
+            <param name="asset">Filter by asset</param>
+            <param name="vipLevel">Vip level</param>
+            <param name="startTime">Filter by startTime from</param>
+            <param name="endTime">Filter by endTime from</param>
+            <param name="limit">Limit of the amount of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of interest rate</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetInterestRateHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get history of interest rate
+            </summary>
+            <param name="asset">Filter by asset</param>
+            <param name="vipLevel">Vip level</param>
+            <param name="startTime">Filter by startTime from</param>
+            <param name="endTime">Filter by endTime from</param>
+            <param name="limit">Limit of the amount of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of interest rate</returns>
+        </member>
         <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetForceLiquidationHistory(System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get history of forced liquidations
@@ -23865,6 +24716,16 @@
             <param name="isIsolated">For isolated margin or not</param>
             <param name="origClientOrderId">The client order id of the order</param>
             <param name="newClientOrderId">Unique identifier for this cancel</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Id's for canceled order</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.CancelOpenMarginOrdersAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Cancel all active orders for a symbol
+            </summary>
+            <param name="symbol">The symbol the to cancel orders for</param>
+            <param name="isIsolated">For isolated margin or not</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for canceled order</returns>
@@ -24235,72 +25096,79 @@
             <param name="ct">Cancellation token</param>
             <returns>Info</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotFuturesInteraction.GetRateAfterAdjustLoanToValue(System.String,System.Decimal,Binance.Net.Enums.AdjustRateDirection,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotFuturesInteraction.GetRateAfterAdjustLoanToValue(System.String,System.String,System.Decimal,Binance.Net.Enums.AdjustRateDirection,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Calculate rate after adjust cross-collateral loan to value
             </summary>
             <param name="collateralCoin">The collateral coin</param>
+            <param name="loanCoin">The loan coin</param>
             <param name="amount">The amount</param>
             <param name="direction">The direction</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>After collateral rate</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotFuturesInteraction.GetRateAfterAdjustLoanToValueAsync(System.String,System.Decimal,Binance.Net.Enums.AdjustRateDirection,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotFuturesInteraction.GetRateAfterAdjustLoanToValueAsync(System.String,System.String,System.Decimal,Binance.Net.Enums.AdjustRateDirection,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Calculate rate after adjust cross-collateral loan to value
             </summary>
             <param name="collateralCoin">The collateral coin</param>
+            <param name="loanCoin">The loan coin</param>
             <param name="amount">The amount</param>
             <param name="direction">The direction</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>After collateral rate</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotFuturesInteraction.GetMaxAmountForAdjustCrossCollateralLoanToValue(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotFuturesInteraction.GetMaxAmountForAdjustCrossCollateralLoanToValue(System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get max amount for adjust cross-collateral LTV
             </summary>
             <param name="collateralCoin">The collateral coin</param>
+            <param name="loanCoin">The loan coin</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Max amounts</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotFuturesInteraction.GetMaxAmountForAdjustCrossCollateralLoanToValueAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotFuturesInteraction.GetMaxAmountForAdjustCrossCollateralLoanToValueAsync(System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get max amount for adjust cross-collateral LTV
             </summary>
             <param name="collateralCoin">The collateral coin</param>
+            <param name="loanCoin">The loan coin</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Max amounts</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotFuturesInteraction.AdjustCrossCollateralLoanToValue(System.String,System.Decimal,Binance.Net.Enums.AdjustRateDirection,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotFuturesInteraction.AdjustCrossCollateralLoanToValue(System.String,System.String,System.Decimal,Binance.Net.Enums.AdjustRateDirection,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Adjust cross collateral LTV
             </summary>
             <param name="collateralCoin">The collateral coin</param>
+            <param name="loanCoin">The loan coin</param>
             <param name="amount">The amount</param>
             <param name="direction">The direction</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Adjust result</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotFuturesInteraction.AdjustCrossCollateralLoanToValueAsync(System.String,System.Decimal,Binance.Net.Enums.AdjustRateDirection,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotFuturesInteraction.AdjustCrossCollateralLoanToValueAsync(System.String,System.String,System.Decimal,Binance.Net.Enums.AdjustRateDirection,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Adjust cross collateral LTV
             </summary>
             <param name="collateralCoin">The collateral coin</param>
+            <param name="loanCoin">The loan coin</param>
             <param name="amount">The amount</param>
             <param name="direction">The direction</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Adjust result</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotFuturesInteraction.GetAdjustCrossCollateralLoanToValueHistory(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotFuturesInteraction.GetAdjustCrossCollateralLoanToValueHistory(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get cross collateral LTV adjustment history
             </summary>
+            <param name="loanCoin">The loan coin</param>
             <param name="collateralCoin">The collateral coin</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
@@ -24309,10 +25177,11 @@
             <param name="ct">Cancellation token</param>
             <returns>Adjustment history</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotFuturesInteraction.GetAdjustCrossCollateralLoanToValueHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotFuturesInteraction.GetAdjustCrossCollateralLoanToValueHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get cross collateral LTV adjustment history
             </summary>
+            <param name="loanCoin">The loan coin</param>
             <param name="collateralCoin">The collateral coin</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
@@ -24321,11 +25190,12 @@
             <param name="ct">Cancellation token</param>
             <returns>Adjustment history</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotFuturesInteraction.GetCrossCollateralLiquidationHistory(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotFuturesInteraction.GetCrossCollateralLiquidationHistory(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get cross collateral liquidation history
             </summary>
             <param name="collateralCoin">The collateral coin</param>
+            <param name="loanCoin">The loan coin</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
             <param name="limit">The page size</param>
@@ -24333,11 +25203,12 @@
             <param name="ct">Cancellation token</param>
             <returns>Liquidation history</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotFuturesInteraction.GetCrossCollateralLiquidationHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotFuturesInteraction.GetCrossCollateralLiquidationHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get cross collateral liquidation history
             </summary>
             <param name="collateralCoin">The collateral coin</param>
+            <param name="loanCoin">The loan coin</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
             <param name="limit">The page size</param>

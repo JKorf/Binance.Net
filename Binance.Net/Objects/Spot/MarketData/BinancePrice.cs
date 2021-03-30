@@ -33,6 +33,6 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// Name of the pair
         /// </summary>
         [JsonProperty("ps")]
-        public string Pair { get; set; }
+        public string Pair { get; set; } = "";
     }
 }

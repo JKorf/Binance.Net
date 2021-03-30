@@ -6,7 +6,7 @@ using Binance.Net.Enums;
 using Binance.Net.Objects.Spot.SpotData;
 using CryptoExchange.Net.Objects;
 
-namespace Binance.Net.SubClients.Margin
+namespace Binance.Net.Interfaces.SubClients.Margin
 {
     /// <summary>
     /// Margin orders interface

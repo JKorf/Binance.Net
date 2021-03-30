@@ -6,7 +6,7 @@ using Binance.Net.Enums;
 using Binance.Net.Objects.Spot.Mining;
 using CryptoExchange.Net.Objects;
 
-namespace Binance.Net.SubClients
+namespace Binance.Net.Interfaces.SubClients
 {
     /// <summary>
     /// Mining interface

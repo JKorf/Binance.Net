@@ -87,7 +87,7 @@ namespace Binance.Net.Objects.Blvt
         /// <summary>
         /// Symbol
         /// </summary>
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = "";
         /// <summary>
         /// Amount
         /// </summary>
