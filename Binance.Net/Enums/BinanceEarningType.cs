@@ -14,6 +14,22 @@ namespace Binance.Net.Enums
         /// </summary>
         MiningWallet,
         /// <summary>
+        /// Merged mining
+        /// </summary>
+        MergedMining,
+        /// <summary>
+        /// Activity bonus
+        /// </summary>
+        ActivityBonus,
+        /// <summary>
+        /// Rebate
+        /// </summary>
+        Rebate,
+        /// <summary>
+        /// Smart pool
+        /// </summary>
+        SmartPool,
+        /// <summary>
         /// Mining address
         /// </summary>
         MiningAddress,

@@ -27,8 +27,13 @@ namespace Binance.Net.SubClients
         private const string minerDetailsEndpoint = "mining/worker/detail";
         private const string minerListEndpoint = "mining/worker/list";
         private const string miningRevenueEndpoint = "mining/payment/list";
+        private const string miningOtherRevenueEndpoint = "mining/payment/other";
         private const string miningStatisticsEndpoint = "mining/statistics/user/status";
         private const string miningAccountListEndpoint = "mining/statistics/user/list";
+        private const string miningHashrateResaleListEndpoint = "mining/hash-transfer/config/details/list";
+        private const string miningHashrateResaleDetailsEndpoint = "mining/hash-transfer/profit/details";
+        private const string miningHashrateResaleRequest = "mining/hash-transfer/config";
+        private const string miningHashrateResaleCancel = "mining/hash-transfer/config/cancel";
 
         private readonly BinanceClient _baseClient;
 
@@ -204,6 +209,7 @@ namespace Binance.Net.SubClients
         /// <param name="algorithm">Algorithm</param>
         /// <param name="userName">Mining account</param>
         /// <param name="page">Result page</param>
+        /// <param name="pageSize">Results per page</param>
         /// <param name="coin">Coin</param>
         /// <param name="startDate">Start date</param>
         /// <param name="endDate">End date</param>
@@ -212,7 +218,7 @@ namespace Binance.Net.SubClients
         public WebCallResult<BinanceRevenueList> GetMiningRevenueList(string algorithm, string userName,
             string? coin = null, DateTime? startDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null,
             CancellationToken ct = default)
-            => GetMiningRevenueListAsync(algorithm, userName, coin, startDate, endDate, page, ct).Result;
+            => GetMiningRevenueListAsync(algorithm, userName, coin, startDate, endDate, page, pageSize, ct).Result;
 
         /// <summary>
         /// Gets revenue list
@@ -253,6 +259,47 @@ namespace Binance.Net.SubClients
             return new WebCallResult<BinanceRevenueList>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
         }
 
+        #endregion
+
+        #region Other Revenue List
+        /// <summary>
+        /// Get other revenue list
+        /// </summary>
+        /// <param name="algorithm">Algorithm</param>
+        /// <param name="userName">Mining account</param>
+        /// <param name="page">Result page</param>
+        /// <param name="pageSize">Results per page</param>
+        /// <param name="coin">Coin</param>
+        /// <param name="startDate">Start date</param>
+        /// <param name="endDate">End date</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Revenue list</returns>
+        public async Task<WebCallResult<BinanceOtherRevenueList>> GetMiningOtherRevenueListAsync(string algorithm, string userName, string? coin = null, DateTime? startDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null, CancellationToken ct = default)
+        {
+            algorithm.ValidateNotNull(nameof(algorithm));
+            userName.ValidateNotNull(nameof(userName));
+
+            var parameters = new Dictionary<string, object>()
+            {
+                {"algo", algorithm},
+                {"userName", userName},
+            };
+
+            parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("pageSize", pageSize?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("coin", coin);
+            parameters.AddOptionalParameter("startDate", startDate.HasValue ? JsonConvert.SerializeObject(startDate.Value, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("endDate", endDate.HasValue ? JsonConvert.SerializeObject(endDate.Value, new TimestampConverter()) : null);
+
+            var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceOtherRevenueList>>(_baseClient.GetUrlSpot(miningOtherRevenueEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            if (!result.Success)
+                return WebCallResult<BinanceOtherRevenueList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
+
+            if (result.Data?.Code != 0)
+                return WebCallResult<BinanceOtherRevenueList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
+
+            return new WebCallResult<BinanceOtherRevenueList>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
+        }
         #endregion
 
         #region Statistics list
@@ -324,6 +371,141 @@ namespace Binance.Net.SubClients
 
             return new WebCallResult<BinanceMiningAccount>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
         }
+        #endregion
+
+        #region Hashrate Resale List
+
+        /// <summary>
+        /// Gets hash rate resale list
+        /// </summary>
+        /// <param name="page">Page</param>
+        /// <param name="pageSize">Results per page</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Resale list</returns>
+        public async Task<WebCallResult<BinanceHashrateResaleList>> GetHashrateResaleListAsync(int? page = null, int? pageSize = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("pageIndex", page?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("pageSize", pageSize?.ToString(CultureInfo.InvariantCulture));
+
+            var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceHashrateResaleList>>(_baseClient.GetUrlSpot(miningHashrateResaleListEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            if (!result.Success)
+                return WebCallResult<BinanceHashrateResaleList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
+
+            if (result.Data?.Code != 0)
+                return WebCallResult<BinanceHashrateResaleList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
+
+            return new WebCallResult<BinanceHashrateResaleList>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
+        }
+
+        #endregion
+
+        #region Hashrate Resale Details
+
+        /// <summary>
+        /// Gets hash rate resale details
+        /// </summary>
+        /// <param name="configId">The mining id</param>
+        /// <param name="userName">Mining account</param>
+        /// <param name="page">Page</param>
+        /// <param name="pageSize">Results per page</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Resale details</returns>
+        public async Task<WebCallResult<BinanceHashrateResaleDetails>> GetHashrateResaleDetailsAsync(int configId, string userName, int? page = null, int? pageSize = null, CancellationToken ct = default)
+        {
+            userName.ValidateNotNull(nameof(userName));
+
+            var parameters = new Dictionary<string, object>()
+            {
+                { "configId", configId.ToString(CultureInfo.InvariantCulture) },
+                { "userName", userName }
+            };
+
+            parameters.AddOptionalParameter("pageIndex", page?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("pageSize", pageSize?.ToString(CultureInfo.InvariantCulture));
+
+            var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceHashrateResaleDetails>>(_baseClient.GetUrlSpot(miningHashrateResaleDetailsEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            if (!result.Success)
+                return WebCallResult<BinanceHashrateResaleDetails>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
+
+            if (result.Data?.Code != 0)
+                return WebCallResult<BinanceHashrateResaleDetails>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
+
+            return new WebCallResult<BinanceHashrateResaleDetails>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
+        }
+
+        #endregion
+
+        #region Hashrate Resale Request
+
+        /// <summary>
+        /// Hashrate resale request
+        /// </summary>
+        /// <param name="userName">Mining account</param>
+        /// <param name="algorithm">Transfer algorithm</param>
+        /// <param name="startDate">Resale start time</param>
+        /// <param name="endDate">Resale end time</param>
+        /// <param name="toUser">To mining account</param>
+        /// <param name="hashRate">Results per page</param>
+        /// <param name="ct">Resale hashrate h/s must be transferred (BTC is greater than 500000000000 ETH is greater than 500000)</param>
+        /// <returns>Mining account</returns>
+        public async Task<WebCallResult<int>> PlaceHashrateResaleRequest(string userName, string algorithm, DateTime startDate, DateTime endDate, string toUser, decimal hashRate, CancellationToken ct = default)
+        {
+            userName.ValidateNotNull(nameof(userName));
+            algorithm.ValidateNotNull(nameof(algorithm));
+            toUser.ValidateNotNull(nameof(toUser));
+
+            var parameters = new Dictionary<string, object>()
+            {
+                { "userName", userName },
+                { "algo", algorithm },
+                { "startDate", JsonConvert.SerializeObject(startDate, new TimestampConverter()) },
+                { "endDate", JsonConvert.SerializeObject(endDate, new TimestampConverter()) },
+                { "toPoolUser", toUser },
+                { "hashRate", hashRate },
+            };
+
+            var result = await _baseClient.SendRequestInternal<BinanceResult<int>>(_baseClient.GetUrlSpot(miningHashrateResaleRequest, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            if (!result.Success)
+                return WebCallResult<int>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
+
+            if (result.Data?.Code != 0)
+                return WebCallResult<int>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
+
+            return new WebCallResult<int>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
+        }
+
+        #endregion
+
+        #region Cancel Hashrate Resale Configuration
+
+        /// <summary>
+        /// Cancel Hashrate Resale Configuration
+        /// </summary>
+        /// <param name="configId">Mining id</param>
+        /// <param name="userName">Mining account</param>
+        /// <param name="ct">Resale hashrate h/s must be transferred (BTC is greater than 500000000000 ETH is greater than 500000)</param>
+        /// <returns>Success</returns>
+        public async Task<WebCallResult<bool>> PlaceHashrateResaleRequest(int configId, string userName, CancellationToken ct = default)
+        {
+            userName.ValidateNotNull(nameof(userName));
+
+            var parameters = new Dictionary<string, object>()
+            {
+                { "configId", configId },
+                { "userName", userName },
+            };
+
+            var result = await _baseClient.SendRequestInternal<BinanceResult<int>>(_baseClient.GetUrlSpot(miningHashrateResaleCancel, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            if (!result.Success)
+                return WebCallResult<bool>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
+
+            if (result.Data?.Code != 0)
+                return WebCallResult<bool>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
+
+            return new WebCallResult<bool>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
+        }
+
         #endregion
 
         #endregion
