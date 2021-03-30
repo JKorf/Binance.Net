@@ -532,6 +532,7 @@ namespace Binance.Net.SubClients.Spot
         /// <summary>
         /// Get cross collateral LTV adjustment history
         /// </summary>
+        /// <param name="loanCoin">The loan coin</param>
         /// <param name="collateralCoin">The collateral coin</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -539,7 +540,7 @@ namespace Binance.Net.SubClients.Spot
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Adjustment history</returns>
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceCrossCollateralAdjustLtvHistory>>> GetAdjustCrossCollateralLoanToValueHistoryAsync(string collateralCoin, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceCrossCollateralAdjustLtvHistory>>> GetAdjustCrossCollateralLoanToValueHistoryAsync(string? collateralCoin = null, string? loanCoin = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
@@ -548,9 +549,10 @@ namespace Binance.Net.SubClients.Spot
             var parameters = new Dictionary<string, object>
             {
                 { "timestamp", _baseClient.GetTimestamp() },
-                { "collateralCoin", collateralCoin }
             };
 
+            parameters.AddOptionalParameter("loanCoin", loanCoin);
+            parameters.AddOptionalParameter("collateralCoin", collateralCoin);
             parameters.AddOptionalParameter("startTime", startTime.HasValue ? JsonConvert.SerializeObject(startTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("size", limit?.ToString(CultureInfo.InvariantCulture));
@@ -579,13 +581,14 @@ namespace Binance.Net.SubClients.Spot
         /// Get cross collateral liquidation history
         /// </summary>
         /// <param name="collateralCoin">The collateral coin</param>
+        /// <param name="loanCoin">The loan coin</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">The page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Liquidation history</returns>
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceCrossCollateralLiquidationHistory>>> GetCrossCollateralLiquidationHistoryAsync(string? collateralCoin = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceCrossCollateralLiquidationHistory>>> GetCrossCollateralLiquidationHistoryAsync(string? collateralCoin = null, string? loanCoin = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
@@ -596,6 +599,7 @@ namespace Binance.Net.SubClients.Spot
                 { "timestamp", _baseClient.GetTimestamp() }
             };
 
+            parameters.AddOptionalParameter("loanCoin", loanCoin);
             parameters.AddOptionalParameter("collateralCoin", collateralCoin);
             parameters.AddOptionalParameter("startTime", startTime.HasValue ? JsonConvert.SerializeObject(startTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
