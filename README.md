@@ -169,6 +169,11 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.13.1 - 02 apr 2021
+    * Fixed mining endpoints
+    * Adjusted TransferSubAccountToSubAccount request
+    * Removed invalid symbol check Usdt futures GetKlines
+
 * Version 6.13.0 - 30 mrt 2021
     * Added CancelOpenMarginOrders endpoint
     * Added universal Transfer endpoints
