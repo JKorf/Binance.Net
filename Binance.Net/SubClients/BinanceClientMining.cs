@@ -59,7 +59,12 @@ namespace Binance.Net.SubClients
         /// <returns>Coins info</returns>
         public async Task<WebCallResult<IEnumerable<BinanceMiningCoin>>> GetMiningCoinListAsync(CancellationToken ct = default)
         {
-            var result = await _baseClient.SendRequestInternal<BinanceResult<IEnumerable<BinanceMiningCoin>>>(_baseClient.GetUrlSpot(coinListEndpoint, "sapi", "1"), HttpMethod.Get, ct, null, false).ConfigureAwait(false);
+            var parameters = new Dictionary<string, object>
+            {
+                {"timestamp", _baseClient.GetTimestamp()}
+            };
+
+            var result = await _baseClient.SendRequestInternal<BinanceResult<IEnumerable<BinanceMiningCoin>>>(_baseClient.GetUrlSpot(coinListEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result.Success)
                 return WebCallResult<IEnumerable<BinanceMiningCoin>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
@@ -87,7 +92,12 @@ namespace Binance.Net.SubClients
         /// <returns>Algorithms info</returns>
         public async Task<WebCallResult<IEnumerable<BinanceMiningAlgorithm>>> GetMiningAlgorithmListAsync(CancellationToken ct = default)
         {
-            var result = await _baseClient.SendRequestInternal<BinanceResult<IEnumerable<BinanceMiningAlgorithm>>>(_baseClient.GetUrlSpot(algorithmEndpoint, "sapi", "1"), HttpMethod.Get, ct, null, true).ConfigureAwait(false);
+            var parameters = new Dictionary<string, object>
+            {
+                {"timestamp", _baseClient.GetTimestamp()}
+            };
+
+            var result = await _baseClient.SendRequestInternal<BinanceResult<IEnumerable<BinanceMiningAlgorithm>>>(_baseClient.GetUrlSpot(algorithmEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result.Success)
                 return WebCallResult<IEnumerable<BinanceMiningAlgorithm>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
@@ -131,7 +141,8 @@ namespace Binance.Net.SubClients
             {
                 {"algo", algorithm},
                 {"userName", userName},
-                {"workerName", workerName}
+                {"workerName", workerName},
+                {"timestamp", _baseClient.GetTimestamp()}
             };
 
             var result = await _baseClient.SendRequestInternal<BinanceResult<IEnumerable<BinanceMinerDetails>>>(_baseClient.GetUrlSpot(minerDetailsEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
@@ -183,6 +194,7 @@ namespace Binance.Net.SubClients
             {
                 {"algo", algorithm},
                 {"userName", userName},
+                {"timestamp", _baseClient.GetTimestamp()}
             };
 
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
@@ -241,6 +253,7 @@ namespace Binance.Net.SubClients
             {
                 {"algo", algorithm},
                 {"userName", userName},
+                {"timestamp", _baseClient.GetTimestamp()}
             };
 
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
@@ -283,6 +296,7 @@ namespace Binance.Net.SubClients
             {
                 {"algo", algorithm},
                 {"userName", userName},
+                {"timestamp", _baseClient.GetTimestamp()}
             };
 
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
@@ -330,6 +344,7 @@ namespace Binance.Net.SubClients
             {
                 {"algo", algorithm},
                 {"userName", userName},
+                {"timestamp", _baseClient.GetTimestamp()}
             };
 
             var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceMiningStatistic>>(_baseClient.GetUrlSpot(miningStatisticsEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
@@ -360,6 +375,7 @@ namespace Binance.Net.SubClients
             {
                 {"algo", algorithm},
                 {"userName", userName},
+                {"timestamp", _baseClient.GetTimestamp()}
             };
 
             var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceMiningAccount>>(_baseClient.GetUrlSpot(miningAccountListEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
@@ -384,7 +400,10 @@ namespace Binance.Net.SubClients
         /// <returns>Resale list</returns>
         public async Task<WebCallResult<BinanceHashrateResaleList>> GetHashrateResaleListAsync(int? page = null, int? pageSize = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
+            var parameters = new Dictionary<string, object>
+            {
+                {"timestamp", _baseClient.GetTimestamp()}
+            };
             parameters.AddOptionalParameter("pageIndex", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("pageSize", pageSize?.ToString(CultureInfo.InvariantCulture));
 
@@ -418,7 +437,8 @@ namespace Binance.Net.SubClients
             var parameters = new Dictionary<string, object>()
             {
                 { "configId", configId.ToString(CultureInfo.InvariantCulture) },
-                { "userName", userName }
+                { "userName", userName },
+                {"timestamp", _baseClient.GetTimestamp()}
             };
 
             parameters.AddOptionalParameter("pageIndex", page?.ToString(CultureInfo.InvariantCulture));
@@ -463,6 +483,7 @@ namespace Binance.Net.SubClients
                 { "endDate", JsonConvert.SerializeObject(endDate, new TimestampConverter()) },
                 { "toPoolUser", toUser },
                 { "hashRate", hashRate },
+                {"timestamp", _baseClient.GetTimestamp()}
             };
 
             var result = await _baseClient.SendRequestInternal<BinanceResult<int>>(_baseClient.GetUrlSpot(miningHashrateResaleRequest, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
@@ -494,6 +515,7 @@ namespace Binance.Net.SubClients
             {
                 { "configId", configId },
                 { "userName", userName },
+                {"timestamp", _baseClient.GetTimestamp()}
             };
 
             var result = await _baseClient.SendRequestInternal<BinanceResult<bool>>(_baseClient.GetUrlSpot(miningHashrateResaleCancel, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
