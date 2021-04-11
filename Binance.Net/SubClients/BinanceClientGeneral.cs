@@ -287,6 +287,10 @@ namespace Binance.Net.SubClients
         /// <returns>Coins info</returns>
         public async Task<WebCallResult<IEnumerable<BinanceUserCoin>>> GetUserCoinsAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<IEnumerable<BinanceUserCoin>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
             var parameters = new Dictionary<string, object>
             {
                 { "timestamp", _baseClient.GetTimestamp() }
