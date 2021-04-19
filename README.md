@@ -167,6 +167,9 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.13.2 - 19 apr 2021
+    * Updated CryptoExchange.Net
+
 * Version 6.13.1 - 02 apr 2021
     * Fixed mining endpoints
     * Adjusted TransferSubAccountToSubAccount request
