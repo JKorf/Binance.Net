@@ -150,8 +150,6 @@ if(!startResult.Success)
 var socketClient = new BinanceSocketClient();
 
 socketClient.Spot.SubscribeToUserDataUpdates(startResult.Data, 
-	accountUpdate => { // Handle account info update 
-	},
 	orderUpdate => { // Handle order update
 	}, 
 	ocoUpdate => { // Handle oco order update
