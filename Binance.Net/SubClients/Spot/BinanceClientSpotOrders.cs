@@ -612,14 +612,14 @@ namespace Binance.Net.SubClients.Spot
         /// Retrieves data for a specific oco order. Either orderListId or listClientOrderId should be provided.
         /// </summary>
         /// <param name="orderListId">The list order id of the order</param>
-        /// <param name="listClientOrderId">The client order id of the list order</param>
+        /// <param name="origClientOrderId">Either orderListId or listClientOrderId must be provided</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The specific order list</returns>
-        public async Task<WebCallResult<BinanceOrderOcoList>> GetOcoOrderAsync(long? orderListId = null, string? listClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceOrderOcoList>> GetOcoOrderAsync(long? orderListId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
-            if (orderListId == null && listClientOrderId == null)
-                throw new ArgumentException("Either orderListId or listClientOrderId must be sent");
+            if (orderListId == null && origClientOrderId == null)
+                throw new ArgumentException("Either orderListId or origClientOrderId must be sent");
 
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
@@ -630,7 +630,7 @@ namespace Binance.Net.SubClients.Spot
                 { "timestamp", _baseClient.GetTimestamp() }
             };
             parameters.AddOptionalParameter("orderListId", orderListId?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("listClientOrderId", listClientOrderId);
+            parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceOrderOcoList>(_baseClient.GetUrlSpot(getOcoOrderEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
