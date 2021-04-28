@@ -513,13 +513,16 @@ namespace Binance.Net
 
         async Task<WebCallResult<ICommonOrderId>> IExchangeClient.PlaceOrderAsync(string symbol, IExchangeClient.OrderSide side, IExchangeClient.OrderType type, decimal quantity, decimal? price, string? accountId)
         {
-            var result = await Spot.Order.PlaceOrderAsync(symbol, GetOrderSide(side), GetOrderType(type), quantity, price: price, timeInForce: TimeInForce.GoodTillCancel);
+            var result = await Spot.Order.PlaceOrderAsync(symbol, GetOrderSide(side), GetOrderType(type), quantity, price: price, timeInForce: type == IExchangeClient.OrderType.Limit ? TimeInForce.GoodTillCancel: (TimeInForce?)null);
             return WebCallResult<ICommonOrderId>.CreateFrom(result);
         }
 
         async Task<WebCallResult<ICommonOrder>> IExchangeClient.GetOrderAsync(string orderId, string? symbol)
         {
-            var result = await Spot.Order.GetOrderAsync(orderId);
+            if (string.IsNullOrEmpty(symbol))
+                return WebCallResult<ICommonOrder>.CreateErrorResult(new ArgumentError(nameof(symbol) + " required for Binance " + nameof(IExchangeClient.GetOrderAsync)));
+
+            var result = await Spot.Order.GetOrderAsync(symbol, long.Parse(orderId));
             return WebCallResult<ICommonOrder>.CreateFrom(result);
         }
 
