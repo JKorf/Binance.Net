@@ -97,7 +97,7 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// Currently Empty
         /// </summary>
         [JsonIgnore]
-        public object[] UnderlyingSupType { get; set; }
+        public object[] UnderlyingSupType { get; set; } = new object[0];
 
         /// <summary>
         /// Allowed order time in force

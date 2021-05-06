@@ -476,44 +476,44 @@ namespace Binance.Net
         
         async Task<WebCallResult<IEnumerable<ICommonSymbol>>> IExchangeClient.GetSymbolsAsync()
         {
-            var exchangeInfo = await Spot.System.GetExchangeInfoAsync();
+            var exchangeInfo = await Spot.System.GetExchangeInfoAsync().ConfigureAwait(false);
             return new WebCallResult<IEnumerable<ICommonSymbol>>(exchangeInfo.ResponseStatusCode,
                 exchangeInfo.ResponseHeaders, exchangeInfo.Data?.Symbols, exchangeInfo.Error);
         }
 
         async Task<WebCallResult<ICommonTicker>> IExchangeClient.GetTickerAsync(string symbol)
         {
-            var tickers = await Spot.Market.Get24HPriceAsync(symbol);
+            var tickers = await Spot.Market.Get24HPriceAsync(symbol).ConfigureAwait(false);
             return new WebCallResult<ICommonTicker>(tickers.ResponseStatusCode, tickers.ResponseHeaders, (Binance24HPrice)tickers.Data, tickers.Error);
         }
 
         async Task<WebCallResult<IEnumerable<ICommonTicker>>> IExchangeClient.GetTickersAsync()
         {
-            var tickers = await Spot.Market.Get24HPricesAsync();
+            var tickers = await Spot.Market.Get24HPricesAsync().ConfigureAwait(false);
             return new WebCallResult<IEnumerable<ICommonTicker>>(tickers.ResponseStatusCode, tickers.ResponseHeaders, tickers.Data?.Select(d => (Binance24HPrice)d), tickers.Error);
         }
 
         async Task<WebCallResult<IEnumerable<ICommonKline>>> IExchangeClient.GetKlinesAsync(string symbol, TimeSpan timespan, DateTime? startTime = null, DateTime? endTime = null, int? limit = null)
         {
-            var klines = await Spot.Market.GetKlinesAsync(symbol, GetKlineIntervalFromTimespan(timespan), startTime, endTime, limit);
+            var klines = await Spot.Market.GetKlinesAsync(symbol, GetKlineIntervalFromTimespan(timespan), startTime, endTime, limit).ConfigureAwait(false);
             return WebCallResult<IEnumerable<ICommonKline>>.CreateFrom(klines);
         }
 
         async Task<WebCallResult<ICommonOrderBook>> IExchangeClient.GetOrderBookAsync(string symbol)
         {
-            var orderBookResult = await Spot.Market.GetOrderBookAsync(symbol);
+            var orderBookResult = await Spot.Market.GetOrderBookAsync(symbol).ConfigureAwait(false);
             return WebCallResult<ICommonOrderBook>.CreateFrom(orderBookResult);
         }
 
         async Task<WebCallResult<IEnumerable<ICommonRecentTrade>>> IExchangeClient.GetRecentTradesAsync(string symbol)
         {
-            var tradesResult = await Spot.Market.GetSymbolTradesAsync(symbol);
+            var tradesResult = await Spot.Market.GetSymbolTradesAsync(symbol).ConfigureAwait(false);
             return WebCallResult<IEnumerable<ICommonRecentTrade>>.CreateFrom(tradesResult);
         }
 
         async Task<WebCallResult<ICommonOrderId>> IExchangeClient.PlaceOrderAsync(string symbol, IExchangeClient.OrderSide side, IExchangeClient.OrderType type, decimal quantity, decimal? price, string? accountId)
         {
-            var result = await Spot.Order.PlaceOrderAsync(symbol, GetOrderSide(side), GetOrderType(type), quantity, price: price, timeInForce: type == IExchangeClient.OrderType.Limit ? TimeInForce.GoodTillCancel: (TimeInForce?)null);
+            var result = await Spot.Order.PlaceOrderAsync(symbol, GetOrderSide(side), GetOrderType(type), quantity, price: price, timeInForce: type == IExchangeClient.OrderType.Limit ? TimeInForce.GoodTillCancel: (TimeInForce?)null).ConfigureAwait(false);
             return WebCallResult<ICommonOrderId>.CreateFrom(result);
         }
 
@@ -522,7 +522,7 @@ namespace Binance.Net
             if (string.IsNullOrEmpty(symbol))
                 return WebCallResult<ICommonOrder>.CreateErrorResult(new ArgumentError(nameof(symbol) + " required for Binance " + nameof(IExchangeClient.GetOrderAsync)));
 
-            var result = await Spot.Order.GetOrderAsync(symbol, long.Parse(orderId));
+            var result = await Spot.Order.GetOrderAsync(symbol, long.Parse(orderId)).ConfigureAwait(false);
             return WebCallResult<ICommonOrder>.CreateFrom(result);
         }
 
@@ -531,7 +531,7 @@ namespace Binance.Net
             if(string.IsNullOrEmpty(symbol))
                 return WebCallResult<IEnumerable<ICommonTrade>>.CreateErrorResult(new ArgumentError(nameof(symbol) + " required for Binance " + nameof(IExchangeClient.GetTradesAsync)));
                
-            var result = await Spot.Order.GetMyTradesAsync(symbol!);
+            var result = await Spot.Order.GetMyTradesAsync(symbol!).ConfigureAwait(false);
             if(!result)
                 return WebCallResult<IEnumerable<ICommonTrade>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
@@ -540,7 +540,7 @@ namespace Binance.Net
 
         async Task<WebCallResult<IEnumerable<ICommonOrder>>> IExchangeClient.GetOpenOrdersAsync(string? symbol)
         {
-            var result = await Spot.Order.GetOpenOrdersAsync();
+            var result = await Spot.Order.GetOpenOrdersAsync().ConfigureAwait(false);
             return WebCallResult<IEnumerable<ICommonOrder>>.CreateFrom(result);
         }
 
@@ -549,7 +549,7 @@ namespace Binance.Net
             if (symbol == null)
                 return WebCallResult<IEnumerable<ICommonOrder>>.CreateErrorResult(new ArgumentError(nameof(symbol) + " required for Binance " + nameof(IExchangeClient.GetClosedOrdersAsync)));
 
-            var result = await Spot.Order.GetAllOrdersAsync(symbol);
+            var result = await Spot.Order.GetAllOrdersAsync(symbol).ConfigureAwait(false);
             return WebCallResult<IEnumerable<ICommonOrder>>.CreateFrom(result);
         }
 
@@ -558,13 +558,13 @@ namespace Binance.Net
             if (symbol == null)
                 return WebCallResult<ICommonOrderId>.CreateErrorResult(new ArgumentError(nameof(symbol) + " required for Binance " + nameof(IExchangeClient.CancelOrderAsync)));
 
-            var result = await Spot.Order.CancelOrderAsync(symbol, orderId: long.Parse(orderId));
+            var result = await Spot.Order.CancelOrderAsync(symbol, orderId: long.Parse(orderId)).ConfigureAwait(false);
             return WebCallResult<ICommonOrderId>.CreateFrom(result);
         }
 
         async Task<WebCallResult<IEnumerable<ICommonBalance>>> IExchangeClient.GetBalancesAsync(string? accountId = null)
         {
-            var result = await General.GetAccountInfoAsync();
+            var result = await General.GetAccountInfoAsync().ConfigureAwait(false);
             return new WebCallResult<IEnumerable<ICommonBalance>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data?.Balances.Select(b => (ICommonBalance)b), result.Error);
         }
 

@@ -62,6 +62,6 @@ namespace Binance.Net.Objects.Futures.MarketStream
         /// Mark Price
         /// </summary>
         [JsonProperty("P")]
-        public decimal EstimatedSettlePrice { get; set; }
+        public new decimal EstimatedSettlePrice { get; set; }
     }
 }
