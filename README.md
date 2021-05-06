@@ -167,6 +167,9 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.14.0-beta2 - 06 mei 2021
+    * Updated CryptoExchange.Net
+
 * Version 6.14.0-beta1 - 30 apr 2021
     * Updated to CryptoExchange.Net 4.0.0-beta1, new websocket implementation
 
