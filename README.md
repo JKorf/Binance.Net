@@ -91,6 +91,9 @@ I develop and maintain this package on my own for free in my spare time. Donatio
 **Eth**:  0x069176ca1a4b1d6e0b7901a6bc0dbf3bb0bf5cc2  
 **Nano**: xrb_1ocs3hbp561ef76eoctjwg85w5ugr8wgimkj8mfhoyqbx4s1pbc74zggw7gs  
 
+## Discord
+A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
+
 
 ## Installation
 ![Nuget version](https://img.shields.io/nuget/v/binance.net.svg)  ![Nuget downloads](https://img.shields.io/nuget/dt/Binance.Net.svg)
