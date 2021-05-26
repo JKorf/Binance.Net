@@ -14,6 +14,7 @@ using Binance.Net.Objects.Futures.MarketData;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
+using Microsoft.Extensions.Logging;
 
 namespace Binance.Net.SubClients.Futures.Usdt
 {
@@ -62,15 +63,6 @@ namespace Binance.Net.SubClients.Futures.Usdt
         }
 
         #region Position Information
-
-        /// <summary>
-        /// Gets account information
-        /// </summary>
-        /// <param name="symbol">Symbol</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of Positions</returns>
-        public WebCallResult<IEnumerable<BinancePositionDetailsUsdt>> GetPositionInformation(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default) => GetPositionInformationAsync(symbol, receiveWindow, ct).Result;
 
         /// <summary>
         /// Gets account information
@@ -145,7 +137,7 @@ namespace Binance.Net.SubClients.Futures.Usdt
                             return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: LotSize filter failed. Original quantity: {quantity}, Closest allowed: {outputQuantity}");
                         }
 
-                        _log.Write(LogVerbosity.Info, $"Quantity clamped from {quantity} to {outputQuantity}");
+                        _log.Write(LogLevel.Information, $"Quantity clamped from {quantity} to {outputQuantity}");
                     }
                 }
             }
@@ -163,7 +155,7 @@ namespace Binance.Net.SubClients.Futures.Usdt
                         if (BaseClient.TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
                             return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter max/min failed. Original price: {price}, Closest allowed: {outputPrice}");
 
-                        _log.Write(LogVerbosity.Info, $"price clamped from {price} to {outputPrice}");
+                        _log.Write(LogLevel.Information, $"price clamped from {price} to {outputPrice}");
                     }
 
                     if (stopPrice != null)
@@ -176,7 +168,7 @@ namespace Binance.Net.SubClients.Futures.Usdt
                                 return BinanceTradeRuleResult.CreateFailed(
                                     $"Trade rules check failed: Stop price filter max/min failed. Original stop price: {stopPrice}, Closest allowed: {outputStopPrice}");
 
-                            _log.Write(LogVerbosity.Info,
+                            _log.Write(LogLevel.Information,
                                 $"Stop price clamped from {stopPrice} to {outputStopPrice} based on price filter");
                         }
                     }
@@ -191,7 +183,7 @@ namespace Binance.Net.SubClients.Futures.Usdt
                         if (BaseClient.TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
                             return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter tick failed. Original price: {price}, Closest allowed: {outputPrice}");
 
-                        _log.Write(LogVerbosity.Info, $"price rounded from {beforePrice} to {outputPrice}");
+                        _log.Write(LogLevel.Information, $"price rounded from {beforePrice} to {outputPrice}");
                     }
 
                     if (stopPrice != null)
@@ -204,7 +196,7 @@ namespace Binance.Net.SubClients.Futures.Usdt
                                 return BinanceTradeRuleResult.CreateFailed(
                                     $"Trade rules check failed: Stop price filter tick failed. Original stop price: {stopPrice}, Closest allowed: {outputStopPrice}");
 
-                            _log.Write(LogVerbosity.Info,
+                            _log.Write(LogLevel.Information,
                                 $"Stop price floored from {beforeStopPrice} to {outputStopPrice} based on price filter");
                         }
                     }

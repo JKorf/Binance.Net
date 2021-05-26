@@ -102,7 +102,7 @@ namespace Binance.Net
             return Deserialize<T>(data, checkObject);   
         }
 
-        internal Task<CallResult<UpdateSubscription>> SubscribeInternal<T>(string url, Action<T> onData)
+        internal Task<CallResult<UpdateSubscription>> SubscribeInternal<T>(string url, Action<DataEvent<T>> onData)
         {
             return Subscribe(url, null, url + NextId(), false, onData);
         }

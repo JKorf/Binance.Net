@@ -19,15 +19,7 @@ namespace Binance.Net.Interfaces.SocketSubClient
         /// <param name="symbol">The symbol</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        CallResult<UpdateSubscription> SubscribeToAggregatedTradeUpdates(string symbol, Action<BinanceStreamAggregatedTrade> onMessage);
-
-        /// <summary>
-        /// Subscribes to the aggregated trades update stream for the provided symbol
-        /// </summary>
-        /// <param name="symbol">The symbol</param>
-        /// <param name="onMessage">The event handler for the received data</param>
-        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToAggregatedTradeUpdatesAsync(string symbol, Action<BinanceStreamAggregatedTrade> onMessage);
+        Task<CallResult<UpdateSubscription>> SubscribeToAggregatedTradeUpdatesAsync(string symbol, Action<DataEvent<BinanceStreamAggregatedTrade>> onMessage);
 
         /// <summary>
         /// Subscribes to the aggregated trades update stream for the provided symbols
@@ -35,15 +27,7 @@ namespace Binance.Net.Interfaces.SocketSubClient
         /// <param name="symbols">The symbols</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        CallResult<UpdateSubscription> SubscribeToAggregatedTradeUpdates(IEnumerable<string> symbols, Action<BinanceStreamAggregatedTrade> onMessage);
-
-        /// <summary>
-        /// Subscribes to the aggregated trades update stream for the provided symbols
-        /// </summary>
-        /// <param name="symbols">The symbols</param>
-        /// <param name="onMessage">The event handler for the received data</param>
-        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToAggregatedTradeUpdatesAsync(IEnumerable<string> symbols, Action<BinanceStreamAggregatedTrade> onMessage);
+        Task<CallResult<UpdateSubscription>> SubscribeToAggregatedTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BinanceStreamAggregatedTrade>> onMessage);
 
         /// <summary>
         /// Subscribes to the candlestick update stream for the provided symbol
@@ -52,16 +36,7 @@ namespace Binance.Net.Interfaces.SocketSubClient
         /// <param name="interval">The interval of the candlesticks</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        CallResult<UpdateSubscription> SubscribeToKlineUpdates(string symbol, KlineInterval interval, Action<IBinanceStreamKlineData> onMessage);
-
-        /// <summary>
-        /// Subscribes to the candlestick update stream for the provided symbol
-        /// </summary>
-        /// <param name="symbol">The symbol</param>
-        /// <param name="interval">The interval of the candlesticks</param>
-        /// <param name="onMessage">The event handler for the received data</param>
-        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<IBinanceStreamKlineData> onMessage);
+        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<IBinanceStreamKlineData>> onMessage);
 
         /// <summary>
         /// Subscribes to the candlestick update stream for the provided symbols
@@ -70,16 +45,7 @@ namespace Binance.Net.Interfaces.SocketSubClient
         /// <param name="interval">The interval of the candlesticks</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        CallResult<UpdateSubscription> SubscribeToKlineUpdates(IEnumerable<string> symbols, KlineInterval interval, Action<IBinanceStreamKlineData> onMessage);
-
-        /// <summary>
-        /// Subscribes to the candlestick update stream for the provided symbols
-        /// </summary>
-        /// <param name="symbols">The symbols</param>
-        /// <param name="interval">The interval of the candlesticks</param>
-        /// <param name="onMessage">The event handler for the received data</param>
-        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<IBinanceStreamKlineData> onMessage);
+        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<IBinanceStreamKlineData>> onMessage);
 
         /// <summary>
         /// Subscribes to mini ticker updates stream for a specific symbol
@@ -87,15 +53,7 @@ namespace Binance.Net.Interfaces.SocketSubClient
         /// <param name="symbol">The symbol to subscribe to</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        CallResult<UpdateSubscription> SubscribeToSymbolMiniTickerUpdates(string symbol, Action<IBinanceMiniTick> onMessage);
-
-        /// <summary>
-        /// Subscribes to mini ticker updates stream for a specific symbol
-        /// </summary>
-        /// <param name="symbol">The symbol to subscribe to</param>
-        /// <param name="onMessage">The event handler for the received data</param>
-        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToSymbolMiniTickerUpdatesAsync(string symbol, Action<IBinanceMiniTick> onMessage);
+        Task<CallResult<UpdateSubscription>> SubscribeToSymbolMiniTickerUpdatesAsync(string symbol, Action<DataEvent<IBinanceMiniTick>> onMessage);
 
         /// <summary>
         /// Subscribes to mini ticker updates stream for a list of symbol
@@ -103,29 +61,14 @@ namespace Binance.Net.Interfaces.SocketSubClient
         /// <param name="symbols">The symbols to subscribe to</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        CallResult<UpdateSubscription> SubscribeToSymbolMiniTickerUpdates(IEnumerable<string> symbols, Action<IBinanceMiniTick> onMessage);
-
-        /// <summary>
-        /// Subscribes to mini ticker updates stream for a list of symbol
-        /// </summary>
-        /// <param name="symbols">The symbols to subscribe to</param>
-        /// <param name="onMessage">The event handler for the received data</param>
-        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToSymbolMiniTickerUpdatesAsync(IEnumerable<string> symbols, Action<IBinanceMiniTick> onMessage);
+        Task<CallResult<UpdateSubscription>> SubscribeToSymbolMiniTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IBinanceMiniTick>> onMessage);
 
         /// <summary>
         /// Subscribes to mini ticker updates stream for all symbols
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        CallResult<UpdateSubscription> SubscribeToAllSymbolMiniTickerUpdates(Action<IEnumerable<IBinanceMiniTick>> onMessage);
-
-        /// <summary>
-        /// Subscribes to mini ticker updates stream for all symbols
-        /// </summary>
-        /// <param name="onMessage">The event handler for the received data</param>
-        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToAllSymbolMiniTickerUpdatesAsync(Action<IEnumerable<IBinanceMiniTick>> onMessage);
+        Task<CallResult<UpdateSubscription>> SubscribeToAllSymbolMiniTickerUpdatesAsync(Action<DataEvent<IEnumerable<IBinanceMiniTick>>> onMessage);
 
         /// <summary>
         /// Subscribes to ticker updates stream for a specific symbol
@@ -133,15 +76,7 @@ namespace Binance.Net.Interfaces.SocketSubClient
         /// <param name="symbol">The symbol to subscribe to</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        CallResult<UpdateSubscription> SubscribeToSymbolTickerUpdates(string symbol, Action<IBinanceTick> onMessage);
-
-        /// <summary>
-        /// Subscribes to ticker updates stream for a specific symbol
-        /// </summary>
-        /// <param name="symbol">The symbol to subscribe to</param>
-        /// <param name="onMessage">The event handler for the received data</param>
-        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToSymbolTickerUpdatesAsync(string symbol, Action<IBinanceTick> onMessage);
+        Task<CallResult<UpdateSubscription>> SubscribeToSymbolTickerUpdatesAsync(string symbol, Action<DataEvent<IBinanceTick>> onMessage);
 
         /// <summary>
         /// Subscribes to ticker updates stream for a specific symbol
@@ -149,42 +84,20 @@ namespace Binance.Net.Interfaces.SocketSubClient
         /// <param name="symbols">The symbols to subscribe to</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        CallResult<UpdateSubscription> SubscribeToSymbolTickerUpdates(IEnumerable<string> symbols, Action<IBinanceTick> onMessage);
-
-        /// <summary>
-        /// Subscribes to ticker updates stream for a specific symbol
-        /// </summary>
-        /// <param name="symbols">The symbols to subscribe to</param>
-        /// <param name="onMessage">The event handler for the received data</param>
-        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToSymbolTickerUpdatesAsync(IEnumerable<string> symbols, Action<IBinanceTick> onMessage);
+        Task<CallResult<UpdateSubscription>> SubscribeToSymbolTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IBinanceTick>> onMessage);
 
         /// <summary>
         /// Subscribes to ticker updates stream for all symbols
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        CallResult<UpdateSubscription> SubscribeToAllSymbolTickerUpdates(Action<IEnumerable<IBinanceTick>> onMessage);
-
-        /// <summary>
-        /// Subscribes to ticker updates stream for all symbols
-        /// </summary>
-        /// <param name="onMessage">The event handler for the received data</param>
-        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToAllSymbolTickerUpdatesAsync(Action<IEnumerable<IBinanceTick>> onMessage);
+        Task<CallResult<UpdateSubscription>> SubscribeToAllSymbolTickerUpdatesAsync(Action<DataEvent<IEnumerable<IBinanceTick>>> onMessage);
 
         /// <summary>
         /// Subscribes to all book ticker update streams
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        CallResult<UpdateSubscription> SubscribeToAllBookTickerUpdates(Action<BinanceStreamBookPrice> onMessage);
-
-        /// <summary>
-        /// Subscribes to all book ticker update streams
-        /// </summary>
-        /// <param name="onMessage">The event handler for the received data</param>
-        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToAllBookTickerUpdatesAsync(Action<BinanceStreamBookPrice> onMessage);
+        Task<CallResult<UpdateSubscription>> SubscribeToAllBookTickerUpdatesAsync(Action<DataEvent<BinanceStreamBookPrice>> onMessage);
     }
 }

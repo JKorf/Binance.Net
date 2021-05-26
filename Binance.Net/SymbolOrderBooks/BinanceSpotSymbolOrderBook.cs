@@ -36,9 +36,9 @@ namespace Binance.Net.SymbolOrderBooks
         {
             CallResult<UpdateSubscription> subResult;
             if (Levels == null)
-                subResult = await _socketClient.Spot.SubscribeToOrderBookUpdatesAsync(Symbol, _updateInterval, data => HandleUpdate((BinanceOrderBook)data)).ConfigureAwait(false);
+                subResult = await _socketClient.Spot.SubscribeToOrderBookUpdatesAsync(Symbol, _updateInterval, data => HandleUpdate((BinanceOrderBook)data.Data)).ConfigureAwait(false);
             else
-                subResult = await _socketClient.Spot.SubscribeToPartialOrderBookUpdatesAsync(Symbol, Levels.Value, _updateInterval, data => HandleUpdate((BinanceOrderBook)data)).ConfigureAwait(false);
+                subResult = await _socketClient.Spot.SubscribeToPartialOrderBookUpdatesAsync(Symbol, Levels.Value, _updateInterval, data => HandleUpdate((BinanceOrderBook)data.Data)).ConfigureAwait(false);
 
             if (!subResult)
                 return new CallResult<UpdateSubscription>(null, subResult.Error);

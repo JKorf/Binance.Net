@@ -18,13 +18,6 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Exchange info</returns>
-        WebCallResult<BinanceFuturesCoinExchangeInfo> GetExchangeInfo(CancellationToken ct = default);
-
-        /// <summary>
-        /// Get's information about the exchange including rate limits and symbol list
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Exchange info</returns>
         Task<WebCallResult<BinanceFuturesCoinExchangeInfo>> GetExchangeInfoAsync(CancellationToken ct = default);
     }
 }

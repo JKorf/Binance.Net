@@ -44,7 +44,7 @@ namespace Binance.Net.SubClients
             _baseClient = baseClient;
         }
 
-        #region Get info
+        #region Get swap pool
 
         /// <summary>
         /// Get all swap pools

@@ -33,14 +33,6 @@ namespace Binance.Net.SubClients.Futures.Coin
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The account information</returns>
-        public WebCallResult<BinanceFuturesCoinAccountInfo> GetAccountInfo(long? receiveWindow = null, CancellationToken ct = default) => GetAccountInfoAsync(receiveWindow, ct).Result;
-
-        /// <summary>
-        /// Gets account information, including balances
-        /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The account information</returns>
         public async Task<WebCallResult<BinanceFuturesCoinAccountInfo>> GetAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -59,14 +51,6 @@ namespace Binance.Net.SubClients.Futures.Coin
         #endregion
 
         #region Future Account Balance
-
-        /// <summary>
-        /// Gets account balances
-        /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The account information</returns>
-        public WebCallResult<IEnumerable<BinanceFuturesCoinAccountBalance>> GetBalance(long? receiveWindow = null, CancellationToken ct = default) => GetBalanceAsync(receiveWindow, ct).Result;
 
         /// <summary>.
         /// Gets account balances

@@ -65,15 +65,15 @@ namespace Binance.Net.SymbolOrderBooks
             return new CallResult<UpdateSubscription>(subResult.Data, null);
         }
 
-        private void HandleUpdate(IBinanceFuturesEventOrderBook data)
+        private void HandleUpdate(DataEvent<IBinanceFuturesEventOrderBook> data)
         {
             if (_limit == null)
             {
-                UpdateOrderBook(data.FirstUpdateId ?? 0, data.LastUpdateId, data.Bids, data.Asks);
+                UpdateOrderBook(data.Data.FirstUpdateId ?? 0, data.Data.LastUpdateId, data.Data.Bids, data.Data.Asks);
             }
             else
             {
-                SetInitialOrderBook(data.LastUpdateId, data.Bids, data.Asks);
+                SetInitialOrderBook(data.Data.LastUpdateId, data.Data.Bids, data.Data.Asks);
             }
         }
 
