@@ -167,6 +167,10 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.14.0-beta3 - 26 May 2021
+    * Removed all non-async calls
+    * Updated to CryptoExchange.Net changes
+
 * Version 6.14.0-beta2 - 06 mei 2021
     * Updated CryptoExchange.Net
 
