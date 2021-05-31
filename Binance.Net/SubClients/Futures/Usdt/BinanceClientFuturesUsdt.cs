@@ -90,6 +90,31 @@ namespace Binance.Net.SubClients.Futures.Usdt
 
         #endregion
 
+        #region Trading status
+        /// <summary>
+        /// Gets the trading status for the current account
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The trading status of the account</returns>
+        public async Task<WebCallResult<BinanceFuturesTradingStatus>> GetTradingStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceFuturesTradingStatus>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", BaseClient.GetTimestamp() },
+            };
+
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? BaseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await BaseClient.SendRequestInternal<BinanceFuturesTradingStatus>(BaseClient.GetUrlUsdtFutures(tradingStatusEndpoint, Api, "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+
+        }
+        #endregion
+
         internal override async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? price, decimal? stopPrice, OrderType type, CancellationToken ct)
         {
             var outputQuantity = quantity;

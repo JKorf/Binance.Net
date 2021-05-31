@@ -12,6 +12,7 @@ using Binance.Net.Interfaces.SubClients.Futures;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Futures.FuturesData;
 using Binance.Net.Objects.Futures.MarketData;
+using Binance.Net.Objects.Spot.WalletData;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Logging;
@@ -33,6 +34,7 @@ namespace Binance.Net.SubClients.Futures
         private const string changeMarginTypeEndpoint = "marginType";
         private const string leverageBracketEndpoint = "leverageBracket";
         private const string adlQuantileEndpoint = "adlQuantile";
+        private const string tradingStatusEndpoint = "apiTradingStatus";
 
         /// <summary>
         /// Api path
@@ -332,7 +334,7 @@ namespace Binance.Net.SubClients.Futures
         }
 
         #endregion
-
+        
         internal abstract Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? price, decimal? stopPrice,
             OrderType type, CancellationToken ct);
         

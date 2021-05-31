@@ -85,6 +85,14 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <returns>List of Positions</returns>
         Task<WebCallResult<IEnumerable<BinancePositionDetailsUsdt>>> GetPositionInformationAsync(string? symbol = null,
             long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets the current status of the trading rules for the account
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of trading rules status per symbol</returns>
+        Task<WebCallResult<BinanceFuturesTradingStatus>> GetTradingStatusAsync(int? receiveWindow = null, CancellationToken ct = default);
     }
 
     /// <summary>
