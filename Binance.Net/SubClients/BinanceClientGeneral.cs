@@ -9,6 +9,7 @@ using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces.SubClients;
 using Binance.Net.Objects;
+using Binance.Net.Objects.Other;
 using Binance.Net.Objects.Spot.MarginData;
 using Binance.Net.Objects.Spot.SpotData;
 using Binance.Net.Objects.Spot.WalletData;
@@ -446,6 +447,29 @@ namespace Binance.Net.SubClients
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceTransfer>>(_baseClient.GetUrlSpot(universalTransferEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+        #endregion
+
+        #region Get products
+
+        /// <summary>
+        /// Get general data for the products available on Binance
+        /// NOTE: This is not an official endpoint and might be changed or removed at any point by Binance
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        public async Task<WebCallResult<IEnumerable<BinanceProduct>>> GetProducts(CancellationToken ct = default)
+        {
+            var url = _baseClient.BaseAddress.Replace("api.", "www.") + "exchange-api/v2/public/asset-service/product/get-products";
+
+            var data = await _baseClient.SendRequestInternal<BinanceExchangeApiWrapper<IEnumerable<BinanceProduct>>> (new Uri(url), HttpMethod.Get, ct).ConfigureAwait(false);
+            if (!data)
+                return data.As<IEnumerable<BinanceProduct>>(null);
+
+            if (!data.Data.Success)
+                return WebCallResult<IEnumerable<BinanceProduct>>.CreateErrorResult(new ServerError(data.Data.Code, data.Data.Message + " - " + data.Data.MessageDetail));
+
+            return data.As(data.Data.Data);
         }
         #endregion
     }

@@ -4554,6 +4554,14 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.GetProducts(System.Threading.CancellationToken)">
+            <summary>
+            Get general data for the products available on Binance
+            NOTE: This is not an official endpoint and might be changed or removed at any point by Binance
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="T:Binance.Net.Interfaces.SubClients.IBinanceClientLending">
             <summary>
             Lending interface
@@ -10869,6 +10877,86 @@
         <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.RealizedProfit">
             <summary>
             Realized profit of the trade
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Other.BinanceProduct">
+            <summary>
+            Info on a product
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Other.BinanceProduct.Symbol">
+            <summary>
+            Name of the symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Other.BinanceProduct.Status">
+            <summary>
+            Status of the symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Other.BinanceProduct.BaseAsset">
+            <summary>
+            Name of the base asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Other.BinanceProduct.QuoteAsset">
+            <summary>
+            Name of the quote asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Other.BinanceProduct.BaseAssetChar">
+            <summary>
+            Char of the base asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Other.BinanceProduct.QuoteAssetChar">
+            <summary>
+            Char of the quote asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Other.BinanceProduct.BaseAssetName">
+            <summary>
+            Base asset name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Other.BinanceProduct.QuoteAssetName">
+            <summary>
+            Quote asset name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Other.BinanceProduct.Open">
+            <summary>
+            Open price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Other.BinanceProduct.High">
+            <summary>
+            High price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Other.BinanceProduct.Low">
+            <summary>
+            Low price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Other.BinanceProduct.Close">
+            <summary>
+            Close price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Other.BinanceProduct.BaseVolume">
+            <summary>
+            Base volume
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Other.BinanceProduct.QuoteVolume">
+            <summary>
+            Quote volume
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Other.BinanceProduct.CirculatingSupply">
+            <summary>
+            Amount of coins in circulation
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Shared.Binance24HPriceBase">
@@ -17957,6 +18045,14 @@
             <param name="page">The page</param>
             <param name="pageSize">Results per page</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientGeneral.GetProducts(System.Threading.CancellationToken)">
+            <summary>
+            Get general data for the products available on Binance
+            NOTE: This is not an official endpoint and might be changed or removed at any point by Binance
+            </summary>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
