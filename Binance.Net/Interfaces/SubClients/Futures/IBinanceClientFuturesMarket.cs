@@ -61,5 +61,16 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <returns>Global Long/Short Ratio (Accounts) info</returns>
         Task<WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>>> GetGlobalLongShortAccountRatioAsync(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
 
+        /// <summary>
+        /// Kline/candlestick bars for the mark price of a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol get the data for</param>
+        /// <param name="interval">The interval of the klines</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time</param>
+        /// <param name="endTime">End time</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BinanceMarkIndexKline>>> GetMarkPriceKlinesAsync(string symbol, KlineInterval interval, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
     }
 }

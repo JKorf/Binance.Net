@@ -33,6 +33,7 @@ namespace Binance.Net.SubClients.Futures
 
         private const string orderBookEndpoint = "depth";
         private const string aggregatedTradesEndpoint = "aggTrades";
+        private const string markPriceKlinesEndpoint = "markPriceKlines";
 
         private const string fundingRateHistoryEndpoint = "fundingRate";
         
@@ -247,6 +248,36 @@ namespace Binance.Net.SubClients.Futures
             parameters.AddOptionalParameter("endTime", endTime != null ? BinanceClient.ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
 
             return await BaseClient.SendRequestInternal<IEnumerable<BinanceFuturesLongShortRatio>>(url, HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Mark Price Kline/Candlestick Data
+
+        /// <summary>
+        /// Kline/candlestick bars for the mark price of a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol get the data for</param>
+        /// <param name="interval">The interval of the klines</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time</param>
+        /// <param name="endTime">End time</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        public async Task<WebCallResult<IEnumerable<BinanceMarkIndexKline>>> GetMarkPriceKlinesAsync(string symbol, KlineInterval interval, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        {
+            limit?.ValidateIntBetween(nameof(limit), 1, 500);
+
+            var parameters = new Dictionary<string, object> {
+                { "symbol", symbol },
+                { "interval", JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)) }
+            };
+
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("startTime", startTime != null ? BinanceClient.ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("endTime", endTime != null ? BinanceClient.ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+
+            return await BaseClient.SendRequestInternal<IEnumerable<BinanceMarkIndexKline>>(FuturesClient.GetUrl(markPriceKlinesEndpoint, Api, publicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         #endregion

@@ -3637,6 +3637,18 @@
             <param name="ct">Cancellation token</param>
             <returns>Global Long/Short Ratio (Accounts) info</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesMarket.GetMarkPriceKlinesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Kline/candlestick bars for the mark price of a symbol
+            </summary>
+            <param name="symbol">The symbol get the data for</param>
+            <param name="interval">The interval of the klines</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time</param>
+            <param name="endTime">End time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="T:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesOrders">
             <summary>
             Futures orders interface
@@ -18956,6 +18968,18 @@
             <param name="endTime">End time to get global long/short ratio (accounts)</param>
             <param name="ct">Cancellation token</param>
             <returns>Global Long/Short Ratio (Accounts) info</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesMarket.GetMarkPriceKlinesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Kline/candlestick bars for the mark price of a symbol
+            </summary>
+            <param name="symbol">The symbol get the data for</param>
+            <param name="interval">The interval of the klines</param>
+            <param name="limit">Max number of results</param>
+            <param name="startTime">Start time</param>
+            <param name="endTime">End time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
         </member>
         <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesMarket.GetKlinesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
