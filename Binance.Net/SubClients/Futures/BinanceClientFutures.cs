@@ -34,7 +34,6 @@ namespace Binance.Net.SubClients.Futures
         private const string changeMarginTypeEndpoint = "marginType";
         private const string leverageBracketEndpoint = "leverageBracket";
         private const string adlQuantileEndpoint = "adlQuantile";
-        private const string tradingStatusEndpoint = "apiTradingStatus";
 
         /// <summary>
         /// Api path

@@ -36,8 +36,11 @@ namespace Binance.Net.SubClients.Futures.Usdt
         private const string takerBuySellVolumeRatioEndpoint = "takerlongshortRatio";
         private const string compositeIndexApi = "indexInfo";
         private const string klinesEndpoint = "klines";
+        private const string continuousContractKlineEndpoint = "continuousKlines";
+
         private const string publicVersion = "1";
         private const string tradingDataApi = "futures/data";
+
         /// <summary>
         /// Api path
         /// </summary>
@@ -352,6 +355,37 @@ namespace Binance.Net.SubClients.Futures.Usdt
         {
             return await BaseClient.SendRequestInternal<IEnumerable<BinancePrice>>(FuturesClient.GetUrl(allPricesEndpoint, Api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
         }
+        #endregion
+
+        #region Continuous contract Kline Data
+
+        /// <summary>
+        /// Get candlestick data for the provided pair
+        /// </summary>
+        /// <param name="pair">The symbol to get the data for</param>
+        /// <param name="contractType">The contract type</param>
+        /// <param name="interval">The candlestick timespan</param>
+        /// <param name="startTime">Start time to get candlestick data</param>
+        /// <param name="endTime">End time to get candlestick data</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The candlestick data for the provided symbol</returns>
+        public async Task<WebCallResult<IEnumerable<IBinanceKline>>> GetContinuousContractKlinesAsync(string pair, ContractType contractType, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        {
+            limit?.ValidateIntBetween(nameof(limit), 1, 1000);
+            var parameters = new Dictionary<string, object> {
+                { "pair", pair },
+                { "interval", JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)) },
+                { "contractType", JsonConvert.SerializeObject(contractType, new ContractTypeConverter(false)) }
+            };
+            parameters.AddOptionalParameter("startTime", startTime != null ? BinanceClient.ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("endTime", endTime != null ? BinanceClient.ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+
+            var result = await BaseClient.SendRequestInternal<IEnumerable<BinanceFuturesUsdtKline>>(FuturesClient.GetUrl(continuousContractKlineEndpoint, Api, publicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return result.As<IEnumerable<IBinanceKline>>(result.Data);
+        }
+
         #endregion
     }
 }

@@ -3920,6 +3920,19 @@
             <param name="ct">Cancellation token</param>
             <returns>List of prices</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtMarket.GetContinuousContractKlinesAsync(System.String,Binance.Net.Enums.ContractType,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get candlestick data for the provided pair
+            </summary>
+            <param name="pair">The symbol to get the data for</param>
+            <param name="contractType">The contract type</param>
+            <param name="interval">The candlestick timespan</param>
+            <param name="startTime">Start time to get candlestick data</param>
+            <param name="endTime">End time to get candlestick data</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The candlestick data for the provided symbol</returns>
+        </member>
         <member name="T:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtOrder">
             <summary>
             USDT-M futures order endpoints
@@ -19820,6 +19833,19 @@
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>List of prices</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket.GetContinuousContractKlinesAsync(System.String,Binance.Net.Enums.ContractType,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get candlestick data for the provided pair
+            </summary>
+            <param name="pair">The symbol to get the data for</param>
+            <param name="contractType">The contract type</param>
+            <param name="interval">The candlestick timespan</param>
+            <param name="startTime">Start time to get candlestick data</param>
+            <param name="endTime">End time to get candlestick data</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The candlestick data for the provided symbol</returns>
         </member>
         <member name="T:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtOrder">
             <summary>

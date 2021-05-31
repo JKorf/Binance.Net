@@ -106,5 +106,18 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of prices</returns>
         Task<WebCallResult<IEnumerable<BinancePrice>>> GetPricesAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Get candlestick data for the provided pair
+        /// </summary>
+        /// <param name="pair">The symbol to get the data for</param>
+        /// <param name="contractType">The contract type</param>
+        /// <param name="interval">The candlestick timespan</param>
+        /// <param name="startTime">Start time to get candlestick data</param>
+        /// <param name="endTime">End time to get candlestick data</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The candlestick data for the provided symbol</returns>
+        Task<WebCallResult<IEnumerable<IBinanceKline>>> GetContinuousContractKlinesAsync(string pair, ContractType contractType, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
     }
 }
