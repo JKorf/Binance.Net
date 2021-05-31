@@ -170,6 +170,17 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.14.0-beta4 - 31 May 2021
+    * Added GetTradingStatusAsync endpoint on USDT futures
+    * Added GetMarkPriceKlinesAsync endpoint on futures
+    * Added GetProductsAsync endpoint
+    * Added GetContinuousContractKlinesAsync endpoint on USDT futures
+    * Added PayToMain and MainToPay transfer types
+    * Added MultiAssetMode endpoints and fields
+    * Removed no longer supported GetLiquidationOrdersAsync futures endpoints
+    * Added Assets property to USDT futures GetExchangeInfoAsync model
+    * Added BalanceChange to futures account balance stream update
+
 * Version 6.14.0-beta3 - 26 May 2021
     * Removed all non-async calls
     * Updated to CryptoExchange.Net changes

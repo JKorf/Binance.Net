@@ -7,9 +7,9 @@
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
     <Authors>JKorf, Nikkozp, CaptHolley</Authors>
-    <PackageVersion>6.14.0-beta3</PackageVersion>
+    <PackageVersion>6.14.0-beta4</PackageVersion>
     <AssemblyVersion>6.14.0</AssemblyVersion>
-    <FileVersion>6.14.0-beta3</FileVersion>
+    <FileVersion>6.14.0-beta4</FileVersion>
     <Description>Binance.Net is a .Net wrapper for the Binance API, including Binance Futures. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance Binance.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
@@ -20,7 +20,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>6.14.0-beta3 - Removed all non-async calls, Updated to CryptoExchange.Net changes</PackageReleaseNotes>
+    <PackageReleaseNotes>6.14.0-beta4 - Added GetTradingStatusAsync endpoint on USDT futures, Added GetMarkPriceKlinesAsync endpoint on futures, Added GetProductsAsync endpoint, Added GetContinuousContractKlinesAsync endpoint on USDT futures, Added PayToMain and MainToPay transfer types, Added MultiAssetMode endpoints and fields, Removed no longer supported GetLiquidationOrdersAsync futures endpoints, Added Assets property to USDT futures GetExchangeInfoAsync model, Added BalanceChange to futures account balance stream update</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup Label="Deterministic Build" Condition="'$(Configuration)' == 'Release'">
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
