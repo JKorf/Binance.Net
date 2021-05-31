@@ -771,11 +771,9 @@ namespace Binance.Net.UnitTests
         public async Task GetTradingStatus_Should_RespondWithSuccess()
         {
             // arrange
-            var status = new BinanceTradingStatusWrapper()
+            var status = new BinanceResult<BinanceTradingStatus>
             {
-                Success = true,
-                Message = "Test",
-                Status = new BinanceTradingStatus()
+                Data = new BinanceTradingStatus()
                 {
                     IsLocked = false,
                     PlannedRecoverTime = 0,
@@ -813,10 +811,10 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsTrue(result.Success);
-            Assert.IsTrue(TestHelpers.AreEqual(status.Status, result.Data, "Indicators", "TriggerConditions"));
-            Assert.IsTrue(status.Status.TriggerConditions["GCR"] == result.Data.TriggerConditions["GCR"]);
-            Assert.IsTrue(status.Status.TriggerConditions["IFER"] == result.Data.TriggerConditions["IFER"]);
-            Assert.IsTrue(TestHelpers.AreEqual(status.Status.Indicators["BTCUSDT"].First(), result.Data.Indicators["BTCUSDT"].First()));
+            Assert.IsTrue(TestHelpers.AreEqual(status.Data, result.Data, "Indicators", "TriggerConditions"));
+            Assert.IsTrue(status.Data.TriggerConditions["GCR"] == result.Data.TriggerConditions["GCR"]);
+            Assert.IsTrue(status.Data.TriggerConditions["IFER"] == result.Data.TriggerConditions["IFER"]);
+            Assert.IsTrue(TestHelpers.AreEqual(status.Data.Indicators["BTCUSDT"].First(), result.Data.Indicators["BTCUSDT"].First()));
         }
 
         [TestCase]
