@@ -41,7 +41,6 @@ namespace Binance.Net.SubClients.Margin
         private const string interestRateHistoryEndpoint = "margin/interestRateHistory";
         private const string forceLiquidationHistoryEndpoint = "margin/forceLiquidationRec";
 
-        private const string createIsolatedMarginAccountEndpoint = "margin/isolated/create";
         private const string isolatedMarginTransferHistoryEndpoint = "margin/isolated/transfer";
         private const string isolatedMarginAccountEndpoint = "margin/isolated/account";
         private const string transferIsolatedMarginAccountEndpoint = "margin/isolated/transfer";
@@ -522,41 +521,6 @@ namespace Binance.Net.SubClients.Margin
         }
 
         #endregion
-
-        /// <summary>
-        /// Create isolated margin account
-        /// </summary>
-        /// <param name="baseAsset">The base asset</param>
-        /// <param name="quoteAsset">The quote asset</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<CreateIsolatedMarginAccountResult>> CreateIsolatedMarginAccountAsync(
-            string baseAsset, string quoteAsset, int? receiveWindow = null, CancellationToken ct = default)
-        {
-            baseAsset.ValidateNotNull(nameof(baseAsset));
-            quoteAsset.ValidateNotNull(nameof(quoteAsset));
-
-            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
-            if (!timestampResult)
-                return new WebCallResult<CreateIsolatedMarginAccountResult>(timestampResult.ResponseStatusCode,
-                    timestampResult.ResponseHeaders, null, timestampResult.Error);
-
-            var parameters = new Dictionary<string, object>
-            {
-                {"base", baseAsset},
-                {"quote", quoteAsset},
-                {"timestamp", _baseClient.GetTimestamp()}
-            };
-            parameters.AddOptionalParameter("recvWindow",
-                receiveWindow?.ToString(CultureInfo.InvariantCulture) ??
-                _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient
-                .SendRequestInternal<CreateIsolatedMarginAccountResult>(
-                    _baseClient.GetUrlSpot(createIsolatedMarginAccountEndpoint, "sapi", "1"), HttpMethod.Post, ct,
-                    parameters, true).ConfigureAwait(false);
-        }
 
         /// <summary>
         /// Get history of transfer to and from the isolated margin account

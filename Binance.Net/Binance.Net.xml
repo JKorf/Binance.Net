@@ -1848,6 +1848,16 @@
             Mining to Margin
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.MainToPay">
+            <summary>
+            Main to pay
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.PayToMain">
+            <summary>
+            Pay to main
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.WithdrawalStatus">
             <summary>
             The status of a withdrawal
@@ -3825,6 +3835,23 @@
             <param name="ct">Cancellation token</param>
             <returns>The account information</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtAccount.GetMultiAssetsModeAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>.
+            Get user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on Every symbol
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Multi asset mode</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtAccount.SetMultiAssetsModeAsync(System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>.
+            Set user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on Every symbol
+            </summary>
+            <param name="enabled">Enabled or not</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Succes</returns>
+        </member>
         <member name="T:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtMarket">
             <summary>
             USDT-M futures market endpoints
@@ -5659,16 +5686,6 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Return max amount</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.CreateIsolatedMarginAccountAsync(System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Create isolated margin account
-            </summary>
-            <param name="baseAsset">The base asset</param>
-            <param name="quoteAsset">The quote asset</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
         </member>
         <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetIsolatedMarginAccountTransferHistoryAsync(System.String,System.String,System.Nullable{Binance.Net.Enums.IsolatedMarginTransferDirection},System.Nullable{Binance.Net.Enums.IsolatedMarginTransferDirection},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
@@ -8687,6 +8704,16 @@
             Direction of the margin change request
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesMultiAssetMode">
+            <summary>
+            Multi asset mode info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesMultiAssetMode.MultiAssetMode">
+            <summary>
+            Is multi assets mode enabled
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesMultipleOrderCancelResult">
             <summary>
             Extension to be able to deserialize an error response as well
@@ -10637,7 +10664,12 @@
             Information about levrage of symbol changed
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamConfigUpdate.UpdateData">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamConfigUpdate.AccountSymbolConfiguration">
+            <summary>
+            Update data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamConfigUpdate.UserConfiguration">
             <summary>
             Update data
             </summary>
@@ -10660,6 +10692,16 @@
         <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamConfigUpdateData.Leverage">
             <summary>
             The symbol this leverage is for
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamUserConfigUpdateData">
+            <summary>
+            User account config update
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamUserConfigUpdateData.MultiAssetMode">
+            <summary>
+            Multi-asset mode enabled
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate">
@@ -19703,6 +19745,23 @@
             <param name="ct">Cancellation token</param>
             <returns>The account information</returns>
         </member>
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtAccount.GetMultiAssetsModeAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>.
+            Get user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on Every symbol
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Multi asset mode</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtAccount.SetMultiAssetsModeAsync(System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>.
+            Set user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on Every symbol
+            </summary>
+            <param name="enabled">Enabled or not</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Succes</returns>
+        </member>
         <member name="T:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket">
             <summary>
             USDT-M futures market endpoints
@@ -20070,16 +20129,6 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Return max amount</returns>
-        </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.CreateIsolatedMarginAccountAsync(System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Create isolated margin account
-            </summary>
-            <param name="baseAsset">The base asset</param>
-            <param name="quoteAsset">The quote asset</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
         </member>
         <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetIsolatedMarginAccountTransferHistoryAsync(System.String,System.String,System.Nullable{Binance.Net.Enums.IsolatedMarginTransferDirection},System.Nullable{Binance.Net.Enums.IsolatedMarginTransferDirection},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>

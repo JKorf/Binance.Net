@@ -15,7 +15,13 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// Update data
         /// </summary>
         [JsonProperty("ac")]
-        public BinanceFuturesStreamConfigUpdateData UpdateData { get; set; } = new BinanceFuturesStreamConfigUpdateData();
+        public BinanceFuturesStreamConfigUpdateData? AccountSymbolConfiguration { get; set; }
+
+        /// <summary>
+        /// Update data
+        /// </summary>
+        [JsonProperty("ai")]
+        public BinanceFuturesStreamUserConfigUpdateData? UserConfiguration { get; set; }
 
         /// <summary>
         /// Transaction time
@@ -40,5 +46,17 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// </summary>
         [JsonProperty("l")]
         public int Leverage { get; set; }
+    }
+
+    /// <summary>
+    /// User account config update
+    /// </summary>
+    public class BinanceFuturesStreamUserConfigUpdateData 
+    { 
+        /// <summary>
+        /// Multi-asset mode enabled
+        /// </summary>
+        [JsonProperty("j")]
+        public bool MultiAssetMode { get; set; }
     }
 }

@@ -352,7 +352,7 @@ namespace Binance.Net.SocketSubClients
                         {
                             var result = BaseClient.DeserializeInternal<BinanceFuturesStreamConfigUpdate>(token, false);
                             if (result)
-                                onLeverageUpdate?.Invoke(data.As(result.Data, result.Data.UpdateData.Symbol));
+                                onLeverageUpdate?.Invoke(data.As(result.Data, result.Data.AccountSymbolConfiguration?.Symbol));
                             else
                                 Log.Write(LogLevel.Warning, "Couldn't deserialize data received from config stream: " + result.Error);
 
