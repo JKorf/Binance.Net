@@ -3285,6 +3285,14 @@
             <param name="ct">Cancellation token</param>
             <returns>List of Positions</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdt.GetTradingStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets the current status of the trading rules for the account
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of trading rules status per symbol</returns>
+        </member>
         <member name="T:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFutures">
             <summary>
             Futures interface
@@ -4452,22 +4460,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The account information</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.GetTradingStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Gets the trading status for the current account
-            </summary>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>The trading status of the account</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.GetUserCoinsAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Gets information of coins for a user
-            </summary>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Coins info</returns>
-        </member>
+        <!-- Badly formed XML comment ignored for member "M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.GetUserCoinsAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)" -->
         <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.GetAssetDividendRecordsAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get asset dividend records
@@ -5869,6 +5862,14 @@
             <summary>
             Spot/futures endpoints
             </summary>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpot.GetTradingStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets the trading status for the current account
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The trading status of the account</returns>
         </member>
         <member name="T:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotFuturesInteraction">
             <summary>
@@ -9128,6 +9129,51 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCoinTrade.BaseQuantity">
             <summary>
             Base quantity
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesTradingStatus">
+            <summary>
+            Trading rules status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesTradingStatus.Indicators">
+            <summary>
+            The trading rule indicators
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesTradingStatus.UpdateTime">
+            <summary>
+            Last update time
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesTradingStatusIndicator">
+            <summary>
+            Indicator details
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesTradingStatusIndicator.IsLocked">
+            <summary>
+            Locked
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesTradingStatusIndicator.PlannedRecoveryTime">
+            <summary>
+            Planned time when indicator is unlocked
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesTradingStatusIndicator.Indicator">
+            <summary>
+            The indicator name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesTradingStatusIndicator.Value">
+            <summary>
+            Current value of the indicator
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesTradingStatusIndicator.TriggerValue">
+            <summary>
+            The trigger value of the indicator
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinancePositionBase">
@@ -17802,14 +17848,6 @@
             <param name="ct">Cancellation token</param>
             <returns>The account information</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientGeneral.GetTradingStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Gets the trading status for the current account
-            </summary>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>The trading status of the account</returns>
-        </member>
         <member name="M:Binance.Net.SubClients.BinanceClientGeneral.GetUserCoinsAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets information of coins for a user
@@ -19498,6 +19536,14 @@
             <param name="ct">Cancellation token</param>
             <returns>List of Positions</returns>
         </member>
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdt.GetTradingStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets the trading status for the current account
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The trading status of the account</returns>
+        </member>
         <member name="T:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtAccount">
             <summary>
             USDT-M futures account endpoints
@@ -20179,6 +20225,14 @@
             <summary>
             Spot/futures endpoints
             </summary>
+        </member>
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpot.GetTradingStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets the trading status for the current account
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The trading status of the account</returns>
         </member>
         <member name="T:Binance.Net.SubClients.Spot.BinanceClientSpotFuturesInteraction">
             <summary>

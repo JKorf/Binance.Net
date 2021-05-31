@@ -25,6 +25,8 @@ namespace Binance.Net.SubClients.Futures.Usdt
     {
         internal BinanceFuturesUsdtExchangeInfo? ExchangeInfo;
         private const string positionInformationEndpoint = "positionRisk";
+        private const string tradingStatusEndpoint = "apiTradingStatus";
+
         /// <summary>
         /// Api path
         /// </summary>
