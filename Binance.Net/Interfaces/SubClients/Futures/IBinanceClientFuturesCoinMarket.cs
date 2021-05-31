@@ -81,18 +81,6 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         Task<WebCallResult<IEnumerable<BinanceFuturesBookPrice>>> GetBookPricesAsync(string? symbol = null, string? pair = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get all Liquidation Orders
-        /// </summary>
-        /// <param name="symbol">The symbol to get the data for</param>
-        /// <param name="pair">Filter by pair</param>
-        /// <param name="startTime">Start time to get  liquidation orders history</param>
-        /// <param name="endTime">End time to get liquidation orders history</param>
-        /// <param name="limit">Max number of results. Default:100 Max:1000</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The all liquidation orders</returns>
-        Task<WebCallResult<IEnumerable<BinanceFuturesLiquidation>>> GetLiquidationOrdersAsync(string? symbol = null, string? pair = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
-
-        /// <summary>
         /// Get present open interest of a specific symbol.
         /// </summary>
         /// <param name="symbol">The symbol to get the data for</param>
