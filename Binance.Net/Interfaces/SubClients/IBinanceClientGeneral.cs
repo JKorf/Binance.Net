@@ -166,6 +166,6 @@ namespace Binance.Net.Interfaces.SubClients
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BinanceProduct>>> GetProducts(CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceProduct>>> GetProductsAsync(CancellationToken ct = default);
     }
 }

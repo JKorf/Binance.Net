@@ -809,7 +809,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = await client.General.GetTradingStatusAsync();
+            var result = await client.Spot.GetTradingStatusAsync();
 
             // assert
             Assert.IsTrue(result.Success);

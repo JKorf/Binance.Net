@@ -32,7 +32,6 @@ namespace Binance.Net.SubClients.Futures.Coin
         private const string price24HEndpoint = "ticker/24hr";
         private const string allPricesEndpoint = "ticker/price";
         private const string bookPricesEndpoint = "ticker/bookTicker";
-        private const string allForcedOrdersEndpoint = "allForceOrders";
         private const string openInterestEndpoint = "openInterest";
         private const string openInterestHistoryEndpoint = "openInterestHist";
         private const string takerBuySellVolumeRatioEndpoint = "takerBuySellVol";
@@ -264,33 +263,7 @@ namespace Binance.Net.SubClients.Futures.Coin
         }
 
         #endregion
-
-        #region Get all Liquidation Orders
-
-        /// <summary>
-        /// Get all Liquidation Orders
-        /// </summary>
-        /// <param name="symbol">The symbol to get the data for</param>
-        /// <param name="pair">Filter by pair</param>
-        /// <param name="startTime">Start time to get  liquidation orders history</param>
-        /// <param name="endTime">End time to get liquidation orders history</param>
-        /// <param name="limit">Max number of results. Default:100 Max:1000</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The all liquidation orders</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceFuturesLiquidation>>> GetLiquidationOrdersAsync(string? symbol = null, string? pair = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
-        {
-            limit?.ValidateIntBetween(nameof(limit), 0, 1000);
-            var parameters = new Dictionary<string, object>();
-            parameters.AddOptionalParameter("symbol", symbol);
-            parameters.AddOptionalParameter("startTime", startTime != null ? BinanceClient.ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
-            parameters.AddOptionalParameter("endTime", endTime != null ? BinanceClient.ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
-            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
-
-            return await BaseClient.SendRequestInternal<IEnumerable<BinanceFuturesLiquidation>>(FuturesClient.GetUrl(allForcedOrdersEndpoint, Api, publicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
-        }
-
-        #endregion
-
+               
         #region Open Interest
 
         /// <summary>

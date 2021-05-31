@@ -3496,18 +3496,6 @@
             <param name="ct">Cancellation token</param>
             <returns>List of book prices</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesCoinMarket.GetLiquidationOrdersAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get all Liquidation Orders
-            </summary>
-            <param name="symbol">The symbol to get the data for</param>
-            <param name="pair">Filter by pair</param>
-            <param name="startTime">Start time to get  liquidation orders history</param>
-            <param name="endTime">End time to get liquidation orders history</param>
-            <param name="limit">Max number of results. Default:100 Max:1000</param>
-            <param name="ct">Cancellation token</param>
-            <returns>The all liquidation orders</returns>
-        </member>
         <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesCoinMarket.GetOpenInterestAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get present open interest of a specific symbol.
@@ -3880,17 +3868,6 @@
             <param name="symbol">Symbol to get book price for</param>
             <param name="ct">Cancellation token</param>
             <returns>List of book prices</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtMarket.GetLiquidationOrdersAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get all Liquidation Orders
-            </summary>
-            <param name="symbol">The symbol to get the data for</param>
-            <param name="startTime">Start time to get  liquidation orders history</param>
-            <param name="endTime">End time to get liquidation orders history</param>
-            <param name="limit">Max number of results. Default:100 Max:1000</param>
-            <param name="ct">Cancellation token</param>
-            <returns>The all liquidation orders</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtMarket.GetOpenInterestAsync(System.String,System.Threading.CancellationToken)">
             <summary>
@@ -4594,7 +4571,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.GetProducts(System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.GetProductsAsync(System.Threading.CancellationToken)">
             <summary>
             Get general data for the products available on Binance
             NOTE: This is not an official endpoint and might be changed or removed at any point by Binance
@@ -10647,6 +10624,11 @@
         <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamBalance.CrossBalance">
             <summary>
             The amount that is locked in a trade
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamBalance.BalanceChange">
+            <summary>
+            Balance Change except PnL and Commission
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition">
@@ -18138,7 +18120,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientGeneral.GetProducts(System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientGeneral.GetProductsAsync(System.Threading.CancellationToken)">
             <summary>
             Get general data for the products available on Binance
             NOTE: This is not an official endpoint and might be changed or removed at any point by Binance
@@ -19583,18 +19565,6 @@
             <param name="ct">Cancellation token</param>
             <returns>List of book prices</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinMarket.GetLiquidationOrdersAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get all Liquidation Orders
-            </summary>
-            <param name="symbol">The symbol to get the data for</param>
-            <param name="pair">Filter by pair</param>
-            <param name="startTime">Start time to get  liquidation orders history</param>
-            <param name="endTime">End time to get liquidation orders history</param>
-            <param name="limit">Max number of results. Default:100 Max:1000</param>
-            <param name="ct">Cancellation token</param>
-            <returns>The all liquidation orders</returns>
-        </member>
         <member name="M:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinMarket.GetOpenInterestAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get present open interest of a specific symbol.
@@ -19861,17 +19831,6 @@
             <param name="symbol">Symbol to get book price for</param>
             <param name="ct">Cancellation token</param>
             <returns>List of book prices</returns>
-        </member>
-        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket.GetLiquidationOrdersAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get all Liquidation Orders
-            </summary>
-            <param name="symbol">The symbol to get the data for</param>
-            <param name="startTime">Start time to get  liquidation orders history</param>
-            <param name="endTime">End time to get liquidation orders history</param>
-            <param name="limit">Max number of results. Default:100 Max:1000</param>
-            <param name="ct">Cancellation token</param>
-            <returns>The all liquidation orders</returns>
         </member>
         <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket.GetOpenInterestAsync(System.String,System.Threading.CancellationToken)">
             <summary>
