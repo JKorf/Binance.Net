@@ -105,6 +105,15 @@ namespace Binance.Net.Enums
         /// <summary>
         /// Mining to Margin
         /// </summary>
-        MiningToMargin
+        MiningToMargin,
+
+        /// <summary>
+        /// Main to pay
+        /// </summary>
+        MainToPay,
+        /// <summary>
+        /// Pay to main
+        /// </summary>
+        PayToMain        
     }
 }

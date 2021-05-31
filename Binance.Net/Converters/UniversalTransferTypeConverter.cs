@@ -18,6 +18,7 @@ namespace Binance.Net.Converters
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MainToCoinFutures, "MAIN_CMFUTURE"),
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MainToMargin, "MAIN_MARGIN"),
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MainToMining, "MAIN_MINING"),
+            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MainToPay, "MAIN_PAY"),
 
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.C2CToMain, "C2C_MAIN"),
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.C2CToUsdFutures, "C2C_UMFUTURE"),
@@ -41,6 +42,8 @@ namespace Binance.Net.Converters
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MiningToUsdFutures, "MINING_UMFUTURE"),
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MiningToC2C, "MINING_C2C"),
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MiningToMargin, "MINING_MARGIN"),
+
+            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.PayToMain, "PAY_MAIN"),
         };
     }
 }
