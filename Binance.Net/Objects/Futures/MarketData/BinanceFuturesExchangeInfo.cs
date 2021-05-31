@@ -38,6 +38,11 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// All symbols supported
         /// </summary>
         public IEnumerable<BinanceFuturesUsdtSymbol> Symbols { get; set; } = new List<BinanceFuturesUsdtSymbol>();
+
+        /// <summary>
+        /// All assets
+        /// </summary>
+        public IEnumerable<BinanceFuturesUsdtAsset> Assets { get; set; } = new List<BinanceFuturesUsdtAsset>();
     }
 
     /// <summary>

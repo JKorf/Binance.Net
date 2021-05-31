@@ -8113,6 +8113,11 @@
             Available balance
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.MarginAvailable">
+            <summary>
+            Whether the asset can be used as margin in Multi-Assets mode
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance">
             <summary>
             Information about an account
@@ -8151,6 +8156,11 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance.MaxWithdrawAvailable">
             <summary>
             Maximum amount for transfer out
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance.MarginAvailable">
+            <summary>
+            Whether the asset can be used as margin in Multi-Assets mode
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo">
@@ -9544,6 +9554,11 @@
             All symbols supported
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesUsdtExchangeInfo.Assets">
+            <summary>
+            All assets
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCoinExchangeInfo">
             <summary>
             Exchange info
@@ -10107,6 +10122,26 @@
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceSymbolMinNotionalFilter.MinNotional">
             <summary>
             The minimal total size of an order. This is calculated by Price * Quantity.
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesUsdtAsset">
+            <summary>
+            Asset info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesUsdtAsset.Asset">
+            <summary>
+            Name of the asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesUsdtAsset.MarginAvailable">
+            <summary>
+            Whether the asset can be used as margin in Multi-Assets mode
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesUsdtAsset.AutoAssetExchange">
+            <summary>
+            Auto-exchange threshold in Multi-Assets margin mode
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesUsdtKline">

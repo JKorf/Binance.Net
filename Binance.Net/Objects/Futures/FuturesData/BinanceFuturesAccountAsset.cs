@@ -64,5 +64,10 @@
         /// Available balance
         /// </summary>
         public decimal AvailableBalance { get; set; }
+
+        /// <summary>
+        /// Whether the asset can be used as margin in Multi-Assets mode
+        /// </summary>
+        public bool? MarginAvailable { get; set; }
     }
 }
