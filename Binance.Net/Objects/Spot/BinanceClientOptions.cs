@@ -10,19 +10,19 @@ namespace Binance.Net.Objects.Spot
     /// </summary>
     public class BinanceClientOptions : RestClientOptions
     {
-        private string _baseAddressUsdtFutures;
-        private string _baseAddressCoinFutures;
+        private string? _baseAddressUsdtFutures;
+        private string? _baseAddressCoinFutures;
 
         /// <summary>
         /// The base address for USDT-M futures
         /// </summary>
-        public string BaseAddressUsdtFutures
+        public string? BaseAddressUsdtFutures
         {
             get => _baseAddressUsdtFutures;
             set
             {
                 var newValue = value;
-                if (!newValue.EndsWith("/"))
+                if (newValue != null && !newValue.EndsWith("/"))
                     newValue += "/";
                 _baseAddressUsdtFutures = newValue;
             }
@@ -31,13 +31,13 @@ namespace Binance.Net.Objects.Spot
         /// <summary>
         /// The base address for Coin-M futures
         /// </summary>
-        public string BaseAddressCoinFutures
+        public string? BaseAddressCoinFutures
         {
             get => _baseAddressCoinFutures;
             set
             {
                 var newValue = value;
-                if (!newValue.EndsWith("/"))
+                if (newValue != null && !newValue.EndsWith("/"))
                     newValue += "/";
                 _baseAddressCoinFutures = newValue;
             }
@@ -75,7 +75,7 @@ namespace Binance.Net.Objects.Spot
         /// <summary>
         /// Constructor with default endpoints
         /// </summary>
-        public BinanceClientOptions(): this("https://api.binance.com", "https://fapi.binance.com", "https://dapi.binance.com")
+        public BinanceClientOptions(): this(BinanceApiAddresses.Default)
         {
         }
 
@@ -83,7 +83,25 @@ namespace Binance.Net.Objects.Spot
         /// Constructor with default endpoints
         /// </summary>
         /// <param name="client">HttpClient to use for requests from this client</param>
-        public BinanceClientOptions(HttpClient client) : this("https://api.binance.com", "https://fapi.binance.com", "https://dapi.binance.com", client)
+        public BinanceClientOptions(HttpClient client) : this(BinanceApiAddresses.Default, client)
+        {
+        }
+
+        /// <summary>
+        /// Constructor with custom endpoints
+        /// </summary>
+        /// <param name="addresses">The base addresses to use</param>
+        public BinanceClientOptions(BinanceApiAddresses addresses) : this(addresses.RestClientAddress, addresses.UsdtFuturesRestClientAddress, addresses.CoinFuturesRestClientAddress, null)
+        {
+        }
+
+
+        /// <summary>
+        /// Constructor with custom endpoints
+        /// </summary>
+        /// <param name="addresses">The base addresses to use</param>
+        /// <param name="client">HttpClient to use for requests from this client</param>
+        public BinanceClientOptions(BinanceApiAddresses addresses, HttpClient client) : this(addresses.RestClientAddress, addresses.UsdtFuturesRestClientAddress, addresses.CoinFuturesRestClientAddress, client)
         {
         }
 
@@ -93,7 +111,7 @@ namespace Binance.Net.Objects.Spot
         /// <param name="spotBaseAddress">Сustom url for the SPOT API</param>
         /// <param name="futuresUsdtBaseAddress">Сustom url for USDT-M futures API</param>
         /// <param name="futuresCoinBaseAddress">Сustom url for Coin-M futures API</param>
-        public BinanceClientOptions(string spotBaseAddress, string futuresUsdtBaseAddress, string futuresCoinBaseAddress) : this(spotBaseAddress, futuresUsdtBaseAddress, futuresCoinBaseAddress, null)
+        public BinanceClientOptions(string spotBaseAddress, string? futuresUsdtBaseAddress, string? futuresCoinBaseAddress) : this(spotBaseAddress, futuresUsdtBaseAddress, futuresCoinBaseAddress, null)
         {
         }
 
@@ -105,7 +123,7 @@ namespace Binance.Net.Objects.Spot
         /// <param name="futuresCoinBaseAddress">Сustom url for Coin-M futures API</param>
         /// <param name="client">HttpClient to use for requests from this client</param>
 #pragma warning disable 8618
-        public BinanceClientOptions(string spotBaseAddress, string futuresUsdtBaseAddress, string futuresCoinBaseAddress, HttpClient? client) : base(spotBaseAddress)
+        public BinanceClientOptions(string spotBaseAddress, string? futuresUsdtBaseAddress, string? futuresCoinBaseAddress, HttpClient? client) : base(spotBaseAddress)
 #pragma warning restore 8618
         {
             HttpClient = client;
@@ -137,19 +155,19 @@ namespace Binance.Net.Objects.Spot
     /// </summary>
     public class BinanceSocketClientOptions : SocketClientOptions
     {
-        private string _baseAddressUsdtFutures = "wss://fstream.binance.com/";
-        private string _baseAddressCoinFutures = "wss://dstream.binance.com/";
+        private string? _baseAddressUsdtFutures;
+        private string? _baseAddressCoinFutures;
 
         /// <summary>
         /// The base address for USDT-M futures
         /// </summary>
-        public string BaseAddressUsdtFutures
+        public string? BaseAddressUsdtFutures
         {
             get => _baseAddressUsdtFutures;
             set
             {
                 var newValue = value;
-                if (!newValue.EndsWith("/"))
+                if (newValue != null && !newValue.EndsWith("/"))
                     newValue += "/";
                 _baseAddressUsdtFutures = newValue;
             }
@@ -158,13 +176,13 @@ namespace Binance.Net.Objects.Spot
         /// <summary>
         /// The base address for Coin-M futures
         /// </summary>
-        public string BaseAddressCoinFutures
+        public string? BaseAddressCoinFutures
         {
             get => _baseAddressCoinFutures;
             set
             {
                 var newValue = value;
-                if (!newValue.EndsWith("/"))
+                if (newValue != null && !newValue.EndsWith("/"))
                     newValue += "/";
                 _baseAddressCoinFutures = newValue;
             }
@@ -188,20 +206,28 @@ namespace Binance.Net.Objects.Spot
         /// <summary>
         /// ctor
         /// </summary>
-        /// <param name="address">Custom address</param>
-        /// <param name="futuresUsdtAddress">Custom address for usdt futures streams</param>
-        /// <param name="futuresCoinAddress">Custom address for coin futures streams</param>
-        public BinanceSocketClientOptions(string address, string futuresUsdtAddress, string futuresCoinAddress) : base(address)
+        public BinanceSocketClientOptions() : this(BinanceApiAddresses.Default)
         {
-            BaseAddressUsdtFutures = futuresUsdtAddress;
-            BaseAddressCoinFutures = futuresCoinAddress;
         }
 
         /// <summary>
         /// ctor
         /// </summary>
-        public BinanceSocketClientOptions(): base("wss://stream.binance.com:9443/")
+        /// <param name="addresses">The base addresses to use</param>
+        public BinanceSocketClientOptions(BinanceApiAddresses addresses) : this(addresses.SocketClientAddress, addresses.UsdtFuturesSocketClientAddress, addresses.CoinFuturesSocketClientAddress)
         {
+        }
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="address">Custom address for spot API</param>
+        /// <param name="futuresUsdtAddress">Custom address for usdt futures streams</param>
+        /// <param name="futuresCoinAddress">Custom address for coin futures streams</param>
+        public BinanceSocketClientOptions(string address, string? futuresUsdtAddress, string? futuresCoinAddress) : base(address)
+        {
+            BaseAddressUsdtFutures = futuresUsdtAddress;
+            BaseAddressCoinFutures = futuresCoinAddress;
         }
 
         /// <summary>

@@ -55,8 +55,8 @@ namespace Binance.Net
         internal BinanceExchangeInfo? ExchangeInfo;
         internal DateTime? LastExchangeInfoUpdate;
 
-        private readonly string _baseAddressFuturesUsdt;
-        private readonly string _baseAddressFuturesCoin;
+        private readonly string? _baseAddressFuturesUsdt;
+        private readonly string? _baseAddressFuturesCoin;
 
         #endregion
 
@@ -287,6 +287,9 @@ namespace Binance.Net
 
         internal Uri GetUrlUsdtFutures(string endpoint, string api, string? version = null)
         {
+            if (string.IsNullOrEmpty(_baseAddressFuturesUsdt))
+                throw new ArgumentNullException("UsdtFuturesAddress", "No usdt futures API address is provided, check the client options");
+
             var result = $"{_baseAddressFuturesUsdt}{api}/";
 
             if (!string.IsNullOrEmpty(version))
@@ -298,6 +301,9 @@ namespace Binance.Net
 
         internal Uri GetUrlCoinFutures(string endpoint, string api, string? version = null)
         {
+            if (string.IsNullOrEmpty(_baseAddressFuturesCoin))
+                throw new ArgumentNullException("CoinFuturesAddress", "No coin futures API address is provided, check the client options");
+
             var result = $"{_baseAddressFuturesCoin}{api}/";
 
             if (!string.IsNullOrEmpty(version))

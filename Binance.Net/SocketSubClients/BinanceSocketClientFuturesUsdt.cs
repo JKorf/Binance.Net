@@ -36,7 +36,7 @@ namespace Binance.Net.SocketSubClients
         /// <summary>
         /// Base address
         /// </summary>
-        protected override string BaseAddress { get; }
+        protected override string? BaseAddress { get; }
 
         internal BinanceSocketClientFuturesUsdt(Log log, BinanceSocketClient baseClient,
             BinanceSocketClientOptions options) : base(log, baseClient)

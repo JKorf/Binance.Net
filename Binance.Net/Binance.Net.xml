@@ -4,6 +4,56 @@
         <name>Binance.Net</name>
     </assembly>
     <members>
+        <member name="T:Binance.Net.BinanceApiAddresses">
+            <summary>
+            Api addresses
+            </summary>
+        </member>
+        <member name="P:Binance.Net.BinanceApiAddresses.RestClientAddress">
+            <summary>
+            The address used by the BinanceClient for the Spot API
+            </summary>
+        </member>
+        <member name="P:Binance.Net.BinanceApiAddresses.SocketClientAddress">
+            <summary>
+            The address used by the BinanceSocketClient for the Spot API
+            </summary>
+        </member>
+        <member name="P:Binance.Net.BinanceApiAddresses.UsdtFuturesRestClientAddress">
+            <summary>
+            The address used by the BinanceClient for the USD futures API
+            </summary>
+        </member>
+        <member name="P:Binance.Net.BinanceApiAddresses.UsdtFuturesSocketClientAddress">
+            <summary>
+            The address used by the BinanceSocketClient for the USD futures API
+            </summary>
+        </member>
+        <member name="P:Binance.Net.BinanceApiAddresses.CoinFuturesRestClientAddress">
+            <summary>
+            The address used by the BinanceClient for the COIN futures API
+            </summary>
+        </member>
+        <member name="P:Binance.Net.BinanceApiAddresses.CoinFuturesSocketClientAddress">
+            <summary>
+            The address used by the BinanceSocketClient for the Coin futures API
+            </summary>
+        </member>
+        <member name="F:Binance.Net.BinanceApiAddresses.Default">
+            <summary>
+            The default addresses to connect to the binance.com API
+            </summary>
+        </member>
+        <member name="F:Binance.Net.BinanceApiAddresses.TestNet">
+            <summary>
+            The addresses to connect to the binance testnet
+            </summary>
+        </member>
+        <member name="F:Binance.Net.BinanceApiAddresses.Us">
+            <summary>
+            The addresses to connect to binance.us. (binance.us futures not are not available)
+            </summary>
+        </member>
         <member name="T:Binance.Net.BinanceClient">
             <summary>
             Client providing access to the Binance REST Api
@@ -11342,6 +11392,19 @@
             </summary>
             <param name="client">HttpClient to use for requests from this client</param>
         </member>
+        <member name="M:Binance.Net.Objects.Spot.BinanceClientOptions.#ctor(Binance.Net.BinanceApiAddresses)">
+            <summary>
+            Constructor with custom endpoints
+            </summary>
+            <param name="addresses">The base addresses to use</param>
+        </member>
+        <member name="M:Binance.Net.Objects.Spot.BinanceClientOptions.#ctor(Binance.Net.BinanceApiAddresses,System.Net.Http.HttpClient)">
+            <summary>
+            Constructor with custom endpoints
+            </summary>
+            <param name="addresses">The base addresses to use</param>
+            <param name="client">HttpClient to use for requests from this client</param>
+        </member>
         <member name="M:Binance.Net.Objects.Spot.BinanceClientOptions.#ctor(System.String,System.String,System.String)">
             <summary>
             Constructor with custom endpoints
@@ -11387,18 +11450,24 @@
             Not available on Binance.
             </summary>
         </member>
-        <member name="M:Binance.Net.Objects.Spot.BinanceSocketClientOptions.#ctor(System.String,System.String,System.String)">
-            <summary>
-            ctor
-            </summary>
-            <param name="address">Custom address</param>
-            <param name="futuresUsdtAddress">Custom address for usdt futures streams</param>
-            <param name="futuresCoinAddress">Custom address for coin futures streams</param>
-        </member>
         <member name="M:Binance.Net.Objects.Spot.BinanceSocketClientOptions.#ctor">
             <summary>
             ctor
             </summary>
+        </member>
+        <member name="M:Binance.Net.Objects.Spot.BinanceSocketClientOptions.#ctor(Binance.Net.BinanceApiAddresses)">
+            <summary>
+            ctor
+            </summary>
+            <param name="addresses">The base addresses to use</param>
+        </member>
+        <member name="M:Binance.Net.Objects.Spot.BinanceSocketClientOptions.#ctor(System.String,System.String,System.String)">
+            <summary>
+            ctor
+            </summary>
+            <param name="address">Custom address for spot API</param>
+            <param name="futuresUsdtAddress">Custom address for usdt futures streams</param>
+            <param name="futuresCoinAddress">Custom address for coin futures streams</param>
         </member>
         <member name="M:Binance.Net.Objects.Spot.BinanceSocketClientOptions.Copy">
             <summary>

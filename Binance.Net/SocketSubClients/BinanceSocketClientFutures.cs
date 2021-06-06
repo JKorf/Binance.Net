@@ -416,6 +416,9 @@ namespace Binance.Net.SocketSubClients
         /// <returns></returns>
         protected async Task<CallResult<UpdateSubscription>> Subscribe<T>(string url, bool combined, Action<DataEvent<T>> onData)
         {
+            if (BaseAddress == null)
+                throw new ArgumentNullException("BaseAddress", "No API address provided for the futures API, check the client options");
+
             if (combined)
                 url = BaseAddress + "stream?streams=" + url;
             else
