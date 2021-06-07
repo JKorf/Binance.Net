@@ -170,6 +170,10 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.14.0-beta5 - 07 Jun 2021
+    * Added BinanceApiAddresses class containing different api setups for easier
+    * Updated CryptoExchange.Net
+
 * Version 6.14.0-beta4 - 31 May 2021
     * Added GetTradingStatusAsync endpoint on USDT futures
     * Added GetMarkPriceKlinesAsync endpoint on futures
