@@ -60,6 +60,15 @@ namespace Binance.Net
 
         #endregion
 
+        /// <summary>
+        /// Event triggered when an order is placed via this client. Only available for Spot orders
+        /// </summary>
+        public event Action<ICommonOrderId> OnOrderPlaced;
+        /// <summary>
+        /// Event triggered when an order is cancelled via this client. Note that this does not trigger when using CancelAllOrdersAsync. Only available for Spot orders
+        /// </summary>
+        public event Action<ICommonOrderId> OnOrderCanceled;
+
         #region Subclients
         /// <summary>
         /// General endpoints
@@ -479,8 +488,18 @@ namespace Binance.Net
             return base.SendRequest<T>(uri, method, cancellationToken, parameters, signed, checkResult, postPosition);
         }
 
+        internal void InvokeOrderPlaced(ICommonOrderId id)
+        {
+            OnOrderPlaced?.Invoke(id);
+        }
+
+        internal void InvokeOrderCanceled(ICommonOrderId id)
+        {
+            OnOrderCanceled?.Invoke(id);
+        }
+
         #endregion
-        
+
         async Task<WebCallResult<IEnumerable<ICommonSymbol>>> IExchangeClient.GetSymbolsAsync()
         {
             var exchangeInfo = await Spot.System.GetExchangeInfoAsync().ConfigureAwait(false);

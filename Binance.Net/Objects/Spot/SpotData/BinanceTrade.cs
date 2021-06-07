@@ -74,5 +74,6 @@ namespace Binance.Net.Objects.Spot.SpotData
         decimal ICommonTrade.CommonQuantity => Quantity;
         decimal ICommonTrade.CommonFee => Commission;
         string ICommonTrade.CommonFeeAsset => CommissionAsset;
+        DateTime ICommonTrade.CommonTradeTime => TradeTime;
     }
 }

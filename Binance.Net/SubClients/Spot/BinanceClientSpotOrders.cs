@@ -137,7 +137,7 @@ namespace Binance.Net.SubClients.Spot
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
-            return await _baseClient.PlaceOrderInternal(_baseClient.GetUrlSpot(newOrderEndpoint, api, signedVersion),
+            var result = await _baseClient.PlaceOrderInternal(_baseClient.GetUrlSpot(newOrderEndpoint, api, signedVersion),
                 symbol,
                 side,
                 type,
@@ -153,6 +153,9 @@ namespace Binance.Net.SubClients.Spot
                 orderResponseType,
                 receiveWindow,
                 ct).ConfigureAwait(false);
+            if (result)
+                _baseClient.InvokeOrderPlaced(result.Data);
+            return result;
         }
 
         #endregion
@@ -189,7 +192,10 @@ namespace Binance.Net.SubClients.Spot
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceCanceledOrder>(_baseClient.GetUrlSpot(cancelOrderEndpoint, api, signedVersion), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceCanceledOrder>(_baseClient.GetUrlSpot(cancelOrderEndpoint, api, signedVersion), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
+            if (result)
+                _baseClient.InvokeOrderCanceled(result.Data);
+            return result;
         }
 
         #endregion

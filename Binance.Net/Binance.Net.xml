@@ -59,6 +59,16 @@
             Client providing access to the Binance REST Api
             </summary>
         </member>
+        <member name="E:Binance.Net.BinanceClient.OnOrderPlaced">
+            <summary>
+            Event triggered when an order is placed via this client. Only available for Spot orders
+            </summary>
+        </member>
+        <member name="E:Binance.Net.BinanceClient.OnOrderCanceled">
+            <summary>
+            Event triggered when an order is cancelled via this client. Note that this does not trigger when using CancelAllOrdersAsync. Only available for Spot orders
+            </summary>
+        </member>
         <member name="P:Binance.Net.BinanceClient.General">
             <summary>
             General endpoints

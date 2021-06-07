@@ -19,11 +19,17 @@ namespace Binance.Net.Objects.Spot.SpotData
         string ICommonOrder.CommonSymbol => Symbol;
         decimal ICommonOrder.CommonPrice => Price;
         decimal ICommonOrder.CommonQuantity => Quantity;
-        string ICommonOrder.CommonStatus => Status.ToString();
+        IExchangeClient.OrderStatus ICommonOrder.CommonStatus =>
+            Status == OrderStatus.New || Status == OrderStatus.PartiallyFilled ? IExchangeClient.OrderStatus.Active :
+            Status == OrderStatus.Filled ? IExchangeClient.OrderStatus.Filled :
+            IExchangeClient.OrderStatus.Canceled;
+
         bool ICommonOrder.IsActive => Status == OrderStatus.New || Status == OrderStatus.PartiallyFilled;
 
         IExchangeClient.OrderSide ICommonOrder.CommonSide =>
             Side == OrderSide.Sell ? IExchangeClient.OrderSide.Sell : IExchangeClient.OrderSide.Buy;
+
+        DateTime ICommonOrder.CommonOrderTime => CreateTime;
 
         IExchangeClient.OrderType ICommonOrder.CommonType
         {
