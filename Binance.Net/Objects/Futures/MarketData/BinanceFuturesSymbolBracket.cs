@@ -12,12 +12,12 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// Symbol or pair
         /// </summary>
         [JsonProperty("symbol")]
-        public string SymbolOrPair { get; set; } = "";
+        public string Symbol { get; set; } = "";
 
         [JsonProperty("pair")]
         private string Pair
         {
-            set => SymbolOrPair = value;
+            set => Symbol = value;
         }
 
         /// <summary>
@@ -69,5 +69,11 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// </summary>
         [JsonProperty("maintMarginRatio")]
         public decimal MaintenanceMarginRatio { get; set; }
+
+        /// <summary>
+        /// Auxiliary number for quick calculation 
+        /// </summary>
+        [JsonProperty("cum")]
+        public decimal MaintAmount { get; set; }
     }
 }

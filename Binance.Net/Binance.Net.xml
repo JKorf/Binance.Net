@@ -10489,7 +10489,7 @@
             Position Initial Margin
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.UnrealizedProfit">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.UnrealizedPnL">
             <summary>
             Unrealized Profit
             </summary>
@@ -10504,7 +10504,7 @@
             Crossed Wallet Balance
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.CrossUnPnl">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.CrossUnrealizedPnL">
             <summary>
             Unrealized profit of crossed positions
             </summary>
@@ -10529,7 +10529,7 @@
             The asset this balance is for
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance.Balance">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance.WalletBalance">
             <summary>
             The total balance of this asset
             </summary>
@@ -10539,7 +10539,7 @@
             Crossed wallet balance
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance.CrossPositionsUnrealizedProfitAndLoss">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance.CrossUnrealizedPnL">
             <summary>
             Unrealized profit of crossed positions
             </summary>
@@ -10549,7 +10549,7 @@
             Available balance
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance.MaxWithdrawAvailable">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance.MaxWithdrawAmount">
             <summary>
             Maximum amount for transfer out
             </summary>
@@ -11145,22 +11145,22 @@
             The average price of the order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.CumulativeQuantity">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.QuantityFilled">
             <summary>
             Cumulative amount
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.CumulativeQuoteQuantity">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.QuoteQuantityFilled">
             <summary>
             Cumulative amount
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.ExecutedQuantity">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.LastFilledQuantity">
             <summary>
             The quantity of the order that is executed
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.OriginalQuantity">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.Quantity">
             <summary>
             The original quantity of the order
             </summary>
@@ -11210,7 +11210,7 @@
             Activation price, only return with TRAILING_STOP_MARKET order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.PriceRate">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.CallbackRate">
             <summary>
             Callback rate, only return with TRAILING_STOP_MARKET order
             </summary>
@@ -11265,22 +11265,22 @@
             The average price of the order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.CumulativeQuantity">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.QuantityFilled">
             <summary>
             Cumulative amount
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.CumulativeQuoteQuantity">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.QuoteQuantityFilled">
             <summary>
             Cumulative amount in quote currency
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.ExecutedQuantity">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.LastFilledQuantity">
             <summary>
             The quantity of the order that is executed
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.OriginalQuantity">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.Quantity">
             <summary>
             The original quantity of the order
             </summary>
@@ -11348,72 +11348,6 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.WorkingType">
             <summary>
             The working type
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPosition">
-            <summary>
-            Information about an position
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPosition.EntryPrice">
-            <summary>
-            The entry price of the position
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPosition.MarginType">
-            <summary>
-            Type of margin used for the position
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPosition.IsAutoAddMargin">
-            <summary>
-            Does the position add margin automatically?
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPosition.IsolatedMargin">
-            <summary>
-            Amount of isolated margin
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPosition.Leverage">
-            <summary>
-            The current initial leverage of the position
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPosition.LiquidationPrice">
-            <summary>
-            The Liquidation price of the position
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPosition.MarkPrice">
-            <summary>
-            The Market price of the position
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPosition.MaxNotionalValue">
-            <summary>
-            The notional value limit of current initial leverage
-            NOTE: string type, because the value van be 'inf' (infinite)
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPosition.Quantity">
-            <summary>
-            The quantity of the position
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPosition.Symbol">
-            <summary>
-            The symbol the position is for
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPosition.UnrealizedPnL">
-            <summary>
-            The price of the unrealized PnL
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPosition.PositionSide">
-            <summary>
-            The position side of the order
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPositionMarginResult">
@@ -11602,7 +11536,7 @@
             Leverage
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionBase.UnrealizedProfit">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionBase.UnrealizedPnL">
             <summary>
             Unrealized profit
             </summary>
@@ -11652,7 +11586,7 @@
             Max notional
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoUsdt.PositionAmount">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoUsdt.Quantity">
             <summary>
             Position amount
             </summary>
@@ -11697,7 +11631,7 @@
             Mark price
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionDetailsBase.PositionAmount">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionDetailsBase.Quantity">
             <summary>
             Position amount
             </summary>
@@ -11707,7 +11641,7 @@
             Usdt position details
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionDetailsUsdt.MaxNotionalValue">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionDetailsUsdt.MaxNotional">
             <summary>
             Max notional
             </summary>
@@ -12295,7 +12229,7 @@
             Notional and Leverage Brackets
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbolBracket.SymbolOrPair">
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbolBracket.Symbol">
             <summary>
             Symbol or pair
             </summary>
@@ -12333,6 +12267,11 @@
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesBracket.MaintenanceMarginRatio">
             <summary>
             Maintenance ratio for this bracket
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesBracket.MaintAmount">
+            <summary>
+            Auxiliary number for quick calculation 
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbolFilter">
@@ -12955,7 +12894,7 @@
             The amount that isn't locked in a trade
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamBalance.CrossBalance">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamBalance.CrossWalletBalance">
             <summary>
             The amount that is locked in a trade
             </summary>
@@ -12970,7 +12909,7 @@
             The symbol this balance is for
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition.PositionAmount">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition.Quantity">
             <summary>
             The amount of the position
             </summary>
@@ -12995,7 +12934,7 @@
             The margin type
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition.IsolatedWallet">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition.IsolatedMargin">
             <summary>
             The isolated wallet (if isolated position)
             </summary>
