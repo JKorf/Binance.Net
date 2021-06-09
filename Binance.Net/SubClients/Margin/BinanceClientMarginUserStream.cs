@@ -92,7 +92,7 @@ namespace Binance.Net.SubClients.Margin
 
         #endregion
 
-        #region Close a ListenKey 
+        #region Invalidate a ListenKey
 
         /// <summary>
         /// Close the user stream for margin account

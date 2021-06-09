@@ -24537,7 +24537,7 @@
             Close the user stream for margin account
             </summary>
             <param name="symbol">The isolated symbol</param>
-            <param name="listenKey">The listen key to keep alive</param>
+            <param name="listenKey">The listen key to invalidate</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -24546,7 +24546,7 @@
             Close the user stream for margin account
             </summary>
             <param name="symbol">The isolated symbol</param>
-            <param name="listenKey">The listen key to keep alive</param>
+            <param name="listenKey">The listen key to invalidate</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -25889,7 +25889,7 @@
             <summary>
             Stops the current user stream
             </summary>
-            <param name="listenKey">The listen key to keep alive</param>
+            <param name="listenKey">The listen key to invalidate</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -25897,7 +25897,7 @@
             <summary>
             Stops the current user stream
             </summary>
-            <param name="listenKey">The listen key to keep alive</param>
+            <param name="listenKey">The listen key to invalidate</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
