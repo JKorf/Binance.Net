@@ -84,7 +84,7 @@ namespace Binance.Net.Converters
                 case SymbolFilterType.MaxPosition:
                     result = new BinanceSymbolMaxPositionFilter
                     {
-                        MaxPosition = (decimal)obj["maxPosition"]
+                        MaxPosition = obj.ContainsKey("maxPosition") ? (decimal)obj["maxPosition"] : 0
                     };
                     break;
                 default:
