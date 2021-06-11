@@ -48,9 +48,9 @@ namespace Binance.Net
         internal readonly TimeSpan TradeRulesUpdateInterval;
         internal readonly TimeSpan DefaultReceiveWindow;
 
-        internal double CalculatedTimeOffset;
-        internal bool TimeSynced;
-        internal DateTime LastTimeSync;
+        internal static double CalculatedTimeOffset;
+        internal static bool TimeSynced;
+        internal static DateTime LastTimeSync;
 
         internal BinanceExchangeInfo? ExchangeInfo;
         internal DateTime? LastExchangeInfoUpdate;

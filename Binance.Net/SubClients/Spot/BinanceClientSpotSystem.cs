@@ -74,7 +74,7 @@ namespace Binance.Net.SubClients.Spot
                 if (!result)
                     return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, default, result.Error);
 
-                if (_baseClient.TimeSynced && !resetAutoTimestamp)
+                if (BinanceClient.TimeSynced && !resetAutoTimestamp)
                     return result.As(result.Data.ServerTime);
 
                 if (_baseClient.TotalRequestsMade == 1)
@@ -91,17 +91,17 @@ namespace Binance.Net.SubClients.Spot
                 if (offset >= 0 && offset < 500)
                 {
                     // Small offset, probably mainly due to ping. Don't adjust time
-                    _baseClient.CalculatedTimeOffset = 0;
-                    _baseClient.TimeSynced = true;
-                    _baseClient.LastTimeSync = DateTime.UtcNow;
+                    BinanceClient.CalculatedTimeOffset = 0;
+                    BinanceClient.TimeSynced = true;
+                    BinanceClient.LastTimeSync = DateTime.UtcNow;
                     _log.Write(LogLevel.Information, $"Time offset between 0 and 500ms ({offset}ms), no adjustment needed");
                     return result.As(result.Data.ServerTime);
                 }
 
-                _baseClient.CalculatedTimeOffset = (result.Data.ServerTime - localTime).TotalMilliseconds;
-                _baseClient.TimeSynced = true;
-                _baseClient.LastTimeSync = DateTime.UtcNow;
-                _log.Write(LogLevel.Information, $"Time offset set to {_baseClient.CalculatedTimeOffset}ms");
+                BinanceClient.CalculatedTimeOffset = (result.Data.ServerTime - localTime).TotalMilliseconds;
+                BinanceClient.TimeSynced = true;
+                BinanceClient.LastTimeSync = DateTime.UtcNow;
+                _log.Write(LogLevel.Information, $"Time offset set to {BinanceClient.CalculatedTimeOffset}ms");
                 return result.As(result.Data.ServerTime);
             }
         }
