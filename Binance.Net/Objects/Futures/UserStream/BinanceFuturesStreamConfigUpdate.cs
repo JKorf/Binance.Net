@@ -1,4 +1,6 @@
-﻿using CryptoExchange.Net.Converters;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
+using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,10 +14,16 @@ namespace Binance.Net.Objects.Futures.UserStream
     public class BinanceFuturesStreamConfigUpdate : BinanceStreamEvent
     {
         /// <summary>
-        /// Update data
+        /// Leverage Update data
         /// </summary>
         [JsonProperty("ac")]
-        public BinanceFuturesStreamConfigUpdateData UpdateData { get; set; } = new BinanceFuturesStreamConfigUpdateData();
+        public BinanceFuturesStreamLeverageUpdateData LeverageUpdateData { get; set; } = new BinanceFuturesStreamLeverageUpdateData();
+
+        /// <summary>
+        /// Position mode Update data
+        /// </summary>
+        [JsonProperty("ai")]
+        public BinanceFuturesStreamConfigUpdateData ConfigUpdateData { get; set; } = new BinanceFuturesStreamConfigUpdateData();
 
         /// <summary>
         /// Transaction time
@@ -27,7 +35,7 @@ namespace Binance.Net.Objects.Futures.UserStream
     /// <summary>
     /// Config update data
     /// </summary>
-    public class BinanceFuturesStreamConfigUpdateData
+    public class BinanceFuturesStreamLeverageUpdateData
     {
         /// <summary>
         /// The symbol this balance is for
@@ -40,5 +48,17 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// </summary>
         [JsonProperty("l")]
         public int Leverage { get; set; }
+    }
+
+    /// <summary>
+    /// Position mode update data
+    /// </summary>
+    public class BinanceFuturesStreamConfigUpdateData
+    {
+        /// <summary>
+        /// Multi-Assets Mode
+        /// </summary>
+        [JsonProperty("j"), JsonConverter(typeof(PositionModeConverter))]
+        public PositionMode PositionMode { get; set; }
     }
 }

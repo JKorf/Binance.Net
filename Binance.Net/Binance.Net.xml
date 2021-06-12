@@ -12949,9 +12949,14 @@
             Information about levrage of symbol changed
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamConfigUpdate.UpdateData">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamConfigUpdate.LeverageUpdateData">
             <summary>
-            Update data
+            Leverage Update data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamConfigUpdate.ConfigUpdateData">
+            <summary>
+            Position mode Update data
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamConfigUpdate.TransactionTime">
@@ -12959,19 +12964,29 @@
             Transaction time
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamConfigUpdateData">
+        <member name="T:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamLeverageUpdateData">
             <summary>
             Config update data
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamConfigUpdateData.Symbol">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamLeverageUpdateData.Symbol">
             <summary>
             The symbol this balance is for
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamConfigUpdateData.Leverage">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamLeverageUpdateData.Leverage">
             <summary>
             The symbol this leverage is for
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamConfigUpdateData">
+            <summary>
+            Position mode update data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamConfigUpdateData.PositionMode">
+            <summary>
+            Multi-Assets Mode
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginUpdate">
@@ -19385,7 +19400,7 @@
             Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStreams.StartUserStream method should be called.
             </summary>
             <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-            <param name="onLeverageUpdate">The event handler for leverage changed update</param>
+            <param name="onConfigUpdate">The event handler for leverage changed update</param>
             <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
             <param name="onAccountUpdate">The event handler for whenever an account update is received</param>
             <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
