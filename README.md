@@ -170,6 +170,10 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.14.0-beta6 - 19 Jun 2021
+    * Fixed invalid symbol check on SubscribeToMarkPriceUpdatesAsync
+    * Made TimeSync static to prevent re-doing when creating a new client
+
 * Version 6.14.0-beta5 - 07 Jun 2021
     * Added BinanceApiAddresses class containing different api setups for easier
     * Updated CryptoExchange.Net
