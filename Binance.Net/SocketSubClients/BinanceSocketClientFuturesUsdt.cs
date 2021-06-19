@@ -65,9 +65,6 @@ namespace Binance.Net.SocketSubClients
         public async Task<CallResult<UpdateSubscription>> SubscribeToMarkPriceUpdatesAsync(IEnumerable<string> symbols, int? updateInterval, Action<DataEvent<BinanceFuturesUsdtStreamMarkPrice>> onMessage)
         {
             symbols.ValidateNotNull(nameof(symbols));
-            foreach (var symbol in symbols)
-                symbol.ValidateBinanceSymbol();
-
             updateInterval?.ValidateIntValues(nameof(updateInterval), 1000, 3000);
 
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesUsdtStreamMarkPrice>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
