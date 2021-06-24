@@ -331,11 +331,11 @@ namespace Binance.Net.SocketSubClients
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
             string listenKey,
-            Action<BinanceFuturesStreamConfigUpdate>? onConfigUpdate,
-            Action<BinanceFuturesStreamMarginUpdate>? onMarginUpdate,
-            Action<BinanceFuturesStreamAccountUpdate>? onAccountUpdate,
-            Action<BinanceFuturesStreamOrderUpdate>? onOrderUpdate,
-            Action<BinanceStreamEvent> onListenKeyExpired)
+            Action<DataEvent<BinanceFuturesStreamConfigUpdate>>? onConfigUpdate,
+            Action<DataEvent<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate,
+            Action<DataEvent<BinanceFuturesStreamAccountUpdate>>? onAccountUpdate,
+            Action<DataEvent<BinanceFuturesStreamOrderUpdate>>? onOrderUpdate,
+            Action<DataEvent<BinanceStreamEvent>>? onListenKeyExpired)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
 
@@ -352,7 +352,7 @@ namespace Binance.Net.SocketSubClients
                         {
                             var result = BaseClient.DeserializeInternal<BinanceFuturesStreamConfigUpdate>(token, false);
                             if (result)
-                                onConfigUpdate?.Invoke(result.Data);
+                                onConfigUpdate?.Invoke(data.As(result.Data));
                             else
                                 Log.Write(LogLevel.Warning, "Couldn't deserialize data received from config stream: " + result.Error);
 
