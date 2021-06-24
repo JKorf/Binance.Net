@@ -323,7 +323,7 @@ namespace Binance.Net.SocketSubClients
         /// Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStreams.StartUserStream method should be called.
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-        /// <param name="onLeverageUpdate">The event handler for leverage changed update</param>
+        /// <param name="onConfigUpdate">The event handler for leverage changed update</param>
         /// <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
         /// <param name="onAccountUpdate">The event handler for whenever an account update is received</param>
         /// <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
@@ -331,11 +331,11 @@ namespace Binance.Net.SocketSubClients
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
             string listenKey,
-            Action<DataEvent<BinanceFuturesStreamConfigUpdate>>? onLeverageUpdate,
-            Action<DataEvent<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate,
-            Action<DataEvent<BinanceFuturesStreamAccountUpdate>>? onAccountUpdate,
-            Action<DataEvent<BinanceFuturesStreamOrderUpdate>>? onOrderUpdate,
-            Action<DataEvent<BinanceStreamEvent>> onListenKeyExpired)
+            Action<BinanceFuturesStreamConfigUpdate>? onConfigUpdate,
+            Action<BinanceFuturesStreamMarginUpdate>? onMarginUpdate,
+            Action<BinanceFuturesStreamAccountUpdate>? onAccountUpdate,
+            Action<BinanceFuturesStreamOrderUpdate>? onOrderUpdate,
+            Action<BinanceStreamEvent> onListenKeyExpired)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
 
@@ -352,7 +352,7 @@ namespace Binance.Net.SocketSubClients
                         {
                             var result = BaseClient.DeserializeInternal<BinanceFuturesStreamConfigUpdate>(token, false);
                             if (result)
-                                onLeverageUpdate?.Invoke(data.As(result.Data, result.Data.AccountSymbolConfiguration?.Symbol));
+                                onConfigUpdate?.Invoke(result.Data);
                             else
                                 Log.Write(LogLevel.Warning, "Couldn't deserialize data received from config stream: " + result.Error);
 

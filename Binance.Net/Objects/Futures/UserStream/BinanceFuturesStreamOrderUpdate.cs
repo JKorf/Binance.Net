@@ -118,7 +118,7 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// The time of the update
         /// </summary>
         [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
-        public DateTime CreateTime { get; set; }
+        public DateTime UpdateTime { get; set; }
         /// <summary>
         /// The trade id
         /// </summary>

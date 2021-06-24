@@ -1,4 +1,6 @@
-﻿using CryptoExchange.Net.Converters;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
+using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -7,21 +9,21 @@ using System.Text;
 namespace Binance.Net.Objects.Futures.UserStream
 {
     /// <summary>
-    /// Information about levrage of symbol changed
+    /// Information about leverage of symbol changed
     /// </summary>
     public class BinanceFuturesStreamConfigUpdate : BinanceStreamEvent
     {
         /// <summary>
-        /// Update data
+        /// Leverage Update data
         /// </summary>
         [JsonProperty("ac")]
-        public BinanceFuturesStreamConfigUpdateData? AccountSymbolConfiguration { get; set; }
+        public BinanceFuturesStreamLeverageUpdateData LeverageUpdateData { get; set; } = new BinanceFuturesStreamLeverageUpdateData();
 
         /// <summary>
-        /// Update data
+        /// Position mode Update data
         /// </summary>
         [JsonProperty("ai")]
-        public BinanceFuturesStreamUserConfigUpdateData? UserConfiguration { get; set; }
+        public BinanceFuturesStreamConfigUpdateData ConfigUpdateData { get; set; } = new BinanceFuturesStreamConfigUpdateData();
 
         /// <summary>
         /// Transaction time
@@ -33,7 +35,7 @@ namespace Binance.Net.Objects.Futures.UserStream
     /// <summary>
     /// Config update data
     /// </summary>
-    public class BinanceFuturesStreamConfigUpdateData
+    public class BinanceFuturesStreamLeverageUpdateData
     {
         /// <summary>
         /// The symbol this balance is for
@@ -49,14 +51,14 @@ namespace Binance.Net.Objects.Futures.UserStream
     }
 
     /// <summary>
-    /// User account config update
+    /// Position mode update data
     /// </summary>
-    public class BinanceFuturesStreamUserConfigUpdateData 
-    { 
+    public class BinanceFuturesStreamConfigUpdateData
+    {
         /// <summary>
-        /// Multi-asset mode enabled
+        /// Multi-Assets Mode
         /// </summary>
-        [JsonProperty("j")]
-        public bool MultiAssetMode { get; set; }
+        [JsonProperty("j"), JsonConverter(typeof(PositionModeConverter))]
+        public PositionMode PositionMode { get; set; }
     }
 }

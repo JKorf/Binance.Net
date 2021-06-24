@@ -57,7 +57,7 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// The asset this balance is for
         /// </summary>
         [JsonProperty("a")]
-        public string? Asset { get; set; }
+        public string Asset { get; set; } = "";
         /// <summary>
         /// The amount that isn't locked in a trade
         /// </summary>
@@ -68,12 +68,6 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// </summary>
         [JsonProperty("cw")]
         public decimal CrossBalance { get; set; }
-
-        /// <summary>
-        /// Balance Change except PnL and Commission
-        /// </summary>
-        [JsonProperty("bc")]
-        public decimal BalanceChange { get; set; }
     }
 
     /// <summary>
@@ -85,12 +79,12 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// The symbol this balance is for
         /// </summary>
         [JsonProperty("s")]
-        public string? Symbol { get; set; }
+        public string Symbol { get; set; } = "";
         /// <summary>
         /// The amount of the position
         /// </summary>
         [JsonProperty("pa")]
-        public decimal PositionAmount { get; set; }
+        public decimal Quantity { get; set; }
         /// <summary>
         /// The entry price
         /// </summary>
@@ -117,7 +111,7 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// The isolated wallet (if isolated position)
         /// </summary>
         [JsonProperty("iw")]
-        public decimal IsolatedWallet { get; set; }
+        public decimal IsolatedMargin { get; set; }
 
         /// <summary>
         /// Position Side
