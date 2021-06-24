@@ -170,6 +170,9 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.13.4 - 24 Jun 2021
+    * Fixed/updated multiple models
+
 * Version 6.13.3 - 28 apr 2021
     * Fixed some issues in the IExchangeClient interface
     * Updated ExchangeClient.Net
