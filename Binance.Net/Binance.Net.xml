@@ -11486,7 +11486,7 @@
             Position side
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesTrade.Timestamp">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesTrade.TradeTime">
             <summary>
             Timestamp
             </summary>
@@ -13154,7 +13154,7 @@
             The asset the commission was taken from
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.CreateTime">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.UpdateTime">
             <summary>
             The time of the update
             </summary>
