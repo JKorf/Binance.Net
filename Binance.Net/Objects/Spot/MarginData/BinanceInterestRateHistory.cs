@@ -16,6 +16,7 @@ namespace Binance.Net.Objects.Spot.MarginData
         /// <summary>
         /// The daily interest
         /// </summary>
+        [JsonProperty("dailyInterestRate")]
         public decimal DailyInterest { get; set; }
         /// <summary>
         /// Timestamp
