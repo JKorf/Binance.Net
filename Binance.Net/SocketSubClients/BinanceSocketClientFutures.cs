@@ -109,13 +109,18 @@ namespace Binance.Net.SocketSubClients
         public abstract Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval,
             Action<IBinanceStreamKlineData> onMessage);
 
+
+        /// <inheritdoc />
+        public abstract Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, IEnumerable<KlineInterval> intervals,
+            Action<IBinanceStreamKlineData> onMessage);
+
         /// <inheritdoc />
         public abstract CallResult<UpdateSubscription> SubscribeToKlineUpdates(IEnumerable<string> symbols,
             KlineInterval interval, Action<IBinanceStreamKlineData> onMessage);
 
         /// <inheritdoc />
         public abstract Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols,
-            KlineInterval interval, Action<IBinanceStreamKlineData> onMessage);
+            IEnumerable<KlineInterval> intervals, Action<IBinanceStreamKlineData> onMessage);
         
 
         #endregion
