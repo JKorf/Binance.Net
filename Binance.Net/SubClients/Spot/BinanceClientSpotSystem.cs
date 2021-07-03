@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -109,15 +111,39 @@ namespace Binance.Net.SubClients.Spot
         #endregion
 
         #region Exchange Information
-
         /// <summary>
-        /// Get's information about the exchange including rate limits and symbol list
+        /// Gets information about the exchange including rate limits and symbol list
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Exchange info</returns>
-        public async Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(CancellationToken ct = default)
+        public Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(CancellationToken ct = default)
+             => GetExchangeInfoAsync(Array.Empty<string>(), ct);
+
+        /// <summary>
+        /// Get's information about the exchange including rate limits and information on the provided symbol
+        /// </summary>
+        /// <param name="symbol">Symbol to get data for token</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Exchange info</returns>
+        public Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(string symbol, CancellationToken ct = default)
+             => GetExchangeInfoAsync(new string[] { symbol }, ct);
+
+        /// <summary>
+        /// Get's information about the exchange including rate limits and information on the provided symbols
+        /// </summary>
+        /// <param name="symbols">Symbols to get data for token</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Exchange info</returns>
+        public async Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(IEnumerable<string> symbols, CancellationToken ct = default)
         {
-            var exchangeInfoResult = await _baseClient.SendRequestInternal<BinanceExchangeInfo>(_baseClient.GetUrlSpot(exchangeInfoEndpoint, api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
+            var parameters = new Dictionary<string, object>();
+            if (symbols.Count() > 1)
+                //parameters.Add("symbols", $"[\"{string.Join("\",\"", symbols)}\"]");
+                parameters.Add("symbols", symbols.ToArray());
+            else if (symbols.Any())
+                parameters.Add("symbol", symbols.First());
+
+            var exchangeInfoResult = await _baseClient.SendRequestInternal<BinanceExchangeInfo>(_baseClient.GetUrlSpot(exchangeInfoEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters: parameters, arraySerialization: ArrayParametersSerialization.Array).ConfigureAwait(false);
             if (!exchangeInfoResult)
                 return exchangeInfoResult;
 

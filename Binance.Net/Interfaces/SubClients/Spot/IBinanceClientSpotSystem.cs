@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Objects.Spot.MarketData;
@@ -25,6 +26,22 @@ namespace Binance.Net.Interfaces.SubClients.Spot
         /// <param name="ct">Cancellation token</param>
         /// <returns>Server time</returns>
         Task<WebCallResult<DateTime>> GetServerTimeAsync(bool resetAutoTimestamp = false, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get's information about the exchange including rate limits and information on the provided symbol
+        /// </summary>
+        /// <param name="symbol">Symbol to get data for token</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Exchange info</returns>
+        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get's information about the exchange including rate limits and information on the provided symbols
+        /// </summary>
+        /// <param name="symbols">Symbols to get data for token</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Exchange info</returns>
+        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(IEnumerable<string> symbols, CancellationToken ct = default);
 
         /// <summary>
         /// Get's information about the exchange including rate limits and symbol list

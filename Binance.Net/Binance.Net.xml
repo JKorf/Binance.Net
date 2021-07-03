@@ -6368,6 +6368,22 @@
             <param name="ct">Cancellation token</param>
             <returns>Server time</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotSystem.GetExchangeInfoAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get's information about the exchange including rate limits and information on the provided symbol
+            </summary>
+            <param name="symbol">Symbol to get data for token</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Exchange info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotSystem.GetExchangeInfoAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+            <summary>
+            Get's information about the exchange including rate limits and information on the provided symbols
+            </summary>
+            <param name="symbols">Symbols to get data for token</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Exchange info</returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotSystem.GetExchangeInfoAsync(System.Threading.CancellationToken)">
             <summary>
             Get's information about the exchange including rate limits and symbol list
@@ -20900,8 +20916,24 @@
         </member>
         <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotSystem.GetExchangeInfoAsync(System.Threading.CancellationToken)">
             <summary>
-            Get's information about the exchange including rate limits and symbol list
+            Gets information about the exchange including rate limits and symbol list
             </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>Exchange info</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotSystem.GetExchangeInfoAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get's information about the exchange including rate limits and information on the provided symbol
+            </summary>
+            <param name="symbol">Symbol to get data for token</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Exchange info</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotSystem.GetExchangeInfoAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+            <summary>
+            Get's information about the exchange including rate limits and information on the provided symbols
+            </summary>
+            <param name="symbols">Symbols to get data for token</param>
             <param name="ct">Cancellation token</param>
             <returns>Exchange info</returns>
         </member>
