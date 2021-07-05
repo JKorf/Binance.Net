@@ -1888,6 +1888,21 @@
             Withdrawal has been processed
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.WithdrawalTransferType">
+            <summary>
+            Withdrawal transfer type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.WithdrawalTransferType.ExternalTransfer">
+            <summary>
+            Withdrawal to external wallets
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.WithdrawalTransferType.InternalTransfer">
+            <summary>
+            Withdrawal from one binance account to another one
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.WithdrawDepositTransferType">
             <summary>
             Transfer type
@@ -6479,7 +6494,7 @@
             Sub accounts interface
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccounts(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccounts(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <summary>
             Gets a list of sub accounts associated with this master account
             </summary>
@@ -6488,10 +6503,11 @@
             <param name="page">The page of the results</param>
             <param name="limit">The max amount of results to return</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="isFreeze">Is freezed</param>
             <param name="ct">Cancellation token</param>
             <returns>List of sub accounts</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountsAsync(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountsAsync(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <summary>
             Gets a list of sub accounts associated with this master account
             </summary>
@@ -6500,14 +6516,16 @@
             <param name="page">The page of the results</param>
             <param name="limit">The max amount of results to return</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="isFreeze">Is freezed</param>
             <param name="ct">Cancellation token</param>
             <returns>List of sub accounts</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountTransferForMasterHistory(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountTransferForMasterHistory(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the transfer history of a sub account (from the master account) 
             </summary>
-            <param name="email">Filter the history by email</param>
+            <param name="fromEmail">Filter the history by from email</param>
+            <param name="toEmail">Filter the history by to email</param>
             <param name="startTime">Filter the history by startTime</param>
             <param name="endTime">Filter the history by endTime</param>
             <param name="page">The page of the results</param>
@@ -6516,11 +6534,12 @@
             <param name="ct">Cancellation token</param>
             <returns>List of transfers</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountTransferHistoryForMasterAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountTransferHistoryForMasterAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the transfer history of a sub account (from the master account) 
             </summary>
-            <param name="email">Filter the history by email</param>
+            <param name="fromEmail">Filter the history by from email</param>
+            <param name="toEmail">Filter the history by to email</param>
             <param name="startTime">Filter the history by startTime</param>
             <param name="endTime">Filter the history by endTime</param>
             <param name="page">The page of the results</param>
@@ -7102,7 +7121,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Withdrawal confirmation</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientWithdrawDeposit.GetWithdrawalHistory(System.String,System.Nullable{Binance.Net.Enums.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientWithdrawDeposit.GetWithdrawalHistory(System.String,System.Nullable{Binance.Net.Enums.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the withdrawal history
             </summary>
@@ -7112,9 +7131,11 @@
             <param name="endTime">Filter end time till</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
+            <param name="limit">Add limit. Default: 1000, Max: 1000</param>
+            <param name="offset">Add offset</param>
             <returns>List of withdrawals</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientWithdrawDeposit.GetWithdrawalHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientWithdrawDeposit.GetWithdrawalHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the withdrawal history
             </summary>
@@ -7124,6 +7145,8 @@
             <param name="endTime">Filter end time till</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
+            <param name="limit">Add limit. Default: 1000, Max: 1000</param>
+            <param name="offset">Add offset</param>
             <returns>List of withdrawals</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientWithdrawDeposit.GetDepositHistory(System.String,System.Nullable{Binance.Net.Enums.DepositStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
@@ -17945,6 +17968,11 @@
             The timestamp of the transfer
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountTransfer.TransactionId">
+            <summary>
+            The timestamp of the transfer
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountTransferResult">
             <summary>
             Sub account transfer result
@@ -18335,19 +18363,9 @@
             Account status info
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceAccountStatus.Message">
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceAccountStatus.Data">
             <summary>
             The result message
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceAccountStatus.Success">
-            <summary>
-            Success boolean
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceAccountStatus.Objects">
-            <summary>
-            Parameters
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceDepositAddress">
@@ -18460,6 +18478,21 @@
             Info
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceDustLogListWrapper">
+            <summary>
+            Dust log response details
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceDustLogListWrapper.Total">
+            <summary>
+            Total counts of exchange
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceDustLogListWrapper.UserAssetDribblets">
+            <summary>
+            Rows
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceDustLog">
             <summary>
             Dust log details
@@ -18485,11 +18518,6 @@
             Detail logs
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceDustLog.OperateTime">
-            <summary>
-            Timestamp
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceDustLogDetails">
             <summary>
             Dust log entry details
@@ -18503,11 +18531,6 @@
         <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceDustLogDetails.ServiceChargeAmount">
             <summary>
             Service charge
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceDustLogDetails.UId">
-            <summary>
-            Identifier
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceDustLogDetails.Amount">
@@ -18653,6 +18676,11 @@
         <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceTradeFee.TakerFee">
             <summary>
             The fee for trades where you're the taker
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceTradingStatusWrapper.UpdateTime">
+            <summary>
+            Time account status was updated
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceTradingStatus">
@@ -18930,26 +18958,6 @@
             Status string for deposit
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawalList">
-            <summary>
-            Wrapper for list of withdrawals
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawalList.List">
-            <summary>
-            The list of withdrawals
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawalList.Success">
-            <summary>
-            Boolean indicating if the withdrawal list retrieval was successful
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawalList.Message">
-            <summary>
-            Message what went wrong if retrieving wasn't successful
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawal">
             <summary>
             Information about a withdrawal
@@ -18995,9 +19003,19 @@
             The asset that was withdrawn
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawal.Network">
+            <summary>
+            Network that was used
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawal.Status">
             <summary>
             The status of the withdrawal
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawal.TransferType">
+            <summary>
+            Transfer type: 1 for internal transfer, 0 for external transfer 
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawalPlaced">
@@ -21716,7 +21734,7 @@
             Sub accounts endpoints
             </summary>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccounts(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccounts(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <summary>
             Gets a list of sub accounts associated with this master account
             </summary>
@@ -21728,7 +21746,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of sub accounts</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountsAsync(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountsAsync(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <summary>
             Gets a list of sub accounts associated with this master account
             </summary>
@@ -21737,14 +21755,16 @@
             <param name="page">The page of the results</param>
             <param name="limit">The max amount of results to return</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="isFreeze">Is freezed</param>
             <param name="ct">Cancellation token</param>
             <returns>List of sub accounts</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountTransferForMasterHistory(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountTransferForMasterHistory(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the transfer history of a sub account (from the master account) 
             </summary>
-            <param name="email">Filter the history by email</param>
+            <param name="fromEmail">Filter the history by from email</param>
+            <param name="toEmail">Filter the history by to email</param>
             <param name="startTime">Filter the history by startTime</param>
             <param name="endTime">Filter the history by endTime</param>
             <param name="page">The page of the results</param>
@@ -21753,11 +21773,12 @@
             <param name="ct">Cancellation token</param>
             <returns>List of transfers</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountTransferHistoryForMasterAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountTransferHistoryForMasterAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the transfer history of a sub account (from the master account) 
             </summary>
-            <param name="email">Filter the history by email</param>
+            <param name="fromEmail">Filter the history by from email</param>
+            <param name="toEmail">Filter the history by to email</param>
             <param name="startTime">Filter the history by startTime</param>
             <param name="endTime">Filter the history by endTime</param>
             <param name="page">The page of the results</param>
@@ -22227,7 +22248,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Withdrawal confirmation</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientWithdrawDeposit.GetWithdrawalHistory(System.String,System.Nullable{Binance.Net.Enums.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientWithdrawDeposit.GetWithdrawalHistory(System.String,System.Nullable{Binance.Net.Enums.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the withdrawal history
             </summary>
@@ -22237,9 +22258,11 @@
             <param name="endTime">Filter end time till</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
+            <param name="limit">Add limit. Default: 1000, Max: 1000</param>
+            <param name="offset">Add offset</param>
             <returns>List of withdrawals</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientWithdrawDeposit.GetWithdrawalHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientWithdrawDeposit.GetWithdrawalHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the withdrawal history
             </summary>
@@ -22248,6 +22271,8 @@
             <param name="startTime">Filter start time from</param>
             <param name="endTime">Filter end time till</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="limit">Add limit. Default: 1000, Max: 1000</param>
+            <param name="offset">Add offset</param>
             <param name="ct">Cancellation token</param>
             <returns>List of withdrawals</returns>
         </member>

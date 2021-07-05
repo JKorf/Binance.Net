@@ -548,31 +548,27 @@ namespace Binance.Net.UnitTests
         public void GetWithdrawHistory_Should_RespondWithWithdrawHistory()
         {
             // arrange
-            var history = new BinanceWithdrawalList()
+            var history = new List<BinanceWithdrawal>()
             {
-                Success = true,
-                List = new List<BinanceWithdrawal>()
+                new BinanceWithdrawal()
                 {
-                    new BinanceWithdrawal()
-                    {
-                        Address = "test",
-                        Amount = 0.1m,
-                        ApplyTime = new DateTime(2017, 1, 1),
-                        Asset = "BNB",
-                        Status = WithdrawalStatus.AwaitingApproval,
-                        Id = "123",
-                        TransactionId = "1"
-                    },
-                    new BinanceWithdrawal()
-                    {
-                        Address = "test2",
-                        Amount = 0.2m,
-                        ApplyTime = new DateTime(2017, 1, 1),
-                        Asset = "ETH",
-                        Status = WithdrawalStatus.Completed,
-                        Id = "123",
-                        TransactionId = "2"
-                    }
+                    Address = "test",
+                    Amount = 0.1m,
+                    ApplyTime = new DateTime(2017, 1, 1),
+                    Asset = "BNB",
+                    Status = WithdrawalStatus.AwaitingApproval,
+                    Id = "123",
+                    TransactionId = "1"
+                },
+                new BinanceWithdrawal()
+                {
+                    Address = "test2",
+                    Amount = 0.2m,
+                    ApplyTime = new DateTime(2017, 1, 1),
+                    Asset = "ETH",
+                    Status = WithdrawalStatus.Completed,
+                    Id = "123",
+                    TransactionId = "2"
                 }
             };
             var client = TestHelpers.CreateResponseClient(history, new BinanceClientOptions()
@@ -586,9 +582,9 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsTrue(result.Success);
-            Assert.AreEqual(result.Data.Count(), history.List.Count());
-            Assert.IsTrue(TestHelpers.AreEqual(history.List.ToList()[0], result.Data.ToList()[0]));
-            Assert.IsTrue(TestHelpers.AreEqual(history.List.ToList()[1], result.Data.ToList()[1]));
+            Assert.AreEqual(result.Data.Count(), history.Count());
+            Assert.IsTrue(TestHelpers.AreEqual(history.ToList()[0], result.Data.ToList()[0]));
+            Assert.IsTrue(TestHelpers.AreEqual(history.ToList()[1], result.Data.ToList()[1]));
         }
 
         [TestCase]
@@ -771,9 +767,8 @@ namespace Binance.Net.UnitTests
             // arrange
             var status = new BinanceTradingStatusWrapper()
             {
-                Success = true,
-                Message = "Test",
-                Status = new BinanceTradingStatus()
+                UpdateTime = new DateTime(2011, 1, 1),
+                Data = new BinanceTradingStatus()
                 {
                     IsLocked = false,
                     PlannedRecoverTime = 0,
@@ -811,10 +806,10 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsTrue(result.Success);
-            Assert.IsTrue(TestHelpers.AreEqual(status.Status, result.Data, "Indicators", "TriggerConditions"));
-            Assert.IsTrue(status.Status.TriggerConditions["GCR"] == result.Data.TriggerConditions["GCR"]);
-            Assert.IsTrue(status.Status.TriggerConditions["IFER"] == result.Data.TriggerConditions["IFER"]);
-            Assert.IsTrue(TestHelpers.AreEqual(status.Status.Indicators["BTCUSDT"].First(), result.Data.Indicators["BTCUSDT"].First()));
+            Assert.IsTrue(TestHelpers.AreEqual(status.Data, result.Data, "Indicators", "TriggerConditions"));
+            Assert.IsTrue(status.Data.TriggerConditions["GCR"] == result.Data.TriggerConditions["GCR"]);
+            Assert.IsTrue(status.Data.TriggerConditions["IFER"] == result.Data.TriggerConditions["IFER"]);
+            Assert.IsTrue(TestHelpers.AreEqual(status.Data.Indicators["BTCUSDT"].First(), result.Data.Indicators["BTCUSDT"].First()));
         }
 
         [TestCase]

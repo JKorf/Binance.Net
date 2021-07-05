@@ -11,16 +11,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// <summary>
         /// The result message
         /// </summary>
-        [JsonProperty("msg")]
-        public string? Message { get; set; }
-        /// <summary>
-        /// Success boolean
-        /// </summary>
-        public bool Success { get; set; }
-        /// <summary>
-        /// Parameters
-        /// </summary>
-        [JsonProperty("objs")]
-        public IEnumerable<object>? Objects { get; set; }
+        [JsonProperty("data")]
+        public string? Data { get; set; }
     }
 }

@@ -9,11 +9,13 @@ namespace Binance.Net.Objects.Spot.WalletData
 {
     internal class BinanceTradingStatusWrapper
     {
-        public bool Success { get; set; }
-        [JsonProperty("msg")]
-        [JsonOptionalProperty]
-        public string? Message { get; set; }
-        public BinanceTradingStatus? Status { get; set; }
+        /// <summary>
+        /// Time account status was updated
+        /// </summary>
+        [JsonConverter(typeof(TimestampConverter))]
+        public DateTime UpdateTime { get; set; }
+
+        public BinanceTradingStatus? Data { get; set; }
     }
 
     /// <summary>

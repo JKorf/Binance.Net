@@ -22,7 +22,7 @@ namespace Binance.Net.SubClients.Spot
         private const string pingEndpoint = "ping";
         private const string checkTimeEndpoint = "time";
         private const string exchangeInfoEndpoint = "exchangeInfo";
-        private const string systemStatusEndpoint = "systemStatus.html";
+        private const string systemStatusEndpoint = "system/status";
 
         private readonly Log _log;
 
@@ -162,7 +162,7 @@ namespace Binance.Net.SubClients.Spot
         /// <returns>The system status</returns>
         public async Task<WebCallResult<BinanceSystemStatus>> GetSystemStatusAsync(CancellationToken ct = default)
         {
-            return await _baseClient.SendRequestInternal<BinanceSystemStatus>(_baseClient.GetUrlSpot(systemStatusEndpoint, "wapi", "3"), HttpMethod.Get, ct, null, false).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceSystemStatus>(_baseClient.GetUrlSpot(systemStatusEndpoint, "sapi", "1"), HttpMethod.Get, ct, null, false).ConfigureAwait(false);
         }
 
         #endregion

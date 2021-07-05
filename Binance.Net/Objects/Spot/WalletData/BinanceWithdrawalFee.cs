@@ -4,16 +4,6 @@ using System.Collections.Generic;
 
 namespace Binance.Net.Objects.Spot.WalletData
 {
-    internal class BinanceAssetDetailsWrapper
-    {
-        [JsonProperty("assetDetail")]
-        public Dictionary<string, BinanceAssetDetails>? Data { get; set; }
-        public bool Success { get; set; }
-        [JsonProperty("msg")]
-        [JsonOptionalProperty]
-        public string? Message { get; set; }
-    }
-
     /// <summary>
     /// Asset details
     /// </summary>
