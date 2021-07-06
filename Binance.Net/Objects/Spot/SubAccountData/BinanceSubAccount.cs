@@ -9,9 +9,6 @@ namespace Binance.Net.Objects.Spot.SubAccountData
 {
     internal class BinanceSubAccountWrapper
     {
-        [JsonProperty("msg")]
-        public string? Message { get; set; }
-        public bool Success { get; set; }
         public IEnumerable<BinanceSubAccount>? SubAccounts { get; set; }
     }
 

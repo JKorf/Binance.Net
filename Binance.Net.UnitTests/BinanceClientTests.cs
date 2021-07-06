@@ -706,8 +706,7 @@ namespace Binance.Net.UnitTests
             // arrange
             var order = new BinanceWithdrawalPlaced()
             {
-                Success = true,
-                Message = "Test"
+                Id = "123123123"
             };
 
             var client = TestHelpers.CreateResponseClient(order, new BinanceClientOptions()

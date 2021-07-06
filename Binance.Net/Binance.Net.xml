@@ -19023,16 +19023,6 @@
             Result of placing a withdrawal
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawalPlaced.Success">
-            <summary>
-            Boolean indicating the success of submitting the withdrawal
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawalPlaced.Message">
-            <summary>
-            Message describing what went wrong if not successful
-            </summary>
-        </member>
         <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawalPlaced.Id">
             <summary>
             The id
