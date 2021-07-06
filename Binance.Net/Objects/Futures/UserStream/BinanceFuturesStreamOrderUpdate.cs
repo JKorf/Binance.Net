@@ -93,17 +93,17 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// The quantity of the last filled trade of this order
         /// </summary>
         [JsonProperty("l")]
-        public decimal QuantityOfLastFilledTrade { get; set; }
+        public decimal LastQuantityFilled { get; set; }
         /// <summary>
         /// The quantity of all trades that were filled for this order
         /// </summary>
         [JsonProperty("z")]
-        public decimal AccumulatedQuantityOfFilledTrades { get; set; }
+        public decimal QuantityFilled { get; set; }
         /// <summary>
         /// The price of the last filled trade
         /// </summary>
         [JsonProperty("L")]
-        public decimal PriceLastFilledTrade { get; set; }
+        public decimal LastPrice { get; set; }
         /// <summary>
         /// The commission payed
         /// </summary>
@@ -143,12 +143,12 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// Is this reduce only
         /// </summary>
         [JsonProperty("R")]
-        public bool IsReduce { get; set; }
+        public bool ReduceOnly { get; set; }
         /// <summary>
         /// Stop price working type
         /// </summary>
         [JsonProperty("wt"), JsonConverter(typeof(WorkingTypeConverter))]
-        public WorkingType StopPriceWorking { get; set; }
+        public WorkingType WorkingType { get; set; }
         /// <summary>
         /// Original Order Type
         /// </summary>
@@ -178,6 +178,6 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// Realized profit of the trade
         /// </summary>
         [JsonProperty("rp")]
-        public decimal RealizedProfit { get; set; }
+        public decimal RealizedPnL { get; set; }
     }
 }

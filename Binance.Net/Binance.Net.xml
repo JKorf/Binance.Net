@@ -11155,7 +11155,7 @@
             Cumulative amount
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.LastFilledQuantity">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.LastQuantityFilled">
             <summary>
             The quantity of the order that is executed
             </summary>
@@ -11471,7 +11471,7 @@
             Quantity
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesTrade.RealizedPnl">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesTrade.RealizedPnL">
             <summary>
             Realized pnl
             </summary>
@@ -13129,17 +13129,17 @@
             The id of the order as assigned by Binance
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.QuantityOfLastFilledTrade">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.LastQuantityFilled">
             <summary>
             The quantity of the last filled trade of this order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.AccumulatedQuantityOfFilledTrades">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.QuantityFilled">
             <summary>
             The quantity of all trades that were filled for this order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.PriceLastFilledTrade">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.LastPrice">
             <summary>
             The price of the last filled trade
             </summary>
@@ -13179,12 +13179,12 @@
             Whether the buyer is the maker
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.IsReduce">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.ReduceOnly">
             <summary>
             Is this reduce only
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.StopPriceWorking">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.WorkingType">
             <summary>
             Stop price working type
             </summary>
@@ -13214,7 +13214,7 @@
             Callback Rate, only pushed with TRAILING_STOP_MARKET order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.RealizedProfit">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.RealizedPnL">
             <summary>
             Realized profit of the trade
             </summary>

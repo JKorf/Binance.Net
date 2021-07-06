@@ -51,7 +51,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// The quantity of the order that is executed
         /// </summary>
         [JsonProperty("executedQty")]
-        public decimal LastFilledQuantity { get; set; }
+        public decimal LastQuantityFilled { get; set; }
         /// <summary>
         /// The original quantity of the order
         /// </summary>
