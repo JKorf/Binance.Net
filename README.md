@@ -165,6 +165,11 @@ Yes, as long as the API endpoints are the same. Switch by changing the BaseAddre
 See Timestamping.
 
 ## Release notes
+* Version 7.0.0-beta1 - 09 Jul 2021
+    * Added symbol filter for GetExchangeInfoAsync
+    * Added Async postfix for async methods
+    * Updated CryptoExchange.Net
+
 * Version 6.14.0-beta7 - 24 Jun 2021
     * Fixed/updated multiple models
 
