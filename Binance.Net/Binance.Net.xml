@@ -286,10 +286,10 @@
         <member name="M:Binance.Net.BinanceSocketClient.MessageMatchesHandler(Newtonsoft.Json.Linq.JToken,System.String)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.AuthenticateSocket(CryptoExchange.Net.Sockets.SocketConnection)">
+        <member name="M:Binance.Net.BinanceSocketClient.AuthenticateSocketAsync(CryptoExchange.Net.Sockets.SocketConnection)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.BinanceSocketClient.Unsubscribe(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Sockets.SocketSubscription)">
+        <member name="M:Binance.Net.BinanceSocketClient.UnsubscribeAsync(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Sockets.SocketSubscription)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Enums.AccountType">
@@ -20985,13 +20985,13 @@
             <param name="symbol">The symbol of the order book</param>
             <param name="options">The options for the order book</param>
         </member>
-        <member name="M:Binance.Net.SymbolOrderBooks.BinanceFuturesCoinSymbolOrderBook.DoStart">
+        <member name="M:Binance.Net.SymbolOrderBooks.BinanceFuturesCoinSymbolOrderBook.DoStartAsync">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.SymbolOrderBooks.BinanceFuturesCoinSymbolOrderBook.DoReset">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.SymbolOrderBooks.BinanceFuturesCoinSymbolOrderBook.DoResync">
+        <member name="M:Binance.Net.SymbolOrderBooks.BinanceFuturesCoinSymbolOrderBook.DoResyncAsync">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.SymbolOrderBooks.BinanceFuturesCoinSymbolOrderBook.Dispose">
@@ -21010,13 +21010,13 @@
             <param name="symbol">The symbol of the order book</param>
             <param name="options">The options for the order book</param>
         </member>
-        <member name="M:Binance.Net.SymbolOrderBooks.BinanceFuturesUsdtSymbolOrderBook.DoStart">
+        <member name="M:Binance.Net.SymbolOrderBooks.BinanceFuturesUsdtSymbolOrderBook.DoStartAsync">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.SymbolOrderBooks.BinanceFuturesUsdtSymbolOrderBook.DoReset">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.SymbolOrderBooks.BinanceFuturesUsdtSymbolOrderBook.DoResync">
+        <member name="M:Binance.Net.SymbolOrderBooks.BinanceFuturesUsdtSymbolOrderBook.DoResyncAsync">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.SymbolOrderBooks.BinanceFuturesUsdtSymbolOrderBook.Dispose">
@@ -21035,13 +21035,13 @@
             <param name="symbol">The symbol of the order book</param>
             <param name="options">The options for the order book</param>
         </member>
-        <member name="M:Binance.Net.SymbolOrderBooks.BinanceSpotSymbolOrderBook.DoStart">
+        <member name="M:Binance.Net.SymbolOrderBooks.BinanceSpotSymbolOrderBook.DoStartAsync">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.SymbolOrderBooks.BinanceSpotSymbolOrderBook.DoReset">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.SymbolOrderBooks.BinanceSpotSymbolOrderBook.DoResync">
+        <member name="M:Binance.Net.SymbolOrderBooks.BinanceSpotSymbolOrderBook.DoResyncAsync">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.SymbolOrderBooks.BinanceSpotSymbolOrderBook.Dispose">

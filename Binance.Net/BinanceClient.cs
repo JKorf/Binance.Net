@@ -257,7 +257,7 @@ namespace Binance.Net
             parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await SendRequest<BinancePlacedOrder>(uri, HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequestAsync<BinancePlacedOrder>(uri, HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -485,7 +485,7 @@ namespace Binance.Net
         internal Task<WebCallResult<T>> SendRequestInternal<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken,
             Dictionary<string, object>? parameters = null, bool signed = false, bool checkResult = true, PostParameters? postPosition = null, ArrayParametersSerialization? arraySerialization = null) where T : class
         {
-            return base.SendRequest<T>(uri, method, cancellationToken, parameters, signed, checkResult, postPosition);
+            return base.SendRequestAsync<T>(uri, method, cancellationToken, parameters, signed, checkResult, postPosition);
         }
 
         internal void InvokeOrderPlaced(ICommonOrderId id)

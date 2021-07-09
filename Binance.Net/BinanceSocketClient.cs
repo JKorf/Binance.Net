@@ -104,7 +104,7 @@ namespace Binance.Net
 
         internal Task<CallResult<UpdateSubscription>> SubscribeInternal<T>(string url, Action<DataEvent<T>> onData)
         {
-            return Subscribe(url, null, url + NextId(), false, onData);
+            return SubscribeAsync(url, null, url + NextId(), false, onData);
         }
 
 
@@ -133,13 +133,13 @@ namespace Binance.Net
         }
 
         /// <inheritdoc />
-        protected override Task<CallResult<bool>> AuthenticateSocket(SocketConnection s)
+        protected override Task<CallResult<bool>> AuthenticateSocketAsync(SocketConnection s)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        protected override Task<bool> Unsubscribe(SocketConnection connection, SocketSubscription s)
+        protected override Task<bool> UnsubscribeAsync(SocketConnection connection, SocketSubscription s)
         {
             return Task.FromResult(true);
         }

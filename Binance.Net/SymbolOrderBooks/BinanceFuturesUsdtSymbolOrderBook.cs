@@ -34,7 +34,7 @@ namespace Binance.Net.SymbolOrderBooks
         }
 
         /// <inheritdoc />
-        protected override async Task<CallResult<UpdateSubscription>> DoStart()
+        protected override async Task<CallResult<UpdateSubscription>> DoStartAsync()
         {
             CallResult<UpdateSubscription> subResult;
             if (_limit == null)
@@ -51,7 +51,7 @@ namespace Binance.Net.SymbolOrderBooks
                 var bookResult = await _restClient.FuturesUsdt.Market.GetOrderBookAsync(Symbol, _limit ?? 1000).ConfigureAwait(false);
                 if (!bookResult)
                 {
-                    await _socketClient.UnsubscribeAll().ConfigureAwait(false);
+                    await _socketClient.UnsubscribeAllAsync().ConfigureAwait(false);
                     return new CallResult<UpdateSubscription>(null, bookResult.Error);
                 }
 
@@ -59,7 +59,7 @@ namespace Binance.Net.SymbolOrderBooks
             }
             else
             {
-                var setResult = await WaitForSetOrderBook(10000).ConfigureAwait(false);
+                var setResult = await WaitForSetOrderBookAsync(10000).ConfigureAwait(false);
                 return setResult ? subResult : new CallResult<UpdateSubscription>(null, setResult.Error);
             }
 
@@ -84,10 +84,10 @@ namespace Binance.Net.SymbolOrderBooks
         }
 
         /// <inheritdoc />
-        protected override async Task<CallResult<bool>> DoResync()
+        protected override async Task<CallResult<bool>> DoResyncAsync()
         {
             if (_limit != null)
-                return await WaitForSetOrderBook(10000).ConfigureAwait(false);
+                return await WaitForSetOrderBookAsync(10000).ConfigureAwait(false);
 
             var bookResult = await _restClient.FuturesUsdt.Market.GetOrderBookAsync(Symbol, _limit ?? 1000).ConfigureAwait(false);
             if (!bookResult)
