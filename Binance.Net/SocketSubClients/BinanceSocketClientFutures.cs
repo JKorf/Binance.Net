@@ -81,11 +81,13 @@ namespace Binance.Net.SocketSubClients
         {
             symbols.ValidateNotNull(nameof(symbols));
 
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamAggregatedTrade>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamAggregatedTrade>>>(data => onMessage(data.As(data.Data.Data, data.Data.Stream)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + aggregatedTradesStreamEndpoint).ToArray();
-            return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
+            return await Subscribe(symbols, handler).ConfigureAwait(false);
         }
+        #endregion
 
+        #region Kline streams
         /// <inheritdoc />
         public abstract Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval,
             Action<DataEvent<IBinanceStreamKlineData>> onMessage);
@@ -93,10 +95,9 @@ namespace Binance.Net.SocketSubClients
         /// <inheritdoc />
         public abstract Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols,
             KlineInterval interval, Action<DataEvent<IBinanceStreamKlineData>> onMessage);
-        
 
         #endregion
-        
+
         #region Individual Symbol Mini Ticker Stream
 
         /// <summary>
@@ -185,9 +186,9 @@ namespace Binance.Net.SocketSubClients
         {
             symbols.ValidateNotNull(nameof(symbols));
 
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamBookPrice>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamBookPrice>>>(data => onMessage(data.As(data.Data.Data, data.Data.Stream)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + bookTickerStreamEndpoint).ToArray();
-            return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
+            return await Subscribe(symbols, handler).ConfigureAwait(false);
         }
 
         #endregion
@@ -201,8 +202,8 @@ namespace Binance.Net.SocketSubClients
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllBookTickerUpdatesAsync(Action<DataEvent<BinanceStreamBookPrice>> onMessage)
         {
-            var handler = new Action<DataEvent<BinanceStreamBookPrice>>(data => onMessage(data.As(data.Data, data.Data.Symbol)));
-            return await Subscribe(allBookTickerStreamEndpoint, false, handler).ConfigureAwait(false);
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamBookPrice>>>(data => onMessage(data.As(data.Data.Data, data.Data.Stream)));
+            return await Subscribe(new[] { allBookTickerStreamEndpoint }, handler).ConfigureAwait(false);
         }
 
         #endregion
@@ -227,9 +228,9 @@ namespace Binance.Net.SocketSubClients
         {
             symbols.ValidateNotNull(nameof(symbols));
 
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamLiquidationData>>>(data => onMessage(data.As(data.Data.Data.Data, data.Data.Data.Data.Symbol)));
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamLiquidationData>>>(data => onMessage(data.As(data.Data.Data.Data, data.Data.Stream)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + liquidationStreamEndpoint).ToArray();
-            return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
+            return await Subscribe(symbols, handler).ConfigureAwait(false);
         }
 
         #endregion
@@ -243,8 +244,8 @@ namespace Binance.Net.SocketSubClients
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllLiquidationUpdatesAsync(Action<DataEvent<BinanceFuturesStreamLiquidation>> onMessage)
         {
-            var handler = new Action<DataEvent<BinanceFuturesStreamLiquidationData>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
-            return await Subscribe(allLiquidationStreamEndpoint, false, handler).ConfigureAwait(false);
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamLiquidationData>>>(data => onMessage(data.As(data.Data.Data.Data, data.Data.Stream)));
+            return await Subscribe(new[] { allLiquidationStreamEndpoint }, handler).ConfigureAwait(false);
         }
 
         #endregion
@@ -278,11 +279,11 @@ namespace Binance.Net.SocketSubClients
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamOrderBookDepth>>>(data =>
             {
                 data.Data.Data.Symbol = data.Data.Stream.Split('@')[0];
-                onMessage(data.As<IBinanceFuturesEventOrderBook>(data.Data.Data, data.Data.Data.Symbol));
+                onMessage(data.As<IBinanceFuturesEventOrderBook>(data.Data.Data, data.Data.Stream));
             });
 
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + partialBookDepthStreamEndpoint + levels + (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
-            return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
+            return await Subscribe(symbols, handler).ConfigureAwait(false);
         }
 
         #endregion
@@ -310,9 +311,9 @@ namespace Binance.Net.SocketSubClients
             symbols.ValidateNotNull(nameof(symbols));
 
             updateInterval?.ValidateIntValues(nameof(updateInterval), 100, 250, 500);
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamOrderBookDepth>>>(data => onMessage(data.As<IBinanceFuturesEventOrderBook>(data.Data.Data, data.Data.Data.Symbol)));
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamOrderBookDepth>>>(data => onMessage(data.As<IBinanceFuturesEventOrderBook>(data.Data.Data, data.Data.Stream)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + depthStreamEndpoint + (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
-            return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
+            return await Subscribe(symbols, handler).ConfigureAwait(false);
         }
 
         #endregion
@@ -341,7 +342,8 @@ namespace Binance.Net.SocketSubClients
 
             var handler = new Action<DataEvent<string>>(data =>
             {
-                var token = JToken.Parse(data.Data);
+                var combinedToken = JToken.Parse(data.Data);
+                var token = combinedToken["data"];
                 var evnt = (string?)token["e"];
                 if (evnt == null)
                     return;
@@ -401,30 +403,23 @@ namespace Binance.Net.SocketSubClients
                 }
             });
 
-            return await Subscribe(listenKey, false, handler).ConfigureAwait(false);
+            return await Subscribe(new[] { listenKey }, handler).ConfigureAwait(false);
         }
 
         #endregion
 
         /// <summary>
-        /// Subscribe
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="url"></param>
-        /// <param name="combined"></param>
+        /// <param name="topics"></param>
         /// <param name="onData"></param>
         /// <returns></returns>
-        protected async Task<CallResult<UpdateSubscription>> Subscribe<T>(string url, bool combined, Action<DataEvent<T>> onData)
+        protected async Task<CallResult<UpdateSubscription>> Subscribe<T>(IEnumerable<string> topics, Action<DataEvent<T>> onData)
         {
             if (BaseAddress == null)
                 throw new ArgumentNullException("BaseAddress", "No API address provided for the futures API, check the client options");
 
-            if (combined)
-                url = BaseAddress + "stream?streams=" + url;
-            else
-                url = BaseAddress + "ws/" + url;
-
-            return await BaseClient.SubscribeInternal(url, onData).ConfigureAwait(false);
+            return await BaseClient.SubscribeInternal(BaseAddress + "stream", topics, onData).ConfigureAwait(false);
         }
     }
 }

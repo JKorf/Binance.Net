@@ -11403,13 +11403,6 @@
             The base address for Coin-M futures
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.BinanceSocketClientOptions.SocketSubscriptionsCombineTarget">
-            <summary>
-            The amount of subscriptions that should be made on a single socket connection. Not all exchanges support multiple subscriptions on a single socket.
-            Setting this to a higher number increases subscription speed, but having more subscriptions on a single connection will also increase the amount of traffic on that single connection.
-            Not available on Binance.
-            </summary>
-        </member>
         <member name="M:Binance.Net.Objects.Spot.BinanceSocketClientOptions.#ctor">
             <summary>
             ctor
@@ -17084,13 +17077,11 @@
             <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFutures.Subscribe``1(System.String,System.Boolean,System.Action{CryptoExchange.Net.Sockets.DataEvent{``0}})">
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFutures.Subscribe``1(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Sockets.DataEvent{``0}})">
             <summary>
-            Subscribe
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="url"></param>
-            <param name="combined"></param>
+            <param name="topics"></param>
             <param name="onData"></param>
             <returns></returns>
         </member>

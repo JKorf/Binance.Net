@@ -16,7 +16,7 @@ namespace Binance.Net.SymbolOrderBooks
     public class BinanceFuturesUsdtSymbolOrderBook : SymbolOrderBook
     {
         private readonly BinanceClient _restClient;
-        private readonly BinanceSocketClient _socketClient;
+        private readonly IBinanceSocketClient _socketClient;
         private readonly int? _limit;
         private readonly int? _updateInterval;
 
@@ -30,7 +30,7 @@ namespace Binance.Net.SymbolOrderBooks
             _limit = options?.Limit;
             _updateInterval = options?.UpdateInterval;
             _restClient = new BinanceClient();
-            _socketClient = new BinanceSocketClient();
+            _socketClient = options?.SocketClient ?? new BinanceSocketClient();
         }
 
         /// <inheritdoc />

@@ -30,7 +30,7 @@ namespace Binance.Net.UnitTests
 
             var data = new BinanceCombinedStream<BinanceStreamKlineData>()
             {
-                Stream = "test",
+                Stream = "ethbtc@kline_1m",
                 Data = new BinanceStreamKlineData()
                 {
                     Event = "TestKlineStream",
@@ -82,7 +82,7 @@ namespace Binance.Net.UnitTests
 
             var data = new BinanceCombinedStream<BinanceStreamTick>()
             {
-                Stream = "test",
+                Stream = "ethbtc@ticker",
                 Data = new BinanceStreamTick() { 
                     FirstTradeId = 1,
                     HighPrice = 0.7m,
@@ -116,22 +116,26 @@ namespace Binance.Net.UnitTests
             IBinanceTick[] result = null;
             await client.Spot.SubscribeToAllSymbolTickerUpdatesAsync((test) => result = test.Data.ToArray());
 
-            var data = new[]
+            var data = new BinanceCombinedStream<BinanceStreamTick[]>
             {
-                new BinanceStreamTick()
+                Data = new[]
                 {
-                    FirstTradeId = 1,
-                    HighPrice = 0.7m,
-                    LastTradeId = 2,
-                    LowPrice = 0.8m,
-                    OpenPrice = 0.9m,
-                    PrevDayClosePrice = 1.0m,
-                    PriceChange = 1.1m,
-                    Symbol = "test",
-                    BaseVolume = 1.3m,
-                    QuoteVolume = 1.4m,
-                    TotalTrades = 3
-                }
+                     new BinanceStreamTick()
+                    {
+                        FirstTradeId = 1,
+                        HighPrice = 0.7m,
+                        LastTradeId = 2,
+                        LowPrice = 0.8m,
+                        OpenPrice = 0.9m,
+                        PrevDayClosePrice = 1.0m,
+                        PriceChange = 1.1m,
+                        Symbol = "test",
+                        BaseVolume = 1.3m,
+                        QuoteVolume = 1.4m,
+                        TotalTrades = 3
+                    }
+                },
+                Stream = "!ticker@arr"
             };
 
             // act
@@ -139,7 +143,7 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsNotNull(result);
-            Assert.IsTrue(TestHelpers.AreEqual(data[0], result[0]));
+            Assert.IsTrue(TestHelpers.AreEqual(data.Data[0], result[0]));
         }
 
         [TestCase()]
@@ -154,7 +158,7 @@ namespace Binance.Net.UnitTests
 
             var data = new BinanceCombinedStream<BinanceStreamTrade>()
             {
-                Stream = "test",
+                Stream = "ethbtc@trade",
                 Data = new BinanceStreamTrade()
                 {
                     Event = "TestTradeStream",
@@ -187,13 +191,17 @@ namespace Binance.Net.UnitTests
             BinanceStreamBalanceUpdate result = null;
             await client.Spot.SubscribeToUserDataUpdatesAsync("test", null, null, null, (test) => result = test.Data);
 
-            var data = new BinanceStreamBalanceUpdate()
+            var data = new BinanceCombinedStream<BinanceStreamBalanceUpdate>
             {
-                Event = "balanceUpdate",
-                EventTime = new DateTime(2017, 1, 1),
-                Asset = "BTC",
-                BalanceDelta = 1,
-                ClearTime = new DateTime(2018, 1, 1),
+                Stream = "test",
+                Data = new BinanceStreamBalanceUpdate()
+                {
+                    Event = "balanceUpdate",
+                    EventTime = new DateTime(2017, 1, 1),
+                    Asset = "BTC",
+                    BalanceDelta = 1,
+                    ClearTime = new DateTime(2018, 1, 1),
+                }
             };
 
             // act
@@ -201,7 +209,7 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsNotNull(result);
-            Assert.IsTrue(TestHelpers.AreEqual(data, result));
+            Assert.IsTrue(TestHelpers.AreEqual(data.Data, result));
         }
 
         [TestCase()]
@@ -214,18 +222,21 @@ namespace Binance.Net.UnitTests
             BinanceStreamOrderList result = null;
             client.Spot.SubscribeToUserDataUpdatesAsync("test", null, (test) => result = test.Data, null, null);
 
-            var data = new BinanceStreamOrderList()
+            var data = new BinanceCombinedStream<BinanceStreamOrderList>
             {
-                Event = "listStatus",
-                EventTime = new DateTime(2017, 1, 1),
-                Symbol = "BNBUSDT",
-                ContingencyType = "OCO",
-                ListStatusType = ListStatusType.Done,
-                ListOrderStatus = ListOrderStatus.Done,
-                OrderListId = 1,
-                ListClientOrderId = "2",
-                TransactionTime = new DateTime(2018, 1, 1),
-                Orders = new []
+                Stream = "test",
+                Data = new BinanceStreamOrderList()
+                {
+                    Event = "listStatus",
+                    EventTime = new DateTime(2017, 1, 1),
+                    Symbol = "BNBUSDT",
+                    ContingencyType = "OCO",
+                    ListStatusType = ListStatusType.Done,
+                    ListOrderStatus = ListOrderStatus.Done,
+                    OrderListId = 1,
+                    ListClientOrderId = "2",
+                    TransactionTime = new DateTime(2018, 1, 1),
+                    Orders = new[]
                 {
                     new BinanceStreamOrderId()
                     {
@@ -240,6 +251,7 @@ namespace Binance.Net.UnitTests
                         ClientOrderId = "4"
                     }
                 }
+                }
             };
 
             // act
@@ -247,9 +259,9 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsNotNull(result);
-            Assert.IsTrue(TestHelpers.AreEqual(data, result, "Orders"));
-            Assert.IsTrue(TestHelpers.AreEqual(data.Orders.ToList()[0], result.Orders.ToList()[0]));
-            Assert.IsTrue(TestHelpers.AreEqual(data.Orders.ToList()[1], result.Orders.ToList()[1]));
+            Assert.IsTrue(TestHelpers.AreEqual(data.Data, result, "Orders"));
+            Assert.IsTrue(TestHelpers.AreEqual(data.Data.Orders.ToList()[0], result.Orders.ToList()[0]));
+            Assert.IsTrue(TestHelpers.AreEqual(data.Data.Orders.ToList()[1], result.Orders.ToList()[1]));
         }
 
         [TestCase()]
@@ -262,30 +274,34 @@ namespace Binance.Net.UnitTests
             BinanceStreamOrderUpdate result = null;
             client.Spot.SubscribeToUserDataUpdatesAsync("test", (test) => result = test.Data, null, null, null);
 
-            var data = new BinanceStreamOrderUpdate()
+            var data = new BinanceCombinedStream<BinanceStreamOrderUpdate>
             {
-                Event = "executionReport",
-                EventTime = new DateTime(2017, 1, 1),
-                BuyerIsMaker = true,
-                Commission = 2.2m,
-                CommissionAsset = "test",
-                ExecutionType = ExecutionType.Trade,
-                I = 100000000000,
-                OrderId = 100000000000,
-                Price = 6.6m,
-                Quantity = 8.8m,
-                RejectReason = OrderRejectReason.AccountCannotSettle,
-                Side = OrderSide.Buy,
-                Status = OrderStatus.Filled,
-                Symbol = "test",
-                TimeInForce = TimeInForce.GoodTillCancel,
-                TradeId = 10000000000000,
-                Type = OrderType.Limit,
-                ClientOrderId = "123",
-                IcebergQuantity = 9.9m,
-                IsWorking = true,
-                OriginalClientOrderId = "456",
-                StopPrice = 10.10m
+                Stream = "test",
+                Data = new BinanceStreamOrderUpdate()
+                {
+                    Event = "executionReport",
+                    EventTime = new DateTime(2017, 1, 1),
+                    BuyerIsMaker = true,
+                    Commission = 2.2m,
+                    CommissionAsset = "test",
+                    ExecutionType = ExecutionType.Trade,
+                    I = 100000000000,
+                    OrderId = 100000000000,
+                    Price = 6.6m,
+                    Quantity = 8.8m,
+                    RejectReason = OrderRejectReason.AccountCannotSettle,
+                    Side = OrderSide.Buy,
+                    Status = OrderStatus.Filled,
+                    Symbol = "test",
+                    TimeInForce = TimeInForce.GoodTillCancel,
+                    TradeId = 10000000000000,
+                    Type = OrderType.Limit,
+                    ClientOrderId = "123",
+                    IcebergQuantity = 9.9m,
+                    IsWorking = true,
+                    OriginalClientOrderId = "456",
+                    StopPrice = 10.10m
+                }
             };
 
             // act
@@ -293,7 +309,7 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsNotNull(result);
-            Assert.IsTrue(TestHelpers.AreEqual(data, result, "Balances"));
+            Assert.IsTrue(TestHelpers.AreEqual(data.Data, result, "Balances"));
         }
     }
 }

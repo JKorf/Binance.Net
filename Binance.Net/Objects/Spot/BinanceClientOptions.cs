@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using Binance.Net.Enums;
+using Binance.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 
 namespace Binance.Net.Objects.Spot
@@ -189,21 +190,6 @@ namespace Binance.Net.Objects.Spot
         }
 
         /// <summary>
-        /// The amount of subscriptions that should be made on a single socket connection. Not all exchanges support multiple subscriptions on a single socket.
-        /// Setting this to a higher number increases subscription speed, but having more subscriptions on a single connection will also increase the amount of traffic on that single connection.
-        /// Not available on Binance.
-        /// </summary>
-        public new int? SocketSubscriptionsCombineTarget
-        {
-            get => 1;
-            set
-            {
-                if (value != 1)
-                    throw new ArgumentException("Can't change SocketSubscriptionsCombineTarget; server implementation does not allow multiple subscription on a socket");
-            }
-        }
-
-        /// <summary>
         /// ctor
         /// </summary>
         public BinanceSocketClientOptions() : this(BinanceApiAddresses.Default)
@@ -228,6 +214,7 @@ namespace Binance.Net.Objects.Spot
         {
             BaseAddressUsdtFutures = futuresUsdtAddress;
             BaseAddressCoinFutures = futuresCoinAddress;
+            SocketSubscriptionsCombineTarget = 10;
         }
 
         /// <summary>
@@ -249,6 +236,11 @@ namespace Binance.Net.Objects.Spot
     public class BinanceOrderBookOptions : OrderBookOptions
     {
         /// <summary>
+        /// The client to use for the socket connection. When using the same client for multiple order books the connection can be shared.
+        /// </summary>
+        public IBinanceSocketClient? SocketClient { get; }
+
+        /// <summary>
         /// The top amount of results to keep in sync. If for example limit=10 is used, the order book will contain the 10 best bids and 10 best asks. Leaving this null will sync the full order book
         /// </summary>
         public int? Limit { get; }
@@ -263,10 +255,12 @@ namespace Binance.Net.Objects.Spot
         /// </summary>
         /// <param name="limit">The top amount of results to keep in sync. If for example limit=10 is used, the order book will contain the 10 best bids and 10 best asks. Leaving this null will sync the full order book</param>
         /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
-        public BinanceOrderBookOptions(int? limit = null, int? updateInterval = null): base("Binance", limit == null, false)
+        /// <param name="client">The client to use for the socket connection. When using the same client for multiple order books the connection can be shared.</param>
+        public BinanceOrderBookOptions(int? limit = null, int? updateInterval = null, IBinanceSocketClient? client = null) : base("Binance", limit == null, false)
         {
             Limit = limit;
             UpdateInterval = updateInterval;
+            SocketClient = client;
         }
     }
 }

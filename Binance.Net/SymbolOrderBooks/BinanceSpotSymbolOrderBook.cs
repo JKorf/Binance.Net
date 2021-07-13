@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Binance.Net.Interfaces;
 using Binance.Net.Objects.Spot;
 using Binance.Net.Objects.Spot.MarketData;
 using CryptoExchange.Net.Objects;
@@ -14,7 +15,7 @@ namespace Binance.Net.SymbolOrderBooks
     public class BinanceSpotSymbolOrderBook : SymbolOrderBook
     {
         private readonly BinanceClient _restClient;
-        private readonly BinanceSocketClient _socketClient;
+        private readonly IBinanceSocketClient _socketClient;
         private readonly int? _updateInterval;
 
         /// <summary>
@@ -28,7 +29,7 @@ namespace Binance.Net.SymbolOrderBooks
             Levels = options?.Limit;
             _updateInterval = options?.UpdateInterval;
             _restClient = new BinanceClient();
-            _socketClient = new BinanceSocketClient();
+            _socketClient = options?.SocketClient ?? new BinanceSocketClient();
         }
 
         /// <inheritdoc />

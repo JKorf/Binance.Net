@@ -9,6 +9,9 @@ using CryptoExchange.Net.Sockets;
 using Newtonsoft.Json.Linq;
 using Binance.Net.Objects.Spot;
 using Binance.Net.SocketSubClients;
+using System.Collections.Generic;
+using System.Linq;
+using Binance.Net.Objects.Other;
 
 namespace Binance.Net
 {
@@ -102,9 +105,16 @@ namespace Binance.Net
             return Deserialize<T>(data, checkObject);   
         }
 
-        internal Task<CallResult<UpdateSubscription>> SubscribeInternal<T>(string url, Action<DataEvent<T>> onData)
+        internal Task<CallResult<UpdateSubscription>> SubscribeInternal<T>(string url, IEnumerable<string> topics, Action<DataEvent<T>> onData)
         {
-            return SubscribeAsync(url, null, url + NextId(), false, onData);
+            var request = new BinanceSocketRequest
+            {
+                Method = "SUBSCRIBE",
+                Params = topics.ToArray(),
+                Id = NextId()
+            };
+
+            return SubscribeAsync(url, request, null, false, onData);
         }
 
 
@@ -117,13 +127,48 @@ namespace Binance.Net
         /// <inheritdoc />
         protected override bool HandleSubscriptionResponse(SocketConnection s, SocketSubscription subscription, object request, JToken message, out CallResult<object>? callResult)
         {
-            throw new NotImplementedException();
+            callResult = null;
+            if (message.Type != JTokenType.Object)
+                return false;
+
+            var id = message["id"];
+            if (id == null)
+                return false;
+
+            var bRequest = (BinanceSocketRequest)request;
+            if ((int)id != bRequest.Id)
+                return false;
+
+            var result = message["result"];
+            if (result?.Type == JTokenType.Null)
+            {
+                callResult = new CallResult<object>(null, null);
+                return true;
+            }
+
+            var error = message["error"];
+            if (error == null)
+            {
+                callResult = new CallResult<object>(null, new ServerError("Unknown error: " + message.ToString()));
+                return true;
+            }
+
+            callResult = new CallResult<object>(null, new ServerError((int)error["code"], error["msg"].ToString()));
+            return true;
         }
 
         /// <inheritdoc />
         protected override bool MessageMatchesHandler(JToken message, object request)
         {
-            throw new NotImplementedException();
+            if (message.Type != JTokenType.Object)
+                return false;
+
+            var bRequest = (BinanceSocketRequest)request;
+            var stream = message["stream"];
+            if (stream == null)
+                return false;
+
+            return bRequest.Params.Contains((string)stream);
         }
 
         /// <inheritdoc />
@@ -139,9 +184,33 @@ namespace Binance.Net
         }
 
         /// <inheritdoc />
-        protected override Task<bool> UnsubscribeAsync(SocketConnection connection, SocketSubscription s)
+        protected override async Task<bool> UnsubscribeAsync(SocketConnection connection, SocketSubscription subscription)
         {
-            return Task.FromResult(true);
+            var topics = ((BinanceSocketRequest)subscription.Request!).Params;
+            var unsub = new BinanceSocketRequest { Method = "UNSUBSCRIBE", Params = topics, Id = NextId() };
+            var result = false;
+            await connection.SendAndWaitAsync(unsub, ResponseTimeout, data =>
+            {
+                if (data.Type != JTokenType.Object)
+                    return false;
+
+                var id = data["id"];
+                if (id == null)
+                    return false;
+
+                if ((int)id != unsub.Id)
+                    return false;
+
+                var result = data["result"];
+                if (result?.Type == JTokenType.Null)
+                {
+                    result = true;
+                    return true;
+                }
+
+                return true;              
+            }).ConfigureAwait(false);
+            return result;
         }
         #endregion
     }

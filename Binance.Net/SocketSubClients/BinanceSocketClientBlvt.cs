@@ -65,8 +65,8 @@ namespace Binance.Net.SocketSubClients
         public async Task<CallResult<UpdateSubscription>> SubscribeToBlvtInfoUpdatesAsync(IEnumerable<string> tokens, Action<DataEvent<BinanceBlvtInfoUpdate>> onMessage)
         {
             tokens = tokens.Select(a => a.ToUpper(CultureInfo.InvariantCulture) + bltvInfoEndpoint).ToArray();
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceBlvtInfoUpdate>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.TokenName)));
-            return await Subscribe(string.Join("/", tokens), true, handler).ConfigureAwait(false);
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceBlvtInfoUpdate>>>(data => onMessage(data.As(data.Data.Data, data.Data.Stream)));
+            return await Subscribe(tokens, handler).ConfigureAwait(false);
         }
 
         #endregion
@@ -93,20 +93,15 @@ namespace Binance.Net.SocketSubClients
         public async Task<CallResult<UpdateSubscription>> SubscribeToBlvtKlineUpdatesAsync(IEnumerable<string> tokens, KlineInterval interval, Action<DataEvent<BinanceStreamKlineData>> onMessage)
         {
             tokens = tokens.Select(a => a.ToUpper(CultureInfo.InvariantCulture) + bltvKlineEndpoint + "_" + JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ToArray();
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamKlineData>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
-            return await Subscribe(string.Join("/", tokens), true, handler).ConfigureAwait(false);
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamKlineData>>>(data => onMessage(data.As(data.Data.Data, data.Data.Stream)));
+            return await Subscribe(tokens, handler).ConfigureAwait(false);
         }
 
         #endregion
 
-        private async Task<CallResult<UpdateSubscription>> Subscribe<T>(string url, bool combined, Action<DataEvent<T>> onData)
+        private async Task<CallResult<UpdateSubscription>> Subscribe<T>(IEnumerable<string> topics, Action<DataEvent<T>> onData)
         {
-            if (combined)
-                url = _baseAddress + "stream?streams=" + url;
-            else
-                url = _baseAddress + "ws/" + url;
-
-            return await _baseClient.SubscribeInternal(url, onData).ConfigureAwait(false);
+            return await _baseClient.SubscribeInternal(_baseAddress + "stream", topics, onData).ConfigureAwait(false);
         }
     }
 }
