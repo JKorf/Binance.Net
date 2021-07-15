@@ -4549,7 +4549,14 @@
             <param name="ct">Cancellation token</param>
             <returns>The account information</returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.GetUserCoinsAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)" -->
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.GetUserCoinsAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets information of coins for a user
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Coins info</returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.GetAssetDividendRecordsAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get asset dividend records
@@ -11433,6 +11440,11 @@
             Binance symbol order book options
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.BinanceOrderBookOptions.SocketClient">
+            <summary>
+            The client to use for the socket connection. When using the same client for multiple order books the connection can be shared.
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Spot.BinanceOrderBookOptions.Limit">
             <summary>
             The top amount of results to keep in sync. If for example limit=10 is used, the order book will contain the 10 best bids and 10 best asks. Leaving this null will sync the full order book
@@ -11443,12 +11455,13 @@
             Update interval in milliseconds, either 100 or 1000. Defaults to 1000
             </summary>
         </member>
-        <member name="M:Binance.Net.Objects.Spot.BinanceOrderBookOptions.#ctor(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+        <member name="M:Binance.Net.Objects.Spot.BinanceOrderBookOptions.#ctor(System.Nullable{System.Int32},System.Nullable{System.Int32},Binance.Net.Interfaces.IBinanceSocketClient)">
             <summary>
             Create new options
             </summary>
             <param name="limit">The top amount of results to keep in sync. If for example limit=10 is used, the order book will contain the 10 best bids and 10 best asks. Leaving this null will sync the full order book</param>
             <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+            <param name="client">The client to use for the socket connection. When using the same client for multiple order books the connection can be shared.</param>
         </member>
         <member name="T:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralAdjustLtvHistory">
             <summary>

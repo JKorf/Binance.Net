@@ -1,6 +1,4 @@
-﻿using System;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Futures.FuturesData
 {
@@ -12,12 +10,12 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// Account alias
         /// </summary>
-        public string AccountAlias { get; set; } = "";
+        public string AccountAlias { get; set; } = string.Empty;
 
         /// <summary>
         /// The asset this balance is for
         /// </summary>
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
 
         /// <summary>
         /// The total balance of this asset

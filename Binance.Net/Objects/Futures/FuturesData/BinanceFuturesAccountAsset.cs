@@ -10,7 +10,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// Asset
         /// </summary>
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
 
         /// <summary>
         /// Initial Margin

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Binance.Net.Interfaces;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.ExchangeInterfaces;

@@ -11,7 +11,6 @@ using Binance.Net.Objects.Spot.WalletData;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Binance.Net.SubClients
 {

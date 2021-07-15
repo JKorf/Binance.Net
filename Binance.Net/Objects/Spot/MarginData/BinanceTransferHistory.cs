@@ -18,11 +18,11 @@ namespace Binance.Net.Objects.Spot.MarginData
         /// <summary>
         /// Asset of the transfer
         /// </summary>
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Status of the transfer
         /// </summary>
-        public string Status { get; set; } = "";
+        public string Status { get; set; } = string.Empty;
         /// <summary>
         /// Timestamp of the transaction
         /// </summary>

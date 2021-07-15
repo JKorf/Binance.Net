@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Binance.Net.Objects.Futures.FuturesData
 {
@@ -39,7 +38,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// The indicator name
         /// </summary>
-        public string Indicator { get; set; } = "";
+        public string Indicator { get; set; } = string.Empty;
         /// <summary>
         /// Current value of the indicator
         /// </summary>

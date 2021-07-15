@@ -21,7 +21,7 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// <summary>
         /// The contingency type
         /// </summary>
-        public string ContingencyType { get; set; } = "";
+        public string ContingencyType { get; set; } = string.Empty;
         /// <summary>
         /// The order list status
         /// </summary>
@@ -35,7 +35,7 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// <summary>
         /// The client id of the order list
         /// </summary>
-        public string ListClientOrderId { get; set; } = "";
+        public string ListClientOrderId { get; set; } = string.Empty;
         /// <summary>
         /// The transaction time
         /// </summary>
@@ -44,16 +44,16 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// <summary>
         /// The symbol of the order list
         /// </summary>
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The order in this list
         /// </summary>
-        public IEnumerable<BinanceOrderId> Orders { get; set; } = new List<BinanceOrderId>();
+        public IEnumerable<BinanceOrderId> Orders { get; set; } = Array.Empty<BinanceOrderId>();
         /// <summary>
         /// The order details
         /// </summary>
         [JsonOptionalProperty]
-        public IEnumerable<BinancePlacedOcoOrder> OrderReports { get; set; } = new List<BinancePlacedOcoOrder>();
+        public IEnumerable<BinancePlacedOcoOrder> OrderReports { get; set; } = Array.Empty<BinancePlacedOcoOrder>();
     }
 
     /// <summary>
@@ -64,7 +64,7 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// <summary>
         /// The symbol of the order
         /// </summary>
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The id of the order
         /// </summary>
@@ -72,7 +72,7 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// <summary>
         /// The client order id
         /// </summary>
-        public string ClientOrderId { get; set; } = "";
+        public string ClientOrderId { get; set; } = string.Empty;
     }
 
     /// <summary>

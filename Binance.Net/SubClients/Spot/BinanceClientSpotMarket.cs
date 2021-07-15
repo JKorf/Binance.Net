@@ -8,7 +8,6 @@ using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.SubClients.Spot;
-using Binance.Net.Objects.Shared;
 using Binance.Net.Objects.Spot.MarketData;
 using Binance.Net.Objects.Spot.WalletData;
 using CryptoExchange.Net;

@@ -123,9 +123,7 @@ namespace Binance.Net.Objects.Spot
         /// <param name="futuresUsdtBaseAddress">Сustom url for USDT-M futures API</param>
         /// <param name="futuresCoinBaseAddress">Сustom url for Coin-M futures API</param>
         /// <param name="client">HttpClient to use for requests from this client</param>
-#pragma warning disable 8618
         public BinanceClientOptions(string spotBaseAddress, string? futuresUsdtBaseAddress, string? futuresCoinBaseAddress, HttpClient? client) : base(spotBaseAddress)
-#pragma warning restore 8618
         {
             HttpClient = client;
             BaseAddressCoinFutures = futuresCoinBaseAddress;

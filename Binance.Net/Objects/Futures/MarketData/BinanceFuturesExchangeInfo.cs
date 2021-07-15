@@ -13,7 +13,7 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// <summary>
         /// The timezone the server uses
         /// </summary>
-        public string TimeZone { get; set; } = "";
+        public string TimeZone { get; set; } = string.Empty;
         /// <summary>
         /// The current server time
         /// </summary>
@@ -22,11 +22,11 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// <summary>
         /// The rate limits used
         /// </summary>
-        public IEnumerable<BinanceRateLimit> RateLimits { get; set; } = new List<BinanceRateLimit>();
+        public IEnumerable<BinanceRateLimit> RateLimits { get; set; } = Array.Empty<BinanceRateLimit>();
         /// <summary>
         /// Filters
         /// </summary>
-        public IEnumerable<object> ExchangeFilters { get; set; } = new List<object>();
+        public IEnumerable<object> ExchangeFilters { get; set; } = Array.Empty<object>();
     }
 
     /// <summary>
@@ -37,12 +37,12 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// <summary>
         /// All symbols supported
         /// </summary>
-        public IEnumerable<BinanceFuturesUsdtSymbol> Symbols { get; set; } = new List<BinanceFuturesUsdtSymbol>();
+        public IEnumerable<BinanceFuturesUsdtSymbol> Symbols { get; set; } = Array.Empty<BinanceFuturesUsdtSymbol>();
 
         /// <summary>
         /// All assets
         /// </summary>
-        public IEnumerable<BinanceFuturesUsdtAsset> Assets { get; set; } = new List<BinanceFuturesUsdtAsset>();
+        public IEnumerable<BinanceFuturesUsdtAsset> Assets { get; set; } = Array.Empty<BinanceFuturesUsdtAsset>();
     }
 
     /// <summary>
@@ -53,6 +53,6 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// <summary>
         /// All symbols supported
         /// </summary>
-        public IEnumerable<BinanceFuturesCoinSymbol> Symbols { get; set; } = new List<BinanceFuturesCoinSymbol>();
+        public IEnumerable<BinanceFuturesCoinSymbol> Symbols { get; set; } = Array.Empty<BinanceFuturesCoinSymbol>();
     }
 }

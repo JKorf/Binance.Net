@@ -72,6 +72,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// <returns>The account information</returns>
         Task<WebCallResult<BinanceAccountInfo>> GetAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default);
 
+        /// <summary>
         /// Gets information of coins for a user
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>

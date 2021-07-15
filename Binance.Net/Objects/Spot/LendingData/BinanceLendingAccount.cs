@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Spot.LendingData
@@ -37,7 +38,7 @@ namespace Binance.Net.Objects.Spot.LendingData
         /// Position amounts
         /// </summary>
         [JsonProperty("positionAmountVos")]
-        public IEnumerable<BinanceLendingPositionAmount> PositionAmounts { get; set; } = new List<BinanceLendingPositionAmount>();
+        public IEnumerable<BinanceLendingPositionAmount> PositionAmounts { get; set; } = Array.Empty<BinanceLendingPositionAmount>();
     }
 
     /// <summary>
@@ -60,6 +61,6 @@ namespace Binance.Net.Objects.Spot.LendingData
         /// <summary>
         /// Asset name
         /// </summary>
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
     }
 }

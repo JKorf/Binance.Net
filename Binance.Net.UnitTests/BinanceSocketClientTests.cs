@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Binance.Net.Objects;
 using Binance.Net.UnitTests.TestImplementations;
 using NUnit.Framework;
-using CryptoExchange.Net.Logging;
 using Binance.Net.Objects.Spot.UserStream;
 using Binance.Net.Objects.Spot.MarketStream;
 using Binance.Net.Enums;

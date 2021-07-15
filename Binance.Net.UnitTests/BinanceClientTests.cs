@@ -19,9 +19,7 @@ using Binance.Net.Objects.Spot.UserData;
 using Binance.Net.Objects.Spot.MarginData;
 using Binance.Net.Objects.Spot;
 using Binance.Net.Enums;
-using Binance.Net.Objects.Futures;
 using Binance.Net.Objects.Futures.FuturesData;
-using CryptoExchange.Net.Logging;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 

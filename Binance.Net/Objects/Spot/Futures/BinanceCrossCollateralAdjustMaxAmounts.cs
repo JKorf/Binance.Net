@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Binance.Net.Objects.Spot.Futures
+﻿namespace Binance.Net.Objects.Spot.Futures
 {
     /// <summary>
     /// Max amounts

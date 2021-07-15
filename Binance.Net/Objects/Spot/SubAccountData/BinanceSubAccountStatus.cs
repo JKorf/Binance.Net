@@ -13,7 +13,7 @@ namespace Binance.Net.Objects.Spot.SubAccountData
         /// User email
         /// </summary>
         [JsonProperty("email")]
-        public string Email { get; set; } = "";
+        public string Email { get; set; } = string.Empty;
 
         /// <summary>
         /// Sub account user enabled

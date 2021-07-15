@@ -12,7 +12,7 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         /// <summary>
         /// Email
         /// </summary>
-        public string Email { get; set; } = "";
+        public string Email { get; set; } = string.Empty;
         
         /// <summary>
         /// Create Date

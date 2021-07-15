@@ -1,5 +1,4 @@
 ﻿using Binance.Net.Interfaces.SocketSubClient;
-using Binance.Net.SocketSubClients;
 using CryptoExchange.Net.Interfaces;
 
 namespace Binance.Net.Interfaces

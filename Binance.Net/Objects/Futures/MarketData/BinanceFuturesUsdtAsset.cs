@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Binance.Net.Objects.Futures.MarketData
+﻿namespace Binance.Net.Objects.Futures.MarketData
 {
     /// <summary>
     /// Asset info
@@ -12,7 +8,7 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// <summary>
         /// Name of the asset
         /// </summary>
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Whether the asset can be used as margin in Multi-Assets mode
         /// </summary>

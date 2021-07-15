@@ -5,20 +5,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
-using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.SocketSubClient;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Blvt;
 using Binance.Net.Objects.Spot;
-using Binance.Net.Objects.Spot.MarketData;
 using Binance.Net.Objects.Spot.MarketStream;
-using Binance.Net.Objects.Spot.UserStream;
-using CryptoExchange.Net;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Binance.Net.SocketSubClients
 {
@@ -36,7 +31,7 @@ namespace Binance.Net.SocketSubClients
 
         private readonly BinanceSocketClient _baseClient;
         private readonly Log _log;
-        private readonly string _baseAddress;
+        private readonly string? _baseAddress;
 
         internal BinanceSocketClientBlvt(Log log, BinanceSocketClient baseClient, BinanceSocketClientOptions options)
         {
@@ -101,6 +96,9 @@ namespace Binance.Net.SocketSubClients
 
         private async Task<CallResult<UpdateSubscription>> Subscribe<T>(IEnumerable<string> topics, Action<DataEvent<T>> onData)
         {
+            if (_baseAddress == null)
+                throw new ArgumentNullException("BaseAddress", "No API address provided for the futures API, check the client options");
+
             return await _baseClient.SubscribeInternal(_baseAddress + "stream", topics, onData).ConfigureAwait(false);
         }
     }

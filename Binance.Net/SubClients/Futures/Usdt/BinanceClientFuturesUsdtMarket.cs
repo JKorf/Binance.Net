@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Converters;
@@ -11,7 +9,6 @@ using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.SubClients.Futures;
 using Binance.Net.Objects.Futures.MarketData;
-using Binance.Net.Objects.Shared;
 using Binance.Net.Objects.Spot.MarketData;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
@@ -30,7 +27,6 @@ namespace Binance.Net.SubClients.Futures.Usdt
         private const string price24HEndpoint = "ticker/24hr";
         private const string allPricesEndpoint = "ticker/price";
         private const string bookPricesEndpoint = "ticker/bookTicker";
-        private const string allForcedOrdersEndpoint = "allForceOrders";
         private const string openInterestEndpoint = "openInterest";
         private const string openInterestHistoryEndpoint = "openInterestHist";
         private const string takerBuySellVolumeRatioEndpoint = "takerlongshortRatio";

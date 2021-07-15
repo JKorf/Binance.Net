@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
@@ -19,7 +18,7 @@ namespace Binance.Net.Objects.BSwap
         /// <summary>
         /// Name
         /// </summary>
-        public string PoolName { get; set; } = "";
+        public string PoolName { get; set; } = string.Empty;
         /// <summary>
         /// Update time
         /// </summary>

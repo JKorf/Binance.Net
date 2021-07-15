@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
@@ -39,7 +38,7 @@ namespace Binance.Net.SocketSubClients
         /// <summary>
         /// Base address
         /// </summary>
-        protected override string BaseAddress { get; }
+        protected override string? BaseAddress { get; }
 
         internal BinanceSocketClientFuturesCoin(Log log, BinanceSocketClient baseClient,
             BinanceSocketClientOptions options) : base(log, baseClient)

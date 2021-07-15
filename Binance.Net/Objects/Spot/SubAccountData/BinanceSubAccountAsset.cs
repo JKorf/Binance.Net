@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Binance.Net.Objects.Spot.SpotData;
 using Newtonsoft.Json;
 
@@ -8,7 +9,7 @@ namespace Binance.Net.Objects.Spot.SubAccountData
     {
         public bool Success { get; set; }
         [JsonProperty("msg")]
-        public string Message { get; set; } = "";
-        public List<BinanceBalance> Balances { get; set; } = new List<BinanceBalance>();
+        public string Message { get; set; } = string.Empty;
+        public IEnumerable<BinanceBalance> Balances { get; set; } = Array.Empty<BinanceBalance>();
     }
 }

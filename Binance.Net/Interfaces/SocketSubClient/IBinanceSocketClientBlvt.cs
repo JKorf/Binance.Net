@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Binance.Net.Enums;
-using Binance.Net.Objects;
 using Binance.Net.Objects.Blvt;
 using Binance.Net.Objects.Spot.MarketStream;
 using CryptoExchange.Net.Objects;

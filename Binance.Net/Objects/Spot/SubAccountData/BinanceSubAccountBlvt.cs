@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Binance.Net.Converters;
-using Binance.Net.Enums;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
-
-namespace Binance.Net.Objects.Spot.SubAccountData
+﻿namespace Binance.Net.Objects.Spot.SubAccountData
 {
     /// <summary>
     /// Sub account details
@@ -15,7 +8,7 @@ namespace Binance.Net.Objects.Spot.SubAccountData
         /// <summary>
         /// The email associated with the sub account
         /// </summary>
-        public string Email { get; set; } = "";      
+        public string Email { get; set; } = string.Empty;      
         /// <summary>
         /// Blvt enabled
         /// </summary>

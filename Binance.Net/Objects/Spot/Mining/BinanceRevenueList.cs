@@ -23,7 +23,7 @@ namespace Binance.Net.Objects.Spot.Mining
         /// <summary>
         /// Revenue items
         /// </summary>
-        public IEnumerable<BinanceRevenueItem> AccountProfits { get; set; } = new List<BinanceRevenueItem>();
+        public IEnumerable<BinanceRevenueItem> AccountProfits { get; set; } = Array.Empty<BinanceRevenueItem>();
     }
 
     /// <summary>
@@ -40,7 +40,7 @@ namespace Binance.Net.Objects.Spot.Mining
         /// Coin
         /// </summary>
         [JsonProperty("coinName")]
-        public string Coin { get; set; } = "";
+        public string Coin { get; set; } = string.Empty;
         /// <summary>
         /// Earning type
         /// </summary>

@@ -1,7 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Binance.Net.Objects.Other
 {
@@ -14,24 +11,24 @@ namespace Binance.Net.Objects.Other
         /// Name of the symbol
         /// </summary>
         [JsonProperty("s")]
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
         /// Status of the symbol
         /// </summary>
         [JsonProperty("st")]
-        public string Status { get; set; }
+        public string Status { get; set; } = string.Empty;
 
         /// <summary>
         /// Name of the base asset
         /// </summary>
         [JsonProperty("b")]
-        public string BaseAsset { get; set; }
+        public string BaseAsset { get; set; } = string.Empty;
         /// <summary>
         /// Name of the quote asset
         /// </summary>
         [JsonProperty("q")]
-        public string QuoteAsset { get; set; }
+        public string QuoteAsset { get; set; } = string.Empty;
 
         /// <summary>
         /// Char of the base asset
@@ -48,12 +45,12 @@ namespace Binance.Net.Objects.Other
         /// Base asset name
         /// </summary>
         [JsonProperty("an")]
-        public string BaseAssetName { get; set; }
+        public string BaseAssetName { get; set; } = string.Empty;
         /// <summary>
         /// Quote asset name
         /// </summary>
         [JsonProperty("qn")]
-        public string QuoteAssetName { get; set; }
+        public string QuoteAssetName { get; set; } = string.Empty;
 
         /// <summary>
         /// Open price

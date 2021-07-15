@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Binance.Net
+﻿namespace Binance.Net
 {
     /// <summary>
     /// Api addresses
@@ -12,11 +8,11 @@ namespace Binance.Net
         /// <summary>
         /// The address used by the BinanceClient for the Spot API
         /// </summary>
-        public string RestClientAddress { get; set; }
+        public string RestClientAddress { get; set; } = "";
         /// <summary>
         /// The address used by the BinanceSocketClient for the Spot API
         /// </summary>
-        public string SocketClientAddress { get; set; }
+        public string SocketClientAddress { get; set; } = "";
 
         /// <summary>
         /// The address used by the BinanceClient for the USD futures API

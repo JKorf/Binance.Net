@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
@@ -14,7 +13,7 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// <summary>
         /// The symbol
         /// </summary>
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Timestamp
         /// </summary>
@@ -25,7 +24,7 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// Base asset list
         /// </summary>
         [JsonProperty("baseAssetList")]
-        public IEnumerable<BinanceFuturesCompositeIndexInfoAsset> BaseAssets { get; set; } = new BinanceFuturesCompositeIndexInfoAsset[0];
+        public IEnumerable<BinanceFuturesCompositeIndexInfoAsset> BaseAssets { get; set; } = Array.Empty<BinanceFuturesCompositeIndexInfoAsset>();
     }
 
     /// <summary>
@@ -36,7 +35,7 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// <summary>
         /// Base asset name
         /// </summary>
-        public string BaseAsset { get; set; } = "";
+        public string BaseAsset { get; set; } = string.Empty;
         /// <summary>
         /// Weight in quantity
         /// </summary>

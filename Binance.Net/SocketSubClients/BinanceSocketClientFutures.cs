@@ -4,19 +4,16 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.SocketSubClient;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Futures.MarketStream;
 using Binance.Net.Objects.Futures.UserStream;
-using Binance.Net.Objects.Spot;
 using Binance.Net.Objects.Spot.MarketStream;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.Extensions.Logging;
 
@@ -53,7 +50,7 @@ namespace Binance.Net.SocketSubClients
         /// <summary>
         /// Base address
         /// </summary>
-        protected abstract string BaseAddress { get; }
+        protected abstract string? BaseAddress { get; }
 
         internal BinanceSocketClientFutures(Log log, BinanceSocketClient baseClient)
         {

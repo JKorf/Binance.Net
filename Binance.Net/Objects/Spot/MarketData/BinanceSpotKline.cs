@@ -1,5 +1,4 @@
-﻿using System;
-using Binance.Net.Objects.Shared;
+﻿using Binance.Net.Objects.Shared;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 

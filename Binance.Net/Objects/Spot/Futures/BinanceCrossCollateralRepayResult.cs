@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Binance.Net.Objects.Spot.Futures
+﻿namespace Binance.Net.Objects.Spot.Futures
 {
     /// <summary>
     /// Repay result
@@ -12,15 +8,15 @@ namespace Binance.Net.Objects.Spot.Futures
         /// <summary>
         /// Id
         /// </summary>
-        public string RepayId { get; set; } = "";
+        public string RepayId { get; set; } = string.Empty;
         /// <summary>
         /// The coin borrowed
         /// </summary>
-        public string Coin { get; set; } = "";
+        public string Coin { get; set; } = string.Empty;
         /// <summary>
         /// The coin used for collateral
         /// </summary>
-        public string CollateralCoin { get; set; } = "";
+        public string CollateralCoin { get; set; } = string.Empty;
         /// <summary>
         /// The amount borrowed
         /// </summary>

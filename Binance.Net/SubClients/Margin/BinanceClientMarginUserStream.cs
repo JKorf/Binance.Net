@@ -3,7 +3,6 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Interfaces.SubClients;
-using Binance.Net.Interfaces.SubClients.Margin;
 using Binance.Net.Objects.Spot.UserData;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;

@@ -6,8 +6,6 @@ using Binance.Net.Enums;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Futures.FuturesData;
 using Binance.Net.Objects.Futures.MarketData;
-using Binance.Net.SubClients.Futures.Coin;
-using Binance.Net.SubClients.Futures.Usdt;
 using CryptoExchange.Net.Objects;
 
 namespace Binance.Net.Interfaces.SubClients.Futures

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Binance.Net.Objects.Futures.MarketData;
 using CryptoExchange.Net.Objects;
 
 namespace Binance.Net.Interfaces.SubClients.Futures

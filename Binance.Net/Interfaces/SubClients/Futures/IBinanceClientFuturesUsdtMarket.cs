@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Enums;
 using Binance.Net.Objects.Futures.MarketData;
-using Binance.Net.Objects.Shared;
 using Binance.Net.Objects.Spot.MarketData;
 using CryptoExchange.Net.Objects;
 

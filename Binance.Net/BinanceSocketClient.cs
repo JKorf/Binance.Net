@@ -140,7 +140,7 @@ namespace Binance.Net
                 return false;
 
             var result = message["result"];
-            if (result?.Type == JTokenType.Null)
+            if (result != null && result.Type == JTokenType.Null)
             {
                 callResult = new CallResult<object>(null, null);
                 return true;

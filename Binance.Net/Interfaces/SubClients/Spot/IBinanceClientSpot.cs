@@ -1,5 +1,4 @@
 ﻿using Binance.Net.Objects.Spot.WalletData;
-using Binance.Net.SubClients.Spot;
 using CryptoExchange.Net.Objects;
 using System.Threading;
 using System.Threading.Tasks;

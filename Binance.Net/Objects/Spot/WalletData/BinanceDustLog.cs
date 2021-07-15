@@ -13,7 +13,7 @@ namespace Binance.Net.Objects.Spot.WalletData
     internal class BinanceDustLogList
     {
         public int Total { get; set; }
-        public IEnumerable<BinanceDustLog> Rows { get; set; } = new List<BinanceDustLog>();
+        public IEnumerable<BinanceDustLog> Rows { get; set; } = Array.Empty<BinanceDustLog>();
     }
 
     /// <summary>
@@ -40,7 +40,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// Detail logs
         /// </summary>
         [JsonProperty("logs")]
-        public IEnumerable<BinanceDustLogDetails> Logs { get; set; } = new List<BinanceDustLogDetails>();
+        public IEnumerable<BinanceDustLogDetails> Logs { get; set; } = Array.Empty<BinanceDustLogDetails>();
         /// <summary>
         /// Timestamp
         /// </summary>
@@ -87,6 +87,6 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// Asset
         /// </summary>
         [JsonProperty("fromAsset")]
-        public string FromAsset { get; set; } = "";
+        public string FromAsset { get; set; } = string.Empty;
     }
 }

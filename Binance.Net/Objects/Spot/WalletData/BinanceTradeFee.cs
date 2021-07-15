@@ -22,7 +22,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// <summary>
         /// The symbol this fee is for
         /// </summary>
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The fee for trades where you're the maker
         /// </summary>

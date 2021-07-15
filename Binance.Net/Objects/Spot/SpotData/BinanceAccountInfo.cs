@@ -55,11 +55,11 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// Permissions types
         /// </summary>
         [JsonProperty(ItemConverterType = typeof(AccountTypeConverter))]
-        public IEnumerable<AccountType> Permissions { get; set; } = new List<AccountType>();
+        public IEnumerable<AccountType> Permissions { get; set; } = Array.Empty<AccountType>();
         /// <summary>
         /// List of assets with their current balances
         /// </summary>
-        public IEnumerable<BinanceBalance> Balances { get; set; } = new List<BinanceBalance>();
+        public IEnumerable<BinanceBalance> Balances { get; set; } = Array.Empty<BinanceBalance>();
     }
 
     /// <summary>
@@ -70,7 +70,7 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// <summary>
         /// The asset this balance is for
         /// </summary>
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// The amount that isn't locked in a trade
         /// </summary>

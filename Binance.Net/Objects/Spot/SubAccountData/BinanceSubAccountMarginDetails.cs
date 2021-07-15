@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Binance.Net.Objects.Spot.MarginData;
 using Newtonsoft.Json;
 
@@ -12,7 +13,7 @@ namespace Binance.Net.Objects.Spot.SubAccountData
         /// <summary>
         /// Email of the account
         /// </summary>
-        public string Email { get; set; } = "";
+        public string Email { get; set; } = string.Empty;
         /// <summary>
         /// Margin level
         /// </summary>
@@ -38,7 +39,7 @@ namespace Binance.Net.Objects.Spot.SubAccountData
         /// Asset list
         /// </summary>
         [JsonProperty("marginUserAssetVoList")]
-        public IEnumerable<BinanceMarginBalance> MarginUserAssets { get; set; } = new List<BinanceMarginBalance>();
+        public IEnumerable<BinanceMarginBalance> MarginUserAssets { get; set; } = Array.Empty<BinanceMarginBalance>();
     }
 
     /// <summary>

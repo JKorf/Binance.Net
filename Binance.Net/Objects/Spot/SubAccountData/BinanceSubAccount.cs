@@ -23,7 +23,7 @@ namespace Binance.Net.Objects.Spot.SubAccountData
         /// <summary>
         /// The email associated with the sub account
         /// </summary>
-        public string Email { get; set; } = "";
+        public string Email { get; set; } = string.Empty;
         /// <summary>
         /// The status of the sub account
         /// </summary>
@@ -36,7 +36,7 @@ namespace Binance.Net.Objects.Spot.SubAccountData
         /// <summary>
         /// The mobile associated with the sub account
         /// </summary>
-        public string Mobile { get; set; } = "";
+        public string Mobile { get; set; } = string.Empty;
         /// <summary>
         /// If Google authentication is enabled
         /// </summary>

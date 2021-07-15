@@ -14,7 +14,7 @@ namespace Binance.Net.Objects
         /// The stream combined
         /// </summary>
         [JsonProperty("stream")]
-        public string Stream { get; set; } = "";
+        public string Stream { get; set; } = string.Empty;
 
         /// <summary>
         /// The data of stream

@@ -17,6 +17,6 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// The execution message
         /// </summary>
         [JsonProperty("msg")]
-        public string Message { get; set; } = "";
+        public string Message { get; set; } = string.Empty;
     }
 }

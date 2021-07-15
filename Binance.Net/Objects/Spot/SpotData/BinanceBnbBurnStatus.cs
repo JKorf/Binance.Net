@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Binance.Net.Objects.Spot.SpotData
+﻿namespace Binance.Net.Objects.Spot.SpotData
 {
     /// <summary>
     /// Bnb burn status

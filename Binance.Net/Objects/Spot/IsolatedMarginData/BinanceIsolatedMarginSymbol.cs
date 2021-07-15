@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Binance.Net.Objects.Spot.IsolatedMarginData
+﻿namespace Binance.Net.Objects.Spot.IsolatedMarginData
 {
     /// <summary>
     /// Isolated margin symbol info
@@ -12,15 +8,15 @@ namespace Binance.Net.Objects.Spot.IsolatedMarginData
         /// <summary>
         /// Symbol name
         /// </summary>
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Base asset
         /// </summary>
-        public string Base { get; set; } = "";
+        public string Base { get; set; } = string.Empty;
         /// <summary>
         /// Quote asset
         /// </summary>
-        public string Quote { get; set; } = "";
+        public string Quote { get; set; } = string.Empty;
         /// <summary>
         /// Margin trade
         /// </summary>

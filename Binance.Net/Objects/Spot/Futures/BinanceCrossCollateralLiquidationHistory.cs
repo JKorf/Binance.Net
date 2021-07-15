@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
@@ -19,7 +17,7 @@ namespace Binance.Net.Objects.Spot.Futures
         /// <summary>
         /// Collateral coin
         /// </summary>
-        public string CollateralCoin { get; set; } = "";
+        public string CollateralCoin { get; set; } = string.Empty;
         /// <summary>
         /// Start time of liquidation
         /// </summary>
@@ -28,7 +26,7 @@ namespace Binance.Net.Objects.Spot.Futures
         /// <summary>
         /// Coin
         /// </summary>
-        public string Coin { get; set; } = "";
+        public string Coin { get; set; } = string.Empty;
         /// <summary>
         /// Rest collateral amount after liquidation
         /// </summary>
@@ -41,6 +39,6 @@ namespace Binance.Net.Objects.Spot.Futures
         /// <summary>
         /// Status
         /// </summary>
-        public string Status { get; set; } = "";
+        public string Status { get; set; } = string.Empty;
     }
 }

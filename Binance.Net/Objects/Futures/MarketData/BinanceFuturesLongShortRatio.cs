@@ -13,7 +13,7 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// The symbol or pair the information is about
         /// </summary>
         [JsonProperty("symbol")]
-        public string SymbolPair { get; set; } = "";
+        public string SymbolPair { get; set; } = string.Empty;
 
         [JsonProperty("pair")]
         private string Pair

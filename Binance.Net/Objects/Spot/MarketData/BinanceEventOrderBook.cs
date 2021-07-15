@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Binance.Net.Interfaces;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
@@ -28,7 +27,7 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// Event type
         /// </summary>
         [JsonProperty("e")]
-        internal string EventType { get; set; } = "";
+        internal string EventType { get; set; } = string.Empty;
 
         /// <summary>
         /// Event time of the update

@@ -2,7 +2,6 @@
 using Binance.Net.Objects;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -63,11 +62,11 @@ namespace Binance.Net
         /// <summary>
         /// Event triggered when an order is placed via this client. Only available for Spot orders
         /// </summary>
-        public event Action<ICommonOrderId> OnOrderPlaced;
+        public event Action<ICommonOrderId>? OnOrderPlaced;
         /// <summary>
         /// Event triggered when an order is cancelled via this client. Note that this does not trigger when using CancelAllOrdersAsync. Only available for Spot orders
         /// </summary>
-        public event Action<ICommonOrderId> OnOrderCanceled;
+        public event Action<ICommonOrderId>? OnOrderCanceled;
 
         #region Subclients
         /// <summary>
@@ -157,7 +156,7 @@ namespace Binance.Net
             arraySerialization = ArrayParametersSerialization.MultipleValues;
             postParametersPosition = PostParameters.InBody;
             requestBodyFormat = RequestBodyFormat.FormData;
-            requestBodyEmptyContent = "";
+            requestBodyEmptyContent = string.Empty;
 
             Spot = new BinanceClientSpot(log, this);
             Brokerage = new BinanceClientBrokerage(this);
@@ -547,7 +546,7 @@ namespace Binance.Net
             if (string.IsNullOrEmpty(symbol))
                 return WebCallResult<ICommonOrder>.CreateErrorResult(new ArgumentError(nameof(symbol) + " required for Binance " + nameof(IExchangeClient.GetOrderAsync)));
 
-            var result = await Spot.Order.GetOrderAsync(symbol, long.Parse(orderId)).ConfigureAwait(false);
+            var result = await Spot.Order.GetOrderAsync(symbol!, long.Parse(orderId)).ConfigureAwait(false);
             return result.As<ICommonOrder>(result.Data);
         }
 

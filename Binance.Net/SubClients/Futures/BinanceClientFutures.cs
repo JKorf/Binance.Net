@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,7 +11,6 @@ using Binance.Net.Interfaces.SubClients.Futures;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Futures.FuturesData;
 using Binance.Net.Objects.Futures.MarketData;
-using Binance.Net.Objects.Spot.WalletData;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Logging;

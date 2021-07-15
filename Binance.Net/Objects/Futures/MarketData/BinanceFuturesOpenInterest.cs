@@ -14,7 +14,7 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// <summary>
         /// The symbol the information is about
         /// </summary>
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
         /// Open Interest info
@@ -36,7 +36,7 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// <summary>
         /// The pair
         /// </summary>
-        public string Pair { get; set; } = "";
+        public string Pair { get; set; } = string.Empty;
         /// <summary>
         /// The contract type
         /// </summary>

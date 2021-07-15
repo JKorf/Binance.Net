@@ -9,8 +9,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Interfaces;
-using Binance.Net.Objects;
-using Binance.Net.Objects.Futures;
 using Binance.Net.Objects.Spot;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Interfaces;

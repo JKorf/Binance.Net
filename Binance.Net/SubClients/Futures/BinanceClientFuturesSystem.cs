@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Interfaces.SubClients.Futures;
-using Binance.Net.Objects.Futures.MarketData;
 using Binance.Net.Objects.Spot.MarketData;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;

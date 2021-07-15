@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Binance.Net.Enums;
-using Binance.Net.Objects.Shared;
 using Binance.Net.Objects.Spot.MarketData;
 using Binance.Net.Objects.Spot.WalletData;
 using CryptoExchange.Net.Objects;
