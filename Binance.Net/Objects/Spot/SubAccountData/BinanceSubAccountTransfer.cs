@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Spot.SubAccountData
 {
-    internal class BinanceSubAccountTransferWrapper
-    {
-        [JsonProperty("msg")]
-        public string? Message { get; set; }
-        public bool Success { get; set; }
-        public IEnumerable<BinanceSubAccountTransfer>? Transfers { get; set; }
-    }
-
     /// <summary>
     /// Sub account transfer info
     /// </summary>
@@ -40,5 +31,14 @@ namespace Binance.Net.Objects.Spot.SubAccountData
         /// </summary>
         [JsonProperty("time"), JsonConverter(typeof(TimestampConverter))]
         public DateTime Timestamp { get; set; }
+        /// <summary>
+        /// Status of the transaction
+        /// </summary>
+        public string Status { get; set; } = "";
+        /// <summary>
+        /// Transaction Id
+        /// </summary>
+        [JsonProperty("tranId")]
+        public long TransactionId { get; set; }
     }
 }

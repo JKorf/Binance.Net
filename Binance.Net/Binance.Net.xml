@@ -17309,24 +17309,9 @@
             The email associated with the sub account
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccount.Status">
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccount.IsFreeze">
             <summary>
-            The status of the sub account
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccount.Activated">
-            <summary>
-            Whether or not the sub account has been activated
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccount.Mobile">
-            <summary>
-            The mobile associated with the sub account
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccount.GoogleAuthentication">
-            <summary>
-            If Google authentication is enabled
+            Is account frozen
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccount.CreateTime">
@@ -17952,6 +17937,16 @@
         <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountTransfer.Timestamp">
             <summary>
             The timestamp of the transfer
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountTransfer.Status">
+            <summary>
+            Status of the transaction
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountTransfer.TransactionId">
+            <summary>
+            Transaction Id
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountTransferResult">
