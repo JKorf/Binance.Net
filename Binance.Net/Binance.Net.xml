@@ -18344,19 +18344,9 @@
             Account status info
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceAccountStatus.Message">
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceAccountStatus.Data">
             <summary>
-            The result message
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceAccountStatus.Success">
-            <summary>
-            Success boolean
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceAccountStatus.Objects">
-            <summary>
-            Parameters
+            The result status
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceDepositAddress">
@@ -18512,11 +18502,6 @@
         <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceDustLogDetails.ServiceChargeAmount">
             <summary>
             Service charge
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceDustLogDetails.UId">
-            <summary>
-            Identifier
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceDustLogDetails.Amount">
@@ -18939,26 +18924,6 @@
             Status string for deposit
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawalList">
-            <summary>
-            Wrapper for list of withdrawals
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawalList.List">
-            <summary>
-            The list of withdrawals
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawalList.Success">
-            <summary>
-            Boolean indicating if the withdrawal list retrieval was successful
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawalList.Message">
-            <summary>
-            Message what went wrong if retrieving wasn't successful
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawal">
             <summary>
             Information about a withdrawal
@@ -18999,14 +18964,24 @@
             Transaction fee for the withdrawal
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawal.Asset">
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawal.Coin">
             <summary>
-            The asset that was withdrawn
+            The coint that was withdrawn
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawal.Network">
+            <summary>
+            The network
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawal.Status">
             <summary>
             The status of the withdrawal
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawal.TransferType">
+            <summary>
+            The transfer type
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawalPlaced">

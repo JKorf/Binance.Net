@@ -6,13 +6,8 @@ namespace Binance.Net.Objects.Spot.WalletData
 {
     internal class BinanceDustLogListWrapper
     {
-        public bool Success { get; set; }
-        public BinanceDustLogList? Results { get; set; }
-    }
-
-    internal class BinanceDustLogList
-    {
         public int Total { get; set; }
+        [JsonProperty("userAssetDribblets")]
         public IEnumerable<BinanceDustLog> Rows { get; set; } = new List<BinanceDustLog>();
     }
 
@@ -24,27 +19,27 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// <summary>
         /// Total transferred
         /// </summary>
-        [JsonProperty("transfered_total")]
+        [JsonProperty("totalTransferedAmount")]
         public decimal TransferredTotal { get; set; }
         /// <summary>
         /// Total service charge
         /// </summary>
-        [JsonProperty("service_charge_total")]
+        [JsonProperty("totalServiceChargeAmount")]
         public decimal ServiceChargeTotal { get; set; }
         /// <summary>
         /// Transaction id
         /// </summary>
-        [JsonProperty("tran_id")]
+        [JsonProperty("transId")]
         public decimal TransactionId { get; set; }
         /// <summary>
         /// Detail logs
         /// </summary>
-        [JsonProperty("logs")]
+        [JsonProperty("userAssetDribbletDetails")]
         public IEnumerable<BinanceDustLogDetails> Logs { get; set; } = new List<BinanceDustLogDetails>();
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("operate_time")]
+        [JsonProperty("operateTime")]
         public DateTime OperateTime { get; set; }
     }
 
@@ -56,18 +51,13 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// <summary>
         /// Transaction id
         /// </summary>
-        [JsonProperty("tranId")]
+        [JsonProperty("transId")]
         public decimal TransactionId { get; set; }
         /// <summary>
         /// Service charge
         /// </summary>
         [JsonProperty("serviceChargeAmount")]
         public decimal ServiceChargeAmount { get; set; }
-        /// <summary>
-        /// Identifier
-        /// </summary>
-        [JsonProperty("uid")]
-        public long UId { get; set; }
         /// <summary>
         /// Amount
         /// </summary>

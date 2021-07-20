@@ -9,28 +9,6 @@ using Binance.Net.Enums;
 namespace Binance.Net.Objects.Spot.WalletData
 {
     /// <summary>
-    /// Wrapper for list of withdrawals
-    /// </summary>
-    internal class BinanceWithdrawalList
-    {
-        /// <summary>
-        /// The list of withdrawals
-        /// </summary>
-        [JsonProperty("withdrawList")]
-        public IEnumerable<BinanceWithdrawal>? List { get; set; }
-        /// <summary>
-        /// Boolean indicating if the withdrawal list retrieval was successful
-        /// </summary>
-        public bool Success { get; set; }
-        /// <summary>
-        /// Message what went wrong if retrieving wasn't successful
-        /// </summary>
-        [JsonProperty("msg")]
-        [JsonOptionalProperty]
-        public string? Message { get; set; }
-    }
-
-    /// <summary>
     /// Information about a withdrawal
     /// </summary>
     public class BinanceWithdrawal
@@ -66,13 +44,22 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// </summary>
         public decimal TransactionFee { get; set; }
         /// <summary>
-        /// The asset that was withdrawn
+        /// The coint that was withdrawn
         /// </summary>
-        public string Asset { get; set; } = "";
+        public string Coin { get; set; } = "";
+        /// <summary>
+        /// The network
+        /// </summary>
+        public string Network { get; set; } = "";
         /// <summary>
         /// The status of the withdrawal
         /// </summary>
         [JsonConverter(typeof(WithdrawalStatusConverter))]
         public WithdrawalStatus Status { get; set; }
+        /// <summary>
+        /// The transfer type
+        /// </summary>
+        [JsonConverter(typeof(WithdrawDepositTransferTypeConverter))]
+        public WithdrawDepositTransferType TransferType { get; set; }
     }
 }

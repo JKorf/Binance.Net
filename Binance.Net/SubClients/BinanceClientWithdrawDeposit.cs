@@ -11,7 +11,6 @@ using Binance.Net.Objects.Spot.WalletData;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Binance.Net.SubClients
 {
@@ -20,9 +19,9 @@ namespace Binance.Net.SubClients
     /// </summary>
     public class BinanceClientWithdrawDeposit : IBinanceClientWithdrawDeposit
     {
-        private const string assetDetailsEndpoint = "assetDetail.html";
-        private const string withdrawEndpoint = "withdraw.html";
-        private const string withdrawHistoryEndpoint = "withdrawHistory.html";
+        private const string assetDetailsEndpoint = "asset/assetDetail";
+        private const string withdrawEndpoint = "capital/withdraw/apply";
+        private const string withdrawHistoryEndpoint = "capital/withdraw/history";
         private const string depositHistoryEndpoint = "capital/deposit/hisrec";
         private const string depositAddressEndpoint = "capital/deposit/address";
 
@@ -60,13 +59,9 @@ namespace Binance.Net.SubClients
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestInternal<BinanceAssetDetailsWrapper>(_baseClient.GetUrlSpot(assetDetailsEndpoint, "wapi", "3"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
-            if (!result)
-                return new WebCallResult<Dictionary<string, BinanceAssetDetails>>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
-
-            return !result.Data.Success ? 
-                new WebCallResult<Dictionary<string, BinanceAssetDetails>>(result.ResponseStatusCode, result.ResponseHeaders, null, _baseClient.ParseErrorResponseInternal(result.Data.Message!))
-                : new WebCallResult<Dictionary<string, BinanceAssetDetails>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
+            return await _baseClient.SendRequestInternal<Dictionary<string, BinanceAssetDetails>>(
+                    _baseClient.GetUrlSpot(assetDetailsEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true)
+                .ConfigureAwait(false);
         }
         #endregion
 
@@ -125,7 +120,7 @@ namespace Binance.Net.SubClients
             parameters.AddOptionalParameter("addressTag", addressTag);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestInternal<BinanceWithdrawalPlaced>(_baseClient.GetUrlSpot(withdrawEndpoint, "wapi", "3"), HttpMethod.Post, ct, parameters, true, true, PostParameters.InUri).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceWithdrawalPlaced>(_baseClient.GetUrlSpot(withdrawEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
             if (!result || result.Data == null)
                 return result;
 
@@ -178,14 +173,9 @@ namespace Binance.Net.SubClients
             parameters.AddOptionalParameter("endTime", endTime != null ? BinanceClient.ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestInternal<BinanceWithdrawalList>(_baseClient.GetUrlSpot(withdrawHistoryEndpoint, "wapi", "3"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
-            if (!result || result.Data == null)
-                return WebCallResult<IEnumerable<BinanceWithdrawal>>.CreateErrorResult(result.Error ?? new UnknownError("Unknown response"));
-
-            if (!result.Data.Success)
-                return new WebCallResult<IEnumerable<BinanceWithdrawal>>(result.ResponseStatusCode, result.ResponseHeaders, null, _baseClient.ParseErrorResponseInternal(result.Data.Message));
-
-            return new WebCallResult<IEnumerable<BinanceWithdrawal>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.List, null);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceWithdrawal>>(
+                    _baseClient.GetUrlSpot(withdrawHistoryEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true)
+                .ConfigureAwait(false);
         }
 
         #endregion

@@ -9,18 +9,8 @@ namespace Binance.Net.Objects.Spot.WalletData
     public class BinanceAccountStatus
     {
         /// <summary>
-        /// The result message
+        /// The result status
         /// </summary>
-        [JsonProperty("msg")]
-        public string? Message { get; set; }
-        /// <summary>
-        /// Success boolean
-        /// </summary>
-        public bool Success { get; set; }
-        /// <summary>
-        /// Parameters
-        /// </summary>
-        [JsonProperty("objs")]
-        public IEnumerable<object>? Objects { get; set; }
+        public string Data { get; set; } = "";
     }
 }

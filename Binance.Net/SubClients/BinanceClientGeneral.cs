@@ -26,8 +26,8 @@ namespace Binance.Net.SubClients
     {
         private const string accountInfoEndpoint = "account";
         private const string accountSnapshotEndpoint = "accountSnapshot";
-        private const string accountStatusEndpoint = "accountStatus.html";
-        private const string tradingStatusEndpoint = "apiTradingStatus.html";
+        private const string accountStatusEndpoint = "account/status";
+        private const string tradingStatusEndpoint = "account/apiTradingStatus";
 
         private const string dividendRecordsEndpoint = "asset/assetDividend";
 
@@ -36,7 +36,7 @@ namespace Binance.Net.SubClients
         private const string disableFastWithdrawSwitchEndpoint = "account/disableFastWithdrawSwitch";
         private const string enableFastWithdrawSwitchEndpoint = "account/enableFastWithdrawSwitch";
 
-        private const string dustLogEndpoint = "userAssetDribbletLog.html";
+        private const string dustLogEndpoint = "asset/dribblet";
         private const string dustTransferEndpoint = "asset/dust";
 
         private const string toggleBnbBurnEndpoint = "bnbBurn";
@@ -195,11 +195,7 @@ namespace Binance.Net.SubClients
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestInternal<BinanceAccountStatus>(_baseClient.GetUrlSpot(accountStatusEndpoint, "wapi", "3"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
-            if (!result)
-                return new WebCallResult<BinanceAccountStatus>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
-
-            return !result.Data.Success ? new WebCallResult<BinanceAccountStatus>(result.ResponseStatusCode, result.ResponseHeaders, null, _baseClient.ParseErrorResponseInternal(result.Data.Message)) : new WebCallResult<BinanceAccountStatus>(result.ResponseStatusCode, result.ResponseHeaders, result.Data, null);
+            return await _baseClient.SendRequestInternal<BinanceAccountStatus>(_baseClient.GetUrlSpot(accountStatusEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
         #endregion
 
@@ -262,11 +258,11 @@ namespace Binance.Net.SubClients
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestInternal<BinanceTradingStatusWrapper>(_baseClient.GetUrlSpot(tradingStatusEndpoint, "wapi", "3"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceTradingStatusWrapper>(_baseClient.GetUrlSpot(tradingStatusEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result)
                 return new WebCallResult<BinanceTradingStatus>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
 
-            return !result.Data.Success ? new WebCallResult<BinanceTradingStatus>(result.ResponseStatusCode, result.ResponseHeaders, null, new ServerError(result.Data.Message!)) : new WebCallResult<BinanceTradingStatus>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Status, null);
+            return new WebCallResult<BinanceTradingStatus>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
         }
         #endregion
 
@@ -445,7 +441,7 @@ namespace Binance.Net.SubClients
             if (!result)
                 return new WebCallResult<IEnumerable<BinanceDustLog>>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
 
-            return !result.Data.Success ? new WebCallResult<IEnumerable<BinanceDustLog>>(result.ResponseStatusCode, result.ResponseHeaders, null, new ServerError("Unknown server error while requesting dust log")) : new WebCallResult<IEnumerable<BinanceDustLog>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Results!.Rows, null);
+            return new WebCallResult<IEnumerable<BinanceDustLog>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Rows, null);
         }
 
         #endregion
