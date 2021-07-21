@@ -8,7 +8,7 @@ namespace Binance.Net.Objects.Spot.WalletData
     /// <summary>
     /// Dust log response details
     /// </summary>
-    public class BinanceDustLogListWrapper
+    public class BinanceDustLogList
     {
         /// <summary>
         /// Total counts of exchange
