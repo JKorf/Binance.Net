@@ -18477,17 +18477,17 @@
             Info
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceDustLogListWrapper">
+        <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceDustLogList">
             <summary>
             Dust log response details
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceDustLogListWrapper.Total">
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceDustLogList.Total">
             <summary>
             Total counts of exchange
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceDustLogListWrapper.UserAssetDribblets">
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceDustLogList.UserAssetDribblets">
             <summary>
             Rows
             </summary>
