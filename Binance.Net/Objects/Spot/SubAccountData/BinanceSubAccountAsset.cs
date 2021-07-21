@@ -6,6 +6,9 @@ namespace Binance.Net.Objects.Spot.SubAccountData
 {
     internal class BinanceSubAccountAsset
     {
+        public bool Success { get; set; }
+        [JsonProperty("msg")]
+        public string Message { get; set; } = "";
         public List<BinanceBalance> Balances { get; set; } = new List<BinanceBalance>();
     }
 }

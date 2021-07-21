@@ -62,6 +62,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// <summary>
         /// Transfer type: 1 for internal transfer, 0 for external transfer 
         /// </summary>
-        public WithdrawalTransferType TransferType { get; set; }
+        [JsonConverter(typeof(WithdrawDepositTransferTypeConverter))]
+        public WithdrawDepositTransferType TransferType { get; set; }
     }
 }

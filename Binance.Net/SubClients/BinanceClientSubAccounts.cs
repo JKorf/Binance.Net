@@ -23,7 +23,7 @@ namespace Binance.Net.SubClients
     {
         private const string subAccountListEndpoint = "sub-account/list";
         private const string subAccountTransferHistoryEndpoint = "sub-account/sub/transfer/history";
-        private const string transferSubAccountEndpoint = "sub-account/transfer.html";
+        private const string transferSubAccountEndpoint = "sub-account/universalTransfer";
         private const string subAccountStatusEndpoint = "sub-account/status";
         private const string subAccountAssetsEndpoint = "sub-account/assets";
 
@@ -208,7 +208,7 @@ namespace Binance.Net.SubClients
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceSubAccountTransferResult>(_baseClient.GetUrlSpot(transferSubAccountEndpoint, "wapi", "3"), HttpMethod.Post, ct, parameters, true, true, PostParameters.InUri).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceSubAccountTransferResult>(_baseClient.GetUrlSpot(transferSubAccountEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true, true, PostParameters.InUri).ConfigureAwait(false);
         }
 
         #endregion
@@ -254,6 +254,10 @@ namespace Binance.Net.SubClients
             if (!result)
                 return WebCallResult<IEnumerable<BinanceBalance>>.CreateErrorResult(result.ResponseStatusCode,
                     result.ResponseHeaders, result.Error!);
+
+            if (!result.Data.Success)
+                return WebCallResult<IEnumerable<BinanceBalance>>.CreateErrorResult(result.ResponseStatusCode,
+                    result.ResponseHeaders, new ServerError(result.Data.Message));
 
             return new WebCallResult<IEnumerable<BinanceBalance>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Balances, null);
         }

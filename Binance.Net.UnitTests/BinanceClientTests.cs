@@ -19,7 +19,6 @@ using Binance.Net.Objects.Spot.UserData;
 using Binance.Net.Objects.Spot.MarginData;
 using Binance.Net.Objects.Spot;
 using Binance.Net.Enums;
-using Binance.Net.Objects.Futures;
 using Binance.Net.Objects.Futures.FuturesData;
 using CryptoExchange.Net.Logging;
 
@@ -766,7 +765,6 @@ namespace Binance.Net.UnitTests
             // arrange
             var status = new BinanceTradingStatusWrapper()
             {
-                UpdateTime = new DateTime(2011, 1, 1),
                 Data = new BinanceTradingStatus()
                 {
                     IsLocked = false,
