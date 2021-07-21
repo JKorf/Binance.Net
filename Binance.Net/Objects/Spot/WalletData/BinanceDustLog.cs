@@ -30,7 +30,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// Transaction id
         /// </summary>
         [JsonProperty("transId")]
-        public decimal TransactionId { get; set; }
+        public long TransactionId { get; set; }
         /// <summary>
         /// Detail logs
         /// </summary>
@@ -52,7 +52,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// Transaction id
         /// </summary>
         [JsonProperty("transId")]
-        public decimal TransactionId { get; set; }
+        public long TransactionId { get; set; }
         /// <summary>
         /// Service charge
         /// </summary>

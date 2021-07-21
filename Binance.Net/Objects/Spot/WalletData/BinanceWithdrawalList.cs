@@ -44,7 +44,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// </summary>
         public decimal TransactionFee { get; set; }
         /// <summary>
-        /// The coint that was withdrawn
+        /// The coin that was withdrawn
         /// </summary>
         public string Coin { get; set; } = "";
         /// <summary>
