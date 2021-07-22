@@ -29,8 +29,10 @@ namespace Binance.Net.SubClients
         private const string accountSnapshotEndpoint = "accountSnapshot";
         private const string accountStatusEndpoint = "account/status";
         private const string tradingStatusEndpoint = "account/apiTradingStatus";
+        private const string apiRestrictionsEndpoint = "account/apiRestrictions ";
 
         private const string dividendRecordsEndpoint = "asset/assetDividend";
+        private const string fundingWalletEndpoint = "asset/get-funding-asset";
 
         private const string userCoinsEndpoint = "capital/config/getall";
 
@@ -199,6 +201,57 @@ namespace Binance.Net.SubClients
                 return new WebCallResult<BinanceTradingStatus>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
 
             return new WebCallResult<BinanceTradingStatus>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
+        }
+        #endregion
+
+        #region Funding Wallet
+        /// <summary>
+        /// Get funding wallet assets
+        /// </summary>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="needBtcValuation">Return BTC valuation</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of assets</returns>
+        public async Task<WebCallResult<IEnumerable<BinanceFundingAsset>>> GetFundingWalletAsync(string? asset = null, bool? needBtcValuation = null, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<IEnumerable<BinanceFundingAsset>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", _baseClient.GetTimestamp() },
+            };
+
+            parameters.AddOptionalParameter("asset", asset);
+            parameters.AddOptionalParameter("needBtcValuation", needBtcValuation?.ToString());
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceFundingAsset>>(_baseClient.GetUrlSpot(fundingWalletEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);            
+        }
+        #endregion
+
+        #region API Key Permission
+        /// <summary>
+        /// Get permission info for the current API key
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Permission info</returns>
+        public async Task<WebCallResult<BinanceAPIKeyPermissions>> GetAPIKeyPermissionsAsync(int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceAPIKeyPermissions>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", _baseClient.GetTimestamp() },
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceAPIKeyPermissions>(_baseClient.GetUrlSpot(apiRestrictionsEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
         #endregion
 
