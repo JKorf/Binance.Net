@@ -16,7 +16,7 @@ I develop and maintain this package on my own for free in my spare time. Donatio
 **Nano**: xrb_1ocs3hbp561ef76eoctjwg85w5ugr8wgimkj8mfhoyqbx4s1pbc74zggw7gs  
 
 ## Discord
-A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
+A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Getting started
 Make sure you have installed the Binance.Net [Nuget](https://www.nuget.org/packages/Binance.Net/) package and add `using Binance.Net` to your usings.  You now have access to 2 clients:  
@@ -201,6 +201,9 @@ See Timestamping.
 
 * Version 6.14.0-beta1 - 30 apr 2021
     * Updated to CryptoExchange.Net 4.0.0-beta1, new websocket implementation
+
+* Version 6.13.4 - 24 Jun 2021
+    * Fixed/updated multiple models
 
 * Version 6.13.3 - 28 apr 2021
     * Fixed some issues in the IExchangeClient interface

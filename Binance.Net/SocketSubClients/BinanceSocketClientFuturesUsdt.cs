@@ -103,7 +103,16 @@ namespace Binance.Net.SocketSubClients
         public override async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<IBinanceStreamKlineData>> onMessage) => await SubscribeToKlineUpdatesAsync(new[] { symbol }, interval, onMessage).ConfigureAwait(false);
 
         /// <summary>
-        /// Subscribes to the candlestick update stream for the provided symbols
+        /// Subscribes to the candlestick update stream for the provided symbol and intervals
+        /// </summary>
+        /// <param name="symbol">The symbol</param>
+        /// <param name="intervals">The intervals of the candlesticks</param>
+        /// <param name="onMessage">The event handler for the received data</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        public override async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, IEnumerable<KlineInterval> intervals, Action<IBinanceStreamKlineData> onMessage) => await SubscribeToKlineUpdatesAsync(new[] { symbol }, intervals, onMessage).ConfigureAwait(false);
+
+        /// <summary>
+        /// Subscribes to the candlestick update stream for the provided symbols and intervals
         /// </summary>
         /// <param name="symbols">The symbols</param>
         /// <param name="interval">The interval of the candlesticks</param>
@@ -115,6 +124,21 @@ namespace Binance.Net.SocketSubClients
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamKlineData>>>(data => onMessage(data.As<IBinanceStreamKlineData>(data.Data.Data, data.Data.Stream)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + klineStreamEndpoint + "_" + JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ToArray();
             return await Subscribe(symbols, handler).ConfigureAwait(false);
+		}
+		
+		/// <summary>
+        /// Subscribes to the candlestick update stream for the provided symbols and intervals
+        /// </summary>
+        /// <param name="symbols">The symbols</param>
+        /// <param name="intervals">The intervals of the candlesticks</param>
+        /// <param name="onMessage">The event handler for the received data</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        public override async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, IEnumerable<KlineInterval> intervals, Action<IBinanceStreamKlineData> onMessage)
+        {
+            symbols.ValidateNotNull(nameof(symbols));
+            var handler = new Action<BinanceCombinedStream<BinanceStreamKlineData>>(data => onMessage(data.Data));
+            symbols = symbols.SelectMany(a => intervals.Select(i => a.ToLower(CultureInfo.InvariantCulture) + klineStreamEndpoint + "_" + JsonConvert.SerializeObject(i, new KlineIntervalConverter(false)))).ToArray();
+            return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
         }
 
         #endregion

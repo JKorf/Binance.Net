@@ -30,7 +30,7 @@ namespace Binance.Net.SubClients.Spot
         private const string allPricesEndpoint = "ticker/price";
         private const string bookPricesEndpoint = "ticker/bookTicker";
         private const string averagePriceEndpoint = "avgPrice";
-        private const string tradeFeeEndpoint = "tradeFee.html";
+        private const string tradeFeeEndpoint = "asset/tradeFee";
 
         private const string api = "api";
         private const string publicVersion = "3";
@@ -299,11 +299,8 @@ namespace Binance.Net.SubClients.Spot
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestInternal<BinanceTradeFeeWrapper>(_baseClient.GetUrlSpot(tradeFeeEndpoint, "wapi", "3"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
-            if (!result)
-                return new WebCallResult<IEnumerable<BinanceTradeFee>>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
-
-            return result.As(result.Data.Data);            
+            var result = await _baseClient.SendRequestInternal<IEnumerable<BinanceTradeFee>>(_baseClient.GetUrlSpot(tradeFeeEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return result;
         }
 
         #endregion

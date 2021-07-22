@@ -83,13 +83,12 @@ namespace Binance.Net.SubClients.Margin
 
         #endregion
 
-        #region Close a ListenKey 
-
+        #region Invalidate a ListenKey
         /// <summary>
         /// Close the user stream for margin account
         /// </summary>
         /// <param name="symbol">The isolated symbol</param>
-        /// <param name="listenKey">The listen key to keep alive</param>
+        /// <param name="listenKey">The listen key to invalidate</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         public async Task<WebCallResult<object>> CloseIsolatedMarginUserStreamAsync(string symbol, string listenKey, CancellationToken ct = default)

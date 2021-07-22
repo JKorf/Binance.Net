@@ -18,18 +18,19 @@ namespace Binance.Net.Interfaces.SubClients
         /// Gets a list of sub accounts associated with this master account
         /// </summary>
         /// <param name="email">Filter the list by email</param>
-        /// <param name="accountStatus">Filter the list by account status</param>
         /// <param name="page">The page of the results</param>
         /// <param name="limit">The max amount of results to return</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="isFreeze">Is freezed</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of sub accounts</returns>
-        Task<WebCallResult<IEnumerable<BinanceSubAccount>>> GetSubAccountsAsync(string? email = null, SubAccountStatus? accountStatus = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceSubAccount>>> GetSubAccountsAsync(string? email = null, int? page = null, int? limit = null, int? receiveWindow = null, bool? isFreeze = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the transfer history of a sub account (from the master account) 
         /// </summary>
-        /// <param name="email">Filter the history by email</param>
+        /// <param name="fromEmail">Filter the history by from email</param>
+        /// <param name="toEmail">Filter the history by to email</param>
         /// <param name="startTime">Filter the history by startTime</param>
         /// <param name="endTime">Filter the history by endTime</param>
         /// <param name="page">The page of the results</param>
@@ -37,7 +38,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of transfers</returns>
-        Task<WebCallResult<IEnumerable<BinanceSubAccountTransfer>>> GetSubAccountTransferHistoryForMasterAsync(string? email = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceSubAccountTransfer>>> GetSubAccountTransferHistoryForMasterAsync(string? fromEmail = null, string? toEmail = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Transfers an asset from one sub account to another
@@ -242,5 +243,33 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BinanceSubAccountBlvt>> EnableBlvtForSubAccountAsync(string email, bool enable, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets a list of universal transfers
+        /// </summary>
+        /// <param name="fromEmail">Filter the list by from email (fromEmail and toEmail cannot be present at same time)</param>
+        /// <param name="toEmail">Filter the list by to email (fromEmail and toEmail cannot be present at same time)</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="page">The page of the results</param>
+        /// <param name="limit">The max amount of results to return (Default 500, max 500)</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of universal transfers</returns>
+        WebCallResult<IEnumerable<BinanceSubAccountUniversalTransferTransaction>> GetUniversalTransferHistory(string? fromEmail = null, string? toEmail = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets a list of universal transfers
+        /// </summary>
+        /// <param name="fromEmail">Filter the list by from email (fromEmail and toEmail cannot be present at same time)</param>
+        /// <param name="toEmail">Filter the list by to email (fromEmail and toEmail cannot be present at same time)</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="page">The page of the results</param>
+        /// <param name="limit">The max amount of results to return (Default 500, max 500)</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of universal transfers</returns>
+        Task<WebCallResult<IEnumerable<BinanceSubAccountUniversalTransferTransaction>>> GetUniversalTransferHistoryAsync(string? fromEmail = null, string? toEmail = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
     }
 }

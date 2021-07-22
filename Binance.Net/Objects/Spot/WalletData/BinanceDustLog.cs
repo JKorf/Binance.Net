@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Spot.WalletData
 {
-    internal class BinanceDustLogListWrapper
+    /// <summary>
+    /// Dust log response details
+    /// </summary>
+    public class BinanceDustLogList
     {
-        public bool Success { get; set; }
-        public BinanceDustLogList? Results { get; set; }
-    }
-
-    internal class BinanceDustLogList
-    {
+        /// <summary>
+        /// Total counts of exchange
+        /// </summary>
         public int Total { get; set; }
-        public IEnumerable<BinanceDustLog> Rows { get; set; } = Array.Empty<BinanceDustLog>();
+        /// <summary>
+        /// Rows
+        /// </summary>
+        public IEnumerable<BinanceDustLog> UserAssetDribblets { get; set; } = Array.Empty<BinanceDustLog>();
     }
 
     /// <summary>
@@ -24,27 +28,28 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// <summary>
         /// Total transferred
         /// </summary>
-        [JsonProperty("transfered_total")]
+        [JsonProperty("totalTransferedAmount")]
         public decimal TransferredTotal { get; set; }
         /// <summary>
         /// Total service charge
         /// </summary>
-        [JsonProperty("service_charge_total")]
+        [JsonProperty("totalServiceChargeAmount")]
         public decimal ServiceChargeTotal { get; set; }
         /// <summary>
         /// Transaction id
         /// </summary>
-        [JsonProperty("tran_id")]
-        public decimal TransactionId { get; set; }
+        [JsonProperty("transId")]
+        public long TransactionId { get; set; }
         /// <summary>
         /// Detail logs
         /// </summary>
-        [JsonProperty("logs")]
+        [JsonProperty("userAssetDribbletDetails")]
         public IEnumerable<BinanceDustLogDetails> Logs { get; set; } = Array.Empty<BinanceDustLogDetails>();
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("operate_time")]
+        [JsonProperty("operateTime")]
+        [JsonConverter(typeof(TimestampConverter))]
         public DateTime OperateTime { get; set; }
     }
 
@@ -56,18 +61,13 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// <summary>
         /// Transaction id
         /// </summary>
-        [JsonProperty("tranId")]
-        public decimal TransactionId { get; set; }
+        [JsonProperty("transId")]
+        public long TransactionId { get; set; }
         /// <summary>
         /// Service charge
         /// </summary>
         [JsonProperty("serviceChargeAmount")]
         public decimal ServiceChargeAmount { get; set; }
-        /// <summary>
-        /// Identifier
-        /// </summary>
-        [JsonProperty("uid")]
-        public long UId { get; set; }
         /// <summary>
         /// Amount
         /// </summary>
@@ -77,6 +77,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// Timestamp
         /// </summary>
         [JsonProperty("operateTime")]
+        [JsonConverter(typeof(TimestampConverter))]
         public DateTime OperateTime { get; set; }
         /// <summary>
         /// Transferred amount

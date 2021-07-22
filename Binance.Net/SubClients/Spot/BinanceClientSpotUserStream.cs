@@ -72,12 +72,11 @@ namespace Binance.Net.SubClients.Spot
 
         #endregion
 
-        #region Close a ListenKey
-
+        #region Invalidate a ListenKey
         /// <summary>
         /// Stops the current user stream
         /// </summary>
-        /// <param name="listenKey">The listen key to keep alive</param>
+        /// <param name="listenKey">The listen key to invalidate</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         public async Task<WebCallResult<object>> StopUserStreamAsync(string listenKey, CancellationToken ct = default)
