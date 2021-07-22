@@ -1438,21 +1438,6 @@
             From sub account margin to sub account spot
             </summary>
         </member>
-        <member name="T:Binance.Net.Enums.SubAccountStatus">
-            <summary>
-            Status of the sub account
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.SubAccountStatus.Enabled">
-            <summary>
-            Enabled
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.SubAccountStatus.Disabled">
-            <summary>
-            Disabled
-            </summary>
-        </member>
         <member name="T:Binance.Net.Enums.SubAccountTransferSubAccountType">
             <summary>
             Transfer type
@@ -6503,12 +6488,11 @@
             Sub accounts interface
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccounts(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccounts(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <summary>
             Gets a list of sub accounts associated with this master account
             </summary>
             <param name="email">Filter the list by email</param>
-            <param name="accountStatus">Filter the list by account status</param>
             <param name="page">The page of the results</param>
             <param name="limit">The max amount of results to return</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -6516,12 +6500,11 @@
             <param name="ct">Cancellation token</param>
             <returns>List of sub accounts</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountsAsync(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountsAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <summary>
             Gets a list of sub accounts associated with this master account
             </summary>
             <param name="email">Filter the list by email</param>
-            <param name="accountStatus">Filter the list by account status</param>
             <param name="page">The page of the results</param>
             <param name="limit">The max amount of results to return</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -6964,6 +6947,34 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetUniversalTransferHistory(System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets a list of universal transfers
+            </summary>
+            <param name="fromEmail">Filter the list by from email (fromEmail and toEmail cannot be present at same time)</param>
+            <param name="toEmail">Filter the list by to email (fromEmail and toEmail cannot be present at same time)</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">The page of the results</param>
+            <param name="limit">The max amount of results to return (Default 500, max 500)</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of universal transfers</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetUniversalTransferHistoryAsync(System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets a list of universal transfers
+            </summary>
+            <param name="fromEmail">Filter the list by from email (fromEmail and toEmail cannot be present at same time)</param>
+            <param name="toEmail">Filter the list by to email (fromEmail and toEmail cannot be present at same time)</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">The page of the results</param>
+            <param name="limit">The max amount of results to return (Default 500, max 500)</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of universal transfers</returns>
         </member>
         <member name="T:Binance.Net.Interfaces.SubClients.IBinanceClientSystem">
             <summary>
@@ -18027,6 +18038,61 @@
             Timestamp of the transfer
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountUniversalTransfersList.Transactions">
+            <summary>
+            Transactions
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction">
+            <summary>
+            Binance sub account universal transaction
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction.TransactionId">
+            <summary>
+            Transaction id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction.FromEmail">
+            <summary>
+            From email
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction.ToEmail">
+            <summary>
+            To email
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction.FromAccountType">
+            <summary>
+            From account type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction.ToAccountType">
+            <summary>
+            To account type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction.Amount">
+            <summary>
+            Amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction.CreateTime">
+            <summary>
+            The time the universal transaction was created
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.UserStream.BinanceStreamAccountInfo">
             <summary>
             Information about an account
@@ -21753,24 +21819,23 @@
             Sub accounts endpoints
             </summary>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccounts(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccounts(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <summary>
             Gets a list of sub accounts associated with this master account
             </summary>
             <param name="email">Filter the list by email</param>
-            <param name="accountStatus">Filter the list by account status</param>
             <param name="page">The page of the results</param>
             <param name="limit">The max amount of results to return</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="isFreeze">Is freezed</param>
             <param name="ct">Cancellation token</param>
             <returns>List of sub accounts</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountsAsync(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountsAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <summary>
             Gets a list of sub accounts associated with this master account
             </summary>
             <param name="email">Filter the list by email</param>
-            <param name="accountStatus">Filter the list by account status</param>
             <param name="page">The page of the results</param>
             <param name="limit">The max amount of results to return</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -22213,6 +22278,34 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetUniversalTransferHistory(System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets a list of universal transfers
+            </summary>
+            <param name="fromEmail">Filter the list by from email (fromEmail and toEmail cannot be present at same time)</param>
+            <param name="toEmail">Filter the list by to email (fromEmail and toEmail cannot be present at same time)</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">The page of the results</param>
+            <param name="limit">The max amount of results to return (Default 500, max 500)</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of universal transfers</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetUniversalTransferHistoryAsync(System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets a list of universal transfers
+            </summary>
+            <param name="fromEmail">Filter the list by from email (fromEmail and toEmail cannot be present at same time)</param>
+            <param name="toEmail">Filter the list by to email (fromEmail and toEmail cannot be present at same time)</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">The page of the results</param>
+            <param name="limit">The max amount of results to return (Default 500, max 500)</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of universal transfers</returns>
         </member>
         <member name="T:Binance.Net.SubClients.BinanceClientWithdrawDeposit">
             <summary>
