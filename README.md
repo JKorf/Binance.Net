@@ -170,6 +170,10 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.13.5 - 22 Jul 2021
+    * Added support for multiple KlineIntervals in kline socket subscriptions
+    * Updated from wapi to sapi endpoints
+
 * Version 6.13.4 - 24 Jun 2021
     * Fixed/updated multiple models
 
