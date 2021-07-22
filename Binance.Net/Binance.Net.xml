@@ -13019,7 +13019,7 @@
             Position Side
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginPosition.PositionAmount">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginPosition.Quantity">
             <summary>
             Position Amount
             </summary>
@@ -13029,7 +13029,7 @@
             Margin type
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginPosition.IsolatedWallet">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginPosition.IsolatedMargin">
             <summary>
             Isolated Wallet (if isolated position)
             </summary>
@@ -13039,7 +13039,7 @@
             Mark Price
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginPosition.UnrealizedPnl">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginPosition.UnrealizedPnL">
             <summary>
             Unrealized PnL
             </summary>

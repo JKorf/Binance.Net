@@ -42,7 +42,7 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// Position Amount
         /// </summary>
         [JsonProperty("pa")]
-        public decimal PositionAmount { get; set; }
+        public decimal Quantity { get; set; }
 
         /// <summary>
         /// Margin type
@@ -54,7 +54,7 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// Isolated Wallet (if isolated position)
         /// </summary>
         [JsonProperty("iw")]
-        public decimal IsolatedWallet { get; set; }
+        public decimal IsolatedMargin { get; set; }
 
         /// <summary>
         /// Mark Price
@@ -66,7 +66,7 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// Unrealized PnL
         /// </summary>
         [JsonProperty("up")]
-        public decimal UnrealizedPnl { get; set; }
+        public decimal UnrealizedPnL { get; set; }
 
         /// <summary>
         /// Maintenance Margin Required
