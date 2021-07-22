@@ -7,11 +7,11 @@ using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using Newtonsoft.Json.Linq;
-using Binance.Net.Objects.Spot;
 using Binance.Net.SocketSubClients;
 using System.Collections.Generic;
 using System.Linq;
 using Binance.Net.Objects.Other;
+using Binance.Net.Objects;
 
 namespace Binance.Net
 {

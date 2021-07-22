@@ -4,7 +4,7 @@ using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 
-namespace Binance.Net.Objects.Spot
+namespace Binance.Net.Objects
 {
     /// <summary>
     /// Options for the binance client

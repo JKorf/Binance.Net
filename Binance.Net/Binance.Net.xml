@@ -4651,12 +4651,14 @@
             Lending interface
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLending.GetFlexibleProductListAsync(System.Nullable{Binance.Net.Enums.ProductStatus},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLending.GetFlexibleProductListAsync(System.Nullable{Binance.Net.Enums.ProductStatus},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get product list
             </summary>
             <param name="status">Filter by status</param>
             <param name="featured">Filter by featured</param>
+            <param name="page">Page to retrieve</param>
+            <param name="pageSize">Page size to return</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of product</returns>
@@ -18166,12 +18168,14 @@
             Lending endpoints
             </summary>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientLending.GetFlexibleProductListAsync(System.Nullable{Binance.Net.Enums.ProductStatus},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientLending.GetFlexibleProductListAsync(System.Nullable{Binance.Net.Enums.ProductStatus},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get product list
             </summary>
             <param name="status">Filter by status</param>
             <param name="featured">Filter by featured</param>
+            <param name="page">Page to retrieve</param>
+            <param name="pageSize">Page size to return</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of product</returns>

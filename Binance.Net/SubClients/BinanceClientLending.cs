@@ -49,10 +49,12 @@ namespace Binance.Net.SubClients
         /// </summary>
         /// <param name="status">Filter by status</param>
         /// <param name="featured">Filter by featured</param>
+        /// <param name="page">Page to retrieve</param>
+        /// <param name="pageSize">Page size to return</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of product</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceSavingsProduct>>> GetFlexibleProductListAsync(ProductStatus? status = null, bool? featured = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceSavingsProduct>>> GetFlexibleProductListAsync(ProductStatus? status = null, bool? featured = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
@@ -63,7 +65,9 @@ namespace Binance.Net.SubClients
                 { "timestamp", _baseClient.GetTimestamp() }
             };
             parameters.AddOptionalParameter("status", status == null ? null : JsonConvert.SerializeObject(status, new ProductStatusConverter(false)));
-            parameters.AddOptionalParameter("featured", featured?.ToString().ToLower());
+            parameters.AddOptionalParameter("featured", featured == true? "TRUE": "ALL");
+            parameters.AddOptionalParameter("current", page?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("size", pageSize?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceSavingsProduct>>(_baseClient.GetUrlSpot(flexibleProductListEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
