@@ -80,6 +80,7 @@ namespace Binance.Net.SocketSubClients
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamCoinKlineData>>>(data => onMessage(data.As<IBinanceStreamKlineData>(data.Data.Data, data.Data.Stream)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + klineStreamEndpoint + "_" + JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ToArray();
             return await Subscribe(symbols, handler).ConfigureAwait(false);
+        }
 
         /// <summary>
         /// Subscribes to the candlestick update stream for the provided symbols and intervals
@@ -91,9 +92,9 @@ namespace Binance.Net.SocketSubClients
         public override async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, IEnumerable<KlineInterval> intervals, Action<DataEvent<IBinanceStreamKlineData>> onMessage)
         {
             symbols.ValidateNotNull(nameof(symbols));
-            var handler = new Action<BinanceCombinedStream<BinanceFuturesStreamCoinKlineData>>(data => onMessage(data.Data));
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamCoinKlineData>>>(data => onMessage(data.As<IBinanceStreamKlineData>(data.Data.Data)));
             symbols = symbols.SelectMany(a => intervals.Select(i => a.ToLower(CultureInfo.InvariantCulture) + klineStreamEndpoint + "_" + JsonConvert.SerializeObject(i, new KlineIntervalConverter(false)))).ToArray();
-            return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
+            return await Subscribe(symbols, handler).ConfigureAwait(false);
         }
 
         #endregion

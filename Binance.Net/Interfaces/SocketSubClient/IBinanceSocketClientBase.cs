@@ -45,7 +45,7 @@ namespace Binance.Net.Interfaces.SocketSubClient
         /// <param name="intervals">The intervals of the candlesticks</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, IEnumerable<KlineInterval> intervals, Action<IBinanceStreamKlineData> onMessage);
+        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, IEnumerable<KlineInterval> intervals, Action<DataEvent<IBinanceStreamKlineData>> onMessage);
 
         /// <summary>
         /// Subscribes to the candlestick update stream for the provided symbols
@@ -63,7 +63,7 @@ namespace Binance.Net.Interfaces.SocketSubClient
         /// <param name="intervals">The intervals of the candlesticks</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, IEnumerable<KlineInterval> intervals, Action<IBinanceStreamKlineData> onMessage);
+        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, IEnumerable<KlineInterval> intervals, Action<DataEvent<IBinanceStreamKlineData>> onMessage);
 
         /// <summary>
         /// Subscribes to mini ticker updates stream for a specific symbol

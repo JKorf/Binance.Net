@@ -146,7 +146,7 @@ namespace Binance.Net.SocketSubClients
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol,
-            IEnumerable<KlineInterval> intervals, Action<IBinanceStreamKlineData> onMessage) =>
+            IEnumerable<KlineInterval> intervals, Action<DataEvent<IBinanceStreamKlineData>> onMessage) =>
             await SubscribeToKlineUpdatesAsync(new[] {symbol}, intervals, onMessage).ConfigureAwait(false);
 
         /// <summary>
@@ -184,12 +184,12 @@ namespace Binance.Net.SocketSubClients
             foreach (var symbol in symbols)
                 symbol.ValidateBinanceSymbol();
 			
-            var handler = new Action<BinanceCombinedStream<BinanceStreamKlineData>>(data => onMessage(data.Data));
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamKlineData>>>(data => onMessage(data.As<IBinanceStreamKlineData>(data.Data.Data)));
             symbols = symbols.SelectMany(a =>
                 intervals.Select(i => 
                     a.ToLower(CultureInfo.InvariantCulture) + klineStreamEndpoint + "_" +
                     JsonConvert.SerializeObject(i, new KlineIntervalConverter(false)))).ToArray();
-            return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
+            return await Subscribe(symbols, handler).ConfigureAwait(false);
         }
 
         #endregion

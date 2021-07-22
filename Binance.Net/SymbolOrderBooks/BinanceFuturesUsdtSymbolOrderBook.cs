@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Binance.Net.Interfaces;
-using Binance.Net.Objects.Spot;
+using Binance.Net.Objects;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.OrderBook;
 using CryptoExchange.Net.Sockets;
