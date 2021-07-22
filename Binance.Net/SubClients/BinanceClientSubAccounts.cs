@@ -21,11 +21,11 @@ namespace Binance.Net.SubClients
     /// </summary>
     public class BinanceClientSubAccount : IBinanceClientSubAccount
     {
-        private const string subAccountListEndpoint = "sub-account/list.html";
-        private const string subAccountTransferHistoryEndpoint = "sub-account/transfer/history.html";
-        private const string transferSubAccountEndpoint = "sub-account/transfer.html";
+        private const string subAccountListEndpoint = "sub-account/list";
+        private const string subAccountTransferHistoryEndpoint = "sub-account/sub/transfer/history";
+        private const string transferSubAccountEndpoint = "sub-account/universalTransfer";
         private const string subAccountStatusEndpoint = "sub-account/status";
-        private const string subAccountAssetsEndpoint = "sub-account/assets.html";
+        private const string subAccountAssetsEndpoint = "sub-account/assets";
 
         private const string subAccountDepositAddressEndpoint = "capital/deposit/subAddress";
         private const string subAccountDepositHistoryEndpoint = "capital/deposit/subHisrec";
@@ -72,7 +72,7 @@ namespace Binance.Net.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of sub accounts</returns>
-        public WebCallResult<IEnumerable<BinanceSubAccount>> GetSubAccounts(string? email = null, SubAccountStatus? accountStatus = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default) => GetSubAccountsAsync(email, accountStatus, page, limit, receiveWindow, ct).Result;
+        public WebCallResult<IEnumerable<BinanceSubAccount>> GetSubAccounts(string? email = null, SubAccountStatus? accountStatus = null, int? page = null, int? limit = null, int? receiveWindow = null, bool? isFreeze = null, CancellationToken ct = default) => GetSubAccountsAsync(email, accountStatus, page, limit, receiveWindow, isFreeze, ct).Result;
 
         /// <summary>
         /// Gets a list of sub accounts associated with this master account
@@ -82,9 +82,10 @@ namespace Binance.Net.SubClients
         /// <param name="page">The page of the results</param>
         /// <param name="limit">The max amount of results to return</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="isFreeze">Is freezed</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of sub accounts</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceSubAccount>>> GetSubAccountsAsync(string? email = null, SubAccountStatus? accountStatus = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceSubAccount>>> GetSubAccountsAsync(string? email = null, SubAccountStatus? accountStatus = null, int? page = null, int? limit = null, int? receiveWindow = null, bool? isFreeze = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
@@ -99,12 +100,13 @@ namespace Binance.Net.SubClients
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("isFreeze", isFreeze);
 
-            var result = await _baseClient.SendRequestInternal<BinanceSubAccountWrapper>(_baseClient.GetUrlSpot(subAccountListEndpoint, "wapi", "3"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceSubAccountWrapper>(_baseClient.GetUrlSpot(subAccountListEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result)
                 return new WebCallResult<IEnumerable<BinanceSubAccount>>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
 
-            return !result.Data.Success ? new WebCallResult<IEnumerable<BinanceSubAccount>>(result.ResponseStatusCode, result.ResponseHeaders, null, new ServerError(result.Data.Message!)) : new WebCallResult<IEnumerable<BinanceSubAccount>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.SubAccounts, null);
+            return new WebCallResult<IEnumerable<BinanceSubAccount>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.SubAccounts, null);
         }
 
         #endregion
@@ -114,7 +116,8 @@ namespace Binance.Net.SubClients
         /// <summary>
         /// Gets the transfer history of a sub account (from the master account) 
         /// </summary>
-        /// <param name="email">Filter the history by email</param>
+        /// <param name="fromEmail">Filter the history by from email</param>
+        /// <param name="toEmail">Filter the history by to email</param>
         /// <param name="startTime">Filter the history by startTime</param>
         /// <param name="endTime">Filter the history by endTime</param>
         /// <param name="page">The page of the results</param>
@@ -122,12 +125,13 @@ namespace Binance.Net.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of transfers</returns>
-        public WebCallResult<IEnumerable<BinanceSubAccountTransfer>> GetSubAccountTransferForMasterHistory(string? email = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default) => GetSubAccountTransferHistoryForMasterAsync(email, startTime, endTime, page, limit, receiveWindow, ct).Result;
+        public WebCallResult<IEnumerable<BinanceSubAccountTransfer>> GetSubAccountTransferForMasterHistory(string? fromEmail = null, string? toEmail = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default) => GetSubAccountTransferHistoryForMasterAsync(fromEmail, toEmail, startTime, endTime, page, limit, receiveWindow, ct).Result;
 
         /// <summary>
         /// Gets the transfer history of a sub account (from the master account) 
         /// </summary>
-        /// <param name="email">Filter the history by email</param>
+        /// <param name="fromEmail">Filter the history by from email</param>
+        /// <param name="toEmail">Filter the history by to email</param>
         /// <param name="startTime">Filter the history by startTime</param>
         /// <param name="endTime">Filter the history by endTime</param>
         /// <param name="page">The page of the results</param>
@@ -135,7 +139,7 @@ namespace Binance.Net.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of transfers</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceSubAccountTransfer>>> GetSubAccountTransferHistoryForMasterAsync(string? email = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceSubAccountTransfer>>> GetSubAccountTransferHistoryForMasterAsync(string? fromEmail = null, string ? toEmail = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
@@ -145,18 +149,16 @@ namespace Binance.Net.SubClients
             {
                 { "timestamp", _baseClient.GetTimestamp() }
             };
-            parameters.AddOptionalParameter("email", email);
+            parameters.AddOptionalParameter("fromEmail", fromEmail);
+            parameters.AddOptionalParameter("toEmail", toEmail);
             parameters.AddOptionalParameter("startTime", startTime != null ? JsonConvert.SerializeObject(startTime, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("endTime", endTime != null ? JsonConvert.SerializeObject(endTime, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestInternal<BinanceSubAccountTransferWrapper>(_baseClient.GetUrlSpot(subAccountTransferHistoryEndpoint, "wapi", "3"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
-            if (!result)
-                return new WebCallResult<IEnumerable<BinanceSubAccountTransfer>>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
-
-            return !result.Data.Success ? new WebCallResult<IEnumerable<BinanceSubAccountTransfer>>(result.ResponseStatusCode, result.ResponseHeaders, null, new ServerError(result.Data.Message!)) : new WebCallResult<IEnumerable<BinanceSubAccountTransfer>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Transfers, null);
+            var result = await _baseClient.SendRequestInternal<IEnumerable<BinanceSubAccountTransfer>>(_baseClient.GetUrlSpot(subAccountTransferHistoryEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return result;
         }
 
         #endregion
@@ -206,7 +208,7 @@ namespace Binance.Net.SubClients
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceSubAccountTransferResult>(_baseClient.GetUrlSpot(transferSubAccountEndpoint, "wapi", "3"), HttpMethod.Post, ct, parameters, true, true, PostParameters.InUri).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceSubAccountTransferResult>(_baseClient.GetUrlSpot(transferSubAccountEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true, true, PostParameters.InUri).ConfigureAwait(false);
         }
 
         #endregion
@@ -248,8 +250,8 @@ namespace Binance.Net.SubClients
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestInternal<BinanceSubAccountAsset>(_baseClient.GetUrlSpot(subAccountAssetsEndpoint, "wapi", "3"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
-            if (!result.Success)
+            var result = await _baseClient.SendRequestInternal<BinanceSubAccountAsset>(_baseClient.GetUrlSpot(subAccountAssetsEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            if (!result)
                 return WebCallResult<IEnumerable<BinanceBalance>>.CreateErrorResult(result.ResponseStatusCode,
                     result.ResponseHeaders, result.Error!);
 

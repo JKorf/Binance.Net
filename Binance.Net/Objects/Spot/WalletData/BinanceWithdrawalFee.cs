@@ -1,19 +1,7 @@
-﻿using CryptoExchange.Net.Attributes;
-using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Spot.WalletData
 {
-    internal class BinanceAssetDetailsWrapper
-    {
-        [JsonProperty("assetDetail")]
-        public Dictionary<string, BinanceAssetDetails>? Data { get; set; }
-        public bool Success { get; set; }
-        [JsonProperty("msg")]
-        [JsonOptionalProperty]
-        public string? Message { get; set; }
-    }
-
     /// <summary>
     /// Asset details
     /// </summary>
