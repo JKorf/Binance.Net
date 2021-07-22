@@ -230,7 +230,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The history of dust conversions</returns>
-        WebCallResult<BinanceDustLogListWrapper> GetDustLog(int? receiveWindow = null, CancellationToken ct = default);
+        WebCallResult<BinanceDustLogList> GetDustLog(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the history of dust conversions
@@ -238,7 +238,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The history of dust conversions</returns>
-        Task<WebCallResult<BinanceDustLogListWrapper>> GetDustLogAsync(int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceDustLogList>> GetDustLogAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Converts dust (small amounts of) assets to BNB 

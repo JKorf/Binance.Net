@@ -9,7 +9,7 @@ namespace Binance.Net.Objects.Spot.WalletData
     public class BinanceAccountStatus
     {
         /// <summary>
-        /// The result message
+        /// The result status
         /// </summary>
         [JsonProperty("data")]
         public string? Data { get; set; }

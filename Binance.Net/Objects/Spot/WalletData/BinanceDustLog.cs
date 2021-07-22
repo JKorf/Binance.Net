@@ -8,7 +8,7 @@ namespace Binance.Net.Objects.Spot.WalletData
     /// <summary>
     /// Dust log response details
     /// </summary>
-    public class BinanceDustLogListWrapper
+    public class BinanceDustLogList
     {
         /// <summary>
         /// Total counts of exchange
@@ -41,12 +41,18 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// Transaction id
         /// </summary>
         [JsonProperty("transId")]
-        public decimal TransactionId { get; set; }
+        public long TransactionId { get; set; }
         /// <summary>
         /// Detail logs
         /// </summary>
         [JsonProperty("userAssetDribbletDetails")]
         public IEnumerable<BinanceDustLogDetails> Logs { get; set; } = new List<BinanceDustLogDetails>();
+        /// <summary>
+        /// Timestamp
+        /// </summary>
+        [JsonProperty("operateTime")]
+        [JsonConverter(typeof(TimestampConverter))]
+        public DateTime OperateTime { get; set; }
     }
 
     /// <summary>
@@ -58,7 +64,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// Transaction id
         /// </summary>
         [JsonProperty("transId")]
-        public decimal TransactionId { get; set; }
+        public long TransactionId { get; set; }
         /// <summary>
         /// Service charge
         /// </summary>
