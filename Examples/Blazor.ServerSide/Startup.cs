@@ -12,6 +12,8 @@ using Microsoft.Extensions.Hosting;
 using Blazor.ServerSide.Data;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Logging;
+using Binance.Net.Objects;
+using Microsoft.Extensions.Logging;
 
 namespace Blazor.ServerSide
 {
@@ -30,7 +32,7 @@ namespace Blazor.ServerSide
         {
             BinanceClient.SetDefaultOptions(new BinanceClientOptions()
             {
-                LogVerbosity = LogVerbosity.Debug,
+                LogLevel = LogLevel.Debug,
                 ApiCredentials = new ApiCredentials("Credentials", "Credentials")
             });
 

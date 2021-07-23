@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Binance.Net.Objects;
 
 namespace Blazor.ClientSide
 {
@@ -24,7 +25,7 @@ namespace Blazor.ClientSide
 
             BinanceClient.SetDefaultOptions(new BinanceClientOptions()
             {
-                LogVerbosity = LogVerbosity.Debug,
+                LogLevel = LogLevel.Debug,
                 HttpClient = new HttpClient()
             });
 
