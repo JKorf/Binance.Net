@@ -165,6 +165,9 @@ Yes, as long as the API endpoints are the same. Switch by changing the BaseAddre
 See Timestamping.
 
 ## Release notes
+* Version 7.0.0-beta3 - 26 Jul 2021
+    * Updated CryptoExchange.Net
+
 * Version 7.0.0-beta2 - 22 Jul 2021
     * Added GetFundingWalletAsync endpoint
     * Added GetAPIKeyPermissionsAsync endpoint
