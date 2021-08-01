@@ -208,6 +208,17 @@ namespace Binance.Net.SocketSubClients
             SubscribeToKlineUpdatesAsync(symbols, new [] {interval}, onMessage).Result;
 
         /// <summary>
+        /// Subscribes to the candlestick update stream for the provided symbols and interval
+        /// </summary>
+        /// <param name="symbols">The symbols</param>
+        /// <param name="interval">The interval of the candlesticks</param>
+        /// <param name="onMessage">The event handler for the received data</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols,
+            KlineInterval interval, Action<IBinanceStreamKlineData> onMessage) =>
+            await SubscribeToKlineUpdatesAsync(symbols, new[] { interval }, onMessage).ConfigureAwait(false);
+
+        /// <summary>
         /// Subscribes to the candlestick update stream for the provided symbols and intervals
         /// </summary>
         /// <param name="symbols">The symbols</param>
