@@ -128,6 +128,11 @@ namespace Binance.Net
         /// Liquidity swap endpoints
         /// </summary>
         public IBinanceClientLiquidSwap BSwap { get; set; }
+
+        /// <summary>
+        /// Fiat endpoints
+        /// </summary>
+        public IBinanceClientFiat Fiat { get; set; }
         #endregion
 
         #region constructor/destructor
@@ -172,6 +177,9 @@ namespace Binance.Net
             WithdrawDeposit = new BinanceClientWithdrawDeposit(this);
             Blvt = new BinanceClientLeveragedTokens(this);
             BSwap = new BinanceClientLiquidSwap(this);
+
+            Fiat = new BinanceClientFiat(this);
+
         }
         #endregion
 

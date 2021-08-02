@@ -129,6 +129,11 @@
             Liquidity swap endpoints
             </summary>
         </member>
+        <member name="P:Binance.Net.BinanceClient.Fiat">
+            <summary>
+            Fiat endpoints
+            </summary>
+        </member>
         <member name="M:Binance.Net.BinanceClient.#ctor">
             <summary>
             Create a new instance of BinanceClient using the default options
@@ -666,6 +671,71 @@
         <member name="F:Binance.Net.Enums.ExecutionType.Expired">
             <summary>
             Expired
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.FiatPaymentStatus">
+            <summary>
+            Status of a fiat payment
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.FiatPaymentStatus.Processing">
+            <summary>
+            Still processing
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.FiatPaymentStatus.Completed">
+            <summary>
+            Successfully completed
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.FiatPaymentStatus.Failed">
+            <summary>
+            Failed
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.FiatPaymentStatus.Refunded">
+            <summary>
+            Refunded
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.FiatWithdrawDepositStatus">
+            <summary>
+            Status of a fiat payment
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.FiatWithdrawDepositStatus.Processing">
+            <summary>
+            Still processing
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.FiatWithdrawDepositStatus.Successful">
+            <summary>
+            Successfully completed
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.FiatWithdrawDepositStatus.Failed">
+            <summary>
+            Failed
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.FiatWithdrawDepositStatus.Finished">
+            <summary>
+            Finished
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.FiatWithdrawDepositStatus.Refunding">
+            <summary>
+            Refunding
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.FiatWithdrawDepositStatus.Refunded">
+            <summary>
+            Refunded
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.FiatWithdrawDepositStatus.RefundFailed">
+            <summary>
+            Refund failed
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.FuturesMarginChangeDirectionType">
@@ -4513,6 +4583,37 @@
             <param name="ct">Cancellation token</param>
             <returns>Asset info</returns>
         </member>
+        <member name="T:Binance.Net.Interfaces.SubClients.IBinanceClientFiat">
+            <summary>
+            Fiat endpoints
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientFiat.GetFiatPaymentHistoryAsync(Binance.Net.Enums.OrderSide,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get Fiat payment history
+            </summary>
+            <param name="side">Filter by side</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Return a specific page</param>
+            <param name="limit">The page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientFiat.GetFiatDepositWithdrawHistoryAsync(Binance.Net.Enums.OrderSide,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get Fiat deposit/withdrawal history
+            </summary>
+            <param name="side">Filter by side</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Return a specific page</param>
+            <param name="limit">The page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="T:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral">
             <summary>
             General endpoints
@@ -8249,6 +8350,106 @@
         <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapResult.SwapId">
             <summary>
             Swap id
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Fiat.BinanceFiatPayment">
+            <summary>
+            Fiat payment info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Fiat.BinanceFiatPayment.OrderNumber">
+            <summary>
+            Order number
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Fiat.BinanceFiatPayment.SourceAmount">
+            <summary>
+            The input amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Fiat.BinanceFiatPayment.FiatCurrency">
+            <summary>
+            The fiat currency
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Fiat.BinanceFiatPayment.ObtainAmount">
+            <summary>
+            The output amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Fiat.BinanceFiatPayment.CryptoCurrency">
+            <summary>
+            The crypto currency
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Fiat.BinanceFiatPayment.TotalFee">
+            <summary>
+            The total fee of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Fiat.BinanceFiatPayment.Price">
+            <summary>
+            The price of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Fiat.BinanceFiatPayment.Status">
+            <summary>
+            The status of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Fiat.BinanceFiatPayment.CreateTime">
+            <summary>
+            Creation time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Fiat.BinanceFiatPayment.UpdateTime">
+            <summary>
+            Last update time
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Fiat.BinanceFiatWithdrawDeposit">
+            <summary>
+            Fiat payment info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Fiat.BinanceFiatWithdrawDeposit.OrderNumber">
+            <summary>
+            Order number
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Fiat.BinanceFiatWithdrawDeposit.Amount">
+            <summary>
+            The amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Fiat.BinanceFiatWithdrawDeposit.IndicatedAmount">
+            <summary>
+            The indicated amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Fiat.BinanceFiatWithdrawDeposit.Method">
+            <summary>
+            The crypto currency
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Fiat.BinanceFiatWithdrawDeposit.TotalFee">
+            <summary>
+            The total fee of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Fiat.BinanceFiatWithdrawDeposit.Status">
+            <summary>
+            The status 
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Fiat.BinanceFiatWithdrawDeposit.CreateTime">
+            <summary>
+            Creation time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Fiat.BinanceFiatWithdrawDeposit.UpdateTime">
+            <summary>
+            Last update time
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.BinanceFuturesClientOptions">
@@ -18252,6 +18453,37 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Rebate records</returns>
+        </member>
+        <member name="T:Binance.Net.SubClients.BinanceClientFiat">
+            <summary>
+            Liquid swap endpoints
+            </summary>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientFiat.GetFiatPaymentHistoryAsync(Binance.Net.Enums.OrderSide,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get Fiat payment history
+            </summary>
+            <param name="side">Filter by side</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Return a specific page</param>
+            <param name="limit">The page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientFiat.GetFiatDepositWithdrawHistoryAsync(Binance.Net.Enums.OrderSide,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get Fiat deposit/withdrawal history
+            </summary>
+            <param name="side">Filter by side</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Return a specific page</param>
+            <param name="limit">The page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
         </member>
         <member name="T:Binance.Net.SubClients.BinanceClientGeneral">
             <summary>
