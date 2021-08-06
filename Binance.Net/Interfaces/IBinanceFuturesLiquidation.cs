@@ -19,7 +19,7 @@ namespace Binance.Net.Interfaces
         /// <summary>
         /// Total quantity
         /// </summary>
-        decimal LastQuantityFilled { get; set; }
+        decimal Quantity { get; set; }
         /// <summary>
         /// The executed quantity
         /// </summary>

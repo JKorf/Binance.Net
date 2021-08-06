@@ -24,7 +24,7 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// Total quantity
         /// </summary>
         [JsonProperty("origQty")]
-        public decimal LastQuantityFilled { get; set; }
+        public decimal Quantity { get; set; }
         /// <summary>
         /// The executed quantity
         /// </summary>

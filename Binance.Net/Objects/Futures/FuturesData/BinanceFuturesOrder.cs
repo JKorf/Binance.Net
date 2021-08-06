@@ -40,18 +40,13 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// Cumulative amount
         /// </summary>
-        [JsonProperty("cumQty")]
+        [JsonProperty("executedQty")]
         public decimal QuantityFilled { get; set; }
         /// <summary>
         /// Cumulative amount
         /// </summary>
         [JsonProperty("cumQuote")]
         public decimal QuoteQuantityFilled { get; set; }
-        /// <summary>
-        /// The quantity of the order that is executed
-        /// </summary>
-        [JsonProperty("executedQty")]
-        public decimal LastQuantityFilled { get; set; }
         /// <summary>
         /// The original quantity of the order
         /// </summary>
