@@ -76,7 +76,7 @@ namespace Binance.Net.Objects.Futures.MarketStream
         /// Liquidation Last Filled Quantity
         /// </summary>
         [JsonProperty("l")]
-        public decimal Quantity { get; set; }
+        public decimal LastQuantityFilled { get; set; }
         
         /// <summary>
         /// Liquidation Accumulated fill quantity

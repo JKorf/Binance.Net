@@ -11322,11 +11322,6 @@
             Cumulative amount in quote currency
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.LastFilledQuantity">
-            <summary>
-            The quantity of the order that is executed
-            </summary>
-        </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.Quantity">
             <summary>
             The original quantity of the order
