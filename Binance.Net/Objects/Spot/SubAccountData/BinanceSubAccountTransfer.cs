@@ -40,5 +40,14 @@ namespace Binance.Net.Objects.Spot.SubAccountData
         /// </summary>
         [JsonProperty("time"), JsonConverter(typeof(TimestampConverter))]
         public DateTime Timestamp { get; set; }
+        /// <summary>
+        /// Status of the transaction
+        /// </summary>
+        public string Status { get; set; } = "";
+        /// <summary>
+        /// Transaction Id
+        /// </summary>
+        [JsonProperty("tranId")]
+        public long TransactionId { get; set; }
     }
 }

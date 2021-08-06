@@ -70,8 +70,10 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="endTime">Filter end time till</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
+        /// <param name="limit">Add limit. Default: 1000, Max: 1000</param>
+        /// <param name="offset">Add offset</param>
         /// <returns>List of withdrawals</returns>
-        WebCallResult<IEnumerable<BinanceWithdrawal>> GetWithdrawalHistory(string? asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default);
+        WebCallResult<IEnumerable<BinanceWithdrawal>> GetWithdrawalHistory(string? asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, int? limit = null, int? offset = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the withdrawal history
@@ -82,8 +84,10 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="endTime">Filter end time till</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
+        /// <param name="limit">Add limit. Default: 1000, Max: 1000</param>
+        /// <param name="offset">Add offset</param>
         /// <returns>List of withdrawals</returns>
-        Task<WebCallResult<IEnumerable<BinanceWithdrawal>>> GetWithdrawalHistoryAsync(string? asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceWithdrawal>>> GetWithdrawalHistoryAsync(string? asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, int? limit = null, int? offset = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the deposit history

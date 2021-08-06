@@ -1438,21 +1438,6 @@
             From sub account margin to sub account spot
             </summary>
         </member>
-        <member name="T:Binance.Net.Enums.SubAccountStatus">
-            <summary>
-            Status of the sub account
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.SubAccountStatus.Enabled">
-            <summary>
-            Enabled
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.SubAccountStatus.Disabled">
-            <summary>
-            Disabled
-            </summary>
-        </member>
         <member name="T:Binance.Net.Enums.SubAccountTransferSubAccountType">
             <summary>
             Transfer type
@@ -1886,6 +1871,21 @@
         <member name="F:Binance.Net.Enums.WithdrawalStatus.Completed">
             <summary>
             Withdrawal has been processed
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.WithdrawalTransferType">
+            <summary>
+            Withdrawal transfer type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.WithdrawalTransferType.ExternalTransfer">
+            <summary>
+            Withdrawal to external wallets
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.WithdrawalTransferType.InternalTransfer">
+            <summary>
+            Withdrawal from one binance account to another one
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.WithdrawDepositTransferType">
@@ -2824,6 +2824,15 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientBase.SubscribeToKlineUpdatesAsync(System.String,System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{Binance.Net.Interfaces.IBinanceStreamKlineData})">
+            <summary>
+            Subscribes to the candlestick update stream for the provided symbol and intervals
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="intervals">The intervals of the candlesticks</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientBase.SubscribeToKlineUpdates(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Interfaces.IBinanceStreamKlineData})">
             <summary>
             Subscribes to the candlestick update stream for the provided symbols
@@ -2839,6 +2848,15 @@
             </summary>
             <param name="symbols">The symbols</param>
             <param name="interval">The interval of the candlesticks</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientBase.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{Binance.Net.Interfaces.IBinanceStreamKlineData})">
+            <summary>
+            Subscribes to the candlestick update stream for the provided symbols and intervals
+            </summary>
+            <param name="symbols">The symbols</param>
+            <param name="intervals">The intervals of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -6479,35 +6497,36 @@
             Sub accounts interface
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccounts(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccounts(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <summary>
             Gets a list of sub accounts associated with this master account
             </summary>
             <param name="email">Filter the list by email</param>
-            <param name="accountStatus">Filter the list by account status</param>
             <param name="page">The page of the results</param>
             <param name="limit">The max amount of results to return</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="isFreeze">Is freezed</param>
             <param name="ct">Cancellation token</param>
             <returns>List of sub accounts</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountsAsync(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountsAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <summary>
             Gets a list of sub accounts associated with this master account
             </summary>
             <param name="email">Filter the list by email</param>
-            <param name="accountStatus">Filter the list by account status</param>
             <param name="page">The page of the results</param>
             <param name="limit">The max amount of results to return</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="isFreeze">Is freezed</param>
             <param name="ct">Cancellation token</param>
             <returns>List of sub accounts</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountTransferForMasterHistory(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountTransferForMasterHistory(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the transfer history of a sub account (from the master account) 
             </summary>
-            <param name="email">Filter the history by email</param>
+            <param name="fromEmail">Filter the history by from email</param>
+            <param name="toEmail">Filter the history by to email</param>
             <param name="startTime">Filter the history by startTime</param>
             <param name="endTime">Filter the history by endTime</param>
             <param name="page">The page of the results</param>
@@ -6516,11 +6535,12 @@
             <param name="ct">Cancellation token</param>
             <returns>List of transfers</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountTransferHistoryForMasterAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetSubAccountTransferHistoryForMasterAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the transfer history of a sub account (from the master account) 
             </summary>
-            <param name="email">Filter the history by email</param>
+            <param name="fromEmail">Filter the history by from email</param>
+            <param name="toEmail">Filter the history by to email</param>
             <param name="startTime">Filter the history by startTime</param>
             <param name="endTime">Filter the history by endTime</param>
             <param name="page">The page of the results</param>
@@ -6937,6 +6957,34 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetUniversalTransferHistory(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets a list of universal transfers
+            </summary>
+            <param name="fromEmail">Filter the list by from email (fromEmail and toEmail cannot be present at same time)</param>
+            <param name="toEmail">Filter the list by to email (fromEmail and toEmail cannot be present at same time)</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">The page of the results</param>
+            <param name="limit">The max amount of results to return (Default 500, max 500)</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of universal transfers</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.GetUniversalTransferHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets a list of universal transfers
+            </summary>
+            <param name="fromEmail">Filter the list by from email (fromEmail and toEmail cannot be present at same time)</param>
+            <param name="toEmail">Filter the list by to email (fromEmail and toEmail cannot be present at same time)</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">The page of the results</param>
+            <param name="limit">The max amount of results to return (Default 500, max 500)</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of universal transfers</returns>
+        </member>
         <member name="T:Binance.Net.Interfaces.SubClients.IBinanceClientSystem">
             <summary>
             System interface
@@ -7102,7 +7150,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Withdrawal confirmation</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientWithdrawDeposit.GetWithdrawalHistory(System.String,System.Nullable{Binance.Net.Enums.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientWithdrawDeposit.GetWithdrawalHistory(System.String,System.Nullable{Binance.Net.Enums.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the withdrawal history
             </summary>
@@ -7112,9 +7160,11 @@
             <param name="endTime">Filter end time till</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
+            <param name="limit">Add limit. Default: 1000, Max: 1000</param>
+            <param name="offset">Add offset</param>
             <returns>List of withdrawals</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientWithdrawDeposit.GetWithdrawalHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientWithdrawDeposit.GetWithdrawalHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the withdrawal history
             </summary>
@@ -7124,6 +7174,8 @@
             <param name="endTime">Filter end time till</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
+            <param name="limit">Add limit. Default: 1000, Max: 1000</param>
+            <param name="offset">Add offset</param>
             <returns>List of withdrawals</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientWithdrawDeposit.GetDepositHistory(System.String,System.Nullable{Binance.Net.Enums.DepositStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
@@ -17295,24 +17347,9 @@
             The email associated with the sub account
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccount.Status">
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccount.IsFreeze">
             <summary>
-            The status of the sub account
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccount.Activated">
-            <summary>
-            Whether or not the sub account has been activated
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccount.Mobile">
-            <summary>
-            The mobile associated with the sub account
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccount.GoogleAuthentication">
-            <summary>
-            If Google authentication is enabled
+            Is account frozen
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccount.CreateTime">
@@ -17940,6 +17977,16 @@
             The timestamp of the transfer
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountTransfer.Status">
+            <summary>
+            Status of the transaction
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountTransfer.TransactionId">
+            <summary>
+            Transaction Id
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountTransferResult">
             <summary>
             Sub account transfer result
@@ -17993,6 +18040,61 @@
         <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountTransferSubAccount.Timestamp">
             <summary>
             Timestamp of the transfer
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountUniversalTransfersList.Transactions">
+            <summary>
+            Transactions
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction">
+            <summary>
+            Binance sub account universal transaction
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction.TransactionId">
+            <summary>
+            Transaction id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction.FromEmail">
+            <summary>
+            From email
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction.ToEmail">
+            <summary>
+            To email
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction.FromAccountType">
+            <summary>
+            From account type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction.ToAccountType">
+            <summary>
+            To account type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction.Amount">
+            <summary>
+            Amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction.CreateTime">
+            <summary>
+            The time the universal transaction was created
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.UserStream.BinanceStreamAccountInfo">
@@ -18330,19 +18432,9 @@
             Account status info
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceAccountStatus.Message">
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceAccountStatus.Data">
             <summary>
-            The result message
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceAccountStatus.Success">
-            <summary>
-            Success boolean
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceAccountStatus.Objects">
-            <summary>
-            Parameters
+            The result status
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceDepositAddress">
@@ -18455,6 +18547,21 @@
             Info
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceDustLogList">
+            <summary>
+            Dust log response details
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceDustLogList.Total">
+            <summary>
+            Total counts of exchange
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceDustLogList.UserAssetDribblets">
+            <summary>
+            Rows
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceDustLog">
             <summary>
             Dust log details
@@ -18498,11 +18605,6 @@
         <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceDustLogDetails.ServiceChargeAmount">
             <summary>
             Service charge
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceDustLogDetails.UId">
-            <summary>
-            Identifier
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceDustLogDetails.Amount">
@@ -18925,26 +19027,6 @@
             Status string for deposit
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawalList">
-            <summary>
-            Wrapper for list of withdrawals
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawalList.List">
-            <summary>
-            The list of withdrawals
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawalList.Success">
-            <summary>
-            Boolean indicating if the withdrawal list retrieval was successful
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawalList.Message">
-            <summary>
-            Message what went wrong if retrieving wasn't successful
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawal">
             <summary>
             Information about a withdrawal
@@ -18990,24 +19072,24 @@
             The asset that was withdrawn
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawal.Network">
+            <summary>
+            Network that was used
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawal.Status">
             <summary>
             The status of the withdrawal
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawal.TransferType">
+            <summary>
+            Transfer type: 1 for internal transfer, 0 for external transfer 
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawalPlaced">
             <summary>
             Result of placing a withdrawal
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawalPlaced.Success">
-            <summary>
-            Boolean indicating the success of submitting the withdrawal
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawalPlaced.Message">
-            <summary>
-            Message describing what went wrong if not successful
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawalPlaced.Id">
@@ -19112,10 +19194,16 @@
         <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFutures.SubscribeToKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Interfaces.IBinanceStreamKlineData})">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFutures.SubscribeToKlineUpdatesAsync(System.String,System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{Binance.Net.Interfaces.IBinanceStreamKlineData})">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFutures.SubscribeToKlineUpdates(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Interfaces.IBinanceStreamKlineData})">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFutures.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Interfaces.IBinanceStreamKlineData})">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFutures.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{Binance.Net.Interfaces.IBinanceStreamKlineData})">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFutures.SubscribeToSymbolMiniTickerUpdates(System.String,System.Action{Binance.Net.Interfaces.IBinanceMiniTick})">
@@ -19433,16 +19521,25 @@
         </member>
         <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFuturesCoin.SubscribeToKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Interfaces.IBinanceStreamKlineData})">
             <summary>
-            Subscribes to the candlestick update stream for the provided symbol
+            Subscribes to the candlestick update stream for the provided symbol and interval
             </summary>
             <param name="symbol">The symbol</param>
             <param name="interval">The interval of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFuturesCoin.SubscribeToKlineUpdatesAsync(System.String,System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{Binance.Net.Interfaces.IBinanceStreamKlineData})">
+            <summary>
+            Subscribes to the candlestick update stream for the provided symbol and intervals
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="intervals">The intervals of the candlesticks</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
         <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFuturesCoin.SubscribeToKlineUpdates(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Interfaces.IBinanceStreamKlineData})">
             <summary>
-            Subscribes to the candlestick update stream for the provided symbols
+            Subscribes to the candlestick update stream for the provided symbols and interval
             </summary>
             <param name="symbols">The symbols</param>
             <param name="interval">The interval of the candlesticks</param>
@@ -19451,10 +19548,19 @@
         </member>
         <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFuturesCoin.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Interfaces.IBinanceStreamKlineData})">
             <summary>
-            Subscribes to the candlestick update stream for the provided symbols
+            Subscribes to the candlestick update stream for the provided symbols and interval
             </summary>
             <param name="symbols">The symbols</param>
             <param name="interval">The interval of the candlesticks</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFuturesCoin.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{Binance.Net.Interfaces.IBinanceStreamKlineData})">
+            <summary>
+            Subscribes to the candlestick update stream for the provided symbols and intervals
+            </summary>
+            <param name="symbols">The symbols</param>
+            <param name="intervals">The intervals of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -19807,16 +19913,25 @@
         </member>
         <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFuturesUsdt.SubscribeToKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Interfaces.IBinanceStreamKlineData})">
             <summary>
-            Subscribes to the candlestick update stream for the provided symbol
+            Subscribes to the candlestick update stream for the provided symbol and interval
             </summary>
             <param name="symbol">The symbol</param>
             <param name="interval">The interval of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFuturesUsdt.SubscribeToKlineUpdatesAsync(System.String,System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{Binance.Net.Interfaces.IBinanceStreamKlineData})">
+            <summary>
+            Subscribes to the candlestick update stream for the provided symbol and intervals
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="intervals">The intervals of the candlesticks</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
         <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFuturesUsdt.SubscribeToKlineUpdates(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Interfaces.IBinanceStreamKlineData})">
             <summary>
-            Subscribes to the candlestick update stream for the provided symbols
+            Subscribes to the candlestick update stream for the provided symbols and interval
             </summary>
             <param name="symbols">The symbols</param>
             <param name="interval">The interval of the candlesticks</param>
@@ -19825,10 +19940,19 @@
         </member>
         <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFuturesUsdt.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Interfaces.IBinanceStreamKlineData})">
             <summary>
-            Subscribes to the candlestick update stream for the provided symbols
+            Subscribes to the candlestick update stream for the provided symbols and interval
             </summary>
             <param name="symbols">The symbols</param>
             <param name="interval">The interval of the candlesticks</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFuturesUsdt.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{Binance.Net.Interfaces.IBinanceStreamKlineData})">
+            <summary>
+            Subscribes to the candlestick update stream for the provided symbols and intervals
+            </summary>
+            <param name="symbols">The symbols</param>
+            <param name="intervals">The intervals of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -20020,16 +20144,25 @@
         </member>
         <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientSpot.SubscribeToKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Interfaces.IBinanceStreamKlineData})">
             <summary>
-            Subscribes to the candlestick update stream for the provided symbol
+            Subscribes to the candlestick update stream for the provided symbol and interval
             </summary>
             <param name="symbol">The symbol</param>
             <param name="interval">The interval of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientSpot.SubscribeToKlineUpdatesAsync(System.String,System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{Binance.Net.Interfaces.IBinanceStreamKlineData})">
+            <summary>
+            Subscribes to the candlestick update stream for the provided symbol and intervals
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="intervals">The intervals of the candlesticks</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
         <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientSpot.SubscribeToKlineUpdates(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Interfaces.IBinanceStreamKlineData})">
             <summary>
-            Subscribes to the candlestick update stream for the provided symbols
+            Subscribes to the candlestick update stream for the provided symbols and interval
             </summary>
             <param name="symbols">The symbols</param>
             <param name="interval">The interval of the candlesticks</param>
@@ -20038,10 +20171,19 @@
         </member>
         <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientSpot.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{Binance.Net.Interfaces.IBinanceStreamKlineData})">
             <summary>
-            Subscribes to the candlestick update stream for the provided symbols
+            Subscribes to the candlestick update stream for the provided symbols and interval
             </summary>
             <param name="symbols">The symbols</param>
             <param name="interval">The interval of the candlesticks</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientSpot.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{Binance.Net.Interfaces.IBinanceStreamKlineData})">
+            <summary>
+            Subscribes to the candlestick update stream for the provided symbols and intervals
+            </summary>
+            <param name="symbols">The symbols</param>
+            <param name="intervals">The intervals of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -21711,35 +21853,36 @@
             Sub accounts endpoints
             </summary>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccounts(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccounts(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <summary>
             Gets a list of sub accounts associated with this master account
             </summary>
             <param name="email">Filter the list by email</param>
-            <param name="accountStatus">Filter the list by account status</param>
             <param name="page">The page of the results</param>
             <param name="limit">The max amount of results to return</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="isFreeze">Is freezed</param>
             <param name="ct">Cancellation token</param>
             <returns>List of sub accounts</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountsAsync(System.String,System.Nullable{Binance.Net.Enums.SubAccountStatus},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountsAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <summary>
             Gets a list of sub accounts associated with this master account
             </summary>
             <param name="email">Filter the list by email</param>
-            <param name="accountStatus">Filter the list by account status</param>
             <param name="page">The page of the results</param>
             <param name="limit">The max amount of results to return</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="isFreeze">Is freezed</param>
             <param name="ct">Cancellation token</param>
             <returns>List of sub accounts</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountTransferForMasterHistory(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountTransferForMasterHistory(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the transfer history of a sub account (from the master account) 
             </summary>
-            <param name="email">Filter the history by email</param>
+            <param name="fromEmail">Filter the history by from email</param>
+            <param name="toEmail">Filter the history by to email</param>
             <param name="startTime">Filter the history by startTime</param>
             <param name="endTime">Filter the history by endTime</param>
             <param name="page">The page of the results</param>
@@ -21748,11 +21891,12 @@
             <param name="ct">Cancellation token</param>
             <returns>List of transfers</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountTransferHistoryForMasterAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetSubAccountTransferHistoryForMasterAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the transfer history of a sub account (from the master account) 
             </summary>
-            <param name="email">Filter the history by email</param>
+            <param name="fromEmail">Filter the history by from email</param>
+            <param name="toEmail">Filter the history by to email</param>
             <param name="startTime">Filter the history by startTime</param>
             <param name="endTime">Filter the history by endTime</param>
             <param name="page">The page of the results</param>
@@ -22169,6 +22313,34 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetUniversalTransferHistory(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets a list of universal transfers
+            </summary>
+            <param name="fromEmail">Filter the list by from email (fromEmail and toEmail cannot be present at same time)</param>
+            <param name="toEmail">Filter the list by to email (fromEmail and toEmail cannot be present at same time)</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">The page of the results</param>
+            <param name="limit">The max amount of results to return (Default 500, max 500)</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of universal transfers</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.GetUniversalTransferHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets a list of universal transfers
+            </summary>
+            <param name="fromEmail">Filter the list by from email (fromEmail and toEmail cannot be present at same time)</param>
+            <param name="toEmail">Filter the list by to email (fromEmail and toEmail cannot be present at same time)</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">The page of the results</param>
+            <param name="limit">The max amount of results to return (Default 500, max 500)</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of universal transfers</returns>
+        </member>
         <member name="T:Binance.Net.SubClients.BinanceClientWithdrawDeposit">
             <summary>
             Withdraw/Deposit endpoints
@@ -22222,7 +22394,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Withdrawal confirmation</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientWithdrawDeposit.GetWithdrawalHistory(System.String,System.Nullable{Binance.Net.Enums.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientWithdrawDeposit.GetWithdrawalHistory(System.String,System.Nullable{Binance.Net.Enums.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the withdrawal history
             </summary>
@@ -22232,9 +22404,11 @@
             <param name="endTime">Filter end time till</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
+            <param name="limit">Add limit. Default: 1000, Max: 1000</param>
+            <param name="offset">Add offset</param>
             <returns>List of withdrawals</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientWithdrawDeposit.GetWithdrawalHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientWithdrawDeposit.GetWithdrawalHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the withdrawal history
             </summary>
@@ -22243,6 +22417,8 @@
             <param name="startTime">Filter start time from</param>
             <param name="endTime">Filter end time till</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="limit">Add limit. Default: 1000, Max: 1000</param>
+            <param name="offset">Add offset</param>
             <param name="ct">Cancellation token</param>
             <returns>List of withdrawals</returns>
         </member>
@@ -24486,7 +24662,7 @@
             Close the user stream for margin account
             </summary>
             <param name="symbol">The isolated symbol</param>
-            <param name="listenKey">The listen key to keep alive</param>
+            <param name="listenKey">The listen key to invalidate</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -24495,7 +24671,7 @@
             Close the user stream for margin account
             </summary>
             <param name="symbol">The isolated symbol</param>
-            <param name="listenKey">The listen key to keep alive</param>
+            <param name="listenKey">The listen key to invalidate</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -25838,7 +26014,7 @@
             <summary>
             Stops the current user stream
             </summary>
-            <param name="listenKey">The listen key to keep alive</param>
+            <param name="listenKey">The listen key to invalidate</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -25846,7 +26022,7 @@
             <summary>
             Stops the current user stream
             </summary>
-            <param name="listenKey">The listen key to keep alive</param>
+            <param name="listenKey">The listen key to invalidate</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>

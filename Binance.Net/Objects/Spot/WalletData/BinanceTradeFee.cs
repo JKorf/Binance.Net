@@ -1,19 +1,7 @@
-﻿using CryptoExchange.Net.Attributes;
-using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Spot.WalletData
 {
-    internal class BinanceTradeFeeWrapper
-    {
-        [JsonOptionalProperty]
-        [JsonProperty("msg")]
-        public string? Message { get; set; }
-        public bool Success { get; set; }
-        [JsonProperty("tradeFee")]
-        public IEnumerable<BinanceTradeFee>? Data { get; set; }
-    }
-
     /// <summary>
     /// Trade fee info
     /// </summary>
@@ -26,12 +14,12 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// <summary>
         /// The fee for trades where you're the maker
         /// </summary>
-        [JsonProperty("maker")]
+        [JsonProperty("makerCommission")]
         public decimal MakerFee { get; set; }
         /// <summary>
         /// The fee for trades where you're the taker
         /// </summary>
-        [JsonProperty("taker")]
+        [JsonProperty("takerCommission")]
         public decimal TakerFee { get; set; }
     }
 }
