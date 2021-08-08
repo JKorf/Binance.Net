@@ -49,8 +49,8 @@ namespace Binance.Net.Objects.Shared
         {
             get
             {
-                if (_price == 0 && Type == OrderType.Market && QuantityFilled != 0)
-                    return QuoteQuantityFilled / QuantityFilled;
+                if (QuantityFilled != 0)
+                    return BinanceHelpers.Floor(QuoteQuantityFilled / QuantityFilled);
                 return _price;
             }
             set => _price = value;
@@ -129,19 +129,5 @@ namespace Binance.Net.Objects.Shared
         /// Quantity which is still open to be filled
         /// </summary>
         public decimal QuantityRemaining => Quantity - QuantityFilled;
-
-        /// <summary>
-        /// The average price the order was filled
-        /// </summary>
-        public decimal? AverageFillPrice
-        {
-            get
-            {
-                if (QuantityFilled == 0)
-                    return null;
-
-                return QuoteQuantityFilled / QuantityFilled;
-            }
-        }
     }
 }

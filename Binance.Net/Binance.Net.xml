@@ -2367,7 +2367,7 @@
             Price
             </summary>
         </member>
-        <member name="P:Binance.Net.Interfaces.IBinanceFuturesLiquidation.LastQuantityFilled">
+        <member name="P:Binance.Net.Interfaces.IBinanceFuturesLiquidation.Quantity">
             <summary>
             Total quantity
             </summary>
@@ -10851,22 +10851,17 @@
             The price of the order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.CumulativeQuantity">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.QuoteQuantityFilled">
             <summary>
             Cumulative amount
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.CumulativeQuoteQuantity">
-            <summary>
-            Cumulative amount
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.ExecutedQuantity">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.QuantityFilled">
             <summary>
             The quantity of the order that is executed
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.OriginalQuantity">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.Quantity">
             <summary>
             The original quantity of the order
             </summary>
@@ -11312,14 +11307,14 @@
             The average price of the order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.QuantityFilled">
-            <summary>
-            Cumulative amount
-            </summary>
-        </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.QuoteQuantityFilled">
             <summary>
             Cumulative amount in quote currency
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.QuantityFilled">
+            <summary>
+            The quantity of the order that is executed
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.Quantity">
@@ -11911,7 +11906,7 @@
             Price
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesLiquidation.LastQuantityFilled">
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesLiquidation.Quantity">
             <summary>
             Total quantity
             </summary>
@@ -14853,7 +14848,7 @@
             Average price
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceForcedLiquidation.ExecutedQuantity">
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceForcedLiquidation.QuantityFilled">
             <summary>
             The executed quantity
             </summary>
