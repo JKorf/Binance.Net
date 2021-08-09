@@ -94,7 +94,7 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// The accumulated realized PnL
         /// </summary>
         [JsonProperty("cr")]
-        public decimal RealizedPnL { get; set; }
+        public decimal RealizedPnl { get; set; }
         /// <summary>
         /// The Unrealized PnL
         /// </summary>

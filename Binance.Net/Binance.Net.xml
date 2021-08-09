@@ -778,7 +778,7 @@
             Futures welcome bonus
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.IncomeType.RealizedPnL">
+        <member name="F:Binance.Net.Enums.IncomeType.RealizedPnl">
             <summary>
             Futures realized profit
             </summary>
@@ -3556,7 +3556,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The candlestick data for the provided symbol</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesCoinMarket.Get24HPricesAsync(System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesCoinMarket.GetTickersAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Get data regarding the last 24 hours change
             </summary>
@@ -3635,7 +3635,7 @@
             COIN-M futures order endpoints
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesCoinOrder.GetMyTradesAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesCoinOrder.GetUserTradesAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user trades for provided symbol
             </summary>
@@ -3836,7 +3836,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of open orders</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesOrders.GetAllOrdersAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesOrders.GetOrdersAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets all orders for the provided symbol
             </summary>
@@ -3931,7 +3931,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Data over the last 24 hours</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtMarket.Get24HPricesAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtMarket.GetTickersAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get data regarding the last 24 hours change
             </summary>
@@ -4020,7 +4020,7 @@
             USDT-M futures order endpoints
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtOrder.GetMyTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtOrder.GetUserTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user trades for provided symbol
             </summary>
@@ -5028,7 +5028,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The order book for the symbol</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientMarket.GetSymbolTradesAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientMarket.GetRecentTradeHistoryAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the recent trades for a symbol
             </summary>
@@ -5037,7 +5037,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of recent trades</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientMarket.GetHistoricalSymbolTradesAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientMarket.GetTradeHistoryAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets the historical  trades for a symbol
             </summary>
@@ -5047,7 +5047,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of recent trades</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientMarket.GetAggregatedTradesAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientMarket.GetAggregatedTradeHistoryAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
             </summary>
@@ -5958,7 +5958,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The specific margin account order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetOpenMarginAccountOrdersAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetMarginAccountOpenOrdersAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets a list of open margin account orders
             </summary>
@@ -5968,7 +5968,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of open margin account orders</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetAllMarginAccountOrdersAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetMarginAccountOrdersAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets all margin account orders for the provided symbol
             </summary>
@@ -5982,7 +5982,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of margin account orders</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetMyMarginAccountTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetMarginAccountUserTradeHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user margin account trades for provided symbol
             </summary>
@@ -6208,7 +6208,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Trade fees</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotMarket.Get24HPriceAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotMarket.GetTickerAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get data regarding the last 24 hours for the provided symbol
             </summary>
@@ -6216,7 +6216,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Data over the last 24 hours</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotMarket.Get24HPricesAsync(System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotMarket.GetTickersAsync(System.Threading.CancellationToken)">
             <summary>
             Get data regarding the last 24 hours for all symbols
             </summary>
@@ -6337,7 +6337,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of open orders</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.GetAllOrdersAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.GetOrdersAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets all orders for the provided symbol
             </summary>
@@ -6412,7 +6412,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Open order lists</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.GetMyTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.GetUserTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user trades for provided symbol
             </summary>
@@ -8377,7 +8377,7 @@
             Position Initial Margin
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.UnrealizedPnL">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.UnrealizedPnl">
             <summary>
             Unrealized Profit
             </summary>
@@ -8392,7 +8392,7 @@
             Crossed Wallet Balance
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.CrossUnrealizedPnL">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.CrossUnrealizedPnl">
             <summary>
             Unrealized profit of crossed positions
             </summary>
@@ -8432,7 +8432,7 @@
             Crossed wallet balance
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance.CrossUnrealizedPnL">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance.CrossUnrealizedPnl">
             <summary>
             Unrealized profit of crossed positions
             </summary>
@@ -9489,7 +9489,7 @@
             Leverage
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionBase.UnrealizedPnL">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionBase.UnrealizedPnl">
             <summary>
             Unrealized profit
             </summary>
@@ -10897,7 +10897,7 @@
             The entry price
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition.RealizedPnL">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition.RealizedPnl">
             <summary>
             The accumulated realized PnL
             </summary>
@@ -19405,7 +19405,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The order book for the symbol</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesMarket.GetSymbolTradesAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesMarket.GetRecentTradeHistoryAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the recent trades for a symbol
             </summary>
@@ -19414,7 +19414,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of recent trades</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesMarket.GetHistoricalSymbolTradesAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesMarket.GetTradeHistoryAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets the historical  trades for a symbol
             </summary>
@@ -19424,7 +19424,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of recent trades</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesMarket.GetAggregatedTradesAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesMarket.GetAggregatedTradeHistoryAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
             </summary>
@@ -19638,7 +19638,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of open orders</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.GetAllOrdersAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.GetOrdersAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets all orders for the provided symbol
             </summary>
@@ -19816,7 +19816,7 @@
             Api path
             </summary>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinMarket.GetSymbolTradesAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinMarket.GetRecentTradeHistoryAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the recent trades for a symbol
             </summary>
@@ -19825,7 +19825,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of recent trades</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinMarket.GetHistoricalSymbolTradesAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinMarket.GetTradeHistoryAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets the historical  trades for a symbol
             </summary>
@@ -19893,7 +19893,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The candlestick data for the provided symbol</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinMarket.Get24HPricesAsync(System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinMarket.GetTickersAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Get data regarding the last 24 hours change
             </summary>
@@ -19977,7 +19977,7 @@
             Api path
             </summary>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinOrder.GetMyTradesAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinOrder.GetUserTradesAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user trades for provided symbol
             </summary>
@@ -20123,7 +20123,7 @@
             Api path
             </summary>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket.GetSymbolTradesAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket.GetRecentTradeHistoryAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the recent trades for a symbol
             </summary>
@@ -20132,7 +20132,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of recent trades</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket.GetHistoricalSymbolTradesAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket.GetTradeHistoryAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets the historical  trades for a symbol
             </summary>
@@ -20150,7 +20150,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Mark data</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket.Get24HPricesAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket.GetTickersAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get data regarding the last 24 hours change
             </summary>
@@ -20256,7 +20256,7 @@
             Api path
             </summary>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtOrder.GetMyTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtOrder.GetUserTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user trades for provided symbol
             </summary>
@@ -20662,7 +20662,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The specific margin account order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetOpenMarginAccountOrdersAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetMarginAccountOpenOrdersAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets a list of open margin account orders
             </summary>
@@ -20672,7 +20672,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of open margin account orders</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetAllMarginAccountOrdersAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetMarginAccountOrdersAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets all margin account orders for the provided symbol
             </summary>
@@ -20686,7 +20686,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of margin account orders</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetMyMarginAccountTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetMarginAccountUserTradeHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user margin account trades for provided symbol
             </summary>
@@ -20935,7 +20935,7 @@
             <param name="ct">Cancellation token</param>
             <returns>The order book for the symbol</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotMarket.GetSymbolTradesAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotMarket.GetRecentTradeHistoryAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the recent trades for a symbol
             </summary>
@@ -20944,7 +20944,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of recent trades</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotMarket.GetHistoricalSymbolTradesAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotMarket.GetTradeHistoryAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets the historical  trades for a symbol
             </summary>
@@ -20954,7 +20954,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of recent trades</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotMarket.GetAggregatedTradesAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotMarket.GetAggregatedTradeHistoryAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
             </summary>
@@ -20986,7 +20986,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotMarket.Get24HPriceAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotMarket.GetTickerAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get data regarding the last 24 hours for the provided symbol
             </summary>
@@ -20994,7 +20994,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Data over the last 24 hours</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotMarket.Get24HPricesAsync(System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotMarket.GetTickersAsync(System.Threading.CancellationToken)">
             <summary>
             Get data regarding the last 24 hours for all symbols
             </summary>
@@ -21124,7 +21124,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of open orders</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.GetAllOrdersAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.GetOrdersAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets all orders for the provided symbol
             </summary>
@@ -21199,7 +21199,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Open order lists</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.GetMyTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.GetUserTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user trades for provided symbol
             </summary>

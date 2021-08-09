@@ -507,13 +507,13 @@ namespace Binance.Net
 
         async Task<WebCallResult<ICommonTicker>> IExchangeClient.GetTickerAsync(string symbol)
         {
-            var tickers = await Spot.Market.Get24HPriceAsync(symbol).ConfigureAwait(false);
+            var tickers = await Spot.Market.GetTickerAsync(symbol).ConfigureAwait(false);
             return tickers.As<ICommonTicker>((Binance24HPrice)tickers.Data);
         }
 
         async Task<WebCallResult<IEnumerable<ICommonTicker>>> IExchangeClient.GetTickersAsync()
         {
-            var tickers = await Spot.Market.Get24HPricesAsync().ConfigureAwait(false);
+            var tickers = await Spot.Market.GetTickersAsync().ConfigureAwait(false);
             return tickers.As<IEnumerable<ICommonTicker>>(tickers.Data?.Select(d => (Binance24HPrice)d));
         }
 
@@ -531,7 +531,7 @@ namespace Binance.Net
 
         async Task<WebCallResult<IEnumerable<ICommonRecentTrade>>> IExchangeClient.GetRecentTradesAsync(string symbol)
         {
-            var tradesResult = await Spot.Market.GetSymbolTradesAsync(symbol).ConfigureAwait(false);
+            var tradesResult = await Spot.Market.GetRecentTradeHistoryAsync(symbol).ConfigureAwait(false);
             return tradesResult.As<IEnumerable<ICommonRecentTrade>>(tradesResult.Data);
         }
 
@@ -555,7 +555,7 @@ namespace Binance.Net
             if(string.IsNullOrEmpty(symbol))
                 return WebCallResult<IEnumerable<ICommonTrade>>.CreateErrorResult(new ArgumentError(nameof(symbol) + " required for Binance " + nameof(IExchangeClient.GetTradesAsync)));
                
-            var result = await Spot.Order.GetMyTradesAsync(symbol!).ConfigureAwait(false);
+            var result = await Spot.Order.GetUserTradesAsync(symbol!).ConfigureAwait(false);
             if(!result)
                 return WebCallResult<IEnumerable<ICommonTrade>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
@@ -573,7 +573,7 @@ namespace Binance.Net
             if (symbol == null)
                 return WebCallResult<IEnumerable<ICommonOrder>>.CreateErrorResult(new ArgumentError(nameof(symbol) + " required for Binance " + nameof(IExchangeClient.GetClosedOrdersAsync)));
 
-            var result = await Spot.Order.GetAllOrdersAsync(symbol).ConfigureAwait(false);
+            var result = await Spot.Order.GetOrdersAsync(symbol).ConfigureAwait(false);
             return result.As<IEnumerable<ICommonOrder>>(result.Data);
         }
 

@@ -76,7 +76,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateResponseClient(JsonConvert.SerializeObject(expected));
 
             // act
-            var result = await client.Spot.Market.Get24HPriceAsync("BNBBTC");
+            var result = await client.Spot.Market.GetTickerAsync("BNBBTC");
 
             // assert
             Assert.AreEqual(true, result.Success);
@@ -211,7 +211,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateResponseClient(trades);
 
             // act
-            var result = await client.Spot.Market.GetAggregatedTradesAsync("BNBBTC");
+            var result = await client.Spot.Market.GetAggregatedTradeHistoryAsync("BNBBTC");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -305,7 +305,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = await client.Spot.Order.GetAllOrdersAsync("BNBBTC");
+            var result = await client.Spot.Order.GetOrdersAsync("BNBBTC");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -479,7 +479,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = await client.Spot.Order.GetMyTradesAsync("BNBBTC");
+            var result = await client.Spot.Order.GetUserTradesAsync("BNBBTC");
 
             // assert
             Assert.IsTrue(result.Success);
