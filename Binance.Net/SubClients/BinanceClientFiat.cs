@@ -71,7 +71,7 @@ namespace Binance.Net.SubClients
 
         #endregion
 
-        #region Get Fiat Payments History 
+        #region Get Fiat Deposit Withdraw History 
         /// <summary>
         /// Get Fiat deposit/withdrawal history
         /// </summary>
