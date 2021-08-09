@@ -1798,6 +1798,21 @@
             Auto adjust order when not complying
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.TransactionType">
+            <summary>
+            Transaction type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.TransactionType.Deposit">
+            <summary>
+            Deposit
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.TransactionType.Withdrawal">
+            <summary>
+            Withdrawal
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.TransferDirection">
             <summary>
             Direction of a transfer
@@ -4601,7 +4616,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientFiat.GetFiatDepositWithdrawHistoryAsync(Binance.Net.Enums.OrderSide,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientFiat.GetFiatDepositWithdrawHistoryAsync(Binance.Net.Enums.TransactionType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get Fiat deposit/withdrawal history
             </summary>
@@ -6083,7 +6098,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of margin account orders</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetMarginAccountUserTradeHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetMarginAccountUserTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user margin account trades for provided symbol
             </summary>
@@ -18472,7 +18487,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientFiat.GetFiatDepositWithdrawHistoryAsync(Binance.Net.Enums.OrderSide,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientFiat.GetFiatDepositWithdrawHistoryAsync(Binance.Net.Enums.TransactionType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get Fiat deposit/withdrawal history
             </summary>
@@ -20918,7 +20933,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of margin account orders</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetMarginAccountUserTradeHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetMarginAccountUserTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user margin account trades for provided symbol
             </summary>

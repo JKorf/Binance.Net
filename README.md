@@ -165,6 +165,19 @@ Yes, as long as the API endpoints are the same. Switch by changing the BaseAddre
 See Timestamping.
 
 ## Release notes
+* Version 7.0.0-beta4 - 09 Aug 2021
+    * Added Fiat endpoints
+    * Renamed Get24HPriceAsync to GetTickerAsync
+    * Renamed GetMyTradesAsync to GetUserTradesAsync
+    * Renamed GetAllOrdersAsync to GetOrdersAsync
+    * Renamed GetSymbolTradesAsync to GetRecentTradeHistoryAsync
+    * Renamed GetHistoricalSymbolTradesAsync to GetTradeHistoryAsync
+    * Renamed GetAggregatedTradesAsync to GetAggregatedTradeHistoryAsync
+    * Renamed GetOpenMarginAccountOrdersAsync to GetMarginAccountOpenOrdersAsync
+    * Renamed GetAllMarginAccountOrdersAsync to GetMarginAccountOrdersAsync
+    * Renamed GetMyMarginAccountTradesAsync to GetMarginAccountUserTradesAsync
+    * Renamed various PnL properties to Pnl
+
 * Version 7.0.0-beta3 - 26 Jul 2021
     * Updated CryptoExchange.Net
 
