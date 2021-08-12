@@ -14,6 +14,7 @@ using Binance.Net.Objects.Futures.MarketData;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
+using Microsoft.Extensions.Logging;
 
 namespace Binance.Net.SubClients.Futures.Usdt
 {
@@ -24,6 +25,8 @@ namespace Binance.Net.SubClients.Futures.Usdt
     {
         internal BinanceFuturesUsdtExchangeInfo? ExchangeInfo;
         private const string positionInformationEndpoint = "positionRisk";
+        private const string tradingStatusEndpoint = "apiTradingStatus";
+
         /// <summary>
         /// Api path
         /// </summary>
@@ -70,15 +73,6 @@ namespace Binance.Net.SubClients.Futures.Usdt
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of Positions</returns>
-        public WebCallResult<IEnumerable<BinancePositionDetailsUsdt>> GetPositionInformation(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default) => GetPositionInformationAsync(symbol, receiveWindow, ct).Result;
-
-        /// <summary>
-        /// Gets account information
-        /// </summary>
-        /// <param name="symbol">Symbol</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of Positions</returns>
         public async Task<WebCallResult<IEnumerable<BinancePositionDetailsUsdt>>> GetPositionInformationAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -96,6 +90,31 @@ namespace Binance.Net.SubClients.Futures.Usdt
             return await BaseClient.SendRequestInternal<IEnumerable<BinancePositionDetailsUsdt>>(GetUrl(positionInformationEndpoint, Api, "2"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
+        #endregion
+
+        #region Trading status
+        /// <summary>
+        /// Gets the trading status for the current account
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The trading status of the account</returns>
+        public async Task<WebCallResult<BinanceFuturesTradingStatus>> GetTradingStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceFuturesTradingStatus>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", BaseClient.GetTimestamp() },
+            };
+
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? BaseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await BaseClient.SendRequestInternal<BinanceFuturesTradingStatus>(BaseClient.GetUrlUsdtFutures(tradingStatusEndpoint, Api, "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+
+        }
         #endregion
 
         internal override async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? price, decimal? stopPrice, OrderType type, CancellationToken ct)
@@ -145,7 +164,7 @@ namespace Binance.Net.SubClients.Futures.Usdt
                             return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: LotSize filter failed. Original quantity: {quantity}, Closest allowed: {outputQuantity}");
                         }
 
-                        _log.Write(LogVerbosity.Info, $"Quantity clamped from {quantity} to {outputQuantity}");
+                        _log.Write(LogLevel.Information, $"Quantity clamped from {quantity} to {outputQuantity}");
                     }
                 }
             }
@@ -163,7 +182,7 @@ namespace Binance.Net.SubClients.Futures.Usdt
                         if (BaseClient.TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
                             return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter max/min failed. Original price: {price}, Closest allowed: {outputPrice}");
 
-                        _log.Write(LogVerbosity.Info, $"price clamped from {price} to {outputPrice}");
+                        _log.Write(LogLevel.Information, $"price clamped from {price} to {outputPrice}");
                     }
 
                     if (stopPrice != null)
@@ -176,7 +195,7 @@ namespace Binance.Net.SubClients.Futures.Usdt
                                 return BinanceTradeRuleResult.CreateFailed(
                                     $"Trade rules check failed: Stop price filter max/min failed. Original stop price: {stopPrice}, Closest allowed: {outputStopPrice}");
 
-                            _log.Write(LogVerbosity.Info,
+                            _log.Write(LogLevel.Information,
                                 $"Stop price clamped from {stopPrice} to {outputStopPrice} based on price filter");
                         }
                     }
@@ -191,7 +210,7 @@ namespace Binance.Net.SubClients.Futures.Usdt
                         if (BaseClient.TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
                             return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter tick failed. Original price: {price}, Closest allowed: {outputPrice}");
 
-                        _log.Write(LogVerbosity.Info, $"price rounded from {beforePrice} to {outputPrice}");
+                        _log.Write(LogLevel.Information, $"price rounded from {beforePrice} to {outputPrice}");
                     }
 
                     if (stopPrice != null)
@@ -204,7 +223,7 @@ namespace Binance.Net.SubClients.Futures.Usdt
                                 return BinanceTradeRuleResult.CreateFailed(
                                     $"Trade rules check failed: Stop price filter tick failed. Original stop price: {stopPrice}, Closest allowed: {outputStopPrice}");
 
-                            _log.Write(LogVerbosity.Info,
+                            _log.Write(LogLevel.Information,
                                 $"Stop price floored from {beforeStopPrice} to {outputStopPrice} based on price filter");
                         }
                     }

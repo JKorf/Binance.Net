@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Binance.Net.Converters;
+﻿using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Newtonsoft.Json;
 
@@ -15,7 +12,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// Symbol
         /// </summary>
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Entry price
         /// </summary>
@@ -29,7 +26,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Unrealized profit
         /// </summary>
         [JsonProperty("unrealizedProfit")]
-        public decimal UnrealizedPnL { get; set; }
+        public decimal UnrealizedPnl { get; set; }
 
         /// <summary>
         /// Position side

@@ -15,7 +15,7 @@ namespace Binance.Net.Objects.Futures.MarketStream
         /// The symbol of the order book (only filled from stream updates)
         /// </summary>
         [JsonProperty("s")]
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
         /// The time the event happened
@@ -47,12 +47,12 @@ namespace Binance.Net.Objects.Futures.MarketStream
         /// The list of diff bids
         /// </summary>
         [JsonProperty("b")]
-        public IEnumerable<BinanceOrderBookEntry> Bids { get; set; } = new List<BinanceOrderBookEntry>();
+        public IEnumerable<BinanceOrderBookEntry> Bids { get; set; } = Array.Empty<BinanceOrderBookEntry>();
 
         /// <summary>
         /// The list of diff asks
         /// </summary>
         [JsonProperty("a")]
-        public IEnumerable<BinanceOrderBookEntry> Asks { get; set; } = new List<BinanceOrderBookEntry>();
+        public IEnumerable<BinanceOrderBookEntry> Asks { get; set; } = Array.Empty<BinanceOrderBookEntry>();
     }
 }

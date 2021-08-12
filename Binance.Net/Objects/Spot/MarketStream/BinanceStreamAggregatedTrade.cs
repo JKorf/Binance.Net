@@ -14,7 +14,7 @@ namespace Binance.Net.Objects.Spot.MarketStream
         /// The symbol the trade was for
         /// </summary>
         [JsonProperty("s")]
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The id of this aggregated trade
         /// </summary>

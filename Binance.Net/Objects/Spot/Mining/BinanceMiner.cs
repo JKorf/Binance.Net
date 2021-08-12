@@ -23,7 +23,7 @@ namespace Binance.Net.Objects.Spot.Mining
         /// <summary>
         /// Worker data
         /// </summary>
-        public IEnumerable<BinanceMinerInfo> WorkerDatas { get; set; } = new List<BinanceMinerInfo>();
+        public IEnumerable<BinanceMinerInfo> WorkerDatas { get; set; } = Array.Empty<BinanceMinerInfo>();
     }
 
     /// <summary>
@@ -34,11 +34,11 @@ namespace Binance.Net.Objects.Spot.Mining
         /// <summary>
         /// Worker id
         /// </summary>
-        public string WorkerId { get; set; } = "";
+        public string WorkerId { get; set; } = string.Empty;
         /// <summary>
         /// Worker name
         /// </summary>
-        public string WorkerName { get; set; } = "";
+        public string WorkerName { get; set; } = string.Empty;
         /// <summary>
         /// Status
         /// </summary>

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
@@ -19,7 +17,7 @@ namespace Binance.Net.Objects.Blvt
         /// <summary>
         /// Token name
         /// </summary>
-        public string TokenName { get; set; } = "";
+        public string TokenName { get; set; } = string.Empty;
         /// <summary>
         /// Redemption amount
         /// </summary>

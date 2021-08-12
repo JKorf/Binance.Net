@@ -20,7 +20,8 @@ using Binance.Net.Objects.Spot.MarginData;
 using Binance.Net.Objects.Spot;
 using Binance.Net.Enums;
 using Binance.Net.Objects.Futures.FuturesData;
-using CryptoExchange.Net.Logging;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace Binance.Net.UnitTests
 {
@@ -29,7 +30,7 @@ namespace Binance.Net.UnitTests
     {
         [TestCase(1508837063996)]
         [TestCase(1507156891385)]
-        public void GetServerTime_Should_RespondWithServerTimeDateTime(long milisecondsTime)
+        public async Task GetServerTime_Should_RespondWithServerTimeDateTime(long milisecondsTime)
         {
             // arrange
             DateTime expected = new DateTime(1970, 1, 1).AddMilliseconds(milisecondsTime);
@@ -37,7 +38,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateResponseClient(JsonConvert.SerializeObject(time), new BinanceClientOptions() { AutoTimestamp = false });
 
             // act
-            var result = client.Spot.System.GetServerTime();
+            var result = await client.Spot.System.GetServerTimeAsync();
 
             // assert
             Assert.AreEqual(true, result.Success);
@@ -45,7 +46,7 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void GetPrices24H_Should_RespondWithPricesForSymbol()
+        public async Task GetPrices24H_Should_RespondWithPricesForSymbol()
         {
             // arrange
             var expected = new Binance24HPrice()
@@ -75,7 +76,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateResponseClient(JsonConvert.SerializeObject(expected));
 
             // act
-            var result = client.Spot.Market.Get24HPrice("BNBBTC");
+            var result = await client.Spot.Market.GetTickerAsync("BNBBTC");
 
             // assert
             Assert.AreEqual(true, result.Success);
@@ -83,7 +84,7 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void GetOrderBook_Should_RespondWithOrderBook()
+        public async Task GetOrderBook_Should_RespondWithOrderBook()
         {
             // arrange
             var orderBook = new BinanceOrderBook()
@@ -120,7 +121,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateResponseClient("{\"lastUpdateId\":123,\"asks\": [[0.1, 1.1], [0.2, 2.2]], \"bids\": [[0.3,3.3], [0.4,4.4]]}");
 
             // act
-            var result = client.Spot.Market.GetOrderBook("BNBBTC");
+            var result = await client.Spot.Market.GetOrderBookAsync("BNBBTC");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -132,7 +133,7 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void GetAccountInfo_Should_RespondWithAccountInfo()
+        public async Task GetAccountInfo_Should_RespondWithAccountInfo()
         {
             // arrange
             var accountInfo = new BinanceAccountInfo()
@@ -168,7 +169,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.General.GetAccountInfo();
+            var result = await client.General.GetAccountInfoAsync();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -178,7 +179,7 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void GetAggregatedTrades_Should_RespondWithGetAggregatedTrades()
+        public async Task GetAggregatedTrades_Should_RespondWithGetAggregatedTrades()
         {
             // arrange
             var trades = new[]
@@ -210,7 +211,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateResponseClient(trades);
 
             // act
-            var result = client.Spot.Market.GetAggregatedTrades("BNBBTC");
+            var result = await client.Spot.Market.GetAggregatedTradeHistoryAsync("BNBBTC");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -221,7 +222,7 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void GetAllBookPrices_Should_RespondWithAllBookPrices()
+        public async Task GetAllBookPrices_Should_RespondWithAllBookPrices()
         {
             // arrange
             var prices = new[]
@@ -247,7 +248,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateResponseClient(prices);
 
             // act
-            var result = client.Spot.Market.GetAllBookPrices();
+            var result = await client.Spot.Market.GetAllBookPricesAsync();
 
             // assert
             var data = result.Data.ToList();
@@ -258,7 +259,7 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void GetAllOrders_Should_RespondWithAllOrders()
+        public async Task GetAllOrders_Should_RespondWithAllOrders()
         {
             // arrange
             var orders = new[]
@@ -304,7 +305,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Spot.Order.GetAllOrders("BNBBTC");
+            var result = await client.Spot.Order.GetOrdersAsync("BNBBTC");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -314,7 +315,7 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void GetAllPrices_Should_RespondWithAllPrices()
+        public async Task GetAllPrices_Should_RespondWithAllPrices()
         {
             // arrange
             var prices = new[]
@@ -334,7 +335,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateResponseClient(prices);
 
             // act
-            var result = client.Spot.Market.GetPrices();
+            var result = await client.Spot.Market.GetPricesAsync();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -344,7 +345,7 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void GetDepositHistory_Should_RespondWithDepositHistory()
+        public async Task GetDepositHistory_Should_RespondWithDepositHistory()
         {
             // arrange
             var history = new List<BinanceDeposit>()
@@ -372,7 +373,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.WithdrawDeposit.GetDepositHistory();
+            var result = await client.WithdrawDeposit.GetDepositHistoryAsync();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -382,7 +383,7 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void GetKlines_Should_RespondWithKlines()
+        public async Task GetKlines_Should_RespondWithKlines()
         {
             // arrange
             var klines = new[]
@@ -428,7 +429,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Spot.Market.GetKlines("BNBBTC", KlineInterval.OneMinute);
+            var result = await client.Spot.Market.GetKlinesAsync("BNBBTC", KlineInterval.OneMinute);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -438,7 +439,7 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void GetMyTrades_Should_RespondWithTrades()
+        public async Task GetMyTrades_Should_RespondWithTrades()
         {
             // arrange
             var trades = new[]
@@ -478,7 +479,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Spot.Order.GetMyTrades("BNBBTC");
+            var result = await client.Spot.Order.GetUserTradesAsync("BNBBTC");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -488,7 +489,7 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void GetOpenOrders_Should_RespondWithOpenOrders()
+        public async Task GetOpenOrders_Should_RespondWithOpenOrders()
         {
             // arrange
             var orders = new[]
@@ -534,7 +535,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Spot.Order.GetOpenOrders("BNBBTC");
+            var result = await client.Spot.Order.GetOpenOrdersAsync("BNBBTC");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -544,7 +545,7 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void GetWithdrawHistory_Should_RespondWithWithdrawHistory()
+        public async Task GetWithdrawHistory_Should_RespondWithWithdrawHistory()
         {
             // arrange
             var history = new List<BinanceWithdrawal>()
@@ -577,7 +578,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.WithdrawDeposit.GetWithdrawalHistory();
+            var result = await client.WithdrawDeposit.GetWithdrawalHistoryAsync();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -587,7 +588,7 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void CancelOrder_Should_RespondWithCanceledOrder()
+        public async Task CancelOrder_Should_RespondWithCanceledOrder()
         {
             // arrange
             var canceled = new BinanceCanceledOrder()
@@ -605,7 +606,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Spot.Order.CancelOrder("BNBBTC",orderId:123);
+            var result = await client.Spot.Order.CancelOrderAsync("BNBBTC",orderId:123);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -613,7 +614,7 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void PlaceTestOrder_Should_RespondWithPlacedTestOrder()
+        public async Task PlaceTestOrder_Should_RespondWithPlacedTestOrder()
         {
             // arrange
             var placed = new BinancePlacedOrder()
@@ -631,7 +632,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Spot.Order.PlaceTestOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, timeInForce: TimeInForce.GoodTillCancel, quantity: 1, price: 2);
+            var result = await client.Spot.Order.PlaceTestOrderAsync("BNBBTC", OrderSide.Buy, OrderType.Limit, timeInForce: TimeInForce.GoodTillCancel, quantity: 1, price: 2);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -639,7 +640,7 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void PlaceOrder_Should_RespondWithPlacedOrder()
+        public async Task PlaceOrder_Should_RespondWithPlacedOrder()
         {
             // arrange
             var placed = new BinancePlacedOrder()
@@ -657,7 +658,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Spot.Order.PlaceOrder("BNBBTC", OrderSide.Buy, OrderType.Limit, timeInForce: TimeInForce.GoodTillCancel, quantity: 1, price: 2);
+            var result = await client.Spot.Order.PlaceOrderAsync("BNBBTC", OrderSide.Buy, OrderType.Limit, timeInForce: TimeInForce.GoodTillCancel, quantity: 1, price: 2);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -665,7 +666,7 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void QueryOrder_Should_RespondWithQueriedOrder()
+        public async Task QueryOrder_Should_RespondWithQueriedOrder()
         {
             // arrange
             var order = new BinanceOrder()
@@ -692,7 +693,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Spot.Order.GetOrder("BNBBTC", orderId: 1);
+            var result = await client.Spot.Order.GetOrderAsync("BNBBTC", orderId: 1);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -700,7 +701,7 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void Withdraw_Should_RespondWithSuccess()
+        public async Task Withdraw_Should_RespondWithSuccess()
         {
             // arrange
             var order = new BinanceWithdrawalPlaced()
@@ -715,7 +716,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.WithdrawDeposit.Withdraw("BNBBTC", "test", 1, "x");
+            var result = await client.WithdrawDeposit.WithdrawAsync("BNBBTC", "test", 1, "x");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -723,7 +724,7 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void PlaceMultipleOrders_Should_RespondWithResultList()
+        public async Task PlaceMultipleOrders_Should_RespondWithResultList()
         {
             // arrange
             var response =
@@ -733,11 +734,11 @@ namespace Binance.Net.UnitTests
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false,
-                LogVerbosity = LogVerbosity.Debug
+                LogLevel = LogLevel.Debug
             });
 
             // act
-            var result = client.FuturesUsdt.Order.PlaceMultipleOrders(new []
+            var result = await client.FuturesUsdt.Order.PlaceMultipleOrdersAsync(new []
             {
                 new BinanceFuturesBatchOrder()
                 {
@@ -760,10 +761,10 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void GetTradingStatus_Should_RespondWithSuccess()
+        public async Task GetTradingStatus_Should_RespondWithSuccess()
         {
             // arrange
-            var status = new BinanceTradingStatusWrapper()
+            var status = new BinanceResult<BinanceTradingStatus>
             {
                 Data = new BinanceTradingStatus()
                 {
@@ -799,7 +800,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.General.GetTradingStatus();
+            var result = await client.Spot.GetTradingStatusAsync();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -810,7 +811,7 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void StartUserStream_Should_RespondWithListenKey()
+        public async Task StartUserStream_Should_RespondWithListenKey()
         {
             // arrange
             var key = new BinanceListenKey()
@@ -825,7 +826,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Spot.UserStream.StartUserStream();
+            var result = await client.Spot.UserStream.StartUserStreamAsync();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -833,7 +834,7 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void KeepAliveUserStream_Should_Respond()
+        public async Task KeepAliveUserStream_Should_Respond()
         {
             // arrange
             var client = TestHelpers.CreateResponseClient("{}", new BinanceClientOptions()
@@ -843,14 +844,14 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Spot.UserStream.KeepAliveUserStream("test");
+            var result = await client.Spot.UserStream.KeepAliveUserStreamAsync("test");
 
             // assert
             Assert.IsTrue(result.Success);
         }
 
         [TestCase]
-        public void StopUserStream_Should_Respond()
+        public async Task StopUserStream_Should_Respond()
         {
             // arrange
             var client = TestHelpers.CreateResponseClient("{}", new BinanceClientOptions()
@@ -860,14 +861,14 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Spot.UserStream.StopUserStream("test");
+            var result = await client.Spot.UserStream.StopUserStreamAsync("test");
 
             // assert
             Assert.IsTrue(result.Success);
         }
 
         [TestCase()]
-        public void EnablingAutoTimestamp_Should_CallServerTime()
+        public async Task EnablingAutoTimestamp_Should_CallServerTime()
         {
             // arrange
             var client = TestHelpers.CreateResponseClient("{}", new BinanceClientOptions()
@@ -879,7 +880,7 @@ namespace Binance.Net.UnitTests
             // act
             try
             {
-                client.Spot.Order.GetOpenOrders();
+                client.Spot.Order.GetOpenOrdersAsync();
             }
             catch (Exception)
             {
@@ -892,14 +893,14 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase()]
-        public void ReceivingBinanceError_Should_ReturnBinanceErrorAndNotSuccess()
+        public async Task ReceivingBinanceError_Should_ReturnBinanceErrorAndNotSuccess()
         {
             // arrange
             var client = TestHelpers.CreateClient();
             TestHelpers.SetErrorWithResponse(client, "{\"msg\": \"Error!\", \"code\": 123}", HttpStatusCode.BadRequest);
 
             // act
-            var result = client.Spot.System.GetServerTime();
+            var result = await client.Spot.System.GetServerTimeAsync();
 
             // assert
             Assert.IsFalse(result.Success);
@@ -909,7 +910,7 @@ namespace Binance.Net.UnitTests
         }
 
         [Test]
-        public void ProvidingApiCredentials_Should_SaveApiCredentials()
+        public async Task ProvidingApiCredentials_Should_SaveApiCredentials()
         {
             // arrange
             // act
@@ -922,7 +923,7 @@ namespace Binance.Net.UnitTests
 
         //[Test]
         [TestCase("", "D0F0F055B496CBD9FD1C8CA6719D0B2253F54C667753F70AEF13F394D9161A8B")]
-        public void AddingAuthToUriString_Should_GiveCorrectSignature(string parameters, string signature)
+        public async Task AddingAuthToUriString_Should_GiveCorrectSignature(string parameters, string signature)
         {
             // arrange
             var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
@@ -936,7 +937,7 @@ namespace Binance.Net.UnitTests
         }
 
         [Test]
-        public void AddingAuthToRequest_Should_AddApiKeyHeader()
+        public async Task AddingAuthToRequest_Should_AddApiKeyHeader()
         {
             // arrange
             var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
@@ -951,7 +952,7 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void Transfer_Should_RespondWithMarginTransaction()
+        public async Task Transfer_Should_RespondWithMarginTransaction()
         {
             // arrange
             var placed = new BinanceTransaction()
@@ -966,7 +967,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Margin.Transfer("USDT", 1001, TransferDirectionType.MainToMargin);
+            var result = await client.Margin.TransferAsync("USDT", 1001, TransferDirectionType.MainToMargin);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -974,7 +975,7 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void Borrow_Should_RespondWithMarginTransaction()
+        public async Task Borrow_Should_RespondWithMarginTransaction()
         {
             // arrange
             var placed = new BinanceTransaction()
@@ -989,7 +990,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Margin.Borrow("USDT", 2002);
+            var result = await client.Margin.BorrowAsync("USDT", 2002);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -997,7 +998,7 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void Repay_Should_RespondWithMarginTransaction()
+        public async Task Repay_Should_RespondWithMarginTransaction()
         {
             // arrange
             var placed = new BinanceTransaction()
@@ -1012,7 +1013,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Margin.Repay("USDT", 2002);
+            var result = await client.Margin.RepayAsync("USDT", 2002);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -1020,7 +1021,7 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void PlaceMarginOrder_Should_RespondWithMarginPlacedOrder()
+        public async Task PlaceMarginOrder_Should_RespondWithMarginPlacedOrder()
         {
             // arrange
             var placed = new BinancePlacedOrder()
@@ -1038,7 +1039,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Margin.Order.PlaceMarginOrder("BTCUSDT", OrderSide.Buy, OrderType.Limit, timeInForce: TimeInForce.GoodTillCancel, quantity: 1, price: 2);
+            var result = await client.Margin.Order.PlaceMarginOrderAsync("BTCUSDT", OrderSide.Buy, OrderType.Limit, timeInForce: TimeInForce.GoodTillCancel, quantity: 1, price: 2);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -1046,7 +1047,7 @@ namespace Binance.Net.UnitTests
         }
 
         [TestCase]
-        public void CancelMarginOrder_Should_RespondWithCanceledOrder()
+        public async Task CancelMarginOrder_Should_RespondWithCanceledOrder()
         {
             // arrange
             var canceled = new BinanceCanceledOrder()
@@ -1064,7 +1065,7 @@ namespace Binance.Net.UnitTests
             });
 
             // act
-            var result = client.Margin.Order.CancelMarginOrder("BNBBTC", orderId:123);
+            var result = await client.Margin.Order.CancelMarginOrderAsync("BNBBTC", orderId:123);
 
             // assert
             Assert.IsTrue(result.Success);
@@ -1081,7 +1082,7 @@ namespace Binance.Net.UnitTests
         [TestCase("KP3RBNB", true)]
         [TestCase("BTC-USDT", false)]
         [TestCase("BTC-USD", false)]
-        public void CheckValidBinanceSymbol(string symbol, bool isValid)
+        public async Task CheckValidBinanceSymbol(string symbol, bool isValid)
         {
             if (isValid)
                 Assert.DoesNotThrow(symbol.ValidateBinanceSymbol);

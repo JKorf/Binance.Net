@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
@@ -14,16 +13,16 @@ namespace Binance.Net.Objects.Blvt
         /// <summary>
         /// Name of the token
         /// </summary>
-        public string TokenName { get; set; } = "";
+        public string TokenName { get; set; } = string.Empty;
         /// <summary>
         /// Description of the token
         /// </summary>
-        public string Description { get; set; } = "";
+        public string Description { get; set; } = string.Empty;
 
         /// <summary>
         /// Underlying asset
         /// </summary>
-        public string Underlying { get; set; } = "";
+        public string Underlying { get; set; } = string.Empty;
         /// <summary>
         /// Token issued
         /// </summary>
@@ -31,7 +30,7 @@ namespace Binance.Net.Objects.Blvt
         /// <summary>
         /// Basket
         /// </summary>
-        public string Basket { get; set; } = "";
+        public string Basket { get; set; } = string.Empty;
         /// <summary>
         /// Nav
         /// </summary>
@@ -52,7 +51,7 @@ namespace Binance.Net.Objects.Blvt
         /// <summary>
         /// Current baskets
         /// </summary>
-        public IEnumerable<BlvtCurrentBasket> CurrentBaskets { get; set; } = new BlvtCurrentBasket[0];
+        public IEnumerable<BlvtCurrentBasket> CurrentBaskets { get; set; } = Array.Empty<BlvtCurrentBasket>();
         /// <summary>
         /// Redeem fee percentage
         /// </summary>
@@ -87,7 +86,7 @@ namespace Binance.Net.Objects.Blvt
         /// <summary>
         /// Symbol
         /// </summary>
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Amount
         /// </summary>

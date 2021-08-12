@@ -12,17 +12,17 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         /// <summary>
         /// Sub Account Id
         /// </summary>
-        public string SubAccountId { get; set; } = "";
+        public string SubAccountId { get; set; } = string.Empty;
         
         /// <summary>
         /// Address
         /// </summary>
-        public string Address { get; set; } = "";
+        public string Address { get; set; } = string.Empty;
         
         /// <summary>
         /// Address Tag
         /// </summary>
-        public string AddressTag { get; set; } = "";
+        public string AddressTag { get; set; } = string.Empty;
         
         /// <summary>
         /// Amount
@@ -32,7 +32,7 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         /// <summary>
         /// Coin
         /// </summary>
-        public string Coin { get; set; } = "";
+        public string Coin { get; set; } = string.Empty;
         
         /// <summary>
         /// Date
@@ -43,7 +43,7 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         /// <summary>
         /// Network
         /// </summary>
-        public string Network { get; set; } = "";
+        public string Network { get; set; } = string.Empty;
         
         /// <summary>
         /// Status
@@ -54,16 +54,16 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         /// Transaction Id
         /// </summary>
         [JsonProperty("txId")]
-        public string TransactionId { get; set; } = "";
+        public string TransactionId { get; set; } = string.Empty;
         
         /// <summary>
         /// Source Address
         /// </summary>
-        public string SourceAddress { get; set; } = "";
+        public string SourceAddress { get; set; } = string.Empty;
         
         /// <summary>
         /// Confirm Times
         /// </summary>
-        public string ConfirmTimes { get; set; } = "";
+        public string ConfirmTimes { get; set; } = string.Empty;
     }
 }

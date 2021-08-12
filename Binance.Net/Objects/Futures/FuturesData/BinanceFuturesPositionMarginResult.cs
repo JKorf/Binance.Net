@@ -22,7 +22,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Maximum margin value
         /// NOTE: string type, because the value van be 'inf' (infinite)
         /// </summary>
-        public string MaxNotionalValue { get; set; } = "";
+        public string MaxNotionalValue { get; set; } = string.Empty;
         /// <summary>
         /// Direction of the requested margin change
         /// </summary>

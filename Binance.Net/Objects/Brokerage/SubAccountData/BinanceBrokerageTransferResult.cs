@@ -11,12 +11,12 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         /// Transaction Id
         /// </summary>
         [JsonProperty("txnId")]
-        public string Id { get; set; } = "";
+        public string Id { get; set; } = string.Empty;
         
         /// <summary>
         /// Client Transfer Id
         /// </summary>
         [JsonProperty("clientTranId")]
-        public string ClientTransferId { get; set; } = "";
+        public string ClientTransferId { get; set; } = string.Empty;
     }
 }

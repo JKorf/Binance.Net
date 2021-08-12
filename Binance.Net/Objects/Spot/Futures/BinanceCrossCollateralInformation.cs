@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Binance.Net.Objects.Spot.Futures
+﻿namespace Binance.Net.Objects.Spot.Futures
 {
     /// <summary>
     /// Collateral info
@@ -12,11 +8,11 @@ namespace Binance.Net.Objects.Spot.Futures
         /// <summary>
         /// The loan coin
         /// </summary>
-        public string LoanCoin { get; set; } = "";
+        public string LoanCoin { get; set; } = string.Empty;
         /// <summary>
         /// The collateral coin
         /// </summary>
-        public string CollateralCoin { get; set; } = "";
+        public string CollateralCoin { get; set; } = string.Empty;
         /// <summary>
         /// Rate
         /// </summary>

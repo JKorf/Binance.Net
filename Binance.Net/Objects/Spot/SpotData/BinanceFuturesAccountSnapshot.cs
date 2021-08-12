@@ -41,11 +41,11 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// <summary>
         /// List of assets
         /// </summary>
-        public IEnumerable<BinanceFuturesAsset> Assets { get; set; } = new List<BinanceFuturesAsset>();
+        public IEnumerable<BinanceFuturesAsset> Assets { get; set; } = Array.Empty<BinanceFuturesAsset>();
         /// <summary>
         /// List of positions
         /// </summary>
-        public IEnumerable<BinanceFuturesSnapshotPosition> Positions { get; set; } = new List<BinanceFuturesSnapshotPosition>();
+        public IEnumerable<BinanceFuturesSnapshotPosition> Positions { get; set; } = Array.Empty<BinanceFuturesSnapshotPosition>();
     }
 
     /// <summary>

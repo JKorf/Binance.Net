@@ -11,12 +11,12 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// Id of the order
         /// </summary>
         [JsonProperty("orderId")]
-        public string Id { get; set; } = "";
+        public string Id { get; set; } = string.Empty;
 
         /// <summary>
         /// Client order id
         /// </summary>
-        public string ClientOrderId { get; set; } = "";
+        public string ClientOrderId { get; set; } = string.Empty;
 
         [JsonProperty("listClientOrderId")]
         private string ListClientOrderId

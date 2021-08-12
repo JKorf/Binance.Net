@@ -15,7 +15,7 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// <summary>
         /// Symbol
         /// </summary>
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Price
         /// </summary>

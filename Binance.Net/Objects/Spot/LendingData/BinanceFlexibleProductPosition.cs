@@ -14,7 +14,7 @@ namespace Binance.Net.Objects.Spot.LendingData
         /// <summary>
         /// Asset
         /// </summary>
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Average annual interest rate
         /// </summary>
@@ -44,11 +44,11 @@ namespace Binance.Net.Objects.Spot.LendingData
         /// <summary>
         /// The product id
         /// </summary>
-        public string ProductId { get; set; } = "";
+        public string ProductId { get; set; } = string.Empty;
         /// <summary>
         /// The product name
         /// </summary>
-        public string ProductName { get; set; } = "";
+        public string ProductName { get; set; } = string.Empty;
         /// <summary>
         /// Redeeming amount
         /// </summary>

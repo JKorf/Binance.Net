@@ -8,7 +8,7 @@
         /// <summary>
         /// Email of the account
         /// </summary>
-        public string Email { get; set; } = "";
+        public string Email { get; set; } = string.Empty;
         /// <summary>
         /// Whether futures trading is enabled
         /// </summary>

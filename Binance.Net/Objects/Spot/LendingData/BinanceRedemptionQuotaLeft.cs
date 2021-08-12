@@ -10,7 +10,7 @@ namespace Binance.Net.Objects.Spot.LendingData
         /// <summary>
         /// The asset
         /// </summary>
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Daily quota
         /// </summary>

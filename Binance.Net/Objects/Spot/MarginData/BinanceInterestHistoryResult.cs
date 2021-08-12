@@ -12,7 +12,7 @@ namespace Binance.Net.Objects.Spot.MarginData
         /// <summary>
         /// The asset
         /// </summary>
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// The amount of interest
         /// </summary>
@@ -34,6 +34,6 @@ namespace Binance.Net.Objects.Spot.MarginData
         /// <summary>
         /// Type of interest
         /// </summary>
-        public string Type { get; set; } = "";
+        public string Type { get; set; } = string.Empty;
     }
 }

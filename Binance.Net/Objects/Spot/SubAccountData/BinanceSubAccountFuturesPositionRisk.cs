@@ -32,7 +32,7 @@
         /// <summary>
         /// Symbol
         /// </summary>
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Unrealized profit
         /// </summary>

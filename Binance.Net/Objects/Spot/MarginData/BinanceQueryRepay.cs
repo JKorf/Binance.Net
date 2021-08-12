@@ -14,7 +14,7 @@ namespace Binance.Net.Objects.Spot.MarginData
         /// <summary>
         /// The asset of the repay
         /// </summary>
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// The transaction id of the repay
         /// </summary>`

@@ -8,7 +8,7 @@
         /// <summary>
         /// Sub Account Id
         /// </summary>
-        public string SubAccountId { get; set; } = "";
+        public string SubAccountId { get; set; } = string.Empty;
         
         /// <summary>
         /// Maker Commission

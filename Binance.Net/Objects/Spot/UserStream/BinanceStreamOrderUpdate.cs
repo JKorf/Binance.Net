@@ -15,12 +15,12 @@ namespace Binance.Net.Objects.Spot.UserStream
         /// The symbol the order is for
         /// </summary>
         [JsonProperty("s")]
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The new client order id
         /// </summary>
         [JsonProperty("c")]
-        public string ClientOrderId { get; set; } = "";
+        public string ClientOrderId { get; set; } = string.Empty;
         /// <summary>
         /// The side of the order
         /// </summary>
@@ -60,7 +60,7 @@ namespace Binance.Net.Objects.Spot.UserStream
         /// The original client order id
         /// </summary>
         [JsonProperty("C")]
-        public string? OriginalClientOrderId { get; set; } = "";
+        public string? OriginalClientOrderId { get; set; } = string.Empty;
         /// <summary>
         /// The execution type
         /// </summary>
@@ -105,7 +105,7 @@ namespace Binance.Net.Objects.Spot.UserStream
         /// The asset the commission was taken from
         /// </summary>
         [JsonProperty("N")]
-        public string CommissionAsset { get; set; } = "";
+        public string CommissionAsset { get; set; } = string.Empty;
         /// <summary>
         /// The time of the update
         /// </summary>

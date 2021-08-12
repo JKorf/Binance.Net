@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces.SubClients;
 using Binance.Net.Objects.Blvt;
-using Binance.Net.Objects.Futures.MarketData;
-using Binance.Net.Objects.Spot.MarketData;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;

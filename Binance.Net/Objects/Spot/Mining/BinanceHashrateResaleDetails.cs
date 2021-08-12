@@ -1,10 +1,7 @@
-﻿using Binance.Net.Converters;
-using Binance.Net.Enums;
-using CryptoExchange.Net.Converters;
+﻿using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Binance.Net.Objects.Spot.Mining
 {
@@ -24,7 +21,7 @@ namespace Binance.Net.Objects.Spot.Mining
         /// <summary>
         /// Transfer details
         /// </summary>
-        public IEnumerable<BinanceHashrateResaleDetailsItem> ProfitTransferDetails { get; set; } = new List<BinanceHashrateResaleDetailsItem>();
+        public IEnumerable<BinanceHashrateResaleDetailsItem> ProfitTransferDetails { get; set; } = Array.Empty<BinanceHashrateResaleDetailsItem>();
     }
 
     /// <summary>
@@ -35,15 +32,15 @@ namespace Binance.Net.Objects.Spot.Mining
         /// <summary>
         /// From user
         /// </summary>
-        public string PoolUserName { get; set; } = "";
+        public string PoolUserName { get; set; } = string.Empty;
         /// <summary>
         /// To user
         /// </summary>
-        public string ToPoolUserName { get; set; } = "";
+        public string ToPoolUserName { get; set; } = string.Empty;
         /// <summary>
         /// Algorithm
         /// </summary>
-        public string AlgoName { get; set; } = "";
+        public string AlgoName { get; set; } = string.Empty;
         /// <summary>
         /// Hash rate
         /// </summary>
@@ -57,7 +54,7 @@ namespace Binance.Net.Objects.Spot.Mining
         /// Coin name
         /// </summary>
         [JsonProperty("coinName")]
-        public string Coin { get; set; } = "";
+        public string Coin { get; set; } = string.Empty;
         /// <summary>
         /// Transferred income
         /// </summary>

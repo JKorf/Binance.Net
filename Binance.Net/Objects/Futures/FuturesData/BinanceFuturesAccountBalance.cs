@@ -1,6 +1,4 @@
-﻿using System;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Futures.FuturesData
 {
@@ -12,12 +10,12 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// Account alias
         /// </summary>
-        public string AccountAlias { get; set; } = "";
+        public string AccountAlias { get; set; } = string.Empty;
 
         /// <summary>
         /// The asset this balance is for
         /// </summary>
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
 
         /// <summary>
         /// The total balance of this asset
@@ -34,7 +32,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Unrealized profit of crossed positions
         /// </summary>
         [JsonProperty("crossUnPnl")]
-        public decimal CrossUnrealizedPnL { get; set; }
+        public decimal CrossUnrealizedPnl { get; set; }
 
         /// <summary>
         /// Available balance
@@ -44,7 +42,12 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// Maximum amount for transfer out
         /// </summary>
-        public decimal MaxWithdrawAmount { get; set; }
+		public decimal MaxWithdrawAmount { get; set; }
+
+        /// <summary>
+        /// Whether the asset can be used as margin in Multi-Assets mode
+        /// </summary>
+        public bool? MarginAvailable { get; set; }
     }
 
 }

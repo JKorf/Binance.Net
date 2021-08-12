@@ -13,8 +13,8 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         /// <summary>
         /// Data
         /// </summary>
-        public IEnumerable<BinanceBrokerageSubAccountSpotAssetInfo> Data { get; set; } = new List<BinanceBrokerageSubAccountSpotAssetInfo>();
-        
+        public IEnumerable<BinanceBrokerageSubAccountSpotAssetInfo> Data { get; set; } = Array.Empty<BinanceBrokerageSubAccountSpotAssetInfo>();
+
         /// <summary>
         /// Timestamp
         /// </summary>
@@ -30,7 +30,7 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         /// <summary>
         /// Sub Account Id
         /// </summary>
-        public string SubAccountId { get; set; } = "";
+        public string SubAccountId { get; set; } = string.Empty;
         
         /// <summary>
         /// Total Balance Of Btc

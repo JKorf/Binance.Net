@@ -13,6 +13,7 @@ using Binance.Net.Enums;
 using Binance.Net.Objects.Spot;
 using Binance.Net.Objects.Spot.UserStream;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Sockets;
 
 namespace Binance.Net.ClientWPF
 {
@@ -113,21 +114,21 @@ namespace Binance.Net.ClientWPF
             messageBoxService = new MessageBoxService();
             orderLock = new object();
 
-            BuyCommand = new DelegateCommand(Buy);
-            SellCommand = new DelegateCommand(Sell);
-            CancelCommand = new DelegateCommand(Cancel);
+            BuyCommand = new DelegateCommand(async (o) => await Buy(o));
+            SellCommand = new DelegateCommand(async (o) => await Sell(o));
+            CancelCommand = new DelegateCommand(async (o) => await Cancel(o));
             SettingsCommand = new DelegateCommand(Settings);
             CloseSettingsCommand = new DelegateCommand(CloseSettings);
 
             Task.Run(() => GetAllSymbols());
         }
 
-        public void Cancel(object o)
+        public async Task Cancel(object o)
         {
             var order = (OrderViewModel)o;
             using (var client = new BinanceClient())
             {
-                var result = client.Spot.Order.CancelOrder(SelectedSymbol.Symbol, order.Id);
+                var result = await client.Spot.Order.CancelOrderAsync(SelectedSymbol.Symbol, order.Id);
                 if (result.Success)
                     messageBoxService.ShowMessage("Order canceled!", "Sucess", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
                 else
@@ -135,11 +136,11 @@ namespace Binance.Net.ClientWPF
             }
         }
 
-        public void Buy(object o)
+        public async Task Buy(object o)
         {
             using (var client = new BinanceClient())
             {
-                var result = client.Spot.Order.PlaceOrder(SelectedSymbol.Symbol, OrderSide.Buy, OrderType.Limit, SelectedSymbol.TradeAmount, price: SelectedSymbol.TradePrice, timeInForce: TimeInForce.GoodTillCancel);
+                var result = await client.Spot.Order.PlaceOrderAsync(SelectedSymbol.Symbol, OrderSide.Buy, OrderType.Limit, SelectedSymbol.TradeAmount, price: SelectedSymbol.TradePrice, timeInForce: TimeInForce.GoodTillCancel);
                 if (result.Success)
                     messageBoxService.ShowMessage("Order placed!", "Sucess", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
                 else
@@ -147,11 +148,11 @@ namespace Binance.Net.ClientWPF
             }
         }
 
-        public void Sell(object o)
+        public async Task Sell(object o)
         {
             using (var client = new BinanceClient())
             {
-                var result = client.Spot.Order.PlaceOrder(SelectedSymbol.Symbol, OrderSide.Sell, OrderType.Limit, SelectedSymbol.TradeAmount, price: SelectedSymbol.TradePrice, timeInForce: TimeInForce.GoodTillCancel);
+                var result = await client.Spot.Order.PlaceOrderAsync(SelectedSymbol.Symbol, OrderSide.Sell, OrderType.Limit, SelectedSymbol.TradeAmount, price: SelectedSymbol.TradePrice, timeInForce: TimeInForce.GoodTillCancel);
                 if (result.Success)
                     messageBoxService.ShowMessage("Order placed!", "Sucess", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
                 else
@@ -180,7 +181,7 @@ namespace Binance.Net.ClientWPF
         {
             using (var client = new BinanceClient())
             {
-                var result = await client.Spot.Market.GetAllPricesAsync();
+                var result = await client.Spot.Market.GetPricesAsync();
                 if (result.Success)
                     AllPrices = new ObservableCollection<BinanceSymbolViewModel>(result.Data.Select(r => new BinanceSymbolViewModel(r.Symbol, r.Price)).ToList());
                 else
@@ -188,8 +189,8 @@ namespace Binance.Net.ClientWPF
             }
 
             socketClient = new BinanceSocketClient();
-            socketClient.Spot.SubscribeToAllSymbolTickerUpdates(data => {
-                foreach (var ud in data) {
+            socketClient.Spot.SubscribeToAllSymbolTickerUpdatesAsync(data => {
+                foreach (var ud in data.Data) {
                     var symbol = AllPrices.SingleOrDefault(p => p.Symbol == ud.Symbol);
                     if (symbol != null)
                         symbol.Price = ud.LastPrice;
@@ -197,11 +198,11 @@ namespace Binance.Net.ClientWPF
             });             
         }
 
-        private void Get24HourStats()
+        private async Task Get24HourStats()
         {
             using (var client = new BinanceClient())
             {
-                var result = client.Spot.Market.Get24HPrice(SelectedSymbol.Symbol);
+                var result = await client.Spot.Market.Get24HPriceAsync(SelectedSymbol.Symbol);
                 if (result.Success)
                 {
                     SelectedSymbol.HighPrice = result.Data.HighPrice;
@@ -214,11 +215,11 @@ namespace Binance.Net.ClientWPF
             }
         }
 
-        private void GetOrders()
+        private async Task GetOrders()
         {
             using (var client = new BinanceClient())
             {
-                var result = client.Spot.Order.GetAllOrders(SelectedSymbol.Symbol);
+                var result = await client.Spot.Order.GetAllOrdersAsync(SelectedSymbol.Symbol);
                 if (result.Success)
                 {
                     SelectedSymbol.Orders = new ObservableCollection<OrderViewModel>(result.Data.OrderByDescending(d => d.CreateTime).Select(o => new OrderViewModel()
@@ -244,25 +245,25 @@ namespace Binance.Net.ClientWPF
             if (ApiKey == null || ApiSecret == null)
                 return;
 
-            Task.Run(() =>
+            Task.Run(async () =>
             {
                 using (var client = new BinanceClient())
                 {
-                    var startOkay = client.Spot.UserStream.StartUserStream();
+                    var startOkay = await client.Spot.UserStream.StartUserStreamAsync();
                     if (!startOkay.Success)
                     {
                         messageBoxService.ShowMessage($"Error starting user stream: {startOkay.Error.Message}", "error", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
 
-                    var subOkay = socketClient.Spot.SubscribeToUserDataUpdates(startOkay.Data, OnAccountUpdate, OnOrderUpdate, null, null, null);
+                    var subOkay = await socketClient.Spot.SubscribeToUserDataUpdatesAsync(startOkay.Data, OnOrderUpdate, null, OnAccountUpdate, null);
                     if (!subOkay.Success)
                     {
                         messageBoxService.ShowMessage($"Error subscribing to user stream: {subOkay.Error.Message}", "error", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
 
-                    var accountResult = client.General.GetAccountInfo();
+                    var accountResult = await client.General.GetAccountInfoAsync();
                     if (accountResult.Success)
                         Assets = new ObservableCollection<AssetViewModel>(accountResult.Data.Balances.Where(b => b.Free != 0 || b.Locked != 0).Select(b => new AssetViewModel() { Asset = b.Asset, Free = b.Free, Locked = b.Locked }).ToList());
                     else
@@ -286,23 +287,25 @@ namespace Binance.Net.ClientWPF
 
         }
 
-        private void OnAccountUpdate(BinanceStreamAccountInfo data)
+        private void OnAccountUpdate(DataEvent<BinanceStreamPositionsUpdate> data)
         {
-            Assets = new ObservableCollection<AssetViewModel>(data.Balances.Where(b => b.Free != 0 || b.Locked != 0).Select(b => new AssetViewModel() { Asset = b.Asset, Free = b.Free, Locked = b.Locked }).ToList());
+            Assets = new ObservableCollection<AssetViewModel>(data.Data.Balances.Where(b => b.Free != 0 || b.Locked != 0).Select(b => new AssetViewModel() { Asset = b.Asset, Free = b.Free, Locked = b.Locked }).ToList());
         }
 
-        private void OnOrderUpdate(BinanceStreamOrderUpdate data)
+        private void OnOrderUpdate(DataEvent<BinanceStreamOrderUpdate> data)
         {
-            var symbol = AllPrices.SingleOrDefault(a => a.Symbol == data.Symbol);
+            var orderUpdate = data.Data;
+
+            var symbol = AllPrices.SingleOrDefault(a => a.Symbol == orderUpdate.Symbol);
             if (symbol == null)
                 return;
 
             lock (orderLock)
             {
-                var order = symbol.Orders.SingleOrDefault(o => o.Id == data.OrderId);
+                var order = symbol.Orders.SingleOrDefault(o => o.Id == orderUpdate.OrderId);
                 if (order == null)
                 {
-                    if (data.RejectReason != OrderRejectReason.None || data.ExecutionType != ExecutionType.New)
+                    if (orderUpdate.RejectReason != OrderRejectReason.None || orderUpdate.ExecutionType != ExecutionType.New)
                         // Order got rejected, no need to show
                         return;
 
@@ -310,22 +313,22 @@ namespace Binance.Net.ClientWPF
                     {
                         symbol.AddOrder(new OrderViewModel()
                         {
-                            ExecutedQuantity = data.QuoteQuantityFilled,
-                            Id = data.OrderId,
-                            OriginalQuantity = data.Quantity,
-                            Price = data.Price,
-                            Side = data.Side,
-                            Status = data.Status,
-                            Symbol = data.Symbol,
-                            Time = data.CreateTime,
-                            Type = data.Type
+                            ExecutedQuantity = orderUpdate.QuoteQuantityFilled,
+                            Id = orderUpdate.OrderId,
+                            OriginalQuantity = orderUpdate.Quantity,
+                            Price = orderUpdate.Price,
+                            Side = orderUpdate.Side,
+                            Status = orderUpdate.Status,
+                            Symbol = orderUpdate.Symbol,
+                            Time = orderUpdate.CreateTime,
+                            Type = orderUpdate.Type
                         });
                     });
                 }
                 else
                 {
-                    order.ExecutedQuantity = data.QuoteQuantityFilled;
-                    order.Status = data.Status;
+                    order.ExecutedQuantity = orderUpdate.QuantityFilled;
+                    order.Status = orderUpdate.Status;
                 }
             }
         }

@@ -8,18 +8,18 @@
         /// <summary>
         /// The deposit address
         /// </summary>
-        public string Address { get; set; } = "";
+        public string Address { get; set; } = string.Empty;
         /// <summary>
         /// Url
         /// </summary>
-        public string Url { get; set; } = "";
+        public string Url { get; set; } = string.Empty;
         /// <summary>
         /// Address tag
         /// </summary>
-        public string Tag { get; set; } = "";
+        public string Tag { get; set; } = string.Empty;
         /// <summary>
         /// Coin the address is for
         /// </summary>
-        public string Coin { get; set; } = "";
+        public string Coin { get; set; } = string.Empty;
     }
 }

@@ -16,7 +16,7 @@
         /// <summary>
         /// Futures realized profit
         /// </summary>
-        RealizedPnL,
+        RealizedPnl,
         /// <summary>
         /// Futures funding fee
         /// </summary>

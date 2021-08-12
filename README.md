@@ -1,91 +1,15 @@
-# ![Icon](https://github.com/JKorf/Binance.Net/blob/master/Binance.Net/Icon/icon.png?raw=true) Binance.Net 
+# Binance.Net
+![Build status](https://travis-ci.org/JKorf/Binance.Net.svg?branch=master) ![Nuget version](https://img.shields.io/nuget/v/binance.net.svg)  ![Nuget downloads](https://img.shields.io/nuget/dt/Binance.Net.svg)
 
-![Build status](https://travis-ci.org/JKorf/Binance.Net.svg?branch=master)
-
-A .Net wrapper for the Binance API as described on [Binance](https://binance-docs.github.io/apidocs/spot/en/#change-log), including all features the API provides (Spot, (Isolated) margin and futures) using clear and readable objects.
+Binance.Net is a wrapper around the Binance API as described on [Binance](https://binance-docs.github.io/apidocs/spot/en/#change-log), including all features the API provides using clear and readable objects. The library support the spot, (isolated) margin and futures API's, both the REST and websocket API's.
 
 **If you think something is broken, something is missing or have any questions, please open an [Issue](https://github.com/JKorf/Binance.Net/issues)**
 
 ## CryptoExchange.Net
-Implementation is build upon the CryptoExchange.Net library, make sure to also check out the documentation on that: [docs](https://github.com/JKorf/CryptoExchange.Net)
-
-Other CryptoExchange.Net implementations:
-<table>
-<tr>
-<td><a href="https://github.com/JKorf/Bittrex.Net"><img src="https://github.com/JKorf/Bittrex.Net/blob/master/Bittrex.Net/Icon/icon.png?raw=true"></a>
-<br />
-<a href="https://github.com/JKorf/Bittrex.Net">Bittrex</a>
-</td>
-<td><a href="https://github.com/JKorf/Bitfinex.Net"><img src="https://github.com/JKorf/Bitfinex.Net/blob/master/Bitfinex.Net/Icon/icon.png?raw=true"></a>
-<br />
-<a href="https://github.com/JKorf/Bitfinex.Net">Bitfinex</a>
-</td>
-<td><a href="https://github.com/JKorf/CoinEx.Net"><img src="https://github.com/JKorf/CoinEx.Net/blob/master/CoinEx.Net/Icon/icon.png?raw=true"></a>
-<br />
-<a href="https://github.com/JKorf/CoinEx.Net">CoinEx</a>
-</td>
-<td><a href="https://github.com/JKorf/Huobi.Net"><img src="https://github.com/JKorf/Huobi.Net/blob/master/Huobi.Net/Icon/icon.png?raw=true"></a>
-<br />
-<a href="https://github.com/JKorf/Huobi.Net">Huobi</a>
-</td>
-<td><a href="https://github.com/JKorf/Kucoin.Net"><img src="https://github.com/JKorf/Kucoin.Net/blob/master/Kucoin.Net/Icon/icon.png?raw=true"></a>
-<br />
-<a href="https://github.com/JKorf/Kucoin.Net">Kucoin</a>
-</td>
-<td><a href="https://github.com/JKorf/Kraken.Net"><img src="https://github.com/JKorf/Kraken.Net/blob/master/Kraken.Net/Icon/icon.png?raw=true"></a>
-<br />
-<a href="https://github.com/JKorf/Kraken.Net">Kraken</a>
-</td>
-</tr>
-</table>
-Implementations from third parties:
-<table>
-<tr>
-<td><a href="https://github.com/Zaliro/Switcheo.Net"><img src="https://github.com/Zaliro/Switcheo.Net/blob/master/Resources/switcheo-coin.png?raw=true"></a>
-<br />
-<a href="https://github.com/Zaliro/Switcheo.Net">Switcheo</a>
-</td>
-<td><a href="https://github.com/ridicoulous/LiquidQuoine.Net"><img src="https://github.com/ridicoulous/LiquidQuoine.Net/blob/master/Resources/icon.png?raw=true"></a>
-<br />
-<a href="https://github.com/ridicoulous/LiquidQuoine.Net">Liquid</a>
-</td>
-<td><a href="https://github.com/ridicoulous/Bitmex.Net"><img src="https://github.com/ridicoulous/Bitmex.Net/blob/master/Bitmex.Net/Icon/icon.png"></a>
-<br />
-<a href="https://github.com/ridicoulous/Bitmex.Net">Bitmex</a>
-</td>
-<td><a href="https://github.com/intelligences/HitBTC.Net"><img src="https://github.com/intelligences/HitBTC.Net/blob/master/src/HitBTC.Net/Icon/icon.png?raw=true"></a>
-<br />
-<a href="https://github.com/intelligences/HitBTC.Net">HitBTC</a>
-</td>
-<td><a href="https://github.com/EricGarnier/LiveCoin.Net"><img src="https://github.com/EricGarnier/LiveCoin.Net/blob/master/LiveCoin.Net/Icon/icon.png?raw=true"></a>
-<br />
-<a href="https://github.com/EricGarnier/LiveCoin.Net">LiveCoin</a>
-</td>
-<td><a href="https://github.com/burakoner/OKEx.Net"><img src="https://github.com/burakoner/OKEx.Net/blob/master/Okex.Net/Icon/icon.png?raw=true"></a>
-<br />
-<a href="https://github.com/burakoner/OKEx.Net">OKEx</a>
-</td>
-<td><a href="https://github.com/burakoner/Chiliz.Net"><img src="https://github.com/burakoner/Chiliz.Net/blob/master/Chiliz.Net/Icon/icon.png?raw=true"></a>
-<br />
-<a href="https://github.com/burakoner/Chiliz.Net">Chiliz</a>
-</td>
-<td><a href="https://github.com/burakoner/BtcTurk.Net"><img src="https://github.com/burakoner/BtcTurk.Net/blob/master/BtcTurk.Net/Icon/icon.png?raw=true"></a>
-<br />
-<a href="https://github.com/burakoner/BtcTurk.Net">BtcTurk</a>
-</td>
-<td><a href="https://github.com/burakoner/Thodex.Net"><img src="https://github.com/burakoner/Thodex.Net/blob/master/Thodex.Net/Icon/icon.png?raw=true"></a>
-<br />
-<a href="https://github.com/burakoner/Thodex.Net">Thodex</a>
-</td>
-<td><a href="https://github.com/d-ugarov/Exante.Net"><img src="https://github.com/d-ugarov/Exante.Net/blob/master/Exante.Net/Icon/icon.png?raw=true"></a>
-<br />
-<a href="https://github.com/d-ugarov/Exante.Net">Exante</a>
-</td>
-</tr>
-</table>
+This library is build upon the CryptoExchange.Net library, make sure to check out the documentation on that for basic usage: [docs](https://github.com/JKorf/CryptoExchange.Net)
 
 ## Donations
-I develop and maintain this package on my own for free in my spare time. Donations are greatly appreciated.
+I develop and maintain this package on my own for free in my spare time. Donations are greatly appreciated. If you prefer to donate any other currency please contact me.
 
 **Btc**:  12KwZk3r2Y3JZ2uMULcjqqBvXmpDwjhhQS  
 **Eth**:  0x069176ca1a4b1d6e0b7901a6bc0dbf3bb0bf5cc2  
@@ -94,82 +18,216 @@ I develop and maintain this package on my own for free in my spare time. Donatio
 ## Discord
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
-
-## Installation
-![Nuget version](https://img.shields.io/nuget/v/binance.net.svg)  ![Nuget downloads](https://img.shields.io/nuget/dt/Binance.Net.svg)
-Available on [Nuget](https://www.nuget.org/packages/Binance.Net/).
-```
-pm> Install-Package Binance.Net
-```
-To get started with Binance.Net first you will need to get the library itself. The easiest way to do this is to install the package into your project using  [NuGet](https://www.nuget.org/packages/Binance.Net/). Using Visual Studio this can be done in two ways.
-
-### Using the package manager
-In Visual Studio right click on your solution and select 'Manage NuGet Packages for solution...'. A screen will appear which initially shows the currently installed packages. In the top bit select 'Browse'. This will let you download net package from the NuGet server. In the search box type 'Binance.Net' and hit enter. The Binance.Net package should come up in the results. After selecting the package you can then on the right hand side select in which projects in your solution the package should install. After you've selected all project you wish to install and use Binance.Net in hit 'Install' and the package will be downloaded and added to you projects.
-
-### Using the package manager console
-In Visual Studio in the top menu select 'Tools' -> 'NuGet Package Manager' -> 'Package Manager Console'. This should open up a command line interface. On top of the interface there is a dropdown menu where you can select the Default Project. This is the project that Binance.Net will be installed in. After selecting the correct project type  `Install-Package Binance.Net`  in the command line interface. This should install the latest version of the package in your project.
-
-After doing either of above steps you should now be ready to actually start using Binance.Net.
 ## Getting started
-After installing it's time to actually use it. To get started we have to add the Binance.Net namespace:  `using Binance.Net;`.
+Make sure you have installed the Binance.Net [Nuget](https://www.nuget.org/packages/Binance.Net/) package and add `using Binance.Net` to your usings.  You now have access to 2 clients:  
+**BinanceClient**  
+The client to interact with the Binance REST API. Getting prices:
+````C#
+var client = new BinanceClient(new BinanceClientOptions(){
+ // Specify options for the client
+});
+var callResult = await client.Spot.Market.GetPricesAsync();
+// Make sure to check if the call was successful
+if(!callResult.Success)
+{
+  // Call failed, check callResult.Error for more info
+}
+else
+{
+  // Call succeeded, callResult.Data will have the resulting data
+}
+````
 
-Binance.Net provides two clients to interact with the Binance API. The  `BinanceClient`  provides all rest API calls. The  `BinanceSocketClient`  provides functions to interact with the websocket provided by the Binance API. Both clients are disposable and as such can be used in a  `using`statement.
+Placing an order:
+````C#
+var client = new BinanceClient(new BinanceClientOptions(){
+ // Specify options for the client
+ ApiCredentials = new ApiCredentials("Key", "Secret")
+});
+var callResult = await client.Spot.Order.PlaceOrderAsync("BTCUSDT", OrderSide.Buy, OrderType.Limit, quantity: 10, price: 50, timeInForce: TimeInForce.GoodTillCancel);
+// Make sure to check if the call was successful
+if(!callResult.Success)
+{
+  // Call failed, check callResult.Error for more info
+}
+else
+{
+  // Call succeeded, callResult.Data will have the resulting data
+}
+````
 
-## Examples
-Examples can be found in the Examples folder.
+Since the Binance API is quite large the `BinanceClient` has been split in multiple sub clients to make it easier to find the correct endpoints:  
+`client.General`: General account endpoints  
+`client.SubAccount`: Subaccount managing endpoints  
+`client.Margin`: (Isolated) margin trading endpoints  
+`client.Spot`: Spot trading endpoints  
+`client.Lending`: Lending endpoints  
+`client.Mining`: Mining endpoints  
+`client.WithdrawDeposit`: Endpoints regarding withdrawing/depositing  
+`client.Brokerage`: Brokerage endpoints  
+`client.FuturesUsdt`: USD-M futures trading endpoints  
+`client.FuturesCoin`: Coin-M futures trading endpoints  
+`client.Blvt`: Leveraged tokens endpoints  
+`client.BSwap`: Liquidity swap endpoints  
+
+The trading Spot, Margin, USD futures and Coin futures sub client are once again separated in different categories. The categories are the same for these sub clients, for example the Spot categories:  
+`client.Spot.System`: General endpoints for Spot trading  
+`client.Spot.Market`: Endpoints for getting market data  
+`client.Spot.Order`: Endpoints for placing and requesting orders  
+`client.Spot.UserStream`: Endpoints for starting/stopping the user stream in the `BinanceSocketClient`   
+`client.Spot.Futures`: Endpoints for futures interaction
+
+**BinanceSocketClient**
+The client to interact with the Binance websocket API. Basic usage:
+````C#
+var client = new BinanceSocketClient(new BinanceSocketClientOptions()
+{
+  // Specify options for the client
+});
+var subscribeResult = client.Spot.SubscribeToAllSymbolMiniTickerUpdatesAsync(data => {
+  // Handle data when it is received
+});
+// Make sure to check if the subscritpion was successful
+if(!subscribeResult.Success)
+{
+  // Subscription failed, check callResult.Error for more info
+}
+else
+{
+  // Subscription succeeded, the handler will start receiving data when it is available
+}
+````
+
+The `BinanceSocketClient` is also separated in different sub clients:  
+`socketClient.Spot`: Subscriptions for the Spot API  
+`socketClient.FuturesUsdt`: Subscriptions for the USD-M futures API  
+`socketClient.FuturesCoin`: Subscriptions for the Coin-M futures API  
+`socketClient.Blvt`: Subscriptions for the leveraged tokens API  
+
+## User data streams
+The `BinanceSocketClient` allows you to subscribe to user data (balances, orders, etc) updates using the `SubscribeToUserDataUpdatesAsync` method. This method needs a `listenKey` parameter which can be obtained via the `BinanceClient`:
+
+````C#
+var listenKeyResult = await binanceClient.Spot.UserStream.StartUserStreamAsync();
+if(!listenKeyResult.Success)
+{
+    // Handle error
+    return;
+}
+
+var subscribeResult = await binanceSocketClient.Spot.SubscribeToUserDataUpdatesAsync(listenKeyResult.Data, null, null, null, null);
+if (!subscribeResult.Success)
+{
+    // Handle error
+    return;
+}
+````
+
+Once the connection is established like this the `binanceClient.Spot.UserStream.KeepAliveUserStreamAsync` method should be called periodically (advised is once every 30 minutes) with the listen key to ensure the connection stays alive. 
+
+## Client options
+For the basic client options see also the CryptoExchange.Net [docs](https://github.com/JKorf/CryptoExchange.Net#client-options). The here listed options are the options specific for Binance.Net.
+**BinanceClientOptions**
+| Property | Description | Default |
+| ----------- | ----------- | ---------|
+|`BaseAddressUsdtFutures`|The base address for the USD-M futures API|`https://fapi.binance.com`
+|`BaseAddressCoinFutures`|The base address for the Coin-M futures API|`https://dapi.binance.com`
+|`AutoTimestamp`|Enable or disable auto syncing the request timestamp. See the Timestamping [docs](#timestamping).|`true`
+|`AutoTimestampRecalculationInterval`|After which time the auto timestamp value should be recalculated|`TimeSpan.FromHours(3)`
+|`TimestampOffset`|A fixed offset for the timestamp|`TimeSpan.Zero`
+|`TradeRulesBehaviour`|If/How to apply trading rules. If not set to `None` the library will check order placements for errors before sending them to the server, based on the exchange rules specified in the GetExchangeInfoAysnc result|`TradeRulesBehaviour.None`
+|TradeRulesUpdateInterval|When `TradeRulesBehaviour` is not `None` this specifies how often the trade rules should be updated from the server|`TimeSpan.FromMinutes(60)`
+|`ReceiveWindow`|The default value for the `ReceiveWindow` parameter when sending requests to protected endpoints. It specifies the max time between the timestamp in the request and the Binance server time before throwing an error | `TimeSpan.FromSeconds(5)`
+
+**BinanceSocketClientOptions**  
+| Property | Description | Default |
+| ----------- | ----------- | ---------|
+|`BaseAddressUsdtFutures`|The base address for the USD-M futures API|`wss://fstream.binance.com`
+|`BaseAddressCoinFutures`|The base address for the USD-M futures API|`wss://dstream.binance.com`
 
 ## Timestamping
-Requests made to Binance are checked for a correct timestamp. When requests are send a timestamp is added to the message. When Binance processes the message the timestamp is checked to be > the current time and < the current time + 5000ms (default). If the timestamp is outside these limits the following errors will be returned:
-`timestamps 1000ms ahead of server time` or `Timestamp for this request is outside of the recvWindow`
-The recvWindow is default 5000ms and can be changed using the `ReceiveWindow` configuration option. All times are communicated in UTC so there won't be any timezone issues. However, because of clock drifting it can be that the client UTC time is not the same as the server UTC time. It is therefor recommended clients use the `SP TimeSync` program to resync the client UTC time more often than windows does by default (every 10 minutes or less is recommended).
+Requests to private endpoints on the Binance API are required to have a timestamp parameter. Binance will check to see if the received timestamp of a request is within a certain timespan vs the Binance server time. The timespan of how much the timestamp parameter is allowed to  differ can be specified using the `recvWindow` parameter on requests to private endpoints.
 
-## Websockets
-The Binance.Net socket client provides several socket endpoint to which can be subscribed. 
+Because not all computers have exactly the same time this mechanism can cause errors. If for example the client time is 2 minutes earlier than the server time the server will think the request was sent 2 minutes ago since (server time on receive - message timestamp = 2 minutes). This will make Binance reject the message. 
 
-````csharp
-var client = new BinanceSocketClient();
-// subscribe to updates on the spot API
-client.Spot.SubscribeToBookTickerUpdates("BTCUSDT", data => {
-  // Handle data
-});
+To fix this the `AutoTimestamp` client options was introduced, which requests the server time and compares it to the local client time. The offset this produces will be used to offset the timestamp which is sent to the server in authenticated requests. This works 90% of the time.
 
-// subscribe to updates on the futures API
-client.Futures.SubscribeToBookTickerUpdates("BTCUSDT", data => {
-  // Handle data
-});
+Another option is to sync the operating system time more often. For Windows users have reported success using the SP TimeSync tool.
 
-````
+## FAQ
+**The user data stream stops sending updates after x time**   
+You're probably not calling the KeepAliveUserStreamAsync periodically to keep the user stream alive.
 
-To subscribe to account update (balance updates, order updates, etc.) you need to create a listen key using the `BinanceClient`, then start the user stream for account updates on the `BinanceSocketClient`:
-````csharp
-var client = new BinanceClient(new BinanceClientOptions{
-	ApiCredentials = new ApiCredentials("APIKEY", "APISECRET")
-});
-var startResult = client.Spot.UserStream.StartUserStream();
+**Does this library support the testnet / Binance.us / any other variant**  
+Yes, as long as the API endpoints are the same. Switch by changing the BaseAddress in the client options.
 
-if(!startResult.Success)
-	throw new Exception($"Failed to start user stream: {startResult.Error}");
-
-var socketClient = new BinanceSocketClient();
-
-socketClient.Spot.SubscribeToUserDataUpdates(startResult.Data, 
-	orderUpdate => { // Handle order update
-	}, 
-	ocoUpdate => { // Handle oco order update
-	},
-	positionUpdate => { // Handle account position update
-	},
-	balanceUpdate => { // Handle balance update
-	});
-````
-
-`null` can be passed as a parameter to any of these handlers to ignore the events of that type.
-
-
-When no longer listening to private endpoints the `StopUserStream` method in `BinanceClient` should be used to signal the Binance server the stream can be closed.
-
+**Timestamp for this request was 1000ms ahead of the server's time / Timestamp for this request is outside of the recvWindow.**  
+See Timestamping.
 
 ## Release notes
+* Version 7.0.0 - 12 Aug 2021
+	* Release version with new CryptoExchange.Net version 4.0.0
+		* Multiple changes regarding logging and socket connection, see [CryptoExchange.Net release notes](https://github.com/JKorf/CryptoExchange.Net#release-notes)
+	* Fixed deserialization of GetMiningStatisticsAsync
+
+* Version 7.0.0-beta4 - 09 Aug 2021
+    * Added Fiat endpoints
+    * Renamed Get24HPriceAsync to GetTickerAsync
+    * Renamed GetMyTradesAsync to GetUserTradesAsync
+    * Renamed GetAllOrdersAsync to GetOrdersAsync
+    * Renamed GetSymbolTradesAsync to GetRecentTradeHistoryAsync
+    * Renamed GetHistoricalSymbolTradesAsync to GetTradeHistoryAsync
+    * Renamed GetAggregatedTradesAsync to GetAggregatedTradeHistoryAsync
+    * Renamed GetOpenMarginAccountOrdersAsync to GetMarginAccountOpenOrdersAsync
+    * Renamed GetAllMarginAccountOrdersAsync to GetMarginAccountOrdersAsync
+    * Renamed GetMyMarginAccountTradesAsync to GetMarginAccountUserTradesAsync
+    * Renamed various PnL properties to Pnl
+
+* Version 7.0.0-beta3 - 26 Jul 2021
+    * Updated CryptoExchange.Net
+
+* Version 7.0.0-beta2 - 22 Jul 2021
+    * Added GetFundingWalletAsync endpoint
+    * Added GetAPIKeyPermissionsAsync endpoint
+    * Merged master
+
+* Version 7.0.0-beta1 - 09 Jul 2021
+    * Added symbol filter for GetExchangeInfoAsync
+    * Added Async postfix for async methods
+    * Updated CryptoExchange.Net
+
+* Version 6.14.0-beta7 - 24 Jun 2021
+    * Fixed/updated multiple models
+
+* Version 6.14.0-beta6 - 19 Jun 2021
+    * Fixed invalid symbol check on SubscribeToMarkPriceUpdatesAsync
+    * Made TimeSync static to prevent re-doing when creating a new client
+
+* Version 6.14.0-beta5 - 07 Jun 2021
+    * Added BinanceApiAddresses class containing different api setups for easier
+    * Updated CryptoExchange.Net
+
+* Version 6.14.0-beta4 - 31 May 2021
+    * Added GetTradingStatusAsync endpoint on USDT futures
+    * Added GetMarkPriceKlinesAsync endpoint on futures
+    * Added GetProductsAsync endpoint
+    * Added GetContinuousContractKlinesAsync endpoint on USDT futures
+    * Added PayToMain and MainToPay transfer types
+    * Added MultiAssetMode endpoints and fields
+    * Removed no longer supported GetLiquidationOrdersAsync futures endpoints
+    * Added Assets property to USDT futures GetExchangeInfoAsync model
+    * Added BalanceChange to futures account balance stream update
+
+* Version 6.14.0-beta3 - 26 May 2021
+    * Removed all non-async calls
+    * Updated to CryptoExchange.Net changes
+
+* Version 6.14.0-beta2 - 06 mei 2021
+    * Updated CryptoExchange.Net
+
+* Version 6.14.0-beta1 - 30 apr 2021
+    * Updated to CryptoExchange.Net 4.0.0-beta1, new websocket implementation
+
 * Version 6.13.6 - 01 Aug 2021
     * Added missing SubscribeToKlineUpdatesAsync overload
 

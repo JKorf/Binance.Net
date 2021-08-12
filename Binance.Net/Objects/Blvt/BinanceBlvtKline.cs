@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
@@ -49,7 +47,7 @@ namespace Binance.Net.Objects.Blvt
         [ArrayProperty(6), JsonConverter(typeof(TimestampConverter))]
         public DateTime CloseTime { get; set; }
 
-        [ArrayProperty(7)] internal string Ignore { get; set; } = "";
+        [ArrayProperty(7)] internal string Ignore { get; set; } = string.Empty;
 
         /// <summary>
         /// Number of updates

@@ -13,8 +13,8 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         /// <summary>
         /// Data
         /// </summary>
-        public IEnumerable<BinanceBrokerageSubAccountFuturesAssetInfo> Data { get; set; } = new List<BinanceBrokerageSubAccountFuturesAssetInfo>();
-        
+        public IEnumerable<BinanceBrokerageSubAccountFuturesAssetInfo> Data { get; set; } = Array.Empty<BinanceBrokerageSubAccountFuturesAssetInfo>();
+
         /// <summary>
         /// Timestamp
         /// </summary>
@@ -30,7 +30,7 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         /// <summary>
         /// Sub Account Id
         /// </summary>
-        public string SubAccountId { get; set; } = "";
+        public string SubAccountId { get; set; } = string.Empty;
         
         /// <summary>
         /// Futures enable

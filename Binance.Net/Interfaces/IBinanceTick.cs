@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Binance.Net.Interfaces
+﻿namespace Binance.Net.Interfaces
 {
     /// <summary>
     /// Price statistics of the last 24 hours

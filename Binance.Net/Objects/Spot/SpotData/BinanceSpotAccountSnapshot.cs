@@ -41,7 +41,7 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// <summary>
         /// List of balances
         /// </summary>
-        public List<BinanceBalance> Balances { get; set; } = new List<BinanceBalance>();
+        public IEnumerable<BinanceBalance> Balances { get; set; } = Array.Empty<BinanceBalance>();
 
     }
 }

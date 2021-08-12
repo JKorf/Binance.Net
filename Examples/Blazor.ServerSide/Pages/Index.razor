@@ -10,7 +10,7 @@
     <h3>24h data</h3>
     @foreach (var tick in _ticks)
     {
-        <div>@tick.Symbol | @tick.PriceChangePercent</div>
+        <div>@tick.Symbol | @tick.PriceChangePercent%</div>
     }
 </div>
 
@@ -30,9 +30,9 @@
             _subscription = subResult.Data;
     }
 
-    private void HandleTickUpdates(IEnumerable<IBinanceTick> ticks)
+    private void HandleTickUpdates(DataEvent<IEnumerable<IBinanceTick>> update)
     {
-        foreach (var tick in ticks)
+        foreach (var tick in update.Data)
         {
             var symbol = _ticks.Single(t => t.Symbol == tick.Symbol);
             symbol.PriceChangePercent = tick.PriceChangePercent;

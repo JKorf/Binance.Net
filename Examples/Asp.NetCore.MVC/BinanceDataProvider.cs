@@ -34,8 +34,8 @@ namespace Asp.Net
         {
             var subResult = await _socketClient.Spot.SubscribeToKlineUpdatesAsync("BTCUSDT", KlineInterval.FifteenMinutes, data =>
             {
-                LastKline = data;
-                OnKlineData?.Invoke(data);
+                LastKline = data.Data;
+                OnKlineData?.Invoke(data.Data);
             });
             if (subResult.Success)            
                 _subscription = subResult.Data;            
@@ -43,7 +43,7 @@ namespace Asp.Net
 
         public async Task Stop()
         {
-            await _socketClient.Unsubscribe(_subscription);
+            await _socketClient.UnsubscribeAsync(_subscription);
         }
     }
 }

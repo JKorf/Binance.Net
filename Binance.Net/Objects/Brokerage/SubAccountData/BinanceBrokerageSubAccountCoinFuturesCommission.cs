@@ -8,12 +8,12 @@
         /// <summary>
         /// Sub Account Id
         /// </summary>
-        public string SubAccountId { get; set; } = "";
+        public string SubAccountId { get; set; } = string.Empty;
         
         /// <summary>
         /// Pair
         /// </summary>
-        public string Pair { get; set; } = "";
+        public string Pair { get; set; } = string.Empty;
         
         /// <summary>
         /// COIN-Ⓜ futures commission adjustment for maker

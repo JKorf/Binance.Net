@@ -10,7 +10,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// Asset
         /// </summary>
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
 
         /// <summary>
         /// Initial Margin
@@ -46,7 +46,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Unrealized Profit
         /// </summary>
         [JsonProperty("unrealizedProfit")]
-        public decimal UnrealizedPnL { get; set; }
+        public decimal UnrealizedPnl { get; set; }
 
         /// <summary>
         /// Wallet Balance
@@ -62,11 +62,16 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Unrealized profit of crossed positions
         /// </summary>
         [JsonProperty("crossUnPnl")]
-        public decimal CrossUnrealizedPnL { get; set; }
+        public decimal CrossUnrealizedPnl { get; set; }
 
         /// <summary>
         /// Available balance
         /// </summary>
         public decimal AvailableBalance { get; set; }
+
+        /// <summary>
+        /// Whether the asset can be used as margin in Multi-Assets mode
+        /// </summary>
+        public bool? MarginAvailable { get; set; }
     }
 }

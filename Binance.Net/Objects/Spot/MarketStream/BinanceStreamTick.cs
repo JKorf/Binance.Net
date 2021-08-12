@@ -14,7 +14,7 @@ namespace Binance.Net.Objects.Spot.MarketStream
         /// The symbol this data is for
         /// </summary>
         [JsonProperty("s")]
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The price change of this symbol
         /// </summary>

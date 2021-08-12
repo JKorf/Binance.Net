@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using CryptoExchange.Net.ExchangeInterfaces;
+using System;
 
 namespace Binance.Net.Objects.Spot.MarketData
 {
@@ -16,7 +17,7 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// The symbol
         /// </summary>
         [JsonProperty("symbol")]
-        public string Name { get; set; } = "";
+        public string Name { get; set; } = string.Empty;
         /// <summary>
         /// The status of the symbol
         /// </summary>
@@ -25,7 +26,7 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// <summary>
         /// The base asset
         /// </summary>
-        public string BaseAsset { get; set; } = "";
+        public string BaseAsset { get; set; } = string.Empty;
         /// <summary>
         /// The precision of the base asset
         /// </summary>
@@ -33,7 +34,7 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// <summary>
         /// The quote asset
         /// </summary>
-        public string QuoteAsset { get; set; } = "";
+        public string QuoteAsset { get; set; } = string.Empty;
         /// <summary>
         /// The precision of the quote asset
         /// </summary>
@@ -44,7 +45,7 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// Allowed order types
         /// </summary>
         [JsonProperty(ItemConverterType = typeof(OrderTypeConverter))]
-        public IEnumerable<OrderType> OrderTypes { get; set; } = new List<OrderType>();
+        public IEnumerable<OrderType> OrderTypes { get; set; } = Array.Empty<OrderType>();
         /// <summary>
         /// Ice berg orders allowed
         /// </summary>
@@ -78,11 +79,11 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// Permissions types
         /// </summary>
         [JsonProperty(ItemConverterType = typeof(AccountTypeConverter))]
-        public IEnumerable<AccountType> Permissions { get; set; } = new List<AccountType>();
+        public IEnumerable<AccountType> Permissions { get; set; } = Array.Empty<AccountType>();
         /// <summary>
         /// Filters for order on this symbol
         /// </summary>
-        public IEnumerable<BinanceSymbolFilter> Filters { get; set; } = new List<BinanceSymbolFilter>();
+        public IEnumerable<BinanceSymbolFilter> Filters { get; set; } = Array.Empty<BinanceSymbolFilter>();
 
         /// <summary>
         /// Filter for max amount of iceberg parts for this symbol

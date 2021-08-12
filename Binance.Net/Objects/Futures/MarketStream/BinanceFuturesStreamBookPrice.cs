@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Binance.Net.Objects.Spot.MarketStream;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
@@ -24,6 +22,6 @@ namespace Binance.Net.Objects.Futures.MarketStream
         [JsonProperty("E"), JsonConverter(typeof(TimestampConverter))]
         public DateTime EventTime { get; set; }
 
-        [JsonProperty("e")] private string Event { get; set; } = "";
+        [JsonProperty("e")] private string Event { get; set; } = string.Empty;
     }
 }
