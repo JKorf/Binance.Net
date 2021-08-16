@@ -563,11 +563,8 @@ namespace Binance.Net
             if(string.IsNullOrEmpty(symbol))
                 return WebCallResult<IEnumerable<ICommonTrade>>.CreateErrorResult(new ArgumentError(nameof(symbol) + " required for Binance " + nameof(IExchangeClient.GetTradesAsync)));
                
-            var result = await Spot.Order.GetUserTradesAsync(symbol!).ConfigureAwait(false);
-            if(!result)
-                return WebCallResult<IEnumerable<ICommonTrade>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
-
-            return result.As<IEnumerable<ICommonTrade>>(result.Data.Where(d => d.OrderId.ToString() == orderId));
+            var result = await Spot.Order.GetUserTradesAsync(symbol!, long.Parse(orderId)).ConfigureAwait(false);
+            return result.As<IEnumerable<ICommonTrade>>(result.Data);
         }
 
         async Task<WebCallResult<IEnumerable<ICommonOrder>>> IExchangeClient.GetOpenOrdersAsync(string? symbol)
