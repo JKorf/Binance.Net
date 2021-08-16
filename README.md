@@ -165,6 +165,10 @@ Yes, as long as the API endpoints are the same. Switch by changing the BaseAddre
 See Timestamping.
 
 ## Release notes
+* Version 7.0.2 - 16 Aug 2021
+    * Added orderId parameter to GetUserTradesAsync
+    * Added missing TransferAsync to client interface
+
 * Version 7.0.1 - 13 Aug 2021
     * Fix for OperationCancelledException being thrown when closing a socket from a .net framework project
 
