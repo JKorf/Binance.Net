@@ -11,6 +11,7 @@ using Binance.Net.Objects.Spot.WalletData;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace Binance.Net.SubClients.Spot
 {
@@ -138,8 +139,7 @@ namespace Binance.Net.SubClients.Spot
         {
             var parameters = new Dictionary<string, object>();
             if (symbols.Count() > 1)
-                //parameters.Add("symbols", $"[\"{string.Join("\",\"", symbols)}\"]");
-                parameters.Add("symbols", symbols.ToArray());
+                parameters.Add("symbols", JsonConvert.SerializeObject(symbols));
             else if (symbols.Any())
                 parameters.Add("symbol", symbols.First());
 
