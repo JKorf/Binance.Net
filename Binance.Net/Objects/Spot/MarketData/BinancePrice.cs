@@ -12,7 +12,7 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// <summary>
         /// The symbol the price is for
         /// </summary>
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The price of the symbol
         /// </summary>
@@ -33,6 +33,6 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// Name of the pair
         /// </summary>
         [JsonProperty("ps")]
-        public string Pair { get; set; } = "";
+        public string Pair { get; set; } = string.Empty;
     }
 }

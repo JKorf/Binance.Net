@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using CryptoExchange.Net.Converters;
@@ -20,12 +18,12 @@ namespace Binance.Net.Objects.BSwap
         /// <summary>
         /// Pool id
         /// </summary>
-        public string PoolId { get; set; } = "";
+        public string PoolId { get; set; } = string.Empty;
 
         /// <summary>
         /// Pool name
         /// </summary>
-        public string PoolName { get; set; } = "";
+        public string PoolName { get; set; } = string.Empty;
         /// <summary>
         /// Operation
         /// </summary>

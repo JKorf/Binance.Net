@@ -16,7 +16,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// The symbol the order is for
         /// </summary>
         [JsonProperty("symbol")]
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The order id as assigned by Binance
         /// </summary>
@@ -26,7 +26,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// The order id as assigned by the client
         /// </summary>
         [JsonProperty("clientOrderId")]
-        public string ClientOrderId { get; set; } = "";
+        public string ClientOrderId { get; set; } = string.Empty;
         /// <summary>
         /// The price of the order
         /// </summary>

@@ -1,6 +1,4 @@
-﻿using System;
-using Binance.Net.Interfaces;
-using CryptoExchange.Net.Converters;
+﻿using Binance.Net.Interfaces;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Spot.MarketStream
@@ -19,7 +17,7 @@ namespace Binance.Net.Objects.Spot.MarketStream
         /// The symbol
         /// </summary>
         [JsonProperty("s")]
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Price of the best bid
         /// </summary>

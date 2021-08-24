@@ -1,9 +1,7 @@
 ﻿using Binance.Net.Interfaces.SubClients;
 using Binance.Net.Interfaces.SubClients.Futures;
-using Binance.Net.Interfaces.SubClients.IsolatedMargin;
 using Binance.Net.Interfaces.SubClients.Margin;
 using Binance.Net.Interfaces.SubClients.Spot;
-using Binance.Net.SubClients;
 using CryptoExchange.Net.Interfaces;
 
 namespace Binance.Net.Interfaces

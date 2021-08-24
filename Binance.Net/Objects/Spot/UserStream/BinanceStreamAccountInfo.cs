@@ -57,12 +57,12 @@ namespace Binance.Net.Objects.Spot.UserStream
         /// Permissions types
         /// </summary>
         [JsonProperty("P", ItemConverterType = typeof(AccountTypeConverter))]
-        public IEnumerable<AccountType> Permissions { get; set; } = new List<AccountType>();
+        public IEnumerable<AccountType> Permissions { get; set; } = Array.Empty<AccountType>();
         /// <summary>
         /// List of assets with their current balances
         /// </summary>
         [JsonProperty("B")]
-        public IEnumerable<BinanceStreamBalance> Balances { get; set; } = new List<BinanceStreamBalance>();
+        public IEnumerable<BinanceStreamBalance> Balances { get; set; } = Array.Empty<BinanceStreamBalance>();
     }
 
     /// <summary>
@@ -74,7 +74,7 @@ namespace Binance.Net.Objects.Spot.UserStream
         /// The asset this balance is for
         /// </summary>
         [JsonProperty("a")]
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// The amount that isn't locked in a trade
         /// </summary>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Binance.Net.Objects
 {
@@ -11,7 +12,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// The list records
         /// </summary>
-        public IEnumerable<T> Rows { get; set; } = new List<T>();
+        public IEnumerable<T> Rows { get; set; } = Array.Empty<T>();
         /// <summary>
         /// The total count of the records
         /// </summary>

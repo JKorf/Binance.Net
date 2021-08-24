@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using CryptoExchange.Net.Converters;
@@ -16,7 +14,7 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// <summary>
         /// The symbol the information is about
         /// </summary>
-        public string Pair { get; set; } = "";
+        public string Pair { get; set; } = string.Empty;
 
         /// <summary>
         /// Contract type

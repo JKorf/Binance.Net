@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace Binance.Net.Objects.Spot.MarginData
@@ -40,7 +41,7 @@ namespace Binance.Net.Objects.Spot.MarginData
         /// Balance list
         /// </summary>
         [JsonProperty("userAssets")]
-        public IEnumerable<BinanceMarginBalance> Balances { get; set; } = new List<BinanceMarginBalance>();
+        public IEnumerable<BinanceMarginBalance> Balances { get; set; } = Array.Empty<BinanceMarginBalance>();
     }
 
     /// <summary>
@@ -51,7 +52,7 @@ namespace Binance.Net.Objects.Spot.MarginData
         /// <summary>
         /// The asset this balance is for
         /// </summary>
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// The amount that was borrowed
         /// </summary>

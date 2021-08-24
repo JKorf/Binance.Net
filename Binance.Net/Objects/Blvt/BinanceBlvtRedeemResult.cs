@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using CryptoExchange.Net.Converters;
@@ -25,7 +23,7 @@ namespace Binance.Net.Objects.Blvt
         /// <summary>
         /// Name of the token
         /// </summary>
-        public string TokenName { get; set; } = "";
+        public string TokenName { get; set; } = string.Empty;
         /// <summary>
         /// Redemption value in usdt
         /// </summary>

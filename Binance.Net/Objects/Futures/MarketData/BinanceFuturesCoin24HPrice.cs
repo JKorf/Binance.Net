@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Binance.Net.Interfaces;
-using Binance.Net.Objects.Shared;
-using CryptoExchange.Net.Converters;
+﻿using Binance.Net.Objects.Shared;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Futures.MarketData

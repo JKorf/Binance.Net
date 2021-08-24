@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Binance.Net.Enums
+﻿namespace Binance.Net.Enums
 {
     /// <summary>
     /// Universal transfer type
@@ -105,6 +101,15 @@ namespace Binance.Net.Enums
         /// <summary>
         /// Mining to Margin
         /// </summary>
-        MiningToMargin
+        MiningToMargin,
+
+        /// <summary>
+        /// Main to pay
+        /// </summary>
+        MainToPay,
+        /// <summary>
+        /// Pay to main
+        /// </summary>
+        PayToMain        
     }
 }

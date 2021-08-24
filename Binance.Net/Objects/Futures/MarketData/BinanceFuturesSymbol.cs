@@ -16,7 +16,7 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// <summary>
         /// Filters for order on this symbol
         /// </summary>
-        public IEnumerable<BinanceFuturesSymbolFilter> Filters { get; set; } = new List<BinanceFuturesSymbolFilter>();
+        public IEnumerable<BinanceFuturesSymbolFilter> Filters { get; set; } = Array.Empty<BinanceFuturesSymbolFilter>();
         /// <summary>
         /// Contract type
         /// </summary>
@@ -41,15 +41,15 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// <summary>
         /// The base asset
         /// </summary>
-        public string BaseAsset { get; set; } = "";
+        public string BaseAsset { get; set; } = string.Empty;
         /// <summary>
         /// Margin asset
         /// </summary>
-        public string MarginAsset { get; set; } = "";
+        public string MarginAsset { get; set; } = string.Empty;
         /// <summary>
         /// The quote asset
         /// </summary>
-        public string QuoteAsset { get; set; } = "";
+        public string QuoteAsset { get; set; } = string.Empty;
         /// <summary>
         /// The precision of the base asset
         /// </summary>
@@ -63,17 +63,17 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// Allowed order types
         /// </summary>
         [JsonProperty(ItemConverterType = typeof(OrderTypeConverter))]
-        public IEnumerable<OrderType> OrderTypes { get; set; } = new List<OrderType>();
+        public IEnumerable<OrderType> OrderTypes { get; set; } = Array.Empty<OrderType>();
         /// <summary>
         /// The symbol
         /// </summary>
         [JsonProperty("symbol")]
-        public string Name { get; set; } = "";
+        public string Name { get; set; } = string.Empty;
         /// <summary>
         /// Pair
         /// </summary>
         [JsonProperty("pair")]
-        public string Pair { get; set; } = "";
+        public string Pair { get; set; } = string.Empty;
         /// <summary>
         /// Delivery Date
         /// </summary>
@@ -97,13 +97,13 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// Currently Empty
         /// </summary>
         [JsonIgnore]
-        public object[] UnderlyingSupType { get; set; }
+        public object[] UnderlyingSupType { get; set; } = Array.Empty<object>();
 
         /// <summary>
         /// Allowed order time in force
         /// </summary>
         [JsonProperty(ItemConverterType = typeof(TimeInForceConverter))]
-        public IEnumerable<TimeInForce> TimeInForce { get; set; } = new List<TimeInForce>();
+        public IEnumerable<TimeInForce> TimeInForce { get; set; } = Array.Empty<TimeInForce>();
         /// <summary>
         /// Filter for the max accuracy of the price for this symbol
         /// </summary>

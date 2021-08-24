@@ -8,7 +8,7 @@
         /// <summary>
         /// The asset
         /// </summary>
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Display priority
         /// </summary>
@@ -52,21 +52,21 @@
         /// <summary>
         /// Project id
         /// </summary>
-        public string ProjectId { get; set; } = "";
+        public string ProjectId { get; set; } = string.Empty;
 
         /// <summary>
         /// Project name
         /// </summary>
-        public string ProjectName { get; set; } = "";
+        public string ProjectName { get; set; } = string.Empty;
         /// <summary>
         /// Status
         /// </summary>
-        public string Status { get; set; } = "";
+        public string Status { get; set; } = string.Empty;
 
         /// <summary>
         /// Type
         /// </summary>
-        public string Type { get; set; } = "";
+        public string Type { get; set; } = string.Empty;
         /// <summary>
         /// Has area limitation
         /// </summary>

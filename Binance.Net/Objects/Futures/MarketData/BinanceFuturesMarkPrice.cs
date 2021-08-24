@@ -13,7 +13,7 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// <summary>
         /// The symbol the information is about
         /// </summary>
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The current market price
         /// </summary>
@@ -48,7 +48,7 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// <summary>
         /// The pair
         /// </summary>
-        public string Pair { get; set; } = "";
+        public string Pair { get; set; } = string.Empty;
         /// <summary>
         /// Estimated settle price
         /// </summary>

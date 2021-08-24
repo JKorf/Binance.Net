@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Futures.MarketStream
 {
@@ -14,7 +11,7 @@ namespace Binance.Net.Objects.Futures.MarketStream
         /// The pair
         /// </summary>
         [JsonProperty("i")]
-        public string Pair { get; set; } = "";
+        public string Pair { get; set; } = string.Empty;
         /// <summary>
         /// The index price
         /// </summary>

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using CryptoExchange.Net.Converters;
@@ -31,11 +29,11 @@ namespace Binance.Net.Objects.BSwap
         /// <summary>
         /// Base asset
         /// </summary>
-        public string BaseAsset { get; set; } = "";
+        public string BaseAsset { get; set; } = string.Empty;
         /// <summary>
         /// Quote asset
         /// </summary>
-        public string QuoteAsset { get; set; } = "";
+        public string QuoteAsset { get; set; } = string.Empty;
         /// <summary>
         /// Base quantity
         /// </summary>

@@ -73,18 +73,6 @@ namespace Binance.Net.SubClients
         /// <param name="isFreeze">Is freezed</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of sub accounts</returns>
-        public WebCallResult<IEnumerable<BinanceSubAccount>> GetSubAccounts(string? email = null, int? page = null, int? limit = null, int? receiveWindow = null, bool? isFreeze = null, CancellationToken ct = default) => GetSubAccountsAsync(email, page, limit, receiveWindow, isFreeze, ct).Result;
-
-        /// <summary>
-        /// Gets a list of sub accounts associated with this master account
-        /// </summary>
-        /// <param name="email">Filter the list by email</param>
-        /// <param name="page">The page of the results</param>
-        /// <param name="limit">The max amount of results to return</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="isFreeze">Is freezed</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of sub accounts</returns>
         public async Task<WebCallResult<IEnumerable<BinanceSubAccount>>> GetSubAccountsAsync(string? email = null, int? page = null, int? limit = null, int? receiveWindow = null, bool? isFreeze = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -124,20 +112,6 @@ namespace Binance.Net.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of transfers</returns>
-        public WebCallResult<IEnumerable<BinanceSubAccountTransfer>> GetSubAccountTransferForMasterHistory(string? fromEmail = null, string? toEmail = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default) => GetSubAccountTransferHistoryForMasterAsync(fromEmail, toEmail, startTime, endTime, page, limit, receiveWindow, ct).Result;
-
-        /// <summary>
-        /// Gets the transfer history of a sub account (from the master account) 
-        /// </summary>
-        /// <param name="fromEmail">Filter the history by from email</param>
-        /// <param name="toEmail">Filter the history by to email</param>
-        /// <param name="startTime">Filter the history by startTime</param>
-        /// <param name="endTime">Filter the history by endTime</param>
-        /// <param name="page">The page of the results</param>
-        /// <param name="limit">The max amount of results to return</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of transfers</returns>
         public async Task<WebCallResult<IEnumerable<BinanceSubAccountTransfer>>> GetSubAccountTransferHistoryForMasterAsync(string? fromEmail = null, string ? toEmail = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -155,7 +129,7 @@ namespace Binance.Net.SubClients
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
+            
             var result = await _baseClient.SendRequestInternal<IEnumerable<BinanceSubAccountTransfer>>(_baseClient.GetUrlSpot(subAccountTransferHistoryEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             return result;
         }
@@ -163,18 +137,6 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Sub-account Transfer(For Master Account)
-
-        /// <summary>
-        /// Transfers an asset from one sub account to another
-        /// </summary>
-        /// <param name="fromEmail">From which account to transfer</param>
-        /// <param name="toEmail">To which account to transfer</param>
-        /// <param name="asset">The asset to transfer</param>
-        /// <param name="amount">The quantity to transfer</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The result of the transfer</returns>
-        public WebCallResult<BinanceSubAccountTransferResult> TransferSubAccount(string fromEmail, string toEmail, string asset, decimal amount, int? receiveWindow = null, CancellationToken ct = default) => TransferSubAccountAsync(fromEmail, toEmail, asset, amount, receiveWindow, ct).Result;
 
         /// <summary>
         /// Transfers an asset from one sub account to another
@@ -221,18 +183,6 @@ namespace Binance.Net.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of balances</returns>
-        public WebCallResult<IEnumerable<BinanceBalance>> GetSubAccountAssets(string email, int? receiveWindow = null,
-            CancellationToken ct = default) =>
-            GetSubAccountAssetsAsync(email, receiveWindow, ct).Result;
-
-
-        /// <summary>
-        /// Gets list of balances for a sub account
-        /// </summary>
-        /// <param name="email">For which account to get the assets</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of balances</returns>
         public async Task<WebCallResult<IEnumerable<BinanceBalance>>> GetSubAccountAssetsAsync(string email, int? receiveWindow = null, CancellationToken ct = default)
         {
             email.ValidateNotNull(nameof(email));
@@ -258,25 +208,12 @@ namespace Binance.Net.SubClients
                 return WebCallResult<IEnumerable<BinanceBalance>>.CreateErrorResult(result.ResponseStatusCode,
                     result.ResponseHeaders, new ServerError(result.Data.Message));
 
-            return new WebCallResult<IEnumerable<BinanceBalance>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Balances, null);
+            return result.As<IEnumerable<BinanceBalance>>(result.Data.Balances);
         }
         #endregion
 
         #region Get Sub-account Deposit Address (For Master Account)
-        /// <summary>
-        /// Gets the deposit address for a coin to a sub account
-        /// </summary>
-        /// <param name="email">The email of the account to deposit to</param>
-        /// <param name="coin">The coin of the deposit</param>
-        /// <param name="network">The coin network</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The deposit address</returns>
-        public WebCallResult<BinanceSubAccountDepositAddress> GetSubAccountDepositAddress(string email, string coin,
-            string? network = null, int? receiveWindow = null, CancellationToken ct = default)
-            => GetSubAccountDepositAddressAsync(email, coin, network, receiveWindow, ct).Result;
-
-
+       
         /// <summary>
         /// Gets the deposit address for a coin to a sub account
         /// </summary>
@@ -310,24 +247,6 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Get Sub-account Deposit History (For Master Account)
-
-        /// <summary>
-        /// Gets the deposit history for a sub account
-        /// </summary>
-        /// <param name="email">The email of the account to get history for</param>
-        /// <param name="coin">Filter for a coin</param>
-        /// <param name="startTime">Only return deposits placed later this</param>
-        /// <param name="endTime">Only return deposits placed before this</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="offset">Offset results by this</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The deposit history</returns>
-        public WebCallResult<IEnumerable<BinanceSubAccountDeposit>> GetSubAccountDepositHistory(string email,
-            string? coin = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null,
-            int? offset = null, int? receiveWindow = null, CancellationToken ct = default)
-            => GetSubAccountDepositHistoryAsync(email, coin, startTime, endTime, limit, offset, receiveWindow, ct)
-                .Result;
 
         /// <summary>
         /// Gets the deposit history for a sub account
@@ -376,15 +295,6 @@ namespace Binance.Net.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of sub accounts status</returns>
-        public WebCallResult<IEnumerable<BinanceSubAccountStatus>> GetSubAccountStatus(string? email = null, int? receiveWindow = null, CancellationToken ct = default) => GetSubAccountStatusAsync(email, receiveWindow, ct).Result;
-
-        /// <summary>
-        /// Get Sub-account's Status on Margin/Futures(For Master Account)
-        /// </summary>
-        /// <param name="email">Filter the list by email</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of sub accounts status</returns>
         public async Task<WebCallResult<IEnumerable<BinanceSubAccountStatus>>> GetSubAccountStatusAsync(string? email = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -404,18 +314,6 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Enable Margin for Sub-account (For Master Account)
-
-        /// <summary>
-        /// Enables margin for a sub account
-        /// </summary>
-        /// <param name="email">The email of the account to enable margin for</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Margin enable status</returns>
-        public WebCallResult<IEnumerable<BinanceSubAccountMarginEnabled>> EnableMarginForSubAccount(string email,
-            int? receiveWindow = null, CancellationToken ct = default)
-            => EnableMarginForSubAccountAsync(email, receiveWindow, ct).Result;
-
 
         /// <summary>
         /// Enables margin for a sub account
@@ -454,17 +352,6 @@ namespace Binance.Net.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Margin details</returns>
-        public WebCallResult<BinanceSubAccountMarginDetails> GetSubAccountMarginDetails(string email,
-            int? receiveWindow = null, CancellationToken ct = default)
-            => GetSubAccountMarginDetailsAsync(email, receiveWindow, ct).Result;
-
-        /// <summary>
-        /// Gets margin details for a sub account
-        /// </summary>
-        /// <param name="email">The email of the account to get margin details for</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Margin details</returns>
         public async Task<WebCallResult<BinanceSubAccountMarginDetails>> GetSubAccountMarginDetailsAsync(string email, int? receiveWindow = null, CancellationToken ct = default)
         {
             email.ValidateNotNull(nameof(email));
@@ -494,16 +381,6 @@ namespace Binance.Net.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Margin summary</returns>
-        public WebCallResult<BinanceSubAccountsMarginSummary> GetSubAccountsMarginSummary(
-            int? receiveWindow = null, CancellationToken ct = default)
-            => GetSubAccountsMarginSummaryAsync(receiveWindow, ct).Result;
-
-        /// <summary>
-        /// Gets margin summary for sub accounts
-        /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Margin summary</returns>
         public async Task<WebCallResult<BinanceSubAccountsMarginSummary>> GetSubAccountsMarginSummaryAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -523,17 +400,7 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Enable Futures for Sub-account (For Master Account) 
-        /// <summary>
-        /// Enables futures for a sub account
-        /// </summary>
-        /// <param name="email">The sub account email to enable futures for</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Futures status</returns>
-        public WebCallResult<BinanceSubAccountFuturesEnabled> EnableFuturesForSubAccount(string email,
-            int? receiveWindow = null, CancellationToken ct = default)
-            => EnableFuturesForSubAccountAsync(email, receiveWindow, ct).Result;
-
+        
         /// <summary>
         /// Enables futures for a sub account
         /// </summary>
@@ -571,17 +438,6 @@ namespace Binance.Net.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Futures details</returns>
-        public WebCallResult<BinanceSubAccountFuturesDetails> GetSubAccountFuturesDetails(string email,
-            int? receiveWindow = null, CancellationToken ct = default)
-            => GetSubAccountFuturesDetailsAsync(email, receiveWindow, ct).Result;
-
-        /// <summary>
-        /// Gets futures details for a sub account
-        /// </summary>
-        /// <param name="email">The email of the account to get future details for</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Futures details</returns>
         public async Task<WebCallResult<BinanceSubAccountFuturesDetails>> GetSubAccountFuturesDetailsAsync(string email, int? receiveWindow = null, CancellationToken ct = default)
         {
             email.ValidateNotNull(nameof(email));
@@ -611,16 +467,6 @@ namespace Binance.Net.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Futures summary</returns>
-        public WebCallResult<BinanceSubAccountsFuturesSummary> GetSubAccountsFuturesSummary(int? receiveWindow = null,
-            CancellationToken ct = default)
-            => GetSubAccountsFuturesSummaryAsync(receiveWindow, ct).Result;
-
-        /// <summary>
-        /// Gets futures summary for sub accounts
-        /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Futures summary</returns>
         public async Task<WebCallResult<BinanceSubAccountsFuturesSummary>> GetSubAccountsFuturesSummaryAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -640,17 +486,6 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Get Futures Postion-Risk of Sub-account (For Master Account)
-
-        /// <summary>
-        /// Gets futures position risk for a sub account
-        /// </summary>
-        /// <param name="email">Email of the sub account</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Position risk</returns>
-        public WebCallResult<IEnumerable<BinanceSubAccountFuturesPositionRisk>> GetSubAccountsFuturesPositionRisk(
-            string email, int? receiveWindow = null, CancellationToken ct = default)
-            => GetSubAccountsFuturesPositionRiskAsync(email, receiveWindow, ct).Result;
 
         /// <summary>
         /// Gets futures position risk for a sub account
@@ -690,21 +525,6 @@ namespace Binance.Net.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The result of the transfer</returns>
-        public WebCallResult<BinanceSubAccountTransaction> TransferSubAccountFutures(string email, string asset,
-            decimal amount, SubAccountFuturesTransferType type, int? receiveWindow = null,
-            CancellationToken ct = default)
-            => TransferSubAccountFuturesAsync(email, asset, amount, type, receiveWindow, ct).Result;
-
-        /// <summary>
-        /// Transfers from or to a futures sub account
-        /// </summary>
-        /// <param name="email">Email of the sub account</param>
-        /// <param name="asset">The asset to transfer</param>
-        /// <param name="amount">The quantity to transfer</param>
-        /// <param name="type">The type of the transfer</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The result of the transfer</returns>
         public async Task<WebCallResult<BinanceSubAccountTransaction>> TransferSubAccountFuturesAsync(string email, string asset, decimal amount, SubAccountFuturesTransferType type, int? receiveWindow = null, CancellationToken ct = default)
         {
             email.ValidateNotNull(nameof(email));
@@ -730,21 +550,7 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Margin Transfer for Sub-account (For Master Account)
-        /// <summary>
-        /// Transfers from or to a margin sub account
-        /// </summary>
-        /// <param name="email">Email of the sub account</param>
-        /// <param name="asset">The asset to transfer</param>
-        /// <param name="amount">The quantity to transfer</param>
-        /// <param name="type">The type of the transfer</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The result of the transfer</returns>
-        public WebCallResult<BinanceSubAccountTransaction> TransferSubAccountMargin(string email, string asset,
-            decimal amount, SubAccountMarginTransferType type, int? receiveWindow = null,
-            CancellationToken ct = default)
-            => TransferSubAccountMarginAsync(email, asset, amount, type, receiveWindow, ct).Result;
-
+        
         /// <summary>
         /// Transfers from or to a margin sub account
         /// </summary>
@@ -780,20 +586,7 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Transfer to Sub-account of Same Master (For Sub-account)
-        /// <summary>
-        /// Transfers to another sub account of the same master
-        /// </summary>
-        /// <param name="email">Email of the sub account</param>
-        /// <param name="asset">The asset to transfer</param>
-        /// <param name="amount">The quantity to transfer</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The result of the transfer</returns>
-        public WebCallResult<BinanceSubAccountTransaction> TransferSubAccountToSubAccount(string email, string asset,
-            decimal amount, int? receiveWindow = null,
-            CancellationToken ct = default)
-            => TransferSubAccountToSubAccountAsync(email, asset, amount, receiveWindow, ct).Result;
-
+        
         /// <summary>
         /// Transfers to another sub account of the same master
         /// </summary>
@@ -827,19 +620,7 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Transfer to Master (For Sub-account)
-        /// <summary>
-        /// Transfers to master account
-        /// </summary>
-        /// <param name="asset">The asset to transfer</param>
-        /// <param name="amount">The quantity to transfer</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The result of the transfer</returns>
-        public WebCallResult<BinanceSubAccountTransaction> TransferSubAccountToMaster(string asset,
-            decimal amount, int? receiveWindow = null,
-            CancellationToken ct = default)
-            => TransferSubAccountToMasterAsync(asset, amount, receiveWindow, ct).Result;
-
+        
         /// <summary>
         /// Transfers to master account
         /// </summary>
@@ -870,24 +651,7 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Sub-account Transfer History (For Sub-account)
-        /// <summary>
-        /// Gets the transfer history of a sub account (from the sub account)
-        /// </summary>
-        /// <param name="asset">The asset</param>
-        /// <param name="type">Filter by type of transfer</param>
-        /// <param name="startTime">Only return transfers later than this</param>
-        /// <param name="endTime">Only return transfers before this</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Transfer history</returns>
-        public WebCallResult<IEnumerable<BinanceSubAccountTransferSubAccount>> GetSubAccountTransferHistoryForSubAccount(
-            string? asset = null, SubAccountTransferSubAccountType? type = null, DateTime? startTime = null,
-            DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
-            => GetSubAccountTransferHistoryForSubAccountAsync(asset, type, startTime, endTime, limit, receiveWindow, ct)
-                .Result;
-
-
+        
         /// <summary>
         /// Gets the transfer history of a sub account (from the sub account)
         /// </summary>
@@ -933,19 +697,6 @@ namespace Binance.Net.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Btc asset values</returns>
-        public WebCallResult<BinanceSubAccountSpotAssetsSummary> GetSubAccountBtcValues(
-            string? email = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
-            => GetSubAccountBtcValuesAsync(email, page, limit, receiveWindow, ct).Result;
-
-        /// <summary>
-        /// Get BTC valued asset summary of subaccounts.
-        /// </summary>
-        /// <param name="email">Email of the sub account</param>
-        /// <param name="page">The page</param>
-        /// <param name="limit">The page size</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Btc asset values</returns>
         public async Task<WebCallResult<BinanceSubAccountSpotAssetsSummary>> GetSubAccountBtcValuesAsync(string? email = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -976,17 +727,6 @@ namespace Binance.Net.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public WebCallResult<BinanceSubAccountEmail> CreateVirtualSubAccount(
-            string email, int? receiveWindow = null, CancellationToken ct = default)
-            => CreateVirtualSubAccountAsync(email, receiveWindow, ct).Result;
-
-        /// <summary>
-        /// Create a virtual sub account
-        /// </summary>
-        /// <param name="email">Virtual email of the sub account</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
         public async Task<WebCallResult<BinanceSubAccountEmail>> CreateVirtualSubAccountAsync(string email, int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -1007,18 +747,6 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Enable Leverage Token for Sub-account (For Master Account)
-
-        /// <summary>
-        /// Enable or disable blvt
-        /// </summary>
-        /// <param name="email">Email of the sub account</param>
-        /// <param name="enable">Enable or disable (only true for now)</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public WebCallResult<BinanceSubAccountBlvt> EnableBlvtForSubAccount(
-            string email, bool enable, int? receiveWindow = null, CancellationToken ct = default)
-            => EnableBlvtForSubAccountAsync(email, enable, receiveWindow, ct).Result;
 
         /// <summary>
         /// Enable or disable blvt

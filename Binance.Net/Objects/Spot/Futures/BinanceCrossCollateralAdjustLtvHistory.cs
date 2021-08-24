@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using CryptoExchange.Net.Converters;
@@ -22,12 +19,12 @@ namespace Binance.Net.Objects.Spot.Futures
         /// <summary>
         /// Collateral coin
         /// </summary>
-        public string CollateralCoin { get; set; } = "";
+        public string CollateralCoin { get; set; } = string.Empty;
 
         /// <summary>
         /// Coin
         /// </summary>
-        public string Coin { get; set; } = "";
+        public string Coin { get; set; } = string.Empty;
         /// <summary>
         /// Pre adjustment rate
         /// </summary>
@@ -45,7 +42,7 @@ namespace Binance.Net.Objects.Spot.Futures
         /// <summary>
         /// Status
         /// </summary>
-        public string Status { get; set; } = "";
+        public string Status { get; set; } = string.Empty;
         /// <summary>
         /// Time of adjustment
         /// </summary>

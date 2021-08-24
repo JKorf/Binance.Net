@@ -36,16 +36,6 @@ namespace Binance.Net.SubClients.Margin
         /// <param name="symbol">The isolated symbol</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Listen key</returns>
-        public WebCallResult<string> StartIsolatedMarginUserStream(string symbol, CancellationToken ct = default) => StartIsolatedMarginUserStreamAsync(symbol, ct).Result;
-
-        /// <summary>
-        /// Starts a user stream  for margin account by requesting a listen key. 
-        /// This listen key can be used in subsequent requests to BinanceSocketClient.Spot.SubscribeToUserDataUpdates
-        /// The stream will close after 60 minutes unless a keep alive is send.
-        /// </summary>
-        /// <param name="symbol">The isolated symbol</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Listen key</returns>
         public async Task<WebCallResult<string>> StartIsolatedMarginUserStreamAsync(string symbol, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
@@ -60,22 +50,12 @@ namespace Binance.Net.SubClients.Margin
             };
 
             var result = await _baseClient.SendRequestInternal<BinanceListenKey>(_baseClient.GetUrlSpot(getListenKeyEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters).ConfigureAwait(false);
-            return new WebCallResult<string>(result.ResponseStatusCode, result.ResponseHeaders, result.Data?.ListenKey, result.Error);
+            return result.As(result.Data?.ListenKey);
         }
 
         #endregion
 
         #region Ping/Keep-alive a ListenKey
-
-        /// <summary>
-        /// Sends a keep alive for the current user for margin account stream listen key to keep the stream from closing. 
-        /// Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
-        /// </summary>
-        /// <param name="symbol">The isolated symbol</param>
-        /// <param name="listenKey">The listen key to keep alive</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public WebCallResult<object> KeepAliveIsolatedMarginUserStream(string symbol, string listenKey, CancellationToken ct = default) => KeepAliveIsolatedMarginUserStreamAsync(symbol, listenKey, ct).Result;
 
         /// <summary>
         /// Sends a keep alive for the current user stream for margin account listen key to keep the stream from closing. 
@@ -104,16 +84,6 @@ namespace Binance.Net.SubClients.Margin
         #endregion
 
         #region Invalidate a ListenKey
-
-        /// <summary>
-        /// Close the user stream for margin account
-        /// </summary>
-        /// <param name="symbol">The isolated symbol</param>
-        /// <param name="listenKey">The listen key to invalidate</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public WebCallResult<object> CloseIsolatedMarginUserStream(string symbol, string listenKey, CancellationToken ct = default) => CloseIsolatedMarginUserStreamAsync(symbol, listenKey, ct).Result;
-
         /// <summary>
         /// Close the user stream for margin account
         /// </summary>

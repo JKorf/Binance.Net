@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using Binance.Net.Interfaces;
 using System;
-using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.ExchangeInterfaces;
 using CryptoExchange.Net.Interfaces;
 
@@ -17,7 +16,7 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// The symbol of the order book 
         /// </summary>
         [JsonProperty("s")]
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
         /// The ID of the last update
@@ -28,12 +27,12 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// <summary>
         /// The list of bids
         /// </summary>
-        public IEnumerable<BinanceOrderBookEntry> Bids { get; set; } = new List<BinanceOrderBookEntry>();
+        public IEnumerable<BinanceOrderBookEntry> Bids { get; set; } = Array.Empty<BinanceOrderBookEntry>();
 
         /// <summary>
         /// The list of asks
         /// </summary>
-        public IEnumerable<BinanceOrderBookEntry> Asks { get; set; } = new List<BinanceOrderBookEntry>();
+        public IEnumerable<BinanceOrderBookEntry> Asks { get; set; } = Array.Empty<BinanceOrderBookEntry>();
 
 
         IEnumerable<ISymbolOrderBookEntry> ICommonOrderBook.CommonBids => Bids;

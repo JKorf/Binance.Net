@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Binance.Net.Objects.Futures.FuturesData
+﻿namespace Binance.Net.Objects.Futures.FuturesData
 {
     /// <summary>
     /// Result of setting a countdown timer
@@ -12,7 +8,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// Symbol
         /// </summary>
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Count down time in milliseconds
         /// </summary>

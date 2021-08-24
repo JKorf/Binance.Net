@@ -12,7 +12,7 @@ namespace Binance.Net.Objects.Spot.MarketStream
         /// The symbol this data is for
         /// </summary>
         [JsonProperty("s")]
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
         /// The current day close price. This is the latest price for this symbol.

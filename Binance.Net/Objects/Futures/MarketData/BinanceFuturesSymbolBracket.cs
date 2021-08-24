@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Futures.MarketData
@@ -12,7 +13,7 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// Symbol or pair
         /// </summary>
         [JsonProperty("symbol")]
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
 
         [JsonProperty("pair")]
         private string Pair
@@ -23,7 +24,7 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// <summary>
         /// Brackets
         /// </summary>
-        public IEnumerable<BinanceFuturesBracket> Brackets { get; set; } = new List<BinanceFuturesBracket>();
+        public IEnumerable<BinanceFuturesBracket> Brackets { get; set; } = Array.Empty<BinanceFuturesBracket>();
 
     }
 

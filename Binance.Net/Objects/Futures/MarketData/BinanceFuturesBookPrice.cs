@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Binance.Net.Objects.Spot.MarketData;
+﻿using Binance.Net.Objects.Spot.MarketData;
 
 namespace Binance.Net.Objects.Futures.MarketData
 {
@@ -13,6 +10,6 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// <summary>
         /// Pair
         /// </summary>
-        public string Pair { get; set; } = "";
+        public string Pair { get; set; } = string.Empty;
     }
 }

@@ -23,7 +23,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// <summary>
         /// Transfer entries
         /// </summary>
-        public IEnumerable<BinanceDustTransferResultEntry> TransferResult { get; set; } = new List<BinanceDustTransferResultEntry>();
+        public IEnumerable<BinanceDustTransferResultEntry> TransferResult { get; set; } = Array.Empty<BinanceDustTransferResultEntry>();
     }
 
     /// <summary>
@@ -38,7 +38,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// <summary>
         /// Asset
         /// </summary>
-        public string FromAsset { get; set; } = "";
+        public string FromAsset { get; set; } = string.Empty;
         /// <summary>
         /// Timestamp of conversion
         /// </summary>

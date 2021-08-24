@@ -14,7 +14,7 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// <summary>
         /// The symbol the trade is for
         /// </summary>
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The id of the trade
         /// </summary>
@@ -50,7 +50,7 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// <summary>
         /// The asset the commission is paid in
         /// </summary>
-        public string CommissionAsset { get; set; } = "";
+        public string CommissionAsset { get; set; } = string.Empty;
         /// <summary>
         /// The time the trade was made
         /// </summary>
@@ -74,5 +74,6 @@ namespace Binance.Net.Objects.Spot.SpotData
         decimal ICommonTrade.CommonQuantity => Quantity;
         decimal ICommonTrade.CommonFee => Commission;
         string ICommonTrade.CommonFeeAsset => CommissionAsset;
+        DateTime ICommonTrade.CommonTradeTime => TradeTime;
     }
 }

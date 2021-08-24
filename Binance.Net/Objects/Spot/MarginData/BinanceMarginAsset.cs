@@ -11,12 +11,12 @@ namespace Binance.Net.Objects.Spot.MarginData
         /// Full name of the asset
         /// </summary>
         [JsonProperty("assetFullName")]
-        public string FullName { get; set; } = "";
+        public string FullName { get; set; } = string.Empty;
         /// <summary>
         /// Short name of the asset
         /// </summary>
         [JsonProperty("assetName")]
-        public string Name { get; set; } = "";
+        public string Name { get; set; } = string.Empty;
         /// <summary>
         /// Is borrowable
         /// </summary>

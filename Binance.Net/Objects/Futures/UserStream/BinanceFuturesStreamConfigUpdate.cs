@@ -3,13 +3,11 @@ using Binance.Net.Enums;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Binance.Net.Objects.Futures.UserStream
 {
     /// <summary>
-    /// Information about levrage of symbol changed
+    /// Information about leverage of symbol changed
     /// </summary>
     public class BinanceFuturesStreamConfigUpdate : BinanceStreamEvent
     {

@@ -27,6 +27,6 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// <summary>
         /// The asset the commission is paid in
         /// </summary>
-        public string CommissionAsset { get; set; } = "";
+        public string CommissionAsset { get; set; } = string.Empty;
     }
 }

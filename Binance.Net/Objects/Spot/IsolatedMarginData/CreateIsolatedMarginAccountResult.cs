@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Binance.Net.Objects.Spot.IsolatedMarginData
+﻿namespace Binance.Net.Objects.Spot.IsolatedMarginData
 {
     /// <summary>
     /// Result of creating isolated margin account
@@ -17,6 +13,6 @@ namespace Binance.Net.Objects.Spot.IsolatedMarginData
         /// <summary>
         /// Symbol
         /// </summary>
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
     }
 }

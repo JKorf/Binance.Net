@@ -18,7 +18,7 @@ namespace Binance.Net.Objects.Spot.SubAccountData
         /// <summary>
         /// The email associated with the sub account
         /// </summary>
-        public string Email { get; set; } = "";
+        public string Email { get; set; } = string.Empty;
         /// <summary>
         /// Is account frozen
         /// </summary>

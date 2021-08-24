@@ -13,7 +13,7 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// <summary>
         /// The timezone the server uses
         /// </summary>
-        public string TimeZone { get; set; } = "";
+        public string TimeZone { get; set; } = string.Empty;
         /// <summary>
         /// The current server time
         /// </summary>
@@ -22,14 +22,14 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// <summary>
         /// The rate limits used
         /// </summary>
-        public IEnumerable<BinanceRateLimit> RateLimits { get; set; } = new List<BinanceRateLimit>();
+        public IEnumerable<BinanceRateLimit> RateLimits { get; set; } = Array.Empty<BinanceRateLimit>();
         /// <summary>
         /// All symbols supported
         /// </summary>
-        public IEnumerable<BinanceSymbol> Symbols { get; set; } = new List<BinanceSymbol>();
+        public IEnumerable<BinanceSymbol> Symbols { get; set; } = Array.Empty<BinanceSymbol>();
         /// <summary>
         /// Filters
         /// </summary>
-        public IEnumerable<object> ExchangeFilters { get; set; } = new List<object>();
+        public IEnumerable<object> ExchangeFilters { get; set; } = Array.Empty<object>();
     }
 }

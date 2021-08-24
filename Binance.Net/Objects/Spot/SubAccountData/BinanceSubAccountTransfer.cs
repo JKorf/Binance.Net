@@ -21,15 +21,15 @@ namespace Binance.Net.Objects.Spot.SubAccountData
         /// <summary>
         /// From which email the transfer originated
         /// </summary>
-        public string From { get; set; } = "";
+        public string From { get; set; } = string.Empty;
         /// <summary>
         /// To which email the transfer was to
         /// </summary>
-        public string To { get; set; } = "";
+        public string To { get; set; } = string.Empty;
         /// <summary>
         /// The asset of the transfer
         /// </summary>
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// The quantity of the transfer
         /// </summary>

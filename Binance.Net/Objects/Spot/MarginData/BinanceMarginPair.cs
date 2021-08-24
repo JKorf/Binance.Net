@@ -11,12 +11,12 @@ namespace Binance.Net.Objects.Spot.MarginData
         /// Base asset of the pair
         /// </summary>
         [JsonProperty("base")]
-        public string BaseAsset { get; set; } = "";
+        public string BaseAsset { get; set; } = string.Empty;
         /// <summary>
         /// Quote asset of the pair
         /// </summary>
         [JsonProperty("quote")]
-        public string QuoteAsset { get; set; } = "";
+        public string QuoteAsset { get; set; } = string.Empty;
         /// <summary>
         /// Id
         /// </summary>
@@ -36,6 +36,6 @@ namespace Binance.Net.Objects.Spot.MarginData
         /// <summary>
         /// Symbol name
         /// </summary>
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
     }
 }

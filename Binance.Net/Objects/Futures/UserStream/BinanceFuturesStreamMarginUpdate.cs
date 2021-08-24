@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Newtonsoft.Json;
@@ -18,7 +19,7 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// <summary>
         /// Positions
         /// </summary>
-        public IEnumerable<BinanceFuturesStreamMarginPosition> Positions { get; set; } = new List<BinanceFuturesStreamMarginPosition>();
+        public IEnumerable<BinanceFuturesStreamMarginPosition> Positions { get; set; } = Array.Empty<BinanceFuturesStreamMarginPosition>();
     }
 
     /// <summary>
@@ -30,7 +31,7 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// Symbol
         /// </summary>
         [JsonProperty("s")]
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
         /// Position Side

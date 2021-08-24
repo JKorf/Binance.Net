@@ -54,6 +54,6 @@ namespace Binance.Net.Objects.Spot.MarginData
         /// <summary>
         /// Assets
         /// </summary>
-        public List<BinanceMarginBalance> UserAssets { get; set; } = new List<BinanceMarginBalance>();
+        public IEnumerable<BinanceMarginBalance> UserAssets { get; set; } = Array.Empty<BinanceMarginBalance>();
     }
 }

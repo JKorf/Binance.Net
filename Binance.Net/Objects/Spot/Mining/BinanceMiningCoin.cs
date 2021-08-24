@@ -11,12 +11,12 @@ namespace Binance.Net.Objects.Spot.Mining
         /// The name of the coin
         /// </summary>
         [JsonProperty("coinName")]
-        public string CoinName { get; set; } = "";
+        public string CoinName { get; set; } = string.Empty;
         /// <summary>
         /// The id of the coin
         /// </summary>
         [JsonProperty("coinId")]
-        public string CoinId { get; set; } = "";
+        public string CoinId { get; set; } = string.Empty;
         /// <summary>
         /// The pool index
         /// </summary>
@@ -26,11 +26,11 @@ namespace Binance.Net.Objects.Spot.Mining
         /// Algorithm id
         /// </summary>
         [JsonProperty("algoId")]
-        public string AlgorithmId { get; set; } = "";
+        public string AlgorithmId { get; set; } = string.Empty;
         /// <summary>
         /// Algorithm name
         /// </summary>
         [JsonProperty("algoName")]
-        public string AlgorithmName { get; set; } = "";
+        public string AlgorithmName { get; set; } = string.Empty;
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,13 +10,15 @@ using Binance.Net.Objects.Spot.MarketData;
 using Binance.Net.Objects.Spot.WalletData;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace Binance.Net.SubClients.Spot
 {
     /// <summary>
     /// Spot system endpoints
     /// </summary>
-    public class BinanceClientSpotSystem : IBinanceClientSpotSystem
+    public class BinanceClientSpotSystem: IBinanceClientSpotSystem
     {
         private const string api = "api";
         private const string publicVersion = "3";
@@ -40,12 +44,6 @@ namespace Binance.Net.SubClients.Spot
         /// Pings the Binance API
         /// </summary>
         /// <returns>True if successful ping, false if no response</returns>
-        public WebCallResult<long> Ping(CancellationToken ct = default) => PingAsync(ct).Result;
-
-        /// <summary>
-        /// Pings the Binance API
-        /// </summary>
-        /// <returns>True if successful ping, false if no response</returns>
         public async Task<WebCallResult<long>> PingAsync(CancellationToken ct = default)
         {
             var sw = Stopwatch.StartNew();
@@ -64,21 +62,13 @@ namespace Binance.Net.SubClients.Spot
         /// <param name="resetAutoTimestamp">Whether the response should be used for a new auto timestamp calculation</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Server time</returns>
-        public WebCallResult<DateTime> GetServerTime(bool resetAutoTimestamp = false, CancellationToken ct = default) => GetServerTimeAsync(resetAutoTimestamp, ct).Result;
-
-        /// <summary>
-        /// Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls
-        /// </summary>
-        /// <param name="resetAutoTimestamp">Whether the response should be used for a new auto timestamp calculation</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Server time</returns>
         public async Task<WebCallResult<DateTime>> GetServerTimeAsync(bool resetAutoTimestamp = false, CancellationToken ct = default)
         {
             var url = _baseClient.GetUrlSpot(checkTimeEndpoint, api, publicVersion);
             if (!_baseClient.AutoTimestamp)
             {
                 var result = await _baseClient.SendRequestInternal<BinanceCheckTime>(url, HttpMethod.Get, ct).ConfigureAwait(false);
-                return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, result.Data?.ServerTime ?? default, result.Error);
+                return result.As(result.Data?.ServerTime ?? default);
             }
             else
             {
@@ -87,8 +77,8 @@ namespace Binance.Net.SubClients.Spot
                 if (!result)
                     return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, default, result.Error);
 
-                if (_baseClient.TimeSynced && !resetAutoTimestamp)
-                    return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.ServerTime, result.Error);
+                if (BinanceClient.TimeSynced && !resetAutoTimestamp)
+                    return result.As(result.Data.ServerTime);
 
                 if (_baseClient.TotalRequestsMade == 1)
                 {
@@ -104,57 +94,67 @@ namespace Binance.Net.SubClients.Spot
                 if (offset >= 0 && offset < 500)
                 {
                     // Small offset, probably mainly due to ping. Don't adjust time
-                    _baseClient.CalculatedTimeOffset = 0;
-                    _baseClient.TimeSynced = true;
-                    _baseClient.LastTimeSync = DateTime.UtcNow;
-                    _log.Write(LogVerbosity.Info, $"Time offset between 0 and 500ms ({offset}ms), no adjustment needed");
-                    return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.ServerTime, result.Error);
+                    BinanceClient.CalculatedTimeOffset = 0;
+                    BinanceClient.TimeSynced = true;
+                    BinanceClient.LastTimeSync = DateTime.UtcNow;
+                    _log.Write(LogLevel.Information, $"Time offset between 0 and 500ms ({offset}ms), no adjustment needed");
+                    return result.As(result.Data.ServerTime);
                 }
 
-                _baseClient.CalculatedTimeOffset = (result.Data.ServerTime - localTime).TotalMilliseconds;
-                _baseClient.TimeSynced = true;
-                _baseClient.LastTimeSync = DateTime.UtcNow;
-                _log.Write(LogVerbosity.Info, $"Time offset set to {_baseClient.CalculatedTimeOffset}ms");
-                return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.ServerTime, result.Error);
+                BinanceClient.CalculatedTimeOffset = (result.Data.ServerTime - localTime).TotalMilliseconds;
+                BinanceClient.TimeSynced = true;
+                BinanceClient.LastTimeSync = DateTime.UtcNow;
+                _log.Write(LogLevel.Information, $"Time offset set to {BinanceClient.CalculatedTimeOffset}ms");
+                return result.As(result.Data.ServerTime);
             }
         }
 
         #endregion
 
         #region Exchange Information
-
         /// <summary>
-        /// Get's information about the exchange including rate limits and symbol list
+        /// Gets information about the exchange including rate limits and symbol list
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Exchange info</returns>
-        public WebCallResult<BinanceExchangeInfo> GetExchangeInfo(CancellationToken ct = default) => GetExchangeInfoAsync(ct).Result;
+        public Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(CancellationToken ct = default)
+             => GetExchangeInfoAsync(Array.Empty<string>(), ct);
 
         /// <summary>
-        /// Get's information about the exchange including rate limits and symbol list
+        /// Get's information about the exchange including rate limits and information on the provided symbol
         /// </summary>
+        /// <param name="symbol">Symbol to get data for token</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Exchange info</returns>
-        public async Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(CancellationToken ct = default)
+        public Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(string symbol, CancellationToken ct = default)
+             => GetExchangeInfoAsync(new string[] { symbol }, ct);
+
+        /// <summary>
+        /// Get's information about the exchange including rate limits and information on the provided symbols
+        /// </summary>
+        /// <param name="symbols">Symbols to get data for token</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Exchange info</returns>
+        public async Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(IEnumerable<string> symbols, CancellationToken ct = default)
         {
-            var exchangeInfoResult = await _baseClient.SendRequestInternal<BinanceExchangeInfo>(_baseClient.GetUrlSpot(exchangeInfoEndpoint, api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
+            var parameters = new Dictionary<string, object>();
+            if (symbols.Count() > 1)
+                parameters.Add("symbols", JsonConvert.SerializeObject(symbols));
+            else if (symbols.Any())
+                parameters.Add("symbol", symbols.First());
+
+            var exchangeInfoResult = await _baseClient.SendRequestInternal<BinanceExchangeInfo>(_baseClient.GetUrlSpot(exchangeInfoEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters: parameters, arraySerialization: ArrayParametersSerialization.Array).ConfigureAwait(false);
             if (!exchangeInfoResult)
                 return exchangeInfoResult;
 
             _baseClient.ExchangeInfo = exchangeInfoResult.Data;
             _baseClient.LastExchangeInfoUpdate = DateTime.UtcNow;
-            _log.Write(LogVerbosity.Info, "Trade rules updated");
+            _log.Write(LogLevel.Information, "Trade rules updated");
             return exchangeInfoResult;
         }
+        #endregion
 
-
-        /// <summary>
-        /// Gets the status of the Binance platform
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The system status</returns>
-        public WebCallResult<BinanceSystemStatus> GetSystemStatus(CancellationToken ct = default) => GetSystemStatusAsync(ct).Result;
-
+        #region System status
         /// <summary>
         /// Gets the status of the Binance platform
         /// </summary>
