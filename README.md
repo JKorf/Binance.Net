@@ -165,6 +165,10 @@ Yes, as long as the API endpoints are the same. Switch by changing the BaseAddre
 See Timestamping.
 
 ## Release notes
+* Version 7.0.3 - 24 Aug 2021
+    * Updated CryptoExchange.Net, improving websocket and SymbolOrderBook performance
+    * Fix for GetExchangeInfoAsync filter by multiple symbols
+
 * Version 7.0.2 - 16 Aug 2021
     * Added orderId parameter to GetUserTradesAsync
     * Added missing TransferAsync to client interface
