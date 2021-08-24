@@ -104,7 +104,6 @@ namespace Binance.Net
         {
             return Deserialize<T>(data, checkObject);   
         }
-
         internal Task<CallResult<UpdateSubscription>> SubscribeInternal<T>(string url, IEnumerable<string> topics, Action<DataEvent<T>> onData)
         {
             var request = new BinanceSocketRequest
