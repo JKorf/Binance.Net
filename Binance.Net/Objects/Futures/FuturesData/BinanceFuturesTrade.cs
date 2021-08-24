@@ -55,7 +55,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// Realized pnl
         /// </summary>
-        public decimal RealizedPnL { get; set; }
+        public decimal RealizedPnl { get; set; }
         /// <summary>
         /// Order side
         /// </summary>

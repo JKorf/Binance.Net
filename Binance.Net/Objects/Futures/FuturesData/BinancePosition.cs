@@ -29,7 +29,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Unrealized profit
         /// </summary>
         [JsonProperty("unrealizedProfit")]
-        public decimal UnrealizedPnL { get; set; }
+        public decimal UnrealizedPnl { get; set; }
 
         /// <summary>
         /// Position side

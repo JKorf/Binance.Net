@@ -46,7 +46,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Unrealized Profit
         /// </summary>
         [JsonProperty("unrealizedProfit")]
-        public decimal UnrealizedPnL { get; set; }
+        public decimal UnrealizedPnl { get; set; }
 
         /// <summary>
         /// Wallet Balance
@@ -62,7 +62,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Unrealized profit of crossed positions
         /// </summary>
         [JsonProperty("crossUnPnl")]
-        public decimal CrossUnrealizedPnL { get; set; }
+        public decimal CrossUnrealizedPnl { get; set; }
 
         /// <summary>
         /// Available balance

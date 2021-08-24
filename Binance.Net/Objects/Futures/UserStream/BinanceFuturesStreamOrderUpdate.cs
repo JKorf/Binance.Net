@@ -178,6 +178,6 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// Realized profit of the trade
         /// </summary>
         [JsonProperty("rp")]
-        public decimal RealizedPnL { get; set; }
+        public decimal RealizedPnl { get; set; }
     }
 }
