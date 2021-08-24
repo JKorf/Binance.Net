@@ -718,7 +718,7 @@
             Futures welcome bonus
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.IncomeType.RealizedPnL">
+        <member name="F:Binance.Net.Enums.IncomeType.RealizedPnl">
             <summary>
             Futures realized profit
             </summary>
@@ -8711,11 +8711,12 @@
             <param name="ct">Cancellation token</param>
             <returns>Open order lists</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.GetMyTrades(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.GetMyTrades(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user trades for provided symbol
             </summary>
             <param name="symbol">Symbol to get trades for</param>
+            <param name="orderId">The order id of the order</param>
             <param name="limit">The max number of results</param>
             <param name="startTime">Orders newer than this date will be retrieved</param>
             <param name="endTime">Orders older than this date will be retrieved</param>
@@ -8724,11 +8725,12 @@
             <param name="ct">Cancellation token</param>
             <returns>List of trades</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.GetMyTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpotOrder.GetMyTradesAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user trades for provided symbol
             </summary>
             <param name="symbol">Symbol to get trades for</param>
+            <param name="orderId">The order id of the order</param>
             <param name="limit">The max number of results</param>
             <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
             <param name="startTime">Orders newer than this date will be retrieved</param>
@@ -10541,7 +10543,7 @@
             Position Initial Margin
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.UnrealizedPnL">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.UnrealizedPnl">
             <summary>
             Unrealized Profit
             </summary>
@@ -10556,7 +10558,7 @@
             Crossed Wallet Balance
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.CrossUnrealizedPnL">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.CrossUnrealizedPnl">
             <summary>
             Unrealized profit of crossed positions
             </summary>
@@ -10591,7 +10593,7 @@
             Crossed wallet balance
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance.CrossUnrealizedPnL">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance.CrossUnrealizedPnl">
             <summary>
             Unrealized profit of crossed positions
             </summary>
@@ -11508,7 +11510,7 @@
             Quantity
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesTrade.RealizedPnL">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesTrade.RealizedPnl">
             <summary>
             Realized pnl
             </summary>
@@ -11573,7 +11575,7 @@
             Leverage
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionBase.UnrealizedPnL">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionBase.UnrealizedPnl">
             <summary>
             Unrealized profit
             </summary>
@@ -12956,7 +12958,7 @@
             The entry price
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition.RealizedPnL">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition.RealizedPnl">
             <summary>
             The accumulated realized PnL
             </summary>
@@ -13076,7 +13078,7 @@
             Mark Price
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginPosition.UnrealizedPnL">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginPosition.UnrealizedPnl">
             <summary>
             Unrealized PnL
             </summary>
@@ -13251,7 +13253,7 @@
             Callback Rate, only pushed with TRAILING_STOP_MARKET order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.RealizedPnL">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.RealizedPnl">
             <summary>
             Realized profit of the trade
             </summary>
@@ -13504,11 +13506,6 @@
         <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.QuantityRemaining">
             <summary>
             Quantity which is still open to be filled
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.AverageFillPrice">
-            <summary>
-            The average price the order was filled
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.BinanceClientOptions">
@@ -25878,11 +25875,12 @@
             <param name="ct">Cancellation token</param>
             <returns>Open order lists</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.GetMyTrades(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.GetMyTrades(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user trades for provided symbol
             </summary>
             <param name="symbol">Symbol to get trades for</param>
+            <param name="orderId">The order id of the order</param>
             <param name="limit">The max number of results</param>
             <param name="startTime">Orders newer than this date will be retrieved</param>
             <param name="endTime">Orders older than this date will be retrieved</param>
@@ -25891,11 +25889,12 @@
             <param name="ct">Cancellation token</param>
             <returns>List of trades</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.GetMyTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.GetMyTradesAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user trades for provided symbol
             </summary>
             <param name="symbol">Symbol to get trades for</param>
+            <param name="orderId">The order id of the order</param>
             <param name="limit">The max number of results</param>
             <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
             <param name="startTime">Orders newer than this date will be retrieved</param>
