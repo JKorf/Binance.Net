@@ -35,7 +35,7 @@ namespace BinanceAPI.ClientConsole
                 // Spot.Market | Spot market info endpoints
                 client.Spot.Market.GetBookPriceAsync("BTCUSDT");
                 // Spot.Order | Spot order info endpoints
-                client.Spot.Order.GetAllOrdersAsync("BTCUSDT");
+                client.Spot.Order.GetOrdersAsync("BTCUSDT");
                 // Spot.System | Spot system endpoints
                 client.Spot.System.GetExchangeInfoAsync();
                 // Spot.UserStream | Spot user stream endpoints. Should be used to subscribe to a user stream with the socket client
@@ -48,7 +48,7 @@ namespace BinanceAPI.ClientConsole
                 // FuturesCoin.Market | Coin-M futures market endpoints
                 client.FuturesCoin.Market.GetBookPricesAsync("BTCUSD");
                 // FuturesCoin.Order | Coin-M futures order endpoints
-                client.FuturesCoin.Order.GetMyTradesAsync();
+                client.FuturesCoin.Order.GetUserTradesAsync();
                 // FuturesCoin.Account | Coin-M account info
                 client.FuturesCoin.Account.GetAccountInfoAsync();
                 // FuturesCoin.System | Coin-M system endpoints
@@ -61,7 +61,7 @@ namespace BinanceAPI.ClientConsole
                 // FuturesUsdt.Market | USDT-M futures market endpoints
                 client.FuturesUsdt.Market.GetBookPricesAsync("BTCUSDT");
                 // FuturesUsdt.Order | USDT-M futures order endpoints
-                client.FuturesUsdt.Order.GetMyTradesAsync("BTCUSDT");
+                client.FuturesUsdt.Order.GetUserTradesAsync("BTCUSDT");
                 // FuturesUsdt.Account | USDT-M account info
                 client.FuturesUsdt.Account.GetAccountInfoAsync();
                 // FuturesUsdt.System | USDT-M system endpoints
@@ -80,7 +80,7 @@ namespace BinanceAPI.ClientConsole
                 // Margin.Market | Margin market endpoints
                 client.Margin.Market.GetMarginPairsAsync();
                 // Margin.Order | Margin order endpoints
-                client.Margin.Order.GetAllMarginAccountOrdersAsync("BTCUSDT");
+                client.Margin.Order.GetMarginAccountOrdersAsync("BTCUSDT");
                 // Margin.UserStream | Margin user stream endpoints. Should be used to subscribe to a user stream with the socket client
                 client.Margin.UserStream.StartUserStreamAsync();
                 // Margin.IsolatedUserStream | Isolated margin user stream endpoints. Should be used to subscribe to a user stream with the socket client

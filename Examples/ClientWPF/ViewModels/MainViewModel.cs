@@ -202,7 +202,7 @@ namespace Binance.Net.ClientWPF
         {
             using (var client = new BinanceClient())
             {
-                var result = await client.Spot.Market.Get24HPriceAsync(SelectedSymbol.Symbol);
+                var result = await client.Spot.Market.GetTickerAsync(SelectedSymbol.Symbol);
                 if (result.Success)
                 {
                     SelectedSymbol.HighPrice = result.Data.HighPrice;
@@ -219,7 +219,7 @@ namespace Binance.Net.ClientWPF
         {
             using (var client = new BinanceClient())
             {
-                var result = await client.Spot.Order.GetAllOrdersAsync(SelectedSymbol.Symbol);
+                var result = await client.Spot.Order.GetOrdersAsync(SelectedSymbol.Symbol);
                 if (result.Success)
                 {
                     SelectedSymbol.Orders = new ObservableCollection<OrderViewModel>(result.Data.OrderByDescending(d => d.CreateTime).Select(o => new OrderViewModel()
