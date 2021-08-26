@@ -35,6 +35,7 @@ namespace Binance.Net.UnitTests.TestImplementations
         public bool Reconnecting { get; set; }
         public string Origin { get; set; }
         public Encoding Encoding { get; set; }
+        public int? RatelimitPerSecond { get; set; }
 
         public Task<bool> ConnectAsync()
         {

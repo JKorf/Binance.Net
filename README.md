@@ -165,6 +165,9 @@ Yes, as long as the API endpoints are the same. Switch by changing the BaseAddre
 See Timestamping.
 
 ## Release notes
+* Version 7.0.5 - 26 Aug 2021
+    * Updated CryptoExchange.Net, fixing reconnecting/resubscribing sockets with multiple subscriptions on a single connection
+
 * Version 7.0.4 - 24 Aug 2021
     * Actually included fix for multiple symbols in GetExchangeInfoAsync
 
