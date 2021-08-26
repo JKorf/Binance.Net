@@ -189,13 +189,16 @@ namespace Binance.Net.ClientWPF
             }
 
             socketClient = new BinanceSocketClient();
-            socketClient.Spot.SubscribeToAllSymbolTickerUpdatesAsync(data => {
+            var subscribeResult = await socketClient.Spot.SubscribeToAllSymbolTickerUpdatesAsync(data => {
                 foreach (var ud in data.Data) {
                     var symbol = AllPrices.SingleOrDefault(p => p.Symbol == ud.Symbol);
                     if (symbol != null)
                         symbol.Price = ud.LastPrice;
                 }
-            });             
+            });  
+            
+            if(!subscribeResult.Success)
+                messageBoxService.ShowMessage($"Failed to subscribe to price updates: {subscribeResult.Error}", "error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private async Task Get24HourStats()
