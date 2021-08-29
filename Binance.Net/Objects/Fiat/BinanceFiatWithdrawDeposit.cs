@@ -19,6 +19,10 @@ namespace Binance.Net.Objects.Fiat
         [JsonProperty("orderNo")]
         public string OrderNumber { get; set; } = string.Empty;
         /// <summary>
+        /// The used currency
+        /// </summary>
+        public string FiatCurrency { get; set; } = string.Empty;
+        /// <summary>
         /// The amount
         /// </summary>
         public decimal Amount { get; set; }
