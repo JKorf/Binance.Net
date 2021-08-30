@@ -8444,6 +8444,11 @@
             Order number
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Fiat.BinanceFiatWithdrawDeposit.FiatCurrency">
+            <summary>
+            The used currency
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Fiat.BinanceFiatWithdrawDeposit.Amount">
             <summary>
             The amount
