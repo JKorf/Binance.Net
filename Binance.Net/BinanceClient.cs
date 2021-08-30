@@ -169,7 +169,7 @@ namespace Binance.Net
             FuturesUsdt = new BinanceClientFuturesUsdt(log, this);
 
             General = new BinanceClientGeneral(this);
-            Margin = new BinanceClientMargin(this);
+            Margin = new BinanceClientMargin(log, this);
             Lending = new BinanceClientLending(this);
             Mining = new BinanceClientMining(this);
             

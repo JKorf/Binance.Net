@@ -59,7 +59,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         [JsonProperty("confirmTimes")]
         public string Confirmations { get; set; } = string.Empty;
         /// <summary>
-        /// Network confirmations for unlockign
+        /// Network confirmations for unlocking
         /// </summary>
         [JsonProperty("unlockConfirm")]
         public string ConfirmationsForUnlock { get; set; } = string.Empty;
