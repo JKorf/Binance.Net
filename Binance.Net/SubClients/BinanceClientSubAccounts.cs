@@ -139,7 +139,7 @@ namespace Binance.Net.SubClients
         #region Sub-account Transfer(For Master Account)
 
         /// <summary>
-        /// Transfers an asset from one sub account to another
+        /// Transfers an asset form/to a sub account. If fromEmail or toEmail is not send it is interpreted as from/to the master account. Transfer between futures accounts is not supported
         /// </summary>
         /// <param name="fromEmail">From which account to transfer</param>
         /// <param name="fromAccountType">Account type to transfer from</param>
@@ -150,10 +150,10 @@ namespace Binance.Net.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The result of the transfer</returns>
-        public async Task<WebCallResult<BinanceSubAccountTransferResult>> TransferSubAccountAsync(string fromEmail, TransferAccountType fromAccountType, string toEmail, TransferAccountType toAccountType, string asset, decimal amount, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceSubAccountTransferResult>> TransferSubAccountAsync(TransferAccountType fromAccountType, TransferAccountType toAccountType, string asset, decimal amount, string? fromEmail = null, string? toEmail = null, int? receiveWindow = null, CancellationToken ct = default)
         {
-            fromEmail.ValidateNotNull(nameof(fromEmail));
-            toEmail.ValidateNotNull(nameof(toEmail));
+            if (string.IsNullOrEmpty(fromEmail) && string.IsNullOrEmpty(toEmail))
+                throw new ArgumentException("fromEmail and/or toEmail should be provided");
             asset.ValidateNotNull(nameof(asset));
 
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -162,14 +162,14 @@ namespace Binance.Net.SubClients
 
             var parameters = new Dictionary<string, object>
             {
-                { "fromEmail", fromEmail },
-                { "toEmail", toEmail },
                 { "fromAccountType", JsonConvert.SerializeObject(fromAccountType, new TransferAccountTypeConverter(false)) },
                 { "toAccountType", JsonConvert.SerializeObject(toAccountType, new TransferAccountTypeConverter(false)) },
                 { "asset", asset },
                 { "amount", amount.ToString(CultureInfo.InvariantCulture) },
                 { "timestamp", _baseClient.GetTimestamp() },
             };
+            parameters.AddOptionalParameter("fromEmail", fromEmail);
+            parameters.AddOptionalParameter("toEmail", toEmail);
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
