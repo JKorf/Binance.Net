@@ -673,6 +673,11 @@
             Expired
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.ExecutionType.Amendment">
+            <summary>
+            Amendment
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.FiatPaymentStatus">
             <summary>
             Status of a fiat payment
@@ -9869,6 +9874,16 @@
             Isolated
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoBase.Quantity">
+            <summary>
+            Position amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoBase.UpdateTime">
+            <summary>
+            Last update time
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoUsdt">
             <summary>
             Usdt position info
@@ -9877,11 +9892,6 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoUsdt.MaxNotional">
             <summary>
             Max notional
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoUsdt.Quantity">
-            <summary>
-            Position amount
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoCoin">
@@ -9937,6 +9947,11 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionDetailsUsdt.MaxNotional">
             <summary>
             Max notional
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionDetailsUsdt.UpdateTime">
+            <summary>
+            Last update time
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinancePositionDetailsCoin">
@@ -10057,6 +10072,11 @@
             Timestamp
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCompositeIndexInfo.Component">
+            <summary>
+            Component asset
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCompositeIndexInfo.BaseAssets">
             <summary>
             Base asset list
@@ -10070,6 +10090,11 @@
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCompositeIndexInfoAsset.BaseAsset">
             <summary>
             Base asset name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCompositeIndexInfoAsset.QuoteAsset">
+            <summary>
+            Quote asset name
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCompositeIndexInfoAsset.WeightInQuantity">
@@ -10440,6 +10465,16 @@
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.UnderlyingType">
             <summary>
             Currently Empty
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.LiquidationFee">
+            <summary>
+            Liquidation fee
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.MarketTakeBound">
+            <summary>
+            The max price difference rate (from mark price) a market order can make
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.UnderlyingSupType">
@@ -10869,7 +10904,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndexAsset.Asset">
             <summary>
-            Asset name
+            Base asset name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndexAsset.QuoteAsset">
+            <summary>
+            Quote asset name
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndexAsset.WeightInQuantity">
@@ -10880,6 +10920,11 @@
         <member name="P:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndexAsset.WeightInPercentage">
             <summary>
             Weight in percentage
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndexAsset.IndexPrice">
+            <summary>
+            Index price
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.MarketStream.BinanceStreamIndexKlineData">

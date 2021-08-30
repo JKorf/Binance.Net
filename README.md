@@ -165,6 +165,11 @@ Yes, as long as the API endpoints are the same. Switch by changing the BaseAddre
 See Timestamping.
 
 ## Release notes
+* Version 7.1.0 - 30 Aug 2021
+    * Added Margin OCO endpoints
+    * Fixed TransferSubAccountAsync parameters
+    * Updated various models
+
 * Version 7.0.5 - 26 Aug 2021
     * Updated CryptoExchange.Net, fixing reconnecting/resubscribing sockets with multiple subscriptions on a single connection
 
