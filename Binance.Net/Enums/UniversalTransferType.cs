@@ -87,6 +87,15 @@
         MarginToC2C,
 
         /// <summary>
+        /// Isolated margin to margin
+        /// </summary>
+        IsolatedMarginToMargin,
+        /// <summary>
+        /// Margin to isolated margin
+        /// </summary>
+        MarginToIsolatedMargin,
+
+        /// <summary>
         /// Mining to Main (spot)
         /// </summary>
         MiningToMain,

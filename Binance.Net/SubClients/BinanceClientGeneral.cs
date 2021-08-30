@@ -470,10 +470,12 @@ namespace Binance.Net.SubClients
         /// <param name="type">The type of transfer</param>
         /// <param name="asset">The asset to transfer</param>
         /// <param name="amount">The amount to transfer</param>
+        /// <param name="fromSymbol">From symbol when transfering from/to isolated margin</param>
+        /// <param name="toSymbol">To symbol when transfering from/to isolated margin</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<BinanceTransaction>> TransferAsync(UniversalTransferType type, string asset, decimal amount, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceTransaction>> TransferAsync(UniversalTransferType type, string asset, decimal amount, string? fromSymbol = null, string? toSymbol = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
@@ -486,6 +488,9 @@ namespace Binance.Net.SubClients
                 { "amount", amount.ToString(CultureInfo.InvariantCulture) },
                 { "timestamp", _baseClient.GetTimestamp() }
             };
+
+            parameters.AddOptionalParameter("fromSymbol", fromSymbol);
+            parameters.AddOptionalParameter("toSymbol", toSymbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceTransaction>(_baseClient.GetUrlSpot(universalTransferEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);

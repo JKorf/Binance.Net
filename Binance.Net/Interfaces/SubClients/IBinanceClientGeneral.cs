@@ -172,10 +172,12 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="type">The type of transfer</param>
         /// <param name="asset">The asset to transfer</param>
         /// <param name="amount">The amount to transfer</param>
+        /// <param name="fromSymbol">From symbol when transfering from/to isolated margin</param>
+        /// <param name="toSymbol">To symbol when transfering from/to isolated margin</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BinanceTransaction>> TransferAsync(UniversalTransferType type, string asset, decimal amount, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceTransaction>> TransferAsync(UniversalTransferType type, string asset, decimal amount, string? fromSymbol = null, string? toSymbol = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get transfer history
