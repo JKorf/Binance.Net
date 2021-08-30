@@ -77,7 +77,7 @@ namespace Binance.Net.SubClients.Futures.Usdt
 
         #endregion
 
-        #region Future Account Balance
+        #region Multi assets mode
 
         /// <summary>.
         /// Get user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on Every symbol

@@ -21,6 +21,11 @@ namespace Binance.Net.Objects.Futures.MarketData
         public DateTime Timestamp { get; set; }
 
         /// <summary>
+        /// Component asset
+        /// </summary>
+        public string Component { get; set; } = string.Empty;
+
+        /// <summary>
         /// Base asset list
         /// </summary>
         [JsonProperty("baseAssetList")]
@@ -36,6 +41,10 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// Base asset name
         /// </summary>
         public string BaseAsset { get; set; } = string.Empty;
+        /// <summary>
+        /// Quote asset name
+        /// </summary>
+        public string QuoteAsset { get; set; } = string.Empty;
         /// <summary>
         /// Weight in quantity
         /// </summary>
