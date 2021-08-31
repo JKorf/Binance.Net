@@ -134,10 +134,12 @@ namespace Binance.Net.Interfaces.SubClients
         /// <summary>
         /// Gets the history of dust conversions
         /// </summary>
+        /// <param name="startTime">The start time</param>
+        /// <param name="endTime">The end time</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The history of dust conversions</returns>
-        Task<WebCallResult<BinanceDustLogList>> GetDustLogAsync(int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceDustLogList>> GetDustLogAsync(DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Converts dust (small amounts of) assets to BNB 
