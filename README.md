@@ -165,6 +165,10 @@ Yes, as long as the API endpoints are the same. Switch by changing the BaseAddre
 See Timestamping.
 
 ## Release notes
+* Version 7.1.1 - 31 Aug 2021
+    * Added optional start/endTime parameters to GetDusLogAsync
+    * Fixed futures position deserialization
+
 * Version 7.1.0 - 30 Aug 2021
     * Added Margin OCO endpoints
     * Fixed TransferSubAccountAsync parameters
