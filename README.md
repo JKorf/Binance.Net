@@ -165,6 +165,10 @@ Yes, as long as the API endpoints are the same. Switch by changing the BaseAddre
 See Timestamping.
 
 ## Release notes
+* Version 7.1.2 - 02 Sep 2021
+    * Fixed subaccount universal transfer result deserialization
+    * Fix for disposing order book closing socket even if there are other connections
+
 * Version 7.1.1 - 31 Aug 2021
     * Added optional start/endTime parameters to GetDusLogAsync
     * Fixed futures position deserialization

@@ -13,7 +13,7 @@ namespace Binance.Net.SymbolOrderBooks
     /// </summary>
     public class BinanceFuturesCoinSymbolOrderBook : SymbolOrderBook
     {
-        private readonly BinanceClient _restClient;
+        private readonly IBinanceClient _restClient;
         private readonly IBinanceSocketClient _socketClient;
         private readonly int? _limit;
         private readonly int? _updateInterval;
