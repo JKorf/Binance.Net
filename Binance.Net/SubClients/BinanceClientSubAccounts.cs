@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces.SubClients;
+using Binance.Net.Objects.Spot.MarginData;
 using Binance.Net.Objects.Spot.SpotData;
 using Binance.Net.Objects.Spot.SubAccountData;
 using CryptoExchange.Net;
