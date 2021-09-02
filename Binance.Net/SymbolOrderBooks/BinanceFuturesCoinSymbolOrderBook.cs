@@ -17,6 +17,8 @@ namespace Binance.Net.SymbolOrderBooks
         private readonly IBinanceSocketClient _socketClient;
         private readonly int? _limit;
         private readonly int? _updateInterval;
+        private readonly bool _restOwner;
+        private readonly bool _socketOwner;
 
         /// <summary>
         /// Create a new instance
@@ -27,8 +29,10 @@ namespace Binance.Net.SymbolOrderBooks
         {
             _limit = options?.Limit;
             _updateInterval = options?.UpdateInterval;
-            _restClient = new BinanceClient();
+            _restClient = options?.RestClient ?? new BinanceClient();
             _socketClient = options?.SocketClient ?? new BinanceSocketClient();
+            _restOwner = options?.RestClient == null;
+            _socketOwner = options?.SocketClient == null;
         }
 
         /// <inheritdoc />
@@ -102,8 +106,10 @@ namespace Binance.Net.SymbolOrderBooks
             asks.Clear();
             bids.Clear();
 
-            _restClient?.Dispose();
-            _socketClient?.Dispose();
+            if(_restOwner)
+                _restClient?.Dispose();
+            if(_socketOwner)
+                _socketClient?.Dispose();
         }
     }
 }
