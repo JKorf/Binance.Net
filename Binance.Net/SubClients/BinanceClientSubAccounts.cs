@@ -150,7 +150,7 @@ namespace Binance.Net.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The result of the transfer</returns>
-        public async Task<WebCallResult<BinanceSubAccountTransferResult>> TransferSubAccountAsync(TransferAccountType fromAccountType, TransferAccountType toAccountType, string asset, decimal amount, string? fromEmail = null, string? toEmail = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceTransaction>> TransferSubAccountAsync(TransferAccountType fromAccountType, TransferAccountType toAccountType, string asset, decimal amount, string? fromEmail = null, string? toEmail = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             if (string.IsNullOrEmpty(fromEmail) && string.IsNullOrEmpty(toEmail))
                 throw new ArgumentException("fromEmail and/or toEmail should be provided");
@@ -158,7 +158,7 @@ namespace Binance.Net.SubClients
 
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
-                return new WebCallResult<BinanceSubAccountTransferResult>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<BinanceTransaction>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -173,7 +173,7 @@ namespace Binance.Net.SubClients
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceSubAccountTransferResult>(_baseClient.GetUrlSpot(transferSubAccountEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true, true, PostParameters.InUri).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceTransaction>(_baseClient.GetUrlSpot(transferSubAccountEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true, true, PostParameters.InUri).ConfigureAwait(false);
         }
 
         #endregion
@@ -203,7 +203,7 @@ namespace Binance.Net.SubClients
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestInternal<BinanceSubAccountAsset>(_baseClient.GetUrlSpot(subAccountAssetsEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceSubAccountAsset>(_baseClient.GetUrlSpot(subAccountAssetsEndpoint, "sapi", "3"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result)
                 return WebCallResult<IEnumerable<BinanceBalance>>.CreateErrorResult(result.ResponseStatusCode,
                     result.ResponseHeaders, result.Error!);
