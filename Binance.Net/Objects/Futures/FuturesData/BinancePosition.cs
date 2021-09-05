@@ -1,6 +1,8 @@
 ﻿using Binance.Net.Converters;
 using Binance.Net.Enums;
+using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
+using System;
 
 namespace Binance.Net.Objects.Futures.FuturesData
 {
@@ -64,6 +66,18 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Isolated
         /// </summary>
         public bool Isolated { get; set; }
+
+        /// <summary>
+        /// Position amount
+        /// </summary>
+        [JsonProperty("positionAmt")]
+        public decimal Quantity { get; set; }
+
+        /// <summary>
+        /// Last update time
+        /// </summary>
+        [JsonConverter(typeof(TimestampConverter))]
+        public DateTime UpdateTime { get; set; }
     }
 
     /// <summary>
@@ -75,12 +89,6 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Max notional
         /// </summary>
         public decimal MaxNotional { get; set; }
-
-        /// <summary>
-        /// Position amount
-        /// </summary>
-        [JsonProperty("positionAmt")]
-        public decimal Quantity { get; set; }
     }
 
     /// <summary>
@@ -143,6 +151,11 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// </summary>
         [JsonProperty("maxNotionalValue")]
         public decimal MaxNotional { get; set; }
+        /// <summary>
+        /// Last update time
+        /// </summary>
+        [JsonConverter(typeof(TimestampConverter))]
+        public DateTime UpdateTime { get; set; }
     }
 
     /// <summary>

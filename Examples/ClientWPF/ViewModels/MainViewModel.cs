@@ -189,20 +189,23 @@ namespace Binance.Net.ClientWPF
             }
 
             socketClient = new BinanceSocketClient();
-            socketClient.Spot.SubscribeToAllSymbolTickerUpdatesAsync(data => {
+            var subscribeResult = await socketClient.Spot.SubscribeToAllSymbolTickerUpdatesAsync(data => {
                 foreach (var ud in data.Data) {
                     var symbol = AllPrices.SingleOrDefault(p => p.Symbol == ud.Symbol);
                     if (symbol != null)
                         symbol.Price = ud.LastPrice;
                 }
-            });             
+            });  
+            
+            if(!subscribeResult.Success)
+                messageBoxService.ShowMessage($"Failed to subscribe to price updates: {subscribeResult.Error}", "error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private async Task Get24HourStats()
         {
             using (var client = new BinanceClient())
             {
-                var result = await client.Spot.Market.Get24HPriceAsync(SelectedSymbol.Symbol);
+                var result = await client.Spot.Market.GetTickerAsync(SelectedSymbol.Symbol);
                 if (result.Success)
                 {
                     SelectedSymbol.HighPrice = result.Data.HighPrice;
@@ -219,7 +222,7 @@ namespace Binance.Net.ClientWPF
         {
             using (var client = new BinanceClient())
             {
-                var result = await client.Spot.Order.GetAllOrdersAsync(SelectedSymbol.Symbol);
+                var result = await client.Spot.Order.GetOrdersAsync(SelectedSymbol.Symbol);
                 if (result.Success)
                 {
                     SelectedSymbol.Orders = new ObservableCollection<OrderViewModel>(result.Data.OrderByDescending(d => d.CreateTime).Select(o => new OrderViewModel()

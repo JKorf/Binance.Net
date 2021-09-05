@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Enums;
+using Binance.Net.Objects.Spot.MarginData;
 using Binance.Net.Objects.Spot.SpotData;
 using Binance.Net.Objects.Spot.SubAccountData;
 using CryptoExchange.Net.Objects;
@@ -41,16 +42,18 @@ namespace Binance.Net.Interfaces.SubClients
         Task<WebCallResult<IEnumerable<BinanceSubAccountTransfer>>> GetSubAccountTransferHistoryForMasterAsync(string? fromEmail = null, string? toEmail = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Transfers an asset from one sub account to another
+        /// Transfers an asset form/to a sub account. If fromEmail or toEmail is not send it is interpreted as from/to the master account. Transfer between futures accounts is not supported
         /// </summary>
         /// <param name="fromEmail">From which account to transfer</param>
+        /// <param name="fromAccountType">Account type to transfer from</param>
         /// <param name="toEmail">To which account to transfer</param>
+        /// <param name="toAccountType">Account type to transfer to</param>
         /// <param name="asset">The asset to transfer</param>
         /// <param name="amount">The quantity to transfer</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The result of the transfer</returns>
-        Task<WebCallResult<BinanceSubAccountTransferResult>> TransferSubAccountAsync(string fromEmail, string toEmail, string asset, decimal amount, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceTransaction>> TransferSubAccountAsync(TransferAccountType fromAccountType, TransferAccountType toAccountType, string asset, decimal amount, string? fromEmail = null, string? toEmail = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets list of balances for a sub account

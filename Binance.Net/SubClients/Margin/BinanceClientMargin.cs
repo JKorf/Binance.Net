@@ -14,6 +14,7 @@ using Binance.Net.Objects.Spot.IsolatedMarginData;
 using Binance.Net.Objects.Spot.MarginData;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
 using Newtonsoft.Json;
 
@@ -64,11 +65,11 @@ namespace Binance.Net.SubClients.Margin
         /// </summary>
         public IBinanceClientIsolatedMarginUserStream IsolatedUserStream { get; }
         
-        internal BinanceClientMargin(BinanceClient baseClient)
+        internal BinanceClientMargin(Log log, BinanceClient baseClient)
         {
             _baseClient = baseClient;
             Market = new BinanceClientMarginMarket(_baseClient);
-            Order = new BinanceClientMarginOrders(_baseClient);
+            Order = new BinanceClientMarginOrders(log, _baseClient);
             UserStream = new BinanceClientMarginUserStream(_baseClient);
             IsolatedUserStream = new BinanceClientIsolatedMarginUserStream(_baseClient);
         }

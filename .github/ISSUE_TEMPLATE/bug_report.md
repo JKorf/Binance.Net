@@ -17,4 +17,4 @@ What endpoints and subscriptions are called.
 A clear and concise description of what you expected to happen.
 
 **Debug logging**
-Add debug logging related to the issue. Enable Debug logging in the client options by settings LogVerbosity to Debug.
+Add debug logging related to the issue. Enable Debug logging in the client options by settings LogLevel to Debug.

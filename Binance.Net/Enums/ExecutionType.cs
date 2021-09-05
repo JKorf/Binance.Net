@@ -28,6 +28,10 @@
         /// <summary>
         /// Expired
         /// </summary>
-        Expired
+        Expired,
+        /// <summary>
+        /// Amendment
+        /// </summary>
+        Amendment
     }
 }

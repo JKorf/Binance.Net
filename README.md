@@ -165,6 +165,22 @@ Yes, as long as the API endpoints are the same. Switch by changing the BaseAddre
 See Timestamping.
 
 ## Release notes
+* Version 7.1.2 - 02 Sep 2021
+    * Fixed subaccount universal transfer result deserialization
+    * Fix for disposing order book closing socket even if there are other connections
+
+* Version 7.1.1 - 31 Aug 2021
+    * Added optional start/endTime parameters to GetDusLogAsync
+    * Fixed futures position deserialization
+
+* Version 7.1.0 - 30 Aug 2021
+    * Added Margin OCO endpoints
+    * Fixed TransferSubAccountAsync parameters
+    * Updated various models
+
+* Version 7.0.5 - 26 Aug 2021
+    * Updated CryptoExchange.Net, fixing reconnecting/resubscribing sockets with multiple subscriptions on a single connection
+
 * Version 7.0.4 - 24 Aug 2021
     * Actually included fix for multiple symbols in GetExchangeInfoAsync
 

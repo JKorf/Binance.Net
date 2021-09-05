@@ -14,8 +14,10 @@ namespace Binance.Net.SymbolOrderBooks
     /// </summary>
     public class BinanceSpotSymbolOrderBook : SymbolOrderBook
     {
-        private readonly BinanceClient _restClient;
+        private readonly IBinanceClient _restClient;
         private readonly IBinanceSocketClient _socketClient;
+        private readonly bool _restOwner;
+        private readonly bool _socketOwner;
         private readonly int? _updateInterval;
 
         /// <summary>
@@ -28,8 +30,10 @@ namespace Binance.Net.SymbolOrderBooks
             symbol.ValidateBinanceSymbol();
             Levels = options?.Limit;
             _updateInterval = options?.UpdateInterval;
-            _restClient = new BinanceClient();
             _socketClient = options?.SocketClient ?? new BinanceSocketClient();
+            _restClient = options?.RestClient ?? new BinanceClient();
+            _restOwner = options?.RestClient == null;
+            _socketOwner = options?.SocketClient == null;
         }
 
         /// <inheritdoc />
@@ -103,8 +107,10 @@ namespace Binance.Net.SymbolOrderBooks
             asks.Clear();
             bids.Clear();
 
-            _restClient?.Dispose();
-            _socketClient?.Dispose();
+            if(_restOwner)
+                _restClient?.Dispose();
+            if(_socketOwner)
+                _socketClient?.Dispose();
         }
     }
 }

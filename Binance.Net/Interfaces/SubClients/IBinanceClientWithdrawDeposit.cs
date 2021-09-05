@@ -41,6 +41,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// Gets the withdrawal history
         /// </summary>
         /// <param name="asset">Filter by asset</param>
+        /// <param name="withdrawOrderId">Filter by withdraw order id</param>
         /// <param name="status">Filter by status</param>
         /// <param name="startTime">Filter start time from</param>
         /// <param name="endTime">Filter end time till</param>
@@ -49,7 +50,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="limit">Add limit. Default: 1000, Max: 1000</param>
         /// <param name="offset">Add offset</param>
         /// <returns>List of withdrawals</returns>
-        Task<WebCallResult<IEnumerable<BinanceWithdrawal>>> GetWithdrawalHistoryAsync(string? asset = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, int? limit = null, int? offset = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceWithdrawal>>> GetWithdrawalHistoryAsync(string? asset = null, string? withdrawOrderId = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, int? limit = null, int? offset = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the deposit history

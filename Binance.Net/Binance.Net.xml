@@ -673,6 +673,11 @@
             Expired
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.ExecutionType.Amendment">
+            <summary>
+            Amendment
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.FiatPaymentStatus">
             <summary>
             Status of a fiat payment
@@ -1813,6 +1818,26 @@
             Withdrawal
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.TransferAccountType">
+            <summary>
+            Transfer account type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.TransferAccountType.Spot">
+            <summary>
+            Spot
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.TransferAccountType.UsdtFuture">
+            <summary>
+            USDT-M future
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.TransferAccountType.CoinFuture">
+            <summary>
+            Coin-M future
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.TransferDirection">
             <summary>
             Direction of a transfer
@@ -1956,6 +1981,16 @@
         <member name="F:Binance.Net.Enums.UniversalTransferType.MarginToC2C">
             <summary>
             Margin to C2C
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.IsolatedMarginToMargin">
+            <summary>
+            Isolated margin to margin
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.MarginToIsolatedMargin">
+            <summary>
+            Margin to isolated margin
             </summary>
         </member>
         <member name="F:Binance.Net.Enums.UniversalTransferType.MiningToMain">
@@ -4742,10 +4777,12 @@
              <param name="ct">Cancellation token</param>
              <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.GetDustLogAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.GetDustLogAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the history of dust conversions
             </summary>
+            <param name="startTime">The start time</param>
+            <param name="endTime">The end time</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>The history of dust conversions</returns>
@@ -4777,13 +4814,15 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.TransferAsync(Binance.Net.Enums.UniversalTransferType,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.TransferAsync(Binance.Net.Enums.UniversalTransferType,System.String,System.Decimal,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers between accounts
             </summary>
             <param name="type">The type of transfer</param>
             <param name="asset">The asset to transfer</param>
             <param name="amount">The amount to transfer</param>
+            <param name="fromSymbol">From symbol when transfering from/to isolated margin</param>
+            <param name="toSymbol">To symbol when transfering from/to isolated margin</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -5359,12 +5398,14 @@
             <param name="ct">Cancellation token</param>
             <returns>List of transfers</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.TransferSubAccountAsync(System.String,System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientSubAccount.TransferSubAccountAsync(Binance.Net.Enums.TransferAccountType,Binance.Net.Enums.TransferAccountType,System.String,System.Decimal,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
-            Transfers an asset from one sub account to another
+            Transfers an asset form/to a sub account. If fromEmail or toEmail is not send it is interpreted as from/to the master account. Transfer between futures accounts is not supported
             </summary>
             <param name="fromEmail">From which account to transfer</param>
+            <param name="fromAccountType">Account type to transfer from</param>
             <param name="toEmail">To which account to transfer</param>
+            <param name="toAccountType">Account type to transfer to</param>
             <param name="asset">The asset to transfer</param>
             <param name="amount">The quantity to transfer</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -5681,11 +5722,12 @@
             <param name="ct">Cancellation token</param>
             <returns>Withdrawal confirmation</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientWithdrawDeposit.GetWithdrawalHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientWithdrawDeposit.GetWithdrawalHistoryAsync(System.String,System.String,System.Nullable{Binance.Net.Enums.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the withdrawal history
             </summary>
             <param name="asset">Filter by asset</param>
+            <param name="withdrawOrderId">Filter by withdraw order id</param>
             <param name="status">Filter by status</param>
             <param name="startTime">Filter start time from</param>
             <param name="endTime">Filter end time till</param>
@@ -6122,6 +6164,78 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of margin account trades</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.PlaceMarginOCOOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.SideEffectType},System.Nullable{System.Boolean},System.String,System.String,System.String,System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Places a new margin OCO(One cancels other) order
+            </summary>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="side">The order side (buy/sell)</param>
+            <param name="stopLimitTimeInForce">Lifetime of the stop order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
+            <param name="quantity">The amount of the symbol</param>
+            <param name="price">The price to use</param>
+            <param name="stopPrice">The stop price</param>
+            <param name="stopLimitPrice">The price for the stop limit order</param>
+            <param name="stopClientOrderId">Client id for the stop order</param>
+            <param name="limitClientOrderId">Client id for the limit order</param>
+            <param name="listClientOrderId">Client id for the order list</param>
+            <param name="limitIcebergQuantity">Iceberg quantity for the limit order</param>
+            <param name="sideEffectType">Side effect type</param>
+            <param name="isIsolated">Is isolated</param>
+            <param name="orderResponseType">Order response type</param>
+            <param name="stopIcebergQuantity">Iceberg quantity for the stop order</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Order list info</returns>        
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.CancelMarginOcoOrderAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Cancels a pending margin oco order
+            </summary>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="isIsolated">For isolated margin or not</param>
+            <param name="orderListId">The id of the order list to cancel</param>
+            <param name="listClientOrderId">The client order id of the order list to cancel</param>
+            <param name="newClientOrderId">The new client order list id for the order list</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Id's for canceled order</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetMarginOcoOrderAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Retrieves data for a specific margin oco order. Either orderListId or listClientOrderId should be provided.
+            </summary>
+            <param name="symbol">Mandatory for isolated margin, not supported for cross margin</param>
+            <param name="isIsolated">For isolated margin or not</param>
+            <param name="orderListId">The list order id of the order</param>
+            <param name="origClientOrderId">Either orderListId or listClientOrderId must be provided</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The specific order list</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetMarginOcoOrdersAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Retrieves a list of margin oco orders matching the parameters
+            </summary>
+            <param name="symbol">Mandatory for isolated margin, not supported for cross margin</param>
+            <param name="isIsolated">For isolated margin or not</param>
+            <param name="fromId">Only return oco orders with id higher than this</param>
+            <param name="startTime">Only return oco orders placed later than this. Only valid if fromId isn't provided</param>
+            <param name="endTime">Only return oco orders placed before this. Only valid if fromId isn't provided</param>
+            <param name="limit">Max number of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Order lists matching the parameters</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMarginOrders.GetOpenOcoOrdersAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Retrieves a list of open margin oco orders
+            </summary>
+            <param name="symbol">Mandatory for isolated margin, not supported for cross margin</param>
+            <param name="isIsolated">For isolated margin or not</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Open order lists</returns>
         </member>
         <member name="T:Binance.Net.Interfaces.SubClients.Spot.IBinanceClientSpot">
             <summary>
@@ -6739,6 +6853,11 @@
             Binance symbol order book options
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderBookOptions.RestClient">
+            <summary>
+            The rest client to use for requesting the initial order book
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceOrderBookOptions.SocketClient">
             <summary>
             The client to use for the socket connection. When using the same client for multiple order books the connection can be shared.
@@ -6754,13 +6873,14 @@
             Update interval in milliseconds, either 100 or 1000. Defaults to 1000
             </summary>
         </member>
-        <member name="M:Binance.Net.Objects.BinanceOrderBookOptions.#ctor(System.Nullable{System.Int32},System.Nullable{System.Int32},Binance.Net.Interfaces.IBinanceSocketClient)">
+        <member name="M:Binance.Net.Objects.BinanceOrderBookOptions.#ctor(System.Nullable{System.Int32},System.Nullable{System.Int32},Binance.Net.Interfaces.IBinanceSocketClient,Binance.Net.Interfaces.IBinanceClient)">
             <summary>
             Create new options
             </summary>
             <param name="limit">The top amount of results to keep in sync. If for example limit=10 is used, the order book will contain the 10 best bids and 10 best asks. Leaving this null will sync the full order book</param>
             <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
-            <param name="client">The client to use for the socket connection. When using the same client for multiple order books the connection can be shared.</param>
+            <param name="socketClient">The client to use for the socket connection. When using the same client for multiple order books the connection can be shared.</param>
+            <param name="restClient">The rest client to use for requesting the initial order book.</param>
         </member>
         <member name="T:Binance.Net.Objects.BinanceCombinedStream`1">
             <summary>
@@ -8444,6 +8564,11 @@
             Order number
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Fiat.BinanceFiatWithdrawDeposit.FiatCurrency">
+            <summary>
+            The used currency
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Fiat.BinanceFiatWithdrawDeposit.Amount">
             <summary>
             The amount
@@ -9742,6 +9867,16 @@
             Isolated
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoBase.Quantity">
+            <summary>
+            Position amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoBase.UpdateTime">
+            <summary>
+            Last update time
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoUsdt">
             <summary>
             Usdt position info
@@ -9750,11 +9885,6 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoUsdt.MaxNotional">
             <summary>
             Max notional
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoUsdt.Quantity">
-            <summary>
-            Position amount
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinancePositionInfoCoin">
@@ -9810,6 +9940,11 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionDetailsUsdt.MaxNotional">
             <summary>
             Max notional
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinancePositionDetailsUsdt.UpdateTime">
+            <summary>
+            Last update time
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinancePositionDetailsCoin">
@@ -9930,6 +10065,11 @@
             Timestamp
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCompositeIndexInfo.Component">
+            <summary>
+            Component asset
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCompositeIndexInfo.BaseAssets">
             <summary>
             Base asset list
@@ -9943,6 +10083,11 @@
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCompositeIndexInfoAsset.BaseAsset">
             <summary>
             Base asset name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCompositeIndexInfoAsset.QuoteAsset">
+            <summary>
+            Quote asset name
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCompositeIndexInfoAsset.WeightInQuantity">
@@ -10313,6 +10458,16 @@
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.UnderlyingType">
             <summary>
             Currently Empty
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.LiquidationFee">
+            <summary>
+            Liquidation fee
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.MarketTakeBound">
+            <summary>
+            The max price difference rate (from mark price) a market order can make
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.UnderlyingSupType">
@@ -10742,7 +10897,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndexAsset.Asset">
             <summary>
-            Asset name
+            Base asset name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndexAsset.QuoteAsset">
+            <summary>
+            Quote asset name
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndexAsset.WeightInQuantity">
@@ -10753,6 +10913,11 @@
         <member name="P:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndexAsset.WeightInPercentage">
             <summary>
             Weight in percentage
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndexAsset.IndexPrice">
+            <summary>
+            Index price
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.MarketStream.BinanceStreamIndexKlineData">
@@ -13293,6 +13458,26 @@
         <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceMarginAsset.MinimalRepayAmount">
             <summary>
             Minimal amount which can be repaid
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.MarginData.BinanceMarginOrderOcoList">
+            <summary>
+            Oco info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceMarginOrderOcoList.MarginBuyBorrowAmount">
+            <summary>
+            Margin buy borrow amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceMarginOrderOcoList.MarginBuyBorrowAsset">
+            <summary>
+            Margin buy borrow asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceMarginOrderOcoList.IsIsolated">
+            <summary>
+            Is isolated margin
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.MarginData.BinanceMarginPair">
@@ -16664,6 +16849,11 @@
             Confirmations
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceDeposit.ConfirmationsForUnlock">
+            <summary>
+            Network confirmations for unlocking
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceDividendRecord">
             <summary>
             Dividend record
@@ -18623,10 +18813,12 @@
              <param name="ct">Cancellation token</param>
              <returns></returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientGeneral.GetDustLogAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientGeneral.GetDustLogAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the history of dust conversions
             </summary>
+            <param name="startTime">The start time</param>
+            <param name="endTime">The end time</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>The history of dust conversions</returns>
@@ -18658,13 +18850,15 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientGeneral.TransferAsync(Binance.Net.Enums.UniversalTransferType,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientGeneral.TransferAsync(Binance.Net.Enums.UniversalTransferType,System.String,System.Decimal,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers between accounts
             </summary>
             <param name="type">The type of transfer</param>
             <param name="asset">The asset to transfer</param>
             <param name="amount">The amount to transfer</param>
+            <param name="fromSymbol">From symbol when transfering from/to isolated margin</param>
+            <param name="toSymbol">To symbol when transfering from/to isolated margin</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -19183,12 +19377,14 @@
             <param name="ct">Cancellation token</param>
             <returns>List of transfers</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.TransferSubAccountAsync(System.String,System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientSubAccount.TransferSubAccountAsync(Binance.Net.Enums.TransferAccountType,Binance.Net.Enums.TransferAccountType,System.String,System.Decimal,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
-            Transfers an asset from one sub account to another
+            Transfers an asset form/to a sub account. If fromEmail or toEmail is not send it is interpreted as from/to the master account. Transfer between futures accounts is not supported
             </summary>
             <param name="fromEmail">From which account to transfer</param>
+            <param name="fromAccountType">Account type to transfer from</param>
             <param name="toEmail">To which account to transfer</param>
+            <param name="toAccountType">Account type to transfer to</param>
             <param name="asset">The asset to transfer</param>
             <param name="amount">The quantity to transfer</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -19444,11 +19640,12 @@
             <param name="ct">Cancellation token</param>
             <returns>Withdrawal confirmation</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientWithdrawDeposit.GetWithdrawalHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientWithdrawDeposit.GetWithdrawalHistoryAsync(System.String,System.String,System.Nullable{Binance.Net.Enums.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the withdrawal history
             </summary>
             <param name="asset">Filter by asset</param>
+            <param name="withdrawOrderId">Filter by withdraw order id</param>
             <param name="status">Filter by status</param>
             <param name="startTime">Filter start time from</param>
             <param name="endTime">Filter end time till</param>
@@ -20948,6 +21145,78 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of margin account trades</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.PlaceMarginOCOOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.SideEffectType},System.Nullable{System.Boolean},System.String,System.String,System.String,System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Places a new margin OCO(One cancels other) order
+            </summary>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="side">The order side (buy/sell)</param>
+            <param name="stopLimitTimeInForce">Lifetime of the stop order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
+            <param name="quantity">The amount of the symbol</param>
+            <param name="price">The price to use</param>
+            <param name="stopPrice">The stop price</param>
+            <param name="stopLimitPrice">The price for the stop limit order</param>
+            <param name="stopClientOrderId">Client id for the stop order</param>
+            <param name="limitClientOrderId">Client id for the limit order</param>
+            <param name="listClientOrderId">Client id for the order list</param>
+            <param name="limitIcebergQuantity">Iceberg quantity for the limit order</param>
+            <param name="sideEffectType">Side effect type</param>
+            <param name="isIsolated">Is isolated</param>
+            <param name="orderResponseType">Order response type</param>
+            <param name="stopIcebergQuantity">Iceberg quantity for the stop order</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Order list info</returns>        
+        </member>
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.CancelMarginOcoOrderAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Cancels a pending margin oco order
+            </summary>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="isIsolated">For isolated margin or not</param>
+            <param name="orderListId">The id of the order list to cancel</param>
+            <param name="listClientOrderId">The client order id of the order list to cancel</param>
+            <param name="newClientOrderId">The new client order list id for the order list</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Id's for canceled order</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetMarginOcoOrderAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Retrieves data for a specific margin oco order. Either orderListId or listClientOrderId should be provided.
+            </summary>
+            <param name="symbol">Mandatory for isolated margin, not supported for cross margin</param>
+            <param name="isIsolated">For isolated margin or not</param>
+            <param name="orderListId">The list order id of the order</param>
+            <param name="origClientOrderId">Either orderListId or listClientOrderId must be provided</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The specific order list</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetMarginOcoOrdersAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Retrieves a list of margin oco orders matching the parameters
+            </summary>
+            <param name="symbol">Mandatory for isolated margin, not supported for cross margin</param>
+            <param name="isIsolated">For isolated margin or not</param>
+            <param name="fromId">Only return oco orders with id higher than this</param>
+            <param name="startTime">Only return oco orders placed later than this. Only valid if fromId isn't provided</param>
+            <param name="endTime">Only return oco orders placed before this. Only valid if fromId isn't provided</param>
+            <param name="limit">Max number of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Order lists matching the parameters</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMarginOrders.GetOpenOcoOrdersAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Retrieves a list of open margin oco orders
+            </summary>
+            <param name="symbol">Mandatory for isolated margin, not supported for cross margin</param>
+            <param name="isIsolated">For isolated margin or not</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Open order lists</returns>
         </member>
         <member name="T:Binance.Net.SubClients.Margin.BinanceClientMarginUserStream">
             <summary>

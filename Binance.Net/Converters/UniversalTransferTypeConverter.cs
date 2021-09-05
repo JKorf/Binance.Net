@@ -30,6 +30,9 @@ namespace Binance.Net.Converters
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.CoinFuturesToMain, "CMFUTURE_MAIN"),
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.CoinFuturesToMargin, "CMFUTURE_MARGIN"),
 
+            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MarginToIsolatedMargin, "MARGIN_ISOLATEDMARGIN "),
+            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.IsolatedMarginToMargin, "ISOLATEDMARGIN_MARGIN"),
+
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MarginToMain, "MARGIN_MAIN"),
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MarginToUsdFutures, "MARGIN_UMFUTURE"),
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MarginToCoinFutures, "MARGIN_CMFUTURE"),

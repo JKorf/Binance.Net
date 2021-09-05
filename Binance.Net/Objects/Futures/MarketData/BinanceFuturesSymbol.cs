@@ -93,6 +93,16 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// </summary>
         [JsonProperty("underlyingType"), JsonConverter(typeof(UnderlyingTypeConverter))]
         public UnderlyingType UnderlyingType { get; set; }
+
+        /// <summary>
+        /// Liquidation fee
+        /// </summary>
+        public decimal LiquidationFee { get; set; }
+        /// <summary>
+        /// The max price difference rate (from mark price) a market order can make
+        /// </summary>
+        public decimal MarketTakeBound { get; set; }
+
         /// <summary>
         /// Currently Empty
         /// </summary>

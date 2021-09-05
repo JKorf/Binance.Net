@@ -33,10 +33,15 @@ namespace Binance.Net.Objects.Futures.MarketStream
     public class BinanceFuturesStreamCompositeIndexAsset
     {
         /// <summary>
-        /// Asset name
+        /// Base asset name
         /// </summary>
         [JsonProperty("b")]
         public string Asset { get; set; } = string.Empty;
+        /// <summary>
+        /// Quote asset name
+        /// </summary>
+        [JsonProperty("q")]
+        public string QuoteAsset { get; set; }
         /// <summary>
         /// Weight in quantity
         /// </summary>
@@ -47,5 +52,10 @@ namespace Binance.Net.Objects.Futures.MarketStream
         /// </summary>
         [JsonProperty("W")]
         public decimal WeightInPercentage { get; set; }
+        /// <summary>
+        /// Index price
+        /// </summary>
+        [JsonProperty("i")]
+        public decimal IndexPrice { get; set; }
     }
 }
