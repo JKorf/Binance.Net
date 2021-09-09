@@ -231,11 +231,11 @@ namespace Binance.Net.Interfaces.SubClients
         /// <summary>
         /// Create a virtual sub account
         /// </summary>
-        /// <param name="email">Virtual email of the sub account</param>
+        /// <param name="subAccountString">Please input a string. We will create a virtual email using that string for you to register</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BinanceSubAccountEmail>> CreateVirtualSubAccountAsync(string email, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceSubAccountEmail>> CreateVirtualSubAccountAsync(string subAccountString, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Enable or disable blvt
