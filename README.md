@@ -165,6 +165,11 @@ Yes, as long as the API endpoints are the same. Switch by changing the BaseAddre
 See Timestamping.
 
 ## Release notes
+* Version 7.1.3 - 14 Sep 2021
+    * Fixed CreateVirtualSubAccountAsync endpoint
+    * Added missing FiatWithdrawDepositStatus entry
+    * Updated testnet spot websocket url
+
 * Version 7.1.2 - 02 Sep 2021
     * Fixed subaccount universal transfer result deserialization
     * Fix for disposing order book closing socket even if there are other connections
