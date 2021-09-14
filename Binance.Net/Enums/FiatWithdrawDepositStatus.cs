@@ -36,6 +36,10 @@ namespace Binance.Net.Enums
         /// <summary>
         /// Refund failed
         /// </summary>
-        RefundFailed
+        RefundFailed,
+        /// <summary>
+        /// Expired
+        /// </summary>
+        Expired
     }
 }

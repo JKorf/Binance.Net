@@ -18,6 +18,7 @@ namespace Binance.Net.Converters
             new KeyValuePair<FiatWithdrawDepositStatus, string>(FiatWithdrawDepositStatus.Refunding, "Refunding"),
             new KeyValuePair<FiatWithdrawDepositStatus, string>(FiatWithdrawDepositStatus.Successful, "Successful"),
             new KeyValuePair<FiatWithdrawDepositStatus, string>(FiatWithdrawDepositStatus.RefundFailed, "Refund Failed"),
+            new KeyValuePair<FiatWithdrawDepositStatus, string>(FiatWithdrawDepositStatus.Expired, "Expired"),
         };
     }
 }
