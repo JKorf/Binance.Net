@@ -159,7 +159,6 @@ namespace Binance.Net
             _baseAddressFuturesCoin = options.BaseAddressCoinFutures;
 
             arraySerialization = ArrayParametersSerialization.MultipleValues;
-            postParametersPosition = PostParameters.InBody;
             requestBodyFormat = RequestBodyFormat.FormData;
             requestBodyEmptyContent = string.Empty;
 
@@ -490,7 +489,7 @@ namespace Binance.Net
         }
 
         internal Task<WebCallResult<T>> SendRequestInternal<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken,
-            Dictionary<string, object>? parameters = null, bool signed = false, bool checkResult = true, PostParameters? postPosition = null, ArrayParametersSerialization? arraySerialization = null) where T : class
+            Dictionary<string, object>? parameters = null, bool signed = false, bool checkResult = true, HttpMethodParameterPosition? postPosition = null, ArrayParametersSerialization? arraySerialization = null) where T : class
         {
             return base.SendRequestAsync<T>(uri, method, cancellationToken, parameters, signed, checkResult, postPosition);
         }
