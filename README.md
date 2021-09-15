@@ -165,6 +165,10 @@ Yes, as long as the API endpoints are the same. Switch by changing the BaseAddre
 See Timestamping.
 
 ## Release notes
+* Version 7.1.4 - 15 Sep 2021
+    * Updated CryptoExchange.Net
+    * Fixed missing interface CoinFutures system sub client
+
 * Version 7.1.3 - 14 Sep 2021
     * Fixed CreateVirtualSubAccountAsync endpoint
     * Added missing FiatWithdrawDepositStatus entry
