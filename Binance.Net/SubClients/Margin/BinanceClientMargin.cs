@@ -614,6 +614,38 @@ namespace Binance.Net.SubClients.Margin
                     parameters, true).ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Disabled an isolated margin account info
+        /// </summary>
+        /// <param name="symbol">Symbol to enable isoldated margin account for</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        public async Task<WebCallResult<CreateIsolatedMarginAccountResult>> DisableIsolatedMarginAccountAsync(string symbol,
+            int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<CreateIsolatedMarginAccountResult>(timestampResult.ResponseStatusCode,
+                    timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                {"symbol", symbol},
+                {"timestamp", _baseClient.GetTimestamp()},
+            };
+
+            parameters.AddOptionalParameter("recvWindow",
+                receiveWindow?.ToString(CultureInfo.InvariantCulture) ??
+                _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient
+                .SendRequestInternal<CreateIsolatedMarginAccountResult>(
+                    _baseClient.GetUrlSpot(isolatedMarginAccountEndpoint, "sapi", "1"), HttpMethod.Delete, ct,
+                    parameters, true).ConfigureAwait(false);
+        }
+
+
 
         /// <summary>
         /// Transfer from or to isolated margin account
