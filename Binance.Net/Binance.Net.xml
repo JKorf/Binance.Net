@@ -5984,6 +5984,15 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.DisableIsolatedMarginAccountAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Disabled an isolated margin account info
+            </summary>
+            <param name="symbol">Symbol to enable isoldated margin account for</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.IsolatedMarginAccountTransferAsync(System.String,System.String,Binance.Net.Enums.IsolatedMarginTransferDirection,Binance.Net.Enums.IsolatedMarginTransferDirection,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfer from or to isolated margin account
@@ -20937,6 +20946,15 @@
             <summary>
             Isolated margin account info
             </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.DisableIsolatedMarginAccountAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Disabled an isolated margin account info
+            </summary>
+            <param name="symbol">Symbol to enable isoldated margin account for</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
