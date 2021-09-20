@@ -84,7 +84,7 @@ namespace Binance.Net.SocketSubClients
             foreach (var symbol in symbols)
                 symbol.ValidateBinanceSymbol();
 
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamAggregatedTrade>>>(data => onMessage(data.As(data.Data.Data, data.Data.Stream)));
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamAggregatedTrade>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + aggregatedTradesStreamEndpoint)
                 .ToArray();
             //return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
@@ -118,7 +118,7 @@ namespace Binance.Net.SocketSubClients
             foreach (var symbol in symbols)
                 symbol.ValidateBinanceSymbol();
 
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamTrade>>>(data => onMessage(data.As(data.Data.Data, data.Data.Stream)));
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamTrade>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + tradesStreamEndpoint).ToArray();
             return await Subscribe(symbols, handler).ConfigureAwait(false);
         }
@@ -174,7 +174,7 @@ namespace Binance.Net.SocketSubClients
             foreach (var symbol in symbols)
                 symbol.ValidateBinanceSymbol();
 			
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamKlineData>>>(data => onMessage(data.As<IBinanceStreamKlineData>(data.Data.Data)));
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamKlineData>>>(data => onMessage(data.As<IBinanceStreamKlineData>(data.Data.Data, data.Data.Data.Symbol)));
             symbols = symbols.SelectMany(a =>
                 intervals.Select(i => 
                     a.ToLower(CultureInfo.InvariantCulture) + klineStreamEndpoint + "_" +
@@ -209,7 +209,7 @@ namespace Binance.Net.SocketSubClients
             foreach (var symbol in symbols)
                 symbol.ValidateBinanceSymbol();
 
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamMiniTick>>>(data => onMessage(data.As<IBinanceMiniTick>(data.Data.Data, data.Data.Stream)));
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamMiniTick>>>(data => onMessage(data.As<IBinanceMiniTick>(data.Data.Data, data.Data.Data.Symbol)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + symbolMiniTickerStreamEndpoint)
                 .ToArray();
 
@@ -259,9 +259,8 @@ namespace Binance.Net.SocketSubClients
             foreach (var symbol in symbols)
                 symbol.ValidateBinanceSymbol();
 
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamBookPrice>>>(data => onMessage(data.As(data.Data.Data, data.Data.Stream)));
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamBookPrice>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + bookTickerStreamEndpoint).ToArray();
-            //return await Subscribe(String.Join("/", symbols), true, handler).ConfigureAwait(false);
             return await Subscribe(symbols, handler).ConfigureAwait(false);
         }
 
@@ -278,7 +277,7 @@ namespace Binance.Net.SocketSubClients
             Action<DataEvent<BinanceStreamBookPrice>> onMessage)
         {
             //return await Subscribe(allBookTickerStreamEndpoint, false, onMessage).ConfigureAwait(false);
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamBookPrice>>>(data => onMessage(data.As(data.Data.Data, data.Data.Stream)));
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamBookPrice>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
             return await Subscribe(new[] { allBookTickerStreamEndpoint }, handler).ConfigureAwait(false);
         }
 
@@ -320,13 +319,12 @@ namespace Binance.Net.SocketSubClients
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceOrderBook>>>(data =>
             {
                 data.Data.Data.Symbol = data.Data.Stream.Split('@')[0];
-                onMessage(data.As<IBinanceOrderBook>(data.Data.Data, data.Data.Stream));
+                onMessage(data.As<IBinanceOrderBook>(data.Data.Data, data.Data.Data.Symbol));
             });
 
             symbols = symbols.Select(a =>
                 a.ToLower(CultureInfo.InvariantCulture) + partialBookDepthStreamEndpoint + levels +
                 (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
-            //return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
             return await Subscribe(symbols, handler).ConfigureAwait(false);
         }
 
@@ -360,11 +358,10 @@ namespace Binance.Net.SocketSubClients
                 symbol.ValidateBinanceSymbol();
 
             updateInterval?.ValidateIntValues(nameof(updateInterval), 100, 1000);
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceEventOrderBook>>>(data => onMessage(data.As<IBinanceEventOrderBook>(data.Data.Data, data.Data.Stream)));
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceEventOrderBook>>>(data => onMessage(data.As<IBinanceEventOrderBook>(data.Data.Data, data.Data.Data.Symbol)));
             symbols = symbols.Select(a =>
                 a.ToLower(CultureInfo.InvariantCulture) + depthStreamEndpoint +
                 (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
-            //return await Subscribe(String.Join("/", symbols), true, handler).ConfigureAwait(false);
             return await Subscribe(symbols, handler).ConfigureAwait(false);
         }
 
@@ -390,9 +387,8 @@ namespace Binance.Net.SocketSubClients
         {
             symbols.ValidateNotNull(nameof(symbols));
 
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamTick>>>(data => onMessage(data.As<IBinanceTick>(data.Data.Data, data.Data.Stream)));
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamTick>>>(data => onMessage(data.As<IBinanceTick>(data.Data.Data, data.Data.Data.Symbol)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + symbolTickerStreamEndpoint).ToArray();
-            //return await Subscribe(string.Join("/", symbols), true, handler).ConfigureAwait(false);
             return await Subscribe(symbols, handler).ConfigureAwait(false);
         }
 
@@ -408,7 +404,6 @@ namespace Binance.Net.SocketSubClients
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllSymbolTickerUpdatesAsync(Action<DataEvent<IEnumerable<IBinanceTick>>> onMessage)
         {
             var handler = new Action<DataEvent<BinanceCombinedStream<IEnumerable<BinanceStreamTick>>>>(data => onMessage(data.As<IEnumerable<IBinanceTick>>(data.Data.Data, data.Data.Stream)));
-            //return await Subscribe(allSymbolTickerStreamEndpoint, false, handler).ConfigureAwait(false);
             return await Subscribe(new[] { allSymbolTickerStreamEndpoint }, handler).ConfigureAwait(false);
         }
 
