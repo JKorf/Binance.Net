@@ -17326,6 +17326,11 @@
             Name of the coin
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceUserCoin.Withdrawing">
+            <summary>
+            Currently withdrawing
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceUserCoin.NetworkList">
             <summary>
             Networks
@@ -17414,6 +17419,21 @@
         <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceNetwork.WithdrawMin">
             <summary>
             Minimal withdraw amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceNetwork.WithdrawIntegerMultiple">
+            <summary>
+            Min withdraw step
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceNetwork.WithdrawMax">
+            <summary>
+            Max withdraw amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceNetwork.SameAddress">
+            <summary>
+            If the coin needs to provide memo to withdraw
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceAssetDetails">
