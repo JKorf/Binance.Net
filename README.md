@@ -165,6 +165,14 @@ Yes, as long as the API endpoints are the same. Switch by changing the BaseAddre
 See Timestamping.
 
 ## Release notes
+* Version 7.2.1 - 24 Sep 2021
+    * Added GetEnabledIsolatedMarginAccountLimitAsync endpoint
+    * Added EnableIsolatedMarginAccountAsync
+    * Added Enabled property to IsolatedMarginAccount model
+    * Added RemoveLiquidityPreviewAsync endpoint
+    * Added AddLiquidityPreviewAsync endpoint
+    * Added GetBSwapPoolConfigureAsync endpoint
+
 * Version 7.2.0 - 20 Sep 2021
     * Updated stream Topic properties to reflect symbol where possible
     * Added DisableIsolatedMarginAccountAysnc endpoint
