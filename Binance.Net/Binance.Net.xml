@@ -1013,6 +1013,21 @@
             Customized fixed
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.LiquidityType">
+            <summary>
+            Add/Remove liquidity type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.LiquidityType.Single">
+            <summary>
+            Add/Remove single asset
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.LiquidityType.Combined">
+            <summary>
+            Add/Remove combination of all coins
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.ListOrderStatus">
             <summary>
             List order status
@@ -1526,21 +1541,6 @@
         <member name="F:Binance.Net.Enums.RedeemType.Normal">
             <summary>
             Normal
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Enums.RemoveLiquidityType">
-            <summary>
-            Remove liquidity type
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.RemoveLiquidityType.Single">
-            <summary>
-            Remove single asset
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.RemoveLiquidityType.Combined">
-            <summary>
-            Remove combination of all coins
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.SideEffectType">
@@ -5096,7 +5096,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap.AddLiquidityAsync(System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap.AddLiquidityAsync(System.Int32,System.String,System.Decimal,System.Nullable{Binance.Net.Enums.LiquidityType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Add liquidity to a pool
             </summary>
@@ -5107,7 +5107,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap.RemoveLiquidityAsync(System.String,System.String,Binance.Net.Enums.RemoveLiquidityType,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap.RemoveLiquidityAsync(System.Int32,System.String,Binance.Net.Enums.LiquidityType,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Remove liquidity from a pool
             </summary>
@@ -5119,7 +5119,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap.GetLiquidityOperationRecordsAsync(System.Nullable{System.Int64},System.String,System.Nullable{Binance.Net.Enums.BSwapOperation},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap.GetLiquidityOperationRecordsAsync(System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.BSwapOperation},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get liquidity operation records
             </summary>
@@ -5167,6 +5167,39 @@
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
             <param name="limit">Max number of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap.GetBSwapPoolConfigureAsync(System.Int32,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get pool config
+            </summary>
+            <param name="poolId">Id of the pool</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap.AddLiquidityPreviewAsync(System.Int32,System.String,System.Decimal,Binance.Net.Enums.LiquidityType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Calculate expected share amount for adding liquidity in single or dual token.
+            </summary>
+            <param name="poolId">The pool</param>
+            <param name="asset">The asset</param>
+            <param name="quantity">Quantity to add</param>
+            <param name="type">Add type</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap.RemoveLiquidityPreviewAsync(System.Int32,System.String,System.Decimal,Binance.Net.Enums.LiquidityType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Calculate expected share amount for removing liquidity in single or dual token.
+            </summary>
+            <param name="poolId">The pool</param>
+            <param name="asset">The asset</param>
+            <param name="quantity">Quantity to add</param>
+            <param name="type">Add type</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -8366,6 +8399,81 @@
             Assets in the pool
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BSwap.BinanceBSwapPoolConfig">
+            <summary>
+            Swap pool config
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPoolConfig.PoolId">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPoolConfig.PoolName">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPoolConfig.UpdateTime">
+            <summary>
+            Update time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPoolConfig.Liquidity">
+            <summary>
+            Pool liquidity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPoolConfig.AssetConfig">
+            <summary>
+            Asset configuration
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BSwap.PoolAssetConfig">
+            <summary>
+            Asset config
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.PoolAssetConfig.MinAdd">
+            <summary>
+            Minimal add
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.PoolAssetConfig.MaxAdd">
+            <summary>
+            Maximal add
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.PoolAssetConfig.MinSwap">
+            <summary>
+            Minimal swap
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.PoolAssetConfig.MaxSwap">
+            <summary>
+            Maximal swap
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BSwap.PoolLiquidity">
+            <summary>
+            Liquidity info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.PoolLiquidity.ConstantA">
+            <summary>
+            Constant a
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.PoolLiquidity.MinRedeemShare">
+            <summary>
+            Minimal redeem share
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.PoolLiquidity.SlippageTolerance">
+            <summary>
+            Slippage tolerance
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.BSwap.BinanceBSwapPoolLiquidity">
             <summary>
             Pool liquidity info
@@ -8414,6 +8522,51 @@
         <member name="P:Binance.Net.Objects.BSwap.BinancePoolShare.Asset">
             <summary>
             Asset
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BSwap.BinanceBSwapPreviewResult">
+            <summary>
+            Preview result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPreviewResult.QuoteAsset">
+            <summary>
+            Quote asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPreviewResult.BaseAsset">
+            <summary>
+            Base asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPreviewResult.QuoteAmount">
+            <summary>
+            Quote amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPreviewResult.BaseAmount">
+            <summary>
+            Base amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPreviewResult.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPreviewResult.Share">
+            <summary>
+            Share
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPreviewResult.Slippage">
+            <summary>
+            Slippage
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPreviewResult.Fee">
+            <summary>
+            Fee
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BSwap.BinanceBSwapQuote">
@@ -17516,6 +17669,11 @@
             Network that was used
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawal.ConfirmTimes">
+            <summary>
+            Confirm times for withdraw
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawal.Status">
             <summary>
             The status of the withdrawal
@@ -19208,18 +19366,19 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientLiquidSwap.AddLiquidityAsync(System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientLiquidSwap.AddLiquidityAsync(System.Int32,System.String,System.Decimal,System.Nullable{Binance.Net.Enums.LiquidityType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Add liquidity to a pool
             </summary>
             <param name="poolId">The pool</param>
             <param name="asset">The asset</param>
             <param name="quantity">Quantity to add</param>
+            <param name="type">Add type</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientLiquidSwap.RemoveLiquidityAsync(System.String,System.String,Binance.Net.Enums.RemoveLiquidityType,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientLiquidSwap.RemoveLiquidityAsync(System.Int32,System.String,Binance.Net.Enums.LiquidityType,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Remove liquidity from a pool
             </summary>
@@ -19231,7 +19390,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientLiquidSwap.GetLiquidityOperationRecordsAsync(System.Nullable{System.Int64},System.String,System.Nullable{Binance.Net.Enums.BSwapOperation},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientLiquidSwap.GetLiquidityOperationRecordsAsync(System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.BSwapOperation},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get liquidity operation records
             </summary>
@@ -19279,6 +19438,39 @@
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
             <param name="limit">Max number of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientLiquidSwap.GetBSwapPoolConfigureAsync(System.Int32,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get pool config
+            </summary>
+            <param name="poolId">Id of the pool</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientLiquidSwap.AddLiquidityPreviewAsync(System.Int32,System.String,System.Decimal,Binance.Net.Enums.LiquidityType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Calculate expected share amount for adding liquidity in single or dual token.
+            </summary>
+            <param name="poolId">The pool</param>
+            <param name="asset">The asset</param>
+            <param name="quantity">Quantity to add</param>
+            <param name="type">Add type</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientLiquidSwap.RemoveLiquidityPreviewAsync(System.Int32,System.String,System.Decimal,Binance.Net.Enums.LiquidityType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Calculate expected share amount for adding liquidity in single or dual token.
+            </summary>
+            <param name="poolId">The pool</param>
+            <param name="asset">The asset</param>
+            <param name="quantity">Quantity to add</param>
+            <param name="type">Add type</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
