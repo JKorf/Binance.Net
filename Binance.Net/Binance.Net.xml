@@ -5984,6 +5984,23 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetEnabledIsolatedMarginAccountLimitAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get max number of enabled isolated margin accounts
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.EnableIsolatedMarginAccountAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Enable an isolated margin account
+            </summary>
+            <param name="symbol">Symbol to enable isoldated margin account for</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.DisableIsolatedMarginAccountAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Disabled an isolated margin account info
@@ -12575,6 +12592,11 @@
             If trading is enabled
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountSymbol.Enabled">
+            <summary>
+            Account is enabled
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountAsset">
             <summary>
             Isolated margin account asset
@@ -12628,6 +12650,21 @@
         <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountAsset.TotalAsset">
             <summary>
             Total asset
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.IsolatedMarginData.IsolatedMarginAccountLimit">
+            <summary>
+            Enabled account limit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.IsolatedMarginAccountLimit.EnabledAccount">
+            <summary>
+            Current enabled accounts
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.IsolatedMarginAccountLimit.MaxAccount">
+            <summary>
+            Max accounts
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.LendingData.BinanceCustomizedFixedProjectPosition">
@@ -20952,9 +20989,26 @@
         </member>
         <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.DisableIsolatedMarginAccountAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
-            Disabled an isolated margin account info
+            Disabled an isolated margin account
             </summary>
             <param name="symbol">Symbol to enable isoldated margin account for</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.EnableIsolatedMarginAccountAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Enable an isolated margin account
+            </summary>
+            <param name="symbol">Symbol to enable isoldated margin account for</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetEnabledIsolatedMarginAccountLimitAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get max number of enabled isolated margin accounts
+            </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>

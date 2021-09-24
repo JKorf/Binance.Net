@@ -81,6 +81,10 @@ namespace Binance.Net.Objects.Spot.IsolatedMarginData
         /// If trading is enabled
         /// </summary>
         public bool TradeEnabled { get; set; }
+        /// <summary>
+        /// Account is enabled
+        /// </summary>
+        public bool Enabled { get; set; }
     }
 
     /// <summary>
