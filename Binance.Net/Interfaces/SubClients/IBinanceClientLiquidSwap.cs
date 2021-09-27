@@ -35,6 +35,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// </summary>
         /// <param name="poolId">The pool</param>
         /// <param name="asset">The asset</param>
+        /// <param name="type">Add type</param>
         /// <param name="quantity">Quantity to add</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>

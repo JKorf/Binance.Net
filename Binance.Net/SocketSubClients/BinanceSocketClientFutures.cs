@@ -349,7 +349,10 @@ namespace Binance.Net.SocketSubClients
             {
                 var combinedToken = JToken.Parse(data.Data);
                 var token = combinedToken["data"];
-                var evnt = (string?)token["e"];
+                if (token == null)
+                    return;
+
+                var evnt = token["e"]?.ToString();
                 if (evnt == null)
                     return;
 

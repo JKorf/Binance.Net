@@ -153,7 +153,7 @@ namespace Binance.Net
                 return true;
             }
 
-            callResult = new CallResult<object>(null, new ServerError((int)error["code"], error["msg"].ToString()));
+            callResult = new CallResult<object>(null, new ServerError(error["code"]!.Value<int>(), error["msg"]!.ToString()));
             return true;
         }
 
@@ -168,7 +168,7 @@ namespace Binance.Net
             if (stream == null)
                 return false;
 
-            return bRequest.Params.Contains((string)stream);
+            return bRequest.Params.Contains(stream.ToString());
         }
 
         /// <inheritdoc />

@@ -66,7 +66,7 @@ namespace Binance.Net.SubClients
 
             var result = await _baseClient.SendRequestInternal<BinanceResult<IEnumerable<BinanceFiatPayment>>>(_baseClient.GetUrlSpot(fiatPaymentHistoryEndpoint, api, apiVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
                         
-            return result.As(result.Data?.Data);
+            return result.As(result.Data?.Data!);
         }
 
         #endregion
@@ -102,7 +102,7 @@ namespace Binance.Net.SubClients
 
             var result = await _baseClient.SendRequestInternal<BinanceResult<IEnumerable<BinanceFiatWithdrawDeposit>>>(_baseClient.GetUrlSpot(fiatDepositWithdrawHistoryEndpoint, api, apiVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
 
-            return result.As(result.Data?.Data);
+            return result.As(result.Data?.Data!);
         }
 
         #endregion

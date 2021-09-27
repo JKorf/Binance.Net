@@ -50,7 +50,7 @@ namespace Binance.Net.SubClients.Margin
             };
 
             var result = await _baseClient.SendRequestInternal<BinanceListenKey>(_baseClient.GetUrlSpot(getListenKeyEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters).ConfigureAwait(false);
-            return result.As(result.Data?.ListenKey);
+            return result.As(result.Data?.ListenKey!);
         }
 
         #endregion
