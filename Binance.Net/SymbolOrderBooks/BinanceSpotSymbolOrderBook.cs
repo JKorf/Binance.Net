@@ -41,9 +41,9 @@ namespace Binance.Net.SymbolOrderBooks
         {
             CallResult<UpdateSubscription> subResult;
             if (Levels == null)
-                subResult = await _socketClient.Spot.SubscribeToOrderBookUpdatesAsync(Symbol, _updateInterval, data => HandleUpdate((BinanceOrderBook)data.Data)).ConfigureAwait(false);
+                subResult = await _socketClient.Spot.SubscribeToOrderBookUpdatesAsync(Symbol, _updateInterval, HandleUpdate).ConfigureAwait(false);
             else
-                subResult = await _socketClient.Spot.SubscribeToPartialOrderBookUpdatesAsync(Symbol, Levels.Value, _updateInterval, data => HandleUpdate((BinanceOrderBook)data.Data)).ConfigureAwait(false);
+                subResult = await _socketClient.Spot.SubscribeToPartialOrderBookUpdatesAsync(Symbol, Levels.Value, _updateInterval, HandleUpdate).ConfigureAwait(false);
 
             if (!subResult)
                 return new CallResult<UpdateSubscription>(null, subResult.Error);
@@ -51,10 +51,13 @@ namespace Binance.Net.SymbolOrderBooks
             Status = OrderBookStatus.Syncing;
             if (Levels == null)
             {
+                // Small delay to make sure the snapshot is from after our first stream update
+                await Task.Delay(200).ConfigureAwait(false);
                 var bookResult = await _restClient.Spot.Market.GetOrderBookAsync(Symbol, Levels ?? 5000).ConfigureAwait(false);
                 if (!bookResult)
                 {
-                    await _socketClient.UnsubscribeAllAsync().ConfigureAwait(false);
+                    log.Write(Microsoft.Extensions.Logging.LogLevel.Debug, $"{Id} order book {Symbol} failed to retrieve initial order book");
+                    await _socketClient.UnsubscribeAsync(subResult.Data).ConfigureAwait(false);
                     return new CallResult<UpdateSubscription>(null, bookResult.Error);
                 }
 
@@ -69,16 +72,21 @@ namespace Binance.Net.SymbolOrderBooks
             return new CallResult<UpdateSubscription>(subResult.Data, null);
         }
 
-        private void HandleUpdate(BinanceOrderBook data)
+        private void HandleUpdate(DataEvent<IBinanceEventOrderBook> data)
         {
-            if (Levels == null)
-            {
-                UpdateOrderBook(data.LastUpdateId, data.Bids, data.Asks);
-            }
+            if(data.Data.FirstUpdateId != null)
+                UpdateOrderBook(data.Data.FirstUpdateId.Value, data.Data.LastUpdateId, data.Data.Bids, data.Data.Asks);
             else
-            {
-                SetInitialOrderBook(data.LastUpdateId, data.Bids, data.Asks);
-            }
+                UpdateOrderBook(data.Data.LastUpdateId, data.Data.Bids, data.Data.Asks);
+        }
+
+
+        private void HandleUpdate(DataEvent<IBinanceOrderBook> data)
+        {
+            if (Levels == null)            
+                UpdateOrderBook(data.Data.LastUpdateId, data.Data.Bids, data.Data.Asks);            
+            else            
+                SetInitialOrderBook(data.Data.LastUpdateId, data.Data.Bids, data.Data.Asks);            
         }
 
         /// <inheritdoc />

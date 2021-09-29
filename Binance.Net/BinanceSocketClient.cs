@@ -66,7 +66,7 @@ namespace Binance.Net
             Blvt = new BinanceSocketClientBlvt(log, this, options);
 
             SetDataInterpreter((byte[] data) => { return string.Empty; }, null);
-            RateLimitPerSocketPerSecond = 5;
+            RateLimitPerSocketPerSecond = 4;
         }
         #endregion 
 
