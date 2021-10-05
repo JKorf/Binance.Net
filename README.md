@@ -165,6 +165,9 @@ Yes, as long as the API endpoints are the same. Switch by changing the BaseAddre
 See Timestamping.
 
 ## Release notes
+* Version 7.2.3 - 05 Oct 2021
+    * Added PriceProtect support
+
 * Version 7.2.2 - 29 Sep 2021
     * Fix for BinanceSpotOrderBook
     * Updated CryptoExchange.Net
