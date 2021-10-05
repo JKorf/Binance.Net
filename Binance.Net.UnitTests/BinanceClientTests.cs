@@ -880,7 +880,7 @@ namespace Binance.Net.UnitTests
             // act
             try
             {
-                client.Spot.Order.GetOpenOrdersAsync();
+                await client.Spot.Order.GetOpenOrdersAsync();
             }
             catch (Exception)
             {
@@ -910,7 +910,7 @@ namespace Binance.Net.UnitTests
         }
 
         [Test]
-        public async Task ProvidingApiCredentials_Should_SaveApiCredentials()
+        public void ProvidingApiCredentials_Should_SaveApiCredentials()
         {
             // arrange
             // act
@@ -923,7 +923,7 @@ namespace Binance.Net.UnitTests
 
         //[Test]
         [TestCase("", "D0F0F055B496CBD9FD1C8CA6719D0B2253F54C667753F70AEF13F394D9161A8B")]
-        public async Task AddingAuthToUriString_Should_GiveCorrectSignature(string parameters, string signature)
+        public void AddingAuthToUriString_Should_GiveCorrectSignature(string parameters, string signature)
         {
             // arrange
             var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
@@ -937,7 +937,7 @@ namespace Binance.Net.UnitTests
         }
 
         [Test]
-        public async Task AddingAuthToRequest_Should_AddApiKeyHeader()
+        public void AddingAuthToRequest_Should_AddApiKeyHeader()
         {
             // arrange
             var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
@@ -1082,7 +1082,7 @@ namespace Binance.Net.UnitTests
         [TestCase("KP3RBNB", true)]
         [TestCase("BTC-USDT", false)]
         [TestCase("BTC-USD", false)]
-        public async Task CheckValidBinanceSymbol(string symbol, bool isValid)
+        public void CheckValidBinanceSymbol(string symbol, bool isValid)
         {
             if (isValid)
                 Assert.DoesNotThrow(symbol.ValidateBinanceSymbol);
