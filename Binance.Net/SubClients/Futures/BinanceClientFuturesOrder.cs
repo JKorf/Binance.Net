@@ -83,6 +83,7 @@ namespace Binance.Net.SubClients.Futures
         /// <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
         /// <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
         /// <param name="orderResponseType">The response type. Default Acknowledge</param>
+        /// <param name="priceProtect">If true when price reaches stopPrice, difference between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than "triggerProtect" of the symbol.</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed order</returns>
@@ -102,6 +103,7 @@ namespace Binance.Net.SubClients.Futures
             WorkingType? workingType = null,
             bool? closePosition = null,
             OrderResponseType? orderResponseType = null,
+            bool? priceProtect = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -152,7 +154,8 @@ namespace Binance.Net.SubClients.Futures
             parameters.AddOptionalParameter("closePosition", closePosition?.ToString().ToLower());
             parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? BaseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
+            parameters.AddOptionalParameter("priceProtect", priceProtect?.ToString().ToUpper());
+            
             return await BaseClient.SendRequestInternal<BinanceFuturesPlacedOrder>(FuturesClient.GetUrl(newOrderEndpoint, Api, SignedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
     
@@ -225,6 +228,7 @@ namespace Binance.Net.SubClients.Futures
                 orderParameters.AddOptionalParameter("callbackRate", order.CallbackRate?.ToString(CultureInfo.InvariantCulture));
                 orderParameters.AddOptionalParameter("workingType", order.WorkingType == null ? null : JsonConvert.SerializeObject(order.WorkingType, new WorkingTypeConverter(false)));
                 orderParameters.AddOptionalParameter("reduceOnly", order.ReduceOnly?.ToString().ToLower());
+                orderParameters.AddOptionalParameter("priceProtect", order.PriceProtect?.ToString().ToUpper());
                 parameterOrders[i] = orderParameters;
                 i++;
             }

@@ -3874,6 +3874,7 @@
             <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
             <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
             <param name="orderResponseType">The response type. Default Acknowledge</param>
+            <param name="priceProtect">If true when price reaches stopPrice, difference between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than "triggerProtect" of the symbol.</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
@@ -9181,6 +9182,11 @@
             Stop price triggered by: Mark or Contract. Default Contract
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder.PriceProtect">
+            <summary>
+            Used with Stop/StopMarket or TakeProfit/TakeProfitMarket orders.
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelAllOrders">
             <summary>
             The result of cancel all orders
@@ -9304,6 +9310,11 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.PositionSide">
             <summary>
             The position side of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.PriceProtect">
+            <summary>
+            Price protect
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesChangeMarginTypeResult">
@@ -9667,6 +9678,11 @@
             The position side of the order
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.PriceProtect">
+            <summary>
+            Price protect
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder">
             <summary>
             The result of placing a new order
@@ -9780,6 +9796,11 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.WorkingType">
             <summary>
             The working type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.PriceProtect">
+            <summary>
+            Price protect
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPositionMarginResult">
@@ -20257,6 +20278,7 @@
             <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
             <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
             <param name="orderResponseType">The response type. Default Acknowledge</param>
+            <param name="priceProtect">If true when price reaches stopPrice, difference between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than "triggerProtect" of the symbol.</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>

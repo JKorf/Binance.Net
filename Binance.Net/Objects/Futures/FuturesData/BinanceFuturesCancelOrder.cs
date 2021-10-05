@@ -130,5 +130,11 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// </summary>
         [JsonProperty("positionSide"), JsonConverter(typeof(PositionSideConverter))]
         public PositionSide PositionSide { get; set; }
+        
+        /// <summary>
+        /// Price protect
+        /// </summary>
+        [JsonProperty("priceProtect")]
+        public bool PriceProtect { get; set; }
     }
 }
