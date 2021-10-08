@@ -165,6 +165,9 @@ Yes, as long as the API endpoints are the same. Switch by changing the BaseAddre
 See Timestamping.
 
 ## Release notes
+* Version 7.2.5 - 08 Oct 2021
+    * Updated CryptoExchange.Net to fix some socket issues
+
 * Version 7.2.4 - 06 Oct 2021
     * Updated CryptoExchange.Net, fixing socket issue when calling from .Net Framework
 
