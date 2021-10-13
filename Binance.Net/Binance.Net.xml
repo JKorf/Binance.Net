@@ -3609,6 +3609,20 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
+        <member name="T:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesAccount">
+            <summary>
+            Futures account interface
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesAccount.GetUserCommissionRateAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Gets account commission rates
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>User commission rate information</returns>
+        </member>
         <member name="T:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesCoinAccount">
             <summary>
             COIN-M futures account endpoints
@@ -9070,6 +9084,26 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountInfo.UpdateTime">
             <summary>
             The time of account info was updated
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountUserCommissionRate">
+            <summary>
+            User commission rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountUserCommissionRate.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountUserCommissionRate.MakerCommissionRate">
+            <summary>
+            Maker commission rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountUserCommissionRate.TakerCommissionRate">
+            <summary>
+            Taker commission rate
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBasis">
@@ -20534,6 +20568,15 @@
             <param name="ct">Cancellation token</param>
             <returns>The account information</returns>
         </member>
+        <member name="M:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinAccount.GetUserCommissionRateAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Gets account commission rates
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>User commission rate information</returns>
+        </member>
         <member name="T:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinMarket">
             <summary>
             COIN-M futures market endpoints
@@ -20840,6 +20883,15 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Succes</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtAccount.GetUserCommissionRateAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Gets account commission rates
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>User commission rate information</returns>
         </member>
         <member name="T:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket">
             <summary>
