@@ -2540,6 +2540,11 @@
             Liquidity swap endpoints
             </summary>
         </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceClient.Fiat">
+            <summary>
+            Fiat endpoints
+            </summary>
+        </member>
         <member name="M:Binance.Net.Interfaces.IBinanceClient.SetApiCredentials(System.String,System.String)">
             <summary>
             Set the API key and secret
