@@ -4140,7 +4140,7 @@
             USDT-M futures order endpoints
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtOrder.GetUserTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtOrder.GetUserTradesAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user trades for provided symbol
             </summary>
@@ -11964,16 +11964,6 @@
             <summary>
             Quantity which is still open to be filled
             </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.AverageFillPrice">
-            <summary>
-            The average price the order was filled
-            </summary>
-        </member>
-            Create new options
-            </summary>
-            <param name="limit">The top amount of results to keep in sync. If for example limit=10 is used, the order book will contain the 10 best bids and 10 best asks. Leaving this null will sync the full order book</param>
-            <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
         </member>
         <member name="T:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralAdjustLtvHistory">
             <summary>
@@ -20702,7 +20692,7 @@
             Api path
             </summary>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtOrder.GetUserTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtOrder.GetUserTradesAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user trades for provided symbol
             </summary>
@@ -21712,17 +21702,17 @@
         <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.GetOpenOcoOrdersAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Retrieves a list of open oco orders
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.GetUserTradesAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Open order lists</returns>
         </member>
-            <param name="orderId">Get trades for this order id</param>
-        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.GetMyTrades(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Spot.BinanceClientSpotOrder.GetUserTradesAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user trades for provided symbol
             </summary>
             <param name="symbol">Symbol to get trades for</param>
+            <param name="orderId">Get trades for this order id</param>
             <param name="limit">The max number of results</param>
             <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
             <param name="startTime">Orders newer than this date will be retrieved</param>
