@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using CryptoExchange.Net.Converters;
+using Newtonsoft.Json;
+using System;
 
 namespace Binance.Net.Objects.Futures.FuturesData
 {
@@ -28,9 +30,10 @@ namespace Binance.Net.Objects.Futures.FuturesData
         public decimal MarginBalance { get; set; }
 
         /// <summary>
-        /// Maximum Withdraw Amount
+        /// Maximum Withdraw Quantity
         /// </summary>
-        public decimal MaxWithdrawAmount { get; set; }
+        [JsonProperty("maxWithdrawAmount")]
+        public decimal MaxWithdrawQuantity { get; set; }
 
         /// <summary>
         /// Open Order Initial Margin
@@ -73,5 +76,10 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Whether the asset can be used as margin in Multi-Assets mode
         /// </summary>
         public bool? MarginAvailable { get; set; }
+        /// <summary>
+        /// Last update time
+        /// </summary>
+        [JsonConverter(typeof(TimestampConverter))]
+        public DateTime UpdateTime { get; set; }
     }
 }

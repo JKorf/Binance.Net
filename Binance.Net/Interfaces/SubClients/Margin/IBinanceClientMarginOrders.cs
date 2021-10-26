@@ -21,8 +21,8 @@ namespace Binance.Net.Interfaces.SubClients.Margin
         /// <param name="side">The order side (buy/sell)</param>
         /// <param name="type">The order type</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
-        /// <param name="quantity">The amount of the symbol</param>
-        /// <param name="quoteOrderQuantity">The amount of the quote symbol. Only valid for market orders</param>
+        /// <param name="quantity">The quantity of the symbol</param>
+        /// <param name="quoteQuantity">The quantity of the quote symbol. Only valid for market orders</param>
         /// <param name="price">The price to use</param>
         /// <param name="newClientOrderId">Unique id for order</param>
         /// <param name="stopPrice">Used for stop orders</param>
@@ -37,7 +37,7 @@ namespace Binance.Net.Interfaces.SubClients.Margin
             OrderSide side,
             OrderType type,
             decimal? quantity = null,
-            decimal? quoteOrderQuantity = null,
+            decimal? quoteQuantity = null,
             string? newClientOrderId = null,
             decimal? price = null,
             TimeInForce? timeInForce = null,
@@ -128,7 +128,7 @@ namespace Binance.Net.Interfaces.SubClients.Margin
         /// <param name="symbol">The symbol the order is for</param>
         /// <param name="side">The order side (buy/sell)</param>
         /// <param name="stopLimitTimeInForce">Lifetime of the stop order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
-        /// <param name="quantity">The amount of the symbol</param>
+        /// <param name="quantity">The quantity of the symbol</param>
         /// <param name="price">The price to use</param>
         /// <param name="stopPrice">The stop price</param>
         /// <param name="stopLimitPrice">The price for the stop limit order</param>

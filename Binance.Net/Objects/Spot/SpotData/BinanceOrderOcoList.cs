@@ -17,7 +17,8 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// <summary>
         /// The id of the order list
         /// </summary>
-        public long OrderListId { get; set; }
+        [JsonProperty("orderListId")]
+        public long Id { get; set; }
         /// <summary>
         /// The contingency type
         /// </summary>

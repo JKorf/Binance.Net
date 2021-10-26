@@ -91,12 +91,12 @@ namespace Binance.Net.Interfaces.SubClients
         Task<WebCallResult<BinanceAPIKeyPermissions>> GetAPIKeyPermissionsAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Gets information of coins for a user
+        /// Gets information of assets for a user
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>Coins info</returns>
-        Task<WebCallResult<IEnumerable<BinanceUserCoin>>> GetUserCoinsAsync(int? receiveWindow = null, CancellationToken ct = default);
+        /// <returns>Assets info</returns>
+        Task<WebCallResult<IEnumerable<BinanceUserAsset>>> GetUserAssetsAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get asset dividend records
@@ -173,13 +173,13 @@ namespace Binance.Net.Interfaces.SubClients
         /// </summary>
         /// <param name="type">The type of transfer</param>
         /// <param name="asset">The asset to transfer</param>
-        /// <param name="amount">The amount to transfer</param>
+        /// <param name="quantity">The quantity to transfer</param>
         /// <param name="fromSymbol">From symbol when transfering from/to isolated margin</param>
         /// <param name="toSymbol">To symbol when transfering from/to isolated margin</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BinanceTransaction>> TransferAsync(UniversalTransferType type, string asset, decimal amount, string? fromSymbol = null, string? toSymbol = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceTransaction>> TransferAsync(UniversalTransferType type, string asset, decimal quantity, string? fromSymbol = null, string? toSymbol = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get transfer history

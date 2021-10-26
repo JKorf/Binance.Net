@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace Binance.Net.Objects.Spot.Futures
@@ -40,21 +41,24 @@ namespace Binance.Net.Objects.Spot.Futures
     public class BinanceCrossCollateralWalletEntry
     {
         /// <summary>
-        /// Loan coin
+        /// Loan asset
         /// </summary>
-        public string LoanCoin { get; set; } = string.Empty;
+        [JsonProperty("loanCoin")]
+        public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Collateral coin
+        /// Collateral asset
         /// </summary>
-        public string CollateralCoin { get; set; } = string.Empty;
+        [JsonProperty("collateralCoin")]
+        public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Amount locked
+        /// Quantity locked
         /// </summary>
         public decimal Locked { get; set; }
         /// <summary>
-        /// Loan amount
+        /// Loan quantity
         /// </summary>
-        public decimal LoanAmount { get; set; }
+        [JsonProperty("loanAmount")]
+        public decimal LoanQuantity { get; set; }
         /// <summary>
         /// Current collateral rate
         /// </summary>

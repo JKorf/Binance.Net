@@ -47,6 +47,6 @@ namespace Binance.Net.Interfaces
         /// <summary>
         /// Forced time
         /// </summary>
-        DateTime Time { get; set; }
+        DateTime Timestamp { get; set; }
     }
 }

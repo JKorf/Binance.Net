@@ -40,10 +40,7 @@ namespace Binance.Net.SubClients.Spot
 
         #region Test Connectivity
 
-        /// <summary>
-        /// Pings the Binance API
-        /// </summary>
-        /// <returns>True if successful ping, false if no response</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<long>> PingAsync(CancellationToken ct = default)
         {
             var sw = Stopwatch.StartNew();
@@ -56,12 +53,7 @@ namespace Binance.Net.SubClients.Spot
 
         #region Check Server Time
 
-        /// <summary>
-        /// Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls
-        /// </summary>
-        /// <param name="resetAutoTimestamp">Whether the response should be used for a new auto timestamp calculation</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Server time</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<DateTime>> GetServerTimeAsync(bool resetAutoTimestamp = false, CancellationToken ct = default)
         {
             var url = _baseClient.GetUrlSpot(checkTimeEndpoint, api, publicVersion);
@@ -112,29 +104,15 @@ namespace Binance.Net.SubClients.Spot
         #endregion
 
         #region Exchange Information
-        /// <summary>
-        /// Gets information about the exchange including rate limits and symbol list
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Exchange info</returns>
+        /// <inheritdoc />
         public Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(CancellationToken ct = default)
              => GetExchangeInfoAsync(Array.Empty<string>(), ct);
 
-        /// <summary>
-        /// Get's information about the exchange including rate limits and information on the provided symbol
-        /// </summary>
-        /// <param name="symbol">Symbol to get data for token</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Exchange info</returns>
+        /// <inheritdoc />
         public Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(string symbol, CancellationToken ct = default)
              => GetExchangeInfoAsync(new string[] { symbol }, ct);
 
-        /// <summary>
-        /// Get's information about the exchange including rate limits and information on the provided symbols
-        /// </summary>
-        /// <param name="symbols">Symbols to get data for token</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Exchange info</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(IEnumerable<string> symbols, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
@@ -155,11 +133,7 @@ namespace Binance.Net.SubClients.Spot
         #endregion
 
         #region System status
-        /// <summary>
-        /// Gets the status of the Binance platform
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The system status</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceSystemStatus>> GetSystemStatusAsync(CancellationToken ct = default)
         {
             return await _baseClient.SendRequestInternal<BinanceSystemStatus>(_baseClient.GetUrlSpot(systemStatusEndpoint, "sapi", "1"), HttpMethod.Get, ct, null, false).ConfigureAwait(false);

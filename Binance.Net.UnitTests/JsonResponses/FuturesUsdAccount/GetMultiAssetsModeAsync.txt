@@ -1,0 +1,3 @@
+{
+    "multiAssetsMargin": true // "true": Multi-Assets Mode; "false": Single-Asset Mode
+}

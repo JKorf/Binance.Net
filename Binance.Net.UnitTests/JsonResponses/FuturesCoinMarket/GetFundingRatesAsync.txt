@@ -1,0 +1,12 @@
+[
+    {
+        "symbol": "BTCUSD_PERP",
+        "fundingTime": 1596038400000,   
+        "fundingRate": "-0.00300000"
+    },
+    {
+        "symbol": "BTCUSD_PERP",
+        "fundingTime": 1596067200000,
+        "fundingRate": "-0.00300000"
+    }
+]

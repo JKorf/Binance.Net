@@ -54,28 +54,29 @@ namespace Binance.Net.Objects.Spot.MarginData
         /// </summary>
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// The amount that was borrowed
+        /// The quantity that was borrowed
         /// </summary>
         public decimal Borrowed { get; set; }
         /// <summary>
-        /// The amount that isn't locked in a trade
+        /// The quantity that isn't locked in a trade
         /// </summary>
-        public decimal Free { get; set; }
+        [JsonProperty("free")]
+        public decimal Available { get; set; }
         /// <summary>
-        /// Commission to need pay by borrowed
+        /// Fee to need pay by borrowed
         /// </summary>
         public decimal Interest { get; set; }
         /// <summary>
-        /// The amount that is currently locked in a trade
+        /// The quantity that is currently locked in a trade
         /// </summary>
         public decimal Locked { get; set; }
         /// <summary>
-        /// The amount that is netAsset
+        /// The quantity that is netAsset
         /// </summary>
         public decimal NetAsset { get; set; }
         /// <summary>
-        /// The total balance of this asset (Free + Locked)
+        /// The total balance of this asset (Available + Locked)
         /// </summary>
-        public decimal Total => Free + Locked;
+        public decimal Total => Available + Locked;
     }
 }

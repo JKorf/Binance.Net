@@ -33,18 +33,19 @@ namespace Binance.Net.Objects.Spot.LendingData
         /// </summary>
         public bool Featured { get; set; }
         /// <summary>
-        /// Minimal amount to purchase
+        /// Minimal quantity to purchase
         /// </summary>
         [JsonProperty("minPurchaseAmount")]
-        public decimal MinimalPurchaseAmount { get; set; }
+        public decimal MinimalPurchaseQuantity { get; set; }
         /// <summary>
         /// Product id
         /// </summary>
         public string ProductId { get; set; } = string.Empty;
         /// <summary>
-        /// Purchased amount
+        /// Purchased quantity
         /// </summary>
-        public decimal PurchasedAmount { get; set; }
+        [JsonProperty("purchasedAmount")]
+        public decimal PurchasedQuantity { get; set; }
         /// <summary>
         /// Status of the product
         /// </summary>

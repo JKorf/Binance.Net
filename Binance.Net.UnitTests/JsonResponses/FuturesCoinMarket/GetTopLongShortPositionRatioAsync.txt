@@ -1,0 +1,16 @@
+[  
+   {
+      "pair": "BTCUSD",
+      "longShortRatio": "0.7869",
+      "longPosition": "0.6442",  //64.42%
+      "shortPosition": "0.4404",  //44.04%
+      "timestamp": 1592870400000
+   },
+   {
+     "pair": "BTCUSD",
+      "longShortRatio": "1.1231",
+      "longPosition": "0.2363",  
+      "shortPosition": "0.4537",  
+      "timestamp": 1592956800000
+    }
+]

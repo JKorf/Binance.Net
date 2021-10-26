@@ -29,17 +29,20 @@ namespace Binance.Net.Objects.Spot.LendingData
         /// </summary>
         public decimal DailyInterestRate { get; set; }
         /// <summary>
-        /// Amount free
+        /// Quantity free
         /// </summary>
-        public decimal FreeAmount { get; set; }
+        [JsonProperty("freeAmount")]
+        public decimal FreeQuantity { get; set; }
         /// <summary>
-        /// Amount frozen
+        /// Quantity frozen
         /// </summary>
-        public decimal FreezeAmount { get; set; }
+        [JsonProperty("freezeAmount")]
+        public decimal FreezeQuantity { get; set; }
         /// <summary>
-        /// Amount locked
+        /// Quantity locked
         /// </summary>
-        public decimal LockedAmount { get; set; }
+        [JsonProperty("lockedAmount")]
+        public decimal LockedQuantity { get; set; }
 
         /// <summary>
         /// The product id
@@ -50,17 +53,20 @@ namespace Binance.Net.Objects.Spot.LendingData
         /// </summary>
         public string ProductName { get; set; } = string.Empty;
         /// <summary>
-        /// Redeeming amount
+        /// Redeeming quantity
         /// </summary>
-        public decimal RedeemingAmount { get; set; }
+        [JsonProperty("redeemingAmount")]
+        public decimal RedeemingQuantity { get; set; }
         /// <summary>
-        /// Amount purchased today
+        /// Quantity purchased today
         /// </summary>
-        public decimal TodayPurchasedAmount { get; set; }
+        [JsonProperty("todayPurchasedAmount")]
+        public decimal TodayPurchasedQuantity { get; set; }
         /// <summary>
-        /// Total amount
+        /// Total quantity
         /// </summary>
-        public decimal TotalAmount { get; set; }
+        [JsonProperty("totalAmount")]
+        public decimal TotalQuantity { get; set; }
         /// <summary>
         /// Total interest
         /// </summary>

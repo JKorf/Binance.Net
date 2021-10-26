@@ -39,9 +39,10 @@ namespace Binance.Net.Objects.Spot.SubAccountData
         /// </summary>
         public int FeeTier { get; set; }
         /// <summary>
-        /// Max amount which can be withdrawn
+        /// Max quantity which can be withdrawn
         /// </summary>
-        public decimal MaxWithdrawAmount { get; set; }
+        [JsonProperty("maxWithdrawAmount")]
+        public decimal MaxWithdrawQuantity{ get; set; }
         /// <summary>
         /// Total initial margin
         /// </summary>
@@ -99,9 +100,10 @@ namespace Binance.Net.Objects.Spot.SubAccountData
         /// </summary>
         public decimal MarginBalance { get; set; }
         /// <summary>
-        /// Max amount which can be withdrawn
+        /// Max quantity which can be withdrawn
         /// </summary>
-        public decimal MaxWithdrawAmount { get; set; }
+        [JsonProperty("maxWithdrawAmount")]
+        public decimal MaxWithdrawQuantity { get; set; }
         /// <summary>
         /// Open order initial margin
         /// </summary>

@@ -19,15 +19,15 @@ namespace Binance.Net.Objects.BSwap
         /// </summary>
         public string BaseAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Quote amount
+        /// Quote quantity
         /// </summary>
         [JsonProperty("quoteAmt")]
-        public decimal QuoteAmount { get; set; }
+        public decimal QuoteQuantity { get; set; }
         /// <summary>
-        /// Base amount
+        /// Base quantity
         /// </summary>
         [JsonProperty("baseAmt")]
-        public decimal BaseAmount { get; set; }
+        public decimal BaseQuantity { get; set; }
         /// <summary>
         /// Price
         /// </summary>

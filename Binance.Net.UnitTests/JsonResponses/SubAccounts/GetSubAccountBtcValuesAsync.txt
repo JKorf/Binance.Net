@@ -1,0 +1,14 @@
+{
+    "totalCount":2,
+    "masterAccountTotalAsset": "0.23231201",
+    "spotSubUserAssetBtcVoList":[
+        {
+            "email":"sub123@test.com",
+            "totalAsset":"9999.00000000"
+        },
+        {
+            "email":"test456@test.com",
+            "totalAsset":"0.00000000"
+        }
+    ]
+}

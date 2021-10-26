@@ -12,6 +12,10 @@ namespace Binance.Net.Objects.Spot.MarginData
     public class BinanceLoan
     {
         /// <summary>
+        /// Isolated symbol
+        /// </summary>
+        public string? IsolatedSymbol { get; set; }
+        /// <summary>
         /// The asset of the loan
         /// </summary>
         public string Asset { get; set; } = string.Empty;
@@ -28,7 +32,7 @@ namespace Binance.Net.Objects.Spot.MarginData
         /// Time of repay completed
         /// </summary>
         [JsonProperty("timestamp"), JsonConverter(typeof(TimestampConverter))]
-        public DateTime Time { get; set; }
+        public DateTime Timestamp { get; set; }
         /// <summary>
         /// The status of the loan
         /// </summary>

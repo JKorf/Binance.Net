@@ -1,0 +1,34 @@
+{
+    "totalInitialMargin": "9.83137400", 
+    "totalMaintenanceMargin": "0.41568700", 
+    "totalMarginBalance": "23.03235621", 
+    "totalOpenOrderInitialMargin": "9.00000000",
+    "totalPositionInitialMargin": "0.83137400",
+    "totalUnrealizedProfit": "0.03219710",
+    "totalWalletBalance": "22.15879444",
+    "asset": "USD",  // The sum of BUSD and USDT
+    "subAccountList":[
+        {
+            "email": "123@test.com",
+            "totalInitialMargin": "9.00000000", 
+            "totalMaintenanceMargin": "0.00000000", 
+            "totalMarginBalance": "22.12659734", 
+            "totalOpenOrderInitialMargin": "9.00000000",
+            "totalPositionInitialMargin": "0.00000000",
+            "totalUnrealizedProfit": "0.00000000",
+            "totalWalletBalance": "22.12659734",
+            "asset": "USD" //The sum of BUSD and USDT
+        },
+        { 
+            "email": "345@test.com",
+            "totalInitialMargin": "0.83137400", 
+            "totalMaintenanceMargin": "0.41568700", 
+            "totalMarginBalance": "0.90575887", 
+            "totalOpenOrderInitialMargin": "0.00000000",
+            "totalPositionInitialMargin": "0.83137400",
+            "totalUnrealizedProfit": "0.03219710",
+            "totalWalletBalance": "0.87356177",
+            "asset": "USD"
+        }
+    ]
+}

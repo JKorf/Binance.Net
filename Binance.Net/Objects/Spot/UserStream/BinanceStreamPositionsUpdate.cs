@@ -14,7 +14,7 @@ namespace Binance.Net.Objects.Spot.UserStream
         /// Time of last account update
         /// </summary>
         [JsonProperty("u"), JsonConverter(typeof(TimestampConverter))]
-        public DateTime Time { get; set; }
+        public DateTime Timestamp { get; set; }
         /// <summary>
         /// Balances
         /// </summary>

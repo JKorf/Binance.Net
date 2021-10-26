@@ -93,6 +93,10 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// </summary>
         [JsonProperty("underlyingType"), JsonConverter(typeof(UnderlyingTypeConverter))]
         public UnderlyingType UnderlyingType { get; set; }
+        /// <summary>
+        /// Sub types
+        /// </summary>
+        public IEnumerable<string> UnderlyingSubType { get; set; } = Array.Empty<string>();
 
         /// <summary>
         /// Liquidation fee

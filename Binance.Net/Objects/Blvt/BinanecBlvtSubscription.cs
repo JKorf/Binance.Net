@@ -19,9 +19,10 @@ namespace Binance.Net.Objects.Blvt
         /// </summary>
         public string TokenName { get; set; } = string.Empty;
         /// <summary>
-        /// Subscription amount
+        /// Subscription quantity
         /// </summary>
-        public decimal Amount { get; set; }
+        [JsonProperty("amount")]
+        public decimal Quantity { get; set; }
         /// <summary>
         /// NAV price of subscription
         /// </summary>

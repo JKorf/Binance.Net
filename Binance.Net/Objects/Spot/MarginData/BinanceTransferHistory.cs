@@ -12,9 +12,10 @@ namespace Binance.Net.Objects.Spot.MarginData
     public class BinanceTransferHistory
     {
         /// <summary>
-        /// Amount of the transfer
+        /// Quanity of the transfer
         /// </summary>
-        public decimal Amount { get; set; }
+        [JsonProperty("amount")]
+        public decimal Quantity { get; set; }
         /// <summary>
         /// Asset of the transfer
         /// </summary>

@@ -64,74 +64,36 @@ namespace Binance.Net
         /// </summary>
         public event Action<ICommonOrderId>? OnOrderPlaced;
         /// <summary>
-        /// Event triggered when an order is cancelled via this client. Note that this does not trigger when using CancelAllOrdersAsync. Only available for Spot orders
+        /// Event triggered when an order is canceled via this client. Note that this does not trigger when using CancelAllOrdersAsync. Only available for Spot orders
         /// </summary>
         public event Action<ICommonOrderId>? OnOrderCanceled;
 
         #region Subclients
-        /// <summary>
-        /// General endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientGeneral General { get; }
-
-        /// <summary>
-        /// Sub account endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientSubAccount SubAccount { get; }
-
-        /// <summary>
-        /// (Isolated) Margin endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientMargin Margin { get; }
-
-        /// <summary>
-        /// Spot endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientSpot Spot { get; }
-
-        /// <summary>
-        /// Lending endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientLending Lending { get; }
-        
-        /// <summary>
-        /// Mining endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientMining Mining { get; }
-        
-        /// <summary>
-        /// Withdraw/deposit endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientWithdrawDeposit WithdrawDeposit { get; }
-
-        /// <summary>
-        /// Brokerage endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientBrokerage Brokerage { get; }
-
-        /// <summary>
-        /// USDT-M futures endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientFuturesUsdt FuturesUsdt { get; }
-
-        /// <summary>
-        /// Coin-M futures endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientFuturesCoin FuturesCoin { get; }
-
-        /// <summary>
-        /// Leveraged tokens endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientLeveragedTokens Blvt { get; set; }
-
-        /// <summary>
-        /// Liquidity swap endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientLiquidSwap BSwap { get; set; }
-
-        /// <summary>
-        /// Fiat endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientFiat Fiat { get; set; }
         #endregion
 
@@ -208,7 +170,7 @@ namespace Binance.Net
             OrderSide side,
             OrderType type,
             decimal? quantity = null,
-            decimal? quoteOrderQuantity = null,
+            decimal? quoteQuantity = null,
             string? newClientOrderId = null,
             decimal? price = null,
             TimeInForce? timeInForce = null,
@@ -222,10 +184,10 @@ namespace Binance.Net
         {
             symbol.ValidateBinanceSymbol();
 
-            if(quoteOrderQuantity != null && type != OrderType.Market)
-                throw new ArgumentException("quoteOrderQuantity is only valid for market orders");
+            if(quoteQuantity != null && type != OrderType.Market)
+                throw new ArgumentException("quoteQuantity is only valid for market orders");
 
-            if ((quantity == null && quoteOrderQuantity == null) || (quantity != null && quoteOrderQuantity != null))
+            if ((quantity == null && quoteQuantity == null) || (quantity != null && quoteQuantity != null))
                 throw new ArgumentException("1 of either should be specified, quantity or quoteOrderQuantity");
 
 
@@ -252,7 +214,7 @@ namespace Binance.Net
                 { "timestamp", GetTimestamp() }
             };
             parameters.AddOptionalParameter("quantity", quantity?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("quoteOrderQty", quoteOrderQuantity?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("quoteOrderQty", quoteQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)));
@@ -474,7 +436,7 @@ namespace Binance.Net
             {
                 if(TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
                     return BinanceTradeRuleResult.CreateFailed(
-                        $"Trade rules check failed: MinNotional filter failed. Order size: {notional}, minimal order size: {symbolData.MinNotionalFilter.MinNotional}");
+                        $"Trade rules check failed: MinNotional filter failed. Order quantity: {notional}, minimal order quantity: {symbolData.MinNotionalFilter.MinNotional}");
 
                 if (symbolData.LotSizeFilter == null)
                     return BinanceTradeRuleResult.CreateFailed("Trade rules check failed: MinNotional filter failed. Unable to auto comply because LotSizeFilter not present");

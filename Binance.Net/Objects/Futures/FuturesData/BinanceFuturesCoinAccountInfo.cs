@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CryptoExchange.Net.Converters;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace Binance.Net.Objects.Futures.FuturesData
@@ -37,5 +39,10 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Account positions
         /// </summary>
         public IEnumerable<BinancePositionInfoCoin> Positions { get; set; } = Array.Empty<BinancePositionInfoCoin>();
+        /// <summary>
+        /// Update time
+        /// </summary>
+        [JsonConverter(typeof(TimestampConverter))]
+        public DateTime UpdateTime { get; set; }
     }
 }

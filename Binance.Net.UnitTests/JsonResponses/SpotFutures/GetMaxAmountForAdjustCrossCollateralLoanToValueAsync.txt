@@ -1,0 +1,4 @@
+{
+    "maxInAmount": "9.97109038",
+    "maxOutAmount": "0.50952693"
+}

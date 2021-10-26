@@ -34,11 +34,7 @@ namespace Binance.Net.SubClients.Futures
         }
 
         #region Start User Data Stream
-        /// <summary>
-        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to BinanceSocketClient.Futures.SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Listen key</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<string>> StartUserStreamAsync(CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -53,12 +49,7 @@ namespace Binance.Net.SubClients.Futures
 
         #region Keepalive User Data Stream
 
-        /// <summary>
-        /// Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
-        /// </summary>
-        /// <param name="listenKey">The listen key to keep alive</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<object>> KeepAliveUserStreamAsync(string listenKey, CancellationToken ct = default)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
@@ -78,12 +69,7 @@ namespace Binance.Net.SubClients.Futures
 
         #region Close User Data Stream
 
-        /// <summary>
-        /// Stops the current user stream
-        /// </summary>
-        /// <param name="listenKey">The listen key to keep alive</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<object>> StopUserStreamAsync(string listenKey, CancellationToken ct = default)
         {
             listenKey.ValidateNotNull(nameof(listenKey));

@@ -12,6 +12,10 @@ namespace Binance.Net.Objects.Spot.MarginData
     public class BinanceRepay
     {
         /// <summary>
+        /// Isolated symbol
+        /// </summary>
+        public string? IsolatedSymbol { get; set; }
+        /// <summary>
         /// The asset of the repay
         /// </summary>
         public string Asset { get; set; } = string.Empty;
@@ -21,9 +25,10 @@ namespace Binance.Net.Objects.Spot.MarginData
         [JsonProperty("txId")]
         public long TransactionId { get; set; }
         /// <summary>
-        /// Total amount repaid
+        /// Total quantity repaid
         /// </summary>
-        public decimal Amount { get; set; }
+        [JsonProperty("amount")]
+        public decimal Quantity { get; set; }
         /// <summary>
         /// Interest repaid
         /// </summary>
@@ -36,7 +41,7 @@ namespace Binance.Net.Objects.Spot.MarginData
         /// Time of repay completed
         /// </summary>
         [JsonProperty("timestamp"), JsonConverter(typeof(TimestampConverter))]
-        public DateTime Time { get; set; }
+        public DateTime Timestamp { get; set; }
         /// <summary>
         /// The status of the repay
         /// </summary>

@@ -27,11 +27,13 @@ namespace Binance.Net.Objects.Blvt
         /// <summary>
         /// Redemption value in usdt
         /// </summary>
-        public decimal Amount { get; set; }
+        [JsonProperty("amount")]
+        public decimal Quantity { get; set; }
         /// <summary>
-        /// Redemption token amount
+        /// Redemption token quantity
         /// </summary>
-        public decimal RedeemAmount { get; set; }
+        [JsonProperty("redeemAmount")]
+        public decimal RedeemQuantity { get; set; }
         /// <summary>
         /// Timestamp
         /// </summary>

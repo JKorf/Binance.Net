@@ -45,7 +45,7 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// <summary>
         /// List of positions
         /// </summary>
-        public IEnumerable<BinanceFuturesSnapshotPosition> Positions { get; set; } = Array.Empty<BinanceFuturesSnapshotPosition>();
+        public IEnumerable<BinanceFuturesSnapshotPosition> Position { get; set; } = Array.Empty<BinanceFuturesSnapshotPosition>();
     }
 
     /// <summary>

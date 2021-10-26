@@ -33,12 +33,7 @@ namespace Binance.Net.SubClients
         }
 
         #region asset details
-        /// <summary>
-        /// Gets the withdraw/deposit details for an asset
-        /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Asset detail</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<Dictionary<string, BinanceAssetDetails>>> GetAssetDetailsAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -57,21 +52,8 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Withdraw
-        /// <summary>
-        /// Withdraw assets from Binance to an address
-        /// </summary>
-        /// <param name="asset">The asset to withdraw</param>
-        /// <param name="address">The address to send the funds to</param>
-        /// <param name="addressTag">Secondary address identifier for coins like XRP,XMR etc.</param>
-        /// <param name="withdrawOrderId">Custom client order id</param>
-        /// <param name="amount">The amount to withdraw</param>
-        /// <param name="transactionFeeFlag">When making internal transfer, true for returning the fee to the destination account; false for returning the fee back to the departure account. Default false.</param>
-        /// <param name="network">The network to use</param>
-        /// <param name="name">Description of the address</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Withdrawal confirmation</returns>
-        public async Task<WebCallResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, decimal amount, string? withdrawOrderId = null, string? network = null, string? addressTag = null, string? name = null, bool? transactionFeeFlag = null, int? receiveWindow = null, CancellationToken ct = default)
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, decimal quantity, string? withdrawOrderId = null, string? network = null, string? addressTag = null, string? name = null, bool? transactionFeeFlag = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             address.ValidateNotNull(nameof(address));
@@ -84,7 +66,7 @@ namespace Binance.Net.SubClients
             {
                 { "coin", asset },
                 { "address", address },
-                { "amount", amount.ToString(CultureInfo.InvariantCulture) },
+                { "amount", quantity.ToString(CultureInfo.InvariantCulture) },
                 { "timestamp", _baseClient.GetTimestamp() }
             };
             parameters.AddOptionalParameter("name", name);
@@ -101,19 +83,7 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Withdraw History
-        /// <summary>
-        /// Gets the withdrawal history
-        /// </summary>
-        /// <param name="asset">Filter by asset</param>
-        /// <param name="withdrawOrderId">Filter by withdraw order id</param>
-        /// <param name="status">Filter by status</param>
-        /// <param name="startTime">Filter start time from</param>
-        /// <param name="endTime">Filter end time till</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="limit">Add limit. Default: 1000, Max: 1000</param>
-        /// <param name="offset">Add offset</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of withdrawals</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceWithdrawal>>> GetWithdrawalHistoryAsync(string? asset = null, string? withdrawOrderId = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, int? limit = null, int? offset = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -141,19 +111,8 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Deposit history        
-        /// <summary>
-        /// Gets the deposit history
-        /// </summary>
-        /// <param name="coin">Filter by asset</param>
-        /// <param name="status">Filter by status</param>
-        /// <param name="limit">Amount of results</param>
-        /// <param name="offset">Offset the results</param>
-        /// <param name="startTime">Filter start time from</param>
-        /// <param name="endTime">Filter end time till</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of deposits</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceDeposit>>> GetDepositHistoryAsync(string? coin = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? offset = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceDeposit>>> GetDepositHistoryAsync(string? asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? offset = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
@@ -163,7 +122,7 @@ namespace Binance.Net.SubClients
             {
                 { "timestamp", _baseClient.GetTimestamp() }
             };
-            parameters.AddOptionalParameter("coin", coin);
+            parameters.AddOptionalParameter("coin", asset);
             parameters.AddOptionalParameter("offset", offset?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("status", status != null ? JsonConvert.SerializeObject(status, new DepositStatusConverter(false)) : null);
@@ -179,17 +138,10 @@ namespace Binance.Net.SubClients
 
         #region Get Deposit Address
 
-        /// <summary>
-        /// Gets the deposit address for an asset
-        /// </summary>
-        /// <param name="coin">Asset to get address for</param>
-        /// <param name="network">Network</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Deposit address</returns>
-        public async Task<WebCallResult<BinanceDepositAddress>> GetDepositAddressAsync(string coin, string? network = null, int? receiveWindow = null, CancellationToken ct = default)
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceDepositAddress>> GetDepositAddressAsync(string asset, string? network = null, int? receiveWindow = null, CancellationToken ct = default)
         {
-            coin.ValidateNotNull(nameof(coin));
+            asset.ValidateNotNull(nameof(asset));
 
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
@@ -197,7 +149,7 @@ namespace Binance.Net.SubClients
 
             var parameters = new Dictionary<string, object>
             {
-                { "coin", coin },
+                { "coin", asset },
                 { "timestamp", _baseClient.GetTimestamp() }
             };
             parameters.AddOptionalParameter("network", network);

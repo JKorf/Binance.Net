@@ -17,6 +17,11 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Request response code
         /// </summary>
         public int Code { get; set; }
+        /// <summary>
+        /// Message
+        /// </summary>
+        [JsonProperty("msg")]
+        public string Message { get; set; } = string.Empty;
 
         /// <summary>
         /// Maximum margin value

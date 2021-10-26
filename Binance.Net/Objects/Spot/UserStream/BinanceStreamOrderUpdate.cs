@@ -12,6 +12,11 @@ namespace Binance.Net.Objects.Spot.UserStream
     public class BinanceStreamOrderUpdate: BinanceStreamEvent
     {
         /// <summary>
+        /// The id of the order as assigned by Binance
+        /// </summary>
+        [JsonProperty("i")]
+        public long Id { get; set; }
+        /// <summary>
         /// The symbol the order is for
         /// </summary>
         [JsonProperty("s")]
@@ -77,11 +82,6 @@ namespace Binance.Net.Objects.Spot.UserStream
         [JsonProperty("r"), JsonConverter(typeof(OrderRejectReasonConverter))]
         public OrderRejectReason RejectReason { get; set; }
         /// <summary>
-        /// The id of the order as assigned by Binance
-        /// </summary>
-        [JsonProperty("i")]
-        public long OrderId { get; set; }
-        /// <summary>
         /// The quantity of the last filled trade of this order
         /// </summary>
         [JsonProperty("l")]
@@ -97,15 +97,15 @@ namespace Binance.Net.Objects.Spot.UserStream
         [JsonProperty("L")]
         public decimal LastPriceFilled { get; set; }
         /// <summary>
-        /// The commission payed
+        /// The fee payed
         /// </summary>
         [JsonProperty("n")]
-        public decimal Commission { get; set; }
+        public decimal Fee { get; set; }
         /// <summary>
-        /// The asset the commission was taken from
+        /// The asset the fee was taken from
         /// </summary>
         [JsonProperty("N")]
-        public string CommissionAsset { get; set; } = string.Empty;
+        public string FeeAsset { get; set; } = string.Empty;
         /// <summary>
         /// The time of the update
         /// </summary>
@@ -132,7 +132,7 @@ namespace Binance.Net.Objects.Spot.UserStream
         [JsonProperty("O"), JsonConverter(typeof(TimestampConverter))]
         public DateTime CreateTime { get; set; }
         /// <summary>
-        /// Cummulative amount
+        /// Cummulative quantity
         /// </summary>
         [JsonProperty("Z")]
         public decimal QuoteQuantityFilled { get; set; }

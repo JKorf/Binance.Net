@@ -1,0 +1,16 @@
+[
+    {
+        "symbol": "ETHUSDT",
+        "brackets": [
+            {
+                "bracket": 1,   // Notional bracket
+                "initialLeverage": 75,  // Max initial leverage for this bracket
+                "notionalCap": 10000,  // Cap notional of this bracket
+                "notionalFloor": 0,  // Notional threshold of this bracket 
+                "maintMarginRatio": 0.0065, // Maintenance ratio for this bracket
+                "cum":0 // Auxiliary number for quick calculation 
+
+            },
+        ]
+    }
+]

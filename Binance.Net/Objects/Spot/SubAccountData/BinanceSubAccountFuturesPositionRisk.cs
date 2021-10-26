@@ -1,4 +1,6 @@
-﻿namespace Binance.Net.Objects.Spot.SubAccountData
+﻿using Newtonsoft.Json;
+
+namespace Binance.Net.Objects.Spot.SubAccountData
 {
     /// <summary>
     /// Sub account position risk
@@ -26,9 +28,10 @@
         /// </summary>
         public decimal MarkPrice { get; set; }
         /// <summary>
-        /// Position amount
+        /// Position quantity
         /// </summary>
-        public decimal PositionAmount { get; set; }
+        [JsonProperty("positionAmount")]
+        public decimal PositionQuantity { get; set; }
         /// <summary>
         /// Symbol
         /// </summary>

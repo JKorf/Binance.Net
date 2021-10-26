@@ -105,15 +105,15 @@ namespace Binance.Net.Objects.Futures.UserStream
         [JsonProperty("L")]
         public decimal PriceLastFilledTrade { get; set; }
         /// <summary>
-        /// The commission payed
+        /// The fee payed
         /// </summary>
         [JsonProperty("n")]
-        public decimal Commission { get; set; }
+        public decimal Fee { get; set; }
         /// <summary>
-        /// The asset the commission was taken from
+        /// The asset the fee was taken from
         /// </summary>
         [JsonProperty("N")]
-        public string CommissionAsset { get; set; } = string.Empty;
+        public string FeeAsset { get; set; } = string.Empty;
         /// <summary>
         /// The time of the update
         /// </summary>

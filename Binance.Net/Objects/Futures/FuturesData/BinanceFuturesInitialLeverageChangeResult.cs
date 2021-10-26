@@ -1,4 +1,6 @@
-﻿namespace Binance.Net.Objects.Futures.FuturesData
+﻿using Newtonsoft.Json;
+
+namespace Binance.Net.Objects.Futures.FuturesData
 {
     /// <summary>
     /// Response to the change in initial leverage request
@@ -14,7 +16,13 @@
         /// Maximum value that can be held
         /// NOTE: string type, because the value van be 'inf' (infinite)
         /// </summary>
-        public string MaxNotionalValue { get; set; } = string.Empty;
+        public string? MaxNotionalValue { get; set; }
+        
+        /// <summary>
+        /// Max quantity
+        /// </summary>
+        [JsonProperty("maxQty")]
+        public string? MaxQuantity { get; set; }
         /// <summary>
         /// Symbol the request is for
         /// </summary>

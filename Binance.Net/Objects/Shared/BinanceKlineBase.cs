@@ -20,26 +20,26 @@ namespace Binance.Net.Objects.Shared
         /// The price at which this candlestick opened
         /// </summary>
         [ArrayProperty(1)]
-        public decimal Open { get; set; }
+        public decimal OpenPrice { get; set; }
         /// <summary>
         /// The highest price in this candlestick
         /// </summary>
         [ArrayProperty(2)]
-        public decimal High { get; set; }
+        public decimal HighPrice { get; set; }
         /// <summary>
         /// The lowest price in this candlestick
         /// </summary>
         [ArrayProperty(3)]
-        public decimal Low { get; set; }
+        public decimal LowPrice { get; set; }
         /// <summary>
         /// The price at which this candlestick closed
         /// </summary>
         [ArrayProperty(4)]
-        public decimal Close { get; set; }
+        public decimal ClosePrice { get; set; }
         /// <summary>
         /// The volume traded during this candlestick
         /// </summary>
-        public abstract decimal BaseVolume { get; set; }
+        public abstract decimal Volume { get; set; }
         /// <summary>
         /// The close time of this candlestick
         /// </summary>
@@ -63,11 +63,11 @@ namespace Binance.Net.Objects.Shared
         /// </summary>
         public abstract decimal TakerBuyQuoteVolume { get; set; }
 
-        decimal ICommonKline.CommonHigh => High;
-        decimal ICommonKline.CommonLow => Low;
-        decimal ICommonKline.CommonOpen => Open;
-        decimal ICommonKline.CommonClose => Close;
-        decimal ICommonKline.CommonVolume => BaseVolume;
+        decimal ICommonKline.CommonHigh => HighPrice;
+        decimal ICommonKline.CommonLow => LowPrice;
+        decimal ICommonKline.CommonOpen => OpenPrice;
+        decimal ICommonKline.CommonClose => ClosePrice;
+        decimal ICommonKline.CommonVolume => Volume;
         DateTime ICommonKline.CommonOpenTime => OpenTime;
     }
 }

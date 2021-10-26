@@ -10,7 +10,7 @@ namespace Binance.Net.Objects.Spot.SubAccountData
         /// <summary>
         /// The transaction id
         /// </summary>
-        [JsonProperty("txId")]
+        [JsonProperty("txnId")]
         public string TransactionId { get; set; } = string.Empty;
     }
 }

@@ -68,7 +68,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         public bool Isolated { get; set; }
 
         /// <summary>
-        /// Position amount
+        /// Position quantity
         /// </summary>
         [JsonProperty("positionAmt")]
         public decimal Quantity { get; set; }
@@ -133,12 +133,18 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Mark price
         /// </summary>
         public decimal MarkPrice { get; set; }
-        
+
         /// <summary>
-        /// Position amount
+        /// Position quantity
         /// </summary>
         [JsonProperty("positionAmt")]
         public decimal Quantity { get; set; }
+
+        /// <summary>
+        /// Last update time
+        /// </summary>
+        [JsonConverter(typeof(TimestampConverter))]
+        public DateTime UpdateTime { get; set; }
     }
 
     /// <summary>
@@ -151,11 +157,6 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// </summary>
         [JsonProperty("maxNotionalValue")]
         public decimal MaxNotional { get; set; }
-        /// <summary>
-        /// Last update time
-        /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
-        public DateTime UpdateTime { get; set; }
     }
 
     /// <summary>

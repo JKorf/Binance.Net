@@ -68,13 +68,15 @@ namespace Binance.Net.Objects.Spot.MarketData
         [JsonProperty("quoteOrderQtyMarketAllowed")]
         public bool QuoteOrderQuantityMarketAllowed { get; set; }
         /// <summary>
-        /// The precision of the base asset commission
+        /// The precision of the base asset fee
         /// </summary>
-        public int BaseCommissionPrecision { get; set; }
+        [JsonProperty("baseCommissionPrecision")]
+        public int BaseFeePrecision { get; set; }
         /// <summary>
-        /// The precision of the quote asset commission
+        /// The precision of the quote asset fee
         /// </summary>
-        public int QuoteCommissionPrecision { get; set; }
+        [JsonProperty("quoteCommissionPrecision")]
+        public int QuoteFeePrecision { get; set; }
         /// <summary>
         /// Permissions types
         /// </summary>
@@ -111,7 +113,7 @@ namespace Binance.Net.Objects.Spot.MarketData
         [JsonIgnore]
         public BinanceSymbolMaxAlgorithmicOrdersFilter? MaxAlgorithmicOrdersFilter => Filters.OfType<BinanceSymbolMaxAlgorithmicOrdersFilter>().FirstOrDefault();
         /// <summary>
-        /// Filter for the minimal size of an order for this symbol
+        /// Filter for the minimal quote quantity of an order for this symbol
         /// </summary>
         [JsonIgnore]
         public BinanceSymbolMinNotionalFilter? MinNotionalFilter => Filters.OfType<BinanceSymbolMinNotionalFilter>().FirstOrDefault();

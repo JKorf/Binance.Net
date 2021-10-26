@@ -34,7 +34,8 @@ namespace Binance.Net.Objects.Spot.Mining
         /// Timestamp
         /// </summary>
         [JsonConverter(typeof(TimestampConverter))]
-        public DateTime Time { get; set; }
+        [JsonProperty("time")]
+        public DateTime Timestamp { get; set; }
         /// <summary>
         /// Hashrate
         /// </summary>

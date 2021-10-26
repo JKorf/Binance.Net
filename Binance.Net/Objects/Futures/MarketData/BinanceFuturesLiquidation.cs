@@ -59,6 +59,6 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// Forced time
         /// </summary>
         [JsonProperty("time"), JsonConverter(typeof(TimestampConverter))]
-        public DateTime Time { get; set; }
+        public DateTime Timestamp { get; set; }
     }
 }

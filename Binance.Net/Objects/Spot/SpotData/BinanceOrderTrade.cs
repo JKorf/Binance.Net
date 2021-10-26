@@ -10,7 +10,8 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// <summary>
         /// The id of the trade
         /// </summary>
-        public long TradeId { get; set; }
+        [JsonProperty("tradeId")]
+        public long Id { get; set; }
         /// <summary>
         /// Price of the trade
         /// </summary>
@@ -21,12 +22,14 @@ namespace Binance.Net.Objects.Spot.SpotData
         [JsonProperty("qty")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Commission paid over this trade
+        /// Fee paid over this trade
         /// </summary>
-        public decimal Commission { get; set; }
+        [JsonProperty("commission")]
+        public decimal Fee { get; set; }
         /// <summary>
-        /// The asset the commission is paid in
+        /// The asset the fee is paid in
         /// </summary>
-        public string CommissionAsset { get; set; } = string.Empty;
+        [JsonProperty("commissionAsset")]
+        public string FeeAsset { get; set; } = string.Empty;
     }
 }

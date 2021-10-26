@@ -9,6 +9,10 @@ namespace Binance.Net.Objects.Spot.SpotData
     /// </summary>
     public class BinanceCanceledOrder: BinanceOrderBase, ICommonOrderId
     {
-        string ICommonOrderId.CommonId => OrderId.ToString(CultureInfo.InvariantCulture);
+        string ICommonOrderId.CommonId => Id.ToString(CultureInfo.InvariantCulture);
+        /// <summary>
+        /// If isolated margin
+        /// </summary>
+        public bool? IsIsolated { get; set; }
     }
 }

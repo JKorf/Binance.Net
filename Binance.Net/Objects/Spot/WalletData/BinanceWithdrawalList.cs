@@ -18,13 +18,18 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// </summary>
         public string Id { get; set; } = string.Empty;
         /// <summary>
+        /// Withdraw order id
+        /// </summary>
+        public string? WithdrawOrderId { get; set; }
+        /// <summary>
         /// The time the withdrawal was applied for
         /// </summary>
         public DateTime ApplyTime { get; set; }
         /// <summary>
-        /// The amount of the withdrawal
+        /// The quantity of the withdrawal
         /// </summary>
-        public decimal Amount { get; set; }
+        [JsonProperty("amount")]
+        public decimal Quantity { get; set; }
         /// <summary>
         /// The address the asset was withdrawn to
         /// </summary>

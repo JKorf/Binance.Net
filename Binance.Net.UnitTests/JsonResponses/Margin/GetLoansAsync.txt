@@ -1,0 +1,13 @@
+{
+  "rows": [
+    {
+        "isolatedSymbol": "BNBUSDT", // isolated symbol, will not be returned for crossed margin
+        "txId": 12807067523,
+        "asset": "BNB",
+        "principal": "0.84624403",
+        "timestamp": 1555056425000,
+        "status": "CONFIRMED"   //one of PENDING (pending execution), CONFIRMED (successfully loaned), FAILED (execution failed, nothing happened to your account);
+    }
+  ],
+  "total": 1
+}

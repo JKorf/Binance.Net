@@ -30,25 +30,15 @@ namespace Binance.Net.SubClients.Futures.Coin
         /// </summary>
         protected override string Api { get; } = "dapi";
 
-        /// <summary>
-        /// Futures market endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientFuturesCoinMarket Market { get; protected set; }
-        /// <summary>
-        /// Futures order endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientFuturesCoinOrder Order { get; protected set; }
-        /// <summary>
-        /// Futures account endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientFuturesCoinAccount Account { get; protected set; }
-        /// <summary>
-        /// Coin futures system endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientFuturesCoinSystem System { get; protected set; }
-        /// <summary>
-        /// Coin futures user stream endpoints
-        /// </summary>
+        /// <inheritdoc />
         public override IBinanceClientUserStream UserStream { get; protected set; }
 
         internal BinanceClientFuturesCoin(Log log, BinanceClient baseClient) : base(log, baseClient)
@@ -62,14 +52,7 @@ namespace Binance.Net.SubClients.Futures.Coin
 
         #region Position Information
 
-        /// <summary>
-        /// Gets account position information
-        /// </summary>
-        /// <param name="marginAsset">Filter by margin asset</param>
-        /// <param name="pair">Filter by pair</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of Positions</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinancePositionDetailsCoin>>> GetPositionInformationAsync(string? marginAsset = null, string? pair = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);

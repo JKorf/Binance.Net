@@ -13,6 +13,15 @@ namespace Binance.Net.Interfaces.SubClients.Spot
     public interface IBinanceClientSpotMarket: IBinanceClientMarket
     {
         /// <summary>
+        /// Gets the order book for the provided symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to get the order book for</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The order book for the symbol</returns>
+        Task<WebCallResult<BinanceOrderBook>> GetOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Gets current average price for a symbol
         /// </summary>
         /// <param name="symbol">The symbol to get the data for</param>

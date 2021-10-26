@@ -10,7 +10,7 @@ namespace Binance.Net.Objects.Spot.MarginData
         /// <summary>
         /// The Transaction id as assigned by Binance
         /// </summary>
-        [JsonProperty("TranId")]
+        [JsonProperty("tranId")]
         public long TransactionId { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace Binance.Net.Objects.Spot.Mining
         /// <summary>
         /// Revenue items
         /// </summary>
-        public IEnumerable<BinanceOtherRevenueItem> AccountProfits { get; set; } = Array.Empty<BinanceOtherRevenueItem>();
+        public IEnumerable<BinanceOtherRevenueItem> OtherProfits { get; set; } = Array.Empty<BinanceOtherRevenueItem>();
     }
 
     /// <summary>
@@ -35,7 +35,8 @@ namespace Binance.Net.Objects.Spot.Mining
         /// Timestamp
         /// </summary>
         [JsonConverter(typeof(TimestampConverter))]
-        public DateTime Time { get; set; }
+        [JsonProperty("time")]
+        public DateTime Timestamp { get; set; }
         /// <summary>
         /// Coin
         /// </summary>
@@ -47,9 +48,10 @@ namespace Binance.Net.Objects.Spot.Mining
         [JsonConverter(typeof(BinanceEarningTypeConverter))]
         public BinanceEarningType Type { get; set; }
         /// <summary>
-        /// Profit amount
+        /// Profit quantity
         /// </summary>
-        public decimal ProfitAmount { get; set; }
+        [JsonProperty("profitAmount")]
+        public decimal ProfitQuantity { get; set; }
         /// <summary>
         /// Status
         /// </summary>

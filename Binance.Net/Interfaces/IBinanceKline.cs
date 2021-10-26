@@ -16,27 +16,27 @@ namespace Binance.Net.Interfaces
         /// <summary>
         /// The price at which this candlestick opened
         /// </summary>
-        decimal Open { get; set; }
+        decimal OpenPrice { get; set; }
 
         /// <summary>
         /// The highest price in this candlestick
         /// </summary>
-        decimal High { get; set; }
+        decimal HighPrice { get; set; }
 
         /// <summary>
         /// The lowest price in this candlestick
         /// </summary>
-        decimal Low { get; set; }
+        decimal LowPrice { get; set; }
 
         /// <summary>
         /// The price at which this candlestick closed
         /// </summary>
-        decimal Close { get; set; }
+        decimal ClosePrice { get; set; }
 
         /// <summary>
         /// The volume traded during this candlestick
         /// </summary>
-        decimal BaseVolume { get; set; }
+        decimal Volume { get; set; }
 
         /// <summary>
         /// The close time of this candlestick

@@ -48,22 +48,13 @@ namespace Binance.Net.SubClients.Margin
         private const string transferIsolatedMarginAccountEndpoint = "margin/isolated/transfer";
 
         private readonly BinanceClient _baseClient;
-        /// <summary>
-        /// Margin market endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientMarginMarket Market { get; }
-        /// <summary>
-        /// Margin order endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientMarginOrders Order { get; }
-        /// <summary>
-        /// Margin user stream endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientUserStream UserStream { get; }
-
-        /// <summary>
-        /// Isolated margin user stream endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientIsolatedMarginUserStream IsolatedUserStream { get; }
         
         internal BinanceClientMargin(Log log, BinanceClient baseClient)
@@ -77,16 +68,8 @@ namespace Binance.Net.SubClients.Margin
 
         #region Margin Account Transfer
 
-        /// <summary>
-        /// Execute transfer between spot account and margin account.
-        /// </summary>
-        /// <param name="asset">The asset being transferred, e.g., BTC</param>
-        /// <param name="amount">The amount to be transferred</param>
-        /// <param name="type">TransferDirection (MainToMargin/MarginToMain)</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Transaction Id</returns>
-        public async Task<WebCallResult<BinanceTransaction>> TransferAsync(string asset, decimal amount, TransferDirectionType type, int? receiveWindow = null, CancellationToken ct = default)
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceTransaction>> TransferAsync(string asset, decimal quantity, TransferDirectionType type, int? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -96,7 +79,7 @@ namespace Binance.Net.SubClients.Margin
             var parameters = new Dictionary<string, object>
             {
                 { "asset", asset },
-                { "amount", amount.ToString(CultureInfo.InvariantCulture) },
+                { "amount", quantity.ToString(CultureInfo.InvariantCulture) },
                 { "type", JsonConvert.SerializeObject(type, new TransferDirectionTypeConverter(false)) },
                 { "timestamp", _baseClient.GetTimestamp() }
             };
@@ -109,17 +92,8 @@ namespace Binance.Net.SubClients.Margin
 
         #region Margin Account Borrow
 
-        /// <summary>
-        /// Borrow. Apply for a loan. 
-        /// </summary>
-        /// <param name="asset">The asset being borrow, e.g., BTC</param>
-        /// <param name="amount">The amount to be borrow</param>
-        /// <param name="isIsolated">For isolated margin or not</param>
-        /// <param name="symbol">The isolated symbol</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Transaction Id</returns>
-        public async Task<WebCallResult<BinanceTransaction>> BorrowAsync(string asset, decimal amount, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceTransaction>> BorrowAsync(string asset, decimal quantity, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             if(isIsolated == true && symbol == null)
@@ -132,7 +106,7 @@ namespace Binance.Net.SubClients.Margin
             var parameters = new Dictionary<string, object>
             {
                 { "asset", asset },
-                { "amount", amount.ToString(CultureInfo.InvariantCulture) },
+                { "amount", quantity.ToString(CultureInfo.InvariantCulture) },
                 { "timestamp", _baseClient.GetTimestamp() }
             };
             parameters.AddOptionalParameter("isIsolated", isIsolated?.ToString().ToLower());
@@ -146,17 +120,8 @@ namespace Binance.Net.SubClients.Margin
 
         #region Margin Account Repay
 
-        /// <summary>
-        /// Repay loan for margin account.
-        /// </summary>
-        /// <param name="asset">The asset being repay, e.g., BTC</param>
-        /// <param name="amount">The amount to be borrow</param>
-        /// <param name="isIsolated">For isolated margin or not</param>
-        /// <param name="symbol">The isolated symbol</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Transaction Id</returns>
-        public async Task<WebCallResult<BinanceTransaction>> RepayAsync(string asset, decimal amount, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceTransaction>> RepayAsync(string asset, decimal quantity, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -166,7 +131,7 @@ namespace Binance.Net.SubClients.Margin
             var parameters = new Dictionary<string, object>
             {
                 { "asset", asset },
-                { "amount", amount.ToString(CultureInfo.InvariantCulture) },
+                { "amount", quantity.ToString(CultureInfo.InvariantCulture) },
                 { "timestamp", _baseClient.GetTimestamp() }
             };
             parameters.AddOptionalParameter("isIsolated", isIsolated?.ToString().ToLower());
@@ -180,17 +145,7 @@ namespace Binance.Net.SubClients.Margin
 
         #region Get Transfer History
 
-        /// <summary>
-        /// Get history of transfers
-        /// </summary>
-        /// <param name="direction">The direction of the the transfers to retrieve</param>
-        /// <param name="page">Results page</param>
-        /// <param name="startTime">Filter by startTime from</param>
-        /// <param name="endTime">Filter by endTime from</param>
-        /// <param name="limit">Limit of the amount of results</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of transfers</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceQueryRecords<BinanceTransferHistory>>> GetTransferHistoryAsync(TransferDirection direction, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 100);
@@ -217,20 +172,7 @@ namespace Binance.Net.SubClients.Margin
 
         #region Query Loan Record
 
-        /// <summary>
-        /// Query loan records
-        /// </summary>
-        /// <param name="asset">The records asset</param>
-        /// <param name="transactionId">The id of loan transaction</param>
-        /// <param name="startTime">Time to start getting records from</param>
-        /// <param name="endTime">Time to stop getting records to</param>
-        /// <param name="current">Number of page records</param>
-        /// <param name="isolatedSymbol">Filter by isolated symbol</param>
-        /// <param name="limit">The records count size need show</param>
-        /// <param name="archived">Set to true for archived data from 6 months ago</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Loan records</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceQueryRecords<BinanceLoan>>> GetLoansAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? limit = 10, string? isolatedSymbol = null, bool? archived = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
@@ -269,20 +211,7 @@ namespace Binance.Net.SubClients.Margin
 
         #region Query Repay Record
 
-        /// <summary>
-        /// Query repay records
-        /// </summary>
-        /// <param name="asset">The records asset</param>
-        /// <param name="transactionId">The id of repay transaction</param>
-        /// <param name="startTime">Time to start getting records from</param>
-        /// <param name="endTime">Time to stop getting records to</param>
-        /// <param name="current">Filter by number</param>
-        /// <param name="isolatedSymbol">Filter by isolated symbol</param>
-        /// <param name="size">The records count size need show</param>
-        /// <param name="archived">Set to true for archived data from 6 months ago</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Repay records</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceQueryRecords<BinanceRepay>>> GetRepaysAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, string? isolatedSymbol = null, bool? archived = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
@@ -321,19 +250,7 @@ namespace Binance.Net.SubClients.Margin
 
         #region Get Interest History
 
-        /// <summary>
-        /// Get history of interest
-        /// </summary>
-        /// <param name="asset">Filter by asset</param>
-        /// <param name="page">Results page</param>
-        /// <param name="startTime">Filter by startTime from</param>
-        /// <param name="endTime">Filter by endTime from</param>
-        /// <param name="isolatedSymbol">Filter by isolated symbol</param>
-        /// <param name="limit">Limit of the amount of results</param>
-        /// <param name="archived">Set to true for archived data from 6 months ago</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of interest events</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceQueryRecords<BinanceInterestHistory>>> GetInterestHistoryAsync(string? asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? isolatedSymbol = null, bool? archived = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 100);
@@ -361,17 +278,7 @@ namespace Binance.Net.SubClients.Margin
 
         #region Get Interest Rate History
 
-        /// <summary>
-        /// Get history of interest rate
-        /// </summary>
-        /// <param name="asset">Filter by asset</param>
-        /// <param name="vipLevel">Vip level</param>
-        /// <param name="startTime">Filter by startTime from</param>
-        /// <param name="endTime">Filter by endTime from</param>
-        /// <param name="limit">Limit of the amount of results</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of interest rate</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceInterestRateHistory>>> GetInterestRateHistoryAsync(string asset, string? vipLevel = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             asset?.ValidateNotNull(nameof(asset));
@@ -398,17 +305,7 @@ namespace Binance.Net.SubClients.Margin
         #endregion
 
         #region Get Force Liquidation Record
-        /// <summary>
-        /// Get history of forced liquidations
-        /// </summary>
-        /// <param name="page">Results page</param>
-        /// <param name="startTime">Filter by startTime from</param>
-        /// <param name="endTime">Filter by endTime from</param>
-        /// <param name="isolatedSymbol">Filter by isolated symbol</param>
-        /// <param name="limit">Limit of the amount of results</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of forced liquidations</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceQueryRecords<BinanceForcedLiquidation>>> GetForceLiquidationHistoryAsync(int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 100);
@@ -434,12 +331,7 @@ namespace Binance.Net.SubClients.Margin
 
         #region Query Margin Account Details
 
-        /// <summary>
-        /// Query margin account details
-        /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The margin account information</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceMarginAccount>> GetMarginAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -459,14 +351,7 @@ namespace Binance.Net.SubClients.Margin
 
         #region Query Max Borrow
 
-        /// <summary>
-        /// Query max borrow amount
-        /// </summary>
-        /// <param name="asset">The records asset</param>
-        /// <param name="isolatedSymbol">The isolated symbol</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Return max amount</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceMarginAmount>> GetMaxBorrowAmountAsync(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
@@ -490,14 +375,7 @@ namespace Binance.Net.SubClients.Margin
 
         #region Query Max Transfer-Out Amount
 
-        /// <summary>
-        /// Query max transfer-out amount 
-        /// </summary>
-        /// <param name="asset">The records asset</param>
-        /// <param name="isolatedSymbol">The isolated symbol</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Return max amount</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<decimal>> GetMaxTransferAmountAsync(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
@@ -519,25 +397,12 @@ namespace Binance.Net.SubClients.Margin
             if (!result)
                 return new WebCallResult<decimal>(result.ResponseStatusCode, result.ResponseHeaders, 0, result.Error);
 
-            return result.As(result.Data.Amount);
+            return result.As(result.Data.Quantity);
         }
 
         #endregion
 
-        /// <summary>
-        /// Get history of transfer to and from the isolated margin account
-        /// </summary>
-        /// <param name="symbol">The symbol</param>
-        /// <param name="asset">Filter by asset</param>
-        /// <param name="from">Filter by direction</param>
-        /// <param name="to">Filter by direction</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="current">Current page</param>
-        /// <param name="limit">Page size</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceQueryRecords<BinanceIsolatedMarginTransfer>>>
             GetIsolatedMarginAccountTransferHistoryAsync(string symbol, string? asset = null,
                 IsolatedMarginTransferDirection? from = null, IsolatedMarginTransferDirection? to = null,
@@ -586,12 +451,7 @@ namespace Binance.Net.SubClients.Margin
                     parameters, true).ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Isolated margin account info
-        /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceIsolatedMarginAccount>> GetIsolatedMarginAccountAsync(
             int? receiveWindow = null, CancellationToken ct = default)
         {
@@ -615,13 +475,7 @@ namespace Binance.Net.SubClients.Margin
                     parameters, true).ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Disabled an isolated margin account
-        /// </summary>
-        /// <param name="symbol">Symbol to enable isoldated margin account for</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<CreateIsolatedMarginAccountResult>> DisableIsolatedMarginAccountAsync(string symbol,
             int? receiveWindow = null, CancellationToken ct = default)
         {
@@ -646,13 +500,7 @@ namespace Binance.Net.SubClients.Margin
                     parameters, true).ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Enable an isolated margin account
-        /// </summary>
-        /// <param name="symbol">Symbol to enable isoldated margin account for</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<CreateIsolatedMarginAccountResult>> EnableIsolatedMarginAccountAsync(string symbol,
             int? receiveWindow = null, CancellationToken ct = default)
         {
@@ -677,12 +525,7 @@ namespace Binance.Net.SubClients.Margin
                     parameters, true).ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Get max number of enabled isolated margin accounts
-        /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IsolatedMarginAccountLimit>> GetEnabledIsolatedMarginAccountLimitAsync(
             int? receiveWindow = null, CancellationToken ct = default)
         {
@@ -706,19 +549,9 @@ namespace Binance.Net.SubClients.Margin
                     parameters, true).ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Transfer from or to isolated margin account
-        /// </summary>
-        /// <param name="asset">The asset</param>
-        /// <param name="symbol">Isolated symbol</param>
-        /// <param name="from">From</param>
-        /// <param name="to">To</param>
-        /// <param name="amount">Amount to transfer</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceTransaction>> IsolatedMarginAccountTransferAsync(string asset,
-            string symbol, IsolatedMarginTransferDirection from, IsolatedMarginTransferDirection to, decimal amount,
+            string symbol, IsolatedMarginTransferDirection from, IsolatedMarginTransferDirection to, decimal quantity,
             int? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
@@ -735,7 +568,7 @@ namespace Binance.Net.SubClients.Margin
                 {"symbol", symbol},
                 {"transFrom", JsonConvert.SerializeObject(from, new IsolatedMarginTransferDirectionConverter(false))},
                 {"transTo", JsonConvert.SerializeObject(to, new IsolatedMarginTransferDirectionConverter(false))},
-                {"amount", amount.ToString(CultureInfo.InvariantCulture)},
+                {"amount", quantity.ToString(CultureInfo.InvariantCulture)},
                 {"timestamp", _baseClient.GetTimestamp()}
             };
             parameters.AddOptionalParameter("recvWindow",

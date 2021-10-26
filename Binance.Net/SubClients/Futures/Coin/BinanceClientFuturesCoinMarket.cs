@@ -27,7 +27,6 @@ namespace Binance.Net.SubClients.Futures.Coin
         private const string markPriceEndpoint = "premiumIndex";
         private const string continuousContractKlineEndpoint = "continuousKlines";
         private const string indexPriceKlineEndpoint = "indexPriceKlines";
-        private const string markPriceKlineEndpoint = "markPriceKlines";
         private const string price24HEndpoint = "ticker/24hr";
         private const string allPricesEndpoint = "ticker/price";
         private const string bookPricesEndpoint = "ticker/bookTicker";
@@ -46,13 +45,7 @@ namespace Binance.Net.SubClients.Futures.Coin
 
         internal BinanceClientFuturesCoinMarket(BinanceClient baseClient, BinanceClientFutures futuresClient) : base(baseClient, futuresClient) { }
 
-        /// <summary>
-        /// Gets the recent trades for a symbol
-        /// </summary>
-        /// <param name="symbol">The symbol to get recent trades for</param>
-        /// <param name="limit">Result limit</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of recent trades</returns>
+        /// <inheritdoc />
         public override async Task<WebCallResult<IEnumerable<IBinanceRecentTrade>>> GetRecentTradeHistoryAsync(string symbol, int? limit = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);
@@ -63,14 +56,7 @@ namespace Binance.Net.SubClients.Futures.Coin
             return result.As<IEnumerable<IBinanceRecentTrade>>(result.Data);
         }
 
-        /// <summary>
-        /// Gets the historical  trades for a symbol
-        /// </summary>
-        /// <param name="symbol">The symbol to get recent trades for</param>
-        /// <param name="limit">Result limit</param>
-        /// <param name="fromId">From which trade id on results should be retrieved</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of recent trades</returns>
+        /// <inheritdoc />
         public override async Task<WebCallResult<IEnumerable<IBinanceRecentTrade>>> GetTradeHistoryAsync(string symbol, int? limit = null, long? fromId = null,
             CancellationToken ct = default)
         {
@@ -85,13 +71,7 @@ namespace Binance.Net.SubClients.Futures.Coin
 
         #region Mark Price
 
-        /// <summary>
-        /// Get Mark Price and Funding Rate for the provided symbol
-        /// </summary>
-        /// <param name="symbol">The symbol to get the data for</param>
-        /// <param name="pair">Filter by pair</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceFuturesCoinMarkPrice>>> GetMarkPricesAsync(string? symbol = null, string? pair = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
@@ -105,16 +85,7 @@ namespace Binance.Net.SubClients.Futures.Coin
 
         #region Kline/Candlestick Data
 
-        /// <summary>
-        /// Get candlestick data for the provided symbol
-        /// </summary>
-        /// <param name="symbol">The symbol to get the data for</param>
-        /// <param name="interval">The candlestick timespan</param>
-        /// <param name="startTime">Start time to get candlestick data</param>
-        /// <param name="endTime">End time to get candlestick data</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The candlestick data for the provided symbol</returns>
+        /// <inheritdoc />
         public override async Task<WebCallResult<IEnumerable<IBinanceKline>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 1500);
@@ -134,17 +105,7 @@ namespace Binance.Net.SubClients.Futures.Coin
 
         #region Continuous contract Kline Data
 
-        /// <summary>
-        /// Get candlestick data for the provided pair
-        /// </summary>
-        /// <param name="pair">The symbol to get the data for</param>
-        /// <param name="contractType">The contract type</param>
-        /// <param name="interval">The candlestick timespan</param>
-        /// <param name="startTime">Start time to get candlestick data</param>
-        /// <param name="endTime">End time to get candlestick data</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The candlestick data for the provided symbol</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<IBinanceKline>>> GetContinuousContractKlinesAsync(string pair, ContractType contractType, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);
@@ -165,16 +126,7 @@ namespace Binance.Net.SubClients.Futures.Coin
 
         #region Index price Kline Data
 
-        /// <summary>
-        /// Get candlestick data for the provided pair
-        /// </summary>
-        /// <param name="pair">The symbol to get the data for</param>
-        /// <param name="interval">The candlestick timespan</param>
-        /// <param name="startTime">Start time to get candlestick data</param>
-        /// <param name="endTime">End time to get candlestick data</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The candlestick data for the provided symbol</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceMarkIndexKline>>> GetIndexPriceKlinesAsync(string pair, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);
@@ -191,42 +143,8 @@ namespace Binance.Net.SubClients.Futures.Coin
 
         #endregion
 
-        #region Mark price Kline Data
-
-        /// <summary>
-        /// Get candlestick data for the provided pair
-        /// </summary>
-        /// <param name="symbol">The symbol to get the data for</param>
-        /// <param name="interval">The candlestick timespan</param>
-        /// <param name="startTime">Start time to get candlestick data</param>
-        /// <param name="endTime">End time to get candlestick data</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The candlestick data for the provided symbol</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceMarkIndexKline>>> GetMarkPriceKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
-        {
-            limit?.ValidateIntBetween(nameof(limit), 1, 1000);
-            var parameters = new Dictionary<string, object> {
-                { "symbol", symbol },
-                { "interval", JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)) }
-            };
-            parameters.AddOptionalParameter("startTime", startTime != null ? BinanceClient.ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
-            parameters.AddOptionalParameter("endTime", endTime != null ? BinanceClient.ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
-            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
-
-            return await BaseClient.SendRequestInternal<IEnumerable<BinanceMarkIndexKline>>(FuturesClient.GetUrl(markPriceKlineEndpoint, Api, publicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
-        }
-
-        #endregion
-
         #region 24h statistics
-        /// <summary>
-        /// Get data regarding the last 24 hours change
-        /// </summary>
-        /// <param name="symbol">The symbol to get the data for</param>
-        /// <param name="pair">Filter by pair</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Data over the last 24 hours</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<IBinance24HPrice>>> GetTickersAsync(string? symbol = null, string? pair = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
@@ -242,13 +160,7 @@ namespace Binance.Net.SubClients.Futures.Coin
 
         #region Symbol Order Book Ticker
 
-        /// <summary>
-        /// Gets the best price/quantity on the order book for a symbol.
-        /// </summary>
-        /// <param name="symbol">Symbol to get book price for</param>
-        /// <param name="pair">Filter by pair</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of book prices</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceFuturesBookPrice>>> GetBookPricesAsync(string? symbol = null, string? pair = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
@@ -262,15 +174,10 @@ namespace Binance.Net.SubClients.Futures.Coin
         }
 
         #endregion
-               
+
         #region Open Interest
 
-        /// <summary>
-        /// Get present open interest of a specific symbol.
-        /// </summary>
-        /// <param name="symbol">The symbol to get the data for</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Open Interest info</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceFuturesCoinOpenInterest>> GetOpenInterestAsync(string symbol, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
@@ -282,20 +189,10 @@ namespace Binance.Net.SubClients.Futures.Coin
         }
 
         #endregion
-        
+
         #region Open Interest History
 
-        /// <summary>
-        /// Gets Open Interest History
-        /// </summary>
-        /// <param name="pair">The pair to get the data for</param>
-        /// <param name="contractType">The contract type</param>
-        /// <param name="period">The period timespan</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="startTime">Start time to get open interest history</param>
-        /// <param name="endTime">End time to get open interest history</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Open Interest History info</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceFuturesCoinOpenInterestHistory>>> GetOpenInterestHistoryAsync(string pair, ContractType contractType, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 500);
@@ -317,17 +214,7 @@ namespace Binance.Net.SubClients.Futures.Coin
 
         #region Taker Buy/Sell Volume Ratio
 
-        /// <summary>
-        /// Gets Taker Buy/Sell Volume Ratio
-        /// </summary>
-        /// <param name="pair">The pair to get the data for</param>
-        /// <param name="contractType">The contract type</param>
-        /// <param name="period">The period timespan</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="startTime">Start time to get taker buy/sell volume ratio</param>
-        /// <param name="endTime">End time to get taker buy/sell volume ratio</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Taker Buy/Sell Volume Ratio info</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceFuturesCoinBuySellVolumeRatio>>> GetTakerBuySellVolumeRatioAsync(string pair, ContractType contractType, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 500);
@@ -349,17 +236,7 @@ namespace Binance.Net.SubClients.Futures.Coin
 
         #region Taker Buy/Sell Volume Ratio
 
-        /// <summary>
-        /// Gets basis
-        /// </summary>
-        /// <param name="pair">The pair to get the data for</param>
-        /// <param name="contractType">The contract type</param>
-        /// <param name="period">The period timespan</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="startTime">Start time</param>
-        /// <param name="endTime">End time</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Basis</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceFuturesBasis>>> GetBasisAsync(string pair, ContractType contractType, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 500);
@@ -380,13 +257,7 @@ namespace Binance.Net.SubClients.Futures.Coin
         #endregion
 
         #region Price
-        /// <summary>
-        /// Get a list of the prices of all symbols
-        /// </summary>
-        /// <param name="symbol">Retrieve for a symbol</param>
-        /// <param name="pair">Retrieve prices for a specific pair</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of prices</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceFuturesCoinPrice>>> GetPricesAsync(string? symbol = null, string? pair = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();

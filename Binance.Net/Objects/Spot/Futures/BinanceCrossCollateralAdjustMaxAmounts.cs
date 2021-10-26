@@ -1,17 +1,21 @@
-﻿namespace Binance.Net.Objects.Spot.Futures
+﻿using Newtonsoft.Json;
+
+namespace Binance.Net.Objects.Spot.Futures
 {
     /// <summary>
-    /// Max amounts
+    /// Max quantities
     /// </summary>
     public class BinanceCrossCollateralAdjustMaxAmounts
     {
         /// <summary>
         /// The max in amount
         /// </summary>
-        public decimal MaxInAmount { get; set; }
+        [JsonProperty("maxInAmount")]
+        public decimal MaxInQuantity { get; set; }
         /// <summary>
         /// The max out amount
         /// </summary>
-        public decimal MaxOutAmount { get; set; }
+        [JsonProperty("maxOutAmount")]
+        public decimal MaxOutQuantity { get; set; }
     }
 }

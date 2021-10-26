@@ -1,0 +1,42 @@
+ [
+      {
+          "assetFullName": "USD coin",
+          "assetName": "USDC",
+          "isBorrowable": true,
+          "isMortgageable": true,
+          "userMinBorrow": "0.00000000",
+          "userMinRepay": "0.00000000"
+      },
+      {
+          "assetFullName": "BNB-coin",
+          "assetName": "BNB",
+          "isBorrowable": true,
+          "isMortgageable": true,
+          "userMinBorrow": "1.00000000",
+          "userMinRepay": "0.00000000"
+      },
+      {
+          "assetFullName": "Tether",
+          "assetName": "USDT",
+          "isBorrowable": true,
+          "isMortgageable": true,
+          "userMinBorrow": "1.00000000",
+          "userMinRepay": "0.00000000"
+      },
+      {
+          "assetFullName": "etherum",
+          "assetName": "ETH",
+          "isBorrowable": true,
+          "isMortgageable": true,
+          "userMinBorrow": "0.00000000",
+          "userMinRepay": "0.00000000"
+      },
+      {
+          "assetFullName": "Bitcoin",
+          "assetName": "BTC",
+          "isBorrowable": true,
+          "isMortgageable": true,
+          "userMinBorrow": "0.00000000",
+          "userMinRepay": "0.00000000"
+      }
+  ]

@@ -17,13 +17,15 @@ namespace Binance.Net.Objects.Spot.WalletData
         [JsonConverter(typeof(TimestampConverter))]
         public DateTime InsertTime { get; set; }
         /// <summary>
-        /// The amount deposited
+        /// The quantity deposited
         /// </summary>
-        public decimal Amount { get; set; }
+        [JsonProperty("amount")]
+        public decimal Quantity { get; set; }
         /// <summary>
-        /// The coin deposited
+        /// The asset deposited
         /// </summary>
-        public string Coin { get; set; } = string.Empty;
+        [JsonProperty("coin")]
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// The address of the deposit
         /// </summary>
@@ -31,7 +33,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// <summary>
         /// The tag of the address of the deposit
         /// </summary>
-        public string Tag { get; set; } = string.Empty;
+        public string AddressTag { get; set; } = string.Empty;
         /// <summary>
         /// The network
         /// </summary>
@@ -40,7 +42,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// The transaction id
         /// </summary>
         [JsonProperty("txId")]
-        public string TransactionId { get; set; } = string.Empty;
+        public string Id { get; set; } = string.Empty;
         /// <summary>
         /// The status of the deposit
         /// </summary>

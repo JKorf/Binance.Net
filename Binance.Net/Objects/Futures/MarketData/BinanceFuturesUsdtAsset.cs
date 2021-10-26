@@ -16,6 +16,6 @@
         /// <summary>
         /// Auto-exchange threshold in Multi-Assets margin mode
         /// </summary>
-        public decimal AutoAssetExchange { get; set; }
+        public decimal? AutoAssetExchange { get; set; }
     }
 }

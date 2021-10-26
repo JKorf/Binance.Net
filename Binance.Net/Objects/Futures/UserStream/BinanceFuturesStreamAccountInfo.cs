@@ -59,12 +59,12 @@ namespace Binance.Net.Objects.Futures.UserStream
         [JsonProperty("a")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// The amount that isn't locked in a trade
+        /// The quantity that isn't locked in a trade
         /// </summary>
         [JsonProperty("wb")]
         public decimal WalletBalance { get; set; }
         /// <summary>
-        /// The amount that is locked in a trade
+        /// The quantity that is locked in a trade
         /// </summary>
         [JsonProperty("cw")]
         public decimal CrossWalletBalance { get; set; }
@@ -81,7 +81,7 @@ namespace Binance.Net.Objects.Futures.UserStream
         [JsonProperty("s")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// The amount of the position
+        /// The quantity of the position
         /// </summary>
         [JsonProperty("pa")]
         public decimal Quantity { get; set; }

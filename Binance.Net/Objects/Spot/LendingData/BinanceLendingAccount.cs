@@ -10,20 +10,24 @@ namespace Binance.Net.Objects.Spot.LendingData
     public class BinanceLendingAccount
     {
         /// <summary>
-        /// Total amount in btc
+        /// Total quantity in btc
         /// </summary>
-        public decimal TotalAmountInBTC { get; set; }
+        [JsonProperty("totalAmountInBTC")]
+        public decimal TotalQuantityInBTC { get; set; }
         /// <summary>
-        /// Total amount in usdt
+        /// Total quantity in usdt
         /// </summary>
-        public decimal TotalAmountInUSDT { get; set; }
+        [JsonProperty("totalAmountInUSDT")]
+        public decimal TotalQuantityInUSDT { get; set; }
         /// <summary>
-        /// Total fixed amount in btc
+        /// Total fixed quantity in btc
         /// </summary>
-        public decimal TotalFixedAmountInBTC { get; set; }
+        [JsonProperty("totalFixedAmountInBTC")]
+        public decimal TotalFixedQuantityInBTC { get; set; }
         /// <summary>
-        /// Total fixed amount in usdt
+        /// Total fixed quantity in usdt
         /// </summary>
+        [JsonProperty("totalFixedQuantityInUSDT")]
         public decimal TotalFixedAmountInUSDT { get; set; }
         /// <summary>
         /// Total flexible in btc
@@ -49,15 +53,18 @@ namespace Binance.Net.Objects.Spot.LendingData
         /// <summary>
         /// Amount of the asset
         /// </summary>
-        public decimal Amount { get; set; }
+        [JsonProperty("amount")]
+        public decimal Quantity { get; set; }
         /// <summary>
         /// Amount in btc
         /// </summary>
-        public decimal AmountInBTC { get; set; }
+        [JsonProperty("amountInBTC")]
+        public decimal QuantityInBTC { get; set; }
         /// <summary>
         /// Amount in usdt
         /// </summary>
-        public decimal AmountInUSDT { get; set; }
+        [JsonProperty("amountInUSDT")]
+        public decimal QuantityInUSDT { get; set; }
         /// <summary>
         /// Asset name
         /// </summary>

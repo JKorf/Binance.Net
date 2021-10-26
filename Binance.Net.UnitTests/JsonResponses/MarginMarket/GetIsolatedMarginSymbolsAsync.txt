@@ -1,0 +1,18 @@
+[
+    {
+        "base": "BNB",
+        "isBuyAllowed": true,
+        "isMarginTrade": true,
+        "isSellAllowed": true,
+        "quote": "BTC",
+        "symbol": "BNBBTC"     
+    },
+    {
+        "base": "TRX",
+        "isBuyAllowed": true,
+        "isMarginTrade": true,
+        "isSellAllowed": true,
+        "quote": "BTC",
+        "symbol": "TRXBTC"    
+    }
+]

@@ -21,22 +21,24 @@ namespace Binance.Net.Objects.Spot.SpotData
         public new DateTime CreateTime { get; set; }
         
         /// <summary>
-        /// Fills for the order
+        /// Trades for the order
         /// </summary>
         [JsonOptionalProperty]
-        public IEnumerable<BinanceOrderTrade>? Fills { get; set; }
-        
+        [JsonProperty("fills")]
+        public IEnumerable<BinanceOrderTrade>? Trades { get; set; }
+
         /// <summary>
         /// Only present if a margin trade happened
         /// </summary>
         [JsonOptionalProperty]
-        public decimal? MarginBuyBorrowAmount { get; set; }
+        [JsonProperty("marginBuyBorrowAmount")]
+        public decimal? MarginBuyBorrowQuantity { get; set; }
         /// <summary>
         /// Only present if a margin trade happened
         /// </summary>
         [JsonOptionalProperty]
-        public string? MarginBuyBorrowAsset { get; set; }
+        public string? MarginBuyBorrowAsset { get; set; }        
         
-        string ICommonOrderId.CommonId => OrderId.ToString();
+        string ICommonOrderId.CommonId => Id.ToString();
     }
 }

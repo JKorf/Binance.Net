@@ -29,12 +29,7 @@ namespace Binance.Net.SubClients.Futures.Usdt
 
         #region Account Information
 
-        /// <summary>
-        /// Gets account information, including balances
-        /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The account information</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceFuturesAccountInfo>> GetAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -54,13 +49,8 @@ namespace Binance.Net.SubClients.Futures.Usdt
 
         #region Future Account Balance
 
-        /// <summary>.
-        /// Gets account balances
-        /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The account information</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceFuturesAccountBalance>>> GetBalanceAsync(long? receiveWindow = null, CancellationToken ct = default)
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesAccountBalance>>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
@@ -79,12 +69,7 @@ namespace Binance.Net.SubClients.Futures.Usdt
 
         #region Multi assets mode
 
-        /// <summary>.
-        /// Get user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on Every symbol
-        /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Multi asset mode</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceFuturesMultiAssetMode>> GetMultiAssetsModeAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -100,13 +85,7 @@ namespace Binance.Net.SubClients.Futures.Usdt
             return await BaseClient.SendRequestInternal<BinanceFuturesMultiAssetMode>(FuturesClient.GetUrl(futuresAccountMultiAssetsModeEndpoint, Api, "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
-        /// <summary>.
-        /// Set user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on Every symbol
-        /// </summary>
-        /// <param name="enabled">Enabled or not</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Succes</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceResult>> SetMultiAssetsModeAsync(bool enabled, long? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);

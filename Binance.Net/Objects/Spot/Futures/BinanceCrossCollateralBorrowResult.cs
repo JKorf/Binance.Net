@@ -14,21 +14,25 @@ namespace Binance.Net.Objects.Spot.Futures
         /// </summary>
         public string BorrowId { get; set; } = string.Empty;
         /// <summary>
-        /// The coin borrowed
+        /// The asset borrowed
         /// </summary>
-        public string Coin { get; set; } = string.Empty;
+        [JsonProperty("coin")]
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// The coin used for collateral
+        /// The asset used for collateral
         /// </summary>
-        public string CollateralCoin { get; set; } = string.Empty;
+        [JsonProperty("collateralCoin")]
+        public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
-        /// The amount borrowed
+        /// The quantity borrowed
         /// </summary>
-        public decimal Amount { get; set; }
+        [JsonProperty("amount")]
+        public decimal Quantity { get; set; }
         /// <summary>
-        /// The collateral amount
+        /// The collateral quantity
         /// </summary>
-        public decimal CollateralAmount { get; set; }
+        [JsonProperty("collateralAmount")]
+        public decimal CollateralQuantity { get; set; }
         /// <summary>
         /// The timestamp
         /// </summary>

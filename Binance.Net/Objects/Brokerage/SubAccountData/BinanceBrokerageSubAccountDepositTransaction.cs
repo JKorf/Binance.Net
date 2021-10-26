@@ -25,20 +25,22 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         public string AddressTag { get; set; } = string.Empty;
         
         /// <summary>
-        /// Amount
+        /// Quantity
         /// </summary>
-        public decimal Amount { get; set; }
+        [JsonProperty("amount")]
+        public decimal Quantity { get; set; }
         
         /// <summary>
-        /// Coin
+        /// Asset
         /// </summary>
-        public string Coin { get; set; } = string.Empty;
+        [JsonProperty("coin")]
+        public string Asset { get; set; } = string.Empty;
         
         /// <summary>
         /// Date
         /// </summary>
         [JsonProperty("insertTime"), JsonConverter(typeof(TimestampConverter))]
-        public DateTime Date { get; set; }
+        public DateTime Timestamp { get; set; }
         
         /// <summary>
         /// Network

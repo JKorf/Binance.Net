@@ -36,9 +36,10 @@ namespace Binance.Net.Objects.Futures.FuturesData
         public int FeeTier { get; set; }
 
         /// <summary>
-        /// Maximum withdraw amount
+        /// Maximum withdraw quantity
         /// </summary>
-        public decimal MaxWithdrawAmount { get; set; }
+        [JsonProperty("maxWithdrawAmount")]
+        public decimal MaxWithdrawQuantity { get; set; }
 
         /// <summary>
         /// Information about an account positions

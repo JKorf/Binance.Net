@@ -14,7 +14,7 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// The id of this aggregation
         /// </summary>
         [JsonProperty("a")]
-        public long AggregateTradeId { get; set; }
+        public long Id { get; set; }
         /// <summary>
         /// The price of trades in this aggregation
         /// </summary>

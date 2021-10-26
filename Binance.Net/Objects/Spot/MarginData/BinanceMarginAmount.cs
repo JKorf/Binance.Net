@@ -1,14 +1,17 @@
-﻿namespace Binance.Net.Objects.Spot.MarginData
+﻿using Newtonsoft.Json;
+
+namespace Binance.Net.Objects.Spot.MarginData
 {
     /// <summary>
-    /// The result amount of getting maxBorrowable or maxTransferable 
+    /// The result quantity of getting maxBorrowable or maxTransferable 
     /// </summary>
     public class BinanceMarginAmount
     {
         /// <summary>
-        /// The amount
+        /// The quantity
         /// </summary>
-        public decimal Amount { get; set; }
+        [JsonProperty("amount")]
+        public decimal Quantity { get; set; }
 
         /// <summary>
         /// The borrow limit

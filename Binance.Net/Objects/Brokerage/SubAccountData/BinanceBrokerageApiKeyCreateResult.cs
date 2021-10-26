@@ -20,7 +20,7 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         /// <summary>
         /// Api Secret
         /// </summary>
-        [JsonProperty("secretkey")]
+        [JsonProperty("secretKey")]
         public string ApiSecret { get; set; } = string.Empty;
         
         /// <summary>

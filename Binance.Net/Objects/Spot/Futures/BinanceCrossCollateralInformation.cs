@@ -1,4 +1,6 @@
-﻿namespace Binance.Net.Objects.Spot.Futures
+﻿using Newtonsoft.Json;
+
+namespace Binance.Net.Objects.Spot.Futures
 {
     /// <summary>
     /// Collateral info
@@ -6,13 +8,15 @@
     public class BinanceCrossCollateralInformation
     {
         /// <summary>
-        /// The loan coin
+        /// The loan asset
         /// </summary>
-        public string LoanCoin { get; set; } = string.Empty;
+        [JsonProperty("loanCoin")]
+        public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
-        /// The collateral coin
+        /// The collateral asset
         /// </summary>
-        public string CollateralCoin { get; set; } = string.Empty;
+        [JsonProperty("collateralCoin")]
+        public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
         /// Rate
         /// </summary>
@@ -29,5 +33,13 @@
         /// Current collateral rate
         /// </summary>
         public decimal CurrentCollateralRate { get; set; }
+        /// <summary>
+        /// Interest rate
+        /// </summary>
+        public decimal InterestRate { get; set; }
+        /// <summary>
+        /// In days
+        /// </summary>
+        public int InterestGracePeriod { get; set; }
     }
 }

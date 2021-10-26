@@ -8,10 +8,6 @@ namespace Binance.Net.Interfaces
     public interface IBinanceTrade
     {
         /// <summary>
-        /// The order id the trade belongs to
-        /// </summary>
-        long OrderId { get; set; }
-        /// <summary>
         /// The symbol the trade is for
         /// </summary>
         string Symbol { get; set; }

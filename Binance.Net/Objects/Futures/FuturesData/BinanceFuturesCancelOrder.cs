@@ -18,6 +18,12 @@ namespace Binance.Net.Objects.Futures.FuturesData
         [JsonProperty("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
+        /// Pair
+        /// </summary>
+        [JsonProperty("pair")]
+        public string? Pair { get; set; }
+
+        /// <summary>
         /// The order id as assigned by Binance
         /// </summary>
         [JsonProperty("orderId")]
@@ -33,25 +39,31 @@ namespace Binance.Net.Objects.Futures.FuturesData
         [JsonProperty("price")]
         public decimal Price { get; set; }
         /// <summary>
-        /// Cumulative amount
+        /// Cumulative quantity
         /// </summary>
         [JsonProperty("cumQty")]
-        public decimal CumulativeQuantity { get; set; }
+        public decimal QuantityFilled { get; set; }
         /// <summary>
-        /// Cumulative amount
+        /// Cumulative quantity in quote asset ( for USD futures )
         /// </summary>
         [JsonProperty("cumQuote")]
-        public decimal CumulativeQuoteQuantity { get; set; }
+        public decimal? QuoteQuantityFilled { get; set; }
+
+        /// <summary>
+        /// Cumulative quantity in quote asset ( for Coin futures )
+        /// </summary>
+        [JsonProperty("cumBase")]
+        public decimal? BaseQuantityFilled { get; set; }
         /// <summary>
         /// The quantity of the order that is executed
         /// </summary>
         [JsonProperty("executedQty")]
-        public decimal ExecutedQuantity { get; set; }
+        public decimal LastFilledQuantity { get; set; }
         /// <summary>
         /// The original quantity of the order
         /// </summary>
         [JsonProperty("origQty")]
-        public decimal OriginalQuantity { get; set; }
+        public decimal Quantity { get; set; }
 
         /// <summary>
         /// Reduce Only
@@ -136,5 +148,10 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// </summary>
         [JsonProperty("priceProtect")]
         public bool PriceProtect { get; set; }
+        /// <summary>
+        /// Average price
+        /// </summary>
+        [JsonProperty("avgPrice"), JsonOptionalProperty]
+        public decimal? AveragePrice { get; set; }
     }
 }

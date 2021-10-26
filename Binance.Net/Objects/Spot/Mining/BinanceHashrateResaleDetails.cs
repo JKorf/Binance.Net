@@ -30,6 +30,10 @@ namespace Binance.Net.Objects.Spot.Mining
     public class BinanceHashrateResaleDetailsItem
     {
         /// <summary>
+        /// Config id
+        /// </summary>
+        public long ConfigId { get; set; }
+        /// <summary>
         /// From user
         /// </summary>
         public string PoolUserName { get; set; } = string.Empty;
@@ -58,6 +62,7 @@ namespace Binance.Net.Objects.Spot.Mining
         /// <summary>
         /// Transferred income
         /// </summary>
-        public decimal Amount { get; set; }
+        [JsonProperty("amount")]
+        public decimal Quantity { get; set; }
     }
 }

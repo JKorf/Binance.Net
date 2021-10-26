@@ -28,14 +28,7 @@ namespace Binance.Net.SubClients.Margin
 
         #region Create a ListenKey
 
-        /// <summary>
-        /// Starts a user stream  for margin account by requesting a listen key. 
-        /// This listen key can be used in subsequent requests to BinanceSocketClient.Spot.SubscribeToUserDataUpdates
-        /// The stream will close after 60 minutes unless a keep alive is send.
-        /// </summary>
-        /// <param name="symbol">The isolated symbol</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Listen key</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<string>> StartIsolatedMarginUserStreamAsync(string symbol, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
@@ -57,14 +50,7 @@ namespace Binance.Net.SubClients.Margin
 
         #region Ping/Keep-alive a ListenKey
 
-        /// <summary>
-        /// Sends a keep alive for the current user stream for margin account listen key to keep the stream from closing. 
-        /// Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
-        /// </summary>
-        /// <param name="symbol">The isolated symbol</param>
-        /// <param name="listenKey">The listen key to keep alive</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<object>> KeepAliveIsolatedMarginUserStreamAsync(string symbol, string listenKey, CancellationToken ct = default)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
@@ -84,13 +70,7 @@ namespace Binance.Net.SubClients.Margin
         #endregion
 
         #region Invalidate a ListenKey
-        /// <summary>
-        /// Close the user stream for margin account
-        /// </summary>
-        /// <param name="symbol">The isolated symbol</param>
-        /// <param name="listenKey">The listen key to invalidate</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<object>> CloseIsolatedMarginUserStreamAsync(string symbol, string listenKey, CancellationToken ct = default)
         {
             listenKey.ValidateNotNull(nameof(listenKey));

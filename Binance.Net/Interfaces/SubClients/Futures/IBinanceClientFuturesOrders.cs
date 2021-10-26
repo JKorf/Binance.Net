@@ -12,7 +12,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
     /// Futures orders interface
     /// </summary>
     public interface IBinanceClientFuturesOrders
-    {       
+    {
         /// <summary>
         /// Places a new order
         /// </summary>
@@ -20,7 +20,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="side">The order side (buy/sell)</param>
         /// <param name="type">The order type</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
-        /// <param name="quantity">The amount of the base symbol</param>
+        /// <param name="quantity">The quantity of the base symbol</param>
         /// <param name="positionSide">The position side</param>
         /// <param name="reduceOnly">Specify as true if the order is intended to only reduce the position</param>
         /// <param name="price">The price to use</param>

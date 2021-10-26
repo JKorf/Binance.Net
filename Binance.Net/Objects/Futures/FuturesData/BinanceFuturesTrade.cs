@@ -21,14 +21,16 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// </summary>
         public bool Buyer { get; set; }
         /// <summary>
-        /// Paid commission
+        /// Paid fee
         /// </summary>
-        public decimal Commission { get; set; }
+        [JsonProperty("commission")]
+        public decimal Fee { get; set; }
 
         /// <summary>
-        /// Asset the commission is paid in
+        /// Asset the fee is paid in
         /// </summary>
-        public string CommissionAsset { get; set; } = string.Empty;
+        [JsonProperty("commissionAsset")]
+        public string FeeAsset { get; set; } = string.Empty;
         /// <summary>
         /// Trade id
         /// </summary>
@@ -68,7 +70,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Timestamp
         /// </summary>
         [JsonProperty("time"), JsonConverter(typeof(TimestampConverter))]
-        public DateTime TradeTime { get; set; }
+        public DateTime Timestamp { get; set; }
     }
 
     /// <summary>
@@ -92,6 +94,12 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// The pair
         /// </summary>
         public string Pair { get; set; } = string.Empty;
+
+        /// <summary>
+        /// The margin asset
+        /// </summary>
+        public string MarginAsset { get; set; } = string.Empty;
+
         /// <summary>
         /// Base quantity
         /// </summary>

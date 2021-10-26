@@ -20,9 +20,9 @@ namespace Binance.Net.Objects.Spot.LendingData
         /// </summary>
         public decimal LeftQuota { get; set; }
         /// <summary>
-        /// Minimal redemption amount
+        /// Minimal redemption quantity
         /// </summary>
         [JsonProperty("minRedemptionAmount")]
-        public decimal MinimalRedemptionAmount { get; set; }
+        public decimal MinimalRedemptionQuantity { get; set; }
     }
 }

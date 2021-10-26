@@ -12,9 +12,10 @@ namespace Binance.Net.Objects.Spot.LendingData
     public class BinanceRedemptionRecord
     {
         /// <summary>
-        /// Amount purchased
+        /// Quantity purchased
         /// </summary>
-        public decimal Amount { get; set; }
+        [JsonProperty("amount")]
+        public decimal Quantity { get; set; }
         /// <summary>
         /// Asset name
         /// </summary>
@@ -25,14 +26,27 @@ namespace Binance.Net.Objects.Spot.LendingData
         [JsonConverter(typeof(TimestampConverter))]
         public DateTime CreateTime { get; set; }
         /// <summary>
+        /// Start time
+        /// </summary>
+        [JsonConverter(typeof(TimestampConverter))]
+        public DateTime? StartTime { get; set; }
+        /// <summary>
+        /// Interest
+        /// </summary>
+        public decimal Interest { get; set; }
+        /// <summary>
         /// Redeem type
         /// </summary>
         [JsonConverter(typeof(RedeemTypeConverter))]
         public RedeemType Type { get; set; }
         /// <summary>
-        /// Name of the product
+        /// Id of the project
         /// </summary>
-        public string ProductName { get; set; } = string.Empty;
+        public string ProjectId { get; set; } = string.Empty;
+        /// <summary>
+        /// Name of the project
+        /// </summary>
+        public string ProjectName { get; set; } = string.Empty;
         /// <summary>
         /// Principal
         /// </summary>

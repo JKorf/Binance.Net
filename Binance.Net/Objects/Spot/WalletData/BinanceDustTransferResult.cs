@@ -32,9 +32,10 @@ namespace Binance.Net.Objects.Spot.WalletData
     public class BinanceDustTransferResultEntry
     {
         /// <summary>
-        /// Amount of dust
+        /// Quantity of dust
         /// </summary>
-        public decimal Amount { get; set; }
+        [JsonProperty("amount")]
+        public decimal Quantity { get; set; }
         /// <summary>
         /// Asset
         /// </summary>
@@ -47,16 +48,17 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// <summary>
         /// Service charge
         /// </summary>
-        public decimal ServiceChargeAmount { get; set; }
+        [JsonProperty("serviceChargeAmount")]
+        public decimal ServiceChargeQuantity { get; set; }
         /// <summary>
         /// Transaction id
         /// </summary>
         [JsonProperty("tranId")]
         public long TransactionId { get; set; }
         /// <summary>
-        /// BNB result amount
+        /// BNB result quantity
         /// </summary>
-        [JsonProperty("TransferedAmount")]
-        public decimal TransferredAmount { get; set; }
+        [JsonProperty("transferedAmount")]
+        public decimal TransferredQuantity { get; set; }
     }
 }

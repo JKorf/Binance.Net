@@ -69,6 +69,10 @@ namespace Binance.Net.Interfaces
         /// Liquidity swap endpoints
         /// </summary>
         IBinanceClientLiquidSwap BSwap { get; set; }
+        /// <summary>
+        /// Fiat endpoints
+        /// </summary>
+        IBinanceClientFiat Fiat { get; set; }
 
         /// <summary>
         /// Set the API key and secret

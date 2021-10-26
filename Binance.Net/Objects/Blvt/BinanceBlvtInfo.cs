@@ -88,9 +88,10 @@ namespace Binance.Net.Objects.Blvt
         /// </summary>
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Amount
+        /// Quantity
         /// </summary>
-        public decimal Amount { get; set; }
+        [JsonProperty("amount")]
+        public decimal Quantity { get; set; }
         /// <summary>
         /// Notional value
         /// </summary>

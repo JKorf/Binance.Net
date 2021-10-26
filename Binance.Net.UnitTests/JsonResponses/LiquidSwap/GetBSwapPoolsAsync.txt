@@ -1,0 +1,26 @@
+[
+    {
+        "poolId": 2,
+        "poolName": "BUSD/USDT",
+        "assets": [
+            "BUSD",
+            "USDT"
+        ]
+    },
+    {
+        "poolId": 3,
+        "poolName": "BUSD/DAI",
+        "assets": [
+            "BUSD",
+            "DAI"
+        ]
+    },
+    {
+        "poolId": 4,
+        "poolName": "USDT/DAI",
+        "assets": [
+            "USDT",
+            "DAI"
+        ]
+    }
+]

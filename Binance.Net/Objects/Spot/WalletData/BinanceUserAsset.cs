@@ -5,24 +5,26 @@ using Newtonsoft.Json;
 namespace Binance.Net.Objects.Spot.WalletData
 {
     /// <summary>
-    /// Information about a coin for a user
+    /// Information about an asset for a user
     /// </summary>
-    public class BinanceUserCoin
+    public class BinanceUserAsset
     {
         /// <summary>
-        /// Coin code
+        /// Asset code
         /// </summary>
-        public string Coin { get; set; } = string.Empty;
+        [JsonProperty("coin")]
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Deposit all is enabled
         /// </summary>
         public bool DepositAllEnable { get; set; }
         /// <summary>
-        /// Amount free
+        /// Quantity free
         /// </summary>
-        public decimal Free { get; set; }
+        [JsonProperty("free")]
+        public decimal Available { get; set; }
         /// <summary>
-        /// Amount frozen
+        /// Quantity frozen
         /// </summary>
         public decimal Freeze { get; set; }
         /// <summary>
@@ -34,11 +36,11 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// </summary>
         public decimal Ipoing { get; set; }
         /// <summary>
-        /// Is the coin legally money
+        /// Is the asset legally money
         /// </summary>
         public bool IsLegalMoney { get; set; }
         /// <summary>
-        /// Amount locked
+        /// Quantity locked
         /// </summary>
         public decimal Locked { get; set; }
         /// <summary>
@@ -54,7 +56,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// </summary>
         public bool WithdrawAllEnable { get; set; }
         /// <summary>
-        /// Name of the coin
+        /// Name of the asset
         /// </summary>
         public string Name { get; set; } = string.Empty;
         /// <summary>
@@ -68,7 +70,7 @@ namespace Binance.Net.Objects.Spot.WalletData
     }
 
     /// <summary>
-    /// Network for a coin
+    /// Network for an asset
     /// </summary>
     public class BinanceNetwork
     {
@@ -77,9 +79,10 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// </summary>
         public string AddressRegex { get; set; } = string.Empty;
         /// <summary>
-        /// Coin name
+        /// Asset name
         /// </summary>
-        public string Coin { get; set; } = string.Empty;
+        [JsonProperty("coin")]
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Deposit description
         /// </summary>
@@ -139,7 +142,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// </summary>
         public decimal WithdrawFee { get; set; }
         /// <summary>
-        /// Minimal withdraw amount
+        /// Minimal withdraw quantity
         /// </summary>
         public decimal WithdrawMin { get; set; }
         /// <summary>
@@ -147,11 +150,11 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// </summary>
         public decimal WithdrawIntegerMultiple { get; set; }
         /// <summary>
-        /// Max withdraw amount
+        /// Max withdraw quantity
         /// </summary>
         public decimal WithdrawMax { get; set; }
         /// <summary>
-        /// If the coin needs to provide memo to withdraw
+        /// If the asset needs to provide memo to withdraw
         /// </summary>
         public bool SameAddress { get; set; }
     }

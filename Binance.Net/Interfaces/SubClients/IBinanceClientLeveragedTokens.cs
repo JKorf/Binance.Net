@@ -48,11 +48,11 @@ namespace Binance.Net.Interfaces.SubClients
         /// Redeem a token
         /// </summary>
         /// <param name="tokenName">Name of the token to redeem</param>
-        /// <param name="amount">Amount to redeem</param>
+        /// <param name="quantity">Quantity to redeem</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BinanceBlvtRedeemResult>> RedeemBlvtAsync(string tokenName, decimal amount, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceBlvtRedeemResult>> RedeemBlvtAsync(string tokenName, decimal quantity, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get redemption records

@@ -47,10 +47,7 @@ namespace Binance.Net.SubClients.Futures
 
         #region Test Connectivity
 
-        /// <summary>
-        /// Pings the Binance Futures API
-        /// </summary>
-        /// <returns>True if successful ping, false if no response</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<long>> PingAsync(CancellationToken ct = default)
         {
             var sw = Stopwatch.StartNew();
@@ -63,12 +60,7 @@ namespace Binance.Net.SubClients.Futures
 
         #region Check Server Time
 
-        /// <summary>
-        /// Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls
-        /// </summary>
-        /// <param name="resetAutoTimestamp">Whether the response should be used for a new auto timestamp calculation</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Server time</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<DateTime>> GetServerTimeAsync(bool resetAutoTimestamp = false, CancellationToken ct = default)
         {
             var url = _futuresClient.GetUrl(checkTimeEndpoint, Api, publicVersion);

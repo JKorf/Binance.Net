@@ -1,4 +1,6 @@
-﻿namespace Binance.Net.Objects.Spot.WalletData
+﻿using Newtonsoft.Json;
+
+namespace Binance.Net.Objects.Spot.WalletData
 {
     /// <summary>
     /// Funding wallet asset
@@ -10,19 +12,20 @@
         /// </summary>
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Amount available
+        /// Quantity available
         /// </summary>
-        public decimal Free { get; set; }
+        [JsonProperty("free")]
+        public decimal Available { get; set; }
         /// <summary>
-        /// Amount locked
+        /// Quantity locked
         /// </summary>
         public decimal Locked { get; set; }
         /// <summary>
-        /// Amount frozen
+        /// Quantity frozen
         /// </summary>
         public decimal Freeze { get; set; }
         /// <summary>
-        /// Amount withdrawing
+        /// Quantity withdrawing
         /// </summary>
         public decimal Withdrawing { get; set; }
         /// <summary>

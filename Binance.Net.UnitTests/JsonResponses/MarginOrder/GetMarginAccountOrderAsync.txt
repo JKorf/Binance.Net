@@ -1,0 +1,19 @@
+{
+   "clientOrderId": "ZwfQzuDIGpceVhKW5DvCmO",
+   "cummulativeQuoteQty": "0.00000000",
+   "executedQty": "0.00000000",
+   "icebergQty": "0.00000000",
+   "isWorking": true,
+   "orderId": 213205622,
+   "origQty": "0.30000000",
+   "price": "0.00493630",
+   "side": "SELL",
+   "status": "NEW",
+   "stopPrice": "0.00000000",
+   "symbol": "BNBBTC",
+   "isIsolated": true,
+   "time": 1562133008725,
+   "timeInForce": "GTC",
+   "type": "LIMIT",
+   "updateTime": 1562133008725
+}

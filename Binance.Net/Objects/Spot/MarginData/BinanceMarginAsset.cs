@@ -26,14 +26,14 @@ namespace Binance.Net.Objects.Spot.MarginData
         /// </summary>
         public bool IsMortgageable { get; set; }
         /// <summary>
-        /// Minimal amount which can be borrowed
+        /// Minimal quantity which can be borrowed
         /// </summary>
         [JsonProperty("userMinBorrow")]
-        public decimal MinimalBorrowAmount { get; set; }
+        public decimal MinimalBorrowQuantity { get; set; }
         /// <summary>
-        /// Minimal amount which can be repaid
+        /// Minimal quantity which can be repaid
         /// </summary>
         [JsonProperty("userMinRepay")]
-        public decimal MinimalRepayAmount { get; set; }
+        public decimal MinimalRepayQuanitty { get; set; }
     }
 }

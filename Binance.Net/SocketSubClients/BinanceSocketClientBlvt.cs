@@ -41,22 +41,12 @@ namespace Binance.Net.SocketSubClients
         }
 
         #region Blvt info update
-        /// <summary>
-        /// Subscribes to leveraged token info updates
-        /// </summary>
-        /// <param name="token">The token to subscribe to</param>
-        /// <param name="onMessage">The event handler for the received data</param>
-        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeToBlvtInfoUpdatesAsync(string token,
             Action<DataEvent<BinanceBlvtInfoUpdate>> onMessage)
             => SubscribeToBlvtInfoUpdatesAsync(new List<string> { token }, onMessage);
 
-        /// <summary>
-        /// Subscribes to leveraged token info updates
-        /// </summary>
-        /// <param name="tokens">The tokens to subscribe to</param>
-        /// <param name="onMessage">The event handler for the received data</param>
-        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToBlvtInfoUpdatesAsync(IEnumerable<string> tokens, Action<DataEvent<BinanceBlvtInfoUpdate>> onMessage)
         {
             tokens = tokens.Select(a => a.ToUpper(CultureInfo.InvariantCulture) + bltvInfoEndpoint).ToArray();
@@ -67,24 +57,12 @@ namespace Binance.Net.SocketSubClients
         #endregion
 
         #region Blvt kline update
-        /// <summary>
-        /// Subscribes to leveraged token kline updates
-        /// </summary>
-        /// <param name="token">The token to subscribe to</param>
-        /// <param name="interval">The kline interval</param>
-        /// <param name="onMessage">The event handler for the received data</param>
-        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeToBlvtKlineUpdatesAsync(string token,
             KlineInterval interval, Action<DataEvent<BinanceStreamKlineData>> onMessage) =>
             SubscribeToBlvtKlineUpdatesAsync(new List<string> { token }, interval, onMessage);
 
-        /// <summary>
-        /// Subscribes to leveraged token kline updates
-        /// </summary>
-        /// <param name="tokens">The tokens to subscribe to</param>
-        /// <param name="interval">The kline interval</param>
-        /// <param name="onMessage">The event handler for the received data</param>
-        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToBlvtKlineUpdatesAsync(IEnumerable<string> tokens, KlineInterval interval, Action<DataEvent<BinanceStreamKlineData>> onMessage)
         {
             tokens = tokens.Select(a => a.ToUpper(CultureInfo.InvariantCulture) + bltvKlineEndpoint + "_" + JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ToArray();

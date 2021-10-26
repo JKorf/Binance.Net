@@ -12,18 +12,18 @@
         /// <summary>
         /// The best bid price in the order book
         /// </summary>
-        decimal BidPrice { get; set; }
+        decimal BestBidPrice { get; set; }
         /// <summary>
-        /// The size of the best bid price in the order book
+        /// The quantity of the best bid price in the order book
         /// </summary>
-        decimal BidQuantity { get; set; }
+        decimal BestBidQuantity { get; set; }
         /// <summary>
         /// The best ask price in the order book
         /// </summary>
-        decimal AskPrice { get; set; }
+        decimal BestAskPrice { get; set; }
         /// <summary>
-        /// The size of the best ask price in the order book
+        /// The quantity of the best ask price in the order book
         /// </summary>
-        decimal AskQuantity { get; set; }
+        decimal BestAskQuantity { get; set; }
     }
 }

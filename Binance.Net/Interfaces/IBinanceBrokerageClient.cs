@@ -170,7 +170,7 @@ namespace Binance.Net.Interfaces
         /// <param name="ct">Cancellation token</param>
         /// <returns>Broker information</returns>
         Task<WebCallResult<BinanceBrokerageAccountInfo>> GetBrokerAccountInfoAsync(int? receiveWindow = null, CancellationToken ct = default);
-        
+
         /// <summary>
         /// Sub Account Transfer
         /// <para>You need to enable "internal transfer" option for the api key which requests this endpoint</para>
@@ -178,14 +178,14 @@ namespace Binance.Net.Interfaces
         /// <para>Transfer to master account if toId not sent</para>
         /// </summary>
         /// <param name="asset">Asset</param>
-        /// <param name="amount">Amount</param>
+        /// <param name="quantity">Quantity</param>
         /// <param name="fromId">From id</param>
         /// <param name="toId">To id</param>
         /// <param name="clientTransferId">Client transfer id, must be unique</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transfer result</returns>
-        Task<WebCallResult<BinanceBrokerageTransferResult>> TransferAsync(string asset, decimal amount, 
+        Task<WebCallResult<BinanceBrokerageTransferResult>> TransferAsync(string asset, decimal quantity, 
             string fromId, string toId, string? clientTransferId = null, int? receiveWindow = null, CancellationToken ct = default);
         
         /// <summary>

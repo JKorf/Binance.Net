@@ -12,9 +12,10 @@ namespace Binance.Net.Objects.Spot.IsolatedMarginData
     public class BinanceIsolatedMarginTransfer
     {
         /// <summary>
-        /// Amount of the transfer
+        /// Quantity of the transfer
         /// </summary>
-        public decimal Amount { get; set; }
+        [JsonProperty("amount")]
+        public decimal Quantity { get; set; }
         /// <summary>
         /// Transfer asset
         /// </summary>

@@ -14,7 +14,7 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// The volume traded during this candlestick
         /// </summary>
         [ArrayProperty(5)]
-        public override decimal BaseVolume { get; set; }
+        public override decimal Volume { get; set; }
         /// <summary>
         /// The volume traded during this candlestick in the asset form
         /// </summary>

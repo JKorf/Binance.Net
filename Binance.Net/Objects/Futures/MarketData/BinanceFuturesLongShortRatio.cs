@@ -15,11 +15,10 @@ namespace Binance.Net.Objects.Futures.MarketData
         [JsonProperty("symbol")]
         public string SymbolPair { get; set; } = string.Empty;
 
-        [JsonProperty("pair")]
-        private string Pair
-        {
-            set => SymbolPair = value;
-        }
+        /// <summary>
+        /// Pair
+        /// </summary>
+        public string? Pair { get; set; } = string.Empty;
 
         /// <summary>
         /// long/short ratio

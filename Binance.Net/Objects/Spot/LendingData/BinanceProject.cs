@@ -48,7 +48,7 @@
         /// <summary>
         /// Needs know your customer
         /// </summary>
-        public bool NeedsKYC { get; set; }
+        public bool NeedKYC { get; set; }
         /// <summary>
         /// Project id
         /// </summary>

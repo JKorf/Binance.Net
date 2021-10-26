@@ -12,9 +12,10 @@ namespace Binance.Net.Objects.Futures.FuturesData
     public class BinanceFuturesMarginChangeHistoryResult
     {
         /// <summary>
-        /// Request amount of margin used
+        /// Request quantity of margin used
         /// </summary>
-        public decimal Amount { get; set; }
+        [JsonProperty("amount")]
+        public decimal Quantity { get; set; }
         /// <summary>
         /// Base asset used for margin
         /// </summary>
@@ -27,12 +28,18 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Time of the margin change request
         /// </summary>
         [JsonConverter(typeof(TimestampConverter))]
-        public DateTime Time { get; set; }
+        [JsonProperty("time")]
+        public DateTime Timestamp { get; set; }
         /// <summary>
         /// Direction of the margin change request
         /// </summary>
         [JsonConverter(typeof(FuturesMarginChangeDirectionTypeConverter))]
         public FuturesMarginChangeDirectionType Type { get; set; }
+        /// <summary>
+        /// Position side
+        /// </summary>
+        [JsonConverter(typeof(PositionSideConverter))]
+        public PositionSide PositionSide { get; set; }
     }
 
 }

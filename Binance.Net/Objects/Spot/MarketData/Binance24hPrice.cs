@@ -18,25 +18,26 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// <summary>
         /// The best bid price in the order book
         /// </summary>
-        public decimal BidPrice { get; set; }
+        [JsonProperty("bidPrice")]
+        public decimal BestBidPrice { get; set; }
         /// <summary>
-        /// The size of the best bid price in the order book
+        /// The quantity of the best bid price in the order book
         /// </summary>
         [JsonProperty("bidQty")]
-        public decimal BidQuantity { get; set; }
+        public decimal BestBidQuantity { get; set; }
         /// <summary>
         /// The best ask price in the order book
         /// </summary>
-        public decimal AskPrice { get; set; }
+        [JsonProperty("askPrice")]
+        public decimal BestAskPrice { get; set; }
         /// <summary>
-        /// The size of the best ask price in the order book
+        /// The quantity of the best ask price in the order book
         /// </summary>
         [JsonProperty("AskQty")]
-        public decimal AskQuantity { get; set; }
+        public decimal BestAskQuantity { get; set; }
         
         /// <inheritdoc />
-        [JsonProperty("volume")]
-        public override decimal BaseVolume { get; set; }
+        public override decimal Volume { get; set; }
         /// <inheritdoc />
         [JsonProperty("quoteVolume")]
         public override decimal QuoteVolume { get; set; }
@@ -44,6 +45,6 @@ namespace Binance.Net.Objects.Spot.MarketData
         string ICommonTicker.CommonSymbol => Symbol;
         decimal ICommonTicker.CommonHigh => HighPrice;
         decimal ICommonTicker.CommonLow => LowPrice;
-        decimal ICommonTicker.CommonVolume => BaseVolume;
+        decimal ICommonTicker.CommonVolume => Volume;
     }
 }

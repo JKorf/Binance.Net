@@ -1,0 +1,18 @@
+[
+    {
+        "amount": "23.36332311",
+        "asset": "BTC",
+        "symbol": "BTCUSD_200925",
+        "time": 1578047897183,
+        "type": 1,
+        "positionSide": "BOTH"
+    },
+    {
+        "amount": "100",
+        "asset": "BTC",
+        "symbol": "BTCUSD_200925",
+        "time": 1578047900425,
+        "type": 1,
+        "positionSide": "LONG"
+    }
+]

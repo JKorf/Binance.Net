@@ -44,18 +44,20 @@ namespace Binance.Net.Objects.Spot.SpotData
         [JsonProperty("quoteQty")]
         public decimal QuoteQuantity { get; set; }
         /// <summary>
-        /// The commission paid for the trade
+        /// The fee paid for the trade
         /// </summary>
-        public decimal Commission { get; set; }
+        [JsonProperty("commission")]
+        public decimal Fee { get; set; }
         /// <summary>
-        /// The asset the commission is paid in
+        /// The asset the fee is paid in
         /// </summary>
-        public string CommissionAsset { get; set; } = string.Empty;
+        [JsonProperty("commissionAsset")]
+        public string FeeAsset { get; set; } = string.Empty;
         /// <summary>
         /// The time the trade was made
         /// </summary>
         [JsonProperty("time"), JsonConverter(typeof(TimestampConverter))]
-        public DateTime TradeTime { get; set; }
+        public DateTime Timestamp { get; set; }
         /// <summary>
         /// Whether account was the buyer in the trade
         /// </summary>
@@ -68,12 +70,16 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// Whether trade was made with the best match
         /// </summary>
         public bool IsBestMatch { get; set; }
+        /// <summary>
+        /// If isolated margin (for margin account orders)
+        /// </summary>
+        public bool? IsIsolated { get; set; }
 
         string ICommonTrade.CommonId => Id.ToString(CultureInfo.InvariantCulture);
         decimal ICommonTrade.CommonPrice => Price;
         decimal ICommonTrade.CommonQuantity => Quantity;
-        decimal ICommonTrade.CommonFee => Commission;
-        string ICommonTrade.CommonFeeAsset => CommissionAsset;
-        DateTime ICommonTrade.CommonTradeTime => TradeTime;
+        decimal ICommonTrade.CommonFee => Fee;
+        string ICommonTrade.CommonFeeAsset => FeeAsset;
+        DateTime ICommonTrade.CommonTradeTime => Timestamp;
     }
 }

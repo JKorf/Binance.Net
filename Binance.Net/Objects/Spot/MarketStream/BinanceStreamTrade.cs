@@ -16,32 +16,32 @@ namespace Binance.Net.Objects.Spot.MarketStream
         [JsonProperty("s")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// The id of this aggregated trade
+        /// The id of this trade
         /// </summary>
         [JsonProperty("t")]
-        public long OrderId { get; set; }
+        public long Id { get; set; }
         /// <summary>
         /// The price of the trades
         /// </summary>
         [JsonProperty("p")]
         public decimal Price { get; set; }
         /// <summary>
-        /// The combined quantity of the trades
+        /// The quantity of the trade
         /// </summary>
         [JsonProperty("q")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// The first trade id in this aggregation
+        /// The buyer order id
         /// </summary>
         [JsonProperty("b")]
         public long BuyerOrderId { get; set; }
         /// <summary>
-        /// The last trade id in this aggregation
+        /// The sell order id
         /// </summary>
         [JsonProperty("a")]
         public long SellerOrderId { get; set; }
         /// <summary>
-        /// The time of the trades
+        /// The time of the trade
         /// </summary>
         [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
         public DateTime TradeTime { get; set; }

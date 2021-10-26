@@ -38,15 +38,15 @@ namespace Binance.Net.Objects.Spot.Mining
         /// <summary>
         /// User name
         /// </summary>
-        public decimal UserName { get; set; }
+        public string UserName { get; set; } = string.Empty;
         /// <summary>
         /// Hashrate unit
         /// </summary>
-        public decimal Unit { get; set; }
+        public string Unit { get; set; } = string.Empty;
         /// <summary>
         /// Algorithm
         /// </summary>
         [JsonProperty("algo")]
-        public decimal Algorithm { get; set; }
+        public string Algorithm { get; set; } = string.Empty;
     }
 }

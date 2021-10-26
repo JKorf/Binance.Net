@@ -1,4 +1,6 @@
-﻿namespace Binance.Net.Objects.Spot.WalletData
+﻿using Newtonsoft.Json;
+
+namespace Binance.Net.Objects.Spot.WalletData
 {
     /// <summary>
     /// Deposit address info
@@ -18,8 +20,9 @@
         /// </summary>
         public string Tag { get; set; } = string.Empty;
         /// <summary>
-        /// Coin the address is for
+        /// Asset the address is for
         /// </summary>
-        public string Coin { get; set; } = string.Empty;
+        [JsonProperty("coin")]
+        public string Asset { get; set; } = string.Empty;
     }
 }

@@ -20,6 +20,18 @@ namespace Binance.Net.Objects.Spot.SubAccountData
         /// </summary>
         public string Email { get; set; } = string.Empty;
         /// <summary>
+        /// From account type
+        /// </summary>
+        public string FromAccountType { get; set; } = string.Empty;
+        /// <summary>
+        /// To account type
+        /// </summary>
+        public string ToAccountType { get; set; } = string.Empty;
+        /// <summary>
+        /// Status
+        /// </summary>
+        public string Status { get; set; } = string.Empty;
+        /// <summary>
         /// Transfer type
         /// </summary>
         [JsonConverter(typeof(SubAccountTransferSubAccountTypeConverter))]

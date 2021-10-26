@@ -88,6 +88,6 @@ namespace Binance.Net.Objects.Futures.MarketStream
         /// Liquidation Trade Time
         /// </summary>
         [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
-        public DateTime Time { get; set; }
+        public DateTime Timestamp { get; set; }
     }
 }

@@ -10,31 +10,36 @@ namespace Binance.Net.Objects.Spot.Futures
     public class BinanceCrossCollateralLiquidationHistory
     {
         /// <summary>
-        /// Amount for liquidation
+        /// Quantity for liquidation
         /// </summary>
-        public decimal CollateralAmountForLiquidation { get; set; }
+        [JsonProperty("collateralAmountForLiquidation")]
+        public decimal CollateralQuantityForLiquidation { get; set; }
 
         /// <summary>
-        /// Collateral coin
+        /// Collateral asset
         /// </summary>
-        public string CollateralCoin { get; set; } = string.Empty;
+        [JsonProperty("collateralCoin")]
+        public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
         /// Start time of liquidation
         /// </summary>
         [JsonConverter(typeof(TimestampConverter))]
         public DateTime ForceLiquidationStartTime { get; set; }
         /// <summary>
-        /// Coin
+        /// Asset
         /// </summary>
-        public string Coin { get; set; } = string.Empty;
+        [JsonProperty("coin")]
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Rest collateral amount after liquidation
+        /// Rest collateral quantity after liquidation
         /// </summary>
-        public decimal RestCollateralAmountAfterLiquidation { get; set; }
+        [JsonProperty("restCollateralAmountAfterLiquidation")]
+        public decimal RestCollateralQuantityAfterLiquidation { get; set; }
         /// <summary>
-        /// Rest loan amount
+        /// Rest loan quantity
         /// </summary>
-        public decimal RestLoanAmount { get; set; }
+        [JsonProperty("restLoanAmount")]
+        public decimal RestLoanQuantity { get; set; }
 
         /// <summary>
         /// Status

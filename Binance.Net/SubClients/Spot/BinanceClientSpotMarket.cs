@@ -44,13 +44,7 @@ namespace Binance.Net.SubClients.Spot
 
         #region Order Book
 
-        /// <summary>
-        /// Gets the order book for the provided symbol
-        /// </summary>
-        /// <param name="symbol">The symbol to get the order book for</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The order book for the symbol</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceOrderBook>> GetOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
@@ -67,13 +61,7 @@ namespace Binance.Net.SubClients.Spot
 
         #region Recent Trades List
 
-        /// <summary>
-        /// Gets the recent trades for a symbol
-        /// </summary>
-        /// <param name="symbol">The symbol to get recent trades for</param>
-        /// <param name="limit">Result limit</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of recent trades</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<IBinanceRecentTrade>>> GetRecentTradeHistoryAsync(string symbol, int? limit = null, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
@@ -89,14 +77,7 @@ namespace Binance.Net.SubClients.Spot
 
         #region Old Trade Lookup
 
-        /// <summary>
-        /// Gets the historical  trades for a symbol
-        /// </summary>
-        /// <param name="symbol">The symbol to get recent trades for</param>
-        /// <param name="limit">Result limit</param>
-        /// <param name="fromId">From which trade id on results should be retrieved</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of recent trades</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<IBinanceRecentTrade>>> GetTradeHistoryAsync(string symbol, int? limit = null, long? fromId = null, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
@@ -113,16 +94,7 @@ namespace Binance.Net.SubClients.Spot
 
         #region Compressed/Aggregate Trades List
 
-        /// <summary>
-        /// Gets compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
-        /// </summary>
-        /// <param name="symbol">The symbol to get the trades for</param>
-        /// <param name="fromId">ID to get aggregate trades from INCLUSIVE.</param>
-        /// <param name="startTime">Time to start getting trades from</param>
-        /// <param name="endTime">Time to stop getting trades from</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The aggregated trades list for the symbol</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceAggregatedTrade>>> GetAggregatedTradeHistoryAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
@@ -141,16 +113,7 @@ namespace Binance.Net.SubClients.Spot
 
         #region Kline/Candlestick Data
 
-        /// <summary>
-        /// Get candlestick data for the provided symbol
-        /// </summary>
-        /// <param name="symbol">The symbol to get the data for</param>
-        /// <param name="interval">The candlestick timespan</param>
-        /// <param name="startTime">Start time to get candlestick data</param>
-        /// <param name="endTime">End time to get candlestick data</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The candlestick data for the provided symbol</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<IBinanceKline>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
@@ -171,12 +134,7 @@ namespace Binance.Net.SubClients.Spot
 
         #region Current Average Price
 
-        /// <summary>
-        /// Gets current average price for a symbol
-        /// </summary>
-        /// <param name="symbol">The symbol to get the data for</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceAveragePrice>> GetCurrentAvgPriceAsync(string symbol, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
@@ -189,12 +147,7 @@ namespace Binance.Net.SubClients.Spot
 
         #region 24hr Ticker Price Change Statistics
 
-        /// <summary>
-        /// Get data regarding the last 24 hours for the provided symbol
-        /// </summary>
-        /// <param name="symbol">The symbol to get the data for</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Data over the last 24 hours</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IBinanceTick>> GetTickerAsync(string symbol, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
@@ -204,11 +157,7 @@ namespace Binance.Net.SubClients.Spot
             return result.As<IBinanceTick>(result.Data);
         }
 
-        /// <summary>
-        /// Get data regarding the last 24 hours for all symbols
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of data over the last 24 hours</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<IBinanceTick>>> GetTickersAsync(CancellationToken ct = default)
         {
             var result = await _baseClient.SendRequestInternal<IEnumerable<Binance24HPrice>>(_baseClient.GetUrlSpot(price24HEndpoint, api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
@@ -219,12 +168,7 @@ namespace Binance.Net.SubClients.Spot
 
         #region Symbol Price Ticker
 
-        /// <summary>
-        /// Gets the price of a symbol
-        /// </summary>
-        /// <param name="symbol">The symbol to get the price for</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Price of symbol</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinancePrice>> GetPriceAsync(string symbol, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
@@ -236,11 +180,7 @@ namespace Binance.Net.SubClients.Spot
             return await _baseClient.SendRequestInternal<BinancePrice>(_baseClient.GetUrlSpot(allPricesEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Get a list of the prices of all symbols
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of prices</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinancePrice>>> GetPricesAsync(CancellationToken ct = default)
         {
             return await _baseClient.SendRequestInternal<IEnumerable<BinancePrice>>(_baseClient.GetUrlSpot(allPricesEndpoint, api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
@@ -250,12 +190,7 @@ namespace Binance.Net.SubClients.Spot
 
         #region Symbol Order Book Ticker
 
-        /// <summary>
-        /// Gets the best price/quantity on the order book for a symbol.
-        /// </summary>
-        /// <param name="symbol">Symbol to get book price for</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of book prices</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceBookPrice>> GetBookPriceAsync(string symbol, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
@@ -264,11 +199,7 @@ namespace Binance.Net.SubClients.Spot
             return await _baseClient.SendRequestInternal<BinanceBookPrice>(_baseClient.GetUrlSpot(bookPricesEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Gets the best price/quantity on the order book for all symbols.
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of book prices</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceBookPrice>>> GetAllBookPricesAsync(CancellationToken ct = default)
         {
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceBookPrice>>(_baseClient.GetUrlSpot(bookPricesEndpoint, api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
@@ -277,14 +208,8 @@ namespace Binance.Net.SubClients.Spot
         #endregion
 
         #region GetTradeFee
-        
-        /// <summary>
-        /// Gets the trade fee for a symbol
-        /// </summary>
-        /// <param name="symbol">Symbol to get withdrawal fee for</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Trade fees</returns>
+
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceTradeFee>>> GetTradeFeeAsync(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             symbol?.ValidateBinanceSymbol();

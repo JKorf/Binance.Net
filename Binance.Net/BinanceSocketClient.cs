@@ -23,25 +23,14 @@ namespace Binance.Net
         #region fields
         private static BinanceSocketClientOptions _defaultOptions = new BinanceSocketClientOptions();
         private static BinanceSocketClientOptions DefaultOptions => _defaultOptions.Copy();
-        
-        /// <summary>
-        /// Spot streams
-        /// </summary>
+
+        /// <inheritdoc />
         public IBinanceSocketClientSpot Spot { get; set; }
-
-        /// <summary>
-        /// USDT-M futures stream
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceSocketClientFuturesUsdt FuturesUsdt { get; set; }
-
-        /// <summary>
-        /// COIN-M futures stream
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceSocketClientFuturesCoin FuturesCoin { get; set; }
-
-        /// <summary>
-        /// Leveraged tokens stream
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceSocketClientBlvt Blvt { get; set; }
         #endregion
 

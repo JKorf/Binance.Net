@@ -20,12 +20,12 @@ namespace Binance.Net.Interfaces.SubClients.Spot
         /// Execute a transfer between the spot account and a futures account
         /// </summary>
         /// <param name="asset">The asset to transfer</param>
-        /// <param name="amount">Amount to transfer</param>
+        /// <param name="quantity">Quantity to transfer</param>
         /// <param name="transferType">The transfer direction</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The transaction id</returns>
-        Task<WebCallResult<BinanceTransaction>> TransferFuturesAccountAsync(string asset, decimal amount, FuturesTransferType transferType, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceTransaction>> TransferFuturesAccountAsync(string asset, decimal quantity, FuturesTransferType transferType, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get history of transfers between spot and futures account
@@ -43,49 +43,49 @@ namespace Binance.Net.Interfaces.SubClients.Spot
         /// <summary>
         /// Borrow for cross-collateral
         /// </summary>
-        /// <param name="coin">The coin to borrow</param>
-        /// <param name="amount">The amount to borrow</param>
-        /// <param name="collateralCoin">The coin to use as collateral</param>
-        /// <param name="collateralAmount">The amount of collateral coin to use</param>
+        /// <param name="asset">The asset to borrow</param>
+        /// <param name="quantity">The quantity to borrow</param>
+        /// <param name="collateralAsset">The asset to use as collateral</param>
+        /// <param name="collateralQuantity">The quantity of collateral asset to use</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Borrow result</returns>
-        Task<WebCallResult<BinanceCrossCollateralBorrowResult>> BorrowForCrossCollateralAsync(string coin, string collateralCoin, decimal? amount = null, decimal? collateralAmount = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceCrossCollateralBorrowResult>> BorrowForCrossCollateralAsync(string asset, string collateralAsset, decimal? quantity = null, decimal? collateralQuantity = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get cross collateral borrow history
         /// </summary>
-        /// <param name="coin">The coin to get history for</param>
+        /// <param name="asset">The asset to get history for</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">The page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>History</returns>
-        Task<WebCallResult<BinanceQueryRecords<BinanceCrossCollateralBorrowHistory>>> GetCrossCollateralBorrowHistoryAsync(string? coin = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceQueryRecords<BinanceCrossCollateralBorrowHistory>>> GetCrossCollateralBorrowHistoryAsync(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Repay for cross-collateral
         /// </summary>
-        /// <param name="coin">The coin</param>
-        /// <param name="amount">The amount to repay</param>
-        /// <param name="collateralCoin">The collateral coin to repay</param>
+        /// <param name="asset">The asset</param>
+        /// <param name="quantity">The quantity to repay</param>
+        /// <param name="collateralAsset">The collateral asset to repay</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Repay result</returns>
-        Task<WebCallResult<BinanceCrossCollateralRepayResult>> RepayForCrossCollateralAsync(string coin, string collateralCoin, decimal amount, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceCrossCollateralRepayResult>> RepayForCrossCollateralAsync(string asset, string collateralAsset, decimal quantity, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get cross collateral borrow history
         /// </summary>
-        /// <param name="coin">The coin to get history for</param>
+        /// <param name="asset">The asset to get history for</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">The page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>History</returns>
-        Task<WebCallResult<BinanceQueryRecords<BinanceCrossCollateralRepayHistory>>> GetCrossCollateralRepayHistoryAsync(string? coin = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceQueryRecords<BinanceCrossCollateralRepayHistory>>> GetCrossCollateralRepayHistoryAsync(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get cross-collateral wallet info
@@ -106,61 +106,61 @@ namespace Binance.Net.Interfaces.SubClients.Spot
         /// <summary>
         /// Calculate rate after adjust cross-collateral loan to value
         /// </summary>
-        /// <param name="collateralCoin">The collateral coin</param>
-        /// <param name="loanCoin">The loan coin</param>
-        /// <param name="amount">The amount</param>
+        /// <param name="collateralAsset">The collateral asset</param>
+        /// <param name="loanAsset">The loan asset</param>
+        /// <param name="quantity">The quantity</param>
         /// <param name="direction">The direction</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>After collateral rate</returns>
-        Task<WebCallResult<BinanceCrossCollateralAfterAdjust>> GetRateAfterAdjustLoanToValueAsync(string collateralCoin, string loanCoin, decimal amount, AdjustRateDirection direction, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceCrossCollateralAfterAdjust>> GetRateAfterAdjustLoanToValueAsync(string collateralAsset, string loanAsset, decimal quantity, AdjustRateDirection direction, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get max amount for adjust cross-collateral LTV
+        /// Get max quantity for adjust cross-collateral LTV
         /// </summary>
-        /// <param name="collateralCoin">The collateral coin</param>
-        /// <param name="loanCoin">The loan coin</param>
+        /// <param name="collateralAsset">The collateral asset</param>
+        /// <param name="loanAsset">The loan asset</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>Max amounts</returns>
-        Task<WebCallResult<BinanceCrossCollateralAdjustMaxAmounts>> GetMaxAmountForAdjustCrossCollateralLoanToValueAsync(string collateralCoin, string loanCoin, long? receiveWindow = null, CancellationToken ct = default);
+        /// <returns>Max quantity</returns>
+        Task<WebCallResult<BinanceCrossCollateralAdjustMaxAmounts>> GetMaxAmountForAdjustCrossCollateralLoanToValueAsync(string collateralAsset, string loanAsset, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Adjust cross collateral LTV
         /// </summary>
-        /// <param name="collateralCoin">The collateral coin</param>
-        /// <param name="loanCoin">The loan coin</param>
-        /// <param name="amount">The amount</param>
+        /// <param name="collateralAsset">The collateral asset</param>
+        /// <param name="loanAsset">The loan asset</param>
+        /// <param name="quantity">The quantity</param>
         /// <param name="direction">The direction</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Adjust result</returns>
-        Task<WebCallResult<BinanceCrossCollateralAdjustLtvResult>> AdjustCrossCollateralLoanToValueAsync(string collateralCoin, string loanCoin, decimal amount, AdjustRateDirection direction, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceCrossCollateralAdjustLtvResult>> AdjustCrossCollateralLoanToValueAsync(string collateralAsset, string loanAsset, decimal quantity, AdjustRateDirection direction, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get cross collateral LTV adjustment history
         /// </summary>
-        /// <param name="loanCoin">The loan coin</param>
-        /// <param name="collateralCoin">The collateral coin</param>
+        /// <param name="loanAsset">The loan asset</param>
+        /// <param name="collateralAsset">The collateral asset</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">The page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Adjustment history</returns>
-        Task<WebCallResult<BinanceQueryRecords<BinanceCrossCollateralAdjustLtvHistory>>> GetAdjustCrossCollateralLoanToValueHistoryAsync(string? collateralCoin = null, string? loanCoin = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceQueryRecords<BinanceCrossCollateralAdjustLtvHistory>>> GetAdjustCrossCollateralLoanToValueHistoryAsync(string? collateralAsset = null, string? loanAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get cross collateral liquidation history
         /// </summary>
-        /// <param name="collateralCoin">The collateral coin</param>
-        /// <param name="loanCoin">The loan coin</param>
+        /// <param name="collateralAsset">The collateral asset</param>
+        /// <param name="loanAsset">The loan asset</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">The page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Liquidation history</returns>
-        Task<WebCallResult<BinanceQueryRecords<BinanceCrossCollateralLiquidationHistory>>> GetCrossCollateralLiquidationHistoryAsync(string? collateralCoin = null, string? loanCoin = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceQueryRecords<BinanceCrossCollateralLiquidationHistory>>> GetCrossCollateralLiquidationHistoryAsync(string? collateralAsset = null, string? loanAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
     }
 }

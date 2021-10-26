@@ -48,11 +48,11 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="poolId">The pool</param>
         /// <param name="asset">The asset</param>
         /// <param name="type">Remove type</param>
-        /// <param name="shareAmount">Amount to remove</param>
+        /// <param name="shareQuantity">Quantity to remove</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BinanceBSwapOperationResult>> RemoveLiquidityAsync(int poolId, string asset, LiquidityType type, decimal shareAmount, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceBSwapOperationResult>> RemoveLiquidityAsync(int poolId, string asset, LiquidityType type, decimal shareQuantity, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get liquidity operation records
@@ -116,7 +116,7 @@ namespace Binance.Net.Interfaces.SubClients
         Task<WebCallResult<IEnumerable<BinanceBSwapPoolConfig>>> GetBSwapPoolConfigureAsync(int poolId, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Calculate expected share amount for adding liquidity in single or dual token.
+        /// Calculate expected share quantity for adding liquidity in single or dual token.
         /// </summary>
         /// <param name="poolId">The pool</param>
         /// <param name="asset">The asset</param>
@@ -128,7 +128,7 @@ namespace Binance.Net.Interfaces.SubClients
         Task<WebCallResult<BinanceBSwapPreviewResult>> AddLiquidityPreviewAsync(int poolId, string asset, decimal quantity, LiquidityType type, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Calculate expected share amount for removing liquidity in single or dual token.
+        /// Calculate expected share quantity for removing liquidity in single or dual token.
         /// </summary>
         /// <param name="poolId">The pool</param>
         /// <param name="asset">The asset</param>

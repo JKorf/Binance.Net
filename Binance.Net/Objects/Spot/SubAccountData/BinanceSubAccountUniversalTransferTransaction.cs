@@ -62,9 +62,10 @@ namespace Binance.Net.Objects.Spot.SubAccountData
         public string Asset { get; set; } = "";
 
         /// <summary>
-        /// Amount
+        /// Quantity
         /// </summary>
-        public decimal Amount { get; set; }
+        [JsonProperty("amount")]
+        public decimal Quantity { get; set; }
 
         /// <summary>
         /// The time the universal transaction was created

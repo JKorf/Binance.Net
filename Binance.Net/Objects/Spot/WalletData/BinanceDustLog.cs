@@ -67,12 +67,12 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// Service charge
         /// </summary>
         [JsonProperty("serviceChargeAmount")]
-        public decimal ServiceChargeAmount { get; set; }
+        public decimal ServiceChargeQuantity { get; set; }
         /// <summary>
-        /// Amount
+        /// Quantity
         /// </summary>
         [JsonProperty("amount")]
-        public decimal Amount { get; set; }
+        public decimal Quantity { get; set; }
         /// <summary>
         /// Timestamp
         /// </summary>
@@ -80,10 +80,10 @@ namespace Binance.Net.Objects.Spot.WalletData
         [JsonConverter(typeof(TimestampConverter))]
         public DateTime OperateTime { get; set; }
         /// <summary>
-        /// Transferred amount
+        /// Transferred quantity
         /// </summary>
         [JsonProperty("transferedAmount")]
-        public decimal TransferredAmount { get; set; }
+        public decimal TransferredQuantity { get; set; }
         /// <summary>
         /// Asset
         /// </summary>

@@ -12,9 +12,10 @@ namespace Binance.Net.Objects.Spot.LendingData
     public class BinancePurchaseRecord
     {
         /// <summary>
-        /// Amount purchased
+        /// Quantity purchased
         /// </summary>
-        public decimal Amount { get; set; }
+        [JsonProperty("amount")]
+        public decimal Quantity { get; set; }
         /// <summary>
         /// Asset name
         /// </summary>
@@ -29,6 +30,10 @@ namespace Binance.Net.Objects.Spot.LendingData
         /// </summary>
         [JsonConverter(typeof(LendingTypeConverter))]
         public LendingType LendingType { get; set; }
+        /// <summary>
+        /// Lot
+        /// </summary>
+        public int Lot { get; set; }
         /// <summary>
         /// Name of the product
         /// </summary>

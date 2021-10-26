@@ -11,7 +11,7 @@ namespace Binance.Net.Objects.Spot.SpotData
     /// </summary>
     public class BinanceOrder: BinanceOrderBase, ICommonOrder
     {
-        string ICommonOrderId.CommonId => OrderId.ToString(CultureInfo.InvariantCulture);
+        string ICommonOrderId.CommonId => Id.ToString(CultureInfo.InvariantCulture);
         string ICommonOrder.CommonSymbol => Symbol;
         decimal ICommonOrder.CommonPrice => Price;
         decimal ICommonOrder.CommonQuantity => Quantity;

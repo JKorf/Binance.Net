@@ -19,7 +19,7 @@ namespace Binance.Net.Objects.Spot.MarketStream
         /// The id of this aggregated trade
         /// </summary>
         [JsonProperty("a")]
-        public long AggregateTradeId { get; set; }
+        public long Id { get; set; }
         /// <summary>
         /// The price of the trades
         /// </summary>

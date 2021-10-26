@@ -1,0 +1,19 @@
+{
+    "totalAssetOfBtc": "4.33333333", 
+    "totalLiabilityOfBtc": "2.11111112", 
+    "totalNetAssetOfBtc": "2.22222221",
+    "subAccountList":[
+        {
+            "email":"123@test.com",
+            "totalAssetOfBtc": "2.11111111",
+            "totalLiabilityOfBtc": "1.11111111",
+            "totalNetAssetOfBtc": "1.00000000"
+        },
+        { 
+            "email":"345@test.com",
+            "totalAssetOfBtc": "2.22222222", 
+            "totalLiabilityOfBtc": "1.00000001", 
+            "totalNetAssetOfBtc": "1.22222221"
+        }
+    ]
+}

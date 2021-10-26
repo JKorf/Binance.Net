@@ -1,0 +1,21 @@
+[
+    { 
+         "symbol":"BTCUSDT",  // long/short account num ratio of all traders
+          "longShortRatio":"0.1960",  //long account num ratio of all traders
+          "longAccount": "0.6622",   // short account num ratio of all traders
+          "shortAccount":"0.3378", 
+          "timestamp":"1583139600000"
+
+     },
+
+     {
+
+         "symbol":"BTCUSDT",
+          "longShortRatio":"1.9559",
+          "longAccount": "0.6617", 
+          "shortAccount":"0.3382",                  
+          "timestamp":"1583139900000"
+
+        },   
+
+]

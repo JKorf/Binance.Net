@@ -40,10 +40,10 @@ namespace Binance.Net.Objects.Futures.UserStream
         public PositionSide PositionSide { get; set; }
 
         /// <summary>
-        /// Position Amount
+        /// Position quantity
         /// </summary>
         [JsonProperty("pa")]
-        public decimal PositionAmount { get; set; }
+        public decimal PositionQuantity { get; set; }
 
         /// <summary>
         /// Margin type

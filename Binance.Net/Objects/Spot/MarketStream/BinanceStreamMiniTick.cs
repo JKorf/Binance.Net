@@ -41,7 +41,7 @@ namespace Binance.Net.Objects.Spot.MarketStream
         /// <summary>
         /// Total traded volume
         /// </summary>
-        public abstract decimal BaseVolume { get; set; }
+        public abstract decimal Volume { get; set; }
 
         /// <summary>
         /// Total traded quote volume
@@ -56,7 +56,7 @@ namespace Binance.Net.Objects.Spot.MarketStream
     {
         /// <inheritdoc/>
         [JsonProperty("v")]
-        public override decimal BaseVolume { get; set; }
+        public override decimal Volume { get; set; }
         /// <inheritdoc/>
         [JsonProperty("q")]
         public override decimal QuoteVolume { get; set; }
@@ -69,7 +69,7 @@ namespace Binance.Net.Objects.Spot.MarketStream
     {
         /// <inheritdoc/>
         [JsonProperty("q")]
-        public override decimal BaseVolume { get; set; }
+        public override decimal Volume { get; set; }
         /// <inheritdoc/>
         [JsonProperty("v")]
         public override decimal QuoteVolume { get; set; }

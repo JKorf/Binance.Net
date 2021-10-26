@@ -40,9 +40,10 @@ namespace Binance.Net.Objects.BSwap
     public class BinancePoolShare
     {
         /// <summary>
-        /// Share amount
+        /// Share quantity
         /// </summary>
-        public decimal ShareAmount { get; set; }
+        [JsonProperty("shareAmount")]
+        public decimal ShareQuantity { get; set; }
         /// <summary>
         /// Share percentage
         /// </summary>

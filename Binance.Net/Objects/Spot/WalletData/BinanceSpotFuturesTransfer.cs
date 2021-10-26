@@ -21,9 +21,10 @@ namespace Binance.Net.Objects.Spot.WalletData
         [JsonProperty("tranId")]
         public long TransactionId { get; set; }
         /// <summary>
-        /// The amount transferred
+        /// The quantity transferred
         /// </summary>
-        public decimal Amount { get; set; }
+        [JsonProperty("amount")]
+        public decimal Quantity { get; set; }
         /// <summary>
         /// The transfer direction
         /// </summary>

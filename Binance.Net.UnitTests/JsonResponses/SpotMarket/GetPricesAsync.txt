@@ -1,0 +1,10 @@
+[
+  {
+    "symbol": "LTCBTC",
+    "price": "4.00000200"
+  },
+  {
+    "symbol": "ETHBTC",
+    "price": "0.07946600"
+  }
+]

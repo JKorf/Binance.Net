@@ -43,11 +43,7 @@ namespace Binance.Net.SubClients
         }
 
         #region Acquiring CoinName
-        /// <summary>
-        /// Gets mining coins info
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Coins info</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceMiningCoin>>> GetMiningCoinListAsync(CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>
@@ -68,11 +64,7 @@ namespace Binance.Net.SubClients
         #endregion Acquiring CoinName
 
         #region Acquiring Algorithm 
-        /// <summary>
-        /// Gets mining algorithms info
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Algorithms info</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceMiningAlgorithm>>> GetMiningAlgorithmListAsync(CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>
@@ -94,14 +86,7 @@ namespace Binance.Net.SubClients
 
         #region Request Detail Miner List
 
-        /// <summary>
-        /// Gets miner details
-        /// </summary>
-        /// <param name="algorithm">Algorithm</param>
-        /// <param name="userName">Mining account</param>
-        /// <param name="workerName">Miners name</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Miner details</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceMinerDetails>>> GetMinerDetailsAsync(string algorithm, string userName, string workerName, CancellationToken ct = default)
         {
             algorithm.ValidateNotNull(nameof(algorithm));
@@ -129,17 +114,7 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Request Miner List
-        /// <summary>
-        /// Gets miner list
-        /// </summary>
-        /// <param name="algorithm">Algorithm</param>
-        /// <param name="userName">Mining account</param>
-        /// <param name="page">Result page</param>
-        /// <param name="sortAscending">Sort in ascending order</param>
-        /// <param name="sortColumn">Column to sort by</param>
-        /// <param name="workerStatus">Filter by status</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Miner list</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceMinerList>> GetMinerListAsync(string algorithm, string userName, int? page = null, bool? sortAscending = null, string? sortColumn = null, MinerStatus? workerStatus = null, CancellationToken ct = default)
         {
             algorithm.ValidateNotNull(nameof(algorithm));
@@ -170,18 +145,7 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Revenue List
-        /// <summary>
-        /// Gets revenue list
-        /// </summary>
-        /// <param name="algorithm">Algorithm</param>
-        /// <param name="userName">Mining account</param>
-        /// <param name="page">Result page</param>
-        /// <param name="pageSize">Results per page</param>
-        /// <param name="coin">Coin</param>
-        /// <param name="startDate">Start date</param>
-        /// <param name="endDate">End date</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Revenue list</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceRevenueList>> GetMiningRevenueListAsync(string algorithm, string userName, string? coin = null, DateTime? startDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null, CancellationToken ct = default)
         {
             algorithm.ValidateNotNull(nameof(algorithm));
@@ -213,18 +177,7 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Other Revenue List
-        /// <summary>
-        /// Get other revenue list
-        /// </summary>
-        /// <param name="algorithm">Algorithm</param>
-        /// <param name="userName">Mining account</param>
-        /// <param name="page">Result page</param>
-        /// <param name="pageSize">Results per page</param>
-        /// <param name="coin">Coin</param>
-        /// <param name="startDate">Start date</param>
-        /// <param name="endDate">End date</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Revenue list</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceOtherRevenueList>> GetMiningOtherRevenueListAsync(string algorithm, string userName, string? coin = null, DateTime? startDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null, CancellationToken ct = default)
         {
             algorithm.ValidateNotNull(nameof(algorithm));
@@ -255,13 +208,7 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Statistics list
-        /// <summary>
-        /// Get mining statistics
-        /// </summary>
-        /// <param name="algorithm">Algorithm</param>
-        /// <param name="userName">User name</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Mining statistics</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceMiningStatistic>> GetMiningStatisticsAsync(string algorithm, string userName, CancellationToken ct = default)
         {
             algorithm.ValidateNotNull(nameof(algorithm));
@@ -286,14 +233,8 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Account List
-        /// <summary>
-        /// Gets mining account list
-        /// </summary>
-        /// <param name="algorithm">Algorithm</param>
-        /// <param name="userName">Mining account user name</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Revenue list</returns>
-        public async Task<WebCallResult<BinanceMiningAccount>> GetMiningAccountListAsync(string algorithm, string userName, CancellationToken ct = default)
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceMiningAccount>>> GetMiningAccountListAsync(string algorithm, string userName, CancellationToken ct = default)
         {
             algorithm.ValidateNotNull(nameof(algorithm));
             userName.ValidateNotNull(nameof(userName));
@@ -305,26 +246,19 @@ namespace Binance.Net.SubClients
                 {"timestamp", _baseClient.GetTimestamp()}
             };
 
-            var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceMiningAccount>>(_baseClient.GetUrlSpot(miningAccountListEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceResult<IEnumerable<BinanceMiningAccount>>>(_baseClient.GetUrlSpot(miningAccountListEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result.Success)
-                return WebCallResult<BinanceMiningAccount>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
+                return WebCallResult<IEnumerable<BinanceMiningAccount>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<BinanceMiningAccount>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
+                return WebCallResult<IEnumerable<BinanceMiningAccount>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
 
             return result.As(result.Data.Data);
         }
         #endregion
 
         #region Hashrate Resale List
-
-        /// <summary>
-        /// Gets hash rate resale list
-        /// </summary>
-        /// <param name="page">Page</param>
-        /// <param name="pageSize">Results per page</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Resale list</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceHashrateResaleList>> GetHashrateResaleListAsync(int? page = null, int? pageSize = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>
@@ -347,16 +281,7 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Hashrate Resale Details
-
-        /// <summary>
-        /// Gets hash rate resale details
-        /// </summary>
-        /// <param name="configId">The mining id</param>
-        /// <param name="userName">Mining account</param>
-        /// <param name="page">Page</param>
-        /// <param name="pageSize">Results per page</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Resale details</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceHashrateResaleDetails>> GetHashrateResaleDetailsAsync(int configId, string userName, int? page = null, int? pageSize = null, CancellationToken ct = default)
         {
             userName.ValidateNotNull(nameof(userName));
@@ -385,17 +310,7 @@ namespace Binance.Net.SubClients
 
         #region Hashrate Resale Request
 
-        /// <summary>
-        /// Hashrate resale request
-        /// </summary>
-        /// <param name="userName">Mining account</param>
-        /// <param name="algorithm">Transfer algorithm</param>
-        /// <param name="startDate">Resale start time</param>
-        /// <param name="endDate">Resale end time</param>
-        /// <param name="toUser">To mining account</param>
-        /// <param name="hashRate">Results per page</param>
-        /// <param name="ct">Resale hashrate h/s must be transferred (BTC is greater than 500000000000 ETH is greater than 500000)</param>
-        /// <returns>Mining account</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<int>> PlaceHashrateResaleRequestAsync(string userName, string algorithm, DateTime startDate, DateTime endDate, string toUser, decimal hashRate, CancellationToken ct = default)
         {
             userName.ValidateNotNull(nameof(userName));
@@ -427,14 +342,8 @@ namespace Binance.Net.SubClients
 
         #region Cancel Hashrate Resale Configuration
 
-        /// <summary>
-        /// Cancel Hashrate Resale Configuration
-        /// </summary>
-        /// <param name="configId">Mining id</param>
-        /// <param name="userName">Mining account</param>
-        /// <param name="ct">Resale hashrate h/s must be transferred (BTC is greater than 500000000000 ETH is greater than 500000)</param>
-        /// <returns>Success</returns>
-        public async Task<WebCallResult<bool>> PlaceHashrateResaleRequestAsync(int configId, string userName, CancellationToken ct = default)
+        /// <inheritdoc />
+        public async Task<WebCallResult<bool>> CancelHashrateResaleRequestAsync(int configId, string userName, CancellationToken ct = default)
         {
             userName.ValidateNotNull(nameof(userName));
 

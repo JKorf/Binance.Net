@@ -10,14 +10,18 @@ namespace Binance.Net.Objects.Spot.MarginData
     public class BinanceInterestHistory
     {
         /// <summary>
+        /// Isolated symbol
+        /// </summary>
+        public string? IsolatedSymbol { get; set; }
+        /// <summary>
         /// The asset
         /// </summary>
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// The amount of interest
+        /// The quantity of interest
         /// </summary>
         [JsonProperty("interest")]
-        public decimal InterestAmount { get; set; }
+        public decimal InterestQuantity { get; set; }
         /// <summary>
         /// Timestamp
         /// </summary>

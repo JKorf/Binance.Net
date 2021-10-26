@@ -1,0 +1,16 @@
+[
+    {
+        "asset": "BUSD",
+        "interest": "0.00006408",
+        "lendingType": "DAILY",
+        "productName": "BUSD",
+        "time": 1577233578000
+    },
+    {
+        "asset": "USDT",
+        "interest": "0.00687654",
+        "lendingType": "DAILY",
+        "productName": "USDT",
+        "time": 1577233562000
+    }
+]

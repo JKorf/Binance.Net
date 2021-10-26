@@ -14,21 +14,25 @@ namespace Binance.Net.Objects.Spot.SpotData
     public class BinanceAccountInfo
     {
         /// <summary>
-        /// Commission percentage to pay when making trades
+        /// Fee percentage to pay when making trades
         /// </summary>
-        public decimal MakerCommission { get; set; }
+        [JsonProperty("makerCommission")]
+        public decimal MakerFee { get; set; }
         /// <summary>
-        /// Commission percentage to pay when taking trades
+        /// Fee percentage to pay when taking trades
         /// </summary>
-        public decimal TakerCommission { get; set; }
+        [JsonProperty("takerCommission")]
+        public decimal TakerFee { get; set; }
         /// <summary>
-        /// Commission percentage to buy when buying
+        /// Fee percentage to pay when buying
         /// </summary>
-        public decimal BuyerCommission { get; set; }
+        [JsonProperty("buyerCommission")]
+        public decimal BuyerFee { get; set; }
         /// <summary>
-        /// Commission percentage to buy when selling
+        /// Fee percentage to pay when selling
         /// </summary>
-        public decimal SellerCommission { get; set; }
+        [JsonProperty("sellerCommission")]
+        public decimal SellerFee { get; set; }
         /// <summary>
         /// Boolean indicating if this account can trade
         /// </summary>
@@ -72,20 +76,21 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// </summary>
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// The amount that isn't locked in a trade
+        /// The quantity that isn't locked in a trade
         /// </summary>
-        public decimal Free { get; set; }
+        [JsonProperty("free")]
+        public decimal Available { get; set; }
         /// <summary>
-        /// The amount that is currently locked in a trade
+        /// The quantity that is currently locked in a trade
         /// </summary>
         public decimal Locked { get; set; }
         /// <summary>
         /// The total balance of this asset (Free + Locked)
         /// </summary>
-        public decimal Total => Free + Locked;
+        public decimal Total => Available + Locked;
 
         string ICommonBalance.CommonAsset => Asset;
-        decimal ICommonBalance.CommonAvailable => Free;
+        decimal ICommonBalance.CommonAvailable => Available;
         decimal ICommonBalance.CommonTotal => Total;
     }
 }

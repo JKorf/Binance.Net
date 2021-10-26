@@ -1,0 +1,4 @@
+{ 
+    "status": 0,              // 0: normal，1：system maintenance
+    "msg": "normal"           // "normal", "system_maintenance"
+}

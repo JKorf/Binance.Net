@@ -14,15 +14,6 @@ namespace Binance.Net.Interfaces.SubClients
     public interface IBinanceClientMarket
     {        
         /// <summary>
-        /// Gets the order book for the provided symbol
-        /// </summary>
-        /// <param name="symbol">The symbol to get the order book for</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The order book for the symbol</returns>
-        Task<WebCallResult<BinanceOrderBook>> GetOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default);
-
-        /// <summary>
         /// Gets the recent trades for a symbol
         /// </summary>
         /// <param name="symbol">The symbol to get recent trades for</param>

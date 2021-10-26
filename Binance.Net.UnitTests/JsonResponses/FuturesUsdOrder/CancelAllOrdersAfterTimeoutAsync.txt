@@ -1,0 +1,4 @@
+{
+    "symbol": "BTCUSDT", 
+    "countdownTime": "100000"
+}

@@ -1,4 +1,6 @@
-﻿namespace Binance.Net.Objects.Brokerage.SubAccountData
+﻿using Newtonsoft.Json;
+
+namespace Binance.Net.Objects.Brokerage.SubAccountData
 {
     /// <summary>
     /// Sub Account Futures Commission
@@ -14,7 +16,12 @@
         /// Symbol
         /// </summary>
         public string Symbol { get; set; } = string.Empty;
-        
+
+        /// <summary>
+        /// Pair
+        /// </summary>
+        public string Pair { get; set; } = string.Empty;
+
         /// <summary>
         /// USDT-Ⓜ futures commission adjustment for maker
         /// </summary>

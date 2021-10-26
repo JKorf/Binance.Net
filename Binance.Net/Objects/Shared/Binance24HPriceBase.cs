@@ -51,7 +51,7 @@ namespace Binance.Net.Objects.Shared
         /// <summary>
         /// The base volume traded in the last 24 hours
         /// </summary>
-        public abstract decimal BaseVolume { get; set; }
+        public abstract decimal Volume { get; set; }
         /// <summary>
         /// The quote asset volume traded in the last 24 hours
         /// </summary>

@@ -22,9 +22,10 @@ namespace Binance.Net.Objects.Spot.Futures
         public DateTime ConfirmedTime { get; set; }
 
         /// <summary>
-        /// Coin
+        /// Asset
         /// </summary>
-        public string Coin { get; set; } = string.Empty;
+        [JsonProperty("coin")]
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// The collateral rate
         /// </summary>
@@ -43,17 +44,20 @@ namespace Binance.Net.Objects.Spot.Futures
         [JsonConverter(typeof(TimestampConverter))]
         public DateTime DeadLine { get; set; }
         /// <summary>
-        /// Collateral coin
+        /// Collateral asset
         /// </summary>
-        public string CollateralCoin { get; set; } = string.Empty;
+        [JsonProperty("collateralCoin")]
+        public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Collateral amount
+        /// Collateral quantity
         /// </summary>
-        public decimal CollateralAmount { get; set; }
+        [JsonProperty("collateralAmount")]
+        public decimal CollateralQuantity { get; set; }
         /// <summary>
         /// The status of the transfer
         /// </summary>
         [JsonConverter(typeof(FuturesTransferStatusConverter))]
+        [JsonProperty("orderStatus")]
         public FuturesTransferStatus Status { get; set; }
     }
 }

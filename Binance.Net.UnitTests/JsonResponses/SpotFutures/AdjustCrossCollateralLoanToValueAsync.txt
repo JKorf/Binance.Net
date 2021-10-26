@@ -1,0 +1,6 @@
+{
+    "collateralCoin": "BUSD",
+    "direction": "ADDITIONAL",
+    "amount": "5.00000000",
+    "time": 1583540328433
+}

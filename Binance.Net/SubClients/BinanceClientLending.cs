@@ -44,16 +44,7 @@ namespace Binance.Net.SubClients
         }
 
         #region Get Flexible Product List
-        /// <summary>
-        /// Get product list
-        /// </summary>
-        /// <param name="status">Filter by status</param>
-        /// <param name="featured">Filter by featured</param>
-        /// <param name="page">Page to retrieve</param>
-        /// <param name="pageSize">Page size to return</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of product</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceSavingsProduct>>> GetFlexibleProductListAsync(ProductStatus? status = null, bool? featured = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -76,13 +67,7 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Get Left Daily Purchase Quota of Flexible Product
-        /// <summary>
-        /// Get the purchase quota left for a product
-        /// </summary>
-        /// <param name="productId">Id of the product</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Quota left</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinancePurchaseQuotaLeft>> GetLeftDailyPurchaseQuotaOfFlexableProductAsync(string productId, long? receiveWindow = null, CancellationToken ct = default)
         {
             productId.ValidateNotNull(nameof(productId));
@@ -104,15 +89,8 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Purchase Flexible Product
-        /// <summary>
-        /// Purchase flexible product
-        /// </summary>
-        /// <param name="productId">Id of the product</param>
-        /// <param name="amount">The amount to purchase</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Purchase id</returns>
-        public async Task<WebCallResult<BinanceLendingPurchaseResult>> PurchaseFlexibleProductAsync(string productId, decimal amount, long? receiveWindow = null, CancellationToken ct = default)
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceLendingPurchaseResult>> PurchaseFlexibleProductAsync(string productId, decimal quantity, long? receiveWindow = null, CancellationToken ct = default)
         {
             productId.ValidateNotNull(nameof(productId));
 
@@ -123,7 +101,7 @@ namespace Binance.Net.SubClients
             var parameters = new Dictionary<string, object>
             {
                 { "productId", productId },
-                { "amount", amount.ToString(CultureInfo.InvariantCulture) },
+                { "amount", quantity.ToString(CultureInfo.InvariantCulture) },
                 { "timestamp", _baseClient.GetTimestamp() }
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -133,14 +111,7 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Get Left Daily Redemption Quota of Flexible Product
-        /// <summary>
-        /// Get the redemption quota left for a product
-        /// </summary>
-        /// <param name="productId">Id of the product</param>
-        /// <param name="type">Type</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Quota left</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceRedemptionQuotaLeft>> GetLeftDailyRedemptionQuotaOfFlexibleProductAsync(string productId, RedeemType type, long? receiveWindow = null, CancellationToken ct = default)
         {
             productId.ValidateNotNull(nameof(productId));
@@ -162,16 +133,8 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Redeem Flexible Product
-        /// <summary>
-        /// Redeem flexible product
-        /// </summary>
-        /// <param name="productId">Id of the product</param>
-        /// <param name="type">Redeem type</param>
-        /// <param name="amount">The amount to redeem</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<object>> RedeemFlexibleProductAsync(string productId, decimal amount, RedeemType type, long? receiveWindow = null, CancellationToken ct = default)
+        /// <inheritdoc />
+        public async Task<WebCallResult<object>> RedeemFlexibleProductAsync(string productId, decimal quantity, RedeemType type, long? receiveWindow = null, CancellationToken ct = default)
         {
             productId.ValidateNotNull(nameof(productId));
 
@@ -183,7 +146,7 @@ namespace Binance.Net.SubClients
             {
                 { "productId", productId },
                 { "type", JsonConvert.SerializeObject(type, new RedeemTypeConverter(false)) },
-                { "amount", amount.ToString(CultureInfo.InvariantCulture) },
+                { "amount", quantity.ToString(CultureInfo.InvariantCulture) },
                 { "timestamp", _baseClient.GetTimestamp() }
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -193,13 +156,7 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Get Flexible Product Position
-        /// <summary>
-        /// Get flexible product position
-        /// </summary>
-        /// <param name="asset">Asset</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Flexible product position</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceFlexibleProductPosition>>> GetFlexibleProductPositionAsync(string asset, long? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
@@ -220,19 +177,7 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Get Fixed And Customized Fixed Project List
-        /// <summary>
-        /// Get fixed and customized fixed project list
-        /// </summary>
-        /// <param name="type">Type of project</param>
-        /// <param name="asset">Asset</param>
-        /// <param name="status">Filter by status</param>
-        /// <param name="sortAscending">If should sort ascending</param>
-        /// <param name="sortBy">Sort by. Valid values: "START_TIME", "LOT_SIZE", "INTEREST_RATE", "DURATION"; default "START_TIME"</param>
-        /// <param name="currentPage">Result page</param>
-        /// <param name="size">Page size</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Project list</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceProject>>> GetFixedAndCustomizedFixedProjectListAsync(
             ProjectType type, string? asset = null, ProductStatus? status = null, bool? sortAscending = null, string? sortBy = null, int? currentPage = null, int? size = null, long? receiveWindow = null, CancellationToken ct = default)
         {
@@ -259,14 +204,7 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Purchase Customized Fixed Project
-        /// <summary>
-        /// Purchase customized fixed project
-        /// </summary>
-        /// <param name="projectId">Id of the project</param>
-        /// <param name="lot">The lot</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Purchase id</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceLendingPurchaseResult>> PurchaseCustomizedFixedProjectAsync(string projectId, int lot, long? receiveWindow = null, CancellationToken ct = default)
         {
             projectId.ValidateNotNull(nameof(projectId));
@@ -289,15 +227,7 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Get Customized Fixed Project Position
-        /// <summary>
-        /// Get customized fixed project position
-        /// </summary>
-        /// <param name="asset">Asset</param>
-        /// <param name="projectId">The project id</param>
-        /// <param name="status">Filter by status</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Customized fixed project position</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceCustomizedFixedProjectPosition>>> GetCustomizedFixedProjectPositionsAsync(string asset, string? projectId = null, ProjectStatus? status = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
@@ -320,12 +250,7 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Lending Account
-        /// <summary>
-        /// Get lending account info
-        /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Lending account</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceLendingAccount>> GetLendingAccountAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -343,18 +268,7 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Get Purchase Records
-        /// <summary>
-        /// Get purchase records
-        /// </summary>
-        /// <param name="lendingType">Lending type</param>
-        /// <param name="asset">Asset</param>
-        /// <param name="page">Results page</param>
-        /// <param name="startTime">Filter by startTime from</param>
-        /// <param name="endTime">Filter by endTime from</param>
-        /// <param name="limit">Limit of the amount of results</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The purchase records</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinancePurchaseRecord>>> GetPurchaseRecordsAsync(LendingType lendingType, string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = 1, int? limit = 10, long? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -378,18 +292,7 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Get Redemption Record
-        /// <summary>
-        /// Get redemption records
-        /// </summary>
-        /// <param name="lendingType">Lending type</param>
-        /// <param name="asset">Asset</param>
-        /// <param name="page">Results page</param>
-        /// <param name="startTime">Filter by startTime from</param>
-        /// <param name="endTime">Filter by endTime from</param>
-        /// <param name="limit">Limit of the amount of results</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The redemption records</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceRedemptionRecord>>> GetRedemptionRecordsAsync(LendingType lendingType, string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = 1, int? limit = 10, long? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -413,18 +316,7 @@ namespace Binance.Net.SubClients
         #endregion
 
         #region Get Interest History
-        /// <summary>
-        /// Get interest history
-        /// </summary>
-        /// <param name="lendingType">Lending type</param>
-        /// <param name="asset">Asset</param>
-        /// <param name="page">Results page</param>
-        /// <param name="startTime">Filter by startTime from</param>
-        /// <param name="endTime">Filter by endTime from</param>
-        /// <param name="limit">Limit of the amount of results</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The interest history</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceLendingInterestHistory>>> GetLendingInterestHistoryAsync(LendingType lendingType, string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = 1, int? limit = 10, long? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -446,24 +338,16 @@ namespace Binance.Net.SubClients
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceLendingInterestHistory>>(_baseClient.GetUrlSpot(lendingInterestHistoryEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
         #endregion
-        
+
         #region ChangeToDailyPosition
-        /// <summary>
-        /// Changed fixed/activity position to daily position
-        /// </summary>
-        /// <param name="projectId">Id of the project</param>
-        /// <param name="lot">The lot</param>
-        /// <param name="positionId">For fixed position</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Purchase id</returns>
-        public async Task<WebCallResult<BinanceLendingPurchaseResult>> ChangeToDailyPositionAsync(string projectId, int lot, long? positionId = null, long? receiveWindow = null, CancellationToken ct = default)
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceLendingChangeToDailyResult>> ChangeToDailyPositionAsync(string projectId, int lot, long? positionId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             projectId.ValidateNotNull(nameof(projectId));
 
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
-                return new WebCallResult<BinanceLendingPurchaseResult>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+                return new WebCallResult<BinanceLendingChangeToDailyResult>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var parameters = new Dictionary<string, object>
             {
@@ -474,7 +358,7 @@ namespace Binance.Net.SubClients
             parameters.AddOptionalParameter("positionId", positionId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceLendingPurchaseResult>(_baseClient.GetUrlSpot(positionChangedEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceLendingChangeToDailyResult>(_baseClient.GetUrlSpot(positionChangedEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion

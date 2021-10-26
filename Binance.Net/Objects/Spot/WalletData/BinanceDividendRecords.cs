@@ -10,9 +10,14 @@ namespace Binance.Net.Objects.Spot.WalletData
     public class BinanceDividendRecord
     {
         /// <summary>
-        /// Amount
+        /// Id
         /// </summary>
-        public decimal Amount { get; set; }
+        public long Id { get; set; }
+        /// <summary>
+        /// Quantity
+        /// </summary>
+        [JsonProperty("amount")]
+        public decimal Quantity { get; set; }
         /// <summary>
         /// Asset
         /// </summary>

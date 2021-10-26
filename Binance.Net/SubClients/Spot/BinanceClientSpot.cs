@@ -20,29 +20,18 @@ namespace Binance.Net.SubClients.Spot
     {
         private const string tradingStatusEndpoint = "account/apiTradingStatus";
 
-        /// <summary>
-        /// Spot system endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientSpotSystem System { get; }
-        /// <summary>
-        /// Spot market endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientSpotMarket Market { get; }
-        /// <summary>
-        /// Spot order endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientSpotOrder Order { get; }
-        /// <summary>
-        /// Spot user stream endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientUserStream UserStream { get; }
-
-        /// <summary>
-        /// Spot/futures endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientSpotFuturesInteraction Futures { get; }
 
-        private BinanceClient _baseClient;
+        private readonly BinanceClient _baseClient;
 
         internal BinanceClientSpot(Log log, BinanceClient baseClient)
         {
@@ -56,12 +45,7 @@ namespace Binance.Net.SubClients.Spot
         }
 
         #region Trading status
-        /// <summary>
-        /// Gets the trading status for the current account
-        /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The trading status of the account</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceTradingStatus>> GetTradingStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);

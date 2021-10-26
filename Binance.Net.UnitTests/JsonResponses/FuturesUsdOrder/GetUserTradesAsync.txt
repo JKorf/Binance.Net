@@ -1,0 +1,18 @@
+[
+  {
+    "buyer": false,
+    "commission": "-0.07819010",
+    "commissionAsset": "USDT",
+    "id": 698759,
+    "maker": false,
+    "orderId": 25851813,
+    "price": "7819.01",
+    "qty": "0.002",
+    "quoteQty": "15.63802",
+    "realizedPnl": "-0.91539999",
+    "side": "SELL",
+    "positionSide": "SHORT",
+    "symbol": "BTCUSDT",
+    "time": 1569514978020
+  }
+]

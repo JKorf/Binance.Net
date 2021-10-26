@@ -39,10 +39,10 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         public string Asset { get; set; } = string.Empty;
         
         /// <summary>
-        /// Amount
+        /// Quantity
         /// </summary>
         [JsonProperty("qty")]
-        public decimal Amount { get; set; }
+        public decimal Quantity { get; set; }
         
         /// <summary>
         /// Date

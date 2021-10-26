@@ -88,7 +88,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Api key result</returns>
-        Task<WebCallResult<IEnumerable<BinanceBrokerageSubAccountApiKey>>> GetSubAccountApiKeyAsync(string subAccountId, string? apiKey = null, int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceBrokerageSubAccountApiKey>> GetSubAccountApiKeyAsync(string subAccountId, string? apiKey = null, int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Change Sub Account Api Permission
@@ -264,7 +264,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// <para>Transfer between futures account is not supported</para>
         /// </summary>
         /// <param name="asset">Asset</param>
-        /// <param name="amount">Amount</param>
+        /// <param name="quantity">Quantity</param>
         /// <param name="fromId">From id</param>
         /// <param name="fromAccountType">From type</param>
         /// <param name="toId">To id</param>
@@ -273,7 +273,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transfer result</returns>
-        Task<WebCallResult<BinanceBrokerageTransferResult>> TransferUniversalAsync(string asset, decimal amount,
+        Task<WebCallResult<BinanceBrokerageTransferResult>> TransferUniversalAsync(string asset, decimal quantity,
             string? fromId, BrokerageAccountType fromAccountType, string? toId, BrokerageAccountType toAccountType,
             string? clientTransferId = null, int? receiveWindow = null, CancellationToken ct = default);
 
@@ -298,7 +298,7 @@ namespace Binance.Net.Interfaces.SubClients
         Task<WebCallResult<IEnumerable<BinanceBrokerageTransferTransactionUniversal>>> GetTransferHistoryUniversalAsync(
             string? fromId = null, string? toId = null, string? clientTransferId = null, DateTime? startDate = null,
             DateTime? endDate = null, int? page = null, int? limit = null, bool showAllStatus = false, int? receiveWindow = null, CancellationToken ct = default);
-        
+
         /// <summary>
         /// Sub Account Transfer (Spot)
         /// <para>You need to enable "internal transfer" option for the api key which requests this endpoint</para>
@@ -306,14 +306,14 @@ namespace Binance.Net.Interfaces.SubClients
         /// <para>Transfer to master account if toId not sent</para>
         /// </summary>
         /// <param name="asset">Asset</param>
-        /// <param name="amount">Amount</param>
+        /// <param name="quantity">Quantity</param>
         /// <param name="fromId">From id</param>
         /// <param name="toId">To id</param>
         /// <param name="clientTransferId">Client transfer id, must be unique</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transfer result</returns>
-        Task<WebCallResult<BinanceBrokerageTransferResult>> TransferAsync(string asset, decimal amount,
+        Task<WebCallResult<BinanceBrokerageTransferResult>> TransferAsync(string asset, decimal quantity,
             string? fromId, string? toId, string? clientTransferId = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
@@ -324,7 +324,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// <para>Each master account could transfer 5000 times/min</para>
         /// </summary>
         /// <param name="asset">Asset</param>
-        /// <param name="amount">Amount</param>
+        /// <param name="quantity">Quantity</param>
         /// <param name="futuresType">Futures type</param>
         /// <param name="fromId">From id</param>
         /// <param name="toId">To id</param>
@@ -332,7 +332,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transfer result</returns>
-        Task<WebCallResult<BinanceBrokerageTransferFuturesResult>> TransferFuturesAsync(string asset, decimal amount, BinanceBrokerageFuturesType futuresType,
+        Task<WebCallResult<BinanceBrokerageTransferFuturesResult>> TransferFuturesAsync(string asset, decimal quantity, BinanceBrokerageFuturesType futuresType,
             string? fromId, string? toId, string? clientTransferId = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>

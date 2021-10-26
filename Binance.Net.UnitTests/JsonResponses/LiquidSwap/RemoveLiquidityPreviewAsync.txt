@@ -1,0 +1,9 @@
+{
+        "quoteAsset": "USDT",
+        "baseAsset": "BUSD", //Display when type is "COMBINATION" 
+        "quoteAmt": 300000,
+        "baseAmt": 299975, //Display when type is "COMBINATION" 
+        "price": 1.00008334,
+        "slippage": 0.00007245, //Display when type is "SINGLE" 
+        "fee": 120 //Display when type is "SINGLE" 
+}

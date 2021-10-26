@@ -21,9 +21,10 @@ namespace Binance.Net.Objects.Spot.Mining
         /// </summary>
         public int PageSize { get; set; }
         /// <summary>
-        /// Revenue items
+        /// Details
         /// </summary>
-        public IEnumerable<BinanceOtherRevenueItem> AccountProfits { get; set; } = Array.Empty<BinanceOtherRevenueItem>();
+        [JsonProperty("configDetails")]
+        public IEnumerable<BinanceHashrateResaleItem> ResaleItmes { get; set; } = Array.Empty<BinanceHashrateResaleItem>();
     }
 
     /// <summary>

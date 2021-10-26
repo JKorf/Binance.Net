@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Spot.SpotData
     /// <summary>
     /// Ids of a canceled order, either OCO or normal
     /// </summary>
-    public class BinanceCancelledId
+    public class BinanceCanceledId
     {
         /// <summary>
         /// Id of the order

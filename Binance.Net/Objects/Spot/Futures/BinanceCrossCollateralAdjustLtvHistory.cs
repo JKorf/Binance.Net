@@ -12,19 +12,22 @@ namespace Binance.Net.Objects.Spot.Futures
     public class BinanceCrossCollateralAdjustLtvHistory
     {
         /// <summary>
-        /// Amount
+        /// Quantity
         /// </summary>
-        public decimal Amount { get; set; }
+        [JsonProperty("amount")]
+        public decimal Quantity { get; set; }
 
         /// <summary>
-        /// Collateral coin
+        /// Collateral asset
         /// </summary>
-        public string CollateralCoin { get; set; } = string.Empty;
+        [JsonProperty("collateralCoin")]
+        public string CollateralAsset { get; set; } = string.Empty;
 
         /// <summary>
-        /// Coin
+        /// Asset
         /// </summary>
-        public string Coin { get; set; } = string.Empty;
+        [JsonProperty("coin")]
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Pre adjustment rate
         /// </summary>

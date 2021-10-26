@@ -19,22 +19,22 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// The price at which this candlestick opened
         /// </summary>
         [ArrayProperty(1)]
-        public decimal Open { get; set; }
+        public decimal OpenPrice { get; set; }
         /// <summary>
         /// The highest price in this candlestick
         /// </summary>
         [ArrayProperty(2)]
-        public decimal High { get; set; }
+        public decimal HighPrice { get; set; }
         /// <summary>
         /// The lowest price in this candlestick
         /// </summary>
         [ArrayProperty(3)]
-        public decimal Low { get; set; }
+        public decimal LowPrice { get; set; }
         /// <summary>
         /// The price at which this candlestick closed
         /// </summary>
         [ArrayProperty(4)]
-        public decimal Close { get; set; }
+        public decimal ClosePrice { get; set; }
 
         [ArrayProperty(5)] internal string? Ignore1 { get; set; } = string.Empty;
         /// <summary>

@@ -16,9 +16,10 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// </summary>
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Amount transfered
+        /// Quantity transfered
         /// </summary>
-        public decimal Amount { get; set; }
+        [JsonProperty("amount")]
+        public decimal Quantity { get; set; }
         /// <summary>
         /// Transfer type
         /// </summary>
@@ -32,7 +33,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// Id
         /// </summary>
         [JsonProperty("tranId")]
-        public long TransactionId { get; set; }
+        public long Id { get; set; }
         /// <summary>
         /// Timestamp
         /// </summary>

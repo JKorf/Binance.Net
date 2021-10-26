@@ -69,22 +69,22 @@ namespace Binance.Net.Objects.Futures.MarketStream
         /// Open price of the kline
         /// </summary>
         [JsonProperty("o")]
-        public decimal Open { get; set; }
+        public decimal OpenPrice { get; set; }
         /// <summary>
         /// Close price of the kline
         /// </summary>
         [JsonProperty("c")]
-        public decimal Close { get; set; }
+        public decimal ClosePrice { get; set; }
         /// <summary>
         /// High price of the kline
         /// </summary>
         [JsonProperty("h")]
-        public decimal High { get; set; }
+        public decimal HighPrice { get; set; }
         /// <summary>
         /// Low price of the kline
         /// </summary>
         [JsonProperty("l")]
-        public decimal Low { get; set; }
+        public decimal LowPrice { get; set; }
 
         /// <summary>
         /// Ignore

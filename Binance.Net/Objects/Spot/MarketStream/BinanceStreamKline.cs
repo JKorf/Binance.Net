@@ -41,7 +41,7 @@ namespace Binance.Net.Objects.Spot.MarketStream
 
         /// <inheritdoc />
         [JsonProperty("v")]
-        public override decimal BaseVolume { get; set; }
+        public override decimal Volume { get; set; }
 
         /// <summary>
         /// The close time of this candlestick
@@ -77,22 +77,22 @@ namespace Binance.Net.Objects.Spot.MarketStream
         /// The open price of this candlestick
         /// </summary>
         [JsonProperty("o")]
-        public new decimal Open { get; set; }
+        public new decimal OpenPrice { get; set; }
         /// <summary>
         /// The close price of this candlestick
         /// </summary>
         [JsonProperty("c")]
-        public new decimal Close { get; set; }
+        public new decimal ClosePrice { get; set; }
         /// <summary>
         /// The highest price of this candlestick
         /// </summary>
         [JsonProperty("h")]
-        public new decimal High { get; set; }
+        public new decimal HighPrice { get; set; }
         /// <summary>
         /// The lowest price of this candlestick
         /// </summary>
         [JsonProperty("l")]
-        public new decimal Low { get; set; }
+        public new decimal LowPrice { get; set; }
         /// <summary>
         /// The amount of trades in this candlestick
         /// </summary>
@@ -120,12 +120,12 @@ namespace Binance.Net.Objects.Spot.MarketStream
         {
             return new BinanceSpotKline
             {
-                Open = Open,
-                Close = Close,
-                BaseVolume = BaseVolume,
+                OpenPrice = OpenPrice,
+                ClosePrice = ClosePrice,
+                Volume = Volume,
                 CloseTime = CloseTime,
-                High = High,
-                Low = Low,
+                HighPrice = HighPrice,
+                LowPrice = LowPrice,
                 OpenTime = OpenTime,
                 QuoteVolume = QuoteVolume,
                 TakerBuyBaseVolume = TakerBuyBaseVolume,

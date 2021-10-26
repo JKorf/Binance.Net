@@ -16,7 +16,7 @@ namespace Binance.Net.Objects.Spot.UserStream
         /// The id of the order list
         /// </summary>
         [JsonProperty("g")]
-        public long OrderListId { get; set; }
+        public long Id { get; set; }
         /// <summary>
         /// The contingency type
         /// </summary>

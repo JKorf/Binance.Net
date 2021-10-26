@@ -1,0 +1,10 @@
+[
+    {
+        "asset": "USDT",
+        "free": "1",    // avalible balance
+        "locked": "0",  // locked asset
+        "freeze": "0",  // freeze asset
+        "withdrawing": "0",  
+        "btcValuation": "0.00000091"  
+    }
+]

@@ -13,7 +13,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// The trading rule indicators
         /// </summary>
-        public Dictionary<string, BinanceFuturesTradingStatusIndicator> Indicators { get; set; } = new Dictionary<string, BinanceFuturesTradingStatusIndicator>();
+        public Dictionary<string, IEnumerable<BinanceFuturesTradingStatusIndicator>> Indicators { get; set; } = new Dictionary<string, IEnumerable<BinanceFuturesTradingStatusIndicator>>();
         /// <summary>
         /// Last update time
         /// </summary>

@@ -38,11 +38,11 @@ namespace Binance.Net.Interfaces.SubClients
         /// Purchase flexible product
         /// </summary>
         /// <param name="productId">Id of the product</param>
-        /// <param name="amount">The amount to purchase</param>
+        /// <param name="quantity">The quantity to purchase</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Purchase id</returns>
-        Task<WebCallResult<BinanceLendingPurchaseResult>> PurchaseFlexibleProductAsync(string productId, decimal amount, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceLendingPurchaseResult>> PurchaseFlexibleProductAsync(string productId, decimal quantity, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get the redemption quota left for a product
@@ -59,11 +59,11 @@ namespace Binance.Net.Interfaces.SubClients
         /// </summary>
         /// <param name="productId">Id of the product</param>
         /// <param name="type">Redeem type</param>
-        /// <param name="amount">The amount to redeem</param>
+        /// <param name="quantity">The quantity to redeem</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<object>> RedeemFlexibleProductAsync(string productId, decimal amount, RedeemType type, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<object>> RedeemFlexibleProductAsync(string productId, decimal quantity, RedeemType type, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get flexible product position
@@ -170,7 +170,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Purchase id</returns>
-        Task<WebCallResult<BinanceLendingPurchaseResult>> ChangeToDailyPositionAsync(string projectId, int lot,
+        Task<WebCallResult<BinanceLendingChangeToDailyResult>> ChangeToDailyPositionAsync(string projectId, int lot,
             long? positionId = null,
             long? receiveWindow = null, CancellationToken ct = default);
     }

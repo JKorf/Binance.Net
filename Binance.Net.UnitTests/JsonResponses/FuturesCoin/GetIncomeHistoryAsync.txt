@@ -1,0 +1,22 @@
+[
+    {
+        "symbol": "",               // trade symbol, if existing
+        "incomeType": "TRANSFER",   // income type
+        "income": "-0.37500000",    // income amount
+        "asset": "BTC",             // income asset
+        "info":"WITHDRAW",          // extra information
+        "time": 1570608000000,
+        "tranId":"9689322392",      // transaction id
+        "tradeId":""                // trade id, if existing
+    },
+    {
+        "symbol": "BTCUSD_200925",
+        "incomeType": "COMMISSION", 
+        "income": "-0.01000000",
+        "asset": "BTC",
+        "info":"",
+        "time": 1570636800000,
+        "tranId":"9689322392",
+        "tradeId":"2059192"
+    }
+]

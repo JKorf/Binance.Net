@@ -28,19 +28,22 @@ namespace Binance.Net.Objects.Spot.Futures
         public DateTime UpdateTime { get; set; }
 
         /// <summary>
-        /// Coin
+        /// Asset
         /// </summary>
-        public string Coin { get; set; } = string.Empty;
+        [JsonProperty("coin")]
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Collateral coin
+        /// Collateral asset
         /// </summary>
-        public string CollateralCoin { get; set; } = string.Empty;
+        [JsonProperty("collateralCoin")]
+        public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Collateral amount
+        /// Quantity
         /// </summary>
-        public decimal Amount { get; set; }
+        [JsonProperty("amount")]
+        public decimal Quantity { get; set; }
         /// <summary>
-        /// Released collateral amount
+        /// Released collateral quantity
         /// </summary>
         public decimal ReleasedCollateral { get; set; }
         /// <summary>
@@ -48,5 +51,17 @@ namespace Binance.Net.Objects.Spot.Futures
         /// </summary>
         [JsonConverter(typeof(FuturesTransferStatusConverter))]
         public FuturesTransferStatus Status { get; set; }
+        /// <summary>
+        /// Repay type
+        /// </summary>
+        public string RepayType { get; set; } = string.Empty;
+        /// <summary>
+        /// Collateral repayment
+        /// </summary>
+        public decimal? RepayCollateral { get; set; }
+        /// <summary>
+        /// Loan/collateral exchange rate
+        /// </summary>
+        public decimal Price { get; set; }
     }
 }

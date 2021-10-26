@@ -8,10 +8,10 @@ namespace Binance.Net.Objects.Spot.WalletData
     public class BinanceAssetDetails
     {
         /// <summary>
-        /// Minimal amount you can withdraw
+        /// Minimal quantity you can withdraw
         /// </summary>
         [JsonProperty("minWithdrawAmount")]
-        public decimal MinimalWithdrawAmount { get; set; }
+        public decimal MinimalWithdrawQuantity { get; set; }
         /// <summary>
         /// Whether deposits are enabled
         /// </summary>

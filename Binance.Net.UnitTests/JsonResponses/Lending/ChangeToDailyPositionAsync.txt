@@ -1,0 +1,5 @@
+{
+  "dailyPurchaseId": 862290,
+  "success": true,      
+  "time": 1577233578000
+}

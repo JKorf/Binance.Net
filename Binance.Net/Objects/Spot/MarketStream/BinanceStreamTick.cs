@@ -49,22 +49,22 @@ namespace Binance.Net.Objects.Spot.MarketStream
         /// The best bid price in the order book
         /// </summary>
         [JsonProperty("b")]
-        public decimal BidPrice { get; set; }
+        public decimal BestBidPrice { get; set; }
         /// <summary>
-        /// The size of the best bid price in the order book
+        /// The quantity of the best bid price in the order book
         /// </summary>
         [JsonProperty("B")]
-        public decimal BidQuantity { get; set; }
+        public decimal BestBidQuantity { get; set; }
         /// <summary>
         /// The best ask price in the order book
         /// </summary>
         [JsonProperty("a")]
-        public decimal AskPrice { get; set; }
+        public decimal BestAskPrice { get; set; }
         /// <summary>
-        /// The size of the best ask price in the order book
+        /// The quantity of the best ask price in the order book
         /// </summary>
         [JsonProperty("A")]
-        public decimal AskQuantity { get; set; }
+        public decimal BestAskQuantity { get; set; }
         /// <summary>
         /// Todays open price
         /// </summary>
@@ -83,7 +83,7 @@ namespace Binance.Net.Objects.Spot.MarketStream
         /// <summary>
         /// Total traded volume in the base asset
         /// </summary>
-        public abstract decimal BaseVolume { get; set; }
+        public abstract decimal Volume { get; set; }
         /// <summary>
         /// Total traded volume in the quote asset
         /// </summary>
@@ -124,7 +124,7 @@ namespace Binance.Net.Objects.Spot.MarketStream
         /// Total traded volume in the base asset
         /// </summary>
         [JsonProperty("v")]
-        public override decimal BaseVolume { get; set; }
+        public override decimal Volume { get; set; }
         /// <summary>
         /// Total traded volume in the quote asset
         /// </summary>
@@ -141,7 +141,7 @@ namespace Binance.Net.Objects.Spot.MarketStream
         /// Total traded volume in the base asset
         /// </summary>
         [JsonProperty("q")]
-        public override decimal BaseVolume { get; set; }
+        public override decimal Volume { get; set; }
         /// <summary>
         /// Total traded volume in the quote asset
         /// </summary>

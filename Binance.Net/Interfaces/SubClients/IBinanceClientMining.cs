@@ -95,7 +95,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="userName">Mining account user name</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Revenue list</returns>
-        Task<WebCallResult<BinanceMiningAccount>> GetMiningAccountListAsync(string algorithm, string userName, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceMiningAccount>>> GetMiningAccountListAsync(string algorithm, string userName, CancellationToken ct = default);
 
         /// <summary>
         /// Gets hash rate resale list
@@ -137,6 +137,6 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="userName">Mining account</param>
         /// <param name="ct">Resale hashrate h/s must be transferred (BTC is greater than 500000000000 ETH is greater than 500000)</param>
         /// <returns>Success</returns>
-        Task<WebCallResult<bool>> PlaceHashrateResaleRequestAsync(int configId, string userName, CancellationToken ct = default);
+        Task<WebCallResult<bool>> CancelHashrateResaleRequestAsync(int configId, string userName, CancellationToken ct = default);
     }
 }

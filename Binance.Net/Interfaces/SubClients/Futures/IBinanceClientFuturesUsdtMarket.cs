@@ -15,13 +15,28 @@ namespace Binance.Net.Interfaces.SubClients.Futures
     public interface IBinanceClientFuturesUsdtMarket: IBinanceClientFuturesMarket
     {
         /// <summary>
+        /// Gets the order book for the provided symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to get the order book for</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The order book for the symbol</returns>
+        Task<WebCallResult<BinanceFuturesOrderBook>> GetOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Get Mark Price and Funding Rate for the provided symbol
         /// </summary>
         /// <param name="symbol">The symbol to get the data for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Data over the last 24 hours</returns>
-        Task<WebCallResult<IEnumerable<BinanceFuturesMarkPrice>>> GetMarkPricesAsync(string? symbol = null,
-            CancellationToken ct = default);
+        Task<WebCallResult<BinanceFuturesMarkPrice>> GetMarkPriceAsync(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get Mark Price and Funding Rate for all symbols
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Data over the last 24 hours</returns>
+        Task<WebCallResult<IEnumerable<BinanceFuturesMarkPrice>>> GetMarkPricesAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get data regarding the last 24 hours change
@@ -29,7 +44,14 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="symbol">The symbol to get the data for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Data over the last 24 hours</returns>
-        Task<WebCallResult<IEnumerable<IBinance24HPrice>>> GetTickersAsync(string? symbol = null, CancellationToken ct = default);
+        Task<WebCallResult<IBinance24HPrice>> GetTickerAsync(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get data regarding the last 24 hours change
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Data over the last 24 hours</returns>
+        Task<WebCallResult<IEnumerable<IBinance24HPrice>>> GetTickersAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Gets the best price/quantity on the order book for a symbol.
@@ -37,7 +59,14 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="symbol">Symbol to get book price for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of book prices</returns>
-        Task<WebCallResult<IEnumerable<BinanceBookPrice>>> GetBookPricesAsync(string? symbol = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceBookPrice>> GetBookPriceAsync(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets the best price/quantity on the order book.
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of book prices</returns>
+        Task<WebCallResult<IEnumerable<BinanceBookPrice>>> GetBookPricesAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get present open interest of a specific symbol.

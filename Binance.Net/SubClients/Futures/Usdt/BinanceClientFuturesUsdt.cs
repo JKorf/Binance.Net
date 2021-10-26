@@ -32,27 +32,16 @@ namespace Binance.Net.SubClients.Futures.Usdt
         /// </summary>
         protected override string Api { get; } = "fapi";
 
-        /// <summary>
-        /// Futures market endpoints
-        /// </summary>
+        /// <inheritdoc />
         public IBinanceClientFuturesUsdtMarket Market { get; protected set; }
-        
-        /// <summary>
-        /// Futures order endpoints
-        /// </summary>
-        public IBinanceClientFuturesUsdtOrder Order { get; protected set; }
-        /// <summary>
-        /// Futures account endpoints
-        /// </summary>
-        public IBinanceClientFuturesUsdtAccount Account { get; protected set; }
 
-        /// <summary>
-        /// System endpoints
-        /// </summary>
+        /// <inheritdoc />
+        public IBinanceClientFuturesUsdtOrder Order { get; protected set; }
+        /// <inheritdoc />
+        public IBinanceClientFuturesUsdtAccount Account { get; protected set; }
+        /// <inheritdoc />
         public IBinanceClientFuturesUsdtSystem System { get; protected set; }
-        /// <summary>
-        /// User stream endpoints
-        /// </summary>
+        /// <inheritdoc />
         public override IBinanceClientUserStream UserStream { get; protected set; }
 
         internal BinanceClientFuturesUsdt(Log log, BinanceClient baseClient) : base(log, baseClient)
@@ -66,13 +55,7 @@ namespace Binance.Net.SubClients.Futures.Usdt
 
         #region Position Information
 
-        /// <summary>
-        /// Gets account information
-        /// </summary>
-        /// <param name="symbol">Symbol</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of Positions</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinancePositionDetailsUsdt>>> GetPositionInformationAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -93,12 +76,7 @@ namespace Binance.Net.SubClients.Futures.Usdt
         #endregion
 
         #region Trading status
-        /// <summary>
-        /// Gets the trading status for the current account
-        /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The trading status of the account</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceFuturesTradingStatus>> GetTradingStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);

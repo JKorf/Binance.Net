@@ -56,27 +56,27 @@ namespace Binance.Net.Objects.Other
         /// Open price
         /// </summary>
         [JsonProperty("o")]
-        public decimal? Open { get; set; }
+        public decimal? OpenPrice { get; set; }
         /// <summary>
         /// High price
         /// </summary>
         [JsonProperty("h")]
-        public decimal? High { get; set; }
+        public decimal? HighPrice { get; set; }
         /// <summary>
         /// Low price
         /// </summary>
         [JsonProperty("l")]
-        public decimal? Low { get; set; }
+        public decimal? LowPrice { get; set; }
         /// <summary>
         /// Close price
         /// </summary>
         [JsonProperty("c")]
-        public decimal? Close { get; set; }
+        public decimal? ClosePrice { get; set; }
         /// <summary>
         /// Base volume
         /// </summary>
         [JsonProperty("v")]
-        public decimal BaseVolume { get; set; }
+        public decimal Volume { get; set; }
         /// <summary>
         /// Quote volume
         /// </summary>
@@ -88,5 +88,26 @@ namespace Binance.Net.Objects.Other
         /// </summary>
         [JsonProperty("cs")]
         public decimal? CirculatingSupply { get; set; }
+
+        /// <summary>
+        /// Amount of coins in circulation
+        /// </summary>
+        [JsonProperty("i")]
+        public decimal? I { get; set; }
+        /// <summary>
+        /// Amount of coins in circulation
+        /// </summary>
+        [JsonProperty("ts")]
+        public decimal? Ts { get; set; }
+        /// <summary>
+        /// Amount of coins in circulation
+        /// </summary>
+        [JsonProperty("y")]
+        public decimal? Y { get; set; }
+        /// <summary>
+        /// Amount of coins in circulation
+        /// </summary>
+        [JsonProperty("as")]
+        public decimal? As { get; set; }
     }
 }

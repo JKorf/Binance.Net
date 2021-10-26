@@ -32,12 +32,21 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// </summary>
         [JsonConverter(typeof(TimestampConverter))]
         public DateTime NextFundingTime { get; set; }
+        /// <summary>
+        /// Estimated settle price
+        /// </summary>
+        public decimal? EstimatedSettlePrice { get; set; }
 
+        /// <summary>
+        /// Interest rate
+        /// </summary>
+        public decimal? InterestRate { get; set; }
         /// <summary>
         /// Timestamp
         /// </summary>
         [JsonConverter(typeof(TimestampConverter))]
-        public DateTime Time { get; set; }
+        [JsonProperty("time")]
+        public DateTime Timestamp { get; set; }
     }
 
     /// <summary>
@@ -49,9 +58,5 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// The pair
         /// </summary>
         public string Pair { get; set; } = string.Empty;
-        /// <summary>
-        /// Estimated settle price
-        /// </summary>
-        public decimal EstimatedSettlePrice { get; set; }
     }
 }

@@ -35,7 +35,8 @@ namespace Binance.Net.Objects.Spot.Mining
         /// Timestamp
         /// </summary>
         [JsonConverter(typeof(TimestampConverter))]
-        public DateTime Time { get; set; }
+        [JsonProperty("time")]
+        public DateTime Timestamp { get; set; }
         /// <summary>
         /// Coin
         /// </summary>
@@ -51,17 +52,19 @@ namespace Binance.Net.Objects.Spot.Mining
         /// </summary>
         public decimal DayHashRate { get; set; }
         /// <summary>
-        /// Profit amount
+        /// Profit quantity
         /// </summary>
-        public decimal ProfitAmount { get; set; }
+        [JsonProperty("profitAmount")]
+        public decimal ProfitQuantity { get; set; }
         /// <summary>
         /// Hash transfer
         /// </summary>
-        public decimal HashTransfer { get; set; }
+        public decimal? HashTransfer { get; set; }
         /// <summary>
-        /// Transfer amount
+        /// Transfer quantity
         /// </summary>
-        public decimal TransferAmount { get; set; }
+        [JsonProperty("transferAmount")]
+        public decimal? TransferQuantity { get; set; }
         /// <summary>
         /// Status
         /// </summary>

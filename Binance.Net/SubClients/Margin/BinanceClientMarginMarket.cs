@@ -35,14 +35,9 @@ namespace Binance.Net.SubClients.Margin
         {
             _baseClient = baseClient;
         }
-        
+
         #region Query Margin Asset
-        /// <summary>
-        /// Get a margin asset
-        /// </summary>
-        /// <param name="asset">The symbol to get</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of margin assets</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceMarginAsset>> GetMarginAssetAsync(string asset, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
@@ -58,13 +53,8 @@ namespace Binance.Net.SubClients.Margin
 
         #region Query Margin Pair
 
-        /// <summary>
-        /// Get a margin pair
-        /// </summary>
-        /// <param name="symbol">The symbol to get</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of margin assets</returns>
-        public async Task<WebCallResult<BinanceMarginPair>> GetMarginPairAsync(string symbol, CancellationToken ct = default)
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceMarginPair>> GetMarginSymbolAsync(string symbol, CancellationToken ct = default)
         {
             symbol.ValidateNotNull(nameof(symbol));
 
@@ -80,11 +70,7 @@ namespace Binance.Net.SubClients.Margin
 
         #region Get All Margin Assets
 
-        /// <summary>
-        /// Get all assets available for margin trading
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of margin assets</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceMarginAsset>>> GetMarginAssetsAsync(CancellationToken ct = default)
         {
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceMarginAsset>>(_baseClient.GetUrlSpot(marginAssetsEndpoint, marginApi, marginVersion), HttpMethod.Get, ct).ConfigureAwait(false);
@@ -94,12 +80,8 @@ namespace Binance.Net.SubClients.Margin
 
         #region Get All Margin Pairs
 
-        /// <summary>
-        /// Get all asset pairs available for margin trading
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of margin pairs</returns>
-        public async Task<WebCallResult<IEnumerable<BinanceMarginPair>>> GetMarginPairsAsync(CancellationToken ct = default)
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceMarginPair>>> GetMarginSymbolsAsync(CancellationToken ct = default)
         {
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceMarginPair>>(_baseClient.GetUrlSpot(marginPairsEndpoint, marginApi, marginVersion), HttpMethod.Get, ct).ConfigureAwait(false);
         }
@@ -107,12 +89,7 @@ namespace Binance.Net.SubClients.Margin
         #endregion
 
         #region Query Margin PriceIndex
-        /// <summary>
-        /// Get margin price index
-        /// </summary>
-        /// <param name="symbol">The symbol to get</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Margin price index</returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceMarginPriceIndex>> GetMarginPriceIndexAsync(string symbol, CancellationToken ct = default)
         {
             symbol.ValidateNotNull(nameof(symbol));
@@ -125,15 +102,9 @@ namespace Binance.Net.SubClients.Margin
             return await _baseClient.SendRequestInternal<BinanceMarginPriceIndex>(_baseClient.GetUrlSpot(marginPriceIndexEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
         #endregion
-        
+
         #region Query isolated margin symbol
-        /// <summary>
-        /// Isolated margin symbol info
-        /// </summary>
-        /// <param name="symbol">The symbol</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<BinanceIsolatedMarginSymbol>> GetIsolatedMarginSymbolAsync(string symbol,
             int? receiveWindow = null, CancellationToken ct = default)
         {
@@ -160,12 +131,7 @@ namespace Binance.Net.SubClients.Margin
                     parameters, true).ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Isolated margin symbol info
-        /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceIsolatedMarginSymbol>>> GetIsolatedMarginSymbolsAsync(int? receiveWindow =
             null, CancellationToken ct = default)
         {

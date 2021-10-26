@@ -1,0 +1,48 @@
+[  
+  {
+    "tokenName": "BTCDOWN",  
+    "description": "3X Short Bitcoin Token",
+    "underlying": "BTC",
+    "tokenIssued": "717953.95",
+    "basket": "-821.474 BTCUSDT Futures",
+    "currentBaskets":[
+       {
+         "symbol":"BTCUSDT",
+         "amount":"-1183.984",
+         "notionalValue":"-22871089.96704"
+       }
+     ], 
+    "nav": "4.79",
+    "realLeverage": "-2.316",
+    "fundingRate": "0.001020",
+    "dailyManagementFee": "0.0001",
+    "purchaseFeePct": "0.0010",  
+    "dailyPurchaseLimit": "100000.00", 
+    "redeemFeePct": "0.0010",  
+    "dailyRedeemLimit": "1000000.00",  
+    "timestamp":1583127900000  
+  },
+  {
+    "tokenName": "LINKUP",  
+    "description": "3X LONG ChainLink Token",
+    "underlying": "LINK",
+    "tokenIssued": "163846.99",
+    "basket": "417288.870 LINKUSDT Futures",
+    "currentBaskets":[
+       {
+         "symbol":"LINKUSDT",
+         "amount":"1640883.83",
+         "notionalValue":"22596611.22293"
+       }
+     ], 
+    "nav": "9.60",
+    "realLeverage": "2.597",
+    "fundingRate": "-0.000917",
+    "dailyManagementFee": "0.0001",
+    "purchaseFeePct": "0.0010",
+    "dailyPurchaseLimit": "100000.00",
+    "redeemFeePct": "0.0010",
+    "dailyRedeemLimit": "1000000.00",
+    "timestamp":1583127900000  
+  }
+ ]

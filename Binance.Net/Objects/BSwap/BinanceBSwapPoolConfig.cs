@@ -30,7 +30,7 @@ namespace Binance.Net.Objects.BSwap
         /// <summary>
         /// Asset configuration
         /// </summary>
-        [JsonProperty("AssetConfigure")]
+        [JsonProperty("assetConfigure")]
         public Dictionary<string, PoolAssetConfig> AssetConfig { get; set; } = new Dictionary<string, PoolAssetConfig>();
     }
 

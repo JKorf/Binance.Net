@@ -12,7 +12,7 @@ namespace Binance.Net.Objects.Futures.MarketData
     {
         /// <inheritdoc/>
         [ArrayProperty(7)]
-        public override decimal BaseVolume { get; set; }
+        public override decimal Volume { get; set; }
         /// <inheritdoc/>
         [ArrayProperty(5)]
         public override decimal QuoteVolume { get; set; }

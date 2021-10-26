@@ -1,0 +1,7 @@
+{
+    "subaccountId": "1", 
+    "apikey":"vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A",
+    "canTrade": true,
+    "marginTrade": true,
+    "futuresTrade": true
+}

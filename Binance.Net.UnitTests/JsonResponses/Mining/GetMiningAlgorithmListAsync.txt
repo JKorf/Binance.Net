@@ -1,0 +1,12 @@
+{
+  "code": 0,
+  "msg": "",
+  "data": [
+    {
+      "algoName": "sha256",                        //  Algorithm name
+      "algoId": 1,                                 // Algorithm ID
+      "poolIndex": 0,                               // Sequence 
+      "unit": "h/s"                                //   Unit
+    }
+  ]
+}

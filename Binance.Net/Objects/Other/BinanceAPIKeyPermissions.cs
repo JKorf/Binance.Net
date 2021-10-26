@@ -25,7 +25,7 @@ namespace Binance.Net.Objects.Other
         /// <summary>
         /// This option authorizes this key to transfer funds between your master account and your sub account instantly
         /// </summary>
-        public bool PermitUniversalTransfer { get; set; }
+        public bool PermitsUniversalTransfer { get; set; }
         /// <summary>
         /// Authorizes this key to be used for a dedicated universal transfer API to transfer multiple supported currencies. Each business's own transfer API rights are not affected by this authorization
         /// </summary>

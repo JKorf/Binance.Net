@@ -1,0 +1,47 @@
+[
+    {
+        "symbol": "BTCUSD_201225",
+        "positionAmt": "0",
+        "entryPrice": "0.0",
+        "markPrice": "0.00000000",
+        "unRealizedProfit": "0.00000000",
+        "liquidationPrice": "0",
+        "leverage": "125",
+        "maxQty": "50",  // maximum quantity of base asset
+        "marginType": "cross",
+        "isolatedMargin": "0.00000000",
+        "isAutoAddMargin": "false",
+        "positionSide": "BOTH",
+        "updateTime": 0
+    },
+    {
+        "symbol": "BTCUSD_201225",
+        "positionAmt": "1",
+        "entryPrice": "11707.70000003",
+        "markPrice": "11788.66626667",
+        "unRealizedProfit": "0.00005866",
+        "liquidationPrice": "11667.63509587",
+        "leverage": "125",
+        "maxQty": "50",
+        "marginType": "cross",
+        "isolatedMargin": "0.00012357",
+        "isAutoAddMargin": "false",
+        "positionSide": "LONG",
+        "updateTime": 0
+    },
+    {
+        "symbol": "BTCUSD_201225",
+        "positionAmt": "0",
+        "entryPrice": "0.0",
+        "markPrice": "0.00000000",
+        "unRealizedProfit": "0.00000000",
+        "liquidationPrice": "0",
+        "leverage": "125",
+        "maxQty": "50",
+        "marginType": "cross",
+        "isolatedMargin": "0.00000000",
+        "isAutoAddMargin": "false",
+        "positionSide": "SHORT",
+        "updateTime":1627026881327
+  }
+]

@@ -40,8 +40,9 @@ namespace Binance.Net.Objects.BSwap
         [JsonConverter(typeof(TimestampConverter))]
         public DateTime UpdateTime { get; set; }
         /// <summary>
-        /// Share amount
+        /// Share quantity
         /// </summary>
-        public decimal ShareAmount { get; set; }
+        [JsonProperty("shareAmount")]
+        public decimal ShareQuantity { get; set; }
     }
 }

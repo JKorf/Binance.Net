@@ -1,4 +1,5 @@
 ﻿using Binance.Net.Objects.Spot.SpotData;
+using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Spot.MarginData
 {
@@ -8,9 +9,10 @@ namespace Binance.Net.Objects.Spot.MarginData
     public class BinanceMarginOrderOcoList: BinanceOrderOcoList
     {
         /// <summary>
-        /// Margin buy borrow amount
+        /// Margin buy borrow quantity
         /// </summary>
-        public decimal? MarginBuyBorrowAmount { get; set; }
+        [JsonProperty("marginBuyBorrowAmount")]
+        public decimal? MarginBuyBorrowQuantity { get; set; }
         /// <summary>
         /// Margin buy borrow asset
         /// </summary>

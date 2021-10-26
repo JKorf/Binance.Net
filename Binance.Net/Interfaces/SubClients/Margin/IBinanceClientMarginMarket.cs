@@ -26,7 +26,7 @@ namespace Binance.Net.Interfaces.SubClients.Margin
         /// <param name="symbol">The symbol to get</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of margin assets</returns>
-        Task<WebCallResult<BinanceMarginPair>> GetMarginPairAsync(string symbol, CancellationToken ct = default);
+        Task<WebCallResult<BinanceMarginPair>> GetMarginSymbolAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Get all assets available for margin trading
@@ -40,7 +40,7 @@ namespace Binance.Net.Interfaces.SubClients.Margin
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of margin pairs</returns>
-        Task<WebCallResult<IEnumerable<BinanceMarginPair>>> GetMarginPairsAsync(CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceMarginPair>>> GetMarginSymbolsAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get margin price index

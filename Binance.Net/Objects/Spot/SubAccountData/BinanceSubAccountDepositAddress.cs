@@ -1,4 +1,6 @@
-﻿namespace Binance.Net.Objects.Spot.SubAccountData
+﻿using Newtonsoft.Json;
+
+namespace Binance.Net.Objects.Spot.SubAccountData
 {
     /// <summary>
     /// Deposit address info for a sub-account
@@ -10,9 +12,10 @@
         /// </summary>
         public string Address { get; set; } = string.Empty;
         /// <summary>
-        /// Coin type
+        /// Asset type
         /// </summary>
-        public string Coin { get; set; } = string.Empty;
+        [JsonProperty("coin")]
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Tag for the deposit address
         /// </summary>
