@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Binance.Net.Objects.Other;
 using Binance.Net.Objects;
+using System.Threading;
 
 namespace Binance.Net
 {
@@ -94,7 +95,7 @@ namespace Binance.Net
         {
             return Deserialize<T>(data, checkObject);   
         }
-        internal Task<CallResult<UpdateSubscription>> SubscribeInternal<T>(string url, IEnumerable<string> topics, Action<DataEvent<T>> onData)
+        internal Task<CallResult<UpdateSubscription>> SubscribeInternal<T>(string url, IEnumerable<string> topics, Action<DataEvent<T>> onData, CancellationToken ct)
         {
             var request = new BinanceSocketRequest
             {
@@ -103,7 +104,7 @@ namespace Binance.Net
                 Id = NextId()
             };
 
-            return SubscribeAsync(url, request, null, false, onData);
+            return SubscribeAsync(url, request, null, false, onData, ct);
         }
 
 

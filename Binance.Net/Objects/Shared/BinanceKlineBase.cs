@@ -63,10 +63,10 @@ namespace Binance.Net.Objects.Shared
         /// </summary>
         public abstract decimal TakerBuyQuoteVolume { get; set; }
 
-        decimal ICommonKline.CommonHigh => HighPrice;
-        decimal ICommonKline.CommonLow => LowPrice;
-        decimal ICommonKline.CommonOpen => OpenPrice;
-        decimal ICommonKline.CommonClose => ClosePrice;
+        decimal ICommonKline.CommonHighPrice => HighPrice;
+        decimal ICommonKline.CommonLowPrice => LowPrice;
+        decimal ICommonKline.CommonOpenPrice => OpenPrice;
+        decimal ICommonKline.CommonClosePrice => ClosePrice;
         decimal ICommonKline.CommonVolume => Volume;
         DateTime ICommonKline.CommonOpenTime => OpenTime;
     }

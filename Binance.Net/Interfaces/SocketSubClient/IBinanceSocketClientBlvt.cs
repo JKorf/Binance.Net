@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Enums;
 using Binance.Net.Objects.Blvt;
@@ -19,17 +20,19 @@ namespace Binance.Net.Interfaces.SocketSubClient
         /// </summary>
         /// <param name="token">The token to subscribe to</param>
         /// <param name="onMessage">The event handler for the received data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToBlvtInfoUpdatesAsync(string token,
-            Action<DataEvent<BinanceBlvtInfoUpdate>> onMessage);
+            Action<DataEvent<BinanceBlvtInfoUpdate>> onMessage, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribes to leveraged token info updates
         /// </summary>
         /// <param name="tokens">The tokens to subscribe to</param>
         /// <param name="onMessage">The event handler for the received data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToBlvtInfoUpdatesAsync(IEnumerable<string> tokens, Action<DataEvent<BinanceBlvtInfoUpdate>> onMessage);
+        Task<CallResult<UpdateSubscription>> SubscribeToBlvtInfoUpdatesAsync(IEnumerable<string> tokens, Action<DataEvent<BinanceBlvtInfoUpdate>> onMessage, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribes to leveraged token kline updates
@@ -37,9 +40,10 @@ namespace Binance.Net.Interfaces.SocketSubClient
         /// <param name="token">The token to subscribe to</param>
         /// <param name="interval">The kline interval</param>
         /// <param name="onMessage">The event handler for the received data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToBlvtKlineUpdatesAsync(string token,
-            KlineInterval interval, Action<DataEvent<BinanceStreamKlineData>> onMessage);
+            KlineInterval interval, Action<DataEvent<BinanceStreamKlineData>> onMessage, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribes to leveraged token kline updates
@@ -47,7 +51,8 @@ namespace Binance.Net.Interfaces.SocketSubClient
         /// <param name="tokens">The tokens to subscribe to</param>
         /// <param name="interval">The kline interval</param>
         /// <param name="onMessage">The event handler for the received data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToBlvtKlineUpdatesAsync(IEnumerable<string> tokens, KlineInterval interval, Action<DataEvent<BinanceStreamKlineData>> onMessage);
+        Task<CallResult<UpdateSubscription>> SubscribeToBlvtKlineUpdatesAsync(IEnumerable<string> tokens, KlineInterval interval, Action<DataEvent<BinanceStreamKlineData>> onMessage, CancellationToken ct = default);
     }
 }

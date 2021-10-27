@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
@@ -63,12 +64,12 @@ namespace Binance.Net.SocketSubClients
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToAggregatedTradeUpdatesAsync(string symbol,
-            Action<DataEvent<BinanceStreamAggregatedTrade>> onMessage) =>
-            await SubscribeToAggregatedTradeUpdatesAsync(new[] {symbol}, onMessage).ConfigureAwait(false);
+            Action<DataEvent<BinanceStreamAggregatedTrade>> onMessage, CancellationToken ct = default) =>
+            await SubscribeToAggregatedTradeUpdatesAsync(new[] {symbol}, onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToAggregatedTradeUpdatesAsync(
-            IEnumerable<string> symbols, Action<DataEvent<BinanceStreamAggregatedTrade>> onMessage)
+            IEnumerable<string> symbols, Action<DataEvent<BinanceStreamAggregatedTrade>> onMessage, CancellationToken ct = default)
         {
             symbols.ValidateNotNull(nameof(symbols));
             foreach (var symbol in symbols)
@@ -77,7 +78,7 @@ namespace Binance.Net.SocketSubClients
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamAggregatedTrade>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + aggregatedTradesStreamEndpoint)
                 .ToArray();
-            return await Subscribe(symbols, handler).ConfigureAwait(false);
+            return await Subscribe(symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -86,12 +87,12 @@ namespace Binance.Net.SocketSubClients
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol,
-            Action<DataEvent<BinanceStreamTrade>> onMessage) =>
-            await SubscribeToTradeUpdatesAsync(new[] {symbol}, onMessage).ConfigureAwait(false);
+            Action<DataEvent<BinanceStreamTrade>> onMessage, CancellationToken ct = default) =>
+            await SubscribeToTradeUpdatesAsync(new[] {symbol}, onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols,
-            Action<DataEvent<BinanceStreamTrade>> onMessage)
+            Action<DataEvent<BinanceStreamTrade>> onMessage, CancellationToken ct = default)
         {
             symbols.ValidateNotNull(nameof(symbols));
             foreach (var symbol in symbols)
@@ -99,7 +100,7 @@ namespace Binance.Net.SocketSubClients
 
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamTrade>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + tradesStreamEndpoint).ToArray();
-            return await Subscribe(symbols, handler).ConfigureAwait(false);
+            return await Subscribe(symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -108,22 +109,22 @@ namespace Binance.Net.SocketSubClients
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol,
-            KlineInterval interval, Action<DataEvent<IBinanceStreamKlineData>> onMessage) =>
-            await SubscribeToKlineUpdatesAsync(new[] {symbol}, interval, onMessage).ConfigureAwait(false);
+            KlineInterval interval, Action<DataEvent<IBinanceStreamKlineData>> onMessage, CancellationToken ct = default) =>
+            await SubscribeToKlineUpdatesAsync(new[] {symbol}, interval, onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol,
-            IEnumerable<KlineInterval> intervals, Action<DataEvent<IBinanceStreamKlineData>> onMessage) =>
-            await SubscribeToKlineUpdatesAsync(new[] {symbol}, intervals, onMessage).ConfigureAwait(false);
+            IEnumerable<KlineInterval> intervals, Action<DataEvent<IBinanceStreamKlineData>> onMessage, CancellationToken ct = default) =>
+            await SubscribeToKlineUpdatesAsync(new[] {symbol}, intervals, onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols,
-            KlineInterval interval, Action<DataEvent<IBinanceStreamKlineData>> onMessage) =>
-            await SubscribeToKlineUpdatesAsync(symbols, new[] { interval }, onMessage).ConfigureAwait(false);
+            KlineInterval interval, Action<DataEvent<IBinanceStreamKlineData>> onMessage, CancellationToken ct = default) =>
+            await SubscribeToKlineUpdatesAsync(symbols, new[] { interval }, onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols,
-            IEnumerable<KlineInterval> intervals, Action<DataEvent<IBinanceStreamKlineData>> onMessage)
+            IEnumerable<KlineInterval> intervals, Action<DataEvent<IBinanceStreamKlineData>> onMessage, CancellationToken ct = default)
         {
             symbols.ValidateNotNull(nameof(symbols));
             foreach (var symbol in symbols)
@@ -134,7 +135,7 @@ namespace Binance.Net.SocketSubClients
                 intervals.Select(i => 
                     a.ToLower(CultureInfo.InvariantCulture) + klineStreamEndpoint + "_" +
                     JsonConvert.SerializeObject(i, new KlineIntervalConverter(false)))).ToArray();
-            return await Subscribe(symbols, handler).ConfigureAwait(false);
+            return await Subscribe(symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -143,12 +144,12 @@ namespace Binance.Net.SocketSubClients
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToMiniTickerUpdatesAsync(string symbol,
-            Action<DataEvent<IBinanceMiniTick>> onMessage) =>
-            await SubscribeToMiniTickerUpdatesAsync(new[] {symbol}, onMessage).ConfigureAwait(false);
+            Action<DataEvent<IBinanceMiniTick>> onMessage, CancellationToken ct = default) =>
+            await SubscribeToMiniTickerUpdatesAsync(new[] {symbol}, onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToMiniTickerUpdatesAsync(
-            IEnumerable<string> symbols, Action<DataEvent<IBinanceMiniTick>> onMessage)
+            IEnumerable<string> symbols, Action<DataEvent<IBinanceMiniTick>> onMessage, CancellationToken ct = default)
         {
             symbols.ValidateNotNull(nameof(symbols));
             foreach (var symbol in symbols)
@@ -158,7 +159,7 @@ namespace Binance.Net.SocketSubClients
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + symbolMiniTickerStreamEndpoint)
                 .ToArray();
 
-            return await Subscribe(symbols, handler).ConfigureAwait(false);
+            return await Subscribe(symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -167,10 +168,10 @@ namespace Binance.Net.SocketSubClients
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllMiniTickerUpdatesAsync(
-            Action<DataEvent<IEnumerable<IBinanceMiniTick>>> onMessage)
+            Action<DataEvent<IEnumerable<IBinanceMiniTick>>> onMessage, CancellationToken ct = default)
         {
             var handler = new Action<DataEvent<BinanceCombinedStream<IEnumerable<BinanceStreamCoinMiniTick>>>>(data => onMessage(data.As<IEnumerable<IBinanceMiniTick>>(data.Data.Data, data.Data.Stream)));
-            return await Subscribe(new[] { allSymbolMiniTickerStreamEndpoint }, handler).ConfigureAwait(false);
+            return await Subscribe(new[] { allSymbolMiniTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -179,12 +180,12 @@ namespace Binance.Net.SocketSubClients
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToBookTickerUpdatesAsync(string symbol,
-            Action<DataEvent<BinanceStreamBookPrice>> onMessage) =>
-            await SubscribeToBookTickerUpdatesAsync(new[] {symbol}, onMessage).ConfigureAwait(false);
+            Action<DataEvent<BinanceStreamBookPrice>> onMessage, CancellationToken ct = default) =>
+            await SubscribeToBookTickerUpdatesAsync(new[] {symbol}, onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToBookTickerUpdatesAsync(IEnumerable<string> symbols,
-            Action<DataEvent<BinanceStreamBookPrice>> onMessage)
+            Action<DataEvent<BinanceStreamBookPrice>> onMessage, CancellationToken ct = default)
         {
             symbols.ValidateNotNull(nameof(symbols));
             foreach (var symbol in symbols)
@@ -192,7 +193,7 @@ namespace Binance.Net.SocketSubClients
 
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamBookPrice>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + bookTickerStreamEndpoint).ToArray();
-            return await Subscribe(symbols, handler).ConfigureAwait(false);
+            return await Subscribe(symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -201,11 +202,11 @@ namespace Binance.Net.SocketSubClients
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllBookTickerUpdatesAsync(
-            Action<DataEvent<BinanceStreamBookPrice>> onMessage)
+            Action<DataEvent<BinanceStreamBookPrice>> onMessage, CancellationToken ct = default)
         {
             //return await Subscribe(allBookTickerStreamEndpoint, false, onMessage).ConfigureAwait(false);
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamBookPrice>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
-            return await Subscribe(new[] { allBookTickerStreamEndpoint }, handler).ConfigureAwait(false);
+            return await Subscribe(new[] { allBookTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -214,13 +215,13 @@ namespace Binance.Net.SocketSubClients
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToPartialOrderBookUpdatesAsync(string symbol,
-            int levels, int? updateInterval, Action<DataEvent<IBinanceOrderBook>> onMessage) =>
-            await SubscribeToPartialOrderBookUpdatesAsync(new[] {symbol}, levels, updateInterval, onMessage)
+            int levels, int? updateInterval, Action<DataEvent<IBinanceOrderBook>> onMessage, CancellationToken ct = default) =>
+            await SubscribeToPartialOrderBookUpdatesAsync(new[] {symbol}, levels, updateInterval, onMessage, ct)
                 .ConfigureAwait(false);
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToPartialOrderBookUpdatesAsync(
-            IEnumerable<string> symbols, int levels, int? updateInterval, Action<DataEvent<IBinanceOrderBook>> onMessage)
+            IEnumerable<string> symbols, int levels, int? updateInterval, Action<DataEvent<IBinanceOrderBook>> onMessage, CancellationToken ct = default)
         {
             symbols.ValidateNotNull(nameof(symbols));
             foreach (var symbol in symbols)
@@ -238,7 +239,7 @@ namespace Binance.Net.SocketSubClients
             symbols = symbols.Select(a =>
                 a.ToLower(CultureInfo.InvariantCulture) + partialBookDepthStreamEndpoint + levels +
                 (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
-            return await Subscribe(symbols, handler).ConfigureAwait(false);
+            return await Subscribe(symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -247,12 +248,12 @@ namespace Binance.Net.SocketSubClients
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string symbol,
-            int? updateInterval, Action<DataEvent<IBinanceEventOrderBook>> onMessage) =>
-            await SubscribeToOrderBookUpdatesAsync(new[] {symbol}, updateInterval, onMessage).ConfigureAwait(false);
+            int? updateInterval, Action<DataEvent<IBinanceEventOrderBook>> onMessage, CancellationToken ct = default) =>
+            await SubscribeToOrderBookUpdatesAsync(new[] {symbol}, updateInterval, onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerable<string> symbols,
-            int? updateInterval, Action<DataEvent<IBinanceEventOrderBook>> onMessage)
+            int? updateInterval, Action<DataEvent<IBinanceEventOrderBook>> onMessage, CancellationToken ct = default)
         {
             symbols.ValidateNotNull(nameof(symbols));
             foreach (var symbol in symbols)
@@ -263,7 +264,7 @@ namespace Binance.Net.SocketSubClients
             symbols = symbols.Select(a =>
                 a.ToLower(CultureInfo.InvariantCulture) + depthStreamEndpoint +
                 (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
-            return await Subscribe(symbols, handler).ConfigureAwait(false);
+            return await Subscribe(symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -271,16 +272,16 @@ namespace Binance.Net.SocketSubClients
         #region Individual Symbol Ticker Streams
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<IBinanceTick>> onMessage) => await SubscribeToTickerUpdatesAsync(new[] { symbol }, onMessage).ConfigureAwait(false);
+        public async Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<IBinanceTick>> onMessage, CancellationToken ct = default) => await SubscribeToTickerUpdatesAsync(new[] { symbol }, onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IBinanceTick>> onMessage)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IBinanceTick>> onMessage, CancellationToken ct = default)
         {
             symbols.ValidateNotNull(nameof(symbols));
 
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamTick>>>(data => onMessage(data.As<IBinanceTick>(data.Data.Data, data.Data.Data.Symbol)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + symbolTickerStreamEndpoint).ToArray();
-            return await Subscribe(symbols, handler).ConfigureAwait(false);
+            return await Subscribe(symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -288,10 +289,10 @@ namespace Binance.Net.SocketSubClients
         #region All Market Tickers Streams
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToAllTickerUpdatesAsync(Action<DataEvent<IEnumerable<IBinanceTick>>> onMessage)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToAllTickerUpdatesAsync(Action<DataEvent<IEnumerable<IBinanceTick>>> onMessage, CancellationToken ct = default)
         {
             var handler = new Action<DataEvent<BinanceCombinedStream<IEnumerable<BinanceStreamTick>>>>(data => onMessage(data.As<IEnumerable<IBinanceTick>>(data.Data.Data, data.Data.Stream)));
-            return await Subscribe(new[] { allSymbolTickerStreamEndpoint }, handler).ConfigureAwait(false);
+            return await Subscribe(new[] { allSymbolTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -304,7 +305,8 @@ namespace Binance.Net.SocketSubClients
             Action<DataEvent<BinanceStreamOrderUpdate>>? onOrderUpdateMessage,
             Action<DataEvent<BinanceStreamOrderList>>? onOcoOrderUpdateMessage,
             Action<DataEvent<BinanceStreamPositionsUpdate>>? onAccountPositionMessage,
-            Action<DataEvent<BinanceStreamBalanceUpdate>>? onAccountBalanceUpdate)
+            Action<DataEvent<BinanceStreamBalanceUpdate>>? onAccountBalanceUpdate, 
+            CancellationToken ct = default)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
 
@@ -367,13 +369,13 @@ namespace Binance.Net.SocketSubClients
                 }
             });
 
-            return await Subscribe(new[] { listenKey }, handler).ConfigureAwait(false);
+            return await Subscribe(new[] { listenKey }, handler, ct).ConfigureAwait(false);
         }
         #endregion
 
-        private async Task<CallResult<UpdateSubscription>> Subscribe<T>(IEnumerable<string> topics, Action<DataEvent<T>> onData)
+        private async Task<CallResult<UpdateSubscription>> Subscribe<T>(IEnumerable<string> topics, Action<DataEvent<T>> onData, CancellationToken ct)
         {
-            return await _baseClient.SubscribeInternal(_baseAddress + "stream", topics, onData).ConfigureAwait(false);
+            return await _baseClient.SubscribeInternal(_baseAddress + "stream", topics, onData, ct).ConfigureAwait(false);
         }
     }
 }

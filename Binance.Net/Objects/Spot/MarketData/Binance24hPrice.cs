@@ -43,8 +43,8 @@ namespace Binance.Net.Objects.Spot.MarketData
         public override decimal QuoteVolume { get; set; }
 
         string ICommonTicker.CommonSymbol => Symbol;
-        decimal ICommonTicker.CommonHigh => HighPrice;
-        decimal ICommonTicker.CommonLow => LowPrice;
+        decimal ICommonTicker.CommonHighPrice => HighPrice;
+        decimal ICommonTicker.CommonLowPrice => LowPrice;
         decimal ICommonTicker.CommonVolume => Volume;
     }
 }

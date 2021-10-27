@@ -134,6 +134,6 @@ namespace Binance.Net.Objects.Spot.MarketData
         public BinanceSymbolMaxPositionFilter? MaxPositionFilter => Filters.OfType<BinanceSymbolMaxPositionFilter>().FirstOrDefault();
 
         string ICommonSymbol.CommonName => Name;
-        decimal ICommonSymbol.CommonMinimumTradeSize => LotSizeFilter?.MinQuantity ?? 0;
+        decimal ICommonSymbol.CommonMinimumTradeQuantity => LotSizeFilter?.MinQuantity ?? 0;
     }
 }

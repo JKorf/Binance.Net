@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
@@ -43,15 +44,15 @@ namespace Binance.Net.SocketSubClients
         #region Blvt info update
         /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeToBlvtInfoUpdatesAsync(string token,
-            Action<DataEvent<BinanceBlvtInfoUpdate>> onMessage)
-            => SubscribeToBlvtInfoUpdatesAsync(new List<string> { token }, onMessage);
+            Action<DataEvent<BinanceBlvtInfoUpdate>> onMessage, CancellationToken ct = default)
+            => SubscribeToBlvtInfoUpdatesAsync(new List<string> { token }, onMessage, ct);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToBlvtInfoUpdatesAsync(IEnumerable<string> tokens, Action<DataEvent<BinanceBlvtInfoUpdate>> onMessage)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToBlvtInfoUpdatesAsync(IEnumerable<string> tokens, Action<DataEvent<BinanceBlvtInfoUpdate>> onMessage, CancellationToken ct = default)
         {
             tokens = tokens.Select(a => a.ToUpper(CultureInfo.InvariantCulture) + bltvInfoEndpoint).ToArray();
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceBlvtInfoUpdate>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.TokenName)));
-            return await Subscribe(tokens, handler).ConfigureAwait(false);
+            return await Subscribe(tokens, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -59,25 +60,25 @@ namespace Binance.Net.SocketSubClients
         #region Blvt kline update
         /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeToBlvtKlineUpdatesAsync(string token,
-            KlineInterval interval, Action<DataEvent<BinanceStreamKlineData>> onMessage) =>
-            SubscribeToBlvtKlineUpdatesAsync(new List<string> { token }, interval, onMessage);
+            KlineInterval interval, Action<DataEvent<BinanceStreamKlineData>> onMessage, CancellationToken ct = default) =>
+            SubscribeToBlvtKlineUpdatesAsync(new List<string> { token }, interval, onMessage, ct);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToBlvtKlineUpdatesAsync(IEnumerable<string> tokens, KlineInterval interval, Action<DataEvent<BinanceStreamKlineData>> onMessage)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToBlvtKlineUpdatesAsync(IEnumerable<string> tokens, KlineInterval interval, Action<DataEvent<BinanceStreamKlineData>> onMessage, CancellationToken ct = default)
         {
             tokens = tokens.Select(a => a.ToUpper(CultureInfo.InvariantCulture) + bltvKlineEndpoint + "_" + JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ToArray();
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamKlineData>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
-            return await Subscribe(tokens, handler).ConfigureAwait(false);
+            return await Subscribe(tokens, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
 
-        private async Task<CallResult<UpdateSubscription>> Subscribe<T>(IEnumerable<string> topics, Action<DataEvent<T>> onData)
+        private async Task<CallResult<UpdateSubscription>> Subscribe<T>(IEnumerable<string> topics, Action<DataEvent<T>> onData, CancellationToken ct)
         {
             if (_baseAddress == null)
                 throw new ArgumentNullException("BaseAddress", "No API address provided for the futures API, check the client options");
 
-            return await _baseClient.SubscribeInternal(_baseAddress + "stream", topics, onData).ConfigureAwait(false);
+            return await _baseClient.SubscribeInternal(_baseAddress + "stream", topics, onData, ct).ConfigureAwait(false);
         }
     }
 }
