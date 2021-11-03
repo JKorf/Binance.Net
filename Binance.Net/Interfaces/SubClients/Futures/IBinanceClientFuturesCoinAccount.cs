@@ -9,7 +9,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
     /// <summary>
     /// COIN-M futures account endpoints
     /// </summary>
-    public interface IBinanceClientFuturesCoinAccount
+    public interface IBinanceClientFuturesCoinAccount : IBinanceClientFuturesAccount
     {
         /// <summary>
         /// Gets account information, including balances
