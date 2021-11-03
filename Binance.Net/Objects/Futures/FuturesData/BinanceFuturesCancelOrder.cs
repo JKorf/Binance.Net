@@ -4,13 +4,14 @@ using CryptoExchange.Net.Attributes;
 using Newtonsoft.Json;
 using System;
 using Binance.Net.Enums;
+using CryptoExchange.Net.ExchangeInterfaces;
 
 namespace Binance.Net.Objects.Futures.FuturesData
 {
     /// <summary>
     /// The result of cancel order
     /// </summary>
-    public class BinanceFuturesCancelOrder
+    public class BinanceFuturesCancelOrder: ICommonOrderId
     {
         /// <summary>
         /// The symbol the order is for
@@ -27,7 +28,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// The order id as assigned by Binance
         /// </summary>
         [JsonProperty("orderId")]
-        public long OrderId { get; set; }
+        public long Id { get; set; }
         /// <summary>
         /// The order id as assigned by the client
         /// </summary>
@@ -153,5 +154,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// </summary>
         [JsonProperty("avgPrice"), JsonOptionalProperty]
         public decimal? AveragePrice { get; set; }
+
+        string ICommonOrderId.CommonId => Id.ToString();
     }
 }

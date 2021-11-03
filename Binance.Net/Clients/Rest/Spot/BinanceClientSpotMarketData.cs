@@ -1,0 +1,236 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using Binance.Net.Converters;
+using Binance.Net.Enums;
+using Binance.Net.Interfaces;
+using Binance.Net.Objects.Spot.MarketData;
+using Binance.Net.Objects.Spot.WalletData;
+using CryptoExchange.Net;
+using CryptoExchange.Net.Logging;
+using CryptoExchange.Net.Objects;
+using Newtonsoft.Json;
+
+namespace Binance.Net.Clients.Rest.Spot
+{
+    /// <summary>
+    /// Spot market endpoints
+    /// </summary>
+    public class BinanceClientSpotMarketData : IBinanceClientSpotMarketData
+    {
+        private const string orderBookEndpoint = "depth";
+        private const string aggregatedTradesEndpoint = "aggTrades";
+        private const string recentTradesEndpoint = "trades";
+        private const string historicalTradesEndpoint = "historicalTrades";
+        private const string klinesEndpoint = "klines";
+        private const string price24HEndpoint = "ticker/24hr";
+        private const string allPricesEndpoint = "ticker/price";
+        private const string bookPricesEndpoint = "ticker/bookTicker";
+        private const string averagePriceEndpoint = "avgPrice";
+        private const string tradeFeeEndpoint = "asset/tradeFee";
+
+        private const string api = "api";
+        private const string publicVersion = "3";
+
+        private readonly Log _log;
+
+        private readonly BinanceClientSpot _baseClient;
+
+        internal BinanceClientSpotMarketData(Log log, BinanceClientSpot baseClient)
+        {
+            _log = log;
+            _baseClient = baseClient;
+        }
+
+        #region Order Book
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceOrderBook>> GetOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default)
+        {
+            symbol.ValidateBinanceSymbol();
+            limit?.ValidateIntValues(nameof(limit), 5, 10, 20, 50, 100, 500, 1000, 5000);
+            var parameters = new Dictionary<string, object> { { "symbol", symbol } };
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            var result = await _baseClient.SendRequestInternal<BinanceOrderBook>(_baseClient.GetUrl(orderBookEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            if (result)
+                result.Data.Symbol = symbol;
+            return result;
+        }
+
+        #endregion
+
+        #region Recent Trades List
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<IBinanceRecentTrade>>> GetRecentTradeHistoryAsync(string symbol, int? limit = null, CancellationToken ct = default)
+        {
+            symbol.ValidateBinanceSymbol();
+            limit?.ValidateIntBetween(nameof(limit), 1, 1000);
+
+            var parameters = new Dictionary<string, object> { { "symbol", symbol } };
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            var result = await _baseClient.SendRequestInternal<IEnumerable<BinanceRecentTradeQuote>>(_baseClient.GetUrl(recentTradesEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return result.As<IEnumerable<IBinanceRecentTrade>>(result.Data);
+        }
+
+        #endregion
+
+        #region Old Trade Lookup
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<IBinanceRecentTrade>>> GetTradeHistoryAsync(string symbol, int? limit = null, long? fromId = null, CancellationToken ct = default)
+        {
+            symbol.ValidateBinanceSymbol();
+            limit?.ValidateIntBetween(nameof(limit), 1, 1000);
+            var parameters = new Dictionary<string, object> { { "symbol", symbol } };
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("fromId", fromId?.ToString(CultureInfo.InvariantCulture));
+
+            var result = await _baseClient.SendRequestInternal<IEnumerable<BinanceRecentTradeQuote>>(_baseClient.GetUrl(historicalTradesEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return result.As<IEnumerable<IBinanceRecentTrade>>(result.Data);
+        }
+
+        #endregion
+
+        #region Compressed/Aggregate Trades List
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceAggregatedTrade>>> GetAggregatedTradeHistoryAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        {
+            symbol.ValidateBinanceSymbol();
+            limit?.ValidateIntBetween(nameof(limit), 1, 1000);
+
+            var parameters = new Dictionary<string, object> { { "symbol", symbol } };
+            parameters.AddOptionalParameter("fromId", fromId?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("startTime", startTime != null ? BinanceBaseClient.ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("endTime", endTime != null ? BinanceBaseClient.ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceAggregatedTrade>>(_baseClient.GetUrl(aggregatedTradesEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Kline/Candlestick Data
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<IBinanceKline>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        {
+            symbol.ValidateBinanceSymbol();
+            limit?.ValidateIntBetween(nameof(limit), 1, 1000);
+            var parameters = new Dictionary<string, object> {
+                { "symbol", symbol },
+                { "interval", JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)) }
+            };
+            parameters.AddOptionalParameter("startTime", startTime != null ? BinanceBaseClient.ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("endTime", endTime != null ? BinanceBaseClient.ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+
+            var result = await _baseClient.SendRequestInternal<IEnumerable<BinanceSpotKline>>(_baseClient.GetUrl(klinesEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return result.As<IEnumerable<IBinanceKline>>(result.Data); 
+        }
+
+        #endregion
+
+        #region Current Average Price
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceAveragePrice>> GetCurrentAvgPriceAsync(string symbol, CancellationToken ct = default)
+        {
+            symbol.ValidateBinanceSymbol();
+            var parameters = new Dictionary<string, object> { { "symbol", symbol } };
+
+            return await _baseClient.SendRequestInternal<BinanceAveragePrice>(_baseClient.GetUrl(averagePriceEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region 24hr Ticker Price Change Statistics
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IBinanceTick>> GetTickerAsync(string symbol, CancellationToken ct = default)
+        {
+            symbol.ValidateBinanceSymbol();
+            var parameters = new Dictionary<string, object> { { "symbol", symbol } };
+
+            var result = await _baseClient.SendRequestInternal<Binance24HPrice>(_baseClient.GetUrl(price24HEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return result.As<IBinanceTick>(result.Data);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<IBinanceTick>>> GetTickersAsync(CancellationToken ct = default)
+        {
+            var result = await _baseClient.SendRequestInternal<IEnumerable<Binance24HPrice>>(_baseClient.GetUrl(price24HEndpoint, api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
+            return result.As<IEnumerable<IBinanceTick>>(result.Data);
+        }
+
+        #endregion
+
+        #region Symbol Price Ticker
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinancePrice>> GetPriceAsync(string symbol, CancellationToken ct = default)
+        {
+            symbol.ValidateBinanceSymbol();
+            var parameters = new Dictionary<string, object>
+            {
+                { "symbol", symbol }
+            };
+
+            return await _baseClient.SendRequestInternal<BinancePrice>(_baseClient.GetUrl(allPricesEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinancePrice>>> GetPricesAsync(CancellationToken ct = default)
+        {
+            return await _baseClient.SendRequestInternal<IEnumerable<BinancePrice>>(_baseClient.GetUrl(allPricesEndpoint, api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Symbol Order Book Ticker
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceBookPrice>> GetBookPriceAsync(string symbol, CancellationToken ct = default)
+        {
+            symbol.ValidateBinanceSymbol();
+            var parameters = new Dictionary<string, object> { { "symbol", symbol } };
+
+            return await _baseClient.SendRequestInternal<BinanceBookPrice>(_baseClient.GetUrl(bookPricesEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceBookPrice>>> GetAllBookPricesAsync(CancellationToken ct = default)
+        {
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceBookPrice>>(_baseClient.GetUrl(bookPricesEndpoint, api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region GetTradeFee
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceTradeFee>>> GetTradeFeeAsync(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            symbol?.ValidateBinanceSymbol();
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<IEnumerable<BinanceTradeFee>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", _baseClient.GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("symbol", symbol);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await _baseClient.SendRequestInternal<IEnumerable<BinanceTradeFee>>(_baseClient.GetUrl(tradeFeeEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+    }
+}

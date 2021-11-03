@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Globalization;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using CryptoExchange.Net.Attributes;
 using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.ExchangeInterfaces;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Shared
@@ -10,7 +12,7 @@ namespace Binance.Net.Objects.Shared
     /// <summary>
     /// Order info
     /// </summary>
-    public class BinanceOrderBase
+    public class BinanceOrderBase: ICommonOrderId
     {
         /// <summary>
         /// The symbol the order is for
@@ -144,5 +146,7 @@ namespace Binance.Net.Objects.Shared
                 return QuoteQuantityFilled / QuantityFilled;
             }
         }
+
+        string ICommonOrderId.CommonId => Id.ToString(CultureInfo.InvariantCulture);
     }
 }

@@ -1,5 +1,8 @@
 ﻿using System.Threading.Tasks;
+using Binance.Net.Clients.Rest.UsdFutures;
 using Binance.Net.Interfaces;
+using Binance.Net.Interfaces.Clients.Rest.UsdFutures;
+using Binance.Net.Interfaces.Clients.Socket;
 using Binance.Net.Objects;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.OrderBook;
@@ -13,8 +16,8 @@ namespace Binance.Net.SymbolOrderBooks
     /// </summary>
     public class BinanceFuturesUsdtSymbolOrderBook : SymbolOrderBook
     {
-        private readonly IBinanceClient _restClient;
-        private readonly IBinanceSocketClient _socketClient;
+        private readonly IBinanceClientUsdFutures _restClient;
+        private readonly IBinanceSocketClientUsdFutures _socketClient;
         private readonly int? _limit;
         private readonly int? _updateInterval;
         private readonly bool _restOwner;
@@ -25,14 +28,17 @@ namespace Binance.Net.SymbolOrderBooks
         /// </summary>
         /// <param name="symbol">The symbol of the order book</param>
         /// <param name="options">The options for the order book</param>
-        public BinanceFuturesUsdtSymbolOrderBook(string symbol, BinanceOrderBookOptions? options = null) : base(symbol, options ?? new BinanceOrderBookOptions())
+        public BinanceFuturesUsdtSymbolOrderBook(string symbol, BinanceUsdFuturesOrderBookOptions? options = null) : base("Binance[UsdFutures]", symbol, options ?? new BinanceUsdFuturesOrderBookOptions())
         {
             _limit = options?.Limit;
             _updateInterval = options?.UpdateInterval;
-            _restClient = options?.RestClient ?? new BinanceClient();
-            _socketClient = options?.SocketClient ?? new BinanceSocketClient();
+            _restClient = options?.RestClient ?? new BinanceClientUsdFutures();
+            _socketClient = options?.SocketClient ?? new BinanceSocketClientUsdFutures();
             _restOwner = options?.RestClient == null;
             _socketOwner = options?.SocketClient == null;
+
+            sequencesAreConsecutive = options?.Limit == null;
+            strictLevels = false;
         }
 
         /// <inheritdoc />
@@ -40,9 +46,9 @@ namespace Binance.Net.SymbolOrderBooks
         {
             CallResult<UpdateSubscription> subResult;
             if (_limit == null)
-                subResult = await _socketClient.FuturesUsdt.SubscribeToOrderBookUpdatesAsync(Symbol, _updateInterval, HandleUpdate).ConfigureAwait(false);
+                subResult = await _socketClient.SubscribeToOrderBookUpdatesAsync(Symbol, _updateInterval, HandleUpdate).ConfigureAwait(false);
             else
-                subResult = await _socketClient.FuturesUsdt.SubscribeToPartialOrderBookUpdatesAsync(Symbol, _limit.Value, _updateInterval, HandleUpdate).ConfigureAwait(false);
+                subResult = await _socketClient.SubscribeToPartialOrderBookUpdatesAsync(Symbol, _limit.Value, _updateInterval, HandleUpdate).ConfigureAwait(false);
 
             if (!subResult)
                 return new CallResult<UpdateSubscription>(null, subResult.Error);
@@ -50,7 +56,7 @@ namespace Binance.Net.SymbolOrderBooks
             Status = OrderBookStatus.Syncing;
             if (_limit == null)
             {
-                var bookResult = await _restClient.FuturesUsdt.Market.GetOrderBookAsync(Symbol, _limit ?? 1000).ConfigureAwait(false);
+                var bookResult = await _restClient.MarketData.GetOrderBookAsync(Symbol, _limit ?? 1000).ConfigureAwait(false);
                 if (!bookResult)
                 {
                     await _socketClient.UnsubscribeAllAsync().ConfigureAwait(false);
@@ -91,7 +97,7 @@ namespace Binance.Net.SymbolOrderBooks
             if (_limit != null)
                 return await WaitForSetOrderBookAsync(10000).ConfigureAwait(false);
 
-            var bookResult = await _restClient.FuturesUsdt.Market.GetOrderBookAsync(Symbol, _limit ?? 1000).ConfigureAwait(false);
+            var bookResult = await _restClient.MarketData.GetOrderBookAsync(Symbol, _limit ?? 1000).ConfigureAwait(false);
             if (!bookResult)
                 return new CallResult<bool>(false, bookResult.Error);
 

@@ -1,7 +1,14 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
+using Binance.Net.Clients.Rest.CoinFutures;
+using Binance.Net.Clients.Rest.Spot;
+using Binance.Net.Clients.Rest.UsdFutures;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces;
+using Binance.Net.Interfaces.Clients.Rest.Margin;
+using Binance.Net.Interfaces.Clients.Rest.UsdFutures;
+using Binance.Net.Interfaces.Clients.Socket;
 using CryptoExchange.Net.Objects;
 
 namespace Binance.Net.Objects
@@ -9,41 +16,8 @@ namespace Binance.Net.Objects
     /// <summary>
     /// Options for the binance client
     /// </summary>
-    public class BinanceClientOptions : RestClientOptions
+    public class BinanceClientOptionsBase : RestClientOptions
     {
-        private string? _baseAddressUsdtFutures;
-        private string? _baseAddressCoinFutures;
-
-        /// <summary>
-        /// The base address for USDT-M futures
-        /// </summary>
-        public string? BaseAddressUsdtFutures
-        {
-            get => _baseAddressUsdtFutures;
-            set
-            {
-                var newValue = value;
-                if (newValue != null && !newValue.EndsWith("/"))
-                    newValue += "/";
-                _baseAddressUsdtFutures = newValue;
-            }
-        }
-
-        /// <summary>
-        /// The base address for Coin-M futures
-        /// </summary>
-        public string? BaseAddressCoinFutures
-        {
-            get => _baseAddressCoinFutures;
-            set
-            {
-                var newValue = value;
-                if (newValue != null && !newValue.EndsWith("/"))
-                    newValue += "/";
-                _baseAddressCoinFutures = newValue;
-            }
-        }
-
         /// <summary>
         /// Whether or not to automatically sync the local time with the server time
         /// </summary>
@@ -72,177 +46,175 @@ namespace Binance.Net.Objects
         /// The default receive window for requests
         /// </summary>
         public TimeSpan ReceiveWindow { get; set; } = TimeSpan.FromSeconds(5);
-        
+
         /// <summary>
-        /// Constructor with default endpoints
+        /// Copy the values of the def to the input
         /// </summary>
-        public BinanceClientOptions(): this(BinanceApiAddresses.Default)
+        /// <typeparam name="T"></typeparam>
+        /// <param name="input"></param>
+        /// <param name="def"></param>
+        public new void Copy<T>(T input, T def) where T: BinanceClientOptionsBase
         {
+            base.Copy(input, def);
+
+            input.AutoTimestamp = def.AutoTimestamp;
+            input.AutoTimestampRecalculationInterval = def.AutoTimestampRecalculationInterval;
+            input.ReceiveWindow = def.ReceiveWindow;
+            input.TimestampOffset = def.TimestampOffset;
+            input.TradeRulesBehaviour = def.TradeRulesBehaviour;
+            input.TradeRulesUpdateInterval = def.TradeRulesUpdateInterval;
         }
+    }
+
+    /// <summary>
+    /// Spot client options
+    /// </summary>
+    public class BinanceClientSpotOptions : BinanceClientOptionsBase
+    {
+        /// <summary>
+        /// Default options for the spot client
+        /// </summary>
+        public static BinanceClientSpotOptions Default { get; set; } = new BinanceClientSpotOptions()
+        {
+            BaseAddress = BinanceApiAddresses.Default.RestClientAddress
+        };
 
         /// <summary>
-        /// Constructor with default endpoints
+        /// ctor
         /// </summary>
-        /// <param name="client">HttpClient to use for requests from this client</param>
-        public BinanceClientOptions(HttpClient client) : this(BinanceApiAddresses.Default, client)
+        public BinanceClientSpotOptions()
         {
+            if (Default == null)
+                return;
+
+            Copy(this, Default);
         }
+    }
+
+    /// <summary>
+    /// Usd futures client options
+    /// </summary>
+    public class BinanceClientUsdFuturesOptions : BinanceClientOptionsBase
+    {
+        /// <summary>
+        /// Default options for the usd futures client
+        /// </summary>
+        public static BinanceClientUsdFuturesOptions Default { get; set; } = new BinanceClientUsdFuturesOptions()
+        {
+            BaseAddress = BinanceApiAddresses.Default.UsdFuturesRestClientAddress!
+        };
 
         /// <summary>
-        /// Constructor with custom endpoints
+        /// ctor
         /// </summary>
-        /// <param name="addresses">The base addresses to use</param>
-        public BinanceClientOptions(BinanceApiAddresses addresses) : this(addresses.RestClientAddress, addresses.UsdtFuturesRestClientAddress, addresses.CoinFuturesRestClientAddress, null)
+        public BinanceClientUsdFuturesOptions()
         {
+            if (Default == null)
+                return;
+
+            Copy(this, Default);
         }
+    }
 
+    /// <summary>
+    /// Coin futures client options
+    /// </summary>
+    public class BinanceClientCoinFuturesOptions : BinanceClientOptionsBase
+    {
+        /// <summary>
+        /// Default options for the coin futures client
+        /// </summary>
+        public static BinanceClientCoinFuturesOptions Default { get; set; } = new BinanceClientCoinFuturesOptions()
+        {
+            BaseAddress = BinanceApiAddresses.Default.CoinFuturesRestClientAddress!
+        };
 
         /// <summary>
-        /// Constructor with custom endpoints
+        /// ctor
         /// </summary>
-        /// <param name="addresses">The base addresses to use</param>
-        /// <param name="client">HttpClient to use for requests from this client</param>
-        public BinanceClientOptions(BinanceApiAddresses addresses, HttpClient client) : this(addresses.RestClientAddress, addresses.UsdtFuturesRestClientAddress, addresses.CoinFuturesRestClientAddress, client)
+        public BinanceClientCoinFuturesOptions()
         {
-        }
+            if (Default == null)
+                return;
 
-        /// <summary>
-        /// Constructor with custom endpoints
-        /// </summary>
-        /// <param name="spotBaseAddress">Сustom url for the SPOT API</param>
-        /// <param name="futuresUsdtBaseAddress">Сustom url for USDT-M futures API</param>
-        /// <param name="futuresCoinBaseAddress">Сustom url for Coin-M futures API</param>
-        public BinanceClientOptions(string spotBaseAddress, string? futuresUsdtBaseAddress, string? futuresCoinBaseAddress) : this(spotBaseAddress, futuresUsdtBaseAddress, futuresCoinBaseAddress, null)
-        {
-        }
-
-        /// <summary>
-        /// Constructor with custom endpoints
-        /// </summary>
-        /// <param name="spotBaseAddress">Сustom url for the SPOT API</param>
-        /// <param name="futuresUsdtBaseAddress">Сustom url for USDT-M futures API</param>
-        /// <param name="futuresCoinBaseAddress">Сustom url for Coin-M futures API</param>
-        /// <param name="client">HttpClient to use for requests from this client</param>
-        public BinanceClientOptions(string spotBaseAddress, string? futuresUsdtBaseAddress, string? futuresCoinBaseAddress, HttpClient? client) : base(spotBaseAddress)
-        {
-            HttpClient = client;
-            BaseAddressCoinFutures = futuresCoinBaseAddress;
-            BaseAddressUsdtFutures = futuresUsdtBaseAddress;
-        }
-
-        /// <summary>
-        /// Return a copy of these options
-        /// </summary>
-        /// <returns></returns>
-        public BinanceClientOptions Copy()
-        {
-            var copy = Copy<BinanceClientOptions>();
-            copy.AutoTimestamp = AutoTimestamp;
-            copy.AutoTimestampRecalculationInterval = AutoTimestampRecalculationInterval;
-            copy.TimestampOffset = TimestampOffset;
-            copy.TradeRulesBehaviour = TradeRulesBehaviour;
-            copy.TradeRulesUpdateInterval = TradeRulesUpdateInterval;
-            copy.ReceiveWindow = ReceiveWindow;
-            copy.BaseAddressCoinFutures = BaseAddressCoinFutures;
-            copy.BaseAddressUsdtFutures = BaseAddressUsdtFutures;
-            return copy;
+            Copy(this, Default);
         }
     }
 
     /// <summary>
     /// Binance socket client options
     /// </summary>
-    public class BinanceSocketClientOptions : SocketClientOptions
+    public class BinanceSocketClientSpotOptions : SocketClientOptions
     {
-        private string? _baseAddressUsdtFutures;
-        private string? _baseAddressCoinFutures;
-
         /// <summary>
-        /// The base address for USDT-M futures
+        /// Default options for the spot socket client
         /// </summary>
-        public string? BaseAddressUsdtFutures
+        public static BinanceSocketClientSpotOptions Default { get; set; } = new BinanceSocketClientSpotOptions()
         {
-            get => _baseAddressUsdtFutures;
-            set
-            {
-                var newValue = value;
-                if (newValue != null && !newValue.EndsWith("/"))
-                    newValue += "/";
-                _baseAddressUsdtFutures = newValue;
-            }
-        }
-
-        /// <summary>
-        /// The base address for Coin-M futures
-        /// </summary>
-        public string? BaseAddressCoinFutures
-        {
-            get => _baseAddressCoinFutures;
-            set
-            {
-                var newValue = value;
-                if (newValue != null && !newValue.EndsWith("/"))
-                    newValue += "/";
-                _baseAddressCoinFutures = newValue;
-            }
-        }
+            BaseAddress = BinanceApiAddresses.Default.SocketClientAddress,
+            SocketSubscriptionsCombineTarget = 10
+        };
 
         /// <summary>
         /// ctor
         /// </summary>
-        public BinanceSocketClientOptions() : this(BinanceApiAddresses.Default)
+        public BinanceSocketClientSpotOptions()
         {
+            Copy(this, Default);
         }
+    }
+
+    /// <summary>
+    /// Binance socket client options
+    /// </summary>
+    public class BinanceSocketClientUsdFuturesOptions : SocketClientOptions
+    {
+        /// <summary>
+        /// Default options for the usd futures socket client
+        /// </summary>
+        public static BinanceSocketClientUsdFuturesOptions Default { get; set; } = new BinanceSocketClientUsdFuturesOptions()
+        {
+            BaseAddress = BinanceApiAddresses.Default.UsdFuturesSocketClientAddress!,
+            SocketSubscriptionsCombineTarget = 10
+        };
 
         /// <summary>
         /// ctor
         /// </summary>
-        /// <param name="addresses">The base addresses to use</param>
-        public BinanceSocketClientOptions(BinanceApiAddresses addresses) : this(addresses.SocketClientAddress, addresses.UsdtFuturesSocketClientAddress, addresses.CoinFuturesSocketClientAddress)
+        public BinanceSocketClientUsdFuturesOptions()
         {
+            Copy(this, Default);
         }
+    }
+
+    /// <summary>
+    /// Binance socket client options
+    /// </summary>
+    public class BinanceSocketClientCoinFuturesOptions : SocketClientOptions
+    {
+        /// <summary>
+        /// Default options for the coin futures socket client
+        /// </summary>
+        public static BinanceSocketClientCoinFuturesOptions Default { get; set; } = new BinanceSocketClientCoinFuturesOptions()
+        {
+            BaseAddress = BinanceApiAddresses.Default.CoinFuturesSocketClientAddress!,
+            SocketSubscriptionsCombineTarget = 10
+        };
 
         /// <summary>
         /// ctor
         /// </summary>
-        /// <param name="address">Custom address for spot API</param>
-        /// <param name="futuresUsdtAddress">Custom address for usdt futures streams</param>
-        /// <param name="futuresCoinAddress">Custom address for coin futures streams</param>
-        public BinanceSocketClientOptions(string address, string? futuresUsdtAddress, string? futuresCoinAddress) : base(address)
+        public BinanceSocketClientCoinFuturesOptions()
         {
-            BaseAddressUsdtFutures = futuresUsdtAddress;
-            BaseAddressCoinFutures = futuresCoinAddress;
-            SocketSubscriptionsCombineTarget = 10;
-        }
-
-        /// <summary>
-        /// Return a copy of these options
-        /// </summary>
-        /// <returns></returns>
-        public BinanceSocketClientOptions Copy()
-        {
-            var copy = Copy<BinanceSocketClientOptions>();
-            copy.BaseAddressCoinFutures = BaseAddressCoinFutures;
-            copy.BaseAddressUsdtFutures = BaseAddressUsdtFutures;
-            return copy;
+            Copy(this, Default);
         }
     }
 
     /// <summary>
     /// Binance symbol order book options
     /// </summary>
-    public class BinanceOrderBookOptions : OrderBookOptions
+    public abstract class BinanceOrderBookOptions : OrderBookOptions
     {
-        /// <summary>
-        /// The rest client to use for requesting the initial order book
-        /// </summary>
-        public IBinanceClient? RestClient { get; set; }
-
-        /// <summary>
-        /// The client to use for the socket connection. When using the same client for multiple order books the connection can be shared.
-        /// </summary>
-        public IBinanceSocketClient? SocketClient { get; set; }
-
         /// <summary>
         /// The top amount of results to keep in sync. If for example limit=10 is used, the order book will contain the 10 best bids and 10 best asks. Leaving this null will sync the full order book
         /// </summary>
@@ -258,14 +230,98 @@ namespace Binance.Net.Objects
         /// </summary>
         /// <param name="limit">The top amount of results to keep in sync. If for example limit=10 is used, the order book will contain the 10 best bids and 10 best asks. Leaving this null will sync the full order book</param>
         /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
-        /// <param name="socketClient">The client to use for the socket connection. When using the same client for multiple order books the connection can be shared.</param>
-        /// <param name="restClient">The rest client to use for requesting the initial order book.</param>
-        public BinanceOrderBookOptions(int? limit = null, int? updateInterval = null, IBinanceSocketClient? socketClient = null, IBinanceClient? restClient = null) : base("Binance", limit == null, false)
+        public BinanceOrderBookOptions(int? limit = null, int? updateInterval = null)
         {
             Limit = limit;
             UpdateInterval = updateInterval;
-            SocketClient = socketClient;
+        }
+    }
+
+    /// <summary>
+    /// Binance symbol order book options
+    /// </summary>
+    public class BinanceSpotOrderBookOptions : BinanceOrderBookOptions
+    {
+        /// <summary>
+        /// The rest client to use for requesting the initial order book
+        /// </summary>
+        public IBinanceClientSpot? RestClient { get; set; }
+
+        /// <summary>
+        /// The client to use for the socket connection. When using the same client for multiple order books the connection can be shared.
+        /// </summary>
+        public IBinanceSocketClientSpot? SocketClient { get; set; }
+
+        /// <summary>
+        /// Create new options
+        /// </summary>
+        /// <param name="limit">The top amount of results to keep in sync. If for example limit=10 is used, the order book will contain the 10 best bids and 10 best asks. Leaving this null will sync the full order book</param>
+        /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+        /// <param name="socketClient">The client to use for the socket connection. When using the same client for multiple order books the connection can be shared.</param>
+        /// <param name="restClient">The rest client to use for requesting the initial order book.</param>
+        public BinanceSpotOrderBookOptions(int? limit = null, int? updateInterval = null, IBinanceSocketClientSpot? socketClient = null, IBinanceClientSpot? restClient = null) 
+            : base(limit, updateInterval)
+        {
             RestClient = restClient;
+            SocketClient = socketClient;
+        }
+    }
+
+    /// <summary>
+    /// Binance symbol order book options
+    /// </summary>
+    public class BinanceUsdFuturesOrderBookOptions : BinanceOrderBookOptions
+    {
+        /// <summary>
+        /// The rest client to use for requesting the initial order book
+        /// </summary>
+        public IBinanceClientUsdFutures? RestClient { get; set; }
+        /// <summary>
+        /// The client to use for the socket connection. When using the same client for multiple order books the connection can be shared.
+        /// </summary>
+        public IBinanceSocketClientUsdFutures? SocketClient { get; set; }
+
+        /// <summary>
+        /// Create new options
+        /// </summary>
+        /// <param name="limit">The top amount of results to keep in sync. If for example limit=10 is used, the order book will contain the 10 best bids and 10 best asks. Leaving this null will sync the full order book</param>
+        /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+        /// <param name="socketClient">The client to use for the socket connection. When using the same client for multiple order books the connection can be shared.</param>
+        /// <param name="restClient">The rest client to use for requesting the initial order book.</param>
+        public BinanceUsdFuturesOrderBookOptions(int? limit = null, int? updateInterval = null, IBinanceSocketClientUsdFutures? socketClient = null, IBinanceClientUsdFutures? restClient = null)
+            : base(limit, updateInterval)
+        {
+            RestClient = restClient;
+            SocketClient = socketClient;
+        }
+    }
+
+    /// <summary>
+    /// Binance symbol order book options
+    /// </summary>
+    public class BinanceCoinFuturesOrderBookOptions : BinanceOrderBookOptions
+    {
+        /// <summary>
+        /// The rest client to use for requesting the initial order book
+        /// </summary>
+        public IBinanceClientCoinFutures? RestClient { get; set; }
+        /// <summary>
+        /// The client to use for the socket connection. When using the same client for multiple order books the connection can be shared.
+        /// </summary>
+        public IBinanceSocketClientCoinFutures? SocketClient { get; set; }
+
+        /// <summary>
+        /// Create new options
+        /// </summary>
+        /// <param name="limit">The top amount of results to keep in sync. If for example limit=10 is used, the order book will contain the 10 best bids and 10 best asks. Leaving this null will sync the full order book</param>
+        /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+        /// <param name="socketClient">The client to use for the socket connection. When using the same client for multiple order books the connection can be shared.</param>
+        /// <param name="restClient">The rest client to use for requesting the initial order book.</param>
+        public BinanceCoinFuturesOrderBookOptions(int? limit = null, int? updateInterval = null, IBinanceSocketClientCoinFutures? socketClient = null, IBinanceClientCoinFutures? restClient = null)
+            : base(limit, updateInterval)
+        {
+            RestClient = restClient;
+            SocketClient = socketClient;
         }
     }
 }
