@@ -33,9 +33,7 @@ namespace Binance.Net.Clients.Rest.UsdFutures
         /// <inheritdoc />
         public IBinanceClientUsdFuturesAccount Account { get; }
         /// <inheritdoc />
-        public IBinanceClientUsdFuturesMarketData MarketData { get; }
-        /// <inheritdoc />
-        public IBinanceClientUsdFuturesSystemInfo SystemInfo { get; }
+        public IBinanceClientUsdFuturesExchangeData ExchangeData { get; }
         /// <inheritdoc />
         public IBinanceClientUsdFuturesTrading Trading { get; }
         #endregion
@@ -57,8 +55,7 @@ namespace Binance.Net.Clients.Rest.UsdFutures
             TradeRulesBehaviour = options.TradeRulesBehaviour;
 
             Account = new BinanceClientUsdFuturesAccount(log, this);
-            MarketData = new BinanceClientUsdFuturesMarketData(log, this);
-            SystemInfo = new BinanceClientUsdFuturesSystemInfo(log, this);
+            ExchangeData = new BinanceClientUsdFuturesExchangeData(log, this);
             Trading = new BinanceClientUsdFuturesTrading(log, this);
         }
         #endregion
@@ -116,7 +113,7 @@ namespace Binance.Net.Clients.Rest.UsdFutures
             if (err.Code == -1021)
             {
                 if (AutoTimestamp)
-                    _ = SystemInfo.GetServerTimeAsync(true);
+                    _ = ExchangeData.GetServerTimeAsync(true);
             }
             return err;
         }
@@ -124,7 +121,7 @@ namespace Binance.Net.Clients.Rest.UsdFutures
         internal async Task<WebCallResult<DateTime>> CheckAutoTimestamp(CancellationToken ct)
         {
             if (AutoTimestamp && (!TimeSynced || DateTime.UtcNow - LastTimeSync > AutoTimestampRecalculationInterval))
-                return await SystemInfo.GetServerTimeAsync(TimeSynced, ct).ConfigureAwait(false);
+                return await ExchangeData.GetServerTimeAsync(TimeSynced, ct).ConfigureAwait(false);
 
             return new WebCallResult<DateTime>(null, null, default, null);
         }
@@ -139,7 +136,7 @@ namespace Binance.Net.Clients.Rest.UsdFutures
                 return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice, outputStopPrice);
 
             if (ExchangeInfo == null || LastExchangeInfoUpdate == null || (DateTime.UtcNow - LastExchangeInfoUpdate.Value).TotalMinutes > TradeRulesUpdateInterval.TotalMinutes)
-                await SystemInfo.GetExchangeInfoAsync(ct).ConfigureAwait(false);
+                await ExchangeData.GetExchangeInfoAsync(ct).ConfigureAwait(false);
 
             if (ExchangeInfo == null)
                 return BinanceTradeRuleResult.CreateFailed("Unable to retrieve trading rules, validation failed");

@@ -48,13 +48,11 @@ namespace Binance.Net.Clients.Rest.Spot
         /// <inheritdoc />
         public IBinanceClientSpotLiquidSwap LiquidSwap { get; }
         /// <inheritdoc />
-        public IBinanceClientSpotMarketData MarketData { get; }
+        public IBinanceClientSpotExchangeData ExchangeData { get; }
         /// <inheritdoc />
         public IBinanceClientSpotMining Mining { get; }
         /// <inheritdoc />
         public IBinanceClientSpotSubAccount SubAccount { get; }
-        /// <inheritdoc />
-        public IBinanceClientSpotSystemInfo SystemInfo { get; }
         /// <inheritdoc />
         public IBinanceClientSpotTrading Trading { get; }
         #endregion
@@ -81,10 +79,9 @@ namespace Binance.Net.Clients.Rest.Spot
             Lending = new BinanceClientSpotLending(log, this);
             LeveragedTokens = new BinanceClientSpotLeveragedTokens(log, this);
             LiquidSwap = new BinanceClientSpotLiquidSwap(log, this);
-            MarketData = new BinanceClientSpotMarketData(log, this);
+            ExchangeData = new BinanceClientSpotExchangeData(log, this);
             Mining = new BinanceClientSpotMining(log, this);
             SubAccount = new BinanceClientSpotSubAccounts(log, this);
-            SystemInfo = new BinanceClientSpotSystemInfo(log, this);
             Trading = new BinanceClientSpotTrading(log, this);
         }
         #endregion
@@ -196,7 +193,7 @@ namespace Binance.Net.Clients.Rest.Spot
             if (err.Code == -1021)
             {
                 if (AutoTimestamp)
-                    _ = SystemInfo.GetServerTimeAsync(true);
+                    _ = ExchangeData.GetServerTimeAsync(true);
             }
             return err;
         }
@@ -215,7 +212,7 @@ namespace Binance.Net.Clients.Rest.Spot
         internal async Task<WebCallResult<DateTime>> CheckAutoTimestamp(CancellationToken ct)
         {
             if (AutoTimestamp && (!TimeSynced || DateTime.UtcNow - LastTimeSync > AutoTimestampRecalculationInterval))
-                return await SystemInfo.GetServerTimeAsync(TimeSynced, ct).ConfigureAwait(false);
+                return await ExchangeData.GetServerTimeAsync(TimeSynced, ct).ConfigureAwait(false);
 
             return new WebCallResult<DateTime>(null, null, default, null);
         }
@@ -230,7 +227,7 @@ namespace Binance.Net.Clients.Rest.Spot
                 return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice, outputStopPrice);
 
             if (ExchangeInfo == null || LastExchangeInfoUpdate == null || (DateTime.UtcNow - LastExchangeInfoUpdate.Value).TotalMinutes > TradeRulesUpdateInterval.TotalMinutes)
-                await SystemInfo.GetExchangeInfoAsync(ct).ConfigureAwait(false);
+                await ExchangeData.GetExchangeInfoAsync(ct).ConfigureAwait(false);
 
             if (ExchangeInfo == null)
                 return BinanceTradeRuleResult.CreateFailed("Unable to retrieve trading rules, validation failed");
@@ -371,37 +368,37 @@ namespace Binance.Net.Clients.Rest.Spot
 
         async Task<WebCallResult<IEnumerable<ICommonSymbol>>> IExchangeClient.GetSymbolsAsync()
         {
-            var exchangeInfo = await SystemInfo.GetExchangeInfoAsync().ConfigureAwait(false);
+            var exchangeInfo = await ExchangeData.GetExchangeInfoAsync().ConfigureAwait(false);
             return exchangeInfo.As<IEnumerable<ICommonSymbol>>(exchangeInfo.Data?.Symbols);
         }
 
         async Task<WebCallResult<ICommonTicker>> IExchangeClient.GetTickerAsync(string symbol)
         {
-            var tickers = await MarketData.GetTickerAsync(symbol).ConfigureAwait(false);
+            var tickers = await ExchangeData.GetTickerAsync(symbol).ConfigureAwait(false);
             return tickers.As<ICommonTicker>((Binance24HPrice)tickers.Data);
         }
 
         async Task<WebCallResult<IEnumerable<ICommonTicker>>> IExchangeClient.GetTickersAsync()
         {
-            var tickers = await MarketData.GetTickersAsync().ConfigureAwait(false);
+            var tickers = await ExchangeData.GetTickersAsync().ConfigureAwait(false);
             return tickers.As<IEnumerable<ICommonTicker>>(tickers.Data?.Select(d => (Binance24HPrice)d));
         }
 
         async Task<WebCallResult<IEnumerable<ICommonKline>>> IExchangeClient.GetKlinesAsync(string symbol, TimeSpan timespan, DateTime? startTime = null, DateTime? endTime = null, int? limit = null)
         {
-            var klines = await MarketData.GetKlinesAsync(symbol, GetKlineIntervalFromTimespan(timespan), startTime, endTime, limit).ConfigureAwait(false);
+            var klines = await ExchangeData.GetKlinesAsync(symbol, GetKlineIntervalFromTimespan(timespan), startTime, endTime, limit).ConfigureAwait(false);
             return klines.As<IEnumerable<ICommonKline>>(klines.Data);
         }
 
         async Task<WebCallResult<ICommonOrderBook>> IExchangeClient.GetOrderBookAsync(string symbol)
         {
-            var orderBookResult = await MarketData.GetOrderBookAsync(symbol).ConfigureAwait(false);
+            var orderBookResult = await ExchangeData.GetOrderBookAsync(symbol).ConfigureAwait(false);
             return orderBookResult.As<ICommonOrderBook>(orderBookResult.Data);
         }
 
         async Task<WebCallResult<IEnumerable<ICommonRecentTrade>>> IExchangeClient.GetRecentTradesAsync(string symbol)
         {
-            var tradesResult = await MarketData.GetRecentTradeHistoryAsync(symbol).ConfigureAwait(false);
+            var tradesResult = await ExchangeData.GetRecentTradeHistoryAsync(symbol).ConfigureAwait(false);
             return tradesResult.As<IEnumerable<ICommonRecentTrade>>(tradesResult.Data);
         }
 

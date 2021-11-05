@@ -18,11 +18,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.UsdFutures
         /// <summary>
         /// Endpoints related to retrieving market data
         /// </summary>
-        public IBinanceClientUsdFuturesMarketData MarketData { get; }
-        /// <summary>
-        /// Endpoints related to system information
-        /// </summary>
-        public IBinanceClientUsdFuturesSystemInfo SystemInfo { get; }
+        public IBinanceClientUsdFuturesExchangeData ExchangeData { get; }
         /// <summary>
         /// Endpoints related to orders and trades
         /// </summary>

@@ -56,7 +56,7 @@ namespace Binance.Net.SymbolOrderBooks
             Status = OrderBookStatus.Syncing;
             if (_limit == null)
             {
-                var bookResult = await _restClient.MarketData.GetOrderBookAsync(Symbol, _limit ?? 1000).ConfigureAwait(false);
+                var bookResult = await _restClient.ExchangeData.GetOrderBookAsync(Symbol, _limit ?? 1000).ConfigureAwait(false);
                 if (!bookResult)
                 {
                     await _socketClient.UnsubscribeAllAsync().ConfigureAwait(false);
@@ -97,7 +97,7 @@ namespace Binance.Net.SymbolOrderBooks
             if (_limit != null)
                 return await WaitForSetOrderBookAsync(10000).ConfigureAwait(false);
 
-            var bookResult = await _restClient.MarketData.GetOrderBookAsync(Symbol, _limit ?? 1000).ConfigureAwait(false);
+            var bookResult = await _restClient.ExchangeData.GetOrderBookAsync(Symbol, _limit ?? 1000).ConfigureAwait(false);
             if (!bookResult)
                 return new CallResult<bool>(false, bookResult.Error);
 

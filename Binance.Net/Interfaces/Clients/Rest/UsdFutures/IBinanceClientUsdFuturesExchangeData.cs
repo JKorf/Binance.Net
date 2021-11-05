@@ -1,8 +1,6 @@
 ﻿using Binance.Net.Enums;
 using Binance.Net.Objects.Futures.FuturesData;
 using Binance.Net.Objects.Futures.MarketData;
-using Binance.Net.Objects.Spot.IsolatedMarginData;
-using Binance.Net.Objects.Spot.MarginData;
 using Binance.Net.Objects.Spot.MarketData;
 using CryptoExchange.Net.Objects;
 using System;
@@ -11,53 +9,38 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Binance.Net.Interfaces.Clients.Rest.Margin
+namespace Binance.Net.Interfaces.Clients.Rest.UsdFutures
 {
-    public interface IBinanceClientCoinFuturesMarketData
+    public interface IBinanceClientUsdFuturesExchangeData
     {
         /// <summary>
-        /// Gets the recent trades for a symbol
+        /// Pings the Binance Futures API
         /// </summary>
-        /// <param name="symbol">The symbol to get recent trades for</param>
-        /// <param name="limit">Result limit</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of recent trades</returns>
-        Task<WebCallResult<IEnumerable<IBinanceRecentTrade>>> GetRecentTradeHistoryAsync(string symbol, int? limit = null, CancellationToken ct = default);
+        /// <returns>True if successful ping, false if no response</returns>
+        Task<WebCallResult<long>> PingAsync(CancellationToken ct = default);
 
         /// <summary>
-        /// Gets the historical  trades for a symbol
+        /// Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls
         /// </summary>
-        /// <param name="symbol">The symbol to get recent trades for</param>
-        /// <param name="limit">Result limit</param>
-        /// <param name="fromId">From which trade id on results should be retrieved</param>
+        /// <param name="resetAutoTimestamp">Whether the response should be used for a new auto timestamp calculation</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>List of recent trades</returns>
-        Task<WebCallResult<IEnumerable<IBinanceRecentTrade>>> GetTradeHistoryAsync(string symbol, int? limit = null, long? fromId = null, CancellationToken ct = default);
+        /// <returns>Server time</returns>
+        Task<WebCallResult<DateTime>> GetServerTimeAsync(bool resetAutoTimestamp = false, CancellationToken ct = default);
 
         /// <summary>
-        /// Gets compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
+        /// Get's information about the exchange including rate limits and symbol list
         /// </summary>
-        /// <param name="symbol">The symbol to get the trades for</param>
-        /// <param name="fromId">ID to get aggregate trades from INCLUSIVE.</param>
-        /// <param name="startTime">Time to start getting trades from</param>
-        /// <param name="endTime">Time to stop getting trades from</param>
-        /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>The aggregated trades list for the symbol</returns>
-        Task<WebCallResult<IEnumerable<BinanceAggregatedTrade>>> GetAggregatedTradeHistoryAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        /// <returns>Exchange info</returns>
+        Task<WebCallResult<BinanceFuturesUsdtExchangeInfo>> GetExchangeInfoAsync(CancellationToken ct = default);
 
         /// <summary>
-        /// Get candlestick data for the provided symbol
+        /// Gets the current status of the trading rules for the account
         /// </summary>
-        /// <param name="symbol">The symbol to get the data for</param>
-        /// <param name="interval">The candlestick timespan</param>
-        /// <param name="startTime">Start time to get candlestick data</param>
-        /// <param name="endTime">End time to get candlestick data</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>The candlestick data for the provided symbol</returns>
-        Task<WebCallResult<IEnumerable<IBinanceKline>>> GetKlinesAsync(string symbol, KlineInterval interval,
-            DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        /// <returns>List of trading rules status per symbol</returns>
+        Task<WebCallResult<BinanceFuturesTradingStatus>> GetTradingStatusAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get funding rate history for the provided symbol
@@ -131,10 +114,102 @@ namespace Binance.Net.Interfaces.Clients.Rest.Margin
         /// Get Mark Price and Funding Rate for the provided symbol
         /// </summary>
         /// <param name="symbol">The symbol to get the data for</param>
-        /// <param name="pair">Filter by pair</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Data over the last 24 hours</returns>
+        Task<WebCallResult<BinanceFuturesMarkPrice>> GetMarkPriceAsync(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get Mark Price and Funding Rate for all symbols
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Data over the last 24 hours</returns>
+        Task<WebCallResult<IEnumerable<BinanceFuturesMarkPrice>>> GetMarkPricesAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Get data regarding the last 24 hours change
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Data over the last 24 hours</returns>
+        Task<WebCallResult<IBinance24HPrice>> GetTickerAsync(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get data regarding the last 24 hours change
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Data over the last 24 hours</returns>
+        Task<WebCallResult<IEnumerable<IBinance24HPrice>>> GetTickersAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets the best price/quantity on the order book for a symbol.
+        /// </summary>
+        /// <param name="symbol">Symbol to get book price for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of book prices</returns>
+        Task<WebCallResult<BinanceBookPrice>> GetBookPriceAsync(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets the best price/quantity on the order book.
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of book prices</returns>
+        Task<WebCallResult<IEnumerable<BinanceBookPrice>>> GetBookPricesAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Get present open interest of a specific symbol.
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Open Interest info</returns>
+        Task<WebCallResult<BinanceFuturesOpenInterest>> GetOpenInterestAsync(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets Open Interest History
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="period">The period timespan</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time to get open interest history</param>
+        /// <param name="endTime">End time to get open interest history</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Open Interest History info</returns>
+        Task<WebCallResult<IEnumerable<BinanceFuturesOpenInterestHistory>>> GetOpenInterestHistoryAsync(string symbol, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets Taker Buy/Sell Volume Ratio
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="period">The period timespan</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="startTime">Start time to get taker buy/sell volume ratio</param>
+        /// <param name="endTime">End time to get taker buy/sell volume ratio</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Taker Buy/Sell Volume Ratio info</returns>
+        Task<WebCallResult<IEnumerable<BinanceFuturesBuySellVolumeRatio>>> GetTakerBuySellVolumeRatioAsync(string symbol, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets composite index info
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BinanceFuturesCoinMarkPrice>>> GetMarkPricesAsync(string? symbol = null, string? pair = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceFuturesCompositeIndexInfo>>> GetCompositeIndexInfoAsync(
+            string? symbol = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets the price of a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to get the price for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Price of symbol</returns>
+        Task<WebCallResult<BinancePrice>> GetPriceAsync(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get a list of the prices of all symbols
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of prices</returns>
+        Task<WebCallResult<IEnumerable<BinancePrice>>> GetPricesAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get candlestick data for the provided pair
@@ -148,91 +223,5 @@ namespace Binance.Net.Interfaces.Clients.Rest.Margin
         /// <param name="ct">Cancellation token</param>
         /// <returns>The candlestick data for the provided symbol</returns>
         Task<WebCallResult<IEnumerable<IBinanceKline>>> GetContinuousContractKlinesAsync(string pair, ContractType contractType, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
-
-        /// <summary>
-        /// Get candlestick data for the provided pair
-        /// </summary>
-        /// <param name="pair">The symbol to get the data for</param>
-        /// <param name="interval">The candlestick timespan</param>
-        /// <param name="startTime">Start time to get candlestick data</param>
-        /// <param name="endTime">End time to get candlestick data</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The candlestick data for the provided symbol</returns>
-        Task<WebCallResult<IEnumerable<BinanceMarkIndexKline>>> GetIndexPriceKlinesAsync(string pair, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
-
-        /// <summary>
-        /// Get data regarding the last 24 hours change
-        /// </summary>
-        /// <param name="symbol">The symbol to get the data for</param>
-        /// <param name="pair">Filter by pair</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Data over the last 24 hours</returns>
-        Task<WebCallResult<IEnumerable<IBinance24HPrice>>> GetTickersAsync(string? symbol = null, string? pair = null, CancellationToken ct = default);
-
-        /// <summary>
-        /// Gets the best price/quantity on the order book for a symbol.
-        /// </summary>
-        /// <param name="symbol">Symbol to get book price for</param>
-        /// <param name="pair">Filter by pair</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of book prices</returns>
-        Task<WebCallResult<IEnumerable<BinanceFuturesBookPrice>>> GetBookPricesAsync(string? symbol = null, string? pair = null, CancellationToken ct = default);
-
-        /// <summary>
-        /// Get present open interest of a specific symbol.
-        /// </summary>
-        /// <param name="symbol">The symbol to get the data for</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Open Interest info</returns>
-        Task<WebCallResult<BinanceFuturesCoinOpenInterest>> GetOpenInterestAsync(string symbol, CancellationToken ct = default);
-
-        /// <summary>
-        /// Gets Open Interest History
-        /// </summary>
-        /// <param name="pair">The pair to get the data for</param>
-        /// <param name="contractType">The contract type</param>
-        /// <param name="period">The period timespan</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="startTime">Start time to get open interest history</param>
-        /// <param name="endTime">End time to get open interest history</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Open Interest History info</returns>
-        Task<WebCallResult<IEnumerable<BinanceFuturesCoinOpenInterestHistory>>> GetOpenInterestHistoryAsync(string pair, ContractType contractType, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
-
-        /// <summary>
-        /// Gets Taker Buy/Sell Volume Ratio
-        /// </summary>
-        /// <param name="pair">The pair to get the data for</param>
-        /// <param name="contractType">The contract type</param>
-        /// <param name="period">The period timespan</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="startTime">Start time to get taker buy/sell volume ratio</param>
-        /// <param name="endTime">End time to get taker buy/sell volume ratio</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Taker Buy/Sell Volume Ratio info</returns>
-        Task<WebCallResult<IEnumerable<BinanceFuturesCoinBuySellVolumeRatio>>> GetTakerBuySellVolumeRatioAsync(string pair, ContractType contractType, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
-
-        /// <summary>
-        /// Gets basis
-        /// </summary>
-        /// <param name="pair">The pair to get the data for</param>
-        /// <param name="contractType">The contract type</param>
-        /// <param name="period">The period timespan</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="startTime">Start time</param>
-        /// <param name="endTime">End time</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Basis</returns>
-        Task<WebCallResult<IEnumerable<BinanceFuturesBasis>>> GetBasisAsync(string pair, ContractType contractType, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
-
-        /// <summary>
-        /// Get a list of the prices of all symbols
-        /// </summary>
-        /// <param name="symbol">Retrieve for a symbol</param>
-        /// <param name="pair">Retrieve prices for a specific pair</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of prices</returns>
-        Task<WebCallResult<IEnumerable<BinanceFuturesCoinPrice>>> GetPricesAsync(string? symbol = null, string? pair = null, CancellationToken ct = default);
     }
 }

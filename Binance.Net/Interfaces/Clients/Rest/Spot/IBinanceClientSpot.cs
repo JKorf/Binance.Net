@@ -55,7 +55,7 @@ namespace Binance.Net.Clients.Rest.Spot
         /// <summary>
         /// Endpoints related to retrieving market data
         /// </summary>
-        public IBinanceClientSpotMarketData MarketData { get; }
+        public IBinanceClientSpotExchangeData ExchangeData { get; }
         /// <summary>
         /// Endpoints related to mining
         /// </summary>
@@ -64,10 +64,6 @@ namespace Binance.Net.Clients.Rest.Spot
         /// Endpoints related to requesting data for and controlling sub accounts
         /// </summary>
         public IBinanceClientSpotSubAccount SubAccount { get; }
-        /// <summary>
-        /// Endpoints related to system information
-        /// </summary>
-        public IBinanceClientSpotSystemInfo SystemInfo { get; }
 
         /// <summary>
         /// Endpoints related to orders and trades

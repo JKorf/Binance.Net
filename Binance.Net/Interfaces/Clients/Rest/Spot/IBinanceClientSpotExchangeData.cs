@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces;
+using Binance.Net.Objects.Other;
+using Binance.Net.Objects.Spot.IsolatedMarginData;
+using Binance.Net.Objects.Spot.MarginData;
 using Binance.Net.Objects.Spot.MarketData;
 using Binance.Net.Objects.Spot.WalletData;
 using CryptoExchange.Net;
@@ -19,8 +22,76 @@ namespace Binance.Net.Clients.Rest.Spot
     /// <summary>
     /// Spot market endpoints
     /// </summary>
-    public interface IBinanceClientSpotMarketData
+    public interface IBinanceClientSpotExchangeData
     {
+        /// <summary>
+        /// Gets the withdraw/deposit details for an asset
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Asset detail</returns>
+        Task<WebCallResult<Dictionary<string, BinanceAssetDetails>>> GetAssetDetailsAsync(int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get general data for the products available on Binance
+        /// NOTE: This is not an official endpoint and might be changed or removed at any point by Binance
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BinanceProduct>>> GetProductsAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Pings the Binance API
+        /// </summary>
+        /// <returns>True if successful ping, false if no response</returns>
+        Task<WebCallResult<long>> PingAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls
+        /// </summary>
+        /// <param name="resetAutoTimestamp">Whether the response should be used for a new auto timestamp calculation</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Server time</returns>
+        Task<WebCallResult<DateTime>> GetServerTimeAsync(bool resetAutoTimestamp = false, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get's information about the exchange including rate limits and information on the provided symbol
+        /// </summary>
+        /// <param name="symbol">Symbol to get data for token</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Exchange info</returns>
+        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get's information about the exchange including rate limits and information on the provided symbols
+        /// </summary>
+        /// <param name="symbols">Symbols to get data for token</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Exchange info</returns>
+        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(IEnumerable<string> symbols, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get's information about the exchange including rate limits and symbol list
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Exchange info</returns>
+        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets the status of the Binance platform
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The system status</returns>
+        Task<WebCallResult<BinanceSystemStatus>> GetSystemStatusAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets the trading status for the current account
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The trading status of the account</returns>
+        Task<WebCallResult<BinanceTradingStatus>> GetTradingStatusAsync(int? receiveWindow = null, CancellationToken ct = default);
+
         /// <summary>
         /// Gets the recent trades for a symbol
         /// </summary>
@@ -136,5 +207,64 @@ namespace Binance.Net.Clients.Rest.Spot
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of prices</returns>
         Task<WebCallResult<IEnumerable<BinancePrice>>> GetPricesAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Get a margin asset
+        /// </summary>
+        /// <param name="asset">The symbol to get</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of margin assets</returns>
+        Task<WebCallResult<BinanceMarginAsset>> GetMarginAssetAsync(string asset, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get a margin pair
+        /// </summary>
+        /// <param name="symbol">The symbol to get</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of margin assets</returns>
+        Task<WebCallResult<BinanceMarginPair>> GetMarginSymbolAsync(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get all assets available for margin trading
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of margin assets</returns>
+        Task<WebCallResult<IEnumerable<BinanceMarginAsset>>> GetMarginAssetsAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Get all asset pairs available for margin trading
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of margin pairs</returns>
+        Task<WebCallResult<IEnumerable<BinanceMarginPair>>> GetMarginSymbolsAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Get margin price index
+        /// </summary>
+        /// <param name="symbol">The symbol to get</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Margin price index</returns>
+        Task<WebCallResult<BinanceMarginPriceIndex>> GetMarginPriceIndexAsync(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Isolated margin symbol info
+        /// </summary>
+        /// <param name="symbol">The symbol</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceIsolatedMarginSymbol>> GetIsolatedMarginSymbolAsync(string symbol,
+            int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Isolated margin symbol info
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BinanceIsolatedMarginSymbol>>> GetIsolatedMarginSymbolsAsync(int? receiveWindow =
+            null, CancellationToken ct = default);
+
+
     }
 }

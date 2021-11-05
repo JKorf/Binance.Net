@@ -58,7 +58,7 @@ namespace Binance.Net.SymbolOrderBooks
             {
                 // Small delay to make sure the snapshot is from after our first stream update
                 await Task.Delay(200).ConfigureAwait(false);
-                var bookResult = await _restClient.MarketData.GetOrderBookAsync(Symbol, Levels ?? 5000).ConfigureAwait(false);
+                var bookResult = await _restClient.ExchangeData.GetOrderBookAsync(Symbol, Levels ?? 5000).ConfigureAwait(false);
                 if (!bookResult)
                 {
                     log.Write(Microsoft.Extensions.Logging.LogLevel.Debug, $"{Id} order book {Symbol} failed to retrieve initial order book");
@@ -105,7 +105,7 @@ namespace Binance.Net.SymbolOrderBooks
             if (Levels != null)
                 return await WaitForSetOrderBookAsync(10000).ConfigureAwait(false);
 
-            var bookResult = await _restClient.MarketData.GetOrderBookAsync(Symbol, Levels ?? 5000).ConfigureAwait(false);
+            var bookResult = await _restClient.ExchangeData.GetOrderBookAsync(Symbol, Levels ?? 5000).ConfigureAwait(false);
             if (!bookResult)
                 return new CallResult<bool>(false, bookResult.Error);
 

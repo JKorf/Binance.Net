@@ -17,11 +17,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Margin
         /// <summary>
         /// Endpoints related to retrieving market data
         /// </summary>
-        public IBinanceClientCoinFuturesMarketData MarketData { get; }
-        /// <summary>
-        /// Endpoints related to system information
-        /// </summary>
-        public IBinanceClientCoinFuturesSystemInfo SystemInfo { get; }
+        public IBinanceClientCoinFuturesExchangeData ExchangeData { get; }
         /// <summary>
         /// Endpoints related to orders and trades
         /// </summary>
