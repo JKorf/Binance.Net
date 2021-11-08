@@ -1893,9 +1893,9 @@
             Universal transfer type
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.UniversalTransferType.MainToC2C">
+        <member name="F:Binance.Net.Enums.UniversalTransferType.MainToFunding">
             <summary>
-            Main (spot) to C2C
+            Main (spot) to Funding
             </summary>
         </member>
         <member name="F:Binance.Net.Enums.UniversalTransferType.MainToUsdFutures">
@@ -1918,24 +1918,19 @@
             Main (spot) to Mining
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.UniversalTransferType.C2CToMain">
+        <member name="F:Binance.Net.Enums.UniversalTransferType.FundingToMain">
             <summary>
-            C2C to Main (spot)
+            Funding to Main (spot)
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.UniversalTransferType.C2CToUsdFutures">
+        <member name="F:Binance.Net.Enums.UniversalTransferType.FundingToUsdFutures">
             <summary>
-            C2C to Usd futures
+            Funding to Usd futures
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.UniversalTransferType.C2CToMining">
+        <member name="F:Binance.Net.Enums.UniversalTransferType.FundingToMargin">
             <summary>
-            C2C to mining
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.UniversalTransferType.C2CToMargin">
-            <summary>
-            C2C to margin
+            Funding to margin
             </summary>
         </member>
         <member name="F:Binance.Net.Enums.UniversalTransferType.UsdFuturesToMain">
@@ -1943,9 +1938,9 @@
             Usd futures to Main (spot)
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.UniversalTransferType.UsdFuturesToC2C">
+        <member name="F:Binance.Net.Enums.UniversalTransferType.UsdFuturesToFunding">
             <summary>
-            Usd futures to C2C
+            Usd futures to Funding
             </summary>
         </member>
         <member name="F:Binance.Net.Enums.UniversalTransferType.UsdFuturesToMargin">
@@ -1983,9 +1978,9 @@
             Margin to Mining
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.UniversalTransferType.MarginToC2C">
+        <member name="F:Binance.Net.Enums.UniversalTransferType.MarginToFunding">
             <summary>
-            Margin to C2C
+            Margin to Funding
             </summary>
         </member>
         <member name="F:Binance.Net.Enums.UniversalTransferType.IsolatedMarginToMargin">
@@ -1998,6 +1993,11 @@
             Margin to isolated margin
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.IsolatedMarginToIsolatedMargin">
+            <summary>
+            Isolated margin to Isolated margin
+            </summary>
+        </member>
         <member name="F:Binance.Net.Enums.UniversalTransferType.MiningToMain">
             <summary>
             Mining to Main (spot)
@@ -2008,24 +2008,19 @@
             Mining to Usd futures
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.UniversalTransferType.MiningToC2C">
-            <summary>
-            Mining to C2C
-            </summary>
-        </member>
         <member name="F:Binance.Net.Enums.UniversalTransferType.MiningToMargin">
             <summary>
             Mining to Margin
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.UniversalTransferType.MainToPay">
+        <member name="F:Binance.Net.Enums.UniversalTransferType.FundingToCoinFutures">
             <summary>
-            Main to pay
+            Funding to Coin futures
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.UniversalTransferType.PayToMain">
+        <member name="F:Binance.Net.Enums.UniversalTransferType.CoinFuturesToFunding">
             <summary>
-            Pay to main
+            Coin futures to Funding
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.WithdrawalStatus">
