@@ -40,6 +40,7 @@ namespace Binance.Net.Clients.Rest.CoinFutures
         private const string accountInfoEndpoint = "account";
         private const string futuresAccountBalanceEndpoint = "balance";
         private const string positionInformationEndpoint = "positionRisk";
+        private const string futuresAccountUserCommissionRateEndpoint = "commissionRate";
 
         private const string api = "fapi";
         private const string signedVersion = "1";
@@ -374,6 +375,23 @@ namespace Binance.Net.Clients.Rest.CoinFutures
             return await _baseClient.SendRequestInternal<IEnumerable<BinancePositionDetailsCoin>>(_baseClient.GetUrl(positionInformationEndpoint, api, "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
+        #endregion
+
+        #region Future Account User Commission Rate
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceFuturesAccountUserCommissionRate>> GetUserCommissionRateAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceFuturesAccountUserCommissionRate>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+            var parameters = new Dictionary<string, object>
+            {
+                { "symbol", symbol},
+                { "timestamp", _baseClient.GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            return await _baseClient.SendRequestInternal<BinanceFuturesAccountUserCommissionRate>(_baseClient.GetUrl(futuresAccountUserCommissionRateEndpoint, "dapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
         #endregion
     }
 }

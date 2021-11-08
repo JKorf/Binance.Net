@@ -42,6 +42,7 @@ namespace Binance.Net.Clients.Rest.UsdFutures
         private const string futuresAccountMultiAssetsModeEndpoint = "multiAssetsMargin";
         private const string positionInformationEndpoint = "positionRisk";
         private const string tradingStatusEndpoint = "apiTradingStatus";
+        private const string futuresAccountUserCommissionRateEndpoint = "commissionRate";
 
         private const string api = "fapi";
         private const string signedVersion = "1";
@@ -433,5 +434,22 @@ namespace Binance.Net.Clients.Rest.UsdFutures
 
         }
         #endregion
+
+        #region Future Account User Commission Rate
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceFuturesAccountUserCommissionRate>> GetUserCommissionRateAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceFuturesAccountUserCommissionRate>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+            var parameters = new Dictionary<string, object>
+            {
+                { "symbol", symbol},
+                { "timestamp", _baseClient.GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            return await _baseClient.SendRequestInternal<BinanceFuturesAccountUserCommissionRate>(_baseClient.GetUrl(futuresAccountUserCommissionRateEndpoint, "fapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+#endregion
     }
 }
