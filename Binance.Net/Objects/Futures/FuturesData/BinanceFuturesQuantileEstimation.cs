@@ -32,5 +32,9 @@
         /// Hedge
         /// </summary>
         public int Hedge { get; set; }
+        /// <summary>
+        /// Hedge
+        /// </summary>
+        public int Both { get; set; }
     }
 }

@@ -1,4 +1,7 @@
-﻿using Binance.Net.Interfaces;
+﻿using Binance.Net.Clients.Rest.Spot;
+using Binance.Net.Interfaces;
+using Binance.Net.Interfaces.Clients.Rest.Margin;
+using Binance.Net.Interfaces.Clients.Rest.UsdFutures;
 using Binance.Net.Objects;
 using Binance.Net.UnitTests.TestImplementations;
 using NUnit.Framework;
@@ -10,154 +13,90 @@ namespace Binance.Net.UnitTests
     [TestFixture]
     public class JsonTests
     {
-        private JsonToObjectComparer<IBinanceClient> _comparer = new JsonToObjectComparer<IBinanceClient>((json) => TestHelpers.CreateResponseClient(json, new BinanceClientOptions()
+        private JsonToObjectComparer<IBinanceClientSpot> _comparer = new JsonToObjectComparer<IBinanceClientSpot>((json) => TestHelpers.CreateResponseClient(json, new BinanceClientSpotOptions()
         { ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), AutoTimestamp = false }));
 
+        private JsonToObjectComparer<IBinanceClientCoinFutures> _comparerCoin = new JsonToObjectComparer<IBinanceClientCoinFutures>((json) => TestHelpers.CreateResponseClientCoin(json, new BinanceClientCoinFuturesOptions()
+        { ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), AutoTimestamp = false }));
+
+        private JsonToObjectComparer<IBinanceClientUsdFutures> _comparerUsd = new JsonToObjectComparer<IBinanceClientUsdFutures>((json) => TestHelpers.CreateResponseClientUsd(json, new BinanceClientUsdFuturesOptions()
+        { ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), AutoTimestamp = false }));
+
+
         [Test]
-        public async Task ValidateSpotCalls()
+        public async Task ValidateSpotAccountCalls()
         {   
             await _comparer.ProcessSubject(
-                "Spot",
-                c => c.Spot,
+                "Spot/Account",
+                c => c.Account,
+                useNestedJsonPropertyForCompare: new Dictionary<string, string> {
+                    { "GetTradingStatusAsync", "data" },
+                    { "GetDailySpotAccountSnapshotAsync", "snapshotVos" },
+                    { "GetDailyMarginAccountSnapshotAsync", "snapshotVos" },
+                    { "GetDailyFutureAccountSnapshotAsync", "snapshotVos" },
+                    { "GetFiatPaymentHistoryAsync", "data" },
+                    { "GetFiatDepositWithdrawHistoryAsync", "data" }
+                },
+                parametersToSetNull: new[] { "limit" });
+        }
+
+        [Test]
+        public async Task ValidateSpotExchangeDataCalls()
+        {
+            await _comparer.ProcessSubject(
+                "Spot/ExchangeData",
+                c => c.ExchangeData,
                 useNestedJsonPropertyForCompare: new Dictionary<string, string> {
                     { "GetTradingStatusAsync", "data" }
-                });
+                },
+                parametersToSetNull: new[] { "limit" });
         }
 
         [Test]
-        public async Task ValidateSpotMarketCalls()
+        public async Task ValidateSpotTradingCalls()
         {
             await _comparer.ProcessSubject(
-                "SpotMarket",
-                c => c.Spot.Market, 
-                new[] { "limit" });
-        }
+                "Spot/Trading",
+                c => c.Trading,
+                useNestedJsonPropertyForCompare: new Dictionary<string, string> {
 
-        [Test]
-        public async Task ValidateSpotFutureCalls()
-        {
-            await _comparer.ProcessSubject(
-                "SpotFutures",
-                c => c.Spot.Futures,
-                new [] { "collateralQuantity" });
-        }
-
-        [Test]
-        public async Task ValidateSpotOrderCalls()
-        {
-            await _comparer.ProcessSubject(
-                "SpotOrder",
-                c => c.Spot.Order,
-                new[] { "quoteQuantity", "fromId" },
+                },
                 ignoreProperties: new Dictionary<string, List<string>>
                 {
-                    { "PlaceOrderAsync", new List<string> { "price" } }
+                    { "PlaceOrderAsync", new List<string> { "price" } },
+                    { "PlaceMarginOrderAsync", new List<string> { "price" } },
+                    { "GetMarginAccountOrdersAsync", new List<string> { "price" } },
+                },
+                parametersToSetNull: new[] { "limit", "quoteQuantity", "fromId" });
+        }
+
+        [Test]
+        public async Task ValidateSpotSubAccountCalls()
+        {
+            await _comparer.ProcessSubject(
+                "Spot/SubAccount",
+                c => c.SubAccount,
+
+                useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
+                    { "GetSubAccountsAsync", "subAccounts" },
+                    { "GetSubAccountAssetsAsync", "balances" },
                 });
         }
 
         [Test]
-        public async Task ValidateSpotSystemCalls()
+        public async Task ValidateSpotBrokerageCalls()
         {
             await _comparer.ProcessSubject(
-                "SpotSystem",
-                c => c.Spot.System);
-        }
-
-        [Test]
-        public async Task ValidateMarginCalls()
-        {
-            await _comparer.ProcessSubject(
-                "Margin",
-                c => c.Margin);
-        }
-
-        [Test]
-        public async Task ValidateMarginMarketCalls()
-        {
-            await _comparer.ProcessSubject(
-                "MarginMarket",
-                c => c.Margin.Market);
-        }
-
-        [Test]
-        public async Task ValidateMarginOrderCalls()
-        {
-            await _comparer.ProcessSubject(
-                "MarginOrder",
-                c => c.Margin.Order,
-                new string[] { "quoteQuantity", "fromId" },
-                ignoreProperties: new Dictionary<string, List<string>>
-                { 
-                    { "GetMarginAccountOrdersAsync", new List<string> { "price" } }
-                });
-        }
-
-        [Test]
-        public async Task ValidateBrokerageCalls()
-        {
-            await _comparer.ProcessSubject(
-                "Brokerage",
+                "Spot/Brokerage",
                 c => c.Brokerage);
         }
 
         [Test]
-        public async Task ValidateFiatCalls()
+        public async Task ValidateSpotMiningCalls()
         {
             await _comparer.ProcessSubject(
-                "Fiat",
-                c => c.Fiat,
-                useNestedJsonPropertyForCompare: new Dictionary<string, string>
-                {
-                    { "GetFiatPaymentHistoryAsync", "data" },
-                    { "GetFiatDepositWithdrawHistoryAsync", "data" }
-                });
-        }
-
-        [Test]
-        public async Task ValidateGeneralCalls()
-        {
-            await _comparer.ProcessSubject(
-                "General",
-                c => c.General,
-                parametersToSetNull: new [] { "limit" },
-                useNestedJsonPropertyForCompare: new Dictionary<string, string>
-                {
-                    { "GetDailySpotAccountSnapshotAsync", "snapshotVos" },
-                    { "GetDailyMarginAccountSnapshotAsync", "snapshotVos" },
-                    { "GetDailyFutureAccountSnapshotAsync", "snapshotVos" },
-                    { "GetTradingStatusAsync", "data" }
-                });
-        }
-
-        [Test]
-        public async Task ValidateLendingCalls()
-        {
-            await _comparer.ProcessSubject(
-                "Lending",
-                c => c.Lending);
-        }
-
-        [Test]
-        public async Task ValidateBlvtCalls()
-        {
-            await _comparer.ProcessSubject(
-                "LeveragedTokens",
-                c => c.Blvt);
-        }
-
-        [Test]
-        public async Task ValidateLiquidSwapCalls()
-        {
-            await _comparer.ProcessSubject(
-                "LiquidSwap",
-                c => c.BSwap);
-        }
-
-        [Test]
-        public async Task ValidateMiningCalls()
-        {
-            await _comparer.ProcessSubject(
-                "Mining",
+                "Spot/Mining",
                 c => c.Mining,
                 useNestedJsonPropertyForCompare: new Dictionary<string, string>
                 {
@@ -177,124 +116,183 @@ namespace Binance.Net.UnitTests
         }
 
         [Test]
-        public async Task ValidateSubAccountCalls()
+        public async Task ValidateSpotFuturesCalls()
         {
             await _comparer.ProcessSubject(
-                "SubAccounts",
-                c => c.SubAccount,
+                "Spot/Futures",
+                c => c.Futures,
+                new [] { "collateralQuantity" });
+        }
+
+
+        [Test]
+        public async Task ValidateSpotLiquidSwapCalls()
+        {
+            await _comparer.ProcessSubject(
+                "Spot/LiquidSwap",
+                c => c.LiquidSwap);
+        }
+
+        [Test]
+        public async Task ValidateSpotLeveragedTokensCalls()
+        {
+            await _comparer.ProcessSubject(
+                "Spot/LeveragedTokens",
+                c => c.LeveragedTokens);
+        }
+
+        [Test]
+        public async Task ValidateSpotLendingCalls()
+        {
+            await _comparer.ProcessSubject(
+                "Spot/Lending",
+                c => c.Lending);
+        }
+
+        [Test]
+        public async Task ValidateCoinFuturesTradingCalls()
+        {
+            await _comparerCoin.ProcessSubject(
+                "CoinFutures/Trading",
+                c => c.Trading,
                 useNestedJsonPropertyForCompare: new Dictionary<string, string>
                 {
-                    { "GetSubAccountsAsync", "subAccounts" },
-                    { "GetSubAccountAssetsAsync", "balances" },
-                });
-        }
 
-        [Test]
-        public async Task ValidateWithdrawDepositCalls()
-        {
-            await _comparer.ProcessSubject(
-                "WithdrawDeposit",
-                c => c.WithdrawDeposit);
-        }
-
-        [Test]
-        public async Task ValidateFuturesUsdCalls()
-        {
-            await _comparer.ProcessSubject(
-                "FuturesUsd",
-                c => c.FuturesUsdt,
+                },
                 ignoreProperties: new Dictionary<string, List<string>>
                 {
-                    { "GetPositionInformationAsync", new List<string>{ "unRealizedProfit"  } }
-                });
-        }
-
-
-        [Test]
-        public async Task ValidateFuturesUsdAccountCalls()
-        {
-            await _comparer.ProcessSubject(
-                "FuturesUsdAccount",
-                c => c.FuturesUsdt.Account);
+                },
+                parametersToSetNull: new string[] {  });
         }
 
         [Test]
-        public async Task ValidateFuturesUsdMarketCalls()
+        public async Task ValidateCoinFuturesAccountCalls()
         {
-            await _comparer.ProcessSubject(
-                "FuturesUsdMarket",
-                c => c.FuturesUsdt.Market,
-                new string[] { "limit" });
-        }
+            await _comparerCoin.ProcessSubject(
+                "CoinFutures/Account",
+                c => c.Account,
+                useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
 
-        [Test]
-        public async Task ValidateFuturesUsdOrderCalls()
-        {
-            await _comparer.ProcessSubject(
-                "FuturesUsdOrder",
-                c => c.FuturesUsdt.Order);
-        }
-
-        [Test]
-        public async Task ValidateFuturesUsdSystemCalls()
-        {
-            await _comparer.ProcessSubject(
-                "FuturesUsdSystem",
-                c => c.FuturesUsdt.System);
-        }
-
-        [Test]
-        public async Task ValidateFuturesCoinCalls()
-        {
-            await _comparer.ProcessSubject(
-                "FuturesCoin",
-                c => c.FuturesCoin,
+                },
                 ignoreProperties: new Dictionary<string, List<string>>
                 {
-                    { "GetPositionInformationAsync", new List<string> { "unRealizedProfit" } },
-                    { "GetBracketsAsync", new List<string> { "pair", "qtyCap", "qtylFloor" } },
-                });
-        }
-
-
-        [Test]
-        public async Task ValidateFuturesCoinAccountCalls()
-        {
-            await _comparer.ProcessSubject(
-                "FuturesCoinAccount",
-                c => c.FuturesCoin.Account);
+                    { "GetPositionInformationAsync", new List<string>{ "unRealizedProfit"  } },
+                    { "GetBracketsAsync", new List<string> { "pair", "qtyCap", "qtylFloor" } }
+                },
+                parametersToSetNull: new string[] { });
         }
 
         [Test]
-        public async Task ValidateFuturesCoinMarketCalls()
+        public async Task ValidateCoinFuturesExchangeDataCalls()
         {
-            await _comparer.ProcessSubject(
-                "FuturesCoinMarket",
-                c => c.FuturesCoin.Market,
-                new string[] { "limit" },
+            await _comparerCoin.ProcessSubject(
+                "CoinFutures/ExchangeData",
+                c => c.ExchangeData,
+                useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
+
+                },
                 ignoreProperties: new Dictionary<string, List<string>>
                 {
                     { "GetTopLongShortPositionRatioAsync", new List<string> { "shortPosition", "longPosition" } },
-                    //{ "GetOrderBookAsync", new List<string> { "symbol" } },
+                },
+                parametersToSetNull: new string[] {
+                    "limit" 
                 });
         }
 
         [Test]
-        public async Task ValidateFuturesCoinOrderCalls()
+        public async Task ValidateUsdFuturesAccountCalls()
         {
-            await _comparer.ProcessSubject(
-                "FuturesCoinOrder",
-                c => c.FuturesCoin.Order);
+            await _comparerUsd.ProcessSubject(
+                "UsdFutures/Account",
+                c => c.Account,
+                useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
+                },
+                ignoreProperties: new Dictionary<string, List<string>>
+                {
+                    { "GetPositionInformationAsync", new List<string>{ "unRealizedProfit"  } }
+                },
+                parametersToSetNull: new string[] {
+                    "limit"
+                });
         }
 
         [Test]
-        public async Task ValidateFuturesCoinSystemCalls()
+        public async Task ValidateUsdFuturesExchangeDataCalls()
         {
-            await _comparer.ProcessSubject(
-                "FuturesCoinSystem",
-                c => c.FuturesCoin.System);
+            await _comparerUsd.ProcessSubject(
+                "UsdFutures/ExchangeData",
+                c => c.ExchangeData,
+                useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
+                },
+                ignoreProperties: new Dictionary<string, List<string>>
+                {
+                },
+                parametersToSetNull: new string[] {
+                    "limit"
+                });
         }
 
-       
+        [Test]
+        public async Task ValidateUsdFuturesTradingCalls()
+        {
+            await _comparerUsd.ProcessSubject(
+                "UsdFutures/Trading",
+                c => c.Trading,
+                useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
+                },
+                ignoreProperties: new Dictionary<string, List<string>>
+                {
+                },
+                parametersToSetNull: new string[] {
+                    "limit"
+                });
+        }
+
+        //[Test]
+        //public async Task ValidateSpotFutureCalls()
+        //{
+        //    await _comparer.ProcessSubject(
+        //        "SpotFutures",
+        //        c => c.Spot.Futures,
+        //        new [] { "collateralQuantity" });
+        //}
+
+        //[Test]
+        //public async Task ValidateBrokerageCalls()
+        //{
+        //    await _comparer.ProcessSubject(
+        //        "Brokerage",
+        //        c => c.Brokerage);
+        //}
+
+        //[Test]
+        //public async Task ValidateLendingCalls()
+        //{
+        //    await _comparer.ProcessSubject(
+        //        "Lending",
+        //        c => c.Lending);
+        //}
+
+        //[Test]
+        //public async Task ValidateBlvtCalls()
+        //{
+        //    await _comparer.ProcessSubject(
+        //        "LeveragedTokens",
+        //        c => c.Blvt);
+        //}
+
+        //[Test]
+        //public async Task ValidateLiquidSwapCalls()
+        //{
+        //    await _comparer.ProcessSubject(
+        //        "LiquidSwap",
+        //        c => c.BSwap);
+        //}
     }
 }

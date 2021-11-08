@@ -85,14 +85,6 @@ namespace Binance.Net.Clients.Rest.Spot
         Task<WebCallResult<BinanceSystemStatus>> GetSystemStatusAsync(CancellationToken ct = default);
 
         /// <summary>
-        /// Gets the trading status for the current account
-        /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The trading status of the account</returns>
-        Task<WebCallResult<BinanceTradingStatus>> GetTradingStatusAsync(int? receiveWindow = null, CancellationToken ct = default);
-
-        /// <summary>
         /// Gets the recent trades for a symbol
         /// </summary>
         /// <param name="symbol">The symbol to get recent trades for</param>

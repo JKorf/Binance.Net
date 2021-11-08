@@ -41,6 +41,7 @@ namespace Binance.Net.Clients.Rest.UsdFutures
         private const string futuresAccountBalanceEndpoint = "balance";
         private const string futuresAccountMultiAssetsModeEndpoint = "multiAssetsMargin";
         private const string positionInformationEndpoint = "positionRisk";
+        private const string tradingStatusEndpoint = "apiTradingStatus";
 
         private const string api = "fapi";
         private const string signedVersion = "1";
@@ -411,6 +412,26 @@ namespace Binance.Net.Clients.Rest.UsdFutures
             return await _baseClient.SendRequestInternal<IEnumerable<BinancePositionDetailsUsdt>>(_baseClient.GetUrl(positionInformationEndpoint, api, "2"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
+        #endregion
+
+        #region Trading status
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceFuturesTradingStatus>> GetTradingStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceFuturesTradingStatus>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", _baseClient.GetTimestamp() },
+            };
+
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceFuturesTradingStatus>(_baseClient.GetUrl(tradingStatusEndpoint, api, "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+
+        }
         #endregion
     }
 }

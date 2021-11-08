@@ -48,6 +48,7 @@ namespace Binance.Net.Clients.Rest.Spot
         private const string toggleBnbBurnEndpoint = "bnbBurn";
         private const string getBnbBurnEndpoint = "bnbBurn";
         private const string universalTransferEndpoint = "asset/transfer";
+        private const string tradingStatusEndpoint = "account/apiTradingStatus";
 
         // Margin
         private const string marginTransferEndpoint = "margin/transfer";
@@ -1268,6 +1269,30 @@ namespace Binance.Net.Clients.Rest.Spot
             return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrl(closeListenKeyIsolatedEndpoint, "sapi", "1"), HttpMethod.Delete, ct, parameters).ConfigureAwait(false);
         }
 
+        #endregion
+
+
+        #region Trading status
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceTradingStatus>> GetTradingStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceTradingStatus>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", _baseClient.GetTimestamp() },
+            };
+
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceTradingStatus>>(_baseClient.GetUrl(tradingStatusEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            if (!result)
+                return new WebCallResult<BinanceTradingStatus>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
+
+            return !string.IsNullOrEmpty(result.Data.Message) ? new WebCallResult<BinanceTradingStatus>(result.ResponseStatusCode, result.ResponseHeaders, null, new ServerError(result.Data.Message!)) : result.As(result.Data.Data);
+        }
         #endregion
     }
 }

@@ -67,7 +67,15 @@ namespace Binance.Net.UnitTests.TestImplementations
                 }
 
                 // act
-                var result = (CallResult)await TestHelpers.InvokeAsync(method, getSubject(client), input.ToArray());
+                CallResult result = null;
+                try
+                {
+                    result = (CallResult)await TestHelpers.InvokeAsync(method, getSubject(client), input.ToArray());
+                }
+                catch(Exception e)
+                {
+                    throw;
+                }
 
                 // asset
                 Assert.Null(result.Error, method.Name);

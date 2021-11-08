@@ -35,53 +35,16 @@ namespace Binance.Net.UnitTests
             // arrange
             DateTime expected = new DateTime(1970, 1, 1).AddMilliseconds(milisecondsTime);
             var time = new BinanceCheckTime() { ServerTime = expected };
-            var client = TestHelpers.CreateResponseClient(JsonConvert.SerializeObject(time), new BinanceClientOptions() { AutoTimestamp = false });
+            var client = TestHelpers.CreateResponseClient(JsonConvert.SerializeObject(time), new BinanceClientSpotOptions() { AutoTimestamp = false });
 
             // act
-            var result = await client.Spot.System.GetServerTimeAsync();
+            var result = await client.ExchangeData.GetServerTimeAsync();
 
             // assert
             Assert.AreEqual(true, result.Success);
             Assert.AreEqual(expected, result.Data);
         }
        
-        [TestCase]
-        public async Task PlaceMultipleOrders_Should_RespondWithResultList()
-        {
-            // arrange
-            var response =
-                "[\r\n    {\r\n        \"clientOrderId\": \"testOrder\",\r\n        \"cumQuote\": \"0\",\r\n        \"executedQty\": \"0\",\r\n        \"orderId\": 22542179,\r\n        \"avgPrice\": \"0.00000\",\r\n        \"origQty\": \"10\",\r\n        \"price\": \"0\",\r\n        \"reduceOnly\": false,\r\n        \"side\": \"BUY\",\r\n        \"positionSide\": \"SHORT\",\r\n        \"status\": \"NEW\",\r\n        \"stopPrice\": \"9300\",        // please ignore when order type is TRAILING_STOP_MARKET\r\n        \"symbol\": \"BTCUSDT\",\r\n        \"timeInForce\": \"GTC\",\r\n        \"type\": \"TRAILING_STOP_MARKET\",\r\n        \"activatePrice\": \"9020\",    // activation price, only return with TRAILING_STOP_MARKET order\r\n        \"priceRate\": \"0.3\",         // callback rate, only return with TRAILING_STOP_MARKET order\r\n        \"updateTime\": 1566818724722,\r\n        \"workingType\": \"CONTRACT_PRICE\"\r\n    },\r\n    {\r\n        \"code\": -2022, \r\n        \"msg\": \"ReduceOnly Order is rejected.\"\r\n    }\r\n]";
-
-            var client = TestHelpers.CreateResponseClient(response, new BinanceClientOptions()
-            {
-                ApiCredentials = new ApiCredentials("Test", "Test"),
-                AutoTimestamp = false,
-                LogLevel = LogLevel.Debug
-            });
-
-            // act
-            var result = await client.FuturesUsdt.Order.PlaceMultipleOrdersAsync(new []
-            {
-                new BinanceFuturesBatchOrder()
-                {
-                    Symbol = "Test",
-                    Quantity = 3,
-                    Side = OrderSide.Sell
-                },
-                new BinanceFuturesBatchOrder()
-                {
-                    Symbol = "Test2",
-                    Quantity = 2,
-                    Side = OrderSide.Buy
-                },
-            });
-
-            // Assert
-            Assert.IsTrue(result.Success);
-            Assert.IsTrue(result.Data.First().Success);
-            Assert.IsFalse(result.Data.Skip(1).First().Success);
-        }
-
         [TestCase]
         public async Task StartUserStream_Should_RespondWithListenKey()
         {
@@ -91,14 +54,14 @@ namespace Binance.Net.UnitTests
                 ListenKey = "123"
             };
 
-            var client = TestHelpers.CreateResponseClient(key, new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient(key, new BinanceClientSpotOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
             });
 
             // act
-            var result = await client.Spot.UserStream.StartUserStreamAsync();
+            var result = await client.Account.StartUserStreamAsync();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -109,14 +72,14 @@ namespace Binance.Net.UnitTests
         public async Task KeepAliveUserStream_Should_Respond()
         {
             // arrange
-            var client = TestHelpers.CreateResponseClient("{}", new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient("{}", new BinanceClientSpotOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
             });
 
             // act
-            var result = await client.Spot.UserStream.KeepAliveUserStreamAsync("test");
+            var result = await client.Account.KeepAliveUserStreamAsync("test");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -126,14 +89,14 @@ namespace Binance.Net.UnitTests
         public async Task StopUserStream_Should_Respond()
         {
             // arrange
-            var client = TestHelpers.CreateResponseClient("{}", new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient("{}", new BinanceClientSpotOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
             });
 
             // act
-            var result = await client.Spot.UserStream.StopUserStreamAsync("test");
+            var result = await client.Account.StopUserStreamAsync("test");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -143,7 +106,7 @@ namespace Binance.Net.UnitTests
         public async Task EnablingAutoTimestamp_Should_CallServerTime()
         {
             // arrange
-            var client = TestHelpers.CreateResponseClient("{}", new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient("{}", new BinanceClientSpotOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = true
@@ -152,7 +115,7 @@ namespace Binance.Net.UnitTests
             // act
             try
             {
-                await client.Spot.Order.GetOpenOrdersAsync();
+                await client.Trading.GetOpenOrdersAsync();
             }
             catch (Exception)
             {
@@ -172,7 +135,7 @@ namespace Binance.Net.UnitTests
             TestHelpers.SetErrorWithResponse(client, "{\"msg\": \"Error!\", \"code\": 123}", HttpStatusCode.BadRequest);
 
             // act
-            var result = await client.Spot.System.GetServerTimeAsync();
+            var result = await client.ExchangeData.GetServerTimeAsync();
 
             // assert
             Assert.IsFalse(result.Success);

@@ -558,6 +558,9 @@
         <member name="M:Binance.Net.Clients.Rest.Spot.BinanceClientSpotAccount.CloseIsolatedMarginUserStreamAsync(System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.Rest.Spot.BinanceClientSpotAccount.GetTradingStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.Rest.Spot.BinanceClientSpotBrokerage">
             <summary>
             Spot system endpoints
@@ -686,9 +689,6 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.Rest.Spot.BinanceClientSpotExchangeData.GetSystemStatusAsync(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.Rest.Spot.BinanceClientSpotExchangeData.GetTradingStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.Rest.Spot.BinanceClientSpotExchangeData.GetAssetDetailsAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
@@ -1104,7 +1104,7 @@
         <member name="M:Binance.Net.Clients.Rest.Spot.BinanceClientSpotTrading.GetMarginOcoOrdersAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.Rest.Spot.BinanceClientSpotTrading.GetOpenOcoOrdersAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.Rest.Spot.BinanceClientSpotTrading.GetMarginOpenOcoOrdersAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.Rest.Spot.IBinanceClientSpot">
@@ -1701,6 +1701,14 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
+        <member name="M:Binance.Net.Clients.Rest.Spot.IBinanceClientSpotAccount.GetTradingStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets the trading status for the current account
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The trading status of the account</returns>
+        </member>
         <member name="M:Binance.Net.Clients.Rest.Spot.IBinanceClientSpotBrokerage.CreateSubAccountAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Create a Sub Account
@@ -2214,14 +2222,6 @@
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>The system status</returns>
-        </member>
-        <member name="M:Binance.Net.Clients.Rest.Spot.IBinanceClientSpotExchangeData.GetTradingStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Gets the trading status for the current account
-            </summary>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>The trading status of the account</returns>
         </member>
         <member name="M:Binance.Net.Clients.Rest.Spot.IBinanceClientSpotExchangeData.GetRecentTradeHistoryAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
@@ -3629,7 +3629,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Order lists matching the parameters</returns>
         </member>
-        <member name="M:Binance.Net.Clients.Rest.Spot.IBinanceClientSpotTrading.GetOpenOcoOrdersAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.Rest.Spot.IBinanceClientSpotTrading.GetMarginOpenOcoOrdersAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Retrieves a list of open margin oco orders
             </summary>
@@ -3734,13 +3734,13 @@
         <member name="M:Binance.Net.Clients.Rest.UsdFutures.BinanceClientUsdFuturesAccount.GetPositionInformationAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.Rest.UsdFutures.BinanceClientUsdFuturesAccount.GetTradingStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.Rest.UsdFutures.BinanceClientUsdFuturesExchangeData">
             <summary>
             Spot system endpoints
             </summary>
-        </member>
-        <member name="M:Binance.Net.Clients.Rest.UsdFutures.BinanceClientUsdFuturesExchangeData.GetTradingStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.Rest.UsdFutures.BinanceClientUsdFuturesExchangeData.PingAsync(System.Threading.CancellationToken)">
             <inheritdoc />
@@ -6756,6 +6756,14 @@
             <param name="ct">Cancellation token</param>
             <returns>Succes</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.Clients.Rest.UsdFutures.IBinanceClientUsdFuturesAccount.GetTradingStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets the current status of the trading rules for the account
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of trading rules status per symbol</returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.Clients.Rest.UsdFutures.IBinanceClientUsdFuturesExchangeData.PingAsync(System.Threading.CancellationToken)">
             <summary>
             Pings the Binance Futures API
@@ -6776,14 +6784,6 @@
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>Exchange info</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.Rest.UsdFutures.IBinanceClientUsdFuturesExchangeData.GetTradingStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Gets the current status of the trading rules for the account
-            </summary>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>List of trading rules status per symbol</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.Rest.UsdFutures.IBinanceClientUsdFuturesExchangeData.GetFundingRatesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
@@ -11543,6 +11543,11 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAdlQuantile.Hedge">
+            <summary>
+            Hedge
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAdlQuantile.Both">
             <summary>
             Hedge
             </summary>

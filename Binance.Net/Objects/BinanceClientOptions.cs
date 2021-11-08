@@ -160,6 +160,9 @@ namespace Binance.Net.Objects
         /// </summary>
         public BinanceSocketClientSpotOptions()
         {
+            if (Default == null)
+                return;
+
             Copy(this, Default);
         }
     }
