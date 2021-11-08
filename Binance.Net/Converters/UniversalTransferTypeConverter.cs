@@ -11,20 +11,18 @@ namespace Binance.Net.Converters
 
         protected override List<KeyValuePair<UniversalTransferType, string>> Mapping => new List<KeyValuePair<UniversalTransferType, string>>
         {
-            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MainToC2C, "MAIN_C2C"),
+            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MainToFunding, "MAIN_FUNDING"),
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MainToUsdFutures, "MAIN_UMFUTURE"),
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MainToCoinFutures, "MAIN_CMFUTURE"),
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MainToMargin, "MAIN_MARGIN"),
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MainToMining, "MAIN_MINING"),
-            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MainToPay, "MAIN_PAY"),
 
-            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.C2CToMain, "C2C_MAIN"),
-            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.C2CToUsdFutures, "C2C_UMFUTURE"),
-            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.C2CToMining, "C2C_MINING"),
-            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.C2CToMargin, "C2C_MARGIN"),
+            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.FundingToMain, "FUNDING_MAIN"),
+            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.FundingToUsdFutures, "FUNDING_UMFUTURE"),
+            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.FundingToMargin, "FUNDING_MARGIN"),
 
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.UsdFuturesToMain, "UMFUTURE_MAIN"),
-            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.UsdFuturesToC2C, "UMFUTURE_C2C"),
+            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.UsdFuturesToFunding, "UMFUTURE_FUNDING"),
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.UsdFuturesToMargin, "UMFUTURE_MARGIN"),
 
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.CoinFuturesToMain, "CMFUTURE_MAIN"),
@@ -37,14 +35,15 @@ namespace Binance.Net.Converters
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MarginToUsdFutures, "MARGIN_UMFUTURE"),
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MarginToCoinFutures, "MARGIN_CMFUTURE"),
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MarginToMining, "MARGIN_MINING"),
-            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MarginToC2C, "MARGIN_C2C"),
+            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MarginToFunding, "MARGIN_FUNDING"),
 
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MiningToMain, "MINING_MAIN"),
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MiningToUsdFutures, "MINING_UMFUTURE"),
-            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MiningToC2C, "MINING_C2C"),
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MiningToMargin, "MINING_MARGIN"),
 
-            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.PayToMain, "PAY_MAIN"),
+            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.FundingToCoinFutures, "FUNDING_CMFUTURE"),
+            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.CoinFuturesToFunding, "CMFUTURE_FUNDING"),
+            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.IsolatedMarginToIsolatedMargin, "ISOLATEDMARGIN_ISOLATEDMARGIN"),
         };
     }
 }
