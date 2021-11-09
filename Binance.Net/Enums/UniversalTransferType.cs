@@ -6,9 +6,9 @@
     public enum UniversalTransferType
     {
         /// <summary>
-        /// Main (spot) to C2C
+        /// Main (spot) to Funding
         /// </summary>
-        MainToC2C,
+        MainToFunding,
         /// <summary>
         /// Main (spot) to Usd Futures
         /// </summary>
@@ -27,30 +27,26 @@
         MainToMining,
 
         /// <summary>
-        /// C2C to Main (spot)
+        /// Funding to Main (spot)
         /// </summary>
-        C2CToMain,
+        FundingToMain,
         /// <summary>
-        /// C2C to Usd futures
+        /// Funding to Usd futures
         /// </summary>
-        C2CToUsdFutures,
+        FundingToUsdFutures,
         /// <summary>
-        /// C2C to mining
+        /// Funding to margin
         /// </summary>
-        C2CToMining,
-        /// <summary>
-        /// C2C to margin
-        /// </summary>
-        C2CToMargin,
+        FundingToMargin,
         
         /// <summary>
         /// Usd futures to Main (spot)
         /// </summary>
         UsdFuturesToMain,
         /// <summary>
-        /// Usd futures to C2C
+        /// Usd futures to Funding
         /// </summary>
-        UsdFuturesToC2C,
+        UsdFuturesToFunding,
         /// <summary>
         /// Usd futures to Margin
         /// </summary>
@@ -82,9 +78,9 @@
         /// </summary>
         MarginToMining,
         /// <summary>
-        /// Margin to C2C
+        /// Margin to Funding
         /// </summary>
-        MarginToC2C,
+        MarginToFunding,
 
         /// <summary>
         /// Isolated margin to margin
@@ -94,6 +90,10 @@
         /// Margin to isolated margin
         /// </summary>
         MarginToIsolatedMargin,
+        /// <summary>
+        /// Isolated margin to Isolated margin
+        /// </summary>
+        IsolatedMarginToIsolatedMargin,
 
         /// <summary>
         /// Mining to Main (spot)
@@ -104,21 +104,16 @@
         /// </summary>
         MiningToUsdFutures,
         /// <summary>
-        /// Mining to C2C
-        /// </summary>
-        MiningToC2C,
-        /// <summary>
         /// Mining to Margin
         /// </summary>
         MiningToMargin,
-
         /// <summary>
-        /// Main to pay
+        /// Funding to Coin futures
         /// </summary>
-        MainToPay,
+        FundingToCoinFutures,
         /// <summary>
-        /// Pay to main
+        /// Coin futures to Funding
         /// </summary>
-        PayToMain        
+        CoinFuturesToFunding,
     }
 }
