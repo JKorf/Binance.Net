@@ -4145,6 +4145,7 @@
             Gets all user trades for provided symbol
             </summary>
             <param name="symbol">Symbol to get trades for</param>
+            <param name="orderId">OrderId to get trades for</param>
             <param name="limit">The max number of results</param>
             <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
             <param name="startTime">Orders newer than this date will be retrieved</param>
@@ -11893,6 +11894,11 @@
         <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.Price">
             <summary>
             The price of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.AvgPrice">
+            <summary>
+            The average price the order was filled
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.Quantity">
@@ -20697,6 +20703,7 @@
             Gets all user trades for provided symbol
             </summary>
             <param name="symbol">Symbol to get trades for</param>
+            <param name="orderId">OrderId to get trades for</param>
             <param name="limit">The max number of results</param>
             <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
             <param name="startTime">Orders newer than this date will be retrieved</param>
