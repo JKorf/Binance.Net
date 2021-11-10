@@ -298,3 +298,6 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 *.nuspec
+
+# Generated code docs
+Binance.Net/Binance.Net.xml
