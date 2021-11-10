@@ -47,6 +47,7 @@ namespace Binance.Net.Clients.Rest.UsdFutures
         private const string compositeIndexapi = "indexInfo";
         private const string klinesEndpoint = "klines";
         private const string continuousContractKlineEndpoint = "continuousKlines";
+        private const string assetIndexEndpoint = "assetIndex";
 
         private const string pingEndpoint = "ping";
         private const string checkTimeEndpoint = "time";
@@ -467,6 +468,27 @@ namespace Binance.Net.Clients.Rest.UsdFutures
 
             var result = await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesUsdtKline>>(_baseClient.GetUrl(continuousContractKlineEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
             return result.As<IEnumerable<IBinanceKline>>(result.Data);
+        }
+
+        #endregion
+
+        #region Asset index
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesAssetIndex>>> GetAssetIndexesAsync(CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesAssetIndex>>(_baseClient.GetUrl(assetIndexEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceFuturesAssetIndex>> GetAssetIndexAsync(string symbol, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol }
+            };
+            return await _baseClient.SendRequestInternal<BinanceFuturesAssetIndex>(_baseClient.GetUrl(assetIndexEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         #endregion
