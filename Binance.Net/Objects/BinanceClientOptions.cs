@@ -186,6 +186,9 @@ namespace Binance.Net.Objects
         /// </summary>
         public BinanceSocketClientUsdFuturesOptions()
         {
+            if (Default == null)
+                return;
+
             Copy(this, Default);
         }
     }
@@ -209,6 +212,9 @@ namespace Binance.Net.Objects
         /// </summary>
         public BinanceSocketClientCoinFuturesOptions()
         {
+            if (Default == null)
+                return;
+
             Copy(this, Default);
         }
     }
