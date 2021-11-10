@@ -131,5 +131,10 @@ namespace Binance.Net.Objects.Futures.FuturesData
         [JsonProperty("workingType"), JsonConverter(typeof(WorkingTypeConverter))]
         public WorkingType WorkingType { get; set; }
 
+        /// <summary>
+        /// Price protect
+        /// </summary>
+        [JsonProperty("priceProtect")]
+        public bool PriceProtect { get; set; }
     }
 }

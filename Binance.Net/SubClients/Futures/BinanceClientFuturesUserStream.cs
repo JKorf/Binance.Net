@@ -46,7 +46,7 @@ namespace Binance.Net.SubClients.Futures
                 return new WebCallResult<string>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 
             var result = await _baseClient.SendRequestInternal<BinanceListenKey>(_futuresClient.GetUrl(getFuturesListenKeyEndpoint, Api, userDataStreamVersion), HttpMethod.Post, ct).ConfigureAwait(false);
-            return result.As(result.Data?.ListenKey);
+            return result.As(result.Data?.ListenKey!);
         }
 
         #endregion

@@ -10,7 +10,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
     /// <summary>
     /// USDT-M futures account endpoints
     /// </summary>
-    public interface IBinanceClientFuturesUsdtAccount
+    public interface IBinanceClientFuturesUsdtAccount : IBinanceClientFuturesAccount
     {
         /// <summary>
         /// Gets account information, including balances

@@ -743,6 +743,11 @@
             Refund failed
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.FiatWithdrawDepositStatus.Expired">
+            <summary>
+            Expired
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.FuturesMarginChangeDirectionType">
             <summary>
             The direction to change futures margin
@@ -1006,6 +1011,21 @@
         <member name="F:Binance.Net.Enums.LendingType.CustomizedFixed">
             <summary>
             Customized fixed
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.LiquidityType">
+            <summary>
+            Add/Remove liquidity type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.LiquidityType.Single">
+            <summary>
+            Add/Remove single asset
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.LiquidityType.Combined">
+            <summary>
+            Add/Remove combination of all coins
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.ListOrderStatus">
@@ -1523,21 +1543,6 @@
             Normal
             </summary>
         </member>
-        <member name="T:Binance.Net.Enums.RemoveLiquidityType">
-            <summary>
-            Remove liquidity type
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.RemoveLiquidityType.Single">
-            <summary>
-            Remove single asset
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.RemoveLiquidityType.Combined">
-            <summary>
-            Remove combination of all coins
-            </summary>
-        </member>
         <member name="T:Binance.Net.Enums.SideEffectType">
             <summary>
             Side effect for a margin order
@@ -1888,9 +1893,9 @@
             Universal transfer type
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.UniversalTransferType.MainToC2C">
+        <member name="F:Binance.Net.Enums.UniversalTransferType.MainToFunding">
             <summary>
-            Main (spot) to C2C
+            Main (spot) to Funding
             </summary>
         </member>
         <member name="F:Binance.Net.Enums.UniversalTransferType.MainToUsdFutures">
@@ -1913,24 +1918,19 @@
             Main (spot) to Mining
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.UniversalTransferType.C2CToMain">
+        <member name="F:Binance.Net.Enums.UniversalTransferType.FundingToMain">
             <summary>
-            C2C to Main (spot)
+            Funding to Main (spot)
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.UniversalTransferType.C2CToUsdFutures">
+        <member name="F:Binance.Net.Enums.UniversalTransferType.FundingToUsdFutures">
             <summary>
-            C2C to Usd futures
+            Funding to Usd futures
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.UniversalTransferType.C2CToMining">
+        <member name="F:Binance.Net.Enums.UniversalTransferType.FundingToMargin">
             <summary>
-            C2C to mining
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.UniversalTransferType.C2CToMargin">
-            <summary>
-            C2C to margin
+            Funding to margin
             </summary>
         </member>
         <member name="F:Binance.Net.Enums.UniversalTransferType.UsdFuturesToMain">
@@ -1938,9 +1938,9 @@
             Usd futures to Main (spot)
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.UniversalTransferType.UsdFuturesToC2C">
+        <member name="F:Binance.Net.Enums.UniversalTransferType.UsdFuturesToFunding">
             <summary>
-            Usd futures to C2C
+            Usd futures to Funding
             </summary>
         </member>
         <member name="F:Binance.Net.Enums.UniversalTransferType.UsdFuturesToMargin">
@@ -1978,9 +1978,9 @@
             Margin to Mining
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.UniversalTransferType.MarginToC2C">
+        <member name="F:Binance.Net.Enums.UniversalTransferType.MarginToFunding">
             <summary>
-            Margin to C2C
+            Margin to Funding
             </summary>
         </member>
         <member name="F:Binance.Net.Enums.UniversalTransferType.IsolatedMarginToMargin">
@@ -1993,6 +1993,11 @@
             Margin to isolated margin
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.IsolatedMarginToIsolatedMargin">
+            <summary>
+            Isolated margin to Isolated margin
+            </summary>
+        </member>
         <member name="F:Binance.Net.Enums.UniversalTransferType.MiningToMain">
             <summary>
             Mining to Main (spot)
@@ -2003,24 +2008,19 @@
             Mining to Usd futures
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.UniversalTransferType.MiningToC2C">
-            <summary>
-            Mining to C2C
-            </summary>
-        </member>
         <member name="F:Binance.Net.Enums.UniversalTransferType.MiningToMargin">
             <summary>
             Mining to Margin
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.UniversalTransferType.MainToPay">
+        <member name="F:Binance.Net.Enums.UniversalTransferType.FundingToCoinFutures">
             <summary>
-            Main to pay
+            Funding to Coin futures
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.UniversalTransferType.PayToMain">
+        <member name="F:Binance.Net.Enums.UniversalTransferType.CoinFuturesToFunding">
             <summary>
-            Pay to main
+            Coin futures to Funding
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.WithdrawalStatus">
@@ -2533,6 +2533,11 @@
         <member name="P:Binance.Net.Interfaces.IBinanceClient.BSwap">
             <summary>
             Liquidity swap endpoints
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceClient.Fiat">
+            <summary>
+            Fiat endpoints
             </summary>
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceClient.SetApiCredentials(System.String,System.String)">
@@ -3604,6 +3609,20 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
+        <member name="T:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesAccount">
+            <summary>
+            Futures account interface
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesAccount.GetUserCommissionRateAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Gets account commission rates
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>User commission rate information</returns>
+        </member>
         <member name="T:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesCoinAccount">
             <summary>
             COIN-M futures account endpoints
@@ -3850,7 +3869,7 @@
             Futures orders interface
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesOrders.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesOrders.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -3869,6 +3888,7 @@
             <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
             <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
             <param name="orderResponseType">The response type. Default Acknowledge</param>
+            <param name="priceProtect">If true when price reaches stopPrice, difference between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than "triggerProtect" of the symbol.</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
@@ -3893,14 +3913,13 @@
             <param name="ct">Cancellation token</param>
             <returns>The specific order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesOrders.CancelOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesOrders.CancelOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Cancels a pending order
             </summary>
             <param name="symbol">The symbol the order is for</param>
             <param name="orderId">The order id of the order</param>
             <param name="origClientOrderId">The client order id of the order</param>
-            <param name="newClientOrderId">Unique identifier for this cancel</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for canceled order</returns>
@@ -4165,20 +4184,6 @@
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>Exchange info</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtSystem.PingAsync(System.Threading.CancellationToken)">
-            <summary>
-            Pings the Binance Futures API
-            </summary>
-            <returns>True if successful ping, false if no response</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtSystem.GetServerTimeAsync(System.Boolean,System.Threading.CancellationToken)">
-            <summary>
-            Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls
-            </summary>
-            <param name="resetAutoTimestamp">Whether the response should be used for a new auto timestamp calculation</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Server time</returns>
         </member>
         <member name="T:Binance.Net.Interfaces.SubClients.IBinanceClientBrokerage">
             <summary>
@@ -5106,18 +5111,19 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap.AddLiquidityAsync(System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap.AddLiquidityAsync(System.Int32,System.String,System.Decimal,System.Nullable{Binance.Net.Enums.LiquidityType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Add liquidity to a pool
             </summary>
             <param name="poolId">The pool</param>
             <param name="asset">The asset</param>
+            <param name="type">Add type</param>
             <param name="quantity">Quantity to add</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap.RemoveLiquidityAsync(System.String,System.String,Binance.Net.Enums.RemoveLiquidityType,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap.RemoveLiquidityAsync(System.Int32,System.String,Binance.Net.Enums.LiquidityType,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Remove liquidity from a pool
             </summary>
@@ -5129,7 +5135,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap.GetLiquidityOperationRecordsAsync(System.Nullable{System.Int64},System.String,System.Nullable{Binance.Net.Enums.BSwapOperation},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap.GetLiquidityOperationRecordsAsync(System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.BSwapOperation},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get liquidity operation records
             </summary>
@@ -5177,6 +5183,39 @@
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
             <param name="limit">Max number of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap.GetBSwapPoolConfigureAsync(System.Int32,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get pool config
+            </summary>
+            <param name="poolId">Id of the pool</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap.AddLiquidityPreviewAsync(System.Int32,System.String,System.Decimal,Binance.Net.Enums.LiquidityType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Calculate expected share amount for adding liquidity in single or dual token.
+            </summary>
+            <param name="poolId">The pool</param>
+            <param name="asset">The asset</param>
+            <param name="quantity">Quantity to add</param>
+            <param name="type">Add type</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientLiquidSwap.RemoveLiquidityPreviewAsync(System.Int32,System.String,System.Decimal,Binance.Net.Enums.LiquidityType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Calculate expected share amount for removing liquidity in single or dual token.
+            </summary>
+            <param name="poolId">The pool</param>
+            <param name="asset">The asset</param>
+            <param name="quantity">Quantity to add</param>
+            <param name="type">Add type</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -5590,7 +5629,7 @@
             <summary>
             Create a virtual sub account
             </summary>
-            <param name="email">Virtual email of the sub account</param>
+            <param name="subAccountString">String based with which a subaccount email will be generated. Should not contain special characters</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -5990,6 +6029,32 @@
             <summary>
             Isolated margin account info
             </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetEnabledIsolatedMarginAccountLimitAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get max number of enabled isolated margin accounts
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.EnableIsolatedMarginAccountAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Enable an isolated margin account
+            </summary>
+            <param name="symbol">Symbol to enable isoldated margin account for</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.DisableIsolatedMarginAccountAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Disabled an isolated margin account info
+            </summary>
+            <param name="symbol">Symbol to enable isoldated margin account for</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -8350,6 +8415,81 @@
             Assets in the pool
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BSwap.BinanceBSwapPoolConfig">
+            <summary>
+            Swap pool config
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPoolConfig.PoolId">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPoolConfig.PoolName">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPoolConfig.UpdateTime">
+            <summary>
+            Update time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPoolConfig.Liquidity">
+            <summary>
+            Pool liquidity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPoolConfig.AssetConfig">
+            <summary>
+            Asset configuration
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BSwap.PoolAssetConfig">
+            <summary>
+            Asset config
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.PoolAssetConfig.MinAdd">
+            <summary>
+            Minimal add
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.PoolAssetConfig.MaxAdd">
+            <summary>
+            Maximal add
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.PoolAssetConfig.MinSwap">
+            <summary>
+            Minimal swap
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.PoolAssetConfig.MaxSwap">
+            <summary>
+            Maximal swap
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BSwap.PoolLiquidity">
+            <summary>
+            Liquidity info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.PoolLiquidity.ConstantA">
+            <summary>
+            Constant a
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.PoolLiquidity.MinRedeemShare">
+            <summary>
+            Minimal redeem share
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.PoolLiquidity.SlippageTolerance">
+            <summary>
+            Slippage tolerance
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.BSwap.BinanceBSwapPoolLiquidity">
             <summary>
             Pool liquidity info
@@ -8398,6 +8538,51 @@
         <member name="P:Binance.Net.Objects.BSwap.BinancePoolShare.Asset">
             <summary>
             Asset
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BSwap.BinanceBSwapPreviewResult">
+            <summary>
+            Preview result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPreviewResult.QuoteAsset">
+            <summary>
+            Quote asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPreviewResult.BaseAsset">
+            <summary>
+            Base asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPreviewResult.QuoteAmount">
+            <summary>
+            Quote amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPreviewResult.BaseAmount">
+            <summary>
+            Base amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPreviewResult.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPreviewResult.Share">
+            <summary>
+            Share
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPreviewResult.Slippage">
+            <summary>
+            Slippage
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BSwap.BinanceBSwapPreviewResult.Fee">
+            <summary>
+            Fee
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BSwap.BinanceBSwapQuote">
@@ -8901,6 +9086,26 @@
             The time of account info was updated
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountUserCommissionRate">
+            <summary>
+            User commission rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountUserCommissionRate.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountUserCommissionRate.MakerCommissionRate">
+            <summary>
+            Maker commission rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountUserCommissionRate.TakerCommissionRate">
+            <summary>
+            Taker commission rate
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBasis">
             <summary>
             Basis info
@@ -9009,6 +9214,11 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder.WorkingType">
             <summary>
             Stop price triggered by: Mark or Contract. Default Contract
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBatchOrder.PriceProtect">
+            <summary>
+            Used with Stop/StopMarket or TakeProfit/TakeProfitMarket orders.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelAllOrders">
@@ -9129,6 +9339,11 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.PositionSide">
             <summary>
             The position side of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.PriceProtect">
+            <summary>
+            Price protect
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesChangeMarginTypeResult">
@@ -9487,6 +9702,11 @@
             The position side of the order
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.PriceProtect">
+            <summary>
+            Price protect
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder">
             <summary>
             The result of placing a new order
@@ -9595,6 +9815,11 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.WorkingType">
             <summary>
             The working type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.PriceProtect">
+            <summary>
+            Price protect
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPositionMarginResult">
@@ -12561,6 +12786,11 @@
             If trading is enabled
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountSymbol.Enabled">
+            <summary>
+            Account is enabled
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountAsset">
             <summary>
             Isolated margin account asset
@@ -12614,6 +12844,21 @@
         <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.BinanceIsolatedMarginAccountAsset.TotalAsset">
             <summary>
             Total asset
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.IsolatedMarginData.IsolatedMarginAccountLimit">
+            <summary>
+            Enabled account limit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.IsolatedMarginAccountLimit.EnabledAccount">
+            <summary>
+            Current enabled accounts
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.IsolatedMarginData.IsolatedMarginAccountLimit.MaxAccount">
+            <summary>
+            Max accounts
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.LendingData.BinanceCustomizedFixedProjectPosition">
@@ -17275,6 +17520,11 @@
             Name of the coin
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceUserCoin.Withdrawing">
+            <summary>
+            Currently withdrawing
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceUserCoin.NetworkList">
             <summary>
             Networks
@@ -17365,6 +17615,21 @@
             Minimal withdraw amount
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceNetwork.WithdrawIntegerMultiple">
+            <summary>
+            Min withdraw step
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceNetwork.WithdrawMax">
+            <summary>
+            Max withdraw amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceNetwork.SameAddress">
+            <summary>
+            If the coin needs to provide memo to withdraw
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.WalletData.BinanceAssetDetails">
             <summary>
             Asset details
@@ -17443,6 +17708,11 @@
         <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawal.Network">
             <summary>
             Network that was used
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawal.ConfirmTimes">
+            <summary>
+            Confirm times for withdraw
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.WalletData.BinanceWithdrawal.Status">
@@ -19137,18 +19407,19 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientLiquidSwap.AddLiquidityAsync(System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientLiquidSwap.AddLiquidityAsync(System.Int32,System.String,System.Decimal,System.Nullable{Binance.Net.Enums.LiquidityType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Add liquidity to a pool
             </summary>
             <param name="poolId">The pool</param>
             <param name="asset">The asset</param>
             <param name="quantity">Quantity to add</param>
+            <param name="type">Add type</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientLiquidSwap.RemoveLiquidityAsync(System.String,System.String,Binance.Net.Enums.RemoveLiquidityType,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientLiquidSwap.RemoveLiquidityAsync(System.Int32,System.String,Binance.Net.Enums.LiquidityType,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Remove liquidity from a pool
             </summary>
@@ -19160,7 +19431,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.SubClients.BinanceClientLiquidSwap.GetLiquidityOperationRecordsAsync(System.Nullable{System.Int64},System.String,System.Nullable{Binance.Net.Enums.BSwapOperation},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.BinanceClientLiquidSwap.GetLiquidityOperationRecordsAsync(System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.BSwapOperation},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get liquidity operation records
             </summary>
@@ -19208,6 +19479,39 @@
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
             <param name="limit">Max number of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientLiquidSwap.GetBSwapPoolConfigureAsync(System.Int32,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get pool config
+            </summary>
+            <param name="poolId">Id of the pool</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientLiquidSwap.AddLiquidityPreviewAsync(System.Int32,System.String,System.Decimal,Binance.Net.Enums.LiquidityType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Calculate expected share amount for adding liquidity in single or dual token.
+            </summary>
+            <param name="poolId">The pool</param>
+            <param name="asset">The asset</param>
+            <param name="quantity">Quantity to add</param>
+            <param name="type">Add type</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientLiquidSwap.RemoveLiquidityPreviewAsync(System.Int32,System.String,System.Decimal,Binance.Net.Enums.LiquidityType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Calculate expected share amount for adding liquidity in single or dual token.
+            </summary>
+            <param name="poolId">The pool</param>
+            <param name="asset">The asset</param>
+            <param name="quantity">Quantity to add</param>
+            <param name="type">Add type</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -19564,7 +19868,7 @@
             <summary>
             Create a virtual sub account
             </summary>
-            <param name="email">Virtual email of the sub account</param>
+            <param name="subAccountString">String based with which a subaccount email will be generated. Should not contain special characters</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -19974,7 +20278,7 @@
             Futures client
             </summary>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -19993,6 +20297,7 @@
             <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
             <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
             <param name="orderResponseType">The response type. Default Acknowledge</param>
+            <param name="priceProtect">If true when price reaches stopPrice, difference between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than "triggerProtect" of the symbol.</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
@@ -20017,14 +20322,13 @@
             <param name="ct">Cancellation token</param>
             <returns>The specific order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.CancelOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.CancelOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Cancels a pending order
             </summary>
             <param name="symbol">The symbol the order is for</param>
             <param name="orderId">The order id of the order</param>
             <param name="origClientOrderId">The client order id of the order</param>
-            <param name="newClientOrderId">Unique identifier for this cancel</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for canceled order</returns>
@@ -20247,6 +20551,15 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>The account information</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinAccount.GetUserCommissionRateAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Gets account commission rates
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>User commission rate information</returns>
         </member>
         <member name="T:Binance.Net.SubClients.Futures.Coin.BinanceClientFuturesCoinMarket">
             <summary>
@@ -20554,6 +20867,15 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Succes</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtAccount.GetUserCommissionRateAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Gets account commission rates
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>User commission rate information</returns>
         </member>
         <member name="T:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket">
             <summary>
@@ -20932,6 +21254,32 @@
         <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetIsolatedMarginAccountAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Isolated margin account info
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.DisableIsolatedMarginAccountAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Disabled an isolated margin account
+            </summary>
+            <param name="symbol">Symbol to enable isoldated margin account for</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.EnableIsolatedMarginAccountAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Enable an isolated margin account
+            </summary>
+            <param name="symbol">Symbol to enable isoldated margin account for</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetEnabledIsolatedMarginAccountLimitAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get max number of enabled isolated margin accounts
             </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>

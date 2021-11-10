@@ -1,16 +1,16 @@
 ﻿namespace Binance.Net.Enums
 {
     /// <summary>
-    /// Remove liquidity type
+    /// Add/Remove liquidity type
     /// </summary>
-    public enum RemoveLiquidityType
+    public enum LiquidityType
     {
         /// <summary>
-        /// Remove single asset
+        /// Add/Remove single asset
         /// </summary>
         Single,
         /// <summary>
-        /// Remove combination of all coins
+        /// Add/Remove combination of all coins
         /// </summary>
         Combined
     }

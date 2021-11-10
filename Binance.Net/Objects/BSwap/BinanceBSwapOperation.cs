@@ -18,7 +18,7 @@ namespace Binance.Net.Objects.BSwap
         /// <summary>
         /// Pool id
         /// </summary>
-        public string PoolId { get; set; } = string.Empty;
+        public int PoolId { get; set; }
 
         /// <summary>
         /// Pool name

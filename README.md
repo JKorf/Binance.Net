@@ -8,12 +8,14 @@ Binance.Net is a wrapper around the Binance API as described on [Binance](https:
 ## CryptoExchange.Net
 This library is build upon the CryptoExchange.Net library, make sure to check out the documentation on that for basic usage: [docs](https://github.com/JKorf/CryptoExchange.Net)
 
-## Donations
+## Donate / Sponsor
 I develop and maintain this package on my own for free in my spare time. Donations are greatly appreciated. If you prefer to donate any other currency please contact me.
 
 **Btc**:  12KwZk3r2Y3JZ2uMULcjqqBvXmpDwjhhQS  
 **Eth**:  0x069176ca1a4b1d6e0b7901a6bc0dbf3bb0bf5cc2  
 **Nano**: xrb_1ocs3hbp561ef76eoctjwg85w5ugr8wgimkj8mfhoyqbx4s1pbc74zggw7gs  
+
+Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf)  
 
 ## Discord
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
@@ -165,6 +167,44 @@ Yes, as long as the API endpoints are the same. Switch by changing the BaseAddre
 See Timestamping.
 
 ## Release notes
+* Version 7.2.6 - 09 Nov 2021
+    * Updated TransferType enum to match new API
+
+* Version 7.2.5 - 08 Oct 2021
+    * Updated CryptoExchange.Net to fix some socket issues
+
+* Version 7.2.4 - 06 Oct 2021
+    * Updated CryptoExchange.Net, fixing socket issue when calling from .Net Framework
+
+* Version 7.2.3 - 05 Oct 2021
+    * Added PriceProtect support
+
+* Version 7.2.2 - 29 Sep 2021
+    * Fix for BinanceSpotOrderBook
+    * Updated CryptoExchange.Net
+
+* Version 7.2.1 - 24 Sep 2021
+    * Added GetEnabledIsolatedMarginAccountLimitAsync endpoint
+    * Added EnableIsolatedMarginAccountAsync
+    * Added Enabled property to IsolatedMarginAccount model
+    * Added RemoveLiquidityPreviewAsync endpoint
+    * Added AddLiquidityPreviewAsync endpoint
+    * Added GetBSwapPoolConfigureAsync endpoint
+
+* Version 7.2.0 - 20 Sep 2021
+    * Updated stream Topic properties to reflect symbol where possible
+    * Added DisableIsolatedMarginAccountAysnc endpoint
+    * Updated CryptoExchange.Net
+
+* Version 7.1.4 - 15 Sep 2021
+    * Updated CryptoExchange.Net
+    * Fixed missing interface CoinFutures system sub client
+
+* Version 7.1.3 - 14 Sep 2021
+    * Fixed CreateVirtualSubAccountAsync endpoint
+    * Added missing FiatWithdrawDepositStatus entry
+    * Updated testnet spot websocket url
+
 * Version 7.1.2 - 02 Sep 2021
     * Fixed subaccount universal transfer result deserialization
     * Fix for disposing order book closing socket even if there are other connections

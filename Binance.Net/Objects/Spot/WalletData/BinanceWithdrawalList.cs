@@ -52,6 +52,11 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// </summary>
         public string Network { get; set; } = string.Empty;
         /// <summary>
+        /// Confirm times for withdraw
+        /// </summary>
+        [JsonProperty("confirmNo")]
+        public int? ConfirmTimes { get; set; }
+        /// <summary>
         /// The status of the withdrawal
         /// </summary>
         [JsonConverter(typeof(WithdrawalStatusConverter))]

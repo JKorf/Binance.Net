@@ -880,7 +880,7 @@ namespace Binance.Net.UnitTests
             // act
             try
             {
-                client.Spot.Order.GetOpenOrdersAsync();
+                await client.Spot.Order.GetOpenOrdersAsync();
             }
             catch (Exception)
             {
@@ -910,7 +910,7 @@ namespace Binance.Net.UnitTests
         }
 
         [Test]
-        public async Task ProvidingApiCredentials_Should_SaveApiCredentials()
+        public void ProvidingApiCredentials_Should_SaveApiCredentials()
         {
             // arrange
             // act
@@ -923,21 +923,21 @@ namespace Binance.Net.UnitTests
 
         //[Test]
         [TestCase("", "D0F0F055B496CBD9FD1C8CA6719D0B2253F54C667753F70AEF13F394D9161A8B")]
-        public async Task AddingAuthToUriString_Should_GiveCorrectSignature(string parameters, string signature)
+        public void AddingAuthToUriString_Should_GiveCorrectSignature(string parameters, string signature)
         {
             // arrange
             var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
             string uri = $"https://test.test-api.com{parameters}";
 
             // act
-            var sign = authProvider.AddAuthenticationToParameters(uri, HttpMethod.Post, new Dictionary<string, object>(), true, PostParameters.InBody, ArrayParametersSerialization.MultipleValues);
+            var sign = authProvider.AddAuthenticationToParameters(uri, HttpMethod.Post, new Dictionary<string, object>(), true, HttpMethodParameterPosition.InBody, ArrayParametersSerialization.MultipleValues);
 
             // assert
             Assert.IsTrue((string)sign.Last().Value == signature);
         }
 
         [Test]
-        public async Task AddingAuthToRequest_Should_AddApiKeyHeader()
+        public void AddingAuthToRequest_Should_AddApiKeyHeader()
         {
             // arrange
             var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
@@ -945,7 +945,7 @@ namespace Binance.Net.UnitTests
             var request = new Request(new HttpRequestMessage(HttpMethod.Get, "https://test.test-api.com"), client, 1);
 
             // act
-            var sign = authProvider.AddAuthenticationToHeaders(request.Uri.ToString(), HttpMethod.Get, new Dictionary<string, object>(), true, PostParameters.InBody, ArrayParametersSerialization.MultipleValues);
+            var sign = authProvider.AddAuthenticationToHeaders(request.Uri.ToString(), HttpMethod.Get, new Dictionary<string, object>(), true, HttpMethodParameterPosition.InBody, ArrayParametersSerialization.MultipleValues);
 
             // assert
             Assert.IsTrue(sign.First().Key == "X-MBX-APIKEY" && sign.First().Value == "TestKey");
@@ -1082,7 +1082,7 @@ namespace Binance.Net.UnitTests
         [TestCase("KP3RBNB", true)]
         [TestCase("BTC-USDT", false)]
         [TestCase("BTC-USD", false)]
-        public async Task CheckValidBinanceSymbol(string symbol, bool isValid)
+        public void CheckValidBinanceSymbol(string symbol, bool isValid)
         {
             if (isValid)
                 Assert.DoesNotThrow(symbol.ValidateBinanceSymbol);

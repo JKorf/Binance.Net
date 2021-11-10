@@ -41,7 +41,7 @@ namespace Binance.Net.Objects.Futures.MarketStream
         /// Quote asset name
         /// </summary>
         [JsonProperty("q")]
-        public string QuoteAsset { get; set; }
+        public string QuoteAsset { get; set; } = string.Empty;
         /// <summary>
         /// Weight in quantity
         /// </summary>

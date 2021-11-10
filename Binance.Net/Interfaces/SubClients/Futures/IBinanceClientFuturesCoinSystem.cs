@@ -8,7 +8,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
     /// <summary>
     /// Futures system interface
     /// </summary>
-    public interface IBinanceClientFuturesCoinSystem
+    public interface IBinanceClientFuturesCoinSystem: IBinanceClientFuturesSystem
     {
         /// <summary>
         /// Get's information about the exchange including rate limits and symbol list

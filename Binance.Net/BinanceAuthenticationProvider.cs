@@ -24,13 +24,13 @@ namespace Binance.Net
             encryptor = new HMACSHA256(Encoding.ASCII.GetBytes(credentials.Secret.GetString()));
         }
 
-        public override Dictionary<string, object> AddAuthenticationToParameters(string uri, HttpMethod method, Dictionary<string, object> parameters, bool signed, PostParameters postParameterPosition, ArrayParametersSerialization arraySerialization)
+        public override Dictionary<string, object> AddAuthenticationToParameters(string uri, HttpMethod method, Dictionary<string, object> parameters, bool signed, HttpMethodParameterPosition parameterPosition, ArrayParametersSerialization arraySerialization)
         {
             if (!signed)
                 return parameters;
 
             string signData;
-            if (method == HttpMethod.Get || method == HttpMethod.Delete || (postParameterPosition == PostParameters.InUri))
+            if (parameterPosition == HttpMethodParameterPosition.InUri)
             {
                 signData = parameters.CreateParamString(true, arraySerialization);
             }
@@ -56,7 +56,7 @@ namespace Binance.Net
             return parameters;
         }
 
-        public override Dictionary<string, string> AddAuthenticationToHeaders(string uri, HttpMethod method, Dictionary<string, object> parameters, bool signed, PostParameters postParameterPosition, ArrayParametersSerialization arraySerialization)
+        public override Dictionary<string, string> AddAuthenticationToHeaders(string uri, HttpMethod method, Dictionary<string, object> parameters, bool signed, HttpMethodParameterPosition parameterPosition, ArrayParametersSerialization arraySerialization)
         {
             if (Credentials.Key == null)
                 throw new ArgumentException("No valid API credentials provided. Key/Secret needed.");

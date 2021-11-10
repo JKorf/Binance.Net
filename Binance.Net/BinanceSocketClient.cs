@@ -66,7 +66,7 @@ namespace Binance.Net
             Blvt = new BinanceSocketClientBlvt(log, this, options);
 
             SetDataInterpreter((byte[] data) => { return string.Empty; }, null);
-            RateLimitPerSocketPerSecond = 5;
+            RateLimitPerSocketPerSecond = 4;
         }
         #endregion 
 
@@ -142,6 +142,7 @@ namespace Binance.Net
             var result = message["result"];
             if (result != null && result.Type == JTokenType.Null)
             {
+                log.Write(Microsoft.Extensions.Logging.LogLevel.Trace, $"Socket {s.Socket.Id} Subscription completed");
                 callResult = new CallResult<object>(null, null);
                 return true;
             }
@@ -153,7 +154,7 @@ namespace Binance.Net
                 return true;
             }
 
-            callResult = new CallResult<object>(null, new ServerError((int)error["code"], error["msg"].ToString()));
+            callResult = new CallResult<object>(null, new ServerError(error["code"]!.Value<int>(), error["msg"]!.ToString()));
             return true;
         }
 
@@ -168,7 +169,7 @@ namespace Binance.Net
             if (stream == null)
                 return false;
 
-            return bRequest.Params.Contains((string)stream);
+            return bRequest.Params.Contains(stream.ToString());
         }
 
         /// <inheritdoc />
@@ -189,6 +190,10 @@ namespace Binance.Net
             var topics = ((BinanceSocketRequest)subscription.Request!).Params;
             var unsub = new BinanceSocketRequest { Method = "UNSUBSCRIBE", Params = topics, Id = NextId() };
             var result = false;
+
+            if (!connection.Socket.IsOpen)
+                return true;
+
             await connection.SendAndWaitAsync(unsub, ResponseTimeout, data =>
             {
                 if (data.Type != JTokenType.Object)

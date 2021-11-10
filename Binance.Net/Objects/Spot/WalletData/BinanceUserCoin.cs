@@ -57,7 +57,10 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// Name of the coin
         /// </summary>
         public string Name { get; set; } = string.Empty;
-
+        /// <summary>
+        /// Currently withdrawing
+        /// </summary>
+        public decimal Withdrawing { get; set; }
         /// <summary>
         /// Networks
         /// </summary>
@@ -139,6 +142,17 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// Minimal withdraw amount
         /// </summary>
         public decimal WithdrawMin { get; set; }
-
+        /// <summary>
+        /// Min withdraw step
+        /// </summary>
+        public decimal WithdrawIntegerMultiple { get; set; }
+        /// <summary>
+        /// Max withdraw amount
+        /// </summary>
+        public decimal WithdrawMax { get; set; }
+        /// <summary>
+        /// If the coin needs to provide memo to withdraw
+        /// </summary>
+        public bool SameAddress { get; set; }
     }
 }
