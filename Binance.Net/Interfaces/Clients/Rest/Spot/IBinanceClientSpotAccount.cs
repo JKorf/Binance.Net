@@ -265,11 +265,12 @@ namespace Binance.Net.Clients.Rest.Spot
         /// <param name="transactionFeeFlag">When making internal transfer, true for returning the fee to the destination account; false for returning the fee back to the departure account. Default false.</param>
         /// <param name="quantity">The quantity to withdraw</param>
         /// <param name="network">The network to use</param>
+        /// <param name="walletType">The wallet type for withdraw</param>
         /// <param name="name">Description of the address</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Withdrawal confirmation</returns>
-        Task<WebCallResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, decimal quantity, string? withdrawOrderId = null, string? network = null, string? addressTag = null, string? name = null, bool? transactionFeeFlag = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, decimal quantity, string? withdrawOrderId = null, string? network = null, string? addressTag = null, string? name = null, bool? transactionFeeFlag = null, WalletType? walletType = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the withdrawal history
@@ -592,5 +593,51 @@ namespace Binance.Net.Clients.Rest.Spot
         /// <returns>The trading status of the account</returns>
         Task<WebCallResult<BinanceTradingStatus>> GetTradingStatusAsync(int? receiveWindow = null, CancellationToken ct = default);
 
+        /// <summary>
+        /// Get the current used order rate limits
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BinanceOrderRateLimit>>> GetOrderRateLimitStatusAsync(int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Toggle IP restriction for an API key
+        /// </summary>
+        /// <param name="apiKey">The api key</param>
+        /// <param name="enable">Enable or disable</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceIpRestriction>> ToggleIpRestrictionForApiKeyAsync(string apiKey, bool enable, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Add IP addresses to the ip whitelist for an API key
+        /// </summary>
+        /// <param name="apiKey">The api key</param>
+        /// <param name="ipAddresses">Addresses to whitelist</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceIpRestriction>> AddIpToWhitelistForApiKeyAsync(string apiKey, IEnumerable<string> ipAddresses, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Remove IP addresses from the ip whitelist for an API key
+        /// </summary>
+        /// <param name="apiKey">The api key</param>
+        /// <param name="ipAddresses">Addresses to remove from whitelist</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceIpRestriction>> RemoveIpFromWhitelistForApiKeyAsync(string apiKey, IEnumerable<string> ipAddresses, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get the current whitelisted ip addresses for an API key
+        /// </summary>
+        /// <param name="apiKey">The api key</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceIpRestriction>> GetIpWhitelistForApiKeyAsync(string apiKey, int? receiveWindow = null, CancellationToken ct = default);
     }
 }

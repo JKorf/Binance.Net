@@ -36,6 +36,9 @@ namespace Binance.Net.Clients.Rest.Spot
         private const string lendingInterestHistoryEndpoint = "lending/union/interestHistory";
         private const string positionChangedEndpoint = "lending/positionChanged";
 
+        private const string cryptoLoanIncomingEndpoint = "loan/income";
+
+
         private readonly Log _log;
 
         private readonly BinanceClientSpot _baseClient;
@@ -363,7 +366,29 @@ namespace Binance.Net.Clients.Rest.Spot
 
             return await _baseClient.SendRequestInternal<BinanceLendingChangeToDailyResult>(_baseClient.GetUrl(positionChangedEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
+        #endregion
 
+        #region GetCryptoLoansIncomeHistory
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceCryptoLoanIncome>>> GetCryptoLoansIncomeHistoryAsync(string asset, LoanIncomeType? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<IEnumerable<BinanceCryptoLoanIncome>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "asset", asset },
+                { "timestamp", _baseClient.GetTimestamp() }
+            };
+            parameters.AddOptionalParameter("type", type.HasValue ? JsonConvert.SerializeObject(type.Value, new LoanIncomeTypeConverter(false)) : null);
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("startTime", startTime.HasValue ? JsonConvert.SerializeObject(startTime.Value, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceCryptoLoanIncome>>(_baseClient.GetUrl(cryptoLoanIncomingEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
         #endregion
     }
 }

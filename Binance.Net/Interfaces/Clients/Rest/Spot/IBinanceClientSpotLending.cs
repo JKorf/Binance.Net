@@ -190,5 +190,18 @@ namespace Binance.Net.Clients.Rest.Spot
         Task<WebCallResult<BinanceLendingChangeToDailyResult>> ChangeToDailyPositionAsync(string projectId, int lot,
             long? positionId = null,
             long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get income history from crypto loans
+        /// </summary>
+        /// <param name="asset">The asset</param>
+        /// <param name="type">Filter by type of incoming</param>
+        /// <param name="startTime">Filter by startTime from</param>
+        /// <param name="endTime">Filter by endTime from</param>
+        /// <param name="limit">Limit of the amount of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BinanceCryptoLoanIncome>>> GetCryptoLoansIncomeHistoryAsync(string asset, LoanIncomeType? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
     }
 }
