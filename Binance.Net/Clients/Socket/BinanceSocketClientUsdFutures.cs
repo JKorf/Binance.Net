@@ -88,11 +88,7 @@ namespace Binance.Net
             BinanceSocketClientUsdFuturesOptions.Default = options;
         }
 
-        /// <summary>
-        /// Set the API key and secret for this client
-        /// </summary>
-        /// <param name="apiKey">The api key</param>
-        /// <param name="apiSecret">The api secret</param>
+        /// <inheritdoc />
         public void SetApiCredentials(string apiKey, string apiSecret)
         {
             SetAuthenticationProvider(new BinanceAuthenticationProvider(new ApiCredentials(apiKey, apiSecret)));

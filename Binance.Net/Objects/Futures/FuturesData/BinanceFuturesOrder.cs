@@ -2,6 +2,7 @@
 using Binance.Net.Enums;
 using CryptoExchange.Net.Attributes;
 using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.ExchangeInterfaces;
 using Newtonsoft.Json;
 using System;
 
@@ -10,7 +11,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
     /// <summary>
     /// The result of query order
     /// </summary>
-    public class BinanceFuturesOrder
+    public class BinanceFuturesOrder: ICommonOrder
     {
         /// <summary>
         /// The symbol the order is for
@@ -28,7 +29,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// The order id as assigned by Binance
         /// </summary>
         [JsonProperty("orderId")]
-        public long OrderId { get; set; }
+        public long Id { get; set; }
         /// <summary>
         /// The order id as assigned by the client
         /// </summary>
@@ -158,5 +159,27 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// </summary>
         [JsonProperty("priceProtect")]
         public bool PriceProtect { get; set; }
+
+        string ICommonOrder.CommonSymbol => Symbol;
+
+        decimal ICommonOrder.CommonPrice => Price;
+
+        decimal ICommonOrder.CommonQuantity => Quantity;
+
+        IExchangeClient.OrderStatus ICommonOrder.CommonStatus => (Status == OrderStatus.New || Status == OrderStatus.PartiallyFilled) ? IExchangeClient.OrderStatus.Active :
+                                                                 Status == OrderStatus.Canceled ? IExchangeClient.OrderStatus.Canceled :
+                                                                 IExchangeClient.OrderStatus.Filled;
+
+        bool ICommonOrder.IsActive => Status == OrderStatus.New || Status == OrderStatus.PartiallyFilled;
+
+        IExchangeClient.OrderSide ICommonOrder.CommonSide => Side == OrderSide.Buy ? IExchangeClient.OrderSide.Buy : IExchangeClient.OrderSide.Sell;
+
+        IExchangeClient.OrderType ICommonOrder.CommonType => Type == OrderType.Limit ? IExchangeClient.OrderType.Limit :
+                                                             Type == OrderType.Market ? IExchangeClient.OrderType.Market :
+                                                             IExchangeClient.OrderType.Other;
+
+        DateTime ICommonOrder.CommonOrderTime => CreateTime;
+
+        string ICommonOrderId.CommonId => Id.ToString();
     }
 }

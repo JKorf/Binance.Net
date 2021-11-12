@@ -86,11 +86,7 @@ namespace Binance.Net
             BinanceSocketClientCoinFuturesOptions.Default = options;
         }
 
-        /// <summary>
-        /// Set the API key and secret for this client
-        /// </summary>
-        /// <param name="apiKey">The api key</param>
-        /// <param name="apiSecret">The api secret</param>
+        /// <inheritdoc />
         public void SetApiCredentials(string apiKey, string apiSecret)
         {
             SetAuthenticationProvider(new BinanceAuthenticationProvider(new ApiCredentials(apiKey, apiSecret)));
@@ -270,33 +266,6 @@ namespace Binance.Net
         }
 
         #endregion
-
-        private void HandlePossibleSingleData<T>(DataEvent<JToken> data, Action<DataEvent<IEnumerable<T>>> onMessage)
-        {
-            var internalData = data.Data["data"];
-            if (internalData == null)
-                return;
-
-            if (internalData.Type == JTokenType.Array)
-            {
-                var firstItemTopic = internalData.First()["i"]?.ToString() ?? internalData.First()["s"]?.ToString();
-                var deserialized = Deserialize<BinanceCombinedStream<IEnumerable<T>>>(data.Data);
-                if (!deserialized)
-                    return;
-
-                onMessage(data.As(deserialized.Data.Data, firstItemTopic));
-            }
-            else
-            {
-                var symbol = internalData["i"]?.ToString() ?? internalData["s"]?.ToString();
-                var deserialized = Deserialize<BinanceCombinedStream<T>>(
-                        data.Data);
-                if (!deserialized)
-                    return;
-
-                onMessage(data.As<IEnumerable<T>>(new[] { deserialized.Data.Data }, symbol));
-            }
-        }
 
         #region Aggregate Trade Streams
 
@@ -496,6 +465,34 @@ namespace Binance.Net
         }
 
         #endregion
+
+
+        private void HandlePossibleSingleData<T>(DataEvent<JToken> data, Action<DataEvent<IEnumerable<T>>> onMessage)
+        {
+            var internalData = data.Data["data"];
+            if (internalData == null)
+                return;
+
+            if (internalData.Type == JTokenType.Array)
+            {
+                var firstItemTopic = internalData.First()["i"]?.ToString() ?? internalData.First()["s"]?.ToString();
+                var deserialized = Deserialize<BinanceCombinedStream<IEnumerable<T>>>(data.Data);
+                if (!deserialized)
+                    return;
+
+                onMessage(data.As(deserialized.Data.Data, firstItemTopic));
+            }
+            else
+            {
+                var symbol = internalData["i"]?.ToString() ?? internalData["s"]?.ToString();
+                var deserialized = Deserialize<BinanceCombinedStream<T>>(
+                        data.Data);
+                if (!deserialized)
+                    return;
+
+                onMessage(data.As<IEnumerable<T>>(new[] { deserialized.Data.Data }, symbol));
+            }
+        }
 
         private async Task<CallResult<UpdateSubscription>> Subscribe<T>(IEnumerable<string> topics, Action<DataEvent<T>> onData, CancellationToken ct)
         {

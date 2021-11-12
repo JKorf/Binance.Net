@@ -79,16 +79,11 @@ namespace Binance.Net
             BinanceSocketClientSpotOptions.Default = options;
         }
 
-        /// <summary>
-        /// Set the API key and secret for this client
-        /// </summary>
-        /// <param name="apiKey">The api key</param>
-        /// <param name="apiSecret">The api secret</param>
+        /// <inheritdoc />
         public void SetApiCredentials(string apiKey, string apiSecret)
         {
             SetAuthenticationProvider(new BinanceAuthenticationProvider(new ApiCredentials(apiKey, apiSecret)));
         }
-
 
         #region Aggregate Trade Streams
 
@@ -234,7 +229,6 @@ namespace Binance.Net
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllBookTickerUpdatesAsync(
             Action<DataEvent<BinanceStreamBookPrice>> onMessage, CancellationToken ct = default)
         {
-            //return await Subscribe(allBookTickerStreamEndpoint, false, onMessage).ConfigureAwait(false);
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamBookPrice>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
             return await Subscribe(new[] { allBookTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
         }

@@ -168,5 +168,28 @@ namespace Binance.Net.Interfaces.Clients.Rest.UsdFutures
         /// <param name="ct">Cancellation token</param>
         /// <returns>User commission rate information</returns>
         Task<WebCallResult<BinanceFuturesAccountUserCommissionRate>> GetUserCommissionRateAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Start a user stream. The resulting listen key can be used to subscribe to the user stream using the socket client
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<string>> StartUserStreamAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Keep alive the user stream. This should be called every 30 minutes to prevent the user stream being stopped
+        /// </summary>
+        /// <param name="listenKey">The listen key to keep alive</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<object>> KeepAliveUserStreamAsync(string listenKey, CancellationToken ct = default);
+
+        /// <summary>
+        /// Stop the user stream, no updates will be send anymore
+        /// </summary>
+        /// <param name="listenKey">The listen key to stop</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<object>> StopUserStreamAsync(string listenKey, CancellationToken ct = default);
     }
 }

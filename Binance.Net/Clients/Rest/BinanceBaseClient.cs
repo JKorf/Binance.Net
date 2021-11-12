@@ -1,8 +1,11 @@
-﻿using Binance.Net.Objects;
+﻿using Binance.Net.Enums;
+using Binance.Net.Objects;
 using CryptoExchange.Net;
 using CryptoExchange.Net.ExchangeInterfaces;
 using CryptoExchange.Net.Objects;
 using System;
+using System.Globalization;
+
 namespace Binance.Net.Clients.Rest
 {
     /// <summary>
@@ -63,6 +66,47 @@ namespace Binance.Net.Clients.Rest
         internal void InvokeOrderCanceled(ICommonOrderId id)
         {
             OnOrderCanceled?.Invoke(id);
+        }
+
+        protected static KlineInterval GetKlineIntervalFromTimespan(TimeSpan timeSpan)
+        {
+            if (timeSpan == TimeSpan.FromMinutes(1)) return KlineInterval.OneMinute;
+            if (timeSpan == TimeSpan.FromMinutes(3)) return KlineInterval.ThreeMinutes;
+            if (timeSpan == TimeSpan.FromMinutes(5)) return KlineInterval.FiveMinutes;
+            if (timeSpan == TimeSpan.FromMinutes(15)) return KlineInterval.FifteenMinutes;
+            if (timeSpan == TimeSpan.FromMinutes(30)) return KlineInterval.ThirtyMinutes;
+            if (timeSpan == TimeSpan.FromHours(1)) return KlineInterval.OneHour;
+            if (timeSpan == TimeSpan.FromHours(2)) return KlineInterval.TwoHour;
+            if (timeSpan == TimeSpan.FromHours(4)) return KlineInterval.FourHour;
+            if (timeSpan == TimeSpan.FromHours(6)) return KlineInterval.SixHour;
+            if (timeSpan == TimeSpan.FromHours(8)) return KlineInterval.EightHour;
+            if (timeSpan == TimeSpan.FromHours(12)) return KlineInterval.TwelveHour;
+            if (timeSpan == TimeSpan.FromDays(1)) return KlineInterval.OneDay;
+            if (timeSpan == TimeSpan.FromDays(3)) return KlineInterval.ThreeDay;
+            if (timeSpan == TimeSpan.FromDays(7)) return KlineInterval.OneWeek;
+            if (timeSpan == TimeSpan.FromDays(30) || timeSpan == TimeSpan.FromDays(31)) return KlineInterval.OneMonth;
+
+            throw new ArgumentException("Unsupported timespan for Binance Klines, check supported intervals using Binance.Net.Enums.KlineInterval");
+        }
+
+        /// <inheritdoc />
+        public string GetSymbolName(string baseAsset, string quoteAsset) =>
+            (baseAsset + quoteAsset).ToUpper(CultureInfo.InvariantCulture);
+
+        protected static OrderSide GetOrderSide(IExchangeClient.OrderSide side)
+        {
+            if (side == IExchangeClient.OrderSide.Sell) return OrderSide.Sell;
+            if (side == IExchangeClient.OrderSide.Buy) return OrderSide.Buy;
+
+            throw new ArgumentException("Unsupported order side for Binance order: " + side);
+        }
+
+        protected static OrderType GetOrderType(IExchangeClient.OrderType type)
+        {
+            if (type == IExchangeClient.OrderType.Limit) return OrderType.Limit;
+            if (type == IExchangeClient.OrderType.Market) return OrderType.Market;
+
+            throw new ArgumentException("Unsupported order type for Binance order: " + type);
         }
 
         #endregion

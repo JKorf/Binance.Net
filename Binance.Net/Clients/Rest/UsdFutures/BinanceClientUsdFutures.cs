@@ -2,7 +2,9 @@
 using Binance.Net.Interfaces.Clients.Rest.UsdFutures;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Futures.MarketData;
+using Binance.Net.Objects.Spot.MarketData;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.ExchangeInterfaces;
 using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
@@ -17,7 +19,7 @@ using System.Threading.Tasks;
 namespace Binance.Net.Clients.Rest.UsdFutures
 {
     /// <inheritdoc />
-    public class BinanceClientUsdFutures : BinanceBaseClient, IBinanceClientUsdFutures
+    public class BinanceClientUsdFutures : BinanceBaseClient, IBinanceClientUsdFutures, IExchangeClient
     {
         #region fields 
         internal readonly TradeRulesBehaviour TradeRulesBehaviour;
@@ -248,5 +250,107 @@ namespace Binance.Net.Clients.Rest.UsdFutures
             return base.SendRequestAsync<T>(uri, method, cancellationToken, parameters, signed, checkResult, postPosition, arraySerialization);
         }
 
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<ICommonSymbol>>> GetSymbolsAsync()
+        {
+            var exchangeInfo = await ExchangeData.GetExchangeInfoAsync().ConfigureAwait(false);
+            return exchangeInfo.As<IEnumerable<ICommonSymbol>>(exchangeInfo.Data?.Symbols);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<ICommonTicker>>> GetTickersAsync()
+        {
+            var tickers = await ExchangeData.GetTickersAsync().ConfigureAwait(false);
+            return tickers.As<IEnumerable<ICommonTicker>>(tickers.Data?.Select(d => (Binance24HPrice)d));
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<ICommonTicker>> GetTickerAsync(string symbol)
+        {
+            var tickers = await ExchangeData.GetTickerAsync(symbol).ConfigureAwait(false);
+            return tickers.As<ICommonTicker>((Binance24HPrice)tickers.Data);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<ICommonKline>>> GetKlinesAsync(string symbol, TimeSpan timespan, DateTime? startTime = null, DateTime? endTime = null, int? limit = null)
+        {
+            var klines = await ExchangeData.GetKlinesAsync(symbol, GetKlineIntervalFromTimespan(timespan), startTime, endTime, limit).ConfigureAwait(false);
+            return klines.As<IEnumerable<ICommonKline>>(klines.Data);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<ICommonOrderBook>> GetOrderBookAsync(string symbol)
+        {
+            var orderBookResult = await ExchangeData.GetOrderBookAsync(symbol).ConfigureAwait(false);
+            return orderBookResult.As<ICommonOrderBook>(orderBookResult.Data);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<ICommonRecentTrade>>> GetRecentTradesAsync(string symbol)
+        {
+            var tradesResult = await ExchangeData.GetRecentTradesAsync(symbol).ConfigureAwait(false);
+            return tradesResult.As<IEnumerable<ICommonRecentTrade>>(tradesResult.Data);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<ICommonOrderId>> PlaceOrderAsync(string symbol, IExchangeClient.OrderSide side, IExchangeClient.OrderType type, decimal quantity, decimal? price = null, string? accountId = null)
+        {
+            var result = await Trading.PlaceOrderAsync(symbol, GetOrderSide(side), GetOrderType(type), quantity, price: price, timeInForce: type == IExchangeClient.OrderType.Limit ? TimeInForce.GoodTillCancel : (TimeInForce?)null).ConfigureAwait(false);
+            return result.As<ICommonOrderId>(result.Data);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<ICommonOrder>> GetOrderAsync(string orderId, string? symbol = null)
+        {
+            if (string.IsNullOrEmpty(symbol))
+                return WebCallResult<ICommonOrder>.CreateErrorResult(new ArgumentError(nameof(symbol) + " required for Binance " + nameof(IExchangeClient.GetOrderAsync)));
+
+            var result = await Trading.GetOrderAsync(symbol!, long.Parse(orderId)).ConfigureAwait(false);
+            return result.As<ICommonOrder>(result.Data);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<ICommonTrade>>> GetTradesAsync(string orderId, string? symbol = null)
+        {
+            if (string.IsNullOrEmpty(symbol))
+                return WebCallResult<IEnumerable<ICommonTrade>>.CreateErrorResult(new ArgumentError(nameof(symbol) + " required for Binance " + nameof(IExchangeClient.GetTradesAsync)));
+
+            var result = await Trading.GetUserTradesAsync(symbol!).ConfigureAwait(false);
+            return result.As(result.Data.Where(t => t.OrderId == long.Parse(orderId)).Select(t => (ICommonTrade)t));
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<ICommonOrder>>> GetOpenOrdersAsync(string? symbol = null)
+        {
+            var result = await Trading.GetOpenOrdersAsync().ConfigureAwait(false);
+            return result.As<IEnumerable<ICommonOrder>>(result.Data);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<ICommonOrder>>> GetClosedOrdersAsync(string? symbol = null)
+        {
+            if (symbol == null)
+                return WebCallResult<IEnumerable<ICommonOrder>>.CreateErrorResult(new ArgumentError(nameof(symbol) + " required for Binance " + nameof(IExchangeClient.GetClosedOrdersAsync)));
+
+            var result = await Trading.GetOrdersAsync(symbol).ConfigureAwait(false);
+            return result.As<IEnumerable<ICommonOrder>>(result.Data.Where(r => r.Status != OrderStatus.New && r.Status != OrderStatus.PartiallyFilled));
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<ICommonOrderId>> CancelOrderAsync(string orderId, string? symbol = null)
+        {
+            if (symbol == null)
+                return WebCallResult<ICommonOrderId>.CreateErrorResult(new ArgumentError(nameof(symbol) + " required for Binance " + nameof(IExchangeClient.CancelOrderAsync)));
+
+            var result = await Trading.CancelOrderAsync(symbol, orderId: long.Parse(orderId)).ConfigureAwait(false);
+            return result.As<ICommonOrderId>(result.Data);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<ICommonBalance>>> GetBalancesAsync(string? accountId = null)
+        {
+            var result = await Account.GetAccountInfoAsync().ConfigureAwait(false);
+            return result.As<IEnumerable<ICommonBalance>>(result.Data?.Assets.Select(b => (ICommonBalance)b));
+        }
     }
 }

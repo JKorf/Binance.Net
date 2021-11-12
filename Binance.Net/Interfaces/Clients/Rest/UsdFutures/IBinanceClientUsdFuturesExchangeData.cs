@@ -35,6 +35,18 @@ namespace Binance.Net.Interfaces.Clients.Rest.UsdFutures
         Task<WebCallResult<BinanceFuturesUsdtExchangeInfo>> GetExchangeInfoAsync(CancellationToken ct = default);
 
         /// <summary>
+        /// Get klines for a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol</param>
+        /// <param name="interval">The kline interval</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<IBinanceKline>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Get funding rate history for the provided symbol
         /// </summary>
         /// <param name="symbol">The symbol to get the data for</param>
@@ -101,6 +113,26 @@ namespace Binance.Net.Interfaces.Clients.Rest.UsdFutures
         /// <param name="ct">Cancellation token</param>
         /// <returns>The order book for the symbol</returns>
         Task<WebCallResult<BinanceFuturesOrderBook>> GetOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get the most recent trades for a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to get trades for</param>
+        /// <param name="limit">Max amount of results</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<IBinanceRecentTrade>>> GetRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get trade history for a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to get trades for</param>
+        /// <param name="limit">The max amount of results</param>
+        /// <param name="fromId">Retrun trades after this trade id</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<IBinanceRecentTrade>>> GetTradeHistoryAsync(string symbol, int? limit = null, long? fromId = null,
+            CancellationToken ct = default);
 
         /// <summary>
         /// Get Mark Price and Funding Rate for the provided symbol
@@ -230,5 +262,17 @@ namespace Binance.Net.Interfaces.Clients.Rest.UsdFutures
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BinanceFuturesAssetIndex>> GetAssetIndexAsync(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
+        /// </summary>
+        /// <param name="symbol">The symbol to get the trades for</param>
+        /// <param name="fromId">ID to get aggregate trades from INCLUSIVE.</param>
+        /// <param name="startTime">Time to start getting trades from</param>
+        /// <param name="endTime">Time to stop getting trades from</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The aggregated trades list for the symbol</returns>
+        Task<WebCallResult<IEnumerable<BinanceAggregatedTrade>>> GetAggregatedTradeHistoryAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
     }
 }

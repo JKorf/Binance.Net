@@ -15,6 +15,13 @@ namespace Binance.Net.Interfaces.Clients.Socket
     public interface IBinanceSocketClientSpot : ISocketClient
     {
         /// <summary>
+        /// Set the API creentials to use for this client
+        /// </summary>
+        /// <param name="apiKey">The API key</param>
+        /// <param name="apiSecret">The API secret</param>
+        void SetApiCredentials(string apiKey, string apiSecret);
+
+        /// <summary>
         /// Subscribes to the aggregated trades update stream for the provided symbol
         /// </summary>
         /// <param name="symbol">The symbol</param>

@@ -2,6 +2,7 @@
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.ExchangeInterfaces;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Futures.FuturesData
@@ -9,7 +10,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
     /// <summary>
     /// Trade info
     /// </summary>
-    public class BinanceFuturesTrade
+    public class BinanceFuturesTrade: ICommonTrade
     {
         /// <summary>
         /// The symbol
@@ -71,6 +72,18 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// </summary>
         [JsonProperty("time"), JsonConverter(typeof(TimestampConverter))]
         public DateTime Timestamp { get; set; }
+
+        string ICommonTrade.CommonId => Id.ToString();
+
+        decimal ICommonTrade.CommonPrice => Price;
+
+        decimal ICommonTrade.CommonQuantity => Quantity;
+
+        decimal ICommonTrade.CommonFee => Fee;
+
+        string? ICommonTrade.CommonFeeAsset => FeeAsset;
+
+        DateTime ICommonTrade.CommonTradeTime => Timestamp;
     }
 
     /// <summary>

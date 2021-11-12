@@ -11,6 +11,13 @@ namespace Binance.Net.Interfaces.Clients.Rest.Margin
     public interface IBinanceClientCoinFutures: IRestClient
     {
         /// <summary>
+        /// Set the API creentials to use for this client
+        /// </summary>
+        /// <param name="apiKey">The API key</param>
+        /// <param name="apiSecret">The API secret</param>
+        void SetApiCredentials(string apiKey, string apiSecret);
+
+        /// <summary>
         /// Endpoints related to account settings, info or actions
         /// </summary>
         public IBinanceClientCoinFuturesAccount Account { get; }

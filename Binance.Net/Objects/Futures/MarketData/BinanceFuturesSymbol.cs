@@ -5,13 +5,14 @@ using Binance.Net.Converters;
 using Binance.Net.Enums;
 using System;
 using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.ExchangeInterfaces;
 
 namespace Binance.Net.Objects.Futures.MarketData
 {
     /// <summary>
     /// Information about a futures symbol
     /// </summary>
-    public class BinanceFuturesSymbol
+    public class BinanceFuturesSymbol: ICommonSymbol
     {
         /// <summary>
         /// Filters for order on this symbol
@@ -158,6 +159,10 @@ namespace Binance.Net.Objects.Futures.MarketData
         /// </summary>
         [JsonIgnore]
         public BinanceSymbolMinNotionalFilter MinNotionalFilter => Filters.OfType<BinanceSymbolMinNotionalFilter>().FirstOrDefault();
+
+        string ICommonSymbol.CommonName => Name;
+
+        decimal ICommonSymbol.CommonMinimumTradeQuantity => LotSizeFilter.MinQuantity;
     }
 
     /// <summary>

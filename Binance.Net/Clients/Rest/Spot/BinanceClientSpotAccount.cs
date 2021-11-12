@@ -284,7 +284,6 @@ namespace Binance.Net.Clients.Rest.Spot
             CancellationToken ct = default) =>
             await GetDailyAccountSnapshot<IEnumerable<BinanceSpotAccountSnapshot>>(AccountType.Spot, startTime, endTime, limit, receiveWindow, ct).ConfigureAwait(false);
 
-        // TODO Should be moved
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceMarginAccountSnapshot>>> GetDailyMarginAccountSnapshotAsync(
             DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null,
