@@ -53,7 +53,6 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// <summary>
         /// The order details
         /// </summary>
-        [JsonOptionalProperty]
         public IEnumerable<BinancePlacedOcoOrder> OrderReports { get; set; } = Array.Empty<BinancePlacedOcoOrder>();
     }
 
@@ -84,7 +83,6 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// <summary>
         /// The time the order was placed
         /// </summary>
-        [JsonOptionalProperty]
         [JsonProperty("transactTime"), JsonConverter(typeof(TimestampConverter))]
         public new DateTime CreateTime { get; set; }
     }

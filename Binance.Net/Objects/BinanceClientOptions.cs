@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using Binance.Net.Clients.Rest.CoinFutures;
@@ -9,6 +10,7 @@ using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients.Rest.Margin;
 using Binance.Net.Interfaces.Clients.Rest.UsdFutures;
 using Binance.Net.Interfaces.Clients.Socket;
+using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 
 namespace Binance.Net.Objects
@@ -76,7 +78,14 @@ namespace Binance.Net.Objects
         /// </summary>
         public static BinanceClientSpotOptions Default { get; set; } = new BinanceClientSpotOptions()
         {
-            BaseAddress = BinanceApiAddresses.Default.RestClientAddress
+            BaseAddress = BinanceApiAddresses.Default.RestClientAddress,
+            RateLimiters = new List<IRateLimiter>
+            {
+                new RateLimiter()
+                    .AddPartialEndpointLimit("/api/", 1200, TimeSpan.FromMinutes(1))
+                    .AddPartialEndpointLimit("/sapi/", 12000, TimeSpan.FromMinutes(1))
+                    .AddEndpointLimit("/api/v3/order", 50, TimeSpan.FromSeconds(10), HttpMethod.Post, true)
+            }
         };
 
         /// <summary>

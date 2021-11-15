@@ -16,27 +16,23 @@ namespace Binance.Net.Objects.Spot.SpotData
         /// <summary>
         /// The time the order was placed
         /// </summary>
-        [JsonOptionalProperty]
         [JsonProperty("transactTime"), JsonConverter(typeof(TimestampConverter))]
         public new DateTime CreateTime { get; set; }
         
         /// <summary>
         /// Trades for the order
         /// </summary>
-        [JsonOptionalProperty]
         [JsonProperty("fills")]
         public IEnumerable<BinanceOrderTrade>? Trades { get; set; }
 
         /// <summary>
         /// Only present if a margin trade happened
         /// </summary>
-        [JsonOptionalProperty]
         [JsonProperty("marginBuyBorrowAmount")]
         public decimal? MarginBuyBorrowQuantity { get; set; }
         /// <summary>
         /// Only present if a margin trade happened
         /// </summary>
-        [JsonOptionalProperty]
         public string? MarginBuyBorrowAsset { get; set; }        
         
         string ICommonOrderId.CommonId => Id.ToString();

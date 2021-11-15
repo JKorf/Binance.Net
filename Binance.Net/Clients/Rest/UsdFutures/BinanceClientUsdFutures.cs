@@ -245,9 +245,9 @@ namespace Binance.Net.Clients.Rest.UsdFutures
         }
 
         internal Task<WebCallResult<T>> SendRequestInternal<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken,
-            Dictionary<string, object>? parameters = null, bool signed = false, bool checkResult = true, HttpMethodParameterPosition? postPosition = null, ArrayParametersSerialization? arraySerialization = null) where T : class
+            Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null, ArrayParametersSerialization? arraySerialization = null) where T : class
         {
-            return base.SendRequestAsync<T>(uri, method, cancellationToken, parameters, signed, checkResult, postPosition, arraySerialization);
+            return base.SendRequestAsync<T>(uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization);
         }
 
         /// <inheritdoc />

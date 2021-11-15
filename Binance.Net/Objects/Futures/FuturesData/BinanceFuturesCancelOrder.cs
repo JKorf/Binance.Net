@@ -93,7 +93,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// Stop price for the order
         /// </summary>
-        [JsonProperty("stopPrice"), JsonOptionalProperty]
+        [JsonProperty("stopPrice")]
         public decimal? StopPrice { get; set; }
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// Average price
         /// </summary>
-        [JsonProperty("avgPrice"), JsonOptionalProperty]
+        [JsonProperty("avgPrice")]
         public decimal? AveragePrice { get; set; }
 
         string ICommonOrderId.CommonId => Id.ToString();

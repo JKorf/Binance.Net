@@ -32,7 +32,6 @@ namespace Binance.Net.Objects.Shared
         /// <summary>
         /// Original order id
         /// </summary>
-        [JsonOptionalProperty]
         [JsonProperty("origClientOrderId")]
         public string OriginalClientOrderId { get; set; } = string.Empty;
 

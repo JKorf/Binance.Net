@@ -101,7 +101,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// Stop price for the order
         /// </summary>
-        [JsonProperty("stopPrice"), JsonOptionalProperty]
+        [JsonProperty("stopPrice")]
         public decimal? StopPrice { get; set; }
 
         /// <summary>
