@@ -245,9 +245,10 @@ namespace Binance.Net.Clients.Rest.CoinFutures
         }
 
         internal Task<WebCallResult<T>> SendRequestInternal<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken,
-            Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null, ArrayParametersSerialization? arraySerialization = null) where T : class
+            Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null, 
+            ArrayParametersSerialization? arraySerialization = null, int weight = 1) where T : class
         {
-            return base.SendRequestAsync<T>(uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization);
+            return base.SendRequestAsync<T>(uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, requestWeight: weight);
         }
 
         /// <inheritdoc />

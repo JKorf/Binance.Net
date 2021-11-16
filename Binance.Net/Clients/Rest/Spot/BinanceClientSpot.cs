@@ -129,6 +129,7 @@ namespace Binance.Net.Clients.Rest.Spot
             bool? isIsolated = null,
             OrderResponseType? orderResponseType = null,
             int? receiveWindow = null,
+            int weight = 1,
             CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
@@ -174,7 +175,7 @@ namespace Binance.Net.Clients.Rest.Spot
             parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await SendRequestAsync<BinancePlacedOrder>(uri, HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await SendRequestAsync<BinancePlacedOrder>(uri, HttpMethod.Post, ct, parameters, true, requestWeight: weight).ConfigureAwait(false);
         }
 
         /// <inheritdoc />

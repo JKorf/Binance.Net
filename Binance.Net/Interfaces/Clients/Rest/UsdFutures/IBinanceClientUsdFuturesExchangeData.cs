@@ -249,6 +249,18 @@ namespace Binance.Net.Interfaces.Clients.Rest.UsdFutures
         Task<WebCallResult<IEnumerable<IBinanceKline>>> GetContinuousContractKlinesAsync(string pair, ContractType contractType, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Get Kline/candlestick data for the index price of a pair.
+        /// </summary>
+        /// <param name="pair">The symbol to get the data for</param>
+        /// <param name="interval">The candlestick timespan</param>
+        /// <param name="startTime">Start time to get candlestick data</param>
+        /// <param name="endTime">End time to get candlestick data</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The candlestick data for the provided symbol</returns>
+        Task<WebCallResult<IEnumerable<IBinanceKline>>> GetIndexPriceKlinesAsync(string pair, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        
+        /// <summary>
         /// Get asset indexex for Multi-Assets mode for all symbols
         /// </summary>
         /// <param name="ct">Cancellation token</param>

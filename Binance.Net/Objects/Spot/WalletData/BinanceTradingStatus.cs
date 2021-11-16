@@ -7,11 +7,6 @@ using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Spot.WalletData
 {
-    internal class BinanceTradingStatusWrapper
-    {
-        public BinanceTradingStatus? Data { get; set; }
-    }
-
     /// <summary>
     /// Trade status
     /// </summary>
