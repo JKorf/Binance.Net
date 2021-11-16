@@ -2,7 +2,7 @@
 using CryptoExchange.Net.Interfaces;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects
+namespace Binance.Net.Objects.Models
 {
     /// <summary>
     /// An entry in the order book

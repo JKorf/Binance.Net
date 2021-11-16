@@ -1,10 +1,8 @@
-﻿using CryptoExchange.Net.Converters;
+﻿using System;
+using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Binance.Net.Objects.Futures.MarketData
+namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// Futures asset index

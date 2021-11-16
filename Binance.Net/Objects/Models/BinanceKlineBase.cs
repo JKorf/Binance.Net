@@ -4,7 +4,7 @@ using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.ExchangeInterfaces;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Shared
+namespace Binance.Net.Objects.Models
 {
     /// <summary>
     /// Candlestick information for symbol

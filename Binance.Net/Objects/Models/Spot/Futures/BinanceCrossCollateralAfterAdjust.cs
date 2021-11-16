@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Spot.Futures
+﻿namespace Binance.Net.Objects.Models.Spot.Futures
 {
     /// <summary>
     /// After adjustment rate

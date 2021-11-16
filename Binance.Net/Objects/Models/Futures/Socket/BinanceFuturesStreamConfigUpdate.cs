@@ -1,10 +1,10 @@
-﻿using Binance.Net.Converters;
+﻿using System;
+using Binance.Net.Converters;
 using Binance.Net.Enums;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
-using System;
 
-namespace Binance.Net.Objects.Futures.UserStream
+namespace Binance.Net.Objects.Models.Futures.Socket
 {
     /// <summary>
     /// Information about leverage of symbol changed

@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Spot.UserData
+﻿namespace Binance.Net.Objects.Models.Spot
 {
     internal class BinanceListenKey
     {

@@ -1,9 +1,5 @@
 ﻿using Binance.Net.Enums;
 using Binance.Net.Objects;
-using Binance.Net.Objects.Blvt;
-using Binance.Net.Objects.Futures.MarketStream;
-using Binance.Net.Objects.Futures.UserStream;
-using Binance.Net.Objects.Spot.MarketStream;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
@@ -12,6 +8,10 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Binance.Net.Objects.Models;
+using Binance.Net.Objects.Models.Futures.Socket;
+using Binance.Net.Objects.Models.Spot.Blvt;
+using Binance.Net.Objects.Models.Spot.Socket;
 
 namespace Binance.Net.Interfaces.Clients.Socket
 {

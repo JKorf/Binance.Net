@@ -2,7 +2,7 @@
 using Binance.Net.Enums;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.WalletData
+namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// The status of Binance

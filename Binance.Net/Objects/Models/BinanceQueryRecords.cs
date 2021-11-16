@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Binance.Net.Objects
+namespace Binance.Net.Objects.Models
 {
     /// <summary>
     /// Query results

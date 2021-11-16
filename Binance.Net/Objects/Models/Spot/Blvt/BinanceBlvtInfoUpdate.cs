@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Blvt
+namespace Binance.Net.Objects.Models.Spot.Blvt
 {
     /// <summary>
     /// Blvt info update

@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using CryptoExchange.Net.Converters;
+using Newtonsoft.Json;
 
-namespace Binance.Net.Objects
+namespace Binance.Net.Objects.Models
 {
     /// <summary>
     /// A event received by a Binance websocket

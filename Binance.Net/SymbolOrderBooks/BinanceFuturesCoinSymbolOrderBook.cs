@@ -1,7 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Binance.Net.Clients.Rest.CoinFutures;
+using Binance.Net.Clients.Socket;
 using Binance.Net.Interfaces;
-using Binance.Net.Interfaces.Clients.Rest.Margin;
+using Binance.Net.Interfaces.Clients.Rest.CoinFutures;
 using Binance.Net.Interfaces.Clients.Socket;
 using Binance.Net.Objects;
 using CryptoExchange.Net.Objects;

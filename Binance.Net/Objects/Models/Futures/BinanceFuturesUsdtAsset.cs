@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Futures.MarketData
+﻿namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// Asset info

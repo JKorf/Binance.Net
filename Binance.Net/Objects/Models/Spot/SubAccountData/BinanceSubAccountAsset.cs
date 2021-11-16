@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Binance.Net.Objects.Spot.SpotData;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.SubAccountData
+namespace Binance.Net.Objects.Models.Spot.SubAccountData
 {
     internal class BinanceSubAccountAsset
     {

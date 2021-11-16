@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Other
+namespace Binance.Net.Objects.Internal
 {
     internal class BinanceSocketRequest
     {

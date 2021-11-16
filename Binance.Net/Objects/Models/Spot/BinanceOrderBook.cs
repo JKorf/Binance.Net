@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using System;
+using System.Collections.Generic;
 using Binance.Net.Interfaces;
-using System;
 using CryptoExchange.Net.ExchangeInterfaces;
 using CryptoExchange.Net.Interfaces;
+using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.MarketData
+namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// The order book for a asset

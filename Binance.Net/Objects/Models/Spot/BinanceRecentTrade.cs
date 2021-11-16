@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using Binance.Net.Interfaces;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.ExchangeInterfaces;
+using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.MarketData
+namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Recent trade info

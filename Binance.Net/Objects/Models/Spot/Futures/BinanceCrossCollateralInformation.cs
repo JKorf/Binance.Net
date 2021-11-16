@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.Futures
+namespace Binance.Net.Objects.Models.Spot.Futures
 {
     /// <summary>
     /// Collateral info

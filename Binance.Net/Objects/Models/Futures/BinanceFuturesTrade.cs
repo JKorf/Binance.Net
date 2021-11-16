@@ -5,7 +5,7 @@ using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.ExchangeInterfaces;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Futures.FuturesData
+namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// Trade info

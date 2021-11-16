@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.WalletData
+namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Deposit address info

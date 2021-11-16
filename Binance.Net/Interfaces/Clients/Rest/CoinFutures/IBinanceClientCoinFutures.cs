@@ -1,9 +1,6 @@
 ﻿using CryptoExchange.Net.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Binance.Net.Interfaces.Clients.Rest.Margin
+namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 {
     /// <summary>
     /// Coin futures endpoints

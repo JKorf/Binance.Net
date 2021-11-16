@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Other
+namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Info on a product

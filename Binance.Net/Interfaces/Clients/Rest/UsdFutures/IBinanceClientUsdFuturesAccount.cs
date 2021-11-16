@@ -1,13 +1,13 @@
 ﻿using Binance.Net.Enums;
 using Binance.Net.Objects;
-using Binance.Net.Objects.Futures.FuturesData;
-using Binance.Net.Objects.Futures.MarketData;
 using CryptoExchange.Net.Objects;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Binance.Net.Objects.Models;
+using Binance.Net.Objects.Models.Futures;
 
 namespace Binance.Net.Interfaces.Clients.Rest.UsdFutures
 {

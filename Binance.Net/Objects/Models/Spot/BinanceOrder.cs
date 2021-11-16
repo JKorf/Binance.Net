@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Globalization;
 using Binance.Net.Enums;
-using Binance.Net.Objects.Shared;
 using CryptoExchange.Net.ExchangeInterfaces;
 
-namespace Binance.Net.Objects.Spot.SpotData
+namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Information regarding a specific order

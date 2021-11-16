@@ -1,12 +1,12 @@
-﻿using Binance.Net.Converters;
-using Binance.Net.Enums;
-using Newtonsoft.Json;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Binance.Net.Converters;
+using Binance.Net.Enums;
 using CryptoExchange.Net.ExchangeInterfaces;
-using System;
+using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.MarketData
+namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Symbol info

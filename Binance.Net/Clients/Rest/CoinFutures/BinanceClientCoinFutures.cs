@@ -1,7 +1,5 @@
 ﻿using Binance.Net.Enums;
-using Binance.Net.Interfaces.Clients.Rest.Margin;
 using Binance.Net.Objects;
-using Binance.Net.Objects.Futures.MarketData;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.ExchangeInterfaces;
 using CryptoExchange.Net.Objects;
@@ -14,6 +12,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Binance.Net.Interfaces.Clients.Rest.CoinFutures;
+using Binance.Net.Objects.Internal;
+using Binance.Net.Objects.Models.Futures;
 
 namespace Binance.Net.Clients.Rest.CoinFutures
 {

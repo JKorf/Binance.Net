@@ -1,9 +1,9 @@
 ﻿using System;
-using Newtonsoft.Json;
-using CryptoExchange.Net.Converters;
 using Binance.Net.Interfaces;
+using CryptoExchange.Net.Converters;
+using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.MarketStream
+namespace Binance.Net.Objects.Models.Spot.Socket
 {
     /// <summary>
     /// Aggregated information about trades for a symbol

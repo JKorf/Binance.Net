@@ -1,8 +1,8 @@
+using System;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
-using System;
 
-namespace Binance.Net.Objects.Futures.MarketData
+namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// Funding rate information for Futures trading

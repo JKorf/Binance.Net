@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Other
+﻿namespace Binance.Net.Objects.Internal
 {
     internal class BinanceExchangeApiWrapper<T>
     {

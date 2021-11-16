@@ -1,10 +1,10 @@
-﻿using Binance.Net.Converters;
+﻿using System;
+using Binance.Net.Converters;
 using Binance.Net.Enums;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
-using System;
 
-namespace Binance.Net.Objects.Spot.LendingData
+namespace Binance.Net.Objects.Models.Spot.Lending
 {
     /// <summary>
     /// Crypto loan income info

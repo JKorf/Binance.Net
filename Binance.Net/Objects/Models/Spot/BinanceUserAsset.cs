@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.WalletData
+namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Information about an asset for a user

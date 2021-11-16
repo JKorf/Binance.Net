@@ -5,7 +5,7 @@ using Binance.Net.Enums;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.UserStream
+namespace Binance.Net.Objects.Models.Spot.Socket
 {   
     /// <summary>
     /// Order list info

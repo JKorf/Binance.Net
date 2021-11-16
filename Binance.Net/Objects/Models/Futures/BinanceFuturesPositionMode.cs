@@ -2,7 +2,7 @@
 using Binance.Net.Enums;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Futures.FuturesData
+namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// User's position mode

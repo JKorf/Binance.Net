@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Spot.SpotData
+﻿namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Bnb burn status

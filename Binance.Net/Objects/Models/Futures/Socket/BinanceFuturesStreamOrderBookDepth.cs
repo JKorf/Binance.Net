@@ -1,10 +1,10 @@
-﻿using Binance.Net.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using Binance.Net.Interfaces;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 
-namespace Binance.Net.Objects.Futures.MarketStream
+namespace Binance.Net.Objects.Models.Futures.Socket
 {
     /// <summary>
     /// The order book for a asset

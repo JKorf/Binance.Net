@@ -1,23 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Binance.Net.Converters;
 using Binance.Net.Enums;
-using Binance.Net.Interfaces;
-using Binance.Net.Objects.Other;
-using Binance.Net.Objects.Spot.IsolatedMarginData;
-using Binance.Net.Objects.Spot.MarginData;
-using Binance.Net.Objects.Spot.MarketData;
-using Binance.Net.Objects.Spot.WalletData;
-using CryptoExchange.Net;
-using CryptoExchange.Net.Logging;
+using Binance.Net.Objects.Models.Spot;
+using Binance.Net.Objects.Models.Spot.IsolatedMargin;
+using Binance.Net.Objects.Models.Spot.Margin;
 using CryptoExchange.Net.Objects;
-using Newtonsoft.Json;
 
-namespace Binance.Net.Clients.Rest.Spot
+namespace Binance.Net.Interfaces.Clients.Rest.Spot
 {
     /// <summary>
     /// Spot market endpoints

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Futures.FuturesData
+namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// Multi asset mode info

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Futures.FuturesData
+namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// Response to the change in initial leverage request

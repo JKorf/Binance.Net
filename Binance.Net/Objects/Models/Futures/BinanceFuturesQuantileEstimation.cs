@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Futures.FuturesData
+﻿namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// Quantile estimation

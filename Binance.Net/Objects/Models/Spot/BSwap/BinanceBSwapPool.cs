@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Binance.Net.Objects.BSwap
+namespace Binance.Net.Objects.Models.Spot.BSwap
 {
     /// <summary>
     /// Swap pool info

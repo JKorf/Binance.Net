@@ -2,7 +2,7 @@
 using Binance.Net.Enums;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects
+namespace Binance.Net.Objects.Models
 {
     /// <summary>
     /// Rate limit info

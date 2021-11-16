@@ -1,10 +1,9 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using CryptoExchange.Net.Converters;
+using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Other
+namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// IP restriction info

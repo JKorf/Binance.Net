@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.MarginData
+namespace Binance.Net.Objects.Models.Spot.Margin
 {
     /// <summary>
     /// Margin asset info

@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.BSwap
+﻿namespace Binance.Net.Objects.Models.Spot.BSwap
 {
     /// <summary>
     /// Operation result

@@ -5,7 +5,7 @@ using Binance.Net.Enums;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.SpotData
+namespace Binance.Net.Objects.Models.Spot
 {
     // NOTE this is a bit of a weird place for this, however it is a request on the normal client since it uses
     // the /sapi/ route instead of /fapi/. For lack of a better place keep it here

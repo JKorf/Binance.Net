@@ -1,27 +1,6 @@
-﻿using Binance.Net.Clients.Rest.Spot;
-using Binance.Net.Converters;
-using Binance.Net.Enums;
-using Binance.Net.Objects;
-using Binance.Net.Objects.Spot.MarketData;
-using Binance.Net.Objects.Spot.SpotData;
-using CryptoExchange.Net;
-using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.ExchangeInterfaces;
-using CryptoExchange.Net.Interfaces;
-using CryptoExchange.Net.Objects;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using CryptoExchange.Net.Interfaces;
 
-namespace Binance.Net.Clients.Rest.Spot
+namespace Binance.Net.Interfaces.Clients.Rest.Spot
 {
     /// <summary>
     /// Spot endpoints

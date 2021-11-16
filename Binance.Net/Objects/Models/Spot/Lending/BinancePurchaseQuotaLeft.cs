@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Spot.LendingData
+﻿namespace Binance.Net.Objects.Models.Spot.Lending
 {
     /// <summary>
     /// Purchase quota left

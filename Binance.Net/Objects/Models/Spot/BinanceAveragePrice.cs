@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.MarketData
+namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Current average price details for a symbol.

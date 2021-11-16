@@ -1,12 +1,11 @@
-﻿using Binance.Net.Converters;
-using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.Attributes;
-using Newtonsoft.Json;
-using System;
+﻿using System;
+using Binance.Net.Converters;
 using Binance.Net.Enums;
+using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.ExchangeInterfaces;
+using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Futures.FuturesData
+namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// The result of cancel order

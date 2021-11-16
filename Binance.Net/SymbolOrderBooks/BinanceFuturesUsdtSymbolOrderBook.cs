@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Binance.Net.Clients.Rest.UsdFutures;
+using Binance.Net.Clients.Socket;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients.Rest.UsdFutures;
 using Binance.Net.Interfaces.Clients.Socket;

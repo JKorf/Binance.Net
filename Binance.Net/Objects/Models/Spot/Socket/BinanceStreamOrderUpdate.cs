@@ -1,10 +1,10 @@
 ﻿using System;
-using Newtonsoft.Json;
 using Binance.Net.Converters;
-using CryptoExchange.Net.Converters;
 using Binance.Net.Enums;
+using CryptoExchange.Net.Converters;
+using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.UserStream
+namespace Binance.Net.Objects.Models.Spot.Socket
 {
     /// <summary>
     /// Update data about an order

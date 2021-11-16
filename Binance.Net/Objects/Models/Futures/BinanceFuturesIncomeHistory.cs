@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
-using System;
-using CryptoExchange.Net.Converters;
+﻿using System;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
+using CryptoExchange.Net.Converters;
+using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Futures.FuturesData
+namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// Futures income history result

@@ -1,9 +1,8 @@
 ﻿using Binance.Net.Interfaces;
-using Binance.Net.Objects.Shared;
 using CryptoExchange.Net.ExchangeInterfaces;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.MarketData
+namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Price statistics of the last 24 hours

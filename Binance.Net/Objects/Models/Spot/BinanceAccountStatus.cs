@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System.Collections.Generic;
 
-namespace Binance.Net.Objects.Spot.WalletData
+namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Account status info

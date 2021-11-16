@@ -4,7 +4,7 @@ using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Futures.UserStream
+namespace Binance.Net.Objects.Models.Futures.Socket
 {
     /// <summary>
     /// Margin update

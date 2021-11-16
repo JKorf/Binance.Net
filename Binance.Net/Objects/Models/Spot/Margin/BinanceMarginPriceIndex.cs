@@ -2,7 +2,7 @@
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.MarginData
+namespace Binance.Net.Objects.Models.Spot.Margin
 {
     /// <summary>
     /// Price index for a symbol

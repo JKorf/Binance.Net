@@ -3,7 +3,7 @@ using Binance.Net.Interfaces;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Shared
+namespace Binance.Net.Objects.Models
 {
     /// <summary>
     /// 24 hour rolling window price data

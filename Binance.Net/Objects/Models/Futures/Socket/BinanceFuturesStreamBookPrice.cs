@@ -1,9 +1,9 @@
 ﻿using System;
-using Binance.Net.Objects.Spot.MarketStream;
+using Binance.Net.Objects.Models.Spot.Socket;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Futures.MarketStream
+namespace Binance.Net.Objects.Models.Futures.Socket
 {
     /// <summary>
     /// Futures book price

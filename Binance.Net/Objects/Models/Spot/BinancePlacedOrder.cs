@@ -1,12 +1,10 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using CryptoExchange.Net.Attributes;
 using CryptoExchange.Net.Converters;
-using Binance.Net.Objects.Shared;
 using CryptoExchange.Net.ExchangeInterfaces;
+using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.SpotData
+namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// The result of placing a new order

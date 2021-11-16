@@ -1,30 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Binance.Net.Converters;
 using Binance.Net.Enums;
-using Binance.Net.Objects;
-using Binance.Net.Objects.Fiat;
-using Binance.Net.Objects.Other;
-using Binance.Net.Objects.Spot.IsolatedMarginData;
-using Binance.Net.Objects.Spot.MarginData;
-using Binance.Net.Objects.Spot.MarketData;
-using Binance.Net.Objects.Spot.SpotData;
-using Binance.Net.Objects.Spot.UserData;
-using Binance.Net.Objects.Spot.WalletData;
-using CryptoExchange.Net;
-using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.Logging;
+using Binance.Net.Objects.Models;
+using Binance.Net.Objects.Models.Spot;
+using Binance.Net.Objects.Models.Spot.IsolatedMargin;
+using Binance.Net.Objects.Models.Spot.Margin;
 using CryptoExchange.Net.Objects;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
-namespace Binance.Net.Clients.Rest.Spot
+namespace Binance.Net.Interfaces.Clients.Rest.Spot
 {
     public interface IBinanceClientSpotAccount
     {

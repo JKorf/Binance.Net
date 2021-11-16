@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Brokerage.SubAccountData
+﻿namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
 {
     /// <summary>
     /// Sub Account Create Result

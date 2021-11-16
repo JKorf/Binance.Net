@@ -1,8 +1,6 @@
 ﻿using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Objects;
-using Binance.Net.Objects.Spot.MarketData;
-using Binance.Net.Objects.Spot.SpotData;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.ExchangeInterfaces;
@@ -17,6 +15,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Binance.Net.Interfaces.Clients.Rest.Spot;
+using Binance.Net.Objects.Internal;
+using Binance.Net.Objects.Models.Spot;
 
 namespace Binance.Net.Clients.Rest.Spot
 {

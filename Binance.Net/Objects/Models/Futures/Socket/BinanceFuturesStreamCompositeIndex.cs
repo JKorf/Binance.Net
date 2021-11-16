@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Futures.MarketStream
+namespace Binance.Net.Objects.Models.Futures.Socket
 {
     /// <summary>
     /// Composite index info

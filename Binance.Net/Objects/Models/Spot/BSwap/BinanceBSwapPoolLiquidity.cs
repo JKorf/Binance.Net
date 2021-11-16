@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.BSwap
+namespace Binance.Net.Objects.Models.Spot.BSwap
 {
     /// <summary>
     /// Pool liquidity info

@@ -1,28 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using Binance.Net.Converters;
+using Binance.Net.Enums;
 using Binance.Net.Interfaces;
+using Binance.Net.Interfaces.Clients.Socket;
+using Binance.Net.Objects;
+using Binance.Net.Objects.Internal;
+using Binance.Net.Objects.Models;
+using Binance.Net.Objects.Models.Futures.Socket;
+using Binance.Net.Objects.Models.Spot.Blvt;
+using Binance.Net.Objects.Models.Spot.Socket;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
-using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
-using System.Linq;
-using Binance.Net.Objects.Other;
-using Binance.Net.Objects;
-using System.Threading;
-using Binance.Net.Objects.Spot.MarketStream;
-using System.Globalization;
-using Binance.Net.Objects.Futures.MarketStream;
-using Binance.Net.Enums;
-using Binance.Net.Converters;
-using Newtonsoft.Json;
-using Binance.Net.Objects.Futures.UserStream;
 using Microsoft.Extensions.Logging;
-using Binance.Net.Objects.Blvt;
-using Binance.Net.Interfaces.Clients.Socket;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
-namespace Binance.Net
+namespace Binance.Net.Clients.Socket
 {
     /// <summary>
     /// Client providing access to the Binance Usd futures websocket Api

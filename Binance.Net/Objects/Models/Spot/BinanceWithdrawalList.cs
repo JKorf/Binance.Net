@@ -1,12 +1,9 @@
-﻿using Binance.Net.Converters;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using CryptoExchange.Net.Attributes;
-using CryptoExchange.Net.Converters;
+﻿using System;
+using Binance.Net.Converters;
 using Binance.Net.Enums;
+using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.WalletData
+namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Information about a withdrawal

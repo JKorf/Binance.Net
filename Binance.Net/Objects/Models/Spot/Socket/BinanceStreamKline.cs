@@ -1,13 +1,11 @@
-﻿using Binance.Net.Converters;
-using Newtonsoft.Json;
-using System;
-using CryptoExchange.Net.Converters;
-using Binance.Net.Interfaces;
-using Binance.Net.Objects.Spot.MarketData;
+﻿using System;
+using Binance.Net.Converters;
 using Binance.Net.Enums;
-using Binance.Net.Objects.Shared;
+using Binance.Net.Interfaces;
+using CryptoExchange.Net.Converters;
+using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.MarketStream
+namespace Binance.Net.Objects.Models.Spot.Socket
 {
     /// <summary>
     /// Wrapper for kline information for a symbol

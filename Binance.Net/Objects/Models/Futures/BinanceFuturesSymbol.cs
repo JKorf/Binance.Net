@@ -1,13 +1,13 @@
-﻿using Newtonsoft.Json;
-using System.Linq;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
-using System;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.ExchangeInterfaces;
+using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Futures.MarketData
+namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// Information about a futures symbol

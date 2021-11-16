@@ -2,12 +2,11 @@
 using System.Globalization;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
-using CryptoExchange.Net.Attributes;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.ExchangeInterfaces;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Shared
+namespace Binance.Net.Objects.Models
 {
     /// <summary>
     /// Order info

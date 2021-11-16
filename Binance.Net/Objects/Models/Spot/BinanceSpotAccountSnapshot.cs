@@ -5,7 +5,7 @@ using Binance.Net.Enums;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.SpotData
+namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Snapshot data of a spot account

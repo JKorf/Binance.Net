@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Blvt
+namespace Binance.Net.Objects.Models.Spot.Blvt
 {
     /// <summary>
     /// Leveraged token info

@@ -1,11 +1,11 @@
-﻿using Binance.Net.Converters;
+﻿using System;
+using System.Collections.Generic;
+using Binance.Net.Converters;
 using Binance.Net.Enums;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 
-namespace Binance.Net.Objects.Spot.Mining
+namespace Binance.Net.Objects.Models.Spot.Mining
 {
     /// <summary>
     /// Resale list

@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.Futures
+namespace Binance.Net.Objects.Models.Spot.Futures
 {
     /// <summary>
     /// Cross colateral wallet info

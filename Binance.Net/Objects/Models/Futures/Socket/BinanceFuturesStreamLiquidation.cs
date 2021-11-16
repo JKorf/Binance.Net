@@ -5,7 +5,7 @@ using Binance.Net.Interfaces;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Futures.MarketStream
+namespace Binance.Net.Objects.Models.Futures.Socket
 {
     /// <summary>
     /// A event received by a Binance websocket

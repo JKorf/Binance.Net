@@ -1,9 +1,9 @@
-using Newtonsoft.Json;
-using CryptoExchange.Net.Converters;
 using System;
 using Binance.Net.Interfaces;
+using CryptoExchange.Net.Converters;
+using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Futures.MarketData
+namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// Mark Price and Funding Rate

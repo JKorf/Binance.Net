@@ -1,12 +1,14 @@
 ﻿using Binance.Net.Clients.Rest.Spot;
 using Binance.Net.Interfaces;
-using Binance.Net.Interfaces.Clients.Rest.Margin;
 using Binance.Net.Interfaces.Clients.Rest.UsdFutures;
 using Binance.Net.Objects;
 using Binance.Net.UnitTests.TestImplementations;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Binance.Net.Interfaces.Clients.Rest.CoinFutures;
+using Binance.Net.Interfaces.Clients.Rest.Spot;
+using CryptoExchange.Net.Interfaces;
 
 namespace Binance.Net.UnitTests
 {
@@ -14,13 +16,13 @@ namespace Binance.Net.UnitTests
     public class JsonTests
     {
         private JsonToObjectComparer<IBinanceClientSpot> _comparer = new JsonToObjectComparer<IBinanceClientSpot>((json) => TestHelpers.CreateResponseClient(json, new BinanceClientSpotOptions()
-        { ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), AutoTimestamp = false }));
+        { ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), AutoTimestamp = false, RateLimiters = new List<IRateLimiter>()}));
 
         private JsonToObjectComparer<IBinanceClientCoinFutures> _comparerCoin = new JsonToObjectComparer<IBinanceClientCoinFutures>((json) => TestHelpers.CreateResponseClientCoin(json, new BinanceClientCoinFuturesOptions()
-        { ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), AutoTimestamp = false }));
+        { ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), AutoTimestamp = false, RateLimiters = new List<IRateLimiter>() }));
 
         private JsonToObjectComparer<IBinanceClientUsdFutures> _comparerUsd = new JsonToObjectComparer<IBinanceClientUsdFutures>((json) => TestHelpers.CreateResponseClientUsd(json, new BinanceClientUsdFuturesOptions()
-        { ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), AutoTimestamp = false }));
+        { ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), AutoTimestamp = false, RateLimiters = new List<IRateLimiter>() }));
 
 
         [Test]

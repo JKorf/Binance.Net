@@ -3,12 +3,11 @@ using System.Linq;
 using Binance.Net.Objects;
 using Binance.Net.UnitTests.TestImplementations;
 using NUnit.Framework;
-using Binance.Net.Objects.Spot.UserStream;
-using Binance.Net.Objects.Spot.MarketStream;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces;
-using Binance.Net.Objects.Spot;
 using System.Threading.Tasks;
+using Binance.Net.Objects.Models;
+using Binance.Net.Objects.Models.Spot.Socket;
 using Microsoft.Extensions.Logging;
 
 namespace Binance.Net.UnitTests

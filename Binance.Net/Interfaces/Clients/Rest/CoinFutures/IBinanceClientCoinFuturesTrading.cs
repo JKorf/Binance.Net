@@ -1,15 +1,12 @@
-﻿using Binance.Net.Enums;
-using Binance.Net.Objects.Futures.FuturesData;
-using Binance.Net.Objects.Spot.MarginData;
-using Binance.Net.Objects.Spot.SpotData;
-using CryptoExchange.Net.Objects;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Binance.Net.Enums;
+using Binance.Net.Objects.Models.Futures;
+using CryptoExchange.Net.Objects;
 
-namespace Binance.Net.Interfaces.Clients.Rest.Margin
+namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 {
     public interface IBinanceClientCoinFuturesTrading
     {

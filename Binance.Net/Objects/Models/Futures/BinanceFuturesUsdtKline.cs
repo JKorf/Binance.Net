@@ -1,8 +1,7 @@
-﻿using Binance.Net.Objects.Shared;
-using CryptoExchange.Net.Converters;
+﻿using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Futures.MarketData
+namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// Candlestick information for symbol

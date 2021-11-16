@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Diagnostics;
-using Binance.Net.Objects.Spot.MarketData;
+using Binance.Net.Objects.Models.Spot;
 
 namespace Binance.Net.Converters
 {

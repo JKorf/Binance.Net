@@ -12,19 +12,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using CryptoExchange.Net.Objects;
-using Binance.Net.Objects.Spot.SpotData;
-using Binance.Net.Objects.Spot.MarketData;
-using Binance.Net.Objects.Spot.WalletData;
-using Binance.Net.Objects.Spot.UserData;
-using Binance.Net.Objects.Spot.MarginData;
-using Binance.Net.Objects.Spot;
 using Binance.Net.Enums;
-using Binance.Net.Objects.Futures.FuturesData;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Binance.Net.Clients.Rest.Spot;
 using System.Reflection;
 using System.Diagnostics;
+using Binance.Net.Clients.Socket;
+using Binance.Net.Objects.Models.Spot;
 using CryptoExchange.Net.Sockets;
 
 namespace Binance.Net.UnitTests

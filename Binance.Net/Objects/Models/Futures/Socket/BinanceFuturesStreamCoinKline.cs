@@ -2,12 +2,11 @@
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces;
-using Binance.Net.Objects.Shared;
-using Binance.Net.Objects.Spot.MarketData;
+using Binance.Net.Objects.Models.Spot;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Futures.MarketStream
+namespace Binance.Net.Objects.Models.Futures.Socket
 {
     /// <summary>
     /// Wrapper for kline information for a symbol

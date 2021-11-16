@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Binance.Net.Objects.BSwap
+namespace Binance.Net.Objects.Models.Spot.BSwap
 {
     /// <summary>
     /// Preview result

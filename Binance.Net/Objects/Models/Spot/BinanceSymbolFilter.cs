@@ -2,7 +2,7 @@
 using Binance.Net.Enums;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.MarketData
+namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// A filter for order placed on a symbol.

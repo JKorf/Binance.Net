@@ -4,7 +4,7 @@ using Binance.Net.Enums;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.Futures
+namespace Binance.Net.Objects.Models.Spot.Futures
 {
     /// <summary>
     /// Repay history

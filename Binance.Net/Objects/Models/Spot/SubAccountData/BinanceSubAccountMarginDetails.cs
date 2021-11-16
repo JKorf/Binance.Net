@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Binance.Net.Objects.Spot.MarginData;
+using Binance.Net.Objects.Models.Spot.Margin;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.SubAccountData
+namespace Binance.Net.Objects.Models.Spot.SubAccountData
 {
     /// <summary>
     /// Sub account margin trade details

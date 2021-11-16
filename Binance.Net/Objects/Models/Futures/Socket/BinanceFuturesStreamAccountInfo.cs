@@ -1,11 +1,11 @@
 using System;
+using System.Collections.Generic;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
-using Newtonsoft.Json;
-using System.Collections.Generic;
 using CryptoExchange.Net.Converters;
+using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Futures.UserStream
+namespace Binance.Net.Objects.Models.Futures.Socket
 {
     /// <summary>
     /// Account update

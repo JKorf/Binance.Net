@@ -1,4 +1,4 @@
-﻿namespace Binance.Net
+﻿namespace Binance.Net.Objects
 {
     /// <summary>
     /// Api addresses

@@ -1,8 +1,8 @@
-﻿using CryptoExchange.Net.Converters;
+﻿using System;
+using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
-using System;
 
-namespace Binance.Net.Objects.Other
+namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Permissions of the current API key

@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Spot.MarginData
+namespace Binance.Net.Objects.Models.Spot.Margin
 {
     /// <summary>
     /// Information about margin account

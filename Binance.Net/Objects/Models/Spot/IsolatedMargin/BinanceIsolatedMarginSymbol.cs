@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Spot.IsolatedMarginData
+﻿namespace Binance.Net.Objects.Models.Spot.IsolatedMargin
 {
     /// <summary>
     /// Isolated margin symbol info
