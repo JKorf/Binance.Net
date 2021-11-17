@@ -2,7 +2,6 @@
 using CryptoExchange.Net.Objects;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Objects.Models.Futures;
@@ -82,7 +81,6 @@ namespace Binance.Net.Interfaces.Clients.Rest.UsdFutures
         /// <param name="symbol">The symbol the order is for</param>
         /// <param name="orderId">The order id of the order</param>
         /// <param name="origClientOrderId">The client order id of the order</param>
-        /// <param name="newClientOrderId">Unique identifier for this cancel</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for canceled order</returns>

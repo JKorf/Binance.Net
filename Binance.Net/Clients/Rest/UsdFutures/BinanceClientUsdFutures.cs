@@ -19,7 +19,7 @@ using Binance.Net.Objects.Models.Spot;
 
 namespace Binance.Net.Clients.Rest.UsdFutures
 {
-    /// <inheritdoc />
+    /// <inheritdoc cref="IBinanceClientUsdFutures" />
     public class BinanceClientUsdFutures : BinanceBaseClient, IBinanceClientUsdFutures, IExchangeClient
     {
         #region fields 

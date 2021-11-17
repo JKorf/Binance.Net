@@ -1,11 +1,9 @@
 ﻿using Binance.Net.Enums;
-using Binance.Net.Objects;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Objects.Models;

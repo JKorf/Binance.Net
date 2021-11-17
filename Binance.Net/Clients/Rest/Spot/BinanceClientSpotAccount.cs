@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients.Rest.Spot;
-using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot;
@@ -1010,11 +1009,11 @@ namespace Binance.Net.Clients.Rest.Spot
                     : JsonConvert.SerializeObject(to, new IsolatedMarginTransferDirectionConverter(false)));
             parameters.AddOptionalParameter("startTime",
                 startTime != null
-                    ? BinanceClientSpot.ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture)
+                    ? BinanceBaseClient.ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture)
                     : null);
             parameters.AddOptionalParameter("endTime",
                 endTime != null
-                    ? BinanceClientSpot.ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture)
+                    ? BinanceBaseClient.ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture)
                     : null);
             parameters.AddOptionalParameter("current", current?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("size", limit?.ToString(CultureInfo.InvariantCulture));

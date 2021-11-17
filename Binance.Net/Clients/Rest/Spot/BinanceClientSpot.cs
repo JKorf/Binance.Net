@@ -21,7 +21,7 @@ using Binance.Net.Objects.Models.Spot;
 
 namespace Binance.Net.Clients.Rest.Spot
 {
-    /// <inheritdoc />
+    /// <inheritdoc cref="IBinanceClientSpot" />
     public class BinanceClientSpot : BinanceBaseClient, IBinanceClientSpot, IExchangeClient
     {
         #region fields 

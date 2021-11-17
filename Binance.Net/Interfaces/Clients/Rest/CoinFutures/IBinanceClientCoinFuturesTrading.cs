@@ -81,7 +81,6 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
         /// <param name="symbol">The symbol the order is for</param>
         /// <param name="orderId">The order id of the order</param>
         /// <param name="origClientOrderId">The client order id of the order</param>
-        /// <param name="newClientOrderId">Unique identifier for this cancel</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for canceled order</returns>
@@ -149,7 +148,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of orders</returns>
-        Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetOrdersAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetOrdersAsync(string? symbol = null, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets a list of users forced orders

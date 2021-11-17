@@ -81,7 +81,7 @@ namespace Binance.Net.Objects.Models.Futures
 
         decimal ICommonTrade.CommonFee => Fee;
 
-        string? ICommonTrade.CommonFeeAsset => FeeAsset;
+        string ICommonTrade.CommonFeeAsset => FeeAsset;
 
         DateTime ICommonTrade.CommonTradeTime => Timestamp;
     }

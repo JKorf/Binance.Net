@@ -89,7 +89,12 @@ namespace Binance.Net.Clients.Rest
             throw new ArgumentException("Unsupported timespan for Binance Klines, check supported intervals using Binance.Net.Enums.KlineInterval");
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Get the symbol name for sending requests to the Binance server based on a base and quote asset
+        /// </summary>
+        /// <param name="baseAsset">The base asset name</param>
+        /// <param name="quoteAsset">The quote asset name</param>
+        /// <returns></returns>
         public string GetSymbolName(string baseAsset, string quoteAsset) =>
             (baseAsset + quoteAsset).ToUpper(CultureInfo.InvariantCulture);
 

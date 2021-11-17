@@ -204,10 +204,9 @@ namespace Binance.Net.Clients.Rest.UsdFutures
             var result = new List<CallResult<BinanceFuturesPlacedOrder>>();
             foreach (var item in response.Data)
             {
-                if (item.Code != 0)
-                    result.Add(new CallResult<BinanceFuturesPlacedOrder>(null, new ServerError(item.Code, item.Message)));
-                else
-                    result.Add(new CallResult<BinanceFuturesPlacedOrder>(item, null));
+                result.Add(item.Code != 0
+                    ? new CallResult<BinanceFuturesPlacedOrder>(null, new ServerError(item.Code, item.Message))
+                    : new CallResult<BinanceFuturesPlacedOrder>(item, null));
             }
 
             return response.As<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>(result);
@@ -355,10 +354,9 @@ namespace Binance.Net.Clients.Rest.UsdFutures
             var result = new List<CallResult<BinanceFuturesCancelOrder>>();
             foreach (var item in response.Data)
             {
-                if (item.Code != 0)
-                    result.Add(new CallResult<BinanceFuturesCancelOrder>(null, new ServerError(item.Code, item.Message)));
-                else
-                    result.Add(new CallResult<BinanceFuturesCancelOrder>(item, null));
+                result.Add(item.Code != 0
+                    ? new CallResult<BinanceFuturesCancelOrder>(null, new ServerError(item.Code, item.Message))
+                    : new CallResult<BinanceFuturesCancelOrder>(item, null));
             }
 
             return response.As<IEnumerable<CallResult<BinanceFuturesCancelOrder>>>(result);
@@ -387,7 +385,7 @@ namespace Binance.Net.Clients.Rest.UsdFutures
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceFuturesOrder>(_baseClient.GetUrl(openOrderEndpoint, api, "1"), HttpMethod.Get, ct, parameters, true, weight: symbol == null ? 40: 1).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceFuturesOrder>(_baseClient.GetUrl(openOrderEndpoint, api, "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -408,7 +406,7 @@ namespace Binance.Net.Clients.Rest.UsdFutures
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("symbol", symbol);
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesOrder>>(_baseClient.GetUrl(openOrdersEndpoint, api, "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesOrder>>(_baseClient.GetUrl(openOrdersEndpoint, api, "1"), HttpMethod.Get, ct, parameters, true, weight: symbol == null ? 40 : 1).ConfigureAwait(false);
         }
 
         #endregion

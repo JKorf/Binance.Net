@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients.Rest.Spot;
-using Binance.Net.Objects;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot.Mining;
 using CryptoExchange.Net;
@@ -62,7 +61,7 @@ namespace Binance.Net.Clients.Rest.Spot
                 return WebCallResult<IEnumerable<BinanceMiningCoin>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<IEnumerable<BinanceMiningCoin>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
+                return WebCallResult<IEnumerable<BinanceMiningCoin>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }
@@ -83,7 +82,7 @@ namespace Binance.Net.Clients.Rest.Spot
                 return WebCallResult<IEnumerable<BinanceMiningAlgorithm>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<IEnumerable<BinanceMiningAlgorithm>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
+                return WebCallResult<IEnumerable<BinanceMiningAlgorithm>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }
@@ -112,7 +111,7 @@ namespace Binance.Net.Clients.Rest.Spot
                 return WebCallResult<IEnumerable<BinanceMinerDetails>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<IEnumerable<BinanceMinerDetails>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
+                return WebCallResult<IEnumerable<BinanceMinerDetails>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }
@@ -143,7 +142,7 @@ namespace Binance.Net.Clients.Rest.Spot
                 return WebCallResult<BinanceMinerList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<BinanceMinerList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
+                return WebCallResult<BinanceMinerList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }
@@ -175,7 +174,7 @@ namespace Binance.Net.Clients.Rest.Spot
                 return WebCallResult<BinanceRevenueList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<BinanceRevenueList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
+                return WebCallResult<BinanceRevenueList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }
@@ -207,7 +206,7 @@ namespace Binance.Net.Clients.Rest.Spot
                 return WebCallResult<BinanceOtherRevenueList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<BinanceOtherRevenueList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
+                return WebCallResult<BinanceOtherRevenueList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }
@@ -232,7 +231,7 @@ namespace Binance.Net.Clients.Rest.Spot
                 return WebCallResult<BinanceMiningStatistic>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<BinanceMiningStatistic>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
+                return WebCallResult<BinanceMiningStatistic>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }
@@ -257,7 +256,7 @@ namespace Binance.Net.Clients.Rest.Spot
                 return WebCallResult<IEnumerable<BinanceMiningAccount>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<IEnumerable<BinanceMiningAccount>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
+                return WebCallResult<IEnumerable<BinanceMiningAccount>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }
@@ -279,7 +278,7 @@ namespace Binance.Net.Clients.Rest.Spot
                 return WebCallResult<BinanceHashrateResaleList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<BinanceHashrateResaleList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
+                return WebCallResult<BinanceHashrateResaleList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }
@@ -307,7 +306,7 @@ namespace Binance.Net.Clients.Rest.Spot
                 return WebCallResult<BinanceHashrateResaleDetails>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<BinanceHashrateResaleDetails>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
+                return WebCallResult<BinanceHashrateResaleDetails>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }
@@ -339,7 +338,7 @@ namespace Binance.Net.Clients.Rest.Spot
                 return WebCallResult<int>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<int>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
+                return WebCallResult<int>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }
@@ -365,7 +364,7 @@ namespace Binance.Net.Clients.Rest.Spot
                 return WebCallResult<bool>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<bool>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
+                return WebCallResult<bool>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }

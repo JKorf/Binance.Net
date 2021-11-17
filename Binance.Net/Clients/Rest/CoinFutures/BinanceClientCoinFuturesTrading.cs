@@ -204,10 +204,9 @@ namespace Binance.Net.Clients.Rest.CoinFutures
             var result = new List<CallResult<BinanceFuturesPlacedOrder>>();
             foreach (var item in response.Data)
             {
-                if (item.Code != 0)
-                    result.Add(new CallResult<BinanceFuturesPlacedOrder>(null, new ServerError(item.Code, item.Message)));
-                else
-                    result.Add(new CallResult<BinanceFuturesPlacedOrder>(item, null));
+                result.Add(item.Code != 0
+                    ? new CallResult<BinanceFuturesPlacedOrder>(null, new ServerError(item.Code, item.Message))
+                    : new CallResult<BinanceFuturesPlacedOrder>(item, null));
             }
 
             return response.As<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>(result);
@@ -354,10 +353,9 @@ namespace Binance.Net.Clients.Rest.CoinFutures
             var result = new List<CallResult<BinanceFuturesCancelOrder>>();
             foreach (var item in response.Data)
             {
-                if (item.Code != 0)
-                    result.Add(new CallResult<BinanceFuturesCancelOrder>(null, new ServerError(item.Code, item.Message)));
-                else
-                    result.Add(new CallResult<BinanceFuturesCancelOrder>(item, null));
+                result.Add(item.Code != 0
+                    ? new CallResult<BinanceFuturesCancelOrder>(null, new ServerError(item.Code, item.Message))
+                    : new CallResult<BinanceFuturesCancelOrder>(item, null));
             }
 
             return response.As<IEnumerable<CallResult<BinanceFuturesCancelOrder>>>(result);
@@ -415,7 +413,7 @@ namespace Binance.Net.Clients.Rest.CoinFutures
         #region All Orders
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetOrdersAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetOrdersAsync(string? symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -424,9 +422,9 @@ namespace Binance.Net.Clients.Rest.CoinFutures
 
             var parameters = new Dictionary<string, object>
             {
-                { "symbol", symbol },
                 { "timestamp", _baseClient.GetTimestamp() }
             };
+            parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("orderId", orderId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("startTime", startTime.HasValue ? JsonConvert.SerializeObject(startTime.Value, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("endTime", endTime.HasValue ? JsonConvert.SerializeObject(endTime.Value, new TimestampConverter()) : null);

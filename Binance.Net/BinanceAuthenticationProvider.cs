@@ -13,15 +13,15 @@ namespace Binance.Net
 {
     internal class BinanceAuthenticationProvider : AuthenticationProvider
     {
-        private readonly object signLock = new object();
-        private readonly HMACSHA256 encryptor;
+        private readonly object _signLock = new object();
+        private readonly HMACSHA256 _encryptor;
 
         public BinanceAuthenticationProvider(ApiCredentials credentials) : base(credentials)
         {
             if (credentials.Secret == null)
                 throw new ArgumentException("No valid API credentials provided. Key/Secret needed.");
 
-            encryptor = new HMACSHA256(Encoding.ASCII.GetBytes(credentials.Secret.GetString()));
+            _encryptor = new HMACSHA256(Encoding.ASCII.GetBytes(credentials.Secret.GetString()));
         }
 
         public override Dictionary<string, object> AddAuthenticationToParameters(string uri, HttpMethod method, Dictionary<string, object> parameters, bool signed, HttpMethodParameterPosition parameterPosition, ArrayParametersSerialization arraySerialization)
@@ -51,8 +51,8 @@ namespace Binance.Net
                 signData = formData.ToString();
             }
 
-            lock (signLock)
-                parameters.Add("signature", ByteToString(encryptor.ComputeHash(Encoding.UTF8.GetBytes(signData))));
+            lock (_signLock)
+                parameters.Add("signature", ByteToString(_encryptor.ComputeHash(Encoding.UTF8.GetBytes(signData))));
             return parameters;
         }
 

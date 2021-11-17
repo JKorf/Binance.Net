@@ -70,7 +70,7 @@ namespace Binance.Net.Clients.Socket
         /// <param name="options">The options to use for this client</param>
         public BinanceSocketClientCoinFutures(BinanceSocketClientCoinFuturesOptions options) : base("Binance", options, options.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.ApiCredentials))
         {
-            SetDataInterpreter((byte[] data) => { return string.Empty; }, null);
+            SetDataInterpreter((byte[] data) => string.Empty, null);
             RateLimitPerSocketPerSecond = 4;
         }
         #endregion 
@@ -536,7 +536,7 @@ namespace Binance.Net.Clients.Socket
             var result = message["result"];
             if (result != null && result.Type == JTokenType.Null)
             {
-                log.Write(Microsoft.Extensions.Logging.LogLevel.Trace, $"Socket {s.Socket.Id} Subscription completed");
+                log.Write(LogLevel.Trace, $"Socket {s.Socket.Id} Subscription completed");
                 callResult = new CallResult<object>(null, null);
                 return true;
             }
@@ -544,7 +544,7 @@ namespace Binance.Net.Clients.Socket
             var error = message["error"];
             if (error == null)
             {
-                callResult = new CallResult<object>(null, new ServerError("Unknown error: " + message.ToString()));
+                callResult = new CallResult<object>(null, new ServerError("Unknown error: " + message));
                 return true;
             }
 

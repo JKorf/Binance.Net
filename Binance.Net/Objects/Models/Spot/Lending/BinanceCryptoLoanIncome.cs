@@ -30,10 +30,11 @@ namespace Binance.Net.Objects.Models.Spot.Lending
         /// </summary>
         [JsonConverter(typeof(TimestampConverter))]
         public DateTime Timestamp { get; set; }
+
         /// <summary>
         /// Transaction id
         /// </summary>
         [JsonProperty("tranId")]
-        public string TransactionId { get; set; }
+        public string TransactionId { get; set; } = string.Empty;
     }
 }

@@ -18,7 +18,7 @@ using Binance.Net.Objects.Models.Futures;
 
 namespace Binance.Net.Clients.Rest.CoinFutures
 {
-    /// <inheritdoc />
+    /// <inheritdoc cref="IBinanceClientCoinFutures" />
     public class BinanceClientCoinFutures : BinanceBaseClient, IBinanceClientCoinFutures, IExchangeClient
     {
         #region fields 
