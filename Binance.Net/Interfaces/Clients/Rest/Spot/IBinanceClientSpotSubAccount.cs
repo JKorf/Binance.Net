@@ -17,6 +17,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
     {
         /// <summary>
         /// Gets a list of sub accounts associated with this master account
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-sub-account-list-for-master-account" /></para>
         /// </summary>
         /// <param name="email">Filter the list by email</param>
         /// <param name="page">The page of the results</param>
@@ -29,6 +30,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets the transfer history of a sub account (from the master account) 
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-sub-account-spot-asset-transfer-history-for-master-account" /></para>
         /// </summary>
         /// <param name="fromEmail">Filter the history by from email</param>
         /// <param name="toEmail">Filter the history by to email</param>
@@ -43,6 +45,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Transfers an asset form/to a sub account. If fromEmail or toEmail is not send it is interpreted as from/to the master account. Transfer between futures accounts is not supported
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#sub-account-futures-asset-transfer-for-master-account" /></para>
         /// </summary>
         /// <param name="fromEmail">From which account to transfer</param>
         /// <param name="fromAccountType">Account type to transfer from</param>
@@ -57,6 +60,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets list of balances for a sub account
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-sub-account-assets-for-master-account" /></para>
         /// </summary>
         /// <param name="email">For which account to get the assets</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -66,6 +70,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets the deposit address for an asset to a sub account
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-sub-account-deposit-address-for-master-account" /></para>
         /// </summary>
         /// <param name="email">The email of the account to deposit to</param>
         /// <param name="asset">The asset of the deposit</param>
@@ -77,6 +82,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets the deposit history for a sub account
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-sub-account-deposit-history-for-master-account" /></para>
         /// </summary>
         /// <param name="email">The email of the account to get history for</param>
         /// <param name="asset">Filter for an asset</param>
@@ -91,6 +97,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get Sub-account's Status on Margin/Futures(For Master Account)
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-sub-account-39-s-status-on-margin-futures-for-master-account" /></para>
         /// </summary>
         /// <param name="email">Filter the list by email</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -100,6 +107,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Enables margin for a sub account
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#enable-margin-for-sub-account-for-master-account" /></para>
         /// </summary>
         /// <param name="email">The email of the account to enable margin for</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -109,6 +117,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets margin details for a sub account
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-detail-on-sub-account-39-s-margin-account-for-master-account" /></para>
         /// </summary>
         /// <param name="email">The email of the account to get margin details for</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -118,6 +127,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets margin summary for sub accounts
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-summary-of-sub-account-39-s-margin-account-for-master-account" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -126,6 +136,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Enables futures for a sub account
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#enable-futures-for-sub-account-for-master-account" /></para>
         /// </summary>
         /// <param name="email">The sub account email to enable futures for</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -135,6 +146,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets futures details for a sub account
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-detail-on-sub-account-39-s-futures-account-for-master-account" /></para>
         /// </summary>
         /// <param name="email">The email of the account to get future details for</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -144,6 +156,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets futures summary for sub accounts
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-summary-of-sub-account-39-s-futures-account-for-master-account" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -152,6 +165,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets futures position risk for a sub account
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-futures-position-risk-of-sub-account-for-master-account" /></para>
         /// </summary>
         /// <param name="email">Email of the sub account</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -161,6 +175,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Transfers from or to a futures sub account
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#futures-transfer-for-sub-account-for-master-account" /></para>
         /// </summary>
         /// <param name="email">Email of the sub account</param>
         /// <param name="asset">The asset to transfer</param>
@@ -173,6 +188,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Transfers from or to a margin sub account
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#margin-transfer-for-sub-account-for-master-account" /></para>
         /// </summary>
         /// <param name="email">Email of the sub account</param>
         /// <param name="asset">The asset to transfer</param>
@@ -185,6 +201,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Transfers to another sub account of the same master
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#transfer-to-sub-account-of-same-master-for-sub-account" /></para>
         /// </summary>
         /// <param name="email">Email of the sub account</param>
         /// <param name="asset">The asset to transfer</param>
@@ -196,6 +213,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Transfers to master account
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#transfer-to-master-for-sub-account" /></para>
         /// </summary>
         /// <param name="asset">The asset to transfer</param>
         /// <param name="quantity">The quantity to transfer</param>
@@ -206,6 +224,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets the transfer history of a sub account (from the sub account)
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#sub-account-transfer-history-for-sub-account" /></para>
         /// </summary>
         /// <param name="asset">The asset</param>
         /// <param name="type">Filter by type of transfer</param>
@@ -219,6 +238,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get BTC valued asset summary of subaccounts.
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-sub-account-spot-assets-summary-for-master-account" /></para>
         /// </summary>
         /// <param name="email">Email of the sub account</param>
         /// <param name="page">The page</param>
@@ -230,6 +250,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Create a virtual sub account
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#create-a-virtual-sub-account-for-master-account" /></para>
         /// </summary>
         /// <param name="subAccountString">String based with which a subaccount email will be generated. Should not contain special characters</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -239,6 +260,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Enable or disable blvt
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#enable-leverage-token-for-sub-account-for-master-account" /></para>
         /// </summary>
         /// <param name="email">Email of the sub account</param>
         /// <param name="enable">Enable or disable (only true for now)</param>
@@ -249,20 +271,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets a list of universal transfers
-        /// </summary>
-        /// <param name="fromEmail">Filter the list by from email (fromEmail and toEmail cannot be present at same time)</param>
-        /// <param name="toEmail">Filter the list by to email (fromEmail and toEmail cannot be present at same time)</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="page">The page of the results</param>
-        /// <param name="limit">The max amount of results to return (Default 500, max 500)</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of universal transfers</returns>
-        WebCallResult<IEnumerable<BinanceSubAccountUniversalTransferTransaction>> GetUniversalTransferHistory(string? fromEmail = null, string? toEmail = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
-
-        /// <summary>
-        /// Gets a list of universal transfers
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-universal-transfer-history-for-master-account" /></para>
         /// </summary>
         /// <param name="fromEmail">Filter the list by from email (fromEmail and toEmail cannot be present at same time)</param>
         /// <param name="toEmail">Filter the list by to email (fromEmail and toEmail cannot be present at same time)</param>
@@ -274,5 +283,48 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of universal transfers</returns>
         Task<WebCallResult<IEnumerable<BinanceSubAccountUniversalTransferTransaction>>> GetUniversalTransferHistoryAsync(string? fromEmail = null, string? toEmail = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Toggle IP restriction for an API key
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#enable-or-disable-ip-restriction-for-a-sub-account-api-key-for-master-account" /></para>
+        /// </summary>
+        /// <param name="apiKey">The api key</param>
+        /// <param name="enable">Enable or disable</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceIpRestriction>> ToggleIpRestrictionForApiKeyAsync(string apiKey, bool enable, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Add IP addresses to the ip whitelist for an API key
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#add-ip-list-for-a-sub-account-api-key-for-master-account" /></para>
+        /// </summary>
+        /// <param name="apiKey">The api key</param>
+        /// <param name="ipAddresses">Addresses to whitelist</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceIpRestriction>> AddIpToWhitelistForApiKeyAsync(string apiKey, IEnumerable<string> ipAddresses, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Remove IP addresses from the ip whitelist for an API key
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#delete-ip-list-for-a-sub-account-api-key-for-master-account" /></para>
+        /// </summary>
+        /// <param name="apiKey">The api key</param>
+        /// <param name="ipAddresses">Addresses to remove from whitelist</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceIpRestriction>> RemoveIpFromWhitelistForApiKeyAsync(string apiKey, IEnumerable<string> ipAddresses, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get the current whitelisted ip addresses for an API key
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-ip-restriction-for-a-sub-account-api-key-for-master-account" /></para>
+        /// </summary>
+        /// <param name="apiKey">The api key</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceIpRestriction>> GetIpWhitelistForApiKeyAsync(string apiKey, int? receiveWindow = null, CancellationToken ct = default);
     }
 }

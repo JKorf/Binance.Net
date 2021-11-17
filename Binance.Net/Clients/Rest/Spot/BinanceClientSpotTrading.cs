@@ -649,7 +649,7 @@ namespace Binance.Net.Clients.Rest.Spot
         #region Query Margin Account's Trade List
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceTrade>>> GetUserMarginTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, bool? isIsolated = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceTrade>>> GetMarginUserTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, bool? isIsolated = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             symbol.ValidateBinanceSymbol();
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);

@@ -15,6 +15,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
     {
         /// <summary>
         /// Get blvt info
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-blvt-info-market_data" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -23,6 +24,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Subscribe to a token
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#subscribe-blvt-user_data" /></para>
         /// </summary>
         /// <param name="tokenName">Name of the token to subscribe to</param>
         /// <param name="cost">Cost of the subscription</param>
@@ -33,6 +35,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get subscription records
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-subscription-record-user_data" /></para>
         /// </summary>
         /// <param name="tokenName">Filter by token</param>
         /// <param name="id">Filter by id</param>
@@ -46,6 +49,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Redeem a token
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#redeem-blvt-user_data" /></para>
         /// </summary>
         /// <param name="tokenName">Name of the token to redeem</param>
         /// <param name="quantity">Quantity to redeem</param>
@@ -56,6 +60,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get redemption records
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-redemption-record-user_data" /></para>
         /// </summary>
         /// <param name="tokenName">Filter by token</param>
         /// <param name="id">Filter by id</param>
@@ -69,6 +74,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get's historical klines
+        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#historical-blvt-nav-kline-candlestick" /></para>
         /// </summary>
         /// <param name="symbol">The token</param>
         /// <param name="interval">Kline interval</param>

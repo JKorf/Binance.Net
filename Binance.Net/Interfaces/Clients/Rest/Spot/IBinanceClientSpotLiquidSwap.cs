@@ -15,6 +15,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
     {
         /// <summary>
         /// Get all swap pools
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#list-all-swap-pools-market_data" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -23,6 +24,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get liquidity info for a pool
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-liquidity-information-of-a-pool-user_data" /></para>
         /// </summary>
         /// <param name="poolId">Get a specific pool</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -32,6 +34,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Add liquidity to a pool
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#add-liquidity-trade" /></para>
         /// </summary>
         /// <param name="poolId">The pool</param>
         /// <param name="asset">The asset</param>
@@ -44,6 +47,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Remove liquidity from a pool
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#remove-liquidity-trade" /></para>
         /// </summary>
         /// <param name="poolId">The pool</param>
         /// <param name="asset">The asset</param>
@@ -56,6 +60,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get liquidity operation records
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-liquidity-operation-record-user_data" /></para>
         /// </summary>
         /// <param name="operationId">Filter by operationId</param>
         /// <param name="poolId">Filter by poolId</param>
@@ -71,6 +76,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
         /// <summary>
         /// Request a quote for swap quote asset (selling asset) for base asset (buying asset), essentially price/exchange rates. quoteQty is quantity of quote asset(to sell).
         /// Please be noted the quote is for reference only, the actual price will change as the liquidity changes, it's recommended to swap immediate after request a quote for slippage prevention.
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#request-quote-user_data" /></para>
         /// </summary>
         /// <param name="quoteAsset">Quote asset</param>
         /// <param name="baseAsset">Base asset</param>
@@ -82,6 +88,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Swap quote asset for base asset
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#swap-trade" /></para>
         /// </summary>
         /// <param name="quoteAsset">Quote asset</param>
         /// <param name="baseAsset">Base asset</param>
@@ -93,6 +100,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get swap history records
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-swap-history-user_data" /></para>
         /// </summary>
         /// <param name="swapId">Filter by swapId</param>
         /// <param name="status">Filter by status</param>
@@ -108,6 +116,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get pool config
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-pool-configure-user_data" /></para>
         /// </summary>
         /// <param name="poolId">Id of the pool</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -117,6 +126,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Calculate expected share quantity for adding liquidity in single or dual token.
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#add-liquidity-preview-user_data" /></para>
         /// </summary>
         /// <param name="poolId">The pool</param>
         /// <param name="asset">The asset</param>
@@ -129,6 +139,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Calculate expected share quantity for removing liquidity in single or dual token.
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#remove-liquidity-preview-user_data" /></para>
         /// </summary>
         /// <param name="poolId">The pool</param>
         /// <param name="asset">The asset</param>

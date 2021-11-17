@@ -15,6 +15,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
     {
         /// <summary>
         /// Gets mining coins info
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#acquiring-coinname-market_data" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Coins info</returns>
@@ -22,6 +23,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets mining algorithms info
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#acquiring-algorithm-market_data" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Algorithms info</returns>
@@ -29,6 +31,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets miner details
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#request-for-detail-miner-list-user_data" /></para>
         /// </summary>
         /// <param name="algorithm">Algorithm</param>
         /// <param name="userName">Mining account</param>
@@ -39,6 +42,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets miner list
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#request-for-miner-list-user_data" /></para>
         /// </summary>
         /// <param name="algorithm">Algorithm</param>
         /// <param name="userName">Mining account</param>
@@ -52,6 +56,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets revenue list
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#earnings-list-user_data" /></para>
         /// </summary>
         /// <param name="algorithm">Algorithm</param>
         /// <param name="userName">Mining account</param>
@@ -66,6 +71,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get other revenue list
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#extra-bonus-list-user_data" /></para>
         /// </summary>
         /// <param name="algorithm">Algorithm</param>
         /// <param name="userName">Mining account</param>
@@ -80,6 +86,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get mining statistics
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#statistic-list-user_data" /></para>
         /// </summary>
         /// <param name="algorithm">Algorithm</param>
         /// <param name="userName">User name</param>
@@ -89,6 +96,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets mining account list
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#account-list-user_data" /></para>
         /// </summary>
         /// <param name="algorithm">Algorithm</param>
         /// <param name="userName">Mining account user name</param>
@@ -98,6 +106,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets hash rate resale list
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#hashrate-resale-list-user_data" /></para>
         /// </summary>
         /// <param name="page">Page</param>
         /// <param name="pageSize">Results per page</param>
@@ -107,6 +116,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets hash rate resale details
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#hashrate-resale-detail-user_data" /></para>
         /// </summary>
         /// <param name="configId">The mining id</param>
         /// <param name="userName">Mining account</param>
@@ -118,23 +128,25 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Hashrate resale request
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#hashrate-resale-request-user_data" /></para>
         /// </summary>
         /// <param name="userName">Mining account</param>
         /// <param name="algorithm">Transfer algorithm</param>
         /// <param name="startDate">Resale start time</param>
         /// <param name="endDate">Resale end time</param>
         /// <param name="toUser">To mining account</param>
-        /// <param name="hashRate">Results per page</param>
-        /// <param name="ct">Resale hashrate h/s must be transferred (BTC is greater than 500000000000 ETH is greater than 500000)</param>
+        /// <param name="hashRate">Resale hashrate h/s must be transferred (BTC is greater than 500000000000 ETH is greater than 500000)</param>
+        /// <param name="ct">Cancellation token</param>
         /// <returns>Mining account</returns>
         Task<WebCallResult<int>> PlaceHashrateResaleRequestAsync(string userName, string algorithm, DateTime startDate, DateTime endDate, string toUser, decimal hashRate, CancellationToken ct = default);
 
         /// <summary>
         /// Cancel Hashrate Resale Configuration
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#cancel-hashrate-resale-configuration-user_data" /></para>
         /// </summary>
         /// <param name="configId">Mining id</param>
         /// <param name="userName">Mining account</param>
-        /// <param name="ct">Resale hashrate h/s must be transferred (BTC is greater than 500000000000 ETH is greater than 500000)</param>
+        /// <param name="ct">Cancellation token</param>
         /// <returns>Success</returns>
         Task<WebCallResult<bool>> CancelHashrateResaleRequestAsync(int configId, string userName, CancellationToken ct = default);
     }

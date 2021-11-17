@@ -15,6 +15,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
     {
         /// <summary>
         /// Get product list
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-product-list-user_data" /></para>
         /// </summary>
         /// <param name="status">Filter by status</param>
         /// <param name="featured">Filter by featured</param>
@@ -27,6 +28,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get the purchase quota left for a product
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-left-daily-purchase-quota-of-flexible-product-user_data" /></para>
         /// </summary>
         /// <param name="productId">Id of the product</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -36,6 +38,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Purchase flexible product
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#purchase-flexible-product-user_data" /></para>
         /// </summary>
         /// <param name="productId">Id of the product</param>
         /// <param name="quantity">The quantity to purchase</param>
@@ -46,6 +49,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get the redemption quota left for a product
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-left-daily-redemption-quota-of-flexible-product-user_data" /></para>
         /// </summary>
         /// <param name="productId">Id of the product</param>
         /// <param name="type">Type</param>
@@ -56,6 +60,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Redeem flexible product
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#redeem-flexible-product-user_data" /></para>
         /// </summary>
         /// <param name="productId">Id of the product</param>
         /// <param name="type">Redeem type</param>
@@ -67,6 +72,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get flexible product position
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-product-position-user_data" /></para>
         /// </summary>
         /// <param name="asset">Asset</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -76,6 +82,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get fixed and customized fixed project list
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-fixed-and-activity-project-list-user_data" /></para>
         /// </summary>
         /// <param name="type">Type of project</param>
         /// <param name="asset">Asset</param>
@@ -92,6 +99,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Purchase customized fixed project
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#purchase-fixed-activity-project-user_data" /></para>
         /// </summary>
         /// <param name="projectId">Id of the project</param>
         /// <param name="lot">The lot</param>
@@ -102,6 +110,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get customized fixed project position
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-fixed-activity-project-position-user_data" /></para>
         /// </summary>
         /// <param name="asset">Asset</param>
         /// <param name="projectId">The project id</param>
@@ -113,6 +122,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get lending account info
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#lending-account-user_data" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -121,6 +131,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get purchase records
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-purchase-record-user_data" /></para>
         /// </summary>
         /// <param name="lendingType">Lending type</param>
         /// <param name="asset">Asset</param>
@@ -135,6 +146,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get redemption records
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-redemption-record-user_data" /></para>
         /// </summary>
         /// <param name="lendingType">Lending type</param>
         /// <param name="asset">Asset</param>
@@ -149,6 +161,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get interest history
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-interest-history-user_data-2" /></para>
         /// </summary>
         /// <param name="lendingType">Lending type</param>
         /// <param name="asset">Asset</param>
@@ -163,6 +176,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Changed fixed/activity position to daily position
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#change-fixed-activity-position-to-daily-position-user_data" /></para>
         /// </summary>
         /// <param name="projectId">Id of the project</param>
         /// <param name="lot">The lot</param>
@@ -176,6 +190,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get income history from crypto loans
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-crypto-loans-income-history-user_data" /></para>
         /// </summary>
         /// <param name="asset">The asset</param>
         /// <param name="type">Filter by type of incoming</param>

@@ -17,6 +17,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
     {
         /// <summary>
         /// Gets the withdraw/deposit details for an asset
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#asset-detail-user_data" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -33,12 +34,14 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Pings the Binance API
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#test-connectivity" /></para>
         /// </summary>
         /// <returns>True if successful ping, false if no response</returns>
         Task<WebCallResult<long>> PingAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#check-server-time" /></para>
         /// </summary>
         /// <param name="resetAutoTimestamp">Whether the response should be used for a new auto timestamp calculation</param>
         /// <param name="ct">Cancellation token</param>
@@ -47,6 +50,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get's information about the exchange including rate limits and information on the provided symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>
         /// </summary>
         /// <param name="symbol">Symbol to get data for token</param>
         /// <param name="ct">Cancellation token</param>
@@ -55,6 +59,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get's information about the exchange including rate limits and information on the provided symbols
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>
         /// </summary>
         /// <param name="symbols">Symbols to get data for token</param>
         /// <param name="ct">Cancellation token</param>
@@ -63,6 +68,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get's information about the exchange including rate limits and symbol list
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Exchange info</returns>
@@ -70,6 +76,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets the status of the Binance platform
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#system-status-system" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The system status</returns>
@@ -77,6 +84,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets the recent trades for a symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#recent-trades-list" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get recent trades for</param>
         /// <param name="limit">Result limit</param>
@@ -86,6 +94,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets the historical  trades for a symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#old-trade-lookup-market_data" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get recent trades for</param>
         /// <param name="limit">Result limit</param>
@@ -96,6 +105,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#compressed-aggregate-trades-list" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get the trades for</param>
         /// <param name="fromId">ID to get aggregate trades from INCLUSIVE.</param>
@@ -108,6 +118,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get candlestick data for the provided symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#kline-candlestick-data" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for</param>
         /// <param name="interval">The candlestick timespan</param>
@@ -121,6 +132,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets the order book for the provided symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#order-book" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get the order book for</param>
         /// <param name="limit">Max number of results</param>
@@ -130,6 +142,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets current average price for a symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#current-average-price" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for</param>
         /// <param name="ct">Cancellation token</param>
@@ -138,6 +151,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets the trade fee for a symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#trade-fee-user_data" /></para>
         /// </summary>
         /// <param name="symbol">Symbol to get withdrawal fee for</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -147,6 +161,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get data regarding the last 24 hours for the provided symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#24hr-ticker-price-change-statistics" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for</param>
         /// <param name="ct">Cancellation token</param>
@@ -156,6 +171,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get data regarding the last 24 hours for all symbols
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#24hr-ticker-price-change-statistics" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of data over the last 24 hours</returns>
@@ -171,6 +187,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets the best price/quantity on the order book for all symbols.
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#symbol-order-book-ticker" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of book prices</returns>
@@ -178,6 +195,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Gets the price of a symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#symbol-price-ticker" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get the price for</param>
         /// <param name="ct">Cancellation token</param>
@@ -186,6 +204,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get a list of the prices of all symbols
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#symbol-price-ticker" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of prices</returns>
@@ -193,6 +212,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get a margin asset
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-margin-asset-market_data" /></para>
         /// </summary>
         /// <param name="asset">The symbol to get</param>
         /// <param name="ct">Cancellation token</param>
@@ -201,6 +221,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get a margin pair
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-cross-margin-pair-market_data" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get</param>
         /// <param name="ct">Cancellation token</param>
@@ -209,6 +230,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get all assets available for margin trading
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-all-margin-assets-market_data" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of margin assets</returns>
@@ -216,6 +238,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get all asset pairs available for margin trading
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-all-cross-margin-pairs-market_data" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of margin pairs</returns>
@@ -223,6 +246,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get margin price index
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-margin-priceindex-market_data" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get</param>
         /// <param name="ct">Cancellation token</param>
@@ -231,6 +255,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Isolated margin symbol info
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-isolated-margin-symbol-user_data" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -241,6 +266,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Isolated margin symbol info
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-all-isolated-margin-symbol-user_data" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>

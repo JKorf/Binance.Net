@@ -13,6 +13,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
     {
         /// <summary>
         /// Gets account position information
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#position-information-user_data" /></para>
         /// </summary>
         /// <param name="marginAsset">Filter by margin asset</param>
         /// <param name="pair">Filter by pair</param>
@@ -24,6 +25,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Gets account information, including balances
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#account-information-user_data" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -32,6 +34,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>.
         /// Gets account balances
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#futures-account-balance-user_data" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -40,6 +43,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#change-position-mode-trade" /></para>
         /// </summary>
         /// <param name="dualPositionSide">User position mode</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -49,6 +53,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Get user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#get-current-position-mode-user_data" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -57,6 +62,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Requests to change the initial leverage of the given symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#change-initial-leverage-trade" /></para>
         /// </summary>
         /// <param name="symbol">Symbol to change the initial leverage for</param>
         /// <param name="leverage">The amount of initial leverage to change to</param>
@@ -67,6 +73,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Change the margin type for an open position
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#change-margin-type-trade" /></para>
         /// </summary>
         /// <param name="symbol">Symbol to change the position type for</param>
         /// <param name="marginType">The type of margin to use</param>
@@ -77,6 +84,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Change the margin on an open position
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#modify-isolated-position-margin-trade" /></para>
         /// </summary>
         /// <param name="symbol">Symbol to adjust the position margin for</param>
         /// <param name="amount">The amount of margin to be used</param>
@@ -89,6 +97,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Requests the margin change history for a specific symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#get-position-margin-change-history-trade" /></para>
         /// </summary>
         /// <param name="symbol">Symbol to get margin history for</param>
         /// <param name="type">Filter the history by the direction of margin change</param>
@@ -102,6 +111,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Gets the income history for the futures account
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#get-income-history-user_data" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get income history from</param>
         /// <param name="incomeType">The income type filter to apply to the request</param>
@@ -115,6 +125,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Gets Notional and Leverage Brackets.
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#notional-bracket-for-pair-user_data" /></para>
         /// </summary>
         /// <param name="symbolOrPair">The symbol or pair to get the data for</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -124,6 +135,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Get position ADL quantile estimations
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#position-adl-quantile-estimation-user_data" /></para>
         /// </summary>
         /// <param name="symbol">Only get for this symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -134,6 +146,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Gets account commission rates
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#user-commission-rate-user_data" /></para>
         /// </summary>
         /// <param name="symbol">Symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -143,6 +156,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Start a user stream. The resulting listen key can be used to subscribe to the user stream using the socket client
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#start-user-data-stream-user_stream" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -150,6 +164,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Keep alive the user stream. This should be called every 30 minutes to prevent the user stream being stopped
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#keepalive-user-data-stream-user_stream" /></para>
         /// </summary>
         /// <param name="listenKey">The listen key to keep alive</param>
         /// <param name="ct">Cancellation token</param>
@@ -158,6 +173,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Stop the user stream, no updates will be send anymore
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#close-user-data-stream-user_stream" /></para>
         /// </summary>
         /// <param name="listenKey">The listen key to stop</param>
         /// <param name="ct">Cancellation token</param>

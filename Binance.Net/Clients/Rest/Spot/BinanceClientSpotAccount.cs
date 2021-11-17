@@ -76,12 +76,6 @@ namespace Binance.Net.Clients.Rest.Spot
         private const string keepListenKeyAliveIsolatedEndpoint = "userDataStream/isolated";
         private const string closeListenKeyIsolatedEndpoint = "userDataStream/isolated";
 
-        private const string toggleIpRestrictionEndpoint = "account/apiRestrictions/ipRestriction";
-        private const string addIpRestrictionListEndpoint = "account/apiRestrictions/ipRestriction/ipList";
-        private const string getIpRestrictionListEndpoint = "account/apiRestrictions/ipRestriction";
-        private const string removeIpRestrictionListEndpoint = "account/apiRestrictions/ipRestriction/ipList";
-
-
         private const string marginApi = "sapi";
         private const string marginVersion = "1";
 
@@ -645,7 +639,7 @@ namespace Binance.Net.Clients.Rest.Spot
         #region Margin Account Transfer
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceTransaction>> TransferAsync(string asset, decimal quantity, TransferDirectionType type, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceTransaction>> CrossMarginTransferAsync(string asset, decimal quantity, TransferDirectionType type, int? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -669,7 +663,7 @@ namespace Binance.Net.Clients.Rest.Spot
         #region Margin Account Borrow
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceTransaction>> BorrowAsync(string asset, decimal quantity, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceTransaction>> MarginBorrowAsync(string asset, decimal quantity, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             if (isIsolated == true && symbol == null)
@@ -697,7 +691,7 @@ namespace Binance.Net.Clients.Rest.Spot
         #region Margin Account Repay
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceTransaction>> RepayAsync(string asset, decimal quantity, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceTransaction>> MarginRepayAsync(string asset, decimal quantity, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -722,7 +716,7 @@ namespace Binance.Net.Clients.Rest.Spot
         #region Get Transfer History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceTransferHistory>>> GetTransferHistoryAsync(TransferDirection direction, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceTransferHistory>>> GetCrossMarginTransferHistoryAsync(TransferDirection direction, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 100);
 
@@ -749,7 +743,7 @@ namespace Binance.Net.Clients.Rest.Spot
         #region Query Loan Record
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceLoan>>> GetLoansAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? limit = 10, string? isolatedSymbol = null, bool? archived = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceLoan>>> GetMarginLoansAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? limit = 10, string? isolatedSymbol = null, bool? archived = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             limit?.ValidateIntBetween(nameof(limit), 1, 100);
@@ -788,7 +782,7 @@ namespace Binance.Net.Clients.Rest.Spot
         #region Query Repay Record
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceRepay>>> GetRepaysAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, string? isolatedSymbol = null, bool? archived = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceRepay>>> GetMarginRepaysAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, string? isolatedSymbol = null, bool? archived = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -827,7 +821,7 @@ namespace Binance.Net.Clients.Rest.Spot
         #region Get Interest History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceInterestHistory>>> GetInterestHistoryAsync(string? asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? isolatedSymbol = null, bool? archived = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceInterestHistory>>> GetMarginInterestHistoryAsync(string? asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? isolatedSymbol = null, bool? archived = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 100);
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -855,7 +849,7 @@ namespace Binance.Net.Clients.Rest.Spot
         #region Get Interest Rate History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceInterestRateHistory>>> GetInterestRateHistoryAsync(string asset, string? vipLevel = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceInterestRateHistory>>> GetMarginInterestRateHistoryAsync(string asset, string? vipLevel = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             asset?.ValidateNotNull(nameof(asset));
             limit?.ValidateIntBetween(nameof(limit), 1, 100);
@@ -882,7 +876,7 @@ namespace Binance.Net.Clients.Rest.Spot
 
         #region Get Force Liquidation Record
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceForcedLiquidation>>> GetForceLiquidationHistoryAsync(int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceForcedLiquidation>>> GetMarginForcedLiquidationHistoryAsync(int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 100);
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -928,7 +922,7 @@ namespace Binance.Net.Clients.Rest.Spot
         #region Query Max Borrow
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceMarginAmount>> GetMaxBorrowAmountAsync(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceMarginAmount>> GetMarginMaxBorrowAmountAsync(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -952,7 +946,7 @@ namespace Binance.Net.Clients.Rest.Spot
         #region Query Max Transfer-Out Amount
 
         /// <inheritdoc />
-        public async Task<WebCallResult<decimal>> GetMaxTransferAmountAsync(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<decimal>> GetMarginMaxTransferAmountAsync(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -1318,81 +1312,5 @@ namespace Binance.Net.Clients.Rest.Spot
         }
         #endregion
 
-        #region IP restrictions
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceIpRestriction>> ToggleIpRestrictionForApiKeyAsync(string apiKey, bool enable, int? receiveWindow = null, CancellationToken ct = default)
-        {
-            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
-            if (!timestampResult)
-                return new WebCallResult<BinanceIpRestriction>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-
-            var parameters = new Dictionary<string, object>
-            {
-                { "accountApiKey", apiKey },
-                { "ipRestrict", enable.ToString() },
-                { "timestamp", _baseClient.GetTimestamp() },
-            };
-
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<BinanceIpRestriction>(_baseClient.GetUrl(toggleIpRestrictionEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 3000).ConfigureAwait(false);
-        }
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceIpRestriction>> AddIpToWhitelistForApiKeyAsync(string apiKey, IEnumerable<string> ipAddresses, int? receiveWindow = null, CancellationToken ct = default)
-        {
-            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
-            if (!timestampResult)
-                return new WebCallResult<BinanceIpRestriction>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-
-            var parameters = new Dictionary<string, object>
-            {
-                { "accountApiKey", apiKey },
-                { "ipAddress", string.Join(",", ipAddresses) },
-                { "timestamp", _baseClient.GetTimestamp() },
-            };
-
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<BinanceIpRestriction>(_baseClient.GetUrl(addIpRestrictionListEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true, weight: 3000).ConfigureAwait(false);
-        }
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceIpRestriction>> RemoveIpFromWhitelistForApiKeyAsync(string apiKey, IEnumerable<string> ipAddresses, int? receiveWindow = null, CancellationToken ct = default)
-        {
-            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
-            if (!timestampResult)
-                return new WebCallResult<BinanceIpRestriction>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-
-            var parameters = new Dictionary<string, object>
-            {
-                { "accountApiKey", apiKey },
-                { "ipAddress", string.Join(",", ipAddresses) },
-                { "timestamp", _baseClient.GetTimestamp() },
-            };
-
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<BinanceIpRestriction>(_baseClient.GetUrl(removeIpRestrictionListEndpoint, "sapi", "1"), HttpMethod.Delete, ct, parameters, true, weight: 3000).ConfigureAwait(false);
-        }
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceIpRestriction>> GetIpWhitelistForApiKeyAsync(string apiKey, int? receiveWindow = null, CancellationToken ct = default)
-        {
-            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
-            if (!timestampResult)
-                return new WebCallResult<BinanceIpRestriction>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-
-            var parameters = new Dictionary<string, object>
-            {
-                { "accountApiKey", apiKey },
-                { "timestamp", _baseClient.GetTimestamp() },
-            };
-
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<BinanceIpRestriction>(_baseClient.GetUrl(getIpRestrictionListEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 3000).ConfigureAwait(false);
-        }
-        #endregion
     }
 }

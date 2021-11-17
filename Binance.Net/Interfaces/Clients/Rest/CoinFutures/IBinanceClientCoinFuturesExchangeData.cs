@@ -13,12 +13,14 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
     {
         /// <summary>
         /// Pings the Binance Futures API
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#test-connectivity" /></para>
         /// </summary>
         /// <returns>True if successful ping, false if no response</returns>
         Task<WebCallResult<long>> PingAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#check-server-time" /></para>
         /// </summary>
         /// <param name="resetAutoTimestamp">Whether the response should be used for a new auto timestamp calculation</param>
         /// <param name="ct">Cancellation token</param>
@@ -27,6 +29,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Get's information about the exchange including rate limits and symbol list
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#exchange-information" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Exchange info</returns>
@@ -34,6 +37,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Gets the recent trades for a symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#recent-trades-list" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get recent trades for</param>
         /// <param name="limit">Result limit</param>
@@ -43,6 +47,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Gets the historical  trades for a symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#old-trades-lookup-market_data" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get recent trades for</param>
         /// <param name="limit">Result limit</param>
@@ -53,6 +58,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Gets compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#compressed-aggregate-trades-list" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get the trades for</param>
         /// <param name="fromId">ID to get aggregate trades from INCLUSIVE.</param>
@@ -65,6 +71,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Get candlestick data for the provided symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#kline-candlestick-data" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for</param>
         /// <param name="interval">The candlestick timespan</param>
@@ -78,6 +85,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Get funding rate history for the provided symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#index-price-and-mark-price" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for</param>
         /// <param name="startTime">Start time to get funding rate history</param>
@@ -89,6 +97,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Gets Top Trader Long/Short Ratio (Accounts)
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#top-trader-long-short-ratio-accounts" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for</param>
         /// <param name="period">The period timespan</param>
@@ -101,6 +110,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Gets Top Trader Long/Short Ratio (Positions)
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#top-trader-long-short-ratio-positions" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for</param>
         /// <param name="period">The period timespan</param>
@@ -113,6 +123,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Gets Global Long/Short Ratio (Accounts)
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#long-short-ratio" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for</param>
         /// <param name="period">The period timespan</param>
@@ -125,6 +136,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Kline/candlestick bars for the mark price of a symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#mark-price-kline-candlestick-data" /></para>
         /// </summary>
         /// <param name="symbol">The symbol get the data for</param>
         /// <param name="interval">The interval of the klines</param>
@@ -137,6 +149,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Gets the order book for the provided symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#order-book" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get the order book for</param>
         /// <param name="limit">Max number of results</param>
@@ -146,6 +159,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Get Mark Price and Funding Rate for the provided symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#index-price-and-mark-price" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for</param>
         /// <param name="pair">Filter by pair</param>
@@ -155,6 +169,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Get candlestick data for the provided pair
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#continuous-contract-kline-candlestick-data" /></para>
         /// </summary>
         /// <param name="pair">The symbol to get the data for</param>
         /// <param name="contractType">The contract type</param>
@@ -168,6 +183,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Get candlestick data for the provided pair
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#index-price-kline-candlestick-data" /></para>
         /// </summary>
         /// <param name="pair">The symbol to get the data for</param>
         /// <param name="interval">The candlestick timespan</param>
@@ -180,6 +196,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Get data regarding the last 24 hours change
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#24hr-ticker-price-change-statistics" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for</param>
         /// <param name="pair">Filter by pair</param>
@@ -189,6 +206,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Gets the best price/quantity on the order book for a symbol.
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#symbol-order-book-ticker" /></para>
         /// </summary>
         /// <param name="symbol">Symbol to get book price for</param>
         /// <param name="pair">Filter by pair</param>
@@ -198,6 +216,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Get present open interest of a specific symbol.
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#open-interest" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for</param>
         /// <param name="ct">Cancellation token</param>
@@ -206,6 +225,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Gets Open Interest History
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#open-interest-statistics" /></para>
         /// </summary>
         /// <param name="pair">The pair to get the data for</param>
         /// <param name="contractType">The contract type</param>
@@ -219,6 +239,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Gets Taker Buy/Sell Volume Ratio
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#taker-buy-sell-volume" /></para>
         /// </summary>
         /// <param name="pair">The pair to get the data for</param>
         /// <param name="contractType">The contract type</param>
@@ -232,6 +253,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Gets basis
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#basis" /></para>
         /// </summary>
         /// <param name="pair">The pair to get the data for</param>
         /// <param name="contractType">The contract type</param>
@@ -245,6 +267,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 
         /// <summary>
         /// Get a list of the prices of all symbols
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#symbol-price-ticker" /></para>
         /// </summary>
         /// <param name="symbol">Retrieve for a symbol</param>
         /// <param name="pair">Retrieve prices for a specific pair</param>

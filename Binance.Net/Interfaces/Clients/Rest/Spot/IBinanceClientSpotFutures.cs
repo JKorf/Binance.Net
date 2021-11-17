@@ -15,6 +15,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
     {
         /// <summary>
         /// Execute a transfer between the spot account and a futures account
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#new-future-account-transfer-user_data" /></para>
         /// </summary>
         /// <param name="asset">The asset to transfer</param>
         /// <param name="quantity">Quantity to transfer</param>
@@ -26,6 +27,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get history of transfers between spot and futures account
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-future-account-transaction-history-list-user_data" /></para>
         /// </summary>
         /// <param name="asset">The asset to get history for</param>
         /// <param name="startTime">Filter by start time</param>
@@ -39,6 +41,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Borrow for cross-collateral
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#borrow-for-cross-collateral-trade" /></para>
         /// </summary>
         /// <param name="asset">The asset to borrow</param>
         /// <param name="quantity">The quantity to borrow</param>
@@ -51,6 +54,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get cross collateral borrow history
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#cross-collateral-borrow-history-user_data" /></para>
         /// </summary>
         /// <param name="asset">The asset to get history for</param>
         /// <param name="startTime">Filter by start time</param>
@@ -63,6 +67,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Repay for cross-collateral
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#repay-for-cross-collateral-trade" /></para>
         /// </summary>
         /// <param name="asset">The asset</param>
         /// <param name="quantity">The quantity to repay</param>
@@ -74,6 +79,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get cross collateral borrow history
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#cross-collateral-repayment-history-user_data" /></para>
         /// </summary>
         /// <param name="asset">The asset to get history for</param>
         /// <param name="startTime">Filter by start time</param>
@@ -86,6 +92,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get cross-collateral wallet info
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#cross-collateral-wallet-v2-user_data" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -94,6 +101,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get cross-collateral info
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#cross-collateral-information-v2-user_data" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -102,6 +110,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Calculate rate after adjust cross-collateral loan to value
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#calculate-rate-after-adjust-cross-collateral-ltv-v2-user_data" /></para>
         /// </summary>
         /// <param name="collateralAsset">The collateral asset</param>
         /// <param name="loanAsset">The loan asset</param>
@@ -114,6 +123,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get max quantity for adjust cross-collateral LTV
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-max-amount-for-adjust-cross-collateral-ltv-v2-user_data" /></para>
         /// </summary>
         /// <param name="collateralAsset">The collateral asset</param>
         /// <param name="loanAsset">The loan asset</param>
@@ -124,6 +134,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Adjust cross collateral LTV
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#adjust-cross-collateral-ltv-v2-trade" /></para>
         /// </summary>
         /// <param name="collateralAsset">The collateral asset</param>
         /// <param name="loanAsset">The loan asset</param>
@@ -136,6 +147,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get cross collateral LTV adjustment history
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#adjust-cross-collateral-ltv-history-user_data" /></para>
         /// </summary>
         /// <param name="loanAsset">The loan asset</param>
         /// <param name="collateralAsset">The collateral asset</param>
@@ -149,6 +161,7 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
 
         /// <summary>
         /// Get cross collateral liquidation history
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#cross-collateral-liquidation-history-user_data" /></para>
         /// </summary>
         /// <param name="collateralAsset">The collateral asset</param>
         /// <param name="loanAsset">The loan asset</param>
