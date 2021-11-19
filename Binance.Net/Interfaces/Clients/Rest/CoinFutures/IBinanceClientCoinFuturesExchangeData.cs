@@ -9,6 +9,9 @@ using CryptoExchange.Net.Objects;
 
 namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 {
+    /// <summary>
+    /// Binance COIN-M futures exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
+    /// </summary>
     public interface IBinanceClientCoinFuturesExchangeData
     {
         /// <summary>

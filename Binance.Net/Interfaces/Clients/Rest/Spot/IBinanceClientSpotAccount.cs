@@ -11,6 +11,9 @@ using CryptoExchange.Net.Objects;
 
 namespace Binance.Net.Interfaces.Clients.Rest.Spot
 {
+    /// <summary>
+    /// Binance Spot account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
+    /// </summary>
     public interface IBinanceClientSpotAccount
     {
         /// <summary>

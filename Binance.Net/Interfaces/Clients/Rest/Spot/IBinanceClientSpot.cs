@@ -3,7 +3,7 @@
 namespace Binance.Net.Interfaces.Clients.Rest.Spot
 {
     /// <summary>
-    /// Spot endpoints
+    /// Client for accessing the Binance Spot API. 
     /// </summary>
     public interface IBinanceClientSpot : IRestClient
     {
@@ -18,18 +18,22 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
         /// Endpoints related to account settings, info or actions
         /// </summary>
         public IBinanceClientSpotAccount Account { get; }
+
         /// <summary>
         /// Endpoints related to brokerage
         /// </summary>
         public IBinanceClientSpotBrokerage Brokerage { get; }
+
         /// <summary>
         /// Endpoints related to futures account interactions
         /// </summary>
         public IBinanceClientSpotFutures Futures { get; }
+
         /// <summary>
         /// Endpoints related to lending/saving
         /// </summary>
         public IBinanceClientSpotLending Lending { get; }
+
         /// <summary>
         /// Endpoints related to BLvt
         /// </summary>
@@ -38,14 +42,17 @@ namespace Binance.Net.Interfaces.Clients.Rest.Spot
         /// Endpoints related to BSwap
         /// </summary>
         public IBinanceClientSpotLiquidSwap LiquidSwap { get; }
+
         /// <summary>
-        /// Endpoints related to retrieving market data
+        /// Endpoints related to retrieving market and system data
         /// </summary>
         public IBinanceClientSpotExchangeData ExchangeData { get; }
+
         /// <summary>
         /// Endpoints related to mining
         /// </summary>
         public IBinanceClientSpotMining Mining { get; }
+
         /// <summary>
         /// Endpoints related to requesting data for and controlling sub accounts
         /// </summary>

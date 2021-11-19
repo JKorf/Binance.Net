@@ -11,7 +11,7 @@ using CryptoExchange.Net.Objects;
 namespace Binance.Net.Interfaces.Clients.Rest.Spot
 {
     /// <summary>
-    /// Spot system endpoints
+    /// Binance Spot Subaccount endpoints
     /// </summary>
     public interface IBinanceClientSpotSubAccount
     {

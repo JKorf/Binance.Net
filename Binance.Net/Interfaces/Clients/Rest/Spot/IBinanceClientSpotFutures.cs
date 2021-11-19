@@ -11,6 +11,9 @@ using CryptoExchange.Net.Objects;
 
 namespace Binance.Net.Interfaces.Clients.Rest.Spot
 {
+    /// <summary>
+    /// Binance futures interaction endpoints
+    /// </summary>
     public interface IBinanceClientSpotFutures
     {
         /// <summary>

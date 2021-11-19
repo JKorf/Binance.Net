@@ -9,6 +9,9 @@ using CryptoExchange.Net.Objects;
 
 namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 {
+    /// <summary>
+    /// Binance COIN-M futures account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
+    /// </summary>
     public interface IBinanceClientCoinFuturesAccount
     {
         /// <summary>

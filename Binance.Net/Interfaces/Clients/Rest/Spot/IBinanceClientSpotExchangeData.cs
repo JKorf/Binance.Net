@@ -11,7 +11,7 @@ using CryptoExchange.Net.Objects;
 namespace Binance.Net.Interfaces.Clients.Rest.Spot
 {
     /// <summary>
-    /// Spot market endpoints
+    /// Binance Spot exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
     /// </summary>
     public interface IBinanceClientSpotExchangeData
     {

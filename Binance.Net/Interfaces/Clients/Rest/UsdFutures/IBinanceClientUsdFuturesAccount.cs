@@ -9,6 +9,9 @@ using Binance.Net.Objects.Models.Futures;
 
 namespace Binance.Net.Interfaces.Clients.Rest.UsdFutures
 {
+    /// <summary>
+    /// Binance USD-M futures account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
+    /// </summary>
     public interface IBinanceClientUsdFuturesAccount
     {
         /// <summary>
@@ -21,7 +24,6 @@ namespace Binance.Net.Interfaces.Clients.Rest.UsdFutures
         /// <returns>List of Positions</returns>
         Task<WebCallResult<IEnumerable<BinancePositionDetailsUsdt>>> GetPositionInformationAsync(string? symbol = null,
             long? receiveWindow = null, CancellationToken ct = default);
-
 
         /// <summary>
         /// Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol

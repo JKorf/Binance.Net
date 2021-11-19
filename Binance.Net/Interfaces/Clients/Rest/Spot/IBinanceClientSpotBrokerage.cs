@@ -8,6 +8,9 @@ using CryptoExchange.Net.Objects;
 
 namespace Binance.Net.Interfaces.Clients.Rest.Spot
 {
+    /// <summary>
+    /// Binance brokerage endpoints.
+    /// </summary>
     public interface IBinanceClientSpotBrokerage
     {
         /// <summary>

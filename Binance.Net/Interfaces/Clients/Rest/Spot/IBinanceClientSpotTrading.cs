@@ -11,7 +11,7 @@ using CryptoExchange.Net.Objects;
 namespace Binance.Net.Interfaces.Clients.Rest.Spot
 {
     /// <summary>
-    /// Spot order endpoints
+    /// Binance Spot trading endpoints, placing and mananging orders.
     /// </summary>
     public interface IBinanceClientSpotTrading
     {

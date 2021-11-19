@@ -8,6 +8,9 @@ using CryptoExchange.Net.Objects;
 
 namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 {
+    /// <summary>
+    /// Binance COIN-M futures trading endpoints, placing and mananging orders.
+    /// </summary>
     public interface IBinanceClientCoinFuturesTrading
     {
         /// <summary>

@@ -9,6 +9,9 @@ using Binance.Net.Objects.Models.Spot;
 
 namespace Binance.Net.Interfaces.Clients.Rest.UsdFutures
 {
+    /// <summary>
+    /// Binance USD-M futures exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
+    /// </summary>
     public interface IBinanceClientUsdFuturesExchangeData
     {
         /// <summary>

@@ -8,6 +8,9 @@ using Binance.Net.Objects.Models.Futures;
 
 namespace Binance.Net.Interfaces.Clients.Rest.UsdFutures
 {
+    /// <summary>
+    /// Binance USD-M futures trading endpoints, placing and mananging orders.
+    /// </summary>
     public interface IBinanceClientUsdFuturesTrading
     {
         /// <summary>

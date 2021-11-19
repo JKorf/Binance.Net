@@ -9,7 +9,7 @@ using CryptoExchange.Net.Objects;
 namespace Binance.Net.Interfaces.Clients.Rest.Spot
 {
     /// <summary>
-    /// Spot system endpoints
+    /// Binance Spot leveraged tokens endpoints
     /// </summary>
     public interface IBinanceClientSpotLeveragedTokens
     {
