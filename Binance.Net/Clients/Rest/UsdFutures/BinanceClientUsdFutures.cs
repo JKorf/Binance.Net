@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models.Futures;
 using Binance.Net.Objects.Models.Spot;
+using CryptoExchange.Net;
 
 namespace Binance.Net.Clients.Rest.UsdFutures
 {
@@ -91,13 +92,12 @@ namespace Binance.Net.Clients.Rest.UsdFutures
 
         internal Uri GetUrl(string endpoint, string api, string? version = null)
         {
-            var result = $"{ClientOptions.BaseAddress}{api}/";
+            var result = ClientOptions.BaseAddress.AppendPath(api);
 
             if (!string.IsNullOrEmpty(version))
-                result += $"v{version}/";
+                result.AppendPath($"v{version}");
 
-            result += endpoint;
-            return new Uri(result);
+            return new Uri(result.AppendPath(endpoint));
         }
 
         /// <inheritdoc />

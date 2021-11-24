@@ -399,7 +399,7 @@ namespace Binance.Net.Clients.Socket
 
         private async Task<CallResult<UpdateSubscription>> Subscribe<T>(IEnumerable<string> topics, Action<DataEvent<T>> onData, CancellationToken ct)
         {
-            return await SubscribeInternal(ClientOptions.BaseAddress + "stream", topics, onData, ct).ConfigureAwait(false);
+            return await SubscribeInternal(ClientOptions.BaseAddress.AppendPath("stream"), topics, onData, ct).ConfigureAwait(false);
         }
 
         internal Task<CallResult<UpdateSubscription>> SubscribeInternal<T>(string url, IEnumerable<string> topics, Action<DataEvent<T>> onData, CancellationToken ct)
