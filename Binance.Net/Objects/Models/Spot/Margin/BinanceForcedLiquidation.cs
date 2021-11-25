@@ -51,7 +51,7 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// <summary>
         /// Last update time
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         [JsonProperty("updatedTime")]
         public DateTime UpdateTime { get; set; }
         /// <summary>

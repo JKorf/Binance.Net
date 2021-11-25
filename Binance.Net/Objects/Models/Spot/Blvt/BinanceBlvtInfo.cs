@@ -74,7 +74,7 @@ namespace Binance.Net.Objects.Models.Spot.Blvt
         /// <summary>
         /// Data timestamp
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
     }
 

@@ -17,7 +17,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Last update time
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime UpdateTime { get; set; }
     }
 
@@ -33,7 +33,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Planned time when indicator is unlocked
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime? PlannedRecoveryTime { get; set; }
         /// <summary>
         /// The indicator name

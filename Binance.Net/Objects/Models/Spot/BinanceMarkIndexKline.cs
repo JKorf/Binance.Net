@@ -13,7 +13,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The time this candlestick opened
         /// </summary>
-        [ArrayProperty(0), JsonConverter(typeof(TimestampConverter))]
+        [ArrayProperty(0), JsonConverter(typeof(DateTimeConverter))]
         public DateTime OpenTime { get; set; }
         /// <summary>
         /// The price at which this candlestick opened
@@ -40,7 +40,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The close time of this candlestick
         /// </summary>
-        [ArrayProperty(6), JsonConverter(typeof(TimestampConverter))]
+        [ArrayProperty(6), JsonConverter(typeof(DateTimeConverter))]
         public DateTime CloseTime { get; set; }
 
         [ArrayProperty(7)] internal string? Ignore2 { get; set; } = string.Empty;

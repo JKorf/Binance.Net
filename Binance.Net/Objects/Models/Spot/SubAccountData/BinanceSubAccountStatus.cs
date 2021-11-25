@@ -30,7 +30,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// <summary>
         /// The time the sub account was created
         /// </summary>
-        [JsonProperty("insertTime"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("insertTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime CreateTime { get; set; }
 
         /// <summary>

@@ -52,7 +52,7 @@ namespace Binance.Net.Objects.Models.Spot.Mining
         /// <summary>
         /// Start day
         /// </summary>
-        [JsonConverter(typeof(TimestampStringConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime Day { get; set; }
         /// <summary>
         /// Coin name

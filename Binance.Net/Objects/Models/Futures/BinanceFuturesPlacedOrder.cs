@@ -142,7 +142,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// The time the order was updated
         /// </summary>
-        [JsonProperty("updateTime"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("updateTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime UpdateTime { get; set; }
 
         /// <summary>

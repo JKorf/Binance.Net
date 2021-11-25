@@ -22,13 +22,13 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// The symbol of the order book 
         /// </summary>
-        [JsonProperty("E"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("E"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime MessageTime { get; set; }
 
         /// <summary>
         /// The ID of the last update
         /// </summary>
-        [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("T"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime TransactionTime { get; set; }
     }
 }

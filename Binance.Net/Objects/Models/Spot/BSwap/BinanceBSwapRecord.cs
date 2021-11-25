@@ -18,7 +18,7 @@ namespace Binance.Net.Objects.Models.Spot.BSwap
         /// <summary>
         /// Time of the swap
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime SwapTime { get; set; }
         /// <summary>
         /// Status

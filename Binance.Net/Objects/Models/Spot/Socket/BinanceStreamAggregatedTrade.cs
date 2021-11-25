@@ -43,7 +43,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// <summary>
         /// The time of the trades
         /// </summary>
-        [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("T"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime TradeTime { get; set; }
         /// <summary>
         /// Whether the buyer was the maker

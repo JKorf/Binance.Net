@@ -33,7 +33,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Last update time
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime UpdateTime { get; set; }
     }
 

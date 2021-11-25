@@ -106,12 +106,12 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// <summary>
         /// The open time of these stats
         /// </summary>
-        [JsonProperty("O"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("O"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime OpenTime { get; set; }
         /// <summary>
         /// The close time of these stats
         /// </summary>
-        [JsonProperty("C"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("C"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime CloseTime { get; set; }
     }
 

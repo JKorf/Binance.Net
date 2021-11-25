@@ -20,7 +20,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// The time the funding rate is applied
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime FundingTime { get; set; }
     }
 }

@@ -59,12 +59,12 @@ namespace Binance.Net.Objects.Models
         /// <summary>
         /// Time at which this 24 hours opened
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime OpenTime { get; set; }
         /// <summary>
         /// Time at which this 24 hours closed
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime CloseTime { get; set; }
         /// <summary>
         /// The first trade ID in the last 24 hours

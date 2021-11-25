@@ -49,7 +49,7 @@ namespace Binance.Net.Objects.Models.Spot.Futures
         /// <summary>
         /// Time of adjustment
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime AdjustTime { get; set; }
     }
 }

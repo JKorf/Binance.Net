@@ -27,7 +27,7 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// <summary>
         /// Timestamp of the transaction
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Transaction id

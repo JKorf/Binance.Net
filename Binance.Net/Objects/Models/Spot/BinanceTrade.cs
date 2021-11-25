@@ -56,7 +56,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The time the trade was made
         /// </summary>
-        [JsonProperty("time"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Whether account was the buyer in the trade

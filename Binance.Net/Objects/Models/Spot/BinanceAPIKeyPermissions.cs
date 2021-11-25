@@ -16,7 +16,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Creation time of the key
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// This option allows you to withdraw via API. You must apply the IP Access Restriction filter in order to enable withdrawals
@@ -53,7 +53,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Expiration time for spot and margin trading permission
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime? TradingAuthorityExpirationTime { get; set; }
     }
 }

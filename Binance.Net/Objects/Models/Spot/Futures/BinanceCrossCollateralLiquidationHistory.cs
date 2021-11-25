@@ -23,7 +23,7 @@ namespace Binance.Net.Objects.Models.Spot.Futures
         /// <summary>
         /// Start time of liquidation
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime ForceLiquidationStartTime { get; set; }
         /// <summary>
         /// Asset

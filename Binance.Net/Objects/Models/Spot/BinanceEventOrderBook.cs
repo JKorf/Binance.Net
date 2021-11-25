@@ -32,7 +32,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Event time of the update
         /// </summary>
-        [JsonProperty("E"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("E"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime EventTime { get; set; }
         
         /// <summary>

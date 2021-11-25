@@ -646,8 +646,8 @@ namespace Binance.Net.Clients.Rest.Spot
             parameters.AddOptionalParameter("fromId", fromId);
             parameters.AddOptionalParameter("toId", toId);
             parameters.AddOptionalParameter("clientTranId", clientTransferId);
-            parameters.AddOptionalParameter("startTime", startDate != null ? JsonConvert.SerializeObject(startDate, new TimestampConverter()) : null);
-            parameters.AddOptionalParameter("endTime", endDate != null ? JsonConvert.SerializeObject(endDate, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startDate));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endDate));
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -721,8 +721,8 @@ namespace Binance.Net.Clients.Rest.Spot
             parameters.AddOptionalParameter("fromId", fromId);
             parameters.AddOptionalParameter("toId", toId);
             parameters.AddOptionalParameter("clientTranId", clientTransferId);
-            parameters.AddOptionalParameter("startTime", startDate != null ? JsonConvert.SerializeObject(startDate, new TimestampConverter()) : null);
-            parameters.AddOptionalParameter("endTime", endDate != null ? JsonConvert.SerializeObject(endDate, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startDate));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endDate));
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -747,8 +747,8 @@ namespace Binance.Net.Clients.Rest.Spot
                                  {"futuresType", ((int)futuresType).ToString(CultureInfo.InvariantCulture)},
                                  {"timestamp", _baseClient.GetTimestamp()}
                              };
-            parameters.AddOptionalParameter("startTime", startDate.HasValue ? JsonConvert.SerializeObject(startDate, new TimestampConverter()) : null);
-            parameters.AddOptionalParameter("endTime", endDate.HasValue ? JsonConvert.SerializeObject(endDate, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startDate));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endDate));
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("clientTranId", clientTransferId);
@@ -773,8 +773,8 @@ namespace Binance.Net.Clients.Rest.Spot
             parameters.AddOptionalParameter("subAccountId", subAccountId);
             parameters.AddOptionalParameter("coin", asset);
             parameters.AddOptionalParameter("status", status.HasValue ? ((int)status).ToString(CultureInfo.InvariantCulture) : null);
-            parameters.AddOptionalParameter("startTime", startDate.HasValue ? JsonConvert.SerializeObject(startDate, new TimestampConverter()) : null);
-            parameters.AddOptionalParameter("endTime", endDate.HasValue ? JsonConvert.SerializeObject(endDate, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startDate));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endDate));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("offset", offset?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -821,8 +821,8 @@ namespace Binance.Net.Clients.Rest.Spot
                                  {"timestamp", _baseClient.GetTimestamp()},
                                  {"subAccountId", subAccountId},
                              };
-            parameters.AddOptionalParameter("startTime", startDate != null ? JsonConvert.SerializeObject(startDate, new TimestampConverter()) : null);
-            parameters.AddOptionalParameter("endTime", endDate != null ? JsonConvert.SerializeObject(endDate, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startDate));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endDate));
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("size", size?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -841,8 +841,8 @@ namespace Binance.Net.Clients.Rest.Spot
             var parameters = new Dictionary<string, object>
                              {
                                  {"futuresType", ((int)futuresType).ToString(CultureInfo.InvariantCulture)},
-                                 {"startTime", JsonConvert.SerializeObject(startDate, new TimestampConverter())},
-                                 {"endTime", JsonConvert.SerializeObject(endDate, new TimestampConverter())},
+                                 {"startTime", DateTimeConverter.ConvertToMilliseconds(startDate)!},
+                                 {"endTime",  DateTimeConverter.ConvertToMilliseconds(endDate)!},
                                  {"timestamp", _baseClient.GetTimestamp()},
                              };
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));

@@ -20,7 +20,7 @@ namespace Binance.Net.Objects.Models.Spot.Lending
         /// <summary>
         /// Time
         /// </summary>
-        [JsonProperty("time"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
     }
 }

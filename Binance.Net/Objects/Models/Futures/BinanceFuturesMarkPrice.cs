@@ -30,7 +30,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// The time the funding rate is applied
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime NextFundingTime { get; set; }
         /// <summary>
         /// Estimated settle price
@@ -44,7 +44,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         [JsonProperty("time")]
         public DateTime Timestamp { get; set; }
     }

@@ -109,7 +109,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// <summary>
         /// The time of the update
         /// </summary>
-        [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("T"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime UpdateTime { get; set; }
         /// <summary>
         /// The trade id
@@ -129,7 +129,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// <summary>
         /// Time the order was created
         /// </summary>
-        [JsonProperty("O"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("O"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// Cummulative quantity

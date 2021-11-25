@@ -32,13 +32,13 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// <summary>
         /// Open time
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         [JsonProperty("t")]
         public DateTime OpenTime { get; set; }
         /// <summary>
         /// Close time
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         [JsonProperty("T")]
         public DateTime CloseTime { get; set; }
 

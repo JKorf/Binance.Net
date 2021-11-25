@@ -78,12 +78,12 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Delivery Date
         /// </summary>
-        [JsonProperty("deliveryDate"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("deliveryDate"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime DeliveryDate { get; set; }
         /// <summary>
         /// Delivery Date
         /// </summary>
-        [JsonProperty("onboardDate"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("onboardDate"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime ListingDate { get; set; }
         /// <summary>
         /// Trigger protect

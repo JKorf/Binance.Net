@@ -27,7 +27,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Time of the margin change request
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         [JsonProperty("time")]
         public DateTime Timestamp { get; set; }
         /// <summary>

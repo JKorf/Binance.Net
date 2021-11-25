@@ -68,7 +68,7 @@ namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
         /// <summary>
         /// Date
         /// </summary>
-        [JsonProperty("time"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Date { get; set; }
     }
 }

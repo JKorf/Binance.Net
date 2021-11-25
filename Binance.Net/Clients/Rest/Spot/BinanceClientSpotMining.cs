@@ -166,8 +166,8 @@ namespace Binance.Net.Clients.Rest.Spot
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("pageSize", pageSize?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("coin", coin);
-            parameters.AddOptionalParameter("startDate", startDate.HasValue ? JsonConvert.SerializeObject(startDate.Value, new TimestampConverter()) : null);
-            parameters.AddOptionalParameter("endDate", endDate.HasValue ? JsonConvert.SerializeObject(endDate.Value, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("startDate", DateTimeConverter.ConvertToMilliseconds(startDate));
+            parameters.AddOptionalParameter("endDate", DateTimeConverter.ConvertToMilliseconds(endDate));
 
             var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceRevenueList>>(_baseClient.GetUrl(miningRevenueEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
             if (!result.Success)
@@ -198,8 +198,8 @@ namespace Binance.Net.Clients.Rest.Spot
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("pageSize", pageSize?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("coin", coin);
-            parameters.AddOptionalParameter("startDate", startDate.HasValue ? JsonConvert.SerializeObject(startDate.Value, new TimestampConverter()) : null);
-            parameters.AddOptionalParameter("endDate", endDate.HasValue ? JsonConvert.SerializeObject(endDate.Value, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("startDate", DateTimeConverter.ConvertToMilliseconds(startDate));
+            parameters.AddOptionalParameter("endDate", DateTimeConverter.ConvertToMilliseconds(endDate));
 
             var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceOtherRevenueList>>(_baseClient.GetUrl(miningOtherRevenueEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
             if (!result.Success)
@@ -326,8 +326,8 @@ namespace Binance.Net.Clients.Rest.Spot
             {
                 { "userName", userName },
                 { "algo", algorithm },
-                { "startDate", JsonConvert.SerializeObject(startDate, new TimestampConverter()) },
-                { "endDate", JsonConvert.SerializeObject(endDate, new TimestampConverter()) },
+                { "startDate", DateTimeConverter.ConvertToMilliseconds(startDate)! },
+                { "endDate", DateTimeConverter.ConvertToMilliseconds(endDate)! },
                 { "toPoolUser", toUser },
                 { "hashRate", hashRate },
                 {"timestamp", _baseClient.GetTimestamp()}

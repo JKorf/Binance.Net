@@ -69,7 +69,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// <summary>
         /// The time the universal transaction was created
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         [JsonProperty("createTimeStamp")]
         public DateTime CreateTime { get; set; }
     }

@@ -22,7 +22,7 @@ namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
         /// <summary>
         /// Create Date
         /// </summary>
-        [JsonProperty("createTime"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("createTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime CreateDate { get; set; }
     }
 }

@@ -39,7 +39,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Data timestamp
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
     }
 }

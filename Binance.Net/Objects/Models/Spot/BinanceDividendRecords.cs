@@ -25,7 +25,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Timestamp of the transaction
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter)), JsonProperty("divTime")]
+        [JsonConverter(typeof(DateTimeConverter)), JsonProperty("divTime")]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Transaction id

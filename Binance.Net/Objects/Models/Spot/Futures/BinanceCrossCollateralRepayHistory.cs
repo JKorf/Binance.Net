@@ -18,13 +18,13 @@ namespace Binance.Net.Objects.Models.Spot.Futures
         /// <summary>
         /// Time of confirmation
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime ConfirmedTime { get; set; }
 
         /// <summary>
         /// Time of last update
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime UpdateTime { get; set; }
 
         /// <summary>

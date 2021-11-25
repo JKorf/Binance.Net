@@ -49,7 +49,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// Timestamp
         /// </summary>
         [JsonProperty("operateTime")]
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime OperateTime { get; set; }
     }
 
@@ -77,7 +77,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// Timestamp
         /// </summary>
         [JsonProperty("operateTime")]
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime OperateTime { get; set; }
         /// <summary>
         /// Transferred quantity

@@ -13,7 +13,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// <summary>
         /// Time of last account update
         /// </summary>
-        [JsonProperty("u"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("u"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Balances

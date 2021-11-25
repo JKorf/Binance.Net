@@ -48,7 +48,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The time of the update
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime UpdateTime { get; set; }
         /// <summary>
         /// The type of account

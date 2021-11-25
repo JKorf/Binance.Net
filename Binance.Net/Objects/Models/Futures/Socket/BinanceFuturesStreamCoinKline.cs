@@ -35,7 +35,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// <summary>
         /// The open time of this candlestick
         /// </summary>
-        [JsonProperty("t"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("t"), JsonConverter(typeof(DateTimeConverter))]
         public new DateTime OpenTime { get; set; }
 
         /// <inheritdoc />
@@ -45,7 +45,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// <summary>
         /// The close time of this candlestick
         /// </summary>
-        [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("T"), JsonConverter(typeof(DateTimeConverter))]
         public new DateTime CloseTime { get; set; }
 
         /// <inheritdoc />

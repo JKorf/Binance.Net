@@ -43,7 +43,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Timestamp of conversion
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter)), JsonProperty("operateTime")]
+        [JsonConverter(typeof(DateTimeConverter)), JsonProperty("operateTime")]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Service charge

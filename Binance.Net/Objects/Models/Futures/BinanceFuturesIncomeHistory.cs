@@ -42,7 +42,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Time of the income
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         [JsonProperty("time")]
         public DateTime Timestamp { get; set; }
 

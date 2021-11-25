@@ -37,7 +37,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// <summary>
         /// Next Funding Time
         /// </summary>
-        [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("T"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime NextFundingTime { get; set; }
     }
 

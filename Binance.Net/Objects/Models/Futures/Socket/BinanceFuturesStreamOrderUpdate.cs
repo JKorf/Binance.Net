@@ -20,7 +20,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// <summary>
         /// Transaction time
         /// </summary>
-        [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("T"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime TransactionTime { get; set; }
     }
 
@@ -117,7 +117,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// <summary>
         /// The time of the update
         /// </summary>
-        [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("T"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime UpdateTime { get; set; }
         /// <summary>
         /// The trade id

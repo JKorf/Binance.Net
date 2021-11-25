@@ -14,7 +14,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// <summary>
         /// Time the deposit was added to Binance
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime InsertTime { get; set; }
         /// <summary>
         /// The quantity deposited

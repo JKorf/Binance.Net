@@ -99,7 +99,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// The time of account info was updated
         /// </summary>
-        [JsonProperty("updateTime"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("updateTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime UpdateTime { get; set; }
     }
 }

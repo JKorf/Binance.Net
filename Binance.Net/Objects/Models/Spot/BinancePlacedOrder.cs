@@ -14,7 +14,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The time the order was placed
         /// </summary>
-        [JsonProperty("transactTime"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("transactTime"), JsonConverter(typeof(DateTimeConverter))]
         public new DateTime CreateTime { get; set; }
         
         /// <summary>

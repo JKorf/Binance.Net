@@ -17,7 +17,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The current server time
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime ServerTime { get; set; }
         /// <summary>
         /// The rate limits used

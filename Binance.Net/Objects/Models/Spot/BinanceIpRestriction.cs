@@ -22,7 +22,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Update Time
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime UpdateTime { get; set; }
         /// <summary>
         /// The API key

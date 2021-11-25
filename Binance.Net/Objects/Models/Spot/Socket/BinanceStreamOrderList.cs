@@ -42,7 +42,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// <summary>
         /// The transaction time
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         [JsonProperty("T")]
         public DateTime TransactionTime { get; set; }
         /// <summary>

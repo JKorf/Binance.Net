@@ -17,7 +17,7 @@ namespace Binance.Net.Objects.Models
         /// <summary>
         /// The time the event happened
         /// </summary>
-        [JsonProperty("E"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("E"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime EventTime { get; set; }
     }
 }

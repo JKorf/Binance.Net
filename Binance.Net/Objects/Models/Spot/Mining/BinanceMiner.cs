@@ -59,7 +59,7 @@ namespace Binance.Net.Objects.Models.Spot.Mining
         /// <summary>
         /// Last share time
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime LastShareTime { get; set; }
     }
 }

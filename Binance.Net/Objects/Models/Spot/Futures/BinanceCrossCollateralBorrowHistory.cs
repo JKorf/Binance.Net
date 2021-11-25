@@ -18,7 +18,7 @@ namespace Binance.Net.Objects.Models.Spot.Futures
         /// <summary>
         /// Time of confirmation
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime ConfirmedTime { get; set; }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Binance.Net.Objects.Models.Spot.Futures
         /// <summary>
         /// Dead line
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime DeadLine { get; set; }
         /// <summary>
         /// Collateral asset

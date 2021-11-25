@@ -55,12 +55,12 @@ namespace Binance.Net.Objects.Models.Spot.Mining
         /// <summary>
         /// Start day
         /// </summary>
-        [JsonConverter(typeof(TimestampStringConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime StartDay { get; set; }
         /// <summary>
         /// End day
         /// </summary>
-        [JsonConverter(typeof(TimestampStringConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime EndDay { get; set; }
 
         /// <summary>

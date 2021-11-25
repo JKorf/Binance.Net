@@ -22,7 +22,7 @@ namespace Binance.Net.Objects.Models.Spot.Lending
         /// <summary>
         /// Create timestamp
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         [JsonProperty("createTimestamp")]
         public DateTime CreateTime { get; set; }
         /// <summary>
@@ -32,7 +32,7 @@ namespace Binance.Net.Objects.Models.Spot.Lending
         /// <summary>
         /// End time
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime EndTime { get; set; }
         /// <summary>
         /// Interest
@@ -65,7 +65,7 @@ namespace Binance.Net.Objects.Models.Spot.Lending
         /// <summary>
         /// Time of purchase
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime PurchaseTime { get; set; }
         /// <summary>
         /// Redeem date
@@ -74,7 +74,7 @@ namespace Binance.Net.Objects.Models.Spot.Lending
         /// <summary>
         /// Start time
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime StartTime { get; set; }
         /// <summary>
         /// Status

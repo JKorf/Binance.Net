@@ -40,7 +40,7 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// <summary>
         /// Time of repay completed
         /// </summary>
-        [JsonProperty("timestamp"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("timestamp"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// The status of the repay

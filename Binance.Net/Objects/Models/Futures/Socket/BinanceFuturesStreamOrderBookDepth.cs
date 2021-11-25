@@ -20,7 +20,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// <summary>
         /// The time the event happened
         /// </summary>
-        [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("T"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime TransactionTime { get; set; }
 
         /// <summary>

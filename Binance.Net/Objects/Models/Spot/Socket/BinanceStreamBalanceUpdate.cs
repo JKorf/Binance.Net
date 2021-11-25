@@ -22,7 +22,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// <summary>
         /// The time the deposit/withdrawal was cleared
         /// </summary>
-        [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("T"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime ClearTime { get; set; }
     }
 }

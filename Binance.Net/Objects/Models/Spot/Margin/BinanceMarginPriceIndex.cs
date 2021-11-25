@@ -20,7 +20,7 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// <summary>
         /// Time of calculation
         /// </summary>
-        [JsonProperty("calcTime"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("calcTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime CalculationTime { get; set; }
     }
 }
