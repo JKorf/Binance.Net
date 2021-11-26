@@ -53,11 +53,6 @@ namespace Binance.Net.Clients.Rest
 
         #region helpers
 
-        internal static long ToUnixTimestamp(DateTime time)
-        {
-            return (long)(time - new DateTime(1970, 1, 1)).TotalMilliseconds;
-        }
-
         internal void InvokeOrderPlaced(ICommonOrderId id)
         {
             OnOrderPlaced?.Invoke(id);

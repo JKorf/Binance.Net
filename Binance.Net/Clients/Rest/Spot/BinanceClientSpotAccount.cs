@@ -207,8 +207,8 @@ namespace Binance.Net.Clients.Rest.Spot
             parameters.AddOptionalParameter("coin", asset);
             parameters.AddOptionalParameter("withdrawOrderId", withdrawOrderId);
             parameters.AddOptionalParameter("status", status != null ? JsonConvert.SerializeObject(status, new WithdrawalStatusConverter(false)) : null);
-            parameters.AddOptionalParameter("startTime", startTime != null ? BinanceBaseClient.ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
-            parameters.AddOptionalParameter("endTime", endTime != null ? BinanceBaseClient.ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("offset", offset);
@@ -235,8 +235,8 @@ namespace Binance.Net.Clients.Rest.Spot
             parameters.AddOptionalParameter("offset", offset?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("status", status != null ? JsonConvert.SerializeObject(status, new DepositStatusConverter(false)) : null);
-            parameters.AddOptionalParameter("startTime", startTime != null ? BinanceBaseClient.ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
-            parameters.AddOptionalParameter("endTime", endTime != null ? BinanceBaseClient.ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceDeposit>>(
@@ -411,8 +411,8 @@ namespace Binance.Net.Clients.Rest.Spot
             };
             parameters.AddOptionalParameter("asset", asset);
             parameters.AddOptionalParameter("limit", limit);
-            parameters.AddOptionalParameter("startTime", startTime != null ? BinanceBaseClient.ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
-            parameters.AddOptionalParameter("endTime", endTime != null ? BinanceBaseClient.ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceDividendRecord>>(_baseClient.GetUrl(dividendRecordsEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 10).ConfigureAwait(false);
@@ -761,14 +761,14 @@ namespace Binance.Net.Clients.Rest.Spot
             // TxId or startTime must be sent. txId takes precedence.
             if (!transactionId.HasValue)
             {
-                parameters.AddOptionalParameter("startTime", BinanceBaseClient.ToUnixTimestamp(startTime ?? DateTime.MinValue).ToString(CultureInfo.InvariantCulture));
+                parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime ?? DateTime.MinValue));
             }
             else
             {
-                parameters.AddOptionalParameter("startTime", startTime != null ? BinanceBaseClient.ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+                parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             }
 
-            parameters.AddOptionalParameter("endTime", endTime != null ? BinanceBaseClient.ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("current", current?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("size", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("archived", archived);
@@ -799,14 +799,14 @@ namespace Binance.Net.Clients.Rest.Spot
             // TxId or startTime must be sent. txId takes precedence.
             if (!transactionId.HasValue)
             {
-                parameters.AddOptionalParameter("startTime", BinanceBaseClient.ToUnixTimestamp(startTime ?? DateTime.MinValue).ToString(CultureInfo.InvariantCulture));
+                parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime ?? DateTime.MinValue));
             }
             else
             {
-                parameters.AddOptionalParameter("startTime", startTime != null ? BinanceBaseClient.ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+                parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             }
 
-            parameters.AddOptionalParameter("endTime", endTime != null ? BinanceBaseClient.ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("current", current?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("size", size?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("isolatedSymbol", isolatedSymbol);
@@ -1001,14 +1001,8 @@ namespace Binance.Net.Clients.Rest.Spot
                 !to.HasValue
                     ? null
                     : JsonConvert.SerializeObject(to, new IsolatedMarginTransferDirectionConverter(false)));
-            parameters.AddOptionalParameter("startTime",
-                startTime != null
-                    ? BinanceBaseClient.ToUnixTimestamp(startTime.Value).ToString(CultureInfo.InvariantCulture)
-                    : null);
-            parameters.AddOptionalParameter("endTime",
-                endTime != null
-                    ? BinanceBaseClient.ToUnixTimestamp(endTime.Value).ToString(CultureInfo.InvariantCulture)
-                    : null);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime)?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime)?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("current", current?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("size", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow",
@@ -1268,7 +1262,6 @@ namespace Binance.Net.Clients.Rest.Spot
         }
 
         #endregion
-
 
         #region Trading status
         /// <inheritdoc />

@@ -16,6 +16,7 @@ using Binance.Net.Interfaces.Clients.Rest.CoinFutures;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models.Futures;
 using CryptoExchange.Net;
+using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Clients.Rest.CoinFutures
 {
@@ -87,7 +88,7 @@ namespace Binance.Net.Clients.Rest.CoinFutures
         {
             var offset = AutoTimestamp ? CalculatedTimeOffset : 0;
             offset += TimestampOffset.TotalMilliseconds;
-            return ToUnixTimestamp(DateTime.UtcNow.AddMilliseconds(offset)).ToString(CultureInfo.InvariantCulture);
+            return DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddMilliseconds(offset))!.Value.ToString(CultureInfo.InvariantCulture);
         }
 
         internal Uri GetUrl(string endpoint, string api, string? version = null)
