@@ -69,7 +69,7 @@ namespace Binance.Net.UnitTests.TestImplementations
             return self == to;
         }
 
-        public static IBinanceSocketClientSpot CreateSocketClient(IWebsocket socket, BinanceSocketClientSpotOptions options = null)
+        public static IBinanceSocketClientSpotMarket CreateSocketClient(IWebsocket socket, BinanceSocketClientSpotOptions options = null)
         {
             BinanceSocketClientSpot client;
             client = options != null ? new BinanceSocketClientSpot(options) : new BinanceSocketClientSpot();
@@ -94,9 +94,9 @@ namespace Binance.Net.UnitTests.TestImplementations
             return client;
         }
 
-        public static IBinanceClientUsdFutures CreateClientUsd(BinanceClientUsdFuturesOptions options = null)
+        public static IBinanceClientUsdFuturesMarket CreateClientUsd(BinanceClientUsdFuturesOptions options = null)
         {
-            IBinanceClientUsdFutures client;
+            IBinanceClientUsdFuturesMarket client;
             client = options != null ? new BinanceClientUsdFutures(options) : new BinanceClientUsdFutures();
             client.RequestFactory = Mock.Of<IRequestFactory>();
             return client;
@@ -104,7 +104,7 @@ namespace Binance.Net.UnitTests.TestImplementations
 
         public static IBinanceClientSpot CreateResponseClient(string response, BinanceClientSpotOptions options = null)
         {
-            var client = (BinanceClientSpot)CreateClient(options);
+            var client = (BinanceClientSpotMarket)CreateClient(options);
             SetResponse(client, response);
             return client;
         }
@@ -116,16 +116,16 @@ namespace Binance.Net.UnitTests.TestImplementations
             return client;
         }
 
-        public static IBinanceClientUsdFutures CreateResponseClientUsd(string response, BinanceClientUsdFuturesOptions options = null)
+        public static IBinanceClientUsdFuturesMarket CreateResponseClientUsd(string response, BinanceClientUsdFuturesOptions options = null)
         {
-            var client = (BinanceClientUsdFutures)CreateClientUsd(options);
+            var client = (BinanceClientUsdFuturesMarket)CreateClientUsd(options);
             SetResponse(client, response);
             return client;
         }
 
         public static IBinanceClientSpot CreateResponseClient<T>(T response, BinanceClientSpotOptions options = null)
         {
-            var client = (BinanceClientSpot)CreateClient(options);
+            var client = (BinanceClientSpotMarket)CreateClient(options);
             SetResponse(client, JsonConvert.SerializeObject(response));
             return client;
         }

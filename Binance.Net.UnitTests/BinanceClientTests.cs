@@ -206,7 +206,7 @@ namespace Binance.Net.UnitTests
         [Test]
         public void CheckRestInterfaces()
         {
-            var assembly = Assembly.GetAssembly(typeof(BinanceClientSpot));
+            var assembly = Assembly.GetAssembly(typeof(BinanceClientSpotMarket));
             var ignore = new string[] { "IBinanceClientUsdFutures", "IBinanceClientCoinFutures", "IBinanceClientSpot" };
             var clientInterfaces = assembly.GetTypes().Where(t => t.Name.StartsWith("IBinanceClient") && !ignore.Contains(t.Name));
             
