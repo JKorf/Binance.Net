@@ -1,11 +1,12 @@
 ﻿using CryptoExchange.Net.Interfaces;
+using System;
 
 namespace Binance.Net.Interfaces.Clients.Rest.CoinFutures
 {
     /// <summary>
     /// Client for accessing the COIN-M Binance futures API. 
     /// </summary>
-    public interface IBinanceClientCoinFuturesMarket
+    public interface IBinanceClientCoinFuturesMarket : IDisposable
     {
         /// <summary>
         /// Endpoints related to account settings, info or actions

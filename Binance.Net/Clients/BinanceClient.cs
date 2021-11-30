@@ -89,5 +89,14 @@ namespace Binance.Net.Clients.Rest.Spot
         {
             return base.SendRequestAsync<T>(subClient, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, requestWeight: weight);
         }
+
+        public override void Dispose()
+        {
+            General.Dispose();
+            SpotMarket.Dispose();
+            UsdFuturesMarket.Dispose();
+            CoinFuturesMarket.Dispose();
+            base.Dispose();
+        }
     }
 }

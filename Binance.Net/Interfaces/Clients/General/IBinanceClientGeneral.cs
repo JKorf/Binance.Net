@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Binance.Net.Interfaces.Clients.General
 {
-    public interface IBinanceClientGeneral
+    public interface IBinanceClientGeneral: IDisposable
     {
         /// <summary>
         /// Endpoints related to brokerage

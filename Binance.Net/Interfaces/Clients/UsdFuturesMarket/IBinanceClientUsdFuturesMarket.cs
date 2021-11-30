@@ -1,11 +1,12 @@
 ﻿using CryptoExchange.Net.Interfaces;
+using System;
 
 namespace Binance.Net.Interfaces.Clients.Rest.UsdFutures
 {
     /// <summary>
     /// Client for accessing the USD-M Binance futures API. 
     /// </summary>
-    public interface IBinanceClientUsdFuturesMarket
+    public interface IBinanceClientUsdFuturesMarket : IDisposable
     {
         /// <summary>
         /// Endpoints related to account settings, info or actions

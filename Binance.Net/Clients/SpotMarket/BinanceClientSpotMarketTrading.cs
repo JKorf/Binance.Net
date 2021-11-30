@@ -56,7 +56,7 @@ namespace Binance.Net.Clients.Rest.Spot
         private const string cancelOpenMarginOrdersEndpoint = "margin/openOrders";
         private const string queryMarginOrderEndpoint = "margin/order";
 
-        // OCO
+        // Margin OCO
         private const string newMarginOCOOrderEndpoint = "margin/order/oco";
         private const string cancelMarginOCOOrderEndpoint = "margin/orderList";
         private const string getMarginOCOOrderEndpoint = "margin/orderList";

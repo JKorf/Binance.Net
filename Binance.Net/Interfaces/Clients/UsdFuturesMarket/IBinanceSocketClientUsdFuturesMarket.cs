@@ -13,7 +13,7 @@ using Binance.Net.Objects.Models.Spot.Socket;
 
 namespace Binance.Net.Interfaces.Clients.Socket
 {
-    public interface IBinanceSocketClientUsdFuturesMarket
+    public interface IBinanceSocketClientUsdFuturesMarket : IDisposable
     {
         /// <summary>
         /// Subscribes to the aggregated trades update stream for the provided symbol

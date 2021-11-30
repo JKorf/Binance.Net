@@ -189,6 +189,14 @@ namespace Binance.Net.Clients.Socket
             }).ConfigureAwait(false);
             return result;
         }
+
+        public override void Dispose()
+        {
+            SpotMarket.Dispose();
+            UsdFuturesMarket.Dispose();
+            CoinFuturesMarket.Dispose();
+            base.Dispose();
+        }
         #endregion
     }
 }

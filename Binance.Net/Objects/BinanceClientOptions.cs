@@ -135,23 +135,23 @@ namespace Binance.Net.Objects
         public static BinanceSocketClientOptions Default { get; set; } = new BinanceSocketClientOptions()
         {
             SocketSubscriptionsCombineTarget = 10,
-            OptionsSpot = new SocketSubClientOptions
+            OptionsSpot = new SubClientOptions
             {
                 BaseAddress = BinanceApiAddresses.Default.SocketClientAddress
             },
-            OptionsUsdFutures = new SocketSubClientOptions
+            OptionsUsdFutures = new SubClientOptions
             {
                 BaseAddress = BinanceApiAddresses.Default.UsdFuturesSocketClientAddress!
             },
-            OptionsCoinFutures = new SocketSubClientOptions
+            OptionsCoinFutures = new SubClientOptions
             {
                 BaseAddress = BinanceApiAddresses.Default.CoinFuturesSocketClientAddress!
             }
         };
 
-        public SocketSubClientOptions OptionsSpot { get; set; }
-        public SocketSubClientOptions OptionsUsdFutures { get; set; }
-        public SocketSubClientOptions OptionsCoinFutures { get; set; }
+        public SubClientOptions OptionsSpot { get; set; }
+        public SubClientOptions OptionsUsdFutures { get; set; }
+        public SubClientOptions OptionsCoinFutures { get; set; }
 
         public BinanceSocketClientOptions()
         {
@@ -166,13 +166,13 @@ namespace Binance.Net.Objects
             if (Default == null)
                 return;
 
-            input.OptionsSpot = new SocketSubClientOptions();
+            input.OptionsSpot = new SubClientOptions();
             def.OptionsSpot.Copy(input.OptionsSpot, def.OptionsSpot);
 
-            input.OptionsUsdFutures = new SocketSubClientOptions();
+            input.OptionsUsdFutures = new SubClientOptions();
             def.OptionsUsdFutures.Copy(input.OptionsUsdFutures, def.OptionsUsdFutures);
 
-            input.OptionsCoinFutures = new SocketSubClientOptions();
+            input.OptionsCoinFutures = new SubClientOptions();
             def.OptionsCoinFutures.Copy(input.OptionsCoinFutures, def.OptionsCoinFutures);
         }
     }
