@@ -1,13 +1,8 @@
-﻿using Binance.Net.Clients.Rest.Spot;
-using Binance.Net.Interfaces;
-using Binance.Net.Interfaces.Clients.Rest.UsdFutures;
-using Binance.Net.Objects;
+﻿using Binance.Net.Objects;
 using Binance.Net.UnitTests.TestImplementations;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Binance.Net.Interfaces.Clients.Rest.CoinFutures;
-using Binance.Net.Interfaces.Clients.Rest.Spot;
 using CryptoExchange.Net.Interfaces;
 using Binance.Net.Interfaces.Clients;
 
@@ -133,23 +128,6 @@ namespace Binance.Net.UnitTests
                 "Spot/Futures",
                 c => c.GeneralApi.Futures,
                 new [] { "collateralQuantity" });
-        }
-
-
-        [Test]
-        public async Task ValidateSpotLiquidSwapCalls()
-        {
-            await _comparer.ProcessSubject(
-                "Spot/LiquidSwap",
-                c => c.SpotApi.LiquidSwap);
-        }
-
-        [Test]
-        public async Task ValidateSpotLeveragedTokensCalls()
-        {
-            await _comparer.ProcessSubject(
-                "Spot/LeveragedTokens",
-                c => c.SpotApi.LeveragedTokens);
         }
 
         [Test]

@@ -1,19 +1,16 @@
-﻿using Binance.Net.Interfaces.Clients.General;
-using Binance.Net.Interfaces.Clients.Rest.CoinFutures;
-using Binance.Net.Interfaces.Clients.Rest.Spot;
-using Binance.Net.Interfaces.Clients.Rest.UsdFutures;
+﻿using Binance.Net.Interfaces.Clients.CoinFuturesApi;
+using Binance.Net.Interfaces.Clients.GeneralApi;
+using Binance.Net.Interfaces.Clients.SpotApi;
+using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using CryptoExchange.Net.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Binance.Net.Interfaces.Clients
 {
     public interface IBinanceClient: IRestClient
     {
-        IBinanceClientGeneral GeneralApi { get; }
-        IBinanceClientCoinFuturesMarket CoinFuturesApi { get; }
-        IBinanceClientSpotMarket SpotApi { get; }
-        IBinanceClientUsdFuturesMarket UsdFuturesApi { get; }
+        IBinanceClientGeneralApi GeneralApi { get; }
+        IBinanceClientCoinFuturesApi CoinFuturesApi { get; }
+        IBinanceClientSpotApi SpotApi { get; }
+        IBinanceClientUsdFuturesApi UsdFuturesApi { get; }
     }
 }

@@ -1,10 +1,7 @@
 ﻿using System.Threading.Tasks;
-using Binance.Net.Clients.Rest.Spot;
-using Binance.Net.Clients.Socket;
+using Binance.Net.Clients;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients;
-using Binance.Net.Interfaces.Clients.Rest.Spot;
-using Binance.Net.Interfaces.Clients.Socket;
 using Binance.Net.Objects;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.OrderBook;

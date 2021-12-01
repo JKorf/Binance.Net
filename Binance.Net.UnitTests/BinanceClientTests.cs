@@ -15,12 +15,12 @@ using CryptoExchange.Net.Objects;
 using Binance.Net.Enums;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Binance.Net.Clients.Rest.Spot;
 using System.Reflection;
 using System.Diagnostics;
-using Binance.Net.Clients.Socket;
 using Binance.Net.Objects.Models.Spot;
 using CryptoExchange.Net.Sockets;
+using Binance.Net.Clients;
+using Binance.Net.Clients.SpotApi;
 
 namespace Binance.Net.UnitTests
 {
@@ -207,7 +207,7 @@ namespace Binance.Net.UnitTests
         public void CheckRestInterfaces()
         {
             var assembly = Assembly.GetAssembly(typeof(BinanceClient));
-            var ignore = new string[] { "IBinanceClientUsdFutures", "IBinanceClientCoinFutures", "IBinanceClientSpot" };
+            var ignore = new string[] { "IBinanceClientUsdFuturesApi", "IBinanceClientCoinFuturesApi", "IBinanceClientSpotApi" };
             var clientInterfaces = assembly.GetTypes().Where(t => t.Name.StartsWith("IBinanceClient") && !ignore.Contains(t.Name));
             
             foreach(var clientInterface in clientInterfaces)
@@ -217,7 +217,7 @@ namespace Binance.Net.UnitTests
                 foreach (var method in implementation.GetMethods().Where(m => m.ReturnType.IsAssignableTo(typeof(Task))))
                 {
                     var interfaceMethod = clientInterface.GetMethod(method.Name, method.GetParameters().Select(p => p.ParameterType).ToArray());
-                    Assert.NotNull(interfaceMethod, $"Missing interface for method {method.Name} in {clientInterface.Name}");
+                    Assert.NotNull(interfaceMethod, $"Missing interface for method {method.Name} in {implementation.Name} implementing interface {clientInterface.Name}");
                     methods++;
                 }
                 Debug.WriteLine($"{clientInterface.Name} {methods} methods validated");
@@ -227,7 +227,7 @@ namespace Binance.Net.UnitTests
         [Test]
         public void CheckSocketInterfaces()
         {
-            var assembly = Assembly.GetAssembly(typeof(BinanceSocketClientSpot));
+            var assembly = Assembly.GetAssembly(typeof(BinanceSocketClientSpotStreams));
             var clientInterfaces = assembly.GetTypes().Where(t => t.Name.StartsWith("IBinanceSocketClient"));
 
             foreach (var clientInterface in clientInterfaces)
@@ -237,7 +237,7 @@ namespace Binance.Net.UnitTests
                 foreach (var method in implementation.GetMethods().Where(m => m.ReturnType.IsAssignableTo(typeof(Task<CallResult<UpdateSubscription>>))))
                 {
                     var interfaceMethod = clientInterface.GetMethod(method.Name, method.GetParameters().Select(p => p.ParameterType).ToArray());
-                    Assert.NotNull(interfaceMethod, $"Missing interface for method {method.Name} in {clientInterface.GetType().Name}");
+                    Assert.NotNull(interfaceMethod, $"Missing interface for method {method.Name} in {implementation.Name} implementing interface {clientInterface.GetType().Name}");
                     methods++;
                 }
                 Debug.WriteLine($"{clientInterface.Name} {methods} methods validated");

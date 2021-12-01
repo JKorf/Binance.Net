@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using System.Net.Http;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients;
-using Binance.Net.Interfaces.Clients.Rest.CoinFutures;
-using Binance.Net.Interfaces.Clients.Rest.Spot;
-using Binance.Net.Interfaces.Clients.Rest.UsdFutures;
-using Binance.Net.Interfaces.Clients.Socket;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 

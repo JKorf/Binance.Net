@@ -1,28 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Binance.Net.Converters;
-using Binance.Net.Enums;
-using Binance.Net.Interfaces;
+using Binance.Net.Clients.CoinFuturesApi;
+using Binance.Net.Clients.SpotApi;
+using Binance.Net.Clients.UsdFuturesApi;
 using Binance.Net.Interfaces.Clients;
-using Binance.Net.Interfaces.Clients.Socket;
+using Binance.Net.Interfaces.Clients.CoinFuturesApi;
+using Binance.Net.Interfaces.Clients.SpotApi;
+using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
-using Binance.Net.Objects.Models;
-using Binance.Net.Objects.Models.Spot;
-using Binance.Net.Objects.Models.Spot.Socket;
 using CryptoExchange.Net;
-using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Binance.Net.Clients.Socket
+namespace Binance.Net.Clients
 {
     /// <summary>
     /// Client providing access to the Binance Spot websocket Api
@@ -34,9 +31,9 @@ namespace Binance.Net.Clients.Socket
 
         #region Api clients
 
-        public IBinanceSocketClientSpotMarket SpotStreams { get; set; }
-        public IBinanceSocketClientUsdFuturesMarket UsdFuturesStreams { get; set; }
-        public IBinanceSocketClientCoinFuturesMarket CoinFuturesStreams { get; set; }
+        public IBinanceSocketClientSpotStreams SpotStreams { get; set; }
+        public IBinanceSocketClientUsdFuturesStreams UsdFuturesStreams { get; set; }
+        public IBinanceSocketClientCoinFuturesStreams CoinFuturesStreams { get; set; }
 
         #endregion
 
@@ -55,12 +52,12 @@ namespace Binance.Net.Clients.Socket
         /// <param name="options">The options to use for this client</param>
         public BinanceSocketClient(BinanceSocketClientOptions options) : base("Binance", options)
         {
-            SetDataInterpreter((byte[] data) => string.Empty, null);
+            SetDataInterpreter((data) => string.Empty, null);
             RateLimitPerSocketPerSecond = 4;
 
-            SpotStreams = new BinanceSocketClientSpot(log, this, options);
-            UsdFuturesStreams = new BinanceSocketClientUsdFutures(log, this, options);
-            CoinFuturesStreams = new BinanceSocketClientCoinFutures(log, this, options);
+            SpotStreams = new BinanceSocketClientSpotStreams(log, this, options);
+            UsdFuturesStreams = new BinanceSocketClientUsdFuturesStreams(log, this, options);
+            CoinFuturesStreams = new BinanceSocketClientCoinFuturesStreams(log, this, options);
         }
         #endregion 
 
@@ -185,7 +182,7 @@ namespace Binance.Net.Clients.Socket
                     return true;
                 }
 
-                return true;              
+                return true;
             }).ConfigureAwait(false);
             return result;
         }

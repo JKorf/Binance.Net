@@ -1,41 +1,32 @@
-﻿using Binance.Net.Converters;
-using Binance.Net.Enums;
-using Binance.Net.Objects;
+﻿using Binance.Net.Objects;
 using CryptoExchange.Net;
-using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.ExchangeInterfaces;
 using CryptoExchange.Net.Objects;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Binance.Net.Interfaces.Clients.Rest.Spot;
-using Binance.Net.Objects.Internal;
-using Binance.Net.Objects.Models.Spot;
-using CryptoExchange.Net.Converters;
-using Binance.Net.Interfaces.Clients.General;
-using Binance.Net.Interfaces.Clients.Rest.UsdFutures;
-using Binance.Net.Interfaces.Clients.Rest.CoinFutures;
 using Binance.Net.Interfaces.Clients;
-using Binance.Net.Clients.Rest.UsdFutures;
-using Binance.Net.Clients.Rest.CoinFutures;
+using Binance.Net.Interfaces.Clients.UsdFuturesApi;
+using Binance.Net.Interfaces.Clients.SpotApi;
+using Binance.Net.Interfaces.Clients.GeneralApi;
+using Binance.Net.Interfaces.Clients.CoinFuturesApi;
+using Binance.Net.Clients.GeneralApi;
+using Binance.Net.Clients.SpotApi;
+using Binance.Net.Clients.UsdFuturesApi;
+using Binance.Net.Clients.CoinFuturesApi;
 
-namespace Binance.Net.Clients.Rest.Spot
+namespace Binance.Net.Clients
 {
     /// <inheritdoc cref="IBinanceClientSpot" />
-    public class BinanceClient: BaseRestClient, IBinanceClient
+    public class BinanceClient : BaseRestClient, IBinanceClient
     {
         #region Api clients
-        public IBinanceClientGeneral GeneralApi { get; }
-        public IBinanceClientSpotMarket SpotApi { get; }
-        public IBinanceClientUsdFuturesMarket UsdFuturesApi { get; }
-        public IBinanceClientCoinFuturesMarket CoinFuturesApi { get; }
+        public IBinanceClientGeneralApi GeneralApi { get; }
+        public IBinanceClientSpotApi SpotApi { get; }
+        public IBinanceClientUsdFuturesApi UsdFuturesApi { get; }
+        public IBinanceClientCoinFuturesApi CoinFuturesApi { get; }
         #endregion
 
         #region constructor/destructor
@@ -52,10 +43,10 @@ namespace Binance.Net.Clients.Rest.Spot
         /// <param name="options">The options to use for this client</param>
         public BinanceClient(BinanceClientOptions options) : base("Binance", options)
         {
-            GeneralApi = new BinanceClientGeneral(this, options);
-            SpotApi = new BinanceClientSpotMarket(log, this, options);
-            UsdFuturesApi = new BinanceClientUsdFuturesMarket(log, this, options);
-            CoinFuturesApi = new BinanceClientCoinFuturesMarket(log, this, options);
+            GeneralApi = new BinanceClientGeneralApi(this, options);
+            SpotApi = new BinanceClientSpotApi(log, this, options);
+            UsdFuturesApi = new BinanceClientUsdFuturesApi(log, this, options);
+            CoinFuturesApi = new BinanceClientCoinFuturesApi(log, this, options);
         }
         #endregion
 
@@ -67,7 +58,7 @@ namespace Binance.Net.Clients.Rest.Spot
         {
             BinanceClientOptions.Default = options;
         }
-               
+
         /// <inheritdoc />
         protected override Error ParseErrorResponse(JToken error)
         {
@@ -84,7 +75,7 @@ namespace Binance.Net.Clients.Rest.Spot
         }
 
         internal Task<WebCallResult<T>> SendRequestInternal<T>(RestApiClient apiClient, Uri uri, HttpMethod method, CancellationToken cancellationToken,
-            Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null, 
+            Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
             ArrayParametersSerialization? arraySerialization = null, int weight = 1) where T : class
         {
             return base.SendRequestAsync<T>(apiClient, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, requestWeight: weight);
