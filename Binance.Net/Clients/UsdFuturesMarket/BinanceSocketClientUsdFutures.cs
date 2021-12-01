@@ -28,7 +28,7 @@ namespace Binance.Net.Clients.Socket
     /// <summary>
     /// Client providing access to the Binance Usd futures websocket Api
     /// </summary>
-    public class BinanceSocketClientUsdFutures : SocketSubClient, IBinanceSocketClientUsdFuturesMarket
+    public class BinanceSocketClientUsdFutures : SocketApiClient, IBinanceSocketClientUsdFuturesMarket
     {
         #region fields
         private readonly BinanceSocketClient _baseClient;
@@ -68,13 +68,17 @@ namespace Binance.Net.Clients.Socket
         /// Create a new instance of BinanceSocketClientSpot with default options
         /// </summary>
         public BinanceSocketClientUsdFutures(Log log, BinanceSocketClient baseClient, BinanceSocketClientOptions options) :
-            base(options.OptionsUsdFutures, options.OptionsUsdFutures.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.OptionsUsdFutures.ApiCredentials))
+            base(options, options.UsdFuturesStreamsOptions)
         {
             _options = options;
             _baseClient = baseClient;
             _log = log;
         }
-        #endregion 
+        #endregion
+
+        public override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+            => new BinanceAuthenticationProvider(credentials);
+
 
         #region methods
 
@@ -91,7 +95,7 @@ namespace Binance.Net.Clients.Socket
 
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesUsdtStreamMarkPrice>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + markPriceStreamEndpoint + (updateInterval == 1000 ? "@1s" : "")).ToArray();
-            return await _baseClient.SubscribeInternal(this, _options.OptionsUsdFutures.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            return await _baseClient.SubscribeInternal(this, BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -104,7 +108,7 @@ namespace Binance.Net.Clients.Socket
             updateInterval?.ValidateIntValues(nameof(updateInterval), 1000, 3000);
 
             var handler = new Action<DataEvent<BinanceCombinedStream<IEnumerable<BinanceFuturesStreamMarkPrice>>>>(data => onMessage(data.As<IEnumerable<BinanceFuturesStreamMarkPrice>>(data.Data.Data, data.Data.Stream)));
-            return await _baseClient.SubscribeInternal(this, _options.OptionsUsdFutures.BaseAddress, new[] { allMarkPriceStreamEndpoint + (updateInterval == 1000 ? "@1s" : "") }, handler, ct).ConfigureAwait(false);
+            return await _baseClient.SubscribeInternal(this, BaseAddress, new[] { allMarkPriceStreamEndpoint + (updateInterval == 1000 ? "@1s" : "") }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -127,7 +131,7 @@ namespace Binance.Net.Clients.Socket
             symbols.ValidateNotNull(nameof(symbols));
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamKlineData>>>(data => onMessage(data.As<IBinanceStreamKlineData>(data.Data.Data, data.Data.Data.Symbol)));
             symbols = symbols.SelectMany(a => intervals.Select(i => a.ToLower(CultureInfo.InvariantCulture) + klineStreamEndpoint + "_" + JsonConvert.SerializeObject(i, new KlineIntervalConverter(false)))).ToArray();
-            return await _baseClient.SubscribeInternal(this, _options.OptionsUsdFutures.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            return await _baseClient.SubscribeInternal(this, BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -144,7 +148,7 @@ namespace Binance.Net.Clients.Socket
 
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamMiniTick>>>(data => onMessage(data.As<IBinanceMiniTick>(data.Data.Data, data.Data.Data.Symbol)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + symbolMiniTickerStreamEndpoint).ToArray();
-            return await _baseClient.SubscribeInternal(this, _options.OptionsUsdFutures.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            return await _baseClient.SubscribeInternal(this, BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -154,7 +158,7 @@ namespace Binance.Net.Clients.Socket
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllMiniTickerUpdatesAsync(Action<DataEvent<IEnumerable<IBinanceMiniTick>>> onMessage, CancellationToken ct = default)
         {
             var handler = new Action<DataEvent<BinanceCombinedStream<IEnumerable<BinanceStreamMiniTick>>>>(data => onMessage(data.As<IEnumerable<IBinanceMiniTick>>(data.Data.Data, data.Data.Stream)));
-            return await _baseClient.SubscribeInternal(this, _options.OptionsUsdFutures.BaseAddress, new[] { allMiniTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
+            return await _baseClient.SubscribeInternal(this, BaseAddress, new[] { allMiniTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
         }
         #endregion
 
@@ -170,7 +174,7 @@ namespace Binance.Net.Clients.Socket
 
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamTick>>>(data => onMessage(data.As<IBinanceTick>(data.Data.Data, data.Data.Data.Symbol)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + symbolTickerStreamEndpoint).ToArray();
-            return await _baseClient.SubscribeInternal(this, _options.OptionsUsdFutures.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            return await _baseClient.SubscribeInternal(this, BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -183,7 +187,7 @@ namespace Binance.Net.Clients.Socket
             var action = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamCompositeIndex>>>(data => {
                 onMessage(data.As(data.Data.Data, data.Data.Data.Symbol));
             });
-            return await _baseClient.SubscribeInternal(this, _options.OptionsUsdFutures.BaseAddress, new[] { symbol + compositeIndexEndpoint }, action, ct).ConfigureAwait(false);
+            return await _baseClient.SubscribeInternal(this, BaseAddress, new[] { symbol + compositeIndexEndpoint }, action, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -194,7 +198,7 @@ namespace Binance.Net.Clients.Socket
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllTickerUpdatesAsync(Action<DataEvent<IEnumerable<IBinanceTick>>> onMessage, CancellationToken ct = default)
         {
             var handler = new Action<DataEvent<BinanceCombinedStream<IEnumerable<BinanceStreamTick>>>>(data => onMessage(data.As<IEnumerable<IBinanceTick>>(data.Data.Data, data.Data.Stream)));
-            return await _baseClient.SubscribeInternal(this, _options.OptionsUsdFutures.BaseAddress, new[] { allTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
+            return await _baseClient.SubscribeInternal(this, BaseAddress, new[] { allTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -211,7 +215,7 @@ namespace Binance.Net.Clients.Socket
 
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamAggregatedTrade>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + aggregatedTradesStreamEndpoint).ToArray();
-            return await _baseClient.SubscribeInternal(this, _options.OptionsUsdFutures.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            return await _baseClient.SubscribeInternal(this, BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
         #endregion
 
@@ -227,7 +231,7 @@ namespace Binance.Net.Clients.Socket
 
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamBookPrice>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + bookTickerStreamEndpoint).ToArray();
-            return await _baseClient.SubscribeInternal(this, _options.OptionsUsdFutures.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            return await _baseClient.SubscribeInternal(this, BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -238,7 +242,7 @@ namespace Binance.Net.Clients.Socket
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllBookTickerUpdatesAsync(Action<DataEvent<BinanceStreamBookPrice>> onMessage, CancellationToken ct = default)
         {
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamBookPrice>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
-            return await _baseClient.SubscribeInternal(this, _options.OptionsUsdFutures.BaseAddress, new[] { allBookTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
+            return await _baseClient.SubscribeInternal(this, BaseAddress, new[] { allBookTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -255,7 +259,7 @@ namespace Binance.Net.Clients.Socket
 
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamLiquidationData>>>(data => onMessage(data.As(data.Data.Data.Data, data.Data.Data.Data.Symbol)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + liquidationStreamEndpoint).ToArray();
-            return await _baseClient.SubscribeInternal(this, _options.OptionsUsdFutures.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            return await _baseClient.SubscribeInternal(this, BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -266,7 +270,7 @@ namespace Binance.Net.Clients.Socket
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllLiquidationUpdatesAsync(Action<DataEvent<BinanceFuturesStreamLiquidation>> onMessage, CancellationToken ct = default)
         {
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamLiquidationData>>>(data => onMessage(data.As(data.Data.Data.Data, data.Data.Data.Data.Symbol)));
-            return await _baseClient.SubscribeInternal(this, _options.OptionsUsdFutures.BaseAddress, new[] { allLiquidationStreamEndpoint }, handler, ct).ConfigureAwait(false);
+            return await _baseClient.SubscribeInternal(this, BaseAddress, new[] { allLiquidationStreamEndpoint }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -290,7 +294,7 @@ namespace Binance.Net.Clients.Socket
             });
 
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + partialBookDepthStreamEndpoint + levels + (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
-            return await _baseClient.SubscribeInternal(this, _options.OptionsUsdFutures.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            return await _baseClient.SubscribeInternal(this, BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -308,7 +312,7 @@ namespace Binance.Net.Clients.Socket
             updateInterval?.ValidateIntValues(nameof(updateInterval), 100, 250, 500);
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamOrderBookDepth>>>(data => onMessage(data.As<IBinanceFuturesEventOrderBook>(data.Data.Data, data.Data.Data.Symbol)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + depthStreamEndpoint + (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
-            return await _baseClient.SubscribeInternal(this, _options.OptionsUsdFutures.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            return await _baseClient.SubscribeInternal(this, BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -393,7 +397,7 @@ namespace Binance.Net.Clients.Socket
                 }
             });
 
-            return await _baseClient.SubscribeInternal(this, _options.OptionsUsdFutures.BaseAddress, new[] { listenKey }, handler, ct).ConfigureAwait(false);
+            return await _baseClient.SubscribeInternal(this, BaseAddress, new[] { listenKey }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -409,7 +413,7 @@ namespace Binance.Net.Clients.Socket
         {
             tokens = tokens.Select(a => a.ToUpper(CultureInfo.InvariantCulture) + bltvInfoEndpoint).ToArray();
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceBlvtInfoUpdate>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.TokenName)));
-            return await _baseClient.SubscribeInternal(this, _options.OptionsUsdFutures.BaseAddress, tokens, handler, ct).ConfigureAwait(false);
+            return await _baseClient.SubscribeInternal(this, BaseAddress, tokens, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -425,7 +429,7 @@ namespace Binance.Net.Clients.Socket
         {
             tokens = tokens.Select(a => a.ToUpper(CultureInfo.InvariantCulture) + bltvKlineEndpoint + "_" + JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ToArray();
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamKlineData>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
-            return await _baseClient.SubscribeInternal(this, _options.OptionsUsdFutures.BaseAddress, tokens, handler, ct).ConfigureAwait(false);
+            return await _baseClient.SubscribeInternal(this, BaseAddress, tokens, handler, ct).ConfigureAwait(false);
         }
 
         #endregion

@@ -1,12 +1,13 @@
 ﻿using Binance.Net.Objects;
 using CryptoExchange.Net;
+using CryptoExchange.Net.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Binance.Net.Clients.Base
 {
-    public class BinanceClientBaseSpot : RestSubClient
+    public class BinanceClientBaseSpot : RestApiClient
     {
         #region fields 
         internal static double CalculatedTimeOffset;
@@ -15,9 +16,11 @@ namespace Binance.Net.Clients.Base
         #endregion
 
         public BinanceClientBaseSpot(BinanceClientOptions options) :
-            base(options.OptionsSpot, options.OptionsSpot.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.OptionsSpot.ApiCredentials))
+            base(options, options.SpotApiOptions)
         {
         }
 
+        public override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+            => new BinanceAuthenticationProvider(credentials);
     }
 }

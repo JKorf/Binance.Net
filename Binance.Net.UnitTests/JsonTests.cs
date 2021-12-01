@@ -9,28 +9,37 @@ using System.Threading.Tasks;
 using Binance.Net.Interfaces.Clients.Rest.CoinFutures;
 using Binance.Net.Interfaces.Clients.Rest.Spot;
 using CryptoExchange.Net.Interfaces;
+using Binance.Net.Interfaces.Clients;
 
 namespace Binance.Net.UnitTests
 {
     [TestFixture]
     public class JsonTests
     {
-        private JsonToObjectComparer<IBinanceClientSpot> _comparer = new JsonToObjectComparer<IBinanceClientSpot>((json) => TestHelpers.CreateResponseClient(json, new BinanceClientSpotOptions()
-        { ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), AutoTimestamp = false, RateLimiters = new List<IRateLimiter>()}));
-
-        private JsonToObjectComparer<IBinanceClientCoinFutures> _comparerCoin = new JsonToObjectComparer<IBinanceClientCoinFutures>((json) => TestHelpers.CreateResponseClientCoin(json, new BinanceClientCoinFuturesOptions()
-        { ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), AutoTimestamp = false, RateLimiters = new List<IRateLimiter>() }));
-
-        private JsonToObjectComparer<IBinanceClientUsdFuturesMarket> _comparerUsd = new JsonToObjectComparer<IBinanceClientUsdFuturesMarket>((json) => TestHelpers.CreateResponseClientUsd(json, new BinanceClientUsdFuturesOptions()
-        { ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), AutoTimestamp = false, RateLimiters = new List<IRateLimiter>() }));
-
+        private JsonToObjectComparer<IBinanceClient> _comparer = new JsonToObjectComparer<IBinanceClient>((json) => TestHelpers.CreateResponseClient(json, new BinanceClientOptions()
+        { 
+            ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), 
+            AutoTimestamp = false, 
+            SpotApiOptions = new BinanceApiClientOptions
+            {
+                RateLimiters = new List<IRateLimiter>()
+            },
+            UsdFuturesApiOptions = new BinanceApiClientOptions
+            {
+                RateLimiters = new List<IRateLimiter>()
+            },
+            CoinFuturesApiOptions = new BinanceApiClientOptions
+            {
+                RateLimiters = new List<IRateLimiter>()
+            }
+        }));
 
         [Test]
         public async Task ValidateSpotAccountCalls()
         {   
             await _comparer.ProcessSubject(
                 "Spot/Account",
-                c => c.Account,
+                c => c.SpotApi.Account,
                 useNestedJsonPropertyForCompare: new Dictionary<string, string> {
                     { "GetTradingStatusAsync", "data" },
                     { "GetDailySpotAccountSnapshotAsync", "snapshotVos" },
@@ -47,7 +56,7 @@ namespace Binance.Net.UnitTests
         {
             await _comparer.ProcessSubject(
                 "Spot/ExchangeData",
-                c => c.ExchangeData,
+                c => c.SpotApi.ExchangeData,
                 useNestedJsonPropertyForCompare: new Dictionary<string, string> {
                     { "GetTradingStatusAsync", "data" }
                 },
@@ -59,7 +68,7 @@ namespace Binance.Net.UnitTests
         {
             await _comparer.ProcessSubject(
                 "Spot/Trading",
-                c => c.Trading,
+                c => c.SpotApi.Trading,
                 useNestedJsonPropertyForCompare: new Dictionary<string, string> {
 
                 },
@@ -77,7 +86,7 @@ namespace Binance.Net.UnitTests
         {
             await _comparer.ProcessSubject(
                 "Spot/SubAccount",
-                c => c.SubAccount,
+                c => c.GeneralApi.SubAccount,
 
                 useNestedJsonPropertyForCompare: new Dictionary<string, string>
                 {
@@ -91,7 +100,7 @@ namespace Binance.Net.UnitTests
         {
             await _comparer.ProcessSubject(
                 "Spot/Brokerage",
-                c => c.Brokerage);
+                c => c.GeneralApi.Brokerage);
         }
 
         [Test]
@@ -99,7 +108,7 @@ namespace Binance.Net.UnitTests
         {
             await _comparer.ProcessSubject(
                 "Spot/Mining",
-                c => c.Mining,
+                c => c.GeneralApi.Mining,
                 useNestedJsonPropertyForCompare: new Dictionary<string, string>
                 {
                     { "GetMiningCoinListAsync", "data" },
@@ -122,7 +131,7 @@ namespace Binance.Net.UnitTests
         {
             await _comparer.ProcessSubject(
                 "Spot/Futures",
-                c => c.Futures,
+                c => c.GeneralApi.Futures,
                 new [] { "collateralQuantity" });
         }
 
@@ -132,7 +141,7 @@ namespace Binance.Net.UnitTests
         {
             await _comparer.ProcessSubject(
                 "Spot/LiquidSwap",
-                c => c.LiquidSwap);
+                c => c.SpotApi.LiquidSwap);
         }
 
         [Test]
@@ -140,7 +149,7 @@ namespace Binance.Net.UnitTests
         {
             await _comparer.ProcessSubject(
                 "Spot/LeveragedTokens",
-                c => c.LeveragedTokens);
+                c => c.SpotApi.LeveragedTokens);
         }
 
         [Test]
@@ -148,15 +157,15 @@ namespace Binance.Net.UnitTests
         {
             await _comparer.ProcessSubject(
                 "Spot/Lending",
-                c => c.Lending);
+                c => c.GeneralApi.Lending);
         }
 
         [Test]
         public async Task ValidateCoinFuturesTradingCalls()
         {
-            await _comparerCoin.ProcessSubject(
+            await _comparer.ProcessSubject(
                 "CoinFutures/Trading",
-                c => c.Trading,
+                c => c.CoinFuturesApi.Trading,
                 useNestedJsonPropertyForCompare: new Dictionary<string, string>
                 {
 
@@ -170,9 +179,9 @@ namespace Binance.Net.UnitTests
         [Test]
         public async Task ValidateCoinFuturesAccountCalls()
         {
-            await _comparerCoin.ProcessSubject(
+            await _comparer.ProcessSubject(
                 "CoinFutures/Account",
-                c => c.Account,
+                c => c.CoinFuturesApi.Account,
                 useNestedJsonPropertyForCompare: new Dictionary<string, string>
                 {
 
@@ -188,9 +197,9 @@ namespace Binance.Net.UnitTests
         [Test]
         public async Task ValidateCoinFuturesExchangeDataCalls()
         {
-            await _comparerCoin.ProcessSubject(
+            await _comparer.ProcessSubject(
                 "CoinFutures/ExchangeData",
-                c => c.ExchangeData,
+                c => c.CoinFuturesApi.ExchangeData,
                 useNestedJsonPropertyForCompare: new Dictionary<string, string>
                 {
 
@@ -207,9 +216,9 @@ namespace Binance.Net.UnitTests
         [Test]
         public async Task ValidateUsdFuturesAccountCalls()
         {
-            await _comparerUsd.ProcessSubject(
+            await _comparer.ProcessSubject(
                 "UsdFutures/Account",
-                c => c.Account,
+                c => c.UsdFuturesApi.Account,
                 useNestedJsonPropertyForCompare: new Dictionary<string, string>
                 {
                 },
@@ -225,9 +234,9 @@ namespace Binance.Net.UnitTests
         [Test]
         public async Task ValidateUsdFuturesExchangeDataCalls()
         {
-            await _comparerUsd.ProcessSubject(
+            await _comparer.ProcessSubject(
                 "UsdFutures/ExchangeData",
-                c => c.ExchangeData,
+                c => c.UsdFuturesApi.ExchangeData,
                 useNestedJsonPropertyForCompare: new Dictionary<string, string>
                 {
                 },
@@ -242,9 +251,9 @@ namespace Binance.Net.UnitTests
         [Test]
         public async Task ValidateUsdFuturesTradingCalls()
         {
-            await _comparerUsd.ProcessSubject(
+            await _comparer.ProcessSubject(
                 "UsdFutures/Trading",
-                c => c.Trading,
+                c => c.UsdFuturesApi.Trading,
                 useNestedJsonPropertyForCompare: new Dictionary<string, string>
                 {
                 },

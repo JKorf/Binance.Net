@@ -11,9 +11,9 @@ namespace Binance.Net.Interfaces.Clients
 {
     public interface IBinanceClient: IRestClient
     {
-        IBinanceClientGeneral General { get; }
-        IBinanceClientCoinFuturesMarket CoinFuturesMarket { get; }
-        IBinanceClientSpotMarket SpotMarket { get; }
-        IBinanceClientUsdFuturesMarket UsdFuturesMarket { get; }
+        IBinanceClientGeneral GeneralApi { get; }
+        IBinanceClientCoinFuturesMarket CoinFuturesApi { get; }
+        IBinanceClientSpotMarket SpotApi { get; }
+        IBinanceClientUsdFuturesMarket UsdFuturesApi { get; }
     }
 }

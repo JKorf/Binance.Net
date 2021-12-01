@@ -39,7 +39,7 @@ namespace Binance.Net.Clients.Rest.Spot
         private Log _log;
         #endregion
 
-        #region Subclients
+        #region Api clients
         /// <inheritdoc />
         public IBinanceClientSpotMarketAccount Account { get; }        
         /// <inheritdoc />
@@ -83,7 +83,7 @@ namespace Binance.Net.Clients.Rest.Spot
         internal string GetTimestamp()
         {
             var offset = Options.AutoTimestamp ? CalculatedTimeOffset : 0;
-            offset += Options.OptionsSpot.TimestampOffset.TotalMilliseconds;
+            offset += Options.SpotApiOptions.TimestampOffset.TotalMilliseconds;
             return DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddMilliseconds(offset))!.Value.ToString(CultureInfo.InvariantCulture);
         }
 
@@ -135,8 +135,7 @@ namespace Binance.Net.Clients.Rest.Spot
             {
                 { "symbol", symbol },
                 { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
-                { "type", JsonConvert.SerializeObject(type, new OrderTypeConverter(false)) },
-                { "timestamp", GetTimestamp() }
+                { "type", JsonConvert.SerializeObject(type, new OrderTypeConverter(false)) }
             };
             parameters.AddOptionalParameter("quantity", quantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("quoteOrderQty", quoteQuantity?.ToString(CultureInfo.InvariantCulture));
@@ -180,7 +179,7 @@ namespace Binance.Net.Clients.Rest.Spot
             if (TradeRulesBehaviour == TradeRulesBehaviour.None)
                 return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice, outputStopPrice);
 
-            if (ExchangeInfo == null || LastExchangeInfoUpdate == null || (DateTime.UtcNow - LastExchangeInfoUpdate.Value).TotalMinutes > Options.OptionsSpot.TradeRulesUpdateInterval.TotalMinutes)
+            if (ExchangeInfo == null || LastExchangeInfoUpdate == null || (DateTime.UtcNow - LastExchangeInfoUpdate.Value).TotalMinutes > Options.SpotApiOptions.TradeRulesUpdateInterval.TotalMinutes)
                 await ExchangeData.GetExchangeInfoAsync(ct).ConfigureAwait(false);
 
             if (ExchangeInfo == null)

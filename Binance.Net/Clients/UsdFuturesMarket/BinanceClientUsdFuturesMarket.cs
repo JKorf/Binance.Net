@@ -24,7 +24,7 @@ using CryptoExchange.Net.Logging;
 namespace Binance.Net.Clients.Rest.UsdFutures
 {
     /// <inheritdoc cref="IBinanceClientUsdFuturesMarket" />
-    public class BinanceClientUsdFuturesMarket : RestSubClient, IBinanceClientUsdFuturesMarket, IExchangeClient
+    public class BinanceClientUsdFuturesMarket : RestApiClient, IBinanceClientUsdFuturesMarket, IExchangeClient
     {
         #region fields 
         private readonly BinanceClient _baseClient;
@@ -42,7 +42,7 @@ namespace Binance.Net.Clients.Rest.UsdFutures
         private Log _log;
         #endregion
 
-        #region Subclients
+        #region Api clients
         /// <inheritdoc />
         public IBinanceClientUsdFuturesMarketAccount Account { get; }
         /// <inheritdoc />
@@ -65,7 +65,7 @@ namespace Binance.Net.Clients.Rest.UsdFutures
         /// Create a new instance of BinanceClient using the default options
         /// </summary>
         public BinanceClientUsdFuturesMarket(Log log, BinanceClient baseClient, BinanceClientOptions options) :
-            base(options.OptionsCoinFutures, options.OptionsCoinFutures.ApiCredentials == null ? null : new BinanceAuthenticationProvider(options.OptionsCoinFutures.ApiCredentials))
+            base(options, options.UsdFuturesApiOptions)
         {
             _log = log;
             Options = options;
@@ -77,10 +77,12 @@ namespace Binance.Net.Clients.Rest.UsdFutures
         }
         #endregion
 
+        public override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+            => new BinanceAuthenticationProvider(credentials);
         internal string GetTimestamp()
         {
             var offset = Options.AutoTimestamp ? CalculatedTimeOffset : 0;
-            offset += Options.OptionsUsdFutures.TimestampOffset.TotalMilliseconds;
+            offset += Options.UsdFuturesApiOptions.TimestampOffset.TotalMilliseconds;
             return DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddMilliseconds(offset))!.Value.ToString(CultureInfo.InvariantCulture);
         }
 
@@ -111,7 +113,7 @@ namespace Binance.Net.Clients.Rest.UsdFutures
             if (TradeRulesBehaviour == TradeRulesBehaviour.None)
                 return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice, outputStopPrice);
 
-            if (ExchangeInfo == null || LastExchangeInfoUpdate == null || (DateTime.UtcNow - LastExchangeInfoUpdate.Value).TotalMinutes > Options.OptionsUsdFutures.TradeRulesUpdateInterval.TotalMinutes)
+            if (ExchangeInfo == null || LastExchangeInfoUpdate == null || (DateTime.UtcNow - LastExchangeInfoUpdate.Value).TotalMinutes > Options.UsdFuturesApiOptions.TradeRulesUpdateInterval.TotalMinutes)
                 await ExchangeData.GetExchangeInfoAsync(ct).ConfigureAwait(false);
 
             if (ExchangeInfo == null)

@@ -32,7 +32,7 @@ namespace Binance.Net.Clients.Rest.CoinFutures
         internal readonly BinanceClientOptions Options;
         #endregion
 
-        #region Subclients
+        #region Api clients
         /// <inheritdoc />
         public IBinanceClientGeneralBrokerage Brokerage { get; }
         /// <inheritdoc />
@@ -63,7 +63,7 @@ namespace Binance.Net.Clients.Rest.CoinFutures
         internal string GetTimestamp()
         {
             var offset = Options.AutoTimestamp ? CalculatedTimeOffset : 0;
-            offset += Options.OptionsSpot.TimestampOffset.TotalMilliseconds;
+            offset += Options.SpotApiOptions.TimestampOffset.TotalMilliseconds;
             return DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddMilliseconds(offset))!.Value.ToString(CultureInfo.InvariantCulture);
         }
 
@@ -80,7 +80,7 @@ namespace Binance.Net.Clients.Rest.CoinFutures
         internal async Task<WebCallResult<DateTime>> CheckAutoTimestamp(CancellationToken ct)
         {
             if (Options.AutoTimestamp && (!TimeSynced || DateTime.UtcNow - LastTimeSync > Options.AutoTimestampRecalculationInterval))
-                return await _baseClient.SpotMarket.ExchangeData.GetServerTimeAsync(TimeSynced, ct).ConfigureAwait(false);
+                return await _baseClient.SpotApi.ExchangeData.GetServerTimeAsync(TimeSynced, ct).ConfigureAwait(false);
 
             return new WebCallResult<DateTime>(null, null, default, null);
         }
@@ -91,7 +91,7 @@ namespace Binance.Net.Clients.Rest.CoinFutures
         {
             if (signed)
             {
-                var timestampResult = await ((BinanceClientSpotMarket)_baseClient.SpotMarket).CheckAutoTimestamp(cancellationToken).ConfigureAwait(false);
+                var timestampResult = await ((BinanceClientSpotMarket)_baseClient.SpotApi).CheckAutoTimestamp(cancellationToken).ConfigureAwait(false);
                 if (!timestampResult)
                     return new WebCallResult<T>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
 

@@ -27,16 +27,16 @@ namespace Binance.Net.Clients.Socket
     /// <summary>
     /// Client providing access to the Binance Spot websocket Api
     /// </summary>
-    public class BinanceSocketClient : SocketClient, IBinanceSocketClient
+    public class BinanceSocketClient : BaseSocketClient, IBinanceSocketClient
     {
         #region fields
         #endregion
 
-        #region Subclients
+        #region Api clients
 
-        public IBinanceSocketClientSpotMarket SpotMarket { get; set; }
-        public IBinanceSocketClientUsdFuturesMarket UsdFuturesMarket { get; set; }
-        public IBinanceSocketClientCoinFuturesMarket CoinFuturesMarket { get; set; }
+        public IBinanceSocketClientSpotMarket SpotStreams { get; set; }
+        public IBinanceSocketClientUsdFuturesMarket UsdFuturesStreams { get; set; }
+        public IBinanceSocketClientCoinFuturesMarket CoinFuturesStreams { get; set; }
 
         #endregion
 
@@ -58,9 +58,9 @@ namespace Binance.Net.Clients.Socket
             SetDataInterpreter((byte[] data) => string.Empty, null);
             RateLimitPerSocketPerSecond = 4;
 
-            SpotMarket = new BinanceSocketClientSpot(log, this, options);
-            UsdFuturesMarket = new BinanceSocketClientUsdFutures(log, this, options);
-            CoinFuturesMarket = new BinanceSocketClientCoinFutures(log, this, options);
+            SpotStreams = new BinanceSocketClientSpot(log, this, options);
+            UsdFuturesStreams = new BinanceSocketClientUsdFutures(log, this, options);
+            CoinFuturesStreams = new BinanceSocketClientCoinFutures(log, this, options);
         }
         #endregion 
 
@@ -78,7 +78,7 @@ namespace Binance.Net.Clients.Socket
         internal CallResult<T> DeserializeInternal<T>(JToken obj, JsonSerializer? serializer = null, int? requestId = null)
             => Deserialize<T>(obj, serializer, requestId);
 
-        internal Task<CallResult<UpdateSubscription>> SubscribeInternal<T>(SocketSubClient subClient, string url, IEnumerable<string> topics, Action<DataEvent<T>> onData, CancellationToken ct)
+        internal Task<CallResult<UpdateSubscription>> SubscribeInternal<T>(SocketApiClient apiClient, string url, IEnumerable<string> topics, Action<DataEvent<T>> onData, CancellationToken ct)
         {
             var request = new BinanceSocketRequest
             {
@@ -87,7 +87,7 @@ namespace Binance.Net.Clients.Socket
                 Id = NextId()
             };
 
-            return SubscribeAsync(subClient, url.AppendPath("stream"), request, null, false, onData, ct);
+            return SubscribeAsync(apiClient, url.AppendPath("stream"), request, null, false, onData, ct);
         }
 
         /// <inheritdoc />
@@ -192,9 +192,9 @@ namespace Binance.Net.Clients.Socket
 
         public override void Dispose()
         {
-            SpotMarket.Dispose();
-            UsdFuturesMarket.Dispose();
-            CoinFuturesMarket.Dispose();
+            SpotStreams.Dispose();
+            UsdFuturesStreams.Dispose();
+            CoinFuturesStreams.Dispose();
             base.Dispose();
         }
         #endregion

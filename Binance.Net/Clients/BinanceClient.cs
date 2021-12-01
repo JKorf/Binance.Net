@@ -29,13 +29,13 @@ using Binance.Net.Clients.Rest.CoinFutures;
 namespace Binance.Net.Clients.Rest.Spot
 {
     /// <inheritdoc cref="IBinanceClientSpot" />
-    public class BinanceClient: RestClient, IBinanceClient
+    public class BinanceClient: BaseRestClient, IBinanceClient
     {
-        #region Subclients
-        public IBinanceClientGeneral General { get; }
-        public IBinanceClientSpotMarket SpotMarket { get; }
-        public IBinanceClientUsdFuturesMarket UsdFuturesMarket { get; }
-        public IBinanceClientCoinFuturesMarket CoinFuturesMarket { get; }
+        #region Api clients
+        public IBinanceClientGeneral GeneralApi { get; }
+        public IBinanceClientSpotMarket SpotApi { get; }
+        public IBinanceClientUsdFuturesMarket UsdFuturesApi { get; }
+        public IBinanceClientCoinFuturesMarket CoinFuturesApi { get; }
         #endregion
 
         #region constructor/destructor
@@ -52,10 +52,10 @@ namespace Binance.Net.Clients.Rest.Spot
         /// <param name="options">The options to use for this client</param>
         public BinanceClient(BinanceClientOptions options) : base("Binance", options)
         {
-            General = new BinanceClientGeneral(this, options);
-            SpotMarket = new BinanceClientSpotMarket(log, this, options);
-            UsdFuturesMarket = new BinanceClientUsdFuturesMarket(log, this, options);
-            CoinFuturesMarket = new BinanceClientCoinFuturesMarket(log, this, options);
+            GeneralApi = new BinanceClientGeneral(this, options);
+            SpotApi = new BinanceClientSpotMarket(log, this, options);
+            UsdFuturesApi = new BinanceClientUsdFuturesMarket(log, this, options);
+            CoinFuturesApi = new BinanceClientCoinFuturesMarket(log, this, options);
         }
         #endregion
 
@@ -83,19 +83,19 @@ namespace Binance.Net.Clients.Rest.Spot
             return new ServerError((int)error["code"]!, (string)error["msg"]!);
         }
 
-        internal Task<WebCallResult<T>> SendRequestInternal<T>(RestSubClient subClient, Uri uri, HttpMethod method, CancellationToken cancellationToken,
+        internal Task<WebCallResult<T>> SendRequestInternal<T>(RestApiClient apiClient, Uri uri, HttpMethod method, CancellationToken cancellationToken,
             Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null, 
             ArrayParametersSerialization? arraySerialization = null, int weight = 1) where T : class
         {
-            return base.SendRequestAsync<T>(subClient, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, requestWeight: weight);
+            return base.SendRequestAsync<T>(apiClient, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, requestWeight: weight);
         }
 
         public override void Dispose()
         {
-            General.Dispose();
-            SpotMarket.Dispose();
-            UsdFuturesMarket.Dispose();
-            CoinFuturesMarket.Dispose();
+            GeneralApi.Dispose();
+            SpotApi.Dispose();
+            UsdFuturesApi.Dispose();
+            CoinFuturesApi.Dispose();
             base.Dispose();
         }
     }

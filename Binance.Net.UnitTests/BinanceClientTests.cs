@@ -34,10 +34,10 @@ namespace Binance.Net.UnitTests
             // arrange
             DateTime expected = new DateTime(1970, 1, 1).AddMilliseconds(milisecondsTime);
             var time = new BinanceCheckTime() { ServerTime = expected };
-            var client = TestHelpers.CreateResponseClient(JsonConvert.SerializeObject(time), new BinanceClientSpotOptions() { AutoTimestamp = false });
+            var client = TestHelpers.CreateResponseClient(JsonConvert.SerializeObject(time), new BinanceClientOptions() { AutoTimestamp = false });
 
             // act
-            var result = await client.ExchangeData.GetServerTimeAsync();
+            var result = await client.SpotApi.ExchangeData.GetServerTimeAsync();
 
             // assert
             Assert.AreEqual(true, result.Success);
@@ -53,14 +53,14 @@ namespace Binance.Net.UnitTests
                 ListenKey = "123"
             };
 
-            var client = TestHelpers.CreateResponseClient(key, new BinanceClientSpotOptions()
+            var client = TestHelpers.CreateResponseClient(key, new BinanceClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
             });
 
             // act
-            var result = await client.Account.StartUserStreamAsync();
+            var result = await client.SpotApi.Account.StartUserStreamAsync();
 
             // assert
             Assert.IsTrue(result.Success);
@@ -71,14 +71,14 @@ namespace Binance.Net.UnitTests
         public async Task KeepAliveUserStream_Should_Respond()
         {
             // arrange
-            var client = TestHelpers.CreateResponseClient("{}", new BinanceClientSpotOptions()
+            var client = TestHelpers.CreateResponseClient("{}", new BinanceClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
             });
 
             // act
-            var result = await client.Account.KeepAliveUserStreamAsync("test");
+            var result = await client.SpotApi.Account.KeepAliveUserStreamAsync("test");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -88,14 +88,14 @@ namespace Binance.Net.UnitTests
         public async Task StopUserStream_Should_Respond()
         {
             // arrange
-            var client = TestHelpers.CreateResponseClient("{}", new BinanceClientSpotOptions()
+            var client = TestHelpers.CreateResponseClient("{}", new BinanceClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = false
             });
 
             // act
-            var result = await client.Account.StopUserStreamAsync("test");
+            var result = await client.SpotApi.Account.StopUserStreamAsync("test");
 
             // assert
             Assert.IsTrue(result.Success);
@@ -105,7 +105,7 @@ namespace Binance.Net.UnitTests
         public async Task EnablingAutoTimestamp_Should_CallServerTime()
         {
             // arrange
-            var client = TestHelpers.CreateResponseClient("{}", new BinanceClientSpotOptions()
+            var client = TestHelpers.CreateResponseClient("{}", new BinanceClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
                 AutoTimestamp = true
@@ -114,7 +114,7 @@ namespace Binance.Net.UnitTests
             // act
             try
             {
-                await client.Trading.GetOpenOrdersAsync();
+                await client.SpotApi.Trading.GetOpenOrdersAsync();
             }
             catch (Exception)
             {
@@ -134,7 +134,7 @@ namespace Binance.Net.UnitTests
             TestHelpers.SetErrorWithResponse(client, "{\"msg\": \"Error!\", \"code\": 123}", HttpStatusCode.BadRequest);
 
             // act
-            var result = await client.ExchangeData.GetServerTimeAsync();
+            var result = await client.SpotApi.ExchangeData.GetServerTimeAsync();
 
             // assert
             Assert.IsFalse(result.Success);
@@ -206,7 +206,7 @@ namespace Binance.Net.UnitTests
         [Test]
         public void CheckRestInterfaces()
         {
-            var assembly = Assembly.GetAssembly(typeof(BinanceClientSpotMarket));
+            var assembly = Assembly.GetAssembly(typeof(BinanceClient));
             var ignore = new string[] { "IBinanceClientUsdFutures", "IBinanceClientCoinFutures", "IBinanceClientSpot" };
             var clientInterfaces = assembly.GetTypes().Where(t => t.Name.StartsWith("IBinanceClient") && !ignore.Contains(t.Name));
             
@@ -217,7 +217,7 @@ namespace Binance.Net.UnitTests
                 foreach (var method in implementation.GetMethods().Where(m => m.ReturnType.IsAssignableTo(typeof(Task))))
                 {
                     var interfaceMethod = clientInterface.GetMethod(method.Name, method.GetParameters().Select(p => p.ParameterType).ToArray());
-                    Assert.NotNull(interfaceMethod);
+                    Assert.NotNull(interfaceMethod, $"Missing interface for method {method.Name} in {clientInterface.Name}");
                     methods++;
                 }
                 Debug.WriteLine($"{clientInterface.Name} {methods} methods validated");
@@ -237,7 +237,7 @@ namespace Binance.Net.UnitTests
                 foreach (var method in implementation.GetMethods().Where(m => m.ReturnType.IsAssignableTo(typeof(Task<CallResult<UpdateSubscription>>))))
                 {
                     var interfaceMethod = clientInterface.GetMethod(method.Name, method.GetParameters().Select(p => p.ParameterType).ToArray());
-                    Assert.NotNull(interfaceMethod);
+                    Assert.NotNull(interfaceMethod, $"Missing interface for method {method.Name} in {clientInterface.GetType().Name}");
                     methods++;
                 }
                 Debug.WriteLine($"{clientInterface.Name} {methods} methods validated");

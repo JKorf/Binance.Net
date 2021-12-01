@@ -14,6 +14,7 @@ using Binance.Net.Clients.Rest.Spot;
 using Binance.Net.Clients.Rest.UsdFutures;
 using Binance.Net.Clients.Socket;
 using Binance.Net.Interfaces;
+using Binance.Net.Interfaces.Clients;
 using Binance.Net.Interfaces.Clients.Rest.CoinFutures;
 using Binance.Net.Interfaces.Clients.Rest.Spot;
 using Binance.Net.Interfaces.Clients.Rest.UsdFutures;
@@ -69,67 +70,38 @@ namespace Binance.Net.UnitTests.TestImplementations
             return self == to;
         }
 
-        public static IBinanceSocketClientSpotMarket CreateSocketClient(IWebsocket socket, BinanceSocketClientSpotOptions options = null)
+        public static IBinanceSocketClient CreateSocketClient(IWebsocket socket, BinanceSocketClientOptions options = null)
         {
-            BinanceSocketClientSpot client;
-            client = options != null ? new BinanceSocketClientSpot(options) : new BinanceSocketClientSpot();
+            BinanceSocketClient client;
+            client = options != null ? new BinanceSocketClient(options) : new BinanceSocketClient();
             client.SocketFactory = Mock.Of<IWebsocketFactory>();
             Mock.Get(client.SocketFactory).Setup(f => f.CreateWebsocket(It.IsAny<Log>(), It.IsAny<string>())).Returns(socket);
             return client;
         }
 
-        public static IBinanceClientSpot CreateClient(BinanceClientSpotOptions options = null)
+        public static IBinanceClient CreateClient(BinanceClientOptions options = null)
         {
-            IBinanceClientSpot client;
-            client = options != null ? new BinanceClientSpot(options) : new BinanceClientSpot();
+            IBinanceClient client;
+            client = options != null ? new BinanceClient(options) : new BinanceClient();
             client.RequestFactory = Mock.Of<IRequestFactory>();
             return client;
         }
 
-        public static IBinanceClientCoinFutures CreateClientCoin(BinanceClientCoinFuturesOptions options = null)
+        public static IBinanceClient CreateResponseClient(string response, BinanceClientOptions options = null)
         {
-            IBinanceClientCoinFutures client;
-            client = options != null ? new BinanceClientCoinFutures(options) : new BinanceClientCoinFutures();
-            client.RequestFactory = Mock.Of<IRequestFactory>();
-            return client;
-        }
-
-        public static IBinanceClientUsdFuturesMarket CreateClientUsd(BinanceClientUsdFuturesOptions options = null)
-        {
-            IBinanceClientUsdFuturesMarket client;
-            client = options != null ? new BinanceClientUsdFutures(options) : new BinanceClientUsdFutures();
-            client.RequestFactory = Mock.Of<IRequestFactory>();
-            return client;
-        }
-
-        public static IBinanceClientSpot CreateResponseClient(string response, BinanceClientSpotOptions options = null)
-        {
-            var client = (BinanceClientSpotMarket)CreateClient(options);
+            var client = (BinanceClient)CreateClient(options);
             SetResponse(client, response);
             return client;
         }
 
-        public static IBinanceClientCoinFutures CreateResponseClientCoin(string response, BinanceClientCoinFuturesOptions options = null)
+        public static IBinanceClient CreateResponseClient<T>(T response, BinanceClientOptions options = null)
         {
-            var client = (BinanceClientCoinFutures)CreateClientCoin(options);
-            SetResponse(client, response);
-            return client;
-        }
-
-        public static IBinanceClientUsdFuturesMarket CreateResponseClientUsd(string response, BinanceClientUsdFuturesOptions options = null)
-        {
-            var client = (BinanceClientUsdFuturesMarket)CreateClientUsd(options);
-            SetResponse(client, response);
-            return client;
-        }
-
-        public static IBinanceClientSpot CreateResponseClient<T>(T response, BinanceClientSpotOptions options = null)
-        {
-            var client = (BinanceClientSpotMarket)CreateClient(options);
+            var client = (BinanceClient)CreateClient(options);
             SetResponse(client, JsonConvert.SerializeObject(response));
             return client;
         }
-        public static void SetResponse(RestClient client, string responseData)
+
+        public static void SetResponse(BaseRestClient client, string responseData)
         {
             var expectedBytes = Encoding.UTF8.GetBytes(responseData);
             var responseStream = new MemoryStream();
@@ -149,7 +121,7 @@ namespace Binance.Net.UnitTests.TestImplementations
                 .Returns(request.Object);
         }
 
-        public static void SetErrorWithResponse(IBinanceClientSpot client, string responseData, HttpStatusCode code)
+        public static void SetErrorWithResponse(IBinanceClient client, string responseData, HttpStatusCode code)
         {
             var expectedBytes = Encoding.UTF8.GetBytes(responseData);
             var responseStream = new MemoryStream();

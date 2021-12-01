@@ -8,8 +8,8 @@ namespace Binance.Net.Interfaces.Clients
 {
     public interface IBinanceSocketClient: ISocketClient
     {
-        IBinanceSocketClientCoinFuturesMarket CoinFuturesMarket { get; }
-        IBinanceSocketClientSpotMarket SpotMarket { get; }
-        IBinanceSocketClientUsdFuturesMarket UsdFuturesMarket { get; }
+        IBinanceSocketClientCoinFuturesMarket CoinFuturesStreams { get; }
+        IBinanceSocketClientSpotMarket SpotStreams { get; }
+        IBinanceSocketClientUsdFuturesMarket UsdFuturesStreams { get; }
     }
 }
