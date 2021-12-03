@@ -18,9 +18,7 @@ using Newtonsoft.Json;
 
 namespace Binance.Net.Clients.GeneralApi
 {
-    /// <summary>
-    /// Spot system endpoints
-    /// </summary>
+    /// <inheritdoc />
     public class BinanceClientGeneralApiFutures : IBinanceClientGeneralApiFutures
     {
         private const string futuresTransferEndpoint = "futures/transfer";

@@ -18,9 +18,7 @@ using Newtonsoft.Json;
 
 namespace Binance.Net.Clients.CoinFuturesApi
 {
-    /// <summary>
-    /// Spot system endpoints
-    /// </summary>
+    /// <inheritdoc />
     public class BinanceClientCoinFuturesApiTrading : IBinanceClientCoinFuturesApiTrading
     {
         private const string newOrderEndpoint = "order";

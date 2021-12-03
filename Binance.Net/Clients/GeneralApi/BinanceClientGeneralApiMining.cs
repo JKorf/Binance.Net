@@ -16,12 +16,9 @@ using Newtonsoft.Json;
 
 namespace Binance.Net.Clients.GeneralApi
 {
-    /// <summary>
-    /// Spot system endpoints
-    /// </summary>
+    /// <inheritdoc />
     public class BinanceClientGeneralApiMining : IBinanceClientGeneralApiMining
     {
-        // Mining
         private const string coinListEndpoint = "mining/pub/coinList";
         private const string algorithmEndpoint = "mining/pub/algoList";
         private const string minerDetailsEndpoint = "mining/worker/detail";

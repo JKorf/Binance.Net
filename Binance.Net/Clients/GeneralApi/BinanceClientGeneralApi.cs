@@ -14,7 +14,7 @@ using Binance.Net.Clients.SpotApi;
 
 namespace Binance.Net.Clients.GeneralApi
 {
-    /// <inheritdoc cref="IBinanceClientCoinFutures" />
+    /// <inheritdoc cref="IBinanceClientGeneralApi" />
     public class BinanceClientGeneralApi : RestApiClient, IBinanceClientGeneralApi
     {
         #region fields 
@@ -29,15 +29,15 @@ namespace Binance.Net.Clients.GeneralApi
         public IBinanceClientGeneralApiFutures Futures { get; }
         /// <inheritdoc />
         public IBinanceClientGeneralApiLending Lending { get; }
+        /// <inheritdoc />
         public IBinanceClientGeneralApiMining Mining { get; }
+        /// <inheritdoc />
         public IBinanceClientGeneralApiSubAccount SubAccount { get; }
         #endregion
 
         #region constructor/destructor
-        /// <summary>
-        /// Create a new instance of BinanceClient using the default options
-        /// </summary>
-        public BinanceClientGeneralApi(BinanceClient baseClient, BinanceClientOptions options) : base(options, options.SpotApiOptions)
+
+        internal BinanceClientGeneralApi(BinanceClient baseClient, BinanceClientOptions options) : base(options, options.SpotApiOptions)
         {
             Options = options;
             _baseClient = baseClient;
@@ -48,10 +48,11 @@ namespace Binance.Net.Clients.GeneralApi
             Mining = new BinanceClientGeneralApiMining(this);
             SubAccount = new BinanceClientGeneralApiSubAccount(this);
         }
+
         #endregion
 
-
-        public override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+        /// <inheritdoc />
+        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BinanceAuthenticationProvider(credentials);
 
         internal string GetTimestamp()

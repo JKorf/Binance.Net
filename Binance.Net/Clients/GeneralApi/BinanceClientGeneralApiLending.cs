@@ -16,9 +16,7 @@ using Newtonsoft.Json;
 
 namespace Binance.Net.Clients.GeneralApi
 {
-    /// <summary>
-    /// Spot system endpoints
-    /// </summary>
+    /// <inheritdoc />
     public class BinanceClientGeneralApiLending : IBinanceClientGeneralApiLending
     {
         // Lending
@@ -38,9 +36,6 @@ namespace Binance.Net.Clients.GeneralApi
         private const string positionChangedEndpoint = "lending/positionChanged";
 
         private const string cryptoLoanIncomingEndpoint = "loan/income";
-
-
-        private readonly Log _log;
 
         private readonly BinanceClientGeneralApi _baseClient;
 

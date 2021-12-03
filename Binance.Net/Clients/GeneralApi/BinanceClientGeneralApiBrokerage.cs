@@ -15,9 +15,7 @@ using Newtonsoft.Json;
 
 namespace Binance.Net.Clients.GeneralApi
 {
-    /// <summary>
-    /// Spot system endpoints
-    /// </summary>
+    /// <inheritdoc />
     public class BinanceClientGeneralApiBrokerage : IBinanceClientGeneralApiBrokerage
     {
         private const string brokerageApi = "sapi";

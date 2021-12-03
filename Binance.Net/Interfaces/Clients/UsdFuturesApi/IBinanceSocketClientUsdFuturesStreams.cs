@@ -12,6 +12,9 @@ using Binance.Net.Objects.Models.Spot.Socket;
 
 namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 {
+    /// <summary>
+    /// Binance USD futures streams
+    /// </summary>
     public interface IBinanceSocketClientUsdFuturesStreams : IDisposable
     {
         /// <summary>

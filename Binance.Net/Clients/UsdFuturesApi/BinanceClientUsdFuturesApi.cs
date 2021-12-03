@@ -59,10 +59,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         public event Action<ICommonOrderId>? OnOrderCanceled;
 
         #region constructor/destructor
-        /// <summary>
-        /// Create a new instance of BinanceClient using the default options
-        /// </summary>
-        public BinanceClientUsdFuturesApi(Log log, BinanceClient baseClient, BinanceClientOptions options) :
+        internal BinanceClientUsdFuturesApi(Log log, BinanceClient baseClient, BinanceClientOptions options) :
             base(options, options.UsdFuturesApiOptions)
         {
             _log = log;
@@ -75,7 +72,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
         }
         #endregion
 
-        public override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+        /// <inheritdoc />
+        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BinanceAuthenticationProvider(credentials);
         internal string GetTimestamp()
         {
@@ -350,7 +348,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             OnOrderCanceled?.Invoke(id);
         }
 
-        protected static KlineInterval GetKlineIntervalFromTimespan(TimeSpan timeSpan)
+        private static KlineInterval GetKlineIntervalFromTimespan(TimeSpan timeSpan)
         {
             if (timeSpan == TimeSpan.FromMinutes(1)) return KlineInterval.OneMinute;
             if (timeSpan == TimeSpan.FromMinutes(3)) return KlineInterval.ThreeMinutes;
@@ -380,7 +378,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         public string GetSymbolName(string baseAsset, string quoteAsset) =>
             (baseAsset + quoteAsset).ToUpper(CultureInfo.InvariantCulture);
 
-        protected static OrderSide GetOrderSide(IExchangeClient.OrderSide side)
+        private static OrderSide GetOrderSide(IExchangeClient.OrderSide side)
         {
             if (side == IExchangeClient.OrderSide.Sell) return OrderSide.Sell;
             if (side == IExchangeClient.OrderSide.Buy) return OrderSide.Buy;
@@ -388,7 +386,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             throw new ArgumentException("Unsupported order side for Binance order: " + side);
         }
 
-        protected static OrderType GetOrderType(IExchangeClient.OrderType type)
+        private static OrderType GetOrderType(IExchangeClient.OrderType type)
         {
             if (type == IExchangeClient.OrderType.Limit) return OrderType.Limit;
             if (type == IExchangeClient.OrderType.Market) return OrderType.Market;

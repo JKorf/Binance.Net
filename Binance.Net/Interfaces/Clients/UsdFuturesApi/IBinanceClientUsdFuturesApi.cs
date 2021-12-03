@@ -3,7 +3,7 @@
 namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 {
     /// <summary>
-    /// Client for accessing the USD-M Binance futures API. 
+    /// Binance USD futures API endpoints
     /// </summary>
     public interface IBinanceClientUsdFuturesApi : IDisposable
     {

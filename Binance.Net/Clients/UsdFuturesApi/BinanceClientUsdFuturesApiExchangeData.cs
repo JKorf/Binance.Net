@@ -20,9 +20,7 @@ using Newtonsoft.Json;
 
 namespace Binance.Net.Clients.UsdFuturesApi
 {
-    /// <summary>
-    /// Spot system endpoints
-    /// </summary>
+    /// <inheritdoc />
     public class BinanceClientUsdFuturesApiExchangeData : IBinanceClientUsdFuturesApiExchangeData
     {
         private const string orderBookEndpoint = "depth";

@@ -21,9 +21,7 @@ using Newtonsoft.Json;
 
 namespace Binance.Net.Clients.SpotApi
 {
-    /// <summary>
-    /// Spot order endpoints
-    /// </summary>
+    /// <inheritdoc />
     public class BinanceClientSpotApiTrading : IBinanceClientSpotApiTrading
     {
         private const string api = "api";

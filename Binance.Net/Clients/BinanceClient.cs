@@ -19,14 +19,20 @@ using Binance.Net.Clients.CoinFuturesApi;
 
 namespace Binance.Net.Clients
 {
-    /// <inheritdoc cref="IBinanceClientSpot" />
+    /// <inheritdoc cref="IBinanceClient" />
     public class BinanceClient : BaseRestClient, IBinanceClient
     {
         #region Api clients
+
+        /// <inheritdoc />
         public IBinanceClientGeneralApi GeneralApi { get; }
+        /// <inheritdoc />
         public IBinanceClientSpotApi SpotApi { get; }
+        /// <inheritdoc />
         public IBinanceClientUsdFuturesApi UsdFuturesApi { get; }
+        /// <inheritdoc />
         public IBinanceClientCoinFuturesApi CoinFuturesApi { get; }
+
         #endregion
 
         #region constructor/destructor
@@ -53,7 +59,7 @@ namespace Binance.Net.Clients
         /// <summary>
         /// Set the default options to be used when creating new clients
         /// </summary>
-        /// <param name="options"></param>
+        /// <param name="options">Options to use as default</param>
         public static void SetDefaultOptions(BinanceClientOptions options)
         {
             BinanceClientOptions.Default = options;
@@ -81,6 +87,7 @@ namespace Binance.Net.Clients
             return base.SendRequestAsync<T>(apiClient, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, requestWeight: weight);
         }
 
+        /// <inheritdoc />
         public override void Dispose()
         {
             GeneralApi.Dispose();

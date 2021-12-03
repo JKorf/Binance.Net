@@ -134,7 +134,7 @@ namespace Binance.Net.UnitTests.TestImplementations
                 .Returns(request.Object);
         }
 
-        public static object? GetTestValue(Type type, int i)
+        public static object GetTestValue(Type type, int i)
         {
             if (type == typeof(bool))
                 return true;

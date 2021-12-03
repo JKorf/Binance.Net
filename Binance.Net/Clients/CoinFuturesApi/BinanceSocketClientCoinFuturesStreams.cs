@@ -23,14 +23,11 @@ using Newtonsoft.Json.Linq;
 
 namespace Binance.Net.Clients.CoinFuturesApi
 {
-    /// <summary>
-    /// Client providing access to the Binance Coin futures websocket Api
-    /// </summary>
+    /// <inheritdoc cref="IBinanceSocketClientCoinFuturesStreams" />
     public class BinanceSocketClientCoinFuturesStreams : SocketApiClient, IBinanceSocketClientCoinFuturesStreams
     {
         #region fields
         private readonly BinanceSocketClient _baseClient;
-        private readonly BinanceSocketClientOptions _options;
         private readonly Log _log;
 
         private const string klineStreamEndpoint = "@kline";
@@ -61,19 +58,16 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         #region constructor/destructor
 
-        /// <summary>
-        /// Create a new instance of BinanceSocketClientCoinFutures with default options
-        /// </summary>
-        public BinanceSocketClientCoinFuturesStreams(Log log, BinanceSocketClient baseClient, BinanceSocketClientOptions options) :
+        internal BinanceSocketClientCoinFuturesStreams(Log log, BinanceSocketClient baseClient, BinanceSocketClientOptions options) :
             base(options, options.CoinFuturesStreamsOptions)
         {
-            _options = options;
             _baseClient = baseClient;
             _log = log;
         }
         #endregion 
 
-        public override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+        /// <inheritdoc />
+        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BinanceAuthenticationProvider(credentials);
 
         #region methods

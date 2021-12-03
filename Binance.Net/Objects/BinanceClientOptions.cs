@@ -8,6 +8,9 @@ using CryptoExchange.Net.Objects;
 
 namespace Binance.Net.Objects
 {
+    /// <summary>
+    /// Options for the Binance client
+    /// </summary>
     public class BinanceClientOptions: BaseRestClientOptions
     {
         /// <summary>
@@ -40,24 +43,38 @@ namespace Binance.Net.Objects
                         .AddEndpointLimit("/api/v3/order", 50, TimeSpan.FromSeconds(10), HttpMethod.Post, true)
                 }
         };
+        /// <summary>
+        /// Spot API options
+        /// </summary>
         public BinanceApiClientOptions SpotApiOptions
         {
             get => _spotApiOptions;
             set => _spotApiOptions.Copy(_spotApiOptions, value);
         }
-        private BinanceApiClientOptions _usdFuturesApiOptions = new BinanceApiClientOptions(BinanceApiAddresses.Default.UsdFuturesRestClientAddress);
+
+        private BinanceApiClientOptions _usdFuturesApiOptions = new BinanceApiClientOptions(BinanceApiAddresses.Default.UsdFuturesRestClientAddress!);
+        /// <summary>
+        /// Usd futures API options
+        /// </summary>
         public BinanceApiClientOptions UsdFuturesApiOptions
         {
             get => _usdFuturesApiOptions;
             set => _usdFuturesApiOptions.Copy(_usdFuturesApiOptions, value);
         }
-        private BinanceApiClientOptions _coinFuturesApiOptions = new BinanceApiClientOptions(BinanceApiAddresses.Default.CoinFuturesRestClientAddress);
+        
+        private BinanceApiClientOptions _coinFuturesApiOptions = new BinanceApiClientOptions(BinanceApiAddresses.Default.CoinFuturesRestClientAddress!);
+        /// <summary>
+        /// Coin futures API options
+        /// </summary>
         public BinanceApiClientOptions CoinFuturesApiOptions
         {
             get => _coinFuturesApiOptions;
             set => _coinFuturesApiOptions.Copy(_coinFuturesApiOptions, value);
         }
 
+        /// <summary>
+        /// ctor
+        /// </summary>
         public BinanceClientOptions()
         {
             if (Default == null)
@@ -100,26 +117,38 @@ namespace Binance.Net.Objects
         };
 
         private ApiClientOptions _spotStreamsOptions = new ApiClientOptions(BinanceApiAddresses.Default.SocketClientAddress);
+        /// <summary>
+        /// Spot streams options
+        /// </summary>
         public ApiClientOptions SpotStreamsOptions
         {
             get => _spotStreamsOptions;
             set => _spotStreamsOptions.Copy(_spotStreamsOptions, value);
         }
 
-        private ApiClientOptions _usdFuturestStreamsOptions = new ApiClientOptions(BinanceApiAddresses.Default.UsdFuturesSocketClientAddress);
+        private ApiClientOptions _usdFuturestStreamsOptions = new ApiClientOptions(BinanceApiAddresses.Default.UsdFuturesSocketClientAddress!);
+        /// <summary>
+        /// Usd futures streams options
+        /// </summary>
         public ApiClientOptions UsdFuturesStreamsOptions
         {
             get => _usdFuturestStreamsOptions;
             set => _usdFuturestStreamsOptions.Copy(_usdFuturestStreamsOptions, value);
         }
 
-        private ApiClientOptions _coinFuturesStreamsOptions = new ApiClientOptions(BinanceApiAddresses.Default.CoinFuturesSocketClientAddress);
+        private ApiClientOptions _coinFuturesStreamsOptions = new ApiClientOptions(BinanceApiAddresses.Default.CoinFuturesSocketClientAddress!);
+        /// <summary>
+        /// Coin futures streams options
+        /// </summary>
         public ApiClientOptions CoinFuturesStreamsOptions
         {
             get => _coinFuturesStreamsOptions;
             set => _coinFuturesStreamsOptions.Copy(_coinFuturesStreamsOptions, value);
         }
 
+        /// <summary>
+        /// ctor
+        /// </summary>
         public BinanceSocketClientOptions()
         {
             if (Default == null)
@@ -128,6 +157,7 @@ namespace Binance.Net.Objects
             Copy(this, Default);
         }
 
+        /// <inheritdoc />
         public new void Copy<T>(T input, T def) where T : BinanceSocketClientOptions
         {
             if (Default == null)
@@ -139,6 +169,9 @@ namespace Binance.Net.Objects
         }
     }
 
+    /// <summary>
+    /// Binance API client options
+    /// </summary>
     public class BinanceApiClientOptions : RestApiClientOptions
     {
         /// <summary>
@@ -155,14 +188,25 @@ namespace Binance.Net.Objects
         /// </summary>
         public TimeSpan TradeRulesUpdateInterval { get; set; } = TimeSpan.FromMinutes(60);
 
+        /// <summary>
+        /// ctor
+        /// </summary>
         public BinanceApiClientOptions() 
         {
         }
 
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="baseAddress"></param>
         public BinanceApiClientOptions(string baseAddress): base(baseAddress)
         {
         }
 
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="baseOn"></param>
         public BinanceApiClientOptions(BinanceApiClientOptions baseOn): base(baseOn)
         {
             TimestampOffset = baseOn.TimestampOffset;
@@ -201,7 +245,6 @@ namespace Binance.Net.Objects
         /// </summary>
         public int? UpdateInterval { get; set; }
 
-
         /// <summary>
         /// The rest client to use for requesting the initial order book
         /// </summary>
@@ -217,6 +260,8 @@ namespace Binance.Net.Objects
         /// </summary>
         /// <param name="limit">The top amount of results to keep in sync. If for example limit=10 is used, the order book will contain the 10 best bids and 10 best asks. Leaving this null will sync the full order book</param>
         /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
+        /// <param name="socketClient">The client to use for the socket connection. When using the same client for multiple order books the connection can be shared.</param>
+        /// <param name="restClient">The rest client to use for requesting the initial order book</param>
         public BinanceOrderBookOptions(int? limit = null, int? updateInterval = null, IBinanceSocketClient? socketClient = null, IBinanceClient? restClient = null)
         {
             Limit = limit;

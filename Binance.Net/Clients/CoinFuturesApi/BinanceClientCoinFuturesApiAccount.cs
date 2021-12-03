@@ -17,9 +17,7 @@ using Newtonsoft.Json;
 
 namespace Binance.Net.Clients.CoinFuturesApi
 {
-    /// <summary>
-    /// Spot system endpoints
-    /// </summary>
+    /// <inheritdoc />
     public class BinanceClientCoinFuturesApiAccount : IBinanceClientCoinFuturesApiAccount
     {
         private const string positionModeSideEndpoint = "positionSide/dual";

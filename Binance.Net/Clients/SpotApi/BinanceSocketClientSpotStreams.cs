@@ -23,9 +23,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Binance.Net.Clients.SpotApi
 {
-    /// <summary>
-    /// Client providing access to the Binance Spot websocket Api
-    /// </summary>
+    /// <inheritdoc />
     public class BinanceSocketClientSpotStreams : SocketApiClient, IBinanceSocketClientSpotStreams
     {
         #region fields
@@ -65,7 +63,8 @@ namespace Binance.Net.Clients.SpotApi
         }
         #endregion
 
-        public override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+        /// <inheritdoc />
+        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BinanceAuthenticationProvider(credentials);
 
         #region methods

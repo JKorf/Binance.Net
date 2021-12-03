@@ -17,9 +17,7 @@ using Newtonsoft.Json;
 
 namespace Binance.Net.Clients.GeneralApi
 {
-    /// <summary>
-    /// Spot system endpoints
-    /// </summary>
+    /// <inheritdoc />
     public class BinanceClientGeneralApiSubAccount : IBinanceClientGeneralApiSubAccount
     {
         private const string subAccountListEndpoint = "sub-account/list";

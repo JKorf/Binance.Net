@@ -3,7 +3,7 @@
 namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 {
     /// <summary>
-    /// Client for accessing the COIN-M Binance futures API. 
+    /// Binance Coin futures API endpoints
     /// </summary>
     public interface IBinanceClientCoinFuturesApi : IDisposable
     {

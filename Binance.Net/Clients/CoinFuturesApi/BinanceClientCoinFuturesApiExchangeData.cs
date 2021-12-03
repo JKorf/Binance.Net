@@ -20,9 +20,7 @@ using Newtonsoft.Json;
 
 namespace Binance.Net.Clients.CoinFuturesApi
 {
-    /// <summary>
-    /// Spot system endpoints
-    /// </summary>
+    /// <inheritdoc />
     public class BinanceClientCoinFuturesApiExchangeData : IBinanceClientCoinFuturesApiExchangeData
     {
         private const string pingEndpoint = "ping";

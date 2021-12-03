@@ -3,7 +3,7 @@
 namespace Binance.Net.Interfaces.Clients.SpotApi
 {
     /// <summary>
-    /// Client for accessing the Binance Spot API. 
+    /// Binance Spot API endpoints
     /// </summary>
     public interface IBinanceClientSpotApi : IDisposable
     {

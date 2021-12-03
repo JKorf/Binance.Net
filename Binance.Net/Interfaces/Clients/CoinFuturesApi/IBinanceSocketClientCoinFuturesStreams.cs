@@ -11,6 +11,9 @@ using Binance.Net.Objects.Models.Spot.Socket;
 
 namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 {
+    /// <summary>
+    /// Binance Coin futures streams
+    /// </summary>
     public interface IBinanceSocketClientCoinFuturesStreams : IDisposable
     {
         /// <summary>

@@ -9,6 +9,9 @@ using Binance.Net.Objects.Models.Spot.Socket;
 
 namespace Binance.Net.Interfaces.Clients.SpotApi
 {
+    /// <summary>
+    /// Binance Spot streams
+    /// </summary>
     public interface IBinanceSocketClientSpotStreams : IDisposable
     {
         /// <summary>

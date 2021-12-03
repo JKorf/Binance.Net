@@ -21,9 +21,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Binance.Net.Clients
 {
-    /// <summary>
-    /// Client providing access to the Binance Spot websocket Api
-    /// </summary>
+    /// <inheritdoc cref="IBinanceSocketClient" />
     public class BinanceSocketClient : BaseSocketClient, IBinanceSocketClient
     {
         #region fields
@@ -31,8 +29,11 @@ namespace Binance.Net.Clients
 
         #region Api clients
 
+        /// <inheritdoc />
         public IBinanceSocketClientSpotStreams SpotStreams { get; set; }
+        /// <inheritdoc />
         public IBinanceSocketClientUsdFuturesStreams UsdFuturesStreams { get; set; }
+        /// <inheritdoc />
         public IBinanceSocketClientCoinFuturesStreams CoinFuturesStreams { get; set; }
 
         #endregion
@@ -64,9 +65,9 @@ namespace Binance.Net.Clients
         #region methods
 
         /// <summary>
-        /// Set the default options to be used when creating new BinanceSocketClientSpot instances
+        /// Set the default options to be used when creating new clients
         /// </summary>
-        /// <param name="options"></param>
+        /// <param name="options">Options to use as default</param>
         public static void SetDefaultOptions(BinanceSocketClientOptions options)
         {
             BinanceSocketClientOptions.Default = options;
@@ -128,7 +129,7 @@ namespace Binance.Net.Clients
         }
 
         /// <inheritdoc />
-        protected override bool MessageMatchesHandler(JToken message, object request)
+        protected override bool MessageMatchesHandler(SocketConnection socketConnection, JToken message, object request)
         {
             if (message.Type != JTokenType.Object)
                 return false;
@@ -142,7 +143,7 @@ namespace Binance.Net.Clients
         }
 
         /// <inheritdoc />
-        protected override bool MessageMatchesHandler(JToken message, string identifier)
+        protected override bool MessageMatchesHandler(SocketConnection socketConnection, JToken message, string identifier)
         {
             return true;
         }
@@ -187,6 +188,7 @@ namespace Binance.Net.Clients
             return result;
         }
 
+        /// <inheritdoc />
         public override void Dispose()
         {
             SpotStreams.Dispose();

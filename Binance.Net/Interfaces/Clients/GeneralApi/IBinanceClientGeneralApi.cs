@@ -2,6 +2,9 @@
 
 namespace Binance.Net.Interfaces.Clients.GeneralApi
 {
+    /// <summary>
+    /// Binance general API endpoints
+    /// </summary>
     public interface IBinanceClientGeneralApi : IDisposable
     {
         /// <summary>

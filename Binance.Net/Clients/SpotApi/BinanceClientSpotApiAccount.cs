@@ -20,9 +20,7 @@ using Newtonsoft.Json;
 
 namespace Binance.Net.Clients.SpotApi
 {
-    /// <summary>
-    /// Spot system endpoints
-    /// </summary>
+    /// <inheritdoc />
     public class BinanceClientSpotApiAccount : IBinanceClientSpotApiAccount
     {
         private const string accountInfoEndpoint = "account";

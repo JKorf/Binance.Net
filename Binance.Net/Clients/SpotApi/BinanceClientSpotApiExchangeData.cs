@@ -25,9 +25,7 @@ using Newtonsoft.Json;
 
 namespace Binance.Net.Clients.SpotApi
 {
-    /// <summary>
-    /// Spot market endpoints
-    /// </summary>
+    /// <inheritdoc />
     public class BinanceClientSpotApiExchangeData : IBinanceClientSpotApiExchangeData
     {
         private const string orderBookEndpoint = "depth";
