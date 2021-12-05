@@ -154,7 +154,7 @@ namespace Binance.Net.Clients.SpotApi
             var result = BaseAddress.AppendPath(api);
 
             if (!string.IsNullOrEmpty(version))
-                result.AppendPath($"v{version}");
+                result = result.AppendPath($"v{version}");
 
             return new Uri(result.AppendPath(endpoint));
         }

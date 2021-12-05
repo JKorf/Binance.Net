@@ -87,7 +87,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var result = BaseAddress.AppendPath(api);
 
             if (!string.IsNullOrEmpty(version))
-                result.AppendPath($"v{version}");
+                result = result.AppendPath($"v{version}");
 
             return new Uri(result.AppendPath(endpoint));
         }
