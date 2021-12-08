@@ -39,7 +39,7 @@ namespace Binance.Net
 
         public override void AuthenticateUriRequest(
            RestApiClient apiClient,
-           ref Uri uri,
+           Uri uri,
            HttpMethod method,
            SortedDictionary<string, object> parameters,
            Dictionary<string, string> headers,
@@ -51,8 +51,10 @@ namespace Binance.Net
             if (!auth)
                 return;
 
-            uri = uri.AddQueryParmeter("timestamp", GetTimestamp(apiClient));
-            uri = uri.AddQueryParmeter("signature", SignHMACSHA256(uri.Query.Replace("?", "")));
+            var timestamp = GetTimestamp(apiClient);
+            parameters.Add("timestamp", timestamp);
+            uri = uri.AddQueryParmeter("timestamp", timestamp);
+            parameters.Add("signature", SignHMACSHA256(uri.Query.Replace("?", "")));
         }
 
         internal string GetTimestamp(RestApiClient apiClient)
