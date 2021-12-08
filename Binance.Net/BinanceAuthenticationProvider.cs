@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Cryptography;
@@ -7,66 +8,56 @@ using System.Text;
 using System.Web;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
 
 namespace Binance.Net
 {
     internal class BinanceAuthenticationProvider : AuthenticationProvider
     {
-        private readonly object _signLock = new object();
-        private readonly HMACSHA256 _encryptor;
-
         public BinanceAuthenticationProvider(ApiCredentials credentials) : base(credentials)
         {
-            if (credentials.Secret == null)
-                throw new ArgumentException("No valid API credentials provided. Key/Secret needed.");
-
-            _encryptor = new HMACSHA256(Encoding.ASCII.GetBytes(credentials.Secret.GetString()));
         }
 
-        public override Dictionary<string, object> AddAuthenticationToParameters(string uri, HttpMethod method, Dictionary<string, object> parameters, bool signed, HttpMethodParameterPosition parameterPosition, ArrayParametersSerialization arraySerialization)
+        public override void AuthenticateBodyRequest(
+            RestApiClient apiClient, 
+            Uri uri, 
+            HttpMethod method,
+            SortedDictionary<string, object> parameters,
+            Dictionary<string, string> headers,
+            bool auth, 
+            ArrayParametersSerialization arraySerialization)
         {
-            if (!signed)
-                return parameters;
+            headers.Add("X-MBX-APIKEY", Credentials.Key!.GetString());
 
-            string signData;
-            if (parameterPosition == HttpMethodParameterPosition.InUri)
-            {
-                signData = parameters.CreateParamString(true, arraySerialization);
-            }
-            else
-            {
-                var formData = HttpUtility.ParseQueryString(string.Empty);
-                foreach (var kvp in parameters.OrderBy(p => p.Key))
-                {
-                    if (kvp.Value.GetType().IsArray)
-                    {
-                        var array = (Array)kvp.Value;
-                        foreach (var value in array)
-                            formData.Add(kvp.Key, value.ToString());
-                    }
-                    else
-                        formData.Add(kvp.Key, kvp.Value.ToString());
-                }
-                signData = formData.ToString();
-            }
+            if (!auth)
+                return;
 
-            lock (_signLock)
-                parameters.Add("signature", ByteToString(_encryptor.ComputeHash(Encoding.UTF8.GetBytes(signData))));
-            return parameters;
+            parameters.Add("timestamp", GetTimestamp(apiClient));
+            parameters.Add("signature", SignHMACSHA256(parameters.ToFormData()));
         }
 
-        public override Dictionary<string, string> AddAuthenticationToHeaders(string uri, HttpMethod method, Dictionary<string, object> parameters, bool signed, HttpMethodParameterPosition parameterPosition, ArrayParametersSerialization arraySerialization)
+        public override void AuthenticateUriRequest(
+           RestApiClient apiClient,
+           ref Uri uri,
+           HttpMethod method,
+           SortedDictionary<string, object> parameters,
+           Dictionary<string, string> headers,
+           bool auth,
+           ArrayParametersSerialization arraySerialization)
         {
-            if (Credentials.Key == null)
-                throw new ArgumentException("No valid API credentials provided. Key/Secret needed.");
+            headers.Add("X-MBX-APIKEY", Credentials.Key!.GetString());
 
-            return new Dictionary<string, string> {{"X-MBX-APIKEY", Credentials.Key.GetString()}};
+            if (!auth)
+                return;
+
+            uri = uri.AddQueryParmeter("timestamp", GetTimestamp(apiClient));
+            uri = uri.AddQueryParmeter("signature", SignHMACSHA256(uri.Query.Replace("?", "")));
         }
-        
-        public override string Sign(string toSign)
+
+        internal string GetTimestamp(RestApiClient apiClient)
         {
-            throw new NotImplementedException();
+            return DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.Add(apiClient.GetTimeOffset()))!.Value.ToString(CultureInfo.InvariantCulture);
         }
     }
 }

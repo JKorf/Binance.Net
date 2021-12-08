@@ -48,7 +48,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="resetAutoTimestamp">Whether the response should be used for a new auto timestamp calculation</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Server time</returns>
-        Task<WebCallResult<DateTime>> GetServerTimeAsync(bool resetAutoTimestamp = false, CancellationToken ct = default);
+        Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get's information about the exchange including rate limits and information on the provided symbol

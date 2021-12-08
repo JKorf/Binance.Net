@@ -11,6 +11,8 @@ using CryptoExchange.Net;
 using CryptoExchange.Net.Converters;
 using Binance.Net.Interfaces.Clients.GeneralApi;
 using Binance.Net.Clients.SpotApi;
+using CryptoExchange.Net.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace Binance.Net.Clients.GeneralApi
 {
@@ -20,6 +22,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region fields 
         private readonly BinanceClient _baseClient;
         internal readonly BinanceClientOptions Options;
+        private Log _log;
         #endregion
 
         #region Api clients
@@ -37,10 +40,11 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region constructor/destructor
 
-        internal BinanceClientGeneralApi(BinanceClient baseClient, BinanceClientOptions options) : base(options, options.SpotApiOptions)
+        internal BinanceClientGeneralApi(Log log, BinanceClient baseClient, BinanceClientOptions options) : base(options, options.SpotApiOptions)
         {
             Options = options;
             _baseClient = baseClient;
+            _log = log;
 
             Brokerage = new BinanceClientGeneralApiBrokerage(this);
             Futures = new BinanceClientGeneralApiFutures(this);
@@ -55,13 +59,6 @@ namespace Binance.Net.Clients.GeneralApi
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BinanceAuthenticationProvider(credentials);
 
-        internal string GetTimestamp()
-        {
-            var offset = Options.AutoTimestamp ? BinanceClientSpotApi.CalculatedTimeOffset : 0;
-            offset += Options.SpotApiOptions.TimestampOffset.TotalMilliseconds;
-            return DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddMilliseconds(offset))!.Value.ToString(CultureInfo.InvariantCulture);
-        }
-
         internal Uri GetUrl(string endpoint, string api, string? version = null)
         {
             var result = BaseAddress.AppendPath(api);
@@ -72,32 +69,33 @@ namespace Binance.Net.Clients.GeneralApi
             return new Uri(result.AppendPath(endpoint));
         }
 
-        internal async Task<WebCallResult<DateTime>> CheckAutoTimestamp(CancellationToken ct)
-        {
-            if (Options.AutoTimestamp && (!BinanceClientSpotApi.TimeSynced || DateTime.UtcNow - BinanceClientSpotApi.LastTimeSync > Options.AutoTimestampRecalculationInterval))
-                return await _baseClient.SpotApi.ExchangeData.GetServerTimeAsync(BinanceClientSpotApi.TimeSynced, ct).ConfigureAwait(false);
-
-            return new WebCallResult<DateTime>(null, null, default, null);
-        }
-
         internal async Task<WebCallResult<T>> SendRequestInternal<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken,
             Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
             ArrayParametersSerialization? arraySerialization = null, int weight = 1) where T : class
         {
-            if (signed)
-            {
-                var timestampResult = await ((BinanceClientSpotApi)_baseClient.SpotApi).CheckAutoTimestamp(cancellationToken).ConfigureAwait(false);
-                if (!timestampResult)
-                    return new WebCallResult<T>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-
-                if (parameters == null)
-                    parameters = new Dictionary<string, object>();
-
-                parameters.Add("timestamp", GetTimestamp());
-            }
-
             return await _baseClient.SendRequestInternal<T>(this, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight).ConfigureAwait(false);
         }
 
+        protected override TimeSyncModel GetTimeSyncParameters()
+        {
+            return new TimeSyncModel(Options.SpotApiOptions.AutoTimestamp, BinanceClientSpotApi.SemaphoreSlim, BinanceClientSpotApi.LastTimeSync);
+        }
+
+        protected override void UpdateTimeOffset(TimeSpan timestamp)
+        {
+            BinanceClientSpotApi.LastTimeSync = DateTime.UtcNow;
+            if (timestamp.TotalMilliseconds > 0 && timestamp.TotalMilliseconds < 500)
+                return;
+
+            _log.Write(LogLevel.Information, $"Time offset set to {Math.Round(timestamp.TotalMilliseconds)}ms");
+            BinanceClientSpotApi.TimeOffset = timestamp;
+        }
+
+        public override TimeSpan GetTimeOffset() => BinanceClientSpotApi.TimeOffset;
+
+        protected override Task<WebCallResult<DateTime>> GetServerTimestampAsync()
+        {
+            return _baseClient.SpotApi.ExchangeData.GetServerTimeAsync();
+        }
     }
 }

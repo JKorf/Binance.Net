@@ -49,7 +49,7 @@ namespace Binance.Net.Clients
         /// <param name="options">The options to use for this client</param>
         public BinanceClient(BinanceClientOptions options) : base("Binance", options)
         {
-            GeneralApi = new BinanceClientGeneralApi(this, options);
+            GeneralApi = new BinanceClientGeneralApi(log, this, options);
             SpotApi = new BinanceClientSpotApi(log, this, options);
             UsdFuturesApi = new BinanceClientUsdFuturesApi(log, this, options);
             CoinFuturesApi = new BinanceClientCoinFuturesApi(log, this, options);

@@ -19,22 +19,13 @@ namespace Binance.Net.Objects
         public static BinanceClientOptions Default { get; set; } = new BinanceClientOptions();
 
         /// <summary>
-        /// Whether or not to automatically sync the local time with the server time
-        /// </summary>
-        public bool AutoTimestamp { get; set; } = true;
-
-        /// <summary>
-        /// Interval for refreshing the auto timestamp calculation
-        /// </summary>
-        public TimeSpan AutoTimestampRecalculationInterval { get; set; } = TimeSpan.FromHours(3);
-
-        /// <summary>
         /// The default receive window for requests
         /// </summary>
         public TimeSpan ReceiveWindow { get; set; } = TimeSpan.FromSeconds(5);
 
         private BinanceApiClientOptions _spotApiOptions = new BinanceApiClientOptions(BinanceApiAddresses.Default.RestClientAddress)
         {
+            AutoTimestamp = true,
             RateLimiters = new List<IRateLimiter>
                 {
                     new RateLimiter()
@@ -52,7 +43,10 @@ namespace Binance.Net.Objects
             set => _spotApiOptions.Copy(_spotApiOptions, value);
         }
 
-        private BinanceApiClientOptions _usdFuturesApiOptions = new BinanceApiClientOptions(BinanceApiAddresses.Default.UsdFuturesRestClientAddress!);
+        private BinanceApiClientOptions _usdFuturesApiOptions = new BinanceApiClientOptions(BinanceApiAddresses.Default.UsdFuturesRestClientAddress!)
+        {
+            AutoTimestamp = true
+        };
         /// <summary>
         /// Usd futures API options
         /// </summary>
@@ -61,8 +55,11 @@ namespace Binance.Net.Objects
             get => _usdFuturesApiOptions;
             set => _usdFuturesApiOptions.Copy(_usdFuturesApiOptions, value);
         }
-        
-        private BinanceApiClientOptions _coinFuturesApiOptions = new BinanceApiClientOptions(BinanceApiAddresses.Default.CoinFuturesRestClientAddress!);
+
+        private BinanceApiClientOptions _coinFuturesApiOptions = new BinanceApiClientOptions(BinanceApiAddresses.Default.CoinFuturesRestClientAddress!)
+        {
+            AutoTimestamp = true
+        };
         /// <summary>
         /// Coin futures API options
         /// </summary>
@@ -93,8 +90,6 @@ namespace Binance.Net.Objects
         {
             base.Copy(input, def);
 
-            input.AutoTimestamp = def.AutoTimestamp;
-            input.AutoTimestampRecalculationInterval = def.AutoTimestampRecalculationInterval;
             input.ReceiveWindow = def.ReceiveWindow;
 
             input.SpotApiOptions = new BinanceApiClientOptions(def.SpotApiOptions);

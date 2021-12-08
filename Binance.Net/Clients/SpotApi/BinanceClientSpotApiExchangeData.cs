@@ -101,51 +101,10 @@ namespace Binance.Net.Clients.SpotApi
         #region Check Server Time
 
         /// <inheritdoc />
-        public async Task<WebCallResult<DateTime>> GetServerTimeAsync(bool resetAutoTimestamp = false, CancellationToken ct = default)
+        public async Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default)
         {
-            var url = _baseClient.GetUrl(checkTimeEndpoint, api, publicVersion);
-            if (!_baseClient.Options.AutoTimestamp)
-            {
-                var result = await _baseClient.SendRequestInternal<BinanceCheckTime>(url, HttpMethod.Get, ct).ConfigureAwait(false);
-                return result.As(result.Data?.ServerTime ?? default);
-            }
-            else
-            {
-                var localTime = DateTime.UtcNow;
-                var result = await _baseClient.SendRequestInternal<BinanceCheckTime>(url, HttpMethod.Get, ct).ConfigureAwait(false);
-                if (!result)
-                    return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, default, result.Error);
-
-                if (BinanceClientSpotApi.TimeSynced && !resetAutoTimestamp)
-                    return result.As(result.Data.ServerTime);
-
-                if (_baseClient.TotalRequestsMade == 1)
-                {
-                    // If this was the first request make another one to calculate the offset since the first one can be slower
-                    localTime = DateTime.UtcNow;
-                    result = await _baseClient.SendRequestInternal<BinanceCheckTime>(url, HttpMethod.Get, ct).ConfigureAwait(false);
-                    if (!result)
-                        return new WebCallResult<DateTime>(result.ResponseStatusCode, result.ResponseHeaders, default, result.Error);
-                }
-
-                // Calculate time offset between local and server
-                var offset = (result.Data.ServerTime - localTime).TotalMilliseconds;
-                if (offset >= 0 && offset < 500)
-                {
-                    // Small offset, probably mainly due to ping. Don't adjust time
-                    BinanceClientSpotApi.CalculatedTimeOffset = 0;
-                    BinanceClientSpotApi.TimeSynced = true;
-                    BinanceClientSpotApi.LastTimeSync = DateTime.UtcNow;
-                    _log.Write(LogLevel.Information, $"Time offset between 0 and 500ms ({offset}ms), no adjustment needed");
-                    return result.As(result.Data.ServerTime);
-                }
-
-                BinanceClientSpotApi.CalculatedTimeOffset = (result.Data.ServerTime - localTime).TotalMilliseconds;
-                BinanceClientSpotApi.TimeSynced = true;
-                BinanceClientSpotApi.LastTimeSync = DateTime.UtcNow;
-                _log.Write(LogLevel.Information, $"Time offset set to {BinanceClientSpotApi.CalculatedTimeOffset}ms");
-                return result.As(result.Data.ServerTime);
-            }
+            var result = await _baseClient.SendRequestInternal<BinanceCheckTime>(_baseClient.GetUrl(checkTimeEndpoint, api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
+            return result.As(result.Data?.ServerTime ?? default);            
         }
 
         #endregion

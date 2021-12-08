@@ -27,15 +27,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region fields 
         private readonly BinanceClient _baseClient;
         internal readonly BinanceClientOptions Options;
-        internal int TotalRequestsMade => _baseClient.TotalRequestsMade;
-
-        internal static double CalculatedTimeOffset;
-        internal static bool TimeSynced;
-        internal static DateTime LastTimeSync;
 
         internal readonly TradeRulesBehaviour TradeRulesBehaviour;
         internal BinanceFuturesUsdtExchangeInfo? ExchangeInfo;
         internal DateTime? LastExchangeInfoUpdate;
+
+        internal static TimeSpan TimeOffset;
+        internal static SemaphoreSlim SemaphoreSlim = new SemaphoreSlim(1, 1);
+        internal static DateTime LastTimeSync;
 
         private Log _log;
         #endregion
@@ -75,13 +74,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BinanceAuthenticationProvider(credentials);
-        internal string GetTimestamp()
-        {
-            var offset = Options.AutoTimestamp ? CalculatedTimeOffset : 0;
-            offset += Options.UsdFuturesApiOptions.TimestampOffset.TotalMilliseconds;
-            return DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddMilliseconds(offset))!.Value.ToString(CultureInfo.InvariantCulture);
-        }
-
+       
         internal Uri GetUrl(string endpoint, string api, string? version = null)
         {
             var result = BaseAddress.AppendPath(api);
@@ -90,14 +83,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 result = result.AppendPath($"v{version}");
 
             return new Uri(result.AppendPath(endpoint));
-        }
-
-        internal async Task<WebCallResult<DateTime>> CheckAutoTimestamp(CancellationToken ct)
-        {
-            if (Options.AutoTimestamp && (!TimeSynced || DateTime.UtcNow - LastTimeSync > Options.AutoTimestampRecalculationInterval))
-                return await ExchangeData.GetServerTimeAsync(TimeSynced, ct).ConfigureAwait(false);
-
-            return new WebCallResult<DateTime>(null, null, default, null);
         }
 
         internal async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? price, decimal? stopPrice, OrderType type, CancellationToken ct)
@@ -220,18 +205,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
             Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
             ArrayParametersSerialization? arraySerialization = null, int weight = 1) where T : class
         {
-            if (signed)
-            {
-                var timestampResult = await CheckAutoTimestamp(cancellationToken).ConfigureAwait(false);
-                if (!timestampResult)
-                    return new WebCallResult<T>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
-
-                if (parameters == null)
-                    parameters = new Dictionary<string, object>();
-
-                parameters.Add("timestamp", GetTimestamp());
-            }
-
             return await _baseClient.SendRequestInternal<T>(this, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight).ConfigureAwait(false);
         }
 
@@ -394,5 +367,31 @@ namespace Binance.Net.Clients.UsdFuturesApi
             throw new ArgumentException("Unsupported order type for Binance order: " + type);
         }
 
+
+        /// <inheritdoc />
+        protected override Task<WebCallResult<DateTime>> GetServerTimestampAsync()
+        {
+            return ExchangeData.GetServerTimeAsync();
+        }
+
+        /// <inheritdoc />
+        protected override TimeSyncModel GetTimeSyncParameters()
+        {
+            return new TimeSyncModel(Options.SpotApiOptions.AutoTimestamp, SemaphoreSlim, LastTimeSync);
+        }
+
+        /// <inheritdoc />
+        protected override void UpdateTimeOffset(TimeSpan timestamp)
+        {
+            LastTimeSync = DateTime.UtcNow;
+            if (timestamp.TotalMilliseconds > 0 && timestamp.TotalMilliseconds < 500)
+                return;
+
+            _log.Write(LogLevel.Information, $"Time offset set to {Math.Round(timestamp.TotalMilliseconds)}ms");
+            TimeOffset = timestamp;
+        }
+
+        /// <inheritdoc />
+        public override TimeSpan GetTimeOffset() => TimeOffset;
     }
 }
