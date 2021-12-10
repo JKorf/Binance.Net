@@ -21,7 +21,7 @@ namespace Binance.Net.Clients.GeneralApi
     {
         #region fields 
         private readonly BinanceClient _baseClient;
-        internal readonly BinanceClientOptions Options;
+        internal new readonly BinanceClientOptions Options;
         private Log _log;
         #endregion
 
@@ -76,26 +76,17 @@ namespace Binance.Net.Clients.GeneralApi
             return await _baseClient.SendRequestInternal<T>(this, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight).ConfigureAwait(false);
         }
 
-        protected override TimeSyncModel GetTimeSyncParameters()
-        {
-            return new TimeSyncModel(Options.SpotApiOptions.AutoTimestamp, BinanceClientSpotApi.SemaphoreSlim, BinanceClientSpotApi.LastTimeSync);
-        }
 
-        protected override void UpdateTimeOffset(TimeSpan timestamp)
-        {
-            BinanceClientSpotApi.LastTimeSync = DateTime.UtcNow;
-            if (timestamp.TotalMilliseconds > 0 && timestamp.TotalMilliseconds < 500)
-                return;
-
-            _log.Write(LogLevel.Information, $"Time offset set to {Math.Round(timestamp.TotalMilliseconds)}ms");
-            BinanceClientSpotApi.TimeOffset = timestamp;
-        }
-
-        public override TimeSpan GetTimeOffset() => BinanceClientSpotApi.TimeOffset;
-
+        /// <inheritdoc />
         protected override Task<WebCallResult<DateTime>> GetServerTimestampAsync()
-        {
-            return _baseClient.SpotApi.ExchangeData.GetServerTimeAsync();
-        }
+            => _baseClient.SpotApi.ExchangeData.GetServerTimeAsync();
+
+        /// <inheritdoc />
+        protected override TimeSyncInfo GetTimeSyncInfo()
+            => new TimeSyncInfo(_log, Options.SpotApiOptions.AutoTimestamp, BinanceClientSpotApi.TimeSyncState);
+
+        /// <inheritdoc />
+        public override TimeSpan GetTimeOffset()
+            => BinanceClientSpotApi.TimeSyncState.TimeOffset;
     }
 }

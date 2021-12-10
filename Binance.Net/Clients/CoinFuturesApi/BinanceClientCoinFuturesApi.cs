@@ -25,15 +25,13 @@ namespace Binance.Net.Clients.CoinFuturesApi
     {
         #region fields 
         private readonly BinanceClient _baseClient;
-        internal readonly BinanceClientOptions Options;
+        internal new readonly BinanceClientOptions Options;
 
         internal readonly TradeRulesBehaviour TradeRulesBehaviour;
         internal BinanceFuturesCoinExchangeInfo? ExchangeInfo;
         internal DateTime? LastExchangeInfoUpdate;
 
-        internal static TimeSpan TimeOffset;
-        internal static SemaphoreSlim SemaphoreSlim = new SemaphoreSlim(1, 1);
-        internal static DateTime LastTimeSync;
+        internal static TimeSyncState TimeSyncState = new TimeSyncState();
 
         private Log _log;
         #endregion
@@ -368,28 +366,14 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         /// <inheritdoc />
         protected override Task<WebCallResult<DateTime>> GetServerTimestampAsync()
-        {
-            return ExchangeData.GetServerTimeAsync();
-        }
+            => ExchangeData.GetServerTimeAsync();
 
         /// <inheritdoc />
-        protected override TimeSyncModel GetTimeSyncParameters()
-        {
-            return new TimeSyncModel(Options.SpotApiOptions.AutoTimestamp, SemaphoreSlim, LastTimeSync);
-        }
+        protected override TimeSyncInfo GetTimeSyncInfo()
+            => new TimeSyncInfo(_log, Options.CoinFuturesApiOptions.AutoTimestamp, TimeSyncState);
 
         /// <inheritdoc />
-        protected override void UpdateTimeOffset(TimeSpan timestamp)
-        {
-            LastTimeSync = DateTime.UtcNow;
-            if (timestamp.TotalMilliseconds > 0 && timestamp.TotalMilliseconds < 500)
-                return;
-
-            _log.Write(LogLevel.Information, $"Time offset set to {Math.Round(timestamp.TotalMilliseconds)}ms");
-            TimeOffset = timestamp;
-        }
-
-        /// <inheritdoc />
-        public override TimeSpan GetTimeOffset() => TimeOffset;
+        public override TimeSpan GetTimeOffset()
+            => TimeSyncState.TimeOffset;
     }
 }

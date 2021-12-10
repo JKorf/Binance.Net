@@ -34,7 +34,7 @@ namespace Binance.Net.UnitTests
             // arrange
             DateTime expected = new DateTime(1970, 1, 1).AddMilliseconds(milisecondsTime);
             var time = new BinanceCheckTime() { ServerTime = expected };
-            var client = TestHelpers.CreateResponseClient(JsonConvert.SerializeObject(time), new BinanceClientOptions() { AutoTimestamp = false });
+            var client = TestHelpers.CreateResponseClient(JsonConvert.SerializeObject(time));
 
             // act
             var result = await client.SpotApi.ExchangeData.GetServerTimeAsync();
@@ -56,7 +56,10 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateResponseClient(key, new BinanceClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
-                AutoTimestamp = false
+                SpotApiOptions = new BinanceApiClientOptions
+                {
+                    AutoTimestamp = false
+                }
             });
 
             // act
@@ -74,7 +77,10 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateResponseClient("{}", new BinanceClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
-                AutoTimestamp = false
+                SpotApiOptions = new BinanceApiClientOptions
+                {
+                    AutoTimestamp = false
+                }
             });
 
             // act
@@ -91,7 +97,10 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateResponseClient("{}", new BinanceClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
-                AutoTimestamp = false
+                SpotApiOptions = new BinanceApiClientOptions
+                {
+                    AutoTimestamp = false
+                }
             });
 
             // act
@@ -108,7 +117,10 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateResponseClient("{}", new BinanceClientOptions()
             {
                 ApiCredentials = new ApiCredentials("Test", "Test"),
-                AutoTimestamp = true
+                SpotApiOptions = new BinanceApiClientOptions
+                {
+                    AutoTimestamp = true
+                }
             });
 
             // act
@@ -123,7 +135,7 @@ namespace Binance.Net.UnitTests
 
 
             // assert
-            Mock.Get(client.RequestFactory).Verify(f => f.Create(It.IsAny<HttpMethod>(), It.Is<string>((msg) => msg.Contains("/time")), It.IsAny<int>()), Times.Exactly(2));
+            Mock.Get(client.RequestFactory).Verify(f => f.Create(It.IsAny<HttpMethod>(), It.Is<Uri>((uri) => uri.ToString().Contains("/time")), It.IsAny<int>()), Times.Exactly(2));
         }
 
         [TestCase()]
@@ -155,21 +167,6 @@ namespace Binance.Net.UnitTests
             Assert.AreEqual(authProvider.Credentials.Secret.GetString(), "TestSecret");
         }
 
-        //[Test]
-        [TestCase("", "D0F0F055B496CBD9FD1C8CA6719D0B2253F54C667753F70AEF13F394D9161A8B")]
-        public void AddingAuthToUriString_Should_GiveCorrectSignature(string parameters, string signature)
-        {
-            // arrange
-            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
-            string uri = $"https://test.test-api.com{parameters}";
-
-            // act
-            var sign = authProvider.AddAuthenticationToParameters(uri, HttpMethod.Post, new Dictionary<string, object>(), true, HttpMethodParameterPosition.InBody, ArrayParametersSerialization.MultipleValues);
-
-            // assert
-            Assert.IsTrue((string)sign.Last().Value == signature);
-        }
-
         [Test]
         public void AddingAuthToRequest_Should_AddApiKeyHeader()
         {
@@ -179,10 +176,12 @@ namespace Binance.Net.UnitTests
             var request = new Request(new HttpRequestMessage(HttpMethod.Get, "https://test.test-api.com"), client, 1);
 
             // act
-            var sign = authProvider.AddAuthenticationToHeaders(request.Uri.ToString(), HttpMethod.Get, new Dictionary<string, object>(), true, HttpMethodParameterPosition.InBody, ArrayParametersSerialization.MultipleValues);
+            var headers = new Dictionary<string, string>();
+            authProvider.AuthenticateRequest(null, request.Uri, HttpMethod.Get, new Dictionary<string, object>(), true, ArrayParametersSerialization.MultipleValues,
+                HttpMethodParameterPosition.InUri, out var uriParameters, out var bodyParameters, out headers);
 
             // assert
-            Assert.IsTrue(sign.First().Key == "X-MBX-APIKEY" && sign.First().Value == "TestKey");
+            Assert.IsTrue(headers.First().Key == "X-MBX-APIKEY" && headers.First().Value == "TestKey");
         }       
 
         [TestCase("BTCUSDT", true)]

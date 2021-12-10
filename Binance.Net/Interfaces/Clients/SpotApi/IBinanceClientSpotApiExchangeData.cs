@@ -42,10 +42,9 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<long>> PingAsync(CancellationToken ct = default);
 
         /// <summary>
-        /// Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls
+        /// Requests the server for the local time
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#check-server-time" /></para>
         /// </summary>
-        /// <param name="resetAutoTimestamp">Whether the response should be used for a new auto timestamp calculation</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Server time</returns>
         Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default);

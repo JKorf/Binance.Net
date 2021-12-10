@@ -67,15 +67,7 @@ namespace Binance.Net.UnitTests.TestImplementations
                 }
 
                 // act
-                CallResult result = null;
-                try
-                {
-                    result = (CallResult)await TestHelpers.InvokeAsync(method, getSubject(client), input.ToArray());
-                }
-                catch(Exception e)
-                {
-                    throw;
-                }
+                CallResult result = (CallResult)await TestHelpers.InvokeAsync(method, getSubject(client), input.ToArray());
 
                 // asset
                 Assert.Null(result.Error, method.Name);
@@ -207,7 +199,7 @@ namespace Binance.Net.UnitTests.TestImplementations
                 CheckPropertyValue(method, prop.Value, propertyValue, property.Name, prop.Name, property, ignoreProperties);
         }
 
-        private static void CheckPropertyValue(string method, JToken propValue, object propertyValue, string? propertyName = null, string? propName = null, PropertyInfo info = null, Dictionary<string, List<string>> ignoreProperties = null)
+        private static void CheckPropertyValue(string method, JToken propValue, object propertyValue, string propertyName = null, string propName = null, PropertyInfo info = null, Dictionary<string, List<string>> ignoreProperties = null)
         {
             if (propertyValue == default && propValue.Type != JTokenType.Null && !string.IsNullOrEmpty(propValue.ToString()))
             {

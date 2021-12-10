@@ -14,18 +14,20 @@ namespace Binance.Net.UnitTests
         private JsonToObjectComparer<IBinanceClient> _comparer = new JsonToObjectComparer<IBinanceClient>((json) => TestHelpers.CreateResponseClient(json, new BinanceClientOptions()
         { 
             ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), 
-            AutoTimestamp = false, 
             SpotApiOptions = new BinanceApiClientOptions
             {
-                RateLimiters = new List<IRateLimiter>()
+                RateLimiters = new List<IRateLimiter>(),
+                AutoTimestamp = false,
             },
             UsdFuturesApiOptions = new BinanceApiClientOptions
             {
-                RateLimiters = new List<IRateLimiter>()
+                RateLimiters = new List<IRateLimiter>(),
+                AutoTimestamp = false,
             },
             CoinFuturesApiOptions = new BinanceApiClientOptions
             {
-                RateLimiters = new List<IRateLimiter>()
+                RateLimiters = new List<IRateLimiter>(),
+                AutoTimestamp = false,
             }
         }));
 

@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using System.Net.Http;
-using System.Security.Cryptography;
-using System.Text;
-using System.Web;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
 
 namespace Binance.Net
@@ -19,47 +13,20 @@ namespace Binance.Net
         {
         }
 
-        public override void AuthenticateBodyRequest(
-            RestApiClient apiClient, 
-            Uri uri, 
-            HttpMethod method,
-            SortedDictionary<string, object> parameters,
-            Dictionary<string, string> headers,
-            bool auth, 
-            ArrayParametersSerialization arraySerialization)
+        public override void AuthenticateRequest(RestApiClient apiClient, Uri uri, HttpMethod method, Dictionary<string, object> providedParameters, bool auth, ArrayParametersSerialization arraySerialization, HttpMethodParameterPosition parameterPosition, out SortedDictionary<string, object> uriParameters, out SortedDictionary<string, object> bodyParameters, out Dictionary<string, string> headers)
         {
-            headers.Add("X-MBX-APIKEY", Credentials.Key!.GetString());
+            uriParameters = parameterPosition == HttpMethodParameterPosition.InUri ? new SortedDictionary<string, object>(providedParameters) : new SortedDictionary<string, object>();
+            bodyParameters = parameterPosition == HttpMethodParameterPosition.InBody ? new SortedDictionary<string, object>(providedParameters) : new SortedDictionary<string, object>();
+            headers = new Dictionary<string, string>() { { "X-MBX-APIKEY", Credentials.Key!.GetString() } };
 
             if (!auth)
                 return;
 
-            parameters.Add("timestamp", GetTimestamp(apiClient));
-            parameters.Add("signature", SignHMACSHA256(parameters.ToFormData()));
-        }
-
-        public override void AuthenticateUriRequest(
-           RestApiClient apiClient,
-           Uri uri,
-           HttpMethod method,
-           SortedDictionary<string, object> parameters,
-           Dictionary<string, string> headers,
-           bool auth,
-           ArrayParametersSerialization arraySerialization)
-        {
-            headers.Add("X-MBX-APIKEY", Credentials.Key!.GetString());
-
-            if (!auth)
-                return;
-
-            var timestamp = GetTimestamp(apiClient);
+            var parameters = parameterPosition == HttpMethodParameterPosition.InUri ? uriParameters : bodyParameters;
+            var timestamp = GetMillisecondTimestamp(apiClient);
             parameters.Add("timestamp", timestamp);
-            uri = uri.AddQueryParmeter("timestamp", timestamp);
-            parameters.Add("signature", SignHMACSHA256(uri.Query.Replace("?", "")));
-        }
-
-        internal string GetTimestamp(RestApiClient apiClient)
-        {
-            return DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.Add(apiClient.GetTimeOffset()))!.Value.ToString(CultureInfo.InvariantCulture);
+            uri = uri.SetParameters(uriParameters);
+            parameters.Add("signature", SignHMACSHA256(parameterPosition == HttpMethodParameterPosition.InUri ? uri.Query.Replace("?", ""): parameters.ToFormData()));
         }
     }
 }

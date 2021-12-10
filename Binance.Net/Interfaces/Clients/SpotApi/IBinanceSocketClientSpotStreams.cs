@@ -16,6 +16,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
     {
         /// <summary>
         /// Subscribes to the aggregated trades update stream for the provided symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#aggregate-trade-streams" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -25,6 +26,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribes to the aggregated trades update stream for the provided symbols
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#aggregate-trade-streams" /></para>
         /// </summary>
         /// <param name="symbols">The symbols</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -34,6 +36,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribes to the candlestick update stream for the provided symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#kline-candlestick-streams" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="interval">The interval of the candlesticks</param>
@@ -44,6 +47,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribes to the candlestick update stream for the provided symbol and intervals
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#kline-candlestick-streams" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="intervals">The intervals of the candlesticks</param>
@@ -54,6 +58,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribes to the candlestick update stream for the provided symbols
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#kline-candlestick-streams" /></para>
         /// </summary>
         /// <param name="symbols">The symbols</param>
         /// <param name="interval">The interval of the candlesticks</param>
@@ -64,6 +69,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribes to the candlestick update stream for the provided symbols and intervals
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#kline-candlestick-streams" /></para>
         /// </summary>
         /// <param name="symbols">The symbols</param>
         /// <param name="intervals">The intervals of the candlesticks</param>
@@ -74,6 +80,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribes to mini ticker updates stream for a specific symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-mini-ticker-stream" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to subscribe to</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -83,6 +90,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribes to mini ticker updates stream for a list of symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-mini-ticker-stream" /></para>
         /// </summary>
         /// <param name="symbols">The symbols to subscribe to</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -92,6 +100,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribes to mini ticker updates stream for all symbols
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#all-market-mini-tickers-stream" /></para>
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -100,6 +109,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribes to ticker updates stream for a specific symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-ticker-streams" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to subscribe to</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -109,6 +119,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribes to ticker updates stream for a specific symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-ticker-streams" /></para>
         /// </summary>
         /// <param name="symbols">The symbols to subscribe to</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -118,6 +129,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribes to ticker updates stream for all symbols
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#all-market-tickers-stream" /></para>
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -126,6 +138,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribes to all book ticker update streams
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#all-book-tickers-stream" /></para>
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -134,6 +147,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribes to the book ticker update stream for the provided symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-book-ticker-streams" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -143,6 +157,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribes to the book ticker update stream for the provided symbols
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-book-ticker-streams" /></para>
         /// </summary>
         /// <param name="symbols">The symbols</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -152,6 +167,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribes to the trades update stream for the provided symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#trade-streams" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -163,6 +179,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribes to the trades update stream for the provided symbols
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#trade-streams" /></para>
         /// </summary>
         /// <param name="symbols">The symbols</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -173,6 +190,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribes to the depth updates for the provided symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#partial-book-depth-streams" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to subscribe on</param>
         /// <param name="levels">The amount of entries to be returned in the update</param>
@@ -184,6 +202,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribes to the depth updates for the provided symbols
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#partial-book-depth-streams" /></para>
         /// </summary>
         /// <param name="symbols">The symbols to subscribe on</param>
         /// <param name="levels">The amount of entries to be returned in the update of each symbol</param>
@@ -195,6 +214,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribes to the order book updates for the provided symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#diff-depth-stream" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="updateInterval">Update interval in milliseconds</param>
@@ -205,6 +225,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribes to the depth update stream for the provided symbols
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#diff-depth-stream" /></para>
         /// </summary>
         /// <param name="symbols">The symbols</param>
         /// <param name="updateInterval">Update interval in milliseconds</param>
@@ -215,6 +236,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribes to the account update stream. Prior to using this, the BinanceClient.Spot.UserStreams.StartUserStream method should be called.
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#user-data-streams" /></para>
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
         /// <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>

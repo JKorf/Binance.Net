@@ -35,6 +35,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         private readonly Log _log;
 
         private const string klineStreamEndpoint = "@kline";
+        private const string continuousContractKlineStreamEndpoint = "@continuousKline";
         private const string markPriceStreamEndpoint = "@markPrice";
         private const string allMarkPriceStreamEndpoint = "!markPrice@arr";
         private const string symbolMiniTickerStreamEndpoint = "@miniTicker";
@@ -132,6 +133,27 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamKlineData>>>(data => onMessage(data.As<IBinanceStreamKlineData>(data.Data.Data, data.Data.Data.Symbol)));
             symbols = symbols.SelectMany(a => intervals.Select(i => a.ToLower(CultureInfo.InvariantCulture) + klineStreamEndpoint + "_" + JsonConvert.SerializeObject(i, new KlineIntervalConverter(false)))).ToArray();
             return await _baseClient.SubscribeInternal(this, BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Continuous contract kline/Candlestick Streams
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToContinuousContractKlineUpdatesAsync(string pair, ContractType contractType, KlineInterval interval, Action<DataEvent<BinanceStreamKlineData>> onMessage, CancellationToken ct = default) => await SubscribeToContinuousContractKlineUpdatesAsync(new[] { pair }, contractType, interval, onMessage, ct).ConfigureAwait(false);
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToContinuousContractKlineUpdatesAsync(IEnumerable<string> pairs, ContractType contractType, KlineInterval interval, Action<DataEvent<BinanceStreamKlineData>> onMessage, CancellationToken ct = default)
+        {
+            pairs.ValidateNotNull(nameof(pairs));
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamKlineData>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
+            pairs = pairs.Select(a => a.ToLower(CultureInfo.InvariantCulture) +
+                                      "_" +
+                                      JsonConvert.SerializeObject(contractType, new ContractTypeConverter(false)).ToLower() +
+                                      continuousContractKlineStreamEndpoint +
+                                      "_" +
+                                      JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ToArray();
+            return await _baseClient.SubscribeInternal(this, BaseAddress, pairs, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
