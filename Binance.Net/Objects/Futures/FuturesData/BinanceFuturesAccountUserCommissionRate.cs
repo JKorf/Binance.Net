@@ -1,9 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-
-namespace Binance.Net.Objects.Futures.FuturesData
+﻿namespace Binance.Net.Objects.Futures.FuturesData
 {
     /// <summary>
     /// User commission rate

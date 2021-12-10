@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Binance.Net.Interfaces;
 using Binance.Net.Objects;
-using Binance.Net.Objects.Spot.MarketData;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.OrderBook;
 using CryptoExchange.Net.Sockets;
@@ -119,6 +119,8 @@ namespace Binance.Net.SymbolOrderBooks
                 _restClient?.Dispose();
             if(_socketOwner)
                 _socketClient?.Dispose();
+
+            GC.SuppressFinalize(this);
         }
     }
 }

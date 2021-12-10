@@ -1,9 +1,6 @@
 ﻿using Binance.Net.Converters;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using CryptoExchange.Net.Attributes;
-using CryptoExchange.Net.Converters;
 using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Spot.WalletData

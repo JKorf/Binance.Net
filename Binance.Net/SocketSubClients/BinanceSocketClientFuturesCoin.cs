@@ -9,7 +9,6 @@ using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.SocketSubClient;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Futures.MarketStream;
-using Binance.Net.Objects.Spot;
 using Binance.Net.Objects.Spot.MarketStream;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Logging;

@@ -8,7 +8,6 @@ using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.SocketSubClient;
 using Binance.Net.Objects;
-using Binance.Net.Objects.Spot;
 using Binance.Net.Objects.Spot.MarketData;
 using Binance.Net.Objects.Spot.MarketStream;
 using Binance.Net.Objects.Spot.UserStream;

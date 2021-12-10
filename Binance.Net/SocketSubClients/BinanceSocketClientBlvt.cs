@@ -8,11 +8,11 @@ using Binance.Net.Enums;
 using Binance.Net.Interfaces.SocketSubClient;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Blvt;
-using Binance.Net.Objects.Spot;
 using Binance.Net.Objects.Spot.MarketStream;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace Binance.Net.SocketSubClients
@@ -97,8 +97,10 @@ namespace Binance.Net.SocketSubClients
         private async Task<CallResult<UpdateSubscription>> Subscribe<T>(IEnumerable<string> topics, Action<DataEvent<T>> onData)
         {
             if (_baseAddress == null)
+            {
+                _log.Write(LogLevel.Error, "No API address provided for the futures API, check the client options");
                 throw new ArgumentNullException("BaseAddress", "No API address provided for the futures API, check the client options");
-
+            }
             return await _baseClient.SubscribeInternal(_baseAddress + "stream", topics, onData).ConfigureAwait(false);
         }
     }

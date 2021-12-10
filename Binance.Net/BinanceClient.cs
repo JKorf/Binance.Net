@@ -14,7 +14,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Objects.Spot.MarketData;
 using Binance.Net.Objects.Spot.SpotData;
-using Binance.Net.Objects.Spot;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.SubClients;
@@ -468,7 +467,7 @@ namespace Binance.Net
             if (symbolData.MinNotionalFilter == null || quantity == null || outputPrice == null)
                 return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice, outputStopPrice);
 
-            var currentQuantity = (outputQuantity.HasValue ? outputQuantity.Value : quantity.Value);
+            var currentQuantity = (outputQuantity ?? quantity.Value);
             var notional = currentQuantity * outputPrice.Value;
             if (notional < symbolData.MinNotionalFilter.MinNotional)
             {

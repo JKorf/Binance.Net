@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Binance.Net.Interfaces;
 using Binance.Net.Objects;
 using CryptoExchange.Net.Objects;
@@ -110,6 +111,8 @@ namespace Binance.Net.SymbolOrderBooks
                 _restClient?.Dispose();
             if (_socketOwner)
                 _socketClient?.Dispose();
+
+            GC.SuppressFinalize(this);
         }
     }
 }

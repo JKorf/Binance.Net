@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Binance.Net.Objects.Spot.WalletData
+﻿namespace Binance.Net.Objects.Spot.WalletData
 {
     /// <summary>
     /// Result of placing a withdrawal

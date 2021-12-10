@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Enums;
-using Binance.Net.Objects.BSwap;
 using Binance.Net.Objects.Fiat;
 using CryptoExchange.Net.Objects;
 

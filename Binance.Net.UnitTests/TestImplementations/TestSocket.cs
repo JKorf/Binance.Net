@@ -67,6 +67,7 @@ namespace Binance.Net.UnitTests.TestImplementations
         }
         public void Dispose()
         {
+            GC.SuppressFinalize(this);
         }
 
         public void InvokeClose()
