@@ -167,6 +167,11 @@ namespace Binance.Net.Converters
                     writer.WritePropertyName("avgPriceMins");
                     writer.WriteValue(pricePercentFilter.AveragePriceMinutes);
                     break;
+                case SymbolFilterType.MaxPosition:
+                    var maxPositionFilter = (BinanceSymbolMaxPositionFilter)filter;
+                    writer.WritePropertyName("maxPosition");
+                    writer.WriteValue(maxPositionFilter.MaxPosition);
+                    break;
                 default:
                     Debug.WriteLine("Can't write symbol filter of type: " + filter.FilterType);
                     break;
