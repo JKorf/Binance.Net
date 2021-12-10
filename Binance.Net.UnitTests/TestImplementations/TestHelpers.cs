@@ -110,7 +110,7 @@ namespace Binance.Net.UnitTests.TestImplementations
                 .Returns(request.Object);
         }
 
-        public static void SetErrorWithResponse(IBinanceClient client, string responseData, HttpStatusCode code)
+        public static void SetErrorWithResponse(IBinanceClient client, string responseData/*, HttpStatusCode code*/)
         {
             var expectedBytes = Encoding.UTF8.GetBytes(responseData);
             var responseStream = new MemoryStream();

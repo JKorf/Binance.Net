@@ -39,7 +39,7 @@ namespace Binance.Net.SubClients
         private const string transferUniversalEndpoint = "broker/universalTransfer";
         private const string transferFuturesEndpoint = "broker/transfer/futures";
         private const string rebatesRecentEndpoint = "broker/rebate/recentRecord";
-        private const string rebatesHistoryEndpoint = "broker/rebate/historicalRecord";
+        //private const string rebatesHistoryEndpoint = "broker/rebate/historicalRecord";
         private const string rebatesFuturesHistoryEndpoint = "broker/rebate/futures/recentRecord";
         private const string changeBnbBurnForSubAccountSpotAndMarginEndpoint = "broker/subAccount/bnbBurn/spot";
         private const string changeBnbBurnForSubAccountMarginInterestEndpoint = "broker/subAccount/bnbBurn/marginInterest";

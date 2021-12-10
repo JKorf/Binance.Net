@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
+#pragma warning disable IDE0051 
 namespace Binance.Net.Objects.Futures.MarketData
 {
     /// <summary>
@@ -78,3 +79,4 @@ namespace Binance.Net.Objects.Futures.MarketData
         public decimal MaintAmount { get; set; }
     }
 }
+#pragma warning restore IDE0051

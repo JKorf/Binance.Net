@@ -377,7 +377,7 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsTrue(result.Success);
-            Assert.AreEqual(result.Data.Count(), history.Count());
+            Assert.AreEqual(result.Data.Count(), history.Count);
             Assert.IsTrue(TestHelpers.AreEqual(history.ToList()[0], result.Data.ToList()[0]));
             Assert.IsTrue(TestHelpers.AreEqual(history.ToList()[1], result.Data.ToList()[1]));
         }
@@ -582,7 +582,7 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsTrue(result.Success);
-            Assert.AreEqual(result.Data.Count(), history.Count());
+            Assert.AreEqual(result.Data.Count(), history.Count);
             Assert.IsTrue(TestHelpers.AreEqual(history.ToList()[0], result.Data.ToList()[0]));
             Assert.IsTrue(TestHelpers.AreEqual(history.ToList()[1], result.Data.ToList()[1]));
         }
@@ -897,7 +897,7 @@ namespace Binance.Net.UnitTests
         {
             // arrange
             var client = TestHelpers.CreateClient();
-            TestHelpers.SetErrorWithResponse(client, "{\"msg\": \"Error!\", \"code\": 123}", HttpStatusCode.BadRequest);
+            TestHelpers.SetErrorWithResponse(client, "{\"msg\": \"Error!\", \"code\": 123}" /*, HttpStatusCode.BadRequest*/);
 
             // act
             var result = await client.Spot.System.GetServerTimeAsync();

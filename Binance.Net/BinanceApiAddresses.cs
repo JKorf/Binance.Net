@@ -35,7 +35,7 @@
         /// <summary>
         /// The default addresses to connect to the binance.com API
         /// </summary>
-        public static BinanceApiAddresses Default = new BinanceApiAddresses
+        public static readonly BinanceApiAddresses Default = new BinanceApiAddresses
         {
             RestClientAddress = "https://api.binance.com",
             SocketClientAddress = "wss://stream.binance.com:9443/",
@@ -48,7 +48,7 @@
         /// <summary>
         /// The addresses to connect to the binance testnet
         /// </summary>
-        public static BinanceApiAddresses TestNet = new BinanceApiAddresses
+        public static readonly BinanceApiAddresses TestNet = new BinanceApiAddresses
         {
             RestClientAddress = "https://testnet.binance.vision",
             SocketClientAddress = "wss://testnet.binance.vision",
@@ -61,7 +61,7 @@
         /// <summary>
         /// The addresses to connect to binance.us. (binance.us futures not are not available)
         /// </summary>
-        public static BinanceApiAddresses Us = new BinanceApiAddresses
+        public static readonly BinanceApiAddresses Us = new BinanceApiAddresses
         {
             RestClientAddress = "https://api.binance.us",
             SocketClientAddress = "wss://stream.binance.us:9443",

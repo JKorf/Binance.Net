@@ -3,6 +3,7 @@ using Binance.Net.Objects.Spot.MarketStream;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
+#pragma warning disable IDE0051 
 namespace Binance.Net.Objects.Futures.MarketStream
 {
     /// <summary>
@@ -25,3 +26,4 @@ namespace Binance.Net.Objects.Futures.MarketStream
         [JsonProperty("e")] private string Event { get; set; } = string.Empty;
     }
 }
+#pragma warning restore IDE0051 

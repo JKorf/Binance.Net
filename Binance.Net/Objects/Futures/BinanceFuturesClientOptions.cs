@@ -85,7 +85,7 @@ namespace Binance.Net.Objects.Futures
         /// Setting this to a higher number increases subscription speed, but having more subscriptions on a single connection will also increase the amount of traffic on that single connection.
         /// Not available on Binance.
         /// </summary>
-        public new int? SocketSubscriptionsCombineTarget
+        public static new int? SocketSubscriptionsCombineTarget
         {
             get => 1;
             set

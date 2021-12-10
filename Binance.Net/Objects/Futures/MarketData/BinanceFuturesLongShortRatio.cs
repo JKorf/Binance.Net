@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 
+#pragma warning disable IDE0051 
 namespace Binance.Net.Objects.Futures.MarketData
 {
     /// <summary>
@@ -54,3 +55,4 @@ namespace Binance.Net.Objects.Futures.MarketData
         public DateTime? Timestamp { get; set; }
     }
 }
+#pragma warning restore IDE0051
