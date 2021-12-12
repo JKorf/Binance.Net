@@ -22,7 +22,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region fields 
         private readonly BinanceClient _baseClient;
         internal new readonly BinanceClientOptions Options;
-        private Log _log;
+        private readonly Log _log;
         #endregion
 
         #region Api clients

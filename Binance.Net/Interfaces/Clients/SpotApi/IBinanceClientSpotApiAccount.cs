@@ -110,7 +110,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#asset-dividend-record-user_data" /></para>
         /// </summary>
         /// <param name="asset">Filter by asset</param>
-        /// /// <param name="startTime">Filter by start time from</param>
+        /// <param name="startTime">Filter by start time from</param>
         /// <param name="endTime">Filter by end time till</param>
         /// <param name="limit">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -500,8 +500,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BinanceQueryRecords<BinanceIsolatedMarginTransfer>>>
-            GetIsolatedMarginAccountTransferHistoryAsync(string symbol, string? asset = null,
+        Task<WebCallResult<BinanceQueryRecords<BinanceIsolatedMarginTransfer>>> GetIsolatedMarginAccountTransferHistoryAsync(string symbol, string? asset = null,
                 IsolatedMarginTransferDirection? from = null, IsolatedMarginTransferDirection? to = null,
                 DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? limit = 10,
                 int? receiveWindow = null, CancellationToken ct = default);

@@ -33,7 +33,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         internal static TimeSyncState TimeSyncState = new TimeSyncState();
 
-        private Log _log;
+        private readonly Log _log;
         #endregion
 
         #region Api clients

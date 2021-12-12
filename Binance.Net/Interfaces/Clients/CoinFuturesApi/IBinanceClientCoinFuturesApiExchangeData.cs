@@ -18,6 +18,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Pings the Binance Futures API
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#test-connectivity" /></para>
         /// </summary>
+        /// <param name="ct">Cancellation token</param>
         /// <returns>True if successful ping, false if no response</returns>
         Task<WebCallResult<long>> PingAsync(CancellationToken ct = default);
 

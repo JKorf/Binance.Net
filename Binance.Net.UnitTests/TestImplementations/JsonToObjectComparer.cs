@@ -24,7 +24,60 @@ namespace Binance.Net.UnitTests.TestImplementations
             _clientFunc = getClient;
         }
 
+
         public async Task ProcessSubject<K>(
+           string folderPrefix,
+           Func<T, K> getSubject,
+           string[] parametersToSetNull = null,
+           Dictionary<string, string> useNestedJsonPropertyForCompare = null,
+           Dictionary<string, List<string>> ignoreProperties = null)
+        {
+            var methods = typeof(K).GetMethods();
+            var callResultMethods = methods.Where(m => m.Name.EndsWith("Async")).ToList();
+            var skippedMethods = new List<string>();
+
+            foreach (var method in callResultMethods)
+            {
+                var path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
+                FileStream file = null;
+                try
+                {
+                    file = File.OpenRead(Path.Combine(path, $"JsonResponses", folderPrefix, $"{method.Name}.txt"));
+                }
+                catch (FileNotFoundException)
+                {
+                    skippedMethods.Add(method.Name);
+                    continue;
+                }
+
+                var buffer = new byte[file.Length];
+                await file.ReadAsync(buffer, 0, buffer.Length);
+                file.Close();
+
+                var json = Encoding.UTF8.GetString(buffer);
+                var client = _clientFunc(json);
+
+                var parameters = method.GetParameters();
+                var input = new List<object>();
+                foreach (var parameter in parameters)
+                {
+                    if (parametersToSetNull?.Contains(parameter.Name) == true)
+                        input.Add(null);
+                    else
+                        input.Add(TestHelpers.GetTestValue(parameter.ParameterType, 1));
+                }
+
+                // act
+
+                // Get socket client
+                // Get socket
+                // Invoke socket with message of json data
+                // Check result
+
+            }
+        }
+
+        public async Task ProcessSocketSubject<K>(
            string folderPrefix,
            Func<T, K> getSubject,
            string[] parametersToSetNull = null,
