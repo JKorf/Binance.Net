@@ -27,7 +27,7 @@ namespace Binance.Net.SymbolOrderBooks
         /// </summary>
         /// <param name="symbol">The symbol of the order book</param>
         /// <param name="options">The options for the order book</param>
-        public BinanceFuturesUsdtSymbolOrderBook(string symbol, BinanceOrderBookOptions? options = null) : base("Binance[UsdFutures]", symbol, options ?? new BinanceOrderBookOptions())
+        public BinanceFuturesUsdtSymbolOrderBook(string symbol, BinanceOrderBookOptions? options = null) : base("Binance", symbol, options ?? new BinanceOrderBookOptions())
         {
             _limit = options?.Limit;
             _updateInterval = options?.UpdateInterval;

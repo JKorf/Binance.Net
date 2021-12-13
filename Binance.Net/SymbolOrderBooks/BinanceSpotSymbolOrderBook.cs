@@ -26,7 +26,7 @@ namespace Binance.Net.SymbolOrderBooks
         /// </summary>
         /// <param name="symbol">The symbol of the order book</param>
         /// <param name="options">The options for the order book</param>
-        public BinanceSpotSymbolOrderBook(string symbol, BinanceOrderBookOptions? options = null) : base("Binance[Spot]", symbol, options ?? new BinanceOrderBookOptions())
+        public BinanceSpotSymbolOrderBook(string symbol, BinanceOrderBookOptions? options = null) : base("Binance", symbol, options ?? new BinanceOrderBookOptions())
         {
             symbol.ValidateBinanceSymbol();
             Levels = options?.Limit;

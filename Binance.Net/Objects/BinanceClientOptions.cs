@@ -249,20 +249,5 @@ namespace Binance.Net.Objects
         /// The client to use for the socket connection. When using the same client for multiple order books the connection can be shared.
         /// </summary>
         public IBinanceSocketClient? SocketClient { get; set; }
-
-        /// <summary>
-        /// Create new options
-        /// </summary>
-        /// <param name="limit">The top amount of results to keep in sync. If for example limit=10 is used, the order book will contain the 10 best bids and 10 best asks. Leaving this null will sync the full order book</param>
-        /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000. Defaults to 1000</param>
-        /// <param name="socketClient">The client to use for the socket connection. When using the same client for multiple order books the connection can be shared.</param>
-        /// <param name="restClient">The rest client to use for requesting the initial order book</param>
-        public BinanceOrderBookOptions(int? limit = null, int? updateInterval = null, IBinanceSocketClient? socketClient = null, IBinanceClient? restClient = null)
-        {
-            Limit = limit;
-            UpdateInterval = updateInterval;
-            RestClient = restClient;
-            SocketClient = socketClient;
-        }
     }
 }
