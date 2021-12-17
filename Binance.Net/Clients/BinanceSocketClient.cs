@@ -56,9 +56,9 @@ namespace Binance.Net.Clients
             SetDataInterpreter((data) => string.Empty, null);
             RateLimitPerSocketPerSecond = 4;
 
-            SpotStreams = new BinanceSocketClientSpotStreams(log, this, options);
-            UsdFuturesStreams = new BinanceSocketClientUsdFuturesStreams(log, this, options);
-            CoinFuturesStreams = new BinanceSocketClientCoinFuturesStreams(log, this, options);
+            SpotStreams = AddApiClient(new BinanceSocketClientSpotStreams(log, this, options));
+            UsdFuturesStreams = AddApiClient(new BinanceSocketClientUsdFuturesStreams(log, this, options));
+            CoinFuturesStreams = AddApiClient(new BinanceSocketClientCoinFuturesStreams(log, this, options));
         }
         #endregion 
 
@@ -186,15 +186,6 @@ namespace Binance.Net.Clients
                 return true;
             }).ConfigureAwait(false);
             return result;
-        }
-
-        /// <inheritdoc />
-        public override void Dispose()
-        {
-            SpotStreams.Dispose();
-            UsdFuturesStreams.Dispose();
-            CoinFuturesStreams.Dispose();
-            base.Dispose();
         }
         #endregion
     }

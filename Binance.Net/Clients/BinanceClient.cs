@@ -49,10 +49,10 @@ namespace Binance.Net.Clients
         /// <param name="options">The options to use for this client</param>
         public BinanceClient(BinanceClientOptions options) : base("Binance", options)
         {
-            GeneralApi = new BinanceClientGeneralApi(log, this, options);
-            SpotApi = new BinanceClientSpotApi(log, this, options);
-            UsdFuturesApi = new BinanceClientUsdFuturesApi(log, this, options);
-            CoinFuturesApi = new BinanceClientCoinFuturesApi(log, this, options);
+            GeneralApi = AddApiClient(new BinanceClientGeneralApi(log, this, options));
+            SpotApi = AddApiClient(new BinanceClientSpotApi(log, this, options));
+            UsdFuturesApi = AddApiClient(new BinanceClientUsdFuturesApi(log, this, options));
+            CoinFuturesApi = AddApiClient(new BinanceClientCoinFuturesApi(log, this, options));
 
             requestBodyEmptyContent = "";
             requestBodyFormat = RequestBodyFormat.FormData;
@@ -89,16 +89,6 @@ namespace Binance.Net.Clients
             ArrayParametersSerialization? arraySerialization = null, int weight = 1) where T : class
         {
             return base.SendRequestAsync<T>(apiClient, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, requestWeight: weight);
-        }
-
-        /// <inheritdoc />
-        public override void Dispose()
-        {
-            GeneralApi.Dispose();
-            SpotApi.Dispose();
-            UsdFuturesApi.Dispose();
-            CoinFuturesApi.Dispose();
-            base.Dispose();
         }
     }
 }
