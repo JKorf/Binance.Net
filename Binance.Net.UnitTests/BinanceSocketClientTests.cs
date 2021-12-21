@@ -290,7 +290,7 @@ namespace Binance.Net.UnitTests
                     Side = OrderSide.Buy,
                     Status = OrderStatus.Filled,
                     Symbol = "test",
-                    TimeInForce = TimeInForce.GoodTillCancel,
+                    TimeInForce = TimeInForce.GoodTillCanceled,
                     TradeId = 10000000000000,
                     Type = OrderType.Limit,
                     ClientOrderId = "123",

@@ -22,11 +22,11 @@
         /// </summary>
         StopLossLimit,
         /// <summary>
-        /// Stop loss order. Will execute a market order when the price drops below a price to sell and therefor limit the loss
+        /// Stop order. Use for new futures orders
         /// </summary>
         Stop,
         /// <summary>
-        /// Stop loss order. Will be executed at the best price available at that time in the order book
+        /// Stop market order. Use for new futures orders
         /// </summary>
         StopMarket,
         /// <summary>

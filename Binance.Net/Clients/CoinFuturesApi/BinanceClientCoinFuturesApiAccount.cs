@@ -38,7 +38,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         private const string positionInformationEndpoint = "positionRisk";
         private const string futuresAccountUserCommissionRateEndpoint = "commissionRate";
 
-        private const string api = "fapi";
+        private const string api = "dapi";
         private const string signedVersion = "1";
 
         private readonly BinanceClientCoinFuturesApi _baseClient;
