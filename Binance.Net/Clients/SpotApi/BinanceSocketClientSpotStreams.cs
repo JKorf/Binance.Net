@@ -28,7 +28,6 @@ namespace Binance.Net.Clients.SpotApi
     {
         #region fields
         private readonly BinanceSocketClient _baseClient;
-        private readonly BinanceSocketClientOptions _options;
         private readonly Log _log;
 
         private const string depthStreamEndpoint = "@depth";
@@ -57,7 +56,6 @@ namespace Binance.Net.Clients.SpotApi
         public BinanceSocketClientSpotStreams(Log log, BinanceSocketClient baseClient, BinanceSocketClientOptions options) :
             base(options, options.SpotStreamsOptions)
         {
-            _options = options;
             _baseClient = baseClient;
             _log = log;
         }
