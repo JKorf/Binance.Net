@@ -56,7 +56,7 @@ namespace Binance.Net.Objects.Models
         }
 
         /// <summary>
-        /// The original quantity of the order
+        /// The original quantity of the order, as specified in the order parameters by the user
         /// </summary>
         [JsonProperty("origQty")]
         public decimal Quantity { get; set; }
@@ -66,16 +66,15 @@ namespace Binance.Net.Objects.Models
         [JsonProperty("executedQty")]
         public decimal QuantityFilled { get; set; }
         /// <summary>
-        /// Cummulative quantity
+        /// The currently executed amount of quote asset. Amounts to Sum(quantity * price) of executed trades for this order
         /// </summary>
         [JsonProperty("cummulativeQuoteQty")]
         public decimal QuoteQuantityFilled { get; set; }
         /// <summary>
-        /// The original quote order quantity
+        /// The original quote order quantity of the order, as specified in the order parameters by the user
         /// </summary>
         [JsonProperty("origQuoteOrderQty")]
         public decimal QuoteQuantity { get; set; }
-
 
         /// <summary>
         /// The status of the order
