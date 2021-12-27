@@ -167,6 +167,9 @@ Yes, as long as the API endpoints are the same. Switch by changing the BaseAddre
 See Timestamping.
 
 ## Release notes
+* Version 8.0.0-alpha3 - 27 Dec 2021
+    * Updated CryptoExchange.Net, small changes
+
 * Version 8.0.0-alpha2 - 21 Dec 2021
     * Update to new CryptoExchange.Net version
 
