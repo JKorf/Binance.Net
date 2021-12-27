@@ -24,7 +24,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         public IBinanceClientCoinFuturesApiTrading Trading { get; }
 
         /// <summary>
-        /// Get the IExchangeClient for this client
+        /// Get the IExchangeClient for this client. This is a common interface which allows for some basic operations without knowing any details of the exchange.
         /// </summary>
         /// <returns></returns>
         IExchangeClient AsExchangeClient();
