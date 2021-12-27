@@ -43,6 +43,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
         public IBinanceClientCoinFuturesApiExchangeData ExchangeData { get; }
         /// <inheritdoc />
         public IBinanceClientCoinFuturesApiTrading Trading { get; }
+        /// <inheritdoc />
+        public string ExchangeName => "Binance";
         #endregion
 
         /// <summary>
@@ -375,5 +377,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
         /// <inheritdoc />
         public override TimeSpan GetTimeOffset()
             => TimeSyncState.TimeOffset;
+
+        /// <inheritdoc />
+        public IExchangeClient AsExchangeClient() => this;
     }
 }

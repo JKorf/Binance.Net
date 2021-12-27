@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CryptoExchange.Net.ExchangeInterfaces;
+using System;
 
 namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 {
@@ -21,5 +22,11 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Endpoints related to orders and trades
         /// </summary>
         public IBinanceClientCoinFuturesApiTrading Trading { get; }
+
+        /// <summary>
+        /// Get the IExchangeClient for this client
+        /// </summary>
+        /// <returns></returns>
+        IExchangeClient AsExchangeClient();
     }
 }

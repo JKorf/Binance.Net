@@ -45,6 +45,8 @@ namespace Binance.Net.Clients.SpotApi
         public IBinanceClientSpotApiExchangeData ExchangeData { get; }
         /// <inheritdoc />
         public IBinanceClientSpotApiTrading Trading { get; }
+        /// <inheritdoc />
+        public string ExchangeName => "Binance";
         #endregion
 
         /// <summary>
@@ -451,6 +453,8 @@ namespace Binance.Net.Clients.SpotApi
         public override TimeSpan GetTimeOffset() 
             => TimeSyncState.TimeOffset;
 
+        /// <inheritdoc />
+        public IExchangeClient AsExchangeClient() => this;
 #pragma warning restore 1066
     }
 }
