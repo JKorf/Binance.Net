@@ -167,6 +167,9 @@ Yes, as long as the API endpoints are the same. Switch by changing the BaseAddre
 See Timestamping.
 
 ## Release notes
+* Version 7.2.7 - 29 Dec 2021
+    * Fixed permission deserialization issue in GetAccountInfoAsync
+
 * Version 7.2.6 - 09 Nov 2021
     * Updated TransferType enum to match new API
 

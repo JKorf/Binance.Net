@@ -322,6 +322,11 @@
             Leveraged account type
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.AccountType.TRD_GRP_002">
+            <summary>
+            See https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#enum-definitions
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.AccountUpdateReason">
             <summary>
             Account update reason
