@@ -113,8 +113,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.AddOptionalParameter("priceProtect", priceProtect?.ToString().ToUpper());
 
             var result = await _baseClient.SendRequestInternal<BinanceFuturesPlacedOrder>(_baseClient.GetUrl(newOrderEndpoint, api, "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
-            if (result)
-                _baseClient.InvokeOrderPlaced(result.Data);
+            //if (result)
+            //    _baseClient.InvokeOrderPlaced(result.Data);
             return result;
         }
 
@@ -237,8 +237,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             var result = await _baseClient.SendRequestInternal<BinanceFuturesCancelOrder>(_baseClient.GetUrl(cancelOrderEndpoint, api, "1"), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
 
-            if (result)
-                _baseClient.InvokeOrderCanceled(result.Data);
+            //if (result)
+            //    _baseClient.InvokeOrderCanceled(result.Data);
             return result;
         }
 

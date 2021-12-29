@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Binance.Net.Clients;
+using Binance.Net.Interfaces.Clients;
+using Binance.Net.Objects;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -96,6 +100,28 @@ namespace Binance.Net
         public static decimal Floor(decimal number)
         {
             return Math.Floor(number * 100000000) / 100000000;
+        }
+
+        /// <summary>
+        /// Add the IBinanceClient and IBinanceSocketClient to the sevice collection so they can be injected
+        /// </summary>
+        /// <param name="services">The service collection</param>
+        /// <param name="defaultOptionsCallback">Set default options for the client</param>
+        /// <returns></returns>
+        public static IServiceCollection AddBinance(this IServiceCollection services, Action<BinanceClientOptions, BinanceSocketClientOptions>? defaultOptionsCallback = null)
+        {
+            if (defaultOptionsCallback != null)
+            {
+                var options = new BinanceClientOptions();
+                var socketOptions = new BinanceSocketClientOptions();
+                defaultOptionsCallback?.Invoke(options, socketOptions);
+
+                BinanceClient.SetDefaultOptions(options);
+                BinanceSocketClient.SetDefaultOptions(socketOptions);
+            }
+
+            return services.AddTransient<IBinanceClient, BinanceClient>()
+                           .AddScoped<IBinanceSocketClient, BinanceSocketClient>();
         }
 
         /// <summary>

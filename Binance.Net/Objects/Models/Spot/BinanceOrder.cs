@@ -8,34 +8,34 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Information regarding a specific order
     /// </summary>
-    public class BinanceOrder: BinanceOrderBase, ICommonOrder
+    public class BinanceOrder: BinanceOrderBase//, ICommonOrder
     {
-        string ICommonOrderId.CommonId => Id.ToString(CultureInfo.InvariantCulture);
-        string ICommonOrder.CommonSymbol => Symbol;
-        decimal ICommonOrder.CommonPrice => Price;
-        decimal ICommonOrder.CommonQuantity => Quantity;
-        IExchangeClient.OrderStatus ICommonOrder.CommonStatus =>
-            Status == OrderStatus.New || Status == OrderStatus.PartiallyFilled ? IExchangeClient.OrderStatus.Active :
-            Status == OrderStatus.Filled ? IExchangeClient.OrderStatus.Filled :
-            IExchangeClient.OrderStatus.Canceled;
+        //string ICommonOrderId.CommonId => Id.ToString(CultureInfo.InvariantCulture);
+        //string ICommonOrder.CommonSymbol => Symbol;
+        //decimal ICommonOrder.CommonPrice => Price;
+        //decimal ICommonOrder.CommonQuantity => Quantity;
+        //IExchangeClient.OrderStatus ICommonOrder.CommonStatus =>
+        //    Status == OrderStatus.New || Status == OrderStatus.PartiallyFilled ? IExchangeClient.OrderStatus.Active :
+        //    Status == OrderStatus.Filled ? IExchangeClient.OrderStatus.Filled :
+        //    IExchangeClient.OrderStatus.Canceled;
 
-        bool ICommonOrder.IsActive => Status == OrderStatus.New || Status == OrderStatus.PartiallyFilled;
+        //bool ICommonOrder.IsActive => Status == OrderStatus.New || Status == OrderStatus.PartiallyFilled;
 
-        IExchangeClient.OrderSide ICommonOrder.CommonSide =>
-            Side == OrderSide.Sell ? IExchangeClient.OrderSide.Sell : IExchangeClient.OrderSide.Buy;
+        //IExchangeClient.OrderSide ICommonOrder.CommonSide =>
+        //    Side == OrderSide.Sell ? IExchangeClient.OrderSide.Sell : IExchangeClient.OrderSide.Buy;
 
-        DateTime ICommonOrder.CommonOrderTime => CreateTime;
+        //DateTime ICommonOrder.CommonOrderTime => CreateTime;
 
-        IExchangeClient.OrderType ICommonOrder.CommonType
-        {
-            get
-            {
-                if (Type == OrderType.Limit)
-                    return IExchangeClient.OrderType.Limit;
-                if (Type == OrderType.Market)
-                    return IExchangeClient.OrderType.Market;
-                return IExchangeClient.OrderType.Other;
-            }
-        }
+        //IExchangeClient.OrderType ICommonOrder.CommonType
+        //{
+        //    get
+        //    {
+        //        if (Type == OrderType.Limit)
+        //            return IExchangeClient.OrderType.Limit;
+        //        if (Type == OrderType.Market)
+        //            return IExchangeClient.OrderType.Market;
+        //        return IExchangeClient.OrderType.Other;
+        //    }
+        //}
     }
 }
