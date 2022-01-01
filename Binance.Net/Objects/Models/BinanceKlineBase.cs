@@ -1,7 +1,6 @@
 ﻿using System;
 using Binance.Net.Interfaces;
 using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.ExchangeInterfaces;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Models
@@ -62,12 +61,5 @@ namespace Binance.Net.Objects.Models
         /// Taker buy quote asset volume
         /// </summary>
         public abstract decimal TakerBuyQuoteVolume { get; set; }
-
-        decimal ICommonKline.CommonHighPrice => HighPrice;
-        decimal ICommonKline.CommonLowPrice => LowPrice;
-        decimal ICommonKline.CommonOpenPrice => OpenPrice;
-        decimal ICommonKline.CommonClosePrice => ClosePrice;
-        decimal ICommonKline.CommonVolume => Volume;
-        DateTime ICommonKline.CommonOpenTime => OpenTime;
     }
 }

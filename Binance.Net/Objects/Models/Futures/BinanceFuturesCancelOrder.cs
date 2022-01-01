@@ -2,7 +2,6 @@
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.ExchangeInterfaces;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Models.Futures
@@ -10,7 +9,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// The result of cancel order
     /// </summary>
-    public class BinanceFuturesCancelOrder: ICommonOrderId
+    public class BinanceFuturesCancelOrder
     {
         /// <summary>
         /// The symbol the order is for
@@ -153,7 +152,5 @@ namespace Binance.Net.Objects.Models.Futures
         /// </summary>
         [JsonProperty("avgPrice")]
         public decimal? AveragePrice { get; set; }
-
-        string ICommonOrderId.CommonId => Id.ToString();
     }
 }

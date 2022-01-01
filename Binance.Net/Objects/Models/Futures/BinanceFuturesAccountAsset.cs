@@ -1,6 +1,5 @@
 ﻿using System;
 using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.ExchangeInterfaces;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Models.Futures
@@ -8,7 +7,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Information about an account asset
     /// </summary>
-    public class BinanceFuturesAccountAsset: ICommonBalance
+    public class BinanceFuturesAccountAsset
     {
         /// <summary>
         /// Asset
@@ -82,11 +81,5 @@ namespace Binance.Net.Objects.Models.Futures
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime UpdateTime { get; set; }
-
-        string ICommonBalance.CommonAsset => Asset;
-
-        decimal ICommonBalance.CommonAvailable => AvailableBalance;
-
-        decimal ICommonBalance.CommonTotal => WalletBalance;
     }
 }

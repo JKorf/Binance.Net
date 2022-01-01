@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Binance.Net.Interfaces;
-using CryptoExchange.Net.ExchangeInterfaces;
 using CryptoExchange.Net.Interfaces;
 using Newtonsoft.Json;
 
@@ -10,7 +9,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// The order book for a asset
     /// </summary>
-    public class BinanceOrderBook : IBinanceOrderBook, ICommonOrderBook
+    public class BinanceOrderBook : IBinanceOrderBook
     {
         /// <summary>
         /// The symbol of the order book 
@@ -33,9 +32,5 @@ namespace Binance.Net.Objects.Models.Spot
         /// The list of asks
         /// </summary>
         public IEnumerable<BinanceOrderBookEntry> Asks { get; set; } = Array.Empty<BinanceOrderBookEntry>();
-
-
-        IEnumerable<ISymbolOrderBookEntry> ICommonOrderBook.CommonBids => Bids;
-        IEnumerable<ISymbolOrderBookEntry> ICommonOrderBook.CommonAsks => Asks;
     }
 }

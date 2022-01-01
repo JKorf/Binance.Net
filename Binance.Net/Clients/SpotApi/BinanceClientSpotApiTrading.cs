@@ -13,6 +13,7 @@ using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.BSwap;
 using Binance.Net.Objects.Models.Spot.Margin;
 using CryptoExchange.Net;
+using CryptoExchange.Net.ComonObjects;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
@@ -99,8 +100,8 @@ namespace Binance.Net.Clients.SpotApi
 
         /// <inheritdoc />
         public async Task<WebCallResult<BinancePlacedOrder>> PlaceTestOrderAsync(string symbol,
-            OrderSide side,
-            OrderType type,
+            Enums.OrderSide side,
+            Enums.OrderType type,
             decimal? quantity = null,
             decimal? quoteQuantity = null,
             string? newClientOrderId = null,
@@ -137,8 +138,8 @@ namespace Binance.Net.Clients.SpotApi
 
         /// <inheritdoc />
         public async Task<WebCallResult<BinancePlacedOrder>> PlaceOrderAsync(string symbol,
-            OrderSide side,
-            OrderType type,
+            Enums.OrderSide side,
+            Enums.OrderType type,
             decimal? quantity = null,
             decimal? quoteQuantity = null,
             string? newClientOrderId = null,
@@ -168,7 +169,7 @@ namespace Binance.Net.Clients.SpotApi
                 1,
                 ct).ConfigureAwait(false);
             if (result)
-                _baseClient.InvokeOrderPlaced(result.Data);
+                _baseClient.InvokeOrderPlaced(new OrderId() { SourceObject = result.Data, Id = result.Data.Id.ToString(CultureInfo.InvariantCulture) });
             return result;
         }
 
@@ -194,7 +195,7 @@ namespace Binance.Net.Clients.SpotApi
 
             var result = await _baseClient.SendRequestInternal<BinanceOrderBase>(_baseClient.GetUrl(cancelOrderEndpoint, api, signedVersion), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
             if (result)
-                _baseClient.InvokeOrderCanceled(result.Data);
+                    _baseClient.InvokeOrderCanceled(new OrderId() { SourceObject = result.Data, Id = result.Data.Id.ToString(CultureInfo.InvariantCulture) });
             return result;
         }
 
@@ -282,7 +283,7 @@ namespace Binance.Net.Clients.SpotApi
 
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceOrderOcoList>> PlaceOcoOrderAsync(string symbol,
-            OrderSide side,
+            Enums.OrderSide side,
             decimal quantity,
             decimal price,
             decimal stopPrice,
@@ -435,8 +436,8 @@ namespace Binance.Net.Clients.SpotApi
 
         /// <inheritdoc />
         public async Task<WebCallResult<BinancePlacedOrder>> PlaceMarginOrderAsync(string symbol,
-            OrderSide side,
-            OrderType type,
+            Enums.OrderSide side,
+            Enums.OrderType type,
             decimal? quantity = null,
             decimal? quoteQuantity = null,
             string? newClientOrderId = null,
@@ -469,7 +470,7 @@ namespace Binance.Net.Clients.SpotApi
                 ct).ConfigureAwait(false);
 
             if (result)
-                _baseClient.InvokeOrderPlaced(result.Data);
+                _baseClient.InvokeOrderPlaced(new OrderId { Id = result.Data.Id.ToString(CultureInfo.InvariantCulture) });
             return result;
         }
 
@@ -497,7 +498,7 @@ namespace Binance.Net.Clients.SpotApi
 
             var result = await _baseClient.SendRequestInternal<BinanceOrderBase>(_baseClient.GetUrl(cancelMarginOrderEndpoint, marginApi, marginVersion), HttpMethod.Delete, ct, parameters, true, weight: 10).ConfigureAwait(false);
             if (result)
-                _baseClient.InvokeOrderCanceled(result.Data);
+                _baseClient.InvokeOrderCanceled(new OrderId { Id = result.Data.Id.ToString(CultureInfo.InvariantCulture) });
             return result;
         }
 
@@ -615,7 +616,7 @@ namespace Binance.Net.Clients.SpotApi
 
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceMarginOrderOcoList>> PlaceMarginOCOOrderAsync(string symbol,
-            OrderSide side,
+            Enums.OrderSide side,
             decimal price,
             decimal stopPrice,
             decimal quantity,

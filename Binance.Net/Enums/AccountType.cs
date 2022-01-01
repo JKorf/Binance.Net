@@ -20,6 +20,10 @@
         /// <summary>
         /// Leveraged account type
         /// </summary>
-        Leveraged
+        Leveraged,
+        /// <summary>
+        /// 
+        /// </summary>
+        TradeGroup002
     }
 }

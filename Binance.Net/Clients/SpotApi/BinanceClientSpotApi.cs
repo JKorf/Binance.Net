@@ -3,7 +3,6 @@ using Binance.Net.Enums;
 using Binance.Net.Objects;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.ExchangeInterfaces;
 using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -309,7 +308,7 @@ namespace Binance.Net.Clients.SpotApi
             => TimeSyncState.TimeOffset;
 
         /// <inheritdoc />
-        public ISpotClient AsISpotClient() => this;
+        public ISpotClient ComonSpotClient => this;
 
         /// <inheritdoc />
         public string GetSymbolName(string baseAsset, string quoteAsset) =>
@@ -328,7 +327,7 @@ namespace Binance.Net.Clients.SpotApi
         async Task<WebCallResult<OrderId>> ISpotClient.PlaceOrderAsync(string symbol, CryptoExchange.Net.ComonObjects.OrderSide side, CryptoExchange.Net.ComonObjects.OrderType type, decimal quantity, decimal? price, string? accountId)
         {
             if (string.IsNullOrWhiteSpace(symbol))
-                throw new ArgumentException("No symbol provided", nameof(symbol));
+                throw new ArgumentException(nameof(symbol) + " required for Binance " + nameof(ISpotClient.PlaceOrderAsync), nameof(symbol));
 
             var order = await Trading.PlaceOrderAsync(symbol, GetOrderSide(side), GetOrderType(type), quantity, price: price, timeInForce: type == CryptoExchange.Net.ComonObjects.OrderType.Limit ? TimeInForce.GoodTillCanceled : (TimeInForce?)null).ConfigureAwait(false);
             if(!order)
@@ -341,13 +340,13 @@ namespace Binance.Net.Clients.SpotApi
             });
         }
 
-        async Task<WebCallResult<Order>> ISpotClient.GetOrderAsync(string orderId, string? symbol)
+        async Task<WebCallResult<Order>> IBaseRestClient.GetOrderAsync(string orderId, string? symbol)
         {
             if (!long.TryParse(orderId, out var id))
                 throw new ArgumentException("Order id invalid", nameof(orderId));
 
             if (string.IsNullOrWhiteSpace(symbol))
-                throw new ArgumentException("No symbol provided", nameof(symbol));
+                throw new ArgumentException(nameof(symbol) + " required for Binance " + nameof(ISpotClient.GetOrderAsync), nameof(symbol));
 
             var order = await Trading.GetOrderAsync(symbol!, id).ConfigureAwait(false);
             if (!order)
@@ -363,17 +362,18 @@ namespace Binance.Net.Clients.SpotApi
                 QuantityFilled = order.Data.QuantityFilled,
                 Side = order.Data.Side == Enums.OrderSide.Buy ? CryptoExchange.Net.ComonObjects.OrderSide.Buy : CryptoExchange.Net.ComonObjects.OrderSide.Sell,
                 Type = GetOrderType(order.Data.Type),
-                Status = GetOrderStatus(order.Data.Status)
+                Status = GetOrderStatus(order.Data.Status),
+                Timestamp = order.Data.CreateTime
             });
         }
 
-        async Task<WebCallResult<IEnumerable<UserTrade>>> ISpotClient.GetOrderTradesAsync(string orderId, string? symbol)
+        async Task<WebCallResult<IEnumerable<UserTrade>>> IBaseRestClient.GetOrderTradesAsync(string orderId, string? symbol)
         {
             if (!long.TryParse(orderId, out var id))
                 throw new ArgumentException("Order id invalid", nameof(orderId));
 
             if (string.IsNullOrWhiteSpace(symbol))
-                throw new ArgumentException("No symbol provided", nameof(symbol));
+                throw new ArgumentException(nameof(symbol) + " required for Binance " + nameof(ISpotClient.GetOrderTradesAsync), nameof(symbol));
 
             var trades = await Trading.GetUserTradesAsync(symbol!, id).ConfigureAwait(false);
             if (!trades)
@@ -384,6 +384,7 @@ namespace Binance.Net.Clients.SpotApi
                 {
                     SourceObject = t,
                     Id = t.Id.ToString(CultureInfo.InvariantCulture),
+                    OrderId = t.OrderId.ToString(CultureInfo.InvariantCulture),
                     Symbol = t.Symbol,
                     Price = t.Price,
                     Quantity = t.Quantity,
@@ -393,7 +394,7 @@ namespace Binance.Net.Clients.SpotApi
                 }));
         }
 
-        async Task<WebCallResult<IEnumerable<Order>>> ISpotClient.GetOpenOrdersAsync(string? symbol)
+        async Task<WebCallResult<IEnumerable<Order>>> IBaseRestClient.GetOpenOrdersAsync(string? symbol)
         {
             var orderInfo = await Trading.GetOpenOrdersAsync(symbol).ConfigureAwait(false);
             if (!orderInfo)
@@ -410,14 +411,15 @@ namespace Binance.Net.Clients.SpotApi
                     Quantity = s.Quantity,
                     QuantityFilled = s.QuantityFilled,
                     Type = GetOrderType(s.Type),
-                    Status = GetOrderStatus(s.Status)
+                    Status = GetOrderStatus(s.Status),
+                    Timestamp = s.CreateTime
                 }));
         }
 
-        async Task<WebCallResult<IEnumerable<Order>>> ISpotClient.GetClosedOrdersAsync(string? symbol)
+        async Task<WebCallResult<IEnumerable<Order>>> IBaseRestClient.GetClosedOrdersAsync(string? symbol)
         {
             if (string.IsNullOrWhiteSpace(symbol))
-                throw new ArgumentException("No symbol provided", nameof(symbol));
+                throw new ArgumentException(nameof(symbol) + " required for Binance " + nameof(ISpotClient.GetClosedOrdersAsync), nameof(symbol));
 
             var orderInfo = await Trading.GetOrdersAsync(symbol!).ConfigureAwait(false);
             if (!orderInfo)
@@ -434,17 +436,18 @@ namespace Binance.Net.Clients.SpotApi
                     QuantityFilled = s.QuantityFilled,
                     Side = s.Side == Enums.OrderSide.Buy ? CryptoExchange.Net.ComonObjects.OrderSide.Buy: CryptoExchange.Net.ComonObjects.OrderSide.Sell,
                     Type = GetOrderType(s.Type),
-                    Status = GetOrderStatus(s.Status)
+                    Status = GetOrderStatus(s.Status),
+                    Timestamp = s.CreateTime
                 }));
         }
 
-        async Task<WebCallResult<OrderId>> ISpotClient.CancelOrderAsync(string orderId, string? symbol)
+        async Task<WebCallResult<OrderId>> IBaseRestClient.CancelOrderAsync(string orderId, string? symbol)
         {
             if (!long.TryParse(orderId, out var id))
                 throw new ArgumentException("Order id invalid", nameof(orderId));
 
             if (string.IsNullOrWhiteSpace(symbol))
-                throw new ArgumentException("No symbol provided", nameof(symbol));
+                throw new ArgumentException(nameof(symbol) + " required for Binance " + nameof(ISpotClient.CancelOrderAsync), nameof(symbol));
 
             var order = await Trading.CancelOrderAsync(symbol!, id).ConfigureAwait(false);
             if (!order)
@@ -476,6 +479,9 @@ namespace Binance.Net.Clients.SpotApi
 
         async Task<WebCallResult<Ticker>> IBaseRestClient.GetTickerAsync(string symbol)
         {
+            if (string.IsNullOrWhiteSpace(symbol))
+                throw new ArgumentException(nameof(symbol) + " required for Binance " + nameof(ISpotClient.GetTickerAsync), nameof(symbol));
+
             var ticker = await ExchangeData.GetTickerAsync(symbol).ConfigureAwait(false);
             if (!ticker)
                 return ticker.As<Ticker>(null);
@@ -512,6 +518,9 @@ namespace Binance.Net.Clients.SpotApi
 
         async Task<WebCallResult<IEnumerable<Kline>>> IBaseRestClient.GetKlinesAsync(string symbol, TimeSpan timespan, DateTime? startTime, DateTime? endTime, int? limit)
         {
+            if (string.IsNullOrWhiteSpace(symbol))
+                throw new ArgumentException(nameof(symbol) + " required for Binance " + nameof(ISpotClient.GetKlinesAsync), nameof(symbol));
+
             var klines = await ExchangeData.GetKlinesAsync(symbol, GetKlineIntervalFromTimespan(timespan), startTime, endTime, limit).ConfigureAwait(false);
             if (!klines)
                 return klines.As<IEnumerable<Kline>>(null);
@@ -530,6 +539,9 @@ namespace Binance.Net.Clients.SpotApi
 
         async Task<WebCallResult<OrderBook>> IBaseRestClient.GetOrderBookAsync(string symbol)
         {
+            if (string.IsNullOrWhiteSpace(symbol))
+                throw new ArgumentException(nameof(symbol) + " required for Binance " + nameof(ISpotClient.GetOrderBookAsync), nameof(symbol));
+
             var orderbook = await ExchangeData.GetOrderBookAsync(symbol).ConfigureAwait(false);
             if (!orderbook)
                 return orderbook.As<OrderBook>(null);
@@ -544,6 +556,9 @@ namespace Binance.Net.Clients.SpotApi
 
         async Task<WebCallResult<IEnumerable<Trade>>> IBaseRestClient.GetRecentTradesAsync(string symbol)
         {
+            if (string.IsNullOrWhiteSpace(symbol))
+                throw new ArgumentException(nameof(symbol) + " required for Binance " + nameof(ISpotClient.GetRecentTradesAsync), nameof(symbol));
+
             var trades = await ExchangeData.GetRecentTradesAsync(symbol).ConfigureAwait(false);
             if (!trades)
                 return trades.As<IEnumerable<Trade>>(null);
@@ -627,6 +642,5 @@ namespace Binance.Net.Clients.SpotApi
 
             throw new ArgumentException("Unsupported timespan for Binance Klines, check supported intervals using Binance.Net.Enums.KlineInterval");
         }
-#pragma warning restore 1066
     }
 }

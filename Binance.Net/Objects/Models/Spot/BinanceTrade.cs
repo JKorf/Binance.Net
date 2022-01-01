@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.ExchangeInterfaces;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Models.Spot
@@ -9,7 +8,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Information about a trade
     /// </summary>
-    public class BinanceTrade: ICommonTrade
+    public class BinanceTrade
     {
         /// <summary>
         /// The symbol the trade is for
@@ -74,12 +73,5 @@ namespace Binance.Net.Objects.Models.Spot
         /// If isolated margin (for margin account orders)
         /// </summary>
         public bool? IsIsolated { get; set; }
-
-        string ICommonTrade.CommonId => Id.ToString(CultureInfo.InvariantCulture);
-        decimal ICommonTrade.CommonPrice => Price;
-        decimal ICommonTrade.CommonQuantity => Quantity;
-        decimal ICommonTrade.CommonFee => Fee;
-        string ICommonTrade.CommonFeeAsset => FeeAsset;
-        DateTime ICommonTrade.CommonTradeTime => Timestamp;
     }
 }

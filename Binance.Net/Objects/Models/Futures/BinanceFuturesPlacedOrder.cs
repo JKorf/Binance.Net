@@ -2,7 +2,6 @@
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.ExchangeInterfaces;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Models.Futures
@@ -10,7 +9,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// The result of placing a new order
     /// </summary>
-    public class BinanceFuturesPlacedOrder: ICommonOrderId
+    public class BinanceFuturesPlacedOrder
     {
         /// <summary>
         /// The symbol the order is for
@@ -156,7 +155,5 @@ namespace Binance.Net.Objects.Models.Futures
         /// </summary>
         [JsonProperty("priceProtect")]
         public bool PriceProtect { get; set; }
-
-        string ICommonOrderId.CommonId => Id.ToString();
     }
 }

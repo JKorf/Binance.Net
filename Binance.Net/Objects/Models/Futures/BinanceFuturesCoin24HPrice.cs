@@ -1,12 +1,11 @@
-﻿using CryptoExchange.Net.ExchangeInterfaces;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// Price statistics of the last 24 hours
     /// </summary>
-    public class BinanceFuturesCoin24HPrice : Binance24HPriceBase, ICommonTicker
+    public class BinanceFuturesCoin24HPrice : Binance24HPriceBase
     {
         /// <summary>
         /// The pair the price is for
@@ -19,10 +18,5 @@ namespace Binance.Net.Objects.Models.Futures
         /// <inheritdoc />
         [JsonProperty("volume")]
         public override decimal QuoteVolume { get; set; }
-
-        string ICommonTicker.CommonSymbol => Symbol;
-        decimal ICommonTicker.CommonHighPrice => HighPrice;
-        decimal ICommonTicker.CommonLowPrice => LowPrice;
-        decimal ICommonTicker.CommonVolume => Volume;
     }
 }

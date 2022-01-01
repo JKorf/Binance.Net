@@ -1,5 +1,4 @@
 ﻿using Binance.Net.Interfaces;
-using CryptoExchange.Net.ExchangeInterfaces;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Models.Spot
@@ -7,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Price statistics of the last 24 hours
     /// </summary>
-    public class Binance24HPrice : Binance24HPriceBase, IBinanceTick, ICommonTicker
+    public class Binance24HPrice : Binance24HPriceBase, IBinanceTick
     {
         /// <summary>
         /// The close price 24 hours ago
@@ -40,10 +39,5 @@ namespace Binance.Net.Objects.Models.Spot
         /// <inheritdoc />
         [JsonProperty("quoteVolume")]
         public override decimal QuoteVolume { get; set; }
-
-        string ICommonTicker.CommonSymbol => Symbol;
-        decimal ICommonTicker.CommonHighPrice => HighPrice;
-        decimal ICommonTicker.CommonLowPrice => LowPrice;
-        decimal ICommonTicker.CommonVolume => Volume;
     }
 }

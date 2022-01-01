@@ -10,6 +10,7 @@ using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using Binance.Net.Objects.Models.Futures;
 using CryptoExchange.Net;
+using CryptoExchange.Net.ComonObjects;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
@@ -51,11 +52,11 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceFuturesPlacedOrder>> PlaceOrderAsync(
             string symbol,
-            OrderSide side,
-            OrderType type,
+            Enums.OrderSide side,
+            Enums.OrderType type,
             decimal? quantity,
             decimal? price = null,
-            PositionSide? positionSide = null,
+            Enums.PositionSide? positionSide = null,
             TimeInForce? timeInForce = null,
             bool? reduceOnly = null,
             string? newClientOrderId = null,
@@ -71,9 +72,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
         {
             if (closePosition == true && positionSide != null)
             {
-                if (positionSide == PositionSide.Short && side == OrderSide.Sell)
+                if (positionSide == Enums.PositionSide.Short && side == Enums.OrderSide.Sell)
                     throw new ArgumentException("Can't close short position with order side sell");
-                if (positionSide == PositionSide.Long && side == OrderSide.Buy)
+                if (positionSide == Enums.PositionSide.Long && side == Enums.OrderSide.Buy)
                     throw new ArgumentException("Can't close long position with order side buy");
             }
 
@@ -113,8 +114,12 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.AddOptionalParameter("priceProtect", priceProtect?.ToString().ToUpper());
 
             var result = await _baseClient.SendRequestInternal<BinanceFuturesPlacedOrder>(_baseClient.GetUrl(newOrderEndpoint, api, "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
-            //if (result)
-            //    _baseClient.InvokeOrderPlaced(result.Data);
+            if (result)
+                _baseClient.InvokeOrderPlaced(new OrderId
+                {
+                    SourceObject = result.Data,
+                    Id = result.Data.Id.ToString(CultureInfo.InvariantCulture)
+                });
             return result;
         }
 
@@ -236,9 +241,11 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestInternal<BinanceFuturesCancelOrder>(_baseClient.GetUrl(cancelOrderEndpoint, api, "1"), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
-
-            //if (result)
-            //    _baseClient.InvokeOrderCanceled(result.Data);
+            _baseClient.InvokeOrderCanceled(new OrderId
+            {
+                SourceObject = result.Data,
+                Id = result.Data.Id.ToString(CultureInfo.InvariantCulture)
+            });
             return result;
         }
 

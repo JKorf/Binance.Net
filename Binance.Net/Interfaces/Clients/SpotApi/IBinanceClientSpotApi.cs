@@ -1,5 +1,4 @@
-﻿using CryptoExchange.Net.ExchangeInterfaces;
-using CryptoExchange.Net.Interfaces;
+﻿using CryptoExchange.Net.Interfaces;
 using System;
 
 namespace Binance.Net.Interfaces.Clients.SpotApi
@@ -28,6 +27,6 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Get the ISpotClient for this client. This is a common interface which allows for some basic operations without knowing any details of the exchange.
         /// </summary>
         /// <returns></returns>
-        ISpotClient AsISpotClient();
+        public ISpotClient ComonSpotClient { get; }
     }
 }

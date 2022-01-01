@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.ExchangeInterfaces;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Models.Spot
@@ -69,7 +68,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Information about an asset balance
     /// </summary>
-    public class BinanceBalance: ICommonBalance
+    public class BinanceBalance
     {
         /// <summary>
         /// The asset this balance is for
@@ -88,9 +87,5 @@ namespace Binance.Net.Objects.Models.Spot
         /// The total balance of this asset (Free + Locked)
         /// </summary>
         public decimal Total => Available + Locked;
-
-        string ICommonBalance.CommonAsset => Asset;
-        decimal ICommonBalance.CommonAvailable => Available;
-        decimal ICommonBalance.CommonTotal => Total;
     }
 }
