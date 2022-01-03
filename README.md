@@ -167,6 +167,9 @@ Yes, as long as the API endpoints are the same. Switch by changing the BaseAddre
 See Timestamping.
 
 ## Release notes
+* Version 8.0.0-alpha5 - 03 Jan 2022
+    * Updated CryptoExchange.Net
+
 * Version 8.0.0-alpha4 - 01 Jan 2022
     * New comon implementation, added AddBinance extension method
 
