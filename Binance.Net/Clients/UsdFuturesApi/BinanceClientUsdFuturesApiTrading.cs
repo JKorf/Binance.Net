@@ -10,7 +10,7 @@ using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using Binance.Net.Objects.Models.Futures;
 using CryptoExchange.Net;
-using CryptoExchange.Net.ComonObjects;
+using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;

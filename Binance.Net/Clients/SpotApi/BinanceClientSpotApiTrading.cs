@@ -13,7 +13,7 @@ using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.BSwap;
 using Binance.Net.Objects.Models.Spot.Margin;
 using CryptoExchange.Net;
-using CryptoExchange.Net.ComonObjects;
+using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;

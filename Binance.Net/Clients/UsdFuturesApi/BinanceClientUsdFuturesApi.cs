@@ -18,7 +18,7 @@ using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Logging;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using CryptoExchange.Net.Interfaces;
-using CryptoExchange.Net.ComonObjects;
+using CryptoExchange.Net.CommonObjects;
 
 namespace Binance.Net.Clients.UsdFuturesApi
 {
@@ -71,7 +71,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             Trading = new BinanceClientUsdFuturesApiTrading(log, this);
         }
 
-        event Action<CryptoExchange.Net.ComonObjects.OrderId> IBaseRestClient.OnOrderPlaced
+        event Action<CryptoExchange.Net.CommonObjects.OrderId> IBaseRestClient.OnOrderPlaced
         {
             add
             {
@@ -84,7 +84,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             }
         }
 
-        event Action<CryptoExchange.Net.ComonObjects.OrderId> IBaseRestClient.OnOrderCanceled
+        event Action<CryptoExchange.Net.CommonObjects.OrderId> IBaseRestClient.OnOrderCanceled
         {
             add
             {
@@ -264,12 +264,12 @@ namespace Binance.Net.Clients.UsdFuturesApi
         public string GetSymbolName(string baseAsset, string quoteAsset) =>
             (baseAsset + quoteAsset).ToUpper(CultureInfo.InvariantCulture);
 
-        async Task<WebCallResult<OrderId>> IFuturesClient.PlaceOrderAsync(string symbol, CryptoExchange.Net.ComonObjects.OrderSide side, CryptoExchange.Net.ComonObjects.OrderType type, decimal quantity, decimal? price, int? leverage, string? accountId)
+        async Task<WebCallResult<OrderId>> IFuturesClient.PlaceOrderAsync(string symbol, CryptoExchange.Net.CommonObjects.OrderSide side, CryptoExchange.Net.CommonObjects.OrderType type, decimal quantity, decimal? price, int? leverage, string? accountId)
         {
             if (string.IsNullOrWhiteSpace(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for Binance " + nameof(IFuturesClient.PlaceOrderAsync), nameof(symbol));
 
-            var order = await Trading.PlaceOrderAsync(symbol, GetOrderSide(side), GetOrderType(type), quantity, price: price, timeInForce: type == CryptoExchange.Net.ComonObjects.OrderType.Limit ? TimeInForce.GoodTillCanceled : (TimeInForce?)null).ConfigureAwait(false);
+            var order = await Trading.PlaceOrderAsync(symbol, GetOrderSide(side), GetOrderType(type), quantity, price: price, timeInForce: type == CryptoExchange.Net.CommonObjects.OrderType.Limit ? TimeInForce.GoodTillCanceled : (TimeInForce?)null).ConfigureAwait(false);
             if (!order)
                 return order.As<OrderId>(null);
 
@@ -299,7 +299,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                     MarkPrice = p.MarkPrice,
                     Quantity = p.Quantity,
                     UnrealizedPnl = p.UnrealizedPnl,
-                    Side = p.PositionSide == Enums.PositionSide.Long ? CryptoExchange.Net.ComonObjects.PositionSide.Long : p.PositionSide == Enums.PositionSide.Short ? CryptoExchange.Net.ComonObjects.PositionSide.Short: CryptoExchange.Net.ComonObjects.PositionSide.Both                    
+                    Side = p.PositionSide == Enums.PositionSide.Long ? CryptoExchange.Net.CommonObjects.PositionSide.Long : p.PositionSide == Enums.PositionSide.Short ? CryptoExchange.Net.CommonObjects.PositionSide.Short: CryptoExchange.Net.CommonObjects.PositionSide.Both                    
                 }
             ));
         }
@@ -324,7 +324,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 Price = order.Data.Price,
                 Quantity = order.Data.Quantity,
                 QuantityFilled = order.Data.QuantityFilled,
-                Side = order.Data.Side == Enums.OrderSide.Buy ? CryptoExchange.Net.ComonObjects.OrderSide.Buy : CryptoExchange.Net.ComonObjects.OrderSide.Sell,
+                Side = order.Data.Side == Enums.OrderSide.Buy ? CryptoExchange.Net.CommonObjects.OrderSide.Buy : CryptoExchange.Net.CommonObjects.OrderSide.Sell,
                 Type = GetOrderType(order.Data.Type),
                 Status = GetOrderStatus(order.Data.Status),
                 Timestamp = order.Data.CreateTime
@@ -370,7 +370,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                     SourceObject = s,
                     Id = s.Id.ToString(CultureInfo.InvariantCulture),
                     Symbol = s.Symbol,
-                    Side = s.Side == Enums.OrderSide.Buy ? CryptoExchange.Net.ComonObjects.OrderSide.Buy : CryptoExchange.Net.ComonObjects.OrderSide.Sell,
+                    Side = s.Side == Enums.OrderSide.Buy ? CryptoExchange.Net.CommonObjects.OrderSide.Buy : CryptoExchange.Net.CommonObjects.OrderSide.Sell,
                     Price = s.Price,
                     Quantity = s.Quantity,
                     QuantityFilled = s.QuantityFilled,
@@ -398,7 +398,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                     Price = s.Price,
                     Quantity = s.Quantity,
                     QuantityFilled = s.QuantityFilled,
-                    Side = s.Side == Enums.OrderSide.Buy ? CryptoExchange.Net.ComonObjects.OrderSide.Buy : CryptoExchange.Net.ComonObjects.OrderSide.Sell,
+                    Side = s.Side == Enums.OrderSide.Buy ? CryptoExchange.Net.CommonObjects.OrderSide.Buy : CryptoExchange.Net.CommonObjects.OrderSide.Sell,
                     Type = GetOrderType(s.Type),
                     Status = GetOrderStatus(s.Status),
                     Timestamp = s.CreateTime
@@ -552,36 +552,36 @@ namespace Binance.Net.Clients.UsdFuturesApi
             }));
         }
 
-        private static CryptoExchange.Net.ComonObjects.OrderType GetOrderType(Enums.OrderType orderType)
+        private static CryptoExchange.Net.CommonObjects.OrderType GetOrderType(Enums.OrderType orderType)
         {
             if (orderType == Enums.OrderType.Limit)
-                return CryptoExchange.Net.ComonObjects.OrderType.Limit;
+                return CryptoExchange.Net.CommonObjects.OrderType.Limit;
             if (orderType == Enums.OrderType.Market)
-                return CryptoExchange.Net.ComonObjects.OrderType.Market;
-            return CryptoExchange.Net.ComonObjects.OrderType.Other;
+                return CryptoExchange.Net.CommonObjects.OrderType.Market;
+            return CryptoExchange.Net.CommonObjects.OrderType.Other;
         }
 
-        private static CryptoExchange.Net.ComonObjects.OrderStatus GetOrderStatus(Enums.OrderStatus orderStatus)
+        private static CryptoExchange.Net.CommonObjects.OrderStatus GetOrderStatus(Enums.OrderStatus orderStatus)
         {
             if (orderStatus == Enums.OrderStatus.New || orderStatus == Enums.OrderStatus.PartiallyFilled)
-                return CryptoExchange.Net.ComonObjects.OrderStatus.Active;
+                return CryptoExchange.Net.CommonObjects.OrderStatus.Active;
             if (orderStatus == Enums.OrderStatus.Filled)
-                return CryptoExchange.Net.ComonObjects.OrderStatus.Filled;
-            return CryptoExchange.Net.ComonObjects.OrderStatus.Canceled;
+                return CryptoExchange.Net.CommonObjects.OrderStatus.Filled;
+            return CryptoExchange.Net.CommonObjects.OrderStatus.Canceled;
         }
 
-        private static Enums.OrderSide GetOrderSide(CryptoExchange.Net.ComonObjects.OrderSide side)
+        private static Enums.OrderSide GetOrderSide(CryptoExchange.Net.CommonObjects.OrderSide side)
         {
-            if (side == CryptoExchange.Net.ComonObjects.OrderSide.Sell) return Enums.OrderSide.Sell;
-            if (side == CryptoExchange.Net.ComonObjects.OrderSide.Buy) return Enums.OrderSide.Buy;
+            if (side == CryptoExchange.Net.CommonObjects.OrderSide.Sell) return Enums.OrderSide.Sell;
+            if (side == CryptoExchange.Net.CommonObjects.OrderSide.Buy) return Enums.OrderSide.Buy;
 
             throw new ArgumentException("Unsupported order side for Binance order: " + side);
         }
 
-        private static Enums.OrderType GetOrderType(CryptoExchange.Net.ComonObjects.OrderType type)
+        private static Enums.OrderType GetOrderType(CryptoExchange.Net.CommonObjects.OrderType type)
         {
-            if (type == CryptoExchange.Net.ComonObjects.OrderType.Limit) return Enums.OrderType.Limit;
-            if (type == CryptoExchange.Net.ComonObjects.OrderType.Market) return Enums.OrderType.Market;
+            if (type == CryptoExchange.Net.CommonObjects.OrderType.Limit) return Enums.OrderType.Limit;
+            if (type == CryptoExchange.Net.CommonObjects.OrderType.Market) return Enums.OrderType.Market;
 
             throw new ArgumentException("Unsupported order type for Binance order: " + type);
         }
