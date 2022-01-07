@@ -155,8 +155,7 @@ namespace Binance.Net.Objects
         /// <inheritdoc />
         public new void Copy<T>(T input, T def) where T : BinanceSocketClientOptions
         {
-            if (Default == null)
-                return;
+            base.Copy(input, def);
 
             input.SpotStreamsOptions = new ApiClientOptions(def.SpotStreamsOptions);
             input.UsdFuturesStreamsOptions = new ApiClientOptions(def.UsdFuturesStreamsOptions);
