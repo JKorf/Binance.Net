@@ -107,8 +107,12 @@ namespace Binance.Net
         /// </summary>
         /// <param name="services">The service collection</param>
         /// <param name="defaultOptionsCallback">Set default options for the client</param>
+        /// <param name="socketClientLifeTime">The lifetime of the IBinanceSocketClient for the service collection. Defaults to Scoped.</param>
         /// <returns></returns>
-        public static IServiceCollection AddBinance(this IServiceCollection services, Action<BinanceClientOptions, BinanceSocketClientOptions>? defaultOptionsCallback = null)
+        public static IServiceCollection AddBinance(
+            this IServiceCollection services, 
+            Action<BinanceClientOptions, BinanceSocketClientOptions>? defaultOptionsCallback = null,
+            ServiceLifetime? socketClientLifeTime = null)
         {
             if (defaultOptionsCallback != null)
             {
@@ -120,8 +124,12 @@ namespace Binance.Net
                 BinanceSocketClient.SetDefaultOptions(socketOptions);
             }
 
-            return services.AddTransient<IBinanceClient, BinanceClient>()
-                           .AddScoped<IBinanceSocketClient, BinanceSocketClient>();
+            services.AddTransient<IBinanceClient, BinanceClient>();
+            if (socketClientLifeTime == null)
+                services.AddScoped<IBinanceSocketClient, BinanceSocketClient>();
+            else
+                services.Add(new ServiceDescriptor(typeof(IBinanceSocketClient), typeof(BinanceSocketClient), socketClientLifeTime.Value));
+            return services;
         }
 
         /// <summary>
