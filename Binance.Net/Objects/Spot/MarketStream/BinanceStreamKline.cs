@@ -37,7 +37,7 @@ namespace Binance.Net.Objects.Spot.MarketStream
         /// The open time of this candlestick
         /// </summary>
         [JsonProperty("t"), JsonConverter(typeof(TimestampConverter))]
-        public new DateTime OpenTime { get; set; }
+        public override DateTime OpenTime { get; set; }
 
         /// <inheritdoc />
         [JsonProperty("v")]
@@ -47,7 +47,7 @@ namespace Binance.Net.Objects.Spot.MarketStream
         /// The close time of this candlestick
         /// </summary>
         [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
-        public new DateTime CloseTime { get; set; }
+        public override DateTime CloseTime { get; set; }
 
         /// <inheritdoc />
         [JsonProperty("q")]
@@ -77,27 +77,27 @@ namespace Binance.Net.Objects.Spot.MarketStream
         /// The open price of this candlestick
         /// </summary>
         [JsonProperty("o")]
-        public new decimal Open { get; set; }
+        public override decimal Open { get; set; }
         /// <summary>
         /// The close price of this candlestick
         /// </summary>
         [JsonProperty("c")]
-        public new decimal Close { get; set; }
+        public override decimal Close { get; set; }
         /// <summary>
         /// The highest price of this candlestick
         /// </summary>
         [JsonProperty("h")]
-        public new decimal High { get; set; }
+        public override decimal High { get; set; }
         /// <summary>
         /// The lowest price of this candlestick
         /// </summary>
         [JsonProperty("l")]
-        public new decimal Low { get; set; }
+        public override decimal Low { get; set; }
         /// <summary>
         /// The amount of trades in this candlestick
         /// </summary>
         [JsonProperty("n")]
-        public new int TradeCount { get; set; }
+        public override int TradeCount { get; set; }
 
         /// <inheritdoc />
         [JsonProperty("V")]
