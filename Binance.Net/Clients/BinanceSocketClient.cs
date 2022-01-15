@@ -113,18 +113,18 @@ namespace Binance.Net.Clients
             if (result != null && result.Type == JTokenType.Null)
             {
                 log.Write(LogLevel.Trace, $"Socket {s.Socket.Id} Subscription completed");
-                callResult = new CallResult<object>(null, null);
+                callResult = new CallResult<object>(new object());
                 return true;
             }
 
             var error = message["error"];
             if (error == null)
             {
-                callResult = new CallResult<object>(null, new ServerError("Unknown error: " + message));
+                callResult = new CallResult<object>(new ServerError("Unknown error: " + message));
                 return true;
             }
 
-            callResult = new CallResult<object>(null, new ServerError(error["code"]!.Value<int>(), error["msg"]!.ToString()));
+            callResult = new CallResult<object>(new ServerError(error["code"]!.Value<int>(), error["msg"]!.ToString()));
             return true;
         }
 

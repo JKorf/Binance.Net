@@ -76,10 +76,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("isFreeze", isFreeze);
 
             var result = await _baseClient.SendRequestInternal<BinanceSubAccountWrapper>(_baseClient.GetUrl(subAccountListEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
-            if (!result)
-                return new WebCallResult<IEnumerable<BinanceSubAccount>>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
-
-            return new WebCallResult<IEnumerable<BinanceSubAccount>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.SubAccounts, null);
+            return result ? result.As<IEnumerable<BinanceSubAccount>>(result.Data.SubAccounts) : result.As<IEnumerable<BinanceSubAccount>>(default);
         }
 
         #endregion
@@ -145,13 +142,11 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestInternal<BinanceSubAccountAsset>(_baseClient.GetUrl(subAccountAssetsEndpoint, "sapi", "3"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
-            if (!result)
-                return WebCallResult<IEnumerable<BinanceBalance>>.CreateErrorResult(result.ResponseStatusCode,
-                    result.ResponseHeaders, result.Error!);
+            if (!result.Success)
+                return result.As<IEnumerable<BinanceBalance>>(default);
 
             if (!result.Data.Success)
-                return WebCallResult<IEnumerable<BinanceBalance>>.CreateErrorResult(result.ResponseStatusCode,
-                    result.ResponseHeaders, new ServerError(result.Data.Message));
+                return result.AsError<IEnumerable<BinanceBalance>>(new ServerError(result.Data!.Message));
 
             return result.As(result.Data.Balances);
         }
@@ -502,10 +497,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestInternal<BinanceSubAccountUniversalTransfersList>(_baseClient.GetUrl(queryUniversalTransferHistoryEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
-            if (!result)
-                return new WebCallResult<IEnumerable<BinanceSubAccountUniversalTransferTransaction>>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
-
-            return new WebCallResult<IEnumerable<BinanceSubAccountUniversalTransferTransaction>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Transactions, null);
+            return result ? result.As<IEnumerable<BinanceSubAccountUniversalTransferTransaction>>(result.Data.Transactions) : result.As<IEnumerable<BinanceSubAccountUniversalTransferTransaction>>(default);
         }
 
         #endregion

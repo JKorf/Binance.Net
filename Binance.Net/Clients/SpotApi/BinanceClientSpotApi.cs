@@ -108,7 +108,7 @@ namespace Binance.Net.Clients.SpotApi
             if (!rulesCheck.Passed)
             {
                 _log.Write(LogLevel.Warning, rulesCheck.ErrorMessage!);
-                return new WebCallResult<BinancePlacedOrder>(null, null, null, new ArgumentError(rulesCheck.ErrorMessage!));
+                return new WebCallResult<BinancePlacedOrder>(new ArgumentError(rulesCheck.ErrorMessage!));
             }
 
             quantity = rulesCheck.Quantity;

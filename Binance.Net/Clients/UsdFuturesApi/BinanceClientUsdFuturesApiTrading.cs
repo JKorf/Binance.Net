@@ -85,7 +85,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (!rulesCheck.Passed)
             {
                 _log.Write(LogLevel.Warning, rulesCheck.ErrorMessage!);
-                return new WebCallResult<BinanceFuturesPlacedOrder>(null, null, null, new ArgumentError(rulesCheck.ErrorMessage!));
+                return new WebCallResult<BinanceFuturesPlacedOrder>(new ArgumentError(rulesCheck.ErrorMessage!));
             }
 
             quantity = rulesCheck.Quantity;
@@ -145,8 +145,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                     if (!rulesCheck.Passed)
                     {
                         _log.Write(LogLevel.Warning, rulesCheck.ErrorMessage!);
-                        return new WebCallResult<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>(null, null, null,
-                            new ArgumentError(rulesCheck.ErrorMessage!));
+                        return new WebCallResult<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>(new ArgumentError(rulesCheck.ErrorMessage!));
                     }
 
                     order.Quantity = rulesCheck.Quantity;
@@ -188,14 +187,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             var response = await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesMultipleOrderPlaceResult>>(_baseClient.GetUrl(multipleNewOrdersEndpoint, api, "1"), HttpMethod.Post, ct, parameters, true, weight: 5).ConfigureAwait(false);
             if (!response.Success)
-                return WebCallResult<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>.CreateErrorResult(response.ResponseStatusCode, response.ResponseHeaders, response.Error!);
+                return response.As<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>(default);
 
             var result = new List<CallResult<BinanceFuturesPlacedOrder>>();
             foreach (var item in response.Data)
             {
                 result.Add(item.Code != 0
-                    ? new CallResult<BinanceFuturesPlacedOrder>(null, new ServerError(item.Code, item.Message))
-                    : new CallResult<BinanceFuturesPlacedOrder>(item, null));
+                    ? new CallResult<BinanceFuturesPlacedOrder>(new ServerError(item.Code, item.Message))
+                    : new CallResult<BinanceFuturesPlacedOrder>(item));
             }
 
             return response.As<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>(result);
@@ -314,14 +313,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var response = await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesMultipleOrderCancelResult>>(_baseClient.GetUrl(cancelMultipleOrdersEndpoint, api, "1"), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
 
             if (!response.Success)
-                return WebCallResult<IEnumerable<CallResult<BinanceFuturesCancelOrder>>>.CreateErrorResult(response.ResponseStatusCode, response.ResponseHeaders, response.Error!);
+                return response.As<IEnumerable<CallResult<BinanceFuturesCancelOrder>>>(default);
 
             var result = new List<CallResult<BinanceFuturesCancelOrder>>();
             foreach (var item in response.Data)
             {
                 result.Add(item.Code != 0
-                    ? new CallResult<BinanceFuturesCancelOrder>(null, new ServerError(item.Code, item.Message))
-                    : new CallResult<BinanceFuturesCancelOrder>(item, null));
+                    ? new CallResult<BinanceFuturesCancelOrder>(new ServerError(item.Code, item.Message))
+                    : new CallResult<BinanceFuturesCancelOrder>(item));
             }
 
             return response.As<IEnumerable<CallResult<BinanceFuturesCancelOrder>>>(result);

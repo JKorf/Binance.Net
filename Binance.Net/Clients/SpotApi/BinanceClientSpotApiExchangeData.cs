@@ -93,7 +93,7 @@ namespace Binance.Net.Clients.SpotApi
             var sw = Stopwatch.StartNew();
             var result = await _baseClient.SendRequestInternal<object>(_baseClient.GetUrl(pingEndpoint, api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
             sw.Stop();
-            return new WebCallResult<long>(result.ResponseStatusCode, result.ResponseHeaders, result.Error == null ? sw.ElapsedMilliseconds : 0, result.Error);
+            return result ? result.As(sw.ElapsedMilliseconds) : result.As<long>(default!);
         }
 
         #endregion
@@ -171,7 +171,7 @@ namespace Binance.Net.Clients.SpotApi
                 return data.As<IEnumerable<BinanceProduct>>(null);
 
             if (!data.Data.Success)
-                return WebCallResult<IEnumerable<BinanceProduct>>.CreateErrorResult(new ServerError(data.Data.Code, data.Data.Message + " - " + data.Data.MessageDetail));
+                return data.AsError<IEnumerable<BinanceProduct>>(new ServerError(data.Data.Code, data.Data.Message + " - " + data.Data.MessageDetail));
 
             return data.As(data.Data.Data);
         }

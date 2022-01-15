@@ -47,10 +47,10 @@ namespace Binance.Net.Clients.GeneralApi
             var parameters = new Dictionary<string, object>();
             var result = await _baseClient.SendRequestInternal<BinanceResult<IEnumerable<BinanceMiningCoin>>>(_baseClient.GetUrl(coinListEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result.Success)
-                return WebCallResult<IEnumerable<BinanceMiningCoin>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
+                return result.As<IEnumerable<BinanceMiningCoin>>(default);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<IEnumerable<BinanceMiningCoin>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<IEnumerable<BinanceMiningCoin>>(new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }
@@ -64,10 +64,10 @@ namespace Binance.Net.Clients.GeneralApi
             var parameters = new Dictionary<string, object>();
             var result = await _baseClient.SendRequestInternal<BinanceResult<IEnumerable<BinanceMiningAlgorithm>>>(_baseClient.GetUrl(algorithmEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result.Success)
-                return WebCallResult<IEnumerable<BinanceMiningAlgorithm>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
+                return result.As<IEnumerable<BinanceMiningAlgorithm>>(default);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<IEnumerable<BinanceMiningAlgorithm>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<IEnumerable<BinanceMiningAlgorithm>>(new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }
@@ -92,10 +92,10 @@ namespace Binance.Net.Clients.GeneralApi
 
             var result = await _baseClient.SendRequestInternal<BinanceResult<IEnumerable<BinanceMinerDetails>>>(_baseClient.GetUrl(minerDetailsEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
             if (!result.Success)
-                return WebCallResult<IEnumerable<BinanceMinerDetails>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
+                return result.As<IEnumerable<BinanceMinerDetails>>(default);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<IEnumerable<BinanceMinerDetails>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<IEnumerable<BinanceMinerDetails>>(new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }
@@ -122,10 +122,10 @@ namespace Binance.Net.Clients.GeneralApi
 
             var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceMinerList>>(_baseClient.GetUrl(minerListEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
             if (!result.Success)
-                return WebCallResult<BinanceMinerList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
+                return result.As<BinanceMinerList>(default);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<BinanceMinerList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<BinanceMinerList>(new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }
@@ -153,10 +153,10 @@ namespace Binance.Net.Clients.GeneralApi
 
             var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceRevenueList>>(_baseClient.GetUrl(miningRevenueEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
             if (!result.Success)
-                return WebCallResult<BinanceRevenueList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
+                return result.As<BinanceRevenueList>(default);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<BinanceRevenueList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<BinanceRevenueList>(new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }
@@ -184,10 +184,10 @@ namespace Binance.Net.Clients.GeneralApi
 
             var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceOtherRevenueList>>(_baseClient.GetUrl(miningOtherRevenueEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
             if (!result.Success)
-                return WebCallResult<BinanceOtherRevenueList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
+                return result.As<BinanceOtherRevenueList>(default);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<BinanceOtherRevenueList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<BinanceOtherRevenueList>(new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }
@@ -208,10 +208,10 @@ namespace Binance.Net.Clients.GeneralApi
 
             var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceMiningStatistic>>(_baseClient.GetUrl(miningStatisticsEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
             if (!result.Success)
-                return WebCallResult<BinanceMiningStatistic>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
+                return result.As<BinanceMiningStatistic>(default);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<BinanceMiningStatistic>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<BinanceMiningStatistic>(new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }
@@ -232,10 +232,10 @@ namespace Binance.Net.Clients.GeneralApi
 
             var result = await _baseClient.SendRequestInternal<BinanceResult<IEnumerable<BinanceMiningAccount>>>(_baseClient.GetUrl(miningAccountListEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
             if (!result.Success)
-                return WebCallResult<IEnumerable<BinanceMiningAccount>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
+                return result.As<IEnumerable<BinanceMiningAccount>>(default);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<IEnumerable<BinanceMiningAccount>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<IEnumerable<BinanceMiningAccount>>(new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }
@@ -251,10 +251,10 @@ namespace Binance.Net.Clients.GeneralApi
 
             var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceHashrateResaleList>>(_baseClient.GetUrl(miningHashrateResaleListEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
             if (!result.Success)
-                return WebCallResult<BinanceHashrateResaleList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
+                return result.As<BinanceHashrateResaleList>(default);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<BinanceHashrateResaleList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<BinanceHashrateResaleList>(new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }
@@ -278,10 +278,10 @@ namespace Binance.Net.Clients.GeneralApi
 
             var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceHashrateResaleDetails>>(_baseClient.GetUrl(miningHashrateResaleDetailsEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
             if (!result.Success)
-                return WebCallResult<BinanceHashrateResaleDetails>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
+                return result.As<BinanceHashrateResaleDetails>(default);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<BinanceHashrateResaleDetails>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data!.Message));
+                result.AsError<BinanceHashrateResaleDetails>(new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }
@@ -309,10 +309,10 @@ namespace Binance.Net.Clients.GeneralApi
 
             var result = await _baseClient.SendRequestInternal<BinanceResult<int>>(_baseClient.GetUrl(miningHashrateResaleRequest, "sapi", "1"), HttpMethod.Post, ct, parameters, true, weight: 5).ConfigureAwait(false);
             if (!result.Success)
-                return WebCallResult<int>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
+                return result.As<int>(default);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<int>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<int>(new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }
@@ -334,10 +334,10 @@ namespace Binance.Net.Clients.GeneralApi
 
             var result = await _baseClient.SendRequestInternal<BinanceResult<bool>>(_baseClient.GetUrl(miningHashrateResaleCancel, "sapi", "1"), HttpMethod.Post, ct, parameters, true, weight: 5).ConfigureAwait(false);
             if (!result.Success)
-                return WebCallResult<bool>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
+                return result.As<bool>(default);
 
             if (result.Data?.Code != 0)
-                return WebCallResult<bool>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<bool>(new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }

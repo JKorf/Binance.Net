@@ -50,7 +50,7 @@ namespace Binance.Net.SymbolOrderBooks
                 subResult = await _socketClient.SpotStreams.SubscribeToPartialOrderBookUpdatesAsync(Symbol, Levels.Value, _updateInterval, HandleUpdate).ConfigureAwait(false);
 
             if (!subResult)
-                return new CallResult<UpdateSubscription>(null, subResult.Error);
+                return new CallResult<UpdateSubscription>(subResult.Error!);
 
             Status = OrderBookStatus.Syncing;
             if (Levels == null)
@@ -62,7 +62,7 @@ namespace Binance.Net.SymbolOrderBooks
                 {
                     log.Write(Microsoft.Extensions.Logging.LogLevel.Debug, $"{Id} order book {Symbol} failed to retrieve initial order book");
                     await _socketClient.UnsubscribeAsync(subResult.Data).ConfigureAwait(false);
-                    return new CallResult<UpdateSubscription>(null, bookResult.Error);
+                    return new CallResult<UpdateSubscription>(bookResult.Error!);
                 }
 
                 SetInitialOrderBook(bookResult.Data.LastUpdateId, bookResult.Data.Bids, bookResult.Data.Asks);
@@ -70,10 +70,10 @@ namespace Binance.Net.SymbolOrderBooks
             else
             {
                 var setResult = await WaitForSetOrderBookAsync(10000).ConfigureAwait(false);
-                return setResult ? subResult : new CallResult<UpdateSubscription>(null, setResult.Error);
+                return setResult ? subResult : new CallResult<UpdateSubscription>(setResult.Error!);
             }
 
-            return new CallResult<UpdateSubscription>(subResult.Data, null);
+            return new CallResult<UpdateSubscription>(subResult.Data);
         }
 
         private void HandleUpdate(DataEvent<IBinanceEventOrderBook> data)
@@ -106,10 +106,10 @@ namespace Binance.Net.SymbolOrderBooks
 
             var bookResult = await _restClient.SpotApi.ExchangeData.GetOrderBookAsync(Symbol, Levels ?? 5000).ConfigureAwait(false);
             if (!bookResult)
-                return new CallResult<bool>(false, bookResult.Error);
+                return new CallResult<bool>(bookResult.Error!);
 
             SetInitialOrderBook(bookResult.Data.LastUpdateId, bookResult.Data.Bids, bookResult.Data.Asks);
-            return new CallResult<bool>(true, null);
+            return new CallResult<bool>(true);
         }
 
         /// <inheritdoc />

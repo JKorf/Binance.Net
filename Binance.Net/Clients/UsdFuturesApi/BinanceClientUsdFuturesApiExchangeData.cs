@@ -74,7 +74,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var sw = Stopwatch.StartNew();
             var result = await _baseClient.SendRequestInternal<object>(_baseClient.GetUrl(pingEndpoint, api, "1"), HttpMethod.Get, ct).ConfigureAwait(false);
             sw.Stop();
-            return new WebCallResult<long>(result.ResponseStatusCode, result.ResponseHeaders, result.Error == null ? sw.ElapsedMilliseconds : 0, result.Error);
+            return result ? result.As(sw.ElapsedMilliseconds) : result.As<long>(default!);
         }
 
         #endregion

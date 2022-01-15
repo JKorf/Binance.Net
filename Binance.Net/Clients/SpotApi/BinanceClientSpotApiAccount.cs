@@ -258,10 +258,10 @@ namespace Binance.Net.Clients.SpotApi
 
             var result = await _baseClient.SendRequestInternal<BinanceSnapshotWrapper<T>>(_baseClient.GetUrl(accountSnapshotEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 2400).ConfigureAwait(false);
             if (!result.Success)
-                return WebCallResult<T>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
+                return result.As<T>(default);
 
             if (result.Data.Code != 200)
-                return WebCallResult<T>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data.Code, result.Data.Message));
+                return result.AsError<T>(new ServerError(result.Data.Code, result.Data.Message));
 
             return result.As(result.Data.SnapshotData);
         }
@@ -760,7 +760,7 @@ namespace Binance.Net.Clients.SpotApi
             var result = await _baseClient.SendRequestInternal<BinanceMarginAmount>(_baseClient.GetUrl(maxTransferableEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 50).ConfigureAwait(false);
 
             if (!result)
-                return new WebCallResult<decimal>(result.ResponseStatusCode, result.ResponseHeaders, 0, result.Error);
+                return result.As<decimal>(default);
 
             return result.As(result.Data.Quantity);
         }
@@ -1004,9 +1004,9 @@ namespace Binance.Net.Clients.SpotApi
 
             var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceTradingStatus>>(_baseClient.GetUrl(tradingStatusEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result)
-                return new WebCallResult<BinanceTradingStatus>(result.ResponseStatusCode, result.ResponseHeaders, null, result.Error);
+                return result.As<BinanceTradingStatus>(default);
 
-            return !string.IsNullOrEmpty(result.Data.Message) ? new WebCallResult<BinanceTradingStatus>(result.ResponseStatusCode, result.ResponseHeaders, null, new ServerError(result.Data.Message!)) : result.As(result.Data.Data);
+            return !string.IsNullOrEmpty(result.Data.Message) ? result.AsError<BinanceTradingStatus>(new ServerError(result.Data.Message!)) : result.As(result.Data.Data);
         }
         #endregion
 
