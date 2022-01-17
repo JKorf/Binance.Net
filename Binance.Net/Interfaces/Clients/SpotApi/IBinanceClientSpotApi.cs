@@ -27,6 +27,6 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Get the ISpotClient for this client. This is a common interface which allows for some basic operations without knowing any details of the exchange.
         /// </summary>
         /// <returns></returns>
-        public ISpotClient ComonSpotClient { get; }
+        public ISpotClient CommonSpotClient { get; }
     }
 }

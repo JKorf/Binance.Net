@@ -308,7 +308,7 @@ namespace Binance.Net.Clients.SpotApi
             => TimeSyncState.TimeOffset;
 
         /// <inheritdoc />
-        public ISpotClient ComonSpotClient => this;
+        public ISpotClient CommonSpotClient => this;
 
         /// <inheritdoc />
         public string GetSymbolName(string baseAsset, string quoteAsset) =>

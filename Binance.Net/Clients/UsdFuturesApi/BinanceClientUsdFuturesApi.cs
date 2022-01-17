@@ -248,7 +248,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             => TimeSyncState.TimeOffset;
 
         /// <inheritdoc />
-        public IFuturesClient ComonFuturesClient => this;
+        public IFuturesClient CommonFuturesClient => this;
 
         internal void InvokeOrderPlaced(OrderId id)
         {

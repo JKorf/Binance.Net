@@ -221,7 +221,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             => TimeSyncState.TimeOffset;
 
         /// <inheritdoc />
-        public IFuturesClient ComonFuturesClient => this;
+        public IFuturesClient CommonFuturesClient => this;
 
         /// <inheritdoc />
         public string GetSymbolName(string baseAsset, string quoteAsset) =>
