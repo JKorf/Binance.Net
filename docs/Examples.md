@@ -73,7 +73,7 @@ Account info includes a list of balances
 ```csharp
 var spotAccountInfo = await binanceClient.SpotApi.Account.GetAccountInfoAsync();
 ```
-#### Placing order
+### Placing order
 ```csharp
 // Placing a buy limit order for 0.001 BTC at a price of 50000USDT each
 var orderData = await binanceClient.SpotApi.Trading.PlaceOrderAsync(
@@ -209,6 +209,11 @@ var orderData =  await binanceClient.UsdFuturesApi.Trading.PlaceOrderAsync(
                 39000,
                 timeInForce: Binance.Net.Enums.TimeInForce.GoodTillCanceled,
                 stopPrice: 40000);
+				
+// Place a buy market order and set TakeProfit/StopLoss for the position ( result checking omitted )
+var openPositionResult = await binanceClient.UsdFuturesApi.Trading.PlaceOrderAsync("BTCUSDT", OrderSide.Buy, OrderType.Market, 0.001m);
+var stopLossResult = await binanceClient.UsdFuturesApi.Trading.PlaceOrderAsync("BTCUSDT", OrderSide.Sell, OrderType.StopMarket, quantity: null, closePosition: true, stopPrice: 40000);
+var takeProfitResult = await binanceClient.UsdFuturesApi.Trading.PlaceOrderAsync("BTCUSDT", OrderSide.Sell, OrderType.TakeProfitMarket, quantity: null, closePosition: true, stopPrice: 43000);
 ```
 
 ### Requesting a specific order
