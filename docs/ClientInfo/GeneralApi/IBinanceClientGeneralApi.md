@@ -1,7 +1,7 @@
 ---
 title: IBinanceClientGeneralApi
 has_children: true
-parent: IBinanceClient
+parent: Rest API documentation
 ---
 *[generated documentation]*  
 `BinanceClient > GeneralApi`  

@@ -2,7 +2,7 @@
 title: IBinanceClientUsdFuturesApiExchangeData
 has_children: false
 parent: IBinanceClientUsdFuturesApi
-grand_parent: IBinanceClient
+grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
 `BinanceClient > UsdFuturesApi > ExchangeData`  

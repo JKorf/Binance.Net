@@ -1,8 +1,9 @@
 ---
-title: IBinanceClient
+title: Rest API documentation
 has_children: true
 ---
 *[generated documentation]*  
+### BinanceClient  
 *Client for accessing the Binance Rest API.*
   
 ***

@@ -2,7 +2,7 @@
 title: IBinanceClientCoinFuturesApiTrading
 has_children: false
 parent: IBinanceClientCoinFuturesApi
-grand_parent: IBinanceClient
+grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
 `BinanceClient > CoinFuturesApi > Trading`  

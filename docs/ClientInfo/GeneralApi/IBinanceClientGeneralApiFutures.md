@@ -2,7 +2,7 @@
 title: IBinanceClientGeneralApiFutures
 has_children: false
 parent: IBinanceClientGeneralApi
-grand_parent: IBinanceClient
+grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
 `BinanceClient > GeneralApi > Futures`  

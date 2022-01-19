@@ -1,3 +1,7 @@
+---
+title: FAQ
+nav_order: 5
+---
 
 <Details>
 <Summary>
@@ -30,7 +34,7 @@ Yes, as long as the API endpoints are the same. Switch by changing the BaseAddre
 </Summary>
 <BlockQuote>
 
-See [Timestamping](https://github.com/JKorf/Binance.Net/wiki/Timestamping).
+See [Timestamping](Timestamping.html).
 
 </BlockQuote>
 </Details>

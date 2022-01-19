@@ -1,11 +1,19 @@
+---
+title: Migrate V7 to V8
+nav_order: 6
+---
+
+## Migrate from version V7.x.x to V8.x.x
+
 There are a decent amount of breaking changes when moving from version 7.x.x to version 8.x.x. Although the interface has changed, the available endpoints/information have not, so there should be no need to completely rewrite your program.
 Most endpoints are now available under a slightly different name or path, and most data models have remained the same, barring a few renames.
 In this document most changes will be described. If you have any other questions or issues when updating, feel free to open an issue.
 
-Changes related to `IExchangeClient`, options and client structure are also (partially) covered in the [CryptoExchange.Net Migration Guide](https://github.com/JKorf/CryptoExchange.Net/wiki/Migration-Guide)
+Changes related to `IExchangeClient`, options and client structure are also (partially) covered in the [CryptoExchange.Net Migration Guide](https://jkorf.github.io/CryptoExchange.Net/Migration%20Guide.html)
 
 ### Namespaces
 There are a few namespace changes:  
+
 |Type|Old|New|
 |----|---|---|
 |Enums|`Binance.Net.Objects`|`Binance.Net.Enums`  |
@@ -17,7 +25,7 @@ There are a few namespace changes:
 ### Client options
 The `BaseAddress`, rate limiting, trade rules and timestamping options are now under the specific Api client options.  
 *V7*
-````C#
+```csharp
 var binanceClient = new BinanceClient(new BinanceClientOptions
 {
 	LogLevel = LogLevel.Debug,
@@ -27,10 +35,10 @@ var binanceClient = new BinanceClient(new BinanceClientOptions
 	AutoTimestamp = true,
 	TradeRulesBehaviour = TradeRulesBehaviour.ThrowError
 });
-````
+```
 
 *V8*
-````C#
+```csharp
 var binanceClient = new BinanceClient(new BinanceClientOptions
 {
 	ApiCredentials = new ApiCredentials("API-KEY", "API-SECRET"),
@@ -46,14 +54,14 @@ var binanceClient = new BinanceClient(new BinanceClientOptions
 		AutoTimestamp = true
 	}
 });
-````
+```
 
 ### Client structure
 Version 8 restructured the rest clients into 4 parts: `GeneralApi`, `SpotApi`, `UsdFuturesApi` and `CoinFuturesApi`. This structure is chosen to make it more clear where what part of the API is found. This new structure is in line with the client structures of other `CryptoExchange.Net` implemenetations. More info on this [here](https://github.com/Jkorf/CryptoExchange.Net/wiki/Clients).
 The socket client is also split into `SpotStreams`, `UsdFuturesStreams` and `CoinFuturesStreams`. This restructuring means all library calls will have changed, though most will only need to change the path:
 
 *V7*
-````C#
+```csharp
 var balances = await binanceClient.General.GetAccountInfoAsync();
 var withdrawals = await binanceClient.WithdrawDeposit.GetWithdrawalHistoryAsync();
 
@@ -79,10 +87,10 @@ var tradesCoin = await binanceClient.FuturesCoin.Order.GetUserTradesAsync();
 var subSpot = binanceSocketClient.Spot.SubscribeToSymbolTickerUpdatesAsync("BTCUSDT", DataHandler);
 var subUsd = binanceSocketClient.FuturesUsdt.SubscribeToSymbolTickerUpdatesAsync("BTCUSDT", DataHandler);
 var subCoin = binanceSocketClient.FuturesCoin.SubscribeToSymbolTickerUpdatesAsync("BTCUSD_PERP", DataHandler);
-````
+```
 
 *V8*  
-````C#
+```csharp
 var balances = await binanceClient.SpotApi.Account.GetAccountInfoAsync();
 var withdrawals = await binanceClient.SpotApi.Account.GetWithdrawalHistoryAsync();
 
@@ -108,10 +116,11 @@ var tradesCoin = await binanceClient.CoinFuturesApi.Trading.GetUserTradesAsync()
 var subSpot = binanceSocketClient.SpotStreams.SubscribeToTickerUpdatesAsync("BTCUSDT", DataHandler);
 var subUsd = binanceSocketClient.UsdFuturesStreams.SubscribeToTickerUpdatesAsync("BTCUSDT", DataHandler);
 var subCoin = binanceSocketClient.CoinFuturesStreams.SubscribeToTickerUpdatesAsync("BTCUSD_PERP", DataHandler);
-````
+```
 
 ### Definitions
 Some names have been changed to a common definition. This includes where the name is part of a bigger name  
+
 |Old|New||
 |----|---|---|
 |`Coin`|`Asset`|`GetUserCoinsAsync()` -> `GetUserAssetsAsync()`|

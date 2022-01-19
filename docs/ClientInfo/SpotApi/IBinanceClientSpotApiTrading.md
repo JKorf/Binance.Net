@@ -2,7 +2,7 @@
 title: IBinanceClientSpotApiTrading
 has_children: false
 parent: IBinanceClientSpotApi
-grand_parent: IBinanceClient
+grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
 `BinanceClient > SpotApi > Trading`  

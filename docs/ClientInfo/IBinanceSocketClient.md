@@ -1,8 +1,9 @@
 ---
-title: IBinanceSocketClient
+title: Socket API documentation
 has_children: true
 ---
 *[generated documentation]*  
+### BinanceSocketClient  
 *Client for accessing the Binance websocket API*
   
 ***

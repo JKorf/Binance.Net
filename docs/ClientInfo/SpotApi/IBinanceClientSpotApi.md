@@ -1,7 +1,7 @@
 ---
 title: IBinanceClientSpotApi
 has_children: true
-parent: IBinanceClient
+parent: Rest API documentation
 ---
 *[generated documentation]*  
 `BinanceClient > SpotApi`  
