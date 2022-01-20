@@ -42,16 +42,7 @@ namespace Binance.Net.SubClients
             _baseClient = baseClient;
         }
 
-        #region Mining endpoints
         #region Acquiring CoinName
-        /// <summary>
-        /// Gets mining coins info
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Coins info</returns>
-        public WebCallResult<IEnumerable<BinanceMiningCoin>> GetMiningCoinList(CancellationToken ct = default)
-            => GetMiningCoinListAsync(ct).Result;
-
         /// <summary>
         /// Gets mining coins info
         /// </summary>
@@ -71,20 +62,12 @@ namespace Binance.Net.SubClients
             if (result.Data?.Code != 0)
                 return WebCallResult<IEnumerable<BinanceMiningCoin>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
 
-            return new WebCallResult<IEnumerable<BinanceMiningCoin>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
+            return result.As(result.Data.Data);
         }
 
         #endregion Acquiring CoinName
 
         #region Acquiring Algorithm 
-        /// <summary>
-        /// Gets mining algorithms info
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Algorithms info</returns>
-        public WebCallResult<IEnumerable<BinanceMiningAlgorithm>> GetMiningAlgorithmList(CancellationToken ct = default)
-            => GetMiningAlgorithmListAsync(ct).Result;
-
         /// <summary>
         /// Gets mining algorithms info
         /// </summary>
@@ -104,24 +87,12 @@ namespace Binance.Net.SubClients
             if (result.Data?.Code != 0)
                 return WebCallResult<IEnumerable<BinanceMiningAlgorithm>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
 
-            return new WebCallResult<IEnumerable<BinanceMiningAlgorithm>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
+            return result.As(result.Data.Data);
         }
 
         #endregion
 
         #region Request Detail Miner List
-
-        /// <summary>
-        /// Gets miner details
-        /// </summary>
-        /// <param name="algorithm">Algorithm</param>
-        /// <param name="userName">Mining account</param>
-        /// <param name="workerName">Miners name</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Miner details</returns>
-        public WebCallResult<IEnumerable<BinanceMinerDetails>> GetMinerDetails(string algorithm, string userName,
-            string workerName, CancellationToken ct = default)
-            => GetMinerDetailsAsync(algorithm, userName, workerName, ct).Result;
 
         /// <summary>
         /// Gets miner details
@@ -152,28 +123,12 @@ namespace Binance.Net.SubClients
             if (result.Data?.Code != 0)
                 return WebCallResult<IEnumerable<BinanceMinerDetails>>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
 
-            return new WebCallResult<IEnumerable<BinanceMinerDetails>>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
+            return result.As(result.Data.Data);
         }
 
         #endregion
 
         #region Request Miner List
-        /// <summary>
-        /// Gets miner list
-        /// </summary>
-        /// <param name="algorithm">Algorithm</param>
-        /// <param name="userName">Mining account</param>
-        /// <param name="page">Result page</param>
-        /// <param name="sortAscending">Sort in ascending order</param>
-        /// <param name="sortColumn">Column to sort by</param>
-        /// <param name="workerStatus">Filter by status</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Miner list</returns>
-        public WebCallResult<BinanceMinerList> GetMinerList(string algorithm, string userName, int? page = null,
-            bool? sortAscending = null, string? sortColumn = null, MinerStatus? workerStatus = null,
-            CancellationToken ct = default)
-            => GetMinerListAsync(algorithm, userName, page, sortAscending, sortColumn, workerStatus, ct).Result;
-
         /// <summary>
         /// Gets miner list
         /// </summary>
@@ -209,29 +164,12 @@ namespace Binance.Net.SubClients
             if (result.Data?.Code != 0)
                 return WebCallResult<BinanceMinerList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
 
-            return new WebCallResult<BinanceMinerList>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
+            return result.As(result.Data.Data);
         }
 
         #endregion
 
         #region Revenue List
-        /// <summary>
-        /// Gets revenue list
-        /// </summary>
-        /// <param name="algorithm">Algorithm</param>
-        /// <param name="userName">Mining account</param>
-        /// <param name="page">Result page</param>
-        /// <param name="pageSize">Results per page</param>
-        /// <param name="coin">Coin</param>
-        /// <param name="startDate">Start date</param>
-        /// <param name="endDate">End date</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Revenue list</returns>
-        public WebCallResult<BinanceRevenueList> GetMiningRevenueList(string algorithm, string userName,
-            string? coin = null, DateTime? startDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null,
-            CancellationToken ct = default)
-            => GetMiningRevenueListAsync(algorithm, userName, coin, startDate, endDate, page, pageSize, ct).Result;
-
         /// <summary>
         /// Gets revenue list
         /// </summary>
@@ -269,7 +207,7 @@ namespace Binance.Net.SubClients
             if (result.Data?.Code != 0)
                 return WebCallResult<BinanceRevenueList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
 
-            return new WebCallResult<BinanceRevenueList>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
+            return result.As(result.Data.Data);
         }
 
         #endregion
@@ -312,22 +250,11 @@ namespace Binance.Net.SubClients
             if (result.Data?.Code != 0)
                 return WebCallResult<BinanceOtherRevenueList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
 
-            return new WebCallResult<BinanceOtherRevenueList>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
+            return result.As(result.Data.Data);
         }
         #endregion
 
         #region Statistics list
-        /// <summary>
-        /// Get mining statistics
-        /// </summary>
-        /// <param name="algorithm">Algorithm</param>
-        /// <param name="userName">User name</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Mining statistics</returns>
-        public WebCallResult<BinanceMiningStatistic> GetMiningStatistics(string algorithm, string userName,
-            CancellationToken ct = default)
-            => GetMiningStatisticsAsync(algorithm, userName, ct).Result;
-
         /// <summary>
         /// Get mining statistics
         /// </summary>
@@ -354,7 +281,7 @@ namespace Binance.Net.SubClients
             if (result.Data?.Code != 0)
                 return WebCallResult<BinanceMiningStatistic>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
 
-            return new WebCallResult<BinanceMiningStatistic>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
+            return result.As(result.Data.Data);
         }
         #endregion
 
@@ -385,7 +312,7 @@ namespace Binance.Net.SubClients
             if (result.Data?.Code != 0)
                 return WebCallResult<BinanceMiningAccount>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
 
-            return new WebCallResult<BinanceMiningAccount>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
+            return result.As(result.Data.Data);
         }
         #endregion
 
@@ -414,7 +341,7 @@ namespace Binance.Net.SubClients
             if (result.Data?.Code != 0)
                 return WebCallResult<BinanceHashrateResaleList>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
 
-            return new WebCallResult<BinanceHashrateResaleList>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
+            return result.As(result.Data.Data);
         }
 
         #endregion
@@ -451,7 +378,7 @@ namespace Binance.Net.SubClients
             if (result.Data?.Code != 0)
                 return WebCallResult<BinanceHashrateResaleDetails>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
 
-            return new WebCallResult<BinanceHashrateResaleDetails>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
+            return result.As(result.Data.Data);
         }
 
         #endregion
@@ -469,7 +396,7 @@ namespace Binance.Net.SubClients
         /// <param name="hashRate">Results per page</param>
         /// <param name="ct">Resale hashrate h/s must be transferred (BTC is greater than 500000000000 ETH is greater than 500000)</param>
         /// <returns>Mining account</returns>
-        public async Task<WebCallResult<int>> PlaceHashrateResaleRequest(string userName, string algorithm, DateTime startDate, DateTime endDate, string toUser, decimal hashRate, CancellationToken ct = default)
+        public async Task<WebCallResult<int>> PlaceHashrateResaleRequestAsync(string userName, string algorithm, DateTime startDate, DateTime endDate, string toUser, decimal hashRate, CancellationToken ct = default)
         {
             userName.ValidateNotNull(nameof(userName));
             algorithm.ValidateNotNull(nameof(algorithm));
@@ -493,7 +420,7 @@ namespace Binance.Net.SubClients
             if (result.Data?.Code != 0)
                 return WebCallResult<int>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
 
-            return new WebCallResult<int>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
+            return result.As(result.Data.Data);
         }
 
         #endregion
@@ -507,7 +434,7 @@ namespace Binance.Net.SubClients
         /// <param name="userName">Mining account</param>
         /// <param name="ct">Resale hashrate h/s must be transferred (BTC is greater than 500000000000 ETH is greater than 500000)</param>
         /// <returns>Success</returns>
-        public async Task<WebCallResult<bool>> PlaceHashrateResaleRequest(int configId, string userName, CancellationToken ct = default)
+        public async Task<WebCallResult<bool>> PlaceHashrateResaleRequestAsync(int configId, string userName, CancellationToken ct = default)
         {
             userName.ValidateNotNull(nameof(userName));
 
@@ -525,10 +452,8 @@ namespace Binance.Net.SubClients
             if (result.Data?.Code != 0)
                 return WebCallResult<bool>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, new ServerError(result.Data!.Code, result.Data.Message));
 
-            return new WebCallResult<bool>(result.ResponseStatusCode, result.ResponseHeaders, result.Data.Data, null);
+            return result.As(result.Data.Data);
         }
-
-        #endregion
 
         #endregion
     }

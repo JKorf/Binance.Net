@@ -23,24 +23,24 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// <summary>
         /// The coin deposited
         /// </summary>
-        public string Coin { get; set; } = "";
+        public string Coin { get; set; } = string.Empty;
         /// <summary>
         /// The address of the deposit
         /// </summary>
-        public string Address { get; set; } = "";
+        public string Address { get; set; } = string.Empty;
         /// <summary>
         /// The tag of the address of the deposit
         /// </summary>
-        public string Tag { get; set; } = "";
+        public string Tag { get; set; } = string.Empty;
         /// <summary>
         /// The network
         /// </summary>
-        public string Network { get; set; } = "";
+        public string Network { get; set; } = string.Empty;
         /// <summary>
         /// The transaction id
         /// </summary>
         [JsonProperty("txId")]
-        public string TransactionId { get; set; } = "";
+        public string TransactionId { get; set; } = string.Empty;
         /// <summary>
         /// The status of the deposit
         /// </summary>
@@ -57,6 +57,11 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// Confirmations
         /// </summary>
         [JsonProperty("confirmTimes")]
-        public string Confirmations { get; set; } = "";
+        public string Confirmations { get; set; } = string.Empty;
+        /// <summary>
+        /// Network confirmations for unlocking
+        /// </summary>
+        [JsonProperty("unlockConfirm")]
+        public string ConfirmationsForUnlock { get; set; } = string.Empty;
     }
 }

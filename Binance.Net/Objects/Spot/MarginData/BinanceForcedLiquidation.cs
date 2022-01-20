@@ -42,7 +42,7 @@ namespace Binance.Net.Objects.Spot.MarginData
         /// <summary>
         /// Symbol
         /// </summary>
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Time in force
         /// </summary>

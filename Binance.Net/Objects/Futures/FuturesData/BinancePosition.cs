@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Binance.Net.Converters;
+﻿using Binance.Net.Converters;
 using Binance.Net.Enums;
+using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
+using System;
 
 namespace Binance.Net.Objects.Futures.FuturesData
 {
@@ -15,7 +14,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// Symbol
         /// </summary>
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Entry price
         /// </summary>
@@ -28,7 +27,8 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// Unrealized profit
         /// </summary>
-        public decimal UnrealizedProfit { get; set; }
+        [JsonProperty("unrealizedProfit")]
+        public decimal UnrealizedPnl { get; set; }
 
         /// <summary>
         /// Position side
@@ -66,6 +66,18 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Isolated
         /// </summary>
         public bool Isolated { get; set; }
+
+        /// <summary>
+        /// Position amount
+        /// </summary>
+        [JsonProperty("positionAmt")]
+        public decimal Quantity { get; set; }
+
+        /// <summary>
+        /// Last update time
+        /// </summary>
+        [JsonConverter(typeof(TimestampConverter))]
+        public DateTime UpdateTime { get; set; }
     }
 
     /// <summary>
@@ -77,12 +89,6 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Max notional
         /// </summary>
         public decimal MaxNotional { get; set; }
-
-        /// <summary>
-        /// Position amount
-        /// </summary>
-        [JsonProperty("positionAmt")]
-        public decimal PositionAmount { get; set; }
     }
 
     /// <summary>
@@ -132,7 +138,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Position amount
         /// </summary>
         [JsonProperty("positionAmt")]
-        public decimal PositionAmount { get; set; }
+        public decimal Quantity { get; set; }
     }
 
     /// <summary>
@@ -143,7 +149,13 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// Max notional
         /// </summary>
-        public decimal MaxNotionalValue { get; set; }
+        [JsonProperty("maxNotionalValue")]
+        public decimal MaxNotional { get; set; }
+        /// <summary>
+        /// Last update time
+        /// </summary>
+        [JsonConverter(typeof(TimestampConverter))]
+        public DateTime UpdateTime { get; set; }
     }
 
     /// <summary>

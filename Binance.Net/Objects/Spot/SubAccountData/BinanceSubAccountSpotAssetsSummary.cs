@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Spot.SubAccountData
@@ -22,7 +21,7 @@ namespace Binance.Net.Objects.Spot.SubAccountData
         /// Sub account values
         /// </summary>
         [JsonProperty("spotSubUserAssetBtcVoList")]
-        public IEnumerable<BinanceSubAccountBtcValue> SubAccountsBtcValues { get; set; } = new List<BinanceSubAccountBtcValue>();
+        public IEnumerable<BinanceSubAccountBtcValue> SubAccountsBtcValues { get; set; } = Array.Empty<BinanceSubAccountBtcValue>();
     }
 
     /// <summary>
@@ -33,7 +32,7 @@ namespace Binance.Net.Objects.Spot.SubAccountData
         /// <summary>
         /// Sub account email
         /// </summary>
-        public string Email { get; set; } = "";
+        public string Email { get; set; } = string.Empty;
         /// <summary>
         /// Sub account total asset 
         /// </summary>

@@ -13,7 +13,7 @@ namespace Binance.Net.Objects.Spot.MarketData
         /// <summary>
         /// The symbol the information is about
         /// </summary>
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The highest bid price for the symbol
         /// </summary>

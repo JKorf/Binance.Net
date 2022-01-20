@@ -49,11 +49,11 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Transaction id if relevant
         /// </summary>
         [JsonProperty("tranId")]
-        public string TransactionId { get; set; } = "";
+        public string TransactionId { get; set; } = string.Empty;
         /// <summary>
         /// Trade id if existing
         /// </summary>
-        public string TradeId { get; set; } = "";
+        public string TradeId { get; set; } = string.Empty;
     }
 
 }

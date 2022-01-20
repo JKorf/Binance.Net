@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
@@ -20,6 +19,6 @@ namespace Binance.Net.Objects.Spot.UserStream
         /// Balances
         /// </summary>
         [JsonProperty("B")]
-        public IEnumerable<BinanceStreamBalance> Balances { get; set; } = new List<BinanceStreamBalance>();
+        public IEnumerable<BinanceStreamBalance> Balances { get; set; } = Array.Empty<BinanceStreamBalance>();
     }
 }

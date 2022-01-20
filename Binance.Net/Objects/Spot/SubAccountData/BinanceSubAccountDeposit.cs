@@ -23,16 +23,16 @@ namespace Binance.Net.Objects.Spot.SubAccountData
         /// <summary>
         /// The coin deposited
         /// </summary>
-        public string Coin { get; set; } = "";
+        public string Coin { get; set; } = string.Empty;
         /// <summary>
         /// The address of the deposit
         /// </summary>
-        public string Address { get; set; } = "";
+        public string Address { get; set; } = string.Empty;
         /// <summary>
         /// The transaction id
         /// </summary>
         [JsonProperty("txId")]
-        public string TransactionId { get; set; } = "";
+        public string TransactionId { get; set; } = string.Empty;
         /// <summary>
         /// The status of the deposit
         /// </summary>

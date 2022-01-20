@@ -13,7 +13,7 @@ namespace Binance.Net.Converters
         {
             new KeyValuePair<RateLimitType, string>(RateLimitType.Orders, "ORDERS"),
             new KeyValuePair<RateLimitType, string>(RateLimitType.RequestWeight, "REQUEST_WEIGHT"),
-            new KeyValuePair<RateLimitType, string>(RateLimitType.RawRequests, "RAW_REQUEST")
+            new KeyValuePair<RateLimitType, string>(RateLimitType.RawRequests, "RAW_REQUESTS")
         };
     }
 }

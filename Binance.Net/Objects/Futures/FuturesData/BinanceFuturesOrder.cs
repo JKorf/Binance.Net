@@ -16,7 +16,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// The symbol the order is for
         /// </summary>
         [JsonProperty("symbol")]
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The order id as assigned by Binance
         /// </summary>
@@ -26,7 +26,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// The order id as assigned by the client
         /// </summary>
         [JsonProperty("clientOrderId")]
-        public string ClientOrderId { get; set; } = "";
+        public string ClientOrderId { get; set; } = string.Empty;
         /// <summary>
         /// The price of the order
         /// </summary>
@@ -41,22 +41,22 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Cumulative amount
         /// </summary>
         [JsonProperty("cumQty")]
-        public decimal CumulativeQuantity { get; set; }
+        public decimal QuantityFilled { get; set; }
         /// <summary>
         /// Cumulative amount
         /// </summary>
         [JsonProperty("cumQuote")]
-        public decimal CumulativeQuoteQuantity { get; set; }
+        public decimal QuoteQuantityFilled { get; set; }
         /// <summary>
         /// The quantity of the order that is executed
         /// </summary>
         [JsonProperty("executedQty")]
-        public decimal ExecutedQuantity { get; set; }
+        public decimal LastFilledQuantity { get; set; }
         /// <summary>
         /// The original quantity of the order
         /// </summary>
         [JsonProperty("origQty")]
-        public decimal OriginalQuantity { get; set; }
+        public decimal Quantity { get; set; }
         /// <summary>
         /// Reduce Only
         /// </summary>
@@ -114,7 +114,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Callback rate, only return with TRAILING_STOP_MARKET order
         /// </summary>
         [JsonProperty("priceRate")]
-        public decimal? PriceRate { get; set; }
+        public decimal? CallbackRate { get; set; }
 
         /// <summary>
         /// The time the order was updated
@@ -139,5 +139,11 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// </summary>
         [JsonProperty("positionSide"), JsonConverter(typeof(PositionSideConverter))]
         public PositionSide PositionSide { get; set; }
+        
+        /// <summary>
+        /// Price protect
+        /// </summary>
+        [JsonProperty("priceProtect")]
+        public bool PriceProtect { get; set; }
     }
 }

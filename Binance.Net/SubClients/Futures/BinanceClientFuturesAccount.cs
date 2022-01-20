@@ -1,14 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using Binance.Net.Interfaces.SubClients.Futures;
-using Binance.Net.Objects.Futures.FuturesData;
-using CryptoExchange.Net;
-using CryptoExchange.Net.Objects;
-
-namespace Binance.Net.SubClients.Futures
+﻿namespace Binance.Net.SubClients.Futures
 {
     /// <summary>
     /// Futures account endpoints

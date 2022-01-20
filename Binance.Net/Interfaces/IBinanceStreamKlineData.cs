@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Binance.Net.Enums;
-using Binance.Net.Objects.Shared;
+﻿using Binance.Net.Enums;
 
 namespace Binance.Net.Interfaces
 {

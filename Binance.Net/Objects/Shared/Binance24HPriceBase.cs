@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Binance.Net.Interfaces;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
@@ -15,7 +13,7 @@ namespace Binance.Net.Objects.Shared
         /// <summary>
         /// The symbol the price is for
         /// </summary>
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The actual price change in the last 24 hours
         /// </summary>

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using CryptoExchange.Net.Converters;
@@ -16,11 +14,11 @@ namespace Binance.Net.Objects.Spot.Futures
         /// <summary>
         /// Collateral coin
         /// </summary>
-        public string CollateralCoin { get; set; } = "";
+        public string CollateralCoin { get; set; } = string.Empty;
         /// <summary>
         /// Loan coin
         /// </summary>
-        public string LoanCoin { get; set; } = "";
+        public string LoanCoin { get; set; } = string.Empty;
         /// <summary>
         /// The direction
         /// </summary>

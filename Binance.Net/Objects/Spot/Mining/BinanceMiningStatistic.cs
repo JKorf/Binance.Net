@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Binance.Net.Objects.Spot.Mining
 {
@@ -29,11 +30,11 @@ namespace Binance.Net.Objects.Spot.Mining
         /// <summary>
         /// Todays profit
         /// </summary>
-        public decimal ProfitToday { get; set; }
+        public Dictionary<string, decimal> ProfitToday { get; set; } = new Dictionary<string, decimal>();
         /// <summary>
         /// Yesterdays profit
         /// </summary>
-        public decimal ProfitYesterday { get; set; }
+        public Dictionary<string, decimal> ProfitYesterday { get; set; } = new Dictionary<string, decimal>();
         /// <summary>
         /// User name
         /// </summary>

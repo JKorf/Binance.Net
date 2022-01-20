@@ -13,7 +13,7 @@ namespace Binance.Net.Objects.Spot.UserStream
         /// The asset which changed
         /// </summary>
         [JsonProperty("a")]
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// The balance delta
         /// </summary>

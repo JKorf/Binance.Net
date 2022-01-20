@@ -13,17 +13,17 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         /// <summary>
         /// Sub Account Id
         /// </summary>
-        public string SubAccountId { get; set; } = "";
+        public string SubAccountId { get; set; } = string.Empty;
 
         /// <summary>
         /// Api key
         /// </summary>
-        public string ApiKey { get; set; } = "";
+        public string ApiKey { get; set; } = string.Empty;
 
         /// <summary>
         /// IP list
         /// </summary>
-        public IEnumerable<string> IpList { get; set; } = new List<string>();
+        public IEnumerable<string> IpList { get; set; } = Array.Empty<string>();
 
         /// <summary>
         /// Timestamp

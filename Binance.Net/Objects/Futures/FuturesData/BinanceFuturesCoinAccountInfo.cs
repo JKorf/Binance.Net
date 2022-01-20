@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Binance.Net.Objects.Futures.FuturesData
 {
@@ -33,10 +32,10 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// Account assets
         /// </summary>
-        public IEnumerable<BinanceFuturesAccountAsset> Assets { get; set; } = new List<BinanceFuturesAccountAsset>();
+        public IEnumerable<BinanceFuturesAccountAsset> Assets { get; set; } = Array.Empty<BinanceFuturesAccountAsset>();
         /// <summary>
         /// Account positions
         /// </summary>
-        public IEnumerable<BinancePositionInfoCoin> Positions { get; set; } = new List<BinancePositionInfoCoin>();
+        public IEnumerable<BinancePositionInfoCoin> Positions { get; set; } = Array.Empty<BinancePositionInfoCoin>();
     }
 }

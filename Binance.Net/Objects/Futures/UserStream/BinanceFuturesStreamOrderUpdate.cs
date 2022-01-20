@@ -33,12 +33,12 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// The symbol the order is for
         /// </summary>
         [JsonProperty("s")]
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The new client order id
         /// </summary>
         [JsonProperty("c")]
-        public string ClientOrderId { get; set; } = "";
+        public string ClientOrderId { get; set; } = string.Empty;
         /// <summary>
         /// The side of the order
         /// </summary>
@@ -113,12 +113,12 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// The asset the commission was taken from
         /// </summary>
         [JsonProperty("N")]
-        public string CommissionAsset { get; set; } = "";
+        public string CommissionAsset { get; set; } = string.Empty;
         /// <summary>
         /// The time of the update
         /// </summary>
         [JsonProperty("T"), JsonConverter(typeof(TimestampConverter))]
-        public DateTime CreateTime { get; set; }
+        public DateTime UpdateTime { get; set; }
         /// <summary>
         /// The trade id
         /// </summary>

@@ -21,7 +21,7 @@ namespace Binance.Net.Objects.Spot.UserStream
         /// The contingency type
         /// </summary>
         [JsonProperty("c")]
-        public string ContingencyType { get; set; } = "";
+        public string ContingencyType { get; set; } = string.Empty;
         /// <summary>
         /// The order list status
         /// </summary>
@@ -38,7 +38,7 @@ namespace Binance.Net.Objects.Spot.UserStream
         /// The client id of the order list
         /// </summary>
         [JsonProperty("C")]
-        public string ListClientOrderId { get; set; } = "";
+        public string ListClientOrderId { get; set; } = string.Empty;
         /// <summary>
         /// The transaction time
         /// </summary>
@@ -49,12 +49,12 @@ namespace Binance.Net.Objects.Spot.UserStream
         /// The symbol of the order list
         /// </summary>
         [JsonProperty("s")]
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The order in this list
         /// </summary>
         [JsonProperty("O")]
-        public IEnumerable<BinanceStreamOrderId> Orders { get; set; } = new List<BinanceStreamOrderId>();
+        public IEnumerable<BinanceStreamOrderId> Orders { get; set; } = Array.Empty<BinanceStreamOrderId>();
     }
 
     /// <summary>
@@ -66,7 +66,7 @@ namespace Binance.Net.Objects.Spot.UserStream
         /// The symbol of the order
         /// </summary>
         [JsonProperty("s")]
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The id of the order
         /// </summary>
@@ -76,6 +76,6 @@ namespace Binance.Net.Objects.Spot.UserStream
         /// The client order id
         /// </summary>
         [JsonProperty("c")]
-        public string ClientOrderId { get; set; } = "";
+        public string ClientOrderId { get; set; } = string.Empty;
     }
 }

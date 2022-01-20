@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.BSwap
 {
@@ -13,11 +10,11 @@ namespace Binance.Net.Objects.BSwap
         /// <summary>
         /// Quote asset
         /// </summary>
-        public string QuoteAsset { get; set; } = "";
+        public string QuoteAsset { get; set; } = string.Empty;
         /// <summary>
         /// Base asset
         /// </summary>
-        public string BaseAsset { get; set; } = "";
+        public string BaseAsset { get; set; } = string.Empty;
         /// <summary>
         /// Quote quantity
         /// </summary>

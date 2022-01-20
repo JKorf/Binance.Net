@@ -35,11 +35,12 @@ namespace Binance.Net.Interfaces.SubClients
         /// </summary>
         /// <param name="poolId">The pool</param>
         /// <param name="asset">The asset</param>
+        /// <param name="type">Add type</param>
         /// <param name="quantity">Quantity to add</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BinanceBSwapOperationResult>> AddLiquidityAsync(string poolId, string asset, decimal quantity, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceBSwapOperationResult>> AddLiquidityAsync(int poolId, string asset, decimal quantity, LiquidityType? type = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Remove liquidity from a pool
@@ -51,7 +52,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BinanceBSwapOperationResult>> RemoveLiquidityAsync(string poolId, string asset, RemoveLiquidityType type, decimal shareAmount, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceBSwapOperationResult>> RemoveLiquidityAsync(int poolId, string asset, LiquidityType type, decimal shareAmount, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get liquidity operation records
@@ -65,7 +66,7 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BinanceBSwapOperation>>> GetLiquidityOperationRecordsAsync(long? operationId = null, string? poolId = null, BSwapOperation? operation = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceBSwapOperation>>> GetLiquidityOperationRecordsAsync(long? operationId = null, int? poolId = null, BSwapOperation? operation = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Request a quote for swap quote asset (selling asset) for base asset (buying asset), essentially price/exchange rates. quoteQty is quantity of quote asset(to sell).
@@ -104,5 +105,38 @@ namespace Binance.Net.Interfaces.SubClients
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<BinanceBSwapRecord>>> GetSwapHistoryAsync(long? swapId = null, BSwapStatus? status = null, string? quoteAsset = null, string? baseAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get pool config
+        /// </summary>
+        /// <param name="poolId">Id of the pool</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BinanceBSwapPoolConfig>>> GetBSwapPoolConfigureAsync(int poolId, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Calculate expected share amount for adding liquidity in single or dual token.
+        /// </summary>
+        /// <param name="poolId">The pool</param>
+        /// <param name="asset">The asset</param>
+        /// <param name="quantity">Quantity to add</param>
+        /// <param name="type">Add type</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceBSwapPreviewResult>> AddLiquidityPreviewAsync(int poolId, string asset, decimal quantity, LiquidityType type, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Calculate expected share amount for removing liquidity in single or dual token.
+        /// </summary>
+        /// <param name="poolId">The pool</param>
+        /// <param name="asset">The asset</param>
+        /// <param name="quantity">Quantity to add</param>
+        /// <param name="type">Add type</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceBSwapPreviewResult>> RemoveLiquidityPreviewAsync(int poolId, string asset, decimal quantity, LiquidityType type, int? receiveWindow = null, CancellationToken ct = default);
     }
 }

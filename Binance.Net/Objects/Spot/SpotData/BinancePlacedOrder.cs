@@ -1,11 +1,8 @@
-﻿using Binance.Net.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using CryptoExchange.Net.Attributes;
 using CryptoExchange.Net.Converters;
-using Binance.Net.Enums;
 using Binance.Net.Objects.Shared;
 using CryptoExchange.Net.ExchangeInterfaces;
 

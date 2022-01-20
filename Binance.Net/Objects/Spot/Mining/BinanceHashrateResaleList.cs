@@ -4,7 +4,6 @@ using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Binance.Net.Objects.Spot.Mining
 {
@@ -24,7 +23,7 @@ namespace Binance.Net.Objects.Spot.Mining
         /// <summary>
         /// Revenue items
         /// </summary>
-        public IEnumerable<BinanceOtherRevenueItem> AccountProfits { get; set; } = new List<BinanceOtherRevenueItem>();
+        public IEnumerable<BinanceOtherRevenueItem> AccountProfits { get; set; } = Array.Empty<BinanceOtherRevenueItem>();
     }
 
     /// <summary>
@@ -39,15 +38,15 @@ namespace Binance.Net.Objects.Spot.Mining
         /// <summary>
         /// From user
         /// </summary>
-        public string PoolUserName { get; set; } = "";
+        public string PoolUserName { get; set; } = string.Empty;
         /// <summary>
         /// To user
         /// </summary>
-        public string ToPoolUserName { get; set; } = "";
+        public string ToPoolUserName { get; set; } = string.Empty;
         /// <summary>
         /// Algorithm
         /// </summary>
-        public string AlgoName { get; set; } = "";
+        public string AlgoName { get; set; } = string.Empty;
         /// <summary>
         /// Hash rate
         /// </summary>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Blvt
@@ -14,7 +13,7 @@ namespace Binance.Net.Objects.Blvt
         /// Token name
         /// </summary>
         [JsonProperty("s")]
-        public string TokenName { get; set; } = "";
+        public string TokenName { get; set; } = string.Empty;
         /// <summary>
         /// Token issued
         /// </summary>
@@ -30,7 +29,7 @@ namespace Binance.Net.Objects.Blvt
         /// Baskets
         /// </summary>
         [JsonProperty("b")]
-        public IEnumerable<BlvtBasket> Baskets { get; set; } = new List<BlvtBasket>();
+        public IEnumerable<BlvtBasket> Baskets { get; set; } = Array.Empty<BlvtBasket>();
         /// <summary>
         /// Token issued
         /// </summary>
@@ -57,7 +56,7 @@ namespace Binance.Net.Objects.Blvt
         /// Symbol
         /// </summary>
         [JsonProperty("s")]
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Position
         /// </summary>

@@ -2,16 +2,12 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces.SubClients;
-using Binance.Net.Objects.Blvt;
 using Binance.Net.Objects.BSwap;
-using Binance.Net.Objects.Futures.MarketData;
-using Binance.Net.Objects.Spot.MarketData;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
@@ -35,6 +31,9 @@ namespace Binance.Net.SubClients
         private const string bSwapQuoteEndpoint = "bswap/quote ";
         private const string bSwapSwapEndpoint = "bswap/swap ";
         private const string bSwapSwapRecordsEndpoint = "bswap/swap ";
+        private const string bSwapPoolsConfigureEndpoint = "bswap/poolConfigure";
+        private const string bSwapAddLiquidityPreviewEndpoint = "bswap/addLiquidityPreview ";
+        private const string bSwapRemoveLiquidityPreviewEndpoint = "bswap/removeLiquidityPreview ";
 
 
         private readonly BinanceClient _baseClient;
@@ -44,7 +43,7 @@ namespace Binance.Net.SubClients
             _baseClient = baseClient;
         }
 
-        #region Get info
+        #region Get swap pool
 
         /// <summary>
         /// Get all swap pools
@@ -104,10 +103,11 @@ namespace Binance.Net.SubClients
         /// <param name="poolId">The pool</param>
         /// <param name="asset">The asset</param>
         /// <param name="quantity">Quantity to add</param>
+        /// <param name="type">Add type</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<BinanceBSwapOperationResult>> AddLiquidityAsync(string poolId, string asset, decimal quantity, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceBSwapOperationResult>> AddLiquidityAsync(int poolId, string asset, decimal quantity, LiquidityType? type = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
@@ -120,6 +120,7 @@ namespace Binance.Net.SubClients
                 {"quantity", quantity.ToString(CultureInfo.InvariantCulture)},
                 {"timestamp", _baseClient.GetTimestamp()}
             };
+            parameters.AddOptionalParameter("type", type == null ? null : JsonConvert.SerializeObject(type.Value, new LiquidityTypeConverter(false)));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceBSwapOperationResult>(_baseClient.GetUrlSpot(bSwapAddLiquidityEndpoint, bSwapApi, bSwapVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
@@ -139,7 +140,7 @@ namespace Binance.Net.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<BinanceBSwapOperationResult>> RemoveLiquidityAsync(string poolId, string asset, RemoveLiquidityType type, decimal shareAmount, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceBSwapOperationResult>> RemoveLiquidityAsync(int poolId, string asset, LiquidityType type, decimal shareAmount, int? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
@@ -149,7 +150,7 @@ namespace Binance.Net.SubClients
             {
                 {"poolId", poolId},
                 {"asset", asset},
-                {"type", JsonConvert.SerializeObject(type, new RemoveLiquidityTypeConverter(false))},
+                {"type", JsonConvert.SerializeObject(type, new LiquidityTypeConverter(false))},
                 {"shareAmount", shareAmount.ToString(CultureInfo.InvariantCulture)},
                 {"timestamp", _baseClient.GetTimestamp()}
             };
@@ -174,7 +175,7 @@ namespace Binance.Net.SubClients
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<BinanceBSwapOperation>>> GetLiquidityOperationRecordsAsync(long? operationId = null, string? poolId = null, BSwapOperation? operation = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceBSwapOperation>>> GetLiquidityOperationRecordsAsync(long? operationId = null, int? poolId = null, BSwapOperation? operation = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 100);
 
@@ -299,6 +300,99 @@ namespace Binance.Net.SubClients
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceBSwapRecord>>(_baseClient.GetUrlSpot(bSwapSwapRecordsEndpoint, bSwapApi, bSwapVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get pool configure
+
+        /// <summary>
+        /// Get pool config
+        /// </summary>
+        /// <param name="poolId">Id of the pool</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        public async Task<WebCallResult<IEnumerable<BinanceBSwapPoolConfig>>> GetBSwapPoolConfigureAsync(int poolId, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<IEnumerable<BinanceBSwapPoolConfig>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "poolId", poolId },
+                {"timestamp", _baseClient.GetTimestamp()}
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceBSwapPoolConfig>>(_baseClient.GetUrlSpot(bSwapPoolsConfigureEndpoint, bSwapApi, bSwapVersion), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Add liquidity preview
+
+        /// <summary>
+        /// Calculate expected share amount for adding liquidity in single or dual token.
+        /// </summary>
+        /// <param name="poolId">The pool</param>
+        /// <param name="asset">The asset</param>
+        /// <param name="quantity">Quantity to add</param>
+        /// <param name="type">Add type</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        public async Task<WebCallResult<BinanceBSwapPreviewResult>> AddLiquidityPreviewAsync(int poolId, string asset, decimal quantity, LiquidityType type, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceBSwapPreviewResult>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                {"poolId", poolId},
+                {"quoteAsset", asset},
+                {"type", JsonConvert.SerializeObject(type, new LiquidityTypeConverter(false))},
+                {"quoteQty", quantity.ToString(CultureInfo.InvariantCulture)},
+                {"timestamp", _baseClient.GetTimestamp()}
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceBSwapPreviewResult>(_baseClient.GetUrlSpot(bSwapAddLiquidityPreviewEndpoint, bSwapApi, bSwapVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Remove liquidity preview
+
+        /// <summary>
+        /// Calculate expected share amount for adding liquidity in single or dual token.
+        /// </summary>
+        /// <param name="poolId">The pool</param>
+        /// <param name="asset">The asset</param>
+        /// <param name="quantity">Quantity to add</param>
+        /// <param name="type">Add type</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        public async Task<WebCallResult<BinanceBSwapPreviewResult>> RemoveLiquidityPreviewAsync(int poolId, string asset, decimal quantity, LiquidityType type, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<BinanceBSwapPreviewResult>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                {"poolId", poolId},
+                {"quoteAsset", asset},
+                {"type", JsonConvert.SerializeObject(type, new LiquidityTypeConverter(false))},
+                {"shareAmount", quantity.ToString(CultureInfo.InvariantCulture)},
+                {"timestamp", _baseClient.GetTimestamp()}
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceBSwapPreviewResult>(_baseClient.GetUrlSpot(bSwapRemoveLiquidityPreviewEndpoint, bSwapApi, bSwapVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion

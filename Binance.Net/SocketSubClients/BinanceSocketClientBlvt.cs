@@ -5,20 +5,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
-using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.SocketSubClient;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Blvt;
 using Binance.Net.Objects.Spot;
-using Binance.Net.Objects.Spot.MarketData;
 using Binance.Net.Objects.Spot.MarketStream;
-using Binance.Net.Objects.Spot.UserStream;
-using CryptoExchange.Net;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Binance.Net.SocketSubClients
 {
@@ -36,7 +31,7 @@ namespace Binance.Net.SocketSubClients
 
         private readonly BinanceSocketClient _baseClient;
         private readonly Log _log;
-        private readonly string _baseAddress;
+        private readonly string? _baseAddress;
 
         internal BinanceSocketClientBlvt(Log log, BinanceSocketClient baseClient, BinanceSocketClientOptions options)
         {
@@ -46,7 +41,6 @@ namespace Binance.Net.SocketSubClients
         }
 
         #region Blvt info update
-
         /// <summary>
         /// Subscribes to leveraged token info updates
         /// </summary>
@@ -54,8 +48,8 @@ namespace Binance.Net.SocketSubClients
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public Task<CallResult<UpdateSubscription>> SubscribeToBlvtInfoUpdatesAsync(string token,
-            Action<BinanceCombinedStream<BinanceBlvtInfoUpdate>> onMessage)
-            => SubscribeToBlvtInfoUpdatesAsync(new List<string> {token}, onMessage);
+            Action<DataEvent<BinanceBlvtInfoUpdate>> onMessage)
+            => SubscribeToBlvtInfoUpdatesAsync(new List<string> { token }, onMessage);
 
         /// <summary>
         /// Subscribes to leveraged token info updates
@@ -63,16 +57,16 @@ namespace Binance.Net.SocketSubClients
         /// <param name="tokens">The tokens to subscribe to</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        public async Task<CallResult<UpdateSubscription>> SubscribeToBlvtInfoUpdatesAsync(IEnumerable<string> tokens, Action<BinanceCombinedStream<BinanceBlvtInfoUpdate>> onMessage)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToBlvtInfoUpdatesAsync(IEnumerable<string> tokens, Action<DataEvent<BinanceBlvtInfoUpdate>> onMessage)
         {
             tokens = tokens.Select(a => a.ToUpper(CultureInfo.InvariantCulture) + bltvInfoEndpoint).ToArray();
-            return await Subscribe(string.Join("/", tokens), true, onMessage).ConfigureAwait(false);
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceBlvtInfoUpdate>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.TokenName)));
+            return await Subscribe(tokens, handler).ConfigureAwait(false);
         }
 
         #endregion
 
         #region Blvt kline update
-
         /// <summary>
         /// Subscribes to leveraged token kline updates
         /// </summary>
@@ -81,8 +75,8 @@ namespace Binance.Net.SocketSubClients
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public Task<CallResult<UpdateSubscription>> SubscribeToBlvtKlineUpdatesAsync(string token,
-            KlineInterval interval, Action<BinanceCombinedStream<BinanceStreamKlineData>> onMessage) =>
-            SubscribeToBlvtKlineUpdatesAsync(new List<string> {token}, interval, onMessage);
+            KlineInterval interval, Action<DataEvent<BinanceStreamKlineData>> onMessage) =>
+            SubscribeToBlvtKlineUpdatesAsync(new List<string> { token }, interval, onMessage);
 
         /// <summary>
         /// Subscribes to leveraged token kline updates
@@ -91,22 +85,21 @@ namespace Binance.Net.SocketSubClients
         /// <param name="interval">The kline interval</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        public async Task<CallResult<UpdateSubscription>> SubscribeToBlvtKlineUpdatesAsync(IEnumerable<string> tokens, KlineInterval interval, Action<BinanceCombinedStream<BinanceStreamKlineData>> onMessage)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToBlvtKlineUpdatesAsync(IEnumerable<string> tokens, KlineInterval interval, Action<DataEvent<BinanceStreamKlineData>> onMessage)
         {
             tokens = tokens.Select(a => a.ToUpper(CultureInfo.InvariantCulture) + bltvKlineEndpoint + "_" + JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ToArray();
-            return await Subscribe(string.Join("/", tokens), true, onMessage).ConfigureAwait(false);
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamKlineData>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
+            return await Subscribe(tokens, handler).ConfigureAwait(false);
         }
 
         #endregion
 
-        private async Task<CallResult<UpdateSubscription>> Subscribe<T>(string url, bool combined, Action<T> onData)
+        private async Task<CallResult<UpdateSubscription>> Subscribe<T>(IEnumerable<string> topics, Action<DataEvent<T>> onData)
         {
-            if (combined)
-                url = _baseAddress + "stream?streams=" + url;
-            else
-                url = _baseAddress + "ws/" + url;
+            if (_baseAddress == null)
+                throw new ArgumentNullException("BaseAddress", "No API address provided for the futures API, check the client options");
 
-            return await _baseClient.SubscribeInternal(url, onData).ConfigureAwait(false);
+            return await _baseClient.SubscribeInternal(_baseAddress + "stream", topics, onData).ConfigureAwait(false);
         }
     }
 }

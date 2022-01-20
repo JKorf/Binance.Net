@@ -14,11 +14,11 @@ namespace Binance.Net.Objects.Spot.SubAccountData
         /// <summary>
         /// Counter party of the transfer
         /// </summary>
-        public string CounterParty { get; set; } = "";
+        public string CounterParty { get; set; } = string.Empty;
         /// <summary>
         /// Email of the account
         /// </summary>
-        public string Email { get; set; } = "";
+        public string Email { get; set; } = string.Empty;
         /// <summary>
         /// Transfer type
         /// </summary>
@@ -27,13 +27,13 @@ namespace Binance.Net.Objects.Spot.SubAccountData
         /// <summary>
         /// Asset
         /// </summary>
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
 
         /// <summary>
         /// Transaction id
         /// </summary>
         [JsonProperty("tranId")]
-        public string TransactionId { get; set; } = "";
+        public string TransactionId { get; set; } = string.Empty;
         /// <summary>
         /// Quantity
         /// </summary>

@@ -16,7 +16,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// <summary>
         /// Asset
         /// </summary>
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Timestamp of the transaction
         /// </summary>
@@ -26,7 +26,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// Transaction id
         /// </summary>
         [JsonProperty("tranId")]
-        public string TransactionId { get; set; } = "";
+        public string TransactionId { get; set; } = string.Empty;
         /// <summary>
         /// Info
         /// </summary>

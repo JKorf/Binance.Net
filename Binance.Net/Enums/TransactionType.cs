@@ -5,17 +5,17 @@ using System.Text;
 namespace Binance.Net.Enums
 {
     /// <summary>
-    /// Remove liquidity type
+    /// Transaction type
     /// </summary>
-    public enum RemoveLiquidityType
+    public enum TransactionType
     {
         /// <summary>
-        /// Remove single asset
+        /// Deposit
         /// </summary>
-        Single,
+        Deposit,
         /// <summary>
-        /// Remove combination of all coins
+        /// Withdrawal
         /// </summary>
-        Combined
+        Withdrawal
     }
 }

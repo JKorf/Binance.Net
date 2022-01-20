@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using CryptoExchange.Net.Converters;
@@ -16,7 +14,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// The symbol
         /// </summary>
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
         /// Is buyer
@@ -30,7 +28,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// Asset the commission is paid in
         /// </summary>
-        public string CommissionAsset { get; set; } = "";
+        public string CommissionAsset { get; set; } = string.Empty;
         /// <summary>
         /// Trade id
         /// </summary>
@@ -70,7 +68,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Timestamp
         /// </summary>
         [JsonProperty("time"), JsonConverter(typeof(TimestampConverter))]
-        public DateTime Timestamp { get; set; }
+        public DateTime TradeTime { get; set; }
     }
 
     /// <summary>
@@ -93,7 +91,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// The pair
         /// </summary>
-        public string Pair { get; set; } = "";
+        public string Pair { get; set; } = string.Empty;
         /// <summary>
         /// Base quantity
         /// </summary>

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
-using Binance.Net.Interfaces;
-using Binance.Net.Objects.Shared;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
@@ -19,7 +15,7 @@ namespace Binance.Net.Objects.Futures.MarketStream
         /// The symbol the data is for
         /// </summary>
         [JsonProperty("s")]
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
         /// The data
@@ -50,7 +46,7 @@ namespace Binance.Net.Objects.Futures.MarketStream
         /// Ignore
         /// </summary>
         [JsonProperty("s")]
-        public string Ignore1 { get; set; } = "";
+        public string Ignore1 { get; set; } = string.Empty;
         /// <summary>
         /// Kline interval
         /// </summary>
@@ -62,12 +58,12 @@ namespace Binance.Net.Objects.Futures.MarketStream
         /// Ignore
         /// </summary>
         [JsonProperty("f")]
-        public string Ignore2 { get; set; } = "";
+        public string Ignore2 { get; set; } = string.Empty;
         /// <summary>
         /// Ignore
         /// </summary>
         [JsonProperty("L")]
-        public string Ignore3 { get; set; } = "";
+        public string Ignore3 { get; set; } = string.Empty;
 
         /// <summary>
         /// Open price of the kline
@@ -94,7 +90,7 @@ namespace Binance.Net.Objects.Futures.MarketStream
         /// Ignore
         /// </summary>
         [JsonProperty("v")]
-        public string Ignore4 { get; set; } = "";
+        public string Ignore4 { get; set; } = string.Empty;
         
         /// <summary>
         /// Number of basic data
@@ -112,21 +108,21 @@ namespace Binance.Net.Objects.Futures.MarketStream
         /// Ignore
         /// </summary>
         [JsonProperty("q")]
-        public string Ignore5 { get; set; } = "";
+        public string Ignore5 { get; set; } = string.Empty;
         /// <summary>
         /// Ignore
         /// </summary>
         [JsonProperty("V")]
-        public string Ignore6 { get; set; } = "";
+        public string Ignore6 { get; set; } = string.Empty;
         /// <summary>
         /// Ignore
         /// </summary>
         [JsonProperty("Q")]
-        public string Ignore7 { get; set; } = "";
+        public string Ignore7 { get; set; } = string.Empty;
         /// <summary>
         /// Ignore
         /// </summary>
         [JsonProperty("b")]
-        public string Ignore8 { get; set; } = "";
+        public string Ignore8 { get; set; } = string.Empty;
     }
 }

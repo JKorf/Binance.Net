@@ -18,12 +18,12 @@ namespace Binance.Net.Objects.Spot.IsolatedMarginData
         /// <summary>
         /// Transfer asset
         /// </summary>
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
 
         /// <summary>
         /// Status of the transfer
         /// </summary>
-        public string Status { get; set; } = "";
+        public string Status { get; set; } = string.Empty;
         /// <summary>
         /// Timestamp of the transfer
         /// </summary>
@@ -33,7 +33,7 @@ namespace Binance.Net.Objects.Spot.IsolatedMarginData
         /// Transaction id
         /// </summary>
         [JsonProperty("txId")]
-        public string TransactionId { get; set; } = "";
+        public string TransactionId { get; set; } = string.Empty;
         /// <summary>
         /// From
         /// </summary>

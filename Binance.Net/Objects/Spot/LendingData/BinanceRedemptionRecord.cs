@@ -18,7 +18,7 @@ namespace Binance.Net.Objects.Spot.LendingData
         /// <summary>
         /// Asset name
         /// </summary>
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Timestamp
         /// </summary>
@@ -32,7 +32,7 @@ namespace Binance.Net.Objects.Spot.LendingData
         /// <summary>
         /// Name of the product
         /// </summary>
-        public string ProductName { get; set; } = "";
+        public string ProductName { get; set; } = string.Empty;
         /// <summary>
         /// Principal
         /// </summary>
@@ -41,6 +41,6 @@ namespace Binance.Net.Objects.Spot.LendingData
         /// <summary>
         /// Purchase status
         /// </summary>
-        public string Status { get; set; } = "";
+        public string Status { get; set; } = string.Empty;
     }
 }

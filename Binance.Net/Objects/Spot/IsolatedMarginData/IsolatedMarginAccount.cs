@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Newtonsoft.Json;
@@ -15,7 +14,7 @@ namespace Binance.Net.Objects.Spot.IsolatedMarginData
         /// <summary>
         /// Account assets
         /// </summary>
-        public IEnumerable<BinanceIsolatedMarginAccountSymbol> Assets { get; set; } = new List<BinanceIsolatedMarginAccountSymbol>();
+        public IEnumerable<BinanceIsolatedMarginAccountSymbol> Assets { get; set; } = Array.Empty<BinanceIsolatedMarginAccountSymbol>();
         /// <summary>
         /// Total btc asset
         /// </summary>
@@ -48,7 +47,7 @@ namespace Binance.Net.Objects.Spot.IsolatedMarginData
         /// <summary>
         /// Symbol name
         /// </summary>
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Isolated created
         /// </summary>
@@ -82,6 +81,10 @@ namespace Binance.Net.Objects.Spot.IsolatedMarginData
         /// If trading is enabled
         /// </summary>
         public bool TradeEnabled { get; set; }
+        /// <summary>
+        /// Account is enabled
+        /// </summary>
+        public bool Enabled { get; set; }
     }
 
     /// <summary>
@@ -92,7 +95,7 @@ namespace Binance.Net.Objects.Spot.IsolatedMarginData
         /// <summary>
         /// Asset name
         /// </summary>
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// If borrow is enabled
         /// </summary>

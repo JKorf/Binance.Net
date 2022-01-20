@@ -39,13 +39,13 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// Balances
         /// </summary>
         [JsonProperty("B")]
-        public IEnumerable<BinanceFuturesStreamBalance> Balances { get; set; } = new List<BinanceFuturesStreamBalance>();
+        public IEnumerable<BinanceFuturesStreamBalance> Balances { get; set; } = Array.Empty<BinanceFuturesStreamBalance>();
 
         /// <summary>
         /// Positions
         /// </summary>
         [JsonProperty("P")]
-        public IEnumerable<BinanceFuturesStreamPosition> Positions { get; set; } = new List<BinanceFuturesStreamPosition>();
+        public IEnumerable<BinanceFuturesStreamPosition> Positions { get; set; } = Array.Empty<BinanceFuturesStreamPosition>();
     }
 
     /// <summary>
@@ -57,7 +57,7 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// The asset this balance is for
         /// </summary>
         [JsonProperty("a")]
-        public string? Asset { get; set; }
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// The amount that isn't locked in a trade
         /// </summary>
@@ -67,7 +67,7 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// The amount that is locked in a trade
         /// </summary>
         [JsonProperty("cw")]
-        public decimal CrossBalance { get; set; }
+        public decimal CrossWalletBalance { get; set; }
     }
 
     /// <summary>
@@ -79,12 +79,12 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// The symbol this balance is for
         /// </summary>
         [JsonProperty("s")]
-        public string? Symbol { get; set; }
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The amount of the position
         /// </summary>
         [JsonProperty("pa")]
-        public decimal PositionAmount { get; set; }
+        public decimal Quantity { get; set; }
         /// <summary>
         /// The entry price
         /// </summary>
@@ -94,7 +94,7 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// The accumulated realized PnL
         /// </summary>
         [JsonProperty("cr")]
-        public decimal RealizedPnL { get; set; }
+        public decimal RealizedPnl { get; set; }
         /// <summary>
         /// The Unrealized PnL
         /// </summary>
@@ -111,7 +111,7 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// The isolated wallet (if isolated position)
         /// </summary>
         [JsonProperty("iw")]
-        public decimal IsolatedWallet { get; set; }
+        public decimal IsolatedMargin { get; set; }
 
         /// <summary>
         /// Position Side

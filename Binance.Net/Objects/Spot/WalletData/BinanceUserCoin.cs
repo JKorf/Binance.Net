@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Spot.WalletData
@@ -11,7 +12,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// <summary>
         /// Coin code
         /// </summary>
-        public string Coin { get; set; } = "";
+        public string Coin { get; set; } = string.Empty;
         /// <summary>
         /// Deposit all is enabled
         /// </summary>
@@ -55,12 +56,15 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// <summary>
         /// Name of the coin
         /// </summary>
-        public string Name { get; set; } = "";
-
+        public string Name { get; set; } = string.Empty;
+        /// <summary>
+        /// Currently withdrawing
+        /// </summary>
+        public decimal Withdrawing { get; set; }
         /// <summary>
         /// Networks
         /// </summary>
-        public IEnumerable<BinanceNetwork> NetworkList { get; set; } = new List<BinanceNetwork>();
+        public IEnumerable<BinanceNetwork> NetworkList { get; set; } = Array.Empty<BinanceNetwork>();
     }
 
     /// <summary>
@@ -71,16 +75,16 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// <summary>
         /// Regex for an address on the network
         /// </summary>
-        public string AddressRegex { get; set; } = "";
+        public string AddressRegex { get; set; } = string.Empty;
         /// <summary>
         /// Coin name
         /// </summary>
-        public string Coin { get; set; } = "";
+        public string Coin { get; set; } = string.Empty;
         /// <summary>
         /// Deposit description
         /// </summary>
         [JsonProperty("depositDesc")]
-        public string DepositDescription { get; set; } = "";
+        public string DepositDescription { get; set; } = string.Empty;
         /// <summary>
         /// Deposit enabled
         /// </summary>
@@ -93,7 +97,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// <summary>
         /// Regex for a memo
         /// </summary>
-        public string MemoRegex { get; set; } = "";
+        public string MemoRegex { get; set; } = string.Empty;
         /// <summary>
         /// Minimal confirmations for balance confirmation
         /// </summary>
@@ -102,11 +106,11 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// <summary>
         /// Name
         /// </summary>
-        public string Name { get; set; } = "";
+        public string Name { get; set; } = string.Empty;
         /// <summary>
         /// Network
         /// </summary>
-        public string Network { get; set; } = "";
+        public string Network { get; set; } = string.Empty;
         /// <summary>
         /// Reset address status
         /// </summary>
@@ -114,7 +118,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// <summary>
         /// Tips
         /// </summary>
-        public string SpecialTips { get; set; } = "";
+        public string SpecialTips { get; set; } = string.Empty;
         /// <summary>
         /// Confirmation number for balance unlock
         /// </summary>
@@ -124,7 +128,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// Withdraw description
         /// </summary>
         [JsonProperty("withdrawDesc")]
-        public string WithdrawDescription { get; set; } = "";
+        public string WithdrawDescription { get; set; } = string.Empty;
         /// <summary>
         /// Withdraw is enabled
         /// </summary>
@@ -138,6 +142,17 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// Minimal withdraw amount
         /// </summary>
         public decimal WithdrawMin { get; set; }
-
+        /// <summary>
+        /// Min withdraw step
+        /// </summary>
+        public decimal WithdrawIntegerMultiple { get; set; }
+        /// <summary>
+        /// Max withdraw amount
+        /// </summary>
+        public decimal WithdrawMax { get; set; }
+        /// <summary>
+        /// If the coin needs to provide memo to withdraw
+        /// </summary>
+        public bool SameAddress { get; set; }
     }
 }

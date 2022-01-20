@@ -24,7 +24,7 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         /// Transfer
         /// </summary>
         [JsonProperty("transfers")]
-        public IEnumerable<BinanceBrokerageTransferFuturesTransaction> Transactions { get; set; } = new List<BinanceBrokerageTransferFuturesTransaction>();
+        public IEnumerable<BinanceBrokerageTransferFuturesTransaction> Transactions { get; set; } = Array.Empty<BinanceBrokerageTransferFuturesTransaction>();
     }
     
     /// <summary>
@@ -35,17 +35,17 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         /// <summary>
         /// From Id
         /// </summary>
-        public string FromId { get; set; } = "";
+        public string FromId { get; set; } = string.Empty;
         
         /// <summary>
         /// To Id
         /// </summary>
-        public string ToId { get; set; } = "";
+        public string ToId { get; set; } = string.Empty;
         
         /// <summary>
         /// Asset
         /// </summary>
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
         
         /// <summary>
         /// Amount
@@ -57,13 +57,13 @@ namespace Binance.Net.Objects.Brokerage.SubAccountData
         /// Transaction Id
         /// </summary>
         [JsonProperty("txnId")]
-        public string Id { get; set; } = "";
+        public string Id { get; set; } = string.Empty;
         
         /// <summary>
         /// Client Transfer Id
         /// </summary>
         [JsonProperty("clientTranId")]
-        public string ClientTransferId { get; set; } = "";
+        public string ClientTransferId { get; set; } = string.Empty;
         
         /// <summary>
         /// Date

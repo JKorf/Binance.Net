@@ -6,6 +6,7 @@ using Binance.Net.Interfaces.SubClients.Futures;
 using Binance.Net.Objects.Futures.MarketData;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
+using Microsoft.Extensions.Logging;
 
 namespace Binance.Net.SubClients.Futures.Coin
 {
@@ -36,13 +37,6 @@ namespace Binance.Net.SubClients.Futures.Coin
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Exchange info</returns>
-        public WebCallResult<BinanceFuturesCoinExchangeInfo> GetExchangeInfo(CancellationToken ct = default) => GetExchangeInfoAsync(ct).Result;
-
-        /// <summary>
-        /// Get's information about the exchange including rate limits and symbol list
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Exchange info</returns>
         public async Task<WebCallResult<BinanceFuturesCoinExchangeInfo>> GetExchangeInfoAsync(CancellationToken ct = default)
         {
             var exchangeInfoResult = await _baseClient.SendRequestInternal<BinanceFuturesCoinExchangeInfo>(_futuresClient.GetUrl(exchangeInfoEndpoint, Api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
@@ -51,7 +45,7 @@ namespace Binance.Net.SubClients.Futures.Coin
 
             _futuresClient.ExchangeInfo = exchangeInfoResult.Data;
             _futuresClient.LastExchangeInfoUpdate = DateTime.UtcNow;
-            _log.Write(LogVerbosity.Info, "Trade rules updated");
+            _log.Write(LogLevel.Information, "Trade rules updated");
             return exchangeInfoResult;
         }
 

@@ -3,8 +3,6 @@ using Binance.Net.Enums;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Binance.Net.Objects.Spot.WalletData
 {
@@ -16,7 +14,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// <summary>
         /// The asset which was transfered
         /// </summary>
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Amount transfered
         /// </summary>
@@ -29,7 +27,7 @@ namespace Binance.Net.Objects.Spot.WalletData
         /// <summary>
         /// Status
         /// </summary>
-        public string Status { get; set; } = "";
+        public string Status { get; set; } = string.Empty;
         /// <summary>
         /// Id
         /// </summary>

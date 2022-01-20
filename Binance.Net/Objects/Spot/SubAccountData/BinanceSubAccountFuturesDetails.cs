@@ -13,15 +13,15 @@ namespace Binance.Net.Objects.Spot.SubAccountData
         /// <summary>
         /// Email of the sub account
         /// </summary>
-        public string Email { get; set; } = "";
+        public string Email { get; set; } = string.Empty;
         /// <summary>
         /// Asset
         /// </summary>
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// List of asset details
         /// </summary>
-        public IEnumerable<BinanceSubAccountFuturesAsset> Assets { get; set; } = new List<BinanceSubAccountFuturesAsset>();
+        public IEnumerable<BinanceSubAccountFuturesAsset> Assets { get; set; } = Array.Empty<BinanceSubAccountFuturesAsset>();
         /// <summary>
         /// Can deposit
         /// </summary>
@@ -85,7 +85,7 @@ namespace Binance.Net.Objects.Spot.SubAccountData
         /// <summary>
         /// The asset
         /// </summary>
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Initial margin
         /// </summary>

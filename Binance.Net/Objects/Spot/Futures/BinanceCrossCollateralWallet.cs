@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Binance.Net.Objects.Spot.Futures
 {
@@ -28,11 +27,11 @@ namespace Binance.Net.Objects.Spot.Futures
         /// <summary>
         /// The asset
         /// </summary>
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Cross collaterals
         /// </summary>
-        public IEnumerable<BinanceCrossCollateralWalletEntry> CrossCollaterals { get; set; } = new List<BinanceCrossCollateralWalletEntry>();
+        public IEnumerable<BinanceCrossCollateralWalletEntry> CrossCollaterals { get; set; } = Array.Empty<BinanceCrossCollateralWalletEntry>();
     }
 
     /// <summary>
@@ -43,11 +42,11 @@ namespace Binance.Net.Objects.Spot.Futures
         /// <summary>
         /// Loan coin
         /// </summary>
-        public string LoanCoin { get; set; } = "";
+        public string LoanCoin { get; set; } = string.Empty;
         /// <summary>
         /// Collateral coin
         /// </summary>
-        public string CollateralCoin { get; set; } = "";
+        public string CollateralCoin { get; set; } = string.Empty;
         /// <summary>
         /// Amount locked
         /// </summary>

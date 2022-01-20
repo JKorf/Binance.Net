@@ -14,7 +14,7 @@
         /// Maximum value that can be held
         /// NOTE: string type, because the value van be 'inf' (infinite)
         /// </summary>
-        public string MaxNotionalValue { get; set; } = "";
+        public string MaxNotionalValue { get; set; } = string.Empty;
         /// <summary>
         /// Symbol the request is for
         /// </summary>

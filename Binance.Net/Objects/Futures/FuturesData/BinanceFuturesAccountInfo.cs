@@ -13,8 +13,8 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// Information about an account assets
         /// </summary>
-        public IEnumerable<BinanceFuturesAccountAsset> Assets { get; set; } = new List<BinanceFuturesAccountAsset>();
-        
+        public IEnumerable<BinanceFuturesAccountAsset> Assets { get; set; } = Array.Empty<BinanceFuturesAccountAsset>();
+
         /// <summary>
         /// Boolean indicating if this account can deposit
         /// </summary>
@@ -43,7 +43,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// Information about an account positions
         /// </summary>
-        public IEnumerable<BinancePositionInfoUsdt> Positions { get; set; } = new List<BinancePositionInfoUsdt>();
+        public IEnumerable<BinancePositionInfoUsdt> Positions { get; set; } = Array.Empty<BinancePositionInfoUsdt>();
 
         /// <summary>
         /// Total initial margin

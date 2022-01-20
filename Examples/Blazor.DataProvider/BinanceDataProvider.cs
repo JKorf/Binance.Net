@@ -20,17 +20,17 @@ namespace Blazor.DataProvider
 
         public Task<WebCallResult<IEnumerable<IBinanceTick>>> Get24HPrices()
         {
-            return _client.Spot.Market.Get24HPricesAsync();
+            return _client.Spot.Market.GetTickersAsync();
         }
 
-        public Task<CallResult<UpdateSubscription>> SubscribeTickerUpdates(Action<IEnumerable<IBinanceTick>> tickHandler)
+        public Task<CallResult<UpdateSubscription>> SubscribeTickerUpdates(Action<DataEvent<IEnumerable<IBinanceTick>>> tickHandler)
         {
             return _socketClient.Spot.SubscribeToAllSymbolTickerUpdatesAsync(tickHandler);
         }
 
         public async Task Unsubscribe(UpdateSubscription subscription)
         {
-            await _socketClient.Unsubscribe(subscription);
+            await _socketClient.UnsubscribeAsync(subscription);
         }
     }
 }

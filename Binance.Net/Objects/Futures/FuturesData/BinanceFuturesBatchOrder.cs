@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Binance.Net.Enums;
+﻿using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Futures.FuturesData
 {
@@ -13,7 +10,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// Symbol of the order
         /// </summary>
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Side of the order
         /// </summary>
@@ -45,7 +42,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// A unique id among open orders. Automatically generated if not sent.
         /// </summary>
-        public string NewClientOrderId { get; set; } = "";
+        public string NewClientOrderId { get; set; } = string.Empty;
         /// <summary>
         /// Used with Stop/StopMarket or TakeProfit/TakeProfitMarket orders.
         /// </summary>
@@ -62,5 +59,9 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Stop price triggered by: Mark or Contract. Default Contract
         /// </summary>
         public WorkingType? WorkingType { get; set; }
+        /// <summary>
+        /// Used with Stop/StopMarket or TakeProfit/TakeProfitMarket orders.
+        /// </summary>
+        public bool? PriceProtect { get; set; }
     }
 }

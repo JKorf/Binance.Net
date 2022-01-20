@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Binance.Net.Objects.Futures.FuturesData
+﻿namespace Binance.Net.Objects.Futures.FuturesData
 {
     /// <summary>
     /// Quantile estimation
@@ -12,7 +8,7 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// <summary>
         /// The symbol
         /// </summary>
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Quantile
         /// </summary>

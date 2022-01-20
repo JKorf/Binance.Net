@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Futures.MarketStream
@@ -14,7 +13,7 @@ namespace Binance.Net.Objects.Futures.MarketStream
         /// The symbol
         /// </summary>
         [JsonProperty("s")]
-        public string Symbol { get; set; } = "";
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The price
         /// </summary>
@@ -25,7 +24,7 @@ namespace Binance.Net.Objects.Futures.MarketStream
         /// Composition
         /// </summary>
         [JsonProperty("c")]
-        public IEnumerable<BinanceFuturesStreamCompositeIndexAsset> Composition { get; set; } = new BinanceFuturesStreamCompositeIndexAsset[0];
+        public IEnumerable<BinanceFuturesStreamCompositeIndexAsset> Composition { get; set; } = Array.Empty<BinanceFuturesStreamCompositeIndexAsset>();
     }
 
     /// <summary>
@@ -34,10 +33,15 @@ namespace Binance.Net.Objects.Futures.MarketStream
     public class BinanceFuturesStreamCompositeIndexAsset
     {
         /// <summary>
-        /// Asset name
+        /// Base asset name
         /// </summary>
         [JsonProperty("b")]
-        public string Asset { get; set; } = "";
+        public string Asset { get; set; } = string.Empty;
+        /// <summary>
+        /// Quote asset name
+        /// </summary>
+        [JsonProperty("q")]
+        public string QuoteAsset { get; set; } = string.Empty;
         /// <summary>
         /// Weight in quantity
         /// </summary>
@@ -48,5 +52,10 @@ namespace Binance.Net.Objects.Futures.MarketStream
         /// </summary>
         [JsonProperty("W")]
         public decimal WeightInPercentage { get; set; }
+        /// <summary>
+        /// Index price
+        /// </summary>
+        [JsonProperty("i")]
+        public decimal IndexPrice { get; set; }
     }
 }

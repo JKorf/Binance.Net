@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -72,15 +71,6 @@ namespace Binance.Net.SubClients.Futures
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Whether the request was successful</returns>
-        public WebCallResult<BinanceResult> ModifyPositionMode(bool dualPositionSide, long? receiveWindow = null, CancellationToken ct = default) => ModifyPositionModeAsync(dualPositionSide, receiveWindow, ct).Result;
-
-        /// <summary>
-        /// Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
-        /// </summary>
-        /// <param name="dualPositionSide">User position mode</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Whether the request was successful</returns>
         public async Task<WebCallResult<BinanceResult>> ModifyPositionModeAsync(bool dualPositionSide, long? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -100,14 +90,6 @@ namespace Binance.Net.SubClients.Futures
         #endregion
 
         #region Get Current Position Mode
-
-        /// <summary>
-        /// Get user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
-        /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Whether the request was successful</returns>
-        public WebCallResult<BinanceFuturesPositionMode> GetPositionMode(long? receiveWindow = null, CancellationToken ct = default) => GetPositionModeAsync(receiveWindow, ct).Result;
 
         /// <summary>
         /// Get user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
@@ -142,16 +124,6 @@ namespace Binance.Net.SubClients.Futures
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Result of the initial leverage change request</returns>
-        public WebCallResult<BinanceFuturesInitialLeverageChangeResult> ChangeInitialLeverage(string symbol, int leverage, long? receiveWindow = null, CancellationToken ct = default) => ChangeInitialLeverageAsync(symbol, leverage, receiveWindow, ct).Result;
-
-        /// <summary>
-        /// Requests to change the initial leverage of the given symbol
-        /// </summary>
-        /// <param name="symbol">Symbol to change the initial leverage for</param>
-        /// <param name="leverage">The amount of initial leverage to change to</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Result of the initial leverage change request</returns>
         public async Task<WebCallResult<BinanceFuturesInitialLeverageChangeResult>> ChangeInitialLeverageAsync(string symbol, int leverage, long? receiveWindow = null, CancellationToken ct = default)
         {
             leverage.ValidateIntBetween(nameof(leverage), 1, 125);
@@ -173,16 +145,6 @@ namespace Binance.Net.SubClients.Futures
         #endregion
 
         #region Change Margin Type
-
-        /// <summary>
-        /// Change the margin type for an open position
-        /// </summary>
-        /// <param name="symbol">Symbol to change the position type for</param>
-        /// <param name="marginType">The type of margin to use</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Whether the request was successful</returns>
-        public WebCallResult<BinanceFuturesChangeMarginTypeResult> ChangeMarginType(string symbol, FuturesMarginType marginType, long? receiveWindow = null, CancellationToken ct = default) => ChangeMarginTypeAsync(symbol, marginType, receiveWindow, ct).Result;
 
         /// <summary>
         /// Change the margin type for an open position
@@ -223,18 +185,6 @@ namespace Binance.Net.SubClients.Futures
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The new position margin</returns>
-        public WebCallResult<BinanceFuturesPositionMarginResult> ModifyPositionMargin(string symbol, decimal amount, FuturesMarginChangeDirectionType type, PositionSide? positionSide = null, long? receiveWindow = null, CancellationToken ct = default) => ModifyPositionMarginAsync(symbol, amount, type, positionSide, receiveWindow, ct).Result;
-
-        /// <summary>
-        /// Change the margin on an open position
-        /// </summary>
-        /// <param name="symbol">Symbol to adjust the position margin for</param>
-        /// <param name="amount">The amount of margin to be used</param>
-        /// <param name="type">Whether to reduce or add margin to the position</param>
-        /// <param name="positionSide">Default BOTH for One-way Mode ; LONG or SHORT for Hedge Mode. It must be sent with Hedge Mode.</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The new position margin</returns>
         public async Task<WebCallResult<BinanceFuturesPositionMarginResult>> ModifyPositionMarginAsync(string symbol, decimal amount, FuturesMarginChangeDirectionType type, PositionSide? positionSide = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -257,19 +207,6 @@ namespace Binance.Net.SubClients.Futures
         #endregion
 
         #region Get Postion Margin Change History
-
-        /// <summary>
-        /// Requests the margin change history for a specific symbol
-        /// </summary>
-        /// <param name="symbol">Symbol to get margin history for</param>
-        /// <param name="type">Filter the history by the direction of margin change</param>
-        /// <param name="startTime">Margin changes newer than this date will be retrieved</param>
-        /// <param name="endTime">Margin changes older than this date will be retrieved</param>
-        /// <param name="limit">The max number of results</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>List of all margin changes for the symbol</returns>
-        public WebCallResult<IEnumerable<BinanceFuturesMarginChangeHistoryResult>> GetMarginChangeHistory(string symbol, FuturesMarginChangeDirectionType? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default) => GetMarginChangeHistoryAsync(symbol, type, startTime, endTime, limit, receiveWindow, ct).Result;
 
         /// <summary>
         /// Requests the margin change history for a specific symbol
@@ -317,19 +254,6 @@ namespace Binance.Net.SubClients.Futures
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The income history for the futures account</returns>
-        public WebCallResult<IEnumerable<BinanceFuturesIncomeHistory>> GetIncomeHistory(string? symbol = null, string? incomeType = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default) => GetIncomeHistoryAsync(symbol, incomeType, startTime, endTime, limit, receiveWindow, ct).Result;
-
-        /// <summary>
-        /// Gets the income history for the futures account
-        /// </summary>
-        /// <param name="symbol">The symbol to get income history from</param>
-        /// <param name="incomeType">The income type filter to apply to the request</param>
-        /// <param name="startTime">Time to start getting income history from</param>
-        /// <param name="endTime">Time to stop getting income history from</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>The income history for the futures account</returns>
         public async Task<WebCallResult<IEnumerable<BinanceFuturesIncomeHistory>>> GetIncomeHistoryAsync(string? symbol = null, string? incomeType = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);
@@ -354,15 +278,6 @@ namespace Binance.Net.SubClients.Futures
         #endregion
 
         #region Notional and Leverage Brackets
-
-        /// <summary>
-        /// Gets Notional and Leverage Brackets
-        /// </summary>
-        /// <param name="symbolOrPair">The symbol or pair to get the data for</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Notional and Leverage Brackets info</returns>
-        public WebCallResult<IEnumerable<BinanceFuturesSymbolBracket>> GetBrackets(string? symbolOrPair = null, long? receiveWindow = null, CancellationToken ct = default) => GetBracketsAsync(symbolOrPair, receiveWindow, ct).Result;
 
         /// <summary>
         /// Gets Notional and Leverage Brackets.
@@ -399,15 +314,6 @@ namespace Binance.Net.SubClients.Futures
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public WebCallResult<IEnumerable<BinanceFuturesQuantileEstimation>> GetPositionAdlQuantileEstimation(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default) => GetPositionAdlQuantileEstimationAsync(symbol, receiveWindow, ct).Result;
-
-        /// <summary>
-        /// Get position ADL quantile estimations
-        /// </summary>
-        /// <param name="symbol">Only get for this symbol</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
         public async Task<WebCallResult<IEnumerable<BinanceFuturesQuantileEstimation>>> GetPositionAdlQuantileEstimationAsync(string? symbol = null, long ? receiveWindow = null, CancellationToken ct = default)
         {
             var timestampResult = await BaseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -425,7 +331,7 @@ namespace Binance.Net.SubClients.Futures
         }
 
         #endregion
-
+        
         internal abstract Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? price, decimal? stopPrice,
             OrderType type, CancellationToken ct);
         

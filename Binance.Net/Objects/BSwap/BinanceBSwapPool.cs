@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Binance.Net.Objects.BSwap
 {
@@ -16,10 +15,10 @@ namespace Binance.Net.Objects.BSwap
         /// <summary>
         /// Name
         /// </summary>
-        public string PoolName { get; set; } = "";
+        public string PoolName { get; set; } = string.Empty;
         /// <summary>
         /// Assets in the pool
         /// </summary>
-        public IEnumerable<string> Assets { get; set; } = new List<string>();
+        public IEnumerable<string> Assets { get; set; } = Array.Empty<string>();
     }
 }

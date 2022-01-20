@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
@@ -38,14 +36,14 @@ namespace Binance.Net.Objects.Spot.MarketData
         [ArrayProperty(4)]
         public decimal Close { get; set; }
 
-        [ArrayProperty(5)] internal string? Ignore1 { get; set; } = "";
+        [ArrayProperty(5)] internal string? Ignore1 { get; set; } = string.Empty;
         /// <summary>
         /// The close time of this candlestick
         /// </summary>
         [ArrayProperty(6), JsonConverter(typeof(TimestampConverter))]
         public DateTime CloseTime { get; set; }
 
-        [ArrayProperty(7)] internal string? Ignore2 { get; set; } = "";
+        [ArrayProperty(7)] internal string? Ignore2 { get; set; } = string.Empty;
         /// <summary>
         /// Number of basic data
         /// </summary>
