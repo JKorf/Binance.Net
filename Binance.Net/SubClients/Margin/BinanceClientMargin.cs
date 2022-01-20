@@ -40,6 +40,8 @@ namespace Binance.Net.SubClients.Margin
         private const string transferHistoryEndpoint = "margin/transfer";
         private const string interestHistoryEndpoint = "margin/interestHistory";
         private const string interestRateHistoryEndpoint = "margin/interestRateHistory";
+
+        private const string interestMarginDataEndpoint = "margin/crossMarginData";
         private const string forceLiquidationHistoryEndpoint = "margin/forceLiquidationRec";
 
         private const string isolatedMarginTransferHistoryEndpoint = "margin/isolated/transfer";
@@ -395,6 +397,33 @@ namespace Binance.Net.SubClients.Margin
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceInterestRateHistory>>(_baseClient.GetUrlSpot(interestRateHistoryEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
+        #endregion
+
+        #region Get Interest Rate Margin Data
+        /// <summary>
+        /// Get Interest Rate Margin Data
+        /// </summary>
+        /// <param name="coin">The coin</param>
+        /// <param name="receiveWindow">Recieve Window</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        public async Task<WebCallResult<IEnumerable<BinanceInterestMarginData>>> GetInterestMarginDataAsync(string coin, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            coin?.ValidateNotNull(nameof(coin));
+
+            var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
+            if (!timestampResult)
+                return new WebCallResult<IEnumerable<BinanceInterestMarginData>>(timestampResult.ResponseStatusCode, timestampResult.ResponseHeaders, null, timestampResult.Error);
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "timestamp", _baseClient.GetTimestamp() },
+                { "coin", coin! }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceInterestMarginData>>(_baseClient.GetUrlSpot(interestMarginDataEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
         #endregion
 
         #region Get Force Liquidation Record
