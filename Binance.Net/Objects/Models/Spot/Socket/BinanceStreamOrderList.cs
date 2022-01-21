@@ -35,6 +35,11 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         [JsonProperty("L")]
         public ListOrderStatus ListOrderStatus { get; set; }
         /// <summary>
+        /// Rejection reason
+        /// </summary>
+        [JsonProperty("r")]
+        public string? ListRejectReason { get; set; }
+        /// <summary>
         /// The client id of the order list
         /// </summary>
         [JsonProperty("C")]

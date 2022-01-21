@@ -24,60 +24,7 @@ namespace Binance.Net.UnitTests.TestImplementations
             _clientFunc = getClient;
         }
 
-
         public async Task ProcessSubject<K>(
-           string folderPrefix,
-           Func<T, K> getSubject,
-           string[] parametersToSetNull = null,
-           Dictionary<string, string> useNestedJsonPropertyForCompare = null,
-           Dictionary<string, List<string>> ignoreProperties = null)
-        {
-            var methods = typeof(K).GetMethods();
-            var callResultMethods = methods.Where(m => m.Name.EndsWith("Async")).ToList();
-            var skippedMethods = new List<string>();
-
-            foreach (var method in callResultMethods)
-            {
-                var path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
-                FileStream file = null;
-                try
-                {
-                    file = File.OpenRead(Path.Combine(path, $"JsonResponses", folderPrefix, $"{method.Name}.txt"));
-                }
-                catch (FileNotFoundException)
-                {
-                    skippedMethods.Add(method.Name);
-                    continue;
-                }
-
-                var buffer = new byte[file.Length];
-                await file.ReadAsync(buffer, 0, buffer.Length);
-                file.Close();
-
-                var json = Encoding.UTF8.GetString(buffer);
-                var client = _clientFunc(json);
-
-                var parameters = method.GetParameters();
-                var input = new List<object>();
-                foreach (var parameter in parameters)
-                {
-                    if (parametersToSetNull?.Contains(parameter.Name) == true)
-                        input.Add(null);
-                    else
-                        input.Add(TestHelpers.GetTestValue(parameter.ParameterType, 1));
-                }
-
-                // act
-
-                // Get socket client
-                // Get socket
-                // Invoke socket with message of json data
-                // Check result
-
-            }
-        }
-
-        public async Task ProcessSocketSubject<K>(
            string folderPrefix,
            Func<T, K> getSubject,
            string[] parametersToSetNull = null,
@@ -126,108 +73,115 @@ namespace Binance.Net.UnitTests.TestImplementations
                 Assert.Null(result.Error, method.Name);
 
                 var resultData = result.GetType().GetProperty("Data", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance).GetValue(result);
-                var resultProperties = resultData.GetType().GetProperties().Select(p => (p, (JsonPropertyAttribute)p.GetCustomAttributes(typeof(JsonPropertyAttribute), true).SingleOrDefault()));
-                var jsonObject = JToken.Parse(json);
-                if (useNestedJsonPropertyForCompare?.ContainsKey(method.Name) == true)
-                {
-                    jsonObject = jsonObject[useNestedJsonPropertyForCompare[method.Name]];
-                }
-
-                if (resultData.GetType().GetInterfaces().Contains(typeof(IDictionary)))
-                {
-                    var dict = (IDictionary)resultData;
-                    var jObj = (JObject)jsonObject;
-                    var properties = jObj.Properties();
-                    foreach (var dictProp in properties)
-                    {
-                        if (!dict.Contains(dictProp.Name))
-                            throw new Exception($"{method}: Dictionary has no value for {dictProp.Name} while input json `{dictProp.Name}` has value {dictProp.Value}");
-
-                        if (dictProp.Value.Type == JTokenType.Object)
-                        {
-                            // TODO Some additional checking for objects
-                            foreach (var prop in ((JObject)dictProp.Value).Properties())
-                                CheckObject(method.Name, prop, dict[dictProp.Name], ignoreProperties);
-                        }
-                        else
-                        {
-                            if (dict[dictProp.Name] == default && dictProp.Value.Type != JTokenType.Null)
-                            {
-                                // Property value not correct
-                                throw new Exception($"{method}: Dictionary entry `{dictProp.Name}` has no value while input json has value {dictProp.Value}");
-                            }
-                        }
-                    }
-                }
-                else if (jsonObject.Type == JTokenType.Array)
-                {
-                    var jObjs = (JArray)jsonObject;
-                    var list = (IEnumerable)resultData;
-                    var enumerator = list.GetEnumerator();
-                    foreach (var jObj in jObjs)
-                    {
-                        enumerator.MoveNext();
-                        if (jObj.Type == JTokenType.Object)
-                        {
-                            foreach (var subProp in ((JObject)jObj).Properties())
-                            {
-                                if (ignoreProperties?.ContainsKey(method.Name) == true && ignoreProperties[method.Name].Contains(subProp.Name))
-                                    continue;
-                                CheckObject(method.Name, subProp, enumerator.Current, ignoreProperties);
-                            }
-                        }
-                        else if (jObj.Type == JTokenType.Array)
-                        {
-                            var resultObj = enumerator.Current;
-                            var resultProps = resultObj.GetType().GetProperties().Select(p => (p, p.GetCustomAttributes(typeof(ArrayPropertyAttribute), true).Cast<ArrayPropertyAttribute>().SingleOrDefault()));
-                            var arrayConverterProperty = resultObj.GetType().GetCustomAttributes(typeof(JsonConverterAttribute), true).FirstOrDefault();
-                            var jsonConverter = (arrayConverterProperty as JsonConverterAttribute).ConverterType;
-                            if (jsonConverter != typeof(ArrayConverter))
-                                // Not array converter?
-                                continue;
-
-                            int i = 0;
-                            foreach (var item in jObj.Values())
-                            {
-                                var arrayProp = resultProps.SingleOrDefault(p => p.Item2.Index == i).p;
-                                if (arrayProp != null)
-                                {
-                                    CheckPropertyValue(method.Name, item, arrayProp.GetValue(resultObj), arrayProp.Name, "Array index " + i, arrayProp, ignoreProperties);
-                                }
-                                i++;
-                            }
-                        }
-                        else
-                        {
-                            var value = enumerator.Current;
-                            if (value == default && ((JValue)jObj).Type != JTokenType.Null)
-                            {
-                                throw new Exception($"{method}: Array has no value while input json array has value {jObj}");
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    foreach (var item in jsonObject)
-                    {
-                        if (item is JProperty prop)
-                        {
-                            if (ignoreProperties?.ContainsKey(method.Name) == true && ignoreProperties[method.Name].Contains(prop.Name))
-                                continue;
-
-                            CheckObject(method.Name, prop, resultData, ignoreProperties);
-                        }
-                    }
-                }
-
-                Debug.WriteLine($"Successfully validated {method.Name}");
+                ProcessData(method.Name, resultData, json, parametersToSetNull, useNestedJsonPropertyForCompare, ignoreProperties);
             }
 
             if (skippedMethods.Any())
                 Debug.WriteLine("Skipped methods:");
             foreach(var method in skippedMethods)
                 Debug.WriteLine(method);
+        }
+
+        internal static void ProcessData(string method, object resultData, string json, string[] parametersToSetNull = null,
+           Dictionary<string, string> useNestedJsonPropertyForCompare = null,
+           Dictionary<string, List<string>> ignoreProperties = null)
+        {
+            var resultProperties = resultData.GetType().GetProperties().Select(p => (p, (JsonPropertyAttribute)p.GetCustomAttributes(typeof(JsonPropertyAttribute), true).SingleOrDefault()));
+            var jsonObject = JToken.Parse(json);
+            if (useNestedJsonPropertyForCompare?.ContainsKey(method) == true)
+            {
+                jsonObject = jsonObject[useNestedJsonPropertyForCompare[method]];
+            }
+
+            if (resultData.GetType().GetInterfaces().Contains(typeof(IDictionary)))
+            {
+                var dict = (IDictionary)resultData;
+                var jObj = (JObject)jsonObject;
+                var properties = jObj.Properties();
+                foreach (var dictProp in properties)
+                {
+                    if (!dict.Contains(dictProp.Name))
+                        throw new Exception($"{method}: Dictionary has no value for {dictProp.Name} while input json `{dictProp.Name}` has value {dictProp.Value}");
+
+                    if (dictProp.Value.Type == JTokenType.Object)
+                    {
+                        // TODO Some additional checking for objects
+                        foreach (var prop in ((JObject)dictProp.Value).Properties())
+                            CheckObject(method, prop, dict[dictProp.Name], ignoreProperties);
+                    }
+                    else
+                    {
+                        if (dict[dictProp.Name] == default && dictProp.Value.Type != JTokenType.Null)
+                        {
+                            // Property value not correct
+                            throw new Exception($"{method}: Dictionary entry `{dictProp.Name}` has no value while input json has value {dictProp.Value}");
+                        }
+                    }
+                }
+            }
+            else if (jsonObject.Type == JTokenType.Array)
+            {
+                var jObjs = (JArray)jsonObject;
+                var list = (IEnumerable)resultData;
+                var enumerator = list.GetEnumerator();
+                foreach (var jObj in jObjs)
+                {
+                    enumerator.MoveNext();
+                    if (jObj.Type == JTokenType.Object)
+                    {
+                        foreach (var subProp in ((JObject)jObj).Properties())
+                        {
+                            if (ignoreProperties?.ContainsKey(method) == true && ignoreProperties[method].Contains(subProp.Name))
+                                continue;
+                            CheckObject(method, subProp, enumerator.Current, ignoreProperties);
+                        }
+                    }
+                    else if (jObj.Type == JTokenType.Array)
+                    {
+                        var resultObj = enumerator.Current;
+                        var resultProps = resultObj.GetType().GetProperties().Select(p => (p, p.GetCustomAttributes(typeof(ArrayPropertyAttribute), true).Cast<ArrayPropertyAttribute>().SingleOrDefault()));
+                        var arrayConverterProperty = resultObj.GetType().GetCustomAttributes(typeof(JsonConverterAttribute), true).FirstOrDefault();
+                        var jsonConverter = (arrayConverterProperty as JsonConverterAttribute).ConverterType;
+                        if (jsonConverter != typeof(ArrayConverter))
+                            // Not array converter?
+                            continue;
+
+                        int i = 0;
+                        foreach (var item in jObj.Values())
+                        {
+                            var arrayProp = resultProps.SingleOrDefault(p => p.Item2.Index == i).p;
+                            if (arrayProp != null)
+                            {
+                                CheckPropertyValue(method, item, arrayProp.GetValue(resultObj), arrayProp.Name, "Array index " + i, arrayProp, ignoreProperties);
+                            }
+                            i++;
+                        }
+                    }
+                    else
+                    {
+                        var value = enumerator.Current;
+                        if (value == default && ((JValue)jObj).Type != JTokenType.Null)
+                        {
+                            throw new Exception($"{method}: Array has no value while input json array has value {jObj}");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (var item in jsonObject)
+                {
+                    if (item is JProperty prop)
+                    {
+                        if (ignoreProperties?.ContainsKey(method) == true && ignoreProperties[method].Contains(prop.Name))
+                            continue;
+
+                        CheckObject(method, prop, resultData, ignoreProperties);
+                    }
+                }
+            }
+
+            Debug.WriteLine($"Successfully validated {method}");
         }
 
         private static void CheckObject(string method, JProperty prop, object obj, Dictionary<string, List<string>> ignoreProperties)
