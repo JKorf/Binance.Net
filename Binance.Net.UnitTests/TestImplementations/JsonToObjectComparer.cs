@@ -31,6 +31,9 @@ namespace Binance.Net.UnitTests.TestImplementations
            Dictionary<string, string> useNestedJsonPropertyForCompare = null,
            Dictionary<string, List<string>> ignoreProperties = null)
         {
+            var listener = new EnumValueTraceListener();
+            Trace.Listeners.Add(listener);
+
             var methods = typeof(K).GetMethods();
             var callResultMethods = methods.Where(m => m.Name.EndsWith("Async")).ToList();
             var skippedMethods = new List<string>();
@@ -80,6 +83,8 @@ namespace Binance.Net.UnitTests.TestImplementations
                 Debug.WriteLine("Skipped methods:");
             foreach(var method in skippedMethods)
                 Debug.WriteLine(method);
+
+            Trace.Listeners.Remove(listener);
         }
 
         internal static void ProcessData(string method, object resultData, string json, string[] parametersToSetNull = null,
