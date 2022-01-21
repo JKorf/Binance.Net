@@ -1,6 +1,6 @@
 ---
 title: IBinanceSocketClientCoinFuturesStreams
-has_children: true
+has_children: false
 parent: Socket API documentation
 ---
 *[generated documentation]*  
