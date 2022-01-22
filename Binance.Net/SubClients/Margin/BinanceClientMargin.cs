@@ -30,6 +30,7 @@ namespace Binance.Net.SubClients.Margin
 
         // Margin
         private const string marginTransferEndpoint = "margin/transfer";
+
         private const string marginBorrowEndpoint = "margin/loan";
         private const string marginRepayEndpoint = "margin/repay";
         private const string getLoanEndpoint = "margin/loan";
@@ -50,14 +51,17 @@ namespace Binance.Net.SubClients.Margin
         private const string transferIsolatedMarginAccountEndpoint = "margin/isolated/transfer";
 
         private readonly BinanceClient _baseClient;
+
         /// <summary>
         /// Margin market endpoints
         /// </summary>
         public IBinanceClientMarginMarket Market { get; }
+
         /// <summary>
         /// Margin order endpoints
         /// </summary>
         public IBinanceClientMarginOrders Order { get; }
+
         /// <summary>
         /// Margin user stream endpoints
         /// </summary>
@@ -67,7 +71,7 @@ namespace Binance.Net.SubClients.Margin
         /// Isolated margin user stream endpoints
         /// </summary>
         public IBinanceClientIsolatedMarginUserStream IsolatedUserStream { get; }
-        
+
         internal BinanceClientMargin(Log log, BinanceClient baseClient)
         {
             _baseClient = baseClient;
@@ -107,12 +111,12 @@ namespace Binance.Net.SubClients.Margin
             return await _baseClient.SendRequestInternal<BinanceTransaction>(_baseClient.GetUrlSpot(marginTransferEndpoint, marginApi, marginVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
-        #endregion
+        #endregion Margin Account Transfer
 
         #region Margin Account Borrow
 
         /// <summary>
-        /// Borrow. Apply for a loan. 
+        /// Borrow. Apply for a loan.
         /// </summary>
         /// <param name="asset">The asset being borrow, e.g., BTC</param>
         /// <param name="amount">The amount to be borrow</param>
@@ -124,7 +128,7 @@ namespace Binance.Net.SubClients.Margin
         public async Task<WebCallResult<BinanceTransaction>> BorrowAsync(string asset, decimal amount, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
-            if(isIsolated == true && symbol == null)
+            if (isIsolated == true && symbol == null)
                 throw new ArgumentException("Symbol should be specified when using isolated margin");
 
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
@@ -144,7 +148,7 @@ namespace Binance.Net.SubClients.Margin
             return await _baseClient.SendRequestInternal<BinanceTransaction>(_baseClient.GetUrlSpot(marginBorrowEndpoint, marginApi, marginVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
-        #endregion
+        #endregion Margin Account Borrow
 
         #region Margin Account Repay
 
@@ -178,7 +182,7 @@ namespace Binance.Net.SubClients.Margin
             return await _baseClient.SendRequestInternal<BinanceTransaction>(_baseClient.GetUrlSpot(marginRepayEndpoint, marginApi, marginVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
-        #endregion
+        #endregion Margin Account Repay
 
         #region Get Transfer History
 
@@ -215,7 +219,7 @@ namespace Binance.Net.SubClients.Margin
             return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceTransferHistory>>(_baseClient.GetUrlSpot(transferHistoryEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
-        #endregion
+        #endregion Get Transfer History
 
         #region Query Loan Record
 
@@ -267,7 +271,7 @@ namespace Binance.Net.SubClients.Margin
             return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceLoan>>(_baseClient.GetUrlSpot(getLoanEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
-        #endregion
+        #endregion Query Loan Record
 
         #region Query Repay Record
 
@@ -319,7 +323,7 @@ namespace Binance.Net.SubClients.Margin
             return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceRepay>>(_baseClient.GetUrlSpot(getRepayEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
-        #endregion
+        #endregion Query Repay Record
 
         #region Get Interest History
 
@@ -359,7 +363,7 @@ namespace Binance.Net.SubClients.Margin
             return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceInterestHistory>>(_baseClient.GetUrlSpot(interestHistoryEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
-        #endregion
+        #endregion Get Interest History
 
         #region Get Interest Rate History
 
@@ -397,19 +401,20 @@ namespace Binance.Net.SubClients.Margin
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceInterestRateHistory>>(_baseClient.GetUrlSpot(interestRateHistoryEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
-        #endregion
+        #endregion Get Interest Rate History
 
         #region Get Interest Rate Margin Data
+
         /// <summary>
-        /// Get Interest Rate Margin Data
+        /// Get interest margin data
         /// </summary>
-        /// <param name="coin">The coin</param>
-        /// <param name="receiveWindow">Recieve Window</param>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="vipLevel">Vip level</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<BinanceInterestMarginData>>> GetInterestMarginDataAsync(string coin, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceInterestMarginData>>> GetInterestMarginDataAsync(string? asset = null, string? vipLevel = null, long? receiveWindow = null, CancellationToken ct = default)
         {
-            coin?.ValidateNotNull(nameof(coin));
+            asset?.ValidateNotNull(nameof(asset));
 
             var timestampResult = await _baseClient.CheckAutoTimestamp(ct).ConfigureAwait(false);
             if (!timestampResult)
@@ -417,16 +422,20 @@ namespace Binance.Net.SubClients.Margin
 
             var parameters = new Dictionary<string, object>
             {
-                { "timestamp", _baseClient.GetTimestamp() },
-                { "coin", coin! }
+                { "timestamp", _baseClient.GetTimestamp() }
             };
+
+            parameters.AddOptionalParameter("coin", asset);
+            parameters.AddOptionalParameter("vipLevel", vipLevel?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.DefaultReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceInterestMarginData>>(_baseClient.GetUrlSpot(interestMarginDataEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
-        #endregion
+
+        #endregion Get Interest Rate Margin Data
 
         #region Get Force Liquidation Record
+
         /// <summary>
         /// Get history of forced liquidations
         /// </summary>
@@ -459,7 +468,7 @@ namespace Binance.Net.SubClients.Margin
             return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceForcedLiquidation>>(_baseClient.GetUrlSpot(forceLiquidationHistoryEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
-        #endregion
+        #endregion Get Force Liquidation Record
 
         #region Query Margin Account Details
 
@@ -484,7 +493,7 @@ namespace Binance.Net.SubClients.Margin
             return await _baseClient.SendRequestInternal<BinanceMarginAccount>(_baseClient.GetUrlSpot(marginAccountInfoEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
-        #endregion
+        #endregion Query Margin Account Details
 
         #region Query Max Borrow
 
@@ -515,12 +524,12 @@ namespace Binance.Net.SubClients.Margin
             return await _baseClient.SendRequestInternal<BinanceMarginAmount>(_baseClient.GetUrlSpot(maxBorrowableEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
-        #endregion
+        #endregion Query Max Borrow
 
         #region Query Max Transfer-Out Amount
 
         /// <summary>
-        /// Query max transfer-out amount 
+        /// Query max transfer-out amount
         /// </summary>
         /// <param name="asset">The records asset</param>
         /// <param name="isolatedSymbol">The isolated symbol</param>
@@ -551,7 +560,7 @@ namespace Binance.Net.SubClients.Margin
             return result.As(result.Data.Amount);
         }
 
-        #endregion
+        #endregion Query Max Transfer-Out Amount
 
         /// <summary>
         /// Get history of transfer to and from the isolated margin account

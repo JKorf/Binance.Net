@@ -48,7 +48,7 @@ namespace Binance.Net.Interfaces.SubClients.Margin
         Task<WebCallResult<BinanceTransaction>> TransferAsync(string asset, decimal amount, TransferDirectionType type, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Borrow. Apply for a loan. 
+        /// Borrow. Apply for a loan.
         /// </summary>
         /// <param name="asset">The asset being borrow, e.g., BTC</param>
         /// <param name="amount">The amount to be borrow</param>
@@ -145,13 +145,14 @@ namespace Binance.Net.Interfaces.SubClients.Margin
         Task<WebCallResult<IEnumerable<BinanceInterestRateHistory>>> GetInterestRateHistoryAsync(string asset, string? vipLevel = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get interest margin data for specified coin
+        /// Get interest margin data
         /// </summary>
-        /// <param name="coin">The coin</param>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="vipLevel">Vip level</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BinanceInterestMarginData>>> GetInterestMarginDataAsync(string coin, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceInterestMarginData>>> GetInterestMarginDataAsync(string? asset = null, string? vipLevel = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get history of forced liquidations
@@ -185,7 +186,7 @@ namespace Binance.Net.Interfaces.SubClients.Margin
         Task<WebCallResult<BinanceMarginAmount>> GetMaxBorrowAmountAsync(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Query max transfer-out amount 
+        /// Query max transfer-out amount
         /// </summary>
         /// <param name="asset">The records asset</param>
         /// <param name="isolatedSymbol">The isolated symbol</param>
