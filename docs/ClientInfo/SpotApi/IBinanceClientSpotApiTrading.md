@@ -900,7 +900,7 @@ var result = await client.SpotApi.Trading.PlaceMarginOrderAsync(/* parameters */
 ```  
 
 ```csharp  
-Task<WebCallResult<BinancePlacedOrder>> PlaceMarginOrderAsync(string symbol, OrderSide side, OrderType type, decimal? quantity = default, decimal? quoteQuantity = default, string? newClientOrderId = default, decimal? price = default, TimeInForce? timeInForce = default, decimal? stopPrice = default, decimal? icebergQuantity = default, SideEffectType? sideEffectType = default, bool? isIsolated = default, OrderResponseType? orderResponseType = default, int? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BinancePlacedOrder>> PlaceMarginOrderAsync(string symbol, OrderSide side, SpotOrderType type, decimal? quantity = default, decimal? quoteQuantity = default, string? newClientOrderId = default, decimal? price = default, TimeInForce? timeInForce = default, decimal? stopPrice = default, decimal? icebergQuantity = default, SideEffectType? sideEffectType = default, bool? isIsolated = default, OrderResponseType? orderResponseType = default, int? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -975,7 +975,7 @@ var result = await client.SpotApi.Trading.PlaceOrderAsync(/* parameters */);
 ```  
 
 ```csharp  
-Task<WebCallResult<BinancePlacedOrder>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal? quantity = default, decimal? quoteQuantity = default, string? newClientOrderId = default, decimal? price = default, TimeInForce? timeInForce = default, decimal? stopPrice = default, decimal? icebergQty = default, OrderResponseType? orderResponseType = default, int? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BinancePlacedOrder>> PlaceOrderAsync(string symbol, OrderSide side, SpotOrderType type, decimal? quantity = default, decimal? quoteQuantity = default, string? newClientOrderId = default, decimal? price = default, TimeInForce? timeInForce = default, decimal? stopPrice = default, decimal? icebergQty = default, OrderResponseType? orderResponseType = default, int? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -1011,7 +1011,7 @@ var result = await client.SpotApi.Trading.PlaceTestOrderAsync(/* parameters */);
 ```  
 
 ```csharp  
-Task<WebCallResult<BinancePlacedOrder>> PlaceTestOrderAsync(string symbol, OrderSide side, OrderType type, decimal? quantity = default, decimal? quoteQuantity = default, string? newClientOrderId = default, decimal? price = default, TimeInForce? timeInForce = default, decimal? stopPrice = default, decimal? icebergQty = default, OrderResponseType? orderResponseType = default, int? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BinancePlacedOrder>> PlaceTestOrderAsync(string symbol, OrderSide side, SpotOrderType type, decimal? quantity = default, decimal? quoteQuantity = default, string? newClientOrderId = default, decimal? price = default, TimeInForce? timeInForce = default, decimal? stopPrice = default, decimal? icebergQty = default, OrderResponseType? orderResponseType = default, int? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|

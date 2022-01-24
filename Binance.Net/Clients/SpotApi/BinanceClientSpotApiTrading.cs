@@ -101,7 +101,7 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<WebCallResult<BinancePlacedOrder>> PlaceTestOrderAsync(string symbol,
             Enums.OrderSide side,
-            Enums.OrderType type,
+            SpotOrderType type,
             decimal? quantity = null,
             decimal? quoteQuantity = null,
             string? newClientOrderId = null,
@@ -139,7 +139,7 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<WebCallResult<BinancePlacedOrder>> PlaceOrderAsync(string symbol,
             Enums.OrderSide side,
-            Enums.OrderType type,
+            SpotOrderType type,
             decimal? quantity = null,
             decimal? quoteQuantity = null,
             string? newClientOrderId = null,
@@ -437,7 +437,7 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<WebCallResult<BinancePlacedOrder>> PlaceMarginOrderAsync(string symbol,
             Enums.OrderSide side,
-            Enums.OrderType type,
+            SpotOrderType type,
             decimal? quantity = null,
             decimal? quoteQuantity = null,
             string? newClientOrderId = null,

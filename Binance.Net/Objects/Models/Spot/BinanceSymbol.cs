@@ -43,8 +43,8 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Allowed order types
         /// </summary>
-        [JsonProperty(ItemConverterType = typeof(OrderTypeConverter))]
-        public IEnumerable<OrderType> OrderTypes { get; set; } = Array.Empty<OrderType>();
+        [JsonProperty(ItemConverterType = typeof(SpotOrderTypeConverter))]
+        public IEnumerable<SpotOrderType> OrderTypes { get; set; } = Array.Empty<SpotOrderType>();
         /// <summary>
         /// Ice berg orders allowed
         /// </summary>

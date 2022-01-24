@@ -292,7 +292,7 @@ namespace Binance.Net.UnitTests
                     Symbol = "test",
                     TimeInForce = TimeInForce.GoodTillCanceled,
                     TradeId = 10000000000000,
-                    Type = OrderType.Limit,
+                    Type = SpotOrderType.Limit,
                     ClientOrderId = "123",
                     IcebergQuantity = 9.9m,
                     IsWorking = true,

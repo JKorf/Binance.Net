@@ -81,7 +81,7 @@ namespace Binance.Net.Clients.SpotApi
         internal async Task<WebCallResult<BinancePlacedOrder>> PlaceOrderInternal(Uri uri,
             string symbol,
             Enums.OrderSide side,
-            Enums.OrderType type,
+            SpotOrderType type,
             decimal? quantity = null,
             decimal? quoteQuantity = null,
             string? newClientOrderId = null,
@@ -98,7 +98,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             symbol.ValidateBinanceSymbol();
 
-            if (quoteQuantity != null && type != Enums.OrderType.Market)
+            if (quoteQuantity != null && type != SpotOrderType.Market)
                 throw new ArgumentException("quoteQuantity is only valid for market orders");
 
             if (quantity == null && quoteQuantity == null || quantity != null && quoteQuantity != null)
@@ -119,7 +119,7 @@ namespace Binance.Net.Clients.SpotApi
             {
                 { "symbol", symbol },
                 { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
-                { "type", JsonConvert.SerializeObject(type, new OrderTypeConverter(false)) }
+                { "type", JsonConvert.SerializeObject(type, new SpotOrderTypeConverter(false)) }
             };
             parameters.AddOptionalParameter("quantity", quantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("quoteOrderQty", quoteQuantity?.ToString(CultureInfo.InvariantCulture));
@@ -146,7 +146,7 @@ namespace Binance.Net.Clients.SpotApi
             return new Uri(result.AppendPath(endpoint));
         }
 
-        internal async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? price, decimal? stopPrice, Enums.OrderType? type, CancellationToken ct)
+        internal async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? price, decimal? stopPrice, SpotOrderType? type, CancellationToken ct)
         {
             var outputQuantity = quantity;
             var outputPrice = price;
@@ -172,12 +172,12 @@ namespace Binance.Net.Clients.SpotApi
                         $"Trade rules check failed: {type} order type not allowed for {symbol}");
             }
 
-            if (symbolData.LotSizeFilter != null || symbolData.MarketLotSizeFilter != null && type == Enums.OrderType.Market)
+            if (symbolData.LotSizeFilter != null || symbolData.MarketLotSizeFilter != null && type == SpotOrderType.Market)
             {
                 var minQty = symbolData.LotSizeFilter?.MinQuantity;
                 var maxQty = symbolData.LotSizeFilter?.MaxQuantity;
                 var stepSize = symbolData.LotSizeFilter?.StepSize;
-                if (type == Enums.OrderType.Market && symbolData.MarketLotSizeFilter != null)
+                if (type == SpotOrderType.Market && symbolData.MarketLotSizeFilter != null)
                 {
                     minQty = symbolData.MarketLotSizeFilter.MinQuantity;
                     if (symbolData.MarketLotSizeFilter.MaxQuantity != 0)
@@ -588,13 +588,13 @@ namespace Binance.Net.Clients.SpotApi
             }));
         }
 
-        private static CryptoExchange.Net.CommonObjects.OrderType GetOrderType(Enums.OrderType orderType)
+        private static OrderType GetOrderType(SpotOrderType orderType)
         {
-            if (orderType == Enums.OrderType.Limit)
-                return CryptoExchange.Net.CommonObjects.OrderType.Limit;
-            if (orderType == Enums.OrderType.Market)
-                return CryptoExchange.Net.CommonObjects.OrderType.Market;
-            return CryptoExchange.Net.CommonObjects.OrderType.Other;
+            if (orderType == SpotOrderType.Limit)
+                return OrderType.Limit;
+            if (orderType == SpotOrderType.Market)
+                return OrderType.Market;
+            return OrderType.Other;
         }
 
         private static CryptoExchange.Net.CommonObjects.OrderStatus GetOrderStatus(Enums.OrderStatus orderStatus)
@@ -614,10 +614,10 @@ namespace Binance.Net.Clients.SpotApi
             throw new ArgumentException("Unsupported order side for Binance order: " + side);
         }
 
-        private static Enums.OrderType GetOrderType(CryptoExchange.Net.CommonObjects.OrderType type)
+        private static SpotOrderType GetOrderType(OrderType type)
         {
-            if (type == CryptoExchange.Net.CommonObjects.OrderType.Limit) return Enums.OrderType.Limit;
-            if (type == CryptoExchange.Net.CommonObjects.OrderType.Market) return Enums.OrderType.Market;
+            if (type == OrderType.Limit) return SpotOrderType.Limit;
+            if (type == OrderType.Market) return SpotOrderType.Market;
 
             throw new ArgumentException("Unsupported order type for Binance order: " + type);
         }

@@ -47,8 +47,8 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// <summary>
         /// The type of the order
         /// </summary>
-        [JsonProperty("o"), JsonConverter(typeof(OrderTypeConverter))]
-        public OrderType Type { get; set; }
+        [JsonProperty("o"), JsonConverter(typeof(FuturesOrderTypeConverter))]
+        public FuturesOrderType Type { get; set; }
         /// <summary>
         /// The timespan the order is active
         /// </summary>
@@ -152,8 +152,8 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// <summary>
         /// Original Order Type
         /// </summary>
-        [JsonProperty("ot"), JsonConverter(typeof(OrderTypeConverter))]
-        public OrderType OriginalType { get; set; }
+        [JsonProperty("ot"), JsonConverter(typeof(FuturesOrderTypeConverter))]
+        public FuturesOrderType OriginalType { get; set; }
         /// <summary>
         /// Position side
         /// </summary>

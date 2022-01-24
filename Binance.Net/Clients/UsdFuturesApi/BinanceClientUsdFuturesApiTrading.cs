@@ -53,7 +53,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         public async Task<WebCallResult<BinanceFuturesPlacedOrder>> PlaceOrderAsync(
             string symbol,
             Enums.OrderSide side,
-            Enums.OrderType type,
+            FuturesOrderType type,
             decimal? quantity,
             decimal? price = null,
             Enums.PositionSide? positionSide = null,
@@ -96,7 +96,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             {
                 { "symbol", symbol },
                 { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
-                { "type", JsonConvert.SerializeObject(type, new OrderTypeConverter(false)) }
+                { "type", JsonConvert.SerializeObject(type, new FuturesOrderTypeConverter(false)) }
             };
             parameters.AddOptionalParameter("quantity", quantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
@@ -163,7 +163,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 {
                     { "symbol", order.Symbol },
                     { "side", JsonConvert.SerializeObject(order.Side, new OrderSideConverter(false)) },
-                    { "type", JsonConvert.SerializeObject(order.Type, new OrderTypeConverter(false)) },
+                    { "type", JsonConvert.SerializeObject(order.Type, new FuturesOrderTypeConverter(false)) },
                     { "newOrderRespType", "RESULT" }
                 };
 

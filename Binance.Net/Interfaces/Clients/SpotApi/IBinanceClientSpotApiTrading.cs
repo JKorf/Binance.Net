@@ -37,7 +37,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <returns>Id's for the placed test order</returns>
         Task<WebCallResult<BinancePlacedOrder>> PlaceTestOrderAsync(string symbol,
             OrderSide side,
-            OrderType type,
+            SpotOrderType type,
             decimal? quantity = null,
             decimal? quoteQuantity = null,
             string? newClientOrderId = null,
@@ -69,7 +69,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <returns>Id's for the placed order</returns>
         Task<WebCallResult<BinancePlacedOrder>> PlaceOrderAsync(string symbol,
             OrderSide side,
-            OrderType type,
+            SpotOrderType type,
             decimal? quantity = null,
             decimal? quoteQuantity = null,
             string? newClientOrderId = null,
@@ -257,7 +257,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <returns>Id's for the placed order</returns>
         Task<WebCallResult<BinancePlacedOrder>> PlaceMarginOrderAsync(string symbol,
             OrderSide side,
-            OrderType type,
+            SpotOrderType type,
             decimal? quantity = null,
             decimal? quoteQuantity = null,
             string? newClientOrderId = null,

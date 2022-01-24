@@ -47,7 +47,7 @@ namespace Binance.Net.Objects.Models
         {
             get
             {
-                if (_price == 0 && Type == OrderType.Market && QuantityFilled != 0)
+                if (_price == 0 && Type == SpotOrderType.Market && QuantityFilled != 0)
                     return QuoteQuantityFilled / QuantityFilled;
                 return _price;
             }
@@ -89,8 +89,8 @@ namespace Binance.Net.Objects.Models
         /// <summary>
         /// The type of the order
         /// </summary>
-        [JsonConverter(typeof(OrderTypeConverter))]
-        public OrderType Type { get; set; }
+        [JsonConverter(typeof(SpotOrderTypeConverter))]
+        public SpotOrderType Type { get; set; }
         /// <summary>
         /// The side of the order
         /// </summary>

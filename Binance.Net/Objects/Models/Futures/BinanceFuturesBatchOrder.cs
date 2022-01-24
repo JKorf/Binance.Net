@@ -22,7 +22,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Order type
         /// </summary>
-        public OrderType Type { get; set; }
+        public FuturesOrderType Type { get; set; }
         /// <summary>
         /// Time in force
         /// </summary>

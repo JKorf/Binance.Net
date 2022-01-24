@@ -39,7 +39,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         Task<WebCallResult<BinanceFuturesPlacedOrder>> PlaceOrderAsync(
             string symbol,
             OrderSide side,
-            OrderType type,
+            FuturesOrderType type,
             decimal? quantity,
             decimal? price = null,
             PositionSide? positionSide = null,

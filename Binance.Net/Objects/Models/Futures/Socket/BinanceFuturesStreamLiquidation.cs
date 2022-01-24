@@ -39,8 +39,8 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// <summary>
         /// Liquidation order type
         /// </summary>
-        [JsonProperty("o"), JsonConverter(typeof(OrderTypeConverter))]
-        public OrderType Type { get; set; }
+        [JsonProperty("o"), JsonConverter(typeof(FuturesOrderTypeConverter))]
+        public FuturesOrderType Type { get; set; }
         
         /// <summary>
         /// Liquidation Time in Force

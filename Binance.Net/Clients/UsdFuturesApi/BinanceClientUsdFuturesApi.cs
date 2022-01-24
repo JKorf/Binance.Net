@@ -112,7 +112,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             return new Uri(result.AppendPath(endpoint));
         }
 
-        internal async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? price, decimal? stopPrice, Enums.OrderType type, CancellationToken ct)
+        internal async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? price, decimal? stopPrice, FuturesOrderType type, CancellationToken ct)
         {
             var outputQuantity = quantity;
             var outputPrice = price;
@@ -134,12 +134,12 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (!symbolData.OrderTypes.Contains(type))
                 return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: {type} order type not allowed for {symbol}");
 
-            if (symbolData.LotSizeFilter != null || symbolData.MarketLotSizeFilter != null && type == Enums.OrderType.Market)
+            if (symbolData.LotSizeFilter != null || symbolData.MarketLotSizeFilter != null && type == FuturesOrderType.Market)
             {
                 var minQty = symbolData.LotSizeFilter?.MinQuantity;
                 var maxQty = symbolData.LotSizeFilter?.MaxQuantity;
                 var stepSize = symbolData.LotSizeFilter?.StepSize;
-                if (type == Enums.OrderType.Market && symbolData.MarketLotSizeFilter != null)
+                if (type == FuturesOrderType.Market && symbolData.MarketLotSizeFilter != null)
                 {
                     minQty = symbolData.MarketLotSizeFilter.MinQuantity;
                     if (symbolData.MarketLotSizeFilter.MaxQuantity != 0)
@@ -552,13 +552,13 @@ namespace Binance.Net.Clients.UsdFuturesApi
             }));
         }
 
-        private static CryptoExchange.Net.CommonObjects.OrderType GetOrderType(Enums.OrderType orderType)
+        private static OrderType GetOrderType(FuturesOrderType orderType)
         {
-            if (orderType == Enums.OrderType.Limit)
-                return CryptoExchange.Net.CommonObjects.OrderType.Limit;
-            if (orderType == Enums.OrderType.Market)
-                return CryptoExchange.Net.CommonObjects.OrderType.Market;
-            return CryptoExchange.Net.CommonObjects.OrderType.Other;
+            if (orderType == FuturesOrderType.Limit)
+                return OrderType.Limit;
+            if (orderType == FuturesOrderType.Market)
+                return OrderType.Market;
+            return OrderType.Other;
         }
 
         private static CryptoExchange.Net.CommonObjects.OrderStatus GetOrderStatus(Enums.OrderStatus orderStatus)
@@ -578,10 +578,10 @@ namespace Binance.Net.Clients.UsdFuturesApi
             throw new ArgumentException("Unsupported order side for Binance order: " + side);
         }
 
-        private static Enums.OrderType GetOrderType(CryptoExchange.Net.CommonObjects.OrderType type)
+        private static FuturesOrderType GetOrderType(OrderType type)
         {
-            if (type == CryptoExchange.Net.CommonObjects.OrderType.Limit) return Enums.OrderType.Limit;
-            if (type == CryptoExchange.Net.CommonObjects.OrderType.Market) return Enums.OrderType.Market;
+            if (type == OrderType.Limit) return FuturesOrderType.Limit;
+            if (type == OrderType.Market) return FuturesOrderType.Market;
 
             throw new ArgumentException("Unsupported order type for Binance order: " + type);
         }

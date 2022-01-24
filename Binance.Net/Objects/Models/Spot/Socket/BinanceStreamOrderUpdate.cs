@@ -34,8 +34,8 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// <summary>
         /// The type of the order
         /// </summary>
-        [JsonProperty("o"), JsonConverter(typeof(OrderTypeConverter))]
-        public OrderType Type { get; set; }
+        [JsonProperty("o"), JsonConverter(typeof(SpotOrderTypeConverter))]
+        public SpotOrderType Type { get; set; }
         /// <summary>
         /// The timespan the order is active
         /// </summary>

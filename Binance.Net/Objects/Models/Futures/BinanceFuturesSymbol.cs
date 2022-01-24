@@ -62,8 +62,8 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Allowed order types
         /// </summary>
-        [JsonProperty(ItemConverterType = typeof(OrderTypeConverter))]
-        public IEnumerable<OrderType> OrderTypes { get; set; } = Array.Empty<OrderType>();
+        [JsonProperty(ItemConverterType = typeof(FuturesOrderTypeConverter))]
+        public IEnumerable<FuturesOrderType> OrderTypes { get; set; } = Array.Empty<FuturesOrderType>();
         /// <summary>
         /// The symbol
         /// </summary>

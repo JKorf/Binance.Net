@@ -129,6 +129,7 @@ Some names have been changed to a common definition. This includes where the nam
 |`Commission`|`Fee`||
 |`Amount`|`Quantity`||
 |`GoodTillCancel`|`GoodTillCanceled`|||
+|`OrderType`|`SpotOrderType`/`FuturesOrderType`|
 
 Some names have slightly changed to be consistent across different libraries  
 `balance.Free` -> `balance.Available`  

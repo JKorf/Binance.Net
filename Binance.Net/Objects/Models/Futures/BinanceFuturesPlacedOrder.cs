@@ -117,14 +117,14 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// The type of the order
         /// </summary>
-        [JsonProperty("type"), JsonConverter(typeof(OrderTypeConverter))]
-        public OrderType Type { get; set; }
+        [JsonProperty("type"), JsonConverter(typeof(FuturesOrderTypeConverter))]
+        public FuturesOrderType Type { get; set; }
 
         /// <summary>
         /// The original type of the order
         /// </summary>
-        [JsonProperty("origType"), JsonConverter(typeof(OrderTypeConverter))]
-        public OrderType OriginalType { get; set; }
+        [JsonProperty("origType"), JsonConverter(typeof(FuturesOrderTypeConverter))]
+        public FuturesOrderType OriginalType { get; set; }
 
         /// <summary>
         /// Activation price, only return with TRAILING_STOP_MARKET order

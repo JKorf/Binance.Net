@@ -79,7 +79,7 @@ var spotAccountInfo = await binanceClient.SpotApi.Account.GetAccountInfoAsync();
 var orderData = await binanceClient.SpotApi.Trading.PlaceOrderAsync(
                 "BTCUSDT",
                 OrderSide.Buy,
-                OrderType.Limit,
+                SpotOrderType.Limit,
                 0.001m,
                 50000,
                 timeInForce: TimeInForce.GoodTillCanceled);
@@ -88,14 +88,14 @@ var orderData = await binanceClient.SpotApi.Trading.PlaceOrderAsync(
 var orderData = await binanceClient.SpotApi.Trading.PlaceOrderAsync(
                 "BTCUSDT",
                 OrderSide.Buy,
-                OrderType.Market,
+                SpotOrderType.Market,
                 quoteQuantity: 50);
 										
 // Place a stop loss order, place a limit order of 0.001 BTC at 39000USDT each when the last trade price drops below 40000USDT
 var orderData = await binanceClient.SpotApi.Trading.PlaceOrderAsync(
                 "BTCUSDT",
                 OrderSide.Buy,
-                OrderType.StopLossLimit,
+                SpotOrderType.StopLossLimit,
                 0.001m,
                 39000,
                 timeInForce: TimeInForce.GoodTillCancel,
@@ -195,7 +195,7 @@ var balanceData = await binanceClient.UsdFuturesApi.Account.GetBalancesAsync();
 var orderData = await binanceClient.UsdFuturesApi.Trading.PlaceOrderAsync(
                 "BTCUSDT",
                 OrderSide.Buy,
-                OrderType.Limit,
+                FuturesOrderType.Limit,
                 0.001m,
                 50000,
                 timeInForce: TimeInForce.GoodTillCanceled);
@@ -203,17 +203,17 @@ var orderData = await binanceClient.UsdFuturesApi.Trading.PlaceOrderAsync(
 // Place a stop loss order, place a limit order of 0.001 BTC at 39000USDT each when the last trade price drops below 40000USDT
 var orderData =  await binanceClient.UsdFuturesApi.Trading.PlaceOrderAsync(
                 "BTCUSDT",
-                Binance.Net.Enums.OrderSide.Buy,
-                Binance.Net.Enums.OrderType.Stop,
+                OrderSide.Buy,
+                FuturesOrderType.Stop,
                 0.001m,
                 39000,
                 timeInForce: Binance.Net.Enums.TimeInForce.GoodTillCanceled,
                 stopPrice: 40000);
 				
 // Place a buy market order and set TakeProfit/StopLoss for the position ( result checking omitted )
-var openPositionResult = await binanceClient.UsdFuturesApi.Trading.PlaceOrderAsync("BTCUSDT", OrderSide.Buy, OrderType.Market, 0.001m);
-var stopLossResult = await binanceClient.UsdFuturesApi.Trading.PlaceOrderAsync("BTCUSDT", OrderSide.Sell, OrderType.StopMarket, quantity: null, closePosition: true, stopPrice: 40000);
-var takeProfitResult = await binanceClient.UsdFuturesApi.Trading.PlaceOrderAsync("BTCUSDT", OrderSide.Sell, OrderType.TakeProfitMarket, quantity: null, closePosition: true, stopPrice: 43000);
+var openPositionResult = await binanceClient.UsdFuturesApi.Trading.PlaceOrderAsync("BTCUSDT", OrderSide.Buy, FuturesOrderType.Market, 0.001m);
+var stopLossResult = await binanceClient.UsdFuturesApi.Trading.PlaceOrderAsync("BTCUSDT", OrderSide.Sell, FuturesOrderType.StopMarket, quantity: null, closePosition: true, stopPrice: 40000);
+var takeProfitResult = await binanceClient.UsdFuturesApi.Trading.PlaceOrderAsync("BTCUSDT", OrderSide.Sell, FuturesOrderType.TakeProfitMarket, quantity: null, closePosition: true, stopPrice: 43000);
 ```
 
 ### Requesting a specific order
@@ -313,7 +313,7 @@ var balanceData = await binanceClient.CoinFuturesApi.Account.GetBalancesAsync();
 var orderData = await binanceClient.CoinFuturesApi.Trading.PlaceOrderAsync(
                 "BTCUSD_200925",
                 OrderSide.Buy,
-                OrderType.Limit,
+                FuturesOrderType.Limit,
                 100, 
                 50000,
                 timeInForce: TimeInForce.GoodTillCanceled);

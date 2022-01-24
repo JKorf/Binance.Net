@@ -331,7 +331,7 @@ var result = await client.UsdFuturesApi.Trading.PlaceOrderAsync(/* parameters */
 ```  
 
 ```csharp  
-Task<WebCallResult<BinanceFuturesPlacedOrder>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal? quantity, decimal? price = default, PositionSide? positionSide = default, TimeInForce? timeInForce = default, bool? reduceOnly = default, string? newClientOrderId = default, decimal? stopPrice = default, decimal? activationPrice = default, decimal? callbackRate = default, WorkingType? workingType = default, bool? closePosition = default, OrderResponseType? orderResponseType = default, bool? priceProtect = default, int? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BinanceFuturesPlacedOrder>> PlaceOrderAsync(string symbol, OrderSide side, FuturesOrderType type, decimal? quantity, decimal? price = default, PositionSide? positionSide = default, TimeInForce? timeInForce = default, bool? reduceOnly = default, string? newClientOrderId = default, decimal? stopPrice = default, decimal? activationPrice = default, decimal? callbackRate = default, WorkingType? workingType = default, bool? closePosition = default, OrderResponseType? orderResponseType = default, bool? priceProtect = default, int? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
