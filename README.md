@@ -20,6 +20,10 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 8.0.0-beta2 - 24 Jan 2022
+    * Split OrderType enum in SpotOrderType and FuturesOrderType enums to prevent confusion
+    * Updated CryptoExchange.Net
+
 * Version 8.0.0-beta1 - 15 Jan 2022
     * Updated CryptoExchange.Net
 

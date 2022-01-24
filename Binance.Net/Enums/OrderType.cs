@@ -1,5 +1,8 @@
 ﻿namespace Binance.Net.Enums
 {
+    /// <summary>
+    /// Order type for a spot order
+    /// </summary>
     public enum SpotOrderType
     {
         /// <summary>
@@ -32,6 +35,9 @@
         LimitMaker
     }
 
+    /// <summary>
+    /// Order type for a futures order
+    /// </summary>
     public enum FuturesOrderType
     {
         /// <summary>
