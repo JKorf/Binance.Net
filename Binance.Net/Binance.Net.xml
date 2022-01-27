@@ -5877,7 +5877,7 @@
         </member>
         <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.BorrowAsync(System.String,System.Decimal,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
-            Borrow. Apply for a loan. 
+            Borrow. Apply for a loan.
             </summary>
             <param name="asset">The asset being borrow, e.g., BTC</param>
             <param name="amount">The amount to be borrow</param>
@@ -5972,6 +5972,16 @@
             <param name="ct">Cancellation token</param>
             <returns>List of interest rate</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetInterestMarginDataAsync(System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get interest margin data
+            </summary>
+            <param name="asset">Filter by asset</param>
+            <param name="vipLevel">Vip level</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetForceLiquidationHistoryAsync(System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get history of forced liquidations
@@ -6005,7 +6015,7 @@
         </member>
         <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetMaxTransferAmountAsync(System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Query max transfer-out amount 
+            Query max transfer-out amount
             </summary>
             <param name="asset">The records asset</param>
             <param name="isolatedSymbol">The isolated symbol</param>
@@ -13508,6 +13518,51 @@
         <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceInterestHistory.Type">
             <summary>
             Type of interest
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Spot.MarginData.BinanceInterestMarginData">
+            <summary>
+            Interest rate history
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceInterestMarginData.VipLevel">
+            <summary>
+            Vip level
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceInterestMarginData.Coin">
+            <summary>
+            The coin
+            </summary>        
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceInterestMarginData.TransferIn">
+            <summary>
+            If coin can be transferred into cross
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceInterestMarginData.Borrowable">
+            <summary>
+            If coin can be borrowed in cross
+            </summary>        
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceInterestMarginData.DailyInterest">
+            <summary>
+            The daily interest
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceInterestMarginData.YearlyInterest">
+            <summary>
+            The yearly interest
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceInterestMarginData.BorrowLimit">
+            <summary>
+            The yearly interest
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceInterestMarginData.MarginablePairs">
+            <summary>
+            Cross marginable pairs for this coin
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.MarginData.BinanceInterestRateHistory">
@@ -21117,7 +21172,7 @@
         </member>
         <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.BorrowAsync(System.String,System.Decimal,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
-            Borrow. Apply for a loan. 
+            Borrow. Apply for a loan.
             </summary>
             <param name="asset">The asset being borrow, e.g., BTC</param>
             <param name="amount">The amount to be borrow</param>
@@ -21212,6 +21267,15 @@
             <param name="ct">Cancellation token</param>
             <returns>List of interest rate</returns>
         </member>
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetInterestMarginDataAsync(System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get interest margin data
+            </summary>
+            <param name="asset">Filter by asset</param>
+            <param name="vipLevel">Vip level</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+        </member>
         <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetForceLiquidationHistoryAsync(System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get history of forced liquidations
@@ -21245,7 +21309,7 @@
         </member>
         <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetMaxTransferAmountAsync(System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Query max transfer-out amount 
+            Query max transfer-out amount
             </summary>
             <param name="asset">The records asset</param>
             <param name="isolatedSymbol">The isolated symbol</param>
