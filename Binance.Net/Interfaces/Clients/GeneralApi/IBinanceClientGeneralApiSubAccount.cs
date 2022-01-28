@@ -155,6 +155,17 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         Task<WebCallResult<BinanceSubAccountFuturesDetails>> GetSubAccountFuturesDetailsAsync(string email, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Gets futures details for a sub account
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-detail-on-sub-account-39-s-futures-account-v2-for-master-account" /></para>
+        /// </summary>
+        /// <param name="email">The email of the account to get future details for</param>
+        /// <param name="futuresType">The account type to get future details for</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Futures details</returns>
+        Task<WebCallResult<BinanceSubAccountFuturesDetailsV2>> GetSubAccountFuturesDetailsAsync(FuturesAccountType futuresType, string email, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Gets futures summary for sub accounts
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-summary-of-sub-account-39-s-futures-account-for-master-account" /></para>
         /// </summary>
@@ -162,7 +173,6 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="ct">Cancellation token</param>
         /// <returns>Futures summary</returns>
         Task<WebCallResult<BinanceSubAccountsFuturesSummary>> GetSubAccountsFuturesSummaryAsync(int? receiveWindow = null, CancellationToken ct = default);
-
         /// <summary>
         /// Gets futures position risk for a sub account
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-futures-position-risk-of-sub-account-for-master-account" /></para>
