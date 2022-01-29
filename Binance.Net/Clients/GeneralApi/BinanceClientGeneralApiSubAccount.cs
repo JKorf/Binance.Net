@@ -342,6 +342,20 @@ namespace Binance.Net.Clients.GeneralApi
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceSubAccountFuturesPositionRisk>>(_baseClient.GetUrl(subAccountFuturesPositionRiskEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 10).ConfigureAwait(false);
         }
 
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceSubAccountFuturesPositionRiskV2>> GetSubAccountsFuturesPositionRiskAsync(FuturesAccountType futuresAccountType, string email, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "email", email },
+                { "futuresType", JsonConvert.SerializeObject(futuresAccountType, new FuturesAccountTypeConverter(false)) }
+            };
+
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceSubAccountFuturesPositionRiskV2>(_baseClient.GetUrl(subAccountFuturesPositionRiskEndpoint, "sapi", "2"), HttpMethod.Get, ct, parameters, true, weight: 10).ConfigureAwait(false);
+        }
+
         #endregion
 
         #region Futures Transfer for Sub-account (For Master Account)
