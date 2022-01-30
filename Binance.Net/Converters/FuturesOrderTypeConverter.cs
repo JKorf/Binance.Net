@@ -34,7 +34,7 @@ namespace Binance.Net.Converters
 
         public override bool CanConvert(Type objectType)
         {
-            return objectType == typeof(SpotOrderType);
+            return objectType == typeof(FuturesOrderType);
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
