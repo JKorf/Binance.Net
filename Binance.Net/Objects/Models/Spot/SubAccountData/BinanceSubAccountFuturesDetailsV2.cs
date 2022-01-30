@@ -14,13 +14,13 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// Futures account response (USDT margined)
         /// </summary>
         [JsonProperty("futureAccountResp")]
-        public BinanceSubAccountFuturesDetailV2Usdt UsdtMarginedFutures { get; set; }
+        public BinanceSubAccountFuturesDetailV2Usdt UsdtMarginedFutures { get; set; } = default!;
 
         /// <summary>
         /// Delivery account response (COIN margined)
         /// </summary>
         [JsonProperty("deliveryAccountResp")]
-        public BinanceSubAccountFuturesDetailV2 CoinMarginedFutures { get; set; }
+        public BinanceSubAccountFuturesDetailV2 CoinMarginedFutures { get; set; } = default!;
     }
 
     /// <summary>

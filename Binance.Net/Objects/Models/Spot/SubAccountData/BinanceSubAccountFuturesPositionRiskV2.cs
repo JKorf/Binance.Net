@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Newtonsoft.Json;
@@ -14,13 +15,13 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// Futures account response (USDT margined)
         /// </summary>
         [JsonProperty("futurePositionRiskVos")]
-        public IEnumerable<BinanceSubAccountFuturesPositionRisk> UsdtMarginedFutures { get; set; }
+        public IEnumerable<BinanceSubAccountFuturesPositionRisk> UsdtMarginedFutures { get; set; } = Array.Empty<BinanceSubAccountFuturesPositionRisk>();
 
         /// <summary>
         /// Delivery account response (COIN margined)
         /// </summary>
         [JsonProperty("deliveryPositionRiskVos")]
-        public IEnumerable<BinanceSubAccountFuturesPositionRiskCoin> CoinMarginedFutures { get; set; }
+        public IEnumerable<BinanceSubAccountFuturesPositionRiskCoin> CoinMarginedFutures { get; set; } = Array.Empty<BinanceSubAccountFuturesPositionRiskCoin>();
     }
 
     /// <summary>
