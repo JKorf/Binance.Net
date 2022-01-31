@@ -20,6 +20,9 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 8.0.0-beta4 - 31 Jan 2022
+    * Updated CryptoExchange.Net
+
 * Version 8.0.0-beta3 - 30 Jan 2022
     * Fixed FuturesOrderType serialization
     * Added SubAccountFuturesDetails V2 and SubAccountFuturesRiskV2 endpoints
