@@ -450,7 +450,6 @@ namespace Binance.Net.Clients.GeneralApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("asset", asset);
-            parameters.AddOptionalParameter("type", type);
             parameters.AddOptionalParameter("type", type == null ? null : JsonConvert.SerializeObject(type, new SubAccountTransferSubAccountTypeConverter(false)));
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
