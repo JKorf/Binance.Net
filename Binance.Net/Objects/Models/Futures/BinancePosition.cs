@@ -77,7 +77,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// Last update time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
-        public DateTime UpdateTime { get; set; }
+        public DateTime? UpdateTime { get; set; }
     }
 
     /// <summary>
