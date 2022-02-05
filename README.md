@@ -20,6 +20,10 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 8.0.0-beta6 - 05 Feb 2022
+    * Fixed BuyerIsMaker mapping on user trade update
+    * Updated CryptoExchange.Net, adding Cancellation token support for Common interface and SymbolOrderBook
+
 * Version 8.0.0-beta5 - 02 Feb 2022
     * Changed UpdateTime on BinancePositionModel to nullable
     * Updated CryptoExchange.Net to fix deserialization error when deserializing string "0" to a non-nullable DateTime property
