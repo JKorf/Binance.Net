@@ -158,5 +158,10 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// </summary>
         [JsonProperty("I")]
         public long I { get; set; }
+        /// <summary>
+        /// Unused
+        /// </summary>
+        [JsonProperty("M")]
+        public bool M { get; set; }
     }
 }
