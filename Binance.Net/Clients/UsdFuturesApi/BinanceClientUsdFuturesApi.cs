@@ -264,12 +264,12 @@ namespace Binance.Net.Clients.UsdFuturesApi
         public string GetSymbolName(string baseAsset, string quoteAsset) =>
             (baseAsset + quoteAsset).ToUpper(CultureInfo.InvariantCulture);
 
-        async Task<WebCallResult<OrderId>> IFuturesClient.PlaceOrderAsync(string symbol, CommonOrderSide side, CommonOrderType type, decimal quantity, decimal? price, int? leverage, string? accountId)
+        async Task<WebCallResult<OrderId>> IFuturesClient.PlaceOrderAsync(string symbol, CommonOrderSide side, CommonOrderType type, decimal quantity, decimal? price, int? leverage, string? accountId, CancellationToken ct)
         {
             if (string.IsNullOrWhiteSpace(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for Binance " + nameof(IFuturesClient.PlaceOrderAsync), nameof(symbol));
 
-            var order = await Trading.PlaceOrderAsync(symbol, GetOrderSide(side), GetOrderType(type), quantity, price: price, timeInForce: type == CommonOrderType.Limit ? TimeInForce.GoodTillCanceled : (TimeInForce?)null).ConfigureAwait(false);
+            var order = await Trading.PlaceOrderAsync(symbol, GetOrderSide(side), GetOrderType(type), quantity, price: price, timeInForce: type == CommonOrderType.Limit ? TimeInForce.GoodTillCanceled : (TimeInForce?)null, ct: ct).ConfigureAwait(false);
             if (!order)
                 return order.As<OrderId>(null);
 
@@ -280,9 +280,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
             });
         }
 
-        async Task<WebCallResult<IEnumerable<Position>>> IFuturesClient.GetPositionsAsync()
+        async Task<WebCallResult<IEnumerable<Position>>> IFuturesClient.GetPositionsAsync(CancellationToken ct)
         {
-            var positions = await Account.GetPositionInformationAsync().ConfigureAwait(false);
+            var positions = await Account.GetPositionInformationAsync(ct: ct).ConfigureAwait(false);
             if (!positions)
                 return positions.As<IEnumerable<Position>>(null);
 
@@ -304,7 +304,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             ));
         }
 
-        async Task<WebCallResult<Order>> IBaseRestClient.GetOrderAsync(string orderId, string? symbol)
+        async Task<WebCallResult<Order>> IBaseRestClient.GetOrderAsync(string orderId, string? symbol, CancellationToken ct)
         {
             if (!long.TryParse(orderId, out var id))
                 throw new ArgumentException("Order id invalid", nameof(orderId));
@@ -312,7 +312,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (string.IsNullOrWhiteSpace(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for Binance " + nameof(IFuturesClient.GetOrderAsync), nameof(symbol));
 
-            var order = await Trading.GetOrderAsync(symbol!, id).ConfigureAwait(false);
+            var order = await Trading.GetOrderAsync(symbol!, id, ct: ct).ConfigureAwait(false);
             if (!order)
                 return order.As<Order>(null);
 
@@ -331,7 +331,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             });
         }
 
-        async Task<WebCallResult<IEnumerable<UserTrade>>> IBaseRestClient.GetOrderTradesAsync(string orderId, string? symbol)
+        async Task<WebCallResult<IEnumerable<UserTrade>>> IBaseRestClient.GetOrderTradesAsync(string orderId, string? symbol, CancellationToken ct)
         {
             if (!long.TryParse(orderId, out var id))
                 throw new ArgumentException("Order id invalid", nameof(orderId));
@@ -339,7 +339,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (string.IsNullOrWhiteSpace(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for Binance " + nameof(IFuturesClient.GetOrderTradesAsync), nameof(symbol));
 
-            var trades = await Trading.GetUserTradesAsync(symbol!).ConfigureAwait(false);
+            var trades = await Trading.GetUserTradesAsync(symbol!, ct: ct).ConfigureAwait(false);
             if (!trades)
                 return trades.As<IEnumerable<UserTrade>>(null);
 
@@ -358,9 +358,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 }));
         }
 
-        async Task<WebCallResult<IEnumerable<Order>>> IBaseRestClient.GetOpenOrdersAsync(string? symbol)
+        async Task<WebCallResult<IEnumerable<Order>>> IBaseRestClient.GetOpenOrdersAsync(string? symbol, CancellationToken ct)
         {
-            var orderInfo = await Trading.GetOpenOrdersAsync(symbol).ConfigureAwait(false);
+            var orderInfo = await Trading.GetOpenOrdersAsync(symbol, ct: ct).ConfigureAwait(false);
             if (!orderInfo)
                 return orderInfo.As<IEnumerable<Order>>(null);
 
@@ -380,12 +380,12 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 }));
         }
 
-        async Task<WebCallResult<IEnumerable<Order>>> IBaseRestClient.GetClosedOrdersAsync(string? symbol)
+        async Task<WebCallResult<IEnumerable<Order>>> IBaseRestClient.GetClosedOrdersAsync(string? symbol, CancellationToken ct)
         {
             if (string.IsNullOrWhiteSpace(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for Binance " + nameof(IFuturesClient.GetClosedOrdersAsync), nameof(symbol));
 
-            var orderInfo = await Trading.GetOrdersAsync(symbol!).ConfigureAwait(false);
+            var orderInfo = await Trading.GetOrdersAsync(symbol!, ct: ct).ConfigureAwait(false);
             if (!orderInfo)
                 return orderInfo.As<IEnumerable<Order>>(null);
 
@@ -405,7 +405,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 }));
         }
 
-        async Task<WebCallResult<OrderId>> IBaseRestClient.CancelOrderAsync(string orderId, string? symbol)
+        async Task<WebCallResult<OrderId>> IBaseRestClient.CancelOrderAsync(string orderId, string? symbol, CancellationToken ct)
         {
             if (!long.TryParse(orderId, out var id))
                 throw new ArgumentException("Order id invalid", nameof(orderId));
@@ -413,7 +413,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (string.IsNullOrWhiteSpace(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for Binance " + nameof(IFuturesClient.CancelOrderAsync), nameof(symbol));
 
-            var order = await Trading.CancelOrderAsync(symbol!, id).ConfigureAwait(false);
+            var order = await Trading.CancelOrderAsync(symbol!, id, ct: ct).ConfigureAwait(false);
             if (!order)
                 return order.As<OrderId>(null);
 
@@ -424,9 +424,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
             });
         }
 
-        async Task<WebCallResult<IEnumerable<Symbol>>> IBaseRestClient.GetSymbolsAsync()
+        async Task<WebCallResult<IEnumerable<Symbol>>> IBaseRestClient.GetSymbolsAsync(CancellationToken ct)
         {
-            var exchangeInfo = await ExchangeData.GetExchangeInfoAsync().ConfigureAwait(false);
+            var exchangeInfo = await ExchangeData.GetExchangeInfoAsync(ct: ct).ConfigureAwait(false);
             if (!exchangeInfo)
                 return exchangeInfo.As<IEnumerable<Symbol>>(null);
 
@@ -441,12 +441,12 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 }));
         }
 
-        async Task<WebCallResult<Ticker>> IBaseRestClient.GetTickerAsync(string symbol)
+        async Task<WebCallResult<Ticker>> IBaseRestClient.GetTickerAsync(string symbol, CancellationToken ct)
         {
             if (string.IsNullOrWhiteSpace(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for Binance " + nameof(IFuturesClient.GetTickerAsync), nameof(symbol));
 
-            var ticker = await ExchangeData.GetTickerAsync(symbol).ConfigureAwait(false);
+            var ticker = await ExchangeData.GetTickerAsync(symbol, ct: ct).ConfigureAwait(false);
             if (!ticker)
                 return ticker.As<Ticker>(null);
 
@@ -462,9 +462,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
             });
         }
 
-        async Task<WebCallResult<IEnumerable<Ticker>>> IBaseRestClient.GetTickersAsync()
+        async Task<WebCallResult<IEnumerable<Ticker>>> IBaseRestClient.GetTickersAsync(CancellationToken ct)
         {
-            var tickers = await ExchangeData.GetTickersAsync().ConfigureAwait(false);
+            var tickers = await ExchangeData.GetTickersAsync(ct: ct).ConfigureAwait(false);
             if (!tickers)
                 return tickers.As<IEnumerable<Ticker>>(null);
 
@@ -480,12 +480,12 @@ namespace Binance.Net.Clients.UsdFuturesApi
             }));
         }
 
-        async Task<WebCallResult<IEnumerable<Kline>>> IBaseRestClient.GetKlinesAsync(string symbol, TimeSpan timespan, DateTime? startTime, DateTime? endTime, int? limit)
+        async Task<WebCallResult<IEnumerable<Kline>>> IBaseRestClient.GetKlinesAsync(string symbol, TimeSpan timespan, DateTime? startTime, DateTime? endTime, int? limit, CancellationToken ct)
         {
             if (string.IsNullOrWhiteSpace(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for Binance " + nameof(IFuturesClient.GetKlinesAsync), nameof(symbol));
 
-            var klines = await ExchangeData.GetKlinesAsync(symbol, GetKlineIntervalFromTimespan(timespan), startTime, endTime, limit).ConfigureAwait(false);
+            var klines = await ExchangeData.GetKlinesAsync(symbol, GetKlineIntervalFromTimespan(timespan), startTime, endTime, limit, ct: ct).ConfigureAwait(false);
             if (!klines)
                 return klines.As<IEnumerable<Kline>>(null);
 
@@ -501,12 +501,12 @@ namespace Binance.Net.Clients.UsdFuturesApi
             }));
         }
 
-        async Task<WebCallResult<OrderBook>> IBaseRestClient.GetOrderBookAsync(string symbol)
+        async Task<WebCallResult<OrderBook>> IBaseRestClient.GetOrderBookAsync(string symbol, CancellationToken ct)
         {
             if (string.IsNullOrWhiteSpace(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for Binance " + nameof(IFuturesClient.GetOrderBookAsync), nameof(symbol));
 
-            var orderbook = await ExchangeData.GetOrderBookAsync(symbol).ConfigureAwait(false);
+            var orderbook = await ExchangeData.GetOrderBookAsync(symbol, ct: ct).ConfigureAwait(false);
             if (!orderbook)
                 return orderbook.As<OrderBook>(null);
 
@@ -518,12 +518,12 @@ namespace Binance.Net.Clients.UsdFuturesApi
             });
         }
 
-        async Task<WebCallResult<IEnumerable<Trade>>> IBaseRestClient.GetRecentTradesAsync(string symbol)
+        async Task<WebCallResult<IEnumerable<Trade>>> IBaseRestClient.GetRecentTradesAsync(string symbol, CancellationToken ct)
         {
             if (string.IsNullOrWhiteSpace(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for Binance " + nameof(IFuturesClient.GetRecentTradesAsync), nameof(symbol));
 
-            var trades = await ExchangeData.GetRecentTradesAsync(symbol).ConfigureAwait(false);
+            var trades = await ExchangeData.GetRecentTradesAsync(symbol, ct: ct).ConfigureAwait(false);
             if (!trades)
                 return trades.As<IEnumerable<Trade>>(null);
 
@@ -537,9 +537,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
             }));
         }
 
-        async Task<WebCallResult<IEnumerable<Balance>>> IBaseRestClient.GetBalancesAsync(string? accountId)
+        async Task<WebCallResult<IEnumerable<Balance>>> IBaseRestClient.GetBalancesAsync(string? accountId, CancellationToken ct)
         {
-            var balances = await Account.GetAccountInfoAsync().ConfigureAwait(false);
+            var balances = await Account.GetAccountInfoAsync(ct: ct).ConfigureAwait(false);
             if (!balances)
                 return balances.As<IEnumerable<Balance>>(null);
 

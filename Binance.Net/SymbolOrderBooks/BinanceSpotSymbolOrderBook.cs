@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using Binance.Net.Clients;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients;
@@ -41,7 +42,7 @@ namespace Binance.Net.SymbolOrderBooks
         }
 
         /// <inheritdoc />
-        protected override async Task<CallResult<UpdateSubscription>> DoStartAsync()
+        protected override async Task<CallResult<UpdateSubscription>> DoStartAsync(CancellationToken ct)
         {
             CallResult<UpdateSubscription> subResult;
             if (Levels == null)
@@ -51,6 +52,12 @@ namespace Binance.Net.SymbolOrderBooks
 
             if (!subResult)
                 return new CallResult<UpdateSubscription>(subResult.Error!);
+
+            if (ct.IsCancellationRequested)
+            {
+                await subResult.Data.CloseAsync().ConfigureAwait(false);
+                return subResult.AsError<UpdateSubscription>(new CancellationRequestedError());
+            }
 
             Status = OrderBookStatus.Syncing;
             if (Levels == null)
@@ -69,7 +76,7 @@ namespace Binance.Net.SymbolOrderBooks
             }
             else
             {
-                var setResult = await WaitForSetOrderBookAsync(10000).ConfigureAwait(false);
+                var setResult = await WaitForSetOrderBookAsync(10000, ct).ConfigureAwait(false);
                 return setResult ? subResult : new CallResult<UpdateSubscription>(setResult.Error!);
             }
 
@@ -99,10 +106,10 @@ namespace Binance.Net.SymbolOrderBooks
         }
 
         /// <inheritdoc />
-        protected override async Task<CallResult<bool>> DoResyncAsync()
+        protected override async Task<CallResult<bool>> DoResyncAsync(CancellationToken ct)
         {
             if (Levels != null)
-                return await WaitForSetOrderBookAsync(10000).ConfigureAwait(false);
+                return await WaitForSetOrderBookAsync(10000, ct).ConfigureAwait(false);
 
             var bookResult = await _restClient.SpotApi.ExchangeData.GetOrderBookAsync(Symbol, Levels ?? 5000).ConfigureAwait(false);
             if (!bookResult)
