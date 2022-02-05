@@ -308,6 +308,33 @@ Task<WebCallResult<BinanceSubAccountFuturesDetails>> GetSubAccountFuturesDetails
 
 ***
 
+## GetSubAccountFuturesDetailsAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#get-detail-on-sub-account-39-s-futures-account-v2-for-master-account](https://binance-docs.github.io/apidocs/spot/en/#get-detail-on-sub-account-39-s-futures-account-v2-for-master-account)  
+<p>
+
+*Gets futures details for a sub account*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.GeneralApi.SubAccount.GetSubAccountFuturesDetailsAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceSubAccountFuturesDetailsV2>> GetSubAccountFuturesDetailsAsync(FuturesAccountType futuresType, string email, int? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|futuresType|The account type to get future details for|
+|email|The email of the account to get future details for|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetSubAccountMarginDetailsAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#get-detail-on-sub-account-39-s-margin-account-for-master-account](https://binance-docs.github.io/apidocs/spot/en/#get-detail-on-sub-account-39-s-margin-account-for-master-account)  
@@ -381,6 +408,33 @@ Task<WebCallResult<IEnumerable<BinanceSubAccountFuturesPositionRisk>>> GetSubAcc
 
 |Parameter|Description|
 |---|---|
+|email|Email of the sub account|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetSubAccountsFuturesPositionRiskAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#get-futures-position-risk-of-sub-account-v2-for-master-account](https://binance-docs.github.io/apidocs/spot/en/#get-futures-position-risk-of-sub-account-v2-for-master-account)  
+<p>
+
+*Gets futures position risk for a sub account*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.GeneralApi.SubAccount.GetSubAccountsFuturesPositionRiskAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceSubAccountFuturesPositionRiskV2>> GetSubAccountsFuturesPositionRiskAsync(FuturesAccountType futuresType, string email, int? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|futuresType|The account type to get future details for|
 |email|Email of the sub account|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
