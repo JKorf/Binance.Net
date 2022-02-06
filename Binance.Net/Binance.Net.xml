@@ -3021,6 +3021,14 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientBase.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,Binance.Net.Enums.KlineInterval}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}})">
+            <summary>
+            Subscribes to the candlestick update stream for the provided symbols and intervals
+            </summary>
+            <param name="symbolIntervalPairs">The symbol-interval pair of the candlesticks</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientBase.SubscribeToSymbolMiniTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceMiniTick}})">
             <summary>
             Subscribes to mini ticker updates stream for a specific symbol
@@ -18018,6 +18026,14 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFuturesCoin.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,Binance.Net.Enums.KlineInterval}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}})">
+            <summary>
+            Subscribes to the candlestick update stream for the provided symbols and intervals
+            </summary>
+            <param name="symbolIntervalPairs">The symbol-interval pair of the candlesticks</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
         <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFuturesCoin.SubscribeToIndexPriceUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamIndexPrice}}})">
             <summary>
             Subscribes to the Index price update stream for a single pair
@@ -18228,6 +18244,14 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFuturesUsdt.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,Binance.Net.Enums.KlineInterval}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}})">
+            <summary>
+            Subscribes to the candlestick update stream for the provided symbols and intervals
+            </summary>
+            <param name="symbolIntervalPairs">The symbol-interval pair of the candlesticks</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
         <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFuturesUsdt.SubscribeToSymbolMiniTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceMiniTick}})">
             <summary>
             Subscribes to mini ticker updates stream for a specific symbol
@@ -18352,6 +18376,14 @@
             </summary>
             <param name="symbols">The symbols</param>
             <param name="intervals">The intervals of the candlesticks</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientSpot.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,Binance.Net.Enums.KlineInterval}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}})">
+            <summary>
+            Subscribes to the candlestick update stream for the provided symbols and intervals
+            </summary>
+            <param name="symbolIntervalPairs">The symbol-interval pair of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>

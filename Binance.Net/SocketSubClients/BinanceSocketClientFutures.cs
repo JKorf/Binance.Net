@@ -101,6 +101,9 @@ namespace Binance.Net.SocketSubClients
         public abstract Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols,
             IEnumerable<KlineInterval> intervals, Action<DataEvent<IBinanceStreamKlineData>> onMessage);
 
+        public abstract Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<KeyValuePair<string, KlineInterval>> symbolIntervalPair,
+            Action<DataEvent<IBinanceStreamKlineData>> onMessage);
+
         #endregion
 
         #region Individual Symbol Mini Ticker Stream

@@ -3,6 +3,7 @@
     <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
+    <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
@@ -29,8 +30,22 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Zaitsev'" Label="Deterministic Build">
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
   <ItemGroup Label="Deterministic Build" Condition="'$(Configuration)' == 'Release'">
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)'=='Zaitsev'" Label="Deterministic Build">
+    <PackageReference Include="Microsoft.SourceLink.GitHub">
+      <Version>1.0.0</Version>
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -47,7 +62,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="CryptoExchange.Net" Version="4.2.8" />
-    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

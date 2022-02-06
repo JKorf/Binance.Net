@@ -130,10 +130,39 @@ namespace Binance.Net.SocketSubClients
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public override async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, IEnumerable<KlineInterval> intervals, Action<DataEvent<IBinanceStreamKlineData>> onMessage)
         {
-            symbols.ValidateNotNull(nameof(symbols));
+            var symbolIntervalCombine = GetSymbolIntervalPair(symbols, intervals);
+
+            return await SubscribeToKlineUpdatesAsync(symbolIntervalCombine, onMessage).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Subscribes to the candlestick update stream for the provided symbols and intervals
+        /// </summary>
+        /// <param name="symbolIntervalPairs">The symbol-interval pair of the candlesticks</param>
+        /// <param name="onMessage">The event handler for the received data</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        public override async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<KeyValuePair<string, KlineInterval>> symbolIntervalPairs, Action<DataEvent<IBinanceStreamKlineData>> onMessage)
+        {
+            symbolIntervalPairs.ValidateNotNull(nameof(symbolIntervalPairs));
+
+            symbolIntervalPairs = symbolIntervalPairs.Distinct();
+
+            foreach (var symbolIntervalPair in symbolIntervalPairs)
+                symbolIntervalPair.Key.ValidateBinanceSymbol();
+
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamKlineData>>>(data => onMessage(data.As<IBinanceStreamKlineData>(data.Data.Data, data.Data.Data.Symbol)));
-            symbols = symbols.SelectMany(a => intervals.Select(i => a.ToLower(CultureInfo.InvariantCulture) + klineStreamEndpoint + "_" + JsonConvert.SerializeObject(i, new KlineIntervalConverter(false)))).ToArray();
+
+            var symbols = symbolIntervalPairs.Select(s => s.Key.ToLower(CultureInfo.InvariantCulture) + klineStreamEndpoint + "_" +
+                    JsonConvert.SerializeObject(s.Value, new KlineIntervalConverter(false))).ToArray();
+
             return await Subscribe(symbols, handler).ConfigureAwait(false);
+        }
+
+        private IEnumerable<KeyValuePair<string, KlineInterval>> GetSymbolIntervalPair(IEnumerable<string> symbols, IEnumerable<KlineInterval> intervals)
+        {
+            foreach (var interval in intervals)
+                foreach (var symbol in symbols)
+                    yield return new KeyValuePair<string, KlineInterval>(symbol, interval);
         }
 
         #endregion
