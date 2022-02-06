@@ -20,7 +20,7 @@ namespace Binance.Net.Objects.Spot.MarginData
         /// The executed quantity
         /// </summary>
         [JsonProperty("executedQty")]
-        public decimal ExecutedQuantity { get; set; }
+        public decimal QuantityFilled { get; set; }
         /// <summary>
         /// Order id
         /// </summary>

@@ -2567,7 +2567,7 @@
             Price
             </summary>
         </member>
-        <member name="P:Binance.Net.Interfaces.IBinanceFuturesLiquidation.LastQuantityFilled">
+        <member name="P:Binance.Net.Interfaces.IBinanceFuturesLiquidation.Quantity">
             <summary>
             Total quantity
             </summary>
@@ -3023,6 +3023,14 @@
             </summary>
             <param name="symbols">The symbols</param>
             <param name="intervals">The intervals of the candlesticks</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientBase.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,Binance.Net.Enums.KlineInterval}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}})">
+            <summary>
+            Subscribes to the candlestick update stream for the provided symbols and intervals
+            </summary>
+            <param name="symbolIntervalPairs">The symbol-interval pair of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -4164,11 +4172,12 @@
             USDT-M futures order endpoints
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtOrder.GetUserTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtOrder.GetUserTradesAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user trades for provided symbol
             </summary>
             <param name="symbol">Symbol to get trades for</param>
+            <param name="orderId">OrderId to get trades for</param>
             <param name="limit">The max number of results</param>
             <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
             <param name="startTime">Orders newer than this date will be retrieved</param>
@@ -9265,22 +9274,17 @@
             The price of the order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.CumulativeQuantity">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.QuoteQuantityFilled">
             <summary>
             Cumulative amount
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.CumulativeQuoteQuantity">
-            <summary>
-            Cumulative amount
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.ExecutedQuantity">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.QuantityFilled">
             <summary>
             The quantity of the order that is executed
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.OriginalQuantity">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesCancelOrder.Quantity">
             <summary>
             The original quantity of the order
             </summary>
@@ -9636,11 +9640,6 @@
             Cumulative amount
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.LastFilledQuantity">
-            <summary>
-            The quantity of the order that is executed
-            </summary>
-        </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.Quantity">
             <summary>
             The original quantity of the order
@@ -9751,17 +9750,12 @@
             The average price of the order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.QuantityFilled">
-            <summary>
-            Cumulative amount
-            </summary>
-        </member>
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.QuoteQuantityFilled">
             <summary>
             Cumulative amount in quote currency
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.LastFilledQuantity">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesPlacedOrder.QuantityFilled">
             <summary>
             The quantity of the order that is executed
             </summary>
@@ -10430,7 +10424,7 @@
             Price
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesLiquidation.LastQuantityFilled">
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesLiquidation.Quantity">
             <summary>
             Total quantity
             </summary>
@@ -11620,7 +11614,7 @@
             Position Side
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginPosition.PositionAmount">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginPosition.Quantity">
             <summary>
             Position Amount
             </summary>
@@ -11630,7 +11624,7 @@
             Margin type
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginPosition.IsolatedWallet">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamMarginPosition.IsolatedMargin">
             <summary>
             Isolated Wallet (if isolated position)
             </summary>
@@ -11730,17 +11724,17 @@
             The id of the order as assigned by Binance
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.QuantityOfLastFilledTrade">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.LastQuantityFilled">
             <summary>
             The quantity of the last filled trade of this order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.AccumulatedQuantityOfFilledTrades">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.QuantityFilled">
             <summary>
             The quantity of all trades that were filled for this order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.PriceLastFilledTrade">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.LastPrice">
             <summary>
             The price of the last filled trade
             </summary>
@@ -11780,12 +11774,12 @@
             Whether the buyer is the maker
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.IsReduce">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.ReduceOnly">
             <summary>
             Is this reduce only
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.StopPriceWorking">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.WorkingType">
             <summary>
             Stop price working type
             </summary>
@@ -11815,7 +11809,7 @@
             Callback Rate, only pushed with TRAILING_STOP_MARKET order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.RealizedProfit">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamOrderUpdateData.RealizedPnl">
             <summary>
             Realized profit of the trade
             </summary>
@@ -12140,6 +12134,11 @@
             The price of the order
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.AvgPrice">
+            <summary>
+            The average price the order was filled
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.Quantity">
             <summary>
             The original quantity of the order
@@ -12208,11 +12207,6 @@
         <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.QuantityRemaining">
             <summary>
             Quantity which is still open to be filled
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Shared.BinanceOrderBase.AverageFillPrice">
-            <summary>
-            The average price the order was filled
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Spot.Futures.BinanceCrossCollateralAdjustLtvHistory">
@@ -13430,7 +13424,7 @@
             Average price
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceForcedLiquidation.ExecutedQuantity">
+        <member name="P:Binance.Net.Objects.Spot.MarginData.BinanceForcedLiquidation.QuantityFilled">
             <summary>
             The executed quantity
             </summary>
@@ -18037,6 +18031,14 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFuturesCoin.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,Binance.Net.Enums.KlineInterval}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}})">
+            <summary>
+            Subscribes to the candlestick update stream for the provided symbols and intervals
+            </summary>
+            <param name="symbolIntervalPairs">The symbol-interval pair of the candlesticks</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
         <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFuturesCoin.SubscribeToIndexPriceUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamIndexPrice}}})">
             <summary>
             Subscribes to the Index price update stream for a single pair
@@ -18247,6 +18249,14 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFuturesUsdt.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,Binance.Net.Enums.KlineInterval}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}})">
+            <summary>
+            Subscribes to the candlestick update stream for the provided symbols and intervals
+            </summary>
+            <param name="symbolIntervalPairs">The symbol-interval pair of the candlesticks</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
         <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFuturesUsdt.SubscribeToSymbolMiniTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceMiniTick}})">
             <summary>
             Subscribes to mini ticker updates stream for a specific symbol
@@ -18371,6 +18381,14 @@
             </summary>
             <param name="symbols">The symbols</param>
             <param name="intervals">The intervals of the candlesticks</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientSpot.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,Binance.Net.Enums.KlineInterval}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}})">
+            <summary>
+            Subscribes to the candlestick update stream for the provided symbols and intervals
+            </summary>
+            <param name="symbolIntervalPairs">The symbol-interval pair of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -21039,11 +21057,12 @@
             Api path
             </summary>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtOrder.GetUserTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtOrder.GetUserTradesAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user trades for provided symbol
             </summary>
             <param name="symbol">Symbol to get trades for</param>
+            <param name="orderId">OrderId to get trades for</param>
             <param name="limit">The max number of results</param>
             <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
             <param name="startTime">Orders newer than this date will be retrieved</param>

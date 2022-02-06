@@ -38,20 +38,23 @@ namespace Binance.Net.Objects.Shared
         /// </summary>
         public string ClientOrderId { get; set; } = string.Empty;
 
-        private decimal _price;
-
         /// <summary>
         /// The price of the order
         /// </summary>
-        public decimal Price
+        public decimal Price { get; set; }
+
+        /// <summary>
+        /// The average price the order was filled
+        /// </summary>
+        public decimal AvgPrice
         {
             get
             {
-                if (_price == 0 && Type == OrderType.Market && QuantityFilled != 0)
-                    return QuoteQuantityFilled / QuantityFilled;
-                return _price;
+                if (QuantityFilled == 0)
+                    return 0;
+
+                return BinanceHelpers.Floor(QuoteQuantityFilled / QuantityFilled);
             }
-            set => _price = value;
         }
 
         /// <summary>
@@ -74,7 +77,6 @@ namespace Binance.Net.Objects.Shared
         /// </summary>
         [JsonProperty("origQuoteOrderQty")]
         public decimal QuoteQuantity { get; set; }
-
 
         /// <summary>
         /// The status of the order
@@ -127,19 +129,5 @@ namespace Binance.Net.Objects.Shared
         /// Quantity which is still open to be filled
         /// </summary>
         public decimal QuantityRemaining => Quantity - QuantityFilled;
-
-        /// <summary>
-        /// The average price the order was filled
-        /// </summary>
-        public decimal? AverageFillPrice
-        {
-            get
-            {
-                if (QuantityFilled == 0)
-                    return null;
-
-                return QuoteQuantityFilled / QuantityFilled;
-            }
-        }
     }
 }

@@ -16,6 +16,7 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// Gets all user trades for provided symbol
         /// </summary>
         /// <param name="symbol">Symbol to get trades for</param>
+        /// <param name="orderId">OrderId to get trades for</param>
         /// <param name="limit">The max number of results</param>
         /// <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
         /// <param name="startTime">Orders newer than this date will be retrieved</param>
@@ -23,6 +24,6 @@ namespace Binance.Net.Interfaces.SubClients.Futures
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of trades</returns>
-        Task<WebCallResult<IEnumerable<BinanceFuturesUsdtTrade>>> GetUserTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceFuturesUsdtTrade>>> GetUserTradesAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? receiveWindow = null, CancellationToken ct = default);
     }
 }
