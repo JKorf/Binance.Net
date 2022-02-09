@@ -612,5 +612,42 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<BinanceBSwapPoolLiquidity>>> GetLiquidityPoolInfoAsync(int? poolId = null, int? receiveWindow = null, CancellationToken ct = default);
 
+        /// <summary>
+        /// Get Customer to Customer trade history
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-c2c-trade-history-user_data" /></para>
+        /// </summary>
+        /// <param name="side">Trade side</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="page">The page</param>
+        /// <param name="pageSize">The page size</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BinanceC2CUserTrade>>> GetC2CTradeHistoryAsync(OrderSide side, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get pay trade history
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-pay-trade-history-user_data" /></para>
+        /// </summary>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="limit">Max amount of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BinancePayTrade>>> GetPayTradeHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get convert trade history
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-convert-trade-history-user_data" /></para>
+        /// </summary>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="limit">Max amount of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceListResult<BinanceConvertTrade>>> GetConvertTradeHistoryAsync(DateTime startTime, DateTime endTime, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
     }
 }

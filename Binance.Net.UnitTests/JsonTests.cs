@@ -68,6 +68,8 @@ namespace Binance.Net.UnitTests
                 c => c.SpotApi.Trading,
                 useNestedJsonPropertyForCompare: new Dictionary<string, string> {
 
+                    { "GetC2CTradeHistoryAsync", "data" },
+                    { "GetPayTradeHistoryAsync", "data" },
                 },
                 ignoreProperties: new Dictionary<string, List<string>>
                 {

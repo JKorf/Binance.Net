@@ -87,6 +87,16 @@ namespace Binance.Net.Clients.SpotApi
         private const string bSwapAddLiquidityPreviewEndpoint = "bswap/addLiquidityPreview ";
         private const string bSwapRemoveLiquidityPreviewEndpoint = "bswap/removeLiquidityPreview ";
 
+        // C2C
+        private const string c2cTradeHistoryEndpoint = "c2c/orderMatch/listUserOrderHistory";
+
+        // Pay
+        private const string payTradeHistoryEndpoint = "pay/transactions";
+
+        // Convert
+        private const string convertTradeHistoryEndpoint = "convert/tradeFlow";
+
+
         private readonly BinanceClientSpotApi _baseClient;
         private readonly Log _log;
 
@@ -773,7 +783,6 @@ namespace Binance.Net.Clients.SpotApi
 
         #endregion
 
-
         #region Get Leveraged tokens subscription records
 
         /// <inheritdoc />
@@ -1002,6 +1011,70 @@ namespace Binance.Net.Clients.SpotApi
         }
 
         #endregion
+
+        #endregion
+
+        #region C2C
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceC2CUserTrade>>> GetC2CTradeHistoryAsync(OrderSide side, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("tradeType", JsonConvert.SerializeObject(side, new OrderSideConverter(false)));
+            parameters.AddOptionalParameter("startTimestamp", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTimestamp", DateTimeConverter.ConvertToMilliseconds(endTime));
+            parameters.AddOptionalParameter("page", page);
+            parameters.AddOptionalParameter("rows", pageSize);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await _baseClient.SendRequestInternal<BinanceResult<IEnumerable<BinanceC2CUserTrade>>>(_baseClient.GetUrl(c2cTradeHistoryEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            if (!result.Success)
+                return result.As<IEnumerable<BinanceC2CUserTrade>>(default);
+
+            if (result.Data?.Code != 0)
+                return result.AsError<IEnumerable<BinanceC2CUserTrade>>(new ServerError(result.Data!.Code, result.Data!.Message));
+
+            return result.As(result.Data.Data);
+        }
+
+        #endregion
+
+        #region Pay
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinancePayTrade>>> GetPayTradeHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("startTimestamp", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTimestamp", DateTimeConverter.ConvertToMilliseconds(endTime));
+            parameters.AddOptionalParameter("limit", limit);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await _baseClient.SendRequestInternal<BinanceResult<IEnumerable<BinancePayTrade>>>(_baseClient.GetUrl(payTradeHistoryEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true, weight: 3000).ConfigureAwait(false);
+            if (!result.Success)
+                return result.As<IEnumerable<BinancePayTrade>>(default);
+
+            if (result.Data?.Code != 0)
+                return result.AsError<IEnumerable<BinancePayTrade>>(new ServerError(result.Data!.Code, result.Data!.Message));
+
+            return result.As(result.Data.Data);
+        }
+
+        #endregion
+
+        #region Convert
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceListResult<BinanceConvertTrade>>> GetConvertTradeHistoryAsync(DateTime startTime, DateTime endTime, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
+            parameters.AddOptionalParameter("limit", limit);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceListResult<BinanceConvertTrade>>(_baseClient.GetUrl(convertTradeHistoryEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true, weight: 3000).ConfigureAwait(false);
+        }
 
         #endregion
     }

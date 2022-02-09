@@ -40,6 +40,7 @@ namespace Binance.Net.Clients.SpotApi
         private const string enableFastWithdrawSwitchEndpoint = "account/enableFastWithdrawSwitch";
         private const string dustLogEndpoint = "asset/dribblet";
         private const string dustTransferEndpoint = "asset/dust";
+        private const string dustElligableEndpoint = "asset/dust-btc";
         private const string toggleBnbBurnEndpoint = "bnbBurn";
         private const string getBnbBurnEndpoint = "bnbBurn";
         private const string universalTransferEndpoint = "asset/transfer";
@@ -72,6 +73,9 @@ namespace Binance.Net.Clients.SpotApi
         private const string getListenKeyIsolatedEndpoint = "userDataStream/isolated";
         private const string keepListenKeyAliveIsolatedEndpoint = "userDataStream/isolated";
         private const string closeListenKeyIsolatedEndpoint = "userDataStream/isolated";
+
+        // Rebate
+        private const string rebateHistoryEndpoint = "rebate/taxQuery";
 
         private const string marginApi = "sapi";
         private const string marginVersion = "1";
@@ -384,6 +388,18 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceDustTransferResult>(_baseClient.GetUrl(dustTransferEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true, weight: 10).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Dust Elligable
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceElligableDusts>> GetAssetsForDustTransferAsync(int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceElligableDusts>(_baseClient.GetUrl(dustElligableEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true, weight: 10).ConfigureAwait(false);
         }
 
         #endregion
@@ -1021,5 +1037,27 @@ namespace Binance.Net.Clients.SpotApi
         }
         #endregion
 
+        #region Rebate
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceRebateWrapper>> GetRebateHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
+            parameters.AddOptionalParameter("page", page);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceRebateWrapper>>(_baseClient.GetUrl(rebateHistoryEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true, weight: 3000).ConfigureAwait(false);
+            if (!result.Success)
+                return result.As<BinanceRebateWrapper>(default);
+
+            if (result.Data?.Code != 0)
+                return result.AsError<BinanceRebateWrapper>(new ServerError(result.Data!.Code, result.Data!.Message));
+
+            return result.As(result.Data.Data);
+        }
+
+        #endregion
     }
 }

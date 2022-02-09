@@ -153,6 +153,14 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<BinanceDustLogList>> GetDustLogAsync(DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Get assets that can be converted to BNB
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceElligableDusts>> GetAssetsForDustTransferAsync(int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Converts dust (small amounts of) assets to BNB 
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#dust-transfer-user_data" /></para>
         /// </summary>
@@ -638,5 +646,16 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<BinanceOrderRateLimit>>> GetOrderRateLimitStatusAsync(int? receiveWindow = null, CancellationToken ct = default);
 
+        /// <summary>
+        /// Get rebate history
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-spot-rebate-history-records-user_data" /></para>
+        /// </summary>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="page">Results per page</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceRebateWrapper>> GetRebateHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default);
     }
 }

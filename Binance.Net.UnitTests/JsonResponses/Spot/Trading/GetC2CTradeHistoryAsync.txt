@@ -1,0 +1,24 @@
+{
+   "code": "000000",
+   "message": "success",
+   "data": [
+   {
+      "orderNumber":"20219644646554779648",
+      "advNo": "11218246497340923904",
+      "tradeType": "SELL",  
+      "asset": "BUSD", 
+      "fiat": "CNY",  
+      "fiatSymbol": "￥",
+      "amount": "5000.00000000",  // Quantity (in Crypto)
+      "totalPrice": "33400.00000000",
+      "unitPrice": "6.68", // Unit Price (in Fiat)
+      "orderStatus": "COMPLETED",  // PENDING, TRADING, BUYER_PAYED, DISTRIBUTING, COMPLETED, IN_APPEAL, CANCELLED, CANCELLED_BY_SYSTEM
+      "createTime": 1619361369000,
+      "commission": "0",   // Transaction Fee (in Crypto)
+      "counterPartNickName": "ab***",
+      "advertisementRole": "TAKER"        
+     }
+   ],
+   "total": 1,
+   "success": true
+}
