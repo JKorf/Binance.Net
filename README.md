@@ -20,6 +20,9 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 8.0.0-beta8 - 11 Feb 2022
+    * Fixed UniversalTransferType enum
+
 * Version 8.0.0-beta7 - 09 Feb 2022
     * Added GetAssetsForDusTransferAsync endpoint
     * Added GetConvertTradeHistoryAsync endpoint
