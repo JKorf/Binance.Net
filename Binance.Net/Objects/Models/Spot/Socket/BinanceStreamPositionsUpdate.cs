@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Binance.Net.Interfaces;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
@@ -25,7 +26,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Information about an asset balance
     /// </summary>
-    public class BinanceStreamBalance
+    public class BinanceStreamBalance: IBinanceBalance
     {
         /// <summary>
         /// The asset this balance is for

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
+using Binance.Net.Interfaces;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
@@ -68,7 +69,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Information about an asset balance
     /// </summary>
-    public class BinanceBalance
+    public class BinanceBalance : IBinanceBalance
     {
         /// <summary>
         /// The asset this balance is for
