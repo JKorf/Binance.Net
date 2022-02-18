@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Diagnostics;
-using Binance.Net.Objects.Spot.MarketData;
+using Binance.Net.Objects.Models.Spot;
 
 namespace Binance.Net.Converters
 {
@@ -88,7 +88,7 @@ namespace Binance.Net.Converters
                     };
                     break;
                 default:
-                    Debug.WriteLine("Can't parse symbol filter of type: " + obj["filterType"]);
+                    Trace.WriteLine($"{DateTime.Now:yyyy/MM/dd HH:mm:ss:fff} | Warning | Can't parse symbol filter of type: " + obj["filterType"]);
                     result = new BinanceSymbolFilter();
                     break;
             }
@@ -168,7 +168,7 @@ namespace Binance.Net.Converters
                     writer.WriteValue(pricePercentFilter.AveragePriceMinutes);
                     break;
                 default:
-                    Debug.WriteLine("Can't write symbol filter of type: " + filter.FilterType);
+                    Trace.WriteLine($"{DateTime.Now:yyyy/MM/dd HH:mm:ss:fff} | Warning | Can't write symbol filter of type: " + filter.FilterType);
                     break;
             }
 

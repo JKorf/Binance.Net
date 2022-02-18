@@ -1,0 +1,19 @@
+[
+    {
+        "poolId": 2,
+        "poolName": "BUSD/USDT",
+        "updateTime": 1565769342148,
+        "liquidity": {
+            "BUSD": 100000315.79,
+            "USDT": 99999245.54
+        },
+        "share": {
+            "shareAmount": 12415,
+            "sharePercentage": 0.00006207,
+            "asset": {
+                "BUSD": 6207.02,
+                "USDT": 6206.95
+            }
+        }
+    }
+]

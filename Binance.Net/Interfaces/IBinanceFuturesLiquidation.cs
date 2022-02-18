@@ -43,10 +43,10 @@ namespace Binance.Net.Interfaces
         /// <summary>
         /// Side
         /// </summary>
-        OrderType Type { get; set; }
+        FuturesOrderType Type { get; set; }
         /// <summary>
         /// Forced time
         /// </summary>
-        DateTime Time { get; set; }
+        DateTime Timestamp { get; set; }
     }
 }

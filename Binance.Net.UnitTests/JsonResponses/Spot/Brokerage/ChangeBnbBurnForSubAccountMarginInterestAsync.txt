@@ -1,0 +1,4 @@
+{
+    "subAccountId":1,
+    "interestBNBBurn":true
+}

@@ -18,8 +18,8 @@ namespace Binance.Net.Enums
         /// </summary>
         ExpirationRatio,
         /// <summary>
-        /// Cancelled orders ratio
+        /// Canceled orders ratio
         /// </summary>
-        CancellationRatio
+        CancelationRatio
     }
 }

@@ -1,0 +1,19 @@
+﻿{
+    "page": 1,  // current page
+    "totalRecords": 2,  // total records
+    "totalPageNum": 1,  // total pages
+    "data": [
+        {
+            "asset": "USDT",  // rebate asset
+            "type": 1,        // rebate type：1 is commission rebate，2 is referral kickback
+            "amount": "0.0001126", 
+            "updateTime": 1637651320000
+        },
+        {
+            "asset": "ETH",
+            "type": 1,
+            "amount": "0.00000056",
+            "updateTime": 1637928379000
+        }
+    ]
+}

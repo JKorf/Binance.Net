@@ -38,7 +38,7 @@
         /// Funding to margin
         /// </summary>
         FundingToMargin,
-        
+
         /// <summary>
         /// Usd futures to Main (spot)
         /// </summary>

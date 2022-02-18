@@ -1,6 +1,5 @@
 using Binance.Net;
 using Binance.Net.Interfaces;
-using Binance.Net.Objects.Spot;
 using Blazor.DataProvider;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
@@ -14,6 +13,8 @@ using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Logging;
 using Binance.Net.Objects;
 using Microsoft.Extensions.Logging;
+using Binance.Net.Clients;
+using Binance.Net.Interfaces.Clients;
 
 namespace Blazor.ServerSide
 {

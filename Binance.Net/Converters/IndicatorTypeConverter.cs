@@ -11,7 +11,7 @@ namespace Binance.Net.Converters
 
         protected override List<KeyValuePair<IndicatorType, string>> Mapping => new List<KeyValuePair<IndicatorType, string>>
         {
-            new KeyValuePair<IndicatorType, string>(IndicatorType.CancellationRatio, "GCR"),
+            new KeyValuePair<IndicatorType, string>(IndicatorType.CancelationRatio, "GCR"),
             new KeyValuePair<IndicatorType, string>(IndicatorType.UnfilledRatio, "UFR"),
             new KeyValuePair<IndicatorType, string>(IndicatorType.ExpirationRatio, "IFER")
         };

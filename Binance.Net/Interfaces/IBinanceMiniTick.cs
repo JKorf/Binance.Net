@@ -33,7 +33,7 @@
         /// <summary>
         /// Total traded volume
         /// </summary>
-        decimal BaseVolume { get; set; }
+        decimal Volume { get; set; }
 
         /// <summary>
         /// Total traded alternate asset volume

@@ -1,0 +1,22 @@
+[
+        {
+            "fromId":"1",
+            "toId":"2",
+            "asset":"BTC",
+            "qty":"1",
+            "time":1544433328000,
+            "txnId":"2966662589",
+            "clientTranId":"abc",
+            "status": "SUCCESS"  // Status Type：INIT,PROCESS,SUCCESS
+        },
+        {
+            "fromId":"1",
+            "toId":"2",
+            "asset":"ETH",
+            "qty":"2",
+            "time":1544433328000,
+            "txnId":"296666999",
+            "clientTranId":"",
+            "status": "SUCCESS"
+        }
+]

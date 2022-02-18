@@ -1,0 +1,20 @@
+[
+    {
+        "from":"aaa@test.com",
+        "to":"bbb@test.com",
+        "asset":"BTC",
+        "qty":"10",
+        "status": "SUCCESS",
+        "tranId": 6489943656,
+        "time":1544433328000
+    },
+    {
+        "from":"bbb@test.com",
+        "to":"ccc@test.com",
+        "asset":"ETH",
+        "qty":"2",
+        "status": "SUCCESS",
+        "tranId": 6489938713,
+        "time":1544433328000
+    }
+]

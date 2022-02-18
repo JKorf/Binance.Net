@@ -10,9 +10,9 @@
         /// </summary>
         Processing,
         /// <summary>
-        /// Cancelled
+        /// Canceled
         /// </summary>
-        Cancelled,
+        Canceled,
         /// <summary>
         /// Terminated
         /// </summary>

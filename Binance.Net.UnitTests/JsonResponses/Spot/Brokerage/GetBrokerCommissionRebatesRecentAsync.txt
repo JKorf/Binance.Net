@@ -1,0 +1,19 @@
+[
+        {
+            "subaccountId":"1",
+            "income": "0.02063898",
+            "asset":"BTC",
+            "symbol": "ETHBTC",
+            "tradeId": 123456,
+            "time":1544433328000
+        },
+        {
+            "subaccountId":"2",
+            "income": "1.2063898",
+            "asset":"USDT",
+            "symbol": "BTCUSDT",
+            "tradeId": 223456,
+            "time":1581580800000
+        }
+
+]

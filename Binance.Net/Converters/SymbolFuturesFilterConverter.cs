@@ -1,9 +1,9 @@
 ﻿using Binance.Net.Enums;
-using Binance.Net.Objects.Futures.MarketData;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Diagnostics;
+using Binance.Net.Objects.Models.Futures;
 
 namespace Binance.Net.Converters
 {
@@ -73,7 +73,7 @@ namespace Binance.Net.Converters
                     };
                     break;
                 default:
-                    Debug.WriteLine("Can't parse symbol filter of type: " + obj["filterType"]);
+                    Trace.WriteLine($"{DateTime.Now:yyyy/MM/dd HH:mm:ss:fff} | Warning | Can't parse symbol filter of type: " + obj["filterType"]);
                     result = new BinanceFuturesSymbolFilter();
                     break;
             }
@@ -144,7 +144,7 @@ namespace Binance.Net.Converters
                     writer.WriteValue(minNotional.MinNotional);
                     break;
                 default:
-                    Debug.WriteLine("Can't write symbol filter of type: " + filter.FilterType);
+                    Trace.WriteLine($"{DateTime.Now:yyyy/MM/dd HH:mm:ss:fff} | Warning | Can't write symbol filter of type: " + filter.FilterType);
                     break;
             }
 

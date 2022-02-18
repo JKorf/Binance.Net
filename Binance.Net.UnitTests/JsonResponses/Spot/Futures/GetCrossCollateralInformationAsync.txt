@@ -1,0 +1,12 @@
+[
+    {
+        "loanCoin": "BUSD",
+        "collateralCoin": "BTC",
+        "rate": "0.9",
+        "marginCallCollateralRate": "0.95",
+        "liquidationCollateralRate": "0.98",
+        "currentCollateralRate": "0.87168984",
+        "interestRate": "0.0", // New for interest collection
+        "interestGracePeriod": "0" //Days, new for interest collection
+    }
+]

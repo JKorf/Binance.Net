@@ -1,0 +1,14 @@
+[
+    {
+        "pair": "BTCUSD",
+        "brackets": [
+            {
+                "bracket": 1,   // bracket level
+                "initialLeverage": 125,  // the maximum leverage
+                "qtyCap": 50,  // upper edge of base asset quantity
+                "qtylFloor": 0,  // lower edge of base asset quantity
+                "maintMarginRatio": 0.004 // maintenance margin rate
+            },
+        ]
+    }
+]

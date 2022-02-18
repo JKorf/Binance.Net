@@ -1,0 +1,5 @@
+{
+    "subaccountId": "1",
+    "enableMargin": true,
+    "updateTime": 1570801523523
+}

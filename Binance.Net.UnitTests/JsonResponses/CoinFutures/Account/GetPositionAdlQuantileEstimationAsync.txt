@@ -1,0 +1,22 @@
+[
+    {
+        "symbol": "BTCUSD_200925", 
+        "adlQuantile": 
+            {
+                // if the positions of the symbol are crossed margined in Hedge Mode, "LONG" and "SHORT" will be returned a same quantile value, and "HEDGE" will be returned instead of "BOTH".
+                "LONG": 3,  
+                "SHORT": 3, 
+                "HEDGE": 0   // only a sign, ignore the value
+            }
+        },
+    {
+        "symbol": "BTCUSD_201225", 
+        "adlQuantile": 
+            {
+                // for positions of the symbol are in One-way Mode or isolated margined in Hedge Mode
+                "LONG": 1,      // adl quantile for "LONG" position in hedge mode
+                "SHORT": 2,     // adl qauntile for "SHORT" position in hedge mode
+                "BOTH": 0       // adl qunatile for position in one-way mode
+            }
+    }
+ ]

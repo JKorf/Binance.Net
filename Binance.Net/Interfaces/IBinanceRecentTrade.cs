@@ -1,12 +1,11 @@
 ﻿using System;
-using CryptoExchange.Net.ExchangeInterfaces;
 
 namespace Binance.Net.Interfaces
 {
     /// <summary>
     /// Recent trade data
     /// </summary>
-    public interface IBinanceRecentTrade: ICommonRecentTrade
+    public interface IBinanceRecentTrade
     {
         /// <summary>
         /// The id of the trade

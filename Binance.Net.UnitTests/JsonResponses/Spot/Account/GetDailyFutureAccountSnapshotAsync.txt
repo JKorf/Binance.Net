@@ -1,0 +1,28 @@
+{
+   "code":200, // 200 for success; others are error codes
+   "msg":"", // error message
+   "snapshotVos":[
+      {
+         "data":{
+            "assets":[
+               {
+                  "asset":"USDT",
+                  "marginBalance":"118.99782335",
+                  "walletBalance":"120.23811389"
+               }
+            ],
+            "position":[
+               {
+                  "entryPrice":"7130.41000000",
+                  "markPrice":"7257.66239673",
+                  "positionAmt":"0.01000000",
+                  "symbol":"BTCUSDT",
+                  "unRealizedProfit":"1.24029054"  // Only show the value at the time of opening the position
+               }
+            ]
+         },
+         "type":"futures",
+         "updateTime":1576281599000
+      }
+   ]
+}

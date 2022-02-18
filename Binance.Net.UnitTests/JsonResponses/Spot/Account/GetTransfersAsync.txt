@@ -1,0 +1,21 @@
+{
+    "total":2,
+    "rows":[
+        {
+            "asset":"USDT",
+            "amount":"1",
+            "type":"MAIN_UMFUTURE",
+            "status": "CONFIRMED",
+            "tranId": 11415955596,
+            "timestamp":1544433328000
+        },
+        {
+            "asset":"USDT",
+            "amount":"2",
+            "type":"MAIN_UMFUTURE",
+            "status": "CONFIRMED",
+            "tranId": 11366865406,
+            "timestamp":1544433328000
+        }
+    ]
+}

@@ -22,8 +22,8 @@
         /// </summary>
         Leveraged,
         /// <summary>
-        /// See https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#enum-definitions
+        /// 
         /// </summary>
-        TRD_GRP_002
+        TradeGroup002
     }
 }

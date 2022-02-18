@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Binance.Net.Clients;
+using Binance.Net.Interfaces.Clients;
+using Binance.Net.Objects;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -99,6 +103,36 @@ namespace Binance.Net
         }
 
         /// <summary>
+        /// Add the IBinanceClient and IBinanceSocketClient to the sevice collection so they can be injected
+        /// </summary>
+        /// <param name="services">The service collection</param>
+        /// <param name="defaultOptionsCallback">Set default options for the client</param>
+        /// <param name="socketClientLifeTime">The lifetime of the IBinanceSocketClient for the service collection. Defaults to Scoped.</param>
+        /// <returns></returns>
+        public static IServiceCollection AddBinance(
+            this IServiceCollection services, 
+            Action<BinanceClientOptions, BinanceSocketClientOptions>? defaultOptionsCallback = null,
+            ServiceLifetime? socketClientLifeTime = null)
+        {
+            if (defaultOptionsCallback != null)
+            {
+                var options = new BinanceClientOptions();
+                var socketOptions = new BinanceSocketClientOptions();
+                defaultOptionsCallback?.Invoke(options, socketOptions);
+
+                BinanceClient.SetDefaultOptions(options);
+                BinanceSocketClient.SetDefaultOptions(socketOptions);
+            }
+
+            services.AddTransient<IBinanceClient, BinanceClient>();
+            if (socketClientLifeTime == null)
+                services.AddScoped<IBinanceSocketClient, BinanceSocketClient>();
+            else
+                services.Add(new ServiceDescriptor(typeof(IBinanceSocketClient), typeof(BinanceSocketClient), socketClientLifeTime.Value));
+            return services;
+        }
+
+        /// <summary>
         /// Validate the string is a valid Binance symbol.
         /// </summary>
         /// <param name="symbolString">string to validate</param>
@@ -108,7 +142,7 @@ namespace Binance.Net
                 throw new ArgumentException("Symbol is not provided");
 
             if(!Regex.IsMatch(symbolString, "^([A-Z|a-z|0-9]{5,})$"))
-                throw new ArgumentException($"{symbolString} is not a valid Binance symbol. Should be [BaseCurrency][QuoteCurrency], e.g. BTCUSDT");
+                throw new ArgumentException($"{symbolString} is not a valid Binance symbol. Should be [BaseAsset][QuoteAsset], e.g. BTCUSDT");
         }
     }
 }

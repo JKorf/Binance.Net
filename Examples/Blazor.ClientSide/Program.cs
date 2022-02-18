@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Text;
 using Binance.Net;
 using Binance.Net.Interfaces;
-using Binance.Net.Objects.Spot;
 using Blazor.DataProvider;
 using CryptoExchange.Net.Logging;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -13,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Binance.Net.Objects;
+using Binance.Net.Interfaces.Clients;
+using Binance.Net.Clients;
 
 namespace Blazor.ClientSide
 {

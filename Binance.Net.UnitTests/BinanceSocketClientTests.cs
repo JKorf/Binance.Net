@@ -3,12 +3,11 @@ using System.Linq;
 using Binance.Net.Objects;
 using Binance.Net.UnitTests.TestImplementations;
 using NUnit.Framework;
-using Binance.Net.Objects.Spot.UserStream;
-using Binance.Net.Objects.Spot.MarketStream;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces;
-using Binance.Net.Objects.Spot;
 using System.Threading.Tasks;
+using Binance.Net.Objects.Models;
+using Binance.Net.Objects.Models.Spot.Socket;
 using Microsoft.Extensions.Logging;
 
 namespace Binance.Net.UnitTests
@@ -24,7 +23,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateSocketClient(socket);
 
             IBinanceStreamKlineData result = null;
-            client.Spot.SubscribeToKlineUpdatesAsync("ETHBTC", KlineInterval.OneMinute, (test) => result = test.Data);
+            client.SpotStreams.SubscribeToKlineUpdatesAsync("ETHBTC", KlineInterval.OneMinute, (test) => result = test.Data);
 
             var data = new BinanceCombinedStream<BinanceStreamKlineData>()
             {
@@ -37,21 +36,21 @@ namespace Binance.Net.UnitTests
                     Data = new BinanceStreamKline()
                     {
                         TakerBuyBaseVolume = 0.1m,
-                        Close = 0.2m,
+                        ClosePrice = 0.2m,
                         CloseTime = new DateTime(2017, 1, 2),
                         Final = true,
                         FirstTrade = 10000000000,
-                        High = 0.3m,
+                        HighPrice = 0.3m,
                         Interval = KlineInterval.OneMinute,
                         LastTrade = 2000000000000,
-                        Low = 0.4m,
-                        Open = 0.5m,
+                        LowPrice = 0.4m,
+                        OpenPrice = 0.5m,
                         TakerBuyQuoteVolume = 0.6m,
                         QuoteVolume = 0.7m,
                         OpenTime = new DateTime(2017, 1, 1),
                         Symbol = "test",
                         TradeCount = 10,
-                        BaseVolume = 0.8m
+                        Volume = 0.8m
                     }
                 }
             };
@@ -76,7 +75,7 @@ namespace Binance.Net.UnitTests
             });
 
             IBinanceTick result = null;
-            await client.Spot.SubscribeToSymbolTickerUpdatesAsync("ETHBTC", (test) => result = test.Data);
+            await client.SpotStreams.SubscribeToTickerUpdatesAsync("ETHBTC", (test) => result = test.Data);
 
             var data = new BinanceCombinedStream<BinanceStreamTick>()
             {
@@ -90,7 +89,7 @@ namespace Binance.Net.UnitTests
                     PrevDayClosePrice = 1.0m,
                     PriceChange = 1.1m,
                     Symbol = "test",
-                    BaseVolume = 1.3m,
+                    Volume = 1.3m,
                     QuoteVolume = 1.4m,
                     TotalTrades = 3
                 }
@@ -112,7 +111,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateSocketClient(socket);
 
             IBinanceTick[] result = null;
-            await client.Spot.SubscribeToAllSymbolTickerUpdatesAsync((test) => result = test.Data.ToArray());
+            await client.SpotStreams.SubscribeToAllTickerUpdatesAsync((test) => result = test.Data.ToArray());
 
             var data = new BinanceCombinedStream<BinanceStreamTick[]>
             {
@@ -128,7 +127,7 @@ namespace Binance.Net.UnitTests
                         PrevDayClosePrice = 1.0m,
                         PriceChange = 1.1m,
                         Symbol = "test",
-                        BaseVolume = 1.3m,
+                        Volume = 1.3m,
                         QuoteVolume = 1.4m,
                         TotalTrades = 3
                     }
@@ -152,7 +151,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateSocketClient(socket);
 
             BinanceStreamTrade result = null;
-            await client.Spot.SubscribeToTradeUpdatesAsync("ETHBTC", (test) => result = test.Data);
+            await client.SpotStreams.SubscribeToTradeUpdatesAsync("ETHBTC", (test) => result = test.Data);
 
             var data = new BinanceCombinedStream<BinanceStreamTrade>()
             {
@@ -187,7 +186,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateSocketClient(socket);
 
             BinanceStreamBalanceUpdate result = null;
-            await client.Spot.SubscribeToUserDataUpdatesAsync("test", null, null, null, (test) => result = test.Data);
+            await client.SpotStreams.SubscribeToUserDataUpdatesAsync("test", null, null, null, (test) => result = test.Data);
 
             var data = new BinanceCombinedStream<BinanceStreamBalanceUpdate>
             {
@@ -218,7 +217,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateSocketClient(socket, new BinanceSocketClientOptions(){ LogLevel = LogLevel.Debug });
 
             BinanceStreamOrderList result = null;
-            client.Spot.SubscribeToUserDataUpdatesAsync("test", null, (test) => result = test.Data, null, null);
+            client.SpotStreams.SubscribeToUserDataUpdatesAsync("test", null, (test) => result = test.Data, null, null);
 
             var data = new BinanceCombinedStream<BinanceStreamOrderList>
             {
@@ -231,7 +230,7 @@ namespace Binance.Net.UnitTests
                     ContingencyType = "OCO",
                     ListStatusType = ListStatusType.Done,
                     ListOrderStatus = ListOrderStatus.Done,
-                    OrderListId = 1,
+                    Id = 1,
                     ListClientOrderId = "2",
                     TransactionTime = new DateTime(2018, 1, 1),
                     Orders = new[]
@@ -270,7 +269,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateSocketClient(socket);
 
             BinanceStreamOrderUpdate result = null;
-            client.Spot.SubscribeToUserDataUpdatesAsync("test", (test) => result = test.Data, null, null, null);
+            client.SpotStreams.SubscribeToUserDataUpdatesAsync("test", (test) => result = test.Data, null, null, null);
 
             var data = new BinanceCombinedStream<BinanceStreamOrderUpdate>
             {
@@ -280,20 +279,20 @@ namespace Binance.Net.UnitTests
                     Event = "executionReport",
                     EventTime = new DateTime(2017, 1, 1),
                     BuyerIsMaker = true,
-                    Commission = 2.2m,
-                    CommissionAsset = "test",
+                    Fee = 2.2m,
+                    FeeAsset = "test",
                     ExecutionType = ExecutionType.Trade,
                     I = 100000000000,
-                    OrderId = 100000000000,
+                    Id = 100000000000,
                     Price = 6.6m,
                     Quantity = 8.8m,
                     RejectReason = OrderRejectReason.AccountCannotSettle,
                     Side = OrderSide.Buy,
                     Status = OrderStatus.Filled,
                     Symbol = "test",
-                    TimeInForce = TimeInForce.GoodTillCancel,
+                    TimeInForce = TimeInForce.GoodTillCanceled,
                     TradeId = 10000000000000,
-                    Type = OrderType.Limit,
+                    Type = SpotOrderType.Limit,
                     ClientOrderId = "123",
                     IcebergQuantity = 9.9m,
                     IsWorking = true,

@@ -24,23 +24,19 @@
         if (callResult)
             _ticks = callResult.Data;
 
-        // IMPORTANT
-        // Webassembly does not support the current implementation of websocket connection
-        // To use websocket updates, see Blazor.ServerSide
-
-        //var subResult = await _dataProvider.SubscribeTickerUpdates(HandleTickUpdates);
-        //if (subResult)
-        //    _subscription = subResult.Data;
+        var subResult = await _dataProvider.SubscribeTickerUpdates(HandleTickUpdates);
+        if (subResult)
+            _subscription = subResult.Data;
     }
 
-    //private void HandleTickUpdates(DataEvent<IEnumerable<IBinanceTick>> update)
-    //{
-    //    foreach (var tick in update.Data)
-    //    {
-    //        var symbol = _ticks.Single(t => t.Symbol == tick.Symbol);
-    //        symbol.PriceChangePercent = tick.PriceChangePercent;
-    //    }
+    private void HandleTickUpdates(DataEvent<IEnumerable<IBinanceTick>> update)
+    {
+        foreach (var tick in update.Data)
+        {
+            var symbol = _ticks.Single(t => t.Symbol == tick.Symbol);
+            symbol.PriceChangePercent = tick.PriceChangePercent;
+        }
 
-    //    InvokeAsync(StateHasChanged);
-    //}
+        InvokeAsync(StateHasChanged);
+    }
 }

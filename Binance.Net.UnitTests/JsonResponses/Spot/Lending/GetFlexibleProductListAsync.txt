@@ -1,0 +1,30 @@
+[
+    {
+        "asset": "BTC",
+        "avgAnnualInterestRate": "0.00250025",
+        "canPurchase": true,
+        "canRedeem": true,
+        "dailyInterestPerThousand": "0.00685000",
+        "featured": true,
+        "minPurchaseAmount": "0.01000000",
+        "productId": "BTC001",
+        "purchasedAmount": "16.32467016",
+        "status": "PURCHASING",
+        "upLimit": "200.00000000",
+        "upLimitPerUser": "5.00000000"
+    },
+    {
+        "asset": "BUSD",
+        "avgAnnualInterestRate": "0.01228590",
+        "canPurchase": true,
+        "canRedeem": true,
+        "dailyInterestPerThousand": "0.03836000",
+        "featured": true,
+        "minPurchaseAmount": "0.10000000",
+        "productId": "BUSD001",
+        "purchasedAmount": "10.38932339",
+        "status": "PURCHASING",
+        "upLimit": "100000.00000000",
+        "upLimitPerUser": "50000.00000000"
+    }
+]

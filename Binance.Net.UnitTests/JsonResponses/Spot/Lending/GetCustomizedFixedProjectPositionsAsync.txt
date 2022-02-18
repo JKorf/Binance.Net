@@ -1,0 +1,21 @@
+[
+    {
+        "asset": "USDT",
+        "canTransfer": true,
+        "createTimestamp": 1587010770000,
+        "duration": 14,
+        "endTime": 1588291200000,
+        "interest": "0.19950000",
+        "interestRate": "0.05201250",
+        "lot": 1,
+        "positionId": 51724,
+        "principal": "100.00000000",
+        "projectId": "CUSDT14DAYSS001",
+        "projectName": "USDT",
+        "purchaseTime": 1587010771000,
+        "redeemDate": "2020-05-01",
+        "startTime": 1587081600000,
+        "status": "HOLDING",
+        "type": "CUSTOMIZED_FIXED"
+    }
+]

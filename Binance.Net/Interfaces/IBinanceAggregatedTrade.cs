@@ -10,7 +10,7 @@ namespace Binance.Net.Interfaces
         /// <summary>
         /// The id of this aggregation
         /// </summary>
-        long AggregateTradeId { get; set; }
+        long Id { get; set; }
         /// <summary>
         /// The price of trades in this aggregation
         /// </summary>

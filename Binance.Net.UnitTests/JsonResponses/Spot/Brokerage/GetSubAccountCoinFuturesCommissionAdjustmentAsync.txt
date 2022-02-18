@@ -1,0 +1,18 @@
+[
+    {   
+        "subAccountId": 1,
+        "pair": "BTCUSD",
+        "makerAdjustment": 150,  // COIN-Ⓜ futures commission adjustment for maker
+        "takerAdjustment": 150,  // COIN-Ⓜ futures commission adjustment for taker
+        "makerCommission": 450,  // COIN-Ⓜ futures commission (after adjusted) for maker
+        "takerCommission": 550,  // COIN-Ⓜ futures commission (after adjusted) for taker
+    },
+    {   
+        "subAccountId": 1,
+        "pair": "ETHUSD",
+        "makerAdjustment": 100,
+        "takerAdjustment": 100,
+        "makerCommission": 400,
+        "takerCommission": 500,
+    },
+]

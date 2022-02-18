@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Binance.Net.Interfaces;
+using Binance.Net.Interfaces.Clients;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 
@@ -20,12 +21,12 @@ namespace Blazor.DataProvider
 
         public Task<WebCallResult<IEnumerable<IBinanceTick>>> Get24HPrices()
         {
-            return _client.Spot.Market.GetTickersAsync();
+            return _client.SpotApi.ExchangeData.GetTickersAsync();
         }
 
         public Task<CallResult<UpdateSubscription>> SubscribeTickerUpdates(Action<DataEvent<IEnumerable<IBinanceTick>>> tickHandler)
         {
-            return _socketClient.Spot.SubscribeToAllSymbolTickerUpdatesAsync(tickHandler);
+            return _socketClient.SpotStreams.SubscribeToAllTickerUpdatesAsync(tickHandler);
         }
 
         public async Task Unsubscribe(UpdateSubscription subscription)

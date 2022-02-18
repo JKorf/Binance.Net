@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Asp.Net.Models;
 using Binance.Net.Interfaces;
+using Binance.Net.Interfaces.Clients;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 

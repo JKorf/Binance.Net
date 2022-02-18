@@ -1,5 +1,7 @@
 using Binance.Net;
+using Binance.Net.Clients;
 using Binance.Net.Interfaces;
+using Binance.Net.Interfaces.Clients;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

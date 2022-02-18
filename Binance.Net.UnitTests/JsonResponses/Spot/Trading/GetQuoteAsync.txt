@@ -1,0 +1,9 @@
+{
+    "quoteAsset": "USDT",
+    "baseAsset": "BUSD",
+    "quoteQty": 300000,
+    "baseQty": 299975,
+    "price": 1.00008334,
+    "slippage": 0.00007245,
+    "fee": 120
+}

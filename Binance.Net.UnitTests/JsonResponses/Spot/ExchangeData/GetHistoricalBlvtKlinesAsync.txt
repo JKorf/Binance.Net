@@ -1,0 +1,16 @@
+[
+    [
+        1598371200000,      // Open time
+        "5.88275270",       // Open NAV price
+        "6.03142087",       // Highest NAV price
+        "5.85749741",       // Lowest NAV price
+        "5.99403551",       // Close (or the latest) NAV price
+        "2.28602984",       // Real leverage
+        1598374799999,      // Close time
+        "0",                // Ignore
+        6209,               // Number of NAV update
+        "14517.64507907",   // Ignore
+        "0",                // Ignore
+        "0"                 // Ignore
+    ]
+]

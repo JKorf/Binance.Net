@@ -1,0 +1,30 @@
+{
+  "code": 0,
+  "msg": "",
+  "data": {
+    "configDetails": [
+      {
+        "configId": 168,     // Mining ID
+        "poolUsername": "123",  //Transfer out of subaccount
+        "toPoolUsername": "user1", //  Transfer into subaccount
+        "algoName": "Ethash",     // Transfer algorithm
+        "hashRate": 5000000,     //  Transferred Hashrate quantity
+        "startDay": 20201210,   // Start date
+        "endDay": 20210405,   //End date
+        "status": 1       //Status：0 Processing，1：Cancelled，2：Terminated 
+      },
+      {
+        "configId": 166,
+        "poolUsername": "pop",
+        "toPoolUsername": "111111",
+        "algoName": "Ethash",
+        "hashRate": 3320000,
+        "startDay": 20201226,
+        "endDay": 20201227,
+        "status": 0
+      }
+    ],
+    "totalNum": 21,
+    "pageSize": 200
+  }
+}
