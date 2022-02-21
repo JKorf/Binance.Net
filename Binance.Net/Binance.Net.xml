@@ -2768,91 +2768,6 @@
             Counterparty Liquidation
             </summary>
         </member>
-        <member name="T:Binance.Net.Enums.SpotOrderType">
-            <summary>
-            Order type for a spot order
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.SpotOrderType.Limit">
-            <summary>
-            Limit orders will be placed at a specific price. If the price isn't available in the order book for that asset the order will be added in the order book for someone to fill.
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.SpotOrderType.Market">
-            <summary>
-            Market order will be placed without a price. The order will be executed at the best price available at that time in the order book.
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.SpotOrderType.StopLoss">
-            <summary>
-            Stop loss order. Will execute a market order when the price drops below a price to sell and therefor limit the loss
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.SpotOrderType.StopLossLimit">
-            <summary>
-            Stop loss order. Will execute a limit order when the price drops below a price to sell and therefor limit the loss
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.SpotOrderType.TakeProfit">
-            <summary>
-            Take profit order. Will execute a market order when the price rises above a price to sell and therefor take a profit
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.SpotOrderType.TakeProfitLimit">
-            <summary>
-            Take profit limit order. Will execute a limit order when the price rises above a price to sell and therefor take a profit
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.SpotOrderType.LimitMaker">
-            <summary>
-            Same as a limit order, however it will fail if the order would immediately match, therefor preventing taker orders
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Enums.FuturesOrderType">
-            <summary>
-            Order type for a futures order
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.FuturesOrderType.Limit">
-            <summary>
-            Limit orders will be placed at a specific price. If the price isn't available in the order book for that asset the order will be added in the order book for someone to fill.
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.FuturesOrderType.Market">
-            <summary>
-            Market order will be placed without a price. The order will be executed at the best price available at that time in the order book.
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.FuturesOrderType.Stop">
-            <summary>
-            Stop order. Execute a limit order when price reaches a specific Stop price
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.FuturesOrderType.StopMarket">
-            <summary>
-            Stop market order. Execute a market order when price reaches a specific Stop price
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.FuturesOrderType.TakeProfit">
-            <summary>
-            Take profit order. Will execute a limit order when the price rises above a price to sell and therefor take a profit
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.FuturesOrderType.TakeProfitMarket">
-            <summary>
-            Take profit market order. Will execute a market order when the price rises above a price to sell and therefor take a profit
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.FuturesOrderType.TrailingStopMarket">
-            <summary>
-            A trailing stop order will execute an order when the price drops below a certain percentage from its all time high since the order was activated
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.FuturesOrderType.Liquidation">
-            <summary>
-            A liquidation order
-            </summary>
-        </member>
         <member name="T:Binance.Net.Enums.PayOrderType">
             <summary>
             Pay order type
@@ -3121,6 +3036,91 @@
         <member name="F:Binance.Net.Enums.SideEffectType.AutoRepay">
             <summary>
             Make auto repayment after order is filled
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.SpotOrderType">
+            <summary>
+            Order type for a spot order
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SpotOrderType.Limit">
+            <summary>
+            Limit orders will be placed at a specific price. If the price isn't available in the order book for that asset the order will be added in the order book for someone to fill.
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SpotOrderType.Market">
+            <summary>
+            Market order will be placed without a price. The order will be executed at the best price available at that time in the order book.
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SpotOrderType.StopLoss">
+            <summary>
+            Stop loss order. Will execute a market order when the price drops below a price to sell and therefor limit the loss
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SpotOrderType.StopLossLimit">
+            <summary>
+            Stop loss order. Will execute a limit order when the price drops below a price to sell and therefor limit the loss
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SpotOrderType.TakeProfit">
+            <summary>
+            Take profit order. Will execute a market order when the price rises above a price to sell and therefor take a profit
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SpotOrderType.TakeProfitLimit">
+            <summary>
+            Take profit limit order. Will execute a limit order when the price rises above a price to sell and therefor take a profit
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SpotOrderType.LimitMaker">
+            <summary>
+            Same as a limit order, however it will fail if the order would immediately match, therefor preventing taker orders
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.FuturesOrderType">
+            <summary>
+            Order type for a futures order
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.FuturesOrderType.Limit">
+            <summary>
+            Limit orders will be placed at a specific price. If the price isn't available in the order book for that asset the order will be added in the order book for someone to fill.
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.FuturesOrderType.Market">
+            <summary>
+            Market order will be placed without a price. The order will be executed at the best price available at that time in the order book.
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.FuturesOrderType.Stop">
+            <summary>
+            Stop order. Execute a limit order when price reaches a specific Stop price
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.FuturesOrderType.StopMarket">
+            <summary>
+            Stop market order. Execute a market order when price reaches a specific Stop price
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.FuturesOrderType.TakeProfit">
+            <summary>
+            Take profit order. Will execute a limit order when the price rises above a price to sell and therefor take a profit
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.FuturesOrderType.TakeProfitMarket">
+            <summary>
+            Take profit market order. Will execute a market order when the price rises above a price to sell and therefor take a profit
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.FuturesOrderType.TrailingStopMarket">
+            <summary>
+            A trailing stop order will execute an order when the price drops below a certain percentage from its all time high since the order was activated
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.FuturesOrderType.Liquidation">
+            <summary>
+            A liquidation order
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.SubAccountMarginTransferType">
