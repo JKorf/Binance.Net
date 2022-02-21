@@ -21,7 +21,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// Contract type
         /// </summary>
         [JsonConverter(typeof(ContractTypeConverter))]
-        public ContractType ContractType { get; set; }
+        public ContractType? ContractType { get; set; }
         /// <summary>
         /// The maintenance margin percent
         /// </summary>

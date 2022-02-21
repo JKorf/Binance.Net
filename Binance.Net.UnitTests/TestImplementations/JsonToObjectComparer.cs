@@ -40,43 +40,47 @@ namespace Binance.Net.UnitTests.TestImplementations
 
             foreach (var method in callResultMethods)
             {
-                var path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
-                FileStream file = null;
-                try
+                for (var i = 0; i < 10; i++)
                 {
-                    file = File.OpenRead(Path.Combine(path, $"JsonResponses", folderPrefix, $"{method.Name}.txt"));
+                    var path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
+                    FileStream file = null;
+                    try
+                    {
+                        file = File.OpenRead(Path.Combine(path, $"JsonResponses", folderPrefix, $"{method.Name}{(i == 0 ? "": i.ToString())}.txt"));
+                    }
+                    catch (FileNotFoundException)
+                    {
+                        if(i == 0)
+                            skippedMethods.Add(method.Name);
+                        break;
+                    }
+
+                    var buffer = new byte[file.Length];
+                    await file.ReadAsync(buffer, 0, buffer.Length);
+                    file.Close();
+
+                    var json = Encoding.UTF8.GetString(buffer);
+                    var client = _clientFunc(json);
+
+                    var parameters = method.GetParameters();
+                    var input = new List<object>();
+                    foreach (var parameter in parameters)
+                    {
+                        if (parametersToSetNull?.Contains(parameter.Name) == true)
+                            input.Add(null);
+                        else
+                            input.Add(TestHelpers.GetTestValue(parameter.ParameterType, 1));
+                    }
+
+                    // act
+                    CallResult result = (CallResult)await TestHelpers.InvokeAsync(method, getSubject(client), input.ToArray());
+
+                    // asset
+                    Assert.Null(result.Error, method.Name);
+
+                    var resultData = result.GetType().GetProperty("Data", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance).GetValue(result);
+                    ProcessData(method.Name + (i == 0 ? "" : i.ToString()), resultData, json, parametersToSetNull, useNestedJsonPropertyForCompare, ignoreProperties);
                 }
-                catch (FileNotFoundException)
-                {
-                    skippedMethods.Add(method.Name);
-                    continue;
-                }
-
-                var buffer = new byte[file.Length];
-                await file.ReadAsync(buffer, 0, buffer.Length);
-                file.Close();
-
-                var json = Encoding.UTF8.GetString(buffer);
-                var client = _clientFunc(json);
-
-                var parameters = method.GetParameters();
-                var input = new List<object>();
-                foreach (var parameter in parameters)
-                {
-                    if (parametersToSetNull?.Contains(parameter.Name) == true)
-                        input.Add(null);
-                    else
-                        input.Add(TestHelpers.GetTestValue(parameter.ParameterType, 1));
-                }
-
-                // act
-                CallResult result = (CallResult)await TestHelpers.InvokeAsync(method, getSubject(client), input.ToArray());
-
-                // asset
-                Assert.Null(result.Error, method.Name);
-
-                var resultData = result.GetType().GetProperty("Data", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance).GetValue(result);
-                ProcessData(method.Name, resultData, json, parametersToSetNull, useNestedJsonPropertyForCompare, ignoreProperties);
             }
 
             if (skippedMethods.Any())

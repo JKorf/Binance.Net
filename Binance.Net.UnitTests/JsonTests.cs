@@ -224,6 +224,7 @@ namespace Binance.Net.UnitTests
                 },
                 ignoreProperties: new Dictionary<string, List<string>>
                 {
+                    { "GetExchangeInfoAsync1" , new List<string>{ "futuresType" } }
                 },
                 parametersToSetNull: new string[] {
                     "limit"
