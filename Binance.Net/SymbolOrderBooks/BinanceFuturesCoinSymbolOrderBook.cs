@@ -112,16 +112,14 @@ namespace Binance.Net.SymbolOrderBooks
         }
 
         /// <inheritdoc />
-        public override void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            processBuffer.Clear();
-            asks.Clear();
-            bids.Clear();
-
             if(_restOwner)
                 _restClient?.Dispose();
             if(_socketOwner)
                 _socketClient?.Dispose();
+
+            base.Dispose(disposing);
         }
     }
 }

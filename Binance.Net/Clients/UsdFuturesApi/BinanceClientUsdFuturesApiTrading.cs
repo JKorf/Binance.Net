@@ -137,7 +137,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (orders.Length <= 0 || orders.Length > 5)
                 throw new ArgumentException("Order list should be at least 1 and max 5 orders");
 
-            if (_baseClient.TradeRulesBehaviour != TradeRulesBehaviour.None)
+            if (_baseClient.Options.UsdFuturesApiOptions.TradeRulesBehaviour != TradeRulesBehaviour.None)
             {
                 foreach (var order in orders)
                 {

@@ -133,7 +133,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             if (orders.Length <= 0 || orders.Length > 5)
                 throw new ArgumentException("Order list should be at least 1 and max 5 orders");
 
-            if (_baseClient.TradeRulesBehaviour != TradeRulesBehaviour.None)
+            if (_baseClient.Options.CoinFuturesApiOptions.TradeRulesBehaviour != TradeRulesBehaviour.None)
             {
                 foreach (var order in orders)
                 {
