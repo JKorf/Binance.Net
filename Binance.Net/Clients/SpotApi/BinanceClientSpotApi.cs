@@ -31,7 +31,6 @@ namespace Binance.Net.Clients.SpotApi
         private readonly BinanceClient _baseClient;
         internal new readonly BinanceClientOptions Options;
 
-        internal readonly TradeRulesBehaviour TradeRulesBehaviour;
         internal BinanceExchangeInfo? ExchangeInfo;
         internal DateTime? LastExchangeInfoUpdate;
 
@@ -153,7 +152,7 @@ namespace Binance.Net.Clients.SpotApi
             var outputPrice = price;
             var outputStopPrice = stopPrice;
 
-            if (TradeRulesBehaviour == TradeRulesBehaviour.None)
+            if (Options.SpotApiOptions.TradeRulesBehaviour == TradeRulesBehaviour.None)
                 return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice, outputStopPrice);
 
             if (ExchangeInfo == null || LastExchangeInfoUpdate == null || (DateTime.UtcNow - LastExchangeInfoUpdate.Value).TotalMinutes > Options.SpotApiOptions.TradeRulesUpdateInterval.TotalMinutes)
@@ -193,7 +192,7 @@ namespace Binance.Net.Clients.SpotApi
                     outputQuantity = BinanceHelpers.ClampQuantity(minQty.Value, maxQty!.Value, stepSize!.Value, quantity.Value);
                     if (outputQuantity != quantity.Value)
                     {
-                        if (TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                        if (Options.SpotApiOptions.TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
                         {
                             return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: LotSize filter failed. Original quantity: {quantity}, Closest allowed: {outputQuantity}");
                         }
@@ -213,7 +212,7 @@ namespace Binance.Net.Clients.SpotApi
                     outputPrice = BinanceHelpers.ClampPrice(symbolData.PriceFilter.MinPrice, symbolData.PriceFilter.MaxPrice, price.Value);
                     if (outputPrice != price)
                     {
-                        if (TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                        if (Options.SpotApiOptions.TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
                             return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter max/min failed. Original price: {price}, Closest allowed: {outputPrice}");
 
                         _log.Write(LogLevel.Information, $"price clamped from {price} to {outputPrice} based on price filter");
@@ -225,7 +224,7 @@ namespace Binance.Net.Clients.SpotApi
                             symbolData.PriceFilter.MaxPrice, stopPrice.Value);
                         if (outputStopPrice != stopPrice)
                         {
-                            if (TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                            if (Options.SpotApiOptions.TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
                                 return BinanceTradeRuleResult.CreateFailed(
                                     $"Trade rules check failed: Stop price filter max/min failed. Original stop price: {stopPrice}, Closest allowed: {outputStopPrice}");
 
@@ -241,7 +240,7 @@ namespace Binance.Net.Clients.SpotApi
                     outputPrice = BinanceHelpers.FloorPrice(symbolData.PriceFilter.TickSize, price.Value);
                     if (outputPrice != beforePrice)
                     {
-                        if (TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                        if (Options.SpotApiOptions.TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
                             return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter tick failed. Original price: {price}, Closest allowed: {outputPrice}");
 
                         _log.Write(LogLevel.Information, $"price floored from {beforePrice} to {outputPrice} based on price filter");
@@ -253,7 +252,7 @@ namespace Binance.Net.Clients.SpotApi
                         outputStopPrice = BinanceHelpers.FloorPrice(symbolData.PriceFilter.TickSize, stopPrice.Value);
                         if (outputStopPrice != beforeStopPrice)
                         {
-                            if (TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                            if (Options.SpotApiOptions.TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
                                 return BinanceTradeRuleResult.CreateFailed(
                                     $"Trade rules check failed: Stop price filter tick failed. Original stop price: {stopPrice}, Closest allowed: {outputStopPrice}");
 
@@ -271,7 +270,7 @@ namespace Binance.Net.Clients.SpotApi
             var notional = currentQuantity * outputPrice.Value;
             if (notional < symbolData.MinNotionalFilter.MinNotional)
             {
-                if (TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                if (Options.SpotApiOptions.TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
                     return BinanceTradeRuleResult.CreateFailed(
                         $"Trade rules check failed: MinNotional filter failed. Order quantity: {notional}, minimal order quantity: {symbolData.MinNotionalFilter.MinNotional}");
 
