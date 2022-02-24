@@ -9456,13 +9456,11 @@
             ctor
             </summary>
         </member>
-        <member name="M:Binance.Net.Objects.BinanceClientOptions.Copy``1(``0,``0)">
+        <member name="M:Binance.Net.Objects.BinanceClientOptions.#ctor(Binance.Net.Objects.BinanceClientOptions)">
             <summary>
-            Copy the values of the def to the input
+            ctor
             </summary>
-            <typeparam name="T"></typeparam>
-            <param name="input"></param>
-            <param name="def"></param>
+            <param name="baseOn">Base the new options on other options</param>
         </member>
         <member name="T:Binance.Net.Objects.BinanceSocketClientOptions">
             <summary>
@@ -9494,8 +9492,11 @@
             ctor
             </summary>
         </member>
-        <member name="M:Binance.Net.Objects.BinanceSocketClientOptions.Copy``1(``0,``0)">
-            <inheritdoc />
+        <member name="M:Binance.Net.Objects.BinanceSocketClientOptions.#ctor(Binance.Net.Objects.BinanceSocketClientOptions)">
+            <summary>
+            ctor
+            </summary>
+            <param name="baseOn">Base the new options on other options</param>
         </member>
         <member name="T:Binance.Net.Objects.BinanceApiClientOptions">
             <summary>
@@ -9528,19 +9529,12 @@
             </summary>
             <param name="baseAddress"></param>
         </member>
-        <member name="M:Binance.Net.Objects.BinanceApiClientOptions.#ctor(Binance.Net.Objects.BinanceApiClientOptions)">
+        <member name="M:Binance.Net.Objects.BinanceApiClientOptions.#ctor(Binance.Net.Objects.BinanceApiClientOptions,Binance.Net.Objects.BinanceApiClientOptions)">
             <summary>
             ctor
             </summary>
             <param name="baseOn"></param>
-        </member>
-        <member name="M:Binance.Net.Objects.BinanceApiClientOptions.Copy``1(``0,``0)">
-            <summary>
-            Copy the values of the def to the input
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="input"></param>
-            <param name="def"></param>
+            <param name="newValues"></param>
         </member>
         <member name="T:Binance.Net.Objects.BinanceOrderBookOptions">
             <summary>
@@ -21056,7 +21050,7 @@
         <member name="M:Binance.Net.SymbolOrderBooks.BinanceFuturesCoinSymbolOrderBook.DoResyncAsync(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.SymbolOrderBooks.BinanceFuturesCoinSymbolOrderBook.Dispose">
+        <member name="M:Binance.Net.SymbolOrderBooks.BinanceFuturesCoinSymbolOrderBook.Dispose(System.Boolean)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.SymbolOrderBooks.BinanceFuturesUsdtSymbolOrderBook">
@@ -21081,7 +21075,7 @@
         <member name="M:Binance.Net.SymbolOrderBooks.BinanceFuturesUsdtSymbolOrderBook.DoResyncAsync(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.SymbolOrderBooks.BinanceFuturesUsdtSymbolOrderBook.Dispose">
+        <member name="M:Binance.Net.SymbolOrderBooks.BinanceFuturesUsdtSymbolOrderBook.Dispose(System.Boolean)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.SymbolOrderBooks.BinanceSpotSymbolOrderBook">
@@ -21106,7 +21100,7 @@
         <member name="M:Binance.Net.SymbolOrderBooks.BinanceSpotSymbolOrderBook.DoResyncAsync(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.SymbolOrderBooks.BinanceSpotSymbolOrderBook.Dispose">
+        <member name="M:Binance.Net.SymbolOrderBooks.BinanceSpotSymbolOrderBook.Dispose(System.Boolean)">
             <inheritdoc />
         </member>
     </members>
