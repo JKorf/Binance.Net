@@ -22,8 +22,12 @@
         /// </summary>
         Leveraged,
         /// <summary>
-        /// 
+        /// Trade group 2
         /// </summary>
-        TradeGroup002
+        TradeGroup002,
+        /// <summary>
+        /// Trade group 3
+        /// </summary>
+        TradeGroup003
     }
 }

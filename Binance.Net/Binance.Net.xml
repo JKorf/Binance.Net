@@ -1699,7 +1699,12 @@
         </member>
         <member name="F:Binance.Net.Enums.AccountType.TradeGroup002">
             <summary>
-            
+            Trade group 2
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup003">
+            <summary>
+            Trade group 3
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.AccountUpdateReason">
