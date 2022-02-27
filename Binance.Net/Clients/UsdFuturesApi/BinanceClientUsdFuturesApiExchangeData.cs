@@ -85,7 +85,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         public async Task<WebCallResult<DateTime>> GetServerTimeAsync(bool resetAutoTimestamp = false, CancellationToken ct = default)
         {
             var url = _baseClient.GetUrl(checkTimeEndpoint, api, "1");
-            var result = await _baseClient.SendRequestInternal<BinanceCheckTime>(url, HttpMethod.Get, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceCheckTime>(url, HttpMethod.Get, ct, ignoreRateLimit: true).ConfigureAwait(false);
             return result.As(result.Data?.ServerTime ?? default);
         }
 
