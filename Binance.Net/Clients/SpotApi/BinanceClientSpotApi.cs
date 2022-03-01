@@ -34,7 +34,7 @@ namespace Binance.Net.Clients.SpotApi
         internal BinanceExchangeInfo? ExchangeInfo;
         internal DateTime? LastExchangeInfoUpdate;
 
-        internal static TimeSyncState TimeSyncState = new TimeSyncState("Spot");
+        internal static TimeSyncState TimeSyncState = new TimeSyncState("Spot Api");
 
         private readonly Log _log;
         #endregion

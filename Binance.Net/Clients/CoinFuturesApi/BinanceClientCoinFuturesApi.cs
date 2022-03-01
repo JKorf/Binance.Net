@@ -32,7 +32,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         internal BinanceFuturesCoinExchangeInfo? ExchangeInfo;
         internal DateTime? LastExchangeInfoUpdate;
 
-        internal static TimeSyncState TimeSyncState = new TimeSyncState("Coin Futures");
+        internal static TimeSyncState TimeSyncState = new TimeSyncState("Coin Futures Api");
 
         private readonly Log _log;
         #endregion
