@@ -233,7 +233,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceMarkIndexKline>>> GetMarkPriceKlinesAsync(string symbol, KlineInterval interval, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
         {
-            limit?.ValidateIntBetween(nameof(limit), 1, 500);
+            limit?.ValidateIntBetween(nameof(limit), 1, 1500);
 
             var parameters = new Dictionary<string, object> {
                 { "symbol", symbol },
@@ -476,7 +476,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #endregion
 
-        #region Continuous contract Kline Data
+        #region Index Price Kline Data
 
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<IBinanceKline>>> GetIndexPriceKlinesAsync(string pair, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
