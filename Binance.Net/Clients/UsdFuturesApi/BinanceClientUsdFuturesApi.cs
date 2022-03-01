@@ -232,7 +232,13 @@ namespace Binance.Net.Clients.UsdFuturesApi
             Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
             ArrayParametersSerialization? arraySerialization = null, int weight = 1, bool ignoreRateLimit = false) where T : class
         {
-            return await _baseClient.SendRequestInternal<T>(this, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight, ignoreRateLimit: ignoreRateLimit).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<T>(this, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight, ignoreRateLimit: ignoreRateLimit).ConfigureAwait(false);
+            if (!result && result.Error!.Code == -1021 && Options.SpotApiOptions.AutoTimestamp)
+            {
+                _log.Write(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
+                TimeSyncState.LastSyncTime = DateTime.MinValue;
+            }
+            return result;
         }
 
         /// <inheritdoc />
