@@ -33,7 +33,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         internal BinanceFuturesUsdtExchangeInfo? ExchangeInfo;
         internal DateTime? LastExchangeInfoUpdate;
 
-        internal static TimeSyncState TimeSyncState = new TimeSyncState();
+        internal static TimeSyncState TimeSyncState = new TimeSyncState("USD Futures");
 
         private readonly Log _log;
         #endregion
