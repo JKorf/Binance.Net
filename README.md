@@ -20,6 +20,10 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 8.0.5 - 01 Mar 2022
+    * Updated Limit checking on Usd futures GetMarkPriceKlinesAsync
+    * Added time sync resetting when a timestamp error is received
+
 * Version 8.0.4 - 27 Feb 2022
     * Updated CryptoExchange.Net to fix timestamping issue when request is ratelimiter
     * Updated USD futures kline requests max limit value check
