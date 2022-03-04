@@ -1782,6 +1782,16 @@
             Options Settle Profit
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.AccountUpdateReason.CoinSwapWithdraw">
+            <summary>
+            Coin swap withdraw
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountUpdateReason.CoinSwapDeposit">
+            <summary>
+            Coin swap deposit
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.AdjustRateDirection">
             <summary>
             Rate direction
