@@ -25,6 +25,7 @@ namespace Binance.Net.Converters
             new KeyValuePair<AccountUpdateReason, string>(AccountUpdateReason.AssetTransfer, "ASSET_TRANSFER"),
             new KeyValuePair<AccountUpdateReason, string>(AccountUpdateReason.OptionsPremiumFee, "OPTIONS_PREMIUM_FEE"),
             new KeyValuePair<AccountUpdateReason, string>(AccountUpdateReason.OptionsSettleProfit, "OPTIONS_SETTLE_PROFIT"),
+            new KeyValuePair<AccountUpdateReason, string>(AccountUpdateReason.CoinSwapWithdraw, "AUTO_EXCHANGE"),
             new KeyValuePair<AccountUpdateReason, string>(AccountUpdateReason.CoinSwapWithdraw, "COIN_SWAP_WITHDRAW"),
             new KeyValuePair<AccountUpdateReason, string>(AccountUpdateReason.CoinSwapDeposit, "COIN_SWAP_DEPOSIT"),
         };

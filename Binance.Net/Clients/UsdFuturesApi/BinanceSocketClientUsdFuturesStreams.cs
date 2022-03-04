@@ -415,7 +415,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                             break;
                         }
                     default:
-                        _log.Write(LogLevel.Warning, $"Received unknown user data event {evnt}: " + data);
+                        _log.Write(LogLevel.Warning, $"Received unknown user data event {evnt}: " + data.Data);
                         break;
                 }
             });
