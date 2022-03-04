@@ -20,46 +20,46 @@ namespace Binance.Net.UnitTests
         [Test]
         public async Task ValidatAggregatedTradeUpdateStreamJson()
         {
-            await TestFileToObject<BinanceStreamAggregatedTrade>(@"JsonResponses\Spot\Socket\AggregatedTradeUpdate.txt");
+            await TestFileToObject<BinanceStreamAggregatedTrade>(@"JsonResponses/Spot/Socket/AggregatedTradeUpdate.txt");
         }
 
         [Test]
         public async Task ValidateTradeUpdateStreamJson()
         {
-            await TestFileToObject<BinanceStreamTrade>(@"JsonResponses\Spot\Socket\TradeUpdate.txt");
+            await TestFileToObject<BinanceStreamTrade>(@"JsonResponses/Spot/Socket/TradeUpdate.txt");
         }
 
         [Test]
         public async Task ValidateKlineUpdateStreamJson()
         {
-            await TestFileToObject<BinanceStreamKlineData>(@"JsonResponses\Spot\Socket\KlineUpdate.txt", new List<string> { "B" });
+            await TestFileToObject<BinanceStreamKlineData>(@"JsonResponses/Spot/Socket/KlineUpdate.txt", new List<string> { "B" });
         }
 
         [Test]
         public async Task ValidateMiniTickUpdateStreamJson()
         {
-            await TestFileToObject<BinanceStreamMiniTick>(@"JsonResponses\Spot\Socket\MiniTickUpdate.txt", new List<string> { "B" });
+            await TestFileToObject<BinanceStreamMiniTick>(@"JsonResponses/Spot/Socket/MiniTickUpdate.txt", new List<string> { "B" });
         }
 
         [Test]
         public async Task ValidateBookPriceUpdateStreamJson()
         {
-            await TestFileToObject<BinanceStreamBookPrice>(@"JsonResponses\Spot\Socket\BookPriceUpdate.txt", new List<string> { "B" });
+            await TestFileToObject<BinanceStreamBookPrice>(@"JsonResponses/Spot/Socket/BookPriceUpdate.txt", new List<string> { "B" });
         }
 
         [Test]
         public async Task ValidateTickerUpdateStreamJson()
         {
-            await TestFileToObject<BinanceStreamTick>(@"JsonResponses\Spot\Socket\TickerUpdate.txt", new List<string> { "B" });
+            await TestFileToObject<BinanceStreamTick>(@"JsonResponses/Spot/Socket/TickerUpdate.txt", new List<string> { "B" });
         }
 
         [Test]
         public async Task ValidateUserUpdateStreamJson()
         {
-            await TestFileToObject<BinanceStreamOrderUpdate>(@"JsonResponses\Spot\Socket\UserUpdate1.txt", new List<string> { "M" });
-            await TestFileToObject<BinanceStreamOrderList>(@"JsonResponses\Spot\Socket\UserUpdate2.txt", new List<string> { "B" });
-            await TestFileToObject<BinanceStreamPositionsUpdate>(@"JsonResponses\Spot\Socket\UserUpdate3.txt", new List<string> { "B" });
-            await TestFileToObject<BinanceStreamBalanceUpdate>(@"JsonResponses\Spot\Socket\UserUpdate4.txt", new List<string> { "B" });
+            await TestFileToObject<BinanceStreamOrderUpdate>(@"JsonResponses/Spot/Socket/UserUpdate1.txt", new List<string> { "M" });
+            await TestFileToObject<BinanceStreamOrderList>(@"JsonResponses/Spot/Socket/UserUpdate2.txt", new List<string> { "B" });
+            await TestFileToObject<BinanceStreamPositionsUpdate>(@"JsonResponses/Spot/Socket/UserUpdate3.txt", new List<string> { "B" });
+            await TestFileToObject<BinanceStreamBalanceUpdate>(@"JsonResponses/Spot/Socket/UserUpdate4.txt", new List<string> { "B" });
         }
 
         private static async Task TestFileToObject<T>(string filePath, List<string> ignoreProperties = null)
