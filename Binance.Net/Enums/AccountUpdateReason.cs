@@ -60,6 +60,14 @@
         /// <summary>
         /// Options Settle Profit
         /// </summary>
-        OptionsSettleProfit
+        OptionsSettleProfit,
+        /// <summary>
+        /// Coin swap withdraw
+        /// </summary>
+        CoinSwapWithdraw,
+        /// <summary>
+        /// Coin swap deposit
+        /// </summary>
+        CoinSwapDeposit
     }
 }
