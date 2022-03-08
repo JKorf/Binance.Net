@@ -18008,7 +18008,7 @@
             Total fixed quantity in btc
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingAccount.TotalFixedAmountInUSDT">
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingAccount.TotalFixedQuantityInUSDT">
             <summary>
             Total fixed quantity in usdt
             </summary>
