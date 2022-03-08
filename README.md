@@ -20,6 +20,13 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 8.0.7 - 08 Mar 2022
+    * Fixed inconsistent naming in BinanceLendingAccount model
+    * Added AllowTrailingStop property on BinanceSymbol
+    * Added new symbol filter PercentagePriceBySide
+    * Updated spot GetOrderBookAsync to allow any limit under 5000
+    * Updated CryptoExchange.Net
+
 * Version 8.0.6 - 01 Mar 2022
     * Updated CryptoExchange.Net improving the websocket reconnection robustness
 

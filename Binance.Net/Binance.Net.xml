@@ -3248,6 +3248,11 @@
             Max position filter
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.SymbolFilterType.PercentagePriceBySide">
+            <summary>
+            Price filter by side
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.SymbolStatus">
             <summary>
             Status of a symbol
@@ -14887,6 +14892,36 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbolPercentPriceFilter.AveragePriceMinutes">
+            <summary>
+            The amount of minutes the average price of trades is calculated over. 0 means the last price is used
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceSymbolPercentPriceBySideFilter">
+            <summary>
+            Price percentage filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbolPercentPriceBySideFilter.BidMultiplierUp">
+            <summary>
+            The max factor the price can deviate up for buys
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbolPercentPriceBySideFilter.AskMultiplierUp">
+            <summary>
+            The max factor the price can deviate up for sells
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbolPercentPriceBySideFilter.BidMultiplierDown">
+            <summary>
+            The max factor the price can deviate down for buys
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbolPercentPriceBySideFilter.AskMultiplierDown">
+            <summary>
+            The max factor the price can deviate down for sells
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbolPercentPriceBySideFilter.AveragePriceMinutes">
             <summary>
             The amount of minutes the average price of trades is calculated over. 0 means the last price is used
             </summary>
