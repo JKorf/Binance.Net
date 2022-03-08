@@ -55,6 +55,33 @@ namespace Binance.Net.Objects.Models.Spot
     }
 
     /// <summary>
+    /// Price percentage filter
+    /// </summary>
+    public class BinanceSymbolPercentPriceBySideFilter : BinanceSymbolFilter
+    {
+        /// <summary>
+        /// The max factor the price can deviate up for buys
+        /// </summary>
+        public decimal BidMultiplierUp { get; set; }
+        /// <summary>
+        /// The max factor the price can deviate up for sells
+        /// </summary>
+        public decimal AskMultiplierUp { get; set; }
+        /// <summary>
+        /// The max factor the price can deviate down for buys
+        /// </summary>
+        public decimal BidMultiplierDown { get; set; }
+        /// <summary>
+        /// The max factor the price can deviate down for sells
+        /// </summary>
+        public decimal AskMultiplierDown { get; set; }
+        /// <summary>
+        /// The amount of minutes the average price of trades is calculated over. 0 means the last price is used
+        /// </summary>
+        public int AveragePriceMinutes { get; set; }
+    }
+
+    /// <summary>
     /// Lot size filter
     /// </summary>
     public class BinanceSymbolLotSizeFilter : BinanceSymbolFilter

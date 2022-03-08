@@ -87,6 +87,16 @@ namespace Binance.Net.Converters
                         MaxPosition = obj.ContainsKey("maxPosition") ? (decimal)obj["maxPosition"] : 0
                     };
                     break;
+                case SymbolFilterType.PercentagePriceBySide:
+                    result = new BinanceSymbolPercentPriceBySideFilter
+                    {
+                        AskMultiplierUp = (decimal)obj["askMultiplierUp"],
+                        AskMultiplierDown = (decimal)obj["askMultiplierDown"],
+                        BidMultiplierUp = (decimal)obj["bidMultiplierUp"],
+                        BidMultiplierDown = (decimal)obj["bidMultiplierDown"],
+                        AveragePriceMinutes = (int)obj["avgPriceMins"]
+                    };
+                    break;
                 default:
                     Trace.WriteLine($"{DateTime.Now:yyyy/MM/dd HH:mm:ss:fff} | Warning | Can't parse symbol filter of type: " + obj["filterType"]);
                     result = new BinanceSymbolFilter();

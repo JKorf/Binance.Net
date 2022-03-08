@@ -44,6 +44,10 @@
         /// <summary>
         /// Max position filter
         /// </summary>
-        MaxPosition
+        MaxPosition,
+        /// <summary>
+        /// Price filter by side
+        /// </summary>
+        PercentagePriceBySide
     }
 }
