@@ -27,8 +27,8 @@ namespace Binance.Net.Objects.Models.Spot.Lending
         /// <summary>
         /// Total fixed quantity in usdt
         /// </summary>
-        [JsonProperty("totalFixedQuantityInUSDT")]
-        public decimal TotalFixedAmountInUSDT { get; set; }
+        [JsonProperty("totalFixedAmountInUSDT")]
+        public decimal TotalFixedQuantityInUSDT { get; set; }
         /// <summary>
         /// Total flexible in btc
         /// </summary>
