@@ -49,6 +49,6 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// User mobile number
         /// </summary>
         [JsonProperty("mobile")]
-        public long MobileNumber { get; set; }
+        public string? MobileNumber { get; set; }
     }
 }
