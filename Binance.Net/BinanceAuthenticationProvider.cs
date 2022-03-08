@@ -25,7 +25,7 @@ namespace Binance.Net
             var parameters = parameterPosition == HttpMethodParameterPosition.InUri ? uriParameters : bodyParameters;
             var timestamp = GetMillisecondTimestamp(apiClient);
             parameters.Add("timestamp", timestamp);
-            uri = uri.SetParameters(uriParameters);
+            uri = uri.SetParameters(uriParameters, arraySerialization);
             parameters.Add("signature", SignHMACSHA256(parameterPosition == HttpMethodParameterPosition.InUri ? uri.Query.Replace("?", ""): parameters.ToFormData()));
         }
     }
