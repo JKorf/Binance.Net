@@ -14756,6 +14756,11 @@
             Spot trading orders allowed
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.AllowTrailingStop">
+            <summary>
+            Trailling stop orders are allowed
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.IsMarginTradingAllowed">
             <summary>
             Margin trading orders allowed

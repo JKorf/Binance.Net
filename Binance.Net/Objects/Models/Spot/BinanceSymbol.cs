@@ -54,6 +54,10 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         public bool IsSpotTradingAllowed { get; set; }
         /// <summary>
+        /// Trailling stop orders are allowed
+        /// </summary>
+        public bool AllowTrailingStop { get; set; }
+        /// <summary>
         /// Margin trading orders allowed
         /// </summary>
         public bool IsMarginTradingAllowed { get; set; }
