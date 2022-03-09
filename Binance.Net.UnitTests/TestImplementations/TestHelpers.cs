@@ -107,6 +107,7 @@ namespace Binance.Net.UnitTests.TestImplementations
 
             var request = new Mock<IRequest>();
             request.Setup(c => c.Uri).Returns(new Uri("http://www.test.com"));
+            request.Setup(c => c.GetHeaders()).Returns(new Dictionary<string, IEnumerable<string>>());
             request.Setup(c => c.GetResponseAsync(It.IsAny<CancellationToken>())).Returns(Task.FromResult(response.Object));
 
             var factory = Mock.Get(client.RequestFactory);
@@ -127,6 +128,7 @@ namespace Binance.Net.UnitTests.TestImplementations
 
             var request = new Mock<IRequest>();
             request.Setup(c => c.Uri).Returns(new Uri("http://www.test.com"));
+            request.Setup(c => c.GetHeaders()).Returns(new Dictionary<string, IEnumerable<string>>());
             request.Setup(c => c.GetResponseAsync(It.IsAny<CancellationToken>())).Returns(Task.FromResult(response.Object));
 
             var factory = Mock.Get(client.RequestFactory);
