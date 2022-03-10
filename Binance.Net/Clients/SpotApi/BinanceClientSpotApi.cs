@@ -266,7 +266,7 @@ namespace Binance.Net.Clients.SpotApi
             if (symbolData.MinNotionalFilter == null || quantity == null || outputPrice == null)
                 return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice, outputStopPrice);
 
-            var currentQuantity = outputQuantity.HasValue ? outputQuantity.Value : quantity.Value;
+            var currentQuantity = outputQuantity ?? quantity.Value;
             var notional = currentQuantity * outputPrice.Value;
             if (notional < symbolData.MinNotionalFilter.MinNotional)
             {

@@ -31,7 +31,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
     {
         #region fields
         private readonly BinanceSocketClient _baseClient;
-        private readonly BinanceSocketClientOptions _options;
         private readonly Log _log;
 
         private const string klineStreamEndpoint = "@kline";
@@ -70,7 +69,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
         public BinanceSocketClientUsdFuturesStreams(Log log, BinanceSocketClient baseClient, BinanceSocketClientOptions options) :
             base(options, options.UsdFuturesStreamsOptions)
         {
-            _options = options;
             _baseClient = baseClient;
             _log = log;
         }
