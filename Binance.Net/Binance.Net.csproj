@@ -7,9 +7,9 @@
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
     <Authors>JKorf, Nikkozp, CaptHolley</Authors>
-    <PackageVersion>8.0.8</PackageVersion>
-    <AssemblyVersion>8.0.8</AssemblyVersion>
-    <FileVersion>8.0.8</FileVersion>
+    <PackageVersion>8.0.9</PackageVersion>
+    <AssemblyVersion>8.0.9</AssemblyVersion>
+    <FileVersion>8.0.9</FileVersion>
     <Description>Binance.Net is a .Net wrapper for the Binance API, including Binance Futures. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance Binance.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
@@ -20,7 +20,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>8.0.8 - Changed MobileNumber type from long to string, fixing GetSubAccountStatusAsync deserialization when no phone number is defined, Updated CryptoExchange.Net</PackageReleaseNotes>
+    <PackageReleaseNotes>8.0.9 - Fixed error handling trying to cancel a unknown order</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup Label="Deterministic Build" Condition="'$(Configuration)' == 'Release'">
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
