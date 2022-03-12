@@ -322,6 +322,16 @@
             Leveraged account type
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup002">
+            <summary>
+            Trade group 2
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup003">
+            <summary>
+            Trade group 3
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.AccountUpdateReason">
             <summary>
             Account update reason
@@ -8954,6 +8964,11 @@
             Whether the asset can be used as margin in Multi-Assets mode
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountAsset.UpdateTime">
+            <summary>
+            Last update time
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountBalance">
             <summary>
             Information about an account
@@ -9630,7 +9645,7 @@
             Cumulative amount
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.QuoteQuantityFilled">
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesOrder.QuoteQuantity">
             <summary>
             Cumulative amount
             </summary>
@@ -11489,6 +11504,11 @@
             The amount that is locked in a trade
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamBalance.TransferBalance">
+            <summary>
+            Balance Change except PnL and Commission
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamPosition">
             <summary>
             Information about an asset position
@@ -11574,7 +11594,7 @@
             Position mode update data
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamConfigUpdateData.PositionMode">
+        <member name="P:Binance.Net.Objects.Futures.UserStream.BinanceFuturesStreamConfigUpdateData.MultiAssetMode">
             <summary>
             Multi-Assets Mode
             </summary>

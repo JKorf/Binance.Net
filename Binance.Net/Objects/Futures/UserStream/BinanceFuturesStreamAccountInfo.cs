@@ -68,6 +68,11 @@ namespace Binance.Net.Objects.Futures.UserStream
         /// </summary>
         [JsonProperty("cw")]
         public decimal CrossWalletBalance { get; set; }
+        /// <summary>
+        /// Balance Change except PnL and Commission
+        /// </summary>
+        [JsonProperty("bc")]
+        public decimal TransferBalance { get; set; }
     }
 
     /// <summary>

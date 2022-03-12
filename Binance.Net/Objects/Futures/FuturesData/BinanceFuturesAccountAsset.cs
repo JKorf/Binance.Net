@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using CryptoExchange.Net.Converters;
+using Newtonsoft.Json;
+using System;
 
 namespace Binance.Net.Objects.Futures.FuturesData
 {
@@ -73,5 +75,11 @@ namespace Binance.Net.Objects.Futures.FuturesData
         /// Whether the asset can be used as margin in Multi-Assets mode
         /// </summary>
         public bool? MarginAvailable { get; set; }
+
+        /// <summary>
+        /// Last update time
+        /// </summary>
+        [JsonConverter(typeof(TimestampConverter))]
+        public DateTime UpdateTime { get; set; }
     }
 }
