@@ -10582,6 +10582,51 @@
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCoin24HPrice.QuoteVolume">
             <inheritdoc />
         </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesCoinAccountBalance">
+            <summary>
+            Information about an account
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCoinAccountBalance.AccountAlias">
+            <summary>
+            Account alias
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCoinAccountBalance.Asset">
+            <summary>
+            The asset this balance is for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCoinAccountBalance.WalletBalance">
+            <summary>
+            The total balance of this asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCoinAccountBalance.CrossWalletBalance">
+            <summary>
+            Crossed wallet balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCoinAccountBalance.CrossUnrealizedPnl">
+            <summary>
+            Unrealized profit of crossed positions
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCoinAccountBalance.AvailableBalance">
+            <summary>
+            Available balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCoinAccountBalance.MaxWithdrawQuantity">
+            <summary>
+            Maximum quantity for transfer out
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCoinAccountBalance.UpdateTime">
+            <summary>
+            Last update time
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesCoinAccountInfo">
             <summary>
             Account info

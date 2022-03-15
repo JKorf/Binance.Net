@@ -7,7 +7,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Information about an account
     /// </summary>
-    public class BinanceFuturesAccountBalance
+    public class BinanceFuturesCoinAccountBalance
     {
         /// <summary>
         /// Account alias
@@ -44,13 +44,9 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Maximum quantity for transfer out
         /// </summary>
-        [JsonProperty("maxWithdrawAmount")]
-		public decimal MaxWithdrawQuantity { get; set; }
+        [JsonProperty("withdrawAvailable")]
+        public decimal MaxWithdrawQuantity { get; set; }
 
-        /// <summary>
-        /// Whether the asset can be used as margin in Multi-Assets mode
-        /// </summary>
-        public bool? MarginAvailable { get; set; }
         /// <summary>
         /// Last update time
         /// </summary>
