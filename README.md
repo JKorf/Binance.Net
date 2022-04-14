@@ -20,6 +20,10 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 8.0.9 - 18 Mar 2022
+    * Fixed Spot MiniTicker subscription having swapped base/quote volume properties
+    * Fixed exception getting thrown when CancelOrderAsync on USD futures fails
+
 * Version 8.0.8 - 10 Mar 2022
     * Changed MobileNumber type from long to string, fixing GetSubAccountStatusAsync deserialization when no phone number is defined
     * Updated CryptoExchange.Net

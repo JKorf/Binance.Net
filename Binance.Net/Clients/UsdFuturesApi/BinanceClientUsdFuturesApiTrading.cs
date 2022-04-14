@@ -240,11 +240,15 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestInternal<BinanceFuturesCancelOrder>(_baseClient.GetUrl(cancelOrderEndpoint, api, "1"), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
-            _baseClient.InvokeOrderCanceled(new OrderId
+
+            if (result)
             {
-                SourceObject = result.Data,
-                Id = result.Data.Id.ToString(CultureInfo.InvariantCulture)
-            });
+                _baseClient.InvokeOrderCanceled(new OrderId
+                {
+                    SourceObject = result.Data,
+                    Id = result.Data.Id.ToString(CultureInfo.InvariantCulture)
+                });
+            }
             return result;
         }
 
