@@ -117,7 +117,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var parameters = new Dictionary<string, object> { { "symbol", symbol } };
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
-            var requestWeight = limit == null ? 10 : limit < 50 ? 2 : limit == 100 ? 5 : limit == 500 ? 10 : 20;
+            var requestWeight = limit == null ? 10 : limit <= 50 ? 2 : limit == 100 ? 5 : limit == 500 ? 10 : 20;
             var result = await _baseClient.SendRequestInternal<BinanceFuturesOrderBook>(_baseClient.GetUrl(orderBookEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters, weight: requestWeight).ConfigureAwait(false);
             if (result && string.IsNullOrEmpty(result.Data.Symbol))
                 result.Data.Symbol = symbol;

@@ -186,7 +186,7 @@ namespace Binance.Net.Clients.SpotApi
             limit?.ValidateIntBetween(nameof(limit), 1, 5000);
             var parameters = new Dictionary<string, object> { { "symbol", symbol } };
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
-            var requestWeight = limit == null ? 1 : limit < 100 ? 1 : limit < 500 ? 5 : limit < 1000 ? 10 : 50;
+            var requestWeight = limit == null ? 1 : limit <= 100 ? 1 : limit <= 500 ? 5 : limit <= 1000 ? 10 : 50;
             var result = await _baseClient.SendRequestInternal<BinanceOrderBook>(_baseClient.GetUrl(orderBookEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters, weight: requestWeight).ConfigureAwait(false);
             if (result)
                 result.Data.Symbol = symbol;

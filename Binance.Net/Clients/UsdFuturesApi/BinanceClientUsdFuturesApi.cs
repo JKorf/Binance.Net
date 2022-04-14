@@ -69,6 +69,10 @@ namespace Binance.Net.Clients.UsdFuturesApi
             Account = new BinanceClientUsdFuturesApiAccount(this);
             ExchangeData = new BinanceClientUsdFuturesApiExchangeData(log, this);
             Trading = new BinanceClientUsdFuturesApiTrading(log, this);
+
+            requestBodyEmptyContent = "";
+            requestBodyFormat = RequestBodyFormat.FormData;
+            arraySerialization = ArrayParametersSerialization.MultipleValues;
         }
 
         event Action<CryptoExchange.Net.CommonObjects.OrderId> IBaseRestClient.OnOrderPlaced

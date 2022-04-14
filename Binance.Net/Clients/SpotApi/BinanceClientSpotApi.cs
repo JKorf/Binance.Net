@@ -69,6 +69,10 @@ namespace Binance.Net.Clients.SpotApi
             Account = new BinanceClientSpotApiAccount(this);
             ExchangeData = new BinanceClientSpotApiExchangeData(log, this);
             Trading = new BinanceClientSpotApiTrading(log, this);
+
+            requestBodyEmptyContent = "";
+            requestBodyFormat = RequestBodyFormat.FormData;
+            arraySerialization = ArrayParametersSerialization.MultipleValues;
         }
         #endregion
 

@@ -51,6 +51,10 @@ namespace Binance.Net.Clients.GeneralApi
             Lending = new BinanceClientGeneralApiLending(this);
             Mining = new BinanceClientGeneralApiMining(this);
             SubAccount = new BinanceClientGeneralApiSubAccount(this);
+
+            requestBodyEmptyContent = "";
+            requestBodyFormat = RequestBodyFormat.FormData;
+            arraySerialization = ArrayParametersSerialization.MultipleValues;
         }
 
         #endregion

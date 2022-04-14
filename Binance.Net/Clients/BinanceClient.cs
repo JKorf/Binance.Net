@@ -53,10 +53,6 @@ namespace Binance.Net.Clients
             SpotApi = AddApiClient(new BinanceClientSpotApi(log, this, options));
             UsdFuturesApi = AddApiClient(new BinanceClientUsdFuturesApi(log, this, options));
             CoinFuturesApi = AddApiClient(new BinanceClientCoinFuturesApi(log, this, options));
-
-            requestBodyEmptyContent = "";
-            requestBodyFormat = RequestBodyFormat.FormData;
-            arraySerialization = ArrayParametersSerialization.MultipleValues;
         }
         #endregion
 
