@@ -48,6 +48,10 @@
         /// <summary>
         /// Price filter by side
         /// </summary>
-        PercentagePriceBySide
+        PercentagePriceBySide,
+        /// <summary>
+        /// Trailing delta filter
+        /// </summary>,
+        TrailingDelta,
     }
 }
