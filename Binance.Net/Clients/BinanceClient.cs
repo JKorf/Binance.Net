@@ -16,6 +16,7 @@ using Binance.Net.Clients.GeneralApi;
 using Binance.Net.Clients.SpotApi;
 using Binance.Net.Clients.UsdFuturesApi;
 using Binance.Net.Clients.CoinFuturesApi;
+using System.Net;
 
 namespace Binance.Net.Clients
 {
@@ -53,6 +54,7 @@ namespace Binance.Net.Clients
             SpotApi = AddApiClient(new BinanceClientSpotApi(log, this, options));
             UsdFuturesApi = AddApiClient(new BinanceClientUsdFuturesApi(log, this, options));
             CoinFuturesApi = AddApiClient(new BinanceClientCoinFuturesApi(log, this, options));
+            ServicePointManager.DefaultConnectionLimit = 50;
         }
         #endregion
 
