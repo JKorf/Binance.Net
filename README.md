@@ -20,6 +20,9 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 8.0.11 - 20 Apr 2022
+    * Added trailing delta symbol filter parsing
+
 * Version 8.0.10 - 14 Apr 2022
     * Fixed request weight for order book requests
     * Updated CryptoExchange.Net
