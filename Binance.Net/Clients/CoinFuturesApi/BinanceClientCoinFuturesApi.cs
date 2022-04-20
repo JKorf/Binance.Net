@@ -68,6 +68,10 @@ namespace Binance.Net.Clients.CoinFuturesApi
             Account = new BinanceClientCoinFuturesApiAccount(this);
             ExchangeData = new BinanceClientCoinFuturesApiExchangeData(log, this);
             Trading = new BinanceClientCoinFuturesApiTrading(log, this);
+
+            requestBodyEmptyContent = "";
+            requestBodyFormat = RequestBodyFormat.FormData;
+            arraySerialization = ArrayParametersSerialization.MultipleValues;
         }
         #endregion
 

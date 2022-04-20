@@ -7,9 +7,9 @@
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
     <Authors>JKorf, Nikkozp, CaptHolley</Authors>
-    <PackageVersion>8.0.9</PackageVersion>
-    <AssemblyVersion>8.0.9</AssemblyVersion>
-    <FileVersion>8.0.9</FileVersion>
+    <PackageVersion>8.0.10</PackageVersion>
+    <AssemblyVersion>8.0.10</AssemblyVersion>
+    <FileVersion>8.0.10</FileVersion>
     <Description>Binance.Net is a .Net wrapper for the Binance API, including Binance Futures. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance Binance.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
@@ -20,7 +20,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>8.0.9 - Fixed Spot MiniTicker subscription having swapped base/quote volume properties, Fixed exception getting thrown when CancelOrderAsync on USD futures fails</PackageReleaseNotes>
+    <PackageReleaseNotes>8.0.10 - Fixed request weight for order book requests, Updated CryptoExchange.Net</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup Label="Deterministic Build" Condition="'$(Configuration)' == 'Release'">
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -46,7 +46,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="CryptoExchange.Net" Version="5.1.6" />
+    <PackageReference Include="CryptoExchange.Net" Version="5.1.7" />
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
