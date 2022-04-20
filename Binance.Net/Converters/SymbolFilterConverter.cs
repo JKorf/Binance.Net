@@ -97,6 +97,15 @@ namespace Binance.Net.Converters
                         AveragePriceMinutes = (int)obj["avgPriceMins"]
                     };
                     break;
+                case SymbolFilterType.TrailingDelta:
+                    result = new BinanceSymbolTrailingDeltaFilter
+                    {
+                        MaxTrailingAboveDelta = (int)obj["maxTrailingAboveDelta"],
+                        MaxTrailingBelowDelta = (int)obj["maxTrailingBelowDelta"],
+                        MinTrailingAboveDelta = (int)obj["minTrailingAboveDelta"],
+                        MinTrailingBelowDelta = (int)obj["minTrailingBelowDelta"],
+                    };
+                    break;
                 default:
                     Trace.WriteLine($"{DateTime.Now:yyyy/MM/dd HH:mm:ss:fff} | Warning | Can't parse symbol filter of type: " + obj["filterType"]);
                     result = new BinanceSymbolFilter();
