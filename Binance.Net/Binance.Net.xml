@@ -3253,6 +3253,11 @@
             Price filter by side
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.SymbolFilterType.TrailingDelta">
+            <summary>
+            Trailing delta filter
+            </summary>,
+        </member>
         <member name="T:Binance.Net.Enums.SymbolStatus">
             <summary>
             Status of a symbol
@@ -14846,6 +14851,11 @@
             Filter for the maximum position on a symbol
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.TrailingDeltaFilter">
+            <summary>
+            Filter for the trailing delta values
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceSymbolFilter">
             <summary>
             A filter for order placed on a symbol.
@@ -15024,6 +15034,31 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbolMaxPositionFilter.MaxPosition">
             <summary>
             The MaxPosition filter defines the allowed maximum position an account can have on the base asset of a symbol.
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceSymbolTrailingDeltaFilter">
+            <summary>
+            Trailing delta filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbolTrailingDeltaFilter.MinTrailingAboveDelta">
+            <summary>
+            The MinTrailingAboveDelta filter defines the minimum amount in Basis Point or BIPS above the price to activate the order.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbolTrailingDeltaFilter.MaxTrailingAboveDelta">
+            <summary>
+            The MaxTrailingAboveDelta filter defines the maximum amount in Basis Point or BIPS above the price to activate the order.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbolTrailingDeltaFilter.MinTrailingBelowDelta">
+            <summary>
+            The MinTrailingBelowDelta filter defines the minimum amount in Basis Point or BIPS below the price to activate the order.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbolTrailingDeltaFilter.MaxTrailingBelowDelta">
+            <summary>
+            The MaxTrailingBelowDelta filter defines the minimum amount in Basis Point or BIPS below the price to activate the order.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceSystemStatus">

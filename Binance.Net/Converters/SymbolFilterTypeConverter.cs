@@ -21,6 +21,7 @@ namespace Binance.Net.Converters
             new KeyValuePair<SymbolFilterType, string>(SymbolFilterType.MaxNumberAlgorithmicOrders, "MAX_NUM_ALGO_ORDERS"),
             new KeyValuePair<SymbolFilterType, string>(SymbolFilterType.MaxPosition, "MAX_POSITION"),
             new KeyValuePair<SymbolFilterType, string>(SymbolFilterType.PercentagePriceBySide, "PERCENT_PRICE_BY_SIDE"),
+            new KeyValuePair<SymbolFilterType, string>(SymbolFilterType.TrailingDelta, "TRAILING_DELTA"),
         };
     }
 }

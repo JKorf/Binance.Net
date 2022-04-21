@@ -183,4 +183,27 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         public decimal MaxPosition { get; set; }
     }
+
+    /// <summary>
+    /// Trailing delta filter
+    /// </summary>
+    public class BinanceSymbolTrailingDeltaFilter : BinanceSymbolFilter
+    {
+        /// <summary>
+        /// The MinTrailingAboveDelta filter defines the minimum amount in Basis Point or BIPS above the price to activate the order.
+        /// </summary>
+        public int MinTrailingAboveDelta { get; set; }
+        /// <summary>
+        /// The MaxTrailingAboveDelta filter defines the maximum amount in Basis Point or BIPS above the price to activate the order.
+        /// </summary>
+        public int MaxTrailingAboveDelta { get; set; }
+        /// <summary>
+        /// The MinTrailingBelowDelta filter defines the minimum amount in Basis Point or BIPS below the price to activate the order.
+        /// </summary>
+        public int MinTrailingBelowDelta { get; set; }
+        /// <summary>
+        /// The MaxTrailingBelowDelta filter defines the minimum amount in Basis Point or BIPS below the price to activate the order.
+        /// </summary>
+        public int MaxTrailingBelowDelta { get; set; }
+    }
 }
