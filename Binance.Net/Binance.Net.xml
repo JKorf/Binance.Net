@@ -9576,6 +9576,11 @@
             Update interval in milliseconds, either 100 or 1000. Defaults to 1000
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.BinanceOrderBookOptions.InitialDataTimeout">
+            <summary>
+            After how much time we should consider the connection dropped if no data is received for this time after the initial subscriptions
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceOrderBookOptions.RestClient">
             <summary>
             The rest client to use for requesting the initial order book
