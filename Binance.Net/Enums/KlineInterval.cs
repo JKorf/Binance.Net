@@ -1,83 +1,83 @@
 ﻿namespace Binance.Net.Enums
 {
     /// <summary>
-    /// The interval for the kline
+    /// The interval for the kline, the int value represents the time in seconds
     /// </summary>
     public enum KlineInterval
     {
         /// <summary>
         /// 1m
         /// </summary>
-        OneMinute = 60000,
+        OneMinute = 60,
 
         /// <summary>
         /// 3m
         /// </summary>
-        ThreeMinutes = 180000,
+        ThreeMinutes = 60 * 3,
 
         /// <summary>
         /// 5m
         /// </summary>
-        FiveMinutes = 300000,
+        FiveMinutes = 60 * 5,
 
         /// <summary>
         /// 15m
         /// </summary>
-        FifteenMinutes = 900000,
+        FifteenMinutes = 60 * 15,
 
         /// <summary>
         /// 30m
         /// </summary>
-        ThirtyMinutes = 1800000,
+        ThirtyMinutes = 60 * 30,
 
         /// <summary>
         /// 1h
         /// </summary>
-        OneHour = 3600000,
+        OneHour = 60 * 60,
 
         /// <summary>
         /// 2h
         /// </summary>
-        TwoHour = 7200000,
+        TwoHour = 60 * 60 * 2,
 
         /// <summary>
         /// 4h
         /// </summary>
-        FourHour = 14400000,
+        FourHour = 60 * 60 * 4,
 
         /// <summary>
         /// 6h
         /// </summary>
-        SixHour = 21600000,
+        SixHour = 60 * 60 * 6,
 
         /// <summary>
         /// 8h
         /// </summary>
-        EightHour = 28800000,
+        EightHour = 60 * 60 * 8,
 
         /// <summary>
         /// 12h
         /// </summary>
-        TwelveHour = 43200000,
+        TwelveHour = 60 * 60 * 12,
 
         /// <summary>
         /// 1d
         /// </summary>
-        OneDay = 86400000,
+        OneDay = 60 * 60 * 24,
 
         /// <summary>
         /// 3d
         /// </summary>
-        ThreeDay = 259200000,
+        ThreeDay = 60 * 60 * 24 * 3,
 
         /// <summary>
         /// 1w
         /// </summary>
-        OneWeek = 259200000,
+        OneWeek = 60 * 60 * 24 * 7,
 
         /// <summary>
         /// 1M
         /// </summary>
-        OneMonth = 604800000
+        OneMonth = 60 * 60 * 24 * 30
     }
 }
