@@ -186,6 +186,17 @@ namespace Binance.Net.Converters
                     writer.WritePropertyName("avgPriceMins");
                     writer.WriteValue(pricePercentFilter.AveragePriceMinutes);
                     break;
+                case SymbolFilterType.TrailingDelta:
+                    var TrailingDelta = (BinanceSymbolTrailingDeltaFilter)filter;
+                    writer.WritePropertyName("maxTrailingAboveDelta");
+                    writer.WriteValue(TrailingDelta.MaxTrailingAboveDelta);
+                    writer.WritePropertyName("maxTrailingBelowDelta");
+                    writer.WriteValue(TrailingDelta.MaxTrailingBelowDelta);
+                    writer.WritePropertyName("minTrailingAboveDelta");
+                    writer.WriteValue(TrailingDelta.MinTrailingAboveDelta);
+                    writer.WritePropertyName("minTrailingBelowDelta");
+                    writer.WriteValue(TrailingDelta.MinTrailingBelowDelta);
+                    break;
                 default:
                     Trace.WriteLine($"{DateTime.Now:yyyy/MM/dd HH:mm:ss:fff} | Warning | Can't write symbol filter of type: " + filter.FilterType);
                     break;
