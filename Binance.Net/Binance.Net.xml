@@ -2370,7 +2370,7 @@
         </member>
         <member name="T:Binance.Net.Enums.KlineInterval">
             <summary>
-            The interval for the kline
+            The interval for the kline, the int value represents the time in seconds
             </summary>
         </member>
         <member name="F:Binance.Net.Enums.KlineInterval.OneMinute">
