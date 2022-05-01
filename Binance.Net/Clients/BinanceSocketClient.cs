@@ -112,7 +112,7 @@ namespace Binance.Net.Clients
             var result = message["result"];
             if (result != null && result.Type == JTokenType.Null)
             {
-                log.Write(LogLevel.Trace, $"Socket {s.Socket.Id} Subscription completed");
+                log.Write(LogLevel.Trace, $"Socket {s.SocketId} Subscription completed");
                 callResult = new CallResult<object>(new object());
                 return true;
             }
@@ -161,7 +161,7 @@ namespace Binance.Net.Clients
             var unsub = new BinanceSocketRequest { Method = "UNSUBSCRIBE", Params = topics, Id = NextId() };
             var result = false;
 
-            if (!connection.Socket.IsOpen)
+            if (!connection.Connected)
                 return true;
 
             await connection.SendAndWaitAsync(unsub, ClientOptions.SocketResponseTimeout, data =>

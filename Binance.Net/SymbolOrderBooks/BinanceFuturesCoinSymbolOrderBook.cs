@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Clients;
 using Binance.Net.Interfaces;
@@ -18,6 +19,7 @@ namespace Binance.Net.SymbolOrderBooks
     {
         private readonly IBinanceClient _restClient;
         private readonly IBinanceSocketClient _socketClient;
+        private readonly TimeSpan _initialDataTimeout;
         private readonly int? _limit;
         private readonly int? _updateInterval;
         private readonly bool _restOwner;
@@ -32,6 +34,7 @@ namespace Binance.Net.SymbolOrderBooks
         {
             _limit = options?.Limit;
             _updateInterval = options?.UpdateInterval;
+            _initialDataTimeout = options?.InitialDataTimeout ?? TimeSpan.FromSeconds(30);
             _restClient = options?.RestClient ?? new BinanceClient();
             _socketClient = options?.SocketClient ?? new BinanceSocketClient();
             _restOwner = options?.RestClient == null;
@@ -73,7 +76,7 @@ namespace Binance.Net.SymbolOrderBooks
             }
             else
             {
-                var setResult = await WaitForSetOrderBookAsync(10000, ct).ConfigureAwait(false);
+                var setResult = await WaitForSetOrderBookAsync(_initialDataTimeout, ct).ConfigureAwait(false);
                 return setResult ? subResult : new CallResult<UpdateSubscription>(setResult.Error!);
             }
 
@@ -101,7 +104,7 @@ namespace Binance.Net.SymbolOrderBooks
         protected override async Task<CallResult<bool>> DoResyncAsync(CancellationToken ct)
         {
             if (_limit != null)
-                return await WaitForSetOrderBookAsync(10000, ct).ConfigureAwait(false);
+                return await WaitForSetOrderBookAsync(_initialDataTimeout, ct).ConfigureAwait(false);
 
             var bookResult = await _restClient.CoinFuturesApi.ExchangeData.GetOrderBookAsync(Symbol, _limit ?? 1000).ConfigureAwait(false);
             if (!bookResult)
