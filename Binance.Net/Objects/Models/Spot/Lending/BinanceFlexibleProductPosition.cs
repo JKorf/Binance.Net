@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Binance.Net.Objects.Models.Spot.Lending
 {
@@ -20,6 +21,11 @@ namespace Binance.Net.Objects.Models.Spot.Lending
         /// </summary>
         [JsonProperty("avgAnnualInterestRate")]
         public decimal AverageAnnualInterestRate { get; set; }
+        /// <summary>
+        /// Tier Average annual interest rate
+        /// </summary>
+        [JsonProperty("tierAnnualInterestRate")]
+        public Dictionary<string, decimal> TierAnnualInterestRate { get; set; } = new Dictionary<string, decimal>();
         /// <summary>
         /// Can redeem
         /// </summary>
