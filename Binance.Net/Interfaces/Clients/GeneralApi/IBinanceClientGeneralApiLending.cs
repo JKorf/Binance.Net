@@ -77,8 +77,8 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="asset">Asset</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>Flexible product position</returns>
-        Task<WebCallResult<IEnumerable<BinanceFlexibleProductPosition>>> GetFlexibleProductPositionAsync(string asset, long? receiveWindow = null, CancellationToken ct = default);
+        /// <returns>Flexible product position(s)</returns>
+        Task<WebCallResult<IEnumerable<BinanceFlexibleProductPosition>>> GetFlexibleProductPositionAsync(string? asset = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get fixed and customized fixed project list
