@@ -131,14 +131,10 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Get Flexible Product Position
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceFlexibleProductPosition>>> GetFlexibleProductPositionAsync(string asset, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceFlexibleProductPosition>>> GetFlexibleProductPositionAsync(string? asset = null, long? receiveWindow = null, CancellationToken ct = default)
         {
-            asset.ValidateNotNull(nameof(asset));
-
-            var parameters = new Dictionary<string, object>
-            {
-                { "asset", asset }
-            };
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("asset", asset); 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceFlexibleProductPosition>>(_baseClient.GetUrl(flexiblePositionEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
