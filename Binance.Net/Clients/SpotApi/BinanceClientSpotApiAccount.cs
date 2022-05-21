@@ -68,6 +68,8 @@ namespace Binance.Net.Clients.SpotApi
         private const string isolatedMarginAccountLimitEndpoint = "margin/isolated/accountLimit";
         private const string transferIsolatedMarginAccountEndpoint = "margin/isolated/transfer";
 
+        private const string marginOrderRateLimitEndpoint = "margin/rateLimit/order";
+
         private const string getListenKeyEndpoint = "userDataStream";
         private const string keepListenKeyAliveEndpoint = "userDataStream";
         private const string closeListenKeyEndpoint = "userDataStream";
@@ -75,6 +77,7 @@ namespace Binance.Net.Clients.SpotApi
         private const string getListenKeyIsolatedEndpoint = "userDataStream/isolated";
         private const string keepListenKeyAliveIsolatedEndpoint = "userDataStream/isolated";
         private const string closeListenKeyIsolatedEndpoint = "userDataStream/isolated";
+
 
         // Blvt
         private const string blvtUserLimitEndpoint = "blvt/userLimit";
@@ -925,6 +928,18 @@ namespace Binance.Net.Clients.SpotApi
                     _baseClient.GetUrl(transferIsolatedMarginAccountEndpoint, "sapi", "1"), HttpMethod.Post, ct,
                     parameters, true).ConfigureAwait(false);
         }
+
+
+        #region Margin order rate limit
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceOrderRateLimit>>> GetMarginOrderRateLimitStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceOrderRateLimit>>(_baseClient.GetUrl(marginOrderRateLimitEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 20).ConfigureAwait(false);
+        }
+        #endregion
 
         #region Create a ListenKey
 

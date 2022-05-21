@@ -573,6 +573,14 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
             int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Get isolated margin order rate limits
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BinanceOrderRateLimit>>> GetMarginOrderRateLimitStatusAsync(int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to BinanceSocketClient.Futures.SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#listen-key-margin" /></para>
         /// </summary>
