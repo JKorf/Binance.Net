@@ -1029,6 +1029,12 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.GetLeveragedTokensUserLimitAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.SetAutoStakingAsync(Binance.Net.Enums.StakingProductType,System.String,System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.GetStakingPersonalQuotaAsync(Binance.Net.Enums.StakingProductType,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData">
             <inheritdoc />
         </member>
@@ -1135,6 +1141,9 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData.GetLiquidityPoolConfigurationAsync(System.Int32,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData.GetStakingProductsAsync(Binance.Net.Enums.StakingProductType,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.SpotApi.BinanceClientSpotApiTrading">
@@ -1261,6 +1270,18 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiTrading.GetConvertTradeHistoryAsync(System.DateTime,System.DateTime,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiTrading.PurchaseStakingProductAsync(Binance.Net.Enums.StakingProductType,System.String,System.Decimal,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiTrading.RedeemStakingProductAsync(Binance.Net.Enums.StakingProductType,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiTrading.GetStakingPositionsAsync(Binance.Net.Enums.StakingProductType,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiTrading.GetStakingHistoryAsync(Binance.Net.Enums.StakingProductType,Binance.Net.Enums.StakingTransactionType,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotStreams">
@@ -3148,6 +3169,46 @@
         <member name="F:Binance.Net.Enums.FuturesOrderType.Liquidation">
             <summary>
             A liquidation order
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.StakingProductType">
+            <summary>
+            Staking type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.StakingProductType.Staking">
+            <summary>
+            Locked staking
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.StakingProductType.FlexibleDeFi">
+            <summary>
+            Flexible DeFi staking
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.StakingProductType.LockedDeFi">
+            <summary>
+            Locked DeFi staking
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.StakingTransactionType">
+            <summary>
+            Staking transaction type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.StakingTransactionType.Subscription">
+            <summary>
+            Subscription
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.StakingTransactionType.Redemption">
+            <summary>
+            Redemption
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.StakingTransactionType.Interest">
+            <summary>
+            Interest
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.SubAccountMarginTransferType">
@@ -6739,6 +6800,29 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
         </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiAccount.SetAutoStakingAsync(Binance.Net.Enums.StakingProductType,System.String,System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Set auto staking for a product
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#set-auto-staking-user_data" /></para>
+            </summary>
+            <param name="product">The staking product</param>
+            <param name="positionId">The position</param>
+            <param name="renewable">Renewable</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiAccount.GetStakingPersonalQuotaAsync(Binance.Net.Enums.StakingProductType,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get personal staking quota
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-personal-left-quota-of-staking-product-user_data" /></para>
+            </summary>
+            <param name="product">The staking product</param>
+            <param name="productId">Product id</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiExchangeData">
             <summary>
             Binance Spot exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
@@ -7063,6 +7147,19 @@
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-pool-configure-user_data" /></para>
             </summary>
             <param name="poolId">Id of the pool</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiExchangeData.GetStakingProductsAsync(Binance.Net.Enums.StakingProductType,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get avaialble staking products list
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-staking-product-list-user_data" /></para>
+            </summary>
+            <param name="product">Product type</param>
+            <param name="asset">Filter for asset</param>
+            <param name="page">Page</param>
+            <param name="limit">Max items per page</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -7633,6 +7730,61 @@
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
             <param name="limit">Max amount of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiTrading.PurchaseStakingProductAsync(Binance.Net.Enums.StakingProductType,System.String,System.Decimal,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Purchase a staking product
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#purchase-staking-product-user_data" /></para>
+            </summary>
+            <param name="product">Product type</param>
+            <param name="productId">Product id</param>
+            <param name="quantity">Quantity to purchase</param>
+            <param name="renewable">Renewable</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiTrading.RedeemStakingProductAsync(Binance.Net.Enums.StakingProductType,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Redeem a staking product
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#redeem-staking-product-user_data" /></para>
+            </summary>
+            <param name="product">Product type</param>
+            <param name="productId">Product id</param>
+            <param name="quantity">Quantity to purchase</param>
+            <param name="renewable">Renewable</param>
+            <param name="positionId">Position id, required for Staking or LockedDefi types</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiTrading.GetStakingPositionsAsync(Binance.Net.Enums.StakingProductType,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get staking positions
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-staking-product-position-user_data" /></para>
+            </summary>
+            <param name="product">Product type</param>
+            <param name="productId">Product id</param>
+            <param name="page">Page</param>
+            <param name="limit">Max results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiTrading.GetStakingHistoryAsync(Binance.Net.Enums.StakingProductType,Binance.Net.Enums.StakingTransactionType,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get staking history
+            </summary>
+            <param name="product">Product type</param>
+            <param name="transactionType">Transaction type</param>
+            <param name="asset">Filter by asset</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Page</param>
+            <param name="limit">Max results</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -20223,6 +20375,286 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTrade.IsBestMatch">
             <summary>
             Unused
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory">
+            <summary>
+            Historical staking info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.PositionId">
+            <summary>
+            Position id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.Project">
+            <summary>
+            Project
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.LockPeriod">
+            <summary>
+            Lock period
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.DeliverDate">
+            <summary>
+            Redemption date
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.Type">
+            <summary>
+            Type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPersonalQuota">
+            <summary>
+            Quota left
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPersonalQuota.PersonalQuotaLeft">
+            <summary>
+            Quota left
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition">
+            <summary>
+            Staking position info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.PositionId">
+            <summary>
+            Position id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.ProductId">
+            <summary>
+            Project id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.Asset">
+            <summary>
+            Locked asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.Quantity">
+            <summary>
+            Locked quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.PurchaseTime">
+            <summary>
+            Purchase time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.Duration">
+            <summary>
+            Lock period in days
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.AccrualDays">
+            <summary>
+            Accrue days
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.RewardAsset">
+            <summary>
+            Reward asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.Apy">
+            <summary>
+            Apy
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.RewardQuantity">
+            <summary>
+            Earned quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.ExtraRewardAsset">
+            <summary>
+            Rewards asset of extra staking type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.ExtraRewardApy">
+            <summary>
+            Extra rewards Apy
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.EstimatedExtraRewardQuantity">
+            <summary>
+            Rewards of extra staking type, distribute when order expires
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.NextInterestPay">
+            <summary>
+            Next estimated interest payment
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.NextInterestPayDate">
+            <summary>
+            Next interest payment date
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.PayInterestPeriod">
+            <summary>
+            Interest cycle
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.RedeemQuantityEarly">
+            <summary>
+            Early redemption amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.InterestEndDate">
+            <summary>
+            Interest accrual end date
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.DeliverDate">
+            <summary>
+            Redemption arrival time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.RedeemPeriod">
+            <summary>
+            Redemption interval
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.RedeemQuantity">
+            <summary>
+            Quantity under redemption
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.PartialQuantityDeliverDate">
+            <summary>
+            Arrival time of partial redemption amount of order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.CanRedeemEarly">
+            <summary>
+            When it is true, early redemption can be operated 
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.Renewable">
+            <summary>
+            When it is true, auto staking can be operated
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.Type">
+            <summary>
+            Order type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingProduct">
+            <summary>
+            Staking product info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingProduct.ProjectId">
+            <summary>
+            Project id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingProduct.Details">
+            <summary>
+            Product details
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingProduct.Quota">
+            <summary>
+            Product quota
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingProductDetails">
+            <summary>
+            Staking product details
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingProductDetails.Asset">
+            <summary>
+            Lock up asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingProductDetails.RewardAsset">
+            <summary>
+            Reward asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingProductDetails.Duration">
+            <summary>
+            Duration in days
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingProductDetails.Renewable">
+            <summary>
+            Renewable
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingProductDetails.Apy">
+            <summary>
+            Apy
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingQuota">
+            <summary>
+            Staking product quota
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingQuota.Quota">
+            <summary>
+            Total Personal quota
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingQuota.Minimum">
+            <summary>
+            Minimum amount per order
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingResult">
+            <summary>
+            Staking result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingResult.Success">
+            <summary>
+            Successful
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPositionResult">
+            <summary>
+            Staking result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPositionResult.PositionId">
+            <summary>
+            Id of the position
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccount">

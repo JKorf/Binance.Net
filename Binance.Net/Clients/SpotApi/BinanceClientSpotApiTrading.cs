@@ -12,6 +12,7 @@ using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.BSwap;
 using Binance.Net.Objects.Models.Spot.Margin;
+using Binance.Net.Objects.Models.Spot.Staking;
 using CryptoExchange.Net;
 using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Converters;
@@ -96,6 +97,11 @@ namespace Binance.Net.Clients.SpotApi
         // Convert
         private const string convertTradeHistoryEndpoint = "convert/tradeFlow";
 
+        // Staking
+        private const string stakingPurchaseEndpoint = "staking/purchase";
+        private const string stakingRedeemEndpoint = "staking/redeem";
+        private const string stakingPositionEndpoint = "staking/position";
+        private const string stakingHistoryEndpoint = "staking/stakingRecord";
 
         private readonly BinanceClientSpotApi _baseClient;
         private readonly Log _log;
@@ -1074,6 +1080,73 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceListResult<BinanceConvertTrade>>(_baseClient.GetUrl(convertTradeHistoryEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true, weight: 3000).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Staking
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceStakingPositionResult>> PurchaseStakingProductAsync(StakingProductType product, string productId, decimal quantity, bool? renewable = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "product", EnumConverter.GetString(product) },
+                { "productId", productId },
+                { "amount", quantity },
+            };
+            parameters.AddOptionalParameter("renewable", renewable);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceStakingPositionResult>(_baseClient.GetUrl(stakingPurchaseEndpoint, marginApi, marginVersion), HttpMethod.Post, ct, parameters, true, weight: 1).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceStakingResult>> RedeemStakingProductAsync(StakingProductType product, string productId, string? positionId = null, decimal? quantity = null, bool? renewable = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "product", EnumConverter.GetString(product) },
+                { "productId", productId },
+            };
+            parameters.AddOptionalParameter("positionId", positionId);
+            parameters.AddOptionalParameter("amount", quantity);
+            parameters.AddOptionalParameter("renewable", renewable);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceStakingResult>(_baseClient.GetUrl(stakingRedeemEndpoint, marginApi, marginVersion), HttpMethod.Post, ct, parameters, true, weight: 1).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceStakingPosition>>> GetStakingPositionsAsync(StakingProductType product, string? productId = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "product", EnumConverter.GetString(product) }
+            };
+            parameters.AddOptionalParameter("productId", productId);
+            parameters.AddOptionalParameter("page", page);
+            parameters.AddOptionalParameter("size", limit);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceStakingPosition>>(_baseClient.GetUrl(stakingPositionEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true, weight: 1).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceStakingHistory>>> GetStakingHistoryAsync(StakingProductType product, StakingTransactionType transactionType, string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "product", EnumConverter.GetString(product) },
+                { "txnType", EnumConverter.GetString(transactionType) }
+            };
+            parameters.AddOptionalParameter("asset", asset);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
+            parameters.AddOptionalParameter("page", page);
+            parameters.AddOptionalParameter("size", limit);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceStakingHistory>>(_baseClient.GetUrl(stakingHistoryEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true, weight: 1).ConfigureAwait(false);
         }
 
         #endregion

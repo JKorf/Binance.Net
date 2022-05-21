@@ -1,0 +1,53 @@
+﻿using CryptoExchange.Net.Converters;
+using Newtonsoft.Json;
+using System;
+
+namespace Binance.Net.Objects.Models.Spot.Staking
+{
+    /// <summary>
+    /// Historical staking info
+    /// </summary>
+    public class BinanceStakingHistory
+    {
+        /// <summary>
+        /// Position id
+        /// </summary>
+        public string? PositionId { get; set; }
+        /// <summary>
+        /// Timestamp
+        /// </summary>
+        [JsonProperty("time")]
+        [JsonConverter(typeof(DateTimeConverter))]
+        public DateTime Timestamp { get; set; }
+        /// <summary>
+        /// Asset
+        /// </summary>
+        public string Asset { get; set; } = string.Empty;
+        /// <summary>
+        /// Project
+        /// </summary>
+        public string Project { get; set; } = string.Empty;
+        /// <summary>
+        /// Quantity
+        /// </summary>
+        [JsonProperty("amount")]
+        public decimal Quantity { get; set; }
+        /// <summary>
+        /// Lock period
+        /// </summary>
+        public int? LockPeriod { get; set; }
+        /// <summary>
+        /// Redemption date
+        /// </summary>
+        [JsonConverter(typeof(DateTimeConverter))]
+        public DateTime DeliverDate { get; set; }
+        /// <summary>
+        /// Type
+        /// </summary>
+        public string? Type { get; set; }
+        /// <summary>
+        /// Status
+        /// </summary>
+        public string Status { get; set; } = string.Empty;
+    }
+}

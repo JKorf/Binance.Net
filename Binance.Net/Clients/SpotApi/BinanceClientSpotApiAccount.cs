@@ -14,6 +14,7 @@ using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.IsolatedMargin;
 using Binance.Net.Objects.Models.Spot.Margin;
+using Binance.Net.Objects.Models.Spot.Staking;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
@@ -80,6 +81,11 @@ namespace Binance.Net.Clients.SpotApi
 
         // Rebate
         private const string rebateHistoryEndpoint = "rebate/taxQuery";
+
+        // Staking
+        private const string setAutoStakingEndpoint = "staking/setAutoStaking";
+        private const string stakingQuotaLeftEndpoint = "staking/personalLeftQuota";
+
 
         private const string marginApi = "sapi";
         private const string marginVersion = "1";
@@ -1075,6 +1081,34 @@ namespace Binance.Net.Clients.SpotApi
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceBlvtUserLimit>>(_baseClient.GetUrl(blvtUserLimitEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);           
         }
 
+        #endregion
+
+        #region Staking
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceStakingResult>> SetAutoStakingAsync(StakingProductType product, string positionId, bool renewable, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "product", EnumConverter.GetString(product) },
+                { "positionId", positionId },
+                { "renewable", renewable },
+            };
+
+            return await _baseClient.SendRequestInternal<BinanceStakingResult>(_baseClient.GetUrl(setAutoStakingEndpoint, marginApi, marginVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceStakingPersonalQuota>> GetStakingPersonalQuotaAsync(StakingProductType product, string productId, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "product", EnumConverter.GetString(product) },
+                { "productId", productId }
+            };
+
+            return await _baseClient.SendRequestInternal<BinanceStakingPersonalQuota>(_baseClient.GetUrl(stakingQuotaLeftEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
         #endregion
     }
 }
