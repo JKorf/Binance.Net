@@ -737,7 +737,7 @@
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSubAccount.GetSubAccountTransferHistoryForMasterAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSubAccount.TransferSubAccountAsync(Binance.Net.Enums.TransferAccountType,Binance.Net.Enums.TransferAccountType,System.String,System.Decimal,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSubAccount.TransferSubAccountAsync(Binance.Net.Enums.TransferAccountType,Binance.Net.Enums.TransferAccountType,System.String,System.Decimal,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSubAccount.GetSubAccountAssetsAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
@@ -3504,6 +3504,16 @@
             Coin-M future
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.TransferAccountType.Margin">
+            <summary>
+            Margin
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.TransferAccountType.IsolatedMargin">
+            <summary>
+            Isolated margin
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.TransferDirection">
             <summary>
             Direction of a transfer
@@ -5784,7 +5794,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of transfers</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiSubAccount.TransferSubAccountAsync(Binance.Net.Enums.TransferAccountType,Binance.Net.Enums.TransferAccountType,System.String,System.Decimal,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiSubAccount.TransferSubAccountAsync(Binance.Net.Enums.TransferAccountType,Binance.Net.Enums.TransferAccountType,System.String,System.Decimal,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers an asset form/to a sub account. If fromEmail or toEmail is not send it is interpreted as from/to the master account. Transfer between futures accounts is not supported
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#sub-account-futures-asset-transfer-for-master-account" /></para>
@@ -5794,6 +5804,7 @@
             <param name="toEmail">To which account to transfer</param>
             <param name="toAccountType">Account type to transfer to</param>
             <param name="asset">The asset to transfer</param>
+            <param name="symbol">The sybol to transfer, only for isolated margin</param>
             <param name="quantity">The quantity to transfer</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>

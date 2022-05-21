@@ -126,6 +126,7 @@ namespace Binance.Net.Clients.SpotApi
             decimal? stopPrice = null,
             decimal? icebergQty = null,
             OrderResponseType? orderResponseType = null,
+            int? trailingDelta = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -143,6 +144,7 @@ namespace Binance.Net.Clients.SpotApi
                 null,
                 null,
                 orderResponseType,
+                trailingDelta,
                 receiveWindow,
                 1,
                 ct).ConfigureAwait(false);
@@ -164,6 +166,7 @@ namespace Binance.Net.Clients.SpotApi
             decimal? stopPrice = null,
             decimal? icebergQty = null,
             OrderResponseType? orderResponseType = null,
+            int? trailingDelta = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -182,6 +185,7 @@ namespace Binance.Net.Clients.SpotApi
                 null,
                 orderResponseType,
                 receiveWindow,
+                trailingDelta,
                 1,
                 ct).ConfigureAwait(false);
             if (result)
@@ -310,6 +314,7 @@ namespace Binance.Net.Clients.SpotApi
             decimal? limitIcebergQuantity = null,
             decimal? stopIcebergQuantity = null,
             TimeInForce? stopLimitTimeInForce = null,
+            int? trailingDelta = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -341,6 +346,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("limitIcebergQty", limitIcebergQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("stopIcebergQty", stopIcebergQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("stopLimitTimeInForce", stopLimitTimeInForce == null ? null : JsonConvert.SerializeObject(stopLimitTimeInForce, new TimeInForceConverter(false)));
+            parameters.AddOptionalParameter("trailingDelta", trailingDelta);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceOrderOcoList>(_baseClient.GetUrl(newOcoOrderEndpoint, api, signedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
@@ -481,6 +487,7 @@ namespace Binance.Net.Clients.SpotApi
                 sideEffectType,
                 isIsolated,
                 orderResponseType,
+                null,
                 receiveWindow,
                 weight: 6,
                 ct).ConfigureAwait(false);

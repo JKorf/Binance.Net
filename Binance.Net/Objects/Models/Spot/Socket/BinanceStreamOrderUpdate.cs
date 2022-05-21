@@ -57,6 +57,11 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         [JsonProperty("P")]
         public decimal StopPrice { get; set; }
         /// <summary>
+        /// The trailing delta of the order
+        /// </summary>
+        [JsonProperty("d")]
+        public int? TrailingDelta { get; set; }
+        /// <summary>
         /// The iceberg quantity of the order
         /// </summary>
         [JsonProperty("F")]
