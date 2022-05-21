@@ -1026,6 +1026,9 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.GetRebateHistoryAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.GetLeveragedTokensUserLimitAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData">
             <inheritdoc />
         </member>
@@ -6717,6 +6720,15 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiAccount.GetLeveragedTokensUserLimitAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get leveraged tokens user limits
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-blvt-user-limit-info-user_data" /></para>
+            </summary>
+            <param name="tokenName">Filter by token name</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiExchangeData">
             <summary>
@@ -15861,44 +15873,64 @@
             Timestamp
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Blvt.BinanecBlvtSubscription">
+        <member name="T:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtSubscription">
             <summary>
             Leveraged token subscription info
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanecBlvtSubscription.Id">
+        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtSubscription.Id">
             <summary>
             Id
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanecBlvtSubscription.TokenName">
+        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtSubscription.TokenName">
             <summary>
             Token name
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanecBlvtSubscription.Quantity">
+        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtSubscription.Quantity">
             <summary>
             Subscription quantity
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanecBlvtSubscription.Nav">
+        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtSubscription.Nav">
             <summary>
             NAV price of subscription
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanecBlvtSubscription.Fee">
+        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtSubscription.Fee">
             <summary>
             Subscription fee in usdt
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanecBlvtSubscription.TotalCharge">
+        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtSubscription.TotalCharge">
             <summary>
             Subscription cost in usdt
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanecBlvtSubscription.Timestamp">
+        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtSubscription.Timestamp">
             <summary>
             Timestamp
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtUserLimit">
+            <summary>
+            Leveraged tokens user limits
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtUserLimit.TokenName">
+            <summary>
+            Token name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtUserLimit.UserDailyTotalPurchaseLimit">
+            <summary>
+            Daily purchase limit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtUserLimit.UserDailyTotalRedeemLimit">
+            <summary>
+            Daily redeem limit
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageAccountInfo">

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Binance.Net.Enums;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot;
+using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.IsolatedMargin;
 using Binance.Net.Objects.Models.Spot.Margin;
 using CryptoExchange.Net.Objects;
@@ -657,5 +658,14 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BinanceRebateWrapper>> GetRebateHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get leveraged tokens user limits
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-blvt-user-limit-info-user_data" /></para>
+        /// </summary>
+        /// <param name="tokenName">Filter by token name</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<IEnumerable<BinanceBlvtUserLimit>>> GetLeveragedTokensUserLimitAsync(string? tokenName = null, long? receiveWindow = null, CancellationToken ct = default);
     }
 }

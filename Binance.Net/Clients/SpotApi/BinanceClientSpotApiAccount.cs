@@ -11,6 +11,7 @@ using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot;
+using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.IsolatedMargin;
 using Binance.Net.Objects.Models.Spot.Margin;
 using CryptoExchange.Net;
@@ -73,6 +74,9 @@ namespace Binance.Net.Clients.SpotApi
         private const string getListenKeyIsolatedEndpoint = "userDataStream/isolated";
         private const string keepListenKeyAliveIsolatedEndpoint = "userDataStream/isolated";
         private const string closeListenKeyIsolatedEndpoint = "userDataStream/isolated";
+
+        // Blvt
+        private const string blvtUserLimitEndpoint = "blvt/userLimit";
 
         // Rebate
         private const string rebateHistoryEndpoint = "rebate/taxQuery";
@@ -1056,6 +1060,19 @@ namespace Binance.Net.Clients.SpotApi
                 return result.AsError<BinanceRebateWrapper>(new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
+        }
+
+        #endregion
+
+        #region Blvt
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceBlvtUserLimit>>> GetLeveragedTokensUserLimitAsync(string? tokenName = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("tokenName", tokenName);
+
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceBlvtUserLimit>>(_baseClient.GetUrl(blvtUserLimitEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);           
         }
 
         #endregion

@@ -7,7 +7,7 @@ namespace Binance.Net.Objects.Models.Spot.Blvt
     /// <summary>
     /// Leveraged token subscription info
     /// </summary>
-    public class BinanecBlvtSubscription
+    public class BinanceBlvtSubscription
     {
         /// <summary>
         /// Id
