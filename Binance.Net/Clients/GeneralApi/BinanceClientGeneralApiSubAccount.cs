@@ -104,7 +104,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Sub-account Transfer(For Master Account)
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceTransaction>> TransferSubAccountAsync(TransferAccountType fromAccountType, TransferAccountType toAccountType, string asset, decimal quantity, string? fromEmail = null, string? toEmail = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceTransaction>> TransferSubAccountAsync(TransferAccountType fromAccountType, TransferAccountType toAccountType, string asset, decimal quantity, string? fromEmail = null, string? toEmail = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             if (string.IsNullOrEmpty(fromEmail) && string.IsNullOrEmpty(toEmail))
                 throw new ArgumentException("fromEmail and/or toEmail should be provided");
@@ -117,6 +117,7 @@ namespace Binance.Net.Clients.GeneralApi
                 { "asset", asset },
                 { "amount", quantity.ToString(CultureInfo.InvariantCulture) }
             };
+            parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("fromEmail", fromEmail);
             parameters.AddOptionalParameter("toEmail", toEmail);
 

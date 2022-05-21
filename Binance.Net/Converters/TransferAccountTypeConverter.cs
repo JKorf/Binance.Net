@@ -14,6 +14,8 @@ namespace Binance.Net.Converters
             new KeyValuePair<TransferAccountType, string>(TransferAccountType.Spot, "SPOT"),
             new KeyValuePair<TransferAccountType, string>(TransferAccountType.UsdtFuture, "USDT_FUTURE"),
             new KeyValuePair<TransferAccountType, string>(TransferAccountType.CoinFuture, "COIN_FUTURE"),
+            new KeyValuePair<TransferAccountType, string>(TransferAccountType.Margin, "MARGIN"),
+            new KeyValuePair<TransferAccountType, string>(TransferAccountType.IsolatedMargin, "ISOLATED_MARGIN"),
         };
     }
 }

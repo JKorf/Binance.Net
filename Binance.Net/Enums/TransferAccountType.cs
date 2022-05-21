@@ -16,6 +16,14 @@
         /// <summary>
         /// Coin-M future
         /// </summary>
-        CoinFuture
+        CoinFuture,
+        /// <summary>
+        /// Margin
+        /// </summary>
+        Margin,
+        /// <summary>
+        /// Isolated margin
+        /// </summary>
+        IsolatedMargin
     }
 }

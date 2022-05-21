@@ -52,11 +52,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="toEmail">To which account to transfer</param>
         /// <param name="toAccountType">Account type to transfer to</param>
         /// <param name="asset">The asset to transfer</param>
+        /// <param name="symbol">The sybol to transfer, only for isolated margin</param>
         /// <param name="quantity">The quantity to transfer</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The result of the transfer</returns>
-        Task<WebCallResult<BinanceTransaction>> TransferSubAccountAsync(TransferAccountType fromAccountType, TransferAccountType toAccountType, string asset, decimal quantity, string? fromEmail = null, string? toEmail = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceTransaction>> TransferSubAccountAsync(TransferAccountType fromAccountType, TransferAccountType toAccountType, string asset, decimal quantity, string? fromEmail = null, string? toEmail = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets list of balances for a sub account
