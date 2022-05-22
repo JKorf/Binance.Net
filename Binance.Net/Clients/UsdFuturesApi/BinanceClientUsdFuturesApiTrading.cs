@@ -9,6 +9,7 @@ using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using Binance.Net.Objects.Models.Futures;
+using Binance.Net.Objects.Models.Futures.AlgoOrders;
 using CryptoExchange.Net;
 using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Converters;
@@ -35,16 +36,26 @@ namespace Binance.Net.Clients.UsdFuturesApi
         private const string forceOrdersEndpoint = "forceOrders";
         private const string myFuturesTradesEndpoint = "userTrades";
 
+        // Futures algo 
+        private const string placeVpOrderEndpoint = "algo/futures/newOrderVp";
+        private const string placeTwapOrderEndpoint = "algo/futures/newOrderTwap";
+        private const string cancelAlgoOrderEndpoint = "algo/futures/order";
+        private const string getAlgoOpenOrdersEndpoint = "algo/futures/openOrders";
+        private const string getAlgoHistoricalOrdersEndpoint = "algo/futures/historicalOrders";
+        private const string getAlgoSubOrdersEndpoint = "algo/futures/subOrders";
+
         private const string api = "fapi";
 
         private readonly Log _log;
 
         private readonly BinanceClientUsdFuturesApi _baseClient;
+        private readonly string _spotBaseAddress;
 
         internal BinanceClientUsdFuturesApiTrading(Log log, BinanceClientUsdFuturesApi baseClient)
         {
             _log = log;
             _baseClient = baseClient;
+            _spotBaseAddress = _baseClient.Options.SpotApiOptions.BaseAddress;
         }
 
         #region New Order
@@ -426,6 +437,135 @@ namespace Binance.Net.Clients.UsdFuturesApi
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesUsdtTrade>>(_baseClient.GetUrl(myFuturesTradesEndpoint, api, "1"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
         }
 
+        #endregion
+
+        #region futures algo
+
+        #region Place VP Order
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceAlgoOrderResult>> PlaceVolumeParticipationOrderAsync(
+            string symbol,
+            OrderSide side,
+            decimal quantity,
+            OrderUrgency urgency,
+            string? clientOrderId = null,
+            bool? reduceOnly = null,
+            decimal? limitPrice = null,
+            PositionSide? positionSide = null,
+            long? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol },
+                { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
+                { "quantity", quantity },
+                { "urgency", EnumConverter.GetString(urgency) },
+            };
+            parameters.AddOptionalParameter("positionSide", positionSide == null ? null : JsonConvert.SerializeObject(positionSide, new PositionSideConverter(false)));
+            parameters.AddOptionalParameter("clientAlgoId", clientOrderId);
+            parameters.AddOptionalParameter("reduceOnly", reduceOnly);
+            parameters.AddOptionalParameter("limitPrice", limitPrice);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var url = _spotBaseAddress.AppendPath("sapi", "v1", placeVpOrderEndpoint);
+            return await _baseClient.SendRequestInternal<BinanceAlgoOrderResult>(new Uri(url), HttpMethod.Post, ct, parameters, true, weight: 3000).ConfigureAwait(false);
+        }
+        #endregion
+
+        #region Place TWAP Order
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceAlgoOrderResult>> PlaceTimeWeightedAveragePriceOrderAsync(
+            string symbol,
+            OrderSide side,
+            decimal quantity,
+            int duration,
+            string? clientOrderId = null,
+            bool? reduceOnly = null,
+            decimal? limitPrice = null,
+            PositionSide? positionSide = null,
+            long? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol },
+                { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
+                { "quantity", quantity },
+                { "duration", duration },
+            };
+            parameters.AddOptionalParameter("positionSide", positionSide == null ? null : JsonConvert.SerializeObject(positionSide, new PositionSideConverter(false)));
+            parameters.AddOptionalParameter("clientAlgoId", clientOrderId);
+            parameters.AddOptionalParameter("reduceOnly", reduceOnly);
+            parameters.AddOptionalParameter("limitPrice", limitPrice);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var url = _spotBaseAddress.AppendPath("sapi", "v1", placeTwapOrderEndpoint);
+            return await _baseClient.SendRequestInternal<BinanceAlgoOrderResult>(new Uri(url), HttpMethod.Post, ct, parameters, true, weight: 3000).ConfigureAwait(false);
+        }
+        #endregion
+
+        #region Cancel algo order
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceAlgoResult>> CancelAlgoOrderAsync(long algoOrderId, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "algoId", algoOrderId },
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var url = _spotBaseAddress.AppendPath("sapi", "v1", cancelAlgoOrderEndpoint);
+            return await _baseClient.SendRequestInternal<BinanceAlgoResult>(new Uri(url), HttpMethod.Delete, ct, parameters, true, weight: 1).ConfigureAwait(false);
+        }
+        #endregion
+
+        #region Get Open Algo Orders
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceAlgoOrders>> GetOpenAlgoOrdersAsync(long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var url = _spotBaseAddress.AppendPath("sapi", "v1", getAlgoOpenOrdersEndpoint);
+            return await _baseClient.SendRequestInternal<BinanceAlgoOrders>(new Uri(url), HttpMethod.Get, ct, parameters, true, weight: 1).ConfigureAwait(false);
+        }
+        #endregion
+
+        #region Get historical Algo Orders
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceAlgoOrders>> GetClosedAlgoOrdersAsync(string? symbol = null, OrderSide? side = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null,long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("symbol", symbol);
+            parameters.AddOptionalParameter("side", side == null? null: JsonConvert.SerializeObject(side, new OrderSideConverter(false)));
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
+            parameters.AddOptionalParameter("page", page);
+            parameters.AddOptionalParameter("pageSize", limit);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var url = _spotBaseAddress.AppendPath("sapi", "v1", getAlgoHistoricalOrdersEndpoint);
+            return await _baseClient.SendRequestInternal<BinanceAlgoOrders>(new Uri(url), HttpMethod.Get, ct, parameters, true, weight: 1).ConfigureAwait(false);
+        }
+        #endregion
+
+        #region Get Algo sub Orders
+        /// <inheritdoc />
+        public async Task<WebCallResult<AlgoSubOrderList>> GetAlgoSubOrdersAsync(long algoId, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "algoId", algoId }
+            };
+            parameters.AddOptionalParameter("page", page);
+            parameters.AddOptionalParameter("pageSize", limit);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var url = _spotBaseAddress.AppendPath("sapi", "v1", getAlgoSubOrdersEndpoint);
+            return await _baseClient.SendRequestInternal<AlgoSubOrderList>(new Uri(url), HttpMethod.Get, ct, parameters, true, weight: 1).ConfigureAwait(false);
+        }
+        #endregion
         #endregion
     }
 }
