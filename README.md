@@ -20,6 +20,20 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 8.1.0 - 22 May 2022
+    * Added LeveragedTokens user limit endpoint
+    * Added Staking endpoints
+    * Added USD futures transaction history download endpoints
+    * Added USD futures algo orders endpoints
+    * Added margin order rate limit endpoint
+    * Added interest margin data endpoint
+    * Added symbol collection overloads for GetPricesAsync, GetBookPricesAsync and GetTickersAsync
+    * Added symbol parameter for subaccount transfer
+    * Added margin account types for subaccount transfer
+    * Added TrailingDelta support
+    * Added quoteQuantity minimal notional value TradeRule validation
+    * Renamed GetAllBookPricesAsync to GetBookPricesAsync
+
 * Version 8.0.13 - 08 May 2022
     * Added TierAnnualInterestRate to BinanceFlexibleProductPosition
     * Changed GetFlexibleProductPositionAsync asset parameter to be optional
