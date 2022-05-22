@@ -109,7 +109,7 @@ namespace Binance.Net.Clients.SpotApi
             if (quantity == null && quoteQuantity == null || quantity != null && quoteQuantity != null)
                 throw new ArgumentException("1 of either should be specified, quantity or quoteOrderQuantity");
 
-            var rulesCheck = await CheckTradeRules(symbol, quantity, price, stopPrice, type, ct).ConfigureAwait(false);
+            var rulesCheck = await CheckTradeRules(symbol, quantity, quoteQuantity, price, stopPrice, type, ct).ConfigureAwait(false);
             if (!rulesCheck.Passed)
             {
                 _log.Write(LogLevel.Warning, rulesCheck.ErrorMessage!);
@@ -119,6 +119,7 @@ namespace Binance.Net.Clients.SpotApi
             quantity = rulesCheck.Quantity;
             price = rulesCheck.Price;
             stopPrice = rulesCheck.StopPrice;
+            quoteQuantity = rulesCheck.QuoteQuantity;
 
             var parameters = new Dictionary<string, object>
             {
@@ -152,14 +153,15 @@ namespace Binance.Net.Clients.SpotApi
             return new Uri(result.AppendPath(endpoint));
         }
 
-        internal async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? price, decimal? stopPrice, SpotOrderType? type, CancellationToken ct)
+        internal async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? quoteQuantity, decimal? price, decimal? stopPrice, SpotOrderType? type, CancellationToken ct)
         {
             var outputQuantity = quantity;
+            var outputQuoteQuantity = quoteQuantity;
             var outputPrice = price;
             var outputStopPrice = stopPrice;
 
             if (Options.SpotApiOptions.TradeRulesBehaviour == TradeRulesBehaviour.None)
-                return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice, outputStopPrice);
+                return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputQuoteQuantity, outputPrice, outputStopPrice);
 
             if (ExchangeInfo == null || LastExchangeInfoUpdate == null || (DateTime.UtcNow - LastExchangeInfoUpdate.Value).TotalMinutes > Options.SpotApiOptions.TradeRulesUpdateInterval.TotalMinutes)
                 await ExchangeData.GetExchangeInfoAsync(ct).ConfigureAwait(false);
@@ -208,8 +210,21 @@ namespace Binance.Net.Clients.SpotApi
                 }
             }
 
+            if(symbolData.MinNotionalFilter != null && outputQuoteQuantity != null)
+            {
+                if (quoteQuantity < symbolData.MinNotionalFilter.MinNotional)
+                {
+                    if (Options.SpotApiOptions.TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                        return BinanceTradeRuleResult.CreateFailed(
+                            $"Trade rules check failed: MinNotional filter failed. Order value: {quoteQuantity}, minimal order value: {symbolData.MinNotionalFilter.MinNotional}");
+
+                    outputQuoteQuantity = symbolData.MinNotionalFilter.MinNotional;
+                    _log.Write(LogLevel.Information, $"QuoteQuantity adjusted from {quoteQuantity} to {outputQuoteQuantity} based on min notional filter");
+                }
+            }
+
             if (price == null)
-                return BinanceTradeRuleResult.CreatePassed(outputQuantity, null, outputStopPrice);
+                return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputQuoteQuantity, null, outputStopPrice);
 
             if (symbolData.PriceFilter != null)
             {
@@ -270,7 +285,7 @@ namespace Binance.Net.Clients.SpotApi
             }
 
             if (symbolData.MinNotionalFilter == null || quantity == null || outputPrice == null)
-                return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice, outputStopPrice);
+                return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputQuoteQuantity, outputPrice, outputStopPrice);
 
             var currentQuantity = outputQuantity ?? quantity.Value;
             var notional = currentQuantity * outputPrice.Value;
@@ -289,7 +304,7 @@ namespace Binance.Net.Clients.SpotApi
                 _log.Write(LogLevel.Information, $"Quantity clamped from {currentQuantity} to {outputQuantity} based on min notional filter");
             }
 
-            return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice, outputStopPrice);
+            return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputQuoteQuantity, outputPrice, outputStopPrice);
         }
 
         internal async Task<WebCallResult<T>> SendRequestInternal<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken,

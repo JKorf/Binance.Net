@@ -52,11 +52,11 @@ namespace Binance.Net.Clients.CoinFuturesApi
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceFuturesPlacedOrder>> PlaceOrderAsync(
             string symbol,
-            Enums.OrderSide side,
+            OrderSide side,
             FuturesOrderType type,
             decimal? quantity,
             decimal? price = null,
-            Enums.PositionSide? positionSide = null,
+            PositionSide? positionSide = null,
             TimeInForce? timeInForce = null,
             bool? reduceOnly = null,
             string? newClientOrderId = null,
@@ -81,7 +81,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             if (orderResponseType == OrderResponseType.Full)
                 throw new ArgumentException("OrderResponseType.Full is not supported in Futures");
 
-            var rulesCheck = await _baseClient.CheckTradeRules(symbol, quantity, price, stopPrice, type, ct).ConfigureAwait(false);
+            var rulesCheck = await _baseClient.CheckTradeRules(symbol, quantity, null, price, stopPrice, type, ct).ConfigureAwait(false);
             if (!rulesCheck.Passed)
             {
                 _log.Write(LogLevel.Warning, rulesCheck.ErrorMessage!);
@@ -137,7 +137,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             {
                 foreach (var order in orders)
                 {
-                    var rulesCheck = await _baseClient.CheckTradeRules(order.Symbol, order.Quantity, order.Price, order.StopPrice, order.Type, ct).ConfigureAwait(false);
+                    var rulesCheck = await _baseClient.CheckTradeRules(order.Symbol, order.Quantity, null, order.Price, order.StopPrice, order.Type, ct).ConfigureAwait(false);
                     if (!rulesCheck.Passed)
                     {
                         _log.Write(LogLevel.Warning, rulesCheck.ErrorMessage!);

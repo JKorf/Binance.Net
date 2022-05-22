@@ -89,14 +89,15 @@ namespace Binance.Net.Clients.CoinFuturesApi
             return new Uri(result.AppendPath(endpoint));
         }
 
-        internal async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? price, decimal? stopPrice, FuturesOrderType type, CancellationToken ct)
+        internal async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? quoteQuantity, decimal? price, decimal? stopPrice, FuturesOrderType type, CancellationToken ct)
         {
             var outputQuantity = quantity;
+            var outputQuoteQuantity = quoteQuantity;
             var outputPrice = price;
             var outputStopPrice = stopPrice;
 
             if (Options.CoinFuturesApiOptions.TradeRulesBehaviour == TradeRulesBehaviour.None)
-                return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice, outputStopPrice);
+                return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputQuoteQuantity, outputPrice, outputStopPrice);
 
             if (ExchangeInfo == null || LastExchangeInfoUpdate == null || (DateTime.UtcNow - LastExchangeInfoUpdate.Value).TotalMinutes > Options.CoinFuturesApiOptions.TradeRulesUpdateInterval.TotalMinutes)
                 await ExchangeData.GetExchangeInfoAsync(ct).ConfigureAwait(false);
@@ -141,8 +142,21 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 }
             }
 
+            if (symbolData.MinNotionalFilter != null && outputQuoteQuantity != null)
+            {
+                if (quoteQuantity < symbolData.MinNotionalFilter.MinNotional)
+                {
+                    if (Options.SpotApiOptions.TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                        return BinanceTradeRuleResult.CreateFailed(
+                            $"Trade rules check failed: MinNotional filter failed. Order value: {quoteQuantity}, minimal order value: {symbolData.MinNotionalFilter.MinNotional}");
+
+                    outputQuoteQuantity = symbolData.MinNotionalFilter.MinNotional;
+                    _log.Write(LogLevel.Information, $"QuoteQuantity adjusted from {quoteQuantity} to {outputQuoteQuantity} based on min notional filter");
+                }
+            }
+
             if (price == null)
-                return BinanceTradeRuleResult.CreatePassed(outputQuantity, null, outputStopPrice);
+                return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputQuoteQuantity, null, outputStopPrice);
 
             if (symbolData.PriceFilter != null)
             {
@@ -202,7 +216,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 }
             }
 
-            return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputPrice, outputStopPrice);
+            return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputQuoteQuantity, outputPrice, outputStopPrice);
         }
 
         internal async Task<WebCallResult<T>> SendRequestInternal<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken,
