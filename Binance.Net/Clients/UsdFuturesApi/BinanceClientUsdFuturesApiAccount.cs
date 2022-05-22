@@ -40,6 +40,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
         private const string tradingStatusEndpoint = "apiTradingStatus";
         private const string futuresAccountUserCommissionRateEndpoint = "commissionRate";
 
+        private const string downloadIdEndpoint = "income/asyn";
+        private const string downloadLinkEndpoint = "income/asyn/id";
+
         private const string api = "fapi";
         private const string signedVersion = "1";
 
@@ -331,6 +334,33 @@ namespace Binance.Net.Clients.UsdFuturesApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             return await _baseClient.SendRequestInternal<BinanceFuturesAccountUserCommissionRate>(_baseClient.GetUrl(futuresAccountUserCommissionRateEndpoint, "fapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 20).ConfigureAwait(false);
+        }
+        #endregion
+
+        #region Get download id for transaction history
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceFuturesDownloadIdInfo>> GetDownloadIdForTransactionHistoryAsync(DateTime startTime, DateTime endTime, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "startTime", DateTimeConverter.ConvertToMilliseconds(startTime) },
+                { "endTime", DateTimeConverter.ConvertToMilliseconds(endTime) },
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            return await _baseClient.SendRequestInternal<BinanceFuturesDownloadIdInfo>(_baseClient.GetUrl(downloadIdEndpoint, "fapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
+        }
+        #endregion
+
+        #region Download transaction history
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceFuturesDownloadLink>> GetDownloadLinkForTransactionHistoryAsync(string downloadId, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "downloadId", downloadId }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            return await _baseClient.SendRequestInternal<BinanceFuturesDownloadLink>(_baseClient.GetUrl(downloadLinkEndpoint, "fapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
         }
         #endregion
     }

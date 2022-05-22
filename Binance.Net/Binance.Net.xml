@@ -1152,10 +1152,10 @@
         <member name="T:Binance.Net.Clients.SpotApi.BinanceClientSpotApiTrading">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiTrading.PlaceTestOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiTrading.PlaceTestOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiTrading.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiTrading.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiTrading.CancelOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
@@ -1173,7 +1173,7 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiTrading.GetOrdersAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiTrading.PlaceOcoOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiTrading.PlaceOcoOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiTrading.CancelOcoOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
@@ -1465,6 +1465,12 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceClientUsdFuturesApiAccount.GetUserCommissionRateAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceClientUsdFuturesApiAccount.GetDownloadIdForTransactionHistoryAsync(System.DateTime,System.DateTime,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceClientUsdFuturesApiAccount.GetDownloadLinkForTransactionHistoryAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.UsdFuturesApi.BinanceClientUsdFuturesApiExchangeData">
@@ -2112,6 +2118,21 @@
         <member name="F:Binance.Net.Enums.DepositStatus.Completed">
             <summary>
             Completed
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.DownloadStatus">
+            <summary>
+            Download status
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.DownloadStatus.Processing">
+            <summary>
+            Processing
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.DownloadStatus.Completed">
+            <summary>
+            Ready for download
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.ExecutionType">
@@ -7191,7 +7212,7 @@
             Binance Spot trading endpoints, placing and mananging orders.
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiTrading.PlaceTestOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiTrading.PlaceTestOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new test order. Test orders are not actually being executed and just test the functionality.
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#test-new-order-trade" /></para>
@@ -7207,11 +7228,12 @@
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQty">User for iceberg orders</param>
             <param name="orderResponseType">Used for the response JSON</param>
+            <param name="trailingDelta">Trailing delta value for order in BIPS. A value of 1 means 0.01% trailing delta.</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed test order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiTrading.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiTrading.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#new-order-trade" /></para>
@@ -7227,6 +7249,7 @@
             <param name="stopPrice">Used for stop orders</param>
             <param name="icebergQty">Used for iceberg orders</param>
             <param name="orderResponseType">Used for the response JSON</param>
+            <param name="trailingDelta">Trailing delta value for order in BIPS. A value of 1 means 0.01% trailing delta.</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
@@ -7290,7 +7313,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of orders</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiTrading.PlaceOcoOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiTrading.PlaceOcoOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new OCO(One cancels other) order
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#new-oco-trade" /></para>
@@ -7307,6 +7330,7 @@
             <param name="listClientOrderId">Client id for the order list</param>
             <param name="limitIcebergQuantity">Iceberg quantity for the limit order</param>
             <param name="stopIcebergQuantity">Iceberg quantity for the stop order</param>
+            <param name="trailingDelta">Trailing delta value for order in BIPS. A value of 1 means 0.01% trailing delta.</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Order list info</returns>
@@ -8269,6 +8293,25 @@
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#close-user-data-stream-user_stream" /></para>
             </summary>
             <param name="listenKey">The listen key to stop</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceClientUsdFuturesApiAccount.GetDownloadIdForTransactionHistoryAsync(System.DateTime,System.DateTime,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get download id for downloading transaction history
+            </summary>
+            <param name="startTime">Start time of the data to download</param>
+            <param name="endTime">End time of the data to download</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceClientUsdFuturesApiAccount.GetDownloadLinkForTransactionHistoryAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get the download link for transaction history by download id
+            </summary>
+            <param name="downloadId">The download id as requested by <see cref="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceClientUsdFuturesApiAccount.GetDownloadIdForTransactionHistoryAsync(System.DateTime,System.DateTime,System.Nullable{System.Int64},System.Threading.CancellationToken)" /></param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -11009,6 +11052,51 @@
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCountDownResult.CountDownTime">
             <summary>
             Count down time in milliseconds
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesDownloadIdInfo">
+            <summary>
+            Transaction download info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesDownloadIdInfo.AverageCostTimestampOfLast30Days">
+            <summary>
+            Average time taken for data download in the past 30 days
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesDownloadIdInfo.DownloadId">
+            <summary>
+            Download id
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesDownloadLink">
+            <summary>
+            Transaction download info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesDownloadLink.DownloadId">
+            <summary>
+            Download id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesDownloadLink.Status">
+            <summary>
+            Is ready to download
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesDownloadLink.Url">
+            <summary>
+            Download url
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesDownloadLink.ExpirationTime">
+            <summary>
+            Link expiration time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesDownloadLink.IsExpired">
+            <summary>
+            Is expired
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesExchangeInfo">
@@ -20063,6 +20151,11 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate.StopPrice">
             <summary>
             The stop price of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate.TrailingDelta">
+            <summary>
+            The trailing delta of the order
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate.IcebergQuantity">
