@@ -61,6 +61,7 @@ namespace Binance.Net.Clients.SpotApi
         private const string transferHistoryEndpoint = "margin/transfer";
         private const string interestHistoryEndpoint = "margin/interestHistory";
         private const string interestRateHistoryEndpoint = "margin/interestRateHistory";
+        private const string interestMarginDataEndpoint = "margin/crossMarginData";
         private const string forceLiquidationHistoryEndpoint = "margin/forceLiquidationRec";
 
         private const string isolatedMarginTransferHistoryEndpoint = "margin/isolated/transfer";
@@ -672,6 +673,24 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceRepay>>(_baseClient.GetUrl(getRepayEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true, weight: 10).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Cross Margin Interest Data
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceInterestMarginData>>> GetInterestMarginDataAsync(string? asset = null, string? vipLevel = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            asset?.ValidateNotNull(nameof(asset));
+
+            var parameters = new Dictionary<string, object>();
+
+            parameters.AddOptionalParameter("coin", asset);
+            parameters.AddOptionalParameter("vipLevel", vipLevel?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceInterestMarginData>>(_baseClient.GetUrl(interestMarginDataEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion

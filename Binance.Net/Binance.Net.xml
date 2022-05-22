@@ -963,6 +963,9 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.GetMarginRepaysAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.GetInterestMarginDataAsync(System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.GetMarginInterestHistoryAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -6623,6 +6626,17 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of interest rate</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiAccount.GetInterestMarginDataAsync(System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin interest data
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-cross-margin-fee-data-user_data" /></para>
+            </summary>
+            <param name="asset">Filter by asset</param>
+            <param name="vipLevel">Vip level</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiAccount.GetMarginForcedLiquidationHistoryAsync(System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
@@ -18881,6 +18895,51 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceInterestHistory.Type">
             <summary>
             Type of interest
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceInterestMarginData">
+            <summary>
+            Cross margin interest data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceInterestMarginData.VipLevel">
+            <summary>
+            Vip level
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceInterestMarginData.Coin">
+            <summary>
+            The coin
+            </summary>        
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceInterestMarginData.TransferIn">
+            <summary>
+            If coin can be transferred into cross
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceInterestMarginData.Borrowable">
+            <summary>
+            If coin can be borrowed in cross
+            </summary>        
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceInterestMarginData.DailyInterest">
+            <summary>
+            The daily interest
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceInterestMarginData.YearlyInterest">
+            <summary>
+            The yearly interest
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceInterestMarginData.BorrowLimit">
+            <summary>
+            The yearly interest
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceInterestMarginData.MarginablePairs">
+            <summary>
+            Cross marginable pairs for this coin
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceInterestRateHistory">
