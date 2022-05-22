@@ -53,17 +53,17 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
         /// <summary>
         /// Executed quantity
         /// </summary>
-        [JsonProperty("excutedQty")]
+        [JsonProperty("executedQty")]
         public decimal ExecutedQuantity { get; set; }
         /// <summary>
         /// exceuted amount
         /// </summary>
-        [JsonProperty("excutedAmt")]
+        [JsonProperty("executedAmt")]
         public decimal ExecutedAmount { get; set; }
         /// <summary>
         /// Average price
         /// </summary>
-        [JsonProperty("avgPriuce")]
+        [JsonProperty("avgPrice")]
         public decimal AveragePrice { get; set; }
         /// <summary>
         /// Client algo id

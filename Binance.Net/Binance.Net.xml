@@ -1605,6 +1605,24 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceClientUsdFuturesApiTrading.GetUserTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceClientUsdFuturesApiTrading.PlaceVolumeParticipationOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,Binance.Net.Enums.OrderUrgency,System.String,System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceClientUsdFuturesApiTrading.PlaceTimeWeightedAveragePriceOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Int32,System.String,System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceClientUsdFuturesApiTrading.CancelAlgoOrderAsync(System.Int64,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceClientUsdFuturesApiTrading.GetOpenAlgoOrdersAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceClientUsdFuturesApiTrading.GetClosedAlgoOrdersAsync(System.String,System.Nullable{Binance.Net.Enums.OrderSide},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceClientUsdFuturesApiTrading.GetAlgoSubOrdersAsync(System.Int64,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesStreams">
             <summary>
             Client providing access to the Binance Usd futures websocket Api
@@ -2841,6 +2859,26 @@
         <member name="F:Binance.Net.Enums.OrderStatus.Adl">
             <summary>
             Counterparty Liquidation
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.OrderUrgency">
+            <summary>
+            Order urgency
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderUrgency.Low">
+            <summary>
+            Low urgency
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderUrgency.Medium">
+            <summary>
+            Medium urgency
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderUrgency.High">
+            <summary>
+            High urgency
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.PayOrderType">
@@ -8797,6 +8835,86 @@
             <param name="ct">Cancellation token</param>
             <returns>List of trades</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceClientUsdFuturesApiTrading.PlaceVolumeParticipationOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,Binance.Net.Enums.OrderUrgency,System.String,System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Place a new Volume Participation order
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#volume-participation-vp-new-order-trade" /></para>
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="side">Order side</param>
+            <param name="quantity">Order quantity</param>
+            <param name="urgency">Represent the relative speed of the current execution</param>
+            <param name="clientOrderId">Client order id</param>
+            <param name="reduceOnly">Reduce only</param>
+            <param name="limitPrice">Limit price of the order. If null will use market price</param>
+            <param name="positionSide">Position side</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceClientUsdFuturesApiTrading.PlaceTimeWeightedAveragePriceOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Int32,System.String,System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Place a new Time Weighted Average Price order
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#time-weighted-average-price-twap-new-order-trade" /></para>
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="side">Order side</param>
+            <param name="quantity">Order quantity</param>
+            <param name="duration">Duration in seconds. Less than 5 minutes will be defaulted to 5 minutes, more than 24 hours will be defaulted to 24 hours.</param>
+            <param name="clientOrderId">Client order id</param>
+            <param name="reduceOnly">Reduce only</param>
+            <param name="limitPrice">Limit price of the order. If null will use market price</param>
+            <param name="positionSide">Position side</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceClientUsdFuturesApiTrading.CancelAlgoOrderAsync(System.Int64,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Cancel an algo order
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#cancel-algo-order-trade" /></para>
+            </summary>
+            <param name="algoOrderId">Algo id to cancel</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceClientUsdFuturesApiTrading.GetOpenAlgoOrdersAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get list of open algo orders
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-current-algo-open-orders-user_data" /></para>
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceClientUsdFuturesApiTrading.GetClosedAlgoOrdersAsync(System.String,System.Nullable{Binance.Net.Enums.OrderSide},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get list of closed algo orders
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-historical-algo-orders-user_data" /></para>
+            </summary>
+            <param name="symbol">Filter by symbol</param>
+            <param name="side">Filter by side</param>
+            <param name="startTime">Fitler by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Page</param>
+            <param name="limit">Max results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceClientUsdFuturesApiTrading.GetAlgoSubOrdersAsync(System.Int64,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get algo sub orders overview
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-sub-orders-user_data" /></para>
+            </summary>
+            <param name="algoId">Algo id</param>
+            <param name="page">Page</param>
+            <param name="limit">Max results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesStreams">
             <summary>
             Binance USD futures streams
@@ -10243,6 +10361,226 @@
         <member name="P:Binance.Net.Objects.Models.BinanceStreamEvent.EventTime">
             <summary>
             The time the event happened
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoOrders">
+            <summary>
+            Algo orders
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoOrders.Total">
+            <summary>
+            Total items
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoOrders.Orders">
+            <summary>
+            Orders
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoOrder">
+            <summary>
+            Algo order info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoOrder.AlgoId">
+            <summary>
+            Algo id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoOrder.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoOrder.Side">
+            <summary>
+            Order side
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoOrder.PositionSide">
+            <summary>
+            Position side
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoOrder.TotalQuantity">
+            <summary>
+            Total quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoOrder.ExecutedQuantity">
+            <summary>
+            Executed quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoOrder.ExecutedAmount">
+            <summary>
+            exceuted amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoOrder.AveragePrice">
+            <summary>
+            Average price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoOrder.ClientAlgoId">
+            <summary>
+            Client algo id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoOrder.BookTime">
+            <summary>
+            Book time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoOrder.EndTime">
+            <summary>
+            End time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoOrder.AlgoStatus">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoOrder.AlgoType">
+            <summary>
+            Algo type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoOrder.Urgency">
+            <summary>
+            Urgency
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoOrderResult">
+            <summary>
+            Algo order result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoOrderResult.ClientAlgoId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoOrderResult.Success">
+            <summary>
+            Successful
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoResult">
+            <summary>
+            Algo order result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoResult.AlgoId">
+            <summary>
+            Algo order id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoResult.Success">
+            <summary>
+            Successful
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoSubOrderList">
+            <summary>
+            Sub order list
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoSubOrderList.Total">
+            <summary>
+            Amount of sub orders
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoSubOrderList.ExecutedQuantity">
+            <summary>
+            Executed quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoSubOrderList.ExecutedAmount">
+            <summary>
+            Executed amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoSubOrderList.SubOrders">
+            <summary>
+            Sub orders
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoSubOrder">
+            <summary>
+            Algo sub order info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoSubOrder.AlgoId">
+            <summary>
+            Algo id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoSubOrder.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoSubOrder.Status">
+            <summary>
+            Order status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoSubOrder.ExecutedQuantity">
+            <summary>
+            Executed quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoSubOrder.ExecutedAmount">
+            <summary>
+            Exceuted amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoSubOrder.FeeAmount">
+            <summary>
+            Fee amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoSubOrder.FeeAsset">
+            <summary>
+            Fee asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoSubOrder.BookTime">
+            <summary>
+            Book time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoSubOrder.AveragePrice">
+            <summary>
+            Average price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoSubOrder.Side">
+            <summary>
+            Side
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoSubOrder.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoSubOrder.SubId">
+            <summary>
+            Sub id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoSubOrder.TimeInForce">
+            <summary>
+            Time in force
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoSubOrder.OriginalQuantity">
+            <summary>
+            Original quantity
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountAsset">

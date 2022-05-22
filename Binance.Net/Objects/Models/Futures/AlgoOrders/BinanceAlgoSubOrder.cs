@@ -11,7 +11,7 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
     /// <summary>
     /// Sub order list
     /// </summary>
-    public class AlgoSubOrderList
+    public class BinanceAlgoSubOrderList
     {
         /// <summary>
         /// Amount of sub orders
@@ -20,21 +20,23 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
         /// <summary>
         /// Executed quantity
         /// </summary>
+        [JsonProperty("executedQty")]
         public decimal ExecutedQuantity { get; set; }
         /// <summary>
         /// Executed amount
         /// </summary>
+        [JsonProperty("executedAmt")]
         public decimal ExecutedAmount { get; set; }
         /// <summary>
         /// Sub orders
         /// </summary>
-        public IEnumerable<AlgoSubOrder> SubOrders { get; set; } = Array.Empty<AlgoSubOrder>();
+        public IEnumerable<BinanceAlgoSubOrder> SubOrders { get; set; } = Array.Empty<BinanceAlgoSubOrder>();
     }
 
     /// <summary>
     /// Algo sub order info
     /// </summary>
-    public class AlgoSubOrder
+    public class BinanceAlgoSubOrder
     {
         /// <summary>
         /// Algo id
@@ -47,7 +49,7 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
         /// <summary>
         /// Order status
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("orderStatus")]
         [JsonConverter(typeof(OrderStatusConverter))]
         public OrderStatus Status { get; set; }
         /// <summary>
@@ -95,8 +97,7 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
         /// <summary>
         /// Time in force
         /// </summary>
-        [JsonConverter(typeof(TimeInForceConverter))]
-        public TimeInForce TimeInForce { get; set; }
+        public string TimeInForce { get; set; } = string.Empty;
         /// <summary>
         /// Original quantity
         /// </summary>
