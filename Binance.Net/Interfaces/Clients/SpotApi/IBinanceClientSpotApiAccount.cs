@@ -449,6 +449,17 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<IEnumerable<BinanceInterestRateHistory>>> GetMarginInterestRateHistoryAsync(string asset, string? vipLevel = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Get cross margin interest data
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-cross-margin-fee-data-user_data" /></para>
+        /// </summary>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="vipLevel">Vip level</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BinanceInterestMarginData>>> GetInterestMarginDataAsync(string? asset = null, string? vipLevel = null, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Get history of forced liquidations
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-force-liquidation-record-user_data" /></para>
         /// </summary>
