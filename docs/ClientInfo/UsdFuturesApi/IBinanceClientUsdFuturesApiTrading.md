@@ -11,6 +11,32 @@ grand_parent: Rest API documentation
 
 ***
 
+## CancelAlgoOrderAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#cancel-algo-order-trade](https://binance-docs.github.io/apidocs/spot/en/#cancel-algo-order-trade)  
+<p>
+
+*Cancel an algo order*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.UsdFuturesApi.Trading.CancelAlgoOrderAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceAlgoResult>> CancelAlgoOrderAsync(long algoOrderId, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|algoOrderId|Algo id to cancel|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## CancelAllOrdersAfterTimeoutAsync  
 
 [https://binance-docs.github.io/apidocs/futures/en/#auto-cancel-all-open-orders-trade](https://binance-docs.github.io/apidocs/futures/en/#auto-cancel-all-open-orders-trade)  
@@ -121,6 +147,65 @@ Task<WebCallResult<BinanceFuturesCancelOrder>> CancelOrderAsync(string symbol, l
 
 ***
 
+## GetAlgoSubOrdersAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#query-sub-orders-user_data](https://binance-docs.github.io/apidocs/spot/en/#query-sub-orders-user_data)  
+<p>
+
+*Get algo sub orders overview*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.UsdFuturesApi.Trading.GetAlgoSubOrdersAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceAlgoSubOrderList>> GetAlgoSubOrdersAsync(long algoId, int? page = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|algoId|Algo id|
+|_[Optional]_ page|Page|
+|_[Optional]_ limit|Max results|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetClosedAlgoOrdersAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#query-historical-algo-orders-user_data](https://binance-docs.github.io/apidocs/spot/en/#query-historical-algo-orders-user_data)  
+<p>
+
+*Get list of closed algo orders*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.UsdFuturesApi.Trading.GetClosedAlgoOrdersAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceAlgoOrders>> GetClosedAlgoOrdersAsync(string? symbol = default, OrderSide? side = default, DateTime? startTime = default, DateTime? endTime = default, int? page = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ symbol|Filter by symbol|
+|_[Optional]_ side|Filter by side|
+|_[Optional]_ startTime|Fitler by start time|
+|_[Optional]_ endTime|Filter by end time|
+|_[Optional]_ page|Page|
+|_[Optional]_ limit|Max results|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetForcedOrdersAsync  
 
 [https://binance-docs.github.io/apidocs/futures/en/#user-39-s-force-orders-user_data](https://binance-docs.github.io/apidocs/futures/en/#user-39-s-force-orders-user_data)  
@@ -143,6 +228,31 @@ Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetForcedOrdersAsync(strin
 |_[Optional]_ closeType|Filter by reason for close|
 |_[Optional]_ startTime|Filter by start time|
 |_[Optional]_ endTime|Filter by end time|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetOpenAlgoOrdersAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#query-current-algo-open-orders-user_data](https://binance-docs.github.io/apidocs/spot/en/#query-current-algo-open-orders-user_data)  
+<p>
+
+*Get list of open algo orders*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.UsdFuturesApi.Trading.GetOpenAlgoOrdersAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceAlgoOrders>> GetOpenAlgoOrdersAsync(long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
@@ -352,6 +462,72 @@ Task<WebCallResult<BinanceFuturesPlacedOrder>> PlaceOrderAsync(string symbol, Or
 |_[Optional]_ closePosition|Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.|
 |_[Optional]_ orderResponseType|The response type. Default Acknowledge|
 |_[Optional]_ priceProtect|If true when price reaches stopPrice, difference between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than "triggerProtect" of the symbol.|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## PlaceTimeWeightedAveragePriceOrderAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#time-weighted-average-price-twap-new-order-trade](https://binance-docs.github.io/apidocs/spot/en/#time-weighted-average-price-twap-new-order-trade)  
+<p>
+
+*Place a new Time Weighted Average Price order*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.UsdFuturesApi.Trading.PlaceTimeWeightedAveragePriceOrderAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceAlgoOrderResult>> PlaceTimeWeightedAveragePriceOrderAsync(string symbol, OrderSide side, decimal quantity, int duration, string? clientOrderId = default, bool? reduceOnly = default, decimal? limitPrice = default, PositionSide? positionSide = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|symbol|The symbol|
+|side|Order side|
+|quantity|Order quantity|
+|duration|Duration in seconds. Less than 5 minutes will be defaulted to 5 minutes, more than 24 hours will be defaulted to 24 hours.|
+|_[Optional]_ clientOrderId|Client order id|
+|_[Optional]_ reduceOnly|Reduce only|
+|_[Optional]_ limitPrice|Limit price of the order. If null will use market price|
+|_[Optional]_ positionSide|Position side|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## PlaceVolumeParticipationOrderAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#volume-participation-vp-new-order-trade](https://binance-docs.github.io/apidocs/spot/en/#volume-participation-vp-new-order-trade)  
+<p>
+
+*Place a new Volume Participation order*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.UsdFuturesApi.Trading.PlaceVolumeParticipationOrderAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceAlgoOrderResult>> PlaceVolumeParticipationOrderAsync(string symbol, OrderSide side, decimal quantity, OrderUrgency urgency, string? clientOrderId = default, bool? reduceOnly = default, decimal? limitPrice = default, PositionSide? positionSide = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|symbol|The symbol|
+|side|Order side|
+|quantity|Order quantity|
+|urgency|Represent the relative speed of the current execution|
+|_[Optional]_ clientOrderId|Client order id|
+|_[Optional]_ reduceOnly|Reduce only|
+|_[Optional]_ limitPrice|Limit price of the order. If null will use market price|
+|_[Optional]_ positionSide|Position side|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 

@@ -40,30 +40,6 @@ Task<WebCallResult<IEnumerable<BinanceAggregatedTrade>>> GetAggregatedTradeHisto
 
 ***
 
-## GetAllBookPricesAsync  
-
-[https://binance-docs.github.io/apidocs/spot/en/#symbol-order-book-ticker](https://binance-docs.github.io/apidocs/spot/en/#symbol-order-book-ticker)  
-<p>
-
-*Gets the best price/quantity on the order book for all symbols.*  
-
-```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.ExchangeData.GetAllBookPricesAsync();  
-```  
-
-```csharp  
-Task<WebCallResult<IEnumerable<BinanceBookPrice>>> GetAllBookPricesAsync(CancellationToken ct = default);  
-```  
-
-|Parameter|Description|
-|---|---|
-|_[Optional]_ ct|Cancellation token|
-
-</p>
-
-***
-
 ## GetAssetDetailsAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#asset-detail-user_data](https://binance-docs.github.io/apidocs/spot/en/#asset-detail-user_data)  
@@ -107,6 +83,54 @@ Task<WebCallResult<BinanceBookPrice>> GetBookPriceAsync(string symbol, Cancellat
 |Parameter|Description|
 |---|---|
 |symbol|Symbol to get book price for|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetBookPricesAsync  
+
+<p>
+
+*Gets the best price/quantity on the order book for a symbol.*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.ExchangeData.GetBookPricesAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BinanceBookPrice>>> GetBookPricesAsync(IEnumerable<string> symbol, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|symbol|Symbol to get book price for|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetBookPricesAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#symbol-order-book-ticker](https://binance-docs.github.io/apidocs/spot/en/#symbol-order-book-ticker)  
+<p>
+
+*Gets the best price/quantity on the order book for all symbols.*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.ExchangeData.GetBookPricesAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BinanceBookPrice>>> GetBookPricesAsync(CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
@@ -577,6 +601,31 @@ Task<WebCallResult<BinancePrice>> GetPriceAsync(string symbol, CancellationToken
 [https://binance-docs.github.io/apidocs/spot/en/#symbol-price-ticker](https://binance-docs.github.io/apidocs/spot/en/#symbol-price-ticker)  
 <p>
 
+*Gets the prices of symbols*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.ExchangeData.GetPricesAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BinancePrice>>> GetPricesAsync(IEnumerable<string> symbols, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|symbols|The symbols to get the price for|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetPricesAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#symbol-price-ticker](https://binance-docs.github.io/apidocs/spot/en/#symbol-price-ticker)  
+<p>
+
 *Get a list of the prices of all symbols*  
 
 ```csharp  
@@ -670,6 +719,35 @@ Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default)
 
 ***
 
+## GetStakingProductsAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#get-staking-product-list-user_data](https://binance-docs.github.io/apidocs/spot/en/#get-staking-product-list-user_data)  
+<p>
+
+*Get avaialble staking products list*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.ExchangeData.GetStakingProductsAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BinanceStakingProduct>>> GetStakingProductsAsync(StakingProductType product, string? asset = default, int? page = default, int? limit = default, int? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|product|Product type|
+|_[Optional]_ asset|Filter for asset|
+|_[Optional]_ page|Page|
+|_[Optional]_ limit|Max items per page|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetSystemStatusAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#system-status-system](https://binance-docs.github.io/apidocs/spot/en/#system-status-system)  
@@ -713,6 +791,31 @@ Task<WebCallResult<IBinanceTick>> GetTickerAsync(string symbol, CancellationToke
 |Parameter|Description|
 |---|---|
 |symbol|The symbol to get the data for|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetTickersAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#24hr-ticker-price-change-statistics](https://binance-docs.github.io/apidocs/spot/en/#24hr-ticker-price-change-statistics)  
+<p>
+
+*Get data regarding the last 24 hours for the provided symbols*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.ExchangeData.GetTickersAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<IBinanceTick>>> GetTickersAsync(IEnumerable<string> symbols, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|symbols|The symbols to get the data for|
 |_[Optional]_ ct|Cancellation token|
 
 </p>

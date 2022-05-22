@@ -662,6 +662,33 @@ Task<WebCallResult<IEnumerable<BinanceFundingAsset>>> GetFundingWalletAsync(stri
 
 ***
 
+## GetInterestMarginDataAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#query-cross-margin-fee-data-user_data](https://binance-docs.github.io/apidocs/spot/en/#query-cross-margin-fee-data-user_data)  
+<p>
+
+*Get cross margin interest data*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.Account.GetInterestMarginDataAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BinanceInterestMarginData>>> GetInterestMarginDataAsync(string? asset = default, string? vipLevel = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ asset|Filter by asset|
+|_[Optional]_ vipLevel|Vip level|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetIsolatedMarginAccountAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#query-isolated-margin-account-info-user_data](https://binance-docs.github.io/apidocs/spot/en/#query-isolated-margin-account-info-user_data)  
@@ -713,6 +740,32 @@ Task<WebCallResult<BinanceQueryRecords<BinanceIsolatedMarginTransfer>>> GetIsola
 |_[Optional]_ endTime|Filter by end time|
 |current|Current page|
 |limit|Page size|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetLeveragedTokensUserLimitAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#get-blvt-user-limit-info-user_data](https://binance-docs.github.io/apidocs/spot/en/#get-blvt-user-limit-info-user_data)  
+<p>
+
+*Get leveraged tokens user limits*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.Account.GetLeveragedTokensUserLimitAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BinanceBlvtUserLimit>>> GetLeveragedTokensUserLimitAsync(string? tokenName = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ tokenName|Filter by token name|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
@@ -924,6 +977,30 @@ Task<WebCallResult<decimal>> GetMarginMaxTransferAmountAsync(string asset, strin
 
 ***
 
+## GetMarginOrderRateLimitStatusAsync  
+
+<p>
+
+*Get isolated margin order rate limits*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.Account.GetMarginOrderRateLimitStatusAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BinanceOrderRateLimit>>> GetMarginOrderRateLimitStatusAsync(int? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetMarginRepaysAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#query-repay-record-user_data](https://binance-docs.github.io/apidocs/spot/en/#query-repay-record-user_data)  
@@ -1003,6 +1080,33 @@ Task<WebCallResult<BinanceRebateWrapper>> GetRebateHistoryAsync(DateTime? startT
 |_[Optional]_ startTime|Filter by start time|
 |_[Optional]_ endTime|Filter by end time|
 |_[Optional]_ page|Results per page|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetStakingPersonalQuotaAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#get-personal-left-quota-of-staking-product-user_data](https://binance-docs.github.io/apidocs/spot/en/#get-personal-left-quota-of-staking-product-user_data)  
+<p>
+
+*Get personal staking quota*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.Account.GetStakingPersonalQuotaAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceStakingPersonalQuota>> GetStakingPersonalQuotaAsync(StakingProductType product, string productId, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|product|The staking product|
+|productId|Product id|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
@@ -1280,6 +1384,34 @@ Task<WebCallResult<BinanceTransaction>> MarginRepayAsync(string asset, decimal q
 |quantity|The quantity to be borrow|
 |_[Optional]_ isIsolated|For isolated margin or not|
 |_[Optional]_ symbol|The isolated symbol|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## SetAutoStakingAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#set-auto-staking-user_data](https://binance-docs.github.io/apidocs/spot/en/#set-auto-staking-user_data)  
+<p>
+
+*Set auto staking for a product*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.Account.SetAutoStakingAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceStakingResult>> SetAutoStakingAsync(StakingProductType product, string positionId, bool renewable, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|product|The staking product|
+|positionId|The position|
+|renewable|Renewable|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 

@@ -678,7 +678,7 @@ var result = await client.GeneralApi.SubAccount.TransferSubAccountAsync(/* param
 ```  
 
 ```csharp  
-Task<WebCallResult<BinanceTransaction>> TransferSubAccountAsync(TransferAccountType fromAccountType, TransferAccountType toAccountType, string asset, decimal quantity, string? fromEmail = default, string? toEmail = default, int? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BinanceTransaction>> TransferSubAccountAsync(TransferAccountType fromAccountType, TransferAccountType toAccountType, string asset, decimal quantity, string? fromEmail = default, string? toEmail = default, string? symbol = default, int? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -689,6 +689,7 @@ Task<WebCallResult<BinanceTransaction>> TransferSubAccountAsync(TransferAccountT
 |quantity|The quantity to transfer|
 |_[Optional]_ fromEmail|From which account to transfer|
 |_[Optional]_ toEmail|To which account to transfer|
+|_[Optional]_ symbol|The sybol to transfer, only for isolated margin|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 

@@ -167,16 +167,16 @@ Task<WebCallResult<IEnumerable<BinanceSavingsProduct>>> GetFlexibleProductListAs
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.GeneralApi.Lending.GetFlexibleProductPositionAsync(/* parameters */);  
+var result = await client.GeneralApi.Lending.GetFlexibleProductPositionAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BinanceFlexibleProductPosition>>> GetFlexibleProductPositionAsync(string asset, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BinanceFlexibleProductPosition>>> GetFlexibleProductPositionAsync(string? asset = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|asset|Asset|
+|_[Optional]_ asset|Asset|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 

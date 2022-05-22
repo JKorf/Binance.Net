@@ -341,7 +341,7 @@ var result = await client.SpotApi.Trading.GetLeveragedTokensSubscriptionRecordsA
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BinanecBlvtSubscription>>> GetLeveragedTokensSubscriptionRecordsAsync(string? tokenName = default, long? id = default, DateTime? startTime = default, DateTime? endTime = default, int? limit = default, int? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BinanceBlvtSubscription>>> GetLeveragedTokensSubscriptionRecordsAsync(string? tokenName = default, long? id = default, DateTime? startTime = default, DateTime? endTime = default, int? limit = default, int? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -874,6 +874,67 @@ Task<WebCallResult<IEnumerable<BinancePayTrade>>> GetPayTradeHistoryAsync(DateTi
 
 ***
 
+## GetStakingHistoryAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#get-staking-history-user_data](https://binance-docs.github.io/apidocs/spot/en/#get-staking-history-user_data)  
+<p>
+
+*Get staking history*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.Trading.GetStakingHistoryAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BinanceStakingHistory>>> GetStakingHistoryAsync(StakingProductType product, StakingTransactionType transactionType, string? asset = default, DateTime? startTime = default, DateTime? endTime = default, int? page = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|product|Product type|
+|transactionType|Transaction type|
+|_[Optional]_ asset|Filter by asset|
+|_[Optional]_ startTime|Filter by start time|
+|_[Optional]_ endTime|Filter by end time|
+|_[Optional]_ page|Page|
+|_[Optional]_ limit|Max results|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetStakingPositionsAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#get-staking-product-position-user_data](https://binance-docs.github.io/apidocs/spot/en/#get-staking-product-position-user_data)  
+<p>
+
+*Get staking positions*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.Trading.GetStakingPositionsAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BinanceStakingPosition>>> GetStakingPositionsAsync(StakingProductType product, string? productId = default, int? page = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|product|Product type|
+|_[Optional]_ productId|Product id|
+|_[Optional]_ page|Page|
+|_[Optional]_ limit|Max results|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetUserTradesAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#account-trade-list-user_data](https://binance-docs.github.io/apidocs/spot/en/#account-trade-list-user_data)  
@@ -1024,7 +1085,7 @@ var result = await client.SpotApi.Trading.PlaceOcoOrderAsync(/* parameters */);
 ```  
 
 ```csharp  
-Task<WebCallResult<BinanceOrderOcoList>> PlaceOcoOrderAsync(string symbol, OrderSide side, decimal quantity, decimal price, decimal stopPrice, decimal? stopLimitPrice = default, string? listClientOrderId = default, string? limitClientOrderId = default, string? stopClientOrderId = default, decimal? limitIcebergQuantity = default, decimal? stopIcebergQuantity = default, TimeInForce? stopLimitTimeInForce = default, int? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BinanceOrderOcoList>> PlaceOcoOrderAsync(string symbol, OrderSide side, decimal quantity, decimal price, decimal stopPrice, decimal? stopLimitPrice = default, string? listClientOrderId = default, string? limitClientOrderId = default, string? stopClientOrderId = default, decimal? limitIcebergQuantity = default, decimal? stopIcebergQuantity = default, TimeInForce? stopLimitTimeInForce = default, int? trailingDelta = default, int? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -1041,6 +1102,7 @@ Task<WebCallResult<BinanceOrderOcoList>> PlaceOcoOrderAsync(string symbol, Order
 |_[Optional]_ limitIcebergQuantity|Iceberg quantity for the limit order|
 |_[Optional]_ stopIcebergQuantity|Iceberg quantity for the stop order|
 |_[Optional]_ stopLimitTimeInForce|Lifetime of the stop order (GoodTillCancel/ImmediateOrCancel/FillOrKill)|
+|_[Optional]_ trailingDelta|Trailing delta value for order in BIPS. A value of 1 means 0.01% trailing delta.|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
@@ -1061,7 +1123,7 @@ var result = await client.SpotApi.Trading.PlaceOrderAsync(/* parameters */);
 ```  
 
 ```csharp  
-Task<WebCallResult<BinancePlacedOrder>> PlaceOrderAsync(string symbol, OrderSide side, SpotOrderType type, decimal? quantity = default, decimal? quoteQuantity = default, string? newClientOrderId = default, decimal? price = default, TimeInForce? timeInForce = default, decimal? stopPrice = default, decimal? icebergQty = default, OrderResponseType? orderResponseType = default, int? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BinancePlacedOrder>> PlaceOrderAsync(string symbol, OrderSide side, SpotOrderType type, decimal? quantity = default, decimal? quoteQuantity = default, string? newClientOrderId = default, decimal? price = default, TimeInForce? timeInForce = default, decimal? stopPrice = default, decimal? icebergQty = default, OrderResponseType? orderResponseType = default, int? trailingDelta = default, int? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -1077,6 +1139,7 @@ Task<WebCallResult<BinancePlacedOrder>> PlaceOrderAsync(string symbol, OrderSide
 |_[Optional]_ stopPrice|Used for stop orders|
 |_[Optional]_ icebergQty|Used for iceberg orders|
 |_[Optional]_ orderResponseType|Used for the response JSON|
+|_[Optional]_ trailingDelta|Trailing delta value for order in BIPS. A value of 1 means 0.01% trailing delta.|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
@@ -1097,7 +1160,7 @@ var result = await client.SpotApi.Trading.PlaceTestOrderAsync(/* parameters */);
 ```  
 
 ```csharp  
-Task<WebCallResult<BinancePlacedOrder>> PlaceTestOrderAsync(string symbol, OrderSide side, SpotOrderType type, decimal? quantity = default, decimal? quoteQuantity = default, string? newClientOrderId = default, decimal? price = default, TimeInForce? timeInForce = default, decimal? stopPrice = default, decimal? icebergQty = default, OrderResponseType? orderResponseType = default, int? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BinancePlacedOrder>> PlaceTestOrderAsync(string symbol, OrderSide side, SpotOrderType type, decimal? quantity = default, decimal? quoteQuantity = default, string? newClientOrderId = default, decimal? price = default, TimeInForce? timeInForce = default, decimal? stopPrice = default, decimal? icebergQty = default, OrderResponseType? orderResponseType = default, int? trailingDelta = default, int? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -1113,6 +1176,36 @@ Task<WebCallResult<BinancePlacedOrder>> PlaceTestOrderAsync(string symbol, Order
 |_[Optional]_ stopPrice|Used for stop orders|
 |_[Optional]_ icebergQty|User for iceberg orders|
 |_[Optional]_ orderResponseType|Used for the response JSON|
+|_[Optional]_ trailingDelta|Trailing delta value for order in BIPS. A value of 1 means 0.01% trailing delta.|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## PurchaseStakingProductAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#purchase-staking-product-user_data](https://binance-docs.github.io/apidocs/spot/en/#purchase-staking-product-user_data)  
+<p>
+
+*Purchase a staking product*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.Trading.PurchaseStakingProductAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceStakingPositionResult>> PurchaseStakingProductAsync(StakingProductType product, string productId, decimal quantity, bool? renewable = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|product|Product type|
+|productId|Product id|
+|quantity|Quantity to purchase|
+|_[Optional]_ renewable|Renewable|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
@@ -1140,6 +1233,36 @@ Task<WebCallResult<BinanceBlvtRedeemResult>> RedeemLeveragedTokenAsync(string to
 |---|---|
 |tokenName|Name of the token to redeem|
 |quantity|Quantity to redeem|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## RedeemStakingProductAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#redeem-staking-product-user_data](https://binance-docs.github.io/apidocs/spot/en/#redeem-staking-product-user_data)  
+<p>
+
+*Redeem a staking product*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.Trading.RedeemStakingProductAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceStakingResult>> RedeemStakingProductAsync(StakingProductType product, string productId, string? positionId = default, decimal? quantity = default, bool? renewable = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|product|Product type|
+|productId|Product id|
+|_[Optional]_ positionId|Position id, required for Staking or LockedDefi types|
+|_[Optional]_ quantity|Quantity to purchase|
+|_[Optional]_ renewable|Renewable|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
