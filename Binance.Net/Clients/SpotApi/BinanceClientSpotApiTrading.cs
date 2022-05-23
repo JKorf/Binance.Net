@@ -184,8 +184,8 @@ namespace Binance.Net.Clients.SpotApi
                 null,
                 null,
                 orderResponseType,
-                receiveWindow,
                 trailingDelta,
+                receiveWindow,
                 1,
                 ct).ConfigureAwait(false);
             if (result)
