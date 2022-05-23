@@ -20,6 +20,9 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 8.1.1 - 23 May 2022
+    * Fixed parameter order trailing delta in PlaceOrderAsync
+
 * Version 8.1.0 - 22 May 2022
     * Added LeveragedTokens user limit endpoint
     * Added Staking endpoints

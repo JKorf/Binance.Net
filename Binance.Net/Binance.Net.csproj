@@ -7,9 +7,9 @@
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
     <Authors>JKorf, Nikkozp, CaptHolley</Authors>
-    <PackageVersion>8.1.0</PackageVersion>
-    <AssemblyVersion>8.1.0</AssemblyVersion>
-    <FileVersion>8.1.0</FileVersion>
+    <PackageVersion>8.1.1</PackageVersion>
+    <AssemblyVersion>8.1.1</AssemblyVersion>
+    <FileVersion>8.1.1</FileVersion>
     <Description>Binance.Net is a .Net wrapper for the Binance API, including Binance Futures. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance Binance.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
@@ -20,7 +20,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>8.1.0 - Added LeveragedTokens user limit endpoint, Added Staking endpoints, Added USD futures transaction history download endpoints, Added USD futures algo orders endpoints, Added margin order rate limit endpoint, Added interest margin data endpoint, Added symbol collection overloads for GetPricesAsync, GetBookPricesAsync and GetTickersAsync, Added symbol parameter for subaccount transfer, Added margin account types for subaccount transfer, Added TrailingDelta support, Added quoteQuantity minimal notional value TradeRule validation, Renamed GetAllBookPricesAsync to GetBookPricesAsync</PackageReleaseNotes>
+    <PackageReleaseNotes>8.1.1 - Fixed parameter order trailing delta in PlaceOrderAsync</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup Label="Deterministic Build" Condition="'$(Configuration)' == 'Release'">
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
