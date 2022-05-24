@@ -11,6 +11,7 @@ using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot;
+using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.Socket;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
@@ -28,6 +29,7 @@ namespace Binance.Net.Clients.SpotApi
     {
         #region fields
         private readonly BinanceSocketClient _baseClient;
+        private readonly BinanceSocketClientOptions _options;
         private readonly Log _log;
 
         private const string depthStreamEndpoint = "@depth";
@@ -41,6 +43,9 @@ namespace Binance.Net.Clients.SpotApi
         private const string partialBookDepthStreamEndpoint = "@depth";
         private const string symbolMiniTickerStreamEndpoint = "@miniTicker";
         private const string allSymbolMiniTickerStreamEndpoint = "!miniTicker@arr";
+
+        private const string bltvInfoEndpoint = "@tokenNav";
+        private const string bltvKlineEndpoint = "@nav_kline";
 
         private const string executionUpdateEvent = "executionReport";
         private const string ocoOrderUpdateEvent = "listStatus";
@@ -56,6 +61,7 @@ namespace Binance.Net.Clients.SpotApi
         public BinanceSocketClientSpotStreams(Log log, BinanceSocketClient baseClient, BinanceSocketClientOptions options) :
             base(options, options.SpotStreamsOptions)
         {
+            _options = options;
             _baseClient = baseClient;
             _log = log;
         }
@@ -379,6 +385,37 @@ namespace Binance.Net.Clients.SpotApi
         }
         #endregion
 
+        #region Blvt info update
+        /// <inheritdoc />
+        public Task<CallResult<UpdateSubscription>> SubscribeToBlvtInfoUpdatesAsync(string token,
+            Action<DataEvent<BinanceBlvtInfoUpdate>> onMessage, CancellationToken ct = default)
+            => SubscribeToBlvtInfoUpdatesAsync(new List<string> { token }, onMessage, ct);
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToBlvtInfoUpdatesAsync(IEnumerable<string> tokens, Action<DataEvent<BinanceBlvtInfoUpdate>> onMessage, CancellationToken ct = default)
+        {
+            tokens = tokens.Select(a => a.ToUpper(CultureInfo.InvariantCulture) + bltvInfoEndpoint).ToArray();
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceBlvtInfoUpdate>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.TokenName)));
+            return await _baseClient.SubscribeInternal(this, _options.BlvtStreamAddress, tokens, handler, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Blvt kline update
+        /// <inheritdoc />
+        public Task<CallResult<UpdateSubscription>> SubscribeToBlvtKlineUpdatesAsync(string token,
+            KlineInterval interval, Action<DataEvent<BinanceStreamKlineData>> onMessage, CancellationToken ct = default) =>
+            SubscribeToBlvtKlineUpdatesAsync(new List<string> { token }, interval, onMessage, ct);
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToBlvtKlineUpdatesAsync(IEnumerable<string> tokens, KlineInterval interval, Action<DataEvent<BinanceStreamKlineData>> onMessage, CancellationToken ct = default)
+        {
+            tokens = tokens.Select(a => a.ToUpper(CultureInfo.InvariantCulture) + bltvKlineEndpoint + "_" + JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ToArray();
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamKlineData>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
+            return await _baseClient.SubscribeInternal(this, _options.BlvtStreamAddress, tokens, handler, ct).ConfigureAwait(false);
+        }
+
+        #endregion
         #endregion
     }
 }

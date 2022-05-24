@@ -137,6 +137,11 @@ namespace Binance.Net.Objects
         }
 
         /// <summary>
+        /// Address for conencting the BLVT streams
+        /// </summary>
+        public string BlvtStreamAddress { get; set; } = BinanceApiAddresses.Default.BlvtSocketClientAddress;
+
+        /// <summary>
         /// ctor
         /// </summary>
         public BinanceSocketClientOptions() : this(Default)
@@ -151,6 +156,8 @@ namespace Binance.Net.Objects
         {
             if (baseOn == null)
                 return;
+
+            BlvtStreamAddress = baseOn.BlvtStreamAddress;
 
             _spotStreamsOptions = new ApiClientOptions(baseOn.SpotStreamsOptions, null);
             _usdFuturesStreamsOptions = new ApiClientOptions(baseOn.UsdFuturesStreamsOptions, null);
