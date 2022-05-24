@@ -40,6 +40,8 @@ namespace Binance.Net.UnitTests.TestImplementations
 
         public Uri Uri => new Uri("wss://test.com/ws");
 
+        public TimeSpan KeepAliveInterval { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public Task<bool> ConnectAsync()
         {
             Connected = CanConnect;
