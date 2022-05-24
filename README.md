@@ -20,6 +20,11 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 8.1.2 - 24 May 2022
+    * Fixed quoteQuantity not being passed on after checking trade rules
+    * Fixed Blvt stream address and moved it to Spot
+    * Updated CryptoExchange.Net
+
 * Version 8.1.1 - 23 May 2022
     * Fixed parameter order trailing delta in PlaceOrderAsync
 
