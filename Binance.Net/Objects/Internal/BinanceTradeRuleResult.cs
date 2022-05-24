@@ -16,7 +16,8 @@
                 Passed = true,
                 Quantity = quantity,
                 Price = price,
-                StopPrice = stopPrice
+                StopPrice = stopPrice,
+                QuoteQuantity = quoteQuantity
             };
         }
 
