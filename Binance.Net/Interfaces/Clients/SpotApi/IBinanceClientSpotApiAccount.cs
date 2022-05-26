@@ -335,7 +335,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<BinanceDepositAddress>> GetDepositAddressAsync(string asset, string? network = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Execute transfer between spot account and margin account.
+        /// Execute transfer between spot account and cross margin account.
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#margin-account-trade" /></para>
         /// </summary>
         /// <param name="asset">The asset being transferred, e.g., BTC</param>
