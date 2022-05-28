@@ -106,8 +106,6 @@ namespace Binance.Net.Clients.GeneralApi
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceTransaction>> TransferUniversalAsync(TransferAccountType fromAccountType, TransferAccountType toAccountType, string asset, decimal quantity, string? fromEmail = null, string? toEmail = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
         {
-            if (string.IsNullOrEmpty(fromEmail) && string.IsNullOrEmpty(toEmail))
-                throw new ArgumentException("fromEmail and/or toEmail should be provided");
             asset.ValidateNotNull(nameof(asset));
 
             var parameters = new Dictionary<string, object>
