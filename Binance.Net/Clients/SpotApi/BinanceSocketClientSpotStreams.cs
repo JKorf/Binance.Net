@@ -394,6 +394,9 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToBlvtInfoUpdatesAsync(IEnumerable<string> tokens, Action<DataEvent<BinanceBlvtInfoUpdate>> onMessage, CancellationToken ct = default)
         {
+            if (_options.BlvtStreamAddress == null)
+                throw new Exception("No url found for Blvt stream, check the `BlvtStreamAddress` client option");
+
             tokens = tokens.Select(a => a.ToUpper(CultureInfo.InvariantCulture) + bltvInfoEndpoint).ToArray();
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceBlvtInfoUpdate>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.TokenName)));
             return await _baseClient.SubscribeInternal(this, _options.BlvtStreamAddress, tokens, handler, ct).ConfigureAwait(false);
@@ -410,6 +413,9 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToBlvtKlineUpdatesAsync(IEnumerable<string> tokens, KlineInterval interval, Action<DataEvent<BinanceStreamKlineData>> onMessage, CancellationToken ct = default)
         {
+            if (_options.BlvtStreamAddress == null)
+                throw new Exception("No url found for Blvt stream, check the `BlvtStreamAddress` client option");
+
             tokens = tokens.Select(a => a.ToUpper(CultureInfo.InvariantCulture) + bltvKlineEndpoint + "_" + JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ToArray();
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamKlineData>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
             return await _baseClient.SubscribeInternal(this, _options.BlvtStreamAddress, tokens, handler, ct).ConfigureAwait(false);

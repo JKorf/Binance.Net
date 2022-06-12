@@ -139,7 +139,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// Address for conencting the BLVT streams
         /// </summary>
-        public string BlvtStreamAddress { get; set; } = BinanceApiAddresses.Default.BlvtSocketClientAddress;
+        public string? BlvtStreamAddress { get; set; } = BinanceApiAddresses.Default.BlvtSocketClientAddress;
 
         /// <summary>
         /// ctor
