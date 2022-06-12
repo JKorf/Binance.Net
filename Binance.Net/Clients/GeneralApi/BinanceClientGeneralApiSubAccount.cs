@@ -101,13 +101,11 @@ namespace Binance.Net.Clients.GeneralApi
 
         #endregion
 
-        #region Sub-account Transfer(For Master Account)
+        #region Universal Transfer(For Master Account)
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceTransaction>> TransferSubAccountAsync(TransferAccountType fromAccountType, TransferAccountType toAccountType, string asset, decimal quantity, string? fromEmail = null, string? toEmail = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceTransaction>> TransferUniversalAsync(TransferAccountType fromAccountType, TransferAccountType toAccountType, string asset, decimal quantity, string? fromEmail = null, string? toEmail = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
         {
-            if (string.IsNullOrEmpty(fromEmail) && string.IsNullOrEmpty(toEmail))
-                throw new ArgumentException("fromEmail and/or toEmail should be provided");
             asset.ValidateNotNull(nameof(asset));
 
             var parameters = new Dictionary<string, object>

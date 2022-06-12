@@ -44,7 +44,9 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         Task<WebCallResult<IEnumerable<BinanceSubAccountTransfer>>> GetSubAccountTransferHistoryForMasterAsync(string? fromEmail = null, string? toEmail = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Transfers an asset form/to a sub account. If fromEmail or toEmail is not send it is interpreted as from/to the master account. Transfer between futures accounts is not supported
+        /// Transfers an asset form/to an account. 
+        /// <para>If fromEmail or toEmail of a sub-account is not sent then it is interpreted as from/to the master account.</para>
+        /// <para>Transfer between futures accounts is not supported</para>
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#sub-account-futures-asset-transfer-for-master-account" /></para>
         /// </summary>
         /// <param name="fromEmail">From which account to transfer</param>
@@ -57,7 +59,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The result of the transfer</returns>
-        Task<WebCallResult<BinanceTransaction>> TransferSubAccountAsync(TransferAccountType fromAccountType, TransferAccountType toAccountType, string asset, decimal quantity, string? fromEmail = null, string? toEmail = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceTransaction>> TransferUniversalAsync(TransferAccountType fromAccountType, TransferAccountType toAccountType, string asset, decimal quantity, string? fromEmail = null, string? toEmail = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets list of balances for a sub account
