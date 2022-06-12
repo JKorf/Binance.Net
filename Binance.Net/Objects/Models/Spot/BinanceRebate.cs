@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Binance.Net.Enums;
+using CryptoExchange.Net.Converters;
+using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Models.Spot
 {
@@ -47,6 +49,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Last udpate time
         /// </summary>
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime UpdateTime { get; set; }
     }
 }
