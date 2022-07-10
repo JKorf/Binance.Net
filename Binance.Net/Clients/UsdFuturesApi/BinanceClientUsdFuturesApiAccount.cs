@@ -200,7 +200,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesQuantileEstimation>>(_baseClient.GetUrl(adlQuantileEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
+            if(symbol == null)            
+                return await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesQuantileEstimation>>(_baseClient.GetUrl(adlQuantileEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
+
+            var result = await _baseClient.SendRequestInternal<BinanceFuturesQuantileEstimation>(_baseClient.GetUrl(adlQuantileEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
+            if (!result)
+                return result.As<IEnumerable<BinanceFuturesQuantileEstimation>>(null);
+
+            return result.As<IEnumerable<BinanceFuturesQuantileEstimation>>(new[] { result.Data });
         }
 
         #endregion
