@@ -12930,6 +12930,11 @@
             The quantity that is locked in a trade
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamBalance.BalanceChange">
+            <summary>
+            The balance change except PnL and commission
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamPosition">
             <summary>
             Information about an asset position
