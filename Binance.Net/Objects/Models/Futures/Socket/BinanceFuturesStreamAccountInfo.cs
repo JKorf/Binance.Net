@@ -68,6 +68,11 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// </summary>
         [JsonProperty("cw")]
         public decimal CrossWalletBalance { get; set; }
+        /// <summary>
+        /// The balance change except PnL and commission
+        /// </summary>
+        [JsonProperty("bc")]
+        public decimal BalanceChange { get; set; }
     }
 
     /// <summary>
