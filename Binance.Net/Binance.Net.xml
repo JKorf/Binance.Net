@@ -6551,7 +6551,7 @@
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiAccount.CrossMarginTransferAsync(System.String,System.Decimal,Binance.Net.Enums.TransferDirectionType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
-            Execute transfer between spot account and margin account.
+            Execute transfer between spot account and cross margin account.
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#margin-account-trade" /></para>
             </summary>
             <param name="asset">The asset being transferred, e.g., BTC</param>

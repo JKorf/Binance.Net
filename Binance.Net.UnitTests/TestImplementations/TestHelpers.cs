@@ -16,6 +16,7 @@ using Binance.Net.Objects;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Logging;
+using CryptoExchange.Net.Sockets;
 using Moq;
 using Newtonsoft.Json;
 
@@ -68,7 +69,7 @@ namespace Binance.Net.UnitTests.TestImplementations
             BinanceSocketClient client;
             client = options != null ? new BinanceSocketClient(options) : new BinanceSocketClient();
             client.SocketFactory = Mock.Of<IWebsocketFactory>();
-            Mock.Get(client.SocketFactory).Setup(f => f.CreateWebsocket(It.IsAny<Log>(), It.IsAny<string>())).Returns(socket);
+            Mock.Get(client.SocketFactory).Setup(f => f.CreateWebsocket(It.IsAny<Log>(), It.IsAny<WebSocketParameters>())).Returns(socket);
             return client;
         }
 

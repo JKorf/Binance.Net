@@ -19,6 +19,8 @@ namespace Binance.Net.UnitTests.TestImplementations
         public event Action<Exception> OnError;
 #pragma warning restore 0067
         public event Action OnOpen;
+        public event Action OnReconnecting;
+        public event Action OnReconnected;
 
         public int Id { get; }
         public bool ShouldReconnect { get; set; }
@@ -103,6 +105,11 @@ namespace Binance.Net.UnitTests.TestImplementations
         {
             while (Connected)
                 await Task.Delay(10);
+        }
+
+        public Task ReconnectAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }
