@@ -20,6 +20,10 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 8.1.5 - 12 Jul 2022
+    * Fixed missing AccountType enum value causing error when deserializing GetExchangeInfoAsync
+    * Fixed future deserialization failing when there's an unknown account type
+
 * Version 8.1.4 - 10 Jul 2022
     * Added BalanceChange property in futures account update
     * Fixed GetPositionAdlQuantileEstimationAsync deserialization when symbol parameter is used
