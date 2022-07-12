@@ -53,12 +53,12 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The type of account
         /// </summary>
-        [JsonConverter(typeof(AccountTypeConverter))]
+        [JsonConverter(typeof(EnumConverter))]
         public AccountType AccountType { get; set; }
         /// <summary>
         /// Permissions types
         /// </summary>
-        [JsonProperty(ItemConverterType = typeof(AccountTypeConverter))]
+        [JsonProperty(ItemConverterType = typeof(EnumConverter))]
         public IEnumerable<AccountType> Permissions { get; set; } = Array.Empty<AccountType>();
         /// <summary>
         /// List of assets with their current balances

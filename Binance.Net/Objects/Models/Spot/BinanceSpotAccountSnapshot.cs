@@ -20,7 +20,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Account type the data is for
         /// </summary>
-        [JsonConverter(typeof(AccountTypeConverter))]
+        [JsonConverter(typeof(EnumConverter))]
         public AccountType Type { get; set; }
         /// <summary>
         /// Snapshot data

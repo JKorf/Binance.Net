@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
+using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Models.Spot
@@ -83,7 +84,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Permissions types
         /// </summary>
-        [JsonProperty(ItemConverterType = typeof(AccountTypeConverter))]
+        [JsonProperty(ItemConverterType = typeof(EnumConverter))]
         public IEnumerable<AccountType> Permissions { get; set; } = Array.Empty<AccountType>();
         /// <summary>
         /// Filters for order on this symbol

@@ -1770,6 +1770,11 @@
             Trade group 3
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup004">
+            <summary>
+            Trade group 4
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.AccountUpdateReason">
             <summary>
             Account update reason
