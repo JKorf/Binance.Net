@@ -17,10 +17,10 @@ namespace Binance.Net.UnitTests.TestImplementations
         public event Action<string> OnMessage;
 #pragma warning disable 0067
         public event Action<Exception> OnError;
-#pragma warning restore 0067
         public event Action OnOpen;
         public event Action OnReconnecting;
         public event Action OnReconnected;
+#pragma warning restore 0067
 
         public int Id { get; }
         public bool ShouldReconnect { get; set; }
