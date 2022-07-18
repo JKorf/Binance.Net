@@ -42,7 +42,7 @@ Task<WebCallResult<object>> CloseIsolatedMarginUserStreamAsync(string symbol, st
 [https://binance-docs.github.io/apidocs/spot/en/#margin-account-trade](https://binance-docs.github.io/apidocs/spot/en/#margin-account-trade)  
 <p>
 
-*Execute transfer between spot account and margin account.*  
+*Execute transfer between spot account and cross margin account.*  
 
 ```csharp  
 var client = new BinanceClient();  
