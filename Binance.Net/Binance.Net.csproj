@@ -7,9 +7,9 @@
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
     <Authors>JKorf, Nikkozp, CaptHolley</Authors>
-    <PackageVersion>8.1.6</PackageVersion>
-    <AssemblyVersion>8.1.6</AssemblyVersion>
-    <FileVersion>8.1.6</FileVersion>
+    <PackageVersion>8.1.7</PackageVersion>
+    <AssemblyVersion>8.1.7</AssemblyVersion>
+    <FileVersion>8.1.7</FileVersion>
     <Description>Binance.Net is a .Net wrapper for the Binance API, including Binance Futures. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance Binance.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
@@ -20,7 +20,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>8.1.6 - Fixed MarginToIsolatedMargin UniversalTransferType serialization, Fixed max position filter serialization, Updated CryptoExchange.Net</PackageReleaseNotes>
+    <PackageReleaseNotes>8.1.7 - Updated CryptoExchange.Net</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup Label="Deterministic Build" Condition="'$(Configuration)' == 'Release'">
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
