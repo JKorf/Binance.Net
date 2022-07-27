@@ -1131,7 +1131,7 @@ namespace Binance.Net.Clients.SpotApi
                 { "product", EnumConverter.GetString(product) }
             };
             parameters.AddOptionalParameter("productId", productId);
-            parameters.AddOptionalParameter("page", page);
+            parameters.AddOptionalParameter("current", page);
             parameters.AddOptionalParameter("size", limit);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
@@ -1149,7 +1149,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("asset", asset);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
-            parameters.AddOptionalParameter("page", page);
+            parameters.AddOptionalParameter("current", page);
             parameters.AddOptionalParameter("size", limit);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
