@@ -7,14 +7,22 @@ Binance.Net is a wrapper around the Binance API as described on [Binance](https:
 
 [Documentation](https://jkorf.github.io/Binance.Net/)
 
-## Donate / Sponsor
-I develop and maintain this package on my own for free in my spare time. Donations are greatly appreciated. If you prefer to donate any other currency please contact me.
+## Support the project
+I develop and maintain this package on my own for free in my spare time, any support is greatly appreciated.
+
+### Referral link
+Sign up using the following referral link to pay a small percentage of the trading fees you pay to support the project instead of paying them straight to Binance. This doesn't cost you a thing!
+[Link](https://accounts.binance.com/en/register?ref=10153680)
+
+### Donate
+Make a one time donation in a crypto currency of your choice. If you prefer to donate a currency not listed here please contact me.
 
 **Btc**:  12KwZk3r2Y3JZ2uMULcjqqBvXmpDwjhhQS  
 **Eth**:  0x069176ca1a4b1d6e0b7901a6bc0dbf3bb0bf5cc2  
 **Nano**: xrb_1ocs3hbp561ef76eoctjwg85w5ugr8wgimkj8mfhoyqbx4s1pbc74zggw7gs  
 
-Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf)  
+### Sponsor
+Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Discord
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
