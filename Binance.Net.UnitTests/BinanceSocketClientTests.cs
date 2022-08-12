@@ -206,7 +206,7 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsNotNull(result);
-            Assert.IsTrue(TestHelpers.AreEqual(data.Data, result));
+            Assert.IsTrue(TestHelpers.AreEqual(data.Data, result, "ListenKey"));
         }
 
         [TestCase()]
@@ -256,7 +256,7 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsNotNull(result);
-            Assert.IsTrue(TestHelpers.AreEqual(data.Data, result, "Orders"));
+            Assert.IsTrue(TestHelpers.AreEqual(data.Data, result, "Orders", "ListenKey"));
             Assert.IsTrue(TestHelpers.AreEqual(data.Data.Orders.ToList()[0], result.Orders.ToList()[0]));
             Assert.IsTrue(TestHelpers.AreEqual(data.Data.Orders.ToList()[1], result.Orders.ToList()[1]));
         }
@@ -306,7 +306,7 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsNotNull(result);
-            Assert.IsTrue(TestHelpers.AreEqual(data.Data, result, "Balances"));
+            Assert.IsTrue(TestHelpers.AreEqual(data.Data, result, "Balances", "ListenKey"));
         }
     }
 }

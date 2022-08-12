@@ -42,6 +42,7 @@ namespace Binance.Net.Clients.SpotApi
         private const string openOrdersEndpoint = "openOrders";
         private const string allOrdersEndpoint = "allOrders";
         private const string newOrderEndpoint = "order";
+        private const string cancelReplaceOrderEndpoint = "order/cancelReplace";
         private const string newTestOrderEndpoint = "order/test";
         private const string queryOrderEndpoint = "order";
         private const string cancelOrderEndpoint = "order";
@@ -235,6 +236,94 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceOrderBase>>(_baseClient.GetUrl(cancelAllOpenOrderEndpoint, api, signedVersion), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
+        }
+        #endregion
+
+        #region Replace order
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceReplaceOrderResult>> ReplaceOrderAsync(string symbol,
+            OrderSide side,
+            SpotOrderType type,
+            CancelReplaceMode cancelReplaceMode,
+            long? cancelOrderId = null,
+            string? cancelClientOrderId = null,
+            string? newCancelClientOrderId = null,
+            string? newClientOrderId = null,
+            decimal? quantity = null,
+            decimal? quoteQuantity = null,
+            decimal? price = null,
+            TimeInForce? timeInForce = null,
+            decimal? stopPrice = null,
+            decimal? icebergQty = null,
+            OrderResponseType? orderResponseType = null,
+            int? trailingDelta = null,
+            int? strategyId = null, 
+            int? strategyType = null,
+            int? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            symbol.ValidateBinanceSymbol();
+
+            if (cancelOrderId == null && cancelClientOrderId == null || cancelOrderId != null && cancelClientOrderId != null)
+                throw new ArgumentException("1 of either should be specified, cancelOrderId or cancelClientOrderId");
+
+            if (quoteQuantity != null && type != SpotOrderType.Market)
+                throw new ArgumentException("quoteQuantity is only valid for market orders");
+
+            if (quantity == null && quoteQuantity == null || quantity != null && quoteQuantity != null)
+                throw new ArgumentException("1 of either should be specified, quantity or quoteOrderQuantity");
+
+            var rulesCheck = await _baseClient.CheckTradeRules(symbol, quantity, quoteQuantity, price, stopPrice, type, ct).ConfigureAwait(false);
+            if (!rulesCheck.Passed)
+            {
+                _log.Write(LogLevel.Warning, rulesCheck.ErrorMessage!);
+                return new WebCallResult<BinanceReplaceOrderResult>(new ArgumentError(rulesCheck.ErrorMessage!));
+            }
+
+            quantity = rulesCheck.Quantity;
+            price = rulesCheck.Price;
+            stopPrice = rulesCheck.StopPrice;
+            quoteQuantity = rulesCheck.QuoteQuantity;
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "symbol", symbol },
+                { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
+                { "type", JsonConvert.SerializeObject(type, new SpotOrderTypeConverter(false)) },
+                { "cancelReplaceMode", EnumConverter.GetString(cancelReplaceMode) }
+            };
+            parameters.AddOptionalParameter("cancelNewClientOrderId", newCancelClientOrderId);
+            parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
+            parameters.AddOptionalParameter("cancelOrderId", cancelOrderId);
+            parameters.AddOptionalParameter("strategyId", strategyId);
+            parameters.AddOptionalParameter("strategyType", strategyType);
+            parameters.AddOptionalParameter("cancelOrigClientOrderId", cancelClientOrderId);
+            parameters.AddOptionalParameter("quantity", quantity?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("quoteOrderQty", quoteQuantity?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)));
+            parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
+            parameters.AddOptionalParameter("trailingDelta", trailingDelta);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await _baseClient.SendRequestInternal<BinanceReplaceOrderResult>(_baseClient.GetUrl(cancelReplaceOrderEndpoint, api, signedVersion), HttpMethod.Post, ct, parameters, true, weight: 1).ConfigureAwait(false);
+            if (!result && result.OriginalData != null)
+            {
+                // Attempt to parse the error
+                var jsonData = result.OriginalData.ToJToken(_log);
+                if (jsonData != null)
+                {
+                    var error = jsonData["data"]?["cancelResult"]?.ToString() == "FAILURE" ? jsonData["data"]!["cancelResponse"] : jsonData["data"]!["newOrderResponse"];
+                    if (error != null && error.HasValues)
+                        return result.AsError<BinanceReplaceOrderResult>(new ServerError(error!.Value<int>("code"), error.Value<string>("msg")!));
+                }
+            }
+
+            if (result && result.Data.NewOrderResult == OrderOperationResult.Success)
+                _baseClient.InvokeOrderPlaced(new OrderId() { SourceObject = result.Data, Id = result.Data.NewOrderResponse!.Id.ToString(CultureInfo.InvariantCulture) });
+            return result;
         }
         #endregion
 

@@ -1,0 +1,35 @@
+{
+  "cancelResult": "SUCCESS",
+  "newOrderResult": "SUCCESS",
+  "cancelResponse": {
+    "symbol": "BTCUSDT",
+    "origClientOrderId": "DnLo3vTAQcjha43lAZhZ0y",
+    "orderId": 9,
+    "orderListId": -1,
+    "clientOrderId": "osxN3JXAtJvKvCqGeMWMVR",
+    "price": "0.01000000",
+    "origQty": "0.000100",
+    "executedQty": "0.00000000",
+    "cummulativeQuoteQty": "0.00000000",
+    "status": "CANCELED",
+    "timeInForce": "GTC",
+    "type": "LIMIT",
+    "side": "SELL"
+  },
+  "newOrderResponse": {
+    "symbol": "BTCUSDT",
+    "orderId": 10,
+    "orderListId": -1,
+    "clientOrderId": "wOceeeOzNORyLiQfw7jd8S",
+    "transactTime": 1652928801803,
+    "price": "0.02000000",
+    "origQty": "0.040000",
+    "executedQty": "0.00000000",
+    "cummulativeQuoteQty": "0.00000000",
+    "status": "NEW",
+    "timeInForce": "GTC",
+    "type": "LIMIT",
+    "side": "BUY",
+    "fills": []
+  }
+}

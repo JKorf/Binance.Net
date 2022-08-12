@@ -110,6 +110,51 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<IEnumerable<BinanceOrderBase>>> CancelAllOrdersAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Cancel an existing order and place a new order on the same symbol
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="side">The order side (buy/sell)</param>
+        /// <param name="type">The order type</param>
+        /// <param name="cancelReplaceMode">Replacement behavior</param>
+        /// <param name="cancelOrderId">The order id to cancel. Either this or cancelClientOrderId should be provided</param>
+        /// <param name="cancelClientOrderId">The client order id to cancel. Either this or cancelOrderId should be provided</param>
+        /// <param name="newCancelClientOrderId">New client order id for the canceled order</param>
+        /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
+        /// <param name="quantity">The quantity of the symbol</param>
+        /// <param name="quoteQuantity">The quantity of the quote symbol. Only valid for market orders</param>
+        /// <param name="price">The price to use</param>
+        /// <param name="newClientOrderId">Unique id for order</param>
+        /// <param name="stopPrice">Used for stop orders</param>
+        /// <param name="icebergQty">Used for iceberg orders</param>
+        /// <param name="orderResponseType">Used for the response JSON</param>
+        /// <param name="trailingDelta">Trailing delta value for order in BIPS. A value of 1 means 0.01% trailing delta.</param>
+        /// <param name="strategyId">Strategy id</param>
+        /// <param name="strategyType">Strategy type</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceReplaceOrderResult>> ReplaceOrderAsync(string symbol,
+            OrderSide side,
+            SpotOrderType type,
+            CancelReplaceMode cancelReplaceMode,
+            long? cancelOrderId = null,
+            string? cancelClientOrderId = null,
+            string? newCancelClientOrderId = null,
+            string? newClientOrderId = null,
+            decimal? quantity = null,
+            decimal? quoteQuantity = null,
+            decimal? price = null,
+            TimeInForce? timeInForce = null,
+            decimal? stopPrice = null,
+            decimal? icebergQty = null,
+            OrderResponseType? orderResponseType = null,
+            int? trailingDelta = null,
+            int? strategyId = null,
+            int? strategyType = null,
+            int? receiveWindow = null,
+            CancellationToken ct = default);
+
+        /// <summary>
         /// Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-order-user_data" /></para>
         /// </summary>

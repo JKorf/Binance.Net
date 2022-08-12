@@ -1167,6 +1167,9 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiTrading.CancelAllOrdersAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiTrading.ReplaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,Binance.Net.Enums.CancelReplaceMode,System.Nullable{System.Int64},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiTrading.GetOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -2081,6 +2084,21 @@
             CanceledBySystem
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.CancelReplaceMode">
+            <summary>
+            Cancel replace mode
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.CancelReplaceMode.StopOnFailure">
+            <summary>
+            If the cancel request fails, the new order placement will not be attempted.
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.CancelReplaceMode.AllowFailure">
+            <summary>
+            New order placement will be attempted even if cancel request fails.
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.ContractType">
             <summary>
             Type of contract
@@ -2724,6 +2742,26 @@
         <member name="F:Binance.Net.Enums.MinerStatus.Failure">
             <summary>
             Failure
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.OrderOperationResult">
+            <summary>
+            Operation result
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderOperationResult.Success">
+            <summary>
+            Successful
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderOperationResult.Failure">
+            <summary>
+            Failed
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderOperationResult.NotAttempted">
+            <summary>
+            Not attempted
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.OrderRejectReason">
@@ -7333,6 +7371,32 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for canceled order</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiTrading.ReplaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,Binance.Net.Enums.CancelReplaceMode,System.Nullable{System.Int64},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Cancel an existing order and place a new order on the same symbol
+            </summary>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="side">The order side (buy/sell)</param>
+            <param name="type">The order type</param>
+            <param name="cancelReplaceMode">Replacement behavior</param>
+            <param name="cancelOrderId">The order id to cancel. Either this or cancelClientOrderId should be provided</param>
+            <param name="cancelClientOrderId">The client order id to cancel. Either this or cancelOrderId should be provided</param>
+            <param name="newCancelClientOrderId">New client order id for the canceled order</param>
+            <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
+            <param name="quantity">The quantity of the symbol</param>
+            <param name="quoteQuantity">The quantity of the quote symbol. Only valid for market orders</param>
+            <param name="price">The price to use</param>
+            <param name="newClientOrderId">Unique id for order</param>
+            <param name="stopPrice">Used for stop orders</param>
+            <param name="icebergQty">Used for iceberg orders</param>
+            <param name="orderResponseType">Used for the response JSON</param>
+            <param name="trailingDelta">Trailing delta value for order in BIPS. A value of 1 means 0.01% trailing delta.</param>
+            <param name="strategyId">Strategy id</param>
+            <param name="strategyType">Strategy type</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiTrading.GetOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
@@ -15322,6 +15386,76 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceRecentTradeBase.BaseQuantity">
             <inheritdoc />
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceReplaceOrderResult">
+            <summary>
+            The result of replacing an order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceReplaceOrderResult.CancelResult">
+            <summary>
+            Cancel result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceReplaceOrderResult.NewOrderResult">
+            <summary>
+            New order result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceReplaceOrderResult.CancelResponse">
+            <summary>
+            Cancel order response. Make sure to check that the CancelResult is Success, else the CancelResponse.Message will contain more info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceReplaceOrderResult.NewOrderResponse">
+            <summary>
+            New order response. Make sure to check that the NewOrderResult is Success, else the NewOrderResponse.Message will contain more info
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceReplaceOrder">
+            <summary>
+            Replace order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceReplaceOrder.Message">
+            <summary>
+            Failure message
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceReplaceOrder.Code">
+            <summary>
+            Error code if not successful
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceReplaceCancelOrder">
+            <summary>
+            Replace cancel order info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceReplaceCancelOrder.Message">
+            <summary>
+            Failure message
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceReplaceCancelOrder.Code">
+            <summary>
+            Error code if not successful
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceReplaceResult">
+            <summary>
+            Replace result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceReplaceResult.Message">
+            <summary>
+            Failure message
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceReplaceResult.Code">
+            <summary>
+            Error code if not successful
+            </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceSpotAccountSnapshot">
             <summary>
