@@ -45,6 +45,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Quantity
         /// </summary>
+        [JsonProperty("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Last udpate time
