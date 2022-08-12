@@ -17,6 +17,10 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         [JsonProperty("u"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         /// <summary>
+        /// The listen key the update was for
+        /// </summary>
+        public string ListenKey { get; set; } = string.Empty;
+        /// <summary>
         /// Balances
         /// </summary>
         [JsonProperty("B")]

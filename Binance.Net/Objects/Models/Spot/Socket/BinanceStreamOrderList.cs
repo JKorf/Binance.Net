@@ -60,6 +60,10 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// </summary>
         [JsonProperty("O")]
         public IEnumerable<BinanceStreamOrderId> Orders { get; set; } = Array.Empty<BinanceStreamOrderId>();
+        /// <summary>
+        /// The listen key the update was for
+        /// </summary>
+        public string ListenKey { get; set; } = string.Empty;
     }
 
     /// <summary>

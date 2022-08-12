@@ -20,6 +20,10 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         [JsonProperty("d")]
         public decimal BalanceDelta { get; set; }
         /// <summary>
+        /// The listen key the update was for
+        /// </summary>
+        public string ListenKey { get; set; } = string.Empty;
+        /// <summary>
         /// The time the deposit/withdrawal was cleared
         /// </summary>
         [JsonProperty("T"), JsonConverter(typeof(DateTimeConverter))]

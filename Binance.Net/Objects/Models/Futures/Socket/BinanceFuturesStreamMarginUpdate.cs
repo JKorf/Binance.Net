@@ -20,6 +20,11 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// Positions
         /// </summary>
         public IEnumerable<BinanceFuturesStreamMarginPosition> Positions { get; set; } = Array.Empty<BinanceFuturesStreamMarginPosition>();
+
+        /// <summary>
+        /// The listen key the update was for
+        /// </summary>
+        public string ListenKey { get; set; } = string.Empty;
     }
 
     /// <summary>

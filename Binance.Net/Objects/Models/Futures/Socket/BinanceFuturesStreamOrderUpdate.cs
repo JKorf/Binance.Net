@@ -22,6 +22,10 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// </summary>
         [JsonProperty("T"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime TransactionTime { get; set; }
+        /// <summary>
+        /// The listen key the update was for
+        /// </summary>
+        public string ListenKey { get; set; } = string.Empty;
     }
 
     /// <summary>

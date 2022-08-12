@@ -12895,6 +12895,11 @@
             Transaction time
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAccountUpdate.ListenKey">
+            <summary>
+            The listen key the update was for
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAccountUpdateData">
             <summary>
             Account update data
@@ -13168,6 +13173,11 @@
             Transaction time
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamConfigUpdate.ListenKey">
+            <summary>
+            The listen key the update was for
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamLeverageUpdateData">
             <summary>
             Config update data
@@ -13398,6 +13408,11 @@
             Positions
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamMarginUpdate.ListenKey">
+            <summary>
+            The listen key the update was for
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamMarginPosition">
             <summary>
             Update data about an margin
@@ -13546,6 +13561,11 @@
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdate.TransactionTime">
             <summary>
             Transaction time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdate.ListenKey">
+            <summary>
+            The listen key the update was for
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdateData">
@@ -20250,6 +20270,11 @@
             The balance delta
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate.ListenKey">
+            <summary>
+            The listen key the update was for
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate.ClearTime">
             <summary>
             The time the deposit/withdrawal was cleared
@@ -20500,6 +20525,11 @@
             The order in this list
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList.ListenKey">
+            <summary>
+            The listen key the update was for
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderId">
             <summary>
             Order reference
@@ -20670,6 +20700,11 @@
             This id of the corresponding order list. (-1 if not part of an order list)
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate.ListenKey">
+            <summary>
+            The listen key for which the update was
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate.I">
             <summary>
             Unused
@@ -20688,6 +20723,11 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate.Timestamp">
             <summary>
             Time of last account update
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate.ListenKey">
+            <summary>
+            The listen key the update was for
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate.Balances">
