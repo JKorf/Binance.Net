@@ -191,6 +191,24 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<IEnumerable<IBinanceTick>>> GetTickersAsync(CancellationToken ct = default);
 
         /// <summary>
+        /// Get data based on the last x time, specified as windowSize
+        /// </summary>
+        /// <param name="symbol">The symbol to get data for</param>
+        /// <param name="windowSize">The window size to use</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IBinance24HPrice>> GetRollingWindowTickerAsync(string symbol, TimeSpan? windowSize = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get data based on the last x time, specified as windowSize
+        /// </summary>
+        /// <param name="symbols">The symbols to get data for</param>
+        /// <param name="windowSize">The window size to use</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<IBinance24HPrice>>> GetRollingWindowTickersAsync(IEnumerable<string> symbols, TimeSpan? windowSize = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Gets the best price/quantity on the order book for a symbol.
         /// </summary>
         /// <param name="symbol">Symbol to get book price for</param>

@@ -1095,6 +1095,12 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData.GetTickersAsync(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData.GetRollingWindowTickerAsync(System.String,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData.GetRollingWindowTickersAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData.GetPriceAsync(System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -1335,6 +1341,12 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotStreams.SubscribeToAllMiniTickerUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Interfaces.IBinanceMiniTick}}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotStreams.SubscribeToRollingWindowTickerUpdatesAsync(System.String,System.TimeSpan,System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotStreams.SubscribeToAllRollingWindowTickerUpdatesAsync(System.TimeSpan,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick}}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotStreams.SubscribeToBookTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBookPrice}},System.Threading.CancellationToken)">
@@ -7135,6 +7147,24 @@
             <param name="ct">Cancellation token</param>
             <returns>List of data over the last 24 hours</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiExchangeData.GetRollingWindowTickerAsync(System.String,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">
+            <summary>
+            Get data based on the last x time, specified as windowSize
+            </summary>
+            <param name="symbol">The symbol to get data for</param>
+            <param name="windowSize">The window size to use</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiExchangeData.GetRollingWindowTickersAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">
+            <summary>
+            Get data based on the last x time, specified as windowSize
+            </summary>
+            <param name="symbols">The symbols to get data for</param>
+            <param name="windowSize">The window size to use</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiExchangeData.GetBookPriceAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Gets the best price/quantity on the order book for a symbol.
@@ -8051,6 +8081,27 @@
             Subscribes to mini ticker updates stream for all symbols
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#all-market-mini-tickers-stream" /></para>
             </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotStreams.SubscribeToRollingWindowTickerUpdatesAsync(System.String,System.TimeSpan,System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to rolling window ticker updates stream for a symbol
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-rolling-window-statistics-streams" /></para>
+            </summary>
+            <param name="symbol">The symbol to subscribe</param>
+            <param name="windowSize">Window size, either 1 hour or 4 hours</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotStreams.SubscribeToAllRollingWindowTickerUpdatesAsync(System.TimeSpan,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick}}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to rolling window ticker updates stream for all symbols
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#all-market-rolling-window-statistics-streams" /></para>
+            </summary>
+            <param name="windowSize">Window size, either 1 hour or 4 hours</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -15602,6 +15653,11 @@
             Ice berg orders allowed
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.CancelReplaceAllowed">
+            <summary>
+            Cancel replace allowed
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.IsSpotTradingAllowed">
             <summary>
             Spot trading orders allowed
@@ -20892,6 +20948,86 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalance.Total">
             <summary>
             The total balance of this asset (Free + Locked)
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick">
+            <summary>
+            Rolling window tick info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick.Symbol">
+            <summary>
+            The symbol this data is for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick.PriceChange">
+            <summary>
+            The price change of this symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick.PriceChangePercent">
+            <summary>
+            The price change percentage of this symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick.WeightedAveragePrice">
+            <summary>
+            The weighted average
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick.LastPrice">
+            <summary>
+            The current close price. This is the latest price for this symbol.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick.OpenPrice">
+            <summary>
+            Tick open price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick.HighPrice">
+            <summary>
+            Tick high price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick.LowPrice">
+            <summary>
+            Tick low price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick.FirstTradeId">
+            <summary>
+            The first trade id of the tick
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick.LastTradeId">
+            <summary>
+            The last trade id of the tick
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick.TotalTrades">
+            <summary>
+            The total trades of id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick.OpenTime">
+            <summary>
+            The open time of these stats
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick.CloseTime">
+            <summary>
+            The close time of these stats
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick.Volume">
+            <summary>
+            Volume
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick.QuoteVolume">
+            <summary>
+            Quote volume
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTickBase">

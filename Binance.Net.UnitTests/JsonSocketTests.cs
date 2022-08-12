@@ -54,6 +54,12 @@ namespace Binance.Net.UnitTests
         }
 
         [Test]
+        public async Task ValidateRollingTickerUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceStreamRollingWindowTick>(@"JsonResponses/Spot/Socket/RollingTickerUpdate.txt", new List<string> { "B" });
+        }
+
+        [Test]
         public async Task ValidateUserUpdateStreamJson()
         {
             await TestFileToObject<BinanceStreamOrderUpdate>(@"JsonResponses/Spot/Socket/UserUpdate1.txt", new List<string> { "M" });

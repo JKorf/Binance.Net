@@ -51,6 +51,10 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         public bool IceBergAllowed { get; set; }
         /// <summary>
+        /// Cancel replace allowed
+        /// </summary>
+        public bool CancelReplaceAllowed { get; set; }
+        /// <summary>
         /// Spot trading orders allowed
         /// </summary>
         public bool IsSpotTradingAllowed { get; set; }

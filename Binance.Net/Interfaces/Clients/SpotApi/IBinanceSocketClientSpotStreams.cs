@@ -109,6 +109,29 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<CallResult<UpdateSubscription>> SubscribeToAllMiniTickerUpdatesAsync(Action<DataEvent<IEnumerable<IBinanceMiniTick>>> onMessage, CancellationToken ct = default);
 
         /// <summary>
+        /// Subscribe to rolling window ticker updates stream for a symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-rolling-window-statistics-streams" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol to subscribe</param>
+        /// <param name="windowSize">Window size, either 1 hour or 4 hours</param>
+        /// <param name="onMessage">The event handler for the received data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToRollingWindowTickerUpdatesAsync(string symbol, TimeSpan windowSize,
+            Action<DataEvent<BinanceStreamRollingWindowTick>> onMessage, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribe to rolling window ticker updates stream for all symbols
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#all-market-rolling-window-statistics-streams" /></para>
+        /// </summary>
+        /// <param name="windowSize">Window size, either 1 hour or 4 hours</param>
+        /// <param name="onMessage">The event handler for the received data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToAllRollingWindowTickerUpdatesAsync(TimeSpan windowSize,
+            Action<DataEvent<IEnumerable<BinanceStreamRollingWindowTick>>> onMessage, CancellationToken ct = default);
+
+        /// <summary>
         /// Subscribes to ticker updates stream for a specific symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-ticker-streams" /></para>
         /// </summary>
