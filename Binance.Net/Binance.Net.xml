@@ -1047,6 +1047,18 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.GetStakingPersonalQuotaAsync(Binance.Net.Enums.StakingProductType,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.GetPortfolioMarginAccountInfoAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.GetPortfolioMarginCollateralRateAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.GetPortfolioMarginBankruptcyLoanAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.PortfolioMarginBankruptcyLoanRepayAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData">
             <inheritdoc />
         </member>
@@ -3035,6 +3047,46 @@
         <member name="F:Binance.Net.Enums.PeriodInterval.OneDay">
             <summary>
             1d
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.PortfolioMarginAccountStatus">
+            <summary>
+            Account status
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PortfolioMarginAccountStatus.Normal">
+            <summary>
+            Normal
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PortfolioMarginAccountStatus.MarginCall">
+            <summary>
+            Margin call
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PortfolioMarginAccountStatus.SupplyMargin">
+            <summary>
+            Supply margin
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PortfolioMarginAccountStatus.ReduceOnly">
+            <summary>
+            Reduce only
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PortfolioMarginAccountStatus.ActiveLiquidation">
+            <summary>
+            Active liquidation
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PortfolioMarginAccountStatus.ForceLiquidation">
+            <summary>
+            Force liquidation
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PortfolioMarginAccountStatus.Bankrupted">
+            <summary>
+            Bankruped
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.PositionMode">
@@ -6997,6 +7049,42 @@
             </summary>
             <param name="product">The staking product</param>
             <param name="productId">Product id</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiAccount.GetPortfolioMarginAccountInfoAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Portfolio margin account info
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-portfolio-margin-account-info-user_data" /></para>
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiAccount.GetPortfolioMarginCollateralRateAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get portfolio margin account collateral rates
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#portfolio-margin-collateral-rate-market_data" /></para>
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiAccount.GetPortfolioMarginBankruptcyLoanAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get portfolio margin bankrupty loan amount
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-portfolio-margin-bankruptcy-loan-amount-user_data" /></para>
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiAccount.PortfolioMarginBankruptcyLoanRepayAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Repay portfolio margin bankruptcy loan
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#portfolio-margin-bankruptcy-loan-repay" /></para>
+            </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -20450,6 +20538,61 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Mining.BinanceRevenueItem.Status">
             <summary>
             Status
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.PortfolioMargin.BinancePortfolioMarginCollateralRate">
+            <summary>
+            Portfolio margin collateral rate info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.PortfolioMargin.BinancePortfolioMarginCollateralRate.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.PortfolioMargin.BinancePortfolioMarginCollateralRate.CollateralRate">
+            <summary>
+            Collateral rate
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.PortfolioMargin.BinancePortfolioMarginInfo">
+            <summary>
+            Portfolio margin account info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.PortfolioMargin.BinancePortfolioMarginInfo.UniMaintenanceMarginRate">
+            <summary>
+            Portfolio margin account maintenance margin rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.PortfolioMargin.BinancePortfolioMarginInfo.AccountEquity">
+            <summary>
+            Account equity, in USD
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.PortfolioMargin.BinancePortfolioMarginInfo.AccountMaintenanceMargin">
+            <summary>
+            Portfolio margin account maintenance margin, in USD
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.PortfolioMargin.BinancePortfolioMarginInfo.AccountStatus">
+            <summary>
+            Account status
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.PortfolioMargin.BinancePortfolioMarginLoan">
+            <summary>
+            Bankruptcy loan info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.PortfolioMargin.BinancePortfolioMarginLoan.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.PortfolioMargin.BinancePortfolioMarginLoan.Quantity">
+            <summary>
+            Loan amount
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAggregatedTrade">

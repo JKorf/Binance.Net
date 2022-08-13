@@ -1,0 +1,6 @@
+{
+        "uniMMR": "5167.92171923",     
+        "accountEquity": "122607.35137903",  
+        "accountMaintMargin": "23.72469206", 
+        "accountStatus": "NORMAL" 
+}
