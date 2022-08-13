@@ -7,9 +7,9 @@
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
     <Authors>JKorf, Nikkozp, CaptHolley</Authors>
-    <PackageVersion>8.1.7</PackageVersion>
-    <AssemblyVersion>8.1.7</AssemblyVersion>
-    <FileVersion>8.1.7</FileVersion>
+    <PackageVersion>8.1.8</PackageVersion>
+    <AssemblyVersion>8.1.8</AssemblyVersion>
+    <FileVersion>8.1.8</FileVersion>
     <Description>Binance.Net is a .Net wrapper for the Binance API, including Binance Futures. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance Binance.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
@@ -20,7 +20,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>8.1.7 - Updated CryptoExchange.Net</PackageReleaseNotes>
+    <PackageReleaseNotes>8.1.8 - Added new endpoints:, SpotApi.Trading.ReplaceOrderAsync, SpotApi.ExchangeData.GetRollingWindowTickersAsync, SpotApi.Account.GetBalancesAsync, SpotApi.Account.GetMarginDustLogAsync, SpotApi.Acocunt.PortfolioMargin endpoints, Added rolling window ticker socket stream, Added ListenKey property to user stream updates, Fixed BinanceRabate quantity deserialization, Updated some request weights</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup Label="Deterministic Build" Condition="'$(Configuration)' == 'Release'">
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
