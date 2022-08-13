@@ -37,7 +37,7 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discuss
         * SpotApi.Acocunt.PortfolioMargin endpoints
     * Added rolling window ticker socket stream
     * Added ListenKey property to user stream updates
-    * Fixed BinanceRabate quantity deserialization
+    * Fixed BinanceRebate quantity deserialization
     * Updated some request weights
 
 * Version 8.1.7 - 18 Jul 2022
