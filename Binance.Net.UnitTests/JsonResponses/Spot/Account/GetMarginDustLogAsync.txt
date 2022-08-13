@@ -1,0 +1,53 @@
+{
+        "total": 8, 
+        "userAssetDribblets": [
+            {
+                "operateTime": 1615985535000,
+                "totalTransferedAmount": "0.00132256",
+                "totalServiceChargeAmount": "0.00002699",
+                "transId": 45178372831,
+                "userAssetDribbletDetails": [ 
+                    {
+                        "transId": 4359321,
+                        "serviceChargeAmount": "0.000009",
+                        "amount": "0.0009",
+                        "operateTime": 1615985535000,
+                        "transferedAmount": "0.000441",
+                        "fromAsset": "USDT"
+                    },
+                    {
+                        "transId": 4359321,
+                        "serviceChargeAmount": "0.00001799",
+                        "amount": "0.0009",
+                        "operateTime": 1615985535000,
+                        "transferedAmount": "0.00088156",
+                        "fromAsset": "ETH"
+                    }
+                ]
+            },
+            {
+                "operateTime":1616203180000,
+                "totalTransferedAmount": "0.00058795",
+                "totalServiceChargeAmount": "0.000012",
+                "transId": 4357015,
+                "userAssetDribbletDetails": [       
+                    {
+                        "transId": 4357015,
+                        "serviceChargeAmount": "0.00001",
+                        "amount": "0.001",
+                        "operateTime": 1616203180000,
+                        "transferedAmount": "0.00049",
+                        "fromAsset": "USDT"
+                    },
+                    {
+                        "transId": 4357015,
+                        "serviceChargeAmount": "0.000002",         
+                        "amount": "0.0001",
+                        "operateTime": 1616203180000,
+                        "transferedAmount": "0.00009795",
+                        "fromAsset": "ETH"
+                    }
+                ]
+            }
+        ]
+    }

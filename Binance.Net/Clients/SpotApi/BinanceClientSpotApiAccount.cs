@@ -56,6 +56,7 @@ namespace Binance.Net.Clients.SpotApi
         private const string marginRepayEndpoint = "margin/repay";
         private const string getLoanEndpoint = "margin/loan";
         private const string getRepayEndpoint = "margin/repay";
+        private const string marginDustLogEndpoint = "margin/dribblet";
         private const string marginAccountInfoEndpoint = "margin/account";
         private const string maxBorrowableEndpoint = "margin/maxBorrowable";
         private const string maxTransferableEndpoint = "margin/maxTransferable";
@@ -596,6 +597,20 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceTransaction>(_baseClient.GetUrl(marginRepayEndpoint, marginApi, marginVersion), HttpMethod.Post, ct, parameters, true, weight: 3000).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Margin DustLog
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceDustLogList>> GetMarginDustLogAsync(DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
+            var result = await _baseClient.SendRequestInternal<BinanceDustLogList>(_baseClient.GetUrl(marginDustLogEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return result;
         }
 
         #endregion

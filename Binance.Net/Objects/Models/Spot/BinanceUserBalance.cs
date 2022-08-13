@@ -6,6 +6,10 @@
     public class BinanceUserBalance : BinanceBalance
     {
         /// <summary>
+        /// Frozen
+        /// </summary>
+        public decimal Freeze { get; set; }
+        /// <summary>
         /// Currently withdrawing
         /// </summary>
         public decimal Withdrawing { get; set; }

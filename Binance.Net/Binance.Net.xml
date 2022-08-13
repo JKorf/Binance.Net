@@ -957,6 +957,9 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.MarginRepayAsync(System.String,System.Decimal,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.GetMarginDustLogAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.GetCrossMarginTransferHistoryAsync(Binance.Net.Enums.TransferDirection,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -6655,6 +6658,17 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Transaction Id</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiAccount.GetMarginDustLogAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets the history of margin dust conversions
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#margin-dustlog-user_data" /></para>
+            </summary>
+            <param name="startTime">The start time</param>
+            <param name="endTime">The end time</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The history of dust conversions</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiAccount.GetCrossMarginTransferHistoryAsync(Binance.Net.Enums.TransferDirection,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
@@ -16354,6 +16368,11 @@
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceUserBalance">
             <summary>
             User balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceUserBalance.Freeze">
+            <summary>
+            Frozen
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceUserBalance.Withdrawing">
