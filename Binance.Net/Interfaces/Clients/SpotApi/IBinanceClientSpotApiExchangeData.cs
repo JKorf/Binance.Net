@@ -192,6 +192,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get data based on the last x time, specified as windowSize
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#rolling-window-price-change-statistics" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get data for</param>
         /// <param name="windowSize">The window size to use</param>
@@ -201,6 +202,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get data based on the last x time, specified as windowSize
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#rolling-window-price-change-statistics" /></para>
         /// </summary>
         /// <param name="symbols">The symbols to get data for</param>
         /// <param name="windowSize">The window size to use</param>
@@ -210,6 +212,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Gets the best price/quantity on the order book for a symbol.
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#rolling-window-price-change-statistics" /></para>
         /// </summary>
         /// <param name="symbol">Symbol to get book price for</param>
         /// <param name="ct">Cancellation token</param>
@@ -218,6 +221,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Gets the best price/quantity on the order book for a symbol.
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#symbol-order-book-ticker" /></para>
         /// </summary>
         /// <param name="symbol">Symbol to get book price for</param>
         /// <param name="ct">Cancellation token</param>

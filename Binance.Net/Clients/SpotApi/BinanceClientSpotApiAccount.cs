@@ -41,6 +41,7 @@ namespace Binance.Net.Clients.SpotApi
         private const string disableFastWithdrawSwitchEndpoint = "account/disableFastWithdrawSwitch";
         private const string enableFastWithdrawSwitchEndpoint = "account/enableFastWithdrawSwitch";
         private const string dustLogEndpoint = "asset/dribblet";
+        private const string balancesEndpoint = "asset/getUserAsset";
         private const string dustTransferEndpoint = "asset/dust";
         private const string dustElligableEndpoint = "asset/dust-btc";
         private const string toggleBnbBurnEndpoint = "bnbBurn";
@@ -330,6 +331,18 @@ namespace Binance.Net.Clients.SpotApi
 
 
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceUserAsset>>(_baseClient.GetUrl(userCoinsEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 10).ConfigureAwait(false);
+        }
+        #endregion
+
+        #region Balances
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceUserBalance>>> GetBalancesAsync(string? asset = null, bool? needBtcValuation = null, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("asset", asset);
+            parameters.AddOptionalParameter("needBtcValuation", needBtcValuation);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceUserBalance>>(_baseClient.GetUrl(balancesEndpoint, "sapi", "3"), HttpMethod.Post, ct, parameters, true, weight: 5).ConfigureAwait(false);
         }
         #endregion
 

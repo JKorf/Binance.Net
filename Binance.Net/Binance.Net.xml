@@ -906,6 +906,9 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.GetUserAssetsAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.GetBalancesAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.GetAssetDividendRecordsAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -6377,6 +6380,17 @@
             <param name="ct">Cancellation token</param>
             <returns>Assets info</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiAccount.GetBalancesAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Retrieve balance info
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#user-asset-user_data" /></para>
+            </summary>
+            <param name="asset">Return for this asset</param>
+            <param name="needBtcValuation">Whether the response should include the BtcValuation. If false (default) BtcValuation will be 0.</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiAccount.GetAssetDividendRecordsAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get asset dividend records
@@ -7150,6 +7164,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiExchangeData.GetRollingWindowTickerAsync(System.String,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">
             <summary>
             Get data based on the last x time, specified as windowSize
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#rolling-window-price-change-statistics" /></para>
             </summary>
             <param name="symbol">The symbol to get data for</param>
             <param name="windowSize">The window size to use</param>
@@ -7159,6 +7174,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiExchangeData.GetRollingWindowTickersAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">
             <summary>
             Get data based on the last x time, specified as windowSize
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#rolling-window-price-change-statistics" /></para>
             </summary>
             <param name="symbols">The symbols to get data for</param>
             <param name="windowSize">The window size to use</param>
@@ -7168,6 +7184,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiExchangeData.GetBookPriceAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Gets the best price/quantity on the order book for a symbol.
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#rolling-window-price-change-statistics" /></para>
             </summary>
             <param name="symbol">Symbol to get book price for</param>
             <param name="ct">Cancellation token</param>
@@ -7176,6 +7193,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiExchangeData.GetBookPricesAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
             <summary>
             Gets the best price/quantity on the order book for a symbol.
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#symbol-order-book-ticker" /></para>
             </summary>
             <param name="symbol">Symbol to get book price for</param>
             <param name="ct">Cancellation token</param>
@@ -16331,6 +16349,26 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceNetwork.SameAddress">
             <summary>
             If the asset needs to provide memo to withdraw
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceUserBalance">
+            <summary>
+            User balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceUserBalance.Withdrawing">
+            <summary>
+            Currently withdrawing
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceUserBalance.Ipoable">
+            <summary>
+            Ipoable amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceUserBalance.BtcValuation">
+            <summary>
+            Value in btc
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceAssetDetails">

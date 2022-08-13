@@ -329,7 +329,7 @@ namespace Binance.Net.Clients.SpotApi
             var parameters = new Dictionary<string, object> { { "symbol", symbol } };
             parameters.AddOptionalParameter("windowSize", windowSize == null ? null : GetWindowSize(windowSize.Value));
 
-            var result = await _baseClient.SendRequestInternal<Binance24HPrice>(_baseClient.GetUrl(rollingWindowPriceEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters, weight: 1).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<Binance24HPrice>(_baseClient.GetUrl(rollingWindowPriceEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters, weight: 2).ConfigureAwait(false);
             return result.As<IBinance24HPrice>(result.Data);
         }
 
@@ -342,7 +342,7 @@ namespace Binance.Net.Clients.SpotApi
             var parameters = new Dictionary<string, object> { { "symbols", $"[{string.Join(",", symbols.Select(s => $"\"{s}\""))}]" } };
             parameters.AddOptionalParameter("windowSize", windowSize == null ? null : GetWindowSize(windowSize.Value));
             var symbolCount = symbols.Count();
-            var weight = symbolCount <= 20 ? 1 : symbolCount <= 100 ? 20 : 40;
+            var weight = Math.Min(symbolCount * 2, 100);
             var result = await _baseClient.SendRequestInternal<IEnumerable<Binance24HPrice>>(_baseClient.GetUrl(rollingWindowPriceEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters, weight: weight).ConfigureAwait(false);
             return result.As<IEnumerable<IBinance24HPrice>>(result.Data);
         }
