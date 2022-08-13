@@ -30,11 +30,11 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discuss
 ## Release notes
 * Version 8.1.8 - 13 Aug 2022
     * Added new endpoints:
-    * SpotApi.Trading.ReplaceOrderAsync
-    * SpotApi.ExchangeData.GetRollingWindowTickersAsync
-    * SpotApi.Account.GetBalancesAsync
-    * SpotApi.Account.GetMarginDustLogAsync
-    * SpotApi.Acocunt.PortfolioMargin endpoints
+        * SpotApi.Trading.ReplaceOrderAsync
+        * SpotApi.ExchangeData.GetRollingWindowTickersAsync
+        * SpotApi.Account.GetBalancesAsync
+        * SpotApi.Account.GetMarginDustLogAsync
+        * SpotApi.Acocunt.PortfolioMargin endpoints
     * Added rolling window ticker socket stream
     * Added ListenKey property to user stream updates
     * Fixed BinanceRabate quantity deserialization
