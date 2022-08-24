@@ -28,6 +28,12 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 8.1.9 - 24 Aug 2022
+    * Added SpotApi.ExchangeData.GetUiKlinesAsync endpoint
+    * Added 1 second kline interval support
+    * Added new Notional filter for BinanceSymbols
+    * Added Brokered to SpotApi.Account.GetAccountInfoAsync response model
+
 * Version 8.1.8 - 13 Aug 2022
     * Added new endpoints:
         * SpotApi.Trading.ReplaceOrderAsync
