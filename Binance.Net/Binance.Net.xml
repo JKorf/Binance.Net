@@ -3509,6 +3509,11 @@
             Trailing delta filter
             </summary>,
         </member>
+        <member name="F:Binance.Net.Enums.SymbolFilterType.Notional">
+            <summary>
+            Notional filter
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.SymbolStatus">
             <summary>
             Status of a symbol
@@ -15853,6 +15858,11 @@
             Filter for the minimal quote quantity of an order for this symbol
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.NotionalFilter">
+            <summary>
+            Filter for the minimal quote quantity of an order for this symbol
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.PriceFilter">
             <summary>
             Filter for the max accuracy of the price for this symbol
@@ -15861,6 +15871,11 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.PricePercentFilter">
             <summary>
             Filter for the maximum deviation of the price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.PricePercentByPriceFilter">
+            <summary>
+            Filter for the maximum deviation of the price per side
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.MaxPositionFilter">
@@ -16009,6 +16024,36 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbolMinNotionalFilter.AveragePriceMinutes">
+            <summary>
+            The amount of minutes the average price of trades is calculated over for market orders. 0 means the last price is used
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceSymbolNotionalFilter">
+            <summary>
+            Notional filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbolNotionalFilter.MinNotional">
+            <summary>
+            The minimal total quote quantity of an order. This is calculated by Price * Quantity.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbolNotionalFilter.MaxNotional">
+            <summary>
+            The maximum total quote quantity of an order, This is calculated by Price * Quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbolNotionalFilter.ApplyMinToMarketOrders">
+            <summary>
+            Whether or not the min notional filter is applied to market orders. If so the average trade price is used.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbolNotionalFilter.ApplyMaxToMarketOrders">
+            <summary>
+            Whether or not the max notional filter is applied to market orders. If so the average trade price is used.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbolNotionalFilter.AveragePriceMinutes">
             <summary>
             The amount of minutes the average price of trades is calculated over for market orders. 0 means the last price is used
             </summary>

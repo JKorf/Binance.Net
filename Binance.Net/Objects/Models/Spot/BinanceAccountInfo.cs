@@ -46,6 +46,10 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         public bool CanDeposit { get; set; }
         /// <summary>
+        /// Account is brokered
+        /// </summary>
+        public bool Brokered { get; set; }
+        /// <summary>
         /// The time of the update
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
