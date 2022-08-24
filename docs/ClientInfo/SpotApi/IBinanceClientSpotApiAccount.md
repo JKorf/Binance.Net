@@ -326,6 +326,33 @@ Task<WebCallResult<BinanceElligableDusts>> GetAssetsForDustTransferAsync(int? re
 
 ***
 
+## GetBalancesAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#user-asset-user_data](https://binance-docs.github.io/apidocs/spot/en/#user-asset-user_data)  
+<p>
+
+*Retrieve balance info*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.Account.GetBalancesAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BinanceUserBalance>>> GetBalancesAsync(string? asset = default, bool? needBtcValuation = default, int? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ asset|Return for this asset|
+|_[Optional]_ needBtcValuation|Whether the response should include the BtcValuation. If false (default) BtcValuation will be 0.|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetBnbBurnStatusAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#get-bnb-burn-status-user_data](https://binance-docs.github.io/apidocs/spot/en/#get-bnb-burn-status-user_data)  
@@ -798,6 +825,33 @@ Task<WebCallResult<BinanceMarginAccount>> GetMarginAccountInfoAsync(long? receiv
 
 ***
 
+## GetMarginDustLogAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#margin-dustlog-user_data](https://binance-docs.github.io/apidocs/spot/en/#margin-dustlog-user_data)  
+<p>
+
+*Gets the history of margin dust conversions*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.Account.GetMarginDustLogAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceDustLogList>> GetMarginDustLogAsync(DateTime? startTime = default, DateTime? endTime = default, int? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ startTime|The start time|
+|_[Optional]_ endTime|The end time|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetMarginForcedLiquidationHistoryAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#get-force-liquidation-record-user_data](https://binance-docs.github.io/apidocs/spot/en/#get-force-liquidation-record-user_data)  
@@ -1048,6 +1102,81 @@ var result = await client.SpotApi.Account.GetOrderRateLimitStatusAsync();
 
 ```csharp  
 Task<WebCallResult<IEnumerable<BinanceOrderRateLimit>>> GetOrderRateLimitStatusAsync(int? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetPortfolioMarginAccountInfoAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#get-portfolio-margin-account-info-user_data](https://binance-docs.github.io/apidocs/spot/en/#get-portfolio-margin-account-info-user_data)  
+<p>
+
+*Portfolio margin account info*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.Account.GetPortfolioMarginAccountInfoAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<BinancePortfolioMarginInfo>> GetPortfolioMarginAccountInfoAsync(long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetPortfolioMarginBankruptcyLoanAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#query-portfolio-margin-bankruptcy-loan-amount-user_data](https://binance-docs.github.io/apidocs/spot/en/#query-portfolio-margin-bankruptcy-loan-amount-user_data)  
+<p>
+
+*Get portfolio margin bankrupty loan amount*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.Account.GetPortfolioMarginBankruptcyLoanAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<BinancePortfolioMarginLoan>> GetPortfolioMarginBankruptcyLoanAsync(long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetPortfolioMarginCollateralRateAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#portfolio-margin-collateral-rate-market_data](https://binance-docs.github.io/apidocs/spot/en/#portfolio-margin-collateral-rate-market_data)  
+<p>
+
+*Get portfolio margin account collateral rates*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.Account.GetPortfolioMarginCollateralRateAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BinancePortfolioMarginCollateralRate>>> GetPortfolioMarginCollateralRateAsync(long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -1384,6 +1513,31 @@ Task<WebCallResult<BinanceTransaction>> MarginRepayAsync(string asset, decimal q
 |quantity|The quantity to be borrow|
 |_[Optional]_ isIsolated|For isolated margin or not|
 |_[Optional]_ symbol|The isolated symbol|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## PortfolioMarginBankruptcyLoanRepayAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#portfolio-margin-bankruptcy-loan-repay](https://binance-docs.github.io/apidocs/spot/en/#portfolio-margin-bankruptcy-loan-repay)  
+<p>
+
+*Repay portfolio margin bankruptcy loan*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.Account.PortfolioMarginBankruptcyLoanRepayAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceTransaction>> PortfolioMarginBankruptcyLoanRepayAsync(long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 

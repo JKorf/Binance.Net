@@ -67,6 +67,7 @@ Task<WebCallResult<Dictionary<string, BinanceAssetDetails>>> GetAssetDetailsAsyn
 
 ## GetBookPriceAsync  
 
+[https://binance-docs.github.io/apidocs/spot/en/#rolling-window-price-change-statistics](https://binance-docs.github.io/apidocs/spot/en/#rolling-window-price-change-statistics)  
 <p>
 
 *Gets the best price/quantity on the order book for a symbol.*  
@@ -91,6 +92,7 @@ Task<WebCallResult<BinanceBookPrice>> GetBookPriceAsync(string symbol, Cancellat
 
 ## GetBookPricesAsync  
 
+[https://binance-docs.github.io/apidocs/spot/en/#symbol-order-book-ticker](https://binance-docs.github.io/apidocs/spot/en/#symbol-order-book-ticker)  
 <p>
 
 *Gets the best price/quantity on the order book for a symbol.*  
@@ -695,6 +697,58 @@ Task<WebCallResult<IEnumerable<IBinanceRecentTrade>>> GetRecentTradesAsync(strin
 
 ***
 
+## GetRollingWindowTickerAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#rolling-window-price-change-statistics](https://binance-docs.github.io/apidocs/spot/en/#rolling-window-price-change-statistics)  
+<p>
+
+*Get data based on the last x time, specified as windowSize*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.ExchangeData.GetRollingWindowTickerAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<IBinance24HPrice>> GetRollingWindowTickerAsync(string symbol, TimeSpan? windowSize = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|symbol|The symbol to get data for|
+|_[Optional]_ windowSize|The window size to use|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetRollingWindowTickersAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#rolling-window-price-change-statistics](https://binance-docs.github.io/apidocs/spot/en/#rolling-window-price-change-statistics)  
+<p>
+
+*Get data based on the last x time, specified as windowSize*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.ExchangeData.GetRollingWindowTickersAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<IBinance24HPrice>>> GetRollingWindowTickersAsync(IEnumerable<string> symbols, TimeSpan? windowSize = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|symbols|The symbols to get data for|
+|_[Optional]_ windowSize|The window size to use|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetServerTimeAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#check-server-time](https://binance-docs.github.io/apidocs/spot/en/#check-server-time)  
@@ -893,6 +947,35 @@ Task<WebCallResult<IEnumerable<IBinanceRecentTrade>>> GetTradeHistoryAsync(strin
 |symbol|The symbol to get recent trades for|
 |_[Optional]_ limit|Result limit|
 |_[Optional]_ fromId|From which trade id on results should be retrieved|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetUiKlinesAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#uiklines](https://binance-docs.github.io/apidocs/spot/en/#uiklines)  
+<p>
+
+*Get candlestick data for the provided symbol. Returns modified kline data, optimized for the presentation of candlestick charts*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.ExchangeData.GetUiKlinesAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<IBinanceKline>>> GetUiKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = default, DateTime? endTime = default, int? limit = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|symbol|The symbol to get the data for|
+|interval|The candlestick timespan|
+|_[Optional]_ startTime|Start time to get candlestick data|
+|_[Optional]_ endTime|End time to get candlestick data|
+|_[Optional]_ limit|Max number of results|
 |_[Optional]_ ct|Cancellation token|
 
 </p>

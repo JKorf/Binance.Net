@@ -1328,6 +1328,48 @@ Task<WebCallResult<BinanceBSwapPreviewResult>> RemoveFromLiquidityPoolPreviewAsy
 
 ***
 
+## ReplaceOrderAsync  
+
+<p>
+
+*Cancel an existing order and place a new order on the same symbol*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.Trading.ReplaceOrderAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceReplaceOrderResult>> ReplaceOrderAsync(string symbol, OrderSide side, SpotOrderType type, CancelReplaceMode cancelReplaceMode, long? cancelOrderId = default, string? cancelClientOrderId = default, string? newCancelClientOrderId = default, string? newClientOrderId = default, decimal? quantity = default, decimal? quoteQuantity = default, decimal? price = default, TimeInForce? timeInForce = default, decimal? stopPrice = default, decimal? icebergQty = default, OrderResponseType? orderResponseType = default, int? trailingDelta = default, int? strategyId = default, int? strategyType = default, int? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|symbol|The symbol the order is for|
+|side|The order side (buy/sell)|
+|type|The order type|
+|cancelReplaceMode|Replacement behavior|
+|_[Optional]_ cancelOrderId|The order id to cancel. Either this or cancelClientOrderId should be provided|
+|_[Optional]_ cancelClientOrderId|The client order id to cancel. Either this or cancelOrderId should be provided|
+|_[Optional]_ newCancelClientOrderId|New client order id for the canceled order|
+|_[Optional]_ newClientOrderId|Unique id for order|
+|_[Optional]_ quantity|The quantity of the symbol|
+|_[Optional]_ quoteQuantity|The quantity of the quote symbol. Only valid for market orders|
+|_[Optional]_ price|The price to use|
+|_[Optional]_ timeInForce|Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)|
+|_[Optional]_ stopPrice|Used for stop orders|
+|_[Optional]_ icebergQty|Used for iceberg orders|
+|_[Optional]_ orderResponseType|Used for the response JSON|
+|_[Optional]_ trailingDelta|Trailing delta value for order in BIPS. A value of 1 means 0.01% trailing delta.|
+|_[Optional]_ strategyId|Strategy id|
+|_[Optional]_ strategyType|Strategy type|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## SubscribeLeveragedTokenAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#subscribe-blvt-user_data](https://binance-docs.github.io/apidocs/spot/en/#subscribe-blvt-user_data)  

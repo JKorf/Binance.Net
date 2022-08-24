@@ -112,6 +112,32 @@ Task<CallResult<UpdateSubscription>> SubscribeToAllMiniTickerUpdatesAsync(Action
 
 ***
 
+## SubscribeToAllRollingWindowTickerUpdatesAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#all-market-rolling-window-statistics-streams](https://binance-docs.github.io/apidocs/spot/en/#all-market-rolling-window-statistics-streams)  
+<p>
+
+*Subscribe to rolling window ticker updates stream for all symbols*  
+
+```csharp  
+var client = new BinanceSocketClient();  
+var result = await client.SpotStreams.SubscribeToAllRollingWindowTickerUpdatesAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<CallResult<UpdateSubscription>> SubscribeToAllRollingWindowTickerUpdatesAsync(TimeSpan windowSize, Action<DataEvent<IEnumerable<BinanceStreamRollingWindowTick>>> onMessage, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|windowSize|Window size, either 1 hour or 4 hours|
+|onMessage|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
+
+</p>
+
+***
+
 ## SubscribeToAllTickerUpdatesAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#all-market-tickers-stream](https://binance-docs.github.io/apidocs/spot/en/#all-market-tickers-stream)  
@@ -558,6 +584,33 @@ Task<CallResult<UpdateSubscription>> SubscribeToPartialOrderBookUpdatesAsync(IEn
 |symbols|The symbols to subscribe on|
 |levels|The amount of entries to be returned in the update of each symbol|
 |updateInterval|Update interval in milliseconds|
+|onMessage|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
+
+</p>
+
+***
+
+## SubscribeToRollingWindowTickerUpdatesAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-rolling-window-statistics-streams](https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-rolling-window-statistics-streams)  
+<p>
+
+*Subscribe to rolling window ticker updates stream for a symbol*  
+
+```csharp  
+var client = new BinanceSocketClient();  
+var result = await client.SpotStreams.SubscribeToRollingWindowTickerUpdatesAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<CallResult<UpdateSubscription>> SubscribeToRollingWindowTickerUpdatesAsync(string symbol, TimeSpan windowSize, Action<DataEvent<BinanceStreamRollingWindowTick>> onMessage, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|symbol|The symbol to subscribe|
+|windowSize|Window size, either 1 hour or 4 hours|
 |onMessage|The event handler for the received data|
 |_[Optional]_ ct|Cancellation token for closing this subscription|
 
