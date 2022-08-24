@@ -11,6 +11,7 @@ namespace Binance.Net.Converters
 
         protected override List<KeyValuePair<KlineInterval, string>> Mapping => new List<KeyValuePair<KlineInterval, string>>
         {
+            new KeyValuePair<KlineInterval, string>(KlineInterval.OneSecond, "1s"),
             new KeyValuePair<KlineInterval, string>(KlineInterval.OneMinute, "1m"),
             new KeyValuePair<KlineInterval, string>(KlineInterval.ThreeMinutes, "3m"),
             new KeyValuePair<KlineInterval, string>(KlineInterval.FiveMinutes, "5m"),

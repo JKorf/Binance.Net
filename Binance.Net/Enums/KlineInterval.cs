@@ -6,6 +6,11 @@
     public enum KlineInterval
     {
         /// <summary>
+        /// 1s
+        /// </summary>
+        OneSecond = 1,
+
+        /// <summary>
         /// 1m
         /// </summary>
         OneMinute = 60,

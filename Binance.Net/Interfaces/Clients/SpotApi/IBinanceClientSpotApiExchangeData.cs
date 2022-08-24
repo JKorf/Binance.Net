@@ -134,6 +134,20 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
             DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Get candlestick data for the provided symbol. Returns modified kline data, optimized for the presentation of candlestick charts
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#uiklines" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for</param>
+        /// <param name="interval">The candlestick timespan</param>
+        /// <param name="startTime">Start time to get candlestick data</param>
+        /// <param name="endTime">End time to get candlestick data</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The candlestick data for the provided symbol</returns>
+        Task<WebCallResult<IEnumerable<IBinanceKline>>> GetUiKlinesAsync(string symbol, KlineInterval interval,
+            DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Gets the order book for the provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#order-book" /></para>
         /// </summary>

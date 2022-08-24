@@ -1101,6 +1101,9 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData.GetKlinesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData.GetUiKlinesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData.GetCurrentAvgPriceAsync(System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -2502,6 +2505,11 @@
         <member name="T:Binance.Net.Enums.KlineInterval">
             <summary>
             The interval for the kline, the int value represents the time in seconds
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.KlineInterval.OneSecond">
+            <summary>
+            1s
             </summary>
         </member>
         <member name="F:Binance.Net.Enums.KlineInterval.OneMinute">
@@ -7204,6 +7212,19 @@
             <summary>
             Get candlestick data for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#kline-candlestick-data" /></para>
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="interval">The candlestick timespan</param>
+            <param name="startTime">Start time to get candlestick data</param>
+            <param name="endTime">End time to get candlestick data</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The candlestick data for the provided symbol</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiExchangeData.GetUiKlinesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get candlestick data for the provided symbol. Returns modified kline data, optimized for the presentation of candlestick charts
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#uiklines" /></para>
             </summary>
             <param name="symbol">The symbol to get the data for</param>
             <param name="interval">The candlestick timespan</param>
@@ -14037,6 +14058,11 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceAccountInfo.CanDeposit">
             <summary>
             Boolean indicating if this account can deposit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceAccountInfo.Brokered">
+            <summary>
+            Account is brokered
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceAccountInfo.UpdateTime">
