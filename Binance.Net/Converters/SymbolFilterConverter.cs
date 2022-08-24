@@ -46,6 +46,16 @@ namespace Binance.Net.Converters
                         AveragePriceMinutes = (int)obj["avgPriceMins"]
                     };
                     break;
+                case SymbolFilterType.Notional:
+                    result = new BinanceSymbolNotionalFilter
+                    {
+                        MinNotional = (decimal)obj["minNotional"],
+                        MaxNotional = (decimal)obj["maxNotional"],
+                        ApplyMinToMarketOrders = (bool)obj["applyMinToMarket"],
+                        ApplyMaxToMarketOrders = (bool)obj["applyMaxToMarket"],
+                        AveragePriceMinutes = (int)obj["avgPriceMins"]
+                    };
+                    break;
                 case SymbolFilterType.Price:
                     result = new BinanceSymbolPriceFilter
                     {

@@ -53,5 +53,9 @@
         /// Trailing delta filter
         /// </summary>,
         TrailingDelta,
+        /// <summary>
+        /// Notional filter
+        /// </summary>
+        Notional
     }
 }

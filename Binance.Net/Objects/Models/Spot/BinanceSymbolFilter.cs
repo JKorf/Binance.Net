@@ -141,6 +141,37 @@ namespace Binance.Net.Objects.Models.Spot
     }
 
     /// <summary>
+    /// Notional filter
+    /// </summary>
+    public class BinanceSymbolNotionalFilter : BinanceSymbolFilter
+    {
+        /// <summary>
+        /// The minimal total quote quantity of an order. This is calculated by Price * Quantity.
+        /// </summary>
+        public decimal MinNotional { get; set; }
+
+        /// <summary>
+        /// The maximum total quote quantity of an order, This is calculated by Price * Quantity
+        /// </summary>
+        public decimal MaxNotional { get; set; }
+
+        /// <summary>
+        /// Whether or not the min notional filter is applied to market orders. If so the average trade price is used.
+        /// </summary>
+        public bool ApplyMinToMarketOrders { get; set; }
+
+        /// <summary>
+        /// Whether or not the max notional filter is applied to market orders. If so the average trade price is used.
+        /// </summary>
+        public bool ApplyMaxToMarketOrders { get; set; }
+
+        /// <summary>
+        /// The amount of minutes the average price of trades is calculated over for market orders. 0 means the last price is used
+        /// </summary>
+        public int AveragePriceMinutes { get; set; }
+    }
+
+    /// <summary>
     ///Max orders filter
     /// </summary>
     public class BinanceSymbolMaxOrdersFilter : BinanceSymbolFilter
