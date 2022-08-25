@@ -1188,7 +1188,7 @@ namespace Binance.Net.Clients.SpotApi
             {
                 { "product", EnumConverter.GetString(product) },
                 { "productId", productId },
-                { "amount", quantity },
+                { "amount", quantity.ToString(CultureInfo.InvariantCulture) },
             };
             parameters.AddOptionalParameter("renewable", renewable);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -1205,7 +1205,7 @@ namespace Binance.Net.Clients.SpotApi
                 { "productId", productId },
             };
             parameters.AddOptionalParameter("positionId", positionId);
-            parameters.AddOptionalParameter("amount", quantity);
+            parameters.AddOptionalParameter("amount", quantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("renewable", renewable);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 

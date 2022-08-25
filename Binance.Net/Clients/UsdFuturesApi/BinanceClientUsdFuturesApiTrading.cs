@@ -459,7 +459,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             {
                 { "symbol", symbol },
                 { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
-                { "quantity", quantity },
+                { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
                 { "urgency", EnumConverter.GetString(urgency) },
             };
             parameters.AddOptionalParameter("positionSide", positionSide == null ? null : JsonConvert.SerializeObject(positionSide, new PositionSideConverter(false)));
@@ -491,7 +491,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             {
                 { "symbol", symbol },
                 { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
-                { "quantity", quantity },
+                { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
                 { "duration", duration },
             };
             parameters.AddOptionalParameter("positionSide", positionSide == null ? null : JsonConvert.SerializeObject(positionSide, new PositionSideConverter(false)));
