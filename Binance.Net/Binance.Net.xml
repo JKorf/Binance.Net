@@ -981,6 +981,9 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.GetMarginForcedLiquidationHistoryAsync(System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.GetIsolatedMarginTierDataAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.GetMarginAccountInfoAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -6868,6 +6871,17 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Max quantity</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiAccount.GetIsolatedMarginTierDataAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get isolated margin tier data
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-isolated-margin-tier-data-user_data" /></para>
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="tier">Tier</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiAccount.GetIsolatedMarginAccountTransferHistoryAsync(System.String,System.String,System.Nullable{Binance.Net.Enums.IsolatedMarginTransferDirection},System.Nullable{Binance.Net.Enums.IsolatedMarginTransferDirection},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
@@ -19749,6 +19763,46 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceInterestRateHistory.VipLevel">
             <summary>
             Vip level
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginTierData">
+            <summary>
+            Isolated margin tier data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginTierData.Symbol">
+            <summary>
+            Average price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginTierData.Tier">
+            <summary>
+            Tier
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginTierData.EffectiveMultiple">
+            <summary>
+            Effective multiple
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginTierData.InitialRiskRatio">
+            <summary>
+            Initial risk ratio
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginTierData.LiquidationRiskRatio">
+            <summary>
+            Liquidation risk ratio
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginTierData.BaseAssetMaxBorrowable">
+            <summary>
+            Base asset max borrowable
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginTierData.QuoteAssetMaxBorrowable">
+            <summary>
+            Quote asset max borrowable
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginAccount">

@@ -530,6 +530,17 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<decimal>> GetMarginMaxTransferAmountAsync(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Get isolated margin tier data
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-isolated-margin-tier-data-user_data" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol</param>
+        /// <param name="tier">Tier</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BinanceIsolatedMarginTierData>>> GetIsolatedMarginTierDataAsync(string symbol, int? tier = null, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Get history of transfer to and from the isolated margin account
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-isolated-margin-transfer-history-user_data" /></para>
         /// </summary>

@@ -66,6 +66,7 @@ namespace Binance.Net.Clients.SpotApi
         private const string interestRateHistoryEndpoint = "margin/interestRateHistory";
         private const string interestMarginDataEndpoint = "margin/crossMarginData";
         private const string forceLiquidationHistoryEndpoint = "margin/forceLiquidationRec";
+        private const string isolatedMargingTierEndpoint = "margin/isolatedMarginTier";
 
         private const string isolatedMarginTransferHistoryEndpoint = "margin/isolated/transfer";
         private const string isolatedMarginAccountEndpoint = "margin/isolated/account";
@@ -789,6 +790,22 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceForcedLiquidation>>(_baseClient.GetUrl(forceLiquidationHistoryEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Isolated margin tier data
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceIsolatedMarginTierData>>> GetIsolatedMarginTierDataAsync(string symbol, int? tier = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol }
+            };
+            parameters.AddOptionalParameter("tier", tier);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceIsolatedMarginTierData>>(_baseClient.GetUrl(isolatedMargingTierEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
