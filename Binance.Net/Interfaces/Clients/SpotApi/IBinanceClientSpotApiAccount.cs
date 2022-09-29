@@ -348,6 +348,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get personal margin level information for your account
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-summary-of-margin-account-user_data" /></para>
         /// </summary>
         /// <param name="email">account email</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
