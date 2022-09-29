@@ -1077,7 +1077,16 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData.GetExchangeInfoAsync(System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData.GetExchangeInfoAsync(Binance.Net.Enums.AccountType,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData.GetExchangeInfoAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData.GetExchangeInfoAsync(System.Collections.Generic.IEnumerable{System.String},System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData.GetExchangeInfoAsync(Binance.Net.Enums.AccountType[],System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData.GetSystemStatusAsync(System.Threading.CancellationToken)">
@@ -7188,12 +7197,40 @@
             <param name="ct">Cancellation token</param>
             <returns>Exchange info</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiExchangeData.GetExchangeInfoAsync(Binance.Net.Enums.AccountType,System.Threading.CancellationToken)">
+            <summary>
+            Get's information about the exchange including rate limits and information on the provided symbol based on account permissions
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>
+            </summary>
+            <param name="permissions">account type</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Exchange info</returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiExchangeData.GetExchangeInfoAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
             <summary>
             Get's information about the exchange including rate limits and information on the provided symbols
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>
             </summary>
             <param name="symbols">Symbols to get data for token</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Exchange info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiExchangeData.GetExchangeInfoAsync(System.Collections.Generic.IEnumerable{System.String},System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Get's information about the exchange including rate limits and information on the provided symbols
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>
+            </summary>
+            <param name="symbols">Symbols to get data for token</param>
+            <param name="permissions">true to use account type permissions instead of symbols</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Exchange info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiExchangeData.GetExchangeInfoAsync(Binance.Net.Enums.AccountType[],System.Threading.CancellationToken)">
+            <summary>
+            Get's information about the exchange including rate limits and information on the provided symbols based on account permissions
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>
+            </summary>
+            <param name="permissions">account type</param>
             <param name="ct">Cancellation token</param>
             <returns>Exchange info</returns>
         </member>
