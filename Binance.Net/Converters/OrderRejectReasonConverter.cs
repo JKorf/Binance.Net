@@ -20,7 +20,8 @@ namespace Binance.Net.Converters
             new KeyValuePair<OrderRejectReason, string>(OrderRejectReason.UnknownAccount, "UNKNOWN_ACCOUNT" ),
             new KeyValuePair<OrderRejectReason, string>(OrderRejectReason.InsufficientBalance, "INSUFFICIENT_BALANCE" ),
             new KeyValuePair<OrderRejectReason, string>(OrderRejectReason.AccountInactive, "ACCOUNT_INACTIVE" ),
-            new KeyValuePair<OrderRejectReason, string>(OrderRejectReason.AccountCannotSettle, "ACCOUNT_CANNOT_SETTLE")
+            new KeyValuePair<OrderRejectReason, string>(OrderRejectReason.AccountCannotSettle, "ACCOUNT_CANNOT_SETTLE"),
+            new KeyValuePair<OrderRejectReason, string>(OrderRejectReason.StopPriceWouldTrigger, "STOP_PRICE_WOULD_TRIGGER_IMMEDIATELY")
         };
     }
 }
