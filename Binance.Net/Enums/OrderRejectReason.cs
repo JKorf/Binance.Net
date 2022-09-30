@@ -44,6 +44,10 @@
         /// <summary>
         /// Cannot settle
         /// </summary>
-        AccountCannotSettle
+        AccountCannotSettle,
+        /// <summary>
+        /// Stop price would trigger immediately
+        /// </summary>
+        StopPriceWouldTrigger
     }
 }
