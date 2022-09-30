@@ -125,8 +125,8 @@ namespace Binance.Net.Clients.SpotApi
              => GetExchangeInfoAsync(new string[] { symbol }, ct);
 
         /// <inheritdoc />
-        public Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(AccountType permissions, CancellationToken ct = default)
-             => GetExchangeInfoAsync(new AccountType[] { permissions }, ct);
+        public Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(AccountType permission, CancellationToken ct = default)
+             => GetExchangeInfoAsync(new AccountType[] { permission }, ct);
 
         /// <inheritdoc />
         public Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(IEnumerable<string> symbols, CancellationToken ct = default) 
