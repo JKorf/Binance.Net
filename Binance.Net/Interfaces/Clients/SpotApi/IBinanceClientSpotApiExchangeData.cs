@@ -61,13 +61,13 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
-        /// Get's information about the exchange including rate limits and information on the provided symbol based on account permissions
+        /// Get's information about the exchange including rate limits and information on the provided symbol based on an account permission
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>
         /// </summary>
-        /// <param name="permissions">account type</param>
+        /// <param name="permission">account type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Exchange info</returns>
-        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(AccountType permissions, CancellationToken ct = default);
+        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(AccountType permission, CancellationToken ct = default);
 
         /// <summary>
         /// Get's information about the exchange including rate limits and information on the provided symbols
