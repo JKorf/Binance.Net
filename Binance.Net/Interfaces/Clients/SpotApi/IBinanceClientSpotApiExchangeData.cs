@@ -96,16 +96,6 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(AccountType[] permissions, CancellationToken ct = default);
 
         /// <summary>
-        /// Get's information about the exchange including rate limits and information on the provided symbols
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>
-        /// </summary>
-        /// <param name="symbols">Symbols to get data for token</param>
-        /// <param name="permissions">true to use account type permissions instead of symbols</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Exchange info</returns>
-        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(IEnumerable<string> symbols, bool permissions = false, CancellationToken ct = default);
-
-        /// <summary>
         /// Gets the status of the Binance platform
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#system-status-system" /></para>
         /// </summary>
