@@ -774,6 +774,33 @@ Task<WebCallResult<BinanceQueryRecords<BinanceIsolatedMarginTransfer>>> GetIsola
 
 ***
 
+## GetIsolatedMarginTierDataAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#query-isolated-margin-tier-data-user_data](https://binance-docs.github.io/apidocs/spot/en/#query-isolated-margin-tier-data-user_data)  
+<p>
+
+*Get isolated margin tier data*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.Account.GetIsolatedMarginTierDataAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BinanceIsolatedMarginTierData>>> GetIsolatedMarginTierDataAsync(string symbol, int? tier = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|symbol|The symbol|
+|_[Optional]_ tier|Tier|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetLeveragedTokensUserLimitAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#get-blvt-user-limit-info-user_data](https://binance-docs.github.io/apidocs/spot/en/#get-blvt-user-limit-info-user_data)  

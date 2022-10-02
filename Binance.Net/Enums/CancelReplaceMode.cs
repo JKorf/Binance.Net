@@ -15,7 +15,7 @@ namespace Binance.Net.Enums
         /// <summary>
         /// New order placement will be attempted even if cancel request fails.
         /// </summary>
-        [Map("ALLOW_FAILURE ")]
+        [Map("ALLOW_FAILURE")]
         AllowFailure
     }
 }
