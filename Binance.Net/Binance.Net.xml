@@ -948,6 +948,9 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.StopUserStreamAsync(System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.GetMarginLevelInformationAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.CrossMarginTransferAsync(System.String,System.Decimal,Binance.Net.Enums.TransferDirectionType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -1077,7 +1080,16 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData.GetExchangeInfoAsync(System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData.GetExchangeInfoAsync(Binance.Net.Enums.AccountType,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData.GetExchangeInfoAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData.GetExchangeInfoAsync(System.Collections.Generic.IEnumerable{System.String},System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData.GetExchangeInfoAsync(Binance.Net.Enums.AccountType[],System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData.GetSystemStatusAsync(System.Threading.CancellationToken)">
@@ -6714,6 +6726,15 @@
             <param name="ct">Cancellation token</param>
             <returns>Deposit address</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiAccount.GetMarginLevelInformationAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get personal margin level information for your account
+            </summary>
+            <param name="email">account email</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Margin Level Information</returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiAccount.CrossMarginTransferAsync(System.String,System.Decimal,Binance.Net.Enums.TransferDirectionType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Execute transfer between spot account and cross margin account.
@@ -7188,12 +7209,40 @@
             <param name="ct">Cancellation token</param>
             <returns>Exchange info</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiExchangeData.GetExchangeInfoAsync(Binance.Net.Enums.AccountType,System.Threading.CancellationToken)">
+            <summary>
+            Get's information about the exchange including rate limits and information on the provided symbol based on account permissions
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>
+            </summary>
+            <param name="permissions">account type</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Exchange info</returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiExchangeData.GetExchangeInfoAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
             <summary>
             Get's information about the exchange including rate limits and information on the provided symbols
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>
             </summary>
             <param name="symbols">Symbols to get data for token</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Exchange info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiExchangeData.GetExchangeInfoAsync(System.Collections.Generic.IEnumerable{System.String},System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Get's information about the exchange including rate limits and information on the provided symbols
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>
+            </summary>
+            <param name="symbols">Symbols to get data for token</param>
+            <param name="permissions">true to use account type permissions instead of symbols</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Exchange info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiExchangeData.GetExchangeInfoAsync(Binance.Net.Enums.AccountType[],System.Threading.CancellationToken)">
+            <summary>
+            Get's information about the exchange including rate limits and information on the provided symbols based on account permissions
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>
+            </summary>
+            <param name="permissions">account type</param>
             <param name="ct">Cancellation token</param>
             <returns>Exchange info</returns>
         </member>
@@ -20013,6 +20062,26 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginAsset.MinimalRepayQuanitty">
             <summary>
             Minimal quantity which can be repaid
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginLevel">
+            <summary>
+            Personal margin level information
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginLevel.NormalLevel">
+            <summary>
+            The level at which your margin level is considered normal.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginLevel.MarginCallLevel">
+            <summary>
+            The level at which you will be margin called (asked to deposit more funds)
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginLevel.ForcedLiquidationLevel">
+            <summary>
+            The level at which your positions will be liquidated until your account balances
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginOrderOcoList">

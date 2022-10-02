@@ -347,6 +347,16 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<BinanceDepositAddress>> GetDepositAddressAsync(string asset, string? network = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Get personal margin level information for your account
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-summary-of-margin-account-user_data" /></para>
+        /// </summary>
+        /// <param name="email">account email</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Margin Level Information</returns>
+        Task<WebCallResult<BinanceMarginLevel>> GetMarginLevelInformationAsync(string email, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Execute transfer between spot account and cross margin account.
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#margin-account-trade" /></para>
         /// </summary>

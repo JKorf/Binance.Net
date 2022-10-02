@@ -116,6 +116,7 @@ namespace Binance.Net.Clients.SpotApi
         #endregion
 
         #region Exchange Information
+
         /// <inheritdoc />
         public Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(CancellationToken ct = default)
              => GetExchangeInfoAsync(Array.Empty<string>(), ct);
@@ -125,13 +126,28 @@ namespace Binance.Net.Clients.SpotApi
              => GetExchangeInfoAsync(new string[] { symbol }, ct);
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(IEnumerable<string> symbols, CancellationToken ct = default)
+        public Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(AccountType permission, CancellationToken ct = default)
+             => GetExchangeInfoAsync(new AccountType[] { permission }, ct);
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(AccountType[] permissions, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
-            if (symbols.Count() > 1)
-                parameters.Add("symbols", JsonConvert.SerializeObject(symbols));
-            else if (symbols.Any())
-                parameters.Add("symbol", symbols.First());
+
+            if (permissions.Length > 1)
+            {
+                List<string> list = new List<string>();
+                foreach (var permission in permissions)
+                {
+                    list.Add(permission.ToString().ToUpper());
+                }
+
+                parameters.Add("permissions", JsonConvert.SerializeObject(list));
+            }
+            else if (permissions.Any())
+            {
+                parameters.Add("permissions", permissions.First().ToString().ToUpper());
+            }
 
             var exchangeInfoResult = await _baseClient.SendRequestInternal<BinanceExchangeInfo>(_baseClient.GetUrl(exchangeInfoEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters: parameters, arraySerialization: ArrayParametersSerialization.Array, weight: 10).ConfigureAwait(false);
             if (!exchangeInfoResult)
@@ -142,6 +158,31 @@ namespace Binance.Net.Clients.SpotApi
             _log.Write(LogLevel.Information, "Trade rules updated");
             return exchangeInfoResult;
         }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(IEnumerable<string> symbols, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+
+            if (symbols.Count() > 1)
+            {
+                parameters.Add("symbols", JsonConvert.SerializeObject(symbols));
+            }
+            else if (symbols.Any())
+            {
+                parameters.Add("symbol", symbols.First());
+            }
+
+            var exchangeInfoResult = await _baseClient.SendRequestInternal<BinanceExchangeInfo>(_baseClient.GetUrl(exchangeInfoEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters: parameters, arraySerialization: ArrayParametersSerialization.Array, weight: 10).ConfigureAwait(false);
+            if (!exchangeInfoResult)
+                return exchangeInfoResult;
+
+            _baseClient.ExchangeInfo = exchangeInfoResult.Data;
+            _baseClient.LastExchangeInfoUpdate = DateTime.UtcNow;
+            _log.Write(LogLevel.Information, "Trade rules updated");
+            return exchangeInfoResult;
+        }
+
         #endregion
 
         #region System status
@@ -378,7 +419,6 @@ namespace Binance.Net.Clients.SpotApi
             return timeSpan.TotalDays + "d";
         }
         #endregion
-
 
         #region Symbol Price Ticker
 
@@ -651,6 +691,5 @@ namespace Binance.Net.Clients.SpotApi
         }
 
         #endregion
-
     }
 }
