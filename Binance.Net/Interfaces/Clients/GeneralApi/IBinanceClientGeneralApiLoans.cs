@@ -60,8 +60,8 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get ongoing loan orders
-        /// </summary>
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#borrow-get-loan-ongoing-orders-user_data" /></para>
+        /// </summary>
         /// <param name="orderId">Filter by order id</param>
         /// <param name="loanAsset">Filter by loan asset</param>
         /// <param name="collateralAsset">Filter by collateral asset</param>

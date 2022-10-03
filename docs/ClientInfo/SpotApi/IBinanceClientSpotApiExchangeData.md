@@ -169,6 +169,30 @@ Task<WebCallResult<BinanceAveragePrice>> GetCurrentAvgPriceAsync(string symbol, 
 [https://binance-docs.github.io/apidocs/spot/en/#exchange-information](https://binance-docs.github.io/apidocs/spot/en/#exchange-information)  
 <p>
 
+*Get's information about the exchange including rate limits and symbol list*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.ExchangeData.GetExchangeInfoAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetExchangeInfoAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#exchange-information](https://binance-docs.github.io/apidocs/spot/en/#exchange-information)  
+<p>
+
 *Get's information about the exchange including rate limits and information on the provided symbol*  
 
 ```csharp  
@@ -219,19 +243,45 @@ Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(IEnumerable<string
 [https://binance-docs.github.io/apidocs/spot/en/#exchange-information](https://binance-docs.github.io/apidocs/spot/en/#exchange-information)  
 <p>
 
-*Get's information about the exchange including rate limits and symbol list*  
+*Get's information about the exchange including rate limits and information on the provided symbol based on an account permission*  
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.ExchangeData.GetExchangeInfoAsync();  
+var result = await client.SpotApi.ExchangeData.GetExchangeInfoAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(CancellationToken ct = default);  
+Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(AccountType permission, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
+|permission|account type|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetExchangeInfoAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#exchange-information](https://binance-docs.github.io/apidocs/spot/en/#exchange-information)  
+<p>
+
+*Get's information about the exchange including rate limits and information on the provided symbols based on account permissions*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.ExchangeData.GetExchangeInfoAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(AccountType[] permissions, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|permissions|account type|
 |_[Optional]_ ct|Cancellation token|
 
 </p>

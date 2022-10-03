@@ -240,6 +240,34 @@ Task<WebCallResult<BinanceOrderBase>> CancelOrderAsync(string symbol, long? orde
 
 ***
 
+## ConvertTransferAsync  
+
+<p>
+
+*Convert between BUSD and stablecoins*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.Trading.ConvertTransferAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceConvertTransferResult>> ConvertTransferAsync(string clientTransferId, string asset, decimal quantity, string targetAsset, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|clientTransferId|Transfer id, should be unique value|
+|asset|Current asset|
+|quantity|Quantity|
+|targetAsset|Target asset|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetC2CTradeHistoryAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#get-c2c-trade-history-user_data](https://binance-docs.github.io/apidocs/spot/en/#get-c2c-trade-history-user_data)  
@@ -291,6 +319,36 @@ Task<WebCallResult<BinanceListResult<BinanceConvertTrade>>> GetConvertTradeHisto
 |startTime|Filter by start time|
 |endTime|Filter by end time|
 |_[Optional]_ limit|Max amount of results|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetConvertTransferHistoryAsync  
+
+<p>
+
+*Get convert transfer history*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.Trading.GetConvertTransferHistoryAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceQueryRecords<BinanceConvertTransferRecord>>> GetConvertTransferHistoryAsync(DateTime startTime, DateTime endTime, long? transferId = default, string? asset = default, int? page = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|startTime|Filter by start time|
+|endTime|Filter by end time|
+|_[Optional]_ transferId|Filter by transfer id|
+|_[Optional]_ asset|Filter by asset|
+|_[Optional]_ page|Page|
+|_[Optional]_ limit|Max results|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 

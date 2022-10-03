@@ -150,7 +150,7 @@ var result = await client.CoinFuturesStreams.SubscribeToAllTickerUpdatesAsync(/*
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToAllTickerUpdatesAsync(Action<DataEvent<IEnumerable<IBinanceTick>>> onMessage, CancellationToken ct = default);  
+Task<CallResult<UpdateSubscription>> SubscribeToAllTickerUpdatesAsync(Action<DataEvent<IEnumerable<IBinance24HPrice>>> onMessage, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -821,7 +821,7 @@ var result = await client.CoinFuturesStreams.SubscribeToTickerUpdatesAsync(/* pa
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<IBinanceTick>> onMessage, CancellationToken ct = default);  
+Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<IBinance24HPrice>> onMessage, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -847,7 +847,7 @@ var result = await client.CoinFuturesStreams.SubscribeToTickerUpdatesAsync(/* pa
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IBinanceTick>> onMessage, CancellationToken ct = default);  
+Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IBinance24HPrice>> onMessage, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
