@@ -1,0 +1,37 @@
+{
+  "total":3,
+  "rows":
+  [
+    {
+      "tranId":118263615991,
+      "type":244,
+      "time":1664442078000,
+      "deductedAsset":"BUSD",
+      "deductedAmount":"1",
+      "targetAsset":"USDC",
+      "targetAmount":"1",
+      "status":"S",
+      "accountType":"MAIN"
+    },{
+      "tranId":118263598801,
+      "type":244,
+      "time":1664442061000,
+      "deductedAsset":"BUSD",
+      "deductedAmount":"1",
+      "targetAsset":"USDC",
+      "targetAmount":"1",
+      "status":"S",
+      "accountType":"MAIN"
+    },{
+      "tranId":118263407119,
+      "type":244,
+      "time":1664441820000,
+      "deductedAsset":"BUSD",
+      "deductedAmount":"1",
+      "targetAsset":"USDC",
+      "targetAmount":"1",
+      "status":"S",
+      "accountType":"MAIN"
+    }
+  ]
+}

@@ -17,9 +17,9 @@ using Newtonsoft.Json;
 namespace Binance.Net.Clients.GeneralApi
 {
     /// <inheritdoc />
-    public class BinanceClientGeneralApiLending : IBinanceClientGeneralApiLending
+    public class BinanceClientGeneralApiSavings : IBinanceClientGeneralApiSavings
     {
-        // Lending
+        // Savings
         private const string flexibleProductListEndpoint = "lending/daily/product/list";
         private const string leftDailyPurchaseQuotaEndpoint = "lending/daily/userLeftQuota";
         private const string purchaseFlexibleProductEndpoint = "lending/daily/purchase";
@@ -35,11 +35,9 @@ namespace Binance.Net.Clients.GeneralApi
         private const string lendingInterestHistoryEndpoint = "lending/union/interestHistory";
         private const string positionChangedEndpoint = "lending/positionChanged";
 
-        private const string cryptoLoanIncomingEndpoint = "loan/income";
-
         private readonly BinanceClientGeneralApi _baseClient;
 
-        internal BinanceClientGeneralApiLending(BinanceClientGeneralApi baseClient)
+        internal BinanceClientGeneralApiSavings(BinanceClientGeneralApi baseClient)
         {
             _baseClient = baseClient;
         }
@@ -134,7 +132,7 @@ namespace Binance.Net.Clients.GeneralApi
         public async Task<WebCallResult<IEnumerable<BinanceFlexibleProductPosition>>> GetFlexibleProductPositionAsync(string? asset = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
-            parameters.AddOptionalParameter("asset", asset); 
+            parameters.AddOptionalParameter("asset", asset);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceFlexibleProductPosition>>(_baseClient.GetUrl(flexiblePositionEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
@@ -282,24 +280,6 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceLendingChangeToDailyResult>(_baseClient.GetUrl(positionChangedEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
-        }
-        #endregion
-
-        #region GetCryptoLoansIncomeHistory
-        /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceCryptoLoanIncome>>> GetCryptoLoansIncomeHistoryAsync(string asset, LoanIncomeType? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>
-            {
-                { "asset", asset }
-            };
-            parameters.AddOptionalParameter("type", type.HasValue ? JsonConvert.SerializeObject(type.Value, new LoanIncomeTypeConverter(false)) : null);
-            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
-            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceCryptoLoanIncome>>(_baseClient.GetUrl(cryptoLoanIncomingEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 6000).ConfigureAwait(false);
         }
         #endregion
     }

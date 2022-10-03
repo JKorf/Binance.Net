@@ -1,0 +1,15 @@
+{
+  "rows": [
+    {
+    "loanCoin": "BUSD",
+    "collateralCoin": "BNB",
+    "direction": "ADDITIONAL",
+    "amount": "5.235",
+    "preLTV": "0.78",
+    "afterLTV": "0.56",
+    "adjustTime": 1575018510000,
+    "orderId": 756783308056935434
+    }
+  ],
+  "total": 1
+}

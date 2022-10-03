@@ -473,7 +473,10 @@
         <member name="P:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApi.Futures">
             <inheritdoc />
         </member>
-        <member name="P:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApi.Lending">
+        <member name="P:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApi.Savings">
+            <inheritdoc />
+        </member>
+        <member name="P:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApi.CryptoLoans">
             <inheritdoc />
         </member>
         <member name="P:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApi.Mining">
@@ -641,52 +644,31 @@
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiFutures.GetCrossCollateralLiquidationHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="T:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiLending">
+        <member name="T:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiCryptoLoans">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiLending.GetFlexibleProductListAsync(System.Nullable{Binance.Net.Enums.ProductStatus},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiCryptoLoans.GetIncomeHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.LoanIncomeType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiLending.GetLeftDailyPurchaseQuotaOfFlexableProductAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiCryptoLoans.BorrowAsync(System.String,System.String,System.Int32,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiLending.PurchaseFlexibleProductAsync(System.String,System.Decimal,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiCryptoLoans.GetBorrowHistoryAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiLending.GetLeftDailyRedemptionQuotaOfFlexibleProductAsync(System.String,Binance.Net.Enums.RedeemType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiCryptoLoans.GetOpenBorrowOrdersAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiLending.RedeemFlexibleProductAsync(System.String,System.Decimal,Binance.Net.Enums.RedeemType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiCryptoLoans.RepayAsync(System.Int64,System.Decimal,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiLending.GetFlexibleProductPositionAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiCryptoLoans.GetRepayHistoryAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiLending.GetFixedAndCustomizedFixedProjectListAsync(Binance.Net.Enums.ProjectType,System.String,System.Nullable{Binance.Net.Enums.ProductStatus},System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiCryptoLoans.AdjustLTVAsync(System.Int64,System.Decimal,System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiLending.PurchaseCustomizedFixedProjectAsync(System.String,System.Int32,System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiLending.GetCustomizedFixedProjectPositionsAsync(System.String,System.String,System.Nullable{Binance.Net.Enums.ProjectStatus},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiLending.GetLendingAccountAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiLending.GetPurchaseRecordsAsync(Binance.Net.Enums.LendingType,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiLending.GetRedemptionRecordsAsync(Binance.Net.Enums.LendingType,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiLending.GetLendingInterestHistoryAsync(Binance.Net.Enums.LendingType,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiLending.ChangeToDailyPositionAsync(System.String,System.Int32,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiLending.GetCryptoLoansIncomeHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.LoanIncomeType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiCryptoLoans.GetLtvAdjustHistoryAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiMining">
@@ -726,6 +708,51 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiMining.CancelHashrateResaleRequestAsync(System.Int32,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSavings">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSavings.GetFlexibleProductListAsync(System.Nullable{Binance.Net.Enums.ProductStatus},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSavings.GetLeftDailyPurchaseQuotaOfFlexableProductAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSavings.PurchaseFlexibleProductAsync(System.String,System.Decimal,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSavings.GetLeftDailyRedemptionQuotaOfFlexibleProductAsync(System.String,Binance.Net.Enums.RedeemType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSavings.RedeemFlexibleProductAsync(System.String,System.Decimal,Binance.Net.Enums.RedeemType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSavings.GetFlexibleProductPositionAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSavings.GetFixedAndCustomizedFixedProjectListAsync(Binance.Net.Enums.ProjectType,System.String,System.Nullable{Binance.Net.Enums.ProductStatus},System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSavings.PurchaseCustomizedFixedProjectAsync(System.String,System.Int32,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSavings.GetCustomizedFixedProjectPositionsAsync(System.String,System.String,System.Nullable{Binance.Net.Enums.ProjectStatus},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSavings.GetLendingAccountAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSavings.GetPurchaseRecordsAsync(Binance.Net.Enums.LendingType,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSavings.GetRedemptionRecordsAsync(Binance.Net.Enums.LendingType,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSavings.GetLendingInterestHistoryAsync(Binance.Net.Enums.LendingType,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSavings.ChangeToDailyPositionAsync(System.String,System.Int32,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSubAccount">
@@ -1330,6 +1357,12 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiTrading.GetStakingHistoryAsync(Binance.Net.Enums.StakingProductType,Binance.Net.Enums.StakingTransactionType,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiTrading.ConvertTransferAsync(System.String,System.String,System.Decimal,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiTrading.GetConvertTransferHistoryAsync(System.DateTime,System.DateTime,System.Nullable{System.Int64},System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotStreams">
@@ -2041,6 +2074,51 @@
         <member name="F:Binance.Net.Enums.BlvtStatus.Failure">
             <summary>
             Failure
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.BorrowStatus">
+            <summary>
+            Borrow status
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BorrowStatus.AccruingInterest">
+            <summary>
+            Accruing interest
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BorrowStatus.Overdeu">
+            <summary>
+            Overdue
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BorrowStatus.Liquidating">
+            <summary>
+            Currently liquidating
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BorrowStatus.Repaying">
+            <summary>
+            Repaying
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BorrowStatus.Repaid">
+            <summary>
+            Repaid
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BorrowStatus.Liquidated">
+            <summary>
+            Liquidated
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BorrowStatus.Pending">
+            <summary>
+            Pending
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BorrowStatus.Failed">
+            <summary>
+            Failed
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.BrokerageAccountType">
@@ -5025,9 +5103,14 @@
             Endpoints related to futures account interactions
             </summary>
         </member>
-        <member name="P:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApi.Lending">
+        <member name="P:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApi.Savings">
             <summary>
-            Endpoints related to lending/saving
+            Endpoints related to savings
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApi.CryptoLoans">
+            <summary>
+            Endpoints related to crypto loans
             </summary>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApi.Mining">
@@ -5658,184 +5741,12 @@
             <param name="ct">Cancellation token</param>
             <returns>Liquidation history</returns>
         </member>
-        <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiLending">
+        <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiCryptoLoans">
             <summary>
-            Binance Spot Lending/Savings endpoints
+            Binance Spot Crypto loans endpoints
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiLending.GetFlexibleProductListAsync(System.Nullable{Binance.Net.Enums.ProductStatus},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Get product list
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-product-list-user_data" /></para>
-            </summary>
-            <param name="status">Filter by status</param>
-            <param name="featured">Filter by featured</param>
-            <param name="page">Page to retrieve</param>
-            <param name="pageSize">Page size to return</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>List of product</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiLending.GetLeftDailyPurchaseQuotaOfFlexableProductAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Get the purchase quota left for a product
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-left-daily-purchase-quota-of-flexible-product-user_data" /></para>
-            </summary>
-            <param name="productId">Id of the product</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Quota left</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiLending.PurchaseFlexibleProductAsync(System.String,System.Decimal,System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Purchase flexible product
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#purchase-flexible-product-user_data" /></para>
-            </summary>
-            <param name="productId">Id of the product</param>
-            <param name="quantity">The quantity to purchase</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Purchase id</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiLending.GetLeftDailyRedemptionQuotaOfFlexibleProductAsync(System.String,Binance.Net.Enums.RedeemType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Get the redemption quota left for a product
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-left-daily-redemption-quota-of-flexible-product-user_data" /></para>
-            </summary>
-            <param name="productId">Id of the product</param>
-            <param name="type">Type</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Quota left</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiLending.RedeemFlexibleProductAsync(System.String,System.Decimal,Binance.Net.Enums.RedeemType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Redeem flexible product
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#redeem-flexible-product-user_data" /></para>
-            </summary>
-            <param name="productId">Id of the product</param>
-            <param name="type">Redeem type</param>
-            <param name="quantity">The quantity to redeem</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiLending.GetFlexibleProductPositionAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Get flexible product position
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-product-position-user_data" /></para>
-            </summary>
-            <param name="asset">Asset</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Flexible product position(s)</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiLending.GetFixedAndCustomizedFixedProjectListAsync(Binance.Net.Enums.ProjectType,System.String,System.Nullable{Binance.Net.Enums.ProductStatus},System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Get fixed and customized fixed project list
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-fixed-and-activity-project-list-user_data" /></para>
-            </summary>
-            <param name="type">Type of project</param>
-            <param name="asset">Asset</param>
-            <param name="status">Filter by status</param>
-            <param name="sortAscending">If should sort ascending</param>
-            <param name="sortBy">Sort by. Valid values: "START_TIME", "LOT_SIZE", "INTEREST_RATE", "DURATION"; default "START_TIME"</param>
-            <param name="currentPage">Result page</param>
-            <param name="size">Page size</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Project list</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiLending.PurchaseCustomizedFixedProjectAsync(System.String,System.Int32,System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Purchase customized fixed project
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#purchase-fixed-activity-project-user_data" /></para>
-            </summary>
-            <param name="projectId">Id of the project</param>
-            <param name="lot">The lot</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Purchase id</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiLending.GetCustomizedFixedProjectPositionsAsync(System.String,System.String,System.Nullable{Binance.Net.Enums.ProjectStatus},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Get customized fixed project position
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-fixed-activity-project-position-user_data" /></para>
-            </summary>
-            <param name="asset">Asset</param>
-            <param name="projectId">The project id</param>
-            <param name="status">Filter by status</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Customized fixed project position</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiLending.GetLendingAccountAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Get lending account info
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#lending-account-user_data" /></para>
-            </summary>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Lending account</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiLending.GetPurchaseRecordsAsync(Binance.Net.Enums.LendingType,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Get purchase records
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-purchase-record-user_data" /></para>
-            </summary>
-            <param name="lendingType">Lending type</param>
-            <param name="asset">Asset</param>
-            <param name="page">Results page</param>
-            <param name="startTime">Filter by startTime from</param>
-            <param name="endTime">Filter by endTime from</param>
-            <param name="limit">Limit of the amount of results</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>The purchase records</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiLending.GetRedemptionRecordsAsync(Binance.Net.Enums.LendingType,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Get redemption records
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-redemption-record-user_data" /></para>
-            </summary>
-            <param name="lendingType">Lending type</param>
-            <param name="asset">Asset</param>
-            <param name="page">Results page</param>
-            <param name="startTime">Filter by startTime from</param>
-            <param name="endTime">Filter by endTime from</param>
-            <param name="limit">Limit of the amount of results</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>The redemption records</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiLending.GetLendingInterestHistoryAsync(Binance.Net.Enums.LendingType,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Get interest history
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-interest-history-user_data-2" /></para>
-            </summary>
-            <param name="lendingType">Lending type</param>
-            <param name="asset">Asset</param>
-            <param name="page">Results page</param>
-            <param name="startTime">Filter by startTime from</param>
-            <param name="endTime">Filter by endTime from</param>
-            <param name="limit">Limit of the amount of results</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>The interest history</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiLending.ChangeToDailyPositionAsync(System.String,System.Int32,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Changed fixed/activity position to daily position
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#change-fixed-activity-position-to-daily-position-user_data" /></para>
-            </summary>
-            <param name="projectId">Id of the project</param>
-            <param name="lot">The lot</param>
-            <param name="positionId">For fixed position</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Purchase id</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiLending.GetCryptoLoansIncomeHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.LoanIncomeType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiCryptoLoans.GetIncomeHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.LoanIncomeType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get income history from crypto loans
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-crypto-loans-income-history-user_data" /></para>
@@ -5845,6 +5756,107 @@
             <param name="startTime">Filter by startTime from</param>
             <param name="endTime">Filter by endTime from</param>
             <param name="limit">Limit of the amount of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiCryptoLoans.BorrowAsync(System.String,System.String,System.Int32,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Take a crypto loan
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#borrow-crypto-loan-borrow-trade" /></para>
+            </summary>
+            <param name="loanAsset">Asset to loan</param>
+            <param name="collateralAsset">Collateral asset</param>
+            <param name="loanTerm">Loan term in days, 7/14/30/90/180</param>
+            <param name="loanQuantity">Quantity to loan in loan asset</param>
+            <param name="collateralQuantity">Quantity to loan in collateral asset</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiCryptoLoans.GetBorrowHistoryAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get borrow order history
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#borrow-get-loan-borrow-history-user_data" /></para>
+            </summary>
+            <param name="orderId">Filter by order id</param>
+            <param name="loanAsset">Filter by loan asset</param>
+            <param name="collateralAsset">Filter by collateral asset</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Page number</param>
+            <param name="limit">Page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiCryptoLoans.GetOpenBorrowOrdersAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get ongoing loan orders
+            </summary>
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#borrow-get-loan-ongoing-orders-user_data" /></para>
+            <param name="orderId">Filter by order id</param>
+            <param name="loanAsset">Filter by loan asset</param>
+            <param name="collateralAsset">Filter by collateral asset</param>
+            <param name="page">Page number</param>
+            <param name="limit">Page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiCryptoLoans.RepayAsync(System.Int64,System.Decimal,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Repay a loan
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#repay-crypto-loan-repay-trade" /></para>
+            </summary>
+            <param name="orderId">Order id to repay</param>
+            <param name="quantity">Quantity to repay</param>
+            <param name="repayWithBorrowedAsset">True to repay with the borrowed asset, false to repay with collateral asset</param>
+            <param name="collateralReturn">Return extra colalteral to spot account</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiCryptoLoans.GetRepayHistoryAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get loan repayment history
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#repay-get-loan-repayment-history-user_data" /></para>
+            </summary>
+            <param name="orderId">Filter by order id</param>
+            <param name="loanAsset">Filter by loan asset</param>
+            <param name="collateralAsset">Filter by collateral asset</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Page number</param>
+            <param name="limit">Page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiCryptoLoans.AdjustLTVAsync(System.Int64,System.Decimal,System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Adjust LTV for a loan
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#adjust-ltv-crypto-loan-adjust-ltv-trade" /></para>
+            </summary>
+            <param name="orderId">Order id</param>
+            <param name="quantity">Adjustment quantity</param>
+            <param name="addOrRmove">True for add, false to reduce</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiCryptoLoans.GetLtvAdjustHistoryAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get LTV adjustment history
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#adjust-ltv-get-loan-ltv-adjustment-history-user_data" /></para>
+            </summary>
+            <param name="orderId">Filter by order id</param>
+            <param name="loanAsset">Filter by loan asset</param>
+            <param name="collateralAsset">Filter by collateral asset</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Page number</param>
+            <param name="limit">Page size</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -5990,6 +6002,183 @@
             <param name="userName">Mining account</param>
             <param name="ct">Cancellation token</param>
             <returns>Success</returns>
+        </member>
+        <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiSavings">
+            <summary>
+            Binance Spot Savings endpoints
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiSavings.GetFlexibleProductListAsync(System.Nullable{Binance.Net.Enums.ProductStatus},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get product list
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-product-list-user_data" /></para>
+            </summary>
+            <param name="status">Filter by status</param>
+            <param name="featured">Filter by featured</param>
+            <param name="page">Page to retrieve</param>
+            <param name="pageSize">Page size to return</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of product</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiSavings.GetLeftDailyPurchaseQuotaOfFlexableProductAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get the purchase quota left for a product
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-left-daily-purchase-quota-of-flexible-product-user_data" /></para>
+            </summary>
+            <param name="productId">Id of the product</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Quota left</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiSavings.PurchaseFlexibleProductAsync(System.String,System.Decimal,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Purchase flexible product
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#purchase-flexible-product-user_data" /></para>
+            </summary>
+            <param name="productId">Id of the product</param>
+            <param name="quantity">The quantity to purchase</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Purchase id</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiSavings.GetLeftDailyRedemptionQuotaOfFlexibleProductAsync(System.String,Binance.Net.Enums.RedeemType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get the redemption quota left for a product
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-left-daily-redemption-quota-of-flexible-product-user_data" /></para>
+            </summary>
+            <param name="productId">Id of the product</param>
+            <param name="type">Type</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Quota left</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiSavings.RedeemFlexibleProductAsync(System.String,System.Decimal,Binance.Net.Enums.RedeemType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Redeem flexible product
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#redeem-flexible-product-user_data" /></para>
+            </summary>
+            <param name="productId">Id of the product</param>
+            <param name="type">Redeem type</param>
+            <param name="quantity">The quantity to redeem</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiSavings.GetFlexibleProductPositionAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get flexible product position
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-product-position-user_data" /></para>
+            </summary>
+            <param name="asset">Asset</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Flexible product position(s)</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiSavings.GetFixedAndCustomizedFixedProjectListAsync(Binance.Net.Enums.ProjectType,System.String,System.Nullable{Binance.Net.Enums.ProductStatus},System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get fixed and customized fixed project list
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-fixed-and-activity-project-list-user_data" /></para>
+            </summary>
+            <param name="type">Type of project</param>
+            <param name="asset">Asset</param>
+            <param name="status">Filter by status</param>
+            <param name="sortAscending">If should sort ascending</param>
+            <param name="sortBy">Sort by. Valid values: "START_TIME", "LOT_SIZE", "INTEREST_RATE", "DURATION"; default "START_TIME"</param>
+            <param name="currentPage">Result page</param>
+            <param name="size">Page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Project list</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiSavings.PurchaseCustomizedFixedProjectAsync(System.String,System.Int32,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Purchase customized fixed project
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#purchase-fixed-activity-project-user_data" /></para>
+            </summary>
+            <param name="projectId">Id of the project</param>
+            <param name="lot">The lot</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Purchase id</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiSavings.GetCustomizedFixedProjectPositionsAsync(System.String,System.String,System.Nullable{Binance.Net.Enums.ProjectStatus},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get customized fixed project position
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-fixed-activity-project-position-user_data" /></para>
+            </summary>
+            <param name="asset">Asset</param>
+            <param name="projectId">The project id</param>
+            <param name="status">Filter by status</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Customized fixed project position</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiSavings.GetLendingAccountAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get lending account info
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#lending-account-user_data" /></para>
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Lending account</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiSavings.GetPurchaseRecordsAsync(Binance.Net.Enums.LendingType,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get purchase records
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-purchase-record-user_data" /></para>
+            </summary>
+            <param name="lendingType">Lending type</param>
+            <param name="asset">Asset</param>
+            <param name="page">Results page</param>
+            <param name="startTime">Filter by startTime from</param>
+            <param name="endTime">Filter by endTime from</param>
+            <param name="limit">Limit of the amount of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The purchase records</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiSavings.GetRedemptionRecordsAsync(Binance.Net.Enums.LendingType,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get redemption records
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-redemption-record-user_data" /></para>
+            </summary>
+            <param name="lendingType">Lending type</param>
+            <param name="asset">Asset</param>
+            <param name="page">Results page</param>
+            <param name="startTime">Filter by startTime from</param>
+            <param name="endTime">Filter by endTime from</param>
+            <param name="limit">Limit of the amount of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The redemption records</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiSavings.GetLendingInterestHistoryAsync(Binance.Net.Enums.LendingType,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get interest history
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-interest-history-user_data-2" /></para>
+            </summary>
+            <param name="lendingType">Lending type</param>
+            <param name="asset">Asset</param>
+            <param name="page">Results page</param>
+            <param name="startTime">Filter by startTime from</param>
+            <param name="endTime">Filter by endTime from</param>
+            <param name="limit">Limit of the amount of results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The interest history</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiSavings.ChangeToDailyPositionAsync(System.String,System.Int32,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Changed fixed/activity position to daily position
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#change-fixed-activity-position-to-daily-position-user_data" /></para>
+            </summary>
+            <param name="projectId">Id of the project</param>
+            <param name="lot">The lot</param>
+            <param name="positionId">For fixed position</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Purchase id</returns>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiSubAccount">
             <summary>
@@ -8205,6 +8394,32 @@
             </summary>
             <param name="product">Product type</param>
             <param name="transactionType">Transaction type</param>
+            <param name="asset">Filter by asset</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Page</param>
+            <param name="limit">Max results</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiTrading.ConvertTransferAsync(System.String,System.String,System.Decimal,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Convert between BUSD and stablecoins
+            </summary>
+            <param name="clientTransferId">Transfer id, should be unique value</param>
+            <param name="asset">Current asset</param>
+            <param name="quantity">Quantity</param>
+            <param name="targetAsset">Target asset</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiTrading.GetConvertTransferHistoryAsync(System.DateTime,System.DateTime,System.Nullable{System.Int64},System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get convert transfer history
+            </summary>
+            <param name="transferId">Filter by transfer id</param>
             <param name="asset">Filter by asset</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
@@ -18362,6 +18577,71 @@
             Swap id
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferRecord">
+            <summary>
+            Result of a convert transfer operation
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferRecord.TransferId">
+            <summary>
+            Transfer id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferRecord.Status">
+            <summary>
+            Status of the transfer (definitions currently unknown)
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferRecord.Time">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferRecord.Type">
+            <summary>
+            Type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferRecord.DeductedAsset">
+            <summary>
+            Deducted asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferRecord.DeductedQuantity">
+            <summary>
+            Deducted quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferRecord.TargetAsset">
+            <summary>
+            Target asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferRecord.TargetQuantity">
+            <summary>
+            Target quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferRecord.AccountType">
+            <summary>
+            Account type
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferResult">
+            <summary>
+            Result of a convert transfer operation
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferResult.TransferId">
+            <summary>
+            Transfer id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferResult.Status">
+            <summary>
+            Status of the transfer (definitions currently unknown)
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralAdjustLtvHistory">
             <summary>
             Adjust history
@@ -19052,619 +19332,329 @@
             Max accounts
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceCryptoLoanIncome">
+        <member name="T:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanBorrow">
+            <summary>
+            Borrow info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanBorrow.LoanAsset">
+            <summary>
+            The loaning asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanBorrow.CollateralAsset">
+            <summary>
+            The collateral asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanBorrow.LoanQuantity">
+            <summary>
+            The loan quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanBorrow.CollateralQuantity">
+            <summary>
+            The collateral quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanBorrow.HourlyInterestRate">
+            <summary>
+            Hourly interest rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanBorrow.OrderId">
+            <summary>
+            Borrow order id
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanBorrowRecord">
+            <summary>
+            Borrow record
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanBorrowRecord.LoanAsset">
+            <summary>
+            The loaning asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanBorrowRecord.CollateralAsset">
+            <summary>
+            The collateral asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanBorrowRecord.InitialLoanQuantity">
+            <summary>
+            The loan quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanBorrowRecord.InitialCollateralQuantity">
+            <summary>
+            The collateral quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanBorrowRecord.HourlyInterestRate">
+            <summary>
+            Hourly interest rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanBorrowRecord.LoanTerm">
+            <summary>
+            Loan term
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanBorrowRecord.OrderId">
+            <summary>
+            Borrow order id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanBorrowRecord.BorrowTime">
+            <summary>
+            Borrow timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanBorrowRecord.Status">
+            <summary>
+            Status of the order
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanIncome">
             <summary>
             Crypto loan income info
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCryptoLoanIncome.Asset">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanIncome.Asset">
             <summary>
             Asset
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCryptoLoanIncome.Type">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanIncome.Type">
             <summary>
             Income type
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCryptoLoanIncome.Quantity">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanIncome.Quantity">
             <summary>
             Quantity
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCryptoLoanIncome.Timestamp">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanIncome.Timestamp">
             <summary>
             Timestamp
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCryptoLoanIncome.TransactionId">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanIncome.TransactionId">
             <summary>
             Transaction id
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition">
+        <member name="T:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanLtvAdjust">
             <summary>
-            Customized fixed project position
+            Adjust info
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.Asset">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanLtvAdjust.LoanAsset">
             <summary>
-            Asset name
+            The loaning asset
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.CanTransfer">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanLtvAdjust.CollateralAsset">
             <summary>
-            Can transfer
+            The collateral asset
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.CreateTime">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanLtvAdjust.Direction">
             <summary>
-            Create timestamp
+            Direction
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.Duration">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanLtvAdjust.Quantity">
             <summary>
-            Duration
+            Amount
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.EndTime">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanLtvAdjust.CurrentLtv">
             <summary>
-            End time
+            Current ltv
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.Interest">
+        <member name="T:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanLtvAdjustRecord">
             <summary>
-            Interest
+            Ltv adjustment info
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.InterestRate">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanLtvAdjustRecord.LoanAsset">
             <summary>
-            Interest rate
+            The loaning asset
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.Lot">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanLtvAdjustRecord.CollateralAsset">
             <summary>
-            Lot
+            The collateral asset
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.PositionId">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanLtvAdjustRecord.Direction">
             <summary>
-            Position id
+            Direction
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.Principal">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanLtvAdjustRecord.Quantity">
             <summary>
-            Principal
+            Amount
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.ProjectId">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanLtvAdjustRecord.PreLtv">
             <summary>
-            Project id
+            Pre adjust ltv
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.ProjectName">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanLtvAdjustRecord.AfterLtv">
             <summary>
-            Project name
+            Post adjust ltv
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.PurchaseTime">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanLtvAdjustRecord.AdjustTime">
             <summary>
-            Time of purchase
+            Adjust time
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.RedeemDate">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanLtvAdjustRecord.OrderId">
             <summary>
-            Redeem date
+            Order id
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.StartTime">
+        <member name="T:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanOpenBorrowOrder">
             <summary>
-            Start time
+            Open borrow order info
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.Status">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanOpenBorrowOrder.LoanAsset">
             <summary>
-            Status
+            The loaning asset
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.Type">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanOpenBorrowOrder.CollateralAsset">
             <summary>
-            Type
+            The collateral asset
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanOpenBorrowOrder.CollateralQuantity">
             <summary>
-            Flexible product position
+            The collateral quantity
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.AnnualInterestRate">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanOpenBorrowOrder.OrderId">
             <summary>
-            Annual interest rate
+            Borrow order id
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.Asset">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanOpenBorrowOrder.TotalDebt">
             <summary>
-            Asset
+            Total debt
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.AverageAnnualInterestRate">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanOpenBorrowOrder.ResidualInterest">
             <summary>
-            Average annual interest rate
+            Residual interest
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.TierAnnualInterestRate">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanOpenBorrowOrder.CurrentLTV">
             <summary>
-            Tier Average annual interest rate
+            Current LTV
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.CanRedeem">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanOpenBorrowOrder.ExpirationTime">
             <summary>
-            Can redeem
+            Expiration time
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.DailyInterestRate">
+        <member name="T:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepay">
             <summary>
-            Daily interest rate
+            Repay info
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.FreeQuantity">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepay.LoanAsset">
             <summary>
-            Quantity free
+            The loaning asset
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.FreezeQuantity">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepay.CollateralAsset">
             <summary>
-            Quantity frozen
+            The collateral asset
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.LockedQuantity">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepay.CurrentLTV">
             <summary>
-            Quantity locked
+            Current LTV
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.ProductId">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepay.RemainingPrincipal">
             <summary>
-            The product id
+            Remaining principal
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.ProductName">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepay.RepayStatus">
             <summary>
-            The product name
+            Repay status
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.RedeemingQuantity">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepay.RemainingCollateral">
             <summary>
-            Redeeming quantity
+            Remaining collateral
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.TodayPurchasedQuantity">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepay.RemainingInterest">
             <summary>
-            Quantity purchased today
+            Remaining interest
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.TotalQuantity">
+        <member name="T:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepayRecord">
             <summary>
-            Total quantity
+            Repay record
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.TotalInterest">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepayRecord.LoanAsset">
             <summary>
-            Total interest
+            The loaning asset
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingInterestHistory">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepayRecord.CollateralAsset">
             <summary>
-            Interest record
+            The collateral asset
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingInterestHistory.Interest">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepayRecord.OrderId">
             <summary>
-            Interest
+            Borrow order id
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingInterestHistory.Asset">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepayRecord.RepayTime">
             <summary>
-            Asset name
+            Repay timestamp
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingInterestHistory.Timestamp">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepayRecord.RepayStatus">
             <summary>
-            Timestamp
+            Status of the repay
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingInterestHistory.LendingType">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepayRecord.CollateralReturn">
             <summary>
-            Lending type
+            Collateral return
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingInterestHistory.ProductName">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepayRecord.CollateralUsed">
             <summary>
-            Name of the product
+            Collateral used
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingAccount">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepayRecord.RepayQuantity">
             <summary>
-            Lending account
+            Repay quantity
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingAccount.TotalQuantityInBTC">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepayRecord.RepayType">
             <summary>
-            Total quantity in btc
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingAccount.TotalQuantityInUSDT">
-            <summary>
-            Total quantity in usdt
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingAccount.TotalFixedQuantityInBTC">
-            <summary>
-            Total fixed quantity in btc
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingAccount.TotalFixedQuantityInUSDT">
-            <summary>
-            Total fixed quantity in usdt
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingAccount.TotalFlexibleInBTC">
-            <summary>
-            Total flexible in btc
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingAccount.TotalFlexibleInUSDT">
-            <summary>
-            Total flexible in usdt
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingAccount.PositionAmounts">
-            <summary>
-            Position amounts
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingPositionAmount">
-            <summary>
-            Lending position amount
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingPositionAmount.Quantity">
-            <summary>
-            Amount of the asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingPositionAmount.QuantityInBTC">
-            <summary>
-            Amount in btc
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingPositionAmount.QuantityInUSDT">
-            <summary>
-            Amount in usdt
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingPositionAmount.Asset">
-            <summary>
-            Asset name
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingChangeToDailyResult">
-            <summary>
-            Purchase result
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingChangeToDailyResult.DailyPurchaseId">
-            <summary>
-            The id of the purchase
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingChangeToDailyResult.Success">
-            <summary>
-            Success
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingChangeToDailyResult.Timestamp">
-            <summary>
-            Time
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingPurchaseResult">
-            <summary>
-            Purchase result
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingPurchaseResult.PurchaseId">
-            <summary>
-            The id of the purchase
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceProject">
-            <summary>
-            Binance project info
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.Asset">
-            <summary>
-            The asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.DisplayPriority">
-            <summary>
-            Display priority
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.Duration">
-            <summary>
-            Duration
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.InterestPerLot">
-            <summary>
-            Interest per lot
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.InterestRate">
-            <summary>
-            Interest rate
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.LotSize">
-            <summary>
-            Lot size
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.LotsLowLimit">
-            <summary>
-            Lots low limit
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.LotsPurchased">
-            <summary>
-            Lots purchased
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.LotsUpLimit">
-            <summary>
-            Lots upper limit
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.MaxLotsPerUser">
-            <summary>
-            Max number of lots per user
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.NeedKYC">
-            <summary>
-            Needs know your customer
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.ProjectId">
-            <summary>
-            Project id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.ProjectName">
-            <summary>
-            Project name
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.Status">
-            <summary>
-            Status
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.Type">
-            <summary>
-            Type
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.WithAreaLimitation">
-            <summary>
-            Has area limitation
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseQuotaLeft">
-            <summary>
-            Purchase quota left
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseQuotaLeft.Asset">
-            <summary>
-            The asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseQuotaLeft.LeftQuota">
-            <summary>
-            The quota left
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord">
-            <summary>
-            Purchase record
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord.Quantity">
-            <summary>
-            Quantity purchased
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord.Asset">
-            <summary>
-            Asset name
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord.CreateTime">
-            <summary>
-            Timestamp
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord.LendingType">
-            <summary>
-            Lending type
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord.Lot">
-            <summary>
-            Lot
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord.ProductName">
-            <summary>
-            Name of the product
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord.PurchaseId">
-            <summary>
-            Purchase id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord.Status">
-            <summary>
-            Purchase status
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionQuotaLeft">
-            <summary>
-            Redemption quota left
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionQuotaLeft.Asset">
-            <summary>
-            The asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionQuotaLeft.DailyQuota">
-            <summary>
-            Daily quota
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionQuotaLeft.LeftQuota">
-            <summary>
-            Left quota
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionQuotaLeft.MinimalRedemptionQuantity">
-            <summary>
-            Minimal redemption quantity
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord">
-            <summary>
-            Redemption record
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.Quantity">
-            <summary>
-            Quantity purchased
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.Asset">
-            <summary>
-            Asset name
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.CreateTime">
-            <summary>
-            Timestamp
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.StartTime">
-            <summary>
-            Start time
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.Interest">
-            <summary>
-            Interest
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.Type">
-            <summary>
-            Redeem type
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.ProjectId">
-            <summary>
-            Id of the project
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.ProjectName">
-            <summary>
-            Name of the project
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.Principal">
-            <summary>
-            Principal
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.Status">
-            <summary>
-            Purchase status
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct">
-            <summary>
-            Savings product
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.Asset">
-            <summary>
-            The asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.AverageAnnualInterestRate">
-            <summary>
-            Average annual interest rage
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.CanPurchase">
-            <summary>
-            Can purchase
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.CanRedeem">
-            <summary>
-            Can redeem
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.DailyInterestPerThousand">
-            <summary>
-            Daily interest per thousand
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.Featured">
-            <summary>
-            Is featured
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.MinimalPurchaseQuantity">
-            <summary>
-            Minimal quantity to purchase
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.ProductId">
-            <summary>
-            Product id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.PurchasedQuantity">
-            <summary>
-            Purchased quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.Status">
-            <summary>
-            Status of the product
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.UpperLimit">
-            <summary>
-            Upper limit
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.UpperLimitPerUser">
-            <summary>
-            Upper limit per user
+            1 for "repay with borrowed asset", 2 for "repay with collateral"
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceForcedLiquidation">
@@ -20805,6 +20795,591 @@
         <member name="P:Binance.Net.Objects.Models.Spot.PortfolioMargin.BinancePortfolioMarginLoan.Quantity">
             <summary>
             Loan amount
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition">
+            <summary>
+            Customized fixed project position
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.Asset">
+            <summary>
+            Asset name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.CanTransfer">
+            <summary>
+            Can transfer
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.CreateTime">
+            <summary>
+            Create timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.Duration">
+            <summary>
+            Duration
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.EndTime">
+            <summary>
+            End time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.Interest">
+            <summary>
+            Interest
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.InterestRate">
+            <summary>
+            Interest rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.Lot">
+            <summary>
+            Lot
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.PositionId">
+            <summary>
+            Position id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.Principal">
+            <summary>
+            Principal
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.ProjectId">
+            <summary>
+            Project id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.ProjectName">
+            <summary>
+            Project name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.PurchaseTime">
+            <summary>
+            Time of purchase
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.RedeemDate">
+            <summary>
+            Redeem date
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.StartTime">
+            <summary>
+            Start time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.Type">
+            <summary>
+            Type
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition">
+            <summary>
+            Flexible product position
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.AnnualInterestRate">
+            <summary>
+            Annual interest rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.AverageAnnualInterestRate">
+            <summary>
+            Average annual interest rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.TierAnnualInterestRate">
+            <summary>
+            Tier Average annual interest rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.CanRedeem">
+            <summary>
+            Can redeem
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.DailyInterestRate">
+            <summary>
+            Daily interest rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.FreeQuantity">
+            <summary>
+            Quantity free
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.FreezeQuantity">
+            <summary>
+            Quantity frozen
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.LockedQuantity">
+            <summary>
+            Quantity locked
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.ProductId">
+            <summary>
+            The product id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.ProductName">
+            <summary>
+            The product name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.RedeemingQuantity">
+            <summary>
+            Redeeming quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.TodayPurchasedQuantity">
+            <summary>
+            Quantity purchased today
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.TotalQuantity">
+            <summary>
+            Total quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.TotalInterest">
+            <summary>
+            Total interest
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingInterestHistory">
+            <summary>
+            Interest record
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingInterestHistory.Interest">
+            <summary>
+            Interest
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingInterestHistory.Asset">
+            <summary>
+            Asset name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingInterestHistory.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingInterestHistory.LendingType">
+            <summary>
+            Lending type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingInterestHistory.ProductName">
+            <summary>
+            Name of the product
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingAccount">
+            <summary>
+            Lending account
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingAccount.TotalQuantityInBTC">
+            <summary>
+            Total quantity in btc
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingAccount.TotalQuantityInUSDT">
+            <summary>
+            Total quantity in usdt
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingAccount.TotalFixedQuantityInBTC">
+            <summary>
+            Total fixed quantity in btc
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingAccount.TotalFixedQuantityInUSDT">
+            <summary>
+            Total fixed quantity in usdt
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingAccount.TotalFlexibleInBTC">
+            <summary>
+            Total flexible in btc
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingAccount.TotalFlexibleInUSDT">
+            <summary>
+            Total flexible in usdt
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingAccount.PositionAmounts">
+            <summary>
+            Position amounts
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingPositionAmount">
+            <summary>
+            Lending position amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingPositionAmount.Quantity">
+            <summary>
+            Amount of the asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingPositionAmount.QuantityInBTC">
+            <summary>
+            Amount in btc
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingPositionAmount.QuantityInUSDT">
+            <summary>
+            Amount in usdt
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingPositionAmount.Asset">
+            <summary>
+            Asset name
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingChangeToDailyResult">
+            <summary>
+            Purchase result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingChangeToDailyResult.DailyPurchaseId">
+            <summary>
+            The id of the purchase
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingChangeToDailyResult.Success">
+            <summary>
+            Success
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingChangeToDailyResult.Timestamp">
+            <summary>
+            Time
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingPurchaseResult">
+            <summary>
+            Purchase result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingPurchaseResult.PurchaseId">
+            <summary>
+            The id of the purchase
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceProject">
+            <summary>
+            Binance project info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.Asset">
+            <summary>
+            The asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.DisplayPriority">
+            <summary>
+            Display priority
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.Duration">
+            <summary>
+            Duration
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.InterestPerLot">
+            <summary>
+            Interest per lot
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.InterestRate">
+            <summary>
+            Interest rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.LotSize">
+            <summary>
+            Lot size
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.LotsLowLimit">
+            <summary>
+            Lots low limit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.LotsPurchased">
+            <summary>
+            Lots purchased
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.LotsUpLimit">
+            <summary>
+            Lots upper limit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.MaxLotsPerUser">
+            <summary>
+            Max number of lots per user
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.NeedKYC">
+            <summary>
+            Needs know your customer
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.ProjectId">
+            <summary>
+            Project id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.ProjectName">
+            <summary>
+            Project name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.Type">
+            <summary>
+            Type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.WithAreaLimitation">
+            <summary>
+            Has area limitation
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseQuotaLeft">
+            <summary>
+            Purchase quota left
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseQuotaLeft.Asset">
+            <summary>
+            The asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseQuotaLeft.LeftQuota">
+            <summary>
+            The quota left
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord">
+            <summary>
+            Purchase record
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord.Quantity">
+            <summary>
+            Quantity purchased
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord.Asset">
+            <summary>
+            Asset name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord.CreateTime">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord.LendingType">
+            <summary>
+            Lending type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord.Lot">
+            <summary>
+            Lot
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord.ProductName">
+            <summary>
+            Name of the product
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord.PurchaseId">
+            <summary>
+            Purchase id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord.Status">
+            <summary>
+            Purchase status
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionQuotaLeft">
+            <summary>
+            Redemption quota left
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionQuotaLeft.Asset">
+            <summary>
+            The asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionQuotaLeft.DailyQuota">
+            <summary>
+            Daily quota
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionQuotaLeft.LeftQuota">
+            <summary>
+            Left quota
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionQuotaLeft.MinimalRedemptionQuantity">
+            <summary>
+            Minimal redemption quantity
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord">
+            <summary>
+            Redemption record
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.Quantity">
+            <summary>
+            Quantity purchased
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.Asset">
+            <summary>
+            Asset name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.CreateTime">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.StartTime">
+            <summary>
+            Start time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.Interest">
+            <summary>
+            Interest
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.Type">
+            <summary>
+            Redeem type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.ProjectId">
+            <summary>
+            Id of the project
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.ProjectName">
+            <summary>
+            Name of the project
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.Principal">
+            <summary>
+            Principal
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.Status">
+            <summary>
+            Purchase status
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct">
+            <summary>
+            Savings product
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.Asset">
+            <summary>
+            The asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.AverageAnnualInterestRate">
+            <summary>
+            Average annual interest rage
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.CanPurchase">
+            <summary>
+            Can purchase
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.CanRedeem">
+            <summary>
+            Can redeem
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.DailyInterestPerThousand">
+            <summary>
+            Daily interest per thousand
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.Featured">
+            <summary>
+            Is featured
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.MinimalPurchaseQuantity">
+            <summary>
+            Minimal quantity to purchase
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.ProductId">
+            <summary>
+            Product id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.PurchasedQuantity">
+            <summary>
+            Purchased quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.Status">
+            <summary>
+            Status of the product
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.UpperLimit">
+            <summary>
+            Upper limit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.UpperLimitPerUser">
+            <summary>
+            Upper limit per user
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAggregatedTrade">

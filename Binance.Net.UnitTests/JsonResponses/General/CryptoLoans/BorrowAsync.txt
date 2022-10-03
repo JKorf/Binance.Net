@@ -1,0 +1,8 @@
+{
+  "loanCoin": "BUSD",
+  "loanAmount": "100.5",
+  "collateralCoin": "BNB",
+  "collateralAmount": "50.5",
+  "hourlyInterestRate": "0.001234",
+  "orderId": "100000001"
+}

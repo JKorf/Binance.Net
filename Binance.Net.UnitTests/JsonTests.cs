@@ -138,8 +138,8 @@ namespace Binance.Net.UnitTests
         public async Task ValidateSpotLendingCalls()
         {
             await _comparer.ProcessSubject(
-                "Spot/Lending",
-                c => c.GeneralApi.Lending);
+                "Spot/Savings",
+                c => c.GeneralApi.Savings);
         }
 
         [Test]
@@ -248,14 +248,14 @@ namespace Binance.Net.UnitTests
                 });
         }
 
-        //[Test]
-        //public async Task ValidateSpotFutureCalls()
-        //{
-        //    await _comparer.ProcessSubject(
-        //        "SpotFutures",
-        //        c => c.Spot.Futures,
-        //        new [] { "collateralQuantity" });
-        //}
+        [Test]
+        public async Task ValidateCryptoLoansCalls()
+        {
+            await _comparer.ProcessSubject(
+                "General/CryptoLoans",
+                c => c.GeneralApi.CryptoLoans,
+                new[] { "collateralQuantity" });
+        }
 
         //[Test]
         //public async Task ValidateBrokerageCalls()
