@@ -34,6 +34,7 @@ namespace Binance.Net.Objects.Models.Spot.ConvertTransfer
         /// <summary>
         /// Deducted quantity
         /// </summary>
+        [JsonProperty("deductedAmount")]
         public decimal DeductedQuantity { get; set; }
         /// <summary>
         /// Target asset
