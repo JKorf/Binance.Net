@@ -28,6 +28,16 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 8.2.0 - 03 Oct 2022
+    * Added CryptoLoans endpoints
+    * Added ConvertTransfer endpoints
+    * Added GetMarginLevelInformationAsync endpoint
+    * Added GetExchangeInfoAsync spot account type overloads
+    * Renamed Lending endpoints to Savings endpoints
+    * Added missing OrderRejectReason
+    * Fixed incorrect AllowFailure enum serialization on SpotApi.ReplaceOrderAsync
+    * Fixed ticker interface for futures streams
+
 * Version 8.1.10 - 04 Sep 2022
     * Added missing (and future) account types, fixes warnings being generated in SpotApi.Trading.GetExchangeInfoAsync
 
