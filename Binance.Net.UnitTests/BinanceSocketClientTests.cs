@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot.Socket;
 using Microsoft.Extensions.Logging;
+using Binance.Net.Objects.Models.Futures.Socket;
 
 namespace Binance.Net.UnitTests
 {
@@ -49,6 +50,56 @@ namespace Binance.Net.UnitTests
                         QuoteVolume = 0.7m,
                         OpenTime = new DateTime(2017, 1, 1),
                         Symbol = "test",
+                        TradeCount = 10,
+                        Volume = 0.8m
+                    }
+                }
+            };
+
+            // act
+            socket.InvokeMessage(data);
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(TestHelpers.AreEqual(data.Data, result, "Data"));
+            Assert.IsTrue(TestHelpers.AreEqual(data.Data.Data, result.Data));
+        }
+
+        [TestCase()]
+        public void SubscribingToContinuousKlineStream_Should_TriggerWhenContinuousKlineStreamMessageIsReceived()
+        {
+            // arrange
+            var socket = new TestSocket();
+            var client = TestHelpers.CreateSocketClient(socket);
+
+            IBinanceStreamKlineData result = null;
+            client.UsdFuturesStreams.SubscribeToContinuousContractKlineUpdatesAsync("ETHBTC", ContractType.Perpetual, KlineInterval.OneMinute, (test) => result = test.Data);
+
+            var data = new BinanceCombinedStream<BinanceStreamContinuousKlineData>()
+            {
+                Stream = "ethbtc_perpetual@continuousKline_1m",
+                Data = new BinanceStreamContinuousKlineData()
+                {
+                    Event = "TestContinuousKlineStream",
+                    EventTime = new DateTime(2017, 1, 1),
+                    Symbol = "ETHBTC",
+                    ContractType = ContractType.Perpetual,
+                    Data = new BinanceStreamKline()
+                    {
+                        TakerBuyBaseVolume = 0.1m,
+                        ClosePrice = 0.2m,
+                        CloseTime = new DateTime(2017, 1, 2),
+                        Final = true,
+                        FirstTrade = 10000000000,
+                        HighPrice = 0.3m,
+                        Interval = KlineInterval.OneMinute,
+                        LastTrade = 2000000000000,
+                        LowPrice = 0.4m,
+                        OpenPrice = 0.5m,
+                        TakerBuyQuoteVolume = 0.6m,
+                        QuoteVolume = 0.7m,
+                        OpenTime = new DateTime(2017, 1, 1),
+                        Symbol = "ETHBTC",
                         TradeCount = 10,
                         Volume = 0.8m
                     }
