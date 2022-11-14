@@ -9,6 +9,7 @@ using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures.Socket;
 using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.Socket;
+using CryptoExchange.Net.Interfaces;
 
 namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 {
@@ -17,6 +18,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
     /// </summary>
     public interface IBinanceSocketClientUsdFuturesStreams : IDisposable
     {
+        /// <summary>
+        /// The factory for creating sockets. Used for unit testing
+        /// </summary>
+        IWebsocketFactory SocketFactory { get; set; }
+
         /// <summary>
         /// Subscribes to the aggregated trades update stream for the provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#aggregate-trade-streams" /></para>

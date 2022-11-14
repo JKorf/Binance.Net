@@ -10,6 +10,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
     public interface IBinanceClientUsdFuturesApi : IDisposable
     {
         /// <summary>
+        /// The factory for creating requests. Used for unit testing
+        /// </summary>
+        IRequestFactory RequestFactory { get; set; }
+
+        /// <summary>
         /// Endpoints related to account settings, info or actions
         /// </summary>
         public IBinanceClientUsdFuturesApiAccount Account { get; }

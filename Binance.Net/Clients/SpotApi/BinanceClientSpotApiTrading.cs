@@ -320,7 +320,11 @@ namespace Binance.Net.Clients.SpotApi
                 var jsonData = result.OriginalData.ToJToken(_log);
                 if (jsonData != null)
                 {
-                    var error = jsonData["data"]?["cancelResult"]?.ToString() == "FAILURE" ? jsonData["data"]!["cancelResponse"] : jsonData["data"]!["newOrderResponse"];
+                    var dataNode = jsonData["data"];
+                    if (dataNode == null)
+                        return result;
+
+                    var error = dataNode?["cancelResult"]?.ToString() == "FAILURE" ? dataNode!["cancelResponse"] : jsonData["data"]!["newOrderResponse"];
                     if (error != null && error.HasValues)
                         return result.AsError<BinanceReplaceOrderResult>(new ServerError(error!.Value<int>("code"), error.Value<string>("msg")!));
                 }

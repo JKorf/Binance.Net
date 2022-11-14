@@ -15,12 +15,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models.Spot;
-using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Logging;
 using Binance.Net.Interfaces.Clients.SpotApi;
-using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Interfaces.CommonClients;
+using Newtonsoft.Json.Linq;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -28,15 +27,12 @@ namespace Binance.Net.Clients.SpotApi
     public class BinanceClientSpotApi : RestApiClient, IBinanceClientSpotApi, ISpotClient
     {
         #region fields 
-        private readonly BinanceClient _baseClient;
         internal new readonly BinanceClientOptions Options;
 
         internal BinanceExchangeInfo? ExchangeInfo;
         internal DateTime? LastExchangeInfoUpdate;
 
         internal static TimeSyncState TimeSyncState = new TimeSyncState("Spot Api");
-
-        private readonly Log _log;
         #endregion
 
         #region Api clients
@@ -60,11 +56,10 @@ namespace Binance.Net.Clients.SpotApi
         public event Action<OrderId>? OnOrderCanceled;
 
         #region constructor/destructor
-        internal BinanceClientSpotApi(Log log, BinanceClient baseClient, BinanceClientOptions options) : base(options, options.SpotApiOptions)
+        internal BinanceClientSpotApi(Log log, BinanceClientOptions options) : base(log, options, options.SpotApiOptions)
         {
             Options = options;
             _log = log;
-            _baseClient = baseClient;
 
             Account = new BinanceClientSpotApiAccount(this);
             ExchangeData = new BinanceClientSpotApiExchangeData(log, this);
@@ -176,8 +171,10 @@ namespace Binance.Net.Clients.SpotApi
             if (type != null)
             {
                 if (!symbolData.OrderTypes.Contains(type.Value))
+                {
                     return BinanceTradeRuleResult.CreateFailed(
                         $"Trade rules check failed: {type} order type not allowed for {symbol}");
+                }
             }
 
             if (symbolData.LotSizeFilter != null || symbolData.MarketLotSizeFilter != null && type == SpotOrderType.Market)
@@ -215,8 +212,10 @@ namespace Binance.Net.Clients.SpotApi
                 if (quoteQuantity < symbolData.MinNotionalFilter.MinNotional)
                 {
                     if (Options.SpotApiOptions.TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                    {
                         return BinanceTradeRuleResult.CreateFailed(
                             $"Trade rules check failed: MinNotional filter failed. Order value: {quoteQuantity}, minimal order value: {symbolData.MinNotionalFilter.MinNotional}");
+                    }
 
                     outputQuoteQuantity = symbolData.MinNotionalFilter.MinNotional;
                     _log.Write(LogLevel.Information, $"QuoteQuantity adjusted from {quoteQuantity} to {outputQuoteQuantity} based on min notional filter");
@@ -246,8 +245,10 @@ namespace Binance.Net.Clients.SpotApi
                         if (outputStopPrice != stopPrice)
                         {
                             if (Options.SpotApiOptions.TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                            {
                                 return BinanceTradeRuleResult.CreateFailed(
                                     $"Trade rules check failed: Stop price filter max/min failed. Original stop price: {stopPrice}, Closest allowed: {outputStopPrice}");
+                            }
 
                             _log.Write(LogLevel.Information,
                                 $"Stop price clamped from {stopPrice} to {outputStopPrice} based on price filter");
@@ -274,8 +275,10 @@ namespace Binance.Net.Clients.SpotApi
                         if (outputStopPrice != beforeStopPrice)
                         {
                             if (Options.SpotApiOptions.TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                            {
                                 return BinanceTradeRuleResult.CreateFailed(
                                     $"Trade rules check failed: Stop price filter tick failed. Original stop price: {stopPrice}, Closest allowed: {outputStopPrice}");
+                            }
 
                             _log.Write(LogLevel.Information,
                                 $"Stop price floored from {beforeStopPrice} to {outputStopPrice} based on price filter");
@@ -292,8 +295,10 @@ namespace Binance.Net.Clients.SpotApi
             if (notional < symbolData.MinNotionalFilter.MinNotional)
             {
                 if (Options.SpotApiOptions.TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                {
                     return BinanceTradeRuleResult.CreateFailed(
                         $"Trade rules check failed: MinNotional filter failed. Order quantity: {notional}, minimal order quantity: {symbolData.MinNotionalFilter.MinNotional}");
+                }
 
                 if (symbolData.LotSizeFilter == null)
                     return BinanceTradeRuleResult.CreateFailed("Trade rules check failed: MinNotional filter failed. Unable to auto comply because LotSizeFilter not present");
@@ -311,7 +316,7 @@ namespace Binance.Net.Clients.SpotApi
             Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
             ArrayParametersSerialization? arraySerialization = null, int weight = 1, bool ignoreRateLimit = false) where T : class
         {
-            var result = await _baseClient.SendRequestInternal<T>(this, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight, ignoreRateLimit: ignoreRateLimit).ConfigureAwait(false);
+            var result = await SendRequestAsync<T>(uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight, ignoreRatelimit: ignoreRateLimit).ConfigureAwait(false);
             if (!result && result.Error!.Code == -1021 && Options.SpotApiOptions.AutoTimestamp)
             {
                 _log.Write(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
@@ -668,6 +673,21 @@ namespace Binance.Net.Clients.SpotApi
             if (timeSpan == TimeSpan.FromDays(30) || timeSpan == TimeSpan.FromDays(31)) return KlineInterval.OneMonth;
 
             throw new ArgumentException("Unsupported timespan for Binance Klines, check supported intervals using Binance.Net.Enums.KlineInterval");
+        }
+
+        /// <inheritdoc />
+        protected override Error ParseErrorResponse(JToken error)
+        {
+            if (!error.HasValues)
+                return new ServerError(error.ToString());
+
+            if (error["msg"] == null && error["code"] == null)
+                return new ServerError(error.ToString());
+
+            if (error["msg"] != null && error["code"] == null)
+                return new ServerError((string)error["msg"]!);
+
+            return new ServerError((int)error["code"]!, (string)error["msg"]!);
         }
     }
 }

@@ -19,6 +19,7 @@ using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Interfaces.CommonClients;
+using Newtonsoft.Json.Linq;
 
 namespace Binance.Net.Clients.CoinFuturesApi
 {
@@ -26,7 +27,6 @@ namespace Binance.Net.Clients.CoinFuturesApi
     public class BinanceClientCoinFuturesApi : RestApiClient, IBinanceClientCoinFuturesApi, IFuturesClient
     {
         #region fields 
-        private readonly BinanceClient _baseClient;
         internal new readonly BinanceClientOptions Options;
 
         internal BinanceFuturesCoinExchangeInfo? ExchangeInfo;
@@ -34,7 +34,6 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         internal static TimeSyncState TimeSyncState = new TimeSyncState("Coin Futures Api");
 
-        private readonly Log _log;
         #endregion
 
         #region Api clients
@@ -58,12 +57,10 @@ namespace Binance.Net.Clients.CoinFuturesApi
         public event Action<OrderId>? OnOrderCanceled;
 
         #region constructor/destructor
-        internal BinanceClientCoinFuturesApi(Log log, BinanceClient baseClient, BinanceClientOptions options) :
-            base(options, options.CoinFuturesApiOptions)
+        internal BinanceClientCoinFuturesApi(Log log, BinanceClientOptions options) :
+            base(log, options, options.CoinFuturesApiOptions)
         {
-            _log = log;
             Options = options;
-            _baseClient = baseClient;
 
             Account = new BinanceClientCoinFuturesApiAccount(this);
             ExchangeData = new BinanceClientCoinFuturesApiExchangeData(log, this);
@@ -223,7 +220,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
             ArrayParametersSerialization? arraySerialization = null, int weight = 1, bool ignoreRateLimit = false) where T : class
         {
-            var result = await _baseClient.SendRequestInternal<T>(this, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight, ignoreRateLimit: ignoreRateLimit).ConfigureAwait(false);
+            var result = await SendRequestAsync<T>(uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight, ignoreRatelimit: ignoreRateLimit).ConfigureAwait(false);
             if (!result && result.Error!.Code == -1021 && Options.SpotApiOptions.AutoTimestamp)
             {
                 _log.Write(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
@@ -603,6 +600,21 @@ namespace Binance.Net.Clients.CoinFuturesApi
             if (timeSpan == TimeSpan.FromDays(30) || timeSpan == TimeSpan.FromDays(31)) return KlineInterval.OneMonth;
 
             throw new ArgumentException("Unsupported timespan for Binance Klines, check supported intervals using Binance.Net.Enums.KlineInterval");
+        }
+
+        /// <inheritdoc />
+        protected override Error ParseErrorResponse(JToken error)
+        {
+            if (!error.HasValues)
+                return new ServerError(error.ToString());
+
+            if (error["msg"] == null && error["code"] == null)
+                return new ServerError(error.ToString());
+
+            if (error["msg"] != null && error["code"] == null)
+                return new ServerError((string)error["msg"]!);
+
+            return new ServerError((int)error["code"]!, (string)error["msg"]!);
         }
     }
 }

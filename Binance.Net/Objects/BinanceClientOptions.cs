@@ -11,7 +11,7 @@ namespace Binance.Net.Objects
     /// <summary>
     /// Options for the Binance client
     /// </summary>
-    public class BinanceClientOptions : BaseRestClientOptions
+    public class BinanceClientOptions : ClientOptions
     {
         /// <summary>
         /// Default options for the spot client
@@ -96,44 +96,53 @@ namespace Binance.Net.Objects
     /// <summary>
     /// Binance socket client options
     /// </summary>
-    public class BinanceSocketClientOptions : BaseSocketClientOptions
+    public class BinanceSocketClientOptions : ClientOptions
     {
         /// <summary>
         /// Default options for the spot client
         /// </summary>
-        public static BinanceSocketClientOptions Default { get; set; } = new BinanceSocketClientOptions()
+        public static BinanceSocketClientOptions Default { get; set; } = new BinanceSocketClientOptions();
+
+        private SocketApiClientOptions _spotStreamsOptions = new SocketApiClientOptions(BinanceApiAddresses.Default.SocketClientAddress)
         {
             SocketSubscriptionsCombineTarget = 10
         };
 
-        private ApiClientOptions _spotStreamsOptions = new ApiClientOptions(BinanceApiAddresses.Default.SocketClientAddress);
         /// <summary>
         /// Spot streams options
         /// </summary>
-        public ApiClientOptions SpotStreamsOptions
+        public SocketApiClientOptions SpotStreamsOptions
         {
             get => _spotStreamsOptions;
-            set => _spotStreamsOptions = new ApiClientOptions(_spotStreamsOptions, value);
+            set => _spotStreamsOptions = new SocketApiClientOptions(_spotStreamsOptions, value);
         }
 
-        private ApiClientOptions _usdFuturesStreamsOptions = new ApiClientOptions(BinanceApiAddresses.Default.UsdFuturesSocketClientAddress!);
+        private SocketApiClientOptions _usdFuturesStreamsOptions = new SocketApiClientOptions(BinanceApiAddresses.Default.UsdFuturesSocketClientAddress!)
+        {
+            SocketSubscriptionsCombineTarget = 10
+        };
+
         /// <summary>
         /// Usd futures streams options
         /// </summary>
-        public ApiClientOptions UsdFuturesStreamsOptions
+        public SocketApiClientOptions UsdFuturesStreamsOptions
         {
             get => _usdFuturesStreamsOptions;
-            set => _usdFuturesStreamsOptions = new ApiClientOptions(_usdFuturesStreamsOptions, value);
+            set => _usdFuturesStreamsOptions = new SocketApiClientOptions(_usdFuturesStreamsOptions, value);
         }
 
-        private ApiClientOptions _coinFuturesStreamsOptions = new ApiClientOptions(BinanceApiAddresses.Default.CoinFuturesSocketClientAddress!);
+        private SocketApiClientOptions _coinFuturesStreamsOptions = new SocketApiClientOptions(BinanceApiAddresses.Default.CoinFuturesSocketClientAddress!)
+        {
+            SocketSubscriptionsCombineTarget = 10
+        };
+
         /// <summary>
         /// Coin futures streams options
         /// </summary>
-        public ApiClientOptions CoinFuturesStreamsOptions
+        public SocketApiClientOptions CoinFuturesStreamsOptions
         {
             get => _coinFuturesStreamsOptions;
-            set => _coinFuturesStreamsOptions = new ApiClientOptions(_coinFuturesStreamsOptions, value);
+            set => _coinFuturesStreamsOptions = new SocketApiClientOptions(_coinFuturesStreamsOptions, value);
         }
 
         /// <summary>
@@ -159,9 +168,9 @@ namespace Binance.Net.Objects
 
             BlvtStreamAddress = baseOn.BlvtStreamAddress;
 
-            _spotStreamsOptions = new ApiClientOptions(baseOn.SpotStreamsOptions, null);
-            _usdFuturesStreamsOptions = new ApiClientOptions(baseOn.UsdFuturesStreamsOptions, null);
-            _coinFuturesStreamsOptions = new ApiClientOptions(baseOn.CoinFuturesStreamsOptions, null);
+            _spotStreamsOptions = new SocketApiClientOptions(baseOn.SpotStreamsOptions, null);
+            _usdFuturesStreamsOptions = new SocketApiClientOptions(baseOn.UsdFuturesStreamsOptions, null);
+            _coinFuturesStreamsOptions = new SocketApiClientOptions(baseOn.CoinFuturesStreamsOptions, null);
         }
     }
 

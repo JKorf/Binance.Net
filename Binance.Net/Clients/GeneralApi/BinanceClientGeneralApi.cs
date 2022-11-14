@@ -13,6 +13,7 @@ using Binance.Net.Interfaces.Clients.GeneralApi;
 using Binance.Net.Clients.SpotApi;
 using CryptoExchange.Net.Logging;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
 
 namespace Binance.Net.Clients.GeneralApi
 {
@@ -20,9 +21,8 @@ namespace Binance.Net.Clients.GeneralApi
     public class BinanceClientGeneralApi : RestApiClient, IBinanceClientGeneralApi
     {
         #region fields 
-        private readonly BinanceClient _baseClient;
         internal new readonly BinanceClientOptions Options;
-        private readonly Log _log;
+        private readonly BinanceClient _baseClient;
         #endregion
 
         #region Api clients
@@ -42,11 +42,10 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region constructor/destructor
 
-        internal BinanceClientGeneralApi(Log log, BinanceClient baseClient, BinanceClientOptions options) : base(options, options.SpotApiOptions)
+        internal BinanceClientGeneralApi(Log log, BinanceClient baseClient, BinanceClientOptions options) : base(log, options, options.SpotApiOptions)
         {
-            Options = options;
             _baseClient = baseClient;
-            _log = log;
+            Options = options;
 
             Brokerage = new BinanceClientGeneralApiBrokerage(this);
             Futures = new BinanceClientGeneralApiFutures(this);
@@ -80,7 +79,7 @@ namespace Binance.Net.Clients.GeneralApi
             Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
             ArrayParametersSerialization? arraySerialization = null, int weight = 1, bool ignoreRateLimit = false) where T : class
         {
-            var result = await _baseClient.SendRequestInternal<T>(this, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight, ignoreRateLimit: ignoreRateLimit).ConfigureAwait(false);
+            var result = await SendRequestAsync<T>(uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight, ignoreRatelimit: ignoreRateLimit).ConfigureAwait(false);
             if (!result && result.Error!.Code == -1021 && Options.SpotApiOptions.AutoTimestamp)
             {
                 _log.Write(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
@@ -101,5 +100,20 @@ namespace Binance.Net.Clients.GeneralApi
         /// <inheritdoc />
         public override TimeSpan GetTimeOffset()
             => BinanceClientSpotApi.TimeSyncState.TimeOffset;
+
+        /// <inheritdoc />
+        protected override Error ParseErrorResponse(JToken error)
+        {
+            if (!error.HasValues)
+                return new ServerError(error.ToString());
+
+            if (error["msg"] == null && error["code"] == null)
+                return new ServerError(error.ToString());
+
+            if (error["msg"] != null && error["code"] == null)
+                return new ServerError((string)error["msg"]!);
+
+            return new ServerError((int)error["code"]!, (string)error["msg"]!);
+        }
     }
 }

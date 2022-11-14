@@ -1,12 +1,5 @@
 ﻿using Binance.Net.Objects;
 using CryptoExchange.Net;
-using CryptoExchange.Net.Objects;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
 using Binance.Net.Interfaces.Clients;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using Binance.Net.Interfaces.Clients.SpotApi;
@@ -50,9 +43,9 @@ namespace Binance.Net.Clients
         public BinanceClient(BinanceClientOptions options) : base("Binance", options)
         {
             GeneralApi = AddApiClient(new BinanceClientGeneralApi(log, this, options));
-            SpotApi = AddApiClient(new BinanceClientSpotApi(log, this, options));
-            UsdFuturesApi = AddApiClient(new BinanceClientUsdFuturesApi(log, this, options));
-            CoinFuturesApi = AddApiClient(new BinanceClientCoinFuturesApi(log, this, options));
+            SpotApi = AddApiClient(new BinanceClientSpotApi(log, options));
+            UsdFuturesApi = AddApiClient(new BinanceClientUsdFuturesApi(log, options));
+            CoinFuturesApi = AddApiClient(new BinanceClientCoinFuturesApi(log, options));
         }
         #endregion
 
@@ -63,28 +56,6 @@ namespace Binance.Net.Clients
         public static void SetDefaultOptions(BinanceClientOptions options)
         {
             BinanceClientOptions.Default = options;
-        }
-
-        /// <inheritdoc />
-        protected override Error ParseErrorResponse(JToken error)
-        {
-            if (!error.HasValues)
-                return new ServerError(error.ToString());
-
-            if (error["msg"] == null && error["code"] == null)
-                return new ServerError(error.ToString());
-
-            if (error["msg"] != null && error["code"] == null)
-                return new ServerError((string)error["msg"]!);
-
-            return new ServerError((int)error["code"]!, (string)error["msg"]!);
-        }
-
-        internal Task<WebCallResult<T>> SendRequestInternal<T>(RestApiClient apiClient, Uri uri, HttpMethod method, CancellationToken cancellationToken,
-            Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
-            ArrayParametersSerialization? arraySerialization = null, int weight = 1, bool ignoreRateLimit = false) where T : class
-        {
-            return base.SendRequestAsync<T>(apiClient, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, requestWeight: weight, ignoreRatelimit: ignoreRateLimit);
         }
     }
 }
