@@ -7,6 +7,9 @@ parent: Socket API documentation
 `BinanceSocketClient > SpotStreams`  
 *Binance Spot streams*
   
+***
+*The factory for creating sockets. Used for unit testing*  
+**IWebsocketFactory SocketFactory { get; set; }**  
 
 ***
 

@@ -7,6 +7,9 @@ parent: Socket API documentation
 `BinanceSocketClient > CoinFuturesStreams`  
 *Binance Coin futures streams*
   
+***
+*The factory for creating sockets. Used for unit testing*  
+**IWebsocketFactory SocketFactory { get; set; }**  
 
 ***
 

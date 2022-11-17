@@ -17,5 +17,8 @@ parent: Rest API documentation
 *Endpoints related to retrieving market data*  
 **[IBinanceClientUsdFuturesApiExchangeData](IBinanceClientUsdFuturesApiExchangeData.html) ExchangeData { get; }**  
 ***
+*The factory for creating requests. Used for unit testing*  
+**IRequestFactory RequestFactory { get; set; }**  
+***
 *Endpoints related to orders and trades*  
 **[IBinanceClientUsdFuturesApiTrading](IBinanceClientUsdFuturesApiTrading.html) Trading { get; }**  

@@ -1777,10 +1777,10 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesStreams.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesStreams.SubscribeToContinuousContractKlineUpdatesAsync(System.String,Binance.Net.Enums.ContractType,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamKlineData}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesStreams.SubscribeToContinuousContractKlineUpdatesAsync(System.String,Binance.Net.Enums.ContractType,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStreamContinuousKlineData}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesStreams.SubscribeToContinuousContractKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.ContractType,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamKlineData}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesStreams.SubscribeToContinuousContractKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.ContractType,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStreamContinuousKlineData}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesStreams.SubscribeToMiniTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceMiniTick}},System.Threading.CancellationToken)">
@@ -9690,7 +9690,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesStreams.SubscribeToContinuousContractKlineUpdatesAsync(System.String,Binance.Net.Enums.ContractType,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamKlineData}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesStreams.SubscribeToContinuousContractKlineUpdatesAsync(System.String,Binance.Net.Enums.ContractType,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStreamContinuousKlineData}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to the continuous contract candlestick update stream for the provided pair
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#continuous-contract-kline-candlestick-streams" /></para>
@@ -9702,7 +9702,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesStreams.SubscribeToContinuousContractKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.ContractType,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamKlineData}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesStreams.SubscribeToContinuousContractKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.ContractType,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStreamContinuousKlineData}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to the continuous contract candlestick update stream for the provided pairs
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#continuous-contract-kline-candlestick-streams" /></para>
@@ -13838,6 +13838,26 @@
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamConfigUpdateData.PositionMode">
             <summary>
             Multi-Assets Mode
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.Socket.BinanceStreamContinuousKlineData">
+            <summary>
+            Wrapper for continuous kline information for a symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceStreamContinuousKlineData.Symbol">
+            <summary>
+            The symbol the data is for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceStreamContinuousKlineData.ContractType">
+            <summary>
+            The contract type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceStreamContinuousKlineData.Data">
+            <summary>
+            The data
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.Socket.BinanceStreamIndexKlineData">
