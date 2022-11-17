@@ -70,6 +70,6 @@ namespace Binance.Net.Objects.Models.Spot
         /// The wallet type，0-spot wallet，1-funding wallet.
         /// </summary>
         [JsonProperty("walletType")]
-        public int WalletType { get; set; };
+        public int WalletType { get; set; }
     }
 }
