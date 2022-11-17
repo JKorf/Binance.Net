@@ -28,6 +28,11 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 8.3.0 - 17 Nov 2022
+    * Updated CryptoExchange.Net
+    * Fixed BinanceConvertTransferRecord DeductedQuantity property
+    * Fixed UsdFutures ContinuousContractKlines deserialization
+
 * Version 8.2.0 - 03 Oct 2022
     * Added CryptoLoans endpoints
     * Added ConvertTransfer endpoints
