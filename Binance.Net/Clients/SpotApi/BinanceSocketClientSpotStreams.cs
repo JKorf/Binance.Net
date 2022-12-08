@@ -204,7 +204,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region All Market Rolling Window Tickers Stream
 
-                /// <inheritdoc />
+        /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllRollingWindowTickerUpdatesAsync(TimeSpan windowSize,
             Action<DataEvent<IEnumerable<BinanceStreamRollingWindowTick>>> onMessage, CancellationToken ct = default)
         {
