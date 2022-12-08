@@ -196,19 +196,21 @@ namespace Binance.Net.Clients.SpotApi
             Action<DataEvent<BinanceStreamRollingWindowTick>> onMessage, CancellationToken ct = default)
         {
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamRollingWindowTick>>>(data => onMessage(data.As(data.Data.Data, data.Data.Stream)));
-            return await SubscribeAsync(BaseAddress, new[] { $"{symbol.ToLowerInvariant()}@ticker_{windowSize.TotalHours}h" }, handler, ct).ConfigureAwait(false);
+            var windowString = windowSize < TimeSpan.FromDays(1) ? windowSize.TotalHours + "h" : windowSize.TotalDays + "d"; 
+            return await SubscribeAsync(BaseAddress, new[] { $"{symbol.ToLowerInvariant()}@ticker_{windowString}" }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
 
         #region All Market Rolling Window Tickers Stream
 
-        /// <inheritdoc />
+                /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllRollingWindowTickerUpdatesAsync(TimeSpan windowSize,
             Action<DataEvent<IEnumerable<BinanceStreamRollingWindowTick>>> onMessage, CancellationToken ct = default)
         {
             var handler = new Action<DataEvent<BinanceCombinedStream<IEnumerable<BinanceStreamRollingWindowTick>>>>(data => onMessage(data.As(data.Data.Data, data.Data.Stream)));
-            return await SubscribeAsync(BaseAddress, new[] { $"!ticker_{windowSize.TotalHours}h@arr" }, handler, ct).ConfigureAwait(false);
+            var windowString = windowSize < TimeSpan.FromDays(1) ? windowSize.TotalHours + "h" : windowSize.TotalDays + "d"; 
+            return await SubscribeAsync(BaseAddress, new[] { $"!ticker_{windowString}@arr" }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
