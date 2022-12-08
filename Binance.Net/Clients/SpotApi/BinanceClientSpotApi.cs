@@ -656,6 +656,7 @@ namespace Binance.Net.Clients.SpotApi
 
         private static KlineInterval GetKlineIntervalFromTimespan(TimeSpan timeSpan)
         {
+            if (timeSpan == TimeSpan.FromSeconds(1)) return KlineInterval.OneSecond;
             if (timeSpan == TimeSpan.FromMinutes(1)) return KlineInterval.OneMinute;
             if (timeSpan == TimeSpan.FromMinutes(3)) return KlineInterval.ThreeMinutes;
             if (timeSpan == TimeSpan.FromMinutes(5)) return KlineInterval.FiveMinutes;
