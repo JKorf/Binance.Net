@@ -57,7 +57,10 @@ namespace Binance.Net.Clients.CoinFuturesApi
         public event Action<OrderId>? OnOrderCanceled;
 
         #region constructor/destructor
-        internal BinanceClientCoinFuturesApi(Log log, BinanceClientOptions options) :
+        /// <summary>
+        /// Create a new instance
+        /// </summary>
+        public BinanceClientCoinFuturesApi(Log log, BinanceClientOptions options) :
             base(log, options, options.CoinFuturesApiOptions)
         {
             Options = options;

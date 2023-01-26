@@ -57,7 +57,10 @@ namespace Binance.Net.Clients.UsdFuturesApi
         public event Action<OrderId>? OnOrderCanceled;
 
         #region constructor/destructor
-        internal BinanceClientUsdFuturesApi(Log log, BinanceClientOptions options) :
+        /// <summary>
+        /// Create a new instance
+        /// </summary>
+        public BinanceClientUsdFuturesApi(Log log, BinanceClientOptions options) :
             base(log,options, options.UsdFuturesApiOptions)
         {
             Options = options;

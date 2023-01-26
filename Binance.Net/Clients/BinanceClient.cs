@@ -18,13 +18,13 @@ namespace Binance.Net.Clients
         #region Api clients
 
         /// <inheritdoc />
-        public IBinanceClientGeneralApi GeneralApi { get; }
+        public IBinanceClientGeneralApi GeneralApi { get; protected set; }
         /// <inheritdoc />
-        public IBinanceClientSpotApi SpotApi { get; }
+        public IBinanceClientSpotApi SpotApi { get; protected set; }
         /// <inheritdoc />
-        public IBinanceClientUsdFuturesApi UsdFuturesApi { get; }
+        public IBinanceClientUsdFuturesApi UsdFuturesApi { get; protected set; }
         /// <inheritdoc />
-        public IBinanceClientCoinFuturesApi CoinFuturesApi { get; }
+        public IBinanceClientCoinFuturesApi CoinFuturesApi { get; protected set; }
 
         #endregion
 

@@ -158,6 +158,11 @@
             Event triggered when an order is canceled via this client. Note that this does not trigger when using CancelAllOrdersAsync. Only available for Spot orders
             </summary>
         </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceClientCoinFuturesApi.#ctor(CryptoExchange.Net.Logging.Log,Binance.Net.Objects.BinanceClientOptions)">
+            <summary>
+            Create a new instance
+            </summary>
+        </member>
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceClientCoinFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
@@ -371,6 +376,9 @@
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesStreams.SubscribeToMarkPriceUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesCoinStreamMarkPrice}}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesStreams.SubscribeToAllMarkPriceUpdatesAsync(System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesCoinStreamMarkPrice}}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesStreams.SubscribeToContinuousContractKlineUpdatesAsync(System.String,Binance.Net.Enums.ContractType,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamKlineData}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -484,6 +492,11 @@
         </member>
         <member name="P:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApi.SubAccount">
             <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApi.#ctor(CryptoExchange.Net.Logging.Log,Binance.Net.Clients.BinanceClient,Binance.Net.Objects.BinanceClientOptions)">
+            <summary>
+            Create a new instance
+            </summary>
         </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
@@ -871,6 +884,11 @@
         <member name="E:Binance.Net.Clients.SpotApi.BinanceClientSpotApi.OnOrderCanceled">
             <summary>
             Event triggered when an order is canceled via this client. Note that this does not trigger when using CancelAllOrdersAsync. Only available for Spot orders
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApi.#ctor(CryptoExchange.Net.Logging.Log,Binance.Net.Objects.BinanceClientOptions)">
+            <summary>
+            Create a new instance
             </summary>
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
@@ -1509,6 +1527,11 @@
             Event triggered when an order is canceled via this client. Note that this does not trigger when using CancelAllOrdersAsync. Only available for Spot orders
             </summary>
         </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceClientUsdFuturesApi.#ctor(CryptoExchange.Net.Logging.Log,Binance.Net.Objects.BinanceClientOptions)">
+            <summary>
+            Create a new instance
+            </summary>
+        </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceClientUsdFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
@@ -1762,7 +1785,7 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesStreams.SubscribeToMarkPriceUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesUsdtStreamMarkPrice}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesStreams.SubscribeToAllMarkPriceUpdatesAsync(System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamMarkPrice}}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesStreams.SubscribeToAllMarkPriceUpdatesAsync(System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesUsdtStreamMarkPrice}}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesStreams.SubscribeToKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Threading.CancellationToken)">
@@ -5070,6 +5093,16 @@
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#mark-price-stream" /></para>
             </summary>
             <param name="symbols">The symbols</param>
+            <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesStreams.SubscribeToAllMarkPriceUpdatesAsync(System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesCoinStreamMarkPrice}}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to the Mark price update stream for a all symbols
+            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#mark-price-of-all-symbols-of-a-pair" /></para>
+            </summary>
             <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -9890,7 +9923,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesStreams.SubscribeToAllMarkPriceUpdatesAsync(System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamMarkPrice}}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesStreams.SubscribeToAllMarkPriceUpdatesAsync(System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesUsdtStreamMarkPrice}}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to the Mark price update stream for a all symbols
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#mark-price-stream-for-all-market" /></para>

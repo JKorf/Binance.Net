@@ -41,8 +41,10 @@ namespace Binance.Net.Clients.GeneralApi
         #endregion
 
         #region constructor/destructor
-
-        internal BinanceClientGeneralApi(Log log, BinanceClient baseClient, BinanceClientOptions options) : base(log, options, options.SpotApiOptions)
+        /// <summary>
+        /// Create a new instance
+        /// </summary>
+        public BinanceClientGeneralApi(Log log, BinanceClient baseClient, BinanceClientOptions options) : base(log, options, options.SpotApiOptions)
         {
             _baseClient = baseClient;
             Options = options;

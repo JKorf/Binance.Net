@@ -56,7 +56,10 @@ namespace Binance.Net.Clients.SpotApi
         public event Action<OrderId>? OnOrderCanceled;
 
         #region constructor/destructor
-        internal BinanceClientSpotApi(Log log, BinanceClientOptions options) : base(log, options, options.SpotApiOptions)
+        /// <summary>
+        /// Create a new instance
+        /// </summary>
+        public BinanceClientSpotApi(Log log, BinanceClientOptions options) : base(log, options, options.SpotApiOptions)
         {
             Options = options;
             _log = log;
