@@ -30,6 +30,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region fields
         private const string klineStreamEndpoint = "@kline";
         private const string markPriceStreamEndpoint = "@markPrice";
+        private const string allMarkPriceStreamEndpoint = "!markPrice@arr";
         private const string indexPriceStreamEndpoint = "@indexPrice";
         private const string continuousKlineStreamEndpoint = "@continuousKline";
         private const string indexKlineStreamEndpoint = "@indexPriceKline";
@@ -128,6 +129,19 @@ namespace Binance.Net.Clients.CoinFuturesApi
             var internalHandler = new Action<DataEvent<JToken>>(data => HandlePossibleSingleData(data, onMessage));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + markPriceStreamEndpoint + (updateInterval == 1000 ? "@1s" : "")).ToArray();
             return await SubscribeAsync( BaseAddress, symbols, internalHandler, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Mark Price Stream for All market
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToAllMarkPriceUpdatesAsync(int? updateInterval, Action<DataEvent<IEnumerable<BinanceFuturesCoinStreamMarkPrice>>> onMessage, CancellationToken ct = default)
+        {
+            updateInterval?.ValidateIntValues(nameof(updateInterval), 1000, 3000);
+
+            var handler = new Action<DataEvent<BinanceCombinedStream<IEnumerable<BinanceFuturesCoinStreamMarkPrice>>>>(data => onMessage(data.As(data.Data.Data, data.Data.Stream)));
+            return await SubscribeAsync(BaseAddress, new[] { allMarkPriceStreamEndpoint + (updateInterval == 1000 ? "@1s" : "") }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
