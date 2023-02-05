@@ -28,6 +28,12 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 8.3.1 - 05 Feb 2023
+    * Removed all book ticker stream subscription as it has been deprecated
+    * Added Strategy and Grid update events to user stream subscription
+    * Fixed missing IndexPrice on UsdFutures.SubscribeToAllMarkPriceUpdatesAsync
+    * Updated AccountConfigUpdate event model
+
 * Version 8.3.0 - 17 Nov 2022
     * Updated CryptoExchange.Net
     * Fixed BinanceConvertTransferRecord DeductedQuantity property
