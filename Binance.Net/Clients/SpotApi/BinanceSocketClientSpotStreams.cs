@@ -237,18 +237,6 @@ namespace Binance.Net.Clients.SpotApi
 
         #endregion
 
-        #region All Book Tickers Stream
-
-        /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToAllBookTickerUpdatesAsync(
-            Action<DataEvent<BinanceStreamBookPrice>> onMessage, CancellationToken ct = default)
-        {
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamBookPrice>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
-            return await SubscribeAsync(BaseAddress, new[] { allBookTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
-        }
-
-        #endregion
-
         #region Partial Book Depth Streams
 
         /// <inheritdoc />
