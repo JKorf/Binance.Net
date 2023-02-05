@@ -54,6 +54,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
         private const string accountUpdateEvent = "ACCOUNT_UPDATE";
         private const string orderUpdateEvent = "ORDER_TRADE_UPDATE";
         private const string listenKeyExpiredEvent = "listenKeyExpired";
+        private const string strategyUpdateEvent = "STRATEGY_UPDATE";
+        private const string gridUpdateEvent = "GRID_UPDATE";
         #endregion
 
         #region constructor/destructor
@@ -97,11 +99,11 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Mark Price Stream for All market
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToAllMarkPriceUpdatesAsync(int? updateInterval, Action<DataEvent<IEnumerable<BinanceFuturesStreamMarkPrice>>> onMessage, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToAllMarkPriceUpdatesAsync(int? updateInterval, Action<DataEvent<IEnumerable<BinanceFuturesUsdtStreamMarkPrice>>> onMessage, CancellationToken ct = default)
         {
             updateInterval?.ValidateIntValues(nameof(updateInterval), 1000, 3000);
 
-            var handler = new Action<DataEvent<BinanceCombinedStream<IEnumerable<BinanceFuturesStreamMarkPrice>>>>(data => onMessage(data.As(data.Data.Data, data.Data.Stream)));
+            var handler = new Action<DataEvent<BinanceCombinedStream<IEnumerable<BinanceFuturesUsdtStreamMarkPrice>>>>(data => onMessage(data.As(data.Data.Data, data.Data.Stream)));
             return await SubscribeAsync(BaseAddress, new[] { allMarkPriceStreamEndpoint + (updateInterval == 1000 ? "@1s" : "") }, handler, ct).ConfigureAwait(false);
         }
 
@@ -343,6 +345,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
             Action<DataEvent<BinanceFuturesStreamAccountUpdate>>? onAccountUpdate,
             Action<DataEvent<BinanceFuturesStreamOrderUpdate>>? onOrderUpdate,
             Action<DataEvent<BinanceStreamEvent>>? onListenKeyExpired,
+            Action<DataEvent<BinanceStrategyUpdate>>? onStrategyUpdate,
+            Action<DataEvent<BinanceGridUpdate>>? onGridUpdate,
             CancellationToken ct = default)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
@@ -417,6 +421,24 @@ namespace Binance.Net.Clients.UsdFuturesApi
                                 onListenKeyExpired?.Invoke(data.As(result.Data, combinedToken["stream"]!.Value<string>()));                            
                             else
                                 _log.Write(LogLevel.Warning, "Couldn't deserialize data received from the expired listen key event: " + result.Error);
+                            break;
+                        }
+                    case strategyUpdateEvent:
+                        {
+                            var result = Deserialize<BinanceStrategyUpdate>(token);
+                            if (result)
+                                onStrategyUpdate?.Invoke(data.As(result.Data, combinedToken["stream"]!.Value<string>()));
+                            else
+                                _log.Write(LogLevel.Warning, "Couldn't deserialize data received from the StrategyUpdate event: " + result.Error);
+                            break;
+                        }
+                    case gridUpdateEvent:
+                        {
+                            var result = Deserialize<BinanceGridUpdate>(token);
+                            if (result)
+                                onGridUpdate?.Invoke(data.As(result.Data, combinedToken["stream"]!.Value<string>()));
+                            else
+                                _log.Write(LogLevel.Warning, "Couldn't deserialize data received from the GridUpdate event: " + result.Error);
                             break;
                         }
                     default:
