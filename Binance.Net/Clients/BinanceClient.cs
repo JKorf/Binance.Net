@@ -57,5 +57,15 @@ namespace Binance.Net.Clients
         {
             BinanceClientOptions.Default = options;
         }
+
+
+        /// <inheritdoc />
+        public void SetApiCredentials(BinanceApiCredentials credentials)
+        {
+            ((BinanceClientGeneralApi)GeneralApi).SetApiCredentials(credentials);
+            ((BinanceClientSpotApi)SpotApi).SetApiCredentials(credentials);
+            ((BinanceClientUsdFuturesApi)UsdFuturesApi).SetApiCredentials(credentials);
+            ((BinanceClientCoinFuturesApi)CoinFuturesApi).SetApiCredentials(credentials);
+        }
     }
 }
