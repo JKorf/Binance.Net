@@ -55,7 +55,7 @@ namespace Binance.Net.UnitTests
 
             var client = TestHelpers.CreateResponseClient(key, new BinanceClientOptions()
             {
-                ApiCredentials = new ApiCredentials("Test", "Test"),
+                ApiCredentials = new BinanceApiCredentials("Test", "Test"),
                 SpotApiOptions = new BinanceApiClientOptions
                 {
                     AutoTimestamp = false
@@ -76,7 +76,7 @@ namespace Binance.Net.UnitTests
             // arrange
             var client = TestHelpers.CreateResponseClient("{}", new BinanceClientOptions()
             {
-                ApiCredentials = new ApiCredentials("Test", "Test"),
+                ApiCredentials = new BinanceApiCredentials("Test", "Test"),
                 SpotApiOptions = new BinanceApiClientOptions
                 {
                     AutoTimestamp = false
@@ -96,7 +96,7 @@ namespace Binance.Net.UnitTests
             // arrange
             var client = TestHelpers.CreateResponseClient("{}", new BinanceClientOptions()
             {
-                ApiCredentials = new ApiCredentials("Test", "Test"),
+                ApiCredentials = new BinanceApiCredentials("Test", "Test"),
                 SpotApiOptions = new BinanceApiClientOptions
                 {
                     AutoTimestamp = false
@@ -116,7 +116,7 @@ namespace Binance.Net.UnitTests
             // arrange
             var client = TestHelpers.CreateResponseClient("{}", new BinanceClientOptions()
             {
-                ApiCredentials = new ApiCredentials("Test", "Test"),
+                ApiCredentials = new BinanceApiCredentials("Test", "Test"),
                 SpotApiOptions = new BinanceApiClientOptions
                 {
                     AutoTimestamp = true
@@ -160,7 +160,7 @@ namespace Binance.Net.UnitTests
         {
             // arrange
             // act
-            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
+            var authProvider = new BinanceAuthenticationProvider(new BinanceApiCredentials("TestKey", "TestSecret"));
 
             // assert
             Assert.AreEqual(authProvider.Credentials.Key.GetString(), "TestKey");
@@ -171,7 +171,7 @@ namespace Binance.Net.UnitTests
         public void AddingAuthToRequest_Should_AddApiKeyHeader()
         {
             // arrange
-            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
+            var authProvider = new BinanceAuthenticationProvider(new BinanceApiCredentials("TestKey", "TestSecret"));
             var client = new HttpClient();
             var request = new Request(new HttpRequestMessage(HttpMethod.Get, "https://test.test-api.com"), client, 1);
 

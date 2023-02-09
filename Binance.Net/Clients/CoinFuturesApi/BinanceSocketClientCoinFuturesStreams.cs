@@ -66,7 +66,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
-            => new BinanceAuthenticationProvider(credentials);
+            => new BinanceAuthenticationProvider((BinanceApiCredentials)credentials);
 
         #region methods
 

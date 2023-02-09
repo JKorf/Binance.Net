@@ -104,6 +104,9 @@
             </summary>
             <param name="options">Options to use as default</param>
         </member>
+        <member name="M:Binance.Net.Clients.BinanceClient.SetApiCredentials(Binance.Net.Objects.BinanceApiCredentials)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.BinanceSocketClient">
             <inheritdoc cref="T:Binance.Net.Interfaces.Clients.IBinanceSocketClient" />
         </member>
@@ -10482,6 +10485,55 @@
             The addresses to connect to binance.us. (binance.us futures not are not available)
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceApiCredentials">
+            <summary>
+            Binance Api credentials
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceApiCredentials.Type">
+            <summary>
+            Type of the credentials
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Objects.BinanceApiCredentials.#ctor(System.Security.SecureString,System.Security.SecureString,Binance.Net.Objects.ApiCredentialsType)">
+            <summary>
+            ctor
+            </summary>
+            <param name="key">The API key</param>
+            <param name="secret">The API secret (Hmac type) or the RSA private key in either xml or pem format (Rsa type)</param>
+            <param name="type">The type of authentication</param>
+        </member>
+        <member name="M:Binance.Net.Objects.BinanceApiCredentials.#ctor(System.String,System.String,Binance.Net.Objects.ApiCredentialsType)">
+            <summary>
+            ctor
+            </summary>
+            <param name="key">The API key</param>
+            <param name="secret">The API secret (Hmac type) or the RSA private key in either xml or pem format (Rsa type)</param>
+            <param name="type">The type of authentication</param>
+        </member>
+        <member name="M:Binance.Net.Objects.BinanceApiCredentials.Copy">
+            <inheritdoc />
+        </member>
+        <member name="T:Binance.Net.Objects.ApiCredentialsType">
+            <summary>
+            Credentials type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.ApiCredentialsType.Hmac">
+            <summary>
+            Hmac keys credentials
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.ApiCredentialsType.RsaXml">
+            <summary>
+            Rsa keys credentials in xml format
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.ApiCredentialsType.RsaPem">
+            <summary>
+            Rsa keys credentials in pem/base64 format. Only available for .NetStandard 2.1 and up, use xml format for lower.
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.BinanceClientOptions">
             <summary>
             Options for the Binance client
@@ -10501,6 +10553,9 @@
             <summary>
             Spot API options
             </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceClientOptions.ApiCredentials">
+            <inheritdoc />
         </member>
         <member name="P:Binance.Net.Objects.BinanceClientOptions.UsdFuturesApiOptions">
             <summary>
@@ -10532,6 +10587,9 @@
             <summary>
             Default options for the spot client
             </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceSocketClientOptions.ApiCredentials">
+            <inheritdoc />
         </member>
         <member name="P:Binance.Net.Objects.BinanceSocketClientOptions.SpotStreamsOptions">
             <summary>
@@ -10569,6 +10627,9 @@
             Binance API client options
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.BinanceApiClientOptions.ApiCredentials">
+            <inheritdoc />
+        </member>
         <member name="P:Binance.Net.Objects.BinanceApiClientOptions.TimestampOffset">
             <summary>
             A manual offset for the timestamp. Should only be used if AutoTimestamp and regular time synchronization on the OS is not reliable enough
@@ -10596,6 +10657,29 @@
             <param name="baseAddress"></param>
         </member>
         <member name="M:Binance.Net.Objects.BinanceApiClientOptions.#ctor(Binance.Net.Objects.BinanceApiClientOptions,Binance.Net.Objects.BinanceApiClientOptions)">
+            <summary>
+            ctor
+            </summary>
+            <param name="baseOn"></param>
+            <param name="newValues"></param>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceSocketApiClientOptions">
+            <inheritdoc />
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceSocketApiClientOptions.ApiCredentials">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Objects.BinanceSocketApiClientOptions.#ctor">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Objects.BinanceSocketApiClientOptions.#ctor(System.String)">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Objects.BinanceSocketApiClientOptions.#ctor(Binance.Net.Objects.BinanceSocketApiClientOptions,Binance.Net.Objects.BinanceSocketApiClientOptions)">
             <summary>
             ctor
             </summary>
