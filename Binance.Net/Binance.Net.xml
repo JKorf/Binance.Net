@@ -10531,7 +10531,7 @@
         </member>
         <member name="F:Binance.Net.Objects.ApiCredentialsType.RsaPem">
             <summary>
-            Rsa keys credentials in pem/base64 format. Only available for .NetStandard 2.1 and up, use xml format for lower
+            Rsa keys credentials in pem/base64 format. Only available for .NetStandard 2.1 and up, use xml format for lower.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinanceClientOptions">

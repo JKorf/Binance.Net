@@ -246,6 +246,7 @@ namespace Binance.Net.Objects
         }
     }
 
+    /// <inheritdoc />
     public class BinanceSocketApiClientOptions : SocketApiClientOptions
     {
         /// <inheritdoc />
