@@ -10500,7 +10500,7 @@
             ctor
             </summary>
             <param name="key">The API key</param>
-            <param name="secret">The API secret (Hmac type) or the RSA private key (Rsa type). When running from .net framework the private key should be in xml format.</param>
+            <param name="secret">The API secret (Hmac type) or the RSA private key in either xml or pem format (Rsa type)</param>
             <param name="type">The type of authentication</param>
         </member>
         <member name="M:Binance.Net.Objects.BinanceApiCredentials.#ctor(System.String,System.String,Binance.Net.Objects.ApiCredentialsType)">
@@ -10508,7 +10508,7 @@
             ctor
             </summary>
             <param name="key">The API key</param>
-            <param name="secret">The API secret (Hmac type) or the RSA private key (Rsa type). When running from .net framework the private key should be in xml format.</param>
+            <param name="secret">The API secret (Hmac type) or the RSA private key in either xml or pem format (Rsa type)</param>
             <param name="type">The type of authentication</param>
         </member>
         <member name="M:Binance.Net.Objects.BinanceApiCredentials.Copy">
@@ -10524,9 +10524,14 @@
             Hmac keys credentials
             </summary>
         </member>
-        <member name="F:Binance.Net.Objects.ApiCredentialsType.Rsa">
+        <member name="F:Binance.Net.Objects.ApiCredentialsType.RsaXml">
             <summary>
-            Rsa keys credentials
+            Rsa keys credentials in xml format
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.ApiCredentialsType.RsaPem">
+            <summary>
+            Rsa keys credentials in pem/base64 format. Only available for .NetStandard 2.1 and up, use xml format for lower
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinanceClientOptions">

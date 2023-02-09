@@ -18,7 +18,7 @@ namespace Binance.Net.Objects
         /// ctor
         /// </summary>
         /// <param name="key">The API key</param>
-        /// <param name="secret">The API secret (Hmac type) or the RSA private key (Rsa type). When running from .net framework the private key should be in xml format.</param>
+        /// <param name="secret">The API secret (Hmac type) or the RSA private key in either xml or pem format (Rsa type)</param>
         /// <param name="type">The type of authentication</param>
         public BinanceApiCredentials(SecureString key, SecureString secret, ApiCredentialsType type = ApiCredentialsType.Hmac) : base(key, secret)
         {
@@ -29,7 +29,7 @@ namespace Binance.Net.Objects
         /// ctor
         /// </summary>
         /// <param name="key">The API key</param>
-        /// <param name="secret">The API secret (Hmac type) or the RSA private key (Rsa type). When running from .net framework the private key should be in xml format.</param>
+        /// <param name="secret">The API secret (Hmac type) or the RSA private key in either xml or pem format (Rsa type)</param>
         /// <param name="type">The type of authentication</param>
         public BinanceApiCredentials(string key, string secret, ApiCredentialsType type = ApiCredentialsType.Hmac) : base(key, secret)
         {
@@ -53,8 +53,12 @@ namespace Binance.Net.Objects
         /// </summary>
         Hmac,
         /// <summary>
-        /// Rsa keys credentials
+        /// Rsa keys credentials in xml format
         /// </summary>
-        Rsa
+        RsaXml,
+        /// <summary>
+        /// Rsa keys credentials in pem/base64 format. Only available for .NetStandard 2.1 and up, use xml format for lower.
+        /// </summary>
+        RsaPem
     }
 }

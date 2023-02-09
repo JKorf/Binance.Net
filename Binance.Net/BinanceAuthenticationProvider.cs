@@ -31,7 +31,8 @@ namespace Binance.Net
             var timestamp = GetMillisecondTimestamp(apiClient);
             parameters.Add("timestamp", timestamp);
 
-            if (((BinanceApiCredentials)Credentials).Type == ApiCredentialsType.Hmac)
+            var authType = ((BinanceApiCredentials)Credentials).Type;
+            if (authType == ApiCredentialsType.Hmac)
             {
                 uri = uri.SetParameters(uriParameters, arraySerialization);
                 parameters.Add("signature", SignHMACSHA256(parameterPosition == HttpMethodParameterPosition.InUri ? uri.Query.Replace("?", "") : parameters.ToFormData()));
@@ -42,22 +43,21 @@ namespace Binance.Net
                 var data = SignSHA256Bytes(parameterString);
 
                 using var rsa = RSA.Create();
-#if NETSTANDARD2_1_OR_GREATER
-                var str = Credentials.Secret!.GetString();
-                if (str.StartsWith("<"))
+                if (authType == ApiCredentialsType.RsaPem)
                 {
-                    // Assuming XML string
-                    rsa.FromXmlString(str);
+#if NETSTANDARD2_1_OR_GREATER
+                    // Read from pem private key
+                    rsa.ImportPkcs8PrivateKey(Convert.FromBase64String(Credentials.Secret!.GetString()), out _);
+#else
+                    throw new Exception("Pem format not supported when running from .NetStandard2.0. Convert the private key to xml format.");
+#endif
                 }
                 else
                 {
-                    // Read from private key
-                    rsa.ImportPkcs8PrivateKey(Convert.FromBase64String(str), out _);
+                    // Read from xml private key format
+                    rsa.FromXmlString(Credentials.Secret!.GetString());
                 }
-#else
-                // Can only parse from XML
-                rsa.FromXmlString(Credentials.Secret!.GetString());
-#endif
+
                 var rsaFormatter = new RSAPKCS1SignatureFormatter(rsa);
                 rsaFormatter.SetHashAlgorithm("SHA256");
                 var sign = rsaFormatter.CreateSignature(data);
