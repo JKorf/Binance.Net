@@ -14,7 +14,7 @@ namespace Binance.Net
 {
     internal class BinanceAuthenticationProvider : AuthenticationProvider
     {
-        public BinanceAuthenticationProvider(ApiCredentials credentials) : base(credentials)
+        public BinanceAuthenticationProvider(BinanceApiCredentials credentials) : base(credentials)
         {
         }
 
