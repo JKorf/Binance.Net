@@ -10663,6 +10663,9 @@
             <param name="baseOn"></param>
             <param name="newValues"></param>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceSocketApiClientOptions">
+            <inheritdoc />
+        </member>
         <member name="P:Binance.Net.Objects.BinanceSocketApiClientOptions.ApiCredentials">
             <inheritdoc />
         </member>
