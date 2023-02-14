@@ -14,13 +14,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
     /// <summary>
     /// Binance Spot streams
     /// </summary>
-    public interface IBinanceSocketClientSpotStreams : IDisposable
+    public interface IBinanceSocketClientSpotStreams : ISocketApiClient, IDisposable
     {
-        /// <summary>
-        /// The factory for creating sockets. Used for unit testing
-        /// </summary>
-        IWebsocketFactory SocketFactory { get; set; }
-
         /// <summary>
         /// Subscribes to the aggregated trades update stream for the provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#aggregate-trade-streams" /></para>

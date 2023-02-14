@@ -6,13 +6,8 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
     /// <summary>
     /// Binance general API endpoints
     /// </summary>
-    public interface IBinanceClientGeneralApi : IDisposable
+    public interface IBinanceClientGeneralApi : IRestApiClient, IDisposable
     {
-        /// <summary>
-        /// The factory for creating requests. Used for unit testing
-        /// </summary>
-        IRequestFactory RequestFactory { get; set; }
-
         /// <summary>
         /// Endpoints related to brokerage
         /// </summary>

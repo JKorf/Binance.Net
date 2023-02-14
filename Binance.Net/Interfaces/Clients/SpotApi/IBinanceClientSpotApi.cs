@@ -7,13 +7,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
     /// <summary>
     /// Binance Spot API endpoints
     /// </summary>
-    public interface IBinanceClientSpotApi : IDisposable
+    public interface IBinanceClientSpotApi : IRestApiClient, IDisposable
     {
-        /// <summary>
-        /// The factory for creating requests. Used for unit testing
-        /// </summary>
-        IRequestFactory RequestFactory { get; set; }
-
         /// <summary>
         /// Endpoints related to account settings, info or actions
         /// </summary>

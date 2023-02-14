@@ -136,6 +136,9 @@
             </summary>
             <param name="options">Options to use as default</param>
         </member>
+        <member name="M:Binance.Net.Clients.BinanceSocketClient.SetApiCredentials(Binance.Net.Objects.BinanceApiCredentials)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.CoinFuturesApi.BinanceClientCoinFuturesApi">
             <inheritdoc cref="T:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceClientCoinFuturesApi" />
         </member>
@@ -4152,11 +4155,6 @@
             Binance Coin futures API endpoints
             </summary>
         </member>
-        <member name="P:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceClientCoinFuturesApi.RequestFactory">
-            <summary>
-            The factory for creating requests. Used for unit testing
-            </summary>
-        </member>
         <member name="P:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceClientCoinFuturesApi.Account">
             <summary>
             Endpoints related to account settings, info or actions
@@ -4786,11 +4784,6 @@
             Binance Coin futures streams
             </summary>
         </member>
-        <member name="P:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesStreams.SocketFactory">
-            <summary>
-            The factory for creating sockets. Used for unit testing
-            </summary>
-        </member>
         <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesStreams.SubscribeToAggregatedTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAggregatedTrade}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to the aggregated trades update stream for the provided symbol
@@ -5146,11 +5139,6 @@
         <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApi">
             <summary>
             Binance general API endpoints
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApi.RequestFactory">
-            <summary>
-            The factory for creating requests. Used for unit testing
             </summary>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApi.Brokerage">
@@ -6607,6 +6595,12 @@
             Usd futures API endpoints
             </summary>
         </member>
+        <member name="M:Binance.Net.Interfaces.Clients.IBinanceClient.SetApiCredentials(Binance.Net.Objects.BinanceApiCredentials)">
+            <summary>
+            Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.
+            </summary>
+            <param name="credentials">The credentials to set</param>
+        </member>
         <member name="T:Binance.Net.Interfaces.Clients.IBinanceSocketClient">
             <summary>
             Client for accessing the Binance websocket API
@@ -6627,14 +6621,15 @@
             Usd futures streams
             </summary>
         </member>
+        <member name="M:Binance.Net.Interfaces.Clients.IBinanceSocketClient.SetApiCredentials(Binance.Net.Objects.BinanceApiCredentials)">
+            <summary>
+            Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.
+            </summary>
+            <param name="credentials">The credentials to set</param>
+        </member>
         <member name="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApi">
             <summary>
             Binance Spot API endpoints
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApi.RequestFactory">
-            <summary>
-            The factory for creating requests. Used for unit testing
             </summary>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApi.Account">
@@ -8501,11 +8496,6 @@
             Binance Spot streams
             </summary>
         </member>
-        <member name="P:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotStreams.SocketFactory">
-            <summary>
-            The factory for creating sockets. Used for unit testing
-            </summary>
-        </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotStreams.SubscribeToAggregatedTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAggregatedTrade}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to the aggregated trades update stream for the provided symbol
@@ -8793,11 +8783,6 @@
         <member name="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceClientUsdFuturesApi">
             <summary>
             Binance USD futures API endpoints
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceClientUsdFuturesApi.RequestFactory">
-            <summary>
-            The factory for creating requests. Used for unit testing
             </summary>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceClientUsdFuturesApi.Account">
@@ -9590,11 +9575,6 @@
         <member name="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesStreams">
             <summary>
             Binance USD futures streams
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesStreams.SocketFactory">
-            <summary>
-            The factory for creating sockets. Used for unit testing
             </summary>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesStreams.SubscribeToAggregatedTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAggregatedTrade}},System.Threading.CancellationToken)">

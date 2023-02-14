@@ -21,6 +21,7 @@ using Binance.Net.Objects.Models.Spot;
 using CryptoExchange.Net.Sockets;
 using Binance.Net.Clients;
 using Binance.Net.Clients.SpotApi;
+using CryptoExchange.Net.Logging;
 
 namespace Binance.Net.UnitTests
 {
@@ -177,7 +178,7 @@ namespace Binance.Net.UnitTests
 
             // act
             var headers = new Dictionary<string, string>();
-            authProvider.AuthenticateRequest(null, request.Uri, HttpMethod.Get, new Dictionary<string, object>(), true, ArrayParametersSerialization.MultipleValues,
+            authProvider.AuthenticateRequest(new BinanceRestApiClient(new Log(""), new BinanceClientOptions(), new BinanceClientOptions().SpotApiOptions), request.Uri, HttpMethod.Get, new Dictionary<string, object>(), true, ArrayParametersSerialization.MultipleValues,
                 HttpMethodParameterPosition.InUri, out var uriParameters, out var bodyParameters, out headers);
 
             // assert

@@ -16,13 +16,8 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
     /// <summary>
     /// Binance USD futures streams
     /// </summary>
-    public interface IBinanceSocketClientUsdFuturesStreams : IDisposable
+    public interface IBinanceSocketClientUsdFuturesStreams : ISocketApiClient, IDisposable
     {
-        /// <summary>
-        /// The factory for creating sockets. Used for unit testing
-        /// </summary>
-        IWebsocketFactory SocketFactory { get; set; }
-
         /// <summary>
         /// Subscribes to the aggregated trades update stream for the provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#aggregate-trade-streams" /></para>
