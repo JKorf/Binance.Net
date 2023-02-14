@@ -141,12 +141,14 @@ var result = await client.GeneralApi.Savings.GetFlexibleProductPositionAsync();
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BinanceFlexibleProductPosition>>> GetFlexibleProductPositionAsync(string? asset = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BinanceFlexibleProductPosition>>> GetFlexibleProductPositionAsync(string? asset = default, int? page = default, int? pageSize = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
 |_[Optional]_ asset|Asset|
+|_[Optional]_ page|Page to retrieve|
+|_[Optional]_ pageSize|Page size to return|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 

@@ -20,9 +20,6 @@ parent: Rest API documentation
 *Endpoints related to mining*  
 **[IBinanceClientGeneralApiMining](IBinanceClientGeneralApiMining.html) Mining { get; }**  
 ***
-*The factory for creating requests. Used for unit testing*  
-**IRequestFactory RequestFactory { get; set; }**  
-***
 *Endpoints related to savings*  
 **[IBinanceClientGeneralApiSavings](IBinanceClientGeneralApiSavings.html) Savings { get; }**  
 ***
