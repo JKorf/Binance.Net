@@ -28,6 +28,9 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 8.4.2 - 16 Feb 2023
+    * Fixed rate limiting issue with high UID weight requests
+
 * Version 8.4.1 - 14 Feb 2023
     * Updated CryptoExchange.Net
     * Fixed Http Method on SpotApi.Trading.GetConvertTransferHistoryAsync request
