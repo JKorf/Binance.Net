@@ -51,10 +51,9 @@ namespace Binance.Net.Clients.GeneralApi
         private const string subAccountCreateVirtualEndpoint = "sub-account/virtualSubAccount";
         private const string subAccountEnableBlvtEndpoint = "sub-account/blvt/enable";
 
-        private const string toggleIpRestrictionEndpoint = "account/apiRestrictions/ipRestriction";
-        private const string addIpRestrictionListEndpoint = "account/apiRestrictions/ipRestriction/ipList";
-        private const string getIpRestrictionListEndpoint = "account/apiRestrictions/ipRestriction";
-        private const string removeIpRestrictionListEndpoint = "account/apiRestrictions/ipRestriction/ipList";
+        private const string updateIpRestrictionListEndpoint = "sub-account/subAccountApi/ipRestriction";
+        private const string getIpRestrictionListEndpoint = "sub-account/subAccountApi/ipRestriction";
+        private const string removeIpRestrictionListEndpoint = "sub-account/subAccountApi/ipRestriction/ipList";
 
         private readonly BinanceClientGeneralApi _baseClient;
 
@@ -534,53 +533,45 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region IP restrictions
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceIpRestriction>> ToggleIpRestrictionForApiKeyAsync(string apiKey, bool enable, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceIpRestriction>> UpdateIpRestrictionForSubAccountApiKeyAsync(string email, string apiKey, bool ipRestrict, IEnumerable<string>? ipAddresses, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>
             {
-                { "accountApiKey", apiKey },
-                { "ipRestrict", enable.ToString() }
+                { "email", email },
+                { "subAccountApiKey", apiKey },
+                { "status", ipRestrict ? 2: 1 }
             };
 
+            if (ipAddresses != null)
+                parameters.AddOptionalParameter("ipAddress", string.Join(",", ipAddresses));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceIpRestriction>(_baseClient.GetUrl(toggleIpRestrictionEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 3000).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceIpRestriction>(_baseClient.GetUrl(updateIpRestrictionListEndpoint, "sapi", "2"), HttpMethod.Post, ct, parameters, true, weight: 3000, postPosition: HttpMethodParameterPosition.InUri).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceIpRestriction>> AddIpToWhitelistForApiKeyAsync(string apiKey, IEnumerable<string> ipAddresses, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceIpRestriction>> RemoveIpRestrictionForSubAccountApiKeyAsync(string email, string apiKey, IEnumerable<string>? ipAddresses, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>
             {
-                { "accountApiKey", apiKey },
-                { "ipAddress", string.Join(",", ipAddresses) }
+                { "email", email },
+                { "subAccountApiKey", apiKey }
             };
 
+            if(ipAddresses != null)
+                parameters.AddOptionalParameter("ipAddress", string.Join(",", ipAddresses));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceIpRestriction>(_baseClient.GetUrl(addIpRestrictionListEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true, weight: 3000).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceIpRestriction>(_baseClient.GetUrl(removeIpRestrictionListEndpoint, "sapi", "1"), HttpMethod.Delete, ct, parameters, true, weight: 3000, postPosition: HttpMethodParameterPosition.InUri).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceIpRestriction>> RemoveIpFromWhitelistForApiKeyAsync(string apiKey, IEnumerable<string> ipAddresses, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceIpRestriction>> GetIpRestrictionForSubAccountApiKeyAsync(string email, string apiKey, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>
             {
-                { "accountApiKey", apiKey },
-                { "ipAddress", string.Join(",", ipAddresses) },
-            };
-
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<BinanceIpRestriction>(_baseClient.GetUrl(removeIpRestrictionListEndpoint, "sapi", "1"), HttpMethod.Delete, ct, parameters, true, weight: 3000).ConfigureAwait(false);
-        }
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceIpRestriction>> GetIpWhitelistForApiKeyAsync(string apiKey, int? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>
-            {
-                { "accountApiKey", apiKey }
+                { "email", email },
+                { "subAccountApiKey", apiKey },
             };
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
