@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <PropertyGroup>
-    <PackageId>VozyakovAV.Binance.Net</PackageId>
+    <PackageId>Binance.Net</PackageId>
     <Authors>JKorf, Nikkozp, CaptHolley</Authors>
     <PackageVersion>8.3.0</PackageVersion>
     <AssemblyVersion>8.3.0</AssemblyVersion>
