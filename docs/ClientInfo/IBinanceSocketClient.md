@@ -10,6 +10,9 @@ has_children: true
 *Coin futures streams*  
 **[IBinanceSocketClientCoinFuturesStreams](CoinFuturesApi/IBinanceSocketClientCoinFuturesStreams.html) CoinFuturesStreams { get; }**  
 ***
+*Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.*  
+**void SetApiCredentials(BinanceApiCredentials credentials);**  
+***
 *Spot streams*  
 **[IBinanceSocketClientSpotStreams](SpotApi/IBinanceSocketClientSpotStreams.html) SpotStreams { get; }**  
 ***

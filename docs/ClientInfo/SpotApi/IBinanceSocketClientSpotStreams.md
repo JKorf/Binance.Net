@@ -7,9 +7,6 @@ parent: Socket API documentation
 `BinanceSocketClient > SpotStreams`  
 *Binance Spot streams*
   
-***
-*The factory for creating sockets. Used for unit testing*  
-**IWebsocketFactory SocketFactory { get; set; }**  
 
 ***
 
@@ -58,31 +55,6 @@ Task<CallResult<UpdateSubscription>> SubscribeToAggregatedTradeUpdatesAsync(IEnu
 |Parameter|Description|
 |---|---|
 |symbols|The symbols|
-|onMessage|The event handler for the received data|
-|_[Optional]_ ct|Cancellation token for closing this subscription|
-
-</p>
-
-***
-
-## SubscribeToAllBookTickerUpdatesAsync  
-
-[https://binance-docs.github.io/apidocs/spot/en/#all-book-tickers-stream](https://binance-docs.github.io/apidocs/spot/en/#all-book-tickers-stream)  
-<p>
-
-*Subscribes to all book ticker update streams*  
-
-```csharp  
-var client = new BinanceSocketClient();  
-var result = await client.SpotStreams.SubscribeToAllBookTickerUpdatesAsync(/* parameters */);  
-```  
-
-```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToAllBookTickerUpdatesAsync(Action<DataEvent<BinanceStreamBookPrice>> onMessage, CancellationToken ct = default);  
-```  
-
-|Parameter|Description|
-|---|---|
 |onMessage|The event handler for the received data|
 |_[Optional]_ ct|Cancellation token for closing this subscription|
 

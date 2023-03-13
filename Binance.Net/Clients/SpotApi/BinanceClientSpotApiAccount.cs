@@ -160,7 +160,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestInternal<BinanceResult<IEnumerable<BinanceFiatWithdrawDeposit>>>(_baseClient.GetUrl(fiatDepositWithdrawHistoryEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceResult<IEnumerable<BinanceFiatWithdrawDeposit>>>(_baseClient.GetUrl(fiatDepositWithdrawHistoryEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 90000).ConfigureAwait(false);
 
             return result.As(result.Data?.Data!);
         }

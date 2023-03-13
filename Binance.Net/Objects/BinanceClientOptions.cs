@@ -30,7 +30,7 @@ namespace Binance.Net.Objects
                 {
                     new RateLimiter()
                         .AddPartialEndpointLimit("/api/", 1200, TimeSpan.FromMinutes(1))
-                        .AddPartialEndpointLimit("/sapi/", 12000, TimeSpan.FromMinutes(1))
+                        .AddPartialEndpointLimit("/sapi/", 180000, TimeSpan.FromMinutes(1))
                         .AddEndpointLimit("/api/v3/order", 50, TimeSpan.FromSeconds(10), HttpMethod.Post, true)
                 }
         };
@@ -41,6 +41,13 @@ namespace Binance.Net.Objects
         {
             get => _spotApiOptions;
             set => _spotApiOptions = new BinanceApiClientOptions(_spotApiOptions, value);
+        }
+
+        /// <inheritdoc />
+        public new BinanceApiCredentials? ApiCredentials
+        {
+            get => (BinanceApiCredentials?)base.ApiCredentials;
+            set => base.ApiCredentials = value;
         }
 
         private BinanceApiClientOptions _usdFuturesApiOptions = new BinanceApiClientOptions(BinanceApiAddresses.Default.UsdFuturesRestClientAddress!)
@@ -87,6 +94,7 @@ namespace Binance.Net.Objects
 
             ReceiveWindow = baseOn.ReceiveWindow;
 
+            ApiCredentials = (BinanceApiCredentials?)baseOn.ApiCredentials?.Copy();
             _spotApiOptions = new BinanceApiClientOptions(baseOn.SpotApiOptions, null);
             _usdFuturesApiOptions = new BinanceApiClientOptions(baseOn.UsdFuturesApiOptions, null);
             _coinFuturesApiOptions = new BinanceApiClientOptions(baseOn.CoinFuturesApiOptions, null);
@@ -103,21 +111,29 @@ namespace Binance.Net.Objects
         /// </summary>
         public static BinanceSocketClientOptions Default { get; set; } = new BinanceSocketClientOptions();
 
-        private SocketApiClientOptions _spotStreamsOptions = new SocketApiClientOptions(BinanceApiAddresses.Default.SocketClientAddress)
+        private BinanceSocketApiClientOptions _spotStreamsOptions = new BinanceSocketApiClientOptions(BinanceApiAddresses.Default.SocketClientAddress)
         {
             SocketSubscriptionsCombineTarget = 10
         };
 
+
+        /// <inheritdoc />
+        public new BinanceApiCredentials? ApiCredentials
+        {
+            get => (BinanceApiCredentials?)base.ApiCredentials;
+            set => base.ApiCredentials = value;
+        }
+
         /// <summary>
         /// Spot streams options
         /// </summary>
-        public SocketApiClientOptions SpotStreamsOptions
+        public BinanceSocketApiClientOptions SpotStreamsOptions
         {
             get => _spotStreamsOptions;
-            set => _spotStreamsOptions = new SocketApiClientOptions(_spotStreamsOptions, value);
+            set => _spotStreamsOptions = new BinanceSocketApiClientOptions(_spotStreamsOptions, value);
         }
 
-        private SocketApiClientOptions _usdFuturesStreamsOptions = new SocketApiClientOptions(BinanceApiAddresses.Default.UsdFuturesSocketClientAddress!)
+        private BinanceSocketApiClientOptions _usdFuturesStreamsOptions = new BinanceSocketApiClientOptions(BinanceApiAddresses.Default.UsdFuturesSocketClientAddress!)
         {
             SocketSubscriptionsCombineTarget = 10
         };
@@ -125,13 +141,13 @@ namespace Binance.Net.Objects
         /// <summary>
         /// Usd futures streams options
         /// </summary>
-        public SocketApiClientOptions UsdFuturesStreamsOptions
+        public BinanceSocketApiClientOptions UsdFuturesStreamsOptions
         {
             get => _usdFuturesStreamsOptions;
-            set => _usdFuturesStreamsOptions = new SocketApiClientOptions(_usdFuturesStreamsOptions, value);
+            set => _usdFuturesStreamsOptions = new BinanceSocketApiClientOptions(_usdFuturesStreamsOptions, value);
         }
 
-        private SocketApiClientOptions _coinFuturesStreamsOptions = new SocketApiClientOptions(BinanceApiAddresses.Default.CoinFuturesSocketClientAddress!)
+        private BinanceSocketApiClientOptions _coinFuturesStreamsOptions = new BinanceSocketApiClientOptions(BinanceApiAddresses.Default.CoinFuturesSocketClientAddress!)
         {
             SocketSubscriptionsCombineTarget = 10
         };
@@ -139,10 +155,10 @@ namespace Binance.Net.Objects
         /// <summary>
         /// Coin futures streams options
         /// </summary>
-        public SocketApiClientOptions CoinFuturesStreamsOptions
+        public BinanceSocketApiClientOptions CoinFuturesStreamsOptions
         {
             get => _coinFuturesStreamsOptions;
-            set => _coinFuturesStreamsOptions = new SocketApiClientOptions(_coinFuturesStreamsOptions, value);
+            set => _coinFuturesStreamsOptions = new BinanceSocketApiClientOptions(_coinFuturesStreamsOptions, value);
         }
 
         /// <summary>
@@ -168,9 +184,10 @@ namespace Binance.Net.Objects
 
             BlvtStreamAddress = baseOn.BlvtStreamAddress;
 
-            _spotStreamsOptions = new SocketApiClientOptions(baseOn.SpotStreamsOptions, null);
-            _usdFuturesStreamsOptions = new SocketApiClientOptions(baseOn.UsdFuturesStreamsOptions, null);
-            _coinFuturesStreamsOptions = new SocketApiClientOptions(baseOn.CoinFuturesStreamsOptions, null);
+            ApiCredentials = (BinanceApiCredentials?)baseOn.ApiCredentials?.Copy();
+            _spotStreamsOptions = new BinanceSocketApiClientOptions(baseOn.SpotStreamsOptions, null);
+            _usdFuturesStreamsOptions = new BinanceSocketApiClientOptions(baseOn.UsdFuturesStreamsOptions, null);
+            _coinFuturesStreamsOptions = new BinanceSocketApiClientOptions(baseOn.CoinFuturesStreamsOptions, null);
         }
     }
 
@@ -179,6 +196,13 @@ namespace Binance.Net.Objects
     /// </summary>
     public class BinanceApiClientOptions : RestApiClientOptions
     {
+        /// <inheritdoc />
+        public new BinanceApiCredentials? ApiCredentials
+        {
+            get => (BinanceApiCredentials?)base.ApiCredentials;
+            set => base.ApiCredentials = value;
+        }
+
         /// <summary>
         /// A manual offset for the timestamp. Should only be used if AutoTimestamp and regular time synchronization on the OS is not reliable enough
         /// </summary>
@@ -215,9 +239,45 @@ namespace Binance.Net.Objects
         /// <param name="newValues"></param>
         internal BinanceApiClientOptions(BinanceApiClientOptions baseOn, BinanceApiClientOptions? newValues) : base(baseOn, newValues)
         {
+            ApiCredentials = (BinanceApiCredentials?)newValues?.ApiCredentials?.Copy() ?? (BinanceApiCredentials?)baseOn.ApiCredentials?.Copy();
             TimestampOffset = newValues?.TimestampOffset ?? baseOn.TimestampOffset;
             TradeRulesBehaviour = newValues?.TradeRulesBehaviour ?? baseOn.TradeRulesBehaviour;
             TradeRulesUpdateInterval = newValues?.TradeRulesUpdateInterval ?? baseOn.TradeRulesUpdateInterval;
+        }
+    }
+
+    /// <inheritdoc />
+    public class BinanceSocketApiClientOptions : SocketApiClientOptions
+    {
+        /// <inheritdoc />
+        public new BinanceApiCredentials? ApiCredentials
+        {
+            get => (BinanceApiCredentials?)base.ApiCredentials;
+            set => base.ApiCredentials = value;
+        }
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        public BinanceSocketApiClientOptions()
+        {
+        }
+        
+        /// <summary>
+        /// ctor
+        /// </summary>
+        public BinanceSocketApiClientOptions(string baseAddress) : base(baseAddress)
+        {
+        }
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="baseOn"></param>
+        /// <param name="newValues"></param>
+        internal BinanceSocketApiClientOptions(BinanceSocketApiClientOptions baseOn, BinanceSocketApiClientOptions? newValues) : base(baseOn, newValues)
+        {
+            ApiCredentials = (BinanceApiCredentials?)newValues?.ApiCredentials?.Copy() ?? (BinanceApiCredentials?)baseOn.ApiCredentials?.Copy();
         }
     }
 

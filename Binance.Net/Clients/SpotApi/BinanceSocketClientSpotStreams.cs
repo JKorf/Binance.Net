@@ -69,7 +69,7 @@ namespace Binance.Net.Clients.SpotApi
 
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
-            => new BinanceAuthenticationProvider(credentials);
+            => new BinanceAuthenticationProvider((BinanceApiCredentials)credentials);
 
         #region methods
 
@@ -233,18 +233,6 @@ namespace Binance.Net.Clients.SpotApi
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamBookPrice>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + bookTickerStreamEndpoint).ToArray();
             return await SubscribeAsync(BaseAddress, symbols, handler, ct).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region All Book Tickers Stream
-
-        /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToAllBookTickerUpdatesAsync(
-            Action<DataEvent<BinanceStreamBookPrice>> onMessage, CancellationToken ct = default)
-        {
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamBookPrice>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
-            return await SubscribeAsync(BaseAddress, new[] { allBookTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -550,7 +538,7 @@ namespace Binance.Net.Clients.SpotApi
             if (!connection.Connected)
                 return true;
 
-            await connection.SendAndWaitAsync(unsub, Options.SocketResponseTimeout, data =>
+            await connection.SendAndWaitAsync(unsub, Options.SocketResponseTimeout, null, data =>
             {
                 if (data.Type != JTokenType.Object)
                     return false;

@@ -13,7 +13,7 @@ namespace Binance.Net.UnitTests
     {
         private JsonToObjectComparer<IBinanceClient> _comparer = new JsonToObjectComparer<IBinanceClient>((json) => TestHelpers.CreateResponseClient(json, new BinanceClientOptions()
         { 
-            ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), 
+            ApiCredentials = new BinanceApiCredentials("123", "123"), 
             SpotApiOptions = new BinanceApiClientOptions
             {
                 RateLimiters = new List<IRateLimiter>(),

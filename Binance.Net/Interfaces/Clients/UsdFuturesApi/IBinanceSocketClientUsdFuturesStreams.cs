@@ -16,13 +16,8 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
     /// <summary>
     /// Binance USD futures streams
     /// </summary>
-    public interface IBinanceSocketClientUsdFuturesStreams : IDisposable
+    public interface IBinanceSocketClientUsdFuturesStreams : ISocketApiClient, IDisposable
     {
-        /// <summary>
-        /// The factory for creating sockets. Used for unit testing
-        /// </summary>
-        IWebsocketFactory SocketFactory { get; set; }
-
         /// <summary>
         /// Subscribes to the aggregated trades update stream for the provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#aggregate-trade-streams" /></para>
@@ -305,6 +300,8 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="onAccountUpdate">The event handler for whenever an account update is received</param>
         /// <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
         /// <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
+        /// <param name="onStrategyUpdate">The event handler for whenever a strategy update is received</param>
+        /// <param name="onGridUpdate">The event handler for whenever a grid update is received</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
@@ -314,6 +311,8 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
             Action<DataEvent<BinanceFuturesStreamAccountUpdate>>? onAccountUpdate,
             Action<DataEvent<BinanceFuturesStreamOrderUpdate>>? onOrderUpdate,
             Action<DataEvent<BinanceStreamEvent>> onListenKeyExpired,
+            Action<DataEvent<BinanceStrategyUpdate>>? onStrategyUpdate,
+            Action<DataEvent<BinanceGridUpdate>>? onGridUpdate,
             CancellationToken ct = default);
 
         

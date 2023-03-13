@@ -56,5 +56,13 @@ namespace Binance.Net.Clients
         {
             BinanceSocketClientOptions.Default = options;
         }
+
+        /// <inheritdoc />
+        public void SetApiCredentials(BinanceApiCredentials credentials)
+        {
+            SpotStreams.SetApiCredentials(credentials);
+            UsdFuturesStreams.SetApiCredentials(credentials);
+            CoinFuturesStreams.SetApiCredentials(credentials);
+        }
     }
 }

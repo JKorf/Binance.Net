@@ -60,7 +60,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// <summary>
         /// Multi-Assets Mode
         /// </summary>
-        [JsonProperty("j"), JsonConverter(typeof(PositionModeConverter))]
-        public PositionMode PositionMode { get; set; }
+        [JsonProperty("j")]
+        public bool MultiAssetMode { get; set; }
     }
 }
