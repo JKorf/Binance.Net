@@ -842,16 +842,13 @@
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSubAccount.GetUniversalTransferHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSubAccount.ToggleIpRestrictionForApiKeyAsync(System.String,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSubAccount.UpdateIpRestrictionForSubAccountApiKeyAsync(System.String,System.String,System.Boolean,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSubAccount.AddIpToWhitelistForApiKeyAsync(System.String,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSubAccount.RemoveIpRestrictionForSubAccountApiKeyAsync(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSubAccount.RemoveIpFromWhitelistForApiKeyAsync(System.String,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSubAccount.GetIpWhitelistForApiKeyAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiSubAccount.GetIpRestrictionForSubAccountApiKeyAsync(System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.SpotApi.BinanceClientSpotApi">
@@ -6527,45 +6524,38 @@
             <param name="ct">Cancellation token</param>
             <returns>List of universal transfers</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiSubAccount.ToggleIpRestrictionForApiKeyAsync(System.String,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiSubAccount.UpdateIpRestrictionForSubAccountApiKeyAsync(System.String,System.String,System.Boolean,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
-            Toggle IP restriction for an API key
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#enable-or-disable-ip-restriction-for-a-sub-account-api-key-for-master-account" /></para>
+            Update the ip restriction for a sub-account
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#update-ip-restriction-for-sub-account-api-key-for-master-account" /></para>
             </summary>
-            <param name="apiKey">The api key</param>
-            <param name="enable">Enable or disable</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiSubAccount.AddIpToWhitelistForApiKeyAsync(System.String,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Add IP addresses to the ip whitelist for an API key
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#add-ip-list-for-a-sub-account-api-key-for-master-account" /></para>
-            </summary>
-            <param name="apiKey">The api key</param>
+            <param name="email">The sub account email</param>
+            <param name="apiKey">The sub account api key</param>
+            <param name="ipRestrict">Enable or disable ip restrictions</param>
             <param name="ipAddresses">Addresses to whitelist</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiSubAccount.RemoveIpFromWhitelistForApiKeyAsync(System.String,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiSubAccount.RemoveIpRestrictionForSubAccountApiKeyAsync(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
-            Remove IP addresses from the ip whitelist for an API key
+            Remove the ip restriction for a sub-account
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#delete-ip-list-for-a-sub-account-api-key-for-master-account" /></para>
             </summary>
-            <param name="apiKey">The api key</param>
+            <param name="email">The sub account email</param>
+            <param name="apiKey">The sub account api key</param>
             <param name="ipAddresses">Addresses to remove from whitelist</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiSubAccount.GetIpWhitelistForApiKeyAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiSubAccount.GetIpRestrictionForSubAccountApiKeyAsync(System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
-            Get the current whitelisted ip addresses for an API key
+            Get the ip restriction for a sub-account
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-ip-restriction-for-a-sub-account-api-key-for-master-account" /></para>
             </summary>
-            <param name="apiKey">The api key</param>
+            <param name="email">The sub account email</param>
+            <param name="apiKey">The sub account api key</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>

@@ -308,46 +308,39 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         Task<WebCallResult<IEnumerable<BinanceSubAccountUniversalTransferTransaction>>> GetUniversalTransferHistoryAsync(string? fromEmail = null, string? toEmail = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Toggle IP restriction for an API key
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#enable-or-disable-ip-restriction-for-a-sub-account-api-key-for-master-account" /></para>
+        /// Update the ip restriction for a sub-account
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#update-ip-restriction-for-sub-account-api-key-for-master-account" /></para>
         /// </summary>
-        /// <param name="apiKey">The api key</param>
-        /// <param name="enable">Enable or disable</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        Task<WebCallResult<BinanceIpRestriction>> ToggleIpRestrictionForApiKeyAsync(string apiKey, bool enable, int? receiveWindow = null, CancellationToken ct = default);
-
-        /// <summary>
-        /// Add IP addresses to the ip whitelist for an API key
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#add-ip-list-for-a-sub-account-api-key-for-master-account" /></para>
-        /// </summary>
-        /// <param name="apiKey">The api key</param>
+        /// <param name="email">The sub account email</param>
+        /// <param name="apiKey">The sub account api key</param>
+        /// <param name="ipRestrict">Enable or disable ip restrictions</param>
         /// <param name="ipAddresses">Addresses to whitelist</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BinanceIpRestriction>> AddIpToWhitelistForApiKeyAsync(string apiKey, IEnumerable<string> ipAddresses, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceIpRestriction>> UpdateIpRestrictionForSubAccountApiKeyAsync(string email, string apiKey, bool ipRestrict, IEnumerable<string>? ipAddresses = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Remove IP addresses from the ip whitelist for an API key
+        /// Remove the ip restriction for a sub-account
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#delete-ip-list-for-a-sub-account-api-key-for-master-account" /></para>
         /// </summary>
-        /// <param name="apiKey">The api key</param>
+        /// <param name="email">The sub account email</param>
+        /// <param name="apiKey">The sub account api key</param>
         /// <param name="ipAddresses">Addresses to remove from whitelist</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BinanceIpRestriction>> RemoveIpFromWhitelistForApiKeyAsync(string apiKey, IEnumerable<string> ipAddresses, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceIpRestriction>> RemoveIpRestrictionForSubAccountApiKeyAsync(string email, string apiKey, IEnumerable<string>? ipAddresses = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get the current whitelisted ip addresses for an API key
+        /// Get the ip restriction for a sub-account
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-ip-restriction-for-a-sub-account-api-key-for-master-account" /></para>
         /// </summary>
-        /// <param name="apiKey">The api key</param>
+        /// <param name="email">The sub account email</param>
+        /// <param name="apiKey">The sub account api key</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BinanceIpRestriction>> GetIpWhitelistForApiKeyAsync(string apiKey, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceIpRestriction>> GetIpRestrictionForSubAccountApiKeyAsync(string email, string apiKey, int? receiveWindow = null, CancellationToken ct = default);
     }
 }
