@@ -22038,6 +22038,11 @@
             The trailing delta of the order
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate.TrailingTime">
+            <summary>
+            Trailing Time; This is only visible if the trailing stop order has been activated.
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate.IcebergQuantity">
             <summary>
             The iceberg quantity of the order
