@@ -32,9 +32,6 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discuss
     * Fixed order deserialization when trailing delta timestamp is present
     * Updated subaccount ip restriction endpoints
     * Updated CryptoExchange.Net
-
-* Version 8.4.3 - 6 Mar 2023
-    * Updated subaccount ip restriction endpoints
 	
 * Version 8.4.2 - 16 Feb 2023
     * Fixed rate limiting issue with high UID weight requests
