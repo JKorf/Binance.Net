@@ -226,10 +226,6 @@ namespace Binance.Net.Converters
                     writer.WritePropertyName("maxNumIcebergOrders");
                     writer.WriteValue(MaxNumIcebergOrders.MaxNumIcebergOrders);                   
                     break;
-
-                default:
-                    Debug.WriteLine("Can't write symbol filter of type: " + filter.FilterType);
-                    break;
             }
 
             writer.WriteEndObject();
