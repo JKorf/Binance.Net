@@ -218,13 +218,13 @@ namespace Binance.Net.Converters
                     writer.WritePropertyName("minTrailingBelowDelta");
                     writer.WriteValue(TrailingDelta.MinTrailingBelowDelta);
                     break;
-                default:
-                    Trace.WriteLine($"{DateTime.Now:yyyy/MM/dd HH:mm:ss:fff} | Warning | Can't write symbol filter of type: " + filter.FilterType);
-                    break;
                 case SymbolFilterType.IcebergOrders:
                     var MaxNumIcebergOrders = (BinanceMaxNumberOfIcebergOrdersFilter)filter;
                     writer.WritePropertyName("maxNumIcebergOrders");
                     writer.WriteValue(MaxNumIcebergOrders.MaxNumIcebergOrders);                   
+                    break;
+                default:
+                    Trace.WriteLine($"{DateTime.Now:yyyy/MM/dd HH:mm:ss:fff} | Warning | Can't write symbol filter of type: " + filter.FilterType);
                     break;
             }
 
