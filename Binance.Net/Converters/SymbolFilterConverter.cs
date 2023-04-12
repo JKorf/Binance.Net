@@ -215,6 +215,15 @@ namespace Binance.Net.Converters
                 default:
                     Trace.WriteLine($"{DateTime.Now:yyyy/MM/dd HH:mm:ss:fff} | Warning | Can't write symbol filter of type: " + filter.FilterType);
                     break;
+                case SymbolFilterType.IcebergOrders:
+                    var MaxNumIcebergOrders = (BinanceMaxNumberOfIcebergOrdersFilter)filter;
+                    writer.WritePropertyName("maxNumIcebergOrders");
+                    writer.WriteValue(MaxNumIcebergOrders.MaxNumIcebergOrders);                   
+                    break;
+
+                default:
+                    Debug.WriteLine("Can't write symbol filter of type: " + filter.FilterType);
+                    break;
             }
 
             writer.WriteEndObject();
