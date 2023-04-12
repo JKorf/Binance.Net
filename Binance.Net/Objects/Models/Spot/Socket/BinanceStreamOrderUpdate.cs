@@ -62,6 +62,11 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         [JsonProperty("d")]
         public int? TrailingDelta { get; set; }
         /// <summary>
+        /// Trailing Time; This is only visible if the trailing stop order has been activated.
+        /// </summary>
+        [JsonProperty("D"), JsonConverter(typeof(DateTimeConverter))]
+        public DateTime TrailingTime { get; set; }
+        /// <summary>
         /// The iceberg quantity of the order
         /// </summary>
         [JsonProperty("F")]
