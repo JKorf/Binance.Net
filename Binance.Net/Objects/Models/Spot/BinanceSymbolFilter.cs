@@ -223,18 +223,18 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The MinTrailingAboveDelta filter defines the minimum amount in Basis Point or BIPS above the price to activate the order.
         /// </summary>
-        public int MinTrailingAboveDelta { get; set; }
+        public int? MinTrailingAboveDelta { get; set; }
         /// <summary>
         /// The MaxTrailingAboveDelta filter defines the maximum amount in Basis Point or BIPS above the price to activate the order.
         /// </summary>
-        public int MaxTrailingAboveDelta { get; set; }
+        public int? MaxTrailingAboveDelta { get; set; }
         /// <summary>
         /// The MinTrailingBelowDelta filter defines the minimum amount in Basis Point or BIPS below the price to activate the order.
         /// </summary>
-        public int MinTrailingBelowDelta { get; set; }
+        public int? MinTrailingBelowDelta { get; set; }
         /// <summary>
         /// The MaxTrailingBelowDelta filter defines the minimum amount in Basis Point or BIPS below the price to activate the order.
         /// </summary>
-        public int MaxTrailingBelowDelta { get; set; }
+        public int? MaxTrailingBelowDelta { get; set; }
     }
 }

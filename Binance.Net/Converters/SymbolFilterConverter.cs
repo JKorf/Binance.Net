@@ -110,10 +110,10 @@ namespace Binance.Net.Converters
                 case SymbolFilterType.TrailingDelta:
                     result = new BinanceSymbolTrailingDeltaFilter
                     {
-                        MaxTrailingAboveDelta = (int)obj["maxTrailingAboveDelta"],
-                        MaxTrailingBelowDelta = (int)obj["maxTrailingBelowDelta"],
-                        MinTrailingAboveDelta = (int)obj["minTrailingAboveDelta"],
-                        MinTrailingBelowDelta = (int)obj["minTrailingBelowDelta"],
+                        MaxTrailingAboveDelta = (int?)obj["maxTrailingAboveDelta"],
+                        MaxTrailingBelowDelta = (int?)obj["maxTrailingBelowDelta"],
+                        MinTrailingAboveDelta = (int?)obj["minTrailingAboveDelta"],
+                        MinTrailingBelowDelta = (int?)obj["minTrailingBelowDelta"],
                     };
                     break;
                 default:
