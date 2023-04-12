@@ -3687,6 +3687,11 @@
             Notional filter
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.SymbolFilterType.IcebergOrders">
+            <summary>
+            Max Iceberg Orders filter
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.SymbolStatus">
             <summary>
             Status of a symbol
@@ -16699,6 +16704,16 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbolTrailingDeltaFilter.MaxTrailingBelowDelta">
             <summary>
             The MaxTrailingBelowDelta filter defines the minimum amount in Basis Point or BIPS below the price to activate the order.
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceMaxNumberOfIcebergOrdersFilter">
+            <summary>
+            Max Iceberg Orders Filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceMaxNumberOfIcebergOrdersFilter.MaxNumIcebergOrders">
+            <summary>
+            Maximum number of iceberg orders for this symbol
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceSystemStatus">
