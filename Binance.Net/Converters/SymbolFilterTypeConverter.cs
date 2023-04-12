@@ -23,6 +23,7 @@ namespace Binance.Net.Converters
             new KeyValuePair<SymbolFilterType, string>(SymbolFilterType.PercentagePriceBySide, "PERCENT_PRICE_BY_SIDE"),
             new KeyValuePair<SymbolFilterType, string>(SymbolFilterType.TrailingDelta, "TRAILING_DELTA"),
             new KeyValuePair<SymbolFilterType, string>(SymbolFilterType.Notional, "NOTIONAL"),
+            new KeyValuePair<SymbolFilterType, string>(SymbolFilterType.IcebergOrders, "EXCHANGE_MAX_NUM_ICEBERG_ORDERS"),
         };
     }
 }
