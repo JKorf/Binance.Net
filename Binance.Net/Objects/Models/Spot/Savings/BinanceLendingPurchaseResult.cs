@@ -8,6 +8,6 @@
         /// <summary>
         /// The id of the purchase
         /// </summary>
-        public int PurchaseId { get; set; }
+        public long PurchaseId { get; set; }
     }
 }
