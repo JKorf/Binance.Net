@@ -325,6 +325,18 @@ namespace Binance.Net.Clients.SpotApi
             return result;                    
         }
 
+        internal async Task<WebCallResult> SendRequestInternal(Uri uri, HttpMethod method, CancellationToken cancellationToken,
+            Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
+            ArrayParametersSerialization? arraySerialization = null, int weight = 1, bool ignoreRateLimit = false)
+        {
+            var result = await SendRequestAsync(uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight, ignoreRatelimit: ignoreRateLimit).ConfigureAwait(false);
+            if (!result && result.Error!.Code == -1021 && Options.SpotApiOptions.AutoTimestamp)
+            {
+                _log.Write(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
+                TimeSyncState.LastSyncTime = DateTime.MinValue;
+            }
+            return result;
+        }
         #endregion
 
         /// <inheritdoc />

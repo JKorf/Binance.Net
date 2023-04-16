@@ -1110,6 +1110,12 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.PortfolioMarginBankruptcyLoanRepayAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.GetAutoConversionConfigAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.SetAutoConversionConfigAsync(System.String,System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData">
             <inheritdoc />
         </member>
@@ -7450,6 +7456,25 @@
             Repay portfolio margin bankruptcy loan
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#portfolio-margin-bankruptcy-loan-repay" /></para>
             </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiAccount.GetAutoConversionConfigAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get auto conversion settings
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-auto-converting-stable-coins-user_data" /></para>
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiAccount.SetAutoConversionConfigAsync(System.String,System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Set auto conversion configuration
+            </summary>
+            <param name="asset">Asset to configure (USDC, USDP or TUSD)</param>
+            <param name="enable">Enable or not</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -14856,6 +14881,26 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceAPIKeyPermissions.TradingAuthorityExpirationTime">
             <summary>
             Expiration time for spot and margin trading permission
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceAutoConversionSettings">
+            <summary>
+            User auto conversion settings
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceAutoConversionSettings.ConvertEnabled">
+            <summary>
+            Is auto convert enabled
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceAutoConversionSettings.Assets">
+            <summary>
+            Assets
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceAutoConversionSettings.ExchangeRates">
+            <summary>
+            Exchange rates
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceAveragePrice">
