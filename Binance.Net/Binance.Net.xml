@@ -11457,19 +11457,34 @@
             Available balance
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountBalance.MaxWithdrawQuantity">
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountBalance.UpdateTime">
+            <summary>
+            Last update time
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceUsdFuturesAccountBalance">
+            <summary>
+            Usd futures account balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceUsdFuturesAccountBalance.MaxWithdrawQuantity">
             <summary>
             Maximum quantity for transfer out
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountBalance.MarginAvailable">
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceUsdFuturesAccountBalance.MarginAvailable">
             <summary>
             Whether the asset can be used as margin in Multi-Assets mode
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountBalance.UpdateTime">
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceCoinFuturesAccountBalance">
             <summary>
-            Last update time
+            Coin futures account balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceCoinFuturesAccountBalance.WithdrawAvailable">
+            <summary>
+            Available for withdraw
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfo">
@@ -15121,6 +15136,11 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceDeposit.ConfirmationsForUnlock">
             <summary>
             Network confirmations for unlocking
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDeposit.WalletType">
+            <summary>
+            The wallet type
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceDividendRecord">

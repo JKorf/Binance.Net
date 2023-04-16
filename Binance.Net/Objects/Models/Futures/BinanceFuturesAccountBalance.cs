@@ -40,17 +40,6 @@ namespace Binance.Net.Objects.Models.Futures
         /// Available balance
         /// </summary>
         public decimal AvailableBalance { get; set; }
-
-        /// <summary>
-        /// Maximum quantity for transfer out
-        /// </summary>
-        [JsonProperty("maxWithdrawAmount")]
-		public decimal MaxWithdrawQuantity { get; set; }
-
-        /// <summary>
-        /// Whether the asset can be used as margin in Multi-Assets mode
-        /// </summary>
-        public bool? MarginAvailable { get; set; }
         /// <summary>
         /// Last update time
         /// </summary>
@@ -58,4 +47,31 @@ namespace Binance.Net.Objects.Models.Futures
         public DateTime UpdateTime { get; set; }
     }
 
+    /// <summary>
+    /// Usd futures account balance
+    /// </summary>
+    public class BinanceUsdFuturesAccountBalance : BinanceFuturesAccountBalance
+    {
+        /// <summary>
+        /// Maximum quantity for transfer out
+        /// </summary>
+        [JsonProperty("maxWithdrawAmount")]
+        public decimal MaxWithdrawQuantity { get; set; }
+
+        /// <summary>
+        /// Whether the asset can be used as margin in Multi-Assets mode
+        /// </summary>
+        public bool? MarginAvailable { get; set; }
+    }
+
+    /// <summary>
+    /// Coin futures account balance
+    /// </summary>
+    public class BinanceCoinFuturesAccountBalance : BinanceFuturesAccountBalance
+    {
+        /// <summary>
+        /// Available for withdraw
+        /// </summary>
+        public decimal WithdrawAvailable { get; set; }
+    }
 }
