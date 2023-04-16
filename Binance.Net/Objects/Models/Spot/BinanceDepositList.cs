@@ -65,5 +65,11 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonProperty("unlockConfirm")]
         public string ConfirmationsForUnlock { get; set; } = string.Empty;
+        /// <summary>
+        /// The wallet type
+        /// </summary>
+        [JsonProperty("walletType")]
+        [JsonConverter(typeof(EnumConverter))]
+        public WalletType WalletType { get; set; }
     }
 }
