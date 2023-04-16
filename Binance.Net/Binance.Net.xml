@@ -425,6 +425,9 @@
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesStreams.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTrade}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesStreams.SubscribeToAllMarkPriceUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesCoinStreamMarkPrice}}},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesStreams.SubscribeToBookTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamBookPrice}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -5088,6 +5091,16 @@
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesStreams.SubscribeToAllMarkPriceUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesCoinStreamMarkPrice}}},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+             <summary>
+            Subscribe to the Mark price update stream for all symbols
+             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#mark-price-of-all-symbols-of-a-pair" /></para>
+             </summary>
+             <param name="onMessage"></param>
+             <param name="updateInterval"></param>
+             <param name="ct"></param>
+             <returns></returns>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesStreams.SubscribeToMarkPriceUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesCoinStreamMarkPrice}}},System.Threading.CancellationToken)">
             <summary>

@@ -318,6 +318,16 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         Task<CallResult<UpdateSubscription>> SubscribeToMarkPriceUpdatesAsync(string symbol, int? updateInterval, Action<DataEvent<IEnumerable<BinanceFuturesCoinStreamMarkPrice>>> onMessage, CancellationToken ct = default);
 
         /// <summary>
+        ///Subscribe to the Mark price update stream for all symbols
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#mark-price-of-all-symbols-of-a-pair" /></para>
+        /// </summary>
+        /// <param name="onMessage"></param>
+        /// <param name="updateInterval"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToAllMarkPriceUpdatesAsync(Action<DataEvent<IEnumerable<BinanceFuturesCoinStreamMarkPrice>>> onMessage, int? updateInterval = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Subscribes to the Mark price update stream for a list of symbols
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#mark-price-stream" /></para>
         /// </summary>
