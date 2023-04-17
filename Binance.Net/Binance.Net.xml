@@ -1110,10 +1110,10 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.PortfolioMarginBankruptcyLoanRepayAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.GetAutoConversionConfigAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.GetAutoConvertStableCoinConfigAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.SetAutoConversionConfigAsync(System.String,System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiAccount.SetAutoConvertStableCoinConfigAsync(System.String,System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData">
@@ -1240,6 +1240,9 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData.GetStakingProductsAsync(Binance.Net.Enums.StakingProductType,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceClientSpotApiExchangeData.GetCrossMarginCollateralRatioAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.SpotApi.BinanceClientSpotApiTrading">
@@ -7460,7 +7463,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiAccount.GetAutoConversionConfigAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiAccount.GetAutoConvertStableCoinConfigAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get auto conversion settings
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-auto-converting-stable-coins-user_data" /></para>
@@ -7469,7 +7472,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiAccount.SetAutoConversionConfigAsync(System.String,System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiAccount.SetAutoConvertStableCoinConfigAsync(System.String,System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Set auto conversion configuration
             </summary>
@@ -7869,6 +7872,14 @@
             <param name="asset">Filter for asset</param>
             <param name="page">Page</param>
             <param name="limit">Max items per page</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceClientSpotApiExchangeData.GetCrossMarginCollateralRatioAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin collateral ratio
+            </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -20052,6 +20063,41 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepayRecord.RepayType">
             <summary>
             1 for "repay with borrowed asset", 2 for "repay with collateral"
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceCrossMarginCollateralRatio">
+            <summary>
+            Cross margin collateral info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceCrossMarginCollateralRatio.Collaterals">
+            <summary>
+            Collaterals
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceCrossMarginCollateralRatio.AssetNames">
+            <summary>
+            Asset names
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceCrossMarginCollateral">
+            <summary>
+            Collateral info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceCrossMarginCollateral.MinUsdValue">
+            <summary>
+            Min usd value
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceCrossMarginCollateral.MaxUsdValue">
+            <summary>
+            Max usd value
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceCrossMarginCollateral.DiscountRate">
+            <summary>
+            Discount rate
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceForcedLiquidation">

@@ -35,6 +35,9 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="icebergQty">User for iceberg orders</param>
         /// <param name="orderResponseType">Used for the response JSON</param>
         /// <param name="trailingDelta">Trailing delta value for order in BIPS. A value of 1 means 0.01% trailing delta.</param>
+        /// <param name="strategyId">Strategy id</param>
+        /// <param name="strategyType">Strategy type</param>
+        /// <param name="selfTradePreventionMode">Self trade prevention mode</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed test order</returns>
@@ -50,6 +53,9 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
             decimal? icebergQty = null,
             OrderResponseType? orderResponseType = null,
             int? trailingDelta = null,
+            int? strategyId = null,
+            int? strategyType = null,
+            SelfTradePreventionMode? selfTradePreventionMode = null,
             int? receiveWindow = null,
             CancellationToken ct = default);
 
@@ -69,6 +75,9 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="icebergQty">Used for iceberg orders</param>
         /// <param name="orderResponseType">Used for the response JSON</param>
         /// <param name="trailingDelta">Trailing delta value for order in BIPS. A value of 1 means 0.01% trailing delta.</param>
+        /// <param name="strategyId">Strategy id</param>
+        /// <param name="strategyType">Strategy type</param>
+        /// <param name="selfTradePreventionMode">Self trade prevention mode</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed order</returns>
@@ -84,6 +93,9 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
             decimal? icebergQty = null,
             OrderResponseType? orderResponseType = null,
             int? trailingDelta = null,
+            int? strategyId = null,
+            int? strategyType = null,
+            SelfTradePreventionMode? selfTradePreventionMode = null,
             int? receiveWindow = null,
             CancellationToken ct = default);
 
@@ -208,6 +220,13 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="limitIcebergQuantity">Iceberg quantity for the limit order</param>
         /// <param name="stopIcebergQuantity">Iceberg quantity for the stop order</param>
         /// <param name="trailingDelta">Trailing delta value for order in BIPS. A value of 1 means 0.01% trailing delta.</param>
+        /// <param name="limitStrategyId">Strategy id of the limit order</param>
+        /// <param name="limitStrategyType">Strategy type of the limit order</param>
+        /// <param name="stopStrategyId">Strategy id of the stop order</param>
+        /// <param name="stopStrategyType">Strategy type of the stop order</param>
+        /// <param name="limitIcebergQty">Iceberg quantity of the limit order</param>
+        /// <param name="stopIcebergQty">Iceberg quantity of the stop order</param>
+        /// <param name="selfTradePreventionMode">Self trade prevention mode</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Order list info</returns>
@@ -224,6 +243,13 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
             decimal? stopIcebergQuantity = null,
             TimeInForce? stopLimitTimeInForce = null,
             int? trailingDelta = null,
+            int? limitStrategyId = null,
+            int? limitStrategyType = null,
+            decimal? limitIcebergQty = null,
+            int? stopStrategyId = null,
+            int? stopStrategyType = null,
+            int? stopIcebergQty = null,
+            SelfTradePreventionMode? selfTradePreventionMode = null,
             int? receiveWindow = null,
             CancellationToken ct = default);
 

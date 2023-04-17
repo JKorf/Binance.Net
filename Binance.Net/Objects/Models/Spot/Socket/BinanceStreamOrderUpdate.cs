@@ -177,5 +177,30 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// </summary>
         [JsonProperty("M")]
         public bool M { get; set; }
+        /// <summary>
+        /// Trade group id
+        /// </summary>
+        [JsonProperty("u")]
+        public long? TradeGroupId { get; set; }
+        /// <summary>
+        /// Prevented match id
+        /// </summary>
+        [JsonProperty("v")]
+        public long? PreventedMatchId { get; set; }
+        /// <summary>
+        /// Counter order id
+        /// </summary>
+        [JsonProperty("U")]
+        public long? CounterOrderId { get; set; }
+        /// <summary>
+        /// Prevented quantity
+        /// </summary>
+        [JsonProperty("A")]
+        public decimal? PreventedQuantity { get; set; }
+        /// <summary>
+        /// Last prevented quantiy
+        /// </summary>
+        [JsonProperty("B")]
+        public decimal? LastPreventedQuantity { get; set; }
     }
 }

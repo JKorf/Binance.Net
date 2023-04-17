@@ -20,6 +20,7 @@ using Binance.Net.Interfaces.Clients.SpotApi;
 using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Interfaces.CommonClients;
 using Newtonsoft.Json.Linq;
+using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -92,6 +93,9 @@ namespace Binance.Net.Clients.SpotApi
             bool? isIsolated = null,
             OrderResponseType? orderResponseType = null,
             int? trailingDelta = null,
+            int? strategyId = null,
+            int? strategyType = null,
+            SelfTradePreventionMode? selfTradePreventionMode = null,
             int? receiveWindow = null,
             int weight = 1,
             CancellationToken ct = default)
@@ -133,6 +137,9 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("isIsolated", isIsolated);
             parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
             parameters.AddOptionalParameter("trailingDelta", trailingDelta);
+            parameters.AddOptionalParameter("strategyId", strategyId);
+            parameters.AddOptionalParameter("strategyType", strategyType);
+            parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter.GetString(selfTradePreventionMode));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await SendRequestInternal<BinancePlacedOrder>(uri, HttpMethod.Post, ct, parameters, true, weight: weight).ConfigureAwait(false);

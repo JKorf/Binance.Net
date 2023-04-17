@@ -133,6 +133,9 @@ namespace Binance.Net.Clients.SpotApi
             decimal? icebergQty = null,
             OrderResponseType? orderResponseType = null,
             int? trailingDelta = null,
+            int? strategyId = null,
+            int? strategyType = null,
+            SelfTradePreventionMode? selfTradePreventionMode = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -151,6 +154,9 @@ namespace Binance.Net.Clients.SpotApi
                 null,
                 orderResponseType,
                 trailingDelta,
+                strategyId,
+                strategyType,
+                selfTradePreventionMode,
                 receiveWindow,
                 1,
                 ct).ConfigureAwait(false);
@@ -173,6 +179,9 @@ namespace Binance.Net.Clients.SpotApi
             decimal? icebergQty = null,
             OrderResponseType? orderResponseType = null,
             int? trailingDelta = null,
+            int? strategyId = null,
+            int? strategyType = null,
+            SelfTradePreventionMode? selfTradePreventionMode = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -191,6 +200,9 @@ namespace Binance.Net.Clients.SpotApi
                 null,
                 orderResponseType,
                 trailingDelta,
+                strategyId,
+                strategyType,
+                selfTradePreventionMode,
                 receiveWindow,
                 1,
                 ct).ConfigureAwait(false);
@@ -413,6 +425,13 @@ namespace Binance.Net.Clients.SpotApi
             decimal? stopIcebergQuantity = null,
             TimeInForce? stopLimitTimeInForce = null,
             int? trailingDelta = null,
+            int? limitStrategyId = null,
+            int? limitStrategyType = null,
+            decimal? limitIcebergQty = null,
+            int? stopStrategyId = null,
+            int? stopStrategyType = null,
+            int? stopIcebergQty = null,
+            SelfTradePreventionMode? selfTradePreventionMode = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -437,6 +456,15 @@ namespace Binance.Net.Clients.SpotApi
                 { "price", price.ToString(CultureInfo.InvariantCulture) },
                 { "stopPrice", stopPrice.ToString(CultureInfo.InvariantCulture) }
             };
+
+            parameters.AddOptionalParameter("limitStrategyId", limitStrategyId);
+            parameters.AddOptionalParameter("limitStrategyType", limitStrategyType);
+            parameters.AddOptionalParameter("limitIcebergQty", limitIcebergQty);
+            parameters.AddOptionalParameter("trailingDelta", trailingDelta);
+            parameters.AddOptionalParameter("stopStrategyId", stopStrategyId);
+            parameters.AddOptionalParameter("stopStrategyType", stopStrategyType);
+            parameters.AddOptionalParameter("stopIcebergQty", stopIcebergQty);
+            parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter.GetString(selfTradePreventionMode));
             parameters.AddOptionalParameter("stopLimitPrice", stopLimitPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("listClientOrderId", listClientOrderId);
             parameters.AddOptionalParameter("limitClientOrderId", limitClientOrderId);
@@ -585,6 +613,9 @@ namespace Binance.Net.Clients.SpotApi
                 sideEffectType,
                 isIsolated,
                 orderResponseType,
+                null,
+                null,
+                null,
                 null,
                 receiveWindow,
                 weight: 6,
