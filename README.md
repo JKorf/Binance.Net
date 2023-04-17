@@ -28,6 +28,15 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 8.5.0 - 17 Apr 2023
+    * Added futures individual trade streams
+    * Added coin futures all mark prices stream
+    * Added Spot AutoConvertStableCoin endpoints
+    * Added GetCrossMarginCollateralRatio endpoint
+    * Added missing parameters to spot place order parameters
+    * Added self trade prevention support
+    * Fixed and updated various models
+
 * Version 8.4.4 - 12 Apr 2023
     * Fixed deserialization issue SpotApi.GetExchangeInfoAsync()
     * Updated CryptoExchange.Net
