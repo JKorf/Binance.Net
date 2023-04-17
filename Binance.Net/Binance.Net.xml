@@ -2659,6 +2659,71 @@
             Insurance clear
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.IncomeType.ReferralKickback">
+            <summary>
+            Referral kickback
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.IncomeType.CommissionRebate">
+            <summary>
+            Commission rebate
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.IncomeType.ApiRebate">
+            <summary>
+            Api rebate
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.IncomeType.ContestReward">
+            <summary>
+            Contest reward
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.IncomeType.CrossCollateralTransfer">
+            <summary>
+            Cross collateral transfer
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.IncomeType.OptionsPremiumFee">
+            <summary>
+            Options premium fee
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.IncomeType.OptionsSettleProfit">
+            <summary>
+            Options settle profit
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.IncomeType.InternalTransfer">
+            <summary>
+            Internal transfer
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.IncomeType.AutoExchange">
+            <summary>
+            Auto exchange
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.IncomeType.DeliveredSettlement">
+            <summary>
+            Delivered settlement
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.IncomeType.CoinSwapDeposit">
+            <summary>
+            Coin swap deposit
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.IncomeType.CoinSwapWithdraw">
+            <summary>
+            Coin swap withdraw
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.IncomeType.PositionLimitIncreaseFee">
+            <summary>
+            Position limit increase fee
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.IndicatorType">
             <summary>
             Types of indicators
@@ -4112,6 +4177,46 @@
         <member name="F:Binance.Net.Enums.UniversalTransferType.CoinFuturesToFunding">
             <summary>
             Coin futures to Funding
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.MainToOption">
+            <summary>
+            Main to Option
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.OptionToMain">
+            <summary>
+            Option to Main
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.UsdFuturesToOption">
+            <summary>
+            Usd Futures to Option
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.OptionToUsdFutures">
+            <summary>
+            Option to Usd Futures
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.MarginToOption">
+            <summary>
+            Margin to Option
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.OptionToMargin">
+            <summary>
+            Option to Margin
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.FundingToOption">
+            <summary>
+            Funding to Option
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.OptionToFunding">
+            <summary>
+            Option to Funding
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.WalletType">
