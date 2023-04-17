@@ -40,6 +40,10 @@
         /// <summary>
         /// Counterparty Liquidation
         /// </summary>
-        Adl
+        Adl,
+        /// <summary>
+        /// Expired because of trigger SelfTradePrevention
+        /// </summary>
+        ExpiredInMatch
     }
 }

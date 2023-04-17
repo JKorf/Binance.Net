@@ -94,7 +94,17 @@ namespace Binance.Net.Objects.Models.Spot
         /// Filters for order on this symbol
         /// </summary>
         public IEnumerable<BinanceSymbolFilter> Filters { get; set; } = Array.Empty<BinanceSymbolFilter>();
-
+        /// <summary>
+        /// Default self trade prevention
+        /// </summary>
+        [JsonProperty("defaultSelfTradePreventionMode")]
+        [JsonConverter(typeof(EnumConverter))]
+        public SelfTradePreventionMode DefaultSelfTradePreventionMode { get; set; }
+        /// <summary>
+        /// Allowed self trade prevention modes
+        /// </summary>
+        [JsonProperty("allowedSelfTradePreventionModes", ItemConverterType = typeof(EnumConverter))]
+        public IEnumerable<SelfTradePreventionMode> AllowedSelfTradePreventionModes { get; set; } = Array.Empty<SelfTradePreventionMode>();
         /// <summary>
         /// Filter for max amount of iceberg parts for this symbol
         /// </summary>

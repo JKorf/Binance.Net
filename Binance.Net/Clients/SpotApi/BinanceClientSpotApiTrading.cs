@@ -1319,5 +1319,23 @@ namespace Binance.Net.Clients.SpotApi
             return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceConvertTransferRecord>>(_baseClient.GetUrl(convertTransferHistoryEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
         }
         #endregion
+
+        #region Get Prevented Trades
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinancePreventedTrade>>> GetPreventedTradesAsync(string symbol, long? preventedMatchId = null, long? orderId = null, long? fromPreventedMatchId = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol }
+            };
+            parameters.AddOptionalParameter("preventedMatchId", preventedMatchId);
+            parameters.AddOptionalParameter("orderId", orderId);
+            parameters.AddOptionalParameter("fromPreventedMatchId", fromPreventedMatchId);
+            parameters.AddOptionalParameter("size", limit);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<IEnumerable<BinancePreventedTrade>>(_baseClient.GetUrl("myPreventedMatches", "api", "3"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
+        }
+#endregion
     }
 }
