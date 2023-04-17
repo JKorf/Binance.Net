@@ -115,5 +115,38 @@
         /// Coin futures to Funding
         /// </summary>
         CoinFuturesToFunding,
+
+        /// <summary>
+        /// Main to Option
+        /// </summary>
+        MainToOption,
+        /// <summary>
+        /// Option to Main
+        /// </summary>
+        OptionToMain,
+        /// <summary>
+        /// Usd Futures to Option
+        /// </summary>
+        UsdFuturesToOption,
+        /// <summary>
+        /// Option to Usd Futures
+        /// </summary>
+        OptionToUsdFutures,
+        /// <summary>
+        /// Margin to Option
+        /// </summary>
+        MarginToOption,
+        /// <summary>
+        /// Option to Margin
+        /// </summary>
+        OptionToMargin,
+        /// <summary>
+        /// Funding to Option
+        /// </summary>
+        FundingToOption,
+        /// <summary>
+        /// Option to Funding
+        /// </summary>
+        OptionToFunding
     }
 }
