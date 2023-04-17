@@ -11,33 +11,6 @@ grand_parent: Rest API documentation
 
 ***
 
-## AddIpToWhitelistForApiKeyAsync  
-
-[https://binance-docs.github.io/apidocs/spot/en/#add-ip-list-for-a-sub-account-api-key-for-master-account](https://binance-docs.github.io/apidocs/spot/en/#add-ip-list-for-a-sub-account-api-key-for-master-account)  
-<p>
-
-*Add IP addresses to the ip whitelist for an API key*  
-
-```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.SubAccount.AddIpToWhitelistForApiKeyAsync(/* parameters */);  
-```  
-
-```csharp  
-Task<WebCallResult<BinanceIpRestriction>> AddIpToWhitelistForApiKeyAsync(string apiKey, IEnumerable<string> ipAddresses, int? receiveWindow = default, CancellationToken ct = default);  
-```  
-
-|Parameter|Description|
-|---|---|
-|apiKey|The api key|
-|ipAddresses|Addresses to whitelist|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|_[Optional]_ ct|Cancellation token|
-
-</p>
-
-***
-
 ## CreateVirtualSubAccountAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#create-a-virtual-sub-account-for-master-account](https://binance-docs.github.io/apidocs/spot/en/#create-a-virtual-sub-account-for-master-account)  
@@ -143,25 +116,26 @@ Task<WebCallResult<BinanceSubAccountMarginEnabled>> EnableMarginForSubAccountAsy
 
 ***
 
-## GetIpWhitelistForApiKeyAsync  
+## GetIpRestrictionForSubAccountApiKeyAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#get-ip-restriction-for-a-sub-account-api-key-for-master-account](https://binance-docs.github.io/apidocs/spot/en/#get-ip-restriction-for-a-sub-account-api-key-for-master-account)  
 <p>
 
-*Get the current whitelisted ip addresses for an API key*  
+*Get the ip restriction for a sub-account*  
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.GeneralApi.SubAccount.GetIpWhitelistForApiKeyAsync(/* parameters */);  
+var result = await client.GeneralApi.SubAccount.GetIpRestrictionForSubAccountApiKeyAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BinanceIpRestriction>> GetIpWhitelistForApiKeyAsync(string apiKey, int? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BinanceIpRestriction>> GetIpRestrictionForSubAccountApiKeyAsync(string email, string apiKey, int? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|apiKey|The api key|
+|email|The sub account email|
+|apiKey|The sub account api key|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
@@ -611,53 +585,27 @@ Task<WebCallResult<IEnumerable<BinanceSubAccountUniversalTransferTransaction>>> 
 
 ***
 
-## RemoveIpFromWhitelistForApiKeyAsync  
+## RemoveIpRestrictionForSubAccountApiKeyAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#delete-ip-list-for-a-sub-account-api-key-for-master-account](https://binance-docs.github.io/apidocs/spot/en/#delete-ip-list-for-a-sub-account-api-key-for-master-account)  
 <p>
 
-*Remove IP addresses from the ip whitelist for an API key*  
+*Remove the ip restriction for a sub-account*  
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.GeneralApi.SubAccount.RemoveIpFromWhitelistForApiKeyAsync(/* parameters */);  
+var result = await client.GeneralApi.SubAccount.RemoveIpRestrictionForSubAccountApiKeyAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BinanceIpRestriction>> RemoveIpFromWhitelistForApiKeyAsync(string apiKey, IEnumerable<string> ipAddresses, int? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BinanceIpRestriction>> RemoveIpRestrictionForSubAccountApiKeyAsync(string email, string apiKey, IEnumerable<string>? ipAddresses = default, int? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|apiKey|The api key|
-|ipAddresses|Addresses to remove from whitelist|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|_[Optional]_ ct|Cancellation token|
-
-</p>
-
-***
-
-## ToggleIpRestrictionForApiKeyAsync  
-
-[https://binance-docs.github.io/apidocs/spot/en/#enable-or-disable-ip-restriction-for-a-sub-account-api-key-for-master-account](https://binance-docs.github.io/apidocs/spot/en/#enable-or-disable-ip-restriction-for-a-sub-account-api-key-for-master-account)  
-<p>
-
-*Toggle IP restriction for an API key*  
-
-```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.SubAccount.ToggleIpRestrictionForApiKeyAsync(/* parameters */);  
-```  
-
-```csharp  
-Task<WebCallResult<BinanceIpRestriction>> ToggleIpRestrictionForApiKeyAsync(string apiKey, bool enable, int? receiveWindow = default, CancellationToken ct = default);  
-```  
-
-|Parameter|Description|
-|---|---|
-|apiKey|The api key|
-|enable|Enable or disable|
+|email|The sub account email|
+|apiKey|The sub account api key|
+|_[Optional]_ ipAddresses|Addresses to remove from whitelist|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
@@ -803,6 +751,35 @@ Task<WebCallResult<BinanceSubAccountTransaction>> TransferSubAccountToSubAccount
 |email|Email of the sub account|
 |asset|The asset to transfer|
 |quantity|The quantity to transfer|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## UpdateIpRestrictionForSubAccountApiKeyAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#update-ip-restriction-for-sub-account-api-key-for-master-account](https://binance-docs.github.io/apidocs/spot/en/#update-ip-restriction-for-sub-account-api-key-for-master-account)  
+<p>
+
+*Update the ip restriction for a sub-account*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.GeneralApi.SubAccount.UpdateIpRestrictionForSubAccountApiKeyAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceIpRestriction>> UpdateIpRestrictionForSubAccountApiKeyAsync(string email, string apiKey, bool ipRestrict, IEnumerable<string>? ipAddresses = default, int? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|email|The sub account email|
+|apiKey|The sub account api key|
+|ipRestrict|Enable or disable ip restrictions|
+|_[Optional]_ ipAddresses|Addresses to whitelist|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
