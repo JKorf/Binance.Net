@@ -20,6 +20,7 @@ using Binance.Net.Interfaces.Clients.SpotApi;
 using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Interfaces.CommonClients;
 using Newtonsoft.Json.Linq;
+using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -92,6 +93,9 @@ namespace Binance.Net.Clients.SpotApi
             bool? isIsolated = null,
             OrderResponseType? orderResponseType = null,
             int? trailingDelta = null,
+            int? strategyId = null,
+            int? strategyType = null,
+            SelfTradePreventionMode? selfTradePreventionMode = null,
             int? receiveWindow = null,
             int weight = 1,
             CancellationToken ct = default)
@@ -133,6 +137,9 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("isIsolated", isIsolated);
             parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
             parameters.AddOptionalParameter("trailingDelta", trailingDelta);
+            parameters.AddOptionalParameter("strategyId", strategyId);
+            parameters.AddOptionalParameter("strategyType", strategyType);
+            parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter.GetString(selfTradePreventionMode));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await SendRequestInternal<BinancePlacedOrder>(uri, HttpMethod.Post, ct, parameters, true, weight: weight).ConfigureAwait(false);
@@ -325,6 +332,18 @@ namespace Binance.Net.Clients.SpotApi
             return result;                    
         }
 
+        internal async Task<WebCallResult> SendRequestInternal(Uri uri, HttpMethod method, CancellationToken cancellationToken,
+            Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
+            ArrayParametersSerialization? arraySerialization = null, int weight = 1, bool ignoreRateLimit = false)
+        {
+            var result = await SendRequestAsync(uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight, ignoreRatelimit: ignoreRateLimit).ConfigureAwait(false);
+            if (!result && result.Error!.Code == -1021 && Options.SpotApiOptions.AutoTimestamp)
+            {
+                _log.Write(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
+                TimeSyncState.LastSyncTime = DateTime.MinValue;
+            }
+            return result;
+        }
         #endregion
 
         /// <inheritdoc />

@@ -42,6 +42,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         private const string compositeIndexEndpoint = "@compositeIndex";
 
         private const string aggregatedTradesStreamEndpoint = "@aggTrade";
+        private const string tradesStreamEndpoint = "@trade";
         private const string bookTickerStreamEndpoint = "@bookTicker";
         private const string allBookTickerStreamEndpoint = "!bookTicker";
         private const string liquidationStreamEndpoint = "@forceOrder";
@@ -235,6 +236,28 @@ namespace Binance.Net.Clients.UsdFuturesApi
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + aggregatedTradesStreamEndpoint).ToArray();
             return await SubscribeAsync(BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
+        #endregion
+
+        #region Trade Streams
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol,
+            Action<DataEvent<BinanceStreamTrade>> onMessage, CancellationToken ct = default) =>
+            await SubscribeToTradeUpdatesAsync(new[] { symbol }, onMessage, ct).ConfigureAwait(false);
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols,
+            Action<DataEvent<BinanceStreamTrade>> onMessage, CancellationToken ct = default)
+        {
+            symbols.ValidateNotNull(nameof(symbols));
+            foreach (var symbol in symbols)
+                symbol.ValidateBinanceSymbol();
+
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamTrade>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + tradesStreamEndpoint).ToArray();
+            return await SubscribeAsync(BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+        }
+
         #endregion
 
         #region Individual Symbol Book Ticker Streams

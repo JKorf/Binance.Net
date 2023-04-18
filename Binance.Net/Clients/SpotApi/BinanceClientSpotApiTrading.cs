@@ -133,6 +133,9 @@ namespace Binance.Net.Clients.SpotApi
             decimal? icebergQty = null,
             OrderResponseType? orderResponseType = null,
             int? trailingDelta = null,
+            int? strategyId = null,
+            int? strategyType = null,
+            SelfTradePreventionMode? selfTradePreventionMode = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -151,6 +154,9 @@ namespace Binance.Net.Clients.SpotApi
                 null,
                 orderResponseType,
                 trailingDelta,
+                strategyId,
+                strategyType,
+                selfTradePreventionMode,
                 receiveWindow,
                 1,
                 ct).ConfigureAwait(false);
@@ -173,6 +179,9 @@ namespace Binance.Net.Clients.SpotApi
             decimal? icebergQty = null,
             OrderResponseType? orderResponseType = null,
             int? trailingDelta = null,
+            int? strategyId = null,
+            int? strategyType = null,
+            SelfTradePreventionMode? selfTradePreventionMode = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -191,6 +200,9 @@ namespace Binance.Net.Clients.SpotApi
                 null,
                 orderResponseType,
                 trailingDelta,
+                strategyId,
+                strategyType,
+                selfTradePreventionMode,
                 receiveWindow,
                 1,
                 ct).ConfigureAwait(false);
@@ -413,6 +425,13 @@ namespace Binance.Net.Clients.SpotApi
             decimal? stopIcebergQuantity = null,
             TimeInForce? stopLimitTimeInForce = null,
             int? trailingDelta = null,
+            int? limitStrategyId = null,
+            int? limitStrategyType = null,
+            decimal? limitIcebergQty = null,
+            int? stopStrategyId = null,
+            int? stopStrategyType = null,
+            int? stopIcebergQty = null,
+            SelfTradePreventionMode? selfTradePreventionMode = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -437,14 +456,20 @@ namespace Binance.Net.Clients.SpotApi
                 { "price", price.ToString(CultureInfo.InvariantCulture) },
                 { "stopPrice", stopPrice.ToString(CultureInfo.InvariantCulture) }
             };
+
+            parameters.AddOptionalParameter("limitStrategyId", limitStrategyId);
+            parameters.AddOptionalParameter("limitStrategyType", limitStrategyType);
+            parameters.AddOptionalParameter("limitIcebergQty", limitIcebergQty);
+            parameters.AddOptionalParameter("trailingDelta", trailingDelta);
+            parameters.AddOptionalParameter("stopStrategyId", stopStrategyId);
+            parameters.AddOptionalParameter("stopStrategyType", stopStrategyType);
+            parameters.AddOptionalParameter("stopIcebergQty", stopIcebergQty);
+            parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter.GetString(selfTradePreventionMode));
             parameters.AddOptionalParameter("stopLimitPrice", stopLimitPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("listClientOrderId", listClientOrderId);
             parameters.AddOptionalParameter("limitClientOrderId", limitClientOrderId);
             parameters.AddOptionalParameter("stopClientOrderId", stopClientOrderId);
-            parameters.AddOptionalParameter("limitIcebergQty", limitIcebergQuantity?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("stopIcebergQty", stopIcebergQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("stopLimitTimeInForce", stopLimitTimeInForce == null ? null : JsonConvert.SerializeObject(stopLimitTimeInForce, new TimeInForceConverter(false)));
-            parameters.AddOptionalParameter("trailingDelta", trailingDelta);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceOrderOcoList>(_baseClient.GetUrl(newOcoOrderEndpoint, api, signedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
@@ -585,6 +610,9 @@ namespace Binance.Net.Clients.SpotApi
                 sideEffectType,
                 isIsolated,
                 orderResponseType,
+                null,
+                null,
+                null,
                 null,
                 receiveWindow,
                 weight: 6,
@@ -1288,5 +1316,23 @@ namespace Binance.Net.Clients.SpotApi
             return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceConvertTransferRecord>>(_baseClient.GetUrl(convertTransferHistoryEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
         }
         #endregion
+
+        #region Get Prevented Trades
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinancePreventedTrade>>> GetPreventedTradesAsync(string symbol, long? preventedMatchId = null, long? orderId = null, long? fromPreventedMatchId = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol }
+            };
+            parameters.AddOptionalParameter("preventedMatchId", preventedMatchId);
+            parameters.AddOptionalParameter("orderId", orderId);
+            parameters.AddOptionalParameter("fromPreventedMatchId", fromPreventedMatchId);
+            parameters.AddOptionalParameter("size", limit);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<IEnumerable<BinancePreventedTrade>>(_baseClient.GetUrl("myPreventedMatches", "api", "3"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
+        }
+#endregion
     }
 }

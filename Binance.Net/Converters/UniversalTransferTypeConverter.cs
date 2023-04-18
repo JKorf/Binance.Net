@@ -44,6 +44,15 @@ namespace Binance.Net.Converters
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.FundingToCoinFutures, "FUNDING_CMFUTURE"),
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.CoinFuturesToFunding, "CMFUTURE_FUNDING"),
             new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.IsolatedMarginToIsolatedMargin, "ISOLATEDMARGIN_ISOLATEDMARGIN"),
+
+            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MainToOption, "MAIN_OPTION"),
+            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.OptionToMain, "OPTION_MAIN"),
+            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.UsdFuturesToOption, "UMFUTURE_OPTION"),
+            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.OptionToUsdFutures, "OPTION_UMFUTURE"),
+            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.MarginToOption, "MARGIN_OPTION"),
+            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.OptionToMargin, "OPTION_MARGIN"),
+            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.FundingToOption, "FUNDING_OPTION"),
+            new KeyValuePair<UniversalTransferType, string>(UniversalTransferType.OptionToFunding, "OPTION_FUNDING"),
         };
     }
 }

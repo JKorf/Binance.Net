@@ -20,6 +20,7 @@ namespace Binance.Net.Converters
             new KeyValuePair<OrderStatus, string>(OrderStatus.Insurance, "NEW_INSURANCE" ),
             new KeyValuePair<OrderStatus, string>(OrderStatus.Adl, "NEW_ADL" ),
             new KeyValuePair<OrderStatus, string>(OrderStatus.Expired, "EXPIRED" ),
+            new KeyValuePair<OrderStatus, string>(OrderStatus.ExpiredInMatch, "EXPIRED_IN_MATCH " ),
         };
     }
 }

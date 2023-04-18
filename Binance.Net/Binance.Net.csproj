@@ -7,9 +7,9 @@
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
     <Authors>JKorf, Nikkozp, CaptHolley</Authors>
-    <PackageVersion>8.4.2</PackageVersion>
-    <AssemblyVersion>8.4.2</AssemblyVersion>
-    <FileVersion>8.4.2</FileVersion>
+    <PackageVersion>8.5.0</PackageVersion>
+    <AssemblyVersion>8.5.0</AssemblyVersion>
+    <FileVersion>8.5.0</FileVersion>
     <Description>Binance.Net is a .Net wrapper for the Binance API, including Binance Futures. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance Binance.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
@@ -20,7 +20,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>8.4.2 - Fixed rate limiting issue with high UID weight requests</PackageReleaseNotes>
+    <PackageReleaseNotes>8.5.0 - Added futures individual trade streams, Added coin futures all mark prices stream, Added Spot AutoConvertStableCoin endpoints, Added GetCrossMarginCollateralRatio endpoint, Added missing parameters to spot place order parameters, Added self trade prevention support, Fixed and updated various models</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup Label="Deterministic Build" Condition="'$(Configuration)' == 'Release'">
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -46,7 +46,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="CryptoExchange.Net" Version="5.4.0" />
+    <PackageReference Include="CryptoExchange.Net" Version="5.4.3" />
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

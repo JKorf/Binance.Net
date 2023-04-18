@@ -1,5 +1,5 @@
 # Binance.Net
-[![.NET](https://github.com/JKorf/Binance.Net/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JKorf/Binance.Net/actions/workflows/dotnet.yml) ![Nuget version](https://img.shields.io/nuget/v/binance.net.svg)  ![Nuget downloads](https://img.shields.io/nuget/dt/Binance.Net.svg)
+[![.NET](https://github.com/JKorf/Binance.Net/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JKorf/Binance.Net/actions/workflows/dotnet.yml) [![Nuget version](https://img.shields.io/nuget/v/binance.net.svg)](https://www.nuget.org/packages/Binance.Net)  [![Nuget downloads](https://img.shields.io/nuget/dt/Binance.Net.svg)](https://www.nuget.org/packages/Binance.Net)
 
 Binance.Net is a wrapper around the Binance API as described on [Binance](https://binance-docs.github.io/apidocs/spot/en/#change-log), including all features the API provides using clear and readable objects. The library support the spot, (isolated) margin and futures API's, both the REST and websocket API's.
 
@@ -28,6 +28,24 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 8.5.0 - 17 Apr 2023
+    * Added futures individual trade streams
+    * Added coin futures all mark prices stream
+    * Added Spot AutoConvertStableCoin endpoints
+    * Added GetCrossMarginCollateralRatio endpoint
+    * Added missing parameters to spot place order parameters
+    * Added self trade prevention support
+    * Fixed and updated various models
+
+* Version 8.4.4 - 12 Apr 2023
+    * Fixed deserialization issue SpotApi.GetExchangeInfoAsync()
+    * Updated CryptoExchange.Net
+
+* Version 8.4.3 - 18 Mar 2023
+    * Fixed order deserialization when trailing delta timestamp is present
+    * Updated subaccount ip restriction endpoints
+    * Updated CryptoExchange.Net
+	
 * Version 8.4.2 - 16 Feb 2023
     * Fixed rate limiting issue with high UID weight requests
 

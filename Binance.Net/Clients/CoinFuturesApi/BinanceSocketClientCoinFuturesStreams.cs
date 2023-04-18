@@ -30,6 +30,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region fields
         private const string klineStreamEndpoint = "@kline";
         private const string markPriceStreamEndpoint = "@markPrice";
+        private const string allMarkPriceStreamEndpoint = "!markPrice@arr";
         private const string indexPriceStreamEndpoint = "@indexPrice";
         private const string continuousKlineStreamEndpoint = "@continuousKline";
         private const string indexKlineStreamEndpoint = "@indexPriceKline";
@@ -40,6 +41,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         private const string allTickerStreamEndpoint = "!ticker@arr";
 
         private const string aggregatedTradesStreamEndpoint = "@aggTrade";
+        private const string tradesStreamEndpoint = "@trade";
         private const string bookTickerStreamEndpoint = "@bookTicker";
         private const string allBookTickerStreamEndpoint = "!bookTicker";
         private const string liquidationStreamEndpoint = "@forceOrder";
@@ -259,6 +261,39 @@ namespace Binance.Net.Clients.CoinFuturesApi
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + aggregatedTradesStreamEndpoint).ToArray();
             return await SubscribeAsync( BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
+        #endregion
+
+        #region Trade Streams
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol,
+            Action<DataEvent<BinanceStreamTrade>> onMessage, CancellationToken ct = default) =>
+            await SubscribeToTradeUpdatesAsync(new[] { symbol }, onMessage, ct).ConfigureAwait(false);
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols,
+            Action<DataEvent<BinanceStreamTrade>> onMessage, CancellationToken ct = default)
+        {
+            symbols.ValidateNotNull(nameof(symbols));
+
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamTrade>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + tradesStreamEndpoint).ToArray();
+            return await SubscribeAsync(BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Mark Price Stream for All market
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToAllMarkPriceUpdatesAsync(Action<DataEvent<IEnumerable<BinanceFuturesCoinStreamMarkPrice>>> onMessage, int? updateInterval = null, CancellationToken ct = default)
+        {
+            updateInterval?.ValidateIntValues(nameof(updateInterval), 1000, 3000);
+
+            var handler = new Action<DataEvent<BinanceCombinedStream<IEnumerable<BinanceFuturesCoinStreamMarkPrice>>>>(data => onMessage(data.As(data.Data.Data, data.Data.Stream)));
+            return await SubscribeAsync(BaseAddress, new[] { allMarkPriceStreamEndpoint + (updateInterval == 1000 ? "@1s" : "") }, handler, ct).ConfigureAwait(false);
+        }
+
         #endregion
 
         #region Individual Symbol Book Ticker Streams

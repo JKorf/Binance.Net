@@ -32,6 +32,10 @@
         /// <summary>
         /// Amendment
         /// </summary>
-        Amendment
+        Amendment,
+        /// <summary>
+        /// Self trade prevented
+        /// </summary>
+        TradePrevention
     }
 }

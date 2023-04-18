@@ -56,6 +56,10 @@
         /// <summary>
         /// Notional filter
         /// </summary>
-        Notional
+        Notional,
+        /// <summary>
+        /// Max Iceberg Orders filter
+        /// </summary>
+        IcebergOrders
     }
 }
