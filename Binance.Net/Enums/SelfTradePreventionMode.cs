@@ -16,7 +16,7 @@ namespace Binance.Net.Enums
         /// Exire maker
         /// </summary>
         [Map("EXPIRE_MAKER")]
-        ExireMaker,
+        ExpireMaker,
         /// <summary>
         /// Exire both
         /// </summary>
