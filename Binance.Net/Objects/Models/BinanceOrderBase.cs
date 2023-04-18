@@ -38,12 +38,12 @@ namespace Binance.Net.Objects.Models
         /// </summary>
         public string ClientOrderId { get; set; } = string.Empty;
 
-        private decimal _price;
+        private decimal? _price;
 
         /// <summary>
         /// The price of the order
         /// </summary>
-        public decimal Price
+        public decimal? Price
         {
             get
             {
