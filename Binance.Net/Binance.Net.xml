@@ -3529,7 +3529,7 @@
             Expire taker
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.SelfTradePreventionMode.ExireMaker">
+        <member name="F:Binance.Net.Enums.SelfTradePreventionMode.ExpireMaker">
             <summary>
             Exire maker
             </summary>
