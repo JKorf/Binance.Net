@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces;
@@ -72,6 +73,14 @@ namespace Binance.Net.Clients.SpotApi
             => new BinanceAuthenticationProvider((BinanceApiCredentials)credentials);
 
         #region methods
+
+        public async Task<CallResult<IEnumerable<BinanceRecentTradeQuote>>> GetRecentTradesAsync(string symbol, int limit)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddParameter("symbol", symbol);
+            parameters.AddOptionalParameter("limit", limit);
+            return await QueryAsync<IEnumerable<BinanceRecentTradeQuote>>(BaseAddress, $"trades.recent", parameters).ConfigureAwait(false);
+        }
 
         #region Aggregate Trade Streams
 
@@ -462,10 +471,37 @@ namespace Binance.Net.Clients.SpotApi
             return SubscribeAsync(url.AppendPath("stream"), request, null, false, onData, ct);
         }
 
+        internal Task<CallResult<T>> QueryAsync<T>(string url, string method, Dictionary<string, object> parameters)
+        {
+            var request = new BinanceSocketQuery
+            {
+                Method = method,
+                Params = parameters,
+                Id = NextId()
+            };
+
+            return QueryAsync<T>(url, request, false);
+        }
+
         /// <inheritdoc />
         protected override bool HandleQueryResponse<T>(SocketConnection s, object request, JToken data, out CallResult<T> callResult)
         {
-            throw new NotImplementedException();
+            callResult = null;
+            var bRequest = (BinanceSocketQuery)request;
+            if (bRequest.Id != data["id"]?.Value<int>())
+                return false;
+
+            var status = data["status"]?.Value<int>();
+            if (status != 200)
+            {
+                var error = data["error"]!;
+                callResult = new CallResult<T>(new ServerError(error["code"]!.Value<int>(), error["msg"]!.Value<string>()!));
+                return true;
+            }
+
+            var result = data["result"];
+            callResult = Deserialize<T>(result!);
+            return true;
         }
 
         /// <inheritdoc />

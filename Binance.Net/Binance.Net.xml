@@ -22600,6 +22600,11 @@
             Last prevented quantiy
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate.SelfTradePreventionMode">
+            <summary>
+            Prevented match id
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate">
             <summary>
             Positions update
