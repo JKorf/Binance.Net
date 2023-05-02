@@ -52,12 +52,27 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Network that was used
         /// </summary>
-        public string Network { get; set; } = string.Empty;
         /// <summary>
         /// Confirm times for withdraw
         /// </summary>
         [JsonProperty("confirmNo")]
         public int? ConfirmTimes { get; set; }
+        /// <summary>
+        /// Transaction private key 
+        /// </summary>
+        public string txKey { get; set; } = string.Empty;
+        /// <summary>
+        /// reason for withdrawal failure
+        /// </summary>
+        public string Info { get; set; } = string.Empty;
+        /// <summary>
+        /// The wallet type for withdraw
+        /// </summary>
+        public WalletType? WalletType { get; set; }
+        /// <summary>
+        /// Complete UTC time when user's asset is deduct from withdrawing, only if status =  6(success)
+        /// </summary>
+        public DateTime? CompleteTime { get; set; }
         /// <summary>
         /// The status of the withdrawal
         /// </summary>
