@@ -68,10 +68,10 @@ namespace Binance.Net.UnitTests.TestImplementations
         {
             BinanceSocketClient client;
             client = options != null ? new BinanceSocketClient(options) : new BinanceSocketClient();
-            client.SpotStreams.SocketFactory = Mock.Of<IWebsocketFactory>();
+            client.SpotApi.SocketFactory = Mock.Of<IWebsocketFactory>();
             client.UsdFuturesStreams.SocketFactory = Mock.Of<IWebsocketFactory>();
             client.CoinFuturesStreams.SocketFactory = Mock.Of<IWebsocketFactory>();
-            Mock.Get(client.SpotStreams.SocketFactory).Setup(f => f.CreateWebsocket(It.IsAny<Log>(), It.IsAny<WebSocketParameters>())).Returns(socket);
+            Mock.Get(client.SpotApi.SocketFactory).Setup(f => f.CreateWebsocket(It.IsAny<Log>(), It.IsAny<WebSocketParameters>())).Returns(socket);
             Mock.Get(client.UsdFuturesStreams.SocketFactory).Setup(f => f.CreateWebsocket(It.IsAny<Log>(), It.IsAny<WebSocketParameters>())).Returns(socket);
             Mock.Get(client.CoinFuturesStreams.SocketFactory).Setup(f => f.CreateWebsocket(It.IsAny<Log>(), It.IsAny<WebSocketParameters>())).Returns(socket);
             return client;

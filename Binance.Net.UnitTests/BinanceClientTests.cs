@@ -227,7 +227,7 @@ namespace Binance.Net.UnitTests
         [Test]
         public void CheckSocketInterfaces()
         {
-            var assembly = Assembly.GetAssembly(typeof(BinanceSocketClientSpotStreams));
+            var assembly = Assembly.GetAssembly(typeof(BinanceSocketClientSpotApi));
             var clientInterfaces = assembly.GetTypes().Where(t => t.Name.StartsWith("IBinanceSocketClient"));
 
             foreach (var clientInterface in clientInterfaces)

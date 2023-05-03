@@ -41,7 +41,7 @@
         public static BinanceApiAddresses Default = new BinanceApiAddresses
         {
             RestClientAddress = "https://api.binance.com",
-            SocketClientAddress = "wss://ws-api.binance.com:443/ws-api/v3",
+            SocketClientAddress = "wss://stream.binance.com:9443/",
             BlvtSocketClientAddress = "wss://nbstream.binance.com/lvt-p",
             UsdFuturesRestClientAddress = "https://fapi.binance.com",
             UsdFuturesSocketClientAddress = "wss://fstream.binance.com/",

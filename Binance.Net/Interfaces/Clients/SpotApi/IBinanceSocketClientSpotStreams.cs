@@ -9,15 +9,16 @@ using Binance.Net.Objects.Models.Spot.Socket;
 using Binance.Net.Objects.Models.Spot.Blvt;
 using CryptoExchange.Net.Interfaces;
 using Binance.Net.Objects.Models.Spot;
+using Binance.Net.Clients.SpotApi;
 
 namespace Binance.Net.Interfaces.Clients.SpotApi
 {
     /// <summary>
     /// Binance Spot streams
     /// </summary>
-    public interface IBinanceSocketClientSpotStreams : ISocketApiClient, IDisposable
+    public interface IBinanceSocketClientSpotApi : ISocketApiClient, IDisposable
     {
-        Task<CallResult<IEnumerable<BinanceRecentTradeQuote>>> GetRecentTradesAsync(string symbol, int limit);
+        BinanceSocketClientSpotApiExchangeData ExchangeData { get; }
 
         /// <summary>
         /// Subscribes to the aggregated trades update stream for the provided symbol

@@ -1,4 +1,5 @@
-﻿using Binance.Net.Interfaces.Clients.CoinFuturesApi;
+﻿using Binance.Net.Clients.SpotApi;
+using Binance.Net.Interfaces.Clients.CoinFuturesApi;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using Binance.Net.Objects;
@@ -18,7 +19,7 @@ namespace Binance.Net.Interfaces.Clients
         /// <summary>
         /// Spot streams
         /// </summary>
-        IBinanceSocketClientSpotStreams SpotStreams { get; }
+        BinanceSocketClientSpotApi SpotApi { get; }
         /// <summary>
         /// Usd futures streams
         /// </summary>

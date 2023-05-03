@@ -19,7 +19,7 @@ namespace Binance.Net.Clients
         #region Api clients
 
         /// <inheritdoc />
-        public IBinanceSocketClientSpotStreams SpotStreams { get; set; }
+        public BinanceSocketClientSpotApi SpotApi { get; set; }
         /// <inheritdoc />
         public IBinanceSocketClientUsdFuturesStreams UsdFuturesStreams { get; set; }
         /// <inheritdoc />
@@ -42,7 +42,7 @@ namespace Binance.Net.Clients
         /// <param name="options">The options to use for this client</param>
         public BinanceSocketClient(BinanceSocketClientOptions options) : base("Binance", options)
         {
-            SpotStreams = AddApiClient(new BinanceSocketClientSpotStreams(log, options));
+            SpotApi = AddApiClient(new BinanceSocketClientSpotApi(log, options));
             UsdFuturesStreams = AddApiClient(new BinanceSocketClientUsdFuturesStreams(log, options));
             CoinFuturesStreams = AddApiClient(new BinanceSocketClientCoinFuturesStreams(log, options));
         }
@@ -60,7 +60,7 @@ namespace Binance.Net.Clients
         /// <inheritdoc />
         public void SetApiCredentials(BinanceApiCredentials credentials)
         {
-            SpotStreams.SetApiCredentials(credentials);
+            SpotApi.SetApiCredentials(credentials);
             UsdFuturesStreams.SetApiCredentials(credentials);
             CoinFuturesStreams.SetApiCredentials(credentials);
         }
