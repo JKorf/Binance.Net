@@ -8,10 +8,16 @@ using CryptoExchange.Net.Sockets;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Logging;
+using System.Collections.Generic;
+using Binance.Net.Objects.Models.Spot;
+using CryptoExchange.Net.Converters;
+using Binance.Net.Interfaces.Clients.SpotApi;
+using Binance.Net.Objects;
 
 namespace Binance.Net.Clients.SpotApi
 {
-    public class BinanceSocketClientSpotApiAccount
+    /// <inheritdoc />
+    public class BinanceSocketClientSpotApiAccount : IBinanceSocketClientSpotApiAccount
     {
         private const string executionUpdateEvent = "executionReport";
         private const string ocoOrderUpdateEvent = "listStatus";
@@ -26,18 +32,85 @@ namespace Binance.Net.Clients.SpotApi
 
         #region constructor/destructor
 
-        /// <summary>
-        /// Create a new instance of BinanceSocketClientSpot with default options
-        /// </summary>
-        public BinanceSocketClientSpotApiAccount(Log log, BinanceSocketClientSpotApi client)
+        internal BinanceSocketClientSpotApiAccount(Log log, BinanceSocketClientSpotApi client)
         {
             _client = client;
             _log = log;
         }
+
+        #endregion
+
+        #region Queries
+
+        #region Get Account Info
+
+        /// <inheritdoc />
+        public async Task<CallResult<BinanceResponse<BinanceAccountInfo>>> GetAccountInfoAsync(IEnumerable<string>? symbols = null)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("symbols", symbols);
+            return await _client.QueryAsync<BinanceAccountInfo>(_baseAddressWebsocketApi, $"account.status", parameters, true, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Order Rate Limits
+
+        /// <inheritdoc />
+        public async Task<CallResult<BinanceResponse<IEnumerable<BinanceCurrentRateLimit>>>> GetOrderRateLimitsAsync(IEnumerable<string>? symbols = null)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("symbols", symbols);
+            return await _client.QueryAsync<IEnumerable<BinanceCurrentRateLimit>>(_baseAddressWebsocketApi, $"account.rateLimits.orders", parameters, true, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Start User Stream
+
+        /// <inheritdoc />
+        public async Task<CallResult<BinanceResponse<string>>> StartUserStreamAsync()
+        {
+            var result = await _client.QueryAsync<BinanceListenKey>(_baseAddressWebsocketApi, $"userDataStream.start", new Dictionary<string, object>(), true).ConfigureAwait(false);
+            if (!result)
+                return result.AsError<BinanceResponse<string>>(result.Error!);
+
+            return result.As(new BinanceResponse<string>
+            {
+                Ratelimits = result.Data!.Ratelimits!,
+                Result = result.Data!.Result?.ListenKey!
+            });
+        }
+
+        #endregion
+
+        #region Start User Stream
+
+        /// <inheritdoc />
+        public async Task<CallResult<BinanceResponse<object>>> KeepAliveUserStreamAsync(string listenKey)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddParameter("listenKey", listenKey);
+            return await _client.QueryAsync<object>(_baseAddressWebsocketApi, $"userDataStream.ping", parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Start User Stream
+
+        /// <inheritdoc />
+        public async Task<CallResult<BinanceResponse<object>>> StopUserStreamAsync(string listenKey)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddParameter("listenKey", listenKey);
+            return await _client.QueryAsync<object>(_baseAddressWebsocketApi, $"userDataStream.stop", parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #endregion
 
         #region Streams
-
 
         #region User Data Stream
 
@@ -47,7 +120,7 @@ namespace Binance.Net.Clients.SpotApi
             Action<DataEvent<BinanceStreamOrderUpdate>>? onOrderUpdateMessage,
             Action<DataEvent<BinanceStreamOrderList>>? onOcoOrderUpdateMessage,
             Action<DataEvent<BinanceStreamPositionsUpdate>>? onAccountPositionMessage,
-            Action<DataEvent<BinanceStreamBalanceUpdate>>? onAccountBalanceUpdate, 
+            Action<DataEvent<BinanceStreamBalanceUpdate>>? onAccountBalanceUpdate,
             CancellationToken ct = default)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
@@ -74,8 +147,11 @@ namespace Binance.Net.Clients.SpotApi
                                 onOrderUpdateMessage?.Invoke(data.As(result.Data, result.Data.Id.ToString()));
                             }
                             else
+                            {
                                 _log.Write(LogLevel.Warning,
                                     "Couldn't deserialize data received from order stream: " + result.Error);
+                            }
+
                             break;
                         }
                     case ocoOrderUpdateEvent:
@@ -87,8 +163,11 @@ namespace Binance.Net.Clients.SpotApi
                                 onOcoOrderUpdateMessage?.Invoke(data.As(result.Data, result.Data.Id.ToString()));
                             }
                             else
+                            {
                                 _log.Write(LogLevel.Warning,
                                     "Couldn't deserialize data received from oco order stream: " + result.Error);
+                            }
+
                             break;
                         }
                     case accountPositionUpdateEvent:
@@ -100,8 +179,11 @@ namespace Binance.Net.Clients.SpotApi
                                 onAccountPositionMessage?.Invoke(data.As(result.Data));
                             }
                             else
+                            {
                                 _log.Write(LogLevel.Warning,
                                     "Couldn't deserialize data received from account position stream: " + result.Error);
+                            }
+
                             break;
                         }
                     case balanceUpdateEvent:
@@ -113,8 +195,11 @@ namespace Binance.Net.Clients.SpotApi
                                 onAccountBalanceUpdate?.Invoke(data.As(result.Data, result.Data.Asset));
                             }
                             else
+                            {
                                 _log.Write(LogLevel.Warning,
                                     "Couldn't deserialize data received from account position stream: " + result.Error);
+                            }
+
                             break;
                         }
                     default:

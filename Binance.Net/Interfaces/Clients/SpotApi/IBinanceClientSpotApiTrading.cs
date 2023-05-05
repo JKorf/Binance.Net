@@ -300,7 +300,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<IEnumerable<BinanceOrderOcoList>>> GetOpenOcoOrdersAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Gets all user trades for provided symbol
+        /// Gets user trades for provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#account-trade-list-user_data" /></para>
         /// </summary>
         /// <param name="symbol">Symbol to get trades for</param>

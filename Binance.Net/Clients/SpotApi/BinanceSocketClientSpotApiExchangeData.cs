@@ -2,13 +2,14 @@
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces;
+using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.Socket;
 using CryptoExchange.Net;
-using CryptoExchange.Net.Logging;
+using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using Newtonsoft.Json;
@@ -16,13 +17,13 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Binance.Net.Clients.SpotApi
 {
-    public class BinanceSocketClientSpotApiExchangeData
+    /// <inheritdoc />
+    public class BinanceSocketClientSpotApiExchangeData : IBinanceSocketClientSpotApiExchangeData
     {
         private readonly BinanceSocketClientSpotApi _client;
 
@@ -30,21 +31,74 @@ namespace Binance.Net.Clients.SpotApi
 
         #region constructor/destructor
 
-        /// <summary>
-        /// Create a new instance of BinanceSocketClientSpot with default options
-        /// </summary>
-        public BinanceSocketClientSpotApiExchangeData(BinanceSocketClientSpotApi client)
+        internal BinanceSocketClientSpotApiExchangeData(BinanceSocketClientSpotApi client)
         {
             _client = client;
         }
+
         #endregion
 
         #region Queries
 
-        #region Get Recent Trades
-        public async Task<CallResult<IEnumerable<BinanceRecentTradeQuote>>> GetRecentTradesAsync(string symbol, int limit)
+        #region Ping
+
+        /// <inheritdoc />
+        public async Task<CallResult<BinanceResponse<object>>> PingAsync()
         {
-            var parameters = new Dictionary<string, object>(); 
+            return await _client.QueryAsync<object>(_baseAddressWebsocketApi, $"ping", new Dictionary<string, object>()).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Server Time
+
+        /// <inheritdoc />
+        public async Task<CallResult<BinanceResponse<DateTime>>> GetServerTimeAsync()
+        {
+            var result = await _client.QueryAsync<BinanceCheckTime>(_baseAddressWebsocketApi, $"time", new Dictionary<string, object>()).ConfigureAwait(false);
+            if (!result)
+                return result.AsError<BinanceResponse<DateTime>>(result.Error!);
+
+            return result.As(new BinanceResponse<DateTime>
+            {
+                Ratelimits = result.Data!.Ratelimits!,
+                Result = result.Data!.Result!.ServerTime!
+            });
+        }
+
+        #endregion
+
+        #region Get Exchange Info
+
+        /// <inheritdoc />
+        public async Task<CallResult<BinanceResponse<BinanceExchangeInfo>>> GetExchangeInfoAsync(IEnumerable<string>? symbols = null)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("symbols", symbols);
+            return await _client.QueryAsync<BinanceExchangeInfo>(_baseAddressWebsocketApi, $"exchangeInfo", parameters).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Orderbook
+
+        /// <inheritdoc />
+        public async Task<CallResult<BinanceResponse<BinanceOrderBook>>> GetOrderBookAsync(string symbol, int? limit = null)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddParameter("symbol", symbol);
+            parameters.AddOptionalParameter("limit", limit);
+            return await _client.QueryAsync<BinanceOrderBook>(_baseAddressWebsocketApi, $"depth", parameters).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Recent Trades
+
+        /// <inheritdoc />
+        public async Task<CallResult<BinanceResponse<IEnumerable<BinanceRecentTradeQuote>>>> GetRecentTradesAsync(string symbol, int? limit = null)
+        {
+            var parameters = new Dictionary<string, object>();
             parameters.AddParameter("symbol", symbol);
             parameters.AddOptionalParameter("limit", limit);
             return await _client.QueryAsync<IEnumerable<BinanceRecentTradeQuote>>(_baseAddressWebsocketApi, $"trades.recent", parameters).ConfigureAwait(false);
@@ -52,14 +106,124 @@ namespace Binance.Net.Clients.SpotApi
 
         #endregion
 
+        #region Get Trade History
+
+        /// <inheritdoc />
+        public async Task<CallResult<BinanceResponse<IEnumerable<BinanceRecentTradeQuote>>>> GetTradeHistoryAsync(string symbol, long? fromId = null, int? limit = null)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddParameter("symbol", symbol);
+            parameters.AddOptionalParameter("limit", limit);
+            parameters.AddOptionalParameter("fromId", fromId);
+            return await _client.QueryAsync<IEnumerable<BinanceRecentTradeQuote>>(_baseAddressWebsocketApi, $"trades.historical", parameters, true).ConfigureAwait(false);
+        }
+
         #endregion
 
-#region Streams
+        #region Get Aggregated Trades
+
+        /// <inheritdoc />
+        public async Task<CallResult<BinanceResponse<IEnumerable<BinanceStreamAggregatedTrade>>>> GetAggregatedTradeHistoryAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddParameter("symbol", symbol);
+            parameters.AddOptionalParameter("limit", limit);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
+            parameters.AddOptionalParameter("fromId", fromId);
+            return await _client.QueryAsync<IEnumerable<BinanceStreamAggregatedTrade>>(_baseAddressWebsocketApi, $"trades.aggregate", parameters, false).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Klines
+
+        /// <inheritdoc />
+        public async Task<CallResult<BinanceResponse<IEnumerable<BinanceSpotKline>>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddParameter("symbol", symbol);
+            parameters.AddParameter("interval", EnumConverter.GetString(interval));
+            parameters.AddOptionalParameter("limit", limit);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
+            return await _client.QueryAsync<IEnumerable<BinanceSpotKline>>(_baseAddressWebsocketApi, $"klines", parameters, false).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get UI Klines
+
+        /// <inheritdoc />
+        public async Task<CallResult<BinanceResponse<IEnumerable<BinanceSpotKline>>>> GetUIKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddParameter("symbol", symbol);
+            parameters.AddParameter("interval", EnumConverter.GetString(interval));
+            parameters.AddOptionalParameter("limit", limit);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
+            return await _client.QueryAsync<IEnumerable<BinanceSpotKline>>(_baseAddressWebsocketApi, $"uiKlines", parameters, false).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Average Price
+
+        /// <inheritdoc />
+        public async Task<CallResult<BinanceResponse<BinanceAveragePrice>>> GetCurrentAvgPriceAsync(string symbol)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddParameter("symbol", symbol);
+            return await _client.QueryAsync<BinanceAveragePrice>(_baseAddressWebsocketApi, $"avgPrice", parameters, false).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Tickers
+
+        /// <inheritdoc />
+        public async Task<CallResult<BinanceResponse<IEnumerable<Binance24HPrice>>>> GetTickersAsync(IEnumerable<string>? symbols = null)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("symbols", symbols);
+            return await _client.QueryAsync<IEnumerable<Binance24HPrice>>(_baseAddressWebsocketApi, $"ticker.24hr", parameters, false).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Rolling Window Tickers
+
+        /// <inheritdoc />
+        public async Task<CallResult<BinanceResponse<IEnumerable<BinanceRollingWindowTick>>>> GetRollingWindowTickersAsync(IEnumerable<string> symbols)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("symbols", symbols);
+            return await _client.QueryAsync<IEnumerable<BinanceRollingWindowTick>>(_baseAddressWebsocketApi, $"ticker", parameters, false).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Book Tickers
+
+        /// <inheritdoc />
+        public async Task<CallResult<BinanceResponse<IEnumerable<BinanceBookPrice>>>> GetBookTickersAsync(IEnumerable<string>? symbols = null)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("symbols", symbols);
+            return await _client.QueryAsync<IEnumerable<BinanceBookPrice>>(_baseAddressWebsocketApi, $"ticker.book", parameters, false).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Streams
 
         #region Trade Streams
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, 
+        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol,
             Action<DataEvent<BinanceStreamTrade>> onMessage, CancellationToken ct = default) =>
             await SubscribeToTradeUpdatesAsync(new[] { symbol }, onMessage, ct).ConfigureAwait(false);
 
@@ -333,7 +497,7 @@ namespace Binance.Net.Clients.SpotApi
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToBlvtKlineUpdatesAsync(IEnumerable<string> tokens, KlineInterval interval, Action<DataEvent<BinanceStreamKlineData>> onMessage, CancellationToken ct = default)
-        { 
+        {
             if (_client.ClientOptions.BlvtStreamAddress == null)
                 throw new Exception("No url found for Blvt stream, check the `BlvtStreamAddress` client option");
 

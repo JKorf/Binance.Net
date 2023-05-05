@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -8,6 +9,7 @@ using System.Text;
 using Binance.Net.Objects;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
 
 namespace Binance.Net
@@ -64,6 +66,22 @@ namespace Binance.Net
 
                 parameters.Add("signature", Convert.ToBase64String(sign));
             }
+        }
+
+        public Dictionary<string, object> AuthenticateSocketParameters(Dictionary<string, object> providedParameters)
+        {
+            var sortedParameters = new SortedDictionary<string, object>(providedParameters)
+            {
+                { "apiKey", Credentials.Key!.GetString() },
+                { "timestamp", DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow) }
+            };
+            var paramString = string.Join("&", sortedParameters.Select(p => p.Key + "=" + Convert.ToString(p.Value, CultureInfo.InvariantCulture)));
+
+            var sign = SignHMACSHA256(paramString);
+            var result = sortedParameters.ToDictionary(p => p.Key, p => p.Value);
+            result.Add("signature", sign);
+            return result;
+            //TODO RSA
         }
     }
 }

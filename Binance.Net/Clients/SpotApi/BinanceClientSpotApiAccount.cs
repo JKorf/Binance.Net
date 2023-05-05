@@ -12,7 +12,6 @@ using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Models.Spot.Blvt;
-using Binance.Net.Objects.Models.Spot.ConvertTransfer;
 using Binance.Net.Objects.Models.Spot.IsolatedMargin;
 using Binance.Net.Objects.Models.Spot.Margin;
 using Binance.Net.Objects.Models.Spot.PortfolioMargin;
@@ -1045,12 +1044,12 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Margin order rate limit
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceOrderRateLimit>>> GetMarginOrderRateLimitStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceCurrentRateLimit>>> GetMarginOrderRateLimitStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceOrderRateLimit>>(_baseClient.GetUrl(marginOrderRateLimitEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 20).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceCurrentRateLimit>>(_baseClient.GetUrl(marginOrderRateLimitEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 20).ConfigureAwait(false);
         }
         #endregion
 
@@ -1166,12 +1165,12 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Order rate limit
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceOrderRateLimit>>> GetOrderRateLimitStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceCurrentRateLimit>>> GetOrderRateLimitStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceOrderRateLimit>>(_baseClient.GetUrl(orderRateLimitEndpoint, "api", "3"), HttpMethod.Get, ct, parameters, true, weight: 20).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceCurrentRateLimit>>(_baseClient.GetUrl(orderRateLimitEndpoint, "api", "3"), HttpMethod.Get, ct, parameters, true, weight: 20).ConfigureAwait(false);
         }
         #endregion
 

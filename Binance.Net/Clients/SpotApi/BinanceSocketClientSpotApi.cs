@@ -7,16 +7,15 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
-using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Models.Spot.Blvt;
-using Binance.Net.Objects.Models.Spot.Socket;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
@@ -27,20 +26,22 @@ using Newtonsoft.Json.Linq;
 namespace Binance.Net.Clients.SpotApi
 {
     /// <inheritdoc />
-    public class BinanceSocketClientSpotApi : SocketApiClient//, IBinanceSocketClientSpotApi
+    public class BinanceSocketClientSpotApi : SocketApiClient, IBinanceSocketClientSpotApi
     {
         #region fields
         internal BinanceSocketClientOptions ClientOptions { get; }
         #endregion
 
-        public  BinanceSocketClientSpotApiExchangeData ExchangeData { get; }
+        /// <inheritdoc />
+        public IBinanceSocketClientSpotApiAccount Account { get; }
+        /// <inheritdoc />
+        public IBinanceSocketClientSpotApiExchangeData ExchangeData { get; }
+        /// <inheritdoc />
+        public IBinanceSocketClientSpotApiTrading Trading { get; }
 
         #region constructor/destructor
 
-        /// <summary>
-        /// Create a new instance of BinanceSocketClientSpot with default options
-        /// </summary>
-        public BinanceSocketClientSpotApi(Log log, BinanceSocketClientOptions options) :
+        internal BinanceSocketClientSpotApi(Log log, BinanceSocketClientOptions options) :
             base(log, options, options.SpotStreamsOptions)
         {
             ClientOptions = options;
@@ -48,7 +49,9 @@ namespace Binance.Net.Clients.SpotApi
             SetDataInterpreter((data) => string.Empty, null);
             RateLimitPerSocketPerSecond = 4;
 
+            Account = new BinanceSocketClientSpotApiAccount(log, this);
             ExchangeData = new BinanceSocketClientSpotApiExchangeData(this);
+            Trading = new BinanceSocketClientSpotApiTrading(this);
         }
         #endregion
 
@@ -68,8 +71,24 @@ namespace Binance.Net.Clients.SpotApi
             return SubscribeAsync(url.AppendPath("stream"), request, null, false, onData, ct);
         }
 
-        internal Task<CallResult<T>> QueryAsync<T>(string url, string method, Dictionary<string, object> parameters)
+        internal Task<CallResult<BinanceResponse<T>>> QueryAsync<T>(string url, string method, Dictionary<string, object> parameters, bool authenticated = false, bool sign = false)
         {
+            if (authenticated)
+            {
+                if (AuthenticationProvider?.Credentials?.Key == null)
+                    throw new InvalidOperationException("No credentials provided for authenticated endpoint");
+
+                if (sign)
+                {
+                    var authProvider = (BinanceAuthenticationProvider)AuthenticationProvider;
+                    parameters = authProvider.AuthenticateSocketParameters(parameters);
+                }
+                else
+                {
+                    parameters.Add("apiKey", AuthenticationProvider.Credentials.Key.GetString());
+                }
+            }
+
             var request = new BinanceSocketQuery
             {
                 Method = method,
@@ -77,7 +96,7 @@ namespace Binance.Net.Clients.SpotApi
                 Id = NextId()
             };
 
-            return QueryAsync<T>(url, request, false);
+            return QueryAsync<BinanceResponse<T>>(url, request, false);
         }
 
         internal CallResult<T> DeserializeInternal<T>(JToken obj, JsonSerializer? serializer = null, int? requestId = null)
@@ -88,7 +107,7 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         protected override bool HandleQueryResponse<T>(SocketConnection s, object request, JToken data, out CallResult<T> callResult)
         {
-            callResult = null;
+            callResult = null!;
             var bRequest = (BinanceSocketQuery)request;
             if (bRequest.Id != data["id"]?.Value<int>())
                 return false;
@@ -100,9 +119,7 @@ namespace Binance.Net.Clients.SpotApi
                 callResult = new CallResult<T>(new ServerError(error["code"]!.Value<int>(), error["msg"]!.Value<string>()!));
                 return true;
             }
-
-            var result = data["result"];
-            callResult = Deserialize<T>(result!);
+            callResult = Deserialize<T>(data!);
             return true;
         }
 

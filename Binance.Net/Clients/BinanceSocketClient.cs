@@ -19,7 +19,7 @@ namespace Binance.Net.Clients
         #region Api clients
 
         /// <inheritdoc />
-        public BinanceSocketClientSpotApi SpotApi { get; set; }
+        public IBinanceSocketClientSpotApi SpotApi { get; set; }
         /// <inheritdoc />
         public IBinanceSocketClientUsdFuturesStreams UsdFuturesStreams { get; set; }
         /// <inheritdoc />

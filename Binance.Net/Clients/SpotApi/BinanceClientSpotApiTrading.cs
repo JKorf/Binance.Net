@@ -469,6 +469,8 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("listClientOrderId", listClientOrderId);
             parameters.AddOptionalParameter("limitClientOrderId", limitClientOrderId);
             parameters.AddOptionalParameter("stopClientOrderId", stopClientOrderId);
+            parameters.AddOptionalParameter("limitIcebergQty", limitIcebergQuantity);
+            parameters.AddOptionalParameter("stopIcebergQty", stopIcebergQuantity);
             parameters.AddOptionalParameter("stopLimitTimeInForce", stopLimitTimeInForce == null ? null : JsonConvert.SerializeObject(stopLimitTimeInForce, new TimeInForceConverter(false)));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.Options.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
