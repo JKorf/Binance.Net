@@ -427,10 +427,8 @@ namespace Binance.Net.Clients.SpotApi
             int? trailingDelta = null,
             int? limitStrategyId = null,
             int? limitStrategyType = null,
-            decimal? limitIcebergQty = null,
             int? stopStrategyId = null,
             int? stopStrategyType = null,
-            int? stopIcebergQty = null,
             SelfTradePreventionMode? selfTradePreventionMode = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
@@ -459,11 +457,9 @@ namespace Binance.Net.Clients.SpotApi
 
             parameters.AddOptionalParameter("limitStrategyId", limitStrategyId);
             parameters.AddOptionalParameter("limitStrategyType", limitStrategyType);
-            parameters.AddOptionalParameter("limitIcebergQty", limitIcebergQty);
             parameters.AddOptionalParameter("trailingDelta", trailingDelta);
             parameters.AddOptionalParameter("stopStrategyId", stopStrategyId);
             parameters.AddOptionalParameter("stopStrategyType", stopStrategyType);
-            parameters.AddOptionalParameter("stopIcebergQty", stopIcebergQty);
             parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter.GetString(selfTradePreventionMode));
             parameters.AddOptionalParameter("stopLimitPrice", stopLimitPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("listClientOrderId", listClientOrderId);

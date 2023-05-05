@@ -1,4 +1,5 @@
 ﻿using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Interfaces;
 
 namespace Binance.Net.Interfaces.Clients.SpotApi
 {
@@ -7,6 +8,11 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
     /// </summary>
     public interface IBinanceSocketClientSpotApi
     {
+        /// <summary>
+        /// Factory for websockets
+        /// </summary>
+        IWebsocketFactory SocketFactory { get; set; }
+
         /// <summary>
         /// Account streams and queries
         /// </summary>

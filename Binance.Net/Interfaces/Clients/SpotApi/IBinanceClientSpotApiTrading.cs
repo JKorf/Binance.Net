@@ -245,10 +245,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
             int? trailingDelta = null,
             int? limitStrategyId = null,
             int? limitStrategyType = null,
-            decimal? limitIcebergQty = null,
             int? stopStrategyId = null,
             int? stopStrategyType = null,
-            int? stopIcebergQty = null,
             SelfTradePreventionMode? selfTradePreventionMode = null,
             int? receiveWindow = null,
             CancellationToken ct = default);
