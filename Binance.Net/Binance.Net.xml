@@ -8299,8 +8299,6 @@
             <param name="limitStrategyType">Strategy type of the limit order</param>
             <param name="stopStrategyId">Strategy id of the stop order</param>
             <param name="stopStrategyType">Strategy type of the stop order</param>
-            <param name="limitIcebergQty">Iceberg quantity of the limit order</param>
-            <param name="stopIcebergQty">Iceberg quantity of the stop order</param>
             <param name="selfTradePreventionMode">Self trade prevention mode</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -9089,7 +9087,7 @@
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.SubscribeToAllRollingWindowTickerUpdatesAsync(System.TimeSpan,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick}}},System.Threading.CancellationToken)">
-            /// <summary>
+            <summary>
             Subscribe to rolling window ticker updates stream for all symbols
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#all-market-rolling-window-statistics-streams" /></para>
             </summary>

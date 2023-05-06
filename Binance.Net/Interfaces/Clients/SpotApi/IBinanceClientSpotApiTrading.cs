@@ -224,8 +224,6 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="limitStrategyType">Strategy type of the limit order</param>
         /// <param name="stopStrategyId">Strategy id of the stop order</param>
         /// <param name="stopStrategyType">Strategy type of the stop order</param>
-        /// <param name="limitIcebergQty">Iceberg quantity of the limit order</param>
-        /// <param name="stopIcebergQty">Iceberg quantity of the stop order</param>
         /// <param name="selfTradePreventionMode">Self trade prevention mode</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
