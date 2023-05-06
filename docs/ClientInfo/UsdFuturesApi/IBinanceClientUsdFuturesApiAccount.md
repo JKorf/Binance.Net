@@ -103,7 +103,7 @@ var result = await client.UsdFuturesApi.Account.GetBalancesAsync();
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BinanceFuturesAccountBalance>>> GetBalancesAsync(long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BinanceUsdFuturesAccountBalance>>> GetBalancesAsync(long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|

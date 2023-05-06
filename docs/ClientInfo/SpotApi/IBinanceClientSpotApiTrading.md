@@ -932,6 +932,36 @@ Task<WebCallResult<IEnumerable<BinancePayTrade>>> GetPayTradeHistoryAsync(DateTi
 
 ***
 
+## GetPreventedTradesAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#query-prevented-matches-user_data](https://binance-docs.github.io/apidocs/spot/en/#query-prevented-matches-user_data)  
+<p>
+
+*Get prevented matches because of self trade prevention*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.Trading.GetPreventedTradesAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BinancePreventedTrade>>> GetPreventedTradesAsync(string symbol, long? preventedMatchId = default, long? orderId = default, long? fromPreventedMatchId = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|symbol|Symbol|
+|_[Optional]_ preventedMatchId|Filter by prevented match id|
+|_[Optional]_ orderId|Filter by order id|
+|_[Optional]_ fromPreventedMatchId|Filter by min prevented match id|
+|_[Optional]_ limit|Max results|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetStakingHistoryAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#get-staking-history-user_data](https://binance-docs.github.io/apidocs/spot/en/#get-staking-history-user_data)  
@@ -998,7 +1028,7 @@ Task<WebCallResult<IEnumerable<BinanceStakingPosition>>> GetStakingPositionsAsyn
 [https://binance-docs.github.io/apidocs/spot/en/#account-trade-list-user_data](https://binance-docs.github.io/apidocs/spot/en/#account-trade-list-user_data)  
 <p>
 
-*Gets all user trades for provided symbol*  
+*Gets user trades for provided symbol*  
 
 ```csharp  
 var client = new BinanceClient();  
@@ -1143,7 +1173,7 @@ var result = await client.SpotApi.Trading.PlaceOcoOrderAsync(/* parameters */);
 ```  
 
 ```csharp  
-Task<WebCallResult<BinanceOrderOcoList>> PlaceOcoOrderAsync(string symbol, OrderSide side, decimal quantity, decimal price, decimal stopPrice, decimal? stopLimitPrice = default, string? listClientOrderId = default, string? limitClientOrderId = default, string? stopClientOrderId = default, decimal? limitIcebergQuantity = default, decimal? stopIcebergQuantity = default, TimeInForce? stopLimitTimeInForce = default, int? trailingDelta = default, int? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BinanceOrderOcoList>> PlaceOcoOrderAsync(string symbol, OrderSide side, decimal quantity, decimal price, decimal stopPrice, decimal? stopLimitPrice = default, string? listClientOrderId = default, string? limitClientOrderId = default, string? stopClientOrderId = default, decimal? limitIcebergQuantity = default, decimal? stopIcebergQuantity = default, TimeInForce? stopLimitTimeInForce = default, int? trailingDelta = default, int? limitStrategyId = default, int? limitStrategyType = default, int? stopStrategyId = default, int? stopStrategyType = default, SelfTradePreventionMode? selfTradePreventionMode = default, int? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -1161,6 +1191,11 @@ Task<WebCallResult<BinanceOrderOcoList>> PlaceOcoOrderAsync(string symbol, Order
 |_[Optional]_ stopIcebergQuantity|Iceberg quantity for the stop order|
 |_[Optional]_ stopLimitTimeInForce|Lifetime of the stop order (GoodTillCancel/ImmediateOrCancel/FillOrKill)|
 |_[Optional]_ trailingDelta|Trailing delta value for order in BIPS. A value of 1 means 0.01% trailing delta.|
+|_[Optional]_ limitStrategyId|Strategy id of the limit order|
+|_[Optional]_ limitStrategyType|Strategy type of the limit order|
+|_[Optional]_ stopStrategyId|Strategy id of the stop order|
+|_[Optional]_ stopStrategyType|Strategy type of the stop order|
+|_[Optional]_ selfTradePreventionMode|Self trade prevention mode|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
@@ -1181,7 +1216,7 @@ var result = await client.SpotApi.Trading.PlaceOrderAsync(/* parameters */);
 ```  
 
 ```csharp  
-Task<WebCallResult<BinancePlacedOrder>> PlaceOrderAsync(string symbol, OrderSide side, SpotOrderType type, decimal? quantity = default, decimal? quoteQuantity = default, string? newClientOrderId = default, decimal? price = default, TimeInForce? timeInForce = default, decimal? stopPrice = default, decimal? icebergQty = default, OrderResponseType? orderResponseType = default, int? trailingDelta = default, int? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BinancePlacedOrder>> PlaceOrderAsync(string symbol, OrderSide side, SpotOrderType type, decimal? quantity = default, decimal? quoteQuantity = default, string? newClientOrderId = default, decimal? price = default, TimeInForce? timeInForce = default, decimal? stopPrice = default, decimal? icebergQty = default, OrderResponseType? orderResponseType = default, int? trailingDelta = default, int? strategyId = default, int? strategyType = default, SelfTradePreventionMode? selfTradePreventionMode = default, int? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -1198,6 +1233,9 @@ Task<WebCallResult<BinancePlacedOrder>> PlaceOrderAsync(string symbol, OrderSide
 |_[Optional]_ icebergQty|Used for iceberg orders|
 |_[Optional]_ orderResponseType|Used for the response JSON|
 |_[Optional]_ trailingDelta|Trailing delta value for order in BIPS. A value of 1 means 0.01% trailing delta.|
+|_[Optional]_ strategyId|Strategy id|
+|_[Optional]_ strategyType|Strategy type|
+|_[Optional]_ selfTradePreventionMode|Self trade prevention mode|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
@@ -1218,7 +1256,7 @@ var result = await client.SpotApi.Trading.PlaceTestOrderAsync(/* parameters */);
 ```  
 
 ```csharp  
-Task<WebCallResult<BinancePlacedOrder>> PlaceTestOrderAsync(string symbol, OrderSide side, SpotOrderType type, decimal? quantity = default, decimal? quoteQuantity = default, string? newClientOrderId = default, decimal? price = default, TimeInForce? timeInForce = default, decimal? stopPrice = default, decimal? icebergQty = default, OrderResponseType? orderResponseType = default, int? trailingDelta = default, int? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BinancePlacedOrder>> PlaceTestOrderAsync(string symbol, OrderSide side, SpotOrderType type, decimal? quantity = default, decimal? quoteQuantity = default, string? newClientOrderId = default, decimal? price = default, TimeInForce? timeInForce = default, decimal? stopPrice = default, decimal? icebergQty = default, OrderResponseType? orderResponseType = default, int? trailingDelta = default, int? strategyId = default, int? strategyType = default, SelfTradePreventionMode? selfTradePreventionMode = default, int? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -1235,6 +1273,9 @@ Task<WebCallResult<BinancePlacedOrder>> PlaceTestOrderAsync(string symbol, Order
 |_[Optional]_ icebergQty|User for iceberg orders|
 |_[Optional]_ orderResponseType|Used for the response JSON|
 |_[Optional]_ trailingDelta|Trailing delta value for order in BIPS. A value of 1 means 0.01% trailing delta.|
+|_[Optional]_ strategyId|Strategy id|
+|_[Optional]_ strategyType|Strategy type|
+|_[Optional]_ selfTradePreventionMode|Self trade prevention mode|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 

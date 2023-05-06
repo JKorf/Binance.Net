@@ -750,6 +750,56 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<s
 
 ***
 
+## SubscribeToTradeUpdatesAsync  
+
+<p>
+
+*Subscribe to individual trade update. NOTE: This endpoint stream isn't document and therefor might be changed or removed without prior notice*  
+
+```csharp  
+var client = new BinanceSocketClient();  
+var result = await client.UsdFuturesStreams.SubscribeToTradeUpdatesAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<BinanceStreamTrade>> onMessage, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|symbol|Symbol to subscribe|
+|onMessage|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
+
+</p>
+
+***
+
+## SubscribeToTradeUpdatesAsync  
+
+<p>
+
+*Subscribe to individual trade update. NOTE: This endpoint stream isn't document and therefor might be changed or removed without prior notice*  
+
+```csharp  
+var client = new BinanceSocketClient();  
+var result = await client.UsdFuturesStreams.SubscribeToTradeUpdatesAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BinanceStreamTrade>> onMessage, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|symbols|Symbols to subscribe|
+|onMessage|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
+
+</p>
+
+***
+
 ## SubscribeToUserDataUpdatesAsync  
 
 [https://binance-docs.github.io/apidocs/futures/en/#user-data-streams](https://binance-docs.github.io/apidocs/futures/en/#user-data-streams)  

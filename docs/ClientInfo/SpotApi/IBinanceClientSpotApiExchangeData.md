@@ -16,7 +16,7 @@ grand_parent: Rest API documentation
 [https://binance-docs.github.io/apidocs/spot/en/#compressed-aggregate-trades-list](https://binance-docs.github.io/apidocs/spot/en/#compressed-aggregate-trades-list)  
 <p>
 
-*Gets compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.*  
+*Gets compressed, aggregate trades. Trades that fill at the same time, from the same order, with the same price will have the quantity aggregated.*  
 
 ```csharp  
 var client = new BinanceClient();  
@@ -139,6 +139,30 @@ Task<WebCallResult<IEnumerable<BinanceBookPrice>>> GetBookPricesAsync(Cancellati
 
 ***
 
+## GetCrossMarginCollateralRatioAsync  
+
+<p>
+
+*Get cross margin collateral ratio*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.ExchangeData.GetCrossMarginCollateralRatioAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BinanceCrossMarginCollateralRatio>>> GetCrossMarginCollateralRatioAsync(int? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetCurrentAvgPriceAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#current-average-price](https://binance-docs.github.io/apidocs/spot/en/#current-average-price)  
@@ -169,7 +193,7 @@ Task<WebCallResult<BinanceAveragePrice>> GetCurrentAvgPriceAsync(string symbol, 
 [https://binance-docs.github.io/apidocs/spot/en/#exchange-information](https://binance-docs.github.io/apidocs/spot/en/#exchange-information)  
 <p>
 
-*Get's information about the exchange including rate limits and symbol list*  
+*Gets information about the exchange including rate limits and symbol list*  
 
 ```csharp  
 var client = new BinanceClient();  
@@ -981,7 +1005,7 @@ Task<WebCallResult<IEnumerable<BinanceTradeFee>>> GetTradeFeeAsync(string? symbo
 [https://binance-docs.github.io/apidocs/spot/en/#old-trade-lookup-market_data](https://binance-docs.github.io/apidocs/spot/en/#old-trade-lookup-market_data)  
 <p>
 
-*Gets the historical  trades for a symbol*  
+*Gets the historical trades for a symbol*  
 
 ```csharp  
 var client = new BinanceClient();  

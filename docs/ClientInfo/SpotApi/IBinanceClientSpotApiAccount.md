@@ -326,6 +326,31 @@ Task<WebCallResult<BinanceElligableDusts>> GetAssetsForDustTransferAsync(int? re
 
 ***
 
+## GetAutoConvertStableCoinConfigAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#query-auto-converting-stable-coins-user_data](https://binance-docs.github.io/apidocs/spot/en/#query-auto-converting-stable-coins-user_data)  
+<p>
+
+*Get auto conversion settings*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.Account.GetAutoConvertStableCoinConfigAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceAutoConversionSettings>> GetAutoConvertStableCoinConfigAsync(long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetBalancesAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#user-asset-user_data](https://binance-docs.github.io/apidocs/spot/en/#user-asset-user_data)  
@@ -1096,7 +1121,7 @@ var result = await client.SpotApi.Account.GetMarginOrderRateLimitStatusAsync();
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BinanceOrderRateLimit>>> GetMarginOrderRateLimitStatusAsync(int? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BinanceCurrentRateLimit>>> GetMarginOrderRateLimitStatusAsync(int? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -1154,7 +1179,7 @@ var result = await client.SpotApi.Account.GetOrderRateLimitStatusAsync();
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BinanceOrderRateLimit>>> GetOrderRateLimitStatusAsync(int? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BinanceCurrentRateLimit>>> GetOrderRateLimitStatusAsync(int? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -1598,6 +1623,32 @@ Task<WebCallResult<BinanceTransaction>> PortfolioMarginBankruptcyLoanRepayAsync(
 
 ***
 
+## SetAutoConvertStableCoinConfigAsync  
+
+<p>
+
+*Set auto conversion configuration*  
+
+```csharp  
+var client = new BinanceClient();  
+var result = await client.SpotApi.Account.SetAutoConvertStableCoinConfigAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult> SetAutoConvertStableCoinConfigAsync(string asset, bool enable, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|asset|Asset to configure (USDC, USDP or TUSD)|
+|enable|Enable or not|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## SetAutoStakingAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#set-auto-staking-user_data](https://binance-docs.github.io/apidocs/spot/en/#set-auto-staking-user_data)  
@@ -1709,7 +1760,7 @@ Task<WebCallResult<string>> StartMarginUserStreamAsync(CancellationToken ct = de
 [https://binance-docs.github.io/apidocs/spot/en/#listen-key-spot](https://binance-docs.github.io/apidocs/spot/en/#listen-key-spot)  
 <p>
 
-*Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to BinanceSocketClient.Futures.SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.*  
+*Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.*  
 
 ```csharp  
 var client = new BinanceClient();  

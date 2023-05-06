@@ -112,6 +112,32 @@ Task<CallResult<UpdateSubscription>> SubscribeToAllLiquidationUpdatesAsync(Actio
 
 ***
 
+## SubscribeToAllMarkPriceUpdatesAsync  
+
+[https://binance-docs.github.io/apidocs/delivery/en/#mark-price-of-all-symbols-of-a-pair](https://binance-docs.github.io/apidocs/delivery/en/#mark-price-of-all-symbols-of-a-pair)  
+<p>
+
+*Subscribe to the Mark price update stream for all symbols*  
+
+```csharp  
+var client = new BinanceSocketClient();  
+var result = await client.CoinFuturesStreams.SubscribeToAllMarkPriceUpdatesAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<CallResult<UpdateSubscription>> SubscribeToAllMarkPriceUpdatesAsync(Action<DataEvent<IEnumerable<BinanceFuturesCoinStreamMarkPrice>>> onMessage, int? updateInterval = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|onMessage||
+|_[Optional]_ updateInterval||
+|_[Optional]_ ct||
+
+</p>
+
+***
+
 ## SubscribeToAllMiniTickerUpdatesAsync  
 
 [https://binance-docs.github.io/apidocs/delivery/en/#all-market-mini-tickers-stream](https://binance-docs.github.io/apidocs/delivery/en/#all-market-mini-tickers-stream)  
@@ -853,6 +879,56 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<s
 |Parameter|Description|
 |---|---|
 |symbols|The symbols to subscribe to|
+|onMessage|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
+
+</p>
+
+***
+
+## SubscribeToTradeUpdatesAsync  
+
+<p>
+
+*Subscribe to individual trade update. NOTE: This endpoint stream isn't document and therefor might be changed or removed without prior notice*  
+
+```csharp  
+var client = new BinanceSocketClient();  
+var result = await client.CoinFuturesStreams.SubscribeToTradeUpdatesAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<BinanceStreamTrade>> onMessage, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|symbol|Symbol to subscribe|
+|onMessage|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
+
+</p>
+
+***
+
+## SubscribeToTradeUpdatesAsync  
+
+<p>
+
+*Subscribe to individual trade update. NOTE: This endpoint stream isn't document and therefor might be changed or removed without prior notice*  
+
+```csharp  
+var client = new BinanceSocketClient();  
+var result = await client.CoinFuturesStreams.SubscribeToTradeUpdatesAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BinanceStreamTrade>> onMessage, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|symbols|Symbols to subscribe|
 |onMessage|The event handler for the received data|
 |_[Optional]_ ct|Cancellation token for closing this subscription|
 

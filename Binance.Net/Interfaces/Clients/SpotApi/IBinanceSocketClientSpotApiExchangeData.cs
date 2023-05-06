@@ -155,7 +155,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToAllMiniTickerUpdatesAsync(Action<DataEvent<IEnumerable<IBinanceMiniTick>>> onMessage, CancellationToken ct = default);
         
-        /// /// <summary>
+        /// <summary>
         /// Subscribe to rolling window ticker updates stream for all symbols
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#all-market-rolling-window-statistics-streams" /></para>
         /// </summary>
