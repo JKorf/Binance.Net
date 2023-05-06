@@ -77,11 +77,42 @@ namespace Binance.Net
             };
             var paramString = string.Join("&", sortedParameters.Select(p => p.Key + "=" + Convert.ToString(p.Value, CultureInfo.InvariantCulture)));
 
-            var sign = SignHMACSHA256(paramString);
-            var result = sortedParameters.ToDictionary(p => p.Key, p => p.Value);
-            result.Add("signature", sign);
-            return result;
-            //TODO RSA
+            var authType = ((BinanceApiCredentials)Credentials).Type;
+            if (authType == ApiCredentialsType.Hmac)
+            {
+                var sign = SignHMACSHA256(paramString);
+                var result = sortedParameters.ToDictionary(p => p.Key, p => p.Value);
+                result.Add("signature", sign);
+                return result;
+            }
+            else
+            {
+                var data = SignSHA256Bytes(paramString);
+
+                using var rsa = RSA.Create();
+                if (authType == ApiCredentialsType.RsaPem)
+                {
+#if NETSTANDARD2_1_OR_GREATER
+                    // Read from pem private key
+                    rsa.ImportPkcs8PrivateKey(Convert.FromBase64String(Credentials.Secret!.GetString()), out _);
+#else
+                    throw new Exception("Pem format not supported when running from .NetStandard2.0. Convert the private key to xml format.");
+#endif
+                }
+                else
+                {
+                    // Read from xml private key format
+                    rsa.FromXmlString(Credentials.Secret!.GetString());
+                }
+
+                var rsaFormatter = new RSAPKCS1SignatureFormatter(rsa);
+                rsaFormatter.SetHashAlgorithm("SHA256");
+                var sign = rsaFormatter.CreateSignature(data);
+
+                var result = sortedParameters.ToDictionary(p => p.Key, p => p.Value);
+                result.Add("signature", Convert.ToBase64String(sign));
+                return result;
+            }
         }
     }
 }

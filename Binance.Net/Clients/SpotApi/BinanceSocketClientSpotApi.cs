@@ -34,7 +34,7 @@ namespace Binance.Net.Clients.SpotApi
         #region constructor/destructor
 
         internal BinanceSocketClientSpotApi(Log log, BinanceSocketClientOptions options) :
-            base(log, options, options.SpotStreamsOptions)
+            base(log, options, options.SpotApiOptions)
         {
             ClientOptions = options;
 

@@ -20,8 +20,10 @@ namespace Binance.Net.Clients
 
         /// <inheritdoc />
         public IBinanceSocketClientSpotApi SpotApi { get; set; }
+        // TODO rename to API
         /// <inheritdoc />
         public IBinanceSocketClientUsdFuturesStreams UsdFuturesStreams { get; set; }
+        // TODO rename to API
         /// <inheritdoc />
         public IBinanceSocketClientCoinFuturesStreams CoinFuturesStreams { get; set; }
 

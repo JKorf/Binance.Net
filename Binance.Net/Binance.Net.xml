@@ -11350,7 +11350,7 @@
         <member name="P:Binance.Net.Objects.BinanceSocketClientOptions.ApiCredentials">
             <inheritdoc />
         </member>
-        <member name="P:Binance.Net.Objects.BinanceSocketClientOptions.SpotStreamsOptions">
+        <member name="P:Binance.Net.Objects.BinanceSocketClientOptions.SpotApiOptions">
             <summary>
             Spot streams options
             </summary>

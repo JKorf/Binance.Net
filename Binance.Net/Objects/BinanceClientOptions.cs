@@ -111,7 +111,7 @@ namespace Binance.Net.Objects
         /// </summary>
         public static BinanceSocketClientOptions Default { get; set; } = new BinanceSocketClientOptions();
 
-        private BinanceSocketApiClientOptions _spotStreamsOptions = new BinanceSocketApiClientOptions(BinanceApiAddresses.Default.SocketClientAddress)
+        private BinanceSocketApiClientOptions _spotApiOptions = new BinanceSocketApiClientOptions(BinanceApiAddresses.Default.SocketClientAddress)
         {
             SocketSubscriptionsCombineTarget = 10
         };
@@ -127,10 +127,10 @@ namespace Binance.Net.Objects
         /// <summary>
         /// Spot streams options
         /// </summary>
-        public BinanceSocketApiClientOptions SpotStreamsOptions
+        public BinanceSocketApiClientOptions SpotApiOptions
         {
-            get => _spotStreamsOptions;
-            set => _spotStreamsOptions = new BinanceSocketApiClientOptions(_spotStreamsOptions, value);
+            get => _spotApiOptions;
+            set => _spotApiOptions = new BinanceSocketApiClientOptions(_spotApiOptions, value);
         }
 
         private BinanceSocketApiClientOptions _usdFuturesStreamsOptions = new BinanceSocketApiClientOptions(BinanceApiAddresses.Default.UsdFuturesSocketClientAddress!)
@@ -185,7 +185,7 @@ namespace Binance.Net.Objects
             BlvtStreamAddress = baseOn.BlvtStreamAddress;
 
             ApiCredentials = (BinanceApiCredentials?)baseOn.ApiCredentials?.Copy();
-            _spotStreamsOptions = new BinanceSocketApiClientOptions(baseOn.SpotStreamsOptions, null);
+            _spotApiOptions = new BinanceSocketApiClientOptions(baseOn.SpotApiOptions, null);
             _usdFuturesStreamsOptions = new BinanceSocketApiClientOptions(baseOn.UsdFuturesStreamsOptions, null);
             _coinFuturesStreamsOptions = new BinanceSocketApiClientOptions(baseOn.CoinFuturesStreamsOptions, null);
         }
