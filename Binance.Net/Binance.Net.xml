@@ -11426,6 +11426,16 @@
         <member name="P:Binance.Net.Objects.BinanceSocketApiClientOptions.ApiCredentials">
             <inheritdoc />
         </member>
+        <member name="P:Binance.Net.Objects.BinanceSocketApiClientOptions.TradeRulesBehaviour">
+            <summary>
+            Whether to check the trade rules when placing new orders and what to do if the trade isn't valid
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceSocketApiClientOptions.TradeRulesUpdateInterval">
+            <summary>
+            How often the trade rules should be updated. Only used when TradeRulesBehaviour is not None
+            </summary>
+        </member>
         <member name="M:Binance.Net.Objects.BinanceSocketApiClientOptions.#ctor">
             <summary>
             ctor

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
+using Binance.Net.Objects.Models.Spot;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Logging;
@@ -22,6 +24,10 @@ namespace Binance.Net.Clients.SpotApi
     {
         #region fields
         internal BinanceSocketClientOptions ClientOptions { get; }
+        internal new readonly BinanceSocketApiClientOptions Options;
+
+        internal BinanceExchangeInfo? ExchangeInfo;
+        internal DateTime? LastExchangeInfoUpdate;
         #endregion
 
         /// <inheritdoc />
@@ -36,14 +42,15 @@ namespace Binance.Net.Clients.SpotApi
         internal BinanceSocketClientSpotApi(Log log, BinanceSocketClientOptions options) :
             base(log, options, options.SpotApiOptions)
         {
+            Options = options.SpotApiOptions;
             ClientOptions = options;
 
             SetDataInterpreter((data) => string.Empty, null);
             RateLimitPerSocketPerSecond = 4;
 
             Account = new BinanceSocketClientSpotApiAccount(log, this);
-            ExchangeData = new BinanceSocketClientSpotApiExchangeData(this);
-            Trading = new BinanceSocketClientSpotApiTrading(this);
+            ExchangeData = new BinanceSocketClientSpotApiExchangeData(log, this);
+            Trading = new BinanceSocketClientSpotApiTrading(log, this);
         }
         #endregion
 
@@ -208,5 +215,20 @@ namespace Binance.Net.Clients.SpotApi
             }).ConfigureAwait(false);
             return result;
         }
+
+        internal async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? quoteQuantity, decimal? price, decimal? stopPrice, SpotOrderType? type)
+        {
+            if (Options.TradeRulesBehaviour == TradeRulesBehaviour.None)
+                return BinanceTradeRuleResult.CreatePassed(quantity, quoteQuantity, price, stopPrice);
+
+            if (ExchangeInfo == null || LastExchangeInfoUpdate == null || (DateTime.UtcNow - LastExchangeInfoUpdate.Value).TotalMinutes > Options.TradeRulesUpdateInterval.TotalMinutes)
+                await ExchangeData.GetExchangeInfoAsync().ConfigureAwait(false);
+
+            if (ExchangeInfo == null)
+                return BinanceTradeRuleResult.CreateFailed("Unable to retrieve trading rules, validation failed");
+
+            return BinanceHelpers.ValidateTradeRules(_log, Options.TradeRulesBehaviour, ExchangeInfo, symbol, quantity, quoteQuantity, price, stopPrice, type);
+        }
+
     }
 }

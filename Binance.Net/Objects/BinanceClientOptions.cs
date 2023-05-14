@@ -257,6 +257,15 @@ namespace Binance.Net.Objects
         }
 
         /// <summary>
+        /// Whether to check the trade rules when placing new orders and what to do if the trade isn't valid
+        /// </summary>
+        public TradeRulesBehaviour TradeRulesBehaviour { get; set; } = TradeRulesBehaviour.None;
+        /// <summary>
+        /// How often the trade rules should be updated. Only used when TradeRulesBehaviour is not None
+        /// </summary>
+        public TimeSpan TradeRulesUpdateInterval { get; set; } = TimeSpan.FromMinutes(60);
+
+        /// <summary>
         /// ctor
         /// </summary>
         public BinanceSocketApiClientOptions()
@@ -277,6 +286,8 @@ namespace Binance.Net.Objects
         /// <param name="newValues"></param>
         internal BinanceSocketApiClientOptions(BinanceSocketApiClientOptions baseOn, BinanceSocketApiClientOptions? newValues) : base(baseOn, newValues)
         {
+            TradeRulesBehaviour = newValues?.TradeRulesBehaviour ?? baseOn.TradeRulesBehaviour;
+            TradeRulesUpdateInterval = newValues?.TradeRulesUpdateInterval ?? baseOn.TradeRulesUpdateInterval;
             ApiCredentials = (BinanceApiCredentials?)newValues?.ApiCredentials?.Copy() ?? (BinanceApiCredentials?)baseOn.ApiCredentials?.Copy();
         }
     }

@@ -12,6 +12,8 @@ using System.Net.Http;
 using System;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
+using CryptoExchange.Net.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -19,13 +21,15 @@ namespace Binance.Net.Clients.SpotApi
     public class BinanceSocketClientSpotApiTrading : IBinanceSocketClientSpotApiTrading
     {
         private readonly BinanceSocketClientSpotApi _client;
+        private readonly Log _log;
 
         private const string _baseAddressWebsocketApi = "wss://ws-api.binance.com:443/ws-api/v3";
 
         #region constructor/destructor
 
-        internal BinanceSocketClientSpotApiTrading(BinanceSocketClientSpotApi client)
+        internal BinanceSocketClientSpotApiTrading(Log log, BinanceSocketClientSpotApi client)
         {
+            _log = log;
             _client = client;
         }
 
@@ -51,6 +55,14 @@ namespace Binance.Net.Clients.SpotApi
             int? strategyType = null,
             SelfTradePreventionMode? selfTradePreventionMode = null)
         {
+            // Check trade rules
+            var rulesCheck = await _client.CheckTradeRules(symbol, quantity, quoteQuantity, price, stopPrice, type).ConfigureAwait(false);
+            if (!rulesCheck.Passed)
+            {
+                _log.Write(LogLevel.Warning, rulesCheck.ErrorMessage!);
+                return new CallResult<BinanceResponse<BinancePlacedOrder>>(new ArgumentError(rulesCheck.ErrorMessage!));
+            }
+
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("symbol", symbol);
             parameters.AddParameter("side", EnumConverter.GetString(side));
@@ -71,7 +83,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #endregion
 
-        #region Place Order
+        #region Place Test Order
 
         /// <inheritdoc />
         public async Task<CallResult<BinanceResponse<BinancePlacedOrder>>> PlaceTestOrderAsync(string symbol,

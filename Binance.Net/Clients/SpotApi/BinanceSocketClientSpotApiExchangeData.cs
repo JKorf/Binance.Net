@@ -10,8 +10,10 @@ using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.Socket;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -25,15 +27,17 @@ namespace Binance.Net.Clients.SpotApi
     /// <inheritdoc />
     public class BinanceSocketClientSpotApiExchangeData : IBinanceSocketClientSpotApiExchangeData
     {
+        private readonly Log _log;
         private readonly BinanceSocketClientSpotApi _client;
 
         private const string _baseAddressWebsocketApi = "wss://ws-api.binance.com:443/ws-api/v3";
 
         #region constructor/destructor
 
-        internal BinanceSocketClientSpotApiExchangeData(BinanceSocketClientSpotApi client)
+        internal BinanceSocketClientSpotApiExchangeData(Log log, BinanceSocketClientSpotApi client)
         {
             _client = client;
+            _log = log;
         }
 
         #endregion
@@ -75,7 +79,14 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("symbols", symbols);
-            return await _client.QueryAsync<BinanceExchangeInfo>(_baseAddressWebsocketApi, $"exchangeInfo", parameters).ConfigureAwait(false);
+            var result = await _client.QueryAsync<BinanceExchangeInfo>(_baseAddressWebsocketApi, $"exchangeInfo", parameters).ConfigureAwait(false);
+            if (!result)
+                return result;
+
+            _client.ExchangeInfo = result.Data.Result;
+            _client.LastExchangeInfoUpdate = DateTime.UtcNow;
+            _log.Write(LogLevel.Information, "Trade rules updated");
+            return result;
         }
 
         #endregion
