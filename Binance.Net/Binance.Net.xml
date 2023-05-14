@@ -458,6 +458,9 @@
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesStreams.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceFuturesEventOrderBook}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesStreams.SubscribeToSymbolUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamSymbolUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesStreams.SubscribeToUserDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamConfigUpdate}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamMarginUpdate}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAccountUpdate}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdate}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -1977,6 +1980,9 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesStreams.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceFuturesEventOrderBook}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesStreams.SubscribeToSymbolUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamSymbolUpdate}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesStreams.SubscribeToUserDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamConfigUpdate}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamMarginUpdate}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAccountUpdate}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdate}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStrategyUpdate}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceGridUpdate}},System.Threading.CancellationToken)">
@@ -5444,6 +5450,14 @@
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesStreams.SubscribeToSymbolUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamSymbolUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to contract/symbol updates
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApi">
             <summary>
@@ -10625,6 +10639,14 @@
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesStreams.SubscribeToSymbolUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamSymbolUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to contract/symbol updates
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesStreams.SubscribeToUserDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamConfigUpdate}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamMarginUpdate}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAccountUpdate}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdate}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStrategyUpdate}},System.Action{CryptoExchange.Net.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceGridUpdate}},System.Threading.CancellationToken)">
             <summary>
@@ -24664,6 +24686,81 @@
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdateData.RealizedProfit">
             <summary>
             Realized profit of the trade
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamSymbolUpdate">
+            <summary>
+            Futures stream symbol update
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamSymbolUpdate.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamSymbolUpdate.Pair">
+            <summary>
+            Pair
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamSymbolUpdate.ContractType">
+            <summary>
+            Contract type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamSymbolUpdate.DeliveryDate">
+            <summary>
+            Delivery date
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamSymbolUpdate.OnboardDate">
+            <summary>
+            Onboard date
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamSymbolUpdate.Status">
+            <summary>
+            Symbol status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamSymbolUpdate.Brackets">
+            <summary>
+            Brackets
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.Socket.BinanceBracketUpdate">
+            <summary>
+            Bracket update
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceBracketUpdate.NotionalBracket">
+            <summary>
+            Notional bracket
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceBracketUpdate.FloorNotional">
+            <summary>
+            Floor notional
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceBracketUpdate.MaxNotional">
+            <summary>
+            Max notional
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceBracketUpdate.MaintenanceRatio">
+            <summary>
+            Maintenance ratio
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceBracketUpdate.MinLeverage">
+            <summary>
+            Min leverage
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceBracketUpdate.MaxLeverage">
+            <summary>
+            Max leverage
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.Socket.BinanceGridUpdate">

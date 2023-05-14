@@ -394,6 +394,17 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         #endregion
 
+        #region Contract Info Streams
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToSymbolUpdatesAsync(Action<DataEvent<BinanceFuturesStreamSymbolUpdate>> onMessage, CancellationToken ct = default)
+        {
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamSymbolUpdate>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
+            return await SubscribeAsync(BaseAddress, new[] { "contractInfo" }, handler, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #region User Data Streams
 
         /// <inheritdoc />

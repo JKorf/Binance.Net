@@ -311,6 +311,14 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerable<string> symbols, int? updateInterval, Action<DataEvent<IBinanceFuturesEventOrderBook>> onMessage, CancellationToken ct = default);
 
         /// <summary>
+        /// Subscribe to contract/symbol updates
+        /// </summary>
+        /// <param name="onMessage">The event handler for the received data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns></returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToSymbolUpdatesAsync(Action<DataEvent<BinanceFuturesStreamSymbolUpdate>> onMessage, CancellationToken ct = default);
+
+        /// <summary>
         /// Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStreams.StartUserStream method should be called.
         /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#user-data-streams" /></para>
         /// </summary>
