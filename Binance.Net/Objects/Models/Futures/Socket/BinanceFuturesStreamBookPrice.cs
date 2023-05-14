@@ -10,7 +10,6 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// </summary>
     public class BinanceFuturesStreamBookPrice : BinanceStreamBookPrice
     {
-
         /// <summary>
         /// Timestamp
         /// </summary>
