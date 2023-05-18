@@ -207,6 +207,32 @@ namespace Binance.Net.Converters
                     writer.WritePropertyName("avgPriceMins");
                     writer.WriteValue(pricePercentFilter.AveragePriceMinutes);
                     break;
+                case SymbolFilterType.PercentagePriceBySide:
+                    var pricePercentSideBySideFilter = (BinanceSymbolPercentPriceBySideFilter)filter;
+                    writer.WritePropertyName("askMultiplierUp");
+                    writer.WriteValue(pricePercentSideBySideFilter.AskMultiplierUp);
+                    writer.WritePropertyName("askMultiplierDown");
+                    writer.WriteValue(pricePercentSideBySideFilter.AskMultiplierDown);
+                    writer.WritePropertyName("bidMultiplierUp");
+                    writer.WriteValue(pricePercentSideBySideFilter.BidMultiplierUp);
+                    writer.WritePropertyName("bidMultiplierDown");
+                    writer.WriteValue(pricePercentSideBySideFilter.BidMultiplierDown);
+                    writer.WritePropertyName("avgPriceMins");
+                    writer.WriteValue(pricePercentSideBySideFilter.AveragePriceMinutes);
+                    break;                    
+                case SymbolFilterType.Notional:
+                    var notionalFilter = (BinanceSymbolNotionalFilter)filter;
+                    writer.WritePropertyName("minNotional");
+                    writer.WriteValue(notionalFilter.MinNotional);
+                    writer.WritePropertyName("maxNotional");
+                    writer.WriteValue(notionalFilter.MaxNotional);
+                    writer.WritePropertyName("applyMinToMarketOrders");
+                    writer.WriteValue(notionalFilter.ApplyMinToMarketOrders);
+                    writer.WritePropertyName("applyMaxToMarketOrders");
+                    writer.WriteValue(notionalFilter.ApplyMaxToMarketOrders);
+                    writer.WritePropertyName("avgPriceMins");
+                    writer.WriteValue(notionalFilter.AveragePriceMinutes);
+                    break;                
                 case SymbolFilterType.TrailingDelta:
                     var TrailingDelta = (BinanceSymbolTrailingDeltaFilter)filter;
                     writer.WritePropertyName("maxTrailingAboveDelta");
