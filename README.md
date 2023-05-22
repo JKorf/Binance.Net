@@ -28,6 +28,10 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 8.6.2 - 22 May 2023
+    * Added orderId filter to futures GetUserTradesAsync endpoints
+    * Fixed missing writers for BinanceSymbolFilter serialization
+
 * Version 8.6.1 - 14 May 2023
     * Added TradeRules validation to websocket PlaceOrder endpoint
     * Corrected futures all book tickers stream response model
