@@ -344,7 +344,7 @@
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceClientCoinFuturesApiTrading.GetForcedOrdersAsync(System.String,System.Nullable{Binance.Net.Enums.AutoCloseType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceClientCoinFuturesApiTrading.GetUserTradesAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceClientCoinFuturesApiTrading.GetUserTradesAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesStreams">
@@ -1858,7 +1858,7 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceClientUsdFuturesApiTrading.GetForcedOrdersAsync(System.String,System.Nullable{Binance.Net.Enums.AutoCloseType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceClientUsdFuturesApiTrading.GetUserTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceClientUsdFuturesApiTrading.GetUserTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceClientUsdFuturesApiTrading.PlaceVolumeParticipationOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,Binance.Net.Enums.OrderUrgency,System.String,System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{System.Int64},System.Threading.CancellationToken)">
@@ -5051,7 +5051,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of forced orders</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceClientCoinFuturesApiTrading.GetUserTradesAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceClientCoinFuturesApiTrading.GetUserTradesAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user trades for provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#account-trade-list-user_data" /></para>
@@ -5060,6 +5060,7 @@
             <param name="pair">Symbol to get trades for</param>
             <param name="limit">The max number of results</param>
             <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
+            <param name="orderId">Get the trades for a specific order</param>
             <param name="startTime">Orders newer than this date will be retrieved</param>
             <param name="endTime">Orders older than this date will be retrieved</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -10251,13 +10252,14 @@
             <param name="ct">Cancellation token</param>
             <returns>List of forced orders</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceClientUsdFuturesApiTrading.GetUserTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceClientUsdFuturesApiTrading.GetUserTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user trades for provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#account-trade-list-user_data" /></para>
             </summary>
             <param name="symbol">Symbol to get trades for</param>
             <param name="limit">The max number of results</param>
+            <param name="orderId">Get the trades for a specific order</param>
             <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
             <param name="startTime">Orders newer than this date will be retrieved</param>
             <param name="endTime">Orders older than this date will be retrieved</param>
