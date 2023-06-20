@@ -211,7 +211,7 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceProduct>>> GetProductsAsync(CancellationToken ct = default)
         {
-            var url = _baseClient.Options.SpotApiOptions.BaseAddress.Replace("api.", "www.").AppendPath("exchange-api/v2/public/asset-service/product/get-products");
+            var url = _baseClient.Options.SpotApiOptions.BaseAddress.Replace("api.", "www.").AppendPath("bapi/asset/v2/public/asset-service/product/get-products");
 
             var data = await _baseClient.SendRequestInternal<BinanceExchangeApiWrapper<IEnumerable<BinanceProduct>>>(new Uri(url), HttpMethod.Get, ct).ConfigureAwait(false);
             if (!data)
