@@ -14160,6 +14160,16 @@
             Fund details
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinancePayTrade.PayerInfo">
+            <summary>
+            Payer info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinancePayTrade.ReceiverInfo">
+            <summary>
+            Receiver info
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinancePayTradeDetails">
             <summary>
             Pay trade funds details
@@ -14173,6 +14183,76 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinancePayTradeDetails.Quantity">
             <summary>
             Quantity
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinancePayTradePayerInfo">
+            <summary>
+            Pay trade payer info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinancePayTradePayerInfo.Name">
+            <summary>
+            Nickname or merchant name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinancePayTradePayerInfo.Type">
+            <summary>
+            Account type，USER for personal，MERCHANT for merchant
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinancePayTradePayerInfo.BinanceId">
+            <summary>
+            Binance uid
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinancePayTradePayerInfo.AccountId">
+            <summary>
+            Binance pay id
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinancePayTradeReceiverInfo">
+            <summary>
+            Pay trade receiver info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinancePayTradeReceiverInfo.Name">
+            <summary>
+            Nickname or merchant name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinancePayTradeReceiverInfo.Type">
+            <summary>
+            Account type，USER for personal，MERCHANT for merchant
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinancePayTradeReceiverInfo.Email">
+            <summary>
+            Email
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinancePayTradeReceiverInfo.BinanceId">
+            <summary>
+            Binance uid
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinancePayTradeReceiverInfo.AccountId">
+            <summary>
+            Binance pay id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinancePayTradeReceiverInfo.CountryCode">
+            <summary>
+            International area code
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinancePayTradeReceiverInfo.PhoneNumber">
+            <summary>
+            Phone number
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinancePayTradeReceiverInfo.MobileCode">
+            <summary>
+            Country code
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinancePlacedOrder">
