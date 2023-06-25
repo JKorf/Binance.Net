@@ -1,11 +1,11 @@
 ---
-title: IBinanceClientSpotApiTrading
+title: IBinanceRestClientSpotApiTrading
 has_children: false
 parent: IBinanceClientSpotApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BinanceClient > SpotApi > Trading`  
+`BinanceClient > SpotApi > IBinanceRestClientTrading`  
 *Binance Spot trading endpoints, placing and mananging orders.*
   
 
@@ -20,7 +20,7 @@ grand_parent: Rest API documentation
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.AddToLiquidityPoolAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.AddToLiquidityPoolAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -49,7 +49,7 @@ Task<WebCallResult<BinanceBSwapOperationResult>> AddToLiquidityPoolAsync(int poo
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.AddToLiquidityPoolPreviewAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.AddToLiquidityPoolPreviewAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -78,7 +78,7 @@ Task<WebCallResult<BinanceBSwapPreviewResult>> AddToLiquidityPoolPreviewAsync(in
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.CancelAllMarginOrdersAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.CancelAllMarginOrdersAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -105,7 +105,7 @@ Task<WebCallResult<IEnumerable<BinanceOrderBase>>> CancelAllMarginOrdersAsync(st
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.CancelAllOrdersAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.CancelAllOrdersAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -131,7 +131,7 @@ Task<WebCallResult<IEnumerable<BinanceOrderBase>>> CancelAllOrdersAsync(string s
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.CancelMarginOcoOrderAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.CancelMarginOcoOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -161,7 +161,7 @@ Task<WebCallResult<BinanceMarginOrderOcoList>> CancelMarginOcoOrderAsync(string 
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.CancelMarginOrderAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.CancelMarginOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -191,7 +191,7 @@ Task<WebCallResult<BinanceOrderBase>> CancelMarginOrderAsync(string symbol, long
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.CancelOcoOrderAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.CancelOcoOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -220,7 +220,7 @@ Task<WebCallResult<BinanceOrderOcoList>> CancelOcoOrderAsync(string symbol, long
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.CancelOrderAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.CancelOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -248,7 +248,7 @@ Task<WebCallResult<BinanceOrderBase>> CancelOrderAsync(string symbol, long? orde
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.ConvertTransferAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.ConvertTransferAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -277,7 +277,7 @@ Task<WebCallResult<BinanceConvertTransferResult>> ConvertTransferAsync(string cl
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetC2CTradeHistoryAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetC2CTradeHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -307,7 +307,7 @@ Task<WebCallResult<IEnumerable<BinanceC2CUserTrade>>> GetC2CTradeHistoryAsync(Or
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetConvertTradeHistoryAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetConvertTradeHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -334,7 +334,7 @@ Task<WebCallResult<BinanceListResult<BinanceConvertTrade>>> GetConvertTradeHisto
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetConvertTransferHistoryAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetConvertTransferHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -365,7 +365,7 @@ Task<WebCallResult<BinanceQueryRecords<BinanceConvertTransferRecord>>> GetConver
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetLeveragedTokensRedemptionRecordsAsync();  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetLeveragedTokensRedemptionRecordsAsync();  
 ```  
 
 ```csharp  
@@ -395,7 +395,7 @@ Task<WebCallResult<IEnumerable<BinanceBlvtRedemption>>> GetLeveragedTokensRedemp
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetLeveragedTokensSubscriptionRecordsAsync();  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetLeveragedTokensSubscriptionRecordsAsync();  
 ```  
 
 ```csharp  
@@ -425,7 +425,7 @@ Task<WebCallResult<IEnumerable<BinanceBlvtSubscription>>> GetLeveragedTokensSubs
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetLiquidityPoolInfoAsync();  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetLiquidityPoolInfoAsync();  
 ```  
 
 ```csharp  
@@ -451,7 +451,7 @@ Task<WebCallResult<IEnumerable<BinanceBSwapPoolLiquidity>>> GetLiquidityPoolInfo
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetLiquidityPoolOperationRecordsAsync();  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetLiquidityPoolOperationRecordsAsync();  
 ```  
 
 ```csharp  
@@ -482,7 +482,7 @@ Task<WebCallResult<IEnumerable<BinanceBSwapOperation>>> GetLiquidityPoolOperatio
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetLiquidityPoolSwapHistoryAsync();  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetLiquidityPoolSwapHistoryAsync();  
 ```  
 
 ```csharp  
@@ -515,7 +515,7 @@ Task<WebCallResult<IEnumerable<BinanceBSwapRecord>>> GetLiquidityPoolSwapHistory
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetLiquidityPoolSwapQuoteAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetLiquidityPoolSwapQuoteAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -543,7 +543,7 @@ Task<WebCallResult<BinanceBSwapQuote>> GetLiquidityPoolSwapQuoteAsync(string quo
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetMarginOcoOrderAsync();  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetMarginOcoOrderAsync();  
 ```  
 
 ```csharp  
@@ -572,7 +572,7 @@ Task<WebCallResult<BinanceMarginOrderOcoList>> GetMarginOcoOrderAsync(string? sy
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetMarginOcoOrdersAsync();  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetMarginOcoOrdersAsync();  
 ```  
 
 ```csharp  
@@ -603,7 +603,7 @@ Task<WebCallResult<IEnumerable<BinanceMarginOrderOcoList>>> GetMarginOcoOrdersAs
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetMarginOpenOcoOrdersAsync();  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetMarginOpenOcoOrdersAsync();  
 ```  
 
 ```csharp  
@@ -630,7 +630,7 @@ Task<WebCallResult<IEnumerable<BinanceMarginOrderOcoList>>> GetMarginOpenOcoOrde
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetMarginOrderAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetMarginOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -659,7 +659,7 @@ Task<WebCallResult<BinanceOrder>> GetMarginOrderAsync(string symbol, long? order
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetMarginOrdersAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetMarginOrdersAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -690,7 +690,7 @@ Task<WebCallResult<IEnumerable<BinanceOrder>>> GetMarginOrdersAsync(string symbo
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetMarginUserTradesAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetMarginUserTradesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -721,7 +721,7 @@ Task<WebCallResult<IEnumerable<BinanceTrade>>> GetMarginUserTradesAsync(string s
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetOcoOrderAsync();  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetOcoOrderAsync();  
 ```  
 
 ```csharp  
@@ -748,7 +748,7 @@ Task<WebCallResult<BinanceOrderOcoList>> GetOcoOrderAsync(long? orderListId = de
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetOcoOrdersAsync();  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetOcoOrdersAsync();  
 ```  
 
 ```csharp  
@@ -777,7 +777,7 @@ Task<WebCallResult<IEnumerable<BinanceOrderOcoList>>> GetOcoOrdersAsync(long? fr
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetOpenMarginOrdersAsync();  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetOpenMarginOrdersAsync();  
 ```  
 
 ```csharp  
@@ -804,7 +804,7 @@ Task<WebCallResult<IEnumerable<BinanceOrder>>> GetOpenMarginOrdersAsync(string? 
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetOpenOcoOrdersAsync();  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetOpenOcoOrdersAsync();  
 ```  
 
 ```csharp  
@@ -829,7 +829,7 @@ Task<WebCallResult<IEnumerable<BinanceOrderOcoList>>> GetOpenOcoOrdersAsync(long
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetOpenOrdersAsync();  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetOpenOrdersAsync();  
 ```  
 
 ```csharp  
@@ -855,7 +855,7 @@ Task<WebCallResult<IEnumerable<BinanceOrder>>> GetOpenOrdersAsync(string? symbol
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetOrderAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -883,7 +883,7 @@ Task<WebCallResult<BinanceOrder>> GetOrderAsync(string symbol, long? orderId = d
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetOrdersAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetOrdersAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -913,7 +913,7 @@ Task<WebCallResult<IEnumerable<BinanceOrder>>> GetOrdersAsync(string symbol, lon
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetPayTradeHistoryAsync();  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetPayTradeHistoryAsync();  
 ```  
 
 ```csharp  
@@ -941,7 +941,7 @@ Task<WebCallResult<IEnumerable<BinancePayTrade>>> GetPayTradeHistoryAsync(DateTi
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetPreventedTradesAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetPreventedTradesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -971,7 +971,7 @@ Task<WebCallResult<IEnumerable<BinancePreventedTrade>>> GetPreventedTradesAsync(
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetStakingHistoryAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetStakingHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1003,7 +1003,7 @@ Task<WebCallResult<IEnumerable<BinanceStakingHistory>>> GetStakingHistoryAsync(S
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetStakingPositionsAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetStakingPositionsAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1032,7 +1032,7 @@ Task<WebCallResult<IEnumerable<BinanceStakingPosition>>> GetStakingPositionsAsyn
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.GetUserTradesAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.GetUserTradesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1063,7 +1063,7 @@ Task<WebCallResult<IEnumerable<BinanceTrade>>> GetUserTradesAsync(string symbol,
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.LiquidityPoolSwapAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.LiquidityPoolSwapAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1091,7 +1091,7 @@ Task<WebCallResult<BinanceBSwapResult>> LiquidityPoolSwapAsync(string quoteAsset
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.PlaceMarginOCOOrderAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.PlaceMarginOCOOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1131,7 +1131,7 @@ Task<WebCallResult<BinanceMarginOrderOcoList>> PlaceMarginOCOOrderAsync(string s
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.PlaceMarginOrderAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.PlaceMarginOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1169,7 +1169,7 @@ Task<WebCallResult<BinancePlacedOrder>> PlaceMarginOrderAsync(string symbol, Ord
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.PlaceOcoOrderAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.PlaceOcoOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1212,7 +1212,7 @@ Task<WebCallResult<BinanceOrderOcoList>> PlaceOcoOrderAsync(string symbol, Order
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.PlaceOrderAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.PlaceOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1252,7 +1252,7 @@ Task<WebCallResult<BinancePlacedOrder>> PlaceOrderAsync(string symbol, OrderSide
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.PlaceTestOrderAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.PlaceTestOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1292,7 +1292,7 @@ Task<WebCallResult<BinancePlacedOrder>> PlaceTestOrderAsync(string symbol, Order
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.PurchaseStakingProductAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.PurchaseStakingProductAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1321,7 +1321,7 @@ Task<WebCallResult<BinanceStakingPositionResult>> PurchaseStakingProductAsync(St
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.RedeemLeveragedTokenAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.RedeemLeveragedTokenAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1348,7 +1348,7 @@ Task<WebCallResult<BinanceBlvtRedeemResult>> RedeemLeveragedTokenAsync(string to
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.RedeemStakingProductAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.RedeemStakingProductAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1378,7 +1378,7 @@ Task<WebCallResult<BinanceStakingResult>> RedeemStakingProductAsync(StakingProdu
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.RemoveFromLiquidityPoolAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.RemoveFromLiquidityPoolAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1407,7 +1407,7 @@ Task<WebCallResult<BinanceBSwapOperationResult>> RemoveFromLiquidityPoolAsync(in
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.RemoveFromLiquidityPoolPreviewAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.RemoveFromLiquidityPoolPreviewAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1435,7 +1435,7 @@ Task<WebCallResult<BinanceBSwapPreviewResult>> RemoveFromLiquidityPoolPreviewAsy
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.ReplaceOrderAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.ReplaceOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1478,7 +1478,7 @@ Task<WebCallResult<BinanceReplaceOrderResult>> ReplaceOrderAsync(string symbol, 
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.SpotApi.Trading.SubscribeLeveragedTokenAsync(/* parameters */);  
+var result = await client.SpotApi.IBinanceRestClientTrading.SubscribeLeveragedTokenAsync(/* parameters */);  
 ```  
 
 ```csharp  

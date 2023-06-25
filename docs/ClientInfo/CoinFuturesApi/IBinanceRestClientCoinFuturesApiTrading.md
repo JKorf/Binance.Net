@@ -1,45 +1,19 @@
 ---
-title: IBinanceClientUsdFuturesApiTrading
+title: IBinanceRestClientCoinFuturesApiTrading
 has_children: false
-parent: IBinanceClientUsdFuturesApi
+parent: IBinanceClientCoinFuturesApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BinanceClient > UsdFuturesApi > Trading`  
-*Binance USD-M futures trading endpoints, placing and mananging orders.*
+`BinanceClient > CoinFuturesApi > IBinanceRestClientTrading`  
+*Binance COIN-M futures trading endpoints, placing and mananging orders.*
   
-
-***
-
-## CancelAlgoOrderAsync  
-
-[https://binance-docs.github.io/apidocs/spot/en/#cancel-algo-order-trade](https://binance-docs.github.io/apidocs/spot/en/#cancel-algo-order-trade)  
-<p>
-
-*Cancel an algo order*  
-
-```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.Trading.CancelAlgoOrderAsync(/* parameters */);  
-```  
-
-```csharp  
-Task<WebCallResult<BinanceAlgoResult>> CancelAlgoOrderAsync(long algoOrderId, long? receiveWindow = default, CancellationToken ct = default);  
-```  
-
-|Parameter|Description|
-|---|---|
-|algoOrderId|Algo id to cancel|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|_[Optional]_ ct|Cancellation token|
-
-</p>
 
 ***
 
 ## CancelAllOrdersAfterTimeoutAsync  
 
-[https://binance-docs.github.io/apidocs/futures/en/#auto-cancel-all-open-orders-trade](https://binance-docs.github.io/apidocs/futures/en/#auto-cancel-all-open-orders-trade)  
+[https://binance-docs.github.io/apidocs/delivery/en/#auto-cancel-all-open-orders-trade](https://binance-docs.github.io/apidocs/delivery/en/#auto-cancel-all-open-orders-trade)  
 <p>
 
 *Cancel all open orders of the specified symbol at the end of the specified countdown. This rest endpoint means to ensure your open orders are canceled in case of an outage. The endpoint should be called repeatedly as heartbeats*  
@@ -47,7 +21,7 @@ Task<WebCallResult<BinanceAlgoResult>> CancelAlgoOrderAsync(long algoOrderId, lo
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.Trading.CancelAllOrdersAfterTimeoutAsync(/* parameters */);  
+var result = await client.CoinFuturesApi.IBinanceRestClientTrading.CancelAllOrdersAfterTimeoutAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -67,14 +41,14 @@ Task<WebCallResult<BinanceFuturesCountDownResult>> CancelAllOrdersAfterTimeoutAs
 
 ## CancelAllOrdersAsync  
 
-[https://binance-docs.github.io/apidocs/futures/en/#cancel-all-open-orders-trade](https://binance-docs.github.io/apidocs/futures/en/#cancel-all-open-orders-trade)  
+[https://binance-docs.github.io/apidocs/delivery/en/#cancel-all-open-orders-trade](https://binance-docs.github.io/apidocs/delivery/en/#cancel-all-open-orders-trade)  
 <p>
 
 *Cancels all open orders*  
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.Trading.CancelAllOrdersAsync(/* parameters */);  
+var result = await client.CoinFuturesApi.IBinanceRestClientTrading.CancelAllOrdersAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -93,14 +67,14 @@ Task<WebCallResult<BinanceFuturesCancelAllOrders>> CancelAllOrdersAsync(string s
 
 ## CancelMultipleOrdersAsync  
 
-[https://binance-docs.github.io/apidocs/futures/en/#cancel-multiple-orders-trade](https://binance-docs.github.io/apidocs/futures/en/#cancel-multiple-orders-trade)  
+[https://binance-docs.github.io/apidocs/delivery/en/#cancel-multiple-orders-trade](https://binance-docs.github.io/apidocs/delivery/en/#cancel-multiple-orders-trade)  
 <p>
 
 *Cancels muliple orders*  
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.Trading.CancelMultipleOrdersAsync(/* parameters */);  
+var result = await client.CoinFuturesApi.IBinanceRestClientTrading.CancelMultipleOrdersAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -121,14 +95,14 @@ Task<WebCallResult<IEnumerable<CallResult<BinanceFuturesCancelOrder>>>> CancelMu
 
 ## CancelOrderAsync  
 
-[https://binance-docs.github.io/apidocs/futures/en/#cancel-order-trade](https://binance-docs.github.io/apidocs/futures/en/#cancel-order-trade)  
+[https://binance-docs.github.io/apidocs/delivery/en/#cancel-order-trade](https://binance-docs.github.io/apidocs/delivery/en/#cancel-order-trade)  
 <p>
 
 *Cancels a pending order*  
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.Trading.CancelOrderAsync(/* parameters */);  
+var result = await client.CoinFuturesApi.IBinanceRestClientTrading.CancelOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -147,75 +121,16 @@ Task<WebCallResult<BinanceFuturesCancelOrder>> CancelOrderAsync(string symbol, l
 
 ***
 
-## GetAlgoSubOrdersAsync  
-
-[https://binance-docs.github.io/apidocs/spot/en/#query-sub-orders-user_data](https://binance-docs.github.io/apidocs/spot/en/#query-sub-orders-user_data)  
-<p>
-
-*Get algo sub orders overview*  
-
-```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.Trading.GetAlgoSubOrdersAsync(/* parameters */);  
-```  
-
-```csharp  
-Task<WebCallResult<BinanceAlgoSubOrderList>> GetAlgoSubOrdersAsync(long algoId, int? page = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
-```  
-
-|Parameter|Description|
-|---|---|
-|algoId|Algo id|
-|_[Optional]_ page|Page|
-|_[Optional]_ limit|Max results|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|_[Optional]_ ct|Cancellation token|
-
-</p>
-
-***
-
-## GetClosedAlgoOrdersAsync  
-
-[https://binance-docs.github.io/apidocs/spot/en/#query-historical-algo-orders-user_data](https://binance-docs.github.io/apidocs/spot/en/#query-historical-algo-orders-user_data)  
-<p>
-
-*Get list of closed algo orders*  
-
-```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.Trading.GetClosedAlgoOrdersAsync();  
-```  
-
-```csharp  
-Task<WebCallResult<BinanceAlgoOrders>> GetClosedAlgoOrdersAsync(string? symbol = default, OrderSide? side = default, DateTime? startTime = default, DateTime? endTime = default, int? page = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
-```  
-
-|Parameter|Description|
-|---|---|
-|_[Optional]_ symbol|Filter by symbol|
-|_[Optional]_ side|Filter by side|
-|_[Optional]_ startTime|Fitler by start time|
-|_[Optional]_ endTime|Filter by end time|
-|_[Optional]_ page|Page|
-|_[Optional]_ limit|Max results|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|_[Optional]_ ct|Cancellation token|
-
-</p>
-
-***
-
 ## GetForcedOrdersAsync  
 
-[https://binance-docs.github.io/apidocs/futures/en/#user-39-s-force-orders-user_data](https://binance-docs.github.io/apidocs/futures/en/#user-39-s-force-orders-user_data)  
+[https://binance-docs.github.io/apidocs/delivery/en/#user-39-s-force-orders-user_data](https://binance-docs.github.io/apidocs/delivery/en/#user-39-s-force-orders-user_data)  
 <p>
 
 *Gets a list of users forced orders*  
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.Trading.GetForcedOrdersAsync();  
+var result = await client.CoinFuturesApi.IBinanceRestClientTrading.GetForcedOrdersAsync();  
 ```  
 
 ```csharp  
@@ -235,41 +150,16 @@ Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetForcedOrdersAsync(strin
 
 ***
 
-## GetOpenAlgoOrdersAsync  
-
-[https://binance-docs.github.io/apidocs/spot/en/#query-current-algo-open-orders-user_data](https://binance-docs.github.io/apidocs/spot/en/#query-current-algo-open-orders-user_data)  
-<p>
-
-*Get list of open algo orders*  
-
-```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.Trading.GetOpenAlgoOrdersAsync();  
-```  
-
-```csharp  
-Task<WebCallResult<BinanceAlgoOrders>> GetOpenAlgoOrdersAsync(long? receiveWindow = default, CancellationToken ct = default);  
-```  
-
-|Parameter|Description|
-|---|---|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|_[Optional]_ ct|Cancellation token|
-
-</p>
-
-***
-
 ## GetOpenOrderAsync  
 
-[https://binance-docs.github.io/apidocs/futures/en/#query-current-open-order-user_data](https://binance-docs.github.io/apidocs/futures/en/#query-current-open-order-user_data)  
+[https://binance-docs.github.io/apidocs/delivery/en/#query-current-open-order-user_data](https://binance-docs.github.io/apidocs/delivery/en/#query-current-open-order-user_data)  
 <p>
 
 *Retrieves data for a specific open order. Either orderId or origClientOrderId should be provided.*  
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.Trading.GetOpenOrderAsync(/* parameters */);  
+var result = await client.CoinFuturesApi.IBinanceRestClientTrading.GetOpenOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -290,14 +180,14 @@ Task<WebCallResult<BinanceFuturesOrder>> GetOpenOrderAsync(string symbol, long? 
 
 ## GetOpenOrdersAsync  
 
-[https://binance-docs.github.io/apidocs/futures/en/#current-all-open-orders-user_data](https://binance-docs.github.io/apidocs/futures/en/#current-all-open-orders-user_data)  
+[https://binance-docs.github.io/apidocs/delivery/en/#current-all-open-orders-user_data](https://binance-docs.github.io/apidocs/delivery/en/#current-all-open-orders-user_data)  
 <p>
 
 *Gets a list of open orders*  
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.Trading.GetOpenOrdersAsync();  
+var result = await client.CoinFuturesApi.IBinanceRestClientTrading.GetOpenOrdersAsync();  
 ```  
 
 ```csharp  
@@ -316,14 +206,14 @@ Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetOpenOrdersAsync(string?
 
 ## GetOrderAsync  
 
-[https://binance-docs.github.io/apidocs/futures/en/#query-order-user_data](https://binance-docs.github.io/apidocs/futures/en/#query-order-user_data)  
+[https://binance-docs.github.io/apidocs/delivery/en/#query-order-user_data](https://binance-docs.github.io/apidocs/delivery/en/#query-order-user_data)  
 <p>
 
 *Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.*  
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.Trading.GetOrderAsync(/* parameters */);  
+var result = await client.CoinFuturesApi.IBinanceRestClientTrading.GetOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -344,23 +234,23 @@ Task<WebCallResult<BinanceFuturesOrder>> GetOrderAsync(string symbol, long? orde
 
 ## GetOrdersAsync  
 
-[https://binance-docs.github.io/apidocs/futures/en/#all-orders-user_data](https://binance-docs.github.io/apidocs/futures/en/#all-orders-user_data)  
+[https://binance-docs.github.io/apidocs/delivery/en/#all-orders-user_data](https://binance-docs.github.io/apidocs/delivery/en/#all-orders-user_data)  
 <p>
 
 *Gets all orders for the provided symbol*  
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.Trading.GetOrdersAsync(/* parameters */);  
+var result = await client.CoinFuturesApi.IBinanceRestClientTrading.GetOrdersAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetOrdersAsync(string symbol, long? orderId = default, DateTime? startTime = default, DateTime? endTime = default, int? limit = default, int? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetOrdersAsync(string? symbol = default, long? orderId = default, DateTime? startTime = default, DateTime? endTime = default, int? limit = default, int? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|symbol|The symbol to get orders for|
+|_[Optional]_ symbol|The symbol to get orders for|
 |_[Optional]_ orderId|If set, only orders with an order id higher than the provided will be returned|
 |_[Optional]_ startTime|If set, only orders placed after this time will be returned|
 |_[Optional]_ endTime|If set, only orders placed before this time will be returned|
@@ -374,27 +264,29 @@ Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetOrdersAsync(string symb
 
 ## GetUserTradesAsync  
 
-[https://binance-docs.github.io/apidocs/futures/en/#account-trade-list-user_data](https://binance-docs.github.io/apidocs/futures/en/#account-trade-list-user_data)  
+[https://binance-docs.github.io/apidocs/delivery/en/#account-trade-list-user_data](https://binance-docs.github.io/apidocs/delivery/en/#account-trade-list-user_data)  
 <p>
 
 *Gets all user trades for provided symbol*  
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.Trading.GetUserTradesAsync(/* parameters */);  
+var result = await client.CoinFuturesApi.IBinanceRestClientTrading.GetUserTradesAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BinanceFuturesUsdtTrade>>> GetUserTradesAsync(string symbol, DateTime? startTime = default, DateTime? endTime = default, int? limit = default, long? fromId = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BinanceFuturesCoinTrade>>> GetUserTradesAsync(string? symbol = default, string? pair = default, DateTime? startTime = default, DateTime? endTime = default, int? limit = default, long? fromId = default, long? orderId = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|symbol|Symbol to get trades for|
+|_[Optional]_ symbol|Symbol to get trades for|
+|_[Optional]_ pair|Symbol to get trades for|
 |_[Optional]_ startTime|Orders newer than this date will be retrieved|
 |_[Optional]_ endTime|Orders older than this date will be retrieved|
 |_[Optional]_ limit|The max number of results|
 |_[Optional]_ fromId|TradeId to fetch from. Default gets most recent trades|
+|_[Optional]_ orderId|Get the trades for a specific order|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
@@ -404,14 +296,14 @@ Task<WebCallResult<IEnumerable<BinanceFuturesUsdtTrade>>> GetUserTradesAsync(str
 
 ## PlaceMultipleOrdersAsync  
 
-[https://binance-docs.github.io/apidocs/futures/en/#place-multiple-orders-trade](https://binance-docs.github.io/apidocs/futures/en/#place-multiple-orders-trade)  
+[https://binance-docs.github.io/apidocs/delivery/en/#place-multiple-orders-trade](https://binance-docs.github.io/apidocs/delivery/en/#place-multiple-orders-trade)  
 <p>
 
 *Place multiple orders in one call*  
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.Trading.PlaceMultipleOrdersAsync(/* parameters */);  
+var result = await client.CoinFuturesApi.IBinanceRestClientTrading.PlaceMultipleOrdersAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -430,14 +322,14 @@ Task<WebCallResult<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>> PlaceMul
 
 ## PlaceOrderAsync  
 
-[https://binance-docs.github.io/apidocs/futures/en/#new-order-trade](https://binance-docs.github.io/apidocs/futures/en/#new-order-trade)  
+[https://binance-docs.github.io/apidocs/delivery/en/#new-order-trade](https://binance-docs.github.io/apidocs/delivery/en/#new-order-trade)  
 <p>
 
 *Places a new order*  
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.Trading.PlaceOrderAsync(/* parameters */);  
+var result = await client.CoinFuturesApi.IBinanceRestClientTrading.PlaceOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -462,72 +354,6 @@ Task<WebCallResult<BinanceFuturesPlacedOrder>> PlaceOrderAsync(string symbol, Or
 |_[Optional]_ closePosition|Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.|
 |_[Optional]_ orderResponseType|The response type. Default Acknowledge|
 |_[Optional]_ priceProtect|If true when price reaches stopPrice, difference between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than "triggerProtect" of the symbol.|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|_[Optional]_ ct|Cancellation token|
-
-</p>
-
-***
-
-## PlaceTimeWeightedAveragePriceOrderAsync  
-
-[https://binance-docs.github.io/apidocs/spot/en/#time-weighted-average-price-twap-new-order-trade](https://binance-docs.github.io/apidocs/spot/en/#time-weighted-average-price-twap-new-order-trade)  
-<p>
-
-*Place a new Time Weighted Average Price order*  
-
-```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.Trading.PlaceTimeWeightedAveragePriceOrderAsync(/* parameters */);  
-```  
-
-```csharp  
-Task<WebCallResult<BinanceAlgoOrderResult>> PlaceTimeWeightedAveragePriceOrderAsync(string symbol, OrderSide side, decimal quantity, int duration, string? clientOrderId = default, bool? reduceOnly = default, decimal? limitPrice = default, PositionSide? positionSide = default, long? receiveWindow = default, CancellationToken ct = default);  
-```  
-
-|Parameter|Description|
-|---|---|
-|symbol|The symbol|
-|side|Order side|
-|quantity|Order quantity|
-|duration|Duration in seconds. Less than 5 minutes will be defaulted to 5 minutes, more than 24 hours will be defaulted to 24 hours.|
-|_[Optional]_ clientOrderId|Client order id|
-|_[Optional]_ reduceOnly|Reduce only|
-|_[Optional]_ limitPrice|Limit price of the order. If null will use market price|
-|_[Optional]_ positionSide|Position side|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|_[Optional]_ ct|Cancellation token|
-
-</p>
-
-***
-
-## PlaceVolumeParticipationOrderAsync  
-
-[https://binance-docs.github.io/apidocs/spot/en/#volume-participation-vp-new-order-trade](https://binance-docs.github.io/apidocs/spot/en/#volume-participation-vp-new-order-trade)  
-<p>
-
-*Place a new Volume Participation order*  
-
-```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.Trading.PlaceVolumeParticipationOrderAsync(/* parameters */);  
-```  
-
-```csharp  
-Task<WebCallResult<BinanceAlgoOrderResult>> PlaceVolumeParticipationOrderAsync(string symbol, OrderSide side, decimal quantity, OrderUrgency urgency, string? clientOrderId = default, bool? reduceOnly = default, decimal? limitPrice = default, PositionSide? positionSide = default, long? receiveWindow = default, CancellationToken ct = default);  
-```  
-
-|Parameter|Description|
-|---|---|
-|symbol|The symbol|
-|side|Order side|
-|quantity|Order quantity|
-|urgency|Represent the relative speed of the current execution|
-|_[Optional]_ clientOrderId|Client order id|
-|_[Optional]_ reduceOnly|Reduce only|
-|_[Optional]_ limitPrice|Limit price of the order. If null will use market price|
-|_[Optional]_ positionSide|Position side|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 

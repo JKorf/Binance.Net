@@ -1,11 +1,11 @@
 ---
-title: IBinanceClientGeneralApiFutures
+title: IBinanceRestClientGeneralApiFutures
 has_children: false
 parent: IBinanceClientGeneralApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BinanceClient > GeneralApi > Futures`  
+`BinanceClient > GeneralApi > IBinanceRestClientFutures`  
 *Binance futures interaction endpoints*
   
 
@@ -20,7 +20,7 @@ grand_parent: Rest API documentation
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.GeneralApi.Futures.AdjustCrossCollateralLoanToValueAsync(/* parameters */);  
+var result = await client.GeneralApi.IBinanceRestClientFutures.AdjustCrossCollateralLoanToValueAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -49,7 +49,7 @@ Task<WebCallResult<BinanceCrossCollateralAdjustLtvResult>> AdjustCrossCollateral
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.GeneralApi.Futures.BorrowForCrossCollateralAsync(/* parameters */);  
+var result = await client.GeneralApi.IBinanceRestClientFutures.BorrowForCrossCollateralAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -78,7 +78,7 @@ Task<WebCallResult<BinanceCrossCollateralBorrowResult>> BorrowForCrossCollateral
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.GeneralApi.Futures.GetAdjustCrossCollateralLoanToValueHistoryAsync();  
+var result = await client.GeneralApi.IBinanceRestClientFutures.GetAdjustCrossCollateralLoanToValueHistoryAsync();  
 ```  
 
 ```csharp  
@@ -108,7 +108,7 @@ Task<WebCallResult<BinanceQueryRecords<BinanceCrossCollateralAdjustLtvHistory>>>
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.GeneralApi.Futures.GetCrossCollateralBorrowHistoryAsync();  
+var result = await client.GeneralApi.IBinanceRestClientFutures.GetCrossCollateralBorrowHistoryAsync();  
 ```  
 
 ```csharp  
@@ -137,7 +137,7 @@ Task<WebCallResult<BinanceQueryRecords<BinanceCrossCollateralBorrowHistory>>> Ge
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.GeneralApi.Futures.GetCrossCollateralInformationAsync();  
+var result = await client.GeneralApi.IBinanceRestClientFutures.GetCrossCollateralInformationAsync();  
 ```  
 
 ```csharp  
@@ -162,7 +162,7 @@ Task<WebCallResult<IEnumerable<BinanceCrossCollateralInformation>>> GetCrossColl
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.GeneralApi.Futures.GetCrossCollateralLiquidationHistoryAsync();  
+var result = await client.GeneralApi.IBinanceRestClientFutures.GetCrossCollateralLiquidationHistoryAsync();  
 ```  
 
 ```csharp  
@@ -192,7 +192,7 @@ Task<WebCallResult<BinanceQueryRecords<BinanceCrossCollateralLiquidationHistory>
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.GeneralApi.Futures.GetCrossCollateralRepayHistoryAsync();  
+var result = await client.GeneralApi.IBinanceRestClientFutures.GetCrossCollateralRepayHistoryAsync();  
 ```  
 
 ```csharp  
@@ -221,7 +221,7 @@ Task<WebCallResult<BinanceQueryRecords<BinanceCrossCollateralRepayHistory>>> Get
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.GeneralApi.Futures.GetCrossCollateralWalletAsync();  
+var result = await client.GeneralApi.IBinanceRestClientFutures.GetCrossCollateralWalletAsync();  
 ```  
 
 ```csharp  
@@ -246,7 +246,7 @@ Task<WebCallResult<BinanceCrossCollateralWallet>> GetCrossCollateralWalletAsync(
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.GeneralApi.Futures.GetFuturesTransferHistoryAsync(/* parameters */);  
+var result = await client.GeneralApi.IBinanceRestClientFutures.GetFuturesTransferHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -276,7 +276,7 @@ Task<WebCallResult<BinanceQueryRecords<BinanceSpotFuturesTransfer>>> GetFuturesT
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.GeneralApi.Futures.GetMaxAmountForAdjustCrossCollateralLoanToValueAsync(/* parameters */);  
+var result = await client.GeneralApi.IBinanceRestClientFutures.GetMaxAmountForAdjustCrossCollateralLoanToValueAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -303,7 +303,7 @@ Task<WebCallResult<BinanceCrossCollateralAdjustMaxAmounts>> GetMaxAmountForAdjus
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.GeneralApi.Futures.GetRateAfterAdjustLoanToValueAsync(/* parameters */);  
+var result = await client.GeneralApi.IBinanceRestClientFutures.GetRateAfterAdjustLoanToValueAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -332,7 +332,7 @@ Task<WebCallResult<BinanceCrossCollateralAfterAdjust>> GetRateAfterAdjustLoanToV
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.GeneralApi.Futures.RepayForCrossCollateralAsync(/* parameters */);  
+var result = await client.GeneralApi.IBinanceRestClientFutures.RepayForCrossCollateralAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -360,7 +360,7 @@ Task<WebCallResult<BinanceCrossCollateralRepayResult>> RepayForCrossCollateralAs
 
 ```csharp  
 var client = new BinanceClient();  
-var result = await client.GeneralApi.Futures.TransferFuturesAccountAsync(/* parameters */);  
+var result = await client.GeneralApi.IBinanceRestClientFutures.TransferFuturesAccountAsync(/* parameters */);  
 ```  
 
 ```csharp  
