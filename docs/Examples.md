@@ -83,14 +83,14 @@ var orderData = await binanceRestClient.SpotApi.Trading.PlaceOrderAsync(
                 0.001m,
                 50000,
                 timeInForce: TimeInForce.GoodTillCanceled);
-				
-// Placing a market buy order for 50USDT				
+                
+// Placing a market buy order for 50USDT                
 var orderData = await binanceRestClient.SpotApi.Trading.PlaceOrderAsync(
                 "BTCUSDT",
                 OrderSide.Buy,
                 SpotOrderType.Market,
                 quoteQuantity: 50);
-										
+                                        
 // Place a stop loss order, place a limit order of 0.001 BTC at 39000USDT each when the last trade price drops below 40000USDT
 var orderData = await binanceRestClient.SpotApi.Trading.PlaceOrderAsync(
                 "BTCUSDT",
@@ -129,7 +129,7 @@ var userTradesResult = await binanceRestClient.SpotApi.Trading.GetUserTradesAsyn
 ```csharp
 var subscribeResult = await binanceSocketClient.SpotApi.SubscribeToAllTickerUpdatesAsync(data =>
 {
-	// Handle ticker data
+    // Handle ticker data
 });
 ```
 
@@ -138,26 +138,26 @@ var subscribeResult = await binanceSocketClient.SpotApi.SubscribeToAllTickerUpda
 var listenKey = await binanceRestClient.SpotApi.Account.StartUserStreamAsync();
 if (!listenKey.Success)
 {
-	// Handler failure
-	return;
+    // Handler failure
+    return;
 }
 var sub = await binanceSocketClient.SpotApi.SubscribeToUserDataUpdatesAsync(listenKey.Data, 
-	data =>
-	{
-		// Handle order update
-	},
-	data =>
-	{
-		// Handle oco order update
-	},
-	data =>
-	{
-		// Handle account balance update, caused by trading
-	}, 
-	data =>
-	{
-		// Handle account balance update, caused by withdrawal/deposit or transfers
-	});
+    data =>
+    {
+        // Handle order update
+    },
+    data =>
+    {
+        // Handle oco order update
+    },
+    data =>
+    {
+        // Handle account balance update, caused by trading
+    }, 
+    data =>
+    {
+        // Handle account balance update, caused by withdrawal/deposit or transfers
+    });
 ```
 
 </BlockQuote>
@@ -199,7 +199,7 @@ var orderData = await binanceRestClient.UsdFuturesApi.Trading.PlaceOrderAsync(
                 0.001m,
                 50000,
                 timeInForce: TimeInForce.GoodTillCanceled);
-															
+                                                            
 // Place a stop loss order, place a limit order of 0.001 BTC at 39000USDT each when the last trade price drops below 40000USDT
 var orderData =  await binanceRestClient.UsdFuturesApi.Trading.PlaceOrderAsync(
                 "BTCUSDT",
@@ -209,7 +209,7 @@ var orderData =  await binanceRestClient.UsdFuturesApi.Trading.PlaceOrderAsync(
                 39000,
                 timeInForce: Binance.Net.Enums.TimeInForce.GoodTillCanceled,
                 stopPrice: 40000);
-				
+                
 // Place a buy market order and set TakeProfit/StopLoss for the position ( result checking omitted )
 var openPositionResult = await binanceRestClient.UsdFuturesApi.Trading.PlaceOrderAsync("BTCUSDT", OrderSide.Buy, FuturesOrderType.Market, 0.001m);
 var stopLossResult = await binanceRestClient.UsdFuturesApi.Trading.PlaceOrderAsync("BTCUSDT", OrderSide.Sell, FuturesOrderType.StopMarket, quantity: null, closePosition: true, stopPrice: 40000);
@@ -243,7 +243,7 @@ var userTradesResult = await binanceRestClient.UsdFuturesApi.Trading.GetUserTrad
 ```csharp
 var subscribeResult = await binanceSocketClient.UsdFuturesApi.SubscribeToAllTickerUpdatesAsync(data => 
 {
-	// Handle ticker data
+    // Handle ticker data
 });
 ```
 
@@ -252,30 +252,30 @@ var subscribeResult = await binanceSocketClient.UsdFuturesApi.SubscribeToAllTick
 var listenKey = await binanceRestClient.UsdFuturesApi.Account.StartUserStreamAsync();
 if (!listenKey.Success)
 {
-	// Handler failure
-	return;
+    // Handler failure
+    return;
 }
 var sub = await binanceSocketClient.UsdFuturesApi.SubscribeToUserDataUpdatesAsync(listenKey.Data,
-	data =>
-	{
-		// Handle leverage update
-	},
-	data =>
-	{
-		// Handle margin update
-	},
-	data =>
-	{
-		// Handle account balance update, caused by trading
-	},
-	data =>
-	{
-		// Handle order update
-	},
-	data =>
-	{
-		// Handle listen key expired
-	});
+    data =>
+    {
+        // Handle leverage update
+    },
+    data =>
+    {
+        // Handle margin update
+    },
+    data =>
+    {
+        // Handle account balance update, caused by trading
+    },
+    data =>
+    {
+        // Handle order update
+    },
+    data =>
+    {
+        // Handle listen key expired
+    });
 ```
 
 </BlockQuote>
@@ -346,7 +346,7 @@ var userTradesResult = await binanceRestClient.CoinFuturesApi.Trading.GetUserTra
 ```csharp
 var subscribeResult = await binanceSocketClient.CoinFuturesApi.SubscribeToAllTickerUpdatesAsync(data =>
 {
-	// Handle ticker data
+    // Handle ticker data
 });
 ```
 
@@ -355,30 +355,30 @@ var subscribeResult = await binanceSocketClient.CoinFuturesApi.SubscribeToAllTic
 var listenKey = await binanceRestClient.CoinFuturesApi.Account.StartUserStreamAsync();
 if (!listenKey.Success)
 {
-	// Handler failure
-	return;
+    // Handler failure
+    return;
 }
 var sub = await binanceSocketClient.CoinFuturesApi.SubscribeToUserDataUpdatesAsync(listenKey.Data,
-	data =>
-	{
-		// Handle leverage update
-	},
-	data =>
-	{
-		// Handle margin update
-	},
-	data =>
-	{
-		// Handle account balance update, caused by trading
-	},
-	data =>
-	{
-		// Handle order update
-	},
-	data =>
-	{
-		// Handle listen key expired
-	});
+    data =>
+    {
+        // Handle leverage update
+    },
+    data =>
+    {
+        // Handle margin update
+    },
+    data =>
+    {
+        // Handle account balance update, caused by trading
+    },
+    data =>
+    {
+        // Handle order update
+    },
+    data =>
+    {
+        // Handle listen key expired
+    });
 ```
 
 </BlockQuote>
