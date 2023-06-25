@@ -28,6 +28,15 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 9.0.0 - 25 Jun 2023
+    * Updated CryptoExchange.Net to version 6.0.0
+    * Renamed BinanceClient to BinanceRestClient
+    * Renamed UsdFuturesStreams and CoinFuturesStreams to UsdFuturesApi and CoinFuturesApi on the BinanceSocketClient
+    * Updated endpoints to consistently use a base url without any path as basis to make switching environments/base urls clearer
+    * Removed BinanceApiCredentials as the base ApiCredentials now supports RSA signing
+    * Added IBinanceOrderBookFactory and implementation for creating order books
+    * Updated dependency injection register method (AddBinance)
+
 * Version 8.6.3 - 19 Jun 2023
     * Fixed trading rules check not actually applying to the parameters send when placing an order with the socket client
 
