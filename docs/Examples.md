@@ -16,10 +16,10 @@ Make sure to read the [CryptoExchange.Net documentation](https://jkorf.github.io
 ### Subaccounts management
 ```csharp
 // Get sub account list
-var subAccountBalances = await binanceClient.GeneralApi.SubAccount.GetSubAccountsAsync();
+var subAccountBalances = await binanceRestClient.GeneralApi.SubAccount.GetSubAccountsAsync();
 
 // Transfer 0.001m BTC from master account to a subaccount
-var transferResult = await binanceClient.GeneralApi.SubAccount.TransferSubAccountAsync(
+var transferResult = await binanceRestClient.GeneralApi.SubAccount.TransferSubAccountAsync(
                     TransferAccountType.Spot, 
                     TransferAccountType.UsdtFuture, 
                     "BTC",
@@ -30,16 +30,16 @@ var transferResult = await binanceClient.GeneralApi.SubAccount.TransferSubAccoun
 ### Futures collateral
 ```csharp
 // Add collateral
-var result = await binanceClient.GeneralApi.Futures.AdjustCrossCollateralLoanToValueAsync("BTC", "BUSD", 1, AdjustRateDirection.Additional);
+var result = await binanceRestClient.GeneralApi.Futures.AdjustCrossCollateralLoanToValueAsync("BTC", "BUSD", 1, AdjustRateDirection.Additional);
 
 // Get transfer history
-var transferHistory = await binanceClient.GeneralApi.Futures.GetFuturesTransferHistoryAsync("BTC", DateTime.UtcNow.AddDays(-10));
+var transferHistory = await binanceRestClient.GeneralApi.Futures.GetFuturesTransferHistoryAsync("BTC", DateTime.UtcNow.AddDays(-10));
 ```
 
 ### Mining
 ```csharp
 // Get mining info
-var result = await binanceClient.GeneralApi.Mining.GetMiningCoinListAsync();
+var result = await binanceRestClient.GeneralApi.Mining.GetMiningCoinListAsync();
 ```
 
 
@@ -56,27 +56,27 @@ var result = await binanceClient.GeneralApi.Mining.GetMiningCoinListAsync();
 ### Get market data
 ```csharp
 // Getting info on all symbols
-var spotSymbolData = await binanceClient.SpotApi.ExchangeData.GetExchangeInfoAsync();
+var spotSymbolData = await binanceRestClient.SpotApi.ExchangeData.GetExchangeInfoAsync();
 
 // Getting ticker
-var spotTickerData = await binanceClient.SpotApi.ExchangeData.GetTickersAsync();
+var spotTickerData = await binanceRestClient.SpotApi.ExchangeData.GetTickersAsync();
 
 // Getting the order book of a symbol
-var spotOrderBookData = await binanceClient.SpotApi.ExchangeData.GetOrderBookAsync("BTCUSDT");
+var spotOrderBookData = await binanceRestClient.SpotApi.ExchangeData.GetOrderBookAsync("BTCUSDT");
 
 // Getting recent trades of a symbol
-var spotTradeHistoryData = await binanceClient.SpotApi.ExchangeData.GetTradeHistoryAsync("BTCUSDT");
+var spotTradeHistoryData = await binanceRestClient.SpotApi.ExchangeData.GetTradeHistoryAsync("BTCUSDT");
 ```
 
 ### Requesting balances
 Account info includes a list of balances
 ```csharp
-var spotAccountInfo = await binanceClient.SpotApi.Account.GetAccountInfoAsync();
+var spotAccountInfo = await binanceRestClient.SpotApi.Account.GetAccountInfoAsync();
 ```
 ### Placing order
 ```csharp
 // Placing a buy limit order for 0.001 BTC at a price of 50000USDT each
-var orderData = await binanceClient.SpotApi.Trading.PlaceOrderAsync(
+var orderData = await binanceRestClient.SpotApi.Trading.PlaceOrderAsync(
                 "BTCUSDT",
                 OrderSide.Buy,
                 SpotOrderType.Limit,
@@ -85,14 +85,14 @@ var orderData = await binanceClient.SpotApi.Trading.PlaceOrderAsync(
                 timeInForce: TimeInForce.GoodTillCanceled);
 				
 // Placing a market buy order for 50USDT				
-var orderData = await binanceClient.SpotApi.Trading.PlaceOrderAsync(
+var orderData = await binanceRestClient.SpotApi.Trading.PlaceOrderAsync(
                 "BTCUSDT",
                 OrderSide.Buy,
                 SpotOrderType.Market,
                 quoteQuantity: 50);
 										
 // Place a stop loss order, place a limit order of 0.001 BTC at 39000USDT each when the last trade price drops below 40000USDT
-var orderData = await binanceClient.SpotApi.Trading.PlaceOrderAsync(
+var orderData = await binanceRestClient.SpotApi.Trading.PlaceOrderAsync(
                 "BTCUSDT",
                 OrderSide.Buy,
                 SpotOrderType.StopLossLimit,
@@ -105,29 +105,29 @@ var orderData = await binanceClient.SpotApi.Trading.PlaceOrderAsync(
 ### Requesting a specific order
 ```csharp
 // Request info on order with id `1234`
-var orderData = await binanceClient.SpotApi.Trading.GetOrderAsync("BTCUSDT", 1234);
+var orderData = await binanceRestClient.SpotApi.Trading.GetOrderAsync("BTCUSDT", 1234);
 ```
 
 ### Requesting order history
 ```csharp
 // Get all orders conform the parameters
- var ordersData = await binanceClient.SpotApi.Trading.GetOrdersAsync("BTCUSDT");
+ var ordersData = await binanceRestClient.SpotApi.Trading.GetOrdersAsync("BTCUSDT");
 ```
 
 ### Cancel order
 ```csharp
 // Cancel order with id `1234`
-var orderData = await binanceClient.SpotApi.Trading.CancelOrderAsync("BTCUSDT", 1234);
+var orderData = await binanceRestClient.SpotApi.Trading.CancelOrderAsync("BTCUSDT", 1234);
 ```
 
 ### Get user trades
 ```csharp
-var userTradesResult = await binanceClient.SpotApi.Trading.GetUserTradesAsync("BTCUSDT");
+var userTradesResult = await binanceRestClient.SpotApi.Trading.GetUserTradesAsync("BTCUSDT");
 ```
 
 ### Subscribing to market data updates
 ```csharp
-var subscribeResult = await binanceSocketClient.SpotStreams.SubscribeToAllTickerUpdatesAsync(data =>
+var subscribeResult = await binanceSocketClient.SpotApi.SubscribeToAllTickerUpdatesAsync(data =>
 {
 	// Handle ticker data
 });
@@ -135,13 +135,13 @@ var subscribeResult = await binanceSocketClient.SpotStreams.SubscribeToAllTicker
 
 ### Subscribing to order updates
 ```csharp
-var listenKey = await binanceClient.SpotApi.Account.StartUserStreamAsync();
+var listenKey = await binanceRestClient.SpotApi.Account.StartUserStreamAsync();
 if (!listenKey.Success)
 {
 	// Handler failure
 	return;
 }
-var sub = await binanceSocketClient.SpotStreams.SubscribeToUserDataUpdatesAsync(listenKey.Data, 
+var sub = await binanceSocketClient.SpotApi.SubscribeToUserDataUpdatesAsync(listenKey.Data, 
 	data =>
 	{
 		// Handle order update
@@ -173,26 +173,26 @@ var sub = await binanceSocketClient.SpotStreams.SubscribeToUserDataUpdatesAsync(
 ### Get market data
 ```csharp
 // Getting info on all symbols
-var usdFuturesSymbolData = await binanceClient.UsdFuturesApi.ExchangeData.GetExchangeInfoAsync();
+var usdFuturesSymbolData = await binanceRestClient.UsdFuturesApi.ExchangeData.GetExchangeInfoAsync();
 
 // Getting ticker
-var usdFuturesTickerData = await binanceClient.UsdFuturesApi.ExchangeData.GetTickersAsync();
+var usdFuturesTickerData = await binanceRestClient.UsdFuturesApi.ExchangeData.GetTickersAsync();
 
 // Getting the order book of a symbol
-var usdFuturesOrderBookData = await binanceClient.UsdFuturesApi.ExchangeData.GetOrderBookAsync("BTCUSDT");
+var usdFuturesOrderBookData = await binanceRestClient.UsdFuturesApi.ExchangeData.GetOrderBookAsync("BTCUSDT");
 
 // Getting recent trades of a symbol
-var usdFuturesTradeHistoryData = await binanceClient.UsdFuturesApi.ExchangeData.GetTradeHistoryAsync("BTCUSDT");
+var usdFuturesTradeHistoryData = await binanceRestClient.UsdFuturesApi.ExchangeData.GetTradeHistoryAsync("BTCUSDT");
 ```
 
 ### Requesting balances
 ```csharp
-var balanceData = await binanceClient.UsdFuturesApi.Account.GetBalancesAsync();
+var balanceData = await binanceRestClient.UsdFuturesApi.Account.GetBalancesAsync();
 ```
 ### Placing order
 ```csharp
 // Placing a buy limit order for 0.001 BTC at a price of 50000USDT each
-var orderData = await binanceClient.UsdFuturesApi.Trading.PlaceOrderAsync(
+var orderData = await binanceRestClient.UsdFuturesApi.Trading.PlaceOrderAsync(
                 "BTCUSDT",
                 OrderSide.Buy,
                 FuturesOrderType.Limit,
@@ -201,7 +201,7 @@ var orderData = await binanceClient.UsdFuturesApi.Trading.PlaceOrderAsync(
                 timeInForce: TimeInForce.GoodTillCanceled);
 															
 // Place a stop loss order, place a limit order of 0.001 BTC at 39000USDT each when the last trade price drops below 40000USDT
-var orderData =  await binanceClient.UsdFuturesApi.Trading.PlaceOrderAsync(
+var orderData =  await binanceRestClient.UsdFuturesApi.Trading.PlaceOrderAsync(
                 "BTCUSDT",
                 OrderSide.Buy,
                 FuturesOrderType.Stop,
@@ -211,37 +211,37 @@ var orderData =  await binanceClient.UsdFuturesApi.Trading.PlaceOrderAsync(
                 stopPrice: 40000);
 				
 // Place a buy market order and set TakeProfit/StopLoss for the position ( result checking omitted )
-var openPositionResult = await binanceClient.UsdFuturesApi.Trading.PlaceOrderAsync("BTCUSDT", OrderSide.Buy, FuturesOrderType.Market, 0.001m);
-var stopLossResult = await binanceClient.UsdFuturesApi.Trading.PlaceOrderAsync("BTCUSDT", OrderSide.Sell, FuturesOrderType.StopMarket, quantity: null, closePosition: true, stopPrice: 40000);
-var takeProfitResult = await binanceClient.UsdFuturesApi.Trading.PlaceOrderAsync("BTCUSDT", OrderSide.Sell, FuturesOrderType.TakeProfitMarket, quantity: null, closePosition: true, stopPrice: 43000);
+var openPositionResult = await binanceRestClient.UsdFuturesApi.Trading.PlaceOrderAsync("BTCUSDT", OrderSide.Buy, FuturesOrderType.Market, 0.001m);
+var stopLossResult = await binanceRestClient.UsdFuturesApi.Trading.PlaceOrderAsync("BTCUSDT", OrderSide.Sell, FuturesOrderType.StopMarket, quantity: null, closePosition: true, stopPrice: 40000);
+var takeProfitResult = await binanceRestClient.UsdFuturesApi.Trading.PlaceOrderAsync("BTCUSDT", OrderSide.Sell, FuturesOrderType.TakeProfitMarket, quantity: null, closePosition: true, stopPrice: 43000);
 ```
 
 ### Requesting a specific order
 ```csharp
 // Request info on order with id `1234`
-var orderData = await binanceClient.UsdFuturesApi.Trading.GetOrderAsync("BTCUSDT", 1234);
+var orderData = await binanceRestClient.UsdFuturesApi.Trading.GetOrderAsync("BTCUSDT", 1234);
 ```
 
 ### Requesting order history
 ```csharp
 // Get all orders conform the parameters
- var ordersData = await binanceClient.UsdFuturesApi.Trading.GetOrdersAsync("BTCUSDT");
+ var ordersData = await binanceRestClient.UsdFuturesApi.Trading.GetOrdersAsync("BTCUSDT");
 ```
 
 ### Cancel order
 ```csharp
 // Cancel order with id `1234`
-var orderData = await binanceClient.UsdFuturesApi.Trading.CancelOrderAsync("BTCUSDT", 1234);
+var orderData = await binanceRestClient.UsdFuturesApi.Trading.CancelOrderAsync("BTCUSDT", 1234);
 ```
 
 ### Get user trades
 ```csharp
-var userTradesResult = await binanceClient.UsdFuturesApi.Trading.GetUserTradesAsync("BTCUSDT");
+var userTradesResult = await binanceRestClient.UsdFuturesApi.Trading.GetUserTradesAsync("BTCUSDT");
 ```
 
 ### Subscribing to market data updates
 ```csharp
-var subscribeResult = await binanceSocketClient.UsdFuturesStreams.SubscribeToAllTickerUpdatesAsync(data => 
+var subscribeResult = await binanceSocketClient.UsdFuturesApi.SubscribeToAllTickerUpdatesAsync(data => 
 {
 	// Handle ticker data
 });
@@ -249,13 +249,13 @@ var subscribeResult = await binanceSocketClient.UsdFuturesStreams.SubscribeToAll
 
 ### Subscribing to order updates
 ```csharp
-var listenKey = await binanceClient.UsdFuturesApi.Account.StartUserStreamAsync();
+var listenKey = await binanceRestClient.UsdFuturesApi.Account.StartUserStreamAsync();
 if (!listenKey.Success)
 {
 	// Handler failure
 	return;
 }
-var sub = await binanceSocketClient.UsdFuturesStreams.SubscribeToUserDataUpdatesAsync(listenKey.Data,
+var sub = await binanceSocketClient.UsdFuturesApi.SubscribeToUserDataUpdatesAsync(listenKey.Data,
 	data =>
 	{
 		// Handle leverage update
@@ -291,26 +291,26 @@ var sub = await binanceSocketClient.UsdFuturesStreams.SubscribeToUserDataUpdates
 ### Get market data
 ```csharp
 // Getting info on all symbols
-var coinFuturesSymbolData = await binanceClient.CoinFuturesApi.ExchangeData.GetExchangeInfoAsync();
+var coinFuturesSymbolData = await binanceRestClient.CoinFuturesApi.ExchangeData.GetExchangeInfoAsync();
 
 // Getting ticker
-var coinFuturesTickerData = await binanceClient.CoinFuturesApi.ExchangeData.GetTickersAsync();
+var coinFuturesTickerData = await binanceRestClient.CoinFuturesApi.ExchangeData.GetTickersAsync();
 
 // Getting the order book of a symbol
-var coinFuturesOrderBookData = await binanceClient.CoinFuturesApi.ExchangeData.GetOrderBookAsync("BTCUSD_PERP");
+var coinFuturesOrderBookData = await binanceRestClient.CoinFuturesApi.ExchangeData.GetOrderBookAsync("BTCUSD_PERP");
 
 // Getting recent trades of a symbol
-var coinFuturesTradeHistoryData = await binanceClient.CoinFuturesApi.ExchangeData.GetTradeHistoryAsync("BTCUSD_PERP");
+var coinFuturesTradeHistoryData = await binanceRestClient.CoinFuturesApi.ExchangeData.GetTradeHistoryAsync("BTCUSD_PERP");
 ```
 
 ### Requesting balances
 ```csharp
-var balanceData = await binanceClient.CoinFuturesApi.Account.GetBalancesAsync();
+var balanceData = await binanceRestClient.CoinFuturesApi.Account.GetBalancesAsync();
 ```
 ### Placing order
 ```csharp
 // Placing a buy limit order for 100 contracts at a price of 50000USDT each
-var orderData = await binanceClient.CoinFuturesApi.Trading.PlaceOrderAsync(
+var orderData = await binanceRestClient.CoinFuturesApi.Trading.PlaceOrderAsync(
                 "BTCUSD_200925",
                 OrderSide.Buy,
                 FuturesOrderType.Limit,
@@ -322,29 +322,29 @@ var orderData = await binanceClient.CoinFuturesApi.Trading.PlaceOrderAsync(
 ### Requesting a specific order
 ```csharp
 // Request info on order with id `1234`
-var orderData = await binanceClient.CoinFuturesApi.Trading.GetOrderAsync("BTCUSD_PERP", 1234);
+var orderData = await binanceRestClient.CoinFuturesApi.Trading.GetOrderAsync("BTCUSD_PERP", 1234);
 ```
 
 ### Requesting order history
 ```csharp
 // Get all orders conform the parameters
- var ordersData = await binanceClient.CoinFuturesApi.Trading.GetOrdersAsync("BTCUSD_PERP");
+ var ordersData = await binanceRestClient.CoinFuturesApi.Trading.GetOrdersAsync("BTCUSD_PERP");
 ```
 
 ### Cancel order
 ```csharp
 // Cancel order with id `1234`
-var orderData = await binanceClient.CoinFuturesApi.Trading.CancelOrderAsync("BTCUSD_PERP", 1234);
+var orderData = await binanceRestClient.CoinFuturesApi.Trading.CancelOrderAsync("BTCUSD_PERP", 1234);
 ```
 
 ### Get user trades
 ```csharp
-var userTradesResult = await binanceClient.CoinFuturesApi.Trading.GetUserTradesAsync();
+var userTradesResult = await binanceRestClient.CoinFuturesApi.Trading.GetUserTradesAsync();
 ```
 
 ### Subscribing to market data updates
 ```csharp
-var subscribeResult = await binanceSocketClient.CoinFuturesStreams.SubscribeToAllTickerUpdatesAsync(data =>
+var subscribeResult = await binanceSocketClient.CoinFuturesApi.SubscribeToAllTickerUpdatesAsync(data =>
 {
 	// Handle ticker data
 });
@@ -352,7 +352,7 @@ var subscribeResult = await binanceSocketClient.CoinFuturesStreams.SubscribeToAl
 
 ### Subscribing to order updates
 ```csharp
-var listenKey = await binanceClient.CoinFuturesApi.Account.StartUserStreamAsync();
+var listenKey = await binanceRestClient.CoinFuturesApi.Account.StartUserStreamAsync();
 if (!listenKey.Success)
 {
 	// Handler failure

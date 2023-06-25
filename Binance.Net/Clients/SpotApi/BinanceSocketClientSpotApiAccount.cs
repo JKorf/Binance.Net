@@ -7,7 +7,6 @@ using Binance.Net.Objects.Models.Spot.Socket;
 using CryptoExchange.Net.Sockets;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Logging;
 using System.Collections.Generic;
 using Binance.Net.Objects.Models.Spot;
 using CryptoExchange.Net.Converters;
@@ -26,16 +25,14 @@ namespace Binance.Net.Clients.SpotApi
 
         private readonly BinanceSocketClientSpotApi _client;
 
-        private const string _baseAddressWebsocketApi = "wss://ws-api.binance.com:443/ws-api/v3";
-
-        private readonly Log _log;
+        private readonly ILogger _logger;
 
         #region constructor/destructor
 
-        internal BinanceSocketClientSpotApiAccount(Log log, BinanceSocketClientSpotApi client)
+        internal BinanceSocketClientSpotApiAccount(ILogger logger, BinanceSocketClientSpotApi client)
         {
             _client = client;
-            _log = log;
+            _logger = logger;
         }
 
         #endregion
@@ -49,7 +46,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("symbols", symbols);
-            return await _client.QueryAsync<BinanceAccountInfo>(_baseAddressWebsocketApi, $"account.status", parameters, true, true).ConfigureAwait(false);
+            return await _client.QueryAsync<BinanceAccountInfo>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"account.status", parameters, true, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -61,7 +58,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("symbols", symbols);
-            return await _client.QueryAsync<IEnumerable<BinanceCurrentRateLimit>>(_baseAddressWebsocketApi, $"account.rateLimits.orders", parameters, true, true).ConfigureAwait(false);
+            return await _client.QueryAsync<IEnumerable<BinanceCurrentRateLimit>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"account.rateLimits.orders", parameters, true, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -71,7 +68,7 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<CallResult<BinanceResponse<string>>> StartUserStreamAsync()
         {
-            var result = await _client.QueryAsync<BinanceListenKey>(_baseAddressWebsocketApi, $"userDataStream.start", new Dictionary<string, object>(), true).ConfigureAwait(false);
+            var result = await _client.QueryAsync<BinanceListenKey>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"userDataStream.start", new Dictionary<string, object>(), true).ConfigureAwait(false);
             if (!result)
                 return result.AsError<BinanceResponse<string>>(result.Error!);
 
@@ -91,7 +88,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("listenKey", listenKey);
-            return await _client.QueryAsync<object>(_baseAddressWebsocketApi, $"userDataStream.ping", parameters, true).ConfigureAwait(false);
+            return await _client.QueryAsync<object>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"userDataStream.ping", parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -103,7 +100,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("listenKey", listenKey);
-            return await _client.QueryAsync<object>(_baseAddressWebsocketApi, $"userDataStream.stop", parameters, true).ConfigureAwait(false);
+            return await _client.QueryAsync<object>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"userDataStream.stop", parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -148,7 +145,7 @@ namespace Binance.Net.Clients.SpotApi
                             }
                             else
                             {
-                                _log.Write(LogLevel.Warning,
+                                _logger.Log(LogLevel.Warning,
                                     "Couldn't deserialize data received from order stream: " + result.Error);
                             }
 
@@ -164,7 +161,7 @@ namespace Binance.Net.Clients.SpotApi
                             }
                             else
                             {
-                                _log.Write(LogLevel.Warning,
+                                _logger.Log(LogLevel.Warning,
                                     "Couldn't deserialize data received from oco order stream: " + result.Error);
                             }
 
@@ -180,7 +177,7 @@ namespace Binance.Net.Clients.SpotApi
                             }
                             else
                             {
-                                _log.Write(LogLevel.Warning,
+                                _logger.Log(LogLevel.Warning,
                                     "Couldn't deserialize data received from account position stream: " + result.Error);
                             }
 
@@ -196,19 +193,19 @@ namespace Binance.Net.Clients.SpotApi
                             }
                             else
                             {
-                                _log.Write(LogLevel.Warning,
+                                _logger.Log(LogLevel.Warning,
                                     "Couldn't deserialize data received from account position stream: " + result.Error);
                             }
 
                             break;
                         }
                     default:
-                        _log.Write(LogLevel.Warning, $"Received unknown user data event {evnt}: " + data);
+                        _logger.Log(LogLevel.Warning, $"Received unknown user data event {evnt}: " + data);
                         break;
                 }
             });
 
-            return await _client.SubscribeAsync(_client.Options.BaseAddress, new[] { listenKey }, handler, ct).ConfigureAwait(false);
+            return await _client.SubscribeAsync(_client.BaseAddress, new[] { listenKey }, handler, ct).ConfigureAwait(false);
         }
         #endregion
 

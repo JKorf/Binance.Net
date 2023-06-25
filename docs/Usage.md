@@ -4,48 +4,52 @@ nav_order: 2
 ---
 
 ## Creating client
-There are 2 clients available to interact with the Binance API, the `BinanceClient` and `BinanceSocketClient`.
+There are 2 clients available to interact with the Binance API, the `BinanceRestClient` and `BinanceSocketClient`. They can be created manually on the fly or be added to the dotnet DI using the `AddBinance` extension method.
 
-*Create a new rest client*
+*Manually create a new client*
 ```csharp
-var binanceClient = new BinanceClient(new BinanceClientOptions()
+var binanceRestClient = new BinanceRestClient(options =>
+{
+	// Set options here for this client
+});
+
+var binanceSocketClient = new BinanceSocketClient(options =>
 {
 	// Set options here for this client
 });
 ```
 
-*Create a new socket client*
+*Using dotnet dependency inject*
 ```csharp
-var binanceSocketClient = new BinanceSocketClient(new BinanceSocketClientOptions()
-{
-	// Set options here for this client
-});
-```
-
-Different options are available to set on the clients, see this example
-```csharp
-var binanceClient = new BinanceClient(new BinanceClientOptions
-{
-	ApiCredentials = new ApiCredentials("API-KEY", "API-SECRET"),
-	SpotApiOptions = new BinanceApiClientOptions
-	{
-		BaseAddress = "ADDRESS",
-		RateLimitingBehaviour = RateLimitingBehaviour.Fail
+services.AddBinance(
+	restOptions => {
+		// set options for the rest client
 	},
-	UsdFuturesApiOptions = new BinanceApiClientOptions
-	{
-		ApiCredentials = new ApiCredentials("OTHER-API-KEY-FOR-FUTURES", "OTHER-API-SECRET-FOR-FUTURES")
-	}
+	socketClientOptions => {
+		// set options for the socket client
+	});	
+	
+// IBinanceRestClient, IBinanceSocketClient and IBinanceOrderBookFactory are now available for injecting
+```
+
+Different options are available to set on the clients:  
+```csharp
+var binanceRestClient = new BinanceRestClient(options =>
+{
+	options.ApiCredentials = new ApiCredentials("API-KEY", "API-SECRET");
+	options.Environment = BinanceEnvironment.Testnet;
+	options.UsdFuturesOptions.ApiCredentials = new ApiCredentials("OTHER-API-KEY", "OTHER-API-SECRET"); // Override the credentials for the USD futures API
 });
 ```
-Alternatively, options can be provided before creating clients by using `SetDefaultOptions`:
+Alternatively, options can be provided before creating clients by using `SetDefaultOptions` or during the registration in the DI container:  
 ```csharp
-BinanceClient.SetDefaultOptions(new BinanceClientOptions{
+BinanceRestClient.SetDefaultOptions(options =>
+{
 	// Set options here for all new clients
 });
-var binanceClient = new BinanceClient();
+var binanceClient = new BinanceRestClient();
 ```
 More info on the specific options can be found in the [CryptoExchange.Net documentation](https://jkorf.github.io/CryptoExchange.Net/Options.html)
 
 ### Dependency injection
-See [CryptoExchange.Net documentation](https://jkorf.github.io/CryptoExchange.Net/Clients.html#dependency-injection)
+See [CryptoExchange.Net documentation](https://jkorf.github.io/CryptoExchange.Net/Dependency%20Injection.html)

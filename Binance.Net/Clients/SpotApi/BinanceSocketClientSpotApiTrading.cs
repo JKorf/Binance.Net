@@ -12,7 +12,6 @@ using System.Net.Http;
 using System;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
-using CryptoExchange.Net.Logging;
 using Microsoft.Extensions.Logging;
 
 namespace Binance.Net.Clients.SpotApi
@@ -21,15 +20,13 @@ namespace Binance.Net.Clients.SpotApi
     public class BinanceSocketClientSpotApiTrading : IBinanceSocketClientSpotApiTrading
     {
         private readonly BinanceSocketClientSpotApi _client;
-        private readonly Log _log;
-
-        private const string _baseAddressWebsocketApi = "wss://ws-api.binance.com:443/ws-api/v3";
+        private readonly ILogger _logger;
 
         #region constructor/destructor
 
-        internal BinanceSocketClientSpotApiTrading(Log log, BinanceSocketClientSpotApi client)
+        internal BinanceSocketClientSpotApiTrading(ILogger logger, BinanceSocketClientSpotApi client)
         {
-            _log = log;
+            _logger = logger;
             _client = client;
         }
 
@@ -59,7 +56,7 @@ namespace Binance.Net.Clients.SpotApi
             var rulesCheck = await _client.CheckTradeRules(symbol, quantity, quoteQuantity, price, stopPrice, type).ConfigureAwait(false);
             if (!rulesCheck.Passed)
             {
-                _log.Write(LogLevel.Warning, rulesCheck.ErrorMessage!);
+                _logger.Log(LogLevel.Warning, rulesCheck.ErrorMessage!);
                 return new CallResult<BinanceResponse<BinancePlacedOrder>>(new ArgumentError(rulesCheck.ErrorMessage!));
             }
 
@@ -78,7 +75,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("strategyId", strategyId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("strategyType", strategyType?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter.GetString(selfTradePreventionMode));
-            return await _client.QueryAsync<BinancePlacedOrder>(_baseAddressWebsocketApi, $"order.place", parameters, true, true).ConfigureAwait(false);
+            return await _client.QueryAsync<BinancePlacedOrder>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"order.place", parameters, true, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -116,7 +113,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("strategyId", strategyId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("strategyType", strategyType?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter.GetString(selfTradePreventionMode));
-            return await _client.QueryAsync<BinancePlacedOrder>(_baseAddressWebsocketApi, $"order.test", parameters, true, true).ConfigureAwait(false);
+            return await _client.QueryAsync<BinancePlacedOrder>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"order.test", parameters, true, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -130,7 +127,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddParameter("symbol", symbol);
             parameters.AddOptionalParameter("orderId", orderId);
             parameters.AddOptionalParameter("origClientOrderId", clientOrderId);
-            return await _client.QueryAsync<BinanceOrder>(_baseAddressWebsocketApi, $"order.status", parameters, true, true).ConfigureAwait(false);
+            return await _client.QueryAsync<BinanceOrder>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"order.status", parameters, true, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -145,7 +142,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("orderId", orderId);
             parameters.AddOptionalParameter("origClientOrderId", clientOrderId);
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
-            return await _client.QueryAsync<BinanceOrder>(_baseAddressWebsocketApi, $"order.cancel", parameters, true, true).ConfigureAwait(false);
+            return await _client.QueryAsync<BinanceOrder>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"order.cancel", parameters, true, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -194,7 +191,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
             parameters.AddOptionalParameter("trailingDelta", trailingDelta?.ToString(CultureInfo.InvariantCulture));
 
-            return await _client.QueryAsync<BinanceReplaceOrderResult>(_baseAddressWebsocketApi, $"order.cancelReplace", parameters, true, true).ConfigureAwait(false);
+            return await _client.QueryAsync<BinanceReplaceOrderResult>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"order.cancelReplace", parameters, true, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -206,7 +203,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("symbol", symbol);
-            return await _client.QueryAsync<IEnumerable<BinanceOrder>>(_baseAddressWebsocketApi, $"openOrders.status", parameters, true, true).ConfigureAwait(false);
+            return await _client.QueryAsync<IEnumerable<BinanceOrder>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"openOrders.status", parameters, true, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -218,7 +215,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("symbol", symbol);
-            return await _client.QueryAsync<IEnumerable<BinanceOrder>>(_baseAddressWebsocketApi, $"openOrders.cancelAll", parameters, true, true).ConfigureAwait(false);
+            return await _client.QueryAsync<IEnumerable<BinanceOrder>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"openOrders.cancelAll", parameters, true, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -276,7 +273,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("stopClientOrderId", stopClientOrderId);
             parameters.AddOptionalParameter("stopLimitTimeInForce", stopLimitTimeInForce == null ? null : JsonConvert.SerializeObject(stopLimitTimeInForce, new TimeInForceConverter(false)));
 
-            return await _client.QueryAsync<BinanceOrderOcoList>(_baseAddressWebsocketApi, $"orderList.place", parameters, true, true).ConfigureAwait(false);
+            return await _client.QueryAsync<BinanceOrderOcoList>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"orderList.place", parameters, true, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -289,7 +286,7 @@ namespace Binance.Net.Clients.SpotApi
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("orderListId", orderId);
             parameters.AddOptionalParameter("origClientOrderId", clientOrderId);
-            return await _client.QueryAsync<BinanceOrderOcoList>(_baseAddressWebsocketApi, $"orderList.status", parameters, true, true).ConfigureAwait(false);
+            return await _client.QueryAsync<BinanceOrderOcoList>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"orderList.status", parameters, true, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -304,7 +301,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("orderListId", orderId);
             parameters.AddOptionalParameter("origClientOrderId", clientOrderId);
             parameters.AddOptionalParameter("newClientOrderId", clientOrderId);
-            return await _client.QueryAsync<BinanceOrderOcoList>(_baseAddressWebsocketApi, $"orderList.cancel", parameters, true, true).ConfigureAwait(false);
+            return await _client.QueryAsync<BinanceOrderOcoList>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"orderList.cancel", parameters, true, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -314,7 +311,7 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<CallResult<BinanceResponse<IEnumerable<BinanceOrderOcoList>>>> GetOpenOcoOrdersAsync()
         {
-            return await _client.QueryAsync<IEnumerable<BinanceOrderOcoList>>(_baseAddressWebsocketApi, $"openOrderLists.status", new Dictionary<string, object>(), true, true).ConfigureAwait(false);
+            return await _client.QueryAsync<IEnumerable<BinanceOrderOcoList>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"openOrderLists.status", new Dictionary<string, object>(), true, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -330,7 +327,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit);
-            return await _client.QueryAsync<IEnumerable<BinanceOrder>>(_baseAddressWebsocketApi, $"allOrders", parameters, true, true).ConfigureAwait(false);
+            return await _client.QueryAsync<IEnumerable<BinanceOrder>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"allOrders", parameters, true, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -345,7 +342,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit);
-            return await _client.QueryAsync<IEnumerable<BinanceOrderOcoList>>(_baseAddressWebsocketApi, $"allOrderLists", parameters, true, true).ConfigureAwait(false);
+            return await _client.QueryAsync<IEnumerable<BinanceOrderOcoList>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"allOrderLists", parameters, true, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -362,7 +359,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit);
-            return await _client.QueryAsync<IEnumerable<BinanceTrade>>(_baseAddressWebsocketApi, $"myTrades", parameters, true, true).ConfigureAwait(false);
+            return await _client.QueryAsync<IEnumerable<BinanceTrade>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"myTrades", parameters, true, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -378,7 +375,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("preventedMatchId", preventedTradeId);
             parameters.AddOptionalParameter("fromPreventedMatchId", fromPreventedTradeId);
             parameters.AddOptionalParameter("limit", limit);
-            return await _client.QueryAsync<IEnumerable<BinancePreventedTrade>>(_baseAddressWebsocketApi, $"myPreventedMatches", parameters, true, true).ConfigureAwait(false);
+            return await _client.QueryAsync<IEnumerable<BinancePreventedTrade>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"myPreventedMatches", parameters, true, true).ConfigureAwait(false);
         }
 
         #endregion
