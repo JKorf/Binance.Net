@@ -28,6 +28,9 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 9.0.1 - 25 Jun 2023
+    * Fix for invalid build
+
 * Version 9.0.0 - 25 Jun 2023
     * Updated CryptoExchange.Net to version 6.0.0
     * Renamed BinanceClient to BinanceRestClient
