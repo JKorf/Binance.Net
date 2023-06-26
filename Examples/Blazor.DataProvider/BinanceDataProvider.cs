@@ -10,10 +10,10 @@ namespace Blazor.DataProvider
 {
     public class BinanceDataProvider
     {
-        private IBinanceClient _client;
+        private IBinanceRestClient _client;
         private IBinanceSocketClient _socketClient;
 
-        public BinanceDataProvider(IBinanceClient client, IBinanceSocketClient socketClient)
+        public BinanceDataProvider(IBinanceRestClient client, IBinanceSocketClient socketClient)
         {
             _client = client;
             _socketClient = socketClient;
@@ -26,7 +26,7 @@ namespace Blazor.DataProvider
 
         public Task<CallResult<UpdateSubscription>> SubscribeTickerUpdates(Action<DataEvent<IEnumerable<IBinanceTick>>> tickHandler)
         {
-            return _socketClient.SpotStreams.SubscribeToAllTickerUpdatesAsync(tickHandler);
+            return _socketClient.SpotApi.ExchangeData.SubscribeToAllTickerUpdatesAsync(tickHandler);
         }
 
         public async Task Unsubscribe(UpdateSubscription subscription)

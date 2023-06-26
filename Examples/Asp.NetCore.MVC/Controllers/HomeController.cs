@@ -9,14 +9,10 @@ namespace Asp.Net.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly IBinanceClient _binanceClient;
         private readonly IBinanceDataProvider _dataProvider;
 
-        public HomeController(ILogger<HomeController> logger, IBinanceClient client, IBinanceDataProvider dataProvider)
+        public HomeController(IBinanceDataProvider dataProvider)
         {
-            _logger = logger;
-            _binanceClient = client;
             _dataProvider = dataProvider;
         }
 

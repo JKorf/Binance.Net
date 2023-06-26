@@ -4,10 +4,11 @@ using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients;
 using CryptoExchange.Net.Sockets;
+using Microsoft.Extensions.Hosting;
 
 namespace Asp.Net
 {
-    public interface IBinanceDataProvider
+    public interface IBinanceDataProvider 
     {
         IBinanceStreamKlineData LastKline { get; }
         Action<IBinanceStreamKlineData> OnKlineData { get; set; }
@@ -33,7 +34,7 @@ namespace Asp.Net
 
         public async Task Start()
         {
-            var subResult = await _socketClient.SpotStreams.SubscribeToKlineUpdatesAsync("BTCUSDT", KlineInterval.FifteenMinutes, data =>
+            var subResult = await _socketClient.SpotApi.ExchangeData.SubscribeToKlineUpdatesAsync("BTCUSDT", KlineInterval.FifteenMinutes, data =>
             {
                 LastKline = data.Data;
                 OnKlineData?.Invoke(data.Data);

@@ -1,19 +1,15 @@
 ﻿using Binance.Net.Clients;
-using Binance.Net.Objects;
 using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
 
-BinanceClient.SetDefaultOptions(new BinanceClientOptions()
+BinanceRestClient.SetDefaultOptions(options =>
 {
-    ApiCredentials = new ApiCredentials("APIKEY", "APISECRET"), // <- Provide you API key/secret in these fields to retrieve data related to your account
-    LogLevel = LogLevel.Debug
+    options.ApiCredentials = new ApiCredentials("APIKEY", "APISECRET"); // <- Provide you API key/secret in these fields to retrieve data related to your account
 });
-BinanceSocketClient.SetDefaultOptions(new BinanceSocketClientOptions()
+BinanceSocketClient.SetDefaultOptions(options =>
 {
-    ApiCredentials = new ApiCredentials("APIKEY", "APISECRET"),
-    LogLevel = LogLevel.Debug
+    options.ApiCredentials = new ApiCredentials("APIKEY", "APISECRET");
 });
 
 string? read = "";
@@ -25,7 +21,7 @@ while (read != "R" && read != "S")
 
 if (read == "R")
 {
-    using (var client = new BinanceClient())
+    using (var client = new BinanceRestClient())
     {
         await HandleRequest("Symbol list", () => client.SpotApi.ExchangeData.GetExchangeInfoAsync(), result => string.Join(", ", result.Symbols.Select(s => s.Name).Take(10)) + " etc");
         await HandleRequest("BTCUSDT book price", () => client.SpotApi.ExchangeData.GetBookPriceAsync("BTCUSDT"), result => $"Best Ask: {result.BestAskPrice}, Best Bid: {result.BestBidPrice}");
@@ -37,7 +33,7 @@ else
     Console.WriteLine("Press enter to subscribe to BTCUSDT trade stream");
     Console.ReadLine();
     var socketClient = new BinanceSocketClient();
-    var subscription = await socketClient.SpotStreams.SubscribeToTradeUpdatesAsync("BTCUSDT", data =>
+    var subscription = await socketClient.SpotApi.ExchangeData.SubscribeToTradeUpdatesAsync("BTCUSDT", data =>
     {
         Console.WriteLine($"{data.Data.TradeTime}: {data.Data.Quantity} @ {data.Data.Price}");
     });

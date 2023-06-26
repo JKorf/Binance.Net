@@ -22,11 +22,8 @@ namespace Asp.Net
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IBinanceSocketClient, BinanceSocketClient>();
-            services.AddTransient<IBinanceClient, BinanceClient>();
-
+            services.AddBinance();
             services.AddSingleton<IBinanceDataProvider, BinanceDataProvider>();
-
             services.AddControllersWithViews();
         }
 
