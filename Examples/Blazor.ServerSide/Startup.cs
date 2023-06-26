@@ -1,20 +1,11 @@
 using Binance.Net;
-using Binance.Net.Interfaces;
 using Blazor.DataProvider;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Blazor.ServerSide.Data;
 using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.Logging;
-using Binance.Net.Objects;
-using Microsoft.Extensions.Logging;
-using Binance.Net.Clients;
-using Binance.Net.Interfaces.Clients;
 
 namespace Blazor.ServerSide
 {
@@ -31,16 +22,16 @@ namespace Blazor.ServerSide
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            BinanceClient.SetDefaultOptions(new BinanceClientOptions()
+            services.AddBinance(restOptions =>
             {
-                LogLevel = LogLevel.Debug,
-                ApiCredentials = new ApiCredentials("Credentials", "Credentials")
+                restOptions.ApiCredentials = new ApiCredentials("Credentials", "Credentials");
+            }, socketOptions =>
+            {
+                socketOptions.ApiCredentials = new ApiCredentials("Credentials", "Credentials");
             });
 
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddTransient<IBinanceClient, BinanceClient>();
-            services.AddTransient<IBinanceSocketClient, BinanceSocketClient>();
             services.AddSingleton<BinanceDataProvider>();
         }
 
