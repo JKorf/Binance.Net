@@ -1,11 +1,11 @@
 ---
 title: IBinanceRestClientCoinFuturesApiTrading
 has_children: false
-parent: IBinanceClientCoinFuturesApi
+parent: IBinanceRestClientCoinFuturesApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BinanceClient > CoinFuturesApi > IBinanceRestClientTrading`  
+`BinanceRestClient > CoinFuturesApi > Trading`  
 *Binance COIN-M futures trading endpoints, placing and mananging orders.*
   
 
@@ -20,8 +20,8 @@ grand_parent: Rest API documentation
 *so that the existing countdown time can be canceled and replaced by a new one.*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientTrading.CancelAllOrdersAfterTimeoutAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Trading.CancelAllOrdersAfterTimeoutAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -47,8 +47,8 @@ Task<WebCallResult<BinanceFuturesCountDownResult>> CancelAllOrdersAfterTimeoutAs
 *Cancels all open orders*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientTrading.CancelAllOrdersAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Trading.CancelAllOrdersAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -73,8 +73,8 @@ Task<WebCallResult<BinanceFuturesCancelAllOrders>> CancelAllOrdersAsync(string s
 *Cancels muliple orders*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientTrading.CancelMultipleOrdersAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Trading.CancelMultipleOrdersAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -101,8 +101,8 @@ Task<WebCallResult<IEnumerable<CallResult<BinanceFuturesCancelOrder>>>> CancelMu
 *Cancels a pending order*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientTrading.CancelOrderAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Trading.CancelOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -129,8 +129,8 @@ Task<WebCallResult<BinanceFuturesCancelOrder>> CancelOrderAsync(string symbol, l
 *Gets a list of users forced orders*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientTrading.GetForcedOrdersAsync();  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Trading.GetForcedOrdersAsync();  
 ```  
 
 ```csharp  
@@ -158,8 +158,8 @@ Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetForcedOrdersAsync(strin
 *Retrieves data for a specific open order. Either orderId or origClientOrderId should be provided.*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientTrading.GetOpenOrderAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Trading.GetOpenOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -186,8 +186,8 @@ Task<WebCallResult<BinanceFuturesOrder>> GetOpenOrderAsync(string symbol, long? 
 *Gets a list of open orders*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientTrading.GetOpenOrdersAsync();  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Trading.GetOpenOrdersAsync();  
 ```  
 
 ```csharp  
@@ -212,8 +212,8 @@ Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetOpenOrdersAsync(string?
 *Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientTrading.GetOrderAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Trading.GetOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -240,8 +240,8 @@ Task<WebCallResult<BinanceFuturesOrder>> GetOrderAsync(string symbol, long? orde
 *Gets all orders for the provided symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientTrading.GetOrdersAsync();  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Trading.GetOrdersAsync();  
 ```  
 
 ```csharp  
@@ -270,8 +270,8 @@ Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetOrdersAsync(string? sym
 *Gets all user trades for provided symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientTrading.GetUserTradesAsync();  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Trading.GetUserTradesAsync();  
 ```  
 
 ```csharp  
@@ -302,8 +302,8 @@ Task<WebCallResult<IEnumerable<BinanceFuturesCoinTrade>>> GetUserTradesAsync(str
 *Place multiple orders in one call*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientTrading.PlaceMultipleOrdersAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Trading.PlaceMultipleOrdersAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -328,8 +328,8 @@ Task<WebCallResult<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>> PlaceMul
 *Places a new order*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientTrading.PlaceOrderAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Trading.PlaceOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  

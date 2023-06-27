@@ -1,11 +1,11 @@
 ---
 title: IBinanceRestClientGeneralApiSubAccount
 has_children: false
-parent: IBinanceClientGeneralApi
+parent: IBinanceRestClientGeneralApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BinanceClient > GeneralApi > IBinanceRestClientSubAccount`  
+`BinanceRestClient > GeneralApi > SubAccount`  
 *Binance Spot Subaccount endpoints*
   
 
@@ -19,8 +19,8 @@ grand_parent: Rest API documentation
 *Create a virtual sub account*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.CreateVirtualSubAccountAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.CreateVirtualSubAccountAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -45,8 +45,8 @@ Task<WebCallResult<BinanceSubAccountEmail>> CreateVirtualSubAccountAsync(string 
 *Enable or disable blvt*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.EnableBlvtForSubAccountAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.EnableBlvtForSubAccountAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -72,8 +72,8 @@ Task<WebCallResult<BinanceSubAccountBlvt>> EnableBlvtForSubAccountAsync(string e
 *Enables futures for a sub account*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.EnableFuturesForSubAccountAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.EnableFuturesForSubAccountAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -98,8 +98,8 @@ Task<WebCallResult<BinanceSubAccountFuturesEnabled>> EnableFuturesForSubAccountA
 *Enables margin for a sub account*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.EnableMarginForSubAccountAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.EnableMarginForSubAccountAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -124,8 +124,8 @@ Task<WebCallResult<BinanceSubAccountMarginEnabled>> EnableMarginForSubAccountAsy
 *Get the ip restriction for a sub-account*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.GetIpRestrictionForSubAccountApiKeyAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.GetIpRestrictionForSubAccountApiKeyAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -151,8 +151,8 @@ Task<WebCallResult<BinanceIpRestriction>> GetIpRestrictionForSubAccountApiKeyAsy
 *Gets list of balances for a sub account*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.GetSubAccountAssetsAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.GetSubAccountAssetsAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -177,8 +177,8 @@ Task<WebCallResult<IEnumerable<BinanceBalance>>> GetSubAccountAssetsAsync(string
 *Get BTC valued asset summary of subaccounts.*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.GetSubAccountBtcValuesAsync();  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.GetSubAccountBtcValuesAsync();  
 ```  
 
 ```csharp  
@@ -205,8 +205,8 @@ Task<WebCallResult<BinanceSubAccountSpotAssetsSummary>> GetSubAccountBtcValuesAs
 *Gets the deposit address for an asset to a sub account*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.GetSubAccountDepositAddressAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.GetSubAccountDepositAddressAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -233,8 +233,8 @@ Task<WebCallResult<BinanceSubAccountDepositAddress>> GetSubAccountDepositAddress
 *Gets the deposit history for a sub account*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.GetSubAccountDepositHistoryAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.GetSubAccountDepositHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -264,8 +264,8 @@ Task<WebCallResult<IEnumerable<BinanceSubAccountDeposit>>> GetSubAccountDepositH
 *Gets futures details for a sub account*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.GetSubAccountFuturesDetailsAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.GetSubAccountFuturesDetailsAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -290,8 +290,8 @@ Task<WebCallResult<BinanceSubAccountFuturesDetails>> GetSubAccountFuturesDetails
 *Gets futures details for a sub account*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.GetSubAccountFuturesDetailsAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.GetSubAccountFuturesDetailsAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -317,8 +317,8 @@ Task<WebCallResult<BinanceSubAccountFuturesDetailsV2>> GetSubAccountFuturesDetai
 *Gets margin details for a sub account*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.GetSubAccountMarginDetailsAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.GetSubAccountMarginDetailsAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -343,8 +343,8 @@ Task<WebCallResult<BinanceSubAccountMarginDetails>> GetSubAccountMarginDetailsAs
 *Gets a list of sub accounts associated with this master account*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.GetSubAccountsAsync();  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.GetSubAccountsAsync();  
 ```  
 
 ```csharp  
@@ -372,8 +372,8 @@ Task<WebCallResult<IEnumerable<BinanceSubAccount>>> GetSubAccountsAsync(string? 
 *Gets futures position risk for a sub account*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.GetSubAccountsFuturesPositionRiskAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.GetSubAccountsFuturesPositionRiskAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -398,8 +398,8 @@ Task<WebCallResult<IEnumerable<BinanceSubAccountFuturesPositionRisk>>> GetSubAcc
 *Gets futures position risk for a sub account*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.GetSubAccountsFuturesPositionRiskAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.GetSubAccountsFuturesPositionRiskAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -425,8 +425,8 @@ Task<WebCallResult<BinanceSubAccountFuturesPositionRiskV2>> GetSubAccountsFuture
 *Gets futures summary for sub accounts*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.GetSubAccountsFuturesSummaryAsync();  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.GetSubAccountsFuturesSummaryAsync();  
 ```  
 
 ```csharp  
@@ -450,8 +450,8 @@ Task<WebCallResult<BinanceSubAccountsFuturesSummary>> GetSubAccountsFuturesSumma
 *Gets margin summary for sub accounts*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.GetSubAccountsMarginSummaryAsync();  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.GetSubAccountsMarginSummaryAsync();  
 ```  
 
 ```csharp  
@@ -475,8 +475,8 @@ Task<WebCallResult<BinanceSubAccountsMarginSummary>> GetSubAccountsMarginSummary
 *Get Sub-account's Status on Margin/Futures(For Master Account)*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.GetSubAccountStatusAsync();  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.GetSubAccountStatusAsync();  
 ```  
 
 ```csharp  
@@ -501,8 +501,8 @@ Task<WebCallResult<IEnumerable<BinanceSubAccountStatus>>> GetSubAccountStatusAsy
 *Gets the transfer history of a sub account (from the master account)*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.GetSubAccountTransferHistoryForMasterAsync();  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.GetSubAccountTransferHistoryForMasterAsync();  
 ```  
 
 ```csharp  
@@ -532,8 +532,8 @@ Task<WebCallResult<IEnumerable<BinanceSubAccountTransfer>>> GetSubAccountTransfe
 *Gets the transfer history of a sub account (from the sub account)*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.GetSubAccountTransferHistoryForSubAccountAsync();  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.GetSubAccountTransferHistoryForSubAccountAsync();  
 ```  
 
 ```csharp  
@@ -562,8 +562,8 @@ Task<WebCallResult<IEnumerable<BinanceSubAccountTransferSubAccount>>> GetSubAcco
 *Gets a list of universal transfers*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.GetUniversalTransferHistoryAsync();  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.GetUniversalTransferHistoryAsync();  
 ```  
 
 ```csharp  
@@ -593,8 +593,8 @@ Task<WebCallResult<IEnumerable<BinanceSubAccountUniversalTransferTransaction>>> 
 *Remove the ip restriction for a sub-account*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.RemoveIpRestrictionForSubAccountApiKeyAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.RemoveIpRestrictionForSubAccountApiKeyAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -621,8 +621,8 @@ Task<WebCallResult<BinanceIpRestriction>> RemoveIpRestrictionForSubAccountApiKey
 *Transfers an asset form/to a sub account. If fromEmail or toEmail is not send it is interpreted as from/to the master account. Transfer between futures accounts is not supported*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.TransferSubAccountAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.TransferSubAccountAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -653,8 +653,8 @@ Task<WebCallResult<BinanceTransaction>> TransferSubAccountAsync(TransferAccountT
 *Transfers from or to a futures sub account*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.TransferSubAccountFuturesAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.TransferSubAccountFuturesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -682,8 +682,8 @@ Task<WebCallResult<BinanceSubAccountTransaction>> TransferSubAccountFuturesAsync
 *Transfers from or to a margin sub account*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.TransferSubAccountMarginAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.TransferSubAccountMarginAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -711,8 +711,8 @@ Task<WebCallResult<BinanceSubAccountTransaction>> TransferSubAccountMarginAsync(
 *Transfers to master account*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.TransferSubAccountToMasterAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.TransferSubAccountToMasterAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -738,8 +738,8 @@ Task<WebCallResult<BinanceSubAccountTransaction>> TransferSubAccountToMasterAsyn
 *Transfers to another sub account of the same master*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.TransferSubAccountToSubAccountAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.TransferSubAccountToSubAccountAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -766,8 +766,8 @@ Task<WebCallResult<BinanceSubAccountTransaction>> TransferSubAccountToSubAccount
 *Update the ip restriction for a sub-account*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSubAccount.UpdateIpRestrictionForSubAccountApiKeyAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.UpdateIpRestrictionForSubAccountApiKeyAsync(/* parameters */);  
 ```  
 
 ```csharp  

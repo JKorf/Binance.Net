@@ -1,11 +1,11 @@
 ---
 title: IBinanceRestClientUsdFuturesApiExchangeData
 has_children: false
-parent: IBinanceClientUsdFuturesApi
+parent: IBinanceRestClientUsdFuturesApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BinanceClient > UsdFuturesApi > IBinanceRestClientExchangeData`  
+`BinanceRestClient > UsdFuturesApi > ExchangeData`  
 *Binance USD-M futures exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.*
   
 
@@ -19,8 +19,8 @@ grand_parent: Rest API documentation
 *Gets compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetAggregatedTradeHistoryAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetAggregatedTradeHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -48,8 +48,8 @@ Task<WebCallResult<IEnumerable<BinanceAggregatedTrade>>> GetAggregatedTradeHisto
 *Get asset index for Multi-Assets mode for a symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetAssetIndexAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetAssetIndexAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -73,8 +73,8 @@ Task<WebCallResult<BinanceFuturesAssetIndex>> GetAssetIndexAsync(string symbol, 
 *Get asset indexex for Multi-Assets mode for all symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetAssetIndexesAsync();  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetAssetIndexesAsync();  
 ```  
 
 ```csharp  
@@ -97,8 +97,8 @@ Task<WebCallResult<IEnumerable<BinanceFuturesAssetIndex>>> GetAssetIndexesAsync(
 *Gets the best price/quantity on the order book for a symbol.*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetBookPriceAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetBookPriceAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -122,8 +122,8 @@ Task<WebCallResult<BinanceBookPrice>> GetBookPriceAsync(string symbol, Cancellat
 *Gets the best price/quantity on the order book.*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetBookPricesAsync();  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetBookPricesAsync();  
 ```  
 
 ```csharp  
@@ -146,8 +146,8 @@ Task<WebCallResult<IEnumerable<BinanceBookPrice>>> GetBookPricesAsync(Cancellati
 *Gets composite index info*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetCompositeIndexInfoAsync();  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetCompositeIndexInfoAsync();  
 ```  
 
 ```csharp  
@@ -171,8 +171,8 @@ Task<WebCallResult<IEnumerable<BinanceFuturesCompositeIndexInfo>>> GetCompositeI
 *Get candlestick data for the provided pair*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetContinuousContractKlinesAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetContinuousContractKlinesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -201,8 +201,8 @@ Task<WebCallResult<IEnumerable<IBinanceKline>>> GetContinuousContractKlinesAsync
 *Get's information about the exchange including rate limits and symbol list*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetExchangeInfoAsync();  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetExchangeInfoAsync();  
 ```  
 
 ```csharp  
@@ -225,8 +225,8 @@ Task<WebCallResult<BinanceFuturesUsdtExchangeInfo>> GetExchangeInfoAsync(Cancell
 *Get funding rate history for the provided symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetFundingRatesAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetFundingRatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -253,8 +253,8 @@ Task<WebCallResult<IEnumerable<BinanceFuturesFundingRateHistory>>> GetFundingRat
 *Gets Global Long/Short Ratio (Accounts)*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetGlobalLongShortAccountRatioAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetGlobalLongShortAccountRatioAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -282,8 +282,8 @@ Task<WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>>> GetGlobalLongShor
 *Get Kline/candlestick data for the index price of a pair.*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetIndexPriceKlinesAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetIndexPriceKlinesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -311,8 +311,8 @@ Task<WebCallResult<IEnumerable<IBinanceKline>>> GetIndexPriceKlinesAsync(string 
 *Get klines for a symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetKlinesAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetKlinesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -340,8 +340,8 @@ Task<WebCallResult<IEnumerable<IBinanceKline>>> GetKlinesAsync(string symbol, Kl
 *Get Mark Price and Funding Rate for the provided symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetMarkPriceAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetMarkPriceAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -365,8 +365,8 @@ Task<WebCallResult<BinanceFuturesMarkPrice>> GetMarkPriceAsync(string symbol, Ca
 *Kline/candlestick bars for the mark price of a symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetMarkPriceKlinesAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetMarkPriceKlinesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -394,8 +394,8 @@ Task<WebCallResult<IEnumerable<BinanceMarkIndexKline>>> GetMarkPriceKlinesAsync(
 *Get Mark Price and Funding Rate for all symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetMarkPricesAsync();  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetMarkPricesAsync();  
 ```  
 
 ```csharp  
@@ -418,8 +418,8 @@ Task<WebCallResult<IEnumerable<BinanceFuturesMarkPrice>>> GetMarkPricesAsync(Can
 *Get present open interest of a specific symbol.*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetOpenInterestAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetOpenInterestAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -443,8 +443,8 @@ Task<WebCallResult<BinanceFuturesOpenInterest>> GetOpenInterestAsync(string symb
 *Gets Open Interest History*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetOpenInterestHistoryAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetOpenInterestHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -472,8 +472,8 @@ Task<WebCallResult<IEnumerable<BinanceFuturesOpenInterestHistory>>> GetOpenInter
 *Gets the order book for the provided symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetOrderBookAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetOrderBookAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -498,8 +498,8 @@ Task<WebCallResult<BinanceFuturesOrderBook>> GetOrderBookAsync(string symbol, in
 *Gets the price of a symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetPriceAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetPriceAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -523,8 +523,8 @@ Task<WebCallResult<BinancePrice>> GetPriceAsync(string symbol, CancellationToken
 *Get a list of the prices of all symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetPricesAsync();  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetPricesAsync();  
 ```  
 
 ```csharp  
@@ -547,8 +547,8 @@ Task<WebCallResult<IEnumerable<BinancePrice>>> GetPricesAsync(CancellationToken 
 *Get the most recent trades for a symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetRecentTradesAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetRecentTradesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -573,8 +573,8 @@ Task<WebCallResult<IEnumerable<IBinanceRecentTrade>>> GetRecentTradesAsync(strin
 *Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetServerTimeAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetServerTimeAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -598,8 +598,8 @@ Task<WebCallResult<DateTime>> GetServerTimeAsync(bool resetAutoTimestamp, Cancel
 *Gets Taker Buy/Sell Volume Ratio*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetTakerBuySellVolumeRatioAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetTakerBuySellVolumeRatioAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -627,8 +627,8 @@ Task<WebCallResult<IEnumerable<BinanceFuturesBuySellVolumeRatio>>> GetTakerBuySe
 *Get data regarding the last 24 hours change*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetTickerAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetTickerAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -652,8 +652,8 @@ Task<WebCallResult<IBinance24HPrice>> GetTickerAsync(string symbol, Cancellation
 *Get data regarding the last 24 hours change*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetTickersAsync();  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetTickersAsync();  
 ```  
 
 ```csharp  
@@ -676,8 +676,8 @@ Task<WebCallResult<IEnumerable<IBinance24HPrice>>> GetTickersAsync(CancellationT
 *Gets Top Trader Long/Short Ratio (Accounts)*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetTopLongShortAccountRatioAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetTopLongShortAccountRatioAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -705,8 +705,8 @@ Task<WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>>> GetTopLongShortAc
 *Gets Top Trader Long/Short Ratio (Positions)*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetTopLongShortPositionRatioAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetTopLongShortPositionRatioAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -734,8 +734,8 @@ Task<WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>>> GetTopLongShortPo
 *Get trade history for a symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.GetTradeHistoryAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.GetTradeHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -761,8 +761,8 @@ Task<WebCallResult<IEnumerable<IBinanceRecentTrade>>> GetTradeHistoryAsync(strin
 *Pings the Binance Futures API*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.UsdFuturesApi.IBinanceRestClientExchangeData.PingAsync();  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.ExchangeData.PingAsync();  
 ```  
 
 ```csharp  

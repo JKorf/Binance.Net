@@ -1,11 +1,11 @@
 ---
 title: IBinanceRestClientGeneralApiMining
 has_children: false
-parent: IBinanceClientGeneralApi
+parent: IBinanceRestClientGeneralApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BinanceClient > GeneralApi > IBinanceRestClientMining`  
+`BinanceRestClient > GeneralApi > Mining`  
 *Binance Spot Mining endpoints*
   
 
@@ -19,8 +19,8 @@ grand_parent: Rest API documentation
 *Cancel Hashrate Resale Configuration*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientMining.CancelHashrateResaleRequestAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Mining.CancelHashrateResaleRequestAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -45,8 +45,8 @@ Task<WebCallResult<bool>> CancelHashrateResaleRequestAsync(int configId, string 
 *Gets hash rate resale details*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientMining.GetHashrateResaleDetailsAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Mining.GetHashrateResaleDetailsAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -73,8 +73,8 @@ Task<WebCallResult<BinanceHashrateResaleDetails>> GetHashrateResaleDetailsAsync(
 *Gets hash rate resale list*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientMining.GetHashrateResaleListAsync();  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Mining.GetHashrateResaleListAsync();  
 ```  
 
 ```csharp  
@@ -99,8 +99,8 @@ Task<WebCallResult<BinanceHashrateResaleList>> GetHashrateResaleListAsync(int? p
 *Gets miner details*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientMining.GetMinerDetailsAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Mining.GetMinerDetailsAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -126,8 +126,8 @@ Task<WebCallResult<IEnumerable<BinanceMinerDetails>>> GetMinerDetailsAsync(strin
 *Gets miner list*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientMining.GetMinerListAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Mining.GetMinerListAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -156,8 +156,8 @@ Task<WebCallResult<BinanceMinerList>> GetMinerListAsync(string algorithm, string
 *Gets mining account list*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientMining.GetMiningAccountListAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Mining.GetMiningAccountListAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -182,8 +182,8 @@ Task<WebCallResult<IEnumerable<BinanceMiningAccount>>> GetMiningAccountListAsync
 *Gets mining algorithms info*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientMining.GetMiningAlgorithmListAsync();  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Mining.GetMiningAlgorithmListAsync();  
 ```  
 
 ```csharp  
@@ -206,8 +206,8 @@ Task<WebCallResult<IEnumerable<BinanceMiningAlgorithm>>> GetMiningAlgorithmListA
 *Gets mining coins info*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientMining.GetMiningCoinListAsync();  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Mining.GetMiningCoinListAsync();  
 ```  
 
 ```csharp  
@@ -230,8 +230,8 @@ Task<WebCallResult<IEnumerable<BinanceMiningCoin>>> GetMiningCoinListAsync(Cance
 *Get other revenue list*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientMining.GetMiningOtherRevenueListAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Mining.GetMiningOtherRevenueListAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -261,8 +261,8 @@ Task<WebCallResult<BinanceOtherRevenueList>> GetMiningOtherRevenueListAsync(stri
 *Gets revenue list*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientMining.GetMiningRevenueListAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Mining.GetMiningRevenueListAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -292,8 +292,8 @@ Task<WebCallResult<BinanceRevenueList>> GetMiningRevenueListAsync(string algorit
 *Get mining statistics*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientMining.GetMiningStatisticsAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Mining.GetMiningStatisticsAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -318,8 +318,8 @@ Task<WebCallResult<BinanceMiningStatistic>> GetMiningStatisticsAsync(string algo
 *Hashrate resale request*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientMining.PlaceHashrateResaleRequestAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Mining.PlaceHashrateResaleRequestAsync(/* parameters */);  
 ```  
 
 ```csharp  

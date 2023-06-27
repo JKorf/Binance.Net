@@ -1,11 +1,11 @@
 ---
 title: IBinanceSocketClientSpotApiTrading
 has_children: false
-parent: IBinanceClientSpotApi
-grand_parent: Rest API documentation
+parent: IBinanceSocketClientSpotApi
+grand_parent: Socket API documentation
 ---
 *[generated documentation]*  
-`BinanceClient > SpotApi > Trading`  
+`BinanceSocketClient > SpotApi > Trading`  
 *Binance Spot Trading socket requests*
   
 
@@ -19,7 +19,7 @@ grand_parent: Rest API documentation
 *Cancel all open orders for the symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.Trading.CancelAllOrdersAsync(/* parameters */);  
 ```  
 
@@ -43,7 +43,7 @@ Task<CallResult<BinanceResponse<IEnumerable<BinanceOrder>>>> CancelAllOrdersAsyn
 *Cancel an Oco order by either orderId or clientOrderId*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.Trading.CancelOcoOrderAsync(/* parameters */);  
 ```  
 
@@ -70,7 +70,7 @@ Task<CallResult<BinanceResponse<BinanceOrderOcoList>>> CancelOcoOrderAsync(strin
 *Cancel an order by either orderId or clientOrderId*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.Trading.CancelOrderAsync(/* parameters */);  
 ```  
 
@@ -97,7 +97,7 @@ Task<CallResult<BinanceResponse<BinanceOrder>>> CancelOrderAsync(string symbol, 
 *Get an oco order by either orderId or clientOrderId*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.Trading.GetOcoOrderAsync();  
 ```  
 
@@ -122,7 +122,7 @@ Task<CallResult<BinanceResponse<BinanceOrderOcoList>>> GetOcoOrderAsync(long? or
 *Get Oco order history*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.Trading.GetOcoOrdersAsync();  
 ```  
 
@@ -149,7 +149,7 @@ Task<CallResult<BinanceResponse<IEnumerable<BinanceOrderOcoList>>>> GetOcoOrders
 *Get open Oco orders*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.Trading.GetOpenOcoOrdersAsync();  
 ```  
 
@@ -172,7 +172,7 @@ Task<CallResult<BinanceResponse<IEnumerable<BinanceOrderOcoList>>>> GetOpenOcoOr
 *Get open orders*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.Trading.GetOpenOrdersAsync();  
 ```  
 
@@ -196,7 +196,7 @@ Task<CallResult<BinanceResponse<IEnumerable<BinanceOrder>>>> GetOpenOrdersAsync(
 *Get order by either orderId or clientOrderId*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.Trading.GetOrderAsync(/* parameters */);  
 ```  
 
@@ -222,7 +222,7 @@ Task<CallResult<BinanceResponse<BinanceOrder>>> GetOrderAsync(string symbol, int
 *Get order history*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.Trading.GetOrdersAsync(/* parameters */);  
 ```  
 
@@ -250,7 +250,7 @@ Task<CallResult<BinanceResponse<IEnumerable<BinanceOrder>>>> GetOrdersAsync(stri
 *Get prevented trades because of self trade prevention*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.Trading.GetPreventedTradesAsync(/* parameters */);  
 ```  
 
@@ -278,7 +278,7 @@ Task<CallResult<BinanceResponse<IEnumerable<BinancePreventedTrade>>>> GetPrevent
 *Gets user trades for provided symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.Trading.GetUserTradesAsync(/* parameters */);  
 ```  
 
@@ -307,7 +307,7 @@ Task<CallResult<BinanceResponse<IEnumerable<BinanceTrade>>>> GetUserTradesAsync(
 *Places a new OCO(One cancels other) order*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.Trading.PlaceOcoOrderAsync(/* parameters */);  
 ```  
 
@@ -350,7 +350,7 @@ Task<CallResult<BinanceResponse<BinanceOrderOcoList>>> PlaceOcoOrderAsync(string
 *Places a new order*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.Trading.PlaceOrderAsync(/* parameters */);  
 ```  
 
@@ -387,7 +387,7 @@ Task<CallResult<BinanceResponse<BinancePlacedOrder>>> PlaceOrderAsync(string sym
 *Places a new test order. Test orders are not actually being executed and just test the functionality.*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.Trading.PlaceTestOrderAsync(/* parameters */);  
 ```  
 
@@ -424,7 +424,7 @@ Task<CallResult<BinanceResponse<BinancePlacedOrder>>> PlaceTestOrderAsync(string
 *Cancel an existing order and place a new order on the same symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.Trading.ReplaceOrderAsync(/* parameters */);  
 ```  
 

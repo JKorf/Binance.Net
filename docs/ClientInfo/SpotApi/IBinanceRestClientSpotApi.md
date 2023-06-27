@@ -1,11 +1,10 @@
 ---
 title: IBinanceRestClientSpotApi
 has_children: true
-parent: IBinanceClientSpotApi
-grand_parent: Rest API documentation
+parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BinanceClient > SpotApi > IBinanceRestClient`  
+`BinanceRestClient > SpotApi`  
 *Binance Spot API endpoints*
   
 ***
@@ -13,10 +12,10 @@ grand_parent: Rest API documentation
 **ISpotClient CommonSpotClient { get; }**  
 ***
 *Endpoints related to account settings, info or actions*  
-**IBinanceRestClientSpotApiAccount Account { get; }**  
+**[IBinanceRestClientSpotApiAccount](IBinanceRestClientSpotApiAccount.html) Account { get; }**  
 ***
 *Endpoints related to retrieving market and system data*  
-**IBinanceRestClientSpotApiExchangeData ExchangeData { get; }**  
+**[IBinanceRestClientSpotApiExchangeData](IBinanceRestClientSpotApiExchangeData.html) ExchangeData { get; }**  
 ***
 *Endpoints related to orders and trades*  
-**IBinanceRestClientSpotApiTrading Trading { get; }**  
+**[IBinanceRestClientSpotApiTrading](IBinanceRestClientSpotApiTrading.html) Trading { get; }**  

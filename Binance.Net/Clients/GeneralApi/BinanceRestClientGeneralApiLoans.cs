@@ -17,7 +17,7 @@ using Newtonsoft.Json;
 namespace Binance.Net.Clients.GeneralApi
 {
     /// <inheritdoc />
-    public class BinanceClientGeneralApiCryptoLoans : IBinanceClientGeneralApiCryptoLoans
+    public class BinanceRestClientGeneralApiLoans : IBinanceRestClientGeneralApiLoans
     {
         // Crypto loans
         private const string incomingEndpoint = "loan/income";
@@ -31,7 +31,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         private readonly BinanceRestClientGeneralApi _baseClient;
 
-        internal BinanceClientGeneralApiCryptoLoans(BinanceRestClientGeneralApi baseClient)
+        internal BinanceRestClientGeneralApiLoans(BinanceRestClientGeneralApi baseClient)
         {
             _baseClient = baseClient;
         }

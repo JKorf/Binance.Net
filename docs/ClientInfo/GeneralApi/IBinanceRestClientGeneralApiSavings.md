@@ -1,11 +1,11 @@
 ---
 title: IBinanceRestClientGeneralApiSavings
 has_children: false
-parent: IBinanceClientGeneralApi
+parent: IBinanceRestClientGeneralApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BinanceClient > GeneralApi > IBinanceRestClientSavings`  
+`BinanceRestClient > GeneralApi > Savings`  
 *Binance Spot Savings endpoints*
   
 
@@ -19,8 +19,8 @@ grand_parent: Rest API documentation
 *Changed fixed/activity position to daily position*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSavings.ChangeToDailyPositionAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Savings.ChangeToDailyPositionAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -47,8 +47,8 @@ Task<WebCallResult<BinanceLendingChangeToDailyResult>> ChangeToDailyPositionAsyn
 *Get customized fixed project position*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSavings.GetCustomizedFixedProjectPositionsAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Savings.GetCustomizedFixedProjectPositionsAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -75,8 +75,8 @@ Task<WebCallResult<IEnumerable<BinanceCustomizedFixedProjectPosition>>> GetCusto
 *Get fixed and customized fixed project list*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSavings.GetFixedAndCustomizedFixedProjectListAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Savings.GetFixedAndCustomizedFixedProjectListAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -107,8 +107,8 @@ Task<WebCallResult<IEnumerable<BinanceProject>>> GetFixedAndCustomizedFixedProje
 *Get product list*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSavings.GetFlexibleProductListAsync();  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Savings.GetFlexibleProductListAsync();  
 ```  
 
 ```csharp  
@@ -136,8 +136,8 @@ Task<WebCallResult<IEnumerable<BinanceSavingsProduct>>> GetFlexibleProductListAs
 *Get flexible product position*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSavings.GetFlexibleProductPositionAsync();  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Savings.GetFlexibleProductPositionAsync();  
 ```  
 
 ```csharp  
@@ -164,8 +164,8 @@ Task<WebCallResult<IEnumerable<BinanceFlexibleProductPosition>>> GetFlexibleProd
 *Get the purchase quota left for a product*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSavings.GetLeftDailyPurchaseQuotaOfFlexableProductAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Savings.GetLeftDailyPurchaseQuotaOfFlexableProductAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -190,8 +190,8 @@ Task<WebCallResult<BinancePurchaseQuotaLeft>> GetLeftDailyPurchaseQuotaOfFlexabl
 *Get the redemption quota left for a product*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSavings.GetLeftDailyRedemptionQuotaOfFlexibleProductAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Savings.GetLeftDailyRedemptionQuotaOfFlexibleProductAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -217,8 +217,8 @@ Task<WebCallResult<BinanceRedemptionQuotaLeft>> GetLeftDailyRedemptionQuotaOfFle
 *Get lending account info*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSavings.GetLendingAccountAsync();  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Savings.GetLendingAccountAsync();  
 ```  
 
 ```csharp  
@@ -242,8 +242,8 @@ Task<WebCallResult<BinanceLendingAccount>> GetLendingAccountAsync(long? receiveW
 *Get interest history*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSavings.GetLendingInterestHistoryAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Savings.GetLendingInterestHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -273,8 +273,8 @@ Task<WebCallResult<IEnumerable<BinanceLendingInterestHistory>>> GetLendingIntere
 *Get purchase records*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSavings.GetPurchaseRecordsAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Savings.GetPurchaseRecordsAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -304,8 +304,8 @@ Task<WebCallResult<IEnumerable<BinancePurchaseRecord>>> GetPurchaseRecordsAsync(
 *Get redemption records*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSavings.GetRedemptionRecordsAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Savings.GetRedemptionRecordsAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -335,8 +335,8 @@ Task<WebCallResult<IEnumerable<BinanceRedemptionRecord>>> GetRedemptionRecordsAs
 *Purchase customized fixed project*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSavings.PurchaseCustomizedFixedProjectAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Savings.PurchaseCustomizedFixedProjectAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -362,8 +362,8 @@ Task<WebCallResult<BinanceLendingPurchaseResult>> PurchaseCustomizedFixedProject
 *Purchase flexible product*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSavings.PurchaseFlexibleProductAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Savings.PurchaseFlexibleProductAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -389,8 +389,8 @@ Task<WebCallResult<BinanceLendingPurchaseResult>> PurchaseFlexibleProductAsync(s
 *Redeem flexible product*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.GeneralApi.IBinanceRestClientSavings.RedeemFlexibleProductAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Savings.RedeemFlexibleProductAsync(/* parameters */);  
 ```  
 
 ```csharp  

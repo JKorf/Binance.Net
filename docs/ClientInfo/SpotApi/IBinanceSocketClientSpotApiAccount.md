@@ -1,11 +1,11 @@
 ---
 title: IBinanceSocketClientSpotApiAccount
 has_children: false
-parent: IBinanceClientSpotApi
-grand_parent: Rest API documentation
+parent: IBinanceSocketClientSpotApi
+grand_parent: Socket API documentation
 ---
 *[generated documentation]*  
-`BinanceClient > SpotApi > Account`  
+`BinanceSocketClient > SpotApi > Account`  
 *Binance Spot Account socket requests and subscriptions*
   
 
@@ -19,7 +19,7 @@ grand_parent: Rest API documentation
 *Gets account information, including balances*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.Account.GetAccountInfoAsync();  
 ```  
 
@@ -43,7 +43,7 @@ Task<CallResult<BinanceResponse<BinanceAccountInfo>>> GetAccountInfoAsync(IEnume
 *Get order rate limit status*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.Account.GetOrderRateLimitsAsync();  
 ```  
 
@@ -67,7 +67,7 @@ Task<CallResult<BinanceResponse<IEnumerable<BinanceCurrentRateLimit>>>> GetOrder
 *Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.Account.KeepAliveUserStreamAsync(/* parameters */);  
 ```  
 
@@ -91,7 +91,7 @@ Task<CallResult<BinanceResponse<object>>> KeepAliveUserStreamAsync(string listen
 *Starts a user stream by requesting a listen key. This listen key can be used in a subsequent request to SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.Account.StartUserStreamAsync();  
 ```  
 
@@ -114,7 +114,7 @@ Task<CallResult<BinanceResponse<string>>> StartUserStreamAsync();
 *Stops the current user stream*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.Account.StopUserStreamAsync(/* parameters */);  
 ```  
 
@@ -138,7 +138,7 @@ Task<CallResult<BinanceResponse<object>>> StopUserStreamAsync(string listenKey);
 *Subscribes to the account update stream. Prior to using this, the BinanceClient.Spot.UserStreams.StartUserStream method should be called.*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.Account.SubscribeToUserDataUpdatesAsync(/* parameters */);  
 ```  
 

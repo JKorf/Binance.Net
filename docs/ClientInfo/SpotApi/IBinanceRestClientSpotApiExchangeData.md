@@ -1,11 +1,11 @@
 ---
 title: IBinanceRestClientSpotApiExchangeData
 has_children: false
-parent: IBinanceClientSpotApi
+parent: IBinanceRestClientSpotApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BinanceClient > SpotApi > IBinanceRestClientExchangeData`  
+`BinanceRestClient > SpotApi > ExchangeData`  
 *Binance Spot exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.*
   
 
@@ -19,8 +19,8 @@ grand_parent: Rest API documentation
 *Gets compressed, aggregate trades. Trades that fill at the same time, from the same order, with the same price will have the quantity aggregated.*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetAggregatedTradeHistoryAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetAggregatedTradeHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -48,8 +48,8 @@ Task<WebCallResult<IEnumerable<BinanceAggregatedTrade>>> GetAggregatedTradeHisto
 *Gets the withdraw/deposit details for an asset*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetAssetDetailsAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetAssetDetailsAsync();  
 ```  
 
 ```csharp  
@@ -73,8 +73,8 @@ Task<WebCallResult<Dictionary<string, BinanceAssetDetails>>> GetAssetDetailsAsyn
 *Gets the best price/quantity on the order book for a symbol.*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetBookPriceAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetBookPriceAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -98,8 +98,8 @@ Task<WebCallResult<BinanceBookPrice>> GetBookPriceAsync(string symbol, Cancellat
 *Gets the best price/quantity on the order book for a symbol.*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetBookPricesAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetBookPricesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -123,8 +123,8 @@ Task<WebCallResult<IEnumerable<BinanceBookPrice>>> GetBookPricesAsync(IEnumerabl
 *Gets the best price/quantity on the order book for all symbols.*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetBookPricesAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetBookPricesAsync();  
 ```  
 
 ```csharp  
@@ -146,8 +146,8 @@ Task<WebCallResult<IEnumerable<BinanceBookPrice>>> GetBookPricesAsync(Cancellati
 *Get cross margin collateral ratio*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetCrossMarginCollateralRatioAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetCrossMarginCollateralRatioAsync();  
 ```  
 
 ```csharp  
@@ -171,8 +171,8 @@ Task<WebCallResult<IEnumerable<BinanceCrossMarginCollateralRatio>>> GetCrossMarg
 *Gets current average price for a symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetCurrentAvgPriceAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetCurrentAvgPriceAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -196,8 +196,8 @@ Task<WebCallResult<BinanceAveragePrice>> GetCurrentAvgPriceAsync(string symbol, 
 *Gets information about the exchange including rate limits and symbol list*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetExchangeInfoAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetExchangeInfoAsync();  
 ```  
 
 ```csharp  
@@ -220,8 +220,8 @@ Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(CancellationToken 
 *Get's information about the exchange including rate limits and information on the provided symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetExchangeInfoAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetExchangeInfoAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -245,8 +245,8 @@ Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(string symbol, Can
 *Get's information about the exchange including rate limits and information on the provided symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetExchangeInfoAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetExchangeInfoAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -270,8 +270,8 @@ Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(IEnumerable<string
 *Get's information about the exchange including rate limits and information on the provided symbol based on an account permission*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetExchangeInfoAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetExchangeInfoAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -295,8 +295,8 @@ Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(AccountType permis
 *Get's information about the exchange including rate limits and information on the provided symbols based on account permissions*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetExchangeInfoAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetExchangeInfoAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -320,8 +320,8 @@ Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(AccountType[] perm
 *Isolated margin symbol info*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetIsolatedMarginSymbolAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetIsolatedMarginSymbolAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -346,8 +346,8 @@ Task<WebCallResult<BinanceIsolatedMarginSymbol>> GetIsolatedMarginSymbolAsync(st
 *Isolated margin symbol info*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetIsolatedMarginSymbolsAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetIsolatedMarginSymbolsAsync();  
 ```  
 
 ```csharp  
@@ -371,8 +371,8 @@ Task<WebCallResult<IEnumerable<BinanceIsolatedMarginSymbol>>> GetIsolatedMarginS
 *Get candlestick data for the provided symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetKlinesAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetKlinesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -400,8 +400,8 @@ Task<WebCallResult<IEnumerable<IBinanceKline>>> GetKlinesAsync(string symbol, Kl
 *Get blvt info*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetLeveragedTokenInfoAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetLeveragedTokenInfoAsync();  
 ```  
 
 ```csharp  
@@ -425,8 +425,8 @@ Task<WebCallResult<IEnumerable<BinanceBlvtInfo>>> GetLeveragedTokenInfoAsync(int
 *Get's historical klines*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetLeveragedTokensHistoricalKlinesAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetLeveragedTokensHistoricalKlinesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -455,8 +455,8 @@ Task<WebCallResult<IEnumerable<BinanceBlvtKline>>> GetLeveragedTokensHistoricalK
 *Get pool config*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetLiquidityPoolConfigurationAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetLiquidityPoolConfigurationAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -481,8 +481,8 @@ Task<WebCallResult<IEnumerable<BinanceBSwapPoolConfig>>> GetLiquidityPoolConfigu
 *Get all swap pools*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetLiquidityPoolsAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetLiquidityPoolsAsync();  
 ```  
 
 ```csharp  
@@ -506,8 +506,8 @@ Task<WebCallResult<IEnumerable<BinanceBSwapPool>>> GetLiquidityPoolsAsync(int? r
 *Get a margin asset*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetMarginAssetAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetMarginAssetAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -531,8 +531,8 @@ Task<WebCallResult<BinanceMarginAsset>> GetMarginAssetAsync(string asset, Cancel
 *Get all assets available for margin trading*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetMarginAssetsAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetMarginAssetsAsync();  
 ```  
 
 ```csharp  
@@ -555,8 +555,8 @@ Task<WebCallResult<IEnumerable<BinanceMarginAsset>>> GetMarginAssetsAsync(Cancel
 *Get margin price index*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetMarginPriceIndexAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetMarginPriceIndexAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -580,8 +580,8 @@ Task<WebCallResult<BinanceMarginPriceIndex>> GetMarginPriceIndexAsync(string sym
 *Get a margin pair*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetMarginSymbolAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetMarginSymbolAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -605,8 +605,8 @@ Task<WebCallResult<BinanceMarginPair>> GetMarginSymbolAsync(string symbol, Cance
 *Get all asset pairs available for margin trading*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetMarginSymbolsAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetMarginSymbolsAsync();  
 ```  
 
 ```csharp  
@@ -629,8 +629,8 @@ Task<WebCallResult<IEnumerable<BinanceMarginPair>>> GetMarginSymbolsAsync(Cancel
 *Gets the order book for the provided symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetOrderBookAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetOrderBookAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -655,8 +655,8 @@ Task<WebCallResult<BinanceOrderBook>> GetOrderBookAsync(string symbol, int? limi
 *Gets the price of a symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetPriceAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetPriceAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -680,8 +680,8 @@ Task<WebCallResult<BinancePrice>> GetPriceAsync(string symbol, CancellationToken
 *Gets the prices of symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetPricesAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetPricesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -705,8 +705,8 @@ Task<WebCallResult<IEnumerable<BinancePrice>>> GetPricesAsync(IEnumerable<string
 *Get a list of the prices of all symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetPricesAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetPricesAsync();  
 ```  
 
 ```csharp  
@@ -729,8 +729,8 @@ Task<WebCallResult<IEnumerable<BinancePrice>>> GetPricesAsync(CancellationToken 
 *NOTE: This is not an official endpoint and might be changed or removed at any point by Binance*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetProductsAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetProductsAsync();  
 ```  
 
 ```csharp  
@@ -753,8 +753,8 @@ Task<WebCallResult<IEnumerable<BinanceProduct>>> GetProductsAsync(CancellationTo
 *Gets the recent trades for a symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetRecentTradesAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetRecentTradesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -779,8 +779,8 @@ Task<WebCallResult<IEnumerable<IBinanceRecentTrade>>> GetRecentTradesAsync(strin
 *Get data based on the last x time, specified as windowSize*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetRollingWindowTickerAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetRollingWindowTickerAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -805,8 +805,8 @@ Task<WebCallResult<IBinance24HPrice>> GetRollingWindowTickerAsync(string symbol,
 *Get data based on the last x time, specified as windowSize*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetRollingWindowTickersAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetRollingWindowTickersAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -831,8 +831,8 @@ Task<WebCallResult<IEnumerable<IBinance24HPrice>>> GetRollingWindowTickersAsync(
 *Requests the server for the local time*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetServerTimeAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetServerTimeAsync();  
 ```  
 
 ```csharp  
@@ -855,8 +855,8 @@ Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default)
 *Get avaialble staking products list*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetStakingProductsAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetStakingProductsAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -884,8 +884,8 @@ Task<WebCallResult<IEnumerable<BinanceStakingProduct>>> GetStakingProductsAsync(
 *Gets the status of the Binance platform*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetSystemStatusAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetSystemStatusAsync();  
 ```  
 
 ```csharp  
@@ -908,8 +908,8 @@ Task<WebCallResult<BinanceSystemStatus>> GetSystemStatusAsync(CancellationToken 
 *Get data regarding the last 24 hours for the provided symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetTickerAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetTickerAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -933,8 +933,8 @@ Task<WebCallResult<IBinanceTick>> GetTickerAsync(string symbol, CancellationToke
 *Get data regarding the last 24 hours for the provided symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetTickersAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetTickersAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -958,8 +958,8 @@ Task<WebCallResult<IEnumerable<IBinanceTick>>> GetTickersAsync(IEnumerable<strin
 *Get data regarding the last 24 hours for all symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetTickersAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetTickersAsync();  
 ```  
 
 ```csharp  
@@ -982,8 +982,8 @@ Task<WebCallResult<IEnumerable<IBinanceTick>>> GetTickersAsync(CancellationToken
 *Gets the trade fee for a symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetTradeFeeAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetTradeFeeAsync();  
 ```  
 
 ```csharp  
@@ -1008,8 +1008,8 @@ Task<WebCallResult<IEnumerable<BinanceTradeFee>>> GetTradeFeeAsync(string? symbo
 *Gets the historical trades for a symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetTradeHistoryAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetTradeHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1035,8 +1035,8 @@ Task<WebCallResult<IEnumerable<IBinanceRecentTrade>>> GetTradeHistoryAsync(strin
 *Get candlestick data for the provided symbol. Returns modified kline data, optimized for the presentation of candlestick charts*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.GetUiKlinesAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetUiKlinesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1064,8 +1064,8 @@ Task<WebCallResult<IEnumerable<IBinanceKline>>> GetUiKlinesAsync(string symbol, 
 *Pings the Binance API*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientExchangeData.PingAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.PingAsync();  
 ```  
 
 ```csharp  

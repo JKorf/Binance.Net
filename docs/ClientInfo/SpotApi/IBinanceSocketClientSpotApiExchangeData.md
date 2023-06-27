@@ -1,11 +1,11 @@
 ---
 title: IBinanceSocketClientSpotApiExchangeData
 has_children: false
-parent: IBinanceClientSpotApi
-grand_parent: Rest API documentation
+parent: IBinanceSocketClientSpotApi
+grand_parent: Socket API documentation
 ---
 *[generated documentation]*  
-`BinanceClient > SpotApi > ExchangeData`  
+`BinanceSocketClient > SpotApi > ExchangeData`  
 *Binance Spot Exchange Data socket requests and subscriptions*
   
 
@@ -19,7 +19,7 @@ grand_parent: Rest API documentation
 *Gets compressed, aggregate trades. Trades that fill at the same time, from the same order, with the same price will have the quantity aggregated.*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.GetAggregatedTradeHistoryAsync(/* parameters */);  
 ```  
 
@@ -47,7 +47,7 @@ Task<CallResult<BinanceResponse<IEnumerable<BinanceStreamAggregatedTrade>>>> Get
 *Gets the best price/quantity on the order book for a symbol.*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.GetBookTickersAsync();  
 ```  
 
@@ -71,7 +71,7 @@ Task<CallResult<BinanceResponse<IEnumerable<BinanceBookPrice>>>> GetBookTickersA
 *Gets current average price for a symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.GetCurrentAvgPriceAsync(/* parameters */);  
 ```  
 
@@ -95,7 +95,7 @@ Task<CallResult<BinanceResponse<BinanceAveragePrice>>> GetCurrentAvgPriceAsync(s
 *Gets information about the exchange including rate limits and symbol list*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.GetExchangeInfoAsync();  
 ```  
 
@@ -119,7 +119,7 @@ Task<CallResult<BinanceResponse<BinanceExchangeInfo>>> GetExchangeInfoAsync(IEnu
 *Get candlestick data for the provided symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.GetKlinesAsync(/* parameters */);  
 ```  
 
@@ -147,7 +147,7 @@ Task<CallResult<BinanceResponse<IEnumerable<BinanceSpotKline>>>> GetKlinesAsync(
 *Gets the order book for the provided symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.GetOrderBookAsync(/* parameters */);  
 ```  
 
@@ -172,7 +172,7 @@ Task<CallResult<BinanceResponse<BinanceOrderBook>>> GetOrderBookAsync(string sym
 *Gets the recent trades for a symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.GetRecentTradesAsync(/* parameters */);  
 ```  
 
@@ -197,7 +197,7 @@ Task<CallResult<BinanceResponse<IEnumerable<BinanceRecentTradeQuote>>>> GetRecen
 *Get data based on the last x time, specified as windowSize*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.GetRollingWindowTickersAsync(/* parameters */);  
 ```  
 
@@ -221,7 +221,7 @@ Task<CallResult<BinanceResponse<IEnumerable<BinanceRollingWindowTick>>>> GetRoll
 *Get the server time*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.GetServerTimeAsync();  
 ```  
 
@@ -244,7 +244,7 @@ Task<CallResult<BinanceResponse<DateTime>>> GetServerTimeAsync();
 *Get data regarding the last 24 hours*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.GetTickersAsync();  
 ```  
 
@@ -268,7 +268,7 @@ Task<CallResult<BinanceResponse<IEnumerable<Binance24HPrice>>>> GetTickersAsync(
 *Gets the historical trades for a symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.GetTradeHistoryAsync(/* parameters */);  
 ```  
 
@@ -294,7 +294,7 @@ Task<CallResult<BinanceResponse<IEnumerable<BinanceRecentTradeQuote>>>> GetTrade
 *Get candlestick data for the provided symbol. Returns modified kline data, optimized for the presentation of candlestick charts*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.GetUIKlinesAsync(/* parameters */);  
 ```  
 
@@ -322,7 +322,7 @@ Task<CallResult<BinanceResponse<IEnumerable<BinanceSpotKline>>>> GetUIKlinesAsyn
 *Ping to test connection*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.PingAsync();  
 ```  
 
@@ -345,7 +345,7 @@ Task<CallResult<BinanceResponse<object>>> PingAsync();
 *Subscribes to the aggregated trades update stream for the provided symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.SubscribeToAggregatedTradeUpdatesAsync(/* parameters */);  
 ```  
 
@@ -371,7 +371,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToAggregatedTradeUpdatesAsync(IEnu
 *Subscribes to the aggregated trades update stream for the provided symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.SubscribeToAggregatedTradeUpdatesAsync(/* parameters */);  
 ```  
 
@@ -397,7 +397,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToAggregatedTradeUpdatesAsync(stri
 *Subscribes to mini ticker updates stream for all symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.SubscribeToAllMiniTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -422,7 +422,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToAllMiniTickerUpdatesAsync(Action
 *Subscribe to rolling window ticker updates stream for all symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.SubscribeToAllRollingWindowTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -448,7 +448,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToAllRollingWindowTickerUpdatesAsy
 *Subscribes to ticker updates stream for all symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.SubscribeToAllTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -473,7 +473,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToAllTickerUpdatesAsync(Action<Dat
 *Subscribes to leveraged token info updates*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.SubscribeToBlvtInfoUpdatesAsync(/* parameters */);  
 ```  
 
@@ -499,7 +499,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToBlvtInfoUpdatesAsync(IEnumerable
 *Subscribes to leveraged token info updates*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.SubscribeToBlvtInfoUpdatesAsync(/* parameters */);  
 ```  
 
@@ -525,7 +525,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToBlvtInfoUpdatesAsync(string toke
 *Subscribes to leveraged token kline updates*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.SubscribeToBlvtKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -552,7 +552,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToBlvtKlineUpdatesAsync(IEnumerabl
 *Subscribes to leveraged token kline updates*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.SubscribeToBlvtKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -579,7 +579,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToBlvtKlineUpdatesAsync(string tok
 *Subscribes to the book ticker update stream for the provided symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.SubscribeToBookTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -605,7 +605,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToBookTickerUpdatesAsync(IEnumerab
 *Subscribes to the book ticker update stream for the provided symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.SubscribeToBookTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -631,7 +631,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToBookTickerUpdatesAsync(string sy
 *Subscribes to the candlestick update stream for the provided symbols and intervals*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.SubscribeToKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -658,7 +658,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<st
 *Subscribes to the candlestick update stream for the provided symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.SubscribeToKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -685,7 +685,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<st
 *Subscribes to the candlestick update stream for the provided symbol and intervals*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.SubscribeToKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -712,7 +712,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol,
 *Subscribes to the candlestick update stream for the provided symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.SubscribeToKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -739,7 +739,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol,
 *Subscribes to mini ticker updates stream for a list of symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.SubscribeToMiniTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -765,7 +765,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToMiniTickerUpdatesAsync(IEnumerab
 *Subscribes to mini ticker updates stream for a specific symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.SubscribeToMiniTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -791,7 +791,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToMiniTickerUpdatesAsync(string sy
 *Subscribes to the depth update stream for the provided symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.SubscribeToOrderBookUpdatesAsync(/* parameters */);  
 ```  
 
@@ -818,7 +818,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerabl
 *Subscribes to the order book updates for the provided symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.SubscribeToOrderBookUpdatesAsync(/* parameters */);  
 ```  
 
@@ -845,7 +845,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string sym
 *Subscribes to the depth updates for the provided symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.SubscribeToPartialOrderBookUpdatesAsync(/* parameters */);  
 ```  
 
@@ -873,7 +873,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToPartialOrderBookUpdatesAsync(IEn
 *Subscribes to the depth updates for the provided symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.SubscribeToPartialOrderBookUpdatesAsync(/* parameters */);  
 ```  
 
@@ -901,7 +901,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToPartialOrderBookUpdatesAsync(str
 *Subscribe to rolling window ticker updates stream for a symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.SubscribeToRollingWindowTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -928,7 +928,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToRollingWindowTickerUpdatesAsync(
 *Subscribes to ticker updates stream for a specific symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.SubscribeToTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -954,7 +954,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<s
 *Subscribes to ticker updates stream for a specific symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.SubscribeToTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -980,7 +980,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol
 *Subscribes to the trades update stream for the provided symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.SubscribeToTradeUpdatesAsync(/* parameters */);  
 ```  
 
@@ -1006,7 +1006,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<st
 *Subscribes to the trades update stream for the provided symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.SpotApi.ExchangeData.SubscribeToTradeUpdatesAsync(/* parameters */);  
 ```  
 

@@ -1,11 +1,11 @@
 ---
 title: IBinanceRestClientSpotApiAccount
 has_children: false
-parent: IBinanceClientSpotApi
+parent: IBinanceRestClientSpotApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BinanceClient > SpotApi > IBinanceRestClientAccount`  
+`BinanceRestClient > SpotApi > Account`  
 *Binance Spot account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings*
   
 
@@ -19,8 +19,8 @@ grand_parent: Rest API documentation
 *Close the user stream for margin account*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.CloseIsolatedMarginUserStreamAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.CloseIsolatedMarginUserStreamAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -45,8 +45,8 @@ Task<WebCallResult<object>> CloseIsolatedMarginUserStreamAsync(string symbol, st
 *Execute transfer between spot account and cross margin account.*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.CrossMarginTransferAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.CrossMarginTransferAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -74,8 +74,8 @@ Task<WebCallResult<BinanceTransaction>> CrossMarginTransferAsync(string asset, d
 *You need to enable "trade" option for the api key which requests this endpoint.*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.DisableFastWithdrawSwitchAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.DisableFastWithdrawSwitchAsync();  
 ```  
 
 ```csharp  
@@ -99,8 +99,8 @@ Task<WebCallResult<object>> DisableFastWithdrawSwitchAsync(int? receiveWindow = 
 *Disabled an isolated margin account info*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.DisableIsolatedMarginAccountAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.DisableIsolatedMarginAccountAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -125,8 +125,8 @@ Task<WebCallResult<CreateIsolatedMarginAccountResult>> DisableIsolatedMarginAcco
 *Converts dust (small amounts of) assets to BNB*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.DustTransferAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.DustTransferAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -155,8 +155,8 @@ Task<WebCallResult<BinanceDustTransferResult>> DustTransferAsync(IEnumerable<str
 *There is no on-chain transaction, no transaction ID and no withdrawal fee.*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.EnableFastWithdrawSwitchAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.EnableFastWithdrawSwitchAsync();  
 ```  
 
 ```csharp  
@@ -180,8 +180,8 @@ Task<WebCallResult<object>> EnableFastWithdrawSwitchAsync(int? receiveWindow = d
 *Enable an isolated margin account*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.EnableIsolatedMarginAccountAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.EnableIsolatedMarginAccountAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -206,8 +206,8 @@ Task<WebCallResult<CreateIsolatedMarginAccountResult>> EnableIsolatedMarginAccou
 *Gets account information, including balances*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetAccountInfoAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetAccountInfoAsync();  
 ```  
 
 ```csharp  
@@ -231,8 +231,8 @@ Task<WebCallResult<BinanceAccountInfo>> GetAccountInfoAsync(long? receiveWindow 
 *Gets the status of the account associated with the api key/secret*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetAccountStatusAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetAccountStatusAsync();  
 ```  
 
 ```csharp  
@@ -256,8 +256,8 @@ Task<WebCallResult<BinanceAccountStatus>> GetAccountStatusAsync(int? receiveWind
 *Get permission info for the current API key*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetAPIKeyPermissionsAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetAPIKeyPermissionsAsync();  
 ```  
 
 ```csharp  
@@ -281,8 +281,8 @@ Task<WebCallResult<BinanceAPIKeyPermissions>> GetAPIKeyPermissionsAsync(int? rec
 *Get asset dividend records*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetAssetDividendRecordsAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetAssetDividendRecordsAsync();  
 ```  
 
 ```csharp  
@@ -309,8 +309,8 @@ Task<WebCallResult<BinanceQueryRecords<BinanceDividendRecord>>> GetAssetDividend
 *Get assets that can be converted to BNB*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetAssetsForDustTransferAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetAssetsForDustTransferAsync();  
 ```  
 
 ```csharp  
@@ -334,8 +334,8 @@ Task<WebCallResult<BinanceElligableDusts>> GetAssetsForDustTransferAsync(int? re
 *Get auto conversion settings*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetAutoConvertStableCoinConfigAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetAutoConvertStableCoinConfigAsync();  
 ```  
 
 ```csharp  
@@ -359,8 +359,8 @@ Task<WebCallResult<BinanceAutoConversionSettings>> GetAutoConvertStableCoinConfi
 *Retrieve balance info*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetBalancesAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetBalancesAsync();  
 ```  
 
 ```csharp  
@@ -386,8 +386,8 @@ Task<WebCallResult<IEnumerable<BinanceUserBalance>>> GetBalancesAsync(string? as
 *Gets the status of the BNB burn switch for spot trading and margin interest*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetBnbBurnStatusAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetBnbBurnStatusAsync();  
 ```  
 
 ```csharp  
@@ -411,8 +411,8 @@ Task<WebCallResult<BinanceBnbBurnStatus>> GetBnbBurnStatusAsync(int? receiveWind
 *Get history of transfers*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetCrossMarginTransferHistoryAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetCrossMarginTransferHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -441,8 +441,8 @@ Task<WebCallResult<BinanceQueryRecords<BinanceTransferHistory>>> GetCrossMarginT
 *Get a daily account snapshot (assets and positions)*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetDailyFutureAccountSnapshotAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetDailyFutureAccountSnapshotAsync();  
 ```  
 
 ```csharp  
@@ -469,8 +469,8 @@ Task<WebCallResult<IEnumerable<BinanceFuturesAccountSnapshot>>> GetDailyFutureAc
 *Get a daily account snapshot (assets)*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetDailyMarginAccountSnapshotAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetDailyMarginAccountSnapshotAsync();  
 ```  
 
 ```csharp  
@@ -497,8 +497,8 @@ Task<WebCallResult<IEnumerable<BinanceMarginAccountSnapshot>>> GetDailyMarginAcc
 *Get a daily account snapshot (balances)*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetDailySpotAccountSnapshotAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetDailySpotAccountSnapshotAsync();  
 ```  
 
 ```csharp  
@@ -525,8 +525,8 @@ Task<WebCallResult<IEnumerable<BinanceSpotAccountSnapshot>>> GetDailySpotAccount
 *Gets the deposit address for an asset*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetDepositAddressAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetDepositAddressAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -552,8 +552,8 @@ Task<WebCallResult<BinanceDepositAddress>> GetDepositAddressAsync(string asset, 
 *Gets the deposit history*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetDepositHistoryAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetDepositHistoryAsync();  
 ```  
 
 ```csharp  
@@ -583,8 +583,8 @@ Task<WebCallResult<IEnumerable<BinanceDeposit>>> GetDepositHistoryAsync(string? 
 *Gets the history of dust conversions*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetDustLogAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetDustLogAsync();  
 ```  
 
 ```csharp  
@@ -610,8 +610,8 @@ Task<WebCallResult<BinanceDustLogList>> GetDustLogAsync(DateTime? startTime = de
 *Get max number of enabled isolated margin accounts*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetEnabledIsolatedMarginAccountLimitAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetEnabledIsolatedMarginAccountLimitAsync();  
 ```  
 
 ```csharp  
@@ -635,8 +635,8 @@ Task<WebCallResult<IsolatedMarginAccountLimit>> GetEnabledIsolatedMarginAccountL
 *Get Fiat deposit/withdrawal history*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetFiatDepositWithdrawHistoryAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetFiatDepositWithdrawHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -665,8 +665,8 @@ Task<WebCallResult<IEnumerable<BinanceFiatWithdrawDeposit>>> GetFiatDepositWithd
 *Get Fiat payment history*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetFiatPaymentHistoryAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetFiatPaymentHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -695,8 +695,8 @@ Task<WebCallResult<IEnumerable<BinanceFiatPayment>>> GetFiatPaymentHistoryAsync(
 *Get funding wallet assets*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetFundingWalletAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetFundingWalletAsync();  
 ```  
 
 ```csharp  
@@ -722,8 +722,8 @@ Task<WebCallResult<IEnumerable<BinanceFundingAsset>>> GetFundingWalletAsync(stri
 *Get cross margin interest data*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetInterestMarginDataAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetInterestMarginDataAsync();  
 ```  
 
 ```csharp  
@@ -749,8 +749,8 @@ Task<WebCallResult<IEnumerable<BinanceInterestMarginData>>> GetInterestMarginDat
 *Isolated margin account info*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetIsolatedMarginAccountAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetIsolatedMarginAccountAsync();  
 ```  
 
 ```csharp  
@@ -774,8 +774,8 @@ Task<WebCallResult<BinanceIsolatedMarginAccount>> GetIsolatedMarginAccountAsync(
 *Get history of transfer to and from the isolated margin account*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetIsolatedMarginAccountTransferHistoryAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetIsolatedMarginAccountTransferHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -807,8 +807,8 @@ Task<WebCallResult<BinanceQueryRecords<BinanceIsolatedMarginTransfer>>> GetIsola
 *Get isolated margin tier data*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetIsolatedMarginTierDataAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetIsolatedMarginTierDataAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -834,8 +834,8 @@ Task<WebCallResult<IEnumerable<BinanceIsolatedMarginTierData>>> GetIsolatedMargi
 *Get leveraged tokens user limits*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetLeveragedTokensUserLimitAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetLeveragedTokensUserLimitAsync();  
 ```  
 
 ```csharp  
@@ -860,8 +860,8 @@ Task<WebCallResult<IEnumerable<BinanceBlvtUserLimit>>> GetLeveragedTokensUserLim
 *Query margin account details*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetMarginAccountInfoAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetMarginAccountInfoAsync();  
 ```  
 
 ```csharp  
@@ -885,8 +885,8 @@ Task<WebCallResult<BinanceMarginAccount>> GetMarginAccountInfoAsync(long? receiv
 *Gets the history of margin dust conversions*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetMarginDustLogAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetMarginDustLogAsync();  
 ```  
 
 ```csharp  
@@ -912,8 +912,8 @@ Task<WebCallResult<BinanceDustLogList>> GetMarginDustLogAsync(DateTime? startTim
 *Get history of forced liquidations*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetMarginForcedLiquidationHistoryAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetMarginForcedLiquidationHistoryAsync();  
 ```  
 
 ```csharp  
@@ -942,8 +942,8 @@ Task<WebCallResult<BinanceQueryRecords<BinanceForcedLiquidation>>> GetMarginForc
 *Get history of interest*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetMarginInterestHistoryAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetMarginInterestHistoryAsync();  
 ```  
 
 ```csharp  
@@ -974,8 +974,8 @@ Task<WebCallResult<BinanceQueryRecords<BinanceInterestHistory>>> GetMarginIntere
 *Get history of interest rate*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetMarginInterestRateHistoryAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetMarginInterestRateHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1004,8 +1004,8 @@ Task<WebCallResult<IEnumerable<BinanceInterestRateHistory>>> GetMarginInterestRa
 *Get personal margin level information for your account*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetMarginLevelInformationAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetMarginLevelInformationAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1030,8 +1030,8 @@ Task<WebCallResult<BinanceMarginLevel>> GetMarginLevelInformationAsync(string em
 *Query loan records*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetMarginLoansAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetMarginLoansAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1063,8 +1063,8 @@ Task<WebCallResult<BinanceQueryRecords<BinanceLoan>>> GetMarginLoansAsync(string
 *Query max borrow quantity*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetMarginMaxBorrowAmountAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetMarginMaxBorrowAmountAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1090,8 +1090,8 @@ Task<WebCallResult<BinanceMarginAmount>> GetMarginMaxBorrowAmountAsync(string as
 *Query max transfer-out quantity*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetMarginMaxTransferAmountAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetMarginMaxTransferAmountAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1116,8 +1116,8 @@ Task<WebCallResult<decimal>> GetMarginMaxTransferAmountAsync(string asset, strin
 *Get isolated margin order rate limits*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetMarginOrderRateLimitStatusAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetMarginOrderRateLimitStatusAsync();  
 ```  
 
 ```csharp  
@@ -1141,8 +1141,8 @@ Task<WebCallResult<IEnumerable<BinanceCurrentRateLimit>>> GetMarginOrderRateLimi
 *Query repay records*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetMarginRepaysAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetMarginRepaysAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1174,8 +1174,8 @@ Task<WebCallResult<BinanceQueryRecords<BinanceRepay>>> GetMarginRepaysAsync(stri
 *Get the current used order rate limits*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetOrderRateLimitStatusAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetOrderRateLimitStatusAsync();  
 ```  
 
 ```csharp  
@@ -1199,8 +1199,8 @@ Task<WebCallResult<IEnumerable<BinanceCurrentRateLimit>>> GetOrderRateLimitStatu
 *Portfolio margin account info*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetPortfolioMarginAccountInfoAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetPortfolioMarginAccountInfoAsync();  
 ```  
 
 ```csharp  
@@ -1224,8 +1224,8 @@ Task<WebCallResult<BinancePortfolioMarginInfo>> GetPortfolioMarginAccountInfoAsy
 *Get portfolio margin bankrupty loan amount*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetPortfolioMarginBankruptcyLoanAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetPortfolioMarginBankruptcyLoanAsync();  
 ```  
 
 ```csharp  
@@ -1249,8 +1249,8 @@ Task<WebCallResult<BinancePortfolioMarginLoan>> GetPortfolioMarginBankruptcyLoan
 *Get portfolio margin account collateral rates*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetPortfolioMarginCollateralRateAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetPortfolioMarginCollateralRateAsync();  
 ```  
 
 ```csharp  
@@ -1274,8 +1274,8 @@ Task<WebCallResult<IEnumerable<BinancePortfolioMarginCollateralRate>>> GetPortfo
 *Get rebate history*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetRebateHistoryAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetRebateHistoryAsync();  
 ```  
 
 ```csharp  
@@ -1302,8 +1302,8 @@ Task<WebCallResult<BinanceRebateWrapper>> GetRebateHistoryAsync(DateTime? startT
 *Get personal staking quota*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetStakingPersonalQuotaAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetStakingPersonalQuotaAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1329,8 +1329,8 @@ Task<WebCallResult<BinanceStakingPersonalQuota>> GetStakingPersonalQuotaAsync(St
 *Gets the trading status for the current account*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetTradingStatusAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetTradingStatusAsync();  
 ```  
 
 ```csharp  
@@ -1354,8 +1354,8 @@ Task<WebCallResult<BinanceTradingStatus>> GetTradingStatusAsync(int? receiveWind
 *Get transfer history*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetTransfersAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetTransfersAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1384,8 +1384,8 @@ Task<WebCallResult<BinanceQueryRecords<BinanceTransfer>>> GetTransfersAsync(Univ
 *Gets information of assets for a user*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetUserAssetsAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetUserAssetsAsync();  
 ```  
 
 ```csharp  
@@ -1409,8 +1409,8 @@ Task<WebCallResult<IEnumerable<BinanceUserAsset>>> GetUserAssetsAsync(int? recei
 *Gets the withdrawal history*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.GetWithdrawalHistoryAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetWithdrawalHistoryAsync();  
 ```  
 
 ```csharp  
@@ -1441,8 +1441,8 @@ Task<WebCallResult<IEnumerable<BinanceWithdrawal>>> GetWithdrawalHistoryAsync(st
 *Transfer from or to isolated margin account*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.IsolatedMarginAccountTransferAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.IsolatedMarginAccountTransferAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1472,8 +1472,8 @@ Task<WebCallResult<BinanceTransaction>> IsolatedMarginAccountTransferAsync(strin
 *Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.KeepAliveIsolatedMarginUserStreamAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.KeepAliveIsolatedMarginUserStreamAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1498,8 +1498,8 @@ Task<WebCallResult<object>> KeepAliveIsolatedMarginUserStreamAsync(string symbol
 *Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.KeepAliveMarginUserStreamAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.KeepAliveMarginUserStreamAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1523,8 +1523,8 @@ Task<WebCallResult<object>> KeepAliveMarginUserStreamAsync(string listenKey, Can
 *Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.KeepAliveUserStreamAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.KeepAliveUserStreamAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1548,8 +1548,8 @@ Task<WebCallResult<object>> KeepAliveUserStreamAsync(string listenKey, Cancellat
 *Borrow. Apply for a loan.*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.MarginBorrowAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.MarginBorrowAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1577,8 +1577,8 @@ Task<WebCallResult<BinanceTransaction>> MarginBorrowAsync(string asset, decimal 
 *Repay loan for margin account.*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.MarginRepayAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.MarginRepayAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1606,8 +1606,8 @@ Task<WebCallResult<BinanceTransaction>> MarginRepayAsync(string asset, decimal q
 *Repay portfolio margin bankruptcy loan*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.PortfolioMarginBankruptcyLoanRepayAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.PortfolioMarginBankruptcyLoanRepayAsync();  
 ```  
 
 ```csharp  
@@ -1630,8 +1630,8 @@ Task<WebCallResult<BinanceTransaction>> PortfolioMarginBankruptcyLoanRepayAsync(
 *Set auto conversion configuration*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.SetAutoConvertStableCoinConfigAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.SetAutoConvertStableCoinConfigAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1657,8 +1657,8 @@ Task<WebCallResult> SetAutoConvertStableCoinConfigAsync(string asset, bool enabl
 *Set auto staking for a product*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.SetAutoStakingAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.SetAutoStakingAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1685,8 +1685,8 @@ Task<WebCallResult<BinanceStakingResult>> SetAutoStakingAsync(StakingProductType
 *Sets the status of the BNB burn switch for spot trading and margin interest*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.SetBnbBurnStatusAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.SetBnbBurnStatusAsync();  
 ```  
 
 ```csharp  
@@ -1714,8 +1714,8 @@ Task<WebCallResult<BinanceBnbBurnStatus>> SetBnbBurnStatusAsync(bool? spotTradin
 *The stream will close after 60 minutes unless a keep alive is send.*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.StartIsolatedMarginUserStreamAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.StartIsolatedMarginUserStreamAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1739,8 +1739,8 @@ Task<WebCallResult<string>> StartIsolatedMarginUserStreamAsync(string symbol, Ca
 *Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to BinanceSocketClient.Futures.SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.StartMarginUserStreamAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.StartMarginUserStreamAsync();  
 ```  
 
 ```csharp  
@@ -1763,8 +1763,8 @@ Task<WebCallResult<string>> StartMarginUserStreamAsync(CancellationToken ct = de
 *Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.StartUserStreamAsync();  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.StartUserStreamAsync();  
 ```  
 
 ```csharp  
@@ -1787,8 +1787,8 @@ Task<WebCallResult<string>> StartUserStreamAsync(CancellationToken ct = default)
 *Stops the current user stream*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.StopMarginUserStreamAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.StopMarginUserStreamAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1812,8 +1812,8 @@ Task<WebCallResult<object>> StopMarginUserStreamAsync(string listenKey, Cancella
 *Stops the current user stream*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.StopUserStreamAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.StopUserStreamAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1837,8 +1837,8 @@ Task<WebCallResult<object>> StopUserStreamAsync(string listenKey, CancellationTo
 *Transfers between accounts*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.TransferAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.TransferAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -1867,8 +1867,8 @@ Task<WebCallResult<BinanceTransaction>> TransferAsync(UniversalTransferType type
 *Withdraw assets from Binance to an address*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.SpotApi.IBinanceRestClientAccount.WithdrawAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.WithdrawAsync(/* parameters */);  
 ```  
 
 ```csharp  

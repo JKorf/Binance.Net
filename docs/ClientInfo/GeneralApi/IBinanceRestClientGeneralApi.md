@@ -1,28 +1,27 @@
 ---
 title: IBinanceRestClientGeneralApi
 has_children: true
-parent: IBinanceClientGeneralApi
-grand_parent: Rest API documentation
+parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BinanceClient > GeneralApi > IBinanceRestClient`  
+`BinanceRestClient > GeneralApi`  
 *Binance general API endpoints*
   
 ***
 *Endpoints related to brokerage*  
-**IBinanceRestClientGeneralApiBrokerage Brokerage { get; }**  
+**[IBinanceRestClientGeneralApiBrokerage](IBinanceRestClientGeneralApiBrokerage.html) Brokerage { get; }**  
 ***
 *Endpoints related to crypto loans*  
-**[IBinanceClientGeneralApiCryptoLoans](IBinanceClientGeneralApiCryptoLoans.html) CryptoLoans { get; }**  
+**[IBinanceRestClientGeneralApiLoans](IBinanceRestClientGeneralApiLoans.html) CryptoLoans { get; }**  
 ***
 *Endpoints related to futures account interactions*  
-**IBinanceRestClientGeneralApiFutures Futures { get; }**  
+**[IBinanceRestClientGeneralApiFutures](IBinanceRestClientGeneralApiFutures.html) Futures { get; }**  
 ***
 *Endpoints related to mining*  
-**IBinanceRestClientGeneralApiMining Mining { get; }**  
+**[IBinanceRestClientGeneralApiMining](IBinanceRestClientGeneralApiMining.html) Mining { get; }**  
 ***
 *Endpoints related to savings*  
-**IBinanceRestClientGeneralApiSavings Savings { get; }**  
+**[IBinanceRestClientGeneralApiSavings](IBinanceRestClientGeneralApiSavings.html) Savings { get; }**  
 ***
 *Endpoints related to requesting data for and controlling sub accounts*  
-**IBinanceRestClientGeneralApiSubAccount SubAccount { get; }**  
+**[IBinanceRestClientGeneralApiSubAccount](IBinanceRestClientGeneralApiSubAccount.html) SubAccount { get; }**  

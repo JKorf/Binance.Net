@@ -1,11 +1,11 @@
 ---
 title: IBinanceRestClientCoinFuturesApiAccount
 has_children: false
-parent: IBinanceClientCoinFuturesApi
+parent: IBinanceRestClientCoinFuturesApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BinanceClient > CoinFuturesApi > IBinanceRestClientAccount`  
+`BinanceRestClient > CoinFuturesApi > Account`  
 *Binance COIN-M futures account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings*
   
 
@@ -19,8 +19,8 @@ grand_parent: Rest API documentation
 *Requests to change the initial leverage of the given symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientAccount.ChangeInitialLeverageAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Account.ChangeInitialLeverageAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -46,8 +46,8 @@ Task<WebCallResult<BinanceFuturesInitialLeverageChangeResult>> ChangeInitialLeve
 *Change the margin type for an open position*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientAccount.ChangeMarginTypeAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Account.ChangeMarginTypeAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -73,8 +73,8 @@ Task<WebCallResult<BinanceFuturesChangeMarginTypeResult>> ChangeMarginTypeAsync(
 *Gets account information, including balances*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientAccount.GetAccountInfoAsync();  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Account.GetAccountInfoAsync();  
 ```  
 
 ```csharp  
@@ -98,8 +98,8 @@ Task<WebCallResult<BinanceFuturesCoinAccountInfo>> GetAccountInfoAsync(long? rec
 *Gets account balances*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientAccount.GetBalancesAsync();  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Account.GetBalancesAsync();  
 ```  
 
 ```csharp  
@@ -123,8 +123,8 @@ Task<WebCallResult<IEnumerable<BinanceCoinFuturesAccountBalance>>> GetBalancesAs
 *Gets Notional and Leverage Brackets.*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientAccount.GetBracketsAsync();  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Account.GetBracketsAsync();  
 ```  
 
 ```csharp  
@@ -149,8 +149,8 @@ Task<WebCallResult<IEnumerable<BinanceFuturesSymbolBracket>>> GetBracketsAsync(s
 *Gets the income history for the futures account*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientAccount.GetIncomeHistoryAsync();  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Account.GetIncomeHistoryAsync();  
 ```  
 
 ```csharp  
@@ -179,8 +179,8 @@ Task<WebCallResult<IEnumerable<BinanceFuturesIncomeHistory>>> GetIncomeHistoryAs
 *Requests the margin change history for a specific symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientAccount.GetMarginChangeHistoryAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Account.GetMarginChangeHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -209,8 +209,8 @@ Task<WebCallResult<IEnumerable<BinanceFuturesMarginChangeHistoryResult>>> GetMar
 *Get position ADL quantile estimations*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientAccount.GetPositionAdlQuantileEstimationAsync();  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Account.GetPositionAdlQuantileEstimationAsync();  
 ```  
 
 ```csharp  
@@ -235,8 +235,8 @@ Task<WebCallResult<IEnumerable<BinanceFuturesQuantileEstimation>>> GetPositionAd
 *Gets account position information*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientAccount.GetPositionInformationAsync();  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Account.GetPositionInformationAsync();  
 ```  
 
 ```csharp  
@@ -262,8 +262,8 @@ Task<WebCallResult<IEnumerable<BinancePositionDetailsCoin>>> GetPositionInformat
 *Get user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientAccount.GetPositionModeAsync();  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Account.GetPositionModeAsync();  
 ```  
 
 ```csharp  
@@ -287,8 +287,8 @@ Task<WebCallResult<BinanceFuturesPositionMode>> GetPositionModeAsync(long? recei
 *Gets account commission rates*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientAccount.GetUserCommissionRateAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Account.GetUserCommissionRateAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -313,8 +313,8 @@ Task<WebCallResult<BinanceFuturesAccountUserCommissionRate>> GetUserCommissionRa
 *Keep alive the user stream. This should be called every 30 minutes to prevent the user stream being stopped*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientAccount.KeepAliveUserStreamAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Account.KeepAliveUserStreamAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -338,8 +338,8 @@ Task<WebCallResult<object>> KeepAliveUserStreamAsync(string listenKey, Cancellat
 *Change the margin on an open position*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientAccount.ModifyPositionMarginAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Account.ModifyPositionMarginAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -367,8 +367,8 @@ Task<WebCallResult<BinanceFuturesPositionMarginResult>> ModifyPositionMarginAsyn
 *Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientAccount.ModifyPositionModeAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Account.ModifyPositionModeAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -393,8 +393,8 @@ Task<WebCallResult<BinanceResult>> ModifyPositionModeAsync(bool dualPositionSide
 *Start a user stream. The resulting listen key can be used to subscribe to the user stream using the socket client*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientAccount.StartUserStreamAsync();  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Account.StartUserStreamAsync();  
 ```  
 
 ```csharp  
@@ -417,8 +417,8 @@ Task<WebCallResult<string>> StartUserStreamAsync(CancellationToken ct = default)
 *Stop the user stream, no updates will be send anymore*  
 
 ```csharp  
-var client = new BinanceClient();  
-var result = await client.CoinFuturesApi.IBinanceRestClientAccount.StopUserStreamAsync(/* parameters */);  
+var client = new BinanceRestClient();  
+var result = await client.CoinFuturesApi.Account.StopUserStreamAsync(/* parameters */);  
 ```  
 
 ```csharp  

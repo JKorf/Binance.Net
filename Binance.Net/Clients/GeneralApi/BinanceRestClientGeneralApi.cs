@@ -35,7 +35,7 @@ namespace Binance.Net.Clients.GeneralApi
         /// <inheritdoc />
         public IBinanceRestClientGeneralApiSavings Savings { get; }
         /// <inheritdoc />
-        public IBinanceClientGeneralApiCryptoLoans CryptoLoans { get; }
+        public IBinanceRestClientGeneralApiLoans CryptoLoans { get; }
         /// <inheritdoc />
         public IBinanceRestClientGeneralApiMining Mining { get; }
         /// <inheritdoc />
@@ -52,7 +52,7 @@ namespace Binance.Net.Clients.GeneralApi
             Brokerage = new BinanceRestClientGeneralApiBrokerage(this);
             Futures = new BinanceRestClientGeneralApiFutures(this);
             Savings = new BinanceRestClientGeneralApiSavings(this);
-            CryptoLoans = new BinanceClientGeneralApiCryptoLoans(this);
+            CryptoLoans = new BinanceRestClientGeneralApiLoans(this);
             Mining = new BinanceRestClientGeneralApiMining(this);
             SubAccount = new BinanceRestClientGeneralApiSubAccount(this);
 

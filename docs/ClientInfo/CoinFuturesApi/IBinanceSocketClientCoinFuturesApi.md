@@ -1,10 +1,10 @@
 ---
 title: IBinanceSocketClientCoinFuturesApi
 has_children: true
-parent: Rest API documentation
+parent: Socket API documentation
 ---
 *[generated documentation]*  
-`BinanceClient > CoinFuturesApi`  
+`BinanceSocketClient > CoinFuturesApi`  
 *Binance Coin futures streams*
   
 
@@ -18,7 +18,7 @@ parent: Rest API documentation
 *Subscribes to the aggregated trades update stream for the provided symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToAggregatedTradeUpdatesAsync(/* parameters */);  
 ```  
 
@@ -44,7 +44,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToAggregatedTradeUpdatesAsync(stri
 *Subscribes to the aggregated trades update stream for the provided symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToAggregatedTradeUpdatesAsync(/* parameters */);  
 ```  
 
@@ -70,7 +70,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToAggregatedTradeUpdatesAsync(IEnu
 *Subscribes to all book ticker update streams*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToAllBookTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -95,7 +95,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToAllBookTickerUpdatesAsync(Action
 *Subscribes to all forced liquidations stream*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToAllLiquidationUpdatesAsync(/* parameters */);  
 ```  
 
@@ -120,7 +120,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToAllLiquidationUpdatesAsync(Actio
 *Subscribe to the Mark price update stream for all symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToAllMarkPriceUpdatesAsync(/* parameters */);  
 ```  
 
@@ -146,7 +146,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToAllMarkPriceUpdatesAsync(Action<
 *Subscribes to mini ticker updates stream for all symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToAllMiniTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -171,7 +171,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToAllMiniTickerUpdatesAsync(Action
 *Subscribes to ticker updates stream for all symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToAllTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -196,7 +196,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToAllTickerUpdatesAsync(Action<Dat
 *Subscribes to the book ticker update stream for the provided symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToBookTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -222,7 +222,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToBookTickerUpdatesAsync(string sy
 *Subscribes to the book ticker update stream for the provided symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToBookTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -248,7 +248,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToBookTickerUpdatesAsync(IEnumerab
 *Subscribes to the continuous contract candlestick update stream for the provided pair*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToContinuousContractKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -276,7 +276,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToContinuousContractKlineUpdatesAs
 *Subscribes to the continuous contract candlestick update stream for the provided pairs*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToContinuousContractKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -304,7 +304,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToContinuousContractKlineUpdatesAs
 *Subscribes to the index candlestick update stream for the provided pair*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToIndexKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -331,7 +331,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToIndexKlineUpdatesAsync(string pa
 *Subscribes to the index candlestick update stream for the provided pairs*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToIndexKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -358,7 +358,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToIndexKlineUpdatesAsync(IEnumerab
 *Subscribes to the Index price update stream for a single pair*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToIndexPriceUpdatesAsync(/* parameters */);  
 ```  
 
@@ -385,7 +385,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToIndexPriceUpdatesAsync(string pa
 *Subscribes to the Index price update stream for a list of pairs*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToIndexPriceUpdatesAsync(/* parameters */);  
 ```  
 
@@ -412,7 +412,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToIndexPriceUpdatesAsync(IEnumerab
 *Subscribes to the candlestick update stream for the provided symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -439,7 +439,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol,
 *Subscribes to the candlestick update stream for the provided symbol and intervals*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -466,7 +466,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol,
 *Subscribes to the candlestick update stream for the provided symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -493,7 +493,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<st
 *Subscribes to the candlestick update stream for the provided symbols and intervals*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -520,7 +520,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<st
 *Subscribes to specific symbol forced liquidations stream*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToLiquidationUpdatesAsync(/* parameters */);  
 ```  
 
@@ -546,7 +546,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(string s
 *Subscribes to list of symbol forced liquidations stream*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToLiquidationUpdatesAsync(/* parameters */);  
 ```  
 
@@ -572,7 +572,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(IEnumera
 *Subscribes to the mark price candlestick update stream for the provided symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToMarkPriceKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -599,7 +599,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToMarkPriceKlineUpdatesAsync(strin
 *Subscribes to the mark price candlestick update stream for the provided symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToMarkPriceKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -626,7 +626,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToMarkPriceKlineUpdatesAsync(IEnum
 *Subscribes to the Mark price update stream for a single symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToMarkPriceUpdatesAsync(/* parameters */);  
 ```  
 
@@ -653,7 +653,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToMarkPriceUpdatesAsync(string sym
 *Subscribes to the Mark price update stream for a list of symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToMarkPriceUpdatesAsync(/* parameters */);  
 ```  
 
@@ -680,7 +680,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToMarkPriceUpdatesAsync(IEnumerabl
 *Subscribes to mini ticker updates stream for a specific symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToMiniTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -706,7 +706,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToMiniTickerUpdatesAsync(string sy
 *Subscribes to mini ticker updates stream for a list of symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToMiniTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -732,7 +732,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToMiniTickerUpdatesAsync(IEnumerab
 *Subscribes to the order book updates for the provided symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToOrderBookUpdatesAsync(/* parameters */);  
 ```  
 
@@ -759,7 +759,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string sym
 *Subscribes to the depth update stream for the provided symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToOrderBookUpdatesAsync(/* parameters */);  
 ```  
 
@@ -786,7 +786,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerabl
 *Subscribes to the depth updates for the provided symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToPartialOrderBookUpdatesAsync(/* parameters */);  
 ```  
 
@@ -814,7 +814,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToPartialOrderBookUpdatesAsync(str
 *Subscribes to the depth updates for the provided symbols*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToPartialOrderBookUpdatesAsync(/* parameters */);  
 ```  
 
@@ -841,7 +841,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToPartialOrderBookUpdatesAsync(IEn
 *Subscribe to contract/symbol updates*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToSymbolUpdatesAsync(/* parameters */);  
 ```  
 
@@ -866,7 +866,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToSymbolUpdatesAsync(Action<DataEv
 *Subscribes to ticker updates stream for a specific symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -892,7 +892,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol
 *Subscribes to ticker updates stream for a specific symbol*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -917,7 +917,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<s
 *Subscribe to individual trade update. NOTE: This endpoint stream isn't document and therefor might be changed or removed without prior notice*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToTradeUpdatesAsync(/* parameters */);  
 ```  
 
@@ -942,7 +942,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol,
 *Subscribe to individual trade update. NOTE: This endpoint stream isn't document and therefor might be changed or removed without prior notice*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToTradeUpdatesAsync(/* parameters */);  
 ```  
 
@@ -968,7 +968,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<st
 *Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStreams.StartUserStream method should be called.*  
 
 ```csharp  
-var client = new BinanceClient();  
+var client = new BinanceSocketClient();  
 var result = await client.CoinFuturesApi.SubscribeToUserDataUpdatesAsync(/* parameters */);  
 ```  
 

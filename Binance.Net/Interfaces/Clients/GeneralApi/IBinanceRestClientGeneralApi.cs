@@ -26,7 +26,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <summary>
         /// Endpoints related to crypto loans
         /// </summary>
-        public IBinanceClientGeneralApiCryptoLoans CryptoLoans { get; }
+        public IBinanceRestClientGeneralApiLoans CryptoLoans { get; }
 
         /// <summary>
         /// Endpoints related to mining

@@ -12,7 +12,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
     /// <summary>
     /// Binance Spot Crypto loans endpoints
     /// </summary>
-    public interface IBinanceClientGeneralApiCryptoLoans
+    public interface IBinanceRestClientGeneralApiLoans
     {
         /// <summary>
         /// Get income history from crypto loans

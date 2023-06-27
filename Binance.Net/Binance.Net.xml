@@ -769,31 +769,31 @@
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiFutures.GetCrossCollateralLiquidationHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="T:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiCryptoLoans">
+        <member name="T:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiLoans">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiCryptoLoans.GetIncomeHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.LoanIncomeType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiLoans.GetIncomeHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.LoanIncomeType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiCryptoLoans.BorrowAsync(System.String,System.String,System.Int32,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiLoans.BorrowAsync(System.String,System.String,System.Int32,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiCryptoLoans.GetBorrowHistoryAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiLoans.GetBorrowHistoryAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiCryptoLoans.GetOpenBorrowOrdersAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiLoans.GetOpenBorrowOrdersAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiCryptoLoans.RepayAsync(System.Int64,System.Decimal,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiLoans.RepayAsync(System.Int64,System.Decimal,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiCryptoLoans.GetRepayHistoryAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiLoans.GetRepayHistoryAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiCryptoLoans.AdjustLTVAsync(System.Int64,System.Decimal,System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiLoans.AdjustLTVAsync(System.Int64,System.Decimal,System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceClientGeneralApiCryptoLoans.GetLtvAdjustHistoryAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiLoans.GetLtvAdjustHistoryAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiMining">
@@ -6255,12 +6255,12 @@
             <param name="ct">Cancellation token</param>
             <returns>Liquidation history</returns>
         </member>
-        <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiCryptoLoans">
+        <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiLoans">
             <summary>
             Binance Spot Crypto loans endpoints
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiCryptoLoans.GetIncomeHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.LoanIncomeType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiLoans.GetIncomeHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.LoanIncomeType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get income history from crypto loans
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-crypto-loans-income-history-user_data" /></para>
@@ -6274,7 +6274,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiCryptoLoans.BorrowAsync(System.String,System.String,System.Int32,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiLoans.BorrowAsync(System.String,System.String,System.Int32,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Take a crypto loan
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#borrow-crypto-loan-borrow-trade" /></para>
@@ -6288,7 +6288,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiCryptoLoans.GetBorrowHistoryAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiLoans.GetBorrowHistoryAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get borrow order history
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#borrow-get-loan-borrow-history-user_data" /></para>
@@ -6304,7 +6304,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiCryptoLoans.GetOpenBorrowOrdersAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiLoans.GetOpenBorrowOrdersAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get ongoing loan orders
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#borrow-get-loan-ongoing-orders-user_data" /></para>
@@ -6318,7 +6318,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiCryptoLoans.RepayAsync(System.Int64,System.Decimal,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiLoans.RepayAsync(System.Int64,System.Decimal,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Repay a loan
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#repay-crypto-loan-repay-trade" /></para>
@@ -6331,7 +6331,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiCryptoLoans.GetRepayHistoryAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiLoans.GetRepayHistoryAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get loan repayment history
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#repay-get-loan-repayment-history-user_data" /></para>
@@ -6347,7 +6347,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiCryptoLoans.AdjustLTVAsync(System.Int64,System.Decimal,System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiLoans.AdjustLTVAsync(System.Int64,System.Decimal,System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Adjust LTV for a loan
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#adjust-ltv-crypto-loan-adjust-ltv-trade" /></para>
@@ -6359,7 +6359,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceClientGeneralApiCryptoLoans.GetLtvAdjustHistoryAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiLoans.GetLtvAdjustHistoryAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get LTV adjustment history
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#adjust-ltv-get-loan-ltv-adjustment-history-user_data" /></para>

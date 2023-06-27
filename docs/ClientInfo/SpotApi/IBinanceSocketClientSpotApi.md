@@ -1,10 +1,10 @@
 ---
 title: IBinanceSocketClientSpotApi
 has_children: true
-parent: Rest API documentation
+parent: Socket API documentation
 ---
 *[generated documentation]*  
-`BinanceClient > SpotApi`  
+`BinanceSocketClient > SpotApi`  
 *Spot API socket subscriptions and requests*
   
 ***

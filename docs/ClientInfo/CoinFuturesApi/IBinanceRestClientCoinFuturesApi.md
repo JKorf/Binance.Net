@@ -1,11 +1,10 @@
 ---
 title: IBinanceRestClientCoinFuturesApi
 has_children: true
-parent: IBinanceClientCoinFuturesApi
-grand_parent: Rest API documentation
+parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BinanceClient > CoinFuturesApi > IBinanceRestClient`  
+`BinanceRestClient > CoinFuturesApi`  
 *Binance Coin futures API endpoints*
   
 ***
@@ -13,10 +12,10 @@ grand_parent: Rest API documentation
 **IFuturesClient CommonFuturesClient { get; }**  
 ***
 *Endpoints related to account settings, info or actions*  
-**IBinanceRestClientCoinFuturesApiAccount Account { get; }**  
+**[IBinanceRestClientCoinFuturesApiAccount](IBinanceRestClientCoinFuturesApiAccount.html) Account { get; }**  
 ***
 *Endpoints related to retrieving market data*  
-**IBinanceRestClientCoinFuturesApiExchangeData ExchangeData { get; }**  
+**[IBinanceRestClientCoinFuturesApiExchangeData](IBinanceRestClientCoinFuturesApiExchangeData.html) ExchangeData { get; }**  
 ***
 *Endpoints related to orders and trades*  
-**IBinanceRestClientCoinFuturesApiTrading Trading { get; }**  
+**[IBinanceRestClientCoinFuturesApiTrading](IBinanceRestClientCoinFuturesApiTrading.html) Trading { get; }**  

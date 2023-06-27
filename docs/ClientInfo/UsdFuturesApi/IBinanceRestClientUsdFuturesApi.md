@@ -1,11 +1,10 @@
 ---
 title: IBinanceRestClientUsdFuturesApi
 has_children: true
-parent: IBinanceClientUsdFuturesApi
-grand_parent: Rest API documentation
+parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BinanceClient > UsdFuturesApi > IBinanceRestClient`  
+`BinanceRestClient > UsdFuturesApi`  
 *Binance USD futures API endpoints*
   
 ***
@@ -13,10 +12,10 @@ grand_parent: Rest API documentation
 **IFuturesClient CommonFuturesClient { get; }**  
 ***
 *Endpoints related to account settings, info or actions*  
-**IBinanceRestClientUsdFuturesApiAccount Account { get; }**  
+**[IBinanceRestClientUsdFuturesApiAccount](IBinanceRestClientUsdFuturesApiAccount.html) Account { get; }**  
 ***
 *Endpoints related to retrieving market data*  
-**IBinanceRestClientUsdFuturesApiExchangeData ExchangeData { get; }**  
+**[IBinanceRestClientUsdFuturesApiExchangeData](IBinanceRestClientUsdFuturesApiExchangeData.html) ExchangeData { get; }**  
 ***
 *Endpoints related to orders and trades*  
-**IBinanceRestClientUsdFuturesApiTrading Trading { get; }**  
+**[IBinanceRestClientUsdFuturesApiTrading](IBinanceRestClientUsdFuturesApiTrading.html) Trading { get; }**  
