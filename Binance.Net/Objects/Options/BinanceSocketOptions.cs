@@ -34,9 +34,9 @@ namespace Binance.Net.Objects.Options
         internal BinanceSocketOptions Copy()
         {
             var options = Copy<BinanceSocketOptions>();
-            options.SpotOptions = SpotOptions.Copy<BinanceSocketApiOptions>();
-            options.UsdFuturesOptions = UsdFuturesOptions.Copy<BinanceSocketApiOptions>();
-            options.CoinFuturesOptions = CoinFuturesOptions.Copy<BinanceSocketApiOptions>();
+            options.SpotOptions = SpotOptions.Copy();
+            options.UsdFuturesOptions = UsdFuturesOptions.Copy();
+            options.CoinFuturesOptions = CoinFuturesOptions.Copy();
             return options;
         }
     }

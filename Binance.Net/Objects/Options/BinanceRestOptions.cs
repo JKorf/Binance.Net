@@ -54,9 +54,9 @@ namespace Binance.Net.Objects.Options
         {
             var options = Copy<BinanceRestOptions>();
             options.ReceiveWindow = ReceiveWindow;
-            options.SpotOptions = SpotOptions.Copy<BinanceRestApiOptions>();
-            options.UsdFuturesOptions = UsdFuturesOptions.Copy<BinanceRestApiOptions>();
-            options.CoinFuturesOptions = CoinFuturesOptions.Copy<BinanceRestApiOptions>();
+            options.SpotOptions = SpotOptions.Copy();
+            options.UsdFuturesOptions = UsdFuturesOptions.Copy();
+            options.CoinFuturesOptions = CoinFuturesOptions.Copy();
             return options;
         }
     }
