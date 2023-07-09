@@ -838,7 +838,7 @@
         <member name="T:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSavings">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSavings.GetFlexibleProductListAsync(System.Nullable{Binance.Net.Enums.ProductStatus},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSavings.GetFlexibleProductListAsync(System.Nullable{Binance.Net.Enums.ProductStatus},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSavings.GetLeftDailyPurchaseQuotaOfFlexableProductAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
@@ -6522,7 +6522,7 @@
             Binance Spot Savings endpoints
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSavings.GetFlexibleProductListAsync(System.Nullable{Binance.Net.Enums.ProductStatus},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSavings.GetFlexibleProductListAsync(System.Nullable{Binance.Net.Enums.ProductStatus},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get product list
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-product-list-user_data" /></para>
