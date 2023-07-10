@@ -223,6 +223,32 @@ namespace Binance.Net.Converters
                     writer.WritePropertyName("maxNumIcebergOrders");
                     writer.WriteValue(MaxNumIcebergOrders.MaxNumIcebergOrders);                   
                     break;
+                case SymbolFilterType.PercentagePriceBySide:
+                    var pricePercentSideBySideFilter = (BinanceSymbolPercentPriceBySideFilter)filter;
+                    writer.WritePropertyName("askMultiplierUp");
+                    writer.WriteValue(pricePercentSideBySideFilter.AskMultiplierUp);
+                    writer.WritePropertyName("askMultiplierDown");
+                    writer.WriteValue(pricePercentSideBySideFilter.AskMultiplierDown);
+                    writer.WritePropertyName("bidMultiplierUp");
+                    writer.WriteValue(pricePercentSideBySideFilter.BidMultiplierUp);
+                    writer.WritePropertyName("bidMultiplierDown");
+                    writer.WriteValue(pricePercentSideBySideFilter.BidMultiplierDown);
+                    writer.WritePropertyName("avgPriceMins");
+                    writer.WriteValue(pricePercentSideBySideFilter.AveragePriceMinutes);
+                    break;
+                case SymbolFilterType.Notional:
+                    var notionalFilter = (BinanceSymbolNotionalFilter)filter;
+                    writer.WritePropertyName("minNotional");
+                    writer.WriteValue(notionalFilter.MinNotional);
+                    writer.WritePropertyName("maxNotional");
+                    writer.WriteValue(notionalFilter.MaxNotional);
+                    writer.WritePropertyName("applyMinToMarketOrders");
+                    writer.WriteValue(notionalFilter.ApplyMinToMarketOrders);
+                    writer.WritePropertyName("applyMaxToMarketOrders");
+                    writer.WriteValue(notionalFilter.ApplyMaxToMarketOrders);
+                    writer.WritePropertyName("avgPriceMins");
+                    writer.WriteValue(notionalFilter.AveragePriceMinutes);
+                    break;
                 default:
                     Trace.WriteLine($"{DateTime.Now:yyyy/MM/dd HH:mm:ss:fff} | Warning | Can't write symbol filter of type: " + filter.FilterType);
                     break;

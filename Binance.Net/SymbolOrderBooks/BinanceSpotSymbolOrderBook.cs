@@ -5,9 +5,12 @@ using Binance.Net.Clients;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients;
 using Binance.Net.Objects;
+using Binance.Net.Objects.Options;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.OrderBook;
 using CryptoExchange.Net.Sockets;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Binance.Net.SymbolOrderBooks
 {
@@ -17,31 +20,52 @@ namespace Binance.Net.SymbolOrderBooks
     /// </summary>
     public class BinanceSpotSymbolOrderBook : SymbolOrderBook
     {
-        private readonly IBinanceClient _restClient;
+        private readonly bool _clientOwner;
+        private readonly IBinanceRestClient _restClient;
         private readonly IBinanceSocketClient _socketClient;
         private readonly TimeSpan _initialDataTimeout;
-        private readonly bool _restOwner;
-        private readonly bool _socketOwner;
         private readonly int? _updateInterval;
 
         /// <summary>
-        /// Create a new instance
+        /// Create a new order book instance
         /// </summary>
-        /// <param name="symbol">The symbol of the order book</param>
-        /// <param name="options">The options for the order book</param>
-        public BinanceSpotSymbolOrderBook(string symbol, BinanceOrderBookOptions? options = null) : base("Binance", symbol, options ?? new BinanceOrderBookOptions())
+        /// <param name="symbol">The symbol the order book is for</param>
+        /// <param name="optionsDelegate">Option configuration delegate</param>
+        public BinanceSpotSymbolOrderBook(string symbol, Action<BinanceOrderBookOptions>? optionsDelegate = null)
+            : this(symbol, optionsDelegate, null, null, null)
         {
-            symbol.ValidateBinanceSymbol();
-            Levels = options?.Limit;
-            _updateInterval = options?.UpdateInterval;
-            _initialDataTimeout = options?.InitialDataTimeout ?? TimeSpan.FromSeconds(30);
-            _socketClient = options?.SocketClient ?? new BinanceSocketClient();
-            _restClient = options?.RestClient ?? new BinanceClient();
-            _restOwner = options?.RestClient == null;
-            _socketOwner = options?.SocketClient == null;
+            _clientOwner = true;
+        }
 
-            sequencesAreConsecutive = options?.Limit == null;
-            strictLevels = false;
+        /// <summary>
+        /// Create a new order book instance
+        /// </summary>
+        /// <param name="symbol">The symbol the order book is for</param>
+        /// <param name="optionsDelegate">Option configuration delegate</param>
+        /// <param name="logger">Logger</param>
+        /// <param name="restClient">Rest client instance</param>
+        /// <param name="socketClient">Socket client instance</param>
+        public BinanceSpotSymbolOrderBook(
+            string symbol,
+            Action<BinanceOrderBookOptions>? optionsDelegate,
+            ILogger<BinanceSpotSymbolOrderBook>? logger,
+            IBinanceRestClient? restClient,
+            IBinanceSocketClient? socketClient) : base(logger, "Binance", symbol)
+        {
+            var options = BinanceOrderBookOptions.Default.Copy();
+            if (optionsDelegate != null)
+                optionsDelegate(options);
+            Initialize(options);
+
+            _strictLevels = false;
+            _sequencesAreConsecutive = options?.Limit == null;
+            _updateInterval = options?.UpdateInterval;
+
+            Levels = options?.Limit;
+            _initialDataTimeout = options?.InitialDataTimeout ?? TimeSpan.FromSeconds(30);
+            _clientOwner = socketClient == null;
+            _socketClient = socketClient ?? new BinanceSocketClient();
+            _restClient = restClient ?? new BinanceRestClient();
         }
 
         /// <inheritdoc />
@@ -49,9 +73,9 @@ namespace Binance.Net.SymbolOrderBooks
         {
             CallResult<UpdateSubscription> subResult;
             if (Levels == null)
-                subResult = await _socketClient.SpotStreams.SubscribeToOrderBookUpdatesAsync(Symbol, _updateInterval, HandleUpdate).ConfigureAwait(false);
+                subResult = await _socketClient.SpotApi.ExchangeData.SubscribeToOrderBookUpdatesAsync(Symbol, _updateInterval, HandleUpdate).ConfigureAwait(false);
             else
-                subResult = await _socketClient.SpotStreams.SubscribeToPartialOrderBookUpdatesAsync(Symbol, Levels.Value, _updateInterval, HandleUpdate).ConfigureAwait(false);
+                subResult = await _socketClient.SpotApi.ExchangeData.SubscribeToPartialOrderBookUpdatesAsync(Symbol, Levels.Value, _updateInterval, HandleUpdate).ConfigureAwait(false);
 
             if (!subResult)
                 return new CallResult<UpdateSubscription>(subResult.Error!);
@@ -70,7 +94,7 @@ namespace Binance.Net.SymbolOrderBooks
                 var bookResult = await _restClient.SpotApi.ExchangeData.GetOrderBookAsync(Symbol, Levels ?? 5000).ConfigureAwait(false);
                 if (!bookResult)
                 {
-                    log.Write(Microsoft.Extensions.Logging.LogLevel.Debug, $"{Id} order book {Symbol} failed to retrieve initial order book");
+                    _logger.Log(Microsoft.Extensions.Logging.LogLevel.Debug, $"{Id} order book {Symbol} failed to retrieve initial order book");
                     await _socketClient.UnsubscribeAsync(subResult.Data).ConfigureAwait(false);
                     return new CallResult<UpdateSubscription>(bookResult.Error!);
                 }
@@ -125,10 +149,11 @@ namespace Binance.Net.SymbolOrderBooks
         /// <inheritdoc />
         protected override void Dispose(bool disposing)
         {
-            if (_restOwner)
+            if (_clientOwner)
+            {
                 _restClient?.Dispose();
-            if (_socketOwner)
                 _socketClient?.Dispose();
+            }
 
             base.Dispose(disposing);
         }
