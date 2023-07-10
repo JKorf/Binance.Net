@@ -21,7 +21,7 @@ using Binance.Net.Objects.Models.Spot;
 using CryptoExchange.Net.Sockets;
 using Binance.Net.Clients;
 using Binance.Net.Clients.SpotApi;
-using CryptoExchange.Net.Logging;
+using Binance.Net.Objects.Options;
 
 namespace Binance.Net.UnitTests
 {
@@ -54,13 +54,10 @@ namespace Binance.Net.UnitTests
                 ListenKey = "123"
             };
 
-            var client = TestHelpers.CreateResponseClient(key, new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient(key, options =>
             {
-                ApiCredentials = new BinanceApiCredentials("Test", "Test"),
-                SpotApiOptions = new BinanceApiClientOptions
-                {
-                    AutoTimestamp = false
-                }
+                options.ApiCredentials = new ApiCredentials("Test", "Test");
+                options.SpotOptions.AutoTimestamp = false;
             });
 
             // act
@@ -75,13 +72,10 @@ namespace Binance.Net.UnitTests
         public async Task KeepAliveUserStream_Should_Respond()
         {
             // arrange
-            var client = TestHelpers.CreateResponseClient("{}", new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient("{}", options =>
             {
-                ApiCredentials = new BinanceApiCredentials("Test", "Test"),
-                SpotApiOptions = new BinanceApiClientOptions
-                {
-                    AutoTimestamp = false
-                }
+                options.ApiCredentials = new ApiCredentials("Test", "Test");
+                options.SpotOptions.AutoTimestamp = false;
             });
 
             // act
@@ -95,14 +89,7 @@ namespace Binance.Net.UnitTests
         public async Task StopUserStream_Should_Respond()
         {
             // arrange
-            var client = TestHelpers.CreateResponseClient("{}", new BinanceClientOptions()
-            {
-                ApiCredentials = new BinanceApiCredentials("Test", "Test"),
-                SpotApiOptions = new BinanceApiClientOptions
-                {
-                    AutoTimestamp = false
-                }
-            });
+            var client = TestHelpers.CreateResponseClient("{}", options => { options.ApiCredentials = new ApiCredentials("Test", "Test"); options.SpotOptions.AutoTimestamp = false; });
 
             // act
             var result = await client.SpotApi.Account.StopUserStreamAsync("test");
@@ -115,13 +102,10 @@ namespace Binance.Net.UnitTests
         public async Task EnablingAutoTimestamp_Should_CallServerTime()
         {
             // arrange
-            var client = TestHelpers.CreateResponseClient("{}", new BinanceClientOptions()
+            var client = TestHelpers.CreateResponseClient("{}", options =>
             {
-                ApiCredentials = new BinanceApiCredentials("Test", "Test"),
-                SpotApiOptions = new BinanceApiClientOptions
-                {
-                    AutoTimestamp = true
-                }
+                options.ApiCredentials = new ApiCredentials("Test", "Test");
+                options.SpotOptions.AutoTimestamp = true;
             });
 
             // act
@@ -161,24 +145,23 @@ namespace Binance.Net.UnitTests
         {
             // arrange
             // act
-            var authProvider = new BinanceAuthenticationProvider(new BinanceApiCredentials("TestKey", "TestSecret"));
+            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
 
             // assert
-            Assert.AreEqual(authProvider.Credentials.Key.GetString(), "TestKey");
-            Assert.AreEqual(authProvider.Credentials.Secret.GetString(), "TestSecret");
+            Assert.AreEqual(authProvider.GetApiKey(), "TestKey");
         }
 
         [Test]
         public void AddingAuthToRequest_Should_AddApiKeyHeader()
         {
             // arrange
-            var authProvider = new BinanceAuthenticationProvider(new BinanceApiCredentials("TestKey", "TestSecret"));
+            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
             var client = new HttpClient();
             var request = new Request(new HttpRequestMessage(HttpMethod.Get, "https://test.test-api.com"), client, 1);
 
             // act
             var headers = new Dictionary<string, string>();
-            authProvider.AuthenticateRequest(new BinanceRestApiClient(new Log(""), new BinanceClientOptions(), new BinanceClientOptions().SpotApiOptions), request.Uri, HttpMethod.Get, new Dictionary<string, object>(), true, ArrayParametersSerialization.MultipleValues,
+            authProvider.AuthenticateRequest(new BinanceRestApiClient(new TraceLogger(), new BinanceRestOptions(), new BinanceRestOptions().SpotOptions), request.Uri, HttpMethod.Get, new Dictionary<string, object>(), true, ArrayParametersSerialization.MultipleValues,
                 HttpMethodParameterPosition.InUri, out var uriParameters, out var bodyParameters, out headers);
 
             // assert
@@ -206,7 +189,7 @@ namespace Binance.Net.UnitTests
         [Test]
         public void CheckRestInterfaces()
         {
-            var assembly = Assembly.GetAssembly(typeof(BinanceClient));
+            var assembly = Assembly.GetAssembly(typeof(BinanceRestClient));
             var ignore = new string[] { "IBinanceClientUsdFuturesApi", "IBinanceClientCoinFuturesApi", "IBinanceClientSpotApi" };
             var clientInterfaces = assembly.GetTypes().Where(t => t.Name.StartsWith("IBinanceClient") && !ignore.Contains(t.Name));
             
@@ -227,7 +210,7 @@ namespace Binance.Net.UnitTests
         [Test]
         public void CheckSocketInterfaces()
         {
-            var assembly = Assembly.GetAssembly(typeof(BinanceSocketClientSpotStreams));
+            var assembly = Assembly.GetAssembly(typeof(BinanceSocketClientSpotApi));
             var clientInterfaces = assembly.GetTypes().Where(t => t.Name.StartsWith("IBinanceSocketClient"));
 
             foreach (var clientInterface in clientInterfaces)

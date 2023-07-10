@@ -1,11 +1,21 @@
 ﻿using Binance.Net.Clients;
+using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients;
 using Binance.Net.Objects;
+using Binance.Net.Objects.Internal;
+using Binance.Net.Objects.Models.Spot;
+using Binance.Net.Objects.Options;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
+using System.Net;
 using System.Text.RegularExpressions;
+using Binance.Net.SymbolOrderBooks;
+using Binance.Net.Interfaces;
 
 namespace Binance.Net
 {
@@ -106,27 +116,47 @@ namespace Binance.Net
         /// Add the IBinanceClient and IBinanceSocketClient to the sevice collection so they can be injected
         /// </summary>
         /// <param name="services">The service collection</param>
-        /// <param name="defaultOptionsCallback">Set default options for the client</param>
-        /// <param name="socketClientLifeTime">The lifetime of the IBinanceSocketClient for the service collection. Defaults to Scoped.</param>
+        /// <param name="defaultRestOptionsDelegate">Set default options for the rest client</param>
+        /// <param name="defaultSocketOptionsDelegate">Set default options for the socket client</param>
+        /// <param name="socketClientLifeTime">The lifetime of the IBinanceSocketClient for the service collection. Defaults to Singleton.</param>
         /// <returns></returns>
         public static IServiceCollection AddBinance(
-            this IServiceCollection services, 
-            Action<BinanceClientOptions, BinanceSocketClientOptions>? defaultOptionsCallback = null,
+            this IServiceCollection services,
+            Action<BinanceRestOptions>? defaultRestOptionsDelegate = null,
+            Action<BinanceSocketOptions>? defaultSocketOptionsDelegate = null,
             ServiceLifetime? socketClientLifeTime = null)
         {
-            if (defaultOptionsCallback != null)
-            {
-                var options = new BinanceClientOptions();
-                var socketOptions = new BinanceSocketClientOptions();
-                defaultOptionsCallback?.Invoke(options, socketOptions);
+            var restOptions = BinanceRestOptions.Default.Copy();
 
-                BinanceClient.SetDefaultOptions(options);
-                BinanceSocketClient.SetDefaultOptions(socketOptions);
+            if (defaultRestOptionsDelegate != null)
+            {
+                defaultRestOptionsDelegate(restOptions);
+                BinanceRestClient.SetDefaultOptions(defaultRestOptionsDelegate);
             }
 
-            services.AddTransient<IBinanceClient, BinanceClient>();
+            if (defaultSocketOptionsDelegate != null)
+                BinanceSocketClient.SetDefaultOptions(defaultSocketOptionsDelegate);
+
+            services.AddHttpClient<IBinanceRestClient, BinanceRestClient>(options =>
+            {
+                options.Timeout = restOptions.RequestTimeout;
+            }).ConfigurePrimaryHttpMessageHandler(() => {
+                var handler = new HttpClientHandler();
+                if (restOptions.Proxy != null)
+                {
+                    handler.Proxy = new WebProxy
+                    {
+                        Address = new Uri($"{restOptions.Proxy.Host}:{restOptions.Proxy.Port}"),
+                        Credentials = restOptions.Proxy.Password == null ? null : new NetworkCredential(restOptions.Proxy.Login, restOptions.Proxy.Password)
+                    };
+                }
+                return handler;
+            });
+
+            services.AddSingleton<IBinanceOrderBookFactory, BinanceOrderBookFactory>();
+            services.AddTransient<IBinanceRestClient, BinanceRestClient>();
             if (socketClientLifeTime == null)
-                services.AddScoped<IBinanceSocketClient, BinanceSocketClient>();
+                services.AddSingleton<IBinanceSocketClient, BinanceSocketClient>();
             else
                 services.Add(new ServiceDescriptor(typeof(IBinanceSocketClient), typeof(BinanceSocketClient), socketClientLifeTime.Value));
             return services;
@@ -135,7 +165,7 @@ namespace Binance.Net
         /// <summary>
         /// Validate the string is a valid Binance symbol.
         /// </summary>
-        /// <param name="symbolString">string to validate</param>
+        /// <param name="symbolString">string to validate</param> 
         public static void ValidateBinanceSymbol(this string symbolString)
         {
             if (string.IsNullOrEmpty(symbolString))
@@ -143,6 +173,161 @@ namespace Binance.Net
 
             if(!Regex.IsMatch(symbolString, "^([A-Z|a-z|0-9]{5,})$"))
                 throw new ArgumentException($"{symbolString} is not a valid Binance symbol. Should be [BaseAsset][QuoteAsset], e.g. BTCUSDT");
+        }
+
+        internal static BinanceTradeRuleResult ValidateTradeRules(ILogger logger, TradeRulesBehaviour tradeRulesBehaviour, BinanceExchangeInfo exchangeInfo, string symbol, decimal? quantity, decimal? quoteQuantity, decimal? price, decimal? stopPrice, SpotOrderType? type)
+        {
+            var outputQuantity = quantity;
+            var outputQuoteQuantity = quoteQuantity;
+            var outputPrice = price;
+            var outputStopPrice = stopPrice;
+
+            var symbolData = exchangeInfo.Symbols.SingleOrDefault(s => string.Equals(s.Name, symbol, StringComparison.CurrentCultureIgnoreCase));
+            if (symbolData == null)
+                return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Symbol {symbol} not found");
+
+            if (type != null)
+            {
+                if (!symbolData.OrderTypes.Contains(type.Value))
+                {
+                    return BinanceTradeRuleResult.CreateFailed(
+                        $"Trade rules check failed: {type} order type not allowed for {symbol}");
+                }
+            }
+
+            if (symbolData.LotSizeFilter != null || symbolData.MarketLotSizeFilter != null && type == SpotOrderType.Market)
+            {
+                var minQty = symbolData.LotSizeFilter?.MinQuantity;
+                var maxQty = symbolData.LotSizeFilter?.MaxQuantity;
+                var stepSize = symbolData.LotSizeFilter?.StepSize;
+                if (type == SpotOrderType.Market && symbolData.MarketLotSizeFilter != null)
+                {
+                    minQty = symbolData.MarketLotSizeFilter.MinQuantity;
+                    if (symbolData.MarketLotSizeFilter.MaxQuantity != 0)
+                        maxQty = symbolData.MarketLotSizeFilter.MaxQuantity;
+
+                    if (symbolData.MarketLotSizeFilter.StepSize != 0)
+                        stepSize = symbolData.MarketLotSizeFilter.StepSize;
+                }
+
+                if (minQty.HasValue && quantity.HasValue)
+                {
+                    outputQuantity = BinanceHelpers.ClampQuantity(minQty.Value, maxQty!.Value, stepSize!.Value, quantity.Value);
+                    if (outputQuantity != quantity.Value)
+                    {
+                        if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                        {
+                            return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: LotSize filter failed. Original quantity: {quantity}, Closest allowed: {outputQuantity}");
+                        }
+
+                        logger.Log(LogLevel.Information, $"Quantity clamped from {quantity} to {outputQuantity} based on lot size filter");
+                    }
+                }
+            }
+
+            if (symbolData.MinNotionalFilter != null && outputQuoteQuantity != null)
+            {
+                if (quoteQuantity < symbolData.MinNotionalFilter.MinNotional)
+                {
+                    if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                    {
+                        return BinanceTradeRuleResult.CreateFailed(
+                            $"Trade rules check failed: MinNotional filter failed. Order value: {quoteQuantity}, minimal order value: {symbolData.MinNotionalFilter.MinNotional}");
+                    }
+
+                    outputQuoteQuantity = symbolData.MinNotionalFilter.MinNotional;
+                    logger.Log(LogLevel.Information, $"QuoteQuantity adjusted from {quoteQuantity} to {outputQuoteQuantity} based on min notional filter");
+                }
+            }
+
+            if (price == null)
+                return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputQuoteQuantity, null, outputStopPrice);
+
+            if (symbolData.PriceFilter != null)
+            {
+                if (symbolData.PriceFilter.MaxPrice != 0 && symbolData.PriceFilter.MinPrice != 0)
+                {
+                    outputPrice = BinanceHelpers.ClampPrice(symbolData.PriceFilter.MinPrice, symbolData.PriceFilter.MaxPrice, price.Value);
+                    if (outputPrice != price)
+                    {
+                        if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                            return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter max/min failed. Original price: {price}, Closest allowed: {outputPrice}");
+
+                        logger.Log(LogLevel.Information, $"price clamped from {price} to {outputPrice} based on price filter");
+                    }
+
+                    if (stopPrice != null)
+                    {
+                        outputStopPrice = BinanceHelpers.ClampPrice(symbolData.PriceFilter.MinPrice,
+                            symbolData.PriceFilter.MaxPrice, stopPrice.Value);
+                        if (outputStopPrice != stopPrice)
+                        {
+                            if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                            {
+                                return BinanceTradeRuleResult.CreateFailed(
+                                    $"Trade rules check failed: Stop price filter max/min failed. Original stop price: {stopPrice}, Closest allowed: {outputStopPrice}");
+                            }
+
+                            logger.Log(LogLevel.Information,
+                                $"Stop price clamped from {stopPrice} to {outputStopPrice} based on price filter");
+                        }
+                    }
+                }
+
+                if (symbolData.PriceFilter.TickSize != 0)
+                {
+                    var beforePrice = outputPrice;
+                    outputPrice = BinanceHelpers.FloorPrice(symbolData.PriceFilter.TickSize, price.Value);
+                    if (outputPrice != beforePrice)
+                    {
+                        if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                            return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter tick failed. Original price: {price}, Closest allowed: {outputPrice}");
+
+                        logger.Log(LogLevel.Information, $"price floored from {beforePrice} to {outputPrice} based on price filter");
+                    }
+
+                    if (stopPrice != null)
+                    {
+                        var beforeStopPrice = outputStopPrice;
+                        outputStopPrice = BinanceHelpers.FloorPrice(symbolData.PriceFilter.TickSize, stopPrice.Value);
+                        if (outputStopPrice != beforeStopPrice)
+                        {
+                            if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                            {
+                                return BinanceTradeRuleResult.CreateFailed(
+                                    $"Trade rules check failed: Stop price filter tick failed. Original stop price: {stopPrice}, Closest allowed: {outputStopPrice}");
+                            }
+
+                            logger.Log(LogLevel.Information,
+                                $"Stop price floored from {beforeStopPrice} to {outputStopPrice} based on price filter");
+                        }
+                    }
+                }
+            }
+
+            if (symbolData.MinNotionalFilter == null || quantity == null || outputPrice == null)
+                return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputQuoteQuantity, outputPrice, outputStopPrice);
+
+            var currentQuantity = outputQuantity ?? quantity.Value;
+            var notional = currentQuantity * outputPrice.Value;
+            if (notional < symbolData.MinNotionalFilter.MinNotional)
+            {
+                if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                {
+                    return BinanceTradeRuleResult.CreateFailed(
+                        $"Trade rules check failed: MinNotional filter failed. Order quantity: {notional}, minimal order quantity: {symbolData.MinNotionalFilter.MinNotional}");
+                }
+
+                if (symbolData.LotSizeFilter == null)
+                    return BinanceTradeRuleResult.CreateFailed("Trade rules check failed: MinNotional filter failed. Unable to auto comply because LotSizeFilter not present");
+
+                var minQuantity = symbolData.MinNotionalFilter.MinNotional / outputPrice.Value;
+                var stepSize = symbolData.LotSizeFilter!.StepSize;
+                outputQuantity = BinanceHelpers.Floor(minQuantity + (stepSize - minQuantity % stepSize));
+                logger.Log(LogLevel.Information, $"Quantity clamped from {currentQuantity} to {outputQuantity} based on min notional filter");
+            }
+
+            return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputQuoteQuantity, outputPrice, outputStopPrice);
         }
     }
 }

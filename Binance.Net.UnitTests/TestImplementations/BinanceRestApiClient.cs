@@ -1,18 +1,15 @@
-﻿using CryptoExchange.Net;
+﻿using Binance.Net.Objects.Options;
+using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
+using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Binance.Net.UnitTests.TestImplementations
 {
     public class BinanceRestApiClient : RestApiClient
     {
-        public BinanceRestApiClient(Log log, ClientOptions options, RestApiClientOptions apiOptions) : base(log, options, apiOptions)
+        public BinanceRestApiClient(ILogger logger, BinanceRestOptions options, BinanceRestApiOptions apiOptions) : base(logger, null, "https://test.com", options, apiOptions)
         {
         }
 

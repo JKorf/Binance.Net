@@ -1,4 +1,6 @@
-﻿namespace Binance.Net.Enums
+﻿using CryptoExchange.Net.Attributes;
+
+namespace Binance.Net.Enums
 {
     /// <summary>
     /// Type of contract
@@ -8,14 +10,17 @@
         /// <summary>
         /// Perpetual
         /// </summary>
+        [Map("PERPETUAL")]
         Perpetual,
         /// <summary>
         /// Current month
         /// </summary>
+        [Map("CURRENT_MONTH")]
         CurrentMonth,
         /// <summary>
         /// Current quarter
         /// </summary>
+        [Map("CURRENT_QUARTER")]
         CurrentQuarter,
         /// <summary>
         /// Current quarter delivering
@@ -24,6 +29,7 @@
         /// <summary>
         /// Next quarter
         /// </summary>
+        [Map("NEXT_QUARTER")]
         NextQuarter,
         /// <summary>
         /// Next quarter delivering
@@ -32,6 +38,7 @@
         /// <summary>
         /// Next month
         /// </summary>
+        [Map("NEXT_MONTH")]
         NextMonth,
         /// <summary>
         /// Unknown
