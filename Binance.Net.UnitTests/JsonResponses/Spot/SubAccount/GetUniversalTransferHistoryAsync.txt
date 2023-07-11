@@ -21,7 +21,18 @@
       "toAccountType": "USDT_FUTURE",
       "status": "SUCCESS",
       "createTimeStamp": 1544433326000
+    },
+    {
+      "tranId": 138579572899,
+      "fromEmail": "master@test.com",
+      "toEmail": "subaccount3@test.com",
+      "asset": "USDC",
+      "amount": "0.3",
+      "fromAccountType": "SPOT",
+      "toAccountType": "MARGIN",
+      "status": "SUCCESS",
+      "createTimeStamp": 1544433327000
     }
   ],
-  "totalCount": 2
+  "totalCount": 3
 }
