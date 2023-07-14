@@ -184,7 +184,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("network", network);
             parameters.AddOptionalParameter("transactionFeeFlag", transactionFeeFlag);
             parameters.AddOptionalParameter("addressTag", addressTag);
-            parameters.AddOptionalParameter("walletType", walletType != null ? JsonConvert.SerializeObject(walletType, new WalletTypeConverter(false)) : null);
+            parameters.AddOptionalParameter("walletType", walletType != null ? JsonConvert.SerializeObject(walletType, StaticConverters.StaticWalletTypeConverter) : null);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestInternal<BinanceWithdrawalPlaced>(_baseClient.GetUrl(withdrawEndpoint, "sapi", "1"), HttpMethod.Post, ct, parameters, true, HttpMethodParameterPosition.InUri).ConfigureAwait(false);
@@ -200,7 +200,7 @@ namespace Binance.Net.Clients.SpotApi
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("coin", asset);
             parameters.AddOptionalParameter("withdrawOrderId", withdrawOrderId);
-            parameters.AddOptionalParameter("status", status != null ? JsonConvert.SerializeObject(status, new WithdrawalStatusConverter(false)) : null);
+            parameters.AddOptionalParameter("status", status != null ? JsonConvert.SerializeObject(status, StaticConverters.StaticWithdrawalStatusConverter) : null);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -221,7 +221,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("coin", asset);
             parameters.AddOptionalParameter("offset", offset?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("status", status != null ? JsonConvert.SerializeObject(status, new DepositStatusConverter(false)) : null);
+            parameters.AddOptionalParameter("status", status != null ? JsonConvert.SerializeObject(status, StaticConverters.StaticDepositStatusConverter) : null);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -475,7 +475,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>
             {
-                { "type", JsonConvert.SerializeObject(type, new UniversalTransferTypeConverter(false)) },
+                { "type", JsonConvert.SerializeObject(type, StaticConverters.StaticUniversalTransferTypeConverter) },
                 { "asset", asset },
                 { "amount", quantity.ToString(CultureInfo.InvariantCulture) }
             };
@@ -494,7 +494,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>
             {
-                { "type", JsonConvert.SerializeObject(type, new UniversalTransferTypeConverter(false)) }
+                { "type", JsonConvert.SerializeObject(type, StaticConverters.StaticUniversalTransferTypeConverter) }
             };
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
@@ -578,7 +578,7 @@ namespace Binance.Net.Clients.SpotApi
             {
                 { "asset", asset },
                 { "amount", quantity.ToString(CultureInfo.InvariantCulture) },
-                { "type", JsonConvert.SerializeObject(type, new TransferDirectionTypeConverter(false)) }
+                { "type", JsonConvert.SerializeObject(type, StaticConverters.StaticTransferDirectionTypeConverter) }
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
@@ -653,7 +653,7 @@ namespace Binance.Net.Clients.SpotApi
 
             var parameters = new Dictionary<string, object>
             {
-                { "direction", JsonConvert.SerializeObject(direction, new TransferDirectionConverter(false)) }
+                { "direction", JsonConvert.SerializeObject(direction, StaticConverters.StaticTransferDirectionConverter) }
             };
             parameters.AddOptionalParameter("size", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("current", page?.ToString(CultureInfo.InvariantCulture));
@@ -907,11 +907,11 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("from",
                 !from.HasValue
                     ? null
-                    : JsonConvert.SerializeObject(from, new IsolatedMarginTransferDirectionConverter(false)));
+                    : JsonConvert.SerializeObject(from, StaticConverters.StaticIsolatedMarginTransferDirectionConverter));
             parameters.AddOptionalParameter("to",
                 !to.HasValue
                     ? null
-                    : JsonConvert.SerializeObject(to, new IsolatedMarginTransferDirectionConverter(false)));
+                    : JsonConvert.SerializeObject(to, StaticConverters.StaticIsolatedMarginTransferDirectionConverter));
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime)?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime)?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("current", current?.ToString(CultureInfo.InvariantCulture));
@@ -1026,8 +1026,8 @@ namespace Binance.Net.Clients.SpotApi
             {
                 {"asset", asset},
                 {"symbol", symbol},
-                {"transFrom", JsonConvert.SerializeObject(from, new IsolatedMarginTransferDirectionConverter(false))},
-                {"transTo", JsonConvert.SerializeObject(to, new IsolatedMarginTransferDirectionConverter(false))},
+                {"transFrom", JsonConvert.SerializeObject(from, StaticConverters.StaticIsolatedMarginTransferDirectionConverter)},
+                {"transTo", JsonConvert.SerializeObject(to, StaticConverters.StaticIsolatedMarginTransferDirectionConverter)},
                 {"amount", quantity.ToString(CultureInfo.InvariantCulture)}
             };
             parameters.AddOptionalParameter("recvWindow",
