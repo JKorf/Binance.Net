@@ -1,7 +1,6 @@
 ﻿using Binance.Net.Clients;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients;
-using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Options;
@@ -9,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Net;
@@ -140,7 +138,8 @@ namespace Binance.Net
             services.AddHttpClient<IBinanceRestClient, BinanceRestClient>(options =>
             {
                 options.Timeout = restOptions.RequestTimeout;
-            }).ConfigurePrimaryHttpMessageHandler(() => {
+            }).ConfigurePrimaryHttpMessageHandler(() =>
+            {
                 var handler = new HttpClientHandler();
                 if (restOptions.Proxy != null)
                 {
@@ -171,7 +170,7 @@ namespace Binance.Net
             if (string.IsNullOrEmpty(symbolString))
                 throw new ArgumentException("Symbol is not provided");
 
-            if(!Regex.IsMatch(symbolString, "^([A-Z|a-z|0-9]{5,})$"))
+            if (!Regex.IsMatch(symbolString, "^([A-Z|a-z|0-9]{5,})$"))
                 throw new ArgumentException($"{symbolString} is not a valid Binance symbol. Should be [BaseAsset][QuoteAsset], e.g. BTCUSDT");
         }
 

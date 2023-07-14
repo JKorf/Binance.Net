@@ -7,7 +7,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures.Socket;
-using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.Socket;
 using CryptoExchange.Net.Interfaces;
 
@@ -343,7 +342,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
             Action<DataEvent<BinanceGridUpdate>>? onGridUpdate,
             CancellationToken ct = default);
 
-        
+
         /// <summary>
         /// Subscribes to the Mark price update stream for a all symbols
         /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#mark-price-stream-for-all-market" /></para>

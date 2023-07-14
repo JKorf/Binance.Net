@@ -1,5 +1,4 @@
 ﻿using Binance.Net.Enums;
-using Binance.Net.Objects;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
@@ -99,7 +98,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BinanceAuthenticationProvider(credentials);
-       
+
         internal Uri GetUrl(string endpoint, string api, string? version = null)
         {
             var result = BaseAddress.AppendPath(api);
@@ -317,7 +316,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                     MarkPrice = p.MarkPrice,
                     Quantity = p.Quantity,
                     UnrealizedPnl = p.UnrealizedPnl,
-                    Side = p.PositionSide == PositionSide.Long ? CommonPositionSide.Long : p.PositionSide == PositionSide.Short ? CommonPositionSide.Short: CommonPositionSide.Both                    
+                    Side = p.PositionSide == PositionSide.Long ? CommonPositionSide.Long : p.PositionSide == PositionSide.Short ? CommonPositionSide.Short : CommonPositionSide.Both
                 }
             ));
         }

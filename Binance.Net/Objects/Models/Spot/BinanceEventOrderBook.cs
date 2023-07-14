@@ -9,7 +9,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Stream order book
     /// </summary>
-    public class BinanceEventOrderBook: BinanceOrderBook, IBinanceEventOrderBook
+    public class BinanceEventOrderBook : BinanceOrderBook, IBinanceEventOrderBook
     {
         /// <summary>
         /// The id of this update, can be synced with BinanceClient.Spot.GetOrderBook to update the order book
@@ -34,7 +34,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonProperty("E"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime EventTime { get; set; }
-        
+
         /// <summary>
         /// Setter for bids (needed forJson.Net)
         /// </summary>

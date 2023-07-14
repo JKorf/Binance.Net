@@ -1,5 +1,4 @@
-﻿using Binance.Net.Objects;
-using CryptoExchange.Net;
+﻿using CryptoExchange.Net;
 using Binance.Net.Interfaces.Clients;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using Binance.Net.Interfaces.Clients.SpotApi;

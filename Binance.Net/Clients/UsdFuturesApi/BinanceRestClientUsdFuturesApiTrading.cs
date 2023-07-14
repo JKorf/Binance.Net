@@ -48,7 +48,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         private readonly ILogger _logger;
 
         private readonly BinanceRestClientUsdFuturesApi _baseClient;
-        private readonly string _spotBaseAddress; 
+        private readonly string _spotBaseAddress;
 
         internal BinanceRestClientUsdFuturesApiTrading(ILogger logger, BinanceRestClientUsdFuturesApi baseClient)
         {
@@ -534,11 +534,11 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #region Get historical Algo Orders
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAlgoOrders>> GetClosedAlgoOrdersAsync(string? symbol = null, OrderSide? side = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null,long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceAlgoOrders>> GetClosedAlgoOrdersAsync(string? symbol = null, OrderSide? side = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("symbol", symbol);
-            parameters.AddOptionalParameter("side", side == null? null: JsonConvert.SerializeObject(side, StaticConverters.StaticOrderSideConverter));
+            parameters.AddOptionalParameter("side", side == null ? null : JsonConvert.SerializeObject(side, StaticConverters.StaticOrderSideConverter));
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("page", page);

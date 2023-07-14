@@ -8,7 +8,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Aggregated information about trades for a symbol
     /// </summary>
-    public class BinanceStreamAggregatedTrade: BinanceStreamEvent, IBinanceAggregatedTrade
+    public class BinanceStreamAggregatedTrade : BinanceStreamEvent, IBinanceAggregatedTrade
     {
         /// <summary>
         /// The symbol the trade was for
@@ -50,7 +50,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// </summary>
         [JsonProperty("m")]
         public bool BuyerIsMaker { get; set; }
-        
+
         /// <summary>
         /// Unused
         /// </summary>

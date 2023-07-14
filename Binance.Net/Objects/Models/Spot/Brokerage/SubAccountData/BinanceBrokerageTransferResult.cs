@@ -12,7 +12,7 @@ namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
         /// </summary>
         [JsonProperty("txnId")]
         public string Id { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// Client Transfer Id
         /// </summary>

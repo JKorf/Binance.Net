@@ -221,7 +221,7 @@ namespace Binance.Net.Converters
                 case SymbolFilterType.IcebergOrders:
                     var MaxNumIcebergOrders = (BinanceMaxNumberOfIcebergOrdersFilter)filter;
                     writer.WritePropertyName("maxNumIcebergOrders");
-                    writer.WriteValue(MaxNumIcebergOrders.MaxNumIcebergOrders);                   
+                    writer.WriteValue(MaxNumIcebergOrders.MaxNumIcebergOrders);
                     break;
                 case SymbolFilterType.PercentagePriceBySide:
                     var pricePercentSideBySideFilter = (BinanceSymbolPercentPriceBySideFilter)filter;

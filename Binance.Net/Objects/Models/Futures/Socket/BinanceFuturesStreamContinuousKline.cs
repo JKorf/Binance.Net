@@ -9,7 +9,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Wrapper for continuous kline information for a symbol
     /// </summary>
-    public class BinanceStreamContinuousKlineData: BinanceStreamEvent, IBinanceStreamKlineData
+    public class BinanceStreamContinuousKlineData : BinanceStreamEvent, IBinanceStreamKlineData
     {
         /// <summary>
         /// The symbol the data is for

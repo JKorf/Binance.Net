@@ -49,12 +49,12 @@ namespace Binance.Net
         public string? CoinFuturesSocketAddress { get; }
 
         internal BinanceEnvironment(
-            string name, 
-            string spotRestAddress, 
-            string spotSocketStreamAddress, 
+            string name,
+            string spotRestAddress,
+            string spotSocketStreamAddress,
             string spotSocketApiAddress,
-            string? blvtSocketAddress, 
-            string? usdFuturesRestAddress, 
+            string? blvtSocketAddress,
+            string? usdFuturesRestAddress,
             string? usdFuturesSocketAddress,
             string? coinFuturesRestAddress,
             string? coinFuturesSocketAddress) :
@@ -73,8 +73,8 @@ namespace Binance.Net
         /// <summary>
         /// Live environment
         /// </summary>
-        public static BinanceEnvironment Live { get; } 
-            = new BinanceEnvironment(TradeEnvironmentNames.Live, 
+        public static BinanceEnvironment Live { get; }
+            = new BinanceEnvironment(TradeEnvironmentNames.Live,
                                      BinanceApiAddresses.Default.RestClientAddress,
                                      BinanceApiAddresses.Default.SocketClientStreamAddress,
                                      BinanceApiAddresses.Default.SocketClientApiAddress,

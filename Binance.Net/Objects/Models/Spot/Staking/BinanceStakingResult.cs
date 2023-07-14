@@ -3,7 +3,7 @@
     /// <summary>
     /// Staking result
     /// </summary>
-    public class BinanceStakingResult 
+    public class BinanceStakingResult
     {
         /// <summary>
         /// Successful
@@ -14,7 +14,7 @@
     /// <summary>
     /// Staking result
     /// </summary>
-    public class BinanceStakingPositionResult: BinanceStakingResult
+    public class BinanceStakingPositionResult : BinanceStakingResult
     {
         /// <summary>
         /// Id of the position

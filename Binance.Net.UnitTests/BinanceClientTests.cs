@@ -1,6 +1,4 @@
-﻿using Binance.Net.Objects;
-using Binance.Net.UnitTests.TestImplementations;
-using CryptoExchange.Net;
+﻿using Binance.Net.UnitTests.TestImplementations;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Requests;
 using Moq;
@@ -12,9 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using CryptoExchange.Net.Objects;
-using Binance.Net.Enums;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using System.Reflection;
 using System.Diagnostics;
 using Binance.Net.Objects.Models.Spot;
@@ -44,7 +40,7 @@ namespace Binance.Net.UnitTests
             Assert.AreEqual(true, result.Success);
             Assert.AreEqual(expected, result.Data);
         }
-       
+
         [TestCase]
         public async Task StartUserStream_Should_RespondWithListenKey()
         {
@@ -166,7 +162,7 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.IsTrue(headers.First().Key == "X-MBX-APIKEY" && headers.First().Value == "TestKey");
-        }       
+        }
 
         [TestCase("BTCUSDT", true)]
         [TestCase("NANOUSDT", true)]
@@ -192,8 +188,8 @@ namespace Binance.Net.UnitTests
             var assembly = Assembly.GetAssembly(typeof(BinanceRestClient));
             var ignore = new string[] { "IBinanceClientUsdFuturesApi", "IBinanceClientCoinFuturesApi", "IBinanceClientSpotApi" };
             var clientInterfaces = assembly.GetTypes().Where(t => t.Name.StartsWith("IBinanceClient") && !ignore.Contains(t.Name));
-            
-            foreach(var clientInterface in clientInterfaces)
+
+            foreach (var clientInterface in clientInterfaces)
             {
                 var implementation = assembly.GetTypes().Single(t => t.IsAssignableTo(clientInterface) && t != clientInterface);
                 int methods = 0;

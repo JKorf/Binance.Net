@@ -31,7 +31,7 @@ namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
         /// Sub Account Id
         /// </summary>
         public string SubAccountId { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// Total Balance Of Btc
         /// </summary>

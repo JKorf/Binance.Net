@@ -17,7 +17,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// NOTE: string type, because the value van be 'inf' (infinite)
         /// </summary>
         public string? MaxNotionalValue { get; set; }
-        
+
         /// <summary>
         /// Max quantity
         /// </summary>

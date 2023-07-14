@@ -8,8 +8,8 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Tick info
     /// </summary>
-    public abstract class BinanceStreamTickBase: BinanceStreamEvent, IBinanceTick
-    {        
+    public abstract class BinanceStreamTickBase : BinanceStreamEvent, IBinanceTick
+    {
         /// <summary>
         /// The symbol this data is for
         /// </summary>
@@ -118,7 +118,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Stream tick
     /// </summary>
-    public class BinanceStreamTick: BinanceStreamTickBase
+    public class BinanceStreamTick : BinanceStreamTickBase
     {
         /// <summary>
         /// Total traded volume in the base asset

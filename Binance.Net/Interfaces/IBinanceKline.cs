@@ -11,7 +11,7 @@ namespace Binance.Net.Interfaces
         /// The time this candlestick opened
         /// </summary>
         DateTime OpenTime { get; set; }
-        
+
         /// <summary>
         /// The price at which this candlestick opened
         /// </summary>

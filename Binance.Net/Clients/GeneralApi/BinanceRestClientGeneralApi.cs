@@ -1,5 +1,4 @@
-﻿using Binance.Net.Objects;
-using CryptoExchange.Net.Authentication;
+﻿using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Objects;
 using System;
 using System.Collections.Generic;
@@ -44,7 +43,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region constructor/destructor
 
-        internal BinanceRestClientGeneralApi(ILogger logger, HttpClient? httpClient, BinanceRestClient baseClient, BinanceRestOptions options) 
+        internal BinanceRestClientGeneralApi(ILogger logger, HttpClient? httpClient, BinanceRestClient baseClient, BinanceRestOptions options)
             : base(logger, httpClient, options.Environment.SpotRestAddress, options, options.SpotOptions)
         {
             _baseClient = baseClient;

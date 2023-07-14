@@ -18,17 +18,17 @@ namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
         /// Income
         /// </summary>
         public decimal Income { get; set; }
-        
+
         /// <summary>
         /// Asset
         /// </summary>
         public string Asset { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// Symbol
         /// </summary>
         public string Symbol { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// Trade Id
         /// </summary>

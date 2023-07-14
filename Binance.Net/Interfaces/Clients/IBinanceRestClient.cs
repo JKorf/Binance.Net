@@ -2,7 +2,6 @@
 using Binance.Net.Interfaces.Clients.GeneralApi;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
-using Binance.Net.Objects;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Interfaces;
 
@@ -11,7 +10,7 @@ namespace Binance.Net.Interfaces.Clients
     /// <summary>
     /// Client for accessing the Binance Rest API. 
     /// </summary>
-    public interface IBinanceRestClient: IRestClient
+    public interface IBinanceRestClient : IRestClient
     {
         /// <summary>
         /// General API endpoints

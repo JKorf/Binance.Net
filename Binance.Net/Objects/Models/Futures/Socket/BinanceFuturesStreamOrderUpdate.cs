@@ -9,7 +9,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Order update
     /// </summary>
-    public class BinanceFuturesStreamOrderUpdate: BinanceStreamEvent
+    public class BinanceFuturesStreamOrderUpdate : BinanceStreamEvent
     {
         /// <summary>
         /// Update data

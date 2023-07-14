@@ -109,7 +109,7 @@ namespace Binance.Net.Clients.SpotApi
         public async Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default)
         {
             var result = await _baseClient.SendRequestInternal<BinanceCheckTime>(_baseClient.GetUrl(checkTimeEndpoint, api, publicVersion), HttpMethod.Get, ct, ignoreRateLimit: true).ConfigureAwait(false);
-            return result.As(result.Data?.ServerTime ?? default);            
+            return result.As(result.Data?.ServerTime ?? default);
         }
 
         #endregion
@@ -362,10 +362,10 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<IBinanceTick>>> GetTickersAsync(IEnumerable<string> symbols, CancellationToken ct = default)
         {
-            foreach(var symbol in symbols)
+            foreach (var symbol in symbols)
                 symbol.ValidateBinanceSymbol();
 
-            var parameters = new Dictionary<string, object> { { "symbols", $"[{string.Join("," ,symbols.Select(s => $"\"{s}\""))}]" } };
+            var parameters = new Dictionary<string, object> { { "symbols", $"[{string.Join(",", symbols.Select(s => $"\"{s}\""))}]" } };
             var symbolCount = symbols.Count();
             var weight = symbolCount <= 20 ? 1 : symbolCount <= 100 ? 20 : 40;
             var result = await _baseClient.SendRequestInternal<IEnumerable<Binance24HPrice>>(_baseClient.GetUrl(price24HEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters, weight: weight).ConfigureAwait(false);
@@ -435,7 +435,7 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinancePrice>>> GetPricesAsync(IEnumerable<string> symbols, CancellationToken ct = default)
         {
-            foreach(var symbol in symbols)
+            foreach (var symbol in symbols)
                 symbol.ValidateBinanceSymbol();
 
             var parameters = new Dictionary<string, object> { { "symbols", $"[{string.Join(",", symbols.Select(s => $"\"{s}\""))}]" } };
@@ -464,7 +464,7 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceBookPrice>>> GetBookPricesAsync(IEnumerable<string> symbols, CancellationToken ct = default)
         {
-            foreach(var symbol in symbols)
+            foreach (var symbol in symbols)
                 symbol.ValidateBinanceSymbol();
             var parameters = new Dictionary<string, object> { { "symbols", $"[{string.Join(",", symbols.Select(s => $"\"{s}\""))}]" } };
 

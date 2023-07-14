@@ -35,7 +35,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
-        
+
         /// <summary>
         /// The status of the transfer
         /// </summary>

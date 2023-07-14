@@ -40,7 +40,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Position info
     /// </summary>
-    public class BinancePositionInfoBase: BinancePositionBase
+    public class BinancePositionInfoBase : BinancePositionBase
     {
         /// <summary>
         /// Initial margin
@@ -56,7 +56,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// Position initial margin
         /// </summary>
         public decimal PositionInitialMargin { get; set; }
-        
+
         /// <summary>
         /// Open order initial margin
         /// </summary>
@@ -106,7 +106,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Base position details
     /// </summary>
-    public class BinancePositionDetailsBase: BinancePositionBase
+    public class BinancePositionDetailsBase : BinancePositionBase
     {
         /// <summary>
         /// Margin type

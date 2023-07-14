@@ -6,7 +6,7 @@ namespace Binance.Net.Converters
 {
     internal class ListStatusTypeConverter : BaseConverter<ListStatusType>
     {
-        public ListStatusTypeConverter(): this(true) { }
+        public ListStatusTypeConverter() : this(true) { }
         public ListStatusTypeConverter(bool quotes) : base(quotes) { }
 
         protected override List<KeyValuePair<ListStatusType, string>> Mapping => new List<KeyValuePair<ListStatusType, string>>

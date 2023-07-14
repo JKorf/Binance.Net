@@ -13,13 +13,13 @@ namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
         /// Sub Account Id
         /// </summary>
         public string SubAccountId { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// Is Futures Enabled
         /// </summary>
         [JsonProperty("enableFutures")]
         public bool IsFuturesEnabled { get; set; }
-        
+
         /// <summary>
         /// Update Date
         /// </summary>

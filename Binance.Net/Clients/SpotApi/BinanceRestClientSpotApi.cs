@@ -1,6 +1,5 @@
 ﻿using Binance.Net.Converters;
 using Binance.Net.Enums;
-using Binance.Net.Objects;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Objects;
@@ -134,7 +133,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, StaticConverters.StaticTimeInForceConverter));
             parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("sideEffectType", sideEffectType == null ? null : JsonConvert.SerializeObject(sideEffectType,  StaticConverters.StaticSideEffectTypeConverter));
+            parameters.AddOptionalParameter("sideEffectType", sideEffectType == null ? null : JsonConvert.SerializeObject(sideEffectType, StaticConverters.StaticSideEffectTypeConverter));
             parameters.AddOptionalParameter("isIsolated", isIsolated);
             parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, StaticConverters.StaticOrderResponseTypeConverter));
             parameters.AddOptionalParameter("trailingDelta", trailingDelta);
@@ -180,7 +179,7 @@ namespace Binance.Net.Clients.SpotApi
                 _logger.Log(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
                 _timeSyncState.LastSyncTime = DateTime.MinValue;
             }
-            return result;                    
+            return result;
         }
 
         internal async Task<WebCallResult> SendRequestInternal(Uri uri, HttpMethod method, CancellationToken cancellationToken,
@@ -232,7 +231,7 @@ namespace Binance.Net.Clients.SpotApi
                 throw new ArgumentException(nameof(symbol) + " required for Binance " + nameof(ISpotClient.PlaceOrderAsync), nameof(symbol));
 
             var order = await Trading.PlaceOrderAsync(symbol, GetOrderSide(side), GetOrderType(type), quantity, price: price, timeInForce: type == CommonOrderType.Limit ? TimeInForce.GoodTillCanceled : (TimeInForce?)null, newClientOrderId: clientOrderId, ct: ct).ConfigureAwait(false);
-            if(!order)
+            if (!order)
                 return order.As<OrderId>(null);
 
             return order.As(new OrderId
@@ -336,7 +335,7 @@ namespace Binance.Net.Clients.SpotApi
                     Price = s.Price,
                     Quantity = s.Quantity,
                     QuantityFilled = s.QuantityFilled,
-                    Side = s.Side == Enums.OrderSide.Buy ? CommonOrderSide.Buy: CommonOrderSide.Sell,
+                    Side = s.Side == Enums.OrderSide.Buy ? CommonOrderSide.Buy : CommonOrderSide.Sell,
                     Type = GetOrderType(s.Type),
                     Status = GetOrderStatus(s.Status),
                     Timestamp = s.CreateTime
@@ -435,8 +434,8 @@ namespace Binance.Net.Clients.SpotApi
                 OpenTime = t.OpenTime,
                 ClosePrice = t.ClosePrice,
                 OpenPrice = t.OpenPrice,
-                Volume  = t.Volume
-            })); 
+                Volume = t.Volume
+            }));
         }
 
         async Task<WebCallResult<OrderBook>> IBaseRestClient.GetOrderBookAsync(string symbol, CancellationToken ct)

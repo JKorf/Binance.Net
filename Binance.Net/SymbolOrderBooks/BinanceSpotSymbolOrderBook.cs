@@ -4,12 +4,10 @@ using System.Threading.Tasks;
 using Binance.Net.Clients;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients;
-using Binance.Net.Objects;
 using Binance.Net.Objects.Options;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.OrderBook;
 using CryptoExchange.Net.Sockets;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace Binance.Net.SymbolOrderBooks
@@ -112,7 +110,7 @@ namespace Binance.Net.SymbolOrderBooks
 
         private void HandleUpdate(DataEvent<IBinanceEventOrderBook> data)
         {
-            if(data.Data.FirstUpdateId != null)
+            if (data.Data.FirstUpdateId != null)
                 UpdateOrderBook(data.Data.FirstUpdateId.Value, data.Data.LastUpdateId, data.Data.Bids, data.Data.Asks);
             else
                 UpdateOrderBook(data.Data.LastUpdateId, data.Data.Bids, data.Data.Asks);
@@ -121,10 +119,10 @@ namespace Binance.Net.SymbolOrderBooks
 
         private void HandleUpdate(DataEvent<IBinanceOrderBook> data)
         {
-            if (Levels == null)            
-                UpdateOrderBook(data.Data.LastUpdateId, data.Data.Bids, data.Data.Asks);            
-            else            
-                SetInitialOrderBook(data.Data.LastUpdateId, data.Data.Bids, data.Data.Asks);            
+            if (Levels == null)
+                UpdateOrderBook(data.Data.LastUpdateId, data.Data.Bids, data.Data.Asks);
+            else
+                SetInitialOrderBook(data.Data.LastUpdateId, data.Data.Bids, data.Data.Asks);
         }
 
         /// <inheritdoc />

@@ -91,7 +91,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// </summary>
         [JsonProperty("v")]
         public string Ignore4 { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// Number of basic data
         /// </summary>

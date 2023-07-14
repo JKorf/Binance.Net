@@ -7,7 +7,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Update when asset is withdrawn/deposited 
     /// </summary>
-    public class BinanceStreamBalanceUpdate: BinanceStreamEvent
+    public class BinanceStreamBalanceUpdate : BinanceStreamEvent
     {
         /// <summary>
         /// The asset which changed

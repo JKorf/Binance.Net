@@ -8,7 +8,6 @@ using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients.CoinFuturesApi;
-using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures.Socket;
@@ -93,8 +92,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 var result = data.Data.Data;
                 onMessage(data.As<IBinanceStreamKlineData>(result, result.Symbol));
             });
-            symbols = symbols.SelectMany(a => intervals.Select(i => a.ToLower(CultureInfo.InvariantCulture) + klineStreamEndpoint + "_" + JsonConvert.SerializeObject(i,  StaticConverters.StaticKlineIntervalConverter))).ToArray();
-            return await SubscribeAsync( BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            symbols = symbols.SelectMany(a => intervals.Select(i => a.ToLower(CultureInfo.InvariantCulture) + klineStreamEndpoint + "_" + JsonConvert.SerializeObject(i, StaticConverters.StaticKlineIntervalConverter))).ToArray();
+            return await SubscribeAsync(BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -112,7 +111,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             var internalHandler = new Action<DataEvent<JToken>>(data => HandlePossibleSingleData(data, onMessage));
             pairs = pairs.Select(a => a.ToLower(CultureInfo.InvariantCulture) + indexPriceStreamEndpoint + (updateInterval == 1000 ? "@1s" : "")).ToArray();
-            return await SubscribeAsync( BaseAddress, pairs, internalHandler, ct).ConfigureAwait(false);
+            return await SubscribeAsync(BaseAddress, pairs, internalHandler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -129,7 +128,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             var internalHandler = new Action<DataEvent<JToken>>(data => HandlePossibleSingleData(data, onMessage));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + markPriceStreamEndpoint + (updateInterval == 1000 ? "@1s" : "")).ToArray();
-            return await SubscribeAsync( BaseAddress, symbols, internalHandler, ct).ConfigureAwait(false);
+            return await SubscribeAsync(BaseAddress, symbols, internalHandler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -149,8 +148,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
                                       JsonConvert.SerializeObject(contractType, StaticConverters.StaticContractTypeConverter).ToLower() +
                                       continuousKlineStreamEndpoint +
                                       "_" +
-                                      JsonConvert.SerializeObject(interval,  StaticConverters.StaticKlineIntervalConverter)).ToArray();
-            return await SubscribeAsync( BaseAddress, pairs, handler, ct).ConfigureAwait(false);
+                                      JsonConvert.SerializeObject(interval, StaticConverters.StaticKlineIntervalConverter)).ToArray();
+            return await SubscribeAsync(BaseAddress, pairs, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -168,8 +167,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
             pairs = pairs.Select(a => a.ToLower(CultureInfo.InvariantCulture) +
                                       indexKlineStreamEndpoint +
                                       "_" +
-                                      JsonConvert.SerializeObject(interval,  StaticConverters.StaticKlineIntervalConverter)).ToArray();
-            return await SubscribeAsync( BaseAddress, pairs, handler, ct).ConfigureAwait(false);
+                                      JsonConvert.SerializeObject(interval, StaticConverters.StaticKlineIntervalConverter)).ToArray();
+            return await SubscribeAsync(BaseAddress, pairs, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -187,8 +186,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) +
                                           markKlineStreamEndpoint +
                                          "_" +
-                                         JsonConvert.SerializeObject(interval,  StaticConverters.StaticKlineIntervalConverter)).ToArray();
-            return await SubscribeAsync( BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+                                         JsonConvert.SerializeObject(interval, StaticConverters.StaticKlineIntervalConverter)).ToArray();
+            return await SubscribeAsync(BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -205,7 +204,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamCoinMiniTick>>>(data => onMessage(data.As<IBinanceMiniTick>(data.Data.Data, data.Data.Data.Symbol)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + symbolMiniTickerStreamEndpoint).ToArray();
-            return await SubscribeAsync( BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            return await SubscribeAsync(BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -215,7 +214,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllMiniTickerUpdatesAsync(Action<DataEvent<IEnumerable<IBinanceMiniTick>>> onMessage, CancellationToken ct = default)
         {
             var handler = new Action<DataEvent<BinanceCombinedStream<IEnumerable<BinanceStreamCoinMiniTick>>>>(data => onMessage(data.As<IEnumerable<IBinanceMiniTick>>(data.Data.Data, data.Data.Stream)));
-            return await SubscribeAsync( BaseAddress, new[] { allMiniTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
+            return await SubscribeAsync(BaseAddress, new[] { allMiniTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
         }
         #endregion
 
@@ -231,7 +230,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamCoinTick>>>(data => onMessage(data.As<IBinance24HPrice>(data.Data.Data, data.Data.Data.Symbol)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + symbolTickerStreamEndpoint).ToArray();
-            return await SubscribeAsync( BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            return await SubscribeAsync(BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -242,7 +241,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllTickerUpdatesAsync(Action<DataEvent<IEnumerable<IBinance24HPrice>>> onMessage, CancellationToken ct = default)
         {
             var handler = new Action<DataEvent<BinanceCombinedStream<IEnumerable<BinanceStreamCoinTick>>>>(data => onMessage(data.As<IEnumerable<IBinance24HPrice>>(data.Data.Data, data.Data.Stream)));
-            return await SubscribeAsync( BaseAddress, new[] { allTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
+            return await SubscribeAsync(BaseAddress, new[] { allTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -259,7 +258,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamAggregatedTrade>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + aggregatedTradesStreamEndpoint).ToArray();
-            return await SubscribeAsync( BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            return await SubscribeAsync(BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
         #endregion
 
@@ -308,7 +307,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamBookPrice>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + bookTickerStreamEndpoint).ToArray();
-            return await SubscribeAsync( BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            return await SubscribeAsync(BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -319,7 +318,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllBookTickerUpdatesAsync(Action<DataEvent<BinanceFuturesStreamBookPrice>> onMessage, CancellationToken ct = default)
         {
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamBookPrice>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
-            return await SubscribeAsync( BaseAddress, new[] { allBookTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
+            return await SubscribeAsync(BaseAddress, new[] { allBookTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -336,7 +335,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamLiquidationData>>>(data => onMessage(data.As(data.Data.Data.Data, data.Data.Data.Data.Symbol)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + liquidationStreamEndpoint).ToArray();
-            return await SubscribeAsync( BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            return await SubscribeAsync(BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -347,7 +346,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllLiquidationUpdatesAsync(Action<DataEvent<BinanceFuturesStreamLiquidation>> onMessage, CancellationToken ct = default)
         {
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamLiquidationData>>>(data => onMessage(data.As(data.Data.Data.Data, data.Data.Data.Data.Symbol)));
-            return await SubscribeAsync( BaseAddress, new[] { allLiquidationStreamEndpoint }, handler, ct).ConfigureAwait(false);
+            return await SubscribeAsync(BaseAddress, new[] { allLiquidationStreamEndpoint }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -371,7 +370,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             });
 
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + partialBookDepthStreamEndpoint + levels + (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
-            return await SubscribeAsync( BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            return await SubscribeAsync(BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -389,7 +388,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             updateInterval?.ValidateIntValues(nameof(updateInterval), 100, 250, 500);
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamOrderBookDepth>>>(data => onMessage(data.As<IBinanceFuturesEventOrderBook>(data.Data.Data, data.Data.Data.Symbol)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + depthStreamEndpoint + (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
-            return await SubscribeAsync( BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            return await SubscribeAsync(BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -499,7 +498,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 }
             });
 
-            return await SubscribeAsync( BaseAddress, new[] { listenKey }, handler, ct).ConfigureAwait(false);
+            return await SubscribeAsync(BaseAddress, new[] { listenKey }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion

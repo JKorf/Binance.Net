@@ -76,7 +76,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Trade details
     /// </summary>
-    public class BinanceFuturesUsdtTrade: BinanceFuturesTrade
+    public class BinanceFuturesUsdtTrade : BinanceFuturesTrade
     {
         /// <summary>
         /// Quote quantity

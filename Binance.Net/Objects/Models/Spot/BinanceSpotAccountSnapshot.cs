@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Binance.Net.Converters;
 using Binance.Net.Enums;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;

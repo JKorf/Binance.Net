@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
@@ -27,7 +26,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// Id of the order list this order belongs to
         /// </summary>
         public long? OrderListId { get; set; }
-        
+
         /// <summary>
         /// The price of the trade
         /// </summary>

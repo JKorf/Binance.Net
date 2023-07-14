@@ -30,7 +30,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Information about an asset balance
     /// </summary>
-    public class BinanceStreamBalance: IBinanceBalance
+    public class BinanceStreamBalance : IBinanceBalance
     {
         /// <summary>
         /// The asset this balance is for

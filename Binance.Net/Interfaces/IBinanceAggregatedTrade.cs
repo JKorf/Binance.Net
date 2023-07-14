@@ -26,7 +26,7 @@ namespace Binance.Net.Interfaces
         /// <summary>
         /// The last trade id in this aggregation
         /// </summary>
-         long LastTradeId { get; set; }
+        long LastTradeId { get; set; }
         /// <summary>
         /// The timestamp of the trades
         /// </summary>

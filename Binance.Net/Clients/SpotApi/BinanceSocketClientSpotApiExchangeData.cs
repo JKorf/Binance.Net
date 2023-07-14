@@ -302,7 +302,7 @@ namespace Binance.Net.Clients.SpotApi
             symbols = symbols.SelectMany(a =>
                 intervals.Select(i =>
                     a.ToLower(CultureInfo.InvariantCulture) + "@kline" + "_" +
-                    JsonConvert.SerializeObject(i,  StaticConverters.StaticKlineIntervalConverter))).ToArray();
+                    JsonConvert.SerializeObject(i, StaticConverters.StaticKlineIntervalConverter))).ToArray();
             return await _client.SubscribeAsync(_client.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
@@ -511,7 +511,7 @@ namespace Binance.Net.Clients.SpotApi
             if (address == null)
                 throw new Exception("No url found for Blvt stream, check the `BlvtSocketAddress` in the client environment");
 
-            tokens = tokens.Select(a => a.ToUpper(CultureInfo.InvariantCulture) + "@nav_kline" + "_" + JsonConvert.SerializeObject(interval,  StaticConverters.StaticKlineIntervalConverter)).ToArray();
+            tokens = tokens.Select(a => a.ToUpper(CultureInfo.InvariantCulture) + "@nav_kline" + "_" + JsonConvert.SerializeObject(interval, StaticConverters.StaticKlineIntervalConverter)).ToArray();
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamKlineData>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
             return await _client.SubscribeAsync(address.AppendPath("lvt-p"), tokens, handler, ct).ConfigureAwait(false);
         }

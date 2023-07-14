@@ -4,9 +4,9 @@ using Binance.Net.Enums;
 
 namespace Binance.Net.Converters
 {
-    internal class SideEffectTypeConverter: BaseConverter<SideEffectType>
+    internal class SideEffectTypeConverter : BaseConverter<SideEffectType>
     {
-        public SideEffectTypeConverter(): this(true) { }
+        public SideEffectTypeConverter() : this(true) { }
         public SideEffectTypeConverter(bool quotes) : base(quotes) { }
 
         protected override List<KeyValuePair<SideEffectType, string>> Mapping => new List<KeyValuePair<SideEffectType, string>>

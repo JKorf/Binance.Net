@@ -52,7 +52,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Mark price for Coin-M future
     /// </summary>
-    public class BinanceFuturesCoinMarkPrice: BinanceFuturesMarkPrice
+    public class BinanceFuturesCoinMarkPrice : BinanceFuturesMarkPrice
     {
         /// <summary>
         /// The pair

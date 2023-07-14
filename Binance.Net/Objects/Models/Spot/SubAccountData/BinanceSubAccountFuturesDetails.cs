@@ -42,7 +42,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// Max quantity which can be withdrawn
         /// </summary>
         [JsonProperty("maxWithdrawAmount")]
-        public decimal MaxWithdrawQuantity{ get; set; }
+        public decimal MaxWithdrawQuantity { get; set; }
         /// <summary>
         /// Total initial margin
         /// </summary>
@@ -77,7 +77,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime UpdateTime { get; set; }
     }
-    
+
     /// <summary>
     /// Sub account future asset details
     /// </summary>

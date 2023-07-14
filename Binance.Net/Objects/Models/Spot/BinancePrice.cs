@@ -27,7 +27,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Futures-Coin price
     /// </summary>
-    public class BinanceFuturesCoinPrice: BinancePrice
+    public class BinanceFuturesCoinPrice : BinancePrice
     {
         /// <summary>
         /// Name of the pair

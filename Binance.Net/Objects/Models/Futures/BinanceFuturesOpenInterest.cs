@@ -31,7 +31,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Open interest
     /// </summary>
-    public class BinanceFuturesCoinOpenInterest: BinanceFuturesOpenInterest
+    public class BinanceFuturesCoinOpenInterest : BinanceFuturesOpenInterest
     {
         /// <summary>
         /// The pair

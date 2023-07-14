@@ -12,7 +12,7 @@
         /// <summary>
         /// Quantile
         /// </summary>
-        public BinanceFuturesAdlQuantile? AdlQuantile{ get; set; }
+        public BinanceFuturesAdlQuantile? AdlQuantile { get; set; }
     }
 
     /// <summary>

@@ -558,7 +558,7 @@ namespace Binance.Net.Clients.GeneralApi
                 { "subAccountApiKey", apiKey }
             };
 
-            if(ipAddresses != null)
+            if (ipAddresses != null)
                 parameters.AddOptionalParameter("ipAddress", string.Join(",", ipAddresses));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 

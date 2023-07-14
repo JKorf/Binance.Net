@@ -7,7 +7,7 @@ namespace Binance.Net.Objects.Models.Spot.Blvt
     /// <summary>
     /// Blvt info update
     /// </summary>
-    public class BinanceBlvtInfoUpdate: BinanceStreamEvent
+    public class BinanceBlvtInfoUpdate : BinanceStreamEvent
     {
         /// <summary>
         /// Token name

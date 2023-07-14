@@ -6,7 +6,7 @@ namespace Binance.Net.Converters
 {
     internal class TimeInForceConverter : BaseConverter<TimeInForce>
     {
-        public TimeInForceConverter(): this(true) { }
+        public TimeInForceConverter() : this(true) { }
         public TimeInForceConverter(bool quotes) : base(quotes) { }
 
         protected override List<KeyValuePair<TimeInForce, string>> Mapping => new List<KeyValuePair<TimeInForce, string>>

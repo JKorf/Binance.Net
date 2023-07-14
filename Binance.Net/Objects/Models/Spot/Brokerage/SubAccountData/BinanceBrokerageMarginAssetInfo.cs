@@ -31,28 +31,28 @@ namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
         /// Sub Account Id
         /// </summary>
         public string SubAccountId { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// Margin enable
         /// </summary>
         [JsonProperty("marginEnable")]
         public bool IsMarginEnable { get; set; }
-        
+
         /// <summary>
         /// Total Asset Of Btc
         /// </summary>
         public decimal TotalAssetOfBtc { get; set; }
-        
+
         /// <summary>
         /// Total Liability Of Btc
         /// </summary>
         public decimal TotalLiabilityOfBtc { get; set; }
-        
+
         /// <summary>
         /// Total Net Asset Of Btc
         /// </summary>
         public decimal TotalNetAssetOfBtc { get; set; }
-        
+
         /// <summary>
         /// Margin level
         /// </summary>

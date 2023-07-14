@@ -8,7 +8,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Mark price update
     /// </summary>
-    public class BinanceFuturesStreamMarkPrice: BinanceStreamEvent, IBinanceFuturesMarkPrice
+    public class BinanceFuturesStreamMarkPrice : BinanceStreamEvent, IBinanceFuturesMarkPrice
     {
         /// <summary>
         /// Symbol
@@ -33,7 +33,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// </summary>
         [JsonProperty("r")]
         public decimal? FundingRate { get; set; }
-        
+
         /// <summary>
         /// Next Funding Time
         /// </summary>

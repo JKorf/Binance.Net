@@ -6,7 +6,7 @@ namespace Binance.Net.Converters
 {
     internal class MinerStatusConverter : BaseConverter<MinerStatus>
     {
-        public MinerStatusConverter(): this(true) { }
+        public MinerStatusConverter() : this(true) { }
         public MinerStatusConverter(bool quotes) : base(quotes) { }
 
         protected override List<KeyValuePair<MinerStatus, string>> Mapping => new List<KeyValuePair<MinerStatus, string>>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Binance.Net.Objects;
 using Binance.Net.UnitTests.TestImplementations;
 using NUnit.Framework;
 using Binance.Net.Enums;
@@ -8,9 +7,7 @@ using Binance.Net.Interfaces;
 using System.Threading.Tasks;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot.Socket;
-using Microsoft.Extensions.Logging;
 using Binance.Net.Objects.Models.Futures.Socket;
-using Binance.Net.Objects.Options;
 
 namespace Binance.Net.UnitTests
 {
@@ -129,7 +126,8 @@ namespace Binance.Net.UnitTests
             var data = new BinanceCombinedStream<BinanceStreamTick>()
             {
                 Stream = "ethbtc@ticker",
-                Data = new BinanceStreamTick() { 
+                Data = new BinanceStreamTick()
+                {
                     FirstTradeId = 1,
                     HighPrice = 0.7m,
                     LastTradeId = 2,

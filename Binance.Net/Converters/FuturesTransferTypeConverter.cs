@@ -4,7 +4,7 @@ using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Converters
 {
-    internal class FuturesTransferTypeConverter: BaseConverter<FuturesTransferType>
+    internal class FuturesTransferTypeConverter : BaseConverter<FuturesTransferType>
     {
         public FuturesTransferTypeConverter() : this(true) { }
         public FuturesTransferTypeConverter(bool quotes) : base(quotes) { }

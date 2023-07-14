@@ -6,11 +6,11 @@ using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Models.Spot.Socket
-{   
+{
     /// <summary>
     /// Order list info
     /// </summary>
-    public class BinanceStreamOrderList: BinanceStreamEvent
+    public class BinanceStreamOrderList : BinanceStreamEvent
     {
         /// <summary>
         /// The id of the order list

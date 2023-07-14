@@ -9,7 +9,7 @@
         /// USDT-Ⓜ Futures
         /// </summary>
         USDT = 1,
-        
+
         /// <summary>
         /// COIN-Ⓜ Futures
         /// </summary>

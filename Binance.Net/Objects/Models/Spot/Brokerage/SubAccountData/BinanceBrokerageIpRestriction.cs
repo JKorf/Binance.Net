@@ -31,7 +31,7 @@ namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
         [JsonProperty("updateTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime UpdateDate { get; set; }
     }
-    
+
     /// <summary>
     /// IP Restriction
     /// </summary>

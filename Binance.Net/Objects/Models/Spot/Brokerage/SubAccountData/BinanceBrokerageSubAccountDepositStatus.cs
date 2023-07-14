@@ -9,12 +9,12 @@
         /// Pending
         /// </summary>
         Pending = 0,
-        
+
         /// <summary>
         /// Success
         /// </summary>
         Success = 1,
-        
+
         /// <summary>
         /// Credited but cannot withdraw
         /// </summary>

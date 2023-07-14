@@ -2,12 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients;
-using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot.Socket;
 using Binance.Net.UnitTests.TestImplementations;
 using Newtonsoft.Json;

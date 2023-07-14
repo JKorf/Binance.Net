@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Binance.Net.Clients;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients;
-using Binance.Net.Objects;
 using Binance.Net.Objects.Options;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.OrderBook;

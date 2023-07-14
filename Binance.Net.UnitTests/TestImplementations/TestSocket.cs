@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace Binance.Net.UnitTests.TestImplementations
 {
-    public class TestSocket: IWebsocket
+    public class TestSocket : IWebsocket
     {
         public bool CanConnect { get; set; }
         public bool Connected { get; set; }
@@ -53,13 +53,13 @@ namespace Binance.Net.UnitTests.TestImplementations
 
         public void Send(string data)
         {
-            if(!Connected)
+            if (!Connected)
                 throw new Exception("Socket not connected");
         }
 
         public void Reset()
         {
-            
+
         }
 
         public Task CloseAsync()

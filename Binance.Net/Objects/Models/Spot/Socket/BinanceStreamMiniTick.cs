@@ -37,7 +37,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// </summary>
         [JsonProperty("l")]
         public decimal LowPrice { get; set; }
-        
+
         /// <summary>
         /// Total traded volume
         /// </summary>
@@ -52,7 +52,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Stream mini tick
     /// </summary>
-    public class BinanceStreamMiniTick: BinanceStreamMiniTickBase
+    public class BinanceStreamMiniTick : BinanceStreamMiniTickBase
     {
         /// <inheritdoc/>
         [JsonProperty("v")]

@@ -13,13 +13,13 @@ namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
         /// Sub Account Id
         /// </summary>
         public string SubAccountId { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// Is Margin Enabled
         /// </summary>
         [JsonProperty("enableMargin")]
         public bool IsMarginEnabled { get; set; }
-        
+
         /// <summary>
         /// Update Date
         /// </summary>

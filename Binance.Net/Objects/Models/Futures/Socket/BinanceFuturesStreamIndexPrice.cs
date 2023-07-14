@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Index price update
     /// </summary>
-    public class BinanceFuturesStreamIndexPrice: BinanceStreamEvent
+    public class BinanceFuturesStreamIndexPrice : BinanceStreamEvent
     {
         /// <summary>
         /// The pair

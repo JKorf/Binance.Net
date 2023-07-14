@@ -3,7 +3,7 @@
     /// <summary>
     /// Information regarding a specific order
     /// </summary>
-    public class BinanceOrder: BinanceOrderBase
+    public class BinanceOrder : BinanceOrderBase
     {
     }
 }

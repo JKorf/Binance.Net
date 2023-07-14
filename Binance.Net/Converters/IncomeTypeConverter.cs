@@ -4,9 +4,9 @@ using Binance.Net.Enums;
 
 namespace Binance.Net.Converters
 {
-    internal class IncomeTypeConverter: BaseConverter<IncomeType>
+    internal class IncomeTypeConverter : BaseConverter<IncomeType>
     {
-        public IncomeTypeConverter(): this(true) { }
+        public IncomeTypeConverter() : this(true) { }
         public IncomeTypeConverter(bool quotes) : base(quotes) { }
 
         protected override List<KeyValuePair<IncomeType, string>> Mapping => new List<KeyValuePair<IncomeType, string>>

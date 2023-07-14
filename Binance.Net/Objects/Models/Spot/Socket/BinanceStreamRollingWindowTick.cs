@@ -7,7 +7,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Rolling window tick info
     /// </summary>
-    public class BinanceStreamRollingWindowTick: BinanceStreamEvent
+    public class BinanceStreamRollingWindowTick : BinanceStreamEvent
     {
         /// <summary>
         /// The symbol this data is for

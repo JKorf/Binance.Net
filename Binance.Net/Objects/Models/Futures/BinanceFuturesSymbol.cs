@@ -163,7 +163,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Information about a futures symbol
     /// </summary>
-    public class BinanceFuturesUsdtSymbol: BinanceFuturesSymbol
+    public class BinanceFuturesUsdtSymbol : BinanceFuturesSymbol
     {
         /// <summary>
         /// The status of the symbol
@@ -181,7 +181,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Information about a futures symbol
     /// </summary>
-    public class BinanceFuturesCoinSymbol: BinanceFuturesSymbol
+    public class BinanceFuturesCoinSymbol : BinanceFuturesSymbol
     {
 
         /// <summary>
@@ -201,6 +201,6 @@ namespace Binance.Net.Objects.Models.Futures
         /// </summary>
         [JsonProperty("equalQtyPrecision")]
         public int EqualQuantityPrecision { get; set; }
-       
+
     }
 }

@@ -232,7 +232,7 @@ namespace Binance.Net.Clients.SpotApi
 
             var result = await _baseClient.SendRequestInternal<BinanceOrderBase>(_baseClient.GetUrl(cancelOrderEndpoint, api, signedVersion), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
             if (result)
-                    _baseClient.InvokeOrderCanceled(new OrderId() { SourceObject = result.Data, Id = result.Data.Id.ToString(CultureInfo.InvariantCulture) });
+                _baseClient.InvokeOrderCanceled(new OrderId() { SourceObject = result.Data, Id = result.Data.Id.ToString(CultureInfo.InvariantCulture) });
             return result;
         }
 
@@ -273,7 +273,7 @@ namespace Binance.Net.Clients.SpotApi
             decimal? icebergQty = null,
             OrderResponseType? orderResponseType = null,
             int? trailingDelta = null,
-            int? strategyId = null, 
+            int? strategyId = null,
             int? strategyType = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
@@ -346,7 +346,7 @@ namespace Binance.Net.Clients.SpotApi
             return result;
         }
         #endregion
-         
+
         #region Query Order
 
         /// <inheritdoc />
@@ -801,7 +801,7 @@ namespace Binance.Net.Clients.SpotApi
             };
             parameters.AddOptionalParameter("stopLimitPrice", stopLimitPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("isIsolated", isIsolated?.ToString());
-            parameters.AddOptionalParameter("sideEffectType", sideEffectType == null ? null : JsonConvert.SerializeObject(sideEffectType,  StaticConverters.StaticSideEffectTypeConverter));
+            parameters.AddOptionalParameter("sideEffectType", sideEffectType == null ? null : JsonConvert.SerializeObject(sideEffectType, StaticConverters.StaticSideEffectTypeConverter));
             parameters.AddOptionalParameter("listClientOrderId", listClientOrderId);
             parameters.AddOptionalParameter("limitClientOrderId", limitClientOrderId);
             parameters.AddOptionalParameter("stopClientOrderId", stopClientOrderId);
@@ -1330,6 +1330,6 @@ namespace Binance.Net.Clients.SpotApi
 
             return await _baseClient.SendRequestInternal<IEnumerable<BinancePreventedTrade>>(_baseClient.GetUrl("myPreventedMatches", "api", "3"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
         }
-#endregion
+        #endregion
     }
 }

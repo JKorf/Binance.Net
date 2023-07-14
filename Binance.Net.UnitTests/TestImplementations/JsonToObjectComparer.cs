@@ -46,11 +46,11 @@ namespace Binance.Net.UnitTests.TestImplementations
                     FileStream file = null;
                     try
                     {
-                        file = File.OpenRead(Path.Combine(path, $"JsonResponses", folderPrefix, $"{method.Name}{(i == 0 ? "": i.ToString())}.txt"));
+                        file = File.OpenRead(Path.Combine(path, $"JsonResponses", folderPrefix, $"{method.Name}{(i == 0 ? "" : i.ToString())}.txt"));
                     }
                     catch (FileNotFoundException)
                     {
-                        if(i == 0)
+                        if (i == 0)
                             skippedMethods.Add(method.Name);
                         break;
                     }
@@ -85,7 +85,7 @@ namespace Binance.Net.UnitTests.TestImplementations
 
             if (skippedMethods.Any())
                 Debug.WriteLine("Skipped methods:");
-            foreach(var method in skippedMethods)
+            foreach (var method in skippedMethods)
                 Debug.WriteLine(method);
 
             Trace.Listeners.Remove(listener);
@@ -211,7 +211,7 @@ namespace Binance.Net.UnitTests.TestImplementations
             }
 
             var propertyValue = property.GetValue(obj);
-            if(property.GetCustomAttribute<JsonPropertyAttribute>(true)?.ItemConverterType == null)
+            if (property.GetCustomAttribute<JsonPropertyAttribute>(true)?.ItemConverterType == null)
                 CheckPropertyValue(method, prop.Value, propertyValue, property.Name, prop.Name, property, ignoreProperties);
         }
 
@@ -335,12 +335,12 @@ namespace Binance.Net.UnitTests.TestImplementations
         {
             if (jsonValue.Type == JTokenType.String)
             {
-                if(objectValue is decimal dec)
+                if (objectValue is decimal dec)
                 {
-                    if(jsonValue.Value<decimal>() != dec)
+                    if (jsonValue.Value<decimal>() != dec)
                         throw new Exception($"{method}: {property} not equal: {jsonValue.Value<decimal>()} vs {dec}");
                 }
-                else if(objectValue is DateTime time)
+                else if (objectValue is DateTime time)
                 {
                     // timestamp, hard to check..
                 }

@@ -4,9 +4,9 @@ using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Converters
 {
-    internal class ExecutionTypeConverter: BaseConverter<ExecutionType>
+    internal class ExecutionTypeConverter : BaseConverter<ExecutionType>
     {
-        public ExecutionTypeConverter(): this(true) { }
+        public ExecutionTypeConverter() : this(true) { }
         public ExecutionTypeConverter(bool quotes) : base(quotes) { }
 
         protected override List<KeyValuePair<ExecutionType, string>> Mapping => new List<KeyValuePair<ExecutionType, string>>

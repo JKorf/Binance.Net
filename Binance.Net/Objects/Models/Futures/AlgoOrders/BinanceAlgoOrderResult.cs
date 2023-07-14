@@ -3,7 +3,7 @@
     /// <summary>
     /// Algo order result
     /// </summary>
-    public class BinanceAlgoOrderResult: BinanceResult
+    public class BinanceAlgoOrderResult : BinanceResult
     {
         /// <summary>
         /// Order id

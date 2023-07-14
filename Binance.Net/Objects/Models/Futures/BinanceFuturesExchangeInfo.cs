@@ -32,7 +32,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Exchange info
     /// </summary>
-    public class BinanceFuturesUsdtExchangeInfo: BinanceFuturesExchangeInfo
+    public class BinanceFuturesUsdtExchangeInfo : BinanceFuturesExchangeInfo
     {
         /// <summary>
         /// All symbols supported

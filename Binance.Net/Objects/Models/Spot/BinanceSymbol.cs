@@ -108,7 +108,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Filter for max amount of iceberg parts for this symbol
         /// </summary>
-        [JsonIgnore]        
+        [JsonIgnore]
         public BinanceSymbolIcebergPartsFilter? IceBergPartsFilter => Filters.OfType<BinanceSymbolIcebergPartsFilter>().FirstOrDefault();
         /// <summary>
         /// Filter for max accuracy of the quantity for this symbol

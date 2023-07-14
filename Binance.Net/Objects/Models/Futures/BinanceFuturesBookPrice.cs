@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Book price
     /// </summary>
-    public class BinanceFuturesBookPrice: BinanceBookPrice
+    public class BinanceFuturesBookPrice : BinanceBookPrice
     {
         /// <summary>
         /// Pair

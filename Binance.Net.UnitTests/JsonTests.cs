@@ -1,5 +1,4 @@
-﻿using Binance.Net.Objects;
-using Binance.Net.UnitTests.TestImplementations;
+﻿using Binance.Net.UnitTests.TestImplementations;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -126,7 +125,7 @@ namespace Binance.Net.UnitTests
             await _comparer.ProcessSubject(
                 "Spot/Futures",
                 c => c.GeneralApi.Futures,
-                new [] { "collateralQuantity" });
+                new[] { "collateralQuantity" });
         }
 
         [Test]
@@ -150,7 +149,7 @@ namespace Binance.Net.UnitTests
                 ignoreProperties: new Dictionary<string, List<string>>
                 {
                 },
-                parametersToSetNull: new string[] {  });
+                parametersToSetNull: new string[] { });
         }
 
         [Test]

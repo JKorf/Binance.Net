@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Binance.Net.Converters
 {
-    internal class InterfaceConverter<TImp>: JsonConverter
+    internal class InterfaceConverter<TImp> : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {

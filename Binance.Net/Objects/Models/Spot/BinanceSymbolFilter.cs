@@ -19,7 +19,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Price filter
     /// </summary>
-    public class BinanceSymbolPriceFilter: BinanceSymbolFilter
+    public class BinanceSymbolPriceFilter : BinanceSymbolFilter
     {
         /// <summary>
         /// The minimal price the order can be for
@@ -237,7 +237,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         public int MaxTrailingBelowDelta { get; set; }
     }
-    
+
     /// <summary>
     /// Max Iceberg Orders Filter
     /// </summary>

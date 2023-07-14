@@ -6,7 +6,7 @@ namespace Binance.Net.Converters
 {
     internal class SymbolStatusConverter : BaseConverter<SymbolStatus>
     {
-        public SymbolStatusConverter(): this(true) { }
+        public SymbolStatusConverter() : this(true) { }
         public SymbolStatusConverter(bool quotes) : base(quotes) { }
 
         protected override List<KeyValuePair<SymbolStatus, string>> Mapping => new List<KeyValuePair<SymbolStatus, string>>

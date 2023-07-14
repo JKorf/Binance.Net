@@ -1,5 +1,4 @@
 ﻿using Binance.Net.Enums;
-using Binance.Net.Objects;
 using CryptoExchange.Net.Authentication;
 using Microsoft.Extensions.Logging;
 using System;
@@ -509,7 +508,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 SourceObject = orderbook.Data,
                 Asks = orderbook.Data.Asks.Select(a => new OrderBookEntry { Price = a.Price, Quantity = a.Quantity }),
                 Bids = orderbook.Data.Bids.Select(b => new OrderBookEntry { Price = b.Price, Quantity = b.Quantity })
-            }); 
+            });
         }
 
         async Task<WebCallResult<IEnumerable<Trade>>> IBaseRestClient.GetRecentTradesAsync(string symbol, CancellationToken ct)

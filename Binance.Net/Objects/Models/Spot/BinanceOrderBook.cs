@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Binance.Net.Interfaces;
-using CryptoExchange.Net.Interfaces;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Models.Spot
@@ -22,7 +21,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonProperty("lastUpdateId")]
         public long LastUpdateId { get; set; }
-        
+
         /// <summary>
         /// The list of bids
         /// </summary>

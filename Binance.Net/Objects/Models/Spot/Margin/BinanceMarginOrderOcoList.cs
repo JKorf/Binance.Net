@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.Margin
     /// <summary>
     /// Oco info
     /// </summary>
-    public class BinanceMarginOrderOcoList: BinanceOrderOcoList
+    public class BinanceMarginOrderOcoList : BinanceOrderOcoList
     {
         /// <summary>
         /// Margin buy borrow quantity

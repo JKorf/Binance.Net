@@ -4,7 +4,7 @@ using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Converters
 {
-    internal class RateLimitConverter: BaseConverter<RateLimitType>
+    internal class RateLimitConverter : BaseConverter<RateLimitType>
     {
         public RateLimitConverter() : this(true) { }
         public RateLimitConverter(bool quotes) : base(quotes) { }

@@ -9,11 +9,11 @@
         internal readonly static SideEffectTypeConverter StaticSideEffectTypeConverter = new SideEffectTypeConverter(false);
 
         internal readonly static PositionSideConverter StaticPositionSideConverter = new PositionSideConverter(false);
-        
+
         internal readonly static WorkingTypeConverter StaticWorkingTypeConverter = new WorkingTypeConverter(false);
 
         internal readonly static OrderResponseTypeConverter StaticOrderResponseTypeConverter = new OrderResponseTypeConverter(false);
-        
+
         internal readonly static FuturesOrderTypeConverter StaticFuturesOrderTypeConverter = new FuturesOrderTypeConverter(false);
 
         internal readonly static WalletTypeConverter StaticWalletTypeConverter = new WalletTypeConverter(false);

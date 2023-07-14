@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using CryptoExchange.Net.Converters;
