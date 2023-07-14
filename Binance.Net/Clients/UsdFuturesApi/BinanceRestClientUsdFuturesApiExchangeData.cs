@@ -171,7 +171,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var url = _baseClient.GetUrl(topLongShortAccountRatioEndpoint, tradingDataapi);
             var parameters = new Dictionary<string, object> {
                 { url.ToString().Contains("dapi") ? "pair": "symbol", symbolPair },
-                { "period", JsonConvert.SerializeObject(period, new PeriodIntervalConverter(false)) }
+                { "period", JsonConvert.SerializeObject(period, StaticConverters.StaticPeriodIntervalConverter) }
             };
 
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
@@ -193,7 +193,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var url = _baseClient.GetUrl(topLongShortPositionRatioEndpoint, tradingDataapi);
             var parameters = new Dictionary<string, object> {
                 { url.ToString().Contains("dapi") ? "pair": "symbol", symbolPair },
-                { "period", JsonConvert.SerializeObject(period, new PeriodIntervalConverter(false)) }
+                { "period", JsonConvert.SerializeObject(period, StaticConverters.StaticPeriodIntervalConverter) }
             };
 
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
@@ -215,7 +215,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var url = _baseClient.GetUrl(globalLongShortAccountRatioEndpoint, tradingDataapi);
             var parameters = new Dictionary<string, object> {
                 { url.ToString().Contains("dapi") ? "pair": "symbol", symbolPair },
-                { "period", JsonConvert.SerializeObject(period, new PeriodIntervalConverter(false)) }
+                { "period", JsonConvert.SerializeObject(period, StaticConverters.StaticPeriodIntervalConverter) }
             };
 
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
@@ -236,7 +236,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             var parameters = new Dictionary<string, object> {
                 { "symbol", symbol },
-                { "interval", JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)) }
+                { "interval", JsonConvert.SerializeObject(interval,  StaticConverters.StaticKlineIntervalConverter) }
             };
 
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
@@ -329,7 +329,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             limit?.ValidateIntBetween(nameof(limit), 1, 1500);
             var parameters = new Dictionary<string, object> {
                 { "symbol", symbol },
-                { "interval", JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)) }
+                { "interval", JsonConvert.SerializeObject(interval,  StaticConverters.StaticKlineIntervalConverter) }
             };
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
@@ -388,7 +388,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             var parameters = new Dictionary<string, object> {
                 { "symbol", symbol },
-                { "period", JsonConvert.SerializeObject(period, new PeriodIntervalConverter(false)) }
+                { "period", JsonConvert.SerializeObject(period, StaticConverters.StaticPeriodIntervalConverter) }
             };
 
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
@@ -409,7 +409,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             var parameters = new Dictionary<string, object> {
                 { "symbol", symbol },
-                { "period", JsonConvert.SerializeObject(period, new PeriodIntervalConverter(false)) }
+                { "period", JsonConvert.SerializeObject(period, StaticConverters.StaticPeriodIntervalConverter) }
             };
 
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
@@ -461,8 +461,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
             limit?.ValidateIntBetween(nameof(limit), 1, 1500);
             var parameters = new Dictionary<string, object> {
                 { "pair", pair },
-                { "interval", JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)) },
-                { "contractType", JsonConvert.SerializeObject(contractType, new ContractTypeConverter(false)) }
+                { "interval", JsonConvert.SerializeObject(interval,  StaticConverters.StaticKlineIntervalConverter) },
+                { "contractType", JsonConvert.SerializeObject(contractType, StaticConverters.StaticContractTypeConverter) }
             };
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
@@ -483,7 +483,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             limit?.ValidateIntBetween(nameof(limit), 1, 1500);
             var parameters = new Dictionary<string, object> {
                 { "pair", pair },
-                { "interval", JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)) }
+                { "interval", JsonConvert.SerializeObject(interval,  StaticConverters.StaticKlineIntervalConverter) }
             };
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));

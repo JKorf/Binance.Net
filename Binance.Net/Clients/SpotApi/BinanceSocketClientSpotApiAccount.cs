@@ -9,7 +9,6 @@ using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using System.Collections.Generic;
 using Binance.Net.Objects.Models.Spot;
-using CryptoExchange.Net.Converters;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
 

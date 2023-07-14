@@ -127,7 +127,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         {
             symbols.ValidateNotNull(nameof(symbols));
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamKlineData>>>(data => onMessage(data.As<IBinanceStreamKlineData>(data.Data.Data, data.Data.Data.Symbol)));
-            symbols = symbols.SelectMany(a => intervals.Select(i => a.ToLower(CultureInfo.InvariantCulture) + klineStreamEndpoint + "_" + JsonConvert.SerializeObject(i, new KlineIntervalConverter(false)))).ToArray();
+            symbols = symbols.SelectMany(a => intervals.Select(i => a.ToLower(CultureInfo.InvariantCulture) + klineStreamEndpoint + "_" + JsonConvert.SerializeObject(i,  StaticConverters.StaticKlineIntervalConverter))).ToArray();
             return await SubscribeAsync(BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
@@ -145,10 +145,10 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamContinuousKlineData>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
             pairs = pairs.Select(a => a.ToLower(CultureInfo.InvariantCulture) +
                                       "_" +
-                                      JsonConvert.SerializeObject(contractType, new ContractTypeConverter(false)).ToLower() +
+                                      JsonConvert.SerializeObject(contractType, StaticConverters.StaticContractTypeConverter).ToLower() +
                                       continuousContractKlineStreamEndpoint +
                                       "_" +
-                                      JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ToArray();
+                                      JsonConvert.SerializeObject(interval,  StaticConverters.StaticKlineIntervalConverter)).ToArray();
             return await SubscribeAsync(BaseAddress, pairs, handler, ct).ConfigureAwait(false);
         }
 

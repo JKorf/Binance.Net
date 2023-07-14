@@ -104,7 +104,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
-                { "marginType", JsonConvert.SerializeObject(marginType, new FuturesMarginTypeConverter(false)) }
+                { "marginType", JsonConvert.SerializeObject(marginType, StaticConverters.StaticFuturesMarginTypeConverter) }
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
@@ -122,9 +122,9 @@ namespace Binance.Net.Clients.CoinFuturesApi
             {
                 { "symbol", symbol },
                 { "amount", quantity.ToString(CultureInfo.InvariantCulture) },
-                { "type", JsonConvert.SerializeObject(type, new FuturesMarginChangeDirectionTypeConverter(false)) },
+                { "type", JsonConvert.SerializeObject(type, StaticConverters.StaticFuturesMarginChangeDirectionTypeConverter) },
             };
-            parameters.AddOptionalParameter("positionSide", positionSide == null ? null : JsonConvert.SerializeObject(positionSide, new PositionSideConverter(false)));
+            parameters.AddOptionalParameter("positionSide", positionSide == null ? null : JsonConvert.SerializeObject(positionSide, StaticConverters.StaticPositionSideConverter));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceFuturesPositionMarginResult>(_baseClient.GetUrl(positionMarginEndpoint, api, signedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
@@ -141,7 +141,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             {
                 { "symbol", symbol }
             };
-            parameters.AddOptionalParameter("type", type.HasValue ? JsonConvert.SerializeObject(type, new FuturesMarginChangeDirectionTypeConverter(false)) : null);
+            parameters.AddOptionalParameter("type", type.HasValue ? JsonConvert.SerializeObject(type, StaticConverters.StaticFuturesMarginChangeDirectionTypeConverter) : null);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
