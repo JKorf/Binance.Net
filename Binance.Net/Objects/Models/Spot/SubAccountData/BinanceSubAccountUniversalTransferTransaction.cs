@@ -42,14 +42,14 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// <summary>
         /// From account type
         /// </summary>
-        [JsonConverter(typeof(BrokerageAccountTypeConverter))]
-        public BrokerageAccountType FromAccountType { get; set; }
+        [JsonConverter(typeof(TransferAccountTypeConverter))]
+        public TransferAccountType FromAccountType { get; set; }
 
         /// <summary>
         /// To account type
         /// </summary>
-        [JsonConverter(typeof(BrokerageAccountTypeConverter))]
-        public BrokerageAccountType ToAccountType { get; set; }
+        [JsonConverter(typeof(TransferAccountTypeConverter))]
+        public TransferAccountType ToAccountType { get; set; }
 
         /// <summary>
         /// Status
