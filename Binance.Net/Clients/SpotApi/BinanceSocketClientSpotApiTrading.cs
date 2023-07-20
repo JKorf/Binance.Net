@@ -6,9 +6,7 @@ using Binance.Net.Objects.Models.Spot;
 using CryptoExchange.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Converters;
-using Newtonsoft.Json;
 using System.Globalization;
-using System.Net.Http;
 using System;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
@@ -172,8 +170,8 @@ namespace Binance.Net.Clients.SpotApi
             var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
-                { "side", JsonConvert.SerializeObject(side, StaticConverters.StaticOrderSideConverter) },
-                { "type", JsonConvert.SerializeObject(type, StaticConverters.StaticSpotOrderTypeConverter) },
+                { "side", StaticConverters.OrderSideConverter(ref side) },
+                { "type", StaticConverters.OrderTypeConverter(ref type) },
                 { "cancelReplaceMode", EnumConverter.GetString(cancelReplaceMode) }
             };
             parameters.AddOptionalParameter("cancelNewClientOrderId", newCancelClientOrderId);
@@ -185,10 +183,10 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("quantity", quantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("quoteOrderQty", quoteQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, StaticConverters.StaticTimeInForceConverter));
+            parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : StaticConverters.TimeInForceConverter(ref timeInForce));
             parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, StaticConverters.StaticOrderResponseTypeConverter));
+            parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : StaticConverters.OrderResponseTypeConverter(ref orderResponseType));
             parameters.AddOptionalParameter("trailingDelta", trailingDelta?.ToString(CultureInfo.InvariantCulture));
 
             return await _client.QueryAsync<BinanceReplaceOrderResult>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"order.cancelReplace", parameters, true, true).ConfigureAwait(false);
@@ -249,7 +247,7 @@ namespace Binance.Net.Clients.SpotApi
             var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
-                { "side", JsonConvert.SerializeObject(side, StaticConverters.StaticOrderSideConverter) },
+                { "side", StaticConverters.OrderSideConverter(ref side) },
                 { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
                 { "price", price.ToString(CultureInfo.InvariantCulture) },
                 { "stopPrice", stopPrice.ToString(CultureInfo.InvariantCulture) }
@@ -271,7 +269,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("stopIcebergQty", stopIcebergQty?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("stopIcebergQty", stopIcebergQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("stopClientOrderId", stopClientOrderId);
-            parameters.AddOptionalParameter("stopLimitTimeInForce", stopLimitTimeInForce == null ? null : JsonConvert.SerializeObject(stopLimitTimeInForce, StaticConverters.StaticTimeInForceConverter));
+            parameters.AddOptionalParameter("stopLimitTimeInForce", stopLimitTimeInForce == null ? null : StaticConverters.TimeInForceConverter(ref stopLimitTimeInForce));
 
             return await _client.QueryAsync<BinanceOrderOcoList>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"orderList.place", parameters, true, true).ConfigureAwait(false);
         }

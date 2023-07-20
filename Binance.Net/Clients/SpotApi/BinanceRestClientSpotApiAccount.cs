@@ -475,7 +475,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>
             {
-                { "type", JsonConvert.SerializeObject(type, StaticConverters.StaticUniversalTransferTypeConverter) },
+                { "type", StaticConverters.UniversalTransferConverter(ref type) },
                 { "asset", asset },
                 { "amount", quantity.ToString(CultureInfo.InvariantCulture) }
             };
@@ -494,7 +494,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>
             {
-                { "type", JsonConvert.SerializeObject(type, StaticConverters.StaticUniversalTransferTypeConverter) }
+                { "type", StaticConverters.UniversalTransferConverter(ref type) }
             };
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
@@ -578,7 +578,7 @@ namespace Binance.Net.Clients.SpotApi
             {
                 { "asset", asset },
                 { "amount", quantity.ToString(CultureInfo.InvariantCulture) },
-                { "type", JsonConvert.SerializeObject(type, StaticConverters.StaticTransferDirectionTypeConverter) }
+                { "type", StaticConverters.TransferDirectionConverter(ref type) }
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
@@ -653,7 +653,7 @@ namespace Binance.Net.Clients.SpotApi
 
             var parameters = new Dictionary<string, object>
             {
-                { "direction", JsonConvert.SerializeObject(direction, StaticConverters.StaticTransferDirectionConverter) }
+                { "direction", StaticConverters.TransferDirectionRollConverter(ref direction) }
             };
             parameters.AddOptionalParameter("size", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("current", page?.ToString(CultureInfo.InvariantCulture));
@@ -907,11 +907,11 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("from",
                 !from.HasValue
                     ? null
-                    : JsonConvert.SerializeObject(from, StaticConverters.StaticIsolatedMarginTransferDirectionConverter));
+                    : StaticConverters.IsolatedMarginTransferDirectionConverter(ref from));
             parameters.AddOptionalParameter("to",
                 !to.HasValue
                     ? null
-                    : JsonConvert.SerializeObject(to, StaticConverters.StaticIsolatedMarginTransferDirectionConverter));
+                    : StaticConverters.IsolatedMarginTransferDirectionConverter(ref to));
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime)?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime)?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("current", current?.ToString(CultureInfo.InvariantCulture));
@@ -1026,8 +1026,8 @@ namespace Binance.Net.Clients.SpotApi
             {
                 {"asset", asset},
                 {"symbol", symbol},
-                {"transFrom", JsonConvert.SerializeObject(from, StaticConverters.StaticIsolatedMarginTransferDirectionConverter)},
-                {"transTo", JsonConvert.SerializeObject(to, StaticConverters.StaticIsolatedMarginTransferDirectionConverter)},
+                {"transFrom", StaticConverters.IsolatedMarginTransferDirectionConverter(ref from)},
+                {"transTo", StaticConverters.IsolatedMarginTransferDirectionConverter(ref to)},
                 {"amount", quantity.ToString(CultureInfo.InvariantCulture)}
             };
             parameters.AddOptionalParameter("recvWindow",

@@ -301,7 +301,7 @@ namespace Binance.Net.Clients.SpotApi
             limit?.ValidateIntBetween(nameof(limit), 1, 1500);
             var parameters = new Dictionary<string, object> {
                 { "symbol", symbol },
-                { "interval", JsonConvert.SerializeObject(interval, StaticConverters.StaticKlineIntervalConverter) }
+                { "interval", StaticConverters.KlineIntervalConverter(ref interval) }
             };
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
@@ -322,7 +322,7 @@ namespace Binance.Net.Clients.SpotApi
             limit?.ValidateIntBetween(nameof(limit), 1, 1500);
             var parameters = new Dictionary<string, object> {
                 { "symbol", symbol },
-                { "interval", JsonConvert.SerializeObject(interval, StaticConverters.StaticKlineIntervalConverter) }
+                { "interval", StaticConverters.KlineIntervalConverter(ref interval) }
             };
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
@@ -625,7 +625,7 @@ namespace Binance.Net.Clients.SpotApi
             var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
-                { "interval", JsonConvert.SerializeObject(interval, StaticConverters.StaticKlineIntervalConverter) }
+                { "interval", StaticConverters.KlineIntervalConverter(ref interval) }
             };
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));

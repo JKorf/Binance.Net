@@ -215,7 +215,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             var parameters = new Dictionary<string, object>
             {
-                { "lendingType", JsonConvert.SerializeObject(lendingType, new LendingTypeConverter(false)) }
+                { "lendingType", StaticConverters.LendingTypeConverter(ref lendingType) }
             };
             parameters.AddOptionalParameter("asset", asset);
             parameters.AddOptionalParameter("size", limit?.ToString(CultureInfo.InvariantCulture));
@@ -234,7 +234,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             var parameters = new Dictionary<string, object>
             {
-                { "lendingType", JsonConvert.SerializeObject(lendingType, new LendingTypeConverter(false)) }
+                { "lendingType", StaticConverters.LendingTypeConverter(ref lendingType) }
             };
             parameters.AddOptionalParameter("asset", asset);
             parameters.AddOptionalParameter("size", limit?.ToString(CultureInfo.InvariantCulture));
@@ -253,7 +253,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             var parameters = new Dictionary<string, object>
             {
-                { "lendingType", JsonConvert.SerializeObject(lendingType, new LendingTypeConverter(false)) }
+                { "lendingType", StaticConverters.LendingTypeConverter(ref lendingType) }
             };
             parameters.AddOptionalParameter("asset", asset);
             parameters.AddOptionalParameter("size", limit?.ToString(CultureInfo.InvariantCulture));

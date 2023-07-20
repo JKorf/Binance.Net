@@ -1,11 +1,9 @@
 ﻿using Binance.Net.Converters;
 using Binance.Net.Enums;
-using Binance.Net.Objects;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -124,19 +122,19 @@ namespace Binance.Net.Clients.SpotApi
             var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
-                { "side", JsonConvert.SerializeObject(side, StaticConverters.StaticOrderSideConverter) },
-                { "type", JsonConvert.SerializeObject(type, StaticConverters.StaticSpotOrderTypeConverter) }
+                { "side", StaticConverters.OrderSideConverter(ref side) },
+                { "type", StaticConverters.OrderTypeConverter(ref type) }
             };
             parameters.AddOptionalParameter("quantity", quantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("quoteOrderQty", quoteQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, StaticConverters.StaticTimeInForceConverter));
+            parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : StaticConverters.TimeInForceConverter(ref timeInForce));
             parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("sideEffectType", sideEffectType == null ? null : JsonConvert.SerializeObject(sideEffectType, StaticConverters.StaticSideEffectTypeConverter));
+            parameters.AddOptionalParameter("sideEffectType", sideEffectType == null ? null : StaticConverters.SideEffectTypeConverter(ref sideEffectType));
             parameters.AddOptionalParameter("isIsolated", isIsolated);
-            parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, StaticConverters.StaticOrderResponseTypeConverter));
+            parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : StaticConverters.OrderResponseTypeConverter(ref orderResponseType));
             parameters.AddOptionalParameter("trailingDelta", trailingDelta);
             parameters.AddOptionalParameter("strategyId", strategyId);
             parameters.AddOptionalParameter("strategyType", strategyType);

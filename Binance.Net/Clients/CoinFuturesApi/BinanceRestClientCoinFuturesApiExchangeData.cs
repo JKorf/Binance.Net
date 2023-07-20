@@ -235,7 +235,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             var parameters = new Dictionary<string, object> {
                 { "symbol", symbol },
-                { "interval", JsonConvert.SerializeObject(interval, StaticConverters.StaticKlineIntervalConverter) }
+                { "interval", StaticConverters.KlineIntervalConverter(ref interval) }
             };
 
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
@@ -293,7 +293,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             limit?.ValidateIntBetween(nameof(limit), 1, 1500);
             var parameters = new Dictionary<string, object> {
                 { "symbol", symbol },
-                { "interval", JsonConvert.SerializeObject(interval, StaticConverters.StaticKlineIntervalConverter) }
+                { "interval", StaticConverters.KlineIntervalConverter(ref interval) }
             };
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
@@ -314,7 +314,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             limit?.ValidateIntBetween(nameof(limit), 1, 1500);
             var parameters = new Dictionary<string, object> {
                 { "pair", pair },
-                { "interval", JsonConvert.SerializeObject(interval, StaticConverters.StaticKlineIntervalConverter) },
+                { "interval", StaticConverters.KlineIntervalConverter(ref interval) },
                 { "contractType", JsonConvert.SerializeObject(contractType, StaticConverters.StaticContractTypeConverter) }
             };
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
@@ -336,7 +336,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             limit?.ValidateIntBetween(nameof(limit), 1, 1500);
             var parameters = new Dictionary<string, object> {
                 { "pair", pair },
-                { "interval", JsonConvert.SerializeObject(interval, StaticConverters.StaticKlineIntervalConverter) }
+                { "interval", StaticConverters.KlineIntervalConverter(ref interval) }
             };
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));

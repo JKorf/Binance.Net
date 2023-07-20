@@ -8,11 +8,9 @@ using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
-using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures.Socket;
-using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.Socket;
 using Binance.Net.Objects.Options;
 using CryptoExchange.Net;
@@ -127,7 +125,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         {
             symbols.ValidateNotNull(nameof(symbols));
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamKlineData>>>(data => onMessage(data.As<IBinanceStreamKlineData>(data.Data.Data, data.Data.Data.Symbol)));
-            symbols = symbols.SelectMany(a => intervals.Select(i => a.ToLower(CultureInfo.InvariantCulture) + klineStreamEndpoint + "_" + JsonConvert.SerializeObject(i, StaticConverters.StaticKlineIntervalConverter))).ToArray();
+            symbols = symbols.SelectMany(a => intervals.Select(i => a.ToLower(CultureInfo.InvariantCulture) + klineStreamEndpoint + "_" + StaticConverters.KlineIntervalConverter(ref i))).ToArray();
             return await SubscribeAsync(BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
@@ -148,7 +146,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                                       JsonConvert.SerializeObject(contractType, StaticConverters.StaticContractTypeConverter).ToLower() +
                                       continuousContractKlineStreamEndpoint +
                                       "_" +
-                                      JsonConvert.SerializeObject(interval, StaticConverters.StaticKlineIntervalConverter)).ToArray();
+                                      StaticConverters.KlineIntervalConverter(ref interval)).ToArray();
             return await SubscribeAsync(BaseAddress, pairs, handler, ct).ConfigureAwait(false);
         }
 
