@@ -144,6 +144,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="trailingDelta">Trailing delta value for order in BIPS. A value of 1 means 0.01% trailing delta.</param>
         /// <param name="strategyId">Strategy id</param>
         /// <param name="strategyType">Strategy type</param>
+        /// <param name="cancelRestriction">Restrict cancellation based on order state</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -165,6 +166,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
             int? trailingDelta = null,
             int? strategyId = null,
             int? strategyType = null,
+            CancelRestriction? cancelRestriction = null,
             int? receiveWindow = null,
             CancellationToken ct = default);
 
