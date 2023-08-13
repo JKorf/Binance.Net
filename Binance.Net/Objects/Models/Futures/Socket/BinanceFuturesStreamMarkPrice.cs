@@ -63,5 +63,11 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// </summary>
         [JsonProperty("P")]
         public new decimal EstimatedSettlePrice { get; set; }
+
+        /// <summary>
+        /// Mark Price
+        /// </summary>
+        [JsonProperty("i")]
+        public decimal IndexPrice { get; set; }
     }
 }

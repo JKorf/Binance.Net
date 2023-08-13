@@ -72,7 +72,170 @@ namespace Binance.Net.UnitTests
         [Test]
         public async Task ValidateUsdFuturesMarginUpdateStreamJson()
         {
-            await TestFileToObject<BinanceFuturesStreamMarginUpdate>(@"JsonResponses/UsdFutures/Socket/MarginUpdate.txt");
+            await TestFileToObject<BinanceFuturesStreamMarginUpdate>(@"JsonResponses/UsdFutures/Socket/UserMarginUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateUsdFuturesConfigUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceFuturesStreamConfigUpdate>(@"JsonResponses/UsdFutures/Socket/UserConfigUpdate1.txt");
+            await TestFileToObject<BinanceFuturesStreamConfigUpdate>(@"JsonResponses/UsdFutures/Socket/UserConfigUpdate2.txt");
+        }
+
+        [Test]
+        public async Task ValidateUsdFuturesAccountUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceFuturesStreamAccountUpdate>(@"JsonResponses/UsdFutures/Socket/UserAccountUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateUsdFuturesOrderUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceFuturesStreamOrderUpdate>(@"JsonResponses/UsdFutures/Socket/UserOrderUpdate.txt", new List<string> { "pP", "si", "ss" });
+        }
+
+        [Test]
+        public async Task ValidateUsdFuturesStrategyUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceStrategyUpdate>(@"JsonResponses/UsdFutures/Socket/UserStrategyUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateUsdFuturesGridUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceGridUpdate>(@"JsonResponses/UsdFutures/Socket/UserGridUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateUsdFuturesContractInfoUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceFuturesStreamSymbolUpdate>(@"JsonResponses/UsdFutures/Socket/ContractInfoUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateUsdFuturesOrderBookUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceFuturesStreamOrderBookDepth>(@"JsonResponses/UsdFutures/Socket/OrderBookUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateUsdFuturesPartialOrderBookUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceFuturesStreamOrderBookDepth>(@"JsonResponses/UsdFutures/Socket/PartialOrderBookUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateUsdFuturesLiquidationUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceFuturesStreamLiquidationData>(@"JsonResponses/UsdFutures/Socket/LiquidationUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateUsdFuturesBookTickerUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceFuturesStreamBookPrice>(@"JsonResponses/UsdFutures/Socket/BookTickerUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateUsdFuturesAggTradesUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceStreamAggregatedTrade>(@"JsonResponses/UsdFutures/Socket/AggTradesUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateUsdFuturesMarketTickerUpdateStreamJson()
+        {
+            await TestFileToObject<IEnumerable<BinanceStreamTick>>(@"JsonResponses/UsdFutures/Socket/MarketTickersUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateUsdFuturesCompositeIndexUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceFuturesStreamCompositeIndex>(@"JsonResponses/UsdFutures/Socket/CompositeIndexUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateUsdFuturesMiniTickerUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceStreamMiniTick>(@"JsonResponses/UsdFutures/Socket/MiniTickersUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateUsdFuturesContinuousKlineUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceStreamContinuousKlineData>(@"JsonResponses/UsdFutures/Socket/ContractKlinesUpdate.txt", new List<string> { "B" });
+        }
+
+        [Test]
+        public async Task ValidateUsdFuturesMarkPriceUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceFuturesUsdtStreamMarkPrice>(@"JsonResponses/UsdFutures/Socket/MarkPriceUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateCoinFuturesKlineUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceFuturesStreamCoinKlineData>(@"JsonResponses/CoinFutures/Socket/KlineUpdate.txt", new List<string> { "B" });
+        }
+
+        [Test]
+        public async Task ValidateCoinFuturesIndexPriceUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceFuturesStreamIndexPrice>(@"JsonResponses/CoinFutures/Socket/IndexPriceUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateCoinFuturesMarkPriceUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceFuturesCoinStreamMarkPrice>(@"JsonResponses/CoinFutures/Socket/MarkPriceUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateCoinFuturesMiniTickerUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceStreamCoinMiniTick>(@"JsonResponses/CoinFutures/Socket/MiniTickerUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateCoinFuturesTickerUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceStreamCoinTick>(@"JsonResponses/CoinFutures/Socket/TickerUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateCoinFuturesAggTradeUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceStreamAggregatedTrade>(@"JsonResponses/CoinFutures/Socket/AggTradeUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateCoinFuturesBookTickerUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceFuturesStreamBookPrice>(@"JsonResponses/CoinFutures/Socket/BookTickerUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateCoinFuturesLiquidationOrderUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceFuturesStreamLiquidationData>(@"JsonResponses/CoinFutures/Socket/LiquidationOrderUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateCoinFuturesPartialBookUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceFuturesStreamOrderBookDepth>(@"JsonResponses/CoinFutures/Socket/PartialBookUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateCoinFuturesOrderBookUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceFuturesStreamOrderBookDepth>(@"JsonResponses/CoinFutures/Socket/OrderBookUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateCoinFuturesContractInfoUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceFuturesStreamSymbolUpdate>(@"JsonResponses/CoinFutures/Socket/ContractInfoUpdate.txt");
         }
 
         private static async Task TestFileToObject<T>(string filePath, List<string> ignoreProperties = null)

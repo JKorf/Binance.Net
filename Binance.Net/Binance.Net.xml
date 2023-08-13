@@ -12188,6 +12188,11 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamCoinMiniTick.QuoteVolume">
             <inheritdoc/>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamCoinMiniTick.Pair">
+            <summary>
+            The pair
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList">
             <summary>
             Order list info
@@ -24002,6 +24007,11 @@
             The time the event happened
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamBookPrice.Event">
+            <summary>
+            The type of the event
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamCoinKlineData">
             <summary>
             Wrapper for kline information for a symbol
@@ -24113,6 +24123,11 @@
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamCompositeIndex.Price">
             <summary>
             The price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamCompositeIndex.BaseAsset">
+            <summary>
+            Base asset
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamCompositeIndex.Composition">
@@ -24525,6 +24540,11 @@
             Mark Price
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesCoinStreamMarkPrice.IndexPrice">
+            <summary>
+            Mark Price
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderBookDepth">
             <summary>
             The order book for a asset
@@ -24815,6 +24835,11 @@
             Max leverage
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceBracketUpdate.Auxiliary">
+            <summary>
+            Auxiliary number for quick calculation
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Futures.Socket.BinanceGridUpdate">
             <summary>
             Strategy update
@@ -24823,6 +24848,11 @@
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceGridUpdate.GridUpdate">
             <summary>
             Update info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceGridUpdate.TransactionTime">
+            <summary>
+            Transaction time
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.Socket.BinanceGridInfo">
@@ -24888,6 +24918,11 @@
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceStrategyUpdate.StrategyUpdate">
             <summary>
             Update info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceStrategyUpdate.TransactionTime">
+            <summary>
+            Transaction time
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.Socket.BinanceStrategyInfo">

@@ -21,6 +21,12 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         public decimal Price { get; set; }
 
         /// <summary>
+        /// Base asset
+        /// </summary>
+        [JsonProperty("C")]
+        public string BaseAsset { get; set; } = string.Empty;
+
+        /// <summary>
         /// Composition
         /// </summary>
         [JsonProperty("c")]
