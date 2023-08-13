@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients;
 using Binance.Net.Objects.Models;
+using Binance.Net.Objects.Models.Futures.Socket;
 using Binance.Net.Objects.Models.Spot.Socket;
 using Binance.Net.UnitTests.TestImplementations;
 using Newtonsoft.Json;
@@ -66,6 +67,12 @@ namespace Binance.Net.UnitTests
             await TestFileToObject<BinanceStreamOrderList>(@"JsonResponses/Spot/Socket/UserUpdate2.txt", new List<string> { "B" });
             await TestFileToObject<BinanceStreamPositionsUpdate>(@"JsonResponses/Spot/Socket/UserUpdate3.txt", new List<string> { "B" });
             await TestFileToObject<BinanceStreamBalanceUpdate>(@"JsonResponses/Spot/Socket/UserUpdate4.txt", new List<string> { "B" });
+        }
+
+        [Test]
+        public async Task ValidateUsdFuturesMarginUpdateStreamJson()
+        {
+            await TestFileToObject<BinanceFuturesStreamMarginUpdate>(@"JsonResponses/UsdFutures/Socket/MarginUpdate.txt");
         }
 
         private static async Task TestFileToObject<T>(string filePath, List<string> ignoreProperties = null)
