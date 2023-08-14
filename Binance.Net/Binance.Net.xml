@@ -1118,6 +1118,9 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.MarginRepayAsync(System.String,System.Decimal,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.CrossMarginAdjustMaxLeverageAsync(System.Int32,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetMarginDustLogAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -1227,6 +1230,24 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.SetAutoConvertStableCoinConfigAsync(System.String,System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.ConvertBusdAsync(System.String,System.String,System.Decimal,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetBusdConvertHistoryAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetCloudMiningHistoryAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetIsolatedMarginFeeDataAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetMarginAssetsBnbConvertableAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.MarginDustTransferAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData">
@@ -2331,6 +2352,36 @@
             Liquidation
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.BinanceBusdConvertType">
+            <summary>
+            Busd convert type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BinanceBusdConvertType.AutoConvertDeposit">
+            <summary>
+            Auto convert when deposit
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BinanceBusdConvertType.AutoConvertWithdrawal">
+            <summary>
+            Auto convert when withdraw
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BinanceBusdConvertType.WithdrawalFailed">
+            <summary>
+            In case withdraw failed
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BinanceBusdConvertType.ApiConvert">
+            <summary>
+            Convert via sapi call
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BinanceBusdConvertType.AutoConvert">
+            <summary>
+            Busd auto convert job
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.BinanceEarningType">
             <summary>
             Mining earnings type
@@ -2595,6 +2646,21 @@
         <member name="F:Binance.Net.Enums.CancelRestriction.OnlyPartiallyFilled">
             <summary>
             Cancel will succeed if order status is PartiallyFilled
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.CloudMiningPaymentStatus">
+            <summary>
+            Cloud mining payment status
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.CloudMiningPaymentStatus.Payment">
+            <summary>
+            Payment
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.CloudMiningPaymentStatus.Refund">
+            <summary>
+            Refund
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.ContractType">
@@ -7905,9 +7971,95 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.SetAutoConvertStableCoinConfigAsync(System.String,System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Set auto conversion configuration
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-auto-converting-stable-coins-user_data" /></para>
             </summary>
             <param name="asset">Asset to configure (USDC, USDP or TUSD)</param>
             <param name="enable">Enable or not</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.ConvertBusdAsync(System.String,System.String,System.Decimal,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Convert transfer, convert between BUSD and stablecoins.
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#busd-convert-trade" /></para>
+            </summary>
+            <param name="clientTransferId">The unique user-defined transaction id, min length 20</param>
+            <param name="asset">The current asset</param>
+            <param name="quantity">Quantity</param>
+            <param name="targetAsset">	Target asset you want to convert</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetBusdConvertHistoryAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get Busd convert history
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#busd-convert-history-user_data" /></para>
+            </summary>
+            <param name="transferId">Filter by transferId</param>
+            <param name="clientTransferId">Filter by clientTransferId</param>
+            <param name="asset">Filter by asset</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Page</param>
+            <param name="pageSize">Page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetCloudMiningHistoryAsync(System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get the query of Cloud-Mining payment and refund history
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-cloud-mining-payment-and-refund-history-user_data" /></para>
+            </summary>
+            <param name="transferId">Filter by transferId</param>
+            <param name="clientTransferId">Filter by clientTransferId</param>
+            <param name="asset">Filter by asset</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Page</param>
+            <param name="pageSize">Page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.CrossMarginAdjustMaxLeverageAsync(System.Int32,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Adjust cross margin max leverage
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#adjust-cross-margin-max-leverage-user_data" /></para>
+            </summary>
+            <param name="maxLeverage">Max leverage, can only adjust 3 or 5</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetIsolatedMarginFeeDataAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get isolated margin fee data collection with any vip level or user's current specific data as https://www.binance.com/en/margin-fee
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-isolated-margin-fee-data-user_data" /></para>
+            </summary>
+            <param name="symbol">Filter by symbol</param>
+            <param name="vipLevel">User's current specific margin data will be returned if vipLevel is omitted</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetMarginAssetsBnbConvertableAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get assets that can be converted into BNB.
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-assets-that-can-be-converted-into-bnb-user_data-2" /></para>
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.MarginDustTransferAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Convert dust assets to BNB.
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#dust-transfer-trade" /></para>
+            </summary>
+            <param name="assets">The assets being converted</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -13109,6 +13261,71 @@
             Timestamp
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceBusdConvertResult">
+            <summary>
+            Convert result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceBusdConvertResult.TransactionId">
+            <summary>
+            Transaction id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceBusdConvertResult.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceBusdHistory">
+            <summary>
+            Busd convert history
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceBusdHistory.TransactionId">
+            <summary>
+            Transaction id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceBusdHistory.Type">
+            <summary>
+            Type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceBusdHistory.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceBusdHistory.DeductedAsset">
+            <summary>
+            Deducted asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceBusdHistory.DeductedQuantity">
+            <summary>
+            Deducted quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceBusdHistory.TargetAsset">
+            <summary>
+            Target asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceBusdHistory.TargetQuantity">
+            <summary>
+            Target quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceBusdHistory.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceBusdHistory.AccountType">
+            <summary>
+            Account type
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceC2CUserTrade">
             <summary>
             C2C user trade
@@ -13182,6 +13399,41 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceC2CUserTrade.AdvertisementRole">
             <summary>
             Advertisement role
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceCloudMiningHistory">
+            <summary>
+            Cloud mining payment/refund history
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceCloudMiningHistory.CreateTime">
+            <summary>
+            Creation time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceCloudMiningHistory.TransactionId">
+            <summary>
+            Transaction id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceCloudMiningHistory.Type">
+            <summary>
+            Type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceCloudMiningHistory.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceCloudMiningHistory.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceCloudMiningHistory.Status">
+            <summary>
+            Status
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceConvertTrade">
@@ -18375,6 +18627,16 @@
             Discount rate
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceCrossMarginLeverageResult">
+            <summary>
+            Result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceCrossMarginLeverageResult.Success">
+            <summary>
+            Success
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceForcedLiquidation">
             <summary>
             Forced liquidation info
@@ -18538,6 +18800,51 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceInterestRateHistory.VipLevel">
             <summary>
             Vip level
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginFeeData">
+            <summary>
+            Fee data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginFeeData.VipLevel">
+            <summary>
+            Vip level
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginFeeData.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginFeeData.Leverage">
+            <summary>
+            Leverage
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginFeeData.FeeInfo">
+            <summary>
+            Data
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginFeeInfo">
+            <summary>
+            Fee info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginFeeInfo.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginFeeInfo.DailyInterest">
+            <summary>
+            Daily interest
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginFeeInfo.BorrowLimit">
+            <summary>
+            Borrow limit
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginTierData">
@@ -18763,6 +19070,126 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginAsset.MinimalRepayQuanitty">
             <summary>
             Minimal quantity which can be repaid
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustAsset">
+            <summary>
+            Asset info for dust conversion
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustAsset.TotalTransferBtc">
+            <summary>
+            Total btc
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustAsset.TotalTransferBnb">
+            <summary>
+            Total bnb
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustAsset.DribbletPercentage">
+            <summary>
+            Dribblet percentage
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustAsset.Details">
+            <summary>
+            Details
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustAssetDetails">
+            <summary>
+            Asset dust details
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustAssetDetails.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustAssetDetails.AssetFullName">
+            <summary>
+            Asset full name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustAssetDetails.QuantityFree">
+            <summary>
+            Quantity fee
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustAssetDetails.ToBtc">
+            <summary>
+            To btc
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustAssetDetails.ToBnb">
+            <summary>
+            To bnb
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustAssetDetails.ToBnbOffExchange">
+            <summary>
+            To bnb off exchange
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustAssetDetails.Exchange">
+            <summary>
+            Exchange
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustTransfer">
+            <summary>
+            Margin dust transfer info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustTransfer.TotalServiceCharge">
+            <summary>
+            Total service charge
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustTransfer.TotalTransfered">
+            <summary>
+            Total transfered
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustTransfer.TransferResults">
+            <summary>
+            Transfer results
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceMargingDustTransferResult">
+            <summary>
+            Transfer results
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMargingDustTransferResult.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMargingDustTransferResult.FromAsset">
+            <summary>
+            Source asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMargingDustTransferResult.OperateTime">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMargingDustTransferResult.ServiceChargeQuantity">
+            <summary>
+            Service charge quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMargingDustTransferResult.TransactionId">
+            <summary>
+            Transaction id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMargingDustTransferResult.TransferedQuantity">
+            <summary>
+            Transfered quantity
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginLevel">

@@ -702,5 +702,7 @@ namespace Binance.Net.Clients.SpotApi
         }
 
         #endregion
+
+        // --- Small liability
     }
 }
