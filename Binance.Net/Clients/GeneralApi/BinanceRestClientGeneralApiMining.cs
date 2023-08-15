@@ -343,5 +343,30 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         #endregion
+
+        #region Acquiring CoinName
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceMiningEarnings>> GetMiningAccountEarningsAsync(string algo, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "algo", algo }
+            };
+            parameters.AddOptionalParameter("startDate", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endDate", DateTimeConverter.ConvertToMilliseconds(endTime));
+            parameters.AddOptionalParameter("pageIndex", page?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("pageSize", pageSize?.ToString(CultureInfo.InvariantCulture));
+
+            var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceMiningEarnings>>(_baseClient.GetUrl("mining/payment/uid", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
+            if (!result.Success)
+                return result.As<BinanceMiningEarnings>(default);
+
+            if (result.Data?.Code != 0)
+                return result.AsError<BinanceMiningEarnings>(new ServerError(result.Data!.Code, result.Data!.Message));
+
+            return result.As(result.Data.Data);
+        }
+
+        #endregion Acquiring CoinName
     }
 }

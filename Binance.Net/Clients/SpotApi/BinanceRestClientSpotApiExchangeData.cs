@@ -703,6 +703,34 @@ namespace Binance.Net.Clients.SpotApi
 
         #endregion
 
-        // --- Small liability
+        #region Get Future Hourly Interest Rate
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesInterestRate>>> GetFutureHourlyInterestRateAsync(IEnumerable<string> assets, bool isolated, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "assets", string.Join(",", assets) },
+                { "isIsolated", isolated.ToString().ToUpper() }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesInterestRate>>(_baseClient.GetUrl("margin/next-hourly-interest-rate", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 100).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Margin Delist Schedule
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceMarginDelistSchedule>>> GetMarginDelistScheduleAsync(int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceMarginDelistSchedule>>(_baseClient.GetUrl("margin/delist-schedule", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 100).ConfigureAwait(false);
+        }
+
+        #endregion
     }
 }
