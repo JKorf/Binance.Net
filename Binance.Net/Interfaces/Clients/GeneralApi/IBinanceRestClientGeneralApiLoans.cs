@@ -128,5 +128,50 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanLtvAdjustRecord>>> GetLtvAdjustHistoryAsync(long? orderId = null, string? loanAsset = null, string? collateralAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get interest rate and borrow limit of loanable assets. The borrow limit is shown in USD value.
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-loanable-assets-data-user_data-2" /></para>
+        /// </summary>
+        /// <param name="loanAsset">Filter by loan asset</param>
+        /// <param name="vipLevel">Vip level</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanAsset>>> GetLoanableAssetsAsync(string? loanAsset = null, int? vipLevel = null, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get LTV information and collateral limit of collateral assets. The collateral limit is shown in USD value.
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-collateral-assets-data-user_data" /></para>
+        /// </summary>
+        /// <param name="collateralAsset">Filter by collateral asset</param>
+        /// <param name="vipLevel">Vip level</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanCollateralAsset>>> GetCollateralAssetsAsync(string? collateralAsset = null, int? vipLevel = null, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get the the rate of collateral coin / loan coin when using collateral repay, the rate will be valid within 8 second.
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#check-collateral-repay-rate-user_data" /></para>
+        /// </summary>
+        /// <param name="loanAsset">Loan asset</param>
+        /// <param name="collateralAsset">Collateral asset</param>
+        /// <param name="quantity">Quantity</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceCryptoLoanRepayRate>> GetCollateralRepayRateAsync(string loanAsset, string collateralAsset, decimal quantity, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Customize margin call for ongoing orders only.
+        /// </summary>
+        /// <param name="marginCall">Margin call value</param>
+        /// <param name="orderId">Order id. Required if collateralAsset is not send</param>
+        /// <param name="collateralAsset">Collateral asset. Required if order id is not send</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanMarginCallResult>>> CustomizeMarginCallAsync(decimal marginCall, string? orderId = null, string? collateralAsset = null, long? receiveWindow = null, CancellationToken ct = default);
     }
 }

@@ -691,6 +691,38 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<IEnumerable<BinanceBSwapPoolLiquidity>>> GetLiquidityPoolInfoAsync(int? poolId = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Get unclaimed rewards 
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-unclaimed-rewards-record-user_data" /></para>
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceBSwapUnclaimedRewards>> GetUnclaimedLiquidityPoolsRewardsAsync(int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Claim liquidity pool rewards
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#claim-rewards-trade" /></para>
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceBSwapClaimResult>> ClaimLiquidityPoolsRewardsAsync(int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get claimed rewards history
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-claimed-history-user_data" /></para>
+        /// </summary>
+        /// <param name="poolId">Filter by pool id</param>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BinanceBSwapRewardHistory>>> GetLiquidityPoolsClaimHistoryAsync(long? poolId = null, string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Get Customer to Customer trade history
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-c2c-trade-history-user_data" /></para>
         /// </summary>

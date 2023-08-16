@@ -174,5 +174,63 @@ namespace Binance.Net.Clients.GeneralApi
             return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceCryptoLoanLtvAdjustRecord>>(_baseClient.GetUrl(adjustLtvHistoryEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 400).ConfigureAwait(false);
         }
         #endregion
+
+        #region Get Loanable Assets
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanAsset>>> GetLoanableAssetsAsync(string? loanAsset = null, int? vipLevel = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("vipLevel", vipLevel);
+            parameters.AddOptionalParameter("loanAsset", loanAsset);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceCryptoLoanAsset>>(_baseClient.GetUrl("loan/loanable/data", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 400).ConfigureAwait(false);
+        }
+        #endregion
+
+        #region Get Collateral Assets
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanCollateralAsset>>> GetCollateralAssetsAsync(string? collateralAsset = null, int? vipLevel = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("vipLevel", vipLevel);
+            parameters.AddOptionalParameter("collateralCoin", collateralAsset);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceCryptoLoanCollateralAsset>>(_baseClient.GetUrl("loan/collateral/data", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 400).ConfigureAwait(false);
+        }
+        #endregion
+
+        #region Get Collateral Assets
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceCryptoLoanRepayRate>> GetCollateralRepayRateAsync(string loanAsset, string collateralAsset, decimal quantity, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "loanCoin", loanAsset },
+                { "collateralCoin", collateralAsset },
+                { "repayAmount", quantity.ToString(CultureInfo.InvariantCulture) }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceCryptoLoanRepayRate>(_baseClient.GetUrl("loan/repay/collateral/rate", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 6000).ConfigureAwait(false);
+        }
+        #endregion
+
+        #region Customize Margin Call
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanMarginCallResult>>> CustomizeMarginCallAsync(decimal marginCall, string? orderId = null, string? collateralAsset = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "marginCall", marginCall.ToString(CultureInfo.InvariantCulture) }
+            };
+            parameters.AddOptionalParameter("orderId", orderId);
+            parameters.AddOptionalParameter("collateralCoin", collateralAsset);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceCryptoLoanMarginCallResult>>(_baseClient.GetUrl("loan/customize/margin_call", "sapi", "1"), HttpMethod.Post, ct, parameters, true, weight: 6000).ConfigureAwait(false);
+        }
+        #endregion
     }
 }
