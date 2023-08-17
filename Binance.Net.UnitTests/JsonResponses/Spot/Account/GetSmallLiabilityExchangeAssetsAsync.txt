@@ -1,0 +1,9 @@
+[
+    {
+      "asset": "ETH",
+      "interest": "0.00083334",
+      "principal": "0.001",
+      "liabilityAsset": "USDT",
+      "liabilityQty": 0.3552
+    }
+]

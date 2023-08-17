@@ -88,5 +88,10 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// </summary>
         [JsonProperty("ma")]
         public decimal MaxLeverage { get; set; }
+        /// <summary>
+        /// Auxiliary number for quick calculation
+        /// </summary>
+        [JsonProperty("cf")]
+        public decimal Auxiliary { get; set; }
     }
 }

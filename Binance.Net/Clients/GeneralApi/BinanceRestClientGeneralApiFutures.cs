@@ -23,15 +23,9 @@ namespace Binance.Net.Clients.GeneralApi
     {
         private const string futuresTransferEndpoint = "futures/transfer";
         private const string futuresTransferHistoryEndpoint = "futures/transfer";
-        private const string futuresBorrowEndpoint = "futures/loan/borrow";
         private const string futuresBorrowHistoryEndpoint = "futures/loan/borrow/history";
-        private const string futuresRepayEndpoint = "futures/loan/repay";
         private const string futuresRepayHistoryEndpoint = "futures/loan/repay/history";
         private const string futuresWalletEndpoint = "futures/loan/wallet";
-        private const string futuresInformationEndpoint = "futures/loan/configs";
-        private const string futuresCalculateAdjustLevelEndpoint = "futures/loan/calcAdjustLevel";
-        private const string futuresCalculateMaxAdjustAmountEndpoint = "futures/loan/calcMaxAdjustAmount";
-        private const string futuresAdjustCrossCollateralEndpoint = "futures/loan/adjustCollateral";
         private const string futuresAdjustCrossCollateralHistoryEndpoint = "futures/loan/adjustCollateral/history";
         private const string futuresCrossCollateralLiquidationHistoryEndpoint = "futures/loan/liquidationHistory";
 
@@ -84,29 +78,6 @@ namespace Binance.Net.Clients.GeneralApi
 
         #endregion
 
-        #region Borrow for cross-collateral
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceCrossCollateralBorrowResult>> BorrowForCrossCollateralAsync(string asset, string collateralAsset, decimal? quantity = null, decimal? collateralQuantity = null, long? receiveWindow = null, CancellationToken ct = default)
-        {
-            if (quantity.HasValue == collateralQuantity.HasValue)
-                throw new ArgumentException("Either quantity or collateralQuantity should be specified", nameof(quantity));
-
-            var parameters = new Dictionary<string, object>
-            {
-                { "coin", asset },
-                { "collateralCoin", collateralAsset }
-            };
-
-            parameters.AddOptionalParameter("amount", quantity?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("collateralAmount", collateralQuantity?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<BinanceCrossCollateralBorrowResult>(_baseClient.GetUrl(futuresBorrowEndpoint, api, publicVersion), HttpMethod.Post, ct, parameters, true, weight: 3000).ConfigureAwait(false);
-        }
-
-        #endregion
-
         #region Get cross collateral borrow history
 
         /// <inheritdoc />
@@ -120,25 +91,6 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceCrossCollateralBorrowHistory>>(_baseClient.GetUrl(futuresBorrowHistoryEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters, true, weight: 10).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region Repay for cross-collateral
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceCrossCollateralRepayResult>> RepayForCrossCollateralAsync(string asset, string collateralAsset, decimal quantity, long? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>
-            {
-                { "coin", asset },
-                { "collateralCoin", collateralAsset },
-                { "amount", quantity.ToString(CultureInfo.InvariantCulture) }
-            };
-
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<BinanceCrossCollateralRepayResult>(_baseClient.GetUrl(futuresRepayEndpoint, api, publicVersion), HttpMethod.Post, ct, parameters, true, weight: 3000).ConfigureAwait(false);
         }
 
         #endregion
@@ -173,77 +125,6 @@ namespace Binance.Net.Clients.GeneralApi
 
         #endregion
 
-        #region Cross collateral information
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceCrossCollateralInformation>>> GetCrossCollateralInformationAsync(long? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>();
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceCrossCollateralInformation>>(_baseClient.GetUrl(futuresInformationEndpoint, api, "2"), HttpMethod.Get, ct, parameters, true, weight: 10).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region Calculate Rate After Adjust Cross-Collateral LTV
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceCrossCollateralAfterAdjust>> GetRateAfterAdjustLoanToValueAsync(string collateralAsset, string loanAsset, decimal quantity, AdjustRateDirection direction, long? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>
-            {
-                { "collateralCoin", collateralAsset },
-                { "loanCoin", loanAsset},
-                { "amount", quantity.ToString(CultureInfo.InvariantCulture) },
-                { "direction", JsonConvert.SerializeObject(direction, new AdjustRateDirectionConverter(false)) },
-            };
-
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<BinanceCrossCollateralAfterAdjust>(_baseClient.GetUrl(futuresCalculateAdjustLevelEndpoint, api, "2"), HttpMethod.Get, ct, parameters, true, weight: 50).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region Get Max Amount for Adjust Cross-Collateral LTV
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceCrossCollateralAdjustMaxAmounts>> GetMaxAmountForAdjustCrossCollateralLoanToValueAsync(string collateralAsset, string loanAsset, long? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>
-            {
-                { "collateralCoin", collateralAsset },
-                { "loanCoin", loanAsset },
-            };
-
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<BinanceCrossCollateralAdjustMaxAmounts>(_baseClient.GetUrl(futuresCalculateMaxAdjustAmountEndpoint, api, "2"), HttpMethod.Get, ct, parameters, true, weight: 50).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region Adjust cross collateral LTV
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceCrossCollateralAdjustLtvResult>> AdjustCrossCollateralLoanToValueAsync(string collateralAsset, string loanAsset, decimal quantity, AdjustRateDirection direction, long? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>
-            {
-                { "collateralCoin", collateralAsset },
-                { "loanCoin", loanAsset },
-                { "amount", quantity.ToString(CultureInfo.InvariantCulture) },
-                { "direction", JsonConvert.SerializeObject(direction, new AdjustRateDirectionConverter(false)) },
-            };
-
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<BinanceCrossCollateralAdjustLtvResult>(_baseClient.GetUrl(futuresAdjustCrossCollateralEndpoint, api, "2"), HttpMethod.Post, ct, parameters, true, weight: 3000).ConfigureAwait(false);
-        }
-
-        #endregion
-
         #region Adjust Cross-Collateral LTV History
 
         /// <inheritdoc />
@@ -272,10 +153,27 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("collateralCoin", collateralAsset);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
-            parameters.AddOptionalParameter("size", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceCrossCollateralLiquidationHistory>>(_baseClient.GetUrl(futuresCrossCollateralLiquidationHistoryEndpoint, api, publicVersion), HttpMethod.Get, ct, parameters, true, weight: 10).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Cross-Collateral Interest History
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceCrossCollateralInterestHistory>>> GetCrossCollateralInterestHistoryAsync(string? collateralAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("collateralCoin", collateralAsset);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceCrossCollateralInterestHistory>>(_baseClient.GetUrl("futures/loan/interestHistory", api, publicVersion), HttpMethod.Get, ct, parameters, true, weight: 1).ConfigureAwait(false);
         }
 
         #endregion

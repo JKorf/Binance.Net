@@ -36,7 +36,7 @@ namespace Binance.Net.Clients.SpotApi
         private const string accountSnapshotEndpoint = "accountSnapshot";
         private const string accountStatusEndpoint = "account/status";
         private const string fundingWalletEndpoint = "asset/get-funding-asset";
-        private const string apiRestrictionsEndpoint = "account/apiRestrictions ";
+        private const string apiRestrictionsEndpoint = "account/apiRestrictions";
         private const string dividendRecordsEndpoint = "asset/assetDividend";
         private const string userCoinsEndpoint = "capital/config/getall";
         private const string disableFastWithdrawSwitchEndpoint = "account/disableFastWithdrawSwitch";
@@ -626,6 +626,22 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceTransaction>(_baseClient.GetUrl(marginRepayEndpoint, marginApi, marginVersion), HttpMethod.Post, ct, parameters, true, weight: 3000).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Cross Margin Adjust Max Leverage
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceCrossMarginLeverageResult>> CrossMarginAdjustMaxLeverageAsync(int maxLeverage, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "maxLeverage", maxLeverage },
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceCrossMarginLeverageResult>(_baseClient.GetUrl("margin/max-leverage", marginApi, marginVersion), HttpMethod.Post, ct, parameters, true, weight: 3000).ConfigureAwait(false);
         }
 
         #endregion
@@ -1302,6 +1318,149 @@ namespace Binance.Net.Clients.SpotApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             return await _baseClient.SendRequestInternal(_baseClient.GetUrl("capital/contract/convertible-coins", marginApi, marginVersion), HttpMethod.Post, ct, parameters, true, weight: 600).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Convert BUSD
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceBusdConvertResult>> ConvertBusdAsync(string clientTransferId, string asset, decimal quantity, string targetAsset, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "clientTranId", clientTransferId },
+                { "asset", asset },
+                { "amount", quantity },
+                { "targetAsset", targetAsset }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            return await _baseClient.SendRequestInternal<BinanceBusdConvertResult>(_baseClient.GetUrl("asset/convert-transfer", marginApi, marginVersion), HttpMethod.Post, ct, parameters, true, weight: 5).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Convert BUSD history
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceBusdHistory>>> GetBusdConvertHistoryAsync(long? transferId = null, string? clientTransferId = null, string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("tranId", transferId);
+            parameters.AddOptionalParameter("clientTranId", clientTransferId);
+            parameters.AddOptionalParameter("asset", asset);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
+            parameters.AddOptionalParameter("current", page);
+            parameters.AddOptionalParameter("size", pageSize);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceBusdHistory>>(_baseClient.GetUrl("asset/convert-transfer/queryByPage", marginApi, marginVersion), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Convert BUSD history
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceCloudMiningHistory>>> GetCloudMiningHistoryAsync(long? transferId = null, string? clientTransferId = null, string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("tranId", transferId);
+            parameters.AddOptionalParameter("clientTranId", clientTransferId);
+            parameters.AddOptionalParameter("asset", asset);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
+            parameters.AddOptionalParameter("current", page);
+            parameters.AddOptionalParameter("size", pageSize);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceCloudMiningHistory>>(_baseClient.GetUrl("asset/ledger-transfer/cloud-mining/queryByPage", marginApi, marginVersion), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Isolated Margin Fee Data
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceIsolatedMarginFeeData>>> GetIsolatedMarginFeeDataAsync(string? symbol = null, int? vipLevel = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("symbol", symbol);
+            parameters.AddOptionalParameter("vipLevel", vipLevel);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceIsolatedMarginFeeData>>(_baseClient.GetUrl("margin/isolatedMarginData", marginApi, marginVersion), HttpMethod.Get, ct, parameters, true, weight: symbol == null ? 10 : 1).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Margin Assets Bnb Convertable
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceMarginDustAsset>> GetMarginAssetsBnbConvertableAsync(long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            return await _baseClient.SendRequestInternal<BinanceMarginDustAsset>(_baseClient.GetUrl("margin/dust", marginApi, marginVersion), HttpMethod.Get, ct, parameters, true, weight: 100).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Margin Dust Transfer
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceMarginDustTransfer>> MarginDustTransferAsync(IEnumerable<string> assets, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "asset", string.Join(",", assets) }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            return await _baseClient.SendRequestInternal<BinanceMarginDustTransfer>(_baseClient.GetUrl("margin/dust", marginApi, marginVersion), HttpMethod.Post, ct, parameters, true, weight: 100).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Small Liability Exchange Assets
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceSmallLiabilityAsset>>> GetCrossMarginSmallLiabilityExchangeAssetsAsync(int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceSmallLiabilityAsset>>(_baseClient.GetUrl("margin/exchange-small-liability", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 100).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Small Liability Exchange Assets
+
+        /// <inheritdoc />
+        public async Task<WebCallResult> CrossMarginSmallLiabilityExchangeAsync(IEnumerable<string> assets, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "assetNames", string.Join(",", assets) }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal(_baseClient.GetUrl("margin/exchange-small-liability", "sapi", "1"), HttpMethod.Post, ct, parameters, true, weight: 3000).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Small Liability Exchange History
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceSmallLiabilityHistory>>> GetCrossMarginSmallLiabilityExchangeHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
+            parameters.AddOptionalParameter("current", page?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("size", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceSmallLiabilityHistory>>(_baseClient.GetUrl("margin/exchange-small-liability-history", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 100).ConfigureAwait(false);
         }
 
         #endregion

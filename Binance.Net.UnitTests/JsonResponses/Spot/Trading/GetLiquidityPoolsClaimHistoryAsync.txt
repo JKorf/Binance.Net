@@ -1,0 +1,10 @@
+[
+    {
+        "poolId":52,  
+        "poolName":"BNB/USDT",                     
+        "assetRewards": "BNB",
+        "claimTime":1565769342148,             
+        "claimAmount":0.00000023,
+        "status":1 // 0: pending, 1: success
+    }
+]

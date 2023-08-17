@@ -107,10 +107,11 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="orderId">The order id of the order</param>
         /// <param name="origClientOrderId">The client order id of the order</param>
         /// <param name="newClientOrderId">Unique identifier for this cancel</param>
+        /// <param name="cancelRestriction">Restrict cancellation based on order state</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for canceled order</returns>
-        Task<WebCallResult<BinanceOrderBase>> CancelOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, string? newClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceOrderBase>> CancelOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, string? newClientOrderId = null, CancelRestriction? cancelRestriction = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Cancels all open orders on a symbol
@@ -143,6 +144,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="trailingDelta">Trailing delta value for order in BIPS. A value of 1 means 0.01% trailing delta.</param>
         /// <param name="strategyId">Strategy id</param>
         /// <param name="strategyType">Strategy type</param>
+        /// <param name="cancelRestriction">Restrict cancellation based on order state</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -164,6 +166,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
             int? trailingDelta = null,
             int? strategyId = null,
             int? strategyType = null,
+            CancelRestriction? cancelRestriction = null,
             int? receiveWindow = null,
             CancellationToken ct = default);
 
@@ -686,6 +689,38 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<BinanceBSwapPoolLiquidity>>> GetLiquidityPoolInfoAsync(int? poolId = null, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get unclaimed rewards 
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-unclaimed-rewards-record-user_data" /></para>
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceBSwapUnclaimedRewards>> GetUnclaimedLiquidityPoolsRewardsAsync(int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Claim liquidity pool rewards
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#claim-rewards-trade" /></para>
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceBSwapClaimResult>> ClaimLiquidityPoolsRewardsAsync(int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get claimed rewards history
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-claimed-history-user_data" /></para>
+        /// </summary>
+        /// <param name="poolId">Filter by pool id</param>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BinanceBSwapRewardHistory>>> GetLiquidityPoolsClaimHistoryAsync(long? poolId = null, string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get Customer to Customer trade history

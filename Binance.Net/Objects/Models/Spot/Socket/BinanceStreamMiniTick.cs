@@ -73,5 +73,11 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// <inheritdoc/>
         [JsonProperty("v")]
         public override decimal QuoteVolume { get; set; }
+
+        /// <summary>
+        /// The pair
+        /// </summary>
+        [JsonProperty("ps")]
+        public string Pair { get; set; } = string.Empty;
     }
 }

@@ -27,6 +27,10 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 9.0.5 - 06 Aug 2023
+    * Added Usd Futures EditOrder endpoint
+    * Added cancelRestriction parameter to spot CancelOrder and ReplaceOrder endpoints
+
 * Version 9.0.4 - 11 Jul 2023
     * Fixed GetUniversalTransferHistoryAsync deserialization
 

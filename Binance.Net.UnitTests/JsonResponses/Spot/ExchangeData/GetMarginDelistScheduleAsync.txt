@@ -1,0 +1,20 @@
+[
+  {
+    "delistTime": 1686161202000,
+    "crossMarginAssets": [
+      "BTC",
+      "USDT"
+    ],
+    "isolatedMarginSymbols": [
+      "ADAUSDT",
+      "BNBUSDT"
+    ]
+  },
+  {
+    "delistTime": 1686222232000,
+    "crossMarginAssets": [
+      "ADA"
+    ],
+    "isolatedMarginSymbols": []
+  }
+]

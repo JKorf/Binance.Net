@@ -14,6 +14,12 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// </summary>
         [JsonProperty("gu")]
         public BinanceGridInfo GridUpdate { get; set; } = null!;
+
+        /// <summary>
+        /// Transaction time
+        /// </summary>
+        [JsonProperty("T"), JsonConverter(typeof(DateTimeConverter))]
+        public DateTime TransactionTime { get; set; }
     }
 
     /// <summary>

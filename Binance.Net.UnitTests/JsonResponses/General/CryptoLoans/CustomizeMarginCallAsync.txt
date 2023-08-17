@@ -1,0 +1,12 @@
+{
+  "rows": [
+    {
+    "orderId": "100000001",
+    "collateralCoin": "BNB",
+    "preMarginCall": "0.8",
+    "afterMarginCall": "0.7",
+    "customizeTime": 1575018510000
+    }
+  ],
+  "total": 1
+}
