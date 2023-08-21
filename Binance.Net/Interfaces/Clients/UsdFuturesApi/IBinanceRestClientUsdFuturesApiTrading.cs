@@ -66,7 +66,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="ct">Cancellation token</param>
         /// <returns>Returns a list of call results, one for each order. The order the results are in is the order the orders were sent</returns>
         Task<WebCallResult<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>> PlaceMultipleOrdersAsync(
-            BinanceFuturesBatchOrder[] orders,
+            IEnumerable<BinanceFuturesBatchOrder> orders,
             int? receiveWindow = null,
             CancellationToken ct = default);
 
@@ -142,6 +142,33 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BinanceFuturesPlacedOrder>> EditOrderAsync(string symbol, OrderSide side, decimal quantity, decimal price, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Edit multiple existing orders
+        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#modify-multiple-orders-trade" /></para>
+        /// </summary>
+        /// <param name="orders">The order info</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>> EditMultipleOrdersAsync(
+            IEnumerable<BinanceFuturesBatchEditOrder> orders,
+            int? receiveWindow = null,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Get order edit history
+        /// </summary>
+        /// <param name="symbol">The symbol to get orders for</param>
+        /// <param name="orderId">Filter by order id</param>
+        /// <param name="clientOrderId">Filter by client order id</param>
+        /// <param name="startTime">If set, only orders edited after this time will be returned</param>
+        /// <param name="endTime">If set, only orders edited before this time will be returned</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BinanceFuturesOrderEditHistory>>> GetOrderEditHistoryAsync(string symbol, long? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Retrieves data for a specific open order. Either orderId or origClientOrderId should be provided.

@@ -342,5 +342,34 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BinanceIpRestriction>> GetIpRestrictionForSubAccountApiKeyAsync(string email, string apiKey, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get internal asset transfers for a sub account (for master account)
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-sub-account-futures-asset-transfer-history-for-master-account" /></para>
+        /// </summary>
+        /// <param name="email">Email of the sub account</param>
+        /// <param name="accountType">Futures account type</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="page">The page of the results</param>
+        /// <param name="limit">The max amount of results to return (Default 50, max 500)</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BinanceSubAccountAssetTransferHistory>>> GetFuturesAssetTransferHistoryAsync(string email, FuturesAccountType accountType, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Transfer futures asset (for master account)
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#sub-account-futures-asset-transfer-for-master-account" /></para>
+        /// </summary>
+        /// <param name="fromEmail">From email</param>
+        /// <param name="toEmail">To email</param>
+        /// <param name="accountType">Futures account</param>
+        /// <param name="asset">Asset</param>
+        /// <param name="quantity">Quantity</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceSubAccountTransaction>> FuturesAssetTransferAsync(string fromEmail, string toEmail, FuturesAccountType accountType, string asset, decimal quantity, int? receiveWindow = null, CancellationToken ct = default);
     }
 }

@@ -1,0 +1,4 @@
+{
+  "cumulativeProfitInBETH": "0.01067982",
+  "lastDayProfitInBETH": "0.01067982"
+}

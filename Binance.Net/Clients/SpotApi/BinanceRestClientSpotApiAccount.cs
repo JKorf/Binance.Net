@@ -92,10 +92,6 @@ namespace Binance.Net.Clients.SpotApi
         // Rebate
         private const string rebateHistoryEndpoint = "rebate/taxQuery";
 
-        // Staking
-        private const string setAutoStakingEndpoint = "staking/setAutoStaking";
-        private const string stakingQuotaLeftEndpoint = "staking/personalLeftQuota";
-
         // Portfolio Margin
         private const string portfolioMarginAccountEndpoint = "portfolio/account";
         private const string portfolioMarginCollateralRateEndpoint = "portfolio/collateralRate";
@@ -1225,36 +1221,6 @@ namespace Binance.Net.Clients.SpotApi
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceBlvtUserLimit>>(_baseClient.GetUrl(blvtUserLimitEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);           
         }
 
-        #endregion
-
-        #region Staking
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceStakingResult>> SetAutoStakingAsync(StakingProductType product, string positionId, bool renewable, long? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>()
-            {
-                { "product", EnumConverter.GetString(product) },
-                { "positionId", positionId },
-                { "renewable", renewable },
-            };
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<BinanceStakingResult>(_baseClient.GetUrl(setAutoStakingEndpoint, marginApi, marginVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
-        }
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceStakingPersonalQuota>> GetStakingPersonalQuotaAsync(StakingProductType product, string productId, long? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>()
-            {
-                { "product", EnumConverter.GetString(product) },
-                { "productId", productId }
-            };
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<BinanceStakingPersonalQuota>(_baseClient.GetUrl(stakingQuotaLeftEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
-        }
         #endregion
 
         #region Portfolio margin

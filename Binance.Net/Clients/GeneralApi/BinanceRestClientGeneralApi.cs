@@ -40,6 +40,8 @@ namespace Binance.Net.Clients.GeneralApi
         public IBinanceRestClientGeneralApiMining Mining { get; }
         /// <inheritdoc />
         public IBinanceRestClientGeneralApiSubAccount SubAccount { get; }
+        /// <inheritdoc />
+        public IBinanceRestClientGeneralApiStaking Staking { get; }
         #endregion
 
         #region constructor/destructor
@@ -55,6 +57,7 @@ namespace Binance.Net.Clients.GeneralApi
             CryptoLoans = new BinanceRestClientGeneralApiLoans(this);
             Mining = new BinanceRestClientGeneralApiMining(this);
             SubAccount = new BinanceRestClientGeneralApiSubAccount(this);
+            Staking = new BinanceRestClientGeneralApiStaking(this);
 
             requestBodyEmptyContent = "";
             requestBodyFormat = RequestBodyFormat.FormData;

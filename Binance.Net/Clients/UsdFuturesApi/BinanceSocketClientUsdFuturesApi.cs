@@ -8,11 +8,9 @@ using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
-using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures.Socket;
-using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.Socket;
 using Binance.Net.Objects.Options;
 using CryptoExchange.Net;
@@ -369,6 +367,24 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #endregion
 
+        #region Asset Index Streams
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToAssetIndexUpdatesAsync(Action<DataEvent<IEnumerable<BinanceFuturesStreamAssetIndexUpdate>>> onMessage, CancellationToken ct = default)
+        {
+            var handler = new Action<DataEvent<BinanceCombinedStream<IEnumerable<BinanceFuturesStreamAssetIndexUpdate>>>>(data => onMessage(data.As(data.Data.Data)));
+            return await SubscribeAsync(BaseAddress, new[] { "!assetIndex@arr" }, handler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToAssetIndexUpdatesAsync(string symbol, Action<DataEvent<BinanceFuturesStreamAssetIndexUpdate>> onMessage, CancellationToken ct = default)
+        {
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamAssetIndexUpdate>>>(data => onMessage(data.As(data.Data.Data)));
+            return await SubscribeAsync(BaseAddress, new[] { symbol.ToLowerInvariant()  + "@assetIndex" }, handler, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #region User Data Streams
 
         /// <inheritdoc />
@@ -381,6 +397,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             Action<DataEvent<BinanceStreamEvent>>? onListenKeyExpired,
             Action<DataEvent<BinanceStrategyUpdate>>? onStrategyUpdate,
             Action<DataEvent<BinanceGridUpdate>>? onGridUpdate,
+            Action<DataEvent<BinanceConditionOrderTriggerRejectUpdate>>? onConditionalOrderTriggerRejectUpdate,
             CancellationToken ct = default)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
@@ -473,6 +490,15 @@ namespace Binance.Net.Clients.UsdFuturesApi
                                 onGridUpdate?.Invoke(data.As(result.Data, combinedToken["stream"]!.Value<string>()));
                             else
                                 _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from the GridUpdate event: " + result.Error);
+                            break;
+                        }
+                    case "CONDITIONAL_ORDER_TRIGGER_REJECT":
+                        {
+                            var result = Deserialize<BinanceConditionOrderTriggerRejectUpdate>(token);
+                            if (result)
+                                onConditionalOrderTriggerRejectUpdate?.Invoke(data.As(result.Data, combinedToken["stream"]!.Value<string>()));
+                            else
+                                _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from the CONDITIONAL_ORDER_TRIGGER_REJECT event: " + result.Error);
                             break;
                         }
                     default:

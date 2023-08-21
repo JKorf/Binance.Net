@@ -1,0 +1,10 @@
+{
+  "rows": [
+    {
+      "annualPercentageRate": "0.00006408",  // BETH APR
+      "exchangeRate": "1.00121234",  // BETH value per 1 WBETH
+      "time": 1577233578000
+    }
+  ],
+  "total": "1"
+}

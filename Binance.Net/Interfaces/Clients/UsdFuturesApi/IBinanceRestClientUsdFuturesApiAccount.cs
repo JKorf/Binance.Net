@@ -212,6 +212,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get download id for downloading transaction history
+        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-download-id-for-futures-transaction-history-user_data" /></para>
         /// </summary>
         /// <param name="startTime">Start time of the data to download</param>
         /// <param name="endTime">End time of the data to download</param>
@@ -222,11 +223,54 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get the download link for transaction history by download id
+        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-futures-transaction-history-download-link-by-id-user_data" /></para>
         /// </summary>
         /// <param name="downloadId">The download id as requested by <see cref="GetDownloadIdForTransactionHistoryAsync" /></param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BinanceFuturesDownloadLink>> GetDownloadLinkForTransactionHistoryAsync(string downloadId, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get download id for downloading order history
+        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-download-id-for-futures-order-history-user_data" /></para>
+        /// </summary>
+        /// <param name="startTime">Start time of the data to download</param>
+        /// <param name="endTime">End time of the data to download</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceFuturesDownloadIdInfo>> GetDownloadIdForOrderHistoryAsync(DateTime startTime, DateTime endTime, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get the download link for order history by download id
+        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-futures-order-history-download-link-by-id-user_data" /></para>
+        /// </summary>
+        /// <param name="downloadId">The download id as requested by <see cref="GetDownloadIdForOrderHistoryAsync" /></param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceFuturesDownloadLink>> GetDownloadLinkForOrderHistoryAsync(string downloadId, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get download id for downloading trade history
+        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-download-id-for-futures-trade-history-user_data" /></para>
+        /// </summary>
+        /// <param name="startTime">Start time of the data to download</param>
+        /// <param name="endTime">End time of the data to download</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceFuturesDownloadIdInfo>> GetDownloadIdForTradeHistoryAsync(DateTime startTime, DateTime endTime, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get the download link for order history by download id
+        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-futures-trade-download-link-by-id-user_data" /></para>
+        /// </summary>
+        /// <param name="downloadId">The download id as requested by <see cref="GetDownloadIdForTradeHistoryAsync" /></param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceFuturesDownloadLink>> GetDownloadLinkForTradeHistoryAsync(string downloadId, long? receiveWindow = null, CancellationToken ct = default);
     }
 }

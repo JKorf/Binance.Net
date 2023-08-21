@@ -330,6 +330,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
         /// <param name="onStrategyUpdate">The event handler for whenever a strategy update is received</param>
         /// <param name="onGridUpdate">The event handler for whenever a grid update is received</param>
+        /// <param name="onConditionalOrderTriggerRejectUpdate">The event handler for whenever a trigger order failed to place an order</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
@@ -341,6 +342,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
             Action<DataEvent<BinanceStreamEvent>> onListenKeyExpired,
             Action<DataEvent<BinanceStrategyUpdate>>? onStrategyUpdate,
             Action<DataEvent<BinanceGridUpdate>>? onGridUpdate,
+            Action<DataEvent<BinanceConditionOrderTriggerRejectUpdate>>? onConditionalOrderTriggerRejectUpdate,
             CancellationToken ct = default);
 
         
@@ -365,5 +367,23 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<CallResult<UpdateSubscription>> SubscribeToCompositeIndexUpdatesAsync(string symbol,
             Action<DataEvent<BinanceFuturesStreamCompositeIndex>> onMessage, CancellationToken ct = default);
 
+        /// <summary>
+        /// Subscribe to asset index updates stream
+        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#multi-assets-mode-asset-index-2" /></para>
+        /// </summary>
+        /// <param name="onMessage">The event handler for the received data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns></returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToAssetIndexUpdatesAsync(Action<DataEvent<IEnumerable<BinanceFuturesStreamAssetIndexUpdate>>> onMessage, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribe to asset index updates for a single
+        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#multi-assets-mode-asset-index-2" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol</param>
+        /// <param name="onMessage">The event handler for the received data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns></returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToAssetIndexUpdatesAsync(string symbol, Action<DataEvent<BinanceFuturesStreamAssetIndexUpdate>> onMessage, CancellationToken ct = default);
     }
 }

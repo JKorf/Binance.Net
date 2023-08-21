@@ -733,29 +733,6 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<IEnumerable<BinanceBlvtUserLimit>>> GetLeveragedTokensUserLimitAsync(string? tokenName = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Set auto staking for a product
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#set-auto-staking-user_data" /></para>
-        /// </summary>
-        /// <param name="product">The staking product</param>
-        /// <param name="positionId">The position</param>
-        /// <param name="renewable">Renewable</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        Task<WebCallResult<BinanceStakingResult>> SetAutoStakingAsync(StakingProductType product, string positionId, bool renewable, long? receiveWindow = null, CancellationToken ct = default);
-
-        /// <summary>
-        /// Get personal staking quota
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-personal-left-quota-of-staking-product-user_data" /></para>
-        /// </summary>
-        /// <param name="product">The staking product</param>
-        /// <param name="productId">Product id</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        Task<WebCallResult<BinanceStakingPersonalQuota>> GetStakingPersonalQuotaAsync(StakingProductType product, string productId, long? receiveWindow = null, CancellationToken ct = default);
-
-        /// <summary>
         /// Portfolio margin account info
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-portfolio-margin-account-info-user_data" /></para>
         /// </summary>

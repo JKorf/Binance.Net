@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Clients;
 using Binance.Net.Interfaces.Clients;
+using Binance.Net.Objects.Models.Futures;
 using Binance.Net.Objects.Options;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Sockets;
@@ -203,6 +204,19 @@ namespace Binance.Net.UnitTests.TestImplementations
 
             if (type == typeof(IEnumerable<string>))
                 return new[] { "string" + i };
+
+            if (type == typeof(IEnumerable<BinanceFuturesBatchEditOrder>))
+                return new BinanceFuturesBatchEditOrder[1]
+                {
+                    new BinanceFuturesBatchEditOrder
+                    {
+                        OrderId = 1,
+                        Price = 1,
+                        Quantity = 1,
+                        Side = Enums.OrderSide.Sell,
+                        Symbol = "1"
+                    }
+                };
 
             if (type.IsEnum)
             {

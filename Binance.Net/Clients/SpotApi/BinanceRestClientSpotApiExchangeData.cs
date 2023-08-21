@@ -65,9 +65,6 @@ namespace Binance.Net.Clients.SpotApi
         private const string bSwapPoolsEndpoint = "bswap/pools";
         private const string bSwapPoolsConfigureEndpoint = "bswap/poolConfigure";
 
-        // Staking
-        private const string stakingProductListEndpoint = "staking/productList";
-
         private const string api = "api";
         private const string publicVersion = "3";
 
@@ -668,25 +665,6 @@ namespace Binance.Net.Clients.SpotApi
         }
 
         #endregion
-
-        #endregion
-
-        #region Staking
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceStakingProduct>>> GetStakingProductsAsync(StakingProductType product, string? asset = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>()
-            {
-                { "product", EnumConverter.GetString(product) }
-            };
-            parameters.AddOptionalParameter("asset", asset);
-            parameters.AddOptionalParameter("current", page);
-            parameters.AddOptionalParameter("size", limit);
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceStakingProduct>>(_baseClient.GetUrl(stakingProductListEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
-        }
 
         #endregion
 

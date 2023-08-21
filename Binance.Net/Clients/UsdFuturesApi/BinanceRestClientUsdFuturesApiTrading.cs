@@ -140,13 +140,10 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>> PlaceMultipleOrdersAsync(
-            BinanceFuturesBatchOrder[] orders,
+            IEnumerable<BinanceFuturesBatchOrder> orders,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
-            if (orders.Length <= 0 || orders.Length > 5)
-                throw new ArgumentException("Order list should be at least 1 and max 5 orders");
-
             if (_baseClient.ApiOptions.TradeRulesBehaviour != TradeRulesBehaviour.None)
             {
                 foreach (var order in orders)
@@ -165,7 +162,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             }
 
             var parameters = new Dictionary<string, object>();
-            var parameterOrders = new Dictionary<string, object>[orders.Length];
+            var parameterOrders = new List<Dictionary<string, object>>();
             int i = 0;
             foreach (var order in orders)
             {
@@ -188,7 +185,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 orderParameters.AddOptionalParameter("workingType", order.WorkingType == null ? null : JsonConvert.SerializeObject(order.WorkingType, new WorkingTypeConverter(false)));
                 orderParameters.AddOptionalParameter("reduceOnly", order.ReduceOnly?.ToString().ToLower());
                 orderParameters.AddOptionalParameter("priceProtect", order.PriceProtect?.ToString().ToUpper());
-                parameterOrders[i] = orderParameters;
+                parameterOrders.Add(orderParameters);
                 i++;
             }
 
@@ -229,6 +226,27 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceFuturesOrder>(_baseClient.GetUrl(queryOrderEndpoint, api, "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Query Order Edit History
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesOrderEditHistory>>> GetOrderEditHistoryAsync(string symbol, long? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "symbol", symbol }
+            };
+            parameters.AddOptionalParameter("orderId", orderId?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("origClientOrderId", clientOrderId?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesOrderEditHistory>>(_baseClient.GetUrl("orderAmendment ", api, "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -304,6 +322,52 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #endregion
 
+        #region Edit Multiple Orders
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>> EditMultipleOrdersAsync(
+            IEnumerable<BinanceFuturesBatchEditOrder> orders,
+            int? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            var parameterOrders = new List<Dictionary<string, object>>();
+            int i = 0;
+            foreach (var order in orders)
+            {
+                var orderParameters = new Dictionary<string, object>()
+                {
+                    { "symbol", order.Symbol },
+                    { "side", JsonConvert.SerializeObject(order.Side, new OrderSideConverter(false)) },
+                    { "quantity", order.Quantity.ToString(CultureInfo.InvariantCulture) },
+                    { "price", order.Price.ToString(CultureInfo.InvariantCulture) },
+                };
+
+                orderParameters.AddOptionalParameter("orderId", order.OrderId);
+                orderParameters.AddOptionalParameter("origClientOrderId", order.ClientOrderId);
+                parameterOrders.Add(orderParameters);
+                i++;
+            }
+
+            parameters.Add("batchOrders", JsonConvert.SerializeObject(parameterOrders));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var response = await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesMultipleOrderPlaceResult>>(_baseClient.GetUrl("batchOrders", api, "1"), HttpMethod.Post, ct, parameters, true, weight: 5).ConfigureAwait(false);
+            if (!response.Success)
+                return response.As<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>(default);
+
+            var result = new List<CallResult<BinanceFuturesPlacedOrder>>();
+            foreach (var item in response.Data)
+            {
+                result.Add(item.Code != 0
+                    ? new CallResult<BinanceFuturesPlacedOrder>(new ServerError(item.Code, item.Message))
+                    : new CallResult<BinanceFuturesPlacedOrder>(item));
+            }
+
+            return response.As<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>(result);
+        }
+
+        #endregion
 
         #region Auto-Cancel All Open Orders
 
