@@ -185,7 +185,22 @@ namespace Binance.Net.Clients.SpotApi
         protected override async Task<bool> UnsubscribeAsync(SocketConnection connection, SocketSubscription subscription)
         {
             var topics = ((BinanceSocketRequest)subscription.Request!).Params;
-            var unsub = new BinanceSocketRequest { Method = "UNSUBSCRIBE", Params = topics, Id = NextId() };
+            var topicsToUnsub = new List<string>();
+            foreach(var topic in topics)
+            {
+                if (connection.Subscriptions.Where(s => s != subscription).Any(s => ((BinanceSocketRequest?)s.Request)?.Params.Contains(topic) == true))
+                    continue;
+
+                topicsToUnsub.Add(topic);
+            }
+
+            if (!topicsToUnsub.Any())
+            {
+                _logger.LogInformation("No topics need unsubscribing (still active on other subscriptions)");
+                return true;
+            }
+
+            var unsub = new BinanceSocketRequest { Method = "UNSUBSCRIBE", Params = topicsToUnsub.ToArray(), Id = NextId() };
             var result = false;
 
             if (!connection.Connected)
