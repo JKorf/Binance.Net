@@ -400,19 +400,6 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<IEnumerable<BinanceBSwapPoolConfig>>> GetLiquidityPoolConfigurationAsync(int poolId, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get avaialble staking products list
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-staking-product-list-user_data" /></para>
-        /// </summary>
-        /// <param name="product">Product type</param>
-        /// <param name="asset">Filter for asset</param>
-        /// <param name="page">Page</param>
-        /// <param name="limit">Max items per page</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BinanceStakingProduct>>> GetStakingProductsAsync(StakingProductType product, string? asset = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
-
-        /// <summary>
         /// Get cross margin collateral ratio
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#cross-margin-collateral-ratio-market_data" /></para>
         /// </summary>

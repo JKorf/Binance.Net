@@ -1,0 +1,4 @@
+{
+  "leftStakingPersonalQuota": "1000", // Show min(Daily available limit, total personal staking quota)
+  "leftRedemptionPersonalQuota": "1000" // Show min(Daily personal redeem quota, total redemption limit)
+}

@@ -579,5 +579,49 @@ namespace Binance.Net.Clients.GeneralApi
             return await _baseClient.SendRequestInternal<BinanceIpRestriction>(_baseClient.GetUrl(getIpRestrictionListEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 3000).ConfigureAwait(false);
         }
         #endregion
+
+        #region Query Sub-account Futures Asset Transfer History (For Master Account)
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceSubAccountAssetTransferHistory>>> GetFuturesAssetTransferHistoryAsync(string email, FuturesAccountType accountType, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "email", email },
+                { "futuresType", EnumConverter.GetString(accountType) },
+            };
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
+            parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await _baseClient.SendRequestInternal<BinanceSubAccountAssetTransferHistoryList>(_baseClient.GetUrl("sub-account/futures/internalTransfer", "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return result ? result.As(result.Data.Transfers) : result.As<IEnumerable<BinanceSubAccountAssetTransferHistory>>(default);
+        }
+
+        #endregion
+
+        #region Sub-account Futures Asset Transfer (For Master Account)
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceSubAccountTransaction>> FuturesAssetTransferAsync(string fromEmail, string toEmail, FuturesAccountType accountType, string asset, decimal quantity, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            asset.ValidateNotNull(nameof(asset));
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "fromEmail", fromEmail },
+                { "toEmail", toEmail },
+                { "futuresType", EnumConverter.GetString(accountType) },
+                { "asset", asset },
+                { "amount", quantity.ToString(CultureInfo.InvariantCulture) }
+            };
+
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceSubAccountTransaction>(_baseClient.GetUrl("sub-account/futures/internalTransfer", "sapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+        #endregion
     }
 }

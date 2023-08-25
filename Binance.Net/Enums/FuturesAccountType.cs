@@ -1,4 +1,6 @@
 ﻿
+using CryptoExchange.Net.Attributes;
+
 namespace Binance.Net.Enums
 {
     /// <summary>
@@ -9,10 +11,12 @@ namespace Binance.Net.Enums
         /// <summary>
         /// USDT Margined Futures
         /// </summary>
+        [Map("1")]
         UsdtMarginedFutures,
         /// <summary>
         /// COIN Margined Futures
         /// </summary>
+        [Map("2")]
         CoinMarginedFutures
     }
 }

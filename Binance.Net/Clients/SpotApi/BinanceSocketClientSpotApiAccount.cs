@@ -46,7 +46,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("symbols", symbols);
-            return await _client.QueryAsync<BinanceAccountInfo>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"account.status", parameters, true, true).ConfigureAwait(false);
+            return await _client.QueryAsync<BinanceAccountInfo>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"account.status", parameters, true, true, weight: 20).ConfigureAwait(false);
         }
 
         #endregion
@@ -58,7 +58,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("symbols", symbols);
-            return await _client.QueryAsync<IEnumerable<BinanceCurrentRateLimit>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"account.rateLimits.orders", parameters, true, true).ConfigureAwait(false);
+            return await _client.QueryAsync<IEnumerable<BinanceCurrentRateLimit>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"account.rateLimits.orders", parameters, true, true, weight: 40).ConfigureAwait(false);
         }
 
         #endregion
@@ -68,7 +68,7 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<CallResult<BinanceResponse<string>>> StartUserStreamAsync()
         {
-            var result = await _client.QueryAsync<BinanceListenKey>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"userDataStream.start", new Dictionary<string, object>(), true).ConfigureAwait(false);
+            var result = await _client.QueryAsync<BinanceListenKey>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"userDataStream.start", new Dictionary<string, object>(), true, weight: 2).ConfigureAwait(false);
             if (!result)
                 return result.AsError<BinanceResponse<string>>(result.Error!);
 
@@ -88,7 +88,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("listenKey", listenKey);
-            return await _client.QueryAsync<object>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"userDataStream.ping", parameters, true).ConfigureAwait(false);
+            return await _client.QueryAsync<object>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"userDataStream.ping", parameters, true, weight: 2).ConfigureAwait(false);
         }
 
         #endregion
@@ -100,7 +100,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("listenKey", listenKey);
-            return await _client.QueryAsync<object>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"userDataStream.stop", parameters, true).ConfigureAwait(false);
+            return await _client.QueryAsync<object>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"userDataStream.stop", parameters, true, weight: 2).ConfigureAwait(false);
         }
 
         #endregion

@@ -108,7 +108,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<CallResult<BinanceResponse<IEnumerable<Binance24HPrice>>>> GetTickersAsync(IEnumerable<string>? symbols = null);
         /// <summary>
         /// Gets the historical trades for a symbol
-        /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#historical-trades-market_data" /></para>
+        /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#historical-trades" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="fromId">Filter by from trade id</param>

@@ -141,6 +141,7 @@ Task<WebCallResult<IEnumerable<BinanceBookPrice>>> GetBookPricesAsync(Cancellati
 
 ## GetCrossMarginCollateralRatioAsync  
 
+[https://binance-docs.github.io/apidocs/spot/en/#cross-margin-collateral-ratio-market_data](https://binance-docs.github.io/apidocs/spot/en/#cross-margin-collateral-ratio-market_data)  
 <p>
 
 *Get cross margin collateral ratio*  
@@ -306,6 +307,33 @@ Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(AccountType[] perm
 |Parameter|Description|
 |---|---|
 |permissions|account type|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetFutureHourlyInterestRateAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#get-a-future-hourly-interest-rate-user_data](https://binance-docs.github.io/apidocs/spot/en/#get-a-future-hourly-interest-rate-user_data)  
+<p>
+
+*Get futures hourly interest rate*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetFutureHourlyInterestRateAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BinanceFuturesInterestRate>>> GetFutureHourlyInterestRateAsync(IEnumerable<string> assets, bool isolated, int? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|assets|Assets|
+|isolated|Isolated or cross|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
@@ -541,6 +569,31 @@ Task<WebCallResult<IEnumerable<BinanceMarginAsset>>> GetMarginAssetsAsync(Cancel
 
 |Parameter|Description|
 |---|---|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetMarginDelistScheduleAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#get-tokens-or-symbols-delist-schedule-for-cross-margin-and-isolated-margin-market_data](https://binance-docs.github.io/apidocs/spot/en/#get-tokens-or-symbols-delist-schedule-for-cross-margin-and-isolated-margin-market_data)  
+<p>
+
+*Get cross and isolated delist schedule*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.ExchangeData.GetMarginDelistScheduleAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BinanceMarginDelistSchedule>>> GetMarginDelistScheduleAsync(int? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
@@ -841,35 +894,6 @@ Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default)
 
 |Parameter|Description|
 |---|---|
-|_[Optional]_ ct|Cancellation token|
-
-</p>
-
-***
-
-## GetStakingProductsAsync  
-
-[https://binance-docs.github.io/apidocs/spot/en/#get-staking-product-list-user_data](https://binance-docs.github.io/apidocs/spot/en/#get-staking-product-list-user_data)  
-<p>
-
-*Get avaialble staking products list*  
-
-```csharp  
-var client = new BinanceRestClient();  
-var result = await client.SpotApi.ExchangeData.GetStakingProductsAsync(/* parameters */);  
-```  
-
-```csharp  
-Task<WebCallResult<IEnumerable<BinanceStakingProduct>>> GetStakingProductsAsync(StakingProductType product, string? asset = default, int? page = default, int? limit = default, int? receiveWindow = default, CancellationToken ct = default);  
-```  
-
-|Parameter|Description|
-|---|---|
-|product|Product type|
-|_[Optional]_ asset|Filter for asset|
-|_[Optional]_ page|Page|
-|_[Optional]_ limit|Max items per page|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>

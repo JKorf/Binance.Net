@@ -8,11 +8,9 @@ using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
-using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures.Socket;
-using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.Socket;
 using Binance.Net.Objects.Options;
 using CryptoExchange.Net;
@@ -68,7 +66,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
             base(logger, options.Environment.UsdFuturesSocketAddress!, options, options.UsdFuturesOptions)
         {
             SetDataInterpreter((data) => string.Empty, null);
-            RateLimitPerSocketPerSecond = 4;
         }
         #endregion 
 
@@ -369,6 +366,24 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #endregion
 
+        #region Asset Index Streams
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToAssetIndexUpdatesAsync(Action<DataEvent<IEnumerable<BinanceFuturesStreamAssetIndexUpdate>>> onMessage, CancellationToken ct = default)
+        {
+            var handler = new Action<DataEvent<BinanceCombinedStream<IEnumerable<BinanceFuturesStreamAssetIndexUpdate>>>>(data => onMessage(data.As(data.Data.Data)));
+            return await SubscribeAsync(BaseAddress, new[] { "!assetIndex@arr" }, handler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToAssetIndexUpdatesAsync(string symbol, Action<DataEvent<BinanceFuturesStreamAssetIndexUpdate>> onMessage, CancellationToken ct = default)
+        {
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamAssetIndexUpdate>>>(data => onMessage(data.As(data.Data.Data)));
+            return await SubscribeAsync(BaseAddress, new[] { symbol.ToLowerInvariant()  + "@assetIndex" }, handler, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #region User Data Streams
 
         /// <inheritdoc />
@@ -381,6 +396,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             Action<DataEvent<BinanceStreamEvent>>? onListenKeyExpired,
             Action<DataEvent<BinanceStrategyUpdate>>? onStrategyUpdate,
             Action<DataEvent<BinanceGridUpdate>>? onGridUpdate,
+            Action<DataEvent<BinanceConditionOrderTriggerRejectUpdate>>? onConditionalOrderTriggerRejectUpdate,
             CancellationToken ct = default)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
@@ -475,6 +491,15 @@ namespace Binance.Net.Clients.UsdFuturesApi
                                 _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from the GridUpdate event: " + result.Error);
                             break;
                         }
+                    case "CONDITIONAL_ORDER_TRIGGER_REJECT":
+                        {
+                            var result = Deserialize<BinanceConditionOrderTriggerRejectUpdate>(token);
+                            if (result)
+                                onConditionalOrderTriggerRejectUpdate?.Invoke(data.As(result.Data, combinedToken["stream"]!.Value<string>()));
+                            else
+                                _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from the CONDITIONAL_ORDER_TRIGGER_REJECT event: " + result.Error);
+                            break;
+                        }
                     default:
                         _logger.Log(LogLevel.Warning, $"Received unknown user data event {evnt}: " + data.Data);
                         break;
@@ -494,7 +519,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             {
                 Method = "SUBSCRIBE",
                 Params = topics.ToArray(),
-                Id = NextId()
+                Id = ExchangeHelpers.NextId()
             };
 
             return SubscribeAsync(url.AppendPath("stream"), request, null, false, onData, ct);
@@ -569,14 +594,30 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// <inheritdoc />
         protected override async Task<bool> UnsubscribeAsync(SocketConnection connection, SocketSubscription subscription)
         {
+
             var topics = ((BinanceSocketRequest)subscription.Request!).Params;
-            var unsub = new BinanceSocketRequest { Method = "UNSUBSCRIBE", Params = topics, Id = NextId() };
+            var topicsToUnsub = new List<string>();
+            foreach (var topic in topics)
+            {
+                if (connection.Subscriptions.Where(s => s != subscription).Any(s => ((BinanceSocketRequest?)s.Request)?.Params.Contains(topic) == true))
+                    continue;
+
+                topicsToUnsub.Add(topic);
+            }
+
+            if (!topicsToUnsub.Any())
+            {
+                _logger.LogInformation("No topics need unsubscribing (still active on other subscriptions)");
+                return true;
+            }
+
+            var unsub = new BinanceSocketRequest { Method = "UNSUBSCRIBE", Params = topicsToUnsub.ToArray(), Id = ExchangeHelpers.NextId() };
             var result = false;
 
             if (!connection.Connected)
                 return true;
 
-            await connection.SendAndWaitAsync(unsub, ClientOptions.RequestTimeout, null, data =>
+            await connection.SendAndWaitAsync(unsub, ClientOptions.RequestTimeout, null, 1, data =>
             {
                 if (data.Type != JTokenType.Object)
                     return false;

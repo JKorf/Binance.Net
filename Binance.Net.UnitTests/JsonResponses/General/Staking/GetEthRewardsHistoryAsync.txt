@@ -1,0 +1,13 @@
+{
+  "rows": [
+    {
+      "time": 1575018510000,
+      "asset": "BETH",
+      "holding": "2.3223", // BETH holding balance
+      "amount": "0.23223", // Distributed rewards
+      "annualPercentageRate": "0.5", // 0.5 means 50% here
+      "status": "SUCCESS"
+    }
+  ],
+  "total": 1
+}

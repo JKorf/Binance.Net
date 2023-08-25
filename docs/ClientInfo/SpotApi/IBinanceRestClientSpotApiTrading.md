@@ -69,6 +69,32 @@ Task<WebCallResult<BinanceBSwapPreviewResult>> AddToLiquidityPoolPreviewAsync(in
 
 ***
 
+## CancelAlgoOrderAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#cancel-algo-order-trade-2](https://binance-docs.github.io/apidocs/spot/en/#cancel-algo-order-trade-2)  
+<p>
+
+*Cancel a spot algo order*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Trading.CancelAlgoOrderAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceAlgoResult>> CancelAlgoOrderAsync(long algoOrderId, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|algoOrderId|Algo order id to cancel|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## CancelAllMarginOrdersAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#margin-account-cancel-all-open-orders-on-a-symbol-trade](https://binance-docs.github.io/apidocs/spot/en/#margin-account-cancel-all-open-orders-on-a-symbol-trade)  
@@ -224,7 +250,7 @@ var result = await client.SpotApi.Trading.CancelOrderAsync(/* parameters */);
 ```  
 
 ```csharp  
-Task<WebCallResult<BinanceOrderBase>> CancelOrderAsync(string symbol, long? orderId = default, string? origClientOrderId = default, string? newClientOrderId = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BinanceOrderBase>> CancelOrderAsync(string symbol, long? orderId = default, string? origClientOrderId = default, string? newClientOrderId = default, CancelRestriction? cancelRestriction = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -233,6 +259,32 @@ Task<WebCallResult<BinanceOrderBase>> CancelOrderAsync(string symbol, long? orde
 |_[Optional]_ orderId|The order id of the order|
 |_[Optional]_ origClientOrderId|The client order id of the order|
 |_[Optional]_ newClientOrderId|Unique identifier for this cancel|
+|_[Optional]_ cancelRestriction|Restrict cancellation based on order state|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## ClaimLiquidityPoolsRewardsAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#claim-rewards-trade](https://binance-docs.github.io/apidocs/spot/en/#claim-rewards-trade)  
+<p>
+
+*Claim liquidity pool rewards*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Trading.ClaimLiquidityPoolsRewardsAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceBSwapClaimResult>> ClaimLiquidityPoolsRewardsAsync(int? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
@@ -268,6 +320,34 @@ Task<WebCallResult<BinanceConvertTransferResult>> ConvertTransferAsync(string cl
 
 ***
 
+## GetAlgoSubOrdersAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#query-historical-algo-orders-user_data-2](https://binance-docs.github.io/apidocs/spot/en/#query-historical-algo-orders-user_data-2)  
+<p>
+
+*Get algo sub orders overview*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Trading.GetAlgoSubOrdersAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceAlgoSubOrderList>> GetAlgoSubOrdersAsync(long algoId, int? page = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|algoId|Algo id|
+|_[Optional]_ page|Page|
+|_[Optional]_ limit|Max results|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetC2CTradeHistoryAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#get-c2c-trade-history-user_data](https://binance-docs.github.io/apidocs/spot/en/#get-c2c-trade-history-user_data)  
@@ -291,6 +371,37 @@ Task<WebCallResult<IEnumerable<BinanceC2CUserTrade>>> GetC2CTradeHistoryAsync(Or
 |_[Optional]_ endTime|Filter by end time|
 |_[Optional]_ page|The page|
 |_[Optional]_ pageSize|The page size|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetClosedAlgoOrdersAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#query-historical-algo-orders-user_data-2](https://binance-docs.github.io/apidocs/spot/en/#query-historical-algo-orders-user_data-2)  
+<p>
+
+*Get list of closed algo orders*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Trading.GetClosedAlgoOrdersAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceAlgoOrders>> GetClosedAlgoOrdersAsync(string? symbol = default, OrderSide? side = default, DateTime? startTime = default, DateTime? endTime = default, int? page = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ symbol|Filter by symbol|
+|_[Optional]_ side|Filter by side|
+|_[Optional]_ startTime|Fitler by start time|
+|_[Optional]_ endTime|Filter by end time|
+|_[Optional]_ page|Page|
+|_[Optional]_ limit|Max results|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
@@ -463,6 +574,36 @@ Task<WebCallResult<IEnumerable<BinanceBSwapOperation>>> GetLiquidityPoolOperatio
 |_[Optional]_ operationId|Filter by operationId|
 |_[Optional]_ poolId|Filter by poolId|
 |_[Optional]_ operation|Filter by operation|
+|_[Optional]_ startTime|Filter by start time|
+|_[Optional]_ endTime|Filter by end time|
+|_[Optional]_ limit|Max number of results|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetLiquidityPoolsClaimHistoryAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#get-claimed-history-user_data](https://binance-docs.github.io/apidocs/spot/en/#get-claimed-history-user_data)  
+<p>
+
+*Get claimed rewards history*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Trading.GetLiquidityPoolsClaimHistoryAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BinanceBSwapRewardHistory>>> GetLiquidityPoolsClaimHistoryAsync(long? poolId = default, string? asset = default, DateTime? startTime = default, DateTime? endTime = default, int? limit = default, int? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ poolId|Filter by pool id|
+|_[Optional]_ asset|Filter by asset|
 |_[Optional]_ startTime|Filter by start time|
 |_[Optional]_ endTime|Filter by end time|
 |_[Optional]_ limit|Max number of results|
@@ -768,6 +909,31 @@ Task<WebCallResult<IEnumerable<BinanceOrderOcoList>>> GetOcoOrdersAsync(long? fr
 
 ***
 
+## GetOpenAlgoOrdersAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#query-current-algo-open-orders-user_data-2](https://binance-docs.github.io/apidocs/spot/en/#query-current-algo-open-orders-user_data-2)  
+<p>
+
+*Get all open spot algo orders*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Trading.GetOpenAlgoOrdersAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceAlgoOrders>> GetOpenAlgoOrdersAsync(long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetOpenMarginOrdersAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#query-margin-account-39-s-open-orders-user_data](https://binance-docs.github.io/apidocs/spot/en/#query-margin-account-39-s-open-orders-user_data)  
@@ -962,60 +1128,24 @@ Task<WebCallResult<IEnumerable<BinancePreventedTrade>>> GetPreventedTradesAsync(
 
 ***
 
-## GetStakingHistoryAsync  
+## GetUnclaimedLiquidityPoolsRewardsAsync  
 
-[https://binance-docs.github.io/apidocs/spot/en/#get-staking-history-user_data](https://binance-docs.github.io/apidocs/spot/en/#get-staking-history-user_data)  
+[https://binance-docs.github.io/apidocs/spot/en/#get-unclaimed-rewards-record-user_data](https://binance-docs.github.io/apidocs/spot/en/#get-unclaimed-rewards-record-user_data)  
 <p>
 
-*Get staking history*  
+*Get unclaimed rewards*  
 
 ```csharp  
 var client = new BinanceRestClient();  
-var result = await client.SpotApi.Trading.GetStakingHistoryAsync(/* parameters */);  
+var result = await client.SpotApi.Trading.GetUnclaimedLiquidityPoolsRewardsAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BinanceStakingHistory>>> GetStakingHistoryAsync(StakingProductType product, StakingTransactionType transactionType, string? asset = default, DateTime? startTime = default, DateTime? endTime = default, int? page = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BinanceBSwapUnclaimedRewards>> GetUnclaimedLiquidityPoolsRewardsAsync(int? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|product|Product type|
-|transactionType|Transaction type|
-|_[Optional]_ asset|Filter by asset|
-|_[Optional]_ startTime|Filter by start time|
-|_[Optional]_ endTime|Filter by end time|
-|_[Optional]_ page|Page|
-|_[Optional]_ limit|Max results|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|_[Optional]_ ct|Cancellation token|
-
-</p>
-
-***
-
-## GetStakingPositionsAsync  
-
-[https://binance-docs.github.io/apidocs/spot/en/#get-staking-product-position-user_data](https://binance-docs.github.io/apidocs/spot/en/#get-staking-product-position-user_data)  
-<p>
-
-*Get staking positions*  
-
-```csharp  
-var client = new BinanceRestClient();  
-var result = await client.SpotApi.Trading.GetStakingPositionsAsync(/* parameters */);  
-```  
-
-```csharp  
-Task<WebCallResult<IEnumerable<BinanceStakingPosition>>> GetStakingPositionsAsync(StakingProductType product, string? productId = default, int? page = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
-```  
-
-|Parameter|Description|
-|---|---|
-|product|Product type|
-|_[Optional]_ productId|Product id|
-|_[Optional]_ page|Page|
-|_[Optional]_ limit|Max results|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
@@ -1283,28 +1413,30 @@ Task<WebCallResult<BinancePlacedOrder>> PlaceTestOrderAsync(string symbol, Order
 
 ***
 
-## PurchaseStakingProductAsync  
+## PlaceTimeWeightedAveragePriceOrderAsync  
 
-[https://binance-docs.github.io/apidocs/spot/en/#purchase-staking-product-user_data](https://binance-docs.github.io/apidocs/spot/en/#purchase-staking-product-user_data)  
+[https://binance-docs.github.io/apidocs/spot/en/#time-weighted-average-price-twap-new-order-trade-2](https://binance-docs.github.io/apidocs/spot/en/#time-weighted-average-price-twap-new-order-trade-2)  
 <p>
 
-*Purchase a staking product*  
+*Place a new spot time weighted average price order*  
 
 ```csharp  
 var client = new BinanceRestClient();  
-var result = await client.SpotApi.Trading.PurchaseStakingProductAsync(/* parameters */);  
+var result = await client.SpotApi.Trading.PlaceTimeWeightedAveragePriceOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BinanceStakingPositionResult>> PurchaseStakingProductAsync(StakingProductType product, string productId, decimal quantity, bool? renewable = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BinanceAlgoOrderResult>> PlaceTimeWeightedAveragePriceOrderAsync(string symbol, OrderSide side, decimal quantity, int duration, string? clientOrderId = default, decimal? limitPrice = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|product|Product type|
-|productId|Product id|
-|quantity|Quantity to purchase|
-|_[Optional]_ renewable|Renewable|
+|symbol|The symbol|
+|side|Order side|
+|quantity|Order quantity|
+|duration|Duration in seconds. 300 - 86400|
+|_[Optional]_ clientOrderId|Client order id|
+|_[Optional]_ limitPrice|Limit price of the order. If null will use market price|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
@@ -1332,36 +1464,6 @@ Task<WebCallResult<BinanceBlvtRedeemResult>> RedeemLeveragedTokenAsync(string to
 |---|---|
 |tokenName|Name of the token to redeem|
 |quantity|Quantity to redeem|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|_[Optional]_ ct|Cancellation token|
-
-</p>
-
-***
-
-## RedeemStakingProductAsync  
-
-[https://binance-docs.github.io/apidocs/spot/en/#redeem-staking-product-user_data](https://binance-docs.github.io/apidocs/spot/en/#redeem-staking-product-user_data)  
-<p>
-
-*Redeem a staking product*  
-
-```csharp  
-var client = new BinanceRestClient();  
-var result = await client.SpotApi.Trading.RedeemStakingProductAsync(/* parameters */);  
-```  
-
-```csharp  
-Task<WebCallResult<BinanceStakingResult>> RedeemStakingProductAsync(StakingProductType product, string productId, string? positionId = default, decimal? quantity = default, bool? renewable = default, long? receiveWindow = default, CancellationToken ct = default);  
-```  
-
-|Parameter|Description|
-|---|---|
-|product|Product type|
-|productId|Product id|
-|_[Optional]_ positionId|Position id, required for Staking or LockedDefi types|
-|_[Optional]_ quantity|Quantity to purchase|
-|_[Optional]_ renewable|Renewable|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
@@ -1439,7 +1541,7 @@ var result = await client.SpotApi.Trading.ReplaceOrderAsync(/* parameters */);
 ```  
 
 ```csharp  
-Task<WebCallResult<BinanceReplaceOrderResult>> ReplaceOrderAsync(string symbol, OrderSide side, SpotOrderType type, CancelReplaceMode cancelReplaceMode, long? cancelOrderId = default, string? cancelClientOrderId = default, string? newCancelClientOrderId = default, string? newClientOrderId = default, decimal? quantity = default, decimal? quoteQuantity = default, decimal? price = default, TimeInForce? timeInForce = default, decimal? stopPrice = default, decimal? icebergQty = default, OrderResponseType? orderResponseType = default, int? trailingDelta = default, int? strategyId = default, int? strategyType = default, int? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BinanceReplaceOrderResult>> ReplaceOrderAsync(string symbol, OrderSide side, SpotOrderType type, CancelReplaceMode cancelReplaceMode, long? cancelOrderId = default, string? cancelClientOrderId = default, string? newCancelClientOrderId = default, string? newClientOrderId = default, decimal? quantity = default, decimal? quoteQuantity = default, decimal? price = default, TimeInForce? timeInForce = default, decimal? stopPrice = default, decimal? icebergQty = default, OrderResponseType? orderResponseType = default, int? trailingDelta = default, int? strategyId = default, int? strategyType = default, CancelRestriction? cancelRestriction = default, int? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -1462,6 +1564,7 @@ Task<WebCallResult<BinanceReplaceOrderResult>> ReplaceOrderAsync(string symbol, 
 |_[Optional]_ trailingDelta|Trailing delta value for order in BIPS. A value of 1 means 0.01% trailing delta.|
 |_[Optional]_ strategyId|Strategy id|
 |_[Optional]_ strategyType|Strategy type|
+|_[Optional]_ cancelRestriction|Restrict cancellation based on order state|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 

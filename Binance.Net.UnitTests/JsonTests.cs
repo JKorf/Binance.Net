@@ -85,8 +85,17 @@ namespace Binance.Net.UnitTests
                 {
                     { "GetSubAccountsAsync", "subAccounts" },
                     { "GetSubAccountAssetsAsync", "balances" },
-                    { "GetUniversalTransferHistoryAsync", "result" }
+                    { "GetUniversalTransferHistoryAsync", "result" },
+                    { "GetFuturesAssetTransferHistoryAsync", "transfers" },
                 });
+        }
+
+        [Test]
+        public async Task ValidateSpotStakingCalls()
+        {
+            await _comparer.ProcessSubject(
+                "General/Staking",
+                c => c.GeneralApi.Staking);
         }
 
         [Test]

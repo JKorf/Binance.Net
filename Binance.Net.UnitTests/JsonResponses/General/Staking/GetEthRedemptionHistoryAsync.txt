@@ -1,0 +1,12 @@
+{
+  "rows": [
+    {
+      "time": 1575018510000,
+      "arrivalTime": 1575018510000,
+      "asset": "BETH",
+      "amount": "21312.23223",
+      "status": "SUCCESS"
+    }
+  ],
+  "total": 1
+}

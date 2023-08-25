@@ -1,0 +1,22 @@
+{
+    "success":true,
+    "futuresType": 2,
+    "transfers":[
+        {
+            "from":"aaa@test.com",
+            "to":"bbb@test.com",
+            "asset":"BTC",
+            "qty":"1",
+            "tranId":11897001102,
+            "time":1544433328000
+        },
+        {
+            "from":"bbb@test.com",
+            "to":"ccc@test.com",
+            "asset":"ETH",
+            "qty":"2",
+            "tranId":11631474902,
+            "time":1544433328000
+        }
+    ]
+}

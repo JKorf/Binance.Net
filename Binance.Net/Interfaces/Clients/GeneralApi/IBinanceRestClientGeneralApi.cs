@@ -37,5 +37,10 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// Endpoints related to requesting data for and controlling sub accounts
         /// </summary>
         public IBinanceRestClientGeneralApiSubAccount SubAccount { get; }
+
+        /// <summary>
+        /// Endpoints related to staking
+        /// </summary>
+        IBinanceRestClientGeneralApiStaking Staking { get; }
     }
 }

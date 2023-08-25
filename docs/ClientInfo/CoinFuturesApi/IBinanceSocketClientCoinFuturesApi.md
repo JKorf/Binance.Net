@@ -973,7 +973,7 @@ var result = await client.CoinFuturesApi.SubscribeToUserDataUpdatesAsync(/* para
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(string listenKey, Action<DataEvent<BinanceFuturesStreamConfigUpdate>>? onLeverageUpdate, Action<DataEvent<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate, Action<DataEvent<BinanceFuturesStreamAccountUpdate>>? onAccountUpdate, Action<DataEvent<BinanceFuturesStreamOrderUpdate>>? onOrderUpdate, Action<DataEvent<BinanceStreamEvent>> onListenKeyExpired, CancellationToken ct = default);  
+Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(string listenKey, Action<DataEvent<BinanceFuturesStreamConfigUpdate>>? onLeverageUpdate, Action<DataEvent<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate, Action<DataEvent<BinanceFuturesStreamAccountUpdate>>? onAccountUpdate, Action<DataEvent<BinanceFuturesStreamOrderUpdate>>? onOrderUpdate, Action<DataEvent<BinanceStreamEvent>> onListenKeyExpired, Action<DataEvent<BinanceStrategyUpdate>>? onStrategyUpdate, Action<DataEvent<BinanceGridUpdate>>? onGridUpdate, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -984,6 +984,8 @@ Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(string list
 |onAccountUpdate|The event handler for whenever an account update is received|
 |onOrderUpdate|The event handler for whenever an order status update is received|
 |onListenKeyExpired|Responds when the listen key for the stream has expired. Initiate a new instance of the stream here|
+|onStrategyUpdate|The event handler for whenever a strategy update is received|
+|onGridUpdate|The event handler for whenever a grid update is received|
 |_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
