@@ -148,6 +148,35 @@ Task<WebCallResult<BinanceMinerList>> GetMinerListAsync(string algorithm, string
 
 ***
 
+## GetMiningAccountEarningsAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#mining-account-earning-user_data](https://binance-docs.github.io/apidocs/spot/en/#mining-account-earning-user_data)  
+<p>
+
+*Get mining account earnings*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Mining.GetMiningAccountEarningsAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceMiningEarnings>> GetMiningAccountEarningsAsync(string algo, DateTime? startTime = default, DateTime? endTime = default, int? page = default, int? pageSize = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|algo|Algorithm|
+|_[Optional]_ startTime|Filter by start time|
+|_[Optional]_ endTime|Filter by end time|
+|_[Optional]_ page|Page|
+|_[Optional]_ pageSize|Page size|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetMiningAccountListAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#account-list-user_data](https://binance-docs.github.io/apidocs/spot/en/#account-list-user_data)  

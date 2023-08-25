@@ -11,64 +11,6 @@ grand_parent: Rest API documentation
 
 ***
 
-## AdjustCrossCollateralLoanToValueAsync  
-
-[https://binance-docs.github.io/apidocs/spot/en/#adjust-cross-collateral-ltv-v2-trade](https://binance-docs.github.io/apidocs/spot/en/#adjust-cross-collateral-ltv-v2-trade)  
-<p>
-
-*Adjust cross collateral LTV*  
-
-```csharp  
-var client = new BinanceRestClient();  
-var result = await client.GeneralApi.Futures.AdjustCrossCollateralLoanToValueAsync(/* parameters */);  
-```  
-
-```csharp  
-Task<WebCallResult<BinanceCrossCollateralAdjustLtvResult>> AdjustCrossCollateralLoanToValueAsync(string collateralAsset, string loanAsset, decimal quantity, AdjustRateDirection direction, long? receiveWindow = default, CancellationToken ct = default);  
-```  
-
-|Parameter|Description|
-|---|---|
-|collateralAsset|The collateral asset|
-|loanAsset|The loan asset|
-|quantity|The quantity|
-|direction|The direction|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|_[Optional]_ ct|Cancellation token|
-
-</p>
-
-***
-
-## BorrowForCrossCollateralAsync  
-
-[https://binance-docs.github.io/apidocs/spot/en/#borrow-for-cross-collateral-trade](https://binance-docs.github.io/apidocs/spot/en/#borrow-for-cross-collateral-trade)  
-<p>
-
-*Borrow for cross-collateral*  
-
-```csharp  
-var client = new BinanceRestClient();  
-var result = await client.GeneralApi.Futures.BorrowForCrossCollateralAsync(/* parameters */);  
-```  
-
-```csharp  
-Task<WebCallResult<BinanceCrossCollateralBorrowResult>> BorrowForCrossCollateralAsync(string asset, string collateralAsset, decimal? quantity = default, decimal? collateralQuantity = default, long? receiveWindow = default, CancellationToken ct = default);  
-```  
-
-|Parameter|Description|
-|---|---|
-|asset|The asset to borrow|
-|collateralAsset|The asset to use as collateral|
-|_[Optional]_ quantity|The quantity to borrow|
-|_[Optional]_ collateralQuantity|The quantity of collateral asset to use|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|_[Optional]_ ct|Cancellation token|
-
-</p>
-
-***
-
 ## GetAdjustCrossCollateralLoanToValueHistoryAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#adjust-cross-collateral-ltv-history-user_data](https://binance-docs.github.io/apidocs/spot/en/#adjust-cross-collateral-ltv-history-user_data)  
@@ -128,24 +70,28 @@ Task<WebCallResult<BinanceQueryRecords<BinanceCrossCollateralBorrowHistory>>> Ge
 
 ***
 
-## GetCrossCollateralInformationAsync  
+## GetCrossCollateralInterestHistoryAsync  
 
-[https://binance-docs.github.io/apidocs/spot/en/#cross-collateral-information-v2-user_data](https://binance-docs.github.io/apidocs/spot/en/#cross-collateral-information-v2-user_data)  
+[https://binance-docs.github.io/apidocs/spot/en/#cross-collateral-interest-history-user_data](https://binance-docs.github.io/apidocs/spot/en/#cross-collateral-interest-history-user_data)  
 <p>
 
-*Get cross-collateral info*  
+*Get cross collateral interest history*  
 
 ```csharp  
 var client = new BinanceRestClient();  
-var result = await client.GeneralApi.Futures.GetCrossCollateralInformationAsync();  
+var result = await client.GeneralApi.Futures.GetCrossCollateralInterestHistoryAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BinanceCrossCollateralInformation>>> GetCrossCollateralInformationAsync(long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BinanceQueryRecords<BinanceCrossCollateralInterestHistory>>> GetCrossCollateralInterestHistoryAsync(string? collateralAsset = default, DateTime? startTime = default, DateTime? endTime = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
+|_[Optional]_ collateralAsset|The collateral asset|
+|_[Optional]_ startTime|Filter by start time|
+|_[Optional]_ endTime|Filter by end time|
+|_[Optional]_ limit|The page size|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
@@ -260,90 +206,6 @@ Task<WebCallResult<BinanceQueryRecords<BinanceSpotFuturesTransfer>>> GetFuturesT
 |_[Optional]_ endTime|Filter by end time|
 |_[Optional]_ page|The page to return|
 |_[Optional]_ limit|The page size|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|_[Optional]_ ct|Cancellation token|
-
-</p>
-
-***
-
-## GetMaxAmountForAdjustCrossCollateralLoanToValueAsync  
-
-[https://binance-docs.github.io/apidocs/spot/en/#get-max-amount-for-adjust-cross-collateral-ltv-v2-user_data](https://binance-docs.github.io/apidocs/spot/en/#get-max-amount-for-adjust-cross-collateral-ltv-v2-user_data)  
-<p>
-
-*Get max quantity for adjust cross-collateral LTV*  
-
-```csharp  
-var client = new BinanceRestClient();  
-var result = await client.GeneralApi.Futures.GetMaxAmountForAdjustCrossCollateralLoanToValueAsync(/* parameters */);  
-```  
-
-```csharp  
-Task<WebCallResult<BinanceCrossCollateralAdjustMaxAmounts>> GetMaxAmountForAdjustCrossCollateralLoanToValueAsync(string collateralAsset, string loanAsset, long? receiveWindow = default, CancellationToken ct = default);  
-```  
-
-|Parameter|Description|
-|---|---|
-|collateralAsset|The collateral asset|
-|loanAsset|The loan asset|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|_[Optional]_ ct|Cancellation token|
-
-</p>
-
-***
-
-## GetRateAfterAdjustLoanToValueAsync  
-
-[https://binance-docs.github.io/apidocs/spot/en/#calculate-rate-after-adjust-cross-collateral-ltv-v2-user_data](https://binance-docs.github.io/apidocs/spot/en/#calculate-rate-after-adjust-cross-collateral-ltv-v2-user_data)  
-<p>
-
-*Calculate rate after adjust cross-collateral loan to value*  
-
-```csharp  
-var client = new BinanceRestClient();  
-var result = await client.GeneralApi.Futures.GetRateAfterAdjustLoanToValueAsync(/* parameters */);  
-```  
-
-```csharp  
-Task<WebCallResult<BinanceCrossCollateralAfterAdjust>> GetRateAfterAdjustLoanToValueAsync(string collateralAsset, string loanAsset, decimal quantity, AdjustRateDirection direction, long? receiveWindow = default, CancellationToken ct = default);  
-```  
-
-|Parameter|Description|
-|---|---|
-|collateralAsset|The collateral asset|
-|loanAsset|The loan asset|
-|quantity|The quantity|
-|direction|The direction|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|_[Optional]_ ct|Cancellation token|
-
-</p>
-
-***
-
-## RepayForCrossCollateralAsync  
-
-[https://binance-docs.github.io/apidocs/spot/en/#repay-for-cross-collateral-trade](https://binance-docs.github.io/apidocs/spot/en/#repay-for-cross-collateral-trade)  
-<p>
-
-*Repay for cross-collateral*  
-
-```csharp  
-var client = new BinanceRestClient();  
-var result = await client.GeneralApi.Futures.RepayForCrossCollateralAsync(/* parameters */);  
-```  
-
-```csharp  
-Task<WebCallResult<BinanceCrossCollateralRepayResult>> RepayForCrossCollateralAsync(string asset, string collateralAsset, decimal quantity, long? receiveWindow = default, CancellationToken ct = default);  
-```  
-
-|Parameter|Description|
-|---|---|
-|asset|The asset|
-|collateralAsset|The collateral asset to repay|
-|quantity|The quantity to repay|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 

@@ -30,6 +30,8 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discuss
 * Version 9.1.0 - 25 Aug 2023
     * Removed deprecated endpoints
     * Updated models
+	* Added support for rate limiting on the socket client
+	* Updated the weights and rate limits for the websocket API
     * Added restClient.GeneralApi.Futures.GetAdjustCrossCollateralLoanToValueHistoryAsync
     * Added restClient.GeneralApi.Futures.GetCrossCollateralLiquidationHistoryAsync
     * Added restClient.GeneralApi.Futures.GetCrossCollateralInterestHistoryAsync

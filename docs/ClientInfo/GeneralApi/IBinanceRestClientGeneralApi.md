@@ -23,5 +23,8 @@ parent: Rest API documentation
 *Endpoints related to savings*  
 **[IBinanceRestClientGeneralApiSavings](IBinanceRestClientGeneralApiSavings.html) Savings { get; }**  
 ***
+*Endpoints related to staking*  
+**[IBinanceRestClientGeneralApiStaking](IBinanceRestClientGeneralApiStaking.html) Staking { get; }**  
+***
 *Endpoints related to requesting data for and controlling sub accounts*  
 **[IBinanceRestClientGeneralApiSubAccount](IBinanceRestClientGeneralApiSubAccount.html) SubAccount { get; }**  

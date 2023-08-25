@@ -147,6 +147,63 @@ Task<WebCallResult<BinanceFuturesCancelOrder>> CancelOrderAsync(string symbol, l
 
 ***
 
+## EditMultipleOrdersAsync  
+
+[https://binance-docs.github.io/apidocs/futures/en/#modify-multiple-orders-trade](https://binance-docs.github.io/apidocs/futures/en/#modify-multiple-orders-trade)  
+<p>
+
+*Edit multiple existing orders*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.Trading.EditMultipleOrdersAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>> EditMultipleOrdersAsync(IEnumerable<BinanceFuturesBatchEditOrder> orders, int? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|orders|The order info|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## EditOrderAsync  
+
+[https://binance-docs.github.io/apidocs/futures/en/#modify-order-trade](https://binance-docs.github.io/apidocs/futures/en/#modify-order-trade)  
+<p>
+
+*Edit an existing order*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.Trading.EditOrderAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceFuturesPlacedOrder>> EditOrderAsync(string symbol, OrderSide side, decimal quantity, decimal price, long? orderId = default, string? origClientOrderId = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|symbol|The symbol|
+|side|Order side|
+|quantity|New quantity|
+|price|New price|
+|_[Optional]_ orderId|Order id of the order to edit|
+|_[Optional]_ origClientOrderId|Client order id of the order to edit|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetAlgoSubOrdersAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#query-sub-orders-user_data](https://binance-docs.github.io/apidocs/spot/en/#query-sub-orders-user_data)  
@@ -342,6 +399,36 @@ Task<WebCallResult<BinanceFuturesOrder>> GetOrderAsync(string symbol, long? orde
 
 ***
 
+## GetOrderEditHistoryAsync  
+
+<p>
+
+*Get order edit history*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.UsdFuturesApi.Trading.GetOrderEditHistoryAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BinanceFuturesOrderEditHistory>>> GetOrderEditHistoryAsync(string symbol, long? orderId = default, string? clientOrderId = default, DateTime? startTime = default, DateTime? endTime = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|symbol|The symbol to get orders for|
+|_[Optional]_ orderId|Filter by order id|
+|_[Optional]_ clientOrderId|Filter by client order id|
+|_[Optional]_ startTime|If set, only orders edited after this time will be returned|
+|_[Optional]_ endTime|If set, only orders edited before this time will be returned|
+|_[Optional]_ limit|Max number of results|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetOrdersAsync  
 
 [https://binance-docs.github.io/apidocs/futures/en/#all-orders-user_data](https://binance-docs.github.io/apidocs/futures/en/#all-orders-user_data)  
@@ -416,7 +503,7 @@ var result = await client.UsdFuturesApi.Trading.PlaceMultipleOrdersAsync(/* para
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>> PlaceMultipleOrdersAsync(BinanceFuturesBatchOrder[] orders, int? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>> PlaceMultipleOrdersAsync(IEnumerable<BinanceFuturesBatchOrder> orders, int? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|

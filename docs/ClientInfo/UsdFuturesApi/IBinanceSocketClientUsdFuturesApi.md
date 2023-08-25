@@ -188,6 +188,57 @@ Task<CallResult<UpdateSubscription>> SubscribeToAllTickerUpdatesAsync(Action<Dat
 
 ***
 
+## SubscribeToAssetIndexUpdatesAsync  
+
+[https://binance-docs.github.io/apidocs/futures/en/#multi-assets-mode-asset-index-2](https://binance-docs.github.io/apidocs/futures/en/#multi-assets-mode-asset-index-2)  
+<p>
+
+*Subscribe to asset index updates stream*  
+
+```csharp  
+var client = new BinanceSocketClient();  
+var result = await client.UsdFuturesApi.SubscribeToAssetIndexUpdatesAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<CallResult<UpdateSubscription>> SubscribeToAssetIndexUpdatesAsync(Action<DataEvent<IEnumerable<BinanceFuturesStreamAssetIndexUpdate>>> onMessage, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|onMessage|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
+
+</p>
+
+***
+
+## SubscribeToAssetIndexUpdatesAsync  
+
+[https://binance-docs.github.io/apidocs/futures/en/#multi-assets-mode-asset-index-2](https://binance-docs.github.io/apidocs/futures/en/#multi-assets-mode-asset-index-2)  
+<p>
+
+*Subscribe to asset index updates for a single*  
+
+```csharp  
+var client = new BinanceSocketClient();  
+var result = await client.UsdFuturesApi.SubscribeToAssetIndexUpdatesAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<CallResult<UpdateSubscription>> SubscribeToAssetIndexUpdatesAsync(string symbol, Action<DataEvent<BinanceFuturesStreamAssetIndexUpdate>> onMessage, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|symbol|The symbol|
+|onMessage|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
+
+</p>
+
+***
+
 ## SubscribeToBookTickerUpdatesAsync  
 
 [https://binance-docs.github.io/apidocs/futures/en/#individual-symbol-book-ticker-streams](https://binance-docs.github.io/apidocs/futures/en/#individual-symbol-book-ticker-streams)  
@@ -837,7 +888,7 @@ var result = await client.UsdFuturesApi.SubscribeToUserDataUpdatesAsync(/* param
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(string listenKey, Action<DataEvent<BinanceFuturesStreamConfigUpdate>>? onLeverageUpdate, Action<DataEvent<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate, Action<DataEvent<BinanceFuturesStreamAccountUpdate>>? onAccountUpdate, Action<DataEvent<BinanceFuturesStreamOrderUpdate>>? onOrderUpdate, Action<DataEvent<BinanceStreamEvent>> onListenKeyExpired, Action<DataEvent<BinanceStrategyUpdate>>? onStrategyUpdate, Action<DataEvent<BinanceGridUpdate>>? onGridUpdate, CancellationToken ct = default);  
+Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(string listenKey, Action<DataEvent<BinanceFuturesStreamConfigUpdate>>? onLeverageUpdate, Action<DataEvent<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate, Action<DataEvent<BinanceFuturesStreamAccountUpdate>>? onAccountUpdate, Action<DataEvent<BinanceFuturesStreamOrderUpdate>>? onOrderUpdate, Action<DataEvent<BinanceStreamEvent>> onListenKeyExpired, Action<DataEvent<BinanceStrategyUpdate>>? onStrategyUpdate, Action<DataEvent<BinanceGridUpdate>>? onGridUpdate, Action<DataEvent<BinanceConditionOrderTriggerRejectUpdate>>? onConditionalOrderTriggerRejectUpdate, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -850,6 +901,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(string list
 |onListenKeyExpired|Responds when the listen key for the stream has expired. Initiate a new instance of the stream here|
 |onStrategyUpdate|The event handler for whenever a strategy update is received|
 |onGridUpdate|The event handler for whenever a grid update is received|
+|onConditionalOrderTriggerRejectUpdate|The event handler for whenever a trigger order failed to place an order|
 |_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>

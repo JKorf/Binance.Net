@@ -262,7 +262,7 @@ Task<CallResult<BinanceResponse<IEnumerable<Binance24HPrice>>>> GetTickersAsync(
 
 ## GetTradeHistoryAsync  
 
-[https://binance-docs.github.io/apidocs/websocket_api/en/#historical-trades-market_data](https://binance-docs.github.io/apidocs/websocket_api/en/#historical-trades-market_data)  
+[https://binance-docs.github.io/apidocs/websocket_api/en/#historical-trades](https://binance-docs.github.io/apidocs/websocket_api/en/#historical-trades)  
 <p>
 
 *Gets the historical trades for a symbol*  

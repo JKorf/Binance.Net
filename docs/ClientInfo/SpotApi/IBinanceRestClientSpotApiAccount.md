@@ -37,6 +37,87 @@ Task<WebCallResult<object>> CloseIsolatedMarginUserStreamAsync(string symbol, st
 
 ***
 
+## ConvertBusdAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#busd-convert-trade](https://binance-docs.github.io/apidocs/spot/en/#busd-convert-trade)  
+<p>
+
+*Convert transfer, convert between BUSD and stablecoins.*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.ConvertBusdAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceBusdConvertResult>> ConvertBusdAsync(string clientTransferId, string asset, decimal quantity, string targetAsset, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|clientTransferId|The unique user-defined transaction id, min length 20|
+|asset|The current asset|
+|quantity|Quantity|
+|targetAsset|	Target asset you want to convert|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## CrossMarginAdjustMaxLeverageAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#adjust-cross-margin-max-leverage-user_data](https://binance-docs.github.io/apidocs/spot/en/#adjust-cross-margin-max-leverage-user_data)  
+<p>
+
+*Adjust cross margin max leverage*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.CrossMarginAdjustMaxLeverageAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceCrossMarginLeverageResult>> CrossMarginAdjustMaxLeverageAsync(int maxLeverage, int? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|maxLeverage|Max leverage, can only adjust 3 or 5|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## CrossMarginSmallLiabilityExchangeAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#small-liability-exchange-margin](https://binance-docs.github.io/apidocs/spot/en/#small-liability-exchange-margin)  
+<p>
+
+*Cross Margin Small Liability Exchange*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.CrossMarginSmallLiabilityExchangeAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult> CrossMarginSmallLiabilityExchangeAsync(IEnumerable<string> assets, int? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|assets|Assets|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## CrossMarginTransferAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#margin-account-trade](https://binance-docs.github.io/apidocs/spot/en/#margin-account-trade)  
@@ -396,6 +477,124 @@ Task<WebCallResult<BinanceBnbBurnStatus>> GetBnbBurnStatusAsync(int? receiveWind
 
 |Parameter|Description|
 |---|---|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetBusdConvertHistoryAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#busd-convert-history-user_data](https://binance-docs.github.io/apidocs/spot/en/#busd-convert-history-user_data)  
+<p>
+
+*Get Busd convert history*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetBusdConvertHistoryAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceQueryRecords<BinanceBusdHistory>>> GetBusdConvertHistoryAsync(long? transferId = default, string? clientTransferId = default, string? asset = default, DateTime? startTime = default, DateTime? endTime = default, int? page = default, int? pageSize = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ transferId|Filter by transferId|
+|_[Optional]_ clientTransferId|Filter by clientTransferId|
+|_[Optional]_ asset|Filter by asset|
+|_[Optional]_ startTime|Filter by start time|
+|_[Optional]_ endTime|Filter by end time|
+|_[Optional]_ page|Page|
+|_[Optional]_ pageSize|Page size|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetCloudMiningHistoryAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#get-cloud-mining-payment-and-refund-history-user_data](https://binance-docs.github.io/apidocs/spot/en/#get-cloud-mining-payment-and-refund-history-user_data)  
+<p>
+
+*Get the query of Cloud-Mining payment and refund history*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetCloudMiningHistoryAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceQueryRecords<BinanceCloudMiningHistory>>> GetCloudMiningHistoryAsync(long? transferId = default, string? clientTransferId = default, string? asset = default, DateTime? startTime = default, DateTime? endTime = default, int? page = default, int? pageSize = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ transferId|Filter by transferId|
+|_[Optional]_ clientTransferId|Filter by clientTransferId|
+|_[Optional]_ asset|Filter by asset|
+|_[Optional]_ startTime|Filter by start time|
+|_[Optional]_ endTime|Filter by end time|
+|_[Optional]_ page|Page|
+|_[Optional]_ pageSize|Page size|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetCrossMarginSmallLiabilityExchangeAssetsAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#get-small-liability-exchange-coin-list-user_data](https://binance-docs.github.io/apidocs/spot/en/#get-small-liability-exchange-coin-list-user_data)  
+<p>
+
+*Query the coins which can be small liability exchange*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetCrossMarginSmallLiabilityExchangeAssetsAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BinanceSmallLiabilityAsset>>> GetCrossMarginSmallLiabilityExchangeAssetsAsync(int? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetCrossMarginSmallLiabilityExchangeHistoryAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#get-small-liability-exchange-history-user_data](https://binance-docs.github.io/apidocs/spot/en/#get-small-liability-exchange-history-user_data)  
+<p>
+
+*Get Small liability Exchange History*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetCrossMarginSmallLiabilityExchangeHistoryAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceQueryRecords<BinanceSmallLiabilityHistory>>> GetCrossMarginSmallLiabilityExchangeHistoryAsync(DateTime? startTime = default, DateTime? endTime = default, int? page = default, int? limit = default, int? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ startTime|Filter by startTime|
+|_[Optional]_ endTime|Filter by endTime|
+|_[Optional]_ page|The page|
+|_[Optional]_ limit|Results per page|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
@@ -799,6 +998,33 @@ Task<WebCallResult<BinanceQueryRecords<BinanceIsolatedMarginTransfer>>> GetIsola
 
 ***
 
+## GetIsolatedMarginFeeDataAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#query-isolated-margin-fee-data-user_data](https://binance-docs.github.io/apidocs/spot/en/#query-isolated-margin-fee-data-user_data)  
+<p>
+
+*Get isolated margin fee data collection with any vip level or user's current specific data as https://www.binance.com/en/margin-fee*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetIsolatedMarginFeeDataAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BinanceIsolatedMarginFeeData>>> GetIsolatedMarginFeeDataAsync(string? symbol = default, int? vipLevel = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ symbol|Filter by symbol|
+|_[Optional]_ vipLevel|User's current specific margin data will be returned if vipLevel is omitted|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetIsolatedMarginTierDataAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#query-isolated-margin-tier-data-user_data](https://binance-docs.github.io/apidocs/spot/en/#query-isolated-margin-tier-data-user_data)  
@@ -866,6 +1092,31 @@ var result = await client.SpotApi.Account.GetMarginAccountInfoAsync();
 
 ```csharp  
 Task<WebCallResult<BinanceMarginAccount>> GetMarginAccountInfoAsync(long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetMarginAssetsBnbConvertableAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#get-assets-that-can-be-converted-into-bnb-user_data-2](https://binance-docs.github.io/apidocs/spot/en/#get-assets-that-can-be-converted-into-bnb-user_data-2)  
+<p>
+
+*Get assets that can be converted into BNB.*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.GetMarginAssetsBnbConvertableAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceMarginDustAsset>> GetMarginAssetsBnbConvertableAsync(long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -1294,33 +1545,6 @@ Task<WebCallResult<BinanceRebateWrapper>> GetRebateHistoryAsync(DateTime? startT
 
 ***
 
-## GetStakingPersonalQuotaAsync  
-
-[https://binance-docs.github.io/apidocs/spot/en/#get-personal-left-quota-of-staking-product-user_data](https://binance-docs.github.io/apidocs/spot/en/#get-personal-left-quota-of-staking-product-user_data)  
-<p>
-
-*Get personal staking quota*  
-
-```csharp  
-var client = new BinanceRestClient();  
-var result = await client.SpotApi.Account.GetStakingPersonalQuotaAsync(/* parameters */);  
-```  
-
-```csharp  
-Task<WebCallResult<BinanceStakingPersonalQuota>> GetStakingPersonalQuotaAsync(StakingProductType product, string productId, long? receiveWindow = default, CancellationToken ct = default);  
-```  
-
-|Parameter|Description|
-|---|---|
-|product|The staking product|
-|productId|Product id|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|_[Optional]_ ct|Cancellation token|
-
-</p>
-
-***
-
 ## GetTradingStatusAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#account-api-trading-status-user_data](https://binance-docs.github.io/apidocs/spot/en/#account-api-trading-status-user_data)  
@@ -1569,6 +1793,32 @@ Task<WebCallResult<BinanceTransaction>> MarginBorrowAsync(string asset, decimal 
 
 ***
 
+## MarginDustTransferAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#dust-transfer-trade](https://binance-docs.github.io/apidocs/spot/en/#dust-transfer-trade)  
+<p>
+
+*Convert dust assets to BNB.*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.SpotApi.Account.MarginDustTransferAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceMarginDustTransfer>> MarginDustTransferAsync(IEnumerable<string> assets, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|assets|The assets being converted|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## MarginRepayAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#margin-account-repay-margin](https://binance-docs.github.io/apidocs/spot/en/#margin-account-repay-margin)  
@@ -1625,6 +1875,7 @@ Task<WebCallResult<BinanceTransaction>> PortfolioMarginBankruptcyLoanRepayAsync(
 
 ## SetAutoConvertStableCoinConfigAsync  
 
+[https://binance-docs.github.io/apidocs/spot/en/#query-auto-converting-stable-coins-user_data](https://binance-docs.github.io/apidocs/spot/en/#query-auto-converting-stable-coins-user_data)  
 <p>
 
 *Set auto conversion configuration*  
@@ -1642,34 +1893,6 @@ Task<WebCallResult> SetAutoConvertStableCoinConfigAsync(string asset, bool enabl
 |---|---|
 |asset|Asset to configure (USDC, USDP or TUSD)|
 |enable|Enable or not|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|_[Optional]_ ct|Cancellation token|
-
-</p>
-
-***
-
-## SetAutoStakingAsync  
-
-[https://binance-docs.github.io/apidocs/spot/en/#set-auto-staking-user_data](https://binance-docs.github.io/apidocs/spot/en/#set-auto-staking-user_data)  
-<p>
-
-*Set auto staking for a product*  
-
-```csharp  
-var client = new BinanceRestClient();  
-var result = await client.SpotApi.Account.SetAutoStakingAsync(/* parameters */);  
-```  
-
-```csharp  
-Task<WebCallResult<BinanceStakingResult>> SetAutoStakingAsync(StakingProductType product, string positionId, bool renewable, long? receiveWindow = default, CancellationToken ct = default);  
-```  
-
-|Parameter|Description|
-|---|---|
-|product|The staking product|
-|positionId|The position|
-|renewable|Renewable|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 

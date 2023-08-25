@@ -69,6 +69,33 @@ Task<WebCallResult<BinanceCryptoLoanBorrow>> BorrowAsync(string loanAsset, strin
 
 ***
 
+## CustomizeMarginCallAsync  
+
+<p>
+
+*Customize margin call for ongoing orders only.*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Loans.CustomizeMarginCallAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanMarginCallResult>>> CustomizeMarginCallAsync(decimal marginCall, string? orderId = default, string? collateralAsset = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|marginCall|Margin call value|
+|_[Optional]_ orderId|Order id. Required if collateralAsset is not send|
+|_[Optional]_ collateralAsset|Collateral asset. Required if order id is not send|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetBorrowHistoryAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#borrow-get-loan-borrow-history-user_data](https://binance-docs.github.io/apidocs/spot/en/#borrow-get-loan-borrow-history-user_data)  
@@ -101,6 +128,61 @@ Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanBorrowRecord>>> GetBorro
 
 ***
 
+## GetCollateralAssetsAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#get-collateral-assets-data-user_data](https://binance-docs.github.io/apidocs/spot/en/#get-collateral-assets-data-user_data)  
+<p>
+
+*Get LTV information and collateral limit of collateral assets. The collateral limit is shown in USD value.*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Loans.GetCollateralAssetsAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanCollateralAsset>>> GetCollateralAssetsAsync(string? collateralAsset = default, int? vipLevel = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ collateralAsset|Filter by collateral asset|
+|_[Optional]_ vipLevel|Vip level|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetCollateralRepayRateAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#check-collateral-repay-rate-user_data](https://binance-docs.github.io/apidocs/spot/en/#check-collateral-repay-rate-user_data)  
+<p>
+
+*Get the the rate of collateral coin / loan coin when using collateral repay, the rate will be valid within 8 second.*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Loans.GetCollateralRepayRateAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceCryptoLoanRepayRate>> GetCollateralRepayRateAsync(string loanAsset, string collateralAsset, decimal quantity, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|loanAsset|Loan asset|
+|collateralAsset|Collateral asset|
+|quantity|Quantity|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetIncomeHistoryAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#get-crypto-loans-income-history-user_data](https://binance-docs.github.io/apidocs/spot/en/#get-crypto-loans-income-history-user_data)  
@@ -124,6 +206,33 @@ Task<WebCallResult<IEnumerable<BinanceCryptoLoanIncome>>> GetIncomeHistoryAsync(
 |_[Optional]_ startTime|Filter by startTime from|
 |_[Optional]_ endTime|Filter by endTime from|
 |_[Optional]_ limit|Limit of the amount of results|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetLoanableAssetsAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#get-loanable-assets-data-user_data-2](https://binance-docs.github.io/apidocs/spot/en/#get-loanable-assets-data-user_data-2)  
+<p>
+
+*Get interest rate and borrow limit of loanable assets. The borrow limit is shown in USD value.*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.Loans.GetLoanableAssetsAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanAsset>>> GetLoanableAssetsAsync(string? loanAsset = default, int? vipLevel = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ loanAsset|Filter by loan asset|
+|_[Optional]_ vipLevel|Vip level|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 

@@ -116,6 +116,67 @@ Task<WebCallResult<BinanceSubAccountMarginEnabled>> EnableMarginForSubAccountAsy
 
 ***
 
+## FuturesAssetTransferAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#sub-account-futures-asset-transfer-for-master-account](https://binance-docs.github.io/apidocs/spot/en/#sub-account-futures-asset-transfer-for-master-account)  
+<p>
+
+*Transfer futures asset (for master account)*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.FuturesAssetTransferAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BinanceSubAccountTransaction>> FuturesAssetTransferAsync(string fromEmail, string toEmail, FuturesAccountType accountType, string asset, decimal quantity, int? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|fromEmail|From email|
+|toEmail|To email|
+|accountType|Futures account|
+|asset|Asset|
+|quantity|Quantity|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetFuturesAssetTransferHistoryAsync  
+
+[https://binance-docs.github.io/apidocs/spot/en/#query-sub-account-futures-asset-transfer-history-for-master-account](https://binance-docs.github.io/apidocs/spot/en/#query-sub-account-futures-asset-transfer-history-for-master-account)  
+<p>
+
+*Get internal asset transfers for a sub account (for master account)*  
+
+```csharp  
+var client = new BinanceRestClient();  
+var result = await client.GeneralApi.SubAccount.GetFuturesAssetTransferHistoryAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BinanceSubAccountAssetTransferHistory>>> GetFuturesAssetTransferHistoryAsync(string email, FuturesAccountType accountType, DateTime? startTime = default, DateTime? endTime = default, int? page = default, int? limit = default, int? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|email|Email of the sub account|
+|accountType|Futures account type|
+|_[Optional]_ startTime|Filter by start time|
+|_[Optional]_ endTime|Filter by end time|
+|_[Optional]_ page|The page of the results|
+|_[Optional]_ limit|The max amount of results to return (Default 50, max 500)|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetIpRestrictionForSubAccountApiKeyAsync  
 
 [https://binance-docs.github.io/apidocs/spot/en/#get-ip-restriction-for-a-sub-account-api-key-for-master-account](https://binance-docs.github.io/apidocs/spot/en/#get-ip-restriction-for-a-sub-account-api-key-for-master-account)  
