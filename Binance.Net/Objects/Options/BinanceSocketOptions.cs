@@ -30,7 +30,7 @@ namespace Binance.Net.Objects.Options
             {
                 new RateLimiter()
                     .AddConnectionRateLimit("stream.binance.com", 5, TimeSpan.FromSeconds(1))
-                    //.AddConnectionRateLimit("ws-api.binance.com", 1200, TimeSpan.FromSeconds(60))
+                    .AddConnectionRateLimit("ws-api.binance.com", 1200, TimeSpan.FromSeconds(60))
             }
         };
 
