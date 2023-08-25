@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
@@ -7,9 +7,9 @@
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
     <Authors>JKorf</Authors>
-    <PackageVersion>9.0.5</PackageVersion>
-    <AssemblyVersion>9.0.5</AssemblyVersion>
-    <FileVersion>9.0.5</FileVersion>
+    <PackageVersion>9.1.0</PackageVersion>
+    <AssemblyVersion>9.1.0</AssemblyVersion>
+    <FileVersion>9.1.0</FileVersion>
     <Description>Binance.Net is a .Net wrapper for the Binance API, including Binance Futures. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance Binance.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
@@ -20,7 +20,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>9.0.5 - Added Usd Futures EditOrder endpoint, Added cancelRestriction parameter to spot CancelOrder and ReplaceOrder endpoints</PackageReleaseNotes>
+    <PackageReleaseNotes>9.1.0 - Removed deprecated endpoints, Updated models, Added restClient.GeneralApi.Futures.GetAdjustCrossCollateralLoanToValueHistoryAsync, Added restClient.GeneralApi.Futures.GetCrossCollateralLiquidationHistoryAsync, Added restClient.GeneralApi.Futures.GetCrossCollateralInterestHistoryAsync, Added restClient.GeneralApi.CryptoLoans.GetLoanableAssetsAsync, Added restClient.GeneralApi.CryptoLoans.GetCollateralAssetsAsync, Added restClient.GeneralApi.CryptoLoans.GetCollateralRepayRateAsync, Added restClient.GeneralApi.CryptoLoans.CustomizeMarginCallAsync, Added restClient.GeneralApi.Mining.GetMiningAccountEarningsAsync, Added restClient.SpotApi.Account.CrossMarginAdjustMaxLeverageAsync, Added restClient.SpotApi.Account.ConvertBusdAsync, Added restClient.SpotApi.Account.GetBusdConvertHistoryAsync, Added restClient.SpotApi.Account.GetCloudMiningHistoryAsync, Added restClient.SpotApi.Account.GetIsolatedMarginFeeDataAsync, Added restClient.SpotApi.Account.GetMarginAssetsBnbConvertableAsync, Added restClient.SpotApi.Account.MarginDustTransferAsync, Added restClient.SpotApi.Account.GetCrossMarginSmallLiabilityExchangeAssetsAsync, Added restClient.SpotApi.Account.CrossMarginSmallLiabilityExchangeAsync, Added restClient.SpotApi.Account.GetCrossMarginSmallLiabilityExchangeHistoryAsync, Added restClient.SpotApi.ExchangeData.GetFutureHourlyInterestRateAsync, Added restClient.SpotApi.ExchangeData.GetMarginDelistScheduleAsync, Added restClient.SpotApi.Trading.GetUnclaimedLiquidityPoolsRewardsAsync, Added restClient.SpotApi.Trading.ClaimLiquidityPoolsRewardsAsync, Added restClient.SpotApi.Trading.GetLiquidityPoolsClaimHistoryAsync, Added restClient.SpotApi.Trading.PlaceSpotTimeWeightedAveragePriceOrderAsync, Added restClient.SpotApi.Trading.CancelSpotAlgoOrderAsync, Added restClient.SpotApi.Trading.GetSpotOpenAlgoOrdersAsync, Added restClient.SpotApi.Trading.GetSpotClosedAlgoOrdersAsync, Added restClient.SpotApi.Trading.GetSpotAlgoSubOrdersAsync</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup Label="Deterministic Build" Condition="'$(Configuration)' == 'Release'">
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
