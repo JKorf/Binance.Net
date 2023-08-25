@@ -76,7 +76,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("symbols", symbols);
-            var result = await _client.QueryAsync<BinanceExchangeInfo>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"exchangeInfo", parameters).ConfigureAwait(false);
+            var result = await _client.QueryAsync<BinanceExchangeInfo>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"exchangeInfo", parameters, weight: 20).ConfigureAwait(false);
             if (!result)
                 return result;
 
@@ -96,7 +96,8 @@ namespace Binance.Net.Clients.SpotApi
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("symbol", symbol);
             parameters.AddOptionalParameter("limit", limit);
-            return await _client.QueryAsync<BinanceOrderBook>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"depth", parameters).ConfigureAwait(false);
+            int weight = limit <= 100 ? 2 : limit <= 500 ? 10 : limit <= 1000 ? 20 : 100;
+            return await _client.QueryAsync<BinanceOrderBook>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"depth", parameters, weight: weight).ConfigureAwait(false);
         }
 
         #endregion
@@ -109,7 +110,7 @@ namespace Binance.Net.Clients.SpotApi
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("symbol", symbol);
             parameters.AddOptionalParameter("limit", limit);
-            return await _client.QueryAsync<IEnumerable<BinanceRecentTradeQuote>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"trades.recent", parameters).ConfigureAwait(false);
+            return await _client.QueryAsync<IEnumerable<BinanceRecentTradeQuote>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"trades.recent", parameters, weight: 2).ConfigureAwait(false);
         }
 
         #endregion
@@ -123,7 +124,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddParameter("symbol", symbol);
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("fromId", fromId);
-            return await _client.QueryAsync<IEnumerable<BinanceRecentTradeQuote>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"trades.historical", parameters, true).ConfigureAwait(false);
+            return await _client.QueryAsync<IEnumerable<BinanceRecentTradeQuote>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"trades.historical", parameters, true, weight: 10).ConfigureAwait(false);
         }
 
         #endregion
@@ -139,7 +140,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("fromId", fromId);
-            return await _client.QueryAsync<IEnumerable<BinanceStreamAggregatedTrade>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"trades.aggregate", parameters, false).ConfigureAwait(false);
+            return await _client.QueryAsync<IEnumerable<BinanceStreamAggregatedTrade>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"trades.aggregate", parameters, false, weight: 2).ConfigureAwait(false);
         }
 
         #endregion
@@ -155,7 +156,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
-            return await _client.QueryAsync<IEnumerable<BinanceSpotKline>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"klines", parameters, false).ConfigureAwait(false);
+            return await _client.QueryAsync<IEnumerable<BinanceSpotKline>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"klines", parameters, false, weight: 2).ConfigureAwait(false);
         }
 
         #endregion
@@ -171,7 +172,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
-            return await _client.QueryAsync<IEnumerable<BinanceSpotKline>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"uiKlines", parameters, false).ConfigureAwait(false);
+            return await _client.QueryAsync<IEnumerable<BinanceSpotKline>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"uiKlines", parameters, false, weight: 2).ConfigureAwait(false);
         }
 
         #endregion
@@ -183,7 +184,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("symbol", symbol);
-            return await _client.QueryAsync<BinanceAveragePrice>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"avgPrice", parameters, false).ConfigureAwait(false);
+            return await _client.QueryAsync<BinanceAveragePrice>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"avgPrice", parameters, false, weight: 2).ConfigureAwait(false);
         }
 
         #endregion
@@ -195,7 +196,9 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("symbols", symbols);
-            return await _client.QueryAsync<IEnumerable<Binance24HPrice>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"ticker.24hr", parameters, false).ConfigureAwait(false);
+            var symbolCount = symbols?.Count();
+            int weight = symbolCount == null || symbolCount > 100 ? 80 : symbolCount <= 20 ? 2 : 40;
+            return await _client.QueryAsync<IEnumerable<Binance24HPrice>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"ticker.24hr", parameters, false, weight: weight).ConfigureAwait(false);
         }
 
         #endregion
@@ -207,7 +210,9 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("symbols", symbols);
-            return await _client.QueryAsync<IEnumerable<BinanceRollingWindowTick>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"ticker", parameters, false).ConfigureAwait(false);
+            var symbolCount = symbols.Count();
+            int weight = Math.Min(symbolCount * 4, 200);
+            return await _client.QueryAsync<IEnumerable<BinanceRollingWindowTick>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"ticker", parameters, false, weight: weight).ConfigureAwait(false);
         }
 
         #endregion
@@ -219,7 +224,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("symbols", symbols);
-            return await _client.QueryAsync<IEnumerable<BinanceBookPrice>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"ticker.book", parameters, false).ConfigureAwait(false);
+            return await _client.QueryAsync<IEnumerable<BinanceBookPrice>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"ticker.book", parameters, false, weight: 4).ConfigureAwait(false);
         }
 
         #endregion
@@ -487,9 +492,7 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToBlvtInfoUpdatesAsync(IEnumerable<string> tokens, Action<DataEvent<BinanceBlvtInfoUpdate>> onMessage, CancellationToken ct = default)
         {
-            var address = ((BinanceEnvironment)_client.ClientOptions.Environment).BlvtSocketAddress;
-            if (address == null)
-                throw new Exception("No url found for Blvt stream, check the `BlvtSocketAddress` in the client environment");
+            var address = _client.ClientOptions.Environment.BlvtSocketAddress ?? throw new Exception("No url found for Blvt stream, check the `BlvtSocketAddress` in the client environment");
 
             tokens = tokens.Select(a => a.ToUpper(CultureInfo.InvariantCulture) + "@tokenNav").ToArray();
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceBlvtInfoUpdate>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.TokenName)));
@@ -507,9 +510,7 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToBlvtKlineUpdatesAsync(IEnumerable<string> tokens, KlineInterval interval, Action<DataEvent<BinanceStreamKlineData>> onMessage, CancellationToken ct = default)
         {
-            var address = ((BinanceEnvironment)_client.ClientOptions.Environment).BlvtSocketAddress;
-            if (address == null)
-                throw new Exception("No url found for Blvt stream, check the `BlvtSocketAddress` in the client environment");
+            var address = _client.ClientOptions.Environment.BlvtSocketAddress ?? throw new Exception("No url found for Blvt stream, check the `BlvtSocketAddress` in the client environment");
 
             tokens = tokens.Select(a => a.ToUpper(CultureInfo.InvariantCulture) + "@nav_kline" + "_" + JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ToArray();
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamKlineData>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));

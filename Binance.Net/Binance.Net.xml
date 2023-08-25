@@ -280,7 +280,7 @@
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApi.GetSymbolName(System.String,System.String)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApi.ParseErrorResponse(Newtonsoft.Json.Linq.JToken)">
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApi.ParseErrorResponse(System.Int32,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}},System.String)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApiAccount">
@@ -622,7 +622,7 @@
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.GetTimeOffset">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.ParseErrorResponse(Newtonsoft.Json.Linq.JToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.ParseErrorResponse(System.Int32,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}},System.String)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiBrokerage">
@@ -1085,7 +1085,7 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApi.GetSymbolName(System.String,System.String)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApi.ParseErrorResponse(Newtonsoft.Json.Linq.JToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApi.ParseErrorResponse(System.Int32,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}},System.String)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount">
@@ -1878,7 +1878,7 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApi.GetSymbolName(System.String,System.String)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApi.ParseErrorResponse(Newtonsoft.Json.Linq.JToken)">
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApi.ParseErrorResponse(System.Int32,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}},System.String)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiAccount">
@@ -9740,7 +9740,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.GetTradeHistoryAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.Int32})">
             <summary>
             Gets the historical trades for a symbol
-            <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#historical-trades-market_data" /></para>
+            <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#historical-trades" /></para>
             </summary>
             <param name="symbol">The symbol</param>
             <param name="fromId">Filter by from trade id</param>

@@ -547,18 +547,22 @@ namespace Binance.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        protected override Error ParseErrorResponse(JToken error)
+        protected override Error ParseErrorResponse(int httpStatusCode, IEnumerable<KeyValuePair<string, IEnumerable<string>>> responseHeaders, string data)
         {
-            if (!error.HasValues)
-                return new ServerError(error.ToString());
+            var errorData = ValidateJson(data);
+            if (!errorData)
+                return new ServerError(data);
 
-            if (error["msg"] == null && error["code"] == null)
-                return new ServerError(error.ToString());
+            if (!errorData.Data.HasValues)
+                return new ServerError(errorData.Data.ToString());
 
-            if (error["msg"] != null && error["code"] == null)
-                return new ServerError((string)error["msg"]!);
+            if (errorData.Data["msg"] == null && errorData.Data["code"] == null)
+                return new ServerError(errorData.Data.ToString());
 
-            return new ServerError((int)error["code"]!, (string)error["msg"]!);
+            if (errorData.Data["msg"] != null && errorData.Data["code"] == null)
+                return new ServerError((string)errorData.Data["msg"]!);
+
+            return new ServerError((int)errorData.Data["code"]!, (string)errorData.Data["msg"]!);
         }
     }
 }

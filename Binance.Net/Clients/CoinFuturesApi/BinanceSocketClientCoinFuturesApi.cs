@@ -64,7 +64,6 @@ namespace Binance.Net.Clients.CoinFuturesApi
             base(logger, options.Environment.CoinFuturesSocketAddress!, options, options.CoinFuturesOptions)
         {
             SetDataInterpreter((data) => string.Empty, null);
-            RateLimitPerSocketPerSecond = 4;
         }
         #endregion 
 
@@ -560,7 +559,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             {
                 Method = "SUBSCRIBE",
                 Params = topics.ToArray(),
-                Id = NextId()
+                Id = ExchangeHelpers.NextId()
             };
 
             return SubscribeAsync(url.AppendPath("stream"), request, null, false, onData, ct);
@@ -651,13 +650,13 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 return true;
             }
 
-            var unsub = new BinanceSocketRequest { Method = "UNSUBSCRIBE", Params = topics.ToArray(), Id = NextId() };
+            var unsub = new BinanceSocketRequest { Method = "UNSUBSCRIBE", Params = topics.ToArray(), Id = ExchangeHelpers.NextId() };
             var result = false;
 
             if (!connection.Connected)
                 return true;
 
-            await connection.SendAndWaitAsync(unsub, ClientOptions.RequestTimeout, null, data =>
+            await connection.SendAndWaitAsync(unsub, ClientOptions.RequestTimeout, null, 1, data =>
             {
                 if (data.Type != JTokenType.Object)
                     return false;

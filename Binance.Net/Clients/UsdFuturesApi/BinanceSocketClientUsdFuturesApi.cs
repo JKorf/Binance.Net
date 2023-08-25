@@ -66,7 +66,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
             base(logger, options.Environment.UsdFuturesSocketAddress!, options, options.UsdFuturesOptions)
         {
             SetDataInterpreter((data) => string.Empty, null);
-            RateLimitPerSocketPerSecond = 4;
         }
         #endregion 
 
@@ -520,7 +519,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             {
                 Method = "SUBSCRIBE",
                 Params = topics.ToArray(),
-                Id = NextId()
+                Id = ExchangeHelpers.NextId()
             };
 
             return SubscribeAsync(url.AppendPath("stream"), request, null, false, onData, ct);
@@ -612,13 +611,13 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 return true;
             }
 
-            var unsub = new BinanceSocketRequest { Method = "UNSUBSCRIBE", Params = topicsToUnsub.ToArray(), Id = NextId() };
+            var unsub = new BinanceSocketRequest { Method = "UNSUBSCRIBE", Params = topicsToUnsub.ToArray(), Id = ExchangeHelpers.NextId() };
             var result = false;
 
             if (!connection.Connected)
                 return true;
 
-            await connection.SendAndWaitAsync(unsub, ClientOptions.RequestTimeout, null, data =>
+            await connection.SendAndWaitAsync(unsub, ClientOptions.RequestTimeout, null, 1, data =>
             {
                 if (data.Type != JTokenType.Object)
                     return false;
