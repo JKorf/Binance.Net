@@ -7,6 +7,9 @@ Binance.Net is a wrapper around the Binance API as described on [Binance](https:
 
 [Documentation](https://jkorf.github.io/Binance.Net/)
 
+## Installation
+`dotnet add package Binance.Net`
+
 ## Support the project
 I develop and maintain this package on my own for free in my spare time, any support is greatly appreciated.
 
