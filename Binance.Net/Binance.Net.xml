@@ -2348,6 +2348,16 @@
             Trade group 13
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup014">
+            <summary>
+            Trade group 14
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup015">
+            <summary>
+            Trade group 15
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.AccountUpdateReason">
             <summary>
             Account update reason
