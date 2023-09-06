@@ -30,6 +30,9 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 9.1.2 - 06 Sep 2023
+    * Added GoodTillDate TimeInForce enum value, fixing UsdFutures.ExchangeData.GetExchangeInfoAsync endpoint deserialization error
+
 * Version 9.1.1 - 02 Sep 2023
     * Added missing account permissions
 

@@ -7,9 +7,9 @@
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
     <Authors>JKorf</Authors>
-    <PackageVersion>9.1.1</PackageVersion>
-    <AssemblyVersion>9.1.1</AssemblyVersion>
-    <FileVersion>9.1.1</FileVersion>
+    <PackageVersion>9.1.2</PackageVersion>
+    <AssemblyVersion>9.1.2</AssemblyVersion>
+    <FileVersion>9.1.2</FileVersion>
     <Description>Binance.Net is a .Net wrapper for the Binance API, including Binance Futures. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance Binance.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
@@ -20,7 +20,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>9.1.1 - Added missing account permissions</PackageReleaseNotes>
+    <PackageReleaseNotes>9.1.2 - Added GoodTillDate TimeInForce enum value, fixing UsdFutures.ExchangeData.GetExchangeInfoAsync endpoint deserialization error</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup Label="Deterministic Build" Condition="'$(Configuration)' == 'Release'">
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
