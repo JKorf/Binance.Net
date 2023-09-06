@@ -116,7 +116,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Allowed order time in force
         /// </summary>
-        [JsonProperty(ItemConverterType = typeof(TimeInForceConverter))]
+        [JsonProperty(ItemConverterType = typeof(EnumConverter))]
         public IEnumerable<TimeInForce> TimeInForce { get; set; } = Array.Empty<TimeInForce>();
         /// <summary>
         /// Filter for the max accuracy of the price for this symbol
