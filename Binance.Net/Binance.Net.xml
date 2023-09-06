@@ -4399,6 +4399,11 @@
             Good til the order expires or is canceled
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.TimeInForce.GoodTillDate">
+            <summary>
+            Good til date
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.TradeRulesBehaviour">
             <summary>
             Trade rules behaviour
