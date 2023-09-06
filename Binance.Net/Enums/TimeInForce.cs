@@ -31,6 +31,11 @@ namespace Binance.Net.Enums
         /// Good til the order expires or is canceled
         /// </summary>
         [Map("GTE_GTC")]
-        GoodTillExpiredOrCanceled
+        GoodTillExpiredOrCanceled,
+        /// <summary>
+        /// Good til date
+        /// </summary>
+        [Map("GTD")]
+        GoodTillDate
     }
 }
