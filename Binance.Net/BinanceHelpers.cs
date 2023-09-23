@@ -16,6 +16,10 @@ using System.Net;
 using System.Text.RegularExpressions;
 using Binance.Net.SymbolOrderBooks;
 using Binance.Net.Interfaces;
+using CryptoExchange.Net.Interfaces.CommonClients;
+using Binance.Net.Clients.SpotApi;
+using Binance.Net.Clients.UsdFuturesApi;
+using Binance.Net.Clients.CoinFuturesApi;
 
 namespace Binance.Net
 {
@@ -155,6 +159,9 @@ namespace Binance.Net
 
             services.AddSingleton<IBinanceOrderBookFactory, BinanceOrderBookFactory>();
             services.AddTransient<IBinanceRestClient, BinanceRestClient>();
+            services.AddTransient(x => x.GetRequiredService<IBinanceRestClient>().SpotApi.CommonSpotClient);
+            services.AddTransient(x => x.GetRequiredService<IBinanceRestClient>().UsdFuturesApi.CommonFuturesClient);
+            services.AddTransient(x => x.GetRequiredService<IBinanceRestClient>().CoinFuturesApi.CommonFuturesClient);
             if (socketClientLifeTime == null)
                 services.AddSingleton<IBinanceSocketClient, BinanceSocketClient>();
             else
