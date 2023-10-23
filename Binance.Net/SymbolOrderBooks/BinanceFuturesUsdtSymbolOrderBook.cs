@@ -7,8 +7,8 @@ using Binance.Net.Interfaces.Clients;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Options;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.OrderBook;
-using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 

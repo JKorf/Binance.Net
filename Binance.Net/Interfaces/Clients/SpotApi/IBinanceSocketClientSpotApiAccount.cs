@@ -2,7 +2,7 @@
 using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Models.Spot.Socket;
 using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Objects.Sockets;
 using System;
 using System.Collections.Generic;
 using System.Threading;

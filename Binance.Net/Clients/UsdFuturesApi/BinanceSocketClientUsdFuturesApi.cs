@@ -16,6 +16,7 @@ using Binance.Net.Objects.Options;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -532,7 +533,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         }
 
         /// <inheritdoc />
-        protected override bool HandleSubscriptionResponse(SocketConnection s, SocketSubscription subscription, object request, JToken message, out CallResult<object>? callResult)
+        protected override bool HandleSubscriptionResponse(SocketConnection s, SocketSubscriptionListener subscription, object request, JToken message, out CallResult<object>? callResult)
         {
             callResult = null;
             if (message.Type != JTokenType.Object)
@@ -592,14 +593,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
         }
 
         /// <inheritdoc />
-        protected override async Task<bool> UnsubscribeAsync(SocketConnection connection, SocketSubscription subscription)
+        protected override async Task<bool> UnsubscribeAsync(SocketConnection connection, SocketSubscriptionListener subscription)
         {
 
-            var topics = ((BinanceSocketRequest)subscription.Request!).Params;
+            var topics = ((BinanceSocketRequest)subscription.Subscription!).Params;
             var topicsToUnsub = new List<string>();
             foreach (var topic in topics)
             {
-                if (connection.Subscriptions.Where(s => s != subscription).Any(s => ((BinanceSocketRequest?)s.Request)?.Params.Contains(topic) == true))
+                if (connection.Subscriptions.Where(s => s != subscription).Any(s => ((BinanceSocketRequest?)s.Subscription)?.Params.Contains(topic) == true))
                     continue;
 
                 topicsToUnsub.Add(topic);

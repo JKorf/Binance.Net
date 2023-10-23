@@ -4,7 +4,6 @@ using System;
 using System.Threading.Tasks;
 using System.Threading;
 using Binance.Net.Objects.Models.Spot.Socket;
-using CryptoExchange.Net.Sockets;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using System.Collections.Generic;
@@ -12,6 +11,7 @@ using Binance.Net.Objects.Models.Spot;
 using CryptoExchange.Net.Converters;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
+using CryptoExchange.Net.Objects.Sockets;
 
 namespace Binance.Net.Clients.SpotApi
 {
