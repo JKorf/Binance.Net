@@ -1,4 +1,5 @@
-﻿using Binance.Net.Objects.Models.Spot.Socket;
+﻿using Binance.Net.Objects.Models;
+using Binance.Net.Objects.Models.Spot.Socket;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects.Sockets;
 using System;
@@ -9,14 +10,19 @@ namespace Binance.Net.Objects.Sockets
 {
     public class BinanceStreamConverter : SocketConverter
     {
-        public override string[] IdFields => new[] { "e" }; 
+        public override string[] SubscriptionIdFields => new[] { "stream" }; 
+        public override string[] TypeIdFields => new[] { "id", "data:e" }; 
 
         public override Type? GetDeserializationType(Dictionary<string, string> idValues, List<MessageListener> listeners)
         {
-            var eventType = idValues["e"];
+            if (idValues["id"] != null)
+                return typeof(BinanceSocketQueryResponse);
+
+            var eventType = idValues["data:e"];
             switch (eventType)
             {
-                case "trade": return typeof(BinanceStreamTrade);
+                case "trade": return typeof(BinanceCombinedStream<BinanceStreamTrade>);
+                case "kline": return typeof(BinanceCombinedStream<BinanceStreamKlineData>);
                 default: return null;
             }
         }

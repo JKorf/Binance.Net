@@ -13,8 +13,10 @@ using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures.Socket;
 using Binance.Net.Objects.Models.Spot.Socket;
 using Binance.Net.Objects.Options;
+using Binance.Net.Objects.Sockets;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
@@ -56,6 +58,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
         private const string listenKeyExpiredEvent = "listenKeyExpired";
         private const string strategyUpdateEvent = "STRATEGY_UPDATE";
         private const string gridUpdateEvent = "GRID_UPDATE";
+
+        public override SocketConverter StreamConverter => throw new NotImplementedException();
         #endregion
 
         #region constructor/destructor
@@ -66,7 +70,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         internal BinanceSocketClientUsdFuturesApi(ILogger logger, BinanceSocketOptions options) :
             base(logger, options.Environment.UsdFuturesSocketAddress!, options, options.UsdFuturesOptions)
         {
-            SetDataInterpreter((data) => string.Empty, null);
+            //SetDataInterpreter((data) => string.Empty, null);
         }
         #endregion 
 
@@ -523,123 +527,126 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 Id = ExchangeHelpers.NextId()
             };
 
-            return SubscribeAsync(url.AppendPath("stream"), request, null, false, onData, ct);
+            var subscription = new BinanceSpotSubscription<T>(_logger, this, topics.ToList(), onData, false);
+            return SubscribeAsync<T>(url.AppendPath("stream"), subscription, ct);
         }
 
         /// <inheritdoc />
-        protected override bool HandleQueryResponse<T>(SocketConnection s, object request, JToken data, out CallResult<T> callResult)
-        {
-            throw new NotImplementedException();
-        }
+        //protected override bool HandleQueryResponse<T>(SocketConnection s, object request, JToken data, out CallResult<T> callResult)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        /// <inheritdoc />
-        protected override bool HandleSubscriptionResponse(SocketConnection s, SocketSubscriptionListener subscription, object request, JToken message, out CallResult<object>? callResult)
-        {
-            callResult = null;
-            if (message.Type != JTokenType.Object)
-                return false;
+        ///// <inheritdoc />
+        //protected override bool HandleSubscriptionResponse(SocketConnection s, SocketSubscriptionListener subscription, object request, JToken message, out CallResult<object>? callResult)
+        //{
+        //    callResult = null;
+        //    if (message.Type != JTokenType.Object)
+        //        return false;
 
-            var id = message["id"];
-            if (id == null)
-                return false;
+        //    var id = message["id"];
+        //    if (id == null)
+        //        return false;
 
-            var bRequest = (BinanceSocketRequest)request;
-            if ((int)id != bRequest.Id)
-                return false;
+        //    var bRequest = (BinanceSocketRequest)request;
+        //    if ((int)id != bRequest.Id)
+        //        return false;
 
-            var result = message["result"];
-            if (result != null && result.Type == JTokenType.Null)
-            {
-                _logger.Log(LogLevel.Trace, $"Socket {s.SocketId} Subscription completed");
-                callResult = new CallResult<object>(new object());
-                return true;
-            }
+        //    var result = message["result"];
+        //    if (result != null && result.Type == JTokenType.Null)
+        //    {
+        //        _logger.Log(LogLevel.Trace, $"Socket {s.SocketId} Subscription completed");
+        //        callResult = new CallResult<object>(new object());
+        //        return true;
+        //    }
 
-            var error = message["error"];
-            if (error == null)
-            {
-                callResult = new CallResult<object>(new ServerError("Unknown error: " + message));
-                return true;
-            }
+        //    var error = message["error"];
+        //    if (error == null)
+        //    {
+        //        callResult = new CallResult<object>(new ServerError("Unknown error: " + message));
+        //        return true;
+        //    }
 
-            callResult = new CallResult<object>(new ServerError(error["code"]!.Value<int>(), error["msg"]!.ToString()));
-            return true;
-        }
+        //    callResult = new CallResult<object>(new ServerError(error["code"]!.Value<int>(), error["msg"]!.ToString()));
+        //    return true;
+        //}
 
-        /// <inheritdoc />
-        protected override bool MessageMatchesHandler(SocketConnection socketConnection, JToken message, object request)
-        {
-            if (message.Type != JTokenType.Object)
-                return false;
+        ///// <inheritdoc />
+        //protected override bool MessageMatchesHandler(SocketConnection socketConnection, JToken message, object request)
+        //{
+        //    if (message.Type != JTokenType.Object)
+        //        return false;
 
-            var bRequest = (BinanceSocketRequest)request;
-            var stream = message["stream"];
-            if (stream == null)
-                return false;
+        //    var bRequest = (BinanceSocketRequest)request;
+        //    var stream = message["stream"];
+        //    if (stream == null)
+        //        return false;
 
-            return bRequest.Params.Contains(stream.ToString());
-        }
+        //    return bRequest.Params.Contains(stream.ToString());
+        //}
 
-        /// <inheritdoc />
-        protected override bool MessageMatchesHandler(SocketConnection socketConnection, JToken message, string identifier)
-        {
-            return true;
-        }
+        ///// <inheritdoc />
+        //protected override bool MessageMatchesHandler(SocketConnection socketConnection, JToken message, string identifier)
+        //{
+        //    return true;
+        //}
 
-        /// <inheritdoc />
-        protected override Task<CallResult<bool>> AuthenticateSocketAsync(SocketConnection s)
-        {
-            throw new NotImplementedException();
-        }
+        ///// <inheritdoc />
+        //protected override Task<CallResult<bool>> AuthenticateSocketAsync(SocketConnection s)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        /// <inheritdoc />
-        protected override async Task<bool> UnsubscribeAsync(SocketConnection connection, SocketSubscriptionListener subscription)
-        {
+        ///// <inheritdoc />
+        //protected override async Task<bool> UnsubscribeAsync(SocketConnection connection, SocketSubscriptionListener subscription)
+        //{
 
-            var topics = ((BinanceSocketRequest)subscription.Subscription!).Params;
-            var topicsToUnsub = new List<string>();
-            foreach (var topic in topics)
-            {
-                if (connection.Subscriptions.Where(s => s != subscription).Any(s => ((BinanceSocketRequest?)s.Subscription)?.Params.Contains(topic) == true))
-                    continue;
+        //    var topics = ((BinanceSocketRequest)subscription.Subscription!).Params;
+        //    var topicsToUnsub = new List<string>();
+        //    foreach (var topic in topics)
+        //    {
+        //        if (connection.Subscriptions.Where(s => s != subscription).Any(s => ((BinanceSocketRequest?)s.Subscription)?.Params.Contains(topic) == true))
+        //            continue;
 
-                topicsToUnsub.Add(topic);
-            }
+        //        topicsToUnsub.Add(topic);
+        //    }
 
-            if (!topicsToUnsub.Any())
-            {
-                _logger.LogInformation("No topics need unsubscribing (still active on other subscriptions)");
-                return true;
-            }
+        //    if (!topicsToUnsub.Any())
+        //    {
+        //        _logger.LogInformation("No topics need unsubscribing (still active on other subscriptions)");
+        //        return true;
+        //    }
 
-            var unsub = new BinanceSocketRequest { Method = "UNSUBSCRIBE", Params = topicsToUnsub.ToArray(), Id = ExchangeHelpers.NextId() };
-            var result = false;
+        //    var unsub = new BinanceSocketRequest { Method = "UNSUBSCRIBE", Params = topicsToUnsub.ToArray(), Id = ExchangeHelpers.NextId() };
+        //    var result = false;
 
-            if (!connection.Connected)
-                return true;
+        //    if (!connection.Connected)
+        //        return true;
 
-            await connection.SendAndWaitAsync(unsub, ClientOptions.RequestTimeout, null, 1, data =>
-            {
-                if (data.Type != JTokenType.Object)
-                    return false;
+        //    await connection.SendAndWaitAsync(unsub, ClientOptions.RequestTimeout, null, 1, data =>
+        //    {
+        //        if (data.Type != JTokenType.Object)
+        //            return false;
 
-                var id = data["id"];
-                if (id == null)
-                    return false;
+        //        var id = data["id"];
+        //        if (id == null)
+        //            return false;
 
-                if ((int)id != unsub.Id)
-                    return false;
+        //        if ((int)id != unsub.Id)
+        //            return false;
 
-                var result = data["result"];
-                if (result?.Type == JTokenType.Null)
-                {
-                    result = true;
-                    return true;
-                }
+        //        var result = data["result"];
+        //        if (result?.Type == JTokenType.Null)
+        //        {
+        //            result = true;
+        //            return true;
+        //        }
 
-                return true;
-            }).ConfigureAwait(false);
-            return result;
-        }
+        //        return true;
+        //    }).ConfigureAwait(false);
+        //    return result;
+        //}
+
+        protected override Query GetAuthenticationRequest() => throw new NotImplementedException();
     }
 }
