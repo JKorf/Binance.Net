@@ -53,7 +53,7 @@ namespace Binance.Net.Clients.SpotApi
             ExchangeData = new BinanceSocketClientSpotApiExchangeData(logger, this);
             Trading = new BinanceSocketClientSpotApiTrading(logger, this);
 
-            _brokerId = !string.IsNullOrEmpty(options.SpotOptions.BrokerId) ? options.SpotOptions.BrokerId : "x-VICEW9VV";
+            _brokerId = !string.IsNullOrEmpty(options.SpotOptions.BrokerId) ? options.SpotOptions.BrokerId! : "x-VICEW9VV";
         }
         #endregion
 

@@ -73,7 +73,7 @@ namespace Binance.Net.Clients.SpotApi
             requestBodyFormat = RequestBodyFormat.FormData;
             arraySerialization = ArrayParametersSerialization.MultipleValues;
 
-            _brokerId = !string.IsNullOrEmpty(options.SpotOptions.BrokerId) ? options.SpotOptions.BrokerId : "x-VICEW9VV";
+            _brokerId = !string.IsNullOrEmpty(options.SpotOptions.BrokerId) ? options.SpotOptions.BrokerId! : "x-VICEW9VV";
         }
         #endregion
 
