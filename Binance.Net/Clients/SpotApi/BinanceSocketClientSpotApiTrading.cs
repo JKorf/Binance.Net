@@ -15,7 +15,7 @@ using Binance.Net.Objects;
 using Microsoft.Extensions.Logging;
 
 namespace Binance.Net.Clients.SpotApi
-{
+{ 
     /// <inheritdoc />
     public class BinanceSocketClientSpotApiTrading : IBinanceSocketClientSpotApiTrading
     {
@@ -60,6 +60,8 @@ namespace Binance.Net.Clients.SpotApi
                 return new CallResult<BinanceResponse<BinancePlacedOrder>>(new ArgumentError(rulesCheck.ErrorMessage!));
             }
 
+            string clientOrderId = newClientOrderId ?? ExchangeHelpers.AppendRandomString(_client._brokerId, 32);
+
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("symbol", symbol);
             parameters.AddParameter("side", EnumConverter.GetString(side));
@@ -68,7 +70,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("price", rulesCheck.Price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("quantity", rulesCheck.Quantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("quoteOrderQty", rulesCheck.QuoteQuantity?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
+            parameters.AddOptionalParameter("newClientOrderId", clientOrderId);
             parameters.AddOptionalParameter("stopPrice", rulesCheck.StopPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("trailingDelta", trailingDelta?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
