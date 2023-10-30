@@ -26844,6 +26844,11 @@
             How often the trade rules should be updated. Only used when TradeRulesBehaviour is not None
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Options.BinanceRestApiOptions.BrokerId">
+            <summary>
+            The broker reference id to use
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Options.BinanceRestOptions">
             <summary>
             Options for the BinanceRestClient
@@ -26887,6 +26892,11 @@
         <member name="P:Binance.Net.Objects.Options.BinanceSocketApiOptions.TradeRulesUpdateInterval">
             <summary>
             How often the trade rules should be updated. Only used when TradeRulesBehaviour is not None
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Options.BinanceSocketApiOptions.BrokerId">
+            <summary>
+            The broker reference id to use
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Options.BinanceSocketOptions">

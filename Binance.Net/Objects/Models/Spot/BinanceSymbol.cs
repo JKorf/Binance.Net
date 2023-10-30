@@ -88,7 +88,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Permissions types
         /// </summary>
-        [JsonProperty(ItemConverterType = typeof(EnumConverter), ItemConverterParameters = new object[] { false })]
+        [JsonProperty(ItemConverterType = typeof(EnumConverter), ItemConverterParameters = new object[] { false, false })]
         public IEnumerable<AccountType> Permissions { get; set; } = Array.Empty<AccountType>();
         /// <summary>
         /// Filters for order on this symbol

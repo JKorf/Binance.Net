@@ -297,6 +297,8 @@ namespace Binance.Net.Clients.SpotApi
             stopPrice = rulesCheck.StopPrice;
             quoteQuantity = rulesCheck.QuoteQuantity;
 
+            string clientOrderId = newClientOrderId ?? ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+
             var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
@@ -305,7 +307,7 @@ namespace Binance.Net.Clients.SpotApi
                 { "cancelReplaceMode", EnumConverter.GetString(cancelReplaceMode) }
             };
             parameters.AddOptionalParameter("cancelNewClientOrderId", newCancelClientOrderId);
-            parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
+            parameters.AddOptionalParameter("newClientOrderId", clientOrderId);
             parameters.AddOptionalParameter("cancelOrderId", cancelOrderId);
             parameters.AddOptionalParameter("strategyId", strategyId);
             parameters.AddOptionalParameter("strategyType", strategyType);

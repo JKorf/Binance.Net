@@ -36,6 +36,8 @@ namespace Binance.Net.Clients.SpotApi
         internal BinanceExchangeInfo? _exchangeInfo;
         internal DateTime? _lastExchangeInfoUpdate;
 
+        internal readonly string _brokerId;
+
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Spot Api");
         #endregion
 
@@ -70,6 +72,8 @@ namespace Binance.Net.Clients.SpotApi
             requestBodyEmptyContent = "";
             requestBodyFormat = RequestBodyFormat.FormData;
             arraySerialization = ArrayParametersSerialization.MultipleValues;
+
+            _brokerId = !string.IsNullOrEmpty(options.SpotOptions.BrokerId) ? options.SpotOptions.BrokerId! : "x-VICEW9VV";
         }
         #endregion
 
@@ -121,6 +125,8 @@ namespace Binance.Net.Clients.SpotApi
             stopPrice = rulesCheck.StopPrice;
             quoteQuantity = rulesCheck.QuoteQuantity;
 
+            string clientOrderId = newClientOrderId ?? ExchangeHelpers.AppendRandomString(_brokerId, 32);
+
             var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
@@ -129,7 +135,7 @@ namespace Binance.Net.Clients.SpotApi
             };
             parameters.AddOptionalParameter("quantity", quantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("quoteOrderQty", quoteQuantity?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
+            parameters.AddOptionalParameter("newClientOrderId", clientOrderId);
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)));
             parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));

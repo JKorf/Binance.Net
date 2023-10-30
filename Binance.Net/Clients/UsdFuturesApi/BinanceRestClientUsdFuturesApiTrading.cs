@@ -103,6 +103,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
             price = rulesCheck.Price;
             stopPrice = rulesCheck.StopPrice;
 
+            string clientOrderId = newClientOrderId ?? ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+
             var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
@@ -110,7 +112,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 { "type", JsonConvert.SerializeObject(type, new FuturesOrderTypeConverter(false)) }
             };
             parameters.AddOptionalParameter("quantity", quantity?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
+            parameters.AddOptionalParameter("newClientOrderId", clientOrderId);
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)));
             parameters.AddOptionalParameter("positionSide", positionSide == null ? null : JsonConvert.SerializeObject(positionSide, new PositionSideConverter(false)));

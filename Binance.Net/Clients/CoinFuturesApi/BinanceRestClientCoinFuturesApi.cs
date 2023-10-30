@@ -35,6 +35,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Coin Futures Api");
 
+        internal readonly string _brokerId;
+
         #endregion
 
         #region Api clients
@@ -68,6 +70,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
             requestBodyEmptyContent = "";
             requestBodyFormat = RequestBodyFormat.FormData;
             arraySerialization = ArrayParametersSerialization.MultipleValues;
+
+            _brokerId = !string.IsNullOrEmpty(options.CoinFuturesOptions.BrokerId) ? options.CoinFuturesOptions.BrokerId! : "x-d63tKbx3";
         }
         #endregion
 

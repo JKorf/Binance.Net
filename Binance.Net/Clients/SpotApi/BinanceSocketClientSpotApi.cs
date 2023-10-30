@@ -31,6 +31,8 @@ namespace Binance.Net.Clients.SpotApi
 
         internal BinanceExchangeInfo? _exchangeInfo;
         internal DateTime? _lastExchangeInfoUpdate;
+        internal readonly string _brokerId;
+
         #endregion
 
         /// <inheritdoc />
@@ -50,6 +52,8 @@ namespace Binance.Net.Clients.SpotApi
             Account = new BinanceSocketClientSpotApiAccount(logger, this);
             ExchangeData = new BinanceSocketClientSpotApiExchangeData(logger, this);
             Trading = new BinanceSocketClientSpotApiTrading(logger, this);
+
+            _brokerId = !string.IsNullOrEmpty(options.SpotOptions.BrokerId) ? options.SpotOptions.BrokerId! : "x-VICEW9VV";
         }
         #endregion
 
