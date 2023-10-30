@@ -46,7 +46,7 @@ namespace Binance.Net.Objects.Sockets
             {
                 Method = "UNSUBSCRIBE",
                 Params = _identifiers.ToArray(),
-                Id = _subId
+                Id = _unsubId
             };
         }
     
