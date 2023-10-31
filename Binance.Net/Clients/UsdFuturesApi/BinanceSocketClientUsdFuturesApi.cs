@@ -59,7 +59,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         private const string strategyUpdateEvent = "STRATEGY_UPDATE";
         private const string gridUpdateEvent = "GRID_UPDATE";
 
-        public override SocketConverter StreamConverter => throw new NotImplementedException();
+        public override SocketConverter StreamConverter => new BinanceUsdFuturesStreamConverter();
         #endregion
 
         #region constructor/destructor
@@ -527,7 +527,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 Id = ExchangeHelpers.NextId()
             };
 
-            var subscription = new BinanceSpotSubscription<T>(_logger, this, topics.ToList(), onData, false);
+            var subscription = new BinanceSpotSubscription<T>(_logger, topics.ToList(), onData, false);
             return SubscribeAsync<T>(url.AppendPath("stream"), subscription, ct);
         }
 

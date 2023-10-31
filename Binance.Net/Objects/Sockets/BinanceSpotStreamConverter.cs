@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Binance.Net.Objects.Sockets
 {
-    internal class BinanceStreamConverter : SocketConverter
+    internal class BinanceSpotStreamConverter : SocketConverter
     {
         public override string[] SubscriptionIdFields => new[] { "stream" }; 
         public override string[] TypeIdFields => new[] { "id", "data:e", "stream" };
@@ -42,12 +42,12 @@ namespace Binance.Net.Objects.Sockets
             { "listStatus", typeof(BinanceStreamOrderList) },
         };
 
-        public override Type? GetDeserializationType(Dictionary<string, string> idValues, List<MessageListener> listeners)
+        public override Type? GetDeserializationType(Dictionary<string, string?> idValues, List<MessageListener> listeners)
         {
             if (idValues["id"] != null)
                 return typeof(BinanceSocketQueryResponse);
             
-            var streamId = idValues["stream"];
+            var streamId = idValues["stream"]!;
             if (_streamIdMapping.TryGetValue(streamId, out var streamIdMapping))
                 return streamIdMapping;
 

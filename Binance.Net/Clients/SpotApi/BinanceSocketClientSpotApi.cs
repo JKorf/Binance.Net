@@ -44,7 +44,8 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public IBinanceSocketClientSpotApiTrading Trading { get; }
 
-        public override SocketConverter StreamConverter => new BinanceStreamConverter();
+        /// <inheritdoc />
+        public override SocketConverter StreamConverter => new BinanceSpotStreamConverter();
 
         #region constructor/destructor
 
@@ -73,7 +74,7 @@ namespace Binance.Net.Clients.SpotApi
                 Params = topics.ToArray(),
                 Id = ExchangeHelpers.NextId()
             };
-            var subscription = new BinanceSpotSubscription<T>(_logger, this, topics.ToList(), onData, false);
+            var subscription = new BinanceSpotSubscription<T>(_logger, topics.ToList(), onData, false);
             return base.SubscribeAsync<T>(url.AppendPath("stream"), subscription, ct);
         }
 

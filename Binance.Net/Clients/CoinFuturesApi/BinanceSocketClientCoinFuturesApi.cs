@@ -567,7 +567,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 Id = ExchangeHelpers.NextId()
             };
 
-            var subscription = new BinanceSpotSubscription<T>(_logger, this, topics.ToList(), onData, false);
+            var subscription = new BinanceSpotSubscription<T>(_logger, topics.ToList(), onData, false);
             return SubscribeAsync<T>(url.AppendPath("stream"), subscription, ct);
         }
 

@@ -1643,6 +1643,9 @@
         <member name="P:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApi.Trading">
             <inheritdoc />
         </member>
+        <member name="P:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApi.StreamConverter">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>

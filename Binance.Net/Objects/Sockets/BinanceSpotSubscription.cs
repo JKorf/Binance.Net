@@ -22,7 +22,7 @@ namespace Binance.Net.Objects.Sockets
         private int _subId;
         private int _unsubId;
 
-        public BinanceSpotSubscription(ILogger logger, ISocketApiClient client, List<string> topics, Action<DataEvent<T>> handler, bool auth) : base(logger, client, auth)
+        public BinanceSpotSubscription(ILogger logger, List<string> topics, Action<DataEvent<T>> handler, bool auth) : base(logger, auth)
         {
             _handler = handler;
             _identifiers = topics;
