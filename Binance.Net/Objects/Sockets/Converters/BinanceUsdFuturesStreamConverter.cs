@@ -9,11 +9,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Binance.Net.Objects.Sockets
+namespace Binance.Net.Objects.Sockets.Converters
 {
     internal class BinanceUsdFuturesStreamConverter : SocketConverter
     {
-        public override string[] SubscriptionIdFields => new[] { "stream" }; 
+        public override string[] SubscriptionIdFields => new[] { "stream" };
         public override string[] TypeIdFields => new[] { "id", "data:e", "stream" };
 
         private static Dictionary<string, Type> _streamIdMapping = new Dictionary<string, Type>
@@ -42,21 +42,21 @@ namespace Binance.Net.Objects.Sockets
             { "contractInfo", typeof(BinanceCombinedStream<BinanceFuturesStreamSymbolUpdate>) },
             { "assetIndexUpdate", typeof(BinanceCombinedStream<BinanceFuturesStreamMarginUpdate>) },
 
-            { "listenKeyExpired", typeof(BinanceStreamEvent) },
-            { "MARGIN_CALL", typeof(BinanceFuturesStreamMarginUpdate) },
-            { "ACCOUNT_UPDATE", typeof(BinanceFuturesStreamAccountUpdate) },
-            { "ORDER_TRADE_UPDATE", typeof(BinanceFuturesStreamOrderUpdate) },
-            { "ACCOUNT_CONFIG_UPDATE", typeof(BinanceFuturesStreamConfigUpdate) },
-            { "STRATEGY_UPDATE", typeof(BinanceStrategyUpdate) },
-            { "GRID_UPDATE", typeof(BinanceGridUpdate) },
-            { "CONDITIONAL_ORDER_TRIGGER_REJECT", typeof(BinanceConditionOrderTriggerRejectUpdate) },
+            { "listenKeyExpired", typeof(BinanceCombinedStream<BinanceStreamEvent>) },
+            { "MARGIN_CALL", typeof(BinanceCombinedStream<BinanceFuturesStreamMarginUpdate>) },
+            { "ACCOUNT_UPDATE", typeof(BinanceCombinedStream<BinanceFuturesStreamAccountUpdate>) },
+            { "ORDER_TRADE_UPDATE", typeof(BinanceCombinedStream<BinanceFuturesStreamOrderUpdate>) },
+            { "ACCOUNT_CONFIG_UPDATE", typeof(BinanceCombinedStream<BinanceFuturesStreamConfigUpdate>) },
+            { "STRATEGY_UPDATE", typeof(BinanceCombinedStream<BinanceStrategyUpdate>) },
+            { "GRID_UPDATE", typeof(BinanceCombinedStream<BinanceGridUpdate>) },
+            { "CONDITIONAL_ORDER_TRIGGER_REJECT", typeof(BinanceCombinedStream<BinanceConditionOrderTriggerRejectUpdate>) },
         };
 
         public override Type? GetDeserializationType(Dictionary<string, string?> idValues, List<MessageListener> listeners)
         {
             if (idValues["id"] != null)
                 return typeof(BinanceSocketQueryResponse);
-            
+
             var streamId = idValues["stream"]!;
             if (_streamIdMapping.TryGetValue(streamId, out var streamIdMapping))
                 return streamIdMapping;

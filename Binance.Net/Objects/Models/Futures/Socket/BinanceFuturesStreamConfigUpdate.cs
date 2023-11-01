@@ -15,13 +15,13 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// Leverage Update data
         /// </summary>
         [JsonProperty("ac")]
-        public BinanceFuturesStreamLeverageUpdateData LeverageUpdateData { get; set; } = new BinanceFuturesStreamLeverageUpdateData();
+        public BinanceFuturesStreamLeverageUpdateData? LeverageUpdateData { get; set; }
 
         /// <summary>
         /// Position mode Update data
         /// </summary>
         [JsonProperty("ai")]
-        public BinanceFuturesStreamConfigUpdateData ConfigUpdateData { get; set; } = new BinanceFuturesStreamConfigUpdateData();
+        public BinanceFuturesStreamConfigUpdateData? ConfigUpdateData { get; set; }
 
         /// <summary>
         /// Transaction time

@@ -15,6 +15,8 @@ using Binance.Net.Objects.Models.Futures.Socket;
 using Binance.Net.Objects.Models.Spot.Socket;
 using Binance.Net.Objects.Options;
 using Binance.Net.Objects.Sockets;
+using Binance.Net.Objects.Sockets.Converters;
+using Binance.Net.Objects.Sockets.Subscriptions;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Converters;
@@ -52,14 +54,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         private const string partialBookDepthStreamEndpoint = "@depth";
         private const string depthStreamEndpoint = "@depth";
 
-        private const string configUpdateEvent = "ACCOUNT_CONFIG_UPDATE";
-        private const string marginUpdateEvent = "MARGIN_CALL";
-        private const string accountUpdateEvent = "ACCOUNT_UPDATE";
-        private const string orderUpdateEvent = "ORDER_TRADE_UPDATE";
-        private const string listenKeyExpiredEvent = "listenKeyExpired";
-        private const string strategyUpdateEvent = "STRATEGY_UPDATE";
-        private const string gridUpdateEvent = "GRID_UPDATE";
-
+        /// <inheritdoc />
         public override SocketConverter StreamConverter => new BinanceCoinFuturesStreamConverter();
         #endregion
 
@@ -68,7 +63,6 @@ namespace Binance.Net.Clients.CoinFuturesApi
         internal BinanceSocketClientCoinFuturesApi(ILogger logger, BinanceSocketOptions options) :
             base(logger, options.Environment.CoinFuturesSocketAddress!, options, options.CoinFuturesOptions)
         {
-            //SetDataInterpreter((data) => string.Empty, null);
         }
         #endregion 
 
@@ -427,105 +421,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
         {
             listenKey.ValidateNotNull(nameof(listenKey));
 
-            var handler = new Action<DataEvent<string>>(data =>
-            {
-                var combinedToken = JToken.Parse(data.Data);
-                var token = combinedToken["data"];
-                if (token == null)
-                    return;
-
-                var evnt = token["e"]?.ToString();
-                if (evnt == null)
-                    return;
-
-                switch (evnt)
-                {
-                    case configUpdateEvent:
-                        {
-                            var result = Deserialize<BinanceFuturesStreamConfigUpdate>(token);
-                            if (result)
-                            {
-                                result.Data.ListenKey = combinedToken["stream"]!.Value<string>()!;
-                                onConfigUpdate?.Invoke(data.As(result.Data, result.Data.LeverageUpdateData?.Symbol));
-                            }
-                            else
-                                _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from config stream: " + result.Error);
-
-                            break;
-                        }
-                    case marginUpdateEvent:
-                        {
-                            var result = Deserialize<BinanceFuturesStreamMarginUpdate>(token);
-                            if (result)
-                            {
-                                result.Data.ListenKey = combinedToken["stream"]!.Value<string>()!;
-                                onMarginUpdate?.Invoke(data.As(result.Data));
-                            }
-                            else
-                                _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from order stream: " + result.Error);
-                            break;
-                        }
-                    case accountUpdateEvent:
-                        {
-                            var result = Deserialize<BinanceFuturesStreamAccountUpdate>(token);
-                            if (result.Success)
-                            {
-                                result.Data.ListenKey = combinedToken["stream"]!.Value<string>()!;
-                                onAccountUpdate?.Invoke(data.As(result.Data));
-                            }
-                            else
-                                _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from account stream: " + result.Error);
-
-                            break;
-                        }
-                    case orderUpdateEvent:
-                        {
-                            var result = Deserialize<BinanceFuturesStreamOrderUpdate>(token);
-                            if (result)
-                            {
-                                result.Data.ListenKey = combinedToken["stream"]!.Value<string>()!;
-                                onOrderUpdate?.Invoke(data.As(result.Data, result.Data.UpdateData.Symbol));
-                            }
-                            else
-                            {
-                                _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from order stream: " + result.Error);
-                            }
-                            break;
-                        }
-                    case listenKeyExpiredEvent:
-                        {
-                            var result = Deserialize<BinanceStreamEvent>(token);
-                            if (result)
-                                onListenKeyExpired?.Invoke(data.As(result.Data, combinedToken["stream"]!.Value<string>()));
-                            else
-                                _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from the expired listen key event: " + result.Error);
-                            break;
-                        }
-                    case strategyUpdateEvent:
-                        {
-                            var result = Deserialize<BinanceStrategyUpdate>(token);
-                            if (result)
-                                onStrategyUpdate?.Invoke(data.As(result.Data, combinedToken["stream"]!.Value<string>()));
-                            else
-                                _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from the StrategyUpdate event: " + result.Error);
-                            break;
-                        }
-                    case gridUpdateEvent:
-                        {
-                            var result = Deserialize<BinanceGridUpdate>(token);
-                            if (result)
-                                onGridUpdate?.Invoke(data.As(result.Data, combinedToken["stream"]!.Value<string>()));
-                            else
-                                _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from the GridUpdate event: " + result.Error);
-                            break;
-                        }
-                    default:
-                        _logger.Log(LogLevel.Warning, $"Received unknown user data event {evnt}: " + data);
-                        break;
-                }
-            });
-
-            return await SubscribeAsync( BaseAddress, new[] { listenKey }, handler, ct).ConfigureAwait(false);
+            var subscription = new BinanceCoinFuturesUserDataSubscription(_logger, new List<string> { listenKey }, onOrderUpdate, onConfigUpdate, onMarginUpdate, onAccountUpdate, onListenKeyExpired, onStrategyUpdate, onGridUpdate);
+            return await SubscribeAsync(BaseAddress, subscription, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -567,125 +464,11 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 Id = ExchangeHelpers.NextId()
             };
 
-            var subscription = new BinanceSpotSubscription<T>(_logger, topics.ToList(), onData, false);
-            return SubscribeAsync<T>(url.AppendPath("stream"), subscription, ct);
+            var subscription = new BinanceSubscription<T>(_logger, topics.ToList(), onData, false);
+            return SubscribeAsync(url.AppendPath("stream"), subscription, ct);
         }
 
-        protected override Query GetAuthenticationRequest() => throw new NotImplementedException();
-
         /// <inheritdoc />
-        //protected override bool HandleQueryResponse<T>(SocketConnection s, object request, JToken data, out CallResult<T> callResult)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        ///// <inheritdoc />
-        //protected override bool HandleSubscriptionResponse(SocketConnection s, SocketSubscriptionListener subscription, object request, JToken message, out CallResult<object>? callResult)
-        //{
-        //    callResult = null;
-        //    if (message.Type != JTokenType.Object)
-        //        return false;
-
-        //    var id = message["id"];
-        //    if (id == null)
-        //        return false;
-
-        //    var bRequest = (BinanceSocketRequest)request;
-        //    if ((int)id != bRequest.Id)
-        //        return false;
-
-        //    var result = message["result"];
-        //    if (result != null && result.Type == JTokenType.Null)
-        //    {
-        //        _logger.Log(LogLevel.Trace, $"Socket {s.SocketId} Subscription completed");
-        //        callResult = new CallResult<object>(new object());
-        //        return true;
-        //    }
-
-        //    var error = message["error"];
-        //    if (error == null)
-        //    {
-        //        callResult = new CallResult<object>(new ServerError("Unknown error: " + message));
-        //        return true;
-        //    }
-
-        //    callResult = new CallResult<object>(new ServerError(error["code"]!.Value<int>(), error["msg"]!.ToString()));
-        //    return true;
-        //}
-
-        ///// <inheritdoc />
-        //protected override bool MessageMatchesHandler(SocketConnection socketConnection, JToken message, object request)
-        //{
-        //    if (message.Type != JTokenType.Object)
-        //        return false;
-
-        //    var bRequest = (BinanceSocketRequest)request;
-        //    var stream = message["stream"];
-        //    if (stream == null)
-        //        return false;
-
-        //    return bRequest.Params.Contains(stream.ToString());
-        //}
-
-        ///// <inheritdoc />
-        //protected override bool MessageMatchesHandler(SocketConnection socketConnection, JToken message, string identifier)
-        //{
-        //    return true;
-        //}
-
-        ///// <inheritdoc />
-        //protected override Task<CallResult<bool>> AuthenticateSocketAsync(SocketConnection s)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        ///// <inheritdoc />
-        //protected override async Task<bool> UnsubscribeAsync(SocketConnection connection, SocketSubscriptionListener subscription)
-        //{
-        //    var topics = ((BinanceSocketRequest)subscription.Subscription!).Params;
-        //    var topicsToUnsub = new List<string>();
-        //    foreach (var topic in topics)
-        //    {
-        //        if (connection.Subscriptions.Where(s => s != subscription).Any(s => ((BinanceSocketRequest?)s.Subscription)?.Params.Contains(topic) == true))
-        //            continue;
-
-        //        topicsToUnsub.Add(topic);
-        //    }
-
-        //    if (!topicsToUnsub.Any())
-        //    {
-        //        _logger.LogInformation("No topics need unsubscribing (still active on other subscriptions)");
-        //        return true;
-        //    }
-
-        //    var unsub = new BinanceSocketRequest { Method = "UNSUBSCRIBE", Params = topics.ToArray(), Id = ExchangeHelpers.NextId() };
-        //    var result = false;
-
-        //    if (!connection.Connected)
-        //        return true;
-
-        //    await connection.SendAndWaitAsync(unsub, ClientOptions.RequestTimeout, null, 1, data =>
-        //    {
-        //        if (data.Type != JTokenType.Object)
-        //            return false;
-
-        //        var id = data["id"];
-        //        if (id == null)
-        //            return false;
-
-        //        if ((int)id != unsub.Id)
-        //            return false;
-
-        //        var result = data["result"];
-        //        if (result?.Type == JTokenType.Null)
-        //        {
-        //            result = true;
-        //            return true;
-        //        }
-
-        //        return true;
-        //    }).ConfigureAwait(false);
-        //    return result;
-        //}
+        protected override Query GetAuthenticationRequest() => throw new NotImplementedException();
     }
 }

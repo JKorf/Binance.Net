@@ -12,6 +12,8 @@ using CryptoExchange.Net.Converters;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
+using Binance.Net.Objects.Sockets;
+using Binance.Net.Objects.Sockets.Subscriptions;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -121,91 +123,8 @@ namespace Binance.Net.Clients.SpotApi
             CancellationToken ct = default)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
-
-            var handler = new Action<DataEvent<string>>(data =>
-            {
-                var combinedToken = JToken.Parse(data.Data);
-                var token = combinedToken["data"];
-                if (token == null)
-                    return;
-
-                var evnt = token["e"]?.ToString();
-                if (evnt == null)
-                    return;
-
-                switch (evnt)
-                {
-                    case executionUpdateEvent:
-                        {
-                            var result = _client.DeserializeInternal<BinanceStreamOrderUpdate>(token);
-                            if (result)
-                            {
-                                result.Data.ListenKey = combinedToken["stream"]!.Value<string>()!;
-                                onOrderUpdateMessage?.Invoke(data.As(result.Data, result.Data.Id.ToString()));
-                            }
-                            else
-                            {
-                                _logger.Log(LogLevel.Warning,
-                                    "Couldn't deserialize data received from order stream: " + result.Error);
-                            }
-
-                            break;
-                        }
-                    case ocoOrderUpdateEvent:
-                        {
-                            var result = _client.DeserializeInternal<BinanceStreamOrderList>(token);
-                            if (result)
-                            {
-                                result.Data.ListenKey = combinedToken["stream"]!.Value<string>()!;
-                                onOcoOrderUpdateMessage?.Invoke(data.As(result.Data, result.Data.Id.ToString()));
-                            }
-                            else
-                            {
-                                _logger.Log(LogLevel.Warning,
-                                    "Couldn't deserialize data received from oco order stream: " + result.Error);
-                            }
-
-                            break;
-                        }
-                    case accountPositionUpdateEvent:
-                        {
-                            var result = _client.DeserializeInternal<BinanceStreamPositionsUpdate>(token);
-                            if (result)
-                            {
-                                result.Data.ListenKey = combinedToken["stream"]!.Value<string>()!;
-                                onAccountPositionMessage?.Invoke(data.As(result.Data));
-                            }
-                            else
-                            {
-                                _logger.Log(LogLevel.Warning,
-                                    "Couldn't deserialize data received from account position stream: " + result.Error);
-                            }
-
-                            break;
-                        }
-                    case balanceUpdateEvent:
-                        {
-                            var result = _client.DeserializeInternal<BinanceStreamBalanceUpdate>(token);
-                            if (result)
-                            {
-                                result.Data.ListenKey = combinedToken["stream"]!.Value<string>()!;
-                                onAccountBalanceUpdate?.Invoke(data.As(result.Data, result.Data.Asset));
-                            }
-                            else
-                            {
-                                _logger.Log(LogLevel.Warning,
-                                    "Couldn't deserialize data received from account position stream: " + result.Error);
-                            }
-
-                            break;
-                        }
-                    default:
-                        _logger.Log(LogLevel.Warning, $"Received unknown user data event {evnt}: " + data);
-                        break;
-                }
-            });
-
-            return await _client.SubscribeAsync(_client.BaseAddress, new[] { listenKey }, handler, ct).ConfigureAwait(false);
+            var subscription = new BinanceSpotUserDataSubscription(_logger, new List<string> { listenKey }, onOrderUpdateMessage, onOcoOrderUpdateMessage, onAccountPositionMessage, onAccountBalanceUpdate, false);
+            return await _client.SubscribeInternalAsync(_client.BaseAddress, subscription, ct).ConfigureAwait(false);
         }
         #endregion
 

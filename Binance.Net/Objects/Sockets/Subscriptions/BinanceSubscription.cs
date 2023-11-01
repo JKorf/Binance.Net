@@ -1,20 +1,19 @@
 ﻿using Binance.Net.Objects.Internal;
 using CryptoExchange.Net;
-using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Binance.Net.Objects.Sockets
+namespace Binance.Net.Objects.Sockets.Subscriptions
 {
-    public class BinanceSpotSubscription<T> : Subscription
+    /// <inheritdoc />
+    public class BinanceSubscription<T> : Subscription
     {
+        /// <inheritdoc />
         public override List<string> Identifiers => _identifiers;
 
         private readonly Action<DataEvent<T>> _handler;
@@ -22,13 +21,21 @@ namespace Binance.Net.Objects.Sockets
         private int _subId;
         private int _unsubId;
 
-        public BinanceSpotSubscription(ILogger logger, List<string> topics, Action<DataEvent<T>> handler, bool auth) : base(logger, auth)
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="topics"></param>
+        /// <param name="handler"></param>
+        /// <param name="auth"></param>
+        public BinanceSubscription(ILogger logger, List<string> topics, Action<DataEvent<T>> handler, bool auth) : base(logger, auth)
         {
             _handler = handler;
             _identifiers = topics;
         }
 
-        public override object? GetSubRequest() 
+        /// <inheritdoc />
+        public override object? GetSubRequest()
         {
             _subId = ExchangeHelpers.NextId();
             return new BinanceSocketRequest
@@ -39,6 +46,7 @@ namespace Binance.Net.Objects.Sockets
             };
         }
 
+        /// <inheritdoc />
         public override object? GetUnsubRequest()
         {
             _unsubId = ExchangeHelpers.NextId();
@@ -49,8 +57,8 @@ namespace Binance.Net.Objects.Sockets
                 Id = _unsubId
             };
         }
-    
 
+        /// <inheritdoc />
         public override (bool, CallResult?) MessageMatchesSubRequest(ParsedMessage message)
         {
             if (message.Data is not BinanceSocketQueryResponse response)
@@ -62,6 +70,7 @@ namespace Binance.Net.Objects.Sockets
             return (true, new CallResult(null));
         }
 
+        /// <inheritdoc />
         public override (bool, CallResult?) MessageMatchesUnsubRequest(ParsedMessage message)
         {
             if (message.Data is not BinanceSocketQueryResponse response)
@@ -73,9 +82,10 @@ namespace Binance.Net.Objects.Sockets
             return (true, new CallResult(null));
         }
 
+        /// <inheritdoc />
         public override Task HandleEventAsync(DataEvent<ParsedMessage> message)
         {
-            var data = (T)message.Data.Data;
+            var data = (T)message.Data.Data!;
             _handler.Invoke(message.As(data, null, SocketUpdateType.Update));
             return Task.CompletedTask;
         }

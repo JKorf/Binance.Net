@@ -14,6 +14,8 @@ using Binance.Net.Objects.Models.Futures.Socket;
 using Binance.Net.Objects.Models.Spot.Socket;
 using Binance.Net.Objects.Options;
 using Binance.Net.Objects.Sockets;
+using Binance.Net.Objects.Sockets.Converters;
+using Binance.Net.Objects.Sockets.Subscriptions;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Converters;
@@ -51,14 +53,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         private const string partialBookDepthStreamEndpoint = "@depth";
         private const string depthStreamEndpoint = "@depth";
 
-        private const string configUpdateEvent = "ACCOUNT_CONFIG_UPDATE";
-        private const string marginUpdateEvent = "MARGIN_CALL";
-        private const string accountUpdateEvent = "ACCOUNT_UPDATE";
-        private const string orderUpdateEvent = "ORDER_TRADE_UPDATE";
-        private const string listenKeyExpiredEvent = "listenKeyExpired";
-        private const string strategyUpdateEvent = "STRATEGY_UPDATE";
-        private const string gridUpdateEvent = "GRID_UPDATE";
-
+        /// <inheritdoc />
         public override SocketConverter StreamConverter => new BinanceUsdFuturesStreamConverter();
         #endregion
 
@@ -70,7 +65,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
         internal BinanceSocketClientUsdFuturesApi(ILogger logger, BinanceSocketOptions options) :
             base(logger, options.Environment.UsdFuturesSocketAddress!, options, options.UsdFuturesOptions)
         {
-            //SetDataInterpreter((data) => string.Empty, null);
         }
         #endregion 
 
@@ -406,112 +400,112 @@ namespace Binance.Net.Clients.UsdFuturesApi
         {
             listenKey.ValidateNotNull(nameof(listenKey));
 
-            var handler = new Action<DataEvent<string>>(data =>
-            {
-                var combinedToken = JToken.Parse(data.Data);
-                var token = combinedToken["data"];
-                if (token == null)
-                    return;
+            //var handler = new Action<DataEvent<string>>(data =>
+            //{
+            //    var combinedToken = JToken.Parse(data.Data);
+            //    var token = combinedToken["data"];
+            //    if (token == null)
+            //        return;
 
-                var evnt = token["e"]?.ToString();
-                if (evnt == null)
-                    return;
+            //    var evnt = token["e"]?.ToString();
+            //    if (evnt == null)
+            //        return;
 
-                switch (evnt)
-                {
-                    case configUpdateEvent:
-                        {
-                            var result = Deserialize<BinanceFuturesStreamConfigUpdate>(token);
-                            if (result)
-                            {
-                                result.Data.ListenKey = combinedToken["stream"]!.Value<string>()!;
-                                onConfigUpdate?.Invoke(data.As(result.Data, result.Data.LeverageUpdateData?.Symbol));
-                            }
-                            else
-                                _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from config stream: " + result.Error);
+            //    switch (evnt)
+            //    {
+            //        case configUpdateEvent:
+            //            {
+            //                var result = Deserialize<BinanceFuturesStreamConfigUpdate>(token);
+            //                if (result)
+            //                {
+            //                    result.Data.ListenKey = combinedToken["stream"]!.Value<string>()!;
+            //                    onConfigUpdate?.Invoke(data.As(result.Data, result.Data.LeverageUpdateData?.Symbol));
+            //                }
+            //                else
+            //                    _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from config stream: " + result.Error);
 
-                            break;
-                        }
-                    case marginUpdateEvent:
-                        {
-                            var result = Deserialize<BinanceFuturesStreamMarginUpdate>(token);
-                            if (result)
-                            {
-                                result.Data.ListenKey = combinedToken["stream"]!.Value<string>()!;
-                                onMarginUpdate?.Invoke(data.As(result.Data));
-                            }
-                            else
-                                _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from order stream: " + result.Error);
-                            break;
-                        }
-                    case accountUpdateEvent:
-                        {
-                            var result = Deserialize<BinanceFuturesStreamAccountUpdate>(token);
-                            if (result.Success)
-                            {
-                                result.Data.ListenKey = combinedToken["stream"]!.Value<string>()!;
-                                onAccountUpdate?.Invoke(data.As(result.Data));
-                            }
-                            else
-                                _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from account stream: " + result.Error);
+            //                break;
+            //            }
+            //        case marginUpdateEvent:
+            //            {
+            //                var result = Deserialize<BinanceFuturesStreamMarginUpdate>(token);
+            //                if (result)
+            //                {
+            //                    result.Data.ListenKey = combinedToken["stream"]!.Value<string>()!;
+            //                    onMarginUpdate?.Invoke(data.As(result.Data));
+            //                }
+            //                else
+            //                    _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from order stream: " + result.Error);
+            //                break;
+            //            }
+            //        case accountUpdateEvent:
+            //            {
+            //                var result = Deserialize<BinanceFuturesStreamAccountUpdate>(token);
+            //                if (result.Success)
+            //                {
+            //                    result.Data.ListenKey = combinedToken["stream"]!.Value<string>()!;
+            //                    onAccountUpdate?.Invoke(data.As(result.Data));
+            //                }
+            //                else
+            //                    _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from account stream: " + result.Error);
 
-                            break;
-                        }
-                    case orderUpdateEvent:
-                        {
-                            var result = Deserialize<BinanceFuturesStreamOrderUpdate>(token);
-                            if (result)
-                            {
-                                result.Data.ListenKey = combinedToken["stream"]!.Value<string>()!;
-                                onOrderUpdate?.Invoke(data.As(result.Data, result.Data.UpdateData.Symbol));
-                            }
-                            else
-                                _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from order stream: " + result.Error);
-                            break;
-                        }
-                    case listenKeyExpiredEvent:
-                        {
-                            var result = Deserialize<BinanceStreamEvent>(token);
-                            if (result)
-                                onListenKeyExpired?.Invoke(data.As(result.Data, combinedToken["stream"]!.Value<string>()));                            
-                            else
-                                _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from the expired listen key event: " + result.Error);
-                            break;
-                        }
-                    case strategyUpdateEvent:
-                        {
-                            var result = Deserialize<BinanceStrategyUpdate>(token);
-                            if (result)
-                                onStrategyUpdate?.Invoke(data.As(result.Data, combinedToken["stream"]!.Value<string>()));
-                            else
-                                _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from the StrategyUpdate event: " + result.Error);
-                            break;
-                        }
-                    case gridUpdateEvent:
-                        {
-                            var result = Deserialize<BinanceGridUpdate>(token);
-                            if (result)
-                                onGridUpdate?.Invoke(data.As(result.Data, combinedToken["stream"]!.Value<string>()));
-                            else
-                                _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from the GridUpdate event: " + result.Error);
-                            break;
-                        }
-                    case "CONDITIONAL_ORDER_TRIGGER_REJECT":
-                        {
-                            var result = Deserialize<BinanceConditionOrderTriggerRejectUpdate>(token);
-                            if (result)
-                                onConditionalOrderTriggerRejectUpdate?.Invoke(data.As(result.Data, combinedToken["stream"]!.Value<string>()));
-                            else
-                                _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from the CONDITIONAL_ORDER_TRIGGER_REJECT event: " + result.Error);
-                            break;
-                        }
-                    default:
-                        _logger.Log(LogLevel.Warning, $"Received unknown user data event {evnt}: " + data.Data);
-                        break;
-                }
-            });
-
-            return await SubscribeAsync(BaseAddress, new[] { listenKey }, handler, ct).ConfigureAwait(false);
+            //                break;
+            //            }
+            //        case orderUpdateEvent:
+            //            {
+            //                var result = Deserialize<BinanceFuturesStreamOrderUpdate>(token);
+            //                if (result)
+            //                {
+            //                    result.Data.ListenKey = combinedToken["stream"]!.Value<string>()!;
+            //                    onOrderUpdate?.Invoke(data.As(result.Data, result.Data.UpdateData.Symbol));
+            //                }
+            //                else
+            //                    _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from order stream: " + result.Error);
+            //                break;
+            //            }
+            //        case listenKeyExpiredEvent:
+            //            {
+            //                var result = Deserialize<BinanceStreamEvent>(token);
+            //                if (result)
+            //                    onListenKeyExpired?.Invoke(data.As(result.Data, combinedToken["stream"]!.Value<string>()));                            
+            //                else
+            //                    _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from the expired listen key event: " + result.Error);
+            //                break;
+            //            }
+            //        case strategyUpdateEvent:
+            //            {
+            //                var result = Deserialize<BinanceStrategyUpdate>(token);
+            //                if (result)
+            //                    onStrategyUpdate?.Invoke(data.As(result.Data, combinedToken["stream"]!.Value<string>()));
+            //                else
+            //                    _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from the StrategyUpdate event: " + result.Error);
+            //                break;
+            //            }
+            //        case gridUpdateEvent:
+            //            {
+            //                var result = Deserialize<BinanceGridUpdate>(token);
+            //                if (result)
+            //                    onGridUpdate?.Invoke(data.As(result.Data, combinedToken["stream"]!.Value<string>()));
+            //                else
+            //                    _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from the GridUpdate event: " + result.Error);
+            //                break;
+            //            }
+            //        case "CONDITIONAL_ORDER_TRIGGER_REJECT":
+            //            {
+            //                var result = Deserialize<BinanceConditionOrderTriggerRejectUpdate>(token);
+            //                if (result)
+            //                    onConditionalOrderTriggerRejectUpdate?.Invoke(data.As(result.Data, combinedToken["stream"]!.Value<string>()));
+            //                else
+            //                    _logger.Log(LogLevel.Warning, "Couldn't deserialize data received from the CONDITIONAL_ORDER_TRIGGER_REJECT event: " + result.Error);
+            //                break;
+            //            }
+            //        default:
+            //            _logger.Log(LogLevel.Warning, $"Received unknown user data event {evnt}: " + data.Data);
+            //            break;
+            //    }
+            //});
+            var subscription = new BinanceUsdFuturesUserDataSubscription(_logger, new List<string> { listenKey }, onOrderUpdate, onConfigUpdate, onMarginUpdate, onAccountUpdate, onListenKeyExpired, onStrategyUpdate, onGridUpdate, onConditionalOrderTriggerRejectUpdate);
+            return await SubscribeAsync(BaseAddress, subscription, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -520,15 +514,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         internal Task<CallResult<UpdateSubscription>> SubscribeAsync<T>(string url, IEnumerable<string> topics, Action<DataEvent<T>> onData, CancellationToken ct)
         {
-            var request = new BinanceSocketRequest
-            {
-                Method = "SUBSCRIBE",
-                Params = topics.ToArray(),
-                Id = ExchangeHelpers.NextId()
-            };
-
-            var subscription = new BinanceSpotSubscription<T>(_logger, topics.ToList(), onData, false);
-            return SubscribeAsync<T>(url.AppendPath("stream"), subscription, ct);
+            var subscription = new BinanceSubscription<T>(_logger, topics.ToList(), onData, false);
+            return SubscribeAsync(url.AppendPath("stream"), subscription, ct);
         }
 
         /// <inheritdoc />

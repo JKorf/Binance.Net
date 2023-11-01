@@ -6,13 +6,14 @@ using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects.Sockets;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
-namespace Binance.Net.Objects.Sockets
+namespace Binance.Net.Objects.Sockets.Converters
 {
     internal class BinanceSpotStreamConverter : SocketConverter
     {
-        public override string[] SubscriptionIdFields => new[] { "stream" }; 
+        public override string[] SubscriptionIdFields => new[] { "stream" };
         public override string[] TypeIdFields => new[] { "id", "data:e", "stream" };
 
         private static Dictionary<string, Type> _streamIdMapping = new Dictionary<string, Type>
@@ -36,23 +37,23 @@ namespace Binance.Net.Objects.Sockets
             { "1dTicker", typeof(BinanceCombinedStream<BinanceStreamRollingWindowTick>) },
             { "depthUpdate", typeof(BinanceCombinedStream<BinanceEventOrderBook>) },
             { "nav", typeof(BinanceCombinedStream<BinanceBlvtInfoUpdate>) },
-            { "outboundAccountPosition", typeof(BinanceStreamPositionsUpdate) },
-            { "balanceUpdate", typeof(BinanceStreamBalanceUpdate) },
-            { "executionReport", typeof(BinanceStreamOrderUpdate) },
-            { "listStatus", typeof(BinanceStreamOrderList) },
+            { "outboundAccountPosition", typeof(BinanceCombinedStream<BinanceStreamPositionsUpdate>) },
+            { "balanceUpdate", typeof(BinanceCombinedStream<BinanceStreamBalanceUpdate>) },
+            { "executionReport", typeof(BinanceCombinedStream<BinanceStreamOrderUpdate>) },
+            { "listStatus", typeof(BinanceCombinedStream<BinanceStreamOrderList>) },
         };
 
         public override Type? GetDeserializationType(Dictionary<string, string?> idValues, List<MessageListener> listeners)
         {
             if (idValues["id"] != null)
                 return typeof(BinanceSocketQueryResponse);
-            
+
             var streamId = idValues["stream"]!;
             if (_streamIdMapping.TryGetValue(streamId, out var streamIdMapping))
                 return streamIdMapping;
 
-            var eventType = idValues["data:e"];
-            if (_eventTypeMapping.TryGetValue(streamId, out var eventTypeMapping))
+            var eventType = idValues["data:e"]!;
+            if (_eventTypeMapping.TryGetValue(eventType, out var eventTypeMapping))
                 return eventTypeMapping;
 
             // These are single events but don't have an 'e' event identifier

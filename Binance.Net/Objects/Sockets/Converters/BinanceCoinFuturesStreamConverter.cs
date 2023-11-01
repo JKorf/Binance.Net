@@ -9,11 +9,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Binance.Net.Objects.Sockets
+namespace Binance.Net.Objects.Sockets.Converters
 {
     internal class BinanceCoinFuturesStreamConverter : SocketConverter
     {
-        public override string[] SubscriptionIdFields => new[] { "stream" }; 
+        public override string[] SubscriptionIdFields => new[] { "stream" };
         public override string[] TypeIdFields => new[] { "id", "data:e", "stream" };
 
         private static Dictionary<string, Type> _streamIdMapping = new Dictionary<string, Type>
@@ -41,19 +41,19 @@ namespace Binance.Net.Objects.Sockets
             { "depthUpdate", typeof(BinanceCombinedStream<BinanceFuturesStreamOrderBookDepth>) },
             { "contractInfo", typeof(BinanceCombinedStream<BinanceFuturesStreamSymbolUpdate>) },
 
-            { "MARGIN_CALL", typeof(BinanceFuturesStreamMarginUpdate) },
-            { "ACCOUNT_UPDATE", typeof(BinanceFuturesStreamAccountUpdate) },
-            { "ORDER_TRADE_UPDATE", typeof(BinanceFuturesStreamOrderUpdate) },
-            { "ACCOUNT_CONFIG_UPDATE", typeof(BinanceFuturesStreamConfigUpdate) },
-            { "STRATEGY_UPDATE", typeof(BinanceStrategyUpdate) },
-            { "GRID_UPDATE", typeof(BinanceGridUpdate) }
+            { "MARGIN_CALL", typeof(BinanceCombinedStream<BinanceFuturesStreamMarginUpdate>) },
+            { "ACCOUNT_UPDATE", typeof(BinanceCombinedStream<BinanceFuturesStreamAccountUpdate>) },
+            { "ORDER_TRADE_UPDATE", typeof(BinanceCombinedStream<BinanceFuturesStreamOrderUpdate>) },
+            { "ACCOUNT_CONFIG_UPDATE", typeof(BinanceCombinedStream<BinanceFuturesStreamConfigUpdate>) },
+            { "STRATEGY_UPDATE", typeof(BinanceCombinedStream<BinanceStrategyUpdate>) },
+            { "GRID_UPDATE", typeof(BinanceCombinedStream<BinanceGridUpdate>) }
         };
 
         public override Type? GetDeserializationType(Dictionary<string, string?> idValues, List<MessageListener> listeners)
         {
             if (idValues["id"] != null)
                 return typeof(BinanceSocketQueryResponse);
-            
+
             var streamId = idValues["stream"]!;
             if (_streamIdMapping.TryGetValue(streamId, out var streamIdMapping))
                 return streamIdMapping;
