@@ -91,27 +91,27 @@ namespace Binance.Net.Objects.Sockets
         }
 
         /// <inheritdoc />
-        public override (bool, CallResult?) MessageMatchesSubRequest(ParsedMessage message)
+        public override bool MessageMatchesSubRequest(ParsedMessage message)
         {
             if (message.Data is not BinanceSocketQueryResponse response)
-                return (false, null);
+                return false;
 
             if (response.Id != _subId)
-                return (false, null);
+                return false;
 
-            return (true, new CallResult(null));
+            return true;
         }
 
         /// <inheritdoc />
-        public override (bool, CallResult?) MessageMatchesUnsubRequest(ParsedMessage message)
+        public override bool MessageMatchesUnsubRequest(ParsedMessage message)
         {
             if (message.Data is not BinanceSocketQueryResponse response)
-                return (false, null);
+                return false;
 
             if (response.Id != _unsubId)
-                return (false, null);
+                return false;
 
-            return (true, new CallResult(null));
+            return true;
         }
 
         /// <inheritdoc />
@@ -156,5 +156,8 @@ namespace Binance.Net.Objects.Sockets
             }
             return Task.CompletedTask;
         }
+
+        public override CallResult HandleSubResponse(ParsedMessage message) => new CallResult(null);
+        public override CallResult HandleUnsubResponse(ParsedMessage message) => new CallResult(null);
     }
 }

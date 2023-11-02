@@ -6,16 +6,27 @@ namespace Binance.Net.Objects
     /// <summary>
     /// Binance response
     /// </summary>
+    public class BinanceResponse
+    {
+        /// <summary>
+        /// Identifier
+        /// </summary>
+        public int Id { get; set; }
+        /// <summary>
+        /// Rate limit info
+        /// </summary>
+        public IEnumerable<BinanceCurrentRateLimit> Ratelimits { get; set; } = new List<BinanceCurrentRateLimit>();
+
+    }
+    /// <summary>
+    /// Binance response
+    /// </summary>
     /// <typeparam name="T">Type of the data</typeparam>
-    public class BinanceResponse<T>
+    public class BinanceResponse<T> : BinanceResponse
     {
         /// <summary>
         /// Data result
         /// </summary>
         public T Result { get; set; } = default!;
-        /// <summary>
-        /// Rate limit info
-        /// </summary>
-        public IEnumerable<BinanceCurrentRateLimit> Ratelimits { get; set; } = new List<BinanceCurrentRateLimit>();
     }
 }

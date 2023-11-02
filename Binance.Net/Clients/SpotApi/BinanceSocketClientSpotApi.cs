@@ -102,8 +102,8 @@ namespace Binance.Net.Clients.SpotApi
                 Id = ExchangeHelpers.NextId()
             };
 
-            var query = new BinanceSpotQuery(request, false, weight);
-            return QueryAsync<BinanceResponse<T>>(url, query);
+            var query = new BinanceSpotQuery<BinanceResponse<T>>(request, false, weight);
+            return QueryAsync(url, query);
         }
 
         internal CallResult<T> DeserializeInternal<T>(JToken obj, JsonSerializer? serializer = null, int? requestId = null)

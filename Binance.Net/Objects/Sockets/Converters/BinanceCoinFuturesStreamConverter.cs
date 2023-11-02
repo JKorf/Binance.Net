@@ -5,6 +5,7 @@ using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.Socket;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects.Sockets;
+using CryptoExchange.Net.Sockets;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -49,7 +50,7 @@ namespace Binance.Net.Objects.Sockets.Converters
             { "GRID_UPDATE", typeof(BinanceCombinedStream<BinanceGridUpdate>) }
         };
 
-        public override Type? GetDeserializationType(Dictionary<string, string?> idValues, List<MessageListener> listeners)
+        public override Type? GetDeserializationType(Dictionary<string, string?> idValues, List<BasePendingRequest> pendingRequests, List<Subscription> listeners)
         {
             if (idValues["id"] != null)
                 return typeof(BinanceSocketQueryResponse);

@@ -1,9 +1,11 @@
-﻿using Binance.Net.Objects.Models;
+﻿using Binance.Net.Objects.Internal;
+using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.Socket;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects.Sockets;
+using CryptoExchange.Net.Sockets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,10 +45,18 @@ namespace Binance.Net.Objects.Sockets.Converters
             { "listStatus", typeof(BinanceCombinedStream<BinanceStreamOrderList>) },
         };
 
-        public override Type? GetDeserializationType(Dictionary<string, string?> idValues, List<MessageListener> listeners)
+        public override Type? GetDeserializationType(Dictionary<string, string?> idValues, List<BasePendingRequest> pendingRequests, List<Subscription> listeners)
         {
             if (idValues["id"] != null)
-                return typeof(BinanceSocketQueryResponse);
+            {
+                var updateId = int.Parse(idValues["id"]);
+                var request = pendingRequests.SingleOrDefault(r => ((BinanceSocketQuery)r.Request).Id == updateId);
+                var responseType = request.ResponseType;
+                if (responseType == null)
+                    return typeof(BinanceSocketQueryResponse);
+
+                return responseType;
+            }
 
             var streamId = idValues["stream"]!;
             if (_streamIdMapping.TryGetValue(streamId, out var streamIdMapping))
