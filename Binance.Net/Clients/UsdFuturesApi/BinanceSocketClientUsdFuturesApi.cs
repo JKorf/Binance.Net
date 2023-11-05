@@ -634,6 +634,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
         //    return result;
         //}
 
-        protected override Query GetAuthenticationRequest() => throw new NotImplementedException();
+        protected override BaseQuery GetAuthenticationRequest() => throw new NotImplementedException();
     }
 }

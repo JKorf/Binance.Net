@@ -469,6 +469,6 @@ namespace Binance.Net.Clients.CoinFuturesApi
         }
 
         /// <inheritdoc />
-        protected override Query GetAuthenticationRequest() => throw new NotImplementedException();
+        protected override BaseQuery GetAuthenticationRequest() => throw new NotImplementedException();
     }
 }

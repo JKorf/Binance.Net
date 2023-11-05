@@ -9,13 +9,13 @@ using System.Text;
 
 namespace Binance.Net.Objects.Sockets
 {
-    internal class BinanceSpotQuery<T> : Query<T> where T: BinanceResponse
+    internal class BinanceSystemQuery<T> : Query<T> where T: BinanceSocketQueryResponse
     {
-        public BinanceSpotQuery(BinanceSocketQuery request, bool authenticated, int weight = 1) : base(request, authenticated, weight)
+        public BinanceSystemQuery(BinanceSocketRequest request, bool authenticated, int weight = 1) : base(request, authenticated, weight)
         {
         }
 
         public override CallResult<T> HandleResponse(ParsedMessage<T> message) => new CallResult<T>(message.Data);
-        public override bool MessageMatchesQuery(ParsedMessage<T> message) => ((BinanceSocketQuery)Request).Id == message.Data.Id;
+        public override bool MessageMatchesQuery(ParsedMessage<T> message) => ((BinanceSocketRequest)Request).Id == message.Data.Id;
     }
 }

@@ -11,15 +11,13 @@ using System.Threading.Tasks;
 namespace Binance.Net.Objects.Sockets.Subscriptions
 {
     /// <inheritdoc />
-    public class BinanceSubscription<T> : Subscription
+    public class BinanceSubscription<T> : Subscription<BinanceSocketQueryResponse, T>
     {
         /// <inheritdoc />
         public override List<string> Identifiers => _identifiers;
 
         private readonly Action<DataEvent<T>> _handler;
         private readonly List<string> _identifiers;
-        private int _subId;
-        private int _unsubId;
 
         /// <summary>
         /// ctor
@@ -35,62 +33,32 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         }
 
         /// <inheritdoc />
-        public override object? GetSubRequest()
+        public override BaseQuery? GetSubQuery()
         {
-            _subId = ExchangeHelpers.NextId();
-            return new BinanceSocketRequest
+            return new BinanceSystemQuery<BinanceSocketQueryResponse>(new BinanceSocketRequest
             {
                 Method = "SUBSCRIBE",
                 Params = _identifiers.ToArray(),
-                Id = _subId
-            };
+                Id = ExchangeHelpers.NextId()
+            }, false);
         }
 
         /// <inheritdoc />
-        public override object? GetUnsubRequest()
+        public override BaseQuery? GetUnsubQuery()
         {
-            _unsubId = ExchangeHelpers.NextId();
-            return new BinanceSocketRequest
+            return new BinanceSystemQuery<BinanceSocketQueryResponse>(new BinanceSocketRequest
             {
                 Method = "UNSUBSCRIBE",
                 Params = _identifiers.ToArray(),
-                Id = _unsubId
-            };
+                Id = ExchangeHelpers.NextId()
+            }, false);
         }
 
         /// <inheritdoc />
-        public override bool MessageMatchesSubRequest(ParsedMessage message)
+        public override Task HandleEventAsync(DataEvent<ParsedMessage<T>> message)
         {
-            if (message.Data is not BinanceSocketQueryResponse response)
-                return false;
-
-            if (response.Id != _subId)
-                return false;
-
-            return true;
-        }
-
-        /// <inheritdoc />
-        public override bool MessageMatchesUnsubRequest(ParsedMessage message)
-        {
-            if (message.Data is not BinanceSocketQueryResponse response)
-                return false;
-
-            if (response.Id != _unsubId)
-                return false;
-
-            return true;
-        }
-
-        /// <inheritdoc />
-        public override Task HandleEventAsync(DataEvent<ParsedMessage> message)
-        {
-            var data = (T)message.Data.Data!;
-            _handler.Invoke(message.As(data, null, SocketUpdateType.Update));
+            _handler.Invoke(message.As(message.Data.Data!, null, SocketUpdateType.Update));
             return Task.CompletedTask;
         }
-
-        public override CallResult HandleSubResponse(ParsedMessage message) => new CallResult(null);
-        public override CallResult HandleUnsubResponse(ParsedMessage message) => new CallResult(null);
     }
 }

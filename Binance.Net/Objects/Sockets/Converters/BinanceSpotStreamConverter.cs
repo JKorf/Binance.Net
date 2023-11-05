@@ -50,10 +50,13 @@ namespace Binance.Net.Objects.Sockets.Converters
             if (idValues["id"] != null)
             {
                 var updateId = int.Parse(idValues["id"]);
-                var request = pendingRequests.SingleOrDefault(r => ((BinanceSocketQuery)r.Request).Id == updateId);
+                var request = pendingRequests.SingleOrDefault(r => ((BinanceSocketMessage)r.Request).Id == updateId);
                 var responseType = request.ResponseType;
                 if (responseType == null)
-                    return typeof(BinanceSocketQueryResponse);
+                {
+                    // Probably shouldn't be exception
+                    throw new Exception("Unknown update type");
+                }
 
                 return responseType;
             }
