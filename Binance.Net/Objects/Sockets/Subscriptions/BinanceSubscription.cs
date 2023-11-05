@@ -55,10 +55,10 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         }
 
         /// <inheritdoc />
-        public override Task HandleEventAsync(DataEvent<ParsedMessage<T>> message)
+        public override Task<CallResult> HandleEventAsync(DataEvent<ParsedMessage<T>> message)
         {
             _handler.Invoke(message.As(message.Data.Data!, null, SocketUpdateType.Update));
-            return Task.CompletedTask;
+            return Task.FromResult(new CallResult(null));
         }
     }
 }

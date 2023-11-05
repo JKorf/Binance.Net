@@ -83,7 +83,7 @@ namespace Binance.Net.Objects.Sockets
         }
     
         /// <inheritdoc />
-        public override Task HandleEventAsync(DataEvent<ParsedMessage<BinanceCombinedStream<BinanceStreamEvent>>> message)
+        public override Task<CallResult> HandleEventAsync(DataEvent<ParsedMessage<BinanceCombinedStream<BinanceStreamEvent>>> message)
         {
             var data = message.Data.Data.Data;
             if (data is BinanceFuturesStreamConfigUpdate configUpdate)
@@ -118,7 +118,7 @@ namespace Binance.Net.Objects.Sockets
             {
                 _gridHandler?.Invoke(message.As(gridUpdate, message.Data.Data.Stream, SocketUpdateType.Update));
             }
-            return Task.CompletedTask;
+            return Task.FromResult(new CallResult(null)); // TODO error not mapped
         }
     }
 }

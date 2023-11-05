@@ -64,7 +64,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         }
 
         /// <inheritdoc />
-        public override Task HandleEventAsync(DataEvent<ParsedMessage<BinanceCombinedStream<BinanceStreamEvent>>> message)
+        public override Task<CallResult> HandleEventAsync(DataEvent<ParsedMessage<BinanceCombinedStream<BinanceStreamEvent>>> message)
         {
             var data = message.Data.Data.Data;
             if (data is BinanceStreamOrderUpdate orderUpdate)
@@ -88,7 +88,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                 _balanceHandler?.Invoke(message.As(balanceUpdate, message.Data.Data.Stream, SocketUpdateType.Update));
             }
 
-            return Task.CompletedTask;
+            return Task.FromResult(new CallResult(null)); // TODO error not mapped
         }
     }
 }
