@@ -14,8 +14,6 @@ namespace Binance.Net.Objects.Sockets.Converters
 {
     internal class BinanceUsdFuturesStreamConverter : SocketConverter
     {
-        public override string[] SubscriptionIdFields => new[] { "stream" };
-        public override string[] TypeIdFields => new[] { "id", "data:e", "stream" };
 
         private static Dictionary<string, Type> _streamIdMapping = new Dictionary<string, Type>
         {
@@ -53,11 +51,29 @@ namespace Binance.Net.Objects.Sockets.Converters
             { "CONDITIONAL_ORDER_TRIGGER_REJECT", typeof(BinanceCombinedStream<BinanceConditionOrderTriggerRejectUpdate>) },
         };
 
-        public override Type? GetDeserializationType(Dictionary<string, string?> idValues, List<BasePendingRequest> pendingRequests, List<Subscription> listeners)
+        public override List<StreamMessageParseCallback> InterpreterPipeline { get; } = new List<StreamMessageParseCallback>
         {
-            if (idValues["id"] != null)
-                return typeof(BinanceSocketQueryResponse);
+            new StreamMessageParseCallback
+            {
+                TypeFields = new List<string> { "id" },
+                IdFields = new List<string> { "id" },
+                Callback = GetDeserializationTypeQueryResponse
+            },
+            new StreamMessageParseCallback
+            {
+                IdFields = new List<string> { "stream" },
+                TypeFields = new List<string> { "stream", "data:e" },
+                Callback = GetDeserializationTypeStreamEvent
+            }
+        };
 
+        public static Type? GetDeserializationTypeQueryResponse(Dictionary<string, string> idValues, IEnumerable<BasePendingRequest> pendingRequests, IEnumerable<Subscription> listeners)
+        {
+            return typeof(BinanceSocketQueryResponse);
+        }
+
+        public static Type? GetDeserializationTypeStreamEvent(Dictionary<string, string> idValues, IEnumerable<BasePendingRequest> pendingRequests, IEnumerable<Subscription> listeners)
+        {
             var streamId = idValues["stream"]!;
             if (_streamIdMapping.TryGetValue(streamId, out var streamIdMapping))
                 return streamIdMapping;

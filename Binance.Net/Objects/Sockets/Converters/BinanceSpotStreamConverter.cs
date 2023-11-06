@@ -15,8 +15,6 @@ namespace Binance.Net.Objects.Sockets.Converters
 {
     internal class BinanceSpotStreamConverter : SocketConverter
     {
-        public override string[] SubscriptionIdFields => new[] { "stream" };
-        public override string[] TypeIdFields => new[] { "id", "data:e", "stream" };
 
         private static Dictionary<string, Type> _streamIdMapping = new Dictionary<string, Type>
         {
@@ -45,22 +43,41 @@ namespace Binance.Net.Objects.Sockets.Converters
             { "listStatus", typeof(BinanceCombinedStream<BinanceStreamOrderList>) },
         };
 
-        public override Type? GetDeserializationType(Dictionary<string, string?> idValues, List<BasePendingRequest> pendingRequests, List<Subscription> listeners)
+        public override List<StreamMessageParseCallback> InterpreterPipeline { get; } = new List<StreamMessageParseCallback>
         {
-            if (idValues["id"] != null)
+            new StreamMessageParseCallback
             {
-                var updateId = int.Parse(idValues["id"]);
-                var request = pendingRequests.SingleOrDefault(r => ((BinanceSocketMessage)r.Request).Id == updateId);
-                var responseType = request.ResponseType;
-                if (responseType == null)
-                {
-                    // Probably shouldn't be exception
-                    throw new Exception("Unknown update type");
-                }
+                TypeFields = new List<string> { "id" },
+                IdFields = new List<string> { "id" },
+                Callback = GetDeserializationTypeQueryResponse
+            },
+            new StreamMessageParseCallback
+            {
+                IdFields = new List<string> { "stream" },
+                TypeFields = new List<string> { "stream", "data:e" },
+                Callback = GetDeserializationTypeStreamEvent
+            }
+        };
 
-                return responseType;
+        private static Type? GetDeserializationTypeQueryResponse(Dictionary<string, string> idValues, IEnumerable<BasePendingRequest> pendingRequests, IEnumerable<Subscription> listeners)
+        {
+            // different fields present mean different deserializations, if there is an id field then its a query, otherways look at stream field
+            // Can we provide some logic to configure this?
+
+            var updateId = int.Parse(idValues["id"]);
+            var request = pendingRequests.SingleOrDefault(r => ((BinanceSocketMessage)r.Request).Id == updateId);
+            var responseType = request.ResponseType;
+            if (responseType == null)
+            {
+                // Probably shouldn't be exception
+                throw new Exception("Unknown update type");
             }
 
+            return responseType;
+        }
+
+        private static Type? GetDeserializationTypeStreamEvent(Dictionary<string, string> idValues, IEnumerable<BasePendingRequest> pendingRequests, IEnumerable<Subscription> listeners)
+        {
             var streamId = idValues["stream"]!;
             if (_streamIdMapping.TryGetValue(streamId, out var streamIdMapping))
                 return streamIdMapping;
