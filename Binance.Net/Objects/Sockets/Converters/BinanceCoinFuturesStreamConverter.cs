@@ -4,6 +4,7 @@ using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.Socket;
 using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
 using System;
@@ -14,7 +15,6 @@ namespace Binance.Net.Objects.Sockets.Converters
 {
     internal class BinanceCoinFuturesStreamConverter : SocketConverter
     {
-
         private static Dictionary<string, Type> _streamIdMapping = new Dictionary<string, Type>
         {
             { "!markPrice@arr", typeof(BinanceCombinedStream<IEnumerable<BinanceFuturesCoinStreamMarkPrice>>) },
@@ -48,38 +48,39 @@ namespace Binance.Net.Objects.Sockets.Converters
             { "GRID_UPDATE", typeof(BinanceCombinedStream<BinanceGridUpdate>) }
         };
 
-        public override List<StreamMessageParseCallback> InterpreterPipeline { get; } = new List<StreamMessageParseCallback>
+        public override MessageInterpreterPipeline InterpreterPipeline { get; } = new MessageInterpreterPipeline
         {
-            new StreamMessageParseCallback
+            PostInspectCallbacks = new List<PostInspectCallback>
             {
-                TypeFields = new List<string> { "id" },
-                IdFields = new List<string> { "id" },
-                Callback = GetDeserializationTypeQueryResponse
-            },
-            new StreamMessageParseCallback
-            {
-                TypeFields = new List<string> { "stream", "data:e" },
-                IdFields = new List<string> { "stream" },
-                Callback = GetDeserializationTypeStreamEvent
+                new PostInspectCallback
+                {
+                    TypeFields = new List<string> { "id" },
+                    Callback = GetDeserializationTypeQueryResponse
+                },
+                new PostInspectCallback
+                {
+                    TypeFields = new List<string> { "stream", "data:e" },
+                    Callback = GetDeserializationTypeStreamEvent
+                }
             }
         };
 
-        public static Type? GetDeserializationTypeStreamEvent(Dictionary<string, string> idValues, IEnumerable<BasePendingRequest> pendingRequests, IEnumerable<Subscription> listeners)
+        public static PostInspectResult? GetDeserializationTypeStreamEvent(Dictionary<string, string> idValues, IDictionary<string, IMessageProcessor> processors)
         {
             var streamId = idValues["stream"]!;
             if (_streamIdMapping.TryGetValue(streamId, out var streamIdMapping))
-                return streamIdMapping;
+                return new PostInspectResult { Type = streamIdMapping, Identifier = idValues["stream"].ToLowerInvariant() };
 
             var eventType = idValues["data:e"]!;
             if (_eventTypeMapping.TryGetValue(eventType, out var eventTypeMapping))
-                return eventTypeMapping;
+                return new PostInspectResult { Type = eventTypeMapping, Identifier = idValues["stream"].ToLowerInvariant() };
 
             return null;
         }
 
-        public static Type? GetDeserializationTypeQueryResponse(Dictionary<string, string> idValues, IEnumerable<BasePendingRequest> pendingRequests, IEnumerable<Subscription> listeners)
+        public static PostInspectResult? GetDeserializationTypeQueryResponse(Dictionary<string, string> idValues, IDictionary<string, IMessageProcessor> processors)
         {
-            return typeof(BinanceSocketQueryResponse);
+            return new PostInspectResult { Type = typeof(BinanceSocketQueryResponse), Identifier = idValues["id"] };
         }
     }
 }

@@ -4,6 +4,7 @@ using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.Socket;
 using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
 using System;
@@ -42,55 +43,49 @@ namespace Binance.Net.Objects.Sockets.Converters
             { "executionReport", typeof(BinanceCombinedStream<BinanceStreamOrderUpdate>) },
             { "listStatus", typeof(BinanceCombinedStream<BinanceStreamOrderList>) },
         };
-
-        public override List<StreamMessageParseCallback> InterpreterPipeline { get; } = new List<StreamMessageParseCallback>
+        public override MessageInterpreterPipeline InterpreterPipeline { get; } = new MessageInterpreterPipeline
         {
-            new StreamMessageParseCallback
+            PostInspectCallbacks = new List<PostInspectCallback>
             {
-                TypeFields = new List<string> { "id" },
-                IdFields = new List<string> { "id" },
-                Callback = GetDeserializationTypeQueryResponse
-            },
-            new StreamMessageParseCallback
-            {
-                IdFields = new List<string> { "stream" },
-                TypeFields = new List<string> { "stream", "data:e" },
-                Callback = GetDeserializationTypeStreamEvent
+                new PostInspectCallback
+                {
+                    TypeFields = new List<string> { "id" },
+                    Callback = GetDeserializationTypeQueryResponse
+                },
+                new PostInspectCallback
+                {
+                    TypeFields = new List<string> { "stream", "data:e" },
+                    Callback = GetDeserializationTypeStreamEvent
+                }
             }
         };
 
-        private static Type? GetDeserializationTypeQueryResponse(Dictionary<string, string> idValues, IEnumerable<BasePendingRequest> pendingRequests, IEnumerable<Subscription> listeners)
+        private static PostInspectResult GetDeserializationTypeQueryResponse(Dictionary<string, string> idValues, IDictionary<string, IMessageProcessor> processors)
         {
-            // different fields present mean different deserializations, if there is an id field then its a query, otherways look at stream field
-            // Can we provide some logic to configure this?
-
-            var updateId = int.Parse(idValues["id"]);
-            var request = pendingRequests.SingleOrDefault(r => ((BinanceSocketMessage)r.Request).Id == updateId);
-            var responseType = request.ResponseType;
-            if (responseType == null)
+            if(!processors.TryGetValue(idValues["id"], out var processor))
             {
                 // Probably shouldn't be exception
                 throw new Exception("Unknown update type");
             }
 
-            return responseType;
+            return new PostInspectResult { Type = processor.ExpectedMessageType, Identifier = idValues["id"] };
         }
 
-        private static Type? GetDeserializationTypeStreamEvent(Dictionary<string, string> idValues, IEnumerable<BasePendingRequest> pendingRequests, IEnumerable<Subscription> listeners)
+        private static PostInspectResult GetDeserializationTypeStreamEvent(Dictionary<string, string> idValues, IDictionary<string, IMessageProcessor> processors)
         {
             var streamId = idValues["stream"]!;
             if (_streamIdMapping.TryGetValue(streamId, out var streamIdMapping))
-                return streamIdMapping;
+                return new PostInspectResult { Type = streamIdMapping, Identifier = idValues["stream"].ToLowerInvariant() };
 
             var eventType = idValues["data:e"]!;
             if (_eventTypeMapping.TryGetValue(eventType, out var eventTypeMapping))
-                return eventTypeMapping;
+                return new PostInspectResult { Type = eventTypeMapping, Identifier = idValues["stream"].ToLowerInvariant() };
 
             // These are single events but don't have an 'e' event identifier
-            if (streamId.EndsWith("@bookTicker")) return typeof(BinanceCombinedStream<BinanceStreamBookPrice>);
-            if (streamId.Contains("@depth")) return typeof(BinanceCombinedStream<BinanceOrderBook>);
+            if (streamId.EndsWith("@bookTicker")) return new PostInspectResult { Type = typeof(BinanceCombinedStream<BinanceStreamBookPrice>), Identifier = idValues["stream"].ToLowerInvariant() };
+            if (streamId.Contains("@depth")) return new PostInspectResult { Type = typeof(BinanceCombinedStream<BinanceOrderBook>), Identifier = idValues["stream"].ToLowerInvariant() };
 
-            return null;
+            return new PostInspectResult();
         }
     }
 }
