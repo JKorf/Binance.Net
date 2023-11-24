@@ -1,8 +1,10 @@
 ﻿using System;
+using Binance.Net.Converters;
+using Binance.Net.Enums;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
-namespace Binance.Net.Objects.Models.Spot
+namespace Binance.Net.Objects.Models.Spot.Convert
 {
     /// <summary>
     /// Convert trade info
@@ -20,25 +22,29 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Order status
         /// </summary>
-        public string OrderStatus { get; set; } = string.Empty;
+        [JsonConverter(typeof(ConvertOrderStatusConverter))]
+        [JsonProperty("orderStatus")]
+        public ConvertOrderStatus Status { get; set; }
         /// <summary>
-        /// From asset
+        /// Quote asset 
         /// </summary>
-        public string FromAsset { get; set; } = string.Empty;
+        [JsonProperty("fromAsset")]
+        public string QuoteAsset { get; set; } = string.Empty;
         /// <summary>
-        /// From quantity
+        /// Quote quantity
         /// </summary>
         [JsonProperty("fromAmount")]
-        public decimal FromQuantity { get; set; }
+        public decimal QuoteQuantity { get; set; }
         /// <summary>
-        /// To asset
+        /// Base asset
         /// </summary>
-        public string ToAsset { get; set; } = string.Empty;
+        [JsonProperty("toAsset")]
+        public string BaseAsset { get; set; } = string.Empty;
         /// <summary>
-        /// To quantity
+        /// Base quantity
         /// </summary>
         [JsonProperty("toAmount")]
-        public decimal ToQuantity { get; set; }
+        public decimal BaseQuantity { get; set; }
         /// <summary>
         /// Price ratio
         /// </summary>
