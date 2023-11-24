@@ -141,6 +141,12 @@ namespace Binance.Net.Objects.Models.Futures
         public decimal Quantity { get; set; }
 
         /// <summary>
+        /// Break even price
+        /// </summary>
+        [JsonProperty("breakEvenPrice")]
+        public decimal BreakEvenPrice { get; set; }
+
+        /// <summary>
         /// Last update time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
