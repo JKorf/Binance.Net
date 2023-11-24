@@ -3994,6 +3994,11 @@
             Raw requests
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.RateLimitType.Connections">
+            <summary>
+            Connections
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.RebateType">
             <summary>
             Type of rebate
