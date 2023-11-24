@@ -3994,6 +3994,11 @@
             Raw requests
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.RateLimitType.Connections">
+            <summary>
+            Connections
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.RebateType">
             <summary>
             Type of rebate
@@ -25604,6 +25609,11 @@
         <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionDetailsBase.Quantity">
             <summary>
             Position quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionDetailsBase.BreakEvenPrice">
+            <summary>
+            Break even price
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionDetailsBase.UpdateTime">

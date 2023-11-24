@@ -16,6 +16,10 @@
         /// <summary>
         /// Raw requests
         /// </summary>
-        RawRequests
+        RawRequests,
+        /// <summary>
+        /// Connections
+        /// </summary>
+        Connections
     }
 }
