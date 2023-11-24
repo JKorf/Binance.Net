@@ -751,6 +751,61 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<IEnumerable<BinancePayTrade>>> GetPayTradeHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Get list all convert pairs
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#list-all-convert-pairs" /></para>
+        /// </summary>
+        /// <param name="quoteAsset">Quote asset</param>
+        /// <param name="baseAsset">Base asset</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BinanceConvertAssetPair>>> GetConvertListAllPairsAsync(string? quoteAsset = null, string? baseAsset = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get quantity precision per asset
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-order-quantity-precision-per-asset-user_data" /></para>
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BinanceConvertQuantityPrecisionAsset>>> GetConvertQuantityPrecisionPerAssetAsync(long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Request a quote for convert asset (selling asset) for base asset (buying asset)
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#send-quote-request-user_data" /></para>
+        /// </summary>
+        /// <param name="quoteAsset">Quote asset</param>
+        /// <param name="baseAsset">Base asset</param>
+        /// <param name="quoteQuantity">Quote quantity</param>
+        /// <param name="baseQuantity">Quote quantity</param>
+        /// <param name="walletType">The wallet type for convert</param>
+        /// <param name="validTime">The valid time for quote</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceConvertQuote>> ConvertQuoteRequestAsync(string quoteAsset, string baseAsset, decimal? quoteQuantity = null, decimal? baseQuantity = null, WalletType? walletType = null, ValidTime? validTime = null, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Accept the previously requested quote
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#accept-quote-trade" /></para>
+        /// </summary>
+        /// <param name="quoteId">The quote id of the order</param>
+        /// <param name="receiveWindow"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceConvertResult>> ConvertAcceptQuoteAsync(string quoteId, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get convert order status
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#order-status-user_data" /></para>
+        /// </summary>
+        /// <param name="orderId">The order id of the order</param>
+        /// <param name="quoteId">The quote id of the order</param>
+        /// <param name="receiveWindow"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceConvertOrderStatus>> GetConvertOrderStatusAsync(string? orderId = null, string? quoteId = null, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Get convert trade history
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-convert-trade-history-user_data" /></para>
         /// </summary>
