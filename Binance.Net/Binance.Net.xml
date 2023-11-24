@@ -25611,6 +25611,11 @@
             Position quantity
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionDetailsBase.BreakEvenPrice">
+            <summary>
+            Break even price
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionDetailsBase.UpdateTime">
             <summary>
             Last update time
