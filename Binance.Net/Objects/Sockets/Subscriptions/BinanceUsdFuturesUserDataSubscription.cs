@@ -65,7 +65,7 @@ namespace Binance.Net.Objects.Sockets
         }
 
         /// <inheritdoc />
-        public override BaseQuery? GetSubQuery()
+        public override BaseQuery? GetSubQuery(SocketConnection connection)
         {
             return new BinanceSystemQuery<BinanceSocketQueryResponse>(new BinanceSocketRequest
             {
@@ -87,44 +87,44 @@ namespace Binance.Net.Objects.Sockets
         }
 
         /// <inheritdoc />
-        public override Task<CallResult> HandleEventAsync(DataEvent<ParsedMessage<BinanceCombinedStream<BinanceStreamEvent>>> message)
+        public override Task<CallResult> HandleEventAsync(SocketConnection connection, DataEvent<ParsedMessage<BinanceCombinedStream<BinanceStreamEvent>>> message)
         {
-            var data = message.Data.Data.Data;
+            var data = message.Data.TypedData.Data;
             if (data is BinanceFuturesStreamConfigUpdate configUpdate)
             {
-                configUpdate.ListenKey = message.Data.Data.Stream;
-                _configHandler?.Invoke(message.As(configUpdate, message.Data.Data.Stream, SocketUpdateType.Update));
+                configUpdate.ListenKey = message.Data.TypedData.Stream;
+                _configHandler?.Invoke(message.As(configUpdate, message.Data.TypedData.Stream, SocketUpdateType.Update));
             }
             else if (data is BinanceFuturesStreamMarginUpdate marginUpdate)
             {
-                marginUpdate.ListenKey = message.Data.Data.Stream;
-                _marginHandler?.Invoke(message.As(marginUpdate, message.Data.Data.Stream, SocketUpdateType.Update));
+                marginUpdate.ListenKey = message.Data.TypedData.Stream;
+                _marginHandler?.Invoke(message.As(marginUpdate, message.Data.TypedData.Stream, SocketUpdateType.Update));
             }
             else if (data is BinanceFuturesStreamAccountUpdate accountUpdate)
             {
-                accountUpdate.ListenKey = message.Data.Data.Stream;
-                _accountHandler?.Invoke(message.As(accountUpdate, message.Data.Data.Stream, SocketUpdateType.Update));
+                accountUpdate.ListenKey = message.Data.TypedData.Stream;
+                _accountHandler?.Invoke(message.As(accountUpdate, message.Data.TypedData.Stream, SocketUpdateType.Update));
             }
             else if (data is BinanceFuturesStreamOrderUpdate orderUpate)
             {
-                orderUpate.ListenKey = message.Data.Data.Stream;
-                _orderHandler?.Invoke(message.As(orderUpate, message.Data.Data.Stream, SocketUpdateType.Update));
+                orderUpate.ListenKey = message.Data.TypedData.Stream;
+                _orderHandler?.Invoke(message.As(orderUpate, message.Data.TypedData.Stream, SocketUpdateType.Update));
             }
             else if (data is BinanceStreamEvent listenKeyUpdate)
             {
-                _listenkeyHandler?.Invoke(message.As(listenKeyUpdate, message.Data.Data.Stream, SocketUpdateType.Update));
+                _listenkeyHandler?.Invoke(message.As(listenKeyUpdate, message.Data.TypedData.Stream, SocketUpdateType.Update));
             }
             else if (data is BinanceStrategyUpdate strategyUpdate)
             {
-                _strategyHandler?.Invoke(message.As(strategyUpdate, message.Data.Data.Stream, SocketUpdateType.Update));
+                _strategyHandler?.Invoke(message.As(strategyUpdate, message.Data.TypedData.Stream, SocketUpdateType.Update));
             }
             else if (data is BinanceGridUpdate gridUpdate)
             {
-                _gridHandler?.Invoke(message.As(gridUpdate, message.Data.Data.Stream, SocketUpdateType.Update));
+                _gridHandler?.Invoke(message.As(gridUpdate, message.Data.TypedData.Stream, SocketUpdateType.Update));
             }
             else if (data is BinanceConditionOrderTriggerRejectUpdate condUpdate)
             {
-                _condOrderHandler?.Invoke(message.As(condUpdate, message.Data.Data.Stream, SocketUpdateType.Update));
+                _condOrderHandler?.Invoke(message.As(condUpdate, message.Data.TypedData.Stream, SocketUpdateType.Update));
             }
             return Task.FromResult(new CallResult(null));
         }

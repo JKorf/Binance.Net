@@ -42,7 +42,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         }
 
         /// <inheritdoc />
-        public override BaseQuery? GetSubQuery()
+        public override BaseQuery? GetSubQuery(SocketConnection connection)
         {
             return new BinanceSystemQuery<BinanceSocketQueryResponse>(new BinanceSocketRequest
             {
@@ -64,28 +64,28 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         }
 
         /// <inheritdoc />
-        public override Task<CallResult> HandleEventAsync(DataEvent<ParsedMessage<BinanceCombinedStream<BinanceStreamEvent>>> message)
+        public override Task<CallResult> HandleEventAsync(SocketConnection connection, DataEvent<ParsedMessage<BinanceCombinedStream<BinanceStreamEvent>>> message)
         {
-            var data = message.Data.Data.Data;
+            var data = message.Data.TypedData.Data;
             if (data is BinanceStreamOrderUpdate orderUpdate)
             {
-                orderUpdate.ListenKey = message.Data.Data.Stream;
-                _orderHandler?.Invoke(message.As(orderUpdate, message.Data.Data.Stream, SocketUpdateType.Update));
+                orderUpdate.ListenKey = message.Data.TypedData.Stream;
+                _orderHandler?.Invoke(message.As(orderUpdate, message.Data.TypedData.Stream, SocketUpdateType.Update));
             }
             else if (data is BinanceStreamOrderList orderListUpdate)
             {
-                orderListUpdate.ListenKey = message.Data.Data.Stream;
-                _orderListHandler?.Invoke(message.As(orderListUpdate, message.Data.Data.Stream, SocketUpdateType.Update));
+                orderListUpdate.ListenKey = message.Data.TypedData.Stream;
+                _orderListHandler?.Invoke(message.As(orderListUpdate, message.Data.TypedData.Stream, SocketUpdateType.Update));
             }
             else if (data is BinanceStreamPositionsUpdate positionUpdate)
             {
-                positionUpdate.ListenKey = message.Data.Data.Stream;
-                _positionHandler?.Invoke(message.As(positionUpdate, message.Data.Data.Stream, SocketUpdateType.Update));
+                positionUpdate.ListenKey = message.Data.TypedData.Stream;
+                _positionHandler?.Invoke(message.As(positionUpdate, message.Data.TypedData.Stream, SocketUpdateType.Update));
             }
             else if (data is BinanceStreamBalanceUpdate balanceUpdate)
             {
-                balanceUpdate.ListenKey = message.Data.Data.Stream;
-                _balanceHandler?.Invoke(message.As(balanceUpdate, message.Data.Data.Stream, SocketUpdateType.Update));
+                balanceUpdate.ListenKey = message.Data.TypedData.Stream;
+                _balanceHandler?.Invoke(message.As(balanceUpdate, message.Data.TypedData.Stream, SocketUpdateType.Update));
             }
 
             return Task.FromResult(new CallResult(null)); // TODO error not mapped

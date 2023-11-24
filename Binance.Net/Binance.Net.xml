@@ -27203,13 +27203,13 @@
             <param name="strategyHandler"></param>
             <param name="gridHandler"></param>
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.BinanceCoinFuturesUserDataSubscription.GetSubQuery">
+        <member name="M:Binance.Net.Objects.Sockets.BinanceCoinFuturesUserDataSubscription.GetSubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Objects.Sockets.BinanceCoinFuturesUserDataSubscription.GetUnsubQuery">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.BinanceCoinFuturesUserDataSubscription.HandleEventAsync(CryptoExchange.Net.Objects.Sockets.DataEvent{CryptoExchange.Net.Objects.Sockets.ParsedMessage{Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.BinanceStreamEvent}}})">
+        <member name="M:Binance.Net.Objects.Sockets.BinanceCoinFuturesUserDataSubscription.HandleEventAsync(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{CryptoExchange.Net.Objects.Sockets.ParsedMessage{Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.BinanceStreamEvent}}})">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription">
@@ -27221,13 +27221,13 @@
         <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.#ctor(Microsoft.Extensions.Logging.ILogger,System.Collections.Generic.List{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate}},System.Boolean)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.GetSubQuery">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.GetSubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.GetUnsubQuery">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.HandleEventAsync(CryptoExchange.Net.Objects.Sockets.DataEvent{CryptoExchange.Net.Objects.Sockets.ParsedMessage{Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.BinanceStreamEvent}}})">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.HandleEventAsync(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{CryptoExchange.Net.Objects.Sockets.ParsedMessage{Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.BinanceStreamEvent}}})">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1">
@@ -27245,13 +27245,13 @@
             <param name="handler"></param>
             <param name="auth"></param>
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1.GetSubQuery">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1.GetSubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1.GetUnsubQuery">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1.HandleEventAsync(CryptoExchange.Net.Objects.Sockets.DataEvent{CryptoExchange.Net.Objects.Sockets.ParsedMessage{`0}})">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1.HandleEventAsync(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{CryptoExchange.Net.Objects.Sockets.ParsedMessage{`0}})">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Objects.Sockets.BinanceUsdFuturesUserDataSubscription">
@@ -27275,13 +27275,13 @@
             <param name="gridHandler"></param>
             <param name="condOrderHandler"></param>
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.BinanceUsdFuturesUserDataSubscription.GetSubQuery">
+        <member name="M:Binance.Net.Objects.Sockets.BinanceUsdFuturesUserDataSubscription.GetSubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Objects.Sockets.BinanceUsdFuturesUserDataSubscription.GetUnsubQuery">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.BinanceUsdFuturesUserDataSubscription.HandleEventAsync(CryptoExchange.Net.Objects.Sockets.DataEvent{CryptoExchange.Net.Objects.Sockets.ParsedMessage{Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.BinanceStreamEvent}}})">
+        <member name="M:Binance.Net.Objects.Sockets.BinanceUsdFuturesUserDataSubscription.HandleEventAsync(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{CryptoExchange.Net.Objects.Sockets.ParsedMessage{Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.BinanceStreamEvent}}})">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.SymbolOrderBooks.BinanceFuturesCoinSymbolOrderBook">

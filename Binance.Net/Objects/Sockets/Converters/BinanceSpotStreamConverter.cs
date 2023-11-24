@@ -5,6 +5,7 @@ using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.Socket;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
 using System;
@@ -45,47 +46,58 @@ namespace Binance.Net.Objects.Sockets.Converters
         };
         public override MessageInterpreterPipeline InterpreterPipeline { get; } = new MessageInterpreterPipeline
         {
-            PostInspectCallbacks = new List<PostInspectCallback>
-            {
-                new PostInspectCallback
-                {
-                    TypeFields = new List<string> { "id" },
-                    Callback = GetDeserializationTypeQueryResponse
-                },
-                new PostInspectCallback
-                {
-                    TypeFields = new List<string> { "stream", "data:e" },
-                    Callback = GetDeserializationTypeStreamEvent
-                }
-            }
+            GetIdentity = GetIdentity,
+            //PostInspectCallbacks = new List<object>
+            //{
+            //    new PostInspectCallback
+            //    {
+            //        TypeFields = new List<TypeField> { new TypeField("id") },
+            //        Callback = GetDeserializationTypeQueryResponse
+            //    },
+            //    new PostInspectCallback
+            //    {
+            //        TypeFields = new List<TypeField> { new TypeField("stream"), new TypeField("data:e") },
+            //        Callback = GetDeserializationTypeStreamEvent
+            //    }
+            //}
         };
 
-        private static PostInspectResult GetDeserializationTypeQueryResponse(Dictionary<string, string> idValues, IDictionary<string, IMessageProcessor> processors)
-        {
-            if(!processors.TryGetValue(idValues["id"], out var processor))
-            {
-                // Probably shouldn't be exception
-                throw new Exception("Unknown update type");
-            }
+        private static string GetIdentity(IMessageAccessor accessor)
+        { 
+            var id = accessor.GetStringValue("id");
+            if (id != null)
+                return id;
 
-            return new PostInspectResult { Type = processor.ExpectedMessageType, Identifier = idValues["id"] };
+            return accessor.GetStringValue("stream");
         }
 
-        private static PostInspectResult GetDeserializationTypeStreamEvent(Dictionary<string, string> idValues, IDictionary<string, IMessageProcessor> processors)
-        {
-            var streamId = idValues["stream"]!;
-            if (_streamIdMapping.TryGetValue(streamId, out var streamIdMapping))
-                return new PostInspectResult { Type = streamIdMapping, Identifier = idValues["stream"].ToLowerInvariant() };
+        //private static PostInspectResult GetDeserializationTypeQueryResponse(IMessageAccessor accessor, Dictionary<string, Type> processors)
+        //{
+        //    var id = accessor.GetStringValue("id");
+        //    if(!processors.TryGetValue(id, out var type))
+        //    {
+        //        // Probably shouldn't be exception
+        //        throw new Exception("Unknown update type");
+        //    }
 
-            var eventType = idValues["data:e"]!;
-            if (_eventTypeMapping.TryGetValue(eventType, out var eventTypeMapping))
-                return new PostInspectResult { Type = eventTypeMapping, Identifier = idValues["stream"].ToLowerInvariant() };
+        //    return new PostInspectResult { Type = type, Identifier = id };
+        //}
 
-            // These are single events but don't have an 'e' event identifier
-            if (streamId.EndsWith("@bookTicker")) return new PostInspectResult { Type = typeof(BinanceCombinedStream<BinanceStreamBookPrice>), Identifier = idValues["stream"].ToLowerInvariant() };
-            if (streamId.Contains("@depth")) return new PostInspectResult { Type = typeof(BinanceCombinedStream<BinanceOrderBook>), Identifier = idValues["stream"].ToLowerInvariant() };
+        //private static PostInspectResult GetDeserializationTypeStreamEvent(IMessageAccessor accessor, Dictionary<string, Type> processors)
+        //{
+        //    var streamId = accessor.GetStringValue("stream")!;
+        //    if (_streamIdMapping.TryGetValue(streamId, out var streamIdMapping))
+        //        return new PostInspectResult { Type = streamIdMapping, Identifier = streamId.ToLowerInvariant() };
 
-            return new PostInspectResult();
-        }
+        //    var eventType = accessor.GetStringValue("data:e")!;
+        //    if (_eventTypeMapping.TryGetValue(eventType, out var eventTypeMapping))
+        //        return new PostInspectResult { Type = eventTypeMapping, Identifier = streamId.ToLowerInvariant() };
+
+        //    // These are single events but don't have an 'e' event identifier
+        //    if (streamId.EndsWith("@bookTicker")) return new PostInspectResult { Type = typeof(BinanceCombinedStream<BinanceStreamBookPrice>), Identifier = streamId.ToLowerInvariant() };
+        //    if (streamId.Contains("@depth")) return new PostInspectResult { Type = typeof(BinanceCombinedStream<BinanceOrderBook>), Identifier = streamId.ToLowerInvariant() };
+
+        //    return new PostInspectResult();
+        //}
     }
 }

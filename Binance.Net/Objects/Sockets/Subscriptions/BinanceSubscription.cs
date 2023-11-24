@@ -33,7 +33,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         }
 
         /// <inheritdoc />
-        public override BaseQuery? GetSubQuery()
+        public override BaseQuery? GetSubQuery(SocketConnection connection)
         {
             return new BinanceSystemQuery<BinanceSocketQueryResponse>(new BinanceSocketRequest
             {
@@ -55,9 +55,9 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         }
 
         /// <inheritdoc />
-        public override Task<CallResult> HandleEventAsync(DataEvent<ParsedMessage<T>> message)
+        public override Task<CallResult> HandleEventAsync(SocketConnection connection, DataEvent<ParsedMessage<T>> message)
         {
-            _handler.Invoke(message.As(message.Data.Data!, null, SocketUpdateType.Update));
+            _handler.Invoke(message.As(message.Data.TypedData!, null, SocketUpdateType.Update));
             return Task.FromResult(new CallResult(null));
         }
     }
