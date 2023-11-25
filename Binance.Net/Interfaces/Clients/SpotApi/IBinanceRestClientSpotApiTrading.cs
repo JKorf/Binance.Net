@@ -751,25 +751,6 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<IEnumerable<BinancePayTrade>>> GetPayTradeHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get list all convert pairs
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#list-all-convert-pairs" /></para>
-        /// </summary>
-        /// <param name="quoteAsset">Quote asset</param>
-        /// <param name="baseAsset">Base asset</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BinanceConvertAssetPair>>> GetConvertListAllPairsAsync(string? quoteAsset = null, string? baseAsset = null, CancellationToken ct = default);
-
-        /// <summary>
-        /// Get quantity precision per asset
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-order-quantity-precision-per-asset-user_data" /></para>
-        /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BinanceConvertQuantityPrecisionAsset>>> GetConvertQuantityPrecisionPerAssetAsync(long? receiveWindow = null, CancellationToken ct = default);
-
-        /// <summary>
         /// Request a quote for convert asset (selling asset) for base asset (buying asset)
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#send-quote-request-user_data" /></para>
         /// </summary>

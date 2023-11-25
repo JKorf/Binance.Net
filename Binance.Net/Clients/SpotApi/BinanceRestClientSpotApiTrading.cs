@@ -100,8 +100,6 @@ namespace Binance.Net.Clients.SpotApi
         private const string payTradeHistoryEndpoint = "pay/transactions";
 
         // Convert
-        private const string convertListAllConvertPairsEndpoint = "convert/exchangeInfo";
-        private const string convertQuantityPrecisionPerAssetEndpoint = "convert/assetInfo";
         private const string convertQuoteRequestEndpoint = "convert/getQuote";
         private const string convertAcceptQuoteEndpoint = "convert/acceptQuote";
         private const string convertOrderStatusEndpoint = "convert/orderStatus";
@@ -1251,36 +1249,6 @@ namespace Binance.Net.Clients.SpotApi
         #endregion
 
         #region Convert
-
-        #region Get Convert List All Pairs
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceConvertAssetPair>>> GetConvertListAllPairsAsync(string? quoteAsset = null, string? baseAsset = null, CancellationToken ct = default)
-        {
-            if (quoteAsset == null && baseAsset == null)
-                throw new ArgumentException("Either one or both of the assets must be sent");
-
-            var parameters = new Dictionary<string, object>();
-            parameters.AddOptionalParameter("fromAsset", quoteAsset);
-            parameters.AddOptionalParameter("toAsset", baseAsset);
-
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceConvertAssetPair>>(_baseClient.GetUrl(convertListAllConvertPairsEndpoint, convertApi, convertVersion), HttpMethod.Get, ct, parameters, true, weight: 3000).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region Get Convert Quantity Precision Per Asset
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceConvertQuantityPrecisionAsset>>> GetConvertQuantityPrecisionPerAssetAsync(long? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>();
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceConvertQuantityPrecisionAsset>>(_baseClient.GetUrl(convertQuantityPrecisionPerAssetEndpoint, convertApi, convertVersion), HttpMethod.Get, ct, parameters, true, weight: 100).ConfigureAwait(false);
-        }
-
-        #endregion
 
         #region Convert Quote Request
 
