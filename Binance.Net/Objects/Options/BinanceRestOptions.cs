@@ -34,9 +34,9 @@ namespace Binance.Net.Objects.Options
             RateLimiters = new List<IRateLimiter>
                 {
                     new RateLimiter()
-                        .AddPartialEndpointLimit("/api/", 1200, TimeSpan.FromMinutes(1))
+                        .AddPartialEndpointLimit("/api/", 6000, TimeSpan.FromMinutes(1))
                         .AddPartialEndpointLimit("/sapi/", 180000, TimeSpan.FromMinutes(1))
-                        .AddEndpointLimit("/api/v3/order", 50, TimeSpan.FromSeconds(10), HttpMethod.Post, true)
+                        .AddEndpointLimit("/api/v3/order", 100, TimeSpan.FromSeconds(10), HttpMethod.Post, true)
                 }
         };
 
