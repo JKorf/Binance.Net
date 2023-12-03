@@ -283,6 +283,9 @@
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApi.ParseErrorResponse(System.Int32,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}},System.String)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApi.ParseRateLimitResponse(System.Int32,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}},System.String)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApiAccount">
             <inheritdoc />
         </member>
@@ -623,6 +626,9 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.ParseErrorResponse(System.Int32,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}},System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.ParseRateLimitResponse(System.Int32,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}},System.String)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiBrokerage">
@@ -1086,6 +1092,9 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApi.ParseErrorResponse(System.Int32,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}},System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApi.ParseRateLimitResponse(System.Int32,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}},System.String)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount">
@@ -1896,6 +1905,9 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApi.ParseErrorResponse(System.Int32,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}},System.String)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApi.ParseRateLimitResponse(System.Int32,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}},System.String)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiAccount">
             <inheritdoc />
         </member>
@@ -2396,6 +2408,26 @@
         <member name="F:Binance.Net.Enums.AccountType.TradeGroup023">
             <summary>
             Trade group 23
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup024">
+            <summary>
+            Trade group 24
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup025">
+            <summary>
+            Trade group 25
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup026">
+            <summary>
+            Trade group 26
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup027">
+            <summary>
+            Trade group 27
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.AccountUpdateReason">
