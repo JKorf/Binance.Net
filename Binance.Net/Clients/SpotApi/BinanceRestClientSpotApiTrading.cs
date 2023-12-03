@@ -1264,7 +1264,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("fromAmount", quoteQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("toAmount", baseQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("walletType", walletType != null ? JsonConvert.SerializeObject(walletType, new WalletTypeConverter(false)) : null);
-            parameters.AddOptionalParameter("validTime", validTime != null ? JsonConvert.SerializeObject(validTime, new ValidTimeConverter(false)) : null);
+            parameters.AddOptionalParameter("validTime", EnumConverter.GetString(validTime));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceConvertQuote>(_baseClient.GetUrl(convertQuoteRequestEndpoint, convertApi, convertVersion), HttpMethod.Post, ct, parameters, true, weight: 200).ConfigureAwait(false);
