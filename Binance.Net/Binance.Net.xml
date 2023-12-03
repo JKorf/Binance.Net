@@ -12363,6 +12363,25 @@
             The addresses to connect to binance.us. (binance.us futures not are not available)
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceRateLimitError">
+            <summary>
+            Binance rate limit error
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Objects.BinanceRateLimitError.#ctor(System.String)">
+            <summary>
+            ctor
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Binance.Net.Objects.BinanceRateLimitError.#ctor(System.Nullable{System.Int32},System.String,System.Object)">
+            <summary>
+            ctor
+            </summary>
+            <param name="code"></param>
+            <param name="message"></param>
+            <param name="data"></param>
+        </member>
         <member name="T:Binance.Net.Objects.BinanceResponse`1">
             <summary>
             Binance response
