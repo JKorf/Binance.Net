@@ -14,6 +14,7 @@ using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.BSwap;
+using Binance.Net.Objects.Models.Spot.Convert;
 using Binance.Net.Objects.Models.Spot.IsolatedMargin;
 using Binance.Net.Objects.Models.Spot.Margin;
 using Binance.Net.Objects.Models.Spot.Staking;
@@ -65,6 +66,10 @@ namespace Binance.Net.Clients.SpotApi
         private const string bSwapPoolsEndpoint = "bswap/pools";
         private const string bSwapPoolsConfigureEndpoint = "bswap/poolConfigure";
 
+        //Convert
+        private const string convertListAllConvertPairsEndpoint = "convert/exchangeInfo";
+        private const string convertQuantityPrecisionPerAssetEndpoint = "convert/assetInfo";
+
         private const string api = "api";
         private const string publicVersion = "3";
 
@@ -76,6 +81,9 @@ namespace Binance.Net.Clients.SpotApi
 
         private const string bSwapApi = "sapi";
         private const string bSwapVersion = "1";
+
+        private const string convertApi = "sapi";
+        private const string convertVersion = "1";
 
         private readonly ILogger _logger;
 
@@ -708,6 +716,40 @@ namespace Binance.Net.Clients.SpotApi
 
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceMarginDelistSchedule>>(_baseClient.GetUrl("margin/delist-schedule", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 100).ConfigureAwait(false);
         }
+
+        #endregion
+
+        #region Convert
+
+        #region Get Convert List All Pairs
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceConvertAssetPair>>> GetConvertListAllPairsAsync(string? quoteAsset = null, string? baseAsset = null, CancellationToken ct = default)
+        {
+            if (quoteAsset == null && baseAsset == null)
+                throw new ArgumentException("Either one or both of the assets must be sent");
+
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("fromAsset", quoteAsset);
+            parameters.AddOptionalParameter("toAsset", baseAsset);
+
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceConvertAssetPair>>(_baseClient.GetUrl(convertListAllConvertPairsEndpoint, convertApi, convertVersion), HttpMethod.Get, ct, parameters, true, weight: 3000).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Convert Quantity Precision Per Asset
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceConvertQuantityPrecisionAsset>>> GetConvertQuantityPrecisionPerAssetAsync(long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceConvertQuantityPrecisionAsset>>(_baseClient.GetUrl(convertQuantityPrecisionPerAssetEndpoint, convertApi, convertVersion), HttpMethod.Get, ct, parameters, true, weight: 100).ConfigureAwait(false);
+        }
+
+        #endregion
 
         #endregion
     }
