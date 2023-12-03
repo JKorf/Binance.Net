@@ -1454,6 +1454,12 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetMarginDelistScheduleAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetConvertListAllPairsAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetConvertQuantityPrecisionPerAssetAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading">
             <inheritdoc />
         </member>
@@ -1587,6 +1593,15 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.GetPayTradeHistoryAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.ConvertQuoteRequestAsync(System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WalletType},System.Nullable{Binance.Net.Enums.ValidTime},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.ConvertAcceptQuoteAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.GetConvertOrderStatusAsync(System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.GetConvertTradeHistoryAsync(System.DateTime,System.DateTime,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
@@ -2867,6 +2882,31 @@
         <member name="F:Binance.Net.Enums.ContractType.Unknown">
             <summary>
             Unknown
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.ConvertOrderStatus">
+            <summary>
+            Convert Order status
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.ConvertOrderStatus.Process">
+            <summary>
+            Process
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.ConvertOrderStatus.AcceptSuccess">
+            <summary>
+            Accept success
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.ConvertOrderStatus.Success">
+            <summary>
+            Success
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.ConvertOrderStatus.Fail">
+            <summary>
+            Fail
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.DepositStatus">
@@ -4732,6 +4772,31 @@
         <member name="F:Binance.Net.Enums.UniversalTransferType.OptionToFunding">
             <summary>
             Option to Funding
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.ValidTime">
+            <summary>
+            Valid Time
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.ValidTime.TenSeconds">
+            <summary>
+            10 seconds
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.ValidTime.ThirtySeconds">
+            <summary>
+            30 seconds
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.ValidTime.OneMinute">
+            <summary>
+            1 minute
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.ValidTime.TwoMinutes">
+            <summary>
+            2 minutes
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.WalletType">
@@ -8923,6 +8988,25 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetConvertListAllPairsAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get list all convert pairs
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#list-all-convert-pairs" /></para>
+            </summary>
+            <param name="quoteAsset">Quote asset</param>
+            <param name="baseAsset">Base asset</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetConvertQuantityPrecisionPerAssetAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get quantity precision per asset
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-order-quantity-precision-per-asset-user_data" /></para>
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading">
             <summary>
             Binance Spot trading endpoints, placing and mananging orders.
@@ -9553,6 +9637,42 @@
             <param name="limit">Max amount of results</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.ConvertQuoteRequestAsync(System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WalletType},System.Nullable{Binance.Net.Enums.ValidTime},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Request a quote for convert asset (selling asset) for base asset (buying asset)
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#send-quote-request-user_data" /></para>
+            </summary>
+            <param name="quoteAsset">Quote asset</param>
+            <param name="baseAsset">Base asset</param>
+            <param name="quoteQuantity">Quote quantity</param>
+            <param name="baseQuantity">Quote quantity</param>
+            <param name="walletType">The wallet type for convert</param>
+            <param name="validTime">The valid time for quote</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.ConvertAcceptQuoteAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Accept the previously requested quote
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#accept-quote-trade" /></para>
+            </summary>
+            <param name="quoteId">The quote id of the order</param>
+            <param name="receiveWindow"></param>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.GetConvertOrderStatusAsync(System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get convert order status
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#order-status-user_data" /></para>
+            </summary>
+            <param name="orderId">The order id of the order</param>
+            <param name="quoteId">The quote id of the order</param>
+            <param name="receiveWindow"></param>
+            <param name="ct"></param>
             <returns></returns>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.GetConvertTradeHistoryAsync(System.DateTime,System.DateTime,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
@@ -14018,61 +14138,6 @@
             Status
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.BinanceConvertTrade">
-            <summary>
-            Convert trade info
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.QuoteId">
-            <summary>
-            Quote id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.OrderId">
-            <summary>
-            Order id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.OrderStatus">
-            <summary>
-            Order status
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.FromAsset">
-            <summary>
-            From asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.FromQuantity">
-            <summary>
-            From quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.ToAsset">
-            <summary>
-            To asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.ToQuantity">
-            <summary>
-            To quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.Ratio">
-            <summary>
-            Price ratio
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.InverseRatio">
-            <summary>
-            Inverse price ratio
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.CreateTime">
-            <summary>
-            Creation time
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceDepositAddress">
             <summary>
             Deposit address info
@@ -18217,6 +18282,216 @@
         <member name="P:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferResult.Status">
             <summary>
             Status of the transfer (definitions currently unknown)
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertAssetPair">
+            <summary>
+            Convert Pairs
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertAssetPair.QuoteAsset">
+            <summary>
+            Quote asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertAssetPair.BaseAsset">
+            <summary>
+            Base asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertAssetPair.QuoteAssetMinQuantity">
+            <summary>
+            Quote asset min quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertAssetPair.QuoteAssetMaxQuantity">
+            <summary>
+            Quote asset max quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertAssetPair.BaseAssetMinQuantity">
+            <summary>
+            Base asset min quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertAssetPair.BaseAssetMaxQuantity">
+            <summary>
+            Base asset max quantity
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertOrderStatus">
+            <summary>
+            Convert trade info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertOrderStatus.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertOrderStatus.Status">
+            <summary>
+            Order status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertOrderStatus.QuoteAsset">
+            <summary>
+            Quote asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertOrderStatus.QuoteQuantity">
+            <summary>
+            Quote quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertOrderStatus.BaseAsset">
+            <summary>
+            Base asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertOrderStatus.BaseQuantity">
+            <summary>
+            Base quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertOrderStatus.Ratio">
+            <summary>
+            Price ratio
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertOrderStatus.InverseRatio">
+            <summary>
+            Inverse price ratio
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertOrderStatus.CreateTime">
+            <summary>
+            Creation time
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertQuantityPrecisionAsset">
+            <summary>
+            Precision per asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertQuantityPrecisionAsset.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertQuantityPrecisionAsset.Fraction">
+            <summary>
+            Fraction
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertQuote">
+            <summary>
+            Convert Quote
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertQuote.QuoteId">
+            <summary>
+            Quote id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertQuote.Ratio">
+            <summary>
+            Price ratio
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertQuote.InverseRatio">
+            <summary>
+            Inverse price ratio
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertQuote.ValidTimestamp">
+            <summary>
+            Valid Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertQuote.BaseQuantity">
+            <summary>
+            Base quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertQuote.QuoteQuantity">
+            <summary>
+            Quote quantity
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertResult">
+            <summary>
+            Convert Quote
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertResult.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertResult.CreateTime">
+            <summary>
+            Creation time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertResult.Status">
+            <summary>
+            Order status
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertTrade">
+            <summary>
+            Convert trade info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertTrade.QuoteId">
+            <summary>
+            Quote id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertTrade.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertTrade.Status">
+            <summary>
+            Order status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertTrade.QuoteAsset">
+            <summary>
+            Quote asset 
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertTrade.QuoteQuantity">
+            <summary>
+            Quote quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertTrade.BaseAsset">
+            <summary>
+            Base asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertTrade.BaseQuantity">
+            <summary>
+            Base quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertTrade.Ratio">
+            <summary>
+            Price ratio
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertTrade.InverseRatio">
+            <summary>
+            Inverse price ratio
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertTrade.CreateTime">
+            <summary>
+            Creation time
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralAdjustLtvHistory">
