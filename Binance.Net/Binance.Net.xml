@@ -12410,6 +12410,21 @@
             <param name="message"></param>
             <param name="data"></param>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceResponse">
+            <summary>
+            Binance response
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceResponse.Id">
+            <summary>
+            Identifier
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceResponse.Ratelimits">
+            <summary>
+            Rate limit info
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.BinanceResponse`1">
             <summary>
             Binance response
@@ -12419,11 +12434,6 @@
         <member name="P:Binance.Net.Objects.BinanceResponse`1.Result">
             <summary>
             Data result
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceResponse`1.Ratelimits">
-            <summary>
-            Rate limit info
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Binance24HPriceBase">
