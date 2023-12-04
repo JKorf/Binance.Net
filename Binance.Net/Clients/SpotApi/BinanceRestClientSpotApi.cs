@@ -180,7 +180,7 @@ namespace Binance.Net.Clients.SpotApi
             Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
             ArrayParametersSerialization? arraySerialization = null, int weight = 1, bool ignoreRateLimit = false) where T : class
         {
-            var result = await SendRequestAsync<T>(uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight, ignoreRatelimit: ignoreRateLimit).ConfigureAwait(false);
+            var result = await SendRequestAsync<T>(uri, method, cancellationToken, parameters, signed, null, postPosition, arraySerialization, weight, ignoreRatelimit: ignoreRateLimit).ConfigureAwait(false);
             if (!result && result.Error!.Code == -1021 && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
             {
                 _logger.Log(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
@@ -193,7 +193,7 @@ namespace Binance.Net.Clients.SpotApi
             Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
             ArrayParametersSerialization? arraySerialization = null, int weight = 1, bool ignoreRateLimit = false)
         {
-            var result = await SendRequestAsync(uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight, ignoreRatelimit: ignoreRateLimit).ConfigureAwait(false);
+            var result = await SendRequestAsync(uri, method, cancellationToken, parameters, signed, null, postPosition, arraySerialization, weight, ignoreRatelimit: ignoreRateLimit).ConfigureAwait(false);
             if (!result && result.Error!.Code == -1021 && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
             {
                 _logger.Log(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
@@ -569,6 +569,40 @@ namespace Binance.Net.Clients.SpotApi
                 return new ServerError((string)errorData.Data["msg"]!);
 
             return new ServerError((int)errorData.Data["code"]!, (string)errorData.Data["msg"]!);
+        }
+
+        /// <inheritdoc />
+        protected override Error ParseRateLimitResponse(int httpStatusCode, IEnumerable<KeyValuePair<string, IEnumerable<string>>> responseHeaders, string data)
+        {
+            var error = GetRateLimitError(data);
+            var retryAfterHeader = responseHeaders.SingleOrDefault(r => r.Key.Equals("Retry-After", StringComparison.InvariantCultureIgnoreCase));
+            if (retryAfterHeader.Value?.Any() != true)
+                return error;
+
+            var value = retryAfterHeader.Value.First();
+            if (!int.TryParse(value, out var seconds))
+                return error;
+
+            error.RetryAfter = DateTime.UtcNow.AddSeconds(seconds);
+            return error;
+        }
+
+        private BinanceRateLimitError GetRateLimitError(string data)
+        {
+            var errorData = ValidateJson(data);
+            if (!errorData)
+                return new BinanceRateLimitError(data);
+
+            if (!errorData.Data.HasValues)
+                return new BinanceRateLimitError(errorData.Data.ToString());
+
+            if (errorData.Data["msg"] == null && errorData.Data["code"] == null)
+                return new BinanceRateLimitError(errorData.Data.ToString());
+
+            if (errorData.Data["msg"] != null && errorData.Data["code"] == null)
+                return new BinanceRateLimitError((string)errorData.Data["msg"]!);
+
+            return new BinanceRateLimitError((int)errorData.Data["code"]!, (string)errorData.Data["msg"]!, null);
         }
     }
 }

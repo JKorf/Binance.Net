@@ -30,6 +30,12 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 9.2.0 - 03 Dec 2023
+    * Added Convert endpoints
+    * Updated default ratelimits
+    * Fixed handling of ratelimit errors
+    * Added missing trade group enum values
+
 * Version 9.1.7 - 24 Nov 2023
     * Added missing BreakEvenPrice property on PositionInfo model
     * Fixed deserialization issue on ratelimiters socket client GetExchangeInfoAsync

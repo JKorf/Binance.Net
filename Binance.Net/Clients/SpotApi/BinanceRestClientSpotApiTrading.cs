@@ -12,6 +12,7 @@ using Binance.Net.Objects.Models.Futures.AlgoOrders;
 using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.BSwap;
+using Binance.Net.Objects.Models.Spot.Convert;
 using Binance.Net.Objects.Models.Spot.ConvertTransfer;
 using Binance.Net.Objects.Models.Spot.Margin;
 using CryptoExchange.Net;
@@ -37,6 +38,9 @@ namespace Binance.Net.Clients.SpotApi
 
         private const string bSwapApi = "sapi";
         private const string bSwapVersion = "1";
+
+        private const string convertApi = "sapi";
+        private const string convertVersion = "1";
 
         // Orders
         private const string openOrdersEndpoint = "openOrders";
@@ -96,6 +100,9 @@ namespace Binance.Net.Clients.SpotApi
         private const string payTradeHistoryEndpoint = "pay/transactions";
 
         // Convert
+        private const string convertQuoteRequestEndpoint = "convert/getQuote";
+        private const string convertAcceptQuoteEndpoint = "convert/acceptQuote";
+        private const string convertOrderStatusEndpoint = "convert/orderStatus";
         private const string convertTradeHistoryEndpoint = "convert/tradeFlow";
 
         // Convert transfer
@@ -1243,6 +1250,62 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Convert
 
+        #region Convert Quote Request
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceConvertQuote>> ConvertQuoteRequestAsync(string quoteAsset, string baseAsset, decimal? quoteQuantity = null, decimal? baseQuantity = null, WalletType? walletType = null, ValidTime? validTime = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            if (quoteQuantity == null && baseQuantity == null || quoteQuantity != null && baseQuantity != null)
+                throw new ArgumentException("Either quoteQuantity or baseQuantity must be sent, but not both");
+
+            var parameters = new Dictionary<string, object>();
+            parameters.AddParameter("fromAsset", quoteAsset);
+            parameters.AddParameter("toAsset", baseAsset);
+            parameters.AddOptionalParameter("fromAmount", quoteQuantity?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("toAmount", baseQuantity?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("walletType", walletType != null ? JsonConvert.SerializeObject(walletType, new WalletTypeConverter(false)) : null);
+            parameters.AddOptionalParameter("validTime", EnumConverter.GetString(validTime));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceConvertQuote>(_baseClient.GetUrl(convertQuoteRequestEndpoint, convertApi, convertVersion), HttpMethod.Post, ct, parameters, true, weight: 200).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Convert Accept Quote
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceConvertResult>> ConvertAcceptQuoteAsync(string quoteId, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddParameter("quoteId", quoteId);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceConvertResult>(_baseClient.GetUrl(convertAcceptQuoteEndpoint, convertApi, convertVersion), HttpMethod.Post, ct, parameters, true, weight: 500).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Convert Order Status
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceConvertOrderStatus>> GetConvertOrderStatusAsync(string? orderId = null, string? quoteId = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            if (orderId == null && quoteId == null || orderId != null && quoteId != null)
+                throw new ArgumentException("Either orderId or quoteId must be sent, but not both");
+
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("orderId", orderId);
+            parameters.AddOptionalParameter("quoteId", quoteId);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<BinanceConvertOrderStatus>(_baseClient.GetUrl(convertOrderStatusEndpoint, convertApi, convertVersion), HttpMethod.Get, ct, parameters, true, weight: 100).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Convert Trade History
+
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceListResult<BinanceConvertTrade>>> GetConvertTradeHistoryAsync(DateTime startTime, DateTime endTime, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
@@ -1252,8 +1315,10 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceListResult<BinanceConvertTrade>>(_baseClient.GetUrl(convertTradeHistoryEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true, weight: 100).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceListResult<BinanceConvertTrade>>(_baseClient.GetUrl(convertTradeHistoryEndpoint, convertApi, convertVersion), HttpMethod.Get, ct, parameters, true, weight: 3000).ConfigureAwait(false);
         }
+
+        #endregion
 
         #endregion
 

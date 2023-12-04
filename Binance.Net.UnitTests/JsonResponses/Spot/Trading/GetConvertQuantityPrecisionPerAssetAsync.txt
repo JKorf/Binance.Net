@@ -1,0 +1,10 @@
+[
+  {
+    "asset": "BTC", 
+    "fraction": 8
+  },
+  {
+    "asset": "SHIB", 
+    "fraction": 2
+  }
+]
