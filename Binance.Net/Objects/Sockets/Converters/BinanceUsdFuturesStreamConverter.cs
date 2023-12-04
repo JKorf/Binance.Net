@@ -55,19 +55,19 @@ namespace Binance.Net.Objects.Sockets.Converters
 
         public override MessageInterpreterPipeline InterpreterPipeline { get; } = new MessageInterpreterPipeline
         {
-            PostInspectCallbacks = new List<object>
-            {
-                new PostInspectCallback
-                {
-                    TypeFields = new List<TypeField> { new TypeField("id") },
-                    Callback = GetDeserializationTypeQueryResponse
-                },
-                new PostInspectCallback
-                {
-                    TypeFields = new List<TypeField> { new TypeField("stream"), new TypeField("data:e") },
-                    Callback = GetDeserializationTypeStreamEvent
-                }
-            }
+            //PostInspectCallbacks = new List<object>
+            //{
+            //    new PostInspectCallback
+            //    {
+            //        TypeFields = new List<TypeField> { new TypeField("id") },
+            //        Callback = GetDeserializationTypeQueryResponse
+            //    },
+            //    new PostInspectCallback
+            //    {
+            //        TypeFields = new List<TypeField> { new TypeField("stream"), new TypeField("data:e") },
+            //        Callback = GetDeserializationTypeStreamEvent
+            //    }
+            //}
         };
 
         public static PostInspectResult GetDeserializationTypeQueryResponse(IMessageAccessor accessor, Dictionary<string, Type> processors)
