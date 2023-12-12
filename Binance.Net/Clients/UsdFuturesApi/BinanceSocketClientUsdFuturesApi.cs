@@ -8,7 +8,6 @@ using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
-using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures.Socket;
 using Binance.Net.Objects.Models.Spot.Socket;
@@ -24,7 +23,6 @@ using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Binance.Net.Clients.UsdFuturesApi
 {
@@ -54,7 +52,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         private const string depthStreamEndpoint = "@depth";
 
         /// <inheritdoc />
-        public override SocketConverter StreamConverter => new BinanceUsdFuturesStreamConverter();
+        public override SocketConverter StreamConverter => new BinanceStreamConverter();
         #endregion
 
         #region constructor/destructor

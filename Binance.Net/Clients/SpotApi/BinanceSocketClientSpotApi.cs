@@ -19,8 +19,6 @@ using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -47,7 +45,7 @@ namespace Binance.Net.Clients.SpotApi
         public IBinanceSocketClientSpotApiTrading Trading { get; }
 
         /// <inheritdoc />
-        public override SocketConverter StreamConverter => new BinanceSpotStreamConverter();
+        public override SocketConverter StreamConverter => new BinanceStreamConverter();
 
         #region constructor/destructor
 
@@ -104,11 +102,6 @@ namespace Binance.Net.Clients.SpotApi
 
             var query = new BinanceSpotQuery<BinanceResponse<T>>(request, false, weight);
             return QueryAsync(url, query);
-        }
-
-        internal CallResult<T> DeserializeInternal<T>(JToken obj, JsonSerializer? serializer = null, int? requestId = null)
-        {
-            return base.Deserialize<T>(obj, serializer, requestId);
         }
 
         /// <inheritdoc />

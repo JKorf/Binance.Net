@@ -8,7 +8,6 @@ using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients.CoinFuturesApi;
-using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures.Socket;
@@ -55,7 +54,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         private const string depthStreamEndpoint = "@depth";
 
         /// <inheritdoc />
-        public override SocketConverter StreamConverter => new BinanceCoinFuturesStreamConverter();
+        public override SocketConverter StreamConverter => new BinanceStreamConverter();
         #endregion
 
         #region constructor/destructor

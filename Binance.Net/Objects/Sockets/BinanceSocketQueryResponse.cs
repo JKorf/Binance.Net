@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Binance.Net.Objects.Sockets
+﻿namespace Binance.Net.Objects.Sockets
 {
     public class BinanceSocketQueryResponse
     {

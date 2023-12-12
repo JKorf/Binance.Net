@@ -4,7 +4,7 @@ using CryptoExchange.Net.Objects.Sockets;
 
 namespace Binance.Net.Objects.Sockets.Converters
 {
-    internal class BinanceSpotStreamConverter : SocketConverter
+    internal class BinanceStreamConverter : SocketConverter
     {
         public override MessageInterpreterPipeline InterpreterPipeline { get; } = new MessageInterpreterPipeline
         {

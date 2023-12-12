@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Threading.Tasks;
 using System.Threading;
@@ -8,11 +7,9 @@ using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using System.Collections.Generic;
 using Binance.Net.Objects.Models.Spot;
-using CryptoExchange.Net.Converters;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
-using Binance.Net.Objects.Sockets;
 using Binance.Net.Objects.Sockets.Subscriptions;
 
 namespace Binance.Net.Clients.SpotApi
@@ -20,11 +17,6 @@ namespace Binance.Net.Clients.SpotApi
     /// <inheritdoc />
     public class BinanceSocketClientSpotApiAccount : IBinanceSocketClientSpotApiAccount
     {
-        private const string executionUpdateEvent = "executionReport";
-        private const string ocoOrderUpdateEvent = "listStatus";
-        private const string accountPositionUpdateEvent = "outboundAccountPosition";
-        private const string balanceUpdateEvent = "balanceUpdate";
-
         private readonly BinanceSocketClientSpotApi _client;
 
         private readonly ILogger _logger;

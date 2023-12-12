@@ -8,7 +8,6 @@ using Binance.Net.Enums;
 using Binance.Net.Converters;
 using Newtonsoft.Json;
 using System.Globalization;
-using System.Net.Http;
 using System;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
