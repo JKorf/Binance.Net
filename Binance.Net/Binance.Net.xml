@@ -1832,7 +1832,7 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiTrading.GetOrderAsync(System.String,System.Nullable{System.Int32},System.String)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiTrading.CancelOrderAsync(System.String,System.Nullable{System.Int32},System.String,System.String)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiTrading.CancelOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.String)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiTrading.ReplaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,Binance.Net.Enums.CancelReplaceMode,System.Nullable{System.Int64},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})">
@@ -10373,7 +10373,7 @@
             <param name="symbol">Filter by symbols</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.GetOrderAsync(System.String,System.Nullable{System.Int32},System.String)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.GetOrderAsync(System.String,System.Nullable{System.Int64},System.String)">
             <summary>
             Get order by either orderId or clientOrderId
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#query-order-user_data" /></para>
