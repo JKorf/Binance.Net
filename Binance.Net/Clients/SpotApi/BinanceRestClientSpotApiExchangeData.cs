@@ -726,9 +726,6 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceConvertAssetPair>>> GetConvertListAllPairsAsync(string? quoteAsset = null, string? baseAsset = null, CancellationToken ct = default)
         {
-            if (quoteAsset == null && baseAsset == null)
-                throw new ArgumentException("Either one or both of the assets must be sent");
-
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("fromAsset", quoteAsset);
             parameters.AddOptionalParameter("toAsset", baseAsset);
