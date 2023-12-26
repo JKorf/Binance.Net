@@ -83,7 +83,7 @@ namespace Binance.Net.Objects.Sockets
         }
     
         /// <inheritdoc />
-        public override Task<CallResult> HandleEventAsync(SocketConnection connection, DataEvent<ParsedMessage<BinanceCombinedStream<BinanceStreamEvent>>> message)
+        public override Task<CallResult> DoHandleEventAsync(SocketConnection connection, DataEvent<ParsedMessage<BinanceCombinedStream<BinanceStreamEvent>>> message)
         {
             var data = message.Data.TypedData.Data;
             if (data is BinanceFuturesStreamConfigUpdate configUpdate)

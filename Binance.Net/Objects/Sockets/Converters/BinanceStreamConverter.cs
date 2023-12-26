@@ -8,7 +8,7 @@ namespace Binance.Net.Objects.Sockets.Converters
     {
         public override MessageInterpreterPipeline InterpreterPipeline { get; } = new MessageInterpreterPipeline
         {
-            GetIdentity = GetIdentity
+            GetStreamIdentifier = GetIdentity
         };
 
         private static string? GetIdentity(IMessageAccessor accessor)
