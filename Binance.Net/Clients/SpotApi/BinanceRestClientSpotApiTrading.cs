@@ -157,6 +157,7 @@ namespace Binance.Net.Clients.SpotApi
                 strategyId,
                 strategyType,
                 selfTradePreventionMode,
+                null,
                 receiveWindow,
                 1,
                 ct).ConfigureAwait(false);
