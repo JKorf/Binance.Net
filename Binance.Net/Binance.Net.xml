@@ -15370,24 +15370,89 @@
             Amount of coins in circulation
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Tags">
+            <summary>
+            Tags
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.LeveragedTokenTrading">
+            <summary>
+            Is Etf enabled
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.I">
             <summary>
-            Amount of coins in circulation
+            
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Ts">
             <summary>
-            Amount of coins in circulation
+            
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Y">
             <summary>
-            Amount of coins in circulation
+            
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.As">
             <summary>
-            Amount of coins in circulation
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Pn">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Pm">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Pom">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Pomt">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Lc">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.G">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Sd">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.R">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Hd">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Rb">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Ks">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceRebateWrapper">
