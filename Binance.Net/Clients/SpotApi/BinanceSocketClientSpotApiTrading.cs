@@ -123,7 +123,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Order
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceOrder>>> GetOrderAsync(string symbol, int? orderId = null, string? clientOrderId = null)
+        public async Task<CallResult<BinanceResponse<BinanceOrder>>> GetOrderAsync(string symbol, long? orderId = null, string? clientOrderId = null)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("symbol", symbol);
@@ -137,7 +137,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Cancel Order
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceOrder>>> CancelOrderAsync(string symbol, int? orderId = null, string? clientOrderId = null, string? newClientOrderId = null)
+        public async Task<CallResult<BinanceResponse<BinanceOrder>>> CancelOrderAsync(string symbol, long? orderId = null, string? clientOrderId = null, string? newClientOrderId = null)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("symbol", symbol);

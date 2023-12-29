@@ -1514,7 +1514,7 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.GetUserTradesAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.PlaceMarginOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.SideEffectType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.PlaceMarginOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.SideEffectType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.CancelMarginOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
@@ -1829,10 +1829,10 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiTrading.PlaceTestOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode})">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiTrading.GetOrderAsync(System.String,System.Nullable{System.Int32},System.String)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiTrading.GetOrderAsync(System.String,System.Nullable{System.Int64},System.String)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiTrading.CancelOrderAsync(System.String,System.Nullable{System.Int32},System.String,System.String)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiTrading.CancelOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.String)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiTrading.ReplaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,Binance.Net.Enums.CancelReplaceMode,System.Nullable{System.Int64},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})">
@@ -9267,7 +9267,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of trades</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.PlaceMarginOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.SideEffectType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.PlaceMarginOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.SideEffectType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Margin account new order
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#margin-account-new-order-trade" /></para>
@@ -9285,6 +9285,8 @@
             <param name="sideEffectType">Side effect type for this order</param>
             <param name="isIsolated">For isolated margin or not</param>
             <param name="orderResponseType">Used for the response JSON</param>
+            <param name="selfTradePreventionMode">Self trade prevention mode</param>
+            <param name="autoRepayAtCancel">Only when MARGIN_BUY or AUTO_BORROW_REPAY order takes effect, true means that the debt generated by the order needs to be repay after the order is cancelled. The default is true</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
@@ -10327,7 +10329,7 @@
             <param name="newClientOrderId">New client order id for the order</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.CancelOrderAsync(System.String,System.Nullable{System.Int32},System.String,System.String)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.CancelOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.String)">
             <summary>
             Cancel an order by either orderId or clientOrderId
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#cancel-order-trade" /></para>
@@ -10373,7 +10375,7 @@
             <param name="symbol">Filter by symbols</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.GetOrderAsync(System.String,System.Nullable{System.Int32},System.String)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.GetOrderAsync(System.String,System.Nullable{System.Int64},System.String)">
             <summary>
             Get order by either orderId or clientOrderId
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#query-order-user_data" /></para>
@@ -15370,24 +15372,89 @@
             Amount of coins in circulation
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Tags">
+            <summary>
+            Tags
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.LeveragedTokenTrading">
+            <summary>
+            Is Etf enabled
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.I">
             <summary>
-            Amount of coins in circulation
+            
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Ts">
             <summary>
-            Amount of coins in circulation
+            
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Y">
             <summary>
-            Amount of coins in circulation
+            
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.As">
             <summary>
-            Amount of coins in circulation
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Pn">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Pm">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Pom">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Pomt">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Lc">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.G">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Sd">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.R">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Hd">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Rb">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Ks">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceRebateWrapper">
@@ -25955,6 +26022,16 @@
         <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionDetailsUsdt.MaxNotional">
             <summary>
             Max notional
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionDetailsUsdt.Notional">
+            <summary>
+            Notional value
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionDetailsUsdt.IsolatedWallet">
+            <summary>
+            Isolated wallet
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinancePositionDetailsCoin">

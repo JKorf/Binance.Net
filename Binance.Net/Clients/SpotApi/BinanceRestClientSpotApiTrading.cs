@@ -157,6 +157,7 @@ namespace Binance.Net.Clients.SpotApi
                 strategyId,
                 strategyType,
                 selfTradePreventionMode,
+                null,
                 receiveWindow,
                 1,
                 ct).ConfigureAwait(false);
@@ -203,6 +204,7 @@ namespace Binance.Net.Clients.SpotApi
                 strategyId,
                 strategyType,
                 selfTradePreventionMode,
+                null,
                 receiveWindow,
                 1,
                 ct).ConfigureAwait(false);
@@ -584,7 +586,7 @@ namespace Binance.Net.Clients.SpotApi
 
         /// <inheritdoc />
         public async Task<WebCallResult<BinancePlacedOrder>> PlaceMarginOrderAsync(string symbol,
-            Enums.OrderSide side,
+            OrderSide side,
             SpotOrderType type,
             decimal? quantity = null,
             decimal? quoteQuantity = null,
@@ -596,6 +598,8 @@ namespace Binance.Net.Clients.SpotApi
             SideEffectType? sideEffectType = null,
             bool? isIsolated = null,
             OrderResponseType? orderResponseType = null,
+            SelfTradePreventionMode? selfTradePreventionMode = null,
+            bool? autoRepayAtCancel = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -616,7 +620,8 @@ namespace Binance.Net.Clients.SpotApi
                 null,
                 null,
                 null,
-                null,
+                selfTradePreventionMode,
+                autoRepayAtCancel,
                 receiveWindow,
                 weight: 6,
                 ct).ConfigureAwait(false);

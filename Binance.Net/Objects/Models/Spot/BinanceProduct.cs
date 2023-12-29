@@ -1,4 +1,7 @@
 ﻿using Newtonsoft.Json;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Binance.Net.Objects.Models.Spot
 {
@@ -88,26 +91,91 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonProperty("cs")]
         public decimal? CirculatingSupply { get; set; }
+        /// <summary>
+        /// Tags
+        /// </summary>
+        [JsonProperty("tags")]
+        public IEnumerable<string> Tags { get; set; } = Array.Empty<string>();
+        /// <summary>
+        /// Is Etf enabled
+        /// </summary>
+        [JsonProperty("etf")]
+        public bool? LeveragedTokenTrading { get; set; }
 
         /// <summary>
-        /// Amount of coins in circulation
+        /// 
         /// </summary>
         [JsonProperty("i")]
         public decimal? I { get; set; }
         /// <summary>
-        /// Amount of coins in circulation
+        /// 
         /// </summary>
         [JsonProperty("ts")]
         public decimal? Ts { get; set; }
         /// <summary>
-        /// Amount of coins in circulation
+        /// 
         /// </summary>
         [JsonProperty("y")]
         public decimal? Y { get; set; }
         /// <summary>
-        /// Amount of coins in circulation
+        /// 
         /// </summary>
         [JsonProperty("as")]
         public decimal? As { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("pn")]
+        public string? Pn { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("pm")]
+        public string? Pm { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("pom")]
+        public bool? Pom { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("pomt")]
+        public bool? Pomt { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("lc")]
+        public bool? Lc { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("g")]
+        public bool? G { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("sd")]
+        public bool? Sd { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("r")]
+        public bool? R { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("hd")]
+        public bool? Hd { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("rb")]
+        public bool? Rb { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("ks")]
+        public bool? Ks { get; set; }
     }
 }

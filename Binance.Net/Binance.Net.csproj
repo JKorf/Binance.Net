@@ -7,9 +7,9 @@
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
     <Authors>JKorf</Authors>
-    <PackageVersion>9.2.0</PackageVersion>
-    <AssemblyVersion>9.2.0</AssemblyVersion>
-    <FileVersion>9.2.0</FileVersion>
+    <PackageVersion>9.3.0</PackageVersion>
+    <AssemblyVersion>9.3.0</AssemblyVersion>
+    <FileVersion>9.3.0</FileVersion>
     <Description>Binance.Net is a .Net wrapper for the Binance API, including Binance Futures. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance Binance.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
@@ -21,7 +21,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>9.2.0 - Added Convert endpoints, Updated default ratelimits, Fixed handling of ratelimit errors, Added missing trade group enum values</PackageReleaseNotes>
+    <PackageReleaseNotes>9.3.0 - Added selfTradePreventionMode and autoRepayAtCancel parameters to SpotApi.Trading.PlaceMarginOrderAsync, Updated SpotApi.ExchangeData.GetProductsAsync response model, Updated Usdt futures position model, Updated orderId parameter to long type on socket client SpotApi.Trading.GetOrderAsync and SpotApi.Trading.CancelOrderAsync</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup Label="Deterministic Build" Condition="'$(Configuration)' == 'Release'">
     <PublishRepositoryUrl>true</PublishRepositoryUrl>

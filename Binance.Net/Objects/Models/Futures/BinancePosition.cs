@@ -163,6 +163,16 @@ namespace Binance.Net.Objects.Models.Futures
         /// </summary>
         [JsonProperty("maxNotionalValue")]
         public decimal MaxNotional { get; set; }
+        /// <summary>
+        /// Notional value
+        /// </summary>
+        [JsonProperty("notional")]
+        public decimal Notional { get; set; }
+        /// <summary>
+        /// Isolated wallet
+        /// </summary>
+        [JsonProperty("isolatedWallet")]
+        public decimal IsolatedWallet { get; set; }
     }
 
     /// <summary>

@@ -39,7 +39,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="clientOrderId">Client order id</param>
         /// <param name="newClientOrderId">New client order id for the order</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<BinanceOrder>>> CancelOrderAsync(string symbol, int? orderId = null, string? clientOrderId = null, string? newClientOrderId = null);
+        Task<CallResult<BinanceResponse<BinanceOrder>>> CancelOrderAsync(string symbol, long? orderId = null, string? clientOrderId = null, string? newClientOrderId = null);
         /// <summary>
         /// Get an oco order by either orderId or clientOrderId
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#account-oco-history-user_data" /></para>
@@ -79,7 +79,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="orderId">Order id</param>
         /// <param name="clientOrderId">Client order id</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<BinanceOrder>>> GetOrderAsync(string symbol, int? orderId = null, string? clientOrderId = null);
+        Task<CallResult<BinanceResponse<BinanceOrder>>> GetOrderAsync(string symbol, long? orderId = null, string? clientOrderId = null);
         /// <summary>
         /// Get order history
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#account-order-history-user_data" /></para>
