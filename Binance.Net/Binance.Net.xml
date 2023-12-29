@@ -862,7 +862,7 @@
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSavings.RedeemFlexibleProductAsync(System.String,System.Decimal,Binance.Net.Enums.RedeemType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSavings.GetFlexibleProductPositionAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSavings.GetFlexibleProductPositionAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSavings.GetFixedAndCustomizedFixedProjectListAsync(Binance.Net.Enums.ProjectType,System.String,System.Nullable{Binance.Net.Enums.ProductStatus},System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
@@ -6938,7 +6938,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSavings.GetFlexibleProductPositionAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSavings.GetFlexibleProductPositionAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get flexible product position
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-product-position-user_data" /></para>
@@ -14189,6 +14189,61 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceCloudMiningHistory.Status">
             <summary>
             Status
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceConvertTrade">
+            <summary>
+            Convert trade info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.QuoteId">
+            <summary>
+            Quote id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.OrderStatus">
+            <summary>
+            Order status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.FromAsset">
+            <summary>
+            From asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.FromQuantity">
+            <summary>
+            From quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.ToAsset">
+            <summary>
+            To asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.ToQuantity">
+            <summary>
+            To quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.Ratio">
+            <summary>
+            Price ratio
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.InverseRatio">
+            <summary>
+            Inverse price ratio
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.CreateTime">
+            <summary>
+            Creation time
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceDepositAddress">
