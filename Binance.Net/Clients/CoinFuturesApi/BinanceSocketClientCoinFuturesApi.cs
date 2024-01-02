@@ -14,11 +14,11 @@ using Binance.Net.Objects.Models.Futures.Socket;
 using Binance.Net.Objects.Models.Spot.Socket;
 using Binance.Net.Objects.Options;
 using Binance.Net.Objects.Sockets;
-using Binance.Net.Objects.Sockets.Converters;
 using Binance.Net.Objects.Sockets.Subscriptions;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
@@ -54,7 +54,11 @@ namespace Binance.Net.Clients.CoinFuturesApi
         private const string depthStreamEndpoint = "@depth";
 
         /// <inheritdoc />
-        public override SocketConverter StreamConverter => new BinanceStreamConverter();
+        public override MessageInterpreterPipeline Pipeline { get; } = new MessageInterpreterPipeline
+        {
+            GetStreamIdentifier = GetStreamIdentifier,
+            GetTypeIdentifier = GetTypeIdentifier
+        };
         #endregion
 
         #region constructor/destructor
@@ -70,6 +74,24 @@ namespace Binance.Net.Clients.CoinFuturesApi
             => new BinanceAuthenticationProvider(credentials);
 
         #region methods
+
+        private static string? GetStreamIdentifier(IMessageAccessor accessor)
+        {
+            var id = accessor.GetStringValue("id");
+            if (id != null)
+                return id;
+
+            var streamValue = accessor.GetStringValue("stream");
+            if (streamValue == null)
+                return null;
+
+            return streamValue;
+        }
+
+        private static string? GetTypeIdentifier(IMessageAccessor accessor)
+        {
+            return accessor.GetStringValue("data:e");
+        }
 
         #region Kline/Candlestick Streams
 

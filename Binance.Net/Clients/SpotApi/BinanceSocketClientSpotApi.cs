@@ -10,11 +10,11 @@ using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Options;
 using Binance.Net.Objects.Sockets;
-using Binance.Net.Objects.Sockets.Converters;
 using Binance.Net.Objects.Sockets.Subscriptions;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
@@ -44,8 +44,11 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public IBinanceSocketClientSpotApiTrading Trading { get; }
 
-        /// <inheritdoc />
-        public override SocketConverter StreamConverter => new BinanceStreamConverter();
+        public override MessageInterpreterPipeline Pipeline { get; } = new MessageInterpreterPipeline
+        {
+            GetStreamIdentifier = GetStreamIdentifier,
+            GetTypeIdentifier = GetTypeIdentifier
+        };
 
         #region constructor/destructor
 
@@ -63,6 +66,24 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BinanceAuthenticationProvider(credentials);
+
+        private static string? GetStreamIdentifier(IMessageAccessor accessor)
+        {
+            var id = accessor.GetStringValue("id");
+            if (id != null)
+                return id;
+
+            var streamValue = accessor.GetStringValue("stream");
+            if (streamValue == null)
+                return null;
+
+            return streamValue;
+        }
+
+        private static string? GetTypeIdentifier(IMessageAccessor accessor)
+        {
+            return accessor.GetStringValue("data:e");
+        }
 
         internal Task<CallResult<UpdateSubscription>> SubscribeAsync<T>(string url, IEnumerable<string> topics, Action<DataEvent<T>> onData, CancellationToken ct)
         {

@@ -13,16 +13,24 @@ using System.Threading.Tasks;
 namespace Binance.Net.Objects.Sockets.Subscriptions
 {
     /// <inheritdoc />
-    public class BinanceSpotUserDataSubscription : Subscription<BinanceSocketQueryResponse, BinanceCombinedStream<BinanceStreamEvent>>
+    public class BinanceSpotUserDataSubscription : Subscription<BinanceSocketQueryResponse>
     {
         /// <inheritdoc />
-        public override List<string> Identifiers => _identifiers;
+        public override List<string> StreamIdentifiers { get; set; }
 
         private readonly Action<DataEvent<BinanceStreamOrderUpdate>>? _orderHandler;
         private readonly Action<DataEvent<BinanceStreamOrderList>>? _orderListHandler;
         private readonly Action<DataEvent<BinanceStreamPositionsUpdate>>? _positionHandler;
         private readonly Action<DataEvent<BinanceStreamBalanceUpdate>>? _balanceHandler;
-        private readonly List<string> _identifiers;
+
+        /// <inheritdoc />
+        public override Dictionary<string, Type> TypeMapping { get; } = new Dictionary<string, Type>
+        {
+            { "outboundAccountPosition", typeof(BinanceCombinedStream<BinanceStreamPositionsUpdate>) },
+            { "balanceUpdate", typeof(BinanceCombinedStream<BinanceStreamBalanceUpdate>) },
+            { "executionReport", typeof(BinanceCombinedStream<BinanceStreamOrderUpdate>) },
+            { "listStatus", typeof(BinanceCombinedStream<BinanceStreamOrderList>) },
+        };
 
         /// <inheritdoc />
         public BinanceSpotUserDataSubscription(
@@ -38,7 +46,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             _orderListHandler = orderListHandler;
             _positionHandler = positionHandler;
             _balanceHandler = balanceHandler;
-            _identifiers = topics;
+            StreamIdentifiers = topics;
         }
 
         /// <inheritdoc />
@@ -47,7 +55,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             return new BinanceSystemQuery<BinanceSocketQueryResponse>(new BinanceSocketRequest
             {
                 Method = "SUBSCRIBE",
-                Params = _identifiers.ToArray(),
+                Params = StreamIdentifiers.ToArray(),
                 Id = ExchangeHelpers.NextId()
             }, false);
         }
@@ -58,34 +66,34 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             return new BinanceSystemQuery<BinanceSocketQueryResponse>(new BinanceSocketRequest
             {
                 Method = "UNSUBSCRIBE",
-                Params = _identifiers.ToArray(),
+                Params = StreamIdentifiers.ToArray(),
                 Id = ExchangeHelpers.NextId()
             }, false);
         }
 
         /// <inheritdoc />
-        public override Task<CallResult> HandleEventAsync(SocketConnection connection, DataEvent<ParsedMessage<BinanceCombinedStream<BinanceStreamEvent>>> message)
+        public override Task<CallResult> DoHandleMessageAsync(SocketConnection connection, DataEvent<BaseParsedMessage> message)
         {
-            var data = message.Data.TypedData.Data;
-            if (data is BinanceStreamOrderUpdate orderUpdate)
+            var data = message.Data.Data;
+            if (data is BinanceCombinedStream<BinanceStreamOrderUpdate> orderUpdate)
             {
-                orderUpdate.ListenKey = message.Data.TypedData.Stream;
-                _orderHandler?.Invoke(message.As(orderUpdate, message.Data.TypedData.Stream, SocketUpdateType.Update));
+                orderUpdate.Data.ListenKey = orderUpdate.Stream;
+                _orderHandler?.Invoke(message.As(orderUpdate.Data, orderUpdate.Stream, SocketUpdateType.Update));
             }
-            else if (data is BinanceStreamOrderList orderListUpdate)
+            else if (data is BinanceCombinedStream<BinanceStreamOrderList> orderListUpdate)
             {
-                orderListUpdate.ListenKey = message.Data.TypedData.Stream;
-                _orderListHandler?.Invoke(message.As(orderListUpdate, message.Data.TypedData.Stream, SocketUpdateType.Update));
+                orderListUpdate.Data.ListenKey = orderListUpdate.Stream;
+                _orderListHandler?.Invoke(message.As(orderListUpdate.Data, orderListUpdate.Stream, SocketUpdateType.Update));
             }
-            else if (data is BinanceStreamPositionsUpdate positionUpdate)
+            else if (data is BinanceCombinedStream<BinanceStreamPositionsUpdate> positionUpdate)
             {
-                positionUpdate.ListenKey = message.Data.TypedData.Stream;
-                _positionHandler?.Invoke(message.As(positionUpdate, message.Data.TypedData.Stream, SocketUpdateType.Update));
+                positionUpdate.Data.ListenKey = positionUpdate.Stream;
+                _positionHandler?.Invoke(message.As(positionUpdate.Data, positionUpdate.Stream, SocketUpdateType.Update));
             }
-            else if (data is BinanceStreamBalanceUpdate balanceUpdate)
+            else if (data is BinanceCombinedStream<BinanceStreamBalanceUpdate> balanceUpdate)
             {
-                balanceUpdate.ListenKey = message.Data.TypedData.Stream;
-                _balanceHandler?.Invoke(message.As(balanceUpdate, message.Data.TypedData.Stream, SocketUpdateType.Update));
+                balanceUpdate.Data.ListenKey = balanceUpdate.Stream;
+                _balanceHandler?.Invoke(message.As(balanceUpdate.Data, balanceUpdate.Stream, SocketUpdateType.Update));
             }
 
             return Task.FromResult(new CallResult(null)); // TODO error not mapped

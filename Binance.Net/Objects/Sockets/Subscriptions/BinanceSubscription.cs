@@ -11,13 +11,17 @@ using System.Threading.Tasks;
 namespace Binance.Net.Objects.Sockets.Subscriptions
 {
     /// <inheritdoc />
-    public class BinanceSubscription<T> : Subscription<BinanceSocketQueryResponse, T>
+    public class BinanceSubscription<T> : Subscription<BinanceSocketQueryResponse>
     {
         /// <inheritdoc />
-        public override List<string> Identifiers => _identifiers;
+        public override List<string> StreamIdentifiers { get; set; }
+
+        public override Dictionary<string, Type> TypeMapping { get; } = new Dictionary<string, Type>
+        {
+            { "", typeof(T) }
+        };
 
         private readonly Action<DataEvent<T>> _handler;
-        private readonly List<string> _identifiers;
 
         /// <summary>
         /// ctor
@@ -29,7 +33,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         public BinanceSubscription(ILogger logger, List<string> topics, Action<DataEvent<T>> handler, bool auth) : base(logger, auth)
         {
             _handler = handler;
-            _identifiers = topics;
+            StreamIdentifiers = topics;
         }
 
         /// <inheritdoc />
@@ -38,7 +42,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             return new BinanceSystemQuery<BinanceSocketQueryResponse>(new BinanceSocketRequest
             {
                 Method = "SUBSCRIBE",
-                Params = _identifiers.ToArray(),
+                Params = StreamIdentifiers.ToArray(),
                 Id = ExchangeHelpers.NextId()
             }, false);
         }
@@ -49,15 +53,15 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             return new BinanceSystemQuery<BinanceSocketQueryResponse>(new BinanceSocketRequest
             {
                 Method = "UNSUBSCRIBE",
-                Params = _identifiers.ToArray(),
+                Params = StreamIdentifiers.ToArray(),
                 Id = ExchangeHelpers.NextId()
             }, false);
         }
 
         /// <inheritdoc />
-        public override Task<CallResult> HandleEventAsync(SocketConnection connection, DataEvent<ParsedMessage<T>> message)
+        public override Task<CallResult> DoHandleMessageAsync(SocketConnection connection, DataEvent<BaseParsedMessage> message)
         {
-            _handler.Invoke(message.As(message.Data.TypedData!, null, SocketUpdateType.Update));
+            _handler.Invoke(message.As((T)message.Data.Data!, null, SocketUpdateType.Update));
             return Task.FromResult(new CallResult(null));
         }
     }

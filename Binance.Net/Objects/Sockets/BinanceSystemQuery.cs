@@ -6,11 +6,11 @@ namespace Binance.Net.Objects.Sockets
 {
     internal class BinanceSystemQuery<T> : Query<T> where T: BinanceSocketQueryResponse
     {
-        public override List<string> Identifiers { get; }
+        public override List<string> StreamIdentifiers { get; set; }
 
         public BinanceSystemQuery(BinanceSocketRequest request, bool authenticated, int weight = 1) : base(request, authenticated, weight)
         {
-            Identifiers = new List<string> { request.Id.ToString() };
+            StreamIdentifiers = new List<string> { request.Id.ToString() };
         }
     }
 }
