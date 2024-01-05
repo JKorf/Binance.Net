@@ -36,7 +36,8 @@
       "timeInForce": "GTC",
       "type": "STOP_LOSS",
       "side": "BUY",
-      "stopPrice": "0.960664"
+      "stopPrice": "0.960664",
+      "selfTradePreventionMode": "NONE"
     },
     {
       "symbol": "LTCBTC",
@@ -51,7 +52,8 @@
       "status": "NEW",
       "timeInForce": "GTC",
       "type": "LIMIT_MAKER",
-      "side": "BUY"
+      "side": "BUY",
+      "selfTradePreventionMode": "NONE"
     }
   ]
 }

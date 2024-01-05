@@ -14,6 +14,7 @@
   "marginBuyBorrowAmount": 5,       // will not return if no margin trade happens
   "marginBuyBorrowAsset": "BTC",    // will not return if no margin trade happens
   "isIsolated": true,       // if isolated margin
+  "selfTradePreventionMode": "NONE",
   "fills": [
     {
       "price": "4000.00000000",

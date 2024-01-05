@@ -142,5 +142,11 @@ namespace Binance.Net.Objects.Models
                 return QuoteQuantityFilled / QuantityFilled;
             }
         }
+
+        /// <summary>
+        /// Self trade prevention mode
+        /// </summary>
+        [JsonProperty("selfTradePreventionMode"), JsonConverter(typeof(EnumConverter))]
+        public SelfTradePreventionMode SelfTradePreventionMode { get; set; }
     }
 }

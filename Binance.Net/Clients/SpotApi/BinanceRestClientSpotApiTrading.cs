@@ -787,6 +787,8 @@ namespace Binance.Net.Clients.SpotApi
             string? limitClientOrderId = null,
             string? stopClientOrderId = null,
             OrderResponseType? orderResponseType = null,
+            SelfTradePreventionMode? selfTradePreventionMode = null,
+            bool? autoRepayAtCancel = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -820,6 +822,8 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
             parameters.AddOptionalParameter("stopIcebergQty", stopIcebergQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("stopLimitTimeInForce", stopLimitTimeInForce == null ? null : JsonConvert.SerializeObject(stopLimitTimeInForce, new TimeInForceConverter(false)));
+            parameters.AddOptionalParameter("autoRepayAtCancel", autoRepayAtCancel);
+            parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter.GetString(selfTradePreventionMode));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<BinanceMarginOrderOcoList>(_baseClient.GetUrl(newMarginOCOOrderEndpoint, marginApi, marginVersion), HttpMethod.Post, ct, parameters, true, weight: 6).ConfigureAwait(false);

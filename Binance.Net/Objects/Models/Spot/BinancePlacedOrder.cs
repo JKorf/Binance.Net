@@ -32,11 +32,5 @@ namespace Binance.Net.Objects.Models.Spot
         /// Only present if a margin trade happened
         /// </summary>
         public string? MarginBuyBorrowAsset { get; set; }
-        /// <summary>
-        /// Self trade prevention mode
-        /// </summary>
-        [JsonProperty("selfTradePreventionMode")]
-        [JsonConverter(typeof(EnumConverter))]
-        public SelfTradePreventionMode? SelfTradePreventionMode { get; set; }
     }
 }
