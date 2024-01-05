@@ -30,6 +30,13 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
+* Version 9.4.0 - 05 Jan 2024
+    * Added futures Trading.GetFundingInfoAsync endpoint
+    * Added autoRepayAtCancel and selfTradePreventionMode parameters to SpotApi.Trading.PlaceMarginOCOOrderAsync
+    * Added MarkPrice to futures funding rate models
+    * Updated and combined futures order models
+    * Updated withdraw history model
+
 * Version 9.3.0 - 26 Dec 2023
     * Added selfTradePreventionMode and autoRepayAtCancel parameters to SpotApi.Trading.PlaceMarginOrderAsync
     * Updated SpotApi.ExchangeData.GetProductsAsync response model
