@@ -49,7 +49,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region New Order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceFuturesPlacedOrder>> PlaceOrderAsync(
+        public async Task<WebCallResult<BinanceFuturesOrder>> PlaceOrderAsync(
             string symbol,
             OrderSide side,
             FuturesOrderType type,
@@ -84,7 +84,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             if (!rulesCheck.Passed)
             {
                 _logger.Log(LogLevel.Warning, rulesCheck.ErrorMessage!);
-                return new WebCallResult<BinanceFuturesPlacedOrder>(new ArgumentError(rulesCheck.ErrorMessage!));
+                return new WebCallResult<BinanceFuturesOrder>(new ArgumentError(rulesCheck.ErrorMessage!));
             }
 
             quantity = rulesCheck.Quantity;
@@ -114,7 +114,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("priceProtect", priceProtect?.ToString().ToUpper());
 
-            var result = await _baseClient.SendRequestInternal<BinanceFuturesPlacedOrder>(_baseClient.GetUrl(newOrderEndpoint, api, "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceFuturesOrder>(_baseClient.GetUrl(newOrderEndpoint, api, "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
             if (result)
                 _baseClient.InvokeOrderPlaced(new OrderId { SourceObject = result.Data, Id = result.Data.Id.ToString(CultureInfo.InvariantCulture) });
             return result;
@@ -126,7 +126,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Multiple New Orders
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>> PlaceMultipleOrdersAsync(
+        public async Task<WebCallResult<IEnumerable<CallResult<BinanceFuturesOrder>>>> PlaceMultipleOrdersAsync(
             BinanceFuturesBatchOrder[] orders,
             int? receiveWindow = null,
             CancellationToken ct = default)
@@ -142,7 +142,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                     if (!rulesCheck.Passed)
                     {
                         _logger.Log(LogLevel.Warning, rulesCheck.ErrorMessage!);
-                        return new WebCallResult<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>(new ArgumentError(rulesCheck.ErrorMessage!));
+                        return new WebCallResult<IEnumerable<CallResult<BinanceFuturesOrder>>>(new ArgumentError(rulesCheck.ErrorMessage!));
                     }
 
                     order.Quantity = rulesCheck.Quantity;
@@ -185,17 +185,17 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             var response = await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesMultipleOrderPlaceResult>>(_baseClient.GetUrl(multipleNewOrdersEndpoint, api, "1"), HttpMethod.Post, ct, parameters, true, weight: 5).ConfigureAwait(false);
             if (!response.Success)
-                return response.As<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>(default);
+                return response.As<IEnumerable<CallResult<BinanceFuturesOrder>>>(default);
 
-            var result = new List<CallResult<BinanceFuturesPlacedOrder>>();
+            var result = new List<CallResult<BinanceFuturesOrder>>();
             foreach (var item in response.Data)
             {
                 result.Add(item.Code != 0
-                    ? new CallResult<BinanceFuturesPlacedOrder>(new ServerError(item.Code, item.Message))
-                    : new CallResult<BinanceFuturesPlacedOrder>(item));
+                    ? new CallResult<BinanceFuturesOrder>(new ServerError(item.Code, item.Message))
+                    : new CallResult<BinanceFuturesOrder>(item));
             }
 
-            return response.As<IEnumerable<CallResult<BinanceFuturesPlacedOrder>>>(result);
+            return response.As<IEnumerable<CallResult<BinanceFuturesOrder>>>(result);
         }
 
         #endregion
@@ -225,7 +225,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Cancel Order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceFuturesCancelOrder>> CancelOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceFuturesOrder>> CancelOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (!orderId.HasValue && string.IsNullOrEmpty(origClientOrderId))
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
@@ -238,7 +238,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestInternal<BinanceFuturesCancelOrder>(_baseClient.GetUrl(cancelOrderEndpoint, api, "1"), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceFuturesOrder>(_baseClient.GetUrl(cancelOrderEndpoint, api, "1"), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
             if (result)
                 _baseClient.InvokeOrderCanceled(new OrderId { SourceObject = result.Data, Id = result.Data.Id.ToString(CultureInfo.InvariantCulture) });
             return result;
@@ -282,7 +282,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Cancel Multiple Orders
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<CallResult<BinanceFuturesCancelOrder>>>> CancelMultipleOrdersAsync(string symbol, List<long>? orderIdList = null, List<string>? origClientOrderIdList = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<CallResult<BinanceFuturesOrder>>>> CancelMultipleOrdersAsync(string symbol, List<long>? orderIdList = null, List<string>? origClientOrderIdList = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (orderIdList == null && origClientOrderIdList == null)
                 throw new ArgumentException("Either orderIdList or origClientOrderIdList must be sent");
@@ -309,17 +309,17 @@ namespace Binance.Net.Clients.CoinFuturesApi
             var response = await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesMultipleOrderCancelResult>>(_baseClient.GetUrl(cancelMultipleOrdersEndpoint, api, "1"), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
 
             if (!response.Success)
-                return response.As<IEnumerable<CallResult<BinanceFuturesCancelOrder>>>(default);
+                return response.As<IEnumerable<CallResult<BinanceFuturesOrder>>>(default);
 
-            var result = new List<CallResult<BinanceFuturesCancelOrder>>();
+            var result = new List<CallResult<BinanceFuturesOrder>>();
             foreach (var item in response.Data)
             {
                 result.Add(item.Code != 0
-                    ? new CallResult<BinanceFuturesCancelOrder>(new ServerError(item.Code, item.Message))
-                    : new CallResult<BinanceFuturesCancelOrder>(item));
+                    ? new CallResult<BinanceFuturesOrder>(new ServerError(item.Code, item.Message))
+                    : new CallResult<BinanceFuturesOrder>(item));
             }
 
-            return response.As<IEnumerable<CallResult<BinanceFuturesCancelOrder>>>(result);
+            return response.As<IEnumerable<CallResult<BinanceFuturesOrder>>>(result);
         }
 
         #endregion

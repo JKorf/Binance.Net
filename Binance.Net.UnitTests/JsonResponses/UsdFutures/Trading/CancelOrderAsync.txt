@@ -20,5 +20,8 @@
     "priceRate": "0.3",                 // callback rate, only return with TRAILING_STOP_MARKET order
     "updateTime": 1571110484038,
     "workingType": "CONTRACT_PRICE",
-    "priceProtect": false            // if conditional order trigger is protected   
+    "priceProtect": false,            // if conditional order trigger is protected  
+    "priceMatch": "NONE",              //price match mode
+    "selfTradePreventionMode": "NONE", //self trading preventation mode
+    "goodTillDate": 0                  //order pre-set auot cancel time for TIF GTD order
 }

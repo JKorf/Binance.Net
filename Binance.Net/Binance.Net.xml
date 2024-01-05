@@ -3976,6 +3976,56 @@
             Both for One-way mode when placing an order
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.PriceMatch">
+            <summary>
+            Price matching type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PriceMatch.None">
+            <summary>
+            No price match
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PriceMatch.Opponent">
+            <summary>
+            Counterparty best price
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PriceMatch.Opponent5">
+            <summary>
+            Counterparty 5th best price
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PriceMatch.Opponent10">
+            <summary>
+            Counterparty 10th best price
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PriceMatch.Opponent20">
+            <summary>
+            Counterparty 20th best price
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PriceMatch.Queue">
+            <summary>
+            The best price on the same side of the order book
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PriceMatch.Queue5">
+            <summary>
+            The 5th best price on the same side of the order book
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PriceMatch.Queue10">
+            <summary>
+            The 10th best price on the same side of the order book
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PriceMatch.Queue20">
+            <summary>
+            The 20th best price on the same side of the order book
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.ProductStatus">
             <summary>
             Status of a product
@@ -24137,136 +24187,6 @@
             The execution message
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesCancelOrder">
-            <summary>
-            The result of cancel order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCancelOrder.Symbol">
-            <summary>
-            The symbol the order is for
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCancelOrder.Pair">
-            <summary>
-            Pair
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCancelOrder.Id">
-            <summary>
-            The order id as assigned by Binance
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCancelOrder.ClientOrderId">
-            <summary>
-            The order id as assigned by the client
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCancelOrder.Price">
-            <summary>
-            The price of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCancelOrder.QuantityFilled">
-            <summary>
-            Cumulative quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCancelOrder.QuoteQuantityFilled">
-            <summary>
-            Cumulative quantity in quote asset ( for USD futures )
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCancelOrder.BaseQuantityFilled">
-            <summary>
-            Cumulative quantity in quote asset ( for Coin futures )
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCancelOrder.LastFilledQuantity">
-            <summary>
-            The quantity of the order that is executed
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCancelOrder.Quantity">
-            <summary>
-            The original quantity of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCancelOrder.ReduceOnly">
-            <summary>
-            Reduce Only
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCancelOrder.ClosePosition">
-            <summary>
-            if Close-All
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCancelOrder.Side">
-            <summary>
-            The side of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCancelOrder.Status">
-            <summary>
-            The current status of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCancelOrder.StopPrice">
-            <summary>
-            Stop price for the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCancelOrder.TimeInForce">
-            <summary>
-            For what time the order lasts
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCancelOrder.OriginalType">
-            <summary>
-            The type of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCancelOrder.Type">
-            <summary>
-            The type of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCancelOrder.ActivatePrice">
-            <summary>
-            Activation price, only return with TRAILING_STOP_MARKET order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCancelOrder.PriceRate">
-            <summary>
-            Callback rate, only return with TRAILING_STOP_MARKET order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCancelOrder.UpdateTime">
-            <summary>
-            The time the order was updated
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCancelOrder.WorkingType">
-            <summary>
-            The working type
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCancelOrder.PositionSide">
-            <summary>
-            The position side of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCancelOrder.PriceProtect">
-            <summary>
-            Price protect
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCancelOrder.AveragePrice">
-            <summary>
-            Average price
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesChangeMarginTypeResult">
             <summary>
             Result from a change margin type request
@@ -24826,7 +24746,17 @@
             Extension to be able to deserialize an error response as well
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceUsdFuturesMultipleOrderCancelResult">
+            <summary>
+            Extension to be able to deserialize an error response as well
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesMultipleOrderPlaceResult">
+            <summary>
+            Extension to be able to deserialize an error response as well
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceUsdFuturesMultipleOrderPlaceResult">
             <summary>
             Extension to be able to deserialize an error response as well
             </summary>
@@ -24921,12 +24851,17 @@
             The price of the order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesOrder.AvgPrice">
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesOrder.AveragePrice">
             <summary>
             The average price of the order
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesOrder.QuantityFilled">
+            <summary>
+            Quantity that has been filled
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesOrder.CummulativeQuantity">
             <summary>
             Cumulative quantity
             </summary>
@@ -24941,11 +24876,6 @@
             Cumulative quantity in quote asset ( for Coin futures )
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesOrder.LastFilledQuantity">
-            <summary>
-            The quantity of the order that is executed
-            </summary>
-        </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesOrder.Quantity">
             <summary>
             The original quantity of the order
@@ -24958,7 +24888,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesOrder.ClosePosition">
             <summary>
-            if Close-All
+            If order is for closing a position
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesOrder.Side">
@@ -24981,12 +24911,12 @@
             For what time the order lasts
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesOrder.OriginalType">
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesOrder.Type">
             <summary>
             The type of the order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesOrder.Type">
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesOrder.OriginalType">
             <summary>
             The type of the order
             </summary>
@@ -25024,6 +24954,26 @@
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesOrder.PriceProtect">
             <summary>
             Price protect
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceUsdFuturesOrder">
+            <summary>
+            Usdt futures order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceUsdFuturesOrder.PriceMatch">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceUsdFuturesOrder.SelfTradePreventionMode">
+            <summary>
+            Self trade prevention mode
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceUsdFuturesOrder.GoodTillDate">
+            <summary>
+            Auto cancel at this date
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesOrderBook">
@@ -25124,136 +25074,6 @@
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesOrderChange.After">
             <summary>
             After edit
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesPlacedOrder">
-            <summary>
-            The result of placing a new order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPlacedOrder.Symbol">
-            <summary>
-            The symbol the order is for
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPlacedOrder.Pair">
-            <summary>
-            Pair
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPlacedOrder.Id">
-            <summary>
-            The order id as assigned by Binance
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPlacedOrder.ClientOrderId">
-            <summary>
-            The order id as assigned by the client
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPlacedOrder.Price">
-            <summary>
-            The price of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPlacedOrder.AveragePrice">
-            <summary>
-            The average price of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPlacedOrder.QuantityFilled">
-            <summary>
-            Cumulative quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPlacedOrder.QuoteQuantityFilled">
-            <summary>
-            Cumulative quantity in quote asset ( for USD futures )
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPlacedOrder.BaseQuantityFilled">
-            <summary>
-            Cumulative quantity in quote asset ( for Coin futures )
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPlacedOrder.LastFilledQuantity">
-            <summary>
-            The quantity of the order that is executed
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPlacedOrder.Quantity">
-            <summary>
-            The original quantity of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPlacedOrder.ReduceOnly">
-            <summary>
-            Reduce Only
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPlacedOrder.Side">
-            <summary>
-            The side of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPlacedOrder.PositionSide">
-            <summary>
-            The position side of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPlacedOrder.Status">
-            <summary>
-            The current status of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPlacedOrder.StopPrice">
-            <summary>
-            Stop price for the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPlacedOrder.ClosePosition">
-            <summary>
-            If order is for closing a position
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPlacedOrder.TimeInForce">
-            <summary>
-            For what time the order lasts
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPlacedOrder.Type">
-            <summary>
-            The type of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPlacedOrder.OriginalType">
-            <summary>
-            The original type of the order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPlacedOrder.ActivatePrice">
-            <summary>
-            Activation price, only return with TRAILING_STOP_MARKET order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPlacedOrder.PriceRate">
-            <summary>
-            Callback rate, only return with TRAILING_STOP_MARKET order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPlacedOrder.UpdateTime">
-            <summary>
-            The time the order was updated
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPlacedOrder.WorkingType">
-            <summary>
-            The working type
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPlacedOrder.PriceProtect">
-            <summary>
-            Price protect
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesPositionMarginResult">
