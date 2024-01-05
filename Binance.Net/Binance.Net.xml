@@ -24552,6 +24552,11 @@
             The time the funding rate is applied
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesFundingRateHistory.MarkPrice">
+            <summary>
+            The mark price
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesIncomeHistory">
             <summary>
             Futures income history result

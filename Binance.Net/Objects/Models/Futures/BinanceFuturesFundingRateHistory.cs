@@ -22,5 +22,10 @@ namespace Binance.Net.Objects.Models.Futures
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime FundingTime { get; set; }
+        /// <summary>
+        /// The mark price
+        /// </summary>
+        [JsonProperty("markPrice")]
+        public decimal MarkPrice { get; set; }
     }
 }
