@@ -14248,61 +14248,6 @@
             Status
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.BinanceConvertTrade">
-            <summary>
-            Convert trade info
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.QuoteId">
-            <summary>
-            Quote id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.OrderId">
-            <summary>
-            Order id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.OrderStatus">
-            <summary>
-            Order status
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.FromAsset">
-            <summary>
-            From asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.FromQuantity">
-            <summary>
-            From quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.ToAsset">
-            <summary>
-            To asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.ToQuantity">
-            <summary>
-            To quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.Ratio">
-            <summary>
-            Price ratio
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.InverseRatio">
-            <summary>
-            Inverse price ratio
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceConvertTrade.CreateTime">
-            <summary>
-            Creation time
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceDepositAddress">
             <summary>
             Deposit address info
@@ -16750,6 +16695,26 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawal.TransferType">
             <summary>
             Transfer type: 1 for internal transfer, 0 for external transfer 
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawal.TransactionKey">
+            <summary>
+            Transaction key
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawal.Info">
+            <summary>
+            Info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawal.WalletType">
+            <summary>
+            The wallet type the withdrawal was from
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawal.CompleteTime">
+            <summary>
+            The time the withdrawal was completed
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceWithdrawalPlaced">

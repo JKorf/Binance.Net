@@ -1,6 +1,7 @@
 ﻿using System;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
+using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Models.Spot
@@ -69,5 +70,28 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonConverter(typeof(WithdrawDepositTransferTypeConverter))]
         public WithdrawDepositTransferType TransferType { get; set; }
+        /// <summary>
+        /// Transaction key
+        /// </summary>
+        [JsonProperty("txKey")]
+        public string TransactionKey { get; set; } = string.Empty;
+        /// <summary>
+        /// Info
+        /// </summary>
+        [JsonProperty("info")]
+        public string Info { get; set; } = string.Empty;
+        /// <summary>
+        /// The wallet type the withdrawal was from
+        /// </summary>
+        [JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("walletType")]
+        public WalletType WalletType { get; set; }
+
+        /// <summary>
+        /// The time the withdrawal was completed
+        /// </summary>
+        [JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("completeTime")]
+        public DateTime? CompleteTime { get; set; }
     }
 }
