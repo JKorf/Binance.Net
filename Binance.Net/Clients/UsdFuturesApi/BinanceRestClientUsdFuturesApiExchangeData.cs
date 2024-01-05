@@ -143,6 +143,16 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #endregion
 
+        #region Get Funding Info
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesFundingInfo>>> GetFundingInfoAsync(CancellationToken ct = default)
+        {
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesFundingInfo>>(_baseClient.GetUrl("fundingInfo", api, publicVersion), HttpMethod.Get, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #region Get Funding Rate History
 
         /// <inheritdoc />

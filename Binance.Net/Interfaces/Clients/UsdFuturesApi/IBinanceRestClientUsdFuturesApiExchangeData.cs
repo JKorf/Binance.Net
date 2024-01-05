@@ -53,6 +53,14 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<WebCallResult<IEnumerable<IBinanceKline>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Get funding rate info for symbols that had FundingRateCap/ FundingRateFloor / fundingIntervalHours adjustment
+        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-funding-rate-info" /></para>
+        /// </summary>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BinanceFuturesFundingInfo>>> GetFundingInfoAsync(CancellationToken ct = default);
+
+        /// <summary>
         /// Get funding rate history for the provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-funding-rate-history" /></para>
         /// </summary>
