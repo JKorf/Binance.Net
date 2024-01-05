@@ -1316,7 +1316,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Convert Trade History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceListResult<BinanceConvertTrade>>> GetConvertTradeHistoryAsync(DateTime startTime, DateTime endTime, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceListResult<Objects.Models.Spot.Convert.BinanceConvertTrade>>> GetConvertTradeHistoryAsync(DateTime startTime, DateTime endTime, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
@@ -1324,7 +1324,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceListResult<BinanceConvertTrade>>(_baseClient.GetUrl(convertTradeHistoryEndpoint, convertApi, convertVersion), HttpMethod.Get, ct, parameters, true, weight: 3000).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceListResult<Objects.Models.Spot.Convert.BinanceConvertTrade>>(_baseClient.GetUrl(convertTradeHistoryEndpoint, convertApi, convertVersion), HttpMethod.Get, ct, parameters, true, weight: 3000).ConfigureAwait(false);
         }
 
         #endregion
