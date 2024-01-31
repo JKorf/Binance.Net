@@ -16,7 +16,6 @@ using CryptoExchange.Net;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Interfaces.CommonClients;
-using Newtonsoft.Json.Linq;
 using Binance.Net.Objects.Options;
 
 namespace Binance.Net.Clients.UsdFuturesApi

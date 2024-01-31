@@ -3,25 +3,28 @@ using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Sockets.MessageParsing.Interfaces;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Binance.Net.Objects.Sockets.Subscriptions
 {
     /// <inheritdoc />
-    public class BinanceSubscription<T> : Subscription<BinanceSocketQueryResponse>
+    internal class BinanceSubscription<T> : Subscription<BinanceSocketQueryResponse, BinanceSocketQueryResponse>
     {
         /// <inheritdoc />
-        public override List<string> StreamIdentifiers { get; set; }
-
-        public override Dictionary<string, Type> TypeMapping { get; } = new Dictionary<string, Type>
-        {
-            { "", typeof(T) }
-        };
+        public override HashSet<string> ListenerIdentifiers { get; set; }
 
         private readonly Action<DataEvent<T>> _handler;
+
+        /// <inheritdoc />
+        public override Type? GetMessageType(IMessageAccessor message)
+        {
+            return typeof(T);
+        }
 
         /// <summary>
         /// ctor
@@ -33,35 +36,35 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         public BinanceSubscription(ILogger logger, List<string> topics, Action<DataEvent<T>> handler, bool auth) : base(logger, auth)
         {
             _handler = handler;
-            StreamIdentifiers = topics;
+            ListenerIdentifiers = new HashSet<string>(topics);
         }
 
         /// <inheritdoc />
-        public override BaseQuery? GetSubQuery(SocketConnection connection)
+        public override Query? GetSubQuery(SocketConnection connection)
         {
             return new BinanceSystemQuery<BinanceSocketQueryResponse>(new BinanceSocketRequest
             {
                 Method = "SUBSCRIBE",
-                Params = StreamIdentifiers.ToArray(),
+                Params = ListenerIdentifiers.ToArray(),
                 Id = ExchangeHelpers.NextId()
             }, false);
         }
 
         /// <inheritdoc />
-        public override BaseQuery? GetUnsubQuery()
+        public override Query? GetUnsubQuery()
         {
             return new BinanceSystemQuery<BinanceSocketQueryResponse>(new BinanceSocketRequest
             {
                 Method = "UNSUBSCRIBE",
-                Params = StreamIdentifiers.ToArray(),
+                Params = ListenerIdentifiers.ToArray(),
                 Id = ExchangeHelpers.NextId()
             }, false);
         }
 
         /// <inheritdoc />
-        public override Task<CallResult> DoHandleMessageAsync(SocketConnection connection, DataEvent<BaseParsedMessage> message)
+        public override Task<CallResult> DoHandleMessageAsync(SocketConnection connection, DataEvent<object> message)
         {
-            _handler.Invoke(message.As((T)message.Data.Data!, null, SocketUpdateType.Update));
+            _handler.Invoke(message.As((T)message.Data!, null, SocketUpdateType.Update));
             return Task.FromResult(new CallResult(null));
         }
     }

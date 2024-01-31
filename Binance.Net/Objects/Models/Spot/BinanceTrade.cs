@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 

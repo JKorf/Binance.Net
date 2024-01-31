@@ -13,11 +13,11 @@ using Binance.Net.Objects.Sockets;
 using Binance.Net.Objects.Sockets.Subscriptions;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Sockets.MessageParsing;
+using CryptoExchange.Net.Sockets.MessageParsing.Interfaces;
 using Microsoft.Extensions.Logging;
 
 namespace Binance.Net.Clients.SpotApi
@@ -35,6 +35,8 @@ namespace Binance.Net.Clients.SpotApi
         internal DateTime? _lastExchangeInfoUpdate;
         internal readonly string _brokerId;
 
+        private static readonly MessagePath _idPath = MessagePath.Get().Property("id");
+        private static readonly MessagePath _streamPath = MessagePath.Get().Property("stream");
         #endregion
 
         /// <inheritdoc />
@@ -43,12 +45,6 @@ namespace Binance.Net.Clients.SpotApi
         public IBinanceSocketClientSpotApiExchangeData ExchangeData { get; }
         /// <inheritdoc />
         public IBinanceSocketClientSpotApiTrading Trading { get; }
-
-        public override MessageInterpreterPipeline Pipeline { get; } = new MessageInterpreterPipeline
-        {
-            GetStreamIdentifier = GetStreamIdentifier,
-            GetTypeIdentifier = GetTypeIdentifier
-        };
 
         #region constructor/destructor
 
@@ -67,22 +63,14 @@ namespace Binance.Net.Clients.SpotApi
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BinanceAuthenticationProvider(credentials);
 
-        private static string? GetStreamIdentifier(IMessageAccessor accessor)
+        /// <inheritdoc />
+        public override string? GetListenerIdentifier(IMessageAccessor message)
         {
-            var id = accessor.GetStringValue("id");
+            var id = message.GetValue<string>(_idPath);
             if (id != null)
                 return id;
 
-            var streamValue = accessor.GetStringValue("stream");
-            if (streamValue == null)
-                return null;
-
-            return streamValue;
-        }
-
-        private static string? GetTypeIdentifier(IMessageAccessor accessor)
-        {
-            return accessor.GetStringValue("data:e");
+            return message.GetValue<string>(_streamPath);
         }
 
         internal Task<CallResult<UpdateSubscription>> SubscribeAsync<T>(string url, IEnumerable<string> topics, Action<DataEvent<T>> onData, CancellationToken ct)
@@ -126,37 +114,7 @@ namespace Binance.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        //protected override bool HandleQueryResponse<T>(SocketConnection s, object request, JToken data, out CallResult<T> callResult)
-        //{
-        //    callResult = null!;
-        //    var bRequest = (BinanceSocketQuery)request;
-        //    if (bRequest.Id != data["id"]?.Value<int>())
-        //        return false;
-
-        //    var status = data["status"]?.Value<int>();
-        //    if (status != 200)
-        //    {
-        //        var error = data["error"]!;
-
-        //        if (status == 429 || status == 418)
-        //        {
-        //            DateTime? retryAfter = null;
-        //            var retryAfterVal = error["data"]?["retryAfter"]?.ToString();
-        //            if (long.TryParse(retryAfterVal, out var retryAfterMs))
-        //                retryAfter = DateTimeConverter.ConvertFromMilliseconds(retryAfterMs);
-
-        //            callResult = new CallResult<T>(new ServerRateLimitError(error["msg"]!.Value<string>()!)
-        //            {
-        //                RetryAfter = retryAfter
-        //            });
-        //        }
-        //        else
-        //            callResult = new CallResult<T>(new ServerError(error["code"]!.Value<int>(), error["msg"]!.Value<string>()!));
-        //        return true;
-        //    }
-        //    callResult = Deserialize<T>(data!);
-        //    return true;
-        //}
+        protected override Query? GetAuthenticationRequest() => null;
 
         internal async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? quoteQuantity, decimal? price, decimal? stopPrice, SpotOrderType? type)
         {

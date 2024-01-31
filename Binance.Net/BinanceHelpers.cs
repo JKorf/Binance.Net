@@ -1,7 +1,6 @@
 ﻿using Binance.Net.Clients;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients;
-using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Options;
@@ -9,17 +8,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Net;
 using System.Text.RegularExpressions;
 using Binance.Net.SymbolOrderBooks;
 using Binance.Net.Interfaces;
-using CryptoExchange.Net.Interfaces.CommonClients;
-using Binance.Net.Clients.SpotApi;
-using Binance.Net.Clients.UsdFuturesApi;
-using Binance.Net.Clients.CoinFuturesApi;
 
 namespace Binance.Net
 {

@@ -1,6 +1,5 @@
 ﻿using CryptoExchange.Net.Objects.Options;
 using System.Collections.Generic;
-using System.Net.Http;
 using System;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;

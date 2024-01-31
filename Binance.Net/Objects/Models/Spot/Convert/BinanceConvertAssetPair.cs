@@ -1,8 +1,4 @@
-﻿using System;
-using Binance.Net.Converters;
-using Binance.Net.Enums;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Models.Spot.Convert
 {

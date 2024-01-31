@@ -17,11 +17,11 @@ using Binance.Net.Objects.Sockets;
 using Binance.Net.Objects.Sockets.Subscriptions;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Sockets.MessageParsing;
+using CryptoExchange.Net.Sockets.MessageParsing.Interfaces;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -32,33 +32,29 @@ namespace Binance.Net.Clients.CoinFuturesApi
     public class BinanceSocketClientCoinFuturesApi : SocketApiClient, IBinanceSocketClientCoinFuturesApi
     {
         #region fields
-        private const string klineStreamEndpoint = "@kline";
-        private const string markPriceStreamEndpoint = "@markPrice";
-        private const string allMarkPriceStreamEndpoint = "!markPrice@arr";
-        private const string indexPriceStreamEndpoint = "@indexPrice";
-        private const string continuousKlineStreamEndpoint = "@continuousKline";
-        private const string indexKlineStreamEndpoint = "@indexPriceKline";
-        private const string markKlineStreamEndpoint = "@markPriceKline";
-        private const string symbolMiniTickerStreamEndpoint = "@miniTicker";
-        private const string allMiniTickerStreamEndpoint = "!miniTicker@arr";
-        private const string symbolTickerStreamEndpoint = "@ticker";
-        private const string allTickerStreamEndpoint = "!ticker@arr";
+        private const string _klineStreamEndpoint = "@kline";
+        private const string _markPriceStreamEndpoint = "@markPrice";
+        private const string _allMarkPriceStreamEndpoint = "!markPrice@arr";
+        private const string _indexPriceStreamEndpoint = "@indexPrice";
+        private const string _continuousKlineStreamEndpoint = "@continuousKline";
+        private const string _indexKlineStreamEndpoint = "@indexPriceKline";
+        private const string _markKlineStreamEndpoint = "@markPriceKline";
+        private const string _symbolMiniTickerStreamEndpoint = "@miniTicker";
+        private const string _allMiniTickerStreamEndpoint = "!miniTicker@arr";
+        private const string _symbolTickerStreamEndpoint = "@ticker";
+        private const string _allTickerStreamEndpoint = "!ticker@arr";
 
-        private const string aggregatedTradesStreamEndpoint = "@aggTrade";
-        private const string tradesStreamEndpoint = "@trade";
-        private const string bookTickerStreamEndpoint = "@bookTicker";
-        private const string allBookTickerStreamEndpoint = "!bookTicker";
-        private const string liquidationStreamEndpoint = "@forceOrder";
-        private const string allLiquidationStreamEndpoint = "!forceOrder@arr";
-        private const string partialBookDepthStreamEndpoint = "@depth";
-        private const string depthStreamEndpoint = "@depth";
+        private const string _aggregatedTradesStreamEndpoint = "@aggTrade";
+        private const string _tradesStreamEndpoint = "@trade";
+        private const string _bookTickerStreamEndpoint = "@bookTicker";
+        private const string _allBookTickerStreamEndpoint = "!bookTicker";
+        private const string _liquidationStreamEndpoint = "@forceOrder";
+        private const string _allLiquidationStreamEndpoint = "!forceOrder@arr";
+        private const string _partialBookDepthStreamEndpoint = "@depth";
+        private const string _depthStreamEndpoint = "@depth";
 
-        /// <inheritdoc />
-        public override MessageInterpreterPipeline Pipeline { get; } = new MessageInterpreterPipeline
-        {
-            GetStreamIdentifier = GetStreamIdentifier,
-            GetTypeIdentifier = GetTypeIdentifier
-        };
+        private static readonly MessagePath _idPath = MessagePath.Get().Property("id");
+        private static readonly MessagePath _streamPath = MessagePath.Get().Property("stream");
         #endregion
 
         #region constructor/destructor
@@ -75,22 +71,14 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         #region methods
 
-        private static string? GetStreamIdentifier(IMessageAccessor accessor)
+        /// <inheritdoc />
+        public override string? GetListenerIdentifier(IMessageAccessor message)
         {
-            var id = accessor.GetStringValue("id");
+            var id = message.GetValue<string>(_idPath);
             if (id != null)
                 return id;
 
-            var streamValue = accessor.GetStringValue("stream");
-            if (streamValue == null)
-                return null;
-
-            return streamValue;
-        }
-
-        private static string? GetTypeIdentifier(IMessageAccessor accessor)
-        {
-            return accessor.GetStringValue("data:e");
+            return message.GetValue<string>(_streamPath);
         }
 
         #region Kline/Candlestick Streams
@@ -114,7 +102,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 var result = data.Data.Data;
                 onMessage(data.As<IBinanceStreamKlineData>(result, result.Symbol));
             });
-            symbols = symbols.SelectMany(a => intervals.Select(i => a.ToLower(CultureInfo.InvariantCulture) + klineStreamEndpoint + "_" + JsonConvert.SerializeObject(i, new KlineIntervalConverter(false)))).ToArray();
+            symbols = symbols.SelectMany(a => intervals.Select(i => a.ToLower(CultureInfo.InvariantCulture) + _klineStreamEndpoint + "_" + JsonConvert.SerializeObject(i, new KlineIntervalConverter(false)))).ToArray();
             return await SubscribeAsync( BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
@@ -132,7 +120,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             updateInterval?.ValidateIntValues(nameof(updateInterval), 1000, 3000);
 
             var internalHandler = new Action<DataEvent<JToken>>(data => HandlePossibleSingleData(data, onMessage));
-            pairs = pairs.Select(a => a.ToLower(CultureInfo.InvariantCulture) + indexPriceStreamEndpoint + (updateInterval == 1000 ? "@1s" : "")).ToArray();
+            pairs = pairs.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _indexPriceStreamEndpoint + (updateInterval == 1000 ? "@1s" : "")).ToArray();
             return await SubscribeAsync( BaseAddress, pairs, internalHandler, ct).ConfigureAwait(false);
         }
 
@@ -149,7 +137,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             updateInterval?.ValidateIntValues(nameof(updateInterval), 1000, 3000);
 
             var internalHandler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesCoinStreamMarkPrice>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
-            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + markPriceStreamEndpoint + (updateInterval == 1000 ? "@1s" : "")).ToArray();
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _markPriceStreamEndpoint + (updateInterval == 1000 ? "@1s" : "")).ToArray();
             return await SubscribeAsync( BaseAddress, symbols, internalHandler, ct).ConfigureAwait(false);
         }
 
@@ -168,7 +156,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             pairs = pairs.Select(a => a.ToLower(CultureInfo.InvariantCulture) +
                                       "_" +
                                       JsonConvert.SerializeObject(contractType, new ContractTypeConverter(false)).ToLower() +
-                                      continuousKlineStreamEndpoint +
+                                      _continuousKlineStreamEndpoint +
                                       "_" +
                                       JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ToArray();
             return await SubscribeAsync( BaseAddress, pairs, handler, ct).ConfigureAwait(false);
@@ -187,7 +175,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             pairs.ValidateNotNull(nameof(pairs));
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamIndexKlineData>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
             pairs = pairs.Select(a => a.ToLower(CultureInfo.InvariantCulture) +
-                                      indexKlineStreamEndpoint +
+                                      _indexKlineStreamEndpoint +
                                       "_" +
                                       JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ToArray();
             return await SubscribeAsync( BaseAddress, pairs, handler, ct).ConfigureAwait(false);
@@ -206,7 +194,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             symbols.ValidateNotNull(nameof(symbols));
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamIndexKlineData>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) +
-                                          markKlineStreamEndpoint +
+                                          _markKlineStreamEndpoint +
                                          "_" +
                                          JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ToArray();
             return await SubscribeAsync( BaseAddress, symbols, handler, ct).ConfigureAwait(false);
@@ -225,7 +213,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             symbols.ValidateNotNull(nameof(symbols));
 
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamCoinMiniTick>>>(data => onMessage(data.As<IBinanceMiniTick>(data.Data.Data, data.Data.Data.Symbol)));
-            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + symbolMiniTickerStreamEndpoint).ToArray();
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _symbolMiniTickerStreamEndpoint).ToArray();
             return await SubscribeAsync( BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
@@ -236,7 +224,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllMiniTickerUpdatesAsync(Action<DataEvent<IEnumerable<IBinanceMiniTick>>> onMessage, CancellationToken ct = default)
         {
             var handler = new Action<DataEvent<BinanceCombinedStream<IEnumerable<BinanceStreamCoinMiniTick>>>>(data => onMessage(data.As<IEnumerable<IBinanceMiniTick>>(data.Data.Data, data.Data.Stream)));
-            return await SubscribeAsync( BaseAddress, new[] { allMiniTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
+            return await SubscribeAsync( BaseAddress, new[] { _allMiniTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
         }
         #endregion
 
@@ -251,7 +239,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             symbols.ValidateNotNull(nameof(symbols));
 
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamCoinTick>>>(data => onMessage(data.As<IBinance24HPrice>(data.Data.Data, data.Data.Data.Symbol)));
-            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + symbolTickerStreamEndpoint).ToArray();
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _symbolTickerStreamEndpoint).ToArray();
             return await SubscribeAsync( BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
@@ -263,7 +251,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllTickerUpdatesAsync(Action<DataEvent<IEnumerable<IBinance24HPrice>>> onMessage, CancellationToken ct = default)
         {
             var handler = new Action<DataEvent<BinanceCombinedStream<IEnumerable<BinanceStreamCoinTick>>>>(data => onMessage(data.As<IEnumerable<IBinance24HPrice>>(data.Data.Data, data.Data.Stream)));
-            return await SubscribeAsync( BaseAddress, new[] { allTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
+            return await SubscribeAsync( BaseAddress, new[] { _allTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -279,7 +267,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             symbols.ValidateNotNull(nameof(symbols));
 
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamAggregatedTrade>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
-            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + aggregatedTradesStreamEndpoint).ToArray();
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _aggregatedTradesStreamEndpoint).ToArray();
             return await SubscribeAsync( BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
         #endregion
@@ -298,7 +286,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             symbols.ValidateNotNull(nameof(symbols));
 
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamTrade>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
-            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + tradesStreamEndpoint).ToArray();
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _tradesStreamEndpoint).ToArray();
             return await SubscribeAsync(BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
@@ -312,7 +300,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             updateInterval?.ValidateIntValues(nameof(updateInterval), 1000, 3000);
 
             var handler = new Action<DataEvent<BinanceCombinedStream<IEnumerable<BinanceFuturesCoinStreamMarkPrice>>>>(data => onMessage(data.As(data.Data.Data, data.Data.Stream)));
-            return await SubscribeAsync(BaseAddress, new[] { allMarkPriceStreamEndpoint + (updateInterval == 1000 ? "@1s" : "") }, handler, ct).ConfigureAwait(false);
+            return await SubscribeAsync(BaseAddress, new[] { _allMarkPriceStreamEndpoint + (updateInterval == 1000 ? "@1s" : "") }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -328,7 +316,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             symbols.ValidateNotNull(nameof(symbols));
 
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamBookPrice>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
-            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + bookTickerStreamEndpoint).ToArray();
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _bookTickerStreamEndpoint).ToArray();
             return await SubscribeAsync( BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
@@ -340,7 +328,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllBookTickerUpdatesAsync(Action<DataEvent<BinanceFuturesStreamBookPrice>> onMessage, CancellationToken ct = default)
         {
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamBookPrice>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Symbol)));
-            return await SubscribeAsync( BaseAddress, new[] { allBookTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
+            return await SubscribeAsync( BaseAddress, new[] { _allBookTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -356,7 +344,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             symbols.ValidateNotNull(nameof(symbols));
 
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamLiquidationData>>>(data => onMessage(data.As(data.Data.Data.Data, data.Data.Data.Data.Symbol)));
-            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + liquidationStreamEndpoint).ToArray();
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _liquidationStreamEndpoint).ToArray();
             return await SubscribeAsync( BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
@@ -368,7 +356,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllLiquidationUpdatesAsync(Action<DataEvent<BinanceFuturesStreamLiquidation>> onMessage, CancellationToken ct = default)
         {
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamLiquidationData>>>(data => onMessage(data.As(data.Data.Data.Data, data.Data.Data.Data.Symbol)));
-            return await SubscribeAsync( BaseAddress, new[] { allLiquidationStreamEndpoint }, handler, ct).ConfigureAwait(false);
+            return await SubscribeAsync( BaseAddress, new[] { _allLiquidationStreamEndpoint }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -391,7 +379,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 onMessage(data.As<IBinanceFuturesEventOrderBook>(data.Data.Data, data.Data.Data.Symbol));
             });
 
-            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + partialBookDepthStreamEndpoint + levels + (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _partialBookDepthStreamEndpoint + levels + (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
             return await SubscribeAsync( BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
@@ -409,7 +397,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             updateInterval?.ValidateIntValues(nameof(updateInterval), 100, 250, 500);
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamOrderBookDepth>>>(data => onMessage(data.As<IBinanceFuturesEventOrderBook>(data.Data.Data, data.Data.Data.Symbol)));
-            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + depthStreamEndpoint + (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _depthStreamEndpoint + (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
             return await SubscribeAsync( BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
@@ -490,6 +478,6 @@ namespace Binance.Net.Clients.CoinFuturesApi
         }
 
         /// <inheritdoc />
-        protected override BaseQuery GetAuthenticationRequest() => throw new NotImplementedException();
+        protected override Query? GetAuthenticationRequest() => null;
     }
 }

@@ -454,10 +454,10 @@
         <member name="T:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi">
             <inheritdoc cref="T:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi" />
         </member>
-        <member name="P:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.Pipeline">
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.GetListenerIdentifier(CryptoExchange.Net.Sockets.MessageParsing.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Threading.CancellationToken)">
@@ -1652,7 +1652,10 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApi.CheckTradeRules(System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.SpotOrderType})">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApi.GetListenerIdentifier(CryptoExchange.Net.Sockets.MessageParsing.Interfaces.IMessageAccessor)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApi.GetAuthenticationRequest">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiAccount">
@@ -2141,9 +2144,6 @@
             Client providing access to the Binance Usd futures websocket Api
             </summary>
         </member>
-        <member name="P:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApi.Pipeline">
-            <inheritdoc />
-        </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApi.#ctor(Microsoft.Extensions.Logging.ILogger,Binance.Net.Objects.Options.BinanceSocketOptions)">
             <summary>
             Create a new instance of BinanceSocketClientUsdFuturesStreams
@@ -2252,6 +2252,9 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApi.SubscribeToUserDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamConfigUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamMarginUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAccountUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStrategyUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceGridUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceConditionOrderTriggerRejectUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApi.GetListenerIdentifier(CryptoExchange.Net.Sockets.MessageParsing.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApi.GetAuthenticationRequest">
@@ -12417,6 +12420,16 @@
             Identifier
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.BinanceResponse.Status">
+            <summary>
+            Result status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceResponse.Error">
+            <summary>
+            Error info
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BinanceResponse.Ratelimits">
             <summary>
             Rate limit info
@@ -12431,6 +12444,41 @@
         <member name="P:Binance.Net.Objects.BinanceResponse`1.Result">
             <summary>
             Data result
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceResponseError">
+            <summary>
+            Binance error response
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceResponseError.Code">
+            <summary>
+            Error code
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceResponseError.Message">
+            <summary>
+            Error message
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceResponseError.Data">
+            <summary>
+            Error data
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.BinanceResponseErrorData">
+            <summary>
+            Error data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceResponseErrorData.ServerTime">
+            <summary>
+            Server time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceResponseErrorData.RetryAfter">
+            <summary>
+            Retry after time
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Binance24HPriceBase">
@@ -27193,10 +27241,10 @@
         <member name="T:Binance.Net.Objects.Sockets.BinanceCoinFuturesUserDataSubscription">
             <inheritdoc />
         </member>
-        <member name="P:Binance.Net.Objects.Sockets.BinanceCoinFuturesUserDataSubscription.StreamIdentifiers">
+        <member name="P:Binance.Net.Objects.Sockets.BinanceCoinFuturesUserDataSubscription.ListenerIdentifiers">
             <inheritdoc />
         </member>
-        <member name="P:Binance.Net.Objects.Sockets.BinanceCoinFuturesUserDataSubscription.TypeMapping">
+        <member name="M:Binance.Net.Objects.Sockets.BinanceCoinFuturesUserDataSubscription.GetMessageType(CryptoExchange.Net.Sockets.MessageParsing.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Objects.Sockets.BinanceCoinFuturesUserDataSubscription.#ctor(Microsoft.Extensions.Logging.ILogger,System.Collections.Generic.List{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamConfigUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamMarginUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAccountUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStrategyUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceGridUpdate}})">
@@ -27219,16 +27267,16 @@
         <member name="M:Binance.Net.Objects.Sockets.BinanceCoinFuturesUserDataSubscription.GetUnsubQuery">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.BinanceCoinFuturesUserDataSubscription.DoHandleMessageAsync(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{CryptoExchange.Net.Objects.Sockets.BaseParsedMessage})">
+        <member name="M:Binance.Net.Objects.Sockets.BinanceCoinFuturesUserDataSubscription.DoHandleMessageAsync(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{System.Object})">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription">
             <inheritdoc />
         </member>
-        <member name="P:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.StreamIdentifiers">
+        <member name="P:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.ListenerIdentifiers">
             <inheritdoc />
         </member>
-        <member name="P:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.TypeMapping">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.GetMessageType(CryptoExchange.Net.Sockets.MessageParsing.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.#ctor(Microsoft.Extensions.Logging.ILogger,System.Collections.Generic.List{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate}},System.Boolean)">
@@ -27240,13 +27288,16 @@
         <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.GetUnsubQuery">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessageAsync(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{CryptoExchange.Net.Objects.Sockets.BaseParsedMessage})">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessageAsync(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{System.Object})">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1">
             <inheritdoc />
         </member>
-        <member name="P:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1.StreamIdentifiers">
+        <member name="P:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1.ListenerIdentifiers">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1.GetMessageType(CryptoExchange.Net.Sockets.MessageParsing.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1.#ctor(Microsoft.Extensions.Logging.ILogger,System.Collections.Generic.List{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{`0}},System.Boolean)">
@@ -27264,16 +27315,16 @@
         <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1.GetUnsubQuery">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1.DoHandleMessageAsync(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{CryptoExchange.Net.Objects.Sockets.BaseParsedMessage})">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1.DoHandleMessageAsync(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{System.Object})">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Objects.Sockets.BinanceUsdFuturesUserDataSubscription">
             <inheritdoc />
         </member>
-        <member name="P:Binance.Net.Objects.Sockets.BinanceUsdFuturesUserDataSubscription.StreamIdentifiers">
+        <member name="P:Binance.Net.Objects.Sockets.BinanceUsdFuturesUserDataSubscription.ListenerIdentifiers">
             <inheritdoc />
         </member>
-        <member name="P:Binance.Net.Objects.Sockets.BinanceUsdFuturesUserDataSubscription.TypeMapping">
+        <member name="M:Binance.Net.Objects.Sockets.BinanceUsdFuturesUserDataSubscription.GetMessageType(CryptoExchange.Net.Sockets.MessageParsing.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Objects.Sockets.BinanceUsdFuturesUserDataSubscription.#ctor(Microsoft.Extensions.Logging.ILogger,System.Collections.Generic.List{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamConfigUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamMarginUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAccountUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStrategyUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceGridUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceConditionOrderTriggerRejectUpdate}})">
@@ -27297,7 +27348,7 @@
         <member name="M:Binance.Net.Objects.Sockets.BinanceUsdFuturesUserDataSubscription.GetUnsubQuery">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.BinanceUsdFuturesUserDataSubscription.DoHandleMessageAsync(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{CryptoExchange.Net.Objects.Sockets.BaseParsedMessage})">
+        <member name="M:Binance.Net.Objects.Sockets.BinanceUsdFuturesUserDataSubscription.DoHandleMessageAsync(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{System.Object})">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.SymbolOrderBooks.BinanceFuturesCoinSymbolOrderBook">

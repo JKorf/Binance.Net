@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures.Socket;
-using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.Socket;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects.Sockets;
