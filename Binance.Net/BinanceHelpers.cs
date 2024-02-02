@@ -14,6 +14,8 @@ using System.Net;
 using System.Text.RegularExpressions;
 using Binance.Net.SymbolOrderBooks;
 using Binance.Net.Interfaces;
+using CryptoExchange.Net.Interfaces.CommonClients;
+using CryptoExchange.Net.Clients;
 
 namespace Binance.Net
 {
@@ -151,8 +153,8 @@ namespace Binance.Net
                 return handler;
             });
 
+            services.AddTransient<ICryptoExchangeClient, CryptoExchangeClient>();
             services.AddSingleton<IBinanceOrderBookFactory, BinanceOrderBookFactory>();
-            services.AddTransient<IBinanceRestClient, BinanceRestClient>();
             services.AddTransient(x => x.GetRequiredService<IBinanceRestClient>().SpotApi.CommonSpotClient);
             services.AddTransient(x => x.GetRequiredService<IBinanceRestClient>().UsdFuturesApi.CommonFuturesClient);
             services.AddTransient(x => x.GetRequiredService<IBinanceRestClient>().CoinFuturesApi.CommonFuturesClient);
@@ -330,5 +332,6 @@ namespace Binance.Net
 
             return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputQuoteQuantity, outputPrice, outputStopPrice);
         }
+
     }
 }

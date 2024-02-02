@@ -13,6 +13,7 @@ using System.Net.Http;
 using System;
 using Binance.Net.Objects.Options;
 using CryptoExchange.Net.Authentication;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Binance.Net.Clients
 {
@@ -38,14 +39,7 @@ namespace Binance.Net.Clients
         /// Create a new instance of the BinanceRestClient using provided options
         /// </summary>
         /// <param name="optionsDelegate">Option configuration delegate</param>
-        public BinanceRestClient(Action<BinanceRestOptions> optionsDelegate) : this(null, null, optionsDelegate)
-        {
-        }
-
-        /// <summary>
-        /// Create a new instance of the BinanceRestClient using provided options
-        /// </summary>
-        public BinanceRestClient(ILoggerFactory? loggerFactory = null, HttpClient? httpClient = null) : this(httpClient, loggerFactory, null)
+        public BinanceRestClient(Action<BinanceRestOptions>? optionsDelegate = null) : this(null, null, optionsDelegate)
         {
         }
 

@@ -169,11 +169,6 @@
             </summary>
             <param name="optionsDelegate">Option configuration delegate</param>
         </member>
-        <member name="M:Binance.Net.Clients.BinanceRestClient.#ctor(Microsoft.Extensions.Logging.ILoggerFactory,System.Net.Http.HttpClient)">
-            <summary>
-            Create a new instance of the BinanceRestClient using provided options
-            </summary>
-        </member>
         <member name="M:Binance.Net.Clients.BinanceRestClient.#ctor(System.Net.Http.HttpClient,Microsoft.Extensions.Logging.ILoggerFactory,System.Action{Binance.Net.Objects.Options.BinanceRestOptions})">
             <summary>
             Create a new instance of the BinanceRestClient using provided options
