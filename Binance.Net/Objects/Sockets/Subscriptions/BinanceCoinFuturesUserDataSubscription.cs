@@ -144,7 +144,8 @@ namespace Binance.Net.Objects.Sockets
             {
                 _gridHandler?.Invoke(message.As(gridUpdate.Data, gridUpdate.Stream, SocketUpdateType.Update));
             }
-            return Task.FromResult(new CallResult(null)); // TODO error not mapped
+
+            return Task.FromResult(new CallResult(null));
         }
     }
 }

@@ -95,7 +95,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             else if (message.Data is BinanceCombinedStream<BinanceStreamOrderList> orderListUpdate)
                 _orderListHandler?.Invoke(message.As(orderListUpdate.Data, orderListUpdate.Stream, SocketUpdateType.Update));
 
-            return Task.FromResult(new CallResult(null)); // TODO error not mapped
+            return Task.FromResult(new CallResult(null));
         }
     }
 }

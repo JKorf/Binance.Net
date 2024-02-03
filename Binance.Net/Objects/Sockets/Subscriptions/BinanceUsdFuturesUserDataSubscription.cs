@@ -154,6 +154,7 @@ namespace Binance.Net.Objects.Sockets
             {
                 _condOrderHandler?.Invoke(message.As(condUpdate.Data, condUpdate.Stream, SocketUpdateType.Update));
             }
+
             return Task.FromResult(new CallResult(null));
         }
     }

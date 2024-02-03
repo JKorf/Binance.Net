@@ -153,7 +153,8 @@ namespace Binance.Net
                 return handler;
             });
 
-            services.AddTransient<ICryptoExchangeClient, CryptoExchangeClient>();
+            services.AddTransient<ICryptoRestClient, CryptoRestClient>();
+            services.AddSingleton<ICryptoSocketClient, CryptoSocketClient>();
             services.AddSingleton<IBinanceOrderBookFactory, BinanceOrderBookFactory>();
             services.AddTransient(x => x.GetRequiredService<IBinanceRestClient>().SpotApi.CommonSpotClient);
             services.AddTransient(x => x.GetRequiredService<IBinanceRestClient>().UsdFuturesApi.CommonFuturesClient);
