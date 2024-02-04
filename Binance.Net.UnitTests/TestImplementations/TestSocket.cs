@@ -19,10 +19,10 @@ namespace Binance.Net.UnitTests.TestImplementations
 #pragma warning disable 0067
         public event Func<Task> OnReconnected;
         public event Func<Task> OnReconnecting;
+        public event Func<Exception, Task> OnError;
 #pragma warning restore 0067
         public event Func<int, Task> OnRequestSent;
         public event Func<WebSocketMessageType, Stream, Task> OnStreamMessage;
-        public event Func<Exception, Task> OnError;
         public event Func<Task> OnOpen;
 
         public int Id { get; }
