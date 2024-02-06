@@ -12,6 +12,7 @@ using System;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
 using Microsoft.Extensions.Logging;
+using Binance.Net.ExtensionMethods;
 
 namespace Binance.Net.Clients.SpotApi
 { 

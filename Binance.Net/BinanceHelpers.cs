@@ -1,21 +1,9 @@
-﻿using Binance.Net.Clients;
-using Binance.Net.Enums;
-using Binance.Net.Interfaces.Clients;
+﻿using Binance.Net.Enums;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models.Spot;
-using Binance.Net.Objects.Options;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Net;
-using System.Text.RegularExpressions;
-using Binance.Net.SymbolOrderBooks;
-using Binance.Net.Interfaces;
-using CryptoExchange.Net.Interfaces.CommonClients;
-using CryptoExchange.Net.Clients;
 
 namespace Binance.Net
 {
@@ -24,38 +12,6 @@ namespace Binance.Net
     /// </summary>
     public static class BinanceHelpers
     {
-        /// <summary>
-        /// Get the used weight from the response headers
-        /// </summary>
-        /// <param name="headers"></param>
-        /// <returns></returns>
-        public static int? UsedWeight(this IEnumerable<KeyValuePair<string, IEnumerable<string>>>? headers)
-        {
-            if (headers == null)
-                return null;
-
-            var headerValues = headers.SingleOrDefault(s => s.Key.StartsWith("X-MBX-USED-WEIGHT-", StringComparison.InvariantCultureIgnoreCase)).Value;
-            if (headerValues != null && int.TryParse(headerValues.First(), out var value))
-                return value;
-            return null;
-        }
-
-        /// <summary>
-        /// Get the used weight from the response headers
-        /// </summary>
-        /// <param name="headers"></param>
-        /// <returns></returns>
-        public static int? UsedOrderCount(this IEnumerable<KeyValuePair<string, IEnumerable<string>>>? headers)
-        {
-            if (headers == null)
-                return null;
-
-            var headerValues = headers.SingleOrDefault(s => s.Key.StartsWith("X-MBX-ORDER-COUNT-", StringComparison.InvariantCultureIgnoreCase)).Value;
-            if (headerValues != null && int.TryParse(headerValues.First(), out var value))
-                return value;
-            return null;
-        }
-
         /// <summary>
         /// Clamp a quantity between a min and max quantity and floor to the closest step
         /// </summary>
@@ -112,73 +68,6 @@ namespace Binance.Net
             return Math.Floor(number * 100000000) / 100000000;
         }
 
-        /// <summary>
-        /// Add the IBinanceClient and IBinanceSocketClient to the sevice collection so they can be injected
-        /// </summary>
-        /// <param name="services">The service collection</param>
-        /// <param name="defaultRestOptionsDelegate">Set default options for the rest client</param>
-        /// <param name="defaultSocketOptionsDelegate">Set default options for the socket client</param>
-        /// <param name="socketClientLifeTime">The lifetime of the IBinanceSocketClient for the service collection. Defaults to Singleton.</param>
-        /// <returns></returns>
-        public static IServiceCollection AddBinance(
-            this IServiceCollection services,
-            Action<BinanceRestOptions>? defaultRestOptionsDelegate = null,
-            Action<BinanceSocketOptions>? defaultSocketOptionsDelegate = null,
-            ServiceLifetime? socketClientLifeTime = null)
-        {
-            var restOptions = BinanceRestOptions.Default.Copy();
-
-            if (defaultRestOptionsDelegate != null)
-            {
-                defaultRestOptionsDelegate(restOptions);
-                BinanceRestClient.SetDefaultOptions(defaultRestOptionsDelegate);
-            }
-
-            if (defaultSocketOptionsDelegate != null)
-                BinanceSocketClient.SetDefaultOptions(defaultSocketOptionsDelegate);
-
-            services.AddHttpClient<IBinanceRestClient, BinanceRestClient>(options =>
-            {
-                options.Timeout = restOptions.RequestTimeout;
-            }).ConfigurePrimaryHttpMessageHandler(() => {
-                var handler = new HttpClientHandler();
-                if (restOptions.Proxy != null)
-                {
-                    handler.Proxy = new WebProxy
-                    {
-                        Address = new Uri($"{restOptions.Proxy.Host}:{restOptions.Proxy.Port}"),
-                        Credentials = restOptions.Proxy.Password == null ? null : new NetworkCredential(restOptions.Proxy.Login, restOptions.Proxy.Password)
-                    };
-                }
-                return handler;
-            });
-
-            services.AddTransient<ICryptoRestClient, CryptoRestClient>();
-            services.AddSingleton<ICryptoSocketClient, CryptoSocketClient>();
-            services.AddSingleton<IBinanceOrderBookFactory, BinanceOrderBookFactory>();
-            services.AddTransient(x => x.GetRequiredService<IBinanceRestClient>().SpotApi.CommonSpotClient);
-            services.AddTransient(x => x.GetRequiredService<IBinanceRestClient>().UsdFuturesApi.CommonFuturesClient);
-            services.AddTransient(x => x.GetRequiredService<IBinanceRestClient>().CoinFuturesApi.CommonFuturesClient);
-            if (socketClientLifeTime == null)
-                services.AddSingleton<IBinanceSocketClient, BinanceSocketClient>();
-            else
-                services.Add(new ServiceDescriptor(typeof(IBinanceSocketClient), typeof(BinanceSocketClient), socketClientLifeTime.Value));
-            return services;
-        }
-
-        /// <summary>
-        /// Validate the string is a valid Binance symbol.
-        /// </summary>
-        /// <param name="symbolString">string to validate</param> 
-        public static void ValidateBinanceSymbol(this string symbolString)
-        {
-            if (string.IsNullOrEmpty(symbolString))
-                throw new ArgumentException("Symbol is not provided");
-
-            if(!Regex.IsMatch(symbolString, "^([A-Z|a-z|0-9]{5,})$"))
-                throw new ArgumentException($"{symbolString} is not a valid Binance symbol. Should be [BaseAsset][QuoteAsset], e.g. BTCUSDT");
-        }
-
         internal static BinanceTradeRuleResult ValidateTradeRules(ILogger logger, TradeRulesBehaviour tradeRulesBehaviour, BinanceExchangeInfo exchangeInfo, string symbol, decimal? quantity, decimal? quoteQuantity, decimal? price, decimal? stopPrice, SpotOrderType? type)
         {
             var outputQuantity = quantity;
@@ -216,7 +105,7 @@ namespace Binance.Net
 
                 if (minQty.HasValue && quantity.HasValue)
                 {
-                    outputQuantity = BinanceHelpers.ClampQuantity(minQty.Value, maxQty!.Value, stepSize!.Value, quantity.Value);
+                    outputQuantity = ClampQuantity(minQty.Value, maxQty!.Value, stepSize!.Value, quantity.Value);
                     if (outputQuantity != quantity.Value)
                     {
                         if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
@@ -251,7 +140,7 @@ namespace Binance.Net
             {
                 if (symbolData.PriceFilter.MaxPrice != 0 && symbolData.PriceFilter.MinPrice != 0)
                 {
-                    outputPrice = BinanceHelpers.ClampPrice(symbolData.PriceFilter.MinPrice, symbolData.PriceFilter.MaxPrice, price.Value);
+                    outputPrice = ClampPrice(symbolData.PriceFilter.MinPrice, symbolData.PriceFilter.MaxPrice, price.Value);
                     if (outputPrice != price)
                     {
                         if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
@@ -262,7 +151,7 @@ namespace Binance.Net
 
                     if (stopPrice != null)
                     {
-                        outputStopPrice = BinanceHelpers.ClampPrice(symbolData.PriceFilter.MinPrice,
+                        outputStopPrice = ClampPrice(symbolData.PriceFilter.MinPrice,
                             symbolData.PriceFilter.MaxPrice, stopPrice.Value);
                         if (outputStopPrice != stopPrice)
                         {
@@ -281,7 +170,7 @@ namespace Binance.Net
                 if (symbolData.PriceFilter.TickSize != 0)
                 {
                     var beforePrice = outputPrice;
-                    outputPrice = BinanceHelpers.FloorPrice(symbolData.PriceFilter.TickSize, price.Value);
+                    outputPrice = FloorPrice(symbolData.PriceFilter.TickSize, price.Value);
                     if (outputPrice != beforePrice)
                     {
                         if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
@@ -293,7 +182,7 @@ namespace Binance.Net
                     if (stopPrice != null)
                     {
                         var beforeStopPrice = outputStopPrice;
-                        outputStopPrice = BinanceHelpers.FloorPrice(symbolData.PriceFilter.TickSize, stopPrice.Value);
+                        outputStopPrice = FloorPrice(symbolData.PriceFilter.TickSize, stopPrice.Value);
                         if (outputStopPrice != beforeStopPrice)
                         {
                             if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
@@ -327,12 +216,11 @@ namespace Binance.Net
 
                 var minQuantity = symbolData.MinNotionalFilter.MinNotional / outputPrice.Value;
                 var stepSize = symbolData.LotSizeFilter!.StepSize;
-                outputQuantity = BinanceHelpers.Floor(minQuantity + (stepSize - minQuantity % stepSize));
+                outputQuantity = Floor(minQuantity + (stepSize - minQuantity % stepSize));
                 logger.Log(LogLevel.Information, $"Quantity clamped from {currentQuantity} to {outputQuantity} based on min notional filter");
             }
 
             return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputQuoteQuantity, outputPrice, outputStopPrice);
         }
-
     }
 }

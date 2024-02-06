@@ -20,6 +20,7 @@ using System.Diagnostics;
 using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Clients;
 using Binance.Net.Clients.SpotApi;
+using Binance.Net.ExtensionMethods;
 using Binance.Net.Objects.Options;
 using CryptoExchange.Net.Objects.Sockets;
 

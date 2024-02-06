@@ -84,20 +84,6 @@
             Helper methods for the Binance API
             </summary>
         </member>
-        <member name="M:Binance.Net.BinanceHelpers.UsedWeight(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}})">
-            <summary>
-            Get the used weight from the response headers
-            </summary>
-            <param name="headers"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.BinanceHelpers.UsedOrderCount(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}})">
-            <summary>
-            Get the used weight from the response headers
-            </summary>
-            <param name="headers"></param>
-            <returns></returns>
-        </member>
         <member name="M:Binance.Net.BinanceHelpers.ClampQuantity(System.Decimal,System.Decimal,System.Decimal,System.Decimal)">
             <summary>
             Clamp a quantity between a min and max quantity and floor to the closest step
@@ -131,22 +117,6 @@
             </summary>
             <param name="number"></param>
             <returns></returns>
-        </member>
-        <member name="M:Binance.Net.BinanceHelpers.AddBinance(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Binance.Net.Objects.Options.BinanceRestOptions},System.Action{Binance.Net.Objects.Options.BinanceSocketOptions},System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
-            <summary>
-            Add the IBinanceClient and IBinanceSocketClient to the sevice collection so they can be injected
-            </summary>
-            <param name="services">The service collection</param>
-            <param name="defaultRestOptionsDelegate">Set default options for the rest client</param>
-            <param name="defaultSocketOptionsDelegate">Set default options for the socket client</param>
-            <param name="socketClientLifeTime">The lifetime of the IBinanceSocketClient for the service collection. Defaults to Singleton.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.BinanceHelpers.ValidateBinanceSymbol(System.String)">
-            <summary>
-            Validate the string is a valid Binance symbol.
-            </summary>
-            <param name="symbolString">string to validate</param> 
         </member>
         <member name="T:Binance.Net.Clients.BinanceRestClient">
             <inheritdoc cref="T:Binance.Net.Interfaces.Clients.IBinanceRestClient" />
@@ -4945,6 +4915,31 @@
             <summary>
             Contract price type
             </summary>
+        </member>
+        <member name="T:Binance.Net.ExtensionMethods.BinanceExtensionMethods">
+            <summary>
+            Extension methods specific to using the Binance API
+            </summary>
+        </member>
+        <member name="M:Binance.Net.ExtensionMethods.BinanceExtensionMethods.UsedWeight(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}})">
+            <summary>
+            Get the used weight from the response headers
+            </summary>
+            <param name="headers"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.ExtensionMethods.BinanceExtensionMethods.UsedOrderCount(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}})">
+            <summary>
+            Get the used weight from the response headers
+            </summary>
+            <param name="headers"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.ExtensionMethods.BinanceExtensionMethods.ValidateBinanceSymbol(System.String)">
+            <summary>
+            Validate the string is a valid Binance symbol.
+            </summary>
+            <param name="symbolString">string to validate</param> 
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApi">
             <summary>
@@ -27478,18 +27473,33 @@
             Extensions for the ICryptoRestClient and ICryptoSocketClient interfaces
             </summary>
         </member>
-        <member name="M:CryptoExchange.Net.Clients.CryptoClientExtensions.Binance(CryptoExchange.Net.Clients.ICryptoRestClient)">
+        <member name="M:CryptoExchange.Net.Clients.CryptoClientExtensions.Binance(CryptoExchange.Net.Interfaces.ICryptoRestClient)">
             <summary>
             Get the Binance REST Api client
             </summary>
             <param name="baseClient"></param>
             <returns></returns>
         </member>
-        <member name="M:CryptoExchange.Net.Clients.CryptoClientExtensions.Binance(CryptoExchange.Net.Clients.ICryptoSocketClient)">
+        <member name="M:CryptoExchange.Net.Clients.CryptoClientExtensions.Binance(CryptoExchange.Net.Interfaces.ICryptoSocketClient)">
             <summary>
             Get the Binance Websocket Api client
             </summary>
             <param name="baseClient"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions">
+            <summary>
+            Extensions for DI
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddBinance(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Binance.Net.Objects.Options.BinanceRestOptions},System.Action{Binance.Net.Objects.Options.BinanceSocketOptions},System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
+            <summary>
+            Add the IBinanceClient and IBinanceSocketClient to the sevice collection so they can be injected
+            </summary>
+            <param name="services">The service collection</param>
+            <param name="defaultRestOptionsDelegate">Set default options for the rest client</param>
+            <param name="defaultSocketOptionsDelegate">Set default options for the socket client</param>
+            <param name="socketClientLifeTime">The lifetime of the IBinanceSocketClient for the service collection. Defaults to Singleton.</param>
             <returns></returns>
         </member>
     </members>

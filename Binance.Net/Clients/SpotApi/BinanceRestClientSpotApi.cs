@@ -20,6 +20,7 @@ using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Interfaces.CommonClients;
 using CryptoExchange.Net.Converters;
 using Binance.Net.Objects.Options;
+using Binance.Net.ExtensionMethods;
 
 namespace Binance.Net.Clients.SpotApi
 {
