@@ -27468,19 +27468,19 @@
         <member name="M:Binance.Net.SymbolOrderBooks.BinanceSpotSymbolOrderBook.Dispose(System.Boolean)">
             <inheritdoc />
         </member>
-        <member name="T:CryptoExchange.Net.Clients.CryptoClientExtensions">
+        <member name="T:CryptoExchange.Net.Interfaces.CryptoClientExtensions">
             <summary>
             Extensions for the ICryptoRestClient and ICryptoSocketClient interfaces
             </summary>
         </member>
-        <member name="M:CryptoExchange.Net.Clients.CryptoClientExtensions.Binance(CryptoExchange.Net.Interfaces.ICryptoRestClient)">
+        <member name="M:CryptoExchange.Net.Interfaces.CryptoClientExtensions.Binance(CryptoExchange.Net.Interfaces.ICryptoRestClient)">
             <summary>
             Get the Binance REST Api client
             </summary>
             <param name="baseClient"></param>
             <returns></returns>
         </member>
-        <member name="M:CryptoExchange.Net.Clients.CryptoClientExtensions.Binance(CryptoExchange.Net.Interfaces.ICryptoSocketClient)">
+        <member name="M:CryptoExchange.Net.Interfaces.CryptoClientExtensions.Binance(CryptoExchange.Net.Interfaces.ICryptoSocketClient)">
             <summary>
             Get the Binance Websocket Api client
             </summary>
