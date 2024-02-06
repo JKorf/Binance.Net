@@ -1,21 +1,64 @@
-# Binance.Net
-[![.NET](https://github.com/JKorf/Binance.Net/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JKorf/Binance.Net/actions/workflows/dotnet.yml) [![Nuget version](https://img.shields.io/nuget/v/binance.net.svg)](https://www.nuget.org/packages/Binance.Net)  [![Nuget downloads](https://img.shields.io/nuget/dt/Binance.Net.svg)](https://www.nuget.org/packages/Binance.Net)
+# ![.Binance.Net](https://raw.githubusercontent.com/JKorf/Binance.Net/master/Binance.Net/Icon/icon.png) Binance.Net  
 
-Binance.Net is a wrapper around the Binance API as described on [Binance](https://binance-docs.github.io/apidocs/spot/en/#change-log), including all features the API provides using clear and readable objects. The library support the spot, (isolated) margin and futures API's, both the REST and websocket API's.
+[![.NET](https://github.com/JKorf/Binance.Net/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JKorf/Binance.Net/actions/workflows/dotnet.yml) 
 
-**If you think something is broken, something is missing or have any questions, please open an [Issue](https://github.com/JKorf/Binance.Net/issues)**
+A client library for accessing the [Binance REST and Websocket API](https://binance-docs.github.io/apidocs/#change-log). All data is mapped to readable models and string enum values accepted and returned by the API are mapped to C# enums.
 
-[Documentation](https://jkorf.github.io/Binance.Net/)
+## Get the library
+Available on Nuget [![Nuget version](https://img.shields.io/nuget/v/binance.net.svg)](https://www.nuget.org/packages/Binance.Net)  [![Nuget downloads](https://img.shields.io/nuget/dt/Binance.Net.svg)](https://www.nuget.org/packages/Binance.Net)
 
-## Installation
 `dotnet add package Binance.Net`
+
+## How to use
+Simplest usage
+```csharp
+// Get the ETH/USDT ticker via rest request
+var restClient = new BinanceRestClient();
+var tickerResult = await restClient.SpotApi.ExchangeData.GetTickerAsync("ETHUSDT");
+var lastPrice = tickerResult.Data.LastPrice;
+```
+
+```csharp
+// Subscribe to ETH/USDT ticker updates via the websocket API
+var socketClient = new BinanceSocketClient();
+var tickerSubscriptionResult = socketClient.SpotApi.ExchangeData.SubscribeToTickerUpdatesAsync("ETHUSDT", (update) => 
+{
+  var lastPrice = update.Data.LastPrice;
+});
+```
+
+For information on the clients, dependency injection, response processing and more see the [documentation](---), or have a look at the [examples](---).
+
+## CryptoExchange.Net
+Binance.Net is based on the [CryptoExchange.Net](https://github.com/JKorf/CryptoExchange.Net) base library. Other exchange API implementations based on the CryptoExchange.Net base library are available and follow the same logic.
+
+CryptoExchange.Net also allows for [easy access to different exchange API's](---).
+
+|Exchange|Repository|Nuget|
+|--|--|
+|Bitfinex|[JKorf/Bitfinex.Net](https://github.com/JKorf/Bitfinex.Net)|[![Nuget version](https://img.shields.io/nuget/v/Bitfinex.net.svg)](https://www.nuget.org/packages/Bitfinex.Net)|
+|Bitget|[JKorf/Bitget.Net](https://github.com/JKorf/Bitget.Net)|[![Nuget version](https://img.shields.io/nuget/v/Bitget.net.svg)](https://www.nuget.org/packages/Bitget.Net)|
+|Bybit|[JKorf/Bybit.Net](https://github.com/JKorf/Bybit.Net)|[![Nuget version](https://img.shields.io/nuget/v/Bybit.net.svg)](https://www.nuget.org/packages/Bybit.Net)|
+|CoinEx|[JKorf/CoinEx.Net](https://github.com/JKorf/CoinEx.Net)|[![Nuget version](https://img.shields.io/nuget/v/CoinEx.net.svg)](https://www.nuget.org/packages/CoinEx.Net)|
+|CoinGecko|[JKorf/CoinGecko.Net](https://github.com/JKorf/CoinGecko.Net)|[![Nuget version](https://img.shields.io/nuget/v/CoinGecko.net.svg)](https://www.nuget.org/packages/CoinGecko.Net)|
+|Huobi/HTX|[JKorf/Huobi.Net](https://github.com/JKorf/Huobi.Net)|[![Nuget version](https://img.shields.io/nuget/v/Huobi.net.svg)](https://www.nuget.org/packages/Huobi.Net)|
+|Kraken|[JKorf/Kraken.Net](https://github.com/JKorf/Kraken.Net)|[![Nuget version](https://img.shields.io/nuget/v/KrakenExchange.net.svg)](https://www.nuget.org/packages/KrakenExchange.Net)|
+|Kucoin|[JKorf/Kucoin.Net](https://github.com/JKorf/Kucoin.Net)|[![Nuget version](https://img.shields.io/nuget/v/Kucoin.net.svg)](https://www.nuget.org/packages/Kucoin.Net)|
+|Mexc|[JKorf/Mexc.Net](https://github.com/JKorf/Mexc.Net)|[![Nuget version](https://img.shields.io/nuget/v/JK.Mexc.net.svg)](https://www.nuget.org/packages/JK.Mexc.Net)|
+|OKX|[JKorf/OKX.Net](https://github.com/JKorf/OKX.Net)|[![Nuget version](https://img.shields.io/nuget/v/JK.OKX.net.svg)](https://www.nuget.org/packages/JK.OKX.Net)|
+
+## Discord
+A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
+
+## Supported functionality
+|API|Supported|Location|
+|--|--:|--|
+|Wallet endpoints|✓|`restClient.SpotApi.Account`|
+|Market data endpoints|✓|`restClient.SpotApi.ExchangeData`|
+|TODO|X||
 
 ## Support the project
 I develop and maintain this package on my own for free in my spare time, any support is greatly appreciated.
-
-### Referral link
-Sign up using the following referral link to pay a small percentage of the trading fees you pay to support the project instead of paying them straight to Binance. This doesn't cost you a thing!
-[Link](https://accounts.binance.com/en/register?ref=10153680)
 
 ### Donate
 Make a one time donation in a crypto currency of your choice. If you prefer to donate a currency not listed here please contact me.
@@ -25,9 +68,6 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 
 ### Sponsor
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
-
-## Discord
-A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Release notes
 * Version 9.4.0 - 05 Jan 2024
