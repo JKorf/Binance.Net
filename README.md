@@ -5,7 +5,8 @@
 A client library for accessing the [Binance REST and Websocket API](https://binance-docs.github.io/apidocs/#change-log). All data is mapped to readable models and string enum values accepted and returned by the API are mapped to C# enums.
 
 ## Get the library
-Available on Nuget [![Nuget version](https://img.shields.io/nuget/v/binance.net.svg)](https://www.nuget.org/packages/Binance.Net)  [![Nuget downloads](https://img.shields.io/nuget/dt/Binance.Net.svg)](https://www.nuget.org/packages/Binance.Net)
+Available on Nuget  
+[![Nuget version](https://img.shields.io/nuget/v/binance.net.svg)](https://www.nuget.org/packages/Binance.Net)  [![Nuget downloads](https://img.shields.io/nuget/dt/Binance.Net.svg)](https://www.nuget.org/packages/Binance.Net)
 
 `dotnet add package Binance.Net`
 
@@ -35,7 +36,7 @@ Binance.Net is based on the [CryptoExchange.Net](https://github.com/JKorf/Crypto
 CryptoExchange.Net also allows for [easy access to different exchange API's](---).
 
 |Exchange|Repository|Nuget|
-|--|--|
+|--|--|--|
 |Bitfinex|[JKorf/Bitfinex.Net](https://github.com/JKorf/Bitfinex.Net)|[![Nuget version](https://img.shields.io/nuget/v/Bitfinex.net.svg)](https://www.nuget.org/packages/Bitfinex.Net)|
 |Bitget|[JKorf/Bitget.Net](https://github.com/JKorf/Bitget.Net)|[![Nuget version](https://img.shields.io/nuget/v/Bitget.net.svg)](https://www.nuget.org/packages/Bitget.Net)|
 |Bybit|[JKorf/Bybit.Net](https://github.com/JKorf/Bybit.Net)|[![Nuget version](https://img.shields.io/nuget/v/Bybit.net.svg)](https://www.nuget.org/packages/Bybit.Net)|
