@@ -28,12 +28,12 @@ var tickerSubscriptionResult = socketClient.SpotApi.ExchangeData.SubscribeToTick
 });
 ```
 
-For information on the clients, dependency injection, response processing and more see the [documentation](---), or have a look at the [examples](---).
+For information on the clients, dependency injection, response processing and more see the [documentation](https://jkorf.github.io/CryptoExchange.Net), or have a look at the examples [here](https://github.com/JKorf/Binance.Net/tree/master/Examples) or [here](https://github.com/JKorf/CryptoExchange.Net/tree/master/Examples).
 
 ## CryptoExchange.Net
 Binance.Net is based on the [CryptoExchange.Net](https://github.com/JKorf/CryptoExchange.Net) base library. Other exchange API implementations based on the CryptoExchange.Net base library are available and follow the same logic.
 
-CryptoExchange.Net also allows for [easy access to different exchange API's](---).
+CryptoExchange.Net also allows for [easy access to different exchange API's](https://jkorf.github.io/CryptoExchange.Net#idocs_common).
 
 |Exchange|Repository|Nuget|
 |--|--|--|
@@ -52,11 +52,71 @@ CryptoExchange.Net also allows for [easy access to different exchange API's](---
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Supported functionality
+### Spot/Margin/Savings/Mining
 |API|Supported|Location|
 |--|--:|--|
 |Wallet endpoints|✓|`restClient.SpotApi.Account`|
+|SubAccount endpoints|✓|`restClient.GeneralApi.SubAccount`|
 |Market data endpoints|✓|`restClient.SpotApi.ExchangeData`|
-|TODO|X||
+|Websocket Market Streams|✓|`socketClient.SpotApi.ExchangeData`|
+|Spot Trading Endpoints|✓|`restClient.SpotApi.Trading`|
+|Spot Account Endpoints|✓|`restClient.SpotApi.Account`|
+|Margin Account/Trade|Partial|`restClient.SpotApi.Account` / `restClient.SpotApi.Trading`|
+|User Data Streams|✓|`socketClient.SpotApi.Account`|
+|Margin User Data Streams|X||
+|Simple Earn Endpoints|Outdated||
+|Auto-Invest Endpoints|X||
+|Staking Endpoints|✓|`restClient.GeneralApi.Staking`|
+|Mining Endpoints|✓|`restClient.GeneralApi.Mining`|
+|Futures|✓|`restClient.GeneralApi.Futures`|
+|Futures Algo Endpoints|✓|`restClient.UsdFuturesApi.Trading`|
+|Spot Algo Endpoints|✓|`restClient.SpotApi.Trading`|
+|Classic Portfolio Margin Endpoints|Partial|`restClient.SpotApi.Account`|
+|BLVT Endpoints|Partial|`restClient.SpotApi.Account` / `restClient.SpotApi.ExchangeData` / `restClient.SpotApi.Trading`|
+|Fiat Endpoints|✓|`restClient.SpotApi.Account`|
+|C2C Endpoints|✓|`restClient.SpotApi.Trading`|
+|VIP Loans Endpoints|X||
+|Crypto Loans Endpoints|Partial|`restClient.GeneralApi.Loans`|
+|Pay Endpoints|✓|`restClient.SpotApi.Trading`|
+|Convert Endpoints|✓|`restClient.SpotApi.ExchangeData` / `restClient.SpotApi.Trading`|
+|Rebate Endpoints|✓|`restClient.SpotApi.Account`|
+|NFT Endpoints|X||
+|Binance Gift Card Endpoints|X||
+
+### USD-M Futures
+|API|Supported|Location|
+|--|--:|--|
+|Market data Endpoints|✓|`restClient.UsdFuturesApi.ExchangeData`|
+|Websocket Market Streams|✓|`socketClient.UsdFuturesApi`|
+|Account/Trades Endpoints|✓|`restClient.UsdFuturesApi.Account` / `restClient.UsdFuturesApi.Trading`|
+|User Data Streams|✓|`socketClient.UsdFuturesApi`|
+|Classic Portfolio Margin Endpoints|X||
+
+### COIN-M Futures
+|API|Supported|Location|
+|--|--:|--|
+|Market data Endpoints|✓|`restClient.CoinFuturesApi.ExchangeData`|
+|Websocket Market Streams|✓|`socketClient.CoinFuturesApi`|
+|Account/Trades Endpoints|✓|`restClient.CoinFuturesApi.Account` / `restClient.CoinFuturesApi.Trading`|
+|User Data Streams|✓|`socketClient.CoinFuturesApi`|
+|Classic Portfolio Margin Endpoints|X||
+
+### European Options
+|API|Supported|Location|
+|--|--:|--|
+|*|X||
+
+### Websocket API
+|API|Supported|Location|
+|--|--:|--|
+|Market data requests|✓|`socketClient.SpotApi.ExchangeData`|
+|Trading requests|✓|`socketClient.SpotApi.Trading`|
+|Account requests|✓|`socketClient.SpotApi.Account`|
+
+### Portfolio Margin
+|API|Supported|Location|
+|--|--:|--|
+|*|X||
 
 ## Support the project
 I develop and maintain this package on my own for free in my spare time, any support is greatly appreciated.
