@@ -52,6 +52,7 @@ CryptoExchange.Net also allows for [easy access to different exchange API's](htt
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Supported functionality
+
 ### Spot/Margin/Savings/Mining
 |API|Supported|Location|
 |--|--:|--|
