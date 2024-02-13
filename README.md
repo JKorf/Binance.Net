@@ -1,32 +1,45 @@
 # ![.Binance.Net](https://raw.githubusercontent.com/JKorf/Binance.Net/master/Binance.Net/Icon/icon.png) Binance.Net  
 
-[![.NET](https://github.com/JKorf/Binance.Net/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JKorf/Binance.Net/actions/workflows/dotnet.yml) 
+[![.NET](https://img.shields.io/github/actions/workflow/status/JKorf/Binance.Net/dotnet.yml?style=for-the-badge)](https://github.com/JKorf/Binance.Net/actions/workflows/dotnet.yml) ![License](https://img.shields.io/github/license/JKorf/Binance.Net?style=for-the-badge)
+
 
 A client library for accessing the [Binance REST and Websocket API](https://binance-docs.github.io/apidocs/#change-log). All data is mapped to readable models and string enum values accepted and returned by the API are mapped to C# enums.
 
+## Supported Frameworks
+The library is targeting both `.NET Standard 2.0` and `.NET Standard 2.1` for optimal compatibility
+
+|.NET implementation|Version Support|
+|--|--|
+|.NET Core|`2.0` and higher|
+|.NET Framework|`4.6.1` and higher|
+|Mono|`5.4` and higher|
+|Xamarin.iOS|`10.14` and higher|
+|Xamarin.Android|`8.0` and higher|
+|UWP|`10.0.16299` and higher|
+|Unity|`2018.1` and higher|
+
 ## Get the library
-Available on Nuget  
-[![Nuget version](https://img.shields.io/nuget/v/binance.net.svg)](https://www.nuget.org/packages/Binance.Net)  [![Nuget downloads](https://img.shields.io/nuget/dt/Binance.Net.svg)](https://www.nuget.org/packages/Binance.Net)
+[![Nuget version](https://img.shields.io/nuget/v/binance.net.svg?style=for-the-badge)](https://www.nuget.org/packages/Binance.Net)  [![Nuget downloads](https://img.shields.io/nuget/dt/Binance.Net.svg?style=for-the-badge)](https://www.nuget.org/packages/Binance.Net)
 
-`dotnet add package Binance.Net`
-
+	dotnet add package Binance.Net
+	
 ## How to use
-Simplest usage
-```csharp
-// Get the ETH/USDT ticker via rest request
-var restClient = new BinanceRestClient();
-var tickerResult = await restClient.SpotApi.ExchangeData.GetTickerAsync("ETHUSDT");
-var lastPrice = tickerResult.Data.LastPrice;
-```
-
-```csharp
-// Subscribe to ETH/USDT ticker updates via the websocket API
-var socketClient = new BinanceSocketClient();
-var tickerSubscriptionResult = socketClient.SpotApi.ExchangeData.SubscribeToTickerUpdatesAsync("ETHUSDT", (update) => 
-{
-  var lastPrice = update.Data.LastPrice;
-});
-```
+* REST Endpoints
+	```csharp
+	// Get the ETH/USDT ticker via rest request
+	var restClient = new BinanceRestClient();
+	var tickerResult = await restClient.SpotApi.ExchangeData.GetTickerAsync("ETHUSDT");
+	var lastPrice = tickerResult.Data.LastPrice;
+	```
+* Websocket streams
+	```csharp
+	// Subscribe to ETH/USDT ticker updates via the websocket API
+	var socketClient = new BinanceSocketClient();
+	var tickerSubscriptionResult = socketClient.SpotApi.ExchangeData.SubscribeToTickerUpdatesAsync("ETHUSDT", (update) => 
+	{
+	  var lastPrice = update.Data.LastPrice;
+	});
+	```
 
 For information on the clients, dependency injection, response processing and more see the [documentation](https://jkorf.github.io/CryptoExchange.Net), or have a look at the examples [here](https://github.com/JKorf/Binance.Net/tree/master/Examples) or [here](https://github.com/JKorf/CryptoExchange.Net/tree/master/Examples).
 
@@ -37,18 +50,19 @@ CryptoExchange.Net also allows for [easy access to different exchange API's](htt
 
 |Exchange|Repository|Nuget|
 |--|--|--|
-|Bitfinex|[JKorf/Bitfinex.Net](https://github.com/JKorf/Bitfinex.Net)|[![Nuget version](https://img.shields.io/nuget/v/Bitfinex.net.svg)](https://www.nuget.org/packages/Bitfinex.Net)|
-|Bitget|[JKorf/Bitget.Net](https://github.com/JKorf/Bitget.Net)|[![Nuget version](https://img.shields.io/nuget/v/Bitget.net.svg)](https://www.nuget.org/packages/Bitget.Net)|
-|Bybit|[JKorf/Bybit.Net](https://github.com/JKorf/Bybit.Net)|[![Nuget version](https://img.shields.io/nuget/v/Bybit.net.svg)](https://www.nuget.org/packages/Bybit.Net)|
-|CoinEx|[JKorf/CoinEx.Net](https://github.com/JKorf/CoinEx.Net)|[![Nuget version](https://img.shields.io/nuget/v/CoinEx.net.svg)](https://www.nuget.org/packages/CoinEx.Net)|
-|CoinGecko|[JKorf/CoinGecko.Net](https://github.com/JKorf/CoinGecko.Net)|[![Nuget version](https://img.shields.io/nuget/v/CoinGecko.net.svg)](https://www.nuget.org/packages/CoinGecko.Net)|
-|Huobi/HTX|[JKorf/Huobi.Net](https://github.com/JKorf/Huobi.Net)|[![Nuget version](https://img.shields.io/nuget/v/Huobi.net.svg)](https://www.nuget.org/packages/Huobi.Net)|
-|Kraken|[JKorf/Kraken.Net](https://github.com/JKorf/Kraken.Net)|[![Nuget version](https://img.shields.io/nuget/v/KrakenExchange.net.svg)](https://www.nuget.org/packages/KrakenExchange.Net)|
-|Kucoin|[JKorf/Kucoin.Net](https://github.com/JKorf/Kucoin.Net)|[![Nuget version](https://img.shields.io/nuget/v/Kucoin.net.svg)](https://www.nuget.org/packages/Kucoin.Net)|
-|Mexc|[JKorf/Mexc.Net](https://github.com/JKorf/Mexc.Net)|[![Nuget version](https://img.shields.io/nuget/v/JK.Mexc.net.svg)](https://www.nuget.org/packages/JK.Mexc.Net)|
-|OKX|[JKorf/OKX.Net](https://github.com/JKorf/OKX.Net)|[![Nuget version](https://img.shields.io/nuget/v/JK.OKX.net.svg)](https://www.nuget.org/packages/JK.OKX.Net)|
+|Bitfinex|[JKorf/Bitfinex.Net](https://github.com/JKorf/Bitfinex.Net)|[![Nuget version](https://img.shields.io/nuget/v/Bitfinex.net.svg?style=flat-square)](https://www.nuget.org/packages/Bitfinex.Net)|
+|Bitget|[JKorf/Bitget.Net](https://github.com/JKorf/Bitget.Net)|[![Nuget version](https://img.shields.io/nuget/v/Bitget.net.svg?style=flat-square)](https://www.nuget.org/packages/Bitget.Net)|
+|Bybit|[JKorf/Bybit.Net](https://github.com/JKorf/Bybit.Net)|[![Nuget version](https://img.shields.io/nuget/v/Bybit.net.svg?style=flat-square)](https://www.nuget.org/packages/Bybit.Net)|
+|CoinEx|[JKorf/CoinEx.Net](https://github.com/JKorf/CoinEx.Net)|[![Nuget version](https://img.shields.io/nuget/v/CoinEx.net.svg?style=flat-square)](https://www.nuget.org/packages/CoinEx.Net)|
+|CoinGecko|[JKorf/CoinGecko.Net](https://github.com/JKorf/CoinGecko.Net)|[![Nuget version](https://img.shields.io/nuget/v/CoinGecko.net.svg?style=flat-square)](https://www.nuget.org/packages/CoinGecko.Net)|
+|Huobi/HTX|[JKorf/Huobi.Net](https://github.com/JKorf/Huobi.Net)|[![Nuget version](https://img.shields.io/nuget/v/Huobi.net.svg?style=flat-square)](https://www.nuget.org/packages/Huobi.Net)|
+|Kraken|[JKorf/Kraken.Net](https://github.com/JKorf/Kraken.Net)|[![Nuget version](https://img.shields.io/nuget/v/KrakenExchange.net.svg?style=flat-square)](https://www.nuget.org/packages/KrakenExchange.Net)|
+|Kucoin|[JKorf/Kucoin.Net](https://github.com/JKorf/Kucoin.Net)|[![Nuget version](https://img.shields.io/nuget/v/Kucoin.net.svg?style=flat-square)](https://www.nuget.org/packages/Kucoin.Net)|
+|Mexc|[JKorf/Mexc.Net](https://github.com/JKorf/Mexc.Net)|[![Nuget version](https://img.shields.io/nuget/v/JK.Mexc.net.svg?style=flat-square)](https://www.nuget.org/packages/JK.Mexc.Net)|
+|OKX|[JKorf/OKX.Net](https://github.com/JKorf/OKX.Net)|[![Nuget version](https://img.shields.io/nuget/v/JK.OKX.net.svg?style=flat-square)](https://www.nuget.org/packages/JK.OKX.Net)|
 
 ## Discord
+[![Nuget version](https://img.shields.io/discord/847020490588422145?style=for-the-badge)](https://discord.gg/MSpeEtSY8t)  
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Supported functionality
