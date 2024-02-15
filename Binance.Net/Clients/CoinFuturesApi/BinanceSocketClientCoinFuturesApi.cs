@@ -419,13 +419,13 @@ namespace Binance.Net.Clients.CoinFuturesApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
             string listenKey,
-            Action<DataEvent<BinanceFuturesStreamConfigUpdate>>? onConfigUpdate,
-            Action<DataEvent<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate,
-            Action<DataEvent<BinanceFuturesStreamAccountUpdate>>? onAccountUpdate,
-            Action<DataEvent<BinanceFuturesStreamOrderUpdate>>? onOrderUpdate,
-            Action<DataEvent<BinanceStreamEvent>>? onListenKeyExpired,
-            Action<DataEvent<BinanceStrategyUpdate>>? onStrategyUpdate,
-            Action<DataEvent<BinanceGridUpdate>>? onGridUpdate,
+            Action<DataEvent<BinanceFuturesStreamConfigUpdate>>? onConfigUpdate = null,
+            Action<DataEvent<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate = null,
+            Action<DataEvent<BinanceFuturesStreamAccountUpdate>>? onAccountUpdate = null,
+            Action<DataEvent<BinanceFuturesStreamOrderUpdate>>? onOrderUpdate = null,
+            Action<DataEvent<BinanceStreamEvent>>? onListenKeyExpired = null,
+            Action<DataEvent<BinanceStrategyUpdate>>? onStrategyUpdate = null,
+            Action<DataEvent<BinanceGridUpdate>>? onGridUpdate = null,
             CancellationToken ct = default)
         {
             listenKey.ValidateNotNull(nameof(listenKey));

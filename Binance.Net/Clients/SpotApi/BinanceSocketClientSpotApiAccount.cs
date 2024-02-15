@@ -108,10 +108,10 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
             string listenKey,
-            Action<DataEvent<BinanceStreamOrderUpdate>>? onOrderUpdateMessage,
-            Action<DataEvent<BinanceStreamOrderList>>? onOcoOrderUpdateMessage,
-            Action<DataEvent<BinanceStreamPositionsUpdate>>? onAccountPositionMessage,
-            Action<DataEvent<BinanceStreamBalanceUpdate>>? onAccountBalanceUpdate,
+            Action<DataEvent<BinanceStreamOrderUpdate>>? onOrderUpdateMessage = null,
+            Action<DataEvent<BinanceStreamOrderList>>? onOcoOrderUpdateMessage = null,
+            Action<DataEvent<BinanceStreamPositionsUpdate>>? onAccountPositionMessage = null,
+            Action<DataEvent<BinanceStreamBalanceUpdate>>? onAccountBalanceUpdate = null,
             CancellationToken ct = default)
         {
             listenKey.ValidateNotNull(nameof(listenKey));

@@ -2,7 +2,6 @@
 
 [![.NET](https://img.shields.io/github/actions/workflow/status/JKorf/Binance.Net/dotnet.yml?style=for-the-badge)](https://github.com/JKorf/Binance.Net/actions/workflows/dotnet.yml) ![License](https://img.shields.io/github/license/JKorf/Binance.Net?style=for-the-badge)
 
-
 A client library for accessing the [Binance REST and Websocket API](https://binance-docs.github.io/apidocs/#change-log). All data is mapped to readable models and string enum values accepted and returned by the API are mapped to C# enums.
 
 ## Supported Frameworks

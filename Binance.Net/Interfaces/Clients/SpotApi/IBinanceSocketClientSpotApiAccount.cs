@@ -63,6 +63,6 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(string listenKey, Action<DataEvent<BinanceStreamOrderUpdate>>? onOrderUpdateMessage, Action<DataEvent<BinanceStreamOrderList>>? onOcoOrderUpdateMessage, Action<DataEvent<BinanceStreamPositionsUpdate>>? onAccountPositionMessage, Action<DataEvent<BinanceStreamBalanceUpdate>>? onAccountBalanceUpdate, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(string listenKey, Action<DataEvent<BinanceStreamOrderUpdate>>? onOrderUpdateMessage = null, Action<DataEvent<BinanceStreamOrderList>>? onOcoOrderUpdateMessage = null, Action<DataEvent<BinanceStreamPositionsUpdate>>? onAccountPositionMessage = null, Action<DataEvent<BinanceStreamBalanceUpdate>>? onAccountBalanceUpdate = null, CancellationToken ct = default);
     }
 }
