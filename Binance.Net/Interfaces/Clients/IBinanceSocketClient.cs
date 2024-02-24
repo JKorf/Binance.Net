@@ -1,8 +1,6 @@
-﻿using Binance.Net.Clients.SpotApi;
-using Binance.Net.Interfaces.Clients.CoinFuturesApi;
+﻿using Binance.Net.Interfaces.Clients.CoinFuturesApi;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
-using Binance.Net.Objects;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Interfaces;
 

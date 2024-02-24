@@ -1,28 +1,22 @@
 ﻿using Microsoft.Extensions.Logging;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Threading.Tasks;
 using System.Threading;
 using Binance.Net.Objects.Models.Spot.Socket;
-using CryptoExchange.Net.Sockets;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using System.Collections.Generic;
 using Binance.Net.Objects.Models.Spot;
-using CryptoExchange.Net.Converters;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
+using CryptoExchange.Net.Objects.Sockets;
+using Binance.Net.Objects.Sockets.Subscriptions;
 
 namespace Binance.Net.Clients.SpotApi
 {
     /// <inheritdoc />
     public class BinanceSocketClientSpotApiAccount : IBinanceSocketClientSpotApiAccount
     {
-        private const string executionUpdateEvent = "executionReport";
-        private const string ocoOrderUpdateEvent = "listStatus";
-        private const string accountPositionUpdateEvent = "outboundAccountPosition";
-        private const string balanceUpdateEvent = "balanceUpdate";
-
         private readonly BinanceSocketClientSpotApi _client;
 
         private readonly ILogger _logger;
@@ -114,98 +108,15 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
             string listenKey,
-            Action<DataEvent<BinanceStreamOrderUpdate>>? onOrderUpdateMessage,
-            Action<DataEvent<BinanceStreamOrderList>>? onOcoOrderUpdateMessage,
-            Action<DataEvent<BinanceStreamPositionsUpdate>>? onAccountPositionMessage,
-            Action<DataEvent<BinanceStreamBalanceUpdate>>? onAccountBalanceUpdate,
+            Action<DataEvent<BinanceStreamOrderUpdate>>? onOrderUpdateMessage = null,
+            Action<DataEvent<BinanceStreamOrderList>>? onOcoOrderUpdateMessage = null,
+            Action<DataEvent<BinanceStreamPositionsUpdate>>? onAccountPositionMessage = null,
+            Action<DataEvent<BinanceStreamBalanceUpdate>>? onAccountBalanceUpdate = null,
             CancellationToken ct = default)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
-
-            var handler = new Action<DataEvent<string>>(data =>
-            {
-                var combinedToken = JToken.Parse(data.Data);
-                var token = combinedToken["data"];
-                if (token == null)
-                    return;
-
-                var evnt = token["e"]?.ToString();
-                if (evnt == null)
-                    return;
-
-                switch (evnt)
-                {
-                    case executionUpdateEvent:
-                        {
-                            var result = _client.DeserializeInternal<BinanceStreamOrderUpdate>(token);
-                            if (result)
-                            {
-                                result.Data.ListenKey = combinedToken["stream"]!.Value<string>()!;
-                                onOrderUpdateMessage?.Invoke(data.As(result.Data, result.Data.Id.ToString()));
-                            }
-                            else
-                            {
-                                _logger.Log(LogLevel.Warning,
-                                    "Couldn't deserialize data received from order stream: " + result.Error);
-                            }
-
-                            break;
-                        }
-                    case ocoOrderUpdateEvent:
-                        {
-                            var result = _client.DeserializeInternal<BinanceStreamOrderList>(token);
-                            if (result)
-                            {
-                                result.Data.ListenKey = combinedToken["stream"]!.Value<string>()!;
-                                onOcoOrderUpdateMessage?.Invoke(data.As(result.Data, result.Data.Id.ToString()));
-                            }
-                            else
-                            {
-                                _logger.Log(LogLevel.Warning,
-                                    "Couldn't deserialize data received from oco order stream: " + result.Error);
-                            }
-
-                            break;
-                        }
-                    case accountPositionUpdateEvent:
-                        {
-                            var result = _client.DeserializeInternal<BinanceStreamPositionsUpdate>(token);
-                            if (result)
-                            {
-                                result.Data.ListenKey = combinedToken["stream"]!.Value<string>()!;
-                                onAccountPositionMessage?.Invoke(data.As(result.Data));
-                            }
-                            else
-                            {
-                                _logger.Log(LogLevel.Warning,
-                                    "Couldn't deserialize data received from account position stream: " + result.Error);
-                            }
-
-                            break;
-                        }
-                    case balanceUpdateEvent:
-                        {
-                            var result = _client.DeserializeInternal<BinanceStreamBalanceUpdate>(token);
-                            if (result)
-                            {
-                                result.Data.ListenKey = combinedToken["stream"]!.Value<string>()!;
-                                onAccountBalanceUpdate?.Invoke(data.As(result.Data, result.Data.Asset));
-                            }
-                            else
-                            {
-                                _logger.Log(LogLevel.Warning,
-                                    "Couldn't deserialize data received from account position stream: " + result.Error);
-                            }
-
-                            break;
-                        }
-                    default:
-                        _logger.Log(LogLevel.Warning, $"Received unknown user data event {evnt}: " + data);
-                        break;
-                }
-            });
-
-            return await _client.SubscribeAsync(_client.BaseAddress, new[] { listenKey }, handler, ct).ConfigureAwait(false);
+            var subscription = new BinanceSpotUserDataSubscription(_logger, new List<string> { listenKey }, onOrderUpdateMessage, onOcoOrderUpdateMessage, onAccountPositionMessage, onAccountBalanceUpdate, false);
+            return await _client.SubscribeInternalAsync(_client.BaseAddress, subscription, ct).ConfigureAwait(false);
         }
         #endregion
 

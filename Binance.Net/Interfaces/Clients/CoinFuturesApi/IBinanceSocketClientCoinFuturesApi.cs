@@ -1,6 +1,5 @@
 ﻿using Binance.Net.Enums;
 using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Sockets;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -9,6 +8,7 @@ using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures.Socket;
 using Binance.Net.Objects.Models.Spot.Socket;
 using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.Objects.Sockets;
 
 namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 {
@@ -279,13 +279,13 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
             string listenKey,
-            Action<DataEvent<BinanceFuturesStreamConfigUpdate>>? onLeverageUpdate,
-            Action<DataEvent<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate,
-            Action<DataEvent<BinanceFuturesStreamAccountUpdate>>? onAccountUpdate,
-            Action<DataEvent<BinanceFuturesStreamOrderUpdate>>? onOrderUpdate,
-            Action<DataEvent<BinanceStreamEvent>> onListenKeyExpired,
-            Action<DataEvent<BinanceStrategyUpdate>>? onStrategyUpdate,
-            Action<DataEvent<BinanceGridUpdate>>? onGridUpdate,
+            Action<DataEvent<BinanceFuturesStreamConfigUpdate>>? onLeverageUpdate = null,
+            Action<DataEvent<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate = null,
+            Action<DataEvent<BinanceFuturesStreamAccountUpdate>>? onAccountUpdate = null,
+            Action<DataEvent<BinanceFuturesStreamOrderUpdate>>? onOrderUpdate = null,
+            Action<DataEvent<BinanceStreamEvent>>? onListenKeyExpired = null,
+            Action<DataEvent<BinanceStrategyUpdate>>? onStrategyUpdate = null,
+            Action<DataEvent<BinanceGridUpdate>>? onGridUpdate = null,
             CancellationToken ct = default);
 
         /// <summary>
@@ -319,7 +319,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToMarkPriceUpdatesAsync(string symbol, int? updateInterval, Action<DataEvent<IEnumerable<BinanceFuturesCoinStreamMarkPrice>>> onMessage, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToMarkPriceUpdatesAsync(string symbol, int? updateInterval, Action<DataEvent<BinanceFuturesCoinStreamMarkPrice>> onMessage, CancellationToken ct = default);
 
         /// <summary>
         ///Subscribe to the Mark price update stream for all symbols
@@ -340,7 +340,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToMarkPriceUpdatesAsync(IEnumerable<string> symbols, int? updateInterval, Action<DataEvent<IEnumerable<BinanceFuturesCoinStreamMarkPrice>>> onMessage, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToMarkPriceUpdatesAsync(IEnumerable<string> symbols, int? updateInterval, Action<DataEvent<BinanceFuturesCoinStreamMarkPrice>> onMessage, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribes to the continuous contract candlestick update stream for the provided pair

@@ -18,10 +18,11 @@ using Microsoft.Extensions.Logging;
 using System.Reflection;
 using System.Diagnostics;
 using Binance.Net.Objects.Models.Spot;
-using CryptoExchange.Net.Sockets;
 using Binance.Net.Clients;
 using Binance.Net.Clients.SpotApi;
+using Binance.Net.ExtensionMethods;
 using Binance.Net.Objects.Options;
+using CryptoExchange.Net.Objects.Sockets;
 
 namespace Binance.Net.UnitTests
 {

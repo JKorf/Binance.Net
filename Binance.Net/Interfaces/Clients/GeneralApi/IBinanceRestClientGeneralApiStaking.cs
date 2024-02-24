@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Enums;
 using Binance.Net.Objects.Models;
-using Binance.Net.Objects.Models.Spot.Lending;
 using Binance.Net.Objects.Models.Spot.Staking;
 using CryptoExchange.Net.Objects;
 

@@ -1,15 +1,14 @@
 ﻿using Binance.Net.Enums;
 using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Sockets;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures.Socket;
-using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.Socket;
 using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.Objects.Sockets;
 
 namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 {
@@ -335,14 +334,14 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
             string listenKey,
-            Action<DataEvent<BinanceFuturesStreamConfigUpdate>>? onLeverageUpdate,
-            Action<DataEvent<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate,
-            Action<DataEvent<BinanceFuturesStreamAccountUpdate>>? onAccountUpdate,
-            Action<DataEvent<BinanceFuturesStreamOrderUpdate>>? onOrderUpdate,
-            Action<DataEvent<BinanceStreamEvent>> onListenKeyExpired,
-            Action<DataEvent<BinanceStrategyUpdate>>? onStrategyUpdate,
-            Action<DataEvent<BinanceGridUpdate>>? onGridUpdate,
-            Action<DataEvent<BinanceConditionOrderTriggerRejectUpdate>>? onConditionalOrderTriggerRejectUpdate,
+            Action<DataEvent<BinanceFuturesStreamConfigUpdate>>? onLeverageUpdate = null,
+            Action<DataEvent<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate = null,
+            Action<DataEvent<BinanceFuturesStreamAccountUpdate>>? onAccountUpdate = null,
+            Action<DataEvent<BinanceFuturesStreamOrderUpdate>>? onOrderUpdate = null,
+            Action<DataEvent<BinanceStreamEvent>>? onListenKeyExpired = null,
+            Action<DataEvent<BinanceStrategyUpdate>>? onStrategyUpdate = null,
+            Action<DataEvent<BinanceGridUpdate>>? onGridUpdate = null,
+            Action<DataEvent<BinanceConditionOrderTriggerRejectUpdate>>? onConditionalOrderTriggerRejectUpdate = null,
             CancellationToken ct = default);
 
         

@@ -10,7 +10,6 @@ using CryptoExchange.Net;
 using Binance.Net.Interfaces.Clients.GeneralApi;
 using Binance.Net.Clients.SpotApi;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json.Linq;
 using Binance.Net.Objects.Options;
 using System.Linq;
 

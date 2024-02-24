@@ -14,7 +14,7 @@ using Binance.Net.Interfaces.Clients;
 using Binance.Net.Objects.Models.Futures;
 using Binance.Net.Objects.Options;
 using CryptoExchange.Net.Interfaces;
-using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Objects.Sockets;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Newtonsoft.Json;

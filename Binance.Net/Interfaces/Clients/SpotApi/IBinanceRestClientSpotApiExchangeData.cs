@@ -9,7 +9,6 @@ using Binance.Net.Objects.Models.Spot.BSwap;
 using Binance.Net.Objects.Models.Spot.Convert;
 using Binance.Net.Objects.Models.Spot.IsolatedMargin;
 using Binance.Net.Objects.Models.Spot.Margin;
-using Binance.Net.Objects.Models.Spot.Staking;
 using CryptoExchange.Net.Objects;
 
 namespace Binance.Net.Interfaces.Clients.SpotApi

@@ -18,9 +18,9 @@ using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Interfaces.CommonClients;
-using Newtonsoft.Json.Linq;
 using CryptoExchange.Net.Converters;
 using Binance.Net.Objects.Options;
+using Binance.Net.ExtensionMethods;
 
 namespace Binance.Net.Clients.SpotApi
 {
