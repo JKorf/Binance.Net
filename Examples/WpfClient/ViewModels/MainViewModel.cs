@@ -12,6 +12,7 @@ using WpfClient.MessageBox;
 using WpfClient.UserControls;
 using Binance.Net.Clients;
 using Binance.Net.Objects.Models.Spot.Socket;
+using CryptoExchange.Net.Objects.Sockets;
 
 namespace WpfClient.ViewModels
 {
