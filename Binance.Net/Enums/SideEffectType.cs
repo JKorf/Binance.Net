@@ -16,6 +16,10 @@
         /// <summary>
         /// Make auto repayment after order is filled
         /// </summary>
-        AutoRepay
+        AutoRepay,
+        /// <summary>
+        /// Automatic borrowing and repayment, simultaneously
+        /// </summary>
+        AutoBorrowRepay,
     }
 }
