@@ -431,7 +431,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             listenKey.ValidateNotNull(nameof(listenKey));
 
             var subscription = new BinanceCoinFuturesUserDataSubscription(_logger, new List<string> { listenKey }, onOrderUpdate, onConfigUpdate, onMarginUpdate, onAccountUpdate, onListenKeyExpired, onStrategyUpdate, onGridUpdate);
-            return await SubscribeAsync(BaseAddress, subscription, ct).ConfigureAwait(false);
+            return await SubscribeAsync(BaseAddress.AppendPath("ws"), subscription, ct).ConfigureAwait(false);
         }
 
         #endregion
