@@ -19,11 +19,6 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         public IBinanceRestClientGeneralApiFutures Futures { get; }
 
         /// <summary>
-        /// Endpoints related to savings
-        /// </summary>
-        public IBinanceRestClientGeneralApiSavings Savings { get; }
-
-        /// <summary>
         /// Endpoints related to crypto loans
         /// </summary>
         public IBinanceRestClientGeneralApiLoans CryptoLoans { get; }
@@ -42,5 +37,10 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// Endpoints related to staking
         /// </summary>
         IBinanceRestClientGeneralApiStaking Staking { get; }
+
+        /// <summary>
+        /// Endpoints related to Binance Simple Earn
+        /// </summary>
+        IBinanceRestClientGeneralApiSimpleEarn SimpleEarn { get; }
     }
 }

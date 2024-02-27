@@ -554,9 +554,6 @@
         <member name="P:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.Futures">
             <inheritdoc />
         </member>
-        <member name="P:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.Savings">
-            <inheritdoc />
-        </member>
         <member name="P:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.CryptoLoans">
             <inheritdoc />
         </member>
@@ -567,6 +564,9 @@
             <inheritdoc />
         </member>
         <member name="P:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.Staking">
+            <inheritdoc />
+        </member>
+        <member name="P:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.SimpleEarn">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
@@ -701,24 +701,6 @@
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiFutures.GetFuturesTransferHistoryAsync(System.String,System.DateTime,System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiFutures.GetCrossCollateralBorrowHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiFutures.GetCrossCollateralRepayHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiFutures.GetCrossCollateralWalletAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiFutures.GetAdjustCrossCollateralLoanToValueHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiFutures.GetCrossCollateralLiquidationHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiFutures.GetCrossCollateralInterestHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
         <member name="T:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiLoans">
             <inheritdoc />
         </member>
@@ -800,73 +782,76 @@
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiMining.GetMiningAccountEarningsAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="T:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSavings">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.GetFlexibleProductsAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSavings.GetFlexibleProductListAsync(System.Nullable{Binance.Net.Enums.ProductStatus},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.GetLockedProductsAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSavings.GetLeftDailyPurchaseQuotaOfFlexableProductAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.SubscribeFlexibleProductAsync(System.String,System.Decimal,System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.AccountSource},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSavings.PurchaseFlexibleProductAsync(System.String,System.Decimal,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.SubscribeLockedProductAsync(System.String,System.Decimal,System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.AccountSource},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSavings.GetLeftDailyRedemptionQuotaOfFlexibleProductAsync(System.String,Binance.Net.Enums.RedeemType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.RedeemFlexibleProductAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.AccountSource},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSavings.RedeemFlexibleProductAsync(System.String,System.Decimal,Binance.Net.Enums.RedeemType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.RedeemLockedProductAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSavings.GetFlexibleProductPositionAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.GetFlexibleProductPositionsAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSavings.GetFixedAndCustomizedFixedProjectListAsync(Binance.Net.Enums.ProjectType,System.String,System.Nullable{Binance.Net.Enums.ProductStatus},System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.GetLockedProductPositionsAsync(System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSavings.PurchaseCustomizedFixedProjectAsync(System.String,System.Int32,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.GetAccountAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSavings.GetCustomizedFixedProjectPositionsAsync(System.String,System.String,System.Nullable{Binance.Net.Enums.ProjectStatus},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.GetFlexibleSubscriptionRecordsAsync(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSavings.GetLendingAccountAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.GetLockedSubscriptionRecordsAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSavings.GetPurchaseRecordsAsync(Binance.Net.Enums.LendingType,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.GetFlexibleRedemptionRecordsAsync(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSavings.GetRedemptionRecordsAsync(Binance.Net.Enums.LendingType,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.GetLockedRedemptionRecordsAsync(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSavings.GetLendingInterestHistoryAsync(Binance.Net.Enums.LendingType,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.GetFlexibleRewardRecordsAsync(Binance.Net.Enums.RewardType,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSavings.ChangeToDailyPositionAsync(System.String,System.Int32,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.GetLockedRewardRecordsAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.SetFlexibleAutoSubscribeAsync(System.String,System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.SetLockedAutoSubscribeAsync(System.String,System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.GetFlexiblePersonalQuotaLeftAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.GetLockedPersonalQuotaLeftAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.GetFlexibleSubscriptionPreviewAsync(System.String,System.Decimal,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.GetLockedSubscriptionPreviewAsync(System.String,System.Decimal,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.GetRateHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.GetCollateralRecordsAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiStaking">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiStaking.SetAutoStakingAsync(Binance.Net.Enums.StakingProductType,System.String,System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiStaking.GetStakingPersonalQuotaAsync(Binance.Net.Enums.StakingProductType,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiStaking.GetStakingProductsAsync(Binance.Net.Enums.StakingProductType,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiStaking.PurchaseStakingProductAsync(Binance.Net.Enums.StakingProductType,System.String,System.Decimal,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiStaking.RedeemStakingProductAsync(Binance.Net.Enums.StakingProductType,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiStaking.GetStakingPositionsAsync(Binance.Net.Enums.StakingProductType,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiStaking.GetStakingHistoryAsync(Binance.Net.Enums.StakingProductType,Binance.Net.Enums.StakingTransactionType,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiStaking.SubscribeEthStakingAsync(System.Decimal,System.Nullable{System.Int64},System.Threading.CancellationToken)">
@@ -2224,6 +2209,26 @@
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApi.GetAuthenticationRequest">
             <inheritdoc />
+        </member>
+        <member name="T:Binance.Net.Enums.AccountSource">
+            <summary>
+            Account source
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountSource.Spot">
+            <summary>
+            Spot
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountSource.Fund">
+            <summary>
+            Fund
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountSource.All">
+            <summary>
+            All
+            </summary>
         </member>
         <member name="T:Binance.Net.Enums.AccountType">
             <summary>
@@ -4086,6 +4091,46 @@
             Normal
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.RedemptionType">
+            <summary>
+            Simple earn redemption type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.RedemptionType.ToSpot">
+            <summary>
+            Redeem to spot account
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.RedemptionType.ToFlexibleProduct">
+            <summary>
+            Redeem to flexible product
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.RedemptionType.EarlyRedemption">
+            <summary>
+            Early redemption
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.RewardType">
+            <summary>
+            Simple Earn Reward type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.RewardType.BonusTieredApr">
+            <summary>
+            Bonus tiered APR
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.RewardType.RealtimeApr">
+            <summary>
+            Realtime APR
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.RewardType.HistoricalRewards">
+            <summary>
+            Historical rewards
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.SelfTradePreventionMode">
             <summary>
             Self trade prevention mode
@@ -4129,6 +4174,11 @@
         <member name="F:Binance.Net.Enums.SideEffectType.AutoRepay">
             <summary>
             Make auto repayment after order is filled
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SideEffectType.AutoBorrowRepay">
+            <summary>
+            Automatic borrowing and repayment, simultaneously
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.SpotOrderType">
@@ -4309,6 +4359,61 @@
         <member name="F:Binance.Net.Enums.SubAccountFuturesTransferType.FromCoinFuturesToSpot">
             <summary>
             From sub account coin-m futures to sub account spot
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.SubscriptionStatus">
+            <summary>
+            Simple earn subscription status
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SubscriptionStatus.Purchasing">
+            <summary>
+            Purchasing
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SubscriptionStatus.Success">
+            <summary>
+            Success
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SubscriptionStatus.Failed">
+            <summary>
+            Failed
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.SubscriptionType">
+            <summary>
+            Simple earn subscription type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SubscriptionType.Auto">
+            <summary>
+            Auto subscribe
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SubscriptionType.Normal">
+            <summary>
+            Normal
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SubscriptionType.Convert">
+            <summary>
+            Locked to flexible
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SubscriptionType.Loan">
+            <summary>
+            Flexible loan
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SubscriptionType.AutoInvest">
+            <summary>
+            Auto invest
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SubscriptionType.Transfer">
+            <summary>
+            Locked saving to flexible
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.SymbolFilterType">
@@ -5989,11 +6094,6 @@
             Endpoints related to futures account interactions
             </summary>
         </member>
-        <member name="P:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApi.Savings">
-            <summary>
-            Endpoints related to savings
-            </summary>
-        </member>
         <member name="P:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApi.CryptoLoans">
             <summary>
             Endpoints related to crypto loans
@@ -6012,6 +6112,11 @@
         <member name="P:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApi.Staking">
             <summary>
             Endpoints related to staking
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApi.SimpleEarn">
+            <summary>
+            Endpoints related to Binance Simple Earn
             </summary>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiBrokerage">
@@ -6498,82 +6603,6 @@
             <param name="ct">Cancellation token</param>
             <returns>History</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiFutures.GetCrossCollateralBorrowHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Get cross collateral borrow history
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#cross-collateral-borrow-history-user_data" /></para>
-            </summary>
-            <param name="asset">The asset to get history for</param>
-            <param name="startTime">Filter by start time</param>
-            <param name="endTime">Filter by end time</param>
-            <param name="limit">The page size</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>History</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiFutures.GetCrossCollateralRepayHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Get cross collateral borrow history
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#cross-collateral-repayment-history-user_data" /></para>
-            </summary>
-            <param name="asset">The asset to get history for</param>
-            <param name="startTime">Filter by start time</param>
-            <param name="endTime">Filter by end time</param>
-            <param name="limit">The page size</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>History</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiFutures.GetCrossCollateralWalletAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Get cross-collateral wallet info
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#cross-collateral-wallet-v2-user_data" /></para>
-            </summary>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Wallet</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiFutures.GetAdjustCrossCollateralLoanToValueHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Get cross collateral LTV adjustment history
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#adjust-cross-collateral-ltv-history-user_data" /></para>
-            </summary>
-            <param name="loanAsset">The loan asset</param>
-            <param name="collateralAsset">The collateral asset</param>
-            <param name="startTime">Filter by start time</param>
-            <param name="endTime">Filter by end time</param>
-            <param name="limit">The page size</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Adjustment history</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiFutures.GetCrossCollateralLiquidationHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Get cross collateral liquidation history
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#cross-collateral-liquidation-history-user_data" /></para>
-            </summary>
-            <param name="collateralAsset">The collateral asset</param>
-            <param name="loanAsset">The loan asset</param>
-            <param name="startTime">Filter by start time</param>
-            <param name="endTime">Filter by end time</param>
-            <param name="limit">The page size</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Liquidation history</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiFutures.GetCrossCollateralInterestHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Get cross collateral interest history
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#cross-collateral-interest-history-user_data" /></para>
-            </summary>
-            <param name="collateralAsset">The collateral asset</param>
-            <param name="startTime">Filter by start time</param>
-            <param name="endTime">Filter by end time</param>
-            <param name="limit">The page size</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
         <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiLoans">
             <summary>
             Binance Spot Crypto loans endpoints
@@ -6894,283 +6923,311 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSavings">
+        <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn">
             <summary>
-            Binance Spot Savings endpoints
+            Binance simple earn endpoints
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSavings.GetFlexibleProductListAsync(System.Nullable{Binance.Net.Enums.ProductStatus},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn.GetFlexibleProductsAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Get product list
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-product-list-user_data" /></para>
+            Get a list of simple earn flexible products
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-simple-earn-flexible-product-list-user_data" /></para>
             </summary>
             <param name="asset">Filter by asset</param>
-            <param name="status">Filter by status</param>
-            <param name="featured">Filter by featured</param>
-            <param name="page">Page to retrieve</param>
-            <param name="pageSize">Page size to return</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>List of product</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSavings.GetLeftDailyPurchaseQuotaOfFlexableProductAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Get the purchase quota left for a product
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-left-daily-purchase-quota-of-flexible-product-user_data" /></para>
-            </summary>
-            <param name="productId">Id of the product</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Quota left</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSavings.PurchaseFlexibleProductAsync(System.String,System.Decimal,System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Purchase flexible product
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#purchase-flexible-product-user_data" /></para>
-            </summary>
-            <param name="productId">Id of the product</param>
-            <param name="quantity">The quantity to purchase</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Purchase id</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSavings.GetLeftDailyRedemptionQuotaOfFlexibleProductAsync(System.String,Binance.Net.Enums.RedeemType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Get the redemption quota left for a product
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-left-daily-redemption-quota-of-flexible-product-user_data" /></para>
-            </summary>
-            <param name="productId">Id of the product</param>
-            <param name="type">Type</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Quota left</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSavings.RedeemFlexibleProductAsync(System.String,System.Decimal,Binance.Net.Enums.RedeemType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Redeem flexible product
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#redeem-flexible-product-user_data" /></para>
-            </summary>
-            <param name="productId">Id of the product</param>
-            <param name="type">Redeem type</param>
-            <param name="quantity">The quantity to redeem</param>
+            <param name="page">Current page</param>
+            <param name="pageSize">Page size</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSavings.GetFlexibleProductPositionAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn.GetLockedProductsAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Get flexible product position
+            Get a list of simple earn locked products
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-simple-earn-locked-product-list-user_data" /></para>
+            </summary>
+            <param name="asset">Filter by asset</param>
+            <param name="page">Current page</param>
+            <param name="pageSize">Page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn.SubscribeFlexibleProductAsync(System.String,System.Decimal,System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.AccountSource},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to flexible product
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#subscribe-flexible-product-trade" /></para>
+            </summary>
+            <param name="productId">Product id</param>
+            <param name="quantity">Quantity</param>
+            <param name="autoSubscribe">Auto subscribe, default true</param>
+            <param name="sourceAccount">Source account</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn.SubscribeLockedProductAsync(System.String,System.Decimal,System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.AccountSource},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to locked product
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#subscribe-locked-product-trade" /></para>
+            </summary>
+            <param name="projectId">Project id</param>
+            <param name="quantity">Quantity</param>
+            <param name="autoSubscribe">Auto subscribe, default true</param>
+            <param name="sourceAccount">Source account</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn.RedeemFlexibleProductAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.AccountSource},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Redeem flexible product
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#redeem-flexible-product-trade" /></para>
+            </summary>
+            <param name="productId">Product id</param>
+            <param name="redeemAll">Whether to redeem all. If not then quantity should be specified</param>
+            <param name="quantity">Quantity</param>
+            <param name="destinationAccount">Destination account</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn.RedeemLockedProductAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Redeem locked product
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#redeem-locked-product-trade" /></para>
+            </summary>
+            <param name="positionId">Position id</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn.GetFlexibleProductPositionsAsync(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get flexible product position info
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-product-position-user_data" /></para>
             </summary>
-            <param name="asset">Asset</param>
+            <param name="asset">Filter by asset</param>
+            <param name="productId">Filter by product id</param>
+            <param name="page">Current page</param>
+            <param name="pageSize">Page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn.GetLockedProductPositionsAsync(System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get locked product position info
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-locked-product-position-user_data" /></para>
+            </summary>
+            <param name="asset">Filter by asset</param>
+            <param name="positionId">Filter by position id</param>
+            <param name="projectId">Filter by project id</param>
+            <param name="page">Current page</param>
+            <param name="pageSize">Page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn.GetAccountAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get Simple Earn account info
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#simple-account-user_data" /></para>
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn.GetFlexibleSubscriptionRecordsAsync(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get Simple Earn flexible product subscription records 
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-subscription-record-user_data" /></para>
+            </summary>
+            <param name="productId">Filter by product id</param>
+            <param name="purchaseId">Filter by purchase id</param>
+            <param name="asset">Filler by asset</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Current page</param>
+            <param name="pageSize">Page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn.GetLockedSubscriptionRecordsAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get Simple Earn locked product subscription records
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-locked-subscription-record-user_data" /></para>
+            </summary>
+            <param name="purchaseId">Filter by purchase id</param>
+            <param name="asset">Filler by asset</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Current page</param>
+            <param name="pageSize">Page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn.GetFlexibleRedemptionRecordsAsync(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get Simple Earn flexible product redemption records
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-redemption-record-user_data" /></para>
+            </summary>
+            <param name="productId">Filter by product id</param>
+            <param name="redeemId">Filler by redeem id</param>
+            <param name="asset">Filler by asset</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Current page</param>
+            <param name="pageSize">Page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn.GetLockedRedemptionRecordsAsync(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get Simple Earn locked product redemption records
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-locked-redemption-record-user_data" /></para>
+            </summary>
+            <param name="positionId">Filter by position id</param>
+            <param name="redeemId">Filler by redeem id</param>
+            <param name="asset">Filler by asset</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Current page</param>
+            <param name="pageSize">Page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn.GetFlexibleRewardRecordsAsync(Binance.Net.Enums.RewardType,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get Simple Earn flexible product reward records
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-rewards-history-user_data" /></para>
+            </summary>
+            <param name="type">Type or rewards</param>
+            <param name="productId">Filter by product id</param>
+            <param name="asset">Filler by asset</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Current page</param>
+            <param name="pageSize">Page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn.GetLockedRewardRecordsAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get Simple Earn locked product reward records
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-locked-rewards-history-user_data" /></para>
+            </summary>
+            <param name="positionId">Position id</param>
+            <param name="asset">Filler by asset</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Current page</param>
+            <param name="pageSize">Page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn.SetFlexibleAutoSubscribeAsync(System.String,System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Set flexible product auto subscribe toggle
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#set-flexible-auto-subscribe-user_data" /></para>
+            </summary>
             <param name="productId">Product id</param>
-            <param name="page">Page to retrieve</param>
-            <param name="pageSize">Page size to return</param>
+            <param name="autoSubscribe">Auto subscribe enabled or not</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
-            <returns>Flexible product position(s)</returns>
+            <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSavings.GetFixedAndCustomizedFixedProjectListAsync(Binance.Net.Enums.ProjectType,System.String,System.Nullable{Binance.Net.Enums.ProductStatus},System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn.SetLockedAutoSubscribeAsync(System.String,System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Get fixed and customized fixed project list
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-fixed-and-activity-project-list-user_data" /></para>
+            Set locked product auto subscribe toggle
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#set-locked-auto-subscribe-user_data" /></para>
             </summary>
-            <param name="type">Type of project</param>
-            <param name="asset">Asset</param>
-            <param name="status">Filter by status</param>
-            <param name="sortAscending">If should sort ascending</param>
-            <param name="sortBy">Sort by. Valid values: "START_TIME", "LOT_SIZE", "INTEREST_RATE", "DURATION"; default "START_TIME"</param>
-            <param name="currentPage">Result page</param>
-            <param name="size">Page size</param>
+            <param name="positionId">Position id</param>
+            <param name="autoSubscribe">Auto subscribe enabled or not</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
-            <returns>Project list</returns>
+            <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSavings.PurchaseCustomizedFixedProjectAsync(System.String,System.Int32,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn.GetFlexiblePersonalQuotaLeftAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Purchase customized fixed project
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#purchase-fixed-activity-project-user_data" /></para>
+            Get flexible product personal quota left
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-personal-left-quota-user_data" /></para>
             </summary>
-            <param name="projectId">Id of the project</param>
-            <param name="lot">The lot</param>
+            <param name="productId">Product id</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
-            <returns>Purchase id</returns>
+            <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSavings.GetCustomizedFixedProjectPositionsAsync(System.String,System.String,System.Nullable{Binance.Net.Enums.ProjectStatus},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn.GetLockedPersonalQuotaLeftAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Get customized fixed project position
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-fixed-activity-project-position-user_data" /></para>
+            Get locked product personal quota left
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-locked-personal-left-quota-user_data" /></para>
             </summary>
-            <param name="asset">Asset</param>
-            <param name="projectId">The project id</param>
-            <param name="status">Filter by status</param>
+            <param name="projectId">Project id</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
-            <returns>Customized fixed project position</returns>
+            <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSavings.GetLendingAccountAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn.GetFlexibleSubscriptionPreviewAsync(System.String,System.Decimal,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Get lending account info
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#lending-account-user_data" /></para>
+            Get flexible subscription preview
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-subscription-preview-user_data" /></para>
             </summary>
+            <param name="productId">Product id</param>
+            <param name="quantity">Quantity</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
-            <returns>Lending account</returns>
+            <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSavings.GetPurchaseRecordsAsync(Binance.Net.Enums.LendingType,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn.GetLockedSubscriptionPreviewAsync(System.String,System.Decimal,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Get purchase records
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-purchase-record-user_data" /></para>
+            Get locked subscription preview
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-locked-subscription-preview-user_data" /></para>
             </summary>
-            <param name="lendingType">Lending type</param>
-            <param name="asset">Asset</param>
-            <param name="page">Results page</param>
-            <param name="startTime">Filter by startTime from</param>
-            <param name="endTime">Filter by endTime from</param>
-            <param name="limit">Limit of the amount of results</param>
+            <param name="projectId">Project id</param>
+            <param name="quantity">Quantity</param>
+            <param name="autoSubscribe">Auto subscribe</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
-            <returns>The purchase records</returns>
+            <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSavings.GetRedemptionRecordsAsync(Binance.Net.Enums.LendingType,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn.GetRateHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Get redemption records
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-redemption-record-user_data" /></para>
+            Get rate history
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-rate-history-user_data" /></para>
             </summary>
-            <param name="lendingType">Lending type</param>
-            <param name="asset">Asset</param>
-            <param name="page">Results page</param>
-            <param name="startTime">Filter by startTime from</param>
-            <param name="endTime">Filter by endTime from</param>
-            <param name="limit">Limit of the amount of results</param>
+            <param name="productId">Product id</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Current page</param>
+            <param name="pageSize">Page size</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
-            <returns>The redemption records</returns>
+            <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSavings.GetLendingInterestHistoryAsync(Binance.Net.Enums.LendingType,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn.GetCollateralRecordsAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Get interest history
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-interest-history-user_data-2" /></para>
+            Get collateral records
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-rate-history-user_data" /></para>
             </summary>
-            <param name="lendingType">Lending type</param>
-            <param name="asset">Asset</param>
-            <param name="page">Results page</param>
-            <param name="startTime">Filter by startTime from</param>
-            <param name="endTime">Filter by endTime from</param>
-            <param name="limit">Limit of the amount of results</param>
+            <param name="productId">Product id</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Current page</param>
+            <param name="pageSize">Page size</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
-            <returns>The interest history</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSavings.ChangeToDailyPositionAsync(System.String,System.Int32,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Changed fixed/activity position to daily position
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#change-fixed-activity-position-to-daily-position-user_data" /></para>
-            </summary>
-            <param name="projectId">Id of the project</param>
-            <param name="lot">The lot</param>
-            <param name="positionId">For fixed position</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns>Purchase id</returns>
+            <returns></returns>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiStaking">
             <summary>
             Binance Staking endpoints
             </summary>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiStaking.SetAutoStakingAsync(Binance.Net.Enums.StakingProductType,System.String,System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Set auto staking for a product
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#set-auto-staking-user_data" /></para>
-            </summary>
-            <param name="product">The staking product</param>
-            <param name="positionId">The position</param>
-            <param name="renewable">Renewable</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiStaking.GetStakingPersonalQuotaAsync(Binance.Net.Enums.StakingProductType,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Get personal staking quota
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-personal-left-quota-of-staking-product-user_data" /></para>
-            </summary>
-            <param name="product">The staking product</param>
-            <param name="productId">Product id</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiStaking.GetStakingProductsAsync(Binance.Net.Enums.StakingProductType,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get avaialble staking products list
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-staking-product-list-user_data" /></para>
-            </summary>
-            <param name="product">Product type</param>
-            <param name="asset">Filter for asset</param>
-            <param name="page">Page</param>
-            <param name="limit">Max items per page</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiStaking.PurchaseStakingProductAsync(Binance.Net.Enums.StakingProductType,System.String,System.Decimal,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Purchase a staking product
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#purchase-staking-product-user_data" /></para>
-            </summary>
-            <param name="product">Product type</param>
-            <param name="productId">Product id</param>
-            <param name="quantity">Quantity to purchase</param>
-            <param name="renewable">Renewable</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiStaking.RedeemStakingProductAsync(Binance.Net.Enums.StakingProductType,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Redeem a staking product
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#redeem-staking-product-user_data" /></para>
-            </summary>
-            <param name="product">Product type</param>
-            <param name="productId">Product id</param>
-            <param name="quantity">Quantity to purchase</param>
-            <param name="renewable">Renewable</param>
-            <param name="positionId">Position id, required for Staking or LockedDefi types</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiStaking.GetStakingPositionsAsync(Binance.Net.Enums.StakingProductType,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Get staking positions
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-staking-product-position-user_data" /></para>
-            </summary>
-            <param name="product">Product type</param>
-            <param name="productId">Product id</param>
-            <param name="page">Page</param>
-            <param name="limit">Max results</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiStaking.GetStakingHistoryAsync(Binance.Net.Enums.StakingProductType,Binance.Net.Enums.StakingTransactionType,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Get staking history
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-staking-history-user_data" /></para>
-            </summary>
-            <param name="product">Product type</param>
-            <param name="transactionType">Transaction type</param>
-            <param name="asset">Filter by asset</param>
-            <param name="startTime">Filter by start time</param>
-            <param name="endTime">Filter by end time</param>
-            <param name="page">Page</param>
-            <param name="limit">Max results</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiStaking.SubscribeEthStakingAsync(System.Decimal,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
@@ -16618,36 +16675,6 @@
             Value in btc
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.BinanceAssetDetails">
-            <summary>
-            Asset details
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceAssetDetails.MinimalWithdrawQuantity">
-            <summary>
-            Minimal quantity you can withdraw
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceAssetDetails.DepositStatus">
-            <summary>
-            Whether deposits are enabled
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceAssetDetails.WithdrawStatus">
-            <summary>
-            Whether withdrawing is enabled
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceAssetDetails.WithdrawFee">
-            <summary>
-            Fee for withdrawing
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceAssetDetails.DepositTip">
-            <summary>
-            Status string for deposit
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceWithdrawal">
             <summary>
             Information about a withdrawal
@@ -16736,6 +16763,36 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawal.CompleteTime">
             <summary>
             The time the withdrawal was completed
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceAssetDetails">
+            <summary>
+            Asset details
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceAssetDetails.MinimalWithdrawQuantity">
+            <summary>
+            Minimal quantity you can withdraw
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceAssetDetails.DepositStatus">
+            <summary>
+            Whether deposits are enabled
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceAssetDetails.WithdrawStatus">
+            <summary>
+            Whether withdrawing is enabled
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceAssetDetails.WithdrawFee">
+            <summary>
+            Fee for withdrawing
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceAssetDetails.DepositTip">
+            <summary>
+            Status string for deposit
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceWithdrawalPlaced">
@@ -22008,6 +22065,806 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.UpperLimitPerUser">
             <summary>
             Upper limit per user
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnAccount">
+            <summary>
+            Simple earn account info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnAccount.TotalQuantityInBtc">
+            <summary>
+            Total quantity in BTC
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnAccount.TotalQuantityInUsdt">
+            <summary>
+            Total quantity in USDT
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnAccount.TotalFlexibleQuantityInBtc">
+            <summary>
+            Total quantity in BTC in flexible products
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnAccount.TotalFlexibleQuantityInUsdt">
+            <summary>
+            Total quantity in USDT in flexible products
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnAccount.TotalLockedInBtc">
+            <summary>
+            Total quantity in BTC in locked products
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnAccount.TotalLockedInUsdt">
+            <summary>
+            Total quantity in USDT in locked products
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnCollateralRecord">
+            <summary>
+            Simple Earn collateral record
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnCollateralRecord.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnCollateralRecord.ProductId">
+            <summary>
+            Product Id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnCollateralRecord.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnCollateralRecord.CreateTime">
+            <summary>
+            Create time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnCollateralRecord.Type">
+            <summary>
+            Type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnCollateralRecord.ProductName">
+            <summary>
+            Product name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnCollateralRecord.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePosition">
+            <summary>
+            Flexible product position info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePosition.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePosition.LatestAnnualPercentageRate">
+            <summary>
+            Latest annual percentage rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePosition.TierAnnualPercentageRate">
+            <summary>
+            Tier annual percentage rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePosition.CanRedeem">
+            <summary>
+            Can redeem product
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePosition.ProductId">
+            <summary>
+            product id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePosition.TotalQuantity">
+            <summary>
+            Total quantity of position
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePosition.YesterdayAirdropPercentageRate">
+            <summary>
+            Air drop percentage rate of yesterday
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePosition.AirDropAsset">
+            <summary>
+            Air drop asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePosition.CollateralQuantity">
+            <summary>
+            Collateral quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePosition.YesterdayRealTimeRewards">
+            <summary>
+            Realtime rewards of yesterday
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePosition.CumulativeBonusRewards">
+            <summary>
+            Cumulative bonus rewards
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePosition.CumulativeRealTimeRewards">
+            <summary>
+            Cumulative realtime rewards
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePosition.CumulativeTotalRewards">
+            <summary>
+            Cumulative total rewards
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePosition.AutoSubscribe">
+            <summary>
+            Is auto subscribe enabled
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePreview">
+            <summary>
+            Simple Earn flexible product subscription preview
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePreview.RewardAsset">
+            <summary>
+            Reward asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePreview.AirDropAsset">
+            <summary>
+            Airdrop asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePreview.TotalQuantity">
+            <summary>
+            Total amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePreview.EstimatedDailyBonusRewards">
+            <summary>
+            Estimated daily bonus rewards
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePreview.EstimatedDailyRealTimeRewards">
+            <summary>
+            Estimated daily realtime rewards
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePreview.EstimatedDailyAirdropRewards">
+            <summary>
+            Estimated daily airdrop rewards
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleProduct">
+            <summary>
+            Simple earn product info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleProduct.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleProduct.LatestAnnualPercentageRate">
+            <summary>
+            Latest annual percentage rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleProduct.TierAnnualPercentageRate">
+            <summary>
+            Tier annual percentage rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleProduct.AirDropPercentageRate">
+            <summary>
+            Air drop percentage rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleProduct.CanPurchase">
+            <summary>
+            Can purchase product
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleProduct.CanRedeem">
+            <summary>
+            Can redeem product
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleProduct.IsSoldOut">
+            <summary>
+            Product is sold out
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleProduct.Hot">
+            <summary>
+            Is hot
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleProduct.MinPurchaseQuantity">
+            <summary>
+            Min purchase quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleProduct.ProductId">
+            <summary>
+            product id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleProduct.SubscriptionStartTime">
+            <summary>
+            Subscription start time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleProduct.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRecord">
+            <summary>
+            Flexible product subscription record
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRecord.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRecord.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRecord.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRecord.PurchaseId">
+            <summary>
+            Purchase id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRecord.Type">
+            <summary>
+            Subscription type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRecord.SourceAccount">
+            <summary>
+            Source account
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRecord.SpotQuantity">
+            <summary>
+            Quantity from spot
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRecord.FundingQuantity">
+            <summary>
+            Quantity from funding
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRecord.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRedemptionRecord">
+            <summary>
+            Simple Earn flexible product redemption record
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRedemptionRecord.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRedemptionRecord.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRedemptionRecord.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRedemptionRecord.ProjectId">
+            <summary>
+            Project id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRedemptionRecord.RedeemId">
+            <summary>
+            Redeem id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRedemptionRecord.DestinationAccount">
+            <summary>
+            Destination account
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRedemptionRecord.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRewardRecord">
+            <summary>
+            Simple Earn flexible product reward record
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRewardRecord.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRewardRecord.ProjectId">
+            <summary>
+            Project id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRewardRecord.Rewards">
+            <summary>
+            Rewards
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRewardRecord.Type">
+            <summary>
+            Reward type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRewardRecord.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition">
+            <summary>
+            Locked product position info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.PositionId">
+            <summary>
+            Position id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.ProjectId">
+            <summary>
+            Project id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.Quantity">
+            <summary>
+            Position quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.PurchaseTime">
+            <summary>
+            Purchase time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.Duration">
+            <summary>
+            Duration in days
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.AccrualDays">
+            <summary>
+            Accrual days
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.RewardAsset">
+            <summary>
+            Reward asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.APY">
+            <summary>
+            APY
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.IsRenewable">
+            <summary>
+            Is renewable
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.IsAutoRenew">
+            <summary>
+            Is auto renew enabled
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.RedeemDate">
+            <summary>
+            Redeem date
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPreview">
+            <summary>
+            Simple Earn locked product preview
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPreview.RewardAsset">
+            <summary>
+            Reward asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPreview.ExtraRewardAsset">
+            <summary>
+            Extra reward asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPreview.TotalRewardQuantity">
+            <summary>
+            Total reward quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPreview.EstimatedTotalExtraRewardQuantity">
+            <summary>
+            Estimated total extra reward quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPreview.NextPay">
+            <summary>
+            Next pay
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPreview.NextPayDate">
+            <summary>
+            Next pay date
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPreview.ValueDate">
+            <summary>
+            Value date
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPreview.RewardsEndDate">
+            <summary>
+            Rewards end date
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPreview.DeliverDate">
+            <summary>
+            Deliver date
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPreview.NextSubscriptionDate">
+            <summary>
+            Next subscription date
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProduct">
+            <summary>
+            Simple earn locked product info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProduct.ProjectId">
+            <summary>
+            Project id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProduct.Details">
+            <summary>
+            Details
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProduct.Quota">
+            <summary>
+            Quota
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProjectDetails">
+            <summary>
+            Simple earn locked project details
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProjectDetails.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProjectDetails.RewardAsset">
+            <summary>
+            Reward asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProjectDetails.Duration">
+            <summary>
+            Duration
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProjectDetails.Renewable">
+            <summary>
+            Renewable
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProjectDetails.IsSoldOut">
+            <summary>
+            Is sold out
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProjectDetails.Apr">
+            <summary>
+            Apr
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProjectDetails.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProjectDetails.SubscriptionStartTime">
+            <summary>
+            Subscription start time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProjectDetails.ExtraRewardAsset">
+            <summary>
+            Extra reward asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProjectDetails.ExtraRewardApr">
+            <summary>
+            Extra reward apr
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProjectQuota">
+            <summary>
+            Simple earn locked project quota
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProjectQuota.TotalPersonalQuota">
+            <summary>
+            Total personal quota
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProjectQuota.Minimum">
+            <summary>
+            Minimum
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRecord">
+            <summary>
+            Locked product subscription record
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRecord.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRecord.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRecord.PositionId">
+            <summary>
+            Position id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRecord.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRecord.PurchaseId">
+            <summary>
+            Purchase id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRecord.Type">
+            <summary>
+            Subscription type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRecord.SourceAccount">
+            <summary>
+            Source account
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRecord.SpotQuantity">
+            <summary>
+            Quantity from spot
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRecord.FundingQuantity">
+            <summary>
+            Quantity from funding
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRecord.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRecord.LockPeriod">
+            <summary>
+            Lock period
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRedemptionRecord">
+            <summary>
+            Simple Earn locked product redemption record
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRedemptionRecord.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRedemptionRecord.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRedemptionRecord.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRedemptionRecord.PositionId">
+            <summary>
+            Position id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRedemptionRecord.RedeemId">
+            <summary>
+            Redeem id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRedemptionRecord.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRedemptionRecord.LockPeriod">
+            <summary>
+            Lock period
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRedemptionRecord.DeliveryDate">
+            <summary>
+            Delivery date
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRedemptionRecord.Type">
+            <summary>
+            Type
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRewardRecord">
+            <summary>
+            Simple Earn locked product reward record
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRewardRecord.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRewardRecord.PositionId">
+            <summary>
+            Position id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRewardRecord.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRewardRecord.LockPeriod">
+            <summary>
+            Lock period
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRewardRecord.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnPersonalQuotaLeft">
+            <summary>
+            Simple Earn personal quota left
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnPersonalQuotaLeft.PersonalQuotaLeft">
+            <summary>
+            Personal quota left
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnPurchase">
+            <summary>
+            Purchase id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnPurchase.Success">
+            <summary>
+            Success
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnPurchase.PurchaseId">
+            <summary>
+            Purchase id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnPurchase.PositionId">
+            <summary>
+            Position id
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnRateRecord">
+            <summary>
+            Simple Earn rate record
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnRateRecord.ProductId">
+            <summary>
+            Product id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnRateRecord.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnRateRecord.AnnualPercentageRate">
+            <summary>
+            Annual percentage rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnRateRecord.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnRedemption">
+            <summary>
+            Redemption
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnRedemption.Success">
+            <summary>
+            Success
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnRedemption.RedeemId">
+            <summary>
+            Redeem id
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnResult">
+            <summary>
+            Simple Earn result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnResult.Success">
+            <summary>
+            Result
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceBethRateHistory">

@@ -33,8 +33,6 @@ namespace Binance.Net.Clients.GeneralApi
         /// <inheritdoc />
         public IBinanceRestClientGeneralApiFutures Futures { get; }
         /// <inheritdoc />
-        public IBinanceRestClientGeneralApiSavings Savings { get; }
-        /// <inheritdoc />
         public IBinanceRestClientGeneralApiLoans CryptoLoans { get; }
         /// <inheritdoc />
         public IBinanceRestClientGeneralApiMining Mining { get; }
@@ -42,6 +40,8 @@ namespace Binance.Net.Clients.GeneralApi
         public IBinanceRestClientGeneralApiSubAccount SubAccount { get; }
         /// <inheritdoc />
         public IBinanceRestClientGeneralApiStaking Staking { get; }
+        /// <inheritdoc />
+        public IBinanceRestClientGeneralApiSimpleEarn SimpleEarn { get; }
         #endregion
 
         #region constructor/destructor
@@ -53,11 +53,11 @@ namespace Binance.Net.Clients.GeneralApi
 
             Brokerage = new BinanceRestClientGeneralApiBrokerage(this);
             Futures = new BinanceRestClientGeneralApiFutures(this);
-            Savings = new BinanceRestClientGeneralApiSavings(this);
             CryptoLoans = new BinanceRestClientGeneralApiLoans(this);
             Mining = new BinanceRestClientGeneralApiMining(this);
             SubAccount = new BinanceRestClientGeneralApiSubAccount(this);
             Staking = new BinanceRestClientGeneralApiStaking(this);
+            SimpleEarn = new BinanceRestClientGeneralApiSimpleEarn(this);
 
             requestBodyEmptyContent = "";
             requestBodyFormat = RequestBodyFormat.FormData;
@@ -69,6 +69,8 @@ namespace Binance.Net.Clients.GeneralApi
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BinanceAuthenticationProvider(credentials);
+
+        internal Uri GetUrl(string endpoint) => new Uri(BaseAddress.AppendPath(endpoint));
 
         internal Uri GetUrl(string endpoint, string api, string? version = null)
         {
