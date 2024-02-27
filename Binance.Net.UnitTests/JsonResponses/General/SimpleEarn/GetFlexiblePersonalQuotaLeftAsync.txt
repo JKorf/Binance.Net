@@ -1,0 +1,3 @@
+{
+  "leftPersonalQuota": "1000"
+}

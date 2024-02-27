@@ -139,11 +139,11 @@ namespace Binance.Net.UnitTests
         }
 
         [Test]
-        public async Task ValidateSpotLendingCalls()
+        public async Task ValidateSimpleEarnCalls()
         {
             await _comparer.ProcessSubject(
-                "Spot/Savings",
-                c => c.GeneralApi.Savings);
+                "General/SimpleEarn",
+                c => c.GeneralApi.SimpleEarn);
         }
 
         [Test]

@@ -1,0 +1,14 @@
+{
+  "rows": [
+    {
+      "amount": "10.54000000",
+      "asset": "USDT",
+      "time": 1577257222000,
+      "projectId": "USDT001",
+      "redeemId": 40607,
+      "destAccount":"SPOT", // SPOT, FUNDING
+      "status": "PAID"
+    }
+  ],
+  "total": 1
+}

@@ -1,0 +1,16 @@
+{
+  "rows": [
+    {
+      "positionId": "123123",
+      "redeemId": 40607,
+      "time": 1575018510000,
+      "asset": "BNB",
+      "lockPeriod": "30",
+      "amount": "21312.23223",
+       "type": "MATURE", //MATURE for redeem to Spot Wallet, NEW_TRANSFERRED for redeem to Flexible product, AHEAD for early redemption
+      "deliverDate": "1575018510000",
+      "status": "PAID"
+    }
+  ],
+  "total": 1
+}

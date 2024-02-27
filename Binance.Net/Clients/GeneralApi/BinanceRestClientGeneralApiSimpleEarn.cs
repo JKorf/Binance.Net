@@ -4,6 +4,7 @@ using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot.SimpleEarn;
 using CryptoExchange.Net.Objects;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -376,7 +377,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get Locked Subscription Preview
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceSimpleEarnLockedPreview>> GetLockedSubscriptionPreviewAsync(string projectId, decimal quantity, bool? autoSubscribe = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceSimpleEarnLockedPreview>>> GetLockedSubscriptionPreviewAsync(string projectId, decimal quantity, bool? autoSubscribe = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection
             {
@@ -386,7 +387,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptional("autoSubscribe", autoSubscribe);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            return await _baseClient.SendRequestInternal<BinanceSimpleEarnLockedPreview>(_baseClient.GetUrl("sapi/v1/simple-earn/locked/subscriptionPreview"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceSimpleEarnLockedPreview>>(_baseClient.GetUrl("sapi/v1/simple-earn/locked/subscriptionPreview"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
