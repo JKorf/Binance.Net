@@ -17,7 +17,8 @@ namespace Binance.Net.Converters
             new KeyValuePair<ExecutionType, string>(ExecutionType.Rejected, "REJECTED"),
             new KeyValuePair<ExecutionType, string>(ExecutionType.Trade, "TRADE"),
             new KeyValuePair<ExecutionType, string>(ExecutionType.Expired, "EXPIRED"),
-            new KeyValuePair<ExecutionType, string>(ExecutionType.Amendment, "AMENDMENT")
+            new KeyValuePair<ExecutionType, string>(ExecutionType.Amendment, "AMENDMENT"),
+            new KeyValuePair<ExecutionType, string>(ExecutionType.Amendment, "TRADE_PREVENTION "),
         };
     }
 }
