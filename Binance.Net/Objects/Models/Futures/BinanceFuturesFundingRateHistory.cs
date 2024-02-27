@@ -26,6 +26,6 @@ namespace Binance.Net.Objects.Models.Futures
         /// The mark price
         /// </summary>
         [JsonProperty("markPrice")]
-        public decimal MarkPrice { get; set; }
+        public decimal? MarkPrice { get; set; }
     }
 }
