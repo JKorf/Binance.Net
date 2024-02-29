@@ -145,6 +145,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 9.6.1 - 29 Feb 2024
+    * Fix for user data websocket streams subscriptions
+
 * Version 9.6.0 - 27 Feb 2024
     * Added REST endpoints for Simple Earn under client.GeneralApi.SimpleEarn
     * Fixed futures userdata websocket subscription
