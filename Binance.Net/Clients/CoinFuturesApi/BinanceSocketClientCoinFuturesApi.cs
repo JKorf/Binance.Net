@@ -431,7 +431,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             listenKey.ValidateNotNull(nameof(listenKey));
 
             var subscription = new BinanceCoinFuturesUserDataSubscription(_logger, new List<string> { listenKey }, onOrderUpdate, onConfigUpdate, onMarginUpdate, onAccountUpdate, onListenKeyExpired, onStrategyUpdate, onGridUpdate);
-            return await SubscribeAsync(BaseAddress.AppendPath("ws"), subscription, ct).ConfigureAwait(false);
+            return await SubscribeAsync(BaseAddress.AppendPath("stream"), subscription, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -461,9 +461,6 @@ namespace Binance.Net.Clients.CoinFuturesApi
         }
 
         #endregion
-        internal CallResult<T> DeserializeInternal<T>(JToken obj, JsonSerializer? serializer = null, int? requestId = null)
-            => Deserialize<T>(obj, serializer, requestId);
-
         internal Task<CallResult<UpdateSubscription>> SubscribeAsync<T>(string url, IEnumerable<string> topics, Action<DataEvent<T>> onData, CancellationToken ct)
         {
             var request = new BinanceSocketRequest

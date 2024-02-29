@@ -397,7 +397,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             listenKey.ValidateNotNull(nameof(listenKey));
 
             var subscription = new BinanceUsdFuturesUserDataSubscription(_logger, new List<string> { listenKey }, onOrderUpdate, onConfigUpdate, onMarginUpdate, onAccountUpdate, onListenKeyExpired, onStrategyUpdate, onGridUpdate, onConditionalOrderTriggerRejectUpdate);
-            return await SubscribeAsync(BaseAddress.AppendPath("ws").AppendPath(listenKey), subscription, ct).ConfigureAwait(false);
+            return await SubscribeAsync(BaseAddress.AppendPath("stream"), subscription, ct).ConfigureAwait(false);
         }
 
         #endregion

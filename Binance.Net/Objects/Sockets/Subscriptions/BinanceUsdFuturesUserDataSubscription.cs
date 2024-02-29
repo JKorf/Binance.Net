@@ -133,10 +133,10 @@ namespace Binance.Net.Objects.Sockets
                 accountUpdate.Data.ListenKey = accountUpdate.Stream;
                 _accountHandler?.Invoke(message.As(accountUpdate.Data, accountUpdate.Stream, SocketUpdateType.Update));
             }
-            else if (message.Data is BinanceCombinedStream<BinanceFuturesStreamOrderUpdate> orderUpate)
+            else if (message.Data is BinanceCombinedStream<BinanceFuturesStreamOrderUpdate> orderUpdate)
             {
-                orderUpate.Data.ListenKey = orderUpate.Stream;
-                _orderHandler?.Invoke(message.As(orderUpate.Data, orderUpate.Stream, SocketUpdateType.Update));
+                orderUpdate.Data.ListenKey = orderUpdate.Stream;
+                _orderHandler?.Invoke(message.As(orderUpdate.Data, orderUpdate.Stream, SocketUpdateType.Update));
             }
             else if (message.Data is BinanceCombinedStream<BinanceStreamEvent> listenKeyUpdate)
             {
