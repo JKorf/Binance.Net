@@ -336,18 +336,19 @@ namespace Binance.Net.Clients.SpotApi
             var result = await _baseClient.SendRequestInternal<BinanceReplaceOrderResult>(_baseClient.GetUrl(cancelReplaceOrderEndpoint, api, signedVersion), HttpMethod.Post, ct, parameters, true, weight: 1).ConfigureAwait(false);
             if (!result && result.OriginalData != null)
             {
-                // Attempt to parse the error
-                var jsonData = result.OriginalData.ToJToken(_logger);
-                if (jsonData != null)
-                {
-                    var dataNode = jsonData["data"];
-                    if (dataNode == null)
-                        return result;
+                // TODO 
+                //// Attempt to parse the error
+                //var jsonData = result.OriginalData.ToJToken(_logger);
+                //if (jsonData != null)
+                //{
+                //    var dataNode = jsonData["data"];
+                //    if (dataNode == null)
+                //        return result;
 
-                    var error = dataNode?["cancelResult"]?.ToString() == "FAILURE" ? dataNode!["cancelResponse"] : jsonData["data"]!["newOrderResponse"];
-                    if (error != null && error.HasValues)
-                        return result.AsError<BinanceReplaceOrderResult>(new ServerError(error!.Value<int>("code"), error.Value<string>("msg")!));
-                }
+                //    var error = dataNode?["cancelResult"]?.ToString() == "FAILURE" ? dataNode!["cancelResponse"] : jsonData["data"]!["newOrderResponse"];
+                //    if (error != null && error.HasValues)
+                //        return result.AsError<BinanceReplaceOrderResult>(new ServerError(error!.Value<int>("code"), error.Value<string>("msg")!));
+                //}
             }
 
             if (result && result.Data.NewOrderResult == OrderOperationResult.Success)

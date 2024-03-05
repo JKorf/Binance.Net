@@ -111,15 +111,15 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Index Price Stream
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToIndexPriceUpdatesAsync(string pair, int? updateInterval, Action<DataEvent<IEnumerable<BinanceFuturesStreamIndexPrice>>> onMessage, CancellationToken ct = default) => await SubscribeToIndexPriceUpdatesAsync(new[] { pair }, updateInterval, onMessage, ct).ConfigureAwait(false);
+        public async Task<CallResult<UpdateSubscription>> SubscribeToIndexPriceUpdatesAsync(string pair, int? updateInterval, Action<DataEvent<BinanceFuturesStreamIndexPrice>> onMessage, CancellationToken ct = default) => await SubscribeToIndexPriceUpdatesAsync(new[] { pair }, updateInterval, onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToIndexPriceUpdatesAsync(IEnumerable<string> pairs, int? updateInterval, Action<DataEvent<IEnumerable<BinanceFuturesStreamIndexPrice>>> onMessage, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToIndexPriceUpdatesAsync(IEnumerable<string> pairs, int? updateInterval, Action<DataEvent<BinanceFuturesStreamIndexPrice>> onMessage, CancellationToken ct = default)
         {
             pairs.ValidateNotNull(nameof(pairs));
             updateInterval?.ValidateIntValues(nameof(updateInterval), 1000, 3000);
 
-            var internalHandler = new Action<DataEvent<JToken>>(data => HandlePossibleSingleData(data, onMessage));
+            var internalHandler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamIndexPrice>>>(data => onMessage(data.As(data.Data.Data, data.Data.Data.Pair)));
             pairs = pairs.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _indexPriceStreamEndpoint + (updateInterval == 1000 ? "@1s" : "")).ToArray();
             return await SubscribeAsync( BaseAddress, pairs, internalHandler, ct).ConfigureAwait(false);
         }
@@ -436,29 +436,29 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         #endregion
 
-        private void HandlePossibleSingleData<T>(DataEvent<JToken> data, Action<DataEvent<IEnumerable<T>>> onMessage)
-        {
-            var internalData = data.Data["data"];
-            if (internalData == null)
-                return;
-            if (internalData.Type == JTokenType.Array)
-            {
-                var firstItemTopic = internalData.First()["i"]?.ToString() ?? internalData.First()["s"]?.ToString();
-                var deserialized = Deserialize<BinanceCombinedStream<IEnumerable<T>>>(data.Data);
-                if (!deserialized)
-                    return;
-                onMessage(data.As(deserialized.Data.Data, firstItemTopic));
-            }
-            else
-            {
-                var symbol = internalData["i"]?.ToString() ?? internalData["s"]?.ToString();
-                var deserialized = Deserialize<BinanceCombinedStream<T>>(
-                        data.Data);
-                if (!deserialized)
-                    return;
-                onMessage(data.As<IEnumerable<T>>(new[] { deserialized.Data.Data }, symbol));
-            }
-        }
+        //private void HandlePossibleSingleData<T>(DataEvent<JToken> data, Action<DataEvent<IEnumerable<T>>> onMessage)
+        //{
+        //    var internalData = data.Data["data"];
+        //    if (internalData == null)
+        //        return;
+        //    if (internalData.Type == JTokenType.Array)
+        //    {
+        //        var firstItemTopic = internalData.First()["i"]?.ToString() ?? internalData.First()["s"]?.ToString();
+        //        var deserialized = Deserialize<BinanceCombinedStream<IEnumerable<T>>>(data.Data);
+        //        if (!deserialized)
+        //            return;
+        //        onMessage(data.As(deserialized.Data.Data, firstItemTopic));
+        //    }
+        //    else
+        //    {
+        //        var symbol = internalData["i"]?.ToString() ?? internalData["s"]?.ToString();
+        //        var deserialized = Deserialize<BinanceCombinedStream<T>>(
+        //                data.Data);
+        //        if (!deserialized)
+        //            return;
+        //        onMessage(data.As<IEnumerable<T>>(new[] { deserialized.Data.Data }, symbol));
+        //    }
+        //}
 
         #endregion
         internal Task<CallResult<UpdateSubscription>> SubscribeAsync<T>(string url, IEnumerable<string> topics, Action<DataEvent<T>> onData, CancellationToken ct)

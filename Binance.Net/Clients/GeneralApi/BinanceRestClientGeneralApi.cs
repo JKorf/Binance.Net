@@ -12,6 +12,8 @@ using Binance.Net.Clients.SpotApi;
 using Microsoft.Extensions.Logging;
 using Binance.Net.Objects.Options;
 using System.Linq;
+using CryptoExchange.Net.Sockets.MessageParsing.Interfaces;
+using Binance.Net.Objects.Models;
 
 namespace Binance.Net.Clients.GeneralApi
 {
@@ -109,28 +111,22 @@ namespace Binance.Net.Clients.GeneralApi
             => BinanceRestClientSpotApi._timeSyncState.TimeOffset;
 
         /// <inheritdoc />
-        protected override Error ParseErrorResponse(int httpStatusCode, IEnumerable<KeyValuePair<string, IEnumerable<string>>> responseHeaders, string data)
+        protected override Error ParseErrorResponse(int httpStatusCode, IEnumerable<KeyValuePair<string, IEnumerable<string>>> responseHeaders, IMessageAccessor accessor)
         {
-            var errorData = ValidateJson(data);
-            if (!errorData)
-                return new ServerError(data);
+            if (!accessor.IsJson)
+                return new ServerError(accessor.GetOriginalString());
 
-            if (!errorData.Data.HasValues)
-                return new ServerError(errorData.Data.ToString());
+            var result = accessor.Deserialize<BinanceResult>();
+            if (!result)
+                return new ServerError(accessor.GetOriginalString());
 
-            if (errorData.Data["msg"] == null && errorData.Data["code"] == null)
-                return new ServerError(errorData.Data.ToString());
-
-            if (errorData.Data["msg"] != null && errorData.Data["code"] == null)
-                return new ServerError((string)errorData.Data["msg"]!);
-
-            return new ServerError((int)errorData.Data["code"]!, (string)errorData.Data["msg"]!);
+            return new ServerError(result.Data.Code, result.Data.Message!);
         }
 
         /// <inheritdoc />
-        protected override Error ParseRateLimitResponse(int httpStatusCode, IEnumerable<KeyValuePair<string, IEnumerable<string>>> responseHeaders, string data)
+        protected override Error ParseRateLimitResponse(int httpStatusCode, IEnumerable<KeyValuePair<string, IEnumerable<string>>> responseHeaders, IMessageAccessor accessor)
         {
-            var error = GetRateLimitError(data);
+            var error = GetRateLimitError(accessor);
             var retryAfterHeader = responseHeaders.SingleOrDefault(r => r.Key.Equals("Retry-After", StringComparison.InvariantCultureIgnoreCase));
             if (retryAfterHeader.Value?.Any() != true)
                 return error;
@@ -143,22 +139,16 @@ namespace Binance.Net.Clients.GeneralApi
             return error;
         }
 
-        private BinanceRateLimitError GetRateLimitError(string data)
+        private BinanceRateLimitError GetRateLimitError(IMessageAccessor accessor)
         {
-            var errorData = ValidateJson(data);
-            if (!errorData)
-                return new BinanceRateLimitError(data);
+            if (!accessor.IsJson)
+                return new BinanceRateLimitError(accessor.GetOriginalString());
 
-            if (!errorData.Data.HasValues)
-                return new BinanceRateLimitError(errorData.Data.ToString());
+            var result = accessor.Deserialize<BinanceResult>();
+            if (!result)
+                return new BinanceRateLimitError(accessor.GetOriginalString());
 
-            if (errorData.Data["msg"] == null && errorData.Data["code"] == null)
-                return new BinanceRateLimitError(errorData.Data.ToString());
-
-            if (errorData.Data["msg"] != null && errorData.Data["code"] == null)
-                return new BinanceRateLimitError((string)errorData.Data["msg"]!);
-
-            return new BinanceRateLimitError((int)errorData.Data["code"]!, (string)errorData.Data["msg"]!, null);
+            return new BinanceRateLimitError(result.Data.Code, result.Data.Message!, null);
         }
     }
 }
