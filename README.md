@@ -25,23 +25,19 @@ The library is targeting both `.NET Standard 2.0` and `.NET Standard 2.1` for op
 ## How to use
 *REST Endpoints*  
 
-	```csharp
 	// Get the ETH/USDT ticker via rest request
 	var restClient = new BinanceRestClient();
 	var tickerResult = await restClient.SpotApi.ExchangeData.GetTickerAsync("ETHUSDT");
 	var lastPrice = tickerResult.Data.LastPrice;
-	```
 	
 *Websocket streams*  
 
-	```csharp
 	// Subscribe to ETH/USDT ticker updates via the websocket API
 	var socketClient = new BinanceSocketClient();
 	var tickerSubscriptionResult = socketClient.SpotApi.ExchangeData.SubscribeToTickerUpdatesAsync("ETHUSDT", (update) => 
 	{
 	  var lastPrice = update.Data.LastPrice;
 	});
-	```
 
 *Create a new project and request the price in 50 seconds*  
 <img src="https://github.com/JKorf/Binance.Net/blob/f74f262151f21b123deecd9b39a717458a18f6ff/docs/Binance.gif" width="600" />
