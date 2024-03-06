@@ -14,6 +14,7 @@ using Binance.Net.Objects.Options;
 using System.Linq;
 using CryptoExchange.Net.Sockets.MessageParsing.Interfaces;
 using Binance.Net.Objects.Models;
+using CryptoExchange.Net.Sockets.MessageParsing;
 
 namespace Binance.Net.Clients.GeneralApi
 {
@@ -97,6 +98,19 @@ namespace Binance.Net.Clients.GeneralApi
             return result;
         }
 
+        internal async Task<WebCallResult> SendRequestInternal(Uri uri, HttpMethod method, CancellationToken cancellationToken,
+            Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
+            ArrayParametersSerialization? arraySerialization = null, int weight = 1, bool ignoreRateLimit = false)
+        {
+            var result = await SendRequestAsync(uri, method, cancellationToken, parameters, signed, null, postPosition, arraySerialization, weight, ignoreRatelimit: ignoreRateLimit).ConfigureAwait(false);
+            if (!result && result.Error!.Code == -1021 && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
+            {
+                _logger.Log(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
+                BinanceRestClientSpotApi._timeSyncState.LastSyncTime = DateTime.MinValue;
+            }
+            return result;
+        }
+
 
         /// <inheritdoc />
         protected override Task<WebCallResult<DateTime>> GetServerTimestampAsync()
@@ -116,11 +130,15 @@ namespace Binance.Net.Clients.GeneralApi
             if (!accessor.IsJson)
                 return new ServerError(accessor.GetOriginalString());
 
-            var result = accessor.Deserialize<BinanceResult>();
-            if (!result)
+            var code = accessor.GetValue<int?>(MessagePath.Get().Property("code"));
+            var msg = accessor.GetValue<string>(MessagePath.Get().Property("msg"));
+            if (msg == null)
                 return new ServerError(accessor.GetOriginalString());
 
-            return new ServerError(result.Data.Code, result.Data.Message!);
+            if (code == null)
+                return new ServerError(msg);
+
+            return new ServerError(code.Value, msg);
         }
 
         /// <inheritdoc />
@@ -144,11 +162,15 @@ namespace Binance.Net.Clients.GeneralApi
             if (!accessor.IsJson)
                 return new BinanceRateLimitError(accessor.GetOriginalString());
 
-            var result = accessor.Deserialize<BinanceResult>();
-            if (!result)
+            var code = accessor.GetValue<int?>(MessagePath.Get().Property("code"));
+            var msg = accessor.GetValue<string>(MessagePath.Get().Property("msg"));
+            if (msg == null)
                 return new BinanceRateLimitError(accessor.GetOriginalString());
 
-            return new BinanceRateLimitError(result.Data.Code, result.Data.Message!, null);
+            if (code == null)
+                return new BinanceRateLimitError(msg);
+
+            return new BinanceRateLimitError(code.Value, msg, null);
         }
     }
 }

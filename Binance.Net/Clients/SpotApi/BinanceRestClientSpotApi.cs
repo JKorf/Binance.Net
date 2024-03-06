@@ -23,6 +23,7 @@ using Binance.Net.Objects.Options;
 using Binance.Net.ExtensionMethods;
 using Binance.Net.Objects.Models;
 using CryptoExchange.Net.Sockets.MessageParsing.Interfaces;
+using CryptoExchange.Net.Sockets.MessageParsing;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -562,11 +563,15 @@ namespace Binance.Net.Clients.SpotApi
             if (!accessor.IsJson)
                 return new ServerError(accessor.GetOriginalString());
 
-            var result = accessor.Deserialize<BinanceResult>();
-            if (!result)
+            var code = accessor.GetValue<int?>(MessagePath.Get().Property("code"));
+            var msg = accessor.GetValue<string>(MessagePath.Get().Property("msg"));
+            if (msg == null)
                 return new ServerError(accessor.GetOriginalString());
 
-            return new ServerError(result.Data.Code, result.Data.Message!);
+            if (code == null)
+                return new ServerError(msg);
+
+            return new ServerError(code.Value, msg);
         }
 
         /// <inheritdoc />
@@ -590,11 +595,15 @@ namespace Binance.Net.Clients.SpotApi
             if (!accessor.IsJson)
                 return new BinanceRateLimitError(accessor.GetOriginalString());
 
-            var result = accessor.Deserialize<BinanceResult>();
-            if (!result)
+            var code = accessor.GetValue<int?>(MessagePath.Get().Property("code"));
+            var msg = accessor.GetValue<string>(MessagePath.Get().Property("msg"));
+            if (msg == null)
                 return new BinanceRateLimitError(accessor.GetOriginalString());
 
-            return new BinanceRateLimitError(result.Data.Code, result.Data.Message!, null);
+            if (code == null)
+                return new BinanceRateLimitError(msg);
+
+            return new BinanceRateLimitError(code.Value, msg, null);
         }
     }
 }

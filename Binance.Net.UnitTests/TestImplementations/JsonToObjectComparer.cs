@@ -79,7 +79,10 @@ namespace Binance.Net.UnitTests.TestImplementations
                     // asset
                     Assert.Null(result.Error, method.Name);
 
-                    var resultData = result.GetType().GetProperty("Data", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance).GetValue(result);
+                    var dataProperty = result.GetType().GetProperty("Data", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+                    if (dataProperty == null)
+                        continue;
+                    var resultData = dataProperty.GetValue(result);
                     ProcessData(method.Name + (i == 0 ? "" : i.ToString()), resultData, json, parametersToSetNull, useNestedJsonPropertyForCompare, ignoreProperties);
                 }
             }

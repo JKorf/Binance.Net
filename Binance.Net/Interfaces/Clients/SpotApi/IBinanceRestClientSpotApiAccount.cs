@@ -139,7 +139,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<object>> DisableFastWithdrawSwitchAsync(int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult> DisableFastWithdrawSwitchAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// This request will enable fastwithdraw switch under your account.
@@ -152,7 +152,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<object>> EnableFastWithdrawSwitchAsync(int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult> EnableFastWithdrawSwitchAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the history of dust conversions
@@ -274,7 +274,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="listenKey">The listen key to keep alive</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<object>> KeepAliveUserStreamAsync(string listenKey, CancellationToken ct = default);
+        Task<WebCallResult> KeepAliveUserStreamAsync(string listenKey, CancellationToken ct = default);
 
         /// <summary>
         /// Stops the current user stream
@@ -283,7 +283,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="listenKey">The listen key to keep alive</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<object>> StopUserStreamAsync(string listenKey, CancellationToken ct = default);
+        Task<WebCallResult> StopUserStreamAsync(string listenKey, CancellationToken ct = default);
 
         /// <summary>
         /// Withdraw assets from Binance to an address
@@ -649,7 +649,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="listenKey">The listen key to keep alive</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<object>> KeepAliveMarginUserStreamAsync(string listenKey, CancellationToken ct = default);
+        Task<WebCallResult> KeepAliveMarginUserStreamAsync(string listenKey, CancellationToken ct = default);
 
         /// <summary>
         /// Stops the current user stream
@@ -658,7 +658,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="listenKey">The listen key to keep alive</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<object>> StopMarginUserStreamAsync(string listenKey, CancellationToken ct = default);
+        Task<WebCallResult> StopMarginUserStreamAsync(string listenKey, CancellationToken ct = default);
 
         /// <summary>
         /// Starts a user stream  for margin account by requesting a listen key. 
@@ -680,7 +680,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="listenKey">The listen key to keep alive</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<object>> KeepAliveIsolatedMarginUserStreamAsync(string symbol, string listenKey, CancellationToken ct = default);
+        Task<WebCallResult> KeepAliveIsolatedMarginUserStreamAsync(string symbol, string listenKey, CancellationToken ct = default);
 
         /// <summary>
         /// Close the user stream for margin account
@@ -690,7 +690,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="listenKey">The listen key to keep alive</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<object>> CloseIsolatedMarginUserStreamAsync(string symbol, string listenKey, CancellationToken ct = default);
+        Task<WebCallResult> CloseIsolatedMarginUserStreamAsync(string symbol, string listenKey, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the trading status for the current account
