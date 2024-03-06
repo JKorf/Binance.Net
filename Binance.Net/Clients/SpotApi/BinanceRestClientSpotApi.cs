@@ -1,7 +1,6 @@
 ﻿using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Objects;
-using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
@@ -22,8 +21,8 @@ using CryptoExchange.Net.Converters;
 using Binance.Net.Objects.Options;
 using Binance.Net.ExtensionMethods;
 using Binance.Net.Objects.Models;
-using CryptoExchange.Net.Sockets.MessageParsing.Interfaces;
-using CryptoExchange.Net.Sockets.MessageParsing;
+using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Clients;
 
 namespace Binance.Net.Clients.SpotApi
 {

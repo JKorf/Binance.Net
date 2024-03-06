@@ -6,15 +6,14 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using CryptoExchange.Net;
 using Binance.Net.Interfaces.Clients.GeneralApi;
 using Binance.Net.Clients.SpotApi;
 using Microsoft.Extensions.Logging;
 using Binance.Net.Objects.Options;
 using System.Linq;
-using CryptoExchange.Net.Sockets.MessageParsing.Interfaces;
 using Binance.Net.Objects.Models;
-using CryptoExchange.Net.Sockets.MessageParsing;
+using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Clients;
 
 namespace Binance.Net.Clients.GeneralApi
 {

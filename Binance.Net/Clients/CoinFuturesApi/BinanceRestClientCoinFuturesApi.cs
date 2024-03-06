@@ -11,15 +11,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models.Futures;
-using CryptoExchange.Net;
 using Binance.Net.Interfaces.Clients.CoinFuturesApi;
 using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Interfaces.CommonClients;
 using Binance.Net.Objects.Options;
-using CryptoExchange.Net.Sockets.MessageParsing.Interfaces;
 using Binance.Net.Objects.Models;
-using CryptoExchange.Net.Sockets.MessageParsing;
+using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Clients;
 
 namespace Binance.Net.Clients.CoinFuturesApi
 {
