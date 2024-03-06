@@ -41,7 +41,7 @@ The library is targeting both `.NET Standard 2.0` and `.NET Standard 2.1` for op
 	```
 
 **Create a new project and request the price in 50 seconds**  
-![Installing Gif](https://raw.githubusercontent.com/JKorf/Binance.Net/master/docs/binance.gif)
+![Installing Gif](https://github.com/JKorf/Binance.Net/blob/f74f262151f21b123deecd9b39a717458a18f6ff/docs/Binance.gif)
 
 For information on the clients, dependency injection, response processing and more see the [documentation](https://jkorf.github.io/CryptoExchange.Net), or have a look at the examples [here](https://github.com/JKorf/Binance.Net/tree/master/Examples) or [here](https://github.com/JKorf/CryptoExchange.Net/tree/master/Examples).
 
