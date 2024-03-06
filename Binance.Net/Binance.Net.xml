@@ -2156,10 +2156,10 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApi.SubscribeToAggregatedTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAggregatedTrade}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTrade}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTrade}},System.Boolean,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTrade}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTrade}},System.Boolean,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApi.SubscribeToBookTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamBookPrice}},System.Threading.CancellationToken)">
@@ -11482,21 +11482,23 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTrade}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTrade}},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             Subscribe to individual trade update. NOTE: This endpoint stream isn't document and therefor might be changed or removed without prior notice
             </summary>
             <param name="symbol">Symbol to subscribe</param>
             <param name="onMessage">The event handler for the received data</param>
+            <param name="filterOutNonTradeUpdates">Filter out any update which isn't a trade. Occasionally different updates (like INSURANCE_FUND updates) will occur on this stream. By default these are ignored</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTrade}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTrade}},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             Subscribe to individual trade update. NOTE: This endpoint stream isn't document and therefor might be changed or removed without prior notice
             </summary>
             <param name="symbols">Symbols to subscribe</param>
             <param name="onMessage">The event handler for the received data</param>
+            <param name="filterOutNonTradeUpdates">Filter out any update which isn't a trade. Occasionally different updates (like INSURANCE_FUND updates) will occur on this stream. By default these are ignored</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns></returns>
         </member>
@@ -13823,6 +13825,11 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTrade.IsBestMatch">
             <summary>
             Unused
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTrade.Type">
+            <summary>
+            Update type
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Binance24HPrice">

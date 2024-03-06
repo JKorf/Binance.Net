@@ -32,20 +32,22 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </summary>
         /// <param name="symbol">Symbol to subscribe</param>
         /// <param name="onMessage">The event handler for the received data</param>
+        /// <param name="filterOutNonTradeUpdates">Filter out any update which isn't a trade. Occasionally different updates (like INSURANCE_FUND updates) will occur on this stream. By default these are ignored</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
         Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol,
-            Action<DataEvent<BinanceStreamTrade>> onMessage, CancellationToken ct = default);
+            Action<DataEvent<BinanceStreamTrade>> onMessage, bool filterOutNonTradeUpdates = true, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to individual trade update. NOTE: This endpoint stream isn't document and therefor might be changed or removed without prior notice
         /// </summary>
         /// <param name="symbols">Symbols to subscribe</param>
         /// <param name="onMessage">The event handler for the received data</param>
+        /// <param name="filterOutNonTradeUpdates">Filter out any update which isn't a trade. Occasionally different updates (like INSURANCE_FUND updates) will occur on this stream. By default these are ignored</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
         Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols,
-            Action<DataEvent<BinanceStreamTrade>> onMessage, CancellationToken ct = default);
+            Action<DataEvent<BinanceStreamTrade>> onMessage, bool filterOutNonTradeUpdates = true, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribes to the aggregated trades update stream for the provided symbols
