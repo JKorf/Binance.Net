@@ -43,7 +43,7 @@ var tickerSubscriptionResult = socketClient.SpotApi.ExchangeData.SubscribeToTick
 });
 ```
 
-*Create a new project and request the last price of a symbol in 50 seconds*  
+*Get started and request the last price of a symbol in 40 seconds*  
 
 <img src="https://github.com/JKorf/Binance.Net/blob/f74f262151f21b123deecd9b39a717458a18f6ff/docs/Binance.gif" width="600" />
 
