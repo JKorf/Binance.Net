@@ -78,7 +78,7 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discuss
 |Margin Account/Trade|Partial|`restClient.SpotApi.Account` / `restClient.SpotApi.Trading`|
 |User Data Streams|✓|`socketClient.SpotApi.Account`|
 |Margin User Data Streams|X||
-|Simple Earn Endpoints|Outdated||
+|Simple Earn Endpoints|✓|`restClient.GeneralApi.SimpleEarn`|
 |Auto-Invest Endpoints|X||
 |Staking Endpoints|✓|`restClient.GeneralApi.Staking`|
 |Mining Endpoints|✓|`restClient.GeneralApi.Mining`|
