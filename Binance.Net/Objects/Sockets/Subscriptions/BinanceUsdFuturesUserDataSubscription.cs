@@ -115,7 +115,7 @@ namespace Binance.Net.Objects.Sockets
         }
 
         /// <inheritdoc />
-        public override Task<CallResult> DoHandleMessageAsync(SocketConnection connection, DataEvent<object> message)
+        public override CallResult DoHandleMessage(SocketConnection connection, DataEvent<object> message)
         {
             if (message.Data is BinanceCombinedStream<BinanceFuturesStreamConfigUpdate> configUpdate)
             {
@@ -154,7 +154,7 @@ namespace Binance.Net.Objects.Sockets
                 _condOrderHandler?.Invoke(message.As(condUpdate.Data, condUpdate.Stream, SocketUpdateType.Update));
             }
 
-            return Task.FromResult(new CallResult(null));
+            return new CallResult(null);
         }
     }
 }

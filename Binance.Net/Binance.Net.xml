@@ -28116,7 +28116,7 @@
         <member name="M:Binance.Net.Objects.Sockets.BinanceCoinFuturesUserDataSubscription.GetUnsubQuery">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.BinanceCoinFuturesUserDataSubscription.DoHandleMessageAsync(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{System.Object})">
+        <member name="M:Binance.Net.Objects.Sockets.BinanceCoinFuturesUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{System.Object})">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription">
@@ -28137,7 +28137,7 @@
         <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.GetUnsubQuery">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessageAsync(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{System.Object})">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{System.Object})">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1">
@@ -28164,7 +28164,7 @@
         <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1.GetUnsubQuery">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1.DoHandleMessageAsync(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{System.Object})">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{System.Object})">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Objects.Sockets.BinanceUsdFuturesUserDataSubscription">
@@ -28197,7 +28197,7 @@
         <member name="M:Binance.Net.Objects.Sockets.BinanceUsdFuturesUserDataSubscription.GetUnsubQuery">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.BinanceUsdFuturesUserDataSubscription.DoHandleMessageAsync(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{System.Object})">
+        <member name="M:Binance.Net.Objects.Sockets.BinanceUsdFuturesUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{System.Object})">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.SymbolOrderBooks.BinanceFuturesCoinSymbolOrderBook">
