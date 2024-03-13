@@ -71,9 +71,9 @@ namespace Binance.Net.Clients.SpotApi
             ExchangeData = new BinanceRestClientSpotApiExchangeData(logger, this);
             Trading = new BinanceRestClientSpotApiTrading(logger, this);
 
-            requestBodyEmptyContent = "";
-            requestBodyFormat = RequestBodyFormat.FormData;
-            arraySerialization = ArrayParametersSerialization.MultipleValues;
+            RequestBodyEmptyContent = "";
+            RequestBodyFormat = RequestBodyFormat.FormData;
+            ArraySerialization = ArrayParametersSerialization.MultipleValues;
 
             _brokerId = !string.IsNullOrEmpty(options.SpotOptions.BrokerId) ? options.SpotOptions.BrokerId! : "x-VICEW9VV";
         }

@@ -61,9 +61,9 @@ namespace Binance.Net.Clients.GeneralApi
             Staking = new BinanceRestClientGeneralApiStaking(this);
             SimpleEarn = new BinanceRestClientGeneralApiSimpleEarn(this);
 
-            requestBodyEmptyContent = "";
-            requestBodyFormat = RequestBodyFormat.FormData;
-            arraySerialization = ArrayParametersSerialization.MultipleValues;
+            RequestBodyEmptyContent = "";
+            RequestBodyFormat = RequestBodyFormat.FormData;
+            ArraySerialization = ArrayParametersSerialization.MultipleValues;
         }
 
         #endregion

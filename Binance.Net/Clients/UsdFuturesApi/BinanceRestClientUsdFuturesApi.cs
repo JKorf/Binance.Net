@@ -66,9 +66,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
             ExchangeData = new BinanceRestClientUsdFuturesApiExchangeData(logger, this);
             Trading = new BinanceRestClientUsdFuturesApiTrading(logger, this);
 
-            requestBodyEmptyContent = "";
-            requestBodyFormat = RequestBodyFormat.FormData;
-            arraySerialization = ArrayParametersSerialization.MultipleValues;
+            RequestBodyEmptyContent = "";
+            RequestBodyFormat = RequestBodyFormat.FormData;
+            ArraySerialization = ArrayParametersSerialization.MultipleValues;
             _brokerId = !string.IsNullOrEmpty(options.UsdFuturesOptions.BrokerId) ? options.UsdFuturesOptions.BrokerId! : "x-d63tKbx3";
         }
 
