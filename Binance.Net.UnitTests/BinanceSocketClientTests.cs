@@ -66,7 +66,7 @@ namespace Binance.Net.UnitTests
             socket.InvokeMessage(data);
 
             // assert
-            ClassicAssert.Null(result, null);
+            ClassicAssert.NotNull(result, null);
             Assert.That(TestHelpers.AreEqual(data.Data, result, "Data"));
             Assert.That(TestHelpers.AreEqual(data.Data.Data, result.Data));
         }

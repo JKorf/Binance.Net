@@ -43,8 +43,8 @@ namespace Binance.Net.UnitTests
             var result = await client.SpotApi.ExchangeData.GetServerTimeAsync();
 
             // assert
-            Assert.ReferenceEquals(true, result.Success);
-            Assert.ReferenceEquals(expected, result.Data);
+            Assert.That(result.Success);
+            Assert.That(expected == result.Data);
         }
        
         [TestCase]
@@ -150,7 +150,7 @@ namespace Binance.Net.UnitTests
             var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
 
             // assert
-            Assert.ReferenceEquals(authProvider.GetApiKey(), "TestKey");
+            Assert.That(authProvider.GetApiKey() == "TestKey");
         }
 
         [Test]
