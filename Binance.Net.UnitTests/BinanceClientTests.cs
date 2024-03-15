@@ -23,6 +23,7 @@ using Binance.Net.Clients.SpotApi;
 using Binance.Net.ExtensionMethods;
 using Binance.Net.Objects.Options;
 using CryptoExchange.Net.Objects.Sockets;
+using NUnit.Framework.Legacy;
 
 namespace Binance.Net.UnitTests
 {
@@ -42,8 +43,8 @@ namespace Binance.Net.UnitTests
             var result = await client.SpotApi.ExchangeData.GetServerTimeAsync();
 
             // assert
-            Assert.AreEqual(true, result.Success);
-            Assert.AreEqual(expected, result.Data);
+            Assert.ReferenceEquals(true, result.Success);
+            Assert.ReferenceEquals(expected, result.Data);
         }
        
         [TestCase]
@@ -65,8 +66,8 @@ namespace Binance.Net.UnitTests
             var result = await client.SpotApi.Account.StartUserStreamAsync();
 
             // assert
-            Assert.IsTrue(result.Success);
-            Assert.IsTrue(key.ListenKey == result.Data);
+            Assert.That(result.Success);
+            Assert.That(key.ListenKey == result.Data);
         }
 
         [TestCase]
@@ -83,7 +84,7 @@ namespace Binance.Net.UnitTests
             var result = await client.SpotApi.Account.KeepAliveUserStreamAsync("test");
 
             // assert
-            Assert.IsTrue(result.Success);
+            Assert.That(result.Success);
         }
 
         [TestCase]
@@ -96,7 +97,7 @@ namespace Binance.Net.UnitTests
             var result = await client.SpotApi.Account.StopUserStreamAsync("test");
 
             // assert
-            Assert.IsTrue(result.Success);
+            Assert.That(result.Success);
         }
 
         [TestCase()]
@@ -135,10 +136,10 @@ namespace Binance.Net.UnitTests
             var result = await client.SpotApi.ExchangeData.GetServerTimeAsync();
 
             // assert
-            Assert.IsFalse(result.Success);
-            Assert.IsNotNull(result.Error);
-            Assert.IsTrue(result.Error.Code == 123);
-            Assert.IsTrue(result.Error.Message == "Error!");
+            ClassicAssert.IsFalse(result.Success);
+            ClassicAssert.IsNotNull(result.Error);
+            Assert.That(result.Error.Code == 123);
+            Assert.That(result.Error.Message == "Error!");
         }
 
         [Test]
@@ -149,7 +150,7 @@ namespace Binance.Net.UnitTests
             var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
 
             // assert
-            Assert.AreEqual(authProvider.GetApiKey(), "TestKey");
+            Assert.ReferenceEquals(authProvider.GetApiKey(), "TestKey");
         }
 
         [Test]
@@ -166,7 +167,7 @@ namespace Binance.Net.UnitTests
                 HttpMethodParameterPosition.InUri, RequestBodyFormat.Json, out var uriParameters, out var bodyParameters, out headers);
 
             // assert
-            Assert.IsTrue(headers.First().Key == "X-MBX-APIKEY" && headers.First().Value == "TestKey");
+            Assert.That(headers.First().Key == "X-MBX-APIKEY" && headers.First().Value == "TestKey");
         }       
 
         [TestCase("BTCUSDT", true)]
@@ -201,7 +202,7 @@ namespace Binance.Net.UnitTests
                 foreach (var method in implementation.GetMethods().Where(m => m.ReturnType.IsAssignableTo(typeof(Task))))
                 {
                     var interfaceMethod = clientInterface.GetMethod(method.Name, method.GetParameters().Select(p => p.ParameterType).ToArray());
-                    Assert.NotNull(interfaceMethod, $"Missing interface for method {method.Name} in {implementation.Name} implementing interface {clientInterface.Name}");
+                    ClassicAssert.NotNull(interfaceMethod, $"Missing interface for method {method.Name} in {implementation.Name} implementing interface {clientInterface.Name}");
                     methods++;
                 }
                 Debug.WriteLine($"{clientInterface.Name} {methods} methods validated");
@@ -221,7 +222,7 @@ namespace Binance.Net.UnitTests
                 foreach (var method in implementation.GetMethods().Where(m => m.ReturnType.IsAssignableTo(typeof(Task<CallResult<UpdateSubscription>>))))
                 {
                     var interfaceMethod = clientInterface.GetMethod(method.Name, method.GetParameters().Select(p => p.ParameterType).ToArray());
-                    Assert.NotNull(interfaceMethod, $"Missing interface for method {method.Name} in {implementation.Name} implementing interface {clientInterface.GetType().Name}");
+                    ClassicAssert.NotNull(interfaceMethod, $"Missing interface for method {method.Name} in {implementation.Name} implementing interface {clientInterface.GetType().Name}");
                     methods++;
                 }
                 Debug.WriteLine($"{clientInterface.Name} {methods} methods validated");
