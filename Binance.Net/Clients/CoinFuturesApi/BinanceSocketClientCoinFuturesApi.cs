@@ -61,6 +61,10 @@ namespace Binance.Net.Clients.CoinFuturesApi
         internal BinanceSocketClientCoinFuturesApi(ILogger logger, BinanceSocketOptions options) :
             base(logger, options.Environment.CoinFuturesSocketAddress!, options, options.CoinFuturesOptions)
         {
+            // When sending more than 4000 bytes the server responds very delayed (somehow connected to the websocket keep alive interval)
+            // See https://dev.binance.vision/t/socket-live-subscribing-server-delay/9645/2
+            // To prevent issues we keep below this
+            MessageSendSizeLimit = 4000;
         }
         #endregion 
 
