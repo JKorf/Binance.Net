@@ -157,6 +157,7 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
     * Added websocket max message size to prevent timeouts and weird behavior when sending large requests
     * Updated WebCallResult<object> return endpoints to WebCallResult return
     * Updated unit test package dependencies and updated tests accordingly
+	* Added parameter on futures stream trades stream for ignoring non trade updates
 
 * Version 9.6.1 - 29 Feb 2024
     * Fix for user data websocket streams subscriptions
