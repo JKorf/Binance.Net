@@ -56,5 +56,11 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// </summary>
         [JsonProperty("M")]
         public bool IsBestMatch { get; set; }
+
+        /// <summary>
+        /// Update type
+        /// </summary>
+        [JsonProperty("X")]
+        public string? Type { get; set; }
     }
 }
