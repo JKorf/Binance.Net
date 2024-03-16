@@ -13,6 +13,7 @@ using Binance.Net.Objects.Models.Futures.Socket;
 using Binance.Net.Objects.Options;
 using Binance.Net.Objects.Sockets;
 using CryptoExchange.Net;
+using NUnit.Framework.Legacy;
 
 namespace Binance.Net.UnitTests
 {
@@ -28,7 +29,7 @@ namespace Binance.Net.UnitTests
 
             IBinanceStreamKlineData result = null;
             var subTask = client.SpotApi.ExchangeData.SubscribeToKlineUpdatesAsync("ETHBTC", KlineInterval.OneMinute, (test) => result = test.Data);
-            await socket.InvokeMessage(new BinanceSocketQueryResponse { Id = ExchangeHelpers.LastId() - 1 });
+            socket.InvokeMessage(new BinanceSocketQueryResponse { Id = ExchangeHelpers.LastId() - 1 });
             await subTask;
 
             var data = new BinanceCombinedStream<BinanceStreamKlineData>()
@@ -62,12 +63,12 @@ namespace Binance.Net.UnitTests
             };
 
             // act
-            await socket.InvokeMessage(data);
+            socket.InvokeMessage(data);
 
             // assert
-            Assert.IsNotNull(result);
-            Assert.IsTrue(TestHelpers.AreEqual(data.Data, result, "Data"));
-            Assert.IsTrue(TestHelpers.AreEqual(data.Data.Data, result.Data));
+            ClassicAssert.NotNull(result, null);
+            Assert.That(TestHelpers.AreEqual(data.Data, result, "Data"));
+            Assert.That(TestHelpers.AreEqual(data.Data.Data, result.Data));
         }
 
         [TestCase()]
@@ -79,7 +80,7 @@ namespace Binance.Net.UnitTests
 
             IBinanceStreamKlineData result = null;
             var subTask = client.UsdFuturesApi.SubscribeToContinuousContractKlineUpdatesAsync("ETHBTC", ContractType.Perpetual, KlineInterval.OneMinute, (test) => result = test.Data);
-            await socket.InvokeMessage(new BinanceSocketQueryResponse { Id = ExchangeHelpers.LastId() - 1 });
+            socket.InvokeMessage(new BinanceSocketQueryResponse { Id = ExchangeHelpers.LastId() - 1 });
             await subTask;
 
             var data = new BinanceCombinedStream<BinanceStreamContinuousKlineData>()
@@ -114,12 +115,12 @@ namespace Binance.Net.UnitTests
             };
 
             // act
-            await socket.InvokeMessage(data);
+            socket.InvokeMessage(data);
 
             // assert
-            Assert.IsNotNull(result);
-            Assert.IsTrue(TestHelpers.AreEqual(data.Data, result, "Data"));
-            Assert.IsTrue(TestHelpers.AreEqual(data.Data.Data, result.Data));
+            ClassicAssert.IsNotNull(result);
+            Assert.That(TestHelpers.AreEqual(data.Data, result, "Data"));
+            Assert.That(TestHelpers.AreEqual(data.Data.Data, result.Data));
         }
 
         [TestCase()]
@@ -131,7 +132,7 @@ namespace Binance.Net.UnitTests
 
             IBinanceTick result = null;
             var subTask = client.SpotApi.ExchangeData.SubscribeToTickerUpdatesAsync("ETHBTC", (test) => result = test.Data);
-            await socket.InvokeMessage(new BinanceSocketQueryResponse { Id = ExchangeHelpers.LastId() - 1 });
+            socket.InvokeMessage(new BinanceSocketQueryResponse { Id = ExchangeHelpers.LastId() - 1 });
             await subTask;
 
             var data = new BinanceCombinedStream<BinanceStreamTick>()
@@ -153,11 +154,11 @@ namespace Binance.Net.UnitTests
             };
 
             // act
-            await socket.InvokeMessage(data);
+            socket.InvokeMessage(data);
 
             // assert
-            Assert.IsNotNull(result);
-            Assert.IsTrue(TestHelpers.AreEqual(data.Data, result));
+            ClassicAssert.IsNotNull(result);
+            Assert.That(TestHelpers.AreEqual(data.Data, result));
         }
 
         [TestCase()]
@@ -169,7 +170,7 @@ namespace Binance.Net.UnitTests
 
             IBinanceTick[] result = null;
             var subTask = client.SpotApi.ExchangeData.SubscribeToAllTickerUpdatesAsync((test) => result = test.Data.ToArray());
-            await socket.InvokeMessage(new BinanceSocketQueryResponse { Id = ExchangeHelpers.LastId() - 1 });
+            socket.InvokeMessage(new BinanceSocketQueryResponse { Id = ExchangeHelpers.LastId() - 1 });
             await subTask;
 
             var data = new BinanceCombinedStream<BinanceStreamTick[]>
@@ -195,11 +196,11 @@ namespace Binance.Net.UnitTests
             };
 
             // act
-            await socket.InvokeMessage(data);
+            socket.InvokeMessage(data);
 
             // assert
-            Assert.IsNotNull(result);
-            Assert.IsTrue(TestHelpers.AreEqual(data.Data[0], result[0]));
+            ClassicAssert.IsNotNull(result);
+            Assert.That(TestHelpers.AreEqual(data.Data[0], result[0]));
         }
 
         [TestCase()]
@@ -211,7 +212,7 @@ namespace Binance.Net.UnitTests
 
             BinanceStreamTrade result = null;
             var subTask = client.SpotApi.ExchangeData.SubscribeToTradeUpdatesAsync("ETHBTC", (test) => result = test.Data);
-            await socket.InvokeMessage(new BinanceSocketQueryResponse { Id = ExchangeHelpers.LastId() - 1 });
+            socket.InvokeMessage(new BinanceSocketQueryResponse { Id = ExchangeHelpers.LastId() - 1 });
             await subTask;
 
             var data = new BinanceCombinedStream<BinanceStreamTrade>()
@@ -232,11 +233,11 @@ namespace Binance.Net.UnitTests
             };
 
             // act
-            await socket.InvokeMessage(data);
+            socket.InvokeMessage(data);
 
             // assert
-            Assert.IsNotNull(result);
-            Assert.IsTrue(TestHelpers.AreEqual(data.Data, result));
+            ClassicAssert.IsNotNull(result);
+            Assert.That(TestHelpers.AreEqual(data.Data, result));
         }
 
         [TestCase()]
@@ -248,7 +249,7 @@ namespace Binance.Net.UnitTests
 
             BinanceStreamBalanceUpdate result = null;
             var subTask = client.SpotApi.Account.SubscribeToUserDataUpdatesAsync("test", null, null, null, (test) => result = test.Data);
-            await socket.InvokeMessage(new BinanceSocketQueryResponse { Id = ExchangeHelpers.LastId() - 1 });
+            socket.InvokeMessage(new BinanceSocketQueryResponse { Id = ExchangeHelpers.LastId() - 1 });
             await subTask;
 
             var data = new BinanceCombinedStream<BinanceStreamBalanceUpdate>
@@ -265,11 +266,11 @@ namespace Binance.Net.UnitTests
             };
 
             // act
-            await socket.InvokeMessage(data);
+            socket.InvokeMessage(data);
 
             // assert
-            Assert.IsNotNull(result);
-            Assert.IsTrue(TestHelpers.AreEqual(data.Data, result, "ListenKey"));
+            ClassicAssert.IsNotNull(result);
+            Assert.That(TestHelpers.AreEqual(data.Data, result, "ListenKey"));
         }
 
         [TestCase()]
@@ -281,7 +282,7 @@ namespace Binance.Net.UnitTests
 
             BinanceStreamOrderList result = null;
             var subTask = client.SpotApi.Account.SubscribeToUserDataUpdatesAsync("test", null, (test) => result = test.Data, null, null);
-            await socket.InvokeMessage(new BinanceSocketQueryResponse { Id = ExchangeHelpers.LastId() - 1 });
+            socket.InvokeMessage(new BinanceSocketQueryResponse { Id = ExchangeHelpers.LastId() - 1 });
             await subTask;
 
             var data = new BinanceCombinedStream<BinanceStreamOrderList>
@@ -317,13 +318,13 @@ namespace Binance.Net.UnitTests
             };
 
             // act
-            await socket.InvokeMessage(data);
+            socket.InvokeMessage(data);
 
             // assert
-            Assert.IsNotNull(result);
-            Assert.IsTrue(TestHelpers.AreEqual(data.Data, result, "Orders", "ListenKey"));
-            Assert.IsTrue(TestHelpers.AreEqual(data.Data.Orders.ToList()[0], result.Orders.ToList()[0]));
-            Assert.IsTrue(TestHelpers.AreEqual(data.Data.Orders.ToList()[1], result.Orders.ToList()[1]));
+            ClassicAssert.IsNotNull(result);
+            Assert.That(TestHelpers.AreEqual(data.Data, result, "Orders", "ListenKey"));
+            Assert.That(TestHelpers.AreEqual(data.Data.Orders.ToList()[0], result.Orders.ToList()[0]));
+            Assert.That(TestHelpers.AreEqual(data.Data.Orders.ToList()[1], result.Orders.ToList()[1]));
         }
 
         [TestCase()]
@@ -335,7 +336,7 @@ namespace Binance.Net.UnitTests
 
             BinanceStreamOrderUpdate result = null;
             var subTask = client.SpotApi.Account.SubscribeToUserDataUpdatesAsync("test", (test) => result = test.Data, null, null, null);
-            await socket.InvokeMessage(new BinanceSocketQueryResponse { Id = ExchangeHelpers.LastId() - 1 });
+            socket.InvokeMessage(new BinanceSocketQueryResponse { Id = ExchangeHelpers.LastId() - 1 });
             await subTask;
 
             var data = new BinanceCombinedStream<BinanceStreamOrderUpdate>
@@ -369,11 +370,11 @@ namespace Binance.Net.UnitTests
             };
 
             // act
-            await socket.InvokeMessage(data);
+            socket.InvokeMessage(data);
 
             // assert
-            Assert.IsNotNull(result);
-            Assert.IsTrue(TestHelpers.AreEqual(data.Data, result, "Balances", "ListenKey"));
+            ClassicAssert.IsNotNull(result);
+            Assert.That(TestHelpers.AreEqual(data.Data, result, "Balances", "ListenKey"));
         }
     }
 }

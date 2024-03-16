@@ -11,13 +11,12 @@ using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Options;
 using Binance.Net.Objects.Sockets;
 using Binance.Net.Objects.Sockets.Subscriptions;
-using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
-using CryptoExchange.Net.Sockets.MessageParsing;
-using CryptoExchange.Net.Sockets.MessageParsing.Interfaces;
 using Microsoft.Extensions.Logging;
 
 namespace Binance.Net.Clients.SpotApi
@@ -56,6 +55,11 @@ namespace Binance.Net.Clients.SpotApi
             Trading = new BinanceSocketClientSpotApiTrading(logger, this);
 
             _brokerId = !string.IsNullOrEmpty(options.SpotOptions.BrokerId) ? options.SpotOptions.BrokerId! : "x-VICEW9VV";
+
+            // When sending more than 4000 bytes the server responds very delayed (somehow connected to the websocket keep alive interval)
+            // See https://dev.binance.vision/t/socket-live-subscribing-server-delay/9645/2
+            // To prevent issues we keep below this
+            MessageSendSizeLimit = 4000;
         }
         #endregion
 

@@ -22,7 +22,7 @@ namespace Binance.Net.UnitTests.TestImplementations
         public event Func<Exception, Task> OnError;
 #pragma warning restore 0067
         public event Func<int, Task> OnRequestSent;
-        public event Func<WebSocketMessageType, Stream, Task> OnStreamMessage;
+        public event Action<WebSocketMessageType, ReadOnlyMemory<byte>> OnStreamMessage;
         public event Func<Task> OnOpen;
 
         public int Id { get; }
@@ -92,16 +92,14 @@ namespace Binance.Net.UnitTests.TestImplementations
             OnOpen?.Invoke();
         }
 
-        public async Task InvokeMessage(string data)
+        public void InvokeMessage(string data)
         {
-            var stream = new MemoryStream(Encoding.UTF8.GetBytes(data));
-            await OnStreamMessage?.Invoke(WebSocketMessageType.Text, stream);
+            OnStreamMessage?.Invoke(WebSocketMessageType.Text, new ReadOnlyMemory<byte>(Encoding.UTF8.GetBytes(data)));
         }
 
-        public async Task InvokeMessage<T>(T data)
+        public void InvokeMessage<T>(T data)
         {
-            var stream = new MemoryStream(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(data)));
-            await OnStreamMessage?.Invoke(WebSocketMessageType.Text, stream);
+            OnStreamMessage?.Invoke(WebSocketMessageType.Text, new ReadOnlyMemory<byte>(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(data))));
         }
 
         public void SetProxy(ApiProxy proxy)

@@ -1,8 +1,10 @@
 ﻿using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.Converters.JsonNet;
 using CryptoExchange.Net.Objects;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -76,9 +78,12 @@ namespace Binance.Net.UnitTests.TestImplementations
                     CallResult result = (CallResult)await TestHelpers.InvokeAsync(method, getSubject(client), input.ToArray());
 
                     // asset
-                    Assert.Null(result.Error, method.Name);
+                    ClassicAssert.Null(result.Error, method.Name);
 
-                    var resultData = result.GetType().GetProperty("Data", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance).GetValue(result);
+                    var dataProperty = result.GetType().GetProperty("Data", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+                    if (dataProperty == null)
+                        continue;
+                    var resultData = dataProperty.GetValue(result);
                     ProcessData(method.Name + (i == 0 ? "" : i.ToString()), resultData, json, parametersToSetNull, useNestedJsonPropertyForCompare, ignoreProperties);
                 }
             }
@@ -199,10 +204,8 @@ namespace Binance.Net.UnitTests.TestImplementations
 
             // Property has a value
             var property = resultProperties.SingleOrDefault(p => p.Item2?.PropertyName == prop.Name).p;
-            if (property is null)
-                property = resultProperties.SingleOrDefault(p => p.p.Name == prop.Name).p;
-            if (property is null)
-                property = resultProperties.SingleOrDefault(p => p.p.Name.ToUpperInvariant() == prop.Name.ToUpperInvariant()).p;
+            property ??= resultProperties.SingleOrDefault(p => p.p.Name == prop.Name).p;
+            property ??= resultProperties.SingleOrDefault(p => p.p.Name.ToUpperInvariant() == prop.Name.ToUpperInvariant()).p;
 
             if (property is null)
             {
@@ -326,7 +329,9 @@ namespace Binance.Net.UnitTests.TestImplementations
                 {
                     if (info.GetCustomAttribute<JsonConverterAttribute>(true) == null
                         && info.GetCustomAttribute<JsonPropertyAttribute>(true)?.ItemConverterType == null)
+                    {
                         CheckValues(method, propertyName, (JValue)propValue, propertyValue);
+                    }
                 }
             }
         }
@@ -345,7 +350,9 @@ namespace Binance.Net.UnitTests.TestImplementations
                     // timestamp, hard to check..
                 }
                 else if (jsonValue.Value<string>().ToLowerInvariant() != objectValue.ToString().ToLowerInvariant())
+                {
                     throw new Exception($"{method}: {property} not equal: {jsonValue.Value<string>()} vs {objectValue.ToString()}");
+                }
             }
             else if (jsonValue.Type == JTokenType.Integer)
             {

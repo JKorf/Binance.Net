@@ -1,6 +1,6 @@
 ﻿using Binance.Net.Objects.Options;
-using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
 using System;

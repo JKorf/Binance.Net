@@ -370,24 +370,24 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Disable Fast Withdraw Switch
         /// <inheritdoc />
-        public async Task<WebCallResult<object>> DisableFastWithdrawSwitchAsync(int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult> DisableFastWithdrawSwitchAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrl(disableFastWithdrawSwitchEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal(_baseClient.GetUrl(disableFastWithdrawSwitchEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
 
         #region Enable Fast Withdraw Switch
         /// <inheritdoc />
-        public async Task<WebCallResult<object>> EnableFastWithdrawSwitchAsync(int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult> EnableFastWithdrawSwitchAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrl(enableFastWithdrawSwitchEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal(_baseClient.GetUrl(enableFastWithdrawSwitchEndpoint, "sapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
         #endregion
 
@@ -515,7 +515,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Ping/Keep-alive a ListenKey
 
         /// <inheritdoc />
-        public async Task<WebCallResult<object>> KeepAliveUserStreamAsync(string listenKey, CancellationToken ct = default)
+        public async Task<WebCallResult> KeepAliveUserStreamAsync(string listenKey, CancellationToken ct = default)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
 
@@ -524,14 +524,14 @@ namespace Binance.Net.Clients.SpotApi
                 { "listenKey", listenKey }
             };
 
-            return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrl(keepListenKeyAliveEndpoint, "api", "3"), HttpMethod.Put, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal(_baseClient.GetUrl(keepListenKeyAliveEndpoint, "api", "3"), HttpMethod.Put, ct, parameters).ConfigureAwait(false);
         }
 
         #endregion
 
         #region Invalidate a ListenKey
         /// <inheritdoc />
-        public async Task<WebCallResult<object>> StopUserStreamAsync(string listenKey, CancellationToken ct = default)
+        public async Task<WebCallResult> StopUserStreamAsync(string listenKey, CancellationToken ct = default)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
 
@@ -540,7 +540,7 @@ namespace Binance.Net.Clients.SpotApi
                 { "listenKey", listenKey }
             };
 
-            return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrl(closeListenKeyEndpoint, "api", "3"), HttpMethod.Delete, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal(_baseClient.GetUrl(closeListenKeyEndpoint, "api", "3"), HttpMethod.Delete, ct, parameters).ConfigureAwait(false);
         }
 
         #endregion
@@ -1079,7 +1079,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Ping/Keep-alive a ListenKey
 
         /// <inheritdoc />
-        public async Task<WebCallResult<object>> KeepAliveMarginUserStreamAsync(string listenKey, CancellationToken ct = default)
+        public async Task<WebCallResult> KeepAliveMarginUserStreamAsync(string listenKey, CancellationToken ct = default)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
 
@@ -1088,7 +1088,7 @@ namespace Binance.Net.Clients.SpotApi
                 { "listenKey", listenKey },
             };
 
-            return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrl(keepListenKeyAliveEndpoint, "sapi", "1"), HttpMethod.Put, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal(_baseClient.GetUrl(keepListenKeyAliveEndpoint, "sapi", "1"), HttpMethod.Put, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -1096,7 +1096,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Invalidate a ListenKey
 
         /// <inheritdoc />
-        public async Task<WebCallResult<object>> StopMarginUserStreamAsync(string listenKey, CancellationToken ct = default)
+        public async Task<WebCallResult> StopMarginUserStreamAsync(string listenKey, CancellationToken ct = default)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
             var parameters = new Dictionary<string, object>
@@ -1104,7 +1104,7 @@ namespace Binance.Net.Clients.SpotApi
                 { "listenKey", listenKey }
             };
 
-            return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrl(closeListenKeyEndpoint, "sapi", "1"), HttpMethod.Delete, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal(_baseClient.GetUrl(closeListenKeyEndpoint, "sapi", "1"), HttpMethod.Delete, ct, parameters).ConfigureAwait(false);
         }
 
         #endregion
@@ -1130,7 +1130,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Ping/Keep-alive a ListenKey
 
         /// <inheritdoc />
-        public async Task<WebCallResult<object>> KeepAliveIsolatedMarginUserStreamAsync(string symbol, string listenKey, CancellationToken ct = default)
+        public async Task<WebCallResult> KeepAliveIsolatedMarginUserStreamAsync(string symbol, string listenKey, CancellationToken ct = default)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
             var parameters = new Dictionary<string, object>
@@ -1139,14 +1139,14 @@ namespace Binance.Net.Clients.SpotApi
                 {"symbol", symbol}
             };
 
-            return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrl(keepListenKeyAliveIsolatedEndpoint, "sapi", "1"), HttpMethod.Put, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal(_baseClient.GetUrl(keepListenKeyAliveIsolatedEndpoint, "sapi", "1"), HttpMethod.Put, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
 
         #region Invalidate a ListenKey
         /// <inheritdoc />
-        public async Task<WebCallResult<object>> CloseIsolatedMarginUserStreamAsync(string symbol, string listenKey, CancellationToken ct = default)
+        public async Task<WebCallResult> CloseIsolatedMarginUserStreamAsync(string symbol, string listenKey, CancellationToken ct = default)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
             var parameters = new Dictionary<string, object>
@@ -1155,7 +1155,7 @@ namespace Binance.Net.Clients.SpotApi
                 {"symbol", symbol}
             };
 
-            return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrl(closeListenKeyIsolatedEndpoint, "sapi", "1"), HttpMethod.Delete, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal(_baseClient.GetUrl(closeListenKeyIsolatedEndpoint, "sapi", "1"), HttpMethod.Delete, ct, parameters).ConfigureAwait(false);
         }
 
         #endregion

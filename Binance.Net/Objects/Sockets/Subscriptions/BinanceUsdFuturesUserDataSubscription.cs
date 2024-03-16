@@ -2,11 +2,10 @@
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures.Socket;
 using CryptoExchange.Net;
+using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
-using CryptoExchange.Net.Sockets.MessageParsing;
-using CryptoExchange.Net.Sockets.MessageParsing.Interfaces;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -116,7 +115,7 @@ namespace Binance.Net.Objects.Sockets
         }
 
         /// <inheritdoc />
-        public override Task<CallResult> DoHandleMessageAsync(SocketConnection connection, DataEvent<object> message)
+        public override CallResult DoHandleMessage(SocketConnection connection, DataEvent<object> message)
         {
             if (message.Data is BinanceCombinedStream<BinanceFuturesStreamConfigUpdate> configUpdate)
             {
@@ -155,7 +154,7 @@ namespace Binance.Net.Objects.Sockets
                 _condOrderHandler?.Invoke(message.As(condUpdate.Data, condUpdate.Stream, SocketUpdateType.Update));
             }
 
-            return Task.FromResult(new CallResult(null));
+            return new CallResult(null);
         }
     }
 }
