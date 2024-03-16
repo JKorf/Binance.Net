@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Converters;
@@ -19,6 +20,7 @@ using Binance.Net.Objects.Models.Spot.Margin;
 using CryptoExchange.Net;
 using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -334,23 +336,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestInternal<BinanceReplaceOrderResult>(_baseClient.GetUrl(cancelReplaceOrderEndpoint, api, signedVersion), HttpMethod.Post, ct, parameters, true, weight: 1).ConfigureAwait(false);
-            if (!result && result.OriginalData != null)
-            {
-                // TODO 
-                //// Attempt to parse the error
-                //var jsonData = result.OriginalData.ToJToken(_logger);
-                //if (jsonData != null)
-                //{
-                //    var dataNode = jsonData["data"];
-                //    if (dataNode == null)
-                //        return result;
-
-                //    var error = dataNode?["cancelResult"]?.ToString() == "FAILURE" ? dataNode!["cancelResponse"] : jsonData["data"]!["newOrderResponse"];
-                //    if (error != null && error.HasValues)
-                //        return result.AsError<BinanceReplaceOrderResult>(new ServerError(error!.Value<int>("code"), error.Value<string>("msg")!));
-                //}
-            }
-
+           
             if (result && result.Data.NewOrderResult == OrderOperationResult.Success)
                 _baseClient.InvokeOrderPlaced(new OrderId() { SourceObject = result.Data, Id = result.Data.NewOrderResponse!.Id.ToString(CultureInfo.InvariantCulture) });
             return result;
