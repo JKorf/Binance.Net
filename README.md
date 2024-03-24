@@ -145,8 +145,9 @@ I develop and maintain this package on my own for free in my spare time, any sup
 ### Donate
 Make a one time donation in a crypto currency of your choice. If you prefer to donate a currency not listed here please contact me.
 
-**Btc**:  bc1qz0jv0my7fc60rxeupr23e75x95qmlq6489n8gh  
-**Eth**:  0xcb1b63aCF9fef2755eBf4a0506250074496Ad5b7  
+**Btc**:  bc1q277a5n54s2l2mzlu778ef7lpkwhjhyvghuv8qf  
+**Eth**:  0xcb1b63aCF9fef2755eBf4a0506250074496Ad5b7   
+**USDT (TRX)**  TKigKeJPXZYyMVDgMyXxMf17MWYia92Rjd
 
 ### Sponsor
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
