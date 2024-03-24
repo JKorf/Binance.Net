@@ -28220,7 +28220,7 @@
             <param name="symbol">The symbol the order book is for</param>
             <param name="optionsDelegate">Option configuration delegate</param>
         </member>
-        <member name="M:Binance.Net.SymbolOrderBooks.BinanceFuturesCoinSymbolOrderBook.#ctor(System.String,System.Action{Binance.Net.Objects.Options.BinanceOrderBookOptions},Microsoft.Extensions.Logging.ILogger{Binance.Net.SymbolOrderBooks.BinanceFuturesCoinSymbolOrderBook},Binance.Net.Interfaces.Clients.IBinanceRestClient,Binance.Net.Interfaces.Clients.IBinanceSocketClient)">
+        <member name="M:Binance.Net.SymbolOrderBooks.BinanceFuturesCoinSymbolOrderBook.#ctor(System.String,System.Action{Binance.Net.Objects.Options.BinanceOrderBookOptions},Microsoft.Extensions.Logging.ILoggerFactory,Binance.Net.Interfaces.Clients.IBinanceRestClient,Binance.Net.Interfaces.Clients.IBinanceSocketClient)">
             <summary>
             Create a new order book instance
             </summary>
@@ -28255,7 +28255,7 @@
             <param name="symbol">The symbol the order book is for</param>
             <param name="optionsDelegate">Option configuration delegate</param>
         </member>
-        <member name="M:Binance.Net.SymbolOrderBooks.BinanceFuturesUsdtSymbolOrderBook.#ctor(System.String,System.Action{Binance.Net.Objects.Options.BinanceOrderBookOptions},Microsoft.Extensions.Logging.ILogger{Binance.Net.SymbolOrderBooks.BinanceFuturesUsdtSymbolOrderBook},Binance.Net.Interfaces.Clients.IBinanceRestClient,Binance.Net.Interfaces.Clients.IBinanceSocketClient)">
+        <member name="M:Binance.Net.SymbolOrderBooks.BinanceFuturesUsdtSymbolOrderBook.#ctor(System.String,System.Action{Binance.Net.Objects.Options.BinanceOrderBookOptions},Microsoft.Extensions.Logging.ILoggerFactory,Binance.Net.Interfaces.Clients.IBinanceRestClient,Binance.Net.Interfaces.Clients.IBinanceSocketClient)">
             <summary>
             Create a new order book instance
             </summary>
@@ -28310,7 +28310,7 @@
             <param name="symbol">The symbol the order book is for</param>
             <param name="optionsDelegate">Option configuration delegate</param>
         </member>
-        <member name="M:Binance.Net.SymbolOrderBooks.BinanceSpotSymbolOrderBook.#ctor(System.String,System.Action{Binance.Net.Objects.Options.BinanceOrderBookOptions},Microsoft.Extensions.Logging.ILogger{Binance.Net.SymbolOrderBooks.BinanceSpotSymbolOrderBook},Binance.Net.Interfaces.Clients.IBinanceRestClient,Binance.Net.Interfaces.Clients.IBinanceSocketClient)">
+        <member name="M:Binance.Net.SymbolOrderBooks.BinanceSpotSymbolOrderBook.#ctor(System.String,System.Action{Binance.Net.Objects.Options.BinanceOrderBookOptions},Microsoft.Extensions.Logging.ILoggerFactory,Binance.Net.Interfaces.Clients.IBinanceRestClient,Binance.Net.Interfaces.Clients.IBinanceSocketClient)">
             <summary>
             Create a new order book instance
             </summary>

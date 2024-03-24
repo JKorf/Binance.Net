@@ -52,6 +52,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-	<PackageReference Include="CryptoExchange.Net" Version="7.1.0" />
+	<PackageReference Include="CryptoExchange.Net" Version="7.2.0" />
   </ItemGroup>
 </Project>

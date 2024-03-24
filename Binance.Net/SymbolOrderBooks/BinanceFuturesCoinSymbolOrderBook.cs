@@ -50,9 +50,9 @@ namespace Binance.Net.SymbolOrderBooks
         public BinanceFuturesCoinSymbolOrderBook(
             string symbol,
             Action<BinanceOrderBookOptions>? optionsDelegate,
-            ILogger<BinanceFuturesCoinSymbolOrderBook>? logger,
+            ILoggerFactory? logger,
             IBinanceRestClient? restClient,
-            IBinanceSocketClient? socketClient) : base(logger, "Binance", symbol)
+            IBinanceSocketClient? socketClient) : base(logger, "Binance", "CoinFutures", symbol)
         {
             var options = BinanceOrderBookOptions.Default.Copy();
             if (optionsDelegate != null)

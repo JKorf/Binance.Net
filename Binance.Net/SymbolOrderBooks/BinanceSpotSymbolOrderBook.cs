@@ -46,9 +46,9 @@ namespace Binance.Net.SymbolOrderBooks
         public BinanceSpotSymbolOrderBook(
             string symbol,
             Action<BinanceOrderBookOptions>? optionsDelegate,
-            ILogger<BinanceSpotSymbolOrderBook>? logger,
+            ILoggerFactory? logger,
             IBinanceRestClient? restClient,
-            IBinanceSocketClient? socketClient) : base(logger, "Binance", symbol)
+            IBinanceSocketClient? socketClient) : base(logger, "Binance", "Spot", symbol)
         {
             var options = BinanceOrderBookOptions.Default.Copy();
             if (optionsDelegate != null)
@@ -92,7 +92,7 @@ namespace Binance.Net.SymbolOrderBooks
                 var bookResult = await _restClient.SpotApi.ExchangeData.GetOrderBookAsync(Symbol, Levels ?? 5000).ConfigureAwait(false);
                 if (!bookResult)
                 {
-                    _logger.Log(Microsoft.Extensions.Logging.LogLevel.Debug, $"{Id} order book {Symbol} failed to retrieve initial order book");
+                    _logger.Log(Microsoft.Extensions.Logging.LogLevel.Debug, $"{Api} order book {Symbol} failed to retrieve initial order book");
                     await _socketClient.UnsubscribeAsync(subResult.Data).ConfigureAwait(false);
                     return new CallResult<UpdateSubscription>(bookResult.Error!);
                 }
