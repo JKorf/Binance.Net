@@ -1,0 +1,164 @@
+/* =================================== */
+/*  1. Basic Style 
+/* =================================== */
+
+body, html {
+height:100%;
+}
+
+body {
+  background: $body-bg;
+  color: $text-color;
+}
+
+/*-------- Preloader --------*/
+.preloader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 999999999 !important;
+  background-color: #fff;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  .lds-ellipsis {
+    display: inline-block;
+    position: absolute;
+    width: 80px;
+    height: 80px;
+	margin-top: -40px;
+	margin-left: -40px;
+    top: 50%;
+    left: 50%;
+    div {
+      position: absolute;
+      top: 33px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: #000;
+      animation-timing-function: cubic-bezier(0, 1, 1, 0);
+      &:nth-child(1) {
+        left: 8px;
+        animation: lds-ellipsis1 0.6s infinite;
+      }
+      &:nth-child(2) {
+        left: 8px;
+        animation: lds-ellipsis2 0.6s infinite;
+      }
+      &:nth-child(3) {
+        left: 32px;
+        animation: lds-ellipsis2 0.6s infinite;
+      }
+      &:nth-child(4) {
+        left: 56px;
+        animation: lds-ellipsis3 0.6s infinite;
+      }
+    }
+  }
+}
+
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
+
+/*--- Preloader Magnific Popup ----*/
+.mfp-container .preloader{
+	background: transparent;
+	.lds-ellipsis div{
+		background: #fff;
+	}
+}
+
+::selection {
+    background: $primary-color;
+    color: #fff;
+    text-shadow: none;
+}
+
+code{padding: 2px 5px; background-color: #f9f2f4; border-radius: 4px;}
+
+form {
+  padding: 0;
+  margin: 0;
+  display: inline;
+}
+
+img {
+  vertical-align: inherit;
+}
+a, a:focus {
+  color: $primary-color;
+  @include transition(all .2s ease);
+}
+a:hover, a:active {
+    color: $primary-color-hover;
+    
+    @include transition(all .2s ease);
+}
+
+a:focus, a:active,
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn:active:focus,
+.btn:focus,
+button:focus,
+button:active{
+	outline: none;
+}
+
+p {
+  line-height: 1.8;
+}
+
+blockquote {
+  border-left: 5px solid #eee;
+  padding: 10px 20px;
+}
+
+iframe {
+  border: 0 !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $title-color;
+  line-height: 1.5;
+  margin: 0 0 1.5rem 0;
+  font-family:Roboto, sans-serif;
+}
+
+h1{font-size:3rem;}
+
+h2{font-size:2.2rem;}
+
+dl, ol, ul, pre, blockquote, .table{margin-bottom:1.8rem;}
+
+/*=== Highlight Js ===*/
+.hljs {padding: 1.5rem;}

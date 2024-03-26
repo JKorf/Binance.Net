@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+<link href="assets/images/logo.png" rel="icon" />
+<title>Binance.Net Documentation</title>
+<meta name="description" content="Documentation for the Binance.Net library">
+<meta name="author" content="JKorf">
+
+<!-- Stylesheet
+============================== -->
+<!-- Bootstrap -->
+<link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap/css/bootstrap.min.css" />
+<!-- Font Awesome Icon -->
+<link rel="stylesheet" type="text/css" href="assets/vendor/font-awesome/css/all.min.css" />
+<!-- Magnific Popup -->
+<link rel="stylesheet" type="text/css" href="assets/vendor/magnific-popup/magnific-popup.min.css" />
+<!-- Highlight Syntax -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+<!--<link rel="stylesheet" type="text/css" href="assets/vendor/highlight.js/styles/github.css" />-->
+<!-- Custom Stylesheet -->
+<link rel="stylesheet" type="text/css" href="assets/css/stylesheet.css" />
+</head>
+
+<body class="box" data-spy="scroll" data-target=".idocs-navigation" data-offset="125">
+
+<!-- Preloader -->
+<div class="preloader">
+  <div class="lds-ellipsis">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
+<!-- Preloader End --> 
+
+<!-- Document Wrapper   
+=============================== -->
+<div id="main-wrapper"> 
+  
+  <!-- Header
+  ============================ -->
+  <header id="header" class="sticky-top"> 
+    <!-- Navbar -->
+    <nav class="primary-menu navbar navbar-expand-lg navbar-dropdown-dark">
+      <div class="container-fluid">
+        <!-- Sidebar Toggler -->
+		<button id="sidebarCollapse" class="navbar-toggler d-block d-md-none" type="button"><span></span><span class="w-75"></span><span class="w-50"></span></button>
+		
+		<!-- Logo --> 
+        <a class="logo ml-md-3" href="index.html" title="iDocs Template"> <img src="assets/images/logo.png" alt="iDocs Template"/> </a> 
+		<span class="text-2 ml-2"></span> 
+        <!-- Logo End -->
+        
+		<!-- Navbar Toggler -->
+		<button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#header-nav"><span></span><span></span><span></span></button>
+        
+        <ul class="social-icons social-icons-sm ml-lg-2 mr-2">
+          <li class="social-icons-ce"><a data-toggle="tooltip" href="https://jkorf.github.io/CryptoExchange.Net/" target="_blank" title="" data-original-title="Nuget">CryptoExchange.Net</a></li>
+          <li class="social-icons-nuget"><a data-toggle="tooltip" href="http://www.nuget.org/profiles/JKorf/Binance.Net" target="_blank" title="" data-original-title="Nuget">Nuget</a></li>
+          <li><a data-toggle="tooltip" href="http://www.github.com/JKorf/Binance.Net" target="_blank" title="" data-original-title="GitHub"><i class="fab fa-github"></i></a></li>
+          <li><a data-toggle="tooltip" href="https://discord.gg/Wyqd4hegMZ" target="_blank" title="" data-original-title="Discord"><i class="fab fa-discord"></i></a></li>
+        </ul>
+      </div>
+    </nav>
+    <!-- Navbar End --> 
+  </header>
+  <!-- Header End --> 
+  
+  <!-- Content
+  ============================ -->
+  <div id="content" role="main">
+    
+	<!-- Sidebar Navigation
+	============================ -->
+	<div class="idocs-navigation bg-light">
+      <ul class="nav flex-column ">
+        <li class="nav-item"><a class="nav-link active" href="#idocs_intro">Introduction</a></li>
+        <li class="nav-item"><a class="nav-link active" href="#idocs_start">Getting Started</a>
+          <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="#idocs_installation">Installation</a></li>
+            <li class="nav-item"><a class="nav-link" href="#idocs_apiaccess">API Access</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link active" href="#idocs_examples">Examples</a>
+		<!--<li class="nav-item"><a class="nav-link" href="#idocs_faq">FAQ</a></li>-->
+      </ul>
+    </div>
+    
+    <!-- Docs Content
+	============================ -->
+    <div class="idocs-content">
+      <div class="container"> 
+        <section id="idocs_intro">
+			<h1>Binance.Net</h1>
+			
+		<p>Binance.Net is a strongly typed client library for accessing the <a href="https://binance-docs.github.io/apidocs/#change-log" target="_blank">Binance REST and Websocket API</a>. All data is mapped to readable models and enum values. Additional features include an implementation for maintaining a client side order book, easy integration with other exchange client libraries and more.</p>
+		<div class="alert alert-info">This library is based on the <a href="https://jkorf.github.io/CryptoExchange.Net/" target="_blank">CryptoExchange.Net</a> base package and can be used in combination with other exchange packages!</div>
+		
+		<h4>Supported Frameworks</h4>
+		<p>
+			The library is targeting both <code>.NET Standard 2.0</code> and <code>.NET Standard 2.1</code> for optimal compatibility
+		</p>
+		<table class="table table-bordered">
+			<tr>
+				<th>.NET implementation</th>
+				<th>Version Support</th>
+			</tr>
+			<tr><td>.NET Core</td><td><code>2.0</code> and higher</td></tr>
+			<tr><td>.NET Framework</td><td><code>4.6.1</code> and higher</td></tr>
+			<tr><td>Mono</td><td><code>5.4</code> and higher</td></tr>
+			<tr><td>Xamarin.iOS</td><td><code>10.14</code> and higher</td></tr>
+			<tr><td>Xamarin.Android</td><td><code>8.0</code> and higher</td></tr>
+			<tr><td>UWP</td><td><code>10.0.16299</code> and higher</td></tr>
+			<tr><td>Unity</td><td><code>2018.1</code> and higher</td></tr>
+		</table>
+
+		<h4>Discord</h4>
+		<a href="https://discord.gg/MSpeEtSY8t" ><img src="https://img.shields.io/discord/847020490588422145?style=for-the-badge" /></a>  
+		<p>A Discord server is available <a href="https://discord.gg/MSpeEtSY8t">here</a>. Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.</p>
+
+		<h4>Support the project</h4>
+		
+		<b>Donate</b><br />
+		<p>Make a one time donation in a crypto currency of your choice. If you prefer to donate a currency not listed here please contact me.<p>
+
+		<p><em>Btc</em>:  bc1q277a5n54s2l2mzlu778ef7lpkwhjhyvghuv8qf<br />
+		<em>Eth</em>:  0xcb1b63aCF9fef2755eBf4a0506250074496Ad5b7<br />
+		<em>USDT (TRX)</em>:  TKigKeJPXZYyMVDgMyXxMf17MWYia92Rjd</p>
+
+		<b>Sponsor</b><br />
+		<p>Alternatively, sponsor me on Github using <a href="https://github.com/sponsors/JKorf">Github Sponsors</a>.</p>
+		
+		<div class="alert alert-info">I develop and maintain these packages on my own for free in my spare time, any support is greatly appreciated.</div>
+
+		</section>
+		
+		<hr class="divider">
+		
+        <!-- Getting Started
+		============================ -->
+        <section id="idocs_start">
+        <h1>Getting Started</h1>
+		<p>The packge is available on Nuget. After installing the package the Binance API is available by using the <code>BinanceRestClient</code> and <code>BinanceSocketClient</code>.</p>
+		<div class="alert alert-info">More information and usage documentation is available at the <a href="https://jkorf.github.io/CryptoExchange.Net/" target="_blank">CryptoExchange.Net</a> documentation page</div>
+		
+        </section>
+        		
+		<hr class="divider">
+		
+        <!-- Installation
+		============================ -->
+        <section id="idocs_installation">
+          <h2>Installation</h2>
+          
+		  <p>Add the package via dotnet, or add it via the package manager.</p>
+		  
+		  <pre><code>dotnet add package Binance.Net</code></pre>
+        </section>
+        		
+		<hr class="divider">
+		
+		<section id="idocs_apiaccess">
+          <h2>API Access</h2>
+          
+		  <p>Binance.Net can be configured using Dotnet dependency injection, after which the clients can be injected into your services. It also correctly configures logging and HttpClient usage.</p>
+		  
+		  <pre><code>builder.Services.AddBinance(options => {
+  // Options can be configured here, for example:
+  options.ApiCredentials = new ApiCredentials("APIKEY", "APISECRET");
+});</code></pre>
+		  
+		  <p>The <code>IBinanceRestClient</code> and <code>IBinanceSocketClient</code> can then be injected.</p>
+		  <p>Alternatively the rest and socket client can be constructed directly</p>
+		  <pre><code>var restClient = new BinanceRestClient(options => {
+  // Options can be configured here, for example:
+  options.ApiCredentials = new ApiCredentials("APIKEY", "APISECRET");
+});
+var socketClient = new BinanceSocketClient();</code></pre>
+		  
+        </section>
+        		
+		<hr class="divider">
+		
+		<section id="idocs_examples">
+          <h2>Examples</h2>
+          
+		  <h3>Spot API</h3>
+		  
+		  <b id="idocs_example_symbols">Get Symbols</b><br />
+		  <p>Get a list of supported spot symbols</p>
+		  <pre><code>var binanceClient = new BinanceRestClient();
+
+var result = await binanceClient.SpotApi.ExchangeData.GetExchangeInfoAsync();
+</code></pre>
+		  
+		  <b id="idocs_example_symbols">Get Symbol Ticker</b><br />
+		  <p>Get the 24h price ticker of a spot symbol</p>
+		  <pre><code>var binanceClient = new BinanceRestClient();
+
+var result = await binanceClient.SpotApi.ExchangeData.GetTickerAsync("ETHUSDT");</code></pre>
+
+		  <b id="idocs_example_symbols">Get Recent Trades</b><br />
+		  <p>Get the most recent trades for a spot symbol</p>
+		  <pre><code>var binanceClient = new BinanceRestClient();
+
+var result = await binanceClient.SpotApi.ExchangeData.GetRecentTradesAsync("ETHUSDT");</code></pre>
+
+		  <b id="idocs_example_symbols">Get Balances</b><br />
+		  <p>Get asset balances of the spot account</p>
+		  <pre><code>var binanceClient = new BinanceRestClient(options => {
+    options.ApiCredentials = new ApiCredentials("KEY", "SECRET");
+});
+
+var result = await binanceClient.SpotApi.Account.GetBalancesAsync();</code></pre>
+
+		  <b id="idocs_example_symbols">Place Limit Order</b><br />
+		  <p>Place a new limit order for buying 0.1 ETH at a price of 2000 USDT</p>
+		  <pre><code>var binanceClient = new BinanceRestClient(options => {
+    options.ApiCredentials = new ApiCredentials("KEY", "SECRET");
+});
+
+var result = await binanceClient.SpotApi.Trading.PlaceOrderAsync(
+    "ETHUSDT",
+    Binance.Net.Enums.OrderSide.Buy,
+    Binance.Net.Enums.SpotOrderType.Limit,
+    0.1m,
+    2000,
+    timeInForce: Binance.Net.Enums.TimeInForce.GoodTillCanceled);</code></pre>
+
+		  <b id="idocs_example_symbols">Place Market Order</b><br />
+		  <p>Place a new market order for buying 50 USDT worth of ETH at the best available price</p>
+		  <pre><code>var binanceClient = new BinanceRestClient(options => {
+    options.ApiCredentials = new ApiCredentials("KEY", "SECRET");
+});
+
+var result = await binanceClient.SpotApi.Trading.PlaceOrderAsync(
+    "ETHUSDT",
+    Binance.Net.Enums.OrderSide.Buy,
+    Binance.Net.Enums.SpotOrderType.Market,
+    quoteQuantity: 50);</code></pre>
+
+		  <b id="idocs_example_symbols">Get Order Info</b><br />
+		  <p>Retrieve order information for a specific order</p>
+		  <pre><code>var binanceClient = new BinanceRestClient(options => {
+    options.ApiCredentials = new ApiCredentials("KEY", "SECRET");
+});
+
+var result = await binanceClient.SpotApi.Trading.GetOrderAsync("ETHUSDT", 123);</code></pre>
+
+		  <b id="idocs_example_symbols">Cancel an order</b><br />
+		  <p>Cancel a currently active order</p>
+		  <pre><code>var binanceClient = new BinanceRestClient(options => {
+    options.ApiCredentials = new ApiCredentials("KEY", "SECRET");
+});
+
+var result = await binanceClient.SpotApi.Trading.CancelOrderAsync("ETHUSDT", 123);</code></pre>
+
+		  <h3>Usd Futures API</h3>
+		  <b id="idocs_example_symbols">Get Symbols</b><br />
+		  <p>Get a list of supported usd futures symbols</p>
+		  <pre><code>var binanceClient = new BinanceRestClient();
+
+var result = await binanceClient.UsdFuturesApi.ExchangeData.GetExchangeInfoAsync();</code></pre>
+		  
+		  <b id="idocs_example_symbols">Get Symbol Ticker</b><br />
+		  <p>Get the 24h price ticker of a spot symbol</p>
+		  <pre><code>var binanceClient = new BinanceRestClient();
+
+var result = await binanceClient.UsdFuturesApi.ExchangeData.GetTickerAsync("ETHUSDT");</code></pre>
+
+		  <b id="idocs_example_symbols">Get Recent Trades</b><br />
+		  <p>Get the most recent trades for a spot symbol</p>
+		  <pre><code>var binanceClient = new BinanceRestClient();
+
+var result = await binanceClient.UsdFuturesApi.ExchangeData.GetRecentTradesAsync("ETHUSDT");</code></pre>
+
+		  <b id="idocs_example_symbols">Get Balances</b><br />
+		  <p>Get balance of the perpetual futures account</p>
+		  <pre><code>var binanceClient = new BinanceRestClient(options => {
+    options.ApiCredentials = new ApiCredentials("KEY", "SECRET");
+});
+
+var result = await binanceClient.UsdFuturesApi.Account.GetBalancesAsync();</code></pre>
+
+		  <b id="idocs_example_symbols">Get Positions</b><br />
+		  <p>Get open positions</p>
+		  <pre><code>var binanceClient = new BinanceRestClient(options => {
+  options.ApiCredentials = new ApiCredentials("KEY", "SECRET");		  
+});
+
+var result = await binanceClient.UsdFuturesApi.Account.GetPositionInformationAsync();</code></pre>
+
+<b id="idocs_example_symbols">Place Limit Order</b><br />
+		  <p>Place a new limit order for going long on 0.1 ETH at a price of 2000 USDT</p>
+		  <pre><code>var binanceClient = new BinanceRestClient(options => {
+    options.ApiCredentials = new ApiCredentials("KEY", "SECRET");
+});
+
+var result = await binanceClient.UsdFuturesApi.Trading.PlaceOrderAsync(
+    "ETHUSDT",
+    Binance.Net.Enums.OrderSide.Buy,
+    Binance.Net.Enums.FuturesOrderType.Limit,
+    0.1m,
+    2000,
+    positionSide: Binance.Net.Enums.PositionSide.Long);
+</code></pre>
+        </section>
+        		
+		<hr class="divider">
+		
+		<!-- FAQ
+		<section id="idocs_faq">
+          <h2>FAQ</h2>
+          <b>I occasionally get a NullReferenceException, what's wrong?</b><br />
+		  <p>
+		  You probably don't check the result status of a call and just assume the data is always there. <code>NullReferenceExecption</code> will happen when you have code like this <code>var symbol = client.GetTickersAync().Result.Data.Symbol</code> because the <code>Data</code> property is null when the call fails. Instead check if the call is successful:
+<pre><code>var tickerResult = await client.SpotApi.ExchangeData.GetTickersAync();
+if(!tickerResult.Success)
+{
+  // Handle error
+}
+else
+{
+  // Handle result, it is now safe to access the Data property
+  var symbol = tickerResult.Data.Symbol;
+}</code></pre>
+		  </p>
+		  
+		<hr class="divider">
+        -->
+      </div>
+    </div>
+  </div>
+  <!-- Content end --> 
+    
+	<footer id="footer" class="section bg-light">
+      <div class="container">
+      <p class="text-center">Give me more <a href="https://jkorf.github.io/CryptoExchange.Net/">documentation</a>.</p>
+      </div>
+    </footer>
+</div>
+<!-- Document Wrapper end --> 
+
+<!-- Back To Top --> 
+<a id="back-to-top" data-toggle="tooltip" title="Back to Top" href="javascript:void(0)"><i class="fa fa-chevron-up"></i></a> 
+
+<!-- JavaScript
+============================ -->
+<script src="assets/vendor/jquery/jquery.min.js"></script> 
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
+<!-- Highlight JS -->
+<!--<script src="assets/vendor/highlight.js/highlight.min.js"></script>-->
+<!-- and it's easy to individually load additional languages -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+<!-- Easing --> 
+<script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script> 
+<!-- Magnific Popup --> 
+<script src="assets/vendor/magnific-popup/jquery.magnific-popup.min.js"></script> 
+<!-- Custom Script -->
+<script src="assets/js/theme.js"></script>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

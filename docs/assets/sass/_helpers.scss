@@ -1,0 +1,301 @@
+/* =================================== */
+/*  2. Helpers Classes
+/* =================================== */
+
+/* Box Shadow */
+.shadow-md {
+	@include box-shadow(0px 0px 50px -35px rgba(0, 0, 0, 0.4)!important);
+}
+
+/* Border Radius */
+
+.rounded-lg{
+	border-radius: 0.6rem !important;
+}
+
+.rounded-top-0{
+	border-top-left-radius:0px!important;
+	border-top-right-radius:0px!important;
+}
+.rounded-bottom-0{
+	border-bottom-left-radius:0px!important;
+	border-bottom-right-radius:0px!important;
+}
+.rounded-left-0{
+	border-top-left-radius:0px!important;
+	border-bottom-left-radius:0px!important;
+}
+.rounded-right-0{border-top-right-radius:0px!important;
+	border-bottom-right-radius:0px!important;
+}
+
+
+/* Border Size */
+
+.border-1{
+	border-width:1px!important;
+}
+.border-2{
+	border-width:2px!important;
+}
+.border-3{
+	border-width:3px!important;
+}
+.border-4{
+	border-width:4px!important;
+}
+.border-5{
+	border-width:5px!important;
+}
+
+/* Text Size */
+.text-0 {
+	font-size: 11px !important;
+	font-size: 0.6875rem !important;
+}
+.text-1 {
+	font-size: 12px !important;
+	font-size: 0.75rem !important;
+}
+.text-2 {
+	font-size: 14px !important;
+	font-size: 0.875rem !important;
+}
+.text-3 {
+	font-size: 16px !important;
+	font-size: 1rem !important;
+}
+.text-4 {
+	font-size: 18px !important;
+	font-size: 1.125rem !important;
+}
+.text-5 {
+	font-size: 21px !important;
+	font-size: 1.3125rem !important;
+}
+.text-6 {
+	font-size: 24px !important;
+	font-size: 1.50rem !important;
+}
+.text-7 {
+	font-size: 28px !important;
+	font-size: 1.75rem !important;
+}
+.text-8 {
+	font-size: 32px !important;
+	font-size: 2rem !important;
+}
+.text-9 {
+	font-size: 36px !important;
+	font-size: 2.25rem !important;
+}
+.text-10 {
+	font-size: 40px !important;
+	font-size: 2.50rem !important;
+}
+.text-11 {
+	@include rfs(44, true);
+}
+.text-12 {
+	@include rfs(48, true);
+}
+.text-13 {
+	@include rfs(52, true);
+}
+.text-14 {
+	@include rfs(56, true);
+}
+.text-15 {
+	@include rfs(60, true);
+}
+.text-16 {
+	@include rfs(64, true);
+}
+.text-17 {
+	@include rfs(72, true);
+}
+.text-18 {
+	@include rfs(80, true);
+}
+.text-19 {
+	@include rfs(84, true);
+}
+.text-20 {
+	@include rfs(92, true);
+}
+.text-21 {
+	@include rfs(104, true);
+}
+.text-22 {
+	@include rfs(112, true);
+}
+.text-23 {
+	@include rfs(124, true);
+}
+.text-24 {
+	@include rfs(132, true);
+}
+.text-25 {
+	@include rfs(144, true);
+}
+
+.text-11, .text-12, .text-13, .text-14, .text-15, .text-16, .text-17, .text-18, .text-19, .text-20, .text-21, .text-22, .text-23, .text-24, .text-25{
+	line-height: 1.3;
+}
+
+
+/* Line height */
+.line-height-07 {
+	line-height: 0.7 !important;
+}
+
+.line-height-1 {
+	line-height: 1 !important;
+}
+
+.line-height-2 {
+	line-height: 1.2 !important;
+}
+
+.line-height-3 {
+	line-height: 1.4 !important;
+}
+
+.line-height-4 {
+	line-height: 1.6 !important;
+}
+
+.line-height-5 {
+	line-height: 1.8 !important;
+}
+
+/* Font Weight */
+.font-weight-100 {
+	font-weight: 100 !important;
+}
+
+.font-weight-200 {
+	font-weight: 200 !important;
+}
+
+.font-weight-300 {
+	font-weight: 300 !important;
+}
+
+.font-weight-400 {
+	font-weight: 400 !important;
+}
+.font-weight-500 {
+	font-weight: 500 !important;
+}
+
+.font-weight-600 {
+	font-weight: 600 !important;
+}
+.font-weight-700 {
+	font-weight: 700 !important;
+}
+.font-weight-800 {
+	font-weight: 800 !important;
+}
+.font-weight-900 {
+	font-weight: 900 !important;
+}
+
+/* Opacity */
+.opacity-0 {
+	opacity: 0;
+}
+
+.opacity-1 {
+	opacity: 0.1;
+}
+
+.opacity-2 {
+	opacity: 0.2;
+}
+
+.opacity-3 {
+	opacity: 0.3;
+}
+
+.opacity-4 {
+	opacity: 0.4;
+}
+
+.opacity-5 {
+	opacity: 0.5;
+}
+
+.opacity-6 {
+	opacity: 0.6;
+}
+
+.opacity-7 {
+	opacity: 0.7;
+}
+
+.opacity-8 {
+	opacity: 0.8;
+}
+
+.opacity-9 {
+	opacity: 0.9;
+}
+
+.opacity-10 {
+	opacity: 1;
+}
+
+/* Background light */
+.bg-light-1 {
+	background-color: $gray-200 !important;
+}
+
+.bg-light-2 {
+	background-color: $gray-300 !important;
+}
+
+.bg-light-3 {
+	background-color: $gray-400 !important;
+}
+
+.bg-light-4 {
+	background-color: $gray-500 !important;
+}
+
+
+/* Background Dark */
+.bg-dark {
+	background-color: #111418 !important;
+}
+
+.bg-dark-1 {
+	background-color: $gray-900 !important;
+}
+
+.bg-dark-2 {
+	background-color: $gray-800 !important;
+}
+
+.bg-dark-3 {
+	background-color: $gray-700 !important;
+}
+
+.bg-dark-4 {
+	background-color: $gray-600 !important;
+}
+
+
+/* Progress Bar */
+.progress-sm {
+  height: 0.5rem !important;
+}
+
+.progress-lg {
+  height: 1.5rem !important;
+}
+
+hr{
+	border-top:1px solid rgba(16,85,96,.1);
+}
