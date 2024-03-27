@@ -36,21 +36,21 @@ namespace Binance.Net.Objects.Sockets
         public override Type? GetMessageType(IMessageAccessor message)
         {
             var identifier = message.GetValue<string>(_ePath);
-            if (identifier == "ACCOUNT_CONFIG_UPDATE")
+            if (string.Equals(identifier, "ACCOUNT_CONFIG_UPDATE", StringComparison.Ordinal))
                 return typeof(BinanceCombinedStream<BinanceFuturesStreamConfigUpdate>);
-            if (identifier == "MARGIN_CALL")
+            if (string.Equals(identifier, "MARGIN_CALL", StringComparison.Ordinal))
                 return typeof(BinanceCombinedStream<BinanceFuturesStreamMarginUpdate>);
-            if (identifier == "ACCOUNT_UPDATE")
+            if (string.Equals(identifier, "ACCOUNT_UPDATE", StringComparison.Ordinal))
                 return typeof(BinanceCombinedStream<BinanceFuturesStreamAccountUpdate>);
-            if (identifier == "ORDER_TRADE_UPDATE")
+            if (string.Equals(identifier, "ORDER_TRADE_UPDATE", StringComparison.Ordinal))
                 return typeof(BinanceCombinedStream<BinanceFuturesStreamOrderUpdate>);
-            if (identifier == "listenKeyExpired")
+            if (string.Equals(identifier, "listenKeyExpired", StringComparison.Ordinal))
                 return typeof(BinanceCombinedStream<BinanceStreamEvent>);
-            if (identifier == "STRATEGY_UPDATE")
+            if (string.Equals(identifier, "STRATEGY_UPDATE", StringComparison.Ordinal))
                 return typeof(BinanceCombinedStream<BinanceStrategyUpdate>);
-            if (identifier == "GRID_UPDATE")
+            if (string.Equals(identifier, "GRID_UPDATE", StringComparison.Ordinal))
                 return typeof(BinanceCombinedStream<BinanceGridUpdate>);
-            if (identifier == "CONDITIONAL_ORDER_TRIGGER_REJECT")
+            if (string.Equals(identifier, "CONDITIONAL_ORDER_TRIGGER_REJECT", StringComparison.Ordinal))
                 return typeof(BinanceCombinedStream<BinanceConditionOrderTriggerRejectUpdate>);
 
             return null;

@@ -31,13 +31,13 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         public override Type? GetMessageType(IMessageAccessor message)
         {
             var identifier = message.GetValue<string>(_ePath);
-            if (identifier == "outboundAccountPosition")
+            if (string.Equals(identifier, "outboundAccountPosition", StringComparison.Ordinal))
                 return typeof(BinanceCombinedStream<BinanceStreamPositionsUpdate>);
-            if (identifier == "balanceUpdate")
+            if (string.Equals(identifier, "balanceUpdate", StringComparison.Ordinal))
                 return typeof(BinanceCombinedStream<BinanceStreamBalanceUpdate>);
-            if (identifier == "executionReport")
+            if (string.Equals(identifier, "executionReport", StringComparison.Ordinal))
                 return typeof(BinanceCombinedStream<BinanceStreamOrderUpdate>);
-            if (identifier == "listStatus")
+            if (string.Equals(identifier, "listStatus", StringComparison.Ordinal))
                 return typeof(BinanceCombinedStream<BinanceStreamOrderList>);
 
             return null;
