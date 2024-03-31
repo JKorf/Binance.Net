@@ -34,6 +34,9 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
         /// <param name="orderResponseType">The response type. Default Acknowledge</param>
         /// <param name="priceProtect">If true when price reaches stopPrice, difference between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than "triggerProtect" of the symbol.</param>
+        /// <param name="priceMatch">Only avaliable for Limit/Stop/TakeProfit order</param>
+        /// <param name="selfTradePreventionMode">Self trade prevention mode</param>
+        /// <param name="goodTillDate">Order cancel time for timeInForce GoodTillDate</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed order</returns>
@@ -54,6 +57,9 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
             bool? closePosition = null,
             OrderResponseType? orderResponseType = null,
             bool? priceProtect = null,
+            PriceMatch? priceMatch = null,
+            SelfTradePreventionMode? selfTradePreventionMode = null,
+            DateTime? goodTillDate = null,
             int? receiveWindow = null,
             CancellationToken ct = default);
 

@@ -77,6 +77,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
             bool? closePosition = null,
             OrderResponseType? orderResponseType = null,
             bool? priceProtect = null,
+            PriceMatch? priceMatch = null,
+            SelfTradePreventionMode? selfTradePreventionMode = null,
+            DateTime? goodTillDate = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -104,7 +107,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             string clientOrderId = newClientOrderId ?? ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection()
             {
                 { "symbol", symbol },
                 { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
@@ -124,6 +127,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("priceProtect", priceProtect?.ToString().ToUpper());
+            parameters.AddOptionalEnum("priceMatch", priceMatch);
+            parameters.AddOptionalEnum("selfTradePreventionMode", selfTradePreventionMode);
+            parameters.AddOptionalSeconds("goodTillDate", goodTillDate);
 
             var result = await _baseClient.SendRequestInternal<BinanceUsdFuturesOrder>(_baseClient.GetUrl(newOrderEndpoint, api, "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
             if (result)
