@@ -535,9 +535,11 @@ namespace Binance.Net.Clients.SpotApi
         #region Get All Margin Assets
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceMarginAsset>>> GetMarginAssetsAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceMarginAsset>>> GetMarginAssetsAsync(string? asset = null, CancellationToken ct = default)
         {
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceMarginAsset>>(_baseClient.GetUrl(marginAssetsEndpoint, marginApi, marginVersion), HttpMethod.Get, ct).ConfigureAwait(false);
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("asset", asset);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceMarginAsset>>(_baseClient.GetUrl(marginAssetsEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         #endregion
@@ -545,9 +547,11 @@ namespace Binance.Net.Clients.SpotApi
         #region Get All Margin Pairs
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceMarginPair>>> GetMarginSymbolsAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceMarginPair>>> GetMarginSymbolsAsync(string? symbol = null, CancellationToken ct = default)
         {
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceMarginPair>>(_baseClient.GetUrl(marginPairsEndpoint, marginApi, marginVersion), HttpMethod.Get, ct).ConfigureAwait(false);
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("symbol", symbol);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceMarginPair>>(_baseClient.GetUrl(marginPairsEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         #endregion
@@ -590,10 +594,11 @@ namespace Binance.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceIsolatedMarginSymbol>>> GetIsolatedMarginSymbolsAsync(int? receiveWindow =
+        public async Task<WebCallResult<IEnumerable<BinanceIsolatedMarginSymbol>>> GetIsolatedMarginSymbolsAsync(string? symbol = null, int? receiveWindow =
             null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow
                                                               ?.ToString(CultureInfo.InvariantCulture) ??
                                                           _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(

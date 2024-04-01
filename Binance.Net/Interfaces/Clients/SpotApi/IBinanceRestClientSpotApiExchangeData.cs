@@ -295,38 +295,42 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<IEnumerable<BinancePrice>>> GetPricesAsync(CancellationToken ct = default);
 
         /// <summary>
-        /// Get a margin asset
+        /// DEPRECATED, USE GetMarginAssetsAsync INSTEAD
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-margin-asset-market_data" /></para>
         /// </summary>
         /// <param name="asset">The symbol to get</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of margin assets</returns>
+        [Obsolete("Use GetMarginAssetsAsync instead")]
         Task<WebCallResult<BinanceMarginAsset>> GetMarginAssetAsync(string asset, CancellationToken ct = default);
 
         /// <summary>
-        /// Get a margin pair
+        /// DEPRECATED, USE GetMarginSymbolsAsync INSTEAD
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-cross-margin-pair-market_data" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of margin assets</returns>
+        [Obsolete("Use GetMarginSymbolsAsync instead")]
         Task<WebCallResult<BinanceMarginPair>> GetMarginSymbolAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Get all assets available for margin trading
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-all-margin-assets-market_data" /></para>
         /// </summary>
+        /// <param name="asset">Filter by asset</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of margin assets</returns>
-        Task<WebCallResult<IEnumerable<BinanceMarginAsset>>> GetMarginAssetsAsync(CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceMarginAsset>>> GetMarginAssetsAsync(string? asset = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get all asset pairs available for margin trading
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-all-cross-margin-pairs-market_data" /></para>
         /// </summary>
+        /// <param name="symbol">Filter by symbol</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of margin pairs</returns>
-        Task<WebCallResult<IEnumerable<BinanceMarginPair>>> GetMarginSymbolsAsync(CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceMarginPair>>> GetMarginSymbolsAsync(string? symbol = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get margin price index
@@ -338,13 +342,14 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<BinanceMarginPriceIndex>> GetMarginPriceIndexAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
-        /// Isolated margin symbol info
+        /// DEPRECATED, USE GetIsolatedMarginSymbolsAsync INSTEAD
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-isolated-margin-symbol-user_data" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
+        [Obsolete("Use GetIsolatedMarginSymbolsAsync instead")]
         Task<WebCallResult<BinanceIsolatedMarginSymbol>> GetIsolatedMarginSymbolAsync(string symbol,
             int? receiveWindow = null, CancellationToken ct = default);
 
@@ -353,9 +358,10 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-all-isolated-margin-symbol-user_data" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="symbol">Filter by symbol</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BinanceIsolatedMarginSymbol>>> GetIsolatedMarginSymbolsAsync(int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceIsolatedMarginSymbol>>> GetIsolatedMarginSymbolsAsync(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get blvt info

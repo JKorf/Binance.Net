@@ -53,10 +53,6 @@ namespace Binance.Net.Clients.SpotApi
 
         // Margin
         private const string marginTransferEndpoint = "margin/transfer";
-        private const string marginBorrowEndpoint = "margin/loan";
-        private const string marginRepayEndpoint = "margin/repay";
-        private const string getLoanEndpoint = "margin/loan";
-        private const string getRepayEndpoint = "margin/repay";
         private const string marginDustLogEndpoint = "margin/dribblet";
         private const string marginAccountInfoEndpoint = "margin/account";
         private const string maxBorrowableEndpoint = "margin/maxBorrowable";
@@ -595,13 +591,14 @@ namespace Binance.Net.Clients.SpotApi
             var parameters = new Dictionary<string, object>
             {
                 { "asset", asset },
+                { "type", "BORROW" },
                 { "amount", quantity.ToString(CultureInfo.InvariantCulture) }
             };
             parameters.AddOptionalParameter("isIsolated", isIsolated?.ToString().ToLower());
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceTransaction>(_baseClient.GetUrl(marginBorrowEndpoint, marginApi, marginVersion), HttpMethod.Post, ct, parameters, true, weight: 3000).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceTransaction>(_baseClient.GetUrl("margin/borrow-repay", marginApi, marginVersion), HttpMethod.Post, ct, parameters, true, weight: 3000).ConfigureAwait(false);
         }
 
         #endregion
@@ -615,13 +612,14 @@ namespace Binance.Net.Clients.SpotApi
             var parameters = new Dictionary<string, object>
             {
                 { "asset", asset },
+                { "type", "REPAY" },
                 { "amount", quantity.ToString(CultureInfo.InvariantCulture) }
             };
             parameters.AddOptionalParameter("isIsolated", isIsolated?.ToString().ToLower());
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceTransaction>(_baseClient.GetUrl(marginRepayEndpoint, marginApi, marginVersion), HttpMethod.Post, ct, parameters, true, weight: 3000).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceTransaction>(_baseClient.GetUrl("margin/borrow-repay", marginApi, marginVersion), HttpMethod.Post, ct, parameters, true, weight: 3000).ConfigureAwait(false);
         }
 
         #endregion
@@ -659,7 +657,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Transfer History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceTransferHistory>>> GetCrossMarginTransferHistoryAsync(TransferDirection direction, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceQueryRecords<BinanceTransferHistory>>> GetMarginTransferHistoryAsync(TransferDirection direction, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 100);
 
@@ -667,6 +665,7 @@ namespace Binance.Net.Clients.SpotApi
             {
                 { "direction", JsonConvert.SerializeObject(direction, new TransferDirectionConverter(false)) }
             };
+            parameters.AddOptionalParameter("isolatedSymbol", isolatedSymbol);
             parameters.AddOptionalParameter("size", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("current", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
@@ -687,7 +686,8 @@ namespace Binance.Net.Clients.SpotApi
             limit?.ValidateIntBetween(nameof(limit), 1, 100);
             var parameters = new Dictionary<string, object>
             {
-                { "asset", asset }
+                { "asset", asset },
+                { "type", "BORROW" }
             };
             parameters.AddOptionalParameter("txId", transactionId?.ToString(CultureInfo.InvariantCulture));
 
@@ -707,7 +707,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("archived", archived);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceLoan>>(_baseClient.GetUrl(getLoanEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true, weight: 10).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceLoan>>(_baseClient.GetUrl("margin/borrow-repay", marginApi, marginVersion), HttpMethod.Get, ct, parameters, true, weight: 10).ConfigureAwait(false);
         }
 
         #endregion
@@ -720,7 +720,8 @@ namespace Binance.Net.Clients.SpotApi
             asset.ValidateNotNull(nameof(asset));
             var parameters = new Dictionary<string, object>
             {
-                { "asset", asset }
+                { "asset", asset },
+                { "type", "REPAY" }
             };
             parameters.AddOptionalParameter("txId", transactionId?.ToString(CultureInfo.InvariantCulture));
 
@@ -741,7 +742,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("archived", archived);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceRepay>>(_baseClient.GetUrl(getRepayEndpoint, marginApi, marginVersion), HttpMethod.Get, ct, parameters, true, weight: 10).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceRepay>>(_baseClient.GetUrl("margin/borrow-repay", marginApi, marginVersion), HttpMethod.Get, ct, parameters, true, weight: 10).ConfigureAwait(false);
         }
 
         #endregion
