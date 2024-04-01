@@ -428,5 +428,18 @@ namespace Binance.Net.Clients.UsdFuturesApi
             return await _baseClient.SendRequestInternal<BinanceFuturesDownloadLink>(_baseClient.GetUrl(downloadLinkTradeEndpoint, "fapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
         }
         #endregion
+
+        #region Get Order Rate Limit
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceRateLimit>>> GetOrderRateLimitAsync(long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceRateLimit>>(_baseClient.GetUrl("rateLimit/order", api, signedVersion), HttpMethod.Get, ct, parameters, true, weight: 30).ConfigureAwait(false);
+        }
+
+        #endregion
     }
 }

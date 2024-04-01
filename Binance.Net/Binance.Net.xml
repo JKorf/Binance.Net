@@ -1891,6 +1891,9 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiAccount.GetDownloadLinkForTradeHistoryAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiAccount.GetOrderRateLimitAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiExchangeData">
             <inheritdoc />
         </member>
@@ -10639,6 +10642,15 @@
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-futures-trade-download-link-by-id-user_data" /></para>
             </summary>
             <param name="downloadId">The download id as requested by <see cref="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetDownloadIdForTradeHistoryAsync(System.DateTime,System.DateTime,System.Nullable{System.Int64},System.Threading.CancellationToken)" /></param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetOrderRateLimitAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get the order rate limits
+            <para><a href="https://binance-docs.github.io/apidocs/futures/en/#user-commission-rate-user_data" /></para>
+            </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
