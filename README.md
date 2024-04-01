@@ -154,6 +154,15 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 9.8.0 - 01 Apr 2024
+    * Added SpotApi.ExchangeData.GetDelistScheduleAsync endpoint
+    * Added UsdFuturesApi.Account.GetOrderRateLimitAsync endpoint
+    * Added UsdFuturesApi.ExchangeData.GetBasisAsync endpoint
+    * Updated Spot Margin endpoints
+    * Updated UsdFuturesApi.ExchangeData.GetPricesAsync endpoint to V2
+    * Updated UsdFuturesApi.Trading.PlaceOrderAsync parameters
+    * Removed deprecated BSwap endpoints
+
 * Version 9.7.1 - 24 Mar 2024
 	* Updated CryptoExchange.Net to 7.2.0, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
 
