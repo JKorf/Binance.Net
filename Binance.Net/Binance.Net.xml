@@ -1095,13 +1095,13 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.EnableFastWithdrawSwitchAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetDustLogAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetDustLogAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{Binance.Net.Enums.AccountType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.DustTransferAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.DustTransferAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{Binance.Net.Enums.AccountType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetAssetsForDustTransferAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetAssetsForDustTransferAsync(System.Nullable{Binance.Net.Enums.AccountType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetBnbBurnStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
@@ -1389,12 +1389,6 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetLeveragedTokensHistoricalKlinesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetLiquidityPoolsAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetLiquidityPoolConfigurationAsync(System.Int32,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetCrossMarginCollateralRatioAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -1504,42 +1498,6 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.GetLeveragedTokensRedemptionRecordsAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.AddToLiquidityPoolAsync(System.Int32,System.String,System.Decimal,System.Nullable{Binance.Net.Enums.LiquidityType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.RemoveFromLiquidityPoolAsync(System.Int32,System.String,Binance.Net.Enums.LiquidityType,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.GetLiquidityPoolOperationRecordsAsync(System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.BSwapOperation},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.GetLiquidityPoolSwapQuoteAsync(System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.LiquidityPoolSwapAsync(System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.GetLiquidityPoolSwapHistoryAsync(System.Nullable{System.Int64},System.Nullable{Binance.Net.Enums.BSwapStatus},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.AddToLiquidityPoolPreviewAsync(System.Int32,System.String,System.Decimal,Binance.Net.Enums.LiquidityType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.RemoveFromLiquidityPoolPreviewAsync(System.Int32,System.String,System.Decimal,Binance.Net.Enums.LiquidityType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.GetLiquidityPoolInfoAsync(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.GetUnclaimedLiquidityPoolsRewardsAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.ClaimLiquidityPoolsRewardsAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.GetLiquidityPoolsClaimHistoryAsync(System.Nullable{System.Int64},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.GetC2CTradeHistoryAsync(Binance.Net.Enums.OrderSide,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
@@ -2688,41 +2646,6 @@
         </member>
         <member name="F:Binance.Net.Enums.BrokerageTransferTransactionStatus.Failure">
             <summary> Failure </summary>
-        </member>
-        <member name="T:Binance.Net.Enums.BSwapOperation">
-            <summary>
-            Swap operation
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.BSwapOperation.Add">
-            <summary>
-            Add liquidity
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.BSwapOperation.Remove">
-            <summary>
-            Remove liquidity
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Enums.BSwapStatus">
-            <summary>
-            Status of a BSwap operation
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.BSwapStatus.Pending">
-            <summary>
-            Pending
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.BSwapStatus.Success">
-            <summary>
-            Success
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.BSwapStatus.Failure">
-            <summary>
-            Failure
-            </summary>
         </member>
         <member name="T:Binance.Net.Enums.C2COrderStatus">
             <summary>
@@ -7948,26 +7871,28 @@
              <param name="ct">Cancellation token</param>
              <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetDustLogAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetDustLogAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{Binance.Net.Enums.AccountType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the history of dust conversions
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#dustlog-user_data" /></para>
             </summary>
             <param name="startTime">The start time</param>
             <param name="endTime">The end time</param>
+            <param name="accountType">Spot or Margin account</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>The history of dust conversions</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetAssetsForDustTransferAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetAssetsForDustTransferAsync(System.Nullable{Binance.Net.Enums.AccountType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get assets that can be converted to BNB
             </summary>
+            <param name="accountType">Spot or Margin account</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.DustTransferAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.DustTransferAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{Binance.Net.Enums.AccountType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Converts dust (small amounts of) assets to BNB 
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#dust-transfer-user_data" /></para>
@@ -9056,25 +8981,6 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetLiquidityPoolsAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get all swap pools
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#list-all-swap-pools-market_data" /></para>
-            </summary>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetLiquidityPoolConfigurationAsync(System.Int32,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get pool config
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-pool-configure-user_data" /></para>
-            </summary>
-            <param name="poolId">Id of the pool</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetCrossMarginCollateralRatioAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get cross margin collateral ratio
@@ -9585,156 +9491,6 @@
             </summary>
             <param name="tokenName">Filter by token</param>
             <param name="id">Filter by id</param>
-            <param name="startTime">Filter by start time</param>
-            <param name="endTime">Filter by end time</param>
-            <param name="limit">Max number of results</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.AddToLiquidityPoolAsync(System.Int32,System.String,System.Decimal,System.Nullable{Binance.Net.Enums.LiquidityType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Add liquidity to a pool
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#add-liquidity-trade" /></para>
-            </summary>
-            <param name="poolId">The pool</param>
-            <param name="asset">The asset</param>
-            <param name="type">Add type</param>
-            <param name="quantity">Quantity to add</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.RemoveFromLiquidityPoolAsync(System.Int32,System.String,Binance.Net.Enums.LiquidityType,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Remove liquidity from a pool
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#remove-liquidity-trade" /></para>
-            </summary>
-            <param name="poolId">The pool</param>
-            <param name="asset">The asset</param>
-            <param name="type">Remove type</param>
-            <param name="shareQuantity">Quantity to remove</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.GetLiquidityPoolOperationRecordsAsync(System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.BSwapOperation},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get liquidity operation records
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-liquidity-operation-record-user_data" /></para>
-            </summary>
-            <param name="operationId">Filter by operationId</param>
-            <param name="poolId">Filter by poolId</param>
-            <param name="operation">Filter by operation</param>
-            <param name="startTime">Filter by start time</param>
-            <param name="endTime">Filter by end time</param>
-            <param name="limit">Max number of results</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.GetLiquidityPoolSwapQuoteAsync(System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Request a quote for swap quote asset (selling asset) for base asset (buying asset), essentially price/exchange rates. quoteQty is quantity of quote asset(to sell).
-            Please be noted the quote is for reference only, the actual price will change as the liquidity changes, it's recommended to swap immediate after request a quote for slippage prevention.
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#request-quote-user_data" /></para>
-            </summary>
-            <param name="quoteAsset">Quote asset</param>
-            <param name="baseAsset">Base asset</param>
-            <param name="quoteQuantity">Quote quantity</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.LiquidityPoolSwapAsync(System.String,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Swap quote asset for base asset
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#swap-trade" /></para>
-            </summary>
-            <param name="quoteAsset">Quote asset</param>
-            <param name="baseAsset">Base asset</param>
-            <param name="quoteQuantity">Quote quantity</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.GetLiquidityPoolSwapHistoryAsync(System.Nullable{System.Int64},System.Nullable{Binance.Net.Enums.BSwapStatus},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get swap history records
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-swap-history-user_data" /></para>
-            </summary>
-            <param name="swapId">Filter by swapId</param>
-            <param name="status">Filter by status</param>
-            <param name="quoteAsset">Filter by quote asset</param>
-            <param name="baseAsset">Filter by base asset</param>
-            <param name="startTime">Filter by start time</param>
-            <param name="endTime">Filter by end time</param>
-            <param name="limit">Max number of results</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.AddToLiquidityPoolPreviewAsync(System.Int32,System.String,System.Decimal,Binance.Net.Enums.LiquidityType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Calculate expected share quantity for adding liquidity in single or dual token.
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#add-liquidity-preview-user_data" /></para>
-            </summary>
-            <param name="poolId">The pool</param>
-            <param name="asset">The asset</param>
-            <param name="quantity">Quantity to add</param>
-            <param name="type">Add type</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.RemoveFromLiquidityPoolPreviewAsync(System.Int32,System.String,System.Decimal,Binance.Net.Enums.LiquidityType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Calculate expected share quantity for removing liquidity in single or dual token.
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#remove-liquidity-preview-user_data" /></para>
-            </summary>
-            <param name="poolId">The pool</param>
-            <param name="asset">The asset</param>
-            <param name="quantity">Quantity to add</param>
-            <param name="type">Add type</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.GetLiquidityPoolInfoAsync(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get liquidity info for a pool
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-liquidity-information-of-a-pool-user_data" /></para>
-            </summary>
-            <param name="poolId">Get a specific pool</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.GetUnclaimedLiquidityPoolsRewardsAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get unclaimed rewards 
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-unclaimed-rewards-record-user_data" /></para>
-            </summary>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.ClaimLiquidityPoolsRewardsAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Claim liquidity pool rewards
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#claim-rewards-trade" /></para>
-            </summary>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.GetLiquidityPoolsClaimHistoryAsync(System.Nullable{System.Int64},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get claimed rewards history
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-claimed-history-user_data" /></para>
-            </summary>
-            <param name="poolId">Filter by pool id</param>
-            <param name="asset">Filter by asset</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
             <param name="limit">Max number of results</param>
@@ -18126,406 +17882,6 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageTransferTransactionUniversal.Status">
             <summary>
             Status
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapClaimResult">
-            <summary>
-            Claim result
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapClaimResult.Success">
-            <summary>
-            Success
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapOperation">
-            <summary>
-            Operation record
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapOperation.OperationId">
-            <summary>
-            Operation id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapOperation.PoolId">
-            <summary>
-            Pool id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapOperation.PoolName">
-            <summary>
-            Pool name
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapOperation.Operation">
-            <summary>
-            Operation
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapOperation.Status">
-            <summary>
-            Status
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapOperation.UpdateTime">
-            <summary>
-            Update time
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapOperation.ShareQuantity">
-            <summary>
-            Share quantity
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapOperationResult">
-            <summary>
-            Operation result
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapOperationResult.OperationId">
-            <summary>
-            Id of the operation
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapPool">
-            <summary>
-            Swap pool info
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapPool.PoolId">
-            <summary>
-            Id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapPool.PoolName">
-            <summary>
-            Name
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapPool.Assets">
-            <summary>
-            Assets in the pool
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapPoolConfig">
-            <summary>
-            Swap pool config
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapPoolConfig.PoolId">
-            <summary>
-            Id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapPoolConfig.PoolName">
-            <summary>
-            Name
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapPoolConfig.UpdateTime">
-            <summary>
-            Update time
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapPoolConfig.Liquidity">
-            <summary>
-            Pool liquidity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapPoolConfig.AssetConfig">
-            <summary>
-            Asset configuration
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.BSwap.PoolAssetConfig">
-            <summary>
-            Asset config
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.PoolAssetConfig.MinAdd">
-            <summary>
-            Minimal add
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.PoolAssetConfig.MaxAdd">
-            <summary>
-            Maximal add
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.PoolAssetConfig.MinSwap">
-            <summary>
-            Minimal swap
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.PoolAssetConfig.MaxSwap">
-            <summary>
-            Maximal swap
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.BSwap.PoolLiquidity">
-            <summary>
-            Liquidity info
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.PoolLiquidity.ConstantA">
-            <summary>
-            Constant a
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.PoolLiquidity.MinRedeemShare">
-            <summary>
-            Minimal redeem share
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.PoolLiquidity.SlippageTolerance">
-            <summary>
-            Slippage tolerance
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapPoolLiquidity">
-            <summary>
-            Pool liquidity info
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapPoolLiquidity.PoolId">
-            <summary>
-            Id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapPoolLiquidity.PoolName">
-            <summary>
-            Name
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapPoolLiquidity.UpdateTime">
-            <summary>
-            Update time
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapPoolLiquidity.Liquidity">
-            <summary>
-            Liquidity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapPoolLiquidity.Share">
-            <summary>
-            Share
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.BSwap.BinancePoolShare">
-            <summary>
-            Pool share info
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinancePoolShare.ShareQuantity">
-            <summary>
-            Share quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinancePoolShare.SharePercentage">
-            <summary>
-            Share percentage
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinancePoolShare.Asset">
-            <summary>
-            Asset
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapPreviewResult">
-            <summary>
-            Preview result
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapPreviewResult.QuoteAsset">
-            <summary>
-            Quote asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapPreviewResult.BaseAsset">
-            <summary>
-            Base asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapPreviewResult.QuoteQuantity">
-            <summary>
-            Quote quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapPreviewResult.BaseQuantity">
-            <summary>
-            Base quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapPreviewResult.Price">
-            <summary>
-            Price
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapPreviewResult.Share">
-            <summary>
-            Share
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapPreviewResult.Slippage">
-            <summary>
-            Slippage
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapPreviewResult.Fee">
-            <summary>
-            Fee
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapQuote">
-            <summary>
-            Quote info
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapQuote.QuoteAsset">
-            <summary>
-            Quote asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapQuote.BaseAsset">
-            <summary>
-            Base asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapQuote.QuoteQuantity">
-            <summary>
-            Quote quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapQuote.BaseQuantity">
-            <summary>
-            Base quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapQuote.Price">
-            <summary>
-            Price
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapQuote.Slippage">
-            <summary>
-            Slippage
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapQuote.Fee">
-            <summary>
-            Fee
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapRecord">
-            <summary>
-            Swap record
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapRecord.SwapId">
-            <summary>
-            Swap id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapRecord.SwapTime">
-            <summary>
-            Time of the swap
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapRecord.Status">
-            <summary>
-            Status
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapRecord.BaseAsset">
-            <summary>
-            Base asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapRecord.QuoteAsset">
-            <summary>
-            Quote asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapRecord.BaseQuantity">
-            <summary>
-            Base quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapRecord.QuoteQuantity">
-            <summary>
-            Quote quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapRecord.Price">
-            <summary>
-            Price
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapRecord.Fee">
-            <summary>
-            Fee
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapResult">
-            <summary>
-            Swap result
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapResult.SwapId">
-            <summary>
-            Swap id
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapRewardHistory">
-            <summary>
-            Rewards history
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapRewardHistory.PoolId">
-            <summary>
-            Pool id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapRewardHistory.PoolName">
-            <summary>
-            Pool name
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapRewardHistory.AssetRewards">
-            <summary>
-            Asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapRewardHistory.ClaimTime">
-            <summary>
-            Claim timestamp
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapRewardHistory.ClaimQuantity">
-            <summary>
-            Claim quanity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapRewardHistory.Status">
-            <summary>
-            Status
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapUnclaimedRewards">
-            <summary>
-            Unclaimed rewards info
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapUnclaimedRewards.TotalUnclaimedRewards">
-            <summary>
-            Total unclaimed rewards
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BSwap.BinanceBSwapUnclaimedRewards.Details">
-            <summary>
-            Details
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferRecord">

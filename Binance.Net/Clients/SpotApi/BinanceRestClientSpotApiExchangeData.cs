@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.ExtensionMethods;
@@ -14,15 +7,9 @@ using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Models.Spot.Blvt;
-using Binance.Net.Objects.Models.Spot.BSwap;
 using Binance.Net.Objects.Models.Spot.Convert;
 using Binance.Net.Objects.Models.Spot.IsolatedMargin;
 using Binance.Net.Objects.Models.Spot.Margin;
-using CryptoExchange.Net;
-using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.Objects;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -62,10 +49,6 @@ namespace Binance.Net.Clients.SpotApi
         private const string blvtInfoEndpoint = "blvt/tokenInfo";
         private const string blvtHistoricalKlinesEndpoint = "lvtKlines";
 
-        // Bswap
-        private const string bSwapPoolsEndpoint = "bswap/pools";
-        private const string bSwapPoolsConfigureEndpoint = "bswap/poolConfigure";
-
         //Convert
         private const string convertListAllConvertPairsEndpoint = "convert/exchangeInfo";
         private const string convertQuantityPrecisionPerAssetEndpoint = "convert/assetInfo";
@@ -78,9 +61,6 @@ namespace Binance.Net.Clients.SpotApi
 
         private const string BlvtApi = "sapi";
         private const string blvtVersion = "1";
-
-        private const string bSwapApi = "sapi";
-        private const string bSwapVersion = "1";
 
         private const string convertApi = "sapi";
         private const string convertVersion = "1";
@@ -642,39 +622,6 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceBlvtKline>>(_baseClient.GetUrl(blvtHistoricalKlinesEndpoint, "fapi", blvtVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #endregion
-
-        #region Liquidity pools
-
-        #region Get liquid swap pools
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceBSwapPool>>> GetLiquidityPoolsAsync(int? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>();
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceBSwapPool>>(_baseClient.GetUrl(bSwapPoolsEndpoint, bSwapApi, bSwapVersion), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region Get pool configure
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceBSwapPoolConfig>>> GetLiquidityPoolConfigurationAsync(int poolId, int? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>
-            {
-                { "poolId", poolId }
-            };
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceBSwapPoolConfig>>(_baseClient.GetUrl(bSwapPoolsConfigureEndpoint, bSwapApi, bSwapVersion), HttpMethod.Get, ct, parameters, signed: true, weight: 150).ConfigureAwait(false);
         }
 
         #endregion

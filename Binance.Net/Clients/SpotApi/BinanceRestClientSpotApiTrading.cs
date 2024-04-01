@@ -13,17 +13,10 @@ using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures.AlgoOrders;
 using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Models.Spot.Blvt;
-using Binance.Net.Objects.Models.Spot.BSwap;
 using Binance.Net.Objects.Models.Spot.Convert;
 using Binance.Net.Objects.Models.Spot.ConvertTransfer;
 using Binance.Net.Objects.Models.Spot.Margin;
-using CryptoExchange.Net;
 using CryptoExchange.Net.CommonObjects;
-using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.Converters.MessageParsing;
-using CryptoExchange.Net.Objects;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -38,9 +31,6 @@ namespace Binance.Net.Clients.SpotApi
 
         private const string BlvtApi = "sapi";
         private const string blvtVersion = "1";
-
-        private const string bSwapApi = "sapi";
-        private const string bSwapVersion = "1";
 
         private const string convertApi = "sapi";
         private const string convertVersion = "1";
@@ -84,17 +74,6 @@ namespace Binance.Net.Clients.SpotApi
         private const string blvtRedeemEndpoint = "blvt/redeem";
         private const string blvtSubscriptionRecordsEndpoint = "blvt/subscribe/record";
         private const string blvtRedeemRecordsEndpoint = "blvt/redeem/record";
-
-        // BSwap        
-        private const string bSwapPoolLiquidityEndpoint = "bswap/liquidity";
-        private const string bSwapAddLiquidityEndpoint = "bswap/liquidityAdd";
-        private const string bSwapRemoveLiquidityEndpoint = "bswap/liquidityRemove";
-        private const string bSwapLiquidityOperationsEndpoint = "bswap/liquidityOps";
-        private const string bSwapQuoteEndpoint = "bswap/quote";
-        private const string bSwapSwapEndpoint = "bswap/swap";
-        private const string bSwapSwapRecordsEndpoint = "bswap/swap";
-        private const string bSwapAddLiquidityPreviewEndpoint = "bswap/addLiquidityPreview";
-        private const string bSwapRemoveLiquidityPreviewEndpoint = "bswap/removeLiquidityPreview";
 
         // C2C
         private const string c2cTradeHistoryEndpoint = "c2c/orderMatch/listUserOrderHistory";
@@ -975,222 +954,6 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestInternal<IEnumerable<BinanceBlvtRedemption>>(_baseClient.GetUrl(blvtRedeemRecordsEndpoint, BlvtApi, blvtVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #endregion
-
-        #region Liquidity pools
-
-        #region Add liquid pool liquidity
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceBSwapOperationResult>> AddToLiquidityPoolAsync(int poolId, string asset, decimal quantity, LiquidityType? type = null, int? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>
-            {
-                {"poolId", poolId},
-                {"asset", asset},
-                {"quantity", quantity.ToString(CultureInfo.InvariantCulture)}
-            };
-            parameters.AddOptionalParameter("type", type == null ? null : JsonConvert.SerializeObject(type.Value, new LiquidityTypeConverter(false)));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<BinanceBSwapOperationResult>(_baseClient.GetUrl(bSwapAddLiquidityEndpoint, bSwapApi, bSwapVersion), HttpMethod.Post, ct, parameters, true, weight: 1000).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region Remove liquid pool liquidity
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceBSwapOperationResult>> RemoveFromLiquidityPoolAsync(int poolId, string asset, LiquidityType type, decimal shareQuantity, int? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>
-            {
-                {"poolId", poolId},
-                {"asset", asset},
-                {"type", JsonConvert.SerializeObject(type, new LiquidityTypeConverter(false))},
-                {"shareAmount", shareQuantity.ToString(CultureInfo.InvariantCulture)}
-            };
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<BinanceBSwapOperationResult>(_baseClient.GetUrl(bSwapRemoveLiquidityEndpoint, bSwapApi, bSwapVersion), HttpMethod.Post, ct, parameters, true, weight: 1000).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region Get liquid pool liquidity operation records
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceBSwapOperation>>> GetLiquidityPoolOperationRecordsAsync(long? operationId = null, int? poolId = null, BSwapOperation? operation = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
-        {
-            limit?.ValidateIntBetween(nameof(limit), 1, 100);
-
-            var parameters = new Dictionary<string, object>();
-            parameters.AddOptionalParameter("operationId", operationId?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("poolId", poolId);
-            parameters.AddOptionalParameter("operation", operation.HasValue ? JsonConvert.SerializeObject(new BSwapOperationConverter(false)) : null);
-            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
-            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
-            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceBSwapOperation>>(_baseClient.GetUrl(bSwapLiquidityOperationsEndpoint, bSwapApi, bSwapVersion), HttpMethod.Get, ct, parameters, true, weight: 3000).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region Request liquid pool swap quote
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceBSwapQuote>> GetLiquidityPoolSwapQuoteAsync(string quoteAsset, string baseAsset, decimal quoteQuantity, int? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>
-            {
-                {"quoteAsset", quoteAsset},
-                {"baseAsset", baseAsset},
-                {"quoteQty", quoteQuantity.ToString(CultureInfo.InvariantCulture)}
-            };
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<BinanceBSwapQuote>(_baseClient.GetUrl(bSwapQuoteEndpoint, bSwapApi, bSwapVersion), HttpMethod.Get, ct, parameters, true, weight: 150).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region Liquid pool swap 
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceBSwapResult>> LiquidityPoolSwapAsync(string quoteAsset, string baseAsset, decimal quoteQuantity, int? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>
-            {
-                {"quoteAsset", quoteAsset},
-                {"baseAsset", baseAsset},
-                {"quoteQty",quoteQuantity.ToString(CultureInfo.InvariantCulture)}
-            };
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<BinanceBSwapResult>(_baseClient.GetUrl(bSwapSwapEndpoint, bSwapApi, bSwapVersion), HttpMethod.Post, ct, parameters, true, weight: 1000).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region Get liquid pool swap history
-        /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceBSwapRecord>>> GetLiquidityPoolSwapHistoryAsync(long? swapId = null, BSwapStatus? status = null, string? quoteAsset = null, string? baseAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
-        {
-            limit?.ValidateIntBetween(nameof(limit), 1, 100);
-
-            var parameters = new Dictionary<string, object>();
-            parameters.AddOptionalParameter("swapId", swapId?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("status", status.HasValue ? JsonConvert.SerializeObject(status.Value, new BSwapStatusConverter(false)) : null);
-            parameters.AddOptionalParameter("baseAsset", baseAsset);
-            parameters.AddOptionalParameter("quoteAsset", quoteAsset);
-            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
-            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
-            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceBSwapRecord>>(_baseClient.GetUrl(bSwapSwapRecordsEndpoint, bSwapApi, bSwapVersion), HttpMethod.Get, ct, parameters, true, weight: 3000).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region Add liquidity pool preview
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceBSwapPreviewResult>> AddToLiquidityPoolPreviewAsync(int poolId, string asset, decimal quantity, LiquidityType type, int? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>
-            {
-                {"poolId", poolId},
-                {"quoteAsset", asset},
-                {"type", JsonConvert.SerializeObject(type, new LiquidityTypeConverter(false))},
-                {"quoteQty", quantity.ToString(CultureInfo.InvariantCulture)},
-            };
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<BinanceBSwapPreviewResult>(_baseClient.GetUrl(bSwapAddLiquidityPreviewEndpoint, bSwapApi, bSwapVersion), HttpMethod.Get, ct, parameters, true, weight: 150).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region Remove liquidity pool preview
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceBSwapPreviewResult>> RemoveFromLiquidityPoolPreviewAsync(int poolId, string asset, decimal quantity, LiquidityType type, int? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>
-            {
-                {"poolId", poolId},
-                {"quoteAsset", asset},
-                {"type", JsonConvert.SerializeObject(type, new LiquidityTypeConverter(false))},
-                {"shareAmount", quantity.ToString(CultureInfo.InvariantCulture)}
-            };
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<BinanceBSwapPreviewResult>(_baseClient.GetUrl(bSwapRemoveLiquidityPreviewEndpoint, bSwapApi, bSwapVersion), HttpMethod.Get, ct, parameters, true, weight: 150).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region Get info
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceBSwapPoolLiquidity>>> GetLiquidityPoolInfoAsync(int? poolId = null, int? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>();
-            parameters.AddOptionalParameter("poolId", poolId?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceBSwapPoolLiquidity>>(_baseClient.GetUrl(bSwapPoolLiquidityEndpoint, bSwapApi, bSwapVersion), HttpMethod.Get, ct, parameters, true, weight: poolId == null ? 10 : 1).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region Get Unclaimed Liquidity Pools Rewards
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceBSwapUnclaimedRewards>> GetUnclaimedLiquidityPoolsRewardsAsync(int? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>();
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<BinanceBSwapUnclaimedRewards>(_baseClient.GetUrl("bswap/unclaimedRewards", bSwapApi, bSwapVersion), HttpMethod.Get, ct, parameters, true, weight: 1000).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region Claim Liquidity Pools Rewards
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceBSwapClaimResult>> ClaimLiquidityPoolsRewardsAsync(int? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>();
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<BinanceBSwapClaimResult>(_baseClient.GetUrl("bswap/claimRewards", bSwapApi, bSwapVersion), HttpMethod.Post, ct, parameters, true, weight: 1000).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region Get Claim History
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceBSwapRewardHistory>>> GetLiquidityPoolsClaimHistoryAsync(long? poolId = null, string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>();
-            parameters.AddOptionalParameter("poolId", poolId);
-            parameters.AddOptionalParameter("assetRewards", asset);
-            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
-            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
-            parameters.AddOptionalParameter("limit", limit);
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceBSwapRewardHistory>>(_baseClient.GetUrl("bswap/claimedHistory", bSwapApi, bSwapVersion), HttpMethod.Get, ct, parameters, true, weight: 1000).ConfigureAwait(false);
         }
 
         #endregion
