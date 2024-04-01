@@ -526,5 +526,24 @@ namespace Binance.Net.Clients.UsdFuturesApi
         }
 
         #endregion
+
+        #region Get Basis
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesBasis>>> GetBasisAsync(string symbol, ContractType contractType, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection()
+            {
+                { "pair", symbol }
+            };
+            parameters.AddEnum("contractType", contractType);
+            parameters.AddEnum("period", period);
+            parameters.AddOptional("limit", limit ?? 30);
+            parameters.AddOptionalMilliseconds("startTime", startTime);
+            parameters.AddOptionalMilliseconds("endTime", endTime);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesBasis>>(new Uri(_baseClient.BaseAddress.AppendPath("futures/data/basis")), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        #endregion
     }
 }
