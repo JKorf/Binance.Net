@@ -349,6 +349,16 @@ namespace Binance.Net.Clients.SpotApi
         }
         #endregion
 
+        #region Get Wallet Balances
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceWalletBalance>>> GetWalletBalancesAsync(int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceWalletBalance>>(_baseClient.GetUrl("asset/wallet/balance", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
+        }
+        #endregion
+
         #region Asset Dividend Records
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceQueryRecords<BinanceDividendRecord>>> GetAssetDividendRecordsAsync(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)

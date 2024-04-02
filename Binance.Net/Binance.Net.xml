@@ -1086,6 +1086,9 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetBalancesAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetWalletBalancesAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetAssetDividendRecordsAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -7837,6 +7840,15 @@
             </summary>
             <param name="asset">Return for this asset</param>
             <param name="needBtcValuation">Whether the response should include the BtcValuation. If false (default) BtcValuation will be 0.</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetWalletBalancesAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Receive balances of the different user wallets
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-user-wallet-balance-user_data" /></para>
+            </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -16500,6 +16512,26 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceUserBalance.BtcValuation">
             <summary>
             Value in btc
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceWalletBalance">
+            <summary>
+            Wallet balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWalletBalance.Active">
+            <summary>
+            Is the wallet activated
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWalletBalance.Balance">
+            <summary>
+            Balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWalletBalance.WalletName">
+            <summary>
+            Name of the wallet
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceWithdrawal">
