@@ -703,6 +703,7 @@ namespace Binance.Net.Clients.SpotApi
                 { "type", "BORROW" }
             };
             parameters.AddOptionalParameter("txId", transactionId?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("isolatedSymbol", isolatedSymbol);
 
             // TxId or startTime must be sent. txId takes precedence.
             if (!transactionId.HasValue)
