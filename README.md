@@ -154,6 +154,11 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 9.8.1 - 03 Apr 2024
+    * Added SpotApi.Account.GetWalletBalancesAsync endpoint
+    * Fixed SpotApi.Account.GetMarginLoansAsync isolatedSymbol parameter not getting send
+    * Removed pre-send symbol validation
+
 * Version 9.8.0 - 01 Apr 2024
     * Added SpotApi.ExchangeData.GetDelistScheduleAsync endpoint
     * Added UsdFuturesApi.Account.GetOrderRateLimitAsync endpoint

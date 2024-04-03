@@ -7,9 +7,9 @@
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
     <Authors>JKorf</Authors>
-    <PackageVersion>9.8.0</PackageVersion>
-    <AssemblyVersion>9.8.0</AssemblyVersion>
-    <FileVersion>9.8.0</FileVersion>
+    <PackageVersion>9.8.1</PackageVersion>
+    <AssemblyVersion>9.8.1</AssemblyVersion>
+    <FileVersion>9.8.1</FileVersion>
     <Description>Binance.Net is a client library for accessing the Binance REST and Websocket API. All data is mapped to readable models and enum values. Additional features include an implementation for maintaining a client side order book, easy integration with other exchange client libraries and more.</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance;Binance.Net;Binance Client;Binance API;CryptoCurrency;CryptoCurrency Exchange</PackageTags>
