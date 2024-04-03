@@ -168,24 +168,6 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.That(headers.First().Key == "X-MBX-APIKEY" && headers.First().Value == "TestKey");
-        }       
-
-        [TestCase("BTCUSDT", true)]
-        [TestCase("NANOUSDT", true)]
-        [TestCase("NANOAUSDTA", true)]
-        [TestCase("NANOBTC", true)]
-        [TestCase("ETHBTC", true)]
-        [TestCase("BEETC", true)]
-        [TestCase("EETC", false)]
-        [TestCase("KP3RBNB", true)]
-        [TestCase("BTC-USDT", false)]
-        [TestCase("BTC-USD", false)]
-        public void CheckValidBinanceSymbol(string symbol, bool isValid)
-        {
-            if (isValid)
-                Assert.DoesNotThrow(symbol.ValidateBinanceSymbol);
-            else
-                Assert.Throws(typeof(ArgumentException), symbol.ValidateBinanceSymbol);
         }
 
         [Test]

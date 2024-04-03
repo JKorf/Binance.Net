@@ -4975,12 +4975,6 @@
             <param name="headers"></param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.ExtensionMethods.BinanceExtensionMethods.ValidateBinanceSymbol(System.String)">
-            <summary>
-            Validate the string is a valid Binance symbol.
-            </summary>
-            <param name="symbolString">string to validate</param> 
-        </member>
         <member name="T:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApi">
             <summary>
             Binance Coin futures API endpoints

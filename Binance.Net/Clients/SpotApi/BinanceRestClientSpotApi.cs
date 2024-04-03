@@ -108,8 +108,6 @@ namespace Binance.Net.Clients.SpotApi
             int weight = 1,
             CancellationToken ct = default)
         {
-            symbol.ValidateBinanceSymbol();
-
             if (quoteQuantity != null && type != SpotOrderType.Market)
                 throw new ArgumentException("quoteQuantity is only valid for market orders");
 

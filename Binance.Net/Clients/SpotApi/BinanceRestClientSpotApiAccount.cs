@@ -923,8 +923,6 @@ namespace Binance.Net.Clients.SpotApi
                 DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? limit = 10,
                 int? receiveWindow = null, CancellationToken ct = default)
         {
-            symbol.ValidateBinanceSymbol();
-
             var parameters = new Dictionary<string, object>
             {
                 {"symbol", symbol}
@@ -1129,8 +1127,6 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<WebCallResult<string>> StartIsolatedMarginUserStreamAsync(string symbol, CancellationToken ct = default)
         {
-            symbol.ValidateBinanceSymbol();
-
             var parameters = new Dictionary<string, object>()
             {
                 {"symbol", symbol}

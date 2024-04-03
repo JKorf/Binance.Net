@@ -246,8 +246,6 @@ namespace Binance.Net.Clients.SpotApi
             int? stopIcebergQty = null,
             SelfTradePreventionMode? selfTradePreventionMode = null)
         {
-            symbol.ValidateBinanceSymbol();
-
             var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },

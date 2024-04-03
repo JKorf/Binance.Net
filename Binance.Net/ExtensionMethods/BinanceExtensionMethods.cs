@@ -42,19 +42,5 @@ namespace Binance.Net.ExtensionMethods
                 return value;
             return null;
         }
-
-        /// <summary>
-        /// Validate the string is a valid Binance symbol.
-        /// </summary>
-        /// <param name="symbolString">string to validate</param> 
-        public static void ValidateBinanceSymbol(this string symbolString)
-        {
-            if (string.IsNullOrEmpty(symbolString))
-                throw new ArgumentException("Symbol is not provided");
-
-            if (!Regex.IsMatch(symbolString, "^([A-Z|a-z|0-9]{5,})$"))
-                throw new ArgumentException($"{symbolString} is not a valid Binance symbol. Should be [BaseAsset][QuoteAsset], e.g. BTCUSDT");
-        }
-
     }
 }
