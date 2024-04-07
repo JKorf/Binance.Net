@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.RateLimiting;
+using CryptoExchange.Net.RateLimiting.Guards;
 
 namespace Binance.Net.Objects.Options
 {
@@ -25,12 +27,15 @@ namespace Binance.Net.Objects.Options
         /// </summary>
         public BinanceSocketApiOptions SpotOptions { get; private set; } = new BinanceSocketApiOptions()
         {
-            RateLimiters = new List<IRateLimiter>
-            {
-                new RateLimiter()
-                    .AddConnectionRateLimit("stream.binance.com", 5, TimeSpan.FromSeconds(1))
-                    .AddConnectionRateLimit("ws-api.binance.com", 6000, TimeSpan.FromSeconds(60))
-            }
+            RateLimiter = new RateLimitGate()
+                .AddGuard(new HostLimitGuard("stream.binance.com", 5, TimeSpan.FromMinutes(1)))
+                .AddGuard(new HostLimitGuard("ws-api.binance.com", 10, TimeSpan.FromMinutes(1)))
+                .WithLimitBehaviour(RateLimitingBehaviour.Wait)
+            //{
+            //    new RateLimiter()
+            //        .AddConnectionRateLimit("stream.binance.com", 5, TimeSpan.FromSeconds(1))
+            //        .AddConnectionRateLimit("ws-api.binance.com", 6000, TimeSpan.FromSeconds(60))
+            //}
         };
 
         /// <summary>
