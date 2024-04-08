@@ -23,6 +23,7 @@ using Binance.Net.ExtensionMethods;
 using Binance.Net.Objects.Models;
 using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.RateLimiting;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -34,6 +35,9 @@ namespace Binance.Net.Clients.SpotApi
         public new BinanceRestApiOptions ApiOptions => (BinanceRestApiOptions)base.ApiOptions;
         /// <inheritdoc />
         public new BinanceRestOptions ClientOptions => (BinanceRestOptions)base.ClientOptions;
+
+        /// <inheritdoc />
+
 
         internal BinanceExchangeInfo? _exchangeInfo;
         internal DateTime? _lastExchangeInfoUpdate;

@@ -1,4 +1,5 @@
-﻿using CryptoExchange.Net.Interfaces;
+﻿using Binance.Net.Clients.SpotApi;
+using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Options;
 using CryptoExchange.Net.RateLimiting;
@@ -33,20 +34,7 @@ namespace Binance.Net.Objects.Options
         /// </summary>
         public BinanceRestApiOptions SpotOptions { get; private set; } = new BinanceRestApiOptions
         {
-            RateLimiter = new RateLimitGate()
-                                .AddGuard(new PartialEndpointTotalLimitGuard("/api/", 6000, TimeSpan.FromMinutes(1)))
-                                .AddGuard(new PartialEndpointTotalLimitGuard("/sapi/", 180000, TimeSpan.FromMinutes(1))) // Should be individual?
-                                .AddGuard(new EndpointLimitGuard("/sapi/", 100, TimeSpan.FromSeconds(10), HttpMethod.Post))
-                                .WithLimitBehaviour(RateLimitingBehaviour.Wait)
-            //.AddGuard(new PartialEndpointTotalLimitGuard("/api/", 2, TimeSpan.FromSeconds(10)))
-            //.AddGuard(new PartialEndpointTotalLimitGuard("/sapi/", 5, TimeSpan.FromMinutes(1)))
-            //.AddGuard(new EndpointLimitGuard("/api/v3/order", 1, TimeSpan.FromSeconds(10)))
-            //{
-            //    new RateLimiter()
-            //        .AddPartialEndpointLimit("/api/", 6000, TimeSpan.FromMinutes(1))
-            //        .AddPartialEndpointLimit("/sapi/", 180000, TimeSpan.FromMinutes(1))
-            //        .AddEndpointLimit("/api/v3/order", 100, TimeSpan.FromSeconds(10), HttpMethod.Post, true)
-            //}
+            RateLimiter = BinanceRateLimiters.SpotApi
         };
 
         /// <summary>

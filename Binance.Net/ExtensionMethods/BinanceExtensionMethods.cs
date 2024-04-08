@@ -21,7 +21,7 @@ namespace Binance.Net.ExtensionMethods
             if (headers == null)
                 return null;
 
-            var headerValues = headers.SingleOrDefault(s => s.Key.StartsWith("X-MBX-USED-WEIGHT-", StringComparison.InvariantCultureIgnoreCase)).Value;
+            var headerValues = headers.SingleOrDefault(s => s.Key.StartsWith("X-MBX-USED-WEIGHT-", StringComparison.InvariantCultureIgnoreCase) || s.Key.StartsWith("X-SAPI-USED-IP-WEIGHT", StringComparison.InvariantCultureIgnoreCase)).Value;
             if (headerValues != null && int.TryParse(headerValues.First(), out var value))
                 return value;
             return null;
