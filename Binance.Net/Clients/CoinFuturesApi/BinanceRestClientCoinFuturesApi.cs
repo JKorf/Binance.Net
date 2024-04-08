@@ -19,6 +19,7 @@ using Binance.Net.Objects.Options;
 using Binance.Net.Objects.Models;
 using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.RateLimiting;
 
 namespace Binance.Net.Clients.CoinFuturesApi
 {
@@ -222,9 +223,9 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         internal async Task<WebCallResult<T>> SendRequestInternal<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken,
             Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
-            ArrayParametersSerialization? arraySerialization = null, int weight = 1, bool ignoreRateLimit = false) where T : class
+            ArrayParametersSerialization? arraySerialization = null, int weight = 1, IRateLimitGate? gate = null) where T : class
         {
-            var result = await SendRequestAsync<T>(uri, method, cancellationToken, parameters, signed, null, postPosition, arraySerialization, weight, ignoreRatelimit: ignoreRateLimit).ConfigureAwait(false);
+            var result = await SendRequestAsync<T>(uri, method, cancellationToken, parameters, signed, null, postPosition, arraySerialization, weight, gate: gate).ConfigureAwait(false);
             if (!result && result.Error!.Code == -1021 && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
             {
                 _logger.Log(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");

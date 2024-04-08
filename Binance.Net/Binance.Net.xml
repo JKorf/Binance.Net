@@ -118,6 +118,31 @@
             <param name="number"></param>
             <returns></returns>
         </member>
+        <member name="T:Binance.Net.BinanceRateLimiting">
+            <summary>
+            Rate limiters for the Binance API
+            </summary>
+        </member>
+        <member name="P:Binance.Net.BinanceRateLimiting.Spot_Api_Ip">
+            <summary>
+            Spot API ratelimiter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.BinanceRateLimiting.Spot_Api_Uid">
+            <summary>
+            Spot API ratelimiter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.BinanceRateLimiting.Spot_Sapi_Ip">
+            <summary>
+            Spot API ratelimiter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.BinanceRateLimiting.Spot_Sapi_Uid">
+            <summary>
+            Spot API ratelimiter
+            </summary>
+        </member>
         <member name="T:Binance.Net.Clients.BinanceRestClient">
             <inheritdoc cref="T:Binance.Net.Interfaces.Clients.IBinanceRestClient" />
         </member>
@@ -990,6 +1015,9 @@
             <inheritdoc />
         </member>
         <member name="P:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApi.ClientOptions">
+            <inheritdoc />
+        </member>
+        <member name="F:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApi._exchangeInfo">
             <inheritdoc />
         </member>
         <member name="P:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApi.Account">

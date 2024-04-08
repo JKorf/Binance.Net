@@ -32,10 +32,7 @@ namespace Binance.Net.Objects.Options
         /// <summary>
         /// Spot API options
         /// </summary>
-        public BinanceRestApiOptions SpotOptions { get; private set; } = new BinanceRestApiOptions
-        {
-            RateLimiter = BinanceRateLimiters.SpotApi
-        };
+        public BinanceRestApiOptions SpotOptions { get; private set; } = new BinanceRestApiOptions();
 
         /// <summary>
         /// Usd futures API options

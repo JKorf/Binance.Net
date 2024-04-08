@@ -110,6 +110,7 @@ namespace Binance.Net.Clients.SpotApi
             bool? autoRepayAtCancel = null,
             int? receiveWindow = null,
             int weight = 1,
+            IRateLimitGate? gate = null,
             CancellationToken ct = default)
         {
             if (quoteQuantity != null && type != SpotOrderType.Market)
@@ -155,7 +156,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("autoRepayAtCancel", autoRepayAtCancel);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await SendRequestInternal<BinancePlacedOrder>(uri, HttpMethod.Post, ct, parameters, true, weight: weight).ConfigureAwait(false);
+            return await SendRequestInternal<BinancePlacedOrder>(uri, HttpMethod.Post, ct, parameters, true, weight: weight, gate: gate).ConfigureAwait(false);
         }
 
         internal Uri GetUrl(string endpoint, string api, string? version = null)
@@ -184,9 +185,9 @@ namespace Binance.Net.Clients.SpotApi
 
         internal async Task<WebCallResult<T>> SendRequestInternal<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken,
             Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
-            ArrayParametersSerialization? arraySerialization = null, int weight = 1, bool ignoreRateLimit = false) where T : class
+            ArrayParametersSerialization? arraySerialization = null, int weight = 1, IRateLimitGate? gate = null) where T : class
         {
-            var result = await SendRequestAsync<T>(uri, method, cancellationToken, parameters, signed, null, postPosition, arraySerialization, weight, ignoreRatelimit: ignoreRateLimit).ConfigureAwait(false);
+            var result = await SendRequestAsync<T>(uri, method, cancellationToken, parameters, signed, null, postPosition, arraySerialization, weight, gate: gate).ConfigureAwait(false);
             if (!result && result.Error!.Code == -1021 && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
             {
                 _logger.Log(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
@@ -197,9 +198,9 @@ namespace Binance.Net.Clients.SpotApi
 
         internal async Task<WebCallResult> SendRequestInternal(Uri uri, HttpMethod method, CancellationToken cancellationToken,
             Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
-            ArrayParametersSerialization? arraySerialization = null, int weight = 1, bool ignoreRateLimit = false)
+            ArrayParametersSerialization? arraySerialization = null, int weight = 1, IRateLimitGate? gate = null)
         {
-            var result = await SendRequestAsync(uri, method, cancellationToken, parameters, signed, null, postPosition, arraySerialization, weight, ignoreRatelimit: ignoreRateLimit).ConfigureAwait(false);
+            var result = await SendRequestAsync(uri, method, cancellationToken, parameters, signed, null, postPosition, arraySerialization, weight, gate: gate).ConfigureAwait(false);
             if (!result && result.Error!.Code == -1021 && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
             {
                 _logger.Log(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
