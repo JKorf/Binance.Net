@@ -87,7 +87,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #endregion
 
-        #region Start User Stream
+        #region Stop User Stream
 
         /// <inheritdoc />
         public async Task<CallResult<BinanceResponse<object>>> StopUserStreamAsync(string listenKey)

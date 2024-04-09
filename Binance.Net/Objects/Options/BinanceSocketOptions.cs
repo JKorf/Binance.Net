@@ -27,10 +27,10 @@ namespace Binance.Net.Objects.Options
         /// </summary>
         public BinanceSocketApiOptions SpotOptions { get; private set; } = new BinanceSocketApiOptions()
         {
-            RateLimiter = new RateLimitGate()
-                .AddGuard(new HostLimitGuard("stream.binance.com", 5, TimeSpan.FromMinutes(1)))
-                .AddGuard(new HostLimitGuard("ws-api.binance.com", 10, TimeSpan.FromMinutes(1)))
-                .WithLimitBehaviour(RateLimitingBehaviour.Wait)
+            //RateLimiter = new RateLimitGate()
+            //    .AddGuard(new HostLimitGuard("stream.binance.com", 5, TimeSpan.FromMinutes(1)))
+            //    .AddGuard(new HostLimitGuard("ws-api.binance.com", 10, TimeSpan.FromMinutes(1)))
+            //    .WithLimitBehaviour(RateLimitingBehaviour.Wait)
             //{
             //    new RateLimiter()
             //        .AddConnectionRateLimit("stream.binance.com", 5, TimeSpan.FromSeconds(1))

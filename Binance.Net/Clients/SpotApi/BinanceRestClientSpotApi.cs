@@ -588,6 +588,12 @@ namespace Binance.Net.Clients.SpotApi
             if (!int.TryParse(value, out var seconds))
                 return error;
 
+            if (seconds == 0)
+            {
+                var now = DateTime.UtcNow;
+                seconds = (int)(new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, 0, DateTimeKind.Utc).AddMinutes(1) - now).TotalSeconds + 1; 
+            }
+
             error.RetryAfter = DateTime.UtcNow.AddSeconds(seconds);
             return error;
         }
