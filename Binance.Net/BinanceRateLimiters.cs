@@ -32,9 +32,9 @@ namespace Binance.Net
         /// </summary>
         public static IRateLimitGate? SpotApi_Socket { get; } = new RateLimitGate()
                                                                     .AddGuard(new HostLimitGuard("stream.binance.com", 5, TimeSpan.FromSeconds(1))) // 5 requests per second
-                                                                    .AddGuard(new HostLimitGuard("stream.binance.com", 300, TimeSpan.FromMinutes(5), RateLimitType.Connection)) // 300 connection per 5 minutes
-                                                                    .AddGuard(new HostLimitGuard("ws-api.binance.com", 6000, TimeSpan.FromMinutes(1), RateLimitType.Request | RateLimitType.Connection), 1) // 6000 request weight per minutes, connections count as 1 weight
-                                                                    .AddGuard(new HostLimitGuard("ws-api.binance.com", 300, TimeSpan.FromMinutes(5), RateLimitType.Connection)) // 300 connections per 5 minutes
+                                                                    .AddGuard(new HostLimitGuard("stream.binance.com", 300, TimeSpan.FromMinutes(5), RateLimitItemType.Connection)) // 300 connection per 5 minutes
+                                                                    .AddGuard(new HostLimitGuard("ws-api.binance.com", 6000, TimeSpan.FromMinutes(1), RateLimitItemType.Request | RateLimitItemType.Connection), 1) // 6000 request weight per minutes, connections count as 1 weight
+                                                                    .AddGuard(new HostLimitGuard("ws-api.binance.com", 300, TimeSpan.FromMinutes(5), RateLimitItemType.Connection)) // 300 connections per 5 minutes
                                                                     .WithWindowType(RateLimitWindowType.Fixed);
     }
 }
