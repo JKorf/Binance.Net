@@ -32,7 +32,11 @@ namespace Binance.Net.Clients.SpotApi
         public async Task<WebCallResult<long>> PingAsync(CancellationToken ct = default)
         {
             var sw = Stopwatch.StartNew();
-            var result = await _baseClient.SendRequestInternal<object>(_baseClient.GetUrl("ping", "api", "3"), HttpMethod.Get, ct, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<object>(_baseClient.GetUrl("ping", "api", "3"), HttpMethod.Get, ct, gate: BinanceExchange.RateLimiters.SpotApi_Ip, endpointLimit: new CryptoExchange.Net.RateLimiting.EndpointLimit
+            {
+                Limit = 2,
+                Period = TimeSpan.FromSeconds(5)
+            }).ConfigureAwait(false);
             sw.Stop();
             return result ? result.As(sw.ElapsedMilliseconds) : result.As<long>(default!);
         }
@@ -44,7 +48,11 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default)
         {
-            var result = await _baseClient.SendRequestInternal<BinanceCheckTime>(_baseClient.GetUrl("time", "api", "3"), HttpMethod.Get, ct, weight: 1, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceCheckTime>(_baseClient.GetUrl("time", "api", "3"), HttpMethod.Get, ct, weight: 1, gate: BinanceExchange.RateLimiters.SpotApi_Ip, endpointLimit: new CryptoExchange.Net.RateLimiting.EndpointLimit
+            {
+                Limit = 4,
+                Period = TimeSpan.FromSeconds(5)
+            }).ConfigureAwait(false);
             return result.As(result.Data?.ServerTime ?? default);            
         }
 

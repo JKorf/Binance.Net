@@ -124,12 +124,22 @@
         </member>
         <member name="P:Binance.Net.BinanceRateLimiters.UsdFuturesApi_Rest">
             <summary>
-            Ratelimiter for Spot endpoints with a IP rate limit
+            Ratelimiter for USD futures endpoints
             </summary>
         </member>
         <member name="P:Binance.Net.BinanceRateLimiters.UsdFuturesApi_Socket">
             <summary>
-            Ratelimiter for Spot websocket connections
+            Ratelimiter for USD futures websocket connections
+            </summary>
+        </member>
+        <member name="P:Binance.Net.BinanceRateLimiters.CoinFuturesApi_Rest">
+            <summary>
+            Ratelimiter for Coin futures endpoints
+            </summary>
+        </member>
+        <member name="P:Binance.Net.BinanceRateLimiters.CoinFuturesApi_Socket">
+            <summary>
+            Ratelimiter for Coin futures websocket connections
             </summary>
         </member>
         <member name="T:Binance.Net.BinanceHelpers">

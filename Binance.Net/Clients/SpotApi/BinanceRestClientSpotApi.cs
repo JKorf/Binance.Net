@@ -185,9 +185,9 @@ namespace Binance.Net.Clients.SpotApi
 
         internal async Task<WebCallResult<T>> SendRequestInternal<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken,
             Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
-            ArrayParametersSerialization? arraySerialization = null, int weight = 1, IRateLimitGate? gate = null) where T : class
+            ArrayParametersSerialization? arraySerialization = null, int weight = 1, IRateLimitGate? gate = null, EndpointLimit? endpointLimit = null) where T : class
         {
-            var result = await SendRequestAsync<T>(uri, method, cancellationToken, parameters, signed, null, postPosition, arraySerialization, weight, gate: gate).ConfigureAwait(false);
+            var result = await SendRequestAsync<T>(uri, method, cancellationToken, parameters, signed, null, postPosition, arraySerialization, weight, gate: gate, endpointLimit: endpointLimit).ConfigureAwait(false);
             if (!result && result.Error!.Code == -1021 && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
             {
                 _logger.Log(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");

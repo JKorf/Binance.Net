@@ -93,7 +93,6 @@ namespace Binance.Net
         /// Ratelimiter for USD futures websocket connections
         /// </summary>
         public IRateLimitGate UsdFuturesApi_Socket { get; } = new RateLimitGate("Socket Usd Futures")
-                                                                    .AddGuard(new ConnectionLimitGuard("fstream.binance.com", 3, TimeSpan.FromSeconds(60))) // --
                                                                     .AddGuard(new HostLimitGuard("fstream.binance.com", 10, TimeSpan.FromSeconds(1))) // 10 requests per second
                                                                     .WithWindowType(RateLimitWindowType.Fixed);
 
@@ -102,6 +101,13 @@ namespace Binance.Net
         /// </summary>
         public IRateLimitGate CoinFuturesApi_Rest { get; } = new RateLimitGate("Rest Coin Futures")
                                                                     .AddGuard(new TotalLimitGuard(2400, TimeSpan.FromMinutes(1)))
+                                                                    .WithWindowType(RateLimitWindowType.Fixed);
+
+        /// <summary>
+        /// Ratelimiter for Coin futures websocket connections
+        /// </summary>
+        public IRateLimitGate CoinFuturesApi_Socket { get; } = new RateLimitGate("Socket Coin Futures")
+                                                                    .AddGuard(new HostLimitGuard("dstream.binance.com", 10, TimeSpan.FromSeconds(1))) // 10 requests per second
                                                                     .WithWindowType(RateLimitWindowType.Fixed);
     }
 }

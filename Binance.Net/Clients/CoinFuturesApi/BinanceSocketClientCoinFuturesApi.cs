@@ -65,6 +65,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
             // See https://dev.binance.vision/t/socket-live-subscribing-server-delay/9645/2
             // To prevent issues we keep below this
             MessageSendSizeLimit = 4000;
+
+            RateLimiter = BinanceExchange.RateLimiters.CoinFuturesApi_Socket;
         }
         #endregion 
 
