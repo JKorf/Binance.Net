@@ -79,6 +79,59 @@
             <param name="coinFuturesSocketAddress"></param>
             <returns></returns>
         </member>
+        <member name="T:Binance.Net.BinanceExchange">
+            <summary>
+            Binance exchange information and helpers
+            </summary>
+        </member>
+        <member name="P:Binance.Net.BinanceExchange.ExchangeName">
+            <summary>
+            Exchange name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.BinanceExchange.RateLimiter">
+            <summary>
+            Rate limiter for the Binance API
+            </summary>
+        </member>
+        <member name="M:Binance.Net.BinanceExchange.FormatSymbol(System.String,System.String)">
+            <summary>   
+            Format 2 assets to form a symbol accepted by the API
+            </summary>
+            <param name="baseAsset">The base asset</param>
+            <param name="quoteAsset">The quote asset</param>
+            <returns></returns>
+        </member>
+        <member name="T:Binance.Net.BinanceRateLimiters">
+            <summary>
+            Rate limiters configured for the Binance API
+            </summary>
+        </member>
+        <member name="P:Binance.Net.BinanceRateLimiters.SpotApi_Ip">
+            <summary>
+            Ratelimiter for Spot endpoints with a IP rate limit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.BinanceRateLimiters.SpotApi_Uid">
+            <summary>
+            Ratelimiter for Spot endpoints with a Uid rate limit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.BinanceRateLimiters.SpotApi_Socket">
+            <summary>
+            Ratelimiter for Spot websocket connections
+            </summary>
+        </member>
+        <member name="P:Binance.Net.BinanceRateLimiters.UsdFuturesApi_Rest">
+            <summary>
+            Ratelimiter for Spot endpoints with a IP rate limit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.BinanceRateLimiters.UsdFuturesApi_Socket">
+            <summary>
+            Ratelimiter for Spot websocket connections
+            </summary>
+        </member>
         <member name="T:Binance.Net.BinanceHelpers">
             <summary>
             Helper methods for the Binance API
@@ -117,26 +170,6 @@
             </summary>
             <param name="number"></param>
             <returns></returns>
-        </member>
-        <member name="T:Binance.Net.BinanceRateLimiting">
-            <summary>
-            Rate limiters for the Binance API
-            </summary>
-        </member>
-        <member name="P:Binance.Net.BinanceRateLimiting.SpotApi_Ip">
-            <summary>
-            Ratelimiter for Spot endpoints with a IP rate limit
-            </summary>
-        </member>
-        <member name="P:Binance.Net.BinanceRateLimiting.SpotApi_Uid">
-            <summary>
-            Ratelimiter for Spot endpoints with a Uid rate limit
-            </summary>
-        </member>
-        <member name="P:Binance.Net.BinanceRateLimiting.SpotApi_Socket">
-            <summary>
-            Ratelimiter for Spot websocket connections
-            </summary>
         </member>
         <member name="T:Binance.Net.Clients.BinanceRestClient">
             <inheritdoc cref="T:Binance.Net.Interfaces.Clients.IBinanceRestClient" />

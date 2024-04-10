@@ -20,36 +20,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
     /// <inheritdoc />
     public class BinanceRestClientUsdFuturesApiAccount : IBinanceRestClientUsdFuturesApiAccount
     {
-        private const string positionModeSideEndpoint = "positionSide/dual";
-        private const string changeInitialLeverageEndpoint = "leverage";
-        private const string incomeHistoryEndpoint = "income";
-        private const string positionMarginEndpoint = "positionMargin";
-        private const string positionMarginChangeHistoryEndpoint = "positionMargin/history";
-        private const string changeMarginTypeEndpoint = "marginType";
-        private const string leverageBracketEndpoint = "leverageBracket";
-        private const string adlQuantileEndpoint = "adlQuantile";
-
-        private const string getFuturesListenKeyEndpoint = "listenKey";
-        private const string keepFuturesListenKeyAliveEndpoint = "listenKey";
-        private const string closeFuturesListenKeyEndpoint = "listenKey";
-
-        private const string accountInfoEndpoint = "account";
-        private const string futuresAccountBalanceEndpoint = "balance";
-        private const string futuresAccountMultiAssetsModeEndpoint = "multiAssetsMargin";
-        private const string positionInformationEndpoint = "positionRisk";
-        private const string tradingStatusEndpoint = "apiTradingStatus";
-        private const string futuresAccountUserCommissionRateEndpoint = "commissionRate";
-
-        private const string downloadIdEndpoint = "income/asyn";
-        private const string downloadLinkEndpoint = "income/asyn/id";
-        private const string downloadIdOrdersEndpoint = "order/asyn";
-        private const string downloadLinkOrdersEndpoint = "order/asyn/id";
-        private const string downloadIdTradeEndpoint = "trade/asyn";
-        private const string downloadLinkTradeEndpoint = "trade/asyn/id";
-
-        private const string api = "fapi";
-        private const string signedVersion = "1";
-
         private readonly BinanceRestClientUsdFuturesApi _baseClient;
 
         internal BinanceRestClientUsdFuturesApiAccount(BinanceRestClientUsdFuturesApi baseClient)
@@ -68,7 +38,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceResult>(_baseClient.GetUrl(positionModeSideEndpoint, api, signedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceResult>(_baseClient.GetUrl("positionSide/dual", "fapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -81,7 +51,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceFuturesPositionMode>(_baseClient.GetUrl(positionModeSideEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true, weight: 30).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceFuturesPositionMode>(_baseClient.GetUrl("positionSide/dual", "fapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 30).ConfigureAwait(false);
         }
 
         #endregion
@@ -99,7 +69,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceFuturesInitialLeverageChangeResult>(_baseClient.GetUrl(changeInitialLeverageEndpoint, api, signedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceFuturesInitialLeverageChangeResult>(_baseClient.GetUrl("leverage", "fapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -116,7 +86,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceFuturesChangeMarginTypeResult>(_baseClient.GetUrl(changeMarginTypeEndpoint, api, signedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceFuturesChangeMarginTypeResult>(_baseClient.GetUrl("marginType", "fapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -135,7 +105,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.AddOptionalParameter("positionSide", positionSide == null ? null : JsonConvert.SerializeObject(positionSide, new PositionSideConverter(false)));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceFuturesPositionMarginResult>(_baseClient.GetUrl(positionMarginEndpoint, api, signedVersion), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceFuturesPositionMarginResult>(_baseClient.GetUrl("positionMargin", "fapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -155,7 +125,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesMarginChangeHistoryResult>>(_baseClient.GetUrl(positionMarginChangeHistoryEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesMarginChangeHistoryResult>>(_baseClient.GetUrl("positionMargin/history", "fapi", "1"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -175,7 +145,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesIncomeHistory>>(_baseClient.GetUrl(incomeHistoryEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true, weight: 30).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesIncomeHistory>>(_baseClient.GetUrl("income", "fapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 30).ConfigureAwait(false);
         }
 
         #endregion
@@ -185,7 +155,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceFuturesSymbolBracket>>> GetBracketsAsync(string? symbolOrPair = null, long? receiveWindow = null, CancellationToken ct = default)
         {
-            var url = _baseClient.GetUrl(leverageBracketEndpoint, api, signedVersion);
+            var url = _baseClient.GetUrl("leverageBracket", "fapi", "1");
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter(url.ToString().Contains("dapi") ? "pair" : "symbol", symbolOrPair);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -205,9 +175,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             if(symbol == null)            
-                return await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesQuantileEstimation>>(_baseClient.GetUrl(adlQuantileEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
+                return await _baseClient.SendRequestInternal<IEnumerable<BinanceFuturesQuantileEstimation>>(_baseClient.GetUrl("adlQuantile", "fapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
 
-            var result = await _baseClient.SendRequestInternal<BinanceFuturesQuantileEstimation>(_baseClient.GetUrl(adlQuantileEndpoint, api, signedVersion), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceFuturesQuantileEstimation>(_baseClient.GetUrl("adlQuantile", "fapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
             if (!result)
                 return result.As<IEnumerable<BinanceFuturesQuantileEstimation>>(null);
 
@@ -220,7 +190,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// <inheritdoc />
         public async Task<WebCallResult<string>> StartUserStreamAsync(CancellationToken ct = default)
         {
-            var result = await _baseClient.SendRequestInternal<BinanceListenKey>(_baseClient.GetUrl(getFuturesListenKeyEndpoint, api, signedVersion), HttpMethod.Post, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BinanceListenKey>(_baseClient.GetUrl("listenKey", "fapi", "1"), HttpMethod.Post, ct).ConfigureAwait(false);
             return result.As(result.Data?.ListenKey!);
         }
 
@@ -237,7 +207,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 { "listenKey", listenKey }
             };
 
-            return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrl(keepFuturesListenKeyAliveEndpoint, api, signedVersion), HttpMethod.Put, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrl("listenKey", "fapi", "1"), HttpMethod.Put, ct, parameters).ConfigureAwait(false);
         }
 
         #endregion
@@ -253,7 +223,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 { "listenKey", listenKey }
             };
 
-            return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrl(closeFuturesListenKeyEndpoint, api, signedVersion), HttpMethod.Delete, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<object>(_baseClient.GetUrl("listenKey", "fapi", "1"), HttpMethod.Delete, ct, parameters).ConfigureAwait(false);
         }
 
         #endregion
@@ -266,7 +236,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceFuturesAccountInfo>(_baseClient.GetUrl(accountInfoEndpoint, api, "2"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceFuturesAccountInfo>(_baseClient.GetUrl("account", "fapi", "2"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
         }
 
         #endregion
@@ -279,7 +249,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceUsdFuturesAccountBalance>>(_baseClient.GetUrl(futuresAccountBalanceEndpoint, api, "2"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceUsdFuturesAccountBalance>>(_baseClient.GetUrl("balance", "fapi", "2"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
         }
 
         #endregion
@@ -292,7 +262,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceFuturesMultiAssetMode>(_baseClient.GetUrl(futuresAccountMultiAssetsModeEndpoint, api, "1"), HttpMethod.Get, ct, parameters, true, weight: 30).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceFuturesMultiAssetMode>(_baseClient.GetUrl("multiAssetsMargin", "fapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 30).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -304,7 +274,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceResult>(_baseClient.GetUrl(futuresAccountMultiAssetsModeEndpoint, api, "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceResult>(_baseClient.GetUrl("multiAssetsMargin", "fapi", "1"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -318,7 +288,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinancePositionDetailsUsdt>>(_baseClient.GetUrl(positionInformationEndpoint, api, "2"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinancePositionDetailsUsdt>>(_baseClient.GetUrl("positionRisk", "fapi", "2"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
         }
 
         #endregion
@@ -330,7 +300,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceFuturesTradingStatus>(_baseClient.GetUrl(tradingStatusEndpoint, api, "1"), HttpMethod.Get, ct, parameters, true, weight: 10).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceFuturesTradingStatus>(_baseClient.GetUrl("apiTradingStatus", "fapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 10).ConfigureAwait(false);
 
         }
         #endregion
@@ -344,7 +314,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 { "symbol", symbol}
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-            return await _baseClient.SendRequestInternal<BinanceFuturesAccountUserCommissionRate>(_baseClient.GetUrl(futuresAccountUserCommissionRateEndpoint, "fapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 20).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceFuturesAccountUserCommissionRate>(_baseClient.GetUrl("commissionRate", "fapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 20).ConfigureAwait(false);
         }
         #endregion
 
@@ -358,7 +328,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 { "endTime", DateTimeConverter.ConvertToMilliseconds(endTime) },
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-            return await _baseClient.SendRequestInternal<BinanceFuturesDownloadIdInfo>(_baseClient.GetUrl(downloadIdEndpoint, "fapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceFuturesDownloadIdInfo>(_baseClient.GetUrl("income/asyn", "fapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 1500).ConfigureAwait(false);
         }
         #endregion
 
@@ -371,7 +341,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 { "downloadId", downloadId }
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-            return await _baseClient.SendRequestInternal<BinanceFuturesDownloadLink>(_baseClient.GetUrl(downloadLinkEndpoint, "fapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceFuturesDownloadLink>(_baseClient.GetUrl("income/asyn/id", "fapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 10).ConfigureAwait(false);
         }
         #endregion
 
@@ -385,7 +355,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 { "endTime", DateTimeConverter.ConvertToMilliseconds(endTime) },
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-            return await _baseClient.SendRequestInternal<BinanceFuturesDownloadIdInfo>(_baseClient.GetUrl(downloadIdOrdersEndpoint, "fapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceFuturesDownloadIdInfo>(_baseClient.GetUrl("order/asyn", "fapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 1500).ConfigureAwait(false);
         }
         #endregion
 
@@ -398,7 +368,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 { "downloadId", downloadId }
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-            return await _baseClient.SendRequestInternal<BinanceFuturesDownloadLink>(_baseClient.GetUrl(downloadLinkOrdersEndpoint, "fapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceFuturesDownloadLink>(_baseClient.GetUrl("order/asyn/id", "fapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 10).ConfigureAwait(false);
         }
         #endregion
 
@@ -412,7 +382,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 { "endTime", DateTimeConverter.ConvertToMilliseconds(endTime) },
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-            return await _baseClient.SendRequestInternal<BinanceFuturesDownloadIdInfo>(_baseClient.GetUrl(downloadIdTradeEndpoint, "fapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceFuturesDownloadIdInfo>(_baseClient.GetUrl("trade/asyn", "fapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 1500).ConfigureAwait(false);
         }
         #endregion
 
@@ -425,7 +395,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 { "downloadId", downloadId }
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-            return await _baseClient.SendRequestInternal<BinanceFuturesDownloadLink>(_baseClient.GetUrl(downloadLinkTradeEndpoint, "fapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<BinanceFuturesDownloadLink>(_baseClient.GetUrl("trade/asyn/id", "fapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 10).ConfigureAwait(false);
         }
         #endregion
 
@@ -437,7 +407,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceRateLimit>>(_baseClient.GetUrl("rateLimit/order", api, signedVersion), HttpMethod.Get, ct, parameters, true, weight: 30).ConfigureAwait(false);
+            return await _baseClient.SendRequestInternal<IEnumerable<BinanceRateLimit>>(_baseClient.GetUrl("rateLimit/order", "fapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 1).ConfigureAwait(false);
         }
 
         #endregion
