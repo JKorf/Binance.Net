@@ -60,16 +60,16 @@ namespace Binance.Net
         /// Ratelimiter for Spot endpoints with a IP rate limit
         /// </summary>
         public IRateLimitGate SpotApi_Ip { get; } = new RateLimitGate("Rest Spot IP")
-                                                                    .AddGuard(new PartialEndpointTotalLimitGuard("/api/", 6000, TimeSpan.FromMinutes(1)))
-                                                                    .AddGuard(new PartialEndpointIndividualLimitGuard("/sapi/", 12000, TimeSpan.FromMinutes(1)))
+                                                                    .AddGuard(new PartialEndpointTotalLimitGuard("api/", 6000, TimeSpan.FromMinutes(1)))
+                                                                    .AddGuard(new PartialEndpointIndividualLimitGuard("sapi/", 12000, TimeSpan.FromMinutes(1)))
                                                                     .WithWindowType(RateLimitWindowType.Fixed);
 
         /// <summary>
         /// Ratelimiter for Spot endpoints with a Uid rate limit
         /// </summary>
         public IRateLimitGate SpotApi_Uid { get; } = new RateLimitGate("Rest Spot Uid")
-                                                                    .AddGuard(new PartialEndpointIndividualLimitGuard("/api/", 6000, TimeSpan.FromMinutes(1)))
-                                                                    .AddGuard(new PartialEndpointIndividualLimitGuard("/sapi/", 180000, TimeSpan.FromMinutes(1)))
+                                                                    .AddGuard(new PartialEndpointIndividualLimitGuard("api/", 6000, TimeSpan.FromMinutes(1)))
+                                                                    .AddGuard(new PartialEndpointIndividualLimitGuard("sapi/", 180000, TimeSpan.FromMinutes(1)))
                                                                     .WithWindowType(RateLimitWindowType.Fixed);
 
         /// <summary>
