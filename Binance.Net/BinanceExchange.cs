@@ -60,54 +60,55 @@ namespace Binance.Net
         /// Ratelimiter for Spot endpoints with a IP rate limit
         /// </summary>
         public IRateLimitGate SpotApi_Ip { get; } = new RateLimitGate("Rest Spot IP")
-                                                                    .AddGuard(new PartialEndpointTotalLimitGuard("api/", 6000, TimeSpan.FromMinutes(1)))
-                                                                    .AddGuard(new PartialEndpointIndividualLimitGuard("sapi/", 12000, TimeSpan.FromMinutes(1)))
-                                                                    .WithWindowType(RateLimitWindowType.Fixed);
+                                                                    .AddGuard(new PartialEndpointTotalLimitGuard("api/", 6000, TimeSpan.FromMinutes(1)), RateLimitWindowType.Fixed)
+                                                                    .AddGuard(new PartialEndpointIndividualLimitGuard("sapi/", 12000, TimeSpan.FromMinutes(1)), RateLimitWindowType.Fixed)
+                                                                    .WithSingleEndpointRateLimitType(RateLimitWindowType.Fixed);
 
         /// <summary>
         /// Ratelimiter for Spot endpoints with a Uid rate limit
         /// </summary>
         public IRateLimitGate SpotApi_Uid { get; } = new RateLimitGate("Rest Spot Uid")
-                                                                    .AddGuard(new PartialEndpointIndividualLimitGuard("api/", 6000, TimeSpan.FromMinutes(1)))
-                                                                    .AddGuard(new PartialEndpointIndividualLimitGuard("sapi/", 180000, TimeSpan.FromMinutes(1)))
-                                                                    .WithWindowType(RateLimitWindowType.Fixed);
+                                                                    .AddGuard(new PartialEndpointIndividualLimitGuard("api/", 6000, TimeSpan.FromMinutes(1)), RateLimitWindowType.Fixed)
+                                                                    .AddGuard(new PartialEndpointIndividualLimitGuard("sapi/", 180000, TimeSpan.FromMinutes(1)), RateLimitWindowType.Fixed)
+                                                                    .WithSingleEndpointRateLimitType(RateLimitWindowType.Fixed);
 
         /// <summary>
         /// Ratelimiter for Spot websocket connections
         /// </summary>
         public IRateLimitGate SpotApi_Socket { get; } = new RateLimitGate("Socket Spot")
-                                                                    .AddGuard(new HostLimitGuard("wss://stream.binance.com", 5, TimeSpan.FromSeconds(1))) // 5 requests per second
-                                                                    .AddGuard(new ConnectionLimitGuard("wss://stream.binance.com", 300, TimeSpan.FromMinutes(5))) // 300 connection per 5 minutes
-                                                                    .AddGuard(new HostLimitGuard("wss://ws-api.binance.com", 6000, TimeSpan.FromMinutes(1), RateLimitItemType.Request | RateLimitItemType.Connection)) // 6000 request weight per minutes, connections count towards this rate
-                                                                    .AddGuard(new ConnectionLimitGuard("wss://ws-api.binance.com", 300, TimeSpan.FromMinutes(5))) // 300 connections per 5 minutes
-                                                                    .WithWindowType(RateLimitWindowType.Fixed);
+                                                                    .AddGuard(new HostEndpointLimitGuard("wss://stream.binance.com", 5, TimeSpan.FromSeconds(1)), RateLimitWindowType.Fixed) // 5 requests per second
+                                                                    .AddGuard(new ConnectionLimitGuard("wss://stream.binance.com", 300, TimeSpan.FromMinutes(5)), RateLimitWindowType.Fixed) // 300 connection per 5 minutes
+                                                                    .AddGuard(new HostEndpointLimitGuard("wss://ws-api.binance.com", 6000, TimeSpan.FromMinutes(1), RateLimitItemType.Request | RateLimitItemType.Connection), RateLimitWindowType.Fixed) // 6000 request weight per minutes, connections count towards this rate
+                                                                    .AddGuard(new ConnectionLimitGuard("wss://ws-api.binance.com", 300, TimeSpan.FromMinutes(5)), RateLimitWindowType.Fixed) // 300 connections per 5 minutes
+
+                                                                    .WithSingleEndpointRateLimitType(RateLimitWindowType.Fixed);
 
         /// <summary>
         /// Ratelimiter for USD futures endpoints
         /// </summary>
         public IRateLimitGate UsdFuturesApi_Rest { get; } = new RateLimitGate("Rest Usd Futures")
-                                                                    .AddGuard(new TotalLimitGuard(2400, TimeSpan.FromMinutes(1)))
-                                                                    .WithWindowType(RateLimitWindowType.Fixed);
+                                                                    .AddGuard(new TotalLimitGuard(2400, TimeSpan.FromMinutes(1)), RateLimitWindowType.Fixed)
+                                                                    .WithSingleEndpointRateLimitType(RateLimitWindowType.Fixed);
 
         /// <summary>
         /// Ratelimiter for USD futures websocket connections
         /// </summary>
         public IRateLimitGate UsdFuturesApi_Socket { get; } = new RateLimitGate("Socket Usd Futures")
-                                                                    .AddGuard(new HostLimitGuard("wss://fstream.binance.com", 10, TimeSpan.FromSeconds(1))) // 10 requests per second
-                                                                    .WithWindowType(RateLimitWindowType.Fixed);
+                                                                    .AddGuard(new HostLimitGuard("wss://fstream.binance.com", 10, TimeSpan.FromSeconds(1)), RateLimitWindowType.Fixed) // 10 requests per second
+                                                                    .WithSingleEndpointRateLimitType(RateLimitWindowType.Fixed);
 
         /// <summary>
         /// Ratelimiter for Coin futures endpoints
         /// </summary>
         public IRateLimitGate CoinFuturesApi_Rest { get; } = new RateLimitGate("Rest Coin Futures")
-                                                                    .AddGuard(new TotalLimitGuard(2400, TimeSpan.FromMinutes(1)))
-                                                                    .WithWindowType(RateLimitWindowType.Fixed);
+                                                                    .AddGuard(new TotalLimitGuard(2400, TimeSpan.FromMinutes(1)), RateLimitWindowType.Fixed)
+                                                                    .WithSingleEndpointRateLimitType(RateLimitWindowType.Fixed);
 
         /// <summary>
         /// Ratelimiter for Coin futures websocket connections
         /// </summary>
         public IRateLimitGate CoinFuturesApi_Socket { get; } = new RateLimitGate("Socket Coin Futures")
-                                                                    .AddGuard(new HostLimitGuard("wss://dstream.binance.com", 10, TimeSpan.FromSeconds(1))) // 10 requests per second
-                                                                    .WithWindowType(RateLimitWindowType.Fixed);
+                                                                    .AddGuard(new HostLimitGuard("wss://dstream.binance.com", 10, TimeSpan.FromSeconds(1)), RateLimitWindowType.Fixed) // 10 requests per second
+                                                                    .WithSingleEndpointRateLimitType(RateLimitWindowType.Fixed);
     }
 }
