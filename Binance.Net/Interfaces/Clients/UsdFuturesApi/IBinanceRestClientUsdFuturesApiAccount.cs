@@ -199,7 +199,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="listenKey">The listen key to keep alive</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<object>> KeepAliveUserStreamAsync(string listenKey, CancellationToken ct = default);
+        Task<WebCallResult> KeepAliveUserStreamAsync(string listenKey, CancellationToken ct = default);
 
         /// <summary>
         /// Stop the user stream, no updates will be send anymore
@@ -208,7 +208,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="listenKey">The listen key to stop</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<object>> StopUserStreamAsync(string listenKey, CancellationToken ct = default);
+        Task<WebCallResult> StopUserStreamAsync(string listenKey, CancellationToken ct = default);
 
         /// <summary>
         /// Get download id for downloading transaction history

@@ -131,7 +131,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("offset", offset);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/capital/withdraw/history", BinanceExchange.RateLimiters.SpotApi_Uid, 18000, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/capital/withdraw/history", BinanceExchange.RateLimiters.SpotApi_Uid, 0, true, endpointLimitCount: 10, endpointLimitPeriod: TimeSpan.FromSeconds(1));
             return await _baseClient.SendAsync<IEnumerable<BinanceWithdrawal>>(request, parameters, ct).ConfigureAwait(false);
         }
 

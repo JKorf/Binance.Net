@@ -13,6 +13,8 @@ namespace Binance.Net.Clients.GeneralApi
 {
     internal class BinanceRestClientGeneralApiSimpleEarn: IBinanceRestClientGeneralApiSimpleEarn
     {
+        private static readonly RequestDefinitionCache _definitions = new RequestDefinitionCache();
+
         private readonly BinanceRestClientGeneralApi _baseClient;
 
         internal BinanceRestClientGeneralApiSimpleEarn(BinanceRestClientGeneralApi baseClient)
@@ -31,7 +33,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptional("size", pageSize);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceSimpleEarnFlexibleProduct>>(_baseClient.GetUrl("sapi/v1/simple-earn/flexible/list"), HttpMethod.Get, ct, parameters, true, weight: 150, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/simple-earn/flexible/list", BinanceExchange.RateLimiters.SpotApi_Ip, 150, true);
+            return await _baseClient.SendAsync<BinanceQueryRecords<BinanceSimpleEarnFlexibleProduct>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -46,8 +49,9 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptional("current", page);
             parameters.AddOptional("size", pageSize);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
-
-            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceSimpleEarnLockedProduct>>(_baseClient.GetUrl("sapi/v1/simple-earn/locked/list"), HttpMethod.Get, ct, parameters, true, weight: 150, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/simple-earn/locked/list", BinanceExchange.RateLimiters.SpotApi_Ip, 150, true);
+            return await _baseClient.SendAsync<BinanceQueryRecords<BinanceSimpleEarnLockedProduct>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -66,7 +70,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalEnum("sourceAccount", sourceAccount);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            return await _baseClient.SendRequestInternal<BinanceSimpleEarnPurchase>(_baseClient.GetUrl("sapi/v1/simple-earn/flexible/subscribe"), HttpMethod.Post, ct, parameters, true, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/simple-earn/flexible/subscribe", BinanceExchange.RateLimiters.SpotApi_Ip, 1, true, endpointLimitCount: 1, endpointLimitPeriod: TimeSpan.FromSeconds(3));
+            return await _baseClient.SendAsync<BinanceSimpleEarnPurchase>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -85,7 +90,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalEnum("sourceAccount", sourceAccount);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            return await _baseClient.SendRequestInternal<BinanceSimpleEarnPurchase>(_baseClient.GetUrl("sapi/v1/simple-earn/locked/subscribe"), HttpMethod.Post, ct, parameters, true, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/simple-earn/locked/subscribe", BinanceExchange.RateLimiters.SpotApi_Ip, 1, true, endpointLimitCount: 1, endpointLimitPeriod: TimeSpan.FromSeconds(3));
+            return await _baseClient.SendAsync<BinanceSimpleEarnPurchase>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -104,7 +110,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalEnum("destAccount", destinationAccount);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            return await _baseClient.SendRequestInternal<BinanceSimpleEarnRedemption>(_baseClient.GetUrl("sapi/v1/simple-earn/flexible/redeem"), HttpMethod.Post, ct, parameters, true, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/simple-earn/flexible/redeem", BinanceExchange.RateLimiters.SpotApi_Ip, 1, true, endpointLimitCount: 1, endpointLimitPeriod: TimeSpan.FromSeconds(3));
+            return await _baseClient.SendAsync<BinanceSimpleEarnRedemption>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -120,7 +127,8 @@ namespace Binance.Net.Clients.GeneralApi
             };
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            return await _baseClient.SendRequestInternal<BinanceSimpleEarnRedemption>(_baseClient.GetUrl("sapi/v1/simple-earn/locked/redeem"), HttpMethod.Post, ct, parameters, true, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/simple-earn/locked/redeem", BinanceExchange.RateLimiters.SpotApi_Ip, 1, true, endpointLimitCount: 1, endpointLimitPeriod: TimeSpan.FromSeconds(3));
+            return await _baseClient.SendAsync<BinanceSimpleEarnRedemption>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -136,8 +144,9 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptional("current", page);
             parameters.AddOptional("size", pageSize);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
-
-            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceSimpleEarnFlexiblePosition>>(_baseClient.GetUrl("sapi/v1/simple-earn/flexible/position"), HttpMethod.Get, ct, parameters, true, weight: 150, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/simple-earn/flexible/position", BinanceExchange.RateLimiters.SpotApi_Ip, 150, true);
+            return await _baseClient.SendAsync<BinanceQueryRecords<BinanceSimpleEarnFlexiblePosition>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -155,7 +164,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptional("size", pageSize);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceSimpleEarnLockedPosition>>(_baseClient.GetUrl("sapi/v1/simple-earn/locked/position"), HttpMethod.Get, ct, parameters, true, weight: 150, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/simple-earn/locked/position", BinanceExchange.RateLimiters.SpotApi_Ip, 150, true);
+            return await _baseClient.SendAsync<BinanceQueryRecords<BinanceSimpleEarnLockedPosition>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -168,7 +178,8 @@ namespace Binance.Net.Clients.GeneralApi
             var parameters = new ParameterCollection();
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            return await _baseClient.SendRequestInternal<BinanceSimpleEarnAccount>(_baseClient.GetUrl("sapi/v1/simple-earn/account"), HttpMethod.Get, ct, parameters, true, weight: 150, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/simple-earn/account", BinanceExchange.RateLimiters.SpotApi_Ip, 150, true);
+            return await _baseClient.SendAsync<BinanceSimpleEarnAccount>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -188,7 +199,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptional("size", pageSize);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceSimpleEarnFlexibleRecord>>(_baseClient.GetUrl("sapi/v1/simple-earn/flexible/history/subscriptionRecord"), HttpMethod.Get, ct, parameters, true, weight: 150, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/simple-earn/flexible/history/subscriptionRecord", BinanceExchange.RateLimiters.SpotApi_Ip, 150, true);
+            return await _baseClient.SendAsync<BinanceQueryRecords<BinanceSimpleEarnFlexibleRecord>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -207,7 +219,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptional("size", pageSize);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceSimpleEarnLockedRecord>>(_baseClient.GetUrl("sapi/v1/simple-earn/locked/history/subscriptionRecord"), HttpMethod.Get, ct, parameters, true, weight: 150, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/simple-earn/locked/history/subscriptionRecord", BinanceExchange.RateLimiters.SpotApi_Ip, 150, true);
+            return await _baseClient.SendAsync<BinanceQueryRecords<BinanceSimpleEarnLockedRecord>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -227,7 +240,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptional("size", pageSize);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceSimpleEarnFlexibleRedemptionRecord>>(_baseClient.GetUrl("sapi/v1/simple-earn/flexible/history/redemptionRecord"), HttpMethod.Get, ct, parameters, true, weight: 150, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/simple-earn/flexible/history/redemptionRecord", BinanceExchange.RateLimiters.SpotApi_Ip, 150, true);
+            return await _baseClient.SendAsync<BinanceQueryRecords<BinanceSimpleEarnFlexibleRedemptionRecord>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -247,7 +261,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptional("size", pageSize);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceSimpleEarnLockedRedemptionRecord>>(_baseClient.GetUrl("sapi/v1/simple-earn/locked/history/redemptionRecord"), HttpMethod.Get, ct, parameters, true, weight: 150, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/simple-earn/locked/history/redemptionRecord", BinanceExchange.RateLimiters.SpotApi_Ip, 150, true);
+            return await _baseClient.SendAsync<BinanceQueryRecords<BinanceSimpleEarnLockedRedemptionRecord>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -267,7 +282,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptional("size", pageSize);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceSimpleEarnFlexibleRewardRecord>>(_baseClient.GetUrl("sapi/v1/simple-earn/flexible/history/rewardsRecord"), HttpMethod.Get, ct, parameters, true, weight: 150, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/simple-earn/flexible/history/rewardsRecord", BinanceExchange.RateLimiters.SpotApi_Ip, 150, true);
+            return await _baseClient.SendAsync<BinanceQueryRecords<BinanceSimpleEarnFlexibleRewardRecord>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -286,7 +302,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptional("size", pageSize);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceSimpleEarnLockedRewardRecord>>(_baseClient.GetUrl("sapi/v1/simple-earn/locked/history/rewardsRecord"), HttpMethod.Get, ct, parameters, true, weight: 150, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/simple-earn/locked/history/rewardsRecord", BinanceExchange.RateLimiters.SpotApi_Ip, 150, true);
+            return await _baseClient.SendAsync<BinanceQueryRecords<BinanceSimpleEarnLockedRewardRecord>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -303,7 +320,8 @@ namespace Binance.Net.Clients.GeneralApi
             };
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            return await _baseClient.SendRequestInternal<BinanceSimpleEarnResult>(_baseClient.GetUrl("sapi/v1/simple-earn/flexible/setAutoSubscribe"), HttpMethod.Post, ct, parameters, true, weight: 150, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/simple-earn/flexible/setAutoSubscribe", BinanceExchange.RateLimiters.SpotApi_Ip, 150, true);
+            return await _baseClient.SendAsync<BinanceSimpleEarnResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -320,7 +338,8 @@ namespace Binance.Net.Clients.GeneralApi
             };
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            return await _baseClient.SendRequestInternal<BinanceSimpleEarnResult>(_baseClient.GetUrl("sapi/v1/simple-earn/locked/setAutoSubscribe"), HttpMethod.Post, ct, parameters, true, weight: 150, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/simple-earn/locked/setAutoSubscribe", BinanceExchange.RateLimiters.SpotApi_Ip, 150, true);
+            return await _baseClient.SendAsync<BinanceSimpleEarnResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -336,7 +355,8 @@ namespace Binance.Net.Clients.GeneralApi
             };
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            return await _baseClient.SendRequestInternal<BinanceSimpleEarnPersonalQuotaLeft>(_baseClient.GetUrl("sapi/v1/simple-earn/flexible/personalLeftQuota"), HttpMethod.Get, ct, parameters, true, weight: 150, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/simple-earn/flexible/personalLeftQuota", BinanceExchange.RateLimiters.SpotApi_Ip, 150, true);
+            return await _baseClient.SendAsync<BinanceSimpleEarnPersonalQuotaLeft>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -352,7 +372,8 @@ namespace Binance.Net.Clients.GeneralApi
             };
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            return await _baseClient.SendRequestInternal<BinanceSimpleEarnPersonalQuotaLeft>(_baseClient.GetUrl("sapi/v1/simple-earn/locked/personalLeftQuota"), HttpMethod.Get, ct, parameters, true, weight: 150, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/simple-earn/locked/personalLeftQuota", BinanceExchange.RateLimiters.SpotApi_Ip, 150, true);
+            return await _baseClient.SendAsync<BinanceSimpleEarnPersonalQuotaLeft>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -369,7 +390,8 @@ namespace Binance.Net.Clients.GeneralApi
             };
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            return await _baseClient.SendRequestInternal<BinanceSimpleEarnFlexiblePreview>(_baseClient.GetUrl("sapi/v1/simple-earn/flexible/subscriptionPreview"), HttpMethod.Get, ct, parameters, true, weight: 150, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/simple-earn/flexible/subscriptionPreview", BinanceExchange.RateLimiters.SpotApi_Ip, 150, true);
+            return await _baseClient.SendAsync<BinanceSimpleEarnFlexiblePreview>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -387,7 +409,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptional("autoSubscribe", autoSubscribe);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceSimpleEarnLockedPreview>>(_baseClient.GetUrl("sapi/v1/simple-earn/locked/subscriptionPreview"), HttpMethod.Get, ct, parameters, true, weight: 150, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/simple-earn/locked/subscriptionPreview", BinanceExchange.RateLimiters.SpotApi_Ip, 150, true);
+            return await _baseClient.SendAsync<IEnumerable<BinanceSimpleEarnLockedPreview>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -405,7 +428,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptional("size", pageSize);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceSimpleEarnRateRecord>>(_baseClient.GetUrl("sapi/v1/simple-earn/flexible/history/rateHistory"), HttpMethod.Get, ct, parameters, true, weight: 150, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/simple-earn/flexible/history/rateHistory", BinanceExchange.RateLimiters.SpotApi_Ip, 150, true);
+            return await _baseClient.SendAsync<BinanceQueryRecords<BinanceSimpleEarnRateRecord>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -423,7 +447,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptional("size", pageSize);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            return await _baseClient.SendRequestInternal<BinanceQueryRecords<BinanceSimpleEarnCollateralRecord>>(_baseClient.GetUrl("sapi/v1/simple-earn/flexible/history/collateralRecord"), HttpMethod.Get, ct, parameters, true, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/simple-earn/flexible/history/collateralRecord", BinanceExchange.RateLimiters.SpotApi_Ip, 1, true);
+            return await _baseClient.SendAsync<BinanceQueryRecords<BinanceSimpleEarnCollateralRecord>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion

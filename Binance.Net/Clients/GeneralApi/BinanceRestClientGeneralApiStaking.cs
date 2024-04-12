@@ -35,7 +35,7 @@ namespace Binance.Net.Clients.GeneralApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/eth-staking/eth/stake", BinanceExchange.RateLimiters.SpotApi_Ip, 150, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/eth-staking/eth/stake", BinanceExchange.RateLimiters.SpotApi_Ip, 150, true, endpointLimitCount: 1, endpointLimitPeriod: TimeSpan.FromSeconds(3));
             return await _baseClient.SendAsync<BinanceStakingResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -48,7 +48,7 @@ namespace Binance.Net.Clients.GeneralApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/eth-staking/eth/redeem", BinanceExchange.RateLimiters.SpotApi_Ip, 150, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/eth-staking/eth/redeem", BinanceExchange.RateLimiters.SpotApi_Ip, 150, true, endpointLimitCount: 1, endpointLimitPeriod: TimeSpan.FromSeconds(3));
             return await _baseClient.SendAsync<BinanceStakingResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -137,20 +137,7 @@ namespace Binance.Net.Clients.GeneralApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/eth-staking/wbeth/wrap", BinanceExchange.RateLimiters.SpotApi_Ip, 150, true);
-            return await _baseClient.SendAsync<BinanceStakingResult>(request, parameters, ct).ConfigureAwait(false);
-        }
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceStakingResult>> UnwrapBethAsync(decimal quantity, long? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new ParameterCollection()
-            {
-                { "amount", quantity.ToString(CultureInfo.InvariantCulture) }
-            };
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/eth-staking/wbeth/unwrap", BinanceExchange.RateLimiters.SpotApi_Ip, 150, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/eth-staking/wbeth/wrap", BinanceExchange.RateLimiters.SpotApi_Ip, 150, true, endpointLimitCount: 1, endpointLimitPeriod: TimeSpan.FromSeconds(3));
             return await _baseClient.SendAsync<BinanceStakingResult>(request, parameters, ct).ConfigureAwait(false);
         }
 

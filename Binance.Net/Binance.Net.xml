@@ -944,9 +944,6 @@
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiStaking.WrapBethAsync(System.Decimal,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiStaking.UnwrapBethAsync(System.Decimal,System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiStaking.GetBethWrapHistoryAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -7293,16 +7290,6 @@
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#wrap-beth-trade" /></para>
             </summary>
             <param name="quantity">Quantity to wrap</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiStaking.UnwrapBethAsync(System.Decimal,System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Unwarp Beth
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#unwrap-wbeth-trade" /></para>
-            </summary>
-            <param name="quantity">Quantity to unwrap</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>

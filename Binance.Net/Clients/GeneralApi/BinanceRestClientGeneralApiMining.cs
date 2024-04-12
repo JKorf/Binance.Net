@@ -19,6 +19,8 @@ namespace Binance.Net.Clients.GeneralApi
     /// <inheritdoc />
     public class BinanceRestClientGeneralApiMining : IBinanceRestClientGeneralApiMining
     {
+        private static readonly RequestDefinitionCache _definitions = new RequestDefinitionCache();
+
         private readonly BinanceRestClientGeneralApi _baseClient;
 
         internal BinanceRestClientGeneralApiMining(BinanceRestClientGeneralApi baseClient)
@@ -31,8 +33,9 @@ namespace Binance.Net.Clients.GeneralApi
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceMiningCoin>>> GetMiningCoinListAsync(CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
-            var result = await _baseClient.SendRequestInternal<BinanceResult<IEnumerable<BinanceMiningCoin>>>(_baseClient.GetUrl("mining/pub/coinList", "sapi", "1"), HttpMethod.Get, ct, parameters, true, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var parameters = new ParameterCollection();
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/pub/coinList", BinanceExchange.RateLimiters.SpotApi_Ip);
+            var result = await _baseClient.SendAsync<BinanceResult<IEnumerable<BinanceMiningCoin>>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return result.As<IEnumerable<BinanceMiningCoin>>(default);
 
@@ -48,8 +51,9 @@ namespace Binance.Net.Clients.GeneralApi
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceMiningAlgorithm>>> GetMiningAlgorithmListAsync(CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
-            var result = await _baseClient.SendRequestInternal<BinanceResult<IEnumerable<BinanceMiningAlgorithm>>>(_baseClient.GetUrl("mining/pub/algoList", "sapi", "1"), HttpMethod.Get, ct, parameters, true, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var parameters = new ParameterCollection();
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/pub/algoList", BinanceExchange.RateLimiters.SpotApi_Ip);
+            var result = await _baseClient.SendAsync<BinanceResult<IEnumerable<BinanceMiningAlgorithm>>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return result.As<IEnumerable<BinanceMiningAlgorithm>>(default);
 
@@ -70,14 +74,15 @@ namespace Binance.Net.Clients.GeneralApi
             userName.ValidateNotNull(nameof(userName));
             workerName.ValidateNotNull(nameof(workerName));
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 {"algo", algorithm},
                 {"userName", userName},
                 {"workerName", workerName}
             };
 
-            var result = await _baseClient.SendRequestInternal<BinanceResult<IEnumerable<BinanceMinerDetails>>>(_baseClient.GetUrl("mining/worker/detail", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/worker/detail", BinanceExchange.RateLimiters.SpotApi_Ip, 5, true);
+            var result = await _baseClient.SendAsync<BinanceResult<IEnumerable<BinanceMinerDetails>>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return result.As<IEnumerable<BinanceMinerDetails>>(default);
 
@@ -96,7 +101,7 @@ namespace Binance.Net.Clients.GeneralApi
             algorithm.ValidateNotNull(nameof(algorithm));
             userName.ValidateNotNull(nameof(userName));
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 {"algo", algorithm},
                 {"userName", userName}
@@ -107,7 +112,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("sortColumn", sortColumn);
             parameters.AddOptionalParameter("workerStatus", workerStatus == null ? null : JsonConvert.SerializeObject(workerStatus, new MinerStatusConverter(false)));
 
-            var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceMinerList>>(_baseClient.GetUrl("mining/worker/list", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/worker/list", BinanceExchange.RateLimiters.SpotApi_Ip, 5, true);
+            var result = await _baseClient.SendAsync<BinanceResult<BinanceMinerList>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return result.As<BinanceMinerList>(default);
 
@@ -126,7 +132,7 @@ namespace Binance.Net.Clients.GeneralApi
             algorithm.ValidateNotNull(nameof(algorithm));
             userName.ValidateNotNull(nameof(userName));
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 {"algo", algorithm},
                 {"userName", userName}
@@ -138,7 +144,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("startDate", DateTimeConverter.ConvertToMilliseconds(startDate));
             parameters.AddOptionalParameter("endDate", DateTimeConverter.ConvertToMilliseconds(endDate));
 
-            var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceRevenueList>>(_baseClient.GetUrl("mining/payment/list", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/payment/list", BinanceExchange.RateLimiters.SpotApi_Ip, 5, true);
+            var result = await _baseClient.SendAsync<BinanceResult<BinanceRevenueList>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return result.As<BinanceRevenueList>(default);
 
@@ -157,7 +164,7 @@ namespace Binance.Net.Clients.GeneralApi
             algorithm.ValidateNotNull(nameof(algorithm));
             userName.ValidateNotNull(nameof(userName));
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 {"algo", algorithm},
                 {"userName", userName}
@@ -169,7 +176,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("startDate", DateTimeConverter.ConvertToMilliseconds(startDate));
             parameters.AddOptionalParameter("endDate", DateTimeConverter.ConvertToMilliseconds(endDate));
 
-            var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceOtherRevenueList>>(_baseClient.GetUrl("mining/payment/other", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/payment/other", BinanceExchange.RateLimiters.SpotApi_Ip, 5, true);
+            var result = await _baseClient.SendAsync<BinanceResult<BinanceOtherRevenueList>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return result.As<BinanceOtherRevenueList>(default);
 
@@ -187,13 +195,14 @@ namespace Binance.Net.Clients.GeneralApi
             algorithm.ValidateNotNull(nameof(algorithm));
             userName.ValidateNotNull(nameof(userName));
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 {"algo", algorithm},
                 {"userName", userName}
             };
 
-            var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceMiningStatistic>>(_baseClient.GetUrl("mining/statistics/user/status", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/statistics/user/status", BinanceExchange.RateLimiters.SpotApi_Ip, 5, true);
+            var result = await _baseClient.SendAsync<BinanceResult<BinanceMiningStatistic>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return result.As<BinanceMiningStatistic>(default);
 
@@ -211,13 +220,14 @@ namespace Binance.Net.Clients.GeneralApi
             algorithm.ValidateNotNull(nameof(algorithm));
             userName.ValidateNotNull(nameof(userName));
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 {"algo", algorithm},
                 {"userName", userName}
             };
 
-            var result = await _baseClient.SendRequestInternal<BinanceResult<IEnumerable<BinanceMiningAccount>>>(_baseClient.GetUrl("mining/statistics/user/list", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/statistics/user/list", BinanceExchange.RateLimiters.SpotApi_Ip, 5, true);
+            var result = await _baseClient.SendAsync<BinanceResult<IEnumerable<BinanceMiningAccount>>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return result.As<IEnumerable<BinanceMiningAccount>>(default);
 
@@ -232,11 +242,12 @@ namespace Binance.Net.Clients.GeneralApi
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceHashrateResaleList>> GetHashrateResaleListAsync(int? page = null, int? pageSize = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
+            var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("pageIndex", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("pageSize", pageSize?.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceHashrateResaleList>>(_baseClient.GetUrl("mining/hash-transfer/config/details/list", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/hash-transfer/config/details/list", BinanceExchange.RateLimiters.SpotApi_Ip, 5, true);
+            var result = await _baseClient.SendAsync<BinanceResult<BinanceHashrateResaleList>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return result.As<BinanceHashrateResaleList>(default);
 
@@ -254,7 +265,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             userName.ValidateNotNull(nameof(userName));
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 { "configId", configId.ToString(CultureInfo.InvariantCulture) },
                 { "userName", userName }
@@ -263,7 +274,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("pageIndex", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("pageSize", pageSize?.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceHashrateResaleDetails>>(_baseClient.GetUrl("mining/hash-transfer/profit/details", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/hash-transfer/profit/details", BinanceExchange.RateLimiters.SpotApi_Ip, 5, true);
+            var result = await _baseClient.SendAsync<BinanceResult<BinanceHashrateResaleDetails>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return result.As<BinanceHashrateResaleDetails>(default);
 
@@ -284,7 +296,7 @@ namespace Binance.Net.Clients.GeneralApi
             algorithm.ValidateNotNull(nameof(algorithm));
             toUser.ValidateNotNull(nameof(toUser));
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 { "userName", userName },
                 { "algo", algorithm },
@@ -294,7 +306,8 @@ namespace Binance.Net.Clients.GeneralApi
                 { "hashRate", hashRate }
             };
 
-            var result = await _baseClient.SendRequestInternal<BinanceResult<int>>(_baseClient.GetUrl("mining/hash-transfer/config", "sapi", "1"), HttpMethod.Post, ct, parameters, true, weight: 5, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/mining/hash-transfer/config", BinanceExchange.RateLimiters.SpotApi_Ip, 5, true);
+            var result = await _baseClient.SendAsync<BinanceResult<int>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return result.As<int>(default);
 
@@ -313,13 +326,14 @@ namespace Binance.Net.Clients.GeneralApi
         {
             userName.ValidateNotNull(nameof(userName));
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 { "configId", configId },
                 { "userName", userName }
             };
 
-            var result = await _baseClient.SendRequestInternal<BinanceResult<bool>>(_baseClient.GetUrl("mining/hash-transfer/config/cancel", "sapi", "1"), HttpMethod.Post, ct, parameters, true, weight: 5, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/mining/hash-transfer/config/cancel", BinanceExchange.RateLimiters.SpotApi_Ip, 5, true);
+            var result = await _baseClient.SendAsync<BinanceResult<bool>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return result.As<bool>(default);
 
@@ -331,11 +345,11 @@ namespace Binance.Net.Clients.GeneralApi
 
         #endregion
 
-        #region Acquiring CoinName
+        #region Get Mining Account Earnings
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceMiningEarnings>> GetMiningAccountEarningsAsync(string algo, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 { "algo", algo }
             };
@@ -344,7 +358,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("pageIndex", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("pageSize", pageSize?.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestInternal<BinanceResult<BinanceMiningEarnings>>(_baseClient.GetUrl("mining/payment/uid", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 5, gate: BinanceExchange.RateLimiters.SpotApi_Ip).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/mining/payment/uid", BinanceExchange.RateLimiters.SpotApi_Ip, 5, true);
+            var result = await _baseClient.SendAsync<BinanceResult<BinanceMiningEarnings>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return result.As<BinanceMiningEarnings>(default);
 
