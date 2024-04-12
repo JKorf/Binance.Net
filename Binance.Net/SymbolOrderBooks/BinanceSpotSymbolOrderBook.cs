@@ -1,14 +1,9 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Binance.Net.Clients;
+﻿using Binance.Net.Clients;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients;
 using Binance.Net.Objects.Options;
-using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.OrderBook;
-using Microsoft.Extensions.Logging;
 
 namespace Binance.Net.SymbolOrderBooks
 {

@@ -1,8 +1,4 @@
-﻿using System;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
-
-namespace Binance.Net.Objects.Models.Spot.SubAccountData
+﻿namespace Binance.Net.Objects.Models.Spot.SubAccountData
 {
     /// <summary>
     /// Sub-account Status on Margin/Futures

@@ -1,16 +1,9 @@
 ﻿using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures.Socket;
-using CryptoExchange.Net;
 using CryptoExchange.Net.Converters.MessageParsing;
-using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Binance.Net.Objects.Sockets
 {

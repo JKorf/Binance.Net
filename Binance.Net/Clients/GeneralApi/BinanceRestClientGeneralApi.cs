@@ -1,17 +1,7 @@
 ﻿using Binance.Net.Objects;
-using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.Objects;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
 using Binance.Net.Interfaces.Clients.GeneralApi;
 using Binance.Net.Clients.SpotApi;
-using Microsoft.Extensions.Logging;
 using Binance.Net.Objects.Options;
-using System.Linq;
-using Binance.Net.Objects.Models;
 using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.RateLimiting;

@@ -1,8 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
-using System;
-
-namespace Binance.Net.Objects.Models.Spot.ConvertTransfer
+﻿namespace Binance.Net.Objects.Models.Spot.ConvertTransfer
 {
     /// <summary>
     /// Result of a convert transfer operation

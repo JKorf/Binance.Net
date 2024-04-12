@@ -1,10 +1,6 @@
 ﻿using Binance.Net.Enums;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Models.Spot;
-using CryptoExchange.Net.Objects;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Binance.Net.Interfaces.Clients.SpotApi
 {

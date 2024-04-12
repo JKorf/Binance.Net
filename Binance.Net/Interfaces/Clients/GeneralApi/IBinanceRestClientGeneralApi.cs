@@ -1,7 +1,4 @@
-﻿using CryptoExchange.Net.Interfaces;
-using System;
-
-namespace Binance.Net.Interfaces.Clients.GeneralApi
+﻿namespace Binance.Net.Interfaces.Clients.GeneralApi
 {
     /// <summary>
     /// Binance general API endpoints

@@ -2,7 +2,6 @@
 using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 using Binance.Net.Objects.Models.Spot.Socket;
-using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Models.Futures.Socket
 {

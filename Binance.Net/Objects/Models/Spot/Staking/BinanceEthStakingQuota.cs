@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Binance.Net.Objects.Models.Spot.Staking
+﻿namespace Binance.Net.Objects.Models.Spot.Staking
 {
     /// <summary>
     /// Eth staking quota

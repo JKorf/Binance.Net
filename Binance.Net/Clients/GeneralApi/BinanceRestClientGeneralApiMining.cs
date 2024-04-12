@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using Binance.Net.Converters;
+﻿using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients.GeneralApi;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot.Mining;
-using CryptoExchange.Net;
-using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.Objects;
-using Newtonsoft.Json;
 
 namespace Binance.Net.Clients.GeneralApi
 {

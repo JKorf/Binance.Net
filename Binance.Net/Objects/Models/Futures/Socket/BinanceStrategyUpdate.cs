@@ -1,8 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
-using System;
-
-namespace Binance.Net.Objects.Models.Futures.Socket
+﻿namespace Binance.Net.Objects.Models.Futures.Socket
 {
     /// <summary>
     /// Strategy update

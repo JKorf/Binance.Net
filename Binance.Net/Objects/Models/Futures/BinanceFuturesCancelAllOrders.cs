@@ -1,5 +1,3 @@
-using Newtonsoft.Json;
-
 namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>

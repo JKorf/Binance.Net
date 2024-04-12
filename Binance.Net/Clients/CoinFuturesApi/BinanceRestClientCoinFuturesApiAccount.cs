@@ -1,20 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Net.Http;
-using System.Security.Cryptography;
-using System.Threading;
-using System.Threading.Tasks;
-using Binance.Net.Converters;
+﻿using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients.CoinFuturesApi;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures;
 using Binance.Net.Objects.Models.Spot;
-using CryptoExchange.Net;
-using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.Objects;
-using Newtonsoft.Json;
 
 namespace Binance.Net.Clients.CoinFuturesApi
 {

@@ -1,14 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Net.Http;
-using System.Security.Cryptography;
-using System.Threading;
-using System.Threading.Tasks;
-using Binance.Net.Converters;
+﻿using Binance.Net.Converters;
 using Binance.Net.Enums;
-using Binance.Net.ExtensionMethods;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models;
@@ -17,10 +8,6 @@ using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.IsolatedMargin;
 using Binance.Net.Objects.Models.Spot.Margin;
 using Binance.Net.Objects.Models.Spot.PortfolioMargin;
-using CryptoExchange.Net;
-using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.Objects;
-using Newtonsoft.Json;
 
 namespace Binance.Net.Clients.SpotApi
 {

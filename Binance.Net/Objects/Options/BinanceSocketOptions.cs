@@ -1,10 +1,4 @@
 ﻿using CryptoExchange.Net.Objects.Options;
-using System.Collections.Generic;
-using System;
-using CryptoExchange.Net.Interfaces;
-using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.RateLimiting;
-using CryptoExchange.Net.RateLimiting.Guards;
 
 namespace Binance.Net.Objects.Options
 {

@@ -1,5 +1,4 @@
 ﻿using Binance.Net.Interfaces;
-using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Models.Spot
 {

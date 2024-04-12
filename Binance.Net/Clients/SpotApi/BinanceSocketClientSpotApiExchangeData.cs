@@ -1,6 +1,5 @@
 ﻿using Binance.Net.Converters;
 using Binance.Net.Enums;
-using Binance.Net.ExtensionMethods;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
@@ -8,18 +7,7 @@ using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.Socket;
-using CryptoExchange.Net;
-using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Binance.Net.Clients.SpotApi
 {

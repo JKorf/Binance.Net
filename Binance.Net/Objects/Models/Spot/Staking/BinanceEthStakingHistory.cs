@@ -1,8 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
-using System;
-
-namespace Binance.Net.Objects.Models.Spot.Staking
+﻿namespace Binance.Net.Objects.Models.Spot.Staking
 {
     /// <summary>
     /// Staking history

@@ -1,8 +1,6 @@
 ﻿using System.Diagnostics;
-using System.Security.Cryptography;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
-using Binance.Net.ExtensionMethods;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects.Internal;
@@ -11,7 +9,6 @@ using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.Convert;
 using Binance.Net.Objects.Models.Spot.IsolatedMargin;
 using Binance.Net.Objects.Models.Spot.Margin;
-using CryptoExchange.Net.RateLimiting;
 
 namespace Binance.Net.Clients.SpotApi
 {

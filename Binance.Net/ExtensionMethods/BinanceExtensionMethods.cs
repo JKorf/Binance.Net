@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-
-namespace Binance.Net.ExtensionMethods
+﻿namespace Binance.Net.ExtensionMethods
 {
     /// <summary>
     /// Extension methods specific to using the Binance API

@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Binance.Net.Converters;
+﻿using Binance.Net.Converters;
 using Binance.Net.Enums;
-using Binance.Net.ExtensionMethods;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using Binance.Net.Objects.Models;
@@ -15,14 +8,10 @@ using Binance.Net.Objects.Models.Spot.Socket;
 using Binance.Net.Objects.Options;
 using Binance.Net.Objects.Sockets;
 using Binance.Net.Objects.Sockets.Subscriptions;
-using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.MessageParsing;
-using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
 namespace Binance.Net.Clients.UsdFuturesApi
 {

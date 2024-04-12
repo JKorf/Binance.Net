@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Binance.Net.Objects.Models.Spot.PortfolioMargin
+﻿namespace Binance.Net.Objects.Models.Spot.PortfolioMargin
 {
     /// <summary>
     /// Bankruptcy loan info

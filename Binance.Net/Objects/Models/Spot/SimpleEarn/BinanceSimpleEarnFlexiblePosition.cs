@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-
-namespace Binance.Net.Objects.Models.Spot.SimpleEarn
+﻿namespace Binance.Net.Objects.Models.Spot.SimpleEarn
 {
     /// <summary>
     /// Flexible product position info

@@ -1,8 +1,4 @@
-﻿using System;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
-
-namespace Binance.Net.Objects.Models.Spot.Blvt
+﻿namespace Binance.Net.Objects.Models.Spot.Blvt
 {
     /// <summary>
     /// Leveraged token subscription info

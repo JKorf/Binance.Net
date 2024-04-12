@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Binance.Net.Enums;
+﻿using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
@@ -11,13 +6,10 @@ using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Options;
 using Binance.Net.Objects.Sockets;
 using Binance.Net.Objects.Sockets.Subscriptions;
-using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.MessageParsing;
-using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
-using Microsoft.Extensions.Logging;
 
 namespace Binance.Net.Clients.SpotApi
 {

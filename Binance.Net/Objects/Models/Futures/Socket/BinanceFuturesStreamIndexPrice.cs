@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Binance.Net.Objects.Models.Futures.Socket
+﻿namespace Binance.Net.Objects.Models.Futures.Socket
 {
     /// <summary>
     /// Index price update

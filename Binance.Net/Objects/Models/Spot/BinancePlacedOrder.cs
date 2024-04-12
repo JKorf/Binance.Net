@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Binance.Net.Enums;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
-
-namespace Binance.Net.Objects.Models.Spot
+﻿namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// The result of placing a new order

@@ -1,7 +1,4 @@
-﻿using System;
-using Binance.Net.Interfaces;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+﻿using Binance.Net.Interfaces;
 
 namespace Binance.Net.Objects.Models.Spot.Socket
 {

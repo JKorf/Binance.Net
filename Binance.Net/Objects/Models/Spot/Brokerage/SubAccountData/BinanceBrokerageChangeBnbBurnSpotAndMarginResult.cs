@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
+﻿namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
 {
     /// <summary>
     /// Enable Or Disable BNB Burn Spot And Margin Result

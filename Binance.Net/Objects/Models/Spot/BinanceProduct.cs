@@ -1,9 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-
-namespace Binance.Net.Objects.Models.Spot
+﻿namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Info on a product

@@ -1,8 +1,4 @@
 ﻿using Binance.Net.Enums;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Binance.Net.Converters
 {

@@ -1,12 +1,4 @@
-﻿using Binance.Net.Clients.SpotApi;
-using CryptoExchange.Net.Interfaces;
-using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Objects.Options;
-using CryptoExchange.Net.RateLimiting;
-using CryptoExchange.Net.RateLimiting.Guards;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
+﻿using CryptoExchange.Net.Objects.Options;
 
 namespace Binance.Net.Objects.Options
 {

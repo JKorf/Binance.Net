@@ -1,5 +1,4 @@
 ﻿using Binance.Net.Enums;
-using System;
 
 namespace Binance.Net.Interfaces
 {

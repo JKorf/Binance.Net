@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using Binance.Net.Enums;
+﻿using Binance.Net.Enums;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.IsolatedMargin;
 using Binance.Net.Objects.Models.Spot.Margin;
 using Binance.Net.Objects.Models.Spot.PortfolioMargin;
-using CryptoExchange.Net.Objects;
 
 namespace Binance.Net.Interfaces.Clients.SpotApi
 {

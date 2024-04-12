@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Binance.Net.Objects.Models.Futures
+﻿namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// Result from a change margin type request

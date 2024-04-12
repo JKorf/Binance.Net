@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Binance.Net.Objects.Models.Spot.Margin
+﻿namespace Binance.Net.Objects.Models.Spot.Margin
 {
     /// <summary>
     /// Oco info

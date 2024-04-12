@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Binance.Net.Objects.Models.Spot.Futures
+﻿namespace Binance.Net.Objects.Models.Spot.Futures
 {
     /// <summary>
     /// Max quantities

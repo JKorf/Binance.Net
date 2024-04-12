@@ -1,7 +1,4 @@
 ﻿using Binance.Net.Enums;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
-using System;
 
 namespace Binance.Net.Objects.Models.Spot.SimpleEarn
 {

@@ -1,7 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
-
-namespace Binance.Net.Converters
+﻿namespace Binance.Net.Converters
 {
     internal class InterfaceConverter<TImp>: JsonConverter
     {

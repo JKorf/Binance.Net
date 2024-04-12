@@ -1,6 +1,4 @@
 ﻿using Binance.Net.Enums;
-using Newtonsoft.Json;
-using System;
 
 namespace Binance.Net.Converters
 {

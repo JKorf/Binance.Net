@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Binance.Net.Converters;
+﻿using Binance.Net.Converters;
 using Binance.Net.Enums;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
 
 namespace Binance.Net.Objects.Models.Spot.Socket
-{   
+{
     /// <summary>
     /// Order list info
     /// </summary>

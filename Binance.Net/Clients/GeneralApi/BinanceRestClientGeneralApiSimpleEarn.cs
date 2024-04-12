@@ -2,12 +2,6 @@
 using Binance.Net.Interfaces.Clients.GeneralApi;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot.SimpleEarn;
-using CryptoExchange.Net.Objects;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Binance.Net.Clients.GeneralApi
 {

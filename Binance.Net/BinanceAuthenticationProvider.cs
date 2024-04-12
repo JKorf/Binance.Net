@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using CryptoExchange.Net.Authentication;
+﻿using System.Text;
 using CryptoExchange.Net.Clients;
-using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.Objects;
 
 namespace Binance.Net
 {

@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Binance.Net.Objects.Models.Spot.Margin
+﻿namespace Binance.Net.Objects.Models.Spot.Margin
 {
     /// <summary>
     /// The result quantity of getting maxBorrowable or maxTransferable 

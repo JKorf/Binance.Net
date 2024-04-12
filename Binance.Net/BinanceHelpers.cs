@@ -1,9 +1,6 @@
 ﻿using Binance.Net.Enums;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models.Spot;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Linq;
 
 namespace Binance.Net
 {

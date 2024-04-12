@@ -1,12 +1,7 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Binance.Net.Enums;
+﻿using Binance.Net.Enums;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot;
-using Binance.Net.Objects.Models.Spot.Futures;
 using Binance.Net.Objects.Models.Spot.Margin;
-using CryptoExchange.Net.Objects;
 
 namespace Binance.Net.Interfaces.Clients.GeneralApi
 {

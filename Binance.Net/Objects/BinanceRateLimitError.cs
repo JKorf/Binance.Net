@@ -1,6 +1,4 @@
-﻿using CryptoExchange.Net.Objects;
-
-namespace Binance.Net.Objects
+﻿namespace Binance.Net.Objects
 {
     /// <summary>
     /// Binance rate limit error

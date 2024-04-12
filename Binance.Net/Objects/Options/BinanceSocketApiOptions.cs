@@ -1,6 +1,5 @@
 ﻿using Binance.Net.Enums;
 using CryptoExchange.Net.Objects.Options;
-using System;
 
 namespace Binance.Net.Objects.Options
 {

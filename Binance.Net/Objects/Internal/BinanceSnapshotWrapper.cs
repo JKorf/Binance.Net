@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Binance.Net.Objects.Internal
+﻿namespace Binance.Net.Objects.Internal
 {
     internal class BinanceSnapshotWrapper<T>
     {

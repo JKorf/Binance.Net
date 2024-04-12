@@ -1,13 +1,7 @@
 ﻿using Binance.Net.Enums;
-using CryptoExchange.Net.Objects;
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures.Socket;
 using Binance.Net.Objects.Models.Spot.Socket;
-using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects.Sockets;
 
 namespace Binance.Net.Interfaces.Clients.CoinFuturesApi

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Binance.Net.Enums;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+﻿using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.Margin
 {

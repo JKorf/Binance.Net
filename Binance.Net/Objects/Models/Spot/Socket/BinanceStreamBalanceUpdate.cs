@@ -1,8 +1,4 @@
-﻿using System;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
-
-namespace Binance.Net.Objects.Models.Spot.Socket
+﻿namespace Binance.Net.Objects.Models.Spot.Socket
 {
     /// <summary>
     /// Update when asset is withdrawn/deposited 

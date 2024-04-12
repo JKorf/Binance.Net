@@ -1,6 +1,4 @@
-﻿using System;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+﻿using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Models.Spot.Blvt
 {
