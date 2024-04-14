@@ -107,41 +107,6 @@
             Rate limiters configured for the Binance API
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceRateLimiters.SpotApi_Ip">
-            <summary>
-            Ratelimiter for Spot endpoints with a IP rate limit
-            </summary>
-        </member>
-        <member name="P:Binance.Net.BinanceRateLimiters.SpotApi_Uid">
-            <summary>
-            Ratelimiter for Spot endpoints with a Uid rate limit
-            </summary>
-        </member>
-        <member name="P:Binance.Net.BinanceRateLimiters.SpotApi_Socket">
-            <summary>
-            Ratelimiter for Spot websocket connections
-            </summary>
-        </member>
-        <member name="P:Binance.Net.BinanceRateLimiters.UsdFuturesApi_Rest">
-            <summary>
-            Ratelimiter for USD futures endpoints
-            </summary>
-        </member>
-        <member name="P:Binance.Net.BinanceRateLimiters.UsdFuturesApi_Socket">
-            <summary>
-            Ratelimiter for USD futures websocket connections
-            </summary>
-        </member>
-        <member name="P:Binance.Net.BinanceRateLimiters.CoinFuturesApi_Rest">
-            <summary>
-            Ratelimiter for Coin futures endpoints
-            </summary>
-        </member>
-        <member name="P:Binance.Net.BinanceRateLimiters.CoinFuturesApi_Socket">
-            <summary>
-            Ratelimiter for Coin futures websocket connections
-            </summary>
-        </member>
         <member name="T:Binance.Net.BinanceHelpers">
             <summary>
             Helper methods for the Binance API

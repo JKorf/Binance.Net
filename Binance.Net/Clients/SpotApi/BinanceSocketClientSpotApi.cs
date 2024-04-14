@@ -53,7 +53,7 @@ namespace Binance.Net.Clients.SpotApi
             // To prevent issues we keep below this
             MessageSendSizeLimit = 4000;
 
-            RateLimiter = BinanceExchange.RateLimiters.SpotApi_Socket;
+            RateLimiter = BinanceExchange.RateLimiters.SpotSocket;
             ConnectionWeight = 2;
         }
         #endregion

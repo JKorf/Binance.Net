@@ -57,7 +57,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             // To prevent issues we keep below this
             MessageSendSizeLimit = 4000;
 
-            RateLimiter = BinanceExchange.RateLimiters.UsdFuturesApi_Socket;
+            RateLimiter = BinanceExchange.RateLimiters.FuturesSocket;
         }
         #endregion 
 
