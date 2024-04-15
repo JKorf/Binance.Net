@@ -81,7 +81,7 @@
         </member>
         <member name="T:Binance.Net.BinanceExchange">
             <summary>
-            Binance exchange information and helpers
+            Binance exchange information and configuration
             </summary>
         </member>
         <member name="P:Binance.Net.BinanceExchange.ExchangeName">
@@ -91,20 +91,17 @@
         </member>
         <member name="P:Binance.Net.BinanceExchange.RateLimiter">
             <summary>
-            Rate limiter for the Binance API
+            Rate limiter configuration for the Binance API
             </summary>
-        </member>
-        <member name="M:Binance.Net.BinanceExchange.FormatSymbol(System.String,System.String)">
-            <summary>   
-            Format 2 assets to form a symbol accepted by the API
-            </summary>
-            <param name="baseAsset">The base asset</param>
-            <param name="quoteAsset">The quote asset</param>
-            <returns></returns>
         </member>
         <member name="T:Binance.Net.BinanceRateLimiters">
             <summary>
-            Rate limiters configured for the Binance API
+            Rate limiter configuration for the Binance API
+            </summary>
+        </member>
+        <member name="E:Binance.Net.BinanceRateLimiters.RateLimitTriggered">
+            <summary>
+            Event for when a rate limit is triggered
             </summary>
         </member>
         <member name="T:Binance.Net.BinanceHelpers">

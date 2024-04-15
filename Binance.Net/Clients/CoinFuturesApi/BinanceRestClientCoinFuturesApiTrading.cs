@@ -88,7 +88,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("priceProtect", priceProtect?.ToString().ToUpper());
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "dapi/v1/order", BinanceExchange.RateLimiters.FuturesRest, 0, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "dapi/v1/order", BinanceExchange.RateLimiter.FuturesRest, 0, true);
             var result = await _baseClient.SendAsync<BinanceFuturesOrder>(request, parameters, ct).ConfigureAwait(false);
             if (result)
                 _baseClient.InvokeOrderPlaced(new OrderId { SourceObject = result.Data, Id = result.Data.Id.ToString(CultureInfo.InvariantCulture) });
@@ -158,7 +158,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             parameters.Add("batchOrders", JsonConvert.SerializeObject(parameterOrders));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "dapi/v1/batchOrders", BinanceExchange.RateLimiters.FuturesRest, 5, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "dapi/v1/batchOrders", BinanceExchange.RateLimiter.FuturesRest, 5, true);
             var response = await _baseClient.SendAsync<IEnumerable<BinanceFuturesMultipleOrderPlaceResult>>(request, parameters, ct).ConfigureAwait(false);
             if (!response.Success)
                 return response.As<IEnumerable<CallResult<BinanceFuturesOrder>>>(default);
@@ -192,7 +192,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "dapi/v1/order", BinanceExchange.RateLimiters.FuturesRest, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "dapi/v1/order", BinanceExchange.RateLimiter.FuturesRest, 1, true);
             return await _baseClient.SendAsync<BinanceFuturesOrder>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -215,7 +215,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Delete, "dapi/v1/order", BinanceExchange.RateLimiters.FuturesRest, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Delete, "dapi/v1/order", BinanceExchange.RateLimiter.FuturesRest, 1, true);
             var result = await _baseClient.SendAsync<BinanceFuturesOrder>(request, parameters, ct).ConfigureAwait(false);
             if (result)
                 _baseClient.InvokeOrderCanceled(new OrderId { SourceObject = result.Data, Id = result.Data.Id.ToString(CultureInfo.InvariantCulture) });
@@ -235,7 +235,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Delete, "dapi/v1/allOpenOrders", BinanceExchange.RateLimiters.FuturesRest, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Delete, "dapi/v1/allOpenOrders", BinanceExchange.RateLimiter.FuturesRest, 1, true);
             return await _baseClient.SendAsync<BinanceFuturesCancelAllOrders>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -253,7 +253,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "dapi/v1/countdownCancelAll", BinanceExchange.RateLimiters.FuturesRest, 10, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "dapi/v1/countdownCancelAll", BinanceExchange.RateLimiter.FuturesRest, 10, true);
             return await _baseClient.SendAsync<BinanceFuturesCountDownResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -286,7 +286,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Delete, "dapi/v1/batchOrders", BinanceExchange.RateLimiters.FuturesRest, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Delete, "dapi/v1/batchOrders", BinanceExchange.RateLimiter.FuturesRest, 1, true);
             var response = await _baseClient.SendAsync<IEnumerable<BinanceFuturesMultipleOrderCancelResult>>(request, parameters, ct).ConfigureAwait(false);
 
             if (!response.Success)
@@ -321,7 +321,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "dapi/v1/openOrder", BinanceExchange.RateLimiters.FuturesRest, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "dapi/v1/openOrder", BinanceExchange.RateLimiter.FuturesRest, 1, true);
             return await _baseClient.SendAsync<BinanceFuturesOrder>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -337,7 +337,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             parameters.AddOptionalParameter("symbol", symbol);
 
             var weight = symbol == null ? 40 : 1;
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "dapi/v1/openOrders", BinanceExchange.RateLimiters.FuturesRest, weight, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "dapi/v1/openOrders", BinanceExchange.RateLimiter.FuturesRest, weight, true);
             return await _baseClient.SendAsync<IEnumerable<BinanceFuturesOrder>>(request, parameters, ct, weight).ConfigureAwait(false);
         }
 
@@ -359,7 +359,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
             var weight = symbol == null ? 40 : 20;
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "dapi/v1/allOrders", BinanceExchange.RateLimiters.FuturesRest, weight, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "dapi/v1/allOrders", BinanceExchange.RateLimiter.FuturesRest, weight, true);
             return await _baseClient.SendAsync<IEnumerable<BinanceFuturesOrder>>(request, parameters, ct, weight).ConfigureAwait(false);
         }
 
@@ -378,7 +378,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
 
             var weight = symbol == null ? 50 : 20;
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "dapi/v1/forceOrders", BinanceExchange.RateLimiters.FuturesRest, weight, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "dapi/v1/forceOrders", BinanceExchange.RateLimiter.FuturesRest, weight, true);
             return await _baseClient.SendAsync<IEnumerable<BinanceFuturesOrder>>(request, parameters, ct, weight).ConfigureAwait(false);
         }
 
@@ -402,7 +402,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var weight = symbol == null ? 40 : 20;
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "dapi/v1/userTrades", BinanceExchange.RateLimiters.FuturesRest, weight, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "dapi/v1/userTrades", BinanceExchange.RateLimiter.FuturesRest, weight, true);
             return await _baseClient.SendAsync<IEnumerable<BinanceFuturesCoinTrade>>(request, parameters, ct, weight).ConfigureAwait(false);
         }
 
