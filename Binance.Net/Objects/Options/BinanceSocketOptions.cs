@@ -19,18 +19,7 @@ namespace Binance.Net.Objects.Options
         /// <summary>
         /// Options for the Spot API
         /// </summary>
-        public BinanceSocketApiOptions SpotOptions { get; private set; } = new BinanceSocketApiOptions()
-        {
-            //RateLimiter = new RateLimitGate()
-            //    .AddGuard(new HostLimitGuard("stream.binance.com", 5, TimeSpan.FromMinutes(1)))
-            //    .AddGuard(new HostLimitGuard("ws-api.binance.com", 10, TimeSpan.FromMinutes(1)))
-            //    .WithLimitBehaviour(RateLimitingBehaviour.Wait)
-            //{
-            //    new RateLimiter()
-            //        .AddConnectionRateLimit("stream.binance.com", 5, TimeSpan.FromSeconds(1))
-            //        .AddConnectionRateLimit("ws-api.binance.com", 6000, TimeSpan.FromSeconds(60))
-            //}
-        };
+        public BinanceSocketApiOptions SpotOptions { get; private set; } = new BinanceSocketApiOptions();
 
         /// <summary>
         /// Options for the Usd Futures API
