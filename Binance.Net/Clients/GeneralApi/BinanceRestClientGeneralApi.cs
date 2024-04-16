@@ -4,7 +4,7 @@ using Binance.Net.Clients.SpotApi;
 using Binance.Net.Objects.Options;
 using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Clients;
-using CryptoExchange.Net.RateLimiting;
+using CryptoExchange.Net.RateLimiting.Interfaces;
 
 namespace Binance.Net.Clients.GeneralApi
 {
