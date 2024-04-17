@@ -19,6 +19,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         private readonly Action<DataEvent<BinanceStreamOrderList>>? _orderListHandler;
         private readonly Action<DataEvent<BinanceStreamPositionsUpdate>>? _positionHandler;
         private readonly Action<DataEvent<BinanceStreamBalanceUpdate>>? _balanceHandler;
+        private readonly Action<DataEvent<BinanceStreamEvent>>? _listenKeyExpiredHandler;
 
         /// <inheritdoc />
         public override Type? GetMessageType(IMessageAccessor message)
@@ -32,6 +33,8 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                 return typeof(BinanceCombinedStream<BinanceStreamOrderUpdate>);
             if (string.Equals(identifier, "listStatus", StringComparison.Ordinal))
                 return typeof(BinanceCombinedStream<BinanceStreamOrderList>);
+            if (string.Equals(identifier, "listenKeyExpired", StringComparison.Ordinal))
+                return typeof(BinanceCombinedStream<BinanceStreamEvent>);
 
             return null;
         }
@@ -44,12 +47,14 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             Action<DataEvent<BinanceStreamOrderList>>? orderListHandler,
             Action<DataEvent<BinanceStreamPositionsUpdate>>? positionHandler,
             Action<DataEvent<BinanceStreamBalanceUpdate>>? balanceHandler,
+            Action<DataEvent<BinanceStreamEvent>>? listenKeyExpiredHandler,
             bool auth) : base(logger, auth)
         {
             _orderHandler = orderHandler;
             _orderListHandler = orderListHandler;
             _positionHandler = positionHandler;
             _balanceHandler = balanceHandler;
+            _listenKeyExpiredHandler = listenKeyExpiredHandler;
             ListenerIdentifiers = new HashSet<string>(topics);
         }
 
@@ -86,6 +91,8 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                 _orderHandler?.Invoke(message.As(orderUpdate.Data, orderUpdate.Stream, SocketUpdateType.Update));
             else if (message.Data is BinanceCombinedStream<BinanceStreamOrderList> orderListUpdate)
                 _orderListHandler?.Invoke(message.As(orderListUpdate.Data, orderListUpdate.Stream, SocketUpdateType.Update));
+            else if (message.Data is BinanceCombinedStream<BinanceStreamEvent> listenKeyExpired)
+                _listenKeyExpiredHandler?.Invoke(message.As(listenKeyExpired.Data, listenKeyExpired.Stream, SocketUpdateType.Update));
 
             return new CallResult(null);
         }
