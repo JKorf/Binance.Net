@@ -17,10 +17,11 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Gets account information, including balances
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#account-information-user_data" /></para>
         /// </summary>
+        /// <param name="omitZeroBalances">When true only return non-zero balances in the account</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The account information</returns>
-        Task<WebCallResult<BinanceAccountInfo>> GetAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceAccountInfo>> GetAccountInfoAsync(bool? omitZeroBalances = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get a daily account snapshot (balances)

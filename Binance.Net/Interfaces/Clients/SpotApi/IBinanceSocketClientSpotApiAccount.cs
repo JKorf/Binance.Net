@@ -14,9 +14,9 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Gets account information, including balances
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#account-information-user_data" /></para>
         /// </summary>
-        /// <param name="symbols"></param>
+        /// <param name="omitZeroBalances">When true only return non-zero balances in the account</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<BinanceAccountInfo>>> GetAccountInfoAsync(IEnumerable<string>? symbols = null);
+        Task<CallResult<BinanceResponse<BinanceAccountInfo>>> GetAccountInfoAsync(bool? omitZeroBalances = null);
 
         /// <summary>
         /// Get order rate limit status

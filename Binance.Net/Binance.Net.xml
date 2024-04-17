@@ -1063,7 +1063,7 @@
         <member name="T:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetAccountInfoAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetAccountInfoAsync(System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetFiatPaymentHistoryAsync(Binance.Net.Enums.OrderSide,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
@@ -1570,7 +1570,7 @@
         <member name="T:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiAccount">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiAccount.GetAccountInfoAsync(System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiAccount.GetAccountInfoAsync(System.Nullable{System.Boolean})">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiAccount.GetOrderRateLimitsAsync(System.Collections.Generic.IEnumerable{System.String})">
@@ -7729,11 +7729,12 @@
             Binance Spot account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetAccountInfoAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetAccountInfoAsync(System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets account information, including balances
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#account-information-user_data" /></para>
             </summary>
+            <param name="omitZeroBalances">When true only return non-zero balances in the account</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>The account information</returns>
@@ -9595,12 +9596,12 @@
             Binance Spot Account socket requests and subscriptions
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.GetAccountInfoAsync(System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.GetAccountInfoAsync(System.Nullable{System.Boolean})">
             <summary>
             Gets account information, including balances
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#account-information-user_data" /></para>
             </summary>
-            <param name="symbols"></param>
+            <param name="omitZeroBalances">When true only return non-zero balances in the account</param>
             <returns></returns>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.GetOrderRateLimitsAsync(System.Collections.Generic.IEnumerable{System.String})">
