@@ -16395,11 +16395,6 @@
             Network
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceNetwork.ResetAddressStatus">
-            <summary>
-            Reset address status
-            </summary>
-        </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceNetwork.SpecialTips">
             <summary>
             Tips

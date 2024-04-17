@@ -111,10 +111,6 @@
         /// </summary>
         public string Network { get; set; } = string.Empty;
         /// <summary>
-        /// Reset address status
-        /// </summary>
-        public bool ResetAddressStatus { get; set; }
-        /// <summary>
         /// Tips
         /// </summary>
         public string SpecialTips { get; set; } = string.Empty;
