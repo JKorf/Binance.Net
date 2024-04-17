@@ -83,6 +83,7 @@
           <ul class="nav flex-column">
             <li class="nav-item"><a class="nav-link" href="#idocs_installation">Installation</a></li>
             <li class="nav-item"><a class="nav-link" href="#idocs_apiaccess">API Access</a></li>
+            <li class="nav-item"><a class="nav-link" href="#idocs_ratelimit">Rate limiting</a></li>
           </ul>
         </li>
         <li class="nav-item"><a class="nav-link active" href="#idocs_examples">Examples</a>
@@ -181,6 +182,25 @@
 });
 var socketClient = new BinanceSocketClient();</code></pre>
 		  
+        </section>
+		
+		<section id="idocs_ratelimit">
+          <h2>Rate limiting</h2>
+          
+		  <p>By default a rate limiter is enabled which makes sure the server rate limits aren't exceeded. For more info on what the rate limits for the Binance API are see the <a href="https://binance-docs.github.io/apidocs/futures/en/#limits" target="_blank">API docs</a>. Note that rate limiting is only implemented to prevent going over the request rate limit, it does not apply for order limits.</p>
+		  <p>Whether client ratelimiting is enabled in the library and what the behaviour should be when the limit is reached can be controlled with the <code>RatelimiterEnabled</code> and <code>RateLimitingBehaviour</code> client options</p>
+		  <pre><code>services.AddBinance(x =>
+    x.RatelimiterEnabled = true;
+    x.RateLimitingBehaviour = RateLimitingBehaviour.Wait;
+}, x =>
+{
+    x.RatelimiterEnabled = true;
+    x.RateLimitingBehaviour = RateLimitingBehaviour.Wait;
+});</code></pre>
+		  <p>To be notified of when a rate limit is hit the static <code>BinanceExchange.RateLimiter</code> exposes an event which triggers when a rate limit is reached</p>
+		  <pre><code>BinanceExchange.RateLimiter.RateLimitTriggered += (rateLimitEvent) => Console.WriteLine("Limit triggered: " + rateLimitEvent);
+
+// Output: Limit triggered: RateLimitEvent { ApiLimit = Spot Socket, LimitDescription = Limit of 6000 per 00:01:00, RequestDefinition = GET 1, Host = wss://ws-api.binance.com, Current = 5752, RequestWeight = 250, Limit = 6000, TimePeriod = 00:01:00, DelayTime = 00:00:38.7784145, Behaviour = Wait }</code></pre>
         </section>
         		
 		<hr class="divider">

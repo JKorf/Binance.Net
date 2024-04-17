@@ -111,7 +111,7 @@ namespace Binance.Net.Clients.SpotApi
             var result = await QueryAsync(url, query).ConfigureAwait(false);
             if (!result.Success && result.Error is BinanceRateLimitError rle)
             {
-                if (rle.RetryAfter != null && RateLimiter != null && ClientOptions.RatelimiterEnabled)
+                if (rle.RetryAfter != null && RateLimiter != null && ClientOptions.RateLimiterEnabled)
                 {
                     _logger.LogWarning("Ratelimit error from server, pausing requests until {Until}", rle.RetryAfter.Value);
                     await RateLimiter.SetRetryAfterGuardAsync(rle.RetryAfter.Value).ConfigureAwait(false);
