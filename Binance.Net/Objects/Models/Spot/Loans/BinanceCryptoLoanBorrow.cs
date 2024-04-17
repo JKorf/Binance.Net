@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Binance.Net.Objects.Models.Spot.Loans
+﻿namespace Binance.Net.Objects.Models.Spot.Loans
 {
     /// <summary>
     /// Borrow info

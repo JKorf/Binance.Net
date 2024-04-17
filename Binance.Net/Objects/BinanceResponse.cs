@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Binance.Net.Objects.Models.Spot;
-using Newtonsoft.Json;
+﻿using Binance.Net.Objects.Models.Spot;
 
 namespace Binance.Net.Objects
 {

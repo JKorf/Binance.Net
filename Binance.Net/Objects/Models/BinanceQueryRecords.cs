@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Binance.Net.Objects.Models
+﻿namespace Binance.Net.Objects.Models
 {
     /// <summary>
     /// Query results

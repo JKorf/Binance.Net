@@ -1,9 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-
-namespace Binance.Net.Objects.Models.Spot.Margin
+﻿namespace Binance.Net.Objects.Models.Spot.Margin
 {
     /// <summary>
     /// Delist margin schedule

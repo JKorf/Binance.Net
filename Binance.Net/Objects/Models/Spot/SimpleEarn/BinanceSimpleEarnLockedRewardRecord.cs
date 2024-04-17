@@ -1,8 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
-using System;
-
-namespace Binance.Net.Objects.Models.Spot.SimpleEarn
+﻿namespace Binance.Net.Objects.Models.Spot.SimpleEarn
 {
     /// <summary>
     /// Simple Earn locked product reward record

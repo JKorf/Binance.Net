@@ -3,12 +3,7 @@ using Binance.Net.Objects;
 using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.Socket;
-using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Binance.Net.Interfaces.Clients.SpotApi
 {

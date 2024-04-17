@@ -1,8 +1,4 @@
-﻿using System;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
-
-namespace Binance.Net.Objects.Models.Spot
+﻿namespace Binance.Net.Objects.Models.Spot
 {
     internal class BinanceCheckTime
     {

@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Binance.Net.Objects.Models.Spot.SimpleEarn
+﻿namespace Binance.Net.Objects.Models.Spot.SimpleEarn
 {
     /// <summary>
     /// Simple Earn personal quota left

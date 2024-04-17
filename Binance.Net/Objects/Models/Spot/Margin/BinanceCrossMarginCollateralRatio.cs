@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Binance.Net.Objects.Models.Spot.Margin
+﻿namespace Binance.Net.Objects.Models.Spot.Margin
 {
     /// <summary>
     /// Cross margin collateral info

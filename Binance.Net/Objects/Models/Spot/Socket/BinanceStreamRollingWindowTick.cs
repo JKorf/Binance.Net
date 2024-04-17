@@ -1,8 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
-using System;
-
-namespace Binance.Net.Objects.Models.Spot.Socket
+﻿namespace Binance.Net.Objects.Models.Spot.Socket
 {
     /// <summary>
     /// Rolling window tick info

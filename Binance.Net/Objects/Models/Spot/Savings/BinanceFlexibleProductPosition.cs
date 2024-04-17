@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-
-namespace Binance.Net.Objects.Models.Spot.Lending
+﻿namespace Binance.Net.Objects.Models.Spot.Lending
 {
     /// <summary>
     /// Flexible product position

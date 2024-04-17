@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Binance.Net.Objects.Models
+﻿namespace Binance.Net.Objects.Models
 {
     /// <summary>
     /// Query result

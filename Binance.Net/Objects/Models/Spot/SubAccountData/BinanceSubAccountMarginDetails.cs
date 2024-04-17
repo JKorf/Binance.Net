@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Binance.Net.Objects.Models.Spot.Margin;
-using Newtonsoft.Json;
+﻿using Binance.Net.Objects.Models.Spot.Margin;
 
 namespace Binance.Net.Objects.Models.Spot.SubAccountData
 {

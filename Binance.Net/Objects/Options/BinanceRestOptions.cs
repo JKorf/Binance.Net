@@ -1,9 +1,4 @@
-﻿using CryptoExchange.Net.Interfaces;
-using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Objects.Options;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
+﻿using CryptoExchange.Net.Objects.Options;
 
 namespace Binance.Net.Objects.Options
 {
@@ -29,16 +24,7 @@ namespace Binance.Net.Objects.Options
         /// <summary>
         /// Spot API options
         /// </summary>
-        public BinanceRestApiOptions SpotOptions { get; private set; } = new BinanceRestApiOptions
-        {
-            RateLimiters = new List<IRateLimiter>
-                {
-                    new RateLimiter()
-                        .AddPartialEndpointLimit("/api/", 6000, TimeSpan.FromMinutes(1))
-                        .AddPartialEndpointLimit("/sapi/", 180000, TimeSpan.FromMinutes(1))
-                        .AddEndpointLimit("/api/v3/order", 100, TimeSpan.FromSeconds(10), HttpMethod.Post, true)
-                }
-        };
+        public BinanceRestApiOptions SpotOptions { get; private set; } = new BinanceRestApiOptions();
 
         /// <summary>
         /// Usd futures API options

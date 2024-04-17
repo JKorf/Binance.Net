@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Binance.Net.Objects.Models.Spot.Lending
+﻿namespace Binance.Net.Objects.Models.Spot.Lending
 {
     /// <summary>
     /// Redemption quota left

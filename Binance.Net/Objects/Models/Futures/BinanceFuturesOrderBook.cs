@@ -1,7 +1,4 @@
-﻿using System;
-using Binance.Net.Objects.Models.Spot;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+﻿using Binance.Net.Objects.Models.Spot;
 
 namespace Binance.Net.Objects.Models.Futures
 {

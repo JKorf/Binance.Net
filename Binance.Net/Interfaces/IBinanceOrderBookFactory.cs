@@ -1,6 +1,4 @@
 ﻿using Binance.Net.Objects.Options;
-using CryptoExchange.Net.Interfaces;
-using System;
 
 namespace Binance.Net.Interfaces
 {

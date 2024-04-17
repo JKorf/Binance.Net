@@ -1,13 +1,6 @@
 ﻿using Binance.Net.Objects.Internal;
-using CryptoExchange.Net;
-using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Binance.Net.Objects.Sockets.Subscriptions
 {

@@ -1,21 +1,11 @@
-﻿using System.Threading.Tasks;
-using CryptoExchange.Net;
-using CryptoExchange.Net.Objects;
-using System.Collections.Generic;
-using Binance.Net.Objects.Models.Spot;
-using CryptoExchange.Net.Converters;
+﻿using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Enums;
 using Binance.Net.Converters;
-using Newtonsoft.Json;
-using System.Globalization;
-using System;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
-using Microsoft.Extensions.Logging;
-using Binance.Net.ExtensionMethods;
 
 namespace Binance.Net.Clients.SpotApi
-{ 
+{
     /// <inheritdoc />
     public class BinanceSocketClientSpotApiTrading : IBinanceSocketClientSpotApiTrading
     {

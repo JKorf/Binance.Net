@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using Binance.Net.Enums;
-using Binance.Net.Objects.Models;
+﻿using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot.Staking;
-using CryptoExchange.Net.Objects;
 
 namespace Binance.Net.Interfaces.Clients.GeneralApi
 {
@@ -113,16 +107,6 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BinanceStakingResult>> WrapBethAsync(decimal quantity, long? receiveWindow = null, CancellationToken ct = default);
-
-        /// <summary>
-        /// Unwarp Beth
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#unwrap-wbeth-trade" /></para>
-        /// </summary>
-        /// <param name="quantity">Quantity to unwrap</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        Task<WebCallResult<BinanceStakingResult>> UnwrapBethAsync(decimal quantity, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get wrap history

@@ -1,24 +1,14 @@
 ﻿using Binance.Net.Enums;
 using Binance.Net.Objects;
-using CryptoExchange.Net.Authentication;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models.Futures;
 using Binance.Net.Interfaces.Clients.CoinFuturesApi;
 using CryptoExchange.Net.CommonObjects;
-using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Interfaces.CommonClients;
 using Binance.Net.Objects.Options;
-using Binance.Net.Objects.Models;
 using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.RateLimiting.Interfaces;
 
 namespace Binance.Net.Clients.CoinFuturesApi
 {
@@ -220,11 +210,23 @@ namespace Binance.Net.Clients.CoinFuturesApi
             return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputQuoteQuantity, outputPrice, outputStopPrice);
         }
 
-        internal async Task<WebCallResult<T>> SendRequestInternal<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken,
-            Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
-            ArrayParametersSerialization? arraySerialization = null, int weight = 1, bool ignoreRateLimit = false) where T : class
+        internal async Task<WebCallResult> SendAsync(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null)
         {
-            var result = await SendRequestAsync<T>(uri, method, cancellationToken, parameters, signed, null, postPosition, arraySerialization, weight, ignoreRatelimit: ignoreRateLimit).ConfigureAwait(false);
+            var result = await base.SendAsync(BaseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
+            if (!result && result.Error!.Code == -1021 && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
+            {
+                _logger.Log(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
+                _timeSyncState.LastSyncTime = DateTime.MinValue;
+            }
+            return result;
+        }
+
+        internal Task<WebCallResult<T>> SendAsync<T>(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null) where T : class
+            => SendToAddressAsync<T>(BaseAddress, definition, parameters, cancellationToken, weight);
+
+        internal async Task<WebCallResult<T>> SendToAddressAsync<T>(string baseAddress, RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null) where T : class
+        {
+            var result = await base.SendAsync<T>(baseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
             if (!result && result.Error!.Code == -1021 && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
             {
                 _logger.Log(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
@@ -625,7 +627,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         }
 
         /// <inheritdoc />
-        protected override Error ParseRateLimitResponse(int httpStatusCode, IEnumerable<KeyValuePair<string, IEnumerable<string>>> responseHeaders, IMessageAccessor accessor)
+        protected override ServerRateLimitError ParseRateLimitResponse(int httpStatusCode, IEnumerable<KeyValuePair<string, IEnumerable<string>>> responseHeaders, IMessageAccessor accessor)
         {
             var error = GetRateLimitError(accessor);
             var retryAfterHeader = responseHeaders.SingleOrDefault(r => r.Key.Equals("Retry-After", StringComparison.InvariantCultureIgnoreCase));
@@ -635,6 +637,12 @@ namespace Binance.Net.Clients.CoinFuturesApi
             var value = retryAfterHeader.Value.First();
             if (!int.TryParse(value, out var seconds))
                 return error;
+
+            if (seconds == 0)
+            {
+                var now = DateTime.UtcNow;
+                seconds = (int)(new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, 0, DateTimeKind.Utc).AddMinutes(1) - now).TotalSeconds + 1;
+            }
 
             error.RetryAfter = DateTime.UtcNow.AddSeconds(seconds);
             return error;

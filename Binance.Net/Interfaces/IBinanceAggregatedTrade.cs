@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Binance.Net.Interfaces
+﻿namespace Binance.Net.Interfaces
 {
     /// <summary>
     /// Compressed aggregated trade information. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.

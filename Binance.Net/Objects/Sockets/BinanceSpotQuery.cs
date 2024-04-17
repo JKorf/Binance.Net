@@ -1,10 +1,6 @@
 ﻿using Binance.Net.Objects.Internal;
-using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Binance.Net.Objects.Sockets
 {
@@ -21,7 +17,7 @@ namespace Binance.Net.Objects.Sockets
         {
             if (message.Data.Status != 200)
             {
-                if (message.Data.Status == 419 || message.Data.Status == 428)
+                if (message.Data.Status == 418 || message.Data.Status == 429)
                 {
                     // Rate limit error 
                     return new CallResult<T>(new BinanceRateLimitError(message.Data.Error!.Code, message.Data.Error!.Message, null)

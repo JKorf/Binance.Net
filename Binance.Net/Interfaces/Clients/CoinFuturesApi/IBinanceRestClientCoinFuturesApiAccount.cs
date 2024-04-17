@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using Binance.Net.Enums;
+﻿using Binance.Net.Enums;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures;
-using CryptoExchange.Net.Objects;
 
 namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 {
@@ -172,7 +167,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// <param name="listenKey">The listen key to keep alive</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<object>> KeepAliveUserStreamAsync(string listenKey, CancellationToken ct = default);
+        Task<WebCallResult> KeepAliveUserStreamAsync(string listenKey, CancellationToken ct = default);
 
         /// <summary>
         /// Stop the user stream, no updates will be send anymore
@@ -181,6 +176,6 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// <param name="listenKey">The listen key to stop</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<object>> StopUserStreamAsync(string listenKey, CancellationToken ct = default);
+        Task<WebCallResult> StopUserStreamAsync(string listenKey, CancellationToken ct = default);
     }
 }

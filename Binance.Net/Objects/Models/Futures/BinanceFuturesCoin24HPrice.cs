@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Binance.Net.Objects.Models.Futures
+﻿namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// Price statistics of the last 24 hours

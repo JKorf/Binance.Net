@@ -1,10 +1,7 @@
 ﻿using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients;
 using Binance.Net.Objects.Options;
-using CryptoExchange.Net.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using System;
 
 namespace Binance.Net.SymbolOrderBooks
 {

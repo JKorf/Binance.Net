@@ -1,6 +1,4 @@
-﻿using CryptoExchange.Net.Interfaces;
-
-namespace Binance.Net.Interfaces.Clients.SpotApi
+﻿namespace Binance.Net.Interfaces.Clients.SpotApi
 {
     /// <summary>
     /// Spot API socket subscriptions and requests

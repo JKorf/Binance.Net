@@ -6,10 +6,7 @@ using Binance.Net.Interfaces.Clients.CoinFuturesApi;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using Binance.Net.Objects.Options;
-using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
-using Microsoft.Extensions.Logging;
-using System;
 
 namespace Binance.Net.Clients
 {

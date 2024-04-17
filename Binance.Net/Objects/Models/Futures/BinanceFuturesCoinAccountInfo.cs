@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
-
-namespace Binance.Net.Objects.Models.Futures
+﻿namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// Account info

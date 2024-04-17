@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Binance.Net.Objects.Models;
+﻿using Binance.Net.Objects.Models;
 
 namespace Binance.Net.Interfaces
 {

@@ -4,10 +4,7 @@ using Binance.Net.Interfaces.Clients;
 using Binance.Net.Objects.Options;
 using Binance.Net.SymbolOrderBooks;
 using CryptoExchange.Net.Clients;
-using CryptoExchange.Net.Interfaces;
-using System;
 using System.Net;
-using System.Net.Http;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

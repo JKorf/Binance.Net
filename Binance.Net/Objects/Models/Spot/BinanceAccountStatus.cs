@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Binance.Net.Objects.Models.Spot
+﻿namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Account status info

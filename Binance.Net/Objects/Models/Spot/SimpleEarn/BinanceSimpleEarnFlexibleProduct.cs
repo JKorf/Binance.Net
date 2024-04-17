@@ -1,9 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-
-namespace Binance.Net.Objects.Models.Spot.SimpleEarn
+﻿namespace Binance.Net.Objects.Models.Spot.SimpleEarn
 {
     /// <summary>
     /// Simple earn product info

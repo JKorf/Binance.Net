@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Binance.Net.Interfaces
+﻿namespace Binance.Net.Interfaces
 {
     /// <summary>
     /// Recent trade data

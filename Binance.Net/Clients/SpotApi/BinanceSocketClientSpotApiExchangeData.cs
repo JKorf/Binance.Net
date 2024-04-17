@@ -1,6 +1,5 @@
 ﻿using Binance.Net.Converters;
 using Binance.Net.Enums;
-using Binance.Net.ExtensionMethods;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
@@ -8,18 +7,7 @@ using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.Socket;
-using CryptoExchange.Net;
-using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -96,7 +84,7 @@ namespace Binance.Net.Clients.SpotApi
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("symbol", symbol);
             parameters.AddOptionalParameter("limit", limit);
-            int weight = limit <= 100 ? 2 : limit <= 500 ? 10 : limit <= 1000 ? 20 : 100;
+            int weight = limit <= 100 ? 5 : limit <= 500 ? 25 : limit <= 1000 ? 50 : 250;
             return await _client.QueryAsync<BinanceOrderBook>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"depth", parameters, weight: weight).ConfigureAwait(false);
         }
 
@@ -110,7 +98,7 @@ namespace Binance.Net.Clients.SpotApi
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("symbol", symbol);
             parameters.AddOptionalParameter("limit", limit);
-            return await _client.QueryAsync<IEnumerable<BinanceRecentTradeQuote>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"trades.recent", parameters, weight: 2).ConfigureAwait(false);
+            return await _client.QueryAsync<IEnumerable<BinanceRecentTradeQuote>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"trades.recent", parameters, weight: 25).ConfigureAwait(false);
         }
 
         #endregion
@@ -124,7 +112,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddParameter("symbol", symbol);
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("fromId", fromId);
-            return await _client.QueryAsync<IEnumerable<BinanceRecentTradeQuote>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"trades.historical", parameters, false, weight: 10).ConfigureAwait(false);
+            return await _client.QueryAsync<IEnumerable<BinanceRecentTradeQuote>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"trades.historical", parameters, false, weight: 25).ConfigureAwait(false);
         }
 
         #endregion

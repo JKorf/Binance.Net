@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-
-namespace Binance.Net.Objects.Internal
+﻿namespace Binance.Net.Objects.Internal
 {
     internal class BinanceSocketMessage
     {

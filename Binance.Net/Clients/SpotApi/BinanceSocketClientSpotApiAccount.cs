@@ -1,11 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using System;
-using System.Threading.Tasks;
-using System.Threading;
-using Binance.Net.Objects.Models.Spot.Socket;
-using CryptoExchange.Net;
-using CryptoExchange.Net.Objects;
-using System.Collections.Generic;
+﻿using Binance.Net.Objects.Models.Spot.Socket;
 using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
@@ -87,7 +80,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #endregion
 
-        #region Start User Stream
+        #region Stop User Stream
 
         /// <inheritdoc />
         public async Task<CallResult<BinanceResponse<object>>> StopUserStreamAsync(string listenKey)

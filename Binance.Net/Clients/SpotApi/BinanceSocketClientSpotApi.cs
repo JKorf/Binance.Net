@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Binance.Net.Enums;
+﻿using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
@@ -11,13 +6,10 @@ using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Options;
 using Binance.Net.Objects.Sockets;
 using Binance.Net.Objects.Sockets.Subscriptions;
-using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.MessageParsing;
-using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
-using Microsoft.Extensions.Logging;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -60,6 +52,8 @@ namespace Binance.Net.Clients.SpotApi
             // See https://dev.binance.vision/t/socket-live-subscribing-server-delay/9645/2
             // To prevent issues we keep below this
             MessageSendSizeLimit = 4000;
+
+            RateLimiter = BinanceExchange.RateLimiter.SpotSocket;
         }
         #endregion
 
@@ -88,7 +82,7 @@ namespace Binance.Net.Clients.SpotApi
             return base.SubscribeAsync(url.AppendPath("stream"), subscription, ct);
         }
 
-        internal Task<CallResult<BinanceResponse<T>>> QueryAsync<T>(string url, string method, Dictionary<string, object> parameters, bool authenticated = false, bool sign = false, int weight = 1)
+        internal async Task<CallResult<BinanceResponse<T>>> QueryAsync<T>(string url, string method, Dictionary<string, object> parameters, bool authenticated = false, bool sign = false, int weight = 1)
         {
             if (authenticated)
             {
@@ -114,7 +108,17 @@ namespace Binance.Net.Clients.SpotApi
             };
 
             var query = new BinanceSpotQuery<BinanceResponse<T>>(request, false, weight);
-            return QueryAsync(url, query);
+            var result = await QueryAsync(url, query).ConfigureAwait(false);
+            if (!result.Success && result.Error is BinanceRateLimitError rle)
+            {
+                if (rle.RetryAfter != null && RateLimiter != null && ClientOptions.RateLimiterEnabled)
+                {
+                    _logger.LogWarning("Ratelimit error from server, pausing requests until {Until}", rle.RetryAfter.Value);
+                    await RateLimiter.SetRetryAfterGuardAsync(rle.RetryAfter.Value).ConfigureAwait(false);
+                }
+            }
+
+            return result;
         }
 
         /// <inheritdoc />

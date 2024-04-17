@@ -1,5 +1,4 @@
 ﻿using Binance.Net.Objects;
-using CryptoExchange.Net.Objects;
 
 namespace Binance.Net
 {

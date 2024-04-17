@@ -1,8 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
-using System;
-
-namespace Binance.Net.Objects.Models.Spot.Loans
+﻿namespace Binance.Net.Objects.Models.Spot.Loans
 {
     /// <summary>
     /// Open borrow order info
