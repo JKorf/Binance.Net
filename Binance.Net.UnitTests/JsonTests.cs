@@ -66,6 +66,7 @@ namespace Binance.Net.UnitTests
                     { "PlaceOrderAsync", new List<string> { "price" } },
                     { "PlaceMarginOrderAsync", new List<string> { "price" } },
                     { "GetMarginOrdersAsync", new List<string> { "price" } },
+                    { "PlaceOcoOrderListAsync", new List<string> { "workingTime" } },
                 },
                 parametersToSetNull: new[] { "limit", "quoteQuantity", "fromId", "cancelClientOrderId", "orderId" });
         }

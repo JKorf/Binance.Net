@@ -1435,6 +1435,9 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.PlaceOcoOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.PlaceOcoOrderListAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,Binance.Net.Enums.SpotOrderType,Binance.Net.Enums.SpotOrderType,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.CancelOcoOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -1733,6 +1736,9 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiTrading.PlaceOcoOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode})">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiTrading.PlaceOcoOrderListAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,Binance.Net.Enums.SpotOrderType,Binance.Net.Enums.SpotOrderType,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode})">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiTrading.GetOcoOrderAsync(System.Nullable{System.Int64},System.String)">
@@ -9078,7 +9084,7 @@
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.PlaceOcoOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
-            Places a new OCO(One cancels other) order
+            DEPRECATED, USE PlaceOcoOrderListAsync INSTEAD
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#new-oco-trade" /></para>
             </summary>
             <param name="symbol">The symbol the order is for</param>
@@ -9102,6 +9108,37 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Order list info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.PlaceOcoOrderListAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,Binance.Net.Enums.SpotOrderType,Binance.Net.Enums.SpotOrderType,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Place a new OCO order. An OCO has 2 legs called the above leg and below leg. One of the legs must be a LimitMaker order and the other leg must be StopLoss or StopLossLimit order.
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#new-order-list-oco-trade" /></para>
+            </summary>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="side">The order side (buy/sell)</param>
+            <param name="quantity">The quantity of the symbol</param>
+            <param name="aboveOrderType">The above leg order type</param>
+            <param name="belowOrderType">The below leg order type</param>
+            <param name="aboveClientOrderId">Client order id for the above leg</param>
+            <param name="aboveIcebergQuantity">Ice berg quantity for the above leg</param>
+            <param name="abovePrice">Limit price for the above leg</param>
+            <param name="aboveStopPrice">Stop price for the above leg</param>
+            <param name="aboveTrailingDelta">Trailing delta for the above leg</param>
+            <param name="aboveTimeInForce">Time in force for the above leg</param>
+            <param name="aboveStrategyId">Strategy id for the above leg</param>
+            <param name="aboveStrategyType">Strategy type for the above leg</param>
+            <param name="belowClientOrderId">Client order id for the below leg</param>
+            <param name="belowIcebergQuantity">Ice berg quantity for the below leg</param>
+            <param name="belowPrice">Limit price for the below leg</param>
+            <param name="belowStopPrice">Stop price for the below leg</param>
+            <param name="belowTrailingDelta">Trailing delta for the below leg</param>
+            <param name="belowTimeInForce">Time in force for the below leg</param>
+            <param name="belowStrategyId">Strategy id for the below leg</param>
+            <param name="belowStrategyType">Strategy type for the below leg</param>
+            <param name="selfTradePreventionMode">Self trade prevention mode</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.CancelOcoOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
@@ -10161,7 +10198,7 @@
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.PlaceOcoOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode})">
             <summary>
-            Places a new OCO(One cancels other) order
+            DEPRECATED, USE PlaceOcoOrderListAsync INSTEAD
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#place-new-oco-trade" /></para>
             </summary>
             <param name="symbol">The symbol the order is for</param>
@@ -10185,6 +10222,35 @@
             <param name="stopIcebergQty">Iceberg quantity of the stop order</param>
             <param name="selfTradePreventionMode">Self trade prevention mode</param>
             <returns>Order list info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.PlaceOcoOrderListAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,Binance.Net.Enums.SpotOrderType,Binance.Net.Enums.SpotOrderType,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode})">
+            <summary>
+            Place a new OCO order. An OCO has 2 legs called the above leg and below leg. One of the legs must be a LimitMaker order and the other leg must be StopLoss or StopLossLimit order.
+            <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#place-new-order-list-oco-trade" /></para>
+            </summary>
+            <param name="symbol">The symbol the order is for</param>
+            <param name="side">The order side (buy/sell)</param>
+            <param name="quantity">The quantity of the symbol</param>
+            <param name="aboveOrderType">The above leg order type</param>
+            <param name="belowOrderType">The below leg order type</param>
+            <param name="aboveClientOrderId">Client order id for the above leg</param>
+            <param name="aboveIcebergQuantity">Ice berg quantity for the above leg</param>
+            <param name="abovePrice">Limit price for the above leg</param>
+            <param name="aboveStopPrice">Stop price for the above leg</param>
+            <param name="aboveTrailingDelta">Trailing delta for the above leg</param>
+            <param name="aboveTimeInForce">Time in force for the above leg</param>
+            <param name="aboveStrategyId">Strategy id for the above leg</param>
+            <param name="aboveStrategyType">Strategy type for the above leg</param>
+            <param name="belowClientOrderId">Client order id for the below leg</param>
+            <param name="belowIcebergQuantity">Ice berg quantity for the below leg</param>
+            <param name="belowPrice">Limit price for the below leg</param>
+            <param name="belowStopPrice">Stop price for the below leg</param>
+            <param name="belowTrailingDelta">Trailing delta for the below leg</param>
+            <param name="belowTimeInForce">Time in force for the below leg</param>
+            <param name="belowStrategyId">Strategy id for the below leg</param>
+            <param name="belowStrategyType">Strategy type for the below leg</param>
+            <param name="selfTradePreventionMode">Self trade prevention mode</param>
+            <returns></returns>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode})">
             <summary>
@@ -12484,6 +12550,11 @@
         <member name="P:Binance.Net.Objects.Models.BinanceOrderBase.UpdateTime">
             <summary>
             The time the order was last updated
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.BinanceOrderBase.WorkingTime">
+            <summary>
+            When the order started working
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.BinanceOrderBase.IsWorking">

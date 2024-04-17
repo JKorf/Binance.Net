@@ -113,6 +113,12 @@ namespace Binance.Net.Objects.Models
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime? UpdateTime { get; set; }
         /// <summary>
+        /// When the order started working
+        /// </summary>
+        [JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("workingTime")]
+        public DateTime? WorkingTime { get; set; }
+        /// <summary>
         /// Is working
         /// </summary>
         public bool? IsWorking { get; set; }

@@ -112,7 +112,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<CallResult<BinanceResponse<IEnumerable<BinanceTrade>>>> GetUserTradesAsync(string symbol, long? orderId = null, long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null);
 
         /// <summary>
-        /// Places a new OCO(One cancels other) order
+        /// DEPRECATED, USE PlaceOcoOrderListAsync INSTEAD
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#place-new-oco-trade" /></para>
         /// </summary>
         /// <param name="symbol">The symbol the order is for</param>
@@ -137,6 +137,60 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="selfTradePreventionMode">Self trade prevention mode</param>
         /// <returns>Order list info</returns>
         Task<CallResult<BinanceResponse<BinanceOrderOcoList>>> PlaceOcoOrderAsync(string symbol, OrderSide side, decimal quantity, decimal price, decimal stopPrice, decimal? stopLimitPrice = null, string? listClientOrderId = null, string? limitClientOrderId = null, string? stopClientOrderId = null, decimal? limitIcebergQuantity = null, decimal? stopIcebergQuantity = null, TimeInForce? stopLimitTimeInForce = null, int? trailingDelta = null, int? limitStrategyId = null, int? limitStrategyType = null, decimal? limitIcebergQty = null, int? stopStrategyId = null, int? stopStrategyType = null, int? stopIcebergQty = null, SelfTradePreventionMode? selfTradePreventionMode = null);
+
+        /// <summary>
+        /// Place a new OCO order. An OCO has 2 legs called the above leg and below leg. One of the legs must be a LimitMaker order and the other leg must be StopLoss or StopLossLimit order.
+        /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#place-new-order-list-oco-trade" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="side">The order side (buy/sell)</param>
+        /// <param name="quantity">The quantity of the symbol</param>
+        /// <param name="aboveOrderType">The above leg order type</param>
+        /// <param name="belowOrderType">The below leg order type</param>
+        /// <param name="aboveClientOrderId">Client order id for the above leg</param>
+        /// <param name="aboveIcebergQuantity">Ice berg quantity for the above leg</param>
+        /// <param name="abovePrice">Limit price for the above leg</param>
+        /// <param name="aboveStopPrice">Stop price for the above leg</param>
+        /// <param name="aboveTrailingDelta">Trailing delta for the above leg</param>
+        /// <param name="aboveTimeInForce">Time in force for the above leg</param>
+        /// <param name="aboveStrategyId">Strategy id for the above leg</param>
+        /// <param name="aboveStrategyType">Strategy type for the above leg</param>
+        /// <param name="belowClientOrderId">Client order id for the below leg</param>
+        /// <param name="belowIcebergQuantity">Ice berg quantity for the below leg</param>
+        /// <param name="belowPrice">Limit price for the below leg</param>
+        /// <param name="belowStopPrice">Stop price for the below leg</param>
+        /// <param name="belowTrailingDelta">Trailing delta for the below leg</param>
+        /// <param name="belowTimeInForce">Time in force for the below leg</param>
+        /// <param name="belowStrategyId">Strategy id for the below leg</param>
+        /// <param name="belowStrategyType">Strategy type for the below leg</param>
+        /// <param name="selfTradePreventionMode">Self trade prevention mode</param>
+        /// <returns></returns>
+        Task<CallResult<BinanceResponse<BinanceOrderOcoList>>> PlaceOcoOrderListAsync(
+            string symbol,
+            OrderSide side,
+            decimal quantity,
+            SpotOrderType aboveOrderType,
+            SpotOrderType belowOrderType,
+
+            string? aboveClientOrderId = null,
+            decimal? aboveIcebergQuantity = null,
+            decimal? abovePrice = null,
+            decimal? aboveStopPrice = null,
+            decimal? aboveTrailingDelta = null,
+            TimeInForce? aboveTimeInForce = null,
+            int? aboveStrategyId = null,
+            int? aboveStrategyType = null,
+
+            string? belowClientOrderId = null,
+            decimal? belowIcebergQuantity = null,
+            decimal? belowPrice = null,
+            decimal? belowStopPrice = null,
+            decimal? belowTrailingDelta = null,
+            TimeInForce? belowTimeInForce = null,
+            int? belowStrategyId = null,
+            int? belowStrategyType = null,
+
+            SelfTradePreventionMode? selfTradePreventionMode = null);
 
         /// <summary>
         /// Places a new order

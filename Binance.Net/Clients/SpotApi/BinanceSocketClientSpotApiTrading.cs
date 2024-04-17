@@ -236,6 +236,9 @@ namespace Binance.Net.Clients.SpotApi
             int? stopIcebergQty = null,
             SelfTradePreventionMode? selfTradePreventionMode = null)
         {
+            limitClientOrderId = limitClientOrderId ?? ExchangeHelpers.AppendRandomString(_client._brokerId, 32);
+            stopClientOrderId = stopClientOrderId ?? ExchangeHelpers.AppendRandomString(_client._brokerId, 32);
+
             var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
@@ -264,6 +267,72 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("stopLimitTimeInForce", stopLimitTimeInForce == null ? null : JsonConvert.SerializeObject(stopLimitTimeInForce, new TimeInForceConverter(false)));
 
             return await _client.QueryAsync<BinanceOrderOcoList>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"orderList.place", parameters, true, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region New OCO
+
+        /// <inheritdoc />
+        public async Task<CallResult<BinanceResponse<BinanceOrderOcoList>>> PlaceOcoOrderListAsync(
+            string symbol,
+            OrderSide side,
+            decimal quantity,
+            SpotOrderType aboveOrderType,
+            SpotOrderType belowOrderType,
+
+            string? aboveClientOrderId = null,
+            decimal? aboveIcebergQuantity = null,
+            decimal? abovePrice = null,
+            decimal? aboveStopPrice = null,
+            decimal? aboveTrailingDelta = null,
+            TimeInForce? aboveTimeInForce = null,
+            int? aboveStrategyId = null,
+            int? aboveStrategyType = null,
+
+            string? belowClientOrderId = null,
+            decimal? belowIcebergQuantity = null,
+            decimal? belowPrice = null,
+            decimal? belowStopPrice = null,
+            decimal? belowTrailingDelta = null,
+            TimeInForce? belowTimeInForce = null,
+            int? belowStrategyId = null,
+            int? belowStrategyType = null,
+
+            SelfTradePreventionMode? selfTradePreventionMode = null)
+        {
+            aboveClientOrderId = aboveClientOrderId ?? ExchangeHelpers.AppendRandomString(_client._brokerId, 32);
+            belowClientOrderId = belowClientOrderId ?? ExchangeHelpers.AppendRandomString(_client._brokerId, 32);
+
+            var parameters = new ParameterCollection
+            {
+                { "symbol", symbol },
+                { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
+                { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
+                { "aboveType", EnumConverter.GetString(aboveOrderType) },
+                { "belowType", EnumConverter.GetString(belowOrderType) },
+            };
+
+            parameters.AddOptional("aboveClientOrderId", aboveClientOrderId);
+            parameters.AddOptional("aboveIcebergQty", aboveIcebergQuantity);
+            parameters.AddOptional("abovePrice", abovePrice);
+            parameters.AddOptional("aboveStopPrice", aboveStopPrice);
+            parameters.AddOptional("aboveTrailingDelta", aboveTrailingDelta);
+            parameters.AddOptionalEnum("aboveTimeInForce", aboveTimeInForce);
+            parameters.AddOptional("aboveStrategyId", aboveStrategyId);
+            parameters.AddOptional("aboveStrategyType", aboveStrategyType);
+
+            parameters.AddOptional("belowClientOrderId", belowClientOrderId);
+            parameters.AddOptional("belowIcebergQty", belowIcebergQuantity);
+            parameters.AddOptional("belowPrice", belowPrice);
+            parameters.AddOptional("belowStopPrice", belowStopPrice);
+            parameters.AddOptional("belowTrailingDelta", belowTrailingDelta);
+            parameters.AddOptionalEnum("belowTimeInForce", belowTimeInForce);
+            parameters.AddOptional("belowStrategyId", belowStrategyId);
+            parameters.AddOptional("belowStrategyType", belowStrategyType);
+
+            parameters.AddOptionalEnum("selfTradePreventionMode", selfTradePreventionMode);
+            return await _client.QueryAsync<BinanceOrderOcoList>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"orderList.place.oco", parameters, true, true).ConfigureAwait(false);
         }
 
         #endregion

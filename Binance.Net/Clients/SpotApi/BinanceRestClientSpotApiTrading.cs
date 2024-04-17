@@ -343,6 +343,9 @@ namespace Binance.Net.Clients.SpotApi
             price = rulesCheck.Price!.Value;
             stopPrice = rulesCheck.StopPrice!.Value;
 
+            limitClientOrderId = limitClientOrderId ?? ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+            stopClientOrderId = stopClientOrderId ?? ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+
             var parameters = new ParameterCollection
             {
                 { "symbol", symbol },
@@ -368,6 +371,76 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "api/v3/order/oco", BinanceExchange.RateLimiter.SpotRestUid, 2, true);
+            return await _baseClient.SendAsync<BinanceOrderOcoList>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region New OCO
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceOrderOcoList>> PlaceOcoOrderListAsync(
+            string symbol,
+            OrderSide side,
+            decimal quantity,
+            SpotOrderType aboveOrderType,
+            SpotOrderType belowOrderType,
+
+            string? aboveClientOrderId = null,
+            decimal? aboveIcebergQuantity = null,
+            decimal? abovePrice = null,
+            decimal? aboveStopPrice = null,
+            decimal? aboveTrailingDelta = null,
+            TimeInForce? aboveTimeInForce = null,
+            int? aboveStrategyId = null,
+            int? aboveStrategyType = null,
+
+            string? belowClientOrderId = null,
+            decimal? belowIcebergQuantity = null,
+            decimal? belowPrice = null,
+            decimal? belowStopPrice = null,
+            decimal? belowTrailingDelta = null,
+            TimeInForce? belowTimeInForce = null,
+            int? belowStrategyId = null,
+            int? belowStrategyType = null,
+
+            SelfTradePreventionMode? selfTradePreventionMode = null,
+            int? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            aboveClientOrderId = aboveClientOrderId ?? ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+            belowClientOrderId = belowClientOrderId ?? ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+
+            var parameters = new ParameterCollection
+            {
+                { "symbol", symbol },
+                { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
+                { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
+                { "aboveType", EnumConverter.GetString(aboveOrderType) },
+                { "belowType", EnumConverter.GetString(belowOrderType) },
+            };
+
+            parameters.AddOptional("aboveClientOrderId", aboveClientOrderId);
+            parameters.AddOptional("aboveIcebergQty", aboveIcebergQuantity);
+            parameters.AddOptional("abovePrice", abovePrice);
+            parameters.AddOptional("aboveStopPrice", aboveStopPrice);
+            parameters.AddOptional("aboveTrailingDelta", aboveTrailingDelta);
+            parameters.AddOptionalEnum("aboveTimeInForce", aboveTimeInForce);
+            parameters.AddOptional("aboveStrategyId", aboveStrategyId);
+            parameters.AddOptional("aboveStrategyType", aboveStrategyType);
+
+            parameters.AddOptional("belowClientOrderId", belowClientOrderId);
+            parameters.AddOptional("belowIcebergQty", belowIcebergQuantity);
+            parameters.AddOptional("belowPrice", belowPrice);
+            parameters.AddOptional("belowStopPrice", belowStopPrice);
+            parameters.AddOptional("belowTrailingDelta", belowTrailingDelta);
+            parameters.AddOptionalEnum("belowTimeInForce", belowTimeInForce);
+            parameters.AddOptional("belowStrategyId", belowStrategyId);
+            parameters.AddOptional("belowStrategyType", belowStrategyType);
+
+            parameters.AddOptionalEnum("selfTradePreventionMode", selfTradePreventionMode);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "api/v3/orderList/oco", BinanceExchange.RateLimiter.SpotRestUid, 1, true);
             return await _baseClient.SendAsync<BinanceOrderOcoList>(request, parameters, ct).ConfigureAwait(false);
         }
 
