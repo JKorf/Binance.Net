@@ -20,7 +20,6 @@
                 "minConfirm": 1,  // min number for balance confirmation
                 "name": "BEP2",
                 "network": "BNB",            
-                "resetAddressStatus": false,
                 "specialTips": "Both a MEMO and an Address are required to successfully deposit your BEP2-BTCB tokens to Binance.",
                 "unLockConfirm": 0,  // confirmation number for balance unlock 
                 "withdrawDesc": "Wallet Maintenance, Withdrawal Suspended", // shown only when "withdrawEnable" is false.
@@ -40,7 +39,6 @@
                 "minConfirm": 1, 
                 "name": "BTC",
                 "network": "BTC",
-                "resetAddressStatus": false,
                 "specialTips": "",
                 "unLockConfirm": 2,
                 "withdrawEnable": true,
