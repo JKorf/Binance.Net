@@ -15725,6 +15725,11 @@
             If OCO(One Cancels Other) orders are allowed
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.OTOAllowed">
+            <summary>
+            If OTO(One Triggers Other) orders are allowed
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.QuoteOrderQuantityMarketAllowed">
             <summary>
             Whether or not it is allowed to specify the quantity of a market order in the quote asset

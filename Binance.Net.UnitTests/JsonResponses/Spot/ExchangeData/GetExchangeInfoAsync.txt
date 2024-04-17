@@ -31,15 +31,19 @@
       ],
       "icebergAllowed": true,
       "ocoAllowed": true,
+      "quoteOrderQtyMarketAllowed": true,
+      "allowTrailingStop": false,
+      "cancelReplaceAllowed": false,
       "isSpotTradingAllowed": true,
       "isMarginTradingAllowed": true,
       "filters": [
         //These are defined in the Filters section.
         //All filters are optional
       ],
-      "permissions": [
-         "SPOT",
-         "MARGIN"
+      "permissions": [],
+      "defaultSelfTradePreventionMode": "NONE",
+      "allowedSelfTradePreventionModes": [
+        "NONE"
       ]
     }
   ]

@@ -66,6 +66,11 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         public bool OCOAllowed { get; set; }
         /// <summary>
+        /// If OTO(One Triggers Other) orders are allowed
+        /// </summary>
+        [JsonProperty("otoAllowed")]
+        public bool OTOAllowed { get; set; }
+        /// <summary>
         /// Whether or not it is allowed to specify the quantity of a market order in the quote asset
         /// </summary>
         [JsonProperty("quoteOrderQtyMarketAllowed")]
@@ -85,6 +90,11 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonProperty(ItemConverterType = typeof(EnumConverter), ItemConverterParameters = new object[] { false, false })]
         public IEnumerable<AccountType> Permissions { get; set; } = Array.Empty<AccountType>();
+        
+        // To be implemented and tested
+        //[JsonProperty("permissionSets")]
+        //public IEnumerable<IEnumerable<AccountType>> PermissionSets { get; set; } = Array.Empty<IEnumerable<AccountType>>();
+
         /// <summary>
         /// Filters for order on this symbol
         /// </summary>
