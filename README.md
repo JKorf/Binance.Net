@@ -154,6 +154,17 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 9.9.0 - 18 Apr 2024
+    * Updated CryptoExchange.Net, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
+    * Added handling of RetryAfter response for both rest and socket API
+    * Added omitZeroBalances parameter to SpotApi.Account.GetAccountInfoAsync
+    * Added new PlaceOcoOrderListAsync as replacement for deprecated PlaceOcoOrderAsync endpoint
+    * Added listenKeyExpired event handler for Spot websocket user data subscription
+    * Added OTOAllowed to SpotApi.ExchangeData.GetExchangeInfoAsync symbol response model
+    * Moved GetTradeFeeAsync from SpotApi.ExchangeData to SpotApi.Account
+    * Changed WebCallResult<object> responses to WebCallResult
+    * Removed deprecated endpoints
+
 * Version 9.8.1 - 03 Apr 2024
     * Added SpotApi.Account.GetWalletBalancesAsync endpoint
     * Fixed SpotApi.Account.GetMarginLoansAsync isolatedSymbol parameter not getting send
