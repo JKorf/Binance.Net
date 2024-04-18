@@ -155,7 +155,7 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 
 ## Release notes
 * Version 9.9.0 - 18 Apr 2024
-    * Updated CryptoExchange.Net, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
+    * Updated CryptoExchange.Net to 7.3.1, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
 	* Re-implemented client side rate limiting
     * Added handling of RetryAfter response for both rest and socket API
     * Added omitZeroBalances parameter to SpotApi.Account.GetAccountInfoAsync
