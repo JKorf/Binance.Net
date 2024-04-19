@@ -343,8 +343,8 @@ namespace Binance.Net.Clients.SpotApi
             price = rulesCheck.Price!.Value;
             stopPrice = rulesCheck.StopPrice!.Value;
 
-            limitClientOrderId = limitClientOrderId ?? ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
-            stopClientOrderId = stopClientOrderId ?? ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+            limitClientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+            stopClientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
 
             var parameters = new ParameterCollection
             {
@@ -408,8 +408,8 @@ namespace Binance.Net.Clients.SpotApi
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
-            aboveClientOrderId = aboveClientOrderId ?? ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
-            belowClientOrderId = belowClientOrderId ?? ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+            aboveClientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+            belowClientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
 
             var parameters = new ParameterCollection
             {
@@ -767,6 +767,9 @@ namespace Binance.Net.Clients.SpotApi
             quantity = rulesCheck.Quantity!.Value;
             price = rulesCheck.Price!.Value;
             stopPrice = rulesCheck.StopPrice!.Value;
+
+            limitClientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+            stopClientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
 
             var parameters = new ParameterCollection
             {
@@ -1162,6 +1165,8 @@ namespace Binance.Net.Clients.SpotApi
             long? receiveWindow = null,
             CancellationToken ct = default)
         {
+            clientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+
             var parameters = new ParameterCollection()
             {
                 { "symbol", symbol },

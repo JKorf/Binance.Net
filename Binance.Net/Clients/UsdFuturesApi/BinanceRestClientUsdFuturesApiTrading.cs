@@ -140,6 +140,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
             int i = 0;
             foreach (var order in orders)
             {
+                string clientOrderId = order.NewClientOrderId ?? ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+
                 var orderParameters = new ParameterCollection()
                 {
                     { "symbol", order.Symbol },
@@ -149,7 +151,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 };
 
                 orderParameters.AddOptionalParameter("quantity", order.Quantity?.ToString(CultureInfo.InvariantCulture));
-                orderParameters.AddOptionalParameter("newClientOrderId", order.NewClientOrderId);
+                orderParameters.AddOptionalParameter("newClientOrderId", clientOrderId);
                 orderParameters.AddOptionalParameter("price", order.Price?.ToString(CultureInfo.InvariantCulture));
                 orderParameters.AddOptionalParameter("timeInForce", order.TimeInForce == null ? null : JsonConvert.SerializeObject(order.TimeInForce, new TimeInForceConverter(false)));
                 orderParameters.AddOptionalParameter("positionSide", order.PositionSide == null ? null : JsonConvert.SerializeObject(order.PositionSide, new PositionSideConverter(false)));
@@ -533,6 +535,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
             long? receiveWindow = null,
             CancellationToken ct = default)
         {
+            clientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+
             var parameters = new ParameterCollection()
             {
                 { "symbol", symbol },
@@ -565,6 +569,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
             long? receiveWindow = null,
             CancellationToken ct = default)
         {
+            clientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+
             var parameters = new ParameterCollection()
             {
                 { "symbol", symbol },

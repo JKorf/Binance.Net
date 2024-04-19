@@ -161,6 +161,8 @@ namespace Binance.Net.Clients.SpotApi
             int? strategyId = null,
             int? strategyType = null)
         {
+            string clientOrderId = newClientOrderId ?? ExchangeHelpers.AppendRandomString(_client._brokerId, 32);
+
             var parameters = new Dictionary<string, object>
             {
                 { "symbol", symbol },
@@ -169,7 +171,7 @@ namespace Binance.Net.Clients.SpotApi
                 { "cancelReplaceMode", EnumConverter.GetString(cancelReplaceMode) }
             };
             parameters.AddOptionalParameter("cancelNewClientOrderId", newCancelClientOrderId);
-            parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
+            parameters.AddOptionalParameter("newClientOrderId", clientOrderId);
             parameters.AddOptionalParameter("cancelOrderId", cancelOrderId);
             parameters.AddOptionalParameter("strategyId", strategyId);
             parameters.AddOptionalParameter("strategyType", strategyType);
@@ -236,8 +238,8 @@ namespace Binance.Net.Clients.SpotApi
             int? stopIcebergQty = null,
             SelfTradePreventionMode? selfTradePreventionMode = null)
         {
-            limitClientOrderId = limitClientOrderId ?? ExchangeHelpers.AppendRandomString(_client._brokerId, 32);
-            stopClientOrderId = stopClientOrderId ?? ExchangeHelpers.AppendRandomString(_client._brokerId, 32);
+            limitClientOrderId ??= ExchangeHelpers.AppendRandomString(_client._brokerId, 32);
+            stopClientOrderId ??= ExchangeHelpers.AppendRandomString(_client._brokerId, 32);
 
             var parameters = new Dictionary<string, object>
             {
@@ -301,8 +303,8 @@ namespace Binance.Net.Clients.SpotApi
 
             SelfTradePreventionMode? selfTradePreventionMode = null)
         {
-            aboveClientOrderId = aboveClientOrderId ?? ExchangeHelpers.AppendRandomString(_client._brokerId, 32);
-            belowClientOrderId = belowClientOrderId ?? ExchangeHelpers.AppendRandomString(_client._brokerId, 32);
+            aboveClientOrderId ??= ExchangeHelpers.AppendRandomString(_client._brokerId, 32);
+            belowClientOrderId ??= ExchangeHelpers.AppendRandomString(_client._brokerId, 32);
 
             var parameters = new ParameterCollection
             {
