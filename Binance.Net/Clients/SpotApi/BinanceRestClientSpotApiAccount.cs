@@ -452,7 +452,7 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<WebCallResult<string>> StartUserStreamAsync(CancellationToken ct = default)
         {
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "api/v3/userDataStream", BinanceExchange.RateLimiter.SpotRestIp, 2, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "api/v3/userDataStream", BinanceExchange.RateLimiter.SpotRestIp, 2);
             var result = await _baseClient.SendAsync<BinanceListenKey>(request, null, ct).ConfigureAwait(false);
             return result.As(result.Data?.ListenKey!);
         }
@@ -471,7 +471,7 @@ namespace Binance.Net.Clients.SpotApi
                 { "listenKey", listenKey }
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Put, "api/v3/userDataStream", BinanceExchange.RateLimiter.SpotRestIp, 2, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Put, "api/v3/userDataStream", BinanceExchange.RateLimiter.SpotRestIp, 2);
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -488,7 +488,7 @@ namespace Binance.Net.Clients.SpotApi
                 { "listenKey", listenKey }
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Delete, "api/v3/userDataStream", BinanceExchange.RateLimiter.SpotRestIp, 2, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Delete, "api/v3/userDataStream", BinanceExchange.RateLimiter.SpotRestIp, 2);
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -932,7 +932,7 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<WebCallResult<string>> StartMarginUserStreamAsync(CancellationToken ct = default)
         {
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/userDataStream", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/userDataStream", BinanceExchange.RateLimiter.SpotRestIp, 1);
             var result = await _baseClient.SendAsync<BinanceListenKey>(request, null, ct).ConfigureAwait(false);
             return result.As(result.Data?.ListenKey!);
         }
@@ -951,7 +951,7 @@ namespace Binance.Net.Clients.SpotApi
                 { "listenKey", listenKey },
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Put, "sapi/v1/userDataStream", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Put, "sapi/v1/userDataStream", BinanceExchange.RateLimiter.SpotRestIp, 1);
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -968,7 +968,7 @@ namespace Binance.Net.Clients.SpotApi
                 { "listenKey", listenKey }
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Delete, "sapi/v1/userDataStream", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Delete, "sapi/v1/userDataStream", BinanceExchange.RateLimiter.SpotRestIp, 1);
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -984,8 +984,8 @@ namespace Binance.Net.Clients.SpotApi
                 {"symbol", symbol}
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/userDataStream/isolated", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
-            var result = await _baseClient.SendAsync<BinanceListenKey>(request, null, ct).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/userDataStream/isolated", BinanceExchange.RateLimiter.SpotRestIp, 1);
+            var result = await _baseClient.SendAsync<BinanceListenKey>(request, parameters, ct).ConfigureAwait(false);
             return result.As(result.Data?.ListenKey!);
         }
 
@@ -1003,7 +1003,7 @@ namespace Binance.Net.Clients.SpotApi
                 {"symbol", symbol}
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Put, "sapi/v1/userDataStream/isolated", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Put, "sapi/v1/userDataStream/isolated", BinanceExchange.RateLimiter.SpotRestIp, 1);
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -1020,7 +1020,7 @@ namespace Binance.Net.Clients.SpotApi
                 {"symbol", symbol}
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Delete, "sapi/v1/userDataStream/isolated", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Delete, "sapi/v1/userDataStream/isolated", BinanceExchange.RateLimiter.SpotRestIp, 1);
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
