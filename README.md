@@ -154,6 +154,16 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 9.9.2 - 19 Apr 2024
+    * Added CoinFuturesApi.Account.GetDownloadIdForTransactionHistoryAsync endpoint
+    * Added CoinFuturesApi.Account.GetDownloadLinkForTransactionHistoryAsync endpoint
+    * Added SpotApi.ExchangeData.GetTradingDayTickerAsync endpoint
+    * Added SpotApi.ExchangeData.GetTradingDayTickersAsync endpoint
+    * Added computeFeeRates parameter to SpotApi.Trading.PlaceTestOrderAsync
+    * Updated SpotApi.Trading.PlaceTestOrderAsync response
+    * Updated broker reference setting
+    * Updated CryptoExchange.Net to 7.3.2 fixing issue which caused some endpoints with specific rate limits to fail
+
 * Version 9.9.1 - 19 Apr 2024
     * Fixed Start/KeepAlive/Stop UserStream operations returning error
 
