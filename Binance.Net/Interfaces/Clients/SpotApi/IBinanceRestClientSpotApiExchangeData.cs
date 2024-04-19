@@ -207,6 +207,26 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<IEnumerable<IBinanceTick>>> GetTickersAsync(CancellationToken ct = default);
 
         /// <summary>
+        /// Get price change stats for a trading day
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#trading-day-ticker" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol</param>
+        /// <param name="timeZone">The timezone offset, for example -3 for UTC-3 or 5 for UTC+5</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceTradingDayTicker>> GetTradingDayTickerAsync(string symbol, string? timeZone = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get price change stats for a trading day
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#trading-day-ticker" /></para>
+        /// </summary>
+        /// <param name="symbols">The symbols</param>
+        /// <param name="timeZone">The timezone offset, for example -3 for UTC-3 or 5 for UTC+5</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BinanceTradingDayTicker>>> GetTradingDayTickersAsync(IEnumerable<string> symbols, string? timeZone = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Get data based on the last x time, specified as windowSize
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#rolling-window-price-change-statistics" /></para>
         /// </summary>

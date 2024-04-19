@@ -1345,6 +1345,12 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetTickersAsync(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetTradingDayTickerAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetTradingDayTickersAsync(System.Collections.Generic.IEnumerable{System.String},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetRollingWindowTickerAsync(System.String,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -8752,6 +8758,26 @@
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>List of data over the last 24 hours</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetTradingDayTickerAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get price change stats for a trading day
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#trading-day-ticker" /></para>
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="timeZone">The timezone offset, for example -3 for UTC-3 or 5 for UTC+5</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetTradingDayTickersAsync(System.Collections.Generic.IEnumerable{System.String},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get price change stats for a trading day
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#trading-day-ticker" /></para>
+            </summary>
+            <param name="symbols">The symbols</param>
+            <param name="timeZone">The timezone offset, for example -3 for UTC-3 or 5 for UTC+5</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetRollingWindowTickerAsync(System.String,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">
             <summary>
@@ -16239,6 +16265,86 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTradeFee.TakerFee">
             <summary>
             The fee for trades where you're the taker
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceTradingDayTicker">
+            <summary>
+            Price change stats for the current trading day
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTradingDayTicker.Symbol">
+            <summary>
+            The symbol the price is for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTradingDayTicker.PriceChange">
+            <summary>
+            The actual price change in the last 24 hours
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTradingDayTicker.PriceChangePercent">
+            <summary>
+            The price change in percentage in the last 24 hours
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTradingDayTicker.WeightedAveragePrice">
+            <summary>
+            The weighted average price in the last 24 hours
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTradingDayTicker.LastPrice">
+            <summary>
+            The most recent trade price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTradingDayTicker.OpenPrice">
+            <summary>
+            The open price 24 hours ago
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTradingDayTicker.HighPrice">
+            <summary>
+            The highest price in the last 24 hours
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTradingDayTicker.LowPrice">
+            <summary>
+            The lowest price in the last 24 hours
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTradingDayTicker.Volume">
+            <summary>
+            Volume in base asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTradingDayTicker.QuoteVolume">
+            <summary>
+            Volume in quote asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTradingDayTicker.OpenTime">
+            <summary>
+            Time at which this stats opened
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTradingDayTicker.CloseTime">
+            <summary>
+            Time at which this stats closed
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTradingDayTicker.FirstTradeId">
+            <summary>
+            The first trade ID in the last 24 hours
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTradingDayTicker.LastTradeId">
+            <summary>
+            The last trade ID in the last 24 hours
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTradingDayTicker.TotalTrades">
+            <summary>
+            The amount of trades made in the last 24 hours
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceTradingStatus">

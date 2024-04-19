@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces;
@@ -324,6 +325,33 @@ namespace Binance.Net.Clients.SpotApi
             return result.As<IEnumerable<IBinanceTick>>(result.Data);
         }
 
+        #endregion
+
+        #region Trading Day Ticker
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceTradingDayTicker>> GetTradingDayTickerAsync(string symbol, string? timeZone = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection 
+            { 
+                { "symbol", symbol }
+            };
+            parameters.AddOptional("timeZone", timeZone);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "api/v3/ticker/tradingDay", BinanceExchange.RateLimiter.SpotRestIp, 4);
+            return await _baseClient.SendAsync<BinanceTradingDayTicker>(request, parameters, ct, 1).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceTradingDayTicker>>> GetTradingDayTickersAsync(IEnumerable<string> symbols, string? timeZone = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection { { "symbols", $"[{string.Join(",", symbols.Select(s => $"\"{s}\""))}]" } };
+            parameters.AddOptional("timeZone", timeZone);
+            var symbolCount = symbols.Count();
+            var weight = Math.Min(symbolCount * 4, 50);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "api/v3/ticker/tradingDay", BinanceExchange.RateLimiter.SpotRestIp, weight);
+            return await _baseClient.SendAsync<IEnumerable<BinanceTradingDayTicker>>(request, parameters, ct, weight).ConfigureAwait(false);
+        }
         #endregion
 
         #region Rolling window price change ticker
