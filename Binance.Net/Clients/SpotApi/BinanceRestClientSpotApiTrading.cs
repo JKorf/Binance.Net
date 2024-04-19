@@ -9,6 +9,7 @@ using Binance.Net.Objects.Models.Spot.Convert;
 using Binance.Net.Objects.Models.Spot.ConvertTransfer;
 using Binance.Net.Objects.Models.Spot.Margin;
 using CryptoExchange.Net.CommonObjects;
+using System;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -29,7 +30,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Test New Order 
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinancePlacedOrder>> PlaceTestOrderAsync(string symbol,
+        public async Task<WebCallResult<BinanceTestOrderCommission>> PlaceTestOrderAsync(string symbol,
             Enums.OrderSide side,
             SpotOrderType type,
             decimal? quantity = null,
@@ -44,32 +45,52 @@ namespace Binance.Net.Clients.SpotApi
             int? strategyId = null,
             int? strategyType = null,
             SelfTradePreventionMode? selfTradePreventionMode = null,
+            bool? computeFeeRates = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
-            return await _baseClient.PlaceOrderInternal(_baseClient.GetUrl("order/test", "api", "3"),
-                symbol,
-                side,
-                type,
-                quantity,
-                quoteQuantity,
-                newClientOrderId,
-                price,
-                timeInForce,
-                stopPrice,
-                icebergQty,
-                null,
-                null,
-                orderResponseType,
-                trailingDelta,
-                strategyId,
-                strategyType,
-                selfTradePreventionMode,
-                null,
-                receiveWindow,
-                1,
-                BinanceExchange.RateLimiter.SpotRestUid,
-                ct).ConfigureAwait(false);
+            if (quoteQuantity != null && type != SpotOrderType.Market)
+                throw new ArgumentException("quoteQuantity is only valid for market orders");
+
+            if (quantity == null && quoteQuantity == null || quantity != null && quoteQuantity != null)
+                throw new ArgumentException("1 of either should be specified, quantity or quoteOrderQuantity");
+
+            var rulesCheck = await _baseClient.CheckTradeRules(symbol, quantity, quoteQuantity, price, stopPrice, type, ct).ConfigureAwait(false);
+            if (!rulesCheck.Passed)
+            {
+                _logger.Log(LogLevel.Warning, rulesCheck.ErrorMessage!);
+                return new WebCallResult<BinanceTestOrderCommission>(new ArgumentError(rulesCheck.ErrorMessage!));
+            }
+
+            quantity = rulesCheck.Quantity;
+            price = rulesCheck.Price;
+            stopPrice = rulesCheck.StopPrice;
+            quoteQuantity = rulesCheck.QuoteQuantity;
+
+            var parameters = new ParameterCollection
+            {
+                { "symbol", symbol },
+                { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
+                { "type", JsonConvert.SerializeObject(type, new SpotOrderTypeConverter(false)) }
+            };
+            parameters.AddOptionalParameter("quantity", quantity?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("quoteOrderQty", quoteQuantity?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
+            parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)));
+            parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
+            parameters.AddOptionalParameter("trailingDelta", trailingDelta);
+            parameters.AddOptionalParameter("strategyId", strategyId);
+            parameters.AddOptionalParameter("strategyType", strategyType);
+            parameters.AddOptional("computeCommissionRates", computeFeeRates?.ToString(CultureInfo.InvariantCulture).ToLowerInvariant());
+            parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter.GetString(selfTradePreventionMode));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var weight = computeFeeRates == true ? 20 : 1;
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "api/v3/order/test", BinanceExchange.RateLimiter.SpotRestIp, weight, true);
+            return await _baseClient.SendAsync<BinanceTestOrderCommission>(request, parameters, ct, weight).ConfigureAwait(false);
         }
 
         #endregion

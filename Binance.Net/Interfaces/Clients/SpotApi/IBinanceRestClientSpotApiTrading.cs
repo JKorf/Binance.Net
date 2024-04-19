@@ -33,10 +33,11 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="strategyId">Strategy id</param>
         /// <param name="strategyType">Strategy type</param>
         /// <param name="selfTradePreventionMode">Self trade prevention mode</param>
+        /// <param name="computeFeeRates">Whether fee rates should be calculated or not</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>Id's for the placed test order</returns>
-        Task<WebCallResult<BinancePlacedOrder>> PlaceTestOrderAsync(string symbol,
+        /// <returns>Fee info if computeCommissionRates was set to true, else empty</returns>
+        Task<WebCallResult<BinanceTestOrderCommission>> PlaceTestOrderAsync(string symbol,
             OrderSide side,
             SpotOrderType type,
             decimal? quantity = null,
@@ -51,6 +52,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
             int? strategyId = null,
             int? strategyType = null,
             SelfTradePreventionMode? selfTradePreventionMode = null,
+            bool? computeFeeRates = null,
             int? receiveWindow = null,
             CancellationToken ct = default);
 
