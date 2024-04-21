@@ -1,0 +1,7 @@
+GET
+/sapi/v1/system/status
+false
+{ 
+    "status": 0,
+    "msg": "normal"
+}
