@@ -4699,6 +4699,11 @@
             Main (spot) to Mining
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.MainToIsolatedMargin">
+            <summary>
+            Main to isolated margin
+            </summary>
+        </member>
         <member name="F:Binance.Net.Enums.UniversalTransferType.FundingToMain">
             <summary>
             Funding to Main (spot)
@@ -4777,6 +4782,11 @@
         <member name="F:Binance.Net.Enums.UniversalTransferType.IsolatedMarginToIsolatedMargin">
             <summary>
             Isolated margin to Isolated margin
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UniversalTransferType.IsolatedMarginToMain">
+            <summary>
+            Isolated margin to main
             </summary>
         </member>
         <member name="F:Binance.Net.Enums.UniversalTransferType.MiningToMain">

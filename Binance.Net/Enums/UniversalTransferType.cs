@@ -25,6 +25,10 @@
         /// Main (spot) to Mining
         /// </summary>
         MainToMining,
+        /// <summary>
+        /// Main to isolated margin
+        /// </summary>
+        MainToIsolatedMargin,
 
         /// <summary>
         /// Funding to Main (spot)
@@ -94,6 +98,10 @@
         /// Isolated margin to Isolated margin
         /// </summary>
         IsolatedMarginToIsolatedMargin,
+        /// <summary>
+        /// Isolated margin to main
+        /// </summary>
+        IsolatedMarginToMain,
 
         /// <summary>
         /// Mining to Main (spot)
