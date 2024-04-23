@@ -154,6 +154,11 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 9.9.3 - 23 Apr 2024
+    * Added missing UniversalTransferType enum values
+    * Fixed CoinFuturesApi.Account.GetIncomeHistoryAsync endpoint url
+    * Updated CryptoExchange.Net to 7.3.3, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
+
 * Version 9.9.2 - 19 Apr 2024
     * Added CoinFuturesApi.Account.GetDownloadIdForTransactionHistoryAsync endpoint
     * Added CoinFuturesApi.Account.GetDownloadLinkForTransactionHistoryAsync endpoint
