@@ -255,6 +255,9 @@
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApi.FormatSymbol(System.String,System.String)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApi.GetServerTimestampAsync">
             <inheritdoc />
         </member>
@@ -453,6 +456,9 @@
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.FormatSymbol(System.String,System.String)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
@@ -601,6 +607,9 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.FormatSymbol(System.String,System.String)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.GetServerTimestampAsync">
@@ -1043,6 +1052,9 @@
             </summary>
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApi.FormatSymbol(System.String,System.String)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApi.GetServerTimestampAsync">
@@ -1573,6 +1585,9 @@
         <member name="P:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApi.Trading">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApi.FormatSymbol(System.String,System.String)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
@@ -1804,6 +1819,9 @@
             <summary>
             Event triggered when an order is canceled via this client. Note that this does not trigger when using CancelAllOrdersAsync. Only available for Spot orders
             </summary>
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApi.FormatSymbol(System.String,System.String)">
+            <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
@@ -2083,6 +2101,9 @@
             </summary>
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApi.FormatSymbol(System.String,System.String)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApi.SubscribeToMarkPriceUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesUsdtStreamMarkPrice}},System.Threading.CancellationToken)">
@@ -12038,6 +12059,21 @@
         <member name="T:Binance.Net.Interfaces.IBinanceOrderBookFactory">
             <summary>
             Binance order book factory
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceOrderBookFactory.Spot">
+            <summary>
+            Spot order book factory methods
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceOrderBookFactory.UsdFutures">
+            <summary>
+            USD Futures order book factory methods
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceOrderBookFactory.CoinFutures">
+            <summary>
+            Coin Futures order book factory methods
             </summary>
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceOrderBookFactory.CreateSpot(System.String,System.Action{Binance.Net.Objects.Options.BinanceOrderBookOptions})">
@@ -27900,6 +27936,15 @@
             </summary>
             <param name="serviceProvider">Service provider for resolving logging and clients</param>
         </member>
+        <member name="P:Binance.Net.SymbolOrderBooks.BinanceOrderBookFactory.Spot">
+            <inheritdoc />
+        </member>
+        <member name="P:Binance.Net.SymbolOrderBooks.BinanceOrderBookFactory.UsdFutures">
+            <inheritdoc />
+        </member>
+        <member name="P:Binance.Net.SymbolOrderBooks.BinanceOrderBookFactory.CoinFutures">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.SymbolOrderBooks.BinanceOrderBookFactory.CreateSpot(System.String,System.Action{Binance.Net.Objects.Options.BinanceOrderBookOptions})">
             <inheritdoc />
         </member>
@@ -27916,6 +27961,13 @@
             </summary>
         </member>
         <member name="M:Binance.Net.SymbolOrderBooks.BinanceSpotSymbolOrderBook.#ctor(System.String,System.Action{Binance.Net.Objects.Options.BinanceOrderBookOptions})">
+            <summary>
+            Create a new order book instance
+            </summary>
+            <param name="symbol">The symbol the order book is for</param>
+            <param name="optionsDelegate">Option configuration delegate</param>
+        </member>
+        <member name="M:Binance.Net.SymbolOrderBooks.BinanceSpotSymbolOrderBook.#ctor(System.String,System.String,System.Action{Binance.Net.Objects.Options.BinanceOrderBookOptions})">
             <summary>
             Create a new order book instance
             </summary>
