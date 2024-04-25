@@ -125,6 +125,20 @@ namespace Binance.Net.Clients.SpotApi
 
         #endregion
 
+        #region Get Withdrawal Addresses
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceWithdrawalAddress>>> GetWithdrawalAddressesAsync(int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/capital/withdraw/address/list", BinanceExchange.RateLimiter.SpotRestIp, 10, true);
+            return await _baseClient.SendAsync<IEnumerable<BinanceWithdrawalAddress>>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #region Deposit history        
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceDeposit>>> GetDepositHistoryAsync(string? asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? offset = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)

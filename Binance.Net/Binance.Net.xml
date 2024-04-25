@@ -1096,6 +1096,9 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetWithdrawalHistoryAsync(System.String,System.String,System.Nullable{Binance.Net.Enums.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetWithdrawalAddressesAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetDepositHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.DepositStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -8106,6 +8109,15 @@
             <param name="limit">Add limit. Default: 1000, Max: 1000</param>
             <param name="offset">Add offset</param>
             <returns>List of withdrawals</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetWithdrawalAddressesAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get list of withdrawal addresses
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#fetch-withdraw-address-list-user_data" /></para>
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetDepositHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.DepositStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
@@ -16813,6 +16825,51 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawal.CompleteTime">
             <summary>
             The time the withdrawal was completed
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceWithdrawalAddress">
+            <summary>
+            Withdrawal address info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawalAddress.Address">
+            <summary>
+            Address
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawalAddress.AddressTag">
+            <summary>
+            Address tag
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawalAddress.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawalAddress.Name">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawalAddress.Network">
+            <summary>
+            Network
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawalAddress.Origin">
+            <summary>
+            Origin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawalAddress.OriginType">
+            <summary>
+            Origin type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawalAddress.Whitelisted">
+            <summary>
+            Is whitelisted
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceAssetDetails">
@@ -27961,13 +28018,6 @@
             </summary>
         </member>
         <member name="M:Binance.Net.SymbolOrderBooks.BinanceSpotSymbolOrderBook.#ctor(System.String,System.Action{Binance.Net.Objects.Options.BinanceOrderBookOptions})">
-            <summary>
-            Create a new order book instance
-            </summary>
-            <param name="symbol">The symbol the order book is for</param>
-            <param name="optionsDelegate">Option configuration delegate</param>
-        </member>
-        <member name="M:Binance.Net.SymbolOrderBooks.BinanceSpotSymbolOrderBook.#ctor(System.String,System.String,System.Action{Binance.Net.Objects.Options.BinanceOrderBookOptions})">
             <summary>
             Create a new order book instance
             </summary>
