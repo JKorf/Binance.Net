@@ -56,7 +56,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddTransient<ICryptoRestClient, CryptoRestClient>();
             services.AddSingleton<ICryptoSocketClient, CryptoSocketClient>();
-            services.AddSingleton<IBinanceOrderBookFactory, BinanceOrderBookFactory>();
+            services.AddTransient<IBinanceOrderBookFactory, BinanceOrderBookFactory>();
             services.AddTransient(x => x.GetRequiredService<IBinanceRestClient>().SpotApi.CommonSpotClient);
             services.AddTransient(x => x.GetRequiredService<IBinanceRestClient>().UsdFuturesApi.CommonFuturesClient);
             services.AddTransient(x => x.GetRequiredService<IBinanceRestClient>().CoinFuturesApi.CommonFuturesClient);
