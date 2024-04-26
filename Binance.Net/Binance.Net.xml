@@ -89,6 +89,16 @@
             Exchange name
             </summary>
         </member>
+        <member name="P:Binance.Net.BinanceExchange.Url">
+            <summary>
+            Url to the main website
+            </summary>
+        </member>
+        <member name="P:Binance.Net.BinanceExchange.ApiDocsUrl">
+            <summary>
+            Urls to the API documentation
+            </summary>
+        </member>
         <member name="P:Binance.Net.BinanceExchange.RateLimiter">
             <summary>
             Rate limiter configuration for the Binance API
