@@ -154,6 +154,13 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 9.9.4 - 28 Apr 2024
+    * Added SpotApi.Account.GetWithdrawalAddressesAsync endpoint
+    * Added Url and ApiDocsUrl to BinanceExchange static class
+    * Added BinanceOrderBookFactory book creation method
+    * Fixed BinanceOrderBookFactory injection issue
+    * Updated CryptoExchange.Net to v7.4.0, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
+
 * Version 9.9.3 - 23 Apr 2024
     * Added missing UniversalTransferType enum values
     * Fixed CoinFuturesApi.Account.GetIncomeHistoryAsync endpoint url
