@@ -89,6 +89,16 @@
             Exchange name
             </summary>
         </member>
+        <member name="P:Binance.Net.BinanceExchange.Url">
+            <summary>
+            Url to the main website
+            </summary>
+        </member>
+        <member name="P:Binance.Net.BinanceExchange.ApiDocsUrl">
+            <summary>
+            Urls to the API documentation
+            </summary>
+        </member>
         <member name="P:Binance.Net.BinanceExchange.RateLimiter">
             <summary>
             Rate limiter configuration for the Binance API
@@ -253,6 +263,9 @@
             </summary>
         </member>
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApi.FormatSymbol(System.String,System.String)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApi.GetServerTimestampAsync">
@@ -453,6 +466,9 @@
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.FormatSymbol(System.String,System.String)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
@@ -601,6 +617,9 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.FormatSymbol(System.String,System.String)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.GetServerTimestampAsync">
@@ -1045,6 +1064,9 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApi.FormatSymbol(System.String,System.String)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApi.GetServerTimestampAsync">
             <inheritdoc />
         </member>
@@ -1082,6 +1104,9 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetWithdrawalHistoryAsync(System.String,System.String,System.Nullable{Binance.Net.Enums.WithdrawalStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetWithdrawalAddressesAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetDepositHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.DepositStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
@@ -1573,6 +1598,9 @@
         <member name="P:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApi.Trading">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApi.FormatSymbol(System.String,System.String)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
@@ -1804,6 +1832,9 @@
             <summary>
             Event triggered when an order is canceled via this client. Note that this does not trigger when using CancelAllOrdersAsync. Only available for Spot orders
             </summary>
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApi.FormatSymbol(System.String,System.String)">
+            <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
@@ -2083,6 +2114,9 @@
             </summary>
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApi.FormatSymbol(System.String,System.String)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApi.SubscribeToMarkPriceUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesUsdtStreamMarkPrice}},System.Threading.CancellationToken)">
@@ -8086,6 +8120,15 @@
             <param name="offset">Add offset</param>
             <returns>List of withdrawals</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetWithdrawalAddressesAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get list of withdrawal addresses
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#fetch-withdraw-address-list-user_data" /></para>
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetDepositHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.DepositStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the deposit history
@@ -12038,6 +12081,21 @@
         <member name="T:Binance.Net.Interfaces.IBinanceOrderBookFactory">
             <summary>
             Binance order book factory
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceOrderBookFactory.Spot">
+            <summary>
+            Spot order book factory methods
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceOrderBookFactory.UsdFutures">
+            <summary>
+            USD Futures order book factory methods
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceOrderBookFactory.CoinFutures">
+            <summary>
+            Coin Futures order book factory methods
             </summary>
         </member>
         <member name="M:Binance.Net.Interfaces.IBinanceOrderBookFactory.CreateSpot(System.String,System.Action{Binance.Net.Objects.Options.BinanceOrderBookOptions})">
@@ -16777,6 +16835,51 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawal.CompleteTime">
             <summary>
             The time the withdrawal was completed
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceWithdrawalAddress">
+            <summary>
+            Withdrawal address info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawalAddress.Address">
+            <summary>
+            Address
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawalAddress.AddressTag">
+            <summary>
+            Address tag
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawalAddress.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawalAddress.Name">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawalAddress.Network">
+            <summary>
+            Network
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawalAddress.Origin">
+            <summary>
+            Origin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawalAddress.OriginType">
+            <summary>
+            Origin type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawalAddress.Whitelisted">
+            <summary>
+            Is whitelisted
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceAssetDetails">
@@ -27899,6 +28002,15 @@
             ctor
             </summary>
             <param name="serviceProvider">Service provider for resolving logging and clients</param>
+        </member>
+        <member name="P:Binance.Net.SymbolOrderBooks.BinanceOrderBookFactory.Spot">
+            <inheritdoc />
+        </member>
+        <member name="P:Binance.Net.SymbolOrderBooks.BinanceOrderBookFactory.UsdFutures">
+            <inheritdoc />
+        </member>
+        <member name="P:Binance.Net.SymbolOrderBooks.BinanceOrderBookFactory.CoinFutures">
+            <inheritdoc />
         </member>
         <member name="M:Binance.Net.SymbolOrderBooks.BinanceOrderBookFactory.CreateSpot(System.String,System.Action{Binance.Net.Objects.Options.BinanceOrderBookOptions})">
             <inheritdoc />

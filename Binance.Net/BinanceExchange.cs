@@ -16,6 +16,18 @@ namespace Binance.Net
         public static string ExchangeName => "Binance";
 
         /// <summary>
+        /// Url to the main website
+        /// </summary>
+        public static string Url { get; } = "https://www.binance.com";
+
+        /// <summary>
+        /// Urls to the API documentation
+        /// </summary>
+        public static string[] ApiDocsUrl { get; } = new[] {
+            "https://binance-docs.github.io/apidocs/spot/en/#change-log"
+            };
+
+        /// <summary>
         /// Rate limiter configuration for the Binance API
         /// </summary>
         public static BinanceRateLimiters RateLimiter { get; } = new BinanceRateLimiters();

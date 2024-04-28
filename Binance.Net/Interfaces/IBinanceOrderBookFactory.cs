@@ -8,6 +8,19 @@ namespace Binance.Net.Interfaces
     public interface IBinanceOrderBookFactory
     {
         /// <summary>
+        /// Spot order book factory methods
+        /// </summary>
+        public IOrderBookFactory<BinanceOrderBookOptions> Spot { get; }
+        /// <summary>
+        /// USD Futures order book factory methods
+        /// </summary>
+        public IOrderBookFactory<BinanceOrderBookOptions> UsdFutures { get; }
+        /// <summary>
+        /// Coin Futures order book factory methods
+        /// </summary>
+        public IOrderBookFactory<BinanceOrderBookOptions> CoinFutures { get; }
+
+        /// <summary>
         /// Create a Spot SymbolOrderBook
         /// </summary>
         /// <param name="symbol">The symbol</param>
