@@ -314,8 +314,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#partial-book-depth-streams" /></para>
         /// </summary>
         /// <param name="symbols">The symbols to subscribe on</param>
-        /// <param name="levels">The amount of entries to be returned in the update of each symbol</param>
-        /// <param name="updateInterval">Update interval in milliseconds</param>
+        /// <param name="levels">The amount of entries to be returned in the update of each symbol, 5, 10 or 20</param>
+        /// <param name="updateInterval">Update interval in milliseconds, 1000ms or 100ms</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -326,8 +326,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#partial-book-depth-streams" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to subscribe on</param>
-        /// <param name="levels">The amount of entries to be returned in the update</param>
-        /// <param name="updateInterval">Update interval in milliseconds</param>
+        /// <param name="levels">The amount of entries to be returned in the update, 5, 10 or 20</param>
+        /// <param name="updateInterval">Update interval in milliseconds, 1000ms or 100ms</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
