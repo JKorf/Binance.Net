@@ -7967,6 +7967,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetAssetsForDustTransferAsync(System.Nullable{Binance.Net.Enums.AccountType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get assets that can be converted to BNB
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-assets-that-can-be-converted-into-bnb-user_data" /></para>
             </summary>
             <param name="accountType">Spot or Margin account</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -9042,7 +9043,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetDelistScheduleAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get spot symbols delist schedule
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-user-delegation-history-for-master-account-user_data" /></para>
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-symbols-delist-schedule-for-spot-market_data" /></para>
             </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -13808,6 +13809,21 @@
             Account is brokered
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceAccountInfo.RequireSelfTradePrevention">
+            <summary>
+            Require self trade prevention
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceAccountInfo.PreventSmartOrderRouting">
+            <summary>
+            Prevent smart order routing
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceAccountInfo.UserId">
+            <summary>
+            User id
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceAccountInfo.UpdateTime">
             <summary>
             The time of the update
@@ -13963,6 +13979,11 @@
             Spot and margin trading allowed
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceAPIKeyPermissions.EnablePortfolioMarginTrading">
+            <summary>
+            Portfolio margin trading enabled
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceAPIKeyPermissions.TradingAuthorityExpirationTime">
             <summary>
             Expiration time for spot and margin trading permission
@@ -14001,6 +14022,11 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceAveragePrice.Price">
             <summary>
             The average price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceAveragePrice.LastTradeTime">
+            <summary>
+            The last trade time
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceBnbBurnStatus">
@@ -14304,6 +14330,11 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceDeposit.Id">
+            <summary>
+            The  id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDeposit.TransactionId">
             <summary>
             The transaction id
             </summary>
@@ -14676,6 +14707,11 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceFiatPayment.Status">
             <summary>
             The status of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceFiatPayment.PaymentMethod">
+            <summary>
+            The payment method
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceFiatPayment.CreateTime">
@@ -16705,6 +16741,16 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceNetwork.SameAddress">
             <summary>
             If the asset needs to provide memo to withdraw
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceNetwork.EstimatedArrivalTime">
+            <summary>
+            Estimated arrival time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceNetwork.Busy">
+            <summary>
+            Whether the network is busy
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceUserBalance">
@@ -18994,6 +19040,11 @@
             Is sell allowed
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.IsolatedMargin.BinanceIsolatedMarginSymbol.DelistTime">
+            <summary>
+            Time at which the symbol gets delisted
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.IsolatedMargin.BinanceIsolatedMarginTransfer">
             <summary>
             Isolated margin transfer
@@ -20194,6 +20245,11 @@
             Minimal quantity which can be repaid
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginAsset.DelistTime">
+            <summary>
+            Time at which the asset gets delisted
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDelistSchedule">
             <summary>
             Delist margin schedule
@@ -20412,6 +20468,11 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginPair.Symbol">
             <summary>
             Symbol name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginPair.DelistTime">
+            <summary>
+            Time at which the symbol gets delisted
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginPriceIndex">

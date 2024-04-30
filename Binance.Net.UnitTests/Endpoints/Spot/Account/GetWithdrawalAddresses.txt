@@ -1,0 +1,15 @@
+GET
+/sapi/v1/capital/withdraw/address/list
+true
+[
+  {
+    "address": "string",
+    "addressTag": "string",
+    "coin": "string",
+    "name": "string",        //is a user-defined name
+    "network": "string",
+    "origin": "string",      //if originType=='others', the address source manually filled in by the user
+    "originType": "string",  //Address source type
+    "whiteStatus": true      //Is it whitelisted
+  }
+]

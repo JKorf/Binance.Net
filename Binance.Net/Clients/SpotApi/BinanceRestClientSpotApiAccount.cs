@@ -351,7 +351,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/asset/dibblet", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/asset/dribblet", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             return await _baseClient.SendAsync<BinanceDustLogList>(request, parameters, ct).ConfigureAwait(false);
         }
 

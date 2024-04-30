@@ -1,0 +1,38 @@
+GET
+/sapi/v1/margin/isolated/allPairs
+true
+[
+    {
+        "base": "BNB",
+        "isBuyAllowed": true,
+        "isMarginTrade": true,
+        "isSellAllowed": true,
+        "quote": "BTC",
+        "symbol": "BNBBTC"
+    },
+    {
+        "base": "TRX",
+        "isBuyAllowed": true,
+        "isMarginTrade": true,
+        "isSellAllowed": true,
+        "quote": "BTC",
+        "symbol": "TRXBTC",
+        "delistTime": 1704973040
+    },
+    {
+        "base": "XRP",
+        "isBuyAllowed": true,
+        "isMarginTrade": true,
+        "isSellAllowed": true,
+        "quote": "BTC",
+        "symbol": "XRPBTC"
+    },
+    {
+        "base": "ETH",
+        "isBuyAllowed": true,
+        "isMarginTrade": true,
+        "isSellAllowed": true,
+        "quote": "BTC",
+        "symbol": "ETHBTC"
+    }   
+]

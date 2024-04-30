@@ -173,6 +173,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get assets that can be converted to BNB
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-assets-that-can-be-converted-into-bnb-user_data" /></para>
         /// </summary>
         /// <param name="accountType">Spot or Margin account</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>

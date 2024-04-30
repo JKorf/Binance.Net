@@ -45,6 +45,21 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         public bool Brokered { get; set; }
         /// <summary>
+        /// Require self trade prevention
+        /// </summary>
+        [JsonProperty("requireSelfTradePrevention")]
+        public bool RequireSelfTradePrevention { get; set; }
+        /// <summary>
+        /// Prevent smart order routing
+        /// </summary>
+        [JsonProperty("preventSor")]
+        public bool PreventSmartOrderRouting { get; set; }
+        /// <summary>
+        /// User id
+        /// </summary>
+        [JsonProperty("uid")]
+        public long UserId { get; set; }
+        /// <summary>
         /// The time of the update
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]

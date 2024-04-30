@@ -149,5 +149,15 @@
         /// If the asset needs to provide memo to withdraw
         /// </summary>
         public bool SameAddress { get; set; }
+        /// <summary>
+        /// Estimated arrival time
+        /// </summary>
+        [JsonProperty("estimatedArrivalTime")]
+        public int? EstimatedArrivalTime { get; set; }
+        /// <summary>
+        /// Whether the network is busy
+        /// </summary>
+        [JsonProperty("busy")]
+        public bool Busy { get; set; }
     }
 }

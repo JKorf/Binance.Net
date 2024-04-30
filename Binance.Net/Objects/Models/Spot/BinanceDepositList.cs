@@ -36,10 +36,15 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         public string Network { get; set; } = string.Empty;
         /// <summary>
+        /// The  id
+        /// </summary>
+        [JsonProperty("id")]
+        public string Id { get; set; } = string.Empty;
+        /// <summary>
         /// The transaction id
         /// </summary>
         [JsonProperty("txId")]
-        public string Id { get; set; } = string.Empty;
+        public string TransactionId { get; set; } = string.Empty;
         /// <summary>
         /// The status of the deposit
         /// </summary>

@@ -1,0 +1,18 @@
+GET
+/sapi/v1/spot/delist-schedule
+false
+[
+  {
+    "delistTime": 1686161202000,
+    "symbols": [
+      "ADAUSDT",
+      "BNBUSDT"
+    ]
+  },
+  {
+    "delistTime": 1686222232000,
+    "symbols": [
+      "ETHUSDT"
+    ]
+  }
+]

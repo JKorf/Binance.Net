@@ -1,0 +1,6 @@
+GET
+/sapi/v1/account/status
+true
+{
+    "data": "Normal"
+}

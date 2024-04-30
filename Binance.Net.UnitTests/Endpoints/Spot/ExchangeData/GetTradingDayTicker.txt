@@ -1,0 +1,20 @@
+GET
+/api/v3/ticker/tradingDay
+false
+{
+  "symbol":             "BTCUSDT",
+  "priceChange":        "-83.13000000",         // Absolute price change
+  "priceChangePercent": "-0.317",               // Relative price change in percent
+  "weightedAvgPrice":   "26234.58803036",       // quoteVolume / volume
+  "openPrice":          "26304.80000000",
+  "highPrice":          "26397.46000000",
+  "lowPrice":           "26088.34000000",
+  "lastPrice":          "26221.67000000",
+  "volume":             "18495.35066000",       // Volume in base asset
+  "quoteVolume":        "485217905.04210480",   // Volume in quote asset
+  "openTime":           1695686400000,
+  "closeTime":          1695772799999,
+  "firstId":            3220151555,             // Trade ID of the first trade in the interval
+  "lastId":             3220849281,             // Trade ID of the last trade in the interval
+  "count":              697727                  // Number of trades in the interval
+}

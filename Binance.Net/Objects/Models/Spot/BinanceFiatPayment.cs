@@ -47,6 +47,11 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonConverter(typeof(FiatPaymentStatusConverter))]
         public FiatPaymentStatus Status { get; set; }
         /// <summary>
+        /// The payment method
+        /// </summary>
+        [JsonProperty("paymentMethod")]
+        public string PaymentMethod { get; set; } = string.Empty;
+        /// <summary>
         /// Creation time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]

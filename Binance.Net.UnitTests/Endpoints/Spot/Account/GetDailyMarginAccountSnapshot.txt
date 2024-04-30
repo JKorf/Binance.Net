@@ -1,0 +1,29 @@
+GET
+/sapi/v1/accountSnapshot
+true
+{
+   "code":200, // 200 for success; others are error codes
+   "msg":"", // error message
+   "snapshotVos":[
+      {
+         "data":{
+            "marginLevel":"2748.02909813",
+            "totalAssetOfBtc":"0.00274803",
+            "totalLiabilityOfBtc":"0.00000100",
+            "totalNetAssetOfBtc":"0.00274750",
+            "userAssets":[
+               {
+                  "asset":"XRP",
+                  "borrowed":"0.00000000",
+                  "free":"1.00000000",
+                  "interest":"0.00000000",
+                  "locked":"0.00000000",
+                  "netAsset":"1.00000000"
+               }
+            ]
+         },
+         "type":"margin",
+         "updateTime":1576281599000
+      }
+   ]
+}

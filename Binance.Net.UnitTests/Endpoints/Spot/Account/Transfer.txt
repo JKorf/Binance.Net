@@ -1,0 +1,6 @@
+POST
+/sapi/v1/asset/transfer
+true
+{
+    "tranId":13526853623
+}

@@ -29,5 +29,10 @@
         /// Is sell allowed
         /// </summary>
         public bool IsSellAllowed { get; set; }
+        /// <summary>
+        /// Time at which the symbol gets delisted
+        /// </summary>
+        [JsonProperty("delistTime"), JsonConverter(typeof(DateTimeConverter))]
+        public DateTime? DelistTime { get; set; }
     }
 }
