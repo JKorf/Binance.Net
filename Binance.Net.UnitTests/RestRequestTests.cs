@@ -1,18 +1,13 @@
 ﻿using Binance.Net.Clients;
-using Binance.Net.Objects.Models.Spot;
 using CryptoExchange.Net.Objects;
-using CryptoExchange.Test.Net;
+using CryptoExchange.Net.Testing;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Binance.Net.UnitTests
 {
     [TestFixture]
-    public class EndpointTests
+    public class RestRequestTests
     {
         [Test]
         public async Task ValidateSpotExchangeDataCalls()
@@ -22,7 +17,7 @@ namespace Binance.Net.UnitTests
                 opts.AutoTimestamp = false;
                 opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
             });
-            var tester = new EndpointTester<BinanceRestClient>(client, "Endpoints/Spot/ExchangeData", "https://api.binance.com", IsAuthenticated, stjCompare: false);
+            var tester = new RestRequestValidator<BinanceRestClient>(client, "Endpoints/Spot/ExchangeData", "https://api.binance.com", IsAuthenticated, stjCompare: false);
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetServerTimeAsync(), "GetServerTime", "serverTime");
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetExchangeInfoAsync(), "GetExchangeInfo");
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetSystemStatusAsync(), "GetSystemStatus");
