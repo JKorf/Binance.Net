@@ -11595,8 +11595,8 @@
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#partial-book-depth-streams" /></para>
             </summary>
             <param name="symbol">The symbol to subscribe on</param>
-            <param name="levels">The amount of entries to be returned in the update</param>
-            <param name="updateInterval">Update interval in milliseconds</param>
+            <param name="levels">The amount of entries to be returned in the update, 5, 10 or 20</param>
+            <param name="updateInterval">Update interval in milliseconds, 100, 250 or 500</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -26807,6 +26807,11 @@
             The entry price
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamPosition.BreakEvenPrice">
+            <summary>
+            The break even price
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamPosition.RealizedPnl">
             <summary>
             The accumulated realized PnL
@@ -27653,6 +27658,26 @@
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdateData.RealizedProfit">
             <summary>
             Realized profit of the trade
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdateData.PriceProtection">
+            <summary>
+            Is price protection enable
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdateData.SelfTradePrevention">
+            <summary>
+            Self trade prevention mode
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdateData.PriceMatchMode">
+            <summary>
+            Price match mode
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdateData.GoodTillDate">
+            <summary>
+            The GoodTillDate if GTD time in force
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamSymbolUpdate">

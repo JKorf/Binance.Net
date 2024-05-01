@@ -1,4 +1,10 @@
-{
+> { "method": "SUBSCRIBE", "params": [ "123" ], "id": "|1|" }
+< { "result": null, "id": |1| }
+= 
+{ 
+	"stream": "123",
+	"data": 
+    {
     "e":"ACCOUNT_CONFIG_UPDATE",       // Event Type
     "E":1611646737479,                 // Event Time
     "T":1611646737476,                 // Transaction Time
@@ -6,3 +12,4 @@
     "j":true                           // Multi-Assets Mode
     }
 }  
+}

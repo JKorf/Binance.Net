@@ -180,5 +180,25 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// </summary>
         [JsonProperty("rp")]
         public decimal RealizedProfit { get; set; }
+        /// <summary>
+        /// Is price protection enable
+        /// </summary>
+        [JsonProperty("pP")]
+        public bool PriceProtection { get; set; }
+        /// <summary>
+        /// Self trade prevention mode
+        /// </summary>
+        [JsonProperty("V"), JsonConverter(typeof(EnumConverter))]
+        public SelfTradePreventionMode SelfTradePrevention { get; set; }
+        /// <summary>
+        /// Price match mode
+        /// </summary>
+        [JsonProperty("pm"), JsonConverter(typeof(EnumConverter))]
+        public PriceMatch PriceMatchMode { get; set; }
+        /// <summary>
+        /// The GoodTillDate if GTD time in force
+        /// </summary>
+        [JsonProperty("gtd"), JsonConverter(typeof(DateTimeConverter))]
+        public DateTime? GoodTillDate { get; set; }
     }
 }
