@@ -1,4 +1,6 @@
-﻿namespace Binance.Net.Objects.Models.Futures
+﻿using Binance.Net.Enums;
+
+namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// The history of order edits
@@ -43,6 +45,11 @@
         /// </summary>
         [JsonProperty("amendment")]
         public BinanceFuturesOrderChanges EditInfo { get; set; } = null!;
+        /// <summary>
+        /// Price match
+        /// </summary>
+        [JsonProperty("priceMatch"), JsonConverter(typeof(EnumConverter))]
+        public PriceMatch PriceMatch { get; set; }
 
     }
 

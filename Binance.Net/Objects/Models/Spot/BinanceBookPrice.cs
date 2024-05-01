@@ -8,6 +8,11 @@ namespace Binance.Net.Objects.Models.Spot
     public class BinanceBookPrice : IBinanceBookPrice
     {
         /// <summary>
+        /// Last trade update id
+        /// </summary>
+        [JsonProperty("lastUpdateId")]
+        public long LastUpdateId { get; set; }
+        /// <summary>
         /// The symbol the information is about
         /// </summary>
         public string Symbol { get; set; } = string.Empty;

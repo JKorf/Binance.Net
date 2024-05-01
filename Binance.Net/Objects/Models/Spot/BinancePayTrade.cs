@@ -32,6 +32,11 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonProperty("currency")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
+        /// Main wallet type
+        /// </summary>
+        [JsonProperty("walletType"), JsonConverter(typeof(EnumConverter))]
+        public PayWalletType WalletType { get; set; }
+        /// <summary>
         /// Fund details
         /// </summary>
         [JsonProperty("fundsDetail")]

@@ -1,0 +1,45 @@
+GET
+/sapi/v1/margin/allOrders
+true
+[
+      {
+          "clientOrderId": "D2KDy4DIeS56PvkM13f8cP",
+          "cummulativeQuoteQty": "0.00000000",
+          "executedQty": "0.00000000",
+          "icebergQty": "0.00000000",
+          "isWorking": false,
+          "orderId": 41295,
+          "origQty": "5.31000000",
+          "price": "0.22500000",
+          "side": "SELL",
+          "status": "CANCELED",
+          "stopPrice": "0.18000000",
+          "symbol": "BNBBTC",
+          "isIsolated": false,
+          "time": 1565769338806,
+          "timeInForce": "GTC",
+          "type": "TAKE_PROFIT_LIMIT",
+          "selfTradePreventionMode": "NONE",
+          "updateTime": 1565769342148
+      },
+      {
+          "clientOrderId": "gXYtqhcEAs2Rn9SUD9nRKx",
+          "cummulativeQuoteQty": "0.00000000",
+          "executedQty": "0.00000000",
+          "icebergQty": "1.00000000",
+          "isWorking": true,
+          "orderId": 41296,
+          "origQty": "6.65000000",
+          "price": "0.18000000",
+          "side": "SELL",
+          "status": "CANCELED",
+          "stopPrice": "0.00000000",
+          "symbol": "BNBBTC",
+          "isIsolated": false,
+          "time": 1565769348687,
+          "timeInForce": "GTC",
+          "type": "LIMIT",
+          "selfTradePreventionMode": "NONE",
+          "updateTime": 1565769352226
+      }
+]

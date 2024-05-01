@@ -1,0 +1,7 @@
+GET
+/sapi/v1/margin/maxBorrowable
+true
+{
+  "amount": "1.69248805", // account's currently max borrowable amount with sufficient system availability
+  "borrowLimit": "60" // max borrowable amount limited by the account level
+}

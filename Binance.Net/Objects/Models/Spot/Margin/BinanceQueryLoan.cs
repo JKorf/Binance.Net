@@ -26,6 +26,10 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// </summary>
         public decimal Principal { get; set; }
         /// <summary>
+        /// Interest repaid 
+        /// </summary>
+        public decimal Interest { get; set; }
+        /// <summary>
         /// Quantity repaid 
         /// </summary>
         [JsonProperty("amount")]

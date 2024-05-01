@@ -1,0 +1,17 @@
+GET
+/sapi/v1/margin/interestRateHistory
+true
+[
+    {
+        "asset": "BTC",
+        "dailyInterestRate": "0.00025000",
+        "timestamp": 1611544731000,
+        "vipLevel": 1    
+    },
+    {
+        "asset": "BTC",
+        "dailyInterestRate": "0.00035000",
+        "timestamp": 1610248118000,
+        "vipLevel": 1    
+    }
+]

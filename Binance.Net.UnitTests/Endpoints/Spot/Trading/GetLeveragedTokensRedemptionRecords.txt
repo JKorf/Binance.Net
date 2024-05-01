@@ -1,0 +1,14 @@
+GET
+/sapi/v1/blvt/redeem/record
+true
+[  
+  {
+    "id": 1,  
+    "tokenName": "LINKUP",
+    "amount": "0.54216292", // Redemption amount
+    "nav": "18.36345064",  // NAV of redemption
+    "fee": "0.00995598", // Reemption fee
+    "netProceed": "9.94602604", // Net redemption value in usdt
+    "timestamp":1599128003050  
+  }
+]

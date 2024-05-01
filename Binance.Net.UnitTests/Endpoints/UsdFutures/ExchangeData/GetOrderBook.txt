@@ -1,0 +1,20 @@
+GET
+/fapi/v1/depth
+false
+{
+  "lastUpdateId": 1027024,
+  "E": 1589436922972,   // Message output time
+  "T": 1589436922959,   // Transaction time
+  "bids": [
+    [
+      "4.00000000",     // PRICE
+      "431.00000000"    // QTY
+    ]
+  ],
+  "asks": [
+    [
+      "4.00000200",
+      "12.00000000"
+    ]
+  ]
+}

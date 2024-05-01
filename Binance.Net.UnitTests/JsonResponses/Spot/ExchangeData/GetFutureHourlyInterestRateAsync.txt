@@ -1,9 +1,0 @@
-[
-{
-        "asset": "BTC",
-        "nextHourlyInterestRate": "0.00000571"
-    },
-    {
-        "asset": "ETH",
-        "nextHourlyInterestRate": "0.00000578"
-    }]

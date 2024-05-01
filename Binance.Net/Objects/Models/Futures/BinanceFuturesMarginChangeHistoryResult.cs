@@ -22,6 +22,11 @@ namespace Binance.Net.Objects.Models.Futures
         /// </summary>
         public string? Symbol { get; set; }
         /// <summary>
+        /// Delta type
+        /// </summary>
+        [JsonProperty("deltaType")]
+        public string? DeltaType { get; set; }
+        /// <summary>
         /// Time of the margin change request
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]

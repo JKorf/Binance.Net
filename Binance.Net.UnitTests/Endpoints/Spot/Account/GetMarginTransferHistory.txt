@@ -1,0 +1,38 @@
+GET
+/sapi/v1/margin/transfer
+true
+{
+  "rows": [
+    {
+      "amount": "0.10000000",
+      "asset": "BNB",
+      "status": "CONFIRMED",
+      "timestamp": 1566898617,
+      "txId": 5240372201,
+      "type": "ROLL_IN",
+      "transFrom": "SPOT", //SPOT,FUTURES,FIAT,DELIVERY,MINING,ISOLATED_MARGIN,FUNDING,MOTHER_SPOT,OPTION,SUB_SPOT,SUB_MARGIN,CROSS_MARGIN
+      "transTo": "ISOLATED_MARGIN",//SPOT,FUTURES,FIAT,DELIVERY,MINING,ISOLATED_MARGIN,FUNDING,MOTHER_SPOT,OPTION,SUB_SPOT,SUB_MARGIN,CROSS_MARGIN
+    },
+    {
+      "amount": "5.00000000",
+      "asset": "USDT",
+      "status": "CONFIRMED",
+      "timestamp": 1566888436,
+      "txId": 5239810406,
+      "type": "ROLL_OUT",
+      "transFrom": "ISOLATED_MARGIN",//SPOT,FUTURES,FIAT,DELIVERY,MINING,ISOLATED_MARGIN,FUNDING,MOTHER_SPOT,OPTION,SUB_SPOT,SUB_MARGIN,CROSS_MARGIN
+      "transTo": "ISOLATED_MARGIN", //SPOT,FUTURES,FIAT,DELIVERY,MINING,ISOLATED_MARGIN,FUNDING,MOTHER_SPOT,OPTION,SUB_SPOT,SUB_MARGIN,CROSS_MARGIN
+      "fromSymbol": "BNBUSDT",
+      "toSymbol": "BTCUSDT"
+    },
+    {
+      "amount": "1.00000000",
+      "asset": "EOS",
+      "status": "CONFIRMED",
+      "timestamp": 1566888403,
+      "txId": 5239808703,
+      "type": "ROLL_IN"
+    }
+  ],
+  "total": 3
+}

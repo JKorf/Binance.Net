@@ -1,4 +1,0 @@
-{
-   "spotBNBBurn":true,
-   "interestBNBBurn": false   
-}

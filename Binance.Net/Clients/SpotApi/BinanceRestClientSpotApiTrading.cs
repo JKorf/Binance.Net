@@ -261,7 +261,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("cancelRestrictions", EnumConverter.GetString(cancelRestriction));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "api/v3/cancelReplace", BinanceExchange.RateLimiter.SpotRestIp, 4, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "api/v3/order/cancelReplace", BinanceExchange.RateLimiter.SpotRestIp, 4, true);
             var result = await _baseClient.SendAsync<BinanceReplaceOrderResult>(request, parameters, ct).ConfigureAwait(false);
 
             if (result && result.Data.NewOrderResult == OrderOperationResult.Success)
@@ -1114,42 +1114,6 @@ namespace Binance.Net.Clients.SpotApi
 
         #endregion
 
-        #endregion
-
-        #region Convert Transfer
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceConvertTransferResult>> ConvertTransferAsync(string clientTransferId, string asset, decimal quantity, string targetAsset, long? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new ParameterCollection()
-            {
-                { "clientTranId", clientTransferId },
-                { "asset", asset },
-                { "amount", quantity },
-                { "targetAsset", targetAsset }
-            };
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/asset/convert-transfer", BinanceExchange.RateLimiter.SpotRestUid, 5, true);
-            return await _baseClient.SendAsync<BinanceConvertTransferResult>(request, parameters, ct).ConfigureAwait(false);
-        }
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceConvertTransferRecord>>> GetConvertTransferHistoryAsync(DateTime startTime, DateTime endTime, long? transferId = null, string? asset = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new ParameterCollection()
-            {
-                { "startTime", DateTimeConverter.ConvertToMilliseconds(startTime) },
-                { "endTime", DateTimeConverter.ConvertToMilliseconds(endTime) },
-            };
-            parameters.AddOptionalParameter("tranId", transferId);
-            parameters.AddOptionalParameter("asset", asset);
-            parameters.AddOptionalParameter("current", page);
-            parameters.AddOptionalParameter("size", limit);
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/asset/convert-transfer/queryByPage", BinanceExchange.RateLimiter.SpotRestUid, 5, true);
-            return await _baseClient.SendAsync<BinanceQueryRecords<BinanceConvertTransferRecord>>(request, parameters, ct).ConfigureAwait(false);
-        }
         #endregion
 
         #region Get Prevented Trades

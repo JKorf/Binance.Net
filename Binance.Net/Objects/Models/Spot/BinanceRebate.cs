@@ -18,6 +18,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Total number of pages
         /// </summary>
+        [JsonProperty("totalPageNum")]
         public int TotalPages { get; set; }
         /// <summary>
         /// Rebate data for this page

@@ -1,0 +1,6 @@
+GET
+/sapi/v1/margin/maxTransferable
+true
+ {
+      "amount": "3.59498107"
+ }

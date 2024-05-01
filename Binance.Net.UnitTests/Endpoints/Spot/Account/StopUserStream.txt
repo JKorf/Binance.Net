@@ -1,0 +1,5 @@
+DELETE
+/api/v3/userDataStream
+false
+{
+}

@@ -1,0 +1,18 @@
+GET
+/sapi/v1/margin/borrow-repay
+true
+{
+  "rows": [
+      {
+        "isolatedSymbol": "BNBUSDT",     // isolated symbol, will not be returned for crossed margin
+        "amount": "14.00000000",   // Total amount borrowed/repaid
+        "asset": "BNB",   
+        "interest": "0.01866667",    // Interest repaid
+        "principal": "13.98133333",   // Principal repaid
+        "status": "CONFIRMED",   //one of PENDING (pending execution), CONFIRMED (successfully execution), FAILED (execution failed, nothing happened to your account);
+        "timestamp": 1563438204000,
+        "txId": 2970933056
+      }
+  ],
+  "total": 1
+}

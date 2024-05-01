@@ -1,9 +1,0 @@
-{
-   "id":323355778339572400,
-   "symbol":"BTCUSDT",
-   "base":"BTC",
-   "quote":"USDT",
-   "isMarginTrade":true,
-   "isBuyAllowed":true,
-   "isSellAllowed":true
-}

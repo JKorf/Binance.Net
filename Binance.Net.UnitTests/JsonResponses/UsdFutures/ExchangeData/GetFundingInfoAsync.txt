@@ -1,8 +1,0 @@
-[
-    {
-        "symbol": "BLZUSDT",
-        "adjustedFundingRateCap": "0.02500000",
-        "adjustedFundingRateFloor": "-0.02500000",
-        "fundingIntervalHours": 8
-    }
-]

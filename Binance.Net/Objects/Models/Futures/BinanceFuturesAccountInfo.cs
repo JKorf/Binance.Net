@@ -26,6 +26,18 @@
         public bool CanWithdraw { get; set; }
 
         /// <summary>
+        /// Boolean indicating if this account is in multi asset mode
+        /// </summary>
+        [JsonProperty("multiAssetsMargin")]
+        public bool MultiAssetsMargin { get; set; }
+
+        /// <summary>
+        /// Trade group id
+        /// </summary>
+        [JsonProperty("tradeGroupId")]
+        public int TradeGroupId { get; set; }
+
+        /// <summary>
         /// Fee tier
         /// </summary>
         public int FeeTier { get; set; }

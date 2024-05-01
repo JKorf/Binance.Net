@@ -1,0 +1,7 @@
+POST
+/fapi/v1/multiAssetsMargin
+true
+{
+    "code": 200,
+    "msg": "success"
+}

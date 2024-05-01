@@ -1,0 +1,15 @@
+GET
+/sapi/v1/blvt/userLimit
+true
+[  
+  {
+    "tokenName": "LINKUP",
+    "userDailyTotalPurchaseLimit": "1000", // USDT
+    "userDailyTotalRedeemLimit": "1000"    // USDT
+  },
+  {
+    "tokenName": "LINKDOWN",
+    "userDailyTotalPurchaseLimit": "1000", // USDT
+    "userDailyTotalRedeemLimit": "50000"   // USDT
+  } 
+]

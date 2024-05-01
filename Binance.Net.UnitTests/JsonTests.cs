@@ -22,56 +22,6 @@ namespace Binance.Net.UnitTests
         }));
 
         [Test]
-        public async Task ValidateSpotAccountCalls()
-        {
-            await _comparer.ProcessSubject(
-                "Spot/Account",
-                c => c.SpotApi.Account,
-                useNestedJsonPropertyForCompare: new Dictionary<string, string> {
-                    { "GetTradingStatusAsync", "data" },
-                    { "GetDailySpotAccountSnapshotAsync", "snapshotVos" },
-                    { "GetDailyMarginAccountSnapshotAsync", "snapshotVos" },
-                    { "GetDailyFutureAccountSnapshotAsync", "snapshotVos" },
-                    { "GetFiatPaymentHistoryAsync", "data" },
-                    { "GetFiatDepositWithdrawHistoryAsync", "data" }
-                },
-                parametersToSetNull: new[] { "limit" });
-        }
-
-        [Test]
-        public async Task ValidateSpotExchangeDataCalls()
-        {
-            await _comparer.ProcessSubject(
-                "Spot/ExchangeData",
-                c => c.SpotApi.ExchangeData,
-                useNestedJsonPropertyForCompare: new Dictionary<string, string> {
-                    { "GetTradingStatusAsync", "data" }
-                },
-                parametersToSetNull: new[] { "limit" });
-        }
-
-        [Test]
-        public async Task ValidateSpotTradingCalls()
-        {
-            await _comparer.ProcessSubject(
-                "Spot/Trading",
-                c => c.SpotApi.Trading,
-                useNestedJsonPropertyForCompare: new Dictionary<string, string> {
-
-                    { "GetC2CTradeHistoryAsync", "data" },
-                    { "GetPayTradeHistoryAsync", "data" },
-                },
-                ignoreProperties: new Dictionary<string, List<string>>
-                {
-                    { "PlaceOrderAsync", new List<string> { "price" } },
-                    { "PlaceMarginOrderAsync", new List<string> { "price" } },
-                    { "GetMarginOrdersAsync", new List<string> { "price" } },
-                    { "PlaceOcoOrderListAsync", new List<string> { "workingTime" } },
-                },
-                parametersToSetNull: new[] { "limit", "quoteQuantity", "fromId", "cancelClientOrderId", "orderId" });
-        }
-
-        [Test]
         public async Task ValidateSpotSubAccountCalls()
         {
             await _comparer.ProcessSubject(
@@ -190,59 +140,6 @@ namespace Binance.Net.UnitTests
                 ignoreProperties: new Dictionary<string, List<string>>
                 {
                     { "GetTopLongShortPositionRatioAsync", new List<string> { "shortPosition", "longPosition" } },
-                },
-                parametersToSetNull: new string[] {
-                    "limit"
-                });
-        }
-
-        [Test]
-        public async Task ValidateUsdFuturesAccountCalls()
-        {
-            await _comparer.ProcessSubject(
-                "UsdFutures/Account",
-                c => c.UsdFuturesApi.Account,
-                useNestedJsonPropertyForCompare: new Dictionary<string, string>
-                {
-                },
-                ignoreProperties: new Dictionary<string, List<string>>
-                {
-                    { "GetPositionInformationAsync", new List<string>{ "unRealizedProfit"  } }
-                },
-                parametersToSetNull: new string[] {
-                    "limit"
-                });
-        }
-
-        [Test]
-        public async Task ValidateUsdFuturesExchangeDataCalls()
-        {
-            await _comparer.ProcessSubject(
-                "UsdFutures/ExchangeData",
-                c => c.UsdFuturesApi.ExchangeData,
-                useNestedJsonPropertyForCompare: new Dictionary<string, string>
-                {
-                },
-                ignoreProperties: new Dictionary<string, List<string>>
-                {
-                    { "GetExchangeInfoAsync1" , new List<string>{ "futuresType" } }
-                },
-                parametersToSetNull: new string[] {
-                    "limit"
-                });
-        }
-
-        [Test]
-        public async Task ValidateUsdFuturesTradingCalls()
-        {
-            await _comparer.ProcessSubject(
-                "UsdFutures/Trading",
-                c => c.UsdFuturesApi.Trading,
-                useNestedJsonPropertyForCompare: new Dictionary<string, string>
-                {
-                },
-                ignoreProperties: new Dictionary<string, List<string>>
-                {
                 },
                 parametersToSetNull: new string[] {
                     "limit"

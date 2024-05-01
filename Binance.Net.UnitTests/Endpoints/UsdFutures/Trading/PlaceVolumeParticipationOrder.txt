@@ -1,0 +1,9 @@
+POST
+/sapi/v1/algo/futures/newOrderVp
+true
+{
+    "clientAlgoId": "00358ce6a268403398bd34eaa36dffe7",
+    "success": true,
+    "code": 0,
+    "msg": "OK"
+}

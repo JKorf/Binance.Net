@@ -1,0 +1,5 @@
+PUT
+/fapi/v1/listenKey
+false
+{
+}

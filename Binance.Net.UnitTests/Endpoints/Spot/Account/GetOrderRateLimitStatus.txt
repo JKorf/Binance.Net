@@ -1,0 +1,20 @@
+GET
+/api/v3/rateLimit/order
+true
+[
+
+  {
+    "rateLimitType": "ORDERS",
+    "interval": "SECOND",
+    "intervalNum": 10,
+    "limit": 10000,
+    "count": 0
+  },
+  {
+    "rateLimitType": "ORDERS",
+    "interval": "DAY",
+    "intervalNum": 1,
+    "limit": 20000,
+    "count": 0
+  }
+]

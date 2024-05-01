@@ -6,6 +6,11 @@
     public class BinanceInterestHistory
     {
         /// <summary>
+        /// Transaction id
+        /// </summary>
+        [JsonProperty("txId")]
+        public string? TransactionId { get; set; }
+        /// <summary>
         /// Isolated symbol
         /// </summary>
         public string? IsolatedSymbol { get; set; }
@@ -13,6 +18,10 @@
         /// The asset
         /// </summary>
         public string Asset { get; set; } = string.Empty;
+        /// <summary>
+        /// The raw asset
+        /// </summary>
+        public string? RawAsset { get; set; }
         /// <summary>
         /// The quantity of interest
         /// </summary>

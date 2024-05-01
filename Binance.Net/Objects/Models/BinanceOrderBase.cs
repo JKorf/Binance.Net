@@ -113,6 +113,11 @@ namespace Binance.Net.Objects.Models
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime? UpdateTime { get; set; }
         /// <summary>
+        /// The time the transaction was executed (when canceling order)
+        /// </summary>
+        [JsonConverter(typeof(DateTimeConverter))]
+        public DateTime? TransactTime { get; set; }
+        /// <summary>
         /// When the order started working
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]

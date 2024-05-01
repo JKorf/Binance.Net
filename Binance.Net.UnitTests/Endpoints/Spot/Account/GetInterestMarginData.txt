@@ -1,0 +1,20 @@
+GET
+/sapi/v1/margin/crossMarginData
+true
+[
+    {
+        "vipLevel": 0,
+        "coin": "BTC",
+        "transferIn": true,
+        "borrowable": true,
+        "dailyInterest": "0.00026125",
+        "yearlyInterest": "0.0953",
+        "borrowLimit": "180",
+        "marginablePairs": [
+            "BNBBTC",
+            "TRXBTC",
+            "ETHBTC",
+            "BTCUSDT"
+        ]
+    }
+]
