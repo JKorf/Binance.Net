@@ -34,6 +34,11 @@ namespace Binance.Net.Objects.Models.Futures
         /// </summary>
         public decimal BasisRate { get; set; }
         /// <summary>
+        /// Annualized basis rate
+        /// </summary>
+        [JsonProperty("annualizedBasisRate")]
+        public decimal? AnnualizedBasisRate { get; set; }
+        /// <summary>
         /// Data timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]

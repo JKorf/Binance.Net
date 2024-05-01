@@ -1,0 +1,15 @@
+GET
+/futures/data/basis
+false
+[  
+    {
+        "indexPrice": "34400.15945055",
+        "contractType": "PERPETUAL",
+        "basisRate": "0.0004",
+        "futuresPrice": "34414.10",
+        "annualizedBasisRate": "",
+        "basis": "13.94054945",
+        "pair": "BTCUSDT",
+        "timestamp": 1698742800000
+    }
+]

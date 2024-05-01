@@ -1,0 +1,19 @@
+GET
+/sapi/v1/margin/interestHistory
+true
+{
+  "rows": [
+    {            
+      "txId": 1352286576452864727,           
+      "interestAccuredTime": 1672160400000,            
+      "asset": "USDT", 
+      "rawAsset": "USDT",  // will not be returned for isolated margin           
+      "principal": "45.3313",            
+      "interest": "0.00024995",            
+      "interestRate": "0.00013233",            
+      "type": "ON_BORROW",           
+      "isolatedSymbol": "BNBUSDT"  // isolated symbol, will not be returned for crossed margin      
+    }
+  ],
+  "total": 1
+}

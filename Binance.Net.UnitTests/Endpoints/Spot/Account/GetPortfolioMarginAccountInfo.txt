@@ -1,0 +1,11 @@
+GET
+/sapi/v1/portfolio/account
+true
+{
+        "uniMMR": "5167.92171923",        // Classic Portfolio margin account maintenance margin rate
+        "accountEquity": "122607.35137903", 
+        "actualEquity": "142607.35137903",  
+        "accountMaintMargin": "23.72469206", 
+        "accountStatus": "NORMAL",   // Classic Portfolio margin account status:"NORMAL", "MARGIN_CALL", "SUPPLY_MARGIN", "REDUCE_ONLY", "ACTIVE_LIQUIDATION", "FORCE_LIQUIDATION", "BANKRUPTED"
+        "accountType": "PM_1"     //PM_1 for classic PM, PM_2 for PM 
+}

@@ -1,0 +1,16 @@
+GET
+/sapi/v1/margin/exchange-small-liability-history
+true
+{
+    "total": 1,
+    "rows": [
+      {
+        "asset": "ETH",
+        "amount": "0.00083434",
+        "targetAsset": "BUSD",
+        "targetAmount": "1.37576819",
+        "bizType": "EXCHANGE_SMALL_LIABILITY",
+        "timestamp": 1672801339253
+      }
+    ]
+}

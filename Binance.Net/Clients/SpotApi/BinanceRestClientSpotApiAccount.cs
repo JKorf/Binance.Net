@@ -351,7 +351,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/asset/dibblet", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/asset/dribblet", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             return await _baseClient.SendAsync<BinanceDustLogList>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -1124,7 +1124,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/portfolio/collateralRate", BinanceExchange.RateLimiter.SpotRestIp, 50, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/portfolio/collateralRate", BinanceExchange.RateLimiter.SpotRestIp, 50, false);
             return await _baseClient.SendAsync<IEnumerable<BinancePortfolioMarginCollateralRate>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -1304,7 +1304,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #endregion
 
-        #region GetTradeFee
+        #region Get Trade Fee
 
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceTradeFee>>> GetTradeFeeAsync(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)

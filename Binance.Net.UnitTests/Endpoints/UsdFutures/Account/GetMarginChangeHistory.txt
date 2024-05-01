@@ -1,0 +1,23 @@
+GET
+/fapi/v1/positionMargin/history
+true
+[
+    {
+        "symbol": "BTCUSDT",
+        "type": 1,
+        "deltaType": "USER_ADJUST",
+        "amount": "23.36332311",
+        "asset": "USDT",
+        "time": 1578047897183,
+        "positionSide": "BOTH"
+    },
+    {
+        "symbol": "BTCUSDT",
+        "type": 1, 
+        "deltaType": "USER_ADJUST",
+        "amount": "100",
+        "asset": "USDT",
+        "time": 1578047900425,
+        "positionSide": "LONG" 
+    }
+]

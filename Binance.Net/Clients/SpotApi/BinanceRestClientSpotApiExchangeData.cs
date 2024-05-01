@@ -143,7 +143,7 @@ namespace Binance.Net.Clients.SpotApi
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/asset/assetDetail", BinanceExchange.RateLimiter.SpotRestIp);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/asset/assetDetail", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             return await _baseClient.SendAsync<Dictionary<string, BinanceAssetDetails>>(request, parameters, ct).ConfigureAwait(false);
         }
         #endregion
@@ -559,7 +559,7 @@ namespace Binance.Net.Clients.SpotApi
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/margin/crossMarginCollateralRatio", BinanceExchange.RateLimiter.SpotRestIp, 100, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/margin/crossMarginCollateralRatio", BinanceExchange.RateLimiter.SpotRestIp, 100, false);
             return await _baseClient.SendAsync<IEnumerable<BinanceCrossMarginCollateralRatio>>(request, parameters, ct).ConfigureAwait(false);
         }
 

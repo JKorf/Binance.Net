@@ -1,0 +1,24 @@
+GET
+/sapi/v1/algo/futures/historicalOrders
+true
+{
+    "total": 1,
+    "orders": [
+        {
+            "algoId": 14518,
+            "symbol": "BNBUSDT",
+            "side": "BUY",
+            "positionSide": "BOTH",
+            "totalQty": "100.00",
+            "executedQty": "0.00",
+            "executedAmt": "0.00000000",
+            "avgPrice": "0.000",
+            "clientAlgoId": "acacab56b3c44bef9f6a8f8ebd2a8408",
+            "bookTime": 1649757019503,
+            "endTime": 1649757088101,
+            "algoStatus": "CANCELLED",
+            "algoType": "VP",
+            "urgency": "LOW"
+        }
+    ]
+}

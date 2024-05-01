@@ -1,0 +1,5 @@
+PUT
+/sapi/v1/userDataStream
+false
+{
+}

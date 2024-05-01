@@ -1,0 +1,9 @@
+POST
+/sapi/v1/algo/spot/newOrderTwap
+true
+{
+    "clientAlgoId": "65ce1630101a480b85915d7e11fd5078",
+    "success": true,
+    "code": 0,
+    "msg": "OK"
+}

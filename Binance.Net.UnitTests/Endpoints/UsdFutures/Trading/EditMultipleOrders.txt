@@ -1,0 +1,36 @@
+PUT
+/fapi/v1/batchOrders
+true
+[
+    {
+        "orderId": 20072994037,
+        "symbol": "BTCUSDT",
+        "pair": "BTCUSDT",
+        "status": "NEW",
+        "clientOrderId": "LJ9R4QZDihCaS8UAOOLpgW",
+        "price": "30005",
+        "avgPrice": "0.0",
+        "origQty": "1",
+        "executedQty": "0",
+        "cumQty": "0",
+        "cumBase": "0",
+        "timeInForce": "GTC",
+        "type": "LIMIT",
+        "reduceOnly": false,
+        "closePosition": false,
+        "side": "BUY",
+        "positionSide": "LONG",
+        "stopPrice": "0",
+        "workingType": "CONTRACT_PRICE",
+        "priceProtect": false,
+        "origType": "LIMIT",
+        "priceMatch": "NONE",
+        "selfTradePreventionMode": "NONE",
+        "goodTillDate": 0,
+        "updateTime": 1629182711600
+    },
+    {
+        "code": -2022, 
+        "msg": "ReduceOnly Order is rejected."
+    }
+]

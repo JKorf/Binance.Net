@@ -195,7 +195,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             {
                 onMessage(data.As(data.Data.Data, data.Data.Data.Symbol));
             });
-            return await SubscribeAsync(BaseAddress, new[] { symbol + _compositeIndexEndpoint }, action, ct).ConfigureAwait(false);
+            return await SubscribeAsync(BaseAddress, new[] { symbol.ToLower(CultureInfo.InvariantCulture) + _compositeIndexEndpoint }, action, ct).ConfigureAwait(false);
         }
 
         #endregion

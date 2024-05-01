@@ -159,6 +159,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get order edit history
+        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-order-modify-history-user_data" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get orders for</param>
         /// <param name="orderId">Filter by order id</param>

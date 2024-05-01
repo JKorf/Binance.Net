@@ -1,0 +1,19 @@
+GET
+/fapi/v1/continuousKlines
+false
+[
+  [
+    1607444700000,          // Open time
+    "18879.99",             // Open
+    "18900.00",             // High
+    "18878.98",             // Low
+    "18896.13",             // Close (or latest price)
+    "492.363",              // Volume
+    1607444759999,          // Close time
+    "9302145.66080",        // Quote asset volume
+    1874,                   // Number of trades
+    "385.983",              // Taker buy volume
+    "7292402.33267",        // Taker buy quote asset volume
+    "0"                     // Ignore.
+  ]
+]

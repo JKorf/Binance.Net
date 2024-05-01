@@ -1,8 +1,0 @@
-{
-   "symbol":"BTCUSDT",
-   "base":"BTC",
-   "quote":"USDT",
-   "isMarginTrade":true,
-   "isBuyAllowed":true,
-   "isSellAllowed":true      
-}

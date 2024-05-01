@@ -1,0 +1,16 @@
+GET
+/sapi/v1/capital/contract/convertible-coins
+true
+{
+  "convertEnabled": true,
+  "coins": [
+    "USDC",
+    "USDP",
+    "TUSD"
+  ],
+  "exchangeRates": {
+    "USDC": "1",
+    "TUSD": "1",
+    "USDP": "1"
+  }
+}

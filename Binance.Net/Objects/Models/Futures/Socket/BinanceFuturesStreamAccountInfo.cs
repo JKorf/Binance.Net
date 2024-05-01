@@ -97,6 +97,11 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         [JsonProperty("ep")]
         public decimal EntryPrice { get; set; }
         /// <summary>
+        /// The break even price
+        /// </summary>
+        [JsonProperty("bep")]
+        public decimal BreakEvenPrice { get; set; }
+        /// <summary>
         /// The accumulated realized PnL
         /// </summary>
         [JsonProperty("cr")]

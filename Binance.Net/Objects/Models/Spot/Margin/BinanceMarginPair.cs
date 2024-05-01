@@ -35,5 +35,10 @@
         /// Symbol name
         /// </summary>
         public string Symbol { get; set; } = string.Empty;
+        /// <summary>
+        /// Time at which the symbol gets delisted
+        /// </summary>
+        [JsonProperty("delistTime"), JsonConverter(typeof(DateTimeConverter))]
+        public DateTime? DelistTime { get; set; }
     }
 }

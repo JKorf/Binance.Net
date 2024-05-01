@@ -1,0 +1,6 @@
+POST
+/sapi/v1/capital/withdraw/apply
+true
+{
+    "id":"7213fea8e94b4a5593d507237e5a555b"
+}

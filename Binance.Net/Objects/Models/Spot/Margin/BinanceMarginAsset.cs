@@ -33,5 +33,10 @@
         /// </summary>
         [JsonProperty("userMinRepay")]
         public decimal MinimalRepayQuanitty { get; set; }
+        /// <summary>
+        /// Time at which the asset gets delisted
+        /// </summary>
+        [JsonProperty("delistTime"), JsonConverter(typeof(DateTimeConverter))]
+        public DateTime? DelistTime { get; set; }
     }
 }

@@ -1,0 +1,7 @@
+GET
+/sapi/v1/portfolio/pmLoan
+true
+{
+        "asset": "BUSD",   
+        "amount":  "579.45", // portfolio margin bankruptcy loan amount in BUSD
+}

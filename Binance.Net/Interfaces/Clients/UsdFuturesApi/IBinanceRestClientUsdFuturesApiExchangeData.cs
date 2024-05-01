@@ -78,7 +78,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="endTime">End time to get top trader long/short ratio (accounts)</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Top Trader Long/Short Ratio (Accounts) info</returns>
-        Task<WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>>> GetTopLongShortAccountRatioAsync(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>>> GetTopLongShortAccountRatioAsync(string symbol, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets Top Trader Long/Short Ratio (Positions)
@@ -91,7 +91,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="endTime">End time to get top trader long/short ratio (positions)</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Top Trader Long/Short Ratio (Positions) info</returns>
-        Task<WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>>> GetTopLongShortPositionRatioAsync(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>>> GetTopLongShortPositionRatioAsync(string symbol, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets Global Long/Short Ratio (Accounts)
@@ -104,7 +104,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="endTime">End time to get global long/short ratio (accounts)</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Global Long/Short Ratio (Accounts) info</returns>
-        Task<WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>>> GetGlobalLongShortAccountRatioAsync(string symbol, PeriodInterval period, int? limit, DateTime? startTime, DateTime? endTime, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceFuturesLongShortRatio>>> GetGlobalLongShortAccountRatioAsync(string symbol, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
 
         /// <summary>
         /// Kline/candlestick bars for the mark price of a symbol

@@ -1,0 +1,8 @@
+GET
+/fapi/v2/ticker/price
+false
+{
+  "symbol": "BTCUSDT",
+  "price": "6000.01",
+  "time": 1589437530011   // Transaction time
+}

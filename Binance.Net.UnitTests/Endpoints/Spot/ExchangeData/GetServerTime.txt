@@ -1,0 +1,6 @@
+GET
+/api/v3/time
+false
+{
+  "serverTime": 1499827319559
+}

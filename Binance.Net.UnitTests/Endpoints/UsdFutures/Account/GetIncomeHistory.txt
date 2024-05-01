@@ -1,0 +1,25 @@
+GET
+/fapi/v1/income
+true
+[
+    {
+        "symbol": "",                   // trade symbol, if existing
+        "incomeType": "TRANSFER",   // income type
+        "income": "-0.37500000",  // income amount
+        "asset": "USDT",                // income asset
+        "info":"TRANSFER",          // extra information
+        "time": 1570608000000,      
+        "tranId":"9689322392",      // transaction id
+        "tradeId":""                    // trade id, if existing
+    },
+    {
+        "symbol": "BTCUSDT",
+        "incomeType": "COMMISSION", 
+        "income": "-0.01000000",
+        "asset": "USDT",
+        "info":"COMMISSION",
+        "time": 1570636800000,
+        "tranId":"9689322392",
+        "tradeId": 2059192
+    }
+]

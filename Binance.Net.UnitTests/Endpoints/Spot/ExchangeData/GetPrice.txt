@@ -1,0 +1,7 @@
+GET
+/api/v3/ticker/price
+false
+{
+  "symbol": "LTCBTC",
+  "price": "4.00000200"
+}

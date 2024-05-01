@@ -1,0 +1,62 @@
+POST
+/api/v3/orderList/oco
+true
+{
+    "orderListId": 1,
+    "contingencyType": "OCO",
+    "listStatusType": "EXEC_STARTED",
+    "listOrderStatus": "EXECUTING",
+    "listClientOrderId": "lH1YDkuQKWiXVXHPSKYEIp",
+    "transactionTime": 1710485608839,
+    "symbol": "LTCBTC",
+    "orders": [
+        {
+            "symbol": "LTCBTC",
+            "orderId": 10,
+            "clientOrderId": "44nZvqpemY7sVYgPYbvPih"
+        },
+        {
+            "symbol": "LTCBTC",
+            "orderId": 11,
+            "clientOrderId": "NuMp0nVYnciDiFmVqfpBqK"
+        }
+    ],
+    "orderReports": [
+        {
+            "symbol": "LTCBTC",
+            "orderId": 10,
+            "orderListId": 1,
+            "clientOrderId": "44nZvqpemY7sVYgPYbvPih",
+            "transactTime": 1710485608839,
+            "price": "1.00000000",
+            "origQty": "5.00000000",
+            "executedQty": "0.00000000",
+            "cummulativeQuoteQty": "0.00000000",
+            "status": "NEW",
+            "timeInForce": "GTC",
+            "type": "STOP_LOSS_LIMIT",
+            "side": "SELL",
+            "stopPrice": "1.00000000",
+            "workingTime": -1,
+            "icebergQty": "1.00000000",
+            "selfTradePreventionMode": "NONE"
+        },
+        {
+            "symbol": "LTCBTC",
+            "orderId": 11,
+            "orderListId": 1,
+            "clientOrderId": "NuMp0nVYnciDiFmVqfpBqK",
+            "transactTime": 1710485608839,
+            "price": "3.00000000",
+            "origQty": "5.00000000",
+            "executedQty": "0.00000000",
+            "cummulativeQuoteQty": "0.00000000",
+            "status": "NEW",
+            "timeInForce": "GTC",
+            "type": "LIMIT_MAKER",
+            "side": "SELL",
+            "workingTime": 1710485608839,
+            "selfTradePreventionMode": "NONE"
+        }
+    ]
+}

@@ -1,0 +1,6 @@
+POST
+/sapi/v1/portfolio/repay
+true
+{
+    "tranId": 58203331886213504
+}

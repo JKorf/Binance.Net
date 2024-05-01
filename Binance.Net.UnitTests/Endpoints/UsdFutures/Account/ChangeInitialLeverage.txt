@@ -1,0 +1,8 @@
+POST
+/fapi/v1/leverage
+true
+{
+    "leverage": 21,
+    "maxNotionalValue": "1000000",
+    "symbol": "BTCUSDT"
+}

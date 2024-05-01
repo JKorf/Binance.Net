@@ -1,0 +1,7 @@
+POST
+/fapi/v1/countdownCancelAll
+true
+{
+    "symbol": "BTCUSDT", 
+    "countdownTime": "100000"
+}

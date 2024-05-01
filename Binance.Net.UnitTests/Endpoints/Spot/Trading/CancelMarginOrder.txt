@@ -1,0 +1,18 @@
+DELETE
+/sapi/v1/margin/order
+true
+{
+  "symbol": "LTCBTC",
+  "isIsolated": true,       // if isolated margin
+  "orderId": "28",
+  "origClientOrderId": "myOrder1",
+  "clientOrderId": "cancelMyOrder1",
+  "price": "1.00000000",
+  "origQty": "10.00000000",
+  "executedQty": "8.00000000",
+  "cummulativeQuoteQty": "8.00000000",
+  "status": "CANCELED",
+  "timeInForce": "GTC",
+  "type": "LIMIT",
+  "side": "SELL"
+}

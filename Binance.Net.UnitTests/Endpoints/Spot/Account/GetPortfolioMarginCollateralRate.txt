@@ -1,0 +1,13 @@
+GET
+/sapi/v1/portfolio/collateralRate
+false
+[
+   {
+       "asset": "USDC",
+       "collateralRate": "1.0000"
+   },
+   {
+       "asset": "BUSD",
+       "collateralRate": "1.0000"
+   },
+]

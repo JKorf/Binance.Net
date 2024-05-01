@@ -1,0 +1,13 @@
+GET
+/sapi/v1/convert/assetInfo
+false
+[
+  {
+    "asset": "BTC", 
+    "fraction": 8
+  },
+  {
+    "asset": "SHIB", 
+    "fraction": 2
+  }
+]

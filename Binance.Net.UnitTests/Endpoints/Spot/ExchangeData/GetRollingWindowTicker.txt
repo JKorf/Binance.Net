@@ -1,0 +1,20 @@
+GET
+/api/v3/ticker
+false
+{
+  "symbol":             "BNBBTC",
+  "priceChange":        "-8.00000000",  // Absolute price change
+  "priceChangePercent": "-88.889",      // Relative price change in percent
+  "weightedAvgPrice":   "2.60427807",   // QuoteVolume / Volume
+  "openPrice":          "9.00000000",
+  "highPrice":          "9.00000000",
+  "lowPrice":           "1.00000000",
+  "lastPrice":          "1.00000000",
+  "volume":             "187.00000000",
+  "quoteVolume":        "487.00000000", // Sum of (price * volume) for all trades
+  "openTime":           1641859200000,  // Open time for ticker window
+  "closeTime":          1642031999999,  // Current Time of the Request
+  "firstId":            0,              // Trade IDs
+  "lastId":             60,
+  "count":              61              // Number of trades in the interval
+}

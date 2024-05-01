@@ -1,8 +1,0 @@
-{
-    "e":"ACCOUNT_CONFIG_UPDATE",       // Event Type
-    "E":1611646737479,                 // Event Time
-    "T":1611646737476,                 // Transaction Time
-    "ai":{                             // User's Account Configuration
-    "j":true                           // Multi-Assets Mode
-    }
-}  

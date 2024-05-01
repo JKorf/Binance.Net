@@ -1,0 +1,17 @@
+GET
+/fapi/v1/rateLimit/order
+true
+[
+  {
+    "rateLimitType": "ORDERS",
+    "interval": "SECOND",
+    "intervalNum": 10,
+    "limit": 10000,
+  },
+  {
+    "rateLimitType": "ORDERS",
+    "interval": "MINUTE",
+    "intervalNum": 1,
+    "limit": 20000,
+  }
+]

@@ -1,0 +1,7 @@
+GET
+/sapi/v1/margin/isolated/accountLimit
+true
+{
+  "enabledAccount": 5,
+  "maxAccount": 20
+}

@@ -1,0 +1,15 @@
+GET
+/sapi/v1/asset/tradeFee
+true
+[
+    {
+        "symbol": "ADABNB",
+        "makerCommission": "0.001",
+        "takerCommission": "0.001"
+    },
+    {
+        "symbol": "BNBBTC",
+        "makerCommission": "0.001",
+        "takerCommission": "0.001"
+    }
+]

@@ -205,5 +205,10 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         [JsonProperty("V")]
         [JsonConverter(typeof(EnumConverter))]
         public SelfTradePreventionMode? SelfTradePreventionMode { get; set; }
+        /// <summary>
+        /// Working time; when it entered the order book
+        /// </summary>
+        [JsonProperty("W"), JsonConverter(typeof(DateTimeConverter))]
+        public DateTime? WorkingTime { get; set; }
     }
 }

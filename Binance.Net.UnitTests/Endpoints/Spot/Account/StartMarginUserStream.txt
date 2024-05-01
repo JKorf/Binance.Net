@@ -1,0 +1,6 @@
+POST
+/sapi/v1/userDataStream
+false
+{
+  "listenKey": "T3ee22BIYuWqmvne0HNq2A2WsFlEtLhvWCtItw6ffhhd"
+}

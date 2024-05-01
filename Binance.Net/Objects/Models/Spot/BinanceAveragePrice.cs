@@ -15,5 +15,10 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonProperty("price")]
         public decimal Price { get; set; }
+        /// <summary>
+        /// The last trade time
+        /// </summary>
+        [JsonProperty("closeTime"), JsonConverter(typeof(DateTimeConverter))]
+        public DateTime LastTradeTime { get; set; }
     }
 }

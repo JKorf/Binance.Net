@@ -1,0 +1,8 @@
+GET
+/fapi/v1/commissionRate
+true
+{
+    "symbol": "BTCUSDT",
+    "makerCommissionRate": "0.0002",  // 0.02%
+    "takerCommissionRate": "0.0004"   // 0.04%
+}

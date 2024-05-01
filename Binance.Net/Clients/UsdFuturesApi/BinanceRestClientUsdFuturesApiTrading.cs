@@ -333,7 +333,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.Add("batchOrders", JsonConvert.SerializeObject(parameterOrders));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "fapi/v1/batchOrders", BinanceExchange.RateLimiter.FuturesRest, 5, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Put, "fapi/v1/batchOrders", BinanceExchange.RateLimiter.FuturesRest, 5, true);
             var response = await _baseClient.SendAsync<IEnumerable<BinanceUsdFuturesMultipleOrderPlaceResult>>(request, parameters, ct).ConfigureAwait(false);
             if (!response.Success)
                 return response.As<IEnumerable<CallResult<BinanceUsdFuturesOrder>>>(default);
@@ -611,7 +611,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/algo/futures/order", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/algo/futures/openOrders", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             return await _baseClient.SendToAddressAsync<BinanceAlgoOrders>(_spotBaseAddress, request, parameters, ct).ConfigureAwait(false);
         }
         #endregion

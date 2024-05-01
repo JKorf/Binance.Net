@@ -1,0 +1,7 @@
+POST
+/sapi/v1/bnbBurn
+true
+{
+   "spotBNBBurn":true,
+   "interestBNBBurn": false   
+}

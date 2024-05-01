@@ -18,6 +18,14 @@
         /// </summary>
         public bool TransferEnabled { get; set; }
         /// <summary>
+        /// Collateral margin level
+        /// </summary>
+        public decimal? CollateralMarginLevel { get; set; }
+        /// <summary>
+        /// Total collateral value in USDT
+        /// </summary>
+        public decimal? TotalCollateralValueInUSDT { get; set; }
+        /// <summary>
         /// Aggregate level of margin
         /// </summary>
         public decimal MarginLevel { get; set; }
@@ -33,6 +41,11 @@
         /// Aggregate total available net balance of BTC
         /// </summary>
         public decimal TotalNetAssetOfBtc { get; set; }
+        /// <summary>
+        /// Account type
+        /// </summary>
+        [JsonProperty("accountType")]
+        public string AccountType { get; set; } = string.Empty;
         /// <summary>
         /// Balance list
         /// </summary>

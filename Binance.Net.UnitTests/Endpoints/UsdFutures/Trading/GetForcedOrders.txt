@@ -1,0 +1,49 @@
+GET
+/fapi/v1/forceOrders
+true
+[
+  {
+    "orderId": 6071832819, 
+    "symbol": "BTCUSDT", 
+    "status": "FILLED", 
+    "clientOrderId": "autoclose-1596107620040000020", 
+    "price": "10871.09", 
+    "avgPrice": "10913.21000", 
+    "origQty": "0.001", 
+    "executedQty": "0.001", 
+    "cumQuote": "10.91321", 
+    "timeInForce": "IOC", 
+    "type": "LIMIT", 
+    "reduceOnly": false, 
+    "closePosition": false, 
+    "side": "SELL", 
+    "positionSide": "BOTH", 
+    "stopPrice": "0", 
+    "workingType": "CONTRACT_PRICE", 
+    "origType": "LIMIT", 
+    "time": 1596107620044, 
+    "updateTime": 1596107620087
+  },
+  {
+    "orderId": 6072734303, 
+    "symbol": "BTCUSDT", 
+    "status": "FILLED", 
+    "clientOrderId": "adl_autoclose", 
+    "price": "11023.14", 
+    "avgPrice": "10979.82000", 
+    "origQty": "0.001", 
+    "executedQty": "0.001", 
+    "cumQuote": "10.97982", 
+    "timeInForce": "GTC", 
+    "type": "LIMIT", 
+    "reduceOnly": false, 
+    "closePosition": false, 
+    "side": "BUY", 
+    "positionSide": "SHORT", 
+    "stopPrice": "0", 
+    "workingType": "CONTRACT_PRICE", 
+    "origType": "LIMIT", 
+    "time": 1596110725059, 
+    "updateTime": 1596110725071
+  }
+]

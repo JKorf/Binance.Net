@@ -173,6 +173,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get assets that can be converted to BNB
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-assets-that-can-be-converted-into-bnb-user_data" /></para>
         /// </summary>
         /// <param name="accountType">Spot or Margin account</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -415,7 +416,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Query loan records
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-loan-record-user_data" /></para>
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-borrow-repay-records-in-margin-account-user_data" /></para>
         /// </summary>
         /// <param name="asset">The records asset</param>
         /// <param name="transactionId">The id of loan transaction</param>
@@ -432,7 +433,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Query repay records
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-repay-record-user_data" /></para>
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-borrow-repay-records-in-margin-account-user_data" /></para>
         /// </summary>
         /// <param name="asset">The records asset</param>
         /// <param name="transactionId">The id of repay transaction</param>
@@ -587,6 +588,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get isolated margin order rate limits
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-current-margin-order-count-usage-trade" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -594,7 +596,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<IEnumerable<BinanceCurrentRateLimit>>> GetMarginOrderRateLimitStatusAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to BinanceSocketClient.Futures.SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.
+        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to BinanceSocketClient.SpotApi.Account..SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#listen-key-margin" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
@@ -621,7 +623,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Starts a user stream  for margin account by requesting a listen key. 
-        /// This listen key can be used in subsequent requests to  BinanceSocketClient.Spot.SubscribeToUserDataUpdates  
+        /// This listen key can be used in subsequent requests to  BinanceSocketClient.SpotApi.Account.SubscribeToUserDataUpdates  
         /// The stream will close after 60 minutes unless a keep alive is send.
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#listen-key-isolated-margin" /></para>
         /// </summary>
@@ -692,7 +694,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Portfolio margin account info
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-portfolio-margin-account-info-user_data" /></para>
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-classic-portfolio-margin-account-info-user_data" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -701,7 +703,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get portfolio margin account collateral rates
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#portfolio-margin-collateral-rate-market_data" /></para>
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#classic-portfolio-margin-collateral-rate-market_data" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -710,7 +712,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get portfolio margin bankrupty loan amount
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-portfolio-margin-bankruptcy-loan-amount-user_data" /></para>
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-classic-portfolio-margin-bankruptcy-loan-amount-user_data" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -719,7 +721,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Repay portfolio margin bankruptcy loan
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#portfolio-margin-bankruptcy-loan-repay" /></para>
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#classic-portfolio-margin-bankruptcy-loan-repay" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>

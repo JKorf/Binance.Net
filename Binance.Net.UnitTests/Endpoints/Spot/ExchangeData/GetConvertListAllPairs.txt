@@ -1,0 +1,13 @@
+GET
+/sapi/v1/convert/exchangeInfo
+false
+[
+  {
+    "fromAsset":"BTC",
+    "toAsset":"USDT",
+    "fromAssetMinAmount":"0.0004",
+    "fromAssetMaxAmount":"50",
+    "toAssetMinAmount":"20",
+    "toAssetMaxAmount":"2500000"
+  }
+]
