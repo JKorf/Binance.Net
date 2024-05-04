@@ -1,0 +1,22 @@
+GET
+/dapi/v1/depth
+false
+{
+  "lastUpdateId": 16769853,
+  "symbol": "BTCUSD_PERP", // Symbol
+  "pair": "BTCUSD",      // Pair
+  "E": 1591250106370,   // Message output time
+  "T": 1591250106368,   // Transaction time
+  "bids": [
+    [
+      "9638.0",         // PRICE
+      "431"             // QTY
+    ]
+  ],
+  "asks": [
+    [
+      "9638.2",
+      "12"
+    ]
+  ]
+}

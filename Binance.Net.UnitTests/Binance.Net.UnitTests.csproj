@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <Folder Include="Endpoints\CoinFutures\Trading\" />
-    <Folder Include="Endpoints\CoinFutures\ExchangeData\" />
     <Folder Include="Endpoints\CoinFutures\Account\" />
   </ItemGroup>
 

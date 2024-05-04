@@ -1,0 +1,6 @@
+GET
+/dapi/v1/time
+false
+{
+  "serverTime": 1499827319559
+}

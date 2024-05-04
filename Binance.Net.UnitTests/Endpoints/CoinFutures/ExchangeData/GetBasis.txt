@@ -1,0 +1,15 @@
+GET
+/futures/data/basis
+false
+[  
+   {
+        "indexPrice": "29269.93972727",
+        "contractType": "CURRENT_QUARTER",
+        "basisRate": "0.0024",
+        "futuresPrice": "29341.3",
+        "annualizedBasisRate": "0.0283",
+        "basis": "71.36027273",
+        "pair": "BTCUSD",
+        "timestamp": 1653381600000
+   }
+]

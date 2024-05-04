@@ -1,0 +1,19 @@
+GET
+/futures/data/openInterestHist
+false
+[  
+   {
+      "pair": "BTCUSD",
+      "contractType": "CURRENT_QUARTER",
+      "sumOpenInterest": "20403",  //unit: cont
+      "sumOpenInterestValue": "176196512.23400000", //unit: base asset
+      "timestamp": 1591261042378
+   },
+   {
+     "pair": "BTCUSD",
+      "contractType": "CURRENT_QUARTER",
+      "sumOpenInterest": "20401",  
+      "sumOpenInterestValue": "176178704.98700000", 
+      "timestamp": 1583128200000
+   }
+]

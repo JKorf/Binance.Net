@@ -1,0 +1,11 @@
+GET
+/dapi/v1/ticker/price
+false
+[
+    {
+        "symbol": "BTCUSD_200626",  
+        "ps": "9647.8",             // pair 
+        "price": "9647.8",      
+        "time": 1591257246176  
+    }
+]

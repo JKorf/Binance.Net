@@ -1,0 +1,13 @@
+GET
+/dapi/v1/historicalTrades
+false
+[
+  {
+    "id": 595103,
+    "price": "9642.2",
+    "qty": "1",
+    "baseQty": "0.01037108",
+    "time": 1499865549590,
+    "isBuyerMaker": true,
+  }
+]

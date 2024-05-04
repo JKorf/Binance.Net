@@ -1,0 +1,15 @@
+GET
+/dapi/v1/ticker/bookTicker
+false
+[
+    {
+        "lastUpdateId": 1027024,
+        "symbol": "BTCUSD_200626",
+        "pair": "BTCUSD",
+        "bidPrice": "9650.1",
+        "bidQty": "16",
+        "askPrice": "9650.3",
+        "askQty": "7",
+        "time": 1591257300345
+    }
+]
