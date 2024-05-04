@@ -1,0 +1,103 @@
+GET
+/sapi/v1/pay/transactions
+true
+{
+    "code": "000000",
+    "message": "success",
+    "data": [
+        {
+            "uid": 72,
+            "counterpartyId": 579313011,
+            "orderId": "294163557804187651",
+            "note": "",
+            "orderType": "C2C",
+            "transactionId": "P_A1JM7ZT9MM571112",
+            "transactionTime": 1714817381912,
+            "amount": "5",
+            "currency": "USDT",
+            "walletType": 1,
+            "walletTypes": [
+                "1"
+            ],
+            "fundsDetail": [
+                {
+                    "currency": "USDT",
+                    "amount": "5",
+                    "walletAssetCost": {
+                        "1": "5"
+                    }
+                }
+            ],
+            "payerInfo": {
+                "name": "F******S",
+                "type": "USER",
+                "email": "md.***@gmail.com",
+                "binanceId": 6,
+                "accountId": 51,
+                "countryCode": 880,
+                "phoneNumber": "018******41",
+                "mobileCode": "BD",
+                "unmaskData": false
+            },
+            "receiverInfo": {
+                "name": "b****s",
+                "type": "USER",
+                "email": "lao***@gmail.com",
+                "binanceId": 72,
+                "accountId": 73,
+                "countryCode": 88,
+                "phoneNumber": "1********90",
+                "mobileCode": "EN",
+                "unmaskData": false
+            },
+            "totalPaymentFee": "0"
+        },
+        {
+            "uid": 72,
+            "counterpartyId": 406201343,
+            "orderId": "294052657623097345",
+            "note": "ABC",
+            "orderType": "C2C",
+            "transactionId": "P_A1JKUDBWMBW71115",
+            "transactionTime": 1714765739266,
+            "amount": "1",
+            "currency": "USDT",
+            "walletType": 1,
+            "walletTypes": [
+                "1"
+            ],
+            "fundsDetail": [
+                {
+                    "currency": "USDT",
+                    "amount": "1",
+                    "walletAssetCost": {
+                        "1": "1"
+                    }
+                }
+            ],
+            "payerInfo": {
+                "name": "A******z",
+                "type": "USER",
+                "email": "akr***@gmail.com",
+                "binanceId": 43,
+                "accountId": 43,
+                "countryCode": 213,
+                "phoneNumber": "79*****64",
+                "mobileCode": "DZ",
+                "unmaskData": false
+            },
+            "receiverInfo": {
+                "name": "b****s",
+                "type": "USER",
+                "email": "lao***@gmail.com",
+                "binanceId": 2,
+                "accountId": 73,
+                "countryCode": 88,
+                "phoneNumber": "1********90",
+                "mobileCode": "EN",
+                "unmaskData": false
+            },
+            "totalPaymentFee": "0"
+        }],
+    "success": true
+}

@@ -174,6 +174,7 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.SpotApi.Trading.GetLeveragedTokensRedemptionRecordsAsync("ETHUSDT", 1), "GetLeveragedTokensRedemptionRecords");
             await tester.ValidateAsync(client => client.SpotApi.Trading.GetC2CTradeHistoryAsync(Enums.OrderSide.Buy), "GetC2CTradeHistory", "data");
             await tester.ValidateAsync(client => client.SpotApi.Trading.GetPayTradeHistoryAsync(), "GetPayTradeHistory", "data", new List<string>{ "walletTypes", "walletAssetCost" });
+            await tester.ValidateAsync(client => client.SpotApi.Trading.GetPayTradeHistoryAsync(), "GetPayTradeHistory2", "data", new List<string>{ "walletTypes", "walletAssetCost" });
             await tester.ValidateAsync(client => client.SpotApi.Trading.ConvertQuoteRequestAsync("USDT", "ETH", 1), "ConvertQuoteRequest");
             await tester.ValidateAsync(client => client.SpotApi.Trading.GetConvertOrderStatusAsync("123"), "GetConvertOrderStatus");
             await tester.ValidateAsync(client => client.SpotApi.Trading.GetConvertTradeHistoryAsync(DateTime.UtcNow, DateTime.UtcNow), "GetConvertTradeHistory");

@@ -8,6 +8,26 @@ namespace Binance.Net.Objects.Models.Spot
     public class BinancePayTrade
     {
         /// <summary>
+        /// Uid
+        /// </summary>
+        [JsonProperty("uid")]
+        public long? Uid { get; set; }
+        /// <summary>
+        /// Counter party id
+        /// </summary>
+        [JsonProperty("counterpartyId")]
+        public long? CounterPartyId { get; set; }
+        /// <summary>
+        /// Order id
+        /// </summary>
+        [JsonProperty("orderId")]
+        public string OrderId { get; set; } = string.Empty;
+        /// <summary>
+        /// Note
+        /// </summary>
+        [JsonProperty("note")]
+        public string? Note { get; set; }
+        /// <summary>
         /// Order type
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
@@ -27,6 +47,11 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonProperty("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
+        /// Total fee
+        /// </summary>
+        [JsonProperty("totalPaymentFee")]
+        public decimal TotalPaymentFee { get; set; }
+        /// <summary>
         /// Asset
         /// </summary>
         [JsonProperty("currency")]
@@ -45,12 +70,12 @@ namespace Binance.Net.Objects.Models.Spot
         /// Payer info
         /// </summary>
         [JsonProperty("payerInfo")]
-        public BinancePayTradePayerInfo PayerInfo { get; set; } = new BinancePayTradePayerInfo();
+        public BinancePayTradeParticipantInfo PayerInfo { get; set; } = new BinancePayTradeParticipantInfo();
         /// <summary>
         /// Receiver info
         /// </summary>
         [JsonProperty("receiverInfo")]
-        public BinancePayTradeReceiverInfo ReceiverInfo { get; set; } = new BinancePayTradeReceiverInfo();
+        public BinancePayTradeParticipantInfo ReceiverInfo { get; set; } = new BinancePayTradeParticipantInfo();
     }
 
     /// <summary>
@@ -71,36 +96,9 @@ namespace Binance.Net.Objects.Models.Spot
     }
 
     /// <summary>
-    /// Pay trade payer info
-    /// </summary>
-    public class BinancePayTradePayerInfo
-    {
-        /// <summary>
-        /// Nickname or merchant name
-        /// </summary>
-        [JsonProperty("name")]
-        public string Name { get; set; } = string.Empty;
-        /// <summary>
-        /// Account type，USER for personal，MERCHANT for merchant
-        /// </summary>
-        [JsonProperty("type")]
-        public string Type { get; set; } = string.Empty;
-        /// <summary>
-        /// Binance uid
-        /// </summary>
-        [JsonProperty("binanceId")]
-        public string BinanceId { get; set; } = string.Empty;
-        /// <summary>
-        /// Binance pay id
-        /// </summary>
-        [JsonProperty("accountId")]
-        public string AccountId { get; set; } = string.Empty;
-    }
-
-    /// <summary>
     /// Pay trade receiver info
     /// </summary>
-    public class BinancePayTradeReceiverInfo
+    public class BinancePayTradeParticipantInfo
     {
         /// <summary>
         /// Nickname or merchant name
@@ -142,5 +140,10 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonProperty("mobileCode")]
         public string MobileCode { get; set; } = string.Empty;
+        /// <summary>
+        /// Unmask data
+        /// </summary>
+        [JsonProperty("unmaskData")]
+        public bool? UnmaskData { get; set; }
     }
 }
