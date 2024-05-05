@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot
 {
@@ -7,6 +7,22 @@ namespace Binance.Net.Objects.Models.Spot
     /// </summary>
     public class BinancePayTrade
     {
+        /// <summary>
+        /// User Id
+        /// </summary>
+        public string uid { get; set; } = string.Empty;
+        /// <summary>
+        /// Counterparty Id
+        /// </summary>
+        public string counterpartyId { get; set; } = string.Empty;
+        /// <summary>
+        /// Note
+        /// </summary>
+        public string note { get; set; } = string.Empty;
+        /// <summary>
+        /// Order Id
+        /// </summary>
+        public string orderId { get; set; } = string.Empty;
         /// <summary>
         /// Order type
         /// </summary>
@@ -51,6 +67,11 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonProperty("receiverInfo")]
         public BinancePayTradeReceiverInfo ReceiverInfo { get; set; } = new BinancePayTradeReceiverInfo();
+        /// <summary>
+        /// PaymentFee
+        /// </summary>
+        [JsonProperty("totalPaymentFee")]
+        public decimal PaymentFee { get; set; }
     }
 
     /// <summary>
