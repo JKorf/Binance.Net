@@ -1,0 +1,19 @@
+GET
+/sapi/v1/loan/repay/history
+true
+{
+  "rows": [
+    {
+    "loanCoin": "BUSD",
+    "repayAmount": "10000",
+    "collateralCoin": "BNB",
+    "collateralUsed": "0",
+    "collateralReturn": "49.27565492",
+    "repayType": "1", // 1 for "repay with borrowed coin", 2 for "repay with collateral"
+    "repayStatus": "Repaid", // Repaid, Repaying, Failed
+    "repayTime": 1575018510000,
+    "orderId": 756783308056935434
+    }
+  ],
+  "total": 1
+}

@@ -36,6 +36,7 @@ namespace Binance.Net.Clients.GeneralApi
             return await _baseClient.SendAsync<IEnumerable<BinanceCryptoLoanIncome>>(request, parameters, ct).ConfigureAwait(false);
         }
         #endregion
+
         #region Borrow
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceCryptoLoanBorrow>> BorrowAsync(string loanAsset, string collateralAsset, int loanTerm, decimal? loanQuantity = null, decimal? collateralQuantity = null, long? receiveWindow = null, CancellationToken ct = default)

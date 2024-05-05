@@ -1,0 +1,25 @@
+GET
+/sapi/v1/broker/subAccount
+true
+[
+        {
+            "subaccountId": "1",
+            "email": "vai_42038996_47411276_brokersubuser@lac.info",
+            "tag":"bob123",
+            "makerCommission": 0.001,
+            "takerCommission": 0.001,
+            "marginMakerCommission": -1,  // if margin disabled, return -1
+            "marginTakerCommission": -1,  // if margin disabled, return -1
+            "createTime":1544433328000
+        },
+        {
+            "subaccountId": "2",
+            "email":"123@abc.com",
+            "tag":"bob123",
+            "makerCommission":0.001,
+            "takerCommission":0.001,
+            "marginMakerCommission": 10,
+            "marginTakerCommission": 10,
+            "createTime":1544433328000
+        }
+]

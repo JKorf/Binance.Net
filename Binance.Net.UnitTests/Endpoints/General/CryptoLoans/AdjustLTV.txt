@@ -1,0 +1,10 @@
+POST
+/sapi/v1/loan/adjust/ltv
+true
+{
+  "loanCoin": "BUSD",
+  "collateralCoin": "BNB",
+  "direction": "ADDITIONAL",
+  "amount": "5.235",
+  "currentLTV": "0.52"
+}

@@ -1,0 +1,4 @@
+DELETE
+/sapi/v1/broker/subAccountApi
+true
+{}

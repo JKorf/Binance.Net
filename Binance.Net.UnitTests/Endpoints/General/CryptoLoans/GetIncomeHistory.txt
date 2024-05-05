@@ -1,0 +1,19 @@
+GET
+/sapi/v1/loan/income
+true
+[
+   {
+        "asset": "BUSD",
+        "type": "borrowIn",
+        "amount": "100",
+        "timestamp": 1633771139847,
+        "tranId": "80423589583"
+    },
+    {
+        "asset": "BUSD",
+        "type": "borrowIn",
+        "amount": "100",
+        "timestamp": 1634638371496,
+        "tranId": "81685123491"
+    }
+ ]

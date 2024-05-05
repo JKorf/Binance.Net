@@ -1,0 +1,34 @@
+POST
+/dapi/v1/batchOrders
+true
+[
+    {
+        "clientOrderId": "testOrder",
+        "cumQty": "0",
+        "cumBase": "0",
+        "executedQty": "0",
+        "orderId": 22542179,
+        "avgPrice": "0.0",
+        "origQty": "10",
+        "price": "0",
+        "reduceOnly": false,
+        "side": "BUY",
+        "positionSide": "SHORT",
+        "status": "NEW",
+        "stopPrice": "9300",             // please ignore when order type is TRAILING_STOP_MARKET
+        "symbol": "BTCUSD_200925",
+        "pair": "BTCUSD",
+        "timeInForce": "GTC",
+        "type": "TRAILING_STOP_MARKET",
+        "origType": "TRAILING_STOP_MARKET",
+        "activatePrice": "9020",         // activation price, only return with TRAILING_STOP_MARKET order
+        "priceRate": "0.3",              // callback rate, only return with TRAILING_STOP_MARKET order
+        "updateTime": 1566818724722,
+        "workingType": "CONTRACT_PRICE",
+        "priceProtect": false            // if conditional order trigger is protected
+    },
+    {
+        "code": -2022, 
+        "msg": "ReduceOnly Order is rejected."
+    }
+]

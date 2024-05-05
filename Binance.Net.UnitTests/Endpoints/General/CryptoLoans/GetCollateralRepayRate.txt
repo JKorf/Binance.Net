@@ -1,0 +1,9 @@
+GET
+/sapi/v1/loan/repay/collateral/rate
+true
+{
+  "loanlCoin": "BUSD",
+  "collateralCoin": "BNB",
+  "repayAmount": "1000",
+  "rate": "300.36781234" // rate of collateral coin/loan coin
+}

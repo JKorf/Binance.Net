@@ -18,8 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Endpoints\CoinFutures\Trading\" />
-    <Folder Include="Endpoints\CoinFutures\Account\" />
+    <Folder Include="Endpoints\General\SimpleEarn\" />
+    <Folder Include="Endpoints\General\Staking\" />
+    <Folder Include="Endpoints\General\SubAccount\" />
+    <Folder Include="Endpoints\General\Mining\" />
+    <Folder Include="Endpoints\General\Futures\" />
   </ItemGroup>
 
 </Project>

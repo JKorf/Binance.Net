@@ -102,11 +102,11 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<CallResult<BinanceFuturesOrder>>>> PlaceMultipleOrdersAsync(
-            BinanceFuturesBatchOrder[] orders,
+            IEnumerable<BinanceFuturesBatchOrder> orders,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
-            if (orders.Length <= 0 || orders.Length > 5)
+            if (orders.Count() <= 0 || orders.Count() > 5)
                 throw new ArgumentException("Order list should be at least 1 and max 5 orders");
 
             if (_baseClient.ApiOptions.TradeRulesBehaviour != TradeRulesBehaviour.None)
@@ -128,7 +128,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             var parameters = new ParameterCollection();
 
-            var parameterOrders = new ParameterCollection[orders.Length];
+            var parameterOrders = new ParameterCollection[orders.Count()];
             int i = 0;
             foreach (var order in orders)
             {
@@ -263,15 +263,15 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Cancel Multiple Orders
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<CallResult<BinanceFuturesOrder>>>> CancelMultipleOrdersAsync(string symbol, List<long>? orderIdList = null, List<string>? origClientOrderIdList = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<CallResult<BinanceFuturesOrder>>>> CancelMultipleOrdersAsync(string symbol, IEnumerable<long>? orderIdList = null, IEnumerable<string>? origClientOrderIdList = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (orderIdList == null && origClientOrderIdList == null)
                 throw new ArgumentException("Either orderIdList or origClientOrderIdList must be sent");
 
-            if (orderIdList?.Count > 10)
+            if (orderIdList?.Count() > 10)
                 throw new ArgumentException("orderIdList cannot contain more than 10 items");
 
-            if (origClientOrderIdList?.Count > 10)
+            if (origClientOrderIdList?.Count() > 10)
                 throw new ArgumentException("origClientOrderIdList cannot contain more than 10 items");
 
             var parameters = new ParameterCollection

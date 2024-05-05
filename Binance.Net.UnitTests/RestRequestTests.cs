@@ -308,6 +308,36 @@ namespace Binance.Net.UnitTests
         }
 
         [Test]
+        public async Task ValidateCoinFuturesAccountCalls()
+        {
+            var client = new BinanceRestClient(opts =>
+            {
+                opts.RateLimiterEnabled = false;
+                opts.AutoTimestamp = false;
+                opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
+            });
+            var tester = new RestRequestValidator<BinanceRestClient>(client, "Endpoints/CoinFutures/Account", "https://dapi.binance.com", IsAuthenticated, stjCompare: false);
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Account.ModifyPositionModeAsync(true), "ModifyPositionMode");
+            //await tester.ValidateAsync(client => client.CoinFuturesApi.Account.GetPositionModeAsync(), "GetPositionMode");
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Account.ChangeInitialLeverageAsync("ETHUSDT", 1), "ChangeInitialLeverage");
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Account.ChangeMarginTypeAsync("ETHUSDT", Enums.FuturesMarginType.Isolated), "ChangeMarginType");
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Account.ModifyPositionMarginAsync("ETHUSDT", 1, Enums.FuturesMarginChangeDirectionType.Add), "ModifyPositionMargin");
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Account.GetMarginChangeHistoryAsync("ETHUSDT"), "GetMarginChangeHistory");
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Account.GetIncomeHistoryAsync("ETHUSDT"), "GetIncomeHistory");
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Account.GetBracketsAsync("ETHUSDT"), "GetBrackets", ignoreProperties: new List<string> { "qtyCap", "qtylFloor" });
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Account.GetPositionAdlQuantileEstimationAsync("ETHUSDT"), "GetPositionAdlQuantileEstimation");
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Account.StartUserStreamAsync(), "StartUserStream", "listenKey");
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Account.KeepAliveUserStreamAsync("123"), "KeepAliveUserStream");
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Account.StopUserStreamAsync("123"), "StopUserStream");
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Account.GetAccountInfoAsync(), "GetAccountInfo");
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Account.GetBalancesAsync(), "GetBalances");
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Account.GetPositionInformationAsync(), "GetPositionInformation", ignoreProperties: new List<string> { "unRealizedProfit" });
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Account.GetUserCommissionRateAsync("ETHUSDT"), "GetUserCommissionRate");
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Account.GetDownloadIdForTransactionHistoryAsync(DateTime.UtcNow, DateTime.UtcNow), "GetDownloadIdForTransactionHistory");
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Account.GetDownloadLinkForTransactionHistoryAsync("123"), "GetDownloadLinkForTransactionHistory", ignoreProperties: new List<string> { "notified" });
+        }
+
+        [Test]
         public async Task ValidateCoinFuturesExchangeDataCalls()
         {
             var client = new BinanceRestClient(opts =>
@@ -340,6 +370,73 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.CoinFuturesApi.ExchangeData.GetTakerBuySellVolumeRatioAsync("ETHUSDT", Enums.ContractType.Perpetual, Enums.PeriodInterval.ThirtyMinutes), "GetTakerBuySellVolumeRatio");
             await tester.ValidateAsync(client => client.CoinFuturesApi.ExchangeData.GetBasisAsync("ETHUSDT", Enums.ContractType.Perpetual, Enums.PeriodInterval.ThirtyMinutes), "GetBasis");
             await tester.ValidateAsync(client => client.CoinFuturesApi.ExchangeData.GetPricesAsync("ETHUSDT"), "GetPrices");
+        }
+
+        [Test]
+        public async Task ValidateCoinFuturesTradingCalls()
+        {
+            var client = new BinanceRestClient(opts =>
+            {
+                opts.RateLimiterEnabled = false;
+                opts.AutoTimestamp = false;
+                opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
+            });
+            var tester = new RestRequestValidator<BinanceRestClient>(client, "Endpoints/CoinFutures/Trading", "https://dapi.binance.com", IsAuthenticated, stjCompare: false);
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Trading.PlaceOrderAsync("ETHUSDT", Enums.OrderSide.Buy, Enums.FuturesOrderType.Market, 1, 1), "PlaceOrder");
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Trading.PlaceMultipleOrdersAsync(new[] { new BinanceFuturesBatchOrder() }), "PlaceMultipleOrders", skipResponseValidation: true);
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Trading.GetOrderAsync("ETHUSDT", 123), "GetOrder");
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Trading.CancelOrderAsync("ETHUSDT", 123), "CancelOrder");
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Trading.CancelAllOrdersAsync("ETHUSDT"), "CancelAllOrders");
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Trading.CancelAllOrdersAfterTimeoutAsync("ETHUSDT", TimeSpan.Zero), "CancelAllOrdersAfterTimeout");
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Trading.CancelMultipleOrdersAsync("ETHUSDT", new List<long> { 123L }), "CancelMultipleOrders", skipResponseValidation: true);
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Trading.GetOpenOrderAsync("ETHUSDT", 123), "GetOpenOrder");
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Trading.GetOpenOrdersAsync("ETHUSDT"), "GetOpenOrders");
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Trading.GetOrdersAsync("ETHUSDT"), "GetOrders");
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Trading.GetForcedOrdersAsync("ETHUSDT"), "GetForcedOrders");
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Trading.GetUserTradesAsync("ETHUSDT"), "GetUserTrades");
+        }
+
+        [Test]
+        public async Task ValidateGeneralBrokerageCalls()
+        {
+            var client = new BinanceRestClient(opts =>
+            {
+                opts.RateLimiterEnabled = false;
+                opts.AutoTimestamp = false;
+                opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
+            });
+            var tester = new RestRequestValidator<BinanceRestClient>(client, "Endpoints/General/Brokerage", "https://api.binance.com", IsAuthenticated, stjCompare: false);
+            await tester.ValidateAsync(client => client.GeneralApi.Brokerage.CreateSubAccountAsync(), "CreateSubAccount");
+            await tester.ValidateAsync(client => client.GeneralApi.Brokerage.GetSubAccountsAsync(), "GetSubAccounts");
+            await tester.ValidateAsync(client => client.GeneralApi.Brokerage.CreateApiKeyForSubAccountAsync("123", true), "CreateApiKeyForSubAccount");
+            await tester.ValidateAsync(client => client.GeneralApi.Brokerage.DeleteSubAccountApiKeyAsync("123", "123"), "DeleteSubAccountApiKey");
+            await tester.ValidateAsync(client => client.GeneralApi.Brokerage.GetSubAccountApiKeyAsync("123", "123"), "GetSubAccountApiKey");
+            await tester.ValidateAsync(client => client.GeneralApi.Brokerage.ChangeSubAccountApiKeyPermissionAsync("123", "123", true, true, true), "ChangeSubAccountApiKeyPermission");
+            // TODO add other endpoints
+        }
+
+        [Test]
+        public async Task ValidateGeneralCryptoLoansCalls()
+        {
+            var client = new BinanceRestClient(opts =>
+            {
+                opts.RateLimiterEnabled = false;
+                opts.AutoTimestamp = false;
+                opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
+            });
+            var tester = new RestRequestValidator<BinanceRestClient>(client, "Endpoints/General/CryptoLoans", "https://api.binance.com", IsAuthenticated, stjCompare: false);
+            await tester.ValidateAsync(client => client.GeneralApi.CryptoLoans.GetIncomeHistoryAsync("ETH"), "GetIncomeHistory");
+            await tester.ValidateAsync(client => client.GeneralApi.CryptoLoans.BorrowAsync("ETH", "USDT", 1), "Borrow");
+            await tester.ValidateAsync(client => client.GeneralApi.CryptoLoans.GetBorrowHistoryAsync(), "GetBorrowHistory");
+            await tester.ValidateAsync(client => client.GeneralApi.CryptoLoans.GetOpenBorrowOrdersAsync(), "GetOpenBorrowOrders");
+            await tester.ValidateAsync(client => client.GeneralApi.CryptoLoans.RepayAsync(123, 1), "Repay");
+            await tester.ValidateAsync(client => client.GeneralApi.CryptoLoans.GetRepayHistoryAsync(), "GetRepayHistory");
+            await tester.ValidateAsync(client => client.GeneralApi.CryptoLoans.AdjustLTVAsync(123, 1, true), "AdjustLTV");
+            await tester.ValidateAsync(client => client.GeneralApi.CryptoLoans.GetLtvAdjustHistoryAsync(123), "GetLtvAdjustHistory");
+            await tester.ValidateAsync(client => client.GeneralApi.CryptoLoans.GetLoanableAssetsAsync(), "GetLoanableAssets");
+            await tester.ValidateAsync(client => client.GeneralApi.CryptoLoans.GetCollateralAssetsAsync(), "GetCollateralAssets");
+            await tester.ValidateAsync(client => client.GeneralApi.CryptoLoans.GetCollateralRepayRateAsync("ETH", "USDT", 1), "GetCollateralRepayRate", ignoreProperties: new List<string> { "loanlCoin" });
+            await tester.ValidateAsync(client => client.GeneralApi.CryptoLoans.CustomizeMarginCallAsync(123), "CustomizeMarginCall");
         }
 
         private bool IsAuthenticated(WebCallResult result)

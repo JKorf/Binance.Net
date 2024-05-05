@@ -1,0 +1,12 @@
+POST
+/sapi/v2/broker/subAccountApi/ipRestriction
+true
+{
+    "status": "2", 
+    "ipList": [
+        "69.210.67.14",
+        "8.34.21.10"  //only return if you open IP restriction and input IP address.
+    ],
+    "updateTime": 1636371437000,
+    "apiKey": "k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf"
+}  

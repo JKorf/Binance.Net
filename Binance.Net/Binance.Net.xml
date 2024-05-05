@@ -427,7 +427,7 @@
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApiTrading.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.FuturesOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApiTrading.PlaceMultipleOrdersAsync(Binance.Net.Objects.Models.Futures.BinanceFuturesBatchOrder[],System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApiTrading.PlaceMultipleOrdersAsync(System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Futures.BinanceFuturesBatchOrder},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApiTrading.GetOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
@@ -442,7 +442,7 @@
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApiTrading.CancelAllOrdersAfterTimeoutAsync(System.String,System.TimeSpan,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApiTrading.CancelMultipleOrdersAsync(System.String,System.Collections.Generic.List{System.Int64},System.Collections.Generic.List{System.String},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApiTrading.CancelMultipleOrdersAsync(System.String,System.Collections.Generic.IEnumerable{System.Int64},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApiTrading.GetOpenOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
@@ -5582,7 +5582,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiTrading.PlaceMultipleOrdersAsync(Binance.Net.Objects.Models.Futures.BinanceFuturesBatchOrder[],System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiTrading.PlaceMultipleOrdersAsync(System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Futures.BinanceFuturesBatchOrder},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Place multiple orders in one call
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#place-multiple-orders-trade" /></para>
@@ -5638,7 +5638,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Countdown result</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiTrading.CancelMultipleOrdersAsync(System.String,System.Collections.Generic.List{System.Int64},System.Collections.Generic.List{System.String},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiTrading.CancelMultipleOrdersAsync(System.String,System.Collections.Generic.IEnumerable{System.Int64},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Cancels muliple orders
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#cancel-multiple-orders-trade" /></para>
@@ -26612,6 +26612,11 @@
             Coin position info
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionInfoCoin.BreakEvenPrice">
+            <summary>
+            Break even price
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionInfoCoin.MaxQuantity">
             <summary>
             Max quantity
@@ -26685,6 +26690,11 @@
         <member name="T:Binance.Net.Objects.Models.Futures.BinancePositionDetailsCoin">
             <summary>
             Coin position info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionDetailsCoin.NotionalValue">
+            <summary>
+            Notional value
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionDetailsCoin.MaxQuantity">

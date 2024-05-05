@@ -1,0 +1,12 @@
+POST
+/sapi/v1/loan/repay
+true
+{
+  "loanCoin": "BUSD",
+  "remainingPrincipal": "100.5",
+  "remainingInterest": "0",
+  "collateralCoin": "BNB",
+  "remainingCollateral": "5.253",
+  "currentLTV": "0.25",
+  "repayStatus": "Repaid" // Repaid, Repaying
+}

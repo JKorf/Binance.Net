@@ -1,0 +1,7 @@
+POST
+/dapi/v1/marginType
+true
+{
+    "code": 200,
+    "msg": "success"
+}

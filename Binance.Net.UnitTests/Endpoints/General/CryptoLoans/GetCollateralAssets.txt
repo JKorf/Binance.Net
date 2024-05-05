@@ -1,0 +1,16 @@
+GET
+/sapi/v1/loan/collateral/data
+true
+{
+  "rows": [
+    {
+      "collateralCoin": "BNB",
+      "initialLTV": "0.65",
+      "marginCallLTV": "0.75",
+      "liquidationLTV": "0.83",
+      "maxLimit": "1000000",
+      "vipLevel": 1
+    }
+  ],
+  "total": 1
+}

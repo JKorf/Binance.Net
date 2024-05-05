@@ -93,6 +93,12 @@ namespace Binance.Net.Objects.Models.Futures
     /// </summary>
     public class BinancePositionInfoCoin : BinancePositionInfoBase
     {
+
+        /// <summary>
+        /// Break even price
+        /// </summary>
+        [JsonProperty("breakEvenPrice")]
+        public decimal BreakEvenPrice { get; set; }
         /// <summary>
         /// Max quantity
         /// </summary>
@@ -177,6 +183,11 @@ namespace Binance.Net.Objects.Models.Futures
     /// </summary>
     public class BinancePositionDetailsCoin : BinancePositionDetailsBase
     {
+        /// <summary>
+        /// Notional value
+        /// </summary>
+        [JsonProperty("notionalValue")]
+        public decimal NotionalValue { get; set; }
         /// <summary>
         /// Max quantity
         /// </summary>

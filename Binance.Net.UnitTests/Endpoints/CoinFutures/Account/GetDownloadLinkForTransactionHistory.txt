@@ -1,0 +1,11 @@
+GET
+/dapi/v1/income/asyn/id
+true
+{
+    "downloadId":"545923594199212032",
+    "status":"completed",     // Enum completed processing
+    "url":"www.binance.com",  // The link is mapped to download id
+    "notified":true,          // ignore
+    "expirationTimestamp":1645009771000,  // The link would expire after this timestamp
+    "isExpired":null,
+}

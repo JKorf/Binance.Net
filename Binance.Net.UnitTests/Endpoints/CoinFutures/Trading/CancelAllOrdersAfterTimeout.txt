@@ -1,0 +1,7 @@
+POST
+/dapi/v1/countdownCancelAll
+true
+{
+    "symbol": "BTCUSD_200925", 
+    "countdownTime": "100000"
+}
