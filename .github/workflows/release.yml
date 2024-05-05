@@ -21,5 +21,3 @@ jobs:
       run: dotnet pack -c Release --no-build --include-symbols -p:PackageVersion=${{github.event.release.name}} --output .
     - name: Push Package to NuGet
       run: dotnet nuget push "*.nupkg" --api-key ${{secrets.nuget_api_key}} --source https://api.nuget.org/v3/index.json
-    - name: Push Symbol Package to NuGet
-      run: dotnet nuget push "*.snupkg" --api-key ${{secrets.nuget_api_key}} --source https://api.nuget.org/v3/index.json

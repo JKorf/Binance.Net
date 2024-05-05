@@ -154,6 +154,11 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 9.9.6 - 05 May 2024
+    * Updated various response models
+    * Updated CoinFuturesApi.Account.GetBracketsAsync to V2 endpoint
+    * Updated CoinFuturesApi.Trading.PlaceMultipleOrdersAsync orders parameter from array to IEnumerable
+
 * Version 9.9.5 - 01 May 2024
     * Updated multiple response models
     * Fixed multiple bugs after new, more thorough unit testing implementation
