@@ -18,6 +18,8 @@ jobs:
     - name: Test
       run: dotnet test -c Release --no-build
     - name: Pack nugets
-      run: dotnet pack -c Release --no-build -p:PackageVersion=${{github.event.release.name}} --output .
-    - name: Push to NuGet
+      run: dotnet pack -c Release --no-build --include-symbols -p:PackageVersion=${{github.event.release.name}} --output .
+    - name: Push Package to NuGet
       run: dotnet nuget push "*.nupkg" --api-key ${{secrets.nuget_api_key}} --source https://api.nuget.org/v3/index.json
+    - name: Push Symbol Package to NuGet
+      run: dotnet nuget push "*.snupkg" --api-key ${{secrets.nuget_api_key}} --source https://api.nuget.org/v3/index.json
