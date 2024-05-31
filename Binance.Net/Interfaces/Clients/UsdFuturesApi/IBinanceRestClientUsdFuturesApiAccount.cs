@@ -276,5 +276,24 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<BinanceRateLimit>>> GetOrderRateLimitAsync(long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get BNB burn for fee discount status
+        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-bnb-burn-status-user_data" /></para>
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceBnbBurnStatus>> GetBnbBurnStatusAsync(long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Set BNB burn for fee discount status
+        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#toggle-bnb-burn-on-futures-trade-trade" /></para>
+        /// </summary>
+        /// <param name="feeBurn">Fee burn status</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult> SetBnbBurnStatusAsync(bool feeBurn, long? receiveWindow = null, CancellationToken ct = default);
     }
 }

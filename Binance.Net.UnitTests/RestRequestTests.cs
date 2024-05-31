@@ -221,6 +221,8 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.UsdFuturesApi.Account.GetDownloadIdForTradeHistoryAsync(DateTime.UtcNow, DateTime.UtcNow), "GetDownloadIdForTradeHistory");
             await tester.ValidateAsync(client => client.UsdFuturesApi.Account.GetDownloadLinkForTradeHistoryAsync("123"), "GetDownloadLinkForTradeHistory", ignoreProperties: new List<string> { "notified" });
             await tester.ValidateAsync(client => client.UsdFuturesApi.Account.GetOrderRateLimitAsync(), "GetOrderRateLimit");
+            await tester.ValidateAsync(client => client.UsdFuturesApi.Account.GetBnbBurnStatusAsync(), "GetBnbBurnStatus");
+            await tester.ValidateAsync(client => client.UsdFuturesApi.Account.SetBnbBurnStatusAsync(true), "SetBnbBurnStatus");
         }
 
         [Test]

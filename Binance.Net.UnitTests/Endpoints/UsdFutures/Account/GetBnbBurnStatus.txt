@@ -1,0 +1,6 @@
+GET
+/fapi/v1/feeBurn
+true
+{
+    "feeBurn": true // "true": Fee Discount On; "false": Fee Discount Off
+}
