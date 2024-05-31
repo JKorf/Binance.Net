@@ -10,6 +10,7 @@ namespace Binance.Net.Converters
         protected override List<KeyValuePair<TimeInForce, string>> Mapping => new List<KeyValuePair<TimeInForce, string>>
         {
             new KeyValuePair<TimeInForce, string>(TimeInForce.GoodTillCanceled, "GTC"),
+            new KeyValuePair<TimeInForce, string>(TimeInForce.GoodTillDate, "GTD"),
             new KeyValuePair<TimeInForce, string>(TimeInForce.ImmediateOrCancel, "IOC"),
             new KeyValuePair<TimeInForce, string>(TimeInForce.FillOrKill, "FOK"),
             new KeyValuePair<TimeInForce, string>(TimeInForce.GoodTillCrossing, "GTX"),
