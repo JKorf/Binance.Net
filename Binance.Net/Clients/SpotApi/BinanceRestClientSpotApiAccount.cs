@@ -1318,5 +1318,19 @@ namespace Binance.Net.Clients.SpotApi
         }
 
         #endregion
+
+        #region Get Account VIP level and margin/futures enabled status
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceVipLevelAndStatus>> GetAccountVipLevelAndStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/account/info", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            return await _baseClient.SendAsync<BinanceVipLevelAndStatus>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
     }
 }

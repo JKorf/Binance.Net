@@ -1313,6 +1313,9 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetTradeFeeAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetAccountVipLevelAndStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData">
             <inheritdoc />
         </member>
@@ -8669,6 +8672,15 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Trade fees</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetAccountVipLevelAndStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get account VIP level and margin/futures enabled status
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#account-info-user_data" /></para>
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData">
             <summary>
@@ -16796,6 +16808,26 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceUserBalance.BtcValuation">
             <summary>
             Value in btc
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceVipLevelAndStatus">
+            <summary>
+            VIP level and futures/margin enabled status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceVipLevelAndStatus.VipLevel">
+            <summary>
+            VIP level
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceVipLevelAndStatus.IsMarginEnabled">
+            <summary>
+            Is margin enabled
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceVipLevelAndStatus.IsFuturesEnabled">
+            <summary>
+            Is futures enabled
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceWalletBalance">
