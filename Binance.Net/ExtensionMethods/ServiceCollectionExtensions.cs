@@ -43,6 +43,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 options.Timeout = restOptions.RequestTimeout;
             }).ConfigurePrimaryHttpMessageHandler(() => {
                 var handler = new HttpClientHandler();
+                handler.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
                 if (restOptions.Proxy != null)
                 {
                     handler.Proxy = new WebProxy
