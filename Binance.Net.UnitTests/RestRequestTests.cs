@@ -184,6 +184,8 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.SpotApi.Trading.GetOpenAlgoOrdersAsync(), "GetOpenAlgoOrders");
             await tester.ValidateAsync(client => client.SpotApi.Trading.GetClosedAlgoOrdersAsync(), "GetClosedAlgoOrders");
             await tester.ValidateAsync(client => client.SpotApi.Trading.GetAlgoSubOrdersAsync(123), "GetAlgoSubOrders");
+            await tester.ValidateAsync(client => client.SpotApi.Trading.PlaceOtocoOrderListAsync("ETHUSDT", Enums.OrderSide.Buy, Enums.SpotOrderType.Limit, 1, 1, 1, Enums.OrderSide.Sell, Enums.SpotOrderType.LimitMaker, Enums.SpotOrderType.LimitMaker), "PlaceOtocoOrderList");
+            await tester.ValidateAsync(client => client.SpotApi.Trading.PlaceOtoOrderListAsync("ETHUSDT", Enums.OrderSide.Buy, Enums.SpotOrderType.Limit, 1, 1, 1, Enums.OrderSide.Sell, Enums.SpotOrderType.LimitMaker), "PlaceOtoOrderList");
         }
 
         [Test]

@@ -6,6 +6,10 @@
     public enum OrderStatus
     {
         /// <summary>
+        /// Order is not yet active
+        /// </summary>
+        PendingNew,
+        /// <summary>
         /// Order is new
         /// </summary>
         New,

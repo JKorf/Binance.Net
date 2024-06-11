@@ -9,6 +9,7 @@ namespace Binance.Net.Converters
 
         protected override List<KeyValuePair<OrderStatus, string>> Mapping => new List<KeyValuePair<OrderStatus, string>>
         {
+            new KeyValuePair<OrderStatus, string>(OrderStatus.PendingNew, "PENDING_NEW"),
             new KeyValuePair<OrderStatus, string>(OrderStatus.New, "NEW"),
             new KeyValuePair<OrderStatus, string>(OrderStatus.PartiallyFilled, "PARTIALLY_FILLED"),
             new KeyValuePair<OrderStatus, string>(OrderStatus.Filled, "FILLED" ),

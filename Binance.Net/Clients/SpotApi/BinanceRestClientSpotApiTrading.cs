@@ -546,6 +546,173 @@ namespace Binance.Net.Clients.SpotApi
 
         #endregion
 
+        #region New OTO
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceOrderOcoList>> PlaceOtoOrderListAsync(
+            string symbol,
+
+            OrderSide workingSide,
+            SpotOrderType workingOrderType,
+            decimal workingQuantity,
+            decimal workingPrice,
+
+            decimal pendingQuantity,
+            OrderSide pendingSide,
+            SpotOrderType pendingOrderType,
+
+            string? listClientOrderId = null,
+            SelfTradePreventionMode? selfTradePreventionMode = null,
+
+            string? workingClientOrderId = null,
+            decimal? workingIcebergQuantity = null,
+            TimeInForce? workingTimeInForce = null,
+            int? workingStrategyId = null,
+            int? workingStrategyType = null,
+
+            string? pendingClientOrderId = null,
+            decimal? pendingPrice = null,
+            decimal? pendingStopPrice = null,
+            decimal? pendingTrailingDelta = null,
+            decimal? pendingIcebergQuantity = null,
+            TimeInForce? pendingTimeInForce = null,
+            int? pendingStrategyId = null,
+            int? pendingStrategyType = null,
+
+            int? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            workingClientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+            pendingClientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.AddEnum("workingType", workingOrderType);
+            parameters.AddEnum("workingSide", workingSide);
+            parameters.Add("workingQuantity", workingQuantity);
+            parameters.Add("workingPrice", workingPrice);
+            parameters.Add("pendingQuantity", pendingQuantity);
+            parameters.AddEnum("pendingSide", pendingSide);
+            parameters.AddEnum("pendingType", pendingOrderType);
+
+            parameters.AddOptional("listClientOrderId", listClientOrderId);
+            parameters.AddOptionalEnum("selfTradePreventionMode", selfTradePreventionMode);
+            parameters.AddOptional("workingClientOrderId", workingClientOrderId);
+            parameters.AddOptional("workingIcebergQty", workingIcebergQuantity);
+            parameters.AddOptionalEnum("workingTimeInForce", workingTimeInForce);
+            parameters.AddOptional("workingStrategyId", workingStrategyId);
+            parameters.AddOptional("workingStrategyType", workingStrategyType);
+
+            parameters.AddOptional("pendingClientOrderId", pendingClientOrderId);
+            parameters.AddOptional("pendingPrice", pendingPrice);
+            parameters.AddOptional("pendingStopPrice", pendingStopPrice);
+            parameters.AddOptional("pendingTrailingDelta", pendingTrailingDelta);
+            parameters.AddOptional("pendingIcebergQty", pendingIcebergQuantity);
+            parameters.AddOptionalEnum("pendingTimeInForce", pendingTimeInForce);
+            parameters.AddOptional("pendingStrategyId", pendingStrategyId);
+            parameters.AddOptional("pendingStrategyType", pendingStrategyType);
+
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "api/v3/orderList/oto", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            return await _baseClient.SendAsync<BinanceOrderOcoList>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region New OTOCO
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceOrderOcoList>> PlaceOtocoOrderListAsync(
+            string symbol,
+            
+            OrderSide workingSide,
+            SpotOrderType workingOrderType,
+            decimal workingQuantity,
+            decimal workingPrice,
+
+            decimal pendingQuantity,
+            OrderSide pendingSide,
+            SpotOrderType pendingAboveOrderType,
+            SpotOrderType pendingBelowOrderType,
+
+            string? listClientOrderId = null,
+            SelfTradePreventionMode? selfTradePreventionMode = null,
+
+            string? workingClientOrderId = null,
+            decimal? workingIcebergQuantity = null,
+            TimeInForce? workingTimeInForce = null,
+            int? workingStrategyId = null,
+            int? workingStrategyType = null,
+
+            string? pendingAboveClientOrderId = null,
+            decimal? pendingAbovePrice = null,
+            decimal? pendingAboveStopPrice = null,
+            decimal? pendingAboveTrailingDelta = null,
+            decimal? pendingAboveIcebergQuantity = null,
+            TimeInForce? pendingAboveTimeInForce = null,
+            int? pendingAboveStrategyId = null,
+            int? pendingAboveStrategyType = null,
+
+            string? pendingBelowClientOrderId = null,
+            decimal? pendingBelowPrice = null,
+            decimal? pendingBelowStopPrice = null,
+            decimal? pendingBelowTrailingDelta = null,
+            decimal? pendingBelowIcebergQuantity = null,
+            TimeInForce? pendingBelowTimeInForce = null,
+            int? pendingBelowStrategyId = null,
+            int? pendingBelowStrategyType = null,
+
+            int? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            workingClientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+            pendingAboveClientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+            pendingBelowClientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.AddEnum("workingType", workingOrderType);
+            parameters.AddEnum("workingSide", workingSide);
+            parameters.Add("workingQuantity", workingQuantity);
+            parameters.Add("workingPrice", workingPrice);
+            parameters.Add("pendingQuantity", pendingQuantity);
+            parameters.AddEnum("pendingSide", pendingSide);
+            parameters.AddEnum("pendingAboveType", pendingAboveOrderType);
+            parameters.AddEnum("pendingBelowType", pendingBelowOrderType);
+
+            parameters.AddOptional("listClientOrderId", listClientOrderId);
+            parameters.AddOptionalEnum("selfTradePreventionMode", selfTradePreventionMode);
+            parameters.AddOptional("workingClientOrderId", workingClientOrderId);
+            parameters.AddOptional("workingIcebergQty", workingIcebergQuantity);
+            parameters.AddOptionalEnum("workingTimeInForce", workingTimeInForce);
+            parameters.AddOptional("workingStrategyId", workingStrategyId);
+            parameters.AddOptional("workingStrategyType", workingStrategyType);
+
+            parameters.AddOptional("pendingAboveClientOrderId", pendingAboveClientOrderId);
+            parameters.AddOptional("pendingAbovePrice", pendingAbovePrice);
+            parameters.AddOptional("pendingAboveStopPrice", pendingAboveStopPrice);
+            parameters.AddOptional("pendingAboveTrailingDelta", pendingAboveTrailingDelta);
+            parameters.AddOptional("pendingAboveIcebergQty", pendingAboveIcebergQuantity);
+            parameters.AddOptionalEnum("pendingAboveTimeInForce", pendingAboveTimeInForce);
+            parameters.AddOptional("pendingAboveStrategyId", pendingAboveStrategyId);
+            parameters.AddOptional("pendingAboveStrategyType", pendingAboveStrategyType);
+
+            parameters.AddOptional("pendingBelowClientOrderId", pendingBelowClientOrderId);
+            parameters.AddOptional("pendingBelowPrice", pendingBelowPrice);
+            parameters.AddOptional("pendingBelowStopPrice", pendingBelowStopPrice);
+            parameters.AddOptional("pendingBelowTrailingDelta", pendingBelowTrailingDelta);
+            parameters.AddOptional("pendingBelowIcebergQty", pendingBelowIcebergQuantity);
+            parameters.AddOptionalEnum("pendingBelowTimeInForce", pendingBelowTimeInForce);
+            parameters.AddOptional("pendingBelowStrategyId", pendingBelowStrategyId);
+            parameters.AddOptional("pendingBelowStrategyType", pendingBelowStrategyType);
+
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "api/v3/orderList/otoco", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            return await _baseClient.SendAsync<BinanceOrderOcoList>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #region Get user trades
 
         /// <inheritdoc />

@@ -354,6 +354,139 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<IEnumerable<BinanceOrderOcoList>>> GetOpenOcoOrdersAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Place a new OTOCO (One Triggers Other) order
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#new-order-list-oco-trade" /></para>
+        /// </summary>
+        /// <param name="symbol">Symbol</param>
+        /// <param name="workingOrderType">Working order type, either Limit or LimitMaker</param>
+        /// <param name="workingSide">Working order side</param>
+        /// <param name="workingQuantity">Working order quantity</param>
+        /// <param name="workingPrice">Working order price</param>
+        /// <param name="pendingQuantity">Pending order quantity</param>
+        /// <param name="pendingSide">Pending order side</param>
+        /// <param name="pendingOrderType">Pending order type</param>
+        /// <param name="listClientOrderId">Arbitrary unique ID among open order lists. Automatically generated if not sent.</param>
+        /// <param name="selfTradePreventionMode">Self trade prevention mode</param>
+        /// <param name="workingClientOrderId">Working order client order id</param>
+        /// <param name="workingIcebergQuantity">Working order iceberg quantity</param>
+        /// <param name="workingTimeInForce">Working order time in force</param>
+        /// <param name="workingStrategyId">Working order strategy id</param>
+        /// <param name="workingStrategyType">Working order strategy type</param>
+        /// <param name="pendingClientOrderId">Pending order client order id</param>
+        /// <param name="pendingPrice">Pending order price</param>
+        /// <param name="pendingStopPrice">Pending order stop price</param>
+        /// <param name="pendingTrailingDelta">Pending order trailing delta</param>
+        /// <param name="pendingIcebergQuantity">Pending order iceberg quantity</param>
+        /// <param name="pendingTimeInForce">Pending order time in force</param>
+        /// <param name="pendingStrategyId">Pending order strategy id</param>
+        /// <param name="pendingStrategyType">Pending order strategy type</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceOrderOcoList>> PlaceOtoOrderListAsync(
+            string symbol,
+            OrderSide workingSide,
+            SpotOrderType workingOrderType,
+            decimal workingQuantity,
+            decimal workingPrice,
+            decimal pendingQuantity,
+            OrderSide pendingSide,
+            SpotOrderType pendingOrderType,
+            string? listClientOrderId = null,
+            SelfTradePreventionMode? selfTradePreventionMode = null,
+            string? workingClientOrderId = null,
+            decimal? workingIcebergQuantity = null,
+            TimeInForce? workingTimeInForce = null,
+            int? workingStrategyId = null,
+            int? workingStrategyType = null,
+            string? pendingClientOrderId = null,
+            decimal? pendingPrice = null,
+            decimal? pendingStopPrice = null,
+            decimal? pendingTrailingDelta = null,
+            decimal? pendingIcebergQuantity = null,
+            TimeInForce? pendingTimeInForce = null,
+            int? pendingStrategyId = null,
+            int? pendingStrategyType = null,
+            int? receiveWindow = null,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Place a new OTOCO (One Triggers One Cancels The Other) order
+        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#new-order-list-otoco-trade" /></para>
+        /// </summary>
+        /// <param name="symbol">Symbol</param>
+        /// <param name="workingOrderType">Working order type, either Limit or LimitMaker</param>
+        /// <param name="workingSide">Working order side</param>
+        /// <param name="workingQuantity">Working order quantity</param>
+        /// <param name="workingPrice">Working order price</param>
+        /// <param name="pendingQuantity">Pending order quantity</param>
+        /// <param name="pendingSide">Pending order side</param>
+        /// <param name="pendingAboveOrderType">Pending above order type, LimitMaker, StopLoss or StopLossLimit</param>
+        /// <param name="pendingBelowOrderType">Pending below order type, LimitMaker, StopLoss or StopLossLimit</param>
+        /// <param name="listClientOrderId">Arbitrary unique ID among open order lists. Automatically generated if not sent.</param>
+        /// <param name="selfTradePreventionMode">Self trade prevention mode</param>
+        /// <param name="workingClientOrderId">Working order client order id</param>
+        /// <param name="workingIcebergQuantity">Working order iceberg quantity</param>
+        /// <param name="workingTimeInForce">Working order time in force</param>
+        /// <param name="workingStrategyId">Working order strategy id</param>
+        /// <param name="workingStrategyType">Working order strategy type</param>
+        /// <param name="pendingAboveClientOrderId">Pending above order client order id</param>
+        /// <param name="pendingAbovePrice">Pending above order price</param>
+        /// <param name="pendingAboveStopPrice">Pending above order stop price</param>
+        /// <param name="pendingAboveTrailingDelta">Pending above order trailing delta</param>
+        /// <param name="pendingAboveIcebergQuantity">Pending above order iceberg quantity</param>
+        /// <param name="pendingAboveTimeInForce">Pending above order time in force</param>
+        /// <param name="pendingAboveStrategyId">Pending above order strategy id</param>
+        /// <param name="pendingAboveStrategyType">Pending above order strategy type</param>
+        /// <param name="pendingBelowClientOrderId">Pending below order client order id</param>
+        /// <param name="pendingBelowPrice">Pending below order price</param>
+        /// <param name="pendingBelowStopPrice">Pending below order stop price</param>
+        /// <param name="pendingBelowTrailingDelta">Pending below order trailing delta</param>
+        /// <param name="pendingBelowIcebergQuantity">Pending below order iceberg quantity</param>
+        /// <param name="pendingBelowTimeInForce">Pending below order time in force</param>
+        /// <param name="pendingBelowStrategyId">Pending below order strategy id</param>
+        /// <param name="pendingBelowStrategyType">Pending below order strategy type</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceOrderOcoList>> PlaceOtocoOrderListAsync(
+            string symbol,
+
+            OrderSide workingSide,
+            SpotOrderType workingOrderType,
+            decimal workingQuantity,
+            decimal workingPrice,
+            decimal pendingQuantity,
+            OrderSide pendingSide,
+            SpotOrderType pendingAboveOrderType,
+            SpotOrderType pendingBelowOrderType,
+            string? listClientOrderId = null,
+            SelfTradePreventionMode? selfTradePreventionMode = null,
+            string? workingClientOrderId = null,
+            decimal? workingIcebergQuantity = null,
+            TimeInForce? workingTimeInForce = null,
+            int? workingStrategyId = null,
+            int? workingStrategyType = null,
+            string? pendingAboveClientOrderId = null,
+            decimal? pendingAbovePrice = null,
+            decimal? pendingAboveStopPrice = null,
+            decimal? pendingAboveTrailingDelta = null,
+            decimal? pendingAboveIcebergQuantity = null,
+            TimeInForce? pendingAboveTimeInForce = null,
+            int? pendingAboveStrategyId = null,
+            int? pendingAboveStrategyType = null,
+            string? pendingBelowClientOrderId = null,
+            decimal? pendingBelowPrice = null,
+            decimal? pendingBelowStopPrice = null,
+            decimal? pendingBelowTrailingDelta = null,
+            decimal? pendingBelowIcebergQuantity = null,
+            TimeInForce? pendingBelowTimeInForce = null,
+            int? pendingBelowStrategyId = null,
+            int? pendingBelowStrategyType = null,
+            int? receiveWindow = null,
+            CancellationToken ct = default);
+
+        /// <summary>
         /// Gets user trades for provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#account-trade-list-user_data" /></para>
         /// </summary>

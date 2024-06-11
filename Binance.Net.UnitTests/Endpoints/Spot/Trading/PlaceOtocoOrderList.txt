@@ -1,0 +1,83 @@
+POST
+/api/v3/orderList/otoco
+true
+{
+    "orderListId": 1,
+    "contingencyType": "OTO",
+    "listStatusType": "EXEC_STARTED",
+    "listOrderStatus": "EXECUTING",
+    "listClientOrderId": "RumwQpBaDctlUu5jyG5rs0",
+    "transactionTime": 1712291372842,
+    "symbol": "ABCDEF",
+    "orders": [
+        {
+            "symbol": "LTCBTC",
+            "orderId": 6,
+            "clientOrderId": "fM9Y4m23IFJVCQmIrlUmMK"
+        },
+        {
+            "symbol": "LTCBTC",
+            "orderId": 7,
+            "clientOrderId": "6pcQbFIzTXGZQ1e2MkGDq4"
+        },
+        {
+            "symbol": "LTCBTC",
+            "orderId": 8,
+            "clientOrderId": "r4JMv9cwAYYUwwBZfbussx"
+        }
+    ],
+    "orderReports": [
+        {
+            "symbol": "LTCBTC",
+            "orderId": 6,
+            "orderListId": 1,
+            "clientOrderId": "fM9Y4m23IFJVCQmIrlUmMK",
+            "transactTime": 1712291372842,
+            "price": "1.00000000",
+            "origQty": "1.00000000",
+            "executedQty": "0.00000000",
+            "cummulativeQuoteQty": "0.00000000",
+            "status": "NEW",
+            "timeInForce": "GTC",
+            "type": "LIMIT",
+            "side": "SELL",
+            "workingTime": 1712291372842,
+            "selfTradePreventionMode": "NONE"
+        },
+        {
+            "symbol": "LTCBTC",
+            "orderId": 7,
+            "orderListId": 1,
+            "clientOrderId": "6pcQbFIzTXGZQ1e2MkGDq4",
+            "transactTime": 1712291372842,
+            "price": "1.00000000",
+            "origQty": "5.00000000",
+            "executedQty": "0.00000000",
+            "cummulativeQuoteQty": "0.00000000",
+            "status": "PENDING_NEW",
+            "timeInForce": "IOC",
+            "type": "STOP_LOSS_LIMIT",
+            "side": "BUY",
+            "stopPrice": "6.00000000",
+            "workingTime": -1,
+            "selfTradePreventionMode": "NONE"
+        },
+        {
+            "symbol": "LTCBTC",
+            "orderId": 8,
+            "orderListId": 1,
+            "clientOrderId": "r4JMv9cwAYYUwwBZfbussx",
+            "transactTime": 1712291372842,
+            "price": "3.00000000",
+            "origQty": "5.00000000",
+            "executedQty": "0.00000000",
+            "cummulativeQuoteQty": "0.00000000",
+            "status": "PENDING_NEW",
+            "timeInForce": "GTC",
+            "type": "LIMIT_MAKER",
+            "side": "BUY",
+            "workingTime": -1,
+            "selfTradePreventionMode": "NONE"
+        }
+    ]
+}
