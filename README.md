@@ -154,6 +154,11 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 9.10.0 - 11 Jun 2024
+    * Added new SpotApi.Trading.PlaceOtoOrderListAsync and SpotApi.Trading.PlaceOtocoOrderListAsync endpoints
+    * Fixed GetProductsAsync endpoints by allowing automatic decompression
+    * Updated CryptoExchange.Net to v7.6.0, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
+
 * Version 9.9.8 - 02 Jun 2024
     * Added SpotApi.Account.GetAccountVipLevelAndStatusAsync endpoint
     * Added UsdFuturesApi.Account.GetBnbBurnStatusAsync and UsdFuturesApi.Account.SetBnbBurnStatusAsync endpoints
