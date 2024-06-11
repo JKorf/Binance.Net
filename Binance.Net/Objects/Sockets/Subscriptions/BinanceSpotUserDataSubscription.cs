@@ -84,15 +84,15 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         public override CallResult DoHandleMessage(SocketConnection connection, DataEvent<object> message)
         {
             if (message.Data is BinanceCombinedStream<BinanceStreamPositionsUpdate> positionUpdate)
-                _positionHandler?.Invoke(message.As(positionUpdate.Data, positionUpdate.Stream, SocketUpdateType.Update));
+                _positionHandler?.Invoke(message.As(positionUpdate.Data, positionUpdate.Stream, null, SocketUpdateType.Update));
             else if (message.Data is BinanceCombinedStream<BinanceStreamBalanceUpdate> balanceUpdate)
-                _balanceHandler?.Invoke(message.As(balanceUpdate.Data, balanceUpdate.Stream, SocketUpdateType.Update));
+                _balanceHandler?.Invoke(message.As(balanceUpdate.Data, balanceUpdate.Stream, null, SocketUpdateType.Update));
             else if (message.Data is BinanceCombinedStream<BinanceStreamOrderUpdate> orderUpdate)
-                _orderHandler?.Invoke(message.As(orderUpdate.Data, orderUpdate.Stream, SocketUpdateType.Update));
+                _orderHandler?.Invoke(message.As(orderUpdate.Data, orderUpdate.Stream, orderUpdate.Data.Symbol, SocketUpdateType.Update));
             else if (message.Data is BinanceCombinedStream<BinanceStreamOrderList> orderListUpdate)
-                _orderListHandler?.Invoke(message.As(orderListUpdate.Data, orderListUpdate.Stream, SocketUpdateType.Update));
+                _orderListHandler?.Invoke(message.As(orderListUpdate.Data, orderListUpdate.Stream, null, SocketUpdateType.Update));
             else if (message.Data is BinanceCombinedStream<BinanceStreamEvent> listenKeyExpired)
-                _listenKeyExpiredHandler?.Invoke(message.As(listenKeyExpired.Data, listenKeyExpired.Stream, SocketUpdateType.Update));
+                _listenKeyExpiredHandler?.Invoke(message.As(listenKeyExpired.Data, listenKeyExpired.Stream, null, SocketUpdateType.Update));
 
             return new CallResult(null);
         }

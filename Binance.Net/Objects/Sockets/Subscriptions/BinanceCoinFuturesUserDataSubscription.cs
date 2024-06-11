@@ -107,34 +107,34 @@ namespace Binance.Net.Objects.Sockets
             if (message.Data is BinanceCombinedStream<BinanceFuturesStreamConfigUpdate> configUpdate)
             {
                 configUpdate.Data.ListenKey = configUpdate.Stream;
-                _configHandler?.Invoke(message.As(configUpdate.Data, configUpdate.Stream, SocketUpdateType.Update));
+                _configHandler?.Invoke(message.As(configUpdate.Data, configUpdate.Stream, null, SocketUpdateType.Update));
             }
             else if (message.Data is BinanceCombinedStream<BinanceFuturesStreamMarginUpdate> marginUpdate)
             {
                 marginUpdate.Data.ListenKey = marginUpdate.Stream;
-                _marginHandler?.Invoke(message.As(marginUpdate.Data, marginUpdate.Stream, SocketUpdateType.Update));
+                _marginHandler?.Invoke(message.As(marginUpdate.Data, marginUpdate.Stream, null, SocketUpdateType.Update));
             }
             else if (message.Data is BinanceCombinedStream<BinanceFuturesStreamAccountUpdate> accountUpdate)
             {
                 accountUpdate.Data.ListenKey = accountUpdate.Stream;
-                _accountHandler?.Invoke(message.As(accountUpdate.Data, accountUpdate.Stream, SocketUpdateType.Update));
+                _accountHandler?.Invoke(message.As(accountUpdate.Data, accountUpdate.Stream, null, SocketUpdateType.Update));
             }
-            else if (message.Data is BinanceCombinedStream<BinanceFuturesStreamOrderUpdate> orderUpate)
+            else if (message.Data is BinanceCombinedStream<BinanceFuturesStreamOrderUpdate> orderUpdate)
             {
-                orderUpate.Data.ListenKey = orderUpate.Stream;
-                _orderHandler?.Invoke(message.As(orderUpate.Data, orderUpate.Stream, SocketUpdateType.Update));
+                orderUpdate.Data.ListenKey = orderUpdate.Stream;
+                _orderHandler?.Invoke(message.As(orderUpdate.Data, orderUpdate.Stream, orderUpdate.Data.UpdateData.Symbol, SocketUpdateType.Update));
             }
             else if (message.Data is BinanceCombinedStream<BinanceStreamEvent> listenKeyUpdate)
             {
-                _listenkeyHandler?.Invoke(message.As(listenKeyUpdate.Data, listenKeyUpdate.Stream, SocketUpdateType.Update));
+                _listenkeyHandler?.Invoke(message.As(listenKeyUpdate.Data, listenKeyUpdate.Stream, null, SocketUpdateType.Update));
             }
             else if (message.Data is BinanceCombinedStream<BinanceStrategyUpdate> strategyUpdate)
             {
-                _strategyHandler?.Invoke(message.As(strategyUpdate.Data, strategyUpdate.Stream, SocketUpdateType.Update));
+                _strategyHandler?.Invoke(message.As(strategyUpdate.Data, strategyUpdate.Stream, null, SocketUpdateType.Update));
             }
             else if (message.Data is BinanceCombinedStream<BinanceGridUpdate> gridUpdate)
             {
-                _gridHandler?.Invoke(message.As(gridUpdate.Data, gridUpdate.Stream, SocketUpdateType.Update));
+                _gridHandler?.Invoke(message.As(gridUpdate.Data, gridUpdate.Stream, null, SocketUpdateType.Update));
             }
 
             return new CallResult(null);

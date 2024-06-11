@@ -11,7 +11,17 @@ namespace Binance.Net
         {
         }
 
-        public override void AuthenticateRequest(RestApiClient apiClient, Uri uri, HttpMethod method, IDictionary<string, object> uriParameters, IDictionary<string, object> bodyParameters, Dictionary<string, string> headers, bool auth, ArrayParametersSerialization arraySerialization, HttpMethodParameterPosition parameterPosition, RequestBodyFormat bodyFormat)
+        public override void AuthenticateRequest(
+            RestApiClient apiClient,
+            Uri uri,
+            HttpMethod method,
+            IDictionary<string, object> uriParameters,
+            IDictionary<string, object> bodyParameters,
+            Dictionary<string, string> headers,
+            bool auth,
+            ArrayParametersSerialization arraySerialization,
+            HttpMethodParameterPosition parameterPosition,
+            RequestBodyFormat requestBodyFormat)
         {
             headers.Add("X-MBX-APIKEY", _credentials.Key!.GetString());
 

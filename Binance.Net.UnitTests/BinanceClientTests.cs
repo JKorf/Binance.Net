@@ -164,7 +164,8 @@ namespace Binance.Net.UnitTests
                 new SortedDictionary<string, object>(),
                 headers,
                 true, ArrayParametersSerialization.MultipleValues,
-                HttpMethodParameterPosition.InUri, RequestBodyFormat.Json);
+                HttpMethodParameterPosition.InUri,
+                RequestBodyFormat.Json);
 
             // assert
             Assert.That(headers.First().Key == "X-MBX-APIKEY" && headers.First().Value == "TestKey");

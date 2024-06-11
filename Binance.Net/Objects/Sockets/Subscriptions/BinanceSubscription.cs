@@ -56,7 +56,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         /// <inheritdoc />
         public override CallResult DoHandleMessage(SocketConnection connection, DataEvent<object> message)
         {
-            _handler.Invoke(message.As((T)message.Data!, null, SocketUpdateType.Update));
+            _handler.Invoke(message.As((T)message.Data!, null, null, SocketUpdateType.Update));
             return new CallResult(null);
         }
     }
